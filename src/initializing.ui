@@ -1,0 +1,62 @@
+<ui version="4.0" >
+ <class>Initializing</class>
+ <widget class="QDialog" name="Initializing" >
+  <property name="windowModality" >
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>326</width>
+    <height>84</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>GoldenDict - Initializing</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QLabel" name="operation" >
+     <property name="text" >
+      <string>Please wait while indexing dictionary</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="dictionary" >
+     <property name="font" >
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Dictionary Name</string>
+     </property>
+     <property name="scaledContents" >
+      <bool>false</bool>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QProgressBar" name="progressBar" >
+     <property name="maximum" >
+      <number>0</number>
+     </property>
+     <property name="value" >
+      <number>-1</number>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

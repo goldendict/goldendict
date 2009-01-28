@@ -1,0 +1,79 @@
+<ui version="4.0" >
+ <class>Options</class>
+ <widget class="QDialog" name="Options" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>81</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Options</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QCheckBox" name="checkBox" >
+     <property name="toolTip" >
+      <string>Imagine searching for the word 'cats'. One dictionary lists
+it as a synonym for 'cat', another one only knows 'cat'
+alone. With this option on, the first dictionary would help
+discover the main word 'cat' which would be added to the
+query, and both dictionaries would include a definition for
+'cat' in response to the 'cats' query. This is very useful in
+most cases, and thus it is recommended to keep this on.</string>
+     </property>
+     <property name="text" >
+      <string>Inject main forms of synonyms into search queries</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Options</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Options</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,158 @@
+<ui version="4.0" >
+ <class>Groups</class>
+ <widget class="QDialog" name="Groups" >
+  <property name="windowModality" >
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>726</width>
+    <height>535</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Groups</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2" >
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3" >
+       <item>
+        <widget class="QLabel" name="label_2" >
+         <property name="text" >
+          <string>Dictionaries available:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="DictListWidget" name="dictionaries" />
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout" >
+       <item>
+        <widget class="QLabel" name="label_3" >
+         <property name="text" >
+          <string>Groups:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="DictGroupsWidget" name="groups" >
+         <property name="tabPosition" >
+          <enum>QTabWidget::North</enum>
+         </property>
+         <property name="elideMode" >
+          <enum>Qt::ElideRight</enum>
+         </property>
+         <widget class="QWidget" name="tab_4" >
+          <attribute name="title" >
+           <string>Tab 2</string>
+          </attribute>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout" >
+         <item>
+          <widget class="QPushButton" name="addGroup" >
+           <property name="text" >
+            <string>&amp;Add group</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="renameGroup" >
+           <property name="text" >
+            <string>Re&amp;name group</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="removeGroup" >
+           <property name="text" >
+            <string>&amp;Remove group</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_4" >
+     <property name="text" >
+      <string>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttons" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DictListWidget</class>
+   <extends>QListWidget</extends>
+   <header>groups_widgets.hh</header>
+  </customwidget>
+  <customwidget>
+   <class>DictGroupsWidget</class>
+   <extends>QTabWidget</extends>
+   <header>groups_widgets.hh</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttons</sender>
+   <signal>accepted()</signal>
+   <receiver>Groups</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttons</sender>
+   <signal>rejected()</signal>
+   <receiver>Groups</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,34 @@
+<ui version="4.0" >
+ <class>GroupSelectorWidget</class>
+ <widget class="QWidget" name="GroupSelectorWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>134</width>
+    <height>40</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout" >
+   <item>
+    <widget class="QLabel" name="label" >
+     <property name="text" >
+      <string>Look in</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="group" >
+     <property name="sizeAdjustPolicy" >
+      <enum>QComboBox::AdjustToContents</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

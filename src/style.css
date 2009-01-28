@@ -1,0 +1,231 @@
+/******** Global, non-dictionary-specific classes ***********/
+
+body
+{
+  background: #fefdeb;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 13px;
+}
+
+/* Plaintext dictionaries are usually 80-column formatted and take a lot
+ * of space. We try to use smaller fonts for them therefore. */
+pre
+{
+  font-size: 12px;
+}
+
+/* Dictionary's name heading */
+.gddictname
+{
+  border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;
+  margin-top: 1.2em; margin-bottom: 0.1em; font-weight: bold; font-size: 14px;
+  /*background: #ffffdd;*/
+}
+
+
+/********* Babylon dictionaries' classes *********/
+
+/* Transcriptions in Babylon dictionaries */
+.bgltrn:before
+{
+  content:"[";
+}
+
+.bgltrn:after
+{
+  content:"]";
+}
+
+.bgltrn { display:block; }
+
+/* Part of speech in Babylon dictionaries. Usually irrelevant,
+ * therefore hidden */
+.bglpos { display: none; }
+
+/******** StarDict dictionaries' classes *********/
+
+
+/* StarDict type 'h' -- Html content. We don't normally do anything here. */
+div.sdct_h
+{
+}
+
+/* StarDict type 'm' -- Pure meaning. Presented as <pre> */
+pre.sdct_m
+{
+}
+
+/* StarDict type 'l' -- Pure meaning which used to be in locale encoding. */
+pre.sdct_m
+{
+}
+
+/* StarDict type 'g' -- Pango Markup */
+div.sdct_g
+{
+}
+
+/* StarDict type 't' -- Transcription */
+div.sdct_t
+{
+  font-weight: bold;
+}
+
+/* StarDict type 'y' -- Chinese YinBiao or Japanese KANA */
+div.sdct_y
+{
+}
+
+/* StarDict type 'x'. Should have xdxf_*-styled elements inside */
+div.sdct_x
+{
+}
+
+
+/******** XDXF markup classes *********/
+
+/* Key -- keys shouldn't normally be present in the article's body since they
+ * are accounted for separately, hence we hide them */
+.xdxf_k
+{
+  display: none;
+}
+
+/* ...and if there's a break after it, we hide it too so we don't have an
+ * extra vertical spacing. */
+.xdxf_k + br
+{
+  display: none;
+}
+
+/* Abbreviation */
+.xdxf_abr
+{
+  font-style: italic;
+  color: green;
+}
+
+/* Color-highlighted */
+.xdxf_c
+{
+  color: blue;
+}
+
+/* Example */
+.xdxf_ex
+{
+  color: grey;
+/*  display: block;
+  margin: 8px;*/
+}
+
+/* Direct translation */
+.xdxf_dtrn
+{
+}
+
+/* Appearance-only tag */
+.xdxf_nu
+{
+  color: red;
+}
+
+/* Transcription */
+.xdxf_tr:before
+{
+  content:"[";
+}
+
+.xdxf_tr:after
+{
+  content:"]";
+}
+
+.xdxf_tr
+{
+  font-weight: bold;
+}
+
+/* Resource reference -- for now just a span. Since there's not yet a mechanism
+ * to load resources off XDXF articles in GoldenDict, we just hide them. */
+.xdxf_rref
+{
+  display: none;
+}
+
+/************* LSA audio archives **************/
+
+/* A table which contains a play icon and a word's link */
+.lsa_play
+{
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.lsa_play a
+{
+  text-decoration: none;
+}
+
+/************* DSL dictionaries **************/
+
+.dsl_u
+{
+  text-decoration: underline;
+}
+
+.dsl_article font[color=c_default_color]
+{
+  color: green;
+}
+
+.dsl_m1
+{
+  padding-left: 9px;
+}
+
+.dsl_m2
+{
+  padding-left: 18px;
+}
+
+.dsl_m3
+{
+  padding-left: 27px;
+}
+
+.dsl_ex
+{
+  color: gray;
+}
+
+.dsl_p
+{
+  color: green;
+  font-style: italic;
+  cursor: default;
+}
+
+.dsl_t
+{
+  font-weight: bold;
+}
+
+.dsl_headwords
+{
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.dsl_headwords p
+{
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0;
+}
+
+.dsl_definition p
+{
+  margin: 0;
+}
