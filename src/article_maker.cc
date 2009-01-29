@@ -5,6 +5,7 @@
 #include "config.hh"
 #include "htmlescape.hh"
 #include "utf8.hh"
+#include "dictlock.hh"
 #include <QFile>
 #include <set>
 
@@ -67,6 +68,8 @@ string ArticleMaker::makeDefinitionFor( QString const & inWord,
   }
 
   result += "</head><body>";
+
+  DictLock _;
 
   // Accumulate main forms
 

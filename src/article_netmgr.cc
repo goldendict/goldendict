@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "article_netmgr.hh"
+#include "dictlock.hh"
 
 using std::string;
 
@@ -67,6 +68,8 @@ bool ArticleNetworkAccessManager::getResource( QUrl const & url,
     string id = url.host().toStdString();
 
     bool search = ( id == "search" );
+
+    DictLock _;
 
     for( unsigned x = 0; x < dictionaries.size(); ++x )
     {

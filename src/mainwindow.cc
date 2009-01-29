@@ -8,6 +8,7 @@
 #include "stardict.hh"
 #include "lsa.hh"
 #include "dsl.hh"
+#include "dictlock.hh"
 #include <QDir>
 #include <QMessageBox>
 #include <QIcon>
@@ -25,8 +26,8 @@ MainWindow::MainWindow():
   cfg( Config::load() ),
   articleMaker( dictionaries, groupInstances ),
   articleNetMgr( this, dictionaries, articleMaker ),
+  wordFinder( this ),
   scanPopup( 0, articleNetMgr ),
-  startLookupTimeout( this ),
   initializing( 0 )
 {
   ui.setupUi( this );
@@ -58,8 +59,6 @@ MainWindow::MainWindow():
   connect( ui.tabWidget, SIGNAL( tabCloseRequested( int ) ),
            this, SLOT( tabCloseRequested( int ) ) );
 
-  startLookupTimeout.setSingleShot( true );
-
   ui.tabWidget->setTabsClosable( true );
 
   connect( ui.sources, SIGNAL( activated() ),
@@ -71,15 +70,17 @@ MainWindow::MainWindow():
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
 
-  connect( &startLookupTimeout, SIGNAL( timeout() ),
-           this, SLOT( startLookup() ) );
-
   connect( ui.wordList, SIGNAL( itemActivated( QListWidgetItem * ) ),
            this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
+
+  connect( wordFinder.qobject(), SIGNAL( prefixMatchComplete( WordFinderResults ) ),
+           this, SLOT( prefixMatchComplete( WordFinderResults ) ) );
 
   makeDictionaries();
 
   addNewTab();
+
+  ui.translateLine->setFocus();
 }
 
 LoadDictionaries::LoadDictionaries( vector< string > const & allFiles_ ):
@@ -133,7 +134,10 @@ void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw
 
 void MainWindow::makeDictionaries()
 {
-  dictionaries.clear();
+  {
+    DictLock _;
+    dictionaries.clear();
+  }
 
   ::Initializing init( this );
 
@@ -175,7 +179,11 @@ void MainWindow::makeDictionaries()
 
     loadDicts.wait();
 
-    dictionaries = loadDicts.getDictionaries();
+    {
+      DictLock _;
+
+      dictionaries = loadDicts.getDictionaries();
+    }
 
     initializing = 0;
 
@@ -234,6 +242,8 @@ void MainWindow::updateGroupList()
   ui.groupList->clear();
 
   groupInstances.clear();
+
+  DictLock _;
 
   for( unsigned x  = 0; x < cfg.groups.size(); ++x )
   {
@@ -347,119 +357,83 @@ void MainWindow::editSources()
 
 void MainWindow::editGroups()
 {
-  Groups groups( this, dictionaries, cfg.groups );
-
-  groups.show();
-
-  if ( groups.exec() == QDialog::Accepted )
   {
-    cfg.groups = groups.getGroups();
+    // We lock all dictionaries during the entire group editing process, since
+    // the dictionaries might get queried for various infos there
+    DictLock _;
+  
+    Groups groups( this, dictionaries, cfg.groups );
+  
+    groups.show();
 
-    Config::save( cfg );
+    if ( groups.exec() == QDialog::Accepted )
+    {
+      cfg.groups = groups.getGroups();
 
-    updateGroupList();
+      Config::save( cfg );
+    }
+    else
+      return;
   }
+
+  updateGroupList();
 }
 
-void MainWindow::translateInputChanged( QString const & )
+void MainWindow::translateInputChanged( QString const & newValue )
 {
-  startLookup();
-  //startLookupTimeout.start( 0 );
-}
+  QString req = newValue.trimmed();
 
-void MainWindow::startLookup()
-{
-  QString word = ui.translateLine->text();
+  if ( !req.size() )
+  {
+    // An empty request always results in an empty result
+    prefixMatchComplete( WordFinderResults( req, &getActiveDicts() ) );
 
-  ui.wordList->clear();
-
-  wstring wordW = word.trimmed().toStdWString();
-
-  if ( wordW.empty() )
     return;
-
-  // Maps lowercased string to the original one. This catches all duplicates
-  // without case sensitivity
-  map< wstring, wstring > exactResults, prefixResults;
-
-  // Where to look?
-
-  vector< sptr< Dictionary::Class > > const & activeDicts = getActiveDicts();
-
-  for( unsigned x = 0; x < activeDicts.size(); ++x )
-  {
-    vector< wstring > exactMatches, prefixMatches;
-
-    activeDicts[ x ]->findExact( wordW, exactMatches, prefixMatches, 200 );
-
-    for( unsigned y = 0; y < exactMatches.size(); ++y )
-    {
-      wstring lowerCased = Folding::applySimpleCaseOnly( exactMatches[ y ] );
-
-      pair< map< wstring, wstring >::iterator, bool > insertResult =
-        exactResults.insert( pair< wstring, wstring >( lowerCased, exactMatches[ y ] ) );
-
-      if ( !insertResult.second )
-      {
-        // Wasn't inserted since there was already an item -- check the case
-        if ( insertResult.first->second != exactMatches[ y ] )
-        {
-          // The case is different -- agree on a lowercase version
-          insertResult.first->second = lowerCased;
-        }
-      }
-    }
-
-    for( unsigned y = 0; y < prefixMatches.size(); ++y )
-    {
-      wstring lowerCased = Folding::applySimpleCaseOnly( prefixMatches[ y ] );
-
-      pair< map< wstring, wstring >::iterator, bool > insertResult =
-        prefixResults.insert( pair< wstring, wstring >( lowerCased, prefixMatches[ y ] ) );
-
-      if ( !insertResult.second )
-      {
-        // Wasn't inserted since there was already an item -- check the case
-        if ( insertResult.first->second != prefixMatches[ y ] )
-        {
-          // The case is different -- agree on a lowercase version
-          insertResult.first->second = lowerCased;
-        }
-      }
-    }
   }
 
-  // Do any sort of collation here in the future. For now we just put the
-  // strings sorted by the map.
+  ui.wordList->setCursor( Qt::WaitCursor );
 
-  for( map< wstring, wstring >::const_iterator i = exactResults.begin();
-       i != exactResults.end(); ++i )
+  wordFinder.prefixMatch( req, &getActiveDicts() );
+}
+
+void MainWindow::prefixMatchComplete( WordFinderResults r )
+{
+  if ( r.requestStr != ui.translateLine->text().trimmed() ||
+      r.requestDicts != &getActiveDicts() )
   {
-    ui.wordList->addItem( QString::fromStdWString( i->second ) );
-
-    QListWidgetItem * item = ui.wordList->item( ui.wordList->count() - 1 );
-
-    QFont font = item->font();
-    //font.setWeight( QFont::Bold );
-
-    item->setFont( font );
+    // Those results are already irrelevant, ignore the result
+    return;
   }
 
-  if ( prefixResults.size() )
+  ui.wordList->setUpdatesEnabled( false );
+
+  for( unsigned x = 0; x < r.results.size(); ++x )
   {
-    for( map< wstring, wstring >::const_iterator i = prefixResults.begin();
-         i != prefixResults.end(); ++i )
-    {
-        ui.wordList->addItem( QString::fromStdWString( i->second ) );
+    QListWidgetItem * i = ui.wordList->item( x );
 
-        QListWidgetItem * item = ui.wordList->item( ui.wordList->count() - 1 );
-
-        QFont font = item->font();
-        //font.setStyle( QFont::StyleOblique );
-
-        item->setFont( font );
-    }
+    if ( !i )
+      ui.wordList->addItem( r.results[ x ] );
+    else
+    if ( i->text() != r.results[ x ] )
+      i->setText( r.results[ x ] );
   }
+
+  while ( ui.wordList->count() > (int) r.results.size() )
+  {
+    // Chop off any extra items that were there
+    QListWidgetItem * i = ui.wordList->takeItem( ui.wordList->count() - 1 );
+
+    if ( i )
+      delete i;
+    else
+      break;
+  }
+
+  if ( ui.wordList->count() )
+    ui.wordList->scrollToItem( ui.wordList->item( 0 ), QAbstractItemView::PositionAtTop );
+
+  ui.wordList->setUpdatesEnabled( true );
+  ui.wordList->unsetCursor();
 }
 
 void MainWindow::wordListItemActivated( QListWidgetItem * item )

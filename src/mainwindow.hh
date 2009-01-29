@@ -17,6 +17,7 @@
 #include "article_maker.hh"
 #include "scanpopup.hh"
 #include "articleview.hh"
+#include "wordfinder.hh"
 
 using std::string;
 using std::vector;
@@ -67,9 +68,9 @@ private:
   ArticleMaker articleMaker;
   ArticleNetworkAccessManager articleNetMgr;
 
-  ScanPopup scanPopup;
+  WordFinder wordFinder;
 
-  QTimer startLookupTimeout;
+  ScanPopup scanPopup;
 
   ::Initializing * initializing;
 
@@ -102,7 +103,7 @@ private slots:
   void indexingDictionary( QString dictionaryName );
 
   void translateInputChanged( QString const & );
-  void startLookup();
+  void prefixMatchComplete( WordFinderResults );
   void wordListItemActivated( QListWidgetItem * );
 
   void showTranslationFor( QString const & );
