@@ -14,8 +14,10 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.definition->page()->setNetworkAccessManager( &articleNetMgr );
 
+  #if 0 // Since this is unconditional this bugs a lot
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
+  #endif
 }
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
