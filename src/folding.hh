@@ -30,7 +30,7 @@ enum
 wstring apply( wstring const & );
 
 /// Applies only simple case folding algorithm. Since many dictionaries have
-/// different case style, we interpret words differing only by case as synonims.
+/// different case style, we interpret words differing only by case as synonyms.
 wstring applySimpleCaseOnly( wstring const & );
 
 /// Same as apply( wstring ), but without any heap operations, therefore
