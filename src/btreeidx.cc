@@ -5,6 +5,8 @@
 #include "folding.hh"
 #include "utf8.hh"
 #include <math.h>
+#include<string.h>
+#include <stdlib.h>
 
 //#define __BTREE_USE_LZO
 // LZO mode is experimental and unsupported. Tests didn't show any substantial

@@ -3,6 +3,7 @@
 
 #include "chunkedstorage.hh"
 #include <zlib.h>
+#include<string.h>
 
 namespace ChunkedStorage {
 

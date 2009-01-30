@@ -24,6 +24,7 @@
 #include "bgl_babylon.hh"
 
 #include<stdlib.h>
+#include<string.h>
 #include<stdio.h>
 #include <iconv.h>
 

@@ -14,6 +14,7 @@
 #include <set>
 #include <string>
 #include <arpa/inet.h>
+#include <stdlib.h>
 
 #include <QString>
 

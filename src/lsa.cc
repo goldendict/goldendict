@@ -9,6 +9,7 @@
 #include "btreeidx.hh"
 #include <set>
 #include <vorbis/vorbisfile.h>
+#include <string.h>
 
 namespace Lsa {
 

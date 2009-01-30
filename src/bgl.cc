@@ -13,6 +13,7 @@
 #include <list>
 #include <zlib.h>
 #include <ctype.h>
+#include <string.h>
 
 namespace Bgl {
 

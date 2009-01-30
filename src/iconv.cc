@@ -4,6 +4,7 @@
 #include "iconv.hh"
 #include <vector>
 #include <errno.h>
+#include <string.h>
 
 char const * const Iconv::Wchar_t = "WCHAR_T";
 char const * const Iconv::Utf16Le = "UTF-16LE";
