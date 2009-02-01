@@ -47,8 +47,12 @@ bool ArticleNetworkAccessManager::getResource( QUrl const & url,
 
   if ( url.scheme() == "gdlookup" )
   {
-    string result = articleMaker.makeDefinitionFor( url.queryItemValue( "word" ),
-                                                    url.queryItemValue( "group" ) );
+    QString word = url.queryItemValue( "word" );
+    QString group = url.queryItemValue( "group" );
+
+    string result = ( url.queryItemValue( "notfound" ) != "1" ) ?
+      articleMaker.makeDefinitionFor( word, group ) :
+      articleMaker.makeNotFoundTextFor( word, group );
 
     data.resize( result.size() );
 

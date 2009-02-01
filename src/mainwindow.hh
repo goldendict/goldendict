@@ -70,13 +70,14 @@ private:
 
   WordFinder wordFinder;
 
-  ScanPopup scanPopup;
+  sptr< ScanPopup > scanPopup;
 
   ::Initializing * initializing;
 
   void makeDictionaries();
   void updateStatusLine();
   void updateGroupList();
+  void makeScanPopup();
 
   /// Returns the reference to dictionaries stored in the currently active
   /// group, or to all dictionaries if there are no groups.

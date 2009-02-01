@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QWebHitTestResult>
 #include <QMenu>
+#include <QDesktopServices>
 
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
@@ -44,6 +45,19 @@ void ArticleView::showDefinition( QString const & word, QString const & group )
   req.setHost( "localhost" );
   req.addQueryItem( "word", word );
   req.addQueryItem( "group", group );
+
+  ui.definition->load( req );
+}
+
+void ArticleView::showNotFound( QString const & word, QString const & group )
+{
+  QUrl req;
+
+  req.setScheme( "gdlookup" );
+  req.setHost( "localhost" );
+  req.addQueryItem( "word", word );
+  req.addQueryItem( "group", group );
+  req.addQueryItem( "notfound", "1" );
 
   ui.definition->load( req );
 }
@@ -161,6 +175,13 @@ void ArticleView::linkClicked( QUrl const & url )
     {
       printf( "%s\n", e.what() );
     }
+  }
+  else
+  if ( url.scheme() == "http" || url.scheme() == "https" ||
+      url.scheme() == "ftp" || url.scheme() == "mailto" )
+  {
+    // Use the system handler for the conventional internet links
+    QDesktopServices::openUrl( url );
   }
 }
 

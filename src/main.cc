@@ -3,11 +3,21 @@
 
 #include <QApplication>
 #include "mainwindow.hh"
-#include "dictionary.hh"
+#include "config.hh"
 
 int main( int argc, char ** argv )
 {
   QApplication app( argc, argv );
+
+  // Try loading a style sheet if there's one
+
+  #if 1
+  QFile cssFile( Config::getUserQtCssFileName() );
+
+  if ( cssFile.open( QFile::ReadOnly ) )
+    app.setStyleSheet( cssFile.readAll() );
+
+  #endif
 
   MainWindow m;
 

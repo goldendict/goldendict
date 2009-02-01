@@ -200,4 +200,9 @@ QString getUserCssFileName() throw( exError )
   return getHomeDir().filePath( "style.css" );
 }
 
+QString getUserQtCssFileName() throw( exError )
+{
+  return getHomeDir().filePath( "qt-style.css" );
+}
+
 }

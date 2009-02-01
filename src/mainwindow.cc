@@ -27,7 +27,6 @@ MainWindow::MainWindow():
   articleMaker( dictionaries, groupInstances ),
   articleNetMgr( this, dictionaries, articleMaker ),
   wordFinder( this ),
-  scanPopup( 0, articleNetMgr ),
   initializing( 0 )
 {
   ui.setupUi( this );
@@ -214,6 +213,7 @@ void MainWindow::makeDictionaries()
 
   updateStatusLine();
   updateGroupList();
+  makeScanPopup();
 }
 
 void MainWindow::updateStatusLine()
@@ -239,24 +239,23 @@ void MainWindow::updateGroupList()
 
   ui.groupLabel->setText( haveGroups ? tr( "Look up in:" ) : tr( "Look up:" ) );
 
-  ui.groupList->clear();
-
-  groupInstances.clear();
-
-  DictLock _;
-
-  for( unsigned x  = 0; x < cfg.groups.size(); ++x )
   {
-    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
-
-    QIcon icon = cfg.groups[ x ].icon.size() ?
-                   QIcon( ":/flags/" + cfg.groups[ x ].icon ) : QIcon();
-
-    ui.groupList->addItem( icon, cfg.groups[ x ].name );
+    DictLock _;
+  
+    groupInstances.clear();
+  
+    for( unsigned x  = 0; x < cfg.groups.size(); ++x )
+      groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
   }
 
-  if ( haveGroups )
-    ui.groupList->setCurrentIndex( 0 );
+  ui.groupList->fill( groupInstances );
+}
+
+void MainWindow::makeScanPopup()
+{
+  scanPopup.reset();
+
+  scanPopup = new ScanPopup( 0, articleNetMgr, dictionaries, groupInstances );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -377,6 +376,7 @@ void MainWindow::editGroups()
   }
 
   updateGroupList();
+  makeScanPopup();
 }
 
 void MainWindow::translateInputChanged( QString const & newValue )

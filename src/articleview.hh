@@ -34,6 +34,9 @@ public:
   /// Shows the definition of the given word with the given group
   void showDefinition( QString const & word, QString const & group );
 
+  /// Shows the page stating that the given word could not be found.
+  void showNotFound( QString const & word, QString const & group );
+
   /// Goes back in history
   void back()
   { ui.definition->back(); }
