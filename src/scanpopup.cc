@@ -28,8 +28,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.prefixButton->hide();
 
   ui.groupList->fill( groups );
-  //setWindowFlags( Qt::Tool );
-  setWindowFlags( Qt::Dialog | Qt::FramelessWindowHint | Qt::Tool );
+  setWindowFlags( Qt::Popup );
 
   #if 0 // Experimental code to give window a non-rectangular shape (i.e.
         // balloon) using a colorkey mask.
@@ -88,7 +87,6 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
     move( currentPos.x() + 4, currentPos.y() + 10 );
 
     show();
-    activateWindow();
 
     QApplication::processEvents(); // Make window appear immediately no matter what
   }
@@ -221,7 +219,7 @@ void ScanPopup::pinButtonClicked( bool checked )
   if ( checked )
     setWindowFlags( Qt::Dialog  );
   else
-    setWindowFlags( Qt::Dialog | Qt::FramelessWindowHint | Qt::Tool );
+    setWindowFlags( Qt::Popup );
 
   // Should we disable grip? I like it with the grip better.
   //ui.gripArea->setDisabled( checked );
