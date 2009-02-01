@@ -68,7 +68,7 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
 
   // Check key modifiers
 
-  if ( !checkModifiersPressed( Ctrl ) )
+  if ( !checkModifiersPressed( Win ) )
     return;
 
   QString subtype = "plain";
