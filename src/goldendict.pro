@@ -11,12 +11,18 @@ QT += webkit
 QT += xml
 QT += network
 
+CONFIG += exceptions rtti stl
+
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
 
-LIBS += -lvorbisfile
+LIBS += -lvorbisfile -lvorbis -logg -lz
+
+win32 {
+  LIBS += -liconv -lwsock32
+}
 
 # Input
 HEADERS += folding.hh \
