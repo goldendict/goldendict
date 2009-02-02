@@ -13,7 +13,11 @@
 #include <map>
 #include <set>
 #include <string>
+#ifndef __WIN32
 #include <arpa/inet.h>
+#else
+#include <winsock.h>
+#endif
 #include <stdlib.h>
 
 #include <QString>
