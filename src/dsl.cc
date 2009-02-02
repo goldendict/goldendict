@@ -380,7 +380,18 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
       try
       {
-        File::Class f( n, "r" );
+        try
+        {
+          File::Class f( n, "rb" );
+        }
+        catch( File::exCantOpen & )
+        {
+          n = getDictionaryFilenames()[ 0 ] + ".files" +
+              FsEncoding::separator() +
+              FsEncoding::encode( filename );
+
+          File::Class f( n, "rb" );
+        }
 
         search = false;
       }
@@ -589,6 +600,19 @@ string DslDictionary::getArticle( wstring const & word,
   return result;
 }
 
+void loadFromFile( string const & n, vector< char > & data )
+{
+  File::Class f( n, "rb" );
+
+  f.seekEnd();
+
+  data.resize( f.tell() );
+
+  f.rewind();
+
+  f.read( &data.front(), data.size() );
+}
+
 void DslDictionary::getResource( string const & name,
                                  vector< char > & data )
   throw( Dictionary::exNoSuchResource, std::exception )
@@ -602,15 +626,18 @@ void DslDictionary::getResource( string const & name,
 
   try
   {
-    File::Class f( n, "rb" );
+    try
+    {
+      loadFromFile( n, data );
+    }
+    catch( File::exCantOpen & )
+    {
+      n = getDictionaryFilenames()[ 0 ] + ".files" +
+          FsEncoding::separator() +
+          FsEncoding::encode( name );
 
-    f.seekEnd();
-
-    data.resize( f.tell() );
-
-    f.rewind();
-
-    f.read( &data.front(), data.size() );
+      loadFromFile( n, data );
+    }
 
     if ( Filetype::isNameOfTiff( name ) )
     {
