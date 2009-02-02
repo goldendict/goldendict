@@ -27,6 +27,10 @@
 #include <stdio.h>
 #include <zlib.h>
 
+#ifdef __WIN32
+#include <windows.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" 
 {
@@ -45,7 +49,13 @@ typedef struct dictCache {
 } dictCache;
 
 typedef struct dictData {
+
+#ifdef __WIN32
+   HANDLE        fileHandle, mappingHandle;
+#else   
    int           fd;		/* file descriptor */
+#endif
+
    const char    *start;	/* start of mmap'd area */
    const char    *end;		/* end of mmap'd area */
    unsigned long size;		/* size of mmap */

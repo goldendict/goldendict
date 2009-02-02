@@ -129,19 +129,20 @@
 #define DICT_GZIP       2
 #define DICT_DZIP       3
 
-/* For now, just always enable the mmap mode */
+/* Always enable the mmap mode -- else it reads the whole file into memory! */
 #define HAVE_MMAP
 
 #include <sys/stat.h>
+
+#ifndef __WIN32
 #ifdef HAVE_MMAP
 #include <sys/mman.h>
 #endif
+#endif
+
 #include <ctype.h>
 #include <fcntl.h>
 #include <assert.h>
-#ifdef HAVE_MMAP
-#include <sys/mman.h>
-#endif
 
 #include <sys/stat.h>
 
@@ -276,7 +277,7 @@ static int dict_read_header( const char *filename,
    int           count;
    unsigned long offset;
 
-   if (!(str = fopen( filename, "r" )))
+   if (!(str = fopen( filename, "rb" )))
       err_fatal_errno( __func__,
 		       "Cannot open data file \"%s\" for read\n", filename );
 
@@ -448,7 +449,54 @@ dictData *dict_data_open( const char *filename, int computeCRC )
       err_fatal( __func__,
 		 "\"%s\" not in text or dzip format\n", filename );
    }
-   
+
+#ifdef __WIN32
+
+   h->fileHandle = CreateFileA( filename, GENERIC_READ, FILE_SHARE_READ, 0,
+                                OPEN_EXISTING, 0, 0 );
+
+   if ( h->fileHandle == INVALID_HANDLE_VALUE )
+   {
+     err_fatal_errno( __func__,
+          "Cannot open data file \"%s\"\n", filename );
+
+     xfree( h );
+
+     return 0;
+   }
+
+   h->size = GetFileSize( h->fileHandle, 0 );
+
+   h->mappingHandle = CreateFileMapping( h->fileHandle, 0,
+                                         PAGE_READONLY, 0, h->size, 0 );
+
+   if ( !h->mappingHandle )
+   {
+     err_fatal_errno( __func__,
+          "Cannot create file mapping for data file \"%s\"\n", filename );
+
+     CloseHandle( h->fileHandle );
+     xfree( h );
+
+     return 0;
+   }
+
+   h->start = MapViewOfFile( h->mappingHandle, FILE_MAP_READ, 0, 0, h->size );
+
+   if ( !h->start )
+   {
+     err_fatal_errno( __func__,
+          "Cannot map view of data file \"%s\"\n", filename );
+
+     CloseHandle( h->mappingHandle );
+     CloseHandle( h->fileHandle );
+     xfree( h );
+
+     return 0;
+   }
+
+#else
+
    if ((h->fd = open( filename, O_RDONLY )) < 0)
       err_fatal_errno( __func__,
 		       "Cannot open data file \"%s\"\n", filename );
@@ -477,6 +525,7 @@ dictData *dict_data_open( const char *filename, int computeCRC )
       close (h -> fd);
       h -> fd = 0;
    }
+#endif
 
    h->end = h->start + h->size;
 
@@ -497,6 +546,11 @@ void dict_data_close( dictData *header )
    if (!header)
       return;
 
+#ifdef __WIN32
+   UnmapViewOfFile( header->start );
+   CloseHandle( header->mappingHandle );
+   CloseHandle( header->fileHandle );
+#else
    if (header->fd >= 0) {
       if (mmap_mode){
 #ifdef HAVE_MMAP
@@ -512,6 +566,7 @@ void dict_data_close( dictData *header )
 	    xfree ((char *) header -> start);
       }
    }
+#endif
 
    if (header->chunks)       xfree( header->chunks );
    if (header->offsets)      xfree( header->offsets );
