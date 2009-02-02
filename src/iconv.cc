@@ -37,7 +37,12 @@ Iconv::Result Iconv::convert( void const * & inBuf, size_t  & inBytesLeft,
   throw( exIncorrectSeq, exOther )
 {
   size_t result = iconv( state,
-                         (char **)&inBuf, &inBytesLeft,
+                         #ifdef __WIN32
+                         (char const **)&inBuf,
+                         #else
+                         (char **)&inBuf,
+                         #endif
+                                           &inBytesLeft,
                          (char **)&outBuf, &outBytesLeft );
 
   if ( result == (size_t) -1 )
