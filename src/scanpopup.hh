@@ -36,6 +36,7 @@ private:
 
   vector< QString > diacriticMatches, prefixMatches;
 
+  void handleInputWord( QString const & );
   void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
@@ -47,6 +48,7 @@ private:
 private slots:
 
   void clipboardChanged( QClipboard::Mode );
+  void mouseHovered( QString const & );
   void currentGroupChanged( QString const & );
   void prefixMatchComplete( WordFinderResults r );
   void diacriticButtonClicked();

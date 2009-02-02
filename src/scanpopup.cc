@@ -3,6 +3,7 @@
 
 #include "scanpopup.hh"
 #include "folding.hh"
+#include "mouseover.hh"
 #include <QUrl>
 #include <QCursor>
 #include <QPixmap>
@@ -59,6 +60,9 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
+
+  connect( &MouseOver::instance(), SIGNAL( hovered( QString const & ) ),
+           this, SLOT( mouseHovered( QString const & ) ) );
 }
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
@@ -72,7 +76,17 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
 
   QString subtype = "plain";
 
-  inputWord = QApplication::clipboard()->text( subtype, m ).trimmed();
+  handleInputWord( QApplication::clipboard()->text( subtype, m ) );
+}
+
+void ScanPopup::mouseHovered( QString const & str )
+{
+  handleInputWord( str );
+}
+
+void ScanPopup::handleInputWord( QString const & str )
+{
+  inputWord = str.trimmed();
 
   if ( !inputWord.size() )
     return;
