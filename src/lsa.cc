@@ -131,6 +131,23 @@ Entry::Entry( File::Class & f )
                         read * sizeof( uint16_t ) );
 }
 
+#ifdef __WIN32
+
+// Win32 features the usual Posix basename() which may modify its input. We
+// provide our local implementation here instead.
+
+char const * basename( char const * n )
+{
+  char const * lastSep = strrchr( n, '\\' );
+
+  if ( !lastSep )
+    return n;
+
+  return lastSep + 1;
+}
+
+#endif
+
 class LsaDictionary: public BtreeIndexing::BtreeDictionary
 {
   File::Class idx;
