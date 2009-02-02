@@ -157,7 +157,7 @@ void MainWindow::makeDictionaries()
 
       for( QStringList::const_iterator i = entries.constBegin();
            i != entries.constEnd(); ++i )
-        allFiles.push_back( dir.filePath( *i ).toLocal8Bit().data() );
+        allFiles.push_back( QDir::toNativeSeparators( dir.filePath( *i ) ).toLocal8Bit().data() );
     }
 
     // Now start a thread to load all the dictionaries
