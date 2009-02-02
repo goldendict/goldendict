@@ -7,6 +7,7 @@
 #include "folding.hh"
 #include "utf8.hh"
 #include "btreeidx.hh"
+#include "fsencoding.hh"
 #include <set>
 #include <vorbis/vorbisfile.h>
 #include <string.h>
@@ -131,23 +132,6 @@ Entry::Entry( File::Class & f )
                         read * sizeof( uint16_t ) );
 }
 
-#ifdef __WIN32
-
-// Win32 features the usual Posix basename() which may modify its input. We
-// provide our local implementation here instead.
-
-char const * basename( char const * n )
-{
-  char const * lastSep = strrchr( n, '\\' );
-
-  if ( !lastSep )
-    return n;
-
-  return lastSep + 1;
-}
-
-#endif
-
 class LsaDictionary: public BtreeIndexing::BtreeDictionary
 {
   File::Class idx;
@@ -159,7 +143,7 @@ public:
                  vector< string > const & dictionaryFiles );
 
   virtual string getName() throw()
-  { return basename( string( getDictionaryFilenames()[ 0 ] ).c_str() ); }
+  { return FsEncoding::basename( getDictionaryFilenames()[ 0 ] ); }
 
   virtual map< Dictionary::Property, string > getProperties() throw()
   { return map< Dictionary::Property, string >(); }
@@ -479,7 +463,7 @@ vector< sptr< Dictionary::Class > > Format::makeDictionaries(
       {
         // Building the index
   
-        initializing.indexingDictionary( basename( i->c_str() ) );
+        initializing.indexingDictionary( FsEncoding::basename( *i ) );
 
         File::Class idx( indexFile, "wb" );
 

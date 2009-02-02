@@ -5,7 +5,6 @@
 #include <QString>
 #include <QDir>
 #include <vector>
-#include <libgen.h>
 
 namespace FsEncoding {
 
@@ -26,11 +25,22 @@ char separator()
 
 string dirname( string const & str )
 {
-  std::vector< char > tmp( str.size() + 1 );
+  size_t x = str.rfind( separator() );
 
-  memcpy( &tmp.front(), str.c_str(), tmp.size() );
+  if ( x == string::npos )
+    return string( "." );
 
-  return ::dirname( &tmp.front() );
+  return string( str, 0, x );
+}
+
+string basename( string const & str )
+{
+  size_t x = str.rfind( separator() );
+
+  if ( x == string::npos )
+    return str;
+
+  return string( str, x + 1 );
 }
 
 }

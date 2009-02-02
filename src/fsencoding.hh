@@ -26,6 +26,9 @@ char separator();
 /// Returns the directory part of the given filename.
 string dirname( string const & );
 
+/// Returns the name part of the given filename.
+string basename( string const & );
+
 }
 
 #endif
