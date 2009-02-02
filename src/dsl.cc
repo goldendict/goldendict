@@ -602,7 +602,7 @@ void DslDictionary::getResource( string const & name,
 
   try
   {
-    File::Class f( n, "r" );
+    File::Class f( n, "rb" );
 
     f.seekEnd();
 
