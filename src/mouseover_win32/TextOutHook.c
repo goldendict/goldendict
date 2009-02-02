@@ -1,3 +1,11 @@
+/*
+ * February 2, 2009: Konstantin Isakov <ikm@users.sf.net>
+ *   Support for ETO_GLYPH_INDEX in ExtTextOutW() function added. This makes
+ *   Firefox 3 work.
+*/
+
+#define _WIN32_WINNT 0x0500
+
 #include "TextOutHook.h"
 #include "GetWord.h"
 #include "HookImportFunction.h"
@@ -323,7 +331,77 @@ BOOL WINAPI ExtTextOutACallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOp
 BOOL WINAPI ExtTextOutWCallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCWSTR lpszString, UINT cbString, CONST INT *lpDx)
 {
 	if (CurParams && CurParams->Active)
-		IsInsidePointW(hdc, nXStart, nYStart, lpszString, cbString);
+  {
+    if ( fuOptions & ETO_GLYPH_INDEX )
+    {
+      LPGLYPHSET ranges;
+      WCHAR * allChars, * ptr, * restoredString;
+      WORD * allIndices;
+      unsigned x;
+
+      // Here we have to decode glyph indices back to chars. We do this
+      // by tedious and ineffective iteration.
+      //
+      ranges = malloc( GetFontUnicodeRanges( hdc, 0 ) );
+      GetFontUnicodeRanges( hdc, ranges );
+
+      // Render up all available chars into one ridiculously big string
+
+      allChars = malloc( ( ranges->cGlyphsSupported ) * sizeof( WCHAR ) );
+      allIndices = malloc( ( ranges->cGlyphsSupported ) * sizeof( WORD ) );
+
+      ptr = allChars;
+
+      for( x = 0; x < ranges->cRanges; ++x )
+      {
+        WCHAR c = ranges->ranges[ x ].wcLow;
+        unsigned y = ranges->ranges[ x ].cGlyphs;
+
+        while( y-- )
+          *ptr++ = c++;
+      }
+
+      // Amazing. Now get glyph indices for this one nice string.
+
+      GetGlyphIndicesW( hdc, allChars, ranges->cGlyphsSupported, allIndices,
+                        GGI_MARK_NONEXISTING_GLYPHS );
+
+      // Fascinating. Now translate our original input string back into
+      // its readable form.
+
+      restoredString = malloc( cbString * sizeof( WCHAR ) );
+
+      for( x = 0; x < cbString; ++x )
+      {
+        unsigned y;
+        WORD idx = lpszString[ x ];
+
+        for( y = 0; y < ranges->cGlyphsSupported; ++y )
+          if ( allIndices[ y ] == idx )
+          {
+            restoredString[ x ] = allChars[ y ];
+            break;
+          }
+        if ( y == ranges->cGlyphsSupported )
+        {
+          // Not found
+          restoredString[ x ] = L'?';
+        }
+      }
+
+      // And we're done.
+
+      free( allIndices );
+      free( allChars );
+      free( ranges );
+
+      IsInsidePointW( hdc, nXStart, nYStart, restoredString, cbString );
+
+      free( restoredString );
+    }
+    else
+      IsInsidePointW(hdc, nXStart, nYStart, lpszString, cbString);
+  }
 	return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
 }
 
