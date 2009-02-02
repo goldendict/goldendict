@@ -10,6 +10,27 @@ namespace Details {
 using std::wstring;
 using std::list;
 
+#ifdef __WIN32
+
+// wcscasecmp() function is a GNU extension, we need to reimplement it
+// for non-GNU systems.
+
+int wcscasecmp( const wchar_t *s1, const wchar_t *s2 )
+{
+  for( ; ; ++s1, ++s2 )
+  {
+    if ( towlower( *s1 ) != towlower( *s2 ) )
+      return towlower( *s1 ) > towlower( *s2 ) ? 1 : -1;
+
+    if ( !*s1 )
+      break;
+  }
+
+  return 0;
+}
+
+#endif
+
 /////////////// ArticleDom
 
 wstring ArticleDom::Node::renderAsText() const
