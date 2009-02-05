@@ -11,7 +11,7 @@ class KeyboardState
 {
 public:
 
-  enum
+  enum Modifier
   {
     Alt = 1,
     Ctrl = 2,
@@ -23,7 +23,7 @@ public:
     RightCtrl = 128,
     LeftShift = 256,
     RightShift = 512
-  } Modifier;
+  };
 
   /// Returns true if all Modifiers present within the given mask are pressed
   /// right now.
