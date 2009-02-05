@@ -69,11 +69,6 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
   printf( "clipboard changed\n" );
 
-  // Check key modifiers
-
-  if ( !checkModifiersPressed( Win ) )
-    return;
-
   QString subtype = "plain";
 
   handleInputWord( QApplication::clipboard()->text( subtype, m ) );
@@ -86,6 +81,16 @@ void ScanPopup::mouseHovered( QString const & str )
 
 void ScanPopup::handleInputWord( QString const & str )
 {
+  // Check key modifiers
+
+#ifdef Q_OS_WIN32
+  if ( !checkModifiersPressed( Ctrl ) )
+    return;
+#else
+  if ( !checkModifiersPressed( Win ) )
+    return;
+#endif
+
   inputWord = str.trimmed();
 
   if ( !inputWord.size() )
