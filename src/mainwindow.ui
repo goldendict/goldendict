@@ -246,6 +246,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="quit"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
     <property name="title">
@@ -253,9 +254,19 @@
     </property>
     <addaction name="sources"/>
     <addaction name="groups"/>
+    <addaction name="preferences"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="openWebsite"/>
+    <addaction name="separator"/>
+    <addaction name="about"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menu_Edit"/>
+   <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_Preferences">
@@ -271,6 +282,26 @@
   <action name="groups">
    <property name="text">
     <string>&amp;Groups...</string>
+   </property>
+  </action>
+  <action name="preferences">
+   <property name="text">
+    <string>&amp;Preferences...</string>
+   </property>
+  </action>
+  <action name="openWebsite">
+   <property name="text">
+    <string>Program's &amp;website</string>
+   </property>
+  </action>
+  <action name="about">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="quit">
+   <property name="text">
+    <string>&amp;Quit</string>
    </property>
   </action>
  </widget>

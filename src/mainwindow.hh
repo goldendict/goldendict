@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include <QThread>
 #include <QToolButton>
+#include <QSystemTrayIcon>
 #include "ui_mainwindow.h"
 #include "folding.hh"
 #include "config.hh"
@@ -58,6 +59,8 @@ public:
 
 private:
 
+  QSystemTrayIcon * trayIcon;
+
   Ui::MainWindow ui;
   QToolBar * navToolbar;
   QAction * navBack, * navForward;
@@ -73,6 +76,12 @@ private:
   sptr< ScanPopup > scanPopup;
 
   ::Initializing * initializing;
+
+  /// Creates, destroys or otherwise updates tray icon, according to the
+  /// current configuration and situation.
+  void updateTrayIcon();
+
+  void closeEvent( QCloseEvent * );
 
   void makeDictionaries();
   void updateStatusLine();
@@ -101,6 +110,7 @@ private slots:
 
   void editSources();
   void editGroups();
+  void editPreferences();
   void indexingDictionary( QString dictionaryName );
 
   void translateInputChanged( QString const & );
@@ -108,6 +118,8 @@ private slots:
   void wordListItemActivated( QListWidgetItem * );
 
   void showTranslationFor( QString const & );
+
+  void trayIconActivated( QSystemTrayIcon::ActivationReason );
 };
 
 #endif

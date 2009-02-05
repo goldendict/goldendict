@@ -2,12 +2,15 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <QApplication>
+#include <QIcon>
 #include "mainwindow.hh"
 #include "config.hh"
 
 int main( int argc, char ** argv )
 {
   QApplication app( argc, argv );
+
+  app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
 
   // Try loading a style sheet if there's one
 
@@ -20,8 +23,6 @@ int main( int argc, char ** argv )
   #endif
 
   MainWindow m;
-
-  m.show();
 
   return app.exec();
 }

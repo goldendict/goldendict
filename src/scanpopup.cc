@@ -13,10 +13,12 @@
 using std::wstring;
 
 ScanPopup::ScanPopup( QWidget * parent,
-                      ArticleNetworkAccessManager & articleNetMgr,
+                      Config::Class const & cfg_,
+                      ArticleNetworkAccessManager & articleNetMgr,                      
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                       Instances::Groups const & groups_ ):
   QDialog( parent ),
+  cfg( cfg_ ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   wordFinder( this )
@@ -81,23 +83,23 @@ void ScanPopup::mouseHovered( QString const & str )
 
 void ScanPopup::handleInputWord( QString const & str )
 {
+  if ( !cfg.preferences.enableScanPopup )
+    return;
+
   // Check key modifiers
 
-#ifdef Q_OS_WIN32
-  if ( !checkModifiersPressed( Ctrl ) )
+  if ( cfg.preferences.enableScanPopupModifiers &&
+       !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
     return;
-#else
-  if ( !checkModifiersPressed( Win ) )
-    return;
-#endif
 
   inputWord = str.trimmed();
 
   if ( !inputWord.size() )
     return;
 
-  setWindowTitle( inputWord );
-  ui.word->setText( inputWord );
+  /// Too large strings make window expand which is probably not what user
+  /// wants
+  ui.word->setText( elideInputWord() );
 
   if ( !isVisible() )
   {
@@ -112,6 +114,12 @@ void ScanPopup::handleInputWord( QString const & str )
 
   initiateTranslation();
 }
+
+QString ScanPopup::elideInputWord()
+{
+  return inputWord.size() > 32 ? inputWord.mid( 0, 32 ) + "..." : inputWord;
+}
+
 
 void ScanPopup::currentGroupChanged( QString const & )
 {
@@ -236,7 +244,10 @@ void ScanPopup::initialWordClicked()
 void ScanPopup::pinButtonClicked( bool checked )
 {
   if ( checked )
-    setWindowFlags( Qt::Dialog  );
+  {
+    setWindowFlags( Qt::Dialog );
+    setWindowTitle( elideInputWord() );
+  }
   else
     setWindowFlags( Qt::Popup );
 

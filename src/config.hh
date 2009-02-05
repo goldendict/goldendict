@@ -26,10 +26,24 @@ struct Group
 /// All the groups
 typedef vector< Group > Groups;
 
+/// Various user preferences
+struct Preferences
+{
+  bool enableTrayIcon;
+  bool startToTray;
+  bool closeToTray;
+  bool enableScanPopup;
+  bool enableScanPopupModifiers;
+  unsigned long scanPopupModifiers; // Combination of KeyboardState::Modifier
+
+  Preferences();
+};
+
 struct Class
 {
   Paths paths;
   Groups groups;
+  Preferences preferences;
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )

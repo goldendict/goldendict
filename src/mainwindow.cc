@@ -4,6 +4,7 @@
 #include "mainwindow.hh"
 #include "sources.hh"
 #include "groups.hh"
+#include "preferences.hh"
 #include "bgl.hh"
 #include "stardict.hh"
 #include "lsa.hh"
@@ -13,6 +14,7 @@
 #include <QMessageBox>
 #include <QIcon>
 #include <QToolBar>
+#include <QCloseEvent>
 #include <set>
 #include <map>
 
@@ -22,6 +24,7 @@ using std::map;
 using std::pair;
 
 MainWindow::MainWindow(): 
+  trayIcon( 0 ),
   addTab( this ),
   cfg( Config::load() ),
   articleMaker( dictionaries, groupInstances ),
@@ -29,6 +32,12 @@ MainWindow::MainWindow():
   wordFinder( this ),
   initializing( 0 )
 {
+  // Show tray icon as early as possible so the user would be happy
+  updateTrayIcon();
+
+  if ( trayIcon )
+    trayIcon->setToolTip( tr( "Loading..." ) );
+
   ui.setupUi( this );
 
   // Make the toolbar
@@ -60,11 +69,17 @@ MainWindow::MainWindow():
 
   ui.tabWidget->setTabsClosable( true );
 
+  connect( ui.quit, SIGNAL( activated() ),
+           qApp, SLOT( quit() ) );
+
   connect( ui.sources, SIGNAL( activated() ),
            this, SLOT( editSources() ) );
 
   connect( ui.groups, SIGNAL( activated() ),
            this, SLOT( editGroups() ) );
+
+  connect( ui.preferences, SIGNAL( activated() ),
+           this, SLOT( editPreferences() ) );
 
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
@@ -80,6 +95,12 @@ MainWindow::MainWindow():
   addNewTab();
 
   ui.translateLine->setFocus();
+
+  updateTrayIcon();
+
+  // Only show window initially if it wasn't configured differently
+  if ( !cfg.preferences.enableTrayIcon || !cfg.preferences.startToTray )
+    show();
 }
 
 LoadDictionaries::LoadDictionaries( vector< string > const & allFiles_ ):
@@ -129,6 +150,41 @@ void LoadDictionaries::run()
 void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw()
 {
   emit indexingDictionarySignal( QString::fromUtf8( dictionaryName.c_str() ) );
+}
+
+void MainWindow::updateTrayIcon()
+{
+  if ( !trayIcon && cfg.preferences.enableTrayIcon )
+  {
+    // Need to show it
+    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon.png" ), this );
+    trayIcon->show();
+
+    connect( trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ),
+             this, SLOT( trayIconActivated( QSystemTrayIcon::ActivationReason ) ) );
+  }
+  else
+  if ( trayIcon && !cfg.preferences.enableTrayIcon )
+  {
+    // Need to hide it
+    delete trayIcon;
+
+    trayIcon = 0;
+  }
+
+  if ( trayIcon )
+    trayIcon->setToolTip( "GoldenDict" );
+}
+
+void MainWindow::closeEvent( QCloseEvent * ev )
+{
+  if ( cfg.preferences.enableTrayIcon && cfg.preferences.closeToTray )
+  {
+    ev->ignore();
+    hide();
+  }
+  else
+    ev->accept();
 }
 
 void MainWindow::makeDictionaries()
@@ -255,7 +311,7 @@ void MainWindow::makeScanPopup()
 {
   scanPopup.reset();
 
-  scanPopup = new ScanPopup( 0, articleNetMgr, dictionaries, groupInstances );
+  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -377,6 +433,20 @@ void MainWindow::editGroups()
 
   updateGroupList();
   makeScanPopup();
+}
+
+void MainWindow::editPreferences()
+{
+  Preferences preferences( this, cfg.preferences );
+
+  preferences.show();
+
+  if ( preferences.exec() == QDialog::Accepted )
+  {
+    cfg.preferences = preferences.getPreferences();
+    updateTrayIcon();
+    Config::save( cfg );
+  }
 }
 
 void MainWindow::translateInputChanged( QString const & newValue )
@@ -539,3 +609,12 @@ void MainWindow::showTranslationFor( QString const & inWord )
 
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
+
+void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason )
+{
+  if ( !isVisible() )
+    show();
+  else
+    hide();
+}
+

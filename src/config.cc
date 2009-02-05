@@ -36,6 +36,16 @@ namespace
   }
 }
 
+Preferences::Preferences():
+  enableTrayIcon( false ),
+  startToTray( false ),
+  enableScanPopup( false ),
+  enableScanPopupModifiers( false ),
+  scanPopupModifiers( 0 )
+{
+}
+
+
 Class load() throw( exError )
 {
   QString configName  = getConfigFileName();
@@ -113,6 +123,18 @@ Class load() throw( exError )
     }
   }
 
+  QDomNode preferences = root.namedItem( "preferences" );
+
+  if ( !preferences.isNull() )
+  {
+    c.preferences.enableTrayIcon = ( preferences.namedItem( "enableTrayIcon" ).toElement().text() == "1" );
+    c.preferences.startToTray = ( preferences.namedItem( "startToTray" ).toElement().text() == "1" );
+    c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
+    c.preferences.enableScanPopup = ( preferences.namedItem( "enableScanPopup" ).toElement().text() == "1" );
+    c.preferences.enableScanPopupModifiers = ( preferences.namedItem( "enableScanPopupModifiers" ).toElement().text() == "1" );
+    c.preferences.scanPopupModifiers = ( preferences.namedItem( "scanPopupModifiers" ).toElement().text().toULong() );    
+  }
+
   return c;
 }
 
@@ -178,6 +200,35 @@ void save( Class const & c ) throw( exError )
         dictionary.appendChild( value );
       }
     }
+  }
+
+  {
+    QDomElement preferences = dd.createElement( "preferences" );
+    root.appendChild( preferences );
+
+    QDomElement opt = dd.createElement( "enableTrayIcon" );
+    opt.appendChild( dd.createTextNode( c.preferences.enableTrayIcon ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "startToTray" );
+    opt.appendChild( dd.createTextNode( c.preferences.startToTray ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "closeToTray" );
+    opt.appendChild( dd.createTextNode( c.preferences.closeToTray ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "enableScanPopup" );
+    opt.appendChild( dd.createTextNode( c.preferences.enableScanPopup ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "enableScanPopupModifiers" );
+    opt.appendChild( dd.createTextNode( c.preferences.enableScanPopupModifiers ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanPopupModifiers" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupModifiers ) ) );
+    preferences.appendChild( opt );
   }
 
   configFile.write( dd.toByteArray() );

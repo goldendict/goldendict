@@ -8,6 +8,7 @@
 #include "articleview.hh"
 #include "wordfinder.hh"
 #include "keyboardstate.hh"
+#include "config.hh"
 #include "ui_scanpopup.h"
 #include <QDialog>
 #include <QClipboard>
@@ -21,12 +22,14 @@ class ScanPopup: public QDialog, KeyboardState
 public:
 
   ScanPopup( QWidget * parent,
+             Config::Class const & cfg,
              ArticleNetworkAccessManager &,
              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
              Instances::Groups const & );
 
 private:
 
+  Config::Class const & cfg;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
   Instances::Groups const & groups;
   Ui::ScanPopup ui;
@@ -44,6 +47,9 @@ private:
   virtual void leaveEvent( QEvent * event );
 
   void popupWordlist( vector< QString > const &, QToolButton * button );
+
+  /// Returns inputWord, chopped with appended ... if it's too long/
+  QString elideInputWord();
 
 private slots:
 
