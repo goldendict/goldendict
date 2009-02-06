@@ -132,13 +132,46 @@ void ArticleView::linkClicked( QUrl const & url )
   else
   if ( url.scheme() == "bres" || url.scheme() == "gdau" )
   {
-    vector< char > data;
-
     // Download it
+
+    vector< char > data;
+    bool found = false;
+
+
+    if ( url.scheme() == "gdau" && url.host() == "search" && groups.size() )
+    {
+      // Since searches should be limited to current group, we just do them
+      // here ourselves since otherwise we'd need to pass group id to netmgr
+      // and it should've been having knowledge of the current groups, too.
+
+      QString currentGroup = getGroup( ui.definition->url() );
+
+      for( unsigned x = 0; x < groups.size(); ++x )
+        if ( groups[ x ].name == currentGroup )
+        {
+          for( unsigned y = 0; y < groups[ x ].dictionaries.size(); ++y )
+          {
+            try
+            {
+              groups[ x ].dictionaries[ y ]->getResource(
+                url.path().mid( 1 ).toUtf8().data(), data );
+
+              found = true;
+              break;
+            }
+            catch( Dictionary::exNoSuchResource & )
+            {
+              continue;
+            }
+          }
+          break;
+        }
+    }
+
 
     QString contentType;
 
-    if ( !articleNetMgr.getResource( url, data, contentType ) )
+    if ( !found && !articleNetMgr.getResource( url, data, contentType ) )
     {
       QMessageBox::critical( this, tr( "GoldenDict" ), tr( "The referenced resource doesn't exist." ) );
       return;
