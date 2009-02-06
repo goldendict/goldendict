@@ -44,6 +44,9 @@ struct Class
   Paths paths;
   Groups groups;
   Preferences preferences;
+
+  QString lastMainGroup; // Last used group in main window
+  QString lastPopupGroup; // Last used group in popup window
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )

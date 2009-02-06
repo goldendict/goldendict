@@ -22,14 +22,14 @@ class ScanPopup: public QDialog, KeyboardState
 public:
 
   ScanPopup( QWidget * parent,
-             Config::Class const & cfg,
+             Config::Class & cfg,
              ArticleNetworkAccessManager &,
              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
              Instances::Groups const & );
 
 private:
 
-  Config::Class const & cfg;
+  Config::Class & cfg;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
   Instances::Groups const & groups;
   Ui::ScanPopup ui;

@@ -56,6 +56,7 @@ class MainWindow: public QMainWindow
 public:
 
   MainWindow();
+  ~MainWindow();
 
 private:
 
@@ -113,6 +114,7 @@ private slots:
   void editPreferences();
   void indexingDictionary( QString dictionaryName );
 
+  void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );
   void prefixMatchComplete( WordFinderResults );
   void wordListItemActivated( QListWidgetItem * );

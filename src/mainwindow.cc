@@ -81,6 +81,9 @@ MainWindow::MainWindow():
   connect( ui.preferences, SIGNAL( activated() ),
            this, SLOT( editPreferences() ) );
 
+  connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+           this, SLOT( currentGroupChanged( QString const & ) ) );
+
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
 
@@ -101,6 +104,12 @@ MainWindow::MainWindow():
   // Only show window initially if it wasn't configured differently
   if ( !cfg.preferences.enableTrayIcon || !cfg.preferences.startToTray )
     show();
+}
+
+MainWindow::~MainWindow()
+{
+  // Save any changes in last chosen groups etc
+  Config::save( cfg );
 }
 
 LoadDictionaries::LoadDictionaries( vector< string > const & allFiles_ ):
@@ -295,6 +304,11 @@ void MainWindow::updateGroupList()
 
   ui.groupLabel->setText( haveGroups ? tr( "Look up in:" ) : tr( "Look up:" ) );
 
+  // currentIndexChanged() signal is very trigger-happy. To avoid triggering
+  // it, we disconnect it while we're clearing and filling back groups.
+  disconnect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+              this, SLOT( currentGroupChanged( QString const & ) ) );
+
   {
     DictLock _;
   
@@ -305,6 +319,10 @@ void MainWindow::updateGroupList()
   }
 
   ui.groupList->fill( groupInstances );
+  ui.groupList->setCurrentGroup( cfg.lastMainGroup );
+
+  connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+           this, SLOT( currentGroupChanged( QString const & ) ) );
 }
 
 void MainWindow::makeScanPopup()
@@ -449,6 +467,15 @@ void MainWindow::editPreferences()
   }
 }
 
+void MainWindow::currentGroupChanged( QString const & gr )
+{
+  cfg.lastMainGroup = gr;
+
+  // Update word search results
+
+  translateInputChanged( ui.translateLine->text() );
+}
+
 void MainWindow::translateInputChanged( QString const & newValue )
 {
   QString req = newValue.trimmed();
@@ -500,7 +527,10 @@ void MainWindow::prefixMatchComplete( WordFinderResults r )
   }
 
   if ( ui.wordList->count() )
+  {
     ui.wordList->scrollToItem( ui.wordList->item( 0 ), QAbstractItemView::PositionAtTop );
+    ui.wordList->setCurrentItem( 0, QItemSelectionModel::Clear );
+  }
 
   ui.wordList->setUpdatesEnabled( true );
   ui.wordList->unsetCursor();
@@ -614,6 +644,12 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason )
 {
   if ( !isVisible() )
     show();
+  else
+  if ( isMinimized() )
+  {
+    showNormal();
+    activateWindow();
+  }
   else
     hide();
 }

@@ -14,7 +14,7 @@
 using std::wstring;
 
 ScanPopup::ScanPopup( QWidget * parent,
-                      Config::Class const & cfg_,
+                      Config::Class & cfg_,
                       ArticleNetworkAccessManager & articleNetMgr,                      
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                       Instances::Groups const & groups_ ):
@@ -33,6 +33,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.prefixButton->hide();
 
   ui.groupList->fill( groups );
+  ui.groupList->setCurrentGroup( cfg.lastPopupGroup );
+
   setWindowFlags( Qt::Popup );
 
   #ifdef Q_OS_WIN32
@@ -131,10 +133,12 @@ QString ScanPopup::elideInputWord()
 }
 
 
-void ScanPopup::currentGroupChanged( QString const & )
+void ScanPopup::currentGroupChanged( QString const & gr )
 {
   if ( isVisible() )
     initiateTranslation();
+
+  cfg.lastPopupGroup = gr;
 }
 
 void ScanPopup::initiateTranslation()

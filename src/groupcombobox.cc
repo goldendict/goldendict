@@ -26,3 +26,15 @@ void GroupComboBox::fill( Instances::Groups const & groups )
   }
 }
 
+void GroupComboBox::setCurrentGroup( QString const & gr )
+{
+  for( int x  = 0; x < count(); ++x )
+  {
+    if ( itemText( x ) == gr )
+    {
+      setCurrentIndex( x );
+      break;
+    }
+  }
+}
+

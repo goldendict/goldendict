@@ -135,6 +135,9 @@ Class load() throw( exError )
     c.preferences.scanPopupModifiers = ( preferences.namedItem( "scanPopupModifiers" ).toElement().text().toULong() );    
   }
 
+  c.lastMainGroup = root.namedItem( "lastMainGroup" ).toElement().text();
+  c.lastPopupGroup = root.namedItem( "lastPopupGroup" ).toElement().text();
+
   return c;
 }
 
@@ -229,6 +232,16 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "scanPopupModifiers" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupModifiers ) ) );
     preferences.appendChild( opt );
+  }
+
+  {
+    QDomElement opt = dd.createElement( "lastMainGroup" );
+    opt.appendChild( dd.createTextNode( c.lastMainGroup ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "lastPopupGroup" );
+    opt.appendChild( dd.createTextNode( c.lastPopupGroup ) );
+    root.appendChild( opt );
   }
 
   configFile.write( dd.toByteArray() );
