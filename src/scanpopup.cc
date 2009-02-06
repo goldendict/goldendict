@@ -37,6 +37,9 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   setWindowFlags( Qt::Popup );
 
+  if ( cfg.lastPopupSize.isValid() )
+    resize( cfg.lastPopupSize );
+
   #ifdef Q_OS_WIN32
   // On Windows, leaveEvent() doesn't seem to work with popups and we're trying
   // to emulate it.
@@ -193,6 +196,13 @@ void ScanPopup::leaveEvent( QEvent * event )
   // If the dialog is pinned, we don't hide the popup
   if ( !ui.pinButton->isChecked() && !geometry().contains( QCursor::pos() ) )
     hide();
+}
+
+void ScanPopup::resizeEvent( QResizeEvent * event )
+{
+  cfg.lastPopupSize = event->size();
+
+  QDialog::resizeEvent( event );
 }
 
 void ScanPopup::prefixMatchComplete( WordFinderResults r )

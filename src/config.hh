@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <QString>
+#include <QSize>
 #include "ex.hh"
 
 /// GoldenDict's configuration
@@ -47,6 +48,7 @@ struct Class
 
   QString lastMainGroup; // Last used group in main window
   QString lastPopupGroup; // Last used group in popup window
+  QSize lastPopupSize;
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )

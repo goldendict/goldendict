@@ -138,6 +138,15 @@ Class load() throw( exError )
   c.lastMainGroup = root.namedItem( "lastMainGroup" ).toElement().text();
   c.lastPopupGroup = root.namedItem( "lastPopupGroup" ).toElement().text();
 
+  QDomNode lastPopupWidth = root.namedItem( "lastPopupWidth" );
+  QDomNode lastPopupHeight = root.namedItem( "lastPopupHeight" );
+
+  if ( !lastPopupWidth.isNull() && !lastPopupHeight.isNull() )
+  {
+    c.lastPopupSize = QSize( lastPopupWidth.toElement().text().toULong(),
+                             lastPopupHeight.toElement().text().toULong() );
+  }
+
   return c;
 }
 
@@ -242,6 +251,17 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "lastPopupGroup" );
     opt.appendChild( dd.createTextNode( c.lastPopupGroup ) );
     root.appendChild( opt );
+
+    if ( c.lastPopupSize.isValid() )
+    {
+      opt = dd.createElement( "lastPopupWidth" );
+      opt.appendChild( dd.createTextNode( QString::number( c.lastPopupSize.width() ) ) );
+      root.appendChild( opt );
+
+      opt = dd.createElement( "lastPopupHeight" );
+      opt.appendChild( dd.createTextNode( QString::number( c.lastPopupSize.height() ) ) );
+      root.appendChild( opt );
+    }
   }
 
   configFile.write( dd.toByteArray() );
