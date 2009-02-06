@@ -22,6 +22,7 @@ LIBS += -lvorbisfile -lvorbis -logg -lz
 
 win32 {
   LIBS += -liconv -lwsock32
+  RC_FILE = goldendict.rc
 }
 
 # Input
