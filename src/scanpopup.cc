@@ -9,6 +9,7 @@
 #include <QPixmap>
 #include <QBitmap>
 #include <QMenu>
+#include <QMouseEvent>
 
 using std::wstring;
 
@@ -21,7 +22,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   cfg( cfg_ ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
-  wordFinder( this )
+  wordFinder( this ),
+  mouseEnteredOnce( false )
 {
   ui.setupUi( this );
   definition = new ArticleView( ui.outerFrame, articleNetMgr, groups, true ),
@@ -32,6 +34,12 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.groupList->fill( groups );
   setWindowFlags( Qt::Popup );
+
+  #ifdef Q_OS_WIN32
+  // On Windows, leaveEvent() doesn't seem to work with popups and we're trying
+  // to emulate it.
+  setMouseTracking( true );
+  #endif
 
   #if 0 // Experimental code to give window a non-rectangular shape (i.e.
         // balloon) using a colorkey mask.
@@ -109,6 +117,8 @@ void ScanPopup::handleInputWord( QString const & str )
 
     show();
 
+    mouseEnteredOnce = false; // Windows-only
+
     QApplication::processEvents(); // Make window appear immediately no matter what
   }
 
@@ -139,6 +149,32 @@ vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
   return
     currentGroup < 0 || currentGroup >= (int)groups.size() ? allDictionaries : 
     groups[ currentGroup ].dictionaries;
+}
+
+void ScanPopup::mouseMoveEvent( QMouseEvent * event )
+{
+  #ifdef Q_OS_WIN32
+  if ( !ui.pinButton->isChecked() )
+  {
+    if ( !mouseEnteredOnce )
+    {
+      // We're waiting for mouse to enter window
+      if ( geometry().contains( event->globalPos() ) )
+        mouseEnteredOnce = true;
+    }
+    else
+    {
+      // We're waiting for mouse to leave window
+      if ( !geometry().contains( event->globalPos() ) )
+      {
+        mouseEnteredOnce = false;
+        hide();
+      }
+    }
+  }
+  #endif
+
+  QDialog::mouseMoveEvent( event );
 }
 
 void ScanPopup::leaveEvent( QEvent * event )

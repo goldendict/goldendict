@@ -39,11 +39,14 @@ private:
 
   vector< QString > diacriticMatches, prefixMatches;
 
+  bool mouseEnteredOnce;
+
   void handleInputWord( QString const & );
   void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
 
+  virtual void mouseMoveEvent( QMouseEvent * event );
   virtual void leaveEvent( QEvent * event );
 
   void popupWordlist( vector< QString > const &, QToolButton * button );
