@@ -95,9 +95,9 @@ public:
 
   /// Loads contents of a resource named 'name' into the 'data' vector. This is
   /// usually a picture file referenced in the article or something like that.
-  virtual void getResource( string const & name,
-                            vector< char > & data ) throw( exNoSuchResource,
-                                                           std::exception )
+  virtual void getResource( string const & /*name*/,
+                            vector< char > & /*data*/ ) throw( exNoSuchResource,
+                                                               std::exception )
   { throw exNoSuchResource(); }
 
   virtual ~Class()
