@@ -158,9 +158,30 @@ vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
     groups[ currentGroup ].dictionaries;
 }
 
+void ScanPopup::mousePressEvent( QMouseEvent * ev )
+{
+  startPos = ev->globalPos();
+  setCursor( Qt::ClosedHandCursor );
+
+  QDialog::mousePressEvent( ev );
+}
+
 void ScanPopup::mouseMoveEvent( QMouseEvent * event )
 {
+  if ( event->buttons() )
+  {
+    QPoint newPos = event->globalPos();
+
+    QPoint delta = newPos - startPos;
+
+    startPos = newPos;
+
+    // Find a top-level window
+
+    move( pos() + delta );
+  }
   #ifdef Q_OS_WIN32
+  else
   if ( !ui.pinButton->isChecked() )
   {
     if ( !mouseEnteredOnce )
@@ -184,6 +205,12 @@ void ScanPopup::mouseMoveEvent( QMouseEvent * event )
   QDialog::mouseMoveEvent( event );
 }
 
+void ScanPopup::mouseReleaseEvent( QMouseEvent * ev )
+{
+  unsetCursor();
+  QDialog::mouseReleaseEvent( ev );
+}
+
 void ScanPopup::leaveEvent( QEvent * event )
 {
   QDialog::leaveEvent( event );
@@ -193,9 +220,15 @@ void ScanPopup::leaveEvent( QEvent * event )
   
   // Combo-boxes seem to generate leave events for their parents when
   // unfolded, so we check coordinates as well.
-  // If the dialog is pinned, we don't hide the popup
-  if ( !ui.pinButton->isChecked() && !geometry().contains( QCursor::pos() ) )
+  // If the dialog is pinned, we don't hide the popup.
+  // If some mouse buttons are pressed, we don't hide the popup either,
+  // since it indicates the move operation is underway.
+  if ( !ui.pinButton->isChecked() && !geometry().contains( QCursor::pos() ) &&
+       QApplication::mouseButtons() == Qt::NoButton )
+  {
+    unsetCursor(); // Just in case
     hide();
+  }
 }
 
 void ScanPopup::resizeEvent( QResizeEvent * event )

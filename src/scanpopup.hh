@@ -41,12 +41,16 @@ private:
 
   bool mouseEnteredOnce;
 
+  QPoint startPos; // For window moving
+
   void handleInputWord( QString const & );
   void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
 
-  virtual void mouseMoveEvent( QMouseEvent * event );
+  virtual void mousePressEvent( QMouseEvent * );
+  virtual void mouseMoveEvent( QMouseEvent * );
+  virtual void mouseReleaseEvent( QMouseEvent * );
   virtual void leaveEvent( QEvent * event );
   virtual void resizeEvent( QResizeEvent * event );
 
