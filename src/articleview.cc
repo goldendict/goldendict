@@ -8,6 +8,10 @@
 #include <QMenu>
 #include <QDesktopServices>
 
+#ifdef Q_OS_WIN32
+#include <windows.h>
+#include <mmsystem.h> // For PlaySound
+#endif
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           Instances::Groups const & groups_, bool popupView_ ):
@@ -35,6 +39,18 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
            this, SLOT( linkClicked( QUrl const & ) ) );
+}
+
+ArticleView::~ArticleView()
+{
+  #ifdef Q_OS_WIN32
+  if ( winWavData.size() )
+  {
+    // If we were playing some sound some time ago, make sure it stopped
+    // playing before freeing the waveform memory.
+    PlaySoundA( 0, 0, 0 );
+  }
+  #endif
 }
 
 void ArticleView::showDefinition( QString const & word, QString const & group )
@@ -129,6 +145,21 @@ void ArticleView::linkClicked( QUrl const & url )
     }
 
     // Decide the viewer
+
+    #ifdef Q_OS_WIN32
+    // Windows-only: use system PlaySound function
+
+    if ( winWavData.size() )
+      PlaySoundA( 0, 0, 0 ); // Stop any currently playing sound to make sure
+                             // previous data isn't used anymore
+                             // 
+    winWavData = data;
+
+    PlaySoundA( &winWavData.front(), 0,
+                SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+
+    return;
+    #endif
 
     QString program, extension;
 

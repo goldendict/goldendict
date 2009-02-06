@@ -22,6 +22,11 @@ class ArticleView: public QFrame
 
   Ui::ArticleView ui;
 
+#ifdef Q_OS_WIN32
+  // Used in Windows only
+  vector< char > winWavData;
+#endif
+
 public:
   /// The popupView flag influences contents of the context menus to be
   /// appropriate to the context of the view.
@@ -30,6 +35,8 @@ public:
                ArticleNetworkAccessManager &,
                Instances::Groups const &,
                bool popupView );
+
+  ~ArticleView();
 
   /// Shows the definition of the given word with the given group
   void showDefinition( QString const & word, QString const & group );

@@ -21,7 +21,7 @@ RCC_DIR = build
 LIBS += -lvorbisfile -lvorbis -logg -lz
 
 win32 {
-  LIBS += -liconv -lwsock32
+  LIBS += -liconv -lwsock32 -lwinmm
   RC_FILE = goldendict.rc
 }
 
