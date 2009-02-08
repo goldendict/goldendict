@@ -179,25 +179,25 @@ void ArticleView::linkClicked( QUrl const & url )
 
     // Decide the viewer
 
-    #ifdef Q_OS_WIN32
-    // Windows-only: use system PlaySound function
-
-    if ( winWavData.size() )
-      PlaySoundA( 0, 0, 0 ); // Stop any currently playing sound to make sure
-                             // previous data isn't used anymore
-                             // 
-    winWavData = data;
-
-    PlaySoundA( &winWavData.front(), 0,
-                SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
-
-    return;
-    #endif
-
     QString program, extension;
 
     if ( url.scheme() == "gdau" )
     {
+      #ifdef Q_OS_WIN32
+      // Windows-only: use system PlaySound function
+  
+      if ( winWavData.size() )
+        PlaySoundA( 0, 0, 0 ); // Stop any currently playing sound to make sure
+                               // previous data isn't used anymore
+                               // 
+      winWavData = data;
+  
+      PlaySoundA( &winWavData.front(), 0,
+                  SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+  
+      return;
+      #endif
+      
       program = "mplayer";
       extension = "wav";
     }
