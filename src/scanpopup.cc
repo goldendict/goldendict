@@ -298,6 +298,14 @@ void ScanPopup::resizeEvent( QResizeEvent * event )
   QDialog::resizeEvent( event );
 }
 
+void ScanPopup::showEvent( QShowEvent * ev )
+{
+  QDialog::showEvent( ev );
+  
+  if ( groups.empty() )
+    ui.groupList->hide();
+}
+
 void ScanPopup::prefixMatchComplete( WordFinderResults r )
 {
   // Check that the request wasn't already overridden by another one and
@@ -393,9 +401,6 @@ void ScanPopup::pinButtonClicked( bool checked )
   }
   else
     setWindowFlags( Qt::Popup );
-
-  // Should we disable grip? I like it with the grip better.
-  //ui.gripArea->setDisabled( checked );
 
   show();
 }

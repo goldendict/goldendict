@@ -62,6 +62,7 @@ private:
   virtual void mouseReleaseEvent( QMouseEvent * );
   virtual void leaveEvent( QEvent * event );
   virtual void resizeEvent( QResizeEvent * event );
+  virtual void showEvent( QShowEvent * );
 
   void popupWordlist( vector< QString > const &, QToolButton * button );
 
