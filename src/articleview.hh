@@ -47,6 +47,11 @@ public:
   /// Shows the page stating that the given word could not be found.
   void showNotFound( QString const & word, QString const & group );
 
+  /// Opens the given link. Supposed to be used in response to
+  /// openLinkInNewTab() signal. The link scheme is therefore supposed to be
+  /// one of the internal ones.
+  void openLink( QUrl const & url, QUrl const & referrer );
+  
   /// Goes back in history
   void back()
   { ui.definition->back(); }
@@ -60,6 +65,11 @@ signals:
   void iconChanged( ArticleView *, QIcon const & icon );
 
   void titleChanged( ArticleView *, QString const & title );
+
+  /// Singals that the following link was requested to be opened in new tab
+  void openLinkInNewTab( QUrl const &, QUrl const & referrer );  
+  /// Singals that the following definition was requested to be showed in new tab
+  void showDefinitionInNewTab( QString const & word, QString const & group );
 
 private slots:
 

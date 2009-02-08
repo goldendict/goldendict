@@ -380,6 +380,12 @@ void MainWindow::addNewTab()
   connect( view, SIGNAL( iconChanged( ArticleView *, QIcon const & ) ),
            this, SLOT( iconChanged( ArticleView *, QIcon const & ) ) );
 
+  connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const & ) ),
+           this, SLOT( openLinkInNewTab( QUrl const &, QUrl const & ) ) );
+  
+  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, QString const & ) ),
+           this, SLOT( showDefinitionInNewTab( QString const &, QString const & ) ) );
+  
   ui.tabWidget->addTab( view, tr( "(untitled)" ) );
 
   ui.tabWidget->setCurrentIndex( ui.tabWidget->count() - 1 );
@@ -568,6 +574,28 @@ void MainWindow::wordListSelectionChanged()
 
   if ( selected.size() )
     wordListItemActivated( selected.front() );
+}
+
+void MainWindow::openLinkInNewTab( QUrl const & url,
+                                   QUrl const & referrer )
+{
+  addNewTab();
+
+  ArticleView & view =
+    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+  view.openLink( url, referrer );
+}
+
+void MainWindow::showDefinitionInNewTab( QString const & word,
+                                         QString const & group )
+{
+  addNewTab();
+
+  ArticleView & view =
+    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+  view.showDefinition( word, group );
 }
 
 void MainWindow::showTranslationFor( QString const & inWord )

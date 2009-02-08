@@ -118,17 +118,22 @@ QString ArticleView::getGroup( QUrl const & url )
 
 void ArticleView::linkClicked( QUrl const & url )
 {
+  openLink( url, ui.definition->url() );
+}
+
+void ArticleView::openLink( QUrl const & url, QUrl const & ref )
+{
   printf( "clicked %s\n", url.toString().toLocal8Bit().data() );
 
   if ( url.scheme() == "bword" )
     showDefinition( url.host().startsWith( "xn--" ) ?
                       QUrl::fromPunycode( url.host().toLatin1() ) :
                       url.host(),
-                    getGroup( ui.definition->url() ) );
+                    getGroup( ref ) );
   else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
     showDefinition( url.path().mid( 1 ),
-                    getGroup( ui.definition->url() ) );
+                    getGroup( ref ) );
   else
   if ( url.scheme() == "bres" || url.scheme() == "gdau" )
   {
@@ -144,7 +149,7 @@ void ArticleView::linkClicked( QUrl const & url )
       // here ourselves since otherwise we'd need to pass group id to netmgr
       // and it should've been having knowledge of the current groups, too.
 
-      QString currentGroup = getGroup( ui.definition->url() );
+      QString currentGroup = getGroup( ref );
 
       for( unsigned x = 0; x < groups.size(); ++x )
         if ( groups[ x ].name == currentGroup )
@@ -258,19 +263,34 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
 
   QAction * followLink = 0;
+  QAction * followLinkNewTab = 0;
   QAction * lookupSelection = 0;
+  QAction * lookupSelectionNewTab = 0;
 
   if ( !r.linkUrl().isEmpty() )
   {
-    followLink = new QAction( tr( "Open the link" ), &menu );
+    followLink = new QAction( tr( "&Open Link" ), &menu );
     menu.addAction( followLink );
+    
+    if ( !popupView )
+    {
+      followLinkNewTab = new QAction( tr( "Open Link in New &Tab" ), &menu );
+      menu.addAction( followLinkNewTab );
+    }
   }
 
   QString selectedText = ui.definition->selectedText();
+  
   if ( selectedText.size() )
   {
-    lookupSelection = new QAction( tr( "Look up \"%1\"" ).arg( ui.definition->selectedText() ), &menu );
+    lookupSelection = new QAction( tr( "&Look up \"%1\"" ).arg( ui.definition->selectedText() ), &menu );
     menu.addAction( lookupSelection );
+    
+    if ( !popupView )
+    {
+      lookupSelectionNewTab = new QAction( tr( "Look up \"%1\" in &New Tab" ).arg( ui.definition->selectedText() ), &menu );
+      menu.addAction( lookupSelectionNewTab );
+    }
   }
 
   if ( !menu.isEmpty() )
@@ -282,6 +302,15 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ) );
+    else
+    if ( !popupView )
+    {
+      if (result == followLinkNewTab )
+        emit openLinkInNewTab( r.linkUrl(), ui.definition->url() );
+      else
+      if ( result == lookupSelectionNewTab )
+        emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ) );
+    }
   }
 #if 0
   printf( "%s\n", r.linkUrl().isEmpty() ? "null" : "not null" );

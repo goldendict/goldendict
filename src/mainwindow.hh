@@ -121,6 +121,9 @@ private slots:
   void wordListItemActivated( QListWidgetItem * );
   void wordListSelectionChanged();
 
+  void openLinkInNewTab( QUrl const &, QUrl const & );
+  void showDefinitionInNewTab( QString const & word, QString const & group );
+  
   void showTranslationFor( QString const & );
 
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
