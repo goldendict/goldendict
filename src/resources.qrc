@@ -9,5 +9,7 @@
     <file>icons/next.png</file>
     <file>icons/previous.png</file>
     <file>icons/programicon.png</file>
+    <file>article-style.css</file>
+    <file>qt-style.css</file>
   </qresource>
 </RCC>

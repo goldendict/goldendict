@@ -29,14 +29,20 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     "<html><head>"
     "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 
+  // Add a css stylesheet
+  
+  QFile builtInCssFile( ":/article-style.css" );
+  builtInCssFile.open( QFile::ReadOnly );
+  QByteArray css = builtInCssFile.readAll();
+  
   QFile cssFile( Config::getUserCssFileName() );
 
   if ( cssFile.open( QFile::ReadOnly ) )
-  {
-    result += "<style type=\"text/css\">\n";
-    result += cssFile.readAll().data();
-    result += "</style>\n";
-  }
+    css += cssFile.readAll();
+  
+  result += "<style type=\"text/css\">\n";
+  result += css.data();
+  result += "</style>\n";
 
   result += "<title>" + Html::escape( Utf8::encode( word.toStdWString() ) ) + "</title>";
 

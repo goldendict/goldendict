@@ -1,0 +1,11 @@
+MainWindow #centralWidget #translateLine, MainWindow #centralWidget #wordList
+{
+  background: #fefdeb;
+}
+
+.ScanPopup #outerFrame
+{
+  border: 1px solid grey;
+}
+
+

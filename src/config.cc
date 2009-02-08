@@ -281,7 +281,7 @@ QString getIndexDir() throw( exError )
 
 QString getUserCssFileName() throw( exError )
 {
-  return getHomeDir().filePath( "style.css" );
+  return getHomeDir().filePath( "article-style.css" );
 }
 
 QString getUserQtCssFileName() throw( exError )
