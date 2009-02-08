@@ -260,7 +260,8 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="openWebsite"/>
+    <addaction name="visitHomepage"/>
+    <addaction name="visitForum"/>
     <addaction name="separator"/>
     <addaction name="about"/>
    </widget>
@@ -289,9 +290,9 @@
     <string>&amp;Preferences...</string>
    </property>
   </action>
-  <action name="openWebsite">
+  <action name="visitHomepage">
    <property name="text">
-    <string>Program's &amp;website</string>
+    <string>&amp;Homepage</string>
    </property>
   </action>
   <action name="about">
@@ -302,6 +303,11 @@
   <action name="quit">
    <property name="text">
     <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="visitForum">
+   <property name="text">
+    <string>&amp;Forum</string>
    </property>
   </action>
  </widget>

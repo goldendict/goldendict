@@ -10,11 +10,13 @@
 #include "lsa.hh"
 #include "dsl.hh"
 #include "dictlock.hh"
+#include "ui_about.h"
 #include <QDir>
 #include <QMessageBox>
 #include <QIcon>
 #include <QToolBar>
 #include <QCloseEvent>
+#include <QDesktopServices>
 #include <set>
 #include <map>
 
@@ -80,16 +82,29 @@ MainWindow::MainWindow():
 
   connect( ui.preferences, SIGNAL( activated() ),
            this, SLOT( editPreferences() ) );
+  
+  connect( ui.visitHomepage, SIGNAL( activated() ),
+           this, SLOT( visitHomepage() ) );
+  connect( ui.visitForum, SIGNAL( activated() ),
+           this, SLOT( visitForum() ) );
+  connect( ui.about, SIGNAL( activated() ),
+           this, SLOT( showAbout() ) );
 
   connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
 
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
+  
+  connect( ui.translateLine, SIGNAL( returnPressed() ),
+           this, SLOT( translateInputFinished() ) );
 
   connect( ui.wordList, SIGNAL( itemActivated( QListWidgetItem * ) ),
            this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
-
+  
+  connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
+           this, SLOT( wordListSelectionChanged() ) );
+  
   connect( wordFinder.qobject(), SIGNAL( prefixMatchComplete( WordFinderResults ) ),
            this, SLOT( prefixMatchComplete( WordFinderResults ) ) );
 
@@ -493,6 +508,12 @@ void MainWindow::translateInputChanged( QString const & newValue )
   wordFinder.prefixMatch( req, &getActiveDicts() );
 }
 
+void MainWindow::translateInputFinished()
+{
+  if ( ui.wordList->count() )
+    wordListItemActivated( ui.wordList->item( 0 ) );
+}
+
 void MainWindow::prefixMatchComplete( WordFinderResults r )
 {
   if ( r.requestStr != ui.translateLine->text().trimmed() ||
@@ -538,9 +559,15 @@ void MainWindow::prefixMatchComplete( WordFinderResults r )
 
 void MainWindow::wordListItemActivated( QListWidgetItem * item )
 {
-  printf( "act: %s\n", item->text().toLocal8Bit().data() );
-
   showTranslationFor( item->text() );
+}
+
+void MainWindow::wordListSelectionChanged()
+{
+  QList< QListWidgetItem * > selected = ui.wordList->selectedItems();
+
+  if ( selected.size() )
+    wordListItemActivated( selected.front() );
 }
 
 void MainWindow::showTranslationFor( QString const & inWord )
@@ -652,5 +679,27 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason )
   }
   else
     hide();
+}
+
+void MainWindow::visitHomepage()
+{
+  QDesktopServices::openUrl( QUrl( "http://goldendict.berlios.de/" ) );
+}
+
+void MainWindow::visitForum()
+{
+  QDesktopServices::openUrl( QUrl( "http://goldendict.berlios.de/forum/" ) );
+}
+
+void MainWindow::showAbout()
+{
+  QDialog about( this );
+
+  Ui::About ui;
+
+  ui.setupUi( &about );
+
+  about.show();
+  about.exec();
 }
 

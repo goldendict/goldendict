@@ -70,7 +70,8 @@ HEADERS += folding.hh \
 	  
 
 FORMS += groups.ui dictgroupwidget.ui mainwindow.ui sources.ui initializing.ui\
-         groupselectorwidget.ui scanpopup.ui articleview.ui preferences.ui
+         groupselectorwidget.ui scanpopup.ui articleview.ui preferences.ui\
+	 about.ui
 
 SOURCES += folding.cc main.cc dictionary.cc md5.c config.cc sources.cc \
            mainwindow.cc utf8.cc file.cc bgl_babylon.cc bgl.cc initializing.cc \

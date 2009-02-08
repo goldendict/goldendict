@@ -116,12 +116,18 @@ private slots:
 
   void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );
+  void translateInputFinished();
   void prefixMatchComplete( WordFinderResults );
   void wordListItemActivated( QListWidgetItem * );
+  void wordListSelectionChanged();
 
   void showTranslationFor( QString const & );
 
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
+
+  void visitHomepage();
+  void visitForum();
+  void showAbout();
 };
 
 #endif
