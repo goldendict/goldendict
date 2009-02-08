@@ -19,6 +19,9 @@ public:
 
 private:
 
+  virtual void closeEvent( QCloseEvent * );
+  virtual void reject();
+  
   Ui::Initializing ui;
 };
 
