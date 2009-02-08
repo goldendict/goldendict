@@ -34,6 +34,7 @@ struct Preferences
   bool startToTray;
   bool closeToTray;
   bool enableScanPopup;
+  bool startWithScanPopupOn;
   bool enableScanPopupModifiers;
   unsigned long scanPopupModifiers; // Combination of KeyboardState::Modifier
 

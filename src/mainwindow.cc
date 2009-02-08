@@ -27,6 +27,7 @@ using std::pair;
 
 MainWindow::MainWindow(): 
   trayIcon( 0 ),
+  trayIconMenu( this ),
   addTab( this ),
   cfg( Config::load() ),
   articleMaker( dictionaries, groupInstances ),
@@ -34,19 +35,35 @@ MainWindow::MainWindow():
   wordFinder( this ),
   initializing( 0 )
 {
-  // Show tray icon as early as possible so the user would be happy
-  updateTrayIcon();
-
-  if ( trayIcon )
-    trayIcon->setToolTip( tr( "Loading..." ) );
-
   ui.setupUi( this );
 
   // Make the toolbar
   navToolbar = addToolBar( tr( "Navigation" ) );
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
+  
+  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
+  enableScanPopup->setCheckable( true );
+  enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
+  if ( cfg.preferences.enableScanPopup && cfg.preferences.startWithScanPopupOn )
+    enableScanPopup->setChecked( true );
 
+  connect( enableScanPopup, SIGNAL( toggled( bool ) ),
+           this, SLOT( scanEnableToggled( bool ) ) );
+
+  connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( activated() ),
+           this, SLOT( showMainWindow() ) );
+  trayIconMenu.addAction( enableScanPopup );
+  trayIconMenu.addSeparator();
+  connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( activated() ),
+           qApp, SLOT( quit() ) );
+  
+  // Show tray icon early so the user would be happy
+  updateTrayIcon();
+
+  if ( trayIcon )
+    trayIcon->setToolTip( tr( "Loading..." ) );
+  
   connect( navBack, SIGNAL( activated() ),
            this, SLOT( backClicked() ) );
   connect( navForward, SIGNAL( activated() ),
@@ -191,6 +208,7 @@ void MainWindow::updateTrayIcon()
   {
     // Need to show it
     trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon.png" ), this );
+    trayIcon->setContextMenu( &trayIconMenu );
     trayIcon->show();
 
     connect( trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ),
@@ -204,9 +222,16 @@ void MainWindow::updateTrayIcon()
 
     trayIcon = 0;
   }
-
   if ( trayIcon )
+  {
+    // Update the icon to reflect the scanning mode
+    trayIcon->setIcon( QIcon(
+      enableScanPopup->isChecked() ?
+        ":/icons/programicon_scan.png" :
+        ":/icons/programicon.png" ) );
+    
     trayIcon->setToolTip( "GoldenDict" );
+  }
 }
 
 void MainWindow::closeEvent( QCloseEvent * ev )
@@ -353,7 +378,13 @@ void MainWindow::makeScanPopup()
 {
   scanPopup.reset();
 
+  if ( !cfg.preferences.enableScanPopup )
+    return;
+  
   scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances );
+  
+  if ( enableScanPopup->isChecked() )
+    scanPopup->enableScanning();
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -492,7 +523,14 @@ void MainWindow::editPreferences()
   if ( preferences.exec() == QDialog::Accepted )
   {
     cfg.preferences = preferences.getPreferences();
+    
+    enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
+
+    if ( !cfg.preferences.enableScanPopup )
+      enableScanPopup->setChecked( false );
+    
     updateTrayIcon();
+    makeScanPopup();
     Config::save( cfg );
   }
 }
@@ -704,7 +742,38 @@ void MainWindow::showTranslationFor( QString const & inWord )
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
 
-void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason )
+void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
+{
+  if ( r == QSystemTrayIcon::DoubleClick )
+  {
+    // Double-click toggles the visibility of main window
+    if ( !isVisible() )
+      show();
+    else
+    if ( isMinimized() )
+    {
+      showNormal();
+      activateWindow();
+    }
+    else
+      hide();
+  }
+}
+
+void MainWindow::scanEnableToggled( bool on )
+{
+  if ( scanPopup )
+  {
+    if ( on )
+      scanPopup->enableScanning();
+    else
+      scanPopup->disableScanning();
+  }
+  
+  updateTrayIcon();
+}
+
+void MainWindow::showMainWindow()
 {
   if ( !isVisible() )
     show();
@@ -714,8 +783,6 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason )
     showNormal();
     activateWindow();
   }
-  else
-    hide();
 }
 
 void MainWindow::visitHomepage()

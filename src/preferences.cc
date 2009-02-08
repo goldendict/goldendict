@@ -38,6 +38,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.startToTray->setChecked( p.startToTray );
   ui.closeToTray->setChecked( p.closeToTray );
   ui.enableScanPopup->setChecked( p.enableScanPopup );
+  ui.startWithScanPopupOn->setChecked( p.startWithScanPopupOn );
   ui.enableScanPopupModifiers->setChecked( p.enableScanPopupModifiers );
 
   ui.altKey->setChecked( p.scanPopupModifiers & KeyboardState::Alt );
@@ -69,11 +70,12 @@ Config::Preferences Preferences::getPreferences()
 {
   Config::Preferences p;
 
-  p.enableTrayIcon = ui.enableTrayIcon->isChecked(  );
-  p.startToTray = ui.startToTray->isChecked(  );
-  p.closeToTray = ui.closeToTray->isChecked(  );
-  p.enableScanPopup = ui.enableScanPopup->isChecked(  );
-  p.enableScanPopupModifiers = ui.enableScanPopupModifiers->isChecked(  );
+  p.enableTrayIcon = ui.enableTrayIcon->isChecked();
+  p.startToTray = ui.startToTray->isChecked();
+  p.closeToTray = ui.closeToTray->isChecked();
+  p.enableScanPopup = ui.enableScanPopup->isChecked();
+  p.startWithScanPopupOn = ui.startWithScanPopupOn->isChecked();
+  p.enableScanPopupModifiers = ui.enableScanPopupModifiers->isChecked();
 
   p.scanPopupModifiers += ui.altKey->isChecked() ? KeyboardState::Alt : 0;
   p.scanPopupModifiers += ui.ctrlKey->isChecked() ? KeyboardState::Ctrl: 0;

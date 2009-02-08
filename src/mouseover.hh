@@ -24,6 +24,11 @@ public:
   /// The class is a singleton.
   static MouseOver & instance();
 
+  /// Enables mouseover. The mouseover is initially disabled.
+  void enableMouseOver();
+  /// Disables mouseover.
+  void disableMouseOver();
+  
 signals:
 
   /// Emitted when there was some text under cursor which was hovered over.
@@ -41,6 +46,7 @@ private:
   typedef void ( *ActivateSpyFn )( bool );
   ActivateSpyFn activateSpyFn;
   HINSTANCE spyDll;
+  bool mouseOverEnabled;
 
 #endif
 

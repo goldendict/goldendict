@@ -21,6 +21,7 @@ ScanPopup::ScanPopup( QWidget * parent,
                       Instances::Groups const & groups_ ):
   QDialog( parent ),
   cfg( cfg_ ),
+  isScanningEnabled( false ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   wordFinder( this ),
@@ -81,8 +82,34 @@ ScanPopup::ScanPopup( QWidget * parent,
            this, SLOT( mouseHovered( QString const & ) ) );
 }
 
+ScanPopup::~ScanPopup()
+{
+  disableScanning();
+}
+
+void ScanPopup::enableScanning()
+{
+  if ( !isScanningEnabled )
+  {
+    isScanningEnabled = true;
+    MouseOver::instance().enableMouseOver();
+  }
+}
+
+void ScanPopup::disableScanning()
+{
+  if ( isScanningEnabled )
+  {
+    MouseOver::instance().disableMouseOver();
+    isScanningEnabled = false;
+  }
+}
+
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
+  if ( !isScanningEnabled )
+    return;
+  
   printf( "clipboard changed\n" );
 
   QString subtype = "plain";

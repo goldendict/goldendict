@@ -40,6 +40,7 @@ Preferences::Preferences():
   enableTrayIcon( false ),
   startToTray( false ),
   enableScanPopup( false ),
+  startWithScanPopupOn( false ),
   enableScanPopupModifiers( false ),
   scanPopupModifiers( 0 )
 {
@@ -131,6 +132,7 @@ Class load() throw( exError )
     c.preferences.startToTray = ( preferences.namedItem( "startToTray" ).toElement().text() == "1" );
     c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
     c.preferences.enableScanPopup = ( preferences.namedItem( "enableScanPopup" ).toElement().text() == "1" );
+    c.preferences.startWithScanPopupOn = ( preferences.namedItem( "startWithScanPopupOn" ).toElement().text() == "1" );
     c.preferences.enableScanPopupModifiers = ( preferences.namedItem( "enableScanPopupModifiers" ).toElement().text() == "1" );
     c.preferences.scanPopupModifiers = ( preferences.namedItem( "scanPopupModifiers" ).toElement().text().toULong() );    
   }
@@ -232,6 +234,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "enableScanPopup" );
     opt.appendChild( dd.createTextNode( c.preferences.enableScanPopup ? "1":"0" ) );
+    preferences.appendChild( opt );
+    
+    opt = dd.createElement( "startWithScanPopupOn" );
+    opt.appendChild( dd.createTextNode( c.preferences.startWithScanPopupOn ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "enableScanPopupModifiers" );

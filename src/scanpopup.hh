@@ -27,9 +27,18 @@ public:
              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
              Instances::Groups const & );
 
+  ~ScanPopup();
+  
+  /// Enables scanning. When the object is created, the scanning is disabled
+  /// initially.
+  void enableScanning();
+  /// Disables scanning.
+  void disableScanning();
+  
 private:
 
   Config::Class & cfg;
+  bool isScanningEnabled;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
   Instances::Groups const & groups;
   Ui::ScanPopup ui;

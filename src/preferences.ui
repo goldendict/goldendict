@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>395</height>
+    <height>331</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -82,6 +82,17 @@ off from main window or tray icon.</string>
       <bool>false</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QCheckBox" name="startWithScanPopupOn">
+        <property name="toolTip">
+         <string>Chooses whether the scan popup mode is on by default nor not. If checked,
+the program would always start with the scan popup active.</string>
+        </property>
+        <property name="text">
+         <string>Start with scan popup turned on</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QCheckBox" name="enableScanPopupModifiers">
         <property name="toolTip">

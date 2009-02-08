@@ -23,6 +23,8 @@ MouseOver::MouseOver()
 {
 #ifdef Q_OS_WIN32
 
+  mouseOverEnabled = false;
+  
   ThTypes_Init();
   memset( GlobalData, 0, sizeof( TGlobalDLLData ) );
   strcpy( GlobalData->LibName,
@@ -53,13 +55,30 @@ MouseOver::MouseOver()
   spyDll = LoadLibrary( QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutSpy.dll" ) ).toStdWString().c_str() );
 
   if ( spyDll )
-  {
     activateSpyFn = ( ActivateSpyFn ) GetProcAddress( spyDll, "ActivateTextOutSpying" );
 
-    if ( activateSpyFn )
-      activateSpyFn( true );
-  }
+#endif
+}
 
+void MouseOver::enableMouseOver()
+{
+#ifdef Q_OS_WIN32
+  if ( !mouseOverEnabled && activateSpyFn )
+  {
+    activateSpyFn( true );
+    mouseOverEnabled = true;
+  }
+#endif
+}
+
+void MouseOver::disableMouseOver()
+{
+#ifdef Q_OS_WIN32
+  if ( mouseOverEnabled && activateSpyFn )
+  {
+    activateSpyFn( false );
+    mouseOverEnabled = false;
+  }
 #endif
 }
 
@@ -174,8 +193,7 @@ MouseOver::~MouseOver()
 {
 #ifdef Q_OS_WIN32
 
-  if ( activateSpyFn )
-    activateSpyFn( false );
+  disableMouseOver();
 
   FreeLibrary( spyDll );
 

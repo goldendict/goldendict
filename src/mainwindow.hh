@@ -64,7 +64,8 @@ private:
 
   Ui::MainWindow ui;
   QToolBar * navToolbar;
-  QAction * navBack, * navForward;
+  QAction * navBack, * navForward, * enableScanPopup;
+  QMenu trayIconMenu;
   QToolButton addTab;
   Config::Class cfg;
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -128,6 +129,10 @@ private slots:
 
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
 
+  void scanEnableToggled( bool );
+
+  void showMainWindow();
+  
   void visitHomepage();
   void visitForum();
   void showAbout();
