@@ -112,6 +112,15 @@ MainWindow::MainWindow():
 
   addNewTab();
 
+  // Show the initial welcome text
+
+  {
+    ArticleView & view =
+      dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+    view.showDefinition( "Welcome!", "internal:about" );
+  }
+  
   ui.translateLine->setFocus();
 
   updateTrayIcon();
