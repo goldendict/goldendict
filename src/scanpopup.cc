@@ -10,6 +10,7 @@
 #include <QBitmap>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QDesktopWidget>
 
 using std::wstring;
 
@@ -116,15 +117,46 @@ void ScanPopup::handleInputWord( QString const & str )
 
   if ( !isVisible() )
   {
+    // Decide where should the window land
+    
     QPoint currentPos = QCursor::pos();
 
-    move( currentPos.x() + 4, currentPos.y() + 10 );
+    QRect desktop = QApplication::desktop()->screenGeometry();
+
+    QSize windowSize = geometry().size();
+
+    int x, y;
+
+    /// Try the to-the-right placement
+    if ( currentPos.x() + 4 + windowSize.width() <= desktop.topRight().x() )
+      x = currentPos.x() + 4;
+    else
+    /// Try the to-the-left placement
+    if ( currentPos.x() - 4 - windowSize.width() >= desktop.x() )
+      x = currentPos.x() - 4 - windowSize.width();
+    else
+    // Center it
+      x = desktop.x() + ( desktop.width() - windowSize.width() ) / 2;
+    
+    /// Try the to-the-buttom placement
+    if ( currentPos.y() + 15 + windowSize.height() <= desktop.bottomLeft().y() )
+      y = currentPos.y() + 15;
+    else
+    /// Try the to-the-top placement
+    if ( currentPos.y() - 15 - windowSize.height() >= desktop.y() )
+      y = currentPos.y() - 15 - windowSize.height();
+    else
+    // Center it
+      y = desktop.y() + ( desktop.height() - windowSize.height() ) / 2;
+      
+    move( x, y );
 
     show();
 
     mouseEnteredOnce = false; // Windows-only
 
-    QApplication::processEvents(); // Make window appear immediately no matter what
+    // This produced some funky mouse grip-related bugs so we commented it out
+    //QApplication::processEvents(); // Make window appear immediately no matter what
   }
 
   initiateTranslation();
