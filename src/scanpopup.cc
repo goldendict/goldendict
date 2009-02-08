@@ -178,6 +178,7 @@ void ScanPopup::currentGroupChanged( QString const & gr )
 
 void ScanPopup::initiateTranslation()
 {
+  definition->showAnticipation();
   wordFinder.prefixMatch( inputWord, &getActiveDicts() );
 }
 

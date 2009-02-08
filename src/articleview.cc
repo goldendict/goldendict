@@ -28,6 +28,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->page()->setNetworkAccessManager( &articleNetMgr );
 
+  connect( ui.definition, SIGNAL( loadFinished( bool ) ),
+           this, SLOT( loadFinished( bool ) ) );
+  
   connect( ui.definition, SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
 
@@ -76,6 +79,19 @@ void ArticleView::showNotFound( QString const & word, QString const & group )
   req.addQueryItem( "notfound", "1" );
 
   ui.definition->load( req );
+}
+
+void ArticleView::showAnticipation()
+{
+  ui.definition->setHtml( "" );
+  //ui.definition->setCursor( Qt::WaitCursor );
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+}
+
+void ArticleView::loadFinished( bool )
+{
+  //ui.definition->unsetCursor();
+  QApplication::restoreOverrideCursor();
 }
 
 void ArticleView::handleTitleChanged( QString const & title )

@@ -47,6 +47,10 @@ public:
   /// Shows the page stating that the given word could not be found.
   void showNotFound( QString const & word, QString const & group );
 
+  /// Clears the view and sets the application-global waiting cursor,
+  /// which will be restored when some article loads eventually.
+  void showAnticipation();
+  
   /// Opens the given link. Supposed to be used in response to
   /// openLinkInNewTab() signal. The link scheme is therefore supposed to be
   /// one of the internal ones.
@@ -73,6 +77,7 @@ signals:
 
 private slots:
 
+  void loadFinished( bool ok );
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
   void linkClicked( QUrl const & );
