@@ -78,7 +78,7 @@ string ArticleMaker::makeDefinitionFor( QString const & inWord,
 "in <b>Edit|Groups</b>."
 "<p>You can also check out the available program preferences at <b>Edit|Preferences</b>. "
 "All settings there have tooltips, be sure to read them if you are in doubt about anything."
-"<p>And then you're reading to look up your words! You can do that in this window "
+"<p>And then you're ready to look up your words! You can do that in this window "
 "by using a pane to the left, or you can <a href=\"Working with popup\">look up words from other active applications</a>. "
 "<p>Should you need further help, have any questions, "
 "suggestions or just wonder what the others think, you are welcome at the program's <a href=\"http://goldendict.berlios.de/forum/\">forum</a>."
