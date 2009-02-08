@@ -27,6 +27,9 @@ class ArticleView: public QFrame
   vector< char > winWavData;
 #endif
 
+  // For resources opened via desktop services
+  sptr< QTemporaryFile > desktopOpenedTempFile;
+
 public:
   /// The popupView flag influences contents of the context menus to be
   /// appropriate to the context of the view.

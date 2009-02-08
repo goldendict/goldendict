@@ -168,7 +168,6 @@ void ArticleView::linkClicked( QUrl const & url )
         }
     }
 
-
     QString contentType;
 
     if ( !found && !articleNetMgr.getResource( url, data, contentType ) )
@@ -177,68 +176,67 @@ void ArticleView::linkClicked( QUrl const & url )
       return;
     }
 
-    // Decide the viewer
-
-    QString program, extension;
-
     if ( url.scheme() == "gdau" )
     {
-      #ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
       // Windows-only: use system PlaySound function
-  
+
       if ( winWavData.size() )
         PlaySoundA( 0, 0, 0 ); // Stop any currently playing sound to make sure
                                // previous data isn't used anymore
                                // 
       winWavData = data;
-  
+
       PlaySoundA( &winWavData.front(), 0,
                   SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
-  
-      return;
-      #endif
-      
-      program = "mplayer";
-      extension = "wav";
-    }
-    else
-    if ( url.path().endsWith( ".pdf", Qt::CaseInsensitive ) )
-    {
-      program = "evince";
-      extension = "pdf";
-    }
-    else
-    if ( url.path().endsWith( ".rtf", Qt::CaseInsensitive ) )
-    {
-      program = "oowriter";
-      extension = "rtf";
-    }
-    else
-    {
-      QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Don't know how to handle the specified resource." ) );
-      return;
-    }
+#else
 
-    try
-    {
-      ExternalViewer * viewer = new ExternalViewer( this, data, extension, program );
-
+      // Use external viewer to play the file
       try
       {
-        viewer->start();
+        ExternalViewer * viewer = new ExternalViewer( this, data, ".wav", "play" );
 
-        // Once started, it will erase itself
+        try
+        {
+          viewer->start();
+
+          // Once started, it will erase itself
+        }
+        catch( ... )
+        {
+          delete viewer;
+          throw;
+        }
       }
-      catch( ... )
+      catch( ExternalViewer::Ex & e )
       {
-        delete viewer;
-        throw;
+        QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
       }
+      
+#endif
+
+      return;
     }
-    catch( ExternalViewer::Ex & e )
+    
+    // Create a temporary file
+    
+    desktopOpenedTempFile.reset();
+
+    desktopOpenedTempFile = new QTemporaryFile( QDir::temp().filePath( "XXXXXX-" + url.path().section( '/', -1 ) ), this );
+
+    if ( !desktopOpenedTempFile->open() || desktopOpenedTempFile->write( &data.front(), data.size() ) != data.size() )
     {
-      printf( "%s\n", e.what() );
+      QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to create temporary file." ) );
+      return;
     }
+
+    // For some reason it loses it after it was closed()
+    QString tempFileName = desktopOpenedTempFile->fileName();
+
+    desktopOpenedTempFile->close();
+
+    if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( tempFileName ) ) )
+      QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( tempFileName ) );
   }
   else
   if ( url.scheme() == "http" || url.scheme() == "https" ||
