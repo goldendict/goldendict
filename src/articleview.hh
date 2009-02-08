@@ -28,7 +28,7 @@ class ArticleView: public QFrame
 #endif
 
   // For resources opened via desktop services
-  sptr< QTemporaryFile > desktopOpenedTempFile;
+  QString desktopOpenedTempFile;
 
 public:
   /// The popupView flag influences contents of the context menus to be
@@ -89,6 +89,9 @@ private:
   /// returns empty string.
   QString getGroup( QUrl const & );
 
+  /// Attempts removing last temporary file created.
+  void cleanupTemp();
+  
 protected:
 
   // We need this to hide the search bar when we're showed

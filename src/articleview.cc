@@ -46,6 +46,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
 ArticleView::~ArticleView()
 {
+  cleanupTemp();
+  
   #ifdef Q_OS_WIN32
   if ( winWavData.size() )
   {
@@ -129,6 +131,15 @@ QString ArticleView::getGroup( QUrl const & url )
     return url.queryItemValue( "group" );
 
   return QString();
+}
+
+void ArticleView::cleanupTemp()
+{
+  if ( desktopOpenedTempFile.size() )
+  {
+    QFile( desktopOpenedTempFile ).remove();
+    desktopOpenedTempFile.clear();
+  }  
 }
 
 
@@ -240,24 +251,27 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
     }
     
     // Create a temporary file
+
     
-    desktopOpenedTempFile.reset();
+    // Remove the one previously used, if any
+    cleanupTemp();
 
-    desktopOpenedTempFile = new QTemporaryFile( QDir::temp().filePath( "XXXXXX-" + url.path().section( '/', -1 ) ), this );
-
-    if ( !desktopOpenedTempFile->open() || desktopOpenedTempFile->write( &data.front(), data.size() ) != data.size() )
     {
-      QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to create temporary file." ) );
-      return;
+      QTemporaryFile tmp( QDir::temp().filePath( "XXXXXX-" + url.path().section( '/', -1 ) ), this );
+  
+      if ( !tmp.open() || tmp.write( &data.front(), data.size() ) != data.size() )
+      {
+        QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to create temporary file." ) );
+        return;
+      }
+
+      tmp.setAutoRemove( false );
+  
+      desktopOpenedTempFile = tmp.fileName();
     }
 
-    // For some reason it loses it after it was closed()
-    QString tempFileName = desktopOpenedTempFile->fileName();
-
-    desktopOpenedTempFile->close();
-
-    if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( tempFileName ) ) )
-      QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( tempFileName ) );
+    if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( desktopOpenedTempFile ) ) )
+      QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
   }
   else
   if ( url.scheme() == "http" || url.scheme() == "https" ||
