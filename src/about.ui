@@ -60,7 +60,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Licensed under GPLv3 or later</string>
+          <string>Licensed under GNU GPLv3 or later</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
