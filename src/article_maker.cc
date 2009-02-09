@@ -73,7 +73,7 @@ string ArticleMaker::makeDefinitionFor( QString const & inWord,
       result += tr(
 "<h3 align=\"center\">Welcome to <b>GoldenDict</b>!</h3>"
 "<p>To start working with the program, first add some directory paths where to search "
-"for the dictionary files at <b>Edit|Sources</b>. Note that the each subdirectory is to be added separately. "
+"for the dictionary files at <b>Edit|Sources</b>. Note that each subdirectory is to be added separately. "
 "After that, you can organize all the dictionaries found into groups "
 "in <b>Edit|Groups</b>."
 "<p>You can also check out the available program preferences at <b>Edit|Preferences</b>. "
