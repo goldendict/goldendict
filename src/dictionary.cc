@@ -55,7 +55,7 @@ bool Format::needToRebuildIndex( vector< string > const & dictionaryFiles,
   for( std::vector< string >::const_iterator i = dictionaryFiles.begin();
        i != dictionaryFiles.end(); ++i )
   {
-    QFileInfo fileInfo( QString::fromStdString( *i ) );
+    QFileInfo fileInfo( QString::fromLocal8Bit( i->c_str() ) );
 
     if ( !fileInfo.exists() )
       return true;
@@ -66,7 +66,7 @@ bool Format::needToRebuildIndex( vector< string > const & dictionaryFiles,
       lastModified = ts;
   }
 
-  QFileInfo fileInfo( QString::fromStdString( indexFile ) );
+  QFileInfo fileInfo( QString::fromLocal8Bit( indexFile.c_str() ) );
 
   if ( !fileInfo.exists() )
     return true;
