@@ -78,7 +78,9 @@ MainWindow::MainWindow():
   //ui.tabWidget->setCornerWidget( &closeTab, Qt::TopRightCorner );
 
   ui.tabWidget->setMovable( true );
+  #ifndef Q_OS_WIN32
   ui.tabWidget->setDocumentMode( true );
+  #endif
 
   connect( &addTab, SIGNAL( clicked() ),
            this, SLOT( addNewTab() ) );
