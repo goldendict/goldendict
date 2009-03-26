@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <cstdio>
 #include "dictionary.hh"
-#include "md5.h"
+
+#include <QCryptographicHash>
 
 // For needToRebuildIndex(), read below
 #include <QFileInfo>
@@ -120,23 +121,13 @@ string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
 
   std::sort( sortedList.begin(), sortedList.end() );
 
-  md5_state_t context;
+  QCryptographicHash hash( QCryptographicHash::Md5 );
 
-  md5_init( &context );
   for( std::vector< string >::const_iterator i = sortedList.begin();
        i != sortedList.end(); ++i )
-    md5_append( &context, (unsigned char const *)i->c_str(), i->size() + 1 );
+    hash.addData( i->c_str(), i->size() + 1 );
 
-  unsigned char digest[ 16 ];
-
-  md5_finish( &context, digest );
-
-  char result[ sizeof( digest ) * 2 + 1 ];
-
-  for( unsigned x = 0; x < sizeof( digest ); ++x )
-    sprintf( result + x * 2, "%02x", digest[ x ] );
-
-  return result;
+  return hash.result().toHex().data();
 }
 
 // While this file is not supposed to have any Qt stuff since it's used by

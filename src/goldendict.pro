@@ -32,7 +32,6 @@ HEADERS += folding.hh \
 	   mainwindow.hh \
 	   sptr.hh \
 	   dictionary.hh \
-	   md5.h \
 	   ex.hh \
 	   config.hh \
 	   sources.hh \
@@ -74,7 +73,7 @@ FORMS += groups.ui dictgroupwidget.ui mainwindow.ui sources.ui initializing.ui\
          groupselectorwidget.ui scanpopup.ui articleview.ui preferences.ui\
 	 about.ui
 
-SOURCES += folding.cc main.cc dictionary.cc md5.c config.cc sources.cc \
+SOURCES += folding.cc main.cc dictionary.cc config.cc sources.cc \
            mainwindow.cc utf8.cc file.cc bgl_babylon.cc bgl.cc initializing.cc \
 	   article_netmgr.cc dictzip.c btreeidx.cc stardict.cc \
 	   chunkedstorage.cc xdxf2html.cc iconv.cc lsa.cc htmlescape.cc \
