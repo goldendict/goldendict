@@ -22,6 +22,14 @@ pre
   /*background: #ffffdd;*/
 }
 
+/* Dictionary query error description string */
+.gderrordesc
+{
+  font-style: italic;
+  background: url("qrcx://localhost/icons/warning.png") center left no-repeat !important;
+  padding-left: 22px !important;
+  margin: 1em;
+}
 
 /********* Babylon dictionaries' classes *********/
 
@@ -230,4 +238,2194 @@ div.sdct_x
   margin: 0;
 }
 
+/************* MediaWiki articles *****************
+ The following consist of excerpts from different .css files edited
+ with a .mwiki prepended to each record.
+*/
+
+.mwiki
+{
+  /* Add some vertical space before the article */
+  margin-top: 1em;
+}
+
+.mwiki .topicon
+{
+  /* Those are padlocks on top and such -- we disable those for GoldenDict
+     since they look really ugly here */
+  display: none;
+}
+
+/************ common.css **************/
+
+/**
+ * CSS in this file is used by *all* skins (that have any CSS at all).  Be
+ * careful what you put in here, since what looks good in one skin may not in
+ * another, but don't ignore the poor non-Monobook users either.
+ */
+.mwiki .mw-plusminus-null { color: #aaa; }
+
+.mwiki .texvc { direction: ltr; unicode-bidi: embed; }
+.mwiki img.tex { vertical-align: middle; }
+.mwiki span.texhtml { font-family: serif; }
+
+/* add a bit of margin space between the preview and the toolbar */
+/* this replaces the ugly <p><br /></p> we used to insert into the page source */
+.mwiki #wikiPreview.ontop { margin-bottom: 1em; }
+
+/* Stop floats from intruding into edit area in previews */
+.mwiki #toolbar, .mwiki #wpTextbox1 { clear: both; }
+
+.mwiki div#mw-js-message {
+	margin: 1em 5%;
+	padding: 0.5em 2.5%;
+	border: solid 1px #ddd;
+	background-color: #fcfcfc;
+}
+
+/* Edit section links */
+.mwiki .editsection {
+	float: right;
+	margin-left: 5px;
+}
+
+/**
+ * File histories
+ */
+.mwiki table.filehistory {
+	border:1px solid #ccc;
+	border-collapse:collapse;
+}
+
+.mwiki table.filehistory th,
+.mwiki table.filehistory td {
+	padding: 0 0.2em 0 0.2em;
+	vertical-align:top;
+	border:1px solid #ccc;
+}
+.mwiki table.filehistory th {
+	text-align: left;
+}
+.mwiki table.filehistory td.mw-imagepage-filesize,
+.mwiki table.filehistory th.mw-imagepage-filesize {
+	white-space:nowrap;
+}
+
+.mwiki table.filehistory td.filehistory-selected {
+	font-weight: bold;
+}
+
+/*
+ * rev_deleted stuff
+ */
+.mwiki li span.deleted, .mwiki span.history-deleted {
+	text-decoration: line-through;
+	color: #888;
+	font-style: italic;
+}
+
+/**
+ * Forms
+ */
+.mwiki body.ltr td.mw-label { text-align: right; }
+.mwiki body.ltr td.mw-input { text-align: left; }
+.mwiki body.ltr td.mw-submit { text-align: left; }
+.mwiki body.rtl td.mw-label { text-align: left; }
+.mwiki body.rtl td.mw-input { text-align: right; }
+.mwiki body.rtl td.mw-submit { text-align: right; }
+
+.mwiki td.mw-label { vertical-align: top; }
+.mwiki td.mw-submit { white-space: nowrap; }
+
+/**
+ * Image captions
+ */
+.mwiki body.rtl .thumbcaption { text-align:right; }
+.mwiki body.rtl .magnify { float:left; }
+
+.mwiki body.ltr .thumbcaption { text-align:left; }
+.mwiki body.ltr .magnify { float:right; }
+
+/**
+ * Hidden categories
+ */
+.mwiki .mw-hidden-cats-hidden { display: none; }
+.mwiki .catlinks-allhidden { display: none; }
+
+/* Convenience links to edit block, delete and protect reasons */
+.mwiki p.mw-ipb-conveniencelinks, .mwiki p.mw-protect-editreasons,
+.mwiki p.mw-filedelete-editreasons, .mwiki p.mw-delete-editreasons {
+	font-size: 90%;
+	float: right;
+}
+
+/* Search results */
+.mwiki div.searchresult {
+	font-size: 95%;
+	width:38em;
+}
+.mwiki .mw-search-results li {
+	padding-bottom: 1em;
+	list-style:none;
+}
+.mwiki .mw-search-result-data {
+	color: green;
+	font-size: 97%;
+}
+
+.mwiki td#mw-search-menu {
+	padding-left:6em;
+	font-size:85%;
+}
+
+.mwiki div#mw-search-interwiki {
+	float: right;
+	width: 18em;
+	border-style: solid;
+	border-color: #AAAAAA;
+	border-width: 1px;
+	margin-top: 2ex;
+}
+
+.mwiki div#mw-search-interwiki li {
+	font-size: 95%;
+}
+
+.mwiki .mw-search-interwiki-more {
+	float: right;
+	font-size: 90%;
+}
+
+.mwiki span.searchalttitle {
+	font-size: 95%;
+}
+
+.mwiki div.searchdidyoumean {
+	font-size: 127%;
+	margin-bottom: 1ex;
+	margin-top: 1ex;
+	/* Note that this color won't affect the link, as desired. */
+	color: #c00;
+}
+
+.mwiki div.searchdidyoumean em {
+	font-weight: bold;
+}
+
+.mwiki .searchmatch {
+	font-weight: bold;
+}
+
+.mwiki div.searchresults {
+	border:1px solid darkblue;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+/*
+ * UserRights stuff
+ */
+.mwiki .mw-userrights-disabled {
+	color: #888;
+}
+
+.mwiki table.mw-userrights-groups * td,.mwiki table.mw-userrights-groups * th {
+	padding-right: 1.5em;
+}
+
+/* 
+ * OpenSearch ajax suggestions
+ */
+.mwiki .os-suggest {
+	overflow: auto; 
+	overflow-x: hidden; 
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 0px;
+	background-color: white; 
+	background-color: Window;
+	border-style: solid;
+	border-color: #AAAAAA;
+	border-width: 1px;
+	z-index:99; 
+	visibility:hidden; 
+	font-size:95%;	
+}
+
+.mwiki table.os-suggest-results {
+	font-size: 95%;
+	cursor: pointer; 
+	border: 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.mwiki td.os-suggest-result, .mwiki td.os-suggest-result-hl {
+	white-space: nowrap;
+	background-color: white; 
+	background-color: Window;
+	color: black;
+	color: WindowText;
+	padding: 2px;
+}
+.mwiki td.os-suggest-result-hl,
+.mwiki td.os-suggest-result-hl-webkit {
+	background-color: #4C59A6; 
+	color: white;
+}
+.mwiki td.os-suggest-result-hl {
+	/* System colors are misimplemented in Safari 3.0 and earlier,
+	   making highlighted text illegible... */
+	background-color: Highlight;
+	color: HighlightText;
+}
+
+.mwiki .os-suggest-toggle {
+	position: relative; 
+	left: 1ex;
+	font-size: 65%;
+}
+.mwiki .os-suggest-toggle-def {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 65%;
+	visibility: hidden;
+}
+
+/* Page history styling */
+/* the auto-generated edit comments */
+.mwiki .autocomment { color: gray; }
+.mwiki #pagehistory .history-user {
+    margin-left: 0.4em;
+    margin-right: 0.2em;
+}
+.mwiki #pagehistory span.minor { font-weight: bold; }
+.mwiki #pagehistory li { border: 1px solid white; }
+.mwiki #pagehistory li.selected {
+    background-color: #f9f9f9;
+    border: 1px dashed #aaa;
+}
+
+/*
+ * Special:ListGroupRights styling
+ * Special:Statistics styling 
+*/
+
+.mwiki table.mw-listgrouprights-table,
+.mwiki table.mw-statistics-table {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+
+.mwiki table.mw-listgrouprights-table tr  {
+	vertical-align: top;
+}
+
+.mwiki table.mw-listgrouprights-table td, .mwiki table.mw-listgrouprights-table th,
+.mwiki table.mw-statistics-table td, .mwiki table.mw-statistics-table th {
+	padding: 0.5em 0.2em 0.5em 0.2em;
+	border: 1px solid #ccc;
+}
+
+.mwiki td.mw-statistics-numbers {
+	text-align: right;
+}
+
+/* Special:SpecialPages styling */
+.mwiki h4.mw-specialpagesgroup {
+	background-color: #dcdcdc;
+	padding: 2px;
+	margin: .3em 0em 0em 0em;
+}
+.mwiki .mw-specialpagerestricted {
+	font-weight: bold;
+}
+
+.mwiki #shared-image-dup, .mwiki #shared-image-conflict {
+	font-style: italic;
+}
+
+/* Special:EmailUser styling */
+.mwiki table.mw-emailuser-table {
+	width: 98%;
+}
+.mwiki td#mw-emailuser-sender, .mwiki td#mw-emailuser-recipient {
+	font-weight: bold;
+}
+
+/* Special:Prefixindex styling */
+.mwiki table#mw-prefixindex-list-table,
+.mwiki table#mw-prefixindex-nav-table {
+	width: 98%;
+	background-color: transparent;
+}
+.mwiki td#mw-prefixindex-nav-form  {
+	font-size: smaller;
+	margin-bottom: 1em;
+	text-align: right;
+	vertical-align: top;
+}
+
+/*
+ * Recreating deleted page warning
+ * Reupload file warning
+ * Page protection warning
+ * incl. log entries for these warnings
+ */
+.mwiki div.mw-warning-with-logexcerpt {
+	padding: 3px;
+	margin-bottom: 3px;
+	border: 2px solid #2F6FAB;
+}
+.mwiki div.mw-warning-with-logexcerpt ul li {
+	font-size: 90%;
+}
+
+/* (show/hide) revision deletion links */
+.mwiki span.mw-revdelundel-link,
+.mwiki strong.mw-revdelundel-link {
+	font-family: monospace;
+	font-size: smaller
+}
+
+/* feed links */
+.mwiki a.feedlink {
+	background: url("images/feed-icon.png") center left no-repeat;
+	padding-left: 16px;
+}
+
+/************ monobook/main.css **************/
+
+/*
+** MediaWiki 'monobook' style sheet for CSS2-capable browsers.
+** Copyright Gabriel Wicke - http://wikidev.net/
+** License: GPL (http://www.gnu.org/copyleft/gpl.html)
+**
+** Loosely based on http://www.positioniseverything.net/ordered-floats.html by Big John
+** and the Plone 2.0 styles, see http://plone.org/ (Alexander Limi,Joe Geldart & Tom Croucher,
+** Michael Zeltner and Geir Bækholt)
+** All you guys rock :)
+*/
+
+.mwiki #column-content {
+	width: 100%;
+	float: right;
+	margin: 0 0 .6em -12.2em;
+	padding: 0;
+}
+.mwiki #content {
+	margin: 2.8em 0 0 12.2em;
+	padding: 0 1em 1em 1em;
+	position: relative;
+	z-index: 2;
+}
+.mwiki #column-one {
+	padding-top: 160px;
+}
+.mwiki #content {
+	background: white;
+	color: black;
+	border: 1px solid #aaa;
+	border-right: none;
+	line-height: 1.5em;
+}
+/* the left column width is specified in class .portlet */
+
+/* Font size:
+** We take advantage of keyword scaling- browsers won't go below 9px
+** More at http://www.w3.org/2003/07/30-font-size
+** http://style.cleverchimp.com/font_size_intervals/altintervals.html
+*/
+
+/*
+body {
+	font: x-small sans-serif;
+	background: #f9f9f9 url(headbg.jpg) 0 0 no-repeat;
+	color: black;
+	margin: 0;
+	padding: 0;
+}
+*/
+
+/* scale back up to a sane default */
+.mwiki #globalWrapper {
+	font-size: 127%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+.mwiki .visualClear {
+	clear: both;
+}
+
+/* general styles */
+
+.mwiki table {
+	font-size: 100%;
+	color: black;
+	/* we don't want the bottom borders of <h2>s to be visible through
+	   floated tables */
+	background-color: white;
+}
+.mwiki fieldset table {
+	/* but keep table layouts in forms clean... */
+	background: none;
+}
+.mwiki a {
+	text-decoration: none;
+	color: #002bb8;
+	background: none;
+}
+.mwiki a:visited {
+	color: #5a3696;
+}
+.mwiki a:active {
+	color: #faa700;
+}
+.mwiki a:hover {
+	text-decoration: underline;
+}
+.mwiki a.stub {
+	color: #772233;
+}
+.mwiki a.new, .mwiki #p-personal a.new {
+	color: #ba0000;
+}
+.mwiki a.new:visited, .mwiki #p-personal a.new:visited {
+	color: #a55858;
+}
+
+.mwiki img {
+	border: none;
+	vertical-align: middle;
+}
+.mwiki p {
+	margin: .4em 0 .5em 0;
+	line-height: 1.5em;
+}
+.mwiki p img {
+	margin: 0;
+}
+
+.mwiki hr {
+	height: 1px;
+	color: #aaa;
+	background-color: #aaa;
+	border: 0;
+	margin: .2em 0 .2em 0;
+}
+
+.mwiki h1, .mwiki h2, .mwiki h3, .mwiki h4, .mwiki h5, .mwiki h6 {
+	color: black;
+	background: none;
+	font-weight: normal;
+	margin: 0;
+	padding-top: .5em;
+	padding-bottom: .17em;
+	border-bottom: 1px solid #aaa;
+}
+.mwiki h1 { font-size: 188%; }
+.mwiki h1 .editsection { font-size: 53%; }
+.mwiki h2 { font-size: 150%; }
+.mwiki h2 .editsection { font-size: 67%; }
+.mwiki h3, .mwiki h4, .mwiki h5, .mwiki h6 {
+	border-bottom: none;
+	font-weight: bold;
+}
+.mwiki h3 { font-size: 132%; }
+.mwiki h3 .editsection { font-size: 76%; font-weight: normal; }
+.mwiki h4 { font-size: 116%; }
+.mwiki h4 .editsection { font-size: 86%; font-weight: normal; }
+.mwiki h5 { font-size: 100%; }
+.mwiki h5 .editsection { font-weight: normal; }
+.mwiki h6 { font-size: 80%;  }
+.mwiki h6 .editsection { font-size: 125%; font-weight: normal; }
+
+.mwiki ul {
+	line-height: 1.5em;
+	list-style-type: square;
+	margin: .3em 0 0 1.5em;
+	padding: 0;
+	list-style-image: url(bullet.gif);
+}
+.mwiki ol {
+	line-height: 1.5em;
+	margin: .3em 0 0 3.2em;
+	padding: 0;
+	list-style-image: none;
+}
+.mwiki li {
+	margin-bottom: .1em;
+}
+.mwiki dt {
+	font-weight: bold;
+	margin-bottom: .1em;
+}
+.mwiki dl {
+	margin-top: .2em;
+	margin-bottom: .5em;
+}
+.mwiki dd {
+	line-height: 1.5em;
+	margin-left: 2em;
+	margin-bottom: .1em;
+}
+
+.mwiki fieldset {
+	border: 1px solid #2f6fab;
+	margin: 1em 0 1em 0;
+	padding: 0 1em 1em;
+	line-height: 1.5em;
+}
+.mwiki fieldset.nested {
+	margin: 0 0 0.5em 0;
+	padding: 0 0.5em 0.5em;
+}
+.mwiki legend {
+	padding: .5em;
+	font-size: 95%;
+}
+.mwiki form {
+	border: none;
+	margin: 0;
+}
+
+.mwiki textarea {
+	width: 100%;
+	padding: .1em;
+}
+
+.mwiki input.historysubmit {
+	padding: 0 .3em .3em .3em !important;
+	font-size: 94%;
+	cursor: pointer;
+	height: 1.7em !important;
+	margin-left: 1.6em;
+}
+.mwiki select {
+	vertical-align: top;
+}
+.mwiki abbr, .mwiki acronym, .mwiki .explain {
+	border-bottom: 1px dotted black;
+	color: black;
+	background: none;
+	cursor: help;
+}
+.mwiki q {
+	font-family: Times, "Times New Roman", serif;
+	font-style: italic;
+}
+/* disabled for now
+.mwiki blockquote {
+	font-family: Times, "Times New Roman", serif;
+	font-style: italic;
+}*/
+.mwiki code {
+	background-color: #f9f9f9;
+}
+.mwiki pre {
+	padding: 1em;
+	border: 1px dashed #2f6fab;
+	color: black;
+	background-color: #f9f9f9;
+	line-height: 1.1em;
+}
+
+/*
+** the main content area
+*/
+
+.mwiki #siteSub {
+	display: none;
+}
+.mwiki #jump-to-nav {
+	display: none;
+}
+
+.mwiki #contentSub, .mwiki #contentSub2 {
+	font-size: 84%;
+	line-height: 1.2em;
+	margin: 0 0 1.4em 1em;
+	color: #7d7d7d;
+	width: auto;
+}
+.mwiki span.subpages {
+	display: block;
+}
+
+/* Some space under the headers in the content area */
+.mwiki #bodyContent h1, .mwiki #bodyContent h2 {
+	margin-bottom: .6em;
+}
+.mwiki #bodyContent h3, .mwiki #bodyContent h4, .mwiki #bodyContent h5 {
+	margin-bottom: .3em;
+}
+.mwiki #firstHeading {
+	margin-bottom: .1em;
+	/* These two rules hack around bug 2013 (fix for more limited bug 11325).
+	   When bug 2013 is fixed properly, they should be removed. */
+	line-height: 1.2em;
+	padding-bottom: 0;
+}
+
+/* user notification thing */
+.mwiki .usermessage {
+	background-color: #ffce7b;
+	border: 1px solid #ffa500;
+	color: black;
+	font-weight: bold;
+	margin: 2em 0 1em;
+	padding: .5em 1em;
+	vertical-align: middle;
+}
+.mwiki #siteNotice {
+	text-align: center;
+	font-size: 95%;
+	padding: 0 .9em;
+}
+.mwiki #siteNotice p {
+	margin: 0;
+	padding: 0;
+}
+.mwiki .success {
+	color: green;
+	font-size: larger;
+}
+.mwiki .error {
+	color: red;
+	font-size: larger;
+}
+.mwiki .errorbox, .mwiki .successbox {
+	font-size: larger;
+	border: 2px solid;
+	padding: .5em 1em;
+	float: left;
+	margin-bottom: 2em;
+	color: #000;
+}
+.mwiki .errorbox {
+	border-color: red;
+	background-color: #fff2f2;
+}
+.mwiki .successbox {
+	border-color: green;
+	background-color: #dfd;
+}
+.mwiki .errorbox h2, .mwiki .successbox h2 {
+	font-size: 1em;
+	font-weight: bold;
+	display: inline;
+	margin: 0 .5em 0 0;
+	border: none;
+}
+
+.mwiki .catlinks {
+	border: 1px solid #aaa;
+	background-color: #f9f9f9;
+	padding: 5px;
+	margin-top: 1em;
+	clear: both;
+}
+/* currently unused, intended to be used by a metadata box
+in the bottom-right corner of the content area */
+.mwiki .documentDescription {
+	/* The summary text describing the document */
+	font-weight: bold;
+	display: block;
+	margin: 1em 0;
+	line-height: 1.5em;
+}
+.mwiki .documentByLine {
+	text-align: right;
+	font-size: 90%;
+	clear: both;
+	font-weight: normal;
+	color: #76797c;
+}
+
+/* emulate center */
+.mwiki .center {
+	width: 100%;
+	text-align: center;
+}
+.mwiki *.center * {
+	margin-left: auto;
+	margin-right: auto;
+}
+/* small for tables and similar */
+.mwiki .small, .mwiki .small * {
+	font-size: 94%;
+}
+.mwiki table.small {
+	font-size: 100%;
+}
+
+/*
+** content styles
+*/
+
+.mwiki #toc,
+.mwiki .toc,
+.mwiki .mw-warning {
+	border: 1px solid #aaa;
+	background-color: #f9f9f9;
+	padding: 5px;
+	font-size: 95%;
+}
+.mwiki #toc h2,
+.mwiki .toc h2 {
+	display: inline;
+	border: none;
+	padding: 0;
+	font-size: 100%;
+	font-weight: bold;
+}
+.mwiki #toc #toctitle,
+.mwiki .toc #toctitle,
+.mwiki #toc .toctitle,
+.mwiki .toc .toctitle {
+	text-align: center;
+}
+.mwiki #toc ul,
+.mwiki .toc ul {
+	list-style-type: none;
+	list-style-image: none;
+	margin-left: 0;
+	padding-left: 0;
+	text-align: left;
+}
+.mwiki #toc ul ul,
+.mwiki .toc ul ul {
+	margin: 0 0 0 2em;
+}
+.mwiki #toc .toctoggle,
+.mwiki .toc .toctoggle {
+	font-size: 94%;
+}
+
+.mwiki .mw-warning {
+	margin-left: 50px;
+	margin-right: 50px;
+	text-align: center;
+}
+
+/* images */
+.mwiki div.floatright, .mwiki table.floatright {
+	clear: right;
+	float: right;
+	position: relative;
+	margin: 0 0 .5em .5em;
+	border: 0;
+/*
+	border: .5em solid white;
+	border-width: .5em 0 .8em 1.4em;
+*/
+}
+.mwiki div.floatright p { font-style: italic; }
+.mwiki div.floatleft, .mwiki table.floatleft {
+	float: left;
+	clear: left;
+	position: relative;
+	margin: 0 .5em .5em 0;
+	border: 0;
+/*
+	margin: .3em .5em .5em 0;
+	border: .5em solid white;
+	border-width: .5em 1.4em .8em 0;
+*/
+}
+.mwiki div.floatleft p { font-style: italic; }
+/* thumbnails */
+.mwiki div.thumb {
+	margin-bottom: .5em;
+	border-style: solid;
+	border-color: white;
+	width: auto;
+}
+.mwiki div.thumbinner {
+	border: 1px solid #ccc;
+	padding: 3px !important;
+	background-color: #f9f9f9;
+	font-size: 94%;
+	text-align: center;
+	overflow: hidden;
+}
+.mwiki html .thumbimage {
+	border: 1px solid #ccc;
+}
+.mwiki html .thumbcaption {
+	border: none;
+	text-align: left;
+	line-height: 1.4em;
+	padding: 3px !important;
+	font-size: 94%;
+}
+.mwiki div.magnify {
+	float: right;
+	border: none !important;
+	background: none !important;
+}
+.mwiki div.magnify a, .mwiki div.magnify img {
+	display: block;
+	border: none !important;
+	background: none !important;
+}
+.mwiki div.tright {
+	clear: right;
+	float: right;
+	border-width: .5em 0 .8em 1.4em;
+}
+.mwiki div.tleft {
+	float: left;
+	clear: left;
+	margin-right: .5em;
+	border-width: .5em 1.4em .8em 0;
+}
+.mwiki img.thumbborder {
+	border: 1px solid #dddddd;
+}
+.mwiki .hiddenStructure {
+	display: none;
+}
+
+/*
+** classes for special content elements like town boxes
+** intended to be referenced directly from the wiki src
+*/
+
+/*
+** User styles
+*/
+/* table standards */
+.mwiki table.rimage {
+	float: right;
+	position: relative;
+	margin-left: 1em;
+	margin-bottom: 1em;
+	text-align: center;
+}
+.mwiki .toccolours {
+	border: 1px solid #aaa;
+	background-color: #f9f9f9;
+	padding: 5px;
+	font-size: 95%;
+}
+
+/*
+** edit views etc
+*/
+.mwiki .special li {
+	line-height: 1.4em;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+** keep the whitespace in front of the ^=, hides rule from konqueror
+** this is css3, the validator doesn't like it when validating as css2
+*/
+.mwiki #bodyContent a.external,
+.mwiki #bodyContent a[href ^="gopher://"] {
+	background: url(external.png) center right no-repeat;
+	padding-right: 13px;
+}
+.mwiki #bodyContent a[href ^="https://"],
+.mwiki .link-https {
+	background: url(lock_icon.gif) center right no-repeat;
+	padding-right: 16px;
+}
+.mwiki #bodyContent a[href ^="mailto:"],
+.mwiki .link-mailto {
+	background: url(mail_icon.gif) center right no-repeat;
+	padding-right: 18px;
+}
+.mwiki #bodyContent a[href ^="news://"] {
+	background: url(news_icon.png) center right no-repeat;
+	padding-right: 18px;
+}
+.mwiki #bodyContent a[href ^="ftp://"],
+.mwiki .link-ftp {
+	background: url(file_icon.gif) center right no-repeat;
+	padding-right: 18px;
+}
+.mwiki #bodyContent a[href ^="irc://"],
+.mwiki #bodyContent a.extiw[href ^="irc://"],
+.mwiki .link-irc {
+	background: url(discussionitem_icon.gif) center right no-repeat;
+	padding-right: 18px;
+}
+.mwiki #bodyContent a.external[href $=".ogg"], .mwiki #bodyContent a.external[href $=".OGG"],
+.mwiki #bodyContent a.external[href $=".mid"], .mwiki #bodyContent a.external[href $=".MID"],
+.mwiki #bodyContent a.external[href $=".midi"], .mwiki #bodyContent a.external[href $=".MIDI"],
+.mwiki #bodyContent a.external[href $=".mp3"], .mwiki #bodyContent a.external[href $=".MP3"],
+.mwiki #bodyContent a.external[href $=".wav"], .mwiki #bodyContent a.external[href $=".WAV"],
+.mwiki #bodyContent a.external[href $=".wma"], .mwiki #bodyContent a.external[href $=".WMA"],
+.mwiki .link-audio {
+	background: url("audio.png") center right no-repeat;
+	padding-right: 13px;
+}
+.mwiki #bodyContent a.external[href $=".ogm"], .mwiki #bodyContent a.external[href $=".OGM"],
+.mwiki #bodyContent a.external[href $=".avi"], .mwiki #bodyContent a.external[href $=".AVI"],
+.mwiki #bodyContent a.external[href $=".mpeg"], .mwiki #bodyContent a.external[href $=".MPEG"],
+.mwiki #bodyContent a.external[href $=".mpg"], .mwiki #bodyContent a.external[href $=".MPG"],
+.mwiki .link-video {
+	background: url("video.png") center right no-repeat;
+	padding-right: 13px;
+}
+.mwiki #bodyContent a.external[href $=".pdf"], .mwiki #bodyContent a.external[href $=".PDF"],
+.mwiki #bodyContent a.external[href *=".pdf#"], .mwiki #bodyContent a.external[href *=".PDF#"],
+.mwiki #bodyContent a.external[href *=".pdf?"], .mwiki #bodyContent a.external[href *=".PDF?"],
+.mwiki .link-document {
+	background: url("document.png") center right no-repeat;
+	padding-right: 12px;
+}
+
+/* disable interwiki styling */
+.mwiki #bodyContent a.extiw,
+.mwiki #bodyContent a.extiw:active {
+	color: #36b;
+	background: none;
+	padding: 0;
+}
+.mwiki #bodyContent a.external {
+	color: #36b;
+}
+/* this can be used in the content area to switch off
+special external link styling */
+.mwiki #bodyContent .plainlinks a {
+	background: none !important;
+	padding: 0 !important;
+}
+/*
+** Structural Elements
+*/
+
+/*
+** general portlet styles (elements in the quickbar)
+*/
+.mwiki .portlet {
+	border: none;
+	margin: 0 0 .5em;
+	padding: 0;
+	float: none;
+	width: 11.6em;
+	overflow: hidden;
+}
+.mwiki .portlet h4 {
+	font-size: 95%;
+	font-weight: normal;
+	white-space: nowrap;
+}
+.mwiki .portlet h5 {
+	background: transparent;
+	padding: 0 1em 0 .5em;
+	display: inline;
+	height: 1em;
+	text-transform: lowercase;
+	font-size: 91%;
+	font-weight: normal;
+	white-space: nowrap;
+}
+.mwiki .portlet h6 {
+	background: #ffae2e;
+	border: 1px solid #2f6fab;
+	border-style: solid solid none solid;
+	padding: 0 1em 0 1em;
+	text-transform: lowercase;
+	display: block;
+	font-size: 1em;
+	height: 1.2em;
+	font-weight: normal;
+	white-space: nowrap;
+}
+.mwiki .pBody {
+	font-size: 95%;
+	background-color: white;
+	color: black;
+	border-collapse: collapse;
+	border: 1px solid #aaa;
+	padding: 0 .8em .3em .5em;
+}
+.mwiki .portlet h1,
+.mwiki .portlet h2,
+.mwiki .portlet h3,
+.mwiki .portlet h4 {
+	margin: 0;
+	padding: 0;
+}
+.mwiki .portlet ul {
+	line-height: 1.5em;
+	list-style-type: square;
+	list-style-image: url(bullet.gif);
+	font-size: 95%;
+}
+.mwiki .portlet li {
+	padding: 0;
+	margin: 0;
+}
+
+/*
+** Logo properties
+*/
+
+.mwiki #p-logo {
+	top: 0;
+	left: 0;
+	position: absolute; /*needed to use z-index */
+	z-index: 3;
+	height: 155px;
+	width: 12em;
+	overflow: visible;
+}
+.mwiki #p-logo h5 {
+	display: none;
+}
+.mwiki #p-logo a,
+.mwiki #p-logo a:hover {
+	display: block;
+	height: 155px;
+	width: 12.2em;
+	background-repeat: no-repeat;
+	background-position: 35% 50% !important;
+	text-decoration: none;
+}
+
+/*
+** Search portlet
+*/
+.mwiki #p-search {
+	position: relative;
+	z-index: 3;
+}
+.mwiki input.searchButton {
+	margin-top: 1px;
+	font-size: 95%;
+}
+.mwiki #searchGoButton {
+	padding-left: .5em;
+	padding-right: .5em;
+	font-weight: bold;
+}
+.mwiki #searchInput {
+	width: 10.9em;
+	margin: 0;
+	font-size: 95%;
+}
+.mwiki #p-search .pBody {
+	padding: .5em .4em .4em .4em;
+	text-align: center;
+}
+.mwiki #p-search #searchform div div {
+	margin-top: .4em;
+	font-size: 95%;
+}
+/*
+** the personal toolbar
+*/
+.mwiki #p-personal {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 0;
+}
+.mwiki #p-personal {
+	width: 100%;
+	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: none;
+	overflow: visible;
+	line-height: 1.2em;
+}
+.mwiki #p-personal h5 {
+	display: none;
+}
+.mwiki #p-personal .portlet,
+.mwiki #p-personal .pBody {
+	z-index: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	overflow: visible;
+	background: none;
+}
+/* this is the ul contained in the portlet */
+.mwiki #p-personal ul {
+	border: none;
+	line-height: 1.4em;
+	color: #2f6fab;
+	padding: 0 2em 0 3em;
+	margin: 0;
+	text-align: right;
+	list-style: none;
+	z-index: 0;
+	background: none;
+	cursor: default;
+}
+.mwiki #p-personal li {
+	z-index: 0;
+	border: none;
+	padding: 0;
+	display: inline;
+	color: #2f6fab;
+	margin-left: 1em;
+	line-height: 1.2em;
+	background: none;
+}
+.mwiki #p-personal li a {
+	text-decoration: none;
+	color: #005896;
+	padding-bottom: .2em;
+	background: none;
+}
+.mwiki #p-personal li a:hover {
+	background-color: white;
+	padding-bottom: .2em;
+	text-decoration: none;
+}
+.mwiki #p-personal li.active a:hover {
+	background-color: transparent;
+}
+/* the icon in front of the user name, single quotes
+in bg url to hide it from iemac */
+.mwiki li#pt-userpage,
+.mwiki li#pt-anonuserpage,
+.mwiki li#pt-login {
+	background: url(user.gif) top left no-repeat;
+	padding-left: 20px;
+	text-transform: none;
+}
+.mwiki #p-personal ul {
+	text-transform: lowercase;
+}
+.mwiki #p-personal li.active {
+	font-weight: bold;
+}
+/*
+** the page-related actions- page/talk, edit etc
+*/
+.mwiki #p-cactions {
+	position: absolute;
+	top: 1.3em;
+	left: 11.5em;
+	margin: 0;
+	white-space: nowrap;
+	width: 76%;
+	line-height: 1.1em;
+	overflow: visible;
+	background: none;
+	border-collapse: collapse;
+	padding-left: 1em;
+	list-style: none;
+	font-size: 95%;
+}
+.mwiki #p-cactions ul {
+	list-style: none;
+}
+.mwiki #p-cactions li {
+	display: inline;
+	border: 1px solid #aaa;
+	border-bottom: none;
+	padding: 0 0 .1em 0;
+	margin: 0 .3em 0 0;
+	overflow: visible;
+	background: white;
+}
+.mwiki #p-cactions li.selected {
+	border-color: #fabd23;
+	padding: 0 0 .2em 0;
+	font-weight: bold;
+}
+.mwiki #p-cactions li a {
+	background-color: #fbfbfb;
+	color: #002bb8;
+	border: none;
+	padding: 0 .8em .3em;
+	position: relative;
+	z-index: 0;
+	margin: 0;
+	text-decoration: none;
+}
+.mwiki #p-cactions li.selected a {
+	z-index: 3;
+	padding: 0 1em .2em!important;
+	background-color: white;
+}
+.mwiki #p-cactions .new a {
+	color: #ba0000;
+}
+.mwiki #p-cactions li a:hover {
+	z-index: 3;
+	text-decoration: none;
+	background-color: white;
+}
+.mwiki #p-cactions h5 {
+	display: none;
+}
+.mwiki #p-cactions li.istalk {
+	margin-right: 0;
+}
+.mwiki #p-cactions li.istalk a {
+	padding-right: .5em;
+}
+.mwiki #p-cactions #ca-addsection a {
+	padding-left: .4em;
+	padding-right: .4em;
+}
+/* offsets to distinguish the tab groups */
+.mwiki li#ca-talk {
+	margin-right: 1.6em;
+}
+.mwiki li#ca-watch, .mwiki li#ca-unwatch, .mwiki li#ca-varlang-0, .mwiki li#ca-print {
+	margin-left: 1.6em;
+}
+.mwiki #p-cactions .pBody {
+	font-size: 1em;
+	background-color: transparent;
+	color: inherit;
+	border-collapse: inherit;
+	border: 0;
+	padding: 0;
+}
+.mwiki #p-cactions .hiddenStructure {
+	display: none;
+}
+.mwiki #p-cactions li a {
+	text-transform: lowercase;
+}
+
+.mwiki #p-lang {
+	position: relative;
+	z-index: 3;
+}
+
+/* TODO: #t-iscite is only used by the Cite extension, come up with some
+ * system which allows extensions to add to this file on the fly
+ */
+.mwiki #t-ispermalink, .mwiki #t-iscite {
+	color: #999;
+}
+/*
+** footer
+*/
+.mwiki #footer {
+	background-color: white;
+	border-top: 1px solid #fabd23;
+	border-bottom: 1px solid #fabd23;
+	margin: .6em 0 1em 0;
+	padding: .4em 0 1.2em 0;
+	text-align: center;
+	font-size: 90%;
+}
+.mwiki #footer li {
+	display: inline;
+	margin: 0 1.3em;
+}
+.mwiki #f-poweredbyico, .mwiki #f-copyrightico {
+	margin: 0 8px;
+	position: relative;
+	top: -2px; /* Bump it up just a tad */
+}
+.mwiki #f-poweredbyico {
+	float: right;
+	height: 1%;
+}
+.mwiki #f-copyrightico {
+	float: left;
+	height: 1%;
+}
+
+/* js pref toc */
+.mwiki #preftoc {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	clear: both;
+}
+.mwiki #preftoc li {
+	background-color: #f0f0f0;
+	color: #000;
+}
+.mwiki #preftoc li {
+	margin: 1px -2px 1px 2px;
+	float: left;
+	padding: 2px 0 3px 0;
+	border: 1px solid #fff;
+	border-right-color: #716f64;
+	border-bottom: 0;
+	position: relative;
+	white-space: nowrap;
+	list-style-type: none;
+	list-style-image: none;
+	z-index: 3;
+}
+.mwiki #preftoc li.selected {
+	font-weight: bold;
+	background-color: #f9f9f9;
+	border: 1px solid #aaa;
+	border-bottom: none;
+	cursor: default;
+	top: 1px;
+	padding-top: 2px;
+	margin-right: -3px;
+}
+.mwiki #preftoc > li.selected {
+	top: 2px;
+}
+.mwiki #preftoc a,
+.mwiki #preftoc a:active {
+	display: block;
+	color: #000;
+	padding: 0 .7em;
+	position: relative;
+	text-decoration: none;
+}
+.mwiki #preftoc li.selected a {
+	cursor: default;
+	text-decoration: none;
+}
+.mwiki #prefcontrol {
+	padding-top: 2em;
+	clear: both;
+}
+.mwiki #preferences {
+	margin: 0;
+	border: 1px solid #aaa;
+	clear: both;
+	padding: 1.5em;
+	background-color: #F9F9F9;
+}
+.mwiki .prefsection {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+.mwiki .prefsection fieldset {
+	border: 1px solid #aaa;
+	float: left;
+	margin-right: 2em;
+}
+.mwiki .prefsection legend {
+	font-weight: bold;   
+}
+.mwiki .prefsection table, .mwiki .prefsection legend {
+	background-color: #F9F9F9;
+}
+.mwiki .mainLegend {
+	display: none;
+}
+.mwiki div.prefsectiontip {
+	font-size: x-small;
+	padding: .2em 2em;
+	color: #666;
+}
+.mwiki .btnSavePrefs {
+	font-weight: bold;
+	padding-left: .3em;
+	padding-right: .3em;
+}
+
+.mwiki .preferences-login {
+	clear: both;
+	margin-bottom: 1.5em;
+}
+
+.mwiki .prefcache {
+	font-size: 90%;
+	margin-top: 2em;
+}
+
+.mwiki div#userloginForm form,
+.mwiki div#userlogin form#userlogin2 {
+	margin: 0 3em 1em 0;
+	border: 1px solid #aaa;
+	clear: both;
+	padding: 1.5em 2em;
+	background-color: #f9f9f9;
+	float: left;
+}
+.mwiki .rtl div#userloginForm form,
+.mwiki .rtl div#userlogin form#userlogin2 {
+	float: right;
+}
+
+.mwiki div#userloginForm table,
+.mwiki div#userlogin form#userlogin2 table {
+	background-color: #f9f9f9;
+}
+
+.mwiki div#userloginForm h2,
+.mwiki div#userlogin form#userlogin2 h2 {
+	padding-top: 0;
+}
+
+.mwiki div#userlogin .captcha,
+.mwiki div#userloginForm .captcha {
+	border: 1px solid #bbb;
+	padding: 1.5em 2em;
+	background-color: white;
+}
+
+.mwiki #loginend, .mwiki #signupend {
+	clear: both;
+}
+
+.mwiki #userloginprompt, .mwiki #languagelinks {
+	font-size: 85%;
+}
+
+.mwiki #login-sectiontip {
+	font-size: 85%;
+	line-height: 1.2;
+	padding-top: 2em;
+}
+
+.mwiki #userlogin .loginText, .mwiki #userlogin .loginPassword {
+	width: 12em;
+}
+
+.mwiki #userloginlink a, .mwiki #wpLoginattempt, .mwiki #wpCreateaccount {
+	font-weight: bold;
+}
+
+
+/* IE/Mac fixes were cut out */
+
+.mwiki .redirectText {
+	font-size: 150%;
+	margin: 5px;
+}
+
+.mwiki .printfooter {
+	display: none;
+}
+
+.mwiki .not-patrolled {
+	background-color: #ffa;
+}
+.mwiki div.patrollink {
+	clear: both;
+	font-size: 75%;
+	text-align: right;
+}
+.mwiki span.newpage, .mwiki span.minor, .mwiki span.bot {
+	font-weight: bold;
+}
+.mwiki span.unpatrolled {
+	font-weight: bold;
+	color: red;
+}
+
+.mwiki .sharedUploadNotice {
+	font-style: italic;
+}
+
+.mwiki span.updatedmarker {
+	color: black;
+	background-color: #0f0;
+}
+
+.mwiki table.gallery {
+	border: 1px solid #ccc;
+	margin: 2px;
+	padding: 2px;
+	background-color: white;
+}
+
+.mwiki table.gallery tr {
+	vertical-align: top;
+}
+
+.mwiki table.gallery td {
+	vertical-align: top;
+	background-color: #f9f9f9;
+	border: solid 2px white;
+}
+/* Keep this temporarily so that cached pages will display right */
+.mwiki table.gallery td.galleryheader {
+    text-align: center;
+	font-weight: bold;
+}
+.mwiki table.gallery caption {
+	font-weight: bold;
+}
+
+.mwiki div.gallerybox {
+	margin: 2px;
+}
+
+.mwiki div.gallerybox div.thumb {
+	text-align: center;
+	border: 1px solid #ccc;
+	margin: 2px;
+}
+
+.mwiki div.gallerytext {
+	overflow: hidden;
+	font-size: 94%;
+	padding: 2px 4px;
+}
+
+.mwiki span.comment {
+	font-style: italic;
+}
+
+.mwiki span.changedby {
+	font-size: 95%;
+}
+
+.mwiki .previewnote {
+	text-indent: 3em;
+	color: #c00;
+	border-bottom: 1px solid #aaa;
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+}
+
+.mwiki .previewnote p {
+	margin: 0;
+	padding: 0;
+}
+
+.mwiki .editExternally {
+	border: 1px solid gray;
+	background-color: #ffffff;
+	padding: 3px;
+	margin-top: 0.5em;
+	float: left;
+	font-size: small;
+	text-align: center;
+}
+.mwiki .editExternallyHelp {
+	font-style: italic;
+	color: gray;
+}
+
+.mwiki .toggle {
+	margin-left: 2em;
+	text-indent: -2em;
+}
+
+/* Classes for EXIF data display */
+.mwiki table.mw_metadata {
+	font-size: 0.8em;
+	margin-left: 0.5em;
+	margin-bottom: 0.5em;
+	width: 300px;
+}
+
+.mwiki table.mw_metadata caption {
+	font-weight: bold;
+}
+
+.mwiki table.mw_metadata th {
+	font-weight: normal;
+}
+
+.mwiki table.mw_metadata td {
+	padding: 0.1em;
+}
+
+.mwiki table.mw_metadata {
+	border: none;
+	border-collapse: collapse;
+}
+
+.mwiki table.mw_metadata td, .mwiki table.mw_metadata th {
+	text-align: center;
+	border: 1px solid #aaaaaa;
+	padding-left: 0.1em;
+	padding-right: 0.1em;
+}
+
+.mwiki table.mw_metadata th {
+	background-color: #f9f9f9;
+}
+
+.mwiki table.mw_metadata td {
+	background-color: #fcfcfc;
+}
+
+.mwiki table.collapsed tr.collapsable {
+	display: none;
+}
+
+
+/* filetoc */
+.mwiki ul#filetoc {
+	text-align: center;
+	border: 1px solid #aaaaaa;
+	background-color: #f9f9f9;
+	padding: 5px;
+	font-size: 95%;
+	margin-bottom: 0.5em;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.mwiki #filetoc li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 2em;
+}
+
+.mwiki input#wpSummary {
+	width: 80%;
+}
+
+/* @bug 1714 */
+.mwiki input#wpSave, .mwiki input#wpDiff {
+	margin-right: 0.33em;
+}
+
+.mwiki #wpSave {
+	font-weight: bold;
+}
+
+/* Classes for article validation */
+
+.mwiki table.revisionform_default {
+	border: 1px solid #000000;
+}
+
+.mwiki table.revisionform_focus {
+	border: 1px solid #000000;
+	background-color:#00BBFF;
+}
+
+.mwiki tr.revision_tr_default {
+	background-color:#EEEEEE;
+}
+
+.mwiki tr.revision_tr_first {
+	background-color:#DDDDDD;
+}
+
+.mwiki p.revision_saved {
+	color: green;
+	font-weight:bold;
+}
+
+.mwiki #mw_trackbacks {
+	border: solid 1px #bbbbff;
+	background-color: #eeeeff;
+	padding: 0.2em;
+}
+
+
+/* Allmessages table */
+
+.mwiki #allmessagestable th {
+	background-color: #b2b2ff;
+}
+
+.mwiki #allmessagestable tr.orig {
+	background-color: #ffe2e2;
+}
+
+.mwiki #allmessagestable tr.new {
+	background-color: #e2ffe2;
+}
+
+.mwiki #allmessagestable tr.def {
+	background-color: #f0f0ff;
+}
+
+
+/* noarticletext */
+.mwiki div.noarticletext {
+	border: 1px solid #ccc;
+	background: #fff;
+	padding: .2em 1em;
+	color: #000;
+}
+
+.mwiki div#searchTargetContainer {
+	left:       10px;
+	top:        10px;
+	width:      90%;
+	background: white;
+}
+
+.mwiki div#searchTarget {
+	padding:    3px;
+	margin:     5px;
+	background: #F0F0F0;
+	border:     solid 1px blue;
+}
+
+.mwiki div#searchTarget ul li {
+	list-style: none;
+}
+
+.mwiki div#searchTarget ul li:before {
+	color: orange;
+	content: "\00BB \0020";
+}
+
+.mwiki div#searchTargetHide {
+	float:right;
+	border:solid 1px black;
+	background:#DCDCDC;
+	padding:2px;
+}
+
+.mwiki #powersearch p {
+	margin-top:0px;
+}
+
+.mwiki div.multipageimagenavbox {
+   border: solid 1px silver;
+   padding: 4px;
+   margin: 1em;
+   background: #f0f0f0;
+}
+
+.mwiki div.multipageimagenavbox div.thumb {
+   border: none;
+   margin-left: 2em;
+   margin-right: 2em;
+}
+
+.mwiki div.multipageimagenavbox hr {
+   margin: 6px;
+}
+
+.mwiki table.multipageimage td {
+   text-align: center;
+}
+
+/** Special:Version */
+
+.mwiki table#sv-ext, table#sv-hooks, .mwiki table#sv-software {
+	margin: 1em;
+	padding:0em;
+}
+
+.mwiki #sv-ext td, .mwiki #sv-hooks td, .mwiki #sv-software td,
+.mwiki #sv-ext th, .mwiki #sv-hooks th, .mwiki #sv-software th {
+	border: 1px solid #A0A0A0;
+	padding: 0 0.15em 0 0.15em;
+}
+.mwiki #sv-ext th, .mwiki #sv-hooks th, .mwiki #sv-software th {
+	background-color: #F0F0F0;
+	color: black;
+	padding: 0 0.15em 0 0.15em;
+}
+.mwiki tr.sv-space{
+	height: 0.8em;
+	border:none;
+}
+.mwiki tr.sv-space td { display: none; }
+
+/*
+  Table pager (e.g. Special:Imagelist)
+  - remove underlines from the navigation link
+  - collapse borders
+  - set the borders to outsets (similar to Special:Allmessages)
+  - remove line wrapping for all td and th, set background color
+  - restore line wrapping for the last two table cells (description and size)
+*/
+.mwiki .TablePager { min-width: 80%; }
+.mwiki .TablePager_nav a { text-decoration: none; }
+.mwiki .TablePager { border-collapse: collapse; }
+.mwiki .TablePager, .mwiki .TablePager td, .mwiki .TablePager th { 
+	border: 1px solid #aaaaaa;
+	padding: 0 0.15em 0 0.15em;
+}
+.mwiki .TablePager th { background-color: #eeeeff }
+.mwiki .TablePager td { background-color: #ffffff }
+.mwiki .TablePager tr:hover td { background-color: #eeeeff }
+
+.mwiki .imagelist td, .mwiki .imagelist th { white-space: nowrap }
+.mwiki .imagelist .TablePager_col_links { background-color: #eeeeff }
+.mwiki .imagelist .TablePager_col_img_description { white-space: normal }
+.mwiki .imagelist th.TablePager_sort { background-color: #ccccff }
+
+.mwiki .templatesUsed { margin-top: 1.5em; }
+
+.mwiki .mw-summary-preview {
+	margin: 0.1em 0;
+}
+
+/* Friendlier slave lag warnings */
+.mwiki div.mw-lag-warn-normal,
+.mwiki div.mw-lag-warn-high {
+	padding: 3px;
+	text-align: center;
+	margin: 3px auto;
+}
+.mwiki div.mw-lag-warn-normal {
+	border: 1px solid #FFCC66;
+	background-color: #FFFFCC;
+}
+.mwiki div.mw-lag-warn-high {
+	font-weight: bold;
+	border: 2px solid #FF0033;
+	background-color: #FFCCCC;
+}
+
+.mwiki .MediaTransformError {
+	background-color: #ccc;
+	padding: 0.1em;
+}
+.mwiki .MediaTransformError td {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 90%;
+}
+
+/** Special:Search stuff */
+.mwiki div#mw-search-interwiki-caption {
+	text-align: center;
+	font-weight: bold;
+	font-size: 95%;
+}
+
+.mwiki .mw-search-interwiki-project {
+	font-size: 97%;
+	text-align: left;
+	padding-left: 0.2em;
+	padding-right: 0.15em;
+	padding-bottom: 0.2em;
+	padding-top: 0.15em;
+	background: #cae8ff;
+}
+
+/* God-damned hack for the crappy layout */
+.mwiki .os-suggest {
+	font-size: 127%;
+}
+
+
+/**** Excerpts from http://en.wikipedia.org/wiki/MediaWiki:Common.css ******/
+/* Since GoldenDict support is not Wikipedia-specific, we don't include all
+ * of it, and besides, it's large and volatile anyway. */
+/* It was also edited for the usually narrow article view */
+
+
+/* Make the list of references smaller */
+.mwiki ol.references {
+    font-size: 100%;
+}
+.mwiki .references-small { 
+    font-size: 90%;
+}
+ 
+/* VALIDATOR NOTICE: the following is correct, but the W3C validator doesn't accept it */
+/* -moz-* is a vendor-specific extension (CSS 2.1 4.1.2.1) */
+/* column-count is from the CSS3 module "CSS Multi-column Layout" */
+/* Please ignore any validator errors caused by these two lines */
+.mwiki .references-2column {
+    font-size: 90%;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+}
+ 
+/* Highlight clicked reference in blue to help navigation */
+.mwiki ol.references > li:target {
+    background-color: #DEF;
+}
+ 
+.mwiki sup.reference:target { 
+    background-color: #DEF;
+}
+ 
+/* Styling for citations */
+.mwiki cite {
+    font-style: normal;
+    word-wrap: break-word;
+}
+ 
+/* If there is an inline link to a full citation, the full citation will turn blue when the inline link is clicked */
+.mwiki cite:target { 
+    background-color: #DEF;
+}
+
+/* wikitable/prettytable class for skinning normal tables */
+.mwiki table.wikitable,
+.mwiki table.prettytable {
+    margin: 1em 1em 1em 0;
+    background: #f9f9f9;
+    border: 1px #aaa solid;
+    border-collapse: collapse;
+}
+.mwiki .wikitable th, .mwiki .wikitable td,
+.mwiki .prettytable th, .mwiki .prettytable td {
+    border: 1px #aaa solid;
+    padding: 0.2em;
+}
+.mwiki .wikitable th,
+.mwiki .prettytable th {
+    background: #f2f2f2;
+    text-align: center;
+}
+.mwiki .wikitable caption,
+.mwiki .prettytable caption {
+    font-weight: bold;
+}
+
+/* default skin for navigation boxes */
+.mwiki table.navbox {            /* navbox container style */
+  border:1px solid #aaa;
+  width:100%; 
+  margin:auto;
+  clear:both;
+  font-size:88%;
+  text-align:center;
+  padding:1px;
+}
+.mwiki table.navbox + table.navbox {
+  margin-top:-1px;        /* single pixel border between adjacent navboxes (doesn't work for IE6, but that's okay) */
+}
+.mwiki .navbox-title, .mwiki .navbox-abovebelow, .mwiki table.navbox th {
+  text-align:center;      /* title and above/below styles */
+  padding-left:1em;
+  padding-right:1em;
+}
+.mwiki .navbox-group {           /* group style */
+  white-space:nowrap;
+  text-align:right;
+  font-weight:bold;
+  padding-left:1em;
+  padding-right:1em;
+}
+.mwiki .navbox, .mwiki .navbox-subgroup {
+  background:#fdfdfd;     /* Background color */
+}
+.mwiki .navbox-list {
+  border-color:#fdfdfd;   /* Must match background color */
+}
+.mwiki .navbox-title, .mwiki table.navbox th {
+  background:#ccccff;     /* Level 1 color */
+}
+.mwiki .navbox-abovebelow, .mwiki .navbox-group, .mwiki .navbox-subgroup .navbox-title {
+  background:#ddddff;     /* Level 2 color */
+}
+.mwiki .navbox-subgroup .navbox-group, .mwiki .navbox-subgroup .navbox-abovebelow {
+  background:#e6e6ff;     /* Level 3 color */
+}
+.mwiki .navbox-even {
+  background:#f7f7f7;     /* Even row striping */
+}
+.mwiki .navbox-odd {
+  background:transparent; /* Odd row striping */
+}
+ 
+.mwiki .collapseButton {         /* 'show'/'hide' buttons created dynamically by the        */
+    float: right;         /* CollapsibleTables javascript in [[MediaWiki:Common.js]] */
+    font-weight: normal;  /* are styled here so they can be customised.              */
+    text-align: right;
+    width: auto;
+}
+.mwiki .navbox .collapseButton { /* In navboxes, the show/hide button balances the vde links from */
+    width: 6em;           /* [[Template:Tnavbar]], so they need to be the same width.      */
+}
+
+
+
+/* Infobox template style */
+.mwiki .infobox {
+    border: 1px solid #aaa;
+    background-color: #f9f9f9;
+    color: black;
+/*    margin: 0.5em 0 0.5em 1em;*/
+    margin: 10px auto 0;
+    padding: 0.2em;
+/*
+    float: right;
+    clear: right;*/
+}
+
+.mwiki .infobox td,
+.mwiki .infobox th {
+    vertical-align: top;
+}
+.mwiki .infobox caption {
+    font-size: larger;
+}
+.mwiki .infobox.bordered {
+    border-collapse: collapse;
+}
+.mwiki .infobox.bordered td,
+.mwiki .infobox.bordered th {
+    border: 1px solid #aaa;
+}
+.mwiki .infobox.bordered .borderless td,
+.mwiki .infobox.bordered .borderless th {
+    border: 0;
+}
+ 
+.mwiki .infobox.sisterproject {
+    width: 20em;
+    font-size: 90%;
+}
+ 
+.mwiki .infobox.standard-talk {
+    border: 1px solid #c0c090;
+    background-color: #f8eaba;
+}
+.mwiki .infobox.standard-talk.bordered td,
+.mwiki .infobox.standard-talk.bordered th {
+    border: 1px solid #c0c090;
+}
+ 
+/* styles for bordered infobox with merged rows */
+.mwiki .infobox.bordered .mergedtoprow td,
+.mwiki .infobox.bordered .mergedtoprow th {
+    border: 0;
+    border-top: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+}
+ 
+.mwiki .infobox.bordered .mergedrow td,
+.mwiki .infobox.bordered .mergedrow th {
+    border: 0;
+    border-right: 1px solid #aaa;
+}
+ 
+/* Styles for geography infoboxes, e.g. countries, country subdivisions, cities, etc. */
+.mwiki .infobox.geography {
+    text-align: left;
+    border-collapse: collapse;
+    line-height: 1.2em; 
+    font-size: 90%;
+}
+ 
+.mwiki .infobox.geography  td,
+.mwiki .infobox.geography  th {
+    border-top: solid 1px #aaa;
+    padding: 0.4em 0.6em 0.4em 0.6em;
+}
+.mwiki .infobox.geography .mergedtoprow td,
+.mwiki .infobox.geography .mergedtoprow th {
+    border-top: solid 1px #aaa;
+    padding: 0.4em 0.6em 0.2em 0.6em;
+}
+ 
+.mwiki .infobox.geography .mergedrow td,
+.mwiki .infobox.geography .mergedrow th {
+    border: 0;
+    padding: 0 0.6em 0.2em 0.6em;
+}
+ 
+.mwiki .infobox.geography .mergedbottomrow td,
+.mwiki .infobox.geography .mergedbottomrow th {
+    border-top: 0;
+    border-bottom: solid 1px #aaa;
+    padding: 0 0.6em 0.4em 0.6em;
+}
+ 
+.mwiki .infobox.geography .maptable td,
+.mwiki .infobox.geography .maptable th {
+    border: 0;
+    padding: 0;
+}
+ 
+/* Style for "notices" */
+.mwiki .notice {
+    margin: 1em;
+    padding: 0.2em;
+}
+ 
+.mwiki #disambig {
+    border-top: 1px solid #ccc; 
+    border-bottom: 1px solid #ccc;
+}
+
+.mwiki .rellink,
+.mwiki .dablink {
+    font-style: italic;
+    padding-left: 2em;
+}
+.mwiki .rellink i,
+.mwiki .dablink i {
+    font-style: normal;
+}
+
+/* Article message box styles */
+.mwiki table.ambox {            /* 10% = Will not overlap with other elements */
+    margin: -1px 10% 0px;    /* -1px = Single border between stacked boxes in all browsers */
+    border: 1px solid #aaa; 
+    border-left: 10px solid #1e90ff;    /* Default "notice" blue */
+    background: #fbfbfb; 
+}
+.mwiki .ambox th.mbox-text, 
+.mwiki .ambox td.mbox-text {            /* The message body cell(s) */
+    padding: 0.25em 0.5em;       /* 0.5em left/right */
+}
+.mwiki .ambox td.mbox-image {           /* The left image cell */
+    padding: 2px 0 2px 0.5em;    /* 0.5em left, 0px right */
+}
+.mwiki .ambox td.mbox-imageright {      /* The right image cell */
+    padding: 2px 0.5em 2px 0;    /* 0px left, 0.5em right */
+}
+
+/* Standard Navigationsleisten, aka box hiding thingy from .de.  Documentation at [[Wikipedia:NavFrame]]. */
+.mwiki div.NavFrame {
+    margin: 0;
+    padding: 4px;
+    border: 1px solid #aaa;
+    text-align: center;
+    border-collapse: collapse;
+    font-size: 95%;
+}
+.mwiki div.NavFrame + div.NavFrame {
+    border-top-style: none;
+    border-top-style: hidden;
+}
+.mwiki div.NavPic {
+    background-color: #fff;
+    margin: 0;
+    padding: 2px;
+    float: left;
+}
+.mwiki div.NavFrame div.NavHead {
+    height: 1.6em;
+    font-weight: bold;
+    background-color: #ccf;
+    position:relative;
+}
+.mwiki div.NavFrame p {
+    font-size: 100%;
+}
+.mwiki div.NavFrame div.NavContent {
+    font-size: 100%;
+}
+.mwiki div.NavFrame div.NavContent p {
+    font-size: 100%;
+}
+.mwiki div.NavEnd {
+    margin: 0;
+    padding: 0;
+    line-height: 1px;
+    clear: both;
+}
+.mwiki a.NavToggle {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    font-weight: normal;
+    font-size: 90%;
+}
+
+
+/****** Wiktionary-specific excerpts *********/
+
+.mwiki .audiolink a {
+    background: url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/16px-Loudspeaker.svg.png") center left no-repeat !important;
+    padding-left: 20px !important;
+    padding-right: 0 !important;
+}
+
+/* default setting for [[:Category:Inflection templates]] */
+ 
+.mwiki .infl-inline { display: inline }
+.mwiki .infl-table { display: none }
 
