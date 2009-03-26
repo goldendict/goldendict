@@ -13,12 +13,108 @@
 
 namespace Dictionary {
 
+bool Request::isFinished()
+{
+  return (int)isFinishedFlag;
+}
+
+void Request::update()
+{
+  if ( !isFinishedFlag )
+    emit updated();
+}
+
+void Request::finish()
+{
+  if ( !isFinishedFlag )
+  {
+    isFinishedFlag.ref();
+
+    emit finished();
+  }
+}
+
+void Request::setErrorString( QString const & str )
+{
+  Mutex::Lock _( errorStringMutex );
+
+  errorString = str;
+}
+
+QString Request::getErrorString()
+{
+  Mutex::Lock _( errorStringMutex );
+
+  return errorString;
+}
+
+
+///////// WordSearchRequest
+  
+size_t WordSearchRequest::matchesCount()
+{
+  Mutex::Lock _( dataMutex );
+  
+  return matches.size();
+}
+
+WordMatch WordSearchRequest::operator [] ( size_t index ) throw( exIndexOutOfRange )
+{
+  Mutex::Lock _( dataMutex );
+  
+  if ( index >= matches.size() )
+    throw exIndexOutOfRange();
+  
+  return matches[ index ];
+}
+
+////////////// DataRequest
+
+long DataRequest::dataSize()
+{
+  Mutex::Lock _( dataMutex );
+  
+  return hasAnyData ? data.size() : -1;
+}
+
+void DataRequest::getDataSlice( size_t offset, size_t size, void * buffer )
+  throw( exSliceOutOfRange )
+{
+  Mutex::Lock _( dataMutex );
+
+  if ( offset + size > data.size() || !hasAnyData )
+    throw exSliceOutOfRange();
+
+  memcpy( buffer, &data[ offset ], size );
+}
+
+vector< char > & DataRequest::getFullData() throw( exRequestUnfinished )
+{
+  if ( !isFinished() )
+    throw exRequestUnfinished();
+
+  return data;
+}
+
 Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
   id( id_ ), dictionaryFiles( dictionaryFiles_ )
 {
 }
 
-string Format::makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
+sptr< WordSearchRequest > Class::findHeadwordsForSynonym( wstring const & )
+  throw( std::exception )
+{
+  return new WordSearchRequestInstant();
+}
+
+sptr< DataRequest > Class::getResource( string const & /*name*/ )
+  throw( std::exception )
+{
+  return new DataRequestInstant( false );
+}
+
+
+string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
 {
   std::vector< string > sortedList( dictionaryFiles );
 
@@ -47,8 +143,8 @@ string Format::makeDictionaryId( vector< string > const & dictionaryFiles ) thro
 // the dictionary backends, there's no platform-independent way to get hold
 // of a timestamp of the file, so we use here Qt anyway. It is supposed to
 // be fixed in the future when it's needed.
-bool Format::needToRebuildIndex( vector< string > const & dictionaryFiles,
-                                 string const & indexFile ) throw()
+bool needToRebuildIndex( vector< string > const & dictionaryFiles,
+                         string const & indexFile ) throw()
 {
   unsigned long lastModified = 0;
 

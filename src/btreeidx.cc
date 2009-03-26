@@ -4,8 +4,11 @@
 #include "btreeidx.hh"
 #include "folding.hh"
 #include "utf8.hh"
+#include <QRunnable>
+#include <QThreadPool>
+#include <QSemaphore>
 #include <math.h>
-#include<string.h>
+#include <string.h>
 #include <stdlib.h>
 
 //#define __BTREE_USE_LZO
@@ -43,12 +46,15 @@ BtreeDictionary::BtreeDictionary( string const & id,
 {
 }
 
-void BtreeDictionary::openIndex( File::Class & file )
+void BtreeDictionary::openIndex( File::Class & file, Mutex & mutex )
 {
+  Mutex::Lock _( mutex );
+  
   indexNodeSize = file.read< uint32_t >();
   rootOffset = file.read< uint32_t >();
 
   idxFile = &file;
+  idxFileMutex = &mutex;
 }
 
 vector< WordArticleLink > BtreeDictionary::findArticles( wstring const & str )
@@ -75,16 +81,76 @@ vector< WordArticleLink > BtreeDictionary::findArticles( wstring const & str )
   return result;
 }
 
-
-void BtreeDictionary::findExact( wstring const & str,
-                                 vector< wstring > & exactMatches,
-                                 vector< wstring > & prefixMatches,
-                                 unsigned long maxPrefixResults )
-  throw( std::exception )
+class BtreeWordSearchRequest;
+  
+class BtreeWordSearchRunnable: public QRunnable
 {
-  exactMatches.clear();
-  prefixMatches.clear();
+  BtreeWordSearchRequest & r;
+  QSemaphore & hasExited;
+  
+public:
 
+  BtreeWordSearchRunnable( BtreeWordSearchRequest & r_,
+                           QSemaphore & hasExited_ ): r( r_ ),
+                                                      hasExited( hasExited_ )
+  {}
+
+  ~BtreeWordSearchRunnable()
+  {
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
+
+class BtreeWordSearchRequest: public Dictionary::WordSearchRequest
+{
+  friend class BtreeWordSearchRunnable;
+
+  BtreeDictionary & dict;
+  wstring str;
+  unsigned long maxResults;
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  BtreeWordSearchRequest( BtreeDictionary & dict_,
+                          wstring const & str_,
+                          unsigned long maxResults_ ):
+    dict( dict_ ), str( str_ ), maxResults( maxResults_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new BtreeWordSearchRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by BtreeWordSearchRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+  
+  ~BtreeWordSearchRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void BtreeWordSearchRunnable::run()
+{
+  r.run();
+}
+
+void BtreeWordSearchRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+  
   wstring folded = Folding::apply( str );
 
   bool exactMatch;
@@ -92,33 +158,49 @@ void BtreeDictionary::findExact( wstring const & str,
   vector< char > leaf;
   uint32_t nextLeaf;
 
-  char const * chainOffset = findChainOffsetExactOrPrefix( folded, exactMatch,
-                                                           leaf, nextLeaf );
+  char const * chainOffset = dict.findChainOffsetExactOrPrefix( folded, exactMatch,
+                                                                leaf, nextLeaf );
 
-  if ( !chainOffset )
-    return;
-
+  if ( chainOffset )
   for( ; ; )
   {
+    if ( isCancelled )
+      break;
+    
     //printf( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
 
-    vector< WordArticleLink > chain = readChain( chainOffset );
-    vector< wstring > wstrings = convertChainToWstrings( chain );
+    vector< WordArticleLink > chain = dict.readChain( chainOffset );
+    vector< wstring > wstrings = dict.convertChainToWstrings( chain );
 
     wstring resultFolded = Folding::apply( wstrings[ 0 ] );
 
     if ( resultFolded == folded )
       // Exact match
-      exactMatches.insert( exactMatches.end(), wstrings.begin(), wstrings.end() );
+    {
+      Mutex::Lock _( dataMutex );
+      
+      matches.insert( matches.end(), wstrings.begin(), wstrings.end() );
+
+      if ( matches.size() >= maxResults )
+      {
+        // For now we actually allow more than maxResults if the last
+        // chain yield more than one result. That's ok and maybe even more
+        // desirable.
+        break;
+      }
+    }
     else
     if ( resultFolded.size() > folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
     {
       // Prefix match
-      prefixMatches.insert( prefixMatches.end(), wstrings.begin(), wstrings.end() );
+      
+      Mutex::Lock _( dataMutex );
+      
+      matches.insert( matches.end(), wstrings.begin(), wstrings.end() );
 
-      if ( prefixMatches.size() >= maxPrefixResults )
+      if ( matches.size() >= maxResults )
       {
-        // For now we actually allow more than maxPrefixResults if the last
+        // For now we actually allow more than maxResults if the last
         // chain yield more than one result. That's ok and maybe even more
         // desirable.
         break;
@@ -138,8 +220,10 @@ void BtreeDictionary::findExact( wstring const & str,
 
       if ( nextLeaf )
       {
-        readNode( nextLeaf, leaf );
-        nextLeaf = idxFile->read< uint32_t >();
+        Mutex::Lock _( *dict.idxFileMutex );
+        
+        dict.readNode( nextLeaf, leaf );
+        nextLeaf = dict.idxFile->read< uint32_t >();
         chainOffset = &leaf.front() + sizeof( uint32_t );
 
         uint32_t leafEntries = *(uint32_t *)&leaf.front();
@@ -154,6 +238,15 @@ void BtreeDictionary::findExact( wstring const & str,
         break; // That was the last leaf
     }
   }
+
+  finish();
+}
+
+sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
+  wstring const & str, unsigned long maxResults )
+  throw( std::exception )
+{
+  return new BtreeWordSearchRequest( *this, str, maxResults );
 }
 
 void BtreeDictionary::readNode( uint32_t offset, vector< char > & out )
@@ -200,7 +293,9 @@ char const * BtreeDictionary::findChainOffsetExactOrPrefix( wstring const & targ
 {
   if ( !idxFile )
     throw exIndexWasNotOpened();
-
+  
+  Mutex::Lock _( *idxFileMutex );
+  
   // Lookup the index by traversing the index btree
 
   vector< char > charBuffer;
@@ -608,10 +703,22 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
 
 uint32_t buildIndex( IndexedWords const & indexedWords, File::Class & file )
 {
+  size_t indexSize = indexedWords.size();
+  IndexedWords::const_iterator nextIndex = indexedWords.begin();
+
+  // Skip any empty words. No point in indexing those, and some dictionaries
+  // are known to have buggy empty-word entries (Stardict's jargon for instance).
+
+  while( indexSize && nextIndex->first.empty() )
+  {
+    indexSize--;
+    ++nextIndex;
+  }
+
   // We try to stick to two-level tree for most dictionaries. Try finding
   // the right size for it.
 
-  size_t btreeMaxElements = ( (size_t) sqrt( indexedWords.size() ) ) + 1;
+  size_t btreeMaxElements = ( (size_t) sqrt( indexSize ) ) + 1;
 
   if ( btreeMaxElements < BtreeMinElements )
     btreeMaxElements = BtreeMinElements;
@@ -621,11 +728,10 @@ uint32_t buildIndex( IndexedWords const & indexedWords, File::Class & file )
 
   printf( "Building a tree of %u elements\n", btreeMaxElements );
 
-  IndexedWords::const_iterator nextIndex = indexedWords.begin();
 
   uint32_t lastLeafOffset = 0;
 
-  uint32_t rootOffset = buildBtreeNode( nextIndex, indexedWords.size(),
+  uint32_t rootOffset = buildBtreeNode( nextIndex, indexSize,
                                         file, btreeMaxElements,
                                         lastLeafOffset );
 

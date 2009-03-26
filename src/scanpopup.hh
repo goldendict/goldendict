@@ -74,7 +74,7 @@ private slots:
   void clipboardChanged( QClipboard::Mode );
   void mouseHovered( QString const & );
   void currentGroupChanged( QString const & );
-  void prefixMatchComplete( WordFinderResults r );
+  void prefixMatchFinished();
   void diacriticButtonClicked();
   void prefixButtonClicked();
   void initialWordClicked();

@@ -7,8 +7,10 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <QObject>
 #include "sptr.hh"
 #include "ex.hh"
+#include "mutex.hh"
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {
@@ -27,8 +29,191 @@ enum Property
 };
 
 DEF_EX( Ex, "Dictionary error", std::exception )
-DEF_EX( exNoSuchWord, "The given word does not exist", Ex )
-DEF_EX( exNoSuchResource, "The given resource does not exist", Ex )
+DEF_EX( exIndexOutOfRange, "The supplied index is out of range", Ex )
+DEF_EX( exSliceOutOfRange, "The requested data slice is out of range", Ex )
+DEF_EX( exRequestUnfinished, "The request hasn't yet finished", Ex )
+
+/// When you request a search to be performed in a dictionary, you get
+/// this structure in return. It accumulates search results over time.
+/// The finished() signal is emitted when the search has finished and there's
+/// no more matches to be expected. Note that before connecting to it, check
+/// the result of isFinished() -- if it's 'true', the search was instantaneous.
+/// Destroy the object when you are not interested in results anymore.
+/// 
+/// Creating, destroying and calling member functions of the requests is done
+/// in the GUI thread, however. Therefore, it is important to make sure those
+/// operations are fast (this is most important for word searches, where
+/// new requests are created and old ones deleted immediately upon a user
+/// changing query).
+class Request: public QObject
+{
+  Q_OBJECT
+
+public:
+
+  /// Returns whether the request has been processed in full and finished.
+  /// This means that the data accumulated is final and won't change anymore.
+  bool isFinished();
+
+  /// Either returns an empty string in case there was no error processing
+  /// the request, or otherwise a human-readable string describing the problem.
+  /// Note that an empty result, such as a lack of word or of an article isn't
+  /// an error -- but any kind of failure to connect to, or read the dictionary
+  /// is.
+  QString getErrorString();
+
+  /// Cancels the ongoing request. This may make Request destruct faster some
+  /// time in the future, Use this in preparation to destruct many Requests,
+  /// so that they'd be cancelling in parallel. When the request was fully
+  /// cancelled, it must emit the finished() signal, either as a result of an
+  /// actual finish which has happened just before the cancellation, or solely as
+  /// a result of a request being cancelled (in the latter case, the actual
+  /// request result may be empty or incomplete). That is, finish() must be
+  /// called by a derivative at least once if cancel() was called, either after
+  /// or before it was called.
+  virtual void cancel()=0;
+
+  virtual ~Request()
+  {}
+  
+signals:
+
+  /// This signal is emitted when more data becomes available. Local
+  /// dictionaries typically don't call this, since it is preferred that all
+  /// data would be available from them at once, but network dictionaries
+  /// might call that.
+  void updated();
+  
+  /// This signal is emitted when the request has been processed in full and
+  /// finished. That is, it's emitted when isFinished() turns true.
+  void finished();
+
+protected:
+
+  /// Called by derivatives to signal update().
+  void update();
+  
+  /// Called by derivatives to set isFinished() flag and signal finished().
+  void finish();
+
+  /// Sets the error string to be returned by getErrorString().
+  void setErrorString( QString const & );
+
+private:
+
+  QAtomicInt isFinishedFlag;
+
+  Mutex errorStringMutex;
+  QString errorString;
+};
+
+/// This structure represents the word found. In addition to holding the
+/// word itself, it also holds its weight. Words with larger weight are always
+/// presented before ones with the smaller weight. It is 0 by default and
+/// should only be used for Levenstein-like matching algorithms to indicate
+/// search distance, in which cases it should be negative.
+struct WordMatch
+{
+  wstring word;
+  int weight;
+
+  WordMatch(): weight( 0 ) {}
+  WordMatch( wstring const & word_ ): word( word_ ), weight( 0 ){}
+  WordMatch( wstring const & word_, int weight_ ): word( word_ ),
+    weight( weight_ ) {}
+};
+
+/// This request type corresponds to all types of word searching operations.
+class WordSearchRequest: public Request
+{
+  Q_OBJECT
+      
+public:
+
+  /// Returns the number of matches found. The value can grow over time
+  /// unless isFinished() is true.
+  size_t matchesCount();
+
+  /// Returns the match with the given zero-based index, which should be less
+  /// than matchesCount().
+  WordMatch operator [] ( size_t index ) throw( exIndexOutOfRange );
+  
+protected:
+  
+  // Subclasses should be filling up the 'matches' array, locking the mutex when
+  // whey work with it.
+  Mutex dataMutex;
+
+  vector< WordMatch > matches;
+};
+
+/// This request type corresponds to any kinds of data responses where a
+/// single large blob of binary data is returned. It currently used of article
+/// bodies and resources.
+class DataRequest: public Request
+{
+  Q_OBJECT
+      
+public:
+
+  /// Returns the number of bytes read, with a -1 meaning that so far it's
+  /// uncertain whether resource even exists or not, and any non-negative value
+  /// meaning that that amount of bytes is not available.
+  /// If -1 is still being returned after the request has finished, that means
+  /// the resource wasn't found.
+  long dataSize();
+
+  /// Writes "size" bytes starting from "offset" of the data read to the given
+  /// buffer. "size + offset" must be <= than dataSize().
+  void getDataSlice( size_t offset, size_t size, void * buffer )
+    throw( exSliceOutOfRange );
+
+  /// Returns all the data read. Since no further locking can or would be
+  /// done, this can only be called after the request has finished.
+  vector< char > & getFullData() throw( exRequestUnfinished );
+
+  DataRequest(): hasAnyData( false ) {}
+
+protected:
+  
+  // Subclasses should be filling up the 'data' array, locking the mutex when
+  // whey work with it.
+  Mutex dataMutex;
+
+  bool hasAnyData; // With this being false, dataSize() always returns -1
+  vector< char > data;
+};
+
+/// A helper class for syncronous word search implementations.
+class WordSearchRequestInstant: public WordSearchRequest
+{
+public:
+
+  WordSearchRequestInstant()
+  { finish(); }
+
+  virtual void cancel()
+  {}
+
+  vector< WordMatch > & getMatches()
+  { return matches; }
+};
+  
+/// A helper class for syncronous data read implementations.
+class DataRequestInstant: public DataRequest
+{
+public:
+
+  DataRequestInstant( bool succeeded )
+  { hasAnyData = succeeded; finish(); }
+
+  virtual void cancel()
+  {}
+
+  vector< char > & getData()
+  { return data; }
+};
+
 
 /// A dictionary. Can be used to query words.
 class Class
@@ -66,39 +251,35 @@ public:
   /// the number of articles, or can be larger if some synonyms are present.
   virtual unsigned long getWordCount() throw()=0;
 
-  /// Looks up a given word in the dictionary, aiming for exact matches. The
-  /// result is a list of such matches. If it is possible to also look up words
-  /// that begin with the given substring without much expense, they should be
-  /// put into the prefix results (if not, it should be left empty). Not more
-  /// than maxPrefixResults prefix results should be stored. The whole
-  /// operation is supposed to be fast and is executed in a GUI thread.
-  virtual void findExact( wstring const &,
-                          vector< wstring > & exactMatches,
-                          vector< wstring > & prefixMatches,
-                          unsigned long maxPrefixResults ) throw( std::exception )=0;
+  /// Looks up a given word in the dictionary, aiming for exact matches and
+  /// prefix matches. If it's not possible to locate any prefix matches, no
+  /// prefix results should be added. Not more than maxResults results should
+  /// be stored. The whole operation is supposed to be fast, though some
+  /// dictionaries, the network ones particularly, may of course be slow.
+  virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
+                                                 unsigned long maxResults ) throw( std::exception )=0;
 
   /// Finds known headwords for the given word, that is, the words for which
   /// the given word is a synonym. If a dictionary can't perform this operation,
   /// it should leave the default implementation which always returns an empty
-  /// vector.
-  virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception )
-  { return vector< wstring >(); }
+  /// result.
+  virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
+    throw( std::exception );
 
   /// Returns a definition for the given word. The definition should
   /// be an html fragment (without html/head/body tags) in an utf8 encoding.
   /// The 'alts' vector could contain a list of words the definitions of which
   /// should be included in the output as well, being treated as additional
   /// synonyms for the main word.
-  virtual string getArticle( wstring const &, vector< wstring > const & alts )
-    throw( exNoSuchWord, std::exception )=0;
+  virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts )
+    throw( std::exception )=0;
 
   /// Loads contents of a resource named 'name' into the 'data' vector. This is
   /// usually a picture file referenced in the article or something like that.
-  virtual void getResource( string const & /*name*/,
-                            vector< char > & /*data*/ ) throw( exNoSuchResource,
-                                                               std::exception )
-  { throw exNoSuchResource(); }
+  /// The default implementation always returns the non-existing resource
+  /// response.
+  virtual sptr< DataRequest > getResource( string const & /*name*/ )
+    throw( std::exception );
 
   virtual ~Class()
   {}
@@ -119,43 +300,20 @@ public:
   {}
 };
 
-/// A dictionary format. This is a factory to create dictionaries' instances.
-/// It is fed filenames to check if they are dictionaries, and it creates
-/// instances when they are.
-class Format
-{
-public:
+/// Generates an id based on the set of file names which the dictionary
+/// consists of. The resulting id is an alphanumeric hex value made by
+/// hashing the file names. This id should be used to identify dictionary
+/// and for the index file name, if one is needed.
+/// This function is supposed to be used by dictionary implementations.
+string makeDictionaryId( vector< string > const & dictionaryFiles ) throw();
 
-  /// Should go through the given list of file names, trying each one as a
-  /// possible dictionary of the supported format. Upon finding one, creates a
-  /// corresponding dictionary instance. As a result, a list of dictionaries
-  /// is created.
-  /// indicesDir indicates a directory where index files can be created, should
-  /// there be need for them. The index file name must be the same as the
-  /// dictionary's id, made by makeDictionaryId() from the list of file names.
-  /// Any exception thrown would terminate the program with an error.
-  virtual vector< sptr< Class > > makeDictionaries( vector< string > const & fileNames,
-                                                    string const & indicesDir,
-                                                    Initializing & )
-    throw( std::exception )=0;
-
-  virtual ~Format()
-  {}
-
-public://protected:
-
-  /// Generates an id based on the set of file names which the dictionary
-  /// consists of. The resulting id is an alphanumeric hex value made by
-  /// hashing the file names. This id should be used to identify dictionary
-  /// and for the index file name, if one is needed.
-  static string makeDictionaryId( vector< string > const & dictionaryFiles ) throw();
-  /// Checks if it is needed to regenerate index file based on its timestamp
-  /// and the timestamps of the dictionary files. If some files are newer than
-  /// the index file, or the index file doesn't exist, returns true. If some
-  /// dictionary files don't exist, returns true, too.
-  static bool needToRebuildIndex( vector< string > const & dictionaryFiles,
-                                  string const & indexFile ) throw();
-};
+/// Checks if it is needed to regenerate index file based on its timestamp
+/// and the timestamps of the dictionary files. If some files are newer than
+/// the index file, or the index file doesn't exist, returns true. If some
+/// dictionary files don't exist, returns true, too.
+/// This function is supposed to be used by dictionary implementations.
+bool needToRebuildIndex( vector< string > const & dictionaryFiles,
+                         string const & indexFile ) throw();
 
 }
 

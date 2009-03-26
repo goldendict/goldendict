@@ -8,6 +8,7 @@
 #include <QThread>
 #include <QToolButton>
 #include <QSystemTrayIcon>
+#include <QNetworkAccessManager>
 #include "ui_mainwindow.h"
 #include "folding.hh"
 #include "config.hh"
@@ -23,16 +24,17 @@
 using std::string;
 using std::vector;
 
-class LoadDictionaries: public QThread, Dictionary::Initializing
+class LoadDictionaries: public QThread, public Dictionary::Initializing
 {
   Q_OBJECT
 
   vector< string > const & allFiles;
+  Config::Class const & cfg;
   vector< sptr< Dictionary::Class > > dictionaries;
 
 public:
 
-  LoadDictionaries( vector< string > const & allFiles );
+  LoadDictionaries( vector< string > const & allFiles, Config::Class const & cfg );
 
   virtual void run();
 
@@ -43,7 +45,7 @@ signals:
 
   void indexingDictionarySignal( QString dictionaryName );
 
-private:
+public:
 
   virtual void indexingDictionary( string const & dictionaryName ) throw();
 };
@@ -72,6 +74,9 @@ private:
   vector< Instances::Group > groupInstances;
   ArticleMaker articleMaker;
   ArticleNetworkAccessManager articleNetMgr;
+  QNetworkAccessManager dictNetMgr; // We give dictionaries a separate manager,
+                                    // since their requests can be destroyed
+                                    // in a separate thread
 
   WordFinder wordFinder;
 
@@ -89,6 +94,8 @@ private:
   void updateStatusLine();
   void updateGroupList();
   void makeScanPopup();
+
+  void updateMatchResults( bool finished );
 
   /// Returns the reference to dictionaries stored in the currently active
   /// group, or to all dictionaries if there are no groups.
@@ -118,7 +125,10 @@ private slots:
   void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );
   void translateInputFinished();
-  void prefixMatchComplete( WordFinderResults );
+
+  void prefixMatchUpdated();
+  void prefixMatchFinished();
+ 
   void wordListItemActivated( QListWidgetItem * );
   void wordListSelectionChanged();
 

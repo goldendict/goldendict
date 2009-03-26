@@ -41,11 +41,29 @@ struct Preferences
   Preferences();
 };
 
+/// A MediaWiki network dictionary definition
+struct MediaWiki
+{
+  QString id, name, url;
+  bool enabled;
+
+  MediaWiki(): enabled( false )
+  {}
+
+  MediaWiki( QString const & id_, QString const & name_, QString const & url_,
+             bool enabled_ ):
+    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ) {}
+};
+
+/// All the MediaWikis
+typedef vector< MediaWiki > MediaWikis;
+
 struct Class
 {
   Paths paths;
   Groups groups;
   Preferences preferences;
+  MediaWikis mediawikis;
 
   QString lastMainGroup; // Last used group in main window
   QString lastPopupGroup; // Last used group in popup window

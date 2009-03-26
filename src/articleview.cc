@@ -13,6 +13,8 @@
 #include <mmsystem.h> // For PlaySound
 #endif
 
+using std::list;
+
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           Instances::Groups const & groups_, bool popupView_ ):
   QFrame( parent ),
@@ -67,7 +69,9 @@ void ArticleView::showDefinition( QString const & word, QString const & group )
   req.addQueryItem( "word", word );
   req.addQueryItem( "group", group );
 
-  ui.definition->load( req );
+  ui.definition->setUrl( req );
+  //QApplication::setOverrideCursor( Qt::WaitCursor );
+  ui.definition->setCursor( Qt::WaitCursor );
 }
 
 void ArticleView::showNotFound( QString const & word, QString const & group )
@@ -80,20 +84,20 @@ void ArticleView::showNotFound( QString const & word, QString const & group )
   req.addQueryItem( "group", group );
   req.addQueryItem( "notfound", "1" );
 
-  ui.definition->load( req );
+  ui.definition->setUrl( req );
 }
 
 void ArticleView::showAnticipation()
 {
   ui.definition->setHtml( "" );
-  //ui.definition->setCursor( Qt::WaitCursor );
-  QApplication::setOverrideCursor( Qt::WaitCursor );
+  ui.definition->setCursor( Qt::WaitCursor );
+  //QApplication::setOverrideCursor( Qt::WaitCursor );
 }
 
 void ArticleView::loadFinished( bool )
 {
-  //ui.definition->unsetCursor();
-  QApplication::restoreOverrideCursor();
+  ui.definition->unsetCursor();
+  //QApplication::restoreOverrideCursor();
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -159,16 +163,26 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
                     getGroup( ref ) );
   else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
+  {
+    if ( url.hasFragment() )
+    {
+      ui.definition->page()->currentFrame()->evaluateJavaScript(
+        QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
+    }
+    else
     showDefinition( url.path().mid( 1 ),
                     getGroup( ref ) );
+  }
   else
   if ( url.scheme() == "bres" || url.scheme() == "gdau" )
   {
     // Download it
 
-    vector< char > data;
-    bool found = false;
+    // Clear any pending ones
 
+    resourceDownloadRequests.clear();
+
+    resourceDownloadUrl = url;
 
     if ( url.scheme() == "gdau" && url.host() == "search" && groups.size() )
     {
@@ -183,95 +197,69 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
         {
           for( unsigned y = 0; y < groups[ x ].dictionaries.size(); ++y )
           {
-            try
-            {
+            sptr< Dictionary::DataRequest > req = 
               groups[ x ].dictionaries[ y ]->getResource(
-                url.path().mid( 1 ).toUtf8().data(), data );
+                url.path().mid( 1 ).toUtf8().data() );
 
-              found = true;
-              break;
-            }
-            catch( Dictionary::exNoSuchResource & )
+            if ( req->isFinished() && req->dataSize() >= 0 )
             {
-              continue;
+              // A request was instantly finished with success.
+              // If we've managed to spawn some lingering requests alrady,
+              // erase them.
+              resourceDownloadRequests.clear();
+
+              // Handle the result
+              resourceDownloadRequests.push_back( req );
+              resourceDownloadFinished();
+
+              return;
+            }
+            else
+            if ( !req->isFinished() )
+            {
+              resourceDownloadRequests.push_back( req );
+
+              connect( req.get(), SIGNAL( finished() ),
+                       this, SLOT( resourceDownloadFinished() ) );
             }
           }
-          break;
         }
+    }
+    else
+    {
+      // Normal resource download
+      QString contentType;
+
+      sptr< Dictionary::DataRequest > req = 
+        articleNetMgr.getResource( url, contentType );
+
+      if ( req->isFinished() && req->dataSize() >= 0 )
+      {
+        // Have data ready, handle it
+        resourceDownloadRequests.push_back( req );
+        resourceDownloadFinished();
+
+        return;
+      }
+      else
+      if ( !req->isFinished() )
+      {
+        // Queue to be handled when done
+
+        resourceDownloadRequests.push_back( req );
+
+        connect( req.get(), SIGNAL( finished() ),
+                 this, SLOT( resourceDownloadFinished() ) );
+      }
     }
 
     QString contentType;
 
-    if ( !found && !articleNetMgr.getResource( url, data, contentType ) )
+    if ( resourceDownloadRequests.empty() ) // No requests were queued
     {
       QMessageBox::critical( this, tr( "GoldenDict" ), tr( "The referenced resource doesn't exist." ) );
       return;
     }
-
-    if ( url.scheme() == "gdau" )
-    {
-#ifdef Q_OS_WIN32
-      // Windows-only: use system PlaySound function
-
-      if ( winWavData.size() )
-        PlaySoundA( 0, 0, 0 ); // Stop any currently playing sound to make sure
-                               // previous data isn't used anymore
-                               // 
-      winWavData = data;
-
-      PlaySoundA( &winWavData.front(), 0,
-                  SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
-#else
-
-      // Use external viewer to play the file
-      try
-      {
-        ExternalViewer * viewer = new ExternalViewer( this, data, ".wav", "play" );
-
-        try
-        {
-          viewer->start();
-
-          // Once started, it will erase itself
-        }
-        catch( ... )
-        {
-          delete viewer;
-          throw;
-        }
-      }
-      catch( ExternalViewer::Ex & e )
-      {
-        QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
-      }
-      
-#endif
-
-      return;
-    }
-    
-    // Create a temporary file
-
-    
-    // Remove the one previously used, if any
-    cleanupTemp();
-
-    {
-      QTemporaryFile tmp( QDir::temp().filePath( "XXXXXX-" + url.path().section( '/', -1 ) ), this );
-  
-      if ( !tmp.open() || tmp.write( &data.front(), data.size() ) != data.size() )
-      {
-        QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to create temporary file." ) );
-        return;
-      }
-
-      tmp.setAutoRemove( false );
-  
-      desktopOpenedTempFile = tmp.fileName();
-    }
-
-    if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( desktopOpenedTempFile ) ) )
-      QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
   }
   else
   if ( url.scheme() == "http" || url.scheme() == "https" ||
@@ -348,6 +336,113 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   printf( "url = %s\n", r.linkUrl().toString().toLocal8Bit().data() );
   printf( "title = %s\n", r.title().toLocal8Bit().data() );
 #endif
+}
+
+void ArticleView::resourceDownloadFinished()
+{
+  if ( resourceDownloadRequests.empty() )
+    return; // Stray signal
+
+  // Find any finished resources
+  for( list< sptr< Dictionary::DataRequest > >::iterator i =
+       resourceDownloadRequests.begin(); i != resourceDownloadRequests.end(); )
+  {
+    if ( (*i)->isFinished() )
+    {
+      if ( (*i)->dataSize() >= 0 )
+      {
+        // Ok, got one finished, all others are irrelevant now
+
+        vector< char > const & data = (*i)->getFullData();
+
+        if ( resourceDownloadUrl.scheme() == "gdau" )
+        {
+          #ifdef Q_OS_WIN32
+          // Windows-only: use system PlaySound function
+
+          if ( winWavData.size() )
+            PlaySoundA( 0, 0, 0 ); // Stop any currently playing sound to make sure
+                                   // previous data isn't used anymore
+                                   // 
+          winWavData = data;
+
+          PlaySoundA( &winWavData.front(), 0,
+                      SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+          #else
+
+          // Use external viewer to play the file
+          try
+          {
+            ExternalViewer * viewer = new ExternalViewer( this, data, ".wav", "mplayer" );
+
+            try
+            {
+              viewer->start();
+
+              // Once started, it will erase itself
+            }
+            catch( ... )
+            {
+              delete viewer;
+              throw;
+            }
+          }
+          catch( ExternalViewer::Ex & e )
+          {
+            QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
+          }
+
+          #endif
+        }
+        else
+        {
+          // Create a temporary file
+  
+  
+          // Remove the one previously used, if any
+          cleanupTemp();
+  
+          {
+            QTemporaryFile tmp(
+              QDir::temp().filePath( "XXXXXX-" + resourceDownloadUrl.path().section( '/', -1 ) ), this );
+
+            if ( !tmp.open() || tmp.write( &data.front(), data.size() ) != data.size() )
+            {
+              QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to create temporary file." ) );
+              return;
+            }
+  
+            tmp.setAutoRemove( false );
+  
+            desktopOpenedTempFile = tmp.fileName();
+          }
+  
+          if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( desktopOpenedTempFile ) ) )
+            QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
+        }
+
+        // Ok, whatever it was, it's finished. Remove this and any other
+        // requests and finish.
+
+        resourceDownloadRequests.clear();
+
+        return;
+      }
+      else
+      {
+        // This one had no data. Erase  it.
+        resourceDownloadRequests.erase( i++ );
+      }
+    }
+    else // Unfinished, try the next one.
+      i++;
+  }
+
+  if ( resourceDownloadRequests.empty() )
+  {
+    // No requests suceeded.
+    QMessageBox::critical( this, tr( "GoldenDict" ), tr( "The referenced resource failed to download." ) );
+  }
 }
 
 void ArticleView::showEvent( QShowEvent * ev )

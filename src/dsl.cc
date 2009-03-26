@@ -75,6 +75,7 @@ bool indexIsOldOrBad( string const & indexFile )
 
 class DslDictionary: public BtreeIndexing::BtreeDictionary
 {
+  Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
   ChunkedStorage::Reader chunks;
@@ -101,18 +102,20 @@ public:
   virtual unsigned long getWordCount() throw()
   { return 0; }
 
+  #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
     throw( std::exception )
   {
     return vector< wstring >();
   }
+  #endif
 
-  virtual string getArticle( wstring const &, vector< wstring > const & alts )
-    throw( Dictionary::exNoSuchWord, std::exception );
+  virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
+                                                      vector< wstring > const & alts )
+    throw( std::exception );
 
-  virtual void getResource( string const & name,
-                            vector< char > & data )
-    throw( Dictionary::exNoSuchResource, std::exception );
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name )
+    throw( std::exception );
 
 private:
 
@@ -191,7 +194,7 @@ DslDictionary::DslDictionary( string const & id,
 
   idx.seek( idxHeader.indexOffset );
 
-  openIndex( idx );
+  openIndex( idx, idxMutex );
 }
 
 DslDictionary::~DslDictionary()
@@ -210,7 +213,13 @@ void DslDictionary::loadArticle( uint32_t address,
   {
     vector< char > chunk;
   
-    char * articleProps = chunks.getBlock( address, chunk );
+    char * articleProps;
+
+    {
+      Mutex::Lock _( idxMutex );
+      
+      articleProps = chunks.getBlock( address, chunk );
+    }
   
     uint32_t articleOffset, articleSize;
   
@@ -508,9 +517,9 @@ vector< wstring > StardictDictionary::findHeadwordsForSynonym( wstring const & s
 #endif
 
 
-string DslDictionary::getArticle( wstring const & word,
-                                       vector< wstring > const & alts )
-  throw( Dictionary::exNoSuchWord, std::exception )
+sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
+                                                           vector< wstring > const & alts )
+  throw( std::exception )
 {
   vector< WordArticleLink > chain = findArticles( word );
 
@@ -585,7 +594,7 @@ string DslDictionary::getArticle( wstring const & word,
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
-    throw Dictionary::exNoSuchWord();
+    return new Dictionary::DataRequestInstant( false );
 
   string result;
 
@@ -597,7 +606,14 @@ string DslDictionary::getArticle( wstring const & word,
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
     result += i->second;
 
-  return result;
+  Dictionary::DataRequestInstant * ret =
+    new Dictionary::DataRequestInstant( true );
+
+  ret->getData().resize( result.size() );
+
+  memcpy( &(ret->getData().front()), result.data(), result.size() );
+
+  return ret;
 }
 
 void loadFromFile( string const & n, vector< char > & data )
@@ -613,9 +629,8 @@ void loadFromFile( string const & n, vector< char > & data )
   f.read( &data.front(), data.size() );
 }
 
-void DslDictionary::getResource( string const & name,
-                                 vector< char > & data )
-  throw( Dictionary::exNoSuchResource, std::exception )
+sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
+  throw( std::exception )
 {
   string n = 
     FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
@@ -626,6 +641,11 @@ void DslDictionary::getResource( string const & name,
 
   try
   {
+    sptr< Dictionary::DataRequestInstant > result = new
+      Dictionary::DataRequestInstant( true );
+
+    vector< char > & data = result->getData();
+    
     try
     {
       loadFromFile( n, data );
@@ -646,25 +666,27 @@ void DslDictionary::getResource( string const & name,
       QImage img = QImage::fromData( (unsigned char *) &data.front(),
                                      data.size() );
 
-      if ( img.isNull() )
+      if ( !img.isNull() )
       {
-        // Failed to load, return data as is
-        return;
+        // Managed to load -- now store it back as BMP
+
+        QByteArray ba;
+        QBuffer buffer( &ba );
+        buffer.open( QIODevice::WriteOnly );
+        img.save( &buffer, "BMP" );
+  
+        data.resize( buffer.size() );
+  
+        memcpy( &data.front(), buffer.data(), data.size() );
       }
-
-      QByteArray ba;
-      QBuffer buffer( &ba );
-      buffer.open( QIODevice::WriteOnly );
-      img.save( &buffer, "BMP" );
-
-      data.resize( buffer.size() );
-
-      memcpy( &data.front(), buffer.data(), data.size() );
     }
+
+    return result;
   }
   catch( File::Ex & )
   {
-    throw Dictionary::exNoSuchResource();
+    // No such resource
+    return new Dictionary::DataRequestInstant( false );
   }
 }
 
@@ -723,10 +745,10 @@ static void findCorrespondingFiles( string const & ifo,
 }
 #endif
 
-vector< sptr< Dictionary::Class > > Format::makeDictionaries(
-                                            vector< string > const & fileNames,
-                                            string const & indicesDir,
-                                            Dictionary::Initializing & initializing )
+vector< sptr< Dictionary::Class > > makeDictionaries(
+                                      vector< string > const & fileNames,
+                                      string const & indicesDir,
+                                      Dictionary::Initializing & initializing )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -759,11 +781,11 @@ vector< sptr< Dictionary::Class > > Format::makeDictionaries(
            tryPossibleName( baseName + "_ABRV.DSL.dz", abrvFileName ) )
         dictFiles.push_back( abrvFileName );
 
-      string dictId = makeDictionaryId( dictFiles );
+      string dictId = Dictionary::makeDictionaryId( dictFiles );
 
       string indexFile = indicesDir + dictId;
 
-      if ( needToRebuildIndex( dictFiles, indexFile ) ||
+      if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
            indexIsOldOrBad( indexFile ) )
       {
         DslScanner scanner( *i );

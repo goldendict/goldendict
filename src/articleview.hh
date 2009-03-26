@@ -6,6 +6,7 @@
 
 #include <QWebView>
 #include <QUrl>
+#include <list>
 #include "article_netmgr.hh"
 #include "instances.hh"
 #include "ui_articleview.h"
@@ -27,7 +28,14 @@ class ArticleView: public QFrame
   vector< char > winWavData;
 #endif
 
-  // For resources opened via desktop services
+  /// Any resource we've decided to download off the dictionary gets stored here.
+  /// Full vector capacity is used for search requests, where we have to make
+  /// a multitude of requests.
+  std::list< sptr< Dictionary::DataRequest > > resourceDownloadRequests;
+  /// Url of the resourceDownloadRequests
+  QUrl resourceDownloadUrl;
+
+  /// For resources opened via desktop services
   QString desktopOpenedTempFile;
 
 public:
@@ -82,6 +90,8 @@ private slots:
   void handleUrlChanged( QUrl const & url );
   void linkClicked( QUrl const & );
   void contextMenuRequested( QPoint const & );
+
+  void resourceDownloadFinished();
 
 private:
 

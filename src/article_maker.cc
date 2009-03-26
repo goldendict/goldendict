@@ -5,15 +5,13 @@
 #include "config.hh"
 #include "htmlescape.hh"
 #include "utf8.hh"
-#include "dictlock.hh"
 #include <QFile>
-#include <set>
-
 
 using std::vector;
 using std::string;
 using std::wstring;
 using std::set;
+using std::list;
 
 ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictionaries_,
                             vector< Instances::Group > const & groups_ ):
@@ -26,6 +24,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
                                           QString const & icon )
 {
   string result =
+    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
     "<html><head>"
     "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 
@@ -56,12 +55,21 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   return result;
 }
 
-string ArticleMaker::makeDefinitionFor( QString const & inWord,
-                                        QString const & group ) const
+std::string ArticleMaker::makeNotFoundBody( QString const & word, QString const & group )
+{
+
+  return string( "<div class=\"gdnotfound\"><p>" ) +
+      tr( "No translation for <b>%1</b> was found in group <b>%2</b>." ).
+        arg( QString::fromUtf8( Html::escape( word.toUtf8().data() ).c_str() ) ).
+        arg( QString::fromUtf8( Html::escape( group.toUtf8().data() ).c_str() ) ).
+          toUtf8().data()
+        +"</p></div>";
+}
+
+sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
+  QString const & inWord, QString const & group ) const
 {
   printf( "group = %ls\n", group.toStdWString().c_str() );
-
-  wstring word = inWord.trimmed().toStdWString();
 
   if ( group == "internal:about" )
   {
@@ -74,6 +82,7 @@ string ArticleMaker::makeDefinitionFor( QString const & inWord,
 "<h3 align=\"center\">Welcome to <b>GoldenDict</b>!</h3>"
 "<p>To start working with the program, first add some directory paths where to search "
 "for the dictionary files at <b>Edit|Sources</b>. Note that each subdirectory is to be added separately. "
+"You can also set up Wikipedia sources there. "
 "After that, you can organize all the dictionaries found into groups "
 "in <b>Edit|Groups</b>."
 "<p>You can also check out the available program preferences at <b>Edit|Preferences</b>. "
@@ -115,9 +124,14 @@ string ArticleMaker::makeDefinitionFor( QString const & inWord,
     
     result += "</body></html>";
 
-    return result;
+    sptr< Dictionary::DataRequestInstant > r = new Dictionary::DataRequestInstant( true );
+
+    r->getData().resize( result.size() );
+    memcpy( &( r->getData().front() ), result.data(), result.size() );
+
+    return r;
   }
-  
+
   // Find the given group
 
   Instances::Group const * activeGroup = 0;
@@ -134,66 +148,204 @@ string ArticleMaker::makeDefinitionFor( QString const & inWord,
   std::vector< sptr< Dictionary::Class > > const & activeDicts =
     activeGroup ? activeGroup->dictionaries : dictionaries;
 
-  string result = makeHtmlHeader( inWord.trimmed(),
+  string header = makeHtmlHeader( inWord.trimmed(),
                                   activeGroup && activeGroup->icon.size() ?
                                     activeGroup->icon : QString() );
 
-  DictLock _;
+  return new ArticleRequest( inWord.trimmed(), group, activeDicts, header );
+}
+
+sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
+  QString const & word, QString const & group ) const
+{
+  string result = makeHtmlHeader( word, QString() ) + makeNotFoundBody( word, group ) +
+    "</body></html>";
+
+  sptr< Dictionary::DataRequestInstant > r = new Dictionary::DataRequestInstant( true );
+
+  r->getData().resize( result.size() );
+  memcpy( &( r->getData().front() ), result.data(), result.size() );
+
+  return r;
+}
+
+//////// ArticleRequest
+
+ArticleRequest::ArticleRequest(
+  QString const & word_, QString const & group_,
+  vector< sptr< Dictionary::Class > > const & activeDicts_,
+  string const & header ):
+    word( word_ ), group( group_ ), activeDicts( activeDicts_ ),
+    altsDone( false ), bodyDone( false ), foundAnyDefinitions( false )
+{
+  // No need to lock dataMutex on construction
+
+  hasAnyData = true;
+
+  data.resize( header.size() );
+  memcpy( &data.front(), header.data(), header.size() );
 
   // Accumulate main forms
 
-  vector< wstring > alts;
-
+  for( unsigned x = 0; x < activeDicts.size(); ++x )
   {
-    set< wstring > altsSet;
+    sptr< Dictionary::WordSearchRequest > s = activeDicts[ x ]->findHeadwordsForSynonym( word.toStdWString() );
+
+    connect( s.get(), SIGNAL( finished() ),
+             this, SLOT( altSearchFinished() ) );
+
+    altSearches.push_back( s );
+  }
+
+  altSearchFinished(); // Handle any ones which have already finished
+}
+
+void ArticleRequest::altSearchFinished()
+{
+  if ( altsDone )
+    return;
+  
+  // Check every request for finishing
+  for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
+         altSearches.begin(); i != altSearches.end(); )
+  {
+    if ( (*i)->isFinished() )
+    {
+      // This one's finished
+      for( size_t count = (*i)->matchesCount(), x = 0; x < count; ++x )
+        alts.insert( (**i)[ x ].word );
+
+      altSearches.erase( i++ );
+    }
+    else
+      ++i;
+  }
+
+  if ( altSearches.empty() )
+  {
+    printf( "alts finished\n" );
+    
+    // They all've finished! Now we can look up bodies
+
+    altsDone = true; // So any pending signals in queued mode won't mess us up
+
+    vector< wstring > altsVector( alts.begin(), alts.end() );
+    
+    for( unsigned x = 0; x < altsVector.size(); ++x )
+    {
+      printf( "Alt: %ls\n", altsVector[ x ].c_str() );
+    }
+
+    wstring wordStd = word.toStdWString();
 
     for( unsigned x = 0; x < activeDicts.size(); ++x )
     {
-      vector< wstring > found = activeDicts[ x ]->findHeadwordsForSynonym( word );
+      sptr< Dictionary::DataRequest > r =
+        activeDicts[ x ]->getArticle( wordStd, altsVector );
 
-      altsSet.insert( found.begin(), found.end() );
+      connect( r.get(), SIGNAL( finished() ),
+               this, SLOT( bodyFinished() ) );
+
+      bodyRequests.push_back( r );
     }
 
-    alts.insert( alts.begin(), altsSet.begin(), altsSet.end() );
+    bodyFinished(); // Handle any ones which have already finished
   }
-
-  for( unsigned x = 0; x < alts.size(); ++x )
-  {
-    printf( "Alt: %ls\n", alts[ x ].c_str() );
-  }
-
-  for( unsigned x = 0; x < activeDicts.size(); ++x )
-  {
-    try
-    {
-      string body = activeDicts[ x ]->getArticle( word, alts );
-
-      printf( "From %s: %s\n", activeDicts[ x ]->getName().c_str(), body.c_str() );
-
-      result += string( "<div class=\"gddictname\">" ) +
-        tr( "From " ).toUtf8().data() +
-        Html::escape( activeDicts[ x ]->getName() ) + "</div>" + body;
-    }
-    catch( Dictionary::exNoSuchWord & )
-    {
-      continue;
-    }
-  }
-
-  result += "</body></html>";
-
-  return result;
 }
 
-string ArticleMaker::makeNotFoundTextFor( QString const & word,
-                                          QString const & group ) const
+void ArticleRequest::bodyFinished()
 {
-  return makeHtmlHeader( word, QString() ) +
-    "<div class=\"gdnotfound\"><p>" +
-      tr( "No translation for <b>%1</b> was found in group <b>%2</b>." ).
-        arg( QString::fromUtf8( Html::escape( word.toUtf8().data() ).c_str() ) ).
-        arg( QString::fromUtf8(Html::escape( group.toUtf8().data() ).c_str() ) ).
-          toUtf8().data()
-        +"</p></div>"
-         "</body></html>";
+  if ( bodyDone )
+    return;
+
+  printf( "some body finished\n" );
+  
+  bool wasUpdated = false;
+  
+  while ( bodyRequests.size() )
+  {
+    // Since requests should go in order, check the first one first
+    if ( bodyRequests.front()->isFinished() )
+    {
+      // Good
+
+      printf( "one finished.\n" );
+
+      Dictionary::DataRequest & req = *bodyRequests.front();
+
+      QString errorString = req.getErrorString();
+
+      if ( req.dataSize() >= 0 || errorString.size() )
+      {
+        string head = string( "<div class=\"gddictname\">" ) +
+          Html::escape(
+            tr( "From %1" ).arg( QString::fromUtf8( activeDicts[ activeDicts.size() - bodyRequests.size() ]->getName().c_str() ) ).toUtf8().data() )
+           + "</div>";
+
+        if ( errorString.size() )
+        {
+          head += "<div class=\"gderrordesc\">" +
+            Html::escape( tr( "Query error: %1" ).arg( errorString ).toUtf8().data() )
+          + "</div>";
+        }
+
+        Mutex::Lock _( dataMutex );
+  
+        size_t offset = data.size();
+        
+        data.resize( data.size() + head.size() + ( req.dataSize() > 0 ? req.dataSize() : 0 ) );
+  
+        memcpy( &data.front() + offset, head.data(), head.size() );
+
+        if ( req.dataSize() > 0 )
+          bodyRequests.front()->getDataSlice( 0, req.dataSize(),
+                                              &data.front() + offset + head.size() );
+
+        wasUpdated = true;
+
+        foundAnyDefinitions = true;
+      }
+      printf( "erasing..\n" );
+      bodyRequests.pop_front();
+      printf( "erase done..\n" );
+    }
+    else
+    {
+        printf( "one not finished.\n" );
+        break;
+    }
+  }
+
+  if ( bodyRequests.empty() )
+  {
+    // No requests left, end the article
+
+    bodyDone = true;
+    
+    {
+      string footer;
+
+      if ( !foundAnyDefinitions )
+      {
+        // No definitions were ever found, say so to the user.
+        footer += ArticleMaker::makeNotFoundBody( word, group );
+      }
+
+      footer += "</body></html>";
+
+      Mutex::Lock _( dataMutex );
+  
+      size_t offset = data.size();
+      
+      data.resize( data.size() + footer.size() );
+  
+      memcpy( &data.front() + offset, footer.data(), footer.size() );
+    }
+
+    finish();
+  }
+  else
+  if ( wasUpdated )
+    update();
 }
+

@@ -28,6 +28,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   mouseEnteredOnce( false )
 {
   ui.setupUi( this );
+
+  ui.queryError->hide();
+
   definition = new ArticleView( ui.outerFrame, articleNetMgr, groups, true ),
   ui.mainLayout->addWidget( definition );
 
@@ -62,8 +65,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
 
-  connect( wordFinder.qobject(), SIGNAL( prefixMatchComplete( WordFinderResults ) ),
-           this, SLOT( prefixMatchComplete( WordFinderResults ) ) );
+  connect( &wordFinder, SIGNAL( finished() ),
+           this, SLOT( prefixMatchFinished() ) );
 
   connect( ui.word, SIGNAL( clicked() ),
            this, SLOT( initialWordClicked() ) );
@@ -205,8 +208,8 @@ void ScanPopup::currentGroupChanged( QString const & gr )
 
 void ScanPopup::initiateTranslation()
 {
-  definition->showAnticipation();
-  wordFinder.prefixMatch( inputWord, &getActiveDicts() );
+  definition->showDefinition( inputWord, ui.groupList->currentText() );
+  wordFinder.prefixMatch( inputWord, getActiveDicts() );
 }
 
 vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
@@ -306,13 +309,19 @@ void ScanPopup::showEvent( QShowEvent * ev )
     ui.groupList->hide();
 }
 
-void ScanPopup::prefixMatchComplete( WordFinderResults r )
+void ScanPopup::prefixMatchFinished()
 {
-  // Check that the request wasn't already overridden by another one and
-  // that there's a window there at all
-  if ( isVisible() && r.requestStr == inputWord &&
-       r.requestDicts == &getActiveDicts() )
+  // Check that there's a window there at all
+  if ( isVisible() )
   {
+    if ( wordFinder.getErrorString().size() )
+    {
+      ui.queryError->setToolTip( wordFinder.getErrorString() );
+      ui.queryError->show();
+    }
+    else
+      ui.queryError->hide();
+
     // Find the matches that aren't prefix. If there're more than one,
     // show the diacritic toolbutton. If there are prefix matches, show
     // the prefix toolbutton.
@@ -322,12 +331,14 @@ void ScanPopup::prefixMatchComplete( WordFinderResults r )
 
     wstring foldedInputWord = Folding::apply( inputWord.toStdWString() );
 
-    for( unsigned x = 0; x < r.results.size(); ++x )
+    std::vector< QString > const & results = wordFinder.getPrefixMatchResults();
+    
+    for( unsigned x = 0; x < results.size(); ++x )
     {
-      if ( Folding::apply( r.results[ x ].toStdWString() ) == foldedInputWord )
-        diacriticMatches.push_back( r.results[ x ] );
+      if ( Folding::apply( results[ x ].toStdWString() ) == foldedInputWord )
+        diacriticMatches.push_back( results[ x ] );
       else
-        prefixMatches.push_back( r.results[ x ] );
+        prefixMatches.push_back( results[ x ] );
     }
 
     if ( diacriticMatches.size() > 1 )
@@ -345,14 +356,6 @@ void ScanPopup::prefixMatchComplete( WordFinderResults r )
     }
     else
       ui.prefixButton->hide();
-
-    if ( diacriticMatches.size() )
-      definition->showDefinition( diacriticMatches[ 0 ], ui.groupList->currentText() );
-    else
-    {
-      // No matches
-      definition->showNotFound( inputWord, ui.groupList->currentText() );
-    }
   }
 }
 

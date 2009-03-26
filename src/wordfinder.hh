@@ -4,51 +4,43 @@
 #ifndef __WORDFINDER_HH_INCLUDED__
 #define __WORDFINDER_HH_INCLUDED__
 
-#include <QThread>
+#include <list>
+#include <map>
+#include <QObject>
+#include <QTimer>
 #include <QMutex>
 #include <QWaitCondition>
+#include <QRunnable>
 #include "dictionary.hh"
 
-
-/// This struct represents results of a WordFinder match operation.
-/// We need to separate this since it's needed to register is as a metatype
-/// for the signal-slot connections to be able to pass it in queued mode.
-struct WordFinderResults
-{
-  /// The initial request parameters. They are passed back so that it'd be
-  /// possible to tell the results apart from any previously cancelled
-  /// operations.
-  QString requestStr;
-  std::vector< sptr< Dictionary::Class > > const * requestDicts;
-
-  /// The results themselves
-  std::vector< QString > results;
-
-  WordFinderResults()
-  {}
-
-  WordFinderResults( QString const & requestStr_,
-                     std::vector< sptr< Dictionary::Class > > const * requestDicts_ ):
-    requestStr( requestStr_ ), requestDicts( requestDicts_ )
-  {}
-};
-
-/// This component takes care of finding words in dictionaries asyncronously,
-/// in another thread. This means the GUI doesn't get blocked during the
-/// sometimes lenghtly process of finding words.
-class WordFinder: QThread
+/// This component takes care of finding words. The search is asyncronous.
+/// This means the GUI doesn't get blocked during the sometimes lenghtly
+/// process of finding words.
+class WordFinder: public QObject
 {
   Q_OBJECT
 
+  std::vector< QString > searchResults;
+  QString searchErrorString;
+  std::list< sptr< Dictionary::WordSearchRequest > > queuedRequests,
+                                                     finishedRequests;
+  bool searchInProgress;
+
+  QTimer updateResultsTimer;
+
+  // Saved search params
+  bool searchQueued;
+  QString inputWord;
+  std::vector< sptr< Dictionary::Class > > const * inputDicts;
+
+  // Maps lowercased string to the original one. This catches all duplicates
+  // without case sensitivity
+  std::map< std::wstring, std::wstring > results;
+    
 public:
 
   WordFinder( QObject * parent );
   ~WordFinder();
-
-  /// Allows accessing the otherwise inaccessible QObject indirect base,
-  /// which is QThread's base. This is needed to connect signals of the object.
-  QObject * qobject()
-  { return this; }
 
   /// Do the standard prefix-match search in the given list of dictionaries.
   /// Some dictionaries might only support exact matches -- for them, only
@@ -57,35 +49,53 @@ public:
   /// matches from different dictionaries are merged together.
   /// If there already was a prefixMatch operation underway, it gets cancelled
   /// and the new one replaces it.
-  /// The dictionaries and the containing vector get locked during the search
-  /// using the DictLock object. Be sure you do that too in case you'd want
-  /// to work with them during the search underway.
   void prefixMatch( QString const &,
-                    std::vector< sptr< Dictionary::Class > > const * );
+                    std::vector< sptr< Dictionary::Class > > const & );
+  
+  /// Returns the vector containing search results from the last prefixMatch()
+  /// operation. If it didn't finish yet, the result is not final and may
+  /// be changing over time.
+  std::vector< QString > const & getPrefixMatchResults() const
+  { return searchResults; }
+
+  /// Returns a human-readable error string for the last finished request. Empty
+  /// string means it finished without any error.
+  QString const & getErrorString()
+  { return searchErrorString; }
+
+  /// Cancels any pending search operation, if any.
+  void cancel();
+
+  /// Cancels any pending search operation, if any, and makes sure no pending
+  /// requests exist, and hence no dictionaries are used anymore. Unlike
+  /// cancel(), this may take some time to finish.
+  void clear();
 
 signals:
 
-  /// This singal gets emitted from another thread and indicates that the
-  /// previously requested prefixMatch() operation was finished. See the
-  /// WordFinderResults structure description for further details.
-  void prefixMatchComplete( WordFinderResults );
+  /// Indicates that the search has got some more results, and continues
+  /// searching.
+  void updated();
+
+  /// Idicates that the search has finished.
+  void finished();
+
+private slots:
+
+  /// Called each time one of the requests gets finished
+  void requestFinished();
+
+  /// Called by updateResultsTimer to update searchResults and signal updated()
+  void updateResults();
 
 private:
 
-  QMutex opMutex;
-  QWaitCondition opCondition;
+  // Starts the previously queued search.
+  void startSearch();
 
-  enum Op
-  {
-    NoOp,
-    QuitOp,
-    DoPrefixMatch
-  } op;
-
-  QString prefixMatchString;
-  std::vector< sptr< Dictionary::Class > > const * prefixMatchDicts;
-
-  virtual void run();
+  // Cancels all searches. Useful to do before destroying them all, since they
+  // would cancel in parallel.
+  void cancelSearches();
 };
 
 #endif

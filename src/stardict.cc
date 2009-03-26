@@ -91,6 +91,7 @@ bool indexIsOldOrBad( string const & indexFile )
 class StardictDictionary: public BtreeIndexing::BtreeDictionary
 {
   Ifo ifo;
+  Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
   ChunkedStorage::Reader chunks;
@@ -116,11 +117,12 @@ public:
   virtual unsigned long getWordCount() throw()
   { return ifo.wordcount + ifo.synwordcount; }
 
-  virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
+  virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     throw( std::exception );
 
-  virtual string getArticle( wstring const &, vector< wstring > const & alts )
-    throw( Dictionary::exNoSuchWord, std::exception );
+  virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
+                                                      vector< wstring > const & alts )
+    throw( std::exception );
 
 private:
 
@@ -157,7 +159,7 @@ StardictDictionary::StardictDictionary( string const & id,
 
   idx.seek( idxHeader.indexOffset );
 
-  openIndex( idx );
+  openIndex( idx, idxMutex );
 }
 
 StardictDictionary::~StardictDictionary()
@@ -172,6 +174,8 @@ void StardictDictionary::getArticleProps( uint32_t articleAddress,
 {
   vector< char > chunk;
 
+  Mutex::Lock _( idxMutex );
+  
   char * articleData = chunks.getBlock( articleAddress, chunk );
 
   memcpy( &offset, articleData, sizeof( uint32_t ) );
@@ -390,10 +394,11 @@ void StardictDictionary::loadArticle( uint32_t address,
   free( articleBody );
 }
 
-vector< wstring > StardictDictionary::findHeadwordsForSynonym( wstring const & str )
+sptr< Dictionary::WordSearchRequest > StardictDictionary::findHeadwordsForSynonym( wstring const & str )
   throw( std::exception )
 {
-  vector< wstring > result;
+  sptr< Dictionary::WordSearchRequestInstant > result =
+    new Dictionary::WordSearchRequestInstant;
 
   vector< WordArticleLink > chain = findArticles( str );
 
@@ -412,16 +417,16 @@ vector< wstring > StardictDictionary::findHeadwordsForSynonym( wstring const & s
     {
       // The headword seems to differ from the input word, which makes the
       // input word its synonym.
-      result.push_back( headwordDecoded );
+      result->getMatches().push_back( headwordDecoded );
     }
   }
 
   return result;
 }
 
-string StardictDictionary::getArticle( wstring const & word,
-                                       vector< wstring > const & alts )
-  throw( Dictionary::exNoSuchWord, std::exception )
+sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & word,
+                                                                vector< wstring > const & alts )
+  throw( std::exception )
 {
   vector< WordArticleLink > chain = findArticles( word );
 
@@ -473,7 +478,7 @@ string StardictDictionary::getArticle( wstring const & word,
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
-    throw Dictionary::exNoSuchWord();
+    return new Dictionary::DataRequestInstant( false ); // No such word
 
   string result;
 
@@ -502,7 +507,14 @@ string StardictDictionary::getArticle( wstring const & word,
       result += cleaner;
   }
 
-  return result;
+  Dictionary::DataRequestInstant * ret =
+    new Dictionary::DataRequestInstant( true );
+
+  ret->getData().resize( result.size() );
+
+  memcpy( &(ret->getData().front()), result.data(), result.size() );
+
+  return ret;
 }
 
 
@@ -743,10 +755,10 @@ static void handleIdxSynFile( string const & fileName,
   printf( "%u entires made\n", indexedWords.size() );
 }
 
-vector< sptr< Dictionary::Class > > Format::makeDictionaries(
-                                            vector< string > const & fileNames,
-                                            string const & indicesDir,
-                                            Dictionary::Initializing & initializing )
+vector< sptr< Dictionary::Class > > makeDictionaries(
+                                      vector< string > const & fileNames,
+                                      string const & indicesDir,
+                                      Dictionary::Initializing & initializing )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -786,11 +798,11 @@ vector< sptr< Dictionary::Class > > Format::makeDictionaries(
       if ( ifo.synwordcount )
         dictFiles.push_back( synFileName );
 
-      string dictId = makeDictionaryId( dictFiles );
+      string dictId = Dictionary::makeDictionaryId( dictFiles );
 
       string indexFile = indicesDir + dictId;
 
-      if ( needToRebuildIndex( dictFiles, indexFile ) ||
+      if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
            indexIsOldOrBad( indexFile ) )
       {
         // Building the index

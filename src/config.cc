@@ -63,6 +63,15 @@ Class load() throw( exError )
 
     #endif
 
+    c.mediawikis.push_back( MediaWiki( "ae6f89aac7151829681b85f035d54e48", "English Wikipedia", "http://en.wikipedia.org/w", true ) );
+    c.mediawikis.push_back( MediaWiki( "affcf9678e7bfe701c9b071f97eccba3", "English Wiktionary", "http://en.wiktionary.org/w", false ) );
+    c.mediawikis.push_back( MediaWiki( "8e0c1c2b6821dab8bdba8eb869ca7176", "Russian Wikipedia", "http://ru.wikipedia.org/w", false ) );
+    c.mediawikis.push_back( MediaWiki( "b09947600ae3902654f8ad4567ae8567", "Russain Wiktionary", "http://ru.wiktionary.org/w", false ) );
+    c.mediawikis.push_back( MediaWiki( "a8a66331a1242ca2aeb0b4aed361c41d", "German Wikipedia", "http://de.wikipedia.org/w", false ) );
+    c.mediawikis.push_back( MediaWiki( "21c64bca5ec10ba17ff19f3066bc962a", "German Wiktionary", "http://de.wiktionary.org/w", false ) );
+    c.mediawikis.push_back( MediaWiki( "96957cb2ad73a20c7a1d561fc83c253a", "Portuguese Wikipedia", "http://pt.wikipedia.org/w", false ) );
+    c.mediawikis.push_back( MediaWiki( "ed4c3929196afdd93cc08b9a903aad6a", "Portuguese Wiktionary", "http://pt.wiktionary.org/w", false ) );
+
     save( c );
 
     return c;
@@ -121,6 +130,27 @@ Class load() throw( exError )
         g.dictionaries.push_back( dicts.item( y ).toElement().text() );
 
       c.groups.push_back( g );
+    }
+  }
+
+  QDomNode mws = root.namedItem( "mediawikis" );
+
+  if ( !mws.isNull() )
+  {
+    QDomNodeList nl = mws.toElement().elementsByTagName( "mediawiki" );
+
+    for( unsigned x = 0; x < nl.length(); ++x )
+    {
+      QDomElement mw = nl.item( x ).toElement();
+
+      MediaWiki w;
+
+      w.id = mw.attribute( "id" );
+      w.name = mw.attribute( "name" );
+      w.url = mw.attribute( "url" );
+      w.enabled = ( mw.attribute( "enabled" ) == "1" );
+
+      c.mediawikis.push_back( w );
     }
   }
 
@@ -213,6 +243,33 @@ void save( Class const & c ) throw( exError )
 
         dictionary.appendChild( value );
       }
+    }
+  }
+
+  {
+    QDomElement mws = dd.createElement( "mediawikis" );
+    root.appendChild( mws );
+
+    for( MediaWikis::const_iterator i = c.mediawikis.begin(); i != c.mediawikis.end(); ++i )
+    {
+      QDomElement mw = dd.createElement( "mediawiki" );
+      mws.appendChild( mw );
+
+      QDomAttr id = dd.createAttribute( "id" );
+      id.setValue( i->id );
+      mw.setAttributeNode( id );
+
+      QDomAttr name = dd.createAttribute( "name" );
+      name.setValue( i->name );
+      mw.setAttributeNode( name );
+
+      QDomAttr url = dd.createAttribute( "url" );
+      url.setValue( i->url );
+      mw.setAttributeNode( url );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( i->enabled ? "1" : "0" );
+      mw.setAttributeNode( enabled );
     }
   }
 

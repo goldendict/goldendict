@@ -61,12 +61,13 @@ HEADERS += folding.hh \
 	   scanpopup.hh \
 	   articleview.hh \
 	   externalviewer.hh \
-	   dictlock.hh \
 	   wordfinder.hh \
 	   groupcombobox.hh \
 	   keyboardstate.hh \
 	   mouseover.hh \
-	   preferences.hh
+	   preferences.hh \
+	   mutex.hh \
+	   mediawiki.hh
 	  
 
 FORMS += groups.ui dictgroupwidget.ui mainwindow.ui sources.ui initializing.ui\
@@ -79,8 +80,9 @@ SOURCES += folding.cc main.cc dictionary.cc md5.c config.cc sources.cc \
 	   chunkedstorage.cc xdxf2html.cc iconv.cc lsa.cc htmlescape.cc \
 	   dsl.cc dsl_details.cc filetype.cc fsencoding.cc groups.cc \
 	   groups_widgets.cc instances.cc article_maker.cc scanpopup.cc \
-	   articleview.cc externalviewer.cc dictlock.cc wordfinder.cc \
-	   groupcombobox.cc keyboardstate.cc mouseover.cc preferences.cc
+	   articleview.cc externalviewer.cc wordfinder.cc \
+	   groupcombobox.cc keyboardstate.cc mouseover.cc preferences.cc \
+	   mutex.cc mediawiki.cc
 
 win32 {
   SOURCES += mouseover_win32/ThTypes.c

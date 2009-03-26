@@ -48,6 +48,8 @@ struct WordArticleLink
   {}
 };
 
+class BtreeWordSearchRequest;
+
 /// A base for the dictionary that utilizes a btree index build using
 /// buildIndex() function declared below.
 class BtreeDictionary: public Dictionary::Class
@@ -58,17 +60,17 @@ public:
 
   /// This function does the search using the btree index. Derivatives
   /// need not to implement this function.
-  virtual void findExact( wstring const &,
-                          vector< wstring > &,
-                          vector< wstring > &,
-                          unsigned long ) throw( std::exception );
+  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
+                                                             unsigned long )
+    throw( std::exception );
 
 protected:
 
   /// Opens the index. The file must be positioned at the offset previously
   /// returned by buildIndex(). The file reference is saved to be used for
   /// subsequent lookups.
-  void openIndex( File::Class & );
+  /// The mutex is the one to be locked when working with the file.
+  void openIndex( File::Class &, Mutex & );
 
   /// Finds articles that match the given string. A case-insensitive search
   /// is performed.
@@ -76,6 +78,7 @@ protected:
 
 private:
 
+  Mutex * idxFileMutex;
   File::Class * idxFile;
   uint32_t indexNodeSize;
   uint32_t rootOffset;
@@ -107,6 +110,8 @@ private:
   /// Drops any alises which arose due to folding. Only case-folded aliases
   /// are left.
   void antialias( wstring const &, vector< WordArticleLink > & );
+
+  friend class BtreeWordSearchRequest;
 };
 
 // Everything below is for building the index data.

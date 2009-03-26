@@ -6,22 +6,17 @@
 
 #include "dictionary.hh"
 
-/// Support for the ABBYY Lingo .DSL files.
+/// Support for the ABBYY Lingvo .DSL files.
 namespace Dsl {
 
 using std::vector;
 using std::string;
 
-class Format: public Dictionary::Format
-{
-public:
-
-  virtual vector< sptr< Dictionary::Class > > makeDictionaries(
+vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & )
     throw( std::exception );
-};
 
 }
 

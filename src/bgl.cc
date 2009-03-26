@@ -192,6 +192,7 @@ namespace
 
   class BglDictionary: public BtreeIndexing::BtreeDictionary
   {
+    Mutex idxMutex;
     File::Class idx;
     IdxHeader idxHeader;
     string dictionaryName;
@@ -214,15 +215,15 @@ namespace
     virtual unsigned long getWordCount() throw()
     { return idxHeader.wordCount; }
 
-    virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
+    virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
       throw( std::exception );
 
-    virtual string getArticle( wstring const &, vector< wstring > const & alts )
-      throw( Dictionary::exNoSuchWord, std::exception );
+    virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
+                                                        vector< wstring > const & alts )
+      throw( std::exception );
 
-    virtual void getResource( string const & name,
-                              vector< char > & data ) throw( Dictionary::exNoSuchResource,
-                                                             std::exception );
+    virtual sptr< Dictionary::DataRequest > getResource( string const & name )
+      throw( std::exception );
 
   private:
 
@@ -257,7 +258,7 @@ namespace
 
     idx.seek( idxHeader.indexOffset );
 
-    openIndex( idx );
+    openIndex( idx, idxMutex );
   }
 
 
@@ -267,6 +268,8 @@ namespace
   {
     vector< char > chunk;
 
+    Mutex::Lock _( idxMutex );
+    
     char * articleData = chunks.getBlock( offset, chunk );
 
     headword = articleData;
@@ -278,10 +281,12 @@ namespace
                 displayedHeadword.size() + 2 );
   }
 
-  vector< wstring > BglDictionary::findHeadwordsForSynonym( wstring const & str )
-    throw( std::exception )
+  sptr< Dictionary::WordSearchRequest >
+    BglDictionary::findHeadwordsForSynonym( wstring const & str )
+      throw( std::exception )
   {
-    vector< wstring > result;
+    sptr< Dictionary::WordSearchRequestInstant > result =
+      new Dictionary::WordSearchRequestInstant;
 
     vector< WordArticleLink > chain = findArticles( str );
 
@@ -300,7 +305,7 @@ namespace
       {
         // The headword seems to differ from the input word, which makes the
         // input word its synonym.
-        result.push_back( headwordDecoded );
+        result->getMatches().push_back( headwordDecoded );
       }
     }
 
@@ -335,9 +340,9 @@ namespace
     return in;
   }
 
-  string BglDictionary::getArticle( wstring const & word,
-                                    vector< wstring > const & alts )
-    throw( Dictionary::exNoSuchWord, std::exception )
+  sptr< Dictionary::DataRequest > BglDictionary::getArticle( wstring const & word,
+                                                             vector< wstring > const & alts )
+    throw( std::exception )
   {
     vector< WordArticleLink > chain = findArticles( word );
 
@@ -392,7 +397,7 @@ namespace
     }
 
     if ( mainArticles.empty() && alternateArticles.empty() )
-      throw Dictionary::exNoSuchWord();
+      return new Dictionary::DataRequestInstant( false ); // No such word
 
     string result;
 
@@ -424,18 +429,27 @@ namespace
 
     replaceCharsetEntities( result );
 
-    return result;
+    
+    Dictionary::DataRequestInstant * ret =
+      new Dictionary::DataRequestInstant( true );
+
+    ret->getData().resize( result.size() );
+
+    memcpy( &(ret->getData().front()), result.data(), result.size() );
+    
+    return ret;
   }
 
-  void BglDictionary::getResource( string const & name,
-                                   vector< char > & data )
-    throw( Dictionary::exNoSuchResource, std::exception )
+  sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name )
+    throw( std::exception )
   {
     string nameLowercased = name;
 
     for( string::iterator i = nameLowercased.begin(); i != nameLowercased.end();
          ++i )
       *i = tolower( *i );
+
+    Mutex::Lock _( idxMutex );
 
     idx.seek( idxHeader.resourceListOffset );
 
@@ -455,30 +469,33 @@ namespace
 
         idx.seek( offset );
 
-        data.resize( idx.read< uint32_t >() );
+        sptr< Dictionary::DataRequestInstant > result = new
+          Dictionary::DataRequestInstant( true );
+
+        result->getData().resize( idx.read< uint32_t >() );
 
         vector< unsigned char > compressedData( idx.read< uint32_t >() );
 
         idx.read( &compressedData.front(), compressedData.size() );
 
-        unsigned long decompressedLength = data.size();
+        unsigned long decompressedLength = result->getData().size();
 
-        if ( uncompress( (unsigned char *)&data.front(),
+        if ( uncompress( (unsigned char *) &( result->getData().front() ),
                          &decompressedLength,
                          &compressedData.front(),
                          compressedData.size() ) != Z_OK ||
-             decompressedLength != data.size() )
+             decompressedLength != result->getData().size() )
         {
           printf( "Failed to decompress resource %s, ignoring it.\n",
             name.c_str() );
-          throw Dictionary::exNoSuchResource();
+          return new Dictionary::DataRequestInstant( false );
         }
 
-        return;
+        return result;
       }
     }
 
-    throw Dictionary::exNoSuchResource();    
+    return new Dictionary::DataRequestInstant( false );
   }
 
   /// Replaces <CHARSET c="t">1234;</CHARSET> occurences with &#x1234;
@@ -628,10 +645,10 @@ namespace
 
 
 
-vector< sptr< Dictionary::Class > > Format::makeDictionaries(
-                                            vector< string > const & fileNames,
-                                            string const & indicesDir,
-                                            Dictionary::Initializing & initializing )
+vector< sptr< Dictionary::Class > > makeDictionaries(
+                                      vector< string > const & fileNames,
+                                      string const & indicesDir,
+                                      Dictionary::Initializing & initializing )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -654,11 +671,12 @@ vector< sptr< Dictionary::Class > > Format::makeDictionaries(
 
     vector< string > dictFiles( 1, *i );
 
-    string dictId = makeDictionaryId( dictFiles );
+    string dictId = Dictionary::makeDictionaryId( dictFiles );
 
     string indexFile = indicesDir + dictId;
 
-    if ( needToRebuildIndex( dictFiles, indexFile ) || indexIsOldOrBad( indexFile ) )
+    if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
+         indexIsOldOrBad( indexFile ) )
     {
       // Building the index
 

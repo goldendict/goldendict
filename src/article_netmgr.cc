@@ -2,7 +2,6 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "article_netmgr.hh"
-#include "dictlock.hh"
 
 using std::string;
 
@@ -27,40 +26,34 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-    vector< char > data;
     QString contentType;
 
-    if ( getResource( req.url(), data, contentType ) )
-      return new ArticleResourceReply( this, req, data, contentType );
+    sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );
+
+    if ( dr.get() )
+      return new ArticleResourceReply( this, req, dr, contentType );
   }
 
   return QNetworkAccessManager::createRequest( op, req, outgoingData );
 }
 
-bool ArticleNetworkAccessManager::getResource( QUrl const & url,
-                                               vector< char > & data,
-                                               QString & contentType )
+sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
+  QUrl const & url, QString & contentType )
 {
-  //printf( "getResource: %ls\n", url.toString().toStdWString().c_str() );
-  //printf( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
-  //printf( "host: %ls\n", url.host().toStdWString().c_str() );
+  printf( "getResource: %ls\n", url.toString().toStdWString().c_str() );
+  printf( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
+  printf( "host: %ls\n", url.host().toStdWString().c_str() );
 
   if ( url.scheme() == "gdlookup" )
   {
     QString word = url.queryItemValue( "word" );
     QString group = url.queryItemValue( "group" );
 
-    string result = ( url.queryItemValue( "notfound" ) != "1" ) ?
-      articleMaker.makeDefinitionFor( word, group ) :
-      articleMaker.makeNotFoundTextFor( word, group );
-
-    data.resize( result.size() );
-
-    memcpy( &data.front(), result.data(), data.size() );
-
     contentType = "text/html";
 
-    return true;
+    return ( url.queryItemValue( "notfound" ) != "1" ) ?
+      articleMaker.makeDefinitionFor( word, group ) :
+      articleMaker.makeNotFoundTextFor( word, group );
   }
 
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ) &&
@@ -73,69 +66,118 @@ bool ArticleNetworkAccessManager::getResource( QUrl const & url,
 
     bool search = ( id == "search" );
 
-    DictLock _;
-
-    for( unsigned x = 0; x < dictionaries.size(); ++x )
+    if ( !search )
     {
-      if ( search || dictionaries[ x ]->getId() == id )
+      for( unsigned x = 0; x < dictionaries.size(); ++x )
+        if ( dictionaries[ x ]->getId() == id )
+          return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+    }
+    else
+    {
+      // We don't do search requests for now
+#if 0
+      for( unsigned x = 0; x < dictionaries.size(); ++x )
       {
-        try
+        if ( search || dictionaries[ x ]->getId() == id )
         {
-          dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data(),
-                                          data );
+          try
+          {
+            dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data(),
+                                            data );
 
-          return true;
-        }
-        catch( Dictionary::exNoSuchResource & )
-        {
-          if ( !search )
-            break;
+            return true;
+          }
+          catch( Dictionary::exNoSuchResource & )
+          {
+            if ( !search )
+              break;
+          }
         }
       }
+#endif      
     }
   }
 
-  return false;
+  return sptr< Dictionary::DataRequest >();
 }
 
 ArticleResourceReply::ArticleResourceReply( QObject * parent,
-  QNetworkRequest const & req,
-  vector< char > const & data_,
+  QNetworkRequest const & netReq,
+  sptr< Dictionary::DataRequest > const & req_,
   QString const & contentType ):
-  QNetworkReply( parent ), data( data_ ), left( data.size() )
+  QNetworkReply( parent ), req( req_ ), alreadyRead( 0 )
 {
-  setRequest( req );
+  setRequest( netReq );
 
   setOpenMode( ReadOnly );
 
   if ( contentType.size() )
     setHeader( QNetworkRequest::ContentTypeHeader, contentType );
 
-  connect( this, SIGNAL( readyReadSignal() ),
-           this, SLOT( readyReadSlot() ), Qt::QueuedConnection );
-  connect( this, SIGNAL( finishedSignal() ),
-           this, SLOT( finishedSlot() ), Qt::QueuedConnection );
+  connect( req.get(), SIGNAL( updated() ),
+           this, SLOT( reqUpdated() ) );
+  
+  connect( req.get(), SIGNAL( finished() ),
+           this, SLOT( reqFinished() ) );
+  
+  if ( req->isFinished() || req->dataSize() > 0 )
+  {
+    connect( this, SIGNAL( readyReadSignal() ),
+             this, SLOT( readyReadSlot() ), Qt::QueuedConnection );
+    connect( this, SIGNAL( finishedSignal() ),
+             this, SLOT( finishedSlot() ), Qt::QueuedConnection );
 
-  emit readyReadSignal();
-  emit finishedSignal();
+    emit readyReadSignal();
+
+    if ( req->isFinished() )
+    {
+      emit finishedSignal();
+      printf( "In-place finish.\n" );
+    }
+  }
+}
+
+void ArticleResourceReply::reqUpdated()
+{
+  emit readyRead();
+}
+
+void ArticleResourceReply::reqFinished()
+{
+  emit readyRead();
+  finishedSlot();
 }
 
 qint64 ArticleResourceReply::bytesAvailable() const
 {
-  return left + QNetworkReply::bytesAvailable();
+  long avail = req->dataSize();
+  
+  if ( avail < 0 )
+    return 0;
+  
+  return (size_t) avail - alreadyRead +  QNetworkReply::bytesAvailable();
 }
 
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 {
   printf( "====reading %d bytes\n", (int)maxSize );
 
+  bool finished = req->isFinished();
+  
+  long avail = req->dataSize();
+
+  if ( avail < 0 )
+    return finished ? -1 : 0;
+
+  size_t left = (size_t) avail - alreadyRead;
+  
   size_t toRead = maxSize < left ? maxSize : left;
 
-  memcpy( out, &data[ data.size() - left ], toRead );
+  req->getDataSlice( alreadyRead, toRead, out );
 
-  left -= toRead;
+  alreadyRead += toRead;
 
-  if ( !toRead )
+  if ( !toRead && finished )
     return -1;
   else
     return toRead;
@@ -148,6 +190,9 @@ void ArticleResourceReply::readyReadSlot()
 
 void ArticleResourceReply::finishedSlot()
 {
+  if ( req->dataSize() < 0 )
+    error( ContentNotFoundError );
+
   finished();
 }
 

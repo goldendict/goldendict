@@ -134,6 +134,7 @@ Entry::Entry( File::Class & f )
 
 class LsaDictionary: public BtreeIndexing::BtreeDictionary
 {
+  Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
 
@@ -154,12 +155,12 @@ public:
   virtual unsigned long getWordCount() throw()
   { return getArticleCount(); }
 
-  virtual string getArticle( wstring const &, vector< wstring > const & alts )
-    throw( Dictionary::exNoSuchWord, std::exception );
+  virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
+                                                      vector< wstring > const & alts )
+    throw( std::exception );
 
-  virtual void getResource( string const & name,
-                            vector< char > & data ) throw( Dictionary::exNoSuchResource,
-                                                           std::exception );
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name )
+    throw( std::exception );
 };
 
 LsaDictionary::LsaDictionary( string const & id,
@@ -173,12 +174,12 @@ LsaDictionary::LsaDictionary( string const & id,
 
   idx.seek( idxHeader.indexOffset );
 
-  openIndex( idx );
+  openIndex( idx, idxMutex );
 }
 
-string LsaDictionary::getArticle( wstring const & word,
-                                  vector< wstring > const & alts )
-  throw( Dictionary::exNoSuchWord, std::exception )
+sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
+                                                           vector< wstring > const & alts )
+  throw( std::exception )
 {
   vector< WordArticleLink > chain = findArticles( word );
 
@@ -223,7 +224,7 @@ string LsaDictionary::getArticle( wstring const & word,
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
-    throw Dictionary::exNoSuchWord();
+    return new Dictionary::DataRequestInstant( false ); // No such word
 
   string result;
 
@@ -255,7 +256,14 @@ string LsaDictionary::getArticle( wstring const & word,
 
   result += "</table>";
 
-  return result;
+  Dictionary::DataRequestInstant * ret =
+    new Dictionary::DataRequestInstant( true );
+
+  ret->getData().resize( result.size() );
+
+  memcpy( &(ret->getData().front()), result.data(), result.size() );
+
+  return ret;
 }
 
 /// This wraps around file operations
@@ -325,9 +333,8 @@ struct WavHeader
   uint32_t dataLength;
 } __attribute__((packed));
 
-void LsaDictionary::getResource( string const & name,
-                                 vector< char > & data )
-  throw( Dictionary::exNoSuchResource, std::exception )
+sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name )
+  throw( std::exception )
 {
   // See if the name ends in .wav. Remove that extension then
 
@@ -338,8 +345,8 @@ void LsaDictionary::getResource( string const & name,
   vector< WordArticleLink > chain = findArticles( Utf8::decode( strippedName ) );
 
   if ( chain.empty() )
-    throw Dictionary::exNoSuchResource();
-
+    return new Dictionary::DataRequestInstant( false ); // No such resource
+  
   File::Class f( getDictionaryFilenames()[ 0 ], "rb" );
 
   f.seek( chain[ 0 ].articleOffset );
@@ -368,6 +375,11 @@ void LsaDictionary::getResource( string const & name,
     throw exFailedToRetrieveVorbisInfo();
   }
 
+  sptr< Dictionary::DataRequestInstant > dr = new
+    Dictionary::DataRequestInstant( true );
+
+  vector< char > & data = dr->getData();
+  
   data.resize( sizeof( WavHeader ) + e.samplesLength * 2 );
 
   WavHeader * wh = (WavHeader *)&data.front();
@@ -417,14 +429,16 @@ void LsaDictionary::getResource( string const & name,
   }
 
   ov_clear( &vf );
+
+  return dr;
 }
 
 }
 
-vector< sptr< Dictionary::Class > > Format::makeDictionaries(
-                                    vector< string > const & fileNames,
-                                    string const & indicesDir,
-                                    Dictionary::Initializing & initializing )
+vector< sptr< Dictionary::Class > > makeDictionaries(
+                                      vector< string > const & fileNames,
+                                      string const & indicesDir,
+                                      Dictionary::Initializing & initializing )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -455,11 +469,11 @@ vector< sptr< Dictionary::Class > > Format::makeDictionaries(
 
       vector< string > dictFiles( 1, *i );
 
-      string dictId = makeDictionaryId( dictFiles );
+      string dictId = Dictionary::makeDictionaryId( dictFiles );
 
       string indexFile = indicesDir + dictId;
 
-      if ( needToRebuildIndex( dictFiles, indexFile ) || indexIsOldOrBad( indexFile ) )
+      if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) || indexIsOldOrBad( indexFile ) )
       {
         // Building the index
   

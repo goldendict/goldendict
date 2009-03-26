@@ -38,6 +38,19 @@
          <widget class="GroupComboBox" name="groupList"/>
         </item>
         <item>
+         <widget class="QLabel" name="queryError">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="resources.qrc">:/icons/warning.png</pixmap>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QToolButton" name="word">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">

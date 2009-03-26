@@ -9,7 +9,7 @@
 #include "stardict.hh"
 #include "lsa.hh"
 #include "dsl.hh"
-#include "dictlock.hh"
+#include "mediawiki.hh"
 #include "ui_about.h"
 #include <QDir>
 #include <QMessageBox>
@@ -32,6 +32,7 @@ MainWindow::MainWindow():
   cfg( Config::load() ),
   articleMaker( dictionaries, groupInstances ),
   articleNetMgr( this, dictionaries, articleMaker ),
+  dictNetMgr( this ),
   wordFinder( this ),
   initializing( 0 )
 {
@@ -124,8 +125,10 @@ MainWindow::MainWindow():
   connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
            this, SLOT( wordListSelectionChanged() ) );
   
-  connect( wordFinder.qobject(), SIGNAL( prefixMatchComplete( WordFinderResults ) ),
-           this, SLOT( prefixMatchComplete( WordFinderResults ) ) );
+  connect( &wordFinder, SIGNAL( updated() ),
+           this, SLOT( prefixMatchUpdated() ) );
+  connect( &wordFinder, SIGNAL( finished() ),
+           this, SLOT( prefixMatchFinished() ) );
 
   makeDictionaries();
 
@@ -155,44 +158,35 @@ MainWindow::~MainWindow()
   Config::save( cfg );
 }
 
-LoadDictionaries::LoadDictionaries( vector< string > const & allFiles_ ):
-  allFiles( allFiles_ )
+LoadDictionaries::LoadDictionaries( vector< string > const & allFiles_,
+                                    Config::Class const & cfg_ ):
+  allFiles( allFiles_ ), cfg( cfg_ )
 {
 }
 
 void LoadDictionaries::run()
 {
-  {
-    Bgl::Format bglFormat;
+  dictionaries = Bgl::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
   
-    dictionaries = bglFormat.makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
-  }
-
   {
-    Stardict::Format stardictFormat;
-  
     vector< sptr< Dictionary::Class > > stardictDictionaries =
-      stardictFormat.makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+      Stardict::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
   
     dictionaries.insert( dictionaries.end(), stardictDictionaries.begin(),
                          stardictDictionaries.end() );
   }
 
   {
-    Lsa::Format lsaFormat;
-
     vector< sptr< Dictionary::Class > > lsaDictionaries =
-      lsaFormat.makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+      Lsa::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
 
     dictionaries.insert( dictionaries.end(), lsaDictionaries.begin(),
                          lsaDictionaries.end() );
   }
 
   {
-    Dsl::Format dslFormat;
-
     vector< sptr< Dictionary::Class > > dslDictionaries =
-      dslFormat.makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+      Dsl::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
 
     dictionaries.insert( dictionaries.end(), dslDictionaries.begin(),
                          dslDictionaries.end() );
@@ -249,10 +243,11 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 
 void MainWindow::makeDictionaries()
 {
-  {
-    DictLock _;
-    dictionaries.clear();
-  }
+  scanPopup.reset();
+
+  wordFinder.clear();
+
+  dictionaries.clear();
 
   ::Initializing init( this );
 
@@ -278,7 +273,7 @@ void MainWindow::makeDictionaries()
 
     // Now start a thread to load all the dictionaries
 
-    LoadDictionaries loadDicts( allFiles );
+    LoadDictionaries loadDicts( allFiles, cfg );
 
     connect( &loadDicts, SIGNAL( indexingDictionarySignal( QString ) ),
              this, SLOT( indexingDictionary( QString ) ) );
@@ -294,10 +289,16 @@ void MainWindow::makeDictionaries()
 
     loadDicts.wait();
 
-    {
-      DictLock _;
+    dictionaries = loadDicts.getDictionaries();
 
-      dictionaries = loadDicts.getDictionaries();
+    ///// We create MediaWiki dicts syncronously, since they use netmgr
+
+    {
+      vector< sptr< Dictionary::Class > > dicts =
+        MediaWiki::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(),
+                                     loadDicts, cfg.mediawikis, dictNetMgr );
+
+      dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
     }
 
     initializing = 0;
@@ -360,14 +361,10 @@ void MainWindow::updateGroupList()
   disconnect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
               this, SLOT( currentGroupChanged( QString const & ) ) );
 
-  {
-    DictLock _;
-  
-    groupInstances.clear();
-  
-    for( unsigned x  = 0; x < cfg.groups.size(); ++x )
-      groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
-  }
+  groupInstances.clear();
+
+  for( unsigned x  = 0; x < cfg.groups.size(); ++x )
+    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
 
   ui.groupList->fill( groupInstances );
   ui.groupList->setCurrentGroup( cfg.lastMainGroup );
@@ -477,13 +474,14 @@ void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
 
 void MainWindow::editSources()
 {
-  Sources src( this, cfg.paths );
+  Sources src( this, cfg.paths, cfg.mediawikis );
 
   src.show();
 
   if ( src.exec() == QDialog::Accepted )
   {
     cfg.paths = src.getPaths();
+    cfg.mediawikis = src.getMediaWikis();
 
     makeDictionaries();
 
@@ -493,25 +491,20 @@ void MainWindow::editSources()
 
 void MainWindow::editGroups()
 {
+  Groups groups( this, dictionaries, cfg.groups );
+
+  groups.show();
+
+  if ( groups.exec() == QDialog::Accepted )
   {
-    // We lock all dictionaries during the entire group editing process, since
-    // the dictionaries might get queried for various infos there
-    DictLock _;
-  
-    Groups groups( this, dictionaries, cfg.groups );
-  
-    groups.show();
+    cfg.groups = groups.getGroups();
 
-    if ( groups.exec() == QDialog::Accepted )
-    {
-      cfg.groups = groups.getGroups();
-
-      Config::save( cfg );
-    }
-    else
-      return;
+    Config::save( cfg );
   }
+  else
+    return;
 
+  scanPopup.reset(); // It was holding group instances
   updateGroupList();
   makeScanPopup();
 }
@@ -548,19 +541,32 @@ void MainWindow::currentGroupChanged( QString const & gr )
 
 void MainWindow::translateInputChanged( QString const & newValue )
 {
+  // If there's some status bar message present, clear it since it may be
+  // about the previous search that has failed.
+  if ( !statusBar()->currentMessage().isEmpty() )
+    statusBar()->clearMessage();
+
   QString req = newValue.trimmed();
 
   if ( !req.size() )
   {
     // An empty request always results in an empty result
-    prefixMatchComplete( WordFinderResults( req, &getActiveDicts() ) );
+    wordFinder.cancel();
+    ui.wordList->clear();
+    ui.wordList->unsetCursor();
 
+    // Reset the noResults mark if it's on right now
+    if ( ui.translateLine->property( "noResults" ).toBool() )
+    {
+      ui.translateLine->setProperty( "noResults", false );
+      qApp->setStyleSheet( qApp->styleSheet() );
+    }
     return;
   }
 
   ui.wordList->setCursor( Qt::WaitCursor );
 
-  wordFinder.prefixMatch( req, &getActiveDicts() );
+  wordFinder.prefixMatch( req, getActiveDicts() );
 }
 
 void MainWindow::translateInputFinished()
@@ -569,29 +575,34 @@ void MainWindow::translateInputFinished()
     wordListItemActivated( ui.wordList->item( 0 ) );
 }
 
-void MainWindow::prefixMatchComplete( WordFinderResults r )
+void MainWindow::prefixMatchUpdated()
 {
-  if ( r.requestStr != ui.translateLine->text().trimmed() ||
-      r.requestDicts != &getActiveDicts() )
-  {
-    // Those results are already irrelevant, ignore the result
-    return;
-  }
+  updateMatchResults( false );
+}
+
+void MainWindow::prefixMatchFinished()
+{
+  updateMatchResults( true );
+}
+
+void MainWindow::updateMatchResults( bool finished )
+{
+  std::vector< QString > const & results = wordFinder.getPrefixMatchResults();
 
   ui.wordList->setUpdatesEnabled( false );
-
-  for( unsigned x = 0; x < r.results.size(); ++x )
+  
+  for( unsigned x = 0; x < results.size(); ++x )
   {
     QListWidgetItem * i = ui.wordList->item( x );
 
     if ( !i )
-      ui.wordList->addItem( r.results[ x ] );
+      ui.wordList->addItem( results[ x ] );
     else
-    if ( i->text() != r.results[ x ] )
-      i->setText( r.results[ x ] );
+    if ( i->text() != results[ x ] )
+      i->setText( results[ x ] );
   }
 
-  while ( ui.wordList->count() > (int) r.results.size() )
+  while ( ui.wordList->count() > (int) results.size() )
   {
     // Chop off any extra items that were there
     QListWidgetItem * i = ui.wordList->takeItem( ui.wordList->count() - 1 );
@@ -609,7 +620,24 @@ void MainWindow::prefixMatchComplete( WordFinderResults r )
   }
 
   ui.wordList->setUpdatesEnabled( true );
-  ui.wordList->unsetCursor();
+
+  if ( finished )
+  {
+    ui.wordList->unsetCursor();
+
+    // Visually mark the input line to mark if there's no results
+
+    bool setMark = results.empty();
+
+    if ( ui.translateLine->property( "noResults" ).toBool() != setMark )
+    {
+      ui.translateLine->setProperty( "noResults", setMark );
+      qApp->setStyleSheet( qApp->styleSheet() );
+    }
+
+    if ( !wordFinder.getErrorString().isEmpty() )
+      statusBar()->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ) );
+  }
 }
 
 void MainWindow::wordListItemActivated( QListWidgetItem * item )

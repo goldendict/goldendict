@@ -12,16 +12,11 @@ namespace Lsa {
 using std::vector;
 using std::string;
 
-class Format: public Dictionary::Format
-{
-public:
-
-  virtual vector< sptr< Dictionary::Class > > makeDictionaries(
+vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & )
-    throw( std::exception );
-};
+  throw( std::exception );
 
 }
 

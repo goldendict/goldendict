@@ -2,185 +2,224 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "wordfinder.hh"
-#include "dictlock.hh"
 #include "folding.hh"
-#include <QMetaType>
+#include <QThreadPool>
 #include <map>
 
 using std::vector;
+using std::list;
 using std::wstring;
 using std::map;
 using std::pair;
 
-namespace
+WordFinder::WordFinder( QObject * parent ):
+  QObject( parent ), searchInProgress( false ),
+  updateResultsTimer( this ),
+  searchQueued( false )
 {
-  struct MetaTypeRegister
-  {
-    MetaTypeRegister()
-    {
-      qRegisterMetaType< WordFinderResults >( "WordFinderResults" );
-    }
-  };
-}
+  updateResultsTimer.setInterval( 1000 ); // We use a one second update timer
+  updateResultsTimer.setSingleShot( true );
 
-WordFinder::WordFinder( QObject * parent ): QThread( parent ), op( NoOp )
-{
-  static MetaTypeRegister _;
-
-  start();
+  connect( &updateResultsTimer, SIGNAL( timeout() ),
+           this, SLOT( updateResults() ) );
 }
 
 WordFinder::~WordFinder()
 {
-  // Request termination and wait for it to happen
-  opMutex.lock();
-
-  op = QuitOp;
-
-  opCondition.wakeOne();
-
-  opMutex.unlock();
-
-  wait();
+  clear();
 }
 
 void WordFinder::prefixMatch( QString const & str,
-                              std::vector< sptr< Dictionary::Class > > const * dicts )
+                              std::vector< sptr< Dictionary::Class > > const & dicts )
 {
-  opMutex.lock();
+  cancel();
 
-  op = DoPrefixMatch;
-  prefixMatchString = str;
-  prefixMatchDicts = dicts;
+  searchQueued = true;
+  inputWord = str;
+  inputDicts = &dicts;
 
-  opCondition.wakeOne();
+  results.clear();
+  searchResults.clear();
 
-  opMutex.unlock();
-}
-
-void WordFinder::run()
-{
-  opMutex.lock();
-
-  for( ; ; )
+  if ( queuedRequests.empty() )
   {
-    // Check the operation requested
-
-    if ( op == NoOp )
-    {
-      opCondition.wait( &opMutex );
-      continue;
-    }
-
-    if ( op == QuitOp )
-      break;
-
-    // The only one op value left is DoPrefixMatch
-
-    Q_ASSERT( op == DoPrefixMatch );
-
-    QString prefixMatchReq = prefixMatchString;
-    vector< sptr< Dictionary::Class > > const & activeDicts = *prefixMatchDicts;
-
-    op = NoOp;
-
-    opMutex.unlock();
-
-    map< wstring, wstring > exactResults, prefixResults;
-
-    {
-      wstring word = prefixMatchReq.toStdWString();
-
-      DictLock _;
-  
-      // Maps lowercased string to the original one. This catches all duplicates
-      // without case sensitivity
-  
-      bool cancel = false;
-  
-      for( unsigned x = 0; x < activeDicts.size(); ++x )
-      {
-        vector< wstring > exactMatches, prefixMatches;
-  
-        activeDicts[ x ]->findExact( word, exactMatches, prefixMatches, 40 );
-  
-        for( unsigned y = 0; y < exactMatches.size(); ++y )
-        {
-          wstring lowerCased = Folding::applySimpleCaseOnly( exactMatches[ y ] );
-  
-          pair< map< wstring, wstring >::iterator, bool > insertResult =
-            exactResults.insert( pair< wstring, wstring >( lowerCased,
-                                                           exactMatches[ y ] ) );
-  
-          if ( !insertResult.second )
-          {
-            // Wasn't inserted since there was already an item -- check the case
-            if ( insertResult.first->second != exactMatches[ y ] )
-            {
-              // The case is different -- agree on a lowercase version
-              insertResult.first->second = lowerCased;
-            }
-          }
-        }
-  
-        for( unsigned y = 0; y < prefixMatches.size(); ++y )
-        {
-          wstring lowerCased = Folding::applySimpleCaseOnly( prefixMatches[ y ] );
-  
-          pair< map< wstring, wstring >::iterator, bool > insertResult =
-            prefixResults.insert( pair< wstring, wstring >( lowerCased,
-                                                            prefixMatches[ y ] ) );
-  
-          if ( !insertResult.second )
-          {
-            // Wasn't inserted since there was already an item -- check the case
-            if ( insertResult.first->second != prefixMatches[ y ] )
-            {
-              // The case is different -- agree on a lowercase version
-              insertResult.first->second = lowerCased;
-            }
-          }
-        }
-  
-        // Check if we've got an op request -- abort the query then
-  
-        opMutex.lock();
-  
-        if ( op != NoOp )
-        {
-          cancel = true;
-          break;
-        }
-  
-        opMutex.unlock();
-      }
-  
-      if ( cancel )
-        continue;
-    }
-
-    // Do any sort of collation here in the future. For now we just put the
-    // strings sorted by the map.
-
-    WordFinderResults r( prefixMatchReq, &activeDicts );
-
-    r.results.reserve( exactResults.size() + prefixResults.size() );
-
-    for( map< wstring, wstring >::const_iterator i = exactResults.begin();
-         i != exactResults.end(); ++i )
-      r.results.push_back( QString::fromStdWString( i->second ) );
-
-    for( map< wstring, wstring >::const_iterator i = prefixResults.begin();
-         i != prefixResults.end(); ++i )
-      r.results.push_back( QString::fromStdWString( i->second ) );
-
-    emit prefixMatchComplete( r );
-
-    // Continue serving op requests
-
-    opMutex.lock();
+    // No requests are queued, no need to wait for them to finish.
+    startSearch();
   }
 
-  opMutex.unlock();
+  // Else some requests are still queued, last one to finish would trigger
+  // new search. This shouldn't take a lot of time, since they were all
+  // cancelled, but still it could take some time.
+}
+
+void WordFinder::startSearch()
+{
+  if ( !searchQueued )
+    return; // Search was probably cancelled
+
+  // Clear the requests just in case
+  queuedRequests.clear();
+  finishedRequests.clear();
+
+  searchErrorString.clear();
+
+  searchQueued = false;
+  searchInProgress = true;
+
+  wstring word = inputWord.toStdWString();
+  
+  for( size_t x = 0; x < inputDicts->size(); ++x )
+  {
+    sptr< Dictionary::WordSearchRequest > sr = (*inputDicts)[ x ]->prefixMatch( word, 40 );
+
+    connect( sr.get(), SIGNAL( finished() ),
+             this, SLOT( requestFinished() ), Qt::QueuedConnection );
+
+    queuedRequests.push_back( sr );
+  }
+
+  // Handle any requests finished already
+
+  requestFinished();
+}
+
+void WordFinder::cancel()
+{
+  searchQueued = false;
+  searchInProgress = false;
+  
+  cancelSearches();
+}
+
+void WordFinder::clear()
+{
+  cancel();
+  queuedRequests.clear();
+  finishedRequests.clear();
+}
+
+void WordFinder::requestFinished()
+{
+  bool newResults = false;
+
+  // See how many new requests have finished, and if we have any new results
+  for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
+         queuedRequests.begin(); i != queuedRequests.end(); )
+  {
+    if ( (*i)->isFinished() )
+    {
+      if ( searchInProgress && !(*i)->getErrorString().isEmpty() )
+        searchErrorString = tr( "Failed to query some dictionaries." );
+
+      if ( (*i)->matchesCount() )
+      {
+        newResults = true;
+
+        // This list is handled by updateResults()
+        finishedRequests.splice( finishedRequests.end(), queuedRequests, i++ );
+      }
+      else // We won't do anything with it anymore, so we erase it
+        queuedRequests.erase( i++ );
+    }
+    else
+      ++i;
+  }
+
+  if ( !searchInProgress )
+  {
+    // There is no search in progress, so we just wait until there's
+    // no requests left
+    
+    if ( queuedRequests.empty() )
+    {
+      // We got rid of all queries, queued search can now start
+      finishedRequests.clear();
+  
+      if ( searchQueued )
+        startSearch();
+    }
+
+    return;
+  }
+
+  if ( newResults && queuedRequests.size() && !updateResultsTimer.isActive() )
+  {
+    // If we have got some new results, but not all of them, we would start a
+    // timer to update a user some time in the future
+    updateResultsTimer.start();
+  }
+
+  if ( queuedRequests.empty() )
+  {
+    // Search is finished.
+    updateResults();
+  }
+}
+
+void WordFinder::updateResults()
+{
+  if ( !searchInProgress )
+    return; // Old queued signal
+
+  if ( updateResultsTimer.isActive() )
+    updateResultsTimer.stop(); // Can happen when we were done before it'd expire
+
+  for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
+         finishedRequests.begin(); i != finishedRequests.end(); )
+  {
+    for( size_t count = (*i)->matchesCount(), x = 0; x < count; ++x )
+    {
+      wstring match = (**i)[ x ].word;
+      wstring lowerCased = Folding::applySimpleCaseOnly( match );
+
+      pair< map< wstring, wstring >::iterator, bool > insertResult =
+        results.insert( pair< wstring, wstring >( lowerCased, match ) );
+
+      if ( !insertResult.second )
+      {
+        // Wasn't inserted since there was already an item -- check the case
+        if ( insertResult.first->second != match )
+        {
+          // The case is different -- agree on a lowercase version
+          insertResult.first->second = lowerCased;
+        }
+      }
+    }
+    finishedRequests.erase( i++ );
+  }
+
+  // Do any sort of collation here in the future. For now we just put the
+  // strings sorted by the map.
+
+  searchResults.clear();
+  searchResults.reserve( results.size() );
+
+  for( map< wstring, wstring >::const_iterator i = results.begin();
+       i != results.end(); ++i )
+  {
+    if ( searchResults.size() < 500 )
+      searchResults.push_back( QString::fromStdWString( i->second ) );
+    else
+      break;
+  }
+
+  if ( queuedRequests.size() )
+  {
+    // There are still some unhandled results.
+    emit updated();
+  }
+  else
+  {
+    // That were all of them.
+    searchInProgress = false;
+    emit finished();
+  }
+}
+
+void WordFinder::cancelSearches()
+{
+  for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
+         queuedRequests.begin(); i != queuedRequests.end(); ++i )
+    (*i)->cancel();
 }
 

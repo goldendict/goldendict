@@ -11,6 +11,7 @@
     <file>icons/programicon.png</file>
     <file>icons/programicon_scan.png</file>
     <file>icons/wizard.png</file>
+    <file>icons/warning.png</file>
     <file>article-style.css</file>
     <file>qt-style.css</file>
   </qresource>

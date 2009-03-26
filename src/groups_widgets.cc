@@ -24,7 +24,7 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
 
   // Populate icons' list
 
-  QStringList icons = QDir( ":/flags/" ).entryList( QDir::Files, QDir::Name );
+  QStringList icons = QDir( ":/flags/" ).entryList( QDir::Files, QDir::NoSort );
 
   ui.groupIcon->addItem( "None", "" );
 

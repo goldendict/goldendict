@@ -28,12 +28,12 @@ public:
     articleMaker( articleMaker_ )
   {}
 
-  /// Tries reading a resource referenced by a "bres://" url. If it succeeds,
-  /// the vector is filled with data, and true is returned. If it doesn't
-  /// succeed, it returns false. The function can optionally set the Content-Type
-  /// header correspondingly.
-  bool getResource( QUrl const & url, vector< char > & data,
-                    QString & contentType );
+  /// Tries handling any kind of internal resources referenced by dictionaries.
+  /// If it succeeds, the result is a dictionary request object. Otherwise, an
+  /// empty pointer is returned.
+  /// The function can optionally set the Content-Type header correspondingly.
+  sptr< Dictionary::DataRequest > getResource( QUrl const & url,
+                                               QString & contentType );
 
 protected:
 
@@ -46,15 +46,14 @@ class ArticleResourceReply: public QNetworkReply
 {
   Q_OBJECT
 
-  vector< char > data;
-
-  size_t left;
+  sptr< Dictionary::DataRequest > req;
+  size_t alreadyRead;
 
 public:
 
   ArticleResourceReply( QObject * parent,
                         QNetworkRequest const &,
-                        vector< char > const & data,
+                        sptr< Dictionary::DataRequest > const &,
                         QString const & contentType );
 
 protected:
@@ -74,6 +73,9 @@ signals:
 
 private slots:
 
+  void reqUpdated();
+  void reqFinished();
+  
   void readyReadSlot();
   void finishedSlot();
 };
