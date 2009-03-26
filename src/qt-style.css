@@ -3,6 +3,11 @@ MainWindow #centralWidget #translateLine, MainWindow #centralWidget #wordList
   background: #fefdeb;
 }
 
+MainWindow #centralWidget #translateLine[noResults="true"]
+{
+  background: #febb7d;
+}
+
 .ScanPopup #outerFrame
 {
   border: 1px solid grey;
