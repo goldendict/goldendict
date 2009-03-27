@@ -46,6 +46,25 @@ Preferences::Preferences():
 {
 }
 
+namespace {
+
+MediaWikis makeDefaultMediaWikis( bool enable )
+{
+  MediaWikis mw;
+
+  mw.push_back( MediaWiki( "ae6f89aac7151829681b85f035d54e48", "English Wikipedia", "http://en.wikipedia.org/w", enable ) );
+  mw.push_back( MediaWiki( "affcf9678e7bfe701c9b071f97eccba3", "English Wiktionary", "http://en.wiktionary.org/w", false ) );
+  mw.push_back( MediaWiki( "8e0c1c2b6821dab8bdba8eb869ca7176", "Russian Wikipedia", "http://ru.wikipedia.org/w", false ) );
+  mw.push_back( MediaWiki( "b09947600ae3902654f8ad4567ae8567", "Russain Wiktionary", "http://ru.wiktionary.org/w", false ) );
+  mw.push_back( MediaWiki( "a8a66331a1242ca2aeb0b4aed361c41d", "German Wikipedia", "http://de.wikipedia.org/w", false ) );
+  mw.push_back( MediaWiki( "21c64bca5ec10ba17ff19f3066bc962a", "German Wiktionary", "http://de.wiktionary.org/w", false ) );
+  mw.push_back( MediaWiki( "96957cb2ad73a20c7a1d561fc83c253a", "Portuguese Wikipedia", "http://pt.wikipedia.org/w", false ) );
+  mw.push_back( MediaWiki( "ed4c3929196afdd93cc08b9a903aad6a", "Portuguese Wiktionary", "http://pt.wiktionary.org/w", false ) );
+
+  return mw;
+}
+
+}
 
 Class load() throw( exError )
 {
@@ -58,19 +77,20 @@ Class load() throw( exError )
 
     #ifdef Q_OS_LINUX
 
-    if ( QDir( "/usr/share/stardict/dic" ).exists() )
-      c.paths.push_back( "/usr/share/stardict/dic" );
+    QDir stardictDir( "/usr/share/stardict/dic" );
+
+    if ( stardictDir.exists() )
+    {
+      QStringList entries = stardictDir.entryList( QDir::Dirs | QDir::NoDotAndDotDot );
+
+      for( QStringList::const_iterator i = entries.constBegin();
+           i != entries.constEnd(); ++i )
+        c.paths.push_back( QDir::toNativeSeparators( stardictDir.filePath( *i ) ) );
+    }
 
     #endif
 
-    c.mediawikis.push_back( MediaWiki( "ae6f89aac7151829681b85f035d54e48", "English Wikipedia", "http://en.wikipedia.org/w", true ) );
-    c.mediawikis.push_back( MediaWiki( "affcf9678e7bfe701c9b071f97eccba3", "English Wiktionary", "http://en.wiktionary.org/w", false ) );
-    c.mediawikis.push_back( MediaWiki( "8e0c1c2b6821dab8bdba8eb869ca7176", "Russian Wikipedia", "http://ru.wikipedia.org/w", false ) );
-    c.mediawikis.push_back( MediaWiki( "b09947600ae3902654f8ad4567ae8567", "Russain Wiktionary", "http://ru.wiktionary.org/w", false ) );
-    c.mediawikis.push_back( MediaWiki( "a8a66331a1242ca2aeb0b4aed361c41d", "German Wikipedia", "http://de.wikipedia.org/w", false ) );
-    c.mediawikis.push_back( MediaWiki( "21c64bca5ec10ba17ff19f3066bc962a", "German Wiktionary", "http://de.wiktionary.org/w", false ) );
-    c.mediawikis.push_back( MediaWiki( "96957cb2ad73a20c7a1d561fc83c253a", "Portuguese Wikipedia", "http://pt.wikipedia.org/w", false ) );
-    c.mediawikis.push_back( MediaWiki( "ed4c3929196afdd93cc08b9a903aad6a", "Portuguese Wiktionary", "http://pt.wiktionary.org/w", false ) );
+    c.mediawikis = makeDefaultMediaWikis( true );
 
     save( c );
 
@@ -152,6 +172,12 @@ Class load() throw( exError )
 
       c.mediawikis.push_back( w );
     }
+  }
+  else
+  {
+    // When upgrading, populate the list with some choices, but don't enable
+    // anything.
+    c.mediawikis = makeDefaultMediaWikis( false );
   }
 
   QDomNode preferences = root.namedItem( "preferences" );
