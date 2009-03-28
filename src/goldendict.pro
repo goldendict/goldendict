@@ -18,7 +18,7 @@ UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
 
-LIBS += -lvorbisfile -lvorbis -logg -lz
+LIBS += -lvorbisfile -lvorbis -logg -lz -lzip
 
 win32 {
   LIBS += -liconv -lwsock32 -lwinmm

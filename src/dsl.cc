@@ -13,6 +13,7 @@
 #include "filetype.hh"
 #include "fsencoding.hh"
 #include <zlib.h>
+#include <zip.h>
 #include <map>
 #include <set>
 #include <string>
@@ -656,7 +657,47 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
           FsEncoding::separator() +
           FsEncoding::encode( name );
 
-      loadFromFile( n, data );
+      try
+      {
+        loadFromFile( n, data );
+      }
+      catch( File::exCantOpen & )
+      {
+        // Try reading from zip file
+        n = getDictionaryFilenames()[ 0 ] + ".files.zip";
+
+        if ( zip * z = zip_open( n.c_str(), 0, 0 ) )
+        {
+          string fname = FsEncoding::encode( name );
+
+          struct zip_stat st;
+          zip_file * zf;
+
+          zip_stat_init( &st );
+
+          if ( !zip_stat( z, fname.c_str(), 0, &st ) &&
+               ( zf = zip_fopen( z, fname.c_str(), 0 ) ) )
+          {
+            data.resize( st.size );
+
+            int result =
+              zip_fread( zf, &data.front(), data.size() );
+
+            zip_fclose( zf );
+            zip_close( z );
+
+            if ( result != (int)data.size() )
+              throw; // Make it fail since we couldn't read the archive
+          }
+          else
+          {
+            zip_close( z );
+            throw;
+          }
+        }
+        else
+          throw;
+      }
     }
 
     if ( Filetype::isNameOfTiff( name ) )
