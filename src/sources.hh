@@ -38,6 +38,35 @@ private:
   Config::MediaWikis mediawikis;
 };
 
+/// A model to be projected into the paths view, according to Qt's MVC model
+class PathsModel: public QAbstractItemModel
+{
+  Q_OBJECT
+
+public:
+
+  PathsModel( QWidget * parent, Config::Paths const & );
+
+  void removePath( int index );
+  void addNewPath( QString const & );
+
+  /// Returns the paths the model currently has listed
+  Config::Paths const & getCurrentPaths() const
+  { return paths; }
+
+  QModelIndex index( int row, int column, QModelIndex const & parent ) const;
+  QModelIndex parent( QModelIndex const & parent ) const;
+  Qt::ItemFlags flags( QModelIndex const & index ) const;
+  int rowCount( QModelIndex const & parent ) const;
+  int columnCount( QModelIndex const & parent ) const;
+  QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+  QVariant data( QModelIndex const & index, int role ) const;
+  bool setData( QModelIndex const & index, const QVariant & value, int role );
+
+private:
+
+  Config::Paths paths;
+};
 
 class Sources: public QDialog
 {
@@ -47,7 +76,7 @@ public:
   Sources( QWidget * parent, Config::Paths const &, Config::MediaWikis const & );
 
   Config::Paths const & getPaths() const
-  { return paths; }
+  { return pathsModel.getCurrentPaths(); }
 
   Config::MediaWikis const & getMediaWikis() const
   { return mediawikisModel.getCurrentWikis(); }
@@ -55,12 +84,14 @@ public:
 private:
   Ui::Sources ui;
   MediaWikisModel mediawikisModel;
-  Config::Paths paths;
+  PathsModel pathsModel;
+
+  void fitPathsColumns();
 
 private slots:
 
-  void add();
-  void remove();
+  void on_addPath_clicked();
+  void on_removePath_clicked();
 
   void on_addMediaWiki_clicked();
   void on_removeMediaWiki_clicked();

@@ -37,19 +37,19 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QListWidget" name="dictionaries"/>
+          <widget class="QTreeView" name="paths"/>
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QPushButton" name="add">
+            <widget class="QPushButton" name="addPath">
              <property name="text">
               <string>&amp;Add...</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="remove">
+            <widget class="QPushButton" name="removePath">
              <property name="text">
               <string>&amp;Remove</string>
              </property>

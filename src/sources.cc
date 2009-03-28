@@ -7,9 +7,9 @@
 #include <QCryptographicHash>
 #include <QDateTime>
 
-Sources::Sources( QWidget * parent, Config::Paths const & paths_,
+Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::MediaWikis const & mediawikis ): QDialog( parent ),
-  mediawikisModel( this, mediawikis ), paths( paths_ )
+  mediawikisModel( this, mediawikis ), pathsModel( this, paths )
 {
   ui.setupUi( this );
 
@@ -19,49 +19,47 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths_,
   ui.mediaWikis->resizeColumnToContents( 1 );
   ui.mediaWikis->resizeColumnToContents( 2 );
 
-  for( Config::Paths::const_iterator i = paths.begin(); i != paths.end(); ++i )
-    ui.dictionaries->addItem( *i );
+  ui.paths->setTabKeyNavigation( true );
+  ui.paths->setModel( &pathsModel );
 
-  ui.dictionaries->setDragEnabled( true );
-  ui.dictionaries->setAcceptDrops( true );
-  ui.dictionaries->setDropIndicatorShown( true );
+  fitPathsColumns();
 
   connect( ui.buttons, SIGNAL( accepted() ),
             this, SLOT( accept() ) );
   connect( ui.buttons, SIGNAL( rejected() ),
             this, SLOT( reject() ) );
-
-  connect( ui.add, SIGNAL( clicked() ),
-            this, SLOT( add() ) );
-  connect( ui.remove, SIGNAL( clicked() ),
-            this, SLOT( remove() ) );
 }
 
-void Sources::add()
+void Sources::fitPathsColumns()
+{
+  ui.paths->resizeColumnToContents( 0 );
+  ui.paths->resizeColumnToContents( 1 );
+}
+
+void Sources::on_addPath_clicked()
 {
   QString dir = 
     QFileDialog::getExistingDirectory( this, tr( "Choose a directory" ) );
 
   if ( !dir.isEmpty() )
   {
-    paths.push_back( dir );
-    ui.dictionaries->addItem( dir );
+    pathsModel.addNewPath( dir );
+    fitPathsColumns();
   }
 }
 
-void Sources::remove()
+void Sources::on_removePath_clicked()
 {
-  int row = ui.dictionaries->currentRow();
+  QModelIndex current = ui.paths->currentIndex();
 
-  if ( row >= 0 && row < (int)paths.size() &&
+  if ( current.isValid() &&
       QMessageBox::question( this, tr( "Confirm removal" ),
-                             tr( "Remove directory <b>%1</b> from the list?" ).arg( paths[ row ] ),
+                             tr( "Remove directory <b>%1</b> from the list?" ).arg( pathsModel.getCurrentPaths()[ current.row() ].path ),
                              QMessageBox::Ok,
                              QMessageBox::Cancel ) == QMessageBox::Ok )
   {
-    if( QListWidgetItem * item = ui.dictionaries->takeItem( row ) )
-      delete item;
-    paths.erase( paths.begin() + row );
+    pathsModel.removePath( current.row() );
+    fitPathsColumns();
   }
 }
 
@@ -237,6 +235,111 @@ bool MediaWikisModel::setData( QModelIndex const & index, const QVariant & value
       default:
         return false;
     }
+
+  return false;
+}
+
+////////// PathsModel
+
+PathsModel::PathsModel( QWidget * parent,
+                        Config::Paths const & paths_ ):
+  QAbstractItemModel( parent ), paths( paths_ )
+{
+}
+
+void PathsModel::removePath( int index )
+{
+  beginRemoveRows( QModelIndex(), index, index );
+  paths.erase( paths.begin() + index );
+  endRemoveRows();
+}
+
+void PathsModel::addNewPath( QString const & path )
+{
+  beginInsertRows( QModelIndex(), paths.size(), paths.size() );
+  paths.push_back( Config::Path( path, false ) );
+  endInsertRows();
+}
+
+QModelIndex PathsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
+{
+  return createIndex( row, column, 0 );
+}
+
+QModelIndex PathsModel::parent( QModelIndex const & /*parent*/ ) const
+{
+  return QModelIndex();
+}
+
+Qt::ItemFlags PathsModel::flags( QModelIndex const & index ) const
+{
+  Qt::ItemFlags result = QAbstractItemModel::flags( index );
+
+  if ( index.isValid() && index.column() == 1 )
+    result |= Qt::ItemIsUserCheckable;
+
+  return result;
+}
+
+int PathsModel::rowCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return paths.size();
+}
+
+int PathsModel::columnCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return 2;
+}
+
+QVariant PathsModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
+{
+  if ( role == Qt::DisplayRole )
+    switch( section )
+    {
+      case 0:
+        return tr( "Path" );
+      case 1:
+        return tr( "Recursive" );
+      default:
+        return QVariant();
+    }
+
+  return QVariant();
+}
+
+QVariant PathsModel::data( QModelIndex const & index, int role ) const
+{
+  if ( (unsigned)index.row() >= paths.size() )
+    return QVariant();
+
+  if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && !index.column() )
+    return paths[ index.row() ].path;
+
+  if ( role == Qt::CheckStateRole && index.column() == 1 )
+    return paths[ index.row() ].recursive;
+
+  return QVariant();
+}
+
+bool PathsModel::setData( QModelIndex const & index, const QVariant & /*value*/,
+                          int role )
+{
+  if ( (unsigned)index.row() >= paths.size() )
+    return false;
+
+  if ( role == Qt::CheckStateRole && index.column() == 1 )
+  {
+    paths[ index.row() ].recursive = !paths[ index.row() ].recursive;
+
+    dataChanged( index, index );
+    return true;
+  }
 
   return false;
 }

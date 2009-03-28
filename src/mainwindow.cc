@@ -155,16 +155,44 @@ MainWindow::~MainWindow()
   Config::save( cfg );
 }
 
-LoadDictionaries::LoadDictionaries( vector< string > const & allFiles_,
-                                    Config::Class const & cfg_ ):
-  allFiles( allFiles_ ), cfg( cfg_ )
+LoadDictionaries::LoadDictionaries( Config::Paths const & paths_ ):
+  paths( paths_ )
 {
 }
 
 void LoadDictionaries::run()
 {
-  dictionaries = Bgl::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
-  
+  for( Config::Paths::const_iterator i = paths.begin(); i != paths.end(); ++i )
+    handlePath( *i );
+}
+
+void LoadDictionaries::handlePath( Config::Path const & path )
+{
+  vector< string > allFiles;
+
+  QDir dir( path.path );
+
+  QFileInfoList entries = dir.entryInfoList( QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot );
+
+  for( QFileInfoList::const_iterator i = entries.constBegin();
+       i != entries.constEnd(); ++i )
+  {
+    QString fullName = i->canonicalFilePath();
+
+    if ( path.recursive && i->isDir() )
+      handlePath( Config::Path( fullName, true ) );
+
+    allFiles.push_back( QDir::toNativeSeparators( fullName ).toLocal8Bit().data() );
+  }
+
+  {
+    vector< sptr< Dictionary::Class > > bglDictionaries =
+      Bgl::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+
+    dictionaries.insert( dictionaries.end(), bglDictionaries.begin(),
+                         bglDictionaries.end() );
+  }
+
   {
     vector< sptr< Dictionary::Class > > stardictDictionaries =
       Stardict::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
@@ -252,25 +280,9 @@ void MainWindow::makeDictionaries()
   {
     initializing = &init;
 
-    // Traverse through known directories in search for the files
+    // Start a thread to load all the dictionaries
 
-    vector< string > allFiles;
-
-    for( Config::Paths::const_iterator i = cfg.paths.begin();
-         i != cfg.paths.end(); ++i )
-    {
-      QDir dir( *i );
-
-      QStringList entries = dir.entryList();
-
-      for( QStringList::const_iterator i = entries.constBegin();
-           i != entries.constEnd(); ++i )
-        allFiles.push_back( QDir::toNativeSeparators( dir.filePath( *i ) ).toLocal8Bit().data() );
-    }
-
-    // Now start a thread to load all the dictionaries
-
-    LoadDictionaries loadDicts( allFiles, cfg );
+    LoadDictionaries loadDicts( cfg.paths );
 
     connect( &loadDicts, SIGNAL( indexingDictionarySignal( QString ) ),
              this, SLOT( indexingDictionary( QString ) ) );
@@ -292,8 +304,7 @@ void MainWindow::makeDictionaries()
 
     {
       vector< sptr< Dictionary::Class > > dicts =
-        MediaWiki::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(),
-                                     loadDicts, cfg.mediawikis, dictNetMgr );
+        MediaWiki::makeDictionaries( loadDicts, cfg.mediawikis, dictNetMgr );
 
       dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
     }

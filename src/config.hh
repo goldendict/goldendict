@@ -14,8 +14,19 @@ namespace Config {
 
 using std::vector;
 
+// A path where to search for the dictionaries
+struct Path
+{
+  QString path;
+  bool recursive;
+
+  Path(): recursive( false ) {}
+  Path( QString const & path_, bool recursive_ ):
+    path( path_ ), recursive( recursive_ ) {}
+};
+
 /// A list of paths where to search for the dictionaries
-typedef vector< QString > Paths;
+typedef vector< Path > Paths;
 
 /// A dictionary group
 struct Group

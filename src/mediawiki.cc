@@ -297,8 +297,6 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word, vecto
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
-                                      vector< string > const & fileNames,
-                                      string const & indicesDir,
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
                                       QNetworkAccessManager & mgr )

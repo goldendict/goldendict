@@ -28,13 +28,12 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
 {
   Q_OBJECT
 
-  vector< string > const & allFiles;
-  Config::Class const & cfg;
+  Config::Paths const & paths;
   vector< sptr< Dictionary::Class > > dictionaries;
 
 public:
 
-  LoadDictionaries( vector< string > const & allFiles, Config::Class const & cfg );
+  LoadDictionaries( Config::Paths const & paths );
 
   virtual void run();
 
@@ -48,6 +47,10 @@ signals:
 public:
 
   virtual void indexingDictionary( string const & dictionaryName ) throw();
+
+private:
+
+  void handlePath( Config::Path const & );
 };
 
 

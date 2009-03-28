@@ -77,16 +77,8 @@ Class load() throw( exError )
 
     #ifdef Q_OS_LINUX
 
-    QDir stardictDir( "/usr/share/stardict/dic" );
-
-    if ( stardictDir.exists() )
-    {
-      QStringList entries = stardictDir.entryList( QDir::Dirs | QDir::NoDotAndDotDot );
-
-      for( QStringList::const_iterator i = entries.constBegin();
-           i != entries.constEnd(); ++i )
-        c.paths.push_back( QDir::toNativeSeparators( stardictDir.filePath( *i ) ) );
-    }
+    if ( QDir( "/usr/share/stardict/dic" ).exists() )
+      c.paths.push_back( Path( "/usr/share/stardict/dic", true ) );
 
     #endif
 
@@ -126,7 +118,9 @@ Class load() throw( exError )
     QDomNodeList nl = paths.toElement().elementsByTagName( "path" );
 
     for( unsigned x = 0; x < nl.length(); ++x )
-      c.paths.push_back( nl.item( x ).toElement().text() );
+      c.paths.push_back(
+        Path( nl.item( x ).toElement().text(),
+              nl.item( x ).toElement().attribute( "recursive" ) == "1" ) );
   }
 
   QDomNode groups = root.namedItem( "groups" );
@@ -228,8 +222,12 @@ void save( Class const & c ) throw( exError )
     {
       QDomElement path = dd.createElement( "path" );
       paths.appendChild( path );
-  
-      QDomText value = dd.createTextNode( *i );
+
+      QDomAttr recursive = dd.createAttribute( "recursive" );
+      recursive.setValue( i->recursive ? "1" : "0" );
+      path.setAttributeNode( recursive );
+
+      QDomText value = dd.createTextNode( i->path );
   
       path.appendChild( value );
     }
