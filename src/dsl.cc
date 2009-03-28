@@ -87,6 +87,8 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   string dictionaryName;
   map< string, string > abrv;
   dictData * dz;
+  Mutex resourceZipMutex;
+  zip * resourceZip;
 
 public:
 
@@ -200,10 +202,16 @@ DslDictionary::DslDictionary( string const & id,
   idx.seek( idxHeader.indexOffset );
 
   openIndex( idx, idxMutex );
+
+  // Open a resource zip file, if there's one
+  resourceZip = zip_open( ( getDictionaryFilenames()[ 0 ] + ".files.zip" ).c_str(), 0, 0 );
 }
 
 DslDictionary::~DslDictionary()
 {
+  if ( resourceZip )
+    zip_close( resourceZip );
+
   if ( dz )
     dict_data_close( dz );
 }
@@ -411,15 +419,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
           catch( File::exCantOpen & )
           {
             // Try zip file
-            n = getDictionaryFilenames()[ 0 ] + ".files.zip";
 
-            if ( zip * z = zip_open( n.c_str(), 0, 0 ) )
+            if ( resourceZip )
             {
               string fname = FsEncoding::encode( filename );
 
-              int result = zip_name_locate( z, fname.c_str(), 0 );
-
-              zip_close( z );
+              int result = zip_name_locate( resourceZip, fname.c_str(), 0 );
 
               if ( result == -1 )
                 throw;
@@ -684,6 +689,9 @@ class DslResourceRequest: public Dictionary::DataRequest
 {
   friend class DslResourceRequestRunnable;
 
+  Mutex & resourceZipMutex;
+  zip * resourceZip;
+
   string dictionaryFileName, resourceName;
 
   QAtomicInt isCancelled;
@@ -691,8 +699,12 @@ class DslResourceRequest: public Dictionary::DataRequest
 
 public:
 
-  DslResourceRequest( string const & dictionaryFileName_,
+  DslResourceRequest( Mutex & resourceZipMutex_,
+                      zip * resourceZip_,
+                      string const & dictionaryFileName_,
                       string const & resourceName_ ):
+    resourceZipMutex( resourceZipMutex_ ),
+    resourceZip( resourceZip_ ),
     dictionaryFileName( dictionaryFileName_ ),
     resourceName( resourceName_ )
   {
@@ -758,9 +770,8 @@ void DslResourceRequest::run()
       catch( File::exCantOpen & )
       {
         // Try reading from zip file
-        n = dictionaryFileName + ".files.zip";
 
-        if ( zip * z = zip_open( n.c_str(), 0, 0 ) )
+        if ( resourceZip )
         {
           string fname = FsEncoding::encode( resourceName );
 
@@ -769,8 +780,14 @@ void DslResourceRequest::run()
 
           zip_stat_init( &st );
 
-          if ( !zip_stat( z, fname.c_str(), 0, &st ) &&
-               ( zf = zip_fopen( z, fname.c_str(), 0 ) ) )
+          Mutex::Lock _( resourceZipMutex );
+
+          int fileIndex;
+
+          if ( !isCancelled &&
+               ( fileIndex = zip_name_locate( resourceZip, fname.c_str(), 0 ) ) != -1 &&
+               !zip_stat_index( resourceZip, fileIndex, 0, &st ) &&
+               ( zf = zip_fopen_index( resourceZip, fileIndex, 0 ) ) )
           {
             int result;
 
@@ -778,21 +795,17 @@ void DslResourceRequest::run()
               Mutex::Lock _( dataMutex );
 
               data.resize( st.size );
-  
+
               result = zip_fread( zf, &data.front(), data.size() );
             }
 
             zip_fclose( zf );
-            zip_close( z );
 
             if ( result != (int)st.size )
               throw; // Make it fail since we couldn't read the archive
           }
           else
-          {
-            zip_close( z );
             throw;
-          }
         }
         else
           throw;
@@ -841,7 +854,8 @@ void DslResourceRequest::run()
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
   throw( std::exception )
 {
-  return new DslResourceRequest( getDictionaryFilenames()[ 0 ], name );
+  return new DslResourceRequest( resourceZipMutex, resourceZip,
+                                 getDictionaryFilenames()[ 0 ], name );
 }
 
 } // anonymous namespace
