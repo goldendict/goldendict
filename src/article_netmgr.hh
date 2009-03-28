@@ -56,6 +56,8 @@ public:
                         sptr< Dictionary::DataRequest > const &,
                         QString const & contentType );
 
+  ~ArticleResourceReply();
+
 protected:
 
   virtual qint64 bytesAvailable() const;

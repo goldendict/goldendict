@@ -137,6 +137,11 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
   }
 }
 
+ArticleResourceReply::~ArticleResourceReply()
+{
+  req->cancel();
+}
+
 void ArticleResourceReply::reqUpdated()
 {
   emit readyRead();
