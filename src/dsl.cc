@@ -404,7 +404,29 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
               FsEncoding::separator() +
               FsEncoding::encode( filename );
 
-          File::Class f( n, "rb" );
+          try
+          {
+            File::Class f( n, "rb" );
+          }
+          catch( File::exCantOpen & )
+          {
+            // Try zip file
+            n = getDictionaryFilenames()[ 0 ] + ".files.zip";
+
+            if ( zip * z = zip_open( n.c_str(), 0, 0 ) )
+            {
+              string fname = FsEncoding::encode( filename );
+
+              int result = zip_name_locate( z, fname.c_str(), 0 );
+
+              zip_close( z );
+
+              if ( result == -1 )
+                throw;
+            }
+            else
+              throw;
+          }
         }
 
         search = false;
