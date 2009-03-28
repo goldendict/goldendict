@@ -21,6 +21,10 @@
 #include <list>
 #include <wctype.h>
 
+#include <QSemaphore>
+#include <QThreadPool>
+#include <QAtomicInt>
+
 // For TIFF conversion
 #include <QImage>
 #include <QByteArray>
@@ -630,45 +634,113 @@ void loadFromFile( string const & n, vector< char > & data )
   f.read( &data.front(), data.size() );
 }
 
-sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
-  throw( std::exception )
+//// DslDictionary::getResource()
+
+class DslResourceRequest;
+
+class DslResourceRequestRunnable: public QRunnable
 {
+  DslResourceRequest & r;
+  QSemaphore & hasExited;
+  
+public:
+
+  DslResourceRequestRunnable( DslResourceRequest & r_,
+                              QSemaphore & hasExited_ ): r( r_ ),
+                                                         hasExited( hasExited_ )
+  {}
+
+  ~DslResourceRequestRunnable()
+  {
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
+
+class DslResourceRequest: public Dictionary::DataRequest
+{
+  friend class DslResourceRequestRunnable;
+
+  string dictionaryFileName, resourceName;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  DslResourceRequest( string const & dictionaryFileName_,
+                      string const & resourceName_ ):
+    dictionaryFileName( dictionaryFileName_ ),
+    resourceName( resourceName_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new DslResourceRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by DslResourceRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+  
+  ~DslResourceRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void DslResourceRequestRunnable::run()
+{
+  r.run();
+}
+
+void DslResourceRequest::run()
+{
+  // Some runnables linger enough that they are cancelled before they start
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
   string n = 
-    FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+    FsEncoding::dirname( dictionaryFileName ) +
     FsEncoding::separator() +
-    FsEncoding::encode( name );
+    FsEncoding::encode( resourceName );
 
   printf( "n is %s\n", n.c_str() );
 
   try
   {
-    sptr< Dictionary::DataRequestInstant > result = new
-      Dictionary::DataRequestInstant( true );
-
-    vector< char > & data = result->getData();
-    
     try
     {
+      Mutex::Lock _( dataMutex );
+
       loadFromFile( n, data );
     }
     catch( File::exCantOpen & )
     {
-      n = getDictionaryFilenames()[ 0 ] + ".files" +
+      n = dictionaryFileName + ".files" +
           FsEncoding::separator() +
-          FsEncoding::encode( name );
+          FsEncoding::encode( resourceName );
 
       try
       {
+        Mutex::Lock _( dataMutex );
+
         loadFromFile( n, data );
       }
       catch( File::exCantOpen & )
       {
         // Try reading from zip file
-        n = getDictionaryFilenames()[ 0 ] + ".files.zip";
+        n = dictionaryFileName + ".files.zip";
 
         if ( zip * z = zip_open( n.c_str(), 0, 0 ) )
         {
-          string fname = FsEncoding::encode( name );
+          string fname = FsEncoding::encode( resourceName );
 
           struct zip_stat st;
           zip_file * zf;
@@ -678,15 +750,20 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
           if ( !zip_stat( z, fname.c_str(), 0, &st ) &&
                ( zf = zip_fopen( z, fname.c_str(), 0 ) ) )
           {
-            data.resize( st.size );
+            int result;
 
-            int result =
-              zip_fread( zf, &data.front(), data.size() );
+            {
+              Mutex::Lock _( dataMutex );
+
+              data.resize( st.size );
+  
+              result = zip_fread( zf, &data.front(), data.size() );
+            }
 
             zip_fclose( zf );
             zip_close( z );
 
-            if ( result != (int)data.size() )
+            if ( result != (int)st.size )
               throw; // Make it fail since we couldn't read the archive
           }
           else
@@ -700,12 +777,16 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
       }
     }
 
-    if ( Filetype::isNameOfTiff( name ) )
+    if ( Filetype::isNameOfTiff( resourceName ) )
     {
       // Convert it
 
+      dataMutex.lock();
+
       QImage img = QImage::fromData( (unsigned char *) &data.front(),
                                      data.size() );
+
+      dataMutex.unlock();
 
       if ( !img.isNull() )
       {
@@ -715,20 +796,30 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
         QBuffer buffer( &ba );
         buffer.open( QIODevice::WriteOnly );
         img.save( &buffer, "BMP" );
-  
+
+        Mutex::Lock _( dataMutex );
+
         data.resize( buffer.size() );
   
         memcpy( &data.front(), buffer.data(), data.size() );
       }
     }
 
-    return result;
+    Mutex::Lock _( dataMutex );
+
+    hasAnyData = true;
   }
   catch( File::Ex & )
   {
-    // No such resource
-    return new Dictionary::DataRequestInstant( false );
+    // No such resource -- we don't set the hasAnyData flag then
   }
+  finish();
+}
+
+sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
+  throw( std::exception )
+{
+  return new DslResourceRequest( getDictionaryFilenames()[ 0 ], name );
 }
 
 } // anonymous namespace
