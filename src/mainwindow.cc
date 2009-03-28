@@ -119,9 +119,6 @@ MainWindow::MainWindow():
   connect( ui.translateLine, SIGNAL( returnPressed() ),
            this, SLOT( translateInputFinished() ) );
 
-  connect( ui.wordList, SIGNAL( itemActivated( QListWidgetItem * ) ),
-           this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
-  
   connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
            this, SLOT( wordListSelectionChanged() ) );
   
