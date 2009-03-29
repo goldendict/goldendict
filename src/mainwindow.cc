@@ -127,6 +127,9 @@ MainWindow::MainWindow():
   connect( &wordFinder, SIGNAL( finished() ),
            this, SLOT( prefixMatchFinished() ) );
 
+  ui.translateLine->installEventFilter( this );
+  ui.wordList->installEventFilter( this );
+
   makeDictionaries();
 
   addNewTab();
@@ -596,8 +599,10 @@ void MainWindow::translateInputChanged( QString const & newValue )
 
 void MainWindow::translateInputFinished()
 {
-  if ( ui.wordList->count() )
-    wordListItemActivated( ui.wordList->item( 0 ) );
+  QString word = ui.translateLine->text();
+
+  if ( word.size() )
+    showTranslationFor( word );
 }
 
 void MainWindow::prefixMatchUpdated()
@@ -663,6 +668,52 @@ void MainWindow::updateMatchResults( bool finished )
     if ( !wordFinder.getErrorString().isEmpty() )
       statusBar()->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ) );
   }
+}
+
+bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
+{
+  if ( obj == ui.translateLine )
+  {
+    if ( ev->type() == QEvent::KeyPress )
+    {
+      QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
+  
+      if ( keyEvent->matches( QKeySequence::MoveToNextLine ) && ui.wordList->count() )
+      {
+        ui.wordList->setFocus( Qt::ShortcutFocusReason );
+        ui.wordList->setCurrentRow( 0, QItemSelectionModel::ClearAndSelect );
+        return true;
+      }
+    }
+  }
+  else
+  if ( obj == ui.wordList )
+  {
+    if ( ev->type() == QEvent::KeyPress )
+    {
+      QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
+
+      if ( keyEvent->matches( QKeySequence::MoveToPreviousLine ) &&
+           !ui.wordList->currentRow() )
+      {
+        ui.wordList->setCurrentRow( 0, QItemSelectionModel::Clear );
+        ui.translateLine->setFocus( Qt::ShortcutFocusReason );
+        return true;
+      }
+
+      if ( keyEvent->matches( QKeySequence::InsertParagraphSeparator ) &&
+           ui.wordList->selectedItems().size() )
+      {
+        dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).focus();
+
+        return true;
+      }
+    }
+  }
+  else
+    return QMainWindow::eventFilter( obj, ev );
+
+  return false;
 }
 
 void MainWindow::wordListItemActivated( QListWidgetItem * item )

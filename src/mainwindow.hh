@@ -105,6 +105,8 @@ private:
 
   void updateMatchResults( bool finished );
 
+  virtual bool eventFilter( QObject *, QEvent * );
+
   /// Returns the reference to dictionaries stored in the currently active
   /// group, or to all dictionaries if there are no groups.
   vector< sptr< Dictionary::Class > > const & getActiveDicts();

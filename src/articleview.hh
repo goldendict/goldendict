@@ -72,6 +72,10 @@ public:
   void forward()
   { ui.definition->forward(); }
 
+  /// Takes the focus to the view
+  void focus()
+  { ui.definition->setFocus( Qt::ShortcutFocusReason ); }
+
 signals:
 
   void iconChanged( ArticleView *, QIcon const & icon );
