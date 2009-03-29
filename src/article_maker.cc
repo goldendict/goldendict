@@ -80,10 +80,9 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
     {
       result += tr(
 "<h3 align=\"center\">Welcome to <b>GoldenDict</b>!</h3>"
-"<p>To start working with the program, first add some directory paths where to search "
-"for the dictionary files at <b>Edit|Sources</b>. Note that each subdirectory is to be added separately. "
-"You can also set up Wikipedia sources there. "
-"After that, you can organize all the dictionaries found into groups "
+"<p>To start working with the program, first visit <b>Edit|Sources</b> to add some directory paths where to search "
+"for the dictionary files, and/or set up various Wikipedia sources. "
+"After that, you can optionally organize all the dictionaries found into groups "
 "in <b>Edit|Groups</b>."
 "<p>You can also check out the available program preferences at <b>Edit|Preferences</b>. "
 "All settings there have tooltips, be sure to read them if you are in doubt about anything."
