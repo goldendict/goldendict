@@ -37,9 +37,10 @@ namespace
 }
 
 Preferences::Preferences():
-  enableTrayIcon( false ),
+  enableTrayIcon( true ),
   startToTray( false ),
-  enableScanPopup( false ),
+  closeToTray( true ),
+  enableScanPopup( true ),
   startWithScanPopupOn( false ),
   enableScanPopupModifiers( false ),
   scanPopupModifiers( 0 )
