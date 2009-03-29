@@ -30,6 +30,7 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
 
   Config::Paths const & paths;
   vector< sptr< Dictionary::Class > > dictionaries;
+  string exceptionText;
 
 public:
 
@@ -39,6 +40,10 @@ public:
 
   vector< sptr< Dictionary::Class > > const & getDictionaries() const
   { return dictionaries; }
+
+  /// Empty string means to exception occured
+  string const & getExceptionText() const
+  { return exceptionText; }
 
 signals:
 

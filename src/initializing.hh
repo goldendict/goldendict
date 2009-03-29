@@ -13,7 +13,7 @@ class Initializing: public QDialog
 
 public:
 
-  Initializing( QWidget * parent );
+  Initializing( QWidget * parent, bool showOnStartup );
 
   void indexing( QString const & dictionaryName );
 

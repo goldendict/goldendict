@@ -4,19 +4,29 @@
 #include "initializing.hh"
 #include <QCloseEvent>
 
-Initializing::Initializing( QWidget * parent ): QDialog( parent )
+Initializing::Initializing( QWidget * parent, bool showOnStartup ): QDialog( parent )
 {
   ui.setupUi( this );
   setWindowFlags( Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint |
                   Qt::WindowMinimizeButtonHint );
   
   setWindowIcon( QIcon( ":/icons/programicon.png" ) );
+
+  if ( showOnStartup )
+  {
+    ui.operation->setText( tr( "Please wait..." ) );
+    ui.dictionary->hide();
+    ui.progressBar->hide();
+    show();
+  }
 }
 
 void Initializing::indexing( QString const & dictionaryName )
 {
   ui.operation->setText( tr( "Please wait while indexing dictionary" ) );
   ui.dictionary->setText( dictionaryName );
+  ui.dictionary->show();
+  ui.progressBar->show();
   show();
 }
 

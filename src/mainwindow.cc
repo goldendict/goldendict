@@ -162,8 +162,15 @@ LoadDictionaries::LoadDictionaries( Config::Paths const & paths_ ):
 
 void LoadDictionaries::run()
 {
-  for( Config::Paths::const_iterator i = paths.begin(); i != paths.end(); ++i )
-    handlePath( *i );
+  try
+  {
+    for( Config::Paths::const_iterator i = paths.begin(); i != paths.end(); ++i )
+      handlePath( *i );
+  }
+  catch( std::exception & e )
+  {
+    exceptionText = e.what();
+  }
 }
 
 void LoadDictionaries::handlePath( Config::Path const & path )
@@ -274,7 +281,7 @@ void MainWindow::makeDictionaries()
 
   dictionaries.clear();
 
-  ::Initializing init( this );
+  ::Initializing init( this, isVisible() );
 
   try
   {
@@ -297,6 +304,16 @@ void MainWindow::makeDictionaries()
     localLoop.exec();
 
     loadDicts.wait();
+
+    if ( loadDicts.getExceptionText().size() )
+    {
+      initializing = 0;
+
+      QMessageBox::critical( this, tr( "Error loading dictionaries" ),
+                             QString::fromUtf8( loadDicts.getExceptionText().c_str() ) );
+
+      return;
+    }
 
     dictionaries = loadDicts.getDictionaries();
 
