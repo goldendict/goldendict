@@ -28,11 +28,23 @@ struct Path
 /// A list of paths where to search for the dictionaries
 typedef vector< Path > Paths;
 
+struct DictionaryRef
+{
+  QString id; // Dictionrary id, which is usually an md5 hash
+  QString name; // Dictionary name, used to recover when its id changes
+
+  DictionaryRef()
+  {}
+
+  DictionaryRef( QString const & id_, QString const & name_ ):
+    id( id_ ), name( name_ ) {}
+};
+
 /// A dictionary group
 struct Group
 {
   QString name, icon;
-  vector< QString > dictionaries; // consists of dictionary's ids
+  vector< DictionaryRef > dictionaries;
 };
 
 /// All the groups

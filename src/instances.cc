@@ -12,14 +12,31 @@ Group::Group( Config::Group const & cfgGroup,
 {
   for( unsigned x = 0; x < cfgGroup.dictionaries.size(); ++x )
   {
-    std::string id = cfgGroup.dictionaries[ x ].toStdString();
+    std::string id = cfgGroup.dictionaries[ x ].id.toStdString();
+
+    bool added = false;
 
     for( unsigned y = allDictionaries.size(); y--; )
       if ( allDictionaries[ y ]->getId() == id )
       {
         dictionaries.push_back( allDictionaries[ y ] );
+        added = true;
         break;
       }
+
+    if ( !added )
+    {
+      // Try matching by name instead
+      std::string name = cfgGroup.dictionaries[ x ].name.toUtf8().data();
+
+      if ( name.size() )
+        for( unsigned y = 0; y < allDictionaries.size(); ++y )
+          if ( allDictionaries[ y ]->getName() == name )
+          {
+            dictionaries.push_back( allDictionaries[ y ] );
+            break;
+          }
+    }
   }
 }
 
@@ -35,9 +52,29 @@ Config::Group Group::makeConfigGroup()
   result.icon = icon;
 
   for( unsigned x = 0; x < dictionaries.size(); ++x )
-    result.dictionaries.push_back( dictionaries[ x ]->getId().c_str() );
+    result.dictionaries.push_back(
+      Config::DictionaryRef( dictionaries[ x ]->getId().c_str(),
+                             QString::fromUtf8( dictionaries[ x ]->getName().c_str() ) ) );
 
   return result;
 }
+
+void updateNames( Config::Group & group,
+                  vector< sptr< Dictionary::Class > > const & allDictionaries )
+{
+
+  for( unsigned x = group.dictionaries.size(); x--; )
+  {
+    std::string id = group.dictionaries[ x ].id.toStdString();
+
+    for( unsigned y = allDictionaries.size(); y--; )
+      if ( allDictionaries[ y ]->getId() == id )
+      {
+        group.dictionaries[ x ].name = QString::fromUtf8( allDictionaries[ y ]->getName().c_str() );
+        break;
+      }
+  }
+}
+
 
 }

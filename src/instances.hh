@@ -36,6 +36,12 @@ struct Group
 
 typedef vector< Group > Groups;
 
+/// For any dictionaries present in the group, updates their names to match
+/// the dictionaries they refer to in their current form, if they exist.
+/// If the dictionary instance can't be located, the name is left untouched.
+void updateNames( Config::Group &,
+                  vector< sptr< Dictionary::Class > > const & allDictionaries );
+
 }
 
 #endif

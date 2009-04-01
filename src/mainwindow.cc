@@ -392,7 +392,13 @@ void MainWindow::updateGroupList()
   groupInstances.clear();
 
   for( unsigned x  = 0; x < cfg.groups.size(); ++x )
+  {
     groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
+
+    // Update names for dictionaries that are present, so that they could be
+    // found in case they got moved.
+    Instances::updateNames( cfg.groups[ x ], dictionaries );
+  }
 
   ui.groupList->fill( groupInstances );
   ui.groupList->setCurrentGroup( cfg.lastMainGroup );

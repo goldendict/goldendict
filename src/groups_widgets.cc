@@ -150,7 +150,7 @@ bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
   {
     Config::Group g;
 
-    g.dictionaries.push_back( value.toString() );
+    g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
 
     Instances::Group i( g, *allDicts );
 

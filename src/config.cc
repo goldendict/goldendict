@@ -142,7 +142,8 @@ Class load() throw( exError )
       QDomNodeList dicts = grp.elementsByTagName( "dictionary" );
 
       for( unsigned y = 0; y < dicts.length(); ++y )
-        g.dictionaries.push_back( dicts.item( y ).toElement().text() );
+        g.dictionaries.push_back( DictionaryRef( dicts.item( y ).toElement().text(),
+                                                 dicts.item( y ).toElement().attribute( "name" ) ) );
 
       c.groups.push_back( g );
     }
@@ -258,15 +259,21 @@ void save( Class const & c ) throw( exError )
         group.setAttributeNode( icon );
       }
 
-      for( vector< QString >::const_iterator j = i->dictionaries.begin(); j != i->dictionaries.end(); ++j )
+      for( vector< DictionaryRef >::const_iterator j = i->dictionaries.begin(); j != i->dictionaries.end(); ++j )
       {
         QDomElement dictionary = dd.createElement( "dictionary" );
 
         group.appendChild( dictionary );
 
-        QDomText value = dd.createTextNode( *j );
+        QDomText value = dd.createTextNode( j->id );
 
         dictionary.appendChild( value );
+
+        QDomAttr name = dd.createAttribute( "name" );
+
+        name.setValue( j->name );
+
+        dictionary.setAttributeNode( name );
       }
     }
   }
