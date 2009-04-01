@@ -250,7 +250,7 @@ void MediaWikiArticleRequest::downloadFinished()
           for( ; ; )
           {
             QString before = articleString;
-            articleString.replace( QRegExp( "<a href=\"([^/:\">]*)_" ), "<a href=\"\\1 " );
+            articleString.replace( QRegExp( "<a href=\"([^/:\">#]*)_" ), "<a href=\"\\1 " );
 
             if ( articleString == before )
               break;
