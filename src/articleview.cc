@@ -24,6 +24,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 {
   ui.setupUi( this );
 
+  ui.definition->pageAction( QWebPage::Copy )->setShortcut( QKeySequence::Copy );
+  ui.definition->addAction( ui.definition->pageAction( QWebPage::Copy ) );
+
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
   ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
@@ -295,6 +298,11 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       followLinkNewTab = new QAction( tr( "Open Link in New &Tab" ), &menu );
       menu.addAction( followLinkNewTab );
     }
+
+    QString scheme = r.linkUrl().scheme();
+
+    if ( scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "mailto" )
+      menu.addAction( ui.definition->pageAction( QWebPage::QWebPage::CopyLinkToClipboard ) );
   }
 
   QString selectedText = ui.definition->selectedText();
@@ -309,6 +317,8 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       lookupSelectionNewTab = new QAction( tr( "Look up \"%1\" in &New Tab" ).arg( ui.definition->selectedText() ), &menu );
       menu.addAction( lookupSelectionNewTab );
     }
+
+    menu.addAction( ui.definition->pageAction( QWebPage::QWebPage::Copy ) );
   }
 
   if ( !menu.isEmpty() )
