@@ -81,10 +81,13 @@ Class load() throw( exError )
     Class c;
 
     #ifdef Q_OS_LINUX
-
     if ( QDir( "/usr/share/stardict/dic" ).exists() )
       c.paths.push_back( Path( "/usr/share/stardict/dic", true ) );
+    #endif
 
+    #ifdef Q_OS_WIN32
+    if ( QDir( "C:/Program Files/StarDict/dic" ).exists() )
+      c.paths.push_back( Path( "C:/Program Files/StarDict/dic", true ) );
     #endif
 
     c.mediawikis = makeDefaultMediaWikis( true );
