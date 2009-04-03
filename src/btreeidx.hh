@@ -24,7 +24,7 @@ enum
   /// This is to be bumped up each time the internal format changes.
   /// The value isn't used here by itself, it is supposed to be added
   /// to each dictionary's internal format version.
-  FormatVersion = 1
+  FormatVersion = 2
 };
 
 // These exceptions which might be thrown during the index traversal

@@ -741,8 +741,8 @@ uint32_t buildIndex( IndexedWords const & indexedWords, File::Class & file )
 
   uint32_t indexOffset = file.tell();
 
-  file.write( btreeMaxElements );
-  file.write( rootOffset );
+  file.write( (uint32_t) btreeMaxElements );
+  file.write( (uint32_t) rootOffset );
 
   return indexOffset;
 }
