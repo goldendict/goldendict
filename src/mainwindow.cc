@@ -130,6 +130,8 @@ MainWindow::MainWindow():
   ui.translateLine->installEventFilter( this );
   ui.wordList->installEventFilter( this );
 
+  applyProxySettings();
+
   makeDictionaries();
 
   addNewTab();
@@ -274,6 +276,42 @@ void MainWindow::closeEvent( QCloseEvent * ev )
   }
   else
     ev->accept();
+}
+
+void MainWindow::applyProxySettings()
+{
+ QNetworkProxy proxy;
+
+ if ( cfg.preferences.proxyServer.enabled )
+ {
+   switch( cfg.preferences.proxyServer.type )
+   {
+     case Config::ProxyServer::Socks5:
+       proxy.setType( QNetworkProxy::Socks5Proxy );
+     break;
+     case Config::ProxyServer::HttpConnect:
+       proxy.setType( QNetworkProxy::HttpProxy );
+     break;
+     case Config::ProxyServer::HttpGet:
+       proxy.setType( QNetworkProxy::HttpCachingProxy );
+     break;
+     default:
+       proxy.setType( QNetworkProxy::NoProxy );
+   }
+
+   proxy.setHostName( cfg.preferences.proxyServer.host );
+   proxy.setPort( cfg.preferences.proxyServer.port );
+
+   if ( cfg.preferences.proxyServer.user.size() )
+     proxy.setUser( cfg.preferences.proxyServer.user );
+
+   if ( cfg.preferences.proxyServer.password.size() )
+     proxy.setPassword( cfg.preferences.proxyServer.password );
+ }
+ else
+   proxy.setType( QNetworkProxy::NoProxy );
+
+ QNetworkProxy::setApplicationProxy( proxy );
 }
 
 void MainWindow::makeDictionaries()
@@ -559,6 +597,7 @@ void MainWindow::editPreferences()
       enableScanPopup->setChecked( false );
     
     updateTrayIcon();
+    applyProxySettings();
     makeScanPopup();
     Config::save( cfg );
   }

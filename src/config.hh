@@ -50,6 +50,25 @@ struct Group
 /// All the groups
 typedef vector< Group > Groups;
 
+/// Proxy server configuration
+struct ProxyServer
+{
+  bool enabled;
+
+  enum Type
+  {
+    Socks5 = 0,
+    HttpConnect,
+    HttpGet
+  } type;
+
+  QString host;
+  unsigned port;
+  QString user, password;
+
+  ProxyServer();
+};
+
 /// Various user preferences
 struct Preferences
 {
@@ -60,6 +79,8 @@ struct Preferences
   bool startWithScanPopupOn;
   bool enableScanPopupModifiers;
   unsigned long scanPopupModifiers; // Combination of KeyboardState::Modifier
+
+  ProxyServer proxyServer;
 
   Preferences();
 };

@@ -98,6 +98,7 @@ private:
 
   void closeEvent( QCloseEvent * );
 
+  void applyProxySettings();
   void makeDictionaries();
   void updateStatusLine();
   void updateGroupList();

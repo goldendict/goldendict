@@ -36,6 +36,10 @@ namespace
   }
 }
 
+ProxyServer::ProxyServer(): enabled( false ), type( Socks5 ), port( 3128 )
+{
+}
+
 Preferences::Preferences():
   enableTrayIcon( true ),
   startToTray( false ),
@@ -186,7 +190,19 @@ Class load() throw( exError )
     c.preferences.enableScanPopup = ( preferences.namedItem( "enableScanPopup" ).toElement().text() == "1" );
     c.preferences.startWithScanPopupOn = ( preferences.namedItem( "startWithScanPopupOn" ).toElement().text() == "1" );
     c.preferences.enableScanPopupModifiers = ( preferences.namedItem( "enableScanPopupModifiers" ).toElement().text() == "1" );
-    c.preferences.scanPopupModifiers = ( preferences.namedItem( "scanPopupModifiers" ).toElement().text().toULong() );    
+    c.preferences.scanPopupModifiers = ( preferences.namedItem( "scanPopupModifiers" ).toElement().text().toULong() );
+
+    QDomNode proxy = preferences.namedItem( "proxyserver" );
+
+    if ( !proxy.isNull() )
+    {
+      c.preferences.proxyServer.enabled = ( proxy.toElement().attribute( "enabled" ) == "1" );
+      c.preferences.proxyServer.type = ( ProxyServer::Type ) proxy.namedItem( "type" ).toElement().text().toULong();
+      c.preferences.proxyServer.host = proxy.namedItem( "host" ).toElement().text();
+      c.preferences.proxyServer.port = proxy.namedItem( "port" ).toElement().text().toULong();
+      c.preferences.proxyServer.user = proxy.namedItem( "user" ).toElement().text();
+      c.preferences.proxyServer.password = proxy.namedItem( "password" ).toElement().text();
+    }
   }
 
   c.lastMainGroup = root.namedItem( "lastMainGroup" ).toElement().text();
@@ -336,6 +352,35 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "scanPopupModifiers" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupModifiers ) ) );
     preferences.appendChild( opt );
+
+    {
+      QDomElement proxy = dd.createElement( "proxyserver" );
+      preferences.appendChild( proxy );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( c.preferences.proxyServer.enabled ? "1" : "0" );
+      proxy.setAttributeNode( enabled );
+
+      opt = dd.createElement( "type" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.proxyServer.type ) ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "host" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.host ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "port" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.proxyServer.port ) ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "user" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.user ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "password" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.password ) );
+      proxy.appendChild( opt );
+    }
   }
 
   {

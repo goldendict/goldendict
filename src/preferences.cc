@@ -64,6 +64,22 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.leftShift->hide();
   ui.rightShift->hide();
 #endif
+
+  // Proxy server
+
+  ui.useProxyServer->setChecked( p.proxyServer.enabled );
+
+  ui.proxyType->addItem( "SOCKS5" );
+  ui.proxyType->addItem( "HTTP Transp." );
+  ui.proxyType->addItem( "HTTP Caching" );
+
+  ui.proxyType->setCurrentIndex( p.proxyServer.type );
+
+  ui.proxyHost->setText( p.proxyServer.host );
+  ui.proxyPort->setValue( p.proxyServer.port );
+
+  ui.proxyUser->setText( p.proxyServer.user );
+  ui.proxyPassword->setText( p.proxyServer.password );
 }
 
 Config::Preferences Preferences::getPreferences()
@@ -87,6 +103,16 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupModifiers += ui.rightCtrl->isChecked() ? KeyboardState::RightCtrl: 0;
   p.scanPopupModifiers += ui.leftShift->isChecked() ? KeyboardState::LeftShift: 0;
   p.scanPopupModifiers += ui.rightShift->isChecked() ? KeyboardState::RightShift: 0;
+
+  p.proxyServer.enabled = ui.useProxyServer->isChecked();
+
+  p.proxyServer.type = ( Config::ProxyServer::Type ) ui.proxyType->currentIndex();
+
+  p.proxyServer.host = ui.proxyHost->text();
+  p.proxyServer.port = ( unsigned ) ui.proxyPort->value();
+
+  p.proxyServer.user = ui.proxyUser->text();
+  p.proxyServer.password = ui.proxyPassword->text();
 
   return p;
 }
