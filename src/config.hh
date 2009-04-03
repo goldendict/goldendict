@@ -112,6 +112,9 @@ struct Class
   QString lastMainGroup; // Last used group in main window
   QString lastPopupGroup; // Last used group in popup window
   QSize lastPopupSize;
+
+  QByteArray mainWindowState; // Binary state saved by QMainWindow
+  QByteArray mainWindowGeometry; // Geometry saved by QMainWindow
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )

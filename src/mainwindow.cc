@@ -40,6 +40,8 @@ MainWindow::MainWindow():
 
   // Make the toolbar
   navToolbar = addToolBar( tr( "Navigation" ) );
+  navToolbar->setObjectName( "navToolbar" );
+
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
   
@@ -130,6 +132,12 @@ MainWindow::MainWindow():
   ui.translateLine->installEventFilter( this );
   ui.wordList->installEventFilter( this );
 
+  if ( cfg.mainWindowGeometry.size() )
+    restoreGeometry( cfg.mainWindowGeometry );
+
+  if ( cfg.mainWindowState.size() )
+    restoreState( cfg.mainWindowState );
+
   applyProxySettings();
 
   makeDictionaries();
@@ -156,6 +164,10 @@ MainWindow::MainWindow():
 
 MainWindow::~MainWindow()
 {
+  // Save MainWindow state and geometry
+  cfg.mainWindowState = saveState();
+  cfg.mainWindowGeometry = saveGeometry();
+
   // Save any changes in last chosen groups etc
   Config::save( cfg );
 }

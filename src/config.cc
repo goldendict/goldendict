@@ -217,6 +217,16 @@ Class load() throw( exError )
                              lastPopupHeight.toElement().text().toULong() );
   }
 
+  QDomNode mainWindowState = root.namedItem( "mainWindowState" );
+
+  if ( !mainWindowState.isNull() )
+    c.mainWindowState = QByteArray::fromBase64( mainWindowState.toElement().text().toLatin1() );
+
+  QDomNode mainWindowGeometry = root.namedItem( "mainWindowGeometry" );
+
+  if ( !mainWindowGeometry.isNull() )
+    c.mainWindowGeometry = QByteArray::fromBase64( mainWindowGeometry.toElement().text().toLatin1() );
+
   return c;
 }
 
@@ -402,6 +412,14 @@ void save( Class const & c ) throw( exError )
       opt.appendChild( dd.createTextNode( QString::number( c.lastPopupSize.height() ) ) );
       root.appendChild( opt );
     }
+
+    opt = dd.createElement( "mainWindowState" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.mainWindowState.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "mainWindowGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.mainWindowGeometry.toBase64() ) ) );
+    root.appendChild( opt );
   }
 
   configFile.write( dd.toByteArray() );
