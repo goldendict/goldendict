@@ -6,7 +6,7 @@
 #include "mainwindow.hh"
 #include "config.hh"
 
-#define __DO_DEBUG
+//#define __DO_DEBUG
 
 #ifdef __DO_DEBUG
 #include <sys/resource.h>
