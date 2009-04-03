@@ -485,19 +485,29 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
   for( ; ; )
   {
     // Check that we have bytes to read
-    if ( !readBufferLeft )
+    if ( readBufferLeft < 4 ) // To convert one char, we need at most 4 bytes
     {
       if ( gzeof( f ) )
-        return false;
-
-      // Read some more bytes to readBuffer
-      int result = gzread( f, readBuffer, sizeof( readBuffer ) );
-
-      if ( result == -1 )
-        throw exCantReadDslFile();
-
-      readBufferPtr = readBuffer;
-      readBufferLeft = (size_t) result;
+      {
+        if ( !readBufferLeft )
+          return false;
+      }
+      else
+      {
+        // To avoid having to deal with ring logic, we move the remaining bytes
+        // to the beginning
+        memmove( readBuffer, readBufferPtr, readBufferLeft );
+  
+        // Read some more bytes to readBuffer
+        int result = gzread( f, readBuffer + readBufferLeft,
+                             sizeof( readBuffer ) - readBufferLeft );
+  
+        if ( result == -1 )
+          throw exCantReadDslFile();
+  
+        readBufferPtr = readBuffer;
+        readBufferLeft += (size_t) result;
+      }
     }
 
     if ( readBufferLeft < readMultiple )
@@ -521,23 +531,33 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
     }
 
     // Check that we have chars to write
-    if ( !leftInOut )
+    if ( leftInOut < 2 ) // With 16-bit wchars, 2 is needed for a surrogate pair
     {
       wcharBuffer.resize( wcharBuffer.size() + 64 );
-      outPtr = &wcharBuffer.front() + wcharBuffer.size() - 64;
+      outPtr = &wcharBuffer.front() + wcharBuffer.size() - 64 - leftInOut;
       leftInOut += 64;
     }
 
     // Ok, now convert one char
-    size_t inBytesLeft = readMultiple;
     size_t outBytesLeft = sizeof( wchar_t );
 
-    if ( iconv.convert( (void const *&)readBufferPtr, inBytesLeft,
-         (void *&)outPtr, outBytesLeft ) !=
-         Iconv::Success || inBytesLeft || outBytesLeft )
+    Iconv::Result r =
+      iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
+                     (void *&)outPtr, outBytesLeft );
+
+    if ( r == Iconv::NeedMoreOut && outBytesLeft == sizeof( wchar_t ) )
+    {
+      // Seems to be a surrogate pair with a 16-bit target wchar
+
+      outBytesLeft *= 2;
+      r = iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
+                     (void *&)outPtr, outBytesLeft );
+      --leftInOut; // Complements the next decremention
+    }
+
+    if ( ( r != Iconv::Success && r != Iconv::NeedMoreOut ) || outBytesLeft )
       throw exEncodingError();
 
-    readBufferLeft -= readMultiple;
     --leftInOut;
 
     // Have we got \n?
