@@ -10,6 +10,7 @@
 #include "lsa.hh"
 #include "dsl.hh"
 #include "mediawiki.hh"
+#include "sounddir.hh"
 #include "ui_about.h"
 #include <QDir>
 #include <QMessageBox>
@@ -172,8 +173,8 @@ MainWindow::~MainWindow()
   Config::save( cfg );
 }
 
-LoadDictionaries::LoadDictionaries( Config::Paths const & paths_ ):
-  paths( paths_ )
+LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
+  paths( cfg.paths ), soundDirs( cfg.soundDirs )
 {
 }
 
@@ -183,6 +184,15 @@ void LoadDictionaries::run()
   {
     for( Config::Paths::const_iterator i = paths.begin(); i != paths.end(); ++i )
       handlePath( *i );
+
+    // Make soundDirs
+    {
+      vector< sptr< Dictionary::Class > > soundDirDictionaries =
+        SoundDir::makeDictionaries( soundDirs, Config::getIndexDir().toLocal8Bit().data(), *this );
+
+      dictionaries.insert( dictionaries.end(), soundDirDictionaries.begin(),
+                           soundDirDictionaries.end() );
+    }
   }
   catch( std::exception & e )
   {
@@ -342,7 +352,7 @@ void MainWindow::makeDictionaries()
 
     // Start a thread to load all the dictionaries
 
-    LoadDictionaries loadDicts( cfg.paths );
+    LoadDictionaries loadDicts( cfg );
 
     connect( &loadDicts, SIGNAL( indexingDictionarySignal( QString ) ),
              this, SLOT( indexingDictionary( QString ) ) );
@@ -558,13 +568,14 @@ void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
 
 void MainWindow::editSources()
 {
-  Sources src( this, cfg.paths, cfg.mediawikis );
+  Sources src( this, cfg.paths, cfg.soundDirs, cfg.mediawikis );
 
   src.show();
 
   if ( src.exec() == QDialog::Accepted )
   {
     cfg.paths = src.getPaths();
+    cfg.soundDirs = src.getSoundDirs();
     cfg.mediawikis = src.getMediaWikis();
 
     makeDictionaries();

@@ -14,7 +14,7 @@ namespace Config {
 
 using std::vector;
 
-// A path where to search for the dictionaries
+/// A path where to search for the dictionaries
 struct Path
 {
   QString path;
@@ -27,6 +27,23 @@ struct Path
 
 /// A list of paths where to search for the dictionaries
 typedef vector< Path > Paths;
+
+/// A directory holding bunches of audiofiles, which is indexed into a separate
+/// dictionary.
+struct SoundDir
+{
+  QString path, name;
+
+  SoundDir()
+  {}
+
+  SoundDir( QString const & path_, QString const & name_ ):
+    path( path_ ), name( name_ )
+  {}
+};
+
+/// A list of SoundDirs
+typedef vector< SoundDir > SoundDirs;
 
 struct DictionaryRef
 {
@@ -105,6 +122,7 @@ typedef vector< MediaWiki > MediaWikis;
 struct Class
 {
   Paths paths;
+  SoundDirs soundDirs;
   Groups groups;
   Preferences preferences;
   MediaWikis mediawikis;

@@ -8,8 +8,10 @@
 #include <QDateTime>
 
 Sources::Sources( QWidget * parent, Config::Paths const & paths,
+                  Config::SoundDirs const & soundDirs,
                   Config::MediaWikis const & mediawikis ): QDialog( parent ),
-  mediawikisModel( this, mediawikis ), pathsModel( this, paths )
+  mediawikisModel( this, mediawikis ), pathsModel( this, paths ),
+  soundDirsModel( this, soundDirs )
 {
   ui.setupUi( this );
 
@@ -23,6 +25,11 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.paths->setModel( &pathsModel );
 
   fitPathsColumns();
+  
+  ui.soundDirs->setTabKeyNavigation( true );
+  ui.soundDirs->setModel( &soundDirsModel );
+  
+  fitSoundDirsColumns();
 
   connect( ui.buttons, SIGNAL( accepted() ),
             this, SLOT( accept() ) );
@@ -34,6 +41,12 @@ void Sources::fitPathsColumns()
 {
   ui.paths->resizeColumnToContents( 0 );
   ui.paths->resizeColumnToContents( 1 );
+}
+
+void Sources::fitSoundDirsColumns()
+{
+  ui.soundDirs->resizeColumnToContents( 0 );
+  ui.soundDirs->resizeColumnToContents( 1 );
 }
 
 void Sources::on_addPath_clicked()
@@ -60,6 +73,33 @@ void Sources::on_removePath_clicked()
   {
     pathsModel.removePath( current.row() );
     fitPathsColumns();
+  }
+}
+
+void Sources::on_addSoundDir_clicked()
+{
+  QString dir = 
+    QFileDialog::getExistingDirectory( this, tr( "Choose a directory" ) );
+
+  if ( !dir.isEmpty() )
+  {
+    soundDirsModel.addNewSoundDir( dir, QDir( dir ).dirName() );
+    fitSoundDirsColumns();
+  }
+}
+
+void Sources::on_removeSoundDir_clicked()
+{
+  QModelIndex current = ui.soundDirs->currentIndex();
+
+  if ( current.isValid() &&
+      QMessageBox::question( this, tr( "Confirm removal" ),
+                             tr( "Remove directory <b>%1</b> from the list?" ).arg( soundDirsModel.getCurrentSoundDirs()[ current.row() ].path ),
+                             QMessageBox::Ok,
+                             QMessageBox::Cancel ) == QMessageBox::Ok )
+  {
+    soundDirsModel.removeSoundDir( current.row() );
+    fitSoundDirsColumns();
   }
 }
 
@@ -344,3 +384,111 @@ bool PathsModel::setData( QModelIndex const & index, const QVariant & /*value*/,
   return false;
 }
 
+
+////////// SoundDirsModel
+
+SoundDirsModel::SoundDirsModel( QWidget * parent,
+                                Config::SoundDirs const & soundDirs_ ):
+  QAbstractItemModel( parent ), soundDirs( soundDirs_ )
+{
+}
+
+void SoundDirsModel::removeSoundDir( int index )
+{
+  beginRemoveRows( QModelIndex(), index, index );
+  soundDirs.erase( soundDirs.begin() + index );
+  endRemoveRows();
+}
+
+void SoundDirsModel::addNewSoundDir( QString const & path, QString const & name )
+{
+  beginInsertRows( QModelIndex(), soundDirs.size(), soundDirs.size() );
+  soundDirs.push_back( Config::SoundDir( path, name ) );
+  endInsertRows();
+}
+
+QModelIndex SoundDirsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
+{
+  return createIndex( row, column, 0 );
+}
+
+QModelIndex SoundDirsModel::parent( QModelIndex const & /*parent*/ ) const
+{
+  return QModelIndex();
+}
+
+Qt::ItemFlags SoundDirsModel::flags( QModelIndex const & index ) const
+{
+  Qt::ItemFlags result = QAbstractItemModel::flags( index );
+
+  if ( index.isValid() && index.column() < 2 )
+    result |= Qt::ItemIsEditable;
+
+  return result;
+}
+
+int SoundDirsModel::rowCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return soundDirs.size();
+}
+
+int SoundDirsModel::columnCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return 2;
+}
+
+QVariant SoundDirsModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
+{
+  if ( role == Qt::DisplayRole )
+    switch( section )
+    {
+      case 0:
+        return tr( "Path" );
+      case 1:
+        return tr( "Name" );
+      default:
+        return QVariant();
+    }
+
+  return QVariant();
+}
+
+QVariant SoundDirsModel::data( QModelIndex const & index, int role ) const
+{
+  if ( (unsigned)index.row() >= soundDirs.size() )
+    return QVariant();
+
+  if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && !index.column() )
+    return soundDirs[ index.row() ].path;
+  
+  if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() == 1 )
+    return soundDirs[ index.row() ].name;
+
+  return QVariant();
+}
+
+bool SoundDirsModel::setData( QModelIndex const & index, const QVariant & value,
+                              int role )
+{
+  if ( (unsigned)index.row() >= soundDirs.size() )
+    return false;
+
+  if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() < 2 )
+  {
+    if ( !index.column() )
+      soundDirs[ index.row() ].path = value.toString();
+    else
+      soundDirs[ index.row() ].name = value.toString();
+
+    dataChanged( index, index );
+    return true;
+  }
+
+  return false;
+}

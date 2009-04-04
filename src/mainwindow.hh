@@ -29,12 +29,13 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
   Q_OBJECT
 
   Config::Paths const & paths;
+  Config::SoundDirs const & soundDirs;
   vector< sptr< Dictionary::Class > > dictionaries;
   string exceptionText;
 
 public:
 
-  LoadDictionaries( Config::Paths const & paths );
+  LoadDictionaries( Config::Class const & cfg );
 
   virtual void run();
 

@@ -130,6 +130,18 @@ Class load() throw( exError )
         Path( nl.item( x ).toElement().text(),
               nl.item( x ).toElement().attribute( "recursive" ) == "1" ) );
   }
+  
+  QDomNode soundDirs = root.namedItem( "sounddirs" );
+
+  if ( !soundDirs.isNull() )
+  {
+    QDomNodeList nl = soundDirs.toElement().elementsByTagName( "sounddir" );
+
+    for( unsigned x = 0; x < nl.length(); ++x )
+      c.soundDirs.push_back(
+        SoundDir( nl.item( x ).toElement().text(),
+                  nl.item( x ).toElement().attribute( "name" ) ) );
+  }
 
   QDomNode groups = root.namedItem( "groups" );
 
@@ -261,6 +273,25 @@ void save( Class const & c ) throw( exError )
       QDomText value = dd.createTextNode( i->path );
   
       path.appendChild( value );
+    }
+  }
+  
+  {
+    QDomElement soundDirs = dd.createElement( "sounddirs" );
+    root.appendChild( soundDirs );
+
+    for( SoundDirs::const_iterator i = c.soundDirs.begin(); i != c.soundDirs.end(); ++i )
+    {
+      QDomElement soundDir = dd.createElement( "sounddir" );
+      soundDirs.appendChild( soundDir );
+
+      QDomAttr name = dd.createAttribute( "name" );
+      name.setValue( i->name );
+      soundDir.setAttributeNode( name );
+
+      QDomText value = dd.createTextNode( i->path );
+
+      soundDir.appendChild( value );
     }
   }
 
