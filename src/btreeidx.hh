@@ -6,6 +6,7 @@
 
 #include "dictionary.hh"
 #include "file.hh"
+#include <stdint.h>
 #include <string>
 #include <vector>
 #include <map>
