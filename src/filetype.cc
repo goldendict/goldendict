@@ -18,7 +18,8 @@ string simplifyString( string const & str )
 
   size_t beginPos = 0;
 
-  while( beginPos < str.size() && isblank( str[ beginPos ] ) );
+  while( beginPos < str.size() && isblank( str[ beginPos ] ) )
+    ++beginPos;
 
   size_t endPos = str.size();
 
