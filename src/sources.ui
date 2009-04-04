@@ -82,7 +82,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Each directory is recursively searched for audiofiles, and is made into a dictionary:</string>
+          <string>Make dictionaries from bunches of audiofiles by adding paths here:</string>
          </property>
         </widget>
        </item>
