@@ -3,6 +3,7 @@
 
 #include "dsl_details.hh"
 #include <wctype.h>
+#include <stdio.h>
 
 namespace Dsl {
 namespace Details {
