@@ -83,11 +83,20 @@ Class load() throw( exError )
     #ifdef Q_OS_LINUX
     if ( QDir( "/usr/share/stardict/dic" ).exists() )
       c.paths.push_back( Path( "/usr/share/stardict/dic", true ) );
+
+    if ( QDir( "/usr/share/WyabdcRealPeopleTTS" ).exists() )
+      c.soundDirs.push_back( SoundDir( "/usr/share/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
     #endif
 
     #ifdef Q_OS_WIN32
     if ( QDir( "C:/Program Files/StarDict/dic" ).exists() )
       c.paths.push_back( Path( "C:/Program Files/StarDict/dic", true ) );
+
+    if ( QDir( "C:/Program Files/StarDict/WyabdcRealPeopleTTS" ).exists() )
+      c.soundDirs.push_back( SoundDir( "C:/Program Files/StarDict/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
+    else
+    if ( QDir( "C:/Program Files/WyabdcRealPeopleTTS" ).exists() )
+      c.soundDirs.push_back( SoundDir( "C:/Program Files/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
     #endif
 
     c.mediawikis = makeDefaultMediaWikis( true );
