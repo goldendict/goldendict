@@ -2,7 +2,11 @@
 
 enum { foldCaseMaxOut = 3 };
 
+#ifdef __WIN32
+size_t foldCase( unsigned int in, wchar_t * out )
+#else
 size_t foldCase( wchar_t in, wchar_t * out )
+#endif
 {
   switch( in )
   {

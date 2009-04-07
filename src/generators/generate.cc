@@ -184,7 +184,8 @@ int main()
     fprintf( outf, "// This file was generated automatically. Do not edit directly.\n\n" );
 
     fprintf( outf, "enum { foldCaseMaxOut = 3 };\n\n" );
-    fprintf( outf, "size_t foldCase( wchar_t in, wchar_t * out )\n{\n  switch( in )\n  {\n" );
+    fprintf( outf, "#ifdef __WIN32\nsize_t foldCase( unsigned int in, wchar_t * out )\n#else\n" );
+    fprintf( outf, "size_t foldCase( wchar_t in, wchar_t * out )\n#endif\n{\n  switch( in )\n  {\n" );
 
     for( map< wchar_t, wstring >::const_iterator i = foldTable.begin();
          i != foldTable.end(); ++i )
