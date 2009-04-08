@@ -281,16 +281,8 @@ void addDir( QDir const & baseDir, QDir const & dir, IndexedWords & indexedWords
 
       if ( pos != wstring::npos )
         name.erase( pos );
-      
-      wstring folded = Folding::apply( name );
 
-      IndexedWords::iterator i = indexedWords.insert(
-        IndexedWords::value_type( folded, vector< WordArticleLink >() ) ).first;
-
-      // Try to conserve memory somewhat -- slow insertions are ok
-      i->second.reserve( i->second.size() + 1 );
-
-      i->second.push_back( WordArticleLink( Utf8::encode( name ), articleOffset ) );
+      indexedWords.addWord( name, articleOffset );
 
       ++soundsCount;
     }

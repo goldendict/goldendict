@@ -34,8 +34,11 @@ class WordFinder: public QObject
   std::vector< sptr< Dictionary::Class > > const * inputDicts;
 
   // Maps lowercased string to the original one. This catches all duplicates
-  // without case sensitivity
-  std::map< std::wstring, std::wstring > results;
+  // without case sensitivity. Made as an array and a map indexing that array.
+  typedef std::list< std::pair< std::wstring, int > > ResultsArray; // int is rank
+  typedef std::map< std::wstring, ResultsArray::iterator > ResultsIndex;
+  ResultsArray resultsArray;
+  ResultsIndex resultsIndex;
     
 public:
 

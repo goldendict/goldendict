@@ -170,16 +170,19 @@ void BtreeWordSearchRequest::run()
     //printf( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
 
     vector< WordArticleLink > chain = dict.readChain( chainOffset );
-    vector< wstring > wstrings = dict.convertChainToWstrings( chain );
 
-    wstring resultFolded = Folding::apply( wstrings[ 0 ] );
+    wstring chainHead = Utf8::decode( chain[ 0 ].word );
 
-    if ( resultFolded == folded )
-      // Exact match
+    wstring resultFolded = Folding::apply( chainHead );
+
+    if ( resultFolded.size() >= folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
     {
-      Mutex::Lock _( dataMutex );
+      // Exact or prefix match
       
-      matches.insert( matches.end(), wstrings.begin(), wstrings.end() );
+      Mutex::Lock _( dataMutex );
+
+      for( unsigned x = 0; x < chain.size(); ++x )
+        matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
 
       if ( matches.size() >= maxResults )
       {
@@ -190,24 +193,7 @@ void BtreeWordSearchRequest::run()
       }
     }
     else
-    if ( resultFolded.size() > folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
-    {
-      // Prefix match
-      
-      Mutex::Lock _( dataMutex );
-      
-      matches.insert( matches.end(), wstrings.begin(), wstrings.end() );
-
-      if ( matches.size() >= maxResults )
-      {
-        // For now we actually allow more than maxResults if the last
-        // chain yield more than one result. That's ok and maybe even more
-        // desirable.
-        break;
-      }
-    }
-    else
-      // No match at all, end this
+      // Neither exact nor a prefix match, end this
       break;
 
     // Fetch new leaf if we're out of chains here
@@ -462,18 +448,21 @@ vector< WordArticleLink > BtreeDictionary::readChain( char const * & ptr )
     string str = ptr;
     ptr += str.size() + 1;
 
+    string prefix = ptr;
+    ptr += prefix.size() + 1;
+
     uint32_t articleOffset;
 
     memcpy( &articleOffset, ptr, sizeof( uint32_t ) );
 
     ptr += sizeof( uint32_t );
 
-    result.push_back( WordArticleLink( str, articleOffset ) );
+    result.push_back( WordArticleLink( str, articleOffset, prefix ) );
 
-    if ( chainSize < str.size() + 1 + sizeof( uint32_t ) )
+    if ( chainSize < str.size() + 1 + prefix.size() + 1 + sizeof( uint32_t ) )
       throw exCorruptedChainData();
     else
-      chainSize -= str.size() + 1 + sizeof( uint32_t );
+      chainSize -= str.size() + 1 + prefix.size() + 1 + sizeof( uint32_t );
   }
 
   return result;
@@ -520,9 +509,16 @@ void BtreeDictionary::antialias( wstring const & str,
   {
     // If after applying case folding to each word they wouldn't match, we
     // drop the entry.
-    if ( Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) ) !=
+    if ( Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) ) !=
          caseFolded )
       chain.erase( chain.begin() + x );
+    else
+    if ( chain[ x ].prefix.size() ) // If there's a prefix, merge it with the word,
+                                    // since it's what dictionaries expect
+    {
+      chain[ x ].word.insert( 0, chain[ x ].prefix );
+      chain[ x ].prefix.clear();
+    }
   }
 }
 
@@ -555,7 +551,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
       vector< WordArticleLink > const & chain = nextWord->second;
 
       for( unsigned y = 0; y < chain.size(); ++y )
-        totalChainsLength += chain[ y ].word.size() + 1 + sizeof( uint32_t );
+        totalChainsLength += chain[ y ].word.size() + 1 + chain[ y ].prefix.size() + 1 + sizeof( uint32_t );
     }
 
     uncompressedData.resize( sizeof( uint32_t ) + totalChainsLength );
@@ -580,10 +576,13 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
         memcpy( ptr, chain[ y ].word.c_str(), chain[ y ].word.size() + 1 );
         ptr += chain[ y ].word.size() + 1;
 
+        memcpy( ptr, chain[ y ].prefix.c_str(), chain[ y ].prefix.size() + 1 );
+        ptr += chain[ y ].prefix.size() + 1;
+
         memcpy( ptr, &(chain[ y ].articleOffset), sizeof( uint32_t ) );
         ptr += sizeof( uint32_t );
 
-        size += chain[ y ].word.size() + 1 + sizeof( uint32_t );
+        size += chain[ y ].word.size() + 1 + chain[ y ].prefix.size() + 1 + sizeof( uint32_t );
       }
 
       memcpy( saveSizeHere, &size, sizeof( uint32_t ) );
@@ -699,6 +698,70 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
   }
 
   return offset;
+}
+
+void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
+{
+  wchar_t const * wordBegin = word.c_str();
+  string::size_type wordSize = word.size();
+
+  // Skip any leading whitespace
+  while( *wordBegin && Folding::isWhitespace( *wordBegin ) )
+  {
+    ++wordBegin;
+    --wordSize;
+  }
+
+  // Skip any trailing whitespace
+  while( wordSize && Folding::isWhitespace( wordBegin[ wordSize - 1 ] ) )
+    --wordSize;
+
+  wchar_t const * nextChar = wordBegin;
+
+  vector< char > utfBuffer( wordSize * 4 );
+
+  for( ; ; )
+  {
+    // Skip any whitespace/punctuation
+    for( ; ; ++nextChar )
+    {
+      if ( !*nextChar )
+        return; // End of string ends everything
+  
+      if ( !Folding::isWhitespace( *nextChar ) && !Folding::isPunct( *nextChar ) )
+        break;
+    }
+
+    // Insert this word
+    iterator i = insert(
+      IndexedWords::value_type(
+        Folding::apply( nextChar ),
+        vector< WordArticleLink >() ) ).first;
+
+    if ( ( i->second.size() < 1024 ) || ( nextChar == wordBegin ) ) // Don't overpopulate chains with middle matches
+    {
+      // Try to conserve memory somewhat -- slow insertions are ok
+      i->second.reserve( i->second.size() + 1 );
+  
+      string utfWord( &utfBuffer.front(),
+                      Utf8::encode( nextChar, wordSize - ( nextChar - wordBegin ), &utfBuffer.front() ) );
+  
+      string utfPrefix( &utfBuffer.front(),
+                        Utf8::encode( wordBegin, nextChar - wordBegin, &utfBuffer.front() ) );
+  
+      i->second.push_back( WordArticleLink( utfWord, articleOffset, utfPrefix ) );
+    }
+
+    // Skip all non-whitespace/punctuation
+    for( ++nextChar; ; ++nextChar )
+    {
+      if ( !*nextChar )
+        return; // End of string ends everything
+
+      if ( Folding::isWhitespace( *nextChar ) || Folding::isPunct( *nextChar ) )
+        break;
+    }
+  }
 }
 
 uint32_t buildIndex( IndexedWords const & indexedWords, File::Class & file )

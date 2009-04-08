@@ -9,11 +9,11 @@
 /// Folding provides means to translate several possible ways to write a
 /// symbol into one. This facilitates searching. Here we currently perform
 /// full case folding (everything gets translated to lowercase, ligatures
-/// and complex letters are decomposed) and diacritics folding (all diacritic
-/// marks get removed). These transforms are done according to the Unicode
-/// standard and/or drafts. The exact algorithms, lists and types of folding
-/// performed might get changed in the future -- in this case, the Version
-/// field will be bumped up.
+/// and complex letters are decomposed), diacritics folding (all diacritic
+/// marks get removed) and whitespace/punctuation marks removal. These
+/// transforms are done according to the Unicode standard and/or drafts. The
+/// exact algorithms, lists and types of folding performed might get changed
+/// in the future -- in this case, the Version field will be bumped up.
 
 namespace Folding {
 
@@ -22,7 +22,7 @@ using std::wstring;
 /// The algorithm's version.
 enum
 {
-  Version = 1
+  Version = 2
 };
 
 /// Applies the folding algorithm to each character in the given string,
@@ -32,6 +32,27 @@ wstring apply( wstring const & );
 /// Applies only simple case folding algorithm. Since many dictionaries have
 /// different case style, we interpret words differing only by case as synonyms.
 wstring applySimpleCaseOnly( wstring const & );
+
+/// Applies only diacritics folding algorithm.
+wstring applyDiacriticsOnly( wstring const & );
+
+/// Applies only punctuation folding algorithm.
+wstring applyPunctOnly( wstring const & );
+
+/// Applies only whitespace folding algorithm.
+wstring applyWhitespaceOnly( wstring const & );
+
+/// Applies only whitespace&punctuation folding algorithm.
+wstring applyWhitespaceAndPunctOnly( wstring const & );
+
+/// Returns true if the given character is any form of whitespace, false
+/// otherwise. Whitespace corresponds to Zl/Zp/Zs Unicode classes, and also
+/// includes \n, \r and \t.
+bool isWhitespace( wchar_t ch );
+
+/// Returns true if the given character is any form of punctuation, false
+/// otherwise. Punctuation corresponds to Pc/Pd/Pe/Pf/Pi/Po/Ps classes.
+bool isPunct( wchar_t ch );
 
 /// Same as apply( wstring ), but without any heap operations, therefore
 /// preferable when there're many strings to process. Returns -1 if the

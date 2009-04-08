@@ -38,14 +38,14 @@ DEF_EX( exCorruptedChainData, "Corrupted chain data in the leaf of a btree encou
 /// translation is represented as an abstract 32-bit offset.
 struct WordArticleLink
 {
-  string word; // in utf8
+  string word, prefix; // in utf8
   uint32_t articleOffset;
 
   WordArticleLink()
   {}
 
-  WordArticleLink( string const & word_, uint32_t articleOffset_ ):
-    word( word_ ), articleOffset( articleOffset_ )
+  WordArticleLink( string const & word_, uint32_t articleOffset_, string const & prefix_ = string() ):
+    word( word_ ), prefix( prefix_ ), articleOffset( articleOffset_ )
   {}
 };
 
@@ -120,8 +120,13 @@ private:
 /// This represents the index in its source form, as a map which binds folded
 /// words to sequences of their unfolded source forms and the corresponding
 /// article offsets.
-typedef map< wstring, vector< WordArticleLink > > IndexedWords;
-
+struct IndexedWords: public map< wstring, vector< WordArticleLink > >
+{
+  /// Instead of adding to the map directly, use this function. It does folding
+  /// itself, and for phrases/sentences it adds additional entries beginning with
+  /// each new word.
+  void addWord( wstring const & word, uint32_t articleOffset );
+};
 
 /// Builds the index, as a compressed btree. Returns offset to its root.
 /// All the data is stored to the given file, beginning from its current

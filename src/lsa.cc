@@ -515,15 +515,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           // Insert new entry into an index
 
-          wstring folded = Folding::apply( Utf8::decode( e.name ) );
-
-          IndexedWords::iterator i = indexedWords.insert(
-            IndexedWords::value_type( folded, vector< WordArticleLink >() ) ).first;
-
-          // Try to conserve memory somewhat -- slow insertions are ok
-          i->second.reserve( i->second.size() + 1 );
-
-          i->second.push_back( WordArticleLink( e.name, offset ) );
+          indexedWords.addWord( Utf8::decode( e.name ), offset );
         }
 
         idxHeader.vorbisOffset = f.tell();

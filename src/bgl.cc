@@ -166,24 +166,7 @@ namespace
       return;
     }
 
-    wcharBuffer[ result ] = 0;
-
-    // Now make its folded version
-
-    wstring folded = Folding::apply( &wcharBuffer.front() );
-
-    /// Try to conserve the memory usage of the string
-    folded.reserve( folded.size() );
-
-    // Insert new entry into an index
-
-    IndexedWords::iterator i = indexedWords.insert(
-      IndexedWords::value_type( folded, vector< WordArticleLink >() ) ).first;
-
-    // Try to conserve memory somewhat -- slow insertions are ok
-    i->second.reserve( i->second.size() + 1 );
-
-    i->second.push_back( WordArticleLink( word, articleOffset ) );
+    indexedWords.addWord( wstring( &wcharBuffer.front(), result ), articleOffset );
   }
 
 

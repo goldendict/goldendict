@@ -739,17 +739,9 @@ static void handleIdxSynFile( string const & fileName,
       offset = (*articleOffsets)[ offsetInIndex ];
     }
 
-    wstring folded = Folding::apply( Utf8::decode( word ) );
-
     // Insert new entry into an index
 
-    IndexedWords::iterator i = indexedWords.insert(
-      IndexedWords::value_type( folded, vector< WordArticleLink >() ) ).first;
-
-    // Try to conserve memory somewhat -- slow insertions are ok
-    i->second.reserve( i->second.size() + 1 );
-
-    i->second.push_back( WordArticleLink( word, offset ) );
+    indexedWords.addWord( Utf8::decode( word ), offset );
   }
 
   printf( "%u entires made\n", indexedWords.size() );

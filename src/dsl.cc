@@ -484,7 +484,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == L"'" )
   {
-    result += "<span class=\"dsl_stress\">" + processNodeChildren( node ) + "<span class=\"dsl_stacc\">" + Utf8::encode( wstring( 1, 0x301 ) ) + "</span></span>";
+    result += "<span class=\"dsl_stress\">" + processNodeChildren( node ) + Utf8::encode( wstring( 1, 0x301 ) ) + "</span>";
   }
   else
   if ( node.tagName == L"lang" )
@@ -1134,15 +1134,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                j != allEntryWords.end(); ++j )
           {
             unescapeDsl( *j );
-            wstring folded = Folding::apply( *j );
-
-            IndexedWords::iterator e = indexedWords.insert(
-              IndexedWords::value_type( folded, vector< WordArticleLink >() ) ).first;
-
-            // Try to conserve memory somewhat -- slow insertions are ok
-            e->second.reserve( e->second.size() + 1 );
-
-            e->second.push_back( WordArticleLink( Utf8::encode( *j ), descOffset ) );
+            indexedWords.addWord( *j, descOffset );
           }
 
           // Skip the article's body
