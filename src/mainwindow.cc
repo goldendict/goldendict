@@ -26,8 +26,9 @@ using std::wstring;
 using std::map;
 using std::pair;
 
-MainWindow::MainWindow(): 
+MainWindow::MainWindow():
   trayIcon( 0 ),
+  translateClearAndFocusAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( Config::load() ),
@@ -61,7 +62,15 @@ MainWindow::MainWindow():
   trayIconMenu.addSeparator();
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( activated() ),
            qApp, SLOT( quit() ) );
-  
+
+  translateClearAndFocusAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  translateClearAndFocusAction.setShortcut( QKeySequence( "Esc" ) );
+
+  connect( &translateClearAndFocusAction, SIGNAL( triggered() ),
+           this, SLOT( translateClearAndFocus() ) );
+
+  ui.centralWidget->addAction( &translateClearAndFocusAction );
+
   // Show tray icon early so the user would be happy
   updateTrayIcon();
 
@@ -671,6 +680,12 @@ void MainWindow::translateInputFinished()
 
   if ( word.size() )
     showTranslationFor( word );
+}
+
+void MainWindow::translateClearAndFocus()
+{
+  ui.translateLine->clear();
+  ui.translateLine->setFocus();
 }
 
 void MainWindow::prefixMatchUpdated()

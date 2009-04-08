@@ -74,6 +74,7 @@ private:
   QSystemTrayIcon * trayIcon;
 
   Ui::MainWindow ui;
+  QAction translateClearAndFocusAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * enableScanPopup;
   QMenu trayIconMenu;
@@ -137,6 +138,8 @@ private slots:
   void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );
   void translateInputFinished();
+
+  void translateClearAndFocus();
 
   void prefixMatchUpdated();
   void prefixMatchFinished();
