@@ -33,6 +33,10 @@ wstring apply( wstring const & );
 /// different case style, we interpret words differing only by case as synonyms.
 wstring applySimpleCaseOnly( wstring const & );
 
+/// Applies only full case folding algorithm. This includes simple case, but also
+/// decomposing ligatures and complex letters.
+wstring applyFullCaseOnly( wstring const & );
+
 /// Applies only diacritics folding algorithm.
 wstring applyDiacriticsOnly( wstring const & );
 
@@ -53,6 +57,10 @@ bool isWhitespace( wchar_t ch );
 /// Returns true if the given character is any form of punctuation, false
 /// otherwise. Punctuation corresponds to Pc/Pd/Pe/Pf/Pi/Po/Ps classes.
 bool isPunct( wchar_t ch );
+
+/// Removes any whitespace or punctuation from the beginning and the end of
+/// the word.
+wstring trimWhitespaceOrPunct( wstring const & );
 
 /// Same as apply( wstring ), but without any heap operations, therefore
 /// preferable when there're many strings to process. Returns -1 if the

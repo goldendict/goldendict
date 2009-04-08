@@ -64,6 +64,22 @@ wstring applySimpleCaseOnly( wstring const & in )
   return out;
 }
 
+wstring applyFullCaseOnly( wstring const & in )
+{
+  wstring caseFolded;
+
+  caseFolded.reserve( in.size() * foldCaseMaxOut );
+
+  wchar_t const * nextChar = in.data();
+
+  wchar_t buf[ foldCaseMaxOut ];
+
+  for( size_t left = in.size(); left--; )
+    caseFolded.append( buf, foldCase(  *nextChar++, buf ) );
+
+  return caseFolded;
+}
+
 wstring applyDiacriticsOnly( wstring const & in )
 {
   wstring withoutDiacritics;
@@ -490,6 +506,26 @@ bool isPunct( wchar_t ch )
     default:
       return false;
   }
+}
+
+wstring trimWhitespaceOrPunct( wstring const & in )
+{
+  wchar_t const * wordBegin = in.c_str();
+  wstring::size_type wordSize = in.size();
+
+  // Skip any leading whitespace
+  while( *wordBegin && ( Folding::isWhitespace( *wordBegin ) || Folding::isPunct( *wordBegin ) ) )
+  {
+    ++wordBegin;
+    --wordSize;
+  }
+
+  // Skip any trailing whitespace
+  while( wordSize && ( Folding::isWhitespace( wordBegin[ wordSize - 1 ] ) ||
+                       Folding::isPunct( wordBegin[ wordSize - 1 ] ) ) )
+    --wordSize;
+
+  return wstring( wordBegin, wordSize );
 }
 
 }

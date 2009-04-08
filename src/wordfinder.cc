@@ -255,6 +255,7 @@ void WordFinder::updateResults()
     enum Category
     {
       ExactMatch,
+      ExactNoFullCaseMatch,
       ExactNoDiaMatch,
       ExactNoPunctMatch,
       ExactNoWsMatch,
@@ -270,7 +271,8 @@ void WordFinder::updateResults()
     };
   
     wstring target = Folding::applySimpleCaseOnly( inputWord.toStdWString() );
-    wstring targetNoDia = Folding::applyDiacriticsOnly( target );
+    wstring targetNoFullCase = Folding::applyFullCaseOnly( target );
+    wstring targetNoDia = Folding::applyDiacriticsOnly( targetNoFullCase );
     wstring targetNoPunct = Folding::applyPunctOnly( targetNoDia );
     wstring targetNoWs = Folding::applyWhitespaceOnly( targetNoPunct );
 
@@ -279,12 +281,15 @@ void WordFinder::updateResults()
     for( ResultsIndex::const_iterator i = resultsIndex.begin(), j = resultsIndex.end();
          i != j; ++i )
     {
-      wstring resultNoDia, resultNoPunct, resultNoWs;
+      wstring resultNoFullCase, resultNoDia, resultNoPunct, resultNoWs;
 
       if ( i->first == target )
         i->second->second = ExactMatch * Multiplier;
       else
-      if ( ( resultNoDia = Folding::applyDiacriticsOnly( i->first ) ) == targetNoDia )
+      if ( ( resultNoFullCase = Folding::applyFullCaseOnly( i->first ) ) == targetNoFullCase )
+        i->second->second = ExactNoFullCaseMatch * Multiplier;
+      else
+      if ( ( resultNoDia = Folding::applyDiacriticsOnly( resultNoFullCase ) ) == targetNoDia )
         i->second->second = ExactNoDiaMatch * Multiplier;
       else
       if ( ( resultNoPunct = Folding::applyPunctOnly( resultNoDia ) ) == targetNoPunct )
