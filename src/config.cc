@@ -84,6 +84,9 @@ Class load() throw( exError )
     if ( QDir( "/usr/share/stardict/dic" ).exists() )
       c.paths.push_back( Path( "/usr/share/stardict/dic", true ) );
 
+    if ( QDir( "/usr/share/dictd" ).exists() )
+      c.paths.push_back( Path( "/usr/share/dictd", true ) );
+
     if ( QDir( "/usr/share/WyabdcRealPeopleTTS" ).exists() )
       c.soundDirs.push_back( SoundDir( "/usr/share/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
 
