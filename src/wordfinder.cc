@@ -159,6 +159,12 @@ void WordFinder::requestFinished()
 
 namespace {
 
+
+unsigned saturated( unsigned x )
+{
+  return x < 255 ? x : 255;
+}
+
 /// Checks whether the first string has the second one inside, surrounded from
 /// both sides by either whitespace, punctuation or begin/end of string.
 /// If true is returned, pos holds the offset in the haystack. If the offset
@@ -182,8 +188,7 @@ bool hasSurroundedWithWs( wstring const & haystack, wstring const & needle,
            Folding::isWhitespace( haystack[ pos + needle.size() ] ) ||
            Folding::isPunct( haystack[ pos + needle.size() ] ) ) )
     {
-      if ( pos > 255 )
-        pos = 255;
+      pos = saturated( pos );
 
       return true;
     }
@@ -298,16 +303,16 @@ void WordFinder::updateResults()
         i->second->rank = ExactNoPunctInsideMatch * Multiplier + matchPos;
       else
       if ( i->first.size() > target.size() && i->first.compare( 0, target.size(), target ) == 0 )
-        i->second->rank = PrefixMatch * Multiplier;
+        i->second->rank = PrefixMatch * Multiplier + saturated( i->first.size() );
       else
       if ( resultNoDia.size() > targetNoDia.size() && resultNoDia.compare( 0, targetNoDia.size(), targetNoDia ) == 0 )
-        i->second->rank = PrefixNoDiaMatch * Multiplier;
+        i->second->rank = PrefixNoDiaMatch * Multiplier + saturated( i->first.size() );
       else
       if ( resultNoPunct.size() > targetNoPunct.size() && resultNoPunct.compare( 0, targetNoPunct.size(), targetNoPunct ) == 0 )
-        i->second->rank = PrefixNoPunctMatch * Multiplier;
+        i->second->rank = PrefixNoPunctMatch * Multiplier + saturated( i->first.size() );
       else
       if ( resultNoWs.size() > targetNoWs.size() && resultNoWs.compare( 0, targetNoWs.size(), targetNoWs ) == 0 )
-        i->second->rank = PrefixNoWsMatch * Multiplier;
+        i->second->rank = PrefixNoWsMatch * Multiplier + saturated( i->first.size() );
       else
         i->second->rank = WorstMatch * Multiplier;
     }
