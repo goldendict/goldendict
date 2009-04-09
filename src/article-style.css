@@ -238,6 +238,14 @@ div.sdct_x
   margin: 0;
 }
 
+/************* Spelling suggestions *****************/
+
+.gdspellsuggestion
+{
+  /* Add some vertical space before the article */
+  margin-top: 1em;
+}
+
 /************* MediaWiki articles *****************
  The following consist of excerpts from different .css files edited
  with a .mwiki prepended to each record.

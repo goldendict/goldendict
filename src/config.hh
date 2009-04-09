@@ -116,6 +116,16 @@ struct MediaWiki
     id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ) {}
 };
 
+/// Hunspell configuration
+struct Hunspell
+{
+  QString dictionariesPath;
+
+  typedef vector< QString > Dictionaries;
+
+  Dictionaries enabledDictionaries;
+};
+
 /// All the MediaWikis
 typedef vector< MediaWiki > MediaWikis;
 
@@ -126,6 +136,7 @@ struct Class
   Groups groups;
   Preferences preferences;
   MediaWikis mediawikis;
+  Hunspell hunspell;
 
   QString lastMainGroup; // Last used group in main window
   QString lastPopupGroup; // Last used group in popup window

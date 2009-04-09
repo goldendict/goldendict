@@ -86,6 +86,10 @@ Class load() throw( exError )
 
     if ( QDir( "/usr/share/WyabdcRealPeopleTTS" ).exists() )
       c.soundDirs.push_back( SoundDir( "/usr/share/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
+
+    if ( QDir( "/usr/share/myspell/dicts" ).exists() )
+      c.hunspell.dictionariesPath = "/usr/share/myspell/dicts";
+
     #endif
 
     #ifdef Q_OS_WIN32
@@ -175,6 +179,18 @@ Class load() throw( exError )
 
       c.groups.push_back( g );
     }
+  }
+
+  QDomNode hunspell = root.namedItem( "hunspell" );
+
+  if ( !hunspell.isNull() )
+  {
+    c.hunspell.dictionariesPath = hunspell.toElement().attribute( "dictionariesPath" );
+
+    QDomNodeList nl = hunspell.toElement().elementsByTagName( "enabled" );
+
+    for( unsigned x = 0; x < nl.length(); ++x )
+      c.hunspell.enabledDictionaries.push_back( nl.item( x ).toElement().text() );
   }
 
   QDomNode mws = root.namedItem( "mediawikis" );
@@ -344,6 +360,23 @@ void save( Class const & c ) throw( exError )
 
         dictionary.setAttributeNode( name );
       }
+    }
+  }
+
+  {
+    QDomElement hunspell = dd.createElement( "hunspell" );
+    QDomAttr path = dd.createAttribute( "dictionariesPath" );
+    path.setValue( c.hunspell.dictionariesPath );
+    hunspell.setAttributeNode( path );
+    root.appendChild( hunspell );
+
+    for( unsigned x = 0; x < c.hunspell.enabledDictionaries.size(); ++x )
+    {
+      QDomElement en = dd.createElement( "enabled" );
+      QDomText value = dd.createTextNode( c.hunspell.enabledDictionaries[ x ] );
+
+      en.appendChild( value );
+      hunspell.appendChild( en );
     }
   }
 

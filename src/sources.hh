@@ -6,6 +6,7 @@
 
 #include "ui_sources.h"
 #include "config.hh"
+#include "hunspell.hh"
 #include <QAbstractItemModel>
 
 /// A model to be projected into the mediawikis view, according to Qt's MVC model
@@ -98,13 +99,46 @@ private:
   Config::SoundDirs soundDirs;
 };
 
+/// A model to be projected into the hunspell dictionaries view, according to Qt's MVC model
+class HunspellDictsModel: public QAbstractItemModel
+{
+  Q_OBJECT
+
+public:
+
+  HunspellDictsModel( QWidget * parent, Config::Hunspell const & );
+
+  void changePath( QString const & newPath );
+
+  /// Returns the dictionaries currently enabled
+  Config::Hunspell::Dictionaries const & getEnabledDictionaries() const
+  { return enabledDictionaries; }
+
+  QModelIndex index( int row, int column, QModelIndex const & parent ) const;
+  QModelIndex parent( QModelIndex const & parent ) const;
+  Qt::ItemFlags flags( QModelIndex const & index ) const;
+  int rowCount( QModelIndex const & parent ) const;
+  int columnCount( QModelIndex const & parent ) const;
+  QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+  QVariant data( QModelIndex const & index, int role ) const;
+  bool setData( QModelIndex const & index, const QVariant & value, int role );
+
+private:
+
+  Config::Hunspell::Dictionaries enabledDictionaries;
+  std::vector< HunspellMorpho::DataFiles > dataFiles;
+};
+
+
 class Sources: public QDialog
 {
   Q_OBJECT
 
 public:
   Sources( QWidget * parent, Config::Paths const &,
-           Config::SoundDirs const &, Config::MediaWikis const & );
+           Config::SoundDirs const &,
+           Config::Hunspell const &,
+           Config::MediaWikis const & );
 
   Config::Paths const & getPaths() const
   { return pathsModel.getCurrentPaths(); }
@@ -115,14 +149,18 @@ public:
   Config::MediaWikis const & getMediaWikis() const
   { return mediawikisModel.getCurrentWikis(); }
 
+  Config::Hunspell getHunspell() const;
+
 private:
   Ui::Sources ui;
   MediaWikisModel mediawikisModel;
   PathsModel pathsModel;
   SoundDirsModel soundDirsModel;
+  HunspellDictsModel hunspellDictsModel;
 
   void fitPathsColumns();
   void fitSoundDirsColumns();
+  void fitHunspellDictsColumns();
 
 private slots:
 
@@ -131,6 +169,8 @@ private slots:
   
   void on_addSoundDir_clicked();
   void on_removeSoundDir_clicked();
+
+  void on_changeHunspellPath_clicked();
 
   void on_addMediaWiki_clicked();
   void on_removeMediaWiki_clicked();

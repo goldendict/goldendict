@@ -9,9 +9,11 @@
 
 Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::SoundDirs const & soundDirs,
+                  Config::Hunspell const & hunspell,
                   Config::MediaWikis const & mediawikis ): QDialog( parent ),
   mediawikisModel( this, mediawikis ), pathsModel( this, paths ),
-  soundDirsModel( this, soundDirs )
+  soundDirsModel( this, soundDirs ),
+  hunspellDictsModel( this, hunspell )
 {
   ui.setupUi( this );
 
@@ -31,6 +33,12 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   
   fitSoundDirsColumns();
 
+  ui.hunspellPath->setText( hunspell.dictionariesPath );
+  ui.hunspellDictionaries->setTabKeyNavigation( true );
+  ui.hunspellDictionaries->setModel( &hunspellDictsModel );
+
+  fitHunspellDictsColumns();
+
   connect( ui.buttons, SIGNAL( accepted() ),
             this, SLOT( accept() ) );
   connect( ui.buttons, SIGNAL( rejected() ),
@@ -47,6 +55,12 @@ void Sources::fitSoundDirsColumns()
 {
   ui.soundDirs->resizeColumnToContents( 0 );
   ui.soundDirs->resizeColumnToContents( 1 );
+}
+
+void Sources::fitHunspellDictsColumns()
+{
+  ui.hunspellDictionaries->resizeColumnToContents( 0 );
+  ui.hunspellDictionaries->resizeColumnToContents( 1 );
 }
 
 void Sources::on_addPath_clicked()
@@ -103,6 +117,19 @@ void Sources::on_removeSoundDir_clicked()
   }
 }
 
+void Sources::on_changeHunspellPath_clicked()
+{
+  QString dir = 
+    QFileDialog::getExistingDirectory( this, tr( "Choose a directory" ) );
+
+  if ( !dir.isEmpty() )
+  {
+    ui.hunspellPath->setText( dir );
+    hunspellDictsModel.changePath( dir );
+    fitHunspellDictsColumns();
+  }
+}
+
 void Sources::on_addMediaWiki_clicked()
 {
   mediawikisModel.addNewWiki();
@@ -126,6 +153,17 @@ void Sources::on_removeMediaWiki_clicked()
                               QMessageBox::Cancel ) == QMessageBox::Ok )
     mediawikisModel.removeWiki( current.row() );
 }
+
+Config::Hunspell Sources::getHunspell() const
+{
+  Config::Hunspell h;
+
+  h.dictionariesPath = ui.hunspellPath->text();
+  h.enabledDictionaries = hunspellDictsModel.getEnabledDictionaries();
+
+  return h;
+}
+
 
 ////////// MediaWikisModel
 
@@ -485,6 +523,129 @@ bool SoundDirsModel::setData( QModelIndex const & index, const QVariant & value,
       soundDirs[ index.row() ].path = value.toString();
     else
       soundDirs[ index.row() ].name = value.toString();
+
+    dataChanged( index, index );
+    return true;
+  }
+
+  return false;
+}
+
+
+////////// HunspellDictsModel
+
+HunspellDictsModel::HunspellDictsModel( QWidget * parent,
+                                        Config::Hunspell const & hunspell ):
+  QAbstractItemModel( parent ), enabledDictionaries( hunspell.enabledDictionaries )
+{
+  changePath( hunspell.dictionariesPath );
+}
+
+void HunspellDictsModel::changePath( QString const & newPath )
+{
+  dataFiles = HunspellMorpho::findDataFiles( newPath );
+  reset();
+}
+
+QModelIndex HunspellDictsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
+{
+  return createIndex( row, column, 0 );
+}
+
+QModelIndex HunspellDictsModel::parent( QModelIndex const & /*parent*/ ) const
+{
+  return QModelIndex();
+}
+
+Qt::ItemFlags HunspellDictsModel::flags( QModelIndex const & index ) const
+{
+  Qt::ItemFlags result = QAbstractItemModel::flags( index );
+
+  if ( index.isValid() )
+  {
+    if ( !index.column() )
+      result |= Qt::ItemIsUserCheckable;
+  }
+
+  return result;
+}
+
+int HunspellDictsModel::rowCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return dataFiles.size();
+}
+
+int HunspellDictsModel::columnCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return 2;
+}
+
+QVariant HunspellDictsModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
+{
+  if ( role == Qt::DisplayRole )
+    switch( section )
+    {
+      case 0:
+        return tr( "Enabled" );
+      case 1:
+        return tr( "Name" );
+      default:
+        return QVariant();
+    }
+
+  return QVariant();
+}
+
+QVariant HunspellDictsModel::data( QModelIndex const & index, int role ) const
+{
+  if ( (unsigned)index.row() >= dataFiles.size() )
+    return QVariant();
+
+  if ( role == Qt::DisplayRole && index.column() == 1 )
+    return dataFiles[ index.row() ].dictName;
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+  {
+    for( unsigned x = enabledDictionaries.size(); x--; )
+    {
+      if ( enabledDictionaries[ x ] == dataFiles[ index.row() ].dictId )
+        return true;
+    }
+
+    return false;
+  }
+
+  return QVariant();
+}
+
+bool HunspellDictsModel::setData( QModelIndex const & index, const QVariant & /*value*/,
+                               int role )
+{
+  if ( (unsigned)index.row() >= dataFiles.size() )
+    return false;
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+  {
+    for( unsigned x = enabledDictionaries.size(); x--; )
+    {
+      if ( enabledDictionaries[ x ] == dataFiles[ index.row() ].dictId )
+      {
+        // Remove it now
+        enabledDictionaries.erase( enabledDictionaries.begin() + x );
+        dataChanged( index, index );
+        return true;
+      }
+    }
+
+    // Add it
+
+    enabledDictionaries.push_back( dataFiles[ index.row() ].dictId );
 
     dataChanged( index, index );
     return true;

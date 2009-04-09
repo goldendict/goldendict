@@ -30,6 +30,7 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
 
   Config::Paths const & paths;
   Config::SoundDirs const & soundDirs;
+  Config::Hunspell const & hunspell;
   vector< sptr< Dictionary::Class > > dictionaries;
   string exceptionText;
 

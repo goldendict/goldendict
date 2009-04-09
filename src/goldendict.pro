@@ -18,7 +18,7 @@ UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
 
-LIBS += -lvorbisfile -lvorbis -logg -lz -lzip
+LIBS += -lvorbisfile -lvorbis -logg -lz -lzip -lhunspell
 
 win32 {
   LIBS += -liconv -lwsock32 -lwinmm
@@ -67,7 +67,8 @@ HEADERS += folding.hh \
 	   preferences.hh \
 	   mutex.hh \
 	   mediawiki.hh \
-	   sounddir.hh
+	   sounddir.hh \
+           hunspell.hh
 	  
 
 FORMS += groups.ui dictgroupwidget.ui mainwindow.ui sources.ui initializing.ui\
@@ -82,7 +83,7 @@ SOURCES += folding.cc main.cc dictionary.cc config.cc sources.cc \
 	   groups_widgets.cc instances.cc article_maker.cc scanpopup.cc \
 	   articleview.cc externalviewer.cc wordfinder.cc \
 	   groupcombobox.cc keyboardstate.cc mouseover.cc preferences.cc \
-	   mutex.cc mediawiki.cc sounddir.cc
+	   mutex.cc mediawiki.cc sounddir.cc hunspell.cc
 
 win32 {
   SOURCES += mouseover_win32/ThTypes.c

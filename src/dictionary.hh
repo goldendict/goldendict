@@ -198,7 +198,7 @@ public:
   vector< WordMatch > & getMatches()
   { return matches; }
 };
-  
+
 /// A helper class for syncronous data read implementations.
 class DataRequestInstant: public DataRequest
 {

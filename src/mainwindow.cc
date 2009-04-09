@@ -11,6 +11,7 @@
 #include "dsl.hh"
 #include "mediawiki.hh"
 #include "sounddir.hh"
+#include "hunspell.hh"
 #include "ui_about.h"
 #include <QDir>
 #include <QMessageBox>
@@ -183,7 +184,7 @@ MainWindow::~MainWindow()
 }
 
 LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
-  paths( cfg.paths ), soundDirs( cfg.soundDirs )
+  paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell )
 {
 }
 
@@ -202,6 +203,16 @@ void LoadDictionaries::run()
       dictionaries.insert( dictionaries.end(), soundDirDictionaries.begin(),
                            soundDirDictionaries.end() );
     }
+
+    // Make hunspells
+    {
+      vector< sptr< Dictionary::Class > > hunspellDictionaries =
+        HunspellMorpho::makeDictionaries( hunspell );
+
+      dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
+                           hunspellDictionaries.end() );
+    }
+
   }
   catch( std::exception & e )
   {
@@ -577,7 +588,7 @@ void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
 
 void MainWindow::editSources()
 {
-  Sources src( this, cfg.paths, cfg.soundDirs, cfg.mediawikis );
+  Sources src( this, cfg.paths, cfg.soundDirs, cfg.hunspell, cfg.mediawikis );
 
   src.show();
 
@@ -585,6 +596,7 @@ void MainWindow::editSources()
   {
     cfg.paths = src.getPaths();
     cfg.soundDirs = src.getSoundDirs();
+    cfg.hunspell = src.getHunspell();
     cfg.mediawikis = src.getMediaWikis();
 
     makeDictionaries();
