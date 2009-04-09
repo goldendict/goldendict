@@ -136,7 +136,7 @@ void ScanPopup::handleInputWord( QString const & str )
        !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
     return;
 
-  inputWord = str.trimmed();
+  inputWord = QString::fromStdWString( Folding::trimWhitespaceOrPunct( str.toStdWString() ) );
 
   if ( !inputWord.size() )
     return;
