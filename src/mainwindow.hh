@@ -75,7 +75,8 @@ private:
   QSystemTrayIcon * trayIcon;
 
   Ui::MainWindow ui;
-  QAction translateClearAndFocusAction;
+  QAction translateClearAndFocusAction, addTabAction, closeCurrentTabAction,
+          switchToNextTabAction, switchToPrevTabAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * enableScanPopup;
   QMenu trayIconMenu;
@@ -121,6 +122,10 @@ private slots:
   void addNewTab();
   // Executed in response to a user click on an 'close' button on a tab
   void tabCloseRequested( int );
+  // Closes current tab.
+  void closeCurrentTab();
+  void switchToNextTab();
+  void switchToPrevTab();
 
   /// Triggered by the actions in the nav toolbar
   void backClicked();

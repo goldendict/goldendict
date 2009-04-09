@@ -31,6 +31,10 @@ using std::pair;
 MainWindow::MainWindow():
   trayIcon( 0 ),
   translateClearAndFocusAction( this ),
+  addTabAction( this ),
+  closeCurrentTabAction( this ),
+  switchToNextTabAction( this ),
+  switchToPrevTabAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( Config::load() ),
@@ -72,6 +76,38 @@ MainWindow::MainWindow():
            this, SLOT( translateClearAndFocus() ) );
 
   ui.centralWidget->addAction( &translateClearAndFocusAction );
+
+  addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
+
+  connect( &addTabAction, SIGNAL( triggered() ),
+           this, SLOT( addNewTab() ) );
+
+  ui.centralWidget->addAction( &addTabAction );
+
+  closeCurrentTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  closeCurrentTabAction.setShortcut( QKeySequence( "Ctrl+W" ) );
+
+  connect( &closeCurrentTabAction, SIGNAL( triggered() ),
+           this, SLOT( closeCurrentTab() ) );
+
+  ui.centralWidget->addAction( &closeCurrentTabAction );
+
+  switchToNextTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  switchToNextTabAction.setShortcut( QKeySequence( "Ctrl+PgDown" ) );
+
+  connect( &switchToNextTabAction, SIGNAL( triggered() ),
+           this, SLOT( switchToNextTab() ) );
+
+  ui.centralWidget->addAction( &switchToNextTabAction );
+
+  switchToPrevTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  switchToPrevTabAction.setShortcut( QKeySequence( "Ctrl+PgUp" ) );
+
+  connect( &switchToPrevTabAction, SIGNAL( triggered() ),
+           this, SLOT( switchToPrevTab() ) );
+
+  ui.centralWidget->addAction( &switchToPrevTabAction );
 
   // Show tray icon early so the user would be happy
   updateTrayIcon();
@@ -563,6 +599,30 @@ void MainWindow::tabCloseRequested( int x )
   ui.tabWidget->removeTab( x );
 
   delete w;
+}
+
+void MainWindow::closeCurrentTab()
+{
+  tabCloseRequested( ui.tabWidget->currentIndex() );
+}
+
+void MainWindow::switchToNextTab()
+{
+  if ( ui.tabWidget->count() < 2 )
+    return;
+
+  ui.tabWidget->setCurrentIndex( ( ui.tabWidget->currentIndex() + 1 ) % ui.tabWidget->count() );
+}
+
+void MainWindow::switchToPrevTab()
+{
+  if ( ui.tabWidget->count() < 2 )
+    return;
+
+  if ( !ui.tabWidget->currentIndex() )
+    ui.tabWidget->setCurrentIndex( ui.tabWidget->count() - 1 );
+  else
+    ui.tabWidget->setCurrentIndex( ui.tabWidget->currentIndex() - 1 );
 }
 
 void MainWindow::backClicked()
