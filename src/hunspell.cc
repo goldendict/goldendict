@@ -830,7 +830,7 @@ vector< DataFiles > findDataFiles( QString const & path )
     {
       if ( dictId.size() > 2 && ( dictId[ 2 ] == '-' || dictId[ 2 ] == '_' ) &&
            dictId.mid( 3 ).toLower() != dictBaseId )
-        dictName += "(" + dictId.mid( 3 ) + ")";
+        dictName += " (" + dictId.mid( 3 ) + ")";
     }
 
     dictName = QCoreApplication::translate( "Hunspell", "%1 Morphology" ).arg( dictName );
