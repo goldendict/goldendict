@@ -51,9 +51,10 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     contentType = "text/html";
 
-    return ( url.queryItemValue( "notfound" ) != "1" ) ?
-      articleMaker.makeDefinitionFor( word, group ) :
-      articleMaker.makeNotFoundTextFor( word, group );
+    if ( word.size() ) // Require word to be passed
+      return ( url.queryItemValue( "notfound" ) != "1" ) ?
+        articleMaker.makeDefinitionFor( word, group ) :
+        articleMaker.makeNotFoundTextFor( word, group );
   }
 
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ) &&
