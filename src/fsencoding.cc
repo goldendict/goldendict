@@ -18,6 +18,11 @@ string encode( string const & str )
   return string( QString::fromUtf8( str.c_str() ).toLocal8Bit().data() );
 }
 
+wstring decode( string const & str )
+{
+  return QString::fromLocal8Bit( str.c_str() ).toStdWString();
+}
+
 char separator()
 {
   return QDir::separator().toAscii();

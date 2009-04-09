@@ -12,6 +12,7 @@
 #include "mediawiki.hh"
 #include "sounddir.hh"
 #include "hunspell.hh"
+#include "dictdfiles.hh"
 #include "ui_about.h"
 #include <QDir>
 #include <QMessageBox>
@@ -269,6 +270,14 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), dslDictionaries.begin(),
                          dslDictionaries.end() );
+  }
+
+  {
+    vector< sptr< Dictionary::Class > > dictdDictionaries =
+      DictdFiles::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+
+    dictionaries.insert( dictionaries.end(), dictdDictionaries.begin(),
+                         dictdDictionaries.end() );
   }
 }
 

@@ -20,6 +20,9 @@ string encode( wstring const & );
 /// Encodes the given string in utf8 to the system 8bit encoding.
 string encode( string const & );
 
+/// Decodes the given 8bit-encoded string to a wide string.
+wstring decode( string const & str );
+
 /// Returns the filesystem separator (/ on Unix and clones, \ on Windows).
 char separator();
 

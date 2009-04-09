@@ -39,4 +39,47 @@ string escape( string const & str )
   return result;
 }
 
+string preformat( string const & str )
+{
+  string escaped = escape( str ), result;
+
+  result.reserve( escaped.size() );
+
+  bool leading = true;
+
+  for( char const * nextChar = escaped.c_str(); *nextChar; ++nextChar )
+  {
+    if ( leading )
+    {
+      if ( *nextChar == ' ' )
+      {
+        result += "&nbsp;";
+        continue;
+      }
+      else
+      if ( *nextChar == '\t' )
+      {
+        result += "&nbsp;&nbsp;&nbsp;&nbsp;";
+        continue;
+      }
+    }
+
+    if ( *nextChar == '\n' )
+    {
+      result += "<br/>";
+      leading = true;
+      continue;
+    }
+
+    if ( *nextChar == '\r' )
+      continue; // Just skip all \r
+
+    result.push_back( *nextChar );
+
+    leading = false;
+  }
+
+  return result;
+}
+
 }

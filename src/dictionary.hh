@@ -206,6 +206,9 @@ public:
   DataRequestInstant( bool succeeded )
   { hasAnyData = succeeded; finish(); }
 
+  DataRequestInstant( QString const & errorString )
+  { setErrorString( errorString ); finish(); }
+
   virtual void cancel()
   {}
 

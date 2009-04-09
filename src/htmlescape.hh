@@ -15,6 +15,10 @@ using std::string;
 // to make the result suitable for inserting as attributes' values.
 string escape( string const & );
 
+// Converts the given preformatted text to html. Each end of line is replaced by
+// <br>, each leading space is converted to &nbsp;.
+string preformat( string const & );
+
 }
 
 #endif

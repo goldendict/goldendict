@@ -246,6 +246,13 @@ div.sdct_x
   margin-top: 1em;
 }
 
+/************* Dictd articles *****************/
+.dictd_article
+{
+  /* Add some vertical space before the article */
+  margin-top: 1em;
+}
+
 /************* MediaWiki articles *****************
  The following consist of excerpts from different .css files edited
  with a .mwiki prepended to each record.
