@@ -197,12 +197,12 @@ static string handleResource( char type, char const * resource, size_t size )
     case 'h': // Html content
       return "<div class=\"sdct_h\">" + string( resource, size ) + "</div>";
     case 'm': // Pure meaning, usually means preformatted text
-      return "<pre class=\"sdct_m\">" + Html::escape( string( resource, size ) ) + "</pre>";
+      return "<div class=\"sdct_m\">" + Html::preformat( string( resource, size ) ) + "</div>";
     case 'l': // Same as 'm', but not in utf8, instead in current locale's
               // encoding.
               // We just use Qt here, it should know better about system's
               // locale.
-      return "<pre class=\"sdct_l\">" + Html::escape( QString::fromLocal8Bit( resource, size ).toUtf8().data() ) + "</pre>";
+      return "<div class=\"sdct_l\">" + Html::preformat( QString::fromLocal8Bit( resource, size ).toUtf8().data() ) + "</div>";
     case 'g': // Pango markup.
       return "<div class=\"sdct_g\">" + string( resource, size ) + "</div>";
     case 't': // Transcription
