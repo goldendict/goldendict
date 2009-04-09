@@ -352,7 +352,7 @@ void HunspellHeadwordsRequest::run()
 
       wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
 
-      QRegExp cutStem( "^\\s*st:(.+)(\\s+\\w{2}:.*)$" );
+      QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:))|\\S+)+)" );
 
       for( int x = 0; x < suggestionsCount; ++x )
       {
