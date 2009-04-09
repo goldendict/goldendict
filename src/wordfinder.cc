@@ -159,24 +159,6 @@ void WordFinder::requestFinished()
 
 namespace {
 
-/// Compares results based on their ranks
-struct SortByRank
-{
-  bool operator () ( pair< wstring, int > const & first,
-                     pair< wstring, int > const & second )
-  {
-    if ( first.second < second.second )
-      return true;
-
-    if ( first.second > second.second )
-      return false;
-
-    // Do any sort of collation here in the future. For now we just put the
-    // strings sorted lexicographically.
-    return first.first < second.first;
-  }
-};
-
 /// Checks whether the first string has the second one inside, surrounded from
 /// both sides by either whitespace, punctuation or begin/end of string.
 /// If true is returned, pos holds the offset in the haystack. If the offset
@@ -224,6 +206,7 @@ void WordFinder::updateResults()
     for( size_t count = (*i)->matchesCount(), x = 0; x < count; ++x )
     {
       wstring match = (**i)[ x ].word;
+      int weight = (**i)[ x ].weight;
       wstring lowerCased = Folding::applySimpleCaseOnly( match );
 
       pair< ResultsIndex::iterator, bool > insertResult =
@@ -233,15 +216,22 @@ void WordFinder::updateResults()
       if ( !insertResult.second )
       {
         // Wasn't inserted since there was already an item -- check the case
-        if ( insertResult.first->second->first != match )
+        if ( insertResult.first->second->word != match )
         {
           // The case is different -- agree on a lowercase version
-          insertResult.first->second->first = lowerCased;
+          insertResult.first->second->word = lowerCased;
         }
+        if ( !weight && insertResult.first->second->wasSuggested )
+          insertResult.first->second->wasSuggested = false;
       }
       else
       {
-        resultsArray.push_back( std::pair< wstring, int >( match, -1 ) );
+        resultsArray.push_back( OneResult() );
+
+        resultsArray.back().word = match;
+        resultsArray.back().rank = -1;
+        resultsArray.back().wasSuggested = ( weight != 0 );
+
         insertResult.first->second = --resultsArray.end();
       }
     }
@@ -269,7 +259,7 @@ void WordFinder::updateResults()
       WorstMatch,
       Multiplier = 256 // Categories should be multiplied by Multiplier
     };
-  
+
     wstring target = Folding::applySimpleCaseOnly( inputWord.toStdWString() );
     wstring targetNoFullCase = Folding::applyFullCaseOnly( target );
     wstring targetNoDia = Folding::applyDiacriticsOnly( targetNoFullCase );
@@ -284,42 +274,42 @@ void WordFinder::updateResults()
       wstring resultNoFullCase, resultNoDia, resultNoPunct, resultNoWs;
 
       if ( i->first == target )
-        i->second->second = ExactMatch * Multiplier;
+        i->second->rank = ExactMatch * Multiplier;
       else
       if ( ( resultNoFullCase = Folding::applyFullCaseOnly( i->first ) ) == targetNoFullCase )
-        i->second->second = ExactNoFullCaseMatch * Multiplier;
+        i->second->rank = ExactNoFullCaseMatch * Multiplier;
       else
       if ( ( resultNoDia = Folding::applyDiacriticsOnly( resultNoFullCase ) ) == targetNoDia )
-        i->second->second = ExactNoDiaMatch * Multiplier;
+        i->second->rank = ExactNoDiaMatch * Multiplier;
       else
       if ( ( resultNoPunct = Folding::applyPunctOnly( resultNoDia ) ) == targetNoPunct )
-        i->second->second = ExactNoPunctMatch * Multiplier;
+        i->second->rank = ExactNoPunctMatch * Multiplier;
       else
       if ( ( resultNoWs = Folding::applyWhitespaceOnly( resultNoPunct ) ) == targetNoWs )
-        i->second->second = ExactNoWsMatch * Multiplier;
+        i->second->rank = ExactNoWsMatch * Multiplier;
       else
       if ( hasSurroundedWithWs( i->first, target, matchPos ) )
-        i->second->second = ExactInsideMatch * Multiplier + matchPos;
+        i->second->rank = ExactInsideMatch * Multiplier + matchPos;
       else
       if ( hasSurroundedWithWs( resultNoDia, targetNoDia, matchPos ) )
-        i->second->second = ExactNoDiaInsideMatch * Multiplier + matchPos;
+        i->second->rank = ExactNoDiaInsideMatch * Multiplier + matchPos;
       else
       if ( hasSurroundedWithWs( resultNoPunct, targetNoPunct, matchPos ) )
-        i->second->second = ExactNoPunctInsideMatch * Multiplier + matchPos;
+        i->second->rank = ExactNoPunctInsideMatch * Multiplier + matchPos;
       else
       if ( i->first.size() > target.size() && i->first.compare( 0, target.size(), target ) == 0 )
-        i->second->second = PrefixMatch * Multiplier;
+        i->second->rank = PrefixMatch * Multiplier;
       else
       if ( resultNoDia.size() > targetNoDia.size() && resultNoDia.compare( 0, targetNoDia.size(), targetNoDia ) == 0 )
-        i->second->second = PrefixNoDiaMatch * Multiplier;
+        i->second->rank = PrefixNoDiaMatch * Multiplier;
       else
       if ( resultNoPunct.size() > targetNoPunct.size() && resultNoPunct.compare( 0, targetNoPunct.size(), targetNoPunct ) == 0 )
-        i->second->second = PrefixNoPunctMatch * Multiplier;
+        i->second->rank = PrefixNoPunctMatch * Multiplier;
       else
       if ( resultNoWs.size() > targetNoWs.size() && resultNoWs.compare( 0, targetNoWs.size(), targetNoWs ) == 0 )
-        i->second->second = PrefixNoWsMatch * Multiplier;
+        i->second->rank = PrefixNoWsMatch * Multiplier;
       else
-        i->second->second = WorstMatch * Multiplier;
+        i->second->rank = WorstMatch * Multiplier;
     }
 
     resultsArray.sort( SortByRank() );
@@ -334,7 +324,7 @@ void WordFinder::updateResults()
     //printf( "%d: %ls\n", i->second, i->first.c_str() );
 
     if ( searchResults.size() < 500 )
-      searchResults.push_back( QString::fromStdWString( i->first ) );
+      searchResults.push_back( std::pair< QString, bool >( QString::fromStdWString( i->word ), i->wasSuggested ) );
     else
       break;
   }

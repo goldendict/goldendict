@@ -712,7 +712,7 @@ void MainWindow::prefixMatchFinished()
 
 void MainWindow::updateMatchResults( bool finished )
 {
-  std::vector< QString > const & results = wordFinder.getPrefixMatchResults();
+  WordFinder::SearchResults const & results = wordFinder.getPrefixMatchResults();
 
   ui.wordList->setUpdatesEnabled( false );
   
@@ -721,10 +721,29 @@ void MainWindow::updateMatchResults( bool finished )
     QListWidgetItem * i = ui.wordList->item( x );
 
     if ( !i )
-      ui.wordList->addItem( results[ x ] );
+    {
+      i = new QListWidgetItem( results[ x ].first, ui.wordList );
+
+      if ( results[ x ].second )
+      {
+        QFont f = i->font();
+        f.setItalic( true );
+        i->setFont( f );
+      }
+      ui.wordList->addItem( i );
+    }
     else
-    if ( i->text() != results[ x ] )
-      i->setText( results[ x ] );
+    {
+      if ( i->text() != results[ x ].first )
+        i->setText( results[ x ].first );
+
+      QFont f = i->font();
+      if ( f.italic() != results[ x ].second )
+      {
+        f.setItalic( results[ x ].second );
+        i->setFont( f );
+      }
+    }
   }
 
   while ( ui.wordList->count() > (int) results.size() )

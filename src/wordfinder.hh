@@ -20,7 +20,13 @@ class WordFinder: public QObject
 {
   Q_OBJECT
 
-  std::vector< QString > searchResults;
+public:
+
+  typedef std::vector< std::pair< QString, bool > > SearchResults; // bool is a "was suggested" flag
+
+private:
+
+  SearchResults searchResults;
   QString searchErrorString;
   std::list< sptr< Dictionary::WordSearchRequest > > queuedRequests,
                                                      finishedRequests;
@@ -33,9 +39,16 @@ class WordFinder: public QObject
   QString inputWord;
   std::vector< sptr< Dictionary::Class > > const * inputDicts;
 
+  struct OneResult
+  {
+    std::wstring word;
+    int rank;
+    bool wasSuggested;
+  };
+
   // Maps lowercased string to the original one. This catches all duplicates
   // without case sensitivity. Made as an array and a map indexing that array.
-  typedef std::list< std::pair< std::wstring, int > > ResultsArray; // int is rank
+  typedef std::list< OneResult > ResultsArray;
   typedef std::map< std::wstring, ResultsArray::iterator > ResultsIndex;
   ResultsArray resultsArray;
   ResultsIndex resultsIndex;
@@ -58,7 +71,7 @@ public:
   /// Returns the vector containing search results from the last prefixMatch()
   /// operation. If it didn't finish yet, the result is not final and may
   /// be changing over time.
-  std::vector< QString > const & getPrefixMatchResults() const
+  SearchResults const & getPrefixMatchResults() const
   { return searchResults; }
 
   /// Returns a human-readable error string for the last finished request. Empty
@@ -99,6 +112,23 @@ private:
   // Cancels all searches. Useful to do before destroying them all, since they
   // would cancel in parallel.
   void cancelSearches();
+
+  /// Compares results based on their ranks
+  struct SortByRank
+  {
+    bool operator () ( OneResult const & first, OneResult const & second )
+    {
+      if ( first.rank < second.rank )
+        return true;
+  
+      if ( first.rank > second.rank )
+        return false;
+  
+      // Do any sort of collation here in the future. For now we just put the
+      // strings sorted lexicographically.
+      return first.word < second.word;
+    }
+  };
 };
 
 #endif

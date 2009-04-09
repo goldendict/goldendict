@@ -50,10 +50,9 @@ public:
   virtual unsigned long getWordCount() throw()
   { return 0; }
 
-  /// There's nothing no match here.
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
-                                                 unsigned long /*maxResults*/ ) throw( std::exception )
-  { return new WordSearchRequestInstant(); }
+                                                 unsigned long maxResults )
+    throw( std::exception );
 
   virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     throw( std::exception );
@@ -397,6 +396,122 @@ sptr< WordSearchRequest > HunspellDictionary::findHeadwordsForSynonym( wstring c
 {
   return new HunspellHeadwordsRequest( word, hunspellMutex, hunspell );
 }
+
+
+/// HunspellDictionary::prefixMatch()
+
+class HunspellPrefixMatchRequest;
+
+class HunspellPrefixMatchRequestRunnable: public QRunnable
+{
+  HunspellPrefixMatchRequest & r;
+  QSemaphore & hasExited;
+  
+public:
+
+  HunspellPrefixMatchRequestRunnable( HunspellPrefixMatchRequest & r_,
+                                      QSemaphore & hasExited_ ): r( r_ ),
+                                                                 hasExited( hasExited_ )
+  {}
+
+  ~HunspellPrefixMatchRequestRunnable()
+  {
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
+
+class HunspellPrefixMatchRequest: public Dictionary::WordSearchRequest
+{
+  friend class HunspellPrefixMatchRequestRunnable;
+
+  Mutex & hunspellMutex;
+  Hunspell & hunspell;
+  wstring word;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  HunspellPrefixMatchRequest( wstring const & word_,
+                              Mutex & hunspellMutex_,
+                              Hunspell & hunspell_ ):
+    hunspellMutex( hunspellMutex_ ),
+    hunspell( hunspell_ ),
+    word( word_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new HunspellPrefixMatchRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by HunspellPrefixMatchRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+  
+  ~HunspellPrefixMatchRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void HunspellPrefixMatchRequestRunnable::run()
+{
+  r.run();
+}
+
+void HunspellPrefixMatchRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  try
+  {
+    wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
+
+    if ( trimmedWord.empty() || containsWhitespace( trimmedWord ) )
+    {
+      // For now we don't analyze whitespace-containing phrases
+      finish();
+      return;
+    }
+
+    Mutex::Lock _( hunspellMutex );
+
+    string encodedWord = encodeToHunspell( hunspell, trimmedWord );
+
+    if ( hunspell.spell( encodedWord.c_str() ) )
+    {
+      // Known word -- add it to the result
+      
+      Mutex::Lock _( dataMutex );
+
+      matches.push_back( WordMatch( trimmedWord, 1 ) );
+    }
+  }
+  catch( Iconv::Ex & e )
+  {
+    printf( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+  }
+
+  finish();
+}
+
+sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
+                                                           unsigned long /*maxResults*/ )
+  throw( std::exception )
+{
+  return new HunspellPrefixMatchRequest( word, hunspellMutex, hunspell );
+}
+
 
 string encodeToHunspell( Hunspell & hunspell, wstring const & str )
 {

@@ -108,10 +108,9 @@ private:
 };
 
 /// This structure represents the word found. In addition to holding the
-/// word itself, it also holds its weight. Words with larger weight are always
-/// presented before ones with the smaller weight. It is 0 by default and
-/// should only be used for Levenstein-like matching algorithms to indicate
-/// search distance, in which cases it should be negative.
+/// word itself, it also holds its weight. It is 0 by default. Negative
+/// values should be used to store distance from Levenstein-like matching
+/// algorithms. Positive values are used by morphology matches.
 struct WordMatch
 {
   wstring word;

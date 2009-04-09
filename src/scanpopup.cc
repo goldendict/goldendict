@@ -331,14 +331,14 @@ void ScanPopup::prefixMatchFinished()
 
     wstring foldedInputWord = Folding::apply( inputWord.toStdWString() );
 
-    std::vector< QString > const & results = wordFinder.getPrefixMatchResults();
+    WordFinder::SearchResults const & results = wordFinder.getPrefixMatchResults();
     
     for( unsigned x = 0; x < results.size(); ++x )
     {
-      if ( Folding::apply( results[ x ].toStdWString() ) == foldedInputWord )
-        diacriticMatches.push_back( results[ x ] );
+      if ( Folding::apply( results[ x ].first.toStdWString() ) == foldedInputWord )
+        diacriticMatches.push_back( results[ x ].first );
       else
-        prefixMatches.push_back( results[ x ] );
+        prefixMatches.push_back( results[ x ].first );
     }
 
     if ( diacriticMatches.size() > 1 )
