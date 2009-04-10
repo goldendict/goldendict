@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>540</height>
+    <width>402</width>
+    <height>261</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,391 +16,508 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_8">
    <item>
-    <widget class="QGroupBox" name="enableTrayIcon">
-     <property name="toolTip">
-      <string>When enabled, an icon appears in the sytem tray area which can be used
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>&amp;Interface</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <spacer name="verticalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="enableTrayIcon">
+         <property name="toolTip">
+          <string>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</string>
-     </property>
-     <property name="title">
-      <string>Enable system tray icon</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QCheckBox" name="startToTray">
-        <property name="toolTip">
-         <string>With this on, the application starts directly to system tray without showing
+         </property>
+         <property name="title">
+          <string>Enable system tray icon</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="startToTray">
+            <property name="toolTip">
+             <string>With this on, the application starts directly to system tray without showing
 its main window.</string>
-        </property>
-        <property name="text">
-         <string>Start to system tray</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="closeToTray">
-        <property name="toolTip">
-         <string>With this on, an attempt to close main window would hide it instead of closing
+            </property>
+            <property name="text">
+             <string>Start to system tray</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="closeToTray">
+            <property name="toolTip">
+             <string>With this on, an attempt to close main window would hide it instead of closing
 the application.</string>
-        </property>
-        <property name="text">
-         <string>Close to system tray</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="enableScanPopup">
-     <property name="toolTip">
-      <string>When enabled, a translation popup window would be shown each time
+            </property>
+            <property name="text">
+             <string>Close to system tray</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>&amp;Scan Popup</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_10">
+       <item>
+        <spacer name="verticalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="enableScanPopup">
+         <property name="toolTip">
+          <string>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</string>
-     </property>
-     <property name="title">
-      <string>Scan popup functionality</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QCheckBox" name="startWithScanPopupOn">
-        <property name="toolTip">
-         <string>Chooses whether the scan popup mode is on by default nor not. If checked,
-the program would always start with the scan popup active.</string>
-        </property>
-        <property name="text">
-         <string>Start with scan popup turned on</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="enableScanPopupModifiers">
-        <property name="toolTip">
-         <string>With this enabled, the popup would only show up if all chosen keys are
-in the pressed state when the word selection changes.</string>
-        </property>
-        <property name="text">
-         <string>Only show popup when all selected keys are kept pressed:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QFrame" name="scanPopupModifiers">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="lineWidth">
-         <number>0</number>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <property name="margin">
-          <number>0</number>
          </property>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout">
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="leftCtrl">
-               <property name="toolTip">
-                <string>Left Ctrl only</string>
-               </property>
-               <property name="text">
-                <string>Left Ctrl</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="rightShift">
-               <property name="toolTip">
-                <string>Right Shift only</string>
-               </property>
-               <property name="text">
-                <string>Right Shift</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="altKey">
-               <property name="toolTip">
-                <string>Alt key</string>
-               </property>
-               <property name="text">
-                <string>Alt</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="ctrlKey">
-               <property name="toolTip">
-                <string>Ctrl key</string>
-               </property>
-               <property name="text">
-                <string>Ctrl</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="leftAlt">
-               <property name="toolTip">
-                <string>Left Alt only</string>
-               </property>
-               <property name="text">
-                <string>Left Alt</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="shiftKey">
-               <property name="toolTip">
-                <string>Shift key</string>
-               </property>
-               <property name="text">
-                <string>Shift</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="rightAlt">
-               <property name="toolTip">
-                <string>Right Alt only</string>
-               </property>
-               <property name="text">
-                <string>Right Alt</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="rightCtrl">
-               <property name="toolTip">
-                <string>Right Ctrl only</string>
-               </property>
-               <property name="text">
-                <string>Right Ctrl</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="leftShift">
-               <property name="toolTip">
-                <string>Left Shift only</string>
-               </property>
-               <property name="text">
-                <string>Left Shift</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="winKey">
-               <property name="toolTip">
-                <string>Windows key or Meta key</string>
-               </property>
-               <property name="text">
-                <string>Win/Meta</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame">
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <property name="lineWidth">
+         <property name="title">
+          <string>Enable scan popup functionality</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QCheckBox" name="startWithScanPopupOn">
+            <property name="toolTip">
+             <string>Chooses whether the scan popup mode is on by default nor not. If checked,
+the program would always start with the scan popup active.</string>
+            </property>
+            <property name="text">
+             <string>Start with scan popup turned on</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="enableScanPopupModifiers">
+            <property name="toolTip">
+             <string>With this enabled, the popup would only show up if all chosen keys are
+in the pressed state when the word selection changes.</string>
+            </property>
+            <property name="text">
+             <string>Only show popup when all selected keys are kept pressed:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="scanPopupModifiers">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <property name="lineWidth">
+             <number>0</number>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <property name="margin">
               <number>0</number>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_3">
-              <property name="margin">
-               <number>0</number>
-              </property>
-             </layout>
-            </widget>
-           </item>
-          </layout>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout">
+                 <item row="1" column="1">
+                  <widget class="QCheckBox" name="leftCtrl">
+                   <property name="toolTip">
+                    <string>Left Ctrl only</string>
+                   </property>
+                   <property name="text">
+                    <string>Left Ctrl</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QCheckBox" name="rightShift">
+                   <property name="toolTip">
+                    <string>Right Shift only</string>
+                   </property>
+                   <property name="text">
+                    <string>Right Shift</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="altKey">
+                   <property name="toolTip">
+                    <string>Alt key</string>
+                   </property>
+                   <property name="text">
+                    <string>Alt</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QCheckBox" name="ctrlKey">
+                   <property name="toolTip">
+                    <string>Ctrl key</string>
+                   </property>
+                   <property name="text">
+                    <string>Ctrl</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="leftAlt">
+                   <property name="toolTip">
+                    <string>Left Alt only</string>
+                   </property>
+                   <property name="text">
+                    <string>Left Alt</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QCheckBox" name="shiftKey">
+                   <property name="toolTip">
+                    <string>Shift key</string>
+                   </property>
+                   <property name="text">
+                    <string>Shift</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="rightAlt">
+                   <property name="toolTip">
+                    <string>Right Alt only</string>
+                   </property>
+                   <property name="text">
+                    <string>Right Alt</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="rightCtrl">
+                   <property name="toolTip">
+                    <string>Right Ctrl only</string>
+                   </property>
+                   <property name="text">
+                    <string>Right Ctrl</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QCheckBox" name="leftShift">
+                   <property name="toolTip">
+                    <string>Left Shift only</string>
+                   </property>
+                   <property name="text">
+                    <string>Left Shift</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QCheckBox" name="winKey">
+                   <property name="toolTip">
+                    <string>Windows key or Meta key</string>
+                   </property>
+                   <property name="text">
+                    <string>Win/Meta</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame">
+                 <property name="frameShape">
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <property name="lineWidth">
+                  <number>0</number>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
+                  <property name="margin">
+                   <number>0</number>
+                  </property>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>&amp;Audio</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="pronounceOnLoadMain">
+         <property name="text">
+          <string>Auto-pronounce words in main window</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="pronounceOnLoadPopup">
+         <property name="text">
+          <string>Auto-pronounce words in scan popup</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Program to play audio files:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="audioPlaybackProgram"/>
          </item>
         </layout>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Sound</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_7">
-      <item>
-       <widget class="QCheckBox" name="pronounceOnLoadMain">
-        <property name="text">
-         <string>Auto-pronounce words in main window</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="pronounceOnLoadPopup">
-        <property name="text">
-         <string>Auto-pronounce words in scan popup</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Program to play audio files:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="audioPlaybackProgram"/>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="useProxyServer">
-     <property name="toolTip">
-      <string>Enable if you wish to use a proxy server
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>46</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>&amp;Network</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="useProxyServer">
+         <property name="toolTip">
+          <string>Enable if you wish to use a proxy server
 for all program's network requests.</string>
-     </property>
-     <property name="title">
-      <string>Use proxy server</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Type:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="proxyType"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Host:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="proxyHost"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Port:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="proxyPort">
-          <property name="maximum">
-           <number>65535</number>
-          </property>
-          <property name="value">
-           <number>8080</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>User:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="proxyUser"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>Password:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="proxyPassword">
-          <property name="echoMode">
-           <enum>QLineEdit::Password</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+         </property>
+         <property name="title">
+          <string>Use proxy server</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Type:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="proxyType"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Host:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="proxyHost"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Port:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="proxyPort">
+              <property name="maximum">
+               <number>65535</number>
+              </property>
+              <property name="value">
+               <number>8080</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>User:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="proxyUser"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Password:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="proxyPassword">
+              <property name="echoMode">
+               <enum>QLineEdit::Password</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>39</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
-   </item>
-   <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
