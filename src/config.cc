@@ -163,6 +163,8 @@ Class load() throw( exError )
 
   if ( !groups.isNull() )
   {
+    c.groups.nextId = groups.toElement().attribute( "nextId", "1" ).toUInt();
+
     QDomNodeList nl = groups.toElement().elementsByTagName( "group" );
 
     for( unsigned x = 0; x < nl.length(); ++x )
@@ -170,6 +172,11 @@ Class load() throw( exError )
       QDomElement grp = nl.item( x ).toElement();
 
       Group g;
+
+      if ( grp.hasAttribute( "id" ) )
+        g.id = grp.attribute( "id" ).toUInt();
+      else
+        g.id = c.groups.nextId++;
 
       g.name = grp.attribute( "name" );
       g.icon = grp.attribute( "icon" );
@@ -248,8 +255,8 @@ Class load() throw( exError )
     }
   }
 
-  c.lastMainGroup = root.namedItem( "lastMainGroup" ).toElement().text();
-  c.lastPopupGroup = root.namedItem( "lastPopupGroup" ).toElement().text();
+  c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
+  c.lastPopupGroupId = root.namedItem( "lastPopupGroupId" ).toElement().text().toUInt();
 
   QDomNode lastPopupWidth = root.namedItem( "lastPopupWidth" );
   QDomNode lastPopupHeight = root.namedItem( "lastPopupHeight" );
@@ -327,10 +334,20 @@ void save( Class const & c ) throw( exError )
     QDomElement groups = dd.createElement( "groups" );
     root.appendChild( groups );
 
+    QDomAttr nextId = dd.createAttribute( "nextId" );
+    nextId.setValue( QString::number( c.groups.nextId ) );
+    groups.setAttributeNode( nextId );
+
     for( Groups::const_iterator i = c.groups.begin(); i != c.groups.end(); ++i )
     {
       QDomElement group = dd.createElement( "group" );
       groups.appendChild( group );
+
+      QDomAttr id = dd.createAttribute( "id" );
+
+      id.setValue( QString::number( i->id ) );
+
+      group.setAttributeNode( id );
 
       QDomAttr name = dd.createAttribute( "name" );
 
@@ -473,12 +490,12 @@ void save( Class const & c ) throw( exError )
   }
 
   {
-    QDomElement opt = dd.createElement( "lastMainGroup" );
-    opt.appendChild( dd.createTextNode( c.lastMainGroup ) );
+    QDomElement opt = dd.createElement( "lastMainGroupId" );
+    opt.appendChild( dd.createTextNode( QString::number( c.lastMainGroupId ) ) );
     root.appendChild( opt );
 
-    opt = dd.createElement( "lastPopupGroup" );
-    opt.appendChild( dd.createTextNode( c.lastPopupGroup ) );
+    opt = dd.createElement( "lastPopupGroupId" );
+    opt.appendChild( dd.createTextNode( QString::number( c.lastPopupGroupId ) ) );
     root.appendChild( opt );
 
     if ( c.lastPopupSize.isValid() )

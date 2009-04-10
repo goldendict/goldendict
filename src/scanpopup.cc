@@ -38,7 +38,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.prefixButton->hide();
 
   ui.groupList->fill( groups );
-  ui.groupList->setCurrentGroup( cfg.lastPopupGroup );
+  ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
 
   setWindowFlags( Qt::Popup );
 
@@ -198,17 +198,17 @@ QString ScanPopup::elideInputWord()
 }
 
 
-void ScanPopup::currentGroupChanged( QString const & gr )
+void ScanPopup::currentGroupChanged( QString const & )
 {
   if ( isVisible() )
     initiateTranslation();
 
-  cfg.lastPopupGroup = gr;
+  cfg.lastPopupGroupId = ui.groupList->getCurrentGroup();
 }
 
 void ScanPopup::initiateTranslation()
 {
-  definition->showDefinition( inputWord, ui.groupList->currentText() );
+  definition->showDefinition( inputWord, ui.groupList->getCurrentGroup() );
   wordFinder.prefixMatch( inputWord, getActiveDicts() );
 }
 
@@ -386,13 +386,13 @@ void ScanPopup::popupWordlist( vector< QString > const & words, QToolButton * bu
                                   QPoint( 0, button->height() ) );
 
   if ( result )
-    definition->showDefinition( result->text(), ui.groupList->currentText() );
+    definition->showDefinition( result->text(), ui.groupList->getCurrentGroup() );
 }
 
 void ScanPopup::initialWordClicked()
 {
   if ( isVisible() && diacriticMatches.size() )
-    definition->showDefinition( diacriticMatches[ 0 ], ui.groupList->currentText() );
+    definition->showDefinition( diacriticMatches[ 0 ], ui.groupList->getCurrentGroup() );
 }
 
 void ScanPopup::pinButtonClicked( bool checked )

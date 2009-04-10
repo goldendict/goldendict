@@ -63,31 +63,18 @@ ArticleView::~ArticleView()
   #endif
 }
 
-void ArticleView::showDefinition( QString const & word, QString const & group )
+void ArticleView::showDefinition( QString const & word, unsigned group )
 {
   QUrl req;
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
   req.addQueryItem( "word", word );
-  req.addQueryItem( "group", group );
+  req.addQueryItem( "group", QString::number( group ) );
 
   ui.definition->setUrl( req );
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
-}
-
-void ArticleView::showNotFound( QString const & word, QString const & group )
-{
-  QUrl req;
-
-  req.setScheme( "gdlookup" );
-  req.setHost( "localhost" );
-  req.addQueryItem( "word", word );
-  req.addQueryItem( "group", group );
-  req.addQueryItem( "notfound", "1" );
-
-  ui.definition->setUrl( req );
 }
 
 void ArticleView::showAnticipation()
@@ -112,13 +99,13 @@ void ArticleView::handleUrlChanged( QUrl const & url )
 {
   QIcon icon;
 
-  QString group = getGroup( url );
+  unsigned group = getGroup( url );
 
-  if ( group.size() )
+  if ( group )
   {
     // Find the group's instance corresponding to the fragment value
     for( unsigned x = 0; x < groups.size(); ++x )
-      if ( groups[ x ].name == group )
+      if ( groups[ x ].id == group )
       {
         // Found it
 
@@ -132,12 +119,12 @@ void ArticleView::handleUrlChanged( QUrl const & url )
   emit iconChanged( this, icon );
 }
 
-QString ArticleView::getGroup( QUrl const & url )
+unsigned ArticleView::getGroup( QUrl const & url )
 {
   if ( url.scheme() == "gdlookup" && url.hasQueryItem( "group" ) )
-    return url.queryItemValue( "group" );
+    return url.queryItemValue( "group" ).toUInt();
 
-  return QString();
+  return 0;
 }
 
 void ArticleView::cleanupTemp()
@@ -193,10 +180,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
       // here ourselves since otherwise we'd need to pass group id to netmgr
       // and it should've been having knowledge of the current groups, too.
 
-      QString currentGroup = getGroup( ref );
+      unsigned currentGroup = getGroup( ref );
 
       for( unsigned x = 0; x < groups.size(); ++x )
-        if ( groups[ x ].name == currentGroup )
+        if ( groups[ x ].id == currentGroup )
         {
           for( unsigned y = 0; y < groups[ x ].dictionaries.size(); ++y )
           {

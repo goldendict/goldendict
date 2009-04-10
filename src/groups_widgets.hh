@@ -92,6 +92,7 @@ public:
 
 private:
   Ui::DictGroupWidget ui;
+  unsigned groupId;
 };
 
 /// A tab widget with groups inside
@@ -121,6 +122,7 @@ public:
 
 private:
 
+  unsigned nextId;
   std::vector< sptr< Dictionary::Class > > const * allDicts;
 };
 

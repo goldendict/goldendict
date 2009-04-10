@@ -46,15 +46,15 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
   if ( url.scheme() == "gdlookup" )
   {
+    bool groupIsValid = false;
+
     QString word = url.queryItemValue( "word" );
-    QString group = url.queryItemValue( "group" );
+    unsigned group = url.queryItemValue( "group" ).toUInt( &groupIsValid );
 
     contentType = "text/html";
 
-    if ( word.size() ) // Require word to be passed
-      return ( url.queryItemValue( "notfound" ) != "1" ) ?
-        articleMaker.makeDefinitionFor( word, group ) :
-        articleMaker.makeNotFoundTextFor( word, group );
+    if ( groupIsValid && word.size() ) // Require group and word to be passed
+      return articleMaker.makeDefinitionFor( word, group );
   }
 
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ) &&

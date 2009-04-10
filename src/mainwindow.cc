@@ -14,6 +14,7 @@
 #include "hunspell.hh"
 #include "dictdfiles.hh"
 #include "ui_about.h"
+#include <limits.h>
 #include <QDir>
 #include <QMessageBox>
 #include <QIcon>
@@ -198,7 +199,7 @@ MainWindow::MainWindow():
     ArticleView & view =
       dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
 
-    view.showDefinition( "Welcome!", "internal:about" );
+    view.showDefinition( "Welcome!", UINT_MAX );
   }
   
   ui.translateLine->setFocus();
@@ -526,7 +527,7 @@ void MainWindow::updateGroupList()
   }
 
   ui.groupList->fill( groupInstances );
-  ui.groupList->setCurrentGroup( cfg.lastMainGroup );
+  ui.groupList->setCurrentGroup( cfg.lastMainGroupId );
 
   connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
@@ -581,8 +582,8 @@ void MainWindow::addNewTab()
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const & ) ) );
   
-  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, QString const & ) ),
-           this, SLOT( showDefinitionInNewTab( QString const &, QString const & ) ) );
+  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned ) ),
+           this, SLOT( showDefinitionInNewTab( QString const &, unsigned ) ) );
   
   ui.tabWidget->addTab( view, tr( "(untitled)" ) );
 
@@ -716,9 +717,9 @@ void MainWindow::editPreferences()
   }
 }
 
-void MainWindow::currentGroupChanged( QString const & gr )
+void MainWindow::currentGroupChanged( QString const & )
 {
-  cfg.lastMainGroup = gr;
+  cfg.lastMainGroupId = ui.groupList->getCurrentGroup();
 
   // Update word search results
 
@@ -924,7 +925,7 @@ void MainWindow::openLinkInNewTab( QUrl const & url,
 }
 
 void MainWindow::showDefinitionInNewTab( QString const & word,
-                                         QString const & group )
+                                         unsigned group )
 {
   addNewTab();
 
@@ -939,8 +940,8 @@ void MainWindow::showTranslationFor( QString const & inWord )
   ArticleView & view =
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
 
-  view.showDefinition( inWord, cfg.groups.empty() ? "" :
-                        groupInstances[ ui.groupList->currentIndex() ].name );
+  view.showDefinition( inWord, cfg.groups.empty() ? 0 :
+                        groupInstances[ ui.groupList->currentIndex() ].id );
 
   #if 0
   QUrl req;

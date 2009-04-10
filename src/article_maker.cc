@@ -5,6 +5,7 @@
 #include "config.hh"
 #include "htmlescape.hh"
 #include "utf8.hh"
+#include <limits.h>
 #include <QFile>
 
 using std::vector;
@@ -67,11 +68,9 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word, QString const 
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
-  QString const & inWord, QString const & group ) const
+  QString const & inWord, unsigned groupId ) const
 {
-  printf( "group = %ls\n", group.toStdWString().c_str() );
-
-  if ( group == "internal:about" )
+  if ( groupId == UINT_MAX )
   {
     // This is a special group containing internal welcome/help pages
     string result = makeHtmlHeader( inWord, QString() );
@@ -118,7 +117,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
     else
     {
       // Not found
-      return makeNotFoundTextFor( inWord,  group );
+      return makeNotFoundTextFor( inWord, "help" );
     }
     
     result += "</body></html>";
@@ -136,7 +135,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   Instances::Group const * activeGroup = 0;
 
   for( unsigned x = 0; x < groups.size(); ++x )
-    if ( groups[ x ].name == group )
+    if ( groups[ x ].id == groupId )
     {
       activeGroup = &groups[ x ];
       break;
@@ -151,7 +150,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
                                   activeGroup && activeGroup->icon.size() ?
                                     activeGroup->icon : QString() );
 
-  return new ArticleRequest( inWord.trimmed(), group, activeDicts, header );
+  return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "", activeDicts, header );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(

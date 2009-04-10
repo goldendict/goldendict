@@ -18,6 +18,7 @@ using std::vector;
 
 struct Group
 {
+  unsigned id;
   QString name, icon;
   vector< sptr< Dictionary::Class > > dictionaries;
 

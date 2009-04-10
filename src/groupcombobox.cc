@@ -10,7 +10,10 @@ GroupComboBox::GroupComboBox( QWidget * parent ): QComboBox( parent )
 
 void GroupComboBox::fill( Instances::Groups const & groups )
 {
-  QString prev = currentText();
+  unsigned prevId = 0;
+
+  if ( count() )
+    prevId = itemData( currentIndex() ).toUInt();
 
   clear();
 
@@ -19,22 +22,30 @@ void GroupComboBox::fill( Instances::Groups const & groups )
     QIcon icon = groups[ x ].icon.size() ?
                    QIcon( ":/flags/" + groups[ x ].icon ) : QIcon();
 
-    addItem( icon, groups[ x ].name );
+    addItem( icon, groups[ x ].name, groups[ x ].id );
 
-    if ( prev == groups[ x ].name )
+    if ( prevId == groups[ x ].id )
       setCurrentIndex( x );
   }
 }
 
-void GroupComboBox::setCurrentGroup( QString const & gr )
+void GroupComboBox::setCurrentGroup( unsigned id )
 {
   for( int x  = 0; x < count(); ++x )
   {
-    if ( itemText( x ) == gr )
+    if ( itemData( x ).toUInt() == id )
     {
       setCurrentIndex( x );
       break;
     }
   }
+}
+
+unsigned GroupComboBox::getCurrentGroup() const
+{
+  if ( !count() )
+    return 0;
+
+  return itemData( currentIndex() ).toUInt();
 }
 

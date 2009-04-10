@@ -60,12 +60,21 @@ struct DictionaryRef
 /// A dictionary group
 struct Group
 {
+  unsigned id;
   QString name, icon;
   vector< DictionaryRef > dictionaries;
+
+  Group(): id( 0 ) {}
 };
 
 /// All the groups
-typedef vector< Group > Groups;
+struct Groups: public vector< Group >
+{
+  unsigned nextId; // Id to use to create the group next time
+
+  Groups(): nextId( 1 )
+  {}
+};
 
 /// Proxy server configuration
 struct ProxyServer
@@ -138,12 +147,14 @@ struct Class
   MediaWikis mediawikis;
   Hunspell hunspell;
 
-  QString lastMainGroup; // Last used group in main window
-  QString lastPopupGroup; // Last used group in popup window
+  unsigned lastMainGroupId; // Last used group in main window
+  unsigned lastPopupGroupId; // Last used group in popup window
   QSize lastPopupSize;
 
   QByteArray mainWindowState; // Binary state saved by QMainWindow
   QByteArray mainWindowGeometry; // Geometry saved by QMainWindow
+
+  Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ) {}
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )

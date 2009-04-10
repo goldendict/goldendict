@@ -21,7 +21,10 @@ public:
 
   /// Chooses the given group in the combobox. If there's no such group,
   /// does nothing.
-  void setCurrentGroup( QString const & );
+  void setCurrentGroup( unsigned id );
+
+  /// Returns current group.
+  unsigned getCurrentGroup() const;
 };
 
 #endif

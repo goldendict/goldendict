@@ -7,6 +7,7 @@ namespace Instances {
 
 Group::Group( Config::Group const & cfgGroup,
               vector< sptr< Dictionary::Class > > const & allDictionaries ):
+  id( cfgGroup.id ),
   name( cfgGroup.name ),
   icon( cfgGroup.icon )
 {
@@ -48,6 +49,7 @@ Config::Group Group::makeConfigGroup()
 {
   Config::Group result;
 
+  result.id = id;
   result.name = name;
   result.icon = icon;
 

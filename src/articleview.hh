@@ -50,10 +50,7 @@ public:
   ~ArticleView();
 
   /// Shows the definition of the given word with the given group
-  void showDefinition( QString const & word, QString const & group );
-
-  /// Shows the page stating that the given word could not be found.
-  void showNotFound( QString const & word, QString const & group );
+  void showDefinition( QString const & word, unsigned group );
 
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
@@ -85,7 +82,7 @@ signals:
   /// Singals that the following link was requested to be opened in new tab
   void openLinkInNewTab( QUrl const &, QUrl const & referrer );  
   /// Singals that the following definition was requested to be showed in new tab
-  void showDefinitionInNewTab( QString const & word, QString const & group );
+  void showDefinitionInNewTab( QString const & word, unsigned group );
 
 private slots:
 
@@ -100,8 +97,8 @@ private slots:
 private:
 
   /// Deduces group from the url. If there doesn't seem to be any group,
-  /// returns empty string.
-  QString getGroup( QUrl const & );
+  /// returns 0.
+  unsigned getGroup( QUrl const & );
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();

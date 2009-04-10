@@ -32,7 +32,7 @@ public:
   /// The result is returned as Dictionary::DataRequest just like dictionaries
   /// themselves do. The difference is that the result is a complete html page
   /// with all definitions from all the relevant dictionaries.
-  sptr< Dictionary::DataRequest > makeDefinitionFor( QString const & word, QString const & group ) const;
+  sptr< Dictionary::DataRequest > makeDefinitionFor( QString const & word, unsigned groupId ) const;
 
   /// Makes up a text which states that no translation for the given word
   /// was found. Sometimes it's better to call this directly when it's already

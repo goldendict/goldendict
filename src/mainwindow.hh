@@ -154,7 +154,7 @@ private slots:
   void wordListSelectionChanged();
 
   void openLinkInNewTab( QUrl const &, QUrl const & );
-  void showDefinitionInNewTab( QString const & word, QString const & group );
+  void showDefinitionInNewTab( QString const & word, unsigned group );
   
   void showTranslationFor( QString const & );
 

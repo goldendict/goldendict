@@ -17,7 +17,8 @@ using std::vector;
 DictGroupWidget::DictGroupWidget( QWidget * parent,
                                   vector< sptr< Dictionary::Class > > const & dicts,
                                   Config::Group const & group ):
-  QWidget( parent )
+  QWidget( parent ),
+  groupId( group.id )
 {
   ui.setupUi( this );
   ui.dictionaries->populate( Instances::Group( group, dicts ).dictionaries, dicts );
@@ -44,6 +45,8 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
 Config::Group DictGroupWidget::makeGroup() const
 {
   Instances::Group g( "" );
+
+  g.id = groupId;
 
   g.dictionaries = ui.dictionaries->getCurrentDictionaries();
 
@@ -214,7 +217,7 @@ std::vector< sptr< Dictionary::Class > > const &
 // DictGroupsWidget
 
 DictGroupsWidget::DictGroupsWidget( QWidget * parent ): 
-  QTabWidget( parent ), allDicts( 0 )
+  QTabWidget( parent ), nextId( 1 ), allDicts( 0 )
 {
   setMovable( true );
 }
@@ -229,12 +232,16 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
 
   for( unsigned x = 0; x < groups.size(); ++x )
     addTab( new DictGroupWidget( this, *allDicts, groups[ x ] ), groups[ x ].name );
+
+  nextId = groups.nextId;
 }
 
 /// Creates groups from what is currently set up
 Config::Groups DictGroupsWidget::makeGroups() const
 {
   Config::Groups result;
+
+  result.nextId = nextId;
 
   for( int x = 0; x < count(); ++x )
   {
@@ -252,8 +259,12 @@ void DictGroupsWidget::addNewGroup( QString const & name )
 
   int idx = currentIndex() + 1;
 
+  Config::Group newGroup;
+
+  newGroup.id = nextId++;
+
   insertTab( idx,
-             new DictGroupWidget( this, *allDicts, Config::Group() ),
+             new DictGroupWidget( this, *allDicts, newGroup ),
              name );
 
   setCurrentIndex( idx );
