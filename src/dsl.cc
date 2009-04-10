@@ -12,6 +12,7 @@
 #include "iconv.hh"
 #include "filetype.hh"
 #include "fsencoding.hh"
+#include "audiolink.hh"
 #include <zlib.h>
 #include <zip.h>
 #include <map>
@@ -442,7 +443,9 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
       string ref = "\"gdau://" + ( search ? string( "search" ) : getId() ) +
                    "/" + Html::escape( filename ) +"\"";
-  
+
+      result += addAudioLink( ref );
+
       result += "<span class=\"dsl_s_wav\"><a href=" + ref
          + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>";
     }

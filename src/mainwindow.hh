@@ -78,7 +78,7 @@ private:
   QAction translateClearAndFocusAction, addTabAction, closeCurrentTabAction,
           switchToNextTabAction, switchToPrevTabAction;
   QToolBar * navToolbar;
-  QAction * navBack, * navForward, * enableScanPopup;
+  QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
   QMenu trayIconMenu;
   QToolButton addTab;
   Config::Class cfg;
@@ -110,6 +110,8 @@ private:
 
   void updateMatchResults( bool finished );
 
+  void updatePronounceAvailability();
+
   virtual bool eventFilter( QObject *, QEvent * );
 
   /// Returns the reference to dictionaries stored in the currently active
@@ -135,6 +137,13 @@ private slots:
   void titleChanged( ArticleView *, QString const & );
   /// ArticleView's icon has changed
   void iconChanged( ArticleView *, QIcon const & );
+
+  void pageLoaded();
+  void tabSwitched( int );
+
+  /// Pronounces the currently displayed word by playing its first audio
+  /// reference, if it has any.
+  void pronounce();
 
   void editSources();
   void editGroups();

@@ -20,6 +20,7 @@ class ArticleView: public QFrame
   ArticleNetworkAccessManager & articleNetMgr;
   Instances::Groups const & groups;
   bool popupView;
+  Config::Class const & cfg;
 
   Ui::ArticleView ui;
 
@@ -45,7 +46,8 @@ public:
   ArticleView( QWidget * parent,
                ArticleNetworkAccessManager &,
                Instances::Groups const &,
-               bool popupView );
+               bool popupView,
+               Config::Class const & cfg );
 
   ~ArticleView();
 
@@ -73,11 +75,19 @@ public:
   void focus()
   { ui.definition->setFocus( Qt::ShortcutFocusReason ); }
 
+  /// Returns true if there's an audio reference on the page, false otherwise.
+  bool hasSound();
+
+  /// Plays the first audio reference on the page, if any.
+  void playSound();
+
 signals:
 
   void iconChanged( ArticleView *, QIcon const & icon );
 
   void titleChanged( ArticleView *, QString const & title );
+
+  void pageLoaded();
 
   /// Singals that the following link was requested to be opened in new tab
   void openLinkInNewTab( QUrl const &, QUrl const & referrer );  

@@ -77,9 +77,12 @@ private slots:
   void currentGroupChanged( QString const & );
   void prefixMatchFinished();
   void on_wordListButton_clicked();
+  void on_pronounceButton_clicked();
   void pinButtonClicked( bool checked );
 
   void hideTimerExpired();
+
+  void pageLoaded();
 };
 
 #endif

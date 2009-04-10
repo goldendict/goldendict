@@ -65,6 +65,18 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.rightShift->hide();
 #endif
 
+  // Sound
+
+  ui.pronounceOnLoadPopup->setEnabled( p.enableScanPopup );
+
+  ui.pronounceOnLoadMain->setChecked( p.pronounceOnLoadMain );
+  ui.pronounceOnLoadPopup->setChecked( p.pronounceOnLoadPopup );
+  ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
+
+#ifdef Q_OS_WIN32
+  ui.audioPlaybackProgram->hide();
+#endif
+
   // Proxy server
 
   ui.useProxyServer->setChecked( p.proxyServer.enabled );
@@ -104,6 +116,10 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupModifiers += ui.leftShift->isChecked() ? KeyboardState::LeftShift: 0;
   p.scanPopupModifiers += ui.rightShift->isChecked() ? KeyboardState::RightShift: 0;
 
+  p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
+  p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();
+  p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
+
   p.proxyServer.enabled = ui.useProxyServer->isChecked();
 
   p.proxyServer.type = ( Config::ProxyServer::Type ) ui.proxyType->currentIndex();
@@ -120,6 +136,7 @@ Config::Preferences Preferences::getPreferences()
 void Preferences::enableScanPopupToggled( bool b )
 {
   ui.scanPopupModifiers->setEnabled( b && ui.enableScanPopupModifiers->isChecked() );
+  ui.pronounceOnLoadPopup->setEnabled( b );
 }
 
 void Preferences::enableScanPopupModifiersToggled( bool b )

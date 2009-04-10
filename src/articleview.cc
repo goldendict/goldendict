@@ -16,11 +16,13 @@
 using std::list;
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
-                          Instances::Groups const & groups_, bool popupView_ ):
+                          Instances::Groups const & groups_, bool popupView_,
+                          Config::Class const & cfg_ ):
   QFrame( parent ),
   articleNetMgr( nm ),
   groups( groups_ ),
-  popupView( popupView_ )
+  popupView( popupView_ ),
+  cfg( cfg_ )
 {
   ui.setupUi( this );
 
@@ -88,6 +90,7 @@ void ArticleView::loadFinished( bool )
 {
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
+  emit pageLoaded();
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -260,6 +263,21 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
   }
 }
 
+bool ArticleView::hasSound()
+{
+  return ui.definition->page()->currentFrame()->
+    evaluateJavaScript( "gdAudioLink;" ).type() == QVariant::String;
+}
+
+void ArticleView::playSound()
+{
+  QVariant v = ui.definition->page()->currentFrame()->evaluateJavaScript(
+    QString( "gdAudioLink;" ) );
+
+  if ( v.type() == QVariant::String )
+    openLink( QUrl( v.toString() ), ui.definition->url() );
+}
+
 void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
@@ -370,7 +388,7 @@ void ArticleView::resourceDownloadFinished()
           // Use external viewer to play the file
           try
           {
-            ExternalViewer * viewer = new ExternalViewer( this, data, ".wav", "mplayer" );
+            ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram );
 
             try
             {

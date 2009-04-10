@@ -8,6 +8,7 @@
 #include "utf8.hh"
 #include "btreeidx.hh"
 #include "fsencoding.hh"
+#include "audiolink.hh"
 #include <set>
 #include <vorbis/vorbisfile.h>
 #include <string.h>
@@ -237,6 +238,8 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
 
     string ref = "\"gdau://" + getId() + "/" + i->second +"\"";
 
+    result += addAudioLink( ref );
+
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
     result += "<td><a href=" + ref + ">" + i->second + "</a></td>";
     result += "</tr>";
@@ -248,6 +251,8 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
     result += "<div class=\"lsa_play\">";
 
     string ref = "\"gdau://" + getId() + "/" + i->second +"\"";
+
+    result += addAudioLink( ref );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
     result += "<td><a href=" + ref + ">" + i->second + "</a></td>";

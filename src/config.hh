@@ -106,6 +106,10 @@ struct Preferences
   bool enableScanPopupModifiers;
   unsigned long scanPopupModifiers; // Combination of KeyboardState::Modifier
 
+  // Whether the word should be pronounced on page load, in main window/popup
+  bool pronounceOnLoadMain, pronounceOnLoadPopup;
+  QString audioPlaybackProgram;
+
   ProxyServer proxyServer;
 
   Preferences();
@@ -154,7 +158,8 @@ struct Class
   QByteArray mainWindowState; // Binary state saved by QMainWindow
   QByteArray mainWindowGeometry; // Geometry saved by QMainWindow
 
-  Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ) {}
+  Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 )
+  {}
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )

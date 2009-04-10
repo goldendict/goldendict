@@ -63,6 +63,13 @@ MainWindow::MainWindow():
   connect( enableScanPopup, SIGNAL( toggled( bool ) ),
            this, SLOT( scanEnableToggled( bool ) ) );
 
+  navToolbar->addSeparator();
+  navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound.png" ), tr( "Pronounce word" ) );
+  navPronounce->setEnabled( false );
+
+  connect( navPronounce, SIGNAL( triggered() ),
+           this, SLOT( pronounce() ) );
+
   connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( activated() ),
            this, SLOT( showMainWindow() ) );
   trayIconMenu.addAction( enableScanPopup );
@@ -139,6 +146,9 @@ MainWindow::MainWindow():
 
   connect( ui.tabWidget, SIGNAL( tabCloseRequested( int ) ),
            this, SLOT( tabCloseRequested( int ) ) );
+
+  connect( ui.tabWidget, SIGNAL( currentChanged( int ) ),
+           this, SLOT( tabSwitched( int ) ) );
 
   ui.tabWidget->setTabsClosable( true );
 
@@ -571,13 +581,15 @@ void MainWindow::indexingDictionary( QString dictionaryName )
 void MainWindow::addNewTab()
 {
   ArticleView * view = new ArticleView( this, articleNetMgr, groupInstances,
-                                        false );
+                                        false, cfg );
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
 
   connect( view, SIGNAL( iconChanged( ArticleView *, QIcon const & ) ),
            this, SLOT( iconChanged( ArticleView *, QIcon const & ) ) );
+
+  connect( view, SIGNAL( pageLoaded() ), this, SLOT( pageLoaded() ) );
 
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const & ) ) );
@@ -654,6 +666,32 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
 void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
 {
   ui.tabWidget->setTabIcon( ui.tabWidget->indexOf( view ), icon );
+}
+
+void MainWindow::pageLoaded()
+{
+  updatePronounceAvailability();
+
+  if ( cfg.preferences.pronounceOnLoadMain )
+    pronounce();
+}
+
+void MainWindow::tabSwitched( int )
+{
+  updatePronounceAvailability();
+}
+
+void MainWindow::pronounce()
+{
+  dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).playSound();
+}
+
+void MainWindow::updatePronounceAvailability()
+{
+  bool pronounceEnabled = ui.tabWidget->count() > 0 && 
+    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).hasSound();
+
+  navPronounce->setEnabled( pronounceEnabled );
 }
 
 void MainWindow::editSources()
@@ -940,8 +978,12 @@ void MainWindow::showTranslationFor( QString const & inWord )
   ArticleView & view =
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
 
+  navPronounce->setEnabled( false );
+
   view.showDefinition( inWord, cfg.groups.empty() ? 0 :
                         groupInstances[ ui.groupList->currentIndex() ].id );
+
+  updatePronounceAvailability();
 
   #if 0
   QUrl req;

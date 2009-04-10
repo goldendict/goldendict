@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>392</height>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -260,6 +260,43 @@ in the pressed state when the word selection changes.</string>
          </item>
         </layout>
        </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Sound</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <item>
+       <widget class="QCheckBox" name="pronounceOnLoadMain">
+        <property name="text">
+         <string>Auto-pronounce words in main window</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="pronounceOnLoadPopup">
+        <property name="text">
+         <string>Auto-pronounce words in scan popup</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Program to play audio files:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="audioPlaybackProgram"/>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

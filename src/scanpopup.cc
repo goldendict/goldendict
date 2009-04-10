@@ -32,10 +32,12 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.queryError->hide();
 
-  definition = new ArticleView( ui.outerFrame, articleNetMgr, groups, true ),
+  definition = new ArticleView( ui.outerFrame, articleNetMgr, groups, true,
+                                cfg );
   ui.mainLayout->addWidget( definition );
 
   ui.wordListButton->hide();
+  ui.pronounceButton->hide();
 
   ui.groupList->fill( groups );
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
@@ -70,6 +72,9 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   connect( ui.pinButton, SIGNAL( clicked( bool ) ),
            this, SLOT( pinButtonClicked( bool ) ) );
+
+  connect( definition, SIGNAL( pageLoaded() ),
+           this, SLOT( pageLoaded() ) );
 
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
@@ -143,6 +148,9 @@ void ScanPopup::handleInputWord( QString const & str )
   /// Too large strings make window expand which is probably not what user
   /// wants
   ui.word->setText( elideInputWord() );
+
+  ui.wordListButton->hide();
+  ui.pronounceButton->hide();
 
   if ( !isVisible() )
   {
@@ -369,6 +377,11 @@ void ScanPopup::on_wordListButton_clicked()
     definition->showDefinition( result->text(), ui.groupList->getCurrentGroup() );
 }
 
+void ScanPopup::on_pronounceButton_clicked()
+{
+  definition->playSound();
+}
+
 void ScanPopup::pinButtonClicked( bool checked )
 {
   if ( checked )
@@ -390,4 +403,12 @@ void ScanPopup::hideTimerExpired()
     unsetCursor(); // Just in case
     hide();
   }
+}
+
+void ScanPopup::pageLoaded()
+{
+  ui.pronounceButton->setVisible( definition->hasSound() );
+
+  if ( cfg.preferences.pronounceOnLoadPopup )
+    definition->playSound();
 }

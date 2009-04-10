@@ -9,6 +9,7 @@
 #include "chunkedstorage.hh"
 #include "filetype.hh"
 #include "htmlescape.hh"
+#include "audiolink.hh"
 #include <set>
 #include <QDir>
 
@@ -162,6 +163,8 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
 
     string ref = "\"gdau://" + getId() + "/" + QString::number( chain[ i->second ].articleOffset ).toUtf8().data() +"\"";
 
+    result += addAudioLink( ref );
+
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
     result += "<td><a href=" + ref + ">" + Html::escape( chain[ i->second ].word ) + "</a></td>";
     result += "</tr>";
@@ -173,6 +176,8 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
     result += "<div class=\"lsa_play\">";
 
     string ref = "\"gdau://" + getId() + "/" + QString::number( chain[ i->second ].articleOffset ).toUtf8().data() +"\"";
+
+    result += addAudioLink( ref );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
     result += "<td><a href=" + ref + ">" + Html::escape( chain[ i->second ].word ) + "</a></td>";

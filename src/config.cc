@@ -47,7 +47,9 @@ Preferences::Preferences():
   enableScanPopup( true ),
   startWithScanPopupOn( false ),
   enableScanPopupModifiers( false ),
-  scanPopupModifiers( 0 )
+  scanPopupModifiers( 0 ),
+  pronounceOnLoadMain( false ),
+  pronounceOnLoadPopup( false )
 {
 }
 
@@ -104,6 +106,10 @@ Class load() throw( exError )
     else
     if ( QDir( "C:/Program Files/WyabdcRealPeopleTTS" ).exists() )
       c.soundDirs.push_back( SoundDir( "C:/Program Files/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
+    #endif
+
+    #ifndef Q_OS_WIN32
+    c.preferences.audioPlaybackProgram = "mplayer";
     #endif
 
     c.mediawikis = makeDefaultMediaWikis( true );
@@ -241,6 +247,14 @@ Class load() throw( exError )
     c.preferences.startWithScanPopupOn = ( preferences.namedItem( "startWithScanPopupOn" ).toElement().text() == "1" );
     c.preferences.enableScanPopupModifiers = ( preferences.namedItem( "enableScanPopupModifiers" ).toElement().text() == "1" );
     c.preferences.scanPopupModifiers = ( preferences.namedItem( "scanPopupModifiers" ).toElement().text().toULong() );
+
+    c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
+    c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
+      c.preferences.audioPlaybackProgram = preferences.namedItem( "audioPlaybackProgram" ).toElement().text();
+    else
+      c.preferences.audioPlaybackProgram = "mplayer";
 
     QDomNode proxy = preferences.namedItem( "proxyserver" );
 
@@ -457,6 +471,18 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "scanPopupModifiers" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupModifiers ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "pronounceOnLoadMain" );
+    opt.appendChild( dd.createTextNode( c.preferences.pronounceOnLoadMain ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "pronounceOnLoadPopup" );
+    opt.appendChild( dd.createTextNode( c.preferences.pronounceOnLoadPopup ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "audioPlaybackProgram" );
+    opt.appendChild( dd.createTextNode( c.preferences.audioPlaybackProgram ) );
     preferences.appendChild( opt );
 
     {
