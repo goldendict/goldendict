@@ -660,7 +660,10 @@ void MainWindow::forwardClicked()
 
 void MainWindow::titleChanged( ArticleView * view, QString const & title )
 {
-  ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), title );
+  QString escaped = title;
+  escaped.replace( "&", "&&" );
+
+  ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), escaped );
 }
 
 void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )

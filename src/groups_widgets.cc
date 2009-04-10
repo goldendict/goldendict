@@ -222,6 +222,24 @@ DictGroupsWidget::DictGroupsWidget( QWidget * parent ):
   setMovable( true );
 }
 
+namespace {
+
+QString escapeAmps( QString const & str )
+{
+  QString result( str );
+  result.replace( "&", "&&" );
+  return result;
+}
+
+QString unescapeAmps( QString const & str )
+{
+  QString result( str );
+  result.replace( "&&", "&" );
+  return result;
+}
+
+}
+
 void DictGroupsWidget::populate( Config::Groups const & groups,
                                  vector< sptr< Dictionary::Class > > const & allDicts_ )
 {
@@ -231,7 +249,7 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
   allDicts = &allDicts_;
 
   for( unsigned x = 0; x < groups.size(); ++x )
-    addTab( new DictGroupWidget( this, *allDicts, groups[ x ] ), groups[ x ].name );
+    addTab( new DictGroupWidget( this, *allDicts, groups[ x ] ), escapeAmps( groups[ x ].name ) );
 
   nextId = groups.nextId;
 }
@@ -246,7 +264,7 @@ Config::Groups DictGroupsWidget::makeGroups() const
   for( int x = 0; x < count(); ++x )
   {
     result.push_back( dynamic_cast< DictGroupWidget & >( *widget( x ) ).makeGroup() );
-    result.back().name = tabText( x );
+    result.back().name = unescapeAmps( tabText( x ) );
   }
 
   return result;
@@ -265,9 +283,19 @@ void DictGroupsWidget::addNewGroup( QString const & name )
 
   insertTab( idx,
              new DictGroupWidget( this, *allDicts, newGroup ),
-             name );
+             escapeAmps( name ) );
 
   setCurrentIndex( idx );
+}
+
+QString DictGroupsWidget::getCurrentGroupName() const
+{
+  int current = currentIndex();
+
+  if ( current >= 0 )
+    return unescapeAmps( tabText( current ) );
+
+  return QString();
 }
 
 void DictGroupsWidget::renameCurrentGroup( QString const & name )
@@ -275,7 +303,7 @@ void DictGroupsWidget::renameCurrentGroup( QString const & name )
   int current = currentIndex();
 
   if ( current >= 0 )
-    setTabText( current, name );
+    setTabText( current, escapeAmps( name ) );
 }
 
 void DictGroupsWidget::removeCurrentGroup()

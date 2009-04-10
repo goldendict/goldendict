@@ -72,7 +72,7 @@ void Groups::renameCurrent()
 
   QString name = QInputDialog::getText( this, tr("Rename group"),
                                   tr("Give a new name for the group:"), QLineEdit::Normal,
-                                  ui.groups->tabText( current ), &ok );
+                                  ui.groups->getCurrentGroupName(), &ok );
 
   if ( ok )
     ui.groups->renameCurrentGroup( name );
@@ -83,7 +83,7 @@ void Groups::removeCurrent()
   int current = ui.groups->currentIndex();
 
   if ( current >= 0 && QMessageBox::question( this, tr( "Remove group" ),
-         tr( "Are you sure you want to remove the group <b>%1</b>?" ).arg( ui.groups->tabText( current ) ),
+         tr( "Are you sure you want to remove the group <b>%1</b>?" ).arg( ui.groups->getCurrentGroupName() ),
          QMessageBox::Yes, QMessageBox::Cancel ) == QMessageBox::Yes )
   {
     ui.groups->removeCurrentGroup();

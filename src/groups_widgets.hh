@@ -111,6 +111,9 @@ public:
   /// Creates new empty group with the given name
   void addNewGroup( QString const & );
 
+  /// Returns currently chosen group's name
+  QString getCurrentGroupName() const;
+
   /// Changes the name of the currently chosen group, if any, to the given one
   void renameCurrentGroup( QString const & );
 
