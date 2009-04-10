@@ -52,6 +52,10 @@ private:
 
   QPoint startPos; // For window moving
 
+  QTimer hideTimer; // When mouse leaves the window, a grace period is
+                    // given for it to return back. If it doesn't before
+                    // this timer expires, the window gets hidden.
+
   void handleInputWord( QString const & );
   void initiateTranslation();
 
@@ -61,6 +65,7 @@ private:
   virtual void mouseMoveEvent( QMouseEvent * );
   virtual void mouseReleaseEvent( QMouseEvent * );
   virtual void leaveEvent( QEvent * event );
+  virtual void enterEvent( QEvent * event );
   virtual void resizeEvent( QResizeEvent * event );
   virtual void showEvent( QShowEvent * );
 
@@ -79,6 +84,8 @@ private slots:
   void prefixButtonClicked();
   void initialWordClicked();
   void pinButtonClicked( bool checked );
+
+  void hideTimerExpired();
 };
 
 #endif

@@ -25,7 +25,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   wordFinder( this ),
-  mouseEnteredOnce( false )
+  mouseEnteredOnce( false ),
+  hideTimer( this )
 {
   ui.setupUi( this );
 
@@ -83,6 +84,12 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const & ) ),
            this, SLOT( mouseHovered( QString const & ) ) );
+
+  hideTimer.setSingleShot( true );
+  hideTimer.setInterval( 400 );
+
+  connect( &hideTimer, SIGNAL( timeout() ),
+           this, SLOT( hideTimerExpired() ) );
 }
 
 ScanPopup::~ScanPopup()
@@ -251,7 +258,10 @@ void ScanPopup::mouseMoveEvent( QMouseEvent * event )
     {
       // We're waiting for mouse to enter window
       if ( geometry().contains( event->globalPos() ) )
+      {
         mouseEnteredOnce = true;
+        hideTimer.stop();
+      }
     }
     else
     {
@@ -259,7 +269,7 @@ void ScanPopup::mouseMoveEvent( QMouseEvent * event )
       if ( !geometry().contains( event->globalPos() ) )
       {
         mouseEnteredOnce = false;
-        hide();
+        hideTimer.start();
       }
     }
   }
@@ -289,9 +299,16 @@ void ScanPopup::leaveEvent( QEvent * event )
   if ( !ui.pinButton->isChecked() && !geometry().contains( QCursor::pos() ) &&
        QApplication::mouseButtons() == Qt::NoButton )
   {
-    unsetCursor(); // Just in case
-    hide();
+    hideTimer.start();
   }
+}
+
+void ScanPopup::enterEvent( QEvent * event )
+{
+  QDialog::enterEvent( event );
+
+  // If there was a countdown to hide the window, stop it.
+  hideTimer.stop();
 }
 
 void ScanPopup::resizeEvent( QResizeEvent * event )
@@ -401,9 +418,19 @@ void ScanPopup::pinButtonClicked( bool checked )
   {
     setWindowFlags( Qt::Dialog );
     setWindowTitle( elideInputWord() );
+    hideTimer.stop();
   }
   else
     setWindowFlags( Qt::Popup );
 
   show();
+}
+
+void ScanPopup::hideTimerExpired()
+{
+  if ( isVisible() )
+  {
+    unsetCursor(); // Just in case
+    hide();
+  }
 }
