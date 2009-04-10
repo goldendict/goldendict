@@ -35,8 +35,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   definition = new ArticleView( ui.outerFrame, articleNetMgr, groups, true ),
   ui.mainLayout->addWidget( definition );
 
-  ui.diacriticButton->hide();
-  ui.prefixButton->hide();
+  ui.wordListButton->hide();
 
   ui.groupList->fill( groups );
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
@@ -68,13 +67,6 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   connect( &wordFinder, SIGNAL( finished() ),
            this, SLOT( prefixMatchFinished() ) );
-
-  connect( ui.word, SIGNAL( clicked() ),
-           this, SLOT( initialWordClicked() ) );
-  connect( ui.diacriticButton, SIGNAL( clicked() ),
-           this, SLOT( diacriticButtonClicked() ) );
-  connect( ui.prefixButton, SIGNAL( clicked() ),
-           this, SLOT( prefixButtonClicked() ) );
 
   connect( ui.pinButton, SIGNAL( clicked( bool ) ),
            this, SLOT( pinButtonClicked( bool ) ) );
@@ -339,77 +331,42 @@ void ScanPopup::prefixMatchFinished()
     else
       ui.queryError->hide();
 
-    // Find the matches that aren't prefix. If there're more than one,
-    // show the diacritic toolbutton. If there are prefix matches, show
-    // the prefix toolbutton.
-
-    diacriticMatches.clear();
-    prefixMatches.clear();
-
-    wstring foldedInputWord = Folding::apply( inputWord.toStdWString() );
-
-    WordFinder::SearchResults const & results = wordFinder.getPrefixMatchResults();
-    
-    for( unsigned x = 0; x < results.size(); ++x )
-    {
-      if ( Folding::apply( results[ x ].first.toStdWString() ) == foldedInputWord )
-        diacriticMatches.push_back( results[ x ].first );
-      else
-        prefixMatches.push_back( results[ x ].first );
-    }
-
-    if ( diacriticMatches.size() > 1 )
-    {
-      ui.diacriticButton->setToolTip( tr( "%1 results differing in diacritic marks" ).arg( diacriticMatches.size() ) );
-      ui.diacriticButton->show();
-    }
-    else
-      ui.diacriticButton->hide();
-
-    if ( prefixMatches.size() )
-    {
-      ui.prefixButton->setToolTip( tr( "%1 result(s) beginning with the search word" ).arg( prefixMatches.size() ) );
-      ui.prefixButton->show();
-    }
-    else
-      ui.prefixButton->hide();
+    ui.wordListButton->setVisible( wordFinder.getPrefixMatchResults().size() );
   }
 }
 
-void ScanPopup::diacriticButtonClicked()
-{
-  popupWordlist( diacriticMatches, ui.diacriticButton );
-}
-
-void ScanPopup::prefixButtonClicked()
-{
-  popupWordlist( prefixMatches, ui.prefixButton );
-}
-
-void ScanPopup::popupWordlist( vector< QString > const & words, QToolButton * button )
+void ScanPopup::on_wordListButton_clicked()
 {
   if ( !isVisible() )
     return;
 
-  if ( words.empty() )
+  WordFinder::SearchResults const & results = wordFinder.getPrefixMatchResults();
+
+  if ( results.empty() )
     return;
 
   QMenu menu( this );
 
-  for( unsigned x = 0; x < words.size(); ++x )
-    menu.addAction( words[ x ] );
+  unsigned total = results.size() < 20 ? results.size() : 20;
 
-  QAction * result = menu.exec( mapToGlobal( button->pos() ) +
-                                  QPoint( 0, button->height() ) );
+  for( unsigned x = 0; x < total; ++x )
+  {
+    // Some items are just too large! For now skip them.
+
+    if ( results[ x ].first.size() > 64 )
+    {
+      if ( total < results.size() )
+        ++total;
+    }
+    else
+      menu.addAction( results[ x ].first );
+  }
+
+  QAction * result = menu.exec( mapToGlobal( ui.wordListButton->pos() ) +
+                                  QPoint( 0, ui.wordListButton->height() ) );
 
   if ( result )
     definition->showDefinition( result->text(), ui.groupList->getCurrentGroup() );
-}
-
-void ScanPopup::initialWordClicked()
-{
-  if ( isVisible() && diacriticMatches.size() )
-    definition->showDefinition( diacriticMatches[ 0 ], ui.groupList->getCurrentGroup() );
 }
 
 void ScanPopup::pinButtonClicked( bool checked )

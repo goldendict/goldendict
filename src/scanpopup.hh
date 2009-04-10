@@ -46,8 +46,6 @@ private:
   QString inputWord;
   WordFinder wordFinder;
 
-  vector< QString > diacriticMatches, prefixMatches;
-
   bool mouseEnteredOnce;
 
   QPoint startPos; // For window moving
@@ -69,8 +67,6 @@ private:
   virtual void resizeEvent( QResizeEvent * event );
   virtual void showEvent( QShowEvent * );
 
-  void popupWordlist( vector< QString > const &, QToolButton * button );
-
   /// Returns inputWord, chopped with appended ... if it's too long/
   QString elideInputWord();
 
@@ -80,9 +76,7 @@ private slots:
   void mouseHovered( QString const & );
   void currentGroupChanged( QString const & );
   void prefixMatchFinished();
-  void diacriticButtonClicked();
-  void prefixButtonClicked();
-  void initialWordClicked();
+  void on_wordListButton_clicked();
   void pinButtonClicked( bool checked );
 
   void hideTimerExpired();

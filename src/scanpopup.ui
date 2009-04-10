@@ -51,43 +51,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="word">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
+         <widget class="QLabel" name="word">
           <property name="text">
            <string>word</string>
           </property>
-          <property name="autoRaise">
-           <bool>true</bool>
-          </property>
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="diacriticButton">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="resources.qrc">
-            <normaloff>:/icons/accents.png</normaloff>:/icons/accents.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>22</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="arrowType">
-           <enum>Qt::NoArrow</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="prefixButton">
+         <widget class="QToolButton" name="wordListButton">
           <property name="text">
            <string>...</string>
           </property>
