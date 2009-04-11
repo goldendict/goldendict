@@ -43,7 +43,7 @@ private:
   Instances::Groups const & groups;
   Ui::ScanPopup ui;
   ArticleView * definition;
-  QString inputWord;
+  QString pendingInputWord, inputWord;
   WordFinder wordFinder;
 
   bool mouseEnteredOnce;
@@ -53,8 +53,10 @@ private:
   QTimer hideTimer; // When mouse leaves the window, a grace period is
                     // given for it to return back. If it doesn't before
                     // this timer expires, the window gets hidden.
+  QTimer altModeExpirationTimer, altModePollingTimer; // Timers for alt mode
 
   void handleInputWord( QString const & );
+  void engagePopup();
   void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
@@ -81,6 +83,8 @@ private slots:
   void pinButtonClicked( bool checked );
 
   void hideTimerExpired();
+  void altModeExpired();
+  void altModePoll();
 
   void pageLoaded();
 };

@@ -87,6 +87,18 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   connect( &hideTimer, SIGNAL( timeout() ),
            this, SLOT( hideTimerExpired() ) );
+
+  altModeExpirationTimer.setSingleShot( true );
+  altModeExpirationTimer.setInterval( cfg.preferences.scanPopupAltModeSecs * 1000 );
+
+  connect( &altModeExpirationTimer, SIGNAL( timeout() ),
+           this, SLOT( altModeExpired() ) );
+
+  // This one polls constantly for modifiers while alt mode lasts
+  altModePollingTimer.setSingleShot( false );
+  altModePollingTimer.setInterval( 50 );
+  connect( &altModePollingTimer, SIGNAL( timeout() ),
+           this, SLOT( altModePoll() ) );
 }
 
 ScanPopup::~ScanPopup()
@@ -134,23 +146,42 @@ void ScanPopup::handleInputWord( QString const & str )
   if ( !cfg.preferences.enableScanPopup )
     return;
 
+  pendingInputWord = QString::fromStdWString( Folding::trimWhitespaceOrPunct( str.toStdWString() ) );
+
+  if ( !pendingInputWord.size() )
+  {
+    if ( cfg.preferences.scanPopupAltMode )
+    {
+      // In case we had any timers engaged before, cancel them now, since
+      // we're not going to translate anything anymore.
+      altModePollingTimer.stop();
+      altModeExpirationTimer.stop();
+    }
+    return;
+  }
+
   // Check key modifiers
 
-  if ( cfg.preferences.enableScanPopupModifiers &&
-       !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
+  if ( cfg.preferences.enableScanPopupModifiers && !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
+  {
+    if ( cfg.preferences.scanPopupAltMode )
+    {
+      altModePollingTimer.start();
+      altModeExpirationTimer.start();
+    }
+
     return;
+  }
 
-  inputWord = QString::fromStdWString( Folding::trimWhitespaceOrPunct( str.toStdWString() ) );
+  inputWord = pendingInputWord;
+  engagePopup();
+}
 
-  if ( !inputWord.size() )
-    return;
-
+void ScanPopup::engagePopup()
+{
   /// Too large strings make window expand which is probably not what user
   /// wants
   ui.word->setText( elideInputWord() );
-
-  ui.wordListButton->hide();
-  ui.pronounceButton->hide();
 
   if ( !isVisible() )
   {
@@ -215,6 +246,9 @@ void ScanPopup::currentGroupChanged( QString const & )
 
 void ScanPopup::initiateTranslation()
 {
+  ui.wordListButton->hide();
+  ui.pronounceButton->hide();
+
   definition->showDefinition( inputWord, ui.groupList->getCurrentGroup() );
   wordFinder.prefixMatch( inputWord, getActiveDicts() );
 }
@@ -402,6 +436,31 @@ void ScanPopup::hideTimerExpired()
   {
     unsetCursor(); // Just in case
     hide();
+  }
+}
+
+void ScanPopup::altModeExpired()
+{
+  // The alt mode duration has expired, so there's no need to poll for modifiers
+  // anymore.
+  altModePollingTimer.stop();
+}
+
+void ScanPopup::altModePoll()
+{
+  if ( !pendingInputWord.size() )
+  {
+    altModePollingTimer.stop();
+    altModeExpirationTimer.stop();
+  }
+  else
+  if ( checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
+  {
+    altModePollingTimer.stop();
+    altModeExpirationTimer.stop();
+
+    inputWord = pendingInputWord;
+    engagePopup();
   }
 }
 

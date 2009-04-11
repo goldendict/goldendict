@@ -52,6 +52,9 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.leftShift->setChecked( p.scanPopupModifiers & KeyboardState::LeftShift );
   ui.rightShift->setChecked( p.scanPopupModifiers & KeyboardState::RightShift );
 
+  ui.scanPopupAltMode->setChecked( p.scanPopupAltMode );
+  ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
+
   // Different platforms have different keys available
 
 #ifdef Q_OS_WIN32
@@ -115,6 +118,9 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupModifiers += ui.rightCtrl->isChecked() ? KeyboardState::RightCtrl: 0;
   p.scanPopupModifiers += ui.leftShift->isChecked() ? KeyboardState::LeftShift: 0;
   p.scanPopupModifiers += ui.rightShift->isChecked() ? KeyboardState::RightShift: 0;
+
+  p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
+  p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();

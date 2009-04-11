@@ -48,6 +48,8 @@ Preferences::Preferences():
   startWithScanPopupOn( false ),
   enableScanPopupModifiers( false ),
   scanPopupModifiers( 0 ),
+  scanPopupAltMode( false ),
+  scanPopupAltModeSecs( 3 ),
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false )
 {
@@ -247,6 +249,9 @@ Class load() throw( exError )
     c.preferences.startWithScanPopupOn = ( preferences.namedItem( "startWithScanPopupOn" ).toElement().text() == "1" );
     c.preferences.enableScanPopupModifiers = ( preferences.namedItem( "enableScanPopupModifiers" ).toElement().text() == "1" );
     c.preferences.scanPopupModifiers = ( preferences.namedItem( "scanPopupModifiers" ).toElement().text().toULong() );
+    c.preferences.scanPopupAltMode = ( preferences.namedItem( "scanPopupAltMode" ).toElement().text() == "1" );
+    if ( !preferences.namedItem( "scanPopupAltModeSecs" ).isNull() )
+      c.preferences.scanPopupAltModeSecs = preferences.namedItem( "scanPopupAltModeSecs" ).toElement().text().toUInt();
 
     c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
     c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
@@ -471,6 +476,14 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "scanPopupModifiers" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupModifiers ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanPopupAltMode" );
+    opt.appendChild( dd.createTextNode( c.preferences.scanPopupAltMode ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanPopupAltModeSecs" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupAltModeSecs ) ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "pronounceOnLoadMain" );

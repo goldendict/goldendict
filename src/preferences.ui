@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
-    <height>261</height>
+    <width>417</width>
+    <height>292</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -316,6 +316,54 @@ in the pressed state when the word selection changes.</string>
              </item>
             </layout>
            </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QCheckBox" name="scanPopupAltMode">
+              <property name="toolTip">
+               <string>Normally, in order to activate a popup you have to
+maintain the chosen keys pressed while you select
+a word. With this enabled, the chosen keys may also
+be pressed shorty after the selection is done.</string>
+              </property>
+              <property name="text">
+               <string>Keys may also be pressed afterwards, within</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="scanPopupAltModeSecs">
+              <property name="toolTip">
+               <string>To avoid false positives, the keys are only monitored
+after the selection's done for a limited amount of
+seconds, which is specified here.</string>
+              </property>
+              <property name="wrapping">
+               <bool>false</bool>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>99</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>secs</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
