@@ -40,7 +40,7 @@ DEF_EX( exInvalidBase64, "Invalid base64 sequence encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x58444344, // DCDX on little-endian, XDCD on big-endian
-  CurrentFormatVersion = 1 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -349,7 +349,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         IndexedWords indexedWords;
 
-        File::Class indexFile( dictFiles[ 0 ], "r" );
+        File::Class indexFile( dictFiles[ 0 ], "rb" );
 
         // Read words from index until none's left.
 
