@@ -74,7 +74,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group )
   req.addQueryItem( "word", word );
   req.addQueryItem( "group", QString::number( group ) );
 
-  ui.definition->setUrl( req );
+  ui.definition->load( req );
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
 }
