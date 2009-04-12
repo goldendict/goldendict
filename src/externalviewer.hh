@@ -30,6 +30,8 @@ public:
                   QString const & extension, QString const & viewerProgram )
     throw( exCantCreateTempFile );
 
+  ~ExternalViewer();
+
   void start() throw( exCantRunViewer );
 
 private slots:

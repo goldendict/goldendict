@@ -32,6 +32,14 @@ ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
            Qt::QueuedConnection );
 }
 
+ExternalViewer::~ExternalViewer()
+{
+  // No need to delete us once we're being destructed. This fixes some
+  // double-free corruption if the object is being freed prematurely.
+  disconnect( this, SIGNAL( finished( ExternalViewer * ) ),
+              &ExternalViewerDeleter::instance(), SLOT( deleteExternalViewer( ExternalViewer * ) ) );
+}
+
 void ExternalViewer::start() throw( exCantRunViewer )
 {
   viewer.start( viewerProgram, QStringList( tempFileName ), QIODevice::NotOpen );
