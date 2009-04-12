@@ -418,7 +418,7 @@ seconds, which is specified here.</string>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QLabel" name="label_6">
+          <widget class="QLabel" name="audioPlaybackProgramLabel">
            <property name="text">
             <string>Program to play audio files:</string>
            </property>

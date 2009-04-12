@@ -78,6 +78,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
 #ifdef Q_OS_WIN32
   ui.audioPlaybackProgram->hide();
+  ui.audioPlaybackProgramLabel->hide();
 #endif
 
   // Proxy server
