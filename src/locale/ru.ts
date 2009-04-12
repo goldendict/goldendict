@@ -1206,7 +1206,7 @@
     <message>
         <location filename="../hunspell.cc" line="836"/>
         <source>%1 Morphology</source>
-        <translation>%1 морфология</translation>
+        <translation>%1 Морфология</translation>
     </message>
 </context>
 <context>
