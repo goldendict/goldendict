@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>icons/arrow.png</file>
     <file>icons/prefix.png</file>
     <file>icons/pushpin.png</file>
     <file>icons/playsound.png</file>

@@ -18,6 +18,7 @@ class ArticleView: public QFrame
   Q_OBJECT
 
   ArticleNetworkAccessManager & articleNetMgr;
+  std::vector< sptr< Dictionary::Class > > const & allDictionaries;
   Instances::Groups const & groups;
   bool popupView;
   Config::Class const & cfg;
@@ -45,6 +46,7 @@ public:
   /// The groups aren't copied -- rather than that, the reference is kept
   ArticleView( QWidget * parent,
                ArticleNetworkAccessManager &,
+               std::vector< sptr< Dictionary::Class > > const & allDictionaries,
                Instances::Groups const &,
                bool popupView,
                Config::Class const & cfg );

@@ -580,8 +580,8 @@ void MainWindow::indexingDictionary( QString dictionaryName )
 
 void MainWindow::addNewTab()
 {
-  ArticleView * view = new ArticleView( this, articleNetMgr, groupInstances,
-                                        false, cfg );
+  ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
+                                        groupInstances, false, cfg );
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );

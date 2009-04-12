@@ -3,6 +3,7 @@
 
 #include "articleview.hh"
 #include "externalviewer.hh"
+#include <map>
 #include <QMessageBox>
 #include <QWebHitTestResult>
 #include <QMenu>
@@ -13,13 +14,16 @@
 #include <mmsystem.h> // For PlaySound
 #endif
 
+using std::map;
 using std::list;
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
+                          std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
                           Config::Class const & cfg_ ):
   QFrame( parent ),
   articleNetMgr( nm ),
+  allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   popupView( popupView_ ),
   cfg( cfg_ )
@@ -326,6 +330,40 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     menu.addAction( ui.definition->pageAction( QWebPage::QWebPage::Copy ) );
   }
 
+  map< QAction *, QString > tableOfContents;
+    
+  // Add table of contents
+  QStringList ids = ui.definition->page()->currentFrame()->
+                      evaluateJavaScript( "gdArticleContents;" ).toString().
+    trimmed().split( ' ', QString::SkipEmptyParts );
+
+  if ( !menu.isEmpty() && ids.size() )
+    menu.addSeparator();
+  
+  for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd();
+       ++i )
+  {
+    // Find this dictionary
+
+    for( unsigned x = allDictionaries.size(); x--; )
+    {
+      if ( allDictionaries[ x ]->getId() == i->toUtf8().data() )
+      {
+        QAction * action =
+          new QAction(
+                QIcon( ":/icons/arrow.png" ),
+                QString::fromUtf8( allDictionaries[ x ]->getName().c_str() ),
+                &menu );
+
+        menu.addAction( action );
+
+        tableOfContents[ action ] = *i;
+
+        break;
+      }
+    }
+  }
+  
   if ( !menu.isEmpty() )
   {
     QAction * result = menu.exec( ui.definition->mapToGlobal( pos ) );
@@ -336,13 +374,22 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ) );
     else
-    if ( !popupView )
+    if ( !popupView && result == followLinkNewTab )
+      emit openLinkInNewTab( r.linkUrl(), ui.definition->url() );
+    else
+    if ( !popupView && result == lookupSelectionNewTab )
+      emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ) );
+    else
     {
-      if (result == followLinkNewTab )
-        emit openLinkInNewTab( r.linkUrl(), ui.definition->url() );
-      else
-      if ( result == lookupSelectionNewTab )
-        emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ) );
+      // Match against table of contents
+      QString id = tableOfContents[ result ];
+
+      if ( id.size() )
+      {
+        QUrl url( ui.definition->url() );
+        url.setFragment( "gdfrom-" + id );
+        openLink( url, ui.definition->url() );
+      }
     }
   }
 #if 0

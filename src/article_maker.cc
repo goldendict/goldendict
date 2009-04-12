@@ -174,7 +174,8 @@ ArticleRequest::ArticleRequest(
   vector< sptr< Dictionary::Class > > const & activeDicts_,
   string const & header ):
     word( word_ ), group( group_ ), activeDicts( activeDicts_ ),
-    altsDone( false ), bodyDone( false ), foundAnyDefinitions( false )
+    altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
+    closePrevSpan( false )
 {
   // No need to lock dataMutex on construction
 
@@ -275,7 +276,26 @@ void ArticleRequest::bodyFinished()
 
       if ( req.dataSize() >= 0 || errorString.size() )
       {
-        string head = string( "<div class=\"gddictname\">" ) +
+        string dictId = activeDicts[ activeDicts.size() - bodyRequests.size() ]->getId();
+        
+        string head;
+
+        if ( closePrevSpan )
+        {
+          head += "</span>";
+          closePrevSpan = false;
+        }
+
+        string jsVal = Html::escapeForJavaScript( dictId );
+        head += "<script language=\"JavaScript\">var gdArticleContents; "
+          "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
+          "else gdArticleContents += \"" + jsVal + " \";</script>";
+        
+        head += "<span id=\"gdfrom-" + Html::escape( dictId ) + "\">";
+
+        closePrevSpan = true;
+        
+        head += string( "<div class=\"gddictname\">" ) +
           Html::escape(
             tr( "From %1" ).arg( QString::fromUtf8( activeDicts[ activeDicts.size() - bodyRequests.size() ]->getName().c_str() ) ).toUtf8().data() )
            + "</div>";
@@ -323,6 +343,12 @@ void ArticleRequest::bodyFinished()
     {
       string footer;
 
+      if ( closePrevSpan )
+      {
+        footer += "</span>";
+        closePrevSpan = false;
+      }
+      
       if ( !foundAnyDefinitions )
       {
         // No definitions were ever found, say so to the user.

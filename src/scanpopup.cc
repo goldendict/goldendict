@@ -32,8 +32,8 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.queryError->hide();
 
-  definition = new ArticleView( ui.outerFrame, articleNetMgr, groups, true,
-                                cfg );
+  definition = new ArticleView( ui.outerFrame, articleNetMgr, allDictionaries,
+                                groups, true, cfg );
   ui.mainLayout->addWidget( definition );
 
   ui.wordListButton->hide();

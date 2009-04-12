@@ -64,7 +64,8 @@ class ArticleRequest: public Dictionary::DataRequest
   bool altsDone, bodyDone;
   std::list< sptr< Dictionary::DataRequest > > bodyRequests;
   bool foundAnyDefinitions;
-  
+  bool closePrevSpan; // Indicates whether the last opened article span is to
+                      // be closed after the article ends.
 
 public:
 
