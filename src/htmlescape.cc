@@ -82,4 +82,39 @@ string preformat( string const & str )
   return result;
 }
 
+string escapeForJavaScript( string const & str )
+{
+  string result( str );
+
+  for( size_t x = result.size(); x--; )
+    switch ( result[ x ] )
+    {
+      case '\\':
+      case '"':
+      case '\'':
+        result.insert( x, 1, '\\' );
+      break;
+
+      case '\n':
+        result.erase( x, 1 );
+        result.insert( x, "\\n" );
+      break;
+
+      case '\r':
+        result.erase( x, 1 );
+        result.insert( x, "\\r" );
+      break;
+
+      case '\t':
+        result.erase( x, 1 );
+        result.insert( x, "\\t" );
+      break;
+
+      default:
+      break;
+    }
+
+  return result;
+}
+
 }

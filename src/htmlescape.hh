@@ -19,6 +19,9 @@ string escape( string const & );
 // <br>, each leading space is converted to &nbsp;.
 string preformat( string const & );
 
+// Escapes the given string to be included in JavaScript.
+string escapeForJavaScript( string const & );
+
 }
 
 #endif
