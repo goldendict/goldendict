@@ -279,7 +279,7 @@ void ArticleView::playSound()
     QString( "gdAudioLink;" ) );
 
   if ( v.type() == QVariant::String )
-    openLink( QUrl( v.toString() ), ui.definition->url() );
+    openLink( QUrl::fromEncoded( v.toString().toUtf8() ), ui.definition->url() );
 }
 
 void ArticleView::contextMenuRequested( QPoint const & pos )
