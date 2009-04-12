@@ -75,7 +75,7 @@ private:
   QSystemTrayIcon * trayIcon;
 
   Ui::MainWindow ui;
-  QAction translateClearAndFocusAction, addTabAction, closeCurrentTabAction,
+  QAction focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           switchToNextTabAction, switchToPrevTabAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
@@ -154,7 +154,9 @@ private slots:
   void translateInputChanged( QString const & );
   void translateInputFinished();
 
-  void translateClearAndFocus();
+  /// Gives the keyboard focus to the translateLine and selects all the text
+  /// it has.
+  void focusTranslateLine();
 
   void prefixMatchUpdated();
   void prefixMatchFinished();

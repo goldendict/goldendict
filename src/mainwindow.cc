@@ -31,7 +31,7 @@ using std::pair;
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIcon( 0 ),
-  translateClearAndFocusAction( this ),
+  focusTranslateLineAction( this ),
   addTabAction( this ),
   closeCurrentTabAction( this ),
   switchToNextTabAction( this ),
@@ -77,13 +77,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( activated() ),
            qApp, SLOT( quit() ) );
 
-  translateClearAndFocusAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
-  translateClearAndFocusAction.setShortcut( QKeySequence( "Esc" ) );
+  focusTranslateLineAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  focusTranslateLineAction.setShortcut( QKeySequence( "Esc" ) );
 
-  connect( &translateClearAndFocusAction, SIGNAL( triggered() ),
-           this, SLOT( translateClearAndFocus() ) );
+  connect( &focusTranslateLineAction, SIGNAL( triggered() ),
+           this, SLOT( focusTranslateLine() ) );
 
-  ui.centralWidget->addAction( &translateClearAndFocusAction );
+  ui.centralWidget->addAction( &focusTranslateLineAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -805,10 +805,10 @@ void MainWindow::translateInputFinished()
     showTranslationFor( word );
 }
 
-void MainWindow::translateClearAndFocus()
+void MainWindow::focusTranslateLine()
 {
-  ui.translateLine->clear();
   ui.translateLine->setFocus();
+  ui.translateLine->selectAll();
 }
 
 void MainWindow::prefixMatchUpdated()
