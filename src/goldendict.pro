@@ -94,3 +94,5 @@ win32 {
 }
 
 RESOURCES += resources.qrc flags.qrc
+
+TRANSLATIONS += locale/ru.ts
