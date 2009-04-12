@@ -12,6 +12,7 @@
 #include "audiolink.hh"
 #include <set>
 #include <QDir>
+#include <QUrl>
 
 namespace SoundDir {
 
@@ -161,7 +162,12 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
   {
     result += "<tr>";
 
-    string ref = "\"gdau://" + getId() + "/" + QString::number( chain[ i->second ].articleOffset ).toUtf8().data() +"\"";
+    QUrl url;
+    url.setScheme( "gdau" );
+    url.setHost( QString::fromUtf8( getId().c_str() ) );
+    url.setPath( QString::number( chain[ i->second ].articleOffset ) );
+
+    string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
     result += addAudioLink( ref );
 
@@ -173,9 +179,13 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
     result += "<tr>";
-    result += "<div class=\"lsa_play\">";
 
-    string ref = "\"gdau://" + getId() + "/" + QString::number( chain[ i->second ].articleOffset ).toUtf8().data() +"\"";
+    QUrl url;
+    url.setScheme( "gdau" );
+    url.setHost( QString::fromUtf8( getId().c_str() ) );
+    url.setPath( QString::number( chain[ i->second ].articleOffset ) );
+
+    string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
     result += addAudioLink( ref );
 

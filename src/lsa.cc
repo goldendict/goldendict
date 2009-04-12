@@ -12,6 +12,7 @@
 #include <set>
 #include <vorbis/vorbisfile.h>
 #include <string.h>
+#include <QUrl>
 
 namespace Lsa {
 
@@ -236,7 +237,12 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
   {
     result += "<tr>";
 
-    string ref = "\"gdau://" + getId() + "/" + i->second +"\"";
+    QUrl url;
+    url.setScheme( "gdau" );
+    url.setHost( QString::fromUtf8( getId().c_str() ) );
+    url.setPath( QString::fromUtf8( i->second.c_str() ) );
+
+    string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
     result += addAudioLink( ref );
 
@@ -248,9 +254,13 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
     result += "<tr>";
-    result += "<div class=\"lsa_play\">";
 
-    string ref = "\"gdau://" + getId() + "/" + i->second +"\"";
+    QUrl url;
+    url.setScheme( "gdau" );
+    url.setHost( QString::fromUtf8( getId().c_str() ) );
+    url.setPath( QString::fromUtf8( i->second.c_str() ) );
+
+    string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
     result += addAudioLink( ref );
 

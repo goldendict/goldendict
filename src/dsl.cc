@@ -25,6 +25,7 @@
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
+#include <QUrl>
 
 // For TIFF conversion
 #include <QImage>
@@ -441,8 +442,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       {
       }
 
-      string ref = "\"gdau://" + ( search ? string( "search" ) : getId() ) +
-                   "/" + Html::escape( filename ) +"\"";
+      QUrl url;
+      url.setScheme( "gdau" );
+      url.setHost( QString::fromUtf8( search ? "search" : getId().c_str() ) );
+      url.setPath( QString::fromUtf8( filename.c_str() ) );
+
+      string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
       result += addAudioLink( ref );
 
@@ -452,13 +457,24 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     else
     if ( Filetype::isNameOfPicture( filename ) )
     {
-      result += "<img src=\"bres://" + getId() + "/" + Html::escape( filename )
+      QUrl url;
+      url.setScheme( "bres" );
+      url.setHost( QString::fromUtf8( getId().c_str() ) );
+      url.setPath( QString::fromUtf8( filename.c_str() ) );
+
+      result += string( "<img src=\"" ) + url.toEncoded().data()
              + "\" alt=\"" + Html::escape( filename ) + "\"/>";
     }
     else
     {
       // Unknown file type, downgrade to a hyperlink
-      result += "<a class=\"dsl_s\" href=\"bres://" + getId() + "/" + Html::escape( filename )
+
+      QUrl url;
+      url.setScheme( "bres" );
+      url.setHost( QString::fromUtf8( getId().c_str() ) );
+      url.setPath( QString::fromUtf8( filename.c_str() ) );
+
+      result += string( "<a class=\"dsl_s\" href=\"" ) + url.toEncoded().data()
              + "\">" + processNodeChildren( node ) + "</a>";
     }
   }
