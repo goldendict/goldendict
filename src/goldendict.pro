@@ -43,6 +43,8 @@ unix {
   INSTALLS += target locale
 }
 
+DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
+
 # Input
 HEADERS += folding.hh \
            inc_case_folding.hh \

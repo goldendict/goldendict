@@ -1138,6 +1138,8 @@ void MainWindow::showAbout()
 
   ui.setupUi( &about );
 
+  ui.version->setText( PROGRAM_VERSION );
+
   about.show();
   about.exec();
 }

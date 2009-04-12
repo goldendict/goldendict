@@ -19,17 +19,26 @@
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="43"/>
         <source>GoldenDict dictionary lookup program, version 0.7</source>
-        <translation>Словарь GoldenDict, версия 0.7</translation>
+        <translation type="obsolete">Словарь GoldenDict, версия 0.7</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="53"/>
+        <location filename="../about.ui" line="48"/>
+        <source>GoldenDict dictionary lookup program, version </source>
+        <translation>Словарь GoldenDict, версия </translation>
+    </message>
+    <message>
+        <location filename="../about.ui" line="61"/>
+        <source>#.#</source>
+        <translation>#.#</translation>
+    </message>
+    <message>
+        <location filename="../about.ui" line="70"/>
         <source>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</source>
         <translation>© Константин Исаков (ikm@users.berlios.de), 2008-2009</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="63"/>
+        <location filename="../about.ui" line="80"/>
         <source>Licensed under GNU GPLv3 or later</source>
         <translation>Лицензия: GNU GPLv3 или более поздняя версия</translation>
     </message>
