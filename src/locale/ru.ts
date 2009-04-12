@@ -1841,12 +1841,12 @@ for all program&apos;s network requests.</source>
     <message>
         <location filename="../sources.ui" line="79"/>
         <source>Sound Dirs</source>
-        <translation>Звуковые директории</translation>
+        <translation>Звуковые папки</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="85"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>Словари создаются из набора аудиофайлов добавлением путей сюда:</translation>
+        <translation>Все найденные аудиофайлы каждой папки компонуются в словари:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="131"/>
