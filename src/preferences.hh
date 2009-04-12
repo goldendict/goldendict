@@ -10,6 +10,8 @@ class Preferences: public QDialog
 {
   Q_OBJECT
 
+  int prevInterfaceLanguage;
+
 public:
 
   Preferences( QWidget * parent, Config::Preferences const & );
@@ -32,6 +34,8 @@ private slots:
   void sideAltClicked( bool );
   void sideCtrlClicked( bool );
   void sideShiftClicked( bool );
+
+  void on_buttonBox_accepted();
 };
 
 #endif

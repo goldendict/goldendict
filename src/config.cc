@@ -242,6 +242,7 @@ Class load() throw( exError )
 
   if ( !preferences.isNull() )
   {
+    c.preferences.interfaceLanguage = preferences.namedItem( "interfaceLanguage" ).toElement().text();
     c.preferences.enableTrayIcon = ( preferences.namedItem( "enableTrayIcon" ).toElement().text() == "1" );
     c.preferences.startToTray = ( preferences.namedItem( "startToTray" ).toElement().text() == "1" );
     c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
@@ -450,7 +451,11 @@ void save( Class const & c ) throw( exError )
     QDomElement preferences = dd.createElement( "preferences" );
     root.appendChild( preferences );
 
-    QDomElement opt = dd.createElement( "enableTrayIcon" );
+    QDomElement opt = dd.createElement( "interfaceLanguage" );
+    opt.appendChild( dd.createTextNode( c.preferences.interfaceLanguage ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "enableTrayIcon" );
     opt.appendChild( dd.createTextNode( c.preferences.enableTrayIcon ? "1":"0" ) );
     preferences.appendChild( opt );
 

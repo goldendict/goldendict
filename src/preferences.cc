@@ -1,8 +1,9 @@
 #include "preferences.hh"
 #include "keyboardstate.hh"
+#include <QMessageBox>
 
 Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
-  QDialog( parent )
+  QDialog( parent ), prevInterfaceLanguage( 0 )
 {
   ui.setupUi( this );
 
@@ -33,6 +34,18 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
            this, SLOT( sideShiftClicked( bool ) ) );
 
   // Load values into form
+
+  ui.interfaceLanguage->addItem( tr( "System default" ), QString() );
+  ui.interfaceLanguage->addItem( tr( "English" ), QString( "en_US" ) );
+  ui.interfaceLanguage->addItem( tr( "Russian" ), QString( "ru_RU" ) );
+
+  for( int x = 0; x < ui.interfaceLanguage->count(); ++x )
+    if ( ui.interfaceLanguage->itemData( x ).toString() == p.interfaceLanguage )
+    {
+      ui.interfaceLanguage->setCurrentIndex( x );
+      prevInterfaceLanguage = x;
+      break;
+    }
 
   ui.enableTrayIcon->setChecked( p.enableTrayIcon );
   ui.startToTray->setChecked( p.startToTray );
@@ -101,6 +114,10 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 Config::Preferences Preferences::getPreferences()
 {
   Config::Preferences p;
+
+  p.interfaceLanguage =
+    ui.interfaceLanguage->itemData(
+      ui.interfaceLanguage->currentIndex() ).toString();
 
   p.enableTrayIcon = ui.enableTrayIcon->isChecked();
   p.startToTray = ui.startToTray->isChecked();
@@ -195,3 +212,11 @@ void Preferences::sideShiftClicked( bool )
   if ( ui.leftShift->isChecked() || ui.rightShift->isChecked() )
     ui.shiftKey->setChecked( false );
 }
+
+void Preferences::on_buttonBox_accepted()
+{
+  if ( prevInterfaceLanguage != ui.interfaceLanguage->currentIndex() )
+    QMessageBox::information( this, tr( "Changing Language" ),
+                              tr( "Restart the program to apply the language change." ) );
+}
+

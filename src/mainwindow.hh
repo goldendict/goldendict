@@ -67,7 +67,7 @@ class MainWindow: public QMainWindow
 
 public:
 
-  MainWindow();
+  MainWindow( Config::Class & cfg );
   ~MainWindow();
 
 private:
@@ -81,7 +81,7 @@ private:
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
   QMenu trayIconMenu;
   QToolButton addTab;
-  Config::Class cfg;
+  Config::Class & cfg;
   vector< sptr< Dictionary::Class > > dictionaries;
   vector< Instances::Group > groupInstances;
   ArticleMaker articleMaker;

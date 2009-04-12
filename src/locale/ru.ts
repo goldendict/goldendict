@@ -99,7 +99,7 @@
     <message>
         <location filename="../articleview.cc" line="257"/>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>Запрошенный источник не найден.</translation>
+        <translation>Запрошенный ресурс не найден.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="302"/>
@@ -134,12 +134,12 @@
     <message>
         <location filename="../articleview.cc" line="483"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Ошибка открытия файла источника, попробуйте открыть вручную: %1.</translation>
+        <translation>Ошибка открытия файла ресурса, попробуйте открыть вручную: %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="506"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Невозможно загрузить указанный источник.</translation>
+        <translation>Невозможно загрузить указанный ресурс.</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="13"/>
@@ -1224,7 +1224,7 @@
         <location filename="../initializing.cc" line="26"/>
         <location filename="../initializing.ui" line="22"/>
         <source>Please wait while indexing dictionary</source>
-        <translation>Подождите, пока закончиться индексирование словаря</translation>
+        <translation>Подождите, пока закончится индексирование словаря</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="16"/>
@@ -1460,12 +1460,17 @@ the application.</source>
         <translation>Сворачивать в системный лоток</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="107"/>
+        <location filename="../preferences.ui" line="111"/>
+        <source>Interface language:</source>
+        <translation>Язык программы:</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="150"/>
         <source>&amp;Scan Popup</source>
         <translation>&amp;Всплывающее окно</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="126"/>
+        <location filename="../preferences.ui" line="169"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -1480,135 +1485,135 @@ off from main window or tray icon.</source>
         <translation type="obsolete">Показывать всплывающее окно</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="132"/>
+        <location filename="../preferences.ui" line="175"/>
         <source>Enable scan popup functionality</source>
         <translation>Разрешить всплывающее окно</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="144"/>
+        <location filename="../preferences.ui" line="187"/>
         <source>Chooses whether the scan popup mode is on by default nor not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>Включать или нет режим всплывающего окна при запуске программы.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="148"/>
+        <location filename="../preferences.ui" line="191"/>
         <source>Start with scan popup turned on</source>
         <translation>Включить режим всплывающего окна при запуске</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="155"/>
+        <location filename="../preferences.ui" line="198"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Показывать всплывающее окно, только если все выбранные клавиши
 находятся в зажатом состоянии в момент выделения слова.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="159"/>
+        <location filename="../preferences.ui" line="202"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>Показывать всплывающее окно только при зажатых клавишах:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="198"/>
+        <location filename="../preferences.ui" line="241"/>
         <source>Left Ctrl only</source>
         <translation>При зажатии левой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="201"/>
+        <location filename="../preferences.ui" line="244"/>
         <source>Left Ctrl</source>
         <translation>Левый Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="208"/>
+        <location filename="../preferences.ui" line="251"/>
         <source>Right Shift only</source>
         <translation>При зажатии правой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="211"/>
+        <location filename="../preferences.ui" line="254"/>
         <source>Right Shift</source>
         <translation>Правый Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="218"/>
+        <location filename="../preferences.ui" line="261"/>
         <source>Alt key</source>
         <translation>При зажатии любой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="221"/>
+        <location filename="../preferences.ui" line="264"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="228"/>
+        <location filename="../preferences.ui" line="271"/>
         <source>Ctrl key</source>
         <translation>При зажатии любой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="231"/>
+        <location filename="../preferences.ui" line="274"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="238"/>
+        <location filename="../preferences.ui" line="281"/>
         <source>Left Alt only</source>
         <translation>При зажатии левой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="241"/>
+        <location filename="../preferences.ui" line="284"/>
         <source>Left Alt</source>
         <translation>Левый Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="248"/>
+        <location filename="../preferences.ui" line="291"/>
         <source>Shift key</source>
         <translation>При зажатии любой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="251"/>
+        <location filename="../preferences.ui" line="294"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="258"/>
+        <location filename="../preferences.ui" line="301"/>
         <source>Right Alt only</source>
         <translation>При зажатии правой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="261"/>
+        <location filename="../preferences.ui" line="304"/>
         <source>Right Alt</source>
         <translation>Правый Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="268"/>
+        <location filename="../preferences.ui" line="311"/>
         <source>Right Ctrl only</source>
         <translation>При зажатии правой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="271"/>
+        <location filename="../preferences.ui" line="314"/>
         <source>Right Ctrl</source>
         <translation>Правый Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="278"/>
+        <location filename="../preferences.ui" line="321"/>
         <source>Left Shift only</source>
         <translation>При зажатии левой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="281"/>
+        <location filename="../preferences.ui" line="324"/>
         <source>Left Shift</source>
         <translation>Левый Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="288"/>
+        <location filename="../preferences.ui" line="331"/>
         <source>Windows key or Meta key</source>
         <translation>При зажатии клавиши Windows или Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="291"/>
+        <location filename="../preferences.ui" line="334"/>
         <source>Win/Meta</source>
         <translation>Win или Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="325"/>
+        <location filename="../preferences.ui" line="368"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -1620,12 +1625,12 @@ be pressed shorty after the selection is done.</source>
 того, как слово было выделено.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="331"/>
+        <location filename="../preferences.ui" line="374"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Клавиши также можно нажать и после, в теч.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="338"/>
+        <location filename="../preferences.ui" line="381"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -1634,71 +1639,96 @@ seconds, which is specified here.</source>
 промежутка времени, который и задается здесь.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="362"/>
+        <location filename="../preferences.ui" line="405"/>
         <source>secs</source>
         <translation>сек</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="388"/>
+        <location filename="../preferences.ui" line="431"/>
         <source>&amp;Audio</source>
         <translation>&amp;Аудио</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="407"/>
+        <location filename="../preferences.ui" line="450"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Автоматически произносить слова в главном окне</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="414"/>
+        <location filename="../preferences.ui" line="457"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Автоматически произносить слова во всплывающем окне</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="423"/>
+        <location filename="../preferences.ui" line="466"/>
         <source>Program to play audio files:</source>
-        <translation>Программа для проигрывания аудиофайлов:</translation>
+        <translation>Программа для воспроизведения аудиофайлов:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="449"/>
+        <location filename="../preferences.ui" line="492"/>
         <source>&amp;Network</source>
         <translation>&amp;Сеть</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="468"/>
+        <location filename="../preferences.ui" line="511"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>Включите, если хотите использовать proxy-сервер
+        <translation>Включите, если хотите использовать прокси-сервер
 для всех сетевых запросов программы.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="472"/>
+        <location filename="../preferences.ui" line="515"/>
         <source>Use proxy server</source>
-        <translation>Использовать proxy-сервер</translation>
+        <translation>Использовать прокси-сервер</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="486"/>
+        <location filename="../preferences.ui" line="529"/>
         <source>Type:</source>
         <translation>Тип:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="496"/>
+        <location filename="../preferences.ui" line="539"/>
         <source>Host:</source>
         <translation>Сервер:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="506"/>
+        <location filename="../preferences.ui" line="549"/>
         <source>Port:</source>
         <translation>Порт:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="527"/>
+        <location filename="../preferences.ui" line="570"/>
         <source>User:</source>
         <translation>Имя:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="537"/>
+        <location filename="../preferences.ui" line="580"/>
         <source>Password:</source>
         <translation>Пароль:</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="38"/>
+        <source>System default</source>
+        <translation>По умолчанию</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="39"/>
+        <source>English</source>
+        <translation>Английский</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="40"/>
+        <source>Russian</source>
+        <translation>Русский</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="219"/>
+        <source>Changing Language</source>
+        <translation>Смена языка</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="220"/>
+        <source>Restart the program to apply the language change.</source>
+        <translation>Перезапустите программу, чтобы изменение языка вошло в силу.</translation>
     </message>
 </context>
 <context>

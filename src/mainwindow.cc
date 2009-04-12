@@ -29,7 +29,7 @@ using std::wstring;
 using std::map;
 using std::pair;
 
-MainWindow::MainWindow():
+MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIcon( 0 ),
   translateClearAndFocusAction( this ),
   addTabAction( this ),
@@ -38,7 +38,7 @@ MainWindow::MainWindow():
   switchToPrevTabAction( this ),
   trayIconMenu( this ),
   addTab( this ),
-  cfg( Config::load() ),
+  cfg( cfg_ ),
   articleMaker( dictionaries, groupInstances ),
   articleNetMgr( this, dictionaries, articleMaker ),
   dictNetMgr( this ),

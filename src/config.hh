@@ -98,6 +98,7 @@ struct ProxyServer
 /// Various user preferences
 struct Preferences
 {
+  QString interfaceLanguage; // Empty value corresponds to system default
   bool enableTrayIcon;
   bool startToTray;
   bool closeToTray;

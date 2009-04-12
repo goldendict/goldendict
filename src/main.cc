@@ -32,18 +32,26 @@ int main( int argc, char ** argv )
 
   app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
 
+  Config::Class cfg( Config::load() );
+
   // Load translations
 
   QTranslator qtTranslator;
 
-  qtTranslator.load( "qt_" + QLocale::system().name(),
+  QString localeName = cfg.preferences.interfaceLanguage;
+
+  if ( localeName.isEmpty() )
+    localeName = QLocale::system().name();
+  {
+  }
+
+  qtTranslator.load( "qt_" + localeName,
                      QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
   app.installTranslator( &qtTranslator );
 
   QTranslator translator;
-  translator.load( QString( Config::getProgramDataDir() ) + "/locale/" + QLocale::system().name() );
+  translator.load( QString( Config::getProgramDataDir() ) + "/locale/" + localeName );
   app.installTranslator( &translator );
-
 
   // Apply qt stylesheet
   {
@@ -60,7 +68,7 @@ int main( int argc, char ** argv )
     app.setStyleSheet( css );
   }
 
-  MainWindow m;
+  MainWindow m( cfg );
 
   return app.exec();
 }
