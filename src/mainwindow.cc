@@ -209,7 +209,7 @@ MainWindow::MainWindow():
     ArticleView & view =
       dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
 
-    view.showDefinition( "Welcome!", UINT_MAX );
+    view.showDefinition( tr( "Welcome!" ), UINT_MAX );
   }
   
   ui.translateLine->setFocus();

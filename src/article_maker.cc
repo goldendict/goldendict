@@ -75,7 +75,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
     // This is a special group containing internal welcome/help pages
     string result = makeHtmlHeader( inWord, QString() );
     
-    if ( inWord == "Welcome!" )
+    if ( inWord == tr( "Welcome!" ) )
     {
       result += tr(
 "<h3 align=\"center\">Welcome to <b>GoldenDict</b>!</h3>"
@@ -96,7 +96,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
         ).toUtf8().data();
     }
     else
-    if ( inWord == "Working with popup" )
+    if ( inWord == tr( "Working with popup" ) )
     {
       result += ( tr( "<h3 align=\"center\">Working with the popup</h3>"
 

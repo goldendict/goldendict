@@ -3,7 +3,8 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = goldendict
+VERSION = 0.8.0
 #DEPENDPATH += . generators
 INCLUDEPATH += .
 
@@ -23,6 +24,23 @@ LIBS += -lvorbisfile -lvorbis -logg -lz -lzip -lhunspell
 win32 {
   LIBS += -liconv -lwsock32 -lwinmm
   RC_FILE = goldendict.rc
+}
+
+unix {
+
+  PREFIX = $$(PREFIX)
+
+  isEmpty( PREFIX ) {
+  PREFIX = /usr/local
+  }
+
+  DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/apps/goldendict/\\\"
+
+  target.path = $$PREFIX/bin/
+  locale.path = $$PREFIX/share/apps/goldendict/locale/
+  locale.files = locale/ru.qm
+
+  INSTALLS += target locale
 }
 
 # Input

@@ -27,7 +27,23 @@ int main( int argc, char ** argv )
 
   QApplication app( argc, argv );
 
+  app.setApplicationName( "GoldenDict" );
+  app.setOrganizationDomain( "http://goldendict.berlios.de/" );
+
   app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
+
+  // Load translations
+
+  QTranslator qtTranslator;
+
+  qtTranslator.load( "qt_" + QLocale::system().name(),
+                     QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
+  app.installTranslator( &qtTranslator );
+
+  QTranslator translator;
+  translator.load( QString( Config::getProgramDataDir() ) + "/locale/" + QLocale::system().name() );
+  app.installTranslator( &translator );
+
 
   // Apply qt stylesheet
   {

@@ -582,4 +582,13 @@ QString getUserQtCssFileName() throw( exError )
   return getHomeDir().filePath( "qt-style.css" );
 }
 
+QString getProgramDataDir() throw()
+{
+  #ifdef PROGRAM_DATA_DIR
+  return PROGRAM_DATA_DIR;
+  #else
+  return "foo"; // Fixme
+  #endif
+}
+
 }

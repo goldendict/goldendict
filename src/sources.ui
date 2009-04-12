@@ -171,10 +171,18 @@
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>Each morphology dictionary appears as a separate auxiliary dictionary which provides stem words for searches and spelling suggestions for mistyped words. Add appropriate dictionaries to the bottoms of the appropriate groups to use them.</string>
+            <string>Each morphology dictionary appears as a
+separate auxiliary dictionary which
+provides stem words for searches and
+spelling suggestions for mistyped words.
+Add appropriate dictionaries to the bottoms
+of the appropriate groups to use them.</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::PlainText</enum>
            </property>
            <property name="wordWrap">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
           </widget>
          </item>
