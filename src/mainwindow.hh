@@ -164,6 +164,10 @@ private slots:
   void wordListItemActivated( QListWidgetItem * );
   void wordListSelectionChanged();
 
+  /// Creates a new tab, which is to be populated then with some content.
+  ArticleView * createNewTab( bool switchToIt,
+                              QString const & name );
+
   void openLinkInNewTab( QUrl const &, QUrl const & );
   void showDefinitionInNewTab( QString const & word, unsigned group );
   

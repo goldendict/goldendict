@@ -41,6 +41,39 @@
         </spacer>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Tabbed browsing</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <widget class="QCheckBox" name="newTabsOpenInBackground">
+            <property name="toolTip">
+             <string>Normally, opening a new tab switches to it immediately.
+With this on however, new tabs will be opened without
+switching to them.</string>
+            </property>
+            <property name="text">
+             <string>Open new tabs in background</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="newTabsOpenAfterCurrentOne">
+            <property name="toolTip">
+             <string>With this on, new tabs are opened just after the
+current, active one. Otherwise they are added to
+be the last ones.</string>
+            </property>
+            <property name="text">
+             <string>Open new tabs after the current one</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QGroupBox" name="enableTrayIcon">
          <property name="toolTip">
           <string>When enabled, an icon appears in the sytem tray area which can be used

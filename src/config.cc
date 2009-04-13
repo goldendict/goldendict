@@ -41,6 +41,8 @@ ProxyServer::ProxyServer(): enabled( false ), type( Socks5 ), port( 3128 )
 }
 
 Preferences::Preferences():
+  newTabsOpenAfterCurrentOne( false ),
+  newTabsOpenInBackground( true ),
   enableTrayIcon( true ),
   startToTray( false ),
   closeToTray( true ),
@@ -243,6 +245,8 @@ Class load() throw( exError )
   if ( !preferences.isNull() )
   {
     c.preferences.interfaceLanguage = preferences.namedItem( "interfaceLanguage" ).toElement().text();
+    c.preferences.newTabsOpenAfterCurrentOne = ( preferences.namedItem( "newTabsOpenAfterCurrentOne" ).toElement().text() == "1" );
+    c.preferences.newTabsOpenInBackground = ( preferences.namedItem( "newTabsOpenInBackground" ).toElement().text() == "1" );
     c.preferences.enableTrayIcon = ( preferences.namedItem( "enableTrayIcon" ).toElement().text() == "1" );
     c.preferences.startToTray = ( preferences.namedItem( "startToTray" ).toElement().text() == "1" );
     c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
@@ -453,6 +457,14 @@ void save( Class const & c ) throw( exError )
 
     QDomElement opt = dd.createElement( "interfaceLanguage" );
     opt.appendChild( dd.createTextNode( c.preferences.interfaceLanguage ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "newTabsOpenAfterCurrentOne" );
+    opt.appendChild( dd.createTextNode( c.preferences.newTabsOpenAfterCurrentOne ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "newTabsOpenInBackground" );
+    opt.appendChild( dd.createTextNode( c.preferences.newTabsOpenInBackground ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "enableTrayIcon" );

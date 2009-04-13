@@ -47,6 +47,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
       break;
     }
 
+  ui.newTabsOpenAfterCurrentOne->setChecked( p.newTabsOpenAfterCurrentOne );
+  ui.newTabsOpenInBackground->setChecked( p.newTabsOpenInBackground );
   ui.enableTrayIcon->setChecked( p.enableTrayIcon );
   ui.startToTray->setChecked( p.startToTray );
   ui.closeToTray->setChecked( p.closeToTray );
@@ -119,6 +121,8 @@ Config::Preferences Preferences::getPreferences()
     ui.interfaceLanguage->itemData(
       ui.interfaceLanguage->currentIndex() ).toString();
 
+  p.newTabsOpenAfterCurrentOne = ui.newTabsOpenAfterCurrentOne->isChecked();
+  p.newTabsOpenInBackground = ui.newTabsOpenInBackground->isChecked();
   p.enableTrayIcon = ui.enableTrayIcon->isChecked();
   p.startToTray = ui.startToTray->isChecked();
   p.closeToTray = ui.closeToTray->isChecked();

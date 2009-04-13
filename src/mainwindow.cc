@@ -580,6 +580,12 @@ void MainWindow::indexingDictionary( QString dictionaryName )
 
 void MainWindow::addNewTab()
 {
+  createNewTab( true, tr( "(untitled)" ) );
+}
+
+ArticleView * MainWindow::createNewTab( bool switchToIt,
+                                        QString const & name )
+{
   ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
                                         groupInstances, false, cfg );
 
@@ -593,14 +599,24 @@ void MainWindow::addNewTab()
 
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const & ) ) );
-  
+
   connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned ) ),
            this, SLOT( showDefinitionInNewTab( QString const &, unsigned ) ) );
-  
-  ui.tabWidget->addTab( view, tr( "(untitled)" ) );
 
-  ui.tabWidget->setCurrentIndex( ui.tabWidget->count() - 1 );
+  int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
+              ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
+
+  QString escaped = name;
+  escaped.replace( "&", "&&" );
+
+  ui.tabWidget->insertTab( index, view, escaped );
+
+  if ( switchToIt )
+    ui.tabWidget->setCurrentIndex( index );
+
+  return view;
 }
+
 
 void MainWindow::tabCloseRequested( int x )
 {
@@ -957,23 +973,13 @@ void MainWindow::wordListSelectionChanged()
 void MainWindow::openLinkInNewTab( QUrl const & url,
                                    QUrl const & referrer )
 {
-  addNewTab();
-
-  ArticleView & view =
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
-
-  view.openLink( url, referrer );
+  createNewTab( !cfg.preferences.newTabsOpenInBackground, "" )->openLink( url, referrer );
 }
 
 void MainWindow::showDefinitionInNewTab( QString const & word,
                                          unsigned group )
 {
-  addNewTab();
-
-  ArticleView & view =
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
-
-  view.showDefinition( word, group );
+  createNewTab( !cfg.preferences.newTabsOpenInBackground, word )->showDefinition( word, group );
 }
 
 void MainWindow::showTranslationFor( QString const & inWord )

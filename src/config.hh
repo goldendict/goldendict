@@ -99,6 +99,8 @@ struct ProxyServer
 struct Preferences
 {
   QString interfaceLanguage; // Empty value corresponds to system default
+  bool newTabsOpenAfterCurrentOne;
+  bool newTabsOpenInBackground;
   bool enableTrayIcon;
   bool startToTray;
   bool closeToTray;
