@@ -378,38 +378,42 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 
 void MainWindow::applyProxySettings()
 {
- QNetworkProxy proxy;
+  QNetworkProxy::ProxyType type = QNetworkProxy::NoProxy;
 
- if ( cfg.preferences.proxyServer.enabled )
- {
-   switch( cfg.preferences.proxyServer.type )
-   {
-     case Config::ProxyServer::Socks5:
-       proxy.setType( QNetworkProxy::Socks5Proxy );
-     break;
-     case Config::ProxyServer::HttpConnect:
-       proxy.setType( QNetworkProxy::HttpProxy );
-     break;
-     case Config::ProxyServer::HttpGet:
-       proxy.setType( QNetworkProxy::HttpCachingProxy );
-     break;
-     default:
-       proxy.setType( QNetworkProxy::NoProxy );
-   }
+  if ( cfg.preferences.proxyServer.enabled )
+  {
+    switch( cfg.preferences.proxyServer.type )
+    {
+      case Config::ProxyServer::Socks5:
+        type = QNetworkProxy::Socks5Proxy;
+      break;
+      case Config::ProxyServer::HttpConnect:
+        type = QNetworkProxy::HttpProxy;
+      break;
+      case Config::ProxyServer::HttpGet:
+        type = QNetworkProxy::HttpCachingProxy;
+      break;
 
+      default:
+      break;
+    }
+  }
+
+  QNetworkProxy proxy( type );
+
+  if ( cfg.preferences.proxyServer.enabled )
+  {
    proxy.setHostName( cfg.preferences.proxyServer.host );
    proxy.setPort( cfg.preferences.proxyServer.port );
-
+  
    if ( cfg.preferences.proxyServer.user.size() )
      proxy.setUser( cfg.preferences.proxyServer.user );
-
+  
    if ( cfg.preferences.proxyServer.password.size() )
      proxy.setPassword( cfg.preferences.proxyServer.password );
- }
- else
-   proxy.setType( QNetworkProxy::NoProxy );
-
- QNetworkProxy::setApplicationProxy( proxy );
+  }
+  
+  QNetworkProxy::setApplicationProxy( proxy );
 }
 
 void MainWindow::makeDictionaries()
