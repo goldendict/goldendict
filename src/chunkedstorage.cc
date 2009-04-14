@@ -15,6 +15,17 @@ enum
 Writer::Writer( File::Class & f ):
   file( f ), chunkStarted( false ), bufferUsed( 0 )
 {
+  // Create a sratchpad at the beginning of file. We use it to write chunk
+  // table if it would fit, in order to save some seek times.
+
+  char zero[ 4096 ];
+
+  memset( zero, 0, sizeof( zero ) );
+
+  scratchPadOffset = file.tell();
+  scratchPadSize = sizeof( zero );
+
+  file.write( zero, sizeof( zero ) );
 }
 
 uint32_t Writer::startNewBlock()
@@ -77,10 +88,25 @@ uint32_t Writer::finish()
   if ( bufferUsed || chunkStarted )
     saveCurrentChunk();
 
+  bool useScratchPad = false;
+  uint32_t savedOffset = 0;
+
+  if ( scratchPadSize >= offsets.size() * sizeof( uint32_t ) + sizeof( uint32_t ) )
+  {
+    useScratchPad = true;
+    savedOffset = file.tell();
+    file.seek( scratchPadOffset );
+  }
+
   uint32_t offset = file.tell();
 
   file.write( (uint32_t) offsets.size() );
-  file.write( &offsets.front(), offsets.size() * sizeof( uint32_t ) );
+
+  if ( offsets.size() )
+    file.write( &offsets.front(), offsets.size() * sizeof( uint32_t ) );
+
+  if ( useScratchPad )
+    file.seek( savedOffset );
 
   offsets.clear();
   chunkStarted = false;

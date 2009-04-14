@@ -47,6 +47,7 @@ using std::list;
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
+using BtreeIndexing::IndexInfo;
 
 namespace {
 
@@ -66,7 +67,8 @@ struct IdxHeader
   uint32_t chunksOffset; // The offset to chunks' storage
   uint32_t hasAbrv; // Non-zero means file has abrvs at abrvAddress
   uint32_t abrvAddress; // Address of abrv map in the chunked storage
-  uint32_t indexOffset; // The offset of the index in the file
+  uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
+  uint32_t indexRootOffset;
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -201,9 +203,9 @@ DslDictionary::DslDictionary( string const & id,
 
   // Initialize the index
 
-  idx.seek( idxHeader.indexOffset );
-
-  openIndex( idx, idxMutex );
+  openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
+                        idxHeader.indexRootOffset ),
+             idx, idxMutex );
 
   // Open a resource zip file, if there's one
   resourceZip = zip_open( ( getDictionaryFilenames()[ 0 ] + ".files.zip" ).c_str(), 0, 0 );
@@ -1184,7 +1186,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         // Build index
 
-        idxHeader.indexOffset = BtreeIndexing::buildIndex( indexedWords, idx );
+        IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
+
+        idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
+        idxHeader.indexRootOffset = idxInfo.rootOffset;
 
         // That concludes it. Update the header.
 

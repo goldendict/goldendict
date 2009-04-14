@@ -29,6 +29,7 @@ class Writer
 {
   vector< uint32_t > offsets;
   File::Class & file;
+  size_t scratchPadOffset, scratchPadSize;
 
 public:
 

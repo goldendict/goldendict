@@ -33,6 +33,7 @@ using std::wstring;
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
+using BtreeIndexing::IndexInfo;
 
 namespace {
 
@@ -65,7 +66,7 @@ struct Ifo
 enum
 {
   Signature = 0x58444953, // SIDX on little-endian, XDIS on big-endian
-  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -73,7 +74,12 @@ struct IdxHeader
   uint32_t signature; // First comes the signature, SIDX
   uint32_t formatVersion; // File format version (CurrentFormatVersion)
   uint32_t chunksOffset; // The offset to chunks' storage
-  uint32_t indexOffset; // The offset of the index in the file
+  uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
+  uint32_t indexRootOffset;
+  uint32_t wordCount; // Saved from Ifo::wordcount
+  uint32_t synWordCount; // Saved from Ifo::synwordcount
+  uint32_t bookNameSize; // Book name's length. Used to read it then.
+  uint32_t sameTypeSequenceSize; // That string's size. Used to read it then.
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -90,32 +96,32 @@ bool indexIsOldOrBad( string const & indexFile )
 
 class StardictDictionary: public BtreeIndexing::BtreeDictionary
 {
-  Ifo ifo;
   Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
+  string bookName;
+  string sameTypeSequence;
   ChunkedStorage::Reader chunks;
   dictData * dz;
 
 public:
 
   StardictDictionary( string const & id, string const & indexFile,
-                      vector< string > const & dictionaryFiles,
-                      Ifo const & );
+                      vector< string > const & dictionaryFiles );
 
   ~StardictDictionary();
 
   virtual string getName() throw()
-  { return ifo.bookname; }
+  { return bookName; }
 
   virtual map< Dictionary::Property, string > getProperties() throw()
   { return map< Dictionary::Property, string >(); }
 
   virtual unsigned long getArticleCount() throw()
-  { return ifo.wordcount; }
+  { return idxHeader.wordCount; }
 
   virtual unsigned long getWordCount() throw()
-  { return ifo.wordcount + ifo.synwordcount; }
+  { return idxHeader.wordCount + idxHeader.synWordCount; }
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     throw( std::exception );
@@ -136,16 +142,18 @@ private:
   void loadArticle(  uint32_t address,
                      string & headword,
                      string & articleText );
+
+  string loadString( size_t size );
 };
 
 StardictDictionary::StardictDictionary( string const & id,
                                         string const & indexFile,
-                                        vector< string > const & dictionaryFiles,
-                                        Ifo const & ifo_ ):
+                                        vector< string > const & dictionaryFiles ):
   BtreeDictionary( id, dictionaryFiles ),
-  ifo( ifo_ ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
+  bookName( loadString( idxHeader.bookNameSize ) ),
+  sameTypeSequence( loadString( idxHeader.sameTypeSequenceSize ) ),
   chunks( idx, idxHeader.chunksOffset )
 {
   // Open the .dict file
@@ -157,15 +165,24 @@ StardictDictionary::StardictDictionary( string const & id,
 
   // Initialize the index
 
-  idx.seek( idxHeader.indexOffset );
-
-  openIndex( idx, idxMutex );
+  openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
+                        idxHeader.indexRootOffset ),
+             idx, idxMutex );
 }
 
 StardictDictionary::~StardictDictionary()
 {
   if ( dz )
     dict_data_close( dz );
+}
+
+string StardictDictionary::loadString( size_t size )
+{
+  vector< char > data( size );
+
+  idx.read( &data.front(), data.size() );
+
+  return string( &data.front(), data.size() );
 }
 
 void StardictDictionary::getArticleProps( uint32_t articleAddress,
@@ -252,14 +269,14 @@ void StardictDictionary::loadArticle( uint32_t address,
 
   char * ptr = articleBody;
 
-  if ( ifo.sametypesequence.size() )
+  if ( sameTypeSequence.size() )
   {
     /// The sequence is known, it's not stored in the article itself
-    for( unsigned seq = 0; seq < ifo.sametypesequence.size(); ++seq )
+    for( unsigned seq = 0; seq < sameTypeSequence.size(); ++seq )
     {
       // Last entry doesn't have size info -- it is inferred from
       // the bytes left
-      bool entrySizeKnown = ( seq == ifo.sametypesequence.size() - 1 );
+      bool entrySizeKnown = ( seq == sameTypeSequence.size() - 1 );
 
       uint32_t entrySize;
 
@@ -272,7 +289,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         break;
       }
 
-      char type = ifo.sametypesequence[ seq ];
+      char type = sameTypeSequence[ seq ];
 
       if ( islower( type ) )
       {
@@ -610,8 +627,7 @@ static bool tryPossibleName( string const & name, string & copyTo )
 }
 
 static void findCorrespondingFiles( string const & ifo,
-                                    string & idx, string & dict, string & syn,
-                                    bool needSyn )
+                                    string & idx, string & dict, string & syn )
 {
   string base( ifo, 0, ifo.size() - 3 );
 
@@ -633,15 +649,15 @@ static void findCorrespondingFiles( string const & ifo,
       ) )
     throw exNoDictFile( ifo );
 
-  if ( needSyn && !(
-                     tryPossibleName( base + "syn", syn ) ||
-                     tryPossibleName( base + "syn.gz", syn ) ||
-                     tryPossibleName( base + "syn.dz", syn ) ||
-                     tryPossibleName( base + "SYN", syn ) ||
-                     tryPossibleName( base + "SYN.GZ", syn ) ||
-                     tryPossibleName( base + "SYN.DZ", syn )
+  if ( !(
+         tryPossibleName( base + "syn", syn ) ||
+         tryPossibleName( base + "syn.gz", syn ) ||
+         tryPossibleName( base + "syn.dz", syn ) ||
+         tryPossibleName( base + "SYN", syn ) ||
+         tryPossibleName( base + "SYN.GZ", syn ) ||
+         tryPossibleName( base + "SYN.DZ", syn )
      ) )
-    throw exNoSynFile( ifo );
+    syn.clear();
 }
 
 static void handleIdxSynFile( string const & fileName,
@@ -764,30 +780,16 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
     try
     {
-      File::Class ifoFile( *i, "r" );
-
-      Ifo ifo( ifoFile );
-
-      if ( ifo.idxoffsetbits == 64 )
-        throw ex64BitsNotSupported();
-
-      if ( ifo.dicttype.size() )
-        throw exDicttypeNotSupported();
-
-      printf( "bookname = %s\n", ifo.bookname.c_str() );
-      printf( "wordcount = %u\n", ifo.wordcount );
-
       vector< string > dictFiles( 1, *i );
 
       string idxFileName, dictFileName, synFileName;
 
-      findCorrespondingFiles( *i, idxFileName, dictFileName, synFileName,
-                              ifo.synwordcount );
+      findCorrespondingFiles( *i, idxFileName, dictFileName, synFileName );
 
       dictFiles.push_back( idxFileName );
       dictFiles.push_back( dictFileName );
 
-      if ( ifo.synwordcount )
+      if ( synFileName.size() )
         dictFiles.push_back( synFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
@@ -798,6 +800,33 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
            indexIsOldOrBad( indexFile ) )
       {
         // Building the index
+
+        File::Class ifoFile( *i, "r" );
+
+        Ifo ifo( ifoFile );
+
+        if ( ifo.idxoffsetbits == 64 )
+          throw ex64BitsNotSupported();
+
+        if ( ifo.dicttype.size() )
+          throw exDicttypeNotSupported();
+
+        if( synFileName.empty() )
+        {
+          if ( ifo.synwordcount )
+            throw exNoSynFile( *i );
+        }
+        else
+        if ( !ifo.synwordcount )
+        {
+          printf( "Warning: ignoring .syn file %s, since there's no synwordcount in .ifo specified\n",
+                  synFileName.c_str() );
+        }
+
+
+        printf( "bookname = %s\n", ifo.bookname.c_str() );
+        printf( "wordcount = %u\n", ifo.wordcount );
+
         initializing.indexingDictionary( ifo.bookname );
 
         File::Class idx( indexFile, "wb" );
@@ -810,6 +839,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // will be rewritten with the right values.
 
         idx.write( idxHeader );
+
+        idx.write( ifo.bookname.data(), ifo.bookname.size() );
+        idx.write( ifo.sametypesequence.data(), ifo.sametypesequence.size() );
 
         IndexedWords indexedWords;
 
@@ -837,12 +869,20 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         // Build index
 
-        idxHeader.indexOffset = BtreeIndexing::buildIndex( indexedWords, idx );
+        IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
+
+        idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
+        idxHeader.indexRootOffset = idxInfo.rootOffset;
 
         // That concludes it. Update the header.
 
         idxHeader.signature = Signature;
         idxHeader.formatVersion = CurrentFormatVersion;
+
+        idxHeader.wordCount = ifo.wordcount;
+        idxHeader.synWordCount = ifo.synwordcount;
+        idxHeader.bookNameSize = ifo.bookname.size();
+        idxHeader.sameTypeSequenceSize = ifo.sametypesequence.size();
 
         idx.rewind();
 
@@ -851,9 +891,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       dictionaries.push_back( new StardictDictionary( dictId,
                                                       indexFile,
-                                                      dictFiles,
-                                                      ifo ) );
-      
+                                                      dictFiles ) );
     }
     catch( std::exception & e )
     {

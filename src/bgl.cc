@@ -26,6 +26,7 @@ using std::pair;
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
+using BtreeIndexing::IndexInfo;
 
 namespace
 {
@@ -49,7 +50,8 @@ namespace
     uint32_t wordCount; // Total number of words, for informative purposes only
     /// Add more fields here, like name, description, author and such.
     uint32_t chunksOffset; // The offset to chunks' storage
-    uint32_t indexOffset; // The offset of the index in the file.
+    uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
+    uint32_t indexRootOffset;
     uint32_t resourceListOffset; // The offset of the list of resources
     uint32_t resourcesCount; // Number of resources stored
   } __attribute__((packed));
@@ -239,9 +241,9 @@ namespace
 
     // Initialize the index
 
-    idx.seek( idxHeader.indexOffset );
-
-    openIndex( idx, idxMutex );
+    openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
+                        idxHeader.indexRootOffset ),
+               idx, idxMutex );
   }
 
 
@@ -739,7 +741,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       // Good. Now build the index
 
-      idxHeader.indexOffset = BtreeIndexing::buildIndex( indexedWords, idx );
+      IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
+
+      idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
+      idxHeader.indexRootOffset = idxInfo.rootOffset;
 
       // Save the resource's list.
 

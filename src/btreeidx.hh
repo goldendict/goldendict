@@ -25,7 +25,7 @@ enum
   /// This is to be bumped up each time the internal format changes.
   /// The value isn't used here by itself, it is supposed to be added
   /// to each dictionary's internal format version.
-  FormatVersion = 2
+  FormatVersion = 3
 };
 
 // These exceptions which might be thrown during the index traversal
@@ -49,6 +49,16 @@ struct WordArticleLink
   {}
 };
 
+/// Information needed to open the index
+struct IndexInfo
+{
+  uint32_t btreeMaxElements, rootOffset;
+
+  IndexInfo( uint32_t btreeMaxElements_, uint32_t rootOffset_ ):
+    btreeMaxElements( btreeMaxElements_ ), rootOffset( rootOffset_ )
+  {}
+};
+
 class BtreeWordSearchRequest;
 
 /// A base for the dictionary that utilizes a btree index build using
@@ -67,11 +77,10 @@ public:
 
 protected:
 
-  /// Opens the index. The file must be positioned at the offset previously
-  /// returned by buildIndex(). The file reference is saved to be used for
+  /// Opens the index. The file reference is saved to be used for
   /// subsequent lookups.
   /// The mutex is the one to be locked when working with the file.
-  void openIndex( File::Class &, Mutex & );
+  void openIndex( IndexInfo const &, File::Class &, Mutex & );
 
   /// Finds articles that match the given string. A case-insensitive search
   /// is performed.
@@ -83,6 +92,9 @@ private:
   File::Class * idxFile;
   uint32_t indexNodeSize;
   uint32_t rootOffset;
+  bool rootNodeLoaded;
+  vector< char > rootNode; // We load root note here and keep it at all times,
+                           // since all searches always start with it.
 
   /// Finds the offset in the btree leaf for the given word, either matching
   /// by an exact match, or by finding the smallest entry that might match
@@ -91,10 +103,16 @@ private:
   /// to true when an exact match is located, and to false otherwise.
   /// The located leaf is loaded to 'leaf', and the pointer to the next
   /// leaf is saved to 'nextLeaf'.
+  /// However, due to root node being permanently cached, the 'leaf' passed
+  /// might not get used at all if the root node was the terminal one. In that
+  /// case, the returned pointer wouldn't belong to 'leaf' at all. To that end,
+  /// the leafEnd pointer always holds the pointer to the first byte outside
+  /// the node data.
   char const * findChainOffsetExactOrPrefix( wstring const & target,
                                              bool & exactMatch,
                                              vector< char > & leaf,
-                                             uint32_t & nextLeaf );
+                                             uint32_t & nextLeaf,
+                                             char const * & leafEnd );
 
   /// Reads a node or leaf at the given offset. Just uncompresses its data
   /// to the given vector and does nothing more.
@@ -128,10 +146,10 @@ struct IndexedWords: public map< wstring, vector< WordArticleLink > >
   void addWord( wstring const & word, uint32_t articleOffset );
 };
 
-/// Builds the index, as a compressed btree. Returns offset to its root.
+/// Builds the index, as a compressed btree. Returns IndexInfo.
 /// All the data is stored to the given file, beginning from its current
 /// position.
-uint32_t buildIndex( IndexedWords const &, File::Class & file );
+IndexInfo buildIndex( IndexedWords const &, File::Class & file );
 
 }
 

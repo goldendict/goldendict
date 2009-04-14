@@ -23,6 +23,7 @@ using std::multimap;
 using std::set;
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
+using BtreeIndexing::IndexInfo;
 
 namespace {
 
@@ -43,7 +44,8 @@ struct IdxHeader
   uint32_t formatVersion; // File format version, currently 1.
   uint32_t soundsCount; // Total number of sounds, for informative purposes only
   uint32_t vorbisOffset; // Offset of the vorbis file which contains all snds
-  uint32_t indexOffset; // The offset of the index in the file
+  uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
+  uint32_t indexRootOffset;
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -174,9 +176,9 @@ LsaDictionary::LsaDictionary( string const & id,
 {
   // Initialize the index
 
-  idx.seek( idxHeader.indexOffset );
-
-  openIndex( idx, idxMutex );
+  openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
+                        idxHeader.indexRootOffset ),
+             idx, idxMutex );
 }
 
 sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
@@ -546,7 +548,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         // Build the index
 
-        idxHeader.indexOffset = BtreeIndexing::buildIndex( indexedWords, idx );
+        IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
+
+        idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
+        idxHeader.indexRootOffset = idxInfo.rootOffset;
 
          // That concludes it. Update the header.
 

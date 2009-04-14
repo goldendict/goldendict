@@ -29,6 +29,7 @@ using std::list;
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
+using BtreeIndexing::IndexInfo;
 
 namespace {
 
@@ -48,7 +49,8 @@ struct IdxHeader
   uint32_t signature; // First comes the signature, DCDX
   uint32_t formatVersion; // File format version (CurrentFormatVersion)
   uint32_t wordCount; // Total number of words
-  uint32_t indexOffset; // The offset of the index in the file
+  uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
+  uint32_t indexRootOffset;
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -109,9 +111,9 @@ DictdDictionary::DictdDictionary( string const & id,
 
   // Initialize the index
 
-  idx.seek( idxHeader.indexOffset );
-
-  openIndex( idx, idxMutex );
+  openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
+                        idxHeader.indexRootOffset ),
+             idx, idxMutex );
 }
 
 DictdDictionary::~DictdDictionary()
@@ -380,7 +382,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         // Build index
 
-        idxHeader.indexOffset = BtreeIndexing::buildIndex( indexedWords, idx );
+        IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
+
+        idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
+        idxHeader.indexRootOffset = idxInfo.rootOffset;
 
         // That concludes it. Update the header.
 

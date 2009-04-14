@@ -42,19 +42,21 @@ enum
 
 BtreeDictionary::BtreeDictionary( string const & id,
                                   vector< string > const & dictionaryFiles ):
-  Dictionary::Class( id, dictionaryFiles ), idxFile( 0 )
+  Dictionary::Class( id, dictionaryFiles ), idxFile( 0 ), rootNodeLoaded( false )
 {
 }
 
-void BtreeDictionary::openIndex( File::Class & file, Mutex & mutex )
+void BtreeDictionary::openIndex( IndexInfo const & indexInfo,
+                                 File::Class & file, Mutex & mutex )
 {
-  Mutex::Lock _( mutex );
-  
-  indexNodeSize = file.read< uint32_t >();
-  rootOffset = file.read< uint32_t >();
+  indexNodeSize = indexInfo.btreeMaxElements;
+  rootOffset = indexInfo.rootOffset;
 
   idxFile = &file;
   idxFileMutex = &mutex;
+
+  rootNodeLoaded = false;
+  rootNode.clear();
 }
 
 vector< WordArticleLink > BtreeDictionary::findArticles( wstring const & str )
@@ -68,8 +70,11 @@ vector< WordArticleLink > BtreeDictionary::findArticles( wstring const & str )
   vector< char > leaf;
   uint32_t nextLeaf;
 
+  char const * leafEnd;
+
   char const * chainOffset = findChainOffsetExactOrPrefix( folded, exactMatch,
-                                                           leaf, nextLeaf );
+                                                           leaf, nextLeaf,
+                                                           leafEnd );
 
   if ( chainOffset && exactMatch )
   {
@@ -157,9 +162,11 @@ void BtreeWordSearchRequest::run()
 
   vector< char > leaf;
   uint32_t nextLeaf;
+  char const * leafEnd;
 
   char const * chainOffset = dict.findChainOffsetExactOrPrefix( folded, exactMatch,
-                                                                leaf, nextLeaf );
+                                                                leaf, nextLeaf,
+                                                                leafEnd );
 
   if ( chainOffset )
   for( ; ; )
@@ -198,7 +205,7 @@ void BtreeWordSearchRequest::run()
 
     // Fetch new leaf if we're out of chains here
 
-    if ( chainOffset > &leaf.back() )
+    if ( chainOffset >= leafEnd )
     {
       // We're past the current leaf, fetch the next one
 
@@ -209,6 +216,8 @@ void BtreeWordSearchRequest::run()
         Mutex::Lock _( *dict.idxFileMutex );
         
         dict.readNode( nextLeaf, leaf );
+        leafEnd = &leaf.front() + leaf.size();
+
         nextLeaf = dict.idxFile->read< uint32_t >();
         chainOffset = &leaf.front() + sizeof( uint32_t );
 
@@ -274,8 +283,9 @@ void BtreeDictionary::readNode( uint32_t offset, vector< char > & out )
 
 char const * BtreeDictionary::findChainOffsetExactOrPrefix( wstring const & target,
                                                             bool & exactMatch,
-                                                            vector< char > & leaf,
-                                                            uint32_t & nextLeaf )
+                                                            vector< char > & extLeaf,
+                                                            uint32_t & nextLeaf,
+                                                            char const * & leafEnd )
 {
   if ( !idxFile )
     throw exIndexWasNotOpened();
@@ -294,14 +304,21 @@ char const * BtreeDictionary::findChainOffsetExactOrPrefix( wstring const & targ
 
   uint32_t currentNodeOffset = rootOffset;
 
+  if ( !rootNodeLoaded )
+  {
+    // Time to load our root node. We do it only once, at the first request.
+    readNode( rootOffset, rootNode );
+    rootNodeLoaded = true;
+  }
+
+  char const * leaf = &rootNode.front();
+  leafEnd = leaf + rootNode.size();
+
   for( ; ; )
   {
-    //printf( "reading node at %x\n", currentNodeOffset );
-    readNode( currentNodeOffset, leaf );
-
     // Is it a leaf or a node?
 
-    uint32_t leafEntries = *(uint32_t *)&leaf.front();
+    uint32_t leafEntries = *(uint32_t *)leaf;
 
     if ( leafEntries == 0xffffFFFF )
     {
@@ -309,124 +326,266 @@ char const * BtreeDictionary::findChainOffsetExactOrPrefix( wstring const & targ
 
       //printf( "=>a node\n" );
 
-      uint32_t const * offsets = (uint32_t *)&leaf.front() + 1;
+      uint32_t const * offsets = (uint32_t *)leaf + 1;
 
-      char const * ptr = &leaf.front() + sizeof( uint32_t ) +
+      char const * ptr = leaf + sizeof( uint32_t ) +
                          ( indexNodeSize + 1 ) * sizeof( uint32_t );
 
-      unsigned entry;
+      // ptr now points to a span of zero-separated strings, up to leafEnd.
+      // We find our match using a binary search.
 
-      for( entry = 0; entry < indexNodeSize; ++entry )
-      {
-        //printf( "checking node agaist word %s\n", ptr );
-        size_t wordSize = strlen( ptr );
+      char const * closestString;
 
+      int compareResult;
+
+      char const * window = ptr;
+      unsigned windowSize = leafEnd - ptr;
+
+      for( ; ; )
+      {  
+        // We boldly shoot in the middle of the whole mess, and then adjust
+        // to the beginning of the string that we've hit.
+        char const * testPoint = window + windowSize/2;
+  
+        closestString = testPoint;
+  
+        while( closestString > ptr && closestString[ -1 ] )
+          --closestString;
+  
+        size_t wordSize = strlen( closestString );
+  
         if ( wcharBuffer.size() <= wordSize )
           wcharBuffer.resize( wordSize + 1 );
-
-        long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
-
+  
+        long result = Utf8::decode( closestString, wordSize, &wcharBuffer.front() );
+  
         if ( result < 0 )
-          throw Utf8::exCantDecode( ptr );
-
+          throw Utf8::exCantDecode( closestString );
+  
         wcharBuffer[ result ] = 0;
 
-        int compareResult = target.compare( &wcharBuffer.front() );
+        //printf( "Checking against %s\n", closestString );
 
+        compareResult = target.compare( &wcharBuffer.front() );
+  
         if ( !compareResult )
         {
-          // The target string matches the current one.
-          // Go to the right, since it's there where we store such results.
-          currentNodeOffset = offsets[ entry + 1 ];
+          // The target string matches the current one. Finish the search.
           break;
         }
         if ( compareResult < 0 )
         {
           // The target string is smaller than the current one.
           // Go to the left.
-          currentNodeOffset = offsets[ entry ];
-          break;
-        }
+          windowSize = closestString - window;
 
-        ptr += wordSize + 1;
+          if ( !windowSize )
+            break;
+        }
+        else
+        {
+          // The target string is larger than the current one.
+          // Go to the right.
+          windowSize -= ( closestString - window )  + wordSize + 1;
+          window = closestString + wordSize + 1;
+
+          if ( !windowSize )
+            break;
+        }
       }
 
-      if ( entry == indexNodeSize )
+      #if 0
+      printf( "The winner is %s, compareResult = %d\n", closestString, compareResult );
+
+      if ( closestString != ptr )
       {
-        // We iterated through all entries, but our string is larger than
-        // all of them. Go the the rightmost node.
+        char const * left = closestString -1;
+
+        while( left != ptr && left[ -1 ] )
+          --left;
+
+        printf( "To the left: %s\n", left );
+      }
+      else
+        printf( "To the lest -- nothing\n" );
+
+      char const * right = closestString + strlen( closestString ) + 1;
+
+      if ( right != leafEnd )
+      {
+        printf( "To the right: %s\n", right );
+      }
+      else
+        printf( "To the right -- nothing\n" );
+      #endif
+
+      // Now, whatever the outcome (compareResult) is, we need to find
+      // entry number for the closestMatch string.
+       
+      unsigned entry = 0;
+
+      for( char const * next = ptr; next != closestString;
+           next += strlen( next ) + 1, ++entry ) ;
+
+      // Ok, now check the outcome
+
+      if ( !compareResult )
+      {
+        // The target string matches the one found.
+        // Go to the right, since it's there where we store such results.
+        currentNodeOffset = offsets[ entry + 1 ];
+      }
+      if ( compareResult < 0 )
+      {
+        // The target string is smaller than the one found.
+        // Go to the left.
         currentNodeOffset = offsets[ entry ];
       }
+      else
+      {
+        // The target string is larger than the one found.
+        // Go to the right.
+        currentNodeOffset = offsets[ entry + 1 ];
+      }
+
+      //printf( "reading node at %x\n", currentNodeOffset );
+      readNode( currentNodeOffset, extLeaf );
+      leaf = &extLeaf.front();
+      leafEnd = leaf + extLeaf.size();
     }
     else
     {
       //printf( "=>a leaf\n" );
       // A leaf
-      nextLeaf = idxFile->read< uint32_t >();
 
-      // Iterate through chains until we find one that matches
+      // If this leaf is the root, there's no next leaf, it just can't be.
+      // We do this check because the file's position indicator just won't
+      // be in the right place for root node anyway, since we precache it.
+      nextLeaf = ( currentNodeOffset != rootOffset ? idxFile->read< uint32_t >() : 0 );
 
-      char const * ptr = &leaf.front() + sizeof( uint32_t );
+      if ( !leafEntries )
+      {
+        // Empty leaf? This may only be possible for entirely empty trees only.
+        if ( currentNodeOffset != rootOffset )
+          throw exCorruptedChainData();
+        else
+          return 0; // No match
+      }
+
+      // Build an array containing all chain pointers
+      char const * ptr = leaf + sizeof( uint32_t );
 
       uint32_t chainSize;
 
-      while( leafEntries-- )
+      vector< char const * > chainOffsets( leafEntries );
+
       {
-        memcpy( &chainSize, ptr, sizeof( uint32_t ) );
-        ptr += sizeof( uint32_t );
+        char const ** nextOffset = &chainOffsets.front();
 
-        if( chainSize )
+        while( leafEntries-- )
         {
-          size_t wordSize = strlen( ptr );
+          *nextOffset++ = ptr;
 
-          if ( wcharBuffer.size() <= wordSize )
-            wcharBuffer.resize( wordSize + 1 );
+          memcpy( &chainSize, ptr, sizeof( uint32_t ) );
 
-          //printf( "checking agaist word %s, left = %u\n", ptr, leafEntries );
+          //printf( "%s + %s\n", ptr + sizeof( uint32_t ), ptr + sizeof( uint32_t ) + strlen( ptr + sizeof( uint32_t ) ) + 1 );
 
-          long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
-
-          if ( result < 0 )
-            throw Utf8::exCantDecode( ptr );
-
-          wcharBuffer[ result ] = 0;
-
-          wstring foldedWord = Folding::apply( &wcharBuffer.front() );
-
-          int compareResult = target.compare( foldedWord );
-
-          if ( !compareResult )
-          {
-            // Exact match -- return and be done
-            exactMatch = true;
-
-            return ptr - sizeof( uint32_t );
-          }
-          else
-          if ( compareResult < 0 )
-          {
-            // The target string is smaller than the current one.
-            // No point in travering further, return this result.
-            
-            return ptr - sizeof( uint32_t );
-          }
-          ptr += chainSize;
+          ptr += sizeof( uint32_t ) + chainSize;
         }
       }
 
-      // Well, our target is larger than all the chains here. This would mean
-      // that the next leaf is the right one.
+      // Now do a binary search in it, aiming to find where our target
+      // string lands.
 
-      if ( nextLeaf )
+      char const ** window = &chainOffsets.front();
+      unsigned windowSize = chainOffsets.size();
+
+      for( ; ; )
       {
-        readNode( nextLeaf, leaf );
+        //printf( "window = %u, ws = %u\n", window - &chainOffsets.front(), windowSize );
 
-        nextLeaf = idxFile->read< uint32_t >();
+        char const ** chainToCheck = window + windowSize/2;
+        ptr = *chainToCheck;
+  
+        memcpy( &chainSize, ptr, sizeof( uint32_t ) );
+        ptr += sizeof( uint32_t );
+  
+        size_t wordSize = strlen( ptr );
+  
+        if ( wcharBuffer.size() <= wordSize )
+          wcharBuffer.resize( wordSize + 1 );
+  
+        //printf( "checking agaist word %s, left = %u\n", ptr, leafEntries );
+  
+        long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
+  
+        if ( result < 0 )
+          throw Utf8::exCantDecode( ptr );
+  
+        wcharBuffer[ result ] = 0;
+  
+        wstring foldedWord = Folding::apply( &wcharBuffer.front() );
+  
+        int compareResult = target.compare( foldedWord );
+  
+        if ( !compareResult )
+        {
+          // Exact match -- return and be done
+          exactMatch = true;
+  
+          return ptr - sizeof( uint32_t );
+        }
+        else
+        if ( compareResult < 0 )
+        {
+          // The target string is smaller than the current one.
+          // Go to the first half
+           
+          windowSize /= 2;
 
-        return &leaf.front() + sizeof( uint32_t );
+          if ( !windowSize )
+          {
+            // That finishes our search. Since our target string
+            // landed before the last tested chain, we return a possible
+            // prefix match against that chain.
+            return ptr - sizeof( uint32_t );
+          }
+        }
+        else
+        {
+          // The target string is larger than the current one.
+          // Go to the second half
+
+          windowSize -= windowSize/2 + 1;
+
+          if ( !windowSize )
+          {
+            // That finishes our search. Since our target string
+            // landed after the last tested chain, we return the next
+            // chain. If there's no next chain in this leaf, this
+            // would mean the first element in the next leaf.
+            if ( chainToCheck == &chainOffsets.back() )
+            {
+              if ( nextLeaf )
+              {
+                readNode( nextLeaf, extLeaf );
+  
+                leafEnd = &extLeaf.front() + extLeaf.size();
+  
+                nextLeaf = idxFile->read< uint32_t >();
+  
+                return &extLeaf.front() + sizeof( uint32_t );
+              }
+              else
+                return 0; // This was the last leaf
+            }
+            else
+              return chainToCheck[ 1 ];
+          }
+
+          window = chainToCheck + 1;
+        }
       }
-      else
-        return 0; // This was the last leaf
     }
   }
 }
@@ -764,7 +923,7 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
   }
 }
 
-uint32_t buildIndex( IndexedWords const & indexedWords, File::Class & file )
+IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )
 {
   size_t indexSize = indexedWords.size();
   IndexedWords::const_iterator nextIndex = indexedWords.begin();
@@ -798,17 +957,7 @@ uint32_t buildIndex( IndexedWords const & indexedWords, File::Class & file )
                                         file, btreeMaxElements,
                                         lastLeafOffset );
 
-  // We need to save btreeMaxElements. For simplicity, we just save it here
-  // along with root offset, and then return that record's offset as the
-  // offset of the index itself.
-
-  uint32_t indexOffset = file.tell();
-
-  file.write( (uint32_t) btreeMaxElements );
-  file.write( (uint32_t) rootOffset );
-
-  return indexOffset;
+  return IndexInfo( btreeMaxElements, rootOffset );
 }
-
 
 }
