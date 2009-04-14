@@ -339,10 +339,19 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   if ( !menu.isEmpty() && ids.size() )
     menu.addSeparator();
-  
+
+  unsigned refsAdded = 0;
+
   for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd();
-       ++i )
+       ++i, ++refsAdded )
   {
+    if ( refsAdded == 20 )
+    {
+      // Enough! Or the menu would become too large.
+      menu.addAction( new QAction( ".........", &menu ) );
+      break;
+    }
+
     // Find this dictionary
 
     for( unsigned x = allDictionaries.size(); x--; )
