@@ -645,11 +645,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         strcasecmp( i->c_str() + ( i->size() - 4 ), ".bgl" ) != 0 )
       continue;
 
-    Babylon b( *i );
-
-    if ( !b.open() )
-      continue;
-
     // Got the file -- check if we need to rebuid the index
 
     vector< string > dictFiles( 1, *i );
@@ -662,6 +657,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
          indexIsOldOrBad( indexFile ) )
     {
       // Building the index
+
+      Babylon b( *i );
+
+      if ( !b.open() )
+        continue;
 
       std::string sourceCharset, targetCharset;
 
