@@ -21,6 +21,9 @@
 #include <stdlib.h>
 
 #include <QString>
+#include <QSemaphore>
+#include <QThreadPool>
+#include <QAtomicInt>
 
 namespace Stardict {
 
@@ -102,6 +105,7 @@ class StardictDictionary: public BtreeIndexing::BtreeDictionary
   string bookName;
   string sameTypeSequence;
   ChunkedStorage::Reader chunks;
+  Mutex dzMutex;
   dictData * dz;
 
 public:
@@ -144,6 +148,9 @@ private:
                      string & articleText );
 
   string loadString( size_t size );
+
+  friend class StardictArticleRequest;
+  friend class StardictHeadwordsRequest;
 };
 
 StardictDictionary::StardictDictionary( string const & id,
@@ -259,8 +266,14 @@ void StardictDictionary::loadArticle( uint32_t address,
 
   getArticleProps( address, headword, offset, size );
 
-  // Note that the function always zero-pads the result.
-  char * articleBody = dict_data_read_( dz, offset, size, 0, 0 );
+  char * articleBody;
+
+  {
+    Mutex::Lock _( dzMutex );
+
+    // Note that the function always zero-pads the result.
+    articleBody = dict_data_read_( dz, offset, size, 0, 0 );
+  }
 
   if ( !articleBody )
     throw exCantReadFile( getDictionaryFilenames()[ 2 ] );
@@ -411,22 +424,94 @@ void StardictDictionary::loadArticle( uint32_t address,
   free( articleBody );
 }
 
-sptr< Dictionary::WordSearchRequest > StardictDictionary::findHeadwordsForSynonym( wstring const & str )
-  throw( std::exception )
+
+/// StardictDictionary::findHeadwordsForSynonym()
+
+class StardictHeadwordsRequest;
+
+class StardictHeadwordsRequestRunnable: public QRunnable
 {
-  sptr< Dictionary::WordSearchRequestInstant > result =
-    new Dictionary::WordSearchRequestInstant;
+  StardictHeadwordsRequest & r;
+  QSemaphore & hasExited;
+  
+public:
 
-  vector< WordArticleLink > chain = findArticles( str );
+  StardictHeadwordsRequestRunnable( StardictHeadwordsRequest & r_,
+                                    QSemaphore & hasExited_ ): r( r_ ),
+                                                               hasExited( hasExited_ )
+  {}
 
-  wstring caseFolded = Folding::applySimpleCaseOnly( str );
+  ~StardictHeadwordsRequestRunnable()
+  {
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
+
+class StardictHeadwordsRequest: public Dictionary::WordSearchRequest
+{
+  friend class StardictHeadwordsRequestRunnable;
+
+  wstring word;
+  StardictDictionary & dict;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  StardictHeadwordsRequest( wstring const & word_,
+                            StardictDictionary & dict_ ):
+    word( word_ ), dict( dict_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new StardictHeadwordsRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by StardictHeadwordsRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+  
+  ~StardictHeadwordsRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void StardictHeadwordsRequestRunnable::run()
+{
+  r.run();
+}
+
+void StardictHeadwordsRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  vector< WordArticleLink > chain = dict.findArticles( word );
+
+  wstring caseFolded = Folding::applySimpleCaseOnly( word );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
+    if ( isCancelled )
+    {
+      finish();
+      return;
+    }
+
     string headword, articleText;
 
-    loadArticle( chain[ x ].articleOffset,
-                 headword, articleText );
+    dict.loadArticle( chain[ x ].articleOffset,
+                      headword, articleText );
 
     wstring headwordDecoded = Utf8::decode( headword );
 
@@ -434,24 +519,103 @@ sptr< Dictionary::WordSearchRequest > StardictDictionary::findHeadwordsForSynony
     {
       // The headword seems to differ from the input word, which makes the
       // input word its synonym.
-      result->getMatches().push_back( headwordDecoded );
+      Mutex::Lock _( dataMutex );
+
+      matches.push_back( headwordDecoded );
     }
   }
 
-  return result;
+  finish();
 }
 
-sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & word,
-                                                                vector< wstring > const & alts )
+sptr< Dictionary::WordSearchRequest >
+  StardictDictionary::findHeadwordsForSynonym( wstring const & word )
   throw( std::exception )
 {
-  vector< WordArticleLink > chain = findArticles( word );
+  return new StardictHeadwordsRequest( word, *this );
+}
+
+
+/// StardictDictionary::getArticle()
+
+class StardictArticleRequest;
+
+class StardictArticleRequestRunnable: public QRunnable
+{
+  StardictArticleRequest & r;
+  QSemaphore & hasExited;
+  
+public:
+
+  StardictArticleRequestRunnable( StardictArticleRequest & r_,
+                                  QSemaphore & hasExited_ ): r( r_ ),
+                                                             hasExited( hasExited_ )
+  {}
+
+  ~StardictArticleRequestRunnable()
+  {
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
+
+class StardictArticleRequest: public Dictionary::DataRequest
+{
+  friend class StardictArticleRequestRunnable;
+
+  wstring word;
+  vector< wstring > alts;
+  StardictDictionary & dict;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  StardictArticleRequest( wstring const & word_,
+                     vector< wstring > const & alts_,
+                     StardictDictionary & dict_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new StardictArticleRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by StardictArticleRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+  
+  ~StardictArticleRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void StardictArticleRequestRunnable::run()
+{
+  r.run();
+}
+
+void StardictArticleRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  vector< WordArticleLink > chain = dict.findArticles( word );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -466,6 +630,12 @@ sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & 
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
+    if ( isCancelled )
+    {
+      finish();
+      return;
+    }
+
     if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
       continue; // We already have this article in the body.
 
@@ -473,7 +643,7 @@ sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & 
 
     string headword, articleText;
 
-    loadArticle( chain[ x ].articleOffset, headword, articleText );
+    dict.loadArticle( chain[ x ].articleOffset, headword, articleText );
 
     // Ok. Now, does it go to main articles, or to alternate ones? We list
     // main ones first, and alternates after.
@@ -495,7 +665,11 @@ sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & 
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
-    return new Dictionary::DataRequestInstant( false ); // No such word
+  {
+    // No such word
+    finish();
+    return;
+  }
 
   string result;
 
@@ -524,16 +698,23 @@ sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & 
       result += cleaner;
   }
 
-  Dictionary::DataRequestInstant * ret =
-    new Dictionary::DataRequestInstant( true );
+  Mutex::Lock _( dataMutex );
 
-  ret->getData().resize( result.size() );
+  data.resize( result.size() );
 
-  memcpy( &(ret->getData().front()), result.data(), result.size() );
+  memcpy( &data.front(), result.data(), result.size() );
 
-  return ret;
+  hasAnyData = true;
+
+  finish();
 }
 
+sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & word,
+                                                                vector< wstring > const & alts )
+  throw( std::exception )
+{
+  return new StardictArticleRequest( word, alts, *this );
+}
 
 
 static char const * beginsWith( char const * substr, char const * str )

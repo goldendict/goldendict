@@ -90,6 +90,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   ChunkedStorage::Reader chunks;
   string dictionaryName;
   map< string, string > abrv;
+  Mutex dzMutex;
   dictData * dz;
   Mutex resourceZipMutex;
   zip * resourceZip;
@@ -142,6 +143,8 @@ private:
   // Parts of dslToHtml()
   string nodeToHtml( ArticleDom::Node const & );
   string processNodeChildren( ArticleDom::Node const & node );
+
+  friend class DslArticleRequest;
 };
 
 DslDictionary::DslDictionary( string const & id,
@@ -246,7 +249,14 @@ void DslDictionary::loadArticle( uint32_t address,
 
     printf( "offset = %x\n", articleOffset );
 
-    char * articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+
+    char * articleBody;
+
+    {
+      Mutex::Lock _( dzMutex );
+
+      articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+    }
   
     if ( !articleBody )
       throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
@@ -569,18 +579,86 @@ vector< wstring > StardictDictionary::findHeadwordsForSynonym( wstring const & s
 }
 #endif
 
+/// DslDictionary::getArticle()
 
-sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
-                                                           vector< wstring > const & alts )
-  throw( std::exception )
+class DslArticleRequest;
+
+class DslArticleRequestRunnable: public QRunnable
 {
-  vector< WordArticleLink > chain = findArticles( word );
+  DslArticleRequest & r;
+  QSemaphore & hasExited;
+  
+public:
+
+  DslArticleRequestRunnable( DslArticleRequest & r_,
+                             QSemaphore & hasExited_ ): r( r_ ),
+                                                        hasExited( hasExited_ )
+  {}
+
+  ~DslArticleRequestRunnable()
+  {
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
+
+class DslArticleRequest: public Dictionary::DataRequest
+{
+  friend class DslArticleRequestRunnable;
+
+  wstring word;
+  vector< wstring > alts;
+  DslDictionary & dict;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  DslArticleRequest( wstring const & word_,
+                     vector< wstring > const & alts_,
+                     DslDictionary & dict_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new DslArticleRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by DslArticleRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+  
+  ~DslArticleRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void DslArticleRequestRunnable::run()
+{
+  r.run();
+}
+
+void DslArticleRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  vector< WordArticleLink > chain = dict.findArticles( word );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -595,6 +673,13 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
+    // Check if we're cancelled occasionally
+    if ( isCancelled )
+    {
+      finish();
+      return;
+    }
+
     if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
       continue; // We already have this article in the body.
 
@@ -605,8 +690,8 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
     list< wstring > displayedHeadwords;
     wstring articleBody;
 
-    loadArticle( chain[ x ].articleOffset, headword, displayedHeadwords,
-                 articleBody );
+    dict.loadArticle( chain[ x ].articleOffset, headword, displayedHeadwords,
+                      articleBody );
 
     string articleText;
 
@@ -615,7 +700,7 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
 
     for( list< wstring >::const_iterator i = displayedHeadwords.begin();
          i != displayedHeadwords.end(); ++i )
-      articleText += dslToHtml( *i );
+      articleText += dict.dslToHtml( *i );
 
     articleText += "</div>";
 
@@ -623,10 +708,10 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
       expandTildes( articleBody, displayedHeadwords.front() );
 
     articleText += "<div class=\"dsl_definition\">";
-    articleText += dslToHtml( articleBody );
+    articleText += dict.dslToHtml( articleBody );
     articleText += "</div>";
     articleText += "</span>";
-    
+
     // Ok. Now, does it go to main articles, or to alternate ones? We list
     // main ones first, and alternates after.
 
@@ -647,7 +732,10 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
-    return new Dictionary::DataRequestInstant( false );
+  {
+    finish();
+    return;
+  }
 
   string result;
 
@@ -659,14 +747,22 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
     result += i->second;
 
-  Dictionary::DataRequestInstant * ret =
-    new Dictionary::DataRequestInstant( true );
+  Mutex::Lock _( dataMutex );
 
-  ret->getData().resize( result.size() );
+  data.resize( result.size() );
 
-  memcpy( &(ret->getData().front()), result.data(), result.size() );
+  memcpy( &data.front(), result.data(), result.size() );
 
-  return ret;
+  hasAnyData = true;
+
+  finish();
+}
+
+sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
+                                                           vector< wstring > const & alts )
+  throw( std::exception )
+{
+  return new DslArticleRequest( word, alts, *this );
 }
 
 void loadFromFile( string const & n, vector< char > & data )

@@ -15,6 +15,10 @@
 #include <ctype.h>
 #include <string.h>
 
+#include <QSemaphore>
+#include <QThreadPool>
+#include <QAtomicInt>
+
 namespace Bgl {
 
 using std::map;
@@ -217,7 +221,11 @@ namespace
     void loadArticle( uint32_t offset, string & headword,
                       string & displayedHeadword, string & articleText );
 
-    void replaceCharsetEntities( string & );
+    static void replaceCharsetEntities( string & );
+
+    friend class BglHeadwordsRequest;
+    friend class BglArticleRequest;
+    friend class BglResourceRequest;
   };
 
   BglDictionary::BglDictionary( string const & id, string const & indexFile,
@@ -266,222 +274,479 @@ namespace
                 displayedHeadword.size() + 2 );
   }
 
-  sptr< Dictionary::WordSearchRequest >
-    BglDictionary::findHeadwordsForSynonym( wstring const & str )
-      throw( std::exception )
+/// BglDictionary::findHeadwordsForSynonym()
+
+class BglHeadwordsRequest;
+
+class BglHeadwordsRequestRunnable: public QRunnable
+{
+  BglHeadwordsRequest & r;
+  QSemaphore & hasExited;
+  
+public:
+
+  BglHeadwordsRequestRunnable( BglHeadwordsRequest & r_,
+                               QSemaphore & hasExited_ ): r( r_ ),
+                                                          hasExited( hasExited_ )
+  {}
+
+  ~BglHeadwordsRequestRunnable()
   {
-    sptr< Dictionary::WordSearchRequestInstant > result =
-      new Dictionary::WordSearchRequestInstant;
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
 
-    vector< WordArticleLink > chain = findArticles( str );
+class BglHeadwordsRequest: public Dictionary::WordSearchRequest
+{
+  friend class BglHeadwordsRequestRunnable;
 
-    wstring caseFolded = Folding::applySimpleCaseOnly( str );
+  wstring str;
+  BglDictionary & dict;
 
-    for( unsigned x = 0; x < chain.size(); ++x )
-    {
-      string headword, displayedHeadword, articleText;
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
 
-      loadArticle( chain[ x ].articleOffset,
-                   headword, displayedHeadword, articleText );
+public:
 
-      wstring headwordDecoded = Utf8::decode( removePostfix(  headword ) );
-
-      if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) )
-      {
-        // The headword seems to differ from the input word, which makes the
-        // input word its synonym.
-        result->getMatches().push_back( headwordDecoded );
-      }
-    }
-
-    return result;
+  BglHeadwordsRequest( wstring const & word_,
+                       BglDictionary & dict_ ):
+    str( word_ ), dict( dict_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new BglHeadwordsRequestRunnable( *this, hasExited ) );
   }
 
-  // Converts a $1$-like postfix to a <sup>1</sup> one
-  string postfixToSuperscript( string const & in )
-  {
-    if ( !in.size() || in[ in.size() - 1 ] != '$' )
-      return in;
+  void run(); // Run from another thread by BglHeadwordsRequestRunnable
 
-    for( long x = in.size() - 2; x >= 0; x-- )
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+  
+  ~BglHeadwordsRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void BglHeadwordsRequestRunnable::run()
+{
+  r.run();
+}
+
+void BglHeadwordsRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  sptr< Dictionary::WordSearchRequestInstant > result =
+    new Dictionary::WordSearchRequestInstant;
+
+  vector< WordArticleLink > chain = dict.findArticles( str );
+
+  wstring caseFolded = Folding::applySimpleCaseOnly( str );
+
+  for( unsigned x = 0; x < chain.size(); ++x )
+  {
+    if ( isCancelled )
     {
-      if ( in[ x ] == '$' )
+      finish();
+      return;
+    }
+
+    string headword, displayedHeadword, articleText;
+
+    dict.loadArticle( chain[ x ].articleOffset,
+                      headword, displayedHeadword, articleText );
+
+    wstring headwordDecoded = Utf8::decode( removePostfix(  headword ) );
+
+    if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) )
+    {
+      // The headword seems to differ from the input word, which makes the
+      // input word its synonym.
+      Mutex::Lock _( dataMutex );
+
+      matches.push_back( headwordDecoded );
+    }
+  }
+
+  finish();
+}
+
+sptr< Dictionary::WordSearchRequest >
+  BglDictionary::findHeadwordsForSynonym( wstring const & word )
+  throw( std::exception )
+{
+  return new BglHeadwordsRequest( word, *this );
+}
+
+// Converts a $1$-like postfix to a <sup>1</sup> one
+string postfixToSuperscript( string const & in )
+{
+  if ( !in.size() || in[ in.size() - 1 ] != '$' )
+    return in;
+
+  for( long x = in.size() - 2; x >= 0; x-- )
+  {
+    if ( in[ x ] == '$' )
+    {
+      if ( in.size() - x - 2 > 2 )
       {
-        if ( in.size() - x - 2 > 2 )
-        {
-          // Large postfixes seem like something we wouldn't want to show --
-          // some dictionaries seem to have each word numbered using the
-          // postfix.
-          return in.substr( 0, x );
-        }
-        else
-          return in.substr( 0, x ) + "<sup>" + in.substr( x + 1, in.size() - x - 2 ) + "</sup>";
+        // Large postfixes seem like something we wouldn't want to show --
+        // some dictionaries seem to have each word numbered using the
+        // postfix.
+        return in.substr( 0, x );
       }
       else
-      if ( !isdigit( in[ x ] ) )
-        break;
+        return in.substr( 0, x ) + "<sup>" + in.substr( x + 1, in.size() - x - 2 ) + "</sup>";
     }
-
-    return in;
+    else
+    if ( !isdigit( in[ x ] ) )
+      break;
   }
 
-  sptr< Dictionary::DataRequest > BglDictionary::getArticle( wstring const & word,
-                                                             vector< wstring > const & alts )
-    throw( std::exception )
+  return in;
+}
+
+
+/// BglDictionary::getArticle()
+
+class BglArticleRequest;
+
+class BglArticleRequestRunnable: public QRunnable
+{
+  BglArticleRequest & r;
+  QSemaphore & hasExited;
+  
+public:
+
+  BglArticleRequestRunnable( BglArticleRequest & r_,
+                                  QSemaphore & hasExited_ ): r( r_ ),
+                                                             hasExited( hasExited_ )
+  {}
+
+  ~BglArticleRequestRunnable()
   {
-    vector< WordArticleLink > chain = findArticles( word );
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
 
-    for( unsigned x = 0; x < alts.size(); ++x )
-    {
-      /// Make an additional query for each alt
+class BglArticleRequest: public Dictionary::DataRequest
+{
+  friend class BglArticleRequestRunnable;
 
-      vector< WordArticleLink > altChain = findArticles( alts[ x ] );
+  wstring word;
+  vector< wstring > alts;
+  BglDictionary & dict;
 
-      chain.insert( chain.end(), altChain.begin(), altChain.end() );
-    }
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
 
-    multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
+public:
 
-    set< uint32_t > articlesIncluded; // Some synonims make it that the articles
-                                      // appear several times. We combat this
-                                      // by only allowing them to appear once.
-
-    wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
-
-    for( unsigned x = 0; x < chain.size(); ++x )
-    {
-      if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
-        continue; // We already have this article in the body.
-
-      // Now grab that article
-
-      string headword, displayedHeadword, articleText;
-
-      loadArticle( chain[ x ].articleOffset,
-                   headword, displayedHeadword, articleText );
-
-      // Ok. Now, does it go to main articles, or to alternate ones? We list
-      // main ones first, and alternates after.
-
-      // We do the case-folded and postfix-less comparison here.
-
-      wstring headwordStripped =
-        Folding::applySimpleCaseOnly( Utf8::decode( removePostfix( headword ) ) );
-
-      multimap< wstring, pair< string, string > > & mapToUse = 
-        ( wordCaseFolded == headwordStripped ) ?
-          mainArticles : alternateArticles;
-
-      mapToUse.insert( pair< wstring, pair< string, string > >(
-        Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-        pair< string, string >( 
-          displayedHeadword.size() ? displayedHeadword : headword,
-          articleText ) ) );
-
-      articlesIncluded.insert( chain[ x ].articleOffset );
-    }
-
-    if ( mainArticles.empty() && alternateArticles.empty() )
-      return new Dictionary::DataRequestInstant( false ); // No such word
-
-    string result;
-
-    multimap< wstring, pair< string, string > >::const_iterator i;
-
-    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</b></b></b></b></b></b></b></b>"
-                     "</i></i></i></i></i></i></i></i>";
-
-    for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
-    {
-        result += "<h3>";
-        result += postfixToSuperscript( i->second.first );
-        result += "</h3>";
-        result += i->second.second;
-        result += cleaner;
-    }
-
-    for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
-    {
-        result += "<h3>";
-        result += postfixToSuperscript( i->second.first );
-        result += "</h3>";
-        result += i->second.second;
-        result += cleaner;
-    }
-    // Do some cleanups in the text
-
-    replaceCharsetEntities( result );
-
-    
-    Dictionary::DataRequestInstant * ret =
-      new Dictionary::DataRequestInstant( true );
-
-    ret->getData().resize( result.size() );
-
-    memcpy( &(ret->getData().front()), result.data(), result.size() );
-    
-    return ret;
+  BglArticleRequest( wstring const & word_,
+                     vector< wstring > const & alts_,
+                     BglDictionary & dict_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new BglArticleRequestRunnable( *this, hasExited ) );
   }
 
-  sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name )
-    throw( std::exception )
+  void run(); // Run from another thread by BglArticleRequestRunnable
+
+  virtual void cancel()
   {
-    string nameLowercased = name;
+    isCancelled.ref();
+  }
+  
+  ~BglArticleRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
 
-    for( string::iterator i = nameLowercased.begin(); i != nameLowercased.end();
-         ++i )
-      *i = tolower( *i );
+void BglArticleRequestRunnable::run()
+{
+  r.run();
+}
 
-    Mutex::Lock _( idxMutex );
+void BglArticleRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
 
-    idx.seek( idxHeader.resourceListOffset );
+  vector< WordArticleLink > chain = dict.findArticles( word );
 
-    for( size_t count = idxHeader.resourcesCount; count--; )
+  for( unsigned x = 0; x < alts.size(); ++x )
+  {
+    /// Make an additional query for each alt
+
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+
+    chain.insert( chain.end(), altChain.begin(), altChain.end() );
+  }
+
+  multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
+
+  set< uint32_t > articlesIncluded; // Some synonims make it that the articles
+                                    // appear several times. We combat this
+                                    // by only allowing them to appear once.
+
+  wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+
+  for( unsigned x = 0; x < chain.size(); ++x )
+  {
+    if ( isCancelled )
     {
-      vector< char > nameData( idx.read< uint32_t >() );
-      idx.read( &nameData.front(), nameData.size() );
+      finish();
+      return;
+    }
 
-      for( size_t x = nameData.size(); x--; )
-        nameData[ x ] = tolower( nameData[ x ] );
+    if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
+      continue; // We already have this article in the body.
 
-      uint32_t offset = idx.read< uint32_t >();
+    // Now grab that article
 
-      if ( string( &nameData.front(), nameData.size() ) == nameLowercased )
+    string headword, displayedHeadword, articleText;
+
+    dict.loadArticle( chain[ x ].articleOffset,
+                      headword, displayedHeadword, articleText );
+
+    // Ok. Now, does it go to main articles, or to alternate ones? We list
+    // main ones first, and alternates after.
+
+    // We do the case-folded and postfix-less comparison here.
+
+    wstring headwordStripped =
+      Folding::applySimpleCaseOnly( Utf8::decode( removePostfix( headword ) ) );
+
+    multimap< wstring, pair< string, string > > & mapToUse = 
+      ( wordCaseFolded == headwordStripped ) ?
+        mainArticles : alternateArticles;
+
+    mapToUse.insert( pair< wstring, pair< string, string > >(
+      Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+      pair< string, string >( 
+        displayedHeadword.size() ? displayedHeadword : headword,
+        articleText ) ) );
+
+    articlesIncluded.insert( chain[ x ].articleOffset );
+  }
+
+  if ( mainArticles.empty() && alternateArticles.empty() )
+  {
+    // No such word
+    finish();
+    return;
+  }
+
+  string result;
+
+  multimap< wstring, pair< string, string > >::const_iterator i;
+
+  string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
+                   "</font>""</font>""</font>""</font>""</font>""</font>"
+                   "</b></b></b></b></b></b></b></b>"
+                   "</i></i></i></i></i></i></i></i>";
+
+  for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
+  {
+      result += "<h3>";
+      result += postfixToSuperscript( i->second.first );
+      result += "</h3>";
+      result += i->second.second;
+      result += cleaner;
+  }
+
+  for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
+  {
+      result += "<h3>";
+      result += postfixToSuperscript( i->second.first );
+      result += "</h3>";
+      result += i->second.second;
+      result += cleaner;
+  }
+  // Do some cleanups in the text
+
+  BglDictionary::replaceCharsetEntities( result );
+
+  Mutex::Lock _( dataMutex );
+
+  data.resize( result.size() );
+
+  memcpy( &data.front(), result.data(), result.size() );
+
+  hasAnyData = true;
+
+  finish();
+}
+
+sptr< Dictionary::DataRequest > BglDictionary::getArticle( wstring const & word,
+                                                           vector< wstring > const & alts )
+  throw( std::exception )
+{
+  return new BglArticleRequest( word, alts, *this );
+}
+
+
+//// BglDictionary::getResource()
+
+class BglResourceRequest;
+
+class BglResourceRequestRunnable: public QRunnable
+{
+  BglResourceRequest & r;
+  QSemaphore & hasExited;
+  
+public:
+
+  BglResourceRequestRunnable( BglResourceRequest & r_,
+                              QSemaphore & hasExited_ ): r( r_ ),
+                                                         hasExited( hasExited_ )
+  {}
+
+  ~BglResourceRequestRunnable()
+  {
+    hasExited.release();
+  }
+  
+  virtual void run();
+};
+
+class BglResourceRequest: public Dictionary::DataRequest
+{
+  friend class BglResourceRequestRunnable;
+
+  Mutex & idxMutex;
+  File::Class & idx;
+  uint32_t resourceListOffset, resourcesCount;
+  string name;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  BglResourceRequest( Mutex & idxMutex_,
+                      File::Class & idx_,
+                      uint32_t resourceListOffset_,
+                      uint32_t resourcesCount_,
+                      string const & name_ ):
+    idxMutex( idxMutex_ ),
+    idx( idx_ ),
+    resourceListOffset( resourceListOffset_ ),
+    resourcesCount( resourcesCount_ ),
+    name( name_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new BglResourceRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by BglResourceRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+  
+  ~BglResourceRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void BglResourceRequestRunnable::run()
+{
+  r.run();
+}
+
+void BglResourceRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  string nameLowercased = name;
+
+  for( string::iterator i = nameLowercased.begin(); i != nameLowercased.end();
+       ++i )
+    *i = tolower( *i );
+
+  Mutex::Lock _( idxMutex );
+
+  idx.seek( resourceListOffset );
+
+  for( size_t count = resourcesCount; count--; )
+  {
+    if ( isCancelled )
+      break;
+
+    vector< char > nameData( idx.read< uint32_t >() );
+    idx.read( &nameData.front(), nameData.size() );
+
+    for( size_t x = nameData.size(); x--; )
+      nameData[ x ] = tolower( nameData[ x ] );
+
+    uint32_t offset = idx.read< uint32_t >();
+
+    if ( string( &nameData.front(), nameData.size() ) == nameLowercased )
+    {
+      // We have a match.
+
+      idx.seek( offset );
+
+      Mutex::Lock _( dataMutex );
+
+      data.resize( idx.read< uint32_t >() );
+
+      vector< unsigned char > compressedData( idx.read< uint32_t >() );
+
+      idx.read( &compressedData.front(), compressedData.size() );
+
+      unsigned long decompressedLength = data.size();
+
+      if ( uncompress( (unsigned char *) &data.front(),
+                       &decompressedLength,
+                       &compressedData.front(),
+                       compressedData.size() ) != Z_OK ||
+           decompressedLength != data.size() )
       {
-        // We have a match.
-
-        idx.seek( offset );
-
-        sptr< Dictionary::DataRequestInstant > result = new
-          Dictionary::DataRequestInstant( true );
-
-        result->getData().resize( idx.read< uint32_t >() );
-
-        vector< unsigned char > compressedData( idx.read< uint32_t >() );
-
-        idx.read( &compressedData.front(), compressedData.size() );
-
-        unsigned long decompressedLength = result->getData().size();
-
-        if ( uncompress( (unsigned char *) &( result->getData().front() ),
-                         &decompressedLength,
-                         &compressedData.front(),
-                         compressedData.size() ) != Z_OK ||
-             decompressedLength != result->getData().size() )
-        {
-          printf( "Failed to decompress resource %s, ignoring it.\n",
-            name.c_str() );
-          return new Dictionary::DataRequestInstant( false );
-        }
-
-        return result;
+        printf( "Failed to decompress resource %s, ignoring it.\n",
+          name.c_str() );
       }
-    }
+      else
+        hasAnyData = true;
 
-    return new Dictionary::DataRequestInstant( false );
+      break;
+    }
   }
+
+  finish();
+}
+
+sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name )
+  throw( std::exception )
+{
+  return new BglResourceRequest( idxMutex, idx, idxHeader.resourceListOffset,
+                                 idxHeader.resourcesCount, name );
+}
 
   /// Replaces <CHARSET c="t">1234;</CHARSET> occurences with &#x1234;
   void BglDictionary::replaceCharsetEntities( string & text )
