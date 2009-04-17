@@ -678,38 +678,6 @@ vector< WordArticleLink > BtreeDictionary::readChain( char const * & ptr )
   return result;
 }
 
-vector< wstring > BtreeDictionary::convertChainToWstrings(
-                                      vector< WordArticleLink > const & chain )
-{
-  vector< wchar_t > wcharBuffer;
-
-  vector< wstring > result;
-
-  for( unsigned x = 0; x < chain.size(); ++x )
-  {
-    unsigned wordSize = chain[ x ].word.size();
-
-    if ( wcharBuffer.size() <= wordSize )
-      wcharBuffer.resize( wordSize + 1 );
-
-    long len = Utf8::decode( chain[ x ].word.data(), wordSize,
-                                &wcharBuffer.front() );
-
-    if ( len < 0 )
-    {
-      fprintf( stderr, "Failed to decode utf8 of a word %s, skipping it.\n",
-               chain[ x ].word.c_str() );
-      continue;
-    }
-
-    wcharBuffer[ len ] = 0;
-
-    result.push_back( &wcharBuffer.front() );
-  }
-
-  return result;
-}
-
 void BtreeDictionary::antialias( wstring const & str,
                                  vector< WordArticleLink > & chain )
 {

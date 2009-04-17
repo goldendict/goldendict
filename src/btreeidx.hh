@@ -128,10 +128,6 @@ private:
   /// is updated to point to the next chain, if there's any.
   vector< WordArticleLink > readChain( char const * & );
 
-  /// Converts words in a chain to a vector of wide strings. The article
-  /// offsets don't get used.
-  vector< wstring > convertChainToWstrings( vector< WordArticleLink > const & );
-
   /// Drops any alises which arose due to folding. Only case-folded aliases
   /// are left.
   void antialias( wstring const &, vector< WordArticleLink > & );
