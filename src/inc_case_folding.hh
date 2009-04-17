@@ -1125,7 +1125,11 @@ size_t foldCase( wchar_t in, wchar_t * out )
   }
 }
 
+#ifdef __WIN32
+wchar_t foldCaseSimple( uint32_t in )
+#else
 wchar_t foldCaseSimple( wchar_t in )
+#endif
 {
   switch( in )
   {

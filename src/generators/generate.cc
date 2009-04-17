@@ -206,7 +206,8 @@ int main()
     fprintf( outf, "    default: *out = in; return 1;\n" );
     fprintf( outf, "  }\n}\n\n" );
 
-    fprintf( outf, "wchar_t foldCaseSimple( wchar_t in )\n{\n  switch( in )\n  {\n" );
+    fprintf( outf, "#ifdef __WIN32\nwchar_t foldCaseSimple( uint32_t in )\n#else\n" );
+    fprintf( outf, "wchar_t foldCaseSimple( wchar_t in )\n#endif\n{\n  switch( in )\n  {\n" );
 
     for( map< wchar_t, wchar_t >::const_iterator i = simpleFoldTable.begin();
          i != simpleFoldTable.end(); ++i )
