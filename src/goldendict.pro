@@ -24,6 +24,8 @@ LIBS += -lvorbisfile -lvorbis -logg -lz -lzip -lhunspell
 win32 {
   LIBS += -liconv -lwsock32 -lwinmm
   RC_FILE = goldendict.rc
+  INCLUDEPATH += winlibs/include
+  LIBS += -Lwinlibs/lib
 }
 
 unix {

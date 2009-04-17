@@ -1,0 +1,6 @@
+; h:\mingw\3.3.1\bin\dlltool.exe --export-all-symbols --output-def=libcharset1.def localcharset.o relocatable.o libcharset-dllversion.o libcharset-dll-rc.o
+EXPORTS
+	libcharset_relocate @ 1 ; 
+	libcharset_set_relocation_prefix @ 2 ; 
+	locale_charset @ 3 ; 
+	DllGetVersion @ 4 ; 

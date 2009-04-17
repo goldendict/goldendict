@@ -1,0 +1,14 @@
+; h:\mingw\3.3.1\bin\dlltool.exe --export-all-symbols --output-def=libiconv2.def iconv.o localcharset.o relocatable.o libiconv-dllversion.o libiconv-dll-rc.o
+EXPORTS
+	DllGetVersion @ 1 ; 
+	_libiconv_version @ 2 DATA ; 
+	aliases2_lookup @ 3 ; 
+	aliases_lookup @ 4 ; 
+	libiconv @ 5 ; 
+	libiconv_close @ 6 ; 
+	libiconv_open @ 7 ; 
+	libiconv_relocate @ 8 ; 
+	libiconv_set_relocation_prefix @ 9 ; 
+	libiconvctl @ 10 ; 
+	libiconvlist @ 11 ; 
+	locale_charset @ 12 ; 
