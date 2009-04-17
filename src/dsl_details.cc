@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "dsl_details.hh"
+#include "folding.hh"
 #include <wctype.h>
 #include <stdio.h>
 
@@ -73,7 +74,7 @@ ArticleDom::ArticleDom( wstring const & str ):
         do
         {
           nextChar();
-        } while( iswblank( ch ) );
+        } while( Folding::isWhitespace( ch ) );
 
         bool isClosing;
 
@@ -89,13 +90,13 @@ ArticleDom::ArticleDom( wstring const & str ):
         // Read tag's name
         wstring name;
 
-        while( ( ch != L']' || escaped ) && !iswblank( ch ) )
+        while( ( ch != L']' || escaped ) && !Folding::isWhitespace( ch ) )
         {
           name.push_back( ch );
           nextChar();
         }
 
-        while( iswblank( ch ) )
+        while( Folding::isWhitespace( ch ) )
           nextChar();
 
         // Read attrs
@@ -230,7 +231,7 @@ ArticleDom::ArticleDom( wstring const & str ):
           do
           {
             nextChar();
-          } while( iswblank( ch ) );
+          } while( Folding::isWhitespace( ch ) );
 
           wstring linkTo;
 
