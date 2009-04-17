@@ -223,6 +223,26 @@ DslDictionary::~DslDictionary()
     dict_data_close( dz );
 }
 
+/// Determines whether or not this char is treated as whitespace for dsl
+/// parsing or not. We can't rely on any Unicode standards here, since the
+/// only standard that matters here is the original Dsl compiler's insides.
+/// Some dictionaries, for instance, are known to specifically use a non-
+/// breakable space (0xa0) to indicate that a headword begins with a space,
+/// so nbsp is not a whitespace character for Dsl compiler.
+/// For now we have only space and tab, since those are most likely the only
+/// ones recognized as spaces by that compiler.
+bool isDslWs( wchar_t ch )
+{
+  switch( ch )
+  {
+    case ' ':
+    case '\t':
+      return true;
+    default:
+      return false;
+  }
+}
+
 void DslDictionary::loadArticle( uint32_t address,
                                  string & headword,
                                  list< wstring > & displayedHeadwords,
@@ -314,7 +334,7 @@ void DslDictionary::loadArticle( uint32_t address,
         ++pos;
     }
 
-    if ( pos != articleData.size() && !iswblank( articleData[ pos ] ) )
+    if ( pos != articleData.size() && !isDslWs( articleData[ pos ] ) )
     {
       // Skip any alt headwords
       pos = articleData.find_first_of( L"\n\r", pos );
@@ -1123,7 +1143,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               // Skip any whitespace
               if ( !abrvScanner.readNextLine( curString, curOffset ) )
                 break;
-              if ( curString.empty() || iswblank( curString[ 0 ] ) )
+              if ( curString.empty() || isDslWs( curString[ 0 ] ) )
                 continue;
 
               string key = Utf8::encode( curString );
@@ -1134,7 +1154,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 break;
               }
 
-              if ( curString.empty() || !iswblank( curString[ 0 ] ) )
+              if ( curString.empty() || !isDslWs( curString[ 0 ] ) )
               {
                 fprintf( stderr, "Warning: malformed file %s\n", abrvFileName.c_str() );
                 break;
@@ -1191,13 +1211,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           if ( curString.empty() )
             continue;
 
-          if ( iswblank( curString[ 0 ] ) )
+          if ( isDslWs( curString[ 0 ] ) )
           {
             // The first character is blank. Let's make sure that all other
             // characters are blank, too.
             for( size_t x = 1; x < curString.size(); ++x )
             {
-              if ( !iswblank( curString[ x ] ) )
+              if ( !isDslWs( curString[ x ] ) )
               {
                 fprintf( stderr, "Warning: garbage string in %s at offset 0x%X\n", i->c_str(), curOffset );
                 break;
@@ -1228,7 +1248,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               break;
             }
 
-            if ( curString.empty() || iswblank( curString[ 0 ] ) )
+            if ( curString.empty() || isDslWs( curString[ 0 ] ) )
               break; // No more headwords
 
             printf( "Alt headword: %ls\n", curString.c_str() );
@@ -1260,7 +1280,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
               break;
 
-            if ( curString.size() && !iswblank( curString[ 0 ] ) )
+            if ( curString.size() && !isDslWs( curString[ 0 ] ) )
               break;
           }
 
