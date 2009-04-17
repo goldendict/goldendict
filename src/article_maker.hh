@@ -9,6 +9,7 @@
 #include <list>
 #include "dictionary.hh"
 #include "instances.hh"
+#include "wordfinder.hh"
 
 /// This class generates the article's body for the given lookup request
 class ArticleMaker: public QObject
@@ -66,6 +67,7 @@ class ArticleRequest: public Dictionary::DataRequest
   bool foundAnyDefinitions;
   bool closePrevSpan; // Indicates whether the last opened article span is to
                       // be closed after the article ends.
+  sptr< WordFinder > stemmedWordFinder; // Used when there're no results
 
 public:
 
@@ -80,6 +82,7 @@ private slots:
 
   void altSearchFinished();
   void bodyFinished();
+  void stemmedSearchFinished();
 };
 
 

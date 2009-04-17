@@ -843,7 +843,7 @@ void MainWindow::prefixMatchFinished()
 
 void MainWindow::updateMatchResults( bool finished )
 {
-  WordFinder::SearchResults const & results = wordFinder.getPrefixMatchResults();
+  WordFinder::SearchResults const & results = wordFinder.getResults();
 
   ui.wordList->setUpdatesEnabled( false );
   

@@ -75,6 +75,12 @@ public:
                                                              unsigned long )
     throw( std::exception );
 
+  virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
+                                                              unsigned minLength,
+                                                              unsigned maxSuffixVariation,
+                                                              unsigned long maxResults )
+    throw( std::exception );
+
 protected:
 
   /// Opens the index. The file reference is saved to be used for

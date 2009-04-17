@@ -373,7 +373,7 @@ void ScanPopup::prefixMatchFinished()
     else
       ui.queryError->hide();
 
-    ui.wordListButton->setVisible( wordFinder.getPrefixMatchResults().size() );
+    ui.wordListButton->setVisible( wordFinder.getResults().size() );
   }
 }
 
@@ -382,7 +382,7 @@ void ScanPopup::on_wordListButton_clicked()
   if ( !isVisible() )
     return;
 
-  WordFinder::SearchResults const & results = wordFinder.getPrefixMatchResults();
+  WordFinder::SearchResults const & results = wordFinder.getResults();
 
   if ( results.empty() )
     return;

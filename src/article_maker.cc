@@ -353,9 +353,19 @@ void ArticleRequest::bodyFinished()
       {
         // No definitions were ever found, say so to the user.
         footer += ArticleMaker::makeNotFoundBody( word, group );
-      }
 
-      footer += "</body></html>";
+        // When there were no definitions, we run stemmed search.
+        stemmedWordFinder = new WordFinder( this );
+
+        connect( stemmedWordFinder.get(), SIGNAL( finished() ),
+                 this, SLOT( stemmedSearchFinished() ), Qt::QueuedConnection );
+
+        stemmedWordFinder->stemmedMatch( word, activeDicts );
+      }
+      else
+      {
+        footer += "</body></html>";
+      }
 
       Mutex::Lock _( dataMutex );
   
@@ -366,10 +376,56 @@ void ArticleRequest::bodyFinished()
       memcpy( &data.front() + offset, footer.data(), footer.size() );
     }
 
-    finish();
+    if ( stemmedWordFinder.get() )
+      update();
+    else
+      finish();
   }
   else
   if ( wasUpdated )
     update();
+}
+
+void ArticleRequest::stemmedSearchFinished()
+{
+  // Got stemmed matching results
+
+  WordFinder::SearchResults sr = stemmedWordFinder->getResults();
+
+  string footer;
+
+  if ( sr.size() )
+  {
+    footer += "<div class=\"gdstemmedsuggestion\"><span class=\"gdstemmedsuggestion_head\">" +
+      Html::escape( tr( "Close words: " ).toUtf8().data() ) +
+      "</span><span class=\"gdstemmedsuggestion_body\">";
+
+    for( unsigned x = 0; x < sr.size(); ++x )
+    {
+      string escapedResult = Html::escape( sr[ x ].first.toUtf8().data() );
+      footer += "<a href=\"bword://" + escapedResult + "\">" + escapedResult +"</a>";
+
+      if ( x != sr.size() - 1 )
+      {
+        footer += ", ";
+      }
+    }
+
+    footer += "</span></div>";
+  }
+
+  footer += "</body></html>";
+
+  {
+    Mutex::Lock _( dataMutex );
+  
+    size_t offset = data.size();
+  
+    data.resize( data.size() + footer.size() );
+  
+    memcpy( &data.front() + offset, footer.data(), footer.size() );
+  }
+
+  finish();
 }
 

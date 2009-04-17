@@ -115,6 +115,9 @@ class BtreeWordSearchRequest: public Dictionary::WordSearchRequest
   BtreeDictionary & dict;
   wstring str;
   unsigned long maxResults;
+  unsigned minLength;
+  int maxSuffixVariation;
+  bool allowMiddleMatches;
   QAtomicInt isCancelled;
   QSemaphore hasExited;
 
@@ -122,8 +125,15 @@ public:
 
   BtreeWordSearchRequest( BtreeDictionary & dict_,
                           wstring const & str_,
+                          unsigned minLength_,
+                          int maxSuffixVariation_,
+                          bool allowMiddleMatches_,
                           unsigned long maxResults_ ):
-    dict( dict_ ), str( str_ ), maxResults( maxResults_ )
+    dict( dict_ ), str( str_ ),
+    maxResults( maxResults_ ),
+    minLength( minLength_ ),
+    maxSuffixVariation( maxSuffixVariation_ ),
+    allowMiddleMatches( allowMiddleMatches_ )
   {
     QThreadPool::globalInstance()->start(
       new BtreeWordSearchRunnable( *this, hasExited ) );
@@ -158,80 +168,112 @@ void BtreeWordSearchRequest::run()
   
   wstring folded = Folding::apply( str );
 
-  bool exactMatch;
+  int initialFoldedSize = folded.size();
 
-  vector< char > leaf;
-  uint32_t nextLeaf;
-  char const * leafEnd;
+  int charsLeftToChop = 0;
 
-  char const * chainOffset = dict.findChainOffsetExactOrPrefix( folded, exactMatch,
-                                                                leaf, nextLeaf,
-                                                                leafEnd );
+  if ( maxSuffixVariation >= 0 )
+  {
+    charsLeftToChop = initialFoldedSize - (int)minLength;
 
-  if ( chainOffset )
+    if ( charsLeftToChop < 0 )
+      charsLeftToChop = 0;
+    else
+    if ( charsLeftToChop > maxSuffixVariation )
+      charsLeftToChop = maxSuffixVariation;
+  }
+
   for( ; ; )
   {
-    if ( isCancelled )
-      break;
-    
-    //printf( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
-
-    vector< WordArticleLink > chain = dict.readChain( chainOffset );
-
-    wstring chainHead = Utf8::decode( chain[ 0 ].word );
-
-    wstring resultFolded = Folding::apply( chainHead );
-
-    if ( resultFolded.size() >= folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
+    bool exactMatch;
+  
+    vector< char > leaf;
+    uint32_t nextLeaf;
+    char const * leafEnd;
+  
+    char const * chainOffset = dict.findChainOffsetExactOrPrefix( folded, exactMatch,
+                                                                  leaf, nextLeaf,
+                                                                  leafEnd );
+  
+    if ( chainOffset )
+    for( ; ; )
     {
-      // Exact or prefix match
-      
-      Mutex::Lock _( dataMutex );
-
-      for( unsigned x = 0; x < chain.size(); ++x )
-        matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
-
-      if ( matches.size() >= maxResults )
-      {
-        // For now we actually allow more than maxResults if the last
-        // chain yield more than one result. That's ok and maybe even more
-        // desirable.
+      if ( isCancelled )
         break;
-      }
-    }
-    else
-      // Neither exact nor a prefix match, end this
-      break;
-
-    // Fetch new leaf if we're out of chains here
-
-    if ( chainOffset >= leafEnd )
-    {
-      // We're past the current leaf, fetch the next one
-
-      //printf( "advancing\n" );
-
-      if ( nextLeaf )
+      
+      //printf( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
+  
+      vector< WordArticleLink > chain = dict.readChain( chainOffset );
+  
+      wstring chainHead = Utf8::decode( chain[ 0 ].word );
+  
+      wstring resultFolded = Folding::apply( chainHead );
+  
+      if ( resultFolded.size() >= folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
       {
-        Mutex::Lock _( *dict.idxFileMutex );
-        
-        dict.readNode( nextLeaf, leaf );
-        leafEnd = &leaf.front() + leaf.size();
+        // Exact or prefix match
 
-        nextLeaf = dict.idxFile->read< uint32_t >();
-        chainOffset = &leaf.front() + sizeof( uint32_t );
-
-        uint32_t leafEntries = *(uint32_t *)&leaf.front();
-
-        if ( leafEntries == 0xffffFFFF )
+        Mutex::Lock _( dataMutex );
+  
+        for( unsigned x = 0; x < chain.size(); ++x )
         {
-          //printf( "bah!\n" );
-          exit( 1 );
+          // Skip middle matches, if requested. If suffix variation is specified,
+          // make sure the string isn't larger than requested.
+          if ( ( allowMiddleMatches || Folding::apply( Utf8::decode( chain[ x ].prefix ) ).empty() ) &&
+               ( maxSuffixVariation < 0 || (int)resultFolded.size() - initialFoldedSize <= maxSuffixVariation ) )
+              matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+        }
+  
+        if ( matches.size() >= maxResults )
+        {
+          // For now we actually allow more than maxResults if the last
+          // chain yield more than one result. That's ok and maybe even more
+          // desirable.
+          break;
         }
       }
       else
-        break; // That was the last leaf
+        // Neither exact nor a prefix match, end this
+        break;
+  
+      // Fetch new leaf if we're out of chains here
+  
+      if ( chainOffset >= leafEnd )
+      {
+        // We're past the current leaf, fetch the next one
+  
+        //printf( "advancing\n" );
+  
+        if ( nextLeaf )
+        {
+          Mutex::Lock _( *dict.idxFileMutex );
+          
+          dict.readNode( nextLeaf, leaf );
+          leafEnd = &leaf.front() + leaf.size();
+  
+          nextLeaf = dict.idxFile->read< uint32_t >();
+          chainOffset = &leaf.front() + sizeof( uint32_t );
+  
+          uint32_t leafEntries = *(uint32_t *)&leaf.front();
+  
+          if ( leafEntries == 0xffffFFFF )
+          {
+            //printf( "bah!\n" );
+            exit( 1 );
+          }
+        }
+        else
+          break; // That was the last leaf
+      }
     }
+
+    if ( charsLeftToChop && !isCancelled )
+    {
+      --charsLeftToChop;
+      folded.resize( folded.size() - 1 );
+    }
+    else
+      break;
   }
 
   finish();
@@ -241,7 +283,16 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
   throw( std::exception )
 {
-  return new BtreeWordSearchRequest( *this, str, maxResults );
+  return new BtreeWordSearchRequest( *this, str, 0, -1, true, maxResults );
+}
+
+sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
+  wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
+  unsigned long maxResults )
+  throw( std::exception )
+{
+  return new BtreeWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
+                                     false, maxResults );
 }
 
 void BtreeDictionary::readNode( uint32_t offset, vector< char > & out )

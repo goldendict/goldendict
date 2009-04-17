@@ -136,6 +136,10 @@ public:
   /// Returns the match with the given zero-based index, which should be less
   /// than matchesCount().
   WordMatch operator [] ( size_t index ) throw( exIndexOutOfRange );
+
+  /// Returns all the matches found. Since no further locking can or would be
+  /// done, this can only be called after the request has finished.
+  vector< WordMatch > & getAllMatches() throw( exRequestUnfinished );
   
 protected:
   
@@ -260,6 +264,19 @@ public:
   /// dictionaries, the network ones particularly, may of course be slow.
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) throw( std::exception )=0;
+
+  /// Looks up a given word in the dictionary, aiming to find different forms
+  /// of the given word by allowing suffix variations. This means allowing words
+  /// which can be as short as the input word size minus maxSuffixVariation, or as
+  /// long as the input word size plus maxSuffixVariation, which share at least
+  /// the input word size minus maxSuffixVariation initial symbols.
+  /// Since the goal is to find forms of the words, no matches where a word
+  /// in the middle of a phrase got matched should be returned.
+  /// The default implementation does nothing, returning an empty result.
+  virtual sptr< WordSearchRequest > stemmedMatch( wstring const &,
+                                                  unsigned minLength,
+                                                  unsigned maxSuffixVariation,
+                                                  unsigned long maxResults ) throw( std::exception );
 
   /// Finds known headwords for the given word, that is, the words for which
   /// the given word is a synonym. If a dictionary can't perform this operation,

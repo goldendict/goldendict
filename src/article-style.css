@@ -246,6 +246,26 @@ div.sdct_x
   margin-top: 1em;
 }
 
+/************* Stemmed suggestions *****************/
+
+.gdstemmedsuggestion
+{
+  /* Add some horizontal and vertical space */
+  margin-top: 1em;
+  margin-left: 1px;
+}
+
+
+.gdstemmedsuggestion_head
+{
+  margin-left: 11px;
+  font-style: italic;
+}
+
+.gdstemmedsuggestion_body
+{
+}
+
 /************* Dictd articles *****************/
 .dictd_article
 {

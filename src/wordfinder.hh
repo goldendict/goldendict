@@ -37,6 +37,12 @@ private:
   // Saved search params
   bool searchQueued;
   QString inputWord;
+  enum SearchType
+  {
+    PrefixMatch,
+    StemmedMatch
+  } searchType;
+
   std::vector< sptr< Dictionary::Class > > const * inputDicts;
 
   struct OneResult
@@ -67,11 +73,17 @@ public:
   /// and the new one replaces it.
   void prefixMatch( QString const &,
                     std::vector< sptr< Dictionary::Class > > const & );
+
+
+  /// Do a stemmed-match search in the given list of dictionaries. All comments
+  /// from prefixMatch() generally apply as well.
+  void stemmedMatch( QString const &,
+                     std::vector< sptr< Dictionary::Class > > const & );
   
-  /// Returns the vector containing search results from the last prefixMatch()
-  /// operation. If it didn't finish yet, the result is not final and may
-  /// be changing over time.
-  SearchResults const & getPrefixMatchResults() const
+  /// Returns the vector containing search results from the last operation.
+  /// If it didn't finish yet, the result is not final and may be changing
+  /// over time.
+  SearchResults const & getResults() const
   { return searchResults; }
 
   /// Returns a human-readable error string for the last finished request. Empty
@@ -93,7 +105,7 @@ signals:
   /// searching.
   void updated();
 
-  /// Idicates that the search has finished.
+  /// Indicates that the search has finished.
   void finished();
 
 private slots:
@@ -124,6 +136,29 @@ private:
       if ( first.rank > second.rank )
         return false;
   
+      // Do any sort of collation here in the future. For now we just put the
+      // strings sorted lexicographically.
+      return first.word < second.word;
+    }
+  };
+
+  /// Compares results based on their ranks and lengths
+  struct SortByRankAndLength
+  {
+    bool operator () ( OneResult const & first, OneResult const & second )
+    {
+      if ( first.rank < second.rank )
+        return true;
+
+      if ( first.rank > second.rank )
+        return false;
+
+      if ( first.word.size() < second.word.size() )
+        return true;
+
+      if ( first.word.size() > second.word.size() )
+        return false;
+
       // Do any sort of collation here in the future. For now we just put the
       // strings sorted lexicographically.
       return first.word < second.word;

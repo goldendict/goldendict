@@ -69,6 +69,14 @@ WordMatch WordSearchRequest::operator [] ( size_t index ) throw( exIndexOutOfRan
   return matches[ index ];
 }
 
+vector< WordMatch > & WordSearchRequest::getAllMatches() throw( exRequestUnfinished )
+{
+  if ( !isFinished() )
+    throw exRequestUnfinished();
+
+  return matches;
+}
+
 ////////////// DataRequest
 
 long DataRequest::dataSize()
@@ -100,6 +108,15 @@ vector< char > & DataRequest::getFullData() throw( exRequestUnfinished )
 Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
   id( id_ ), dictionaryFiles( dictionaryFiles_ )
 {
+}
+
+sptr< WordSearchRequest > Class::stemmedMatch( wstring const & /*str*/,
+                                               unsigned /*minLength*/,
+                                               unsigned /*maxSuffixVariation*/,
+                                               unsigned long /*maxResults*/ )
+  throw( std::exception )
+{
+  return new WordSearchRequestInstant();
 }
 
 sptr< WordSearchRequest > Class::findHeadwordsForSynonym( wstring const & )
