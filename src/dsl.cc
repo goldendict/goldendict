@@ -288,6 +288,7 @@ void DslDictionary::loadArticle( uint32_t address,
         DslIconv::toWstring(
           DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
           articleBody, articleSize );
+      free( articleBody );
     }
     catch( ... )
     {
