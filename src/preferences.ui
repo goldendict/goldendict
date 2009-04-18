@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>417</width>
-    <height>292</height>
+    <height>325</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,8 +26,8 @@
       <attribute name="title">
        <string>&amp;Interface</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0" colspan="2">
         <spacer name="verticalSpacer_8">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -40,7 +40,7 @@
          </property>
         </spacer>
        </item>
-       <item>
+       <item row="1" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
           <string>Tabbed browsing</string>
@@ -73,7 +73,7 @@ be the last ones.</string>
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="2" column="0">
         <widget class="QGroupBox" name="enableTrayIcon">
          <property name="toolTip">
           <string>When enabled, an icon appears in the sytem tray area which can be used
@@ -120,7 +120,26 @@ the application.</string>
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="2" column="1">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Startup</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QCheckBox" name="cbAutostart">
+            <property name="toolTip">
+             <string>Automatically starts GoldenDict after operation system bootup</string>
+            </property>
+            <property name="text">
+             <string>Start with system</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0">
         <spacer name="verticalSpacer_9">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -136,7 +155,7 @@ the application.</string>
          </property>
         </spacer>
        </item>
-       <item>
+       <item row="4" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="QLabel" name="label_6">
@@ -163,7 +182,7 @@ the application.</string>
          </item>
         </layout>
        </item>
-       <item>
+       <item row="5" column="0" colspan="2">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -655,6 +674,41 @@ for all program's network requests.</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>newTabsOpenInBackground</tabstop>
+  <tabstop>newTabsOpenAfterCurrentOne</tabstop>
+  <tabstop>enableTrayIcon</tabstop>
+  <tabstop>startToTray</tabstop>
+  <tabstop>closeToTray</tabstop>
+  <tabstop>cbAutostart</tabstop>
+  <tabstop>interfaceLanguage</tabstop>
+  <tabstop>startWithScanPopupOn</tabstop>
+  <tabstop>enableScanPopupModifiers</tabstop>
+  <tabstop>leftCtrl</tabstop>
+  <tabstop>rightShift</tabstop>
+  <tabstop>altKey</tabstop>
+  <tabstop>ctrlKey</tabstop>
+  <tabstop>leftAlt</tabstop>
+  <tabstop>shiftKey</tabstop>
+  <tabstop>rightAlt</tabstop>
+  <tabstop>rightCtrl</tabstop>
+  <tabstop>leftShift</tabstop>
+  <tabstop>winKey</tabstop>
+  <tabstop>scanPopupAltMode</tabstop>
+  <tabstop>scanPopupAltModeSecs</tabstop>
+  <tabstop>pronounceOnLoadMain</tabstop>
+  <tabstop>pronounceOnLoadPopup</tabstop>
+  <tabstop>audioPlaybackProgram</tabstop>
+  <tabstop>useProxyServer</tabstop>
+  <tabstop>proxyType</tabstop>
+  <tabstop>proxyHost</tabstop>
+  <tabstop>proxyPort</tabstop>
+  <tabstop>proxyUser</tabstop>
+  <tabstop>proxyPassword</tabstop>
+  <tabstop>enableScanPopup</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

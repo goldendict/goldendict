@@ -52,6 +52,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.enableTrayIcon->setChecked( p.enableTrayIcon );
   ui.startToTray->setChecked( p.startToTray );
   ui.closeToTray->setChecked( p.closeToTray );
+  ui.cbAutostart->setChecked( p.autoStart );
   ui.enableScanPopup->setChecked( p.enableScanPopup );
   ui.startWithScanPopupOn->setChecked( p.startWithScanPopupOn );
   ui.enableScanPopupModifiers->setChecked( p.enableScanPopupModifiers );
@@ -126,6 +127,7 @@ Config::Preferences Preferences::getPreferences()
   p.enableTrayIcon = ui.enableTrayIcon->isChecked();
   p.startToTray = ui.startToTray->isChecked();
   p.closeToTray = ui.closeToTray->isChecked();
+  p.autoStart = ui.cbAutostart->isChecked();
   p.enableScanPopup = ui.enableScanPopup->isChecked();
   p.startWithScanPopupOn = ui.startWithScanPopupOn->isChecked();
   p.enableScanPopupModifiers = ui.enableScanPopupModifiers->isChecked();
