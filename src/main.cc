@@ -57,8 +57,6 @@ int main( int argc, char ** argv )
 
   if ( localeName.isEmpty() )
     localeName = QLocale::system().name();
-  {
-  }
 
   qtTranslator.load( "qt_" + localeName,
                      QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
