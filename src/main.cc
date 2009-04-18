@@ -5,6 +5,7 @@
 #include <QIcon>
 #include "mainwindow.hh"
 #include "config.hh"
+#include "processwrapper.hh"
 
 //#define __DO_DEBUG
 
@@ -17,7 +18,7 @@ int main( int argc, char ** argv )
   #ifdef __DO_DEBUG
   {
     rlimit limit;
-  
+
     memset( &limit, 0, sizeof( limit ) );
     limit.rlim_cur = RLIM_INFINITY;
     limit.rlim_max = RLIM_INFINITY;
@@ -33,6 +34,20 @@ int main( int argc, char ** argv )
   app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
 
   Config::Class cfg( Config::load() );
+
+
+  // Prevent execution of the 2nd copy
+
+  // check if 2nd copy was started
+  QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
+  unsigned int pid = ProcessWrapper::findProcess(
+          app_fname.toAscii().data(),
+          QCoreApplication::applicationPid());
+  if (pid)
+  {
+    // to do: switch to pid ?
+    return 1;
+  }
 
   // Load translations
 
@@ -58,13 +73,13 @@ int main( int argc, char ** argv )
     QFile builtInCssFile( ":/qt-style.css" );
     builtInCssFile.open( QFile::ReadOnly );
     QByteArray css = builtInCssFile.readAll();
-    
+
     // Try loading a style sheet if there's one
     QFile cssFile( Config::getUserQtCssFileName() );
-  
+
     if ( cssFile.open( QFile::ReadOnly ) )
       css += cssFile.readAll();
-    
+
     app.setStyleSheet( css );
   }
 
