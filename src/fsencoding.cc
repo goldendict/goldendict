@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "fsencoding.hh"
+#include "wstring_qt.hh"
 #include <QString>
 #include <QDir>
 #include <vector>
@@ -10,7 +11,7 @@ namespace FsEncoding {
 
 string encode( wstring const & str )
 {
-  return string( QString::fromStdWString( str ).toLocal8Bit().data() );
+  return string( gd::toQString( str ).toLocal8Bit().data() );
 }
 
 string encode( string const & str )
@@ -20,7 +21,7 @@ string encode( string const & str )
 
 wstring decode( string const & str )
 {
-  return QString::fromLocal8Bit( str.c_str() ).toStdWString();
+  return gd::toWString( QString::fromLocal8Bit( str.c_str() ) );
 }
 
 char separator()

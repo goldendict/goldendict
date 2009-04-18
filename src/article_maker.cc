@@ -5,12 +5,13 @@
 #include "config.hh"
 #include "htmlescape.hh"
 #include "utf8.hh"
+#include "wstring_qt.hh"
 #include <limits.h>
 #include <QFile>
 
 using std::vector;
 using std::string;
-using std::wstring;
+using gd::wstring;
 using std::set;
 using std::list;
 
@@ -44,7 +45,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   result += css.data();
   result += "</style>\n";
 
-  result += "<title>" + Html::escape( Utf8::encode( word.toStdWString() ) ) + "</title>";
+  result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
 
   // This doesn't seem to be much of influence right now, but we'll keep
   // it anyway.
@@ -188,7 +189,7 @@ ArticleRequest::ArticleRequest(
 
   for( unsigned x = 0; x < activeDicts.size(); ++x )
   {
-    sptr< Dictionary::WordSearchRequest > s = activeDicts[ x ]->findHeadwordsForSynonym( word.toStdWString() );
+    sptr< Dictionary::WordSearchRequest > s = activeDicts[ x ]->findHeadwordsForSynonym( gd::toWString( word ) );
 
     connect( s.get(), SIGNAL( finished() ),
              this, SLOT( altSearchFinished() ) );
@@ -235,7 +236,7 @@ void ArticleRequest::altSearchFinished()
       printf( "Alt: %ls\n", altsVector[ x ].c_str() );
     }
 
-    wstring wordStd = word.toStdWString();
+    wstring wordStd = gd::toWString( word );
 
     for( unsigned x = 0; x < activeDicts.size(); ++x )
     {

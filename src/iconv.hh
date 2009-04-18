@@ -5,7 +5,7 @@
 #define __ICONV_HH_INCLUDED__
 
 #include <iconv.h>
-#include <string>
+#include "wstring.hh"
 #include "ex.hh"
 
 /// A wrapper for the iconv() character set conversion functions
@@ -23,7 +23,7 @@ public:
 
   // Some predefined character sets' names
 
-  static char const * const Wchar_t;
+  static char const * const GdWchar;
   static char const * const Utf16Le;
   static char const * const Utf8;
 
@@ -46,7 +46,7 @@ public:
                                                                   exOther );
 
   // Converts a given block of data from the given encoding to a wide string.
-  static std::wstring toWstring( char const * fromEncoding, void const * fromData,
+  static gd::wstring toWstring( char const * fromEncoding, void const * fromData,
                                  size_t dataSize )
     throw( exCantInit, exIncorrectSeq, exPrematureEnd, exOther );
 

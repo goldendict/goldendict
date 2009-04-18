@@ -6,6 +6,7 @@
 #include "htmlescape.hh"
 #include "iconv.hh"
 #include "folding.hh"
+#include "wstring_qt.hh"
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSemaphore>
@@ -18,6 +19,8 @@
 namespace HunspellMorpho {
 
 using namespace Dictionary;
+
+using gd::wchar;
 
 namespace {
 
@@ -72,7 +75,7 @@ wstring decodeFromHunspell( Hunspell &, char const * );
 /// Returns true if the string contains whitespace, false otherwise
 bool containsWhitespace( wstring const & str )
 {
-  wchar_t const * next = str.c_str();
+  wchar const * next = str.c_str();
 
   for( ; *next; ++next )
     if ( Folding::isWhitespace( *next ) )
@@ -356,13 +359,13 @@ void HunspellHeadwordsRequest::run()
 
       for( int x = 0; x < suggestionsCount; ++x )
       {
-        QString suggestion = QString::fromStdWString( decodeFromHunspell( hunspell, suggestions[ x ] ) );
+        QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ] ) );
 
         printf( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
 
         if ( cutStem.indexIn( suggestion ) != -1 )
         {
-          wstring alt = cutStem.cap( 1 ).toStdWString();
+          wstring alt = gd::toWString( cutStem.cap( 1 ) );
 
           if ( Folding::applySimpleCaseOnly( alt ) != lowercasedWord ) // No point in providing same word
           {
@@ -515,10 +518,10 @@ sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
 
 string encodeToHunspell( Hunspell & hunspell, wstring const & str )
 {
-  Iconv conv( hunspell.get_dic_encoding(), Iconv::Wchar_t );
+  Iconv conv( hunspell.get_dic_encoding(), Iconv::GdWchar );
 
   void const * in = str.data();
-  size_t inLeft = str.size() * sizeof( wchar_t );
+  size_t inLeft = str.size() * sizeof( wchar );
 
   vector< char > result( str.size() * 4 + 1 ); // +1 isn't actually needed,
                                                // but then iconv complains on empty
@@ -535,20 +538,20 @@ string encodeToHunspell( Hunspell & hunspell, wstring const & str )
 
 wstring decodeFromHunspell( Hunspell & hunspell, char const * str )
 {
-  Iconv conv( Iconv::Wchar_t, hunspell.get_dic_encoding() );
+  Iconv conv( Iconv::GdWchar, hunspell.get_dic_encoding() );
 
   void const * in = str;
   size_t inLeft = strlen( str );
 
-  vector< wchar_t > result( inLeft + 1 ); // +1 isn't needed, but see above
+  vector< wchar > result( inLeft + 1 ); // +1 isn't needed, but see above
 
   void * out = &result.front();
-  size_t outLeft = result.size() * sizeof( wchar_t );
+  size_t outLeft = result.size() * sizeof( wchar );
 
   if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
     throw Iconv::Ex();
 
-  return wstring( &result.front(), result.size() - outLeft/sizeof( wchar_t ) );
+  return wstring( &result.front(), result.size() - outLeft/sizeof( wchar ) );
 }
 
 }

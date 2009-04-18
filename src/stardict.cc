@@ -32,7 +32,7 @@ using std::multimap;
 using std::pair;
 using std::set;
 using std::string;
-using std::wstring;
+using gd::wstring;
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;

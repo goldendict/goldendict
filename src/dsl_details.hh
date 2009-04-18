@@ -16,7 +16,8 @@ namespace Dsl {
 namespace Details {
 
 using std::string;
-using std::wstring;
+using gd::wstring;
+using gd::wchar;
 using std::list;
 using std::vector;
 
@@ -67,17 +68,17 @@ struct ArticleDom
 
 private:
 
-  wchar_t const * stringPos;
+  wchar const * stringPos;
 
   class eot {};
 
-  wchar_t ch;
+  wchar ch;
   bool escaped;
 
   void nextChar() throw( eot );
 };
 
-/// A adapted version of Iconv which takes Dsl encoding and decodes to wchar_t.
+/// A adapted version of Iconv which takes Dsl encoding and decodes to wchar.
 class DslIconv: public Iconv
 {
 public:
@@ -99,7 +100,7 @@ class DslScanner
   char readBuffer[ 65536 ];
   char * readBufferPtr;
   size_t readBufferLeft;
-  vector< wchar_t > wcharBuffer;
+  vector< wchar > wcharBuffer;
 
 public:
 

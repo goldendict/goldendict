@@ -23,7 +23,7 @@ using std::multimap;
 using std::pair;
 using std::set;
 using std::string;
-using std::wstring;
+using gd::wstring;
 using std::vector;
 using std::list;
 

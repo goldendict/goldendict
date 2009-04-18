@@ -41,7 +41,8 @@ using std::multimap;
 using std::pair;
 using std::set;
 using std::string;
-using std::wstring;
+using gd::wstring;
+using gd::wchar;
 using std::vector;
 using std::list;
 
@@ -231,7 +232,7 @@ DslDictionary::~DslDictionary()
 /// so nbsp is not a whitespace character for Dsl compiler.
 /// For now we have only space and tab, since those are most likely the only
 /// ones recognized as spaces by that compiler.
-bool isDslWs( wchar_t ch )
+bool isDslWs( wchar ch )
 {
   switch( ch )
   {
@@ -295,7 +296,7 @@ void DslDictionary::loadArticle( uint32_t address,
     }
   }
 
-  size_t pos = articleData.find_first_of( L"\n\r" );
+  size_t pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ) );
 
   if ( pos == wstring::npos )
     pos = articleData.size();
@@ -337,7 +338,7 @@ void DslDictionary::loadArticle( uint32_t address,
     if ( pos != articleData.size() && !isDslWs( articleData[ pos ] ) )
     {
       // Skip any alt headwords
-      pos = articleData.find_first_of( L"\n\r", pos );
+      pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), pos );
 
       if ( pos == wstring::npos )
         pos = articleData.size();
@@ -349,7 +350,7 @@ void DslDictionary::loadArticle( uint32_t address,
   if ( pos != articleData.size() )
     articleText = wstring( articleData, pos );
   else
-    articleText = L"";
+    articleText.clear();
 }
 
 string DslDictionary::dslToHtml( wstring const & str )
@@ -386,39 +387,39 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
   string result;
 
-  if ( node.tagName == L"b" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"b" ) )
     result += "<b class=\"dsl_b\">" + processNodeChildren( node ) + "</b>";
   else
-  if ( node.tagName == L"i" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"i" ) )
     result += "<i class=\"dsl_i\">" + processNodeChildren( node ) + "</i>";
   else
-  if ( node.tagName == L"u" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"u" ) )
     result += "<span class=\"dsl_u\">" + processNodeChildren( node ) + "</span>";
   else
-  if ( node.tagName == L"c" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"c" ) )
   {
     result += "<font color=\"" + ( node.tagAttrs.size() ?
       Html::escape( Utf8::encode( node.tagAttrs ) ) : string( "c_default_color" ) )
       + "\">" + processNodeChildren( node ) + "</font>";
   }
   else
-  if ( node.tagName == L"*" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"*" ) )
     result += "<span class=\"dsl_opt\">" + processNodeChildren( node ) + "</span>";
   else
   if ( node.tagName.size() == 2 && node.tagName[ 0 ] == L'm' &&
        iswdigit( node.tagName[ 1 ] ) )
     result += "<div class=\"dsl_" + Utf8::encode( node.tagName ) + "\">" + processNodeChildren( node ) + "</div>";
   else
-  if ( node.tagName == L"trn" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"trn" ) )
     result += "<span class=\"dsl_trn\">" + processNodeChildren( node ) + "</span>";
   else
-  if ( node.tagName == L"ex" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"ex" ) )
     result += "<span class=\"dsl_ex\">" + processNodeChildren( node ) + "</span>";
   else
-  if ( node.tagName == L"com" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"com" ) )
     result += "<span class=\"dsl_com\">" + processNodeChildren( node ) + "</span>";
   else
-  if ( node.tagName == L"s" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) )
   {
     string filename = Utf8::encode( node.renderAsText() );
 
@@ -511,13 +512,13 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     }
   }
   else
-  if ( node.tagName == L"url" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
     result += "<a class=\"dsl_url\" href=\"" + Html::escape( Utf8::encode( node.renderAsText() ) ) +"\">" + processNodeChildren( node ) + "</a>";
   else
-  if ( node.tagName == L"!trs" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"!trs" ) )
     result += "<span class=\"dsl_trs\">" + processNodeChildren( node ) + "</span>";
   else
-  if ( node.tagName == L"p" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"p") )
   {
     result += "<span class=\"dsl_p\"";
 
@@ -533,32 +534,32 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += ">" + processNodeChildren( node ) + "</span>";
   }
   else
-  if ( node.tagName == L"'" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"'" ) )
   {
     result += "<span class=\"dsl_stress\">" + processNodeChildren( node ) + Utf8::encode( wstring( 1, 0x301 ) ) + "</span>";
   }
   else
-  if ( node.tagName == L"lang" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"lang" ) )
   {
     result += "<span class=\"dsl_lang\">" + processNodeChildren( node ) + "</span>";
   }
   else
-  if ( node.tagName == L"ref" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"ref" ) )
   {
     result += "<a class=\"dsl_ref\" href=\"bword://" + Html::escape( Utf8::encode( node.renderAsText() ) ) +"\">" + processNodeChildren( node ) + "</a>";
   }
   else
-  if ( node.tagName == L"sub" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"sub" ) )
   {
     result += "<sub>" + processNodeChildren( node ) + "</sub>";
   }
   else
-  if ( node.tagName == L"sup" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"sup" ) )
   {
     result += "<sup>" + processNodeChildren( node ) + "</sup>";
   }
   else
-  if ( node.tagName == L"t" )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"t" ) )
   {
     result += "<span class=\"dsl_t\">" + processNodeChildren( node ) + "</span>";
   }
@@ -1095,7 +1096,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         DslScanner scanner( *i );
 
-        if ( scanner.getDictionaryName() == L"Abbrev" )
+        if ( scanner.getDictionaryName() == GD_NATIVE_TO_WS( L"Abbrev" ) )
           continue; // For now just skip abbreviations
 
         // Building the index
@@ -1160,7 +1161,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 break;
               }
 
-              curString.erase( 0, curString.find_first_not_of( L" \t" ) );
+              curString.erase( 0, curString.find_first_not_of( GD_NATIVE_TO_WS( L" \t" ) ) );
 
               abrv[ key ] = Utf8::encode( curString );
             }

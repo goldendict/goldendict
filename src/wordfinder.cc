@@ -3,12 +3,14 @@
 
 #include "wordfinder.hh"
 #include "folding.hh"
+#include "wstring_qt.hh"
 #include <QThreadPool>
 #include <map>
 
 using std::vector;
 using std::list;
-using std::wstring;
+using gd::wstring;
+using gd::wchar;
 using std::map;
 using std::pair;
 
@@ -85,7 +87,7 @@ void WordFinder::startSearch()
   searchQueued = false;
   searchInProgress = true;
 
-  wstring word = inputWord.toStdWString();
+  wstring word = gd::toWString( inputWord );
 
   for( size_t x = 0; x < inputDicts->size(); ++x )
   {
@@ -290,7 +292,7 @@ void WordFinder::updateResults()
         Multiplier = 256 // Categories should be multiplied by Multiplier
       };
   
-      wstring target = Folding::applySimpleCaseOnly( inputWord.toStdWString() );
+      wstring target = Folding::applySimpleCaseOnly( gd::toWString( inputWord ) );
       wstring targetNoFullCase = Folding::applyFullCaseOnly( target );
       wstring targetNoDia = Folding::applyDiacriticsOnly( targetNoFullCase );
       wstring targetNoPunct = Folding::applyPunctOnly( targetNoDia );
@@ -352,7 +354,7 @@ void WordFinder::updateResults()
       // in their beginnings, and second, the length of the strings. Here we assign
       // only the first one, storing it in rank. Then we sort the results using
       // SortByRankAndLength.
-      wstring target = Folding::apply( inputWord.toStdWString() );
+      wstring target = Folding::apply( gd::toWString( inputWord ) );
 
       for( ResultsIndex::const_iterator i = resultsIndex.begin(), j = resultsIndex.end();
            i != j; ++i )
@@ -361,7 +363,7 @@ void WordFinder::updateResults()
 
         int charsInCommon = 0;
 
-        for( wchar_t const * t = target.c_str(), * r = resultFolded.c_str();
+        for( wchar const * t = target.c_str(), * r = resultFolded.c_str();
              *t && *t == *r; ++t, ++r, ++charsInCommon ) ;
 
         i->second->rank = -charsInCommon; // Negated so the lesser-than
@@ -384,7 +386,7 @@ void WordFinder::updateResults()
     //printf( "%d: %ls\n", i->second, i->first.c_str() );
 
     if ( searchResults.size() < maxSearchResults )
-      searchResults.push_back( std::pair< QString, bool >( QString::fromStdWString( i->word ), i->wasSuggested ) );
+      searchResults.push_back( std::pair< QString, bool >( gd::toQString( i->word ), i->wasSuggested ) );
     else
       break;
   }

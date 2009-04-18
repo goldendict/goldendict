@@ -17,7 +17,7 @@
 namespace Lsa {
 
 using std::string;
-using std::wstring;
+using gd::wstring;
 using std::map;
 using std::multimap;
 using std::set;

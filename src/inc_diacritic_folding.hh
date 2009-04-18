@@ -2,7 +2,7 @@
 
 enum { foldDiacriticMaxIn = 3 };
 
-wchar_t foldDiacritic( wchar_t const * in, size_t size, size_t & consumed )
+wchar foldDiacritic( wchar const * in, size_t size, size_t & consumed )
 {
   if ( size > 0 )
   {

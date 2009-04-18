@@ -10,6 +10,7 @@
 #include "filetype.hh"
 #include "htmlescape.hh"
 #include "audiolink.hh"
+#include "wstring_qt.hh"
 #include <set>
 #include <QDir>
 #include <QUrl>
@@ -17,7 +18,7 @@
 namespace SoundDir {
 
 using std::string;
-using std::wstring;
+using gd::wstring;
 using std::map;
 using std::multimap;
 using std::set;
@@ -292,7 +293,7 @@ void addDir( QDir const & baseDir, QDir const & dir, IndexedWords & indexedWords
       uint32_t articleOffset = chunks.startNewBlock();
       chunks.addToBlock( fileName.c_str(), fileName.size() + 1 );
 
-      wstring name = i->fileName().toStdWString();
+      wstring name = gd::toWString( i->fileName() );
 
       wstring::size_type pos = name.rfind( L'.' );
 

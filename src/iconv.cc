@@ -6,9 +6,16 @@
 #include <errno.h>
 #include <string.h>
 
-char const * const Iconv::Wchar_t = "WCHAR_T";
+#ifdef __WIN32
+char const * const Iconv::GdWchar = "UCS-4LE";
+#else
+char const * const Iconv::GdWchar = "WCHAR_T";
+#endif
+
 char const * const Iconv::Utf16Le = "UTF-16LE";
 char const * const Iconv::Utf8 = "UTF-8";
+
+using gd::wchar;
 
 Iconv::Iconv( char const * to, char const * from ) throw( exCantInit ):
   state( iconv_open( to, from ) )
@@ -63,39 +70,39 @@ Iconv::Result Iconv::convert( void const * & inBuf, size_t  & inBytesLeft,
   return Success;
 }
 
-std::wstring Iconv::toWstring( char const * fromEncoding, void const * fromData,
-                               size_t dataSize )
+gd::wstring Iconv::toWstring( char const * fromEncoding, void const * fromData,
+                              size_t dataSize )
   throw( exCantInit, exIncorrectSeq, exPrematureEnd, exOther )
 {
   /// Special-case the dataSize == 0 to avoid any kind of iconv-specific
   /// behaviour in that regard.
 
   if ( !dataSize )
-    return std::wstring();
+    return gd::wstring();
 
-  Iconv ic( Wchar_t, fromEncoding );
+  Iconv ic( GdWchar, fromEncoding );
 
   /// This size is usually enough, but may be enlarged during the conversion
-  std::vector< wchar_t > outBuf( dataSize );
+  std::vector< wchar > outBuf( dataSize );
 
   void * outBufPtr = &outBuf.front();
 
-  size_t outBufLeft = outBuf.size() * sizeof( wchar_t );
+  size_t outBufLeft = outBuf.size() * sizeof( wchar );
 
   for( ; ; )
   {
     switch( ic.convert( fromData, dataSize, outBufPtr, outBufLeft ) )
     {
       case Success:
-        return std::wstring( &outBuf.front(),
-                             outBuf.size() - outBufLeft / sizeof( wchar_t ) );
+        return gd::wstring( &outBuf.front(),
+                            outBuf.size() - outBufLeft / sizeof( wchar ) );
       case NeedMoreIn:
         throw exPrematureEnd();
       case NeedMoreOut:
       {
         // Grow the buffer and retry
         // The pointer may get invalidated so we save the diff and restore it
-        size_t offset = (wchar_t *)outBufPtr - &outBuf.front();
+        size_t offset = (wchar *)outBufPtr - &outBuf.front();
         outBuf.resize( outBuf.size() + 256 );
         outBufPtr = &outBuf.front() + offset;
         outBufLeft += 256;

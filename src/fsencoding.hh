@@ -4,7 +4,7 @@
 #ifndef __FSENCODING_HH_INCLUDED__
 #define __FSENCODING_HH_INCLUDED__
 
-#include <string>
+#include "wstring.hh"
 
 /// Utilities to convert a wide string or an utf8 string to the local 8bit
 /// encoding of the file system, and to do other manipulations on the file
@@ -12,7 +12,7 @@
 namespace FsEncoding {
 
 using std::string;
-using std::wstring;
+using gd::wstring;
 
 /// Encodes the given wide string to the system 8bit encoding.
 string encode( wstring const & );

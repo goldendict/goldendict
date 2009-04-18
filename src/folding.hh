@@ -4,7 +4,7 @@
 #ifndef __FOLDING_HH_INCLUDED__
 #define __FOLDING_HH_INCLUDED__
 
-#include <string>
+#include "wstring.hh"
 
 /// Folding provides means to translate several possible ways to write a
 /// symbol into one. This facilitates searching. Here we currently perform
@@ -17,7 +17,8 @@
 
 namespace Folding {
 
-using std::wstring;
+using gd::wstring;
+using gd::wchar;
 
 /// The algorithm's version.
 enum
@@ -52,11 +53,11 @@ wstring applyWhitespaceAndPunctOnly( wstring const & );
 /// Returns true if the given character is any form of whitespace, false
 /// otherwise. Whitespace corresponds to Zl/Zp/Zs Unicode classes, and also
 /// includes \n, \r and \t.
-bool isWhitespace( wchar_t ch );
+bool isWhitespace( wchar ch );
 
 /// Returns true if the given character is any form of punctuation, false
 /// otherwise. Punctuation corresponds to Pc/Pd/Pe/Pf/Pi/Po/Ps classes.
-bool isPunct( wchar_t ch );
+bool isPunct( wchar ch );
 
 /// Removes any whitespace or punctuation from the beginning and the end of
 /// the word.
@@ -68,7 +69,7 @@ wstring trimWhitespaceOrPunct( wstring const & );
 /// to succeed.
 /// Currently commented out, consider implementing it in case indices'
 /// generation would be too slow.
-//ssize_t apply( wchar_t const * in, wchar_t * out, size_t outSize );
+//ssize_t apply( wchar const * in, wchar * out, size_t outSize );
 
 }
 

@@ -83,7 +83,7 @@ long DataRequest::dataSize()
 {
   Mutex::Lock _( dataMutex );
   
-  return hasAnyData ? data.size() : -1;
+  return hasAnyData ? (long)data.size() : -1;
 }
 
 void DataRequest::getDataSlice( size_t offset, size_t size, void * buffer )

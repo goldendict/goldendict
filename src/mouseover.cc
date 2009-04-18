@@ -94,7 +94,7 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
 
     // Is the string in utf8 or in locale encoding?
 
-    wchar_t testBuf[ 256 ];
+    gd::wchar testBuf[ 256 ];
 
     long result = Utf8::decode( GlobalData->CurMod.MatchedWord,
                                 strlen( GlobalData->CurMod.MatchedWord ),

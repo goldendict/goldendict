@@ -184,8 +184,7 @@ int main()
     fprintf( outf, "// This file was generated automatically. Do not edit directly.\n\n" );
 
     fprintf( outf, "enum { foldCaseMaxOut = 3 };\n\n" );
-    fprintf( outf, "#ifdef __WIN32\nsize_t foldCase( unsigned int in, wchar_t * out )\n#else\n" );
-    fprintf( outf, "size_t foldCase( wchar_t in, wchar_t * out )\n#endif\n{\n  switch( in )\n  {\n" );
+    fprintf( outf, "size_t foldCase( wchar in, wchar * out )\n{\n  switch( in )\n  {\n" );
 
     for( map< wchar_t, wstring >::const_iterator i = foldTable.begin();
          i != foldTable.end(); ++i )
@@ -206,8 +205,7 @@ int main()
     fprintf( outf, "    default: *out = in; return 1;\n" );
     fprintf( outf, "  }\n}\n\n" );
 
-    fprintf( outf, "#ifdef __WIN32\nwchar_t foldCaseSimple( uint32_t in )\n#else\n" );
-    fprintf( outf, "wchar_t foldCaseSimple( wchar_t in )\n#endif\n{\n  switch( in )\n  {\n" );
+    fprintf( outf, "wchar foldCaseSimple( wchar in )\n{\n  switch( in )\n  {\n" );
 
     for( map< wchar_t, wchar_t >::const_iterator i = simpleFoldTable.begin();
          i != simpleFoldTable.end(); ++i )
@@ -301,7 +299,7 @@ int main()
     fprintf( outf, "// This file was generated automatically. Do not edit directly.\n\n" );
 
     fprintf( outf, "enum { foldDiacriticMaxIn = 3 };\n\n" );
-    fprintf( outf, "wchar_t foldDiacritic( wchar_t const * in, size_t size, size_t & consumed )\n{\n" );
+    fprintf( outf, "wchar foldDiacritic( wchar const * in, size_t size, size_t & consumed )\n{\n" );
 
     handleForest( outf, forest, 0, 1 );
 

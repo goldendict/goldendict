@@ -11,13 +11,14 @@
 #include "sptr.hh"
 #include "ex.hh"
 #include "mutex.hh"
+#include "wstring.hh"
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {
 
 using std::vector;
 using std::string;
-using std::wstring;
+using gd::wstring;
 using std::map;
 
 enum Property

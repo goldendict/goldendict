@@ -24,7 +24,8 @@ namespace Bgl {
 using std::map;
 using std::multimap;
 using std::set;
-using std::wstring;
+using gd::wstring;
+using gd::wchar;
 using std::list;
 using std::pair;
 
@@ -142,7 +143,7 @@ namespace
   void addEntryToIndex( string & word,
                         uint32_t articleOffset,
                         IndexedWords & indexedWords,
-                        vector< wchar_t > & wcharBuffer )
+                        vector< wchar > & wcharBuffer )
   {
     // Strip any leading or trailing whitespaces
     trimWs( word );
@@ -962,7 +963,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       IndexedWords indexedWords;
 
       // We use this buffer to decode utf8 into it.
-      vector< wchar_t > wcharBuffer;
+      vector< wchar > wcharBuffer;
 
       ChunkedStorage::Writer chunks( idx );
 

@@ -47,7 +47,7 @@ private:
 
   struct OneResult
   {
-    std::wstring word;
+    gd::wstring word;
     int rank;
     bool wasSuggested;
   };
@@ -55,7 +55,7 @@ private:
   // Maps lowercased string to the original one. This catches all duplicates
   // without case sensitivity. Made as an array and a map indexing that array.
   typedef std::list< OneResult > ResultsArray;
-  typedef std::map< std::wstring, ResultsArray::iterator > ResultsIndex;
+  typedef std::map< gd::wstring, ResultsArray::iterator > ResultsIndex;
   ResultsArray resultsArray;
   ResultsIndex resultsIndex;
     

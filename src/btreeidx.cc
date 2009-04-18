@@ -34,6 +34,9 @@ struct __LzoInit
 
 namespace BtreeIndexing {
 
+using gd::wstring;
+using gd::wchar;
+
 enum
 {
   BtreeMinElements = 64,
@@ -346,7 +349,7 @@ char const * BtreeDictionary::findChainOffsetExactOrPrefix( wstring const & targ
   // Lookup the index by traversing the index btree
 
   vector< char > charBuffer;
-  vector< wchar_t > wcharBuffer;
+  vector< wchar > wcharBuffer;
   vector< char > wordsBuffer;
 
   exactMatch = false;
@@ -880,7 +883,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
 
 void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
 {
-  wchar_t const * wordBegin = word.c_str();
+  wchar const * wordBegin = word.c_str();
   string::size_type wordSize = word.size();
 
   // Skip any leading whitespace
@@ -894,7 +897,7 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
   while( wordSize && Folding::isWhitespace( wordBegin[ wordSize - 1 ] ) )
     --wordSize;
 
-  wchar_t const * nextChar = wordBegin;
+  wchar const * nextChar = wordBegin;
 
   vector< char > utfBuffer( wordSize * 4 );
 

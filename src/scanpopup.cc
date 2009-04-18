@@ -4,6 +4,7 @@
 #include "scanpopup.hh"
 #include "folding.hh"
 #include "mouseover.hh"
+#include "wstring_qt.hh"
 #include <QUrl>
 #include <QCursor>
 #include <QPixmap>
@@ -146,7 +147,7 @@ void ScanPopup::handleInputWord( QString const & str )
   if ( !cfg.preferences.enableScanPopup )
     return;
 
-  pendingInputWord = QString::fromStdWString( Folding::trimWhitespaceOrPunct( str.toStdWString() ) );
+  pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
 
   if ( !pendingInputWord.size() )
   {

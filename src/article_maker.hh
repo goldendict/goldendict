@@ -60,7 +60,7 @@ class ArticleRequest: public Dictionary::DataRequest
   QString word, group;
   std::vector< sptr< Dictionary::Class > > const & activeDicts;
   
-  std::set< std::wstring > alts; // Accumulated main forms
+  std::set< gd::wstring > alts; // Accumulated main forms
   std::list< sptr< Dictionary::WordSearchRequest > > altSearches;
   bool altsDone, bodyDone;
   std::list< sptr< Dictionary::DataRequest > > bodyRequests;

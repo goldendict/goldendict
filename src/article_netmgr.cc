@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "article_netmgr.hh"
+#include "wstring_qt.hh"
 
 using std::string;
 

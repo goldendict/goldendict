@@ -9,7 +9,7 @@
 namespace Dsl {
 namespace Details {
 
-using std::wstring;
+using gd::wstring;
 using std::list;
 
 #ifdef __WIN32
@@ -17,7 +17,7 @@ using std::list;
 // wcscasecmp() function is a GNU extension, we need to reimplement it
 // for non-GNU systems.
 
-int wcscasecmp( const wchar_t *s1, const wchar_t *s2 )
+int wcscasecmp( const wchar *s1, const wchar *s2 )
 {
   for( ; ; ++s1, ++s2 )
   {
@@ -51,12 +51,12 @@ wstring ArticleDom::Node::renderAsText() const
 // Returns true if src == 'm' and dest is 'mX', where X is a digit
 static inline bool checkM( wstring const & dest, wstring const & src )
 {
-  return ( src == L"m" && dest.size() == 2 &&
+  return ( src == GD_NATIVE_TO_WS( L"m" ) && dest.size() == 2 &&
     dest[ 0 ] == L'm' && iswdigit( dest[ 1 ] ) );
 }
 
 ArticleDom::ArticleDom( wstring const & str ):
-  root( Node::Tag(), L"", L"" ), stringPos( str.c_str() )
+  root( Node::Tag(), wstring(), wstring() ), stringPos( str.c_str() )
 {
   list< Node * > stack; // Currently opened tags
 
@@ -263,7 +263,7 @@ ArticleDom::ArticleDom( wstring const & str ):
             textNode = 0;
           }
 
-          Node link( Node::Tag(), L"ref", L"" );
+          Node link( Node::Tag(), GD_NATIVE_TO_WS( L"ref" ), wstring() );
           link.push_back( Node( Node::Text(), linkTo ) );
 
           if ( stack.empty() )
@@ -280,7 +280,7 @@ ArticleDom::ArticleDom( wstring const & str ):
       // If there's currently no text node, open one
       if ( !textNode )
       {
-        Node text( Node::Text(), L"" );
+        Node text = Node( Node::Text(), wstring() );
 
         if ( stack.empty() )
         {
@@ -408,10 +408,10 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
 
     bool isName = false;
 
-    if ( !str.compare( 0, 5, L"#NAME", 5 ) )
+    if ( !str.compare( 0, 5, GD_NATIVE_TO_WS( L"#NAME" ), 5 ) )
       isName = true;
     else
-    if ( str.compare( 0, 17, L"#SOURCE_CODE_PAGE", 17 ) )
+    if ( str.compare( 0, 17, GD_NATIVE_TO_WS( L"#SOURCE_CODE_PAGE" ), 17 ) )
       continue;
 
     // Locate the argument
@@ -439,13 +439,13 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
         fprintf( stderr, "Warning: encoding was specified in a Unicode file, ignoring.\n" );
       }
       else
-      if ( !wcscasecmp( arg.c_str(), L"Latin" ) )
+      if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Latin" ) ) )
         encoding = Windows1252;
       else
-      if ( !wcscasecmp( arg.c_str(), L"Cyrillic" ) )
+      if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Cyrillic" ) ) )
         encoding = Windows1251;
       else
-      if ( !wcscasecmp( arg.c_str(), L"EasternEuropean" ) )
+      if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"EasternEuropean" ) ) )
         encoding = Windows1250;
       else
       {
@@ -482,7 +482,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
 
   size_t leftInOut = wcharBuffer.size();
 
-  wchar_t * outPtr = &wcharBuffer.front();
+  wchar * outPtr = &wcharBuffer.front();
 
   for( ; ; )
   {
@@ -541,13 +541,13 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
     }
 
     // Ok, now convert one char
-    size_t outBytesLeft = sizeof( wchar_t );
+    size_t outBytesLeft = sizeof( wchar );
 
     Iconv::Result r =
       iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
                      (void *&)outPtr, outBytesLeft );
 
-    if ( r == Iconv::NeedMoreOut && outBytesLeft == sizeof( wchar_t ) )
+    if ( r == Iconv::NeedMoreOut && outBytesLeft == sizeof( wchar ) )
     {
       // Seems to be a surrogate pair with a 16-bit target wchar
 
@@ -582,13 +582,13 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
 /////////////// DslScanner
 
 DslIconv::DslIconv( DslEncoding e ) throw( Iconv::Ex ):
-  Iconv( Iconv::Wchar_t, getEncodingNameFor( e ) )
+  Iconv( Iconv::GdWchar, getEncodingNameFor( e ) )
 {
 }
 
 void DslIconv::reinit( DslEncoding e ) throw( Iconv::Ex )
 {
-  Iconv::reinit( Iconv::Wchar_t, getEncodingNameFor( e ) );
+  Iconv::reinit( Iconv::GdWchar, getEncodingNameFor( e ) );
 }
 
 char const * DslIconv::getEncodingNameFor( DslEncoding e )
@@ -618,7 +618,7 @@ void processUnsortedParts( wstring & str, bool strip )
 
   for( size_t x = 0; x < str.size(); )
   {
-    wchar_t ch = str[ x ];
+    wchar ch = str[ x ];
 
     if ( ch == L'\\' )
     {
@@ -691,7 +691,7 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
 {
   for( ; x < str.size(); )
   {
-    wchar_t ch = str[ x ];
+    wchar ch = str[ x ];
 
     if ( ch == L'\\' )
     {
@@ -708,7 +708,7 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
   
         for( size_t y = x + 1; y < str.size(); ++y )
         {
-          wchar_t ch = str[ y ];
+          wchar ch = str[ y ];
   
           if ( ch == L'\\' )
           {

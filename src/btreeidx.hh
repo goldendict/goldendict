@@ -16,7 +16,7 @@
 namespace BtreeIndexing {
 
 using std::string;
-using std::wstring;
+using gd::wstring;
 using std::vector;
 using std::map;
 

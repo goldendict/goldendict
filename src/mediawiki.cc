@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "mediawiki.hh"
+#include "wstring_qt.hh"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QUrl>
@@ -84,7 +85,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   printf( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
-  reqUrl.addQueryItem( "apfrom", QString::fromStdWString( str ) );
+  reqUrl.addQueryItem( "apfrom", gd::toQString( str ) );
 
   netReply = mgr.get( QNetworkRequest( reqUrl ) );
 
@@ -154,7 +155,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
         Mutex::Lock _( dataMutex );
         
         for( unsigned x = 0; x < nl.length(); ++x )
-          matches.push_back( nl.item( x ).toElement().attribute( "title" ).toStdWString() );
+          matches.push_back( gd::toWString( nl.item( x ).toElement().attribute( "title" ) ) );
       }
     }
     printf( "done.\n" );
@@ -196,7 +197,7 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
   
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
-  reqUrl.addQueryItem( "page", QString::fromStdWString( str ) );
+  reqUrl.addQueryItem( "page", gd::toQString( str ) );
 
   netReply = mgr.get( QNetworkRequest( reqUrl ) );
   

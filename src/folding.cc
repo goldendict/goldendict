@@ -19,13 +19,13 @@ wstring apply( wstring const & in )
 
   withoutDiacritics.reserve( in.size() );
 
-  wchar_t const * nextChar = in.data();
+  wchar const * nextChar = in.data();
 
   size_t consumed;
 
   for( size_t left = in.size(); left; )
   {
-    wchar_t ch = foldDiacritic( nextChar, left, consumed );
+    wchar ch = foldDiacritic( nextChar, left, consumed );
 
     if ( !isWhitespace( ch ) && !isPunct( ch ) )
       withoutDiacritics.push_back( ch );
@@ -42,7 +42,7 @@ wstring apply( wstring const & in )
 
   nextChar = withoutDiacritics.data();
 
-  wchar_t buf[ foldCaseMaxOut ];
+  wchar buf[ foldCaseMaxOut ];
 
   for( size_t left = withoutDiacritics.size(); left--; )
     caseFolded.append( buf, foldCase(  *nextChar++, buf ) );
@@ -52,7 +52,7 @@ wstring apply( wstring const & in )
 
 wstring applySimpleCaseOnly( wstring const & in )
 {
-  wchar_t const * nextChar = in.data();
+  wchar const * nextChar = in.data();
 
   wstring out;
 
@@ -70,9 +70,9 @@ wstring applyFullCaseOnly( wstring const & in )
 
   caseFolded.reserve( in.size() * foldCaseMaxOut );
 
-  wchar_t const * nextChar = in.data();
+  wchar const * nextChar = in.data();
 
-  wchar_t buf[ foldCaseMaxOut ];
+  wchar buf[ foldCaseMaxOut ];
 
   for( size_t left = in.size(); left--; )
     caseFolded.append( buf, foldCase(  *nextChar++, buf ) );
@@ -86,13 +86,13 @@ wstring applyDiacriticsOnly( wstring const & in )
 
   withoutDiacritics.reserve( in.size() );
 
-  wchar_t const * nextChar = in.data();
+  wchar const * nextChar = in.data();
 
   size_t consumed;
 
   for( size_t left = in.size(); left; )
   {
-    wchar_t ch = foldDiacritic( nextChar, left, consumed );
+    wchar ch = foldDiacritic( nextChar, left, consumed );
 
     withoutDiacritics.push_back( ch );
 
@@ -105,7 +105,7 @@ wstring applyDiacriticsOnly( wstring const & in )
 
 wstring applyPunctOnly( wstring const & in )
 {
-  wchar_t const * nextChar = in.data();
+  wchar const * nextChar = in.data();
 
   wstring out;
 
@@ -120,7 +120,7 @@ wstring applyPunctOnly( wstring const & in )
 
 wstring applyWhitespaceOnly( wstring const & in )
 {
-  wchar_t const * nextChar = in.data();
+  wchar const * nextChar = in.data();
 
   wstring out;
 
@@ -135,7 +135,7 @@ wstring applyWhitespaceOnly( wstring const & in )
 
 wstring applyWhitespaceAndPunctOnly( wstring const & in )
 {
-  wchar_t const * nextChar = in.data();
+  wchar const * nextChar = in.data();
 
   wstring out;
 
@@ -148,7 +148,7 @@ wstring applyWhitespaceAndPunctOnly( wstring const & in )
   return out;
 }
 
-bool isWhitespace( wchar_t ch )
+bool isWhitespace( wchar ch )
 {
   switch( ch )
   {
@@ -185,7 +185,7 @@ bool isWhitespace( wchar_t ch )
   }
 }
 
-bool isPunct( wchar_t ch )
+bool isPunct( wchar ch )
 {
   switch( ch )
   {
@@ -510,7 +510,7 @@ bool isPunct( wchar_t ch )
 
 wstring trimWhitespaceOrPunct( wstring const & in )
 {
-  wchar_t const * wordBegin = in.c_str();
+  wchar const * wordBegin = in.c_str();
   wstring::size_type wordSize = in.size();
 
   // Skip any leading whitespace
