@@ -160,7 +160,7 @@ private slots:
 
   void prefixMatchUpdated();
   void prefixMatchFinished();
- 
+
   void wordListItemActivated( QListWidgetItem * );
   void wordListSelectionChanged();
 
@@ -170,18 +170,22 @@ private slots:
 
   void openLinkInNewTab( QUrl const &, QUrl const & );
   void showDefinitionInNewTab( QString const & word, unsigned group );
-  
+
   void showTranslationFor( QString const & );
 
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
 
   void scanEnableToggled( bool );
 
+  void setAutostart( bool );
+
   void showMainWindow();
-  
+
   void visitHomepage();
   void visitForum();
   void showAbout();
+
+  void on_actionCloseToTray_activated();
 };
 
 #endif

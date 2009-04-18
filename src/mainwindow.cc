@@ -53,7 +53,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
-  
+
   enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
@@ -122,7 +122,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   if ( trayIcon )
     trayIcon->setToolTip( tr( "Loading..." ) );
-  
+
   connect( navBack, SIGNAL( activated() ),
            this, SLOT( backClicked() ) );
   connect( navForward, SIGNAL( activated() ),
@@ -163,7 +163,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( ui.preferences, SIGNAL( activated() ),
            this, SLOT( editPreferences() ) );
-  
+
   connect( ui.visitHomepage, SIGNAL( activated() ),
            this, SLOT( visitHomepage() ) );
   connect( ui.visitForum, SIGNAL( activated() ),
@@ -176,13 +176,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
-  
+
   connect( ui.translateLine, SIGNAL( returnPressed() ),
            this, SLOT( translateInputFinished() ) );
 
   connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
            this, SLOT( wordListSelectionChanged() ) );
-  
+
   connect( &wordFinder, SIGNAL( updated() ),
            this, SLOT( prefixMatchUpdated() ) );
   connect( &wordFinder, SIGNAL( finished() ),
@@ -211,10 +211,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
     view.showDefinition( tr( "Welcome!" ), UINT_MAX );
   }
-  
+
   ui.translateLine->setFocus();
 
   updateTrayIcon();
+
+  // Update autostart info
+  setAutostart(cfg.preferences.autoStart);
 
   // Only show window initially if it wasn't configured differently
   if ( !cfg.preferences.enableTrayIcon || !cfg.preferences.startToTray )
@@ -298,7 +301,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   {
     vector< sptr< Dictionary::Class > > stardictDictionaries =
       Stardict::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
-  
+
     dictionaries.insert( dictionaries.end(), stardictDictionaries.begin(),
                          stardictDictionaries.end() );
   }
@@ -360,7 +363,7 @@ void MainWindow::updateTrayIcon()
       enableScanPopup->isChecked() ?
         ":/icons/programicon_scan.png" :
         ":/icons/programicon.png" ) );
-    
+
     trayIcon->setToolTip( "GoldenDict" );
   }
 }
@@ -405,14 +408,14 @@ void MainWindow::applyProxySettings()
   {
    proxy.setHostName( cfg.preferences.proxyServer.host );
    proxy.setPort( cfg.preferences.proxyServer.port );
-  
+
    if ( cfg.preferences.proxyServer.user.size() )
      proxy.setUser( cfg.preferences.proxyServer.user );
-  
+
    if ( cfg.preferences.proxyServer.password.size() )
      proxy.setPassword( cfg.preferences.proxyServer.password );
   }
-  
+
   QNetworkProxy::setApplicationProxy( proxy );
 }
 
@@ -553,9 +556,9 @@ void MainWindow::makeScanPopup()
 
   if ( !cfg.preferences.enableScanPopup )
     return;
-  
+
   scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances );
-  
+
   if ( enableScanPopup->isChecked() )
     scanPopup->enableScanning();
 }
@@ -711,7 +714,7 @@ void MainWindow::pronounce()
 
 void MainWindow::updatePronounceAvailability()
 {
-  bool pronounceEnabled = ui.tabWidget->count() > 0 && 
+  bool pronounceEnabled = ui.tabWidget->count() > 0 &&
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).hasSound();
 
   navPronounce->setEnabled( pronounceEnabled );
@@ -765,15 +768,18 @@ void MainWindow::editPreferences()
   if ( preferences.exec() == QDialog::Accepted )
   {
     cfg.preferences = preferences.getPreferences();
-    
+
     enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
 
     if ( !cfg.preferences.enableScanPopup )
       enableScanPopup->setChecked( false );
-    
+
     updateTrayIcon();
     applyProxySettings();
     makeScanPopup();
+
+    setAutostart(cfg.preferences.autoStart);
+
     Config::save( cfg );
   }
 }
@@ -846,7 +852,7 @@ void MainWindow::updateMatchResults( bool finished )
   WordFinder::SearchResults const & results = wordFinder.getResults();
 
   ui.wordList->setUpdatesEnabled( false );
-  
+
   for( unsigned x = 0; x < results.size(); ++x )
   {
     QListWidgetItem * i = ui.wordList->item( x );
@@ -922,7 +928,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     if ( ev->type() == QEvent::KeyPress )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
-  
+
       if ( keyEvent->matches( QKeySequence::MoveToNextLine ) && ui.wordList->count() )
       {
         ui.wordList->setFocus( Qt::ShortcutFocusReason );
@@ -1026,11 +1032,11 @@ void MainWindow::showTranslationFor( QString const & inWord )
 
   {
     set< wstring > altsSet;
-  
+
     for( unsigned x = 0; x < activeDicts.size(); ++x )
     {
       vector< wstring > found = activeDicts[ x ]->findHeadwordsForSynonym( word );
-  
+
       altsSet.insert( found.begin(), found.end() );
     }
 
@@ -1114,7 +1120,7 @@ void MainWindow::scanEnableToggled( bool on )
     else
       scanPopup->disableScanning();
   }
-  
+
   updateTrayIcon();
 }
 
@@ -1154,3 +1160,30 @@ void MainWindow::showAbout()
   about.exec();
 }
 
+void MainWindow::setAutostart(bool autostart)
+{
+#ifdef Q_OS_WIN32
+    QSettings reg("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+                  QSettings::NativeFormat);
+    if (autostart)
+        reg.setValue(QCoreApplication::applicationName(), QCoreApplication::applicationFilePath());
+    else
+        reg.remove(QCoreApplication::applicationName());
+    reg.sync();
+#else
+    // this is for KDE
+    QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
+    QString lnk(QDir::homePath()+"/.kde/Autostart/"+app_fname);
+    if (autostart) {
+        QFile f(QCoreApplication::applicationFilePath());
+        f.link(lnk);
+    } else {
+        QFile::remove(lnk);
+    }
+#endif
+}
+
+void MainWindow::on_actionCloseToTray_activated()
+{
+    close();
+}

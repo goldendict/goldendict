@@ -239,13 +239,14 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="actionCloseToTray"/>
     <addaction name="quit"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
@@ -270,24 +271,28 @@
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_Preferences">
-   <property name="text">
-    <string>&amp;Preferences...</string>
-   </property>
-  </action>
   <action name="sources">
    <property name="text">
     <string>&amp;Sources...</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
   <action name="groups">
    <property name="text">
     <string>&amp;Groups...</string>
    </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
   </action>
   <action name="preferences">
    <property name="text">
     <string>&amp;Preferences...</string>
+   </property>
+   <property name="shortcut">
+    <string>F4</string>
    </property>
   </action>
   <action name="visitHomepage">
@@ -299,15 +304,38 @@
    <property name="text">
     <string>&amp;About</string>
    </property>
+   <property name="toolTip">
+    <string>About GoldenDict</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
   </action>
   <action name="quit">
    <property name="text">
     <string>&amp;Quit</string>
    </property>
+   <property name="toolTip">
+    <string>Quit from application</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
   </action>
   <action name="visitForum">
    <property name="text">
     <string>&amp;Forum</string>
+   </property>
+  </action>
+  <action name="actionCloseToTray">
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="toolTip">
+    <string>Close window (or go to tray if enabled)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F4</string>
    </property>
   </action>
  </widget>
@@ -322,8 +350,6 @@
   <tabstop>translateLine</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
