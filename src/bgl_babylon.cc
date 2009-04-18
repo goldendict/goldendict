@@ -26,7 +26,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<stdio.h>
-#include <iconv.h>
+#include<iconv.h>
 
 #ifdef _WIN32
 #include <io.h>
@@ -295,15 +295,15 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         len = (unsigned char)block.data[pos++];
         std::string filename( block.data+pos, len );
         //if (filename != "8EAF66FD.bmp" && filename != "C2EEF3F6.html") {
-    		pos += len;
+            pos += len;
         if ( resourceHandler )
           resourceHandler->handleBabylonResource( filename,
                                                   block.data + pos,
                                                   block.length - pos );
     #if 0
-	        FILE *ifile = fopen(filename.c_str(), "w");
-        	fwrite(block.data + pos, 1, block.length -pos, ifile);
-	        fclose(ifile);
+            FILE *ifile = fopen(filename.c_str(), "w");
+            fwrite(block.data + pos, 1, block.length -pos, ifile);
+            fclose(ifile);
     #endif
         break;
       }
@@ -374,7 +374,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               pos += len - a;
               break;
             }
-            
+
             displayedHeadword = std::string( block.data + pos + 2, length );
             pos += length + 2;
             a += length + 1;
