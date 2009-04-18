@@ -14,7 +14,7 @@ namespace
   {
     QDir result = QDir::home();
 
-    char const * pathInHome = 
+    char const * pathInHome =
       #ifdef Q_OS_WIN32
       "Application Data/GoldenDict"
       #else
@@ -46,6 +46,7 @@ Preferences::Preferences():
   enableTrayIcon( true ),
   startToTray( false ),
   closeToTray( true ),
+  autoStart( false ),
   enableScanPopup( true ),
   startWithScanPopupOn( false ),
   enableScanPopupModifiers( false ),
@@ -102,6 +103,10 @@ Class load() throw( exError )
     #endif
 
     #ifdef Q_OS_WIN32
+
+    // #### "C:/Program Files" is bad! will not work for German Windows etc.
+    // #### should be replaced to system path
+
     if ( QDir( "C:/Program Files/StarDict/dic" ).exists() )
       c.paths.push_back( Path( "C:/Program Files/StarDict/dic", true ) );
 
@@ -156,7 +161,7 @@ Class load() throw( exError )
         Path( nl.item( x ).toElement().text(),
               nl.item( x ).toElement().attribute( "recursive" ) == "1" ) );
   }
-  
+
   QDomNode soundDirs = root.namedItem( "sounddirs" );
 
   if ( !soundDirs.isNull() )
@@ -250,6 +255,7 @@ Class load() throw( exError )
     c.preferences.enableTrayIcon = ( preferences.namedItem( "enableTrayIcon" ).toElement().text() == "1" );
     c.preferences.startToTray = ( preferences.namedItem( "startToTray" ).toElement().text() == "1" );
     c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
+    c.preferences.autoStart = ( preferences.namedItem( "autoStart" ).toElement().text() == "1" );
     c.preferences.enableScanPopup = ( preferences.namedItem( "enableScanPopup" ).toElement().text() == "1" );
     c.preferences.startWithScanPopupOn = ( preferences.namedItem( "startWithScanPopupOn" ).toElement().text() == "1" );
     c.preferences.enableScanPopupModifiers = ( preferences.namedItem( "enableScanPopupModifiers" ).toElement().text() == "1" );
@@ -319,7 +325,7 @@ void save( Class const & c ) throw( exError )
   {
     QDomElement paths = dd.createElement( "paths" );
     root.appendChild( paths );
-  
+
     for( Paths::const_iterator i = c.paths.begin(); i != c.paths.end(); ++i )
     {
       QDomElement path = dd.createElement( "path" );
@@ -330,11 +336,11 @@ void save( Class const & c ) throw( exError )
       path.setAttributeNode( recursive );
 
       QDomText value = dd.createTextNode( i->path );
-  
+
       path.appendChild( value );
     }
   }
-  
+
   {
     QDomElement soundDirs = dd.createElement( "sounddirs" );
     root.appendChild( soundDirs );
@@ -479,10 +485,14 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.preferences.closeToTray ? "1":"0" ) );
     preferences.appendChild( opt );
 
+    opt = dd.createElement( "autoStart" );
+    opt.appendChild( dd.createTextNode( c.preferences.autoStart ? "1":"0" ) );
+    preferences.appendChild( opt );
+
     opt = dd.createElement( "enableScanPopup" );
     opt.appendChild( dd.createTextNode( c.preferences.enableScanPopup ? "1":"0" ) );
     preferences.appendChild( opt );
-    
+
     opt = dd.createElement( "startWithScanPopupOn" );
     opt.appendChild( dd.createTextNode( c.preferences.startWithScanPopupOn ? "1":"0" ) );
     preferences.appendChild( opt );

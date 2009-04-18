@@ -104,6 +104,7 @@ struct Preferences
   bool enableTrayIcon;
   bool startToTray;
   bool closeToTray;
+  bool autoStart;
   bool enableScanPopup;
   bool startWithScanPopupOn;
   bool enableScanPopupModifiers;
