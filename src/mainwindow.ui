@@ -239,7 +239,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -329,10 +329,10 @@
   </action>
   <action name="actionCloseToTray">
    <property name="text">
-    <string>Close</string>
+    <string>&amp;Close To Tray</string>
    </property>
    <property name="toolTip">
-    <string>Close window (or go to tray if enabled)</string>
+    <string>Minimizes the window to tray</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+F4</string>

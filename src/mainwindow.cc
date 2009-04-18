@@ -366,6 +366,10 @@ void MainWindow::updateTrayIcon()
 
     trayIcon->setToolTip( "GoldenDict" );
   }
+
+  // The 'Close to tray' action is associated with the tray icon, so we hide
+  // or show it here.
+  ui.actionCloseToTray->setVisible( cfg.preferences.enableTrayIcon );
 }
 
 void MainWindow::closeEvent( QCloseEvent * ev )
@@ -1185,5 +1189,5 @@ void MainWindow::setAutostart(bool autostart)
 
 void MainWindow::on_actionCloseToTray_activated()
 {
-    close();
+  hide();
 }
