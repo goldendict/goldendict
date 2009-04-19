@@ -139,8 +139,9 @@ private:
 
 /// This represents the index in its source form, as a map which binds folded
 /// words to sequences of their unfolded source forms and the corresponding
-/// article offsets.
-struct IndexedWords: public map< wstring, vector< WordArticleLink > >
+/// article offsets. The words are utf8-encoded -- it doesn't break Unicode
+/// sorting, but conserves space.
+struct IndexedWords: public map< string, vector< WordArticleLink > >
 {
   /// Instead of adding to the map directly, use this function. It does folding
   /// itself, and for phrases/sentences it adds additional entries beginning with

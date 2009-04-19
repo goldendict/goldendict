@@ -780,8 +780,6 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
 
     unsigned prevEntry = 0;
 
-    vector< char > charBuffer;
-
     for( unsigned x = 0; x < maxElements; ++x )
     {
       unsigned curEntry = (uint64_t) indexSize * ( x + 1 ) / ( maxElements + 1 );
@@ -793,18 +791,13 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
 
       memcpy( &uncompressedData.front() + sizeof( uint32_t ) + x * sizeof( uint32_t ), &offset, sizeof( uint32_t ) );
 
-      if ( charBuffer.size() < nextIndex->first.size() * 4 )
-        charBuffer.resize( nextIndex->first.size() * 4 );
-
-      size_t sz = Utf8::encode( nextIndex->first.data(), nextIndex->first.size(),
-                                &charBuffer.front() );
+      size_t sz = nextIndex->first.size() + 1;
 
       size_t prevSize = uncompressedData.size();
-      uncompressedData.resize( prevSize + sz + 1 );
+      uncompressedData.resize( prevSize + sz );
 
-      memcpy( &uncompressedData.front() + prevSize, &charBuffer.front(), sz );
-
-      uncompressedData.back() = 0;
+      memcpy( &uncompressedData.front() + prevSize, nextIndex->first.c_str(),
+              sz );
 
       prevEntry = curEntry;
     }
@@ -914,9 +907,12 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
     }
 
     // Insert this word
+    wstring folded = Folding::apply( nextChar );
+    
     iterator i = insert(
       IndexedWords::value_type(
-        Folding::apply( nextChar ),
+        string( &utfBuffer.front(),
+                Utf8::encode( folded.data(), folded.size(), &utfBuffer.front() ) ),
         vector< WordArticleLink >() ) ).first;
 
     if ( ( i->second.size() < 1024 ) || ( nextChar == wordBegin ) ) // Don't overpopulate chains with middle matches
