@@ -1,11 +1,12 @@
 /* This file is (c) 2008-2009 Konstantin Isakov <ikm@users.berlios.de>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include <QApplication>
 #include <QIcon>
 #include "mainwindow.hh"
 #include "config.hh"
+
 #include "processwrapper.hh"
+#include "hotkeywrapper.hh"
 
 //#define __DO_DEBUG
 
@@ -26,7 +27,7 @@ int main( int argc, char ** argv )
   }
   #endif
 
-  QApplication app( argc, argv );
+  QHotkeyApplication app( argc, argv );
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.berlios.de/" );
@@ -39,15 +40,15 @@ int main( int argc, char ** argv )
   // Prevent execution of the 2nd copy
 
   // check if 2nd copy was started
-  QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
-  unsigned int pid = ProcessWrapper::findProcess(
-          app_fname.toAscii().data(),
-          QCoreApplication::applicationPid());
-  if (pid)
-  {
-    // to do: switch to pid ?
-    return 1;
-  }
+    QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
+    unsigned int pid = ProcessWrapper::findProcess(
+            app_fname.toAscii().data(),
+            QCoreApplication::applicationPid());
+    if (pid) {
+        // to do: switch to pid ?
+        return 1;
+    }
+
 
   // Load translations
 
@@ -57,6 +58,8 @@ int main( int argc, char ** argv )
 
   if ( localeName.isEmpty() )
     localeName = QLocale::system().name();
+  {
+  }
 
   qtTranslator.load( "qt_" + localeName,
                      QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );

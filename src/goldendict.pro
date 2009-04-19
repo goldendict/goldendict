@@ -95,7 +95,8 @@ HEADERS += folding.hh \
            audiolink.hh \
            wstring.hh \
            wstring_qt.hh \
-           processwrapper.hh
+           processwrapper.hh \
+           hotkeywrapper.hh
 	  
 
 FORMS += groups.ui dictgroupwidget.ui mainwindow.ui sources.ui initializing.ui\
@@ -111,7 +112,7 @@ SOURCES += folding.cc main.cc dictionary.cc config.cc sources.cc \
 	   articleview.cc externalviewer.cc wordfinder.cc \
 	   groupcombobox.cc keyboardstate.cc mouseover.cc preferences.cc \
 	   mutex.cc mediawiki.cc sounddir.cc hunspell.cc dictdfiles.cc \
-           audiolink.cc wstring.cc wstring_qt.cc processwrapper.cc
+           audiolink.cc wstring.cc wstring_qt.cc processwrapper.cc hotkeywrapper.cc
 
 win32 {
   SOURCES += mouseover_win32/ThTypes.c

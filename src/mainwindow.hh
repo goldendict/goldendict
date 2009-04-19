@@ -96,6 +96,8 @@ private:
 
   ::Initializing * initializing;
 
+  class HotkeyWrapper * hotkeyWrapper;
+
   /// Creates, destroys or otherwise updates tray icon, according to the
   /// current configuration and situation.
   void updateTrayIcon();

@@ -13,6 +13,7 @@
 #include "sounddir.hh"
 #include "hunspell.hh"
 #include "dictdfiles.hh"
+#include "hotkeywrapper.hh"
 #include "ui_about.h"
 #include <limits.h>
 #include <QDir>
@@ -219,6 +220,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Update autostart info
   setAutostart(cfg.preferences.autoStart);
 
+  // Initialize global hotkeys
+  hotkeyWrapper = new HotkeyWrapper(this);
+  hotkeyWrapper->setGlobalKey(Qt::Key_F11, Qt::Key_F11, Qt::ControlModifier, this,
+                              SLOT(on_actionCloseToTray_activated()));
+
+  // Shortcut for close to tray
+  ui.actionCloseToTray->setShortcut(QKeySequence("Ctrl+F11"));
+
   // Only show window initially if it wasn't configured differently
   if ( !cfg.preferences.enableTrayIcon || !cfg.preferences.startToTray )
     show();
@@ -366,10 +375,6 @@ void MainWindow::updateTrayIcon()
 
     trayIcon->setToolTip( "GoldenDict" );
   }
-
-  // The 'Close to tray' action is associated with the tray icon, so we hide
-  // or show it here.
-  ui.actionCloseToTray->setVisible( cfg.preferences.enableTrayIcon );
 }
 
 void MainWindow::closeEvent( QCloseEvent * ev )
@@ -929,7 +934,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
   if ( obj == ui.translateLine )
   {
-    if ( ev->type() == QEvent::KeyPress )
+    if ( ev->type() == /*QEvent::KeyPress*/ 6 )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -944,7 +949,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   else
   if ( obj == ui.wordList )
   {
-    if ( ev->type() == QEvent::KeyPress )
+    if ( ev->type() == /*QEvent::KeyPress*/ 6 )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -1088,7 +1093,7 @@ void MainWindow::showTranslationFor( QString const & inWord )
 
   ArticleMaker am( dictionaries, groupInstances );
 
-  string result = am.makeDefiniti onFor( inWord, "En" );
+  string result = am.makeDefinitionFor( inWord, "En" );
 
   ui.definition->setContent( result.c_str(), QString() );
 
@@ -1099,9 +1104,9 @@ void MainWindow::showTranslationFor( QString const & inWord )
 
 void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
 {
-  if ( r == QSystemTrayIcon::Trigger )
+  if ( r == QSystemTrayIcon::DoubleClick )
   {
-    // Left click toggles the visibility of main window
+    // Double-click toggles the visibility of main window
     if ( !isVisible() )
       show();
     else
@@ -1109,13 +1114,6 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
     {
       showNormal();
       activateWindow();
-      raise();
-    }
-    else
-    if ( !isActiveWindow() )
-    {
-      activateWindow();
-      raise();
     }
     else
       hide();
@@ -1144,13 +1142,6 @@ void MainWindow::showMainWindow()
   {
     showNormal();
     activateWindow();
-    raise();
-  }
-  else
-  if ( !isActiveWindow() )
-  {
-    activateWindow();
-    raise();
   }
 }
 
@@ -1183,10 +1174,14 @@ void MainWindow::setAutostart(bool autostart)
 #ifdef Q_OS_WIN32
     QSettings reg("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
                   QSettings::NativeFormat);
-    if (autostart)
-        reg.setValue(QCoreApplication::applicationName(), QCoreApplication::applicationFilePath());
-    else
+    if (autostart) {
+        QString app_fname = QString("\"%1\"").arg( QCoreApplication::applicationFilePath() );
+        app_fname.replace("/", "\\");
+        reg.setValue(QCoreApplication::applicationName(), app_fname);
+    }
+    else {
         reg.remove(QCoreApplication::applicationName());
+    }
     reg.sync();
 #else
     // this is for KDE
@@ -1203,5 +1198,8 @@ void MainWindow::setAutostart(bool autostart)
 
 void MainWindow::on_actionCloseToTray_activated()
 {
-  hide();
+    if (isVisible())
+        hide();
+    else
+        show();
 }

@@ -239,7 +239,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -335,7 +335,7 @@
     <string>Minimizes the window to tray</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+F4</string>
+    <string>Ctrl+F11</string>
    </property>
   </action>
  </widget>
