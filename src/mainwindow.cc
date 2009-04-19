@@ -1088,7 +1088,7 @@ void MainWindow::showTranslationFor( QString const & inWord )
 
   ArticleMaker am( dictionaries, groupInstances );
 
-  string result = am.makeDefinitionFor( inWord, "En" );
+  string result = am.makeDefiniti onFor( inWord, "En" );
 
   ui.definition->setContent( result.c_str(), QString() );
 
@@ -1099,9 +1099,9 @@ void MainWindow::showTranslationFor( QString const & inWord )
 
 void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
 {
-  if ( r == QSystemTrayIcon::DoubleClick )
+  if ( r == QSystemTrayIcon::Trigger )
   {
-    // Double-click toggles the visibility of main window
+    // Left click toggles the visibility of main window
     if ( !isVisible() )
       show();
     else
@@ -1109,6 +1109,13 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
     {
       showNormal();
       activateWindow();
+      raise();
+    }
+    else
+    if ( !isActiveWindow() )
+    {
+      activateWindow();
+      raise();
     }
     else
       hide();
@@ -1137,6 +1144,13 @@ void MainWindow::showMainWindow()
   {
     showNormal();
     activateWindow();
+    raise();
+  }
+  else
+  if ( !isActiveWindow() )
+  {
+    activateWindow();
+    raise();
   }
 }
 
