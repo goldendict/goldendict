@@ -120,6 +120,10 @@ private:
   /// group, or to all dictionaries if there are no groups.
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
 
+  /// Brings the main window to front if it's not currently, or hides it
+  /// otherwise. The hiding part is omitted if onlyShow is true.
+  void toggleMainWindow( bool onlyShow = false );
+
 private slots:
 
   // Executed in response to a user click on an 'add tab' tool button

@@ -375,6 +375,10 @@ void MainWindow::updateTrayIcon()
 
     trayIcon->setToolTip( "GoldenDict" );
   }
+
+  // The 'Close to tray' action is associated with the tray icon, so we hide
+  // or show it here.
+  ui.actionCloseToTray->setVisible( cfg.preferences.enableTrayIcon );
 }
 
 void MainWindow::closeEvent( QCloseEvent * ev )
@@ -1102,21 +1106,34 @@ void MainWindow::showTranslationFor( QString const & inWord )
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
 
+void MainWindow::toggleMainWindow( bool onlyShow )
+{
+  if ( !isVisible() )
+    show();
+  else
+  if ( isMinimized() )
+  {
+    showNormal();
+    activateWindow();
+    raise();
+  }
+  else
+  if ( !isActiveWindow() )
+  {
+    activateWindow();
+    raise();
+  }
+  else
+  if ( !onlyShow )
+    hide();
+}
+
 void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
 {
-  if ( r == QSystemTrayIcon::DoubleClick )
+  if ( r == QSystemTrayIcon::Trigger )
   {
-    // Double-click toggles the visibility of main window
-    if ( !isVisible() )
-      show();
-    else
-    if ( isMinimized() )
-    {
-      showNormal();
-      activateWindow();
-    }
-    else
-      hide();
+    // Left click toggles the visibility of main window
+    toggleMainWindow();
   }
 }
 
@@ -1135,14 +1152,7 @@ void MainWindow::scanEnableToggled( bool on )
 
 void MainWindow::showMainWindow()
 {
-  if ( !isVisible() )
-    show();
-  else
-  if ( isMinimized() )
-  {
-    showNormal();
-    activateWindow();
-  }
+  toggleMainWindow( true );
 }
 
 void MainWindow::visitHomepage()
@@ -1198,8 +1208,5 @@ void MainWindow::setAutostart(bool autostart)
 
 void MainWindow::on_actionCloseToTray_activated()
 {
-    if (isVisible())
-        hide();
-    else
-        show();
+  toggleMainWindow( !cfg.preferences.enableTrayIcon );
 }
