@@ -54,7 +54,8 @@ Preferences::Preferences():
   scanPopupAltMode( false ),
   scanPopupAltModeSecs( 3 ),
   pronounceOnLoadMain( false ),
-  pronounceOnLoadPopup( false )
+  pronounceOnLoadPopup( false ),
+  checkForNewReleases( true )
 {
 }
 
@@ -283,6 +284,9 @@ Class load() throw( exError )
       c.preferences.proxyServer.user = proxy.namedItem( "user" ).toElement().text();
       c.preferences.proxyServer.password = proxy.namedItem( "password" ).toElement().text();
     }
+
+    if ( !preferences.namedItem( "checkForNewReleases" ).isNull() )
+      c.preferences.checkForNewReleases = ( preferences.namedItem( "checkForNewReleases" ).toElement().text() == "1" );
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -306,6 +310,12 @@ Class load() throw( exError )
 
   if ( !mainWindowGeometry.isNull() )
     c.mainWindowGeometry = QByteArray::fromBase64( mainWindowGeometry.toElement().text().toLatin1() );
+
+  QDomNode timeForNewReleaseCheck = root.namedItem( "timeForNewReleaseCheck" );
+
+  if ( !timeForNewReleaseCheck.isNull() )
+    c.timeForNewReleaseCheck = QDateTime::fromString( timeForNewReleaseCheck.toElement().text(),
+                                                      Qt::ISODate );
 
   return c;
 }
@@ -553,6 +563,10 @@ void save( Class const & c ) throw( exError )
       opt.appendChild( dd.createTextNode( c.preferences.proxyServer.password ) );
       proxy.appendChild( opt );
     }
+
+    opt = dd.createElement( "checkForNewReleases" );
+    opt.appendChild( dd.createTextNode( c.preferences.checkForNewReleases ? "1" : "0" ) );
+    preferences.appendChild( opt );
   }
 
   {
@@ -581,6 +595,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "mainWindowGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.mainWindowGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "timeForNewReleaseCheck" );
+    opt.appendChild( dd.createTextNode( c.timeForNewReleaseCheck.toString( Qt::ISODate ) ) );
     root.appendChild( opt );
   }
 

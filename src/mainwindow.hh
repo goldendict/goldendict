@@ -106,6 +106,10 @@ private:
 
   class HotkeyWrapper * hotkeyWrapper;
 
+  QTimer newReleaseCheckTimer; // Countdown to a check for the new program
+                               // release, if enabled
+  sptr< QNetworkReply > latestReleaseReply;
+
   /// Creates, destroys or otherwise updates tray icon, according to the
   /// current configuration and situation.
   void updateTrayIcon();
@@ -131,6 +135,18 @@ private:
   /// Brings the main window to front if it's not currently, or hides it
   /// otherwise. The hiding part is omitted if onlyShow is true.
   void toggleMainWindow( bool onlyShow = false );
+
+  /// If new release checks are on, santizies the next check time and starts
+  /// the timer. Does nothing otherwise.
+  void prepareNewReleaseChecks();
+
+private slots:
+
+  /// Does the new release check.
+  void checkForNewRelease();
+
+  /// Signalled when the lastestReleaseReply is finished()
+  void latestReleaseReplyReady();
 
 private slots:
 

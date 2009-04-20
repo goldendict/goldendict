@@ -46,7 +46,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleNetMgr( this, dictionaries, articleMaker ),
   dictNetMgr( this ),
   wordFinder( this ),
-  initializing( 0 )
+  initializing( 0 ),
+  newReleaseCheckTimer( this )
 {
   ui.setupUi( this );
 
@@ -247,6 +248,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Only show window initially if it wasn't configured differently
   if ( !cfg.preferences.enableTrayIcon || !cfg.preferences.startToTray )
     show();
+
+  connect( &newReleaseCheckTimer, SIGNAL( timeout() ),
+           this, SLOT( checkForNewRelease() ) );
+
+  prepareNewReleaseChecks();
 }
 
 MainWindow::~MainWindow()
@@ -807,7 +813,9 @@ void MainWindow::editPreferences()
     applyProxySettings();
     makeScanPopup();
 
-    setAutostart(cfg.preferences.autoStart);
+    setAutostart( cfg.preferences.autoStart );
+
+    prepareNewReleaseChecks();
 
     Config::save( cfg );
   }
@@ -1142,6 +1150,109 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   else
   if ( !onlyShow )
     hide();
+}
+
+void MainWindow::prepareNewReleaseChecks()
+{
+  if ( cfg.preferences.checkForNewReleases )
+  {
+    QDateTime now = QDateTime::currentDateTime();
+
+    if ( !cfg.timeForNewReleaseCheck.isValid() ||
+         now.daysTo( cfg.timeForNewReleaseCheck ) > 2 )
+    {
+      // The date is invalid, or the check is set to happen more than 2 days
+      // in the future -- fix that.
+      cfg.timeForNewReleaseCheck = now.addDays( 2 );
+    }
+
+    int secsToCheck = now.secsTo( cfg.timeForNewReleaseCheck );
+
+    if ( secsToCheck < 1 )
+      secsToCheck = 1;
+
+    newReleaseCheckTimer.setSingleShot( true );
+    newReleaseCheckTimer.start( secsToCheck * 1000 );
+  }
+  else
+    newReleaseCheckTimer.stop(); // In case it was started before
+}
+
+void MainWindow::checkForNewRelease()
+{
+  latestReleaseReply.reset();
+
+  QNetworkRequest req(
+    QUrl( "http://goldendict.berlios.de/latest_release.php?current="
+          PROGRAM_VERSION ) );
+
+  latestReleaseReply = articleNetMgr.get( req );
+
+  connect( latestReleaseReply.get(), SIGNAL( finished() ),
+           this, SLOT( latestReleaseReplyReady() ), Qt::QueuedConnection );
+}
+
+void MainWindow::latestReleaseReplyReady()
+{
+  if ( !latestReleaseReply.get() )
+    return; // Some stray signal
+
+  bool success = false;
+  QString latestVersion, downloadUrl;
+
+  // See if we succeeded
+
+  if ( latestReleaseReply->error() == QNetworkReply::NoError )
+  {
+    QString latestReleaseInfo = QString::fromUtf8( latestReleaseReply->readLine() ).trimmed();
+    QStringList parts = latestReleaseInfo.split( ' ' );
+    if ( parts.size() == 2 )
+    {
+      latestVersion = parts[ 0 ];
+      downloadUrl = parts[ 1 ];
+      success = true;
+    }
+  }
+
+  latestReleaseReply.reset();
+
+  if ( !success )
+  {
+    // Failed -- reschedule to check in two hours
+    newReleaseCheckTimer.start( 2 * 60 * 60 * 1000 );
+
+    printf( "Failed to check program version, retry in two hours\n" );
+  }
+  else
+  {
+    // Success -- reschedule for a normal check and save config
+    cfg.timeForNewReleaseCheck = QDateTime();
+
+    prepareNewReleaseChecks();
+
+    Config::save( cfg );
+
+    printf( "Program version's check successful, current version is %ls\n",
+            latestVersion.toStdWString().c_str() );
+  }
+
+  if ( success && latestVersion > PROGRAM_VERSION )
+  {
+    QMessageBox msg( QMessageBox::Information,
+                     tr( "New Release Available" ),
+                     tr( "Version <b>%1</b> of GoldenDict is now available for download.<br>"
+                         "Click <b>Download</b> to get to the download page." ).arg( latestVersion ),
+                     QMessageBox::NoButton,
+                     this );
+
+    QPushButton * dload = msg.addButton( tr( "Download" ), QMessageBox::AcceptRole );
+    msg.addButton( QMessageBox::Cancel );
+
+    msg.exec();
+
+    if ( msg.clickedButton() == dload )
+      QDesktopServices::openUrl( QUrl( downloadUrl ) );
+  }
 }
 
 void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )

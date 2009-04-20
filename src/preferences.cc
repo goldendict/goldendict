@@ -112,6 +112,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
   ui.proxyUser->setText( p.proxyServer.user );
   ui.proxyPassword->setText( p.proxyServer.password );
+
+  ui.checkForNewReleases->setChecked( p.checkForNewReleases );
 }
 
 Config::Preferences Preferences::getPreferences()
@@ -159,6 +161,8 @@ Config::Preferences Preferences::getPreferences()
 
   p.proxyServer.user = ui.proxyUser->text();
   p.proxyServer.password = ui.proxyPassword->text();
+
+  p.checkForNewReleases = ui.checkForNewReleases->isChecked();
 
   return p;
 }

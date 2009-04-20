@@ -7,6 +7,7 @@
 #include <vector>
 #include <QString>
 #include <QSize>
+#include <QDateTime>
 #include "ex.hh"
 
 /// GoldenDict's configuration
@@ -118,6 +119,8 @@ struct Preferences
 
   ProxyServer proxyServer;
 
+  bool checkForNewReleases;
+
   Preferences();
 };
 
@@ -163,6 +166,9 @@ struct Class
 
   QByteArray mainWindowState; // Binary state saved by QMainWindow
   QByteArray mainWindowGeometry; // Geometry saved by QMainWindow
+
+  QDateTime timeForNewReleaseCheck; // Only effective if
+                                    // preferences.checkForNewReleases is set
 
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 )
   {}
