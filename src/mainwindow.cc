@@ -32,6 +32,8 @@ using std::pair;
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIcon( 0 ),
+  groupLabel( &searchPaneTitleBar ),
+  groupList( &searchPaneTitleBar ),
   focusTranslateLineAction( this ),
   addTabAction( this ),
   closeCurrentTabAction( this ),
@@ -47,6 +49,19 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   initializing( 0 )
 {
   ui.setupUi( this );
+
+  // Make the search pane's titlebar
+
+  groupLabel.setText( tr( "Look up in:" ) );
+
+  searchPaneTitleBarLayout.setContentsMargins( 8, 2, 8, 0 );
+  searchPaneTitleBarLayout.addWidget( &groupLabel );
+  searchPaneTitleBarLayout.addWidget( &groupList );
+  searchPaneTitleBarLayout.addStretch();
+
+  searchPaneTitleBar.setLayout( &searchPaneTitleBarLayout );
+
+  ui.searchPane->setTitleBarWidget( &searchPaneTitleBar );
 
   // Make the toolbar
   navToolbar = addToolBar( tr( "Navigation" ) );
@@ -173,7 +188,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.about, SIGNAL( activated() ),
            this, SLOT( showAbout() ) );
 
-  connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+  connect( &groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
 
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
@@ -537,13 +552,13 @@ void MainWindow::updateGroupList()
 {
   bool haveGroups = cfg.groups.size();
 
-  ui.groupList->setVisible( haveGroups );
+  groupList.setVisible( haveGroups );
 
-  ui.groupLabel->setText( haveGroups ? tr( "Look up in:" ) : tr( "Look up:" ) );
+  groupLabel.setText( haveGroups ? tr( "Look up in:" ) : tr( "Look up:" ) );
 
   // currentIndexChanged() signal is very trigger-happy. To avoid triggering
   // it, we disconnect it while we're clearing and filling back groups.
-  disconnect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+  disconnect( &groupList, SIGNAL( currentIndexChanged( QString const & ) ),
               this, SLOT( currentGroupChanged( QString const & ) ) );
 
   groupInstances.clear();
@@ -557,10 +572,10 @@ void MainWindow::updateGroupList()
     Instances::updateNames( cfg.groups[ x ], dictionaries );
   }
 
-  ui.groupList->fill( groupInstances );
-  ui.groupList->setCurrentGroup( cfg.lastMainGroupId );
+  groupList.fill( groupInstances );
+  groupList.setCurrentGroup( cfg.lastMainGroupId );
 
-  connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+  connect( &groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
 }
 
@@ -582,7 +597,7 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
   if ( cfg.groups.empty() )
     return dictionaries;
 
-  int current = ui.groupList->currentIndex();
+  int current = groupList.currentIndex();
 
   if ( current < 0 || current >= (int) groupInstances.size() )
   {
@@ -800,7 +815,7 @@ void MainWindow::editPreferences()
 
 void MainWindow::currentGroupChanged( QString const & )
 {
-  cfg.lastMainGroupId = ui.groupList->getCurrentGroup();
+  cfg.lastMainGroupId = groupList.getCurrentGroup();
 
   // Update word search results
 
@@ -1014,7 +1029,7 @@ void MainWindow::showTranslationFor( QString const & inWord )
   navPronounce->setEnabled( false );
 
   view.showDefinition( inWord, cfg.groups.empty() ? 0 :
-                        groupInstances[ ui.groupList->currentIndex() ].id );
+                        groupInstances[ groupList.currentIndex() ].id );
 
   updatePronounceAvailability();
 
@@ -1026,7 +1041,7 @@ void MainWindow::showTranslationFor( QString const & inWord )
   req.addQueryItem( "word", inWord );
   req.addQueryItem( "group",
                     cfg.groups.empty() ? "" :
-                      groupInstances[ ui.groupList->currentIndex() ].name );
+                      groupInstances[ groupList.currentIndex() ].name );
 
   ui.definition->load( req );
 

@@ -75,6 +75,14 @@ private:
   QSystemTrayIcon * trayIcon;
 
   Ui::MainWindow ui;
+
+  /// This widget is used as a title bar for the searchPane dock, and
+  /// incorporates the next three objects inside
+  QWidget searchPaneTitleBar;
+  QHBoxLayout searchPaneTitleBarLayout;
+  QLabel groupLabel;
+  GroupComboBox groupList;
+
   QAction focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           switchToNextTabAction, switchToPrevTabAction;
   QToolBar * navToolbar;
