@@ -666,9 +666,9 @@ for all program's network requests.</string>
          <property name="toolTip">
           <string>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
-is available for download. If it is, the program
-informs the user about it and provides a
-download link. The checks are done each two days.</string>
+is available for download. If it is so, the program
+informs the user about it and prompts to open a
+download page. The checks are done each two days.</string>
          </property>
          <property name="text">
           <string>Check for new program releases periodically</string>
