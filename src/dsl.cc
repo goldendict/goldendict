@@ -57,7 +57,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 6 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 7 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -70,6 +70,8 @@ struct IdxHeader
   uint32_t abrvAddress; // Address of abrv map in the chunked storage
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
+  uint32_t articleCount; // Number of articles this dictionary has
+  uint32_t wordCount; // Number of headwords this dictionary has
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -110,10 +112,10 @@ public:
   { return map< Dictionary::Property, string >(); }
 
   virtual unsigned long getArticleCount() throw()
-  { return 0; }
+  { return idxHeader.articleCount; }
 
   virtual unsigned long getWordCount() throw()
-  { return 0; }
+  { return idxHeader.wordCount; }
 
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
@@ -1198,6 +1200,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         wstring curString;
         size_t curOffset;
 
+        uint32_t articleCount = 0, wordCount = 0;
+
         for( ; ; )
         {
           // Find the main headword
@@ -1246,7 +1250,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
             {
               fprintf( stderr, "Warning: premature end of file %s\n", i->c_str() );
-              exit( 0 );
               break;
             }
 
@@ -1275,6 +1278,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             unescapeDsl( *j );
             indexedWords.addWord( *j, descOffset );
           }
+
+          ++articleCount;
+          wordCount += allEntryWords.size();
 
           // Skip the article's body
           for( ; ; )
@@ -1313,6 +1319,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         idxHeader.signature = Signature;
         idxHeader.formatVersion = CurrentFormatVersion;
+
+        idxHeader.articleCount = articleCount;
+        idxHeader.wordCount = wordCount;
 
         idx.rewind();
 
