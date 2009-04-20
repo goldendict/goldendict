@@ -1184,7 +1184,20 @@ void MainWindow::checkForNewRelease()
 
   QNetworkRequest req(
     QUrl( "http://goldendict.berlios.de/latest_release.php?current="
-          PROGRAM_VERSION ) );
+          PROGRAM_VERSION "&platform="
+#ifdef Q_WS_X11
+          "x11"
+#endif
+#ifdef Q_WS_MAC
+          "mac"
+#endif
+#ifdef Q_WS_QWS
+          "qws"
+#endif
+#ifdef Q_WS_WIN
+          "win"
+#endif
+          ) );
 
   latestReleaseReply = articleNetMgr.get( req );
 
