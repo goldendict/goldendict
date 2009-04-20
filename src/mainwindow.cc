@@ -85,6 +85,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( focusTranslateLine() ) );
 
   ui.centralWidget->addAction( &focusTranslateLineAction );
+  ui.searchPaneWidget->addAction( &focusTranslateLineAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -196,7 +197,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     restoreGeometry( cfg.mainWindowGeometry );
 
   if ( cfg.mainWindowState.size() )
-    restoreState( cfg.mainWindowState );
+    restoreState( cfg.mainWindowState, 1 );
 
   applyProxySettings();
 
@@ -236,7 +237,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 MainWindow::~MainWindow()
 {
   // Save MainWindow state and geometry
-  cfg.mainWindowState = saveState();
+  cfg.mainWindowState = saveState( 1 );
   cfg.mainWindowGeometry = saveGeometry();
 
   // Save any changes in last chosen groups etc

@@ -96,7 +96,8 @@ HEADERS += folding.hh \
            wstring.hh \
            wstring_qt.hh \
            processwrapper.hh \
-           hotkeywrapper.hh
+           hotkeywrapper.hh \
+           searchpanewidget.hh
 	  
 
 FORMS += groups.ui dictgroupwidget.ui mainwindow.ui sources.ui initializing.ui\
