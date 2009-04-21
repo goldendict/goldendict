@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <QObject>
+#include <QIcon>
 #include "sptr.hh"
 #include "ex.hh"
 #include "mutex.hh"
@@ -40,7 +41,7 @@ DEF_EX( exRequestUnfinished, "The request hasn't yet finished", Ex )
 /// no more matches to be expected. Note that before connecting to it, check
 /// the result of isFinished() -- if it's 'true', the search was instantaneous.
 /// Destroy the object when you are not interested in results anymore.
-/// 
+///
 /// Creating, destroying and calling member functions of the requests is done
 /// in the GUI thread, however. Therefore, it is important to make sure those
 /// operations are fast (this is most important for word searches, where
@@ -76,7 +77,7 @@ public:
 
   virtual ~Request()
   {}
-  
+
 signals:
 
   /// This signal is emitted when more data becomes available. Local
@@ -84,7 +85,7 @@ signals:
   /// data would be available from them at once, but network dictionaries
   /// might call that.
   void updated();
-  
+
   /// This signal is emitted when the request has been processed in full and
   /// finished. That is, it's emitted when isFinished() turns true.
   void finished();
@@ -93,7 +94,7 @@ protected:
 
   /// Called by derivatives to signal update().
   void update();
-  
+
   /// Called by derivatives to set isFinished() flag and signal finished().
   void finish();
 
@@ -127,7 +128,7 @@ struct WordMatch
 class WordSearchRequest: public Request
 {
   Q_OBJECT
-      
+
 public:
 
   /// Returns the number of matches found. The value can grow over time
@@ -141,9 +142,9 @@ public:
   /// Returns all the matches found. Since no further locking can or would be
   /// done, this can only be called after the request has finished.
   vector< WordMatch > & getAllMatches() throw( exRequestUnfinished );
-  
+
 protected:
-  
+
   // Subclasses should be filling up the 'matches' array, locking the mutex when
   // whey work with it.
   Mutex dataMutex;
@@ -157,7 +158,7 @@ protected:
 class DataRequest: public Request
 {
   Q_OBJECT
-      
+
 public:
 
   /// Returns the number of bytes read, with a -1 meaning that so far it's
@@ -179,7 +180,7 @@ public:
   DataRequest(): hasAnyData( false ) {}
 
 protected:
-  
+
   // Subclasses should be filling up the 'data' array, locking the mutex when
   // whey work with it.
   Mutex dataMutex;
@@ -243,7 +244,6 @@ public:
   vector< string > const & getDictionaryFilenames() throw()
   { return dictionaryFiles; }
 
-
   /// Returns the dictionary's full name, utf8.
   virtual string getName() throw()=0;
 
@@ -257,6 +257,10 @@ public:
   /// Returns the number of words in the dictionary. This can be equal to
   /// the number of articles, or can be larger if some synonyms are present.
   virtual unsigned long getWordCount() throw()=0;
+
+  /// Returns the dictionary's icon.
+  virtual QIcon getIcon() throw()
+  { return QIcon(); }
 
   /// Looks up a given word in the dictionary, aiming for exact matches and
   /// prefix matches. If it's not possible to locate any prefix matches, no

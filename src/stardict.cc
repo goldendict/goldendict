@@ -127,6 +127,9 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount + idxHeader.synWordCount; }
 
+  virtual QIcon getIcon() throw()
+  { return QIcon(":/icons/icon32_stardict.png"); }
+
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     throw( std::exception );
 
@@ -199,7 +202,7 @@ void StardictDictionary::getArticleProps( uint32_t articleAddress,
   vector< char > chunk;
 
   Mutex::Lock _( idxMutex );
-  
+
   char * articleData = chunks.getBlock( articleAddress, chunk );
 
   memcpy( &offset, articleData, sizeof( uint32_t ) );
@@ -433,7 +436,7 @@ class StardictHeadwordsRequestRunnable: public QRunnable
 {
   StardictHeadwordsRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   StardictHeadwordsRequestRunnable( StardictHeadwordsRequest & r_,
@@ -445,7 +448,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -475,7 +478,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~StardictHeadwordsRequest()
   {
     isCancelled.ref();
@@ -544,7 +547,7 @@ class StardictArticleRequestRunnable: public QRunnable
 {
   StardictArticleRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   StardictArticleRequestRunnable( StardictArticleRequest & r_,
@@ -556,7 +559,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -588,7 +591,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~StardictArticleRequest()
   {
     isCancelled.ref();
@@ -653,7 +656,7 @@ void StardictArticleRequest::run()
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
 
-    multimap< wstring, pair< string, string > > & mapToUse = 
+    multimap< wstring, pair< string, string > > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
         mainArticles : alternateArticles;
 
@@ -1036,10 +1039,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           vector< uint32_t > articleOffsets;
 
           articleOffsets.reserve( ifo.wordcount );
-  
+
           handleIdxSynFile( idxFileName, indexedWords, chunks, &articleOffsets,
                             false );
-  
+
           handleIdxSynFile( synFileName, indexedWords, chunks, &articleOffsets,
                             true );
         }

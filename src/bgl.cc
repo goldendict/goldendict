@@ -205,6 +205,9 @@ namespace
     virtual unsigned long getWordCount() throw()
     { return idxHeader.wordCount; }
 
+    virtual QIcon getIcon() throw()
+    { return QIcon(":/icons/icon32_bgl.png"); }
+
     virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
       throw( std::exception );
 
@@ -263,7 +266,7 @@ namespace
     vector< char > chunk;
 
     Mutex::Lock _( idxMutex );
-    
+
     char * articleData = chunks.getBlock( offset, chunk );
 
     headword = articleData;
@@ -271,7 +274,7 @@ namespace
     displayedHeadword = articleData + headword.size() + 1;
 
     articleText =
-      string( articleData + headword.size() + 
+      string( articleData + headword.size() +
                 displayedHeadword.size() + 2 );
   }
 
@@ -283,7 +286,7 @@ class BglHeadwordsRequestRunnable: public QRunnable
 {
   BglHeadwordsRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   BglHeadwordsRequestRunnable( BglHeadwordsRequest & r_,
@@ -295,7 +298,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -325,7 +328,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~BglHeadwordsRequest()
   {
     isCancelled.ref();
@@ -425,7 +428,7 @@ class BglArticleRequestRunnable: public QRunnable
 {
   BglArticleRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   BglArticleRequestRunnable( BglArticleRequest & r_,
@@ -437,7 +440,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -469,7 +472,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~BglArticleRequest()
   {
     isCancelled.ref();
@@ -535,13 +538,13 @@ void BglArticleRequest::run()
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( removePostfix( headword ) ) );
 
-    multimap< wstring, pair< string, string > > & mapToUse = 
+    multimap< wstring, pair< string, string > > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
         mainArticles : alternateArticles;
 
     mapToUse.insert( pair< wstring, pair< string, string > >(
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-      pair< string, string >( 
+      pair< string, string >(
         displayedHeadword.size() ? displayedHeadword : headword,
         articleText ) ) );
 
@@ -612,7 +615,7 @@ class BglResourceRequestRunnable: public QRunnable
 {
   BglResourceRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   BglResourceRequestRunnable( BglResourceRequest & r_,
@@ -624,7 +627,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -663,7 +666,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~BglResourceRequest()
   {
     isCancelled.ref();

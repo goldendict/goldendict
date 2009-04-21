@@ -1,18 +1,22 @@
 <RCC>
-  <qresource>
-    <file>icons/arrow.png</file>
-    <file>icons/prefix.png</file>
-    <file>icons/pushpin.png</file>
-    <file>icons/playsound.png</file>
-    <file>icons/closetab.png</file>
-    <file>icons/addtab.png</file>
-    <file>icons/next.png</file>
-    <file>icons/previous.png</file>
-    <file>icons/programicon.png</file>
-    <file>icons/programicon_scan.png</file>
-    <file>icons/wizard.png</file>
-    <file>icons/warning.png</file>
-    <file>article-style.css</file>
-    <file>qt-style.css</file>
-  </qresource>
+    <qresource prefix="/" >
+        <file>icons/arrow.png</file>
+        <file>icons/prefix.png</file>
+        <file>icons/pushpin.png</file>
+        <file>icons/playsound.png</file>
+        <file>icons/closetab.png</file>
+        <file>icons/addtab.png</file>
+        <file>icons/next.png</file>
+        <file>icons/previous.png</file>
+        <file>icons/programicon.png</file>
+        <file>icons/programicon_scan.png</file>
+        <file>icons/wizard.png</file>
+        <file>icons/warning.png</file>
+        <file>article-style.css</file>
+        <file>qt-style.css</file>
+        <file>icons/icon32_dsl.png</file>
+        <file>icons/icon32_stardict.png</file>
+        <file>icons/icon32_xdxf.png</file>
+        <file>icons/icon32_bgl.png</file>
+    </qresource>
 </RCC>

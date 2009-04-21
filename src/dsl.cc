@@ -117,6 +117,10 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
 
+  virtual QIcon getIcon() throw()
+  { return QIcon(":/icons/icon32_dsl.png"); }
+
+
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
     throw( std::exception )
@@ -255,17 +259,17 @@ void DslDictionary::loadArticle( uint32_t address,
 
   {
     vector< char > chunk;
-  
+
     char * articleProps;
 
     {
       Mutex::Lock _( idxMutex );
-      
+
       articleProps = chunks.getBlock( address, chunk );
     }
-  
+
     uint32_t articleOffset, articleSize;
-  
+
     memcpy( &articleOffset, articleProps, sizeof( articleOffset ) );
     memcpy( &articleSize, articleProps + sizeof( articleOffset ),
             sizeof( articleSize ) );
@@ -280,7 +284,7 @@ void DslDictionary::loadArticle( uint32_t address,
 
       articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
     }
-  
+
     if ( !articleBody )
       throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
 
@@ -430,8 +434,8 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     {
       // If we have the file here, do the exact reference to this dictionary.
       // Otherwise, make a global 'search' one.
-      
-      string n = 
+
+      string n =
         FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
         FsEncoding::separator() +
         FsEncoding::encode( filename );
@@ -611,7 +615,7 @@ class DslArticleRequestRunnable: public QRunnable
 {
   DslArticleRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   DslArticleRequestRunnable( DslArticleRequest & r_,
@@ -623,7 +627,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -655,7 +659,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~DslArticleRequest()
   {
     isCancelled.ref();
@@ -744,7 +748,7 @@ void DslArticleRequest::run()
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
 
-    multimap< wstring, string > & mapToUse = 
+    multimap< wstring, string > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
         mainArticles : alternateArticles;
 
@@ -810,7 +814,7 @@ class DslResourceRequestRunnable: public QRunnable
 {
   DslResourceRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   DslResourceRequestRunnable( DslResourceRequest & r_,
@@ -822,7 +826,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -859,7 +863,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~DslResourceRequest()
   {
     isCancelled.ref();
@@ -881,7 +885,7 @@ void DslResourceRequest::run()
     return;
   }
 
-  string n = 
+  string n =
     FsEncoding::dirname( dictionaryFileName ) +
     FsEncoding::separator() +
     FsEncoding::encode( resourceName );
@@ -976,7 +980,7 @@ void DslResourceRequest::run()
         Mutex::Lock _( dataMutex );
 
         data.resize( buffer.size() );
-  
+
         memcpy( &data.front(), buffer.data(), data.size() );
       }
     }

@@ -100,11 +100,28 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
   if ( !item )
     return QVariant();
 
-  if ( role == Qt::DisplayRole )
-    return QString::fromUtf8( item->getName().c_str() );
-  else
-  if ( role == Qt::EditRole )
-    return QString::fromUtf8( item->getId().c_str() );
+//  if ( role == Qt::DisplayRole )
+//    return QString::fromUtf8( item->getName().c_str() );
+//  else
+//  if ( role == Qt::EditRole )
+//    return QString::fromUtf8( item->getId().c_str() );
+//  else
+//  if ( role == Qt::DecorationRole )
+//    return item->getIcon();
+
+  switch ( role )
+  {
+    case Qt::DisplayRole :
+      return QString::fromUtf8( item->getName().c_str() );
+
+    case Qt::EditRole :
+      return QString::fromUtf8( item->getId().c_str() );
+
+    case Qt::DecorationRole:
+      return item->getIcon();
+
+    default:;
+  }
 
   return QVariant();
 }
@@ -143,7 +160,7 @@ bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
        index.row() >= (int)dictionaries.size() )
     return false;
 
-  if ( role == Qt::DisplayRole )
+  if ( ( role == Qt::DisplayRole ) || ( role ==  Qt::DecorationRole ) )
   {
     // Allow changing that, but do nothing
     return true;
@@ -216,7 +233,7 @@ std::vector< sptr< Dictionary::Class > > const &
 
 // DictGroupsWidget
 
-DictGroupsWidget::DictGroupsWidget( QWidget * parent ): 
+DictGroupsWidget::DictGroupsWidget( QWidget * parent ):
   QTabWidget( parent ), nextId( 1 ), allDicts( 0 )
 {
   setMovable( true );
