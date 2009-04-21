@@ -25,11 +25,12 @@ void QHotkeyApplication::unregisterWrapper(HotkeyWrapper *wrapper)
 //////////////////////////////////////////////////////////////////////////
 
 HotkeyStruct::HotkeyStruct( quint32 key_, quint32 key2_, quint32 modifier_,
-                            int handle_ ):
+                            int handle_, int id_ ):
   key( key_ ),
   key2( key2_ ),
   modifier( modifier_ ),
-  handle( handle_ )
+  handle( handle_ ),
+  id( id_ )
 {
 }
 
@@ -41,6 +42,11 @@ HotkeyWrapper::HotkeyWrapper(QObject *parent) : QThread( parent ),
   init();
 
   (static_cast<QHotkeyApplication*>(qApp))->registerWrapper(this);
+}
+
+HotkeyWrapper::~HotkeyWrapper()
+{
+  unregister();
 }
 
 void HotkeyWrapper::waitKey2()
@@ -110,7 +116,7 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
   quint32 vk = nativeKey( key );
   quint32 vk2 = key2 ? nativeKey( key2 ) : 0;
 
-  hotkeys.append( HotkeyStruct( vk, vk2, mod, handle ) );
+  hotkeys.append( HotkeyStruct( vk, vk2, mod, handle, id ) );
 
   if (!RegisterHotKey(hwnd, id++, mod, vk))
     return false;
@@ -193,16 +199,16 @@ quint32 HotkeyWrapper::nativeKey(int key)
   return key;
 }
 
-HotkeyWrapper::~HotkeyWrapper()
+void HotkeyWrapper::unregister()
 {
   for (int i = 0; i < hotkeys.count(); i++)
   {
     HotkeyStruct const & hk = hotkeys.at( i );
 
-    UnregisterHotKey( hwnd, hk.key );
+    UnregisterHotKey( hwnd, hk.id );
 
     if ( hk.key2 && hk.key2 != hk.key )
-      UnregisterHotKey( hwnd, hk.key2 );
+      UnregisterHotKey( hwnd, hk.id+1 );
   }
 
   (static_cast<QHotkeyApplication*>(qApp))->unregisterWrapper(this);
@@ -389,7 +395,7 @@ quint32 HotkeyWrapper::nativeKey(int key)
   return XKeysymToKeycode( display, XStringToKeysym( keySymName.toLatin1().data() ) );
 }
 
-HotkeyWrapper::~HotkeyWrapper()
+void HotkeyWrapper::unregister()
 {
   Display * display = QX11Info::display();
 

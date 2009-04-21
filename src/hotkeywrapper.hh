@@ -18,11 +18,12 @@
 struct HotkeyStruct
 {
   HotkeyStruct() {};
-  HotkeyStruct( quint32 key, quint32 key2, quint32 modifier, int handle );
+  HotkeyStruct( quint32 key, quint32 key2, quint32 modifier, int handle, int id );
 
   quint32 key, key2;
   quint32 modifier;
   int handle;
+  int id;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -44,6 +45,9 @@ public:
   /// was activated.
   bool setGlobalKey( int key, int key2, Qt::KeyboardModifiers modifier,
                      int handle );
+
+  /// Unregisters everything
+  void unregister();
 
 signals:
 
