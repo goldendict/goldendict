@@ -27,6 +27,10 @@
 #include <QAtomicInt>
 #include <QUrl>
 
+#include <QDir>
+#include <QFileInfo>
+#include <QPainter>
+
 // For TIFF conversion
 #include <QImage>
 #include <QByteArray>
@@ -97,6 +101,8 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   dictData * dz;
   Mutex resourceZipMutex;
   zip * resourceZip;
+  QIcon dictionaryIcon;
+  bool dictionaryIconLoaded;
 
 public:
 
@@ -117,9 +123,7 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
 
-  virtual QIcon getIcon() throw()
-  { return QIcon(":/icons/icon32_dsl.png"); }
-
+  virtual QIcon getIcon() throw();
 
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
@@ -160,7 +164,8 @@ DslDictionary::DslDictionary( string const & id,
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
-  chunks( idx, idxHeader.chunksOffset )
+  chunks( idx, idxHeader.chunksOffset ),
+  dictionaryIconLoaded( false )
 {
   // Open the .dict file
 
@@ -228,6 +233,67 @@ DslDictionary::~DslDictionary()
 
   if ( dz )
     dict_data_close( dz );
+}
+
+QIcon DslDictionary::getIcon() throw()
+{
+  if ( !dictionaryIconLoaded )
+  {
+    // Try loading icon now
+    QString fileName =
+      QDir::fromNativeSeparators( QString::fromLocal8Bit( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+    // Remove the extension
+
+    QString lc = fileName.toLower();
+
+    if ( fileName.endsWith( ".dsl.dz", Qt::CaseInsensitive ) )
+      fileName.chop( 6 );
+    else
+      fileName.chop( 4 );
+
+    fileName += "bmp";
+
+    QFileInfo info( fileName );
+
+    if ( info.exists() )
+    {
+      QImage img( fileName );
+
+      if ( !img.isNull() )
+      {
+        // Load successful
+
+        // Apply the color key
+
+        img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
+                                                      Qt::MaskOutColor ) );
+
+        // Transform it to be square
+        int max = img.width() > img.height() ? img.width() : img.height();
+
+        QImage result( max, max, QImage::Format_ARGB32 );
+        result.fill( 0 ); // Black transparent
+
+        QPainter painter( &result );
+
+        painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                                   img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                           img );
+
+        painter.end();
+
+        dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+      }
+    }
+
+    dictionaryIconLoaded = true;
+  }
+
+  if ( !dictionaryIcon.isNull() )
+    return dictionaryIcon;
+  else
+    return QIcon(":/icons/icon32_dsl.png");
 }
 
 /// Determines whether or not this char is treated as whitespace for dsl
