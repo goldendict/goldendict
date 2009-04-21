@@ -272,7 +272,7 @@
     <message>
         <location filename="../groups.ui" line="91"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Перетаскиваете словари в группы из списка доступных словарей, изменяйте порядок групп, используя мышь.</translation>
+        <translation>Перетаскивайте словари в группы из списка доступных словарей, изменяйте порядок групп, используя мышь.</translation>
     </message>
 </context>
 <context>
