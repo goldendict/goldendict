@@ -125,6 +125,28 @@ void ScanPopup::disableScanning()
   }
 }
 
+void ScanPopup::translateWordFromClipboard()
+{
+  printf( "translating from clipboard\n" );
+
+  QString subtype = "plain";
+
+  QString str = QApplication::clipboard()->text( subtype,
+                                                 QClipboard::Clipboard );
+
+  str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
+
+  if ( !str.size() )
+    return; // Nothing there
+
+  // In case we had any timers engaged before, cancel them now.
+  altModePollingTimer.stop();
+  altModeExpirationTimer.stop();
+
+  inputWord = str;
+  engagePopup();
+}
+
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
   if ( !isScanningEnabled )
@@ -144,9 +166,6 @@ void ScanPopup::mouseHovered( QString const & str )
 
 void ScanPopup::handleInputWord( QString const & str )
 {
-  if ( !cfg.preferences.enableScanPopup )
-    return;
-
   pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
 
   if ( !pendingInputWord.size() )

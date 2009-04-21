@@ -53,6 +53,12 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.startToTray->setChecked( p.startToTray );
   ui.closeToTray->setChecked( p.closeToTray );
   ui.cbAutostart->setChecked( p.autoStart );
+
+  ui.enableMainWindowHotkey->setChecked( p.enableMainWindowHotkey );
+  ui.mainWindowHotkey->setHotKey( p.mainWindowHotkey );
+  ui.enableClipboardHotkey->setChecked( p.enableClipboardHotkey );
+  ui.clipboardHotkey->setHotKey( p.clipboardHotkey );
+
   ui.enableScanPopup->setChecked( p.enableScanPopup );
   ui.startWithScanPopupOn->setChecked( p.startWithScanPopupOn );
   ui.enableScanPopupModifiers->setChecked( p.enableScanPopupModifiers );
@@ -130,6 +136,12 @@ Config::Preferences Preferences::getPreferences()
   p.startToTray = ui.startToTray->isChecked();
   p.closeToTray = ui.closeToTray->isChecked();
   p.autoStart = ui.cbAutostart->isChecked();
+
+  p.enableMainWindowHotkey = ui.enableMainWindowHotkey->isChecked();
+  p.mainWindowHotkey = ui.mainWindowHotkey->getHotKey();
+  p.enableClipboardHotkey = ui.enableClipboardHotkey->isChecked();
+  p.clipboardHotkey = ui.clipboardHotkey->getHotKey();
+
   p.enableScanPopup = ui.enableScanPopup->isChecked();
   p.startWithScanPopupOn = ui.startWithScanPopupOn->isChecked();
   p.enableScanPopupModifiers = ui.enableScanPopupModifiers->isChecked();
@@ -221,6 +233,16 @@ void Preferences::sideShiftClicked( bool )
 {
   if ( ui.leftShift->isChecked() || ui.rightShift->isChecked() )
     ui.shiftKey->setChecked( false );
+}
+
+void Preferences::on_enableMainWindowHotkey_toggled( bool checked )
+{
+  ui.mainWindowHotkey->setEnabled( checked );
+}
+
+void Preferences::on_enableClipboardHotkey_toggled( bool checked )
+{
+  ui.clipboardHotkey->setEnabled( checked );
 }
 
 void Preferences::on_buttonBox_accepted()

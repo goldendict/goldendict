@@ -8,6 +8,7 @@
 #include <QString>
 #include <QSize>
 #include <QDateTime>
+#include <QKeySequence>
 #include "ex.hh"
 
 /// GoldenDict's configuration
@@ -96,6 +97,21 @@ struct ProxyServer
   ProxyServer();
 };
 
+// A hotkey -- currently qt modifiers plus one or two keys
+struct HotKey
+{
+  Qt::KeyboardModifiers modifiers;
+  int key1, key2;
+
+  HotKey();
+
+  /// We use the first two keys of QKeySequence, with modifiers being stored
+  /// in the first one.
+  HotKey( QKeySequence const & );
+
+  QKeySequence toKeySequence() const;
+};
+
 /// Various user preferences
 struct Preferences
 {
@@ -106,6 +122,12 @@ struct Preferences
   bool startToTray;
   bool closeToTray;
   bool autoStart;
+
+  bool enableMainWindowHotkey;
+  HotKey mainWindowHotkey;
+  bool enableClipboardHotkey;
+  HotKey clipboardHotkey;
+
   bool enableScanPopup;
   bool startWithScanPopupOn;
   bool enableScanPopupModifiers;

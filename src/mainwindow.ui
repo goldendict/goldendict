@@ -278,7 +278,7 @@
     <string>Minimizes the window to tray</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+F11</string>
+    <string>Ctrl+F4</string>
    </property>
   </action>
  </widget>

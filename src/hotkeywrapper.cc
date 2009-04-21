@@ -1,5 +1,9 @@
 #include "hotkeywrapper.hh"
 
+#ifdef Q_WS_X11
+#include <X11/Xlibint.h>
+#endif
+
 //////////////////////////////////////////////////////////////////////////
 
 QHotkeyApplication::QHotkeyApplication(int & argc, char ** argv) : QApplication(argc,argv)
@@ -20,18 +24,18 @@ void QHotkeyApplication::unregisterWrapper(HotkeyWrapper *wrapper)
 
 //////////////////////////////////////////////////////////////////////////
 
-HotkeyStruct::HotkeyStruct(quint32 key, quint32 key2, quint32 modifier, const QObject *member, const char *receiver)
+HotkeyStruct::HotkeyStruct( quint32 key_, quint32 key2_, quint32 modifier_,
+                            int handle_ ):
+  key( key_ ),
+  key2( key2_ ),
+  modifier( modifier_ ),
+  handle( handle_ )
 {
-  this->key = key;
-  this->key2 = key2;
-  this->modifier = modifier;
-  this->member = member;
-  this->receiver = receiver;
 }
 
 //////////////////////////////////////////////////////////////////////////
 
-HotkeyWrapper::HotkeyWrapper(QObject *parent) : QObject(parent),
+HotkeyWrapper::HotkeyWrapper(QObject *parent) : QThread( parent ),
     state2(false)
 {
   init();
@@ -49,21 +53,18 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
   if (state2) {	// wait for 2nd key
     state2 = false;
     if (state2waiter.key2 == vk && state2waiter.modifier == mod) {
-       connect(this, SIGNAL(hotkeyActivated()), state2waiter.member, state2waiter.receiver);
-       emit hotkeyActivated();
-       disconnect(state2waiter.member, state2waiter.receiver);
+       emit hotkeyActivated( state2waiter.handle );
        return true;
     }
   }
 
   for (int i = 0; i < hotkeys.count(); i++) {
+
     const HotkeyStruct &hs = hotkeys.at(i);
 
     if (hs.key == vk && hs.modifier == mod) {
       if (hs.key2 == 0) {
-         connect(this, SIGNAL(hotkeyActivated()), hs.member, hs.receiver);
-         emit hotkeyActivated();
-         disconnect(hs.member, hs.receiver);
+         emit hotkeyActivated( hs.handle );
          return true;
       }
 
@@ -90,10 +91,11 @@ void HotkeyWrapper::init()
   hwnd = (HWND)root->winId();
 }
 
-bool HotkeyWrapper::setGlobalKey(int key, int key2, Qt::KeyboardModifiers modifier, const QObject *member, const char *receiver)
+bool HotkeyWrapper::setGlobalKey( int key, int key2,
+                                  Qt::KeyboardModifiers modifier, int handle )
 {
-  if (!member || !receiver)
-    return false;
+  if ( !key )
+    return false; // We don't monitor empty combinations
 
   static int id = 0;
 
@@ -105,15 +107,15 @@ bool HotkeyWrapper::setGlobalKey(int key, int key2, Qt::KeyboardModifiers modifi
   if (modifier & Qt::SHIFT)
     mod |= MOD_SHIFT;
 
-  quint32 vk = nativeKey(key);
-  quint32 vk2 = nativeKey(key2);
+  quint32 vk = nativeKey( key );
+  quint32 vk2 = key2 ? nativeKey( key2 ) : 0;
 
-  hotkeys.append(HotkeyStruct(vk, vk2, mod, member, receiver));
+  hotkeys.append( HotkeyStruct( vk, vk2, mod, handle ) );
 
   if (!RegisterHotKey(hwnd, id++, mod, vk))
     return false;
 
-  if (vk2)
+  if ( key2 && key2 != key )
     return RegisterHotKey(hwnd, id++, mod, vk2);
 
   return true;
@@ -194,7 +196,14 @@ quint32 HotkeyWrapper::nativeKey(int key)
 HotkeyWrapper::~HotkeyWrapper()
 {
   for (int i = 0; i < hotkeys.count(); i++)
-    UnregisterHotKey(hwnd, hotkeys.at(i).key);
+  {
+    HotkeyStruct const & hk = hotkeys.at( i );
+
+    UnregisterHotKey( hwnd, hk.key );
+
+    if ( hk.key2 && hk.key2 != hk.key )
+      UnregisterHotKey( hwnd, hk.key2 );
+  }
 
   (static_cast<QHotkeyApplication*>(qApp))->unregisterWrapper(this);
 }
@@ -207,7 +216,7 @@ bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
   {
     for (int i = 0; i < hotkeyWrappers.size(); i++)
     {
-      if (hotkeyWrappers.at(i)->winEvent( message, result ))
+      if ( hotkeyWrappers.at(i)->winEvent( message, result ) )
         return true;
     }
   }
@@ -225,15 +234,129 @@ bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
 
 void HotkeyWrapper::init()
 {
+  // We use RECORD extension instead of XGrabKey. That's because XGrabKey
+  // prevents other clients from getting their input if it's grabbed.
+
+  Display * display = QX11Info::display();
+
+  lShiftCode = XKeysymToKeycode( display, XK_Shift_L );
+  rShiftCode = XKeysymToKeycode( display, XK_Shift_R );
+
+  lCtrlCode = XKeysymToKeycode( display, XK_Control_L );
+  rCtrlCode = XKeysymToKeycode( display, XK_Control_R );
+
+  lAltCode = XKeysymToKeycode( display, XK_Alt_L );
+  rAltCode = XKeysymToKeycode( display, XK_Alt_R );
+
+  currentModifiers = 0;
+
+  // This one will be used to read the recorded content
+  dataDisplay = XOpenDisplay( 0 );
+
+  if ( !dataDisplay )
+    throw exInit();
+
+  recordRange = XRecordAllocRange();
+
+  if ( !recordRange )
+  {
+    XCloseDisplay( dataDisplay );
+    throw exInit();
+  }
+
+  recordRange->device_events.first = KeyPress;
+  recordRange->device_events.last = KeyRelease;
+  recordClientSpec = XRecordAllClients;
+
+  recordContext = XRecordCreateContext( display, 0,
+                                        &recordClientSpec, 1,
+                                        &recordRange, 1 );
+
+  if ( !recordContext )
+  {
+    XFree( recordRange );
+    XCloseDisplay( dataDisplay );
+    throw exInit();
+  }
+
+  // This is required to ensure context was indeed created
+  XSync( display, False );
+
+  connect( this, SIGNAL( keyRecorded( quint32, quint32 ) ),
+           this, SLOT( checkState( quint32, quint32 ) ),
+           Qt::QueuedConnection );
+
+  start();
 }
 
-bool HotkeyWrapper::setGlobalKey(int key, int key2, Qt::KeyboardModifiers modifier, const QObject *member, const char *receiver)
+void HotkeyWrapper::run() // Runs in a separate thread
 {
-  if (!member || !receiver)
-      return false;
+  if ( !XRecordEnableContext( dataDisplay, recordContext,
+                              recordEventCallback,
+                              (XPointer) this ) )
+    printf( "Failed to enable record context\n" );
+}
 
-  int vk = nativeKey(key);
-  int vk2 = nativeKey(key2);
+
+void HotkeyWrapper::recordEventCallback( XPointer ptr, XRecordInterceptData * data )
+{
+  ((HotkeyWrapper * )ptr)->handleRecordEvent( data );
+}
+
+void HotkeyWrapper::handleRecordEvent( XRecordInterceptData * data )
+{
+  if ( data->category == XRecordFromServer )
+  {
+    xEvent * event = ( xEvent * ) data->data;
+
+    if ( event->u.u.type == KeyPress )
+    {
+      KeyCode key = event->u.u.detail;
+
+      if ( key == lShiftCode ||
+           key == rShiftCode )
+        currentModifiers |= ShiftMask;
+      else
+      if ( key == lCtrlCode ||
+           key == rCtrlCode )
+        currentModifiers |= ControlMask;
+      else
+      if ( key == lAltCode ||
+           key == rAltCode )
+        currentModifiers |= Mod1Mask;
+      else
+        emit keyRecorded( key, currentModifiers );
+    }
+    else
+    if ( event->u.u.type == KeyRelease )
+    {
+      KeyCode key = event->u.u.detail;
+
+      if ( key == lShiftCode ||
+           key == rShiftCode )
+        currentModifiers &= ~ShiftMask;
+      else
+      if ( key == lCtrlCode ||
+           key == rCtrlCode )
+        currentModifiers &= ~ControlMask;
+      else
+      if ( key == lAltCode ||
+           key == rAltCode )
+        currentModifiers &= ~Mod1Mask;
+    }
+  }
+
+  XRecordFreeData( data );
+}
+
+bool HotkeyWrapper::setGlobalKey( int key, int key2,
+                                  Qt::KeyboardModifiers modifier, int handle )
+{
+  if ( !key )
+    return false; // We don't monitor empty combinations
+
+  int vk = nativeKey( key );
+  int vk2 = key2 ? nativeKey( key2 ) : 0;
 
   quint32 mod = 0;
   if (modifier & Qt::ShiftModifier)
@@ -243,59 +366,43 @@ bool HotkeyWrapper::setGlobalKey(int key, int key2, Qt::KeyboardModifiers modifi
   if (modifier & Qt::AltModifier)
       mod |= Mod1Mask;
 
-  hotkeys.append(HotkeyStruct(vk, vk2, mod, member, receiver));
-
-  Display* display = QX11Info::display();
-  Window root = QX11Info::appRootWindow();
-
- //   qDebug() << "Grab " << vk << " " << mod << " " << root;
-
-  XGrabKey(display, vk, mod, root, True, GrabModeAsync, GrabModeAsync);
-
-  if (key2)
-      XGrabKey(display, vk2, mod, root, True, GrabModeAsync, GrabModeAsync);
+  hotkeys.append( HotkeyStruct( vk, vk2, mod, handle ) );
 
   return true;
 }
 
 quint32 HotkeyWrapper::nativeKey(int key)
 {
-  Display* display = QX11Info::display();
-  return XKeysymToKeycode(display, XStringToKeysym(QKeySequence(key).toString().toLatin1().data()));
-}
+  QString keySymName;
 
-bool HotkeyWrapper::x11Event ( XEvent * event )
-{
-  if (event->type == KeyPress)
-    return HotkeyWrapper::checkState(event->xkey.keycode, event->xkey.state);
+  switch( key )
+  {
+    case Qt::Key_Insert:
+      keySymName = "Insert";
+    break;
+    default:
+      keySymName = QKeySequence( key ).toString();
+    break;
+  }
 
-  return false;
+  Display * display = QX11Info::display();
+  return XKeysymToKeycode( display, XStringToKeysym( keySymName.toLatin1().data() ) );
 }
 
 HotkeyWrapper::~HotkeyWrapper()
 {
-  Display* display = QX11Info::display();
-  Window root = QX11Info::appRootWindow();
+  Display * display = QX11Info::display();
 
-  for (int i = 0; i < hotkeys.count(); i++)
-    XUngrabKey(display, hotkeys.at(i).key, hotkeys.at(i).modifier, root);
+  XRecordDisableContext( display, recordContext );
+  XSync( display, False );
+
+  wait();
+
+  XRecordFreeContext( display, recordContext );
+  XFree( recordRange );
+  XCloseDisplay( dataDisplay );
 
   (static_cast<QHotkeyApplication*>(qApp))->unregisterWrapper(this);
-}
-
-
-bool QHotkeyApplication::x11EventFilter ( XEvent * event )
-{
-  if (event->type == KeyPress)
-  {
-    for (int i = 0; i < hotkeyWrappers.size(); i++)
-    {
-      if (hotkeyWrappers.at(i)->x11Event(event))
-        return true;
-    }
-  }
-
-  return QApplication::x11EventFilter(event);
 }
 
 #endif

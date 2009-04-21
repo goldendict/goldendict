@@ -40,6 +40,27 @@ ProxyServer::ProxyServer(): enabled( false ), type( Socks5 ), port( 3128 )
 {
 }
 
+HotKey::HotKey(): modifiers( 0 ), key1( 0 ), key2( 0 )
+{
+}
+
+// Does anyone know how to separate modifiers from the keycode? We'll
+// use our own mask.
+
+uint32_t const keyMask = 0x01FFFFFF;
+
+HotKey::HotKey( QKeySequence const & seq ):
+  modifiers( seq[ 0 ] & ~keyMask ),
+  key1( seq[ 0 ] & keyMask ),
+  key2( seq[ 1 ] & keyMask )
+{
+}
+
+QKeySequence HotKey::toKeySequence() const
+{
+  return QKeySequence( key1 | modifiers, key2 );
+}
+
 Preferences::Preferences():
   newTabsOpenAfterCurrentOne( false ),
   newTabsOpenInBackground( true ),
@@ -47,6 +68,12 @@ Preferences::Preferences():
   startToTray( false ),
   closeToTray( true ),
   autoStart( false ),
+
+  enableMainWindowHotkey( true ),
+  mainWindowHotkey( QKeySequence( "Ctrl+F11,F11" ) ),
+  enableClipboardHotkey( true ),
+  clipboardHotkey( QKeySequence( "Ctrl+Ins,Ins" ) ),
+
   enableScanPopup( true ),
   startWithScanPopupOn( false ),
   enableScanPopupModifiers( false ),
@@ -75,6 +102,19 @@ MediaWikis makeDefaultMediaWikis( bool enable )
   mw.push_back( MediaWiki( "ed4c3929196afdd93cc08b9a903aad6a", "Portuguese Wiktionary", "http://pt.wiktionary.org/w", false ) );
 
   return mw;
+}
+
+/// Sets option to true of false if node is "1" or "0" respectively, or leaves
+/// it intact if it's neither "1" nor "0".
+void applyBoolOption( bool & option, QDomNode const & node )
+{
+  QString value = node.toElement().text();
+
+  if ( value == "1" )
+    option = true;
+  else
+  if ( value == "0" )
+    option = false;
 }
 
 }
@@ -257,6 +297,14 @@ Class load() throw( exError )
     c.preferences.startToTray = ( preferences.namedItem( "startToTray" ).toElement().text() == "1" );
     c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
     c.preferences.autoStart = ( preferences.namedItem( "autoStart" ).toElement().text() == "1" );
+
+    applyBoolOption( c.preferences.enableMainWindowHotkey, preferences.namedItem( "enableMainWindowHotkey" ) );
+    if ( !preferences.namedItem( "mainWindowHotkey" ).isNull() )
+      c.preferences.mainWindowHotkey = QKeySequence::fromString( preferences.namedItem( "mainWindowHotkey" ).toElement().text() );
+    applyBoolOption( c.preferences.enableClipboardHotkey, preferences.namedItem( "enableClipboardHotkey" ) );
+    if ( !preferences.namedItem( "clipboardHotkey" ).isNull() )
+      c.preferences.clipboardHotkey = QKeySequence::fromString( preferences.namedItem( "clipboardHotkey" ).toElement().text() );
+
     c.preferences.enableScanPopup = ( preferences.namedItem( "enableScanPopup" ).toElement().text() == "1" );
     c.preferences.startWithScanPopupOn = ( preferences.namedItem( "startWithScanPopupOn" ).toElement().text() == "1" );
     c.preferences.enableScanPopupModifiers = ( preferences.namedItem( "enableScanPopupModifiers" ).toElement().text() == "1" );
@@ -497,6 +545,22 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "autoStart" );
     opt.appendChild( dd.createTextNode( c.preferences.autoStart ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "enableMainWindowHotkey" );
+    opt.appendChild( dd.createTextNode( c.preferences.enableMainWindowHotkey ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "mainWindowHotkey" );
+    opt.appendChild( dd.createTextNode( c.preferences.mainWindowHotkey.toKeySequence().toString() ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "enableClipboardHotkey" );
+    opt.appendChild( dd.createTextNode( c.preferences.enableClipboardHotkey ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "clipboardHotkey" );
+    opt.appendChild( dd.createTextNode( c.preferences.clipboardHotkey.toKeySequence().toString() ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "enableScanPopup" );

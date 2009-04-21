@@ -34,7 +34,12 @@ public:
   void enableScanning();
   /// Disables scanning.
   void disableScanning();
-  
+
+public slots:
+
+  /// Translates the word from the clipboard, showing the window etc.
+  void translateWordFromClipboard();
+
 private:
 
   Config::Class & cfg;

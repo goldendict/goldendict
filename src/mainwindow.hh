@@ -20,6 +20,7 @@
 #include "scanpopup.hh"
 #include "articleview.hh"
 #include "wordfinder.hh"
+#include "hotkeywrapper.hh"
 
 using std::string;
 using std::vector;
@@ -104,7 +105,7 @@ private:
 
   ::Initializing * initializing;
 
-  class HotkeyWrapper * hotkeyWrapper;
+  sptr< HotkeyWrapper > hotkeyWrapper;
 
   QTimer newReleaseCheckTimer; // Countdown to a check for the new program
                                // release, if enabled
@@ -135,6 +136,13 @@ private:
   /// Brings the main window to front if it's not currently, or hides it
   /// otherwise. The hiding part is omitted if onlyShow is true.
   void toggleMainWindow( bool onlyShow = false );
+
+  /// Creates hotkeyWrapper and hooks the currently set keys for it
+  void installHotKeys();
+
+private slots:
+
+  void hotKeyActivated( int );
 
   /// If new release checks are on, santizies the next check time and starts
   /// the timer. Does nothing otherwise.

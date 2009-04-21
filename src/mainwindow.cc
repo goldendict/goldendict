@@ -13,7 +13,6 @@
 #include "sounddir.hh"
 #include "hunspell.hh"
 #include "dictdfiles.hh"
-#include "hotkeywrapper.hh"
 #include "ui_about.h"
 #include <limits.h>
 #include <QDir>
@@ -238,12 +237,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   setAutostart(cfg.preferences.autoStart);
 
   // Initialize global hotkeys
-  hotkeyWrapper = new HotkeyWrapper(this);
-  hotkeyWrapper->setGlobalKey(Qt::Key_F11, Qt::Key_F11, Qt::ControlModifier, this,
-                              SLOT(on_actionCloseToTray_activated()));
-
-  // Shortcut for close to tray
-  ui.actionCloseToTray->setShortcut(QKeySequence("Ctrl+F11"));
+  installHotKeys();
 
   // Only show window initially if it wasn't configured differently
   if ( !cfg.preferences.enableTrayIcon || !cfg.preferences.startToTray )
@@ -589,12 +583,13 @@ void MainWindow::makeScanPopup()
 {
   scanPopup.reset();
 
-  if ( !cfg.preferences.enableScanPopup )
+  if ( !cfg.preferences.enableScanPopup &&
+       !cfg.preferences.enableClipboardHotkey )
     return;
 
   scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances );
 
-  if ( enableScanPopup->isChecked() )
+  if ( cfg.preferences.enableScanPopup && enableScanPopup->isChecked() )
     scanPopup->enableScanning();
 }
 
@@ -796,6 +791,8 @@ void MainWindow::editGroups()
 
 void MainWindow::editPreferences()
 {
+  hotkeyWrapper.reset(); // So we could use the keys it hooks
+
   Preferences preferences( this, cfg.preferences );
 
   preferences.show();
@@ -819,6 +816,8 @@ void MainWindow::editPreferences()
 
     Config::save( cfg );
   }
+
+  installHotKeys();
 }
 
 void MainWindow::currentGroupChanged( QString const & )
@@ -1152,6 +1151,53 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     hide();
 }
 
+void MainWindow::installHotKeys()
+{
+  hotkeyWrapper.reset(); // Remove the old one
+
+  if ( cfg.preferences.enableMainWindowHotkey ||
+       cfg.preferences.enableClipboardHotkey )
+  {
+    try
+    {
+      hotkeyWrapper = new HotkeyWrapper( this );
+    }
+    catch( HotkeyWrapper::exInit & )
+    {
+      QMessageBox::critical( this, tr( "GoldenDict" ),
+        tr( "Failed to initialize hotkeys monitoring mechanism.<br>"
+            "Make sure your XServer has RECORD extension turned on." ) );
+
+      return;
+    }
+
+    hotkeyWrapper->setGlobalKey( cfg.preferences.mainWindowHotkey.key1,
+                                 cfg.preferences.mainWindowHotkey.key2,
+                                 cfg.preferences.mainWindowHotkey.modifiers,
+                                 0 );
+
+    if ( cfg.preferences.enableClipboardHotkey && scanPopup.get() )
+    {
+      hotkeyWrapper->setGlobalKey( cfg.preferences.clipboardHotkey.key1,
+                                   cfg.preferences.clipboardHotkey.key2,
+                                   cfg.preferences.clipboardHotkey.modifiers,
+                                   1 );
+    }
+
+    connect( hotkeyWrapper.get(), SIGNAL( hotkeyActivated( int ) ),
+             this, SLOT( hotKeyActivated( int ) ) );
+  }
+}
+
+void MainWindow::hotKeyActivated( int hk )
+{
+  if ( !hk )
+    on_actionCloseToTray_activated();
+  else
+  if ( scanPopup.get() )
+    scanPopup->translateWordFromClipboard();
+}
+
 void MainWindow::prepareNewReleaseChecks()
 {
   if ( cfg.preferences.checkForNewReleases )
@@ -1279,6 +1325,9 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
 
 void MainWindow::scanEnableToggled( bool on )
 {
+  if ( !cfg.preferences.enableScanPopup )
+    return;
+
   if ( scanPopup )
   {
     if ( on )

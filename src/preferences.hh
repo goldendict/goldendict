@@ -35,6 +35,9 @@ private slots:
   void sideCtrlClicked( bool );
   void sideShiftClicked( bool );
 
+  void on_enableMainWindowHotkey_toggled( bool checked );
+  void on_enableClipboardHotkey_toggled( bool checked );
+
   void on_buttonBox_accepted();
 };
 

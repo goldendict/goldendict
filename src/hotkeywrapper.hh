@@ -6,47 +6,60 @@
 #ifdef Q_WS_X11
 
 #include <X11/Xlib.h>
+#include <X11/extensions/record.h>
 #include <QX11Info>
 
 #endif
 
+#include "ex.hh"
 
 //////////////////////////////////////////////////////////////////////////
 
 struct HotkeyStruct
 {
   HotkeyStruct() {};
-  HotkeyStruct(quint32 key, quint32 key2, quint32 modifier, const QObject *member, const char *receiver);
+  HotkeyStruct( quint32 key, quint32 key2, quint32 modifier, int handle );
 
   quint32 key, key2;
   quint32 modifier;
-  const QObject *member;
-  const char *receiver;
+  int handle;
 };
 
 //////////////////////////////////////////////////////////////////////////
 
-class HotkeyWrapper : public QObject
+class HotkeyWrapper : public QThread // Thread is actually only used on X11
 {
   Q_OBJECT
 
   friend class QHotkeyApplication;
 
 public:
+
+  DEF_EX( exInit, "Hotkey wrapper failed to init", std::exception )
+
   HotkeyWrapper(QObject *parent);
   virtual ~HotkeyWrapper();
 
-  bool setGlobalKey(int key, int key2, Qt::KeyboardModifiers modifier, const QObject *member, const char *receiver);
+  /// The handle is passed back in hotkeyActivated() to inform which hotkey
+  /// was activated.
+  bool setGlobalKey( int key, int key2, Qt::KeyboardModifiers modifier,
+                     int handle );
 
 signals:
-  void hotkeyActivated(void);
+
+  void hotkeyActivated( int );
 
 protected slots:
+
   void waitKey2();
 
-protected:
+private slots:
+
+  bool checkState( quint32 vk, quint32 mod );
+
+private:
+
   void init();
-  bool checkState(quint32 vk, quint32 mod);
   quint32 nativeKey(int key);
 
   QList<HotkeyStruct> hotkeys;
@@ -58,7 +71,29 @@ protected:
   virtual bool winEvent ( MSG * message, long * result );
   HWND hwnd;
 #else
-  virtual bool x11Event ( XEvent * event );
+
+  static void recordEventCallback( XPointer, XRecordInterceptData * );
+
+  /// Called by recordEventCallback()
+  void handleRecordEvent( XRecordInterceptData * );
+
+  void run(); // QThread
+
+  // We do one-time init of those, translating keysyms to keycodes
+  KeyCode lShiftCode, rShiftCode, lCtrlCode, rCtrlCode, lAltCode, rAltCode;
+
+  quint32 currentModifiers;
+
+  Display * dataDisplay;
+  XRecordRange * recordRange;
+  XRecordContext recordContext;
+  XRecordClientSpec recordClientSpec;
+
+signals:
+
+  /// Emitted from the thread
+  void keyRecorded( quint32 vk, quint32 mod );
+
 #endif
 };
 
@@ -77,8 +112,6 @@ protected:
 
 #ifdef Q_OS_WIN32
   virtual bool winEventFilter ( MSG * message, long * result );
-#else
-  virtual bool x11EventFilter ( XEvent * event );
 #endif
 
   QList<HotkeyWrapper*> hotkeyWrappers;
