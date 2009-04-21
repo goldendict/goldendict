@@ -18,5 +18,8 @@
         <file>icons/icon32_stardict.png</file>
         <file>icons/icon32_xdxf.png</file>
         <file>icons/icon32_bgl.png</file>
+        <file>icons/icon32_dictd.png</file>
+        <file>icons/icon32_hunspell.png</file>
+        <file>icons/icon32_wiki.png</file>
     </qresource>
 </RCC>

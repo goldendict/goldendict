@@ -159,6 +159,9 @@ public:
   virtual unsigned long getWordCount() throw()
   { return getArticleCount(); }
 
+  virtual QIcon getIcon() throw()
+  { return QIcon(":/icons/playsound.png"); }
+
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts )
     throw( std::exception );
@@ -217,7 +220,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
 
-    multimap< wstring, string > & mapToUse = 
+    multimap< wstring, string > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
         mainArticles : alternateArticles;
 
@@ -363,7 +366,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
 
   if ( chain.empty() )
     return new Dictionary::DataRequestInstant( false ); // No such resource
-  
+
   File::Class f( getDictionaryFilenames()[ 0 ], "rb" );
 
   f.seek( chain[ 0 ].articleOffset );
@@ -396,7 +399,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
     Dictionary::DataRequestInstant( true );
 
   vector< char > & data = dr->getData();
-  
+
   data.resize( sizeof( WavHeader ) + e.samplesLength * 2 );
 
   WavHeader * wh = (WavHeader *)&data.front();
@@ -493,7 +496,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) || indexIsOldOrBad( indexFile ) )
       {
         // Building the index
-  
+
         initializing.indexingDictionary( FsEncoding::basename( *i ) );
 
         File::Class idx( indexFile, "wb" );
@@ -508,22 +511,22 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idx.write( idxHeader );
 
         IndexedWords indexedWords;
-  
+
         /// XXX handle big-endian machines here!
         uint32_t entriesCount = f.read< uint32_t >();
-  
+
         printf( "%s: %u entries\n", i->c_str(), entriesCount );
 
         idxHeader.soundsCount = entriesCount;
 
         vector< uint16_t > filenameBuffer;
-  
+
         while( entriesCount-- )
         {
           uint32_t offset = f.tell();
 
           Entry e( f );
- 
+
 
           // Remove the extension, no need for that in the index
           e.name = stripExtension( e.name );

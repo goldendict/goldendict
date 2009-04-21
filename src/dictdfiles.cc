@@ -89,6 +89,9 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
 
+  virtual QIcon getIcon() throw()
+  { return QIcon(":/icons/icon32_dictd.png"); }
+
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts )
     throw( std::exception );
@@ -171,31 +174,31 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
   try
   {
     vector< WordArticleLink > chain = findArticles( word );
-  
+
     for( unsigned x = 0; x < alts.size(); ++x )
     {
       /// Make an additional query for each alt
-  
+
       vector< WordArticleLink > altChain = findArticles( alts[ x ] );
-  
+
       chain.insert( chain.end(), altChain.begin(), altChain.end() );
     }
-  
+
     multimap< wstring, string > mainArticles, alternateArticles;
-  
+
     set< uint32_t > articlesIncluded; // Some synonyms make it that the articles
                                       // appear several times. We combat this
                                       // by only allowing them to appear once.
-  
+
     wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
-  
+
     char buf[ 16384 ];
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
       if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
         continue; // We already have this article in the body.
-  
+
       // Now load that article
 
       indexFile.seek( chain[ x ].articleOffset );
@@ -229,46 +232,46 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         Html::preformat( articleBody ) + "</div>";
 
       free( articleBody );
-    
+
       // Ok. Now, does it go to main articles, or to alternate ones? We list
       // main ones first, and alternates after.
-  
+
       // We do the case-folded comparison here.
-  
+
       wstring headwordStripped =
         Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
-  
-      multimap< wstring, string > & mapToUse = 
+
+      multimap< wstring, string > & mapToUse =
         ( wordCaseFolded == headwordStripped ) ?
           mainArticles : alternateArticles;
-  
+
       mapToUse.insert( pair< wstring, string >(
         Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) ),
         articleText ) );
 
       articlesIncluded.insert( chain[ x ].articleOffset );
     }
-  
+
     if ( mainArticles.empty() && alternateArticles.empty() )
       return new Dictionary::DataRequestInstant( false );
-  
+
     string result;
-  
+
     multimap< wstring, string >::const_iterator i;
-  
+
     for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
       result += i->second;
-  
+
     for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
       result += i->second;
-  
+
     sptr< Dictionary::DataRequestInstant > ret =
       new Dictionary::DataRequestInstant( true );
-  
+
     ret->getData().resize( result.size() );
-  
+
     memcpy( &(ret->getData().front()), result.data(), result.size() );
-  
+
     return ret;
   }
   catch( std::exception & e )

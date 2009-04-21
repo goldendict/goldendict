@@ -81,6 +81,9 @@ public:
   virtual unsigned long getWordCount() throw()
   { return getArticleCount(); }
 
+  virtual QIcon getIcon() throw()
+  { return QIcon(":/icons/playsound.png"); }
+
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts )
     throw( std::exception );
@@ -143,7 +146,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
 
-    multimap< wstring, unsigned > & mapToUse = 
+    multimap< wstring, unsigned > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
         mainArticles : alternateArticles;
 
@@ -225,7 +228,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & 
   try
   {
     Mutex::Lock _( idxMutex );
-  
+
     articleData = chunks.getBlock( articleOffset, chunk );
 
     if ( articleData >= &chunk.front() + chunk.size() )
@@ -248,18 +251,18 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & 
   QString fileName = QDir::toNativeSeparators( dir.filePath( QString::fromUtf8( articleData ) ) );
 
   // Now try loading that file
-  
+
   try
   {
     File::Class f( fileName.toLocal8Bit().data(), "rb" );
-    
+
     sptr< Dictionary::DataRequestInstant > dr = new
       Dictionary::DataRequestInstant( true );
 
     vector< char > & data = dr->getData();
 
     f.seekEnd();
-    
+
     data.resize( f.tell() );
 
     f.rewind();
@@ -289,7 +292,7 @@ void addDir( QDir const & baseDir, QDir const & dir, IndexedWords & indexedWords
       // Add this sound to index
 
       string fileName = baseDir.relativeFilePath( i->filePath() ).toUtf8().data();
-      
+
       uint32_t articleOffset = chunks.startNewBlock();
       chunks.addToBlock( fileName.c_str(), fileName.size() + 1 );
 
@@ -328,7 +331,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::SoundDirs const & 
       QDir::toNativeSeparators( dir.canonicalPath() ).toLocal8Bit().data() );
 
     dictFiles.push_back( "SoundDir" ); // A mixin
-    
+
     string dictId = Dictionary::makeDictionaryId( dictFiles );
 
     dictFiles.pop_back(); // Remove mixin
@@ -353,19 +356,19 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::SoundDirs const & 
       idx.write( idxHeader );
 
       IndexedWords indexedWords;
-      
+
       ChunkedStorage::Writer chunks( idx );
 
       uint32_t soundsCount = 0; // Header's one is packed, we can't ref it
-      
+
       addDir( dir, dir, indexedWords, soundsCount, chunks );
-      
+
       idxHeader.soundsCount = soundsCount;
 
       // Finish with the chunks
 
       idxHeader.chunksOffset = chunks.finish();
-      
+
       // Build the index
 
       IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );

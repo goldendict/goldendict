@@ -29,7 +29,7 @@ class HunspellDictionary: public Dictionary::Class
   string name;
   Mutex hunspellMutex;
   Hunspell hunspell;
-    
+
 public:
 
   /// files[ 0 ] should be .aff file, files[ 1 ] should be .dic file.
@@ -40,7 +40,7 @@ public:
     hunspell( files[ 0 ].c_str(), files[ 1 ].c_str() )
   {
   }
-  
+
   virtual string getName() throw()
   { return name; }
 
@@ -52,6 +52,9 @@ public:
 
   virtual unsigned long getWordCount() throw()
   { return 0; }
+
+  virtual QIcon getIcon() throw()
+  { return QIcon(":/icons/icon32_hunspell.png"); }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults )
@@ -92,7 +95,7 @@ class HunspellArticleRequestRunnable: public QRunnable
 {
   HunspellArticleRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   HunspellArticleRequestRunnable( HunspellArticleRequest & r_,
@@ -104,7 +107,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -138,7 +141,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~HunspellArticleRequest()
   {
     isCancelled.ref();
@@ -191,7 +194,7 @@ void HunspellArticleRequest::run()
     {
       // There were some suggestions made for us. Make an appropriate output.
 
-      string result = "<div class=\"gdspellsuggestion\">" + 
+      string result = "<div class=\"gdspellsuggestion\">" +
         Html::escape( QCoreApplication::translate( "Hunspell", "Spelling suggestions: " ).toUtf8().data() );
 
       wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
@@ -205,7 +208,7 @@ void HunspellArticleRequest::run()
           // If among suggestions we see the same word just with the different
           // case, we botch the search -- our searches are case-insensitive, and
           // there's no need for suggestions on a good word.
-          
+
           finish();
 
           hunspell.free_list( &suggestions, suggestionsCount );
@@ -261,7 +264,7 @@ class HunspellHeadwordsRequestRunnable: public QRunnable
 {
   HunspellHeadwordsRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   HunspellHeadwordsRequestRunnable( HunspellHeadwordsRequest & r_,
@@ -273,7 +276,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -307,7 +310,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~HunspellHeadwordsRequest()
   {
     isCancelled.ref();
@@ -409,7 +412,7 @@ class HunspellPrefixMatchRequestRunnable: public QRunnable
 {
   HunspellPrefixMatchRequest & r;
   QSemaphore & hasExited;
-  
+
 public:
 
   HunspellPrefixMatchRequestRunnable( HunspellPrefixMatchRequest & r_,
@@ -421,7 +424,7 @@ public:
   {
     hasExited.release();
   }
-  
+
   virtual void run();
 };
 
@@ -455,7 +458,7 @@ public:
   {
     isCancelled.ref();
   }
-  
+
   ~HunspellPrefixMatchRequest()
   {
     isCancelled.ref();
@@ -494,7 +497,7 @@ void HunspellPrefixMatchRequest::run()
     if ( hunspell.spell( encodedWord.c_str() ) )
     {
       // Known word -- add it to the result
-      
+
       Mutex::Lock _( dataMutex );
 
       matches.push_back( WordMatch( trimmedWord, 1 ) );
@@ -842,7 +845,7 @@ vector< DataFiles > findDataFiles( QString const & path )
     {
       // Only include dictionaries with unique names. This combats stuff
       // like symlinks en-US->en_US and such
-      
+
       result.push_back( DataFiles( affFileName, dicFileName, dictId, dictName ) );
     }
   }

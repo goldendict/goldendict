@@ -19,7 +19,7 @@ class MediaWikiDictionary: public Dictionary::Class
   string name;
   QString url;
   QNetworkAccessManager & netMgr;
-    
+
 public:
 
   MediaWikiDictionary( string const & id, string const & name_,
@@ -31,7 +31,7 @@ public:
     netMgr( netMgr_ )
   {
   }
-  
+
   virtual string getName() throw()
   { return name; }
 
@@ -43,6 +43,9 @@ public:
 
   virtual unsigned long getWordCount() throw()
   { return 0; }
+
+  virtual QIcon getIcon() throw()
+  { return QIcon(":/icons/icon32_wiki.png"); }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) throw( std::exception );
@@ -73,7 +76,7 @@ protected:
   virtual void timerEvent( QTimerEvent * );
 
 private:
-  
+
   virtual void downloadFinished();
 };
 
@@ -153,7 +156,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
         QDomNodeList nl = pages.toElement().elementsByTagName( "p" );
 
         Mutex::Lock _( dataMutex );
-        
+
         for( unsigned x = 0; x < nl.length(); ++x )
           matches.push_back( gd::toWString( nl.item( x ).toElement().attribute( "title" ) ) );
       }
@@ -170,7 +173,7 @@ class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 {
   sptr< QNetworkReply > netReply;
   QString url;
-  
+
 public:
 
   MediaWikiArticleRequest( wstring const &,
@@ -179,7 +182,7 @@ public:
   virtual void cancel();
 
 private:
-  
+
   virtual void downloadFinished();
 };
 
@@ -194,13 +197,13 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
   url( url_ )
 {
   printf( "Requesting article %ls\n", str.c_str() );
-  
+
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
   reqUrl.addQueryItem( "page", gd::toQString( str ) );
 
   netReply = mgr.get( QNetworkRequest( reqUrl ) );
-  
+
   printf( "request begin\n" );
   connect( netReply.get(), SIGNAL( finished() ),
            this, SLOT( downloadFinished() ) );
@@ -260,16 +263,16 @@ void MediaWikiArticleRequest::downloadFinished()
           QByteArray articleBody = articleString.toUtf8();
 
           printf( "Article body after: %s\n", articleBody.data() );
-  
+
           articleBody.prepend( "<div class=\"mwiki\">" );
           articleBody.append( "</div>" );
-  
+
           Mutex::Lock _( dataMutex );
 
           data.resize( articleBody.size() );
-          
+
           memcpy( &data.front(), articleBody.data(), data.size() );
-  
+
           hasAnyData = true;
         }
       }
@@ -316,5 +319,5 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
   return result;
 }
- 
+
 }

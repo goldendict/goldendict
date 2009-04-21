@@ -100,15 +100,6 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
   if ( !item )
     return QVariant();
 
-//  if ( role == Qt::DisplayRole )
-//    return QString::fromUtf8( item->getName().c_str() );
-//  else
-//  if ( role == Qt::EditRole )
-//    return QString::fromUtf8( item->getId().c_str() );
-//  else
-//  if ( role == Qt::DecorationRole )
-//    return item->getIcon();
-
   switch ( role )
   {
     case Qt::DisplayRole :
