@@ -4,6 +4,10 @@
 #include <X11/Xlibint.h>
 #endif
 
+#ifdef Q_OS_WIN32
+#include "windows.h"
+#endif
+
 //////////////////////////////////////////////////////////////////////////
 
 QHotkeyApplication::QHotkeyApplication(int & argc, char ** argv) : QApplication(argc,argv)
@@ -105,7 +109,8 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 
       #endif
 
-      return true;
+//      return true;
+      return false; // not handled !
     }
   }
 
@@ -116,8 +121,6 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 //////////////////////////////////////////////////////////////////////////
 
 #ifdef Q_WS_WIN
-
-#include "windows.h"
 
 void HotkeyWrapper::init()
 {
@@ -158,7 +161,19 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
 bool HotkeyWrapper::winEvent ( MSG * message, long * result )
 {
   if (message->message == WM_HOTKEY)
-    return HotkeyWrapper::checkState((message->lParam >> 16), (message->lParam & 0xffff));
+  {
+    if ( ! HotkeyWrapper::checkState((message->lParam >> 16), (message->lParam & 0xffff)) )
+    {
+      // pass event as keypress & keyrelease
+      int vk = (message->lParam >> 16);
+      int scan = MapVirtualKey(vk, /*MAPVK_VK_TO_VSC*/0);
+      HWND wnd = GetForegroundWindow();
+      SendMessage(wnd, WM_KEYDOWN, vk, (scan << 16));
+      SendMessage(wnd, WM_KEYUP, vk, (scan << 16) | (3 << 30));
+      return false;
+    }
+    return true;
+  }
 
   return false;
 }
@@ -429,7 +444,7 @@ bool HotkeyWrapper::isKeyGrabbed( quint32 keyCode, quint32 modifiers ) const
 HotkeyWrapper::GrabbedKeys::iterator HotkeyWrapper::grabKey( quint32 keyCode,
                                                              quint32 modifiers )
 {
-  std::pair< GrabbedKeys::iterator, bool > result = 
+  std::pair< GrabbedKeys::iterator, bool > result =
     grabbedKeys.insert( std::make_pair( keyCode, modifiers ) );
 
   if ( result.second )
