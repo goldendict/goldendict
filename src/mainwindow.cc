@@ -101,6 +101,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.centralWidget->addAction( &focusTranslateLineAction );
   ui.searchPaneWidget->addAction( &focusTranslateLineAction );
+  groupList.addAction( &focusTranslateLineAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
