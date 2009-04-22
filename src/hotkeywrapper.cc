@@ -52,15 +52,29 @@ HotkeyWrapper::~HotkeyWrapper()
 void HotkeyWrapper::waitKey2()
 {
   state2 = false;
+
+#ifdef Q_WS_X11
+
+  if ( keyToUngrab != grabbedKeys.end() )
+  {
+    ungrabKey( keyToUngrab );
+    keyToUngrab = grabbedKeys.end();
+  }
+
+#endif
 }
 
 bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 {
-  if (state2) {	// wait for 2nd key
-    state2 = false;
-    if (state2waiter.key2 == vk && state2waiter.modifier == mod) {
-       emit hotkeyActivated( state2waiter.handle );
-       return true;
+  if ( state2 )
+  { // wait for 2nd key
+
+    waitKey2(); // Cancel the 2nd-key wait stage
+
+    if (state2waiter.key2 == vk && state2waiter.modifier == mod)
+    {
+      emit hotkeyActivated( state2waiter.handle );
+      return true;
     }
   }
 
@@ -77,6 +91,20 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
       state2 = true;
       state2waiter = hs;
       QTimer::singleShot(500, this, SLOT(waitKey2()));
+
+      #ifdef Q_WS_X11
+
+      // Grab the second key, unless it's grabbed already
+      // Note that we only grab the clipboard key only if
+      // the sequence didn't begin with it
+
+      if ( ( isCopyToClipboardKey( hs.key, hs.modifier ) ||
+             !isCopyToClipboardKey( hs.key2, hs.modifier ) ) &&
+           !isKeyGrabbed( hs.key2, hs.modifier ) )
+        keyToUngrab = grabKey( hs.key2, hs.modifier );
+
+      #endif
+
       return true;
     }
   }
@@ -240,6 +268,8 @@ bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
 
 void HotkeyWrapper::init()
 {
+  keyToUngrab = grabbedKeys.end();
+
   // We use RECORD extension instead of XGrabKey. That's because XGrabKey
   // prevents other clients from getting their input if it's grabbed.
 
@@ -253,6 +283,9 @@ void HotkeyWrapper::init()
 
   lAltCode = XKeysymToKeycode( display, XK_Alt_L );
   rAltCode = XKeysymToKeycode( display, XK_Alt_R );
+
+  cCode = XKeysymToKeycode( display, XK_c );
+  insertCode = XKeysymToKeycode( display, XK_Insert );
 
   currentModifiers = 0;
 
@@ -372,9 +405,47 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
   if (modifier & Qt::AltModifier)
       mod |= Mod1Mask;
 
-  hotkeys.append( HotkeyStruct( vk, vk2, mod, handle ) );
+  hotkeys.append( HotkeyStruct( vk, vk2, mod, handle, 0 ) );
+
+  if ( !isCopyToClipboardKey( vk, mod ) )
+    grabKey( vk, mod ); // Make sure it doesn't get caught by other apps
 
   return true;
+}
+
+bool HotkeyWrapper::isCopyToClipboardKey( quint32 keyCode, quint32 modifiers ) const
+{
+  return modifiers == ControlMask &&
+         ( keyCode == cCode || keyCode == insertCode );
+}
+
+bool HotkeyWrapper::isKeyGrabbed( quint32 keyCode, quint32 modifiers ) const
+{
+  GrabbedKeys::const_iterator i = grabbedKeys.find( std::make_pair( keyCode, modifiers ) );
+
+  return i != grabbedKeys.end();
+}
+
+HotkeyWrapper::GrabbedKeys::iterator HotkeyWrapper::grabKey( quint32 keyCode,
+                                                             quint32 modifiers )
+{
+  std::pair< GrabbedKeys::iterator, bool > result = 
+    grabbedKeys.insert( std::make_pair( keyCode, modifiers ) );
+
+  if ( result.second )
+  {
+    XGrabKey( QX11Info::display(), keyCode, modifiers, QX11Info::appRootWindow(),
+              True, GrabModeAsync, GrabModeAsync );
+  }
+
+  return result.first;
+}
+
+void HotkeyWrapper::ungrabKey( GrabbedKeys::iterator i )
+{
+  XUngrabKey( QX11Info::display(), i->first, i->second, QX11Info::appRootWindow() );
+
+  grabbedKeys.erase( i );
 }
 
 quint32 HotkeyWrapper::nativeKey(int key)
@@ -407,6 +478,9 @@ void HotkeyWrapper::unregister()
   XRecordFreeContext( display, recordContext );
   XFree( recordRange );
   XCloseDisplay( dataDisplay );
+
+  while( grabbedKeys.size() )
+    ungrabKey( grabbedKeys.begin() );
 
   (static_cast<QHotkeyApplication*>(qApp))->unregisterWrapper(this);
 }

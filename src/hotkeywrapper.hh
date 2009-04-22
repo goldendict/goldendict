@@ -5,6 +5,8 @@
 
 #ifdef Q_WS_X11
 
+#include <set>
+
 #include <X11/Xlib.h>
 #include <X11/extensions/record.h>
 #include <QX11Info>
@@ -84,7 +86,8 @@ private:
   void run(); // QThread
 
   // We do one-time init of those, translating keysyms to keycodes
-  KeyCode lShiftCode, rShiftCode, lCtrlCode, rCtrlCode, lAltCode, rAltCode;
+  KeyCode lShiftCode, rShiftCode, lCtrlCode, rCtrlCode, lAltCode, rAltCode,
+          cCode, insertCode;
 
   quint32 currentModifiers;
 
@@ -92,6 +95,26 @@ private:
   XRecordRange * recordRange;
   XRecordContext recordContext;
   XRecordClientSpec recordClientSpec;
+
+  /// Holds all the keys currently grabbed.
+  /// The first value is keycode, the second is modifiers
+  typedef std::set< std::pair< quint32, quint32 > > GrabbedKeys;
+  GrabbedKeys grabbedKeys;
+
+  GrabbedKeys::iterator keyToUngrab; // Used for second stage grabs
+
+  /// Returns true if the given key is usually used to copy from clipboard,
+  /// false otherwise.
+  bool isCopyToClipboardKey( quint32 keyCode, quint32 modifiers ) const;
+  /// Returns true if the given key is grabbed, false otherwise
+  bool isKeyGrabbed( quint32 keyCode, quint32 modifiers ) const;
+  /// Grabs the given key, recording the fact in grabbedKeys. If the key's
+  /// already grabbed, does nothing.
+  /// Returns the key's iterator in grabbedKeys.
+  GrabbedKeys::iterator grabKey( quint32 keyCode, quint32 modifiers );
+  /// Ungrabs the given key. erasing it from grabbedKeys. The key's provided
+  /// as an interator inside the grabbedKeys set.
+  void ungrabKey( GrabbedKeys::iterator );
 
 signals:
 
