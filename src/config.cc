@@ -58,7 +58,7 @@ HotKey::HotKey( QKeySequence const & seq ):
 
 QKeySequence HotKey::toKeySequence() const
 {
-  return QKeySequence( key1 | modifiers, key2 );
+  return QKeySequence( key1 | modifiers, key2 | modifiers );
 }
 
 Preferences::Preferences():
