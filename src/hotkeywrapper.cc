@@ -1,11 +1,12 @@
+#ifdef __WIN32 // Q_OS_WIN32 isn't available at this point
+#define _WIN32_WINNT 0x0430
+#include <windows.h>
+#endif
+
 #include "hotkeywrapper.hh"
 
 #ifdef Q_WS_X11
 #include <X11/Xlibint.h>
-#endif
-
-#ifdef Q_OS_WIN32
-#include "windows.h"
 #endif
 
 //////////////////////////////////////////////////////////////////////////
@@ -87,6 +88,28 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
     const HotkeyStruct &hs = hotkeys.at(i);
 
     if (hs.key == vk && hs.modifier == mod) {
+
+      #ifdef Q_WS_WIN32
+      // If that was a copy-to-clipboard shortcut, re-emit it back so it could
+      // reach its original destination so it could be acted upon.
+      if ( ( vk == VK_INSERT || vk == 'c' || vk == 'C' ) && mod == MOD_CONTROL )
+      {
+        INPUT i[ 2 ];
+  
+        memset( i, 0, sizeof( i ) );
+  
+        i[ 0 ].type = INPUT_KEYBOARD;
+        i[ 0 ].ki.wVk = 'C';
+        i[ 1 ].type = INPUT_KEYBOARD;
+        i[ 1 ].ki.wVk = 'C';
+        i[ 1 ].ki.dwFlags = KEYEVENTF_KEYUP;
+  
+        UnregisterHotKey( hwnd, hs.id );
+        SendInput( 2, i, sizeof( *i ) );
+        RegisterHotKey(hwnd, hs.id, hs.modifier, hs.key);
+      }
+      #endif
+
       if (hs.key2 == 0) {
          emit hotkeyActivated( hs.handle );
          return true;
@@ -109,8 +132,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 
       #endif
 
-//      return true;
-      return false; // not handled !
+      return true;
     }
   }
 
@@ -161,19 +183,7 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
 bool HotkeyWrapper::winEvent ( MSG * message, long * result )
 {
   if (message->message == WM_HOTKEY)
-  {
-    if ( ! HotkeyWrapper::checkState((message->lParam >> 16), (message->lParam & 0xffff)) )
-    {
-      // pass event as keypress & keyrelease
-      int vk = (message->lParam >> 16);
-      int scan = MapVirtualKey(vk, /*MAPVK_VK_TO_VSC*/0);
-      HWND wnd = GetForegroundWindow();
-      SendMessage(wnd, WM_KEYDOWN, vk, (scan << 16));
-      SendMessage(wnd, WM_KEYUP, vk, (scan << 16) | (3 << 30));
-      return false;
-    }
-    return true;
-  }
+    return checkState( (message->lParam >> 16), (message->lParam & 0xffff) );
 
   return false;
 }
