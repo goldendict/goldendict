@@ -262,6 +262,14 @@ public:
   virtual QIcon getIcon() throw()
   { return QIcon(); }
 
+  /// Returns the dictionary's source language.
+  virtual quint32 getLangFrom() const
+  { return 0; }
+
+  /// Returns the dictionary's target language.
+  virtual quint32 getLangTo() const
+  { return 0; }
+
   /// Looks up a given word in the dictionary, aiming for exact matches and
   /// prefix matches. If it's not possible to locate any prefix matches, no
   /// prefix results should be added. Not more than maxResults results should

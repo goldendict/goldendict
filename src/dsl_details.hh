@@ -97,6 +97,7 @@ class DslScanner
   DslEncoding encoding;
   DslIconv iconv;
   wstring dictionaryName;
+  string langFrom, langTo;
   char readBuffer[ 65536 ];
   char * readBufferPtr;
   size_t readBufferLeft;
@@ -121,6 +122,14 @@ public:
   /// Returns the dictionary's name, as was read from file's headers.
   wstring const & getDictionaryName() const
   { return dictionaryName; }
+
+  /// Returns the dictionary's source language, as was read from file's headers.
+  string const & getLangFrom() const
+  { return langFrom; }
+
+  /// Returns the dictionary's target language, as was read from file's headers.
+  string const & getLangTo() const
+  { return langTo; }
 
   /// Reads next line from the file. Returns true if reading succeeded --
   /// the string gets stored in the one passed, along with its physical

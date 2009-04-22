@@ -3,6 +3,7 @@
 
 #include "dsl_details.hh"
 #include "folding.hh"
+#include "utf8.hh"
 #include <wctype.h>
 #include <stdio.h>
 
@@ -67,7 +68,7 @@ ArticleDom::ArticleDom( wstring const & str ):
     for( ;; )
     {
       nextChar();
-  
+
       if ( ch == L'[' && !escaped )
       {
         // Beginning of a tag.
@@ -155,7 +156,7 @@ ArticleDom::ArticleDom( wstring const & str ):
             // closed.
 
             list< Node > nodesToReopen;
-  
+
             while( stack.size() )
             {
               bool found = stack.back()->tagName == name ||
@@ -407,9 +408,17 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
       break;
 
     bool isName = false;
+    bool isLangFrom = false;
+    bool isLangTo = false;
 
     if ( !str.compare( 0, 5, GD_NATIVE_TO_WS( L"#NAME" ), 5 ) )
       isName = true;
+    else
+    if ( !str.compare( 0, 15, GD_NATIVE_TO_WS( L"#INDEX_LANGUAGE" ), 15 ) )
+      isLangFrom = true;
+    else
+    if ( !str.compare( 0, 18, GD_NATIVE_TO_WS( L"#CONTENTS_LANGUAGE" ), 18 ) )
+      isLangTo = true;
     else
     if ( str.compare( 0, 17, GD_NATIVE_TO_WS( L"#SOURCE_CODE_PAGE" ), 17 ) )
       continue;
@@ -430,6 +439,10 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
 
     if ( isName )
       dictionaryName = arg;
+    else if ( isLangFrom )
+      langFrom = Utf8::encode(arg);
+    else if ( isLangTo )
+      langTo = Utf8::encode(arg);
     else
     {
       // The encoding
@@ -499,14 +512,14 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
         // To avoid having to deal with ring logic, we move the remaining bytes
         // to the beginning
         memmove( readBuffer, readBufferPtr, readBufferLeft );
-  
+
         // Read some more bytes to readBuffer
         int result = gzread( f, readBuffer + readBufferLeft,
                              sizeof( readBuffer ) - readBufferLeft );
-  
+
         if ( result == -1 )
           throw exCantReadDslFile();
-  
+
         readBufferPtr = readBuffer;
         readBufferLeft += (size_t) result;
       }
@@ -705,11 +718,11 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
 
       {
         int refCount = 1;
-  
+
         for( size_t y = x + 1; y < str.size(); ++y )
         {
           wchar ch = str[ y ];
-  
+
           if ( ch == L'\\' )
           {
             // Escape code
@@ -730,21 +743,21 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
               {
                 wstring removed( str, 0, x );
                 removed.append( str, y + 1, str.size() - y - 1 );
-    
+
                 expandOptionalParts( removed, result, x );
               }
-  
+
               break;
             }
           }
         }
-  
+
         if ( refCount && x != str.size() - 1 )
         {
           // Closing paren not found? Chop it.
 
           wstring removed( str, 0, x );
-  
+
           result.push_back( removed );
         }
       }

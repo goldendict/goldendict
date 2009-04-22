@@ -5,6 +5,7 @@
 
 #include "instances.hh"
 #include "config.hh"
+#include "langcoder.hh"
 
 #include <QMenu>
 #include <QDir>
@@ -104,6 +105,8 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
   {
     case Qt::DisplayRole :
       return QString::fromUtf8( item->getName().c_str() );
+//          + QString("  lang: %1 %2").arg( langCoder.decode(item->getLangFrom()),
+//                                        langCoder.decode(item->getLangTo()) );
 
     case Qt::EditRole :
       return QString::fromUtf8( item->getId().c_str() );

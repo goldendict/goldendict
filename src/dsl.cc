@@ -13,6 +13,8 @@
 #include "filetype.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
+#include "langcoder.hh"
+
 #include <zlib.h>
 #include <zip.h>
 #include <map>
@@ -61,7 +63,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 7 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 8 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -76,6 +78,8 @@ struct IdxHeader
   uint32_t indexRootOffset;
   uint32_t articleCount; // Number of articles this dictionary has
   uint32_t wordCount; // Number of headwords this dictionary has
+  uint32_t langFrom;  // Source language
+  uint32_t langTo;    // Target language
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -124,6 +128,12 @@ public:
   { return idxHeader.wordCount; }
 
   virtual QIcon getIcon() throw();
+
+  inline virtual quint32 getLangFrom() const
+  { return idxHeader.langFrom; }
+
+  inline virtual quint32 getLangTo() const
+  { return idxHeader.langTo; }
 
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
@@ -1392,6 +1402,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         idxHeader.articleCount = articleCount;
         idxHeader.wordCount = wordCount;
+
+        idxHeader.langFrom = LangCoder::code3toInt( scanner.getLangFrom() );
+        idxHeader.langTo = LangCoder::code3toInt( scanner.getLangTo() );
 
         idx.rewind();
 
