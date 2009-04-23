@@ -147,8 +147,7 @@ public:
   LsaDictionary( string const & id, string const & indexFile,
                  vector< string > const & dictionaryFiles );
 
-  virtual string getName() throw()
-  { return FsEncoding::basename( getDictionaryFilenames()[ 0 ] ); }
+  virtual string getName() throw();
 
   virtual map< Dictionary::Property, string > getProperties() throw()
   { return map< Dictionary::Property, string >(); }
@@ -169,6 +168,16 @@ public:
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
     throw( std::exception );
 };
+
+string LsaDictionary::getName() throw()
+{
+  string result = FsEncoding::basename( getDictionaryFilenames()[ 0 ] );
+
+  // Strip the extension
+  result.erase( result.rfind( '.' ) );
+
+  return result;
+}
 
 LsaDictionary::LsaDictionary( string const & id,
                               string const & indexFile,
