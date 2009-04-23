@@ -123,6 +123,8 @@ Class load() throw( exError )
 {
   QString configName  = getConfigFileName();
 
+  bool loadFromTemplate = false;
+
   if ( !QFile::exists( configName ) )
   {
     // Make the default config, save it and return it
@@ -164,9 +166,17 @@ Class load() throw( exError )
 
     c.mediawikis = makeDefaultMediaWikis( true );
 
-    save( c );
+    // Check if we have a template config file. If we do, load it instead
 
-    return c;
+    configName = getProgramDataDir() + "/content/defconfig";
+    loadFromTemplate = QFile( configName ).exists();
+
+    if ( !loadFromTemplate )
+    {
+      save( c );
+
+      return c;
+    }
   }
 
   QFile configFile( configName );
@@ -179,10 +189,29 @@ Class load() throw( exError )
   QString errorStr;
   int errorLine, errorColumn;
 
-  if ( !dd.setContent( &configFile, false, &errorStr, &errorLine, &errorColumn  ) )
+  if ( !loadFromTemplate )
   {
-    printf( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
-      throw exMalformedConfigFile();
+    // Load the config as usual
+    if ( !dd.setContent( &configFile, false, &errorStr, &errorLine, &errorColumn  ) )
+    {
+      printf( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
+        throw exMalformedConfigFile();
+    }
+  }
+  else
+  {
+    // We need to replace all %PROGRAMDIR% with the program data dir
+    QByteArray data = configFile.readAll();
+
+    data.replace( "%PROGRAMDIR%", getProgramDataDir().toUtf8() );
+
+    QBuffer bufferedData( &data );
+
+    if ( !dd.setContent( &bufferedData, false, &errorStr, &errorLine, &errorColumn  ) )
+    {
+      printf( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
+        throw exMalformedConfigFile();
+    }
   }
 
   configFile.close();
@@ -696,7 +725,7 @@ QString getProgramDataDir() throw()
   #ifdef PROGRAM_DATA_DIR
   return PROGRAM_DATA_DIR;
   #else
-  return "foo"; // Fixme
+  return QCoreApplication::applicationDirPath();
   #endif
 }
 
