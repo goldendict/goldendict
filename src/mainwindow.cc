@@ -54,7 +54,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   groupLabel.setText( tr( "Look up in:" ) );
 
-  searchPaneTitleBarLayout.setContentsMargins( 8, 2, 8, 0 );
+  searchPaneTitleBarLayout.setContentsMargins( 8, 5, 8, 4 );
   searchPaneTitleBarLayout.addWidget( &groupLabel );
   searchPaneTitleBarLayout.addWidget( &groupList );
   searchPaneTitleBarLayout.addStretch();
