@@ -48,12 +48,10 @@ quint32 LangCoder::code3toInt(const std::string& code3)
     return 0;
 
   // this is temporary
-  char code1 = code3.at(1);
-  char code0 = code3.at(0);
-  tolower(code1);
-  tolower(code0);
+  char code1 = tolower( code3.at(1) );
+  char code0 = tolower( code3.at(0) );
 
-  return ((quint32)code1) << 256 + (quint32)code0;
+  return ( ((quint32)code1) << 8 ) + (quint32)code0;
 }
 
 /*
