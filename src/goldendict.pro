@@ -3,7 +3,7 @@
 # #####################################################################
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 0.7.99-svn
+VERSION = 0.8.1-svn
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
