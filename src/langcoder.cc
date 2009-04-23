@@ -1,4 +1,5 @@
 #include "langcoder.hh"
+#include "folding.hh"
 
 #include <cctype>
 
@@ -52,6 +53,22 @@ quint32 LangCoder::code3toInt(const std::string& code3)
   char code0 = tolower( code3.at(0) );
 
   return ( ((quint32)code1) << 8 ) + (quint32)code0;
+}
+
+quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
+{
+  gd::wstring langFolded = Folding::apply( lang );
+
+  for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
+  {
+    if( langFolded == Folding::apply( lc->lang.toStdWString() ) )
+    {
+      // We've got a match
+      return code2toInt( lc->code );
+    }
+  }
+
+  return 0;
 }
 
 /*

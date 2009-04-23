@@ -2,11 +2,12 @@
 #define LANGCODER_H
 
 #include <QtGui>
+#include "wstring.hh"
 
 struct LangCode
 {
-    char code[3];
-    QString lang;
+    char code[ 3 ]; // ISO 639-1
+    QString lang; // Language name in English
 };
 
 // Language codes
@@ -224,6 +225,10 @@ public:
   { return ( ((quint32)code[1]) << 8 ) + (quint32)code[0]; }
 
   static quint32 code3toInt(const std::string& code3);
+
+  /// Finds the id for the given language name, written in english. The search
+  /// is case- and punctuation insensitive.
+  static quint32 findIdForLanguage( gd::wstring const & );
 
   //const QMap<quint32, int>& codes() { return codeMap; }
 
