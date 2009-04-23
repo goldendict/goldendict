@@ -97,7 +97,7 @@ class DslScanner
   DslEncoding encoding;
   DslIconv iconv;
   wstring dictionaryName;
-  string langFrom, langTo;
+  wstring langFrom, langTo;
   char readBuffer[ 65536 ];
   char * readBufferPtr;
   size_t readBufferLeft;
@@ -124,11 +124,11 @@ public:
   { return dictionaryName; }
 
   /// Returns the dictionary's source language, as was read from file's headers.
-  string const & getLangFrom() const
+  wstring const & getLangFrom() const
   { return langFrom; }
 
   /// Returns the dictionary's target language, as was read from file's headers.
-  string const & getLangTo() const
+  wstring const & getLangTo() const
   { return langTo; }
 
   /// Reads next line from the file. Returns true if reading succeeded --
@@ -174,6 +174,10 @@ inline size_t DslScanner::distanceToBytes( size_t x ) const
       return x;
   }
 }
+
+/// Converts the given language name taken from Dsl header (i.e. getLangFrom(),
+/// getLangTo()) to its proper language id.
+quint32 dslLanguageToId( wstring const & name );
 
 }
 }

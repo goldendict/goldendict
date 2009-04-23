@@ -63,7 +63,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 8 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 9 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -1147,11 +1147,22 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
   {
     // Try .dsl and .dsl.dz suffixes
 
-    if ( ( i->size() < 4 ||
-           strcasecmp( i->c_str() + ( i->size() - 4 ), ".dsl" ) != 0 ) &&
+    bool uncompressedDsl = ( i->size() >= 4 &&
+                             strcasecmp( i->c_str() + ( i->size() - 4 ), ".dsl" ) == 0 );
+    if ( !uncompressedDsl &&
          ( i->size() < 7 ||
            strcasecmp( i->c_str() + ( i->size() - 7 ), ".dsl.dz" ) != 0 ) )
       continue;
+
+    // Make sure it's not an abbreviation file
+
+    int extSize = ( uncompressedDsl ? 4 : 7 );
+    if ( i->size() - extSize >= 5 &&
+         strncasecmp( i->c_str() + i->size() - extSize - 5, "_abrv", 5 ) == 0 )
+    {
+      // It is, skip it
+      continue;
+    }
 
     try
     {
@@ -1403,8 +1414,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idxHeader.articleCount = articleCount;
         idxHeader.wordCount = wordCount;
 
-        idxHeader.langFrom = LangCoder::code3toInt( scanner.getLangFrom() );
-        idxHeader.langTo = LangCoder::code3toInt( scanner.getLangTo() );
+        idxHeader.langFrom = dslLanguageToId( scanner.getLangFrom() );
+        idxHeader.langTo = dslLanguageToId( scanner.getLangTo() );
 
         idx.rewind();
 

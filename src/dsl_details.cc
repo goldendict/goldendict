@@ -3,7 +3,7 @@
 
 #include "dsl_details.hh"
 #include "folding.hh"
-#include "utf8.hh"
+#include "langcoder.hh"
 #include <wctype.h>
 #include <stdio.h>
 
@@ -440,9 +440,9 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
     if ( isName )
       dictionaryName = arg;
     else if ( isLangFrom )
-      langFrom = Utf8::encode(arg);
+      langFrom = arg;
     else if ( isLangTo )
-      langTo = Utf8::encode(arg);
+      langTo = arg;
     else
     {
       // The encoding
@@ -800,6 +800,38 @@ void unescapeDsl( wstring & str )
   for( size_t x = 0; x < str.size(); ++x )
     if ( str[ x ] == L'\\' )
       str.erase( x, 1 ); // ++x would skip the next char without processing it
+}
+
+namespace
+{
+  void cutEnding( wstring & where, wstring const & ending )
+  {
+    if ( where.size() > ending.size() &&
+         where.compare( where.size() - ending.size(),
+                               ending.size(), ending ) == 0 )
+      where.erase( where.size() - ending.size() );
+  }
+}
+
+quint32 dslLanguageToId( wstring const & name )
+{
+  static wstring newSp( GD_NATIVE_TO_WS( L"newspelling" ) );
+  static wstring st( GD_NATIVE_TO_WS( L"standard" ) );
+  static wstring ms( GD_NATIVE_TO_WS( L"modernsort" ) );
+  static wstring ts( GD_NATIVE_TO_WS( L"traditionalsort" ) );
+  static wstring prc( GD_NATIVE_TO_WS( L"prc" ) );
+
+  // Any of those endings are to be removed
+
+  wstring nameStripped = Folding::apply( name );
+
+  cutEnding( nameStripped, newSp );
+  cutEnding( nameStripped, st );
+  cutEnding( nameStripped, ms );
+  cutEnding( nameStripped, ts );
+  cutEnding( nameStripped, prc );
+
+  return LangCoder::findIdForLanguage( nameStripped );
 }
 
 }
