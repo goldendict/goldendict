@@ -1,5 +1,6 @@
 #include "langcoder.hh"
 #include "folding.hh"
+#include "wstring_qt.hh"
 
 #include <cctype>
 
@@ -61,7 +62,7 @@ quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
 
   for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
   {
-    if( langFolded == Folding::apply( lc->lang.toStdWString() ) )
+    if ( langFolded == Folding::apply( gd::toWString( lc->lang ) ) )
     {
       // We've got a match
       return code2toInt( lc->code );
