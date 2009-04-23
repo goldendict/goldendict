@@ -1257,7 +1257,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               curString.erase( 0, curString.find_first_not_of( GD_NATIVE_TO_WS( L" \t" ) ) );
 
-              abrv[ key ] = Utf8::encode( curString );
+              // If the string has any dsl markup, we strip it
+
+              abrv[ key ] = Utf8::encode( ArticleDom( curString ).root.renderAsText() );
             }
 
             idxHeader.hasAbrv = 1;
