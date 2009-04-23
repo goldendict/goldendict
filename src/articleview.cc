@@ -360,7 +360,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       {
         QAction * action =
           new QAction(
-                QIcon( ":/icons/arrow.png" ),
+                allDictionaries[ x ]->getIcon(),
                 QString::fromUtf8( allDictionaries[ x ]->getName().c_str() ),
                 &menu );
 
