@@ -7,7 +7,7 @@
 struct LangCode
 {
     char code[ 3 ]; // ISO 639-1
-    char *lang; // Language name in English
+    char const * lang; // Language name in English
 };
 
 // Language codes
