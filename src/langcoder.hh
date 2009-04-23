@@ -7,7 +7,7 @@
 struct LangCode
 {
     char code[ 3 ]; // ISO 639-1
-    QString lang; // Language name in English
+    char *lang; // Language name in English
 };
 
 // Language codes
@@ -230,9 +230,15 @@ public:
   /// is case- and punctuation insensitive.
   static quint32 findIdForLanguage( gd::wstring const & );
 
-  //const QMap<quint32, int>& codes() { return codeMap; }
 
-  QString decode(quint32 code);
+  static QPair<quint32,quint32> findIdsForFilename( QString const & );
+
+  static quint32 guessId( const QString & lang );
+
+  /// Returns decoded name of language or empty string if not found.
+  static QString decode(quint32 code);
+
+  //const QMap<quint32, int>& codes() { return codeMap; }
 
   LangStruct langStruct(quint32 code);
 

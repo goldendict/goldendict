@@ -9,6 +9,8 @@
 #include "dictzip.h"
 #include "xdxf2html.hh"
 #include "htmlescape.hh"
+#include "langcoder.hh"
+
 #include <zlib.h>
 #include <map>
 #include <set>
@@ -69,7 +71,7 @@ struct Ifo
 enum
 {
   Signature = 0x58444953, // SIDX on little-endian, XDIS on big-endian
-  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 6 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -83,6 +85,8 @@ struct IdxHeader
   uint32_t synWordCount; // Saved from Ifo::synwordcount
   uint32_t bookNameSize; // Book name's length. Used to read it then.
   uint32_t sameTypeSequenceSize; // That string's size. Used to read it then.
+  uint32_t langFrom;  // Source language
+  uint32_t langTo;    // Target language
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -129,6 +133,12 @@ public:
 
   virtual QIcon getIcon() throw()
   { return QIcon(":/icons/icon32_stardict.png"); }
+
+  inline virtual quint32 getLangFrom() const
+  { return idxHeader.langFrom; }
+
+  inline virtual quint32 getLangTo() const
+  { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     throw( std::exception );
@@ -1067,6 +1077,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idxHeader.synWordCount = ifo.synwordcount;
         idxHeader.bookNameSize = ifo.bookname.size();
         idxHeader.sameTypeSequenceSize = ifo.sametypesequence.size();
+
+        QPair<quint32,quint32> langs =
+            LangCoder::findIdsForFilename( QString::fromStdString( dictFileName ) );
+        idxHeader.langFrom = langs.first;
+        idxHeader.langTo = langs.second;
 
         idx.rewind();
 

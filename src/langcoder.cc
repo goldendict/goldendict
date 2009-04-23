@@ -12,7 +12,7 @@ LangCoder::LangCoder()
   LangStruct ls;
   for (int i = 0; true; i++) {
     const LangCode &lc = LangCodes[i];
-    if (lc.lang.isEmpty())
+    if (lc.lang[0] == 0)
       break;
     //ls.order = i;
     //ls.icon = QIcon(":/flags/" + QString(lc.code) + ".png");
@@ -23,8 +23,8 @@ LangCoder::LangCoder()
 QString LangCoder::decode(quint32 code)
 {
   // temp!
-  if (codeMap.contains(code))
-    return LangCodes[codeMap[code]].lang;
+  if (langCoder.codeMap.contains(code))
+    return LangCodes[langCoder.codeMap[code]].lang;
 
   return QString();
 }
@@ -70,6 +70,50 @@ quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
   }
 
   return 0;
+}
+
+quint32 LangCoder::guessId( const QString & lang )
+{
+  QString lstr = lang.simplified().toLower();
+
+  // too small to guess
+  if (lstr.size() < 2)
+    return 0;
+
+  // check if it could be the whole language name
+  if (lstr.size() >= 3)
+  {
+    for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
+    {
+      if ( lstr == QString( lc->lang ) )
+      {
+        // We've got a match
+        return code2toInt( lc->code );
+      }
+    }
+  }
+
+  // still not found - try to match by 2-symbol code
+  return code2toInt( lstr.left(2).toAscii().data() );
+}
+
+QPair<quint32,quint32> LangCoder::findIdsForFilename( QString const & name )
+{
+  QString nameFolded = QFileInfo( name ).fileName().toCaseFolded();
+
+  QRegExp reg( "[-_.]([a-z]{2,3})-([a-z]{2,3})[-_.]" ); reg.setMinimal(true);
+  int off = 0;
+  while ( reg.indexIn( nameFolded, off ) >= 0 )
+  {
+    quint32 from = guessId( reg.cap(1) );
+    quint32 to = guessId( reg.cap(2) );
+    if (from && to)
+      return QPair<quint32,quint32>(from, to);
+
+    off += reg.matchedLength();
+  }
+
+  return QPair<quint32,quint32>(0, 0);
 }
 
 /*
