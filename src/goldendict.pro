@@ -22,7 +22,7 @@ LIBS += -lvorbisfile \
     -logg \
     -lz \
     -lzip \
-    -lhunspell
+    -lhunspell-1.2
 win32 { 
     LIBS += -liconv \
         -lwsock32 \
