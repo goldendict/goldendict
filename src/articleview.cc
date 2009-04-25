@@ -181,7 +181,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
 
     resourceDownloadUrl = url;
 
-    if ( url.scheme() == "gdau" && url.host() == "search" && groups.size() )
+    if ( url.scheme() == "gdau" && url.host() == "search" )
     {
       // Since searches should be limited to current group, we just do them
       // here ourselves since otherwise we'd need to pass group id to netmgr
@@ -189,36 +189,47 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
 
       unsigned currentGroup = getGroup( ref );
 
-      for( unsigned x = 0; x < groups.size(); ++x )
-        if ( groups[ x ].id == currentGroup )
-        {
-          for( unsigned y = 0; y < groups[ x ].dictionaries.size(); ++y )
+      std::vector< sptr< Dictionary::Class > > const * activeDicts = 0;
+
+      if ( groups.size() )
+      {
+        for( unsigned x = 0; x < groups.size(); ++x )
+          if ( groups[ x ].id == currentGroup )
           {
-            sptr< Dictionary::DataRequest > req = 
-              groups[ x ].dictionaries[ y ]->getResource(
-                url.path().mid( 1 ).toUtf8().data() );
+            activeDicts = &( groups[ x ].dictionaries );
+            break;
+          }
+      }
+      else
+        activeDicts = &allDictionaries;
 
-            if ( req->isFinished() && req->dataSize() >= 0 )
-            {
-              // A request was instantly finished with success.
-              // If we've managed to spawn some lingering requests alrady,
-              // erase them.
-              resourceDownloadRequests.clear();
-
-              // Handle the result
-              resourceDownloadRequests.push_back( req );
-              resourceDownloadFinished();
-
-              return;
-            }
-            else
-            if ( !req->isFinished() )
-            {
-              resourceDownloadRequests.push_back( req );
-
-              connect( req.get(), SIGNAL( finished() ),
-                       this, SLOT( resourceDownloadFinished() ) );
-            }
+      if ( activeDicts )
+        for( unsigned x = 0; x < activeDicts->size(); ++x )
+        {
+          sptr< Dictionary::DataRequest > req = 
+            (*activeDicts)[ x ]->getResource(
+              url.path().mid( 1 ).toUtf8().data() );
+  
+          if ( req->isFinished() && req->dataSize() >= 0 )
+          {
+            // A request was instantly finished with success.
+            // If we've managed to spawn some lingering requests already,
+            // erase them.
+            resourceDownloadRequests.clear();
+  
+            // Handle the result
+            resourceDownloadRequests.push_back( req );
+            resourceDownloadFinished();
+  
+            return;
+          }
+          else
+          if ( !req->isFinished() )
+          {
+            resourceDownloadRequests.push_back( req );
+  
+            connect( req.get(), SIGNAL( finished() ),
+                     this, SLOT( resourceDownloadFinished() ) );
           }
         }
     }
@@ -230,6 +241,11 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
       sptr< Dictionary::DataRequest > req = 
         articleNetMgr.getResource( url, contentType );
 
+      if ( !req.get() )
+      {
+        // Request failed, fail
+      }
+      else
       if ( req->isFinished() && req->dataSize() >= 0 )
       {
         // Have data ready, handle it
@@ -257,6 +273,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
       QMessageBox::critical( this, tr( "GoldenDict" ), tr( "The referenced resource doesn't exist." ) );
       return;
     }
+    else
+      resourceDownloadFinished(); // Check any requests finished already
   }
   else
   if ( url.scheme() == "http" || url.scheme() == "https" ||
