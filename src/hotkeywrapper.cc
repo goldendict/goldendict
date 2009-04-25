@@ -311,6 +311,7 @@ void HotkeyWrapper::init()
 
   cCode = XKeysymToKeycode( display, XK_c );
   insertCode = XKeysymToKeycode( display, XK_Insert );
+  kpInsertCode = XKeysymToKeycode( display, XK_KP_Insert );
 
   currentModifiers = 0;
 
@@ -389,7 +390,14 @@ void HotkeyWrapper::handleRecordEvent( XRecordInterceptData * data )
            key == rAltCode )
         currentModifiers |= Mod1Mask;
       else
+      {
+        // Here we employ a kind of hack translating KP_Insert key
+        // to just Insert. This allows reacting to both Insert keys.
+        if ( key == kpInsertCode )
+          key = insertCode;
+
         emit keyRecorded( key, currentModifiers );
+      }
     }
     else
     if ( event->u.u.type == KeyRelease )
@@ -441,7 +449,7 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
 bool HotkeyWrapper::isCopyToClipboardKey( quint32 keyCode, quint32 modifiers ) const
 {
   return modifiers == ControlMask &&
-         ( keyCode == cCode || keyCode == insertCode );
+         ( keyCode == cCode || keyCode == insertCode || keyCode == kpInsertCode );
 }
 
 bool HotkeyWrapper::isKeyGrabbed( quint32 keyCode, quint32 modifiers ) const

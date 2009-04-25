@@ -88,7 +88,7 @@ private:
 
   // We do one-time init of those, translating keysyms to keycodes
   KeyCode lShiftCode, rShiftCode, lCtrlCode, rCtrlCode, lAltCode, rAltCode,
-          cCode, insertCode;
+          cCode, insertCode, kpInsertCode;
 
   quint32 currentModifiers;
 
