@@ -14,19 +14,34 @@ LangCoder::LangCoder()
     const LangCode &lc = LangCodes[i];
     if (lc.lang[0] == 0)
       break;
-    //ls.order = i;
-    //ls.icon = QIcon(":/flags/" + QString(lc.code) + ".png");
     codeMap[code2toInt(lc.code)] = i;
   }
 }
 
 QString LangCoder::decode(quint32 code)
 {
-  // temp!
   if (langCoder.codeMap.contains(code))
     return LangCodes[langCoder.codeMap[code]].lang;
 
   return QString();
+}
+
+QIcon LangCoder::icon(quint32 code)
+{
+  if (langCoder.codeMap.contains(code))
+  {
+    const LangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
+//    QString flag_id( lc.code );
+//    if (flag_id == "en")
+//      flag_id = "gb";
+//    else
+//    if (flag_id == "uk")
+//      flag_id = "ua";
+
+    return QIcon( ":/flags/" + QString( lc.code) + ".png" );
+  }
+
+  return QIcon();
 }
 
 LangStruct LangCoder::langStruct(quint32 code)

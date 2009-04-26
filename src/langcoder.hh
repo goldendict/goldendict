@@ -237,6 +237,8 @@ public:
 
   /// Returns decoded name of language or empty string if not found.
   static QString decode(quint32 code);
+  /// Returns icon for language or empty string if not found.
+  static QIcon icon(quint32 code);
 
   //const QMap<quint32, int>& codes() { return codeMap; }
 
@@ -246,12 +248,12 @@ public:
 
 //	bool CheckCode(QString &code);
 
-protected:
+private:
   QMap<quint32, int> codeMap;
 //	LangStruct dummyLS;
 };
 
-extern LangCoder langCoder;
+//extern LangCoder langCoder;
 
 ///////////////////////////////////////////////////////////////////////////////
 

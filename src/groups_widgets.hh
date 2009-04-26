@@ -6,20 +6,20 @@
 
 // Various custom widgets used in the Groups dialog
 
-#include <QListWidget>
+#include <QtGui>
 #include "config.hh"
 #include "dictionary.hh"
 #include <vector>
 
 /// A model to be projected into the view, according to Qt's MVC model
-class DictListModel: public QAbstractListModel
+class DictListModel: public QAbstractItemModel
 {
   Q_OBJECT
 
 public:
 
   DictListModel( QWidget * parent ):
-    QAbstractListModel( parent ), isSource( false ), allDicts( 0 )
+    QAbstractItemModel( parent ), isSource( false ), allDicts( 0 )
   {}
 
   /// Populates the current model with the given dictionaries. This is
@@ -32,12 +32,20 @@ public:
   /// Returns the dictionaries the model currently has listed
   std::vector< sptr< Dictionary::Class > > const & getCurrentDictionaries() const;
 
+  void removeSelectedRows( QItemSelectionModel * source );
+  void addSelectedUniqueFromModel( QItemSelectionModel * source );
+
   Qt::ItemFlags flags( QModelIndex const &index ) const;
   int rowCount( QModelIndex const & parent ) const;
+  int columnCount( QModelIndex const & parent ) const { return 3; }
   QVariant data( QModelIndex const & index, int role ) const;
-  bool insertRows( int row, int count, const QModelIndex & parent );
-  bool removeRows( int row, int count, const QModelIndex & parent );
+  bool insertRows( int row, int count, const QModelIndex & parent = QModelIndex() );
+  bool removeRows( int row = 0, int count = INT_MAX, const QModelIndex & parent = QModelIndex() );
   bool setData( QModelIndex const & index, const QVariant & value, int role );
+  QModelIndex index( int row, int column,
+                            const QModelIndex &parent = QModelIndex() ) const;
+  QModelIndex parent( const QModelIndex &child ) const;
+  QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
 
   Qt::DropActions supportedDropActions() const;
 
@@ -50,7 +58,7 @@ private:
 
 /// This widget is for dictionaries' lists, it handles drag-n-drop operations
 /// with them etc.
-class DictListWidget: public QListView
+class DictListWidget: public QTreeView
 {
   Q_OBJECT
 public:
@@ -67,6 +75,8 @@ public:
   /// Returns the dictionaries the widget currently has listed
   std::vector< sptr< Dictionary::Class > > const & getCurrentDictionaries() const;
 
+  DictListModel * getModel()
+  { return & model; }
 
 private:
 
@@ -89,6 +99,12 @@ public:
   /// Since the group's name is not part of the widget by design right now
   /// (it is known by the containing tab widget only), it is returned as empty.
   Config::Group makeGroup() const;
+
+  DictListModel * getModel() const
+  { return ui.dictionaries->getModel(); }
+
+  QItemSelectionModel * getSelectionModel() const
+  { return ui.dictionaries->selectionModel(); }
 
 private:
   Ui::DictGroupWidget ui;
@@ -117,11 +133,20 @@ public:
   /// Changes the name of the currently chosen group, if any, to the given one
   void renameCurrentGroup( QString const & );
 
+  void emptyCurrentGroup();
+
   /// Removes the currently chosen group, if any
   void removeCurrentGroup();
 
+  /// Removes all the groups
+  void removeAllGroups();
+
   /// Creates groups from what is currently set up
   Config::Groups makeGroups() const;
+
+  DictListModel * getCurrentModel() const;
+
+  QItemSelectionModel * getCurrentSelectionModel() const;
 
 private:
 

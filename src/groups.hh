@@ -30,10 +30,13 @@ private:
   void countChanged();
 
 private slots:
-
   void addNew();
   void renameCurrent();
+  //void emptyCurrent();
+  void addDictsToCurrentGroup();
+  void removeDictsFromCurrentGroup();
   void removeCurrent();
+  void removeAll();
 };
 
 #endif

@@ -27,8 +27,18 @@ Groups::Groups( QWidget * parent,
            this, SLOT( addNew() ) );
   connect( ui.renameGroup, SIGNAL( clicked() ),
            this, SLOT( renameCurrent() ) );
+//  connect( ui.emptyGroup, SIGNAL( clicked() ),
+//           this, SLOT( emptyCurrent() ) );
   connect( ui.removeGroup, SIGNAL( clicked() ),
            this, SLOT( removeCurrent() ) );
+  connect( ui.removeGroups, SIGNAL( clicked() ),
+           this, SLOT( removeAll() ) );
+
+  connect( ui.tbAddDictsToGroup, SIGNAL( clicked() ),
+           this, SLOT( addDictsToCurrentGroup() ) );
+  connect( ui.tbRemoveDictsFromGroup, SIGNAL( clicked() ),
+           this, SLOT( removeDictsFromCurrentGroup() ) );
+
 
   countChanged();
 }
@@ -43,7 +53,12 @@ void Groups::countChanged()
   bool en = ui.groups->count();
 
   ui.renameGroup->setEnabled( en );
+//  ui.emptyGroup->setEnabled( en );
   ui.removeGroup->setEnabled( en );
+  ui.removeGroups->setEnabled( en );
+
+  ui.tbAddDictsToGroup->setEnabled( en );
+  ui.tbRemoveDictsFromGroup->setEnabled( en );
 }
 
 void Groups::addNew()
@@ -78,6 +93,38 @@ void Groups::renameCurrent()
     ui.groups->renameCurrentGroup( name );
 }
 
+//void Groups::emptyCurrent()
+//{
+//  int current = ui.groups->currentIndex();
+//
+//  if ( current < 0  || QMessageBox::question( this, tr( "Empty group contents" ),
+//         tr( "Are you sure you want to remove all the dictionaries from this group?" ),
+//         QMessageBox::Yes, QMessageBox::Cancel ) != QMessageBox::Yes )
+//    return;
+//
+//  ui.groups->emptyCurrentGroup();
+//}
+
+void Groups::addDictsToCurrentGroup()
+{
+  int current = ui.groups->currentIndex();
+
+  if ( current >= 0 )
+  {
+    ui.groups->getCurrentModel()->addSelectedUniqueFromModel( ui.dictionaries->selectionModel() );
+  }
+}
+
+void Groups::removeDictsFromCurrentGroup()
+{
+  int current = ui.groups->currentIndex();
+
+  if ( current >= 0 )
+  {
+    ui.groups->getCurrentModel()->removeSelectedRows( ui.groups->getCurrentSelectionModel() );
+  }
+}
+
 void Groups::removeCurrent()
 {
   int current = ui.groups->currentIndex();
@@ -87,6 +134,19 @@ void Groups::removeCurrent()
          QMessageBox::Yes, QMessageBox::Cancel ) == QMessageBox::Yes )
   {
     ui.groups->removeCurrentGroup();
+    countChanged();
+  }
+}
+
+void Groups::removeAll()
+{
+  int current = ui.groups->currentIndex();
+
+  if ( current >= 0 && QMessageBox::question( this, tr( "Remove all groups" ),
+         tr( "Are you sure you want to remove all the groups?" ),
+         QMessageBox::Yes, QMessageBox::Cancel ) == QMessageBox::Yes )
+  {
+    ui.groups->removeAllGroups();
     countChanged();
   }
 }
