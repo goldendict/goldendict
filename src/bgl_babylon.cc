@@ -541,6 +541,10 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
       inbufbytes--;
     }
   }
+  
+  // Flush the state. This fixes CP1255 problems.
+  iconv( cd, 0, 0, &outbuf, &outbufbytes );
+  
   s = std::string( defbuf );
 
   free( defbuf );
