@@ -38,7 +38,7 @@ namespace
   enum
   {
     Signature = 0x584c4742, // BGLX on little-endian, XLGB on big-endian
-    CurrentFormatVersion = 12 + BtreeIndexing::FormatVersion
+    CurrentFormatVersion = 13 + BtreeIndexing::FormatVersion
   };
 
   struct IdxHeader
@@ -147,6 +147,12 @@ namespace
   {
     // Strip any leading or trailing whitespaces
     trimWs( word );
+
+    // If the word starts with a slash, we drop it. There are quite a lot
+    // of them, and they all seem to be redudant duplicates.
+
+    if ( word.size() && word[ 0 ] == '/' )
+      return;
 
     // Check the input word for a superscript postfix ($1$, $2$ etc), which
     // signifies different meaning in Bgl files. We emit different meaning
