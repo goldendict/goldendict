@@ -421,6 +421,24 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
             pos += length + 4;
             a += length + 3;
           }
+          else if ( (unsigned char)block.data[pos] >= 0x40 &&
+                    len - a >= 2 &&
+                    (unsigned char)block.data[pos + 1 ] == 0x1B )
+          {
+            // Hidden transcription (a transcription which is usually the same
+            // as the headword and shouldn't probably be visible).
+            unsigned length = (unsigned char)block.data[ pos ] - 0x3F;
+
+            if ( length > len - a - 2 )
+            {
+              fprintf( stderr, "Hidden transcription is too large %s\n", headword.c_str() );
+              pos += len - a;
+              break;
+            }
+
+            pos += length + 2;
+            a += length + 1;
+          }
           else if ( (unsigned char)block.data[pos] == 0x1E )
           {
             // Resource reference begin marker
