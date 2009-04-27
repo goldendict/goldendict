@@ -79,80 +79,9 @@ std::vector< sptr< Dictionary::Class > > const &
   return dictionaries;
 }
 
-void DictListModel::removeSelectedRows( QItemSelectionModel * source )
-{
-  if ( !source )
-    return;
-
-  QModelIndexList rows = source->selectedRows();
-
-  if ( !rows.count() )
-    return;
-
-  for ( int i = rows.count()-1; i >= 0; --i )
-  {
-    dictionaries.erase( dictionaries.begin() + rows.at( i ).row() );
-  }
-
-  reset();
-}
-
-void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
-{
-  if ( !source )
-    return;
-
-  QModelIndexList rows = source->selectedRows();
-
-  if ( !rows.count() )
-    return;
-
-  const DictListModel * baseModel = dynamic_cast< const DictListModel * > ( source->model() );
-  if ( !baseModel )
-    return;
-
-  QVector< Dictionary::Class * > list;
-  QVector< Dictionary::Class * > dicts;
-  for ( int i = 0; i < dictionaries.size(); i++ )
-    dicts.append( dictionaries.at( i ).get() );
-
-  for ( int i = 0; i < rows.count(); i++ )
-  {
-    Dictionary::Class * d =
-        static_cast< Dictionary::Class * > ( rows.at( i ).internalPointer() );
-
-    //qDebug() << "rows.at( i ).internalPointer() " << rows.at( i ).internalPointer();
-
-    if ( !d )
-      continue;
-
-//    sptr< Dictionary::Class > s ( d );
-//
-//    if ( std::find( dictionaries.begin(), dictionaries.end(), s ) == dictionaries.end() )
-//      continue;
-//
-//    qDebug() << "std::find ";
-
-    if ( !dicts.contains( d ) )
-      list.append( d );
-
-    //list.push_back( s );
-  }
-
-  if ( list.empty() )
-    return;
-
-//  qDebug() << "list " << list.size();
-
-  for ( int i = 0; i < list.size(); i++ )
-    dictionaries.push_back( sptr< Dictionary::Class > ( list.at( i ) ) );
-
-  reset();
-}
-
 Qt::ItemFlags DictListModel::flags( QModelIndex const & index ) const
 {
-  Qt::ItemFlags defaultFlags = QAbstractItemModel::flags( index );
+  Qt::ItemFlags defaultFlags = QAbstractListModel::flags( index );
 
   if (index.isValid())
      return Qt::ItemIsDragEnabled | defaultFlags;
@@ -172,69 +101,20 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
   if ( !item )
     return QVariant();
 
-  switch ( index.column() )
+  switch ( role )
   {
-    case 0:
-    {
-      switch ( role )
-      {
-        case Qt::DisplayRole :
-          return QString::fromUtf8( item->getName().c_str() );
-    //          + QString("  lang: %1 %2").arg( langCoder.decode(item->getLangFrom()),
-    //                                        langCoder.decode(item->getLangTo()) );
+    case Qt::DisplayRole :
+      return QString::fromUtf8( item->getName().c_str() );
+//          + QString("  lang: %1 %2").arg( langCoder.decode(item->getLangFrom()),
+//                                        langCoder.decode(item->getLangTo()) );
 
-        case Qt::EditRole :
-          return QString::fromUtf8( item->getId().c_str() );
+    case Qt::EditRole :
+      return QString::fromUtf8( item->getId().c_str() );
 
-        case Qt::DecorationRole:
-          return item->getIcon();
-
-        default:;
-      }
-
-      break;
-    }
-
-    case 1:
-    {
-      switch ( role )
-      {
-        case Qt::DisplayRole :
-          return LangCoder::decode( item->getLangFrom() ).left( 3 );
-
-        case Qt::EditRole :
-          break;
-
-        case Qt::DecorationRole:
-          return LangCoder::icon( item->getLangFrom() );
-
-        default:;
-      }
-
-      break;
-    }
-
-    case 2:
-    {
-      switch ( role )
-      {
-        case Qt::DisplayRole :
-          return LangCoder::decode( item->getLangTo() ).left( 3 );
-
-        case Qt::EditRole :
-          break;
-
-        case Qt::DecorationRole:
-          return LangCoder::icon( item->getLangTo() );
-
-        default:;
-      }
-
-      break;
-    }
+    case Qt::DecorationRole:
+      return item->getIcon();
 
     default:;
-
   }
 
   return QVariant();
@@ -261,7 +141,7 @@ bool DictListModel::removeRows( int row, int count,
 
   beginRemoveRows( parent, row, row + count - 1 );
   dictionaries.erase( dictionaries.begin() + row,
-                      count == INT_MAX ? dictionaries.end() : dictionaries.begin() + row + count );
+                      dictionaries.begin() + row + count );
   endRemoveRows();
 
   return true;
@@ -280,80 +160,45 @@ bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
     return true;
   }
 
-//  if ( role == Qt::EditRole )
-//  {
-//    Config::Group g;
-//
-//    g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
-//
-//    Instances::Group i( g, *allDicts );
-//
-//    if ( i.dictionaries.size() == 1 )
-//    {
-//      // Found that dictionary
-//      dictionaries[ index.row() ] = i.dictionaries.front();
-//
-//      emit dataChanged( index, index );
-//
-//      return true;
-//    }
-//  }
+  if ( role == Qt::EditRole )
+  {
+    Config::Group g;
+
+    g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
+
+    Instances::Group i( g, *allDicts );
+
+    if ( i.dictionaries.size() == 1 )
+    {
+      // Found that dictionary
+      dictionaries[ index.row() ] = i.dictionaries.front();
+
+      emit dataChanged( index, index );
+
+      return true;
+    }
+  }
 
   return false;
 }
 
 Qt::DropActions DictListModel::supportedDropActions() const
 {
-  return 0; //Qt::MoveAction;
-}
-
-QModelIndex DictListModel::index( int row, int column, const QModelIndex &parent ) const
-{
-  return createIndex( row, column, dictionaries.at( row ).get() );
-}
-
-QModelIndex DictListModel::parent( const QModelIndex & child ) const
-{
-  return QModelIndex();
-}
-
-QVariant DictListModel::headerData ( int section, Qt::Orientation orientation, int role ) const
-{
-  if ( role == Qt::DisplayRole )
-  {
-    switch ( section )
-    {
-      case 0:     return tr( "Dictionary" );
-      case 1:     return tr( "Source" );
-      case 2:     return tr( "Target" );
-      default:;
-    }
-  }
-
-  return QAbstractItemModel::headerData( section, orientation, role );
+  return Qt::MoveAction;
 }
 
 /// DictListWidget
 
-DictListWidget::DictListWidget( QWidget * parent ): QTreeView( parent ),
+DictListWidget::DictListWidget( QWidget * parent ): QListView( parent ),
   model( this )
 {
   setModel( &model );
 
   setSelectionMode( ExtendedSelection );
 
-  setDragEnabled( false );
-  setAcceptDrops( false );
-  setDropIndicatorShown( false );
-
-  setRootIsDecorated( false );
-  setItemsExpandable( false );
-//  setSortingEnabled( true );
-
-  header()->setAlternatingRowColors( true );
-  header()->setResizeMode( QHeaderView::ResizeToContents );
-//  header()->setSortIndicatorShown( true );
-//  header()->setSortIndicator( 1, Qt::AscendingOrder );
+  setDragEnabled( true );
+  setAcceptDrops( true );
+  setDropIndicatorShown( true );
 }
 
 DictListWidget::~DictListWidget()
@@ -436,32 +281,6 @@ Config::Groups DictGroupsWidget::makeGroups() const
   return result;
 }
 
-DictListModel * DictGroupsWidget::getCurrentModel() const
-{
-  int current = currentIndex();
-
-  if ( current >= 0 )
-  {
-    DictGroupWidget * w = ( DictGroupWidget * ) widget( current );
-    return w->getModel();
-  }
-
-  return 0;
-}
-
-QItemSelectionModel * DictGroupsWidget::getCurrentSelectionModel() const
-{
-  int current = currentIndex();
-
-  if ( current >= 0 )
-  {
-    DictGroupWidget * w = ( DictGroupWidget * ) widget( current );
-    return w->getSelectionModel();
-  }
-
-  return 0;
-}
-
 void DictGroupsWidget::addNewGroup( QString const & name )
 {
   if ( !allDicts )
@@ -498,17 +317,6 @@ void DictGroupsWidget::renameCurrentGroup( QString const & name )
     setTabText( current, escapeAmps( name ) );
 }
 
-void DictGroupsWidget::emptyCurrentGroup()
-{
-  int current = currentIndex();
-
-  if ( current >= 0 )
-  {
-    DictGroupWidget * w = ( DictGroupWidget * ) widget( current );
-    w->getModel()->removeRows( );
-  }
-}
-
 void DictGroupsWidget::removeCurrentGroup()
 {
   int current = currentIndex();
@@ -520,14 +328,3 @@ void DictGroupsWidget::removeCurrentGroup()
     delete w;
   }
 }
-
-void DictGroupsWidget::removeAllGroups()
-{
-  while ( count() )
-  {
-    QWidget * w = widget( 0 );
-    removeTab( 0 );
-    delete w;
-  }
-}
-
