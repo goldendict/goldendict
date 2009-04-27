@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QFile>
 #include <QtXml>
+#include <stdint.h>
 
 namespace Config {
 

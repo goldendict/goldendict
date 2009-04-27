@@ -22,6 +22,7 @@
  * 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <stdlib.h>
 #include "dictzip.h"
 #include <limits.h>
 #include <stdarg.h>
