@@ -109,7 +109,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &addTabAction, SIGNAL( triggered() ),
            this, SLOT( addNewTab() ) );
 
-  ui.centralWidget->addAction( &addTabAction );
+  addAction( &addTabAction );
 
   closeCurrentTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   closeCurrentTabAction.setShortcut( QKeySequence( "Ctrl+W" ) );
@@ -117,7 +117,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &closeCurrentTabAction, SIGNAL( triggered() ),
            this, SLOT( closeCurrentTab() ) );
 
-  ui.centralWidget->addAction( &closeCurrentTabAction );
+  addAction( &closeCurrentTabAction );
 
   switchToNextTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   switchToNextTabAction.setShortcut( QKeySequence( "Ctrl+PgDown" ) );
@@ -125,7 +125,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &switchToNextTabAction, SIGNAL( triggered() ),
            this, SLOT( switchToNextTab() ) );
 
-  ui.centralWidget->addAction( &switchToNextTabAction );
+  addAction( &switchToNextTabAction );
 
   switchToPrevTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   switchToPrevTabAction.setShortcut( QKeySequence( "Ctrl+PgUp" ) );
@@ -133,7 +133,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &switchToPrevTabAction, SIGNAL( triggered() ),
            this, SLOT( switchToPrevTab() ) );
 
-  ui.centralWidget->addAction( &switchToPrevTabAction );
+  addAction( &switchToPrevTabAction );
 
   // Show tray icon early so the user would be happy
   updateTrayIcon();
