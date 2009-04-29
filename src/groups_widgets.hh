@@ -120,6 +120,9 @@ public:
   /// Removes the currently chosen group, if any
   void removeCurrentGroup();
 
+  /// Removes all the groups
+  void removeAllGroups();
+
   /// Creates groups from what is currently set up
   Config::Groups makeGroups() const;
 

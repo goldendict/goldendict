@@ -30,10 +30,10 @@ private:
   void countChanged();
 
 private slots:
-
   void addNew();
   void renameCurrent();
   void removeCurrent();
+  void removeAll();
 };
 
 #endif

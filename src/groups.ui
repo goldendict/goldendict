@@ -1,10 +1,11 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>Groups</class>
- <widget class="QDialog" name="Groups" >
-  <property name="windowModality" >
+ <widget class="QDialog" name="Groups">
+  <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>
-  <property name="geometry" >
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -12,70 +13,89 @@
     <height>535</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Groups</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2" >
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3" >
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QLabel" name="label_2" >
-         <property name="text" >
+        <widget class="QLabel" name="label_2">
+         <property name="text">
           <string>Dictionaries available:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="DictListWidget" name="dictionaries" />
+        <widget class="DictListWidget" name="dictionaries"/>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" >
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QLabel" name="label_3" >
-         <property name="text" >
+        <widget class="QLabel" name="label_3">
+         <property name="text">
           <string>Groups:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="DictGroupsWidget" name="groups" >
-         <property name="tabPosition" >
+        <widget class="DictGroupsWidget" name="groups">
+         <property name="tabPosition">
           <enum>QTabWidget::North</enum>
          </property>
-         <property name="elideMode" >
+         <property name="elideMode">
           <enum>Qt::ElideRight</enum>
          </property>
-         <widget class="QWidget" name="tab_4" >
-          <attribute name="title" >
+         <widget class="QWidget" name="tab_4">
+          <attribute name="title">
            <string>Tab 2</string>
           </attribute>
          </widget>
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" >
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QPushButton" name="addGroup" >
-           <property name="text" >
+          <widget class="QPushButton" name="addGroup">
+           <property name="toolTip">
+            <string>Create new dictionary group</string>
+           </property>
+           <property name="text">
             <string>&amp;Add group</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="renameGroup" >
-           <property name="text" >
+          <widget class="QPushButton" name="renameGroup">
+           <property name="toolTip">
+            <string>Rename current dictionary group</string>
+           </property>
+           <property name="text">
             <string>Re&amp;name group</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="removeGroup" >
-           <property name="text" >
+          <widget class="QPushButton" name="removeGroup">
+           <property name="toolTip">
+            <string>Remove current dictionary group</string>
+           </property>
+           <property name="text">
             <string>&amp;Remove group</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="removeAllGroups">
+           <property name="toolTip">
+            <string>Remove all dictionary groups</string>
+           </property>
+           <property name="text">
+            <string>Remove all groups</string>
            </property>
           </widget>
          </item>
@@ -86,21 +106,21 @@
     </layout>
    </item>
    <item>
-    <widget class="QLabel" name="label_4" >
-     <property name="text" >
+    <widget class="QLabel" name="label_4">
+     <property name="text">
       <string>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</string>
      </property>
-     <property name="wordWrap" >
+     <property name="wordWrap">
       <bool>true</bool>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttons" >
-     <property name="orientation" >
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons" >
+     <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
@@ -128,11 +148,11 @@
    <receiver>Groups</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -144,11 +164,11 @@
    <receiver>Groups</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>

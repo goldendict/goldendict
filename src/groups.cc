@@ -29,6 +29,8 @@ Groups::Groups( QWidget * parent,
            this, SLOT( renameCurrent() ) );
   connect( ui.removeGroup, SIGNAL( clicked() ),
            this, SLOT( removeCurrent() ) );
+  connect( ui.removeAllGroups, SIGNAL( clicked() ),
+           this, SLOT( removeAll() ) );
 
   countChanged();
 }
@@ -44,6 +46,7 @@ void Groups::countChanged()
 
   ui.renameGroup->setEnabled( en );
   ui.removeGroup->setEnabled( en );
+  ui.removeAllGroups->setEnabled( en );
 }
 
 void Groups::addNew()
@@ -90,3 +93,17 @@ void Groups::removeCurrent()
     countChanged();
   }
 }
+
+void Groups::removeAll()
+{
+  int current = ui.groups->currentIndex();
+
+  if ( current >= 0 && QMessageBox::question( this, tr( "Remove all groups" ),
+         tr( "Are you sure you want to remove all the groups?" ),
+         QMessageBox::Yes, QMessageBox::Cancel ) == QMessageBox::Yes )
+  {
+    ui.groups->removeAllGroups();
+    countChanged();
+  }
+}
+

@@ -330,3 +330,14 @@ void DictGroupsWidget::removeCurrentGroup()
     delete w;
   }
 }
+
+
+void DictGroupsWidget::removeAllGroups()
+{
+  while ( count() )
+  {
+    QWidget * w = widget( 0 );
+    removeTab( 0 );
+    delete w;
+  }
+}
