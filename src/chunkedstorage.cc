@@ -1,10 +1,16 @@
 /* This file is (c) 2008-2009 Konstantin Isakov <ikm@users.berlios.de>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include <stdint.h>
 #include "chunkedstorage.hh"
 #include <zlib.h>
-#include<string.h>
+#include <string.h>
+
+#ifdef _MSC_VER
+#include <stdint_msvc.h>
+#else
+#include <stdint.h>
+#endif
+
 
 namespace ChunkedStorage {
 

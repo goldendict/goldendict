@@ -34,7 +34,6 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 
 #ifndef ZIP_EXTERN
 #ifdef _MSC_VER
@@ -146,8 +145,6 @@ extern "C" {
 #endif
 #define ZIP_EM_UNKNOWN    0xffff  /* unknown algorithm */
 
-
-
 enum zip_source_cmd {
     ZIP_SOURCE_OPEN,	/* prepare for reading */
     ZIP_SOURCE_READ, 	/* read data */
@@ -156,6 +153,10 @@ enum zip_source_cmd {
     ZIP_SOURCE_ERROR,	/* get error information */
     ZIP_SOURCE_FREE	/* cleanup and free resources */
 };
+
+#ifndef ssize_t
+#define ssize_t int
+#endif
 
 typedef ssize_t (*zip_source_callback)(void *state, void *data,
 				       size_t len, enum zip_source_cmd cmd);

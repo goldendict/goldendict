@@ -286,7 +286,11 @@ typedef uLong FAR uLongf;
 
 #if 1           /* HAVE_UNISTD_H -- this line is updated by ./configure */
 #  include <sys/types.h> /* for off_t */
+
+#ifndef _MSC_VER
 #  include <unistd.h>    /* for SEEK_* and off_t */
+#endif
+
 #  ifdef VMS
 #    include <unixio.h>   /* for off_t */
 #  endif

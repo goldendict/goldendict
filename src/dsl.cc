@@ -24,6 +24,10 @@
 #include <list>
 #include <wctype.h>
 
+#ifdef _MSC_VER
+#include <stub_msvc.h>
+#endif
+
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
@@ -80,7 +84,11 @@ struct IdxHeader
   uint32_t wordCount; // Number of headwords this dictionary has
   uint32_t langFrom;  // Source language
   uint32_t langTo;    // Target language
-} __attribute__((packed));
+} 
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 bool indexIsOldOrBad( string const & indexFile )
 {

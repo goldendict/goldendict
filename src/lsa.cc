@@ -9,9 +9,16 @@
 #include "btreeidx.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
+
 #include <set>
+#include <string>
+
+#ifdef _MSC_VER
+#include <stub_msvc.h>
+#endif
+
 #include <vorbis/vorbisfile.h>
-#include <string.h>
+
 #include <QUrl>
 
 namespace Lsa {
@@ -46,7 +53,11 @@ struct IdxHeader
   uint32_t vorbisOffset; // Offset of the vorbis file which contains all snds
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
-} __attribute__((packed));
+} 
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 bool indexIsOldOrBad( string const & indexFile )
 {
@@ -360,7 +371,11 @@ struct WavHeader
   uint16_t bitsPerSample; // 16
   char data[ 4 ]; // data
   uint32_t dataLength;
-} __attribute__((packed));
+} 
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name )
   throw( std::exception )

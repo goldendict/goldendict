@@ -263,6 +263,14 @@ static void err_internal( const char *routine, const char *format, ... )
   abort();
 }
 
+#ifndef __func__
+# ifdef __FUNCTION__
+#  define __func__  __FUNCTION__
+# else
+#  define __func__  __FILE__
+# endif
+#endif
+
 static int dict_read_header( const char *filename,
 			     dictData *header, int computeCRC )
 {

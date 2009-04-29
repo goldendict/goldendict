@@ -958,7 +958,7 @@ IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )
   // We try to stick to two-level tree for most dictionaries. Try finding
   // the right size for it.
 
-  size_t btreeMaxElements = ( (size_t) sqrt( indexSize ) ) + 1;
+  size_t btreeMaxElements = ( (size_t) sqrt( (double) indexSize ) ) + 1;
 
   if ( btreeMaxElements < BtreeMinElements )
     btreeMaxElements = BtreeMinElements;

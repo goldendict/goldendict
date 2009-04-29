@@ -154,10 +154,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.tabWidget->setCornerWidget( &addTab, Qt::TopLeftCorner );
   //ui.tabWidget->setCornerWidget( &closeTab, Qt::TopRightCorner );
 
+#if QT_VERSION >= 0x040500
   ui.tabWidget->setMovable( true );
-  #ifndef Q_OS_WIN32
+#endif
+
+#ifndef Q_OS_WIN32
   ui.tabWidget->setDocumentMode( true );
-  #endif
+#endif
 
   connect( &addTab, SIGNAL( clicked() ),
            this, SLOT( addNewTab() ) );
@@ -168,7 +171,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.tabWidget, SIGNAL( currentChanged( int ) ),
            this, SLOT( tabSwitched( int ) ) );
 
+#if QT_VERSION >= 0x040500
   ui.tabWidget->setTabsClosable( true );
+#endif
 
   connect( ui.quit, SIGNAL( activated() ),
            qApp, SLOT( quit() ) );
@@ -989,6 +994,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         return true;
       }
 
+#if QT_VERSION >= 0x040500
       if ( keyEvent->matches( QKeySequence::InsertParagraphSeparator ) &&
            ui.wordList->selectedItems().size() )
       {
@@ -996,6 +1002,8 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
         return true;
       }
+#endif
+
     }
   }
   else

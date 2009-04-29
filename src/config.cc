@@ -5,7 +5,12 @@
 #include <QDir>
 #include <QFile>
 #include <QtXml>
+
+#ifdef _MSC_VER
+#include <stdint_msvc.h>
+#else
 #include <stdint.h>
+#endif
 
 namespace Config {
 

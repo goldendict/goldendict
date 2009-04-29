@@ -16,6 +16,10 @@
 #include <wctype.h>
 #include <stdlib.h>
 
+#ifdef _MSC_VER
+#include <stub_msvc.h>
+#endif
+
 namespace DictdFiles {
 
 using std::map;
@@ -51,7 +55,11 @@ struct IdxHeader
   uint32_t wordCount; // Total number of words
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
-} __attribute__((packed));
+} 
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 bool indexIsOldOrBad( string const & indexFile )
 {

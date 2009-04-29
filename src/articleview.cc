@@ -329,7 +329,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     QString scheme = r.linkUrl().scheme();
 
     if ( scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "mailto" )
-      menu.addAction( ui.definition->pageAction( QWebPage::QWebPage::CopyLinkToClipboard ) );
+      menu.addAction( ui.definition->pageAction( QWebPage::CopyLinkToClipboard ) );
   }
 
   QString selectedText = ui.definition->selectedText();
@@ -345,7 +345,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       menu.addAction( lookupSelectionNewTab );
     }
 
-    menu.addAction( ui.definition->pageAction( QWebPage::QWebPage::Copy ) );
+    menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
   }
 
   map< QAction *, QString > tableOfContents;

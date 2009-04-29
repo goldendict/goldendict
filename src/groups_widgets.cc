@@ -230,7 +230,9 @@ std::vector< sptr< Dictionary::Class > > const &
 DictGroupsWidget::DictGroupsWidget( QWidget * parent ):
   QTabWidget( parent ), nextId( 1 ), allDicts( 0 )
 {
+#if QT_VERSION >= 0x040500
   setMovable( true );
+#endif
 }
 
 namespace {

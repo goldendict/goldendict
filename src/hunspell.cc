@@ -766,7 +766,11 @@ vector< DataFiles > findDataFiles( QString const & path )
     TRY_LANG( "nr", QCoreApplication::translate( "Hunspell", "South Ndebele" ) )
     TRY_LANG( "nv", QCoreApplication::translate( "Hunspell", "Navajo" ) )
     TRY_LANG( "ny", QCoreApplication::translate( "Hunspell", "Chichewa" ) )
-    TRY_LANG( "oc", QCoreApplication::translate( "Hunspell", "Occitan" ) )
+		readableNameSucceeded = false;
+
+	if (readableNameSucceeded == false) 
+	{
+	TRY_LANG( "oc", QCoreApplication::translate( "Hunspell", "Occitan" ) )
     TRY_LANG( "oj", QCoreApplication::translate( "Hunspell", "Ojibwa" ) )
     TRY_LANG( "om", QCoreApplication::translate( "Hunspell", "Oromo" ) )
     TRY_LANG( "or", QCoreApplication::translate( "Hunspell", "Oriya" ) )
@@ -831,6 +835,7 @@ vector< DataFiles > findDataFiles( QString const & path )
     TRY_LANG( "zh", QCoreApplication::translate( "Hunspell", "Chinese" ) )
     TRY_LANG( "zu", QCoreApplication::translate( "Hunspell", "Zulu" ) )
       readableNameSucceeded = false; // This ends the last else, so it's conditional
+	}
 
     if ( readableNameSucceeded )
     {

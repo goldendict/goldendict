@@ -42,7 +42,11 @@ struct IdxHeader
   uint32_t chunksOffset; // The offset to chunks' storage
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
-} __attribute__((packed));
+} 
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 bool indexIsOldOrBad( string const & indexFile )
 {

@@ -15,6 +15,10 @@
 #include <ctype.h>
 #include <string.h>
 
+#ifdef _MSC_VER
+#include <stub_msvc.h>
+#endif
+
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
@@ -59,7 +63,11 @@ namespace
     uint32_t indexRootOffset;
     uint32_t resourceListOffset; // The offset of the list of resources
     uint32_t resourcesCount; // Number of resources stored
-  } __attribute__((packed));
+  } 
+  #ifndef _MSC_VER
+	__attribute__((packed))
+  #endif
+  ;
 
   bool indexIsOldOrBad( string const & indexFile )
   {
