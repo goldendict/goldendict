@@ -1013,8 +1013,10 @@ void DslResourceRequest::run()
 
           int fileIndex;
 
+          // We ignore case in zip files since most dsls are created for Windows,
+          // where names are case-insensitive.
           if ( !isCancelled &&
-               ( fileIndex = zip_name_locate( resourceZip, fname.c_str(), 0 ) ) != -1 &&
+               ( fileIndex = zip_name_locate( resourceZip, fname.c_str(), ZIP_FL_NOCASE ) ) != -1 &&
                !zip_stat_index( resourceZip, fileIndex, 0, &st ) &&
                ( zf = zip_fopen_index( resourceZip, fileIndex, 0 ) ) )
           {
