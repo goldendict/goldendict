@@ -51,6 +51,10 @@ extern "C" {
 #include <stdio.h>
 #include <time.h>
 
+#ifdef _MSC_VER
+#include <stub_msvc.h>
+#endif
+
 /* flags for zip_open */
 
 #define ZIP_CREATE           1
@@ -153,10 +157,6 @@ enum zip_source_cmd {
     ZIP_SOURCE_ERROR,	/* get error information */
     ZIP_SOURCE_FREE	/* cleanup and free resources */
 };
-
-#ifndef ssize_t
-#define ssize_t int
-#endif
 
 typedef ssize_t (*zip_source_callback)(void *state, void *data,
 				       size_t len, enum zip_source_cmd cmd);
