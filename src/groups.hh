@@ -10,7 +10,7 @@
 #include "groups_widgets.hh"
 #include <QToolButton>
 
-class Groups: public QDialog
+class Groups: public QWidget
 {
   Q_OBJECT
 

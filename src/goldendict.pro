@@ -97,7 +97,10 @@ HEADERS += folding.hh \
     hotkeywrapper.hh \
     searchpanewidget.hh \
     hotkeyedit.hh \
-    langcoder.hh
+    langcoder.hh \
+    editdictionaries.hh \
+    loaddictionaries.hh
+
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -107,7 +110,9 @@ FORMS += groups.ui \
     scanpopup.ui \
     articleview.ui \
     preferences.ui \
-    about.ui
+    about.ui \
+    editdictionaries.ui
+
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -155,7 +160,10 @@ SOURCES += folding.cc \
     processwrapper.cc \
     hotkeywrapper.cc \
     hotkeyedit.cc \
-    langcoder.cc
+    langcoder.cc \
+    editdictionaries.cc \
+    loaddictionaries.cc
+
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h

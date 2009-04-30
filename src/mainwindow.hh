@@ -13,7 +13,6 @@
 #include "folding.hh"
 #include "config.hh"
 #include "dictionary.hh"
-#include "initializing.hh"
 #include "article_netmgr.hh"
 #include "instances.hh"
 #include "article_maker.hh"
@@ -24,43 +23,6 @@
 
 using std::string;
 using std::vector;
-
-class LoadDictionaries: public QThread, public Dictionary::Initializing
-{
-  Q_OBJECT
-
-  Config::Paths const & paths;
-  Config::SoundDirs const & soundDirs;
-  Config::Hunspell const & hunspell;
-  vector< sptr< Dictionary::Class > > dictionaries;
-  string exceptionText;
-
-public:
-
-  LoadDictionaries( Config::Class const & cfg );
-
-  virtual void run();
-
-  vector< sptr< Dictionary::Class > > const & getDictionaries() const
-  { return dictionaries; }
-
-  /// Empty string means to exception occured
-  string const & getExceptionText() const
-  { return exceptionText; }
-
-signals:
-
-  void indexingDictionarySignal( QString dictionaryName );
-
-public:
-
-  virtual void indexingDictionary( string const & dictionaryName ) throw();
-
-private:
-
-  void handlePath( Config::Path const & );
-};
-
 
 class MainWindow: public QMainWindow
 {
@@ -102,8 +64,6 @@ private:
   WordFinder wordFinder;
 
   sptr< ScanPopup > scanPopup;
-
-  ::Initializing * initializing;
 
   sptr< HotkeyWrapper > hotkeyWrapper;
 
@@ -183,10 +143,8 @@ private slots:
   /// reference, if it has any.
   void pronounce();
 
-  void editSources();
-  void editGroups();
+  void editDictionaries();
   void editPreferences();
-  void indexingDictionary( QString dictionaryName );
 
   void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );

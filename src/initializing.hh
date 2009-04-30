@@ -15,6 +15,8 @@ public:
 
   Initializing( QWidget * parent, bool showOnStartup );
 
+public slots:
+
   void indexing( QString const & dictionaryName );
 
 private:

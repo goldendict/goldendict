@@ -130,7 +130,7 @@ private:
 };
 
 
-class Sources: public QDialog
+class Sources: public QWidget
 {
   Q_OBJECT
 

@@ -25,6 +25,9 @@ struct Path
   Path(): recursive( false ) {}
   Path( QString const & path_, bool recursive_ ):
     path( path_ ), recursive( recursive_ ) {}
+
+  bool operator == ( Path const & other ) const
+  { return path == other.path && recursive == other.recursive; }
 };
 
 /// A list of paths where to search for the dictionaries
@@ -42,6 +45,9 @@ struct SoundDir
   SoundDir( QString const & path_, QString const & name_ ):
     path( path_ ), name( name_ )
   {}
+
+  bool operator == ( SoundDir const & other ) const
+  { return path == other.path && name == other.name; }
 };
 
 /// A list of SoundDirs
@@ -57,6 +63,9 @@ struct DictionaryRef
 
   DictionaryRef( QString const & id_, QString const & name_ ):
     id( id_ ), name( name_ ) {}
+
+  bool operator == ( DictionaryRef const & other ) const
+  { return id == other.id && name == other.name; }
 };
 
 /// A dictionary group
@@ -67,6 +76,9 @@ struct Group
   vector< DictionaryRef > dictionaries;
 
   Group(): id( 0 ) {}
+
+  bool operator == ( Group const & other ) const
+  { return id == other.id && name == other.name && icon == other.icon; }
 };
 
 /// All the groups
@@ -158,6 +170,10 @@ struct MediaWiki
   MediaWiki( QString const & id_, QString const & name_, QString const & url_,
              bool enabled_ ):
     id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ) {}
+
+  bool operator == ( MediaWiki const & other ) const
+  { return id == other.id && name == other.name && url == other.url &&
+           enabled == other.enabled; }
 };
 
 /// Hunspell configuration
@@ -168,6 +184,13 @@ struct Hunspell
   typedef vector< QString > Dictionaries;
 
   Dictionaries enabledDictionaries;
+
+  bool operator == ( Hunspell const & other ) const
+  { return dictionariesPath == other.dictionariesPath &&
+    enabledDictionaries == other.enabledDictionaries; }
+
+  bool operator != ( Hunspell const & other ) const
+  { return ! operator == ( other ); }
 };
 
 /// All the MediaWikis

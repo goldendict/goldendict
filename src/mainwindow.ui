@@ -72,8 +72,7 @@
     <property name="title">
      <string>&amp;Edit</string>
     </property>
-    <addaction name="sources"/>
-    <addaction name="groups"/>
+    <addaction name="dictionaries"/>
     <addaction name="preferences"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
@@ -217,9 +216,9 @@
     </layout>
    </widget>
   </widget>
-  <action name="sources">
+  <action name="dictionaries">
    <property name="text">
-    <string>&amp;Sources...</string>
+    <string>&amp;Dictionaries...</string>
    </property>
    <property name="shortcut">
     <string>F2</string>

@@ -2,17 +2,9 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "mainwindow.hh"
-#include "sources.hh"
-#include "groups.hh"
+#include "editdictionaries.hh"
+#include "loaddictionaries.hh"
 #include "preferences.hh"
-#include "bgl.hh"
-#include "stardict.hh"
-#include "lsa.hh"
-#include "dsl.hh"
-#include "mediawiki.hh"
-#include "sounddir.hh"
-#include "hunspell.hh"
-#include "dictdfiles.hh"
 #include "ui_about.h"
 #include <limits.h>
 #include <QDir>
@@ -45,7 +37,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleNetMgr( this, dictionaries, articleMaker ),
   dictNetMgr( this ),
   wordFinder( this ),
-  initializing( 0 ),
   newReleaseCheckTimer( this )
 {
   ui.setupUi( this );
@@ -178,11 +169,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.quit, SIGNAL( activated() ),
            qApp, SLOT( quit() ) );
 
-  connect( ui.sources, SIGNAL( activated() ),
-           this, SLOT( editSources() ) );
-
-  connect( ui.groups, SIGNAL( activated() ),
-           this, SLOT( editGroups() ) );
+  connect( ui.dictionaries, SIGNAL( activated() ),
+           this, SLOT( editDictionaries() ) );
 
   connect( ui.preferences, SIGNAL( activated() ),
            this, SLOT( editPreferences() ) );
@@ -265,107 +253,6 @@ MainWindow::~MainWindow()
   Config::save( cfg );
 }
 
-LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
-  paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell )
-{
-}
-
-void LoadDictionaries::run()
-{
-  try
-  {
-    for( Config::Paths::const_iterator i = paths.begin(); i != paths.end(); ++i )
-      handlePath( *i );
-
-    // Make soundDirs
-    {
-      vector< sptr< Dictionary::Class > > soundDirDictionaries =
-        SoundDir::makeDictionaries( soundDirs, Config::getIndexDir().toLocal8Bit().data(), *this );
-
-      dictionaries.insert( dictionaries.end(), soundDirDictionaries.begin(),
-                           soundDirDictionaries.end() );
-    }
-
-    // Make hunspells
-    {
-      vector< sptr< Dictionary::Class > > hunspellDictionaries =
-        HunspellMorpho::makeDictionaries( hunspell );
-
-      dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
-                           hunspellDictionaries.end() );
-    }
-
-  }
-  catch( std::exception & e )
-  {
-    exceptionText = e.what();
-  }
-}
-
-void LoadDictionaries::handlePath( Config::Path const & path )
-{
-  vector< string > allFiles;
-
-  QDir dir( path.path );
-
-  QFileInfoList entries = dir.entryInfoList( QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot );
-
-  for( QFileInfoList::const_iterator i = entries.constBegin();
-       i != entries.constEnd(); ++i )
-  {
-    QString fullName = i->canonicalFilePath();
-
-    if ( path.recursive && i->isDir() )
-      handlePath( Config::Path( fullName, true ) );
-
-    allFiles.push_back( QDir::toNativeSeparators( fullName ).toLocal8Bit().data() );
-  }
-
-  {
-    vector< sptr< Dictionary::Class > > bglDictionaries =
-      Bgl::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
-
-    dictionaries.insert( dictionaries.end(), bglDictionaries.begin(),
-                         bglDictionaries.end() );
-  }
-
-  {
-    vector< sptr< Dictionary::Class > > stardictDictionaries =
-      Stardict::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
-
-    dictionaries.insert( dictionaries.end(), stardictDictionaries.begin(),
-                         stardictDictionaries.end() );
-  }
-
-  {
-    vector< sptr< Dictionary::Class > > lsaDictionaries =
-      Lsa::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
-
-    dictionaries.insert( dictionaries.end(), lsaDictionaries.begin(),
-                         lsaDictionaries.end() );
-  }
-
-  {
-    vector< sptr< Dictionary::Class > > dslDictionaries =
-      Dsl::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
-
-    dictionaries.insert( dictionaries.end(), dslDictionaries.begin(),
-                         dslDictionaries.end() );
-  }
-
-  {
-    vector< sptr< Dictionary::Class > > dictdDictionaries =
-      DictdFiles::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
-
-    dictionaries.insert( dictionaries.end(), dictdDictionaries.begin(),
-                         dictdDictionaries.end() );
-  }
-}
-
-void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw()
-{
-  emit indexingDictionarySignal( QString::fromUtf8( dictionaryName.c_str() ) );
-}
 
 void MainWindow::updateTrayIcon()
 {
@@ -460,79 +347,7 @@ void MainWindow::makeDictionaries()
 
   wordFinder.clear();
 
-  dictionaries.clear();
-
-  ::Initializing init( this, isVisible() );
-
-  try
-  {
-    initializing = &init;
-
-    // Start a thread to load all the dictionaries
-
-    LoadDictionaries loadDicts( cfg );
-
-    connect( &loadDicts, SIGNAL( indexingDictionarySignal( QString ) ),
-             this, SLOT( indexingDictionary( QString ) ) );
-
-    QEventLoop localLoop;
-
-    connect( &loadDicts, SIGNAL( finished() ),
-             &localLoop, SLOT( quit() ) );
-
-    loadDicts.start();
-
-    localLoop.exec();
-
-    loadDicts.wait();
-
-    if ( loadDicts.getExceptionText().size() )
-    {
-      initializing = 0;
-
-      QMessageBox::critical( this, tr( "Error loading dictionaries" ),
-                             QString::fromUtf8( loadDicts.getExceptionText().c_str() ) );
-
-      return;
-    }
-
-    dictionaries = loadDicts.getDictionaries();
-
-    ///// We create MediaWiki dicts syncronously, since they use netmgr
-
-    {
-      vector< sptr< Dictionary::Class > > dicts =
-        MediaWiki::makeDictionaries( loadDicts, cfg.mediawikis, dictNetMgr );
-
-      dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
-    }
-
-    initializing = 0;
-
-    // Remove any stale index files
-
-    set< string > ids;
-
-    for( unsigned x = dictionaries.size(); x--; )
-      ids.insert( dictionaries[ x ]->getId() );
-
-    QDir indexDir( Config::getIndexDir() );
-
-    QStringList allIdxFiles = indexDir.entryList( QDir::Files );
-
-    for( QStringList::const_iterator i = allIdxFiles.constBegin();
-         i != allIdxFiles.constEnd(); ++i )
-    {
-      if ( ids.find( i->toLocal8Bit().data() ) == ids.end() &&
-           i->size() == 32 )
-        indexDir.remove( *i );
-    }
-  }
-  catch( ... )
-  {
-    initializing = 0;
-    throw;
-  }
+  loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr );
 
   updateStatusLine();
   updateGroupList();
@@ -613,12 +428,6 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
   }
 
   return groupInstances[ current ].dictionaries;
-}
-
-void MainWindow::indexingDictionary( QString dictionaryName )
-{
-  if ( initializing )
-    initializing->indexing( dictionaryName );
 }
 
 void MainWindow::addNewTab()
@@ -756,43 +565,24 @@ void MainWindow::updatePronounceAvailability()
   navPronounce->setEnabled( pronounceEnabled );
 }
 
-void MainWindow::editSources()
+void MainWindow::editDictionaries()
 {
-  Sources src( this, cfg.paths, cfg.soundDirs, cfg.hunspell, cfg.mediawikis );
+  hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
+  scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  
+  EditDictionaries dicts( this, cfg, dictionaries, dictNetMgr );
 
-  src.show();
-
-  if ( src.exec() == QDialog::Accepted )
+  dicts.exec();
+  
+  if ( dicts.areDictionariesChanged() || dicts.areGroupsChanged() )
   {
-    cfg.paths = src.getPaths();
-    cfg.soundDirs = src.getSoundDirs();
-    cfg.hunspell = src.getHunspell();
-    cfg.mediawikis = src.getMediaWikis();
-
-    makeDictionaries();
-
+    updateGroupList();
+    
     Config::save( cfg );
   }
-}
-
-void MainWindow::editGroups()
-{
-  Groups groups( this, dictionaries, cfg.groups );
-
-  groups.show();
-
-  if ( groups.exec() == QDialog::Accepted )
-  {
-    cfg.groups = groups.getGroups();
-
-    Config::save( cfg );
-  }
-  else
-    return;
-
-  scanPopup.reset(); // It was holding group instances
-  updateGroupList();
+  
   makeScanPopup();
+  installHotKeys();
 }
 
 void MainWindow::editPreferences()

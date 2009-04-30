@@ -10,7 +10,7 @@
 Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::SoundDirs const & soundDirs,
                   Config::Hunspell const & hunspell,
-                  Config::MediaWikis const & mediawikis ): QDialog( parent ),
+                  Config::MediaWikis const & mediawikis ): QWidget( parent ),
   mediawikisModel( this, mediawikis ), pathsModel( this, paths ),
   soundDirsModel( this, soundDirs ),
   hunspellDictsModel( this, hunspell )
@@ -38,11 +38,6 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.hunspellDictionaries->setModel( &hunspellDictsModel );
 
   fitHunspellDictsColumns();
-
-  connect( ui.buttons, SIGNAL( accepted() ),
-            this, SLOT( accept() ) );
-  connect( ui.buttons, SIGNAL( rejected() ),
-            this, SLOT( reject() ) );
 }
 
 void Sources::fitPathsColumns()

@@ -9,7 +9,7 @@ using std::vector;
 
 Groups::Groups( QWidget * parent,
                 vector< sptr< Dictionary::Class > > const & dicts_,
-                Config::Groups const & groups_ ): QDialog( parent ),
+                Config::Groups const & groups_ ): QWidget( parent ),
   dicts( dicts_ ), groups( groups_ )
 {
   ui.setupUi( this );
