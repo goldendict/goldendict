@@ -766,11 +766,19 @@ vector< DataFiles > findDataFiles( QString const & path )
     TRY_LANG( "nr", QCoreApplication::translate( "Hunspell", "South Ndebele" ) )
     TRY_LANG( "nv", QCoreApplication::translate( "Hunspell", "Navajo" ) )
     TRY_LANG( "ny", QCoreApplication::translate( "Hunspell", "Chichewa" ) )
-		readableNameSucceeded = false;
 
-	if (readableNameSucceeded == false) 
-	{
-	TRY_LANG( "oc", QCoreApplication::translate( "Hunspell", "Occitan" ) )
+    // This looks really like a fake, and it is a fake - because
+    // the one very "intelligent" MSVC compiler does not understand if...else
+    // with more than 128 cases :(
+
+#ifdef _MSC_VER
+      readableNameSucceeded = false;
+
+  if (readableNameSucceeded == false)
+  {
+#endif
+
+    TRY_LANG( "oc", QCoreApplication::translate( "Hunspell", "Occitan" ) )
     TRY_LANG( "oj", QCoreApplication::translate( "Hunspell", "Ojibwa" ) )
     TRY_LANG( "om", QCoreApplication::translate( "Hunspell", "Oromo" ) )
     TRY_LANG( "or", QCoreApplication::translate( "Hunspell", "Oriya" ) )
@@ -835,7 +843,9 @@ vector< DataFiles > findDataFiles( QString const & path )
     TRY_LANG( "zh", QCoreApplication::translate( "Hunspell", "Chinese" ) )
     TRY_LANG( "zu", QCoreApplication::translate( "Hunspell", "Zulu" ) )
       readableNameSucceeded = false; // This ends the last else, so it's conditional
-	}
+#ifdef _MSC_VER
+  }
+#endif
 
     if ( readableNameSucceeded )
     {
