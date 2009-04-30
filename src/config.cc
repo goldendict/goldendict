@@ -357,13 +357,7 @@ Class load() throw( exError )
     c.preferences.autoStart = ( preferences.namedItem( "autoStart" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "zoomFactor" ).isNull() )
-    {
       c.preferences.zoomFactor = preferences.namedItem( "zoomFactor" ).toElement().text().toDouble();
-      if ( c.preferences.zoomFactor < 0.5 )
-        c.preferences.zoomFactor = 0.5;
-      else if ( c.preferences.zoomFactor > 5 )
-        c.preferences.zoomFactor = 5;
-    }
 
     applyBoolOption( c.preferences.enableMainWindowHotkey, preferences.namedItem( "enableMainWindowHotkey" ) );
     if ( !preferences.namedItem( "mainWindowHotkey" ).isNull() )

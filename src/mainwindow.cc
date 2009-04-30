@@ -241,6 +241,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   updateTrayIcon();
 
+  // Update zoomers
+  applyZoomFactor();
+
   // Update autostart info
   setAutostart(cfg.preferences.autoStart);
 
@@ -1217,18 +1220,12 @@ void MainWindow::on_actionCloseToTray_activated()
 
 void MainWindow::zoomin()
 {
-  if ( cfg.preferences.zoomFactor >= 5 )
-    return; // 5x is maximum
-
   cfg.preferences.zoomFactor += 0.1;
   applyZoomFactor();
 }
 
 void MainWindow::zoomout()
 {
-  if ( cfg.preferences.zoomFactor <= 0.5 )
-    return; // 0.5x is minimum
-
   cfg.preferences.zoomFactor -= 0.1;
   applyZoomFactor();
 }
@@ -1241,6 +1238,15 @@ void MainWindow::unzoom()
 
 void MainWindow::applyZoomFactor()
 {
+  if ( cfg.preferences.zoomFactor >= 3 )
+    cfg.preferences.zoomFactor = 3;
+  else if ( cfg.preferences.zoomFactor <= 0.8 )
+    cfg.preferences.zoomFactor = 0.8;
+
+  zoomIn->setEnabled( cfg.preferences.zoomFactor < 3 );
+  zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.8 );
+  zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
+
   for ( int i = 0; i < ui.tabWidget->count(); i++ )
   {
     ArticleView & view =
