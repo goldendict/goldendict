@@ -59,12 +59,12 @@ public:
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
   void showAnticipation();
-  
+
   /// Opens the given link. Supposed to be used in response to
   /// openLinkInNewTab() signal. The link scheme is therefore supposed to be
   /// one of the internal ones.
   void openLink( QUrl const & url, QUrl const & referrer );
-  
+
   /// Goes back in history
   void back()
   { ui.definition->back(); }
@@ -83,6 +83,9 @@ public:
   /// Plays the first audio reference on the page, if any.
   void playSound();
 
+  void setZoomFactor( qreal factor )
+  { ui.definition->setZoomFactor( factor ); }
+
 signals:
 
   void iconChanged( ArticleView *, QIcon const & icon );
@@ -92,7 +95,7 @@ signals:
   void pageLoaded();
 
   /// Singals that the following link was requested to be opened in new tab
-  void openLinkInNewTab( QUrl const &, QUrl const & referrer );  
+  void openLinkInNewTab( QUrl const &, QUrl const & referrer );
   /// Singals that the following definition was requested to be showed in new tab
   void showDefinitionInNewTab( QString const & word, unsigned group );
 
@@ -114,7 +117,7 @@ private:
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();
-  
+
 protected:
 
   // We need this to hide the search bar when we're showed

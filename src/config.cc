@@ -88,7 +88,9 @@ Preferences::Preferences():
   scanPopupAltModeSecs( 3 ),
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
-  checkForNewReleases( true )
+  checkForNewReleases( true ),
+
+  zoomFactor( 1 )
 {
 }
 
@@ -332,6 +334,15 @@ Class load() throw( exError )
     c.preferences.startToTray = ( preferences.namedItem( "startToTray" ).toElement().text() == "1" );
     c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
     c.preferences.autoStart = ( preferences.namedItem( "autoStart" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "zoomFactor" ).isNull() )
+    {
+      c.preferences.zoomFactor = preferences.namedItem( "zoomFactor" ).toElement().text().toDouble();
+      if ( c.preferences.zoomFactor < 0.5 )
+        c.preferences.zoomFactor = 0.5;
+      else if ( c.preferences.zoomFactor > 5 )
+        c.preferences.zoomFactor = 5;
+    }
 
     applyBoolOption( c.preferences.enableMainWindowHotkey, preferences.namedItem( "enableMainWindowHotkey" ) );
     if ( !preferences.namedItem( "mainWindowHotkey" ).isNull() )
@@ -580,6 +591,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "autoStart" );
     opt.appendChild( dd.createTextNode( c.preferences.autoStart ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "zoomFactor" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.zoomFactor ) ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "enableMainWindowHotkey" );

@@ -50,6 +50,7 @@ private:
           switchToNextTabAction, switchToPrevTabAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
+  QAction * zoomIn, * zoomOut, * zoomBase;
   QMenu trayIconMenu;
   QToolButton addTab;
   Config::Class & cfg;
@@ -100,6 +101,8 @@ private:
   /// Creates hotkeyWrapper and hooks the currently set keys for it
   void installHotKeys();
 
+  void applyZoomFactor();
+
 private slots:
 
   void hotKeyActivated( int );
@@ -142,6 +145,10 @@ private slots:
   /// Pronounces the currently displayed word by playing its first audio
   /// reference, if it has any.
   void pronounce();
+
+  void zoomin();
+  void zoomout();
+  void unzoom();
 
   void editDictionaries();
   void editPreferences();

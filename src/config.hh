@@ -155,6 +155,8 @@ struct Preferences
 
   bool checkForNewReleases;
 
+  qreal zoomFactor;
+
   Preferences();
 };
 

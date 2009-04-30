@@ -21,5 +21,8 @@
         <file>icons/icon32_dictd.png</file>
         <file>icons/icon32_hunspell.png</file>
         <file>icons/icon32_wiki.png</file>
+        <file>icons/icon32_zoombase.png</file>
+        <file>icons/icon32_zoomin.png</file>
+        <file>icons/icon32_zoomout.png</file>
     </qresource>
 </RCC>

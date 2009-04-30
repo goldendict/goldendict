@@ -77,6 +77,20 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( navPronounce, SIGNAL( triggered() ),
            this, SLOT( pronounce() ) );
 
+  // zooming
+  navToolbar->addSeparator();
+  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Increase zoom factor" ) );
+  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Decrease zoom factor" ) );
+  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Reset zoom factor to default" ) );
+
+  connect( zoomIn, SIGNAL( triggered() ),
+           this, SLOT( zoomin() ) );
+  connect( zoomOut, SIGNAL( triggered() ),
+           this, SLOT( zoomout() ) );
+  connect( zoomBase, SIGNAL( triggered() ),
+           this, SLOT( unzoom() ) );
+
+  // tray icon
   connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( activated() ),
            this, SLOT( showMainWindow() ) );
   trayIconMenu.addAction( enableScanPopup );
@@ -466,6 +480,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   if ( switchToIt )
     ui.tabWidget->setCurrentIndex( index );
 
+  view->setZoomFactor( cfg.preferences.zoomFactor );
+
   return view;
 }
 
@@ -569,18 +585,18 @@ void MainWindow::editDictionaries()
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
-  
+
   EditDictionaries dicts( this, cfg, dictionaries, dictNetMgr );
 
   dicts.exec();
-  
+
   if ( dicts.areDictionariesChanged() || dicts.areGroupsChanged() )
   {
     updateGroupList();
-    
+
     Config::save( cfg );
   }
-  
+
   makeScanPopup();
   installHotKeys();
 }
@@ -1197,4 +1213,38 @@ void MainWindow::setAutostart(bool autostart)
 void MainWindow::on_actionCloseToTray_activated()
 {
   toggleMainWindow( !cfg.preferences.enableTrayIcon );
+}
+
+void MainWindow::zoomin()
+{
+  if ( cfg.preferences.zoomFactor >= 5 )
+    return; // 5x is maximum
+
+  cfg.preferences.zoomFactor += 0.1;
+  applyZoomFactor();
+}
+
+void MainWindow::zoomout()
+{
+  if ( cfg.preferences.zoomFactor <= 0.5 )
+    return; // 0.5x is minimum
+
+  cfg.preferences.zoomFactor -= 0.1;
+  applyZoomFactor();
+}
+
+void MainWindow::unzoom()
+{
+  cfg.preferences.zoomFactor = 1;
+  applyZoomFactor();
+}
+
+void MainWindow::applyZoomFactor()
+{
+  for ( int i = 0; i < ui.tabWidget->count(); i++ )
+  {
+    ArticleView & view =
+      dynamic_cast< ArticleView & >( *( ui.tabWidget->widget(i) ) );
+    view.setZoomFactor( cfg.preferences.zoomFactor );
+  }
 }
