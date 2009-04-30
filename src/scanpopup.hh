@@ -35,6 +35,10 @@ public:
   /// Disables scanning.
   void disableScanning();
 
+  /// Applies current zoom factor to the popup's view. Should be called when
+  /// it's changed.
+  void applyZoomFactor();
+  
 public slots:
 
   /// Translates the word from the clipboard, showing the window etc.

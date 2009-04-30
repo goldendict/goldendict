@@ -1247,4 +1247,7 @@ void MainWindow::applyZoomFactor()
       dynamic_cast< ArticleView & >( *( ui.tabWidget->widget(i) ) );
     view.setZoomFactor( cfg.preferences.zoomFactor );
   }
+
+  if ( scanPopup.get() )
+    scanPopup->applyZoomFactor();
 }

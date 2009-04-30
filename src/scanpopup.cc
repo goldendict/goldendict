@@ -35,6 +35,9 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   definition = new ArticleView( ui.outerFrame, articleNetMgr, allDictionaries,
                                 groups, true, cfg );
+
+  applyZoomFactor();
+  
   ui.mainLayout->addWidget( definition );
 
   ui.wordListButton->hide();
@@ -123,6 +126,11 @@ void ScanPopup::disableScanning()
     MouseOver::instance().disableMouseOver();
     isScanningEnabled = false;
   }
+}
+
+void ScanPopup::applyZoomFactor()
+{
+  definition->setZoomFactor( cfg.preferences.zoomFactor );
 }
 
 void ScanPopup::translateWordFromClipboard()
