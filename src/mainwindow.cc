@@ -61,6 +61,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
 
+  navToolbar->addAction( ui.saveArticle );
+
   enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
@@ -1216,6 +1218,32 @@ void MainWindow::setAutostart(bool autostart)
 void MainWindow::on_actionCloseToTray_activated()
 {
   toggleMainWindow( !cfg.preferences.enableTrayIcon );
+}
+
+void MainWindow::on_saveArticle_activated()
+{
+  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+  QFileDialog fileDialog( this, tr( "Save Article As" ), QString(), tr( "Html files (*.html *.htm)" ) );
+
+  fileDialog.setAcceptMode( QFileDialog::AcceptSave );
+  
+  fileDialog.setDefaultSuffix( "html" );
+  
+  fileDialog.selectFile( view.getTitle() + ".html" );
+
+  if ( fileDialog.exec() && fileDialog.selectedFiles().size() == 1 )
+  {
+    QString fileName = fileDialog.selectedFiles().front();
+    
+    QFile file( fileName );
+
+    if ( !file.open( QIODevice::WriteOnly ) )
+      QMessageBox::critical( this, tr( "Error" ),
+                             tr( "Can't save article: %1" ).arg( file.errorString() ) );
+    else
+      file.write( view.toHtml().toUtf8() );
+  }
 }
 
 void MainWindow::zoomin()

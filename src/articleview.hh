@@ -86,6 +86,12 @@ public:
   void setZoomFactor( qreal factor )
   { ui.definition->setZoomFactor( factor ); }
 
+  /// Returns current article's text in .html format
+  QString toHtml();
+
+  /// Returns current article's title
+  QString getTitle();
+  
 signals:
 
   void iconChanged( ArticleView *, QIcon const & icon );

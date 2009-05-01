@@ -189,6 +189,8 @@ private slots:
   void showAbout();
 
   void on_actionCloseToTray_activated();
+  
+  void on_saveArticle_activated();
 };
 
 #endif

@@ -300,6 +300,16 @@ void ArticleView::playSound()
     openLink( QUrl::fromEncoded( v.toString().toUtf8() ), ui.definition->url() );
 }
 
+QString ArticleView::toHtml()
+{
+  return ui.definition->page()->currentFrame()->toHtml();
+}
+
+QString ArticleView::getTitle()
+{
+  return ui.definition->page()->currentFrame()->title();
+}
+
 void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?

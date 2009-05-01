@@ -65,6 +65,8 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="saveArticle"/>
+    <addaction name="separator"/>
     <addaction name="actionCloseToTray"/>
     <addaction name="quit"/>
    </widget>
@@ -221,7 +223,7 @@
     <string>&amp;Dictionaries...</string>
    </property>
    <property name="shortcut">
-    <string>F2</string>
+    <string>F3</string>
    </property>
   </action>
   <action name="groups">
@@ -283,6 +285,21 @@
     <string>Ctrl+F4</string>
    </property>
   </action>
+  <action name="saveArticle">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save Article</string>
+   </property>
+   <property name="toolTip">
+    <string>Save Article</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -296,6 +313,8 @@
   <tabstop>translateLine</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
