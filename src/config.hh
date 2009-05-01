@@ -78,7 +78,8 @@ struct Group
   Group(): id( 0 ) {}
 
   bool operator == ( Group const & other ) const
-  { return id == other.id && name == other.name && icon == other.icon; }
+  { return id == other.id && name == other.name && icon == other.icon &&
+           dictionaries == other.dictionaries; }
 };
 
 /// All the groups
