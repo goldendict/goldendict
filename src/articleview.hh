@@ -91,6 +91,9 @@ public:
 
   /// Returns current article's title
   QString getTitle();
+
+  /// Prints current article
+  void print( QPrinter * ) const;
   
 signals:
 

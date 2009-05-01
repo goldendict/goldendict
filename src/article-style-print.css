@@ -1,0 +1,6 @@
+/* This stylesheet is used for printing only, overriding article-style.css */
+
+body
+{
+  background: white;
+}

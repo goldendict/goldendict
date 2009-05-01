@@ -310,6 +310,11 @@ QString ArticleView::getTitle()
   return ui.definition->page()->currentFrame()->title();
 }
 
+void ArticleView::print( QPrinter * printer ) const
+{
+  ui.definition->print( printer );
+}
+
 void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?

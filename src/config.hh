@@ -241,6 +241,9 @@ QString getIndexDir() throw( exError );
 /// Returns the user .css file name.
 QString getUserCssFileName() throw( exError );
 
+/// Returns the user .css file name used for printing only.
+QString getUserCssPrintFileName() throw( exError );
+
 /// Returns the user .css file name for the Qt interface customization.
 QString getUserQtCssFileName() throw( exError );
 

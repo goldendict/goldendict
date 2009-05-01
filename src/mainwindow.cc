@@ -61,6 +61,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
 
+  navToolbar->addAction( ui.print );
   navToolbar->addAction( ui.saveArticle );
 
   enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
@@ -1218,6 +1219,44 @@ void MainWindow::setAutostart(bool autostart)
 void MainWindow::on_actionCloseToTray_activated()
 {
   toggleMainWindow( !cfg.preferences.enableTrayIcon );
+}
+
+void MainWindow::on_pageSetup_activated()
+{
+  QPageSetupDialog dialog( &printer, this );
+
+  dialog.exec();
+}
+
+void MainWindow::on_printPreview_activated()
+{
+  QPrintPreviewDialog dialog( &printer, this );
+
+  connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
+           this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
+
+  dialog.exec();
+}
+
+void MainWindow::on_print_activated()
+{
+  QPrintDialog dialog( &printer, this );
+  
+  dialog.setWindowTitle( tr( "Print Article") );
+  
+  if ( dialog.exec() != QDialog::Accepted )
+   return;
+
+  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+  view.print( &printer );
+}
+
+void MainWindow::printPreviewPaintRequested( QPrinter * printer )
+{
+  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+  view.print( printer );
 }
 
 void MainWindow::on_saveArticle_activated()

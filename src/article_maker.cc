@@ -31,20 +31,39 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 
   // Add a css stylesheet
-  
-  QFile builtInCssFile( ":/article-style.css" );
-  builtInCssFile.open( QFile::ReadOnly );
-  QByteArray css = builtInCssFile.readAll();
-  
-  QFile cssFile( Config::getUserCssFileName() );
 
-  if ( cssFile.open( QFile::ReadOnly ) )
-    css += cssFile.readAll();
+  {
+    QFile builtInCssFile( ":/article-style.css" );
+    builtInCssFile.open( QFile::ReadOnly );
+    QByteArray css = builtInCssFile.readAll();
+    
+    QFile cssFile( Config::getUserCssFileName() );
   
-  result += "<style type=\"text/css\">\n";
-  result += css.data();
-  result += "</style>\n";
+    if ( cssFile.open( QFile::ReadOnly ) )
+      css += cssFile.readAll();
+    
+    result += "<style type=\"text/css\" media=\"all\">\n";
+    result += css.data();
+    result += "</style>\n";
+  }
 
+  // Add print-only css
+  
+  {
+    QFile builtInCssFile( ":/article-style-print.css" );
+    builtInCssFile.open( QFile::ReadOnly );
+    QByteArray css = builtInCssFile.readAll();
+
+    QFile cssFile( Config::getUserCssPrintFileName() );
+
+    if ( cssFile.open( QFile::ReadOnly ) )
+      css += cssFile.readAll();
+    
+    result += "<style type=\"text/css\" media=\"print\">\n";
+    result += css.data();
+    result += "</style>\n";
+  }
+  
   result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
 
   // This doesn't seem to be much of influence right now, but we'll keep

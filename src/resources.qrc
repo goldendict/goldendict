@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/" >
+    <file>icons/print.png</file>
     <file>icons/arrow.png</file>
     <file>icons/prefix.png</file>
     <file>icons/pushpin.png</file>
@@ -13,6 +14,7 @@
     <file>icons/wizard.png</file>
     <file>icons/warning.png</file>
     <file>article-style.css</file>
+    <file>article-style-print.css</file>
     <file>qt-style.css</file>
     <file>icons/icon32_dsl.png</file>
     <file>icons/icon32_stardict.png</file>

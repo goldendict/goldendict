@@ -72,6 +72,8 @@ private:
                                // release, if enabled
   sptr< QNetworkReply > latestReleaseReply;
 
+  QPrinter printer; // The printer we use for all printing operations
+  
   /// Creates, destroys or otherwise updates tray icon, according to the
   /// current configuration and situation.
   void updateTrayIcon();
@@ -189,6 +191,11 @@ private slots:
   void showAbout();
 
   void on_actionCloseToTray_activated();
+  
+  void on_pageSetup_activated();
+  void on_printPreview_activated();
+  void on_print_activated();
+  void printPreviewPaintRequested( QPrinter * );
   
   void on_saveArticle_activated();
 };

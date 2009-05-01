@@ -751,6 +751,11 @@ QString getUserCssFileName() throw( exError )
   return getHomeDir().filePath( "article-style.css" );
 }
 
+QString getUserCssPrintFileName() throw( exError )
+{
+  return getHomeDir().filePath( "article-style-print.css" );
+}
+
 QString getUserQtCssFileName() throw( exError )
 {
   return getHomeDir().filePath( "qt-style.css" );

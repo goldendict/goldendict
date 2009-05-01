@@ -65,6 +65,10 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="pageSetup"/>
+    <addaction name="printPreview"/>
+    <addaction name="print"/>
+    <addaction name="separator"/>
     <addaction name="saveArticle"/>
     <addaction name="separator"/>
     <addaction name="actionCloseToTray"/>
@@ -298,6 +302,28 @@
    </property>
    <property name="shortcut">
     <string>F2</string>
+   </property>
+  </action>
+  <action name="print">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Print</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="pageSetup">
+   <property name="text">
+    <string>Page Set&amp;up</string>
+   </property>
+  </action>
+  <action name="printPreview">
+   <property name="text">
+    <string>Print Preview</string>
    </property>
   </action>
  </widget>
