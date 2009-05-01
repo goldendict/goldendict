@@ -16,7 +16,7 @@
 #include "langcoder.hh"
 
 #include <zlib.h>
-#include <zip.h>
+#include "libzip/zip.h"
 #include <map>
 #include <set>
 #include <string>

@@ -34,6 +34,7 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 
 #ifndef ZIP_EXTERN
 #ifdef _MSC_VER
@@ -50,10 +51,6 @@ extern "C" {
 #include <sys/types.h>
 #include <stdio.h>
 #include <time.h>
-
-#ifdef _MSC_VER
-#include <stub_msvc.h>
-#endif
 
 /* flags for zip_open */
 
@@ -148,6 +145,8 @@ extern "C" {
 #define ZIP_EM_RC4        0x6801
 #endif
 #define ZIP_EM_UNKNOWN    0xffff  /* unknown algorithm */
+
+
 
 enum zip_source_cmd {
     ZIP_SOURCE_OPEN,	/* prepare for reading */
