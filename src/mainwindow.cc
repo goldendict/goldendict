@@ -82,9 +82,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // zooming
   navToolbar->addSeparator();
-  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Increase zoom factor" ) );
-  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Decrease zoom factor" ) );
-  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Reset zoom factor to default" ) );
+  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
+  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Zoom Out" ) );
+  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
 
   connect( zoomIn, SIGNAL( triggered() ),
            this, SLOT( zoomin() ) );
