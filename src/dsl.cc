@@ -550,7 +550,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
             {
               string fname = FsEncoding::encode( filename );
 
-              int result = zip_name_locate( resourceZip, fname.c_str(), 0 );
+              int result = zip_name_locate( resourceZip, fname.c_str(), ZIP_FL_NOCASE );
 
               if ( result == -1 )
                 throw;
