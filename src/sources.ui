@@ -19,7 +19,17 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
+     <property name="iconSize">
+      <size>
+       <width>15</width>
+       <height>15</height>
+      </size>
+     </property>
      <widget class="QWidget" name="filesTab">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Files</string>
       </attribute>
@@ -72,6 +82,10 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/fileopen.png</normaloff>:/icons/fileopen.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Sound Dirs</string>
       </attribute>
@@ -124,6 +138,10 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/icon32_hunspell.png</normaloff>:/icons/icon32_hunspell.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Morphology</string>
       </attribute>
@@ -188,6 +206,10 @@ of the appropriate groups to use them.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="mediaWikisTab">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/icon32_wiki.png</normaloff>:/icons/icon32_wiki.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Wikipedia</string>
       </attribute>
@@ -246,6 +268,8 @@ of the appropriate groups to use them.</string>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
