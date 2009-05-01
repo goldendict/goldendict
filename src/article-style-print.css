@@ -4,3 +4,11 @@ body
 {
   background: white;
 }
+
+/* Hide audio icons */
+
+.dsl_s_wav
+{
+  display: none;
+}
+
