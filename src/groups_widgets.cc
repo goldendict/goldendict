@@ -120,18 +120,19 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
   return QVariant();
 }
 
-bool DictListModel::insertRows( int row, int count, const QModelIndex & parent )
-{
-  if ( isSource )
-    return false;
-
-  beginInsertRows( parent, row, row + count - 1 );
-  dictionaries.insert( dictionaries.begin() + row, count,
-                       sptr< Dictionary::Class >() );
-  endInsertRows();
-
-  return true;
-}
+// #### Ars: probably there is no more need in this method.
+//bool DictListModel::insertRows( int row, int count, const QModelIndex & parent )
+//{
+//  if ( isSource )
+//    return false;
+//
+//  beginInsertRows( parent, row, row + count - 1 );
+//  dictionaries.insert( dictionaries.begin() + row, count,
+//                       sptr< Dictionary::Class >() );
+//  endInsertRows();
+//
+//  return true;
+//}
 
 bool DictListModel::removeRows( int row, int count,
                                 const QModelIndex & parent )
@@ -160,24 +161,25 @@ bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
     return true;
   }
 
-  if ( role == Qt::EditRole )
-  {
-    Config::Group g;
-
-    g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
-
-    Instances::Group i( g, *allDicts );
-
-    if ( i.dictionaries.size() == 1 )
-    {
-      // Found that dictionary
-      dictionaries[ index.row() ] = i.dictionaries.front();
-
-      emit dataChanged( index, index );
-
-      return true;
-    }
-  }
+// #### Ars: probably there is no more need in this code.
+//  if ( role == Qt::EditRole )
+//  {
+//    Config::Group g;
+//
+//    g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
+//
+//    Instances::Group i( g, *allDicts );
+//
+//    if ( i.dictionaries.size() == 1 )
+//    {
+//      // Found that dictionary
+//      dictionaries[ index.row() ] = i.dictionaries.front();
+//
+//      emit dataChanged( index, index );
+//
+//      return true;
+//    }
+//  }
 
   return false;
 }
@@ -243,6 +245,7 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
       if ( allDicts->at( i )->getId() == list.at( j ) )
       {
         dictionaries.push_back( allDicts->at( i ) );
+        break;
       }
     }
   }
@@ -286,6 +289,16 @@ std::vector< sptr< Dictionary::Class > > const &
   DictListWidget::getCurrentDictionaries() const
 {
   return model.getCurrentDictionaries();
+}
+
+void DictListWidget::dropEvent ( QDropEvent * event )
+{
+  DictListWidget * sourceList = dynamic_cast< DictListWidget* > ( event->source() );
+
+  if ( sourceList && sourceList->model.sourceModel() )
+  {
+    model.addSelectedUniqueFromModel( sourceList->selectionModel() );
+  }
 }
 
 // DictGroupsWidget

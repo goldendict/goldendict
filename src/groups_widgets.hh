@@ -29,6 +29,8 @@ public:
 
   /// Marks that this model is used as an immutable dictionary source
   void setAsSource();
+  bool sourceModel() const { return isSource; }
+
   /// Returns the dictionaries the model currently has listed
   std::vector< sptr< Dictionary::Class > > const & getCurrentDictionaries() const;
 
@@ -38,7 +40,7 @@ public:
   Qt::ItemFlags flags( QModelIndex const &index ) const;
   int rowCount( QModelIndex const & parent ) const;
   QVariant data( QModelIndex const & index, int role ) const;
-  bool insertRows( int row, int count, const QModelIndex & parent );
+  //bool insertRows( int row, int count, const QModelIndex & parent );
   bool removeRows( int row, int count, const QModelIndex & parent );
   bool setData( QModelIndex const & index, const QVariant & value, int role );
 
@@ -73,8 +75,10 @@ public:
   DictListModel * getModel()
   { return & model; }
 
-private:
+protected:
+  virtual void dropEvent ( QDropEvent * event );
 
+private:
   DictListModel model;
 };
 
