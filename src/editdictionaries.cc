@@ -21,19 +21,21 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 {
   ui.setupUi( this );
 
+  setWindowIcon( QIcon(":/icons/book.png") );
+
   ui.tabs->clear();
-  
-  ui.tabs->addTab( &sources, tr( "&Sources" ) );
-  ui.tabs->addTab( groups.get(), tr( "&Groups" ) );
+
+  ui.tabs->addTab( &sources, QIcon(":/icons/book.png"), tr( "&Sources" ) );
+  ui.tabs->addTab( groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
 }
 
 
 void EditDictionaries::accept()
 {
   acceptChangedSources();
-  
+
   Config::Groups newGroups = groups->getGroups();
-  
+
   if ( origCfg.groups != newGroups )
   {
     groupsChanged = true;
@@ -56,15 +58,15 @@ void EditDictionaries::on_tabs_currentChanged( int index )
     if ( isSourcesChanged() )
     {
       ui.tabs->setCurrentIndex( 0 );
-      
+
       QMessageBox question( QMessageBox::Question, tr( "Sources changed" ),
                             tr( "Some sources were changed. Would you like to accept the changes?" ),
                             QMessageBox::NoButton, this );
 
       QPushButton * accept = question.addButton( tr( "Accept" ), QMessageBox::AcceptRole );
-      
+
       question.addButton( tr( "Cancel" ), QMessageBox::RejectRole );
-      
+
       question.exec();
 
       if ( question.clickedButton() == accept )
@@ -72,7 +74,7 @@ void EditDictionaries::on_tabs_currentChanged( int index )
         acceptChangedSources();
 
         // Rebuild groups from scratch
-        
+
         Config::Groups savedGroups = groups->getGroups();
 
         ui.tabs->setUpdatesEnabled( false );
@@ -81,7 +83,7 @@ void EditDictionaries::on_tabs_currentChanged( int index )
         groups = new Groups( this, dictionaries, savedGroups );
         ui.tabs->insertTab( 1, groups.get(), tr( "&Groups" ) );
         ui.tabs->setUpdatesEnabled( true );
-        
+
         lastCurrentTab = index;
         ui.tabs->setCurrentIndex( index );
       }
@@ -110,7 +112,7 @@ void EditDictionaries::acceptChangedSources()
   if ( isSourcesChanged() )
   {
     dictionariesChanged = true;
-    
+
     cfg.paths = sources.getPaths();
     cfg.soundDirs = sources.getSoundDirs();
     cfg.hunspell = sources.getHunspell();

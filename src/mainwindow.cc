@@ -61,9 +61,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
 
+  navToolbar->addSeparator();
   navToolbar->addAction( ui.print );
   navToolbar->addAction( ui.saveArticle );
 
+  navToolbar->addSeparator();
   enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
@@ -1241,9 +1243,9 @@ void MainWindow::on_printPreview_activated()
 void MainWindow::on_print_activated()
 {
   QPrintDialog dialog( &printer, this );
-  
+
   dialog.setWindowTitle( tr( "Print Article") );
-  
+
   if ( dialog.exec() != QDialog::Accepted )
    return;
 
@@ -1266,15 +1268,15 @@ void MainWindow::on_saveArticle_activated()
   QFileDialog fileDialog( this, tr( "Save Article As" ), QString(), tr( "Html files (*.html *.htm)" ) );
 
   fileDialog.setAcceptMode( QFileDialog::AcceptSave );
-  
+
   fileDialog.setDefaultSuffix( "html" );
-  
+
   fileDialog.selectFile( view.getTitle() + ".html" );
 
   if ( fileDialog.exec() && fileDialog.selectedFiles().size() == 1 )
   {
     QString fileName = fileDialog.selectedFiles().front();
-    
+
     QFile file( fileName );
 
     if ( !file.open( QIODevice::WriteOnly ) )

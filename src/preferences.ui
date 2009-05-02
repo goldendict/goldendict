@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>435</width>
+    <width>472</width>
     <height>325</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Preferences</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -20,9 +24,13 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/interface.png</normaloff>:/icons/interface.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>&amp;Interface</string>
       </attribute>
@@ -198,6 +206,10 @@ the application.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_5">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/hotkeys.png</normaloff>:/icons/hotkeys.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Hotkeys</string>
       </attribute>
@@ -319,6 +331,10 @@ the application.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_4">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/wizard.png</normaloff>:/icons/wizard.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>&amp;Scan Popup</string>
       </attribute>
@@ -613,6 +629,10 @@ seconds, which is specified here.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>&amp;Audio</string>
       </attribute>
@@ -674,6 +694,10 @@ seconds, which is specified here.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/network.png</normaloff>:/icons/network.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>&amp;Network</string>
       </attribute>
@@ -880,7 +904,9 @@ download page.</string>
   <tabstop>proxyPassword</tabstop>
   <tabstop>enableScanPopup</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

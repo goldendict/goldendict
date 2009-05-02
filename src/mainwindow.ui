@@ -58,7 +58,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -223,6 +223,10 @@
    </widget>
   </widget>
   <action name="dictionaries">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/book.png</normaloff>:/icons/book.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Dictionaries...</string>
    </property>
@@ -231,6 +235,10 @@
    </property>
   </action>
   <action name="groups">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Groups...</string>
    </property>
@@ -239,6 +247,10 @@
    </property>
   </action>
   <action name="preferences">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Preferences...</string>
    </property>
@@ -291,7 +303,7 @@
   </action>
   <action name="saveArticle">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
    </property>
    <property name="text">
@@ -306,7 +318,7 @@
   </action>
   <action name="print">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
    </property>
    <property name="text">
@@ -339,8 +351,6 @@
   <tabstop>translateLine</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
