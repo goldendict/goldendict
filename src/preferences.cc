@@ -36,8 +36,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   // Load values into form
 
   ui.interfaceLanguage->addItem( tr( "System default" ), QString() );
-  ui.interfaceLanguage->addItem( tr( "English" ), QString( "en_US" ) );
-  ui.interfaceLanguage->addItem( tr( "Russian" ), QString( "ru_RU" ) );
+  ui.interfaceLanguage->addItem( QIcon( ":/flags/us.png" ), tr( "English" ), QString( "en_US" ) );
+  ui.interfaceLanguage->addItem( QIcon( ":/flags/ru.png" ), tr( "Russian" ), QString( "ru_RU" ) );
 
   for( int x = 0; x < ui.interfaceLanguage->count(); ++x )
     if ( ui.interfaceLanguage->itemData( x ).toString() == p.interfaceLanguage )
