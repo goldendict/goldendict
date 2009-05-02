@@ -304,7 +304,10 @@ void DictListWidget::dropEvent ( QDropEvent * event )
   if ( sourceList && sourceList->model.sourceModel() )
   {
     model.addSelectedUniqueFromModel( sourceList->selectionModel() );
+    return;
   }
+
+  QListView::dropEvent( event );
 }
 
 // DictGroupsWidget
