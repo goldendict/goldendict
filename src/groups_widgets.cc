@@ -240,11 +240,17 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
 
   for ( int i = 0; i < allDicts->size(); i++ )
   {
-    for ( int j = list.size(); j--; )
+    for ( int j = 0; j < list.size(); j++ )
     {
       if ( allDicts->at( i )->getId() == list.at( j ) )
       {
         dictionaries.push_back( allDicts->at( i ) );
+        list.remove( j );
+        if ( list.isEmpty() )
+        {
+          reset();
+          return;
+        }
         break;
       }
     }
