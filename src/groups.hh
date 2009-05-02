@@ -34,6 +34,8 @@ private slots:
   void renameCurrent();
   void removeCurrent();
   void removeAll();
+  void addToGroup();
+  void removeFromGroup();
 };
 
 #endif

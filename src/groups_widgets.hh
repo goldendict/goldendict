@@ -32,6 +32,9 @@ public:
   /// Returns the dictionaries the model currently has listed
   std::vector< sptr< Dictionary::Class > > const & getCurrentDictionaries() const;
 
+  void removeSelectedRows( QItemSelectionModel * source );
+  void addSelectedUniqueFromModel( QItemSelectionModel * source );
+
   Qt::ItemFlags flags( QModelIndex const &index ) const;
   int rowCount( QModelIndex const & parent ) const;
   QVariant data( QModelIndex const & index, int role ) const;
@@ -67,6 +70,8 @@ public:
   /// Returns the dictionaries the widget currently has listed
   std::vector< sptr< Dictionary::Class > > const & getCurrentDictionaries() const;
 
+  DictListModel * getModel()
+  { return & model; }
 
 private:
 
@@ -89,6 +94,12 @@ public:
   /// Since the group's name is not part of the widget by design right now
   /// (it is known by the containing tab widget only), it is returned as empty.
   Config::Group makeGroup() const;
+
+  DictListModel * getModel() const
+  { return ui.dictionaries->getModel(); }
+
+  QItemSelectionModel * getSelectionModel() const
+  { return ui.dictionaries->selectionModel(); }
 
 private:
   Ui::DictGroupWidget ui;
@@ -125,6 +136,10 @@ public:
 
   /// Creates groups from what is currently set up
   Config::Groups makeGroups() const;
+
+  DictListModel * getCurrentModel() const;
+
+  QItemSelectionModel * getCurrentSelectionModel() const;
 
 private:
 

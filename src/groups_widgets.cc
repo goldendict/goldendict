@@ -187,6 +187,69 @@ Qt::DropActions DictListModel::supportedDropActions() const
   return Qt::MoveAction;
 }
 
+
+void DictListModel::removeSelectedRows( QItemSelectionModel * source )
+{
+  if ( !source )
+    return;
+
+  QModelIndexList rows = source->selectedRows();
+
+  if ( !rows.count() )
+    return;
+
+  for ( int i = rows.count()-1; i >= 0; --i )
+  {
+    dictionaries.erase( dictionaries.begin() + rows.at( i ).row() );
+  }
+
+  reset();
+}
+
+void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
+{
+  if ( !source )
+    return;
+
+  QModelIndexList rows = source->selectedRows();
+
+  if ( !rows.count() )
+    return;
+
+  const DictListModel * baseModel = dynamic_cast< const DictListModel * > ( source->model() );
+  if ( !baseModel )
+    return;
+
+  QVector< std::string > list;
+  QVector< std::string > dicts;
+  for ( int i = 0; i < dictionaries.size(); i++ )
+    dicts.append( dictionaries.at( i )->getId() );
+
+  for ( int i = 0; i < rows.count(); i++ )
+  {
+    std::string id = baseModel->dictionaries.at( rows.at( i ).row() )->getId();
+
+    if ( !dicts.contains( id ) )
+      list.append( id );
+  }
+
+  if ( list.empty() )
+    return;
+
+  for ( int i = 0; i < allDicts->size(); i++ )
+  {
+    for ( int j = list.size(); j--; )
+    {
+      if ( allDicts->at( i )->getId() == list.at( j ) )
+      {
+        dictionaries.push_back( allDicts->at( i ) );
+      }
+    }
+  }
+
+  reset();
+}
+
 /// DictListWidget
 
 DictListWidget::DictListWidget( QWidget * parent ): QListView( parent ),
@@ -283,6 +346,33 @@ Config::Groups DictGroupsWidget::makeGroups() const
   return result;
 }
 
+DictListModel * DictGroupsWidget::getCurrentModel() const
+{
+  int current = currentIndex();
+
+  if ( current >= 0 )
+  {
+    DictGroupWidget * w = ( DictGroupWidget * ) widget( current );
+    return w->getModel();
+  }
+
+  return 0;
+}
+
+QItemSelectionModel * DictGroupsWidget::getCurrentSelectionModel() const
+{
+  int current = currentIndex();
+
+  if ( current >= 0 )
+  {
+    DictGroupWidget * w = ( DictGroupWidget * ) widget( current );
+    return w->getSelectionModel();
+  }
+
+  return 0;
+}
+
+
 void DictGroupsWidget::addNewGroup( QString const & name )
 {
   if ( !allDicts )
@@ -330,7 +420,6 @@ void DictGroupsWidget::removeCurrentGroup()
     delete w;
   }
 }
-
 
 void DictGroupsWidget::removeAllGroups()
 {

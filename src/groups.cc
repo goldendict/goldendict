@@ -31,6 +31,10 @@ Groups::Groups( QWidget * parent,
            this, SLOT( removeCurrent() ) );
   connect( ui.removeAllGroups, SIGNAL( clicked() ),
            this, SLOT( removeAll() ) );
+  connect( ui.addDictsToGroup, SIGNAL( clicked() ),
+           this, SLOT( addToGroup() ) );
+  connect( ui.removeDictsFromGroup, SIGNAL( clicked() ),
+           this, SLOT( removeFromGroup() ) );
 
   countChanged();
 }
@@ -107,3 +111,22 @@ void Groups::removeAll()
   }
 }
 
+void Groups::addToGroup()
+{
+  int current = ui.groups->currentIndex();
+
+  if ( current >= 0 )
+  {
+    ui.groups->getCurrentModel()->addSelectedUniqueFromModel( ui.dictionaries->selectionModel() );
+  }
+}
+
+void Groups::removeFromGroup()
+{
+  int current = ui.groups->currentIndex();
+
+  if ( current >= 0 )
+  {
+    ui.groups->getCurrentModel()->removeSelectedRows( ui.groups->getCurrentSelectionModel() );
+  }
+}
