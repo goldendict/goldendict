@@ -9,10 +9,14 @@
 #define HAVE_DLFCN_H 1
 
 /* Define to 1 if you have the `fseeko' function. */
+#ifndef _WIN32
 #define HAVE_FSEEKO 1
+#endif
 
 /* Define to 1 if you have the `ftello' function. */
+#ifndef _WIN32
 #define HAVE_FTELLO 1
+#endif
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -24,7 +28,9 @@
 #define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have the `mkstemp' function. */
+#ifndef _WIN32
 #define HAVE_MKSTEMP 1
+#endif
 
 /* Define to 1 if you have the `MoveFileExA' function. */
 /* #undef HAVE_MOVEFILEEXA */
@@ -42,7 +48,9 @@
 #define HAVE_STRING_H 1
 
 /* Define to 1 if `tm_zone' is member of `struct tm'. */
+#ifndef _WIN32
 #define HAVE_STRUCT_TM_TM_ZONE 1
+#endif
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
