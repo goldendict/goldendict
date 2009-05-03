@@ -41,7 +41,7 @@ public:
   int rowCount( QModelIndex const & parent ) const;
   QVariant data( QModelIndex const & index, int role ) const;
   //bool insertRows( int row, int count, const QModelIndex & parent );
-  bool removeRows( int row, int count, const QModelIndex & parent );
+  //bool removeRows( int row, int count, const QModelIndex & parent );
   bool setData( QModelIndex const & index, const QVariant & value, int role );
 
   Qt::DropActions supportedDropActions() const;

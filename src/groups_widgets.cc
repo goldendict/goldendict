@@ -134,19 +134,19 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
 //  return true;
 //}
 
-bool DictListModel::removeRows( int row, int count,
-                                const QModelIndex & parent )
-{
-  if ( isSource )
-    return false;
-
-  beginRemoveRows( parent, row, row + count - 1 );
-  dictionaries.erase( dictionaries.begin() + row,
-                      dictionaries.begin() + row + count );
-  endRemoveRows();
-
-  return true;
-}
+//bool DictListModel::removeRows( int row, int count,
+//                                const QModelIndex & parent )
+//{
+//  if ( isSource )
+//    return false;
+//
+//  beginRemoveRows( parent, row, row + count - 1 );
+//  dictionaries.erase( dictionaries.begin() + row,
+//                      dictionaries.begin() + row + count );
+//  endRemoveRows();
+//
+//  return true;
+//}
 
 bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
                              int role )
@@ -301,13 +301,27 @@ void DictListWidget::dropEvent ( QDropEvent * event )
 {
   DictListWidget * sourceList = dynamic_cast< DictListWidget* > ( event->source() );
 
-  if ( sourceList && sourceList->model.sourceModel() )
+  if ( sourceList == this )
   {
-    model.addSelectedUniqueFromModel( sourceList->selectionModel() );
+    event->accept();
     return;
   }
 
-  QListView::dropEvent( event );
+  if ( sourceList && sourceList->model.sourceModel() )
+  {
+    model.addSelectedUniqueFromModel( sourceList->selectionModel() );
+    event->ignore();
+    return;
+  }
+
+  if ( sourceList && model.sourceModel() )
+  {
+    sourceList->model.removeSelectedRows( sourceList->selectionModel() );
+    event->ignore();
+    return;
+  }
+
+  //QListView::dropEvent( event );
 }
 
 // DictGroupsWidget
