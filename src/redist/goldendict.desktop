@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Categories=Office;Dictionary;Education;Qt;Applications
+Name=GoldenDict
+GenericName=Multiformat Dictionary
+Comment=GoldenDict
+Encoding=UTF-8
+Icon=/usr/share/pixmaps/goldendict.png
+Exec=goldendict
