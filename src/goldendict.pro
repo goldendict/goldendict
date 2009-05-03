@@ -41,6 +41,22 @@ unix {
     locale.files = locale/ru.qm
     INSTALLS += target \
         locale
+
+    icons.path = /usr/share/pixmaps
+    icons.files = redist/icons/*.*
+    INSTALLS += icons
+
+    icons2.path = /usr/share/app-install/icons
+    icons2.files = redist/icons/*.*
+    INSTALLS += icons2
+
+    desktops.path = /usr/share/applications
+    desktops.files = redist/*.desktop
+    INSTALLS += desktops
+
+    desktops2.path = /usr/share/app-install/desktop
+    desktops2.files = redist/*.desktop
+    INSTALLS += desktops2
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
