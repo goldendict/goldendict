@@ -268,7 +268,7 @@ QIcon DslDictionary::getIcon() throw()
     if ( fileName.endsWith( ".dsl.dz", Qt::CaseInsensitive ) )
       fileName.chop( 6 );
     else
-      fileName.chop( 4 );
+      fileName.chop( 3 );
 
     fileName += "bmp";
 
