@@ -31,14 +31,17 @@ win32 {
     INCLUDEPATH += winlibs/include
     LIBS += -Lwinlibs/lib
 }
+
+
 unix { 
     LIBS += -lXtst
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr/local
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/apps/goldendict/\\\"
+
     target.path = $$PREFIX/bin/
     locale.path = $$PREFIX/share/apps/goldendict/locale/
-    locale.files = locale/ru.qm
+    locale.files = locale/*.qm
     INSTALLS += target \
         locale
 
@@ -185,7 +188,23 @@ win32 {
 }
 RESOURCES += resources.qrc \
     flags.qrc
+
 TRANSLATIONS += locale/ru.ts
+
+# This makes qmake generate translations
+
+isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+
+TS_OUT = $$TRANSLATIONS
+TS_OUT~=s/.ts/.qm
+
+TSQM.name = lrelease ${QMAKE_FILE_IN}
+TSQM.input = TRANSLATIONS
+TSQM.output = $$TS_OUT
+TSQM.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN}
+TSQM.CONFIG = no_link
+QMAKE_EXTRA_COMPILERS += TSQM
+PRE_TARGETDEPS += $$TS_OUT
 
 # LibZip
 
