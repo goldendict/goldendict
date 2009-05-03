@@ -120,33 +120,32 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
   return QVariant();
 }
 
-// #### Ars: probably there is no more need in this method.
-//bool DictListModel::insertRows( int row, int count, const QModelIndex & parent )
-//{
-//  if ( isSource )
-//    return false;
-//
-//  beginInsertRows( parent, row, row + count - 1 );
-//  dictionaries.insert( dictionaries.begin() + row, count,
-//                       sptr< Dictionary::Class >() );
-//  endInsertRows();
-//
-//  return true;
-//}
+bool DictListModel::insertRows( int row, int count, const QModelIndex & parent )
+{
+  if ( isSource )
+    return false;
 
-//bool DictListModel::removeRows( int row, int count,
-//                                const QModelIndex & parent )
-//{
-//  if ( isSource )
-//    return false;
-//
-//  beginRemoveRows( parent, row, row + count - 1 );
-//  dictionaries.erase( dictionaries.begin() + row,
-//                      dictionaries.begin() + row + count );
-//  endRemoveRows();
-//
-//  return true;
-//}
+  beginInsertRows( parent, row, row + count - 1 );
+  dictionaries.insert( dictionaries.begin() + row, count,
+                       sptr< Dictionary::Class >() );
+  endInsertRows();
+
+  return true;
+}
+
+bool DictListModel::removeRows( int row, int count,
+                                const QModelIndex & parent )
+{
+  if ( isSource )
+    return false;
+
+  beginRemoveRows( parent, row, row + count - 1 );
+  dictionaries.erase( dictionaries.begin() + row,
+                      dictionaries.begin() + row + count );
+  endRemoveRows();
+
+  return true;
+}
 
 bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
                              int role )
@@ -161,25 +160,24 @@ bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
     return true;
   }
 
-// #### Ars: probably there is no more need in this code.
-//  if ( role == Qt::EditRole )
-//  {
-//    Config::Group g;
-//
-//    g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
-//
-//    Instances::Group i( g, *allDicts );
-//
-//    if ( i.dictionaries.size() == 1 )
-//    {
-//      // Found that dictionary
-//      dictionaries[ index.row() ] = i.dictionaries.front();
-//
-//      emit dataChanged( index, index );
-//
-//      return true;
-//    }
-//  }
+  if ( role == Qt::EditRole )
+  {
+    Config::Group g;
+
+    g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
+
+    Instances::Group i( g, *allDicts );
+
+    if ( i.dictionaries.size() == 1 )
+    {
+      // Found that dictionary
+      dictionaries[ index.row() ] = i.dictionaries.front();
+
+      emit dataChanged( index, index );
+
+      return true;
+    }
+  }
 
   return false;
 }
@@ -188,7 +186,6 @@ Qt::DropActions DictListModel::supportedDropActions() const
 {
   return Qt::MoveAction;
 }
-
 
 void DictListModel::removeSelectedRows( QItemSelectionModel * source )
 {
@@ -259,6 +256,30 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
   reset();
 }
 
+void DictListModel::filterDuplicates()
+{
+  QSet< QString > ids;
+  bool doReset = false;
+
+  for ( int i = 0; i < dictionaries.size(); i++ )
+  {
+    QString id = QString::fromStdString( dictionaries.at( i )->getId() );
+
+    if ( ids.contains( id ) )
+    {
+      dictionaries.erase( dictionaries.begin() + i );
+      doReset = true;
+      i--;
+      continue;
+    }
+
+    ids.insert( id );
+  }
+
+  if ( doReset )
+    reset();
+}
+
 /// DictListWidget
 
 DictListWidget::DictListWidget( QWidget * parent ): QListView( parent ),
@@ -301,27 +322,32 @@ void DictListWidget::dropEvent ( QDropEvent * event )
 {
   DictListWidget * sourceList = dynamic_cast< DictListWidget* > ( event->source() );
 
-  if ( sourceList == this )
-  {
-    event->accept();
-    return;
-  }
+//  if ( sourceList == this )
+//  {
+//    event->accept();
+//    return;
+//  }
+//
+//  if ( sourceList && sourceList->model.sourceModel() )
+//  {
+//    model.addSelectedUniqueFromModel( sourceList->selectionModel() );
+//    event->ignore();
+//    return;
+//  }
+//
+//  if ( sourceList && model.sourceModel() )
+//  {
+//    sourceList->model.removeSelectedRows( sourceList->selectionModel() );
+//    event->ignore();
+//    return;
+//  }
+
+  QListView::dropEvent( event );
 
   if ( sourceList && sourceList->model.sourceModel() )
   {
-    model.addSelectedUniqueFromModel( sourceList->selectionModel() );
-    event->ignore();
-    return;
+    model.filterDuplicates();
   }
-
-  if ( sourceList && model.sourceModel() )
-  {
-    sourceList->model.removeSelectedRows( sourceList->selectionModel() );
-    event->ignore();
-    return;
-  }
-
-  //QListView::dropEvent( event );
 }
 
 // DictGroupsWidget
