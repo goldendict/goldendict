@@ -38,7 +38,7 @@ class MediaWikiDataRequestSlots: public Dictionary::DataRequest
 
 protected slots:
 
-  virtual void downloadFinished()
+  virtual void requestFinished( QNetworkReply * )
   {}
 };
 

@@ -7,6 +7,7 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QtXml>
+#include <list>
 
 namespace MediaWiki {
 
@@ -171,19 +172,22 @@ void MediaWikiWordSearchRequest::downloadFinished()
 
 class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 {
-  sptr< QNetworkReply > netReply;
+  typedef std::list< std::pair< sptr< QNetworkReply >, bool > > NetReplies;
+  NetReplies netReplies;
   QString url;
 
 public:
 
-  MediaWikiArticleRequest( wstring const &,
+  MediaWikiArticleRequest( wstring const & word, vector< wstring > const & alts,
                            QString const & url, QNetworkAccessManager & mgr );
 
   virtual void cancel();
 
 private:
 
-  virtual void downloadFinished();
+  void addQuery( QNetworkAccessManager & mgr, wstring const & word );
+
+  virtual void requestFinished( QNetworkReply * );
 };
 
 void MediaWikiArticleRequest::cancel()
@@ -192,9 +196,22 @@ void MediaWikiArticleRequest::cancel()
 }
 
 MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
+                                                  vector< wstring > const & alts,
                                                   QString const & url_,
                                                   QNetworkAccessManager & mgr ):
   url( url_ )
+{
+  connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
+           this, SLOT( requestFinished( QNetworkReply * ) ) );
+  
+  addQuery(  mgr, str );
+
+  for( unsigned x = 0; x < alts.size(); ++x )
+    addQuery( mgr, alts[ x ] );
+}
+
+void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
+                                        wstring const & str )
 {
   printf( "Requesting article %ls\n", str.c_str() );
 
@@ -202,87 +219,119 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
 
   reqUrl.addQueryItem( "page", gd::toQString( str ) );
 
-  netReply = mgr.get( QNetworkRequest( reqUrl ) );
-
-  printf( "request begin\n" );
-  connect( netReply.get(), SIGNAL( finished() ),
-           this, SLOT( downloadFinished() ) );
-  printf( "request end\n" );
+  sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
+  
+  netReplies.push_back( std::make_pair( netReply, false ) );
 }
 
-void MediaWikiArticleRequest::downloadFinished()
+void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 {
   printf( "Finished.\n" );
 
   if ( isFinished() ) // Was cancelled
     return;
 
-  if ( netReply->error() == QNetworkReply::NoError )
+  // Find this reply
+
+  bool found = false;
+  
+  for( NetReplies::iterator i = netReplies.begin(); i != netReplies.end(); ++i )
   {
-    QDomDocument dd;
-
-    QString errorStr;
-    int errorLine, errorColumn;
-
-    if ( !dd.setContent( netReply.get(), false, &errorStr, &errorLine, &errorColumn  ) )
+    if ( i->first.get() == r )
     {
-      setErrorString( QString( tr( "XML parse error: %1 at %2,%3" ).
-                               arg( errorStr ).arg( errorLine ).arg( errorColumn ) ) );
+      i->second = true; // Mark as finished
+      found = true;
+      break;
     }
-    else
+  }
+
+  if ( !found )
+  {
+    // Well, that's not our reply, don't do anything
+    return;
+  }
+  
+  bool updated = false;
+
+  for( ; netReplies.size() && netReplies.front().second; netReplies.pop_front() )
+  {
+    sptr< QNetworkReply > netReply = netReplies.front().first;
+    
+    if ( netReply->error() == QNetworkReply::NoError )
     {
-      QDomNode parseNode = dd.namedItem( "api" ).namedItem( "parse" );
-
-      if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0" )
+      QDomDocument dd;
+  
+      QString errorStr;
+      int errorLine, errorColumn;
+  
+      if ( !dd.setContent( netReply.get(), false, &errorStr, &errorLine, &errorColumn  ) )
       {
-        QDomNode textNode = parseNode.namedItem( "text" );
-
-        if ( !textNode.isNull() )
+        setErrorString( QString( tr( "XML parse error: %1 at %2,%3" ).
+                                 arg( errorStr ).arg( errorLine ).arg( errorColumn ) ) );
+      }
+      else
+      {
+        QDomNode parseNode = dd.namedItem( "api" ).namedItem( "parse" );
+  
+        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0" )
         {
-          QString articleString = textNode.toElement().text();
-
-          QUrl wikiUrl( url );
-          wikiUrl.setPath( "" );
-
-          // Update any special index.php pages to be absolute
-          articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
-                                 QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
-          // Replace the href="/foo/bar/Baz" to just href="Baz".
-          articleString.replace( QRegExp( "<a\\shref=\"/(\\w*/)*" ), "<a href=\"" );
-
-          // In those strings, change any underscores to spaces
-          for( ; ; )
+          QDomNode textNode = parseNode.namedItem( "text" );
+  
+          if ( !textNode.isNull() )
           {
-            QString before = articleString;
-            articleString.replace( QRegExp( "<a href=\"([^/:\">#]*)_" ), "<a href=\"\\1 " );
+            QString articleString = textNode.toElement().text();
+  
+            QUrl wikiUrl( url );
+            wikiUrl.setPath( "" );
+  
+            // Update any special index.php pages to be absolute
+            articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
+                                   QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
+            // Replace the href="/foo/bar/Baz" to just href="Baz".
+            articleString.replace( QRegExp( "<a\\shref=\"/(\\w*/)*" ), "<a href=\"" );
+  
+            // In those strings, change any underscores to spaces
+            for( ; ; )
+            {
+              QString before = articleString;
+              articleString.replace( QRegExp( "<a href=\"([^/:\">#]*)_" ), "<a href=\"\\1 " );
+  
+              if ( articleString == before )
+                break;
+            }
+  
+            QByteArray articleBody = articleString.toUtf8();
+  
+            printf( "Article body after: %s\n", articleBody.data() );
+  
+            articleBody.prepend( "<div class=\"mwiki\">" );
+            articleBody.append( "</div>" );
+  
+            Mutex::Lock _( dataMutex );
 
-            if ( articleString == before )
-              break;
+            size_t prevSize = data.size();
+            
+            data.resize( prevSize + articleBody.size() );
+  
+            memcpy( &data.front() + prevSize, articleBody.data(), articleBody.size() );
+  
+            hasAnyData = true;
+
+            updated = true;
           }
-
-          QByteArray articleBody = articleString.toUtf8();
-
-          printf( "Article body after: %s\n", articleBody.data() );
-
-          articleBody.prepend( "<div class=\"mwiki\">" );
-          articleBody.append( "</div>" );
-
-          Mutex::Lock _( dataMutex );
-
-          data.resize( articleBody.size() );
-
-          memcpy( &data.front(), articleBody.data(), data.size() );
-
-          hasAnyData = true;
         }
       }
+      printf( "done.\n" );
     }
-    printf( "done.\n" );
+    else
+      setErrorString( netReply->errorString() );
   }
-  else
-    setErrorString( netReply->errorString() );
 
-  finish();
+  if ( netReplies.empty() )
+    finish();
+  else
+  if ( updated )
+    update();
 }
 
 sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word,
@@ -295,7 +344,7 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
 sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word, vector< wstring > const & alts )
   throw( std::exception )
 {
-  return new MediaWikiArticleRequest( word, url, netMgr );
+  return new MediaWikiArticleRequest( word, alts, url, netMgr );
 }
 
 }
