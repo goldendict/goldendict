@@ -128,7 +128,7 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
       if ( dirs.size() )
       {
         tt += "<hr>";
-        tt += QString::fromStdString( dirs.at( 0 ) );
+        tt += QString::fromLocal8Bit( dirs.at( 0 ).c_str() );
       }
 
       tt.replace( " ", "&nbsp;" );
