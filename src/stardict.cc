@@ -1090,21 +1090,17 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // read languages
         QPair<quint32,quint32> langs =
             LangCoder::findIdsForFilename( QString::fromStdString( dictFileName ) );
-        idxHeader.langFrom = langs.first;
-        idxHeader.langTo = langs.second;
-
-//        qDebug() << QString::fromStdString( dictFileName ) << " " << langs;
 
         // if no languages found, try dictionary's name
         if ( langs.first == 0 || langs.second == 0 )
         {
-//          qDebug() << QString::fromStdString( ifo.bookname );
-
           langs =
             LangCoder::findIdsForFilename( QString::fromStdString( ifo.bookname ) );
-          idxHeader.langFrom = langs.first;
-          idxHeader.langTo = langs.second;
         }
+
+        idxHeader.langFrom = langs.first;
+        idxHeader.langTo = langs.second;
+
 
         idx.rewind();
 

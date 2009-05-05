@@ -8,6 +8,7 @@
 #include "dictzip.h"
 #include "htmlescape.hh"
 #include "fsencoding.hh"
+#include "langcoder.hh"
 #include <map>
 #include <set>
 #include <string>
@@ -45,7 +46,7 @@ DEF_EX( exInvalidBase64, "Invalid base64 sequence encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x58444344, // DCDX on little-endian, XDCD on big-endian
-  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -55,7 +56,9 @@ struct IdxHeader
   uint32_t wordCount; // Total number of words
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
-} 
+  uint32_t langFrom;  // Source language
+  uint32_t langTo;    // Target language
+}
 #ifndef _MSC_VER
 __attribute__((packed))
 #endif
@@ -99,6 +102,12 @@ public:
 
   virtual QIcon getIcon() throw()
   { return QIcon(":/icons/icon32_dictd.png"); }
+
+  inline virtual quint32 getLangFrom() const
+  { return idxHeader.langFrom; }
+
+  inline virtual quint32 getLangTo() const
+  { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts )
@@ -402,6 +411,20 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         idxHeader.signature = Signature;
         idxHeader.formatVersion = CurrentFormatVersion;
+
+        // read languages
+        QPair<quint32,quint32> langs =
+            LangCoder::findIdsForFilename( QString::fromStdString( dictFiles[ 0 ] ) );
+
+        // if no languages found, try dictionary's name
+        if ( langs.first == 0 || langs.second == 0 )
+        {
+          langs =
+            LangCoder::findIdsForFilename( QString::fromStdString( nameFromFileName( dictFiles[ 0 ] ) ) );
+        }
+
+        idxHeader.langFrom = langs.first;
+        idxHeader.langTo = langs.second;
 
         idx.rewind();
 
