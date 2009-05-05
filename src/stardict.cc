@@ -985,7 +985,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     {
       vector< string > dictFiles( 1, *i );
 
-      string idxFileName, dictFileName, synFileName, dictName;
+      string idxFileName, dictFileName, synFileName;
 
       findCorrespondingFiles( *i, idxFileName, dictFileName, synFileName );
 
@@ -1029,8 +1029,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         printf( "bookname = %s\n", ifo.bookname.c_str() );
         printf( "wordcount = %u\n", ifo.wordcount );
-
-        dictName = ifo.bookname;
 
         initializing.indexingDictionary( ifo.bookname );
 
@@ -1100,10 +1098,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // if no languages found, try dictionary's name
         if ( langs.first == 0 || langs.second == 0 )
         {
-//          qDebug() << QString::fromStdString( dictName );
+//          qDebug() << QString::fromStdString( ifo.bookname );
 
           langs =
-            LangCoder::findIdsForFilename( QString::fromStdString( dictName ) );
+            LangCoder::findIdsForFilename( QString::fromStdString( ifo.bookname ) );
           idxHeader.langFrom = langs.first;
           idxHeader.langTo = langs.second;
         }
