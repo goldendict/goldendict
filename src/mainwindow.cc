@@ -684,7 +684,13 @@ void MainWindow::translateInputFinished()
   QString word = ui.translateLine->text();
 
   if ( word.size() )
+  {
+    Qt::KeyboardModifiers mods = QApplication::keyboardModifiers();
+    if ( mods & Qt::ControlModifier )
+      addNewTab();
+
     showTranslationFor( word );
+  }
 }
 
 void MainWindow::focusTranslateLine()
