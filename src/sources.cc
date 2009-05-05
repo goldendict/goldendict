@@ -648,3 +648,9 @@ bool HunspellDictsModel::setData( QModelIndex const & index, const QVariant & /*
 
   return false;
 }
+
+void Sources::on_rescan_clicked()
+{
+  emit rescan();
+}
+

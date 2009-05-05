@@ -75,6 +75,13 @@
              </property>
             </spacer>
            </item>
+           <item>
+            <widget class="QPushButton" name="rescan">
+             <property name="text">
+              <string>Re&amp;scan now</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
         </layout>

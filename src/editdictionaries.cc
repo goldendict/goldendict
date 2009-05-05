@@ -27,12 +27,15 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 
   ui.tabs->addTab( &sources, QIcon(":/icons/book.png"), tr( "&Sources" ) );
   ui.tabs->addTab( groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
+
+  connect( &sources, SIGNAL( rescan() ), this, SLOT( rescanSources() ) );
 }
 
 
 void EditDictionaries::accept()
 {
-  acceptChangedSources();
+  if ( isSourcesChanged() )
+    acceptChangedSources();
 
   Config::Groups newGroups = groups->getGroups();
 
@@ -99,6 +102,11 @@ void EditDictionaries::on_tabs_currentChanged( int index )
   lastCurrentTab = index;
 }
 
+void EditDictionaries::rescanSources()
+{
+  acceptChangedSources();
+}
+
 bool EditDictionaries::isSourcesChanged() const
 {
   return sources.getPaths() != cfg.paths ||
@@ -109,15 +117,12 @@ bool EditDictionaries::isSourcesChanged() const
 
 void EditDictionaries::acceptChangedSources()
 {
-  if ( isSourcesChanged() )
-  {
-    dictionariesChanged = true;
+  dictionariesChanged = true;
 
-    cfg.paths = sources.getPaths();
-    cfg.soundDirs = sources.getSoundDirs();
-    cfg.hunspell = sources.getHunspell();
-    cfg.mediawikis = sources.getMediaWikis();
+  cfg.paths = sources.getPaths();
+  cfg.soundDirs = sources.getSoundDirs();
+  cfg.hunspell = sources.getHunspell();
+  cfg.mediawikis = sources.getMediaWikis();
 
-    loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
-  }
+  loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
 }

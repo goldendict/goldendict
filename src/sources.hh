@@ -151,6 +151,11 @@ public:
 
   Config::Hunspell getHunspell() const;
 
+signals:
+
+  /// Emitted when a 'Rescan' button is clicked.
+  void rescan();
+  
 private:
   Ui::Sources ui;
   MediaWikisModel mediawikisModel;
@@ -174,6 +179,8 @@ private slots:
 
   void on_addMediaWiki_clicked();
   void on_removeMediaWiki_clicked();
+
+  void on_rescan_clicked();
 };
 
 #endif
