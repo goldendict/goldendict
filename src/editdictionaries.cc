@@ -78,15 +78,8 @@ void EditDictionaries::on_tabs_currentChanged( int index )
 
         // Rebuild groups from scratch
 
-        Config::Groups savedGroups = groups->getGroups();
-
-        ui.tabs->setUpdatesEnabled( false );
-        ui.tabs->removeTab( 1 );
-        groups.reset();
-        groups = new Groups( this, dictionaries, savedGroups );
-        ui.tabs->insertTab( 1, groups.get(), tr( "&Groups" ) );
-        ui.tabs->setUpdatesEnabled( true );
-
+        rebuildGroups();
+        
         lastCurrentTab = index;
         ui.tabs->setCurrentIndex( index );
       }
@@ -105,6 +98,7 @@ void EditDictionaries::on_tabs_currentChanged( int index )
 void EditDictionaries::rescanSources()
 {
   acceptChangedSources();
+  rebuildGroups();
 }
 
 bool EditDictionaries::isSourcesChanged() const
@@ -125,4 +119,16 @@ void EditDictionaries::acceptChangedSources()
   cfg.mediawikis = sources.getMediaWikis();
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+}
+
+void EditDictionaries::rebuildGroups()
+{
+  Config::Groups savedGroups = groups->getGroups();
+
+  ui.tabs->setUpdatesEnabled( false );
+  ui.tabs->removeTab( 1 );
+  groups.reset();
+  groups = new Groups( this, dictionaries, savedGroups );
+  ui.tabs->insertTab( 1, groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
+  ui.tabs->setUpdatesEnabled( true );
 }

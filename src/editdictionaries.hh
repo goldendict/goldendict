@@ -44,6 +44,8 @@ private:
   bool isSourcesChanged() const;
 
   void acceptChangedSources();
+
+  void rebuildGroups();
   
 private:
    
