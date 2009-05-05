@@ -92,7 +92,7 @@ struct IdxHeader
   uint32_t sameTypeSequenceSize; // That string's size. Used to read it then.
   uint32_t langFrom;  // Source language
   uint32_t langTo;    // Target language
-} 
+}
 #ifndef _MSC_VER
 __attribute__((packed))
 #endif
@@ -985,7 +985,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     {
       vector< string > dictFiles( 1, *i );
 
-      string idxFileName, dictFileName, synFileName;
+      string idxFileName, dictFileName, synFileName, dictName;
 
       findCorrespondingFiles( *i, idxFileName, dictFileName, synFileName );
 
@@ -1029,6 +1029,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         printf( "bookname = %s\n", ifo.bookname.c_str() );
         printf( "wordcount = %u\n", ifo.wordcount );
+
+        dictName = ifo.bookname;
 
         initializing.indexingDictionary( ifo.bookname );
 
@@ -1087,10 +1089,24 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idxHeader.bookNameSize = ifo.bookname.size();
         idxHeader.sameTypeSequenceSize = ifo.sametypesequence.size();
 
+        // read languages
         QPair<quint32,quint32> langs =
             LangCoder::findIdsForFilename( QString::fromStdString( dictFileName ) );
         idxHeader.langFrom = langs.first;
         idxHeader.langTo = langs.second;
+
+//        qDebug() << QString::fromStdString( dictFileName ) << " " << langs;
+
+        // if no languages found, try dictionary's name
+        if ( langs.first == 0 || langs.second == 0 )
+        {
+//          qDebug() << QString::fromStdString( dictName );
+
+          langs =
+            LangCoder::findIdsForFilename( QString::fromStdString( dictName ) );
+          idxHeader.langFrom = langs.first;
+          idxHeader.langTo = langs.second;
+        }
 
         idx.rewind();
 
