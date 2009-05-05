@@ -103,6 +103,38 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
 
   switch ( role )
   {
+    case Qt::ToolTipRole:
+    {
+      QString tt = "<b>" + QString::fromUtf8( item->getName().c_str() ) + "</b>";
+
+      QString lfrom( LangCoder::decode( item->getLangFrom() ) );
+      QString lto( LangCoder::decode( item->getLangTo() ) );
+      if ( !lfrom.isEmpty() )
+      {
+        if ( lfrom == lto )
+          tt += "<br>" + lfrom;
+        else
+          tt += "<br>" + lfrom + " - " + lto;
+      }
+
+      int entries = item->getArticleCount();
+      if ( !entries )
+        entries = item->getWordCount();
+      if ( entries )
+        tt += "<br>" + tr( "%1 entries" ).arg( entries );
+
+      const std::vector< std::string > & dirs = item->getDictionaryFilenames();
+
+      if ( dirs.size() )
+      {
+        tt += "<hr>";
+        tt += QString::fromStdString( dirs.at( 0 ) );
+      }
+
+      tt.replace( " ", "&nbsp;" );
+      return tt;
+    }
+
     case Qt::DisplayRole :
       return QString::fromUtf8( item->getName().c_str() );
 //          + QString("  lang: %1 %2").arg( langCoder.decode(item->getLangFrom()),
@@ -267,9 +299,8 @@ void DictListModel::filterDuplicates()
 
     if ( ids.contains( id ) )
     {
-      dictionaries.erase( dictionaries.begin() + i );
+      dictionaries.erase( dictionaries.begin() + i-- );
       doReset = true;
-      i--;
       continue;
     }
 
@@ -334,17 +365,17 @@ void DictListWidget::dropEvent ( QDropEvent * event )
 //    event->ignore();
 //    return;
 //  }
-//
-//  if ( sourceList && model.sourceModel() )
-//  {
-//    sourceList->model.removeSelectedRows( sourceList->selectionModel() );
-//    event->ignore();
-//    return;
-//  }
+
+  if ( sourceList && !( sourceList->model.sourceModel() ) && ( sourceList != this ) )
+  {
+    sourceList->model.removeSelectedRows( sourceList->selectionModel() );
+    event->ignore();
+    return;
+  }
 
   QListView::dropEvent( event );
 
-  if ( sourceList && sourceList->model.sourceModel() )
+  if ( sourceList && sourceList->model.sourceModel() && ( sourceList != this ) )
   {
     model.filterDuplicates();
   }
