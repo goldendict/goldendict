@@ -54,7 +54,7 @@ void LoadDictionaries::run()
       dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
                            hunspellDictionaries.end() );
     }
-    
+
     // Make romaji
     {
       vector< sptr< Dictionary::Class > > romajiDictionaries =
@@ -64,7 +64,7 @@ void LoadDictionaries::run()
                            romajiDictionaries.end() );
     }
 
-    // Make Russian tnrasliteration
+    // Make Russian transliteration
     if ( transliteration.enableRussianTransliteration )
       dictionaries.push_back( RussianTranslit::makeDictionary() );
   }
@@ -146,7 +146,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
                        QNetworkAccessManager & dictNetMgr )
 {
   dictionaries.clear();
-  
+
   ::Initializing init( parent, showInitially );
 
   // Start a thread to load all the dictionaries

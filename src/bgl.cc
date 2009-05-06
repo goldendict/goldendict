@@ -8,6 +8,8 @@
 #include "folding.hh"
 #include "utf8.hh"
 #include "chunkedstorage.hh"
+#include "langcoder.hh"
+
 #include <map>
 #include <set>
 #include <list>
@@ -42,7 +44,7 @@ namespace
   enum
   {
     Signature = 0x584c4742, // BGLX on little-endian, XLGB on big-endian
-    CurrentFormatVersion = 13 + BtreeIndexing::FormatVersion
+    CurrentFormatVersion = 14 + BtreeIndexing::FormatVersion
   };
 
   struct IdxHeader
@@ -63,9 +65,11 @@ namespace
     uint32_t indexRootOffset;
     uint32_t resourceListOffset; // The offset of the list of resources
     uint32_t resourcesCount; // Number of resources stored
-  } 
+    uint32_t langFrom;  // Source language
+    uint32_t langTo;    // Target language
+  }
   #ifndef _MSC_VER
-	__attribute__((packed))
+  __attribute__((packed))
   #endif
   ;
 
@@ -221,6 +225,12 @@ namespace
 
     virtual QIcon getIcon() throw()
     { return QIcon(":/icons/icon32_bgl.png"); }
+
+    inline virtual quint32 getLangFrom() const
+    { return idxHeader.langFrom; }
+
+    inline virtual quint32 getLangTo() const
+    { return idxHeader.langTo; }
 
     virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
       throw( std::exception );
@@ -1034,13 +1044,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       idxHeader.resourceListOffset = idx.tell();
       idxHeader.resourcesCount = resourceHandler.getResources().size();
 
-      for( list< pair< string, uint32_t > >::const_iterator i =
+      for( list< pair< string, uint32_t > >::const_iterator j =
           resourceHandler.getResources().begin();
-           i != resourceHandler.getResources().end(); ++i )
+           j != resourceHandler.getResources().end(); ++j )
       {
-        idx.write< uint32_t >( i->first.size() );
-        idx.write( i->first.data(), i->first.size() );
-        idx.write< uint32_t >( i->second );
+        idx.write< uint32_t >( j->first.size() );
+        idx.write( j->first.data(), j->first.size() );
+        idx.write< uint32_t >( j->second );
       }
 
       // That concludes it. Update the header.
@@ -1051,6 +1061,21 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       idxHeader.foldingVersion = Folding::Version;
       idxHeader.articleCount = articleCount;
       idxHeader.wordCount = wordCount;
+
+      // read languages
+      QPair<quint32,quint32> langs =
+          LangCoder::findIdsForFilename( QString::fromStdString( *i ) );
+
+      // if no languages found, try dictionary's name
+      if ( langs.first == 0 || langs.second == 0 )
+      {
+        langs =
+          LangCoder::findIdsForFilename( QString::fromStdString( b.title() ) );
+      }
+
+      idxHeader.langFrom = langs.first;
+      idxHeader.langTo = langs.second;
+
 
       idx.rewind();
 
