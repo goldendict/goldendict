@@ -87,19 +87,36 @@ void WordFinder::startSearch()
   searchQueued = false;
   searchInProgress = true;
 
-  wstring word = gd::toWString( inputWord );
+  // Gather all writings of the word
+
+  if ( allWordWritings.size() != 1 )
+    allWordWritings.resize( 1 );
+  
+  allWordWritings[ 0 ] = gd::toWString( inputWord );
 
   for( size_t x = 0; x < inputDicts->size(); ++x )
   {
-    sptr< Dictionary::WordSearchRequest > sr =
-      ( searchType == PrefixMatch ) ?
-        (*inputDicts)[ x ]->prefixMatch( word, 40 ) :
-        (*inputDicts)[ x ]->stemmedMatch( word, 3, 3, 30 );
+    vector< wstring > writings = (*inputDicts)[ x ]->getAlternateWritings( allWordWritings[ 0 ] );
 
-    connect( sr.get(), SIGNAL( finished() ),
-             this, SLOT( requestFinished() ), Qt::QueuedConnection );
+    allWordWritings.insert( allWordWritings.end(), writings.begin(), writings.end() );
+  }
 
-    queuedRequests.push_back( sr );
+  // Query each dictionary for all word writings
+
+  for( size_t x = 0; x < inputDicts->size(); ++x )
+  {
+    for( size_t y = 0; y < allWordWritings.size(); ++y )
+    {
+      sptr< Dictionary::WordSearchRequest > sr =
+        ( searchType == PrefixMatch ) ?
+          (*inputDicts)[ x ]->prefixMatch( allWordWritings[ y ], 40 ) :
+          (*inputDicts)[ x ]->stemmedMatch( allWordWritings[ y ], 3, 3, 30 );
+  
+      connect( sr.get(), SIGNAL( finished() ),
+               this, SLOT( requestFinished() ), Qt::QueuedConnection );
+  
+      queuedRequests.push_back( sr );
+    }
   }
 
   // Handle any requests finished already
@@ -257,7 +274,7 @@ void WordFinder::updateResults()
         resultsArray.push_back( OneResult() );
 
         resultsArray.back().word = match;
-        resultsArray.back().rank = -1;
+        resultsArray.back().rank = INT_MAX;
         resultsArray.back().wasSuggested = ( weight != 0 );
 
         insertResult.first->second = --resultsArray.end();
@@ -291,57 +308,65 @@ void WordFinder::updateResults()
         WorstMatch,
         Multiplier = 256 // Categories should be multiplied by Multiplier
       };
-  
-      wstring target = Folding::applySimpleCaseOnly( gd::toWString( inputWord ) );
-      wstring targetNoFullCase = Folding::applyFullCaseOnly( target );
-      wstring targetNoDia = Folding::applyDiacriticsOnly( targetNoFullCase );
-      wstring targetNoPunct = Folding::applyPunctOnly( targetNoDia );
-      wstring targetNoWs = Folding::applyWhitespaceOnly( targetNoPunct );
-  
-      wstring::size_type matchPos = 0;
-  
-      for( ResultsIndex::const_iterator i = resultsIndex.begin(), j = resultsIndex.end();
-           i != j; ++i )
+
+      for( unsigned wr = 0; wr < allWordWritings.size(); ++wr )
       {
-        wstring resultNoFullCase, resultNoDia, resultNoPunct, resultNoWs;
-  
-        if ( i->first == target )
-          i->second->rank = ExactMatch * Multiplier;
-        else
-        if ( ( resultNoFullCase = Folding::applyFullCaseOnly( i->first ) ) == targetNoFullCase )
-          i->second->rank = ExactNoFullCaseMatch * Multiplier;
-        else
-        if ( ( resultNoDia = Folding::applyDiacriticsOnly( resultNoFullCase ) ) == targetNoDia )
-          i->second->rank = ExactNoDiaMatch * Multiplier;
-        else
-        if ( ( resultNoPunct = Folding::applyPunctOnly( resultNoDia ) ) == targetNoPunct )
-          i->second->rank = ExactNoPunctMatch * Multiplier;
-        else
-        if ( ( resultNoWs = Folding::applyWhitespaceOnly( resultNoPunct ) ) == targetNoWs )
-          i->second->rank = ExactNoWsMatch * Multiplier;
-        else
-        if ( hasSurroundedWithWs( i->first, target, matchPos ) )
-          i->second->rank = ExactInsideMatch * Multiplier + matchPos;
-        else
-        if ( hasSurroundedWithWs( resultNoDia, targetNoDia, matchPos ) )
-          i->second->rank = ExactNoDiaInsideMatch * Multiplier + matchPos;
-        else
-        if ( hasSurroundedWithWs( resultNoPunct, targetNoPunct, matchPos ) )
-          i->second->rank = ExactNoPunctInsideMatch * Multiplier + matchPos;
-        else
-        if ( i->first.size() > target.size() && i->first.compare( 0, target.size(), target ) == 0 )
-          i->second->rank = PrefixMatch * Multiplier + saturated( i->first.size() );
-        else
-        if ( resultNoDia.size() > targetNoDia.size() && resultNoDia.compare( 0, targetNoDia.size(), targetNoDia ) == 0 )
-          i->second->rank = PrefixNoDiaMatch * Multiplier + saturated( i->first.size() );
-        else
-        if ( resultNoPunct.size() > targetNoPunct.size() && resultNoPunct.compare( 0, targetNoPunct.size(), targetNoPunct ) == 0 )
-          i->second->rank = PrefixNoPunctMatch * Multiplier + saturated( i->first.size() );
-        else
-        if ( resultNoWs.size() > targetNoWs.size() && resultNoWs.compare( 0, targetNoWs.size(), targetNoWs ) == 0 )
-          i->second->rank = PrefixNoWsMatch * Multiplier + saturated( i->first.size() );
-        else
-          i->second->rank = WorstMatch * Multiplier;
+        wstring target = Folding::applySimpleCaseOnly( allWordWritings[ wr ] );
+        wstring targetNoFullCase = Folding::applyFullCaseOnly( target );
+        wstring targetNoDia = Folding::applyDiacriticsOnly( targetNoFullCase );
+        wstring targetNoPunct = Folding::applyPunctOnly( targetNoDia );
+        wstring targetNoWs = Folding::applyWhitespaceOnly( targetNoPunct );
+    
+        wstring::size_type matchPos = 0;
+    
+        for( ResultsIndex::const_iterator i = resultsIndex.begin(), j = resultsIndex.end();
+             i != j; ++i )
+        {
+          wstring resultNoFullCase, resultNoDia, resultNoPunct, resultNoWs;
+
+          int rank;
+          
+          if ( i->first == target )
+            rank = ExactMatch * Multiplier;
+          else
+          if ( ( resultNoFullCase = Folding::applyFullCaseOnly( i->first ) ) == targetNoFullCase )
+            rank = ExactNoFullCaseMatch * Multiplier;
+          else
+          if ( ( resultNoDia = Folding::applyDiacriticsOnly( resultNoFullCase ) ) == targetNoDia )
+            rank = ExactNoDiaMatch * Multiplier;
+          else
+          if ( ( resultNoPunct = Folding::applyPunctOnly( resultNoDia ) ) == targetNoPunct )
+            rank = ExactNoPunctMatch * Multiplier;
+          else
+          if ( ( resultNoWs = Folding::applyWhitespaceOnly( resultNoPunct ) ) == targetNoWs )
+            rank = ExactNoWsMatch * Multiplier;
+          else
+          if ( hasSurroundedWithWs( i->first, target, matchPos ) )
+            rank = ExactInsideMatch * Multiplier + matchPos;
+          else
+          if ( hasSurroundedWithWs( resultNoDia, targetNoDia, matchPos ) )
+            rank = ExactNoDiaInsideMatch * Multiplier + matchPos;
+          else
+          if ( hasSurroundedWithWs( resultNoPunct, targetNoPunct, matchPos ) )
+            rank = ExactNoPunctInsideMatch * Multiplier + matchPos;
+          else
+          if ( i->first.size() > target.size() && i->first.compare( 0, target.size(), target ) == 0 )
+            rank = PrefixMatch * Multiplier + saturated( i->first.size() );
+          else
+          if ( resultNoDia.size() > targetNoDia.size() && resultNoDia.compare( 0, targetNoDia.size(), targetNoDia ) == 0 )
+            rank = PrefixNoDiaMatch * Multiplier + saturated( i->first.size() );
+          else
+          if ( resultNoPunct.size() > targetNoPunct.size() && resultNoPunct.compare( 0, targetNoPunct.size(), targetNoPunct ) == 0 )
+            rank = PrefixNoPunctMatch * Multiplier + saturated( i->first.size() );
+          else
+          if ( resultNoWs.size() > targetNoWs.size() && resultNoWs.compare( 0, targetNoWs.size(), targetNoWs ) == 0 )
+            rank = PrefixNoWsMatch * Multiplier + saturated( i->first.size() );
+          else
+            rank = WorstMatch * Multiplier;
+
+          if ( i->second->rank > rank )
+            i->second->rank = rank; // We store the best rank of any writing
+        }
       }
   
       resultsArray.sort( SortByRank() );
@@ -354,23 +379,29 @@ void WordFinder::updateResults()
       // in their beginnings, and second, the length of the strings. Here we assign
       // only the first one, storing it in rank. Then we sort the results using
       // SortByRankAndLength.
-      wstring target = Folding::apply( gd::toWString( inputWord ) );
-
-      for( ResultsIndex::const_iterator i = resultsIndex.begin(), j = resultsIndex.end();
-           i != j; ++i )
+      for( unsigned wr = 0; wr < allWordWritings.size(); ++wr )
       {
-        wstring resultFolded = Folding::apply( i->first );
+        wstring target = Folding::apply( allWordWritings[ wr ] );
+  
+        for( ResultsIndex::const_iterator i = resultsIndex.begin(), j = resultsIndex.end();
+             i != j; ++i )
+        {
+          wstring resultFolded = Folding::apply( i->first );
+  
+          int charsInCommon = 0;
+  
+          for( wchar const * t = target.c_str(), * r = resultFolded.c_str();
+               *t && *t == *r; ++t, ++r, ++charsInCommon ) ;
+  
+          int rank = -charsInCommon; // Negated so the lesser-than
+                                     // comparison would yield right
+                                     // results.
 
-        int charsInCommon = 0;
-
-        for( wchar const * t = target.c_str(), * r = resultFolded.c_str();
-             *t && *t == *r; ++t, ++r, ++charsInCommon ) ;
-
-        i->second->rank = -charsInCommon; // Negated so the lesser-than
-                                          // comparison would yield right
-                                          // results.
+          if ( i->second->rank > rank )
+            i->second->rank = rank; // We store the best rank of any writing
+        }
       }
-
+      
       resultsArray.sort( SortByRankAndLength() );
 
       maxSearchResults = 15;

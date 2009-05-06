@@ -11,6 +11,8 @@
 #include "sounddir.hh"
 #include "hunspell.hh"
 #include "dictdfiles.hh"
+#include "romaji.hh"
+#include "russiantranslit.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -23,7 +25,8 @@ using std::string;
 using std::vector;
 
 LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
-  paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell )
+  paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell ),
+  transliteration( cfg.transliteration )
 {
 }
 
@@ -51,7 +54,19 @@ void LoadDictionaries::run()
       dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
                            hunspellDictionaries.end() );
     }
+    
+    // Make romaji
+    {
+      vector< sptr< Dictionary::Class > > romajiDictionaries =
+        Romaji::makeDictionaries( transliteration.romaji );
 
+      dictionaries.insert( dictionaries.end(), romajiDictionaries.begin(),
+                           romajiDictionaries.end() );
+    }
+
+    // Make Russian tnrasliteration
+    if ( transliteration.enableRussianTransliteration )
+      dictionaries.push_back( RussianTranslit::makeDictionary() );
   }
   catch( std::exception & e )
   {

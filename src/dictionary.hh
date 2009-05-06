@@ -298,6 +298,14 @@ public:
   virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     throw( std::exception );
 
+  /// For a given word, provides alternate writings of it which are to be looked
+  /// up alongside with it. Transliteration dictionaries implement this. The
+  /// default implementation returns an empty list. Note that this function is
+  /// supposed to be very fast and simple, and the results are thus returned
+  /// syncronously.
+  virtual vector< wstring > getAlternateWritings( wstring const & )
+    throw();
+  
   /// Returns a definition for the given word. The definition should
   /// be an html fragment (without html/head/body tags) in an utf8 encoding.
   /// The 'alts' vector could contain a list of words the definitions of which

@@ -117,7 +117,10 @@ HEADERS += folding.hh \
     hotkeyedit.hh \
     langcoder.hh \
     editdictionaries.hh \
-    loaddictionaries.hh
+    loaddictionaries.hh \
+    transliteration.hh \
+    romaji.hh \
+    russiantranslit.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -180,7 +183,10 @@ SOURCES += folding.cc \
     hotkeyedit.cc \
     langcoder.cc \
     editdictionaries.cc \
-    loaddictionaries.cc
+    loaddictionaries.cc \
+    transliteration.cc \
+    romaji.cc \
+    russiantranslit.cc
 
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c

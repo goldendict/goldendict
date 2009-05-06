@@ -10,6 +10,7 @@
 Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::SoundDirs const & soundDirs,
                   Config::Hunspell const & hunspell,
+                  Config::Transliteration const & tr,
                   Config::MediaWikis const & mediawikis ): QWidget( parent ),
   mediawikisModel( this, mediawikis ), pathsModel( this, paths ),
   soundDirsModel( this, soundDirs ),
@@ -38,6 +39,14 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.hunspellDictionaries->setModel( &hunspellDictsModel );
 
   fitHunspellDictsColumns();
+
+  ui.enableRussianTransliteration->setChecked( tr.enableRussianTransliteration );
+  ui.enableRomaji->setChecked( tr.romaji.enable );
+  ui.enableHepburn->setChecked( tr.romaji.enableHepburn );
+  ui.enableNihonShiki->setChecked( tr.romaji.enableNihonShiki );
+  ui.enableKunreiShiki->setChecked( tr.romaji.enableKunreiShiki );
+  ui.enableHiragana->setChecked( tr.romaji.enableHiragana );
+  ui.enableKatakana->setChecked( tr.romaji.enableKatakana );
 }
 
 void Sources::fitPathsColumns()
@@ -159,6 +168,20 @@ Config::Hunspell Sources::getHunspell() const
   return h;
 }
 
+Config::Transliteration Sources::getTransliteration() const
+{
+  Config::Transliteration tr;
+
+  tr.enableRussianTransliteration = ui.enableRussianTransliteration->isChecked();
+  tr.romaji.enable = ui.enableRomaji->isChecked();
+  tr.romaji.enableHepburn = ui.enableHepburn->isChecked();
+  tr.romaji.enableNihonShiki = ui.enableNihonShiki->isChecked();
+  tr.romaji.enableKunreiShiki = ui.enableKunreiShiki->isChecked();
+  tr.romaji.enableHiragana = ui.enableHiragana->isChecked();
+  tr.romaji.enableKatakana = ui.enableKatakana->isChecked();
+
+  return tr;
+}
 
 ////////// MediaWikisModel
 

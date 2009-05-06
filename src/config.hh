@@ -199,6 +199,48 @@ struct Hunspell
 /// All the MediaWikis
 typedef vector< MediaWiki > MediaWikis;
 
+/// Romaji transliteration configuration
+struct Romaji
+{
+  bool enable;
+
+  bool enableHepburn;
+  bool enableNihonShiki;
+  bool enableKunreiShiki;
+  bool enableHiragana;
+  bool enableKatakana;
+
+  Romaji();
+
+  bool operator == ( Romaji const & other ) const
+  { return enable == other.enable &&
+           enableHepburn == other.enableHepburn &&
+           enableNihonShiki == other.enableNihonShiki &&
+           enableKunreiShiki == other.enableKunreiShiki &&
+           enableHiragana == other.enableHiragana &&
+           enableKatakana == other.enableKatakana; }
+
+  bool operator != ( Romaji const & other ) const
+  { return ! operator == ( other ); }
+  
+};
+
+struct Transliteration
+{
+  bool enableRussianTransliteration;
+  Romaji romaji;
+
+  bool operator == ( Transliteration const & other ) const
+  { return enableRussianTransliteration == other.enableRussianTransliteration &&
+           romaji == other.romaji; }
+
+  bool operator != ( Transliteration const & other ) const
+  { return ! operator == ( other ); }
+
+  Transliteration(): enableRussianTransliteration( false )
+  {}
+};
+
 struct Class
 {
   Paths paths;
@@ -207,6 +249,7 @@ struct Class
   Preferences preferences;
   MediaWikis mediawikis;
   Hunspell hunspell;
+  Transliteration transliteration;
 
   unsigned lastMainGroupId; // Last used group in main window
   unsigned lastPopupGroupId; // Last used group in popup window

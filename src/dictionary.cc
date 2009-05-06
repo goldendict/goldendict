@@ -125,6 +125,12 @@ sptr< WordSearchRequest > Class::findHeadwordsForSynonym( wstring const & )
   return new WordSearchRequestInstant();
 }
 
+vector< wstring > Class::getAlternateWritings( wstring const & )
+  throw()
+{
+  return vector< wstring >();
+}
+
 sptr< DataRequest > Class::getResource( string const & /*name*/ )
   throw( std::exception )
 {

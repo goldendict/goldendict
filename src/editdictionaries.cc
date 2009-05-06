@@ -13,7 +13,8 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   QDialog( parent ), cfg( cfg_ ), dictionaries( dictionaries_ ),
   dictNetMgr( dictNetMgr_ ),
   origCfg( cfg ),
-  sources( this, cfg.paths, cfg.soundDirs, cfg.hunspell, cfg.mediawikis ),
+  sources( this, cfg.paths, cfg.soundDirs, cfg.hunspell, cfg.transliteration,
+           cfg.mediawikis ),
   groups( new Groups( this, dictionaries, cfg.groups ) ),
   dictionariesChanged( false ),
   groupsChanged( false ),
@@ -106,6 +107,7 @@ bool EditDictionaries::isSourcesChanged() const
   return sources.getPaths() != cfg.paths ||
          sources.getSoundDirs() != cfg.soundDirs ||
          sources.getHunspell() != cfg.hunspell ||
+         sources.getTransliteration() != cfg.transliteration ||
          sources.getMediaWikis() != cfg.mediawikis;
 }
 
@@ -116,6 +118,7 @@ void EditDictionaries::acceptChangedSources()
   cfg.paths = sources.getPaths();
   cfg.soundDirs = sources.getSoundDirs();
   cfg.hunspell = sources.getHunspell();
+  cfg.transliteration = sources.getTransliteration();
   cfg.mediawikis = sources.getMediaWikis();
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );

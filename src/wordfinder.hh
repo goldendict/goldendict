@@ -45,6 +45,8 @@ private:
 
   std::vector< sptr< Dictionary::Class > > const * inputDicts;
 
+  std::vector< gd::wstring > allWordWritings; // All writings of the inputWord
+  
   struct OneResult
   {
     gd::wstring word;

@@ -98,6 +98,16 @@ Preferences::Preferences():
 {
 }
 
+Romaji::Romaji():
+  enable( false ),
+  enableHepburn( true ),
+  enableNihonShiki( false ),
+  enableKunreiShiki( false ),
+  enableHiragana( true ),
+  enableKatakana( true )
+{
+}
+
 namespace {
 
 MediaWikis makeDefaultMediaWikis( bool enable )
@@ -315,6 +325,26 @@ Class load() throw( exError )
 
     for( unsigned x = 0; x < nl.length(); ++x )
       c.hunspell.enabledDictionaries.push_back( nl.item( x ).toElement().text() );
+  }
+
+  QDomNode transliteration = root.namedItem( "transliteration" );
+  
+  if ( !transliteration.isNull() )
+  {
+    applyBoolOption( c.transliteration.enableRussianTransliteration,
+                     transliteration.namedItem( "enableRussianTransliteration" ) );
+    
+    QDomNode romaji = transliteration.namedItem( "romaji" );
+
+    if ( !romaji.isNull() )
+    {
+      applyBoolOption( c.transliteration.romaji.enable, romaji.namedItem( "enable" ) );
+      applyBoolOption( c.transliteration.romaji.enableHepburn, romaji.namedItem( "enableHepburn" ) );
+      applyBoolOption( c.transliteration.romaji.enableNihonShiki, romaji.namedItem( "enableNihonShiki" ) );
+      applyBoolOption( c.transliteration.romaji.enableKunreiShiki, romaji.namedItem( "enableKunreiShiki" ) );
+      applyBoolOption( c.transliteration.romaji.enableHiragana, romaji.namedItem( "enableHiragana" ) );
+      applyBoolOption( c.transliteration.romaji.enableKatakana, romaji.namedItem( "enableKatakana" ) );
+    }
   }
 
   QDomNode mws = root.namedItem( "mediawikis" );
@@ -549,6 +579,42 @@ void save( Class const & c ) throw( exError )
     }
   }
 
+  {
+    QDomElement transliteration = dd.createElement( "transliteration" );
+    root.appendChild( transliteration );
+
+    QDomElement opt = dd.createElement( "enableRussianTransliteration" );
+    opt.appendChild( dd.createTextNode( c.transliteration.enableRussianTransliteration ? "1":"0" ) );
+    transliteration.appendChild( opt );
+
+    QDomElement romaji = dd.createElement( "romaji" );
+    transliteration.appendChild( romaji );
+
+    opt = dd.createElement( "enable" );
+    opt.appendChild( dd.createTextNode( c.transliteration.romaji.enable ? "1":"0" ) );
+    romaji.appendChild( opt );
+    
+    opt = dd.createElement( "enableHepburn" );
+    opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableHepburn ? "1":"0" ) );
+    romaji.appendChild( opt );
+    
+    opt = dd.createElement( "enableNihonShiki" );
+    opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableNihonShiki ? "1":"0" ) );
+    romaji.appendChild( opt );
+    
+    opt = dd.createElement( "enableKunreiShiki" );
+    opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableKunreiShiki ? "1":"0" ) );    
+    romaji.appendChild( opt );
+    
+    opt = dd.createElement( "enableHiragana" );
+    opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableHiragana ? "1":"0" ) );
+    romaji.appendChild( opt );
+    
+    opt = dd.createElement( "enableKatakana" );
+    opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableKatakana ? "1":"0" ) );
+    romaji.appendChild( opt );
+  }
+  
   {
     QDomElement mws = dd.createElement( "mediawikis" );
     root.appendChild( mws );

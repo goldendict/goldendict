@@ -271,6 +271,131 @@ of the appropriate groups to use them.</string>
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Transliteration</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="enableRussianTransliteration">
+         <property name="text">
+          <string>Russian transliteration</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="enableRomaji">
+         <property name="toolTip">
+          <string>Enables to use the Latin alphabet to write the Japanese language</string>
+         </property>
+         <property name="title">
+          <string>Japanese Romaji</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Systems:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="enableHepburn">
+            <property name="toolTip">
+             <string>The most widely used method of transcription of Japanese,
+based on English phonology</string>
+            </property>
+            <property name="text">
+             <string>Hepburn</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="enableNihonShiki">
+            <property name="toolTip">
+             <string>The most regular system, having a one-to-one relation to the
+kana writing systems. Standardized as ISO 3602</string>
+            </property>
+            <property name="text">
+             <string>Nihon-shiki</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="enableKunreiShiki">
+            <property name="toolTip">
+             <string>Based on Nihon-shiki system, but modified for modern standard Japanese.
+Standardized as ISO 3602</string>
+            </property>
+            <property name="text">
+             <string>Kunrei-shiki</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Syllabaries:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="enableHiragana">
+            <property name="toolTip">
+             <string>Hiragana Japanese syllabary</string>
+            </property>
+            <property name="text">
+             <string>Hiragana</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QCheckBox" name="enableKatakana">
+            <property name="toolTip">
+             <string>Hiragana Japanese syllabary</string>
+            </property>
+            <property name="text">
+             <string>Katakana</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>80</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

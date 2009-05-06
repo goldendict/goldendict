@@ -138,6 +138,7 @@ public:
   Sources( QWidget * parent, Config::Paths const &,
            Config::SoundDirs const &,
            Config::Hunspell const &,
+           Config::Transliteration const &,
            Config::MediaWikis const & );
 
   Config::Paths const & getPaths() const
@@ -150,6 +151,8 @@ public:
   { return mediawikisModel.getCurrentWikis(); }
 
   Config::Hunspell getHunspell() const;
+  
+  Config::Transliteration getTransliteration() const;
 
 signals:
 
