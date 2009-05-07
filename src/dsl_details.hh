@@ -74,6 +74,7 @@ private:
 
   wchar ch;
   bool escaped;
+  unsigned transcriptionCount; // >0 = inside a [t] tag
 
   void nextChar() throw( eot );
 };

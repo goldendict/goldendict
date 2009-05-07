@@ -57,7 +57,8 @@ static inline bool checkM( wstring const & dest, wstring const & src )
 }
 
 ArticleDom::ArticleDom( wstring const & str ):
-  root( Node::Tag(), wstring(), wstring() ), stringPos( str.c_str() )
+  root( Node::Tag(), wstring(), wstring() ), stringPos( str.c_str() ),
+  transcriptionCount( 0 )
 {
   list< Node * > stack; // Currently opened tags
 
@@ -119,6 +120,18 @@ ArticleDom::ArticleDom( wstring const & str ):
           textNode = 0;
         }
 
+        // If the tag is [t], we update the transcriptionCount
+        if ( name == GD_NATIVE_TO_WS( L"t" ) )
+        {
+          if ( isClosing )
+          {
+            if ( transcriptionCount )
+              --transcriptionCount;
+          }
+          else
+            ++transcriptionCount;
+        }
+        
         if ( !isClosing )
         {
           Node node( Node::Tag(), name, attrs );
@@ -297,6 +310,83 @@ ArticleDom::ArticleDom( wstring const & str ):
         textNode = stack.back();
       }
 
+      // If we're inside the transcription, do old-encoding conversion
+      if ( transcriptionCount )
+      {
+        switch ( ch )
+        {
+          case 0x2021: ch = 0xE6; break;
+          case 0x407: ch = 0x72; break;
+          case 0xB0: ch = 0x6B; break;
+          case 0x20AC: ch = 0x254; break;
+          case 0x404: ch = 0x7A; break;
+          case 0x40F: ch = 0x283; break;
+          case 0xAB: ch = 0x74; break;
+          case 0xAC: ch = 0x64; break;
+          case 0x2020: ch = 0x259; break;
+          case 0x490: ch = 0x6D; break;
+          case 0xA7: ch = 0x66; break;
+          case 0xAE: ch = 0x6C; break;
+          case 0xB1: ch = 0x67; break;
+          case 0x45E: ch = 0x65; break;
+          case 0xAD: ch = 0x6E; break;
+          case 0xA9: ch = 0x73; break;
+          case 0xA6: ch = 0x77; break;
+          case 0x2026: ch = 0x28C; break;
+          case 0x452: ch = 0x76; break;
+          case 0x408: ch = 0x70; break;
+          case 0x40C: ch = 0x75; break;
+          case 0x406: ch = 0x68; break;
+          case 0xB5: ch = 0x61; break;
+          case 0x491: ch = 0x25B; break;
+          case 0x40A: ch = 0x14B; break;
+          case 0x2030: ch = 0xF0; break;
+          case 0x456: ch = 0x6A; break;
+          case 0xA4: ch = 0x62; break;
+          case 0x409: ch = 0x292; break;
+          case 0x40E: ch = 0x69; break;
+          //case 0x44D: ch = 0x131; break;
+          case 0x40B: ch = 0x4E8; break;
+          case 0xB6: ch = 0x28A; break;
+          case 0x2018: ch = 0x251; break;
+          case 0x457: ch = 0x265; break;
+          case 0x458: ch = 0x153; break;
+          case 0x405: textNode->text.push_back( 0x153 ); ch = 0x303; break;
+          case 0x441: ch = 0x272; break;
+          case 0x442: textNode->text.push_back( 0x254 ); ch = 0x303; break;
+          case 0x443: ch = 0xF8; break;
+          case 0x445: textNode->text.push_back(0x25B ); ch = 0x303; break;
+          case 0x446: ch = 0xE7; break;
+          case 0x44C: textNode->text.push_back( 0x251 ); ch = 0x303; break;
+          case 0x44D: ch = 0x26A; break;
+          case 0x44F: ch = 0x252; break;
+          case 0x30: ch = 0x3B2; break;
+          case 0x31: textNode->text.push_back( 0x65 ); ch = 0x303; break;
+          case 0x32: ch = 0x25C; break;
+          case 0x33: ch = 0x129; break;
+          case 0x34: ch = 0xF5; break;
+          case 0x36: ch = 0x28E; break;
+          case 0x37: ch = 0x263; break;
+          case 0x38: ch = 0x1DD; break;
+          case 0x3A: ch = 0x2D0; break;
+          case 0x27: ch = 0x2C8; break;
+          case 0x455: ch = 0x1D0; break;
+          case 0xB7: ch = 0xE3; break;
+
+          case 0x00a0: ch = 0x02A7; break;
+          //case 0x00b1: ch = 0x0261; break;
+          case 0x0402: textNode->text.push_back( 0x0069 ); ch = L':'; break;
+          case 0x0403: textNode->text.push_back( 0x0251 ); ch = L':'; break;
+          //case 0x040b: ch = 0x03b8; break;
+          //case 0x040e: ch = 0x026a; break;
+          case 0x0428: ch = 0x0061; break;
+          case 0x0453: textNode->text.push_back( 0x0075 ); ch = L':'; break;
+          case 0x201a: ch = 0x0254; break;
+          case 0x201e: ch = 0x0259; break;
+          case 0x2039: textNode->text.push_back( 0x0064 ); ch = 0x0292; break;
+        }
+      }
+            
       textNode->text.push_back( ch );
     } // for( ; ; )
   }
