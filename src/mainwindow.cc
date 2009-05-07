@@ -961,7 +961,11 @@ void MainWindow::showTranslationFor( QString const & inWord )
 void MainWindow::toggleMainWindow( bool onlyShow )
 {
   if ( !isVisible() )
+  {
     show();
+    activateWindow();
+    raise();
+  }
   else
   if ( isMinimized() )
   {
