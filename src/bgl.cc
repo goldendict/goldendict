@@ -44,7 +44,7 @@ namespace
   enum
   {
     Signature = 0x584c4742, // BGLX on little-endian, XLGB on big-endian
-    CurrentFormatVersion = 14 + BtreeIndexing::FormatVersion
+    CurrentFormatVersion = 15 + BtreeIndexing::FormatVersion
   };
 
   struct IdxHeader
@@ -67,6 +67,8 @@ namespace
     uint32_t resourcesCount; // Number of resources stored
     uint32_t langFrom;  // Source language
     uint32_t langTo;    // Target language
+    uint32_t iconAddress; // Address of the icon in the chunks' storage
+    uint32_t iconSize; // Size of the icon in the chunks' storage, 0 = no icon
   }
   #ifndef _MSC_VER
   __attribute__((packed))
@@ -205,6 +207,8 @@ namespace
     IdxHeader idxHeader;
     string dictionaryName;
     ChunkedStorage::Reader chunks;
+    QIcon dictionaryIcon;
+    bool dictionaryIconLoaded;
 
   public:
 
@@ -223,8 +227,7 @@ namespace
     virtual unsigned long getWordCount() throw()
     { return idxHeader.wordCount; }
 
-    virtual QIcon getIcon() throw()
-    { return QIcon(":/icons/icon32_bgl.png"); }
+    virtual QIcon getIcon() throw();
 
     inline virtual quint32 getLangFrom() const
     { return idxHeader.langFrom; }
@@ -261,7 +264,8 @@ namespace
     BtreeDictionary( id, vector< string >( 1, dictionaryFile ) ),
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
-    chunks( idx, idxHeader.chunksOffset )
+    chunks( idx, idxHeader.chunksOffset ),
+    dictionaryIconLoaded( !idxHeader.iconSize )
   {
     idx.seek( sizeof( idxHeader ) );
 
@@ -282,6 +286,49 @@ namespace
                idx, idxMutex );
   }
 
+  QIcon BglDictionary::getIcon() throw()
+  {
+    if ( !dictionaryIconLoaded )
+    {
+      // Try loading icon now
+
+      vector< char > chunk;
+
+      Mutex::Lock _( idxMutex );
+
+      char * iconData = chunks.getBlock( idxHeader.iconAddress, chunk );
+
+      QImage img;
+
+      if (img.loadFromData( ( unsigned char *) iconData, idxHeader.iconSize  ) )
+      {
+        // Load successful
+
+        // Transform it to be square
+        int max = img.width() > img.height() ? img.width() : img.height();
+
+        QImage result( max, max, QImage::Format_ARGB32 );
+        result.fill( 0 ); // Black transparent
+
+        QPainter painter( &result );
+
+        painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                                   img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                           img );
+
+        painter.end();
+
+        dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+      }
+
+      dictionaryIconLoaded = true;
+    }
+
+    if ( !dictionaryIcon.isNull() )
+      return dictionaryIcon;
+    else
+      return QIcon(":/icons/icon32_bgl.png");
+  }
 
   void BglDictionary::loadArticle( uint32_t offset, string & headword,
                                    string & displayedHeadword,
@@ -1000,6 +1047,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       b.setResourcePrefix( string( "bres://" ) + dictId + "/" );
 
+      // Save icon if there's one
+      if ( size_t sz = b.getIcon().size() )
+      {
+        idxHeader.iconAddress = chunks.startNewBlock();
+        chunks.addToBlock( &b.getIcon().front(), sz );
+        idxHeader.iconSize = sz;
+      }
+      
       for( ; ; )
       {
         bgl_entry e = b.readEntry( &resourceHandler );
@@ -1061,21 +1116,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       idxHeader.foldingVersion = Folding::Version;
       idxHeader.articleCount = articleCount;
       idxHeader.wordCount = wordCount;
-
-      // read languages
-      QPair<quint32,quint32> langs =
-          LangCoder::findIdsForFilename( QString::fromStdString( *i ) );
-
-      // if no languages found, try dictionary's name
-      if ( langs.first == 0 || langs.second == 0 )
-      {
-        langs =
-          LangCoder::findIdsForFilename( QString::fromStdString( b.title() ) );
-      }
-
-      idxHeader.langFrom = langs.first;
-      idxHeader.langTo = langs.second;
-
+      idxHeader.langFrom = LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
+      idxHeader.langTo = LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
 
       idx.rewind();
 

@@ -230,6 +230,10 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
             }
             m_description = headword;
             break;
+          case 11:
+            icon.resize( block.length - 2 );
+            memcpy( &icon.front(), &(block.data[ 2 ]), icon.size() );
+          break;
           case 26:
             type = (unsigned int)block.data[2];
             if( type > 64 ) type -= 65;

@@ -188,9 +188,12 @@ public:
 
     inline std::string filename() const { return m_filename; };
 
+    std::vector< char > const & getIcon() const
+    { return icon; }
+    
     enum
     {
-      ParserVersion = 4
+      ParserVersion = 5
     };
 
 private:
@@ -211,6 +214,7 @@ private:
     std::string m_defaultCharset;
     std::string m_sourceCharset;
     std::string m_targetCharset;
+    std::vector< char > icon;
 
     std::string m_resourcePrefix;
 
