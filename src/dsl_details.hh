@@ -68,6 +68,9 @@ struct ArticleDom
 
 private:
 
+  void closeTag( wstring const & name, list< Node * > & stack,
+                 bool warn = true );
+
   wchar const * stringPos;
 
   class eot {};

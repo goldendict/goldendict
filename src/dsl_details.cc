@@ -134,6 +134,12 @@ ArticleDom::ArticleDom( wstring const & str ):
         
         if ( !isClosing )
         {
+          if ( name.size() == 2 && name[ 0 ] == L'm' && iswdigit( name[ 1 ] ) )
+          {
+            // Opening an 'mX' tag closes any previous 'm' tag
+            closeTag( GD_NATIVE_TO_WS( L"m" ), stack, false );
+          }
+          
           Node node( Node::Tag(), name, attrs );
 
           if ( stack.empty() )
@@ -149,74 +155,7 @@ ArticleDom::ArticleDom( wstring const & str ):
         }
         else
         {
-          // Find the tag which is to be closed
-
-          list< Node * >::reverse_iterator n;
-
-          for( n = stack.rbegin(); n != stack.rend(); ++n )
-          {
-            if ( (*n)->tagName == name || checkM( (*n)->tagName, name ) )
-            {
-              // Found it
-              break;
-            }
-          }
-
-          if ( n != stack.rend() )
-          {
-            // If there is a corresponding tag, close all tags above it,
-            // then close the tag itself, then reopen all the tags which got
-            // closed.
-
-            list< Node > nodesToReopen;
-
-            while( stack.size() )
-            {
-              bool found = stack.back()->tagName == name ||
-                           checkM( stack.back()->tagName, name );
-
-              if ( !found )
-                nodesToReopen.push_back( Node( Node::Tag(), stack.back()->tagName,
-                                               stack.back()->tagAttrs ) );
-
-              if ( stack.back()->empty() )
-              {
-                // Empty nodes are deleted since they're no use
-
-                stack.pop_back();
-
-                Node * parent = stack.size() ? stack.back() : &root;
-
-                parent->pop_back();
-              }
-              else
-                stack.pop_back();
-
-              if ( found )
-                break;
-            }
-
-            while( nodesToReopen.size() )
-            {
-              if ( stack.empty() )
-              {
-                root.push_back( nodesToReopen.back() );
-                stack.push_back( &root.back() );
-              }
-              else
-              {
-                stack.back()->push_back( nodesToReopen.back() );
-                stack.push_back( &stack.back()->back() );
-              }
-
-              nodesToReopen.pop_back();
-            }
-          }
-          else
-          {
-            fprintf( stderr, "Warning: no corresponding opening tag for closing tag \"/%ls\" found.\n",
-                     name.c_str() );
-          }
+          closeTag( name, stack );
         } // if ( isClosing )
         continue;
       } // if ( ch == '[' )
@@ -399,6 +338,81 @@ ArticleDom::ArticleDom( wstring const & str ):
 
   if ( stack.size() )
     fprintf( stderr, "Warning: %u tags were unclosed.\n", stack.size() );
+}
+
+void ArticleDom::closeTag( wstring const & name,
+                           list< Node * > & stack,
+                           bool warn )
+{
+  // Find the tag which is to be closed
+
+  list< Node * >::reverse_iterator n;
+
+  for( n = stack.rbegin(); n != stack.rend(); ++n )
+  {
+    if ( (*n)->tagName == name || checkM( (*n)->tagName, name ) )
+    {
+      // Found it
+      break;
+    }
+  }
+
+  if ( n != stack.rend() )
+  {
+    // If there is a corresponding tag, close all tags above it,
+    // then close the tag itself, then reopen all the tags which got
+    // closed.
+
+    list< Node > nodesToReopen;
+
+    while( stack.size() )
+    {
+      bool found = stack.back()->tagName == name ||
+                   checkM( stack.back()->tagName, name );
+
+      if ( !found )
+        nodesToReopen.push_back( Node( Node::Tag(), stack.back()->tagName,
+                                       stack.back()->tagAttrs ) );
+
+      if ( stack.back()->empty() )
+      {
+        // Empty nodes are deleted since they're no use
+
+        stack.pop_back();
+
+        Node * parent = stack.size() ? stack.back() : &root;
+
+        parent->pop_back();
+      }
+      else
+        stack.pop_back();
+
+      if ( found )
+        break;
+    }
+
+    while( nodesToReopen.size() )
+    {
+      if ( stack.empty() )
+      {
+        root.push_back( nodesToReopen.back() );
+        stack.push_back( &root.back() );
+      }
+      else
+      {
+        stack.back()->push_back( nodesToReopen.back() );
+        stack.push_back( &stack.back()->back() );
+      }
+
+      nodesToReopen.pop_back();
+    }
+  }
+  else
+  if ( warn )
+  {
+    fprintf( stderr, "Warning: no corresponding opening tag for closing tag \"/%ls\" found.\n",
+             name.c_str() );
+  }
 }
 
 void ArticleDom::nextChar() throw( eot )
