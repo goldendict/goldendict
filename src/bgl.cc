@@ -25,6 +25,8 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 
+#include <QRegExp>
+
 namespace Bgl {
 
 using std::map;
@@ -826,103 +828,33 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
   /// Replaces <CHARSET c="t">1234;</CHARSET> occurences with &#x1234;
   void BglDictionary::replaceCharsetEntities( string & text )
   {
-    string lowercased = text;
+    QRegExp charsetExp( "<\\s*charset\\s+c\\s*=\\s*[\"']?t[\"']?\\s*>((?:\\s*[0-9a-fA-F]+\\s*;\\s*)*)<\\s*/\\s*charset\\s*>",
+                        Qt::CaseInsensitive );
 
-    // Make a lowercased version of text, used for searching only. Only touch
-    // symbols < 0x80 to avoid any weird results.
-    for( unsigned x = lowercased.size(); x--; )
-      if ( (unsigned char )lowercased[ x ] < 0x80 )
-        lowercased[ x ] = tolower( lowercased[ x ] );
+    charsetExp.setMinimal( true );
+    
+    QRegExp oneValueExp( "\\s*([0-9a-fA-F]+)\\s*;" );
 
-    size_t prevPos = 0;
-
-    for( ;; )
+    QString str = QString::fromUtf8( text.c_str() );
+    
+    for( int pos = 0; ( pos = charsetExp.indexIn( str, pos ) ) != -1; )
     {
-      size_t pos = lowercased.find( "<charset c=\"t\">", prevPos );
+      //printf( "Match: %s\n", str.mid( pos, charsetExp.matchedLength() ).toUtf8().data() );
+      
+      QString out;
 
-      if ( pos == string::npos )
-        break;
-
-      if ( lowercased.size() - pos < 30 )
+      for( int p = 0; ( p = oneValueExp.indexIn( charsetExp.cap( 1 ), p ) ) != -1; )
       {
-        // This is not right, the string is too short, leave it alone
-        break;
+        //printf( "Cap: %s\n", oneValueExp.cap( 1 ).toUtf8().data() );
+        out += "&#x" + oneValueExp.cap( 1 ) + ";";
+
+        p += oneValueExp.matchedLength();
       }
 
-      prevPos = pos + 1;
-
-      if ( lowercased.substr( pos + 15 + 4, 11 ) != ";</charset>" )
-      {
-        // The ending doesn't match
-        printf( "!!!!!!ending mismatch\n" );
-        continue;
-      }
-
-      // Check if digits are all hex
-
-      if ( !isxdigit( lowercased[ pos + 15 ] ) ||
-           !isxdigit( lowercased[ pos + 16 ] ) ||
-           !isxdigit( lowercased[ pos + 17 ] ) ||
-           !isxdigit( lowercased[ pos + 18 ] ) )
-      {
-        printf( "!!!!!!!!not hex digits\n" );
-        continue;
-      }
-
-      // Ok, replace now.
-
-      lowercased.replace( pos, 15, "&#x" );
-      lowercased.erase( pos + 8, 10 );
-
-      text.replace( pos, 15, "&#x" );
-      text.erase( pos + 8, 10 );
+      str.replace( pos, charsetExp.matchedLength(), out );
     }
 
-    prevPos = 0;
-
-    // Copy-pasted version for <charset c=t>. This should all be replaced
-    // by regexps.
-    for( ;; )
-    {
-      size_t pos = lowercased.find( "<charset c=t>", prevPos );
-
-      if ( pos == string::npos )
-        break;
-
-      if ( lowercased.size() - pos < 28 )
-      {
-        // This is not right, the string is too short, leave it alone
-        break;
-      }
-
-      prevPos = pos + 1;
-
-      if ( lowercased.substr( pos + 13 + 4, 11 ) != ";</charset>" )
-      {
-        // The ending doesn't match
-        printf( "!!!!!!ending mismatch\n" );
-        continue;
-      }
-
-      // Check if digits are all hex
-
-      if ( !isxdigit( lowercased[ pos + 13 ] ) ||
-           !isxdigit( lowercased[ pos + 14 ] ) ||
-           !isxdigit( lowercased[ pos + 15 ] ) ||
-           !isxdigit( lowercased[ pos + 16 ] ) )
-      {
-        printf( "!!!!!!!!not hex digits\n" );
-        continue;
-      }
-
-      // Ok, replace now.
-
-      lowercased.replace( pos, 13, "&#x" );
-      lowercased.erase( pos + 8, 10 );
-
-      text.replace( pos, 13, "&#x" );
-      text.erase( pos + 8, 10 );
-    }
+    text = str.toUtf8().data();
   }
 
   class ResourceHandler: public Babylon::ResourceHandler
