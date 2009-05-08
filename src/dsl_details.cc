@@ -325,6 +325,9 @@ ArticleDom::ArticleDom( wstring const & str ):
           case 0x2039: textNode->text.push_back( 0x0064 ); ch = 0x0292; break;
         }
       }
+
+      if ( escaped && ch == L' ' )
+        ch = 0xA0; // Escaped spaces turn into non-breakable ones in Lingvo
             
       textNode->text.push_back( ch );
     } // for( ; ; )
