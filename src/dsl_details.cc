@@ -471,6 +471,19 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
   if ( firstBytes[ 0 ] == 0xFE && firstBytes[ 1 ] == 0xFF )
     encoding = Utf16BE;
   else
+  if ( firstBytes[ 0 ] == 0xEF && firstBytes[ 1 ] == 0xBB )
+  {
+    // Looks like Utf8, read one more byte
+    if ( gzread( f, firstBytes, 1 ) != 1 || firstBytes[ 0 ] != 0xBF )
+    {
+      // Either the file's too short, or the BOM is weird
+      gzclose( f );
+      throw exMalformedDslFile( fileName );
+    }
+    
+    encoding = Utf8;
+  }
+  else
   {
     if ( firstBytes[ 0 ] && !firstBytes[ 1 ] )
       encoding = Utf16LE;
@@ -720,6 +733,8 @@ char const * DslIconv::getEncodingNameFor( DslEncoding e )
       return "WINDOWS-1252";
     case Windows1251:
       return "WINDOWS-1251";
+    case Details::Utf8:
+      return "UTF-8";
     case Windows1250:
     default:
       return "WINDOWS-1250";

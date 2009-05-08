@@ -28,7 +28,8 @@ enum DslEncoding
   Utf16BE,
   Windows1252,
   Windows1251,
-  Windows1250
+  Windows1250,
+  Utf8 // This is an extension. Detected solely by the UTF8 BOM.
 };
 
 
