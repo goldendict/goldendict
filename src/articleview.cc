@@ -154,9 +154,9 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
   printf( "clicked %s\n", url.toString().toLocal8Bit().data() );
 
   if ( url.scheme() == "bword" )
-    showDefinition( url.host().startsWith( "xn--" ) ?
+    showDefinition( ( url.host().startsWith( "xn--" ) ?
                       QUrl::fromPunycode( url.host().toLatin1() ) :
-                      url.host(),
+                      url.host() ) + url.path(),
                     getGroup( ref ) );
   else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
