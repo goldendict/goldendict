@@ -1297,6 +1297,19 @@ void MainWindow::on_saveArticle_activated()
   }
 }
 
+void MainWindow::on_rescanFiles_activated()
+{
+  hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
+  scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+
+  loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+  
+  updateGroupList();
+
+  makeScanPopup();
+  installHotKeys();
+}
+
 void MainWindow::zoomin()
 {
   cfg.preferences.zoomFactor += 0.1;

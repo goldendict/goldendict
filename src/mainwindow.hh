@@ -198,6 +198,8 @@ private slots:
   void printPreviewPaintRequested( QPrinter * );
   
   void on_saveArticle_activated();
+
+  void on_rescanFiles_activated();
 };
 
 #endif

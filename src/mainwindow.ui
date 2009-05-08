@@ -58,7 +58,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -70,6 +70,8 @@
     <addaction name="print"/>
     <addaction name="separator"/>
     <addaction name="saveArticle"/>
+    <addaction name="separator"/>
+    <addaction name="rescanFiles"/>
     <addaction name="separator"/>
     <addaction name="actionCloseToTray"/>
     <addaction name="quit"/>
@@ -336,6 +338,14 @@
   <action name="printPreview">
    <property name="text">
     <string>Print Preview</string>
+   </property>
+  </action>
+  <action name="rescanFiles">
+   <property name="text">
+    <string>Rescan Files</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F5</string>
    </property>
   </action>
  </widget>
