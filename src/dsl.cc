@@ -396,6 +396,7 @@ void DslDictionary::loadArticle( uint32_t address,
   bool hadFirstHeadword = false;
   bool foundDisplayedHeadword = false;
 
+  wstring tildeValueWithUnsorted; // This one has unsorted parts left
   for( headwordIndex = 0; ; )
   {
     size_t begin = pos;
@@ -409,26 +410,31 @@ void DslDictionary::loadArticle( uint32_t address,
     {
       // Process the headword
 
-      wstring rawHeadword = Folding::trimWhitespace( wstring( articleData, begin, pos - begin ) );
+      wstring rawHeadword = wstring( articleData, begin, pos - begin );
 
       if ( !hadFirstHeadword )
       {
         // We need our tilde expansion value
         tildeValue = rawHeadword;
-        processUnsortedParts( tildeValue, false );
+
         list< wstring > lst;
 
         expandOptionalParts( tildeValue, lst );
 
         if ( lst.size() ) // Should always be
           tildeValue = lst.front();
+
+        tildeValueWithUnsorted = tildeValue;
+
+        processUnsortedParts( tildeValue, false );
       }
 
       wstring str = rawHeadword;
-      processUnsortedParts( str, true );
 
       if ( hadFirstHeadword )
-        expandTildes( str, tildeValue );
+        expandTildes( str, tildeValueWithUnsorted );
+
+      processUnsortedParts( str, true );
 
       str = Folding::applySimpleCaseOnly( str );
 
@@ -441,13 +447,14 @@ void DslDictionary::loadArticle( uint32_t address,
       for( list< wstring >::iterator i = lst.begin(); i != lst.end(); ++i )
       {
         unescapeDsl( *i );
-        if ( *i == requestedHeadwordFolded )
+
+        if ( Folding::trimWhitespace( *i ) == requestedHeadwordFolded )
         {
           // Found it. Now we should make a displayed headword for it.
-          processUnsortedParts( rawHeadword, false );
-
           if ( hadFirstHeadword )
-            expandTildes( rawHeadword, tildeValue );
+            expandTildes( rawHeadword, tildeValueWithUnsorted );
+
+          processUnsortedParts( rawHeadword, false );
 
           displayedHeadword = rawHeadword;
 
