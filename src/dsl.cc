@@ -14,6 +14,7 @@
 #include "fsencoding.hh"
 #include "audiolink.hh"
 #include "langcoder.hh"
+#include "wstring_qt.hh"
 
 #include <zlib.h>
 #include "libzip/zip.h"
@@ -637,7 +638,13 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"ref" ) )
   {
-    result += "<a class=\"dsl_ref\" href=\"bword://" + Html::escape( Utf8::encode( node.renderAsText() ) ) +"\">" + processNodeChildren( node ) + "</a>";
+    QUrl url;
+
+    url.setScheme( "gdlookup" );
+    url.setHost( "localhost" );
+    url.setPath( gd::toQString( node.renderAsText() ) );
+
+    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"sub" ) )
