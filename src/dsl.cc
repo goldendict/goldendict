@@ -545,7 +545,15 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += "<i class=\"dsl_i\">" + processNodeChildren( node ) + "</i>";
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"u" ) )
-    result += "<span class=\"dsl_u\">" + processNodeChildren( node ) + "</span>";
+  {
+    string nodeText = processNodeChildren( node );
+
+    if ( nodeText.size() && isDslWs( nodeText[ 0 ] ) )
+      result.push_back( ' ' ); // Fix a common problem where in "foo[i] bar[/i]"
+                               // the space before "bar" gets underlined.
+
+    result += "<span class=\"dsl_u\">" + nodeText + "</span>";
+  }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"c" ) )
   {
