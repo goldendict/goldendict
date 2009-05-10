@@ -3,9 +3,17 @@
 
 #include "groupcombobox.hh"
 
-GroupComboBox::GroupComboBox( QWidget * parent ): QComboBox( parent )
+GroupComboBox::GroupComboBox( QWidget * parent ): QComboBox( parent ),
+  popupAction( this )
 {
   setSizeAdjustPolicy( AdjustToContents );
+  setToolTip( tr( "Choose a Group (Alt+G)" ) );
+
+  popupAction.setShortcut( QKeySequence( "Alt+G" ) );
+  connect( &popupAction, SIGNAL( triggered() ),
+           this, SLOT( popupGroups() ) );
+
+  addAction( &popupAction );
 }
 
 void GroupComboBox::fill( Instances::Groups const & groups )
@@ -49,3 +57,7 @@ unsigned GroupComboBox::getCurrentGroup() const
   return itemData( currentIndex() ).toUInt();
 }
 
+void GroupComboBox::popupGroups()
+{
+  showPopup();
+}

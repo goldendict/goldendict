@@ -5,6 +5,7 @@
 #define __GROUPCOMBOBOX_HH_INCLUDED__
 
 #include <QComboBox>
+#include <QAction>
 #include "instances.hh"
 
 /// This is a combo box which is for choosing the dictionary group
@@ -25,6 +26,13 @@ public:
 
   /// Returns current group.
   unsigned getCurrentGroup() const;
+private slots:
+
+  void popupGroups();
+
+private:
+
+  QAction popupAction;
 };
 
 #endif
