@@ -63,6 +63,10 @@ bool isPunct( wchar ch );
 /// the word.
 wstring trimWhitespaceOrPunct( wstring const & );
 
+/// Removes any whitespace from the beginning and the end of
+/// the word.
+wstring trimWhitespace( wstring const & );
+
 /// Same as apply( wstring ), but without any heap operations, therefore
 /// preferable when there're many strings to process. Returns -1 if the
 /// operation succeded, or otherwise the minimum value of outSize required

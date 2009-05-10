@@ -163,8 +163,10 @@ private:
 
   /// Loads the article. Does not process the DSL language.
   void loadArticle( uint32_t address,
-                    string & headword,
-                    list< wstring > & displayedHeadwords,
+                    wstring const & requestedHeadwordFolded,
+                    wstring & tildeValue,
+                    wstring & displayedHeadword,
+                    unsigned & headwordIndex,
                     wstring & articleText );
 
   /// Converts DSL language to an Html.
@@ -336,8 +338,10 @@ bool isDslWs( wchar ch )
 }
 
 void DslDictionary::loadArticle( uint32_t address,
-                                 string & headword,
-                                 list< wstring > & displayedHeadwords,
+                                 wstring const & requestedHeadwordFolded,
+                                 wstring & tildeValue,
+                                 wstring & displayedHeadword,
+                                 unsigned & headwordIndex,
                                  wstring & articleText )
 {
   wstring articleData;
@@ -388,36 +392,82 @@ void DslDictionary::loadArticle( uint32_t address,
     }
   }
 
-  size_t pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ) );
+  size_t pos = 0;
+  bool hadFirstHeadword = false;
+  bool foundDisplayedHeadword = false;
 
-  if ( pos == wstring::npos )
-    pos = articleData.size();
-
-  wstring firstHeadword( articleData, 0, pos );
-
-  printf( "first headword = %ls\n", firstHeadword.c_str() );
-
-  // Make a headword
+  for( headwordIndex = 0; ; )
   {
-    wstring str( firstHeadword );
-    list< wstring > lst;
+    size_t begin = pos;
 
-    processUnsortedParts( str, true );
-    expandOptionalParts( str, lst );
+    pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), begin );
 
-    headword = Utf8::encode( lst.front() );
-  }
+    if ( pos == wstring::npos )
+      pos = articleData.size();
 
-  // Generate displayed headwords
+    if ( !foundDisplayedHeadword )
+    {
+      // Process the headword
 
-  displayedHeadwords.clear();
+      wstring rawHeadword = Folding::trimWhitespace( wstring( articleData, begin, pos - begin ) );
 
-  processUnsortedParts( firstHeadword, false );
-  expandOptionalParts( firstHeadword, displayedHeadwords );
+      if ( !hadFirstHeadword )
+      {
+        // We need our tilde expansion value
+        tildeValue = rawHeadword;
+        processUnsortedParts( tildeValue, false );
+        list< wstring > lst;
 
-  // Now skip alts until we reach the body itself
-  while ( pos != articleData.size() )
-  {
+        expandOptionalParts( tildeValue, lst );
+
+        if ( lst.size() ) // Should always be
+          tildeValue = lst.front();
+      }
+
+      wstring str = rawHeadword;
+      processUnsortedParts( str, true );
+
+      if ( hadFirstHeadword )
+        expandTildes( str, tildeValue );
+
+      str = Folding::applySimpleCaseOnly( str );
+
+      list< wstring > lst;
+      expandOptionalParts( str, lst );
+
+      // Does one of the results match the requested word? If so, we'd choose
+      // it as our headword.
+
+      for( list< wstring >::iterator i = lst.begin(); i != lst.end(); ++i )
+      {
+        unescapeDsl( *i );
+        if ( *i == requestedHeadwordFolded )
+        {
+          // Found it. Now we should make a displayed headword for it.
+          processUnsortedParts( rawHeadword, false );
+
+          if ( hadFirstHeadword )
+            expandTildes( rawHeadword, tildeValue );
+
+          displayedHeadword = rawHeadword;
+
+          foundDisplayedHeadword = true;
+          break;
+        }
+      }
+
+      if ( !foundDisplayedHeadword )
+      {
+        ++headwordIndex;
+        hadFirstHeadword = true;
+      }
+    }
+
+    if ( pos == articleData.size() )
+      break;
+
+    // Skip \n\r
+
     if ( articleData[ pos ] == '\r' )
       ++pos;
 
@@ -427,16 +477,18 @@ void DslDictionary::loadArticle( uint32_t address,
         ++pos;
     }
 
-    if ( pos != articleData.size() && !isDslWs( articleData[ pos ] ) )
+    if ( pos == articleData.size() || isDslWs( articleData[ pos ] ) )
     {
-      // Skip any alt headwords
-      pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), pos );
-
-      if ( pos == wstring::npos )
-        pos = articleData.size();
-    }
-    else
+      // Ok, it's either end of article, or the begining of the article's text
       break;
+    }
+  }
+
+  if ( !foundDisplayedHeadword )
+  {
+    // This is strange. Anyway, use tilde expansion value, it's better
+    // than nothing.
+    displayedHeadword = tildeValue;
   }
 
   if ( pos != articleData.size() )
@@ -782,11 +834,11 @@ void DslArticleRequest::run()
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
 
-  multimap< wstring, string > mainArticles, alternateArticles;
-
-  set< uint32_t > articlesIncluded; // Some synonims make it that the articles
-                                    // appear several times. We combat this
-                                    // by only allowing them to appear once.
+  // Some synonyms make it that the articles appear several times. We combat
+  // this by only allowing them to appear once. Dsl treats different headwords
+  // of the same article as different articles, so we also include headword
+  // index here.
+  set< pair< uint32_t, unsigned > > articlesIncluded;
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
 
@@ -799,80 +851,45 @@ void DslArticleRequest::run()
       return;
     }
 
-    if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
-      continue; // We already have this article in the body.
+    // Grab that article
 
-    // Now grab that article
-
-    string headword;
-
-    list< wstring > displayedHeadwords;
+    wstring tildeValue;
+    wstring displayedHeadword;
     wstring articleBody;
+    unsigned headwordIndex;
 
-    dict.loadArticle( chain[ x ].articleOffset, headword, displayedHeadwords,
-                      articleBody );
+    dict.loadArticle( chain[ x ].articleOffset, wordCaseFolded, tildeValue,
+                      displayedHeadword, headwordIndex, articleBody );
+
+    if ( !articlesIncluded.insert( std::make_pair( chain[ x ].articleOffset,
+                                                   headwordIndex ) ).second )
+      continue; // We already have this article in the body.
 
     string articleText;
 
     articleText += "<span class=\"dsl_article\">";
     articleText += "<div class=\"dsl_headwords\">";
 
-    for( list< wstring >::const_iterator i = displayedHeadwords.begin();
-         i != displayedHeadwords.end(); ++i )
-      articleText += dict.dslToHtml( *i );
+    articleText += dict.dslToHtml( displayedHeadword );
 
     articleText += "</div>";
 
-    if ( displayedHeadwords.size() )
-      expandTildes( articleBody, displayedHeadwords.front() );
+    expandTildes( articleBody, tildeValue );
 
     articleText += "<div class=\"dsl_definition\">";
     articleText += dict.dslToHtml( articleBody );
     articleText += "</div>";
     articleText += "</span>";
 
-    // Ok. Now, does it go to main articles, or to alternate ones? We list
-    // main ones first, and alternates after.
+    Mutex::Lock _( dataMutex );
 
-    // We do the case-folded comparison here.
+    data.resize( data.size() + articleText.size() );
 
-    wstring headwordStripped =
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+    memcpy( &data.front() + data.size() - articleText.size(),
+            articleText.data(), articleText.size() );
 
-    multimap< wstring, string > & mapToUse =
-      ( wordCaseFolded == headwordStripped ) ?
-        mainArticles : alternateArticles;
-
-    mapToUse.insert( pair< wstring, string >(
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-      articleText ) );
-
-    articlesIncluded.insert( chain[ x ].articleOffset );
+    hasAnyData = true;
   }
-
-  if ( mainArticles.empty() && alternateArticles.empty() )
-  {
-    finish();
-    return;
-  }
-
-  string result;
-
-  multimap< wstring, string >::const_iterator i;
-
-  for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
-    result += i->second;
-
-  for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
-    result += i->second;
-
-  Mutex::Lock _( dataMutex );
-
-  data.resize( result.size() );
-
-  memcpy( &data.front(), result.data(), result.size() );
-
-  hasAnyData = true;
 
   finish();
 }

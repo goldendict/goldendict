@@ -528,4 +528,23 @@ wstring trimWhitespaceOrPunct( wstring const & in )
   return wstring( wordBegin, wordSize );
 }
 
+wstring trimWhitespace( wstring const & in )
+{
+  wchar const * wordBegin = in.c_str();
+  wstring::size_type wordSize = in.size();
+
+  // Skip any leading whitespace
+  while( *wordBegin && Folding::isWhitespace( *wordBegin ) )
+  {
+    ++wordBegin;
+    --wordSize;
+  }
+
+  // Skip any trailing whitespace
+  while( wordSize && Folding::isWhitespace( wordBegin[ wordSize - 1 ] ) )
+    --wordSize;
+
+  return wstring( wordBegin, wordSize );
+}
+
 }
