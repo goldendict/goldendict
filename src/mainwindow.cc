@@ -493,11 +493,11 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   connect( view, SIGNAL( pageLoaded() ), this, SLOT( pageLoaded() ) );
 
-  connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const & ) ),
-           this, SLOT( openLinkInNewTab( QUrl const &, QUrl const & ) ) );
+  connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const & ) ),
+           this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const & ) ) );
 
-  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned ) ),
-           this, SLOT( showDefinitionInNewTab( QString const &, unsigned ) ) );
+  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned, QString const & ) ),
+           this, SLOT( showDefinitionInNewTab( QString const &, unsigned, QString const & ) ) );
 
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
@@ -885,15 +885,19 @@ void MainWindow::wordListSelectionChanged()
 }
 
 void MainWindow::openLinkInNewTab( QUrl const & url,
-                                   QUrl const & referrer )
+                                   QUrl const & referrer,
+                                   QString const & fromArticle )
 {
-  createNewTab( !cfg.preferences.newTabsOpenInBackground, "" )->openLink( url, referrer );
+  createNewTab( !cfg.preferences.newTabsOpenInBackground, "" )->
+      openLink( url, referrer, fromArticle );
 }
 
 void MainWindow::showDefinitionInNewTab( QString const & word,
-                                         unsigned group )
+                                         unsigned group,
+                                         QString const & fromArticle )
 {
-  createNewTab( !cfg.preferences.newTabsOpenInBackground, word )->showDefinition( word, group );
+  createNewTab( !cfg.preferences.newTabsOpenInBackground, word )->
+      showDefinition( word, group, fromArticle );
 }
 
 void MainWindow::showTranslationFor( QString const & inWord )

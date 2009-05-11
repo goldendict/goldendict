@@ -27,6 +27,21 @@ pre
 {
 }
 
+/* The article span. Here we have a padding/margin hack to make fragment links
+   behave better (have some space before the start of article) */
+.gdarticle
+{
+  display: block;
+  padding-top: 1px;
+  margin-top: -9px;
+  margin-bottom: 8px;
+}
+
+/* Appears between the articles */
+.gdarticleseparator
+{
+}
+
 /* Dictionary query error description string */
 .gderrordesc
 {

@@ -53,8 +53,11 @@ public:
 
   ~ArticleView();
 
-  /// Shows the definition of the given word with the given group
-  void showDefinition( QString const & word, unsigned group );
+  /// Shows the definition of the given word with the given group.
+  /// scrollTo can be optionally set to a "gdfrom-xxxx" identifier to position
+  /// the page to that article on load.
+  void showDefinition( QString const & word, unsigned group,
+                       QString const & scrollTo = QString() );
 
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
@@ -63,7 +66,8 @@ public:
   /// Opens the given link. Supposed to be used in response to
   /// openLinkInNewTab() signal. The link scheme is therefore supposed to be
   /// one of the internal ones.
-  void openLink( QUrl const & url, QUrl const & referrer );
+  void openLink( QUrl const & url, QUrl const & referrer,
+                 QString const & scrollTo = QString() );
 
   /// Goes back in history
   void back()
@@ -108,9 +112,11 @@ signals:
   void pageLoaded();
 
   /// Singals that the following link was requested to be opened in new tab
-  void openLinkInNewTab( QUrl const &, QUrl const & referrer );
+  void openLinkInNewTab( QUrl const &, QUrl const & referrer,
+                         QString const & fromArticle );
   /// Singals that the following definition was requested to be showed in new tab
-  void showDefinitionInNewTab( QString const & word, unsigned group );
+  void showDefinitionInNewTab( QString const & word, unsigned group,
+                               QString const & fromArticle );
 
 private slots:
 
@@ -127,6 +133,9 @@ private:
   /// Deduces group from the url. If there doesn't seem to be any group,
   /// returns 0.
   unsigned getGroup( QUrl const & );
+
+  /// Returns current article in the view, in the form of "gdform-xxx" id.
+  QString getCurrentArticle();
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();

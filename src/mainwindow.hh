@@ -176,8 +176,9 @@ private slots:
   ArticleView * createNewTab( bool switchToIt,
                               QString const & name );
 
-  void openLinkInNewTab( QUrl const &, QUrl const & );
-  void showDefinitionInNewTab( QString const & word, unsigned group );
+  void openLinkInNewTab( QUrl const &, QUrl const &, QString const & );
+  void showDefinitionInNewTab( QString const & word, unsigned group,
+                               QString const & fromArticle );
 
   void showTranslationFor( QString const & );
 

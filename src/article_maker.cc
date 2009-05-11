@@ -330,10 +330,18 @@ void ArticleRequest::bodyFinished()
         
         string head;
 
+        string gdFrom = "gdfrom-" + Html::escape( dictId );
+
         if ( closePrevSpan )
         {
-          head += "</span>";
+          head += "</span><span class=\"gdarticleseparator\"></span>";
           closePrevSpan = false;
+        }
+        else
+        {
+          // This is the first article
+          head += "<script language=\"JavaScript\">"
+                  "var gdCurrentArticle=\"" + gdFrom  + "\";</script>";
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
@@ -341,7 +349,10 @@ void ArticleRequest::bodyFinished()
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";</script>";
         
-        head += "<span id=\"gdfrom-" + Html::escape( dictId ) + "\">";
+        head += "<span class=\"gdarticle\" id=\"" + gdFrom +
+                "\" onClick=\"gdCurrentArticle='" + gdFrom + "';\""
+                " onContextMenu=\"gdCurrentArticle='" + gdFrom + "';\""
+                + ">";
 
         closePrevSpan = true;
         

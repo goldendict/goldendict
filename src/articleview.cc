@@ -80,7 +80,8 @@ ArticleView::~ArticleView()
   #endif
 }
 
-void ArticleView::showDefinition( QString const & word, unsigned group )
+void ArticleView::showDefinition( QString const & word, unsigned group,
+                                  QString const & scrollTo )
 {
   QUrl req;
 
@@ -88,6 +89,9 @@ void ArticleView::showDefinition( QString const & word, unsigned group )
   req.setHost( "localhost" );
   req.addQueryItem( "word", word );
   req.addQueryItem( "group", QString::number( group ) );
+
+  if ( scrollTo.size() )
+    req.setFragment( scrollTo );
 
   ui.definition->load( req );
   //QApplication::setOverrideCursor( Qt::WaitCursor );
@@ -145,6 +149,17 @@ unsigned ArticleView::getGroup( QUrl const & url )
   return 0;
 }
 
+QString ArticleView::getCurrentArticle()
+{
+  QVariant v = ui.definition->page()->currentFrame()->evaluateJavaScript(
+    QString( "gdCurrentArticle;" ) );
+
+  if ( v.type() == QVariant::String )
+    return v.toString();
+  else
+    return QString();
+}
+
 void ArticleView::cleanupTemp()
 {
   if ( desktopOpenedTempFile.size() )
@@ -157,10 +172,11 @@ void ArticleView::cleanupTemp()
 
 void ArticleView::linkClicked( QUrl const & url )
 {
-  openLink( url, ui.definition->url() );
+  openLink( url, ui.definition->url(), getCurrentArticle() );
 }
 
-void ArticleView::openLink( QUrl const & url, QUrl const & ref )
+void ArticleView::openLink( QUrl const & url, QUrl const & ref,
+                            QString const & scrollTo )
 {
   printf( "clicked %s\n", url.toString().toLocal8Bit().data() );
 
@@ -168,7 +184,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
     showDefinition( ( url.host().startsWith( "xn--" ) ?
                       QUrl::fromPunycode( url.host().toLatin1() ) :
                       url.host() ) + url.path(),
-                    getGroup( ref ) );
+                    getGroup( ref ), scrollTo );
   else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
   {
@@ -179,7 +195,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref )
     }
     else
     showDefinition( url.path().mid( 1 ),
-                    getGroup( ref ) );
+                    getGroup( ref ), scrollTo );
   }
   else
   if ( url.scheme() == "bres" || url.scheme() == "gdau" )
@@ -425,13 +441,14 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       linkClicked( r.linkUrl() );
     else
     if ( result == lookupSelection )
-      showDefinition( selectedText, getGroup( ui.definition->url() ) );
+      showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
     else
     if ( !popupView && result == followLinkNewTab )
-      emit openLinkInNewTab( r.linkUrl(), ui.definition->url() );
+      emit openLinkInNewTab( r.linkUrl(), ui.definition->url(), getCurrentArticle() );
     else
     if ( !popupView && result == lookupSelectionNewTab )
-      emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ) );
+      emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
+                                   getCurrentArticle() );
     else
     {
       // Match against table of contents
