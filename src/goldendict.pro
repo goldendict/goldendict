@@ -31,32 +31,25 @@ win32 {
     INCLUDEPATH += winlibs/include
     LIBS += -Lwinlibs/lib
 }
-
-
 unix { 
     LIBS += -lXtst
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr/local
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/apps/goldendict/\\\"
-
     target.path = $$PREFIX/bin/
     locale.path = $$PREFIX/share/apps/goldendict/locale/
     locale.files = locale/*.qm
     INSTALLS += target \
         locale
-
     icons.path = /usr/share/pixmaps
     icons.files = redist/icons/*.*
     INSTALLS += icons
-
     icons2.path = /usr/share/app-install/icons
     icons2.files = redist/icons/*.*
     INSTALLS += icons2
-
     desktops.path = /usr/share/applications
     desktops.files = redist/*.desktop
     INSTALLS += desktops
-
     desktops2.path = /usr/share/app-install/desktop
     desktops2.files = redist/*.desktop
     INSTALLS += desktops2
@@ -120,8 +113,8 @@ HEADERS += folding.hh \
     loaddictionaries.hh \
     transliteration.hh \
     romaji.hh \
-    russiantranslit.hh
-
+    russiantranslit.hh \
+    german.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -133,7 +126,6 @@ FORMS += groups.ui \
     preferences.ui \
     about.ui \
     editdictionaries.ui
-
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -186,86 +178,82 @@ SOURCES += folding.cc \
     loaddictionaries.cc \
     transliteration.cc \
     romaji.cc \
-    russiantranslit.cc
-
+    russiantranslit.cc \
+    german.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h
 }
 RESOURCES += resources.qrc \
     flags.qrc
-
 TRANSLATIONS += locale/ru.ts
 
 # This makes qmake generate translations
-
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-
 TS_OUT = $$TRANSLATIONS
-TS_OUT~=s/.ts/.qm
-
-TSQM.name = lrelease ${QMAKE_FILE_IN}
+TS_OUT ~= s/.ts/.qm
+TSQM.name = lrelease \
+    ${QMAKE_FILE_IN}
 TSQM.input = TRANSLATIONS
 TSQM.output = $$TS_OUT
-TSQM.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN}
+TSQM.commands = $$QMAKE_LRELEASE \
+    ${QMAKE_FILE_IN}
 TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += $$TS_OUT
 
 # LibZip
-
-SOURCES += \
-libzip/mkstemp.c \
-libzip/zip_add.c \
-libzip/zip_add_dir.c \
-libzip/zip_close.c \
-libzip/zip_delete.c \
-libzip/zip_dirent.c \
-libzip/zip_entry_free.c \
-libzip/zip_entry_new.c \
-libzip/zip_error.c \
-libzip/zip_error_clear.c \
-libzip/zip_error_get.c \
-libzip/zip_error_get_sys_type.c \
-libzip/zip_error_strerror.c \
-libzip/zip_error_to_str.c \
-libzip/zip_err_str.c \
-libzip/zip_fclose.c \
-libzip/zip_file_error_clear.c \
-libzip/zip_file_error_get.c \
-libzip/zip_file_get_offset.c \
-libzip/zip_filerange_crc.c \
-libzip/zip_file_strerror.c \
-libzip/zip_fopen.c \
-libzip/zip_fopen_index.c \
-libzip/zip_fread.c \
-libzip/zip_free.c \
-libzip/zip_get_archive_comment.c \
-libzip/zip_get_archive_flag.c \
-libzip/zip_get_file_comment.c \
-libzip/zip_get_name.c \
-libzip/zip_get_num_files.c \
-libzip/zip_memdup.c \
-libzip/zip_name_locate.c \
-libzip/zip_new.c \
-libzip/zip_open.c \
-libzip/zip_rename.c \
-libzip/zip_replace.c \
-libzip/zip_set_archive_comment.c \
-libzip/zip_set_archive_flag.c \
-libzip/zip_set_file_comment.c \
-libzip/zip_set_name.c \
-libzip/zip_source_buffer.c \
-libzip/zip_source_file.c \
-libzip/zip_source_filep.c \
-libzip/zip_source_free.c \
-libzip/zip_source_function.c \
-libzip/zip_source_zip.c \
-libzip/zip_stat.c \
-libzip/zip_stat_index.c \
-libzip/zip_stat_init.c \
-libzip/zip_strerror.c \
-libzip/zip_unchange_all.c \
-libzip/zip_unchange_archive.c \
-libzip/zip_unchange.c \
-libzip/zip_unchange_data.c
+SOURCES += libzip/mkstemp.c \
+    libzip/zip_add.c \
+    libzip/zip_add_dir.c \
+    libzip/zip_close.c \
+    libzip/zip_delete.c \
+    libzip/zip_dirent.c \
+    libzip/zip_entry_free.c \
+    libzip/zip_entry_new.c \
+    libzip/zip_error.c \
+    libzip/zip_error_clear.c \
+    libzip/zip_error_get.c \
+    libzip/zip_error_get_sys_type.c \
+    libzip/zip_error_strerror.c \
+    libzip/zip_error_to_str.c \
+    libzip/zip_err_str.c \
+    libzip/zip_fclose.c \
+    libzip/zip_file_error_clear.c \
+    libzip/zip_file_error_get.c \
+    libzip/zip_file_get_offset.c \
+    libzip/zip_filerange_crc.c \
+    libzip/zip_file_strerror.c \
+    libzip/zip_fopen.c \
+    libzip/zip_fopen_index.c \
+    libzip/zip_fread.c \
+    libzip/zip_free.c \
+    libzip/zip_get_archive_comment.c \
+    libzip/zip_get_archive_flag.c \
+    libzip/zip_get_file_comment.c \
+    libzip/zip_get_name.c \
+    libzip/zip_get_num_files.c \
+    libzip/zip_memdup.c \
+    libzip/zip_name_locate.c \
+    libzip/zip_new.c \
+    libzip/zip_open.c \
+    libzip/zip_rename.c \
+    libzip/zip_replace.c \
+    libzip/zip_set_archive_comment.c \
+    libzip/zip_set_archive_flag.c \
+    libzip/zip_set_file_comment.c \
+    libzip/zip_set_name.c \
+    libzip/zip_source_buffer.c \
+    libzip/zip_source_file.c \
+    libzip/zip_source_filep.c \
+    libzip/zip_source_free.c \
+    libzip/zip_source_function.c \
+    libzip/zip_source_zip.c \
+    libzip/zip_stat.c \
+    libzip/zip_stat_index.c \
+    libzip/zip_stat_init.c \
+    libzip/zip_strerror.c \
+    libzip/zip_unchange_all.c \
+    libzip/zip_unchange_archive.c \
+    libzip/zip_unchange.c \
+    libzip/zip_unchange_data.c

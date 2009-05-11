@@ -28,10 +28,10 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.paths->setModel( &pathsModel );
 
   fitPathsColumns();
-  
+
   ui.soundDirs->setTabKeyNavigation( true );
   ui.soundDirs->setModel( &soundDirsModel );
-  
+
   fitSoundDirsColumns();
 
   ui.hunspellPath->setText( hunspell.dictionariesPath );
@@ -41,6 +41,7 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   fitHunspellDictsColumns();
 
   ui.enableRussianTransliteration->setChecked( tr.enableRussianTransliteration );
+  ui.enableGermanTransliteration->setChecked( tr.enableGermanTransliteration );
   ui.enableRomaji->setChecked( tr.romaji.enable );
   ui.enableHepburn->setChecked( tr.romaji.enableHepburn );
   ui.enableNihonShiki->setChecked( tr.romaji.enableNihonShiki );
@@ -69,7 +70,7 @@ void Sources::fitHunspellDictsColumns()
 
 void Sources::on_addPath_clicked()
 {
-  QString dir = 
+  QString dir =
     QFileDialog::getExistingDirectory( this, tr( "Choose a directory" ) );
 
   if ( !dir.isEmpty() )
@@ -96,7 +97,7 @@ void Sources::on_removePath_clicked()
 
 void Sources::on_addSoundDir_clicked()
 {
-  QString dir = 
+  QString dir =
     QFileDialog::getExistingDirectory( this, tr( "Choose a directory" ) );
 
   if ( !dir.isEmpty() )
@@ -123,7 +124,7 @@ void Sources::on_removeSoundDir_clicked()
 
 void Sources::on_changeHunspellPath_clicked()
 {
-  QString dir = 
+  QString dir =
     QFileDialog::getExistingDirectory( this, tr( "Choose a directory" ) );
 
   if ( !dir.isEmpty() )
@@ -173,6 +174,7 @@ Config::Transliteration Sources::getTransliteration() const
   Config::Transliteration tr;
 
   tr.enableRussianTransliteration = ui.enableRussianTransliteration->isChecked();
+  tr.enableGermanTransliteration = ui.enableGermanTransliteration->isChecked();
   tr.romaji.enable = ui.enableRomaji->isChecked();
   tr.romaji.enableHepburn = ui.enableHepburn->isChecked();
   tr.romaji.enableNihonShiki = ui.enableNihonShiki->isChecked();
@@ -522,7 +524,7 @@ QVariant SoundDirsModel::data( QModelIndex const & index, int role ) const
 
   if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && !index.column() )
     return soundDirs[ index.row() ].path;
-  
+
   if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() == 1 )
     return soundDirs[ index.row() ].name;
 

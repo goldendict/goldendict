@@ -328,12 +328,15 @@ Class load() throw( exError )
   }
 
   QDomNode transliteration = root.namedItem( "transliteration" );
-  
+
   if ( !transliteration.isNull() )
   {
     applyBoolOption( c.transliteration.enableRussianTransliteration,
                      transliteration.namedItem( "enableRussianTransliteration" ) );
-    
+
+    applyBoolOption( c.transliteration.enableGermanTransliteration,
+                     transliteration.namedItem( "enableGermanTransliteration" ) );
+
     QDomNode romaji = transliteration.namedItem( "romaji" );
 
     if ( !romaji.isNull() )
@@ -581,6 +584,8 @@ void save( Class const & c ) throw( exError )
   }
 
   {
+    // Russian translit
+
     QDomElement transliteration = dd.createElement( "transliteration" );
     root.appendChild( transliteration );
 
@@ -588,34 +593,45 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.transliteration.enableRussianTransliteration ? "1":"0" ) );
     transliteration.appendChild( opt );
 
+    // German translit
+
+    QDomElement german = dd.createElement( "german" );
+    root.appendChild( german );
+
+    opt = dd.createElement( "enableGermanTransliteration" );
+    opt.appendChild( dd.createTextNode( c.transliteration.enableGermanTransliteration ? "1":"0" ) );
+    german.appendChild( opt );
+
+    // Romaji
+
     QDomElement romaji = dd.createElement( "romaji" );
     transliteration.appendChild( romaji );
 
     opt = dd.createElement( "enable" );
     opt.appendChild( dd.createTextNode( c.transliteration.romaji.enable ? "1":"0" ) );
     romaji.appendChild( opt );
-    
+
     opt = dd.createElement( "enableHepburn" );
     opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableHepburn ? "1":"0" ) );
     romaji.appendChild( opt );
-    
+
     opt = dd.createElement( "enableNihonShiki" );
     opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableNihonShiki ? "1":"0" ) );
     romaji.appendChild( opt );
-    
+
     opt = dd.createElement( "enableKunreiShiki" );
-    opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableKunreiShiki ? "1":"0" ) );    
+    opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableKunreiShiki ? "1":"0" ) );
     romaji.appendChild( opt );
-    
+
     opt = dd.createElement( "enableHiragana" );
     opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableHiragana ? "1":"0" ) );
     romaji.appendChild( opt );
-    
+
     opt = dd.createElement( "enableKatakana" );
     opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableKatakana ? "1":"0" ) );
     romaji.appendChild( opt );
   }
-  
+
   {
     QDomElement mws = dd.createElement( "mediawikis" );
     root.appendChild( mws );

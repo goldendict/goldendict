@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="iconSize">
       <size>
@@ -27,7 +27,7 @@
      </property>
      <widget class="QWidget" name="filesTab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
       </attribute>
       <attribute name="title">
@@ -90,7 +90,7 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/fileopen.png</normaloff>:/icons/fileopen.png</iconset>
       </attribute>
       <attribute name="title">
@@ -146,7 +146,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/icon32_hunspell.png</normaloff>:/icons/icon32_hunspell.png</iconset>
       </attribute>
       <attribute name="title">
@@ -214,7 +214,7 @@ of the appropriate groups to use them.</string>
      </widget>
      <widget class="QWidget" name="mediaWikisTab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/icon32_wiki.png</normaloff>:/icons/icon32_wiki.png</iconset>
       </attribute>
       <attribute name="title">
@@ -295,6 +295,39 @@ of the appropriate groups to use them.</string>
           <string>Russian transliteration</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="enableGermanTransliteration">
+         <property name="text">
+          <string>German transliteration</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QGroupBox" name="enableRomaji">
@@ -400,8 +433,30 @@ Standardized as ISO 3602</string>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <tabstops>
+  <tabstop>enableRussianTransliteration</tabstop>
+  <tabstop>enableGermanTransliteration</tabstop>
+  <tabstop>enableRomaji</tabstop>
+  <tabstop>enableHepburn</tabstop>
+  <tabstop>enableNihonShiki</tabstop>
+  <tabstop>enableKunreiShiki</tabstop>
+  <tabstop>enableHiragana</tabstop>
+  <tabstop>enableKatakana</tabstop>
+  <tabstop>hunspellPath</tabstop>
+  <tabstop>changeHunspellPath</tabstop>
+  <tabstop>hunspellDictionaries</tabstop>
+  <tabstop>mediaWikis</tabstop>
+  <tabstop>addMediaWiki</tabstop>
+  <tabstop>removeMediaWiki</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>addPath</tabstop>
+  <tabstop>removePath</tabstop>
+  <tabstop>rescan</tabstop>
+  <tabstop>soundDirs</tabstop>
+  <tabstop>addSoundDir</tabstop>
+  <tabstop>removeSoundDir</tabstop>
+  <tabstop>paths</tabstop>
+ </tabstops>
+ <resources/>
  <connections/>
 </ui>

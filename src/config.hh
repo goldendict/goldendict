@@ -223,22 +223,27 @@ struct Romaji
 
   bool operator != ( Romaji const & other ) const
   { return ! operator == ( other ); }
-  
+
 };
 
 struct Transliteration
 {
   bool enableRussianTransliteration;
+  bool enableGermanTransliteration;
   Romaji romaji;
 
   bool operator == ( Transliteration const & other ) const
   { return enableRussianTransliteration == other.enableRussianTransliteration &&
-           romaji == other.romaji; }
+           romaji == other.romaji &&
+           enableGermanTransliteration == other.enableGermanTransliteration;
+  }
 
   bool operator != ( Transliteration const & other ) const
   { return ! operator == ( other ); }
 
-  Transliteration(): enableRussianTransliteration( false )
+  Transliteration():
+      enableRussianTransliteration( false ),
+      enableGermanTransliteration( false )
   {}
 };
 

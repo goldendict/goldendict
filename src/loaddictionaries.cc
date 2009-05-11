@@ -13,6 +13,7 @@
 #include "dictdfiles.hh"
 #include "romaji.hh"
 #include "russiantranslit.hh"
+#include "german.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -67,6 +68,10 @@ void LoadDictionaries::run()
     // Make Russian transliteration
     if ( transliteration.enableRussianTransliteration )
       dictionaries.push_back( RussianTranslit::makeDictionary() );
+
+    // Make German transliteration
+    if ( transliteration.enableGermanTransliteration )
+      dictionaries.push_back( GermanTranslit::makeDictionary() );
   }
   catch( std::exception & e )
   {
