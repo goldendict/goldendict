@@ -86,6 +86,14 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   if ( icon.size() )
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
+  result += "<script language=\"JavaScript\">"
+            "function gdMakeArticleActive( newId ) {"
+            "if ( gdCurrentArticle != newId ) {"
+            "document.getElementById( gdCurrentArticle ).className = 'gdarticle';"
+            "document.getElementById( newId ).className = 'gdarticle gdactivearticle';"
+            "gdCurrentArticle = newId; } }"
+            "</script>";
+
   result += "</head><body>";
 
   return result;
@@ -335,7 +343,6 @@ void ArticleRequest::bodyFinished()
         if ( closePrevSpan )
         {
           head += "</span><span class=\"gdarticleseparator\"></span>";
-          closePrevSpan = false;
         }
         else
         {
@@ -348,10 +355,12 @@ void ArticleRequest::bodyFinished()
         head += "<script language=\"JavaScript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";</script>";
-        
-        head += "<span class=\"gdarticle\" id=\"" + gdFrom +
-                "\" onClick=\"gdCurrentArticle='" + gdFrom + "';\""
-                " onContextMenu=\"gdCurrentArticle='" + gdFrom + "';\""
+
+        head += string( "<span class=\"gdarticle" ) +
+                ( closePrevSpan ? "" : " gdactivearticle" ) +
+                "\" id=\"" + gdFrom +
+                "\" onClick=\"gdMakeArticleActive( '" + gdFrom + "' );\" " +
+                " onContextMenu=\"gdMakeArticleActive( '" + gdFrom + "' );\""
                 + ">";
 
         closePrevSpan = true;

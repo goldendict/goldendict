@@ -134,8 +134,15 @@ private:
   /// returns 0.
   unsigned getGroup( QUrl const & );
 
-  /// Returns current article in the view, in the form of "gdform-xxx" id.
+  /// Returns all articles current present in view, as a list of dictionary
+  /// string ids.
+  QStringList getArticlesList();
+
+  /// Returns current article in the view, in the form of "gdfrom-xxx" id.
   QString getCurrentArticle();
+
+  /// Sets the current article by executing a javascript code.
+  void setCurrentArticle( QString const & );
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();

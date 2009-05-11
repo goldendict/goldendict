@@ -8,6 +8,7 @@
 #include <QWebHitTestResult>
 #include <QMenu>
 #include <QDesktopServices>
+#include <QWebHistory>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -93,7 +94,15 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   if ( scrollTo.size() )
     req.setFragment( scrollTo );
 
+  // Save current article, if any
+
+  QString currentArticle = getCurrentArticle();
+
+  if ( currentArticle.size() )
+    ui.definition->history()->currentItem().setUserData( currentArticle );
+
   ui.definition->load( req );
+
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
 }
@@ -107,6 +116,24 @@ void ArticleView::showAnticipation()
 
 void ArticleView::loadFinished( bool )
 {
+  QUrl url = ui.definition->url();
+
+  QVariant userData = ui.definition->history()->currentItem().userData();
+
+  if ( userData.type() == QVariant::String && userData.toString().startsWith( "gdfrom-" ) )
+  {
+    printf( "has user data\n" );
+    // There's an active article saved, so set it to be active.
+    setCurrentArticle( userData.toString() );
+  }
+  else
+  if ( url.hasFragment() && url.fragment().startsWith( "gdfrom-" ) )
+  {
+    // There is no active article saved in history, but we have it in fragment.
+    // setCurrentArticle will save it.
+    setCurrentArticle( url.fragment() );
+  }
+
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
   emit pageLoaded();
@@ -149,6 +176,13 @@ unsigned ArticleView::getGroup( QUrl const & url )
   return 0;
 }
 
+QStringList ArticleView::getArticlesList()
+{
+  return ui.definition->page()->currentFrame()->
+           evaluateJavaScript( "gdArticleContents;" ).toString().
+             trimmed().split( ' ', QString::SkipEmptyParts );
+}
+
 QString ArticleView::getCurrentArticle()
 {
   QVariant v = ui.definition->page()->currentFrame()->evaluateJavaScript(
@@ -158,6 +192,19 @@ QString ArticleView::getCurrentArticle()
     return v.toString();
   else
     return QString();
+}
+
+void ArticleView::setCurrentArticle( QString const & id )
+{
+  if ( !id.startsWith( "gdfrom-" ) )
+    return; // Incorrect id
+
+  if ( getArticlesList().contains( id.mid( 7 ) ) )
+  {
+    ui.definition->history()->currentItem().setUserData( id );
+    ui.definition->page()->currentFrame()->evaluateJavaScript(
+      QString( "gdMakeArticleActive( '%1' );" ).arg( id ) );
+  }
 }
 
 void ArticleView::cleanupTemp()
@@ -393,9 +440,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   map< QAction *, QString > tableOfContents;
     
   // Add table of contents
-  QStringList ids = ui.definition->page()->currentFrame()->
-                      evaluateJavaScript( "gdArticleContents;" ).toString().
-    trimmed().split( ' ', QString::SkipEmptyParts );
+  QStringList ids = getArticlesList();
 
   if ( !menu.isEmpty() && ids.size() )
     menu.addSeparator();
@@ -456,9 +501,11 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
       if ( id.size() )
       {
+        QString targetArticle = "gdfrom-" + id;
         QUrl url( ui.definition->url() );
-        url.setFragment( "gdfrom-" + id );
+        url.setFragment( targetArticle );
         openLink( url, ui.definition->url() );
+        setCurrentArticle( targetArticle );
       }
     }
   }

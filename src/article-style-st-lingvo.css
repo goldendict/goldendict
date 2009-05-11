@@ -28,3 +28,53 @@ a:hover
   display: none;
 }
 
+.gddictname
+{
+	 font-size: 13px;
+  font-weight: normal;
+  
+  float: right;
+  border: 1px solid white;
+  margin-top: 7px;
+  color: #7f7f7f;
+  background: white;
+}
+
+.gdarticleseparator + script + .gdarticle .gddictname
+{
+/*  border-top: 1px solid #ccc;*/
+  margin-top: 11px;
+}
+
+.gdactivearticle .gddictname
+{
+	 font-size: 13px;
+  font-weight: normal;
+  
+  float: right;
+  border: 1px solid #b3d7f7;
+  margin-top: 7px;
+  color: #0066ff;
+  background: #deecf8;
+}
+
+.gdarticleseparator + script + .gdactivearticle .gddictname
+{
+/*  border-top: 1px solid #b3d7f7;*/
+  margin-top: 11px;
+}
+
+.gdarticleseparator
+{
+  margin-top: 10px;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: -1px;
+  display: block;
+  clear: both;
+}
+
+.gddictname + h3, .gddictname + .dsl_article > .dsl_headwords
+{
+  margin-top: 10px;
+}
+
