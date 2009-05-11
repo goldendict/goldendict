@@ -315,9 +315,9 @@ void ArticleRequest::bodyFinished()
 
         closePrevSpan = true;
         
-        head += string( "<div class=\"gddictname\">" ) +
-          Html::escape(
-            tr( "From %1" ).arg( QString::fromUtf8( activeDicts[ activeDicts.size() - bodyRequests.size() ]->getName().c_str() ) ).toUtf8().data() )
+        head += string( "<div class=\"gddictname\"><span class=\"gdfromprefix\">" ) +
+          Html::escape( tr( "From " ).toUtf8().data() ) + "</span>" +
+          Html::escape( activeDicts[ activeDicts.size() - bodyRequests.size() ]->getName().c_str() )
            + "</div>";
 
         if ( errorString.size() )

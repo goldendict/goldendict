@@ -22,6 +22,11 @@ pre
   /*background: #ffffdd;*/
 }
 
+/* The 'From ' string which preceeds dictionary name in the heading */
+.gdfromprefix
+{
+}
+
 /* Dictionary query error description string */
 .gderrordesc
 {
