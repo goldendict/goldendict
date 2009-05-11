@@ -47,6 +47,16 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
       break;
     }
 
+  ui.displayStyle->addItem( QIcon( ":/icons/programicon.png" ), tr( "Default" ), QString() );
+  ui.displayStyle->addItem( QIcon( ":/icons/icon32_dsl.png" ), tr( "Lingvo" ), QString( "lingvo" ) );
+
+  for( int x = 0; x < ui.displayStyle->count(); ++x )
+    if ( ui.displayStyle->itemData( x ).toString() == p.displayStyle )
+    {
+      ui.displayStyle->setCurrentIndex( x );
+      break;
+    }
+
   ui.newTabsOpenAfterCurrentOne->setChecked( p.newTabsOpenAfterCurrentOne );
   ui.newTabsOpenInBackground->setChecked( p.newTabsOpenInBackground );
   ui.enableTrayIcon->setChecked( p.enableTrayIcon );
@@ -129,6 +139,10 @@ Config::Preferences Preferences::getPreferences()
   p.interfaceLanguage =
     ui.interfaceLanguage->itemData(
       ui.interfaceLanguage->currentIndex() ).toString();
+
+  p.displayStyle =
+    ui.displayStyle->itemData(
+      ui.displayStyle->currentIndex() ).toString();
 
   p.newTabsOpenAfterCurrentOne = ui.newTabsOpenAfterCurrentOne->isChecked();
   p.newTabsOpenInBackground = ui.newTabsOpenInBackground->isChecked();

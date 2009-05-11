@@ -33,6 +33,9 @@ public:
   MainWindow( Config::Class & cfg );
   ~MainWindow();
 
+  /// Applies the qt's stylesheet, given the style's name.
+  static void applyQtStyleSheet( QString const & displayStyle );
+
 private:
 
   QSystemTrayIcon * trayIcon;

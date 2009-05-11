@@ -77,6 +77,10 @@ public:
   void focus()
   { ui.definition->setFocus( Qt::ShortcutFocusReason ); }
 
+  /// Reloads the view
+  void reload()
+  { ui.definition->reload(); }
+
   /// Returns true if there's an audio reference on the page, false otherwise.
   bool hasSound();
 

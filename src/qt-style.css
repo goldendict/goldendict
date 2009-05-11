@@ -1,4 +1,5 @@
-MainWindow #searchPane #translateLine, MainWindow #searchPane #wordList
+MainWindow #searchPane #translateLine, MainWindow #searchPane #wordList,
+ArticleView #definition
 {
   background: #fefdeb;
 }

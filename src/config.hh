@@ -129,6 +129,7 @@ struct HotKey
 struct Preferences
 {
   QString interfaceLanguage; // Empty value corresponds to system default
+  QString displayStyle; // Empty value corresponds to the default one
   bool newTabsOpenAfterCurrentOne;
   bool newTabsOpenInBackground;
   bool enableTrayIcon;

@@ -33,7 +33,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
-  articleMaker( dictionaries, groupInstances ),
+  articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
   articleNetMgr( this, dictionaries, articleMaker ),
   dictNetMgr( this ),
   wordFinder( this ),
@@ -275,6 +275,28 @@ MainWindow::~MainWindow()
   Config::save( cfg );
 }
 
+void MainWindow::applyQtStyleSheet( QString const & displayStyle )
+{
+  QFile builtInCssFile( ":/qt-style.css" );
+  builtInCssFile.open( QFile::ReadOnly );
+  QByteArray css = builtInCssFile.readAll();
+
+  if ( displayStyle.size() )
+  {
+    // Load an additional stylesheet
+    QFile builtInCssFile( QString( ":/qt-style-st-%1.css" ).arg( displayStyle ) );
+    builtInCssFile.open( QFile::ReadOnly );
+    css += builtInCssFile.readAll();
+  }
+
+  // Try loading a style sheet if there's one
+  QFile cssFile( Config::getUserQtCssFileName() );
+
+  if ( cssFile.open( QFile::ReadOnly ) )
+    css += cssFile.readAll();
+
+  qApp->setStyleSheet( css );
+}
 
 void MainWindow::updateTrayIcon()
 {
@@ -619,7 +641,24 @@ void MainWindow::editPreferences()
 
   if ( preferences.exec() == QDialog::Accepted )
   {
-    cfg.preferences = preferences.getPreferences();
+    Config::Preferences p = preferences.getPreferences();
+
+    // See if we need to reapply stylesheets
+    if ( cfg.preferences.displayStyle != p.displayStyle )
+    {
+      applyQtStyleSheet( p.displayStyle );
+      articleMaker.setDisplayStyle( p.displayStyle );
+
+      for( int x = 0; x < ui.tabWidget->count(); ++x )
+      {
+        ArticleView & view =
+          dynamic_cast< ArticleView & >( *( ui.tabWidget->widget( x ) ) );
+
+        view.reload();
+      }
+    }
+
+    cfg.preferences = p;
 
     enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
 

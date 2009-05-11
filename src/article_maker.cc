@@ -16,14 +16,21 @@ using std::set;
 using std::list;
 
 ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictionaries_,
-                            vector< Instances::Group > const & groups_ ):
+                            vector< Instances::Group > const & groups_,
+                            QString const & displayStyle_ ):
   dictionaries( dictionaries_ ),
-  groups( groups_ )
+  groups( groups_ ),
+  displayStyle( displayStyle_ )
 {
 }
 
+void ArticleMaker::setDisplayStyle( QString const & st )
+{
+  displayStyle = st;
+}
+
 std::string ArticleMaker::makeHtmlHeader( QString const & word,
-                                          QString const & icon )
+                                          QString const & icon ) const
 {
   string result =
     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
@@ -37,6 +44,14 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     builtInCssFile.open( QFile::ReadOnly );
     QByteArray css = builtInCssFile.readAll();
     
+    if ( displayStyle.size() )
+    {
+      // Load an additional stylesheet
+      QFile builtInCssFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ) );
+      builtInCssFile.open( QFile::ReadOnly );
+      css += builtInCssFile.readAll();
+    }
+
     QFile cssFile( Config::getUserCssFileName() );
   
     if ( cssFile.open( QFile::ReadOnly ) )
@@ -76,7 +91,8 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   return result;
 }
 
-std::string ArticleMaker::makeNotFoundBody( QString const & word, QString const & group )
+std::string ArticleMaker::makeNotFoundBody( QString const & word,
+                                            QString const & group )
 {
 
   return string( "<div class=\"gdnotfound\"><p>" ) +

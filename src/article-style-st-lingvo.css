@@ -1,0 +1,30 @@
+body
+{
+  background: white;
+}
+
+a
+{
+  text-decoration: none;
+  color: darkblue;
+}
+
+a:hover
+{
+  text-decoration: underline;
+}
+
+/* Dictionary's name heading */
+.gddictname
+{
+  border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;
+  margin-top: 1.2em; margin-bottom: 0.1em; font-weight: bold; font-size: 14px;
+  background: #87CEEB;
+}
+
+/* The 'From ' string which preceeds dictionary name in the heading */
+.gdfromprefix
+{
+  display: none;
+}
+

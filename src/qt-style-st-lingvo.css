@@ -1,0 +1,6 @@
+MainWindow #searchPane #translateLine, MainWindow #searchPane #wordList,
+ArticleView #definition
+{
+  background: white;
+}
+

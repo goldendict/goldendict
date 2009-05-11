@@ -34,5 +34,7 @@
         <file>icons/configure.png</file>
         <file>icons/book.png</file>
         <file>icons/bookcase.png</file>
+        <file>qt-style-st-lingvo.css</file>
+        <file>article-style-st-lingvo.css</file>
     </qresource>
 </RCC>

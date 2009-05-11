@@ -19,6 +19,8 @@ class ArticleMaker: public QObject
   std::vector< sptr< Dictionary::Class > > const & dictionaries;
   std::vector< Instances::Group > const & groups;
 
+  QString displayStyle;
+
 public:
 
   /// On construction, a reference to all dictionaries and a reference all
@@ -26,7 +28,12 @@ public:
   /// references, and as such, any changes to them would reflect on the results
   /// of the inquiries, altthough those changes are perfectly legal.
   ArticleMaker( std::vector< sptr< Dictionary::Class > > const & dictionaries,
-                std::vector< Instances::Group > const & groups );
+                std::vector< Instances::Group > const & groups,
+                QString const & displayStyle );
+
+  /// Sets the display style to use for any new requests. This affects the
+  /// choice of the stylesheet file.
+  void setDisplayStyle( QString const & );
 
   /// Looks up the given word within the given group, and creates a full html
   /// page text containing its definition.
@@ -43,7 +50,7 @@ public:
 private:
 
   /// Makes everything up to and including the opening body tag.
-  static std::string makeHtmlHeader( QString const & word, QString const & icon );
+  std::string makeHtmlHeader( QString const & word, QString const & icon ) const;
 
   /// Makes the html body for makeNotFoundTextFor()
   static std::string makeNotFoundBody( QString const & word, QString const & group );
