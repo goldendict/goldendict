@@ -42,8 +42,8 @@ a:hover
 
 .gdarticleseparator + script + .gdarticle .gddictname
 {
-/*  border-top: 1px solid #ccc;*/
-  margin-top: 11px;
+  border-top: 1px solid #ccc;
+/*  margin-top: 11px;*/
 }
 
 .gdactivearticle .gddictname
@@ -60,8 +60,8 @@ a:hover
 
 .gdarticleseparator + script + .gdactivearticle .gddictname
 {
-/*  border-top: 1px solid #b3d7f7;*/
-  margin-top: 11px;
+  border-top: 1px solid #b3d7f7;
+/*  margin-top: 11px;*/
 }
 
 .gdarticleseparator
