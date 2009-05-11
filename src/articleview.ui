@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ArticleView</class>
- <widget class="QWidget" name="ArticleView" >
-  <property name="geometry" >
+ <widget class="QWidget" name="ArticleView">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,92 +10,28 @@
     <height>634</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2" >
-   <property name="margin" >
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="frame" >
-     <property name="frameShape" >
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="frameShadow" >
+     <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout" >
-      <property name="margin" >
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="margin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QWebView" name="definition" >
-        <property name="palette" >
-         <palette>
-          <active>
-           <colorrole role="Base" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>254</red>
-              <green>253</green>
-              <blue>235</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Window" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>255</red>
-              <green>255</green>
-              <blue>255</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </active>
-          <inactive>
-           <colorrole role="Base" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>254</red>
-              <green>253</green>
-              <blue>235</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Window" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>255</red>
-              <green>255</green>
-              <blue>255</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </inactive>
-          <disabled>
-           <colorrole role="Base" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>255</red>
-              <green>255</green>
-              <blue>255</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Window" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>255</red>
-              <green>255</green>
-              <blue>255</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </disabled>
-         </palette>
-        </property>
-        <property name="url" >
+       <widget class="QWebView" name="definition">
+        <property name="url">
          <url>
           <string>about:blank</string>
          </url>
@@ -105,40 +42,40 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="searchFrame" >
-     <property name="frameShape" >
+    <widget class="QFrame" name="searchFrame">
+     <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="frameShadow" >
+     <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout" >
-      <property name="margin" >
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="margin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QToolButton" name="searchCloseButton" >
-        <property name="text" >
+       <widget class="QToolButton" name="searchCloseButton">
+        <property name="text">
          <string>x</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label" >
-        <property name="text" >
+       <widget class="QLabel" name="label">
+        <property name="text">
          <string>Find:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="searchText" />
+       <widget class="QLineEdit" name="searchText"/>
       </item>
       <item>
-       <spacer name="horizontalSpacer" >
-        <property name="orientation" >
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0" >
+        <property name="sizeHint" stdset="0">
          <size>
           <width>40</width>
           <height>20</height>

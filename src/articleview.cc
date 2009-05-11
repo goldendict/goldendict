@@ -53,6 +53,17 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
            this, SLOT( linkClicked( QUrl const & ) ) );
+
+  // Load the default blank page instantly, so there would be no flicker.
+
+  QString contentType;
+  QUrl blankPage( "gdlookup://localhost?blank=1" );
+
+  sptr< Dictionary::DataRequest > r = articleNetMgr.getResource( blankPage,
+                                                                 contentType );
+
+  ui.definition->setHtml( QByteArray( &( r->getFullData().front() ),
+                                      r->getFullData().size() ), blankPage );
 }
 
 ArticleView::~ArticleView()

@@ -47,6 +47,9 @@ public:
   /// known that there's no translation.
   sptr< Dictionary::DataRequest > makeNotFoundTextFor( QString const & word, QString const & group ) const;
 
+  /// Creates an 'untitled' page. The result is guaranteed to be instant.
+  sptr< Dictionary::DataRequest > makeEmptyPage() const;
+
 private:
 
   /// Makes everything up to and including the opening body tag.

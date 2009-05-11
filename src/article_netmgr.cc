@@ -53,12 +53,15 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
   if ( url.scheme() == "gdlookup" )
   {
+    contentType = "text/html";
+
+    if ( url.queryItemValue( "blank" ) == "1" )
+      return articleMaker.makeEmptyPage();
+
     bool groupIsValid = false;
 
     QString word = url.queryItemValue( "word" );
     unsigned group = url.queryItemValue( "group" ).toUInt( &groupIsValid );
-
-    contentType = "text/html";
 
     if ( groupIsValid && word.size() ) // Require group and word to be passed
       return articleMaker.makeDefinitionFor( word, group );

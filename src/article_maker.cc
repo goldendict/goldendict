@@ -203,6 +203,20 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
   return r;
 }
 
+sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
+{
+  string result = makeHtmlHeader( tr( "(untitled)" ), QString() ) +
+    "</body></html>";
+
+  sptr< Dictionary::DataRequestInstant > r =
+      new Dictionary::DataRequestInstant( true );
+
+  r->getData().resize( result.size() );
+  memcpy( &( r->getData().front() ), result.data(), result.size() );
+
+  return r;
+}
+
 //////// ArticleRequest
 
 ArticleRequest::ArticleRequest(
