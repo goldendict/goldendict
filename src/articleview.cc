@@ -9,6 +9,9 @@
 #include <QMenu>
 #include <QDesktopServices>
 #include <QWebHistory>
+#include <QClipboard>
+#include "folding.hh"
+#include "wstring_qt.hh"
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -27,7 +30,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   popupView( popupView_ ),
-  cfg( cfg_ )
+  cfg( cfg_ ),
+  pasteAction( this )
 {
   ui.setupUi( this );
 
@@ -54,6 +58,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
            this, SLOT( linkClicked( QUrl const & ) ) );
+
+  pasteAction.setShortcut( QKeySequence::Paste  );
+  ui.definition->addAction( &pasteAction );
+  connect( &pasteAction, SIGNAL( triggered() ), this, SLOT( pasteTriggered() ) );
 
   // Load the default blank page instantly, so there would be no flicker.
 
@@ -622,6 +630,18 @@ void ArticleView::resourceDownloadFinished()
     // No requests suceeded.
     QMessageBox::critical( this, tr( "GoldenDict" ), tr( "The referenced resource failed to download." ) );
   }
+}
+
+void ArticleView::pasteTriggered()
+{
+  QString text =
+      gd::toQString(
+          Folding::trimWhitespaceOrPunct(
+              gd::toWString(
+                  QApplication::clipboard()->text() ) ) );
+
+  if ( text.size() )
+    showDefinition( text, getGroup( ui.definition->url() ), getCurrentArticle() );
 }
 
 void ArticleView::showEvent( QShowEvent * ev )

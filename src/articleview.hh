@@ -25,6 +25,8 @@ class ArticleView: public QFrame
 
   Ui::ArticleView ui;
 
+  QAction pasteAction;
+
 #ifdef Q_OS_WIN32
   // Used in Windows only
   vector< char > winWavData;
@@ -127,6 +129,9 @@ private slots:
   void contextMenuRequested( QPoint const & );
 
   void resourceDownloadFinished();
+
+  /// We handle pasting by attempting to define the word in clipboard.
+  void pasteTriggered();
 
 private:
 
