@@ -68,7 +68,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 9 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 11 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -1290,25 +1290,48 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               if ( curString.empty() || isDslWs( curString[ 0 ] ) )
                 continue;
 
-              string key = Utf8::encode( curString );
+              list< wstring > keys;
 
-              if ( !abrvScanner.readNextLine( curString, curOffset ) )
+              bool eof = false;
+
+              // Insert the key and read more, or get to the definition
+              for( ; ; )
               {
-                fprintf( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
-                break;
+                processUnsortedParts( curString, true );
+
+                if ( keys.size() )
+                  expandTildes( curString, keys.front() );
+
+                expandOptionalParts( curString, keys );
+
+                if ( !abrvScanner.readNextLine( curString, curOffset ) || curString.empty() )
+                {
+                  fprintf( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
+                  eof = true;
+                  break;
+                }
+
+                if ( isDslWs( curString[ 0 ] ) )
+                  break;
               }
 
-              if ( curString.empty() || !isDslWs( curString[ 0 ] ) )
-              {
-                fprintf( stderr, "Warning: malformed file %s\n", abrvFileName.c_str() );
+              if ( eof )
                 break;
-              }
 
               curString.erase( 0, curString.find_first_not_of( GD_NATIVE_TO_WS( L" \t" ) ) );
 
-              // If the string has any dsl markup, we strip it
+              if ( keys.size() )
+                expandTildes( curString, keys.front() );
 
-              abrv[ key ] = Utf8::encode( ArticleDom( curString ).root.renderAsText() );
+              // If the string has any dsl markup, we strip it
+              string value = Utf8::encode( ArticleDom( curString ).root.renderAsText() );
+
+              for( list< wstring >::iterator i = keys.begin(); i != keys.end();
+                   ++i )
+              {
+                unescapeDsl( *i );
+                abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
+              }
             }
 
             idxHeader.hasAbrv = 1;
