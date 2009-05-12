@@ -622,12 +622,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
     // Check that we have bytes to read
     if ( readBufferLeft < 4 ) // To convert one char, we need at most 4 bytes
     {
-      if ( gzeof( f ) )
-      {
-        if ( !readBufferLeft )
-          return false;
-      }
-      else
+      if ( !gzeof( f ) )
       {
         // To avoid having to deal with ring logic, we move the remaining bytes
         // to the beginning
