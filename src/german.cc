@@ -23,10 +23,15 @@ GermanTable::GermanTable()
   ins( "oe", "ö" );
   ins( "ss", "ß" );
 
-  ins( "ü", "ue" );
-  ins( "ä", "ae" );
-  ins( "ö", "oe" );
-  ins( "ß", "ss" );
+  ins( "UE", "Ü" );
+  ins( "AE", "Ä" );
+  ins( "OS", "Ö" );
+  ins( "SS", "ß" );
+
+//  ins( "ü", "ue" );
+//  ins( "ä", "ae" );
+//  ins( "ö", "oe" );
+//  ins( "ß", "ss" );
 
 }
 
