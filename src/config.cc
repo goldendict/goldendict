@@ -595,12 +595,9 @@ void save( Class const & c ) throw( exError )
 
     // German translit
 
-    QDomElement german = dd.createElement( "german" );
-    root.appendChild( german );
-
     opt = dd.createElement( "enableGermanTransliteration" );
     opt.appendChild( dd.createTextNode( c.transliteration.enableGermanTransliteration ? "1":"0" ) );
-    german.appendChild( opt );
+    transliteration.appendChild( opt );
 
     // Romaji
 
