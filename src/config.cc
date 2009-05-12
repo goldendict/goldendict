@@ -830,6 +830,11 @@ QString getIndexDir() throw( exError )
   return result.path() + QDir::separator();
 }
 
+QString getPidFileName() throw( exError )
+{
+  return getHomeDir().filePath( "pid" );
+}
+
 QString getUserCssFileName() throw( exError )
 {
   return getHomeDir().filePath( "article-style.css" );

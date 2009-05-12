@@ -48,23 +48,24 @@ int main( int argc, char ** argv )
           current_pid);
 
   // check pid file
-  QString pid_name = QDir::homePath() + "/.pid";
-  QFile pid_file(pid_name);
-  if (pid_file.exists()) // pid file exists, check it
+  QFile pid_file( Config::getPidFileName() );
+
+  if ( pid_file.exists() ) // pid file exists, check it
   {
-    pid_file.open(QIODevice::ReadWrite);
-    QDataStream ds(&pid_file);
+    pid_file.open( QIODevice::ReadWrite );
+    QDataStream ds( &pid_file );
     quint64 tmp; ds >> tmp;
-    if (tmp == pid) // it is active - exiting
+    pid_file.close();
+
+    if ( tmp == pid ) // it is active - exiting
     {
       // to do: switch to pid ?
-      pid_file.close();
       return 1;
     }
   }
 
-  pid_file.open(QIODevice::WriteOnly);
-  QDataStream ds(&pid_file);
+  pid_file.open( QIODevice::WriteOnly );
+  QDataStream ds( &pid_file );
   ds << current_pid;
   pid_file.close();
 

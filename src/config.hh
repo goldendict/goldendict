@@ -287,6 +287,10 @@ void save( Class const & ) throw( exError );
 /// Returns the index directory, where the indices are to be stored.
 QString getIndexDir() throw( exError );
 
+/// Returns the filename of a .pid file which should store current pid of
+/// the process.
+QString getPidFileName() throw( exError );
+
 /// Returns the user .css file name.
 QString getUserCssFileName() throw( exError );
 
