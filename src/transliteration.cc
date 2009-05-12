@@ -89,13 +89,13 @@ vector< wstring > TransliterationDictionary::getAlternateWritings( wstring const
 
     if ( !x )
     {
-      // No matches -- skip one char
+      // No matches -- add this char as it is
+      result.push_back( *ptr++ );
       --left;
-      ++ptr;
     }
   }
   
-  if ( result.size() )
+  if ( result != str )
     results.push_back( result );
 
   return results;
