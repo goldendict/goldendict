@@ -907,9 +907,14 @@ void MainWindow::showDefinitionInNewTab( QString const & word,
 
 void MainWindow::typingEvent( QString const & t )
 {
-  ui.translateLine->setText( t );
-  ui.translateLine->setFocus();
-  ui.translateLine->setCursorPosition( t.size() );
+  if ( t == "\n" || t == "\r" )
+    focusTranslateLine();
+  else
+  {
+    ui.translateLine->setText( t );
+    ui.translateLine->setFocus();
+    ui.translateLine->setCursorPosition( t.size() );
+  }
 }
 
 void MainWindow::showTranslationFor( QString const & inWord )

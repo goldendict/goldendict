@@ -235,6 +235,10 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
+      if ( keyEvent->key() == Qt::Key_Space ||
+           keyEvent->key() == Qt::Key_Backspace )
+        return false; // Those key have other uses than to start typing
+
       QString text = keyEvent->text();
 
       if ( text.size() )
