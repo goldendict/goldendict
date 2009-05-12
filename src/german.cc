@@ -25,7 +25,7 @@ GermanTable::GermanTable()
 
   ins( "UE", "Ü" );
   ins( "AE", "Ä" );
-  ins( "OS", "Ö" );
+  ins( "OE", "Ö" );
   ins( "SS", "ß" );
 
 //  ins( "ü", "ue" );
