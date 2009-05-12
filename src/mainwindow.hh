@@ -179,6 +179,7 @@ private slots:
   void openLinkInNewTab( QUrl const &, QUrl const &, QString const & );
   void showDefinitionInNewTab( QString const & word, unsigned group,
                                QString const & fromArticle );
+  void typingEvent( QString const & );
 
   void showTranslationFor( QString const & );
 

@@ -10,6 +10,7 @@
 #include <QDesktopServices>
 #include <QWebHistory>
 #include <QClipboard>
+#include <QKeyEvent>
 #include "folding.hh"
 #include "wstring_qt.hh"
 
@@ -62,6 +63,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   pasteAction.setShortcut( QKeySequence::Paste  );
   ui.definition->addAction( &pasteAction );
   connect( &pasteAction, SIGNAL( triggered() ), this, SLOT( pasteTriggered() ) );
+
+  ui.definition->installEventFilter( this );
 
   // Load the default blank page instantly, so there would be no flicker.
 
@@ -222,6 +225,29 @@ void ArticleView::cleanupTemp()
     QFile( desktopOpenedTempFile ).remove();
     desktopOpenedTempFile.clear();
   }  
+}
+
+bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
+{
+  if ( obj == ui.definition )
+  {
+    if ( ev->type() == QEvent::KeyPress )
+    {
+      QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
+
+      QString text = keyEvent->text();
+
+      if ( text.size() )
+      {
+        emit typingEvent( text );
+        return true;
+      }
+    }
+  }
+  else
+    return QFrame::eventFilter( obj, ev );
+
+  return false;
 }
 
 

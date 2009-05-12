@@ -499,6 +499,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned, QString const & ) ),
            this, SLOT( showDefinitionInNewTab( QString const &, unsigned, QString const & ) ) );
 
+  connect( view, SIGNAL( typingEvent( QString const & ) ),
+           this, SLOT( typingEvent( QString const & ) ) );
+
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
 
@@ -729,6 +732,8 @@ void MainWindow::translateInputFinished()
       addNewTab();
 
     showTranslationFor( word );
+
+    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).focus();
   }
 }
 
@@ -898,6 +903,13 @@ void MainWindow::showDefinitionInNewTab( QString const & word,
 {
   createNewTab( !cfg.preferences.newTabsOpenInBackground, word )->
       showDefinition( word, group, fromArticle );
+}
+
+void MainWindow::typingEvent( QString const & t )
+{
+  ui.translateLine->setText( t );
+  ui.translateLine->setFocus();
+  ui.translateLine->setCursorPosition( t.size() );
 }
 
 void MainWindow::showTranslationFor( QString const & inWord )

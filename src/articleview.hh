@@ -120,6 +120,10 @@ signals:
   void showDefinitionInNewTab( QString const & word, unsigned group,
                                QString const & fromArticle );
 
+  /// Emitted when user types a text key. This should typically be used to
+  /// switch focus to word input.
+  void typingEvent( QString const & text );
+
 private slots:
 
   void loadFinished( bool ok );
@@ -151,6 +155,8 @@ private:
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();
+
+  bool eventFilter( QObject * obj, QEvent * ev );
 
 protected:
 
