@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -27,7 +27,7 @@
      </property>
      <widget class="QWidget" name="filesTab">
       <attribute name="icon">
-       <iconset>
+       <iconset resource="resources.qrc">
         <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
       </attribute>
       <attribute name="title">
@@ -90,7 +90,7 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="icon">
-       <iconset>
+       <iconset resource="resources.qrc">
         <normaloff>:/icons/fileopen.png</normaloff>:/icons/fileopen.png</iconset>
       </attribute>
       <attribute name="title">
@@ -146,7 +146,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
-       <iconset>
+       <iconset resource="resources.qrc">
         <normaloff>:/icons/icon32_hunspell.png</normaloff>:/icons/icon32_hunspell.png</iconset>
       </attribute>
       <attribute name="title">
@@ -214,7 +214,7 @@ of the appropriate groups to use them.</string>
      </widget>
      <widget class="QWidget" name="mediaWikisTab">
       <attribute name="icon">
-       <iconset>
+       <iconset resource="resources.qrc">
         <normaloff>:/icons/icon32_wiki.png</normaloff>:/icons/icon32_wiki.png</iconset>
       </attribute>
       <attribute name="title">
@@ -457,6 +457,8 @@ Standardized as ISO 3602</string>
   <tabstop>removeSoundDir</tabstop>
   <tabstop>paths</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -22,6 +22,12 @@ GermanTable::GermanTable()
   ins( "ae", "ä" );
   ins( "oe", "ö" );
   ins( "ss", "ß" );
+
+  ins( "ü", "ue" );
+  ins( "ä", "ae" );
+  ins( "ö", "oe" );
+  ins( "ß", "ss" );
+
 }
 
 sptr< Dictionary::Class > makeDictionary() throw( std::exception )

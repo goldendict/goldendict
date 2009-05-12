@@ -39,15 +39,34 @@ int main( int argc, char ** argv )
 
   // Prevent execution of the 2nd copy
 
-  // check if 2nd copy was started
-    QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
-    unsigned int pid = ProcessWrapper::findProcess(
-            app_fname.toAscii().data(),
-            QCoreApplication::applicationPid());
-    if (pid) {
-        // to do: switch to pid ?
-        return 1;
+  // get pid
+  quint64 current_pid = QCoreApplication::applicationPid();
+
+  QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
+  quint64 pid = ProcessWrapper::findProcess(
+          app_fname.toAscii().data(),
+          current_pid);
+
+  // check pid file
+  QString pid_name = QDir::homePath() + "/.pid";
+  QFile pid_file(pid_name);
+  if (pid_file.exists()) // pid file exists, check it
+  {
+    pid_file.open(QIODevice::ReadWrite);
+    QDataStream ds(&pid_file);
+    quint64 tmp; ds >> tmp;
+    if (tmp == pid) // it is active - exiting
+    {
+      // to do: switch to pid ?
+      pid_file.close();
+      return 1;
     }
+  }
+
+  pid_file.open(QIODevice::WriteOnly);
+  QDataStream ds(&pid_file);
+  ds << current_pid;
+  pid_file.close();
 
 
   // Load translations
@@ -72,5 +91,10 @@ int main( int argc, char ** argv )
 
   MainWindow m( cfg );
 
-  return app.exec();
+  int r = app.exec();
+
+  // remove pid file
+  pid_file.remove();
+
+  return r;
 }
