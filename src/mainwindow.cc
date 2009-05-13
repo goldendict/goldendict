@@ -257,7 +257,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // Only show window initially if it wasn't configured differently
   if ( !cfg.preferences.enableTrayIcon || !cfg.preferences.startToTray )
+  {
     show();
+    focusTranslateLine();
+  }
 
   connect( &newReleaseCheckTimer, SIGNAL( timeout() ),
            this, SLOT( checkForNewRelease() ) );
@@ -733,12 +736,18 @@ void MainWindow::translateInputFinished()
 
     showTranslationFor( word );
 
+    if ( ui.searchPane->isFloating() )
+      activateWindow();
+
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).focus();
   }
 }
 
 void MainWindow::focusTranslateLine()
 {
+  if ( ui.searchPane->isFloating() )
+    ui.searchPane->activateWindow();
+
   ui.translateLine->setFocus();
   ui.translateLine->selectAll();
 }
@@ -862,6 +871,9 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       if ( keyEvent->matches( QKeySequence::InsertParagraphSeparator ) &&
            ui.wordList->selectedItems().size() )
       {
+        if ( ui.searchPane->isFloating() )
+          activateWindow();
+
         dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).focus();
 
         return true;
@@ -911,6 +923,9 @@ void MainWindow::typingEvent( QString const & t )
     focusTranslateLine();
   else
   {
+    if ( ui.searchPane->isFloating() )
+      ui.searchPane->activateWindow();
+
     ui.translateLine->setText( t );
     ui.translateLine->setFocus();
     ui.translateLine->setCursorPosition( t.size() );
