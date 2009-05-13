@@ -506,7 +506,10 @@ void DslDictionary::loadArticle( uint32_t address,
 
 string DslDictionary::dslToHtml( wstring const & str )
 {
-  ArticleDom dom( str );
+ // Normalize the string
+  wstring normalizedStr = gd::toWString( gd::toQString( str ).normalized( QString::NormalizationForm_C ) );
+
+  ArticleDom dom( normalizedStr );
 
   string html = processNodeChildren( dom.root );
 
