@@ -95,7 +95,7 @@ private slots:
   void altModeExpired();
   void altModePoll();
 
-  void pageLoaded();
+  void pageLoaded( ArticleView * );
 };
 
 #endif

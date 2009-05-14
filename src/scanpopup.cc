@@ -77,8 +77,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.pinButton, SIGNAL( clicked( bool ) ),
            this, SLOT( pinButtonClicked( bool ) ) );
 
-  connect( definition, SIGNAL( pageLoaded() ),
-           this, SLOT( pageLoaded() ) );
+  connect( definition, SIGNAL( pageLoaded( ArticleView * ) ),
+           this, SLOT( pageLoaded( ArticleView * ) ) );
 
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
@@ -492,7 +492,7 @@ void ScanPopup::altModePoll()
   }
 }
 
-void ScanPopup::pageLoaded()
+void ScanPopup::pageLoaded( ArticleView * )
 {
   ui.pronounceButton->setVisible( definition->hasSound() );
 
