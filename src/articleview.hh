@@ -9,6 +9,7 @@
 #include <list>
 #include "article_netmgr.hh"
 #include "instances.hh"
+#include "groupcombobox.hh"
 #include "ui_articleview.h"
 
 /// A widget with the web view tailored to view and handle articles -- it
@@ -42,6 +43,8 @@ class ArticleView: public QFrame
   /// For resources opened via desktop services
   QString desktopOpenedTempFile;
 
+  GroupComboBox const * groupComboBox;
+
 public:
   /// The popupView flag influences contents of the context menus to be
   /// appropriate to the context of the view.
@@ -51,7 +54,13 @@ public:
                std::vector< sptr< Dictionary::Class > > const & allDictionaries,
                Instances::Groups const &,
                bool popupView,
-               Config::Class const & cfg );
+               Config::Class const & cfg,
+               GroupComboBox const * groupComboBox = 0 );
+
+  /// Sets the currently active group combo box. When looking up selections,
+  /// this allows presenting a choice of looking up in the currently chosen
+  /// group. Setting this to 0 disables this. It is 0 by default.
+  void setGroupComboBox( GroupComboBox const * );
 
   ~ArticleView();
 
@@ -111,7 +120,7 @@ signals:
 
   void titleChanged( ArticleView *, QString const & title );
 
-  void pageLoaded();
+  void pageLoaded( ArticleView * );
 
   /// Singals that the following link was requested to be opened in new tab
   void openLinkInNewTab( QUrl const &, QUrl const & referrer,

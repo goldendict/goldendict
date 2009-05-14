@@ -486,7 +486,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )
 {
   ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
-                                        groupInstances, false, cfg );
+                                        groupInstances, false, cfg, &groupList );
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
@@ -494,7 +494,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( iconChanged( ArticleView *, QIcon const & ) ),
            this, SLOT( iconChanged( ArticleView *, QIcon const & ) ) );
 
-  connect( view, SIGNAL( pageLoaded() ), this, SLOT( pageLoaded() ) );
+  connect( view, SIGNAL( pageLoaded( ArticleView * ) ),
+           this, SLOT( pageLoaded( ArticleView * ) ) );
 
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const & ) ) );
@@ -591,12 +592,12 @@ void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
   ui.tabWidget->setTabIcon( ui.tabWidget->indexOf( view ), icon );
 }
 
-void MainWindow::pageLoaded()
+void MainWindow::pageLoaded( ArticleView * view )
 {
   updatePronounceAvailability();
 
   if ( cfg.preferences.pronounceOnLoadMain )
-    pronounce();
+    pronounce( view );
 }
 
 void MainWindow::tabSwitched( int )
@@ -604,9 +605,12 @@ void MainWindow::tabSwitched( int )
   updatePronounceAvailability();
 }
 
-void MainWindow::pronounce()
+void MainWindow::pronounce( ArticleView * view )
 {
-  dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).playSound();
+  if ( view )
+    view->playSound();
+  else
+    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).playSound();
 }
 
 void MainWindow::updatePronounceAvailability()

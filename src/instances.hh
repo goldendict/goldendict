@@ -32,10 +32,15 @@ struct Group
 
   /// Makes the configuration group from the current contents.
   Config::Group makeConfigGroup();
-
 };
 
-typedef vector< Group > Groups;
+struct Groups: public vector< Group >
+{
+  /// Tries finding the given group by its id. Returns the group found, or
+  /// 0 if there's no such group.
+  Group * findGroup( unsigned id );
+  Group const * findGroup( unsigned id ) const;
+};
 
 /// For any dictionaries present in the group, updates their names to match
 /// the dictionaries they refer to in their current form, if they exist.

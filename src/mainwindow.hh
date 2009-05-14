@@ -58,7 +58,7 @@ private:
   QToolButton addTab;
   Config::Class & cfg;
   vector< sptr< Dictionary::Class > > dictionaries;
-  vector< Instances::Group > groupInstances;
+  Instances::Groups groupInstances;
   ArticleMaker articleMaker;
   ArticleNetworkAccessManager articleNetMgr;
   QNetworkAccessManager dictNetMgr; // We give dictionaries a separate manager,
@@ -144,12 +144,13 @@ private slots:
   /// ArticleView's icon has changed
   void iconChanged( ArticleView *, QIcon const & );
 
-  void pageLoaded();
+  void pageLoaded( ArticleView * );
   void tabSwitched( int );
 
   /// Pronounces the currently displayed word by playing its first audio
   /// reference, if it has any.
-  void pronounce();
+  /// If view is 0, the operation is done for the currently open tab.
+  void pronounce( ArticleView * view = 0 );
 
   void zoomin();
   void zoomout();

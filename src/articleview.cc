@@ -25,14 +25,16 @@ using std::list;
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
-                          Config::Class const & cfg_ ):
+                          Config::Class const & cfg_,
+                          GroupComboBox const * groupComboBox_ ):
   QFrame( parent ),
   articleNetMgr( nm ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   popupView( popupView_ ),
   cfg( cfg_ ),
-  pasteAction( this )
+  pasteAction( this ),
+  groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
 
@@ -76,6 +78,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->setHtml( QByteArray( &( r->getFullData().front() ),
                                       r->getFullData().size() ), blankPage );
+}
+
+void ArticleView::setGroupComboBox( GroupComboBox const * g )
+{
+  groupComboBox = g;
 }
 
 ArticleView::~ArticleView()
@@ -147,7 +154,7 @@ void ArticleView::loadFinished( bool )
 
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
-  emit pageLoaded();
+  emit pageLoaded( this );
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -441,7 +448,9 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * followLink = 0;
   QAction * followLinkNewTab = 0;
   QAction * lookupSelection = 0;
+  QAction * lookupSelectionGr = 0;
   QAction * lookupSelectionNewTab = 0;
+  QAction * lookupSelectionNewTabGr = 0;
 
   if ( !r.linkUrl().isEmpty() )
   {
@@ -464,13 +473,42 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   
   if ( selectedText.size() )
   {
-    lookupSelection = new QAction( tr( "&Look up \"%1\"" ).arg( ui.definition->selectedText() ), &menu );
+    lookupSelection = new QAction( tr( "&Look up \"%1\"" ).
+                                   arg( ui.definition->selectedText() ),
+                                   &menu );
     menu.addAction( lookupSelection );
     
     if ( !popupView )
     {
-      lookupSelectionNewTab = new QAction( tr( "Look up \"%1\" in &New Tab" ).arg( ui.definition->selectedText() ), &menu );
+      lookupSelectionNewTab = new QAction( QIcon( ":/icons/addtab.png" ),
+                                           tr( "Look up \"%1\" in &New Tab" ).
+                                           arg( ui.definition->selectedText() ),
+                                           &menu );
       menu.addAction( lookupSelectionNewTab );
+    }
+
+    Instances::Group const * altGroup =
+      ( groupComboBox && groupComboBox->getCurrentGroup() !=  getGroup( ui.definition->url() )  ) ?
+        groups.findGroup( groupComboBox->getCurrentGroup() ) : 0;
+
+    if ( altGroup )
+    {
+      QIcon icon = altGroup->icon.size() ? QIcon( ":/flags/" + altGroup->icon ) :
+                   QIcon();
+
+      lookupSelectionGr = new QAction( icon, tr( "&Look up \"%1\" in %2" ).
+                                       arg( ui.definition->selectedText() ).
+                                       arg( altGroup->name ), &menu );
+      menu.addAction( lookupSelectionGr );
+
+      if ( !popupView )
+      {
+        lookupSelectionNewTabGr = new QAction( QIcon( ":/icons/addtab.png" ),
+                                               tr( "Look up \"%1\" in %2 in &New Tab" ).
+                                               arg( ui.definition->selectedText() ).
+                                               arg( altGroup->name ), &menu );
+        menu.addAction( lookupSelectionNewTabGr );
+      }
     }
 
     menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
@@ -527,12 +565,19 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
     else
+    if ( result == lookupSelectionGr && groupComboBox )
+      showDefinition( selectedText, groupComboBox->getCurrentGroup(), QString() );
+    else
     if ( !popupView && result == followLinkNewTab )
       emit openLinkInNewTab( r.linkUrl(), ui.definition->url(), getCurrentArticle() );
     else
     if ( !popupView && result == lookupSelectionNewTab )
       emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
                                    getCurrentArticle() );
+    else
+    if ( !popupView && result == lookupSelectionNewTabGr && groupComboBox )
+      emit showDefinitionInNewTab( selectedText, groupComboBox->getCurrentGroup(),
+                                   QString() );
     else
     {
       // Match against table of contents

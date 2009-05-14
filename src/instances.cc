@@ -61,6 +61,24 @@ Config::Group Group::makeConfigGroup()
   return result;
 }
 
+Group * Groups::findGroup( unsigned id )
+{
+  for( unsigned x = 0; x < size(); ++x )
+    if ( operator [] ( x ).id == id )
+      return &( operator [] ( x ) );
+
+  return 0;
+}
+
+Group const * Groups::findGroup( unsigned id ) const
+{
+  for( unsigned x = 0; x < size(); ++x )
+    if ( operator [] ( x ).id == id )
+      return &( operator [] ( x ) );
+
+  return 0;
+}
+
 void updateNames( Config::Group & group,
                   vector< sptr< Dictionary::Class > > const & allDictionaries )
 {
