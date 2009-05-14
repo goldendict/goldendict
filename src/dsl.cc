@@ -691,7 +691,24 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     map< string, string >::const_iterator i = abrv.find( val );
 
     if ( i != abrv.end() )
-      result += " title=\"" + Html::escape( i->second ) + "\"";
+    {
+      // Replace all spaces with non-breakable ones, since that's how
+      // Lingvo shows tooltips
+      string title;
+      title.reserve( i->second.size() );
+
+      for( char const * c = i->second.c_str(); *c; ++c )
+        if ( *c == ' ' || *c == '\t' )
+        {
+          // u00A0 in utf8
+          title.push_back( 0xC2 );
+          title.push_back( 0xA0 );
+        }
+        else
+          title.push_back( *c );
+
+      result += " title=\"" + Html::escape( title ) + "\"";
+    }
 
     result += ">" + processNodeChildren( node ) + "</span>";
   }
