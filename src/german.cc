@@ -28,6 +28,11 @@ GermanTable::GermanTable()
   ins( "OE", "Ö" );
   ins( "SS", "ß" );
 
+  ins( "Ue", "Ü" );
+  ins( "Ae", "Ä" );
+  ins( "Oe", "Ö" );
+  ins( "Ss", "ß" );
+
 //  ins( "ü", "ue" );
 //  ins( "ä", "ae" );
 //  ins( "ö", "oe" );
