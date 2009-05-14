@@ -460,6 +460,8 @@ Class load() throw( exError )
     c.timeForNewReleaseCheck = QDateTime::fromString( timeForNewReleaseCheck.toElement().text(),
                                                       Qt::ISODate );
 
+  c.skippedRelease = root.namedItem( "skippedRelease" ).toElement().text();
+
   return c;
 }
 
@@ -812,6 +814,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "timeForNewReleaseCheck" );
     opt.appendChild( dd.createTextNode( c.timeForNewReleaseCheck.toString( Qt::ISODate ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "skippedRelease" );
+    opt.appendChild( dd.createTextNode( c.skippedRelease ) );
     root.appendChild( opt );
   }
 

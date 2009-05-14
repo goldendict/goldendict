@@ -266,6 +266,7 @@ struct Class
 
   QDateTime timeForNewReleaseCheck; // Only effective if
                                     // preferences.checkForNewReleases is set
+  QString skippedRelease; // Empty by default
 
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 )
   {}

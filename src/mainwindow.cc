@@ -1203,7 +1203,7 @@ void MainWindow::latestReleaseReplyReady()
             latestVersion.toStdWString().c_str() );
   }
 
-  if ( success && latestVersion > PROGRAM_VERSION )
+  if ( success && latestVersion > PROGRAM_VERSION && latestVersion != cfg.skippedRelease )
   {
     QMessageBox msg( QMessageBox::Information,
                      tr( "New Release Available" ),
@@ -1213,12 +1213,19 @@ void MainWindow::latestReleaseReplyReady()
                      this );
 
     QPushButton * dload = msg.addButton( tr( "Download" ), QMessageBox::AcceptRole );
+    QPushButton * skip = msg.addButton( tr( "Skip This Release" ), QMessageBox::DestructiveRole );
     msg.addButton( QMessageBox::Cancel );
 
     msg.exec();
 
     if ( msg.clickedButton() == dload )
       QDesktopServices::openUrl( QUrl( downloadUrl ) );
+    else
+    if ( msg.clickedButton() == skip )
+    {
+      cfg.skippedRelease = latestVersion;
+      Config::save( cfg );
+    }
   }
 }
 
