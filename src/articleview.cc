@@ -221,7 +221,7 @@ void ArticleView::setCurrentArticle( QString const & id )
   {
     ui.definition->history()->currentItem().setUserData( id );
     ui.definition->page()->currentFrame()->evaluateJavaScript(
-      QString( "gdMakeArticleActive( '%1' );" ).arg( id ) );
+      QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
   }
 }
 

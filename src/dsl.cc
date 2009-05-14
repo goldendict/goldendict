@@ -644,7 +644,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
       string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
-      result += addAudioLink( ref );
+      result += addAudioLink( ref, getId() );
 
       result += "<span class=\"dsl_s_wav\"><a href=" + ref
          + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>";

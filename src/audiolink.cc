@@ -3,9 +3,13 @@
 
 #include "audiolink.hh"
 
-std::string addAudioLink( std::string const & url )
+std::string addAudioLink( std::string const & url,
+                          std::string const & dictionaryId )
 {
   return std::string( "<script language=\"JavaScript\">var gdAudioLink; "
                       "if ( !gdAudioLink ) gdAudioLink=" ) + url +
-         ";" + "</script>";
+         "; if ( typeof gdActivateAudioLink_" + dictionaryId + " != 'function' ) {"
+         "eval( 'function gdActivateAudioLink_" + dictionaryId + "() {"
+         "gdAudioLink=" + url + "; }' ); }"
+         "</script>";
 }

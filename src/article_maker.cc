@@ -88,10 +88,10 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
 
   result += "<script language=\"JavaScript\">"
             "function gdMakeArticleActive( newId ) {"
-            "if ( gdCurrentArticle != newId ) {"
+            "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "document.getElementById( gdCurrentArticle ).className = 'gdarticle';"
-            "document.getElementById( newId ).className = 'gdarticle gdactivearticle';"
-            "gdCurrentArticle = newId; } }"
+            "document.getElementById( 'gdfrom-' + newId ).className = 'gdarticle gdactivearticle';"
+            "gdCurrentArticle = 'gdfrom-' + newId; eval( 'gdActivateAudioLink_' + newId + '();' ); } }"
             "</script>";
 
   result += "</head><body>";
@@ -359,8 +359,8 @@ void ArticleRequest::bodyFinished()
         head += string( "<span class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
                 "\" id=\"" + gdFrom +
-                "\" onClick=\"gdMakeArticleActive( '" + gdFrom + "' );\" " +
-                " onContextMenu=\"gdMakeArticleActive( '" + gdFrom + "' );\""
+                "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +
+                " onContextMenu=\"gdMakeArticleActive( '" + jsVal + "' );\""
                 + ">";
 
         closePrevSpan = true;
