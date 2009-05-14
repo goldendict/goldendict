@@ -695,17 +695,23 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       // Replace all spaces with non-breakable ones, since that's how
       // Lingvo shows tooltips
       string title;
-      title.reserve( i->second.size() );
 
-      for( char const * c = i->second.c_str(); *c; ++c )
-        if ( *c == ' ' || *c == '\t' )
-        {
-          // u00A0 in utf8
-          title.push_back( 0xC2 );
-          title.push_back( 0xA0 );
-        }
-        else
-          title.push_back( *c );
+      if ( Utf8::decode( i->second ).size() < 70 )
+      {
+        title.reserve( i->second.size() );
+
+        for( char const * c = i->second.c_str(); *c; ++c )
+          if ( *c == ' ' || *c == '\t' )
+          {
+            // u00A0 in utf8
+            title.push_back( 0xC2 );
+            title.push_back( 0xA0 );
+          }
+          else
+            title.push_back( *c );
+      }
+      else
+        title = i->second;
 
       result += " title=\"" + Html::escape( title ) + "\"";
     }
