@@ -38,11 +38,13 @@ class TransliterationDictionary: public Dictionary::Class
 {
   string name;
   Table const & table;
+  bool caseSensitive;
   
 public:
 
   TransliterationDictionary( string const & id, string const & name,
-                             Table const & table );
+                             Table const & table,
+                             bool caseSensitive = true );
 
   virtual string getName() throw();
 

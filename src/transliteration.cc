@@ -22,9 +22,11 @@ void Table::ins( char const * from, char const * to )
   
 TransliterationDictionary::TransliterationDictionary( string const & id,
                                                       string const & name_,
-                                                      Table const & table_ ):
+                                                      Table const & table_,
+                                                      bool caseSensitive_ ):
   Dictionary::Class( id, vector< string >() ),
-  name( name_ ), table( table_ )
+  name( name_ ), table( table_ ),
+  caseSensitive( caseSensitive_ )
 {}
 
 string TransliterationDictionary::getName() throw()
@@ -53,17 +55,23 @@ vector< wstring > TransliterationDictionary::getAlternateWritings( wstring const
   throw()
 {
   vector< wstring > results;
-  
-  wstring folded = Folding::apply( str );
 
-  if ( folded.empty() )
-    return results;
+  wstring result, folded;
+  wstring const * target;
 
-  wstring result;
+  if ( caseSensitive )
+  {
+    // Don't do any transform -- the transliteration is case-sensitive
+    target = &str;
+  }
+  else
+  {
+    folded = Folding::applySimpleCaseOnly( str );
+    target = &folded;
+  }
 
-  wchar const * ptr = folded.c_str();
-
-  size_t left = folded.size();
+  wchar const * ptr = target->c_str();
+  size_t left = target->size();
 
   Table::const_iterator i;
   
@@ -95,7 +103,7 @@ vector< wstring > TransliterationDictionary::getAlternateWritings( wstring const
     }
   }
   
-  if ( result != str )
+  if ( result != *target )
     results.push_back( result );
 
   return results;
