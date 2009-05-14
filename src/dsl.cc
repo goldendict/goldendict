@@ -692,12 +692,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
     if ( i != abrv.end() )
     {
-      // Replace all spaces with non-breakable ones, since that's how
-      // Lingvo shows tooltips
       string title;
 
       if ( Utf8::decode( i->second ).size() < 70 )
       {
+        // Replace all spaces with non-breakable ones, since that's how
+        // Lingvo shows tooltips
         title.reserve( i->second.size() );
 
         for( char const * c = i->second.c_str(); *c; ++c )
