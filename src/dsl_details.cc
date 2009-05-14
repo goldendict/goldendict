@@ -228,6 +228,45 @@ ArticleDom::ArticleDom( wstring const & str ):
         }
       } // if ( ch == '<' )
 
+      if ( ch == L'{' && !escaped )
+      {
+        // Special case: {{comment}}
+
+        nextChar();
+
+        if ( ch != L'{' || escaped )
+        {
+          // Ok, it's not it.
+          --stringPos;
+
+          if ( escaped )
+          {
+            --stringPos;
+            escaped = false;
+          }
+          ch = L'{';
+        }
+        else
+        {
+          // Skip the comment's body
+          for( ; ; )
+          {
+            nextChar();
+
+            // Is it the end?
+            if ( ch == L'}' && !escaped )
+            {
+              nextChar();
+
+              if ( ch == L'}' && !escaped )
+                break;
+            }
+          }
+
+          continue;
+        }
+      } // if ( ch == '{' )
+
       // If we're here, we've got a normal symbol, to be saved as text.
 
       // If there's currently no text node, open one
