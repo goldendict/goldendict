@@ -76,7 +76,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( scanEnableToggled( bool ) ) );
 
   navToolbar->addSeparator();
-  navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound.png" ), tr( "Pronounce word" ) );
+  navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound.png" ), tr( "Pronounce Word (Alt+S)" ) );
+  navPronounce->setShortcut( QKeySequence( "Alt+S" ) );
   navPronounce->setEnabled( false );
 
   connect( navPronounce, SIGNAL( triggered() ),

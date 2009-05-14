@@ -60,7 +60,7 @@
         <item>
          <widget class="QToolButton" name="wordListButton">
           <property name="toolTip">
-           <string>List matches</string>
+           <string>List Matches (Alt+M)</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -75,12 +75,15 @@
             <height>16</height>
            </size>
           </property>
+          <property name="shortcut">
+           <string>Alt+M</string>
+          </property>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="pronounceButton">
           <property name="toolTip">
-           <string>Pronounce word</string>
+           <string>Pronounce Word (Alt+S)</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -88,6 +91,9 @@
           <property name="icon">
            <iconset resource="resources.qrc">
             <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Alt+S</string>
           </property>
           <property name="autoRaise">
            <bool>false</bool>
