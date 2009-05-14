@@ -242,6 +242,10 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
+      if ( keyEvent->modifiers() &
+           ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
+        return false; // A non-typing modifier is pressed
+
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
            keyEvent->key() == Qt::Key_Tab )
