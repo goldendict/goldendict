@@ -627,7 +627,7 @@ void MainWindow::editDictionaries()
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
 
-  EditDictionaries dicts( this, cfg, dictionaries, dictNetMgr );
+  EditDictionaries dicts( this, cfg, dictionaries, groupInstances, dictNetMgr );
 
   dicts.exec();
 
@@ -1388,6 +1388,8 @@ void MainWindow::on_rescanFiles_activated()
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+
+  groupInstances.clear(); // Release all the dictionaries they hold
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
   

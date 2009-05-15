@@ -9,6 +9,7 @@
 #include "ui_editdictionaries.h"
 #include "sources.hh"
 #include "groups.hh"
+#include "instances.hh"
 #include <QNetworkAccessManager>
 
 class EditDictionaries: public QDialog
@@ -19,6 +20,7 @@ public:
 
   EditDictionaries( QWidget * parent, Config::Class & cfg,
                     std::vector< sptr< Dictionary::Class > > & dictionaries,
+                    Instances::Groups & groupInstances, // We only clear those on rescan
                     QNetworkAccessManager & dictNetMgr );
 
   /// Returns true if any changes to the 'dictionaries' vector passed were done.
@@ -51,6 +53,7 @@ private:
    
   Config::Class & cfg;
   std::vector< sptr< Dictionary::Class > > & dictionaries;
+  Instances::Groups & groupInstances;
   QNetworkAccessManager & dictNetMgr;
   
   // Backed up to decide later if something was changed or not

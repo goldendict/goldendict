@@ -9,8 +9,10 @@ using std::vector;
 
 EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
                                     vector< sptr< Dictionary::Class > > & dictionaries_,
+                                    Instances::Groups & groupInstances_,
                                     QNetworkAccessManager & dictNetMgr_ ):
   QDialog( parent ), cfg( cfg_ ), dictionaries( dictionaries_ ),
+  groupInstances( groupInstances_ ),
   dictNetMgr( dictNetMgr_ ),
   origCfg( cfg ),
   sources( this, cfg.paths, cfg.soundDirs, cfg.hunspell, cfg.transliteration,
@@ -121,6 +123,9 @@ void EditDictionaries::acceptChangedSources()
   cfg.transliteration = sources.getTransliteration();
   cfg.mediawikis = sources.getMediaWikis();
 
+  groupInstances.clear(); // Those hold pointers to dictionaries, we need to
+                          // free them.
+  
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
 }
 
