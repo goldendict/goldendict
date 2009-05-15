@@ -37,10 +37,10 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 
 void EditDictionaries::accept()
 {
-  if ( isSourcesChanged() )
-    acceptChangedSources();
-
   Config::Groups newGroups = groups->getGroups();
+
+  if ( isSourcesChanged() )
+    acceptChangedSources( false );
 
   if ( origCfg.groups != newGroups )
   {
@@ -77,11 +77,7 @@ void EditDictionaries::on_tabs_currentChanged( int index )
 
       if ( question.clickedButton() == accept )
       {
-        acceptChangedSources();
-
-        // Rebuild groups from scratch
-
-        rebuildGroups();
+        acceptChangedSources( true );
         
         lastCurrentTab = index;
         ui.tabs->setCurrentIndex( index );
@@ -100,8 +96,7 @@ void EditDictionaries::on_tabs_currentChanged( int index )
 
 void EditDictionaries::rescanSources()
 {
-  acceptChangedSources();
-  rebuildGroups();
+  acceptChangedSources( true );
 }
 
 bool EditDictionaries::isSourcesChanged() const
@@ -113,30 +108,32 @@ bool EditDictionaries::isSourcesChanged() const
          sources.getMediaWikis() != cfg.mediawikis;
 }
 
-void EditDictionaries::acceptChangedSources()
+void EditDictionaries::acceptChangedSources( bool rebuildGroups )
 {
   dictionariesChanged = true;
+
+  Config::Groups savedGroups = groups->getGroups();
 
   cfg.paths = sources.getPaths();
   cfg.soundDirs = sources.getSoundDirs();
   cfg.hunspell = sources.getHunspell();
   cfg.transliteration = sources.getTransliteration();
   cfg.mediawikis = sources.getMediaWikis();
-
+  
   groupInstances.clear(); // Those hold pointers to dictionaries, we need to
                           // free them.
-  
-  loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
-}
-
-void EditDictionaries::rebuildGroups()
-{
-  Config::Groups savedGroups = groups->getGroups();
 
   ui.tabs->setUpdatesEnabled( false );
   ui.tabs->removeTab( 1 );
   groups.reset();
-  groups = new Groups( this, dictionaries, savedGroups );
-  ui.tabs->insertTab( 1, groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
-  ui.tabs->setUpdatesEnabled( true );
+  
+  loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+
+  if ( rebuildGroups )
+  {
+    groups = new Groups( this, dictionaries, savedGroups );
+    ui.tabs->insertTab( 1, groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
+    ui.tabs->setUpdatesEnabled( true );
+  }
 }
+
