@@ -26,7 +26,7 @@ class ArticleView: public QFrame
 
   Ui::ArticleView ui;
 
-  QAction pasteAction;
+  QAction pasteAction, articleUpAction, articleDownAction;
 
 #ifdef Q_OS_WIN32
   // Used in Windows only
@@ -146,6 +146,12 @@ private slots:
   /// We handle pasting by attempting to define the word in clipboard.
   void pasteTriggered();
 
+  /// Nagivates to the previous article relative to the active one.
+  void moveOneArticleUp();
+
+  /// Nagivates to the next article relative to the active one.
+  void moveOneArticleDown();
+
 private:
 
   /// Deduces group from the url. If there doesn't seem to be any group,
@@ -160,7 +166,8 @@ private:
   QString getCurrentArticle();
 
   /// Sets the current article by executing a javascript code.
-  void setCurrentArticle( QString const & );
+  /// If moveToIt is true, it moves the focus to it as well.
+  void setCurrentArticle( QString const &, bool moveToIt = false );
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();

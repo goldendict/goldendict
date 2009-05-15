@@ -34,6 +34,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   popupView( popupView_ ),
   cfg( cfg_ ),
   pasteAction( this ),
+  articleUpAction( this ),
+  articleDownAction( this ),
   groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
@@ -65,6 +67,14 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   pasteAction.setShortcut( QKeySequence::Paste  );
   ui.definition->addAction( &pasteAction );
   connect( &pasteAction, SIGNAL( triggered() ), this, SLOT( pasteTriggered() ) );
+
+  articleUpAction.setShortcut( QKeySequence( "Alt+Up" ) );
+  ui.definition->addAction( &articleUpAction );
+  connect( &articleUpAction, SIGNAL( triggered() ), this, SLOT( moveOneArticleUp() ) );
+
+  articleDownAction.setShortcut( QKeySequence( "Alt+Down" ) );
+  ui.definition->addAction( &articleDownAction );
+  connect( &articleDownAction, SIGNAL( triggered() ), this, SLOT( moveOneArticleDown() ) );
 
   ui.definition->installEventFilter( this );
 
@@ -212,13 +222,20 @@ QString ArticleView::getCurrentArticle()
     return QString();
 }
 
-void ArticleView::setCurrentArticle( QString const & id )
+void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 {
   if ( !id.startsWith( "gdfrom-" ) )
     return; // Incorrect id
 
   if ( getArticlesList().contains( id.mid( 7 ) ) )
   {
+    if ( moveToIt )
+    {
+      QUrl url( ui.definition->url() );
+      url.setFragment( id );
+      openLink( url, ui.definition->url() );
+    }
+
     ui.definition->history()->currentItem().setUserData( id );
     ui.definition->page()->currentFrame()->evaluateJavaScript(
       QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
@@ -588,13 +605,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       QString id = tableOfContents[ result ];
 
       if ( id.size() )
-      {
-        QString targetArticle = "gdfrom-" + id;
-        QUrl url( ui.definition->url() );
-        url.setFragment( targetArticle );
-        openLink( url, ui.definition->url() );
-        setCurrentArticle( targetArticle );
-      }
+        setCurrentArticle( "gdfrom-" + id, true );
     }
   }
 #if 0
@@ -722,6 +733,47 @@ void ArticleView::pasteTriggered()
 
   if ( text.size() )
     showDefinition( text, getGroup( ui.definition->url() ), getCurrentArticle() );
+}
+
+void ArticleView::moveOneArticleUp()
+{
+  QString current = getCurrentArticle();
+
+  if ( current.size() )
+  {
+    QStringList lst = getArticlesList();
+
+    int idx = lst.indexOf( current.mid( 7 ) );
+
+    if ( idx != -1 )
+    {
+      --idx;
+
+      if ( idx < 0 )
+        idx = lst.size() - 1;
+
+      setCurrentArticle( "gdfrom-" + lst[ idx ], true );
+    }
+  }
+}
+
+void ArticleView::moveOneArticleDown()
+{
+  QString current = getCurrentArticle();
+
+  if ( current.size() )
+  {
+    QStringList lst = getArticlesList();
+
+    int idx = lst.indexOf( current.mid( 7 ) );
+
+    if ( idx != -1 )
+    {
+      idx = ( idx + 1 ) % lst.size();
+
+      setCurrentArticle( "gdfrom-" + lst[ idx ], true );
+    }
+  }
 }
 
 void ArticleView::showEvent( QShowEvent * ev )
