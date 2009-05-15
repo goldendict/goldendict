@@ -40,6 +40,12 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 {
   ui.setupUi( this );
 
+  ui.definition->pageAction( QWebPage::Back )->setShortcut( QKeySequence( "Alt+Left" ) );
+  ui.definition->addAction( ui.definition->pageAction( QWebPage::Back ) );
+
+  ui.definition->pageAction( QWebPage::Forward )->setShortcut( QKeySequence( "Alt+Right" ) );
+  ui.definition->addAction( ui.definition->pageAction( QWebPage::Forward ) );
+
   ui.definition->pageAction( QWebPage::Copy )->setShortcut( QKeySequence::Copy );
   ui.definition->addAction( ui.definition->pageAction( QWebPage::Copy ) );
 
