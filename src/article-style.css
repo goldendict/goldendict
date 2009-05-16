@@ -323,6 +323,14 @@ div.sdct_x
   margin-top: 1em;
 }
 
+/************* Websites *****************/
+
+.website_padding
+{
+  height: 1em;
+  clear:both;
+}
+
 /************* MediaWiki articles *****************
  The following consist of excerpts from different .css files edited
  with a .mwiki prepended to each record.

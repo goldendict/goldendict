@@ -180,6 +180,27 @@ struct MediaWiki
            enabled == other.enabled; }
 };
 
+/// Any website which can be queried though a simple template substitution
+struct WebSite
+{
+  QString id, name, url;
+  bool enabled;
+
+  WebSite(): enabled( false )
+  {}
+
+  WebSite( QString const & id_, QString const & name_, QString const & url_,
+           bool enabled_ ):
+    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ) {}
+
+  bool operator == ( WebSite const & other ) const
+  { return id == other.id && name == other.name && url == other.url &&
+           enabled == other.enabled; }
+};
+
+/// All the WebSites
+typedef vector< WebSite > WebSites;
+
 /// Hunspell configuration
 struct Hunspell
 {
@@ -256,6 +277,7 @@ struct Class
   Groups groups;
   Preferences preferences;
   MediaWikis mediawikis;
+  WebSites webSites;
   Hunspell hunspell;
   Transliteration transliteration;
 

@@ -114,7 +114,8 @@ HEADERS += folding.hh \
     transliteration.hh \
     romaji.hh \
     russiantranslit.hh \
-    german.hh
+    german.hh \
+    website.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -179,7 +180,8 @@ SOURCES += folding.cc \
     transliteration.cc \
     romaji.cc \
     russiantranslit.cc \
-    german.cc
+    german.cc \
+    website.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h

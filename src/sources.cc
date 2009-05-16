@@ -11,8 +11,11 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::SoundDirs const & soundDirs,
                   Config::Hunspell const & hunspell,
                   Config::Transliteration const & tr,
-                  Config::MediaWikis const & mediawikis ): QWidget( parent ),
-  mediawikisModel( this, mediawikis ), pathsModel( this, paths ),
+                  Config::MediaWikis const & mediawikis,
+                  Config::WebSites const & webSites ): QWidget( parent ),
+  mediawikisModel( this, mediawikis ),
+  webSitesModel( this, webSites ),
+  pathsModel( this, paths ),
   soundDirsModel( this, soundDirs ),
   hunspellDictsModel( this, hunspell )
 {
@@ -23,6 +26,12 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.mediaWikis->resizeColumnToContents( 0 );
   ui.mediaWikis->resizeColumnToContents( 1 );
   ui.mediaWikis->resizeColumnToContents( 2 );
+
+  ui.webSites->setTabKeyNavigation( true );
+  ui.webSites->setModel( &webSitesModel );
+  ui.webSites->resizeColumnToContents( 0 );
+  ui.webSites->resizeColumnToContents( 1 );
+  ui.webSites->resizeColumnToContents( 2 );
 
   ui.paths->setTabKeyNavigation( true );
   ui.paths->setModel( &pathsModel );
@@ -157,6 +166,30 @@ void Sources::on_removeMediaWiki_clicked()
                               QMessageBox::Ok,
                               QMessageBox::Cancel ) == QMessageBox::Ok )
     mediawikisModel.removeWiki( current.row() );
+}
+
+void Sources::on_addWebSite_clicked()
+{
+  webSitesModel.addNewSite();
+
+  QModelIndex result =
+    webSitesModel.index( webSitesModel.rowCount( QModelIndex() ) - 1,
+                         1, QModelIndex() );
+
+  ui.webSites->scrollTo( result );
+  ui.webSites->edit( result );
+}
+
+void Sources::on_removeWebSite_clicked()
+{
+  QModelIndex current = ui.webSites->currentIndex();
+
+  if ( current.isValid() &&
+       QMessageBox::question( this, tr( "Confirm removal" ),
+                              tr( "Remove site <b>%1</b> from the list?" ).arg( webSitesModel.getCurrentWebSites()[ current.row() ].name ),
+                              QMessageBox::Ok,
+                              QMessageBox::Cancel ) == QMessageBox::Ok )
+    webSitesModel.removeSite( current.row() );
 }
 
 Config::Hunspell Sources::getHunspell() const
@@ -336,6 +369,160 @@ bool MediaWikisModel::setData( QModelIndex const & index, const QVariant & value
 
   return false;
 }
+
+
+////////// WebSitesModel
+
+WebSitesModel::WebSitesModel( QWidget * parent,
+                              Config::WebSites const & webSites_ ):
+  QAbstractItemModel( parent ), webSites( webSites_ )
+{
+}
+void WebSitesModel::removeSite( int index )
+{
+  beginRemoveRows( QModelIndex(), index, index );
+  webSites.erase( webSites.begin() + index );
+  endRemoveRows();
+}
+
+void WebSitesModel::addNewSite()
+{
+  Config::WebSite w;
+
+  w.enabled = false;
+
+  // That's quite some rng
+  w.id = QString(
+    QCryptographicHash::hash(
+      QDateTime::currentDateTime().toString( "\"WebSite\"dd.MM.yyyy hh:mm:ss.zzz" ).toUtf8(),
+      QCryptographicHash::Md5 ).toHex() );
+
+  w.url = "http://";
+
+  beginInsertRows( QModelIndex(), webSites.size(), webSites.size() );
+  webSites.push_back( w );
+  endInsertRows();
+}
+
+QModelIndex WebSitesModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
+{
+  return createIndex( row, column, 0 );
+}
+
+QModelIndex WebSitesModel::parent( QModelIndex const & /*parent*/ ) const
+{
+  return QModelIndex();
+}
+
+Qt::ItemFlags WebSitesModel::flags( QModelIndex const & index ) const
+{
+  Qt::ItemFlags result = QAbstractItemModel::flags( index );
+
+  if ( index.isValid() )
+  {
+    if ( !index.column() )
+      result |= Qt::ItemIsUserCheckable;
+    else
+      result |= Qt::ItemIsEditable;
+  }
+
+  return result;
+}
+
+int WebSitesModel::rowCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return webSites.size();
+}
+
+int WebSitesModel::columnCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return 3;
+}
+
+QVariant WebSitesModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
+{
+  if ( role == Qt::DisplayRole )
+    switch( section )
+    {
+      case 0:
+        return tr( "Enabled" );
+      case 1:
+        return tr( "Name" );
+      case 2:
+        return tr( "Address" );
+      default:
+        return QVariant();
+    }
+
+  return QVariant();
+}
+
+QVariant WebSitesModel::data( QModelIndex const & index, int role ) const
+{
+  if ( (unsigned)index.row() >= webSites.size() )
+    return QVariant();
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+  {
+    switch( index.column() )
+    {
+      case 1:
+        return webSites[ index.row() ].name;
+      case 2:
+        return webSites[ index.row() ].url;
+      default:
+        return QVariant();
+    }
+  }
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+    return webSites[ index.row() ].enabled;
+
+  return QVariant();
+}
+
+bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
+                               int role )
+{
+  if ( (unsigned)index.row() >= webSites.size() )
+    return false;
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+  {
+    //printf( "type = %d\n", (int)value.type() );
+    //printf( "value = %d\n", (int)value.toInt() );
+
+    // XXX it seems to be always passing Int( 2 ) as a value, so we just toggle
+    webSites[ index.row() ].enabled = !webSites[ index.row() ].enabled;
+
+    dataChanged( index, index );
+    return true;
+  }
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+    switch( index.column() )
+    {
+      case 1:
+        webSites[ index.row() ].name =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 2:
+        webSites[ index.row() ].url =  value.toString();
+        dataChanged( index, index );
+        return true;
+      default:
+        return false;
+    }
+
+  return false;
+}
+
 
 ////////// PathsModel
 

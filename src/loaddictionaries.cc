@@ -14,6 +14,7 @@
 #include "romaji.hh"
 #include "russiantranslit.hh"
 #include "german.hh"
+#include "website.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -187,6 +188,14 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   {
     vector< sptr< Dictionary::Class > > dicts =
       MediaWiki::makeDictionaries( loadDicts, cfg.mediawikis, dictNetMgr );
+
+    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+  }
+
+  ///// WebSites are very simple, no need to create them asyncronously
+  {
+    vector< sptr< Dictionary::Class > > dicts =
+      WebSite::makeDictionaries( cfg.webSites );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }

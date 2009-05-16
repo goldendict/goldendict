@@ -126,6 +126,18 @@ MediaWikis makeDefaultMediaWikis( bool enable )
   return mw;
 }
 
+WebSites makeDefaultWebSites()
+{
+  WebSites ws;
+
+  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "http://www.urbandictionary.com/define.php?term=%GDWORD%", false ) );
+  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "http://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false ) );
+  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://www.abbyyonline.ru/translate.aspx?LingvoAction=translate&Ln=1&words=%GDWORD%", false ) );
+  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false ) );
+
+  return ws;
+}
+
 /// Sets option to true of false if node is "1" or "0" respectively, or leaves
 /// it intact if it's neither "1" nor "0".
 void applyBoolOption( bool & option, QDomNode const & node )
@@ -225,6 +237,7 @@ Class load() throw( exError )
     #endif
 
     c.mediawikis = makeDefaultMediaWikis( true );
+    c.webSites = makeDefaultWebSites();
 
     // Check if we have a template config file. If we do, load it instead
 
@@ -390,6 +403,32 @@ Class load() throw( exError )
     // When upgrading, populate the list with some choices, but don't enable
     // anything.
     c.mediawikis = makeDefaultMediaWikis( false );
+  }
+
+  QDomNode wss = root.namedItem( "websites" );
+
+  if ( !wss.isNull() )
+  {
+    QDomNodeList nl = wss.toElement().elementsByTagName( "website" );
+
+    for( unsigned x = 0; x < nl.length(); ++x )
+    {
+      QDomElement ws = nl.item( x ).toElement();
+
+      WebSite w;
+
+      w.id = ws.attribute( "id" );
+      w.name = ws.attribute( "name" );
+      w.url = ws.attribute( "url" );
+      w.enabled = ( ws.attribute( "enabled" ) == "1" );
+
+      c.webSites.push_back( w );
+    }
+  }
+  else
+  {
+    // Upgrading
+    c.webSites = makeDefaultWebSites();
   }
 
   QDomNode preferences = root.namedItem( "preferences" );
@@ -692,6 +731,33 @@ void save( Class const & c ) throw( exError )
       QDomAttr enabled = dd.createAttribute( "enabled" );
       enabled.setValue( i->enabled ? "1" : "0" );
       mw.setAttributeNode( enabled );
+    }
+  }
+
+  {
+    QDomElement wss = dd.createElement( "websites" );
+    root.appendChild( wss );
+
+    for( WebSites::const_iterator i = c.webSites.begin(); i != c.webSites.end(); ++i )
+    {
+      QDomElement ws = dd.createElement( "website" );
+      wss.appendChild( ws );
+
+      QDomAttr id = dd.createAttribute( "id" );
+      id.setValue( i->id );
+      ws.setAttributeNode( id );
+
+      QDomAttr name = dd.createAttribute( "name" );
+      name.setValue( i->name );
+      ws.setAttributeNode( name );
+
+      QDomAttr url = dd.createAttribute( "url" );
+      url.setValue( i->url );
+      ws.setAttributeNode( url );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( i->enabled ? "1" : "0" );
+      ws.setAttributeNode( enabled );
     }
   }
 

@@ -39,6 +39,36 @@ private:
   Config::MediaWikis mediawikis;
 };
 
+/// A model to be projected into the webSites view, according to Qt's MVC model
+class WebSitesModel: public QAbstractItemModel
+{
+  Q_OBJECT
+
+public:
+
+  WebSitesModel( QWidget * parent, Config::WebSites const & );
+
+  void removeSite( int index );
+  void addNewSite();
+
+  /// Returns the sites the model currently has listed
+  Config::WebSites const & getCurrentWebSites() const
+  { return webSites; }
+
+  QModelIndex index( int row, int column, QModelIndex const & parent ) const;
+  QModelIndex parent( QModelIndex const & parent ) const;
+  Qt::ItemFlags flags( QModelIndex const & index ) const;
+  int rowCount( QModelIndex const & parent ) const;
+  int columnCount( QModelIndex const & parent ) const;
+  QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+  QVariant data( QModelIndex const & index, int role ) const;
+  bool setData( QModelIndex const & index, const QVariant & value, int role );
+
+private:
+
+  Config::WebSites webSites;
+};
+
 /// A model to be projected into the paths view, according to Qt's MVC model
 class PathsModel: public QAbstractItemModel
 {
@@ -139,7 +169,8 @@ public:
            Config::SoundDirs const &,
            Config::Hunspell const &,
            Config::Transliteration const &,
-           Config::MediaWikis const & );
+           Config::MediaWikis const &,
+           Config::WebSites const & );
 
   Config::Paths const & getPaths() const
   { return pathsModel.getCurrentPaths(); }
@@ -149,6 +180,9 @@ public:
 
   Config::MediaWikis const & getMediaWikis() const
   { return mediawikisModel.getCurrentWikis(); }
+
+  Config::WebSites const & getWebSites() const
+  { return webSitesModel.getCurrentWebSites(); }
 
   Config::Hunspell getHunspell() const;
   
@@ -162,6 +196,7 @@ signals:
 private:
   Ui::Sources ui;
   MediaWikisModel mediawikisModel;
+  WebSitesModel webSitesModel;
   PathsModel pathsModel;
   SoundDirsModel soundDirsModel;
   HunspellDictsModel hunspellDictsModel;
@@ -182,6 +217,9 @@ private slots:
 
   void on_addMediaWiki_clicked();
   void on_removeMediaWiki_clicked();
+
+  void on_addWebSite_clicked();
+  void on_removeWebSite_clicked();
 
   void on_rescan_clicked();
 };

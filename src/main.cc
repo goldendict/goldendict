@@ -97,9 +97,6 @@ int main( int argc, char ** argv )
   translator.load( QString( Config::getProgramDataDir() ) + "/locale/" + localeName );
   app.installTranslator( &translator );
 
-  // Apply qt stylesheet
-  MainWindow::applyQtStyleSheet( cfg.preferences.displayStyle );
-
   MainWindow m( cfg );
 
   int r = app.exec();

@@ -39,6 +39,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   wordFinder( this ),
   newReleaseCheckTimer( this )
 {
+  applyQtStyleSheet( cfg.preferences.displayStyle );
+
   ui.setupUi( this );
 
   // Make the search pane's titlebar
@@ -299,7 +301,7 @@ void MainWindow::applyQtStyleSheet( QString const & displayStyle )
   if ( cssFile.open( QFile::ReadOnly ) )
     css += cssFile.readAll();
 
-  qApp->setStyleSheet( css );
+  setStyleSheet( css );
 }
 
 void MainWindow::updateTrayIcon()
@@ -457,6 +459,8 @@ void MainWindow::makeScanPopup()
     return;
 
   scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances );
+
+  scanPopup->setStyleSheet( styleSheet() );
 
   if ( cfg.preferences.enableScanPopup && enableScanPopup->isChecked() )
     scanPopup->enableScanning();
@@ -719,7 +723,7 @@ void MainWindow::translateInputChanged( QString const & newValue )
     if ( ui.translateLine->property( "noResults" ).toBool() )
     {
       ui.translateLine->setProperty( "noResults", false );
-      qApp->setStyleSheet( qApp->styleSheet() );
+      setStyleSheet( styleSheet() );
     }
     return;
   }
@@ -836,7 +840,7 @@ void MainWindow::updateMatchResults( bool finished )
     if ( ui.translateLine->property( "noResults" ).toBool() != setMark )
     {
       ui.translateLine->setProperty( "noResults", setMark );
-      qApp->setStyleSheet( qApp->styleSheet() );
+      setStyleSheet( styleSheet() );
     }
 
     if ( !wordFinder.getErrorString().isEmpty() )

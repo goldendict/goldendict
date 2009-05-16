@@ -174,6 +174,42 @@ void ArticleView::loadFinished( bool )
     setCurrentArticle( url.fragment() );
   }
 
+  // See if we have any iframes in need of expansion
+
+  QList< QWebFrame * > frames = ui.definition->page()->mainFrame()->childFrames();
+
+  bool wereFrames = false;
+
+  for( QList< QWebFrame * >::iterator i = frames.begin(); i != frames.end(); ++i )
+  {
+    if ( (*i)->frameName().startsWith( "gdexpandframe-" ) )
+    {
+      //printf( "Name: %s\n", (*i)->frameName().toUtf8().data() );
+      //printf( "Size: %d\n", (*i)->contentsSize().height() );
+      //printf( ">>>>>>>>Height = %s\n", (*i)->evaluateJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
+  
+      // Set the height
+      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').height = %2;" ).
+        arg( (*i)->frameName() ).
+        arg( (*i)->contentsSize().height() ) );
+
+      // Show it
+      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
+        arg( (*i)->frameName() ) );
+
+      wereFrames = true;
+    }
+  }
+
+  if ( wereFrames )
+  {
+    // There's some sort of glitch -- sometimes you need to move a mouse
+
+    QMouseEvent ev( QEvent::MouseMove, QPoint(), Qt::MouseButton(), 0, 0 );
+
+    qApp->sendEvent( ui.definition, &ev );
+  }
+
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
   emit pageLoaded( this );
@@ -218,14 +254,14 @@ unsigned ArticleView::getGroup( QUrl const & url )
 
 QStringList ArticleView::getArticlesList()
 {
-  return ui.definition->page()->currentFrame()->
+  return ui.definition->page()->mainFrame()->
            evaluateJavaScript( "gdArticleContents;" ).toString().
              trimmed().split( ' ', QString::SkipEmptyParts );
 }
 
 QString ArticleView::getCurrentArticle()
 {
-  QVariant v = ui.definition->page()->currentFrame()->evaluateJavaScript(
+  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript(
     QString( "gdCurrentArticle;" ) );
 
   if ( v.type() == QVariant::String )
@@ -249,7 +285,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     }
 
     ui.definition->history()->currentItem().setUserData( id );
-    ui.definition->page()->currentFrame()->evaluateJavaScript(
+    ui.definition->page()->mainFrame()->evaluateJavaScript(
       QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
   }
 }
@@ -316,7 +352,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   {
     if ( url.hasFragment() )
     {
-      ui.definition->page()->currentFrame()->evaluateJavaScript(
+      ui.definition->page()->mainFrame()->evaluateJavaScript(
         QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
     else
@@ -440,13 +476,13 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
 bool ArticleView::hasSound()
 {
-  return ui.definition->page()->currentFrame()->
+  return ui.definition->page()->mainFrame()->
     evaluateJavaScript( "gdAudioLink;" ).type() == QVariant::String;
 }
 
 void ArticleView::playSound()
 {
-  QVariant v = ui.definition->page()->currentFrame()->evaluateJavaScript(
+  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript(
     QString( "gdAudioLink;" ) );
 
   if ( v.type() == QVariant::String )
@@ -455,12 +491,12 @@ void ArticleView::playSound()
 
 QString ArticleView::toHtml()
 {
-  return ui.definition->page()->currentFrame()->toHtml();
+  return ui.definition->page()->mainFrame()->toHtml();
 }
 
 QString ArticleView::getTitle()
 {
-  return ui.definition->page()->currentFrame()->title();
+  return ui.definition->page()->mainFrame()->title();
 }
 
 void ArticleView::print( QPrinter * printer ) const
@@ -472,7 +508,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
 
-  QWebHitTestResult r = ui.definition->page()->currentFrame()->
+  QWebHitTestResult r = ui.definition->page()->mainFrame()->
                           hitTestContent( pos );
 
   QMenu menu( this );
@@ -803,14 +839,23 @@ void ArticleView::openSearch()
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
   {
-    ui.definition->triggerPageAction( QWebPage::SelectAll );
-    ui.definition->triggerPageAction( QWebPage::SelectStartOfDocument );
+    ui.definition->page()->currentFrame()->
+           evaluateJavaScript( "window.getSelection().removeAllRanges();" );
   }
 
   if ( ui.searchText->property( "noResults" ).toBool() )
   {
     ui.searchText->setProperty( "noResults", false );
-    qApp->setStyleSheet( qApp->styleSheet() );
+
+    // Reload stylesheet
+    for( QWidget * w = parentWidget(); w; w = w->parentWidget() )
+    {
+      if ( w->styleSheet().size() )
+      {
+        w->setStyleSheet( w->styleSheet() );
+        break;
+      }
+    }
   }
 }
 
@@ -849,8 +894,8 @@ void ArticleView::performFindOperation( bool restart, bool backwards )
     // For now we resort to this hack:
     if ( ui.definition->selectedText().size() )
     {
-      ui.definition->triggerPageAction( QWebPage::SelectAll );
-      ui.definition->triggerPageAction( QWebPage::SelectStartOfDocument );
+      ui.definition->page()->currentFrame()->
+             evaluateJavaScript( "window.getSelection().removeAllRanges();" );
     }
   }
 
@@ -867,7 +912,16 @@ void ArticleView::performFindOperation( bool restart, bool backwards )
   if ( ui.searchText->property( "noResults" ).toBool() != setMark )
   {
     ui.searchText->setProperty( "noResults", setMark );
-    qApp->setStyleSheet( qApp->styleSheet() );
+
+    // Reload stylesheet
+    for( QWidget * w = parentWidget(); w; w = w->parentWidget() )
+    {
+      if ( w->styleSheet().size() )
+      {
+        w->setStyleSheet( w->styleSheet() );
+        break;
+      }
+    }
   }
 }
 

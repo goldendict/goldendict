@@ -33,9 +33,6 @@ public:
   MainWindow( Config::Class & cfg );
   ~MainWindow();
 
-  /// Applies the qt's stylesheet, given the style's name.
-  static void applyQtStyleSheet( QString const & displayStyle );
-
 private:
 
   QSystemTrayIcon * trayIcon;
@@ -77,6 +74,9 @@ private:
 
   QPrinter printer; // The printer we use for all printing operations
   
+  /// Applies the qt's stylesheet, given the style's name.
+  void applyQtStyleSheet( QString const & displayStyle );
+
   /// Creates, destroys or otherwise updates tray icon, according to the
   /// current configuration and situation.
   void updateTrayIcon();

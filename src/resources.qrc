@@ -36,5 +36,6 @@
         <file>icons/bookcase.png</file>
         <file>qt-style-st-lingvo.css</file>
         <file>article-style-st-lingvo.css</file>
+        <file>icons/internet.png</file>
     </qresource>
 </RCC>
