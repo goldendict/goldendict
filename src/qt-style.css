@@ -3,7 +3,7 @@ MainWindow #searchPane #translateLine, MainWindow #searchPane #wordList
   background: #fefdeb;
 }
 
-MainWindow #centralWidget #translateLine[noResults="true"]
+MainWindow #searchPane #translateLine[noResults="true"]
 {
   background: #febb7d;
 }
