@@ -139,6 +139,27 @@ void applyBoolOption( bool & option, QDomNode const & node )
     option = false;
 }
 
+Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
+{
+  Group g;
+
+  if ( grp.hasAttribute( "id" ) )
+    g.id = grp.attribute( "id" ).toUInt();
+  else
+    g.id = nextId ? (*nextId)++ : 0;
+
+  g.name = grp.attribute( "name" );
+  g.icon = grp.attribute( "icon" );
+
+  QDomNodeList dicts = grp.elementsByTagName( "dictionary" );
+
+  for( unsigned y = 0; y < dicts.length(); ++y )
+    g.dictionaries.push_back( DictionaryRef( dicts.item( y ).toElement().text(),
+                                             dicts.item( y ).toElement().attribute( "name" ) ) );
+
+  return g;
+}
+
 }
 
 Class load() throw( exError )
@@ -283,6 +304,16 @@ Class load() throw( exError )
                   nl.item( x ).toElement().attribute( "name" ) ) );
   }
 
+  QDomNode dictionaryOrder = root.namedItem( "dictionaryOrder" );
+
+  if ( !dictionaryOrder.isNull() )
+    c.dictionaryOrder = loadGroup( dictionaryOrder.toElement() );
+
+  QDomNode inactiveDictionaries = root.namedItem( "inactiveDictionaries" );
+
+  if ( !inactiveDictionaries.isNull() )
+    c.inactiveDictionaries = loadGroup( inactiveDictionaries.toElement() );
+
   QDomNode groups = root.namedItem( "groups" );
 
   if ( !groups.isNull() )
@@ -295,23 +326,7 @@ Class load() throw( exError )
     {
       QDomElement grp = nl.item( x ).toElement();
 
-      Group g;
-
-      if ( grp.hasAttribute( "id" ) )
-        g.id = grp.attribute( "id" ).toUInt();
-      else
-        g.id = c.groups.nextId++;
-
-      g.name = grp.attribute( "name" );
-      g.icon = grp.attribute( "icon" );
-
-      QDomNodeList dicts = grp.elementsByTagName( "dictionary" );
-
-      for( unsigned y = 0; y < dicts.length(); ++y )
-        g.dictionaries.push_back( DictionaryRef( dicts.item( y ).toElement().text(),
-                                                 dicts.item( y ).toElement().attribute( "name" ) ) );
-
-      c.groups.push_back( g );
+      c.groups.push_back( loadGroup( grp, &c.groups.nextId ) );
     }
   }
 
@@ -465,6 +480,52 @@ Class load() throw( exError )
   return c;
 }
 
+namespace {
+void saveGroup( Group const & data, QDomElement & group )
+{
+  QDomDocument dd = group.ownerDocument();
+
+  QDomAttr id = dd.createAttribute( "id" );
+
+  id.setValue( QString::number( data.id ) );
+
+  group.setAttributeNode( id );
+
+  QDomAttr name = dd.createAttribute( "name" );
+
+  name.setValue( data.name );
+
+  group.setAttributeNode( name );
+
+  if ( data.icon.size() )
+  {
+    QDomAttr icon = dd.createAttribute( "icon" );
+
+    icon.setValue( data.icon );
+
+    group.setAttributeNode( icon );
+  }
+
+  for( vector< DictionaryRef >::const_iterator j = data.dictionaries.begin(); j != data.dictionaries.end(); ++j )
+  {
+    QDomElement dictionary = dd.createElement( "dictionary" );
+
+    group.appendChild( dictionary );
+
+    QDomText value = dd.createTextNode( j->id );
+
+    dictionary.appendChild( value );
+
+    QDomAttr name = dd.createAttribute( "name" );
+
+    name.setValue( j->name );
+
+    dictionary.setAttributeNode( name );
+  }
+}
+
+}
+
 void save( Class const & c ) throw( exError )
 {
   QFile configFile( getConfigFileName() );
@@ -516,6 +577,18 @@ void save( Class const & c ) throw( exError )
   }
 
   {
+    QDomElement dictionaryOrder = dd.createElement( "dictionaryOrder" );
+    root.appendChild( dictionaryOrder );
+    saveGroup( c.dictionaryOrder, dictionaryOrder );
+  }
+
+  {
+    QDomElement inactiveDictionaries = dd.createElement( "inactiveDictionaries" );
+    root.appendChild( inactiveDictionaries );
+    saveGroup( c.inactiveDictionaries, inactiveDictionaries );
+  }
+
+  {
     QDomElement groups = dd.createElement( "groups" );
     root.appendChild( groups );
 
@@ -528,43 +601,7 @@ void save( Class const & c ) throw( exError )
       QDomElement group = dd.createElement( "group" );
       groups.appendChild( group );
 
-      QDomAttr id = dd.createAttribute( "id" );
-
-      id.setValue( QString::number( i->id ) );
-
-      group.setAttributeNode( id );
-
-      QDomAttr name = dd.createAttribute( "name" );
-
-      name.setValue( i->name );
-
-      group.setAttributeNode( name );
-
-      if ( i->icon.size() )
-      {
-        QDomAttr icon = dd.createAttribute( "icon" );
-
-        icon.setValue( i->icon );
-
-        group.setAttributeNode( icon );
-      }
-
-      for( vector< DictionaryRef >::const_iterator j = i->dictionaries.begin(); j != i->dictionaries.end(); ++j )
-      {
-        QDomElement dictionary = dd.createElement( "dictionary" );
-
-        group.appendChild( dictionary );
-
-        QDomText value = dd.createTextNode( j->id );
-
-        dictionary.appendChild( value );
-
-        QDomAttr name = dd.createAttribute( "name" );
-
-        name.setValue( j->name );
-
-        dictionary.setAttributeNode( name );
-      }
+      saveGroup( *i, group );
     }
   }
 

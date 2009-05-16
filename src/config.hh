@@ -251,6 +251,8 @@ struct Class
 {
   Paths paths;
   SoundDirs soundDirs;
+  Group dictionaryOrder;
+  Group inactiveDictionaries;
   Groups groups;
   Preferences preferences;
   MediaWikis mediawikis;
