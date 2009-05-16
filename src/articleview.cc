@@ -36,6 +36,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   pasteAction( this ),
   articleUpAction( this ),
   articleDownAction( this ),
+  openSearchAction( this ),
+  searchIsOpened( false ),
   groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
@@ -81,6 +83,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   articleDownAction.setShortcut( QKeySequence( "Alt+Down" ) );
   ui.definition->addAction( &articleDownAction );
   connect( &articleDownAction, SIGNAL( triggered() ), this, SLOT( moveOneArticleDown() ) );
+
+  openSearchAction.setShortcut( QKeySequence( "Ctrl+F" ) );
+  ui.definition->addAction( &openSearchAction );
+  connect( &openSearchAction, SIGNAL( triggered() ), this, SLOT( openSearch() ) );
 
   ui.definition->installEventFilter( this );
 
@@ -782,9 +788,107 @@ void ArticleView::moveOneArticleDown()
   }
 }
 
+void ArticleView::openSearch()
+{
+  if ( !searchIsOpened )
+  {
+    ui.searchFrame->show();
+    ui.searchText->setText( getTitle() );
+    searchIsOpened = true;
+  }
+
+  ui.searchText->setFocus();
+  ui.searchText->selectAll();
+
+  // Clear any current selection
+  if ( ui.definition->selectedText().size() )
+  {
+    ui.definition->triggerPageAction( QWebPage::SelectAll );
+    ui.definition->triggerPageAction( QWebPage::SelectStartOfDocument );
+  }
+
+  if ( ui.searchText->property( "noResults" ).toBool() )
+  {
+    ui.searchText->setProperty( "noResults", false );
+    qApp->setStyleSheet( qApp->styleSheet() );
+  }
+}
+
+void ArticleView::on_searchPrevious_clicked()
+{
+  performFindOperation( false, true );
+}
+
+void ArticleView::on_searchNext_clicked()
+{
+  performFindOperation( false, false );
+}
+
+void ArticleView::on_searchText_textEdited()
+{
+  performFindOperation( true, false );
+}
+
+void ArticleView::on_searchText_returnPressed()
+{
+  on_searchNext_clicked();
+}
+
+void ArticleView::on_searchCloseButton_clicked()
+{
+  closeSearch();
+}
+
+void ArticleView::performFindOperation( bool restart, bool backwards )
+{
+  QString text = ui.searchText->text();
+
+  if ( restart )
+  {
+    // Anyone knows how we reset the search position?
+    // For now we resort to this hack:
+    if ( ui.definition->selectedText().size() )
+    {
+      ui.definition->triggerPageAction( QWebPage::SelectAll );
+      ui.definition->triggerPageAction( QWebPage::SelectStartOfDocument );
+    }
+  }
+
+  QWebPage::FindFlags f( 0 );
+
+  if ( ui.searchCaseSensitive->isChecked() )
+    f |= QWebPage::FindCaseSensitively;
+
+  if ( backwards )
+    f |= QWebPage::FindBackward;
+
+  bool setMark = text.size() && !ui.definition->findText( text, f );
+
+  if ( ui.searchText->property( "noResults" ).toBool() != setMark )
+  {
+    ui.searchText->setProperty( "noResults", setMark );
+    qApp->setStyleSheet( qApp->styleSheet() );
+  }
+}
+
+bool ArticleView::closeSearch()
+{
+  if ( searchIsOpened )
+  {
+    ui.searchFrame->hide();
+    ui.definition->setFocus();
+    searchIsOpened = false;
+
+    return true;
+  }
+  else
+    return false;
+}
+
 void ArticleView::showEvent( QShowEvent * ev )
 {
   QFrame::showEvent( ev );
 
-  ui.searchFrame->hide();
+  if ( !searchIsOpened )
+    ui.searchFrame->hide();
 }

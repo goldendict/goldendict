@@ -8,6 +8,11 @@ MainWindow #centralWidget #translateLine[noResults="true"]
   background: #febb7d;
 }
 
+ArticleView #searchText[noResults="true"]
+{
+  background: #febb7d;
+}
+
 .ScanPopup #outerFrame
 {
   border: 1px solid grey;

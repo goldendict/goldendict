@@ -25,6 +25,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   isScanningEnabled( false ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
+  escapeAction( this ),
   wordFinder( this ),
   mouseEnteredOnce( false ),
   hideTimer( this )
@@ -67,6 +68,11 @@ ScanPopup::ScanPopup( QWidget * parent,
   // This helps against flickering
   setAttribute( Qt::WA_NoSystemBackground );
   #endif
+
+  escapeAction.setShortcut( QKeySequence( "Esc" ) );
+  addAction( &escapeAction );
+  connect( &escapeAction, SIGNAL( triggered() ),
+           this, SLOT( escapePressed() ) );
 
   connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
@@ -498,4 +504,13 @@ void ScanPopup::pageLoaded( ArticleView * )
 
   if ( cfg.preferences.pronounceOnLoadPopup )
     definition->playSound();
+}
+
+void ScanPopup::escapePressed()
+{
+  if ( !definition->closeSearch() )
+  {
+    unsetCursor();
+    hide();
+  }
 }

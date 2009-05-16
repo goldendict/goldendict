@@ -26,7 +26,8 @@ class ArticleView: public QFrame
 
   Ui::ArticleView ui;
 
-  QAction pasteAction, articleUpAction, articleDownAction;
+  QAction pasteAction, articleUpAction, articleDownAction, openSearchAction;
+  bool searchIsOpened;
 
 #ifdef Q_OS_WIN32
   // Used in Windows only
@@ -113,6 +114,10 @@ public:
 
   /// Prints current article
   void print( QPrinter * ) const;
+
+  /// Closes search if it's open and returns true. Returns false if it
+  /// wasn't open.
+  bool closeSearch();
   
 signals:
 
@@ -152,6 +157,15 @@ private slots:
   /// Nagivates to the next article relative to the active one.
   void moveOneArticleDown();
 
+  /// Opens the search area
+  void openSearch();
+
+  void on_searchPrevious_clicked();
+  void on_searchNext_clicked();
+  void on_searchText_textEdited();
+  void on_searchText_returnPressed();
+  void on_searchCloseButton_clicked();
+
 private:
 
   /// Deduces group from the url. If there doesn't seem to be any group,
@@ -173,6 +187,8 @@ private:
   void cleanupTemp();
 
   bool eventFilter( QObject * obj, QEvent * ev );
+
+  void performFindOperation( bool restart, bool backwards );
 
 protected:
 

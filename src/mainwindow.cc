@@ -750,6 +750,9 @@ void MainWindow::translateInputFinished()
 
 void MainWindow::focusTranslateLine()
 {
+  if ( dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).closeSearch() )
+    return;
+
   if ( ui.searchPane->isFloating() )
     ui.searchPane->activateWindow();
 

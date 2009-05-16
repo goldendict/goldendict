@@ -52,6 +52,7 @@ private:
   Instances::Groups const & groups;
   Ui::ScanPopup ui;
   ArticleView * definition;
+  QAction escapeAction;
   QString pendingInputWord, inputWord;
   WordFinder wordFinder;
 
@@ -96,6 +97,8 @@ private slots:
   void altModePoll();
 
   void pageLoaded( ArticleView * );
+
+  void escapePressed();
 };
 
 #endif
