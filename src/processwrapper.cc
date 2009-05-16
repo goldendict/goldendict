@@ -13,6 +13,25 @@ unsigned int ProcessWrapper::currentProcessId()
 	return GetCurrentProcessId();
 }
 
+bool ProcessWrapper::processExists(unsigned int pid)
+{
+    DWORD aProcesses[1024], cbNeeded, cProcesses;
+    unsigned int i;
+
+    if ( !EnumProcesses( aProcesses, sizeof(aProcesses), &cbNeeded ) )
+        return false;
+
+    cProcesses = cbNeeded / sizeof(DWORD);
+    for ( i = 0; i < cProcesses; i++ )
+    {
+      unsigned int processID = aProcesses[i];
+      if ( processID == pid )
+        return true;
+    }
+
+    return false;
+}
+
 unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip)
 {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
@@ -31,7 +50,7 @@ unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip
     for ( i = 0; i < cProcesses; i++ )
     {
         unsigned int processID = aProcesses[i];
-		if( processID != 0 && processID != pid_skip )
+        if( processID != 0 && processID != pid_skip )
         {
             char szProcessName[MAX_PATH] = "<unknown>";
 
@@ -78,6 +97,11 @@ unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip
 unsigned int ProcessWrapper::currentProcessId()
 {
     return getpid();
+}
+
+bool ProcessWrapper::processExists(unsigned int pid)
+{
+  return QFile::exists(QString("/proc/%1").arg(pid));
 }
 
 unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip)

@@ -42,10 +42,13 @@ int main( int argc, char ** argv )
   // get pid
   quint64 current_pid = QCoreApplication::applicationPid();
 
-  QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
-  quint64 pid = ProcessWrapper::findProcess(
-          app_fname.toAscii().data(),
-          current_pid);
+//  QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
+//  quint64 pid = ProcessWrapper::findProcess(
+//          app_fname.toAscii().data(),
+//          current_pid);
+//
+//  qDebug() << "pid " << pid;
+//  qDebug() << "current_pid " << current_pid;
 
   // check pid file
   QFile pid_file( Config::getPidFileName() );
@@ -57,11 +60,18 @@ int main( int argc, char ** argv )
     quint64 tmp; ds >> tmp;
     pid_file.close();
 
-    if ( tmp == pid ) // it is active - exiting
+    bool isExist = ProcessWrapper::processExists(tmp);
+    if ( isExist )
     {
-      // to do: switch to pid ?
+      puts( "Another GoldenDict copy started already." );
       return 1;
     }
+
+//    if ( tmp == pid ) // it is active - exiting
+//    {
+//      // to do: switch to pid ?
+//      return 1;
+//    }
   }
 
   pid_file.open( QIODevice::WriteOnly );
