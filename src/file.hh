@@ -19,6 +19,12 @@ DEF_EX( exReadError, "Error reading from the file", Ex )
 DEF_EX( exWriteError, "Error writing to the file", Ex )
 DEF_EX( exSeekError, "File seek error", Ex )
 
+/// Checks if the file exists or not.
+bool exists( char const * filename ) throw();
+
+inline bool exists( std::string const & filename ) throw()
+{ return exists( filename.c_str() ); }
+
 class Class
 {
   FILE * f;

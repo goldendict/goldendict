@@ -815,18 +815,14 @@ Ifo::Ifo( File::Class & f ):
 
 static bool tryPossibleName( string const & name, string & copyTo )
 {
-  try
+  if ( File::exists( name ) )
   {
-    File::Class f( name, "rb" );
-
     copyTo = name;
 
     return true;
   }
-  catch( ... )
-  {
+  else
     return false;
-  }
 }
 
 static void findCorrespondingFiles( string const & ifo,

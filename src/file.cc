@@ -6,6 +6,10 @@
 #include <cstring>
 #include <cerrno>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 namespace File {
 
 enum
@@ -14,6 +18,17 @@ enum
   // they consists of many small writes. The default size for the buffer is 64k
   WriteBufferSize = 65536
 };
+
+bool exists( char const * filename ) throw()
+{
+#ifdef __WIN32
+  struct _stat buf;
+  return _stat( filename, &buf ) == 0;
+#else
+  struct stat buf;
+  return stat( filename, &buf ) == 0;
+#endif
+}
 
 void Class::open( char const * filename, char const * mode ) throw( exCantOpen )
 {

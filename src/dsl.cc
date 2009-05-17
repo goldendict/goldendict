@@ -1276,18 +1276,14 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
 
 static bool tryPossibleName( string const & name, string & copyTo )
 {
-  try
+  if ( File::exists( name ) )
   {
-    File::Class f( name, "rb" );
-
     copyTo = name;
 
     return true;
   }
-  catch( ... )
-  {
+  else
     return false;
-  }
 }
 
 #if 0

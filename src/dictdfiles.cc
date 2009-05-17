@@ -301,18 +301,14 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
 static bool tryPossibleName( string const & name, string & copyTo )
 {
-  try
+  if ( File::exists( name ) )
   {
-    File::Class f( name, "rb" );
-
     copyTo = name;
 
     return true;
   }
-  catch( ... )
-  {
+  else
     return false;
-  }
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
