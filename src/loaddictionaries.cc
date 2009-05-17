@@ -158,7 +158,8 @@ void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw
 void loadDictionaries( QWidget * parent, bool showInitially,
                        Config::Class const & cfg,
                        std::vector< sptr< Dictionary::Class > > & dictionaries,
-                       QNetworkAccessManager & dictNetMgr )
+                       QNetworkAccessManager & dictNetMgr,
+                       bool doDeferredInit_ )
 {
   dictionaries.clear();
 
@@ -232,7 +233,12 @@ void loadDictionaries( QWidget * parent, bool showInitially,
 
   // Run deferred inits
 
+  if ( doDeferredInit_ )
+    doDeferredInit( dictionaries );
+}
+
+void doDeferredInit( std::vector< sptr< Dictionary::Class > > & dictionaries )
+{
   for( unsigned x = 0; x < dictionaries.size(); ++x )
     dictionaries[ x ]->deferredInit();
 }
-

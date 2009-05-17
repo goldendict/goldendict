@@ -53,10 +53,16 @@ private:
 /// Loads all dictionaries mentioned in the configuration passed, into the
 /// supplied array. When necessary, a window would pop up describing the process.
 /// If showInitially is passed as true, the window will always popup.
+/// If doDeferredInit is true (default), doDeferredInit() is done on all
+/// dictionaries at the end.
 void loadDictionaries( QWidget * parent, bool showInitially,
                        Config::Class const & cfg,
                        std::vector< sptr< Dictionary::Class > > &,
-                       QNetworkAccessManager & dictNetMgr );
+                       QNetworkAccessManager & dictNetMgr,
+                       bool doDeferredInit = true );
 
+/// Runs deferredInit() on all the given dictionaries. Useful when
+/// loadDictionaries() was previously called with doDeferredInit = false.
+void doDeferredInit( std::vector< sptr< Dictionary::Class > > & );
 #endif
 

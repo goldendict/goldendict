@@ -269,6 +269,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( checkForNewRelease() ) );
 
   prepareNewReleaseChecks();
+
+  // makeDictionaries() didn't do deferred init - we do it here, at the end.
+  doDeferredInit( dictionaries );
 }
 
 MainWindow::~MainWindow()
@@ -397,7 +400,7 @@ void MainWindow::makeDictionaries()
 
   wordFinder.clear();
 
-  loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr );
+  loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
   updateStatusLine();
   updateGroupList();
