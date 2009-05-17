@@ -16,6 +16,7 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
 {
   Q_OBJECT
 
+  QStringList nameFilters;
   Config::Paths const & paths;
   Config::SoundDirs const & soundDirs;
   Config::Hunspell const & hunspell;

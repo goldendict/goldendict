@@ -30,6 +30,10 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell ),
   transliteration( cfg.transliteration )
 {
+  // Populate name filters
+
+  nameFilters << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
+              << "*.dsl" << "*.dsl.dz"  << "*.index";
 }
 
 void LoadDictionaries::run()
@@ -86,7 +90,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   QDir dir( path.path );
 
-  QFileInfoList entries = dir.entryInfoList( QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot );
+  QFileInfoList entries = dir.entryInfoList( nameFilters, QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot );
 
   for( QFileInfoList::const_iterator i = entries.constBegin();
        i != entries.constEnd(); ++i )
