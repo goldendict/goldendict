@@ -98,7 +98,12 @@ void LoadDictionaries::handlePath( Config::Path const & path )
     QString fullName = i->canonicalFilePath();
 
     if ( path.recursive && i->isDir() )
-      handlePath( Config::Path( fullName, true ) );
+    {
+      // Make sure the path doesn't look like with dsl resources
+      if ( !fullName.endsWith( ".dsl.files", Qt::CaseInsensitive ) &&
+           !fullName.endsWith( ".dsl.dz.files", Qt::CaseInsensitive ) )
+        handlePath( Config::Path( fullName, true ) );
+    }
 
     allFiles.push_back( QDir::toNativeSeparators( fullName ).toLocal8Bit().data() );
   }
