@@ -236,6 +236,14 @@ public:
   /// dictionary consists of.
   Class( string const & id, vector< string > const & dictionaryFiles );
 
+  /// Called once after the dictionary is constructed. Usually called for each
+  /// dictionaries once all dictionaries were made. The implementation should
+  /// queue any initialization tasks the dictionary decided to postpone to
+  /// threadpools, network requests etc, so the system could complete them
+  /// in background.
+  /// The default implementation does nothing.
+  virtual void deferredInit();
+
   /// Returns the dictionary's id.
   string getId() throw()
   { return id; }

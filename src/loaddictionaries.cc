@@ -200,6 +200,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
+  printf( "Load done\n" );
+
   // Remove any stale index files
 
   set< string > ids;
@@ -218,5 +220,10 @@ void loadDictionaries( QWidget * parent, bool showInitially,
          i->size() == 32 )
       indexDir.remove( *i );
   }
+
+  // Run deferred inits
+
+  for( unsigned x = 0; x < dictionaries.size(); ++x )
+    dictionaries[ x ]->deferredInit();
 }
 

@@ -107,7 +107,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
-  ChunkedStorage::Reader chunks;
+  sptr< ChunkedStorage::Reader > chunks;
   string dictionaryName;
   map< string, string > abrv;
   Mutex dzMutex;
@@ -117,10 +117,19 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   QIcon dictionaryIcon;
   bool dictionaryIconLoaded;
 
+  QAtomicInt deferredInitDone;
+  Mutex deferredInitMutex;
+  bool deferredInitRunnableStarted;
+  QSemaphore deferredInitRunnableExited;
+
+  string initError;
+
 public:
 
   DslDictionary( string const & id, string const & indexFile,
-                      vector< string > const & dictionaryFiles );
+                 vector< string > const & dictionaryFiles );
+
+  virtual void deferredInit();
 
   ~DslDictionary();
 
@@ -161,6 +170,9 @@ public:
 
 private:
 
+  virtual string const & ensureInitDone();
+  void doDeferredInit();
+
   /// Loads the article. Does not process the DSL language.
   void loadArticle( uint32_t address,
                     wstring const & requestedHeadwordFolded,
@@ -177,6 +189,8 @@ private:
   string processNodeChildren( ArticleDom::Node const & node );
 
   friend class DslArticleRequest;
+  friend class DslResourceRequest;
+  friend class DslDeferredInitRunnable;
 };
 
 DslDictionary::DslDictionary( string const & id,
@@ -185,16 +199,11 @@ DslDictionary::DslDictionary( string const & id,
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
-  chunks( idx, idxHeader.chunksOffset ),
-  dictionaryIconLoaded( false )
+  dz( 0 ),
+  resourceZip( 0 ),
+  dictionaryIconLoaded( false ),
+  deferredInitRunnableStarted( false )
 {
-  // Open the .dict file
-
-  dz = dict_data_open( dictionaryFiles[ 0 ].c_str(), 0 );
-
-  if ( !dz )
-    throw exCantReadFile( dictionaryFiles[ 0 ] );
-
   // Read the dictionary name
 
   idx.seek( sizeof( idxHeader ) );
@@ -203,58 +212,159 @@ DslDictionary::DslDictionary( string const & id,
   idx.read( &dName.front(), dName.size() );
   dictionaryName = string( &dName.front(), dName.size() );
 
-  // Read the abrv, if any
-
-  if ( idxHeader.hasAbrv )
-  {
-    vector< char > chunk;
-
-    char * abrvBlock = chunks.getBlock( idxHeader.abrvAddress, chunk );
-
-    uint32_t total;
-    memcpy( &total, abrvBlock, sizeof( uint32_t ) );
-    abrvBlock += sizeof( uint32_t );
-
-    printf( "Loading %u abbrv\n", total );
-
-    while( total-- )
-    {
-      uint32_t keySz;
-      memcpy( &keySz, abrvBlock, sizeof( uint32_t ) );
-      abrvBlock += sizeof( uint32_t );
-
-      char * key = abrvBlock;
-
-      abrvBlock += keySz;
-
-      uint32_t valueSz;
-      memcpy( &valueSz, abrvBlock, sizeof( uint32_t ) );
-      abrvBlock += sizeof( uint32_t );
-
-      abrv[ string( key, keySz ) ] = string( abrvBlock, valueSz );
-
-      abrvBlock += valueSz;
-    }
-  }
-
-  // Initialize the index
-
-  openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
-                        idxHeader.indexRootOffset ),
-             idx, idxMutex );
-
-  // Open a resource zip file, if there's one
-  resourceZip = zip_open( ( getDictionaryFilenames()[ 0 ] + ".files.zip" ).c_str(), 0, 0 );
+  // Everything else would be done in deferred init
 }
 
 DslDictionary::~DslDictionary()
 {
+  Mutex::Lock _( deferredInitMutex );
+
+  // Wait for init runnable to complete if it was ever started
+  if ( deferredInitRunnableStarted )
+    deferredInitRunnableExited.acquire();
+
   if ( resourceZip )
     zip_close( resourceZip );
 
   if ( dz )
     dict_data_close( dz );
 }
+
+//////// DslDictionary::deferredInit()
+
+class DslDeferredInitRunnable: public QRunnable
+{
+  DslDictionary & dictionary;
+  QSemaphore & hasExited;
+
+public:
+
+  DslDeferredInitRunnable( DslDictionary & dictionary_,
+                           QSemaphore & hasExited_ ):
+    dictionary( dictionary_ ), hasExited( hasExited_ )
+  {}
+
+  ~DslDeferredInitRunnable()
+  {
+    hasExited.release();
+  }
+
+  virtual void run()
+  {
+    dictionary.doDeferredInit();
+  }
+};
+
+void DslDictionary::deferredInit()
+{
+  if ( !deferredInitDone )
+  {
+    Mutex::Lock _( deferredInitMutex );
+
+    if ( deferredInitDone )
+      return;
+
+    if ( !deferredInitRunnableStarted )
+    {
+      QThreadPool::globalInstance()->start(
+        new DslDeferredInitRunnable( *this, deferredInitRunnableExited ),
+        -1000 );
+      deferredInitRunnableStarted = true;
+    }
+  }
+}
+
+
+string const & DslDictionary::ensureInitDone()
+{
+  // Simple, really.
+  doDeferredInit();
+
+  return initError;
+}
+
+void DslDictionary::doDeferredInit()
+{
+  if ( !deferredInitDone )
+  {
+    Mutex::Lock _( deferredInitMutex );
+
+    if ( deferredInitDone )
+      return;
+
+    // Do deferred init
+
+    try
+    {
+      // Don't lock index file - no one should be working with it until
+      // the init is complete.
+      //Mutex::Lock _( idxMutex );
+
+      chunks = new ChunkedStorage::Reader( idx, idxHeader.chunksOffset );
+
+      // Open the .dict file
+
+      dz = dict_data_open( getDictionaryFilenames()[ 0 ].c_str(), 0 );
+
+      if ( !dz )
+        throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
+
+      // Read the abrv, if any
+
+      if ( idxHeader.hasAbrv )
+      {
+        vector< char > chunk;
+
+        char * abrvBlock = chunks->getBlock( idxHeader.abrvAddress, chunk );
+
+        uint32_t total;
+        memcpy( &total, abrvBlock, sizeof( uint32_t ) );
+        abrvBlock += sizeof( uint32_t );
+
+        printf( "Loading %u abbrv\n", total );
+
+        while( total-- )
+        {
+          uint32_t keySz;
+          memcpy( &keySz, abrvBlock, sizeof( uint32_t ) );
+          abrvBlock += sizeof( uint32_t );
+
+          char * key = abrvBlock;
+
+          abrvBlock += keySz;
+
+          uint32_t valueSz;
+          memcpy( &valueSz, abrvBlock, sizeof( uint32_t ) );
+          abrvBlock += sizeof( uint32_t );
+
+          abrv[ string( key, keySz ) ] = string( abrvBlock, valueSz );
+
+          abrvBlock += valueSz;
+        }
+      }
+
+      // Initialize the index
+
+      openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
+                            idxHeader.indexRootOffset ),
+                 idx, idxMutex );
+
+      // Open a resource zip file, if there's one
+      resourceZip = zip_open( ( getDictionaryFilenames()[ 0 ] + ".files.zip" ).c_str(), 0, 0 );
+    }
+    catch( std::exception & e )
+    {
+      initError = e.what();
+    }
+    catch( ... )
+    {
+      initError = "Unknown error";
+    }
+
+    deferredInitDone.ref();
+  }
+}
+
 
 QIcon DslDictionary::getIcon() throw()
 {
@@ -354,7 +464,7 @@ void DslDictionary::loadArticle( uint32_t address,
     {
       Mutex::Lock _( idxMutex );
 
-      articleProps = chunks.getBlock( address, chunk );
+      articleProps = chunks->getBlock( address, chunk );
     }
 
     uint32_t articleOffset, articleSize;
@@ -864,6 +974,13 @@ void DslArticleRequest::run()
     return;
   }
 
+  if ( dict.ensureInitDone().size() )
+  {
+    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    finish();
+    return;
+  }
+
   vector< WordArticleLink > chain = dict.findArticles( word );
 
   for( unsigned x = 0; x < alts.size(); ++x )
@@ -983,23 +1100,18 @@ class DslResourceRequest: public Dictionary::DataRequest
 {
   friend class DslResourceRequestRunnable;
 
-  Mutex & resourceZipMutex;
-  zip * resourceZip;
+  DslDictionary & dict;
 
-  string dictionaryFileName, resourceName;
+  string resourceName;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
 
 public:
 
-  DslResourceRequest( Mutex & resourceZipMutex_,
-                      zip * resourceZip_,
-                      string const & dictionaryFileName_,
+  DslResourceRequest( DslDictionary & dict_,
                       string const & resourceName_ ):
-    resourceZipMutex( resourceZipMutex_ ),
-    resourceZip( resourceZip_ ),
-    dictionaryFileName( dictionaryFileName_ ),
+    dict( dict_ ),
     resourceName( resourceName_ )
   {
     QThreadPool::globalInstance()->start(
@@ -1034,8 +1146,15 @@ void DslResourceRequest::run()
     return;
   }
 
+  if ( dict.ensureInitDone().size() )
+  {
+    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    finish();
+    return;
+  }
+
   string n =
-    FsEncoding::dirname( dictionaryFileName ) +
+    FsEncoding::dirname( dict.getDictionaryFilenames()[ 0 ] ) +
     FsEncoding::separator() +
     FsEncoding::encode( resourceName );
 
@@ -1051,7 +1170,7 @@ void DslResourceRequest::run()
     }
     catch( File::exCantOpen & )
     {
-      n = dictionaryFileName + ".files" +
+      n = dict.getDictionaryFilenames()[ 0 ] + ".files" +
           FsEncoding::separator() +
           FsEncoding::encode( resourceName );
 
@@ -1065,7 +1184,7 @@ void DslResourceRequest::run()
       {
         // Try reading from zip file
 
-        if ( resourceZip )
+        if ( dict.resourceZip )
         {
           string fname = FsEncoding::encode( resourceName );
 
@@ -1074,16 +1193,16 @@ void DslResourceRequest::run()
 
           zip_stat_init( &st );
 
-          Mutex::Lock _( resourceZipMutex );
+          Mutex::Lock _( dict.resourceZipMutex );
 
           int fileIndex;
 
           // We ignore case in zip files since most dsls are created for Windows,
           // where names are case-insensitive.
           if ( !isCancelled &&
-               ( fileIndex = zip_name_locate( resourceZip, fname.c_str(), ZIP_FL_NOCASE ) ) != -1 &&
-               !zip_stat_index( resourceZip, fileIndex, 0, &st ) &&
-               ( zf = zip_fopen_index( resourceZip, fileIndex, 0 ) ) )
+               ( fileIndex = zip_name_locate( dict.resourceZip, fname.c_str(), ZIP_FL_NOCASE ) ) != -1 &&
+               !zip_stat_index( dict.resourceZip, fileIndex, 0, &st ) &&
+               ( zf = zip_fopen_index( dict.resourceZip, fileIndex, 0 ) ) )
           {
             int result;
 
@@ -1150,8 +1269,7 @@ void DslResourceRequest::run()
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
   throw( std::exception )
 {
-  return new DslResourceRequest( resourceZipMutex, resourceZip,
-                                 getDictionaryFilenames()[ 0 ], name );
+  return new DslResourceRequest( *this, name );
 }
 
 } // anonymous namespace

@@ -110,6 +110,10 @@ Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
 {
 }
 
+void Class::deferredInit()
+{
+}
+
 sptr< WordSearchRequest > Class::stemmedMatch( wstring const & /*str*/,
                                                unsigned /*minLength*/,
                                                unsigned /*maxSuffixVariation*/,

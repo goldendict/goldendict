@@ -49,6 +49,13 @@ BtreeDictionary::BtreeDictionary( string const & id,
 {
 }
 
+string const & BtreeDictionary::ensureInitDone()
+{
+  static string empty;
+
+  return empty;
+}
+
 void BtreeDictionary::openIndex( IndexInfo const & indexInfo,
                                  File::Class & file, Mutex & mutex )
 {
@@ -165,6 +172,13 @@ void BtreeWordSearchRequest::run()
 {
   if ( isCancelled )
   {
+    finish();
+    return;
+  }
+
+  if ( dict.ensureInitDone().size() )
+  {
+    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
     finish();
     return;
   }

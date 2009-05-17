@@ -89,6 +89,13 @@ public:
 
 protected:
 
+  /// Called before each matching operation to ensure that any child init
+  /// has completed. Mainly used for deferred init. The default implementation
+  /// does nothing.
+  /// The function returns an empty string if the initialization is or was
+  /// successful, or a human-readable error string otherwise.
+  virtual string const & ensureInitDone();
+
   /// Opens the index. The file reference is saved to be used for
   /// subsequent lookups.
   /// The mutex is the one to be locked when working with the file.
