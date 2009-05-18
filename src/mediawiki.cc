@@ -288,7 +288,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
                                    QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
             // Replace the href="/foo/bar/Baz" to just href="Baz".
-            articleString.replace( QRegExp( "<a\\shref=\"/(\\w*/)*" ), "<a href=\"" );
+            articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
   
             // In those strings, change any underscores to spaces
             for( ; ; )
