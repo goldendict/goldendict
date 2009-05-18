@@ -22,10 +22,11 @@ void Table::ins( char const * from, char const * to )
   
 TransliterationDictionary::TransliterationDictionary( string const & id,
                                                       string const & name_,
+                                                      QIcon icon_,
                                                       Table const & table_,
                                                       bool caseSensitive_ ):
   Dictionary::Class( id, vector< string >() ),
-  name( name_ ), table( table_ ),
+  name( name_ ), icon( icon_ ), table( table_ ),
   caseSensitive( caseSensitive_ )
 {}
 

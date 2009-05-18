@@ -357,6 +357,10 @@ of the appropriate groups to use them.</string>
          <property name="text">
           <string>Russian transliteration</string>
          </property>
+         <property name="icon">
+          <iconset resource="flags.qrc">
+           <normaloff>:/flags/ru.png</normaloff>:/flags/ru.png</iconset>
+         </property>
         </widget>
        </item>
        <item>
@@ -376,6 +380,10 @@ of the appropriate groups to use them.</string>
         <widget class="QCheckBox" name="enableGermanTransliteration">
          <property name="text">
           <string>German transliteration</string>
+         </property>
+         <property name="icon">
+          <iconset resource="flags.qrc">
+           <normaloff>:/flags/de.png</normaloff>:/flags/de.png</iconset>
          </property>
         </widget>
        </item>
@@ -521,6 +529,7 @@ Standardized as ISO 3602</string>
   <tabstop>paths</tabstop>
  </tabstops>
  <resources>
+  <include location="flags.qrc"/>
   <include location="resources.qrc"/>
  </resources>
  <connections/>
