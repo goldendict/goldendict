@@ -8,6 +8,7 @@
 #include "config.hh"
 #include "ui_editdictionaries.h"
 #include "sources.hh"
+#include "orderandprops.hh"
 #include "groups.hh"
 #include "instances.hh"
 #include <QNetworkAccessManager>
@@ -59,6 +60,7 @@ private:
 
   Ui::EditDictionaries ui;
   Sources sources;
+  sptr< OrderAndProps > orderAndProps;
   sptr< Groups > groups;
 
   bool dictionariesChanged;

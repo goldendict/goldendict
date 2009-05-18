@@ -437,14 +437,28 @@ void MainWindow::updateGroupList()
 
   groupInstances.clear();
 
-  for( unsigned x  = 0; x < cfg.groups.size(); ++x )
+  // Add dictionaryOrder first, as the 'All' group.
   {
+    Instances::Group g( cfg.dictionaryOrder, dictionaries );
+
+    g.name = tr( "All" );
+    g.id = UINT_MAX - 1; // Currently we use this as an 'all' group id
+    g.icon = "folder.png";
+
+    groupInstances.push_back( g );
+  }
+
+  for( unsigned x  = 0; x < cfg.groups.size(); ++x )
     groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
 
-    // Update names for dictionaries that are present, so that they could be
-    // found in case they got moved.
-    Instances::updateNames( cfg.groups[ x ], dictionaries );
-  }
+  // Update names for dictionaries that are present, so that they could be
+  // found in case they got moved.
+  Instances::updateNames( cfg, dictionaries );
+
+  // Add any missing entries to dictionary order
+  Instances::complementDictionaryOrder( cfg.dictionaryOrder,
+                                        cfg.inactiveDictionaries,
+                                        dictionaries );
 
   groupList.fill( groupInstances );
   groupList.setCurrentGroup( cfg.lastMainGroupId );
@@ -471,7 +485,7 @@ void MainWindow::makeScanPopup()
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
 {
-  if ( cfg.groups.empty() )
+  if ( groupInstances.empty() )
     return dictionaries;
 
   int current = groupList.currentIndex();
@@ -597,7 +611,7 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
 
 void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
 {
-  ui.tabWidget->setTabIcon( ui.tabWidget->indexOf( view ), icon );
+  ui.tabWidget->setTabIcon( ui.tabWidget->indexOf( view ), groupInstances.size() > 1 ? icon : QIcon() );
 }
 
 void MainWindow::pageLoaded( ArticleView * view )
@@ -954,7 +968,7 @@ void MainWindow::showTranslationFor( QString const & inWord )
 
   navPronounce->setEnabled( false );
 
-  view.showDefinition( inWord, cfg.groups.empty() ? 0 :
+  view.showDefinition( inWord, groupInstances.empty() ? 0 :
                         groupInstances[ groupList.currentIndex() ].id );
 
   updatePronounceAvailability();

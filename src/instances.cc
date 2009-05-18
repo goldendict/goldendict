@@ -2,8 +2,12 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "instances.hh"
+#include <set>
 
 namespace Instances {
+
+using std::set;
+using std::string;
 
 Group::Group( Config::Group const & cfgGroup,
               vector< sptr< Dictionary::Class > > const & allDictionaries ):
@@ -41,7 +45,7 @@ Group::Group( Config::Group const & cfgGroup,
   }
 }
 
-Group::Group( QString const & name_ ): name( name_ )
+Group::Group( QString const & name_ ): id( 0 ), name( name_ )
 {
 }
 
@@ -79,6 +83,27 @@ Group const * Groups::findGroup( unsigned id ) const
   return 0;
 }
 
+void complementDictionaryOrder( Config::Group & group,
+                                Config::Group const & inactiveDictionaries,
+                                vector< sptr< Dictionary::Class > > const & dicts )
+{
+  set< string > presentIds;
+
+  for( unsigned x = group.dictionaries.size(); x--; )
+    presentIds.insert( group.dictionaries[ x ].id.toStdString() );
+
+  for( unsigned x = inactiveDictionaries.dictionaries.size(); x--; )
+    presentIds.insert( inactiveDictionaries.dictionaries[ x ].id.toStdString() );
+
+  for( unsigned x = 0; x < dicts.size(); ++x )
+  {
+    if ( presentIds.find( dicts[ x ]->getId() ) == presentIds.end() )
+      group.dictionaries.push_back(
+          Config::DictionaryRef( QString::fromStdString( dicts[ x ]->getId() ),
+                                 QString::fromUtf8( dicts[ x ]->getName().c_str() ) ) );
+  }
+}
+
 void updateNames( Config::Group & group,
                   vector< sptr< Dictionary::Class > > const & allDictionaries )
 {
@@ -96,5 +121,19 @@ void updateNames( Config::Group & group,
   }
 }
 
+void updateNames( Config::Groups & groups,
+                  vector< sptr< Dictionary::Class > > const & allDictionaries )
+{
+  for( unsigned x = 0; x < groups.size(); ++x )
+    updateNames( groups[ x ], allDictionaries );
+}
+
+void updateNames( Config::Class & cfg,
+                  vector< sptr< Dictionary::Class > > const & allDictionaries )
+{
+  updateNames( cfg.dictionaryOrder, allDictionaries );
+  updateNames( cfg.inactiveDictionaries, allDictionaries );
+  updateNames( cfg.groups, allDictionaries );
+}
 
 }

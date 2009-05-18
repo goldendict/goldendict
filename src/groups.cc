@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "groups.hh"
+#include "instances.hh"
 #include <QMessageBox>
 #include <QInputDialog>
 
@@ -9,7 +10,8 @@ using std::vector;
 
 Groups::Groups( QWidget * parent,
                 vector< sptr< Dictionary::Class > > const & dicts_,
-                Config::Groups const & groups_ ): QWidget( parent ),
+                Config::Groups const & groups_,
+                Config::Group const & order ): QWidget( parent ),
   dicts( dicts_ ), groups( groups_ )
 {
   ui.setupUi( this );
@@ -17,7 +19,8 @@ Groups::Groups( QWidget * parent,
   // Populate the dictionaries' list
 
   ui.dictionaries->setAsSource();
-  ui.dictionaries->populate( dicts, dicts );
+  ui.dictionaries->populate( Instances::Group( order, dicts ).dictionaries,
+                             dicts );
 
   // Populate groups' widget
 
@@ -37,6 +40,20 @@ Groups::Groups( QWidget * parent,
            this, SLOT( removeFromGroup() ) );
 
   countChanged();
+}
+
+void Groups::updateDictionaryOrder( Config::Group const & order )
+{
+  // Make sure it differs from what we have
+
+  Instances::Group newOrder( order, dicts );
+
+  if ( ui.dictionaries->getCurrentDictionaries() != newOrder.dictionaries )
+  {
+    // Repopulate
+    ui.dictionaries->populate( Instances::Group( order, dicts ).dictionaries,
+                               dicts );
+  }
 }
 
 Config::Groups Groups::getGroups() const

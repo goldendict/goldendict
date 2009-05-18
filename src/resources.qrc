@@ -9,6 +9,7 @@
         <file>icons/addtab.png</file>
         <file>icons/next.png</file>
         <file>icons/previous.png</file>
+	<file>icons/reload.png</file>
         <file>icons/programicon.png</file>
         <file>icons/programicon_scan.png</file>
         <file>icons/wizard.png</file>

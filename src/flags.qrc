@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/" >
         <file>flags/wiki.png</file>
+        <file>flags/folder.png</file>
         <file>flags/ad.png</file>
         <file>flags/ae.png</file>
         <file>flags/af.png</file>

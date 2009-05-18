@@ -115,7 +115,8 @@ HEADERS += folding.hh \
     romaji.hh \
     russiantranslit.hh \
     german.hh \
-    website.hh
+    website.hh \
+    orderandprops.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -126,7 +127,8 @@ FORMS += groups.ui \
     articleview.ui \
     preferences.ui \
     about.ui \
-    editdictionaries.ui
+    editdictionaries.ui \
+    orderandprops.ui
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -181,7 +183,8 @@ SOURCES += folding.cc \
     romaji.cc \
     russiantranslit.cc \
     german.cc \
-    website.cc
+    website.cc \
+    orderandprops.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h

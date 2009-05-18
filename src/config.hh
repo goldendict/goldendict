@@ -80,6 +80,9 @@ struct Group
   bool operator == ( Group const & other ) const
   { return id == other.id && name == other.name && icon == other.icon &&
            dictionaries == other.dictionaries; }
+
+  bool operator != ( Group const & other ) const
+  { return ! operator == ( other ); }
 };
 
 /// All the groups

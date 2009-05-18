@@ -17,7 +17,13 @@ class Groups: public QWidget
 public:
   Groups( QWidget * parent,
           std::vector< sptr< Dictionary::Class > > const &,
-          Config::Groups const & );
+          Config::Groups const &,
+          Config::Group const & order );
+
+  /// Should be called when the dictionary order has changed to reflect on
+  /// that changes. It would only do anything if the order has actually
+  /// changed.
+  void updateDictionaryOrder( Config::Group const & order );
 
   Config::Groups getGroups() const;
 

@@ -42,11 +42,29 @@ struct Groups: public vector< Group >
   Group const * findGroup( unsigned id ) const;
 };
 
+/// Adds any dictionaries not already present in the given group or in
+/// inactiveDictionaires to its end. Meant to be used with dictionaryOrder
+/// special group.
+void complementDictionaryOrder( Config::Group & dictionaryOrder,
+                                Config::Group const & inactiveDictionaries,
+                                vector< sptr< Dictionary::Class > > const &
+                                allDictionaries );
+
 /// For any dictionaries present in the group, updates their names to match
 /// the dictionaries they refer to in their current form, if they exist.
 /// If the dictionary instance can't be located, the name is left untouched.
 void updateNames( Config::Group &,
                   vector< sptr< Dictionary::Class > > const & allDictionaries );
+
+/// Does updateNames() for a set of given groups.
+void updateNames( Config::Groups &,
+                  vector< sptr< Dictionary::Class > > const & allDictionaries );
+
+/// Does updateNames() for any relevant dictionary groups present in the
+/// configuration.
+void updateNames( Config::Class &,
+                  vector< sptr< Dictionary::Class > > const & allDictionaries );
+
 
 }
 

@@ -390,7 +390,7 @@ void ScanPopup::showEvent( QShowEvent * ev )
 {
   QDialog::showEvent( ev );
   
-  if ( groups.empty() )
+  if ( groups.size() <= 1 ) // Only the default group? Hide then.
     ui.groupList->hide();
 }
 

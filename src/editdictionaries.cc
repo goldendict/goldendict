@@ -17,18 +17,29 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   origCfg( cfg ),
   sources( this, cfg.paths, cfg.soundDirs, cfg.hunspell, cfg.transliteration,
            cfg.mediawikis, cfg.webSites ),
-  groups( new Groups( this, dictionaries, cfg.groups ) ),
+  orderAndProps( new OrderAndProps( this, cfg.dictionaryOrder, cfg.inactiveDictionaries,
+                                    dictionaries ) ),
+  groups( new Groups( this, dictionaries, cfg.groups, cfg.dictionaryOrder ) ),
   dictionariesChanged( false ),
   groupsChanged( false ),
   lastCurrentTab( 0 )
 {
+  // Some groups may have contained links to non-existnent dictionaries. We
+  // would like to preserve them if no edits were done. To that end, we save
+  // the initial group readings so that if no edits were really done, we won't
+  // be changing groups.
+  origCfg.groups = groups->getGroups();
+  origCfg.dictionaryOrder = orderAndProps->getCurrentDictionaryOrder();
+  origCfg.inactiveDictionaries = orderAndProps->getCurrentInactiveDictionaries();
+
   ui.setupUi( this );
 
   setWindowIcon( QIcon(":/icons/book.png") );
 
   ui.tabs->clear();
 
-  ui.tabs->addTab( &sources, QIcon(":/icons/book.png"), tr( "&Sources" ) );
+  ui.tabs->addTab( &sources, QIcon(":/icons/reload.png"), tr( "&Sources" ) );
+  ui.tabs->addTab( orderAndProps.get(), QIcon(":/icons/book.png"), tr( "&Dictionaries" ) );
   ui.tabs->addTab( groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
 
   connect( &sources, SIGNAL( rescan() ), this, SLOT( rescanSources() ) );
@@ -38,14 +49,19 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 void EditDictionaries::accept()
 {
   Config::Groups newGroups = groups->getGroups();
+  Config::Group newOrder = orderAndProps->getCurrentDictionaryOrder();
+  Config::Group newInactive = orderAndProps->getCurrentInactiveDictionaries();
 
   if ( isSourcesChanged() )
     acceptChangedSources( false );
 
-  if ( origCfg.groups != newGroups )
+  if ( origCfg.groups != newGroups || origCfg.dictionaryOrder != newOrder ||
+       origCfg.inactiveDictionaries != newInactive )
   {
     groupsChanged = true;
     cfg.groups = newGroups;
+    cfg.dictionaryOrder = newOrder;
+    cfg.inactiveDictionaries = newInactive;
   }
 
   QDialog::accept();
@@ -90,6 +106,13 @@ void EditDictionaries::on_tabs_currentChanged( int index )
       }
     }
   }
+  else
+  if ( lastCurrentTab == 1 && index != 1 )
+  {
+    // When switching from the dictionary order, we need to propagate any
+    // changes to the groups.
+    groups->updateDictionaryOrder( orderAndProps->getCurrentDictionaryOrder() );
+  }
 
   lastCurrentTab = index;
 }
@@ -114,6 +137,8 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   dictionariesChanged = true;
 
   Config::Groups savedGroups = groups->getGroups();
+  Config::Group savedOrder = orderAndProps->getCurrentDictionaryOrder();
+  Config::Group savedInactive = orderAndProps->getCurrentInactiveDictionaries();
 
   cfg.paths = sources.getPaths();
   cfg.soundDirs = sources.getSoundDirs();
@@ -127,14 +152,60 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
 
   ui.tabs->setUpdatesEnabled( false );
   ui.tabs->removeTab( 1 );
+  ui.tabs->removeTab( 1 );
   groups.reset();
-  
+  orderAndProps.reset();
+
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+
+  // If no changes to groups were made, update the original data
+  if ( origCfg.groups == savedGroups )
+  {
+    Config::Groups origGroups = cfg.groups;
+
+    Instances::updateNames( origGroups, dictionaries );
+
+    origCfg.groups = origGroups;
+    savedGroups = origGroups;
+  }
+  else
+    Instances::updateNames( savedGroups, dictionaries );
+
+  if ( origCfg.dictionaryOrder == savedOrder )
+  {
+    Config::Group origOrder = cfg.dictionaryOrder;
+
+    Instances::updateNames( origOrder, dictionaries );
+    origCfg.dictionaryOrder = origOrder;
+    savedOrder = origOrder;
+  }
+  else
+    Instances::updateNames( savedOrder, dictionaries );
+
+  if ( origCfg.inactiveDictionaries == savedInactive )
+  {
+    Config::Group origInactive = cfg.inactiveDictionaries;
+
+    Instances::updateNames( origInactive, dictionaries );
+    origCfg.inactiveDictionaries = origInactive;
+    savedInactive = origInactive;
+  }
+  else
+    Instances::updateNames( savedInactive, dictionaries );
+
+  Instances::complementDictionaryOrder( savedOrder,
+                                        savedInactive,
+                                        dictionaries );
+
 
   if ( rebuildGroups )
   {
-    groups = new Groups( this, dictionaries, savedGroups );
-    ui.tabs->insertTab( 1, groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
+    orderAndProps = new OrderAndProps( this, savedOrder, savedInactive, dictionaries );
+    ui.tabs->insertTab( 1, orderAndProps.get(), QIcon(":/icons/book.png"), tr( "&Dictionaries" ) );
+
+    groups = new Groups( this, dictionaries, savedGroups, savedOrder );
+    ui.tabs->insertTab( 2, groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
+
     ui.tabs->setUpdatesEnabled( true );
   }
 }
