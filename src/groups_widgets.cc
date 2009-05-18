@@ -251,7 +251,7 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
 
   QVector< std::string > list;
   QVector< std::string > dicts;
-  for ( int i = 0; i < dictionaries.size(); i++ )
+  for ( unsigned i = 0; i < dictionaries.size(); i++ )
     dicts.append( dictionaries.at( i )->getId() );
 
   for ( int i = 0; i < rows.count(); i++ )
@@ -265,7 +265,7 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
   if ( list.empty() )
     return;
 
-  for ( int i = 0; i < allDicts->size(); i++ )
+  for ( unsigned i = 0; i < allDicts->size(); i++ )
   {
     for ( int j = 0; j < list.size(); j++ )
     {
@@ -291,7 +291,7 @@ void DictListModel::filterDuplicates()
   QSet< QString > ids;
   bool doReset = false;
 
-  for ( int i = 0; i < dictionaries.size(); i++ )
+  for ( unsigned i = 0; i < dictionaries.size(); i++ )
   {
     QString id = QString::fromStdString( dictionaries.at( i )->getId() );
 
@@ -349,31 +349,11 @@ std::vector< sptr< Dictionary::Class > > const &
 
 void DictListWidget::dropEvent ( QDropEvent * event )
 {
-  DictListWidget * sourceList = dynamic_cast< DictListWidget* > ( event->source() );
-
-//  if ( sourceList == this )
-//  {
-//    event->accept();
-//    return;
-//  }
-//
-//  if ( sourceList && sourceList->model.sourceModel() )
-//  {
-//    model.addSelectedUniqueFromModel( sourceList->selectionModel() );
-//    event->ignore();
-//    return;
-//  }
-
-  if ( sourceList && !( sourceList->model.sourceModel() ) && ( sourceList != this ) )
-  {
-    sourceList->model.removeSelectedRows( sourceList->selectionModel() );
-    event->ignore();
-    return;
-  }
+  DictListWidget * sourceList = dynamic_cast< DictListWidget * > ( event->source() );
 
   QListView::dropEvent( event );
 
-  if ( sourceList && sourceList->model.sourceModel() && ( sourceList != this ) )
+  if ( sourceList != this )
   {
     model.filterDuplicates();
   }
