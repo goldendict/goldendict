@@ -60,23 +60,6 @@ void LoadDictionaries::run()
       dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
                            hunspellDictionaries.end() );
     }
-
-    // Make romaji
-    {
-      vector< sptr< Dictionary::Class > > romajiDictionaries =
-        Romaji::makeDictionaries( transliteration.romaji );
-
-      dictionaries.insert( dictionaries.end(), romajiDictionaries.begin(),
-                           romajiDictionaries.end() );
-    }
-
-    // Make Russian transliteration
-    if ( transliteration.enableRussianTransliteration )
-      dictionaries.push_back( RussianTranslit::makeDictionary() );
-
-    // Make German transliteration
-    if ( transliteration.enableGermanTransliteration )
-      dictionaries.push_back( GermanTranslit::makeDictionary() );
   }
   catch( std::exception & e )
   {
@@ -192,6 +175,25 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   }
 
   dictionaries = loadDicts.getDictionaries();
+
+  ///// We create transliterations syncronously since they are very simple
+
+  // Make Romaji
+  {
+    vector< sptr< Dictionary::Class > > romajiDictionaries =
+      Romaji::makeDictionaries( cfg.transliteration.romaji );
+
+    dictionaries.insert( dictionaries.end(), romajiDictionaries.begin(),
+                         romajiDictionaries.end() );
+  }
+
+  // Make Russian transliteration
+  if ( cfg.transliteration.enableRussianTransliteration )
+    dictionaries.push_back( RussianTranslit::makeDictionary() );
+
+  // Make German transliteration
+  if ( cfg.transliteration.enableGermanTransliteration )
+    dictionaries.push_back( GermanTranslit::makeDictionary() );
 
   ///// We create MediaWiki dicts syncronously, since they use netmgr
 
