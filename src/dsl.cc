@@ -630,7 +630,10 @@ string DslDictionary::dslToHtml( wstring const & str )
     if ( html[ x ] == '\n' )
       html.insert( x + 1, "</p><p>" );
 
-  return "<!-- DSL Source:\n" + Utf8::encode( str ) + "\n-->"
+  return
+#if 0 // Enable this to enable dsl source in html as a comment
+      "<!-- DSL Source:\n" + Utf8::encode( str ) + "\n-->"
+#endif
          "<p>" + html + "</p>";
 }
 
