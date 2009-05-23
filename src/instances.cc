@@ -83,24 +83,22 @@ Group const * Groups::findGroup( unsigned id ) const
   return 0;
 }
 
-void complementDictionaryOrder( Config::Group & group,
-                                Config::Group const & inactiveDictionaries,
+void complementDictionaryOrder( Group & group,
+                                Group const & inactiveDictionaries,
                                 vector< sptr< Dictionary::Class > > const & dicts )
 {
   set< string > presentIds;
 
   for( unsigned x = group.dictionaries.size(); x--; )
-    presentIds.insert( group.dictionaries[ x ].id.toStdString() );
+    presentIds.insert( group.dictionaries[ x ]->getId());
 
   for( unsigned x = inactiveDictionaries.dictionaries.size(); x--; )
-    presentIds.insert( inactiveDictionaries.dictionaries[ x ].id.toStdString() );
+    presentIds.insert( inactiveDictionaries.dictionaries[ x ]->getId() );
 
   for( unsigned x = 0; x < dicts.size(); ++x )
   {
     if ( presentIds.find( dicts[ x ]->getId() ) == presentIds.end() )
-      group.dictionaries.push_back(
-          Config::DictionaryRef( QString::fromStdString( dicts[ x ]->getId() ),
-                                 QString::fromUtf8( dicts[ x ]->getName().c_str() ) ) );
+      group.dictionaries.push_back( dicts[ x ] );
   }
 }
 

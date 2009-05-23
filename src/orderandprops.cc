@@ -12,12 +12,14 @@ OrderAndProps::OrderAndProps( QWidget * parent,
   QWidget( parent )
 {
   ui.setupUi( this );
-  ui.dictionaryOrder->populate(
-    Instances::Group( dictionaryOrder, allDictionaries ).dictionaries,
-    allDictionaries );
-  ui.inactiveDictionaries->populate(
-    Instances::Group( inactiveDictionaries, allDictionaries ).dictionaries,
-    allDictionaries );
+
+  Instances::Group order( dictionaryOrder, allDictionaries );
+  Instances::Group inactive( inactiveDictionaries, allDictionaries );
+
+  Instances::complementDictionaryOrder( order, inactive, allDictionaries );
+
+  ui.dictionaryOrder->populate( order.dictionaries, allDictionaries );
+  ui.inactiveDictionaries->populate( inactive.dictionaries, allDictionaries );
 }
 
 Config::Group OrderAndProps::getCurrentDictionaryOrder() const

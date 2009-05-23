@@ -45,8 +45,8 @@ struct Groups: public vector< Group >
 /// Adds any dictionaries not already present in the given group or in
 /// inactiveDictionaires to its end. Meant to be used with dictionaryOrder
 /// special group.
-void complementDictionaryOrder( Config::Group & dictionaryOrder,
-                                Config::Group const & inactiveDictionaries,
+void complementDictionaryOrder( Group & dictionaryOrder,
+                                Group const & inactiveDictionaries,
                                 vector< sptr< Dictionary::Class > > const &
                                 allDictionaries );
 

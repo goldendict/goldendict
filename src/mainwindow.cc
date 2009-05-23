@@ -282,6 +282,17 @@ MainWindow::~MainWindow()
 
   // Save any changes in last chosen groups etc
   Config::save( cfg );
+
+  // Close all tabs -- they should be destroyed before network managers
+  // do.
+  while( ui.tabWidget->count() )
+  {
+    QWidget * w = ui.tabWidget->widget( 0 );
+
+    ui.tabWidget->removeTab( 0 );
+
+    delete w;
+  }
 }
 
 void MainWindow::applyQtStyleSheet( QString const & displayStyle )
@@ -441,6 +452,11 @@ void MainWindow::updateGroupList()
   {
     Instances::Group g( cfg.dictionaryOrder, dictionaries );
 
+    // Add any missing entries to dictionary order
+    Instances::complementDictionaryOrder( g,
+                                          Instances::Group( cfg.inactiveDictionaries, dictionaries ),
+                                          dictionaries );
+
     g.name = tr( "All" );
     g.id = UINT_MAX - 1; // Currently we use this as an 'all' group id
     g.icon = "folder.png";
@@ -454,11 +470,6 @@ void MainWindow::updateGroupList()
   // Update names for dictionaries that are present, so that they could be
   // found in case they got moved.
   Instances::updateNames( cfg, dictionaries );
-
-  // Add any missing entries to dictionary order
-  Instances::complementDictionaryOrder( cfg.dictionaryOrder,
-                                        cfg.inactiveDictionaries,
-                                        dictionaries );
 
   groupList.fill( groupInstances );
   groupList.setCurrentGroup( cfg.lastMainGroupId );
