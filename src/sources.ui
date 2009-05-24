@@ -435,9 +435,14 @@ based on English phonology</string>
           </item>
           <item row="0" column="2">
            <widget class="QCheckBox" name="enableNihonShiki">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="toolTip">
              <string>The most regular system, having a one-to-one relation to the
-kana writing systems. Standardized as ISO 3602</string>
+kana writing systems. Standardized as ISO 3602
+
+Not implemented yet in GoldenDict.</string>
             </property>
             <property name="text">
              <string>Nihon-shiki</string>
@@ -446,9 +451,14 @@ kana writing systems. Standardized as ISO 3602</string>
           </item>
           <item row="0" column="3">
            <widget class="QCheckBox" name="enableKunreiShiki">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="toolTip">
              <string>Based on Nihon-shiki system, but modified for modern standard Japanese.
-Standardized as ISO 3602</string>
+Standardized as ISO 3602
+
+Not implemented yet in GoldenDict.</string>
             </property>
             <property name="text">
              <string>Kunrei-shiki</string>
