@@ -485,7 +485,7 @@ Not implemented yet in GoldenDict.</string>
           <item row="1" column="3">
            <widget class="QCheckBox" name="enableKatakana">
             <property name="toolTip">
-             <string>Hiragana Japanese syllabary</string>
+             <string>Katakana Japanese syllabary</string>
             </property>
             <property name="text">
              <string>Katakana</string>
