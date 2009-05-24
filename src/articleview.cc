@@ -565,7 +565,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       QIcon icon = altGroup->icon.size() ? QIcon( ":/flags/" + altGroup->icon ) :
                    QIcon();
 
-      lookupSelectionGr = new QAction( icon, tr( "&Look up \"%1\" in %2" ).
+      lookupSelectionGr = new QAction( icon, tr( "Look up \"%1\" in %2" ).
                                        arg( ui.definition->selectedText() ).
                                        arg( altGroup->name ), &menu );
       menu.addAction( lookupSelectionGr );
