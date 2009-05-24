@@ -347,7 +347,7 @@ std::vector< sptr< Dictionary::Class > > const &
   return model.getCurrentDictionaries();
 }
 
-void DictListWidget::dropEvent ( QDropEvent * event )
+void DictListWidget::dropEvent( QDropEvent * event )
 {
   DictListWidget * sourceList = dynamic_cast< DictListWidget * > ( event->source() );
 
@@ -358,6 +358,30 @@ void DictListWidget::dropEvent ( QDropEvent * event )
     model.filterDuplicates();
   }
 }
+
+void DictListWidget::rowsInserted( QModelIndex const & parent, int start, int end )
+{
+  QListView::rowsInserted( parent, start, end );
+
+  // When inserting new rows, make the first of them current
+  selectionModel()->setCurrentIndex( model.index( start, 0, parent ),
+                                     QItemSelectionModel::NoUpdate );
+}
+
+void DictListWidget::rowsAboutToBeRemoved( QModelIndex const & parent, int start, int end )
+{
+  // When removing rows, if the current row is among the removed ones, select
+  // an item just before the first row to be removed, if there's one.
+  QModelIndex current = currentIndex();
+
+  if ( current.isValid() && current.row() &&
+       current.row() >= start && current.row() <= end )
+    selectionModel()->setCurrentIndex( model.index( current.row() - 1, 0, parent ),
+                                       QItemSelectionModel::NoUpdate );
+
+  QListView::rowsAboutToBeRemoved( parent, start, end );
+}
+
 
 // DictGroupsWidget
 

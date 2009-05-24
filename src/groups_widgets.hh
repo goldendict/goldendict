@@ -78,7 +78,11 @@ public:
   { return & model; }
 
 protected:
-  virtual void dropEvent ( QDropEvent * event );
+  virtual void dropEvent( QDropEvent * event );
+
+  // We need these to to handle drag-and-drop focus issues
+  virtual void rowsInserted( QModelIndex const & parent, int start, int end );
+  virtual void rowsAboutToBeRemoved( QModelIndex const & parent, int start, int end );
 
 private:
   DictListModel model;
