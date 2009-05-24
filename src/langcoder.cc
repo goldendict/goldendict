@@ -59,6 +59,19 @@ LangStruct LangCoder::langStruct(quint32 code)
   return ls;
 }
 
+QString LangCoder::intToCode2( quint32 val )
+{
+  if ( !val )
+    return QString();
+
+  char code[ 2 ];
+
+  code[ 0 ] = val & 0xFF;
+  code[ 1 ] = ( val >> 8 ) & 0xFF;
+
+  return QString::fromAscii( code, 2 );
+}
+
 quint32 LangCoder::code3toInt(const std::string& code3)
 {
   if (code3.length() < 2)

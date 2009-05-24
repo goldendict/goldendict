@@ -20,10 +20,17 @@ public:
   Config::Group getCurrentDictionaryOrder() const;
   Config::Group getCurrentInactiveDictionaries() const;
 
+private slots:
+
+  void on_dictionaryOrder_clicked( QModelIndex const & );
+  void on_inactiveDictionaries_clicked( QModelIndex const & );
+
 private:
 
   Ui::OrderAndProps ui;
 
+  void disableDictionaryDescription();
+  void describeDictionary( DictListWidget *, QModelIndex const & );
 };
 
 #endif
