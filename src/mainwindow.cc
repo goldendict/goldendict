@@ -1357,9 +1357,15 @@ void MainWindow::on_actionCloseToTray_activated()
 
 void MainWindow::on_pageSetup_activated()
 {
-  QPageSetupDialog dialog( &printer, this );
+  if ( printer.isValid() )
+  {
+    QPageSetupDialog dialog( &printer, this );
 
-  dialog.exec();
+    dialog.exec();
+  }
+  else
+    QMessageBox::critical( this, tr( "Page Setup" ),
+                           tr( "No printer is available. Please install one first." ) );
 }
 
 void MainWindow::on_printPreview_activated()

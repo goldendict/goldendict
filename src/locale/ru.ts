@@ -2221,27 +2221,37 @@
         <translation>Пропустить данную версию</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1379"/>
+        <location filename="../mainwindow.cc" line="1367"/>
+        <source>Page Setup</source>
+        <translation>Параметры страницы</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1368"/>
+        <source>No printer is available. Please install one first.</source>
+        <translation>В системе не установлено ни одного принтера.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1385"/>
         <source>Print Article</source>
         <translation>Печать статьи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1400"/>
+        <location filename="../mainwindow.cc" line="1406"/>
         <source>Save Article As</source>
         <translation>Сохранить статью как</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1400"/>
+        <location filename="../mainwindow.cc" line="1406"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлы Html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1415"/>
+        <location filename="../mainwindow.cc" line="1421"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1416"/>
+        <location filename="../mainwindow.cc" line="1422"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Невозможно сохранить статью: %1</translation>
     </message>
