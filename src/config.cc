@@ -236,6 +236,11 @@ Class load() throw( exError )
     c.preferences.audioPlaybackProgram = "mplayer";
     #endif
 
+    QString possibleMorphologyPath = getProgramDataDir() + "/content/morphology";
+
+    if ( QDir( possibleMorphologyPath ).exists() )
+      c.hunspell.dictionariesPath = possibleMorphologyPath;
+
     c.mediawikis = makeDefaultMediaWikis( true );
     c.webSites = makeDefaultWebSites();
 
