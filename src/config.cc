@@ -82,7 +82,7 @@ Preferences::Preferences():
   enableMainWindowHotkey( true ),
   mainWindowHotkey( QKeySequence( "Ctrl+F11,F11" ) ),
   enableClipboardHotkey( true ),
-  clipboardHotkey( QKeySequence( "Ctrl+Ins,Ins" ) ),
+  clipboardHotkey( QKeySequence( "Ctrl+C,C" ) ),
 
   enableScanPopup( true ),
   startWithScanPopupOn( false ),
