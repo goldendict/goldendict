@@ -123,17 +123,14 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
     {
       result += tr(
 "<h3 align=\"center\">Welcome to <b>GoldenDict</b>!</h3>"
-"<p>To start working with the program, first visit <b>Edit|Sources</b> to add some directory paths where to search "
-"for the dictionary files, and/or set up various Wikipedia sources. "
-"After that, you can optionally organize all the dictionaries found into groups "
-"in <b>Edit|Groups</b>."
-"<p>You can also check out the available program preferences at <b>Edit|Preferences</b>. "
-"All settings there have tooltips, be sure to read them if you are in doubt about anything."
+"<p>To start working with the program, first visit <b>Edit|Dictionaries</b> to add some directory paths where to search "
+"for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups."
 "<p>And then you're ready to look up your words! You can do that in this window "
 "by using a pane to the left, or you can <a href=\"Working with popup\">look up words from other active applications</a>. "
+"<p>To customize program, check out the available preferences at <b>Edit|Preferences</b>. "
+"All settings there have tooltips, be sure to read them if you are in doubt about anything."
 "<p>Should you need further help, have any questions, "
 "suggestions or just wonder what the others think, you are welcome at the program's <a href=\"http://goldendict.berlios.de/forum/\">forum</a>."
-"<p>You can also contact the author directly by writing an <a href=\"mailto: Konstantin Isakov <ikm@users.berlios.de>\">e-mail</a>."
 "<p>Check program's <a href=\"http://goldendict.berlios.de/\">website</a> for the updates. "
 "<p>(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later."
         
