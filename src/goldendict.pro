@@ -116,7 +116,8 @@ HEADERS += folding.hh \
     russiantranslit.hh \
     german.hh \
     website.hh \
-    orderandprops.hh
+    orderandprops.hh \
+    language.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -184,7 +185,8 @@ SOURCES += folding.cc \
     russiantranslit.cc \
     german.cc \
     website.cc \
-    orderandprops.cc
+    orderandprops.cc \
+    language.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h

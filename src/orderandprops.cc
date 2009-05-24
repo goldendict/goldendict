@@ -4,6 +4,7 @@
 #include "orderandprops.hh"
 #include "instances.hh"
 #include "langcoder.hh"
+#include "language.hh"
 
 OrderAndProps::OrderAndProps( QWidget * parent,
                               Config::Group const & dictionaryOrder,
@@ -73,9 +74,9 @@ void OrderAndProps::disableDictionaryDescription()
 }
 
 namespace {
-  QString makeLangText( quint32 langId )
+  QString makeLangText( Language::Id langId )
   {
-    QString name = LangCoder::decode( langId );
+    QString name = Language::localizedNameForId( langId );
 
     if ( name.isEmpty() )
       return name;

@@ -6,6 +6,7 @@
 #include "instances.hh"
 #include "config.hh"
 #include "langcoder.hh"
+#include "language.hh"
 
 #include <QMenu>
 #include <QDir>
@@ -107,8 +108,8 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
     {
       QString tt = "<b>" + QString::fromUtf8( item->getName().c_str() ) + "</b>";
 
-      QString lfrom( LangCoder::decode( item->getLangFrom() ) );
-      QString lto( LangCoder::decode( item->getLangTo() ) );
+      QString lfrom( Language::localizedNameForId( item->getLangFrom() ) );
+      QString lto( Language::localizedNameForId( item->getLangTo() ) );
       if ( !lfrom.isEmpty() )
       {
         if ( lfrom == lto )
