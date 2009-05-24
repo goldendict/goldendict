@@ -55,54 +55,58 @@
         <translation>Добро пожаловать!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="124"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Sources&lt;/b&gt; to add some directory paths where to search for the dictionary files, and/or set up various Wikipedia sources. After that, you can optionally organize all the dictionaries found into groups in &lt;b&gt;Edit|Groups&lt;/b&gt;.&lt;p&gt;You can also check out the available program preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;You can also contact the author directly by writing an &lt;a href=&quot;mailto: Konstantin Isakov &lt;ikm@users.berlios.de&gt;&quot;&gt;e-mail&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Добро пожаловать в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Если вы запустили программу в первый раз, укажите пути к словарям в &lt;b&gt;Правка|Источники&lt;/b&gt;. После этого сгруппируйте найденные словари в &lt;b&gt;Правка|Группы&lt;/b&gt;.&lt;p&gt;Вы можете настроить параметры программы в &lt;b&gt;Правка|Параметры&lt;/b&gt;. Все параметры настройки имеют подсказки, показываемые при наведении курсора на них.&lt;p&gt;Теперь всё готово для поиска слов! Введите слово в верхнее поле левой панели. Также вы можете &lt;a href=&quot;Всплывающее окно&quot;&gt;искать слова прямо из других приложений&lt;/a&gt;.&lt;p&gt;Если вы хотите помочь в разработке и улучшении программы, пишите на &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форум&lt;/a&gt; или непосредственно автору &lt;a href=&quot;mailto: Konstantin Isakov &lt;ikm@users.berlios.de&gt;&quot;&gt;по электронной почте&lt;/a&gt;.&lt;p&gt;Последняя версия программы доступна на &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;веб-сайте GoldenDict&lt;/a&gt;.&lt;p&gt;© Константин Исаков, 2008-2009. Лицензия: GPLv3 или более поздняя версия.</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Добро пожаловать в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Если вы запустили программу в первый раз, укажите пути к словарям в &lt;b&gt;Правка|Источники&lt;/b&gt;. После этого сгруппируйте найденные словари в &lt;b&gt;Правка|Группы&lt;/b&gt;.&lt;p&gt;Вы можете настроить параметры программы в &lt;b&gt;Правка|Параметры&lt;/b&gt;. Все параметры настройки имеют подсказки, показываемые при наведении курсора на них.&lt;p&gt;Теперь всё готово для поиска слов! Введите слово в верхнее поле левой панели. Также вы можете &lt;a href=&quot;Всплывающее окно&quot;&gt;искать слова прямо из других приложений&lt;/a&gt;.&lt;p&gt;Если вы хотите помочь в разработке и улучшении программы, пишите на &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форум&lt;/a&gt; или непосредственно автору &lt;a href=&quot;mailto: Konstantin Isakov &lt;ikm@users.berlios.de&gt;&quot;&gt;по электронной почте&lt;/a&gt;.&lt;p&gt;Последняя версия программы доступна на &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;веб-сайте GoldenDict&lt;/a&gt;.&lt;p&gt;© Константин Исаков, 2008-2009. Лицензия: GPLv3 или более поздняя версия.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="143"/>
+        <location filename="../article_maker.cc" line="124"/>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Добро пожаловать в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Если вы запустили программу в первый раз, укажите пути к словарям в &lt;b&gt;Словари&lt;/b&gt;. Там же вы можете настроить другие источники, изменить порядок словарей и создать группы словарей.&lt;p&gt;Настройка параметров программы доступна в &lt;b&gt;Правка|Параметры&lt;/b&gt;. Все параметры настройки имеют подсказки, показываемые при наведении курсора на них.&lt;p&gt;Теперь всё готово для поиска слов! Введите слово в верхнее поле левой панели. Также вы можете &lt;a href=&quot;Всплывающее окно&quot;&gt;искать слова прямо из других приложений&lt;/a&gt;.&lt;p&gt;Если вы хотите помочь в разработке и улучшении программы, пишите на &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форум GoldenDict&lt;/a&gt;.&lt;p&gt;Последняя версия программы доступна на &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;веб-сайте GoldenDict&lt;/a&gt;.&lt;p&gt;© Константин Исаков, 2008-2009. Лицензия: GPLv3 или более поздняя версия.</translation>
+    </message>
+    <message>
+        <location filename="../article_maker.cc" line="140"/>
         <source>Working with popup</source>
         <translation>Всплывающее окно</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="145"/>
+        <location filename="../article_maker.cc" line="142"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Всплывающее окно&lt;/h3&gt;Для поиска слов из других приложений, вам нужно включить &lt;i&gt;«Разрешить всплывающее окно»&lt;/i&gt; в &lt;b&gt;Параметрах&lt;/b&gt; и после этого включить всплывающее окно кнопкой «Сканировать» в основном окне или в контекстном меню значка в системном лотке.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="152"/>
+        <location filename="../article_maker.cc" line="149"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Теперь подведите курсор мыши к какому-либо слову в приложении, и появится всплывающее окно с переводом или значением этого слова.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="155"/>
+        <location filename="../article_maker.cc" line="152"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Теперь выделите какое-либо слово в приложении (двойным щелчком, или же проводя по ним курсором мыши при зажатой левой кнопке), и появится всплывающее окно с переводом или значением этого слова.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="216"/>
+        <location filename="../article_maker.cc" line="213"/>
         <source>(untitled)</source>
-        <translation type="unfinished">(без имени)</translation>
+        <translation>(без имени)</translation>
     </message>
 </context>
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="369"/>
+        <location filename="../article_maker.cc" line="366"/>
         <source>From </source>
-        <translation type="unfinished"></translation>
+        <translation>Из словаря </translation>
     </message>
     <message>
         <source>From %1</source>
         <translation type="obsolete">Из словаря %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="376"/>
+        <location filename="../article_maker.cc" line="373"/>
         <source>Query error: %1</source>
         <translation>Ошибка поиска: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="470"/>
+        <location filename="../article_maker.cc" line="467"/>
         <source>Close words: </source>
         <translation>Близкие слова: </translation>
     </message>
@@ -145,13 +149,13 @@
     </message>
     <message>
         <location filename="../articleview.cc" line="568"/>
-        <source>&amp;Look up &quot;%1&quot; in %2</source>
-        <translation type="unfinished"></translation>
+        <source>Look up &quot;%1&quot; in %2</source>
+        <translation>Поиск «%1» в %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="576"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск «%1» в %2 в &amp;новой вкладке</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="718"/>
@@ -196,22 +200,22 @@
     <message>
         <location filename="../articleview.ui" line="89"/>
         <source>&amp;Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Предыдущее</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="106"/>
         <source>&amp;Next</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Следующее</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="113"/>
         <source>Ctrl+G</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+G</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="126"/>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Учитывать &amp;регистр</translation>
     </message>
 </context>
 <context>
@@ -230,9 +234,9 @@
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="124"/>
+        <location filename="../groups_widgets.cc" line="125"/>
         <source>%1 entries</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 статей</translation>
     </message>
 </context>
 <context>
@@ -246,7 +250,7 @@
         <location filename="../editdictionaries.cc" line="42"/>
         <location filename="../editdictionaries.cc" line="186"/>
         <source>&amp;Dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Словари</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="43"/>
@@ -285,7 +289,7 @@
     <message>
         <location filename="../german.cc" line="48"/>
         <source>German Transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Немецкая транслитерация</translation>
     </message>
 </context>
 <context>
@@ -293,7 +297,7 @@
     <message>
         <location filename="../groupcombobox.cc" line="10"/>
         <source>Choose a Group (Alt+G)</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор группы (Alt+G)</translation>
     </message>
 </context>
 <context>
@@ -364,32 +368,32 @@
     <message>
         <location filename="../groups.ui" line="61"/>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить выбранные словари в группу (Ins)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="64"/>
         <source>&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt;</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="67"/>
         <source>Ins</source>
-        <translation type="unfinished"></translation>
+        <translation>Ins</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="86"/>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить выбранные словари из группы (Del)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="89"/>
         <source>&lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="92"/>
         <source>Del</source>
-        <translation type="unfinished"></translation>
+        <translation>Del</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="116"/>
@@ -445,938 +449,753 @@
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="198"/>
+        <location filename="../hunspell.cc" line="200"/>
         <source>Spelling suggestions: </source>
         <translation>Варианты написания: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="648"/>
         <source>Afar</source>
-        <translation>Афарский</translation>
+        <translation type="obsolete">Афарский</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="649"/>
         <source>Abkhazian</source>
-        <translation>Абхазский</translation>
+        <translation type="obsolete">Абхазский</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="650"/>
         <source>Avestan</source>
-        <translation>Авестийский</translation>
+        <translation type="obsolete">Авестийский</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="651"/>
         <source>Afrikaans</source>
-        <translation>Африкаанс</translation>
+        <translation type="obsolete">Африкаанс</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="652"/>
         <source>Akan</source>
-        <translation>Аканский</translation>
+        <translation type="obsolete">Аканский</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="653"/>
         <source>Amharic</source>
-        <translation>Амхарский</translation>
+        <translation type="obsolete">Амхарский</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="654"/>
         <source>Aragonese</source>
-        <translation>Арагонский</translation>
+        <translation type="obsolete">Арагонский</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="655"/>
         <source>Arabic</source>
-        <translation>Арабский</translation>
+        <translation type="obsolete">Арабский</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="656"/>
         <source>Assamese</source>
-        <translation>Ассамский</translation>
+        <translation type="obsolete">Ассамский</translation>
+    </message>
+    <message>
+        <source>Avaric</source>
+        <translation type="obsolete">Аварский</translation>
+    </message>
+    <message>
+        <source>Aymara</source>
+        <translation type="obsolete">Аймарский</translation>
+    </message>
+    <message>
+        <source>Azerbaijani</source>
+        <translation type="obsolete">Азербайджанский</translation>
+    </message>
+    <message>
+        <source>Bashkir</source>
+        <translation type="obsolete">Башкирский</translation>
+    </message>
+    <message>
+        <source>Belarusian</source>
+        <translation type="obsolete">Белорусский</translation>
+    </message>
+    <message>
+        <source>Bulgarian</source>
+        <translation type="obsolete">Болгарский</translation>
+    </message>
+    <message>
+        <source>Bihari</source>
+        <translation type="obsolete">Бихарский</translation>
+    </message>
+    <message>
+        <source>Bislama</source>
+        <translation type="obsolete">Бислама</translation>
+    </message>
+    <message>
+        <source>Bambara</source>
+        <translation type="obsolete">Бамана</translation>
+    </message>
+    <message>
+        <source>Bengali</source>
+        <translation type="obsolete">Бенгали</translation>
+    </message>
+    <message>
+        <source>Tibetan</source>
+        <translation type="obsolete">Тибетский</translation>
+    </message>
+    <message>
+        <source>Breton</source>
+        <translation type="obsolete">Бретонский</translation>
+    </message>
+    <message>
+        <source>Bosnian</source>
+        <translation type="obsolete">Боснийский</translation>
+    </message>
+    <message>
+        <source>Catalan</source>
+        <translation type="obsolete">Каталонский</translation>
+    </message>
+    <message>
+        <source>Chechen</source>
+        <translation type="obsolete">Чеченский</translation>
+    </message>
+    <message>
+        <source>Chamorro</source>
+        <translation type="obsolete">Чаморро</translation>
+    </message>
+    <message>
+        <source>Corsican</source>
+        <translation type="obsolete">Корсиканский</translation>
+    </message>
+    <message>
+        <source>Cree</source>
+        <translation type="obsolete">Кри</translation>
+    </message>
+    <message>
+        <source>Czech</source>
+        <translation type="obsolete">Чешский</translation>
+    </message>
+    <message>
+        <source>Church Slavic</source>
+        <translation type="obsolete">Церковно-славянский</translation>
+    </message>
+    <message>
+        <source>Chuvash</source>
+        <translation type="obsolete">Чувашский</translation>
+    </message>
+    <message>
+        <source>Welsh</source>
+        <translation type="obsolete">Уэльский</translation>
+    </message>
+    <message>
+        <source>Danish</source>
+        <translation type="obsolete">Датский</translation>
+    </message>
+    <message>
+        <source>German</source>
+        <translation type="obsolete">Немецкий</translation>
+    </message>
+    <message>
+        <source>Divehi</source>
+        <translation type="obsolete">Мальдивский</translation>
+    </message>
+    <message>
+        <source>Dzongkha</source>
+        <translation type="obsolete">Дзонгка (Бутан)</translation>
+    </message>
+    <message>
+        <source>Ewe</source>
+        <translation type="obsolete">Эве</translation>
+    </message>
+    <message>
+        <source>Greek</source>
+        <translation type="obsolete">Греческий</translation>
+    </message>
+    <message>
+        <source>English</source>
+        <translation type="obsolete">Английский</translation>
+    </message>
+    <message>
+        <source>Esperanto</source>
+        <translation type="obsolete">Эсперанто</translation>
+    </message>
+    <message>
+        <source>Spanish</source>
+        <translation type="obsolete">Испанский</translation>
+    </message>
+    <message>
+        <source>Estonian</source>
+        <translation type="obsolete">Эстонский</translation>
+    </message>
+    <message>
+        <source>Basque</source>
+        <translation type="obsolete">Баскский</translation>
+    </message>
+    <message>
+        <source>Persian</source>
+        <translation type="obsolete">Персидский</translation>
+    </message>
+    <message>
+        <source>Fulah</source>
+        <translation type="obsolete">Фула</translation>
+    </message>
+    <message>
+        <source>Finnish</source>
+        <translation type="obsolete">Финский</translation>
+    </message>
+    <message>
+        <source>Fijian</source>
+        <translation type="obsolete">Фиджи</translation>
+    </message>
+    <message>
+        <source>Faroese</source>
+        <translation type="obsolete">Фарерский</translation>
+    </message>
+    <message>
+        <source>French</source>
+        <translation type="obsolete">Французский</translation>
+    </message>
+    <message>
+        <source>Western Frisian</source>
+        <translation type="obsolete">Фризийский</translation>
+    </message>
+    <message>
+        <source>Irish</source>
+        <translation type="obsolete">Галльский (Ирландия)</translation>
+    </message>
+    <message>
+        <source>Scottish Gaelic</source>
+        <translation type="obsolete">Галльский (Шотландия)</translation>
+    </message>
+    <message>
+        <source>Galician</source>
+        <translation type="obsolete">Галицийский</translation>
+    </message>
+    <message>
+        <source>Guarani</source>
+        <translation type="obsolete">Гуарани</translation>
+    </message>
+    <message>
+        <source>Gujarati</source>
+        <translation type="obsolete">Гуджарати</translation>
+    </message>
+    <message>
+        <source>Manx</source>
+        <translation type="obsolete">Манкс</translation>
+    </message>
+    <message>
+        <source>Hausa</source>
+        <translation type="obsolete">Хауса</translation>
+    </message>
+    <message>
+        <source>Hebrew</source>
+        <translation type="obsolete">Иврит</translation>
+    </message>
+    <message>
+        <source>Hindi</source>
+        <translation type="obsolete">Хинди</translation>
+    </message>
+    <message>
+        <source>Hiri Motu</source>
+        <translation type="obsolete">Хири-моту</translation>
+    </message>
+    <message>
+        <source>Croatian</source>
+        <translation type="obsolete">Хорватский</translation>
+    </message>
+    <message>
+        <source>Haitian</source>
+        <translation type="obsolete">Гаитянский</translation>
+    </message>
+    <message>
+        <source>Hungarian</source>
+        <translation type="obsolete">Венгерский</translation>
+    </message>
+    <message>
+        <source>Armenian</source>
+        <translation type="obsolete">Армянский</translation>
+    </message>
+    <message>
+        <source>Herero</source>
+        <translation type="obsolete">Эреро</translation>
+    </message>
+    <message>
+        <source>Interlingua</source>
+        <translation type="obsolete">Интерлингва</translation>
+    </message>
+    <message>
+        <source>Indonesian</source>
+        <translation type="obsolete">Индонезийский</translation>
+    </message>
+    <message>
+        <source>Interlingue</source>
+        <translation type="obsolete">Окциденталь</translation>
+    </message>
+    <message>
+        <source>Igbo</source>
+        <translation type="obsolete">Ибо</translation>
+    </message>
+    <message>
+        <source>Sichuan Yi</source>
+        <translation type="obsolete">Сычуаньский И</translation>
+    </message>
+    <message>
+        <source>Inupiaq</source>
+        <translation type="obsolete">Инупиак</translation>
+    </message>
+    <message>
+        <source>Ido</source>
+        <translation type="obsolete">Идо</translation>
+    </message>
+    <message>
+        <source>Icelandic</source>
+        <translation type="obsolete">Исландский</translation>
+    </message>
+    <message>
+        <source>Italian</source>
+        <translation type="obsolete">Итальянский</translation>
+    </message>
+    <message>
+        <source>Inuktitut</source>
+        <translation type="obsolete">Инуктитут</translation>
+    </message>
+    <message>
+        <source>Japanese</source>
+        <translation type="obsolete">Японский</translation>
+    </message>
+    <message>
+        <source>Javanese</source>
+        <translation type="obsolete">Яванский</translation>
+    </message>
+    <message>
+        <source>Georgian</source>
+        <translation type="obsolete">Грузинский</translation>
+    </message>
+    <message>
+        <source>Kongo</source>
+        <translation type="obsolete">Конго</translation>
+    </message>
+    <message>
+        <source>Kikuyu</source>
+        <translation type="obsolete">Кикую</translation>
+    </message>
+    <message>
+        <source>Kwanyama</source>
+        <translation type="obsolete">Кваньяма</translation>
+    </message>
+    <message>
+        <source>Kazakh</source>
+        <translation type="obsolete">Казахский</translation>
+    </message>
+    <message>
+        <source>Kalaallisut</source>
+        <translation type="obsolete">Калаалисут</translation>
+    </message>
+    <message>
+        <source>Khmer</source>
+        <translation type="obsolete">Кхмерский</translation>
+    </message>
+    <message>
+        <source>Kannada</source>
+        <translation type="obsolete">Каннада</translation>
+    </message>
+    <message>
+        <source>Korean</source>
+        <translation type="obsolete">Корейский</translation>
+    </message>
+    <message>
+        <source>Kanuri</source>
+        <translation type="obsolete">Канури</translation>
+    </message>
+    <message>
+        <source>Kashmiri</source>
+        <translation type="obsolete">Кашмирский</translation>
+    </message>
+    <message>
+        <source>Kurdish</source>
+        <translation type="obsolete">Курдский</translation>
+    </message>
+    <message>
+        <source>Komi</source>
+        <translation type="obsolete">Коми</translation>
+    </message>
+    <message>
+        <source>Cornish</source>
+        <translation type="obsolete">Корнуольский</translation>
+    </message>
+    <message>
+        <source>Kirghiz</source>
+        <translation type="obsolete">Киргизский</translation>
+    </message>
+    <message>
+        <source>Latin</source>
+        <translation type="obsolete">Латинский</translation>
+    </message>
+    <message>
+        <source>Luxembourgish</source>
+        <translation type="obsolete">Люксембургский</translation>
+    </message>
+    <message>
+        <source>Ganda</source>
+        <translation type="obsolete">Ганда</translation>
+    </message>
+    <message>
+        <source>Limburgish</source>
+        <translation type="obsolete">Лимбуржский</translation>
+    </message>
+    <message>
+        <source>Lingala</source>
+        <translation type="obsolete">Лингала</translation>
+    </message>
+    <message>
+        <source>Lao</source>
+        <translation type="obsolete">Лао</translation>
+    </message>
+    <message>
+        <source>Lithuanian</source>
+        <translation type="obsolete">Литовский</translation>
+    </message>
+    <message>
+        <source>Luba-Katanga</source>
+        <translation type="obsolete">Луба-Катанга</translation>
+    </message>
+    <message>
+        <source>Latvian</source>
+        <translation type="obsolete">Латышский</translation>
+    </message>
+    <message>
+        <source>Malagasy</source>
+        <translation type="obsolete">Мальгашский</translation>
+    </message>
+    <message>
+        <source>Marshallese</source>
+        <translation type="obsolete">Маршалльский</translation>
+    </message>
+    <message>
+        <source>Maori</source>
+        <translation type="obsolete">Маори</translation>
+    </message>
+    <message>
+        <source>Macedonian</source>
+        <translation type="obsolete">Македонский</translation>
+    </message>
+    <message>
+        <source>Malayalam</source>
+        <translation type="obsolete">Малайялам</translation>
+    </message>
+    <message>
+        <source>Mongolian</source>
+        <translation type="obsolete">Монгольский</translation>
+    </message>
+    <message>
+        <source>Marathi</source>
+        <translation type="obsolete">Марати</translation>
+    </message>
+    <message>
+        <source>Malay</source>
+        <translation type="obsolete">Малайский</translation>
+    </message>
+    <message>
+        <source>Maltese</source>
+        <translation type="obsolete">Мальтийский</translation>
+    </message>
+    <message>
+        <source>Burmese</source>
+        <translation type="obsolete">Бирманский</translation>
+    </message>
+    <message>
+        <source>Nauru</source>
+        <translation type="obsolete">Науру</translation>
+    </message>
+    <message>
+        <source>Norwegian Bokmal</source>
+        <translation type="obsolete">Норвежский букмол</translation>
+    </message>
+    <message>
+        <source>North Ndebele</source>
+        <translation type="obsolete">Сев. Ндебеле</translation>
+    </message>
+    <message>
+        <source>Nepali</source>
+        <translation type="obsolete">Непальский</translation>
+    </message>
+    <message>
+        <source>Ndonga</source>
+        <translation type="obsolete">Ндонга</translation>
+    </message>
+    <message>
+        <source>Dutch</source>
+        <translation type="obsolete">Голландский</translation>
+    </message>
+    <message>
+        <source>Norwegian Nynorsk</source>
+        <translation type="obsolete">Новонорвежский (нюнорск)</translation>
+    </message>
+    <message>
+        <source>Norwegian</source>
+        <translation type="obsolete">Норвежский</translation>
+    </message>
+    <message>
+        <source>South Ndebele</source>
+        <translation type="obsolete">Юж. Ндебеле</translation>
+    </message>
+    <message>
+        <source>Navajo</source>
+        <translation type="obsolete">Навахо</translation>
+    </message>
+    <message>
+        <source>Chichewa</source>
+        <translation type="obsolete">Чичева</translation>
+    </message>
+    <message>
+        <source>Occitan</source>
+        <translation type="obsolete">Французский (диалект Occitan)</translation>
+    </message>
+    <message>
+        <source>Ojibwa</source>
+        <translation type="obsolete">Оджибва</translation>
+    </message>
+    <message>
+        <source>Oromo</source>
+        <translation type="obsolete">Оромо</translation>
+    </message>
+    <message>
+        <source>Oriya</source>
+        <translation type="obsolete">Ория</translation>
+    </message>
+    <message>
+        <source>Ossetian</source>
+        <translation type="obsolete">Осетинский</translation>
+    </message>
+    <message>
+        <source>Panjabi</source>
+        <translation type="obsolete">Панджаби</translation>
+    </message>
+    <message>
+        <source>Pali</source>
+        <translation type="obsolete">Пали</translation>
+    </message>
+    <message>
+        <source>Polish</source>
+        <translation type="obsolete">Польский</translation>
+    </message>
+    <message>
+        <source>Pashto</source>
+        <translation type="obsolete">Пуштунский</translation>
+    </message>
+    <message>
+        <source>Portuguese</source>
+        <translation type="obsolete">Португальский</translation>
+    </message>
+    <message>
+        <source>Quechua</source>
+        <translation type="obsolete">Кечуа</translation>
+    </message>
+    <message>
+        <source>Raeto-Romance</source>
+        <translation type="obsolete">Романшский</translation>
+    </message>
+    <message>
+        <source>Kirundi</source>
+        <translation type="obsolete">Рунди</translation>
+    </message>
+    <message>
+        <source>Romanian</source>
+        <translation type="obsolete">Румынский</translation>
+    </message>
+    <message>
+        <source>Russian</source>
+        <translation type="obsolete">Русский</translation>
+    </message>
+    <message>
+        <source>Kinyarwanda</source>
+        <translation type="obsolete">Киньяруанда</translation>
+    </message>
+    <message>
+        <source>Sanskrit</source>
+        <translation type="obsolete">Санскрит</translation>
+    </message>
+    <message>
+        <source>Sardinian</source>
+        <translation type="obsolete">Сардинийский</translation>
+    </message>
+    <message>
+        <source>Sindhi</source>
+        <translation type="obsolete">Синдхи</translation>
+    </message>
+    <message>
+        <source>Northern Sami</source>
+        <translation type="obsolete">Северное Саами</translation>
+    </message>
+    <message>
+        <source>Sango</source>
+        <translation type="obsolete">Санго</translation>
+    </message>
+    <message>
+        <source>Serbo-Croatian</source>
+        <translation type="obsolete">Сербо-хорватский</translation>
+    </message>
+    <message>
+        <source>Sinhala</source>
+        <translation type="obsolete">Сингальский</translation>
+    </message>
+    <message>
+        <source>Slovak</source>
+        <translation type="obsolete">Словацкий</translation>
+    </message>
+    <message>
+        <source>Slovenian</source>
+        <translation type="obsolete">Словенский</translation>
+    </message>
+    <message>
+        <source>Samoan</source>
+        <translation type="obsolete">Самоа</translation>
+    </message>
+    <message>
+        <source>Shona</source>
+        <translation type="obsolete">Схона</translation>
+    </message>
+    <message>
+        <source>Somali</source>
+        <translation type="obsolete">Сомалийский</translation>
+    </message>
+    <message>
+        <source>Albanian</source>
+        <translatorcomment>А то ж!</translatorcomment>
+        <translation type="obsolete">Албанский</translation>
+    </message>
+    <message>
+        <source>Serbian</source>
+        <translation type="obsolete">Сербский</translation>
+    </message>
+    <message>
+        <source>Swati</source>
+        <translation type="obsolete">Свати</translation>
+    </message>
+    <message>
+        <source>Southern Sotho</source>
+        <translation type="obsolete">Юж. Сото</translation>
+    </message>
+    <message>
+        <source>Sundanese</source>
+        <translation type="obsolete">Сунданский</translation>
+    </message>
+    <message>
+        <source>Swedish</source>
+        <translation type="obsolete">Шведский</translation>
+    </message>
+    <message>
+        <source>Swahili</source>
+        <translation type="obsolete">Суахили</translation>
+    </message>
+    <message>
+        <source>Tamil</source>
+        <translation type="obsolete">Тамильский</translation>
+    </message>
+    <message>
+        <source>Telugu</source>
+        <translation type="obsolete">Телугу</translation>
+    </message>
+    <message>
+        <source>Tajik</source>
+        <translation type="obsolete">Таджикский</translation>
+    </message>
+    <message>
+        <source>Thai</source>
+        <translation type="obsolete">Тайский</translation>
+    </message>
+    <message>
+        <source>Tigrinya</source>
+        <translation type="obsolete">Тигринья</translation>
+    </message>
+    <message>
+        <source>Turkmen</source>
+        <translation type="obsolete">Туркменский</translation>
+    </message>
+    <message>
+        <source>Tagalog</source>
+        <translation type="obsolete">Тагалог</translation>
+    </message>
+    <message>
+        <source>Tswana</source>
+        <translation type="obsolete">Тсвана</translation>
+    </message>
+    <message>
+        <source>Tonga</source>
+        <translation type="obsolete">Тонга</translation>
+    </message>
+    <message>
+        <source>Turkish</source>
+        <translation type="obsolete">Турецкий</translation>
+    </message>
+    <message>
+        <source>Tsonga</source>
+        <translation type="obsolete">Тсонга</translation>
+    </message>
+    <message>
+        <source>Tatar</source>
+        <translation type="obsolete">Татарский</translation>
+    </message>
+    <message>
+        <source>Twi</source>
+        <translation type="obsolete">Тви</translation>
+    </message>
+    <message>
+        <source>Tahitian</source>
+        <translation type="obsolete">Таитянский</translation>
+    </message>
+    <message>
+        <source>Uighur</source>
+        <translation type="obsolete">Уйгурский</translation>
+    </message>
+    <message>
+        <source>Ukrainian</source>
+        <translation type="obsolete">Украинский</translation>
+    </message>
+    <message>
+        <source>Urdu</source>
+        <translation type="obsolete">Урду</translation>
+    </message>
+    <message>
+        <source>Uzbek</source>
+        <translation type="obsolete">Узбекский</translation>
+    </message>
+    <message>
+        <source>Venda</source>
+        <translation type="obsolete">Венда</translation>
+    </message>
+    <message>
+        <source>Vietnamese</source>
+        <translation type="obsolete">Вьетнамский</translation>
+    </message>
+    <message>
+        <source>Volapuk</source>
+        <translation type="obsolete">Волапюк</translation>
+    </message>
+    <message>
+        <source>Walloon</source>
+        <translation type="obsolete">Валлонский</translation>
+    </message>
+    <message>
+        <source>Wolof</source>
+        <translation type="obsolete">Уолоф</translation>
+    </message>
+    <message>
+        <source>Xhosa</source>
+        <translation type="obsolete">Кшоса</translation>
+    </message>
+    <message>
+        <source>Yiddish</source>
+        <translation type="obsolete">Идиш</translation>
+    </message>
+    <message>
+        <source>Yoruba</source>
+        <translation type="obsolete">Йоруба</translation>
+    </message>
+    <message>
+        <source>Zhuang</source>
+        <translation type="obsolete">Чжуанг</translation>
+    </message>
+    <message>
+        <source>Chinese</source>
+        <translation type="obsolete">Китайский</translation>
+    </message>
+    <message>
+        <source>Zulu</source>
+        <translation type="obsolete">Зулусский</translation>
     </message>
     <message>
         <location filename="../hunspell.cc" line="657"/>
-        <source>Avaric</source>
-        <translation>Аварский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="658"/>
-        <source>Aymara</source>
-        <translation>Аймарский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="659"/>
-        <source>Azerbaijani</source>
-        <translation>Азербайджанский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="660"/>
-        <source>Bashkir</source>
-        <translation>Башкирский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="661"/>
-        <source>Belarusian</source>
-        <translation>Белорусский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="662"/>
-        <source>Bulgarian</source>
-        <translation>Болгарский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="663"/>
-        <source>Bihari</source>
-        <translation>Бихарский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="664"/>
-        <source>Bislama</source>
-        <translation>Бислама</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="665"/>
-        <source>Bambara</source>
-        <translation>Бамана</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="666"/>
-        <source>Bengali</source>
-        <translation>Бенгали</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="667"/>
-        <source>Tibetan</source>
-        <translation>Тибетский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="668"/>
-        <source>Breton</source>
-        <translation>Бретонский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="669"/>
-        <source>Bosnian</source>
-        <translation>Боснийский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="670"/>
-        <source>Catalan</source>
-        <translation>Каталонский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="671"/>
-        <source>Chechen</source>
-        <translation>Чеченский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="672"/>
-        <source>Chamorro</source>
-        <translation>Чаморро</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="673"/>
-        <source>Corsican</source>
-        <translation>Корсиканский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="674"/>
-        <source>Cree</source>
-        <translation>Кри</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="675"/>
-        <source>Czech</source>
-        <translation>Чешский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="676"/>
-        <source>Church Slavic</source>
-        <translation>Церковно-славянский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="677"/>
-        <source>Chuvash</source>
-        <translation>Чувашский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="678"/>
-        <source>Welsh</source>
-        <translation>Уэльский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="679"/>
-        <source>Danish</source>
-        <translation>Датский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="680"/>
-        <source>German</source>
-        <translation>Немецкий</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="681"/>
-        <source>Divehi</source>
-        <translation>Мальдивский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="682"/>
-        <source>Dzongkha</source>
-        <translation>Дзонгка (Бутан)</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="683"/>
-        <source>Ewe</source>
-        <translation>Эве</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="684"/>
-        <source>Greek</source>
-        <translation>Греческий</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="685"/>
-        <source>English</source>
-        <translation>Английский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="686"/>
-        <source>Esperanto</source>
-        <translation>Эсперанто</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="687"/>
-        <source>Spanish</source>
-        <translation>Испанский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="688"/>
-        <source>Estonian</source>
-        <translation>Эстонский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="689"/>
-        <source>Basque</source>
-        <translation>Баскский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="690"/>
-        <source>Persian</source>
-        <translation>Персидский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="691"/>
-        <source>Fulah</source>
-        <translation>Фула</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="692"/>
-        <source>Finnish</source>
-        <translation>Финский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="693"/>
-        <source>Fijian</source>
-        <translation>Фиджи</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="694"/>
-        <source>Faroese</source>
-        <translation>Фарерский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="695"/>
-        <source>French</source>
-        <translation>Французский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="696"/>
-        <source>Western Frisian</source>
-        <translation>Фризийский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="697"/>
-        <source>Irish</source>
-        <translation>Галльский (Ирландия)</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="698"/>
-        <source>Scottish Gaelic</source>
-        <translation>Галльский (Шотландия)</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="699"/>
-        <source>Galician</source>
-        <translation>Галицийский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="700"/>
-        <source>Guarani</source>
-        <translation>Гуарани</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="701"/>
-        <source>Gujarati</source>
-        <translation>Гуджарати</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="702"/>
-        <source>Manx</source>
-        <translation>Манкс</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="703"/>
-        <source>Hausa</source>
-        <translation>Хауса</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="704"/>
-        <source>Hebrew</source>
-        <translation>Иврит</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="705"/>
-        <source>Hindi</source>
-        <translation>Хинди</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="706"/>
-        <source>Hiri Motu</source>
-        <translation>Хири-моту</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="707"/>
-        <source>Croatian</source>
-        <translation>Хорватский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="708"/>
-        <source>Haitian</source>
-        <translation>Гаитянский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="709"/>
-        <source>Hungarian</source>
-        <translation>Венгерский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="710"/>
-        <source>Armenian</source>
-        <translation>Армянский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="711"/>
-        <source>Herero</source>
-        <translation>Эреро</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="712"/>
-        <source>Interlingua</source>
-        <translation>Интерлингва</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="713"/>
-        <source>Indonesian</source>
-        <translation>Индонезийский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="714"/>
-        <source>Interlingue</source>
-        <translation>Окциденталь</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="715"/>
-        <source>Igbo</source>
-        <translation>Ибо</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="716"/>
-        <source>Sichuan Yi</source>
-        <translation>Сычуаньский И</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="717"/>
-        <source>Inupiaq</source>
-        <translation>Инупиак</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="718"/>
-        <source>Ido</source>
-        <translation>Идо</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="719"/>
-        <source>Icelandic</source>
-        <translation>Исландский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="720"/>
-        <source>Italian</source>
-        <translation>Итальянский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="721"/>
-        <source>Inuktitut</source>
-        <translation>Инуктитут</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="722"/>
-        <source>Japanese</source>
-        <translation>Японский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="723"/>
-        <source>Javanese</source>
-        <translation>Яванский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="724"/>
-        <source>Georgian</source>
-        <translation>Грузинский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="725"/>
-        <source>Kongo</source>
-        <translation>Конго</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="726"/>
-        <source>Kikuyu</source>
-        <translation>Кикую</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="727"/>
-        <source>Kwanyama</source>
-        <translation>Кваньяма</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="728"/>
-        <source>Kazakh</source>
-        <translation>Казахский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="729"/>
-        <source>Kalaallisut</source>
-        <translation>Калаалисут</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="730"/>
-        <source>Khmer</source>
-        <translation>Кхмерский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="731"/>
-        <source>Kannada</source>
-        <translation>Каннада</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="732"/>
-        <source>Korean</source>
-        <translation>Корейский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="733"/>
-        <source>Kanuri</source>
-        <translation>Канури</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="734"/>
-        <source>Kashmiri</source>
-        <translation>Кашмирский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="735"/>
-        <source>Kurdish</source>
-        <translation>Курдский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="736"/>
-        <source>Komi</source>
-        <translation>Коми</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="737"/>
-        <source>Cornish</source>
-        <translation>Корнуольский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="738"/>
-        <source>Kirghiz</source>
-        <translation>Киргизский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="739"/>
-        <source>Latin</source>
-        <translation>Латинский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="740"/>
-        <source>Luxembourgish</source>
-        <translation>Люксембургский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="741"/>
-        <source>Ganda</source>
-        <translation>Ганда</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="742"/>
-        <source>Limburgish</source>
-        <translation>Лимбуржский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="743"/>
-        <source>Lingala</source>
-        <translation>Лингала</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="744"/>
-        <source>Lao</source>
-        <translation>Лао</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="745"/>
-        <source>Lithuanian</source>
-        <translation>Литовский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="746"/>
-        <source>Luba-Katanga</source>
-        <translation>Луба-Катанга</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="747"/>
-        <source>Latvian</source>
-        <translation>Латышский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="748"/>
-        <source>Malagasy</source>
-        <translation>Мальгашский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="749"/>
-        <source>Marshallese</source>
-        <translation>Маршалльский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="750"/>
-        <source>Maori</source>
-        <translation>Маори</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="751"/>
-        <source>Macedonian</source>
-        <translation>Македонский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="752"/>
-        <source>Malayalam</source>
-        <translation>Малайялам</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="753"/>
-        <source>Mongolian</source>
-        <translation>Монгольский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="754"/>
-        <source>Marathi</source>
-        <translation>Марати</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="755"/>
-        <source>Malay</source>
-        <translation>Малайский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="756"/>
-        <source>Maltese</source>
-        <translation>Мальтийский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="757"/>
-        <source>Burmese</source>
-        <translation>Бирманский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="758"/>
-        <source>Nauru</source>
-        <translation>Науру</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="759"/>
-        <source>Norwegian Bokmal</source>
-        <translation>Норвежский букмол</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="760"/>
-        <source>North Ndebele</source>
-        <translation>Сев. Ндебеле</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="761"/>
-        <source>Nepali</source>
-        <translation>Непальский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="762"/>
-        <source>Ndonga</source>
-        <translation>Ндонга</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="763"/>
-        <source>Dutch</source>
-        <translation>Голландский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="764"/>
-        <source>Norwegian Nynorsk</source>
-        <translation>Новонорвежский (нюнорск)</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="765"/>
-        <source>Norwegian</source>
-        <translation>Норвежский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="766"/>
-        <source>South Ndebele</source>
-        <translation>Юж. Ндебеле</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="767"/>
-        <source>Navajo</source>
-        <translation>Навахо</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="768"/>
-        <source>Chichewa</source>
-        <translation>Чичева</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="781"/>
-        <source>Occitan</source>
-        <translation>Французский (диалект Occitan)</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="782"/>
-        <source>Ojibwa</source>
-        <translation>Оджибва</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="783"/>
-        <source>Oromo</source>
-        <translation>Оромо</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="784"/>
-        <source>Oriya</source>
-        <translation>Ория</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="785"/>
-        <source>Ossetian</source>
-        <translation>Осетинский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="786"/>
-        <source>Panjabi</source>
-        <translation>Панджаби</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="787"/>
-        <source>Pali</source>
-        <translation>Пали</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="788"/>
-        <source>Polish</source>
-        <translation>Польский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="789"/>
-        <source>Pashto</source>
-        <translation>Пуштунский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="790"/>
-        <source>Portuguese</source>
-        <translation>Португальский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="791"/>
-        <source>Quechua</source>
-        <translation>Кечуа</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="792"/>
-        <source>Raeto-Romance</source>
-        <translation>Романшский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="793"/>
-        <source>Kirundi</source>
-        <translation>Рунди</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="794"/>
-        <source>Romanian</source>
-        <translation>Румынский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="795"/>
-        <source>Russian</source>
-        <translation>Русский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="796"/>
-        <source>Kinyarwanda</source>
-        <translation>Киньяруанда</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="797"/>
-        <source>Sanskrit</source>
-        <translation>Санскрит</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="798"/>
-        <source>Sardinian</source>
-        <translation>Сардинийский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="799"/>
-        <source>Sindhi</source>
-        <translation>Синдхи</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="800"/>
-        <source>Northern Sami</source>
-        <translation>Северное Саами</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="801"/>
-        <source>Sango</source>
-        <translation>Санго</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="802"/>
-        <source>Serbo-Croatian</source>
-        <translation>Сербо-хорватский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="803"/>
-        <source>Sinhala</source>
-        <translation>Сингальский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="804"/>
-        <source>Slovak</source>
-        <translation>Словацкий</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="805"/>
-        <source>Slovenian</source>
-        <translation>Словенский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="806"/>
-        <source>Samoan</source>
-        <translation>Самоа</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="807"/>
-        <source>Shona</source>
-        <translation>Схона</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="808"/>
-        <source>Somali</source>
-        <translation>Сомалийский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="809"/>
-        <source>Albanian</source>
-        <translatorcomment>А то ж!</translatorcomment>
-        <translation>Албанский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="810"/>
-        <source>Serbian</source>
-        <translation>Сербский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="811"/>
-        <source>Swati</source>
-        <translation>Свати</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="812"/>
-        <source>Southern Sotho</source>
-        <translation>Юж. Сото</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="813"/>
-        <source>Sundanese</source>
-        <translation>Сунданский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="814"/>
-        <source>Swedish</source>
-        <translation>Шведский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="815"/>
-        <source>Swahili</source>
-        <translation>Суахили</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="816"/>
-        <source>Tamil</source>
-        <translation>Тамильский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="817"/>
-        <source>Telugu</source>
-        <translation>Телугу</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="818"/>
-        <source>Tajik</source>
-        <translation>Таджикский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="819"/>
-        <source>Thai</source>
-        <translation>Тайский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="820"/>
-        <source>Tigrinya</source>
-        <translation>Тигринья</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="821"/>
-        <source>Turkmen</source>
-        <translation>Туркменский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="822"/>
-        <source>Tagalog</source>
-        <translation>Тагалог</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="823"/>
-        <source>Tswana</source>
-        <translation>Тсвана</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="824"/>
-        <source>Tonga</source>
-        <translation>Тонга</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="825"/>
-        <source>Turkish</source>
-        <translation>Турецкий</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="826"/>
-        <source>Tsonga</source>
-        <translation>Тсонга</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="827"/>
-        <source>Tatar</source>
-        <translation>Татарский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="828"/>
-        <source>Twi</source>
-        <translation>Тви</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="829"/>
-        <source>Tahitian</source>
-        <translation>Таитянский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="830"/>
-        <source>Uighur</source>
-        <translation>Уйгурский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="831"/>
-        <source>Ukrainian</source>
-        <translation>Украинский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="832"/>
-        <source>Urdu</source>
-        <translation>Урду</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="833"/>
-        <source>Uzbek</source>
-        <translation>Узбекский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="834"/>
-        <source>Venda</source>
-        <translation>Венда</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="835"/>
-        <source>Vietnamese</source>
-        <translation>Вьетнамский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="836"/>
-        <source>Volapuk</source>
-        <translation>Волапюк</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="837"/>
-        <source>Walloon</source>
-        <translation>Валлонский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="838"/>
-        <source>Wolof</source>
-        <translation>Уолоф</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="839"/>
-        <source>Xhosa</source>
-        <translation>Кшоса</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="840"/>
-        <source>Yiddish</source>
-        <translation>Идиш</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="841"/>
-        <source>Yoruba</source>
-        <translation>Йоруба</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="842"/>
-        <source>Zhuang</source>
-        <translation>Чжуанг</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="843"/>
-        <source>Chinese</source>
-        <translation>Китайский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="844"/>
-        <source>Zulu</source>
-        <translation>Зулусский</translation>
-    </message>
-    <message>
-        <location filename="../hunspell.cc" line="857"/>
         <source>%1 Morphology</source>
         <translation>%1 (морфология)</translation>
     </message>
@@ -2399,7 +2218,7 @@
     <message>
         <location filename="../mainwindow.cc" line="1256"/>
         <source>Skip This Release</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропустить данную версию</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1379"/>
@@ -2465,7 +2284,7 @@
     <message>
         <location filename="../mainwindow.cc" line="81"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Произнести слово (Alt+S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="90"/>
@@ -2490,7 +2309,7 @@
     <message>
         <location filename="../mainwindow.cc" line="460"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Все</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="515"/>
@@ -2655,12 +2474,12 @@
     <message>
         <location filename="../mainwindow.ui" line="345"/>
         <source>Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересканировать файлы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="348"/>
         <source>Ctrl+F5</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F5</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="102"/>
@@ -2695,12 +2514,12 @@
     <message>
         <location filename="../orderandprops.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Form</translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="26"/>
         <source>Dictionary order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Порядок словарей:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="51"/>
@@ -2708,52 +2527,52 @@
         <location filename="../orderandprops.ui" line="101"/>
         <location filename="../orderandprops.ui" line="111"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="136"/>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Неактивные (отключенные) словари:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="150"/>
         <source>Dictionary information</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о словаре</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="158"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="185"/>
         <source>Total articles:</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество статей:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="192"/>
         <source>Total words:</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество слов:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="209"/>
         <source>Translates from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Исходный язык:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="216"/>
         <source>Translates to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Целевой язык:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="271"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы, из которых состоит словарь:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="333"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменяйте порядок словарей, перетаскивая словари мышкой. Для отключения словаря перетащите его в неактивную группу снизу.</translation>
     </message>
 </context>
 <context>
@@ -2875,35 +2694,35 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="187"/>
         <source>Display style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиль интерфейса:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="246"/>
+        <location filename="../preferences.ui" line="544"/>
         <source>Hotkeys</source>
         <translation>Горячие клавиши</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="265"/>
+        <location filename="../preferences.ui" line="563"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>Использовать следующую комбинацию для показа/скрытия основного окна:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="296"/>
+        <location filename="../preferences.ui" line="594"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>Использовать следующую комбинацию для перевода слова из буфера обмена:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="343"/>
+        <location filename="../preferences.ui" line="641"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>Горячие клавиши являются глобальными и работают из любой программы и в любом состоянии, до тех пор пока GoldenDict работает в фоне.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="371"/>
+        <location filename="../preferences.ui" line="246"/>
         <source>&amp;Scan Popup</source>
         <translation>&amp;Всплывающее окно</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="390"/>
+        <location filename="../preferences.ui" line="265"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -2918,135 +2737,135 @@ off from main window or tray icon.</source>
         <translation type="obsolete">Показывать всплывающее окно</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="396"/>
+        <location filename="../preferences.ui" line="271"/>
         <source>Enable scan popup functionality</source>
         <translation>Разрешить всплывающее окно</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="408"/>
+        <location filename="../preferences.ui" line="283"/>
         <source>Chooses whether the scan popup mode is on by default nor not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>Включать или нет режим всплывающего окна при запуске программы.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="412"/>
+        <location filename="../preferences.ui" line="287"/>
         <source>Start with scan popup turned on</source>
         <translation>Включить режим всплывающего окна при запуске</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="419"/>
+        <location filename="../preferences.ui" line="294"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Показывать всплывающее окно, только если все выбранные клавиши
 находятся в зажатом состоянии в момент выделения слова.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="423"/>
+        <location filename="../preferences.ui" line="298"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>Показывать всплывающее окно только при зажатых клавишах:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="462"/>
+        <location filename="../preferences.ui" line="337"/>
         <source>Left Ctrl only</source>
         <translation>При зажатии левой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="465"/>
+        <location filename="../preferences.ui" line="340"/>
         <source>Left Ctrl</source>
         <translation>Левый Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="472"/>
+        <location filename="../preferences.ui" line="347"/>
         <source>Right Shift only</source>
         <translation>При зажатии правой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="475"/>
+        <location filename="../preferences.ui" line="350"/>
         <source>Right Shift</source>
         <translation>Правый Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="482"/>
+        <location filename="../preferences.ui" line="357"/>
         <source>Alt key</source>
         <translation>При зажатии любой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="485"/>
+        <location filename="../preferences.ui" line="360"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="492"/>
+        <location filename="../preferences.ui" line="367"/>
         <source>Ctrl key</source>
         <translation>При зажатии любой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="495"/>
+        <location filename="../preferences.ui" line="370"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="502"/>
+        <location filename="../preferences.ui" line="377"/>
         <source>Left Alt only</source>
         <translation>При зажатии левой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="505"/>
+        <location filename="../preferences.ui" line="380"/>
         <source>Left Alt</source>
         <translation>Левый Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="512"/>
+        <location filename="../preferences.ui" line="387"/>
         <source>Shift key</source>
         <translation>При зажатии любой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="515"/>
+        <location filename="../preferences.ui" line="390"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="522"/>
+        <location filename="../preferences.ui" line="397"/>
         <source>Right Alt only</source>
         <translation>При зажатии правой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="525"/>
+        <location filename="../preferences.ui" line="400"/>
         <source>Right Alt</source>
         <translation>Правый Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="532"/>
+        <location filename="../preferences.ui" line="407"/>
         <source>Right Ctrl only</source>
         <translation>При зажатии правой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="535"/>
+        <location filename="../preferences.ui" line="410"/>
         <source>Right Ctrl</source>
         <translation>Правый Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="542"/>
+        <location filename="../preferences.ui" line="417"/>
         <source>Left Shift only</source>
         <translation>При зажатии левой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="545"/>
+        <location filename="../preferences.ui" line="420"/>
         <source>Left Shift</source>
         <translation>Левый Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="552"/>
+        <location filename="../preferences.ui" line="427"/>
         <source>Windows key or Meta key</source>
         <translation>При зажатии клавиши Windows или Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="555"/>
+        <location filename="../preferences.ui" line="430"/>
         <source>Win/Meta</source>
         <translation>Win или Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="589"/>
+        <location filename="../preferences.ui" line="464"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -3058,12 +2877,12 @@ be pressed shorty after the selection is done.</source>
 того, как слово было выделено.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="595"/>
+        <location filename="../preferences.ui" line="470"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Задержка проверки модификаторов</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="602"/>
+        <location filename="../preferences.ui" line="477"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -3072,7 +2891,7 @@ seconds, which is specified here.</source>
 промежутка времени, который и задается здесь.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="626"/>
+        <location filename="../preferences.ui" line="501"/>
         <source>secs</source>
         <translation>секунд(ы)</translation>
     </message>
@@ -3174,12 +2993,12 @@ GoldenDict. Если новая версия появилась, програм�
     <message>
         <location filename="../preferences.cc" line="50"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="51"/>
         <source>Lingvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingvo</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="265"/>
@@ -3197,12 +3016,12 @@ GoldenDict. Если новая версия появилась, програм�
     <message>
         <location filename="../romaji.cc" line="90"/>
         <source>Hepburn Romaji for Hiragana</source>
-        <translation type="unfinished"></translation>
+        <translation>Система Хэпбёрна (Хирагана)</translation>
     </message>
     <message>
         <location filename="../romaji.cc" line="99"/>
         <source>Hepburn Romaji for Katakana</source>
-        <translation type="unfinished"></translation>
+        <translation>Система Хэпбёрна (Катакана)</translation>
     </message>
 </context>
 <context>
@@ -3210,7 +3029,7 @@ GoldenDict. Если новая версия появилась, програм�
     <message>
         <location filename="../russiantranslit.cc" line="107"/>
         <source>Russian Transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитерация (Русский)</translation>
     </message>
 </context>
 <context>
@@ -3236,22 +3055,22 @@ GoldenDict. Если новая версия появилась, програм�
     <message>
         <location filename="../scanpopup.ui" line="63"/>
         <source>List Matches (Alt+M)</source>
-        <translation type="unfinished"></translation>
+        <translation>Список совпадений (Alt+M)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="79"/>
         <source>Alt+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+M</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="86"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Произнести слово (Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="96"/>
         <source>Alt+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+S</translation>
     </message>
     <message>
         <source>List matches</source>
@@ -3344,7 +3163,7 @@ GoldenDict. Если новая версия появилась, програм�
     <message>
         <location filename="../sources.ui" line="81"/>
         <source>Re&amp;scan now</source>
-        <translation type="unfinished"></translation>
+        <translation>Пере&amp;сканировать</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="97"/>
@@ -3397,58 +3216,59 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="280"/>
         <source>Websites</source>
-        <translation type="unfinished"></translation>
+        <translation>Веб-сайты</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="286"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation type="unfinished"></translation>
+        <translation>Любые веб-сайты. Строка %GDWORD% будет заменена на запрашиваемое слово:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Также можно использовать %GD1251% для кодировки CP1251, %GDISO1% для кодировки ISO 8859-1.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="339"/>
         <source>Transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитерация</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="358"/>
         <source>Russian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитерация (Русский)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="382"/>
         <source>German transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитерация (Немецкий)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
-        <translation type="unfinished"></translation>
+        <translation>Позволяет использовать латинский алфавит для ввода на Японском</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>
         <source>Japanese Romaji</source>
-        <translation type="unfinished"></translation>
+        <translation>Ромадзи (Японский)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="421"/>
         <source>Systems:</source>
-        <translation type="unfinished"></translation>
+        <translation>Системы:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="428"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation type="unfinished"></translation>
+        <translation>Наиболее популярный метод транскрибирования Японского,
+основанный на Английской фонологии</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="432"/>
         <source>Hepburn</source>
-        <translation type="unfinished"></translation>
+        <translation>Хэпбёрн</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="442"/>
@@ -3456,12 +3276,15 @@ based on English phonology</source>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation type="unfinished"></translation>
+        <translation>Система, передающая отображения на знаки каны наиболее точно.
+Стандартизована в ISO 3602.
+
+В GoldenDict пока не реализована.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="448"/>
         <source>Nihon-shiki</source>
-        <translation type="unfinished"></translation>
+        <translation>Nihon-shiki</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="458"/>
@@ -3469,33 +3292,40 @@ Not implemented yet in GoldenDict.</source>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation type="unfinished"></translation>
+        <translation>Основана на системе Nihon-shiki, но модицирована в соответствии с
+современным Японским. Стандартизована в ISO 3602.
+
+В GoldenDict пока не реализована.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="464"/>
         <source>Kunrei-shiki</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunrei-shiki</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="471"/>
         <source>Syllabaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Слоговые азбуки:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="478"/>
-        <location filename="../sources.ui" line="488"/>
         <source>Hiragana Japanese syllabary</source>
-        <translation type="unfinished"></translation>
+        <translation>Слоговая азбука &quot;Хирагана&quot;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="481"/>
         <source>Hiragana</source>
-        <translation type="unfinished"></translation>
+        <translation>Хирагана</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="488"/>
+        <source>Katakana Japanese syllabary</source>
+        <translation>Слоговая азбука &quot;Катакана&quot;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="491"/>
         <source>Katakana</source>
-        <translation type="unfinished"></translation>
+        <translation>Катакана</translation>
     </message>
     <message>
         <source>Each morphology dictionary appears as a separate auxiliary dictionary which provides stem words for searches and spelling suggestions for mistyped words. Add appropriate dictionaries to the bottoms of the appropriate groups to use them.</source>
@@ -3518,17 +3348,17 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="454"/>
         <source>Enabled</source>
-        <translation type="unfinished">Включено</translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="456"/>
         <source>Name</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="458"/>
         <source>Address</source>
-        <translation type="unfinished">Адрес</translation>
+        <translation>Адрес</translation>
     </message>
 </context>
 <context>
