@@ -96,7 +96,10 @@ int main( int argc, char ** argv )
   app.installTranslator( &qtTranslator );
 
   QTranslator translator;
-  translator.load( QString( Config::getProgramDataDir() ) + "/locale/" + localeName );
+
+  if ( !translator.load( QString( Config::getProgramDataDir() ) + "/locale/" + localeName ) )
+    translator.load( QCoreApplication::applicationDirPath() + "/locale/" + localeName );
+
   app.installTranslator( &translator );
 
   MainWindow m( cfg );
