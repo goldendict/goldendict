@@ -8,15 +8,12 @@
 #include "file.hh"
 
 #include <vector>
-
-#ifdef _MSC_VER
-#include <stdint_msvc.h>
-#endif
+#include <stdint.h>
 
 /// A chunked compression storage. We use this for articles' bodies. The idea
 /// is to store data in a separately-compressed chunks, much like in dictzip,
 /// but without any fancy gzip-compatibility or whatever. Another difference
-/// is that any block of data saved is always contained without one chunk,
+/// is that any block of data saved is always contained within one chunk,
 /// even if its size does exceed its maximum allowed size. This is very
 /// handy since we're retrieving the data by the same blocks we used to save
 /// it as, that' the only kind of seek we support, really.
