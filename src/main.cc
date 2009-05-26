@@ -1,6 +1,7 @@
 /* This file is (c) 2008-2009 Konstantin Isakov <ikm@users.berlios.de>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
+#include <stdio.h>
 #include <QIcon>
 #include "mainwindow.hh"
 #include "config.hh"
@@ -26,6 +27,14 @@ int main( int argc, char ** argv )
     setrlimit( RLIMIT_CORE, &limit );
   }
   #endif
+
+#ifdef __WIN32
+
+  // Under Windows, increase the amount of fopen()-able file descriptors from
+  // the default 512 up to 2048.
+  _setmaxstdio( 2048 );
+
+#endif
 
   QHotkeyApplication app( argc, argv );
 
