@@ -906,7 +906,10 @@ static void handleIdxSynFile( string const & fileName,
     if ( ptr + wordLen + 1 + ( isSynFile ? sizeof( uint32_t ) :
                                            sizeof( uint32_t ) * 2 ) >
          &image.back() )
-      throw exSuddenEndOfFile( fileName );
+    {
+      fprintf( stderr, "Warning: sudden end of file %s\n", fileName.c_str() );
+      break;
+    }
 
     char const * word = ptr;
 
