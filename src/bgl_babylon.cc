@@ -155,6 +155,8 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
   std::string headword;
   std::string definition;
 
+  bool isUtf8File = false;
+
   m_sourceCharset = source_charset;
   m_targetCharset = target_charset;
   m_numEntries = 0;
@@ -234,6 +236,10 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
             icon.resize( block.length - 2 );
             memcpy( &icon.front(), &(block.data[ 2 ]), icon.size() );
           break;
+          case 17:
+            if ( block.length >= 5 && (unsigned char) block.data[ 4 ] == 0x80 )
+              isUtf8File = true;
+          break;
           case 26:
             type = (unsigned int)block.data[2];
             if( type > 64 ) type -= 65;
@@ -260,6 +266,14 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
     if( block.length ) free( block.data );
   }
   gzseek( file, 0, SEEK_SET );
+
+  if ( isUtf8File )
+  {
+    //fprintf( stderr, "%s: utf8 file.\n", m_title.c_str() );
+    m_defaultCharset = "UTF-8";
+    m_sourceCharset = "UTF-8";
+    m_targetCharset = "UTF-8";
+  }
 
   convertToUtf8( m_title, TARGET_CHARSET );
   convertToUtf8( m_author, TARGET_CHARSET );
