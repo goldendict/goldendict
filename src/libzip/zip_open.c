@@ -232,14 +232,16 @@ _zip_readcdir(FILE *fp, unsigned char *buf, unsigned char *eocd, int buflen,
     }
 
   // Instead of using nentry, just read all entries until one can't be read.
-  // And we're not gonna use 
+
+  int allocated = nentry;
 
     for (i=0; ; i++)
     {
-      if ( i >= nentry )
+      if ( i >= allocated )
       {
         // The original array won't hold -- reallocate
-        cd->entry = realloc( cd->entry, ( i + 1 ) * sizeof(*(cd->entry)) );
+        allocated += 65536;
+        cd->entry = realloc( cd->entry, allocated * sizeof(*(cd->entry)) );
       }
       
 	if ((_zip_dirent_read(cd->entry+i, fp, bufp, eocd-cdp, 0,
@@ -247,6 +249,11 @@ _zip_readcdir(FILE *fp, unsigned char *buf, unsigned char *eocd, int buflen,
     break;
 	}
     }
+
+  // Deallocate the unneeded memory
+
+  if ( allocated != i )
+    cd->entry = realloc( cd->entry, i * sizeof(*(cd->entry)) );
 
   cd->nentry = i;
     
