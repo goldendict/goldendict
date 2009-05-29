@@ -198,8 +198,8 @@ void ArticleView::loadFinished( bool )
         arg( (*i)->frameName() ) );
 
       (*i)->evaluateJavaScript( "var gdLastUrlText;" );
-      (*i)->evaluateJavaScript( "document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.text; }, true );" );
-      (*i)->evaluateJavaScript( "document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.text; }, true );" );
+      (*i)->evaluateJavaScript( "document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
+      (*i)->evaluateJavaScript( "document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
 
       wereFrames = true;
     }
