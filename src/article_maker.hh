@@ -5,6 +5,7 @@
 #define __ARTICLE_MAKER_HH_INCLUDED__
 
 #include <QObject>
+#include <QMap>
 #include <set>
 #include <list>
 #include "dictionary.hh"
@@ -40,7 +41,10 @@ public:
   /// The result is returned as Dictionary::DataRequest just like dictionaries
   /// themselves do. The difference is that the result is a complete html page
   /// with all definitions from all the relevant dictionaries.
-  sptr< Dictionary::DataRequest > makeDefinitionFor( QString const & word, unsigned groupId ) const;
+  /// Contexts is a map of context values to be passed to each dictionary, where
+  /// the keys are dictionary ids.
+  sptr< Dictionary::DataRequest > makeDefinitionFor( QString const & word, unsigned groupId,
+                                                     QMap< QString, QString > const & contexts ) const;
 
   /// Makes up a text which states that no translation for the given word
   /// was found. Sometimes it's better to call this directly when it's already
@@ -68,6 +72,7 @@ class ArticleRequest: public Dictionary::DataRequest
   Q_OBJECT
 
   QString word, group;
+  QMap< QString, QString > contexts;
   std::vector< sptr< Dictionary::Class > > const & activeDicts;
   
   std::set< gd::wstring > alts; // Accumulated main forms
@@ -82,6 +87,7 @@ class ArticleRequest: public Dictionary::DataRequest
 public:
 
   ArticleRequest( QString const & word, QString const & group,
+                  QMap< QString, QString > const & contexts,
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
                   std::string const & header );
 

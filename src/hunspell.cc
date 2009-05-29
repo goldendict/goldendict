@@ -65,7 +65,9 @@ public:
   virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     throw( std::exception );
 
-  virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts )
+  virtual sptr< DataRequest > getArticle( wstring const &,
+                                          vector< wstring > const & alts,
+                                          wstring const & )
     throw( std::exception );
 };
 
@@ -252,7 +254,9 @@ void HunspellArticleRequest::run()
   finish();
 }
 
-sptr< DataRequest > HunspellDictionary::getArticle( wstring const & word, vector< wstring > const & )
+sptr< DataRequest > HunspellDictionary::getArticle( wstring const & word,
+                                                    vector< wstring > const &,
+                                                    wstring const & )
   throw( std::exception )
 {
   return new HunspellArticleRequest( word, hunspellMutex, hunspell );

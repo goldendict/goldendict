@@ -319,7 +319,11 @@ public:
   /// The 'alts' vector could contain a list of words the definitions of which
   /// should be included in the output as well, being treated as additional
   /// synonyms for the main word.
-  virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts )
+  /// context is a dictionary-specific data, currently only used for the
+  /// 'Websites' feature.
+  virtual sptr< DataRequest > getArticle( wstring const &,
+                                          vector< wstring > const & alts,
+                                          wstring const & context = wstring() )
     throw( std::exception )=0;
 
   /// Loads contents of a resource named 'name' into the 'data' vector. This is

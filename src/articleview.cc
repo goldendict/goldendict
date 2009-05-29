@@ -122,7 +122,8 @@ ArticleView::~ArticleView()
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
-                                  QString const & scrollTo )
+                                  QString const & scrollTo,
+                                  Contexts const & contexts )
 {
   QUrl req;
 
@@ -132,7 +133,22 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   req.addQueryItem( "group", QString::number( group ) );
 
   if ( scrollTo.size() )
-    req.setFragment( scrollTo );
+    req.addQueryItem( "scrollto", scrollTo );
+
+  if ( contexts.size() )
+  {
+    QBuffer buf;
+
+    buf.open( QIODevice::WriteOnly );
+
+    QDataStream stream( &buf );
+
+    stream << contexts;
+
+    buf.close();
+
+    req.addQueryItem( "contexts", QString::fromAscii( buf.buffer().toBase64() ) );
+  }
 
   // Save current article, if any
 
@@ -158,22 +174,6 @@ void ArticleView::loadFinished( bool )
 {
   QUrl url = ui.definition->url();
 
-  QVariant userData = ui.definition->history()->currentItem().userData();
-
-  if ( userData.type() == QVariant::String && userData.toString().startsWith( "gdfrom-" ) )
-  {
-    printf( "has user data\n" );
-    // There's an active article saved, so set it to be active.
-    setCurrentArticle( userData.toString() );
-  }
-  else
-  if ( url.hasFragment() && url.fragment().startsWith( "gdfrom-" ) )
-  {
-    // There is no active article saved in history, but we have it in fragment.
-    // setCurrentArticle will save it.
-    setCurrentArticle( url.fragment() );
-  }
-
   // See if we have any iframes in need of expansion
 
   QList< QWebFrame * > frames = ui.definition->page()->mainFrame()->childFrames();
@@ -197,6 +197,10 @@ void ArticleView::loadFinished( bool )
       ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
         arg( (*i)->frameName() ) );
 
+      (*i)->evaluateJavaScript( "var gdLastUrlText;" );
+      (*i)->evaluateJavaScript( "document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.text; }, true );" );
+      (*i)->evaluateJavaScript( "document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.text; }, true );" );
+
       wereFrames = true;
     }
   }
@@ -209,6 +213,23 @@ void ArticleView::loadFinished( bool )
 
     qApp->sendEvent( ui.definition, &ev );
   }
+
+  QVariant userData = ui.definition->history()->currentItem().userData();
+
+  if ( userData.type() == QVariant::String && userData.toString().startsWith( "gdfrom-" ) )
+  {
+    //printf( "has user data\n" );
+    // There's an active article saved, so set it to be active.
+    setCurrentArticle( userData.toString() );
+  }
+  else
+  if ( url.queryItemValue( "scrollto" ).startsWith( "gdfrom-" ) )
+  {
+    // There is no active article saved in history, but we have it as a parameter.
+    // setCurrentArticle will save it and scroll there.
+    setCurrentArticle( url.queryItemValue( "scrollto" ), true );
+  }
+
 
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
@@ -278,15 +299,77 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( getArticlesList().contains( id.mid( 7 ) ) )
   {
     if ( moveToIt )
-    {
-      QUrl url( ui.definition->url() );
-      url.setFragment( id );
-      openLink( url, ui.definition->url() );
-    }
+      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
 
     ui.definition->history()->currentItem().setUserData( id );
     ui.definition->page()->mainFrame()->evaluateJavaScript(
       QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
+  }
+}
+
+bool ArticleView::isFramedArticle( QString const & ca )
+{
+  if ( ca.isEmpty() )
+    return false;
+
+  return ui.definition->page()->mainFrame()->
+               evaluateJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) ).toBool();
+}
+
+bool ArticleView::isExternalLink( QUrl const & url )
+{
+  return url.scheme() == "http" || url.scheme() == "https" ||
+         url.scheme() == "ftp" || url.scheme() == "mailto";
+}
+
+void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
+{
+  if( url.scheme() == "http" || url.scheme() == "https" )
+  {
+    // Maybe a link inside a website was clicked?
+
+    QString ca = getCurrentArticle();
+
+    if ( isFramedArticle( ca ) )
+    {
+      QVariant result = ui.definition->page()->currentFrame()->evaluateJavaScript( "gdLastUrlText;" );
+
+      if ( result.type() == QVariant::String )
+      {
+        // Looks this way
+
+        contexts[ ca.mid( 7 ) ] = QString::fromAscii( url.toEncoded() );
+
+        QUrl target;
+
+        target.setScheme( "gdlookup" );
+        target.setHost( "localhost" );
+        target.setPath( "/" + result.toString() );
+
+        url = target;
+      }
+    }
+  }
+}
+
+void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
+{
+  if ( !frame )
+    frame = ui.definition->page()->currentFrame();
+
+  for( ; frame; frame = frame->parentFrame() )
+  {
+    QString frameName = frame->frameName();
+
+    if ( frameName.startsWith( "gdexpandframe-" ) )
+    {
+      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
+
+      if ( getCurrentArticle() != newCurrent )
+        setCurrentArticle( newCurrent, false );
+
+      break;
+    }
   }
 }
 
@@ -332,13 +415,21 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 }
 
 
-void ArticleView::linkClicked( QUrl const & url )
+void ArticleView::linkClicked( QUrl const & url_ )
 {
-  openLink( url, ui.definition->url(), getCurrentArticle() );
+  updateCurrentArticleFromCurrentFrame();
+
+  QUrl url( url_ );
+  Contexts contexts;
+
+  tryMangleWebsiteClickedUrl( url, contexts );
+
+  openLink( url, ui.definition->url(), getCurrentArticle(), contexts );
 }
 
 void ArticleView::openLink( QUrl const & url, QUrl const & ref,
-                            QString const & scrollTo )
+                            QString const & scrollTo,
+                            Contexts const & contexts )
 {
   printf( "clicked %s\n", url.toString().toLocal8Bit().data() );
 
@@ -346,7 +437,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     showDefinition( ( url.host().startsWith( "xn--" ) ?
                       QUrl::fromPunycode( url.host().toLatin1() ) :
                       url.host() ) + url.path(),
-                    getGroup( ref ), scrollTo );
+                    getGroup( ref ), scrollTo, contexts );
   else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
   {
@@ -357,7 +448,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
     else
     showDefinition( url.path().mid( 1 ),
-                    getGroup( ref ), scrollTo );
+                    getGroup( ref ), scrollTo, contexts );
   }
   else
   if ( url.scheme() == "bres" || url.scheme() == "gdau" )
@@ -511,31 +602,45 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QWebHitTestResult r = ui.definition->page()->mainFrame()->
                           hitTestContent( pos );
 
+  updateCurrentArticleFromCurrentFrame( r.frame() );
+
   QMenu menu( this );
 
 
   QAction * followLink = 0;
+  QAction * followLinkExternal = 0;
   QAction * followLinkNewTab = 0;
   QAction * lookupSelection = 0;
   QAction * lookupSelectionGr = 0;
   QAction * lookupSelectionNewTab = 0;
   QAction * lookupSelectionNewTabGr = 0;
 
+  QUrl targetUrl( r.linkUrl() );
+  Contexts contexts;
+
+  tryMangleWebsiteClickedUrl( targetUrl, contexts );
+
   if ( !r.linkUrl().isEmpty() )
   {
-    followLink = new QAction( tr( "&Open Link" ), &menu );
-    menu.addAction( followLink );
-    
-    if ( !popupView )
+    if ( !isExternalLink( targetUrl ) )
     {
-      followLinkNewTab = new QAction( tr( "Open Link in New &Tab" ), &menu );
-      menu.addAction( followLinkNewTab );
+      followLink = new QAction( tr( "&Open Link" ), &menu );
+      menu.addAction( followLink );
+
+      if ( !popupView )
+      {
+        followLinkNewTab = new QAction( QIcon( ":/icons/addtab.png" ),
+                                        tr( "Open Link in New &Tab" ), &menu );
+        menu.addAction( followLinkNewTab );
+      }
     }
 
-    QString scheme = r.linkUrl().scheme();
-
-    if ( scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "mailto" )
+    if ( isExternalLink( r.linkUrl() ) )
+    {
+      followLinkExternal = new QAction( tr( "Open Link in &External Browser" ), &menu );
+      menu.addAction( followLinkExternal );
       menu.addAction( ui.definition->pageAction( QWebPage::CopyLinkToClipboard ) );
+    }
   }
 
   QString selectedText = ui.definition->selectedText();
@@ -628,8 +733,14 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   {
     QAction * result = menu.exec( ui.definition->mapToGlobal( pos ) );
 
+    if ( !result )
+      return;
+
     if ( result == followLink )
-      linkClicked( r.linkUrl() );
+      openLink( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
+    else
+    if ( result == followLinkExternal )
+      QDesktopServices::openUrl( r.linkUrl() );
     else
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
@@ -638,15 +749,15 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       showDefinition( selectedText, groupComboBox->getCurrentGroup(), QString() );
     else
     if ( !popupView && result == followLinkNewTab )
-      emit openLinkInNewTab( r.linkUrl(), ui.definition->url(), getCurrentArticle() );
+      emit openLinkInNewTab( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
     else
     if ( !popupView && result == lookupSelectionNewTab )
       emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
-                                   getCurrentArticle() );
+                                   getCurrentArticle(), Contexts() );
     else
     if ( !popupView && result == lookupSelectionNewTabGr && groupComboBox )
       emit showDefinitionInNewTab( selectedText, groupComboBox->getCurrentGroup(),
-                                   QString() );
+                                   QString(), Contexts() );
     else
     {
       // Match against table of contents

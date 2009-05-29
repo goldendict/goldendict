@@ -89,7 +89,8 @@ public:
   { return QIcon(":/icons/playsound.png"); }
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                      vector< wstring > const & alts )
+                                                      vector< wstring > const & alts,
+                                                      wstring const & )
     throw( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
@@ -114,7 +115,8 @@ SoundDirDictionary::SoundDirDictionary( string const & id,
 }
 
 sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & word,
-                                                                vector< wstring > const & alts )
+                                                                vector< wstring > const & alts,
+                                                                wstring const & )
   throw( std::exception )
 {
   vector< WordArticleLink > chain = findArticles( word );

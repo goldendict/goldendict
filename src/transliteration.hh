@@ -69,7 +69,8 @@ public:
                                                              unsigned long ) throw( std::exception );
   
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                      vector< wstring > const & )
+                                                      vector< wstring > const &,
+                                                      wstring const & )
     throw( std::exception );
 };
 

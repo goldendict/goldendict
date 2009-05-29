@@ -112,7 +112,8 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
-  QString const & inWord, unsigned groupId ) const
+  QString const & inWord, unsigned groupId,
+  QMap< QString, QString > const & contexts ) const
 {
   if ( groupId == UINT_MAX )
   {
@@ -191,7 +192,8 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
                                   activeGroup && activeGroup->icon.size() ?
                                     activeGroup->icon : QString() );
 
-  return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "", activeDicts, header );
+  return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+                             contexts, activeDicts, header );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
@@ -226,9 +228,11 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
 
 ArticleRequest::ArticleRequest(
   QString const & word_, QString const & group_,
+  QMap< QString, QString > const & contexts_,
   vector< sptr< Dictionary::Class > > const & activeDicts_,
   string const & header ):
-    word( word_ ), group( group_ ), activeDicts( activeDicts_ ),
+    word( word_ ), group( group_ ), contexts( contexts_ ),
+    activeDicts( activeDicts_ ),
     altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
     closePrevSpan( false )
 {
@@ -295,7 +299,8 @@ void ArticleRequest::altSearchFinished()
     for( unsigned x = 0; x < activeDicts.size(); ++x )
     {
       sptr< Dictionary::DataRequest > r =
-        activeDicts[ x ]->getArticle( wordStd, altsVector );
+        activeDicts[ x ]->getArticle( wordStd, altsVector,
+                                      gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
 
       connect( r.get(), SIGNAL( finished() ),
                this, SLOT( bodyFinished() ) );

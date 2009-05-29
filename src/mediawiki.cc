@@ -51,7 +51,8 @@ public:
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) throw( std::exception );
 
-  virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts )
+  virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
+                                          wstring const & )
     throw( std::exception );
 };
 
@@ -341,7 +342,9 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
   return new MediaWikiWordSearchRequest( word, url, netMgr );
 }
 
-sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word, vector< wstring > const & alts )
+sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
+                                                     vector< wstring > const & alts,
+                                                     wstring const & )
   throw( std::exception )
 {
   return new MediaWikiArticleRequest( word, alts, url, netMgr );

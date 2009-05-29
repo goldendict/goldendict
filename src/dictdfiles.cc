@@ -110,7 +110,8 @@ public:
   { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                      vector< wstring > const & alts )
+                                                      vector< wstring > const & alts,
+                                                      wstring const & )
     throw( std::exception );
 };
 
@@ -185,7 +186,8 @@ uint32_t decodeBase64( string const & str )
 }
 
 sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & word,
-                                                             vector< wstring > const & alts )
+                                                             vector< wstring > const & alts,
+                                                             wstring const & )
   throw( std::exception )
 {
   try

@@ -162,7 +162,8 @@ public:
   #endif
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                      vector< wstring > const & alts )
+                                                      vector< wstring > const & alts,
+                                                      wstring const & )
     throw( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
@@ -1056,7 +1057,8 @@ void DslArticleRequest::run()
 }
 
 sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
-                                                           vector< wstring > const & alts )
+                                                           vector< wstring > const & alts,
+                                                           wstring const & )
   throw( std::exception )
 {
   return new DslArticleRequest( word, alts, *this );

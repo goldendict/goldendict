@@ -241,7 +241,8 @@ namespace
       throw( std::exception );
 
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                        vector< wstring > const & alts )
+                                                        vector< wstring > const & alts,
+                                                        wstring const & )
       throw( std::exception );
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
@@ -673,7 +674,8 @@ void BglArticleRequest::run()
 }
 
 sptr< Dictionary::DataRequest > BglDictionary::getArticle( wstring const & word,
-                                                           vector< wstring > const & alts )
+                                                           vector< wstring > const & alts,
+                                                           wstring const & )
   throw( std::exception )
 {
   return new BglArticleRequest( word, alts, *this );

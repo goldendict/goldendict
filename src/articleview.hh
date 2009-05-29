@@ -6,6 +6,7 @@
 
 #include <QWebView>
 #include <QUrl>
+#include <QMap>
 #include <list>
 #include "article_netmgr.hh"
 #include "instances.hh"
@@ -65,11 +66,17 @@ public:
 
   ~ArticleView();
 
+  typedef QMap< QString, QString > Contexts;
+
   /// Shows the definition of the given word with the given group.
   /// scrollTo can be optionally set to a "gdfrom-xxxx" identifier to position
   /// the page to that article on load.
+  /// contexts is an optional map of context values to be passed for dictionaries.
+  /// The only values to pass here are ones obtained from showDefinitionInNewTab()
+  /// signal or none at all.
   void showDefinition( QString const & word, unsigned group,
-                       QString const & scrollTo = QString() );
+                       QString const & scrollTo = QString(),
+                       Contexts const & contexts = Contexts() );
 
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
@@ -78,8 +85,12 @@ public:
   /// Opens the given link. Supposed to be used in response to
   /// openLinkInNewTab() signal. The link scheme is therefore supposed to be
   /// one of the internal ones.
+  /// contexts is an optional map of context values to be passed for dictionaries.
+  /// The only values to pass here are ones obtained from showDefinitionInNewTab()
+  /// signal or none at all.
   void openLink( QUrl const & url, QUrl const & referrer,
-                 QString const & scrollTo = QString() );
+                 QString const & scrollTo = QString(),
+                 Contexts const & contexts = Contexts() );
 
   /// Goes back in history
   void back()
@@ -129,10 +140,12 @@ signals:
 
   /// Singals that the following link was requested to be opened in new tab
   void openLinkInNewTab( QUrl const &, QUrl const & referrer,
-                         QString const & fromArticle );
+                         QString const & fromArticle,
+                         ArticleView::Contexts const & contexts );
   /// Singals that the following definition was requested to be showed in new tab
   void showDefinitionInNewTab( QString const & word, unsigned group,
-                               QString const & fromArticle );
+                               QString const & fromArticle,
+                               ArticleView::Contexts const & contexts );
 
   /// Emitted when user types a text key. This should typically be used to
   /// switch focus to word input.
@@ -182,6 +195,23 @@ private:
   /// Sets the current article by executing a javascript code.
   /// If moveToIt is true, it moves the focus to it as well.
   void setCurrentArticle( QString const &, bool moveToIt = false );
+
+  /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
+  /// frame.
+  bool isFramedArticle( QString const & );
+
+  /// Checks if the given link is to be opened externally, as opposed to opening
+  /// it in-place.
+  bool isExternalLink( QUrl const & url );
+
+  /// Sees if the last clicked link is from a website frame. If so, changes url
+  /// to point to url text translation instead, and saves the original
+  /// url to the appropriate "contexts" entry.
+  void tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts );
+
+  /// Use the known information about the current frame to update the current
+  /// article's value.
+  void updateCurrentArticleFromCurrentFrame( QWebFrame * frame = 0 );
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();

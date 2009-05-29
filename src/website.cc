@@ -3,6 +3,7 @@
 
 #include "website.hh"
 #include "wstring_qt.hh"
+#include "utf8.hh"
 #include <QUrl>
 #include <QTextCodec>
 
@@ -45,7 +46,9 @@ public:
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long ) throw( std::exception );
 
-  virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts )
+  virtual sptr< DataRequest > getArticle( wstring const &,
+                                          vector< wstring > const & alts,
+                                          wstring const & context )
     throw( std::exception );
 };
 
@@ -59,18 +62,28 @@ sptr< WordSearchRequest > WebSiteDictionary::prefixMatch( wstring const & word,
   return sr;
 }
 
-sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str, vector< wstring > const & )
+sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
+                                                   vector< wstring > const &,
+                                                   wstring const & context )
   throw( std::exception )
 {
   sptr< DataRequestInstant > dr = new DataRequestInstant( true );
 
-  QByteArray urlString( urlTemplate );
+  QByteArray urlString;
 
-  QString inputWord = gd::toQString( str );
+  // Context contains the right url to go to
+  if ( context.size() )
+    urlString = Utf8::encode( context ).c_str();
+  else
+  {
+    urlString = urlTemplate;
 
-  urlString.replace( "%25GDWORD%25", inputWord.toUtf8().toPercentEncoding() );
-  urlString.replace( "%25GD1251%25", QTextCodec::codecForName( "Windows-1251" )->fromUnicode( inputWord ).toPercentEncoding() );
-  urlString.replace( "%25GDISO1%25", QTextCodec::codecForName( "ISO 8859-1" )->fromUnicode( inputWord ).toPercentEncoding() );
+    QString inputWord = gd::toQString( str );
+
+    urlString.replace( "%25GDWORD%25", inputWord.toUtf8().toPercentEncoding() );
+    urlString.replace( "%25GD1251%25", QTextCodec::codecForName( "Windows-1251" )->fromUnicode( inputWord ).toPercentEncoding() );
+    urlString.replace( "%25GDISO1%25", QTextCodec::codecForName( "ISO 8859-1" )->fromUnicode( inputWord ).toPercentEncoding() );
+  }
 
   string result = "<div class=\"website_padding\"></div>";
 

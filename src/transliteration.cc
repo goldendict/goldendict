@@ -47,7 +47,8 @@ sptr< Dictionary::WordSearchRequest > TransliterationDictionary::prefixMatch( ws
 { return new Dictionary::WordSearchRequestInstant(); }
 
 sptr< Dictionary::DataRequest > TransliterationDictionary::getArticle( wstring const &,
-                                                    vector< wstring > const & )
+                                                                       vector< wstring > const &,
+                                                                       wstring const & )
   throw( std::exception )
 { return new Dictionary::DataRequestInstant( false ); }
 

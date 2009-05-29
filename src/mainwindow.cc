@@ -530,11 +530,11 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
-  connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const & ) ),
-           this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const & ) ) );
+  connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ),
+           this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ) );
 
-  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned, QString const & ) ),
-           this, SLOT( showDefinitionInNewTab( QString const &, unsigned, QString const & ) ) );
+  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned, QString const &, ArticleView::Contexts const & ) ),
+           this, SLOT( showDefinitionInNewTab( QString const &, unsigned, QString const &, ArticleView::Contexts const & ) ) );
 
   connect( view, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
@@ -943,18 +943,20 @@ void MainWindow::wordListSelectionChanged()
 
 void MainWindow::openLinkInNewTab( QUrl const & url,
                                    QUrl const & referrer,
-                                   QString const & fromArticle )
+                                   QString const & fromArticle,
+                                   ArticleView::Contexts const & contexts )
 {
   createNewTab( !cfg.preferences.newTabsOpenInBackground, "" )->
-      openLink( url, referrer, fromArticle );
+      openLink( url, referrer, fromArticle, contexts );
 }
 
 void MainWindow::showDefinitionInNewTab( QString const & word,
                                          unsigned group,
-                                         QString const & fromArticle )
+                                         QString const & fromArticle,
+                                         ArticleView::Contexts const & contexts )
 {
   createNewTab( !cfg.preferences.newTabsOpenInBackground, word )->
-      showDefinition( word, group, fromArticle );
+      showDefinition( word, group, fromArticle, contexts );
 }
 
 void MainWindow::typingEvent( QString const & t )

@@ -63,8 +63,27 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     QString word = url.queryItemValue( "word" );
     unsigned group = url.queryItemValue( "group" ).toUInt( &groupIsValid );
 
+    // Unpack contexts
+
+    QMap< QString, QString > contexts;
+
+    QString contextsEncoded = url.queryItemValue( "contexts" );
+
+    if ( contextsEncoded.size() )
+    {
+      QByteArray ba = QByteArray::fromBase64( contextsEncoded.toAscii() );
+
+      QBuffer buf( & ba );
+
+      buf.open( QBuffer::ReadOnly );
+
+      QDataStream stream( &buf );
+
+      stream >> contexts;
+    }
+
     if ( groupIsValid && word.size() ) // Require group and word to be passed
-      return articleMaker.makeDefinitionFor( word, group );
+      return articleMaker.makeDefinitionFor( word, group, contexts );
   }
 
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ) &&

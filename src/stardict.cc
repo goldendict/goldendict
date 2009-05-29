@@ -153,7 +153,8 @@ public:
     throw( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                      vector< wstring > const & alts )
+                                                      vector< wstring > const & alts,
+                                                      wstring const & )
     throw( std::exception );
 
 private:
@@ -732,7 +733,8 @@ void StardictArticleRequest::run()
 }
 
 sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & word,
-                                                                vector< wstring > const & alts )
+                                                                vector< wstring > const & alts,
+                                                                wstring const & )
   throw( std::exception )
 {
   return new StardictArticleRequest( word, alts, *this );
