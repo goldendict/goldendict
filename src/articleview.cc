@@ -36,17 +36,23 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   pasteAction( this ),
   articleUpAction( this ),
   articleDownAction( this ),
+  goBackAction( this ),
+  goForwardAction( this ),
   openSearchAction( this ),
   searchIsOpened( false ),
   groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
 
-  ui.definition->pageAction( QWebPage::Back )->setShortcut( QKeySequence( "Alt+Left" ) );
-  ui.definition->addAction( ui.definition->pageAction( QWebPage::Back ) );
+  goBackAction.setShortcut( QKeySequence( "Alt+Left" ) );
+  ui.definition->addAction( &goBackAction );
+  connect( &goBackAction, SIGNAL( triggered() ),
+           this, SLOT( back() ) );
 
-  ui.definition->pageAction( QWebPage::Forward )->setShortcut( QKeySequence( "Alt+Right" ) );
-  ui.definition->addAction( ui.definition->pageAction( QWebPage::Forward ) );
+  goForwardAction.setShortcut( QKeySequence( "Alt+Right" ) );
+  ui.definition->addAction( &goForwardAction );
+  connect( &goForwardAction, SIGNAL( triggered() ),
+           this, SLOT( forward() ) );
 
   ui.definition->pageAction( QWebPage::Copy )->setShortcut( QKeySequence::Copy );
   ui.definition->addAction( ui.definition->pageAction( QWebPage::Copy ) );
@@ -150,12 +156,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
     req.addQueryItem( "contexts", QString::fromAscii( buf.buffer().toBase64() ) );
   }
 
-  // Save current article, if any
-
-  QString currentArticle = getCurrentArticle();
-
-  if ( currentArticle.size() )
-    ui.definition->history()->currentItem().setUserData( currentArticle );
+  // Update history
+  saveHistoryUserData();
 
   ui.definition->load( req );
 
@@ -214,13 +216,34 @@ void ArticleView::loadFinished( bool )
     qApp->sendEvent( ui.definition, &ev );
   }
 
-  QVariant userData = ui.definition->history()->currentItem().userData();
+  QVariant userDataVariant = ui.definition->history()->currentItem().userData();
 
-  if ( userData.type() == QVariant::String && userData.toString().startsWith( "gdfrom-" ) )
+  if ( userDataVariant.type() == QVariant::Map )
   {
-    //printf( "has user data\n" );
-    // There's an active article saved, so set it to be active.
-    setCurrentArticle( userData.toString() );
+    QMap< QString, QVariant > userData = userDataVariant.toMap();
+
+    QString currentArticle = userData.value( "currentArticle" ).toString();
+
+    if ( currentArticle.size() )
+    {
+      // There's an active article saved, so set it to be active.
+      setCurrentArticle( currentArticle );
+    }
+
+    double sx = 0, sy = 0;
+
+    if ( userData.value( "sx" ).type() == QVariant::Double )
+      sx = userData.value( "sx" ).toDouble();
+
+    if ( userData.value( "sy" ).type() == QVariant::Double )
+      sy = userData.value( "sy" ).toDouble();
+
+    if ( sx != 0 || sy != 0 )
+    {
+      // Restore scroll position
+      ui.definition->page()->mainFrame()->evaluateJavaScript(
+          QString( "window.scroll( %1, %2 );" ).arg( sx ).arg( sy ) );
+    }
   }
   else
   if ( url.queryItemValue( "scrollto" ).startsWith( "gdfrom-" ) )
@@ -301,7 +324,11 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     if ( moveToIt )
       ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
 
-    ui.definition->history()->currentItem().setUserData( id );
+    QMap< QString, QVariant > userData = ui.definition->history()->
+                                         currentItem().userData().toMap();
+    userData[ "currentArticle" ] = id;
+    ui.definition->history()->currentItem().setUserData( userData );
+
     ui.definition->page()->mainFrame()->evaluateJavaScript(
       QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
   }
@@ -378,6 +405,24 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
       break;
     }
   }
+}
+
+void ArticleView::saveHistoryUserData()
+{
+  QMap< QString, QVariant > userData = ui.definition->history()->
+                                       currentItem().userData().toMap();
+
+  // Save current article, which can be empty
+
+  userData[ "currentArticle" ] = getCurrentArticle();
+
+  // We also save window position. We restore it when the page is fully loaded,
+  // when any hidden frames are expanded.
+
+  userData[ "sx" ] = ui.definition->page()->mainFrame()->evaluateJavaScript( "window.scrollX;" ).toDouble();
+  userData[ "sy" ] = ui.definition->page()->mainFrame()->evaluateJavaScript( "window.scrollY;" ).toDouble();
+
+  ui.definition->history()->currentItem().setUserData( userData );
 }
 
 void ArticleView::cleanupTemp()

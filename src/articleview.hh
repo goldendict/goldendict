@@ -27,7 +27,8 @@ class ArticleView: public QFrame
 
   Ui::ArticleView ui;
 
-  QAction pasteAction, articleUpAction, articleDownAction, openSearchAction;
+  QAction pasteAction, articleUpAction, articleDownAction,
+          goBackAction, goForwardAction, openSearchAction;
   bool searchIsOpened;
 
 #ifdef Q_OS_WIN32
@@ -92,13 +93,17 @@ public:
                  QString const & scrollTo = QString(),
                  Contexts const & contexts = Contexts() );
 
+public slots:
+
   /// Goes back in history
   void back()
-  { ui.definition->back(); }
+  { saveHistoryUserData(); ui.definition->back(); }
 
   /// Goes forward in history
   void forward()
-  { ui.definition->forward(); }
+  { saveHistoryUserData(); ui.definition->forward(); }
+
+public:
 
   /// Takes the focus to the view
   void focus()
@@ -212,6 +217,10 @@ private:
   /// Use the known information about the current frame to update the current
   /// article's value.
   void updateCurrentArticleFromCurrentFrame( QWebFrame * frame = 0 );
+
+  /// Saves current article and scroll position for the current history item.
+  /// Should be used when leaving the page.
+  void saveHistoryUserData();
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();
