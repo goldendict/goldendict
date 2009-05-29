@@ -342,9 +342,16 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
         QUrl target;
 
+        QString queryWord = result.toString();
+
+        // Empty requests are treated as no request, so we work this around by
+        // adding a space.
+        if ( queryWord.isEmpty() )
+          queryWord = " ";
+
         target.setScheme( "gdlookup" );
         target.setHost( "localhost" );
-        target.setPath( "/" + result.toString() );
+        target.setPath( "/" + queryWord );
 
         url = target;
       }
