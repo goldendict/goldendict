@@ -50,15 +50,9 @@ typedef struct dictCache {
 
 typedef struct dictData {
 
-#ifdef __WIN32
-   HANDLE        fileHandle, mappingHandle;
-#else   
-   int           fd;		/* file descriptor */
-#endif
+   FILE *        fd;		/* file descriptor */
 
-   const char    *start;	/* start of mmap'd area */
-   const char    *end;		/* end of mmap'd area */
-   unsigned long size;		/* size of mmap */
+   unsigned long size;		/* size of file */
    
    int           type;
    const char    *filename;

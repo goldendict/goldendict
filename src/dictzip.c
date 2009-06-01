@@ -130,17 +130,6 @@
 #define DICT_GZIP       2
 #define DICT_DZIP       3
 
-/* Always enable the mmap mode -- else it reads the whole file into memory! */
-#define HAVE_MMAP
-
-#include <sys/stat.h>
-
-#ifndef __WIN32
-#ifdef HAVE_MMAP
-#include <sys/mman.h>
-#endif
-#endif
-
 #include <ctype.h>
 #include <fcntl.h>
 #include <assert.h>
@@ -148,12 +137,6 @@
 #include <sys/stat.h>
 
 #define USE_CACHE 1
-
-#ifdef HAVE_MMAP
-int mmap_mode = 1; /* dictd uses mmap() function (the default) */
-#else
-int mmap_mode = 0;
-#endif
 
 #define dict_data_filter( ... )
 #define PRINTF( ... )
@@ -455,88 +438,23 @@ dictData *dict_data_open( const char *filename, int computeCRC )
    h->initialized = 0;
 
    if (dict_read_header( filename, h, computeCRC )) {
+     return 0; /*
       err_fatal( __func__,
-		 "\"%s\" not in text or dzip format\n", filename );
+     "\"%s\" not in text or dzip format\n", filename );*/
    }
 
-#ifdef __WIN32
+   h->fd = fopen( filename, "rb" );
 
-   h->fileHandle = CreateFileA( filename, GENERIC_READ, FILE_SHARE_READ, 0,
-                                OPEN_EXISTING, 0, 0 );
-
-   if ( h->fileHandle == INVALID_HANDLE_VALUE )
+   if ( !h->fd )
    {
-     err_fatal_errno( __func__,
-          "Cannot open data file \"%s\"\n", filename );
-
-     xfree( h );
-
      return 0;
-   }
+      /*err_fatal_errno( __func__,
+           "Cannot open data file \"%s\"\n", filename );*/
+    }
 
-   h->size = GetFileSize( h->fileHandle, 0 );
+   fseek( h->fd, 0, SEEK_END );
 
-   h->mappingHandle = CreateFileMapping( h->fileHandle, 0,
-                                         PAGE_READONLY, 0, h->size, 0 );
-
-   if ( !h->mappingHandle )
-   {
-     err_fatal_errno( __func__,
-          "Cannot create file mapping for data file \"%s\"\n", filename );
-
-     CloseHandle( h->fileHandle );
-     xfree( h );
-
-     return 0;
-   }
-
-   h->start = MapViewOfFile( h->mappingHandle, FILE_MAP_READ, 0, 0, h->size );
-
-   if ( !h->start )
-   {
-     err_fatal_errno( __func__,
-          "Cannot map view of data file \"%s\"\n", filename );
-
-     CloseHandle( h->mappingHandle );
-     CloseHandle( h->fileHandle );
-     xfree( h );
-
-     return 0;
-   }
-
-#else
-
-   if ((h->fd = open( filename, O_RDONLY )) < 0)
-      err_fatal_errno( __func__,
-		       "Cannot open data file \"%s\"\n", filename );
-   if (fstat( h->fd, &sb ))
-      err_fatal_errno( __func__,
-		       "Cannot stat data file \"%s\"\n", filename );
-   h->size = sb.st_size;
-
-   if (mmap_mode){
-#ifdef HAVE_MMAP
-      h->start = mmap( NULL, h->size, PROT_READ, MAP_SHARED, h->fd, 0 );
-      if ((void *)h->start == (void *)(-1))
-	 err_fatal_errno(
-	    __func__,
-	    "Cannot mmap data file \"%s\"\n", filename );
-#else
-      err_fatal (__func__, "This should not happen");
-#endif
-   }else{
-      h->start = xmalloc (h->size);
-      if (-1 == read (h->fd, (char *) h->start, h->size))
-	 err_fatal_errno (
-	    __func__,
-	    "Cannot read data file \"%s\"\n", filename );
-
-      close (h -> fd);
-      h -> fd = 0;
-   }
-#endif
-
-   h->end = h->start + h->size;
+   h->size = ftell( h->fd );
 
    for (j = 0; j < DICT_CACHE_SIZE; j++) {
       h->cache[j].chunk    = -1;
@@ -555,27 +473,8 @@ void dict_data_close( dictData *header )
    if (!header)
       return;
 
-#ifdef __WIN32
-   UnmapViewOfFile( header->start );
-   CloseHandle( header->mappingHandle );
-   CloseHandle( header->fileHandle );
-#else
-   if (header->fd >= 0) {
-      if (mmap_mode){
-#ifdef HAVE_MMAP
-	 munmap( (void *)header->start, header->size );
-	 close( header->fd );
-	 header->fd = 0;
-	 header->start = header->end = NULL;
-#else
-	 err_fatal (__func__, "This should not happen");
-#endif
-      }else{
-	 if (header -> start)
-	    xfree ((char *) header -> start);
-      }
-   }
-#endif
+   if ( header->fd )
+     fclose( header->fd );
 
    if (header->chunks)       xfree( header->chunks );
    if (header->offsets)      xfree( header->offsets );
@@ -628,9 +527,17 @@ char *dict_data_read_ (
 		 " or dzip format (for space savings).\n" );
       break;
    case DICT_TEXT:
-      memcpy( buffer, h->start + start, size );
-      buffer[size] = '\0';
-      break;
+   {
+     if ( fseek( h->fd, start, SEEK_SET ) != 0 ||
+          fread( buffer, size, 1, h->fd ) != 1 )
+     {
+       xfree( buffer );
+       return 0;
+     }
+
+     buffer[size] = '\0';
+   }
+   break;
    case DICT_DZIP:
       if (!h->initialized) {
 	 ++h->initialized;
@@ -690,7 +597,14 @@ char *dict_data_read_ (
 			     "h->chunks[%d] = %d >= %ld (OUT_BUFFER_SIZE)\n",
 			     i, h->chunks[i], OUT_BUFFER_SIZE );
 	    }
-	    memcpy( outBuffer, h->start + h->offsets[i], h->chunks[i] );
+
+      if ( fseek( h->fd, h->offsets[ i ], SEEK_SET ) != 0 ||
+           fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
+      {
+        xfree( buffer );
+        return 0;
+      }
+
       dict_data_filter( outBuffer, &count, OUT_BUFFER_SIZE, preFilter );
 	 
 	    h->zStream.next_in   = outBuffer;
