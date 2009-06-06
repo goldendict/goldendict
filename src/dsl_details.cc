@@ -970,6 +970,27 @@ void unescapeDsl( wstring & str )
       str.erase( x, 1 ); // ++x would skip the next char without processing it
 }
 
+void normalizeHeadword( wstring & str )
+{
+  for( size_t x = str.size(); x-- > 1; ) // >1 -- Don't test the first char
+  {
+    if ( str[ x ] == L' ' )
+    {
+      size_t y;
+      for( y = x; y && ( str[ y - 1 ] == L' ' ) ; --y );
+
+      if ( y != x )
+      {
+        // Remove extra spaces
+
+        str.erase( y, x - y );
+
+        x = y;
+      }
+    }
+  }
+}
+
 namespace
 {
   void cutEnding( wstring & where, wstring const & ending )

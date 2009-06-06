@@ -167,6 +167,9 @@ void expandTildes( wstring & str, wstring const & tildeReplacement );
 // before unescaping them.
 void unescapeDsl( wstring & str );
 
+// Normalizes the headword. Currently turns any sequences of consecutive spaces
+// into a single space.
+void normalizeHeadword( wstring & );
 
 inline size_t DslScanner::distanceToBytes( size_t x ) const
 {

@@ -68,7 +68,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 12 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 13 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -558,6 +558,7 @@ void DslDictionary::loadArticle( uint32_t address,
       for( list< wstring >::iterator i = lst.begin(); i != lst.end(); ++i )
       {
         unescapeDsl( *i );
+        normalizeHeadword( *i );
 
         if ( Folding::trimWhitespace( *i ) == requestedHeadwordFolded )
         {
@@ -1475,6 +1476,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                    ++i )
               {
                 unescapeDsl( *i );
+                normalizeHeadword( *i );
+
                 abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
               }
             }
@@ -1586,6 +1589,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                j != allEntryWords.end(); ++j )
           {
             unescapeDsl( *j );
+            normalizeHeadword( *j );
             indexedWords.addWord( *j, descOffset );
           }
 
