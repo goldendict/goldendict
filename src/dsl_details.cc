@@ -474,6 +474,18 @@ void ArticleDom::nextChar() throw( eot )
     escaped = true;
   }
   else
+  if ( ch == L'[' && *stringPos == L'[' )
+  {
+    ++stringPos;
+    escaped = true;
+  }
+  else
+  if ( ch == L']' && *stringPos == L']' )
+  {
+    ++stringPos;
+    escaped = true;
+  }
+  else
     escaped = false;
 }
 
