@@ -332,6 +332,8 @@ QString getUserQtCssFileName() throw( exError );
 /// /usr/share/apps/goldendict, under Windows C:/Program Files/GoldenDict.
 QString getProgramDataDir() throw();
 
+/// Returns the directory storing program localizized files (.qm).
+QString getLocDir() throw();
 }
 
 #endif

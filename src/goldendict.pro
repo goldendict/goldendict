@@ -193,20 +193,17 @@ win32 {
 }
 RESOURCES += resources.qrc \
     flags.qrc
-TRANSLATIONS += locale/ru.ts
+TRANSLATIONS += locale/ru_RU.ts locale/zh_CN.ts locale/cs_CZ.ts
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+updateqm.input = TRANSLATIONS
+updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
+updateqm.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
+updateqm.CONFIG += no_link
+QMAKE_EXTRA_COMPILERS += updateqm
 TS_OUT = $$TRANSLATIONS
-TS_OUT ~= s/.ts/.qm
-TSQM.name = lrelease \
-    ${QMAKE_FILE_IN}
-TSQM.input = TRANSLATIONS
-TSQM.output = $$TS_OUT
-TSQM.commands = $$QMAKE_LRELEASE \
-    ${QMAKE_FILE_IN}
-TSQM.CONFIG = no_link
-QMAKE_EXTRA_COMPILERS += TSQM
+TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 # LibZip

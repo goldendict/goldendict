@@ -973,4 +973,12 @@ QString getProgramDataDir() throw()
   #endif
 }
 
+QString getLocDir() throw()
+{
+  if ( QDir( getProgramDataDir() ).cd( "locale" ) )
+    return getProgramDataDir() + "/locale";
+  else
+    return QCoreApplication::applicationDirPath() + "/locale";
+}
+
 }

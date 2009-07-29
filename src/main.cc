@@ -106,8 +106,7 @@ int main( int argc, char ** argv )
 
   QTranslator translator;
 
-  if ( !translator.load( QString( Config::getProgramDataDir() ) + "/locale/" + localeName ) )
-    translator.load( QCoreApplication::applicationDirPath() + "/locale/" + localeName );
+  translator.load( Config::getLocDir() + "/" + localeName );
 
   app.installTranslator( &translator );
 

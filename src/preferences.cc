@@ -1,5 +1,7 @@
 #include "preferences.hh"
 #include "keyboardstate.hh"
+#include "language.hh"
+#include "langcoder.hh"
 #include <QMessageBox>
 
 Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
@@ -36,8 +38,28 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   // Load values into form
 
   ui.interfaceLanguage->addItem( tr( "System default" ), QString() );
-  ui.interfaceLanguage->addItem( QIcon( ":/flags/us.png" ), tr( "English" ), QString( "en_US" ) );
-  ui.interfaceLanguage->addItem( QIcon( ":/flags/ru.png" ), tr( "Russian" ), QString( "ru_RU" ) );
+  ui.interfaceLanguage->addItem( QIcon( ":/flags/us.png" ), Language::localizedNameForId( LangCoder::code2toInt( "en" ) ), QString( "en_US" ) );
+
+  // See which other translations do we have
+
+  QStringList availLocs = QDir( Config::getLocDir() ).entryList( QStringList( "*.qm" ),
+                                                                 QDir::Files );
+
+  // We need to sort by language name -- otherwise list looks really weird
+  QMap< QString, QPair< QIcon, QString > > sortedLocs;
+
+  for( QStringList::iterator i = availLocs.begin(); i != availLocs.end(); ++i )
+  {
+    // Here we assume the xx_YY naming, where xx is language and YY is region.
+    QString lang = i->mid( 0, 2 );
+    sortedLocs[ Language::localizedNameForId( LangCoder::code2toInt( lang.toAscii().data() ) ) ]
+        = QPair< QIcon, QString >( QIcon( QString( ":/flags/%1.png" ).arg( i->mid( 3, 2 ).toLower() ) ),
+                                   i->mid( 0, i->size() - 3 ) );
+  }
+
+  for( QMap< QString, QPair< QIcon, QString > >::iterator i = sortedLocs.begin();
+       i != sortedLocs.end(); ++i )
+    ui.interfaceLanguage->addItem( i.value().first, i.key(), i.value().second );
 
   for( int x = 0; x < ui.interfaceLanguage->count(); ++x )
     if ( ui.interfaceLanguage->itemData( x ).toString() == p.interfaceLanguage )
