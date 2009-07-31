@@ -274,6 +274,22 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   doDeferredInit( dictionaries );
 }
 
+void MainWindow::mousePressEvent( QMouseEvent *event)
+{
+	if (event->button() != Qt::MidButton)
+		return QMainWindow::mousePressEvent(event);
+	// middle clicked
+  	QString subtype = "plain";
+
+  	QString str = QApplication::clipboard()->text(subtype, 
+  		QClipboard::Selection);
+	ui.translateLine->setText(str);
+      
+      	QKeyEvent ev(QEvent::Type(6)/*QEvent::KeyPress*/, Qt::Key_Enter,
+      		 Qt::NoModifier);
+      	QApplication::sendEvent(ui.translateLine, &ev);
+}
+
 MainWindow::~MainWindow()
 {
   // Save MainWindow state and geometry
@@ -1273,11 +1289,23 @@ void MainWindow::latestReleaseReplyReady()
 
 void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
 {
-  if ( r == QSystemTrayIcon::Trigger )
-  {
-    // Left click toggles the visibility of main window
-    toggleMainWindow();
-  }
+	switch(r) {
+		case QSystemTrayIcon::Trigger:
+			// Left click toggles the visibility of main window
+			toggleMainWindow();
+			break;
+
+		case QSystemTrayIcon::MiddleClick:
+			// Middle mouse click on Tray translates selection
+			// it is functional like as stardict
+			if ( scanPopup.get() ) {
+				scanPopup->translateWordFromSelection();
+			}
+			break;
+		default:
+			break;
+
+	}
 }
 
 void MainWindow::scanEnableToggled( bool on )

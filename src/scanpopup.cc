@@ -141,12 +141,21 @@ void ScanPopup::applyZoomFactor()
 
 void ScanPopup::translateWordFromClipboard()
 {
-  printf( "translating from clipboard\n" );
+	return translateWordFromClipboard(QClipboard::Clipboard);
+}
+
+void ScanPopup::translateWordFromSelection()
+{
+	return translateWordFromClipboard(QClipboard::Selection);
+}
+
+void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
+{
+  printf( "translating from clipboard or selection\n" );
 
   QString subtype = "plain";
 
-  QString str = QApplication::clipboard()->text( subtype,
-                                                 QClipboard::Clipboard );
+  QString str = QApplication::clipboard()->text( subtype, m);
 
   str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
 

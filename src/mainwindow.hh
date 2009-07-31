@@ -108,6 +108,8 @@ private:
 
   void applyZoomFactor();
 
+  void mousePressEvent ( QMouseEvent * event );
+
 private slots:
 
   void hotKeyActivated( int );

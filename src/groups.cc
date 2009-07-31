@@ -36,6 +36,8 @@ Groups::Groups( QWidget * parent,
            this, SLOT( removeAll() ) );
   connect( ui.addDictsToGroup, SIGNAL( clicked() ),
            this, SLOT( addToGroup() ) );
+  connect( ui.dictionaries, SIGNAL(  doubleClicked(const QModelIndex &) ),
+           this, SLOT( addToGroup() ) );
   connect( ui.removeDictsFromGroup, SIGNAL( clicked() ),
            this, SLOT( removeFromGroup() ) );
 

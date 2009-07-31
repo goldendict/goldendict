@@ -43,8 +43,13 @@ public slots:
 
   /// Translates the word from the clipboard, showing the window etc.
   void translateWordFromClipboard();
+  /// Translates the word from the clipboard selection
+  void translateWordFromSelection();
 
 private:
+
+  // Translates the word from the clipboard or the clipboard selection
+  void translateWordFromClipboard(QClipboard::Mode m);
 
   Config::Class & cfg;
   bool isScanningEnabled;
