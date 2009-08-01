@@ -107,6 +107,7 @@ class DslScanner
   char * readBufferPtr;
   size_t readBufferLeft;
   vector< wchar > wcharBuffer;
+  unsigned linesRead;
 
 public:
 
@@ -143,6 +144,10 @@ public:
   /// Reading begins from the first line after the headers (ones which start
   /// with #).
   bool readNextLine( wstring &, size_t & offset ) throw( Ex, Iconv::Ex );
+
+  /// Returns the number of lines read so far from the file.
+  unsigned getLinesRead() const
+  { return linesRead; }
 
   /// Converts the given number of characters to the number of bytes they
   /// would occupy in the file, knowing its encoding. It's possible to know

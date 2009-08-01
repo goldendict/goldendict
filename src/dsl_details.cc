@@ -494,7 +494,7 @@ void ArticleDom::nextChar() throw( eot )
 
 DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
   encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 )
+  readBufferLeft( 0 ), linesRead( 0 )
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -705,6 +705,8 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
 
         out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
 
+        ++linesRead;
+
         return true;
       }
       else
@@ -751,6 +753,8 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
           --outPtr;
 
       out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
+
+      ++linesRead;
 
       return true;
     }

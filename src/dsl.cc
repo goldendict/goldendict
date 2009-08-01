@@ -1359,6 +1359,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       continue;
     }
 
+    unsigned atLine = 0; // Indicates current line in .dsl, for debug purposes
+
     try
     {
       vector< string > dictFiles( 1, *i );
@@ -1384,6 +1386,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
            indexIsOldOrBad( indexFile ) )
       {
         DslScanner scanner( *i );
+
+        try { // Here we intercept any errors during the read to save line at
+              // which the incident happened. We need alive scanner for that.
 
         if ( scanner.getDictionaryName() == GD_NATIVE_TO_WS( L"Abbrev" ) )
           continue; // For now just skip abbreviations
@@ -1643,7 +1648,15 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idx.rewind();
 
         idx.write( &idxHeader, sizeof( idxHeader ) );
+
+      } // In-place try for saving line count
+      catch( ... )
+      {
+        atLine = scanner.getLinesRead();
+        throw;
       }
+
+      } // if need to rebuild
 
       dictionaries.push_back( new DslDictionary( dictId,
                                                  indexFile,
@@ -1651,8 +1664,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "DSL dictionary reading failed: %s, error: %s\n",
-        i->c_str(), e.what() );
+      fprintf( stderr, "DSL dictionary reading failed: %s:%u, error: %s\n",
+        i->c_str(), atLine, e.what() );
     }
   }
 
