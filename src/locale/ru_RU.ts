@@ -2479,7 +2479,7 @@
     <message>
         <location filename="../mainwindow.ui" line="340"/>
         <source>Print Preview</source>
-        <translation>Предварительый просмотр</translation>
+        <translation>Предварительный просмотр</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="345"/>
