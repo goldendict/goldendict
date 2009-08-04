@@ -23,7 +23,7 @@ using gd::wchar;
 /// The algorithm's version.
 enum
 {
-  Version = 2
+  Version = 3
 };
 
 /// Applies the folding algorithm to each character in the given string,
