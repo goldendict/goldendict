@@ -39,10 +39,8 @@ HepburnHiragana::HepburnHiragana()
   ins( "nna", "っな" ); ins( "nni", "っに" ); ins( "nnu", "っぬ" ); ins( "nne", "っね" ); ins( "nno", "っの" ); ins( "nnya", "っにゃ" ); ins( "nnyu", "っにゅ" ); ins( "nnyo", "っにょ" );
   ins( "hha", "っは" ); ins( "hhi", "っひ" ); ins( "ffu", "っふ" ); ins( "hhe", "っへ" ); ins( "hho", "っほ" ); ins( "hhya", "っひゃ" ); ins( "hhyu", "っひゅ" ); ins( "hhyo", "っひょ" );
   ins( "mma", "っま" ); ins( "mmi", "っみ" ); ins( "mmu", "っむ" ); ins( "mme", "っめ" ); ins( "mmo", "っも" ); ins( "mmya", "っみゃ" ); ins( "mmyu", "っみゅ" ); ins( "mmyo", "っみょ" );
-  ins( "yya", "っや" ); ins( "yyu", "っゆ" ); ins( "yyo", "っよ" );
   ins( "rra", "っら" ); ins( "rri", "っり" ); ins( "rru", "っる" ); ins( "rre", "っれ" ); ins( "rro", "っろ" ); ins( "rrya", "っりゃ" ); ins( "rryu", "っりゅ" ); ins( "rryo", "っりょ" );
   ins( "wwa", "っわ" ); /*ゐ wi† 		ゑ we† 	を wo‡ 	*/
-  ins( "nn", "っん" );
   ins( "gga", "っが" ); ins( "ggi", "っぎ" ); ins( "ggu", "っぐ" ); ins( "gge", "っげ" ); ins( "ggo", "っご" ); ins( "ggya", "っぎゃ" ); ins( "ggyu", "っぎゅ" ); ins( "ggyo", "っぎょ" );
   ins( "zza", "っざ" ); ins( "jji", "っじ" ); ins( "zzu", "っず" ); ins( "zze", "っぜ" ); ins( "zzo", "っぞ" ); ins( "jja", "っじゃ" ); ins( "jju", "っじゅ" ); ins( "jjo", "っじょ" );
   ins( "dda", "っだ" ); ins( "((ji)", "っぢ" ); ins( "((zu)", "っづ" ); ins( "dde", "っで" ); ins( "ddo", "っど" ); ins( "((ja)", "っぢゃ" ); ins( "((ju)", "っぢゅ" ); ins( "((jo)", "っぢょ" );
@@ -100,16 +98,13 @@ HepburnKatakana::HepburnKatakana()
   ins( "nna", "ッナ" ); ins( "nni", "ッニ" ); ins( "nnu", "ッヌ" ); ins( "nne", "ッネ" ); ins( "nno", "ッノ" ); ins( "nnya", "ッニャ" ); ins( "nnyu", "ッニュ" ); ins( "nnyo", "ッニョ" );
   ins( "hha", "ッハ" ); ins( "hhi", "ッヒ" ); ins( "ffu", "ッフ" ); ins( "hhe", "ッヘ" ); ins( "hho", "ッホ" ); ins( "hhya", "ッヒャ" ); ins( "hhyu", "ッヒュ" ); ins( "hhyo", "ッヒョ" );
   ins( "mma", "ッマ" ); ins( "mmi", "ッミ" ); ins( "mmu", "ッム" ); ins( "mme", "ッメ" ); ins( "mmo", "ッモ" ); ins( "mmya", "ッミャ" ); ins( "mmyu", "ッミュ" ); ins( "mmyo", "ッミョ" );
-  ins( "yya", "ッヤ" ); ins( "yyu", "ッユ" ); ins( "yyo", "ッヨ" );
   ins( "rra", "ッラ" ); ins( "rri", "ッリ" ); ins( "rru", "ッル" ); ins( "rre", "ッレ" ); ins( "rro", "ッロ" ); ins( "rrya", "ッリャ" ); ins( "rryu", "ッリュ" ); ins( "rryo", "ッリョ" );
   ins( "wwa", "ッワ" ); /*ヰ wi† 		ヱ we† 	ヲ wo‡ 	*/
-  ins( "nn", "ッン" );
   ins( "gga", "ッガ" ); ins( "ggi", "ッギ" ); ins( "ggu", "ッグ" ); ins( "gge", "ッゲ" ); ins( "ggo", "ッゴ" ); ins( "ggya", "ッギャ" ); ins( "ggyu", "ッギュ" ); ins( "ggyo", "ッギョ" );
   ins( "zza", "ッザ" ); ins( "jji", "ッジ" ); ins( "zzu", "ッズ" ); ins( "zze", "ッゼ" ); ins( "zzo", "ッゾ" ); ins( "jja", "ッジャ" ); ins( "jju", "ッジュ" ); ins( "jjo", "ッジョ" );
   ins( "dda", "ッダ" ); ins( "((ji)", "ッヂ" ); ins( "((zu)", "ッヅ" ); ins( "dde", "ッデ" ); ins( "ddo", "ッド" ); ins( "((ja)", "ッヂャ" ); ins( "((ju)", "ッヂュ" ); ins( "((jo)", "ッヂョ" );
   ins( "bba", "ッバ" ); ins( "bbi", "ッビ" ); ins( "bbu", "ッブ" ); ins( "bbe", "ッベ" ); ins( "bbo", "ッボ" ); ins( "bbya", "ッビャ" ); ins( "bbyu", "ッビュ" ); ins( "bbyo", "ッビョ" );
   ins( "ppa", "ッパ" ); ins( "ppi", "ッピ" ); ins( "ppu", "ップ" ); ins( "ppe", "ッペ" ); ins( "ppo", "ッポ" ); ins( "ppya", "ッピャ" ); ins( "ppyu", "ッピュ" ); ins( "ppyo", "ッピョ" );
-  ins( "yye", "ッイェ" );
   ins( "wwi", "ッウィ" ); ins( "wwe", "ッウェ" ); ins( "wwo", "ッウォ" );
   ins( "vva", "ッヷ" ); /*ヸ vi† 		ヹ ve†*/ ins( "vvo", "ッヺ" );
   ins( "vva", "ッヴァ" ); ins( "vvi", "ッヴィ" ); ins( "vvu", "ッヴ" ); ins( "vve", "ッヴェ" ); ins( "vvo", "ッヴォ" );
