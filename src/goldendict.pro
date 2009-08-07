@@ -193,7 +193,7 @@ win32 {
 }
 RESOURCES += resources.qrc \
     flags.qrc
-TRANSLATIONS += locale/ru_RU.ts locale/zh_CN.ts locale/cs_CZ.ts
+TRANSLATIONS += locale/ru_RU.ts locale/zh_CN.ts locale/cs_CZ.ts locale/de_DE.ts
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
