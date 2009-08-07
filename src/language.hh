@@ -29,6 +29,11 @@ QString englishNameForId( Id );
 /// If the Id is incorrect, or has Unknown/Any values, returns empty string.
 QString localizedNameForId( Id );
 
+/// Returns a two-letter code of a country which speaks the given language.
+/// This is useful for picking up icons for languages. If there's no
+/// corresponding country it the database, returns an empty strings.
+QString countryCodeForId( Id );
+
 // All other functions are to be used from LangCoder, which is supposed to
 // be migrated here over time.
 

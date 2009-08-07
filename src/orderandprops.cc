@@ -81,7 +81,7 @@ namespace {
     if ( name.isEmpty() )
       return name;
 
-    QString iconId = LangCoder::intToCode2( langId );
+    QString iconId = Language::countryCodeForId( langId );
 
     return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId ).arg( name );
   }

@@ -18,9 +18,12 @@ struct Db
   map< QString, QString > const & getIso2ToLocalized() const
   { return iso2ToLocalized; }
 
+  map< QString, QString > const & getIso2ToCountry() const
+  { return iso2ToCountry; }
+
 private:
 
-  map< QString, QString > iso2ToEnglish, iso2ToLocalized;
+  map< QString, QString > iso2ToEnglish, iso2ToLocalized, iso2ToCountry;
 
   Db();
 
@@ -229,6 +232,131 @@ Db::Db()
   addEntry( "za", "Zhuang", QCoreApplication::translate( "Language", "Zhuang" ) );
   addEntry( "zh", "Chinese", QCoreApplication::translate( "Language", "Chinese" ) );
   addEntry( "zu", "Zulu", QCoreApplication::translate( "Language", "Zulu" ) );
+
+  // Countries
+
+  iso2ToCountry[ "aa" ] = "et";
+  iso2ToCountry[ "af" ] = "za";
+  iso2ToCountry[ "am" ] = "et";
+  iso2ToCountry[ "an" ] = "es";
+  iso2ToCountry[ "ar" ] = "ae";
+  iso2ToCountry[ "as" ] = "in";
+  iso2ToCountry[ "az" ] = "az";
+  iso2ToCountry[ "be" ] = "by";
+  iso2ToCountry[ "bg" ] = "bg";
+  iso2ToCountry[ "bn" ] = "bd";
+  iso2ToCountry[ "bo" ] = "cn";
+  iso2ToCountry[ "br" ] = "fr";
+  iso2ToCountry[ "bs" ] = "ba";
+  iso2ToCountry[ "ca" ] = "ad";
+  iso2ToCountry[ "cs" ] = "cz";
+  iso2ToCountry[ "cy" ] = "gb";
+  iso2ToCountry[ "da" ] = "dk";
+  iso2ToCountry[ "de" ] = "de";
+  iso2ToCountry[ "dz" ] = "bt";
+  iso2ToCountry[ "el" ] = "gr";
+  iso2ToCountry[ "en" ] = "gb";
+  iso2ToCountry[ "es" ] = "es";
+  iso2ToCountry[ "et" ] = "ee";
+  iso2ToCountry[ "eu" ] = "es";
+  iso2ToCountry[ "fa" ] = "ir";
+  iso2ToCountry[ "fi" ] = "fi";
+  iso2ToCountry[ "fo" ] = "fo";
+  iso2ToCountry[ "fr" ] = "fr";
+  iso2ToCountry[ "fy" ] = "nl";
+  iso2ToCountry[ "ga" ] = "ie";
+  iso2ToCountry[ "gd" ] = "gb";
+  iso2ToCountry[ "gl" ] = "es";
+  iso2ToCountry[ "gu" ] = "in";
+  iso2ToCountry[ "gv" ] = "gb";
+  iso2ToCountry[ "ha" ] = "ng";
+  iso2ToCountry[ "he" ] = "il";
+  iso2ToCountry[ "hi" ] = "in";
+  iso2ToCountry[ "hr" ] = "hr";
+  iso2ToCountry[ "ht" ] = "ht";
+  iso2ToCountry[ "hu" ] = "hu";
+  iso2ToCountry[ "hy" ] = "am";
+  iso2ToCountry[ "id" ] = "id";
+  iso2ToCountry[ "ig" ] = "ng";
+  iso2ToCountry[ "ik" ] = "ca";
+  iso2ToCountry[ "is" ] = "is";
+  iso2ToCountry[ "it" ] = "it";
+  iso2ToCountry[ "iu" ] = "ca";
+  iso2ToCountry[ "iw" ] = "il";
+  iso2ToCountry[ "ja" ] = "jp";
+  iso2ToCountry[ "ka" ] = "ge";
+  iso2ToCountry[ "kk" ] = "kz";
+  iso2ToCountry[ "kl" ] = "gl";
+  iso2ToCountry[ "km" ] = "kh";
+  iso2ToCountry[ "kn" ] = "in";
+  iso2ToCountry[ "ko" ] = "kr";
+  iso2ToCountry[ "ku" ] = "tr";
+  iso2ToCountry[ "kw" ] = "gb";
+  iso2ToCountry[ "ky" ] = "kg";
+  iso2ToCountry[ "lg" ] = "ug";
+  iso2ToCountry[ "li" ] = "be";
+  iso2ToCountry[ "lo" ] = "la";
+  iso2ToCountry[ "lt" ] = "lt";
+  iso2ToCountry[ "lv" ] = "lv";
+  iso2ToCountry[ "mg" ] = "mg";
+  iso2ToCountry[ "mi" ] = "nz";
+  iso2ToCountry[ "mk" ] = "mk";
+  iso2ToCountry[ "ml" ] = "in";
+  iso2ToCountry[ "mn" ] = "mn";
+  iso2ToCountry[ "mr" ] = "in";
+  iso2ToCountry[ "ms" ] = "my";
+  iso2ToCountry[ "mt" ] = "mt";
+  iso2ToCountry[ "nb" ] = "no";
+  iso2ToCountry[ "ne" ] = "np";
+  iso2ToCountry[ "nl" ] = "nl";
+  iso2ToCountry[ "nn" ] = "no";
+  iso2ToCountry[ "nr" ] = "za";
+  iso2ToCountry[ "oc" ] = "fr";
+  iso2ToCountry[ "om" ] = "et";
+  iso2ToCountry[ "or" ] = "in";
+  iso2ToCountry[ "pa" ] = "pk";
+  iso2ToCountry[ "pl" ] = "pl";
+  iso2ToCountry[ "pt" ] = "pt";
+  iso2ToCountry[ "ro" ] = "ro";
+  iso2ToCountry[ "ru" ] = "ru";
+  iso2ToCountry[ "rw" ] = "rw";
+  iso2ToCountry[ "sa" ] = "in";
+  iso2ToCountry[ "sc" ] = "it";
+  iso2ToCountry[ "sd" ] = "in";
+  iso2ToCountry[ "se" ] = "no";
+  iso2ToCountry[ "si" ] = "lk";
+  iso2ToCountry[ "sk" ] = "sk";
+  iso2ToCountry[ "sl" ] = "si";
+  iso2ToCountry[ "so" ] = "so";
+  iso2ToCountry[ "sq" ] = "al";
+  iso2ToCountry[ "sr" ] = "rs";
+  iso2ToCountry[ "ss" ] = "za";
+  iso2ToCountry[ "st" ] = "za";
+  iso2ToCountry[ "sv" ] = "se";
+  iso2ToCountry[ "ta" ] = "in";
+  iso2ToCountry[ "te" ] = "in";
+  iso2ToCountry[ "tg" ] = "tj";
+  iso2ToCountry[ "th" ] = "th";
+  iso2ToCountry[ "ti" ] = "er";
+  iso2ToCountry[ "tk" ] = "tm";
+  iso2ToCountry[ "tl" ] = "ph";
+  iso2ToCountry[ "tn" ] = "za";
+  iso2ToCountry[ "tr" ] = "tr";
+  iso2ToCountry[ "ts" ] = "za";
+  iso2ToCountry[ "tt" ] = "ru";
+  iso2ToCountry[ "ug" ] = "cn";
+  iso2ToCountry[ "uk" ] = "ua";
+  iso2ToCountry[ "ur" ] = "pk";
+  iso2ToCountry[ "uz" ] = "uz";
+  iso2ToCountry[ "ve" ] = "za";
+  iso2ToCountry[ "vi" ] = "vn";
+  iso2ToCountry[ "wa" ] = "be";
+  iso2ToCountry[ "wo" ] = "sn";
+  iso2ToCountry[ "xh" ] = "za";
+  iso2ToCountry[ "yi" ] = "us";
+  iso2ToCountry[ "yo" ] = "ng";
+  iso2ToCountry[ "zh" ] = "cn";
+  iso2ToCountry[ "zu" ] = "za";
 }
 
 }
@@ -250,6 +378,17 @@ QString localizedNameForId( Id id )
       Db::instance().getIso2ToLocalized().find( LangCoder::intToCode2( id ) );
 
   if ( i == Db::instance().getIso2ToLocalized().end() )
+    return QString();
+
+  return i->second;
+}
+
+QString countryCodeForId( Id id )
+{
+  map< QString, QString >::const_iterator i =
+      Db::instance().getIso2ToCountry().find( LangCoder::intToCode2( id ) );
+
+  if ( i == Db::instance().getIso2ToCountry().end() )
     return QString();
 
   return i->second;
