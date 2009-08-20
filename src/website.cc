@@ -82,7 +82,16 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
 
     urlString.replace( "%25GDWORD%25", inputWord.toUtf8().toPercentEncoding() );
     urlString.replace( "%25GD1251%25", QTextCodec::codecForName( "Windows-1251" )->fromUnicode( inputWord ).toPercentEncoding() );
-    urlString.replace( "%25GDISO1%25", QTextCodec::codecForName( "ISO 8859-1" )->fromUnicode( inputWord ).toPercentEncoding() );
+
+    // Handle all ISO-8859 encodings
+    for( int x = 1; x <= 16; ++x )
+    {
+      urlString.replace( QString( "%25GDISO%1%25" ).arg( x ),
+                         QTextCodec::codecForName( QString( "ISO 8859-%1" ).arg( x ).toAscii() )->fromUnicode( inputWord ).toPercentEncoding() );
+
+      if ( x == 10 )
+        x = 12; // Skip encodings 11..12, they don't exist
+    }
   }
 
   string result = "<div class=\"website_padding\"></div>";
