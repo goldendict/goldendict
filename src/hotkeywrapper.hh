@@ -134,6 +134,12 @@ class QHotkeyApplication : public QApplication
 public:
   QHotkeyApplication(int & argc, char ** argv);
 
+  /// This allows the application to be closed right away by the session
+  /// manager. The default implementation may refuse to be closed if some
+  /// application windows refuse to be closed.
+  virtual void commitData( QSessionManager & )
+  {}
+
 protected:
   void registerWrapper(HotkeyWrapper *wrapper);
   void unregisterWrapper(HotkeyWrapper *wrapper);
