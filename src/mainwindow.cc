@@ -34,7 +34,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab( this ),
   cfg( cfg_ ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
-  articleNetMgr( this, dictionaries, articleMaker ),
+  articleNetMgr( this, dictionaries, articleMaker,
+                 cfg.preferences.disallowContentFromOtherSites ),
   dictNetMgr( this ),
   wordFinder( this ),
   newReleaseCheckTimer( this )

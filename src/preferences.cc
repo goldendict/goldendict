@@ -152,6 +152,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.proxyPassword->setText( p.proxyServer.password );
 
   ui.checkForNewReleases->setChecked( p.checkForNewReleases );
+  ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
 }
 
 Config::Preferences Preferences::getPreferences()
@@ -211,6 +212,7 @@ Config::Preferences Preferences::getPreferences()
   p.proxyServer.password = ui.proxyPassword->text();
 
   p.checkForNewReleases = ui.checkForNewReleases->isChecked();
+  p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();
 
   return p;
 }

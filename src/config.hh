@@ -159,6 +159,7 @@ struct Preferences
   ProxyServer proxyServer;
 
   bool checkForNewReleases;
+  bool disallowContentFromOtherSites;
 
   qreal zoomFactor;
 

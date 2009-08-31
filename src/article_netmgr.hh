@@ -17,15 +17,18 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
   vector< sptr< Dictionary::Class > > const & dictionaries;
   ArticleMaker const & articleMaker;
+  bool const & disallowContentFromOtherSites;
 
 public:
 
   ArticleNetworkAccessManager( QObject * parent,
                                vector< sptr< Dictionary::Class > > const &
                                dictionaries_,
-                               ArticleMaker const & articleMaker_ ):
+                               ArticleMaker const & articleMaker_,
+                               bool const & disallowContentFromOtherSites_ ):
     QNetworkAccessManager( parent ), dictionaries( dictionaries_ ),
-    articleMaker( articleMaker_ )
+    articleMaker( articleMaker_ ),
+    disallowContentFromOtherSites( disallowContentFromOtherSites_ )
   {}
 
   /// Tries handling any kind of internal resources referenced by dictionaries.
@@ -79,6 +82,36 @@ private slots:
   void reqFinished();
   
   void readyReadSlot();
+  void finishedSlot();
+};
+
+class BlockedNetworkReply: public QNetworkReply
+{
+  Q_OBJECT
+
+public:
+
+  BlockedNetworkReply( QObject * parent );
+
+  virtual qint64 readData( char *, qint64 )
+  {
+    return -1;
+  }
+
+  virtual void abort()
+  {}
+
+protected:
+
+  // We use the hackery below to work around the fact that we need to emit
+  // ready/finish signals after we've been constructed.
+
+signals:
+
+  void finishedSignal();
+
+private slots:
+
   void finishedSlot();
 };
 
