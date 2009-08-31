@@ -28,7 +28,8 @@ using std::vector;
 
 LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell ),
-  transliteration( cfg.transliteration )
+  transliteration( cfg.transliteration ),
+  exceptionText( "Load did not finish" ) // Will be cleared upon success
 {
   // Populate name filters
 
@@ -60,6 +61,8 @@ void LoadDictionaries::run()
       dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
                            hunspellDictionaries.end() );
     }
+
+    exceptionText.clear();
   }
   catch( std::exception & e )
   {
