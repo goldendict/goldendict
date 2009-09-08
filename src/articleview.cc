@@ -719,9 +719,12 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   }
 
   QString selectedText = ui.definition->selectedText();
-  
-  if ( selectedText.size() )
+
+  if ( selectedText.size() && selectedText.size() < 60 )
   {
+    // We don't prompt for selections larger or equal to 60 chars, since
+    // it ruins the menu and it's hardly a single word anyway.
+
     lookupSelection = new QAction( tr( "&Look up \"%1\"" ).
                                    arg( ui.definition->selectedText() ),
                                    &menu );
@@ -759,9 +762,10 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
         menu.addAction( lookupSelectionNewTabGr );
       }
     }
-
-    menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
   }
+
+  if ( selectedText.size() )
+    menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
 
   map< QAction *, QString > tableOfContents;
     
