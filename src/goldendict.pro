@@ -117,7 +117,8 @@ HEADERS += folding.hh \
     german.hh \
     website.hh \
     orderandprops.hh \
-    language.hh
+    language.hh \
+    dictionarybar.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -186,20 +187,27 @@ SOURCES += folding.cc \
     german.cc \
     website.cc \
     orderandprops.cc \
-    language.cc
+    language.cc \
+    dictionarybar.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h
 }
 RESOURCES += resources.qrc \
     flags.qrc
-TRANSLATIONS += locale/ru_RU.ts locale/zh_CN.ts locale/cs_CZ.ts locale/de_DE.ts
+TRANSLATIONS += locale/ru_RU.ts \
+    locale/zh_CN.ts \
+    locale/cs_CZ.ts \
+    locale/de_DE.ts
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
 updateqm.input = TRANSLATIONS
 updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
-updateqm.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
+updateqm.commands = $$QMAKE_LRELEASE \
+    ${QMAKE_FILE_IN} \
+    -qm \
+    ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
 updateqm.CONFIG += no_link
 QMAKE_EXTRA_COMPILERS += updateqm
 TS_OUT = $$TRANSLATIONS

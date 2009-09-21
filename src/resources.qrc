@@ -9,7 +9,7 @@
         <file>icons/addtab.png</file>
         <file>icons/next.png</file>
         <file>icons/previous.png</file>
-	<file>icons/reload.png</file>
+        <file>icons/reload.png</file>
         <file>icons/programicon.png</file>
         <file>icons/programicon_scan.png</file>
         <file>icons/wizard.png</file>
@@ -38,5 +38,6 @@
         <file>qt-style-st-lingvo.css</file>
         <file>article-style-st-lingvo.css</file>
         <file>icons/internet.png</file>
+        <file>icons/icon_dsl_native.png</file>
     </qresource>
 </RCC>

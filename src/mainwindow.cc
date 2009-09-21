@@ -33,6 +33,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
+  configEvents( cfg ),
+  dictionaryBar( this, cfg.mutedDictionaries, configEvents ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites ),
@@ -148,6 +150,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( switchToPrevTab() ) );
 
   addAction( &switchToPrevTabAction );
+
+  // Dictionary bar
+
+  addToolBar( &dictionaryBar );
 
   // Show tray icon early so the user would be happy
   updateTrayIcon();
@@ -273,6 +279,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // makeDictionaries() didn't do deferred init - we do it here, at the end.
   doDeferredInit( dictionaries );
+
+  // Hide dictionary bar -- it's unfinished
+  dictionaryBar.hide();
+  removeToolBar( &dictionaryBar );
 }
 
 void MainWindow::mousePressEvent( QMouseEvent *event)
@@ -491,8 +501,19 @@ void MainWindow::updateGroupList()
   groupList.fill( groupInstances );
   groupList.setCurrentGroup( cfg.lastMainGroupId );
 
+  updateDictionaryBar();
+
   connect( &groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
+}
+
+void MainWindow::updateDictionaryBar()
+{
+  Instances::Group * grp =
+      groupInstances.findGroup( groupList.getCurrentGroup() );
+
+  if ( grp ) // Should always be !0, but check as a safeguard
+    dictionaryBar.setDictionaries( grp->dictionaries );
 }
 
 void MainWindow::makeScanPopup()
@@ -742,6 +763,8 @@ void MainWindow::editPreferences()
 void MainWindow::currentGroupChanged( QString const & )
 {
   cfg.lastMainGroupId = groupList.getCurrentGroup();
+
+  updateDictionaryBar();
 
   // Update word search results
 

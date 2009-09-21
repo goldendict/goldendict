@@ -108,6 +108,28 @@ Romaji::Romaji():
 {
 }
 
+Events::Events( Class & c ): config( c )
+{
+}
+
+void Events::muteDictionary( QString const & id )
+{
+  if ( !config.mutedDictionaries.contains( id ) )
+  {
+    config.mutedDictionaries.insert( id );
+    emit dictionaryMuted( id );
+  }
+}
+
+void Events::unmuteDictionary( QString const & id )
+{
+  if ( config.mutedDictionaries.contains( id ) )
+  {
+    config.mutedDictionaries.remove( id );
+    emit dictionaryUnmuted( id );
+  }
+}
+
 namespace {
 
 MediaWikis makeDefaultMediaWikis( bool enable )
@@ -434,6 +456,17 @@ Class load() throw( exError )
   {
     // Upgrading
     c.webSites = makeDefaultWebSites();
+  }
+
+  QDomNode mutedDictionaries = root.namedItem( "mutedDictionaries" );
+
+  if ( !mutedDictionaries.isNull() )
+  {
+    QDomNodeList nl = mutedDictionaries.toElement().
+                        elementsByTagName( "mutedDictionary" );
+
+    for( unsigned x = 0; x < nl.length(); ++x )
+      c.mutedDictionaries.insert( nl.item( x ).toElement().text() );
   }
 
   QDomNode preferences = root.namedItem( "preferences" );
@@ -766,6 +799,21 @@ void save( Class const & c ) throw( exError )
       QDomAttr enabled = dd.createAttribute( "enabled" );
       enabled.setValue( i->enabled ? "1" : "0" );
       ws.setAttributeNode( enabled );
+    }
+  }
+
+  {
+    QDomElement muted = dd.createElement( "mutedDictionaries" );
+    root.appendChild( muted );
+
+    for( MutedDictionaries::const_iterator i = c.mutedDictionaries.begin();
+         i != c.mutedDictionaries.end(); ++i )
+    {
+      QDomElement dict = dd.createElement( "mutedDictionary" );
+      muted.appendChild( dict );
+
+      QDomText value = dd.createTextNode( *i );
+      dict.appendChild( value );
     }
   }
 

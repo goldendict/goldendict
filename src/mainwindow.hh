@@ -20,6 +20,7 @@
 #include "articleview.hh"
 #include "wordfinder.hh"
 #include "hotkeywrapper.hh"
+#include "dictionarybar.hh"
 
 using std::string;
 using std::vector;
@@ -54,6 +55,8 @@ private:
   QMenu trayIconMenu;
   QToolButton addTab;
   Config::Class & cfg;
+  Config::Events configEvents;
+  DictionaryBar dictionaryBar;
   vector< sptr< Dictionary::Class > > dictionaries;
   Instances::Groups groupInstances;
   ArticleMaker articleMaker;
@@ -87,6 +90,7 @@ private:
   void makeDictionaries();
   void updateStatusLine();
   void updateGroupList();
+  void updateDictionaryBar();
   void makeScanPopup();
 
   void updateMatchResults( bool finished );

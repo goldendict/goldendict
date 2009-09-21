@@ -9,6 +9,7 @@
 #include <QSize>
 #include <QDateTime>
 #include <QKeySequence>
+#include <QSet>
 #include "ex.hh"
 
 /// GoldenDict's configuration
@@ -272,6 +273,9 @@ struct Transliteration
   {}
 };
 
+/// Dictionaries which are temporarily disabled via the dictionary bar.
+typedef QSet< QString > MutedDictionaries;
+
 struct Class
 {
   Paths paths;
@@ -292,12 +296,45 @@ struct Class
   QByteArray mainWindowState; // Binary state saved by QMainWindow
   QByteArray mainWindowGeometry; // Geometry saved by QMainWindow
 
+  MutedDictionaries mutedDictionaries; // Disabled via dictionary bar
+
   QDateTime timeForNewReleaseCheck; // Only effective if
                                     // preferences.checkForNewReleases is set
   QString skippedRelease; // Empty by default
 
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 )
   {}
+};
+
+/// Configuration-specific events. Some parts of the program need to react
+/// to specific changes in configuration. The object of this class is used
+/// to emit signals when such events happen -- and the listeners connect to
+/// them to be notified of them.
+/// This class is separate from the main Class since QObjects can't be copied.
+class Events: public QObject
+{
+  Q_OBJECT
+
+public:
+
+  Events( Class & );
+
+  /// Adds given dictionary id to mutedDictionaries and emits dictionaryMuted
+  void muteDictionary( QString const & );
+  /// Removed given dictionary id from mutedDictionaries and emits
+  /// dictionaryUnmuted
+  void unmuteDictionary( QString const & );
+
+signals:
+
+  /// A dictionary was added to the mutedDictionaries set.
+  void dictionaryMuted( QString const & );
+  /// A dictionary was removed from the mutedDictionaries set.
+  void dictionaryUnmuted( QString const & );
+
+private:
+
+  Class & config;
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )

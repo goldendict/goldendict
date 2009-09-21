@@ -270,6 +270,12 @@ public:
   virtual QIcon getIcon() throw()
   { return QIcon(); }
 
+  /// Returns the dictionary's native icon. Dsl icons are usually rectangular,
+  /// and are adapted by getIcon() to be square. This function allows getting
+  /// the original icon with no geometry transformations applied.
+  virtual QIcon getNativeIcon() throw()
+  { return getIcon(); }
+
   /// Returns the dictionary's source language.
   virtual quint32 getLangFrom() const
   { return 0; }

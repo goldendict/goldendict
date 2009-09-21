@@ -114,7 +114,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   dictData * dz;
   Mutex resourceZipMutex;
   zip * resourceZip;
-  QIcon dictionaryIcon;
+  QIcon dictionaryNativeIcon, dictionaryIcon;
   bool dictionaryIconLoaded;
 
   QAtomicInt deferredInitDone;
@@ -147,6 +147,8 @@ public:
 
   virtual QIcon getIcon() throw();
 
+  virtual QIcon getNativeIcon() throw();
+
   inline virtual quint32 getLangFrom() const
   { return idxHeader.langFrom; }
 
@@ -173,6 +175,8 @@ private:
 
   virtual string const & ensureInitDone();
   void doDeferredInit();
+
+  void loadIcon();
 
   /// Loads the article. Does not process the DSL language.
   void loadArticle( uint32_t address,
@@ -367,65 +371,84 @@ void DslDictionary::doDeferredInit()
 }
 
 
+
+QIcon DslDictionary::getNativeIcon() throw()
+{
+  loadIcon();
+
+  return dictionaryNativeIcon;
+}
+
 QIcon DslDictionary::getIcon() throw()
 {
-  if ( !dictionaryIconLoaded )
+  loadIcon();
+
+  return dictionaryIcon;
+}
+
+void DslDictionary::loadIcon()
+{
+  if ( dictionaryIconLoaded )
+    return;
+
+  QString fileName =
+    QDir::fromNativeSeparators( QString::fromLocal8Bit( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+  // Remove the extension
+
+  QString lc = fileName.toLower();
+
+  if ( fileName.endsWith( ".dsl.dz", Qt::CaseInsensitive ) )
+    fileName.chop( 6 );
+  else
+    fileName.chop( 3 );
+
+  fileName += "bmp";
+
+  QFileInfo info( fileName );
+
+  if ( info.exists() )
   {
-    // Try loading icon now
-    QString fileName =
-      QDir::fromNativeSeparators( QString::fromLocal8Bit( getDictionaryFilenames()[ 0 ].c_str() ) );
+    QImage img( fileName );
 
-    // Remove the extension
-
-    QString lc = fileName.toLower();
-
-    if ( fileName.endsWith( ".dsl.dz", Qt::CaseInsensitive ) )
-      fileName.chop( 6 );
-    else
-      fileName.chop( 3 );
-
-    fileName += "bmp";
-
-    QFileInfo info( fileName );
-
-    if ( info.exists() )
+    if ( !img.isNull() )
     {
-      QImage img( fileName );
+      // Load successful
 
-      if ( !img.isNull() )
-      {
-        // Load successful
+      // Apply the color key
 
-        // Apply the color key
+      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
+                                                    Qt::MaskOutColor ) );
 
-        img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
-                                                      Qt::MaskOutColor ) );
+      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
 
-        // Transform it to be square
-        int max = img.width() > img.height() ? img.width() : img.height();
+      // Transform it to be square
+      int max = img.width() > img.height() ? img.width() : img.height();
 
-        QImage result( max, max, QImage::Format_ARGB32 );
-        result.fill( 0 ); // Black transparent
+      QImage result( max, max, QImage::Format_ARGB32 );
+      result.fill( 0 ); // Black transparent
 
-        QPainter painter( &result );
+      QPainter painter( &result );
 
-        painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                   img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                           img );
+      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                         img );
 
-        painter.end();
+      painter.end();
 
-        dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
-      }
+      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
     }
-
-    dictionaryIconLoaded = true;
   }
 
-  if ( !dictionaryIcon.isNull() )
-    return dictionaryIcon;
-  else
-    return QIcon(":/icons/icon32_dsl.png");
+  if ( dictionaryIcon.isNull() )
+  {
+    // Load failed -- use default icons
+
+    dictionaryIcon = QIcon(":/icons/icon32_dsl.png");
+    dictionaryNativeIcon = QIcon(":/icons/icon_dsl_native.png");
+  }
+
+  dictionaryIconLoaded = true;
 }
 
 /// Determines whether or not this char is treated as whitespace for dsl
