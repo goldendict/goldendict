@@ -46,6 +46,7 @@ class ArticleView: public QFrame
   /// For resources opened via desktop services
   QString desktopOpenedTempFile;
 
+  QAction * dictionaryBarToggled;
   GroupComboBox const * groupComboBox;
 
 public:
@@ -58,6 +59,7 @@ public:
                Instances::Groups const &,
                bool popupView,
                Config::Class const & cfg,
+               QAction * dictionaryBarToggled = 0,
                GroupComboBox const * groupComboBox = 0 );
 
   /// Sets the currently active group combo box. When looking up selections,
@@ -92,6 +94,10 @@ public:
   void openLink( QUrl const & url, QUrl const & referrer,
                  QString const & scrollTo = QString(),
                  Contexts const & contexts = Contexts() );
+
+  /// Called when the state of dictionary bar changes and the view is active.
+  /// The function reloads content if the change affects it.
+  void updateMutedContents();
 
 public slots:
 
@@ -228,6 +234,10 @@ private:
   bool eventFilter( QObject * obj, QEvent * ev );
 
   void performFindOperation( bool restart, bool backwards );
+
+  /// Returns the comma-separated list of dictionary ids which should be muted
+  /// for the given group. If there are none, returns empty string.
+  QString getMutedForGroup( unsigned group );
 
 protected:
 

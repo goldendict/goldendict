@@ -58,7 +58,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -92,7 +92,13 @@
     <addaction name="separator"/>
     <addaction name="about"/>
    </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuView"/>
    <addaction name="menu_Edit"/>
    <addaction name="menu_Help"/>
   </widget>
@@ -226,7 +232,7 @@
   </widget>
   <action name="dictionaries">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/book.png</normaloff>:/icons/book.png</iconset>
    </property>
    <property name="text">
@@ -238,7 +244,7 @@
   </action>
   <action name="groups">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
    </property>
    <property name="text">
@@ -250,7 +256,7 @@
   </action>
   <action name="preferences">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
    </property>
    <property name="text">
@@ -305,7 +311,7 @@
   </action>
   <action name="saveArticle">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
    </property>
    <property name="text">
@@ -320,7 +326,7 @@
   </action>
   <action name="print">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
    </property>
    <property name="text">
@@ -361,6 +367,8 @@
   <tabstop>translateLine</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

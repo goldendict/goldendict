@@ -317,24 +317,17 @@ class Events: public QObject
 
 public:
 
-  Events( Class & );
-
-  /// Adds given dictionary id to mutedDictionaries and emits dictionaryMuted
-  void muteDictionary( QString const & );
-  /// Removed given dictionary id from mutedDictionaries and emits
-  /// dictionaryUnmuted
-  void unmuteDictionary( QString const & );
+  /// Signals that the value of the mutedDictionaries has changed.
+  /// This emits mutedDictionariesChanged() signal, so the subscribers will
+  /// be notified.
+  void signalMutedDictionariesChanged();
 
 signals:
 
-  /// A dictionary was added to the mutedDictionaries set.
-  void dictionaryMuted( QString const & );
-  /// A dictionary was removed from the mutedDictionaries set.
-  void dictionaryUnmuted( QString const & );
+  /// THe value of the mutedDictionaries has changed.
+  void mutedDictionariesChanged();
 
 private:
-
-  Class & config;
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )

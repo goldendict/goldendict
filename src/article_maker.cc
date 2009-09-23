@@ -113,7 +113,8 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   QString const & inWord, unsigned groupId,
-  QMap< QString, QString > const & contexts ) const
+  QMap< QString, QString > const & contexts,
+  QSet< QString > const & mutedDicts ) const
 {
   if ( groupId == UINT_MAX )
   {
@@ -192,8 +193,23 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
                                   activeGroup && activeGroup->icon.size() ?
                                     activeGroup->icon : QString() );
 
-  return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
-                             contexts, activeDicts, header );
+  if ( mutedDicts.size() )
+  {
+    std::vector< sptr< Dictionary::Class > > unmutedDicts;
+
+    unmutedDicts.reserve( activeDicts.size() );
+
+    for( unsigned x = 0; x < activeDicts.size(); ++x )
+      if ( !mutedDicts.contains(
+              QString::fromStdString( activeDicts[ x ]->getId() ) ) )
+        unmutedDicts.push_back( activeDicts[ x ] );
+
+    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+                               contexts, unmutedDicts, header );
+  }
+  else
+    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+                               contexts, activeDicts, header );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(

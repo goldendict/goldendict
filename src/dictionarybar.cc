@@ -1,5 +1,6 @@
 #include "dictionarybar.hh"
 #include <QAction>
+#include <QApplication>
 
 using std::vector;
 
@@ -12,11 +13,8 @@ DictionaryBar::DictionaryBar( QWidget * parent,
 {
   setObjectName( "dictionaryBar" );
 
-  connect( &events, SIGNAL( dictionaryMuted( QString const & ) ),
-           this, SLOT( dictionaryMuted( QString const & ) ) );
-
-  connect( &events, SIGNAL( dictionaryUnmuted( QString const & ) ),
-           this, SLOT( dictionaryUnmuted( QString const & ) ) );
+  connect( &events, SIGNAL( mutedDictionariesChanged() ),
+           this, SLOT( mutedDictionariesChanged() ) );
 
   connect( this, SIGNAL(actionTriggered(QAction*)),
            this, SLOT(actionWasTriggered(QAction*)) );
@@ -28,6 +26,7 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
   setUpdatesEnabled( false );
 
   clear();
+  dictActions.clear();
 
   bool use14x21 = false;
 
@@ -53,6 +52,8 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
          ++i )
       if ( i->width() == 14 && i->height() == 21 )
         use14x21 = true;
+
+    dictActions.append( action );
   }
 
   setIconSize( use14x21 ? QSize( 14, 21 ) : QSize( 21, 21 ) );
@@ -61,14 +62,24 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
 }
 
 
-void DictionaryBar::dictionaryMuted( QString const & )
+void DictionaryBar::mutedDictionariesChanged()
 {
-  printf( "Dictionary muted\n" );
-}
+  printf( "Muted dictionaries changed\n" );
 
-void DictionaryBar::dictionaryUnmuted( QString const & )
-{
-  printf( "Dictionary unmuted\n" );
+  // Update actions
+
+  setUpdatesEnabled( false );
+
+  for( QList< QAction * >::iterator i = dictActions.begin();
+       i != dictActions.end(); ++i )
+  {
+    bool isUnmuted = !mutedDictionaries.contains( (*i)->data().toString() );
+
+    if ( isUnmuted != (*i)->isChecked() )
+      (*i)->setChecked( isUnmuted );
+  }
+
+  setUpdatesEnabled( true );
 }
 
 void DictionaryBar::actionWasTriggered( QAction * action )
@@ -78,8 +89,75 @@ void DictionaryBar::actionWasTriggered( QAction * action )
   if ( id.isEmpty() )
     return; // Some weird action, not our button
 
-  if ( action->isChecked() )
-    configEvents.unmuteDictionary( id );
+  if ( QApplication::keyboardModifiers() &
+         ( Qt::ControlModifier | Qt::ShiftModifier ) )
+  {
+    // Solo mode -- either use the dictionary exclusively, or toggle
+    // back all dictionaries if we do that already.
+
+    // Are we solo already?
+
+    bool isSolo = true;
+
+    // For solo, all dictionaries must be unchecked, since we're handling
+    // the result of the dictionary being (un)checked, and in case we were
+    // in solo, now we would end up with no dictionaries being checked at all.
+    for( QList< QAction * >::iterator i = dictActions.begin();
+         i != dictActions.end(); ++i )
+    {
+      if ( (*i)->isChecked() )
+      {
+        isSolo = false;
+        break;
+      }
+    }
+
+    if ( isSolo )
+    {
+      // Toggle back all the dictionaries
+      for( QList< QAction * >::iterator i = dictActions.begin();
+           i != dictActions.end(); ++i )
+        mutedDictionaries.remove( (*i)->data().toString() );
+    }
+    else
+    {
+      // Make dictionary solo
+      for( QList< QAction * >::iterator i = dictActions.begin();
+           i != dictActions.end(); ++i )
+      {
+        QString dictId = (*i)->data().toString();
+
+        if ( dictId == id )
+          mutedDictionaries.remove( dictId );
+        else
+          mutedDictionaries.insert( dictId );
+      }
+    }
+    configEvents.signalMutedDictionariesChanged();
+  }
   else
-    configEvents.muteDictionary( id );
+  {
+    // Normal mode
+
+    if ( action->isChecked() )
+    {
+      // Unmute the dictionary
+
+      if ( mutedDictionaries.contains( id ) )
+      {
+        mutedDictionaries.remove( id );
+        configEvents.signalMutedDictionariesChanged();
+      }
+    }
+    else
+    {
+      // Mute the dictionary
+
+      if ( !mutedDictionaries.contains( id ) )
+      {
+        mutedDictionaries.insert( id );
+        configEvents.signalMutedDictionariesChanged();
+      }
+    }
+  }
 }

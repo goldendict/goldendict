@@ -118,6 +118,11 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     QString word = url.queryItemValue( "word" );
     unsigned group = url.queryItemValue( "group" ).toUInt( &groupIsValid );
 
+    // See if we have some dictionaries muted
+
+    QSet< QString > mutedDicts =
+        QSet< QString >::fromList( url.queryItemValue( "muted" ).split( ',' ) );
+
     // Unpack contexts
 
     QMap< QString, QString > contexts;
@@ -138,7 +143,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     }
 
     if ( groupIsValid && word.size() ) // Require group and word to be passed
-      return articleMaker.makeDefinitionFor( word, group, contexts );
+      return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts );
   }
 
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ) &&

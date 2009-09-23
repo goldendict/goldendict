@@ -3,6 +3,7 @@
 
 #include <QToolBar>
 #include <QSize>
+#include <QList>
 #include "dictionary.hh"
 #include "config.hh"
 
@@ -28,10 +29,12 @@ private:
   Config::MutedDictionaries & mutedDictionaries;
   Config::Events & configEvents;
 
+  /// All the actions we have added to the toolbar
+  QList< QAction * > dictActions;
+
 private slots:
 
-  void dictionaryMuted( QString const & );
-  void dictionaryUnmuted( QString const & );
+  void mutedDictionariesChanged();
 
   void actionWasTriggered( QAction * );
 };

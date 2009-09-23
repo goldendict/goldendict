@@ -58,6 +58,8 @@ private:
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
   vector< sptr< Dictionary::Class > > dictionaries;
+  /// Here we store unmuted dictionaries when the dictionary bar is active
+  vector< sptr< Dictionary::Class > > dictionariesUnmuted;
   Instances::Groups groupInstances;
   ArticleMaker articleMaker;
   ArticleNetworkAccessManager articleNetMgr;
@@ -96,6 +98,10 @@ private:
   void updateMatchResults( bool finished );
 
   void updatePronounceAvailability();
+
+  /// Updates word search request and active article view in response to
+  /// muting or unmuting dictionaries, or showing/hiding dictionary bar.
+  void applyMutedDictionariesState();
 
   virtual bool eventFilter( QObject *, QEvent * );
 
@@ -153,6 +159,8 @@ private slots:
   void pageLoaded( ArticleView * );
   void tabSwitched( int );
 
+  void dictionaryBarToggled( bool checked );
+
   /// Pronounces the currently displayed word by playing its first audio
   /// reference, if it has any.
   /// If view is 0, the operation is done for the currently open tab.
@@ -189,6 +197,8 @@ private slots:
                                QString const & fromArticle,
                                ArticleView::Contexts const & contexts );
   void typingEvent( QString const & );
+
+  void mutedDictionariesChanged();
 
   void showTranslationFor( QString const & );
 

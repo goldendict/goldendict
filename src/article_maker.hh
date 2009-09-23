@@ -43,8 +43,12 @@ public:
   /// with all definitions from all the relevant dictionaries.
   /// Contexts is a map of context values to be passed to each dictionary, where
   /// the keys are dictionary ids.
+  /// If mutedDicts is not empty, the search would be limited only to those
+  /// dictionaries in group which aren't listed there.
   sptr< Dictionary::DataRequest > makeDefinitionFor( QString const & word, unsigned groupId,
-                                                     QMap< QString, QString > const & contexts ) const;
+                                                     QMap< QString, QString > const & contexts,
+                                                     QSet< QString > const & mutedDicts =
+                                                       QSet< QString >() ) const;
 
   /// Makes up a text which states that no translation for the given word
   /// was found. Sometimes it's better to call this directly when it's already
@@ -73,7 +77,7 @@ class ArticleRequest: public Dictionary::DataRequest
 
   QString word, group;
   QMap< QString, QString > contexts;
-  std::vector< sptr< Dictionary::Class > > const & activeDicts;
+  std::vector< sptr< Dictionary::Class > > activeDicts;
   
   std::set< gd::wstring > alts; // Accumulated main forms
   std::list< sptr< Dictionary::WordSearchRequest > > altSearches;

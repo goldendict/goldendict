@@ -26,6 +26,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
                           Config::Class const & cfg_,
+                          QAction * dictionaryBarToggled_,
                           GroupComboBox const * groupComboBox_ ):
   QFrame( parent ),
   articleNetMgr( nm ),
@@ -40,6 +41,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   goForwardAction( this ),
   openSearchAction( this ),
   searchIsOpened( false ),
+  dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
@@ -155,6 +157,11 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
     req.addQueryItem( "contexts", QString::fromAscii( buf.buffer().toBase64() ) );
   }
+
+  QString mutedDicts = getMutedForGroup( group );
+
+  if ( mutedDicts.size() )
+    req.addQueryItem( "muted", mutedDicts );
 
   // Update history
   saveHistoryUserData();
@@ -466,6 +473,33 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
   return false;
 }
 
+QString ArticleView::getMutedForGroup( unsigned group )
+{
+  if ( dictionaryBarToggled && dictionaryBarToggled->isChecked() )
+  {
+    // Dictionary bar is active -- mute the muted dictionaries
+    Instances::Group const * groupInstance = groups.findGroup( group );
+
+    QStringList mutedDicts;
+
+    if ( groupInstance )
+    {
+      for( unsigned x = 0; x < groupInstance->dictionaries.size(); ++x )
+      {
+        QString id = QString::fromStdString(
+                       groupInstance->dictionaries[ x ]->getId() );
+
+        if ( cfg.mutedDictionaries.contains( id ) )
+          mutedDicts.append( id );
+      }
+    }
+
+    if ( mutedDicts.size() )
+      return mutedDicts.join( "," );
+  }
+
+  return QString();
+}
 
 void ArticleView::linkClicked( QUrl const & url_ )
 {
@@ -637,6 +671,38 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   {
     // Use the system handler for the conventional internet links
     QDesktopServices::openUrl( url );
+  }
+}
+
+void ArticleView::updateMutedContents()
+{
+  QUrl currentUrl = ui.definition->url();
+
+  if ( currentUrl.scheme() != "gdlookup" )
+    return; // Weird url -- do nothing
+
+  unsigned group = getGroup( currentUrl );
+
+  if ( !group )
+    return; // No group in url -- do nothing
+
+  QString mutedDicts = getMutedForGroup( group );
+
+  if ( currentUrl.queryItemValue( "muted" ) != mutedDicts )
+  {
+    // The list has changed -- update the url
+
+    currentUrl.removeQueryItem( "muted" );
+
+    if ( mutedDicts.size() )
+    currentUrl.addQueryItem( "muted", mutedDicts );
+
+    saveHistoryUserData();
+
+    ui.definition->load( currentUrl );
+
+    //QApplication::setOverrideCursor( Qt::WaitCursor );
+    ui.definition->setCursor( Qt::WaitCursor );
   }
 }
 

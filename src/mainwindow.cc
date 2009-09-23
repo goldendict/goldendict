@@ -33,7 +33,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
-  configEvents( cfg ),
   dictionaryBar( this, cfg.mutedDictionaries, configEvents ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
@@ -151,9 +150,19 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addAction( &switchToPrevTabAction );
 
+  // Popuplate 'View' menu
+
+  ui.menuView->addAction( ui.searchPane->toggleViewAction() );
+  ui.menuView->addSeparator();
+  ui.menuView->addAction( dictionaryBar.toggleViewAction() );
+  ui.menuView->addAction( navToolbar->toggleViewAction() );
+
   // Dictionary bar
 
   addToolBar( &dictionaryBar );
+
+  connect( dictionaryBar.toggleViewAction(), SIGNAL(toggled(bool)),
+           this, SLOT(dictionaryBarToggled(bool)) );
 
   // Show tray icon early so the user would be happy
   updateTrayIcon();
@@ -228,6 +237,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &wordFinder, SIGNAL( finished() ),
            this, SLOT( prefixMatchFinished() ) );
 
+  connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
+           this, SLOT( mutedDictionariesChanged() ) );
+
   ui.translateLine->installEventFilter( this );
   ui.wordList->installEventFilter( this );
 
@@ -279,10 +291,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // makeDictionaries() didn't do deferred init - we do it here, at the end.
   doDeferredInit( dictionaries );
-
-  // Hide dictionary bar -- it's unfinished
-  dictionaryBar.hide();
-  removeToolBar( &dictionaryBar );
 }
 
 void MainWindow::mousePressEvent( QMouseEvent *event)
@@ -438,6 +446,8 @@ void MainWindow::makeDictionaries()
 
   wordFinder.clear();
 
+  dictionariesUnmuted.clear();
+
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
   updateStatusLine();
@@ -509,6 +519,9 @@ void MainWindow::updateGroupList()
 
 void MainWindow::updateDictionaryBar()
 {
+  if ( !dictionaryBar.toggleViewAction()->isChecked() )
+    return; // It's not enabled, therefore hidden -- don't waste time
+
   Instances::Group * grp =
       groupInstances.findGroup( groupList.getCurrentGroup() );
 
@@ -533,7 +546,7 @@ void MainWindow::makeScanPopup()
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
-{
+{  
   if ( groupInstances.empty() )
     return dictionaries;
 
@@ -545,7 +558,26 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
     return dictionaries;
   }
 
-  return groupInstances[ current ].dictionaries;
+  if ( !dictionaryBar.toggleViewAction()->isChecked() )
+    return groupInstances[ current ].dictionaries;
+  else
+  {
+    vector< sptr< Dictionary::Class > > const & activeDicts =
+      groupInstances[ current ].dictionaries;
+
+    // Populate the special dictionariesUnmuted array with only unmuted
+    // dictionaries
+
+    dictionariesUnmuted.clear();
+    dictionariesUnmuted.reserve( activeDicts.size() );
+
+    for( unsigned x = 0; x < activeDicts.size(); ++x )
+      if ( !cfg.mutedDictionaries.contains(
+              QString::fromStdString( activeDicts[ x ]->getId() ) ) )
+        dictionariesUnmuted.push_back( activeDicts[ x ] );
+
+    return dictionariesUnmuted;
+  }
 }
 
 void MainWindow::addNewTab()
@@ -553,11 +585,15 @@ void MainWindow::addNewTab()
   createNewTab( true, tr( "(untitled)" ) );
 }
 
+void applyMutedDictionariesState();
+
 ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )
 {
   ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
-                                        groupInstances, false, cfg, &groupList );
+                                        groupInstances, false, cfg,
+                                        dictionaryBar.toggleViewAction(),
+                                        &groupList );
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
@@ -676,6 +712,12 @@ void MainWindow::tabSwitched( int )
   updatePronounceAvailability();
 }
 
+void MainWindow::dictionaryBarToggled( bool )
+{
+  updateDictionaryBar(); // Updates dictionary bar contents if it's shown
+  applyMutedDictionariesState(); // Visibility change affects searches and results
+}
+
 void MainWindow::pronounce( ArticleView * view )
 {
   if ( view )
@@ -696,6 +738,9 @@ void MainWindow::editDictionaries()
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+
+  wordFinder.clear();
+  dictionariesUnmuted.clear();
 
   EditDictionaries dicts( this, cfg, dictionaries, groupInstances, dictNetMgr );
 
@@ -916,6 +961,18 @@ void MainWindow::updateMatchResults( bool finished )
   }
 }
 
+void MainWindow::applyMutedDictionariesState()
+{
+  // Redo the current search request
+  translateInputChanged( ui.translateLine->text() );
+
+  // Update active article view
+  ArticleView & view =
+    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+  view.updateMutedContents();
+}
+
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
   if ( obj == ui.translateLine )
@@ -1012,6 +1069,12 @@ void MainWindow::typingEvent( QString const & t )
     ui.translateLine->setFocus();
     ui.translateLine->setCursorPosition( t.size() );
   }
+}
+
+void MainWindow::mutedDictionariesChanged()
+{
+  if ( dictionaryBar.toggleViewAction()->isChecked() )
+    applyMutedDictionariesState();
 }
 
 void MainWindow::showTranslationFor( QString const & inWord )

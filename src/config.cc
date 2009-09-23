@@ -108,26 +108,9 @@ Romaji::Romaji():
 {
 }
 
-Events::Events( Class & c ): config( c )
+void Events::signalMutedDictionariesChanged()
 {
-}
-
-void Events::muteDictionary( QString const & id )
-{
-  if ( !config.mutedDictionaries.contains( id ) )
-  {
-    config.mutedDictionaries.insert( id );
-    emit dictionaryMuted( id );
-  }
-}
-
-void Events::unmuteDictionary( QString const & id )
-{
-  if ( config.mutedDictionaries.contains( id ) )
-  {
-    config.mutedDictionaries.remove( id );
-    emit dictionaryUnmuted( id );
-  }
+  emit mutedDictionariesChanged();
 }
 
 namespace {
