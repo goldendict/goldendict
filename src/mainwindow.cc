@@ -161,6 +161,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addToolBar( &dictionaryBar );
 
+  connect( dictionaryBar.toggleViewAction(), SIGNAL(triggered(bool)),
+           this, SLOT(dictionaryBarToggled(bool)) );
+  // This one will be disconnected once the slot is activated. It exists
+  // only to handle the initial appearance of the dictionary bar.
   connect( dictionaryBar.toggleViewAction(), SIGNAL(toggled(bool)),
            this, SLOT(dictionaryBarToggled(bool)) );
 
@@ -714,6 +718,10 @@ void MainWindow::tabSwitched( int )
 
 void MainWindow::dictionaryBarToggled( bool )
 {
+  // From now on, only the triggered() signal is interesting to us
+  disconnect( dictionaryBar.toggleViewAction(), SIGNAL(toggled(bool)),
+              this, SLOT(dictionaryBarToggled(bool)) );
+
   updateDictionaryBar(); // Updates dictionary bar contents if it's shown
   applyMutedDictionariesState(); // Visibility change affects searches and results
 }
