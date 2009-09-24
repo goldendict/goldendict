@@ -589,8 +589,6 @@ void MainWindow::addNewTab()
   createNewTab( true, tr( "(untitled)" ) );
 }
 
-void applyMutedDictionariesState();
-
 ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )
 {
