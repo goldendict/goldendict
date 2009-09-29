@@ -3,6 +3,7 @@
 #include "language.hh"
 #include "langcoder.hh"
 #include <QMessageBox>
+#include "broken_xrecord.hh"
 
 Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   QDialog( parent ), prevInterfaceLanguage( 0 )
@@ -134,6 +135,9 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.audioPlaybackProgram->hide();
   ui.audioPlaybackProgramLabel->hide();
 #endif
+
+  if ( !isRECORDBroken() )
+    ui.brokenXRECORD->hide();
 
   // Proxy server
 

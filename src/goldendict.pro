@@ -118,7 +118,8 @@ HEADERS += folding.hh \
     website.hh \
     orderandprops.hh \
     language.hh \
-    dictionarybar.hh
+    dictionarybar.hh \
+    broken_xrecord.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -188,7 +189,8 @@ SOURCES += folding.cc \
     website.cc \
     orderandprops.cc \
     language.cc \
-    dictionarybar.cc
+    dictionarybar.cc \
+    broken_xrecord.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h
