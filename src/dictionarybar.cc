@@ -64,7 +64,7 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
 
 void DictionaryBar::mutedDictionariesChanged()
 {
-  printf( "Muted dictionaries changed\n" );
+//  printf( "Muted dictionaries changed\n" );
 
   // Update actions
 
