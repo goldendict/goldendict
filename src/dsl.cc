@@ -354,8 +354,22 @@ void DslDictionary::doDeferredInit()
                             idxHeader.indexRootOffset ),
                  idx, idxMutex );
 
+      string const & dictionaryFilename = getDictionaryFilenames()[ 0 ];
+
       // Open a resource zip file, if there's one
-      resourceZip = zip_open( ( getDictionaryFilenames()[ 0 ] + ".files.zip" ).c_str(), 0, 0 );
+      resourceZip = zip_open( ( dictionaryFilename + ".files.zip" ).c_str(), 0, 0 );
+
+
+      // If failed, try without the .dz extension
+      if ( !resourceZip && dictionaryFilename.size() >= 3 &&
+           ( !dictionaryFilename.compare( dictionaryFilename.size() - 3, 3, ".dz" ) ||
+             !dictionaryFilename.compare( dictionaryFilename.size() - 3, 3, ".DZ" )
+           )
+         )
+      {
+        resourceZip = zip_open(
+            ( dictionaryFilename.substr( 0, dictionaryFilename.size() - 3 )  + ".files.zip" ).c_str(), 0, 0 );
+      }
     }
     catch( std::exception & e )
     {
