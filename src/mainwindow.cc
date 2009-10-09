@@ -168,11 +168,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( dictionaryBar.toggleViewAction(), SIGNAL(toggled(bool)),
            this, SLOT(dictionaryBarToggled(bool)) );
 
-  // Show tray icon early so the user would be happy
-  updateTrayIcon();
+  // Show tray icon early so the user would be happy. It won't be functional
+  // though until the program inits fully.
 
-  if ( trayIcon )
+  if ( cfg.preferences.enableTrayIcon )
+  {
+    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon.png" ), this );
     trayIcon->setToolTip( tr( "Loading..." ) );
+    trayIcon->show();
+  }
 
   connect( navBack, SIGNAL( activated() ),
            this, SLOT( backClicked() ) );
@@ -269,6 +273,17 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
 
   ui.translateLine->setFocus();
+
+  if ( trayIcon )
+  {
+    // Upgrade existing dummy tray icon into a full-functional one
+
+    trayIcon->setContextMenu( &trayIconMenu );
+    trayIcon->show();
+
+    connect( trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ),
+             this, SLOT( trayIconActivated( QSystemTrayIcon::ActivationReason ) ) );
+  }
 
   updateTrayIcon();
 
