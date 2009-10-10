@@ -143,7 +143,7 @@ the application.</string>
           <item>
            <widget class="QCheckBox" name="cbAutostart">
             <property name="toolTip">
-             <string>Automatically starts GoldenDict after operation system bootup</string>
+             <string>Automatically starts GoldenDict after operation system bootup.</string>
             </property>
             <property name="text">
              <string>Start with system</string>
@@ -280,7 +280,7 @@ off from main window or tray icon.</string>
           <item>
            <widget class="QCheckBox" name="startWithScanPopupOn">
             <property name="toolTip">
-             <string>Chooses whether the scan popup mode is on by default nor not. If checked,
+             <string>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</string>
             </property>
             <property name="text">
@@ -464,7 +464,7 @@ in the pressed state when the word selection changes.</string>
                <string>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
-be pressed shorty after the selection is done.</string>
+be pressed shortly after the selection is done.</string>
               </property>
               <property name="text">
                <string>Keys may also be pressed afterwards, within</string>
