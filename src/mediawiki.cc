@@ -203,7 +203,8 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
   url( url_ )
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
-           this, SLOT( requestFinished( QNetworkReply * ) ) );
+           this, SLOT( requestFinished( QNetworkReply * ) ),
+           Qt::QueuedConnection );
   
   addQuery(  mgr, str );
 
