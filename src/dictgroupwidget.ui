@@ -39,11 +39,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="groupIcon">
-       <property name="sizeAdjustPolicy">
-        <enum>QComboBox::AdjustToContents</enum>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="groupIcon"/>
      </item>
      <item>
       <spacer name="horizontalSpacer">
