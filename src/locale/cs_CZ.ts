@@ -175,6 +175,10 @@
         <source>&amp;Case Sensitive</source>
         <translation>Rozlišovat velikost pís&amp;ma</translation>
     </message>
+    <message>
+        <source>Open Link in &amp;External Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
@@ -192,6 +196,13 @@
     <message>
         <source>%1 entries</source>
         <translation>%1 záznamů</translation>
+    </message>
+</context>
+<context>
+    <name>DictionaryBar</name>
+    <message>
+        <source>Dictionary Bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1402,7 +1413,7 @@
     </message>
     <message>
         <source>Interlingua</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Интерлингва</translation>
     </message>
     <message>
         <source>Indonesian</source>
@@ -1410,7 +1421,7 @@
     </message>
     <message>
         <source>Interlingue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Окциденталь</translation>
     </message>
     <message>
         <source>Igbo</source>
@@ -1502,7 +1513,7 @@
     </message>
     <message>
         <source>Cornish</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Корнуольский</translation>
     </message>
     <message>
         <source>Kirghiz</source>
@@ -1546,7 +1557,7 @@
     </message>
     <message>
         <source>Malagasy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Мальгашский</translation>
     </message>
     <message>
         <source>Marshallese</source>
@@ -1758,7 +1769,7 @@
     </message>
     <message>
         <source>Sundanese</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сунданский</translation>
     </message>
     <message>
         <source>Swedish</source>
@@ -2154,6 +2165,10 @@
         <source>Ctrl+F11</source>
         <translation type="obsolete">Ctrl+F11</translation>
     </message>
+    <message>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWikisModel</name>
@@ -2305,7 +2320,7 @@ ukončení aplikace.</translation>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation>Automaticky spustí GoldenDict po spuštění systému</translation>
+        <translation type="obsolete">Automaticky spustí GoldenDict po spuštění systému</translation>
     </message>
     <message>
         <source>Start with system</source>
@@ -2360,7 +2375,7 @@ v ikoně v systémové liště.</translation>
     <message>
         <source>Chooses whether the scan popup mode is on by default nor not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Určuje, zda je vyskakovací okno automaticky povoleno nebo zakázáno. Pokud
+        <translation type="obsolete">Určuje, zda je vyskakovací okno automaticky povoleno nebo zakázáno. Pokud
 zaškrtnuto, program bude automaticky startovat s aktivovaným vyskakovacím oknem.</translation>
     </message>
     <message>
@@ -2462,7 +2477,7 @@ zvolené klávesy stisknuty při změně výběru.</translation>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shorty after the selection is done.</source>
-        <translation>Normálně musíte pro aktivaci vyskakovacího okna
+        <translation type="obsolete">Normálně musíte pro aktivaci vyskakovacího okna
 držet zkratkouvou klávesu během vybírání slova.
 Takto stačí abyste tuto klávesu krátce stiskli až
 po označení slova.</translation>
@@ -2554,11 +2569,11 @@ a nabídne otevření stránky s aktualizací ke stažení.</translation>
     </message>
     <message>
         <source>English</source>
-        <translation>Anglicky</translation>
+        <translation type="obsolete">Anglicky</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation>Rusky</translation>
+        <translation type="obsolete">Rusky</translation>
     </message>
     <message>
         <source>Default</source>
@@ -2575,6 +2590,40 @@ a nabídne otevření stránky s aktualizací ke stažení.</translation>
     <message>
         <source>Restart the program to apply the language change.</source>
         <translation>Restartujte program aby se provedla změna jazyka.</translation>
+    </message>
+    <message>
+        <source>Automatically starts GoldenDict after operation system bootup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chooses whether the scan popup mode is on by default or not. If checked,
+the program would always start with the scan popup active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normally, in order to activate a popup you have to
+maintain the chosen keys pressed while you select
+a word. With this enabled, the chosen keys may also
+be pressed shortly after the selection is done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling this would make GoldenDict block most advertisements
+by disallowing content (images, frames) not originating from the site
+you are browsing. If some site breaks because of this, try disabling this.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disallow loading content from other sites (hides most advertisements)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

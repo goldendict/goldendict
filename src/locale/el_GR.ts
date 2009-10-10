@@ -4,8 +4,8 @@
 <context>
     <name></name>
     <message>
-        <location filename="../mediawiki.cc" line="149"/>
-        <location filename="../mediawiki.cc" line="270"/>
+        <location filename="../mediawiki.cc" line="157"/>
+        <location filename="../mediawiki.cc" line="279"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Σφάλμα κατά την ανάλυση του XML: %1 στο %2,%3</translation>
     </message>
@@ -46,12 +46,12 @@
         <translation>Δε βρέθηκε μετάφραση του &lt;b&gt;%1&lt;/b&gt; στην ομάδα &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="123"/>
+        <location filename="../article_maker.cc" line="124"/>
         <source>Welcome!</source>
         <translation>Καλώς ήλθατε!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="125"/>
+        <location filename="../article_maker.cc" line="126"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Καλώς ήλθατε στο &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Για να ξεκινήσετε, επιλέξτε &lt;b&gt;Επεξεργασία|Λεξικά&lt;/b&gt;. Από εδώ μπορείτε να προσθέσετε τους καταλόγους σας που περιέχουν λεξικά, να ενεργοποιήσετε την αναζήτηση στη Βικιπαίδεια ή άλλες πηγές, να αλλάξετε τη σειρά των λεξικών ή να δημιουργήσετε ομάδες λεξικών.&lt;/p&gt;
 &lt;p&gt;Μετά θα είστε έτοιμοι να ξεκινήσετε την αναζήτηση! Μπορείτε να αναζητάτε λέξεις από την αριστερή στήλη αυτού του παραθύρου, ή από &lt;a href=&quot;Χρήση αναδυόμενου παραθύρου&quot;&gt;οποιαδήποτε άλλη ανοιχτή εφαρμογή&lt;/a&gt;.&lt;/p&gt;
@@ -59,27 +59,27 @@
 &lt;p&gt;Για περαιτέρω βοήθεια, ερωτήματα, υποδείξεις, ή απλά για να διαβάσετε τις γνώμες άλλων χρηστών, μπορείτε να εγγραφείτε στο &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;φόρουμ&lt;/a&gt; του προγράμματος. &lt;p&gt;Ενημερώσεις μπορείτε να βρείτε στον &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;Ιστότοπο&lt;/a&gt; του προγράμματος.&lt;p&gt;(c) 2008-2009 Konstantin Isakov. Διανέμεται υπό τους όρους της GNU GPLv3 ή νεότερης έκδοσής της.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="141"/>
+        <location filename="../article_maker.cc" line="142"/>
         <source>Working with popup</source>
         <translation>Χρήση αναδυόμενου παραθύρου</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="143"/>
+        <location filename="../article_maker.cc" line="144"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Χρήση αναδυόμενου παραθύρου&lt;/h3&gt; Για να μπορείτε να αναζητάτε λέξεις που συναντήσατε σε άλλες ενεργές εφαρμογές, πρέπει πρώτα να ενεργοποιήσετε τη &lt;i&gt;&quot;Λειτουργία αναδυόμενου παραθύρου&quot;&lt;/i&gt; από τις &lt;b&gt;Προτιμήσεις&lt;/b&gt;. Στη συνέχεια, θα μπορείτε να την ενεργοποιείτε όποτε θέλετε, είτε πατώντας το εικονίδιο &quot;Αναδυόμενο παράθυρο&quot; της εργαλειοθήκης, είτε κάνοντας δεξί κλικ στο εικονίδιο της περιοχής ειδοποιήσεων και επιλέγοντας την από το μενού.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="150"/>
+        <location filename="../article_maker.cc" line="151"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Τώρα θα μπορείτε να τοποθετείτε το δρομέα πάνω στις λέξεις που σας ενδιαφέρουν για να εμφανίζετε ένα παράθυρο με την επεξήγησή τους.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="153"/>
+        <location filename="../article_maker.cc" line="154"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Τώρα, απλά επιλέξτε με το ποντίκι μια λέξη σε άλλη εφαρμογή (π.χ. με δεξί κλικ πάνω στη λέξη), και θα εμφανιστεί ένα παράθυρο με την επεξήγησή της.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="215"/>
+        <location filename="../article_maker.cc" line="231"/>
         <source>(untitled)</source>
         <translation>(ανώνυμο)</translation>
     </message>
@@ -87,17 +87,17 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="371"/>
+        <location filename="../article_maker.cc" line="387"/>
         <source>From </source>
         <translation>Από </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="378"/>
+        <location filename="../article_maker.cc" line="394"/>
         <source>Query error: %1</source>
         <translation>Σφάλμα αναζήτησης: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="472"/>
+        <location filename="../article_maker.cc" line="488"/>
         <source>Close words: </source>
         <translation>Παρόμοιες λέξεις: </translation>
     </message>
@@ -105,71 +105,71 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="605"/>
-        <location filename="../articleview.cc" line="881"/>
-        <location filename="../articleview.cc" line="900"/>
-        <location filename="../articleview.cc" line="910"/>
-        <location filename="../articleview.cc" line="933"/>
+        <location filename="../articleview.cc" line="662"/>
+        <location filename="../articleview.cc" line="974"/>
+        <location filename="../articleview.cc" line="993"/>
+        <location filename="../articleview.cc" line="1003"/>
+        <location filename="../articleview.cc" line="1026"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="605"/>
+        <location filename="../articleview.cc" line="662"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Δεν υπάρχει ο ζητούμενος πόρος.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="679"/>
+        <location filename="../articleview.cc" line="768"/>
         <source>&amp;Open Link</source>
         <translation>Άνοι&amp;γμα συνδέσμου</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="685"/>
+        <location filename="../articleview.cc" line="774"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Άνοιγμα συνδέσμου σε νέα &amp;καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="692"/>
+        <location filename="../articleview.cc" line="781"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Άνοιγμα συνδέσμου σε &amp;εξωτερικό περιηγητή</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="702"/>
+        <location filename="../articleview.cc" line="794"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>Ανα&amp;ζήτηση του &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="710"/>
+        <location filename="../articleview.cc" line="802"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Αναζήτηση του &quot;%1&quot; σε &amp;νέα καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="725"/>
+        <location filename="../articleview.cc" line="817"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Αναζήτηση του &quot;%1&quot; στο %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="733"/>
+        <location filename="../articleview.cc" line="825"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Αναζήτηση του &quot;%1&quot; στο %2 σε &amp;νέα καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="881"/>
+        <location filename="../articleview.cc" line="974"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Δεν ήταν δυνατή η αναπαραγωγή του αρχείου ήχου: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="900"/>
+        <location filename="../articleview.cc" line="993"/>
         <source>Failed to create temporary file.</source>
         <translation>Απέτυχε η δημιουργία προσωρινού αρχείου.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="910"/>
+        <location filename="../articleview.cc" line="1003"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Απέτυχε το αυτόματο άνοιγμα του αρχείου· δοκιμάστε να το ανοίξετε χειροκίνητα: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="933"/>
+        <location filename="../articleview.cc" line="1026"/>
         <source>The referenced resource failed to download.</source>
         <translation>Απέτυχε η λήψη του ζητούμενου πόρου.</translation>
     </message>
@@ -233,6 +233,14 @@
         <location filename="../groups_widgets.cc" line="125"/>
         <source>%1 entries</source>
         <translation>%1 λήμματα</translation>
+    </message>
+</context>
+<context>
+    <name>DictionaryBar</name>
+    <message>
+        <location filename="../dictionarybar.cc" line="10"/>
+        <source>Dictionary Bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -312,43 +320,43 @@
 <context>
     <name>Groups</name>
     <message>
-        <location filename="../groups.cc" line="77"/>
+        <location filename="../groups.cc" line="79"/>
         <source>Add group</source>
         <translation>Προσθήκη ομάδας</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="78"/>
+        <location filename="../groups.cc" line="80"/>
         <source>Give a name for the new group:</source>
         <translation>Εισάγετε το όνομα της νέας ομάδας:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="97"/>
+        <location filename="../groups.cc" line="99"/>
         <source>Rename group</source>
         <translation>Μετονομασία ομάδας</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="98"/>
+        <location filename="../groups.cc" line="100"/>
         <source>Give a new name for the group:</source>
         <translation>Εισάγετε το νέο όνομα της ομάδας:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="109"/>
+        <location filename="../groups.cc" line="111"/>
         <source>Remove group</source>
         <translation>Αφαίρεση ομάδας</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="110"/>
+        <location filename="../groups.cc" line="112"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
         <translation>Σίγουρα θέλετε να αφαιρέσετε την ομάδα &lt;b&gt;%1&lt;/b&gt;;</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="122"/>
+        <location filename="../groups.cc" line="124"/>
         <location filename="../groups.ui" line="173"/>
         <source>Remove all groups</source>
         <translation>Αφαίρεση όλων των ομάδων</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="123"/>
+        <location filename="../groups.cc" line="125"/>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>Σίγουρα θέλετε να διαγράψετε όλες τις ομάδες;</translation>
     </message>
@@ -491,927 +499,927 @@
 <context>
     <name>Language</name>
     <message>
-        <location filename="../language.cc" line="47"/>
+        <location filename="../language.cc" line="50"/>
         <source>Afar</source>
         <translation>Afar</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="48"/>
+        <location filename="../language.cc" line="51"/>
         <source>Abkhazian</source>
         <translation>Αμπκχαζικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="49"/>
+        <location filename="../language.cc" line="52"/>
         <source>Avestan</source>
         <translation>Avesta</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="50"/>
+        <location filename="../language.cc" line="53"/>
         <source>Afrikaans</source>
         <translation>Afrikaans</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="51"/>
+        <location filename="../language.cc" line="54"/>
         <source>Akan</source>
         <translation>Akanα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="52"/>
+        <location filename="../language.cc" line="55"/>
         <source>Amharic</source>
         <translation>Αμχαρικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="53"/>
+        <location filename="../language.cc" line="56"/>
         <source>Aragonese</source>
         <translation>Αραγόνας</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="54"/>
+        <location filename="../language.cc" line="57"/>
         <source>Arabic</source>
         <translation>Αραβικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="55"/>
+        <location filename="../language.cc" line="58"/>
         <source>Assamese</source>
         <translation>Assam</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="56"/>
+        <location filename="../language.cc" line="59"/>
         <source>Avaric</source>
         <translation>Αβαρικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="57"/>
+        <location filename="../language.cc" line="60"/>
         <source>Aymara</source>
         <translation>Aymar</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="58"/>
+        <location filename="../language.cc" line="61"/>
         <source>Azerbaijani</source>
         <translation>Αζέρικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="59"/>
+        <location filename="../language.cc" line="62"/>
         <source>Bashkir</source>
         <translation>Bašqort</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="60"/>
+        <location filename="../language.cc" line="63"/>
         <source>Belarusian</source>
         <translation>Λευκορωσικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="61"/>
+        <location filename="../language.cc" line="64"/>
         <source>Bulgarian</source>
         <translation>Βουλγαρικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="62"/>
+        <location filename="../language.cc" line="65"/>
         <source>Bihari</source>
         <translation>Bihari</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="63"/>
+        <location filename="../language.cc" line="66"/>
         <source>Bislama</source>
         <translation>Bislama</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="64"/>
+        <location filename="../language.cc" line="67"/>
         <source>Bambara</source>
         <translation>Bamanankan</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="65"/>
+        <location filename="../language.cc" line="68"/>
         <source>Bengali</source>
         <translation>Bengali</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="66"/>
+        <location filename="../language.cc" line="69"/>
         <source>Tibetan</source>
         <translation>Θιβετιανά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="67"/>
+        <location filename="../language.cc" line="70"/>
         <source>Breton</source>
         <translation>Βρετάννης</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="68"/>
+        <location filename="../language.cc" line="71"/>
         <source>Bosnian</source>
         <translation>Βοσνιακά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="69"/>
+        <location filename="../language.cc" line="72"/>
         <source>Catalan</source>
         <translation>Καταλανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="70"/>
+        <location filename="../language.cc" line="73"/>
         <source>Chechen</source>
         <translation>Τσετσενικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="71"/>
+        <location filename="../language.cc" line="74"/>
         <source>Chamorro</source>
         <translation>Chamoru</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="72"/>
+        <location filename="../language.cc" line="75"/>
         <source>Corsican</source>
         <translation>Κορσικανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="73"/>
+        <location filename="../language.cc" line="76"/>
         <source>Cree</source>
         <translation>Nehiyaw</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="74"/>
+        <location filename="../language.cc" line="77"/>
         <source>Czech</source>
         <translation>Τσεχικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="75"/>
+        <location filename="../language.cc" line="78"/>
         <source>Church Slavic</source>
         <translation>Εκκλησιαστικά Σλαβικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="76"/>
+        <location filename="../language.cc" line="79"/>
         <source>Chuvash</source>
         <translation>Čăvašla</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="77"/>
+        <location filename="../language.cc" line="80"/>
         <source>Welsh</source>
         <translation>Ουαλλικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="78"/>
+        <location filename="../language.cc" line="81"/>
         <source>Danish</source>
         <translation>Δανέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="79"/>
+        <location filename="../language.cc" line="82"/>
         <source>German</source>
         <translation>Γερμανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="80"/>
+        <location filename="../language.cc" line="83"/>
         <source>Divehi</source>
         <translation>Divehi</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="81"/>
+        <location filename="../language.cc" line="84"/>
         <source>Dzongkha</source>
         <translation>Dzongkha</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="82"/>
+        <location filename="../language.cc" line="85"/>
         <source>Ewe</source>
         <translation>Eʋegbe</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="83"/>
+        <location filename="../language.cc" line="86"/>
         <source>Greek</source>
         <translation>Ελληνικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="84"/>
+        <location filename="../language.cc" line="87"/>
         <source>English</source>
         <translation>Αγγλικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="85"/>
+        <location filename="../language.cc" line="88"/>
         <source>Esperanto</source>
         <translation>Εσπεράντο</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="86"/>
+        <location filename="../language.cc" line="89"/>
         <source>Spanish</source>
         <translation>Ισπανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="87"/>
+        <location filename="../language.cc" line="90"/>
         <source>Estonian</source>
         <translation>Εσθονικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="88"/>
+        <location filename="../language.cc" line="91"/>
         <source>Basque</source>
         <translation>Βασκικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="89"/>
+        <location filename="../language.cc" line="92"/>
         <source>Persian</source>
         <translation>Περσικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="90"/>
+        <location filename="../language.cc" line="93"/>
         <source>Fulah</source>
         <translation>Fulfulde</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="91"/>
+        <location filename="../language.cc" line="94"/>
         <source>Finnish</source>
         <translation>Φιλανδικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="92"/>
+        <location filename="../language.cc" line="95"/>
         <source>Fijian</source>
         <translation>Φίτζι</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="93"/>
+        <location filename="../language.cc" line="96"/>
         <source>Faroese</source>
         <translation>Føroyskt</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="94"/>
+        <location filename="../language.cc" line="97"/>
         <source>French</source>
         <translation>Γαλλικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="95"/>
+        <location filename="../language.cc" line="98"/>
         <source>Western Frisian</source>
         <translation>Frysk</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="96"/>
+        <location filename="../language.cc" line="99"/>
         <source>Irish</source>
         <translation>Ιρλανδικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="97"/>
+        <location filename="../language.cc" line="100"/>
         <source>Scottish Gaelic</source>
         <translation>Σκωτσέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="98"/>
+        <location filename="../language.cc" line="101"/>
         <source>Galician</source>
         <translation>Γαλικιανά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="99"/>
+        <location filename="../language.cc" line="102"/>
         <source>Guarani</source>
         <translation>Guaraní</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="100"/>
+        <location filename="../language.cc" line="103"/>
         <source>Gujarati</source>
         <translation>Gujarati</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="101"/>
+        <location filename="../language.cc" line="104"/>
         <source>Manx</source>
         <translation>Gaelg</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="102"/>
+        <location filename="../language.cc" line="105"/>
         <source>Hausa</source>
         <translation>Hausa</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="103"/>
+        <location filename="../language.cc" line="106"/>
         <source>Hebrew</source>
         <translation>Εβραϊκά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="104"/>
+        <location filename="../language.cc" line="107"/>
         <source>Hindi</source>
         <translation>Ινδικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="105"/>
+        <location filename="../language.cc" line="108"/>
         <source>Hiri Motu</source>
         <translation>Hiri Motu</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="106"/>
+        <location filename="../language.cc" line="109"/>
         <source>Croatian</source>
         <translation>Κροατικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="107"/>
+        <location filename="../language.cc" line="110"/>
         <source>Haitian</source>
         <translation>Αϊτιανά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="108"/>
+        <location filename="../language.cc" line="111"/>
         <source>Hungarian</source>
         <translation>Ουγγρικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="109"/>
+        <location filename="../language.cc" line="112"/>
         <source>Armenian</source>
         <translation>Αρμενικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="110"/>
+        <location filename="../language.cc" line="113"/>
         <source>Herero</source>
         <translation>Herero</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="111"/>
+        <location filename="../language.cc" line="114"/>
         <source>Interlingua</source>
         <translation>Interlingua</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="112"/>
+        <location filename="../language.cc" line="115"/>
         <source>Indonesian</source>
         <translation>Ινδονησιακά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="113"/>
+        <location filename="../language.cc" line="116"/>
         <source>Interlingue</source>
         <translation>Interlingue</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="114"/>
+        <location filename="../language.cc" line="117"/>
         <source>Igbo</source>
         <translation>Igbo</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="115"/>
+        <location filename="../language.cc" line="118"/>
         <source>Sichuan Yi</source>
         <translation>Nuosu</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="116"/>
+        <location filename="../language.cc" line="119"/>
         <source>Inupiaq</source>
         <translation>Iñupiak</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="117"/>
+        <location filename="../language.cc" line="120"/>
         <source>Ido</source>
         <translation>Ido</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="118"/>
+        <location filename="../language.cc" line="121"/>
         <source>Icelandic</source>
         <translation>Ισλανδικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="119"/>
+        <location filename="../language.cc" line="122"/>
         <source>Italian</source>
         <translation>Ιταλικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="120"/>
+        <location filename="../language.cc" line="123"/>
         <source>Inuktitut</source>
         <translation>Inuktitut</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="121"/>
+        <location filename="../language.cc" line="124"/>
         <source>Japanese</source>
         <translation>Ιαπωνικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="122"/>
+        <location filename="../language.cc" line="125"/>
         <source>Javanese</source>
         <translation>Ιάβας</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="123"/>
+        <location filename="../language.cc" line="126"/>
         <source>Georgian</source>
         <translation>Γεωργιανά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="124"/>
+        <location filename="../language.cc" line="127"/>
         <source>Kongo</source>
         <translation>Κονγκολέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="125"/>
+        <location filename="../language.cc" line="128"/>
         <source>Kikuyu</source>
         <translation>Κικούγιου</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="126"/>
+        <location filename="../language.cc" line="129"/>
         <source>Kwanyama</source>
         <translation>Kwanyama</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="127"/>
+        <location filename="../language.cc" line="130"/>
         <source>Kazakh</source>
         <translation>Καζακικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="128"/>
+        <location filename="../language.cc" line="131"/>
         <source>Kalaallisut</source>
         <translation>Γροιλανδικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="129"/>
+        <location filename="../language.cc" line="132"/>
         <source>Khmer</source>
         <translation>Χμερ</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="130"/>
+        <location filename="../language.cc" line="133"/>
         <source>Kannada</source>
         <translation>Kannada</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="131"/>
+        <location filename="../language.cc" line="134"/>
         <source>Korean</source>
         <translation>Κορεατικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="132"/>
+        <location filename="../language.cc" line="135"/>
         <source>Kanuri</source>
         <translation>Kanuri</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="133"/>
+        <location filename="../language.cc" line="136"/>
         <source>Kashmiri</source>
         <translation>Κασμίρ</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="134"/>
+        <location filename="../language.cc" line="137"/>
         <source>Kurdish</source>
         <translation>Κουρδικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="135"/>
+        <location filename="../language.cc" line="138"/>
         <source>Komi</source>
         <translation>Komi</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="136"/>
+        <location filename="../language.cc" line="139"/>
         <source>Cornish</source>
         <translation>Κορνουάλης</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="137"/>
+        <location filename="../language.cc" line="140"/>
         <source>Kirghiz</source>
         <translation>Κιργιζικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="138"/>
+        <location filename="../language.cc" line="141"/>
         <source>Latin</source>
         <translation>Λατινικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="139"/>
+        <location filename="../language.cc" line="142"/>
         <source>Luxembourgish</source>
         <translation>Λουξεμβούργου</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="140"/>
+        <location filename="../language.cc" line="143"/>
         <source>Ganda</source>
         <translation>Luganda</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="141"/>
+        <location filename="../language.cc" line="144"/>
         <source>Limburgish</source>
         <translation>Λιμβούργου</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="142"/>
+        <location filename="../language.cc" line="145"/>
         <source>Lingala</source>
         <translation>Lingala</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="143"/>
+        <location filename="../language.cc" line="146"/>
         <source>Lao</source>
         <translation>Λαοτιανά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="144"/>
+        <location filename="../language.cc" line="147"/>
         <source>Lithuanian</source>
         <translation>Λιθουανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="145"/>
+        <location filename="../language.cc" line="148"/>
         <source>Luba-Katanga</source>
         <translation>Luba-Katanga</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="146"/>
+        <location filename="../language.cc" line="149"/>
         <source>Latvian</source>
         <translation>Λετονικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="147"/>
+        <location filename="../language.cc" line="150"/>
         <source>Malagasy</source>
         <translation>Μαλγασικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="148"/>
+        <location filename="../language.cc" line="151"/>
         <source>Marshallese</source>
         <translation>Νήσων Μάρσαλ</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="149"/>
+        <location filename="../language.cc" line="152"/>
         <source>Maori</source>
         <translation>Μαορί</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="150"/>
+        <location filename="../language.cc" line="153"/>
         <source>Macedonian</source>
         <translation>Σλαβομακεδονικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="151"/>
+        <location filename="../language.cc" line="154"/>
         <source>Malayalam</source>
         <translation>Malayalam</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="152"/>
+        <location filename="../language.cc" line="155"/>
         <source>Mongolian</source>
         <translation>Μογγολικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="153"/>
+        <location filename="../language.cc" line="156"/>
         <source>Marathi</source>
         <translation>Marathi</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="154"/>
+        <location filename="../language.cc" line="157"/>
         <source>Malay</source>
         <translation>Μαλαισιανά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="155"/>
+        <location filename="../language.cc" line="158"/>
         <source>Maltese</source>
         <translation>Μαλτέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="156"/>
+        <location filename="../language.cc" line="159"/>
         <source>Burmese</source>
         <translation>Βιρμανίας</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="157"/>
+        <location filename="../language.cc" line="160"/>
         <source>Nauru</source>
         <translation>Ναουρού</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="158"/>
+        <location filename="../language.cc" line="161"/>
         <source>Norwegian Bokmal</source>
         <translation>Νορβηγικά, Bokmal</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="159"/>
+        <location filename="../language.cc" line="162"/>
         <source>North Ndebele</source>
         <translation>Βόρεια Ndebele</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="160"/>
+        <location filename="../language.cc" line="163"/>
         <source>Nepali</source>
         <translation>Νεπαλέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="161"/>
+        <location filename="../language.cc" line="164"/>
         <source>Ndonga</source>
         <translation>Ndonga</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="162"/>
+        <location filename="../language.cc" line="165"/>
         <source>Dutch</source>
         <translation>Ολλανδικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="163"/>
+        <location filename="../language.cc" line="166"/>
         <source>Norwegian Nynorsk</source>
         <translation>Νορβηγικά, Nynorsk</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="164"/>
+        <location filename="../language.cc" line="167"/>
         <source>Norwegian</source>
         <translation>Νορβηγικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="165"/>
+        <location filename="../language.cc" line="168"/>
         <source>South Ndebele</source>
         <translation>Νότια Ndebele</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="166"/>
+        <location filename="../language.cc" line="169"/>
         <source>Navajo</source>
         <translation>Νάβαχο</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="167"/>
+        <location filename="../language.cc" line="170"/>
         <source>Chichewa</source>
         <translation>Chichewa</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="168"/>
+        <location filename="../language.cc" line="171"/>
         <source>Occitan</source>
         <translation>Οξιτανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="169"/>
+        <location filename="../language.cc" line="172"/>
         <source>Ojibwa</source>
         <translation>Ojibwa</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="170"/>
+        <location filename="../language.cc" line="173"/>
         <source>Oromo</source>
         <translation>Oromoo</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="171"/>
+        <location filename="../language.cc" line="174"/>
         <source>Oriya</source>
         <translation>Oriya</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="172"/>
+        <location filename="../language.cc" line="175"/>
         <source>Ossetian</source>
         <translation>Οσετικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="173"/>
+        <location filename="../language.cc" line="176"/>
         <source>Panjabi</source>
         <translation>Panjabi</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="174"/>
+        <location filename="../language.cc" line="177"/>
         <source>Pali</source>
         <translation>Pali</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="175"/>
+        <location filename="../language.cc" line="178"/>
         <source>Polish</source>
         <translation>Πολωνικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="176"/>
+        <location filename="../language.cc" line="179"/>
         <source>Pashto</source>
         <translation>Αφγανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="177"/>
+        <location filename="../language.cc" line="180"/>
         <source>Portuguese</source>
         <translation>Πορτογαλικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="178"/>
+        <location filename="../language.cc" line="181"/>
         <source>Quechua</source>
         <translation>Quechua</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="179"/>
+        <location filename="../language.cc" line="182"/>
         <source>Raeto-Romance</source>
         <translation>Ρετο-ρωμανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="180"/>
+        <location filename="../language.cc" line="183"/>
         <source>Kirundi</source>
         <translation>Kirundi</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="181"/>
+        <location filename="../language.cc" line="184"/>
         <source>Romanian</source>
         <translation>Ρουμανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="182"/>
+        <location filename="../language.cc" line="185"/>
         <source>Russian</source>
         <translation>Ρωσικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="183"/>
+        <location filename="../language.cc" line="186"/>
         <source>Kinyarwanda</source>
         <translation>Kinyarwanda</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="184"/>
+        <location filename="../language.cc" line="187"/>
         <source>Sanskrit</source>
         <translation>Σανσκριτικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="185"/>
+        <location filename="../language.cc" line="188"/>
         <source>Sardinian</source>
         <translation>Σαρδηνίας</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="186"/>
+        <location filename="../language.cc" line="189"/>
         <source>Sindhi</source>
         <translation>Sindhi</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="187"/>
+        <location filename="../language.cc" line="190"/>
         <source>Northern Sami</source>
         <translation>Βόρεια Σάμι</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="188"/>
+        <location filename="../language.cc" line="191"/>
         <source>Sango</source>
         <translation>Sango</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="189"/>
+        <location filename="../language.cc" line="192"/>
         <source>Serbo-Croatian</source>
         <translation>Σερβοκροατικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="190"/>
+        <location filename="../language.cc" line="193"/>
         <source>Sinhala</source>
         <translation>Sinhala</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="191"/>
+        <location filename="../language.cc" line="194"/>
         <source>Slovak</source>
         <translation>Σλοβακικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="192"/>
+        <location filename="../language.cc" line="195"/>
         <source>Slovenian</source>
         <translation>Σλοβενικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="193"/>
+        <location filename="../language.cc" line="196"/>
         <source>Samoan</source>
         <translation>Σαμόας</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="194"/>
+        <location filename="../language.cc" line="197"/>
         <source>Shona</source>
         <translation>Shona</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="195"/>
+        <location filename="../language.cc" line="198"/>
         <source>Somali</source>
         <translation>Σομαλέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="196"/>
+        <location filename="../language.cc" line="199"/>
         <source>Albanian</source>
         <translation>Αλβανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="197"/>
+        <location filename="../language.cc" line="200"/>
         <source>Serbian</source>
         <translation>Σερβικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="198"/>
+        <location filename="../language.cc" line="201"/>
         <source>Swati</source>
         <translation>Swati</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="199"/>
+        <location filename="../language.cc" line="202"/>
         <source>Southern Sotho</source>
         <translation>Νότια Sotho</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="200"/>
+        <location filename="../language.cc" line="203"/>
         <source>Sundanese</source>
         <translation>Sunda</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="201"/>
+        <location filename="../language.cc" line="204"/>
         <source>Swedish</source>
         <translation>Σουηδικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="202"/>
+        <location filename="../language.cc" line="205"/>
         <source>Swahili</source>
         <translation>Σουαχίλι</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="203"/>
+        <location filename="../language.cc" line="206"/>
         <source>Tamil</source>
         <translation>Tamil</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="204"/>
+        <location filename="../language.cc" line="207"/>
         <source>Telugu</source>
         <translation>Telugu</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="205"/>
+        <location filename="../language.cc" line="208"/>
         <source>Tajik</source>
         <translation>Τατζικικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="206"/>
+        <location filename="../language.cc" line="209"/>
         <source>Thai</source>
         <translation>Ταϋλανδέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="207"/>
+        <location filename="../language.cc" line="210"/>
         <source>Tigrinya</source>
         <translation>Tigrinya</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="208"/>
+        <location filename="../language.cc" line="211"/>
         <source>Turkmen</source>
         <translation>Τουρκμενικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="209"/>
+        <location filename="../language.cc" line="212"/>
         <source>Tagalog</source>
         <translation>Tagalog</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="210"/>
+        <location filename="../language.cc" line="213"/>
         <source>Tswana</source>
         <translation>Setswana</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="211"/>
+        <location filename="../language.cc" line="214"/>
         <source>Tonga</source>
         <translation>Tonga</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="212"/>
+        <location filename="../language.cc" line="215"/>
         <source>Turkish</source>
         <translation>Τουρκικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="213"/>
+        <location filename="../language.cc" line="216"/>
         <source>Tsonga</source>
         <translation>Xitsonga</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="214"/>
+        <location filename="../language.cc" line="217"/>
         <source>Tatar</source>
         <translation>Ταταρικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="215"/>
+        <location filename="../language.cc" line="218"/>
         <source>Twi</source>
         <translation>Twi</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="216"/>
+        <location filename="../language.cc" line="219"/>
         <source>Tahitian</source>
         <translation>Ταϊτής</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="217"/>
+        <location filename="../language.cc" line="220"/>
         <source>Uighur</source>
         <translation>Ουιγουρικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="218"/>
+        <location filename="../language.cc" line="221"/>
         <source>Ukrainian</source>
         <translation>Ουκρανικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="219"/>
+        <location filename="../language.cc" line="222"/>
         <source>Urdu</source>
         <translation>Urdu</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="220"/>
+        <location filename="../language.cc" line="223"/>
         <source>Uzbek</source>
         <translation>Ουζμπεκικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="221"/>
+        <location filename="../language.cc" line="224"/>
         <source>Venda</source>
         <translation>Tshivenda</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="222"/>
+        <location filename="../language.cc" line="225"/>
         <source>Vietnamese</source>
         <translation>Βιετναμέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="223"/>
+        <location filename="../language.cc" line="226"/>
         <source>Volapuk</source>
         <translation>Volapük</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="224"/>
+        <location filename="../language.cc" line="227"/>
         <source>Walloon</source>
         <translation>Βαλονικά</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="225"/>
+        <location filename="../language.cc" line="228"/>
         <source>Wolof</source>
         <translation>Wolof</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="226"/>
+        <location filename="../language.cc" line="229"/>
         <source>Xhosa</source>
         <translation>Xhosa</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="227"/>
+        <location filename="../language.cc" line="230"/>
         <source>Yiddish</source>
         <translation>Γίντις</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="228"/>
+        <location filename="../language.cc" line="231"/>
         <source>Yoruba</source>
         <translation>Yoruba</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="229"/>
+        <location filename="../language.cc" line="232"/>
         <source>Zhuang</source>
         <translation>Zhuang</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="230"/>
+        <location filename="../language.cc" line="233"/>
         <source>Chinese</source>
         <translation>Κινέζικα</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="231"/>
+        <location filename="../language.cc" line="234"/>
         <source>Zulu</source>
         <translation>Ζουλού</translation>
     </message>
@@ -1419,7 +1427,7 @@
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="171"/>
+        <location filename="../loaddictionaries.cc" line="174"/>
         <source>Error loading dictionaries</source>
         <translation>Σφάλμα κατά τη φόρτωση των λεξικών</translation>
     </message>
@@ -1427,161 +1435,161 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cc" line="48"/>
-        <location filename="../mainwindow.cc" line="442"/>
+        <location filename="../mainwindow.cc" line="50"/>
+        <location filename="../mainwindow.cc" line="498"/>
         <source>Look up in:</source>
         <translation>Αναζήτηση σε:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="60"/>
+        <location filename="../mainwindow.cc" line="62"/>
         <source>Navigation</source>
         <translation>Πλοήγηση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="63"/>
+        <location filename="../mainwindow.cc" line="65"/>
         <source>Back</source>
         <translation>Πίσω</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="64"/>
+        <location filename="../mainwindow.cc" line="66"/>
         <source>Forward</source>
         <translation>Μπροστά</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="71"/>
+        <location filename="../mainwindow.cc" line="73"/>
         <source>Scan Popup</source>
         <translation>Αναδυόμενο παράθυρο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="81"/>
+        <location filename="../mainwindow.cc" line="83"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Εκφώνηση λέξης (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="90"/>
+        <location filename="../mainwindow.cc" line="92"/>
         <source>Zoom In</source>
         <translation>Μεγέθυνση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="91"/>
+        <location filename="../mainwindow.cc" line="93"/>
         <source>Zoom Out</source>
         <translation>Σμίκρυνση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="92"/>
+        <location filename="../mainwindow.cc" line="94"/>
         <source>Normal Size</source>
         <translation>Κανονικό μέγεθος</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="102"/>
+        <location filename="../mainwindow.cc" line="104"/>
         <source>Show &amp;Main Window</source>
         <translation>Εμφάνιση &amp;κύριου παραθύρου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="106"/>
-        <location filename="../mainwindow.ui" line="281"/>
+        <location filename="../mainwindow.cc" line="108"/>
+        <location filename="../mainwindow.ui" line="287"/>
         <source>&amp;Quit</source>
         <translation>Έ&amp;ξοδος</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="155"/>
+        <location filename="../mainwindow.cc" line="177"/>
         <source>Loading...</source>
         <translation>Φόρτωση...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="245"/>
+        <location filename="../mainwindow.cc" line="272"/>
         <location filename="../mainwindow.ui" line="43"/>
         <source>Welcome!</source>
         <translation>Καλώς ήλθατε!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="431"/>
+        <location filename="../mainwindow.cc" line="487"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 λεξικά, %2 άρθρα, %3 λήμματα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="442"/>
+        <location filename="../mainwindow.cc" line="498"/>
         <source>Look up:</source>
         <translation>Αναζήτηση:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="460"/>
+        <location filename="../mainwindow.cc" line="516"/>
         <source>All</source>
         <translation>Όλα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="515"/>
+        <location filename="../mainwindow.cc" line="604"/>
         <source>(untitled)</source>
         <translation>(ανώνυμο)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="875"/>
+        <location filename="../mainwindow.cc" line="981"/>
         <source>WARNING: %1</source>
         <translation>ΠΡΟΣΟΧΗ: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1117"/>
+        <location filename="../mainwindow.cc" line="1241"/>
         <location filename="../mainwindow.ui" line="14"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1118"/>
+        <location filename="../mainwindow.cc" line="1242"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Απέτυχε η φόρτωση του μηχανισμού παρακολούθησης πλήκτρων συντομεύσεων.&lt;br&gt;Βεβαιωθείτε ότι η επέκταση RECORD του XServer είναι ενεργοποιημένη.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1251"/>
+        <location filename="../mainwindow.cc" line="1375"/>
         <source>New Release Available</source>
         <translation>Νέα έκδοση διαθέσιμη</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1252"/>
+        <location filename="../mainwindow.cc" line="1376"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Η έκδοση &lt;b&gt;%1&lt;/b&gt; του GoldenDict είναι διαθέσιμη.&lt;br&gt;Κάντε κλικ στο &lt;b&gt;Λήψη&lt;/b&gt; για να επισκεφτείτε την ιστοσελίδα λήψης.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1257"/>
+        <location filename="../mainwindow.cc" line="1381"/>
         <source>Download</source>
         <translation>Λήψη</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1258"/>
+        <location filename="../mainwindow.cc" line="1382"/>
         <source>Skip This Release</source>
         <translation>Παράβλεψη αυτής της έκδοσης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1369"/>
+        <location filename="../mainwindow.cc" line="1505"/>
         <source>Page Setup</source>
         <translation>Διάταξη σελίδας</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1370"/>
+        <location filename="../mainwindow.cc" line="1506"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Δε βρέθηκε εκτυπωτής. Παρακαλώ εγκαταστήστε έναν εκτυπωτή.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1387"/>
+        <location filename="../mainwindow.cc" line="1523"/>
         <source>Print Article</source>
         <translation>Εκτύπωση άρθρου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1408"/>
+        <location filename="../mainwindow.cc" line="1544"/>
         <source>Save Article As</source>
         <translation>Αποθήκευση άρθρου ως</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1408"/>
+        <location filename="../mainwindow.cc" line="1544"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html αρχεία (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1423"/>
+        <location filename="../mainwindow.cc" line="1559"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1424"/>
+        <location filename="../mainwindow.cc" line="1560"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Αδύνατη η αποθήκευση του άρθρου: %1</translation>
     </message>
@@ -1601,128 +1609,133 @@
         <translation>&amp;Βοήθεια</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="102"/>
+        <location filename="../mainwindow.ui" line="97"/>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="108"/>
         <source>Search Pane</source>
         <translation>Στήλη αναζήτησης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="233"/>
+        <location filename="../mainwindow.ui" line="239"/>
         <source>&amp;Dictionaries...</source>
         <translation>&amp;Λεξικά...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="236"/>
-        <location filename="../mainwindow.ui" line="248"/>
+        <location filename="../mainwindow.ui" line="242"/>
+        <location filename="../mainwindow.ui" line="254"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="245"/>
+        <location filename="../mainwindow.ui" line="251"/>
         <source>&amp;Groups...</source>
         <translation>&amp;Ομάδες...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="257"/>
+        <location filename="../mainwindow.ui" line="263"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Προτιμήσεις...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="260"/>
+        <location filename="../mainwindow.ui" line="266"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="265"/>
+        <location filename="../mainwindow.ui" line="271"/>
         <source>&amp;Homepage</source>
         <translation>&amp;Ιστοσελίδα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="270"/>
+        <location filename="../mainwindow.ui" line="276"/>
         <source>&amp;About</source>
         <translation>Πε&amp;ρί</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="273"/>
+        <location filename="../mainwindow.ui" line="279"/>
         <source>About GoldenDict</source>
         <translation>Περί GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="276"/>
+        <location filename="../mainwindow.ui" line="282"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="284"/>
+        <location filename="../mainwindow.ui" line="290"/>
         <source>Quit from application</source>
         <translation>Έξοδος εφαρμογής</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="287"/>
+        <location filename="../mainwindow.ui" line="293"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="292"/>
+        <location filename="../mainwindow.ui" line="298"/>
         <source>&amp;Forum</source>
         <translation>&amp;Φόρουμ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="297"/>
+        <location filename="../mainwindow.ui" line="303"/>
         <source>&amp;Close To Tray</source>
         <translation>&amp;Ελαχιστοποίηση στην περιοχή ειδοποιήσεων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="300"/>
+        <location filename="../mainwindow.ui" line="306"/>
         <source>Minimizes the window to tray</source>
         <translation>Ελαχιστοποιεί το παράθυρο ως εικονίδιο στην περιοχή ειδοποιήσεων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="303"/>
+        <location filename="../mainwindow.ui" line="309"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="312"/>
+        <location filename="../mainwindow.ui" line="318"/>
         <source>&amp;Save Article</source>
         <translation>&amp;Αποθήκευση άρθρου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="315"/>
+        <location filename="../mainwindow.ui" line="321"/>
         <source>Save Article</source>
         <translation>Αποθήκευση άρθρου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="318"/>
+        <location filename="../mainwindow.ui" line="324"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="327"/>
+        <location filename="../mainwindow.ui" line="333"/>
         <source>&amp;Print</source>
         <translation>Εκ&amp;τύπωση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="330"/>
+        <location filename="../mainwindow.ui" line="336"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="335"/>
+        <location filename="../mainwindow.ui" line="341"/>
         <source>Page Set&amp;up</source>
         <translation>&amp;Διάταξη σελίδας</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="340"/>
+        <location filename="../mainwindow.ui" line="346"/>
         <source>Print Preview</source>
         <translation>Προεπισκόπηση εκτύπωσης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="345"/>
+        <location filename="../mainwindow.ui" line="351"/>
         <source>Rescan Files</source>
         <translation>Νέα σάρωση αρχείων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="348"/>
+        <location filename="../mainwindow.ui" line="354"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
@@ -1827,37 +1840,35 @@
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../preferences.cc" line="38"/>
+        <location filename="../preferences.cc" line="41"/>
         <source>System default</source>
         <translation>Συστήματος</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="39"/>
         <source>English</source>
-        <translation>Αγγλικά</translation>
+        <translation type="obsolete">Αγγλικά</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="40"/>
         <source>Russian</source>
-        <translation>Ρωσικά</translation>
+        <translation type="obsolete">Ρωσικά</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="50"/>
+        <location filename="../preferences.cc" line="73"/>
         <source>Default</source>
         <translation>Κλασική</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="51"/>
+        <location filename="../preferences.cc" line="74"/>
         <source>Lingvo</source>
         <translation>Lingvo</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="265"/>
+        <location filename="../preferences.cc" line="293"/>
         <source>Changing Language</source>
         <translation>Αλλαγή γλώσσας</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="266"/>
+        <location filename="../preferences.cc" line="294"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Απαιτείται επανεκκίνηση του προγράμματος για να εφαρμοστεί η αλλαγή γλώσσας.</translation>
     </message>
@@ -1945,9 +1956,8 @@ the application.</source>
         <translation>Εκκίνηση</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="146"/>
         <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation>Εκκινεί αυτόματα το GoldenDict κατά την εκκίνηση του συστήματος</translation>
+        <translation type="obsolete">Εκκινεί αυτόματα το GoldenDict κατά την εκκίνηση του συστήματος</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="149"/>
@@ -1986,12 +1996,22 @@ off from main window or tray icon.</source>
         <translation>Ενεργοποίηση λειτουργίας αναδυόμενου παραθύρου</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="283"/>
         <source>Chooses whether the scan popup mode is on by default nor not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Ρυθμίζει αν θα είναι προεπιλεγμένη η λειτουργία αναδυόμενου παραθύρου.
+        <translation type="obsolete">Ρυθμίζει αν θα είναι προεπιλεγμένη η λειτουργία αναδυόμενου παραθύρου.
 Αν σημειώσετε την επιλογή, η εφαρμογή θα εκκινείται πάντα με το αναδυόμενο 
 παράθυρο ενεργοποιημένο.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="146"/>
+        <source>Automatically starts GoldenDict after operation system bootup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="283"/>
+        <source>Chooses whether the scan popup mode is on by default or not. If checked,
+the program would always start with the scan popup active.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="287"/>
@@ -2115,8 +2135,15 @@ in the pressed state when the word selection changes.</source>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
+be pressed shortly after the selection is done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normally, in order to activate a popup you have to
+maintain the chosen keys pressed while you select
+a word. With this enabled, the chosen keys may also
 be pressed shorty after the selection is done.</source>
-        <translation>Κανονικά, για να εμφανιστεί το αναδυόμενο παράθυρο,
+        <translation type="obsolete">Κανονικά, για να εμφανιστεί το αναδυόμενο παράθυρο,
 πρέπει να κρατάτε τα επιλεγμένα πλήκτρα πατημένα κατά
 την επιλογή λέξης. Χάρη σε αυτή την επιλογή, μπορείτε 
 να πατάτε τα πλήκτρα αμέσως μετά την επιλογή της λέξης.</translation>
@@ -2161,69 +2188,90 @@ seconds, which is specified here.</source>
         <translation>Οι συντομεύσεις λειτουργούν παντού και από οποιαδήποτε εφαρμογή, αρκεί να εκτελείται το GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="669"/>
+        <location filename="../preferences.ui" line="651"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="689"/>
         <source>&amp;Audio</source>
         <translation>Ή&amp;χος</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="688"/>
+        <location filename="../preferences.ui" line="708"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Αυτόματη εκφώνηση λέξεων στο κύριο παράθυρο</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="695"/>
+        <location filename="../preferences.ui" line="715"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Αυτόματη εκφώνηση λέξεων στο αναδυόμενο παράθυρο</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="704"/>
+        <location filename="../preferences.ui" line="724"/>
         <source>Program to play audio files:</source>
         <translation>Πρόγραμμα αναπαραγωγής αρχείων ήχου:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="734"/>
+        <location filename="../preferences.ui" line="754"/>
         <source>&amp;Network</source>
         <translation>&amp;Δίκτυο</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="753"/>
+        <location filename="../preferences.ui" line="773"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Επιλέξτε το αν θέλετε να χρησιμοποιείτε
 διαμεσολαβητή για όλες τις ανάγκες της εφαρμογής.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="757"/>
+        <location filename="../preferences.ui" line="777"/>
         <source>Use proxy server</source>
         <translation>Χρήση διαμεσολαβητή</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="771"/>
+        <location filename="../preferences.ui" line="791"/>
         <source>Type:</source>
         <translation>Τύπος:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="781"/>
+        <location filename="../preferences.ui" line="801"/>
         <source>Host:</source>
         <translation>Διεύθυνση:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="791"/>
+        <location filename="../preferences.ui" line="811"/>
         <source>Port:</source>
         <translation>Θύρα:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="812"/>
+        <location filename="../preferences.ui" line="832"/>
         <source>User:</source>
         <translation>Χρήστης:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="822"/>
+        <location filename="../preferences.ui" line="842"/>
         <source>Password:</source>
         <translation>Κωδικός:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="857"/>
+        <location filename="../preferences.ui" line="877"/>
+        <source>Enabling this would make GoldenDict block most advertisements
+by disallowing content (images, frames) not originating from the site
+you are browsing. If some site breaks because of this, try disabling this.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="882"/>
+        <source>Disallow loading content from other sites (hides most advertisements)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="905"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -2235,7 +2283,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
 χρήστη και θα παραπέμπει στην ιστοσελίδα λήψης.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="864"/>
+        <location filename="../preferences.ui" line="912"/>
         <source>Check for new program releases periodically</source>
         <translation>Περιοδικός έλεγχος για νέες εκδόσεις/ενημερώσεις</translation>
     </message>
@@ -2243,12 +2291,12 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
 <context>
     <name>Romaji</name>
     <message>
-        <location filename="../romaji.cc" line="90"/>
+        <location filename="../romaji.cc" line="137"/>
         <source>Hepburn Romaji for Hiragana</source>
         <translation>Hepburn Romaji για Hiragana</translation>
     </message>
     <message>
-        <location filename="../romaji.cc" line="99"/>
+        <location filename="../romaji.cc" line="146"/>
         <source>Hepburn Romaji for Katakana</source>
         <translation>Hepburn Romaji για Katakana</translation>
     </message>
