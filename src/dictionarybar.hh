@@ -24,6 +24,7 @@ public:
   /// disabled) are taken from the configuration data.
   void setDictionaries( std::vector< sptr< Dictionary::Class > > const & );
 
+
 private:
 
   Config::MutedDictionaries & mutedDictionaries;
@@ -31,6 +32,10 @@ private:
 
   /// All the actions we have added to the toolbar
   QList< QAction * > dictActions;
+
+protected:
+
+  void contextMenuEvent( QContextMenuEvent * event );
 
 private slots:
 

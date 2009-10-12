@@ -1,6 +1,8 @@
 #include "dictionarybar.hh"
 #include <QAction>
 #include <QApplication>
+#include <QMenu>
+#include <QContextMenuEvent>
 
 using std::vector;
 
@@ -79,9 +81,31 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
 }
 
 
+void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
+{
+  QMenu menu( this );
+
+  for( QList< QAction * >::iterator i = dictActions.begin();
+       i != dictActions.end(); ++i )
+  {
+    // We need new action, since the one we have has text elided
+    QAction * action = menu.addAction( (*i)->icon(), (*i)->toolTip() );
+
+    action->setCheckable( true );
+    action->setChecked( (*i)->isChecked() );
+    action->setData( QVariant::fromValue( (void *)*i ) );
+  }
+  QAction * result = menu.exec( event->globalPos() );
+
+  if ( result && result->data().value< void * >() )
+    ( ( QAction * )( result->data().value< void * >() ) )->trigger();
+
+  event->accept();
+}
+
 void DictionaryBar::mutedDictionariesChanged()
 {
-//  printf( "Muted dictionaries changed\n" );
+  //printf( "Muted dictionaries changed\n" );
 
   // Update actions
 
@@ -178,3 +202,4 @@ void DictionaryBar::actionWasTriggered( QAction * action )
     }
   }
 }
+
