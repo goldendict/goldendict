@@ -20,6 +20,20 @@ DictionaryBar::DictionaryBar( QWidget * parent,
            this, SLOT(actionWasTriggered(QAction*)) );
 }
 
+static QString elideDictName( QString const & name )
+{
+  // Some names are way too long -- we insert an ellipsis in the middle of those
+
+  int const maxSize = 33;
+
+  if ( name.size() <= maxSize )
+    return name;
+
+  int const pieceSize = maxSize / 2 - 1;
+
+  return name.left( pieceSize ) + QChar( 0x2026 ) + name.right( pieceSize );
+}
+
 void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
                                      const & dictionaries )
 {
@@ -34,9 +48,12 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
   {
     QIcon icon = dictionaries[ x ]->getNativeIcon();
 
-    QAction * action = addAction( icon,
-                                  QString::fromUtf8(
-                                      dictionaries[ x ]->getName().c_str() ) );
+    QString dictName = QString::fromUtf8( dictionaries[ x ]->
+                                            getName().c_str() );
+
+    QAction * action = addAction( icon, elideDictName( dictName ) );
+
+    action->setToolTip( dictName ); // Tooltip need not be shortened
 
     QString id = QString::fromStdString( dictionaries[ x ]->getId() );
 
