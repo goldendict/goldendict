@@ -53,9 +53,9 @@
     <message>
         <location filename="../article_maker.cc" line="126"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Καλώς ήλθατε στο &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Για να ξεκινήσετε, επιλέξτε &lt;b&gt;Επεξεργασία|Λεξικά&lt;/b&gt;. Από εδώ μπορείτε να προσθέσετε τους καταλόγους σας που περιέχουν λεξικά, να ενεργοποιήσετε την αναζήτηση στη Βικιπαίδεια ή άλλες πηγές, να αλλάξετε τη σειρά των λεξικών ή να δημιουργήσετε ομάδες λεξικών.&lt;/p&gt;
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Καλώς ήλθατε στο &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Για να ξεκινήσετε, επιλέξτε &lt;b&gt;Επεξεργασία|Λεξικά&lt;/b&gt;. Από εδώ μπορείτε να προσθέσετε φακέλους που περιέχουν λεξικά, να ενεργοποιήσετε την αναζήτηση στη Βικιπαίδεια ή άλλες πηγές, να αλλάξετε τη σειρά των λεξικών ή να δημιουργήσετε ομάδες λεξικών.&lt;/p&gt;
 &lt;p&gt;Μετά θα είστε έτοιμοι να ξεκινήσετε την αναζήτηση! Μπορείτε να αναζητάτε λέξεις από την αριστερή στήλη αυτού του παραθύρου, ή από &lt;a href=&quot;Χρήση αναδυόμενου παραθύρου&quot;&gt;οποιαδήποτε άλλη ανοιχτή εφαρμογή&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Για να προσαρμόσετε το πρόγραμμα στις απαιτήσεις σας, δείτε τις διαθέσιμες ρυθμίσεις στο μενού &lt;b&gt;Επεξεργασία|Προτιμήσεις&lt;/b&gt;. Όλες οι προτιμήσεις.διαθέτουν χρήσιμες συμβουλές οθόνης, που μπορείτε να δείτε τοποθετώντας το ποντίκι πάνω στην προτίμηση.&lt;/p&gt;
+&lt;p&gt;Για να προσαρμόσετε το πρόγραμμα στις απαιτήσεις σας, δείτε τις διαθέσιμες ρυθμίσεις στο μενού &lt;b&gt;Επεξεργασία|Προτιμήσεις&lt;/b&gt;. Όλες οι προτιμήσεις διαθέτουν χρήσιμες συμβουλές οθόνης, που μπορείτε να δείτε τοποθετώντας το ποντίκι πάνω στην προτίμηση.&lt;/p&gt;
 &lt;p&gt;Για περαιτέρω βοήθεια, ερωτήματα, υποδείξεις, ή απλά για να διαβάσετε τις γνώμες άλλων χρηστών, μπορείτε να εγγραφείτε στο &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;φόρουμ&lt;/a&gt; του προγράμματος. &lt;p&gt;Ενημερώσεις μπορείτε να βρείτε στον &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;Ιστότοπο&lt;/a&gt; του προγράμματος.&lt;p&gt;(c) 2008-2009 Konstantin Isakov. Διανέμεται υπό τους όρους της GNU GPLv3 ή νεότερης έκδοσής της.</translation>
     </message>
     <message>
@@ -66,17 +66,17 @@
     <message>
         <location filename="../article_maker.cc" line="144"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Χρήση αναδυόμενου παραθύρου&lt;/h3&gt; Για να μπορείτε να αναζητάτε λέξεις που συναντήσατε σε άλλες ενεργές εφαρμογές, πρέπει πρώτα να ενεργοποιήσετε τη &lt;i&gt;&quot;Λειτουργία αναδυόμενου παραθύρου&quot;&lt;/i&gt; από τις &lt;b&gt;Προτιμήσεις&lt;/b&gt;. Στη συνέχεια, θα μπορείτε να την ενεργοποιείτε όποτε θέλετε, είτε πατώντας το εικονίδιο &quot;Αναδυόμενο παράθυρο&quot; της εργαλειοθήκης, είτε κάνοντας δεξί κλικ στο εικονίδιο της περιοχής ειδοποιήσεων και επιλέγοντας την από το μενού.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Χρήση αναδυόμενου παραθύρου&lt;/h3&gt; Για να μπορείτε να αναζητάτε λέξεις που συναντήσατε σε άλλες ενεργές εφαρμογές, πρέπει πρώτα να ενεργοποιήσετε τη &lt;i&gt;&quot;Λειτουργία αναδυόμενου παραθύρου&quot;&lt;/i&gt; από τις &lt;b&gt;Προτιμήσεις&lt;/b&gt;. Μετά, θα μπορείτε να την ενεργοποιείτε όποτε θέλετε, είτε πατώντας το εικονίδιο &quot;Αναδυόμενο παράθυρο&quot; της εργαλειοθήκης, είτε κάνοντας δεξί κλικ στο εικονίδιο της περιοχής ειδοποιήσεων και επιλέγοντας την από το μενού.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="151"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>Τώρα θα μπορείτε να τοποθετείτε το δρομέα πάνω στις λέξεις που σας ενδιαφέρουν για να εμφανίζετε ένα παράθυρο με την επεξήγησή τους.</translation>
+        <translation>Στη συνέχεια, θα μπορείτε να τοποθετείτε το δρομέα πάνω στις λέξεις που σας ενδιαφέρουν για να εμφανίζετε ένα παράθυρο με την επεξήγησή τους.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="154"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Τώρα, απλά επιλέξτε με το ποντίκι μια λέξη σε άλλη εφαρμογή (π.χ. με δεξί κλικ πάνω στη λέξη), και θα εμφανιστεί ένα παράθυρο με την επεξήγησή της.</translation>
+        <translation>Στη συνέχεια, απλά επιλέξτε με το ποντίκι μια λέξη σε άλλη εφαρμογή (π.χ. με δεξί κλικ πάνω στη λέξη), και θα εμφανιστεί ένα παράθυρο με την επεξήγησή της.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="231"/>
@@ -99,7 +99,7 @@
     <message>
         <location filename="../article_maker.cc" line="488"/>
         <source>Close words: </source>
-        <translation>Παρόμοιες λέξεις: </translation>
+        <translation>Παρόμοια λήμματα: </translation>
     </message>
 </context>
 <context>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="10"/>
         <source>Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή λεξικών</translation>
     </message>
 </context>
 <context>
@@ -1463,7 +1463,7 @@
     <message>
         <location filename="../mainwindow.cc" line="83"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Εκφώνηση λέξης (Alt+S)</translation>
+        <translation>Εκφώνηση λήμματος (Alt+S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="92"/>
@@ -1611,7 +1611,7 @@
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Προβολή</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
@@ -1834,7 +1834,7 @@
     <message>
         <location filename="../sources.cc" line="593"/>
         <source>Recursive</source>
-        <translation>Αναδρομική</translation>
+        <translation>Υποφάκελοι</translation>
     </message>
 </context>
 <context>
@@ -2005,13 +2005,15 @@ the program would always start with the scan popup active.</source>
     <message>
         <location filename="../preferences.ui" line="146"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εκκινεί αυτόματα το GoldenDict κατά την εκκίνηση του συστήματος</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="283"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Καθορίζει αν θα είναι προεπιλεγμένη η λειτουργία αναδυόμενου παραθύρου.
+Αν σημειώσετε την επιλογή, η εφαρμογή θα εκκινείται πάντα με το αναδυόμενο 
+παράθυρο ενεργοποιημένο.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="287"/>
@@ -2136,7 +2138,10 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Κανονικά, για να εμφανιστεί το αναδυόμενο παράθυρο,
+πρέπει να κρατάτε τα επιλεγμένα πλήκτρα πατημένα κατά
+την επιλογή λέξης. Χάρη σε αυτή την επιλογή, μπορείτε 
+να πατάτε τα πλήκτρα αμέσως μετά την επιλογή της λέξης.</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
@@ -2194,7 +2199,11 @@ seconds, which is specified here.</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Σημείωση: Μάλλον χρησιμοποιείτε έκδοση του X.Org XServer στην οποία δε λειτουργεί η επέκταση RECORD. Κατά πάσα πιθανότητα, οι συντομεύσεις του GoldenDict δε θα λειτουργήσουν. Το σφάλμα θα πρέπει να διορθωθεί σε επίπεδο X.Org XServer. Παρακαλώ, ανατρέξτε σε αυτήν την &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;αναφορά σφάλματος&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; και προσθέστε σχόλιο, αν το επιθυμείτε.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="689"/>
@@ -2204,12 +2213,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="708"/>
         <source>Auto-pronounce words in main window</source>
-        <translation>Αυτόματη εκφώνηση λέξεων στο κύριο παράθυρο</translation>
+        <translation>Αυτόματη εκφώνηση λημμάτων στο κύριο παράθυρο</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="715"/>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Αυτόματη εκφώνηση λέξεων στο αναδυόμενο παράθυρο</translation>
+        <translation>Αυτόματη εκφώνηση λημμάτων στο αναδυόμενο παράθυρο</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="724"/>
@@ -2263,12 +2272,15 @@ for all program&apos;s network requests.</source>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν το επιλέξετε, το GoldenDict θα εμποδίζει τις περισσότερες διαφημίσεις, 
+μη επιτρέποντας την εμφάνιση περιεχομένου (εικόνων, πλαισίων) που δεν 
+προέρχονται από τον ιστότοπο στον οποίο βρίσκεστε. Αν προκύψουν 
+προβλήματα με κάποιους ιστοτόπους, δοκιμάστε να το αποεπιλέξετε.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="882"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation type="unfinished"></translation>
+        <translation>Φραγή περιεχομένου από άλλους ιστοτόπους (εξαφανίζει τις περισσότερες διαφημίσεις)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="905"/>
@@ -2341,7 +2353,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../scanpopup.ui" line="86"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Εκφώνηση λέξης (Alt+S)</translation>
+        <translation>Εκφώνηση λήμματος (Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="96"/>
@@ -2369,7 +2381,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <location filename="../sources.cc" line="110"/>
         <location filename="../sources.cc" line="137"/>
         <source>Choose a directory</source>
-        <translation>Επιλογή καταλόγου</translation>
+        <translation>Επιλογή φακέλου</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="97"/>
@@ -2383,7 +2395,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <location filename="../sources.cc" line="98"/>
         <location filename="../sources.cc" line="125"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Να αφαιρεθεί ο κατάλογος &lt;b&gt;%1&lt;/b&gt; από τη λίστα;</translation>
+        <translation>Να αφαιρεθεί ο φάκελος &lt;b&gt;%1&lt;/b&gt; από τη λίστα;</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="165"/>
@@ -2425,7 +2437,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../sources.ui" line="97"/>
         <source>Sound Dirs</source>
-        <translation>Κατάλογοι ήχων</translation>
+        <translation>Φάκελοι ήχων</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="103"/>
@@ -2440,7 +2452,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../sources.ui" line="159"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>Διαδρομή καταλόγου με λεξικά Hunspell/Myspell:</translation>
+        <translation>Διαδρομή φακέλου με λεξικά Hunspell/Myspell:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="175"/>
