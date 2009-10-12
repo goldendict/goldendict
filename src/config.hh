@@ -302,7 +302,10 @@ struct Class
                                     // preferences.checkForNewReleases is set
   QString skippedRelease; // Empty by default
 
-  Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 )
+  bool showingDictBarNames;
+
+  Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
+           showingDictBarNames( false )
   {}
 };
 

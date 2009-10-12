@@ -30,6 +30,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   closeCurrentTabAction( this ),
   switchToNextTabAction( this ),
   switchToPrevTabAction( this ),
+  showDictBarNamesAction( tr( "Show Names in Dictionary Bar" ), this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -150,14 +151,26 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addAction( &switchToPrevTabAction );
 
+
+  showDictBarNamesAction.setCheckable( true );
+  showDictBarNamesAction.setChecked( cfg.showingDictBarNames );
+
+  connect( &showDictBarNamesAction, SIGNAL( triggered() ),
+           this, SLOT( showDictBarNamesTriggered() ) );
+
   // Popuplate 'View' menu
 
   ui.menuView->addAction( ui.searchPane->toggleViewAction() );
   ui.menuView->addSeparator();
   ui.menuView->addAction( dictionaryBar.toggleViewAction() );
   ui.menuView->addAction( navToolbar->toggleViewAction() );
+  ui.menuView->addSeparator();
+  ui.menuView->addAction( &showDictBarNamesAction );
 
   // Dictionary bar
+
+  showDictBarNamesTriggered(); // Make update its state according to initial
+                               // setting
 
   addToolBar( &dictionaryBar );
 
@@ -1459,6 +1472,15 @@ void MainWindow::showAbout()
 
   about.show();
   about.exec();
+}
+
+void MainWindow::showDictBarNamesTriggered()
+{
+  bool show = showDictBarNamesAction.isChecked();
+
+  dictionaryBar.setToolButtonStyle( show ? Qt::ToolButtonTextBesideIcon :
+                                           Qt::ToolButtonIconOnly );
+  cfg.showingDictBarNames = show;
 }
 
 void MainWindow::setAutostart(bool autostart)

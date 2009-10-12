@@ -540,6 +540,8 @@ Class load() throw( exError )
 
   c.skippedRelease = root.namedItem( "skippedRelease" ).toElement().text();
 
+  c.showingDictBarNames = ( root.namedItem( "showingDictBarNames" ).toElement().text() == "1" );
+
   return c;
 }
 
@@ -964,6 +966,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "skippedRelease" );
     opt.appendChild( dd.createTextNode( c.skippedRelease ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "showingDictBarNames" );
+    opt.appendChild( dd.createTextNode( c.showingDictBarNames ? "1" : "0" ) );
     root.appendChild( opt );
   }
 

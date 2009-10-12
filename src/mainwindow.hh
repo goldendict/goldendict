@@ -48,7 +48,7 @@ private:
   GroupComboBox groupList;
 
   QAction focusTranslateLineAction, addTabAction, closeCurrentTabAction,
-          switchToNextTabAction, switchToPrevTabAction;
+          switchToNextTabAction, switchToPrevTabAction, showDictBarNamesAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
   QAction * zoomIn, * zoomOut, * zoomBase;
@@ -213,6 +213,8 @@ private slots:
   void visitHomepage();
   void visitForum();
   void showAbout();
+
+  void showDictBarNamesTriggered();
 
   void on_actionCloseToTray_activated();
   
