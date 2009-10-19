@@ -76,7 +76,7 @@ struct Ifo
 enum
 {
   Signature = 0x58444953, // SIDX on little-endian, XDIS on big-endian
-  CurrentFormatVersion = 6 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 7 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -957,6 +957,25 @@ static void handleIdxSynFile( string const & fileName,
         throw exIncorrectOffset( fileName );
 
       offset = (*articleOffsets)[ offsetInIndex ];
+
+      // Some StarDict dictionaries are in fact badly converted Babylon ones.
+      // They contain a lot of superfluous slashed entries with dollar signs.
+      // We try to filter them out here, since those entries become much more
+      // apparent in GoldenDict than they were in StarDict because of
+      // punctuation folding. Hopefully there are not a whole lot of valid
+      // synonyms which really start from slash and contain dollar signs, or
+      // end with dollar and contain slashes.
+      if ( *word == '/' )
+      {
+        if ( strchr( word, '$' ) )
+          continue; // Skip this entry
+      }
+      else
+      if ( wordLen && word[ wordLen - 1 ] == '$' )
+      {
+        if ( strchr( word, '/' ) )
+          continue; // Skip this entry
+      }
     }
 
     // Insert new entry into an index
