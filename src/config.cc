@@ -995,7 +995,7 @@ void save( Class const & c ) throw( exError )
   QVector< wchar_t > destFileW( destFile.size() + 1 );
   destFileW[ destFile.toWCharArray( destFileW.data() ) ] = 0;
 
-  if ( !MoveFileExW( srcFile.data(), destFile.data(),  MOVEFILE_REPLACE_EXISTING ) )
+  if ( !MoveFileExW( srcFileW.data(), destFileW.data(),  MOVEFILE_REPLACE_EXISTING ) )
     throw exCantWriteConfigFile();
 #else
 
