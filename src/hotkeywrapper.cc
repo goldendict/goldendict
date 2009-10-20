@@ -165,6 +165,8 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
     mod |= MOD_ALT;
   if (modifier & Qt::SHIFT)
     mod |= MOD_SHIFT;
+  if (modifier & Qt::META)
+    mod |= MOD_WIN;
 
   quint32 vk = nativeKey( key );
   quint32 vk2 = key2 ? nativeKey( key2 ) : 0;
