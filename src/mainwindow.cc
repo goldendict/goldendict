@@ -1122,17 +1122,16 @@ void MainWindow::mutedDictionariesChanged()
 }
 
 void MainWindow::showTranslationFor( QString const & inWord,
-                                     int inGroup )
+                                     unsigned inGroup )
 {
   ArticleView & view =
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
 
   navPronounce->setEnabled( false );
 
-  unsigned group = inGroup < 0 ?
+  unsigned group = inGroup ? inGroup :
                    ( groupInstances.empty() ? 0 :
-                        groupInstances[ groupList.currentIndex() ].id ):
-                     inGroup;
+                        groupInstances[ groupList.currentIndex() ].id );
 
   view.showDefinition( inWord, group );
 

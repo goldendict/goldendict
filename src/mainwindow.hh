@@ -202,7 +202,7 @@ private slots:
 
   void mutedDictionariesChanged();
 
-  void showTranslationFor( QString const &, int inGroup = -1 );
+  void showTranslationFor( QString const &, unsigned inGroup = 0 );
 
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
 
