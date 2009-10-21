@@ -27,10 +27,8 @@ void GroupComboBox::fill( Instances::Groups const & groups )
 
   for( unsigned x  = 0; x < groups.size(); ++x )
   {
-    QIcon icon = groups[ x ].icon.size() ?
-                   QIcon( ":/flags/" + groups[ x ].icon ) : QIcon();
-
-    addItem( icon, groups[ x ].name, groups[ x ].id );
+    addItem( groups[ x ].makeIcon(),
+             groups[ x ].name, groups[ x ].id );
 
     if ( prevId == groups[ x ].id )
       setCurrentIndex( x );

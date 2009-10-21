@@ -65,6 +65,15 @@ Config::Group Group::makeConfigGroup()
   return result;
 }
 
+QIcon Group::makeIcon() const
+{
+  QIcon i = icon.size() ?
+                 QIcon( ":/flags/" + icon ) : QIcon();
+
+  return i;
+}
+
+
 Group * Groups::findGroup( unsigned id )
 {
   for( unsigned x = 0; x < size(); ++x )
