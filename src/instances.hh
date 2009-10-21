@@ -6,6 +6,7 @@
 
 #include "config.hh"
 #include "dictionary.hh"
+#include <QIcon>
 
 // This complements Config, providing instances for the stored configurations.
 // Simply put, it can convert groups to ones which hold references to
@@ -32,6 +33,9 @@ struct Group
 
   /// Makes the configuration group from the current contents.
   Config::Group makeConfigGroup();
+
+  /// Makes an icon object for this group, based on the icon's name.
+  QIcon makeIcon() const;
 };
 
 struct Groups: public vector< Group >
