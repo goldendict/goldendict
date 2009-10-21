@@ -34,6 +34,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
+  history( History::Load() ),
   dictionaryBar( this, cfg.mutedDictionaries, configEvents ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
@@ -181,6 +182,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( dictionaryBar.toggleViewAction(), SIGNAL(toggled(bool)),
            this, SLOT(dictionaryBarToggled(bool)) );
 
+  // History
+
+  connect( &history, SIGNAL( itemsChanged() ),
+           this, SLOT( historyChanged() ) );
+
   // Show tray icon early so the user would be happy. It won't be functional
   // though until the program inits fully.
 
@@ -273,6 +279,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   applyProxySettings();
 
   makeDictionaries();
+
+  // After we have dictionaries and groups, we can populate history
+  historyChanged();
 
   addNewTab();
 
@@ -569,7 +578,8 @@ void MainWindow::makeScanPopup()
        !cfg.preferences.enableClipboardHotkey )
     return;
 
-  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances );
+  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances,
+                             history );
 
   scanPopup->setStyleSheet( styleSheet() );
 
@@ -1111,17 +1121,27 @@ void MainWindow::mutedDictionariesChanged()
     applyMutedDictionariesState();
 }
 
-void MainWindow::showTranslationFor( QString const & inWord )
+void MainWindow::showTranslationFor( QString const & inWord,
+                                     int inGroup )
 {
   ArticleView & view =
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
 
   navPronounce->setEnabled( false );
 
-  view.showDefinition( inWord, groupInstances.empty() ? 0 :
-                        groupInstances[ groupList.currentIndex() ].id );
+  unsigned group = inGroup < 0 ?
+                   ( groupInstances.empty() ? 0 :
+                        groupInstances[ groupList.currentIndex() ].id ):
+                     inGroup;
+
+  view.showDefinition( inWord, group );
 
   updatePronounceAvailability();
+
+  // Add to history
+
+  history.addItem( History::Item( group, inWord.trimmed() ) );
+  history.save();
 
   #if 0
   QUrl req;
@@ -1481,6 +1501,56 @@ void MainWindow::showDictBarNamesTriggered()
   dictionaryBar.setToolButtonStyle( show ? Qt::ToolButtonTextBesideIcon :
                                            Qt::ToolButtonIconOnly );
   cfg.showingDictBarNames = show;
+}
+
+void MainWindow::historyChanged()
+{
+  // Rebuild history menu
+
+  ui.menuHistory->clear();
+
+  QList< History::Item > const & items = history.getItems();
+
+  for( int x = 0; x < items.size(); ++x )
+  {
+    History::Item const * i = &items[ x ];
+
+    Instances::Group const * group = groupInstances.findGroup( i->groupId );
+
+    QIcon icon = group ? group->makeIcon() : QIcon();
+
+    QAction * action = ui.menuHistory->addAction( icon, i->word );
+
+    action->setData( x );
+  }
+
+  ui.menuHistory->addSeparator();
+
+  ui.menuHistory->addAction( ui.clearHistory );
+
+  ui.clearHistory->setEnabled( items.size() );
+}
+
+void MainWindow::on_menuHistory_triggered( QAction * action )
+{
+  if ( action->data().type() != QVariant::Int )
+    return; // Not the item we added
+
+  int index = action->data().toInt();
+
+  QList< History::Item > const & items = history.getItems();
+
+  if ( index < 0 || index >= items.size() )
+    return; // Something's not right
+
+  History::Item const & item = items[ index ];
+
+  showTranslationFor( item.word, item.groupId );
+}
+
+void MainWindow::on_clearHistory_activated()
+{
+  history.clear();
 }
 
 void MainWindow::setAutostart(bool autostart)

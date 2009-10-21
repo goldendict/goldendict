@@ -12,6 +12,7 @@
 #include "ui_scanpopup.h"
 #include <QDialog>
 #include <QClipboard>
+#include "history.hh"
 
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
@@ -25,7 +26,8 @@ public:
              Config::Class & cfg,
              ArticleNetworkAccessManager &,
              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
-             Instances::Groups const & );
+             Instances::Groups const &,
+             History & );
 
   ~ScanPopup();
   
@@ -55,6 +57,7 @@ private:
   bool isScanningEnabled;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
   Instances::Groups const & groups;
+  History & history;
   Ui::ScanPopup ui;
   ArticleView * definition;
   QAction escapeAction;

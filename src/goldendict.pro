@@ -119,7 +119,9 @@ HEADERS += folding.hh \
     orderandprops.hh \
     language.hh \
     dictionarybar.hh \
-    broken_xrecord.hh
+    broken_xrecord.hh \
+    history.hh \
+    atomic_rename.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -190,7 +192,9 @@ SOURCES += folding.cc \
     orderandprops.cc \
     language.cc \
     dictionarybar.cc \
-    broken_xrecord.cc
+    broken_xrecord.cc \
+    history.cc \
+    atomic_rename.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h
@@ -201,7 +205,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/zh_CN.ts \
     locale/cs_CZ.ts \
     locale/de_DE.ts \
-    locale/el_GR.ts
+    locale/el_GR.ts \
+    locale/bg_BG.ts
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease

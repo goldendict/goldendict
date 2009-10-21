@@ -21,6 +21,7 @@
 #include "wordfinder.hh"
 #include "hotkeywrapper.hh"
 #include "dictionarybar.hh"
+#include "history.hh"
 
 using std::string;
 using std::vector;
@@ -56,6 +57,7 @@ private:
   QToolButton addTab;
   Config::Class & cfg;
   Config::Events configEvents;
+  History history;
   DictionaryBar dictionaryBar;
   vector< sptr< Dictionary::Class > > dictionaries;
   /// Here we store unmuted dictionaries when the dictionary bar is active
@@ -200,7 +202,7 @@ private slots:
 
   void mutedDictionariesChanged();
 
-  void showTranslationFor( QString const & );
+  void showTranslationFor( QString const &, int inGroup = -1 );
 
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
 
@@ -215,6 +217,10 @@ private slots:
   void showAbout();
 
   void showDictBarNamesTriggered();
+
+  void historyChanged();
+  void on_menuHistory_triggered( QAction * );
+  void on_clearHistory_activated();
 
   void on_actionCloseToTray_activated();
   

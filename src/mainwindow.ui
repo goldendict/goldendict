@@ -97,9 +97,17 @@
      <string>&amp;View</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuHistory">
+    <property name="title">
+     <string>&amp;History</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="clearHistory"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menu_Edit"/>
+   <addaction name="menuHistory"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -352,6 +360,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F5</string>
+   </property>
+  </action>
+  <action name="clearHistory">
+   <property name="text">
+    <string>&amp;Clear</string>
    </property>
   </action>
  </widget>

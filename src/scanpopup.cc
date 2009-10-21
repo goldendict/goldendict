@@ -19,12 +19,14 @@ ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
                       ArticleNetworkAccessManager & articleNetMgr,                      
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
-                      Instances::Groups const & groups_ ):
+                      Instances::Groups const & groups_,
+                      History & history_ ):
   QDialog( parent ),
   cfg( cfg_ ),
   isScanningEnabled( false ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
+  history( history_ ),
   escapeAction( this ),
   wordFinder( this ),
   mouseEnteredOnce( false ),
@@ -294,6 +296,10 @@ void ScanPopup::initiateTranslation()
 
   definition->showDefinition( inputWord, ui.groupList->getCurrentGroup() );
   wordFinder.prefixMatch( inputWord, getActiveDicts() );
+
+  history.addItem( History::Item( ui.groupList->getCurrentGroup(),
+                                  inputWord.trimmed() ) );
+  history.save();
 }
 
 vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
