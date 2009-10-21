@@ -867,6 +867,12 @@ void MainWindow::translateInputChanged( QString const & newValue )
   if ( !statusBar()->currentMessage().isEmpty() )
     statusBar()->clearMessage();
 
+  // If some word is selected in the word list, unselect it. This prevents
+  // triggering a set of spurious activation signals when the list changes.
+
+  if ( ui.wordList->selectionModel()->hasSelection() )
+    ui.wordList->setCurrentItem( 0, QItemSelectionModel::Clear );
+
   QString req = newValue.trimmed();
 
   if ( !req.size() )
