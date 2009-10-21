@@ -14,10 +14,9 @@
 
 #ifdef Q_OS_WIN32
 #include "shlobj.h"
-#include <windows.h>
 #endif
 
-#include <stdio.h>
+#include "atomic_rename.hh"
 
 namespace Config {
 
@@ -983,27 +982,7 @@ void save( Class const & c ) throw( exError )
 
   configFile.close();
 
-  /// Now rename it atomically. Qt does not have such a facility.
-
-#ifdef Q_OS_WIN32
-
-  QString srcFile( QDir::toNativeSeparators( configFile.fileName() ) );
-  QVector< wchar_t > srcFileW( srcFile.size() + 1 );
-  srcFileW[ srcFile.toWCharArray( srcFileW.data() ) ] = 0;
-
-  QString destFile( QDir::toNativeSeparators( getConfigFileName() ) );
-  QVector< wchar_t > destFileW( destFile.size() + 1 );
-  destFileW[ destFile.toWCharArray( destFileW.data() ) ] = 0;
-
-  if ( !MoveFileExW( srcFileW.data(), destFileW.data(),  MOVEFILE_REPLACE_EXISTING ) )
-    throw exCantWriteConfigFile();
-#else
-
-  if ( rename( QFile::encodeName( QDir::toNativeSeparators( configFile.fileName() ) ).data(),
-               QFile::encodeName( QDir::toNativeSeparators( getConfigFileName() ) ).data() ) )
-    throw exCantWriteConfigFile();
-
-#endif
+  renameAtomically( configFile.fileName(), getConfigFileName() );
 }
 
 QString getIndexDir() throw( exError )
@@ -1021,6 +1000,11 @@ QString getIndexDir() throw( exError )
 QString getPidFileName() throw( exError )
 {
   return getHomeDir().filePath( "pid" );
+}
+
+QString getHistoryFileName() throw( exError )
+{
+  return getHomeDir().filePath( "history" );
 }
 
 QString getUserCssFileName() throw( exError )

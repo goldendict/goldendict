@@ -353,6 +353,9 @@ QString getIndexDir() throw( exError );
 /// the process.
 QString getPidFileName() throw( exError );
 
+/// Returns the filename of a history file which stores search history.
+QString getHistoryFileName() throw( exError );
+
 /// Returns the user .css file name.
 QString getUserCssFileName() throw( exError );
 
