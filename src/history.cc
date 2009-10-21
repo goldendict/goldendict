@@ -48,6 +48,12 @@ History::History( Load, unsigned size ): maxSize( size )
 
 void History::addItem( Item const & item )
 {
+  if ( item.word.size() > 60 )
+  {
+    // The search looks bogus. Don't save it.
+    return;
+  }
+
   if ( items.contains( item ) )
     items.removeAll( item );
 
