@@ -510,7 +510,13 @@ void ArticleView::linkClicked( QUrl const & url_ )
 
   tryMangleWebsiteClickedUrl( url, contexts );
 
-  openLink( url, ui.definition->url(), getCurrentArticle(), contexts );
+  if ( !popupView && ui.definition->isMidButtonPressed() )
+  {
+    // Mid button is currently pressed - open the link in new tab
+    emit openLinkInNewTab( url, ui.definition->url(), getCurrentArticle(), contexts );
+  }
+  else
+    openLink( url, ui.definition->url(), getCurrentArticle(), contexts );
 }
 
 void ArticleView::openLink( QUrl const & url, QUrl const & ref,
