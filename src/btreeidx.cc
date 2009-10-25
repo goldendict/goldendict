@@ -43,9 +43,14 @@ enum
   BtreeMaxElements = 2048
 };
 
+BtreeIndex::BtreeIndex():
+  idxFile( 0 ), rootNodeLoaded( false )
+{
+}
+
 BtreeDictionary::BtreeDictionary( string const & id,
                                   vector< string > const & dictionaryFiles ):
-  Dictionary::Class( id, dictionaryFiles ), idxFile( 0 ), rootNodeLoaded( false )
+  Dictionary::Class( id, dictionaryFiles )
 {
 }
 
@@ -56,8 +61,8 @@ string const & BtreeDictionary::ensureInitDone()
   return empty;
 }
 
-void BtreeDictionary::openIndex( IndexInfo const & indexInfo,
-                                 File::Class & file, Mutex & mutex )
+void BtreeIndex::openIndex( IndexInfo const & indexInfo,
+                            File::Class & file, Mutex & mutex )
 {
   indexNodeSize = indexInfo.btreeMaxElements;
   rootOffset = indexInfo.rootOffset;
@@ -69,7 +74,7 @@ void BtreeDictionary::openIndex( IndexInfo const & indexInfo,
   rootNode.clear();
 }
 
-vector< WordArticleLink > BtreeDictionary::findArticles( wstring const & str )
+vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
 {
   vector< WordArticleLink > result;
 
@@ -312,7 +317,7 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
                                      false, maxResults );
 }
 
-void BtreeDictionary::readNode( uint32_t offset, vector< char > & out )
+void BtreeIndex::readNode( uint32_t offset, vector< char > & out )
 {
   idxFile->seek( offset );
 
@@ -349,11 +354,11 @@ void BtreeDictionary::readNode( uint32_t offset, vector< char > & out )
   #endif
 }
 
-char const * BtreeDictionary::findChainOffsetExactOrPrefix( wstring const & target,
-                                                            bool & exactMatch,
-                                                            vector< char > & extLeaf,
-                                                            uint32_t & nextLeaf,
-                                                            char const * & leafEnd )
+char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
+                                                       bool & exactMatch,
+                                                       vector< char > & extLeaf,
+                                                       uint32_t & nextLeaf,
+                                                       char const * & leafEnd )
 {
   if ( !idxFile )
     throw exIndexWasNotOpened();
@@ -658,7 +663,7 @@ char const * BtreeDictionary::findChainOffsetExactOrPrefix( wstring const & targ
   }
 }
 
-vector< WordArticleLink > BtreeDictionary::readChain( char const * & ptr )
+vector< WordArticleLink > BtreeIndex::readChain( char const * & ptr )
 {
   uint32_t chainSize;
 
@@ -695,8 +700,8 @@ vector< WordArticleLink > BtreeDictionary::readChain( char const * & ptr )
   return result;
 }
 
-void BtreeDictionary::antialias( wstring const & str,
-                                 vector< WordArticleLink > & chain )
+void BtreeIndex::antialias( wstring const & str,
+                            vector< WordArticleLink > & chain )
 {
   wstring caseFolded = Folding::applySimpleCaseOnly( str );
 
@@ -953,6 +958,16 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
         break;
     }
   }
+}
+
+void IndexedWords::addSingleWord( wstring const & word, uint32_t articleOffset )
+{
+  vector< WordArticleLink > links( 1, WordArticleLink( Utf8::encode( word ),
+                                                       articleOffset ) );
+
+  insert(
+      IndexedWords::value_type(
+          Utf8::encode( Folding::apply( word ) ), links ) );
 }
 
 IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )

@@ -65,36 +65,16 @@ struct IndexInfo
   {}
 };
 
-class BtreeWordSearchRequest;
-
-/// A base for the dictionary that utilizes a btree index build using
-/// buildIndex() function declared below.
-class BtreeDictionary: public Dictionary::Class
+/// Base btree indexing class which allows using what buildIndex() function
+/// created. It's quite low-lovel and is basically a set of 'bulding blocks'
+/// functions.
+class BtreeIndex
 {
 public:
 
-  BtreeDictionary( string const & id, vector< string > const & dictionaryFiles );
-
-  /// This function does the search using the btree index. Derivatives
-  /// need not to implement this function.
-  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
-                                                             unsigned long )
-    throw( std::exception );
-
-  virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
-                                                              unsigned minLength,
-                                                              unsigned maxSuffixVariation,
-                                                              unsigned long maxResults )
-    throw( std::exception );
+  BtreeIndex();
 
 protected:
-
-  /// Called before each matching operation to ensure that any child init
-  /// has completed. Mainly used for deferred init. The default implementation
-  /// does nothing.
-  /// The function returns an empty string if the initialization is or was
-  /// successful, or a human-readable error string otherwise.
-  virtual string const & ensureInitDone();
 
   /// Opens the index. The file reference is saved to be used for
   /// subsequent lookups.
@@ -104,16 +84,6 @@ protected:
   /// Finds articles that match the given string. A case-insensitive search
   /// is performed.
   vector< WordArticleLink > findArticles( wstring const & );
-
-private:
-
-  Mutex * idxFileMutex;
-  File::Class * idxFile;
-  uint32_t indexNodeSize;
-  uint32_t rootOffset;
-  bool rootNodeLoaded;
-  vector< char > rootNode; // We load root note here and keep it at all times,
-                           // since all searches always start with it.
 
   /// Finds the offset in the btree leaf for the given word, either matching
   /// by an exact match, or by finding the smallest entry that might match
@@ -145,6 +115,51 @@ private:
   /// are left.
   void antialias( wstring const &, vector< WordArticleLink > & );
 
+protected:
+
+  Mutex * idxFileMutex;
+  File::Class * idxFile;
+
+private:
+
+  uint32_t indexNodeSize;
+  uint32_t rootOffset;
+  bool rootNodeLoaded;
+  vector< char > rootNode; // We load root note here and keep it at all times,
+                           // since all searches always start with it.
+};
+
+class BtreeWordSearchRequest;
+
+/// A base for the dictionary that utilizes a btree index build using
+/// buildIndex() function declared below.
+class BtreeDictionary: public Dictionary::Class, public BtreeIndex
+{
+public:
+
+  BtreeDictionary( string const & id, vector< string > const & dictionaryFiles );
+
+  /// This function does the search using the btree index. Derivatives
+  /// need not to implement this function.
+  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
+                                                             unsigned long )
+    throw( std::exception );
+
+  virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
+                                                              unsigned minLength,
+                                                              unsigned maxSuffixVariation,
+                                                              unsigned long maxResults )
+    throw( std::exception );
+
+protected:
+
+  /// Called before each matching operation to ensure that any child init
+  /// has completed. Mainly used for deferred init. The default implementation
+  /// does nothing.
+  /// The function returns an empty string if the initialization is or was
+  /// successful, or a human-readable error string otherwise.
+  virtual string const & ensureInitDone();
+
   friend class BtreeWordSearchRequest;
 };
 
@@ -160,6 +175,10 @@ struct IndexedWords: public map< string, vector< WordArticleLink > >
   /// itself, and for phrases/sentences it adds additional entries beginning with
   /// each new word.
   void addWord( wstring const & word, uint32_t articleOffset );
+
+  /// Differs from addWord() in that it only adds a single entry. We use this
+  /// for zip's file names.
+  void addSingleWord( wstring const & word, uint32_t articleOffset );
 };
 
 /// Builds the index, as a compressed btree. Returns IndexInfo.

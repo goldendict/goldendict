@@ -15,9 +15,10 @@
 #include "audiolink.hh"
 #include "langcoder.hh"
 #include "wstring_qt.hh"
+#include "zipfile.hh"
+#include "indexedzip.hh"
 
 #include <zlib.h>
-#include "libzip/zip.h"
 #include <map>
 #include <set>
 #include <string>
@@ -68,13 +69,17 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 13 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 14 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentZipSupportVersion = 1
 };
 
 struct IdxHeader
 {
   uint32_t signature; // First comes the signature, DSLX
   uint32_t formatVersion; // File format version (CurrentFormatVersion)
+  uint32_t zipSupportVersion; // Zip support version -- narrows down reindexing
+                              // when it changes only for dictionaries with the
+                              // zip files
   int dslEncoding; // Which encoding is used for the file indexed
   uint32_t chunksOffset; // The offset to chunks' storage
   uint32_t hasAbrv; // Non-zero means file has abrvs at abrvAddress
@@ -85,13 +90,18 @@ struct IdxHeader
   uint32_t wordCount; // Number of headwords this dictionary has
   uint32_t langFrom;  // Source language
   uint32_t langTo;    // Target language
-} 
+  uint32_t hasZipFile; // Non-zero means there's a zip file with resources
+                       // present
+  uint32_t zipIndexBtreeMaxElements; // Two fields from IndexInfo of the zip
+                                     // resource index.
+  uint32_t zipIndexRootOffset;
+}
 #ifndef _MSC_VER
 __attribute__((packed))
 #endif
 ;
 
-bool indexIsOldOrBad( string const & indexFile )
+bool indexIsOldOrBad( string const & indexFile, bool hasZipFile )
 {
   File::Class idx( indexFile, "rb" );
 
@@ -99,7 +109,9 @@ bool indexIsOldOrBad( string const & indexFile )
 
   return idx.readRecords( &header, sizeof( header ), 1 ) != 1 ||
          header.signature != Signature ||
-         header.formatVersion != CurrentFormatVersion;
+         header.formatVersion != CurrentFormatVersion ||
+         (bool) header.hasZipFile != hasZipFile ||
+         ( hasZipFile && header.zipSupportVersion != CurrentZipSupportVersion );
 }
 
 class DslDictionary: public BtreeIndexing::BtreeDictionary
@@ -113,7 +125,8 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   Mutex dzMutex;
   dictData * dz;
   Mutex resourceZipMutex;
-  zip * resourceZip;
+  IndexedZip resourceZip;
+  BtreeIndex resourceZipIndex;
   QIcon dictionaryNativeIcon, dictionaryIcon;
   bool dictionaryIconLoaded;
 
@@ -205,7 +218,6 @@ DslDictionary::DslDictionary( string const & id,
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
   dz( 0 ),
-  resourceZip( 0 ),
   dictionaryIconLoaded( false ),
   deferredInitRunnableStarted( false )
 {
@@ -227,9 +239,6 @@ DslDictionary::~DslDictionary()
   // Wait for init runnable to complete if it was ever started
   if ( deferredInitRunnableStarted )
     deferredInitRunnableExited.acquire();
-
-  if ( resourceZip )
-    zip_close( resourceZip );
 
   if ( dz )
     dict_data_close( dz );
@@ -354,21 +363,21 @@ void DslDictionary::doDeferredInit()
                             idxHeader.indexRootOffset ),
                  idx, idxMutex );
 
-      string const & dictionaryFilename = getDictionaryFilenames()[ 0 ];
-
       // Open a resource zip file, if there's one
-      resourceZip = zip_open( ( dictionaryFilename + ".files.zip" ).c_str(), 0, 0 );
 
-
-      // If failed, try without the .dz extension
-      if ( !resourceZip && dictionaryFilename.size() >= 3 &&
-           ( !dictionaryFilename.compare( dictionaryFilename.size() - 3, 3, ".dz" ) ||
-             !dictionaryFilename.compare( dictionaryFilename.size() - 3, 3, ".DZ" )
-           )
-         )
+      if ( idxHeader.hasZipFile &&
+           ( idxHeader.zipIndexBtreeMaxElements ||
+             idxHeader.zipIndexRootOffset ) )
       {
-        resourceZip = zip_open(
-            ( dictionaryFilename.substr( 0, dictionaryFilename.size() - 3 )  + ".files.zip" ).c_str(), 0, 0 );
+        resourceZip.openIndex( IndexInfo( idxHeader.zipIndexBtreeMaxElements,
+                                          idxHeader.zipIndexRootOffset ),
+                               idx, idxMutex );
+
+        QString zipName = QDir::fromNativeSeparators(
+            QFile::decodeName( getDictionaryFilenames().back().c_str() ) );
+
+        if ( zipName.endsWith( ".zip", Qt::CaseInsensitive ) ) // Sanity check
+          resourceZip.openZipFile( zipName );
       }
     }
     catch( std::exception & e )
@@ -747,47 +756,13 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
         FsEncoding::separator() +
         FsEncoding::encode( filename );
 
-      bool search = true;
+      bool search =
 
-      try
-      {
-        try
-        {
-          File::Class f( n, "rb" );
-        }
-        catch( File::exCantOpen & )
-        {
-          n = getDictionaryFilenames()[ 0 ] + ".files" +
-              FsEncoding::separator() +
-              FsEncoding::encode( filename );
-
-          try
-          {
-            File::Class f( n, "rb" );
-          }
-          catch( File::exCantOpen & )
-          {
-            // Try zip file
-
-            if ( resourceZip )
-            {
-              string fname = FsEncoding::encode( filename );
-
-              int result = zip_name_locate( resourceZip, fname.c_str(), ZIP_FL_NOCASE );
-
-              if ( result == -1 )
-                throw;
-            }
-            else
-              throw;
-          }
-        }
-
-        search = false;
-      }
-      catch( File::Ex & )
-      {
-      }
+        !File::exists( n ) && !File::exists( getDictionaryFilenames()[ 0 ] + ".files" +
+                                             FsEncoding::separator() +
+                                             FsEncoding::encode( filename ) ) &&
+          ( !resourceZip.isOpen() ||
+            !resourceZip.hasFile( Utf8::decode( filename ) ) );
 
       QUrl url;
       url.setScheme( "gdau" );
@@ -1227,43 +1202,14 @@ void DslResourceRequest::run()
       {
         // Try reading from zip file
 
-        if ( dict.resourceZip )
+        if ( dict.resourceZip.isOpen() )
         {
-          string fname = FsEncoding::encode( resourceName );
-
-          struct zip_stat st;
-          zip_file * zf;
-
-          zip_stat_init( &st );
-
           Mutex::Lock _( dict.resourceZipMutex );
 
-          int fileIndex;
+          Mutex::Lock __( dataMutex );
 
-          // We ignore case in zip files since most dsls are created for Windows,
-          // where names are case-insensitive.
-          if ( !isCancelled &&
-               ( fileIndex = zip_name_locate( dict.resourceZip, fname.c_str(), ZIP_FL_NOCASE ) ) != -1 &&
-               !zip_stat_index( dict.resourceZip, fileIndex, 0, &st ) &&
-               ( zf = zip_fopen_index( dict.resourceZip, fileIndex, 0 ) ) )
-          {
-            int result;
-
-            {
-              Mutex::Lock _( dataMutex );
-
-              data.resize( st.size );
-
-              result = zip_fread( zf, &data.front(), data.size() );
-            }
-
-            zip_fclose( zf );
-
-            if ( result != (int)st.size )
-              throw; // Make it fail since we couldn't read the archive
-          }
-          else
-            throw;
+          if ( !dict.resourceZip.loadFile( Utf8::decode( resourceName ), data ) )
+            throw; // Make it fail since we couldn't read the archive
         }
         else
           throw;
@@ -1306,6 +1252,11 @@ void DslResourceRequest::run()
   {
     // No such resource -- we don't set the hasAnyData flag then
   }
+  catch( Utf8::exCantDecode )
+  {
+    // Failed to decode some utf8 -- probably the resource name is no good
+  }
+
   finish();
 }
 
@@ -1417,10 +1368,20 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
 
+      // See if there's a zip file with resources present. If so, include it.
+
+      string zipFileName;
+
+      if ( tryPossibleName( baseName + ".dsl.files.zip", zipFileName ) ||
+           tryPossibleName( baseName + ".dsl.dz.files.zip", zipFileName ) ||
+           tryPossibleName( baseName + ".DSL.FILES.ZIP", zipFileName ) ||
+           tryPossibleName( baseName + ".DSL.DZ.FILES.ZIP", zipFileName ) )
+        dictFiles.push_back( zipFileName );
+
       string indexFile = indicesDir + dictId;
 
       if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
-           indexIsOldOrBad( indexFile ) )
+           indexIsOldOrBad( indexFile, zipFileName.size() ) )
       {
         DslScanner scanner( *i );
 
@@ -1671,10 +1632,137 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
         idxHeader.indexRootOffset = idxInfo.rootOffset;
 
+        indexedWords.clear(); // Release memory -- no need for this data
+
+        // If there was a zip file, index it too
+
+        if ( zipFileName.size() )
+        {
+          printf( "Indexing zip file\n" );
+
+          idxHeader.hasZipFile = 1;
+
+          QFile zipFile( QDir::fromNativeSeparators(
+                           QFile::decodeName( zipFileName.c_str() ) ) );
+
+          if ( !zipFile.open( QFile::ReadOnly ) )
+            throw exCantReadFile( zipFileName );
+
+          if ( ZipFile::positionAtCentralDir( zipFile ) )
+          {
+            // File seems to be a valid zip file
+
+            IndexedWords zipFileNames;
+
+            ZipFile::CentralDirEntry entry;
+
+            while( ZipFile::readNextEntry( zipFile, entry ) )
+            {
+              if ( entry.compressionMethod == ZipFile::Unsupported )
+              {
+                printf( "Warning: compression method unsupported -- skipping file %s\n",
+                        entry.fileName.data() );
+                continue;
+              }
+
+              // Check if the file name has some non-ascii letters.
+
+              unsigned char const * ptr = ( unsigned char const * )
+                                            entry.fileName.constData();
+
+              bool hasNonAscii = false;
+
+              for( ; ; )
+              {
+                if ( *ptr & 0x80 )
+                {
+                  hasNonAscii = true;
+                  break;
+                }
+                else
+                if ( !*ptr++ )
+                  break;
+              }
+
+              if ( !hasNonAscii )
+              {
+                // Add entry as is
+
+                zipFileNames.addSingleWord( Utf8::decode( entry.fileName.data() ),
+                                            entry.localHeaderOffset );
+              }
+              else
+              {
+                // Try assuming different encodings. Those are UTF8 and two
+                // Russian ones (Windows and Windows OEM). Unfortunately, zip
+                // files do not say which encoding they utilize.
+
+                // Utf8
+                try
+                {
+                  wstring decoded = Utf8::decode( entry.fileName.constData() );
+
+                  zipFileNames.addSingleWord( decoded,
+                                              entry.localHeaderOffset );
+                }
+                catch( Utf8::exCantDecode )
+                {
+                  // Failed to decode
+                }
+
+                // CP866
+                try
+                {
+                  wstring decoded = Iconv::toWstring( "CP866", entry.fileName.constData(),
+                                                      entry.fileName.size() );
+
+                  zipFileNames.addSingleWord( decoded,
+                                              entry.localHeaderOffset );
+                }
+                catch( Iconv::Ex )
+                {
+                  // Failed to decode
+                }
+
+                // CP1251
+                try
+                {
+                  wstring decoded = Iconv::toWstring( "CP1251", entry.fileName.constData(),
+                                                      entry.fileName.size() );
+
+                  zipFileNames.addSingleWord( decoded,
+                                              entry.localHeaderOffset );
+                }
+                catch( Iconv::Ex )
+                {
+                  // Failed to decode
+                }
+              }
+            }
+
+            // Build the resulting zip file index
+
+            IndexInfo idxInfo = BtreeIndexing::buildIndex( zipFileNames, idx );
+
+            idxHeader.zipIndexBtreeMaxElements = idxInfo.btreeMaxElements;
+            idxHeader.zipIndexRootOffset = idxInfo.rootOffset;
+          }
+          else
+          {
+            // Bad zip file -- no index (though the mark that we have one
+            // remains)
+            idxHeader.zipIndexBtreeMaxElements = 0;
+            idxHeader.zipIndexRootOffset = 0;
+          }
+        }
+        else
+          idxHeader.hasZipFile = 0;
+
         // That concludes it. Update the header.
 
         idxHeader.signature = Signature;
         idxHeader.formatVersion = CurrentFormatVersion;
+        idxHeader.zipSupportVersion = CurrentZipSupportVersion;
 
         idxHeader.articleCount = articleCount;
         idxHeader.wordCount = wordCount;

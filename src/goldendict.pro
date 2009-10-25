@@ -122,7 +122,9 @@ HEADERS += folding.hh \
     broken_xrecord.hh \
     history.hh \
     atomic_rename.hh \
-    articlewebview.hh
+    articlewebview.hh \
+    zipfile.hh \
+    indexedzip.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -196,7 +198,9 @@ SOURCES += folding.cc \
     broken_xrecord.cc \
     history.cc \
     atomic_rename.cc \
-    articlewebview.cc
+    articlewebview.cc \
+    zipfile.cc \
+    indexedzip.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h
