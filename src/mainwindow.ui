@@ -99,7 +99,7 @@
    </widget>
    <widget class="QMenu" name="menuHistory">
     <property name="title">
-     <string>&amp;History</string>
+     <string>Hi&amp;story</string>
     </property>
     <addaction name="separator"/>
     <addaction name="clearHistory"/>
