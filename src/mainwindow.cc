@@ -187,6 +187,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &history, SIGNAL( itemsChanged() ),
            this, SLOT( historyChanged() ) );
 
+  connect( ui.menuHistory, SIGNAL(triggered(QAction*)),
+           this, SLOT(menuHistoryTriggered(QAction*)), Qt::QueuedConnection );
+
   // Show tray icon early so the user would be happy. It won't be functional
   // though until the program inits fully.
 
@@ -1536,7 +1539,7 @@ void MainWindow::historyChanged()
   ui.clearHistory->setEnabled( items.size() );
 }
 
-void MainWindow::on_menuHistory_triggered( QAction * action )
+void MainWindow::menuHistoryTriggered( QAction * action )
 {
   if ( action->data().type() != QVariant::Int )
     return; // Not the item we added

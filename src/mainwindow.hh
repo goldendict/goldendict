@@ -219,7 +219,7 @@ private slots:
   void showDictBarNamesTriggered();
 
   void historyChanged();
-  void on_menuHistory_triggered( QAction * );
+  void menuHistoryTriggered( QAction * );
   void on_clearHistory_activated();
 
   void on_actionCloseToTray_activated();
