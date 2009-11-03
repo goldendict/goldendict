@@ -5,7 +5,7 @@
     <name></name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>XML语法错误：%1于%2,%3</translation>
+        <translation>XML 语法错误：%1 于 %2, %3</translation>
     </message>
 </context>
 <context>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>GoldenDict电子词典程序，版本号</translation>
+        <translation>GoldenDict 电子词典程序，版本 </translation>
     </message>
     <message>
         <source>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</source>
@@ -28,30 +28,30 @@
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>授权基于GNU公共授权GPLv3或更高版本</translation>
+        <translation>授权基于 GNU 公共授权 GPLv3 或更高版本</translation>
     </message>
 </context>
 <context>
     <name>ArticleMaker</name>
     <message>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>然后只要将鼠标指针停留在你想要进行抓词查询的单词上，程序就会在弹出式窗口里显示释义。</translation>
+        <translation>然后只要将鼠标指针停留在你想要进行抓词查询的单词上，程序就会在弹出式窗口中显示释义。</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;使用屏幕取词功能&lt;/h3&gt;如要从其他程序里直接进行抓词查询的话，需要首先在&lt;b&gt;使用偏好&lt;/b&gt;里启用&lt;i&gt;&quot;屏幕取词功能&quot;&lt;/i&gt;，然后点击上面的&quot;弹出菜单&quot;图标，或者右键点击系统托盘图标后从弹出菜单里选定&quot;屏幕取词&quot;以激活此功能。</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;使用屏幕取词功能&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;如要从其它程序中直接进行抓词查询，需要首先在&lt;b&gt;首选项&lt;/b&gt;中启用“屏幕取词功能”，然后点击上面的“弹出菜单”图标，或者右键点击系统托盘图标后从弹出菜单中选定“屏幕取词”以激活此功能。</translation>
     </message>
     <message>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>在&lt;b&gt;%2&lt;/b&gt;组群里找不到&lt;b&gt;%1&lt;/b&gt;的可用翻译。</translation>
+        <translation>在&lt;b&gt;%2&lt;/b&gt;群组中找不到&lt;b&gt;%1&lt;/b&gt;的可用翻译。</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;欢迎使用&lt;b&gt;GoldenDict&lt;/b&gt;词典程序！&lt;/h3&gt;&lt;p&gt;使用时请首先打开&lt;b&gt;编辑 | 词典&lt;/b&gt;菜单以添加并扫描含有词典文件的目录，添加维基百科网站查询或其他资源，调整词典排序或创建新的词典组群。&lt;p&gt;这些设定都完成之后，就可以开始使用了。你可以把要查的词汇输入到左侧的查询框里，或者&lt;a href=&quot;使用屏幕抓词&quot;&gt;来直接从其他程序里抓词查询&lt;/a&gt;，&lt;p&gt;如需要改变设定，可以在&lt;b&gt;编辑 | 使用偏好&lt;/b&gt;菜单里查看一下可用的系统设定。所有的设定都有鼠标指针提示信息，如果有不明之处的话请仔细阅读提示信息。&lt;p&gt;如果你需要帮助，有任何疑问、建议，或者想看看其他人是怎么说的，欢迎访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;官方论坛&lt;/a&gt;。&lt;p&gt;访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;官方网站&lt;/a&gt;以获取更新。&lt;p&gt;(c) 2008-2009 Konstantin Isakov. 授权基于GPLv3或更高版本。</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;欢迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 词典程序！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用时请首先打开&lt;b&gt;编辑 | 词典&lt;/b&gt;菜单以添加并扫描含有词典文件的目录，添加维基百科网站查询或其它资源，调整词典排序或创建新的词典群组。&lt;p style=&quot;text-indent:2em&quot;&gt;这些设置都完成以后，就可以开始使用了。你可以使用左侧的查询面板，或者&lt;a href=&quot;使用屏幕取词功能&quot;&gt;直接从其它程序中抓词查询&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要改变设置，可以在&lt;b&gt;编辑 | 首选项&lt;/b&gt;菜单中查看一下可用的系统设置。所有的设置都有鼠标指针提示信息，如果有不明之处，请仔细阅读提示信息。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要帮助，有任何疑问、建议，或者想看看其他人是怎么说的，欢迎访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;官方论坛&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;官方网站&lt;/a&gt;以获取更新。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2009 Konstantin Isakov. 授权基于 GPLv3 或更高版本。</translation>
     </message>
     <message>
         <source>Working with popup</source>
-        <translation>使用弹出式窗口</translation>
+        <translation>使用屏幕取词功能</translation>
     </message>
     <message>
         <source>(untitled)</source>
@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>然后只要用鼠标指针选定你要进行抓词查询的词（双击单词或者用鼠标拖拉选定），程序就会在弹出式窗口里显示释义。</translation>
+        <translation>然后只要用鼠标指针选定你要进行抓词查询的词（双击单词或者用鼠标拖拉选定），程序就会在弹出式窗口中显示释义。</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>没有可用的播放器，无法打开声音文件：%1</translation>
+        <translation>没有可用的播放器，无法打开音频文件：%1</translation>
     </message>
     <message>
         <source>&amp;Next</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>&amp;Look up &quot;%1&quot;</source>
-        <translation>查找&quot;%1&quot;(&amp;L)</translation>
+        <translation>查找 &quot;%1&quot;(&amp;L)</translation>
     </message>
     <message>
         <source>about:blank</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>在新标签页中查找&quot;%1&quot;(&amp;N)</translation>
+        <translation>在新标签页中查找 &quot;%1&quot;(&amp;N)</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -153,11 +153,11 @@
     </message>
     <message>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>在%2中查找&quot;%1&quot;</translation>
+        <translation>在 %2 中查找 &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>在%2中查找&quot;%1&quot;并打开新标签页(&amp;N)</translation>
+        <translation>在 %2 中查找 &quot;%1&quot; 并使用新标签页(&amp;N)</translation>
     </message>
     <message>
         <source>Open Link in New &amp;Tab</source>
@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>在外部浏览器中打开链接(&amp;E)</translation>
     </message>
 </context>
 <context>
@@ -176,21 +176,21 @@
     </message>
     <message>
         <source>Group icon:</source>
-        <translation>组群图标：</translation>
+        <translation>群组图标：</translation>
     </message>
 </context>
 <context>
     <name>DictListModel</name>
     <message>
         <source>%1 entries</source>
-        <translation>%1个项目</translation>
+        <translation>%1 条记录</translation>
     </message>
 </context>
 <context>
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>词典栏</translation>
     </message>
 </context>
 <context>
@@ -221,7 +221,7 @@
     </message>
     <message>
         <source>&amp;Groups</source>
-        <translation>组群(&amp;G)</translation>
+        <translation>群组(&amp;G)</translation>
     </message>
     <message>
         <source>Some sources were changed. Would you like to accept the changes?</source>
@@ -239,7 +239,7 @@
     <name>GroupComboBox</name>
     <message>
         <source>Choose a Group (Alt+G)</source>
-        <translation>选择一个组群(Alt+G)</translation>
+        <translation>选择一个群组(Alt+G)</translation>
     </message>
 </context>
 <context>
@@ -273,27 +273,27 @@
     </message>
     <message>
         <source>Tab 2</source>
-        <translation>标签页2</translation>
+        <translation>标签页 2</translation>
     </message>
     <message>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>确定移除全部组群吗？</translation>
+        <translation>确定移除全部群组吗？</translation>
     </message>
     <message>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>确定要移除&lt;b&gt;%1&lt;/b&gt;组群吗？</translation>
+        <translation>确定要移除&lt;b&gt;%1&lt;/b&gt;群组吗？</translation>
     </message>
     <message>
         <source>Remove group</source>
-        <translation>移除组群</translation>
+        <translation>移除群组</translation>
     </message>
     <message>
         <source>Rename group</source>
-        <translation>重命名组群</translation>
+        <translation>重命名群组</translation>
     </message>
     <message>
         <source>Give a new name for the group:</source>
-        <translation>为组群起一个新名字：</translation>
+        <translation>为群组起一个新名字：</translation>
     </message>
     <message>
         <source>Dictionaries available:</source>
@@ -301,59 +301,59 @@
     </message>
     <message>
         <source>&amp;Add group</source>
-        <translation>添加组群(&amp;A)</translation>
+        <translation>添加群组(&amp;A)</translation>
     </message>
     <message>
         <source>Add group</source>
-        <translation>添加组群</translation>
+        <translation>添加群组</translation>
     </message>
     <message>
         <source>Create new dictionary group</source>
-        <translation>创建新的词典组群</translation>
+        <translation>创建新的词典群组</translation>
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>可以用鼠标拖拽词典以改变其组群设置或排序。(&amp;D)</translation>
+        <translation>可以用鼠标拖拽词典以改变其群组设置或排序。(&amp;D)</translation>
     </message>
     <message>
         <source>Rename current dictionary group</source>
-        <translation>重命名当前词典组群</translation>
+        <translation>重命名当前词典群组</translation>
     </message>
     <message>
         <source>Remove current dictionary group</source>
-        <translation>移除词典组群</translation>
+        <translation>移除词典群组</translation>
     </message>
     <message>
         <source>Give a name for the new group:</source>
-        <translation>为新组群命名：</translation>
+        <translation>为新群组命名：</translation>
     </message>
     <message>
         <source>Remove all groups</source>
-        <translation>移除全部组群</translation>
+        <translation>移除全部群组</translation>
     </message>
     <message>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>将所选词典从组群中移除(Del)</translation>
+        <translation>将所选词典从群组中移除(Del)</translation>
     </message>
     <message>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>将所选词典添加进组群(Ins)</translation>
+        <translation>将所选词典添加进群组(Ins)</translation>
     </message>
     <message>
         <source>&amp;Remove group</source>
-        <translation>移除组群(&amp;R)</translation>
+        <translation>移除群组(&amp;R)</translation>
     </message>
     <message>
         <source>Groups:</source>
-        <translation>组群：</translation>
+        <translation>群组：</translation>
     </message>
     <message>
         <source>Re&amp;name group</source>
-        <translation>重命名组群(&amp;N)</translation>
+        <translation>重命名群组(&amp;N)</translation>
     </message>
     <message>
         <source>Remove all dictionary groups</source>
-        <translation>移除全部词典组群</translation>
+        <translation>移除全部词典群组</translation>
     </message>
 </context>
 <context>
@@ -364,7 +364,7 @@
     </message>
     <message>
         <source>%1 Morphology</source>
-        <translation>%1构词法</translation>
+        <translation>%1 构词法</translation>
     </message>
 </context>
 <context>
@@ -386,11 +386,11 @@
     </message>
     <message>
         <source>GoldenDict - Initializing</source>
-        <translation>初始化GoldenDict</translation>
+        <translation>初始化 GoldenDict</translation>
     </message>
     <message>
         <source>Please wait while indexing dictionary</source>
-        <translation>读取词典，请稍候</translation>
+        <translation>正在索引词典，请稍候</translation>
     </message>
     <message>
         <source>Please wait...</source>
@@ -413,7 +413,7 @@
     </message>
     <message>
         <source>Twi</source>
-        <translation>Тви</translation>
+        <translation>维特语（加纳）</translation>
     </message>
     <message>
         <source>Afar</source>
@@ -433,7 +433,7 @@
     </message>
     <message>
         <source>Komi</source>
-        <translation>Коми</translation>
+        <translation>科米语</translation>
     </message>
     <message>
         <source>Manx</source>
@@ -441,7 +441,7 @@
     </message>
     <message>
         <source>Pali</source>
-        <translation>Пали</translation>
+        <translation>巴利语</translation>
     </message>
     <message>
         <source>Thai</source>
@@ -465,7 +465,7 @@
     </message>
     <message>
         <source>Ganda</source>
-        <translation>Ганда</translation>
+        <translation>卢甘达语</translation>
     </message>
     <message>
         <source>Fulah</source>
@@ -513,27 +513,27 @@
     </message>
     <message>
         <source>Oriya</source>
-        <translation>Ория</translation>
+        <translation>奥里亚语</translation>
     </message>
     <message>
         <source>Oromo</source>
-        <translation>Оромо</translation>
+        <translation>奥洛莫语</translation>
     </message>
     <message>
         <source>Sango</source>
-        <translation>Санго</translation>
+        <translation>桑戈语</translation>
     </message>
     <message>
         <source>Shona</source>
-        <translation>Схона</translation>
+        <translation>绍纳语</translation>
     </message>
     <message>
         <source>Tajik</source>
-        <translation>Таджикский</translation>
+        <translation>塔吉克语</translation>
     </message>
     <message>
         <source>Tamil</source>
-        <translation>Тамильский</translation>
+        <translation>泰米尔语</translation>
     </message>
     <message>
         <source>Tatar</source>
@@ -541,11 +541,11 @@
     </message>
     <message>
         <source>Swati</source>
-        <translation>Свати</translation>
+        <translation>斯瓦特语</translation>
     </message>
     <message>
         <source>Tonga</source>
-        <translation>Тонга</translation>
+        <translation>东加语</translation>
     </message>
     <message>
         <source>Inupiaq</source>
@@ -553,7 +553,7 @@
     </message>
     <message>
         <source>Venda</source>
-        <translation>Венда</translation>
+        <translation>文达语</translation>
     </message>
     <message>
         <source>Uzbek</source>
@@ -565,11 +565,11 @@
     </message>
     <message>
         <source>Wolof</source>
-        <translation>Уолоф</translation>
+        <translation>沃洛夫语</translation>
     </message>
     <message>
         <source>Xhosa</source>
-        <translation>Кшоса</translation>
+        <translation>科萨语</translation>
     </message>
     <message>
         <source>Italian</source>
@@ -577,7 +577,7 @@
     </message>
     <message>
         <source>Raeto-Romance</source>
-        <translation>Романшский</translation>
+        <translation>罗曼斯语</translation>
     </message>
     <message>
         <source>Dzongkha</source>
@@ -589,7 +589,7 @@
     </message>
     <message>
         <source>North Ndebele</source>
-        <translation>Сев. Ндебеле</translation>
+        <translation>北恩德贝勒语</translation>
     </message>
     <message>
         <source>Abkhazian</source>
@@ -597,11 +597,11 @@
     </message>
     <message>
         <source>Kirghiz</source>
-        <translation>Киргизский</translation>
+        <translation>吉尔吉斯语</translation>
     </message>
     <message>
         <source>Kirundi</source>
-        <translation>Рунди</translation>
+        <translation>科隆地语</translation>
     </message>
     <message>
         <source>Scottish Gaelic</source>
@@ -617,7 +617,7 @@
     </message>
     <message>
         <source>Malayalam</source>
-        <translation>Малайялам</translation>
+        <translation>马拉雅拉姆语</translation>
     </message>
     <message>
         <source>Kurdish</source>
@@ -629,7 +629,7 @@
     </message>
     <message>
         <source>Lingala</source>
-        <translation>Лингала</translation>
+        <translation>林加拉语</translation>
     </message>
     <message>
         <source>Maltese</source>
@@ -637,7 +637,7 @@
     </message>
     <message>
         <source>Marathi</source>
-        <translation>Марати</translation>
+        <translation>马拉地语</translation>
     </message>
     <message>
         <source>Arabic</source>
@@ -665,7 +665,7 @@
     </message>
     <message>
         <source>Sundanese</source>
-        <translation>Сунданский</translation>
+        <translation>巽他语</translation>
     </message>
     <message>
         <source>Danish</source>
@@ -677,7 +677,7 @@
     </message>
     <message>
         <source>Luba-Katanga</source>
-        <translation>Луба-Катанга</translation>
+        <translation>卢巴卡丹加语</translation>
     </message>
     <message>
         <source>Fijian</source>
@@ -729,11 +729,11 @@
     </message>
     <message>
         <source>Navajo</source>
-        <translation>Навахо</translation>
+        <translation>纳瓦霍语</translation>
     </message>
     <message>
         <source>Ndonga</source>
-        <translation>Ндонга</translation>
+        <translation>恩敦加语</translation>
     </message>
     <message>
         <source>Nepali</source>
@@ -741,11 +741,11 @@
     </message>
     <message>
         <source>Ojibwa</source>
-        <translation>Оджибва</translation>
+        <translation>奥吉布瓦语</translation>
     </message>
     <message>
         <source>Pashto</source>
-        <translation>Пуштунский</translation>
+        <translation>普什图语</translation>
     </message>
     <message>
         <source>Polish</source>
@@ -757,11 +757,11 @@
     </message>
     <message>
         <source>Occitan</source>
-        <translation>Французский (диалект Occitan)</translation>
+        <translation>奥西坦语</translation>
     </message>
     <message>
         <source>Sindhi</source>
-        <translation>Синдхи</translation>
+        <translation>信德语</translation>
     </message>
     <message>
         <source>Slovak</source>
@@ -773,15 +773,15 @@
     </message>
     <message>
         <source>Telugu</source>
-        <translation>Телугу</translation>
+        <translation>泰卢固语</translation>
     </message>
     <message>
         <source>Tsonga</source>
-        <translation>Тсонга</translation>
+        <translation>颂加语</translation>
     </message>
     <message>
         <source>Tswana</source>
-        <translation>Тсвана</translation>
+        <translation>茨瓦纳语</translation>
     </message>
     <message>
         <source>Uighur</source>
@@ -793,7 +793,7 @@
     </message>
     <message>
         <source>Yoruba</source>
-        <translation>Йоруба</translation>
+        <translation>约鲁巴语</translation>
     </message>
     <message>
         <source>Zhuang</source>
@@ -809,11 +809,11 @@
     </message>
     <message>
         <source>Panjabi</source>
-        <translation>Панджаби</translation>
+        <translation>旁遮普语</translation>
     </message>
     <message>
         <source>Southern Sotho</source>
-        <translation>Юж. Сото</translation>
+        <translation>梭托语</translation>
     </message>
     <message>
         <source>Corsican</source>
@@ -845,7 +845,7 @@
     </message>
     <message>
         <source>Malagasy</source>
-        <translation>Мальгашский</translation>
+        <translation>马达加斯加语</translation>
     </message>
     <message>
         <source>Galician</source>
@@ -917,7 +917,7 @@
     </message>
     <message>
         <source>Kinyarwanda</source>
-        <translation>Киньяруанда</translation>
+        <translation>卢旺达语</translation>
     </message>
     <message>
         <source>Afrikaans</source>
@@ -933,7 +933,7 @@
     </message>
     <message>
         <source>Norwegian Bokmal</source>
-        <translation>Норвежский букмол</translation>
+        <translation>波克默尔语（挪威）</translation>
     </message>
     <message>
         <source>Croatian</source>
@@ -969,7 +969,7 @@
     </message>
     <message>
         <source>Limburgish</source>
-        <translation>Лимбуржский</translation>
+        <translation>林堡语</translation>
     </message>
     <message>
         <source>Norwegian</source>
@@ -989,7 +989,7 @@
     </message>
     <message>
         <source>Sinhala</source>
-        <translation>Сингальский</translation>
+        <translation>僧加罗语</translation>
     </message>
     <message>
         <source>Spanish</source>
@@ -997,11 +997,11 @@
     </message>
     <message>
         <source>Cornish</source>
-        <translation>Корнуольский</translation>
+        <translation>凯尔特语</translation>
     </message>
     <message>
         <source>Tagalog</source>
-        <translation>Тагалог</translation>
+        <translation>他加禄语（菲律宾）</translation>
     </message>
     <message>
         <source>Assamese</source>
@@ -1009,7 +1009,7 @@
     </message>
     <message>
         <source>Ossetian</source>
-        <translation>Осетинский</translation>
+        <translation>奥塞梯语</translation>
     </message>
     <message>
         <source>Estonian</source>
@@ -1017,7 +1017,7 @@
     </message>
     <message>
         <source>Swahili</source>
-        <translation>Суахили</translation>
+        <translation>斯瓦希里语</translation>
     </message>
     <message>
         <source>Swedish</source>
@@ -1081,11 +1081,11 @@
     </message>
     <message>
         <source>Volapuk</source>
-        <translation>Волапюк</translation>
+        <translation>沃拉普克语</translation>
     </message>
     <message>
         <source>Walloon</source>
-        <translation>Валлонский</translation>
+        <translation>华隆语</translation>
     </message>
     <message>
         <source>Kwanyama</source>
@@ -1097,7 +1097,7 @@
     </message>
     <message>
         <source>Northern Sami</source>
-        <translation>Северное Саами</translation>
+        <translation>北萨莫斯语</translation>
     </message>
     <message>
         <source>Haitian</source>
@@ -1109,7 +1109,7 @@
     </message>
     <message>
         <source>Norwegian Nynorsk</source>
-        <translation>Новонорвежский (нюнорск)</translation>
+        <translation>尼诺斯克语（挪威）</translation>
     </message>
     <message>
         <source>Guarani</source>
@@ -1117,11 +1117,11 @@
     </message>
     <message>
         <source>South Ndebele</source>
-        <translation>Юж. Ндебеле</translation>
+        <translation>南恩德贝勒语</translation>
     </message>
     <message>
         <source>Chichewa</source>
-        <translation>Чичева</translation>
+        <translation>奇契瓦语</translation>
     </message>
     <message>
         <source>Lithuanian</source>
@@ -1133,7 +1133,7 @@
     </message>
     <message>
         <source>Tigrinya</source>
-        <translation>Тигринья</translation>
+        <translation>提格里尼亚语</translation>
     </message>
     <message>
         <source>Yiddish</source>
@@ -1144,7 +1144,7 @@
     <name>LoadDictionaries</name>
     <message>
         <source>Error loading dictionaries</source>
-        <translation>读取词典时出错</translation>
+        <translation>读取词典出错</translation>
     </message>
 </context>
 <context>
@@ -1243,7 +1243,7 @@
     </message>
     <message>
         <source>Save Article As</source>
-        <translation>将文章保存为</translation>
+        <translation>文章另存为</translation>
     </message>
     <message>
         <source>Ctrl+P</source>
@@ -1263,7 +1263,7 @@
     </message>
     <message>
         <source>Page Set&amp;up</source>
-        <translation>页面设定(&amp;U)</translation>
+        <translation>页面设置(&amp;U)</translation>
     </message>
     <message>
         <source>&amp;Homepage</source>
@@ -1283,7 +1283,7 @@
     </message>
     <message>
         <source>&amp;Groups...</source>
-        <translation>组群...(&amp;G)</translation>
+        <translation>群组...(&amp;G)</translation>
     </message>
     <message>
         <source>Show &amp;Main Window</source>
@@ -1291,7 +1291,7 @@
     </message>
     <message>
         <source>About GoldenDict</source>
-        <translation>关于GoldenDict</translation>
+        <translation>关于 GoldenDict</translation>
     </message>
     <message>
         <source>Download</source>
@@ -1299,7 +1299,7 @@
     </message>
     <message>
         <source>Page Setup</source>
-        <translation>页面设定</translation>
+        <translation>页面设置</translation>
     </message>
     <message>
         <source>Look up in:</source>
@@ -1311,16 +1311,16 @@
     </message>
     <message>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>初始化热键监视机制失败。&lt;br&gt;请确保你的XServer已启用RECORD扩展。</translation>
+        <translation>初始化热键监视机制失败。&lt;br&gt;请确保你的 XServer 已启用 RECORD 扩展。</translation>
     </message>
     <message>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>有新版GoldenDict可用，版本号为&lt;b&gt;%1&lt;/b&gt;。&lt;br&gt;
+        <translation>有新版 GoldenDict 可用，版本为 &lt;b&gt;%1&lt;/b&gt;。&lt;br&gt;
 点击&lt;b&gt;下载&lt;/b&gt;，打开下载页面。</translation>
     </message>
     <message>
         <source>Search Pane</source>
-        <translation>搜索框</translation>
+        <translation>查询面板</translation>
     </message>
     <message>
         <source>Ctrl+F4</source>
@@ -1336,7 +1336,7 @@
     </message>
     <message>
         <source>Loading...</source>
-        <translation>读取中...</translation>
+        <translation>读取中……</translation>
     </message>
     <message>
         <source>(untitled)</source>
@@ -1344,11 +1344,11 @@
     </message>
     <message>
         <source>&amp;Preferences...</source>
-        <translation>使用偏好...(&amp;P)</translation>
+        <translation>首选项...(&amp;P)</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
-        <translation>Html文件(*.html *.htm)</translation>
+        <translation>Html 文件(*.html *.htm)</translation>
     </message>
     <message>
         <source>Welcome!</source>
@@ -1364,7 +1364,7 @@
     </message>
     <message>
         <source>Skip This Release</source>
-        <translation>跳过此次升级</translation>
+        <translation>忽略此次升级</translation>
     </message>
     <message>
         <source>Forward</source>
@@ -1380,7 +1380,7 @@
     </message>
     <message>
         <source>No printer is available. Please install one first.</source>
-        <translation>找不到可用的打印机，请安装一个打印机。</translation>
+        <translation>找不到可用的打印机，请先安装一个打印机。</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -1388,7 +1388,19 @@
     </message>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>查看(&amp;V)</translation>
+    </message>
+    <message>
+        <source>Show Names in Dictionary Bar</source>
+        <translation>在词典栏中显示词典名称</translation>
+    </message>
+    <message>
+        <source>H&amp;istory</source>
+        <translation>历史(&amp;I)</translation>
+    </message>
+    <message>
+        <source>&amp;Clear</source>
+        <translation>清除(&amp;C)</translation>
     </message>
 </context>
 <context>
@@ -1418,7 +1430,7 @@
     </message>
     <message>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>未启用或已禁用的词典：</translation>
+        <translation>未启用（已禁用）的词典：</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -1442,7 +1454,7 @@
     </message>
     <message>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>可以通过拖拽改变项目的排序。将词典放入未启用的组群以禁用。</translation>
+        <translation>可以通过拖拽改变项目的排序。将词典放入未启用的群组以禁用。</translation>
     </message>
     <message>
         <source>Dictionary order:</source>
@@ -1465,7 +1477,7 @@
     </message>
     <message>
         <source>Recursive</source>
-        <translation>搜索时包含子目录</translation>
+        <translation>递归搜索</translation>
     </message>
 </context>
 <context>
@@ -1480,7 +1492,7 @@
     </message>
     <message>
         <source>Left Shift only</source>
-        <translation>仅限左Shift</translation>
+        <translation>仅限左 Shift</translation>
     </message>
     <message>
         <source>Ctrl</source>
@@ -1527,7 +1539,7 @@
 With this on however, new tabs will be opened without
 switching to them.</source>
         <translation>在正常情况下，打开一个新标签页将会自动将其选定。
-启用此选项将会在打开新标签页的时候不自动选定。</translation>
+启用此选项将会在打开新标签页时不自动选定。</translation>
     </message>
     <message>
         <source>Use proxy server</source>
@@ -1539,7 +1551,7 @@ switching to them.</source>
     </message>
     <message>
         <source>Windows key or Meta key</source>
-        <translation>Windows键或Meta键</translation>
+        <translation>Windows 键或 Meta 键</translation>
     </message>
     <message>
         <source>Only show popup when all selected keys are kept pressed:</source>
@@ -1555,7 +1567,7 @@ switching to them.</source>
     </message>
     <message>
         <source>Left Alt only</source>
-        <translation>仅限左Alt</translation>
+        <translation>仅限左 Alt</translation>
     </message>
     <message>
         <source>Tabbed browsing</source>
@@ -1563,23 +1575,23 @@ switching to them.</source>
     </message>
     <message>
         <source>Right Shift only</source>
-        <translation>仅限右Shift</translation>
+        <translation>仅限右 Shift</translation>
     </message>
     <message>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
-        <translation>启用此选项的话，关闭窗口将使程序最小化至系统托盘，
+        <translation>启用此选项，关闭窗口将使程序最小化至系统托盘，
 而不是退出程序。</translation>
     </message>
     <message>
         <source>&amp;Audio</source>
-        <translation>声音(&amp;A)</translation>
+        <translation>音频(&amp;A)</translation>
     </message>
     <message>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>请选定此选项如果你希望透过代理服务器
-执行程序的网络查询。</translation>
+        <translation>如果你希望通过代理服务器执行程序的网络查
+询功能，启用此选项。</translation>
     </message>
     <message>
         <source>Interface language:</source>
@@ -1587,7 +1599,7 @@ for all program&apos;s network requests.</source>
     </message>
     <message>
         <source>Left Ctrl only</source>
-        <translation>仅限左Ctrl</translation>
+        <translation>仅限左 Ctrl</translation>
     </message>
     <message>
         <source>Open new tabs in background</source>
@@ -1599,7 +1611,7 @@ for all program&apos;s network requests.</source>
     </message>
     <message>
         <source>Right Ctrl only</source>
-        <translation>仅限右Ctrl</translation>
+        <translation>仅限右 Ctrl</translation>
     </message>
     <message>
         <source>Lingvo</source>
@@ -1607,16 +1619,16 @@ for all program&apos;s network requests.</source>
     </message>
     <message>
         <source>Right Shift</source>
-        <translation>右Shift</translation>
+        <translation>右 Shift</translation>
     </message>
     <message>
         <source>Left Shift</source>
-        <translation>左Shift</translation>
+        <translation>左 Shift</translation>
     </message>
     <message>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>当选定此设定时，屏幕取词功能只有在按住特定按键时才会启动。</translation>
+        <translation>当选定此设置时，屏幕取词功能只有在按住特定按键时才会启动。</translation>
     </message>
     <message>
         <source>Display style:</source>
@@ -1640,15 +1652,15 @@ in the pressed state when the word selection changes.</source>
     </message>
     <message>
         <source>Alt key</source>
-        <translation>Alt键</translation>
+        <translation>Alt 键</translation>
     </message>
     <message>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>启用后，用鼠标指针指向一个单词(Windows下)，或者
-选定一个单词(Linux下)的时候，都会出现一个弹出式
+        <translation>启用后，用鼠标指针指向一个单词（Windows下），或者
+选定一个单词（Linux下）的时候，都会出现一个弹出式
 窗口来显示释义。启用此功能后，可以从主窗口或系统
 托盘菜单中选择是否激活屏幕取词功能。</translation>
     </message>
@@ -1660,12 +1672,8 @@ off from main window or tray icon.</source>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>打开此选项，新标签页将会在当前页面后打开。
-不打开此选项的话新标签页将会自动添加至最后尾。</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="obsolete">俄语</translation>
+        <translation>打开此选项，新标签页将会在当前页面后打开；不
+打开此选项，新标签页将会自动添加到末尾。</translation>
     </message>
     <message>
         <source>Close to system tray</source>
@@ -1676,19 +1684,9 @@ be the last ones.</source>
         <translation>系统默认</translation>
     </message>
     <message>
-        <source>Normally, in order to activate a popup you have to
-maintain the chosen keys pressed while you select
-a word. With this enabled, the chosen keys may also
-be pressed shorty after the selection is done.</source>
-        <translation type="obsolete">正常情况下，要激活屏幕取词的弹出式菜单，
-需要在取词动作的同时按住预先设定的热键。
-启用此选项的话，也可以在鼠标选词之后稍等
-一小下再按热键。</translation>
-    </message>
-    <message>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>启用此选项的话，将会启用系统托盘图标。</translation>
+        <translation>启用此选项，将会启用系统托盘图标。</translation>
     </message>
     <message>
         <source>When this is enabled, the program periodically
@@ -1696,9 +1694,9 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>当选定此选项时，程序将会自动检查GoldenDict的
-可用更新。如有新版本的话，程序将会提醒用户
-打开下载页面。</translation>
+        <translation>当启用此选项时，程序将会自动检查 GoldenDict 的可
+用更新。如有新版本，程序将会提醒用户打开下载
+页面。</translation>
     </message>
     <message>
         <source>Startup</source>
@@ -1721,7 +1719,7 @@ download page.</source>
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
         <translation>为了防止误按，仅仅在鼠标选词后的几秒之内才会
-被监视。热键监视的秒数可以在这里设定。</translation>
+被监视。热键监视的秒数可以在这里设置。</translation>
     </message>
     <message>
         <source>Changing Language</source>
@@ -1729,7 +1727,7 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>Ctrl key</source>
-        <translation>Ctrl键</translation>
+        <translation>Ctr l键</translation>
     </message>
     <message>
         <source>Use the following hotkey to show or hide the main window:</source>
@@ -1737,19 +1735,15 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>Left Alt</source>
-        <translation>左Alt</translation>
-    </message>
-    <message>
-        <source>English</source>
-        <translation type="obsolete">英语</translation>
+        <translation>左 Alt</translation>
     </message>
     <message>
         <source>Right Alt only</source>
-        <translation>仅限右Alt</translation>
+        <translation>仅限右 Alt</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation>使用偏好</translation>
+        <translation>首选项</translation>
     </message>
     <message>
         <source>Keys may also be pressed afterwards, within</source>
@@ -1757,25 +1751,19 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>Left Ctrl</source>
-        <translation>左Ctrl</translation>
+        <translation>左 Ctrl</translation>
     </message>
     <message>
         <source>Right Alt</source>
-        <translation>右Alt</translation>
-    </message>
-    <message>
-        <source>Chooses whether the scan popup mode is on by default nor not. If checked,
-the program would always start with the scan popup active.</source>
-        <translation type="obsolete">设定屏幕取词功能是否为默认开启。
-如果是的话，每次启动程序都会自动启动屏幕取词功能。</translation>
+        <translation>右 Alt</translation>
     </message>
     <message>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>热键均为全局热键，只要GoldenDict在后台运行，热键就可以在任何程序中使用。</translation>
+        <translation>热键均为全局键，只要 GoldenDict 在后台运行，热键就可以在任何程序中使用。</translation>
     </message>
     <message>
         <source>Right Ctrl</source>
-        <translation>右Ctrl</translation>
+        <translation>右 Ctrl</translation>
     </message>
     <message>
         <source>Hotkeys</source>
@@ -1788,35 +1776,33 @@ the program would always start with the scan popup active.</source>
     <message>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>启用此选项的话，程序启动时将直接最小化至系统托盘。</translation>
+        <translation>启用此选项，程序启动时将直接最小化至系统托盘。</translation>
     </message>
     <message>
         <source>Program to play audio files:</source>
-        <translation>播放声音文件的程序：</translation>
+        <translation>播放音频文件的程序：</translation>
     </message>
     <message>
         <source>Shift key</source>
-        <translation>Shift键</translation>
-    </message>
-    <message>
-        <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation type="obsolete">操作系统启动时自动启动GoldenDict</translation>
+        <translation>Shift 键</translation>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation type="unfinished"></translation>
+        <translation>开机自动启动 GoldenDict.</translation>
     </message>
     <message>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择是否默认启用屏幕取词模式。如果选中，程序启动时将会自动激活屏幕取词功能。</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation type="unfinished"></translation>
+        <translation>通常，为了弹出屏幕取词窗口，在选择单词的同时需要一直
+按住选定的按键。启用此选项后，只需在选择单词以后指定
+的一小段时间内按下键即可。</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1824,17 +1810,23 @@ be pressed shortly after the selection is done.</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;注意： 你正在运行的 X.Org XServer 版本 RECORD 扩展功能不能正常工作。GoldenDict 中的热键可能因此而失效。问题的解决依赖于 xserver 自身的恢复。请参照如下链接： &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug 记录&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; 并留下评论。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation type="unfinished"></translation>
+        <translation>启用此选项后，GoldenDict 将会禁止载入你所浏览的站点中来自其它站点的
+内容（图片，框架）以便封杀广告。如果某些网点因此而出现错误，尝试禁
+用此选项。</translation>
     </message>
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation type="unfinished"></translation>
+        <translation>禁止载入来自其它站点的内容（封杀广告）</translation>
     </message>
 </context>
 <context>
@@ -1875,7 +1867,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Dialog</source>
-        <translation>对话</translation>
+        <translation>对话框</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
@@ -1917,7 +1909,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>作为替代选项，使用%GD1251%代替CP1251，%GDISO1%代替ISO 8859-1。</translation>
+        <translation>作为替代选项，使用 %GD1251% 代替 CP1251，%GDISO1% 代替 ISO 8859-1.</translation>
     </message>
     <message>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
@@ -1933,7 +1925,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>如要批量添加声音文件的话，请把路径添加在这里：</translation>
+        <translation>如要批量添加音频文件，请把路径添加在这里：</translation>
     </message>
     <message>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
@@ -1949,17 +1941,17 @@ Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
         <translation>以日本式为基础，针对现代日语做了一些修改。
-标准化为ISO 3602。
+标准化为 ISO 3602。
 
-GoldenDict尚不支持此方案。</translation>
+GoldenDict 尚不支持此方案。</translation>
     </message>
     <message>
         <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>维基百科(MediaWiki)网站：</translation>
+        <translation>维基百科/MediaWiki 网站：</translation>
     </message>
     <message>
         <source>Sound Dirs</source>
-        <translation>声音文件目录</translation>
+        <translation>音频文件目录</translation>
     </message>
     <message>
         <source>The most widely used method of transcription of Japanese,
@@ -1980,9 +1972,9 @@ kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
         <translation>最常用的方案，跟假名系统一一对应。
-标准化为ISO 3602。
+标准化 为ISO 3602。
 
-GoldenDict尚不支持此方案。</translation>
+GoldenDict 尚不支持此方案。</translation>
     </message>
     <message>
         <source>Russian transliteration</source>
@@ -2002,7 +1994,7 @@ GoldenDict尚不支持此方案。</translation>
     </message>
     <message>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>储存Hunspell/Myspell拼写检查词库文件的路径：</translation>
+        <translation>储存 Hunspell/Myspell 拼写检查词库文件的路径：</translation>
     </message>
     <message>
         <source>Re&amp;scan now</source>
@@ -2014,7 +2006,7 @@ GoldenDict尚不支持此方案。</translation>
     </message>
     <message>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>所有网站。%GDWORD%字符串将会被搜索关键词替换：</translation>
+        <translation>所有网站。%GDWORD% 字符串将会被搜索关键词替换：</translation>
     </message>
     <message>
         <source>&amp;Add...</source>
@@ -2034,7 +2026,7 @@ GoldenDict尚不支持此方案。</translation>
     </message>
     <message>
         <source>Paths to search for the dictionary files:</source>
-        <translation>搜索词典文件的目录：</translation>
+        <translation>词典文件所在目录：</translation>
     </message>
     <message>
         <source>Confirm removal</source>
@@ -2063,7 +2055,7 @@ of the appropriate groups to use them.</source>
 独立的辅助词典，这些
 词典为提供拼写检查拼写建议
 要使用这些构词法规则库，请
-将其添加至相应组群的最下面。</translation>
+将其添加至相应群组的最下面。</translation>
     </message>
     <message>
         <source>Hepburn</source>
