@@ -41,16 +41,16 @@ unix {
     locale.files = locale/*.qm
     INSTALLS += target \
         locale
-    icons.path = /usr/share/pixmaps
+    icons.path = $$PREFIX/share/pixmaps
     icons.files = redist/icons/*.*
     INSTALLS += icons
-    icons2.path = /usr/share/app-install/icons
+    icons2.path = $$PREFIX/share/app-install/icons
     icons2.files = redist/icons/*.*
     INSTALLS += icons2
-    desktops.path = /usr/share/applications
+    desktops.path = $$PREFIX/share/applications
     desktops.files = redist/*.desktop
     INSTALLS += desktops
-    desktops2.path = /usr/share/app-install/desktop
+    desktops2.path = $$PREFIX/share/app-install/desktop
     desktops2.files = redist/*.desktop
     INSTALLS += desktops2
 }
@@ -215,7 +215,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/bg_BG.ts
 
 # This makes qmake generate translations
-isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
 updateqm.input = TRANSLATIONS
 updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
 updateqm.commands = $$QMAKE_LRELEASE \
