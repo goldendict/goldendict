@@ -525,7 +525,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 {
   printf( "clicked %s\n", url.toString().toLocal8Bit().data() );
 
-  if ( url.scheme() == "bword" )
+  if ( url.scheme().compare( "bword", Qt::CaseInsensitive ) == 0 )
   {
     QString host = url.host();
 
