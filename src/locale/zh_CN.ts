@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>Close words: </source>
-        <translation>关闭词条：</translation>
+        <translation>相近词条：</translation>
     </message>
 </context>
 <context>
@@ -105,7 +105,7 @@
     </message>
     <message>
         <source>The referenced resource failed to download.</source>
-        <translation>所查找的资源下载失败。</translation>
+        <translation>所引用的资源下载失败。</translation>
     </message>
     <message>
         <source>Failed to create temporary file.</source>
@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>about:blank</source>
-        <translation>关于：空白页</translation>
+        <translation>about:blank</translation>
     </message>
     <message>
         <source>&amp;Previous</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>所查询的资源不存在。</translation>
+        <translation>所引用的资源不存在。</translation>
     </message>
     <message>
         <source>&amp;Open Link</source>
@@ -217,7 +217,7 @@
     </message>
     <message>
         <source>&amp;Sources</source>
-        <translation>词典文件所在目录(&amp;S)</translation>
+        <translation>词典来源(&amp;S)</translation>
     </message>
     <message>
         <source>&amp;Groups</source>
@@ -1336,7 +1336,7 @@
     </message>
     <message>
         <source>Loading...</source>
-        <translation>读取中……</translation>
+        <translation>加载中……</translation>
     </message>
     <message>
         <source>(untitled)</source>
@@ -1384,7 +1384,7 @@
     </message>
     <message>
         <source>Navigation</source>
-        <translation>导航</translation>
+        <translation>导航栏</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -1628,7 +1628,7 @@ for all program&apos;s network requests.</source>
     <message>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>当选定此设置时，屏幕取词功能只有在按住特定按键时才会启动。</translation>
+        <translation>启用后，屏幕取词窗口只有在按住特定按键时才会弹出。</translation>
     </message>
     <message>
         <source>Display style:</source>
@@ -1780,7 +1780,7 @@ its main window.</source>
     </message>
     <message>
         <source>Program to play audio files:</source>
-        <translation>播放音频文件的程序：</translation>
+        <translation>音频文件播放程序：</translation>
     </message>
     <message>
         <source>Shift key</source>
@@ -1925,7 +1925,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>如要批量添加音频文件，请把路径添加在这里：</translation>
+        <translation>如果要批量添加音频文件，请把路径添加在这里：</translation>
     </message>
     <message>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
@@ -1947,7 +1947,7 @@ GoldenDict 尚不支持此方案。</translation>
     </message>
     <message>
         <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>维基百科/MediaWiki 网站：</translation>
+        <translation>维基百科（MediaWik）站点：</translation>
     </message>
     <message>
         <source>Sound Dirs</source>
@@ -2006,7 +2006,7 @@ GoldenDict 尚不支持此方案。</translation>
     </message>
     <message>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>所有网站。%GDWORD% 字符串将会被搜索关键词替换：</translation>
+        <translation>任意网站。%GDWORD% 字符串将会被搜索关键词替换：</translation>
     </message>
     <message>
         <source>&amp;Add...</source>
@@ -2051,11 +2051,10 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>每个构词法规则库都会显示为
-独立的辅助词典，这些
-词典为提供拼写检查拼写建议
-要使用这些构词法规则库，请
-将其添加至相应群组的最下面。</translation>
+        <translation>每个构词法规则库都会显示为独立的辅助
+词典。拼写检查和拼写建议需要使用这些
+构词法规则库，请将其添加至相应群组的
+最下面。</translation>
     </message>
     <message>
         <source>Hepburn</source>
