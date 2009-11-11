@@ -374,6 +374,16 @@ MainWindow::~MainWindow()
   }
 }
 
+QPrinter & MainWindow::getPrinter()
+{
+  if ( printer.get() )
+    return *printer;
+
+  printer = new QPrinter( QPrinter::HighResolution );
+
+  return *printer;
+}
+
 void MainWindow::applyQtStyleSheet( QString const & displayStyle )
 {
   QFile builtInCssFile( ":/qt-style.css" );
@@ -1595,9 +1605,9 @@ void MainWindow::on_actionCloseToTray_activated()
 
 void MainWindow::on_pageSetup_activated()
 {
-  if ( printer.isValid() )
+  if ( getPrinter().isValid() )
   {
-    QPageSetupDialog dialog( &printer, this );
+    QPageSetupDialog dialog( &getPrinter(), this );
 
     dialog.exec();
   }
@@ -1608,7 +1618,7 @@ void MainWindow::on_pageSetup_activated()
 
 void MainWindow::on_printPreview_activated()
 {
-  QPrintPreviewDialog dialog( &printer, this );
+  QPrintPreviewDialog dialog( &getPrinter(), this );
 
   connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
            this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
@@ -1618,7 +1628,7 @@ void MainWindow::on_printPreview_activated()
 
 void MainWindow::on_print_activated()
 {
-  QPrintDialog dialog( &printer, this );
+  QPrintDialog dialog( &getPrinter(), this );
 
   dialog.setWindowTitle( tr( "Print Article") );
 
@@ -1627,7 +1637,7 @@ void MainWindow::on_print_activated()
 
   ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
 
-  view.print( &printer );
+  view.print( &getPrinter() );
 }
 
 void MainWindow::printPreviewPaintRequested( QPrinter * printer )

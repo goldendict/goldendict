@@ -79,8 +79,10 @@ private:
                                // release, if enabled
   sptr< QNetworkReply > latestReleaseReply;
 
-  QPrinter printer; // The printer we use for all printing operations
+  sptr< QPrinter > printer; // The printer we use for all printing operations
   
+  QPrinter & getPrinter(); // Creates a printer if it's not there and returns it
+
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle );
 
