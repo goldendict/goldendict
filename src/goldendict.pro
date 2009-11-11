@@ -215,6 +215,10 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/bg_BG.ts
 
 # This makes qmake generate translations
+win32 {
+  # Windows doesn't seem to have *-qt4 symlinks
+  isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+}
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
 updateqm.input = TRANSLATIONS
 updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
