@@ -8,6 +8,7 @@
 #include "wstring_qt.hh"
 #include <limits.h>
 #include <QFile>
+#include <QUrl>
 
 using std::vector;
 using std::string;
@@ -490,8 +491,14 @@ void ArticleRequest::stemmedSearchFinished()
 
     for( unsigned x = 0; x < sr.size(); ++x )
     {
+      QUrl url;
+
+      url.setScheme( "gdlookup" );
+      url.setHost( "localhost" );
+      url.setPath( sr[ x ].first );
+
       string escapedResult = Html::escape( sr[ x ].first.toUtf8().data() );
-      footer += "<a href=\"bword://" + escapedResult + "\">" + escapedResult +"</a>";
+      footer += string( "<a href=\"" ) + url.toEncoded().data() + "\">" + escapedResult +"</a>";
 
       if ( x != sr.size() - 1 )
       {
