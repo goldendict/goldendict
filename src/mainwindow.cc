@@ -1067,7 +1067,6 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         return true;
       }
 
-#if QT_VERSION >= 0x040500
       if ( keyEvent->matches( QKeySequence::InsertParagraphSeparator ) &&
            ui.wordList->selectedItems().size() )
       {
@@ -1078,8 +1077,26 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
         return true;
       }
-#endif
 
+      // Handle typing events used to initiate new lookups
+
+      if ( keyEvent->modifiers() &
+           ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
+        return false; // A non-typing modifier is pressed
+
+      if ( keyEvent->key() == Qt::Key_Space ||
+           keyEvent->key() == Qt::Key_Backspace ||
+           keyEvent->key() == Qt::Key_Tab )
+        return false; // Those key have other uses than to start typing
+                      // or don't make sense
+
+      QString text = keyEvent->text();
+
+      if ( text.size() )
+      {
+        typingEvent( text );
+        return true;
+      }
     }
   }
   else
