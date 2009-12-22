@@ -961,7 +961,7 @@ void ArticleView::resourceDownloadFinished()
           // Use external viewer to play the file
           try
           {
-            ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram );
+            ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram.trimmed() );
 
             try
             {
