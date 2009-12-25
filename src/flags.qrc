@@ -252,5 +252,6 @@
         <file>flags/zw.png</file>
         <file>flags/en.png</file>
         <file>flags/uk.png</file>
+        <file>flags/eo.png</file>
     </qresource>
 </RCC>
