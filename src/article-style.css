@@ -70,6 +70,13 @@ pre
  * therefore hidden */
 .bglpos { display: none; }
 
+/* Right-to-left text */
+.bglrtl
+{
+  text-align: right;
+  direction: rtl;
+}
+
 /******** StarDict dictionaries' classes *********/
 
 

@@ -9,6 +9,7 @@
 #include "utf8.hh"
 #include "chunkedstorage.hh"
 #include "langcoder.hh"
+#include "language.hh"
 
 #include <map>
 #include <set>
@@ -641,21 +642,29 @@ void BglArticleRequest::run()
                    "</b></b></b></b></b></b></b></b>"
                    "</i></i></i></i></i></i></i></i>";
 
+  static Language::Id hebrew = LangCoder::code2toInt( "he" );
+
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
       result += "<h3>";
       result += postfixToSuperscript( i->second.first );
       result += "</h3>";
-      result += i->second.second;
+      if ( dict.idxHeader.langTo == hebrew )
+        result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
+      else
+        result +=  i->second.second ;
       result += cleaner;
   }
-
+ 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
       result += "<h3>";
       result += postfixToSuperscript( i->second.first );
       result += "</h3>";
-      result += i->second.second;
+      if ( dict.idxHeader.langTo == hebrew )
+        result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
+      else
+        result +=  i->second.second ;
       result += cleaner;
   }
   // Do some cleanups in the text
