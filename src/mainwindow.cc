@@ -984,6 +984,10 @@ void MainWindow::updateMatchResults( bool finished )
         i->setFont( f );
       }
     }
+    if (i->text().at(0).direction() == QChar::DirR)
+        i->setTextAlignment(Qt::AlignRight);
+    if (i->text().at(0).direction() == QChar::DirL)
+        i->setTextAlignment(Qt::AlignLeft);
   }
 
   while ( ui.wordList->count() > (int) results.size() )
