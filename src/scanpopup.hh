@@ -64,8 +64,6 @@ private:
   QString pendingInputWord, inputWord;
   WordFinder wordFinder;
 
-  bool mouseEnteredOnce;
-
   QPoint startPos; // For window moving
 
   QTimer hideTimer; // When mouse leaves the window, a grace period is

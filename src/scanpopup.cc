@@ -29,7 +29,6 @@ ScanPopup::ScanPopup( QWidget * parent,
   history( history_ ),
   escapeAction( this ),
   wordFinder( this ),
-  mouseEnteredOnce( false ),
   hideTimer( this )
 {
   ui.setupUi( this );
@@ -49,7 +48,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.groupList->fill( groups );
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
 
-  setWindowFlags( Qt::Popup );
+  setWindowFlags( Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
   if ( cfg.lastPopupSize.isValid() )
     resize( cfg.lastPopupSize );
@@ -57,7 +56,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   #ifdef Q_OS_WIN32
   // On Windows, leaveEvent() doesn't seem to work with popups and we're trying
   // to emulate it.
-  setMouseTracking( true );
+  //setMouseTracking( true );
   #endif
 
   #if 0 // Experimental code to give window a non-rectangular shape (i.e.
@@ -227,49 +226,60 @@ void ScanPopup::engagePopup()
   /// Too large strings make window expand which is probably not what user
   /// wants
   ui.word->setText( elideInputWord() );
-
+ 
   if ( !isVisible() )
   {
-    // Decide where should the window land
-    
-    QPoint currentPos = QCursor::pos();
+    // Need to show the window
 
-    QRect desktop = QApplication::desktop()->screenGeometry();
+    if ( !ui.pinButton->isChecked() )
+    {
+      // Decide where should the window land
 
-    QSize windowSize = geometry().size();
+      QPoint currentPos = QCursor::pos();
 
-    int x, y;
+      QRect desktop = QApplication::desktop()->screenGeometry();
 
-    /// Try the to-the-right placement
-    if ( currentPos.x() + 4 + windowSize.width() <= desktop.topRight().x() )
-      x = currentPos.x() + 4;
-    else
-    /// Try the to-the-left placement
-    if ( currentPos.x() - 4 - windowSize.width() >= desktop.x() )
-      x = currentPos.x() - 4 - windowSize.width();
-    else
-    // Center it
-      x = desktop.x() + ( desktop.width() - windowSize.width() ) / 2;
-    
-    /// Try the to-the-buttom placement
-    if ( currentPos.y() + 15 + windowSize.height() <= desktop.bottomLeft().y() )
-      y = currentPos.y() + 15;
-    else
-    /// Try the to-the-top placement
-    if ( currentPos.y() - 15 - windowSize.height() >= desktop.y() )
-      y = currentPos.y() - 15 - windowSize.height();
-    else
-    // Center it
-      y = desktop.y() + ( desktop.height() - windowSize.height() ) / 2;
-      
-    move( x, y );
+      QSize windowSize = geometry().size();
+
+      int x, y;
+
+      /// Try the to-the-right placement
+      if ( currentPos.x() + 4 + windowSize.width() <= desktop.topRight().x() )
+        x = currentPos.x() + 4;
+      else
+      /// Try the to-the-left placement
+      if ( currentPos.x() - 4 - windowSize.width() >= desktop.x() )
+        x = currentPos.x() - 4 - windowSize.width();
+      else
+      // Center it
+        x = desktop.x() + ( desktop.width() - windowSize.width() ) / 2;
+
+      /// Try the to-the-bottom placement
+      if ( currentPos.y() + 15 + windowSize.height() <= desktop.bottomLeft().y() )
+        y = currentPos.y() + 15;
+      else
+      /// Try the to-the-top placement
+      if ( currentPos.y() - 15 - windowSize.height() >= desktop.y() )
+        y = currentPos.y() - 15 - windowSize.height();
+      else
+      // Center it
+        y = desktop.y() + ( desktop.height() - windowSize.height() ) / 2;
+
+      move( x, y );
+    }
 
     show();
 
-    mouseEnteredOnce = false; // Windows-only
-
     // This produced some funky mouse grip-related bugs so we commented it out
     //QApplication::processEvents(); // Make window appear immediately no matter what
+  }
+  else
+  if ( ui.pinButton->isChecked() )
+  {
+    // Pinned-down window isn't always on top, so we need to raise it
+    show();
+    activateWindow();
+    raise();
   }
 
   initiateTranslation();
@@ -333,30 +343,7 @@ void ScanPopup::mouseMoveEvent( QMouseEvent * event )
 
     move( pos() + delta );
   }
-  #ifdef Q_OS_WIN32
-  else
-  if ( !ui.pinButton->isChecked() )
-  {
-    if ( !mouseEnteredOnce )
-    {
-      // We're waiting for mouse to enter window
-      if ( geometry().contains( event->globalPos() ) )
-      {
-        mouseEnteredOnce = true;
-        hideTimer.stop();
-      }
-    }
-    else
-    {
-      // We're waiting for mouse to leave window
-      if ( !geometry().contains( event->globalPos() ) )
-      {
-        mouseEnteredOnce = false;
-        hideTimer.start();
-      }
-    }
-  }
-  #endif
+ 
 
   QDialog::mouseMoveEvent( event );
 }
@@ -438,7 +425,7 @@ void ScanPopup::on_wordListButton_clicked()
 
   QMenu menu( this );
 
-  unsigned total = results.size() < 20 ? results.size() : 20;
+  unsigned total = results.size() < 40 ? results.size() : 40;
 
   for( unsigned x = 0; x < total; ++x )
   {
@@ -474,7 +461,7 @@ void ScanPopup::pinButtonClicked( bool checked )
     hideTimer.stop();
   }
   else
-    setWindowFlags( Qt::Popup );
+      setWindowFlags( Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
   show();
 }
