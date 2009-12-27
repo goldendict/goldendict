@@ -22,7 +22,7 @@
  * program. */
 
 #include "bgl_babylon.hh"
-
+#include <algorithm>
 #include<stdlib.h>
 #include<string.h>
 #include<stdio.h>
@@ -302,6 +302,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
   std::string temp;
   std::vector<std::string> alternates;
   std::string alternate;
+  std::string root;
 
   while( readBlock( block ) )
   {
@@ -330,6 +331,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         alternate.clear();
         headword.clear();
         displayedHeadword.clear();
+        root.clear();
         definition.clear();
         temp.clear();
         pos = 0;
@@ -362,6 +364,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
             // Something
             pos += 2;
             ++a;
+            definition += " ";
           }
           else if ( (unsigned char)block.data[pos] >= 0x40 &&
                     len - a >= 2 &&
@@ -384,7 +387,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           else if ( (unsigned char)block.data[pos] == 0x18 )
           {
             // Displayed headword
-            unsigned length = (unsigned char)block.data[ pos + 1 ];
+              unsigned length = (unsigned char)block.data[ pos + 1 ];
 
             if ( length > len - a - 2 )
             {
@@ -481,15 +484,30 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               //break;
             } else if (block.data[pos] == 0x14) {
               pos++;
+            } else if ((unsigned char)block.data[pos] == 0x1A){
+                unsigned length = (unsigned char)block.data[ pos + 1 ];
+                if (length <= 10){// 0x1A identifies two different data types.
+                                  // data about the Hebrew root should be shorter then
+                                  // 10 bytes, and in the other data type the byte
+                          // after 0x1A is > 10 (at least it is in Bybylon's
+                          // Hebrew dictionaries).   
+                    root = std::string( block.data + pos + 2, length );
+                    std::reverse(root.begin(),root.end());
+                    definition += " (" + root + ")";
+                    pos += length + 2;
+                    a += length + 1;
+               }
+                else
+                    pos++;
             } else {
-              definition += block.data[pos++];
+                definition += block.data[pos++];
             }
           }else definition += block.data[pos++];
         }
         convertToUtf8( definition, TARGET_CHARSET );
 
         if ( displayedHeadword.size() )
-          convertToUtf8( displayedHeadword, TARGET_CHARSET );
+          convertToUtf8( displayedHeadword, SOURCE_CHARSET );
 
         // Alternate forms
         while( pos != block.length )
@@ -502,9 +520,14 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           alternate.clear();
         }
 
+        if (headword != displayedHeadword){
+                alternates.push_back(displayedHeadword);
+        }
         entry.headword = headword;
+
         entry.displayedHeadword = displayedHeadword;
         entry.definition = definition;
+
         entry.alternates = alternates;
 
         if( block.length ) free( block.data );
