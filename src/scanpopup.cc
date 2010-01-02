@@ -40,6 +40,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   history( history_ ),
   escapeAction( this ),
   wordFinder( this ),
+  mouseEnteredOnce( false ),
+  mouseIntercepted( false ),
   hideTimer( this )
 {
   ui.setupUi( this );
@@ -64,11 +66,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   if ( cfg.lastPopupSize.isValid() )
     resize( cfg.lastPopupSize );
 
-  #ifdef Q_OS_WIN32
-  // On Windows, leaveEvent() doesn't seem to work with popups and we're trying
-  // to emulate it.
-  //setMouseTracking( true );
-  #endif
+  definition->focus();
 
   #if 0 // Experimental code to give window a non-rectangular shape (i.e.
         // balloon) using a colorkey mask.
@@ -179,7 +177,12 @@ void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
   altModeExpirationTimer.stop();
 
   inputWord = str;
-  engagePopup();
+  engagePopup(
+#ifdef Q_WS_WIN
+      true // We only focus popup under Windows when activated via Ctrl+C+C
+           // -- on Linux it already has an implicit focus
+#endif
+      );
 }
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
@@ -232,7 +235,7 @@ void ScanPopup::handleInputWord( QString const & str )
   engagePopup();
 }
 
-void ScanPopup::engagePopup()
+void ScanPopup::engagePopup( bool giveFocus )
 {
   /// Too large strings make window expand which is probably not what user
   /// wants
@@ -280,6 +283,19 @@ void ScanPopup::engagePopup()
     }
 
     show();
+
+    if ( giveFocus )
+    {
+      activateWindow();
+      raise();
+    }
+
+    if ( !ui.pinButton->isChecked() )
+    {
+      mouseEnteredOnce = false;
+      // Need to monitor the mouse so we know when to hide the window
+      interceptMouse();
+    }
 
     // This produced some funky mouse grip-related bugs so we commented it out
     //QApplication::processEvents(); // Make window appear immediately no matter what
@@ -332,8 +348,72 @@ vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
     groups[ currentGroup ].dictionaries;
 }
 
+bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
+{
+  if ( mouseIntercepted )
+  {
+    // We're only interested in our events
+
+    if ( event->type() == QEvent::MouseMove )
+    {
+      QMouseEvent * mouseEvent = ( QMouseEvent * ) event;
+
+//      printf( "Object: %s\n", watched->objectName().toUtf8().data() );
+
+      if ( geometry().contains( mouseEvent->globalPos() ) )
+      {
+//        printf( "got inside\n" );
+
+        hideTimer.stop();
+        mouseEnteredOnce = true;
+        uninterceptMouse();
+      }
+      else
+      {
+//        printf( "outside\n" );
+        // We're in grab mode and outside the window - calculate the
+        // distance from it. We might want to hide it.
+
+        // When the mouse has entered once, we don't allow it stayng outside,
+        // but we give a grace period for it to return.
+        int proximity = mouseEnteredOnce ? 0 : 60;
+
+        // Note: watched == this ensures no other child objects popping out are
+        // receiving this event, meaning there's basically nothing under the
+        // cursor.
+        if ( watched == this &&
+             !frameGeometry().adjusted( -proximity, -proximity, proximity, proximity ).
+             contains( mouseEvent->globalPos() ) )
+        {
+          // We've way too far from the window -- hide the popup
+
+          // If the mouse never entered the popup, hide the window instantly --
+          // the user just moved the cursor further away from the window.
+
+          if ( !mouseEnteredOnce )
+            hideWindow();
+          else
+            hideTimer.start();
+        }
+      }
+    }
+  }
+
+  return QDialog::eventFilter( watched, event );
+}
+
 void ScanPopup::mousePressEvent( QMouseEvent * ev )
 {
+  // With mouse grabs, the press can occur anywhere on the screen, which
+  // might mean hiding the window.
+
+  if ( !frameGeometry().contains( ev->globalPos() ) )
+  {
+    hideWindow();
+
+    return;
+  }
+
   startPos = ev->globalPos();
   setCursor( Qt::ClosedHandCursor );
 
@@ -342,7 +422,7 @@ void ScanPopup::mousePressEvent( QMouseEvent * ev )
 
 void ScanPopup::mouseMoveEvent( QMouseEvent * event )
 {
-  if ( event->buttons() )
+  if ( event->buttons() && cursor().shape() == Qt::ClosedHandCursor )
   {
     QPoint newPos = event->globalPos();
 
@@ -350,12 +430,11 @@ void ScanPopup::mouseMoveEvent( QMouseEvent * event )
 
     startPos = newPos;
 
-    // Find a top-level window
+    // Move the window
 
     move( pos() + delta );
   }
  
-
   QDialog::mouseMoveEvent( event );
 }
 
@@ -369,9 +448,8 @@ void ScanPopup::leaveEvent( QEvent * event )
 {
   QDialog::leaveEvent( event );
 
-  // We hide the popup when the mouse leaves it. So in order to close it
-  // without any clicking the cursor has to get inside and then to leave.
-  
+  // We hide the popup when the mouse leaves it.
+
   // Combo-boxes seem to generate leave events for their parents when
   // unfolded, so we check coordinates as well.
   // If the dialog is pinned, we don't hide the popup.
@@ -388,8 +466,14 @@ void ScanPopup::enterEvent( QEvent * event )
 {
   QDialog::enterEvent( event );
 
-  // If there was a countdown to hide the window, stop it.
-  hideTimer.stop();
+  if ( mouseEnteredOnce )
+  {
+    // We "enter" first time via our event filter. This seems to evade some
+    // unexpected behavior under Windows.
+
+    // If there was a countdown to hide the window, stop it.
+    hideTimer.stop();
+  }
 }
 
 void ScanPopup::resizeEvent( QResizeEvent * event )
@@ -467,12 +551,18 @@ void ScanPopup::pinButtonClicked( bool checked )
 {
   if ( checked )
   {
+    uninterceptMouse();
+
     setWindowFlags( Qt::Dialog );
     setWindowTitle( elideInputWord() );
     hideTimer.stop();
   }
   else
-      setWindowFlags( popupWindowFlags );
+  {
+    setWindowFlags( popupWindowFlags );
+
+    mouseEnteredOnce = true;
+  }
 
   show();
 }
@@ -480,10 +570,7 @@ void ScanPopup::pinButtonClicked( bool checked )
 void ScanPopup::hideTimerExpired()
 {
   if ( isVisible() )
-  {
-    unsetCursor(); // Just in case
-    hide();
-  }
+    hideWindow();
 }
 
 void ScanPopup::altModeExpired()
@@ -522,8 +609,36 @@ void ScanPopup::pageLoaded( ArticleView * )
 void ScanPopup::escapePressed()
 {
   if ( !definition->closeSearch() )
+    hideWindow();
+}
+
+void ScanPopup::hideWindow()
+{
+  uninterceptMouse();
+
+  hideTimer.stop();
+  unsetCursor();
+  hide();
+}
+
+void ScanPopup::interceptMouse()
+{
+  if ( !mouseIntercepted )
   {
-    unsetCursor();
-    hide();
+    grabMouse();
+    qApp->installEventFilter( this );
+
+    mouseIntercepted = true;
+  }
+}
+
+void ScanPopup::uninterceptMouse()
+{
+  if ( mouseIntercepted )
+  {
+    qApp->removeEventFilter( this );
+    releaseMouse();
+
+    mouseIntercepted = false;
   }
 }

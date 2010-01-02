@@ -53,6 +53,14 @@ private:
   // Translates the word from the clipboard or the clipboard selection
   void translateWordFromClipboard(QClipboard::Mode m);
 
+  // Hides the popup window, effectively closing it.
+  void hideWindow();
+
+  // Grabs mouse and installs global event filter to track it thoroughly.
+  void interceptMouse();
+  // Ungrabs mouse and uninstalls global event filter.
+  void uninterceptMouse();
+
   Config::Class & cfg;
   bool isScanningEnabled;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
@@ -64,6 +72,9 @@ private:
   QString pendingInputWord, inputWord;
   WordFinder wordFinder;
 
+  bool mouseEnteredOnce;
+  bool mouseIntercepted;
+
   QPoint startPos; // For window moving
 
   QTimer hideTimer; // When mouse leaves the window, a grace period is
@@ -72,11 +83,12 @@ private:
   QTimer altModeExpirationTimer, altModePollingTimer; // Timers for alt mode
 
   void handleInputWord( QString const & );
-  void engagePopup();
+  void engagePopup( bool giveFocus = false );
   void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
 
+  virtual bool eventFilter( QObject * watched, QEvent * event );
   virtual void mousePressEvent( QMouseEvent * );
   virtual void mouseMoveEvent( QMouseEvent * );
   virtual void mouseReleaseEvent( QMouseEvent * );
