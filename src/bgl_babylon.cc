@@ -27,6 +27,7 @@
 #include<string.h>
 #include<stdio.h>
 #include<iconv.h>
+#include <QTextDocument>
 
 #ifdef _WIN32
 #include <io.h>
@@ -34,6 +35,8 @@
 #else
 #define DUP dup
 #endif
+
+using std::string;
 
 Babylon::Babylon( std::string filename )
 {
@@ -520,9 +523,25 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           alternate.clear();
         }
 
-        if (headword != displayedHeadword){
-                alternates.push_back(displayedHeadword);
+        // Try adding displayed headword to the list of alts
+        if ( headword != displayedHeadword )
+        {
+          // Does it contain HTML? If it does, we need to strip it
+          if ( displayedHeadword.find( '<' ) != string::npos ||
+               displayedHeadword.find( '&' ) != string::npos )
+          {
+            QTextDocument d;
+            d.setHtml( QString::fromUtf8( displayedHeadword.data(), displayedHeadword.size() ) );
+
+            string result = d.toPlainText().toUtf8().data();
+
+            if ( result != headword )
+            alternates.push_back( result );
+          }
+          else
+            alternates.push_back(displayedHeadword);
         }
+
         entry.headword = headword;
 
         entry.displayedHeadword = displayedHeadword;
