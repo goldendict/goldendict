@@ -70,7 +70,7 @@ int main( int argc, char ** argv )
     pid_file.close();
 
     bool isExist = ProcessWrapper::processExists(tmp);
-    if ( isExist )
+    if ( isExist && tmp != current_pid )
     {
       puts( "Another GoldenDict copy started already." );
       return 1;
