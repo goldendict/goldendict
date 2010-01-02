@@ -15,6 +15,17 @@
 
 using std::wstring;
 
+/// We use different window flags under Windows and X11 due to slight differences
+/// in their behavior on those platforms.
+static Qt::WindowFlags popupWindowFlags =
+
+#ifdef Q_WS_WIN
+Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
+#else
+Qt::Popup
+#endif
+;
+
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
                       ArticleNetworkAccessManager & articleNetMgr,                      
@@ -48,7 +59,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.groupList->fill( groups );
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
 
-  setWindowFlags( Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+  setWindowFlags( popupWindowFlags );
 
   if ( cfg.lastPopupSize.isValid() )
     resize( cfg.lastPopupSize );
@@ -461,7 +472,7 @@ void ScanPopup::pinButtonClicked( bool checked )
     hideTimer.stop();
   }
   else
-      setWindowFlags( Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+      setWindowFlags( popupWindowFlags );
 
   show();
 }
