@@ -14,13 +14,37 @@
 #include "folding.hh"
 #include "wstring_qt.hh"
 
-#ifdef Q_OS_WIN32
-#include <windows.h>
-#include <mmsystem.h> // For PlaySound
-#endif
+#include <QBuffer>
 
 using std::map;
 using std::list;
+
+/// A phonon-based audio player, created on demand
+struct AudioPlayer
+{
+  Phonon::AudioOutput output;
+  Phonon::MediaObject object;
+
+  static AudioPlayer & instance();
+
+private:
+
+  AudioPlayer();
+};
+
+AudioPlayer::AudioPlayer():
+    output( Phonon::AccessibilityCategory )
+{
+  Phonon::createPath( &object, &output );
+}
+
+AudioPlayer & AudioPlayer::instance()
+{
+  static AudioPlayer a;
+
+  return a;
+}
+
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
@@ -118,15 +142,6 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
-  
-  #ifdef Q_OS_WIN32
-  if ( winWavData.size() )
-  {
-    // If we were playing some sound some time ago, make sure it stopped
-    // playing before freeing the waveform memory.
-    PlaySoundA( 0, 0, 0 );
-  }
-  #endif
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
@@ -945,42 +960,49 @@ void ArticleView::resourceDownloadFinished()
 
         if ( resourceDownloadUrl.scheme() == "gdau" )
         {
-          #ifdef Q_OS_WIN32
-          // Windows-only: use system PlaySound function
+          // Audio data
 
-          if ( winWavData.size() )
-            PlaySoundA( 0, 0, 0 ); // Stop any currently playing sound to make sure
-                                   // previous data isn't used anymore
-                                   // 
-          winWavData = data;
-
-          PlaySoundA( &winWavData.front(), 0,
-                      SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
-          #else
-
-          // Use external viewer to play the file
-          try
+          if ( !cfg.preferences.useExternalPlayer )
           {
-            ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram.trimmed() );
+            // Play via Phonon
 
+            QBuffer * buf = new QBuffer;
+
+            buf->buffer().append( &data.front(), data.size() );
+
+            Phonon::MediaSource source( buf );
+            source.setAutoDelete( true ); // Dispose of our buf when done
+
+            AudioPlayer::instance().object.stop();
+            AudioPlayer::instance().object.clear();
+            AudioPlayer::instance().object.enqueue( source );
+            AudioPlayer::instance().object.play();
+          }
+          else
+          {
+
+            // Use external viewer to play the file
             try
             {
-              viewer->start();
+              ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram.trimmed() );
 
-              // Once started, it will erase itself
+              try
+              {
+                viewer->start();
+
+                // Once started, it will erase itself
+              }
+              catch( ... )
+              {
+                delete viewer;
+                throw;
+              }
             }
-            catch( ... )
+            catch( ExternalViewer::Ex & e )
             {
-              delete viewer;
-              throw;
+              QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
             }
           }
-          catch( ExternalViewer::Ex & e )
-          {
-            QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
-          }
-
-          #endif
         }
         else
         {

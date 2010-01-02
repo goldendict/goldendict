@@ -156,6 +156,7 @@ struct Preferences
   // Whether the word should be pronounced on page load, in main window/popup
   bool pronounceOnLoadMain, pronounceOnLoadPopup;
   QString audioPlaybackProgram;
+  bool useExternalPlayer;
 
   ProxyServer proxyServer;
 

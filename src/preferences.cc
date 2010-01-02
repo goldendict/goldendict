@@ -125,16 +125,18 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
   // Sound
 
+#ifdef Q_WS_WIN
+  // Since there's only one Phonon backend under Windows, be more precise
+  ui.playViaPhonon->setText( tr( "Play via DirectShow" ) );
+#endif
+
   ui.pronounceOnLoadPopup->setEnabled( p.enableScanPopup );
 
   ui.pronounceOnLoadMain->setChecked( p.pronounceOnLoadMain );
   ui.pronounceOnLoadPopup->setChecked( p.pronounceOnLoadPopup );
-  ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
 
-#ifdef Q_OS_WIN32
-  ui.audioPlaybackProgram->hide();
-  ui.audioPlaybackProgramLabel->hide();
-#endif
+  ui.useExternalPlayer->setChecked( p.useExternalPlayer );
+  ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
 
   if ( !isRECORDBroken() )
     ui.brokenXRECORD->hide();
@@ -203,6 +205,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();
+  p.useExternalPlayer = ui.useExternalPlayer->isChecked();
   p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
 
   p.proxyServer.enabled = ui.useProxyServer->isChecked();
@@ -292,5 +295,10 @@ void Preferences::on_buttonBox_accepted()
   if ( prevInterfaceLanguage != ui.interfaceLanguage->currentIndex() )
     QMessageBox::information( this, tr( "Changing Language" ),
                               tr( "Restart the program to apply the language change." ) );
+}
+
+void Preferences::on_useExternalPlayer_toggled( bool enabled )
+{
+  ui.audioPlaybackProgram->setEnabled( enabled );
 }
 

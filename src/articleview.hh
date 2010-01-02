@@ -12,6 +12,7 @@
 #include "instances.hh"
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
+#include <phonon>
 
 /// A widget with the web view tailored to view and handle articles -- it
 /// uses the appropriate netmgr, handles link clicks, rmb clicks etc
@@ -30,11 +31,6 @@ class ArticleView: public QFrame
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, openSearchAction;
   bool searchIsOpened;
-
-#ifdef Q_OS_WIN32
-  // Used in Windows only
-  vector< char > winWavData;
-#endif
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make

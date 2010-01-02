@@ -39,6 +39,8 @@ private slots:
   void on_enableClipboardHotkey_toggled( bool checked );
 
   void on_buttonBox_accepted();
+
+  void on_useExternalPlayer_toggled( bool enabled );
 };
 
 #endif

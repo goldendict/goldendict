@@ -94,6 +94,11 @@ Preferences::Preferences():
   scanPopupAltModeSecs( 3 ),
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
+#ifdef Q_WS_WIN
+  useExternalPlayer( false ),
+#else
+  useExternalPlayer( true ), // Phonon on Linux still feels quite buggy
+#endif
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
   zoomFactor( 1 )
@@ -487,6 +492,9 @@ Class load() throw( exError )
 
     c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
     c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
+    
+    if ( !preferences.namedItem( "useExternalPlayer" ).isNull() )
+      c.preferences.useExternalPlayer = ( preferences.namedItem( "useExternalPlayer" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
       c.preferences.audioPlaybackProgram = preferences.namedItem( "audioPlaybackProgram" ).toElement().text();
@@ -890,6 +898,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "pronounceOnLoadPopup" );
     opt.appendChild( dd.createTextNode( c.preferences.pronounceOnLoadPopup ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "useExternalPlayer" );
+    opt.appendChild( dd.createTextNode( c.preferences.useExternalPlayer ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "audioPlaybackProgram" );

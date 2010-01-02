@@ -52,7 +52,16 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".au" ) ||
     endsWith( s, ".voc" ) ||
     endsWith( s, ".ogg" ) ||
-    endsWith( s, ".mp3" );
+    endsWith( s, ".mp3" ) ||
+    endsWith( s, ".mp4" ) ||
+    endsWith( s, ".aac" ) ||
+    endsWith( s, ".flac" ) ||
+    endsWith( s, ".mid" ) ||
+    endsWith( s, ".kar" ) ||
+    endsWith( s, ".mpc" ) ||
+    endsWith( s, ".wma" ) ||
+    endsWith( s, ".wv" ) ||
+    endsWith( s, ".ape" );
 }
 
 bool isNameOfPicture( string const & name )

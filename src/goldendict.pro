@@ -10,6 +10,7 @@ INCLUDEPATH += .
 QT += webkit
 QT += xml
 QT += network
+QT += phonon
 CONFIG += exceptions \
     rtti \
     stl
