@@ -26,7 +26,9 @@ bool exists( char const * filename ) throw()
   return _stat( filename, &buf ) == 0;
 #else
   struct stat buf;
-  return stat( filename, &buf ) == 0;
+
+  // EOVERFLOW rationale: if the file is too large, it still does exist
+  return stat( filename, &buf ) == 0 || errno == EOVERFLOW;
 #endif
 }
 
