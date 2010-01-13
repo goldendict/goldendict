@@ -111,7 +111,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            qApp, SLOT( quit() ) );
 
   focusTranslateLineAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
-  focusTranslateLineAction.setShortcut( QKeySequence( "Esc" ) );
+  focusTranslateLineAction.setShortcuts( QList< QKeySequence >() <<
+                                         QKeySequence( "Esc" ) <<
+                                         QKeySequence( "Alt+D" ) <<
+                                         QKeySequence( "Ctrl+L" ) );
 
   connect( &focusTranslateLineAction, SIGNAL( triggered() ),
            this, SLOT( focusTranslateLine() ) );
