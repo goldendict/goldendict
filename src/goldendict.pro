@@ -23,6 +23,11 @@ LIBS += -lvorbisfile \
     -logg \
     -lz \
     -lhunspell-1.2
+
+# This is to keep symbols for backtraces
+QMAKE_CXXFLAGS += -rdynamic
+QMAKE_LFLAGS += -rdynamic
+
 win32 { 
     LIBS += -liconv \
         -lwsock32 \
@@ -33,7 +38,8 @@ win32 {
     LIBS += -Lwinlibs/lib
 }
 unix { 
-    LIBS += -lX11 -lXtst
+    LIBS += -lX11 \
+        -lXtst
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr/local
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/apps/goldendict/\\\"
@@ -125,7 +131,8 @@ HEADERS += folding.hh \
     atomic_rename.hh \
     articlewebview.hh \
     zipfile.hh \
-    indexedzip.hh
+    indexedzip.hh \
+    termination.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -201,7 +208,8 @@ SOURCES += folding.cc \
     atomic_rename.cc \
     articlewebview.cc \
     zipfile.cc \
-    indexedzip.cc
+    indexedzip.cc \
+    termination.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h
@@ -216,10 +224,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/bg_BG.ts
 
 # This makes qmake generate translations
-win32 {
-  # Windows doesn't seem to have *-qt4 symlinks
-  isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-}
+win32:# Windows doesn't seem to have *-qt4 symlinks
+isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
 updateqm.input = TRANSLATIONS
 updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm

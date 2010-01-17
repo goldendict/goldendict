@@ -15,8 +15,35 @@
 #include <sys/resource.h>
 #endif
 
+#include "termination.hh"
+
 int main( int argc, char ** argv )
 {
+  if ( argc == 3 && strcmp( argv[ 1 ], "--show-error-file" ) == 0 )
+  {
+    // The program has crashed -- show a message about it
+
+    QApplication app( argc, argv );
+
+    QFile errFile( argv[ 2 ] );
+
+    QString errorText;
+
+    if ( errFile.open( QFile::ReadOnly ) )
+      errorText = QString::fromUtf8( errFile.readAll() );
+
+    errorText += "\n" + QString( "This information is located in file %1, "
+                                 "which will be removed once you close this dialog.").arg( errFile.fileName() );
+
+    QMessageBox::critical( 0, "GoldenDict has crashed", errorText );
+
+    errFile.remove();
+
+    return 0;
+  }
+
+  installTerminationHandler();
+
   #ifdef __DO_DEBUG
   {
     rlimit limit;
