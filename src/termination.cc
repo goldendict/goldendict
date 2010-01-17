@@ -7,7 +7,10 @@
 #include <cxxabi.h>
 #include <string>
 
+#ifndef __WIN32
 #include <execinfo.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -64,6 +67,8 @@ static void termHandler()
     message += "terminate() called without active exception\n";
   }
 
+#ifndef __WIN32
+
   message += "\nBacktrace:\n";
 
   const size_t maxDepth = 200;
@@ -115,6 +120,8 @@ static void termHandler()
     message += line.size() ? line.c_str() : stackStrings[ i ];
     message += '\n';
   }
+
+#endif
 
   QTemporaryFile file;
 
