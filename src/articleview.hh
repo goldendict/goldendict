@@ -12,7 +12,6 @@
 #include "instances.hh"
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
-#include <phonon>
 
 /// A widget with the web view tailored to view and handle articles -- it
 /// uses the appropriate netmgr, handles link clicks, rmb clicks etc

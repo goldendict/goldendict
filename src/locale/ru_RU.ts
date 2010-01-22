@@ -4,8 +4,8 @@
 <context>
     <name></name>
     <message>
-        <location filename="../mediawiki.cc" line="157"/>
-        <location filename="../mediawiki.cc" line="279"/>
+        <location filename="../mediawiki.cc" line="149"/>
+        <location filename="../mediawiki.cc" line="271"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Ошибка обработки XML: %1 на строке %2, столбце %3</translation>
     </message>
@@ -114,71 +114,71 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="662"/>
-        <location filename="../articleview.cc" line="974"/>
-        <location filename="../articleview.cc" line="993"/>
-        <location filename="../articleview.cc" line="1003"/>
-        <location filename="../articleview.cc" line="1026"/>
+        <location filename="../articleview.cc" line="668"/>
+        <location filename="../articleview.cc" line="980"/>
+        <location filename="../articleview.cc" line="999"/>
+        <location filename="../articleview.cc" line="1009"/>
+        <location filename="../articleview.cc" line="1032"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="662"/>
+        <location filename="../articleview.cc" line="668"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Запрошенный ресурс не найден.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="768"/>
+        <location filename="../articleview.cc" line="774"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Открыть ссылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="774"/>
+        <location filename="../articleview.cc" line="780"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Открыть ссылку в новой &amp;вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="781"/>
+        <location filename="../articleview.cc" line="787"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть ссылку во внешнем &amp;браузере</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="794"/>
+        <location filename="../articleview.cc" line="800"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Поиск «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="802"/>
+        <location filename="../articleview.cc" line="808"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Поиск «%1» в &amp;новой вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="817"/>
+        <location filename="../articleview.cc" line="823"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Поиск «%1» в %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="825"/>
+        <location filename="../articleview.cc" line="831"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Поиск «%1» в %2 в &amp;новой вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="974"/>
+        <location filename="../articleview.cc" line="980"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Невозможно запустить проигрыватель звукового файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="993"/>
+        <location filename="../articleview.cc" line="999"/>
         <source>Failed to create temporary file.</source>
         <translation>Ошибка создания временного файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1003"/>
+        <location filename="../articleview.cc" line="1009"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Ошибка открытия файла ресурса, попробуйте открыть вручную: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1026"/>
+        <location filename="../articleview.cc" line="1032"/>
         <source>The referenced resource failed to download.</source>
         <translation>Невозможно загрузить указанный ресурс.</translation>
     </message>
@@ -247,9 +247,9 @@
 <context>
     <name>DictionaryBar</name>
     <message>
-        <location filename="../dictionarybar.cc" line="10"/>
+        <location filename="../dictionarybar.cc" line="12"/>
         <source>Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Панель словарей</translation>
     </message>
 </context>
 <context>
@@ -2189,22 +2189,22 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cc" line="62"/>
+        <location filename="../mainwindow.cc" line="64"/>
         <source>Navigation</source>
         <translation>Навигация</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="65"/>
+        <location filename="../mainwindow.cc" line="67"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="66"/>
+        <location filename="../mainwindow.cc" line="68"/>
         <source>Forward</source>
         <translation>Вперёд</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="73"/>
+        <location filename="../mainwindow.cc" line="75"/>
         <source>Scan Popup</source>
         <translation>Сканировать</translation>
     </message>
@@ -2213,58 +2213,58 @@
         <translation type="obsolete">Произнести слово</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="104"/>
+        <location filename="../mainwindow.cc" line="106"/>
         <source>Show &amp;Main Window</source>
         <translation>Показать &amp;основное окно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="108"/>
-        <location filename="../mainwindow.ui" line="287"/>
+        <location filename="../mainwindow.cc" line="110"/>
+        <location filename="../mainwindow.ui" line="295"/>
         <source>&amp;Quit</source>
         <translation>В&amp;ыход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="177"/>
+        <location filename="../mainwindow.cc" line="199"/>
         <source>Loading...</source>
         <translation>Загрузка...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1382"/>
+        <location filename="../mainwindow.cc" line="1423"/>
         <source>Skip This Release</source>
         <translation>Пропустить данную версию</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1505"/>
+        <location filename="../mainwindow.cc" line="1605"/>
         <source>Page Setup</source>
         <translation>Параметры страницы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1506"/>
+        <location filename="../mainwindow.cc" line="1606"/>
         <source>No printer is available. Please install one first.</source>
         <translation>В системе не установлено ни одного принтера.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1523"/>
+        <location filename="../mainwindow.cc" line="1623"/>
         <source>Print Article</source>
         <translation>Печать статьи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1544"/>
+        <location filename="../mainwindow.cc" line="1644"/>
         <source>Save Article As</source>
         <translation>Сохранить статью как</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1544"/>
+        <location filename="../mainwindow.cc" line="1644"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлы Html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1559"/>
+        <location filename="../mainwindow.cc" line="1659"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1560"/>
+        <location filename="../mainwindow.cc" line="1660"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Невозможно сохранить статью: %1</translation>
     </message>
@@ -2273,79 +2273,84 @@
         <translation type="obsolete">Ошибка при загрузке словарей</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="487"/>
+        <location filename="../mainwindow.cc" line="512"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>Словарей: %1, статей: %2, слов: %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1242"/>
+        <location filename="../mainwindow.cc" line="1283"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Ошибка инициализации механизма отслеживания горячих клавиш.&lt;br&gt;Убедитесь, что ваш XServer поддерживает расширение RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1375"/>
+        <location filename="../mainwindow.cc" line="1416"/>
         <source>New Release Available</source>
         <translation>Доступна новая версия</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1376"/>
+        <location filename="../mainwindow.cc" line="1417"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версия &lt;b&gt;%1&lt;/b&gt; программы GoldenDict доступа для загрузки.&lt;br&gt;
 Нажмите &lt;b&gt;Загрузить&lt;/b&gt;, чтобы перейти на страницу загрузки.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1381"/>
+        <location filename="../mainwindow.cc" line="1422"/>
         <source>Download</source>
         <translation>Загрузить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="50"/>
-        <location filename="../mainwindow.cc" line="498"/>
+        <location filename="../mainwindow.cc" line="52"/>
+        <location filename="../mainwindow.cc" line="523"/>
         <source>Look up in:</source>
         <translation>Поиск в:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="83"/>
+        <location filename="../mainwindow.cc" line="33"/>
+        <source>Show Names in Dictionary Bar</source>
+        <translation>Показывать названия в панели словарей</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="85"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Произнести слово (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="92"/>
+        <location filename="../mainwindow.cc" line="94"/>
         <source>Zoom In</source>
         <translation>Увеличить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="93"/>
+        <location filename="../mainwindow.cc" line="95"/>
         <source>Zoom Out</source>
         <translation>Уменьшить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="94"/>
+        <location filename="../mainwindow.cc" line="96"/>
         <source>Normal Size</source>
         <translation>Обычный размер</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="498"/>
+        <location filename="../mainwindow.cc" line="523"/>
         <source>Look up:</source>
         <translation>Искать:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="516"/>
+        <location filename="../mainwindow.cc" line="541"/>
         <source>All</source>
         <translation>Все</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="604"/>
+        <location filename="../mainwindow.cc" line="630"/>
         <source>(untitled)</source>
         <translation>(без имени)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="981"/>
+        <location filename="../mainwindow.cc" line="1013"/>
         <source>WARNING: %1</source>
         <translation>Внимание: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1241"/>
+        <location filename="../mainwindow.cc" line="1282"/>
         <location filename="../mainwindow.ui" line="14"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
@@ -2359,7 +2364,7 @@
         <translation type="obsolete">Tab 2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="272"/>
+        <location filename="../mainwindow.cc" line="297"/>
         <location filename="../mainwindow.ui" line="43"/>
         <source>Welcome!</source>
         <translation>Добро пожаловать!</translation>
@@ -2380,7 +2385,7 @@
         <translation>&amp;Справка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="263"/>
+        <location filename="../mainwindow.ui" line="271"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Параметры...</translation>
     </message>
@@ -2389,128 +2394,138 @@
         <translation type="obsolete">&amp;Источники...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="324"/>
+        <location filename="../mainwindow.ui" line="332"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="251"/>
+        <location filename="../mainwindow.ui" line="259"/>
         <source>&amp;Groups...</source>
         <translation>&amp;Группы...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="239"/>
+        <location filename="../mainwindow.ui" line="102"/>
+        <source>H&amp;istory</source>
+        <translation>&amp;Журнал</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="247"/>
         <source>&amp;Dictionaries...</source>
         <translation>&amp;Словари...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="242"/>
-        <location filename="../mainwindow.ui" line="254"/>
+        <location filename="../mainwindow.ui" line="250"/>
+        <location filename="../mainwindow.ui" line="262"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="266"/>
+        <location filename="../mainwindow.ui" line="274"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="271"/>
+        <location filename="../mainwindow.ui" line="279"/>
         <source>&amp;Homepage</source>
         <translation>&amp;Веб-сайт</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="276"/>
+        <location filename="../mainwindow.ui" line="284"/>
         <source>&amp;About</source>
         <translation>&amp;О программе</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="279"/>
+        <location filename="../mainwindow.ui" line="287"/>
         <source>About GoldenDict</source>
         <translation>О программе GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="282"/>
+        <location filename="../mainwindow.ui" line="290"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="290"/>
+        <location filename="../mainwindow.ui" line="298"/>
         <source>Quit from application</source>
         <translation>Выйти из приложения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="293"/>
+        <location filename="../mainwindow.ui" line="301"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="298"/>
+        <location filename="../mainwindow.ui" line="306"/>
         <source>&amp;Forum</source>
         <translation>&amp;Форум</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="303"/>
+        <location filename="../mainwindow.ui" line="311"/>
         <source>&amp;Close To Tray</source>
         <translation>&amp;Свернуть в лоток</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="306"/>
+        <location filename="../mainwindow.ui" line="314"/>
         <source>Minimizes the window to tray</source>
         <translation>Свёртывает окно в лоток</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="309"/>
+        <location filename="../mainwindow.ui" line="317"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="318"/>
+        <location filename="../mainwindow.ui" line="326"/>
         <source>&amp;Save Article</source>
         <translation>&amp;Сохранить статью</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="321"/>
+        <location filename="../mainwindow.ui" line="329"/>
         <source>Save Article</source>
         <translation>Сохранить статью</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="333"/>
+        <location filename="../mainwindow.ui" line="341"/>
         <source>&amp;Print</source>
         <translation>&amp;Печатать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="336"/>
+        <location filename="../mainwindow.ui" line="344"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../mainwindow.ui" line="349"/>
         <source>Page Set&amp;up</source>
         <translation>П&amp;араметры страницы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="346"/>
+        <location filename="../mainwindow.ui" line="354"/>
         <source>Print Preview</source>
         <translation>Предварительный просмотр</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="351"/>
+        <location filename="../mainwindow.ui" line="359"/>
         <source>Rescan Files</source>
         <translation>Пересканировать файлы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="../mainwindow.ui" line="362"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="108"/>
+        <location filename="../mainwindow.ui" line="367"/>
+        <source>&amp;Clear</source>
+        <translation>О&amp;чистить</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="116"/>
         <source>Search Pane</source>
         <translation>Панель поиска</translation>
     </message>
@@ -2704,11 +2719,6 @@ the application.</source>
         <translation>Запуск</translation>
     </message>
     <message>
-        <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation type="obsolete">Автоматически запускать программу при старте операционной
-системы</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="149"/>
         <source>Start with system</source>
         <translation>Автозапуск программы</translation>
@@ -2727,7 +2737,7 @@ the application.</source>
         <location filename="../preferences.ui" line="283"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включать или нет режим всплывающего окна при запуске программы.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="464"/>
@@ -2735,7 +2745,15 @@ the program would always start with the scan popup active.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation type="unfinished"></translation>
+	<translation>В обычном состоянии, чтобы активизировать всплывающее
+окно, необходимо удерживать выбранные клавиши в процессе
+выделения слова. Однако, если включить данный режим, клавиши
+могут быть нажаты также и в течение некоторого времени после
+того, как слово было выделено.</translation>
+	<translatorcomment>Может быть, лучше так:
+Обычно, всплывающее окно активируется, только если выбранные
+клавиши были зажаты в процессе выделения. Если включён данный режим,
+выбранные клавиши можно нажать после того, как текст выделен.</translatorcomment>
     </message>
     <message>
         <location filename="../preferences.ui" line="544"/>
@@ -2765,7 +2783,7 @@ be pressed shortly after the selection is done.</source>
     <message>
         <location filename="../preferences.ui" line="146"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически запускать GoldenDict при старте операционной системы.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="265"/>
@@ -2786,11 +2804,6 @@ off from main window or tray icon.</source>
         <location filename="../preferences.ui" line="271"/>
         <source>Enable scan popup functionality</source>
         <translation>Разрешить всплывающее окно</translation>
-    </message>
-    <message>
-        <source>Chooses whether the scan popup mode is on by default nor not. If checked,
-the program would always start with the scan popup active.</source>
-        <translation type="obsolete">Включать или нет режим всплывающего окна при запуске программы.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="287"/>
@@ -2910,17 +2923,6 @@ in the pressed state when the word selection changes.</source>
         <translation>Win или Meta</translation>
     </message>
     <message>
-        <source>Normally, in order to activate a popup you have to
-maintain the chosen keys pressed while you select
-a word. With this enabled, the chosen keys may also
-be pressed shorty after the selection is done.</source>
-        <translation type="obsolete">В обычном состоянии, чтобы активизировать всплывающее
-окно, необходимо удерживать выбранные клавиши в процессе
-выделения слова. Однако если включить данный режим, клавиши
-могут быть нажаты также и в течение некоторого времени после
-того, как слово было выделено.</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="470"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Задержка проверки модификаторов</translation>
@@ -2946,7 +2948,11 @@ seconds, which is specified here.</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Замечание: Кажется, Вы используете версию X.Org XServer, в которой отсутствует поддержка расширения RECORD. Вероятно, горячие клавиши в GoldenDict не заработают. Эта проблема должна быть исправлена на стороне XServer. Более подробную информацию смотрите на &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; и, если хотите, оставляйте там свои пожелания.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="689"/>
@@ -3015,12 +3021,15 @@ for all program&apos;s network requests.</source>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation type="unfinished"></translation>
+	<translation>Включение этой опции позволяет GoldenDict блокировать большую часть
+рекламы путём запрещения определённых данных (картинок, фреймов итп),
+не находящихся на исходном сайте. Если некоторые сайты перестанут
+из-за этого функционировать, попробуйте запретить эту опцию</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="882"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation type="unfinished"></translation>
+        <translation>Запретить загрузку информации с других сайтов (убирает большую часть рекламы)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="905"/>

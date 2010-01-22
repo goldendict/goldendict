@@ -15,6 +15,8 @@
 #include "wstring_qt.hh"
 
 #include <QBuffer>
+#include <Phonon/AudioOutput>
+#include <Phonon/MediaObject>
 
 using std::map;
 using std::list;

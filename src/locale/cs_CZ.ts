@@ -2169,6 +2169,18 @@
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show Names in Dictionary Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>H&amp;istory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWikisModel</name>

@@ -18,11 +18,8 @@ OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
-LIBS += -lvorbisfile \
-    -lvorbis \
-    -logg \
-    -lz \
-    -lhunspell-1.2
+LIBS += \
+        -lz \
 
 # This is to keep symbols for backtraces
 QMAKE_CXXFLAGS += -rdynamic
@@ -33,11 +30,20 @@ win32 {
         -lwsock32 \
         -lwinmm \
         -lpsapi
+    LIBS += -lvorbisfile \
+        -lvorbis \
+        -logg \
+        -lhunspell-1.2
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
     LIBS += -Lwinlibs/lib
 }
-unix { 
+unix {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += vorbisfile \
+    	vorbis \
+	ogg \
+	hunspell
     LIBS += -lX11 \
         -lXtst
     PREFIX = $$(PREFIX)

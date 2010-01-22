@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name></name>
     <message>
@@ -161,6 +163,10 @@
         <source>&amp;Case Sensitive</source>
         <translation>Отчитане на &amp;регистъра</translation>
     </message>
+    <message>
+        <source>Open Link in &amp;External Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
@@ -178,6 +184,13 @@
     <message>
         <source>%1 entries</source>
         <translation>%1 записа</translation>
+    </message>
+</context>
+<context>
+    <name>DictionaryBar</name>
+    <message>
+        <source>Dictionary Bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1380,6 +1393,22 @@
         <source>Search Pane</source>
         <translation>Панел Търсене</translation>
     </message>
+    <message>
+        <source>Show Names in Dictionary Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>H&amp;istory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWikisModel</name>
@@ -1532,7 +1561,7 @@ the application.</source>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation>Автоматично зарежда GoldenDict слез зареждане на ОС</translation>
+        <translation type="obsolete">Автоматично зарежда GoldenDict слез зареждане на ОС</translation>
     </message>
     <message>
         <source>Start with system</source>
@@ -1583,7 +1612,7 @@ off from main window or tray icon.</source>
     <message>
         <source>Chooses whether the scan popup mode is on by default nor not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Избира дали изскачащият прозорец да е включен поначало или не. Ако е
+        <translation type="obsolete">Избира дали изскачащият прозорец да е включен поначало или не. Ако е
 включен, програмата винаги ще се стартира с активен изскачащ прозорец.</translation>
     </message>
     <message>
@@ -1685,7 +1714,7 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shorty after the selection is done.</source>
-        <translation>Обикновено, за да активирате изскачащ прозорец трябва да
+        <translation type="obsolete">Обикновено, за да активирате изскачащ прозорец трябва да
 задържите избраните клавиши докато избирате дума.
 Когато това е включено, избраните клавиши могат да бъдат
 натиснати и малко след като думата е избрана.</translation>
@@ -1777,11 +1806,11 @@ download page.</source>
     </message>
     <message>
         <source>English</source>
-        <translation>Английски</translation>
+        <translation type="obsolete">Английски</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation>Руски</translation>
+        <translation type="obsolete">Руски</translation>
     </message>
     <message>
         <source>Default</source>
@@ -1798,6 +1827,40 @@ download page.</source>
     <message>
         <source>Restart the program to apply the language change.</source>
         <translation>Рестартирайте програмата, за да се приложи смяната на езика.</translation>
+    </message>
+    <message>
+        <source>Automatically starts GoldenDict after operation system bootup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chooses whether the scan popup mode is on by default or not. If checked,
+the program would always start with the scan popup active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normally, in order to activate a popup you have to
+maintain the chosen keys pressed while you select
+a word. With this enabled, the chosen keys may also
+be pressed shortly after the selection is done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling this would make GoldenDict block most advertisements
+by disallowing content (images, frames) not originating from the site
+you are browsing. If some site breaks because of this, try disabling this.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disallow loading content from other sites (hides most advertisements)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
