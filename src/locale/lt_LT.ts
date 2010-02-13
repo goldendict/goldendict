@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="el_GR">
+<TS version="2.0" language="lt">
 <context>
     <name></name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="obsolete">Σφάλμα κατά την ανάλυση του XML: %1 στο %2,%3</translation>
+        <translation type="obsolete">Ошибка обработки XML: %1 на строке %2, столбце %3</translation>
     </message>
 </context>
 <context>
@@ -13,12 +13,16 @@
     <message>
         <location filename="../about.ui" line="17"/>
         <source>About</source>
-        <translation>Περί</translation>
+        <translation>Apie</translation>
+    </message>
+    <message>
+        <source>GoldenDict dictionary lookup program, version 0.7</source>
+        <translation type="obsolete">GoldenDict paieškos žodyne programa, 0.7 versija</translation>
     </message>
     <message>
         <location filename="../about.ui" line="48"/>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>GoldenDict, πρόγραμμα αναζήτησης σε λεξικά, έκδοση </translation>
+        <translation>GoldenDict paieškos žodyne programa, versija </translation>
     </message>
     <message>
         <location filename="../about.ui" line="61"/>
@@ -28,12 +32,12 @@
     <message>
         <location filename="../about.ui" line="70"/>
         <source>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</translation>
+        <translation>© 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="80"/>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>Διανέμεται υπό τους όρους της GNU GPLv3 ή νεότερης</translation>
+        <translation>Licencija: GNU GPLv3 arba vėlesnė</translation>
     </message>
 </context>
 <context>
@@ -41,45 +45,42 @@
     <message>
         <location filename="../article_maker.cc" line="108"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>Δε βρέθηκε μετάφραση του &lt;b&gt;%1&lt;/b&gt; στην ομάδα &lt;b&gt;%2&lt;/b&gt;.</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; vertimas nerastas grupėje &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="125"/>
         <source>Welcome!</source>
-        <translation>Καλώς ήλθατε!</translation>
+        <translation>Jus sveikina GoldenDict!</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="127"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Καλώς ήλθατε στο &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Για να ξεκινήσετε, επιλέξτε &lt;b&gt;Επεξεργασία|Λεξικά&lt;/b&gt;. Από εδώ μπορείτε να προσθέσετε φακέλους που περιέχουν λεξικά, να ενεργοποιήσετε την αναζήτηση στη Βικιπαίδεια ή άλλες πηγές, να αλλάξετε τη σειρά των λεξικών ή να δημιουργήσετε ομάδες λεξικών.&lt;/p&gt;
-&lt;p&gt;Μετά θα είστε έτοιμοι να ξεκινήσετε την αναζήτηση! Μπορείτε να αναζητάτε λέξεις από την αριστερή στήλη αυτού του παραθύρου, ή από &lt;a href=&quot;Χρήση αναδυόμενου παραθύρου&quot;&gt;οποιαδήποτε άλλη ανοιχτή εφαρμογή&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Για να προσαρμόσετε το πρόγραμμα στις απαιτήσεις σας, δείτε τις διαθέσιμες ρυθμίσεις στο μενού &lt;b&gt;Επεξεργασία|Προτιμήσεις&lt;/b&gt;. Όλες οι προτιμήσεις διαθέτουν χρήσιμες συμβουλές οθόνης, που μπορείτε να δείτε τοποθετώντας το ποντίκι πάνω στην προτίμηση.&lt;/p&gt;
-&lt;p&gt;Για περαιτέρω βοήθεια, ερωτήματα, υποδείξεις, ή απλά για να διαβάσετε τις γνώμες άλλων χρηστών, μπορείτε να εγγραφείτε στο &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;φόρουμ&lt;/a&gt; του προγράμματος. &lt;p&gt;Ενημερώσεις μπορείτε να βρείτε στον &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;Ιστότοπο&lt;/a&gt; του προγράμματος.&lt;p&gt;(c) 2008-2009 Konstantin Isakov. Διανέμεται υπό τους όρους της GNU GPLv3 ή νεότερης έκδοσής της.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spusdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinkite žodynų tvarką arba kurkite žodynų grupes.&lt;p&gt;Po to jau galėsite peržvelgti žodžius! Ieškoti žodžių galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad skaitykite, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p&gt;Programos atnaujinimų ieškokite &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. GPLv3 arba vėlesnė licencija.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="143"/>
         <source>Working with popup</source>
-        <translation>Χρήση αναδυόμενου παραθύρου</translation>
+        <translation>Iškylantys langai</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="145"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Χρήση αναδυόμενου παραθύρου&lt;/h3&gt; Για να μπορείτε να αναζητάτε λέξεις που συναντήσατε σε άλλες ενεργές εφαρμογές, πρέπει πρώτα να ενεργοποιήσετε τη &lt;i&gt;&quot;Λειτουργία αναδυόμενου παραθύρου&quot;&lt;/i&gt; από τις &lt;b&gt;Προτιμήσεις&lt;/b&gt;. Μετά, θα μπορείτε να την ενεργοποιείτε όποτε θέλετε, είτε πατώντας το εικονίδιο &quot;Αναδυόμενο παράθυρο&quot; της εργαλειοθήκης, είτε κάνοντας δεξί κλικ στο εικονίδιο της περιοχής ειδοποιήσεων και επιλέγοντας την από το μενού.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Iškylantys langai&lt;/h3&gt;Norėdami žodžių ieškoti kitomis veikiančiomis programomis, pirmiausia turite &lt;b&gt;Nuostatose&lt;/b&gt; įgalinti &lt;i&gt;„iškylančius langus“&lt;/i&gt;, o po to bet kada spragtelėti „iškylančių langų“ ženkliuką viršuje arba spustelėti sistemos dėklo ženkliuką dešiniu pelės klavišu ir pasirinkti atitinkamą meniu įrašą. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>Στη συνέχεια, θα μπορείτε να τοποθετείτε το δρομέα πάνω στις λέξεις που σας ενδιαφέρουν για να εμφανίζετε ένα παράθυρο με την επεξήγησή τους.</translation>
+        <translation>Tuomet kokioje nors programoje užveskite žymeklį ties norimu ieškoti žodžiu – netrukus pasirodys iškylantis langas su pasirinkto žodžio apibūdinimu.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="155"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Στη συνέχεια, απλά επιλέξτε με το ποντίκι μια λέξη σε άλλη εφαρμογή (π.χ. με δεξί κλικ πάνω στη λέξη), και θα εμφανιστεί ένα παράθυρο με την επεξήγησή της.</translation>
+        <translation>Tuomet kokioje nors programoje tiesiog pele pažymėkite bet kokį norimą žodį (dukart jį spragtelėkite arba braukite jį nuspaudę pelės klavišą) – netrukus pasirodys iškylantis langas su pasirinkto žodžio apibūdinimu.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="232"/>
         <source>(untitled)</source>
-        <translation>(ανώνυμο)</translation>
+        <translation>(bevardis)</translation>
     </message>
 </context>
 <context>
@@ -87,17 +88,17 @@
     <message>
         <location filename="../article_maker.cc" line="388"/>
         <source>From </source>
-        <translation>Από </translation>
+        <translation> </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="395"/>
         <source>Query error: %1</source>
-        <translation>Σφάλμα αναζήτησης: %1</translation>
+        <translation>Užklausos klaida: %1</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="489"/>
         <source>Close words: </source>
-        <translation>Παρόμοια λήμματα: </translation>
+        <translation>Panašūs žodžiai: </translation>
     </message>
 </context>
 <context>
@@ -114,72 +115,72 @@
     <message>
         <location filename="../articleview.cc" line="685"/>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>Δεν υπάρχει ο ζητούμενος πόρος.</translation>
+        <translation>Nurodyto šaltinio nėra.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="791"/>
         <source>&amp;Open Link</source>
-        <translation>Άνοι&amp;γμα συνδέσμου</translation>
+        <translation>&amp;Atverti nuorodą</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="797"/>
         <source>Open Link in New &amp;Tab</source>
-        <translation>Άνοιγμα συνδέσμου σε νέα &amp;καρτέλα</translation>
+        <translation>Atverti nuorodą naujoje &amp;kortelėje</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="804"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation>Άνοιγμα συνδέσμου σε &amp;εξωτερικό περιηγητή</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="817"/>
         <source>&amp;Look up &quot;%1&quot;</source>
-        <translation>Ανα&amp;ζήτηση του &quot;%1&quot;</translation>
+        <translation>&amp;Ieškoti „%1“</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="825"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>Αναζήτηση του &quot;%1&quot; σε &amp;νέα καρτέλα</translation>
+        <translation>Ieškoti „%1“ &amp;naujoje kortelėje</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="840"/>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>Αναζήτηση του &quot;%1&quot; στο %2</translation>
+        <translation>Ieškoti „%1“ grupėje %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="848"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>Αναζήτηση του &quot;%1&quot; στο %2 σε &amp;νέα καρτέλα</translation>
+        <translation>Ieškoti „%1“ grupėje %2 &amp;naujoje kortelėje</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1005"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Δεν ήταν δυνατή η αναπαραγωγή του αρχείου ήχου: %1</translation>
+        <translation>Nepavyko paleisti grotuvo garso rinkmenai atkurti: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1023"/>
         <source>Failed to create temporary file.</source>
-        <translation>Απέτυχε η δημιουργία προσωρινού αρχείου.</translation>
+        <translation>Nepavyko sukurti laikinosios rinkmenos.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1033"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Απέτυχε το αυτόματο άνοιγμα του αρχείου· δοκιμάστε να το ανοίξετε χειροκίνητα: %1.</translation>
+        <translation>Nepavyko automatiškai atverti šaltinio rinkmenos, mėginkite rankiniu būdu: %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1056"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Απέτυχε η λήψη του ζητούμενου πόρου.</translation>
+        <translation>Nepavyko parsiųsti nurodytų šaltinių.</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="14"/>
         <source>Form</source>
-        <translation>Μορφή</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="36"/>
         <source>about:blank</source>
-        <translation>about:blank</translation>
+        <translation>tuščias</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="65"/>
@@ -189,27 +190,27 @@
     <message>
         <location filename="../articleview.ui" line="79"/>
         <source>Find:</source>
-        <translation>Εύρεση:</translation>
+        <translation>Ieškoti:</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="89"/>
         <source>&amp;Previous</source>
-        <translation>&amp;Προηγούμενο</translation>
+        <translation>&amp;Ankstesnis</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="106"/>
         <source>&amp;Next</source>
-        <translation>&amp;Επόμενο</translation>
+        <translation>&amp;Tolesnis</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="113"/>
         <source>Ctrl+G</source>
-        <translation>Ctrl+G</translation>
+        <translation>Vald+G</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="126"/>
         <source>&amp;Case Sensitive</source>
-        <translation>&amp;Διάκριση πεζών/κεφαλαίων</translation>
+        <translation>&amp;Skirti raidžių dydį</translation>
     </message>
 </context>
 <context>
@@ -217,12 +218,12 @@
     <message>
         <location filename="../dictgroupwidget.ui" line="14"/>
         <source>Form</source>
-        <translation>Μορφή</translation>
+        <translation> </translation>
     </message>
     <message>
         <location filename="../dictgroupwidget.ui" line="37"/>
         <source>Group icon:</source>
-        <translation>Εικονίδιο ομάδας:</translation>
+        <translation>Grupės ženkliukas:</translation>
     </message>
 </context>
 <context>
@@ -230,7 +231,7 @@
     <message>
         <location filename="../groups_widgets.cc" line="125"/>
         <source>%1 entries</source>
-        <translation>%1 λήμματα</translation>
+        <translation>Įrašų: %1</translation>
     </message>
 </context>
 <context>
@@ -238,7 +239,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="12"/>
         <source>Dictionary Bar</source>
-        <translation>Γραμμή λεξικών</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -246,44 +247,44 @@
     <message>
         <location filename="../editdictionaries.cc" line="41"/>
         <source>&amp;Sources</source>
-        <translation>&amp;Πηγές</translation>
+        <translation>&amp;Šaltiniai</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
         <location filename="../editdictionaries.cc" line="186"/>
         <source>&amp;Dictionaries</source>
-        <translation>&amp;Λεξικά</translation>
+        <translation>&amp;Žodynai</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="43"/>
         <location filename="../editdictionaries.cc" line="189"/>
         <source>&amp;Groups</source>
-        <translation>&amp;Ομάδες</translation>
+        <translation>&amp;Grupės</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="84"/>
         <source>Sources changed</source>
-        <translation>Οι πηγές άλλαξαν</translation>
+        <translation>Šaltiniai pasikeitė</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="85"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>Ορισμένες πηγές άλλαξαν. Αποδέχεστε τις αλλαγές;</translation>
+        <translation>Kai kurie šaltiniai pasikeitė. Priimti pakeitimus?</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="88"/>
         <source>Accept</source>
-        <translation>Αποδοχή</translation>
+        <translation>Priimti</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="90"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Atšaukti</translation>
     </message>
     <message>
         <location filename="../editdictionaries.ui" line="14"/>
         <source>Dictionaries</source>
-        <translation>Λεξικά</translation>
+        <translation>Žodynai</translation>
     </message>
 </context>
 <context>
@@ -291,7 +292,7 @@
     <message>
         <location filename="../german.cc" line="48"/>
         <source>German Transliteration</source>
-        <translation>Γερμανική μεταγραφή</translation>
+        <translation>Transliteracija (vokiečių)</translation>
     </message>
 </context>
 <context>
@@ -299,7 +300,7 @@
     <message>
         <location filename="../groupcombobox.cc" line="10"/>
         <source>Choose a Group (Alt+G)</source>
-        <translation>Επιλογή ομάδας (Alt+G)</translation>
+        <translation>Pasirinkti grupę (Alt+G)</translation>
     </message>
 </context>
 <context>
@@ -307,12 +308,12 @@
     <message>
         <location filename="../groupselectorwidget.ui" line="13"/>
         <source>Form</source>
-        <translation>Μορφή</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <location filename="../groupselectorwidget.ui" line="19"/>
         <source>Look in</source>
-        <translation>Αναζήτηση σε</translation>
+        <translation>Ieškojimo vieta</translation>
     </message>
 </context>
 <context>
@@ -320,53 +321,53 @@
     <message>
         <location filename="../groups.cc" line="79"/>
         <source>Add group</source>
-        <translation>Προσθήκη ομάδας</translation>
+        <translation>Pridėti grupę</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="80"/>
         <source>Give a name for the new group:</source>
-        <translation>Εισάγετε το όνομα της νέας ομάδας:</translation>
+        <translation>Pavadinkite naująją grupę:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="99"/>
         <source>Rename group</source>
-        <translation>Μετονομασία ομάδας</translation>
+        <translation>Pervadinti grupę</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="100"/>
         <source>Give a new name for the group:</source>
-        <translation>Εισάγετε το νέο όνομα της ομάδας:</translation>
+        <translation>Naujas grupės pavadinimas:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="111"/>
         <source>Remove group</source>
-        <translation>Αφαίρεση ομάδας</translation>
+        <translation>Pašalinti grupę</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="112"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>Σίγουρα θέλετε να αφαιρέσετε την ομάδα &lt;b&gt;%1&lt;/b&gt;;</translation>
+        <translation>Tikrai norite pašalinti &lt;b&gt;%1&lt;/b&gt; grupę?</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="173"/>
         <location filename="../groups.cc" line="124"/>
         <source>Remove all groups</source>
-        <translation>Αφαίρεση όλων των ομάδων</translation>
+        <translation>Pašalinti visas grupes</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="125"/>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>Σίγουρα θέλετε να διαγράψετε όλες τις ομάδες;</translation>
+        <translation>Tikrai norite pašalinti visas grupes?</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="22"/>
         <source>Dictionaries available:</source>
-        <translation>Διαθέσιμα λεξικά:</translation>
+        <translation>Galimi žodynai:</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="61"/>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>Προσθήκη των επιλεγμένων λεξικών στην ομάδα (Ins)</translation>
+        <translation>Į grupę įtraukti pasirinktus žodynus (Įterpti/Ins)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="64"/>
@@ -376,12 +377,12 @@
     <message>
         <location filename="../groups.ui" line="67"/>
         <source>Ins</source>
-        <translation>Ins</translation>
+        <translation>Įterpti</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="86"/>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>Αφαίρεση επιλεγμένων λεξικών από την ομάδα (Del)</translation>
+        <translation>Iš grupės pašalinti pasirinktus žodynus (Šalinti/Del)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="89"/>
@@ -391,57 +392,57 @@
     <message>
         <location filename="../groups.ui" line="92"/>
         <source>Del</source>
-        <translation>Del</translation>
+        <translation>Šalinti</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="116"/>
         <source>Groups:</source>
-        <translation>Ομάδες:</translation>
+        <translation>Grupės:</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="130"/>
         <source>Tab 2</source>
-        <translation>Tab 2</translation>
+        <translation>Kortelė</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="140"/>
         <source>Create new dictionary group</source>
-        <translation>Δημιουργία νέας ομάδας λεξικών</translation>
+        <translation>Sukurti naują žodynų grupę</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
         <source>&amp;Add group</source>
-        <translation>Προσ&amp;θήκη ομάδας</translation>
+        <translation>Pri&amp;dėti grupę</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="150"/>
         <source>Rename current dictionary group</source>
-        <translation>Μετονομασία τρέχουσας ομάδας λεξικών</translation>
+        <translation>Pervadinti esamą žodynų grupę</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="153"/>
         <source>Re&amp;name group</source>
-        <translation>&amp;Μετονομασία ομάδας</translation>
+        <translation>Per&amp;vadinti grupę</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="160"/>
         <source>Remove current dictionary group</source>
-        <translation>Αφαίρεση τρέχουσας ομάδας λεξικών</translation>
+        <translation>Pašalinti esamą žodynų grupę</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="163"/>
         <source>&amp;Remove group</source>
-        <translation>Α&amp;φαίρεση ομάδας</translation>
+        <translation>Pašali&amp;nti grupę</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="170"/>
         <source>Remove all dictionary groups</source>
-        <translation>Αφαίρεση όλων των ομάδων λεξικών</translation>
+        <translation>Pašalinti visas žodynų grupes</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="184"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Χρησιμοποιήστε το ποντίκι σας για να σύρετε λεξικά από και προς τις ομάδες, καθώς και για να αλλάξετε τη σειρά των λεξικών ή των ομάδων.</translation>
+        <translation>Nutempkite žodynus prie (arba iš) grupių, kilnokite juos grupės viduje, pele keiskite grupių tvarką.</translation>
     </message>
 </context>
 <context>
@@ -449,12 +450,12 @@
     <message>
         <location filename="../hunspell.cc" line="202"/>
         <source>Spelling suggestions: </source>
-        <translation>Προτάσεις ορθογραφίας:</translation>
+        <translation>Rašybos spėjimas: </translation>
     </message>
     <message>
         <location filename="../hunspell.cc" line="661"/>
         <source>%1 Morphology</source>
-        <translation>Μορφολογία για %1</translation>
+        <translation>%1 (morfologija)</translation>
     </message>
 </context>
 <context>
@@ -462,12 +463,12 @@
     <message>
         <location filename="../sources.cc" line="802"/>
         <source>Enabled</source>
-        <translation>Ενεργή</translation>
+        <translation>Įgalinta</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="804"/>
         <source>Name</source>
-        <translation>Όνομα</translation>
+        <translation>Pavadinimas</translation>
     </message>
 </context>
 <context>
@@ -475,23 +476,23 @@
     <message>
         <location filename="../initializing.cc" line="17"/>
         <source>Please wait...</source>
-        <translation>Παρακαλώ περιμένετε...</translation>
+        <translation>Palaukite...</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="22"/>
         <location filename="../initializing.cc" line="26"/>
         <source>Please wait while indexing dictionary</source>
-        <translation>Παρακαλώ περιμένετε να ολοκληρωθεί η δημιουργία ευρετηρίου</translation>
+        <translation>Indeksuojamas žodynas</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="16"/>
         <source>GoldenDict - Initializing</source>
-        <translation>GoldenDict - Έναρξη</translation>
+        <translation>Ruošiamas GoldenDict</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="38"/>
         <source>Dictionary Name</source>
-        <translation>Όνομα λεξικού</translation>
+        <translation>Žodyno pavadinimas</translation>
     </message>
 </context>
 <context>
@@ -499,292 +500,292 @@
     <message>
         <location filename="../language.cc" line="50"/>
         <source>Afar</source>
-        <translation>Afar</translation>
+        <translation>afarų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="51"/>
         <source>Abkhazian</source>
-        <translation>Αμπκχαζικά</translation>
+        <translation>abchazų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="52"/>
         <source>Avestan</source>
-        <translation>Avesta</translation>
+        <translation>avestianų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="53"/>
         <source>Afrikaans</source>
-        <translation>Afrikaans</translation>
+        <translation>afrikanų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="54"/>
         <source>Akan</source>
-        <translation>Akanα</translation>
+        <translation>akanų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="55"/>
         <source>Amharic</source>
-        <translation>Αμχαρικά</translation>
+        <translation>amharų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="56"/>
         <source>Aragonese</source>
-        <translation>Αραγόνας</translation>
+        <translation>aragosų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="57"/>
         <source>Arabic</source>
-        <translation>Αραβικά</translation>
+        <translation>arabų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="58"/>
         <source>Assamese</source>
-        <translation>Assam</translation>
+        <translation>asamų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="59"/>
         <source>Avaric</source>
-        <translation>Αβαρικά</translation>
+        <translation>avarų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="60"/>
         <source>Aymara</source>
-        <translation>Aymar</translation>
+        <translation>aimarų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="61"/>
         <source>Azerbaijani</source>
-        <translation>Αζέρικα</translation>
+        <translation>azerbadžaniečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="62"/>
         <source>Bashkir</source>
-        <translation>Bašqort</translation>
+        <translation>baškirų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="63"/>
         <source>Belarusian</source>
-        <translation>Λευκορωσικά</translation>
+        <translation>gudų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="64"/>
         <source>Bulgarian</source>
-        <translation>Βουλγαρικά</translation>
+        <translation>bulgarų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="65"/>
         <source>Bihari</source>
-        <translation>Bihari</translation>
+        <translation>biharų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="66"/>
         <source>Bislama</source>
-        <translation>Bislama</translation>
+        <translation>bislama</translation>
     </message>
     <message>
         <location filename="../language.cc" line="67"/>
         <source>Bambara</source>
-        <translation>Bamanankan</translation>
+        <translation>bambarų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="68"/>
         <source>Bengali</source>
-        <translation>Bengali</translation>
+        <translation>bengalų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="69"/>
         <source>Tibetan</source>
-        <translation>Θιβετιανά</translation>
+        <translation>tibetiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="70"/>
         <source>Breton</source>
-        <translation>Βρετάννης</translation>
+        <translation>bretonų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="71"/>
         <source>Bosnian</source>
-        <translation>Βοσνιακά</translation>
+        <translation>bosnių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="72"/>
         <source>Catalan</source>
-        <translation>Καταλανικά</translation>
+        <translation>katalonų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="73"/>
         <source>Chechen</source>
-        <translation>Τσετσενικά</translation>
+        <translation>čečėnų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="74"/>
         <source>Chamorro</source>
-        <translation>Chamoru</translation>
+        <translation>čemorų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="75"/>
         <source>Corsican</source>
-        <translation>Κορσικανικά</translation>
+        <translation>korsikiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="76"/>
         <source>Cree</source>
-        <translation>Nehiyaw</translation>
+        <translation>krijų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="77"/>
         <source>Czech</source>
-        <translation>Τσεχικά</translation>
+        <translation>čekų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="78"/>
         <source>Church Slavic</source>
-        <translation>Εκκλησιαστικά Σλαβικά</translation>
+        <translation>senoji slavų bažnytinė</translation>
     </message>
     <message>
         <location filename="../language.cc" line="79"/>
         <source>Chuvash</source>
-        <translation>Čăvašla</translation>
+        <translation>čiuvašų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="80"/>
         <source>Welsh</source>
-        <translation>Ουαλλικά</translation>
+        <translation>valų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="81"/>
         <source>Danish</source>
-        <translation>Δανέζικα</translation>
+        <translation>danų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="82"/>
         <source>German</source>
-        <translation>Γερμανικά</translation>
+        <translation>vokiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="83"/>
         <source>Divehi</source>
-        <translation>Divehi</translation>
+        <translation>maldyvų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="84"/>
         <source>Dzongkha</source>
-        <translation>Dzongkha</translation>
+        <translation>botijų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="85"/>
         <source>Ewe</source>
-        <translation>Eʋegbe</translation>
+        <translation>evų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="86"/>
         <source>Greek</source>
-        <translation>Ελληνικά</translation>
+        <translation>graikų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="87"/>
         <source>English</source>
-        <translation>Αγγλικά</translation>
+        <translation>anglų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="88"/>
         <source>Esperanto</source>
-        <translation>Εσπεράντο</translation>
+        <translation>esperanto</translation>
     </message>
     <message>
         <location filename="../language.cc" line="89"/>
         <source>Spanish</source>
-        <translation>Ισπανικά</translation>
+        <translation>ispanų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="90"/>
         <source>Estonian</source>
-        <translation>Εσθονικά</translation>
+        <translation>estų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="91"/>
         <source>Basque</source>
-        <translation>Βασκικά</translation>
+        <translation>baskų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="92"/>
         <source>Persian</source>
-        <translation>Περσικά</translation>
+        <translation>persų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="93"/>
         <source>Fulah</source>
-        <translation>Fulfulde</translation>
+        <translation>fulų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="94"/>
         <source>Finnish</source>
-        <translation>Φιλανδικά</translation>
+        <translation>suomių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="95"/>
         <source>Fijian</source>
-        <translation>Φίτζι</translation>
+        <translation>fidžių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="96"/>
         <source>Faroese</source>
-        <translation>Føroyskt</translation>
+        <translation>farerų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="97"/>
         <source>French</source>
-        <translation>Γαλλικά</translation>
+        <translation>prancūzų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="98"/>
         <source>Western Frisian</source>
-        <translation>Frysk</translation>
+        <translation>fryzų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="99"/>
         <source>Irish</source>
-        <translation>Ιρλανδικά</translation>
+        <translation>airių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="100"/>
         <source>Scottish Gaelic</source>
-        <translation>Σκωτσέζικα</translation>
+        <translation>škotų gėlų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="101"/>
         <source>Galician</source>
-        <translation>Γαλικιανά</translation>
+        <translation>galisų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="102"/>
         <source>Guarani</source>
-        <translation>Guaraní</translation>
+        <translation>gvaranių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="103"/>
         <source>Gujarati</source>
-        <translation>Gujarati</translation>
+        <translation>gudžaratų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="104"/>
         <source>Manx</source>
-        <translation>Gaelg</translation>
+        <translation>menksiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="105"/>
         <source>Hausa</source>
-        <translation>Hausa</translation>
+        <translation>hausų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="106"/>
         <source>Hebrew</source>
-        <translation>Εβραϊκά</translation>
+        <translation>hebrajų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="107"/>
         <source>Hindi</source>
-        <translation>Ινδικά</translation>
+        <translation>hindi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="108"/>
@@ -794,22 +795,22 @@
     <message>
         <location filename="../language.cc" line="109"/>
         <source>Croatian</source>
-        <translation>Κροατικά</translation>
+        <translation>kroatų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="110"/>
         <source>Haitian</source>
-        <translation>Αϊτιανά</translation>
+        <translation>Haičio kreolų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="111"/>
         <source>Hungarian</source>
-        <translation>Ουγγρικά</translation>
+        <translation>vengrų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="112"/>
         <source>Armenian</source>
-        <translation>Αρμενικά</translation>
+        <translation>armėnų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="113"/>
@@ -819,592 +820,592 @@
     <message>
         <location filename="../language.cc" line="114"/>
         <source>Interlingua</source>
-        <translation>Interlingua</translation>
+        <translation>interlingua</translation>
     </message>
     <message>
         <location filename="../language.cc" line="115"/>
         <source>Indonesian</source>
-        <translation>Ινδονησιακά</translation>
+        <translation>indoneziečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="116"/>
         <source>Interlingue</source>
-        <translation>Interlingue</translation>
+        <translation>interlingue</translation>
     </message>
     <message>
         <location filename="../language.cc" line="117"/>
         <source>Igbo</source>
-        <translation>Igbo</translation>
+        <translation>igbų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="118"/>
         <source>Sichuan Yi</source>
-        <translation>Nuosu</translation>
+        <translation>Sičuan Ji</translation>
     </message>
     <message>
         <location filename="../language.cc" line="119"/>
         <source>Inupiaq</source>
-        <translation>Iñupiak</translation>
+        <translation>inupiakų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="120"/>
         <source>Ido</source>
-        <translation>Ido</translation>
+        <translation>ido</translation>
     </message>
     <message>
         <location filename="../language.cc" line="121"/>
         <source>Icelandic</source>
-        <translation>Ισλανδικά</translation>
+        <translation>islandų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="122"/>
         <source>Italian</source>
-        <translation>Ιταλικά</translation>
+        <translation>italų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="123"/>
         <source>Inuktitut</source>
-        <translation>Inuktitut</translation>
+        <translation>inuktikuto</translation>
     </message>
     <message>
         <location filename="../language.cc" line="124"/>
         <source>Japanese</source>
-        <translation>Ιαπωνικά</translation>
+        <translation>japonų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="125"/>
         <source>Javanese</source>
-        <translation>Ιάβας</translation>
+        <translation>javiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="126"/>
         <source>Georgian</source>
-        <translation>Γεωργιανά</translation>
+        <translation>gruzinų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="127"/>
         <source>Kongo</source>
-        <translation>Κονγκολέζικα</translation>
+        <translation>kongiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="128"/>
         <source>Kikuyu</source>
-        <translation>Κικούγιου</translation>
+        <translation>kikuju</translation>
     </message>
     <message>
         <location filename="../language.cc" line="129"/>
         <source>Kwanyama</source>
-        <translation>Kwanyama</translation>
+        <translation>kvanjama</translation>
     </message>
     <message>
         <location filename="../language.cc" line="130"/>
         <source>Kazakh</source>
-        <translation>Καζακικά</translation>
+        <translation>kazachų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="131"/>
         <source>Kalaallisut</source>
-        <translation>Γροιλανδικά</translation>
+        <translation>grenlandų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="132"/>
         <source>Khmer</source>
-        <translation>Χμερ</translation>
+        <translation>chmerų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="133"/>
         <source>Kannada</source>
-        <translation>Kannada</translation>
+        <translation>kanadų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="134"/>
         <source>Korean</source>
-        <translation>Κορεατικά</translation>
+        <translation>korėjiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="135"/>
         <source>Kanuri</source>
-        <translation>Kanuri</translation>
+        <translation>karuni</translation>
     </message>
     <message>
         <location filename="../language.cc" line="136"/>
         <source>Kashmiri</source>
-        <translation>Κασμίρ</translation>
+        <translation>kašmyrų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="137"/>
         <source>Kurdish</source>
-        <translation>Κουρδικά</translation>
+        <translation>kurdų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="138"/>
         <source>Komi</source>
-        <translation>Komi</translation>
+        <translation>komių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="139"/>
         <source>Cornish</source>
-        <translation>Κορνουάλης</translation>
+        <translation>kornų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="140"/>
         <source>Kirghiz</source>
-        <translation>Κιργιζικά</translation>
+        <translation>kirgizų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="141"/>
         <source>Latin</source>
-        <translation>Λατινικά</translation>
+        <translation>lotynų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="142"/>
         <source>Luxembourgish</source>
-        <translation>Λουξεμβούργου</translation>
+        <translation>liuksemburgiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="143"/>
         <source>Ganda</source>
-        <translation>Luganda</translation>
+        <translation>ganda</translation>
     </message>
     <message>
         <location filename="../language.cc" line="144"/>
         <source>Limburgish</source>
-        <translation>Λιμβούργου</translation>
+        <translation>limburgiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="145"/>
         <source>Lingala</source>
-        <translation>Lingala</translation>
+        <translation>lingala</translation>
     </message>
     <message>
         <location filename="../language.cc" line="146"/>
         <source>Lao</source>
-        <translation>Λαοτιανά</translation>
+        <translation>laosiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="147"/>
         <source>Lithuanian</source>
-        <translation>Λιθουανικά</translation>
+        <translation>lietuvių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="148"/>
         <source>Luba-Katanga</source>
-        <translation>Luba-Katanga</translation>
+        <translation>luba-katanga</translation>
     </message>
     <message>
         <location filename="../language.cc" line="149"/>
         <source>Latvian</source>
-        <translation>Λετονικά</translation>
+        <translation>latvių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="150"/>
         <source>Malagasy</source>
-        <translation>Μαλγασικά</translation>
+        <translation>malagasių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="151"/>
         <source>Marshallese</source>
-        <translation>Νήσων Μάρσαλ</translation>
+        <translation>maršaliečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="152"/>
         <source>Maori</source>
-        <translation>Μαορί</translation>
+        <translation>maorių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="153"/>
         <source>Macedonian</source>
-        <translation>Σλαβομακεδονικά</translation>
+        <translation>makedonų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="154"/>
         <source>Malayalam</source>
-        <translation>Malayalam</translation>
+        <translation>malajalių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="155"/>
         <source>Mongolian</source>
-        <translation>Μογγολικά</translation>
+        <translation>mongolų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="156"/>
         <source>Marathi</source>
-        <translation>Marathi</translation>
+        <translation>marathų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="157"/>
         <source>Malay</source>
-        <translation>Μαλαισιανά</translation>
+        <translation>malajų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="158"/>
         <source>Maltese</source>
-        <translation>Μαλτέζικα</translation>
+        <translation>maltiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="159"/>
         <source>Burmese</source>
-        <translation>Βιρμανίας</translation>
+        <translation>birmiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="160"/>
         <source>Nauru</source>
-        <translation>Ναουρού</translation>
+        <translation>nauriečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="161"/>
         <source>Norwegian Bokmal</source>
-        <translation>Νορβηγικά, Bokmal</translation>
+        <translation>Norvegijos Bokmal</translation>
     </message>
     <message>
         <location filename="../language.cc" line="162"/>
         <source>North Ndebele</source>
-        <translation>Βόρεια Ndebele</translation>
+        <translation>šiaurės ndebele</translation>
     </message>
     <message>
         <location filename="../language.cc" line="163"/>
         <source>Nepali</source>
-        <translation>Νεπαλέζικα</translation>
+        <translation>nepalų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="164"/>
         <source>Ndonga</source>
-        <translation>Ndonga</translation>
+        <translation>ndonga</translation>
     </message>
     <message>
         <location filename="../language.cc" line="165"/>
         <source>Dutch</source>
-        <translation>Ολλανδικά</translation>
+        <translation>olandų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="166"/>
         <source>Norwegian Nynorsk</source>
-        <translation>Νορβηγικά, Nynorsk</translation>
+        <translation>norvegų naujoji</translation>
     </message>
     <message>
         <location filename="../language.cc" line="167"/>
         <source>Norwegian</source>
-        <translation>Νορβηγικά</translation>
+        <translation>norvegų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="168"/>
         <source>South Ndebele</source>
-        <translation>Νότια Ndebele</translation>
+        <translation>pietų ndebele</translation>
     </message>
     <message>
         <location filename="../language.cc" line="169"/>
         <source>Navajo</source>
-        <translation>Νάβαχο</translation>
+        <translation>navahų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="170"/>
         <source>Chichewa</source>
-        <translation>Chichewa</translation>
+        <translation>čičevų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="171"/>
         <source>Occitan</source>
-        <translation>Οξιτανικά</translation>
+        <translation>oksitanų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="172"/>
         <source>Ojibwa</source>
-        <translation>Ojibwa</translation>
+        <translation>odžibvės kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="173"/>
         <source>Oromo</source>
-        <translation>Oromoo</translation>
+        <translation>omorų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="174"/>
         <source>Oriya</source>
-        <translation>Oriya</translation>
+        <translation>orijų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="175"/>
         <source>Ossetian</source>
-        <translation>Οσετικά</translation>
+        <translation>osetinų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="176"/>
         <source>Panjabi</source>
-        <translation>Panjabi</translation>
+        <translation>pendžabų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="177"/>
         <source>Pali</source>
-        <translation>Pali</translation>
+        <translation>pali</translation>
     </message>
     <message>
         <location filename="../language.cc" line="178"/>
         <source>Polish</source>
-        <translation>Πολωνικά</translation>
+        <translation>lenkų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="179"/>
         <source>Pashto</source>
-        <translation>Αφγανικά</translation>
+        <translation>puštūnų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="180"/>
         <source>Portuguese</source>
-        <translation>Πορτογαλικά</translation>
+        <translation>portugalų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="181"/>
         <source>Quechua</source>
-        <translation>Quechua</translation>
+        <translation>kečujų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="182"/>
         <source>Raeto-Romance</source>
-        <translation>Ρετο-ρωμανικά</translation>
+        <translation>retoromanų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="183"/>
         <source>Kirundi</source>
-        <translation>Kirundi</translation>
+        <translation>kirundi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="184"/>
         <source>Romanian</source>
-        <translation>Ρουμανικά</translation>
+        <translation>rumunų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="185"/>
         <source>Russian</source>
-        <translation>Ρωσικά</translation>
+        <translation>rusų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="186"/>
         <source>Kinyarwanda</source>
-        <translation>Kinyarwanda</translation>
+        <translation>kinjaruanda kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="187"/>
         <source>Sanskrit</source>
-        <translation>Σανσκριτικά</translation>
+        <translation>sanskritas</translation>
     </message>
     <message>
         <location filename="../language.cc" line="188"/>
         <source>Sardinian</source>
-        <translation>Σαρδηνίας</translation>
+        <translation>sardiniečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="189"/>
         <source>Sindhi</source>
-        <translation>Sindhi</translation>
+        <translation>sindhų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="190"/>
         <source>Northern Sami</source>
-        <translation>Βόρεια Σάμι</translation>
+        <translation>šiaurės samių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="191"/>
         <source>Sango</source>
-        <translation>Sango</translation>
+        <translation>songo</translation>
     </message>
     <message>
         <location filename="../language.cc" line="192"/>
         <source>Serbo-Croatian</source>
-        <translation>Σερβοκροατικά</translation>
+        <translation>serbų-kroatų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="193"/>
         <source>Sinhala</source>
-        <translation>Sinhala</translation>
+        <translation>sinhalų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="194"/>
         <source>Slovak</source>
-        <translation>Σλοβακικά</translation>
+        <translation>slovakų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="195"/>
         <source>Slovenian</source>
-        <translation>Σλοβενικά</translation>
+        <translation>slovėnų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="196"/>
         <source>Samoan</source>
-        <translation>Σαμόας</translation>
+        <translation>samojiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="197"/>
         <source>Shona</source>
-        <translation>Shona</translation>
+        <translation>šanų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="198"/>
         <source>Somali</source>
-        <translation>Σομαλέζικα</translation>
+        <translation>somalių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="199"/>
         <source>Albanian</source>
-        <translation>Αλβανικά</translation>
+        <translation>albanų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="200"/>
         <source>Serbian</source>
-        <translation>Σερβικά</translation>
+        <translation>serbų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="201"/>
         <source>Swati</source>
-        <translation>Swati</translation>
+        <translation>svazių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="202"/>
         <source>Southern Sotho</source>
-        <translation>Νότια Sotho</translation>
+        <translation>pietų sotų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="203"/>
         <source>Sundanese</source>
-        <translation>Sunda</translation>
+        <translation>sudaniečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="204"/>
         <source>Swedish</source>
-        <translation>Σουηδικά</translation>
+        <translation>švedų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="205"/>
         <source>Swahili</source>
-        <translation>Σουαχίλι</translation>
+        <translation>suahelių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="206"/>
         <source>Tamil</source>
-        <translation>Tamil</translation>
+        <translation>tamilų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="207"/>
         <source>Telugu</source>
-        <translation>Telugu</translation>
+        <translation>telugų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="208"/>
         <source>Tajik</source>
-        <translation>Τατζικικά</translation>
+        <translation>tadžikų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="209"/>
         <source>Thai</source>
-        <translation>Ταϋλανδέζικα</translation>
+        <translation>tajų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="210"/>
         <source>Tigrinya</source>
-        <translation>Tigrinya</translation>
+        <translation>tigrinų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="211"/>
         <source>Turkmen</source>
-        <translation>Τουρκμενικά</translation>
+        <translation>turkmėnų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="212"/>
         <source>Tagalog</source>
-        <translation>Tagalog</translation>
+        <translation>tagalų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="213"/>
         <source>Tswana</source>
-        <translation>Setswana</translation>
+        <translation>tsvanų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="214"/>
         <source>Tonga</source>
-        <translation>Tonga</translation>
+        <translation>tongų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="215"/>
         <source>Turkish</source>
-        <translation>Τουρκικά</translation>
+        <translation>turkų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="216"/>
         <source>Tsonga</source>
-        <translation>Xitsonga</translation>
+        <translation>tsongų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="217"/>
         <source>Tatar</source>
-        <translation>Ταταρικά</translation>
+        <translation>totorių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="218"/>
         <source>Twi</source>
-        <translation>Twi</translation>
+        <translation>tvi kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="219"/>
         <source>Tahitian</source>
-        <translation>Ταϊτής</translation>
+        <translation>taitiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="220"/>
         <source>Uighur</source>
-        <translation>Ουιγουρικά</translation>
+        <translation>uigurų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="221"/>
         <source>Ukrainian</source>
-        <translation>Ουκρανικά</translation>
+        <translation>ukrainiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="222"/>
         <source>Urdu</source>
-        <translation>Urdu</translation>
+        <translation>urdu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="223"/>
         <source>Uzbek</source>
-        <translation>Ουζμπεκικά</translation>
+        <translation>uzbekų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="224"/>
         <source>Venda</source>
-        <translation>Tshivenda</translation>
+        <translation>venda</translation>
     </message>
     <message>
         <location filename="../language.cc" line="225"/>
         <source>Vietnamese</source>
-        <translation>Βιετναμέζικα</translation>
+        <translation>vietnamiečių</translation>
     </message>
     <message>
         <location filename="../language.cc" line="226"/>
         <source>Volapuk</source>
-        <translation>Volapük</translation>
+        <translation>volapiukas</translation>
     </message>
     <message>
         <location filename="../language.cc" line="227"/>
         <source>Walloon</source>
-        <translation>Βαλονικά</translation>
+        <translation>valonų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="228"/>
         <source>Wolof</source>
-        <translation>Wolof</translation>
+        <translation>volofų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="229"/>
         <source>Xhosa</source>
-        <translation>Xhosa</translation>
+        <translation>kosų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="230"/>
         <source>Yiddish</source>
-        <translation>Γίντις</translation>
+        <translation>jidiš</translation>
     </message>
     <message>
         <location filename="../language.cc" line="231"/>
         <source>Yoruba</source>
-        <translation>Yoruba</translation>
+        <translation>jorubų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="232"/>
@@ -1414,12 +1415,12 @@
     <message>
         <location filename="../language.cc" line="233"/>
         <source>Chinese</source>
-        <translation>Κινέζικα</translation>
+        <translation>kinų</translation>
     </message>
     <message>
         <location filename="../language.cc" line="234"/>
         <source>Zulu</source>
-        <translation>Ζουλού</translation>
+        <translation>zulų</translation>
     </message>
 </context>
 <context>
@@ -1427,108 +1428,163 @@
     <message>
         <location filename="../loaddictionaries.cc" line="174"/>
         <source>Error loading dictionaries</source>
-        <translation>Σφάλμα κατά τη φόρτωση των λεξικών</translation>
+        <translation>Žodynų įkelti nepavyko</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
+    <message>
+        <location filename="../mainwindow.cc" line="64"/>
+        <source>Navigation</source>
+        <translation>Navigacija</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="67"/>
+        <source>Back</source>
+        <translation>Atgal</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="68"/>
+        <source>Forward</source>
+        <translation>Pirmyn</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="75"/>
+        <source>Scan Popup</source>
+        <translation>Iškylantis langas</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="106"/>
+        <source>Show &amp;Main Window</source>
+        <translation>Rodyti &amp;pagrindinį langą</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="295"/>
+        <location filename="../mainwindow.cc" line="110"/>
+        <source>&amp;Quit</source>
+        <translation>&amp;Baigti</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="202"/>
+        <source>Loading...</source>
+        <translation>Įkeliama...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1457"/>
+        <source>Skip This Release</source>
+        <translation>Praleisti šią versiją</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1639"/>
+        <source>Page Setup</source>
+        <translation>Puslapio parinktys</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1640"/>
+        <source>No printer is available. Please install one first.</source>
+        <translation>Nera jokio spausdintuvo. Įdiekite kokį nors.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1657"/>
+        <source>Print Article</source>
+        <translation>Spausdinti straipsnį</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1678"/>
+        <source>Save Article As</source>
+        <translation>Įrašyti straipsnį kaip</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1678"/>
+        <source>Html files (*.html *.htm)</source>
+        <translation>Html rikmenos (*.html *.htm)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1693"/>
+        <source>Error</source>
+        <translation>Klaida</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1694"/>
+        <source>Can&apos;t save article: %1</source>
+        <translation>Nepavyksta įrašyti straipsnio: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="525"/>
+        <source>%1 dictionaries, %2 articles, %3 words</source>
+        <translation>Žodynų: %1, straipsnių: %2, žodžių: %3</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1317"/>
+        <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
+        <translation>Nepavyko paruošti sparčiųjų klavišų stebėjimo mechanizmo&lt;br&gt;Įsitikinkite, kad XServer turi įjungtą RECORD plėtinį.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1450"/>
+        <source>New Release Available</source>
+        <translation>Yra nauja versija</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1451"/>
+        <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
+        <translation>Galite parsisųstiGoldenDict &lt;b&gt;%1&lt;/b&gt; versiją.&lt;br&gt;
+Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1456"/>
+        <source>Download</source>
+        <translation>Parsisiųsti</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="52"/>
+        <location filename="../mainwindow.cc" line="536"/>
+        <source>Look up in:</source>
+        <translation>Ieškoti grupėje:</translation>
+    </message>
     <message>
         <location filename="../mainwindow.cc" line="33"/>
         <source>Show Names in Dictionary Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="52"/>
-        <location filename="../mainwindow.cc" line="536"/>
-        <source>Look up in:</source>
-        <translation>Αναζήτηση σε:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="64"/>
-        <source>Navigation</source>
-        <translation>Πλοήγηση</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="67"/>
-        <source>Back</source>
-        <translation>Πίσω</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="68"/>
-        <source>Forward</source>
-        <translation>Μπροστά</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="75"/>
-        <source>Scan Popup</source>
-        <translation>Αναδυόμενο παράθυρο</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="85"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Εκφώνηση λήμματος (Alt+S)</translation>
+        <translation>Ištarti žodį (Alt+S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="94"/>
         <source>Zoom In</source>
-        <translation>Μεγέθυνση</translation>
+        <translation>Padidinti</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="95"/>
         <source>Zoom Out</source>
-        <translation>Σμίκρυνση</translation>
+        <translation>Sumažinti</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="96"/>
         <source>Normal Size</source>
-        <translation>Κανονικό μέγεθος</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="106"/>
-        <source>Show &amp;Main Window</source>
-        <translation>Εμφάνιση &amp;κύριου παραθύρου</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="295"/>
-        <location filename="../mainwindow.cc" line="110"/>
-        <source>&amp;Quit</source>
-        <translation>Έ&amp;ξοδος</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="202"/>
-        <source>Loading...</source>
-        <translation>Φόρτωση...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="43"/>
-        <location filename="../mainwindow.cc" line="300"/>
-        <source>Welcome!</source>
-        <translation>Καλώς ήλθατε!</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="525"/>
-        <source>%1 dictionaries, %2 articles, %3 words</source>
-        <translation>%1 λεξικά, %2 άρθρα, %3 λήμματα</translation>
+        <translation>Įprastas dydis</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="536"/>
         <source>Look up:</source>
-        <translation>Αναζήτηση:</translation>
+        <translation>Ieškoti:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="554"/>
         <source>All</source>
-        <translation>Όλα</translation>
+        <translation>Visi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="643"/>
         <source>(untitled)</source>
-        <translation>(ανώνυμο)</translation>
+        <translation>(nepavadinta)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1030"/>
         <source>WARNING: %1</source>
-        <translation>ΠΡΟΣΟΧΗ: %1</translation>
+        <translation>Įspėjimas: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -1537,84 +1593,45 @@
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1317"/>
-        <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Απέτυχε η φόρτωση του μηχανισμού παρακολούθησης πλήκτρων συντομεύσεων.&lt;br&gt;Βεβαιωθείτε ότι η επέκταση RECORD του XServer είναι ενεργοποιημένη.</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1450"/>
-        <source>New Release Available</source>
-        <translation>Νέα έκδοση διαθέσιμη</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1451"/>
-        <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>Η έκδοση &lt;b&gt;%1&lt;/b&gt; του GoldenDict είναι διαθέσιμη.&lt;br&gt;Κάντε κλικ στο &lt;b&gt;Λήψη&lt;/b&gt; για να επισκεφτείτε την ιστοσελίδα λήψης.</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1456"/>
-        <source>Download</source>
-        <translation>Λήψη</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1457"/>
-        <source>Skip This Release</source>
-        <translation>Παράβλεψη αυτής της έκδοσης</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1639"/>
-        <source>Page Setup</source>
-        <translation>Διάταξη σελίδας</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1640"/>
-        <source>No printer is available. Please install one first.</source>
-        <translation>Δε βρέθηκε εκτυπωτής. Παρακαλώ εγκαταστήστε έναν εκτυπωτή.</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1657"/>
-        <source>Print Article</source>
-        <translation>Εκτύπωση άρθρου</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1678"/>
-        <source>Save Article As</source>
-        <translation>Αποθήκευση άρθρου ως</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1678"/>
-        <source>Html files (*.html *.htm)</source>
-        <translation>Html αρχεία (*.html *.htm)</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1693"/>
-        <source>Error</source>
-        <translation>Σφάλμα</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1694"/>
-        <source>Can&apos;t save article: %1</source>
-        <translation>Αδύνατη η αποθήκευση του άρθρου: %1</translation>
+        <location filename="../mainwindow.ui" line="43"/>
+        <location filename="../mainwindow.cc" line="300"/>
+        <source>Welcome!</source>
+        <translation>Jus sveikina GoldenDict!</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="66"/>
         <source>&amp;File</source>
-        <translation>&amp;Αρχείο</translation>
+        <translation>&amp;Rinkmena</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Επεξεργασία</translation>
+        <translation>&amp;Keisti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="88"/>
         <source>&amp;Help</source>
-        <translation>&amp;Βοήθεια</translation>
+        <translation>&amp;Pagalba</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="271"/>
+        <source>&amp;Preferences...</source>
+        <translation>&amp;Nuostatos...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="332"/>
+        <source>F2</source>
+        <translation>F2</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="259"/>
+        <source>&amp;Groups...</source>
+        <translation>&amp;Grupės...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;View</source>
-        <translation>&amp;Προβολή</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="102"/>
@@ -1622,30 +1639,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="116"/>
-        <source>Search Pane</source>
-        <translation>Στήλη αναζήτησης</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="247"/>
         <source>&amp;Dictionaries...</source>
-        <translation>&amp;Λεξικά...</translation>
+        <translation>&amp;Žodynai...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="250"/>
         <location filename="../mainwindow.ui" line="262"/>
         <source>F3</source>
         <translation>F3</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="259"/>
-        <source>&amp;Groups...</source>
-        <translation>&amp;Ομάδες...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="271"/>
-        <source>&amp;Preferences...</source>
-        <translation>&amp;Προτιμήσεις...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="274"/>
@@ -1655,17 +1657,17 @@
     <message>
         <location filename="../mainwindow.ui" line="279"/>
         <source>&amp;Homepage</source>
-        <translation>&amp;Ιστοσελίδα</translation>
+        <translation>&amp;Svetainė</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="284"/>
         <source>&amp;About</source>
-        <translation>Πε&amp;ρί</translation>
+        <translation>&amp;Apie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="287"/>
         <source>About GoldenDict</source>
-        <translation>Περί GoldenDict</translation>
+        <translation>Apie GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
@@ -1675,82 +1677,82 @@
     <message>
         <location filename="../mainwindow.ui" line="298"/>
         <source>Quit from application</source>
-        <translation>Έξοδος εφαρμογής</translation>
+        <translation>Užverti programą</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>
         <source>Ctrl+Q</source>
-        <translation>Ctrl+Q</translation>
+        <translation>Vald+Q</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="306"/>
         <source>&amp;Forum</source>
-        <translation>&amp;Φόρουμ</translation>
+        <translation>&amp;Diskusijos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="311"/>
         <source>&amp;Close To Tray</source>
-        <translation>&amp;Ελαχιστοποίηση στην περιοχή ειδοποιήσεων</translation>
+        <translation>&amp;Nuleisti langą</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="314"/>
         <source>Minimizes the window to tray</source>
-        <translation>Ελαχιστοποιεί το παράθυρο ως εικονίδιο στην περιοχή ειδοποιήσεων</translation>
+        <translation>Nuleisti į sistemos dėklą</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="317"/>
         <source>Ctrl+F4</source>
-        <translation>Ctrl+F4</translation>
+        <translation>Vald+F4</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="326"/>
         <source>&amp;Save Article</source>
-        <translation>&amp;Αποθήκευση άρθρου</translation>
+        <translation>Į&amp;rašyti straipsnį</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="329"/>
         <source>Save Article</source>
-        <translation>Αποθήκευση άρθρου</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="332"/>
-        <source>F2</source>
-        <translation>F2</translation>
+        <translation>Įrašyti straipsnį</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
         <source>&amp;Print</source>
-        <translation>Εκ&amp;τύπωση</translation>
+        <translation>&amp;Spausdinti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="344"/>
         <source>Ctrl+P</source>
-        <translation>Ctrl+P</translation>
+        <translation>Vald+P</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="349"/>
         <source>Page Set&amp;up</source>
-        <translation>&amp;Διάταξη σελίδας</translation>
+        <translation>&amp;Puslapio parinktys</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="354"/>
         <source>Print Preview</source>
-        <translation>Προεπισκόπηση εκτύπωσης</translation>
+        <translation>Spaudinio peržiūra</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="359"/>
         <source>Rescan Files</source>
-        <translation>Νέα σάρωση αρχείων</translation>
+        <translation>Peržvelgti rinkmenas</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="362"/>
         <source>Ctrl+F5</source>
-        <translation>Ctrl+F5</translation>
+        <translation>Vald+F5</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="367"/>
         <source>&amp;Clear</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="116"/>
+        <source>Search Pane</source>
+        <translation>Paieškos polangis</translation>
     </message>
 </context>
 <context>
@@ -1774,17 +1776,17 @@
     <message>
         <location filename="../sources.cc" line="301"/>
         <source>Enabled</source>
-        <translation>Ενεργή</translation>
+        <translation>Įgalinta</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="303"/>
         <source>Name</source>
-        <translation>Όνομα</translation>
+        <translation>Pavadinimas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="305"/>
         <source>Address</source>
-        <translation>Διεύθυνση</translation>
+        <translation>Adresas</translation>
     </message>
 </context>
 <context>
@@ -1792,12 +1794,12 @@
     <message>
         <location filename="../orderandprops.ui" line="14"/>
         <source>Form</source>
-        <translation>Μορφή</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="26"/>
         <source>Dictionary order:</source>
-        <translation>Λίστα λεξικών:</translation>
+        <translation>Žodynų tvarka:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="51"/>
@@ -1810,47 +1812,47 @@
     <message>
         <location filename="../orderandprops.ui" line="136"/>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>Ανενεργά (απενεργοποιημένα) λεξικά:</translation>
+        <translation>Nenaudojami (uždrausti) žodynai:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="150"/>
         <source>Dictionary information</source>
-        <translation>Πληροφορίες λεξικού</translation>
+        <translation>Žodyno informacija</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="158"/>
         <source>Name:</source>
-        <translation>Όνομα:</translation>
+        <translation>Pavadinimas:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="185"/>
         <source>Total articles:</source>
-        <translation>Σύνολο άρθρων:</translation>
+        <translation>Iš viso straipsnių:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="192"/>
         <source>Total words:</source>
-        <translation>Σύνολο λημμάτων:</translation>
+        <translation>Iš viso žodžių:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="209"/>
         <source>Translates from:</source>
-        <translation>Μεταφράζει από:</translation>
+        <translation>Verčia iš:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="216"/>
         <source>Translates to:</source>
-        <translation>Μεταφράζει σε:</translation>
+        <translation>Verčia į:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="271"/>
         <source>Files comprising this dictionary:</source>
-        <translation>Αρχεία λεξικού:</translation>
+        <translation>Žodyną sudarančios rinkmenos:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="336"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Μπορείτε να αλλάξετε τη σειρά εμφάνισης των λεξικών, σύροντάς τα με το ποντίκι. Σύρετε λεξικά στην ομάδα των ανενεργών για να τα απενεργοποιήσετε.</translation>
+        <translation>Žodynų tvarką pakeisite tiesiog juos tempdami. Norėdami uždrausti žodyną, tiesiog nutempkite jį į neaktyviųjų grupę.</translation>
     </message>
 </context>
 <context>
@@ -1858,160 +1860,162 @@
     <message>
         <location filename="../sources.cc" line="591"/>
         <source>Path</source>
-        <translation>Διαδρομή</translation>
+        <translation>Kelias</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="593"/>
         <source>Recursive</source>
-        <translation>Υποφάκελοι</translation>
+        <translation>Rekursinis</translation>
     </message>
 </context>
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../preferences.cc" line="41"/>
-        <source>System default</source>
-        <translation>Συστήματος</translation>
-    </message>
-    <message>
-        <source>English</source>
-        <translation type="obsolete">Αγγλικά</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="obsolete">Ρωσικά</translation>
-    </message>
-    <message>
-        <location filename="../preferences.cc" line="73"/>
-        <source>Default</source>
-        <translation>Κλασική</translation>
-    </message>
-    <message>
-        <location filename="../preferences.cc" line="74"/>
-        <source>Lingvo</source>
-        <translation>Lingvo</translation>
-    </message>
-    <message>
-        <location filename="../preferences.cc" line="130"/>
-        <source>Play via DirectShow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.cc" line="296"/>
-        <source>Changing Language</source>
-        <translation>Αλλαγή γλώσσας</translation>
-    </message>
-    <message>
-        <location filename="../preferences.cc" line="297"/>
-        <source>Restart the program to apply the language change.</source>
-        <translation>Απαιτείται επανεκκίνηση του προγράμματος για να εφαρμοστεί η αλλαγή γλώσσας.</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="14"/>
         <source>Preferences</source>
-        <translation>Προτιμήσεις</translation>
+        <translation>Nuostatos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="41"/>
         <source>&amp;Interface</source>
-        <translation>&amp;Εφαρμογή</translation>
+        <translation>&amp;Sąsaja</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="60"/>
         <source>Tabbed browsing</source>
-        <translation>Καρτέλες</translation>
+        <translation>Naršymas kortelėse</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="66"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>Κανονικά, όταν ανοίγει νέα καρτέλα, η εφαρμογή εστιάζει σε αυτή.
-Αν όμως σημειώσετε αυτή την επιλογή, δε θα εστιάζονται οι νέες καρτέλες.</translation>
+        <translation>Paprastai atvėrus kortelę, ji aktyvuojama ir rodomas jos turinys.
+Pažymėjus šią parinktį, naujos kortelės nebus aktyvuojamos.
+</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="71"/>
         <source>Open new tabs in background</source>
-        <translation>Άνοιγμα νέων καρτελών στο παρασκήνιο</translation>
+        <translation>Naujas korteles atverti fone</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="78"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Αν σημειώσετε αυτή την επιλογή, οι νέες καρτέλες 
-θα ανοίγουν ακριβώς δίπλα στην τρέχουσα ενεργή καρτέλα. 
-Στην αντίθετη περίπτωση θα ανοίγουν στο τέλος.</translation>
+        <translation>Pažymėjus šią parinktį, naujos kortelės atveriamos
+greta aktyviosios. Priešingu atveju, jos pridedamos
+prie paskutiniųjų.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="83"/>
         <source>Open new tabs after the current one</source>
-        <translation>Άνοιγμα νέων καρτελών δίπλα στην τρέχουσα</translation>
+        <translation>Naujas korteles atverti už dabartinės</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="93"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Αν ενεργοποιηθεί, θα εμφανίζεται ένα εικονίδιο στην περιοχή ειδοποιήσεων
-που θα σας παρέχει διάφορες δυνατότητες, π.χ. άνοιγμα κύριου παραθύρου.</translation>
+        <translation>Jei pasirinkta, sistemos dėkle rodomas ženkliukas, kuriuo galite
+atverti pagrindinį langą ir atlikti kitas užduotis.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="97"/>
         <source>Enable system tray icon</source>
-        <translation>Ενεργοποίηση εικονιδίου περιοχής ειδοποιήσεων</translation>
+        <translation>Įgalinti sistemos dėklo ženkliuką</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="115"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Αν ενεργοποιηθεί, η εφαρμογή θα εκκινείται απευθείας στην περιοχή ειδοποιήσεων,
-και δε θα εμφανίζεται το κύριο παράθυρο.</translation>
+        <translation>Programa paleidžiama, tačiau nerodomas pagrindinis langas;
+rodomas tik ženkliukas sistemos dėkle.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="119"/>
         <source>Start to system tray</source>
-        <translation>Εκκίνηση στην περιοχή ειδοποιήσεων</translation>
+        <translation>Paleisti sistemos dėkle</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="126"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
-        <translation>Αν ενεργοποιηθεί, δε θα τερματίζεται η εφαρμογή 
-όποτε κλείνει το κύριο παράθυρο.</translation>
+        <translation>Uždarant programos pagrindinį langą, programa neišjungiama, –
+tiesiog paslepiama.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="130"/>
         <source>Close to system tray</source>
-        <translation>Κλείσιμο στην περιοχή ειδοποιήσεων</translation>
+        <translation>Užveriant nuleisti į sistemos dėklą</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="140"/>
         <source>Startup</source>
-        <translation>Εκκίνηση</translation>
+        <translation>Paleistis</translation>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation type="obsolete">Εκκινεί αυτόματα το GoldenDict κατά την εκκίνηση του συστήματος</translation>
+        <translation type="obsolete">GoldenDict paleisti kartu su vartotojo darbalaukiu</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="149"/>
         <source>Start with system</source>
-        <translation>Εκκίνηση μαζί με το σύστημα</translation>
+        <translation>Paleisti kraunantis sistemai</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="161"/>
         <source>Interface language:</source>
-        <translation>Γλώσσα εφαρμογής:</translation>
+        <translation>Sąsajos kalba:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="187"/>
         <source>Display style:</source>
-        <translation>Μορφή εμφάνισης:</translation>
+        <translation>Lango stilius:</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="283"/>
+        <source>Chooses whether the scan popup mode is on by default or not. If checked,
+the program would always start with the scan popup active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="464"/>
+        <source>Normally, in order to activate a popup you have to
+maintain the chosen keys pressed while you select
+a word. With this enabled, the chosen keys may also
+be pressed shortly after the selection is done.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="544"/>
+        <source>Hotkeys</source>
+        <translation>Spartieji klavišai</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="563"/>
+        <source>Use the following hotkey to show or hide the main window:</source>
+        <translation>Nuspaudus spartųjį klavišą parodyti ar paslėpti pagrindinį langą:</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="594"/>
+        <source>Use the following hotkey to translate a word from clipboard:</source>
+        <translation>Nuspaudus spartųjį klavišą išversti iškarpinės turinį:</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="641"/>
+        <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
+        <translation>Spartieji klavišai yra bendri sitemai ir veikia dirbant bet kuria programa, bet kokioje aplinkoje, kol fone paleistas GoldenDict žodynas.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="246"/>
         <source>&amp;Scan Popup</source>
-        <translation>Ανα&amp;δυόμενο παράθυρο</translation>
+        <translation>&amp;Iškylantis langas</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="146"/>
+        <source>Automatically starts GoldenDict after operation system bootup.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="265"/>
@@ -2019,77 +2023,62 @@ the application.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>Αν ενεργοποιηθεί, κάθε φορά που δείχνετε μια λέξη με το ποντίκι (Windows),
-ή επιλέγετε μια λέξη με το ποντίκι (Linux), θα εμφανίζεται ένα αναδυόμενο 
-παράθυρο. Στη συνέχεια, θα μπορείτε να το ενεργοποιείτε ή να το απενεργοποιείτε
-από το κύριο παράθυρο ή από το εικονίδιο της περιοχής ειδοποιήσεων.</translation>
+        <translation>Jei įgalinta, vertimo iškylantis langas pasirodys kaskart, kai užvesite 
+pelę ties žodžiu (Windows) arba pažymėsite jį pele (Linux).
+Jei įgalinta, galite vėliau tiek šią funkciją įjungti, tiek išjungti
+pagrindiniame lange arba nuspaudę ženkliuką sistemos dėkle.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="271"/>
         <source>Enable scan popup functionality</source>
-        <translation>Ενεργοποίηση λειτουργίας αναδυόμενου παραθύρου</translation>
+        <translation>Įgalinti iškylančius langus</translation>
     </message>
     <message>
         <source>Chooses whether the scan popup mode is on by default nor not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="obsolete">Ρυθμίζει αν θα είναι προεπιλεγμένη η λειτουργία αναδυόμενου παραθύρου.
-Αν σημειώσετε την επιλογή, η εφαρμογή θα εκκινείται πάντα με το αναδυόμενο 
-παράθυρο ενεργοποιημένο.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="146"/>
-        <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>Εκκινεί αυτόματα το GoldenDict κατά την εκκίνηση του συστήματος</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="283"/>
-        <source>Chooses whether the scan popup mode is on by default or not. If checked,
-the program would always start with the scan popup active.</source>
-        <translation>Καθορίζει αν θα είναι προεπιλεγμένη η λειτουργία αναδυόμενου παραθύρου.
-Αν σημειώσετε την επιλογή, η εφαρμογή θα εκκινείται πάντα με το αναδυόμενο 
-παράθυρο ενεργοποιημένο.</translation>
+        <translation type="obsolete">Nurodykite, ar iškylančių langų funkcija bus įjungta vos paleistoje programoje.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="287"/>
         <source>Start with scan popup turned on</source>
-        <translation>Εκκίνηση με το αναδυόμενο παράθυρο ενεργοποιημένο</translation>
+        <translation>Paleisti su įjungta iškylančių langų funkcija</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="294"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>Αν ενεργοποιηθεί, το αναδυόμενο παράθυρο θα εμφανίζεται μόνο αν είναι
-πατημένα όλα τα παρακάτω πλήκτρα όταν γίνεται η επιλογή της λέξης.</translation>
+        <translation>Jei įgalinta, langas su vertimu iškils tik nuspaudus visus nurodytus klavišus
+po to, kai pasikeis pažymėtas žodis.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="298"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
-        <translation>Αναδυόμενο παράθυρο μόνο αν είναι πατημένα όλα τα επιλεγμένα πλήκτρα:</translation>
+        <translation>Iškylantis langas pasirodys tik nuspaudus visus šiuos klavišus:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="337"/>
         <source>Left Ctrl only</source>
-        <translation>Μόνο το αριστερό Ctrl</translation>
+        <translation>Tik kairysis Vald</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="340"/>
         <source>Left Ctrl</source>
-        <translation>Aριστερό Ctrl</translation>
+        <translation>Kairysis Vald</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="347"/>
         <source>Right Shift only</source>
-        <translation>Μόνο το δεξί Shift</translation>
+        <translation>Tik dešinysis Lyg2</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="350"/>
         <source>Right Shift</source>
-        <translation>Δεξί Shift</translation>
+        <translation>Dešinysis Lyg2</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
         <source>Alt key</source>
-        <translation>Πλήκτρο Alt</translation>
+        <translation>Alt klavišas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="360"/>
@@ -2099,83 +2088,72 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="367"/>
         <source>Ctrl key</source>
-        <translation>Πλήκτρο Ctrl</translation>
+        <translation>Vald klavišas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="370"/>
         <source>Ctrl</source>
-        <translation>Ctrl</translation>
+        <translation>Vald</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="377"/>
         <source>Left Alt only</source>
-        <translation>Μόνο το αριστερό Alt</translation>
+        <translation>Tik kairysis Alt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="380"/>
         <source>Left Alt</source>
-        <translation>Αριστερό Alt</translation>
+        <translation>Kairysis Alt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="387"/>
         <source>Shift key</source>
-        <translation>Πλήκτρο Shift</translation>
+        <translation>Lyg2 klavišas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="390"/>
         <source>Shift</source>
-        <translation>Shift</translation>
+        <translation>Lyg2</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="397"/>
         <source>Right Alt only</source>
-        <translation>Μόνο το δεξί Alt</translation>
+        <translation>Tik dešinysis Alt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="400"/>
         <source>Right Alt</source>
-        <translation>Δεξί Alt</translation>
+        <translation>Dešinysis Alt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="407"/>
         <source>Right Ctrl only</source>
-        <translation>Μόνο το δεξί Ctrl</translation>
+        <translation>Tik dešinysis Vald</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="410"/>
         <source>Right Ctrl</source>
-        <translation>Δεξί Ctrl</translation>
+        <translation>Dešin. Vald</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="417"/>
         <source>Left Shift only</source>
-        <translation>Μόνο το αριστερό Shift</translation>
+        <translation>Tik kairysis Lyg2</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="420"/>
         <source>Left Shift</source>
-        <translation>Αριστερό Shift</translation>
+        <translation>Kairysis Lyg2</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="427"/>
         <source>Windows key or Meta key</source>
-        <translation>Πλήκτρο Windows ή Meta (Μενού)</translation>
+        <translation>Windows arba Meta klavišas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="430"/>
         <source>Win/Meta</source>
-        <translation>Win/Meta</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="464"/>
-        <source>Normally, in order to activate a popup you have to
-maintain the chosen keys pressed while you select
-a word. With this enabled, the chosen keys may also
-be pressed shortly after the selection is done.</source>
-        <translation>Κανονικά, για να εμφανιστεί το αναδυόμενο παράθυρο,
-πρέπει να κρατάτε τα επιλεγμένα πλήκτρα πατημένα κατά
-την επιλογή λέξης. Χάρη σε αυτή την επιλογή, μπορείτε 
-να πατάτε τα πλήκτρα αμέσως μετά την επιλογή της λέξης.</translation>
+        <translation>Win arba Meta</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="731"/>
@@ -2197,49 +2175,28 @@ be pressed shortly after the selection is done.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shorty after the selection is done.</source>
-        <translation type="obsolete">Κανονικά, για να εμφανιστεί το αναδυόμενο παράθυρο,
-πρέπει να κρατάτε τα επιλεγμένα πλήκτρα πατημένα κατά
-την επιλογή λέξης. Χάρη σε αυτή την επιλογή, μπορείτε 
-να πατάτε τα πλήκτρα αμέσως μετά την επιλογή της λέξης.</translation>
+        <translation type="obsolete">Paprastai langas su vertimu iškyla nuspaudus pasirinktus klavišus
+žymėjimo metu. Jei įgalinta ši parinktis, klavišai suveiks ir
+praėjus trupučiui laiko po to, kai baigėte žymėti.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="470"/>
         <source>Keys may also be pressed afterwards, within</source>
-        <translation>Εκ των υστέρων πάτημα πλήκτρων, εντός</translation>
+        <translation>Klavišai gali būti paspausti per</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="477"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>Για να αποφευχθεί η ανεπιθύμητη εμφάνιση του παραθύρου,
-τα πλήκτρα μπορούν να πατηθούν μόνο λίγα δευτερόλεπτα
-μετά την επιλογή της λέξης.</translation>
+        <translation>Kad iškylantis langas nepasirodytų kai to nereikia,
+į klavišus reaguojama tik tam tikrą laiką po
+baigimo žymėti. Laiką nurodykie čia.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="501"/>
         <source>secs</source>
-        <translation>δευτ.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="544"/>
-        <source>Hotkeys</source>
-        <translation>Συντομεύσεις</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="563"/>
-        <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>Συντόμευση για εμφάνιση/απόκρυψη κύριου παραθύρου:</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="594"/>
-        <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Συντόμευση για αναζήτηση λέξης που βρίσκεται στο πρόχειρο:</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="641"/>
-        <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>Οι συντομεύσεις λειτουργούν παντού και από οποιαδήποτε εφαρμογή, αρκεί να εκτελείται το GoldenDict.</translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="651"/>
@@ -2248,16 +2205,12 @@ seconds, which is specified here.</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Σημείωση: Μάλλον χρησιμοποιείτε έκδοση του X.Org XServer στην οποία δε λειτουργεί η επέκταση RECORD. Κατά πάσα πιθανότητα, οι συντομεύσεις του GoldenDict δε θα λειτουργήσουν. Το σφάλμα θα πρέπει να διορθωθεί σε επίπεδο X.Org XServer. Παρακαλώ, ανατρέξτε σε αυτήν την &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;αναφορά σφάλματος&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; και προσθέστε σχόλιο, αν το επιθυμείτε.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="689"/>
         <source>&amp;Audio</source>
-        <translation>Ή&amp;χος</translation>
+        <translation>&amp;Garsas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="708"/>
@@ -2267,73 +2220,70 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="714"/>
         <source>Auto-pronounce words in main window</source>
-        <translation>Αυτόματη εκφώνηση λημμάτων στο κύριο παράθυρο</translation>
+        <translation>Automatiškai ištarti pagrindinio lango žodžius</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="721"/>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Αυτόματη εκφώνηση λημμάτων στο αναδυόμενο παράθυρο</translation>
+        <translation>Automatiškai ištarti iškylančio lango žodžius</translation>
     </message>
     <message>
         <source>Program to play audio files:</source>
-        <translation type="obsolete">Πρόγραμμα αναπαραγωγής αρχείων ήχου:</translation>
+        <translation type="obsolete">Garso rinkmenas groti su programa:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="786"/>
         <source>&amp;Network</source>
-        <translation>&amp;Δίκτυο</translation>
+        <translation>&amp;Tinklas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="805"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>Επιλέξτε το αν θέλετε να χρησιμοποιείτε
-διαμεσολαβητή για όλες τις ανάγκες της εφαρμογής.</translation>
+        <translation>Įgalinkite, jei norite programos visoms tinklo
+užklausoms naudoti įgaliotąjį serverį.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="809"/>
         <source>Use proxy server</source>
-        <translation>Χρήση διαμεσολαβητή</translation>
+        <translation>Naudoti įgaliotąjį serverį</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="823"/>
         <source>Type:</source>
-        <translation>Τύπος:</translation>
+        <translation>Tipas:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="833"/>
         <source>Host:</source>
-        <translation>Διεύθυνση:</translation>
+        <translation>Serveris:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="843"/>
         <source>Port:</source>
-        <translation>Θύρα:</translation>
+        <translation>Prievadas:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="864"/>
         <source>User:</source>
-        <translation>Χρήστης:</translation>
+        <translation>Vartotojo vardas:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="874"/>
         <source>Password:</source>
-        <translation>Κωδικός:</translation>
+        <translation>Slaptažodis:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="909"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>Αν το επιλέξετε, το GoldenDict θα εμποδίζει τις περισσότερες διαφημίσεις, 
-μη επιτρέποντας την εμφάνιση περιεχομένου (εικόνων, πλαισίων) που δεν 
-προέρχονται από τον ιστότοπο στον οποίο βρίσκεστε. Αν προκύψουν 
-προβλήματα με κάποιους ιστοτόπους, δοκιμάστε να το αποεπιλέξετε.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="914"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation>Φραγή περιεχομένου από άλλους ιστοτόπους (εξαφανίζει τις περισσότερες διαφημίσεις)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="937"/>
@@ -2342,15 +2292,54 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>Αν ενεργοποιηθεί, το πρόγραμμα θα ελέγχει τακτικά 
-αν έχει κυκλοφορήσει νέα, ενημερωμένη έκδοση του 
-GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το 
-χρήστη και θα παραπέμπει στην ιστοσελίδα λήψης.</translation>
+        <translation>Jei įgalinta, programa karts nuo karto patikrins,
+ar galima parsisiųsti naują, patobulintą GoldenDict
+versiją. Jei taip, programas praneš jums apie tai
+ir pasiūlys atverti parsisiuntimo puslapį.
+</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="944"/>
         <source>Check for new program releases periodically</source>
-        <translation>Περιοδικός έλεγχος για νέες εκδόσεις/ενημερώσεις</translation>
+        <translation>Periodiškai tikrinti, ar yra naujų programos versijų</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="41"/>
+        <source>System default</source>
+        <translation>Sistemoje numatyta</translation>
+    </message>
+    <message>
+        <source>English</source>
+        <translation type="obsolete">Anglų</translation>
+    </message>
+    <message>
+        <source>Russian</source>
+        <translation type="obsolete">Rusų</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="73"/>
+        <source>Default</source>
+        <translation>Numatytasis</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="74"/>
+        <source>Lingvo</source>
+        <translation>Lingvo</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="130"/>
+        <source>Play via DirectShow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="296"/>
+        <source>Changing Language</source>
+        <translation>Kalbos keitimas</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="297"/>
+        <source>Restart the program to apply the language change.</source>
+        <translation>Naująją kalbą programa naudos po to, kai ją atversite iš naujo.</translation>
     </message>
 </context>
 <context>
@@ -2358,12 +2347,12 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../romaji.cc" line="137"/>
         <source>Hepburn Romaji for Hiragana</source>
-        <translation>Hepburn Romaji για Hiragana</translation>
+        <translation>Hepburn Romaji (Hiragana)</translation>
     </message>
     <message>
         <location filename="../romaji.cc" line="146"/>
         <source>Hepburn Romaji for Katakana</source>
-        <translation>Hepburn Romaji για Katakana</translation>
+        <translation>Hepburn Romaji (Katakana)</translation>
     </message>
 </context>
 <context>
@@ -2371,7 +2360,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../russiantranslit.cc" line="107"/>
         <source>Russian Transliteration</source>
-        <translation>Ρωσική μεταγραφή</translation>
+        <translation>Transliteracija (rusų)</translation>
     </message>
 </context>
 <context>
@@ -2379,24 +2368,17 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../scanpopup.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Διάλογος</translation>
+        <translation>Langas</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="56"/>
         <source>word</source>
-        <translation>λήμμα</translation>
+        <translation>žodis</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="63"/>
         <source>List Matches (Alt+M)</source>
-        <translation>Εμφάνιση αποτελεσμάτων (Alt+M)</translation>
-    </message>
-    <message>
-        <location filename="../scanpopup.ui" line="66"/>
-        <location filename="../scanpopup.ui" line="89"/>
-        <location filename="../scanpopup.ui" line="119"/>
-        <source>...</source>
-        <translation>...</translation>
+        <translation>Atitikmenų sąrašas (Alt+M)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="79"/>
@@ -2406,12 +2388,19 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../scanpopup.ui" line="86"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Εκφώνηση λήμματος (Alt+S)</translation>
+        <translation>Ištarti žodį (Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="96"/>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
+    </message>
+    <message>
+        <location filename="../scanpopup.ui" line="66"/>
+        <location filename="../scanpopup.ui" line="89"/>
+        <location filename="../scanpopup.ui" line="119"/>
+        <source>...</source>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2419,12 +2408,12 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../sources.cc" line="697"/>
         <source>Path</source>
-        <translation>Διαδρομή</translation>
+        <translation>Kelias</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="699"/>
         <source>Name</source>
-        <translation>Όνομα</translation>
+        <translation>Pavadinimas</translation>
     </message>
 </context>
 <context>
@@ -2434,7 +2423,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <location filename="../sources.cc" line="110"/>
         <location filename="../sources.cc" line="137"/>
         <source>Choose a directory</source>
-        <translation>Επιλογή φακέλου</translation>
+        <translation>Pasirinkite aplanką</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="97"/>
@@ -2442,29 +2431,29 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <location filename="../sources.cc" line="164"/>
         <location filename="../sources.cc" line="188"/>
         <source>Confirm removal</source>
-        <translation>Επιβεβαίωση αφαίρεσης</translation>
+        <translation>Šalinimo patvirtinimas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="98"/>
         <location filename="../sources.cc" line="125"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Να αφαιρεθεί ο φάκελος &lt;b&gt;%1&lt;/b&gt; από τη λίστα;</translation>
+        <translation>Aplanką &lt;b&gt;%1&lt;/b&gt; pašalinti iš sąrašo?</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="165"/>
         <location filename="../sources.cc" line="189"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Να αφαιρεθεί η ιστοσελίδα &lt;b&gt;%1&lt;/b&gt; από τη λίστα;</translation>
+        <translation>Svetainę &lt;b&gt;%1&lt;/b&gt; pašalinti iš sąrašo?</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="34"/>
         <source>Files</source>
-        <translation>Αρχεία</translation>
+        <translation>Rinkmenos</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="40"/>
         <source>Paths to search for the dictionary files:</source>
-        <translation>Διαδρομές αναζήτησης αρχείων λεξικών:</translation>
+        <translation>Keliai, kuriuose ieškoma žodynų rinkmenų:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="54"/>
@@ -2472,7 +2461,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <location filename="../sources.ui" line="241"/>
         <location filename="../sources.ui" line="300"/>
         <source>&amp;Add...</source>
-        <translation>Προσ&amp;θήκη...</translation>
+        <translation>Pri&amp;dėti...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="61"/>
@@ -2480,42 +2469,42 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <location filename="../sources.ui" line="248"/>
         <location filename="../sources.ui" line="307"/>
         <source>&amp;Remove</source>
-        <translation>Α&amp;φαίρεση</translation>
+        <translation>&amp;Pašalinti</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="81"/>
         <source>Re&amp;scan now</source>
-        <translation>Νέα &amp;σάρωση</translation>
+        <translation>Pe&amp;ržvelgti dabar</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="97"/>
         <source>Sound Dirs</source>
-        <translation>Φάκελοι ήχων</translation>
+        <translation>Garsų aplankai</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="103"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>Δημιουργήστε λεξικά χρησιμοποιώντας ομάδες αρχείων ήχου, προσθέτοντας τις διαδρομές τους εδώ:</translation>
+        <translation>Nurodydami kelius, sukurkite žodynus iš garsų rinkmenų rinkinių:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="153"/>
         <source>Morphology</source>
-        <translation>Μορφολογία</translation>
+        <translation>Morfologija</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="159"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>Διαδρομή φακέλου με λεξικά Hunspell/Myspell:</translation>
+        <translation>Kelias iki aplanko su Hunspell/Myspell žodynais:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="175"/>
         <source>&amp;Change...</source>
-        <translation>Αλλα&amp;γή...</translation>
+        <translation>&amp;Keisti...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="184"/>
         <source>Available morphology dictionaries:</source>
-        <translation>Διαθέσιμα λεξικά μορφολογίας:</translation>
+        <translation>Rasti morfologijos žodynai:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="196"/>
@@ -2525,73 +2514,63 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>Τα λεξικά μορφολογίας εμφανίζονται ως 
-ξεχωριστά βοηθητικά λεξικά και παρέχουν
-ρίζες λέξεων και προτάσεις ορθογραφίας.
-Προσθέστε λεξικά μορφολογίας στο τέλος
-μιας ομάδας για να τα χρησιμοποιήσετε.</translation>
-    </message>
-    <message>
-        <location filename="../sources.ui" line="221"/>
-        <source>Wikipedia</source>
-        <translation>Βικιπαίδεια</translation>
-    </message>
-    <message>
-        <location filename="../sources.ui" line="227"/>
-        <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>Ιστοσελίδες τύπου Βικιπαίδειας (MediaWiki):</translation>
+        <translation>Kiekvienas morfologijos žodynas rodomas kaip
+atskiras pagalbinis žodynas, kuris paieškai 
+pateikia žodžių kaminus ir klaidingai įvestų žodžių
+rašybos spėjimus.
+Žodynus pridėkite atitinkamų grupių apačioje.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="280"/>
         <source>Websites</source>
-        <translation>Ιστοσελίδες</translation>
+        <translation>Svetainės</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="286"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Προσθέστε οποιαδήποτε ιστοσελίδα. Οι χαρακτήρες %GDWORD% αντικαθίστανται από τη ζητούμενη λέξη:</translation>
+        <translation>Bet kokios svetainės. %GDWORD% rašykite vietoj užklausos žodžio:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Εναλλακτικά, χρησιμοποιήστε %GD1253% για κωδικοποίηση CP1253, %GDISO7% για ISO 8859-7.</translation>
+        <translation>Taip pat galite naudoti %GD1251% (CP1251koduotei) arba %GDISO1% (ISO 8859-1 koduotei).</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="339"/>
         <source>Transliteration</source>
-        <translation>Μεταγραφή</translation>
+        <translation>Transliteracija</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="358"/>
         <source>Russian transliteration</source>
-        <translation>Ρωσική μεταγραφή</translation>
+        <translation>Transliteracija (rusų)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="382"/>
         <source>German transliteration</source>
-        <translation>Γερμανική μεταγραφή</translation>
+        <translation>Transliteracija (vokiečių)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
-        <translation>Επιτρέπει τη χρήση του Λατινικού αλφαβήτου για τη μεταγραφή Ιαπωνικών</translation>
+        <translation>Įgalinti rašymą japonų kalba naudojant lotynišką abėcėlę</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>
         <source>Japanese Romaji</source>
-        <translation>Ιαπωνικά Romaji</translation>
+        <translation>Romaji (japonų)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="421"/>
         <source>Systems:</source>
-        <translation>Μέθοδοι:</translation>
+        <translation>Sistemos:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="428"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation>Η πιο διαδεδομένη μέθοδος μεταγραφής Ιαπωνικών,
-βασισμένη στην αγγλική φωνολογία</translation>
+        <translation>Dažniausiai naudojamas būdas japonų kalbai transkribuoti
+anglų kalbos fonologijos pagrindu</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="432"/>
@@ -2604,10 +2583,10 @@ based on English phonology</source>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Το πιο κανονικό σύστημα, με αντιστοιχία ένα προς ένα των kana.
-Πρότυπο ISO 3602
+        <translation>Taisyklingiausia sistema, turinti tiesioginį ryšį su
+kana rašto sistemomis. Standartizuota kaip ISO 3602
 
-Δεν υποστηρίζεται ακόμη από το GoldenDict.</translation>
+Dar neįtraukta į GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="448"/>
@@ -2620,10 +2599,10 @@ Not implemented yet in GoldenDict.</source>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Βασίζεται στο Nihon-shiki, αλλά έχει προσαρμοστεί στα σύγχρονα Ιαπωνικά.
-Πρότυπο ISO 3602
+        <translation>Sukurta Nihon-shiki sistemos pagrindu, bet pritaikyta šiuolaikinei japponų kalbai.
+Standartizuota kaip ISO 3602
 
-Δεν υποστηρίζεται ακόμη από το GoldenDict.</translation>
+Dar įtraukta į GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="464"/>
@@ -2633,12 +2612,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.ui" line="471"/>
         <source>Syllabaries:</source>
-        <translation>Χαρακτήρες:</translation>
+        <translation>Skiemenų abėcėlė:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="478"/>
         <source>Hiragana Japanese syllabary</source>
-        <translation>Ιαπωνικοί χαρακτήρες Hiragana</translation>
+        <translation>Japonų skiemenenų abėcėlė Hiragana</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="481"/>
@@ -2648,12 +2627,23 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.ui" line="488"/>
         <source>Katakana Japanese syllabary</source>
-        <translation>Ιαπωνικοί χαρακτήρες Katakana</translation>
+        <translation>Japonų skiemenenų abėcėlė Katakana</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="491"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="221"/>
+        <source>Wikipedia</source>
+        <translatorcomment>Пишется по-русски, источник: ru.wikipedia.org</translatorcomment>
+        <translation>Vikipedija</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="227"/>
+        <source>Wikipedia (MediaWiki) sites:</source>
+        <translation>Vikipedijos (Vikitekos) svetainės:</translation>
     </message>
 </context>
 <context>
@@ -2661,17 +2651,17 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="454"/>
         <source>Enabled</source>
-        <translation>Ενεργή</translation>
+        <translation>Įgalinta</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="456"/>
         <source>Name</source>
-        <translation>Όνομα</translation>
+        <translation>Pavadinimas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="458"/>
         <source>Address</source>
-        <translation>Διεύθυνση</translation>
+        <translation>Adresas</translation>
     </message>
 </context>
 <context>
@@ -2679,7 +2669,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../wordfinder.cc" line="153"/>
         <source>Failed to query some dictionaries.</source>
-        <translation>Απέτυχε η αναζήτηση σε ορισμένα λεξικά.</translation>
+        <translation>Kai kurių žodynų nepavyko užklausti.</translation>
     </message>
 </context>
 </TS>

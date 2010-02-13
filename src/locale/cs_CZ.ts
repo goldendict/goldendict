@@ -5,7 +5,7 @@
     <name></name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>Chyba při zpracování XML: %1 v %2, %3</translation>
+        <translation type="obsolete">Chyba při zpracování XML: %1 v %2, %3</translation>
     </message>
 </context>
 <context>
@@ -2183,6 +2183,20 @@
     </message>
 </context>
 <context>
+    <name>MediaWiki::MediaWikiArticleRequest</name>
+    <message>
+        <source>XML parse error: %1 at %2,%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MediaWiki::MediaWikiWordSearchRequest</name>
+    <message>
+        <source>XML parse error: %1 at %2,%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MediaWikisModel</name>
     <message>
         <source>Enabled</source>
@@ -2524,7 +2538,7 @@ nastavit zde) poté co označíte text.</translation>
     </message>
     <message>
         <source>Program to play audio files:</source>
-        <translation>Program pro přehrávání audio souborů:</translation>
+        <translation type="obsolete">Program pro přehrávání audio souborů:</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -2635,6 +2649,26 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pronunciation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play via Phonon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use external program:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play via DirectShow</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

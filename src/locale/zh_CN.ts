@@ -5,7 +5,7 @@
     <name></name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>XML 语法错误：%1 于 %2, %3</translation>
+        <translation type="obsolete">XML 语法错误：%1 于 %2, %3</translation>
     </message>
 </context>
 <context>
@@ -1404,6 +1404,20 @@
     </message>
 </context>
 <context>
+    <name>MediaWiki::MediaWikiArticleRequest</name>
+    <message>
+        <source>XML parse error: %1 at %2,%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MediaWiki::MediaWikiWordSearchRequest</name>
+    <message>
+        <source>XML parse error: %1 at %2,%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MediaWikisModel</name>
     <message>
         <source>Name</source>
@@ -1780,7 +1794,7 @@ its main window.</source>
     </message>
     <message>
         <source>Program to play audio files:</source>
-        <translation>音频文件播放程序：</translation>
+        <translation type="obsolete">音频文件播放程序：</translation>
     </message>
     <message>
         <source>Shift key</source>
@@ -1827,6 +1841,26 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>禁止载入来自其它站点的内容（封杀广告）</translation>
+    </message>
+    <message>
+        <source>Pronunciation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play via Phonon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use external program:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play via DirectShow</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
