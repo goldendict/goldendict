@@ -130,7 +130,7 @@
     <message>
         <location filename="../articleview.cc" line="804"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Atv&amp;erti nuorodą naršyklėje</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="817"/>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="12"/>
         <source>Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodynų juosta</translation>
     </message>
 </context>
 <context>
@@ -1544,7 +1544,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="33"/>
         <source>Show Names in Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodynų juostelėje rodyti pavadinimus</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="85"/>
@@ -1631,12 +1631,12 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ro&amp;dinys</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="102"/>
         <source>H&amp;istory</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Istorija</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="247"/>
@@ -1747,7 +1747,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="367"/>
         <source>&amp;Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš&amp;valyti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="116"/>
@@ -1760,7 +1760,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mediawiki.cc" line="271"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation>XML nagrinėjimo klaida: %1 ties %2,%3</translation>
     </message>
 </context>
 <context>
@@ -1768,7 +1768,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mediawiki.cc" line="149"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation>XML nagrinėjimo klaida: %1 ties %2,%3</translation>
     </message>
 </context>
 <context>
@@ -1977,7 +1977,8 @@ tiesiog paslepiama.</translation>
         <location filename="../preferences.ui" line="283"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nurodykite, ar ši iškylančių langų funkcija yra numatytoji.
+Jei pažymėta, iškylančių langų funkcija bus įjungta vos paleistoje programoje.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="464"/>
@@ -1985,7 +1986,10 @@ the program would always start with the scan popup active.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paprastai langas su vertimu iškyla nuspaudus 
+pasirinktus klavišus žymėjimo metu. 
+Jei įgalinta ši parinktis, klavišai suveiks ir
+praėjus trupučiui laiko po to, kai baigėte žymėti.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="544"/>
@@ -2015,7 +2019,7 @@ be pressed shortly after the selection is done.</source>
     <message>
         <location filename="../preferences.ui" line="146"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict paleisti kartu su vartotojo darbalaukiu kraunantis opoeracinei sistemai.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="265"/>
@@ -2158,17 +2162,17 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="731"/>
         <source>Playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Grojimas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="737"/>
         <source>Play via Phonon</source>
-        <translation type="unfinished"></translation>
+        <translation>Groti per Phonon</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="749"/>
         <source>Use external program:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti išorinę programą:</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
@@ -2205,7 +2209,11 @@ baigimo žymėti. Laiką nurodykie čia.</translation>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Pastaba: regis naudojate X.Org XServerio versiją, kurios RECORD plėtinys yra sugadintas. Spartieji klavišai GoldenDict programai greičiausiai neveiks. Tai pirmiausia turėų būti ištaisyta pačiame Xserveryje. Žiūrėkite pranešimą apie &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;ydą&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; bei, jei norite, palikite savo komentarą .&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="689"/>
@@ -2215,7 +2223,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="708"/>
         <source>Pronunciation</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarimas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="714"/>
@@ -2278,12 +2286,12 @@ užklausoms naudoti įgaliotąjį serverį.</translation>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Įgalinus šią parinktį, GoldenDict blokuos didžiąją dalį reklamos, neleisdama turinio (paveikslėlių, kadrų) esančio iš kito šaltinio, nei jūsų naršomas puslapis. Jei kuri svetainė neveiks su šia parinktimi, ją išjunkite.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="914"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation type="unfinished"></translation>
+        <translation>Neleisti įkelti turinio iš kitų svetainių (dažniausiai reklamos)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="937"/>
@@ -2329,7 +2337,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../preferences.cc" line="130"/>
         <source>Play via DirectShow</source>
-        <translation type="unfinished"></translation>
+        <translation>Groti per DirectShow</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="296"/>
