@@ -2,13 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="zh_CN">
 <context>
-    <name></name>
-    <message>
-        <source>XML parse error: %1 at %2,%3</source>
-        <translation type="obsolete">XML 语法错误：%1 于 %2, %3</translation>
-    </message>
-</context>
-<context>
     <name>About</name>
     <message>
         <source>#.#</source>
@@ -1407,14 +1400,14 @@
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation>XML 语法错误：%1 于 %2, %3</translation>
     </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation>XML 语法错误：%1 于 %2, %3</translation>
     </message>
 </context>
 <context>
@@ -1793,10 +1786,6 @@ its main window.</source>
         <translation>启用此选项，程序启动时将直接最小化至系统托盘。</translation>
     </message>
     <message>
-        <source>Program to play audio files:</source>
-        <translation type="obsolete">音频文件播放程序：</translation>
-    </message>
-    <message>
         <source>Shift key</source>
         <translation>Shift 键</translation>
     </message>
@@ -1844,23 +1833,23 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Pronunciation</source>
-        <translation type="unfinished"></translation>
+        <translation>朗读</translation>
     </message>
     <message>
         <source>Playback</source>
-        <translation type="unfinished"></translation>
+        <translation>播放</translation>
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation type="unfinished"></translation>
+        <translation>通过 Phonon 播放</translation>
     </message>
     <message>
         <source>Use external program:</source>
-        <translation type="unfinished"></translation>
+        <translation>通过外部程序播放：</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation type="unfinished"></translation>
+        <translation>通过 DirectShow 播放</translation>
     </message>
 </context>
 <context>
