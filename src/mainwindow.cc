@@ -1320,10 +1320,11 @@ void MainWindow::installHotKeys()
       return;
     }
 
-    hotkeyWrapper->setGlobalKey( cfg.preferences.mainWindowHotkey.key1,
-                                 cfg.preferences.mainWindowHotkey.key2,
-                                 cfg.preferences.mainWindowHotkey.modifiers,
-                                 0 );
+    if ( cfg.preferences.enableMainWindowHotkey )
+      hotkeyWrapper->setGlobalKey( cfg.preferences.mainWindowHotkey.key1,
+                                   cfg.preferences.mainWindowHotkey.key2,
+                                   cfg.preferences.mainWindowHotkey.modifiers,
+                                   0 );
 
     if ( cfg.preferences.enableClipboardHotkey && scanPopup.get() )
     {
