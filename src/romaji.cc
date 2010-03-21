@@ -23,8 +23,8 @@ HepburnHiragana::HepburnHiragana()
   ins( "ma", "ま" ); ins( "mi", "み" ); ins( "mu", "む" ); ins( "me", "め" ); ins( "mo", "も" ); ins( "mya", "みゃ" ); ins( "myu", "みゅ" ); ins( "myo", "みょ" ); 
   ins( "ya", "や" ); ins( "yu", "ゆ" ); ins( "yo", "よ" ); 
   ins( "ra", "ら" ); ins( "ri", "り" ); ins( "ru", "る" ); ins( "re", "れ" ); ins( "ro", "ろ" ); ins( "rya", "りゃ" ); ins( "ryu", "りゅ" ); ins( "ryo", "りょ" ); 
-  ins( "wa", "わ" ); /*ゐ wi† 		ゑ we† 	を wo‡ 	*/
-  ins( "n", "ん" ); 
+  ins( "wa", "わ" ); /*ゐ wi† 		ゑ we† */ ins( "wo", "を" );
+  ins( "n", "ん" );
   ins( "ga", "が" ); ins( "gi", "ぎ" ); ins( "gu", "ぐ" ); ins( "ge", "げ" ); ins( "go", "ご" ); ins( "gya", "ぎゃ" ); ins( "gyu", "ぎゅ" ); ins( "gyo", "ぎょ" ); 
   ins( "za", "ざ" ); ins( "ji", "じ" ); ins( "zu", "ず" ); ins( "ze", "ぜ" ); ins( "zo", "ぞ" ); ins( "ja", "じゃ" ); ins( "ju", "じゅ" ); ins( "jo", "じょ" ); 
   ins( "da", "だ" ); ins( "(ji)", "ぢ" ); ins( "(zu)", "づ" ); ins( "de", "で" ); ins( "do", "ど" ); ins( "(ja)", "ぢゃ" ); ins( "(ju)", "ぢゅ" ); ins( "(jo)", "ぢょ" ); 
