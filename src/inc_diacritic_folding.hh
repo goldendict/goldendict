@@ -3130,6 +3130,8 @@ wchar foldDiacritic( wchar const * in, size_t size, size_t & consumed )
         consumed = 1; return *in;
       case 0x400:
         consumed = 1; return 0x415;
+      case 0x401:
+        consumed = 1; return 0x415;
       case 0x40d:
         consumed = 1; return 0x418;
       case 0x410:
@@ -3361,6 +3363,8 @@ wchar foldDiacritic( wchar const * in, size_t size, size_t & consumed )
         }
         consumed = 1; return *in;
       case 0x450:
+        consumed = 1; return 0x435;
+      case 0x451:
         consumed = 1; return 0x435;
       case 0x45d:
         consumed = 1; return 0x438;

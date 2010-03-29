@@ -1,3 +1,9 @@
+# Note: the following lines was added for the GoldenDict. It's the only modification
+# made.
+
+0401; 0415 # CYRILLIC CAPITAL LETTER IO -> CYRILLIC CAPITAL LETTER IE
+0451; 0435 # CYRILLIC SMALL LETTER IO -> CYRILLIC SMALL LETTER IE
+
 # 	DiacriticFolding.txt
 #	DRAFT 1 - 2004-07-14 John Cowan
 #	Subject to change

@@ -446,6 +446,7 @@ size_t foldCase( wchar in, wchar * out )
     case 0x51e: *out = 0x51f; return 1;
     case 0x520: *out = 0x521; return 1;
     case 0x522: *out = 0x523; return 1;
+    case 0x524: *out = 0x525; return 1;
     case 0x531: *out = 0x561; return 1;
     case 0x532: *out = 0x562; return 1;
     case 0x533: *out = 0x563; return 1;
@@ -906,8 +907,11 @@ size_t foldCase( wchar in, wchar * out )
     case 0x2c6d: *out = 0x251; return 1;
     case 0x2c6e: *out = 0x271; return 1;
     case 0x2c6f: *out = 0x250; return 1;
+    case 0x2c70: *out = 0x252; return 1;
     case 0x2c72: *out = 0x2c73; return 1;
     case 0x2c75: *out = 0x2c76; return 1;
+    case 0x2c7e: *out = 0x23f; return 1;
+    case 0x2c7f: *out = 0x240; return 1;
     case 0x2c80: *out = 0x2c81; return 1;
     case 0x2c82: *out = 0x2c83; return 1;
     case 0x2c84: *out = 0x2c85; return 1;
@@ -958,6 +962,8 @@ size_t foldCase( wchar in, wchar * out )
     case 0x2cde: *out = 0x2cdf; return 1;
     case 0x2ce0: *out = 0x2ce1; return 1;
     case 0x2ce2: *out = 0x2ce3; return 1;
+    case 0x2ceb: *out = 0x2cec; return 1;
+    case 0x2ced: *out = 0x2cee; return 1;
     case 0xa640: *out = 0xa641; return 1;
     case 0xa642: *out = 0xa643; return 1;
     case 0xa644: *out = 0xa645; return 1;
@@ -1559,6 +1565,7 @@ wchar foldCaseSimple( wchar in )
     case 0x51e: return 0x51f;
     case 0x520: return 0x521;
     case 0x522: return 0x523;
+    case 0x524: return 0x525;
     case 0x531: return 0x561;
     case 0x532: return 0x562;
     case 0x533: return 0x563;
@@ -1961,8 +1968,11 @@ wchar foldCaseSimple( wchar in )
     case 0x2c6d: return 0x251;
     case 0x2c6e: return 0x271;
     case 0x2c6f: return 0x250;
+    case 0x2c70: return 0x252;
     case 0x2c72: return 0x2c73;
     case 0x2c75: return 0x2c76;
+    case 0x2c7e: return 0x23f;
+    case 0x2c7f: return 0x240;
     case 0x2c80: return 0x2c81;
     case 0x2c82: return 0x2c83;
     case 0x2c84: return 0x2c85;
@@ -2013,6 +2023,8 @@ wchar foldCaseSimple( wchar in )
     case 0x2cde: return 0x2cdf;
     case 0x2ce0: return 0x2ce1;
     case 0x2ce2: return 0x2ce3;
+    case 0x2ceb: return 0x2cec;
+    case 0x2ced: return 0x2cee;
     case 0xa640: return 0xa641;
     case 0xa642: return 0xa643;
     case 0xa644: return 0xa645;
