@@ -15,8 +15,16 @@
 #include "wstring_qt.hh"
 
 #include <QBuffer>
+
+// Phonon headers are a mess. How to include them properly? Send patches if you
+// know.
+#ifdef __WIN32
 #include <Phonon/AudioOutput>
 #include <Phonon/MediaObject>
+#else
+#include <phonon/audiooutput.h>
+#include <phonon/mediaobject.h>
+#endif
 
 using std::map;
 using std::list;
