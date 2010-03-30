@@ -340,7 +340,14 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
                                                             unsigned long maxResults )
   throw( std::exception )
 {
-  return new MediaWikiWordSearchRequest( word, url, netMgr );
+  if ( word.size() > 80 )
+  {
+    // Don't make excessively large queries -- they're fruitless anyway
+
+    return new WordSearchRequestInstant();
+  }
+  else
+    return new MediaWikiWordSearchRequest( word, url, netMgr );
 }
 
 sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
@@ -348,7 +355,14 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
                                                      wstring const & )
   throw( std::exception )
 {
-  return new MediaWikiArticleRequest( word, alts, url, netMgr );
+  if ( word.size() > 80 )
+  {
+    // Don't make excessively large queries -- they're fruitless anyway
+
+    return new DataRequestInstant( false );
+  }
+  else
+    return new MediaWikiArticleRequest( word, alts, url, netMgr );
 }
 
 }
