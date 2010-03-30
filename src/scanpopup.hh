@@ -13,10 +13,11 @@
 #include <QDialog>
 #include <QClipboard>
 #include "history.hh"
+#include "dictionarybar.hh"
 
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
-class ScanPopup: public QDialog, KeyboardState
+class ScanPopup: public QMainWindow, KeyboardState
 {
   Q_OBJECT
 
@@ -61,6 +62,8 @@ private:
   // Ungrabs mouse and uninstalls global event filter.
   void uninterceptMouse();
 
+  void updateDictionaryBar();
+
   Config::Class & cfg;
   bool isScanningEnabled;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
@@ -71,6 +74,8 @@ private:
   QAction escapeAction;
   QString pendingInputWord, inputWord;
   WordFinder wordFinder;
+  Config::Events configEvents;
+  DictionaryBar dictionaryBar;
 
   bool mouseEnteredOnce;
   bool mouseIntercepted;
@@ -94,7 +99,6 @@ private:
   virtual void mouseReleaseEvent( QMouseEvent * );
   virtual void leaveEvent( QEvent * event );
   virtual void enterEvent( QEvent * event );
-  virtual void resizeEvent( QResizeEvent * event );
   virtual void showEvent( QShowEvent * );
 
   /// Returns inputWord, chopped with appended ... if it's too long/
@@ -109,6 +113,7 @@ private slots:
   void on_wordListButton_clicked();
   void on_pronounceButton_clicked();
   void pinButtonClicked( bool checked );
+  void on_showDictionaryBar_clicked( bool checked );
 
   void hideTimerExpired();
   void altModeExpired();
@@ -117,6 +122,8 @@ private slots:
   void pageLoaded( ArticleView * );
 
   void escapePressed();
+
+  void mutedDictionariesChanged();
 };
 
 #endif

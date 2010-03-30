@@ -32,7 +32,7 @@ ScanPopup::ScanPopup( QWidget * parent,
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                       Instances::Groups const & groups_,
                       History & history_ ):
-  QDialog( parent ),
+  QMainWindow( parent ),
   cfg( cfg_ ),
   isScanningEnabled( false ),
   allDictionaries( allDictionaries_ ),
@@ -40,6 +40,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   history( history_ ),
   escapeAction( this ),
   wordFinder( this ),
+  dictionaryBar( this, cfg.popupMutedDictionaries, configEvents ),
   mouseEnteredOnce( false ),
   mouseIntercepted( false ),
   hideTimer( this )
@@ -49,7 +50,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.queryError->hide();
 
   definition = new ArticleView( ui.outerFrame, articleNetMgr, allDictionaries,
-                                groups, true, cfg );
+                                groups, true, cfg,
+                                dictionaryBar.toggleViewAction(),
+                                &cfg.popupMutedDictionaries );
 
   applyZoomFactor();
   
@@ -61,10 +64,21 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.groupList->fill( groups );
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
 
+  dictionaryBar.setFloatable( false );
+  dictionaryBar.setMovable( false );
+
+  addToolBar( Qt::RightToolBarArea, &dictionaryBar );
+
+  if ( cfg.popupWindowGeometry.size() )
+    restoreGeometry( cfg.popupWindowGeometry );
+
+  if ( cfg.popupWindowState.size() )
+    restoreState( cfg.popupWindowState, 1 );
+
   setWindowFlags( popupWindowFlags );
 
-  if ( cfg.lastPopupSize.isValid() )
-    resize( cfg.lastPopupSize );
+  connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
+           this, SLOT( mutedDictionariesChanged() ) );
 
   definition->focus();
 
@@ -123,6 +137,10 @@ ScanPopup::ScanPopup( QWidget * parent,
 
 ScanPopup::~ScanPopup()
 {
+  // Save state and geometry
+  cfg.popupWindowState = saveState( 1 );
+  cfg.popupWindowGeometry = saveGeometry();
+
   disableScanning();
 }
 
@@ -320,6 +338,8 @@ QString ScanPopup::elideInputWord()
 
 void ScanPopup::currentGroupChanged( QString const & )
 {
+  updateDictionaryBar();
+
   if ( isVisible() )
     initiateTranslation();
 
@@ -399,7 +419,7 @@ bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
     }
   }
 
-  return QDialog::eventFilter( watched, event );
+  return QMainWindow::eventFilter( watched, event );
 }
 
 void ScanPopup::mousePressEvent( QMouseEvent * ev )
@@ -414,10 +434,13 @@ void ScanPopup::mousePressEvent( QMouseEvent * ev )
     return;
   }
 
-  startPos = ev->globalPos();
-  setCursor( Qt::ClosedHandCursor );
+  if ( ev->button() == Qt::LeftButton )
+  {
+    startPos = ev->globalPos();
+    setCursor( Qt::ClosedHandCursor );
+  }
 
-  QDialog::mousePressEvent( ev );
+  QMainWindow::mousePressEvent( ev );
 }
 
 void ScanPopup::mouseMoveEvent( QMouseEvent * event )
@@ -435,18 +458,18 @@ void ScanPopup::mouseMoveEvent( QMouseEvent * event )
     move( pos() + delta );
   }
  
-  QDialog::mouseMoveEvent( event );
+  QMainWindow::mouseMoveEvent( event );
 }
 
 void ScanPopup::mouseReleaseEvent( QMouseEvent * ev )
 {
   unsetCursor();
-  QDialog::mouseReleaseEvent( ev );
+  QMainWindow::mouseReleaseEvent( ev );
 }
 
 void ScanPopup::leaveEvent( QEvent * event )
 {
-  QDialog::leaveEvent( event );
+  QMainWindow::leaveEvent( event );
 
   // We hide the popup when the mouse leaves it.
 
@@ -464,7 +487,7 @@ void ScanPopup::leaveEvent( QEvent * event )
 
 void ScanPopup::enterEvent( QEvent * event )
 {
-  QDialog::enterEvent( event );
+  QMainWindow::enterEvent( event );
 
   if ( mouseEnteredOnce )
   {
@@ -476,19 +499,18 @@ void ScanPopup::enterEvent( QEvent * event )
   }
 }
 
-void ScanPopup::resizeEvent( QResizeEvent * event )
-{
-  cfg.lastPopupSize = event->size();
-
-  QDialog::resizeEvent( event );
-}
-
 void ScanPopup::showEvent( QShowEvent * ev )
 {
-  QDialog::showEvent( ev );
+  QMainWindow::showEvent( ev );
   
   if ( groups.size() <= 1 ) // Only the default group? Hide then.
     ui.groupList->hide();
+
+  if ( ui.showDictionaryBar->isChecked() != dictionaryBar.isVisible() )
+  {
+    ui.showDictionaryBar->setChecked( dictionaryBar.isVisible() );
+    updateDictionaryBar();
+  }
 }
 
 void ScanPopup::prefixMatchFinished()
@@ -555,16 +577,25 @@ void ScanPopup::pinButtonClicked( bool checked )
 
     setWindowFlags( Qt::Dialog );
     setWindowTitle( elideInputWord() );
+    dictionaryBar.setMovable( true );
     hideTimer.stop();
   }
   else
   {
+    dictionaryBar.setMovable( false );
     setWindowFlags( popupWindowFlags );
 
     mouseEnteredOnce = true;
   }
 
   show();
+}
+
+void ScanPopup::on_showDictionaryBar_clicked( bool checked )
+{
+  dictionaryBar.setVisible( checked );
+  updateDictionaryBar();
+  definition->updateMutedContents();
 }
 
 void ScanPopup::hideTimerExpired()
@@ -641,4 +672,18 @@ void ScanPopup::uninterceptMouse()
 
     mouseIntercepted = false;
   }
+}
+
+void ScanPopup::updateDictionaryBar()
+{
+  if ( !dictionaryBar.toggleViewAction()->isChecked() )
+    return; // It's not enabled, therefore hidden -- don't waste time
+
+  dictionaryBar.setDictionaries( getActiveDicts() );
+}
+
+void ScanPopup::mutedDictionariesChanged()
+{
+  if ( dictionaryBar.toggleViewAction()->isChecked() )
+    definition->updateMutedContents();
 }

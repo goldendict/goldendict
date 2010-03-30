@@ -61,6 +61,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           Instances::Groups const & groups_, bool popupView_,
                           Config::Class const & cfg_,
                           QAction * dictionaryBarToggled_,
+                          Config::MutedDictionaries * mutedDictionaries_,
                           GroupComboBox const * groupComboBox_ ):
   QFrame( parent ),
   articleNetMgr( nm ),
@@ -76,6 +77,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   openSearchAction( this ),
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
+  mutedDictionaries( mutedDictionaries_ ),
   groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
@@ -500,7 +502,7 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 
 QString ArticleView::getMutedForGroup( unsigned group )
 {
-  if ( dictionaryBarToggled && dictionaryBarToggled->isChecked() )
+  if ( dictionaryBarToggled && mutedDictionaries && dictionaryBarToggled->isChecked() )
   {
     // Dictionary bar is active -- mute the muted dictionaries
     Instances::Group const * groupInstance = groups.findGroup( group );
@@ -514,7 +516,7 @@ QString ArticleView::getMutedForGroup( unsigned group )
         QString id = QString::fromStdString(
                        groupInstance->dictionaries[ x ]->getId() );
 
-        if ( cfg.mutedDictionaries.contains( id ) )
+        if ( mutedDictionaries->contains( id ) )
           mutedDicts.append( id );
       }
     }

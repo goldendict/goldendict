@@ -42,6 +42,7 @@ class ArticleView: public QFrame
   QString desktopOpenedTempFile;
 
   QAction * dictionaryBarToggled;
+  Config::MutedDictionaries * mutedDictionaries;
   GroupComboBox const * groupComboBox;
 
 public:
@@ -55,6 +56,7 @@ public:
                bool popupView,
                Config::Class const & cfg,
                QAction * dictionaryBarToggled = 0,
+               Config::MutedDictionaries * mutedDictionaries = 0,
                GroupComboBox const * groupComboBox = 0 );
 
   /// Sets the currently active group combo box. When looking up selections,

@@ -292,12 +292,14 @@ struct Class
 
   unsigned lastMainGroupId; // Last used group in main window
   unsigned lastPopupGroupId; // Last used group in popup window
-  QSize lastPopupSize;
+  QByteArray popupWindowState; // Binary state saved by QMainWindow
+  QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
 
   QByteArray mainWindowState; // Binary state saved by QMainWindow
   QByteArray mainWindowGeometry; // Geometry saved by QMainWindow
 
   MutedDictionaries mutedDictionaries; // Disabled via dictionary bar
+  MutedDictionaries popupMutedDictionaries; // Disabled via dictionary bar in popup
 
   QDateTime timeForNewReleaseCheck; // Only effective if
                                     // preferences.checkForNewReleases is set

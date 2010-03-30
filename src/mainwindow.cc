@@ -362,6 +362,10 @@ MainWindow::~MainWindow()
   cfg.mainWindowState = saveState( 1 );
   cfg.mainWindowGeometry = saveGeometry();
 
+  // Close the popup, so it would save its geometry to config
+
+  scanPopup.reset();
+
   // Save any changes in last chosen groups etc
   Config::save( cfg );
 
@@ -649,6 +653,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
                                         groupInstances, false, cfg,
                                         dictionaryBar.toggleViewAction(),
+                                        &cfg.mutedDictionaries,
                                         &groupList );
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),

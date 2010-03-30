@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ScanPopup</class>
- <widget class="QDialog" name="ScanPopup">
+ <widget class="QMainWindow" name="ScanPopup">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,129 +13,152 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="margin">
+  <widget class="QFrame" name="outerFrame">
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="lineWidth">
     <number>0</number>
    </property>
-   <item>
-    <widget class="QFrame" name="outerFrame">
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <property name="lineWidth">
-      <number>0</number>
-     </property>
-     <layout class="QVBoxLayout" name="mainLayout">
-      <property name="margin">
-       <number>9</number>
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="margin">
+     <number>9</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>-1</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="GroupComboBox" name="groupList"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="queryError">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="resources.qrc">:/icons/warning.png</pixmap>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="word">
-          <property name="text">
-           <string>word</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="wordListButton">
-          <property name="toolTip">
-           <string>List Matches (Alt+M)</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="resources.qrc">
-            <normaloff>:/icons/prefix.png</normaloff>:/icons/prefix.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>22</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="shortcut">
-           <string>Alt+M</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="pronounceButton">
-          <property name="toolTip">
-           <string>Pronounce Word (Alt+S)</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="resources.qrc">
-            <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
-          </property>
-          <property name="shortcut">
-           <string>Alt+S</string>
-          </property>
-          <property name="autoRaise">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QToolButton" name="pinButton">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="resources.qrc">
-            <normaloff>:/icons/pushpin.png</normaloff>:/icons/pushpin.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="autoRaise">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="GroupComboBox" name="groupList"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="queryError">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/icons/warning.png</pixmap>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="word">
+        <property name="text">
+         <string>word</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="wordListButton">
+        <property name="toolTip">
+         <string>List Matches (Alt+M)</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/prefix.png</normaloff>:/icons/prefix.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Alt+M</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="pronounceButton">
+        <property name="toolTip">
+         <string>Pronounce Word (Alt+S)</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
+        </property>
+        <property name="shortcut">
+         <string>Alt+S</string>
+        </property>
+        <property name="autoRaise">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="showDictionaryBar">
+        <property name="toolTip">
+         <string>Shows or hides the dictionary bar</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/bookcase.png</normaloff>:/icons/bookcase.png</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="pinButton">
+        <property name="toolTip">
+         <string>Use this to pin down the window so it would stay on screen,
+could be resized or managed in other ways.</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/pushpin.png</normaloff>:/icons/pushpin.png</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-  </layout>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
