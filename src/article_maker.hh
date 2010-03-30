@@ -27,7 +27,7 @@ public:
   /// On construction, a reference to all dictionaries and a reference all
   /// groups' instances are to be passed. Those references are kept stored as
   /// references, and as such, any changes to them would reflect on the results
-  /// of the inquiries, altthough those changes are perfectly legal.
+  /// of the inquiries, although those changes are perfectly legal.
   ArticleMaker( std::vector< sptr< Dictionary::Class > > const & dictionaries,
                 std::vector< Instances::Group > const & groups,
                 QString const & displayStyle );
@@ -88,6 +88,20 @@ class ArticleRequest: public Dictionary::DataRequest
                       // be closed after the article ends.
   sptr< WordFinder > stemmedWordFinder; // Used when there're no results
 
+  /// A sequence of words and spacings between them, including the initial
+  /// spacing before the first word and the final spacing after the last word.
+  typedef QList< QString > Words;
+  typedef QList< QString > Spacings;
+
+  /// Splits the given string into words and spacings between them.
+  QPair< Words, Spacings > splitIntoWords( QString const & );
+
+  QPair< Words, Spacings > splittedWords;
+  int currentSplittedWordStart;
+  int currentSplittedWordEnd;
+  QString currentSplittedWordCompound;
+  bool firstCompoundWasFound;
+
 public:
 
   ArticleRequest( QString const & word, QString const & group,
@@ -103,6 +117,25 @@ private slots:
   void altSearchFinished();
   void bodyFinished();
   void stemmedSearchFinished();
+  void individualWordFinished();
+
+private:
+
+  /// Appends the given string to 'data', with locking its mutex.
+  void appendToData( std::string const & );
+
+  /// Uses stemmedWordFinder to perform the next step of looking up word
+  /// combinations.
+  void compoundSearchNextStep( bool lastSearchSucceeded );
+
+  /// Creates a single word out of the [currentSplittedWordStart..End] range.
+  QString makeSplittedWordCompound();
+
+  /// Makes an html link to the given word.
+  std::string linkWord( QString const & );
+
+  /// Escapes the spacing between the words to include in html.
+  std::string escapeSpacing( QString const & );
 };
 
 

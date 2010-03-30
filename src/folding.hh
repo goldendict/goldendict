@@ -67,6 +67,9 @@ wstring trimWhitespaceOrPunct( wstring const & );
 /// the word.
 wstring trimWhitespace( wstring const & );
 
+/// Turns any sequences of consecutive whitespace into a single basic space.
+void normalizeWhitespace( wstring & );
+
 /// Same as apply( wstring ), but without any heap operations, therefore
 /// preferable when there're many strings to process. Returns -1 if the
 /// operation succeded, or otherwise the minimum value of outSize required

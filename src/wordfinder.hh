@@ -42,6 +42,9 @@ private:
     PrefixMatch,
     StemmedMatch
   } searchType;
+  unsigned stemmedMinLength;
+  unsigned stemmedMaxSuffixVariation;
+  unsigned long stemmedMaxResults;
 
   std::vector< sptr< Dictionary::Class > > const * inputDicts;
 
@@ -76,11 +79,13 @@ public:
   void prefixMatch( QString const &,
                     std::vector< sptr< Dictionary::Class > > const & );
 
-
   /// Do a stemmed-match search in the given list of dictionaries. All comments
   /// from prefixMatch() generally apply as well.
   void stemmedMatch( QString const &,
-                     std::vector< sptr< Dictionary::Class > > const & );
+                     std::vector< sptr< Dictionary::Class > > const &,
+                     unsigned minLength = 3,
+                     unsigned maxSuffixVariation = 3,
+                     unsigned long maxResults = 30 );
   
   /// Returns the vector containing search results from the last operation.
   /// If it didn't finish yet, the result is not final and may be changing

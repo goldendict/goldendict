@@ -56,7 +56,10 @@ void WordFinder::prefixMatch( QString const & str,
   // cancelled, but still it could take some time.
 }
 void WordFinder::stemmedMatch( QString const & str,
-                               std::vector< sptr< Dictionary::Class > > const & dicts )
+                               std::vector< sptr< Dictionary::Class > > const & dicts,
+                               unsigned minLength,
+                               unsigned maxSuffixVariation,
+                               unsigned long maxResults )
 {
   cancel();
 
@@ -64,6 +67,9 @@ void WordFinder::stemmedMatch( QString const & str,
   searchType = StemmedMatch;
   inputWord = str;
   inputDicts = &dicts;
+  stemmedMinLength = minLength;
+  stemmedMaxSuffixVariation = maxSuffixVariation;
+  stemmedMaxResults = maxResults;
 
   resultsArray.clear();
   resultsIndex.clear();
@@ -110,7 +116,7 @@ void WordFinder::startSearch()
       sptr< Dictionary::WordSearchRequest > sr =
         ( searchType == PrefixMatch ) ?
           (*inputDicts)[ x ]->prefixMatch( allWordWritings[ y ], 40 ) :
-          (*inputDicts)[ x ]->stemmedMatch( allWordWritings[ y ], 3, 3, 30 );
+          (*inputDicts)[ x ]->stemmedMatch( allWordWritings[ y ], stemmedMinLength, stemmedMaxSuffixVariation, stemmedMaxResults );
   
       connect( sr.get(), SIGNAL( finished() ),
                this, SLOT( requestFinished() ), Qt::QueuedConnection );

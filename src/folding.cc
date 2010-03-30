@@ -636,4 +636,27 @@ wstring trimWhitespace( wstring const & in )
   return wstring( wordBegin, wordSize );
 }
 
+void normalizeWhitespace( wstring & str )
+{
+  for( size_t x = str.size(); x-- > 1; ) // >1 -- Don't test the first char
+  {
+    if ( isWhitespace( str[ x ] ) )
+    {
+      size_t y;
+      for( y = x; y && ( isWhitespace( str[ y - 1 ] ) ) ; --y );
+
+      if ( y != x )
+      {
+        // Remove extra spaces
+
+        str.erase( y, x - y );
+
+        x = y;
+
+        str[ x ] = ' ';
+      }
+    }
+  }
+}
+
 }

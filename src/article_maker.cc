@@ -9,6 +9,7 @@
 #include <limits.h>
 #include <QFile>
 #include <QUrl>
+#include "folding.hh"
 
 using std::vector;
 using std::string;
@@ -103,13 +104,21 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
 std::string ArticleMaker::makeNotFoundBody( QString const & word,
                                             QString const & group )
 {
+  string result( "<div class=\"gdnotfound\"><p>" );
 
-  return string( "<div class=\"gdnotfound\"><p>" ) +
-      tr( "No translation for <b>%1</b> was found in group <b>%2</b>." ).
-        arg( QString::fromUtf8( Html::escape( word.toUtf8().data() ).c_str() ) ).
-        arg( QString::fromUtf8( Html::escape( group.toUtf8().data() ).c_str() ) ).
-          toUtf8().data()
-        +"</p></div>";
+  if ( word.size() )
+    result += tr( "No translation for <b>%1</b> was found in group <b>%2</b>." ).
+              arg( QString::fromUtf8( Html::escape( word.toUtf8().data() ).c_str() ) ).
+              arg( QString::fromUtf8( Html::escape( group.toUtf8().data() ).c_str() ) ).
+                toUtf8().data();
+  else
+    result += tr( "No translation was found in group <b>%1</b>." ).
+              arg( QString::fromUtf8( Html::escape( group.toUtf8().data() ).c_str() ) ).
+                toUtf8().data();
+
+  result += "</p></div>";
+
+  return result;
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
@@ -441,7 +450,10 @@ void ArticleRequest::bodyFinished()
       if ( !foundAnyDefinitions )
       {
         // No definitions were ever found, say so to the user.
-        footer += ArticleMaker::makeNotFoundBody( word, group );
+
+        // Larger words are usually whole sentences - don't clutter the ouput
+        // with their full bodies.
+        footer += ArticleMaker::makeNotFoundBody( word.size() < 40 ? word : "", group );
 
         // When there were no definitions, we run stemmed search.
         stemmedWordFinder = new WordFinder( this );
@@ -483,6 +495,8 @@ void ArticleRequest::stemmedSearchFinished()
 
   string footer;
 
+  bool continueMatching = false;
+
   if ( sr.size() )
   {
     footer += "<div class=\"gdstemmedsuggestion\"><span class=\"gdstemmedsuggestion_head\">" +
@@ -491,14 +505,7 @@ void ArticleRequest::stemmedSearchFinished()
 
     for( unsigned x = 0; x < sr.size(); ++x )
     {
-      QUrl url;
-
-      url.setScheme( "gdlookup" );
-      url.setHost( "localhost" );
-      url.setPath( sr[ x ].first );
-
-      string escapedResult = Html::escape( sr[ x ].first.toUtf8().data() );
-      footer += string( "<a href=\"" ) + url.toEncoded().data() + "\">" + escapedResult +"</a>";
+      footer += linkWord( sr[ x ].first );
 
       if ( x != sr.size() - 1 )
       {
@@ -509,7 +516,42 @@ void ArticleRequest::stemmedSearchFinished()
     footer += "</span></div>";
   }
 
-  footer += "</body></html>";
+  splittedWords = splitIntoWords( word );
+
+  if ( splittedWords.first.size() > 1 ) // Contains more than one word
+  {
+    footer += "<div class=\"gdstemmedsuggestion\"><span class=\"gdstemmedsuggestion_head\">" +
+      Html::escape( tr( "Individual words: " ).toUtf8().data() ) +
+      "</span><span class=\"gdstemmedsuggestion_body\">";
+
+    footer += escapeSpacing( splittedWords.second[ 0 ] );
+
+    for( int x = 0; x < splittedWords.first.size(); ++x )
+    {
+      footer += linkWord( splittedWords.first[ x ] );
+      footer += escapeSpacing( splittedWords.second[ x + 1 ] );
+    }
+
+    footer += "</span>";
+
+    disconnect( stemmedWordFinder.get(), SIGNAL( finished() ),
+                this, SLOT( stemmedSearchFinished() ) );
+
+    connect( stemmedWordFinder.get(), SIGNAL( finished() ),
+             this, SLOT( individualWordFinished() ), Qt::QueuedConnection );
+
+    currentSplittedWordStart = -1;
+    currentSplittedWordEnd = currentSplittedWordStart;
+
+    firstCompoundWasFound = false;
+
+    compoundSearchNextStep( false );
+
+    continueMatching = true;
+  }
+
+  if ( !continueMatching )
+    footer += "</body></html>";
 
   {
     Mutex::Lock _( dataMutex );
@@ -521,6 +563,208 @@ void ArticleRequest::stemmedSearchFinished()
     memcpy( &data.front() + offset, footer.data(), footer.size() );
   }
 
-  finish();
+  if ( continueMatching )
+    update();
+  else
+    finish();
 }
 
+void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
+{
+  if ( !lastSearchSucceeded )
+  {
+    // Last search was unsuccessful. First, emit what we had.
+
+    string footer;
+
+    if ( currentSplittedWordEnd - currentSplittedWordStart > 1 ) // We have something to append
+    {
+//      printf( "Appending\n" );
+
+      --currentSplittedWordEnd;
+
+      if ( !firstCompoundWasFound )
+      {
+        // Append the beginning
+        footer += "<div class=\"gdstemmedsuggestion\"><span class=\"gdstemmedsuggestion_head\">" +
+          Html::escape( tr( "Compound expressions: " ).toUtf8().data() ) +
+          "</span><span class=\"gdstemmedsuggestion_body\">";
+
+        firstCompoundWasFound = true;
+      }
+      else
+      {
+        // Append the separator
+        footer += " / ";
+      }
+
+      footer += linkWord( makeSplittedWordCompound() );
+    }
+
+    // Then, start a new search for the next word, if possible
+
+    if ( currentSplittedWordStart >= splittedWords.first.size() - 2 )
+    {
+      // The last word was the last possible to start from
+
+      if ( firstCompoundWasFound )
+        footer += "</span>";
+
+      footer += "</body></html>";
+
+      appendToData( footer );
+
+      finish();
+
+      return;
+    }
+
+    if ( footer.size() )
+    {
+      appendToData( footer );
+      update();
+    }
+
+    // Advance to the next word and start from looking up two words
+    ++currentSplittedWordStart;
+    currentSplittedWordEnd = currentSplittedWordStart + 1;
+  }
+  else
+  {
+    // Last lookup succeeded -- see if we can try the larger sequence
+
+    if ( currentSplittedWordEnd < splittedWords.first.size() - 1 )
+    {
+      // We can, indeed.
+      ++currentSplittedWordEnd;
+    }
+    else
+    {
+      // We can't. Emit what we have and start over.
+
+      ++currentSplittedWordEnd; // So we could use the same code for result
+                                // emitting
+
+      // Initiate new lookup
+      compoundSearchNextStep( false );
+
+      return;
+    }
+  }
+
+  // Build the compound sequence
+
+  currentSplittedWordCompound = makeSplittedWordCompound();
+
+  // Look it up
+
+//  printf( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
+
+  stemmedWordFinder->stemmedMatch( currentSplittedWordCompound, activeDicts, 0, 0, 1 );
+}
+
+QString ArticleRequest::makeSplittedWordCompound()
+{
+  QString result;
+
+  result.clear();
+
+  for( int x = currentSplittedWordStart; x <= currentSplittedWordEnd; ++x )
+  {
+    result.append( splittedWords.first[ x ] );
+
+    if ( x < currentSplittedWordEnd )
+    {
+      wstring ws( gd::toWString( splittedWords.second[ x + 1 ] ) );
+
+      Folding::normalizeWhitespace( ws );
+
+      result.append( gd::toQString( ws ) );
+    }
+  }
+
+  return result;
+}
+
+void ArticleRequest::individualWordFinished()
+{
+  WordFinder::SearchResults const & results = stemmedWordFinder->getResults();
+
+  if ( results.size() )
+  {
+    // Check if the aliases are acceptable
+    wstring source = Folding::applySimpleCaseOnly( gd::toWString( currentSplittedWordCompound ) );
+
+    for( unsigned x = 0; x < results.size(); ++x )
+      if ( source == Folding::applySimpleCaseOnly( gd::toWString( results[ x ].first ) ) )
+      {
+        // Ok, good enough
+        compoundSearchNextStep( true );
+        return;
+      }
+  }
+
+  compoundSearchNextStep( false );
+}
+
+void ArticleRequest::appendToData( std::string const & str )
+{
+  Mutex::Lock _( dataMutex );
+
+  size_t offset = data.size();
+
+  data.resize( data.size() + str.size() );
+
+  memcpy( &data.front() + offset, str.data(), str.size() );
+
+}
+
+QPair< ArticleRequest::Words, ArticleRequest::Spacings > ArticleRequest::splitIntoWords( QString const & input )
+{
+  QPair< Words, Spacings > result;
+
+  QChar const * ptr = input.data();
+
+  for( ; ; )
+  {
+    QString spacing;
+
+    for( ; ptr->unicode() && ( Folding::isPunct( ptr->unicode() ) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
+      spacing.append( *ptr );
+
+    result.second.append( spacing );
+
+    QString word;
+
+    for( ; ptr->unicode() && !( Folding::isPunct( ptr->unicode() ) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
+      word.append( *ptr );
+
+    if ( word.isEmpty() )
+      break;
+
+    result.first.append( word );
+  }
+
+  return result;
+}
+
+string ArticleRequest::linkWord( QString const & str )
+{
+  QUrl url;
+
+  url.setScheme( "gdlookup" );
+  url.setHost( "localhost" );
+  url.setPath( str );
+
+  string escapedResult = Html::escape( str.toUtf8().data() );
+  return string( "<a href=\"" ) + url.toEncoded().data() + "\">" + escapedResult +"</a>";
+}
+
+std::string ArticleRequest::escapeSpacing( QString const & str )
+{
+  QByteArray spacing = Html::escape( str.toUtf8().data() ).c_str();
+
+  spacing.replace( "\n", "<br>" );
+
+  return spacing.data();
+}
