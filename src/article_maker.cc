@@ -520,20 +520,6 @@ void ArticleRequest::stemmedSearchFinished()
 
   if ( splittedWords.first.size() > 1 ) // Contains more than one word
   {
-    footer += "<div class=\"gdstemmedsuggestion\"><span class=\"gdstemmedsuggestion_head\">" +
-      Html::escape( tr( "Individual words: " ).toUtf8().data() ) +
-      "</span><span class=\"gdstemmedsuggestion_body\">";
-
-    footer += escapeSpacing( splittedWords.second[ 0 ] );
-
-    for( int x = 0; x < splittedWords.first.size(); ++x )
-    {
-      footer += linkWord( splittedWords.first[ x ] );
-      footer += escapeSpacing( splittedWords.second[ x + 1 ] );
-    }
-
-    footer += "</span>";
-
     disconnect( stemmedWordFinder.get(), SIGNAL( finished() ),
                 this, SLOT( stemmedSearchFinished() ) );
 
@@ -609,6 +595,22 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
       if ( firstCompoundWasFound )
         footer += "</span>";
+
+      // Now add links to all the individual words. They conclude the result.
+
+      footer += "<div class=\"gdstemmedsuggestion\"><span class=\"gdstemmedsuggestion_head\">" +
+        Html::escape( tr( "Individual words: " ).toUtf8().data() ) +
+        "</span><span class=\"gdstemmedsuggestion_body\">";
+
+      footer += escapeSpacing( splittedWords.second[ 0 ] );
+
+      for( int x = 0; x < splittedWords.first.size(); ++x )
+      {
+        footer += linkWord( splittedWords.first[ x ] );
+        footer += escapeSpacing( splittedWords.second[ x + 1 ] );
+      }
+
+      footer += "</span>";
 
       footer += "</body></html>";
 
