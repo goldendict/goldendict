@@ -73,6 +73,10 @@
         <source>(untitled)</source>
         <translation>(nepojmenovaný)</translation>
     </message>
+    <message>
+        <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
@@ -91,6 +95,14 @@
     <message>
         <source>Close words: </source>
         <translation>Blízká slova: </translation>
+    </message>
+    <message>
+        <source>Compound expressions: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual words: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2186,14 +2198,14 @@
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chyba při zpracování XML: %1 v %2, %3</translation>
     </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chyba při zpracování XML: %1 v %2, %3</translation>
     </message>
 </context>
 <context>
@@ -2735,6 +2747,15 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     <message>
         <source>Pronounce word</source>
         <translation type="obsolete">Произнести слово</translation>
+    </message>
+    <message>
+        <source>Shows or hides the dictionary bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use this to pin down the window so it would stay on screen,
+could be resized or managed in other ways.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -32,42 +32,47 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="108"/>
+        <location filename="../article_maker.cc" line="110"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>لم يجد ترجمة لـ &lt;b&gt;%1&lt;/b&gt; في المجموعة &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="125"/>
+        <location filename="../article_maker.cc" line="115"/>
+        <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../article_maker.cc" line="134"/>
         <source>Welcome!</source>
         <translation>مرحبا!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="127"/>
+        <location filename="../article_maker.cc" line="136"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="143"/>
+        <location filename="../article_maker.cc" line="152"/>
         <source>Working with popup</source>
         <translation>العمل مع المنبثقات</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="145"/>
+        <location filename="../article_maker.cc" line="154"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;العمل مع المنبثقات&lt;/h3&gt;لنظر كلمة من برنامج نشط آخر, عليك أولا تفعيل &lt;i&gt;&quot;خاصية منبثقة المسح&quot;&lt;/i&gt; في &lt;b&gt;التفضيلات&lt;/b&gt;, ثم تفعيلها في أي وقت إما بضغط أيقونة ‘المنبثقة‘ فوق, أو بالنقر على أيقونة  الزاوية بزر الفأرة الأيمن واختيار ذلك من القائمة التي أظهرتها. </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="152"/>
+        <location filename="../article_maker.cc" line="161"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>ثم اوقف المؤشر على الكلمة التي تريد نظرها في البرنامج الآخر, و ستنبثق نافذة تصفها لك.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="155"/>
+        <location filename="../article_maker.cc" line="164"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>ثم اختر أية كلمة لنظرها في البرنامج الآخر بالفأرة (نقرتين عليها او حددها بالفأرة و الزر مضغوط), و ستظهر لك نافذة تصفها لك.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="232"/>
+        <location filename="../article_maker.cc" line="241"/>
         <source>(untitled)</source>
         <translation>(بلا عنوان)</translation>
     </message>
@@ -75,19 +80,29 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="388"/>
+        <location filename="../article_maker.cc" line="397"/>
         <source>From </source>
         <translation>من</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="395"/>
+        <location filename="../article_maker.cc" line="404"/>
         <source>Query error: %1</source>
         <translation>أخطاء الطلب: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="489"/>
+        <location filename="../article_maker.cc" line="503"/>
         <source>Close words: </source>
         <translation type="unfinished">كلمات قريبة:</translation>
+    </message>
+    <message>
+        <location filename="../article_maker.cc" line="576"/>
+        <source>Compound expressions: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../article_maker.cc" line="602"/>
+        <source>Individual words: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -133,71 +148,71 @@
         <translation>&amp;حساس للحالة</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="685"/>
-        <location filename="../articleview.cc" line="1005"/>
-        <location filename="../articleview.cc" line="1023"/>
+        <location filename="../articleview.cc" line="695"/>
+        <location filename="../articleview.cc" line="1015"/>
         <location filename="../articleview.cc" line="1033"/>
-        <location filename="../articleview.cc" line="1056"/>
+        <location filename="../articleview.cc" line="1043"/>
+        <location filename="../articleview.cc" line="1066"/>
         <source>GoldenDict</source>
         <translation>القاموس الذهبي</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="685"/>
+        <location filename="../articleview.cc" line="695"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>المرجع المشار إليه غير موجود.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="791"/>
+        <location filename="../articleview.cc" line="801"/>
         <source>&amp;Open Link</source>
         <translation>ا&amp;فتح الرابط</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="797"/>
+        <location filename="../articleview.cc" line="807"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>افتح الرابط في لسا&amp;ن جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="804"/>
+        <location filename="../articleview.cc" line="814"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>افتح الرابط في &amp;متصفح خارجي</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="817"/>
+        <location filename="../articleview.cc" line="827"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>ا&amp;نظر &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="825"/>
+        <location filename="../articleview.cc" line="835"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>انظر &quot;%1&quot; في &amp;لسان جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="840"/>
+        <location filename="../articleview.cc" line="850"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>انظر &quot;%1&quot; في %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="848"/>
+        <location filename="../articleview.cc" line="858"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>انظر &quot;%1&quot;في %2 في لسان &amp;جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1005"/>
+        <location filename="../articleview.cc" line="1015"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>فشل بدء مشغل لتشغيل ملف الصوت: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1023"/>
+        <location filename="../articleview.cc" line="1033"/>
         <source>Failed to create temporary file.</source>
         <translation>فشل إنشاء ملف مؤقت.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1033"/>
+        <location filename="../articleview.cc" line="1043"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>تعذر فتح ملف المصدر آليا, حاول فتحه يدويا: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1056"/>
+        <location filename="../articleview.cc" line="1066"/>
         <source>The referenced resource failed to download.</source>
         <translation>فشل تنزيل المرجع المشار إليه.</translation>
     </message>
@@ -297,7 +312,7 @@
     <message>
         <location filename="../groupselectorwidget.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">من</translation>
     </message>
     <message>
         <location filename="../groupselectorwidget.ui" line="19"/>
@@ -1424,7 +1439,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1316"/>
+        <location filename="../mainwindow.cc" line="1321"/>
         <source>GoldenDict</source>
         <translation>القاموس الذهبي</translation>
     </message>
@@ -1603,7 +1618,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cc" line="52"/>
-        <location filename="../mainwindow.cc" line="536"/>
+        <location filename="../mainwindow.cc" line="540"/>
         <source>Look up in:</source>
         <translation>انظر في:</translation>
     </message>
@@ -1658,87 +1673,87 @@
         <translation>تحميل...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="525"/>
+        <location filename="../mainwindow.cc" line="529"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 قواميس, %2 مقالات, %3 كلمات</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="536"/>
+        <location filename="../mainwindow.cc" line="540"/>
         <source>Look up:</source>
         <translation>انظر:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="554"/>
+        <location filename="../mainwindow.cc" line="558"/>
         <source>All</source>
         <translation>الكل</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="643"/>
+        <location filename="../mainwindow.cc" line="647"/>
         <source>(untitled)</source>
         <translation>(بلا عنوان)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1030"/>
+        <location filename="../mainwindow.cc" line="1035"/>
         <source>WARNING: %1</source>
         <translation>تحذير: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1317"/>
+        <location filename="../mainwindow.cc" line="1322"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>فشل بدء آلية مراقبة المفاتيح السريعة.&lt;br&gt;تأكد من ان خادم الرسوميات مفعّل للاحقة RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1450"/>
+        <location filename="../mainwindow.cc" line="1456"/>
         <source>New Release Available</source>
         <translation>اصدار جديد متوفر</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1451"/>
+        <location filename="../mainwindow.cc" line="1457"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>الاصدار &lt;b&gt;%1&lt;/b&gt; من القاموس الذهبي متوفر للتنزيل.&lt;br&gt;انقر &lt;b&gt;نزّل&lt;/b&gt; للوصول لصفحة التنزيل.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1456"/>
+        <location filename="../mainwindow.cc" line="1462"/>
         <source>Download</source>
         <translation>نزّل</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1457"/>
+        <location filename="../mainwindow.cc" line="1463"/>
         <source>Skip This Release</source>
         <translation>تجاهل هذا الاصدار</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1639"/>
+        <location filename="../mainwindow.cc" line="1645"/>
         <source>Page Setup</source>
         <translation>اعداد الصفحة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1640"/>
+        <location filename="../mainwindow.cc" line="1646"/>
         <source>No printer is available. Please install one first.</source>
         <translation>لا يوجد طابعة. ركب واحدة أولا.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1657"/>
+        <location filename="../mainwindow.cc" line="1663"/>
         <source>Print Article</source>
         <translation>اطبع المقال</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1678"/>
+        <location filename="../mainwindow.cc" line="1684"/>
         <source>Save Article As</source>
         <translation>احفظ المقال كـ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1678"/>
+        <location filename="../mainwindow.cc" line="1684"/>
         <source>Html files (*.html *.htm)</source>
         <translation>ملفات Html ‏(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1693"/>
+        <location filename="../mainwindow.cc" line="1699"/>
         <source>Error</source>
         <translation>خطأ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1694"/>
+        <location filename="../mainwindow.cc" line="1700"/>
         <source>Can&apos;t save article: %1</source>
         <translation>تعذر حفظ المقال: %1</translation>
     </message>
@@ -2334,36 +2349,48 @@ download page.</source>
         <translation>مربع حوار</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="56"/>
+        <location filename="../scanpopup.ui" line="54"/>
         <source>word</source>
         <translation>كلمة</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="63"/>
+        <location filename="../scanpopup.ui" line="61"/>
         <source>List Matches (Alt+M)</source>
         <translation>اسرد المقابلات (Alt+M)</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="66"/>
-        <location filename="../scanpopup.ui" line="89"/>
-        <location filename="../scanpopup.ui" line="119"/>
+        <location filename="../scanpopup.ui" line="64"/>
+        <location filename="../scanpopup.ui" line="87"/>
+        <location filename="../scanpopup.ui" line="120"/>
+        <location filename="../scanpopup.ui" line="144"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="79"/>
+        <location filename="../scanpopup.ui" line="77"/>
         <source>Alt+M</source>
         <translation>Alt+M</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="86"/>
+        <location filename="../scanpopup.ui" line="84"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>انطق الكلمة (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="96"/>
+        <location filename="../scanpopup.ui" line="94"/>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
+    </message>
+    <message>
+        <location filename="../scanpopup.ui" line="117"/>
+        <source>Shows or hides the dictionary bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scanpopup.ui" line="140"/>
+        <source>Use this to pin down the window so it would stay on screen,
+could be resized or managed in other ways.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2630,7 +2657,7 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WordFinder</name>
     <message>
-        <location filename="../wordfinder.cc" line="153"/>
+        <location filename="../wordfinder.cc" line="159"/>
         <source>Failed to query some dictionaries.</source>
         <translation>فشل طلب بعض القواميس.</translation>
     </message>

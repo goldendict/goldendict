@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>在&lt;b&gt;%2&lt;/b&gt;群组中找不到&lt;b&gt;%1&lt;/b&gt;的可用翻译。</translation>
+        <translation>在 &lt;b&gt;%2&lt;/b&gt; 群组中找不到 &lt;b&gt;%1&lt;/b&gt; 的可用翻译。</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
@@ -58,6 +58,10 @@
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>然后只要用鼠标指针选定你要进行抓词查询的词（双击单词或者用鼠标拖拉选定），程序就会在弹出式窗口中显示释义。</translation>
     </message>
+    <message>
+        <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
+        <translation>在 &lt;b&gt;%1&lt;/b&gt; 群组中找不到可用的翻译。</translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
@@ -72,6 +76,14 @@
     <message>
         <source>Close words: </source>
         <translation>相近词条：</translation>
+    </message>
+    <message>
+        <source>Compound expressions: </source>
+        <translation>复合短语：</translation>
+    </message>
+    <message>
+        <source>Individual words: </source>
+        <translation>单个词汇：</translation>
     </message>
 </context>
 <context>
@@ -1899,6 +1911,15 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     <message>
         <source>Pronounce Word (Alt+S)</source>
         <translation>朗读词条(Alt+S)</translation>
+    </message>
+    <message>
+        <source>Shows or hides the dictionary bar</source>
+        <translation>显示或隐藏词典栏</translation>
+    </message>
+    <message>
+        <source>Use this to pin down the window so it would stay on screen,
+could be resized or managed in other ways.</source>
+        <translation>使用此按钮可以固定窗口，以便它能停留在屏幕上进行改变大小等相关窗口管理操作。</translation>
     </message>
 </context>
 <context>

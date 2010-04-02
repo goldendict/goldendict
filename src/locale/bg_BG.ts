@@ -58,6 +58,10 @@
         <source>(untitled)</source>
         <translation>(без име)</translation>
     </message>
+    <message>
+        <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
@@ -72,6 +76,14 @@
     <message>
         <source>Close words: </source>
         <translation>Близки думи: </translation>
+    </message>
+    <message>
+        <source>Compound expressions: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual words: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1937,6 +1949,15 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     <message>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <source>Shows or hides the dictionary bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use this to pin down the window so it would stay on screen,
+could be resized or managed in other ways.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
