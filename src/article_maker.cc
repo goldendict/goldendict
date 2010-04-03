@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QUrl>
 #include "folding.hh"
+#include "langcoder.hh"
 
 using std::vector;
 using std::string;
@@ -362,7 +363,10 @@ void ArticleRequest::bodyFinished()
 
       if ( req.dataSize() >= 0 || errorString.size() )
       {
-        string dictId = activeDicts[ activeDicts.size() - bodyRequests.size() ]->getId();
+        sptr< Dictionary::Class > const & activeDict =
+            activeDicts[ activeDicts.size() - bodyRequests.size() ];
+
+        string dictId = activeDict->getId();
         
         string head;
 
@@ -370,7 +374,7 @@ void ArticleRequest::bodyFinished()
 
         if ( closePrevSpan )
         {
-          head += "</span><span class=\"gdarticleseparator\"></span>";
+          head += "</span></span><span class=\"gdarticleseparator\"></span>";
         }
         else
         {
@@ -392,11 +396,17 @@ void ArticleRequest::bodyFinished()
                 + ">";
 
         closePrevSpan = true;
-        
+
         head += string( "<div class=\"gddictname\"><span class=\"gdfromprefix\">" ) +
           Html::escape( tr( "From " ).toUtf8().data() ) + "</span>" +
-          Html::escape( activeDicts[ activeDicts.size() - bodyRequests.size() ]->getName().c_str() )
+          Html::escape( activeDict->getName().c_str() )
            + "</div>";
+
+        head += "<span class=\"gdarticlebody gdlangfrom-";
+        head += LangCoder::intToCode2( activeDict->getLangFrom() ).toAscii().data();
+        head += "\" lang=\"";
+        head += LangCoder::intToCode2( activeDict->getLangTo() ).toAscii().data();
+        head += "\">";
 
         if ( errorString.size() )
         {
@@ -443,7 +453,7 @@ void ArticleRequest::bodyFinished()
 
       if ( closePrevSpan )
       {
-        footer += "</span>";
+        footer += "</span></span>";
         closePrevSpan = false;
       }
       

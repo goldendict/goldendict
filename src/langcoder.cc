@@ -61,7 +61,7 @@ LangStruct LangCoder::langStruct(quint32 code)
 
 QString LangCoder::intToCode2( quint32 val )
 {
-  if ( !val )
+  if ( !val || val == 0xFFffFFff )
     return QString();
 
   char code[ 2 ];
