@@ -140,6 +140,7 @@ struct Preferences
   bool startToTray;
   bool closeToTray;
   bool autoStart;
+  bool doubleClickTranslates;
 
   bool enableMainWindowHotkey;
   HotKey mainWindowHotkey;

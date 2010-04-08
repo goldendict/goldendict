@@ -187,6 +187,9 @@ private slots:
   void on_searchText_returnPressed();
   void on_searchCloseButton_clicked();
 
+  /// Handles the double-click from the definition.
+  void doubleClicked();
+
 private:
 
   /// Deduces group from the url. If there doesn't seem to be any group,

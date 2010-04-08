@@ -10,8 +10,12 @@
 /// Currently the only added feature is an ability to know if the middle mouse
 /// button is pressed or not according to the view's current state. This is used
 /// to open links in new tabs when they are clicked with middle button.
+/// There's also an added posibility to get double-click events after the fact
+/// with the doubleClicked() signal.
 class ArticleWebView: public QWebView
 {
+  Q_OBJECT
+
 public:
 
   ArticleWebView( QWidget * parent ): QWebView( parent ),
@@ -21,10 +25,19 @@ public:
   bool isMidButtonPressed() const
   { return midButtonPressed; }
 
+signals:
+
+  /// Signals that the user has just double-clicked. The signal is delivered
+  /// after the event was processed by the view -- that's the difference from
+  /// installing an event filter. This is used for translating the double-clicked
+  /// word, which gets selected by the view in response to double-click.
+  void doubleClicked();
+
 protected:
 
   void mousePressEvent( QMouseEvent * event );
   void mouseReleaseEvent( QMouseEvent * event );
+  void mouseDoubleClickEvent( QMouseEvent * event );
 
 private:
 

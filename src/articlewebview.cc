@@ -22,3 +22,9 @@ void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
     midButtonPressed = false;
 }
 
+void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
+{
+  QWebView::mouseDoubleClickEvent( event );
+
+  emit doubleClicked();
+}

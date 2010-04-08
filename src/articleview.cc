@@ -116,6 +116,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
            this, SLOT( linkClicked( QUrl const & ) ) );
 
+  connect( ui.definition, SIGNAL(doubleClicked()),this,SLOT(doubleClicked()) );
+
   pasteAction.setShortcut( QKeySequence::Paste  );
   ui.definition->addAction( &pasteAction );
   connect( &pasteAction, SIGNAL( triggered() ), this, SLOT( pasteTriggered() ) );
@@ -1179,6 +1181,25 @@ void ArticleView::on_searchCloseButton_clicked()
 {
   closeSearch();
 }
+
+void ArticleView::doubleClicked()
+{
+  // We might want to initiate translation of the selected word
+
+  if ( cfg.preferences.doubleClickTranslates )
+  {
+    QString selectedText = ui.definition->selectedText();
+
+    // Do some checks to make sure there's a sensible selection indeed
+    if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
+         selectedText.size() < 40 )
+    {
+      // Initiate translation
+      showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+    }
+  }
+}
+
 
 void ArticleView::performFindOperation( bool restart, bool backwards )
 {
