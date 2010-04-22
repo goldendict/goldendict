@@ -551,6 +551,11 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
         if( block.length ) free( block.data );
 
+        // Some dictionaries can in fact have an empty headword, so we
+        // make it non-empty here to differentiate between the end of entries.
+        if ( entry.headword.empty() )
+          entry.headword += ' ';
+
         return entry;
 
         break;
