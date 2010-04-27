@@ -48,7 +48,7 @@ private:
   QLabel groupLabel;
   GroupComboBox groupList;
 
-  QAction focusTranslateLineAction, addTabAction, closeCurrentTabAction,
+  QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           switchToNextTabAction, switchToPrevTabAction, showDictBarNamesAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
@@ -180,6 +180,9 @@ private slots:
   void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );
   void translateInputFinished();
+
+  /// Closes any opened search in the article view, and focuses the translateLine.
+  void handleEsc();
 
   /// Gives the keyboard focus to the translateLine and selects all the text
   /// it has.

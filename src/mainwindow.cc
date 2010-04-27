@@ -25,6 +25,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIcon( 0 ),
   groupLabel( &searchPaneTitleBar ),
   groupList( &searchPaneTitleBar ),
+  escAction( this ),
   focusTranslateLineAction( this ),
   addTabAction( this ),
   closeCurrentTabAction( this ),
@@ -110,15 +111,22 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( activated() ),
            qApp, SLOT( quit() ) );
 
+  escAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  escAction.setShortcut( QKeySequence( "Esc" ) );
+  connect( &escAction, SIGNAL( triggered() ),
+           this, SLOT( handleEsc() ) );
+
   focusTranslateLineAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   focusTranslateLineAction.setShortcuts( QList< QKeySequence >() <<
-                                         QKeySequence( "Esc" ) <<
                                          QKeySequence( "Alt+D" ) <<
                                          QKeySequence( "Ctrl+L" ) );
 
   connect( &focusTranslateLineAction, SIGNAL( triggered() ),
            this, SLOT( focusTranslateLine() ) );
 
+  ui.centralWidget->addAction( &escAction );
+  ui.searchPaneWidget->addAction( &escAction );
+  groupList.addAction( &escAction );
   ui.centralWidget->addAction( &focusTranslateLineAction );
   ui.searchPaneWidget->addAction( &focusTranslateLineAction );
   groupList.addAction( &focusTranslateLineAction );
@@ -936,11 +944,16 @@ void MainWindow::translateInputFinished()
   }
 }
 
-void MainWindow::focusTranslateLine()
+void MainWindow::handleEsc()
 {
   if ( dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).closeSearch() )
     return;
 
+  focusTranslateLine();
+}
+
+void MainWindow::focusTranslateLine()
+{
   if ( ui.searchPane->isFloating() )
     ui.searchPane->activateWindow();
 
@@ -1281,11 +1294,14 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
 void MainWindow::toggleMainWindow( bool onlyShow )
 {
+  bool shown = false;
+
   if ( !isVisible() )
   {
     show();
     activateWindow();
     raise();
+    shown = true;
   }
   else
   if ( isMinimized() )
@@ -1293,16 +1309,21 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     showNormal();
     activateWindow();
     raise();
+    shown = true;
   }
   else
   if ( !isActiveWindow() )
   {
     activateWindow();
     raise();
+    shown = true;
   }
   else
   if ( !onlyShow )
     hide();
+
+  if ( shown )
+    focusTranslateLine();
 }
 
 void MainWindow::installHotKeys()

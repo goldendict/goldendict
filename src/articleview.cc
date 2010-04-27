@@ -195,6 +195,9 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   // Update history
   saveHistoryUserData();
 
+  // Any search opened is probably irrelevant now
+  closeSearch();
+
   ui.definition->load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
