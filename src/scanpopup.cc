@@ -361,11 +361,34 @@ void ScanPopup::initiateTranslation()
 
 vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
 {
-  int currentGroup = ui.groupList->currentIndex();
+  int current = ui.groupList->currentIndex();
 
-  return
-    currentGroup < 0 || currentGroup >= (int)groups.size() ? allDictionaries : 
-    groups[ currentGroup ].dictionaries;
+  if ( current < 0 || current >= (int) groups.size() )
+  {
+    // This shouldn't ever happen
+    return allDictionaries;
+  }
+
+  if ( !dictionaryBar.toggleViewAction()->isChecked() )
+    return groups[ current ].dictionaries;
+  else
+  {
+    vector< sptr< Dictionary::Class > > const & activeDicts =
+      groups[ current ].dictionaries;
+
+    // Populate the special dictionariesUnmuted array with only unmuted
+    // dictionaries
+
+    dictionariesUnmuted.clear();
+    dictionariesUnmuted.reserve( activeDicts.size() );
+
+    for( unsigned x = 0; x < activeDicts.size(); ++x )
+      if ( !cfg.popupMutedDictionaries.contains(
+              QString::fromStdString( activeDicts[ x ]->getId() ) ) )
+        dictionariesUnmuted.push_back( activeDicts[ x ] );
+
+    return dictionariesUnmuted;
+  }
 }
 
 bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
@@ -679,7 +702,11 @@ void ScanPopup::updateDictionaryBar()
   if ( !dictionaryBar.toggleViewAction()->isChecked() )
     return; // It's not enabled, therefore hidden -- don't waste time
 
-  dictionaryBar.setDictionaries( getActiveDicts() );
+  Instances::Group const * grp =
+      groups.findGroup( ui.groupList->getCurrentGroup() );
+
+  if ( grp ) // Should always be !0, but check as a safeguard
+    dictionaryBar.setDictionaries( grp->dictionaries );
 }
 
 void ScanPopup::mutedDictionariesChanged()

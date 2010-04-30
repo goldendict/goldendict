@@ -67,6 +67,7 @@ private:
   Config::Class & cfg;
   bool isScanningEnabled;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
+  std::vector< sptr< Dictionary::Class > > dictionariesUnmuted;
   Instances::Groups const & groups;
   History & history;
   Ui::ScanPopup ui;
