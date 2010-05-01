@@ -513,6 +513,12 @@ char *dict_data_read_ (
    end  = start + size;
 
    buffer = xmalloc( size + 1 );
+
+   if ( !size )
+   {
+     *buffer = 0;
+     return buffer;
+   }
    
    PRINTF(DBG_UNZIP,
 	  ("dict_data_read( %p, %lu, %lu, %s, %s )\n",

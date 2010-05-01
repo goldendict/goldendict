@@ -519,33 +519,40 @@ void StardictHeadwordsRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
-
-  wstring caseFolded = Folding::applySimpleCaseOnly( word );
-
-  for( unsigned x = 0; x < chain.size(); ++x )
+  try
   {
-    if ( isCancelled )
+    vector< WordArticleLink > chain = dict.findArticles( word );
+
+    wstring caseFolded = Folding::applySimpleCaseOnly( word );
+
+    for( unsigned x = 0; x < chain.size(); ++x )
     {
-      finish();
-      return;
+      if ( isCancelled )
+      {
+        finish();
+        return;
+      }
+
+      string headword, articleText;
+
+      dict.loadArticle( chain[ x ].articleOffset,
+                        headword, articleText );
+
+      wstring headwordDecoded = Utf8::decode( headword );
+
+      if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) )
+      {
+        // The headword seems to differ from the input word, which makes the
+        // input word its synonym.
+        Mutex::Lock _( dataMutex );
+
+        matches.push_back( headwordDecoded );
+      }
     }
-
-    string headword, articleText;
-
-    dict.loadArticle( chain[ x ].articleOffset,
-                      headword, articleText );
-
-    wstring headwordDecoded = Utf8::decode( headword );
-
-    if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) )
-    {
-      // The headword seems to differ from the input word, which makes the
-      // input word its synonym.
-      Mutex::Lock _( dataMutex );
-
-      matches.push_back( headwordDecoded );
-    }
+  }
+  catch( std::exception & e )
+  {
+    setErrorString( QString::fromUtf8( e.what() ) );
   }
 
   finish();
@@ -632,102 +639,109 @@ void StardictArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
-
-  for( unsigned x = 0; x < alts.size(); ++x )
+  try
   {
-    /// Make an additional query for each alt
+    vector< WordArticleLink > chain = dict.findArticles( word );
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
-
-    chain.insert( chain.end(), altChain.begin(), altChain.end() );
-  }
-
-  multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
-
-  set< uint32_t > articlesIncluded; // Some synonims make it that the articles
-                                    // appear several times. We combat this
-                                    // by only allowing them to appear once.
-
-  wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
-
-  for( unsigned x = 0; x < chain.size(); ++x )
-  {
-    if ( isCancelled )
+    for( unsigned x = 0; x < alts.size(); ++x )
     {
+      /// Make an additional query for each alt
+
+      vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+
+      chain.insert( chain.end(), altChain.begin(), altChain.end() );
+    }
+
+    multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
+
+    set< uint32_t > articlesIncluded; // Some synonims make it that the articles
+                                      // appear several times. We combat this
+                                      // by only allowing them to appear once.
+
+    wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+
+    for( unsigned x = 0; x < chain.size(); ++x )
+    {
+      if ( isCancelled )
+      {
+        finish();
+        return;
+      }
+
+      if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
+        continue; // We already have this article in the body.
+
+      // Now grab that article
+
+      string headword, articleText;
+
+      dict.loadArticle( chain[ x ].articleOffset, headword, articleText );
+
+      // Ok. Now, does it go to main articles, or to alternate ones? We list
+      // main ones first, and alternates after.
+
+      // We do the case-folded comparison here.
+
+      wstring headwordStripped =
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+
+      multimap< wstring, pair< string, string > > & mapToUse =
+        ( wordCaseFolded == headwordStripped ) ?
+          mainArticles : alternateArticles;
+
+      mapToUse.insert( pair< wstring, pair< string, string > >(
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+        pair< string, string >( headword, articleText ) ) );
+
+      articlesIncluded.insert( chain[ x ].articleOffset );
+    }
+
+    if ( mainArticles.empty() && alternateArticles.empty() )
+    {
+      // No such word
       finish();
       return;
     }
 
-    if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
-      continue; // We already have this article in the body.
+    string result;
 
-    // Now grab that article
+    multimap< wstring, pair< string, string > >::const_iterator i;
 
-    string headword, articleText;
+    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</b></b></b></b></b></b></b></b>"
+                     "</i></i></i></i></i></i></i></i>";
 
-    dict.loadArticle( chain[ x ].articleOffset, headword, articleText );
+    for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
+    {
+        result += "<h3>";
+        result += i->second.first;
+        result += "</h3>";
+        result += i->second.second;
+        result += cleaner;
+    }
 
-    // Ok. Now, does it go to main articles, or to alternate ones? We list
-    // main ones first, and alternates after.
+    for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
+    {
+        result += "<h3>";
+        result += i->second.first;
+        result += "</h3>";
+        result += i->second.second;
+        result += cleaner;
+    }
 
-    // We do the case-folded comparison here.
+    Mutex::Lock _( dataMutex );
 
-    wstring headwordStripped =
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+    data.resize( result.size() );
 
-    multimap< wstring, pair< string, string > > & mapToUse =
-      ( wordCaseFolded == headwordStripped ) ?
-        mainArticles : alternateArticles;
+    memcpy( &data.front(), result.data(), result.size() );
 
-    mapToUse.insert( pair< wstring, pair< string, string > >(
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-      pair< string, string >( headword, articleText ) ) );
-
-    articlesIncluded.insert( chain[ x ].articleOffset );
+    hasAnyData = true;
   }
-
-  if ( mainArticles.empty() && alternateArticles.empty() )
+  catch( std::exception & e )
   {
-    // No such word
-    finish();
-    return;
+    setErrorString( QString::fromUtf8( e.what() ) );
   }
-
-  string result;
-
-  multimap< wstring, pair< string, string > >::const_iterator i;
-
-  string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</b></b></b></b></b></b></b></b>"
-                   "</i></i></i></i></i></i></i></i>";
-
-  for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
-  {
-      result += "<h3>";
-      result += i->second.first;
-      result += "</h3>";
-      result += i->second.second;
-      result += cleaner;
-  }
-
-  for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
-  {
-      result += "<h3>";
-      result += i->second.first;
-      result += "</h3>";
-      result += i->second.second;
-      result += cleaner;
-  }
-
-  Mutex::Lock _( dataMutex );
-
-  data.resize( result.size() );
-
-  memcpy( &data.front(), result.data(), result.size() );
-
-  hasAnyData = true;
 
   finish();
 }
