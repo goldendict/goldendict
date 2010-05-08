@@ -137,6 +137,10 @@ int main( int argc, char ** argv )
 
   app.installTranslator( &translator );
 
+  // Prevent app from quitting spontaneously when it works with scan popup
+  // and with the main window closed.
+  app.setQuitOnLastWindowClosed( false );
+
   MainWindow m( cfg );
 
   int r = app.exec();

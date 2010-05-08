@@ -466,7 +466,10 @@ void MainWindow::closeEvent( QCloseEvent * ev )
     hide();
   }
   else
+  {
     ev->accept();
+    qApp->quit();
+  }
 }
 
 void MainWindow::applyProxySettings()
