@@ -24,6 +24,11 @@ public:
   /// disabled) are taken from the configuration data.
   void setDictionaries( std::vector< sptr< Dictionary::Class > > const & );
 
+signals:
+
+  /// Signalled when the user decided to edit group the bar currently
+  /// shows.
+  void editGroupRequested();
 
 private:
 

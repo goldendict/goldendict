@@ -44,6 +44,19 @@ Groups::Groups( QWidget * parent,
   countChanged();
 }
 
+void Groups::editGroup( unsigned id )
+{
+  for( unsigned x = 0; x < groups.size(); ++x )
+  {
+    if ( groups[ x ].id == id )
+    {
+      ui.groups->setCurrentIndex( x );
+      ui.groups->currentWidget()->setFocus();
+      break;
+    }
+  }
+}
+
 void Groups::updateDictionaryOrder( Config::Group const & order )
 {
   // Make sure it differs from what we have

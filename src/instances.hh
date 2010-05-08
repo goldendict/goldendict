@@ -7,6 +7,7 @@
 #include "config.hh"
 #include "dictionary.hh"
 #include <QIcon>
+#include <limits.h>
 
 // This complements Config, providing instances for the stored configurations.
 // Simply put, it can convert groups to ones which hold references to
@@ -36,6 +37,17 @@ struct Group
 
   /// Makes an icon object for this group, based on the icon's name.
   QIcon makeIcon() const;
+
+  // Some constants
+
+  /// The id of the 'All' group
+  static const unsigned AllGroupId = UINT_MAX - 1;
+
+  /// The id of the fictious 'Help' group
+  static const unsigned HelpGroupId = UINT_MAX;
+
+  /// Invalid value, used to specify that no group id is specified at all.
+  static const unsigned NoGroupId = 0;
 };
 
 struct Groups: public vector< Group >

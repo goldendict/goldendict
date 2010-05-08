@@ -193,6 +193,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( dictionaryBar.toggleViewAction(), SIGNAL(toggled(bool)),
            this, SLOT(dictionaryBarToggled(bool)) );
 
+  connect( &dictionaryBar, SIGNAL(editGroupRequested()),
+           this, SLOT(editCurrentGroup()) );
+
   // History
 
   connect( &history, SIGNAL( itemsChanged() ),
@@ -305,7 +308,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     ArticleView & view =
       dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
 
-    view.showDefinition( tr( "Welcome!" ), UINT_MAX );
+    view.showDefinition( tr( "Welcome!" ), Instances::Group::HelpGroupId );
   }
 
   ui.translateLine->setFocus();
@@ -567,7 +570,7 @@ void MainWindow::updateGroupList()
                                           dictionaries );
 
     g.name = tr( "All" );
-    g.id = UINT_MAX - 1; // Currently we use this as an 'all' group id
+    g.id = Instances::Group::AllGroupId;
     g.icon = "folder.png";
 
     groupInstances.push_back( g );
@@ -616,6 +619,9 @@ void MainWindow::makeScanPopup()
 
   if ( cfg.preferences.enableScanPopup && enableScanPopup->isChecked() )
     scanPopup->enableScanning();
+
+  connect( scanPopup.get(), SIGNAL(editGroupRequested( unsigned )),
+           this,SLOT(editDictionaries( unsigned )), Qt::QueuedConnection );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -810,7 +816,7 @@ void MainWindow::updatePronounceAvailability()
   navPronounce->setEnabled( pronounceEnabled );
 }
 
-void MainWindow::editDictionaries()
+void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
@@ -819,6 +825,9 @@ void MainWindow::editDictionaries()
   dictionariesUnmuted.clear();
 
   EditDictionaries dicts( this, cfg, dictionaries, groupInstances, dictNetMgr );
+
+  if ( editDictionaryGroup != Instances::Group::NoGroupId )
+    dicts.editGroup( editDictionaryGroup );
 
   dicts.exec();
 
@@ -831,6 +840,11 @@ void MainWindow::editDictionaries()
 
   makeScanPopup();
   installHotKeys();
+}
+
+void MainWindow::editCurrentGroup()
+{
+  editDictionaries( groupList.getCurrentGroup() );
 }
 
 void MainWindow::editPreferences()

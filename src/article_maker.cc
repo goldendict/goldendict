@@ -127,7 +127,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   QMap< QString, QString > const & contexts,
   QSet< QString > const & mutedDicts ) const
 {
-  if ( groupId == UINT_MAX )
+  if ( groupId == Instances::Group::HelpGroupId )
   {
     // This is a special group containing internal welcome/help pages
     string result = makeHtmlHeader( inWord, QString() );

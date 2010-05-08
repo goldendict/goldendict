@@ -24,6 +24,9 @@ public:
                     Instances::Groups & groupInstances, // We only clear those on rescan
                     QNetworkAccessManager & dictNetMgr );
 
+  /// Instructs the dialog to position itself on editing the given group.
+  void editGroup( unsigned id );
+
   /// Returns true if any changes to the 'dictionaries' vector passed were done.
   bool areDictionariesChanged() const
   { return dictionariesChanged; }

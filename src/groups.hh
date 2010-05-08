@@ -20,6 +20,9 @@ public:
           Config::Groups const &,
           Config::Group const & order );
 
+  /// Instructs the dialog to position itself on editing the given group.
+  void editGroup( unsigned id );
+
   /// Should be called when the dictionary order has changed to reflect on
   /// that changes. It would only do anything if the order has actually
   /// changed.

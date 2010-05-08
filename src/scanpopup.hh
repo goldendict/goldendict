@@ -42,12 +42,19 @@ public:
   /// it's changed.
   void applyZoomFactor();
   
+signals:
+
+  /// Forwarded from the dictionary bar, so that main window could act on this.
+  void editGroupRequested( unsigned id );
+
 public slots:
 
   /// Translates the word from the clipboard, showing the window etc.
   void translateWordFromClipboard();
   /// Translates the word from the clipboard selection
   void translateWordFromSelection();
+  /// From the dictionary bar.
+  void editGroupRequested();
 
 private:
 

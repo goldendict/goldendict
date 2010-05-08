@@ -95,8 +95,18 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
     action->setChecked( (*i)->isChecked() );
     action->setData( QVariant::fromValue( (void *)*i ) );
   }
+
+  if ( !menu.isEmpty() )
+    menu.addSeparator();
+
+  QAction * editAction =
+      menu.addAction( QIcon( ":/icons/bookcase.png" ), tr( "Edit this group" ) );
+
   QAction * result = menu.exec( event->globalPos() );
 
+  if ( result == editAction )
+    emit editGroupRequested();
+  else
   if ( result && result->data().value< void * >() )
     ( ( QAction * )( result->data().value< void * >() ) )->trigger();
 

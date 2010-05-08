@@ -45,6 +45,16 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   connect( &sources, SIGNAL( rescan() ), this, SLOT( rescanSources() ) );
 }
 
+void EditDictionaries::editGroup( unsigned id )
+{
+  if ( id == Instances::Group::AllGroupId )
+    ui.tabs->setCurrentIndex( 1 );
+  else
+  {
+    ui.tabs->setCurrentIndex( 2 );
+    groups->editGroup( id );
+  }
+}
 
 void EditDictionaries::accept()
 {

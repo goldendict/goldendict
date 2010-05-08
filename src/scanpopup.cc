@@ -69,6 +69,9 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   addToolBar( Qt::RightToolBarArea, &dictionaryBar );
 
+  connect( &dictionaryBar, SIGNAL(editGroupRequested()),
+           this, SLOT(editGroupRequested()) );
+
   if ( cfg.popupWindowGeometry.size() )
     restoreGeometry( cfg.popupWindowGeometry );
 
@@ -175,6 +178,11 @@ void ScanPopup::translateWordFromClipboard()
 void ScanPopup::translateWordFromSelection()
 {
 	return translateWordFromClipboard(QClipboard::Selection);
+}
+
+void ScanPopup::editGroupRequested()
+{
+  emit editGroupRequested( ui.groupList->getCurrentGroup() );
 }
 
 void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)

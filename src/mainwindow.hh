@@ -174,7 +174,11 @@ private slots:
   void zoomout();
   void unzoom();
 
-  void editDictionaries();
+  /// If editDictionaryGroup is specified, the dialog positions on that group
+  /// initially.
+  void editDictionaries( unsigned editDictionaryGroup = Instances::Group::NoGroupId );
+  /// Edits current group when triggered from the dictionary bar.
+  void editCurrentGroup();
   void editPreferences();
 
   void currentGroupChanged( QString const & );
