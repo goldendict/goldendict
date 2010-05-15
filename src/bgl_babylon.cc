@@ -526,20 +526,37 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         // Try adding displayed headword to the list of alts
         if ( headword != displayedHeadword )
         {
-          // Does it contain HTML? If it does, we need to strip it
-          if ( displayedHeadword.find( '<' ) != string::npos ||
-               displayedHeadword.find( '&' ) != string::npos )
+          // Only add displayed headword if the normal one has digits.
+          // This would indicate some irregularity in it (like e.g. if it serves
+          // as some kind of an identifier instead of being an actual headword)
+          bool hasDigits = false;
+
+          for( char const * p = headword.c_str(); *p; ++p )
+            if ( *p >= '0' && *p <= '9' )
+            {
+              hasDigits = true;
+              break;
+            }
+
+          if ( hasDigits )
           {
-            QTextDocument d;
-            d.setHtml( QString::fromUtf8( displayedHeadword.data(), displayedHeadword.size() ) );
+            // Ok, let's add it.
 
-            string result = d.toPlainText().toUtf8().data();
+            // Does it contain HTML? If it does, we need to strip it
+            if ( displayedHeadword.find( '<' ) != string::npos ||
+                 displayedHeadword.find( '&' ) != string::npos )
+            {
+              QTextDocument d;
+              d.setHtml( QString::fromUtf8( displayedHeadword.data(), displayedHeadword.size() ) );
 
-            if ( result != headword )
-            alternates.push_back( result );
+              string result = d.toPlainText().toUtf8().data();
+
+              if ( result != headword )
+              alternates.push_back( result );
+            }
+            else
+              alternates.push_back(displayedHeadword);
           }
-          else
-            alternates.push_back(displayedHeadword);
         }
 
         entry.headword = headword;

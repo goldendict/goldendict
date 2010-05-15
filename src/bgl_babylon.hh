@@ -193,7 +193,7 @@ public:
     
     enum
     {
-      ParserVersion = 9
+      ParserVersion = 10
     };
 
 private:
