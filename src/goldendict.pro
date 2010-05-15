@@ -5,7 +5,6 @@ TEMPLATE = app
 TARGET = goldendict
 VERSION = 0.9.0+git
 
-error( "Repository moved to Gitorious. Sorry for the trouble, we promise it's the last transition! The new url is git://gitorious.org/goldendict/goldendict.git")
 # DEPENDPATH += . generators
 INCLUDEPATH += .
 QT += webkit
