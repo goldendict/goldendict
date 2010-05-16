@@ -485,7 +485,54 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               a += 2;
               //pos += len - a;
               //break;
-            } else if (block.data[pos] == 0x14) {
+            }
+            else
+            if ( block.data[ pos ] == 0x14 && len - a >= 5 &&
+                 block.data[ pos + 1 ] == 0x06 &&
+                 block.data[ pos + 2 ] == 0x5A &&
+                 block.data[ pos + 3 ] == 0x18 )
+            {
+              // 1-byte sized displayed headword
+              // note that this probably overrides the handlers above
+              unsigned length = (unsigned char)block.data[ pos + 4 ];
+
+              if ( length > len - a - 5 )
+              {
+                fprintf( stderr, "1-byte sized displayed headword for %s is too large\n", headword.c_str() );
+                pos += len - a;
+                break;
+              }
+
+              displayedHeadword = std::string( block.data + pos + 5, length );
+
+              pos += length + 5;
+              a += length + 4;
+            }
+            else
+            if ( block.data[ pos ] == 0x14 && len - a >= 6 &&
+                 block.data[ pos + 1 ] == 0x06 &&
+                 block.data[ pos + 2 ] == 0x5A &&
+                 block.data[ pos + 3 ] == 0x28 )
+            {
+              // 2-byte sized displayed headword
+              unsigned length = (unsigned char)block.data[ pos + 4 ];
+              length <<= 8;
+              length += (unsigned char)block.data[ pos + 5 ];
+
+              if ( length > len - a - 6 )
+              {
+                fprintf( stderr, "2-byte sized displayed headword for %s is too large\n", headword.c_str() );
+                pos += len - a;
+                break;
+              }
+
+              displayedHeadword = std::string( block.data + pos + 6, length );
+
+              pos += length + 6;
+              a += length + 5;
+            }
+            else
+            if (block.data[pos] == 0x14) {
               pos++;
             } else if ((unsigned char)block.data[pos] == 0x1A){
                 unsigned length = (unsigned char)block.data[ pos + 1 ];
@@ -510,7 +557,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         convertToUtf8( definition, TARGET_CHARSET );
 
         if ( displayedHeadword.size() )
-          convertToUtf8( displayedHeadword, SOURCE_CHARSET );
+          convertToUtf8( displayedHeadword, TARGET_CHARSET );
 
         // Alternate forms
         while( pos != block.length )
