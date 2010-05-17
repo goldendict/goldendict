@@ -17,11 +17,15 @@
     </message>
     <message>
         <source>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</translation>
+        <translation type="obsolete">(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
         <translation>授权基于 GNU 公共授权 GPLv3 或更高版本</translation>
+    </message>
+    <message>
+        <source>(c) 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</source>
+        <translation>(c) 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
 </context>
 <context>
@@ -40,7 +44,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;欢迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 词典程序！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用时请首先打开&lt;b&gt;编辑 | 词典&lt;/b&gt;菜单以添加并扫描含有词典文件的目录，添加维基百科网站查询或其它资源，调整词典排序或创建新的词典群组。&lt;p style=&quot;text-indent:2em&quot;&gt;这些设置都完成以后，就可以开始使用了。你可以使用左侧的查询面板，或者&lt;a href=&quot;使用屏幕取词功能&quot;&gt;直接从其它程序中抓词查询&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要改变设置，可以在&lt;b&gt;编辑 | 首选项&lt;/b&gt;菜单中查看一下可用的系统设置。所有的设置都有鼠标指针提示信息，如果有不明之处，请仔细阅读提示信息。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要帮助，有任何疑问、建议，或者想看看其他人是怎么说的，欢迎访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;官方论坛&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;官方网站&lt;/a&gt;以获取更新。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2009 Konstantin Isakov. 授权基于 GPLv3 或更高版本。</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;欢迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 词典程序！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用时请首先打开&lt;b&gt;编辑 | 词典&lt;/b&gt;菜单以添加并扫描含有词典文件的目录，添加维基百科网站查询或其它资源，调整词典排序或创建新的词典群组。&lt;p style=&quot;text-indent:2em&quot;&gt;这些设置都完成以后，就可以开始使用了。你可以使用左侧的查询面板，或者&lt;a href=&quot;使用屏幕取词功能&quot;&gt;直接从其它程序中抓词查询&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要改变设置，可以在&lt;b&gt;编辑 | 首选项&lt;/b&gt;菜单中查看一下可用的系统设置。所有的设置都有鼠标指针提示信息，如果有不明之处，请仔细阅读提示信息。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要帮助，有任何疑问、建议，或者想看看其他人是怎么说的，欢迎访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;官方论坛&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;官方网站&lt;/a&gt;以获取更新。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2009 Konstantin Isakov. 授权基于 GPLv3 或更高版本。</translation>
     </message>
     <message>
         <source>Working with popup</source>
@@ -61,6 +65,10 @@
     <message>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>在 &lt;b&gt;%1&lt;/b&gt; 群组中找不到可用的翻译。</translation>
+    </message>
+    <message>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;欢迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 词典程序！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用时请首先打开&lt;b&gt;编辑 | 词典&lt;/b&gt;菜单以添加并扫描含有词典文件的目录，添加维基百科网站查询或其它资源，调整词典排序或创建新的词典群组。&lt;p style=&quot;text-indent:2em&quot;&gt;这些设置都完成以后，就可以开始使用了。你可以使用左侧的查询面板，或者&lt;a href=&quot;使用屏幕取词功能&quot;&gt;直接从其它程序中抓词查询&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要改变设置，可以在&lt;b&gt;编辑 | 首选项&lt;/b&gt;菜单中查看一下可用的系统设置。所有的设置都有鼠标指针提示信息，如果有不明之处，请仔细阅读提示信息。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要帮助，有任何疑问、建议，或者想看看其他人是怎么说的，欢迎访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;官方论坛&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;访问此程序的&lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;官方网站&lt;/a&gt;以获取更新。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2010 Konstantin Isakov. 授权基于 GPLv3 或更高版本。</translation>
     </message>
 </context>
 <context>
@@ -196,6 +204,10 @@
     <message>
         <source>Dictionary Bar</source>
         <translation>词典栏</translation>
+    </message>
+    <message>
+        <source>Edit this group</source>
+        <translation>编辑此群组</translation>
     </message>
 </context>
 <context>
@@ -1862,6 +1874,10 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     <message>
         <source>Play via DirectShow</source>
         <translation>通过 DirectShow 播放</translation>
+    </message>
+    <message>
+        <source>Double-click translates the word clicked</source>
+        <translation>双击翻译词条（在主界面中）</translation>
     </message>
 </context>
 <context>
