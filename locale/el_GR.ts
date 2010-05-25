@@ -5,7 +5,7 @@
     <name></name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="obsolete">Σφάλμα κατά την ανάλυση του XML: %1 στο %2,%3</translation>
+        <translation type="obsolete">Σφάλμα ανάλυσης XML: %1 στο %2,%3</translation>
     </message>
 </context>
 <context>
@@ -46,7 +46,7 @@
     <message>
         <location filename="../article_maker.cc" line="115"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε βρέθηκαν μεταφράσεις στην ομάδα &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="134"/>
@@ -107,12 +107,12 @@
     <message>
         <location filename="../article_maker.cc" line="576"/>
         <source>Compound expressions: </source>
-        <translation type="unfinished"></translation>
+        <translation>Σύνθετες εκφράσεις: </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="602"/>
         <source>Individual words: </source>
-        <translation type="unfinished"></translation>
+        <translation>Μεμονωμένες λέξεις: </translation>
     </message>
 </context>
 <context>
@@ -302,11 +302,11 @@
     </message>
 </context>
 <context>
-    <name>GermanTranslit</name>
+    <name>GreekTranslit</name>
     <message>
         <location filename="../german.cc" line="48"/>
-        <source>German Transliteration</source>
-        <translation>Γερμανική μεταγραφή</translation>
+        <source>Greek Transliteration</source>
+        <translation>Ελληνική μεταγραφή</translation>
     </message>
 </context>
 <context>
@@ -1450,7 +1450,7 @@
     <message>
         <location filename="../mainwindow.cc" line="33"/>
         <source>Show Names in Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ονομάτων στη γραμμή λεξικών</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="52"/>
@@ -1634,7 +1634,7 @@
     <message>
         <location filename="../mainwindow.ui" line="102"/>
         <source>H&amp;istory</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ιστορικό</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="116"/>
@@ -1765,7 +1765,7 @@
     <message>
         <location filename="../mainwindow.ui" line="367"/>
         <source>&amp;Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Εκκαθάριση</translation>
     </message>
 </context>
 <context>
@@ -1773,7 +1773,7 @@
     <message>
         <location filename="../mediawiki.cc" line="271"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Σφάλμα κατά την ανάλυση του XML: %1 στο %2,%3</translation>
+        <translation>Σφάλμα ανάλυσης XML: %1 στο %2,%3</translation>
     </message>
 </context>
 <context>
@@ -1781,7 +1781,7 @@
     <message>
         <location filename="../mediawiki.cc" line="149"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Σφάλμα κατά την ανάλυση του XML: %1 στο %2,%3</translation>
+        <translation>Σφάλμα ανάλυσης XML: %1 στο %2,%3</translation>
     </message>
 </context>
 <context>
@@ -1909,7 +1909,7 @@
     <message>
         <location filename="../preferences.cc" line="130"/>
         <source>Play via DirectShow</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή μέσω DirectShow</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="296"/>
@@ -2195,17 +2195,17 @@ be pressed shortly after the selection is done.</source>
     <message>
         <location filename="../preferences.ui" line="731"/>
         <source>Playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="737"/>
         <source>Play via Phonon</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή μέσω Phonon</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="749"/>
         <source>Use external program:</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση εξωτερικού προγράμματος:</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
@@ -2277,7 +2277,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="708"/>
         <source>Pronunciation</source>
-        <translation type="unfinished"></translation>
+        <translation>Προφορά</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="714"/>
@@ -2432,13 +2432,13 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../scanpopup.ui" line="117"/>
         <source>Shows or hides the dictionary bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ή απόκρυψη της γραμμής λεξικών</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="140"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρησιμοποιήστε το για να μετατρέψετε το αναδυόμενο σε κανονικό παράθυρο, που δεν εξαφανίζεται από την οθόνη και μπορεί π.χ. να αλλάξει μέγεθος.</translation>
     </message>
 </context>
 <context>
@@ -2591,12 +2591,17 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="358"/>
         <source>Russian transliteration</source>
-        <translation>Ρωσική μεταγραφή</translation>
+        <translation>Μεταγραφή Ρωσικών</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="382"/>
         <source>German transliteration</source>
-        <translation>Γερμανική μεταγραφή</translation>
+        <translation>Μεταγραφή Γερμανικών</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="390"/>
+        <source>Greek transliteration</source>
+        <translation>Μεταγραφή Ελληνικών</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
