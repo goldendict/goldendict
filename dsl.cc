@@ -1495,7 +1495,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             for( map< string, string >::const_iterator i = abrv.begin();
                  i != abrv.end(); ++i )
             {
-              printf( "%s:%s\n", i->first.c_str(), i->second.c_str() );
+//              printf( "%s:%s\n", i->first.c_str(), i->second.c_str() );
 
               sz = i->first.size();
               chunks.addToBlock( &sz, sizeof( uint32_t ) );
