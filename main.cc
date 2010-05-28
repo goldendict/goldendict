@@ -72,6 +72,15 @@ int main( int argc, char ** argv )
 
   Config::Class cfg( Config::load() );
 
+  if ( Config::isPortableVersion() )
+  {
+    // For portable version, hardcode some settings
+
+    cfg.paths.clear();
+    cfg.paths.push_back( Config::Path( Config::getPortableVersionDictionaryDir(), true ) );
+    cfg.soundDirs.clear();
+    cfg.hunspell.dictionariesPath = Config::getPortableVersionMorphoDir();
+  }
 
   // Prevent execution of the 2nd copy
 

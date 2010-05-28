@@ -6,11 +6,12 @@
 #include <QMessageBox>
 #include <QCryptographicHash>
 #include <QDateTime>
+#include <QStandardItemModel>
 
 Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::SoundDirs const & soundDirs,
                   Config::Hunspell const & hunspell,
-                  Config::Transliteration const & tr,
+                  Config::Transliteration const & trs,
                   Config::MediaWikis const & mediawikis,
                   Config::WebSites const & webSites ): QWidget( parent ),
   mediawikisModel( this, mediawikis ),
@@ -49,14 +50,41 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
 
   fitHunspellDictsColumns();
 
-  ui.enableRussianTransliteration->setChecked( tr.enableRussianTransliteration );
-  ui.enableGermanTransliteration->setChecked( tr.enableGermanTransliteration );
-  ui.enableRomaji->setChecked( tr.romaji.enable );
-  ui.enableHepburn->setChecked( tr.romaji.enableHepburn );
-  ui.enableNihonShiki->setChecked( tr.romaji.enableNihonShiki );
-  ui.enableKunreiShiki->setChecked( tr.romaji.enableKunreiShiki );
-  ui.enableHiragana->setChecked( tr.romaji.enableHiragana );
-  ui.enableKatakana->setChecked( tr.romaji.enableKatakana );
+  ui.enableRussianTransliteration->setChecked( trs.enableRussianTransliteration );
+  ui.enableGermanTransliteration->setChecked( trs.enableGermanTransliteration );
+  ui.enableRomaji->setChecked( trs.romaji.enable );
+  ui.enableHepburn->setChecked( trs.romaji.enableHepburn );
+  ui.enableNihonShiki->setChecked( trs.romaji.enableNihonShiki );
+  ui.enableKunreiShiki->setChecked( trs.romaji.enableKunreiShiki );
+  ui.enableHiragana->setChecked( trs.romaji.enableHiragana );
+  ui.enableKatakana->setChecked( trs.romaji.enableKatakana );
+
+  if ( Config::isPortableVersion() )
+  {
+    // Paths
+
+    ui.paths->setEnabled( false );
+    ui.addPath->setEnabled( false );
+    ui.removePath->setEnabled( false );
+
+    // Sound dirs
+
+    {
+      QStandardItemModel * model =  new QStandardItemModel( this );
+      model->setHorizontalHeaderLabels( QStringList() << " " );
+      model->invisibleRootItem()->appendRow( new QStandardItem( tr( "(not available in portable version)" ) ) );
+      ui.soundDirs->setModel( model );
+      ui.soundDirs->setEnabled( false );
+
+      ui.addSoundDir->setEnabled( false );
+      ui.removeSoundDir->setEnabled( false );
+    }
+
+    // Morpho
+
+    ui.hunspellPath->setEnabled( false );
+    ui.changeHunspellPath->setEnabled( false );
+  }
 }
 
 void Sources::fitPathsColumns()

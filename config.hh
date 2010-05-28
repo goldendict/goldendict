@@ -375,6 +375,19 @@ QString getProgramDataDir() throw();
 
 /// Returns the directory storing program localizized files (.qm).
 QString getLocDir() throw();
+
+/// Returns true if the program is configured as a portable version. In that
+/// mode, all the settings and indices are kept in the program's directory.
+bool isPortableVersion() throw();
+
+/// Returns directory with dictionaries for portable version. It is content/
+/// in the application's directory.
+QString getPortableVersionDictionaryDir() throw();
+
+/// Returns directory with morpgologies for portable version. It is
+/// content/morphology in the application's directory.
+QString getPortableVersionMorphoDir() throw();
+
 }
 
 #endif

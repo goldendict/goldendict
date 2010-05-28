@@ -24,6 +24,9 @@ namespace
 {
   QDir getHomeDir()
   {
+    if ( isPortableVersion() )
+      return QDir( QCoreApplication::applicationDirPath() + "/portable" );
+
     QDir result = QDir::home();
 
     char const * pathInHome =
@@ -1062,6 +1065,9 @@ QString getUserQtCssFileName() throw( exError )
 
 QString getProgramDataDir() throw()
 {
+  if ( isPortableVersion() )
+    return QCoreApplication::applicationDirPath();
+
   #ifdef PROGRAM_DATA_DIR
   return PROGRAM_DATA_DIR;
   #else
@@ -1075,6 +1081,37 @@ QString getLocDir() throw()
     return getProgramDataDir() + "/locale";
   else
     return QCoreApplication::applicationDirPath() + "/locale";
+}
+
+bool isPortableVersion() throw()
+{
+  struct IsPortable
+  {
+    bool isPortable;
+
+    IsPortable(): isPortable( QFileInfo( QCoreApplication::applicationDirPath() + "/portable" ).isDir() )
+    {}
+  };
+
+  static IsPortable p;
+
+  return p.isPortable;
+}
+
+QString getPortableVersionDictionaryDir() throw()
+{
+  if ( isPortableVersion() )
+    return getProgramDataDir() + "/content";
+  else
+    return QString();
+}
+
+QString getPortableVersionMorphoDir() throw()
+{
+  if ( isPortableVersion() )
+    return getPortableVersionDictionaryDir() + "/morphology";
+  else
+    return QString();
 }
 
 }

@@ -12,6 +12,10 @@
 #include <QFileInfo>
 #include <QDateTime>
 
+#include "config.hh"
+#include <QDir>
+#include <QFileInfo>
+
 namespace Dictionary {
 
 bool Request::isFinished()
@@ -144,7 +148,33 @@ sptr< DataRequest > Class::getResource( string const & /*name*/ )
 
 string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
 {
-  std::vector< string > sortedList( dictionaryFiles );
+  std::vector< string > sortedList;
+
+  if ( Config::isPortableVersion() )
+  {
+    // For portable version, we use relative paths
+    sortedList.reserve( dictionaryFiles.size() );
+
+    QDir dictionariesDir( Config::getPortableVersionDictionaryDir() );
+
+    for( unsigned x = 0; x < dictionaryFiles.size(); ++x )
+    {
+      string const & full( dictionaryFiles[ x ] );
+
+      QFileInfo fileInfo( QString::fromLocal8Bit( full.c_str() ) );
+
+      if ( fileInfo.isAbsolute() )
+        sortedList.push_back( dictionariesDir.relativeFilePath( fileInfo.filePath() ).toLocal8Bit().data() );
+      else
+      {
+        // Well, it's relative. We don't technically support those, but
+        // what the heck
+        sortedList.push_back( full );
+      }
+    }
+  }
+  else
+    sortedList = dictionaryFiles;
 
   std::sort( sortedList.begin(), sortedList.end() );
 
