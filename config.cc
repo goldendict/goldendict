@@ -416,6 +416,9 @@ Class load() throw( exError )
     applyBoolOption( c.transliteration.enableGermanTransliteration,
                      transliteration.namedItem( "enableGermanTransliteration" ) );
 
+    applyBoolOption( c.transliteration.enableGreekTransliteration,
+                     transliteration.namedItem( "enableGreekTransliteration" ) );
+
     QDomNode romaji = transliteration.namedItem( "romaji" );
 
     if ( !romaji.isNull() )
@@ -741,6 +744,12 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "enableGermanTransliteration" );
     opt.appendChild( dd.createTextNode( c.transliteration.enableGermanTransliteration ? "1":"0" ) );
+    transliteration.appendChild( opt );
+
+    // Greek translit
+
+    opt = dd.createElement( "enableGreekTransliteration" );
+    opt.appendChild( dd.createTextNode( c.transliteration.enableGreekTransliteration ? "1":"0" ) );
     transliteration.appendChild( opt );
 
     // Romaji

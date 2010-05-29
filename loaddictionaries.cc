@@ -14,6 +14,7 @@
 #include "romaji.hh"
 #include "russiantranslit.hh"
 #include "german.hh"
+#include "greektranslit.hh"
 #include "website.hh"
 
 #include <QMessageBox>
@@ -197,6 +198,10 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   // Make German transliteration
   if ( cfg.transliteration.enableGermanTransliteration )
     dictionaries.push_back( GermanTranslit::makeDictionary() );
+
+  // Make Greek transliteration
+  if ( cfg.transliteration.enableGreekTransliteration )
+    dictionaries.push_back( GreekTranslit::makeDictionary() );
 
   ///// We create MediaWiki dicts syncronously, since they use netmgr
 

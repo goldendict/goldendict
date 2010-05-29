@@ -138,7 +138,8 @@ HEADERS += folding.hh \
     articlewebview.hh \
     zipfile.hh \
     indexedzip.hh \
-    termination.hh
+    termination.hh \
+    greektranslit.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -215,7 +216,8 @@ SOURCES += folding.cc \
     articlewebview.cc \
     zipfile.cc \
     indexedzip.cc \
-    termination.cc
+    termination.cc \
+    greektranslit.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h
