@@ -100,6 +100,7 @@ class ArticleRequest: public Dictionary::DataRequest
   int currentSplittedWordStart;
   int currentSplittedWordEnd;
   QString currentSplittedWordCompound;
+  QString lastGoodCompoundResult;
   bool firstCompoundWasFound;
 
 public:

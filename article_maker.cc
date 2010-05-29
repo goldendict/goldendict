@@ -573,11 +573,9 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
     string footer;
 
-    if ( currentSplittedWordEnd - currentSplittedWordStart > 1 ) // We have something to append
+    if ( lastGoodCompoundResult.size() ) // We have something to append
     {
 //      printf( "Appending\n" );
-
-      --currentSplittedWordEnd;
 
       if ( !firstCompoundWasFound )
       {
@@ -594,7 +592,9 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
         footer += " / ";
       }
 
-      footer += linkWord( makeSplittedWordCompound() );
+      footer += linkWord( lastGoodCompoundResult );
+
+      lastGoodCompoundResult.clear();
     }
 
     // Then, start a new search for the next word, if possible
@@ -672,7 +672,8 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
 //  printf( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
 
-  stemmedWordFinder->stemmedMatch( currentSplittedWordCompound, activeDicts, 0, 0, 1 );
+  stemmedWordFinder->prefixMatch( currentSplittedWordCompound, activeDicts, 40, // Would one be enough? Leave 40 to be safe.
+                                  Dictionary::SuitableForCompoundSearching );
 }
 
 QString ArticleRequest::makeSplittedWordCompound()
@@ -707,13 +708,35 @@ void ArticleRequest::individualWordFinished()
     // Check if the aliases are acceptable
     wstring source = Folding::applySimpleCaseOnly( gd::toWString( currentSplittedWordCompound ) );
 
+    bool hadSomething = false;
+
     for( unsigned x = 0; x < results.size(); ++x )
-      if ( source == Folding::applySimpleCaseOnly( gd::toWString( results[ x ].first ) ) )
+    {
+      if ( results[ x ].second )
+        continue; // We're not interested in suggestions
+
+      wstring result( Folding::applySimpleCaseOnly( gd::toWString( results[ x ].first ) ) );
+
+      if ( source.size() <= result.size() && result.compare( 0, source.size(), source ) == 0 )
       {
-        // Ok, good enough
-        compoundSearchNextStep( true );
-        return;
+        // The resulting string begins with the source one
+
+        hadSomething = true;
+
+        if ( source.size() == result.size() )
+        {
+          // Got the match. No need to continue.
+          lastGoodCompoundResult = currentSplittedWordCompound;
+          break;
+        }
       }
+    }
+
+    if ( hadSomething )
+    {
+      compoundSearchNextStep( true );
+      return;
+    }
   }
 
   compoundSearchNextStep( false );

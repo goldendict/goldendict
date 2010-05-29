@@ -32,7 +32,9 @@ WordFinder::~WordFinder()
 }
 
 void WordFinder::prefixMatch( QString const & str,
-                              std::vector< sptr< Dictionary::Class > > const & dicts )
+                              std::vector< sptr< Dictionary::Class > > const & dicts,
+                              unsigned long maxResults,
+                              Dictionary::Features features )
 {
   cancel();
 
@@ -40,6 +42,8 @@ void WordFinder::prefixMatch( QString const & str,
   searchType = PrefixMatch;
   inputWord = str;
   inputDicts = &dicts;
+  requestedMaxResults = maxResults;
+  requestedFeatures = features;
 
   resultsArray.clear();
   resultsIndex.clear();
@@ -59,7 +63,8 @@ void WordFinder::stemmedMatch( QString const & str,
                                std::vector< sptr< Dictionary::Class > > const & dicts,
                                unsigned minLength,
                                unsigned maxSuffixVariation,
-                               unsigned long maxResults )
+                               unsigned long maxResults,
+                               Dictionary::Features features )
 {
   cancel();
 
@@ -67,9 +72,10 @@ void WordFinder::stemmedMatch( QString const & str,
   searchType = StemmedMatch;
   inputWord = str;
   inputDicts = &dicts;
+  requestedMaxResults = maxResults;
+  requestedFeatures = features;
   stemmedMinLength = minLength;
   stemmedMaxSuffixVariation = maxSuffixVariation;
-  stemmedMaxResults = maxResults;
 
   resultsArray.clear();
   resultsIndex.clear();
@@ -111,12 +117,15 @@ void WordFinder::startSearch()
 
   for( size_t x = 0; x < inputDicts->size(); ++x )
   {
+    if ( ( (*inputDicts)[ x ]->getFeatures() & requestedFeatures ) != requestedFeatures )
+      continue;
+
     for( size_t y = 0; y < allWordWritings.size(); ++y )
     {
       sptr< Dictionary::WordSearchRequest > sr =
         ( searchType == PrefixMatch ) ?
-          (*inputDicts)[ x ]->prefixMatch( allWordWritings[ y ], 40 ) :
-          (*inputDicts)[ x ]->stemmedMatch( allWordWritings[ y ], stemmedMinLength, stemmedMaxSuffixVariation, stemmedMaxResults );
+          (*inputDicts)[ x ]->prefixMatch( allWordWritings[ y ], requestedMaxResults ) :
+          (*inputDicts)[ x ]->stemmedMatch( allWordWritings[ y ], stemmedMinLength, stemmedMaxSuffixVariation, requestedMaxResults );
   
       connect( sr.get(), SIGNAL( finished() ),
                this, SLOT( requestFinished() ), Qt::QueuedConnection );

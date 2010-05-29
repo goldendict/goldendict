@@ -222,6 +222,18 @@ public:
   { return data; }
 };
 
+/// Dictionary features. Different dictionaries can possess different features,
+/// which hint at some of their aspects.
+enum Feature
+{
+  /// No features
+  NoFeatures = 0,
+  /// The dictionary is suitable to query when searching for compound expressions.
+  SuitableForCompoundSearching = 1
+};
+
+Q_DECLARE_FLAGS( Features, Feature )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Features )
 
 /// A dictionary. Can be used to query words.
 class Class
@@ -258,6 +270,11 @@ public:
   /// Returns all the available properties, like the author's name, copyright,
   /// description etc. All strings are in utf8.
   virtual map< Property, string > getProperties() throw()=0;
+
+  /// Returns the features the dictionary possess. See the Feature enum for
+  /// their list.
+  virtual Features getFeatures() const throw()
+  { return NoFeatures; }
 
   /// Returns the number of articles in the dictionary.
   virtual unsigned long getArticleCount() throw()=0;

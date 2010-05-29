@@ -42,9 +42,10 @@ private:
     PrefixMatch,
     StemmedMatch
   } searchType;
+  unsigned long requestedMaxResults;
+  Dictionary::Features requestedFeatures;
   unsigned stemmedMinLength;
   unsigned stemmedMaxSuffixVariation;
-  unsigned long stemmedMaxResults;
 
   std::vector< sptr< Dictionary::Class > > const * inputDicts;
 
@@ -74,10 +75,14 @@ public:
   /// the exact matches would be found. All search results are put into a single
   /// list containing the exact matches first, then the prefix ones. Duplicate
   /// matches from different dictionaries are merged together.
+  /// If a list of features is specified, the search will only be performed in
+  /// the dictionaries which possess all the features requested.
   /// If there already was a prefixMatch operation underway, it gets cancelled
   /// and the new one replaces it.
   void prefixMatch( QString const &,
-                    std::vector< sptr< Dictionary::Class > > const & );
+                    std::vector< sptr< Dictionary::Class > > const &,
+                    unsigned long maxResults = 40,
+                    Dictionary::Features = Dictionary::NoFeatures );
 
   /// Do a stemmed-match search in the given list of dictionaries. All comments
   /// from prefixMatch() generally apply as well.
@@ -85,7 +90,8 @@ public:
                      std::vector< sptr< Dictionary::Class > > const &,
                      unsigned minLength = 3,
                      unsigned maxSuffixVariation = 3,
-                     unsigned long maxResults = 30 );
+                     unsigned long maxResults = 30,
+                     Dictionary::Features = Dictionary::NoFeatures );
   
   /// Returns the vector containing search results from the last operation.
   /// If it didn't finish yet, the result is not final and may be changing
