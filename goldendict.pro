@@ -140,7 +140,8 @@ HEADERS += folding.hh \
     zipfile.hh \
     indexedzip.hh \
     termination.hh \
-    greektranslit.hh
+    greektranslit.hh \
+    webmultimediadownload.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -218,7 +219,8 @@ SOURCES += folding.cc \
     zipfile.cc \
     indexedzip.cc \
     termination.cc \
-    greektranslit.cc
+    greektranslit.cc \
+    webmultimediadownload.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h

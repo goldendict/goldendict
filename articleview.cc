@@ -13,6 +13,7 @@
 #include <QKeyEvent>
 #include "folding.hh"
 #include "wstring_qt.hh"
+#include "webmultimediadownload.hh"
 
 #include <QBuffer>
 
@@ -390,7 +391,10 @@ bool ArticleView::isExternalLink( QUrl const & url )
 
 void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 {
-  if( url.scheme() == "http" || url.scheme() == "https" )
+  // Don't try mangling audio urls, even if they are from the framed websites
+
+  if( ( url.scheme() == "http" || url.scheme() == "https" )
+      && ! Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Maybe a link inside a website was clicked?
 
@@ -598,7 +602,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                     getGroup( ref ), scrollTo, contexts );
   }
   else
-  if ( url.scheme() == "bres" || url.scheme() == "gdau" )
+  if ( url.scheme() == "bres" || url.scheme() == "gdau" ||
+       Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Download it
 
@@ -608,6 +613,17 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
     resourceDownloadUrl = url;
 
+    if ( Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
+    {
+      sptr< Dictionary::DataRequest > req =
+        new Dictionary::WebMultimediaDownload( url, articleNetMgr );
+
+      resourceDownloadRequests.push_back( req );
+
+      connect( req.get(), SIGNAL( finished() ),
+               this, SLOT( resourceDownloadFinished() ) );
+    }
+    else
     if ( url.scheme() == "gdau" && url.host() == "search" )
     {
       // Since searches should be limited to current group, we just do them
@@ -975,7 +991,8 @@ void ArticleView::resourceDownloadFinished()
 
         vector< char > const & data = (*i)->getFullData();
 
-        if ( resourceDownloadUrl.scheme() == "gdau" )
+        if ( resourceDownloadUrl.scheme() == "gdau" ||
+             Dictionary::WebMultimediaDownload::isAudioUrl( resourceDownloadUrl ) )
         {
           // Audio data
 
