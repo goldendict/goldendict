@@ -21,10 +21,6 @@ RCC_DIR = build
 LIBS += \
         -lz \
 
-# This is to keep symbols for backtraces
-QMAKE_CXXFLAGS += -rdynamic
-QMAKE_LFLAGS += -rdynamic
-
 win32 { 
     LIBS += -liconv \
         -lwsock32 \
@@ -39,6 +35,11 @@ win32 {
     LIBS += -Lwinlibs/lib
 }
 unix {
+
+  # This is to keep symbols for backtraces
+  QMAKE_CXXFLAGS += -rdynamic
+  QMAKE_LFLAGS += -rdynamic
+
     CONFIG += link_pkgconfig
     PKGCONFIG += vorbisfile \
     	vorbis \
