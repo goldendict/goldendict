@@ -19,6 +19,19 @@
 
 int main( int argc, char ** argv )
 {
+  // The following clause fixes a race in the MinGW runtime where throwing
+  // exceptions for the first time in several threads simultaneously can cause
+  // an abort(). This code throws first exception in a safe, single-threaded
+  // manner, thus avoiding that race.
+  {
+    class Dummy {};
+
+    try
+    { throw Dummy(); }
+    catch( Dummy )
+    {}
+  }
+
   if ( argc == 3 && strcmp( argv[ 1 ], "--show-error-file" ) == 0 )
   {
     // The program has crashed -- show a message about it
