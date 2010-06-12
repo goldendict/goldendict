@@ -16,7 +16,7 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   dictNetMgr( dictNetMgr_ ),
   origCfg( cfg ),
   sources( this, cfg.paths, cfg.soundDirs, cfg.hunspell, cfg.transliteration,
-           cfg.mediawikis, cfg.webSites ),
+           cfg.forvo, cfg.mediawikis, cfg.webSites ),
   orderAndProps( new OrderAndProps( this, cfg.dictionaryOrder, cfg.inactiveDictionaries,
                                     dictionaries ) ),
   groups( new Groups( this, dictionaries, cfg.groups, orderAndProps->getCurrentDictionaryOrder() ) ),
@@ -138,6 +138,7 @@ bool EditDictionaries::isSourcesChanged() const
          sources.getSoundDirs() != cfg.soundDirs ||
          sources.getHunspell() != cfg.hunspell ||
          sources.getTransliteration() != cfg.transliteration ||
+         sources.getForvo() != cfg.forvo ||
          sources.getMediaWikis() != cfg.mediawikis ||
          sources.getWebSites() != cfg.webSites;
 }
@@ -154,6 +155,7 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   cfg.soundDirs = sources.getSoundDirs();
   cfg.hunspell = sources.getHunspell();
   cfg.transliteration = sources.getTransliteration();
+  cfg.forvo = sources.getForvo();
   cfg.mediawikis = sources.getMediaWikis();
   cfg.webSites = sources.getWebSites();
 

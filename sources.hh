@@ -169,6 +169,7 @@ public:
            Config::SoundDirs const &,
            Config::Hunspell const &,
            Config::Transliteration const &,
+           Config::Forvo const & forvo,
            Config::MediaWikis const &,
            Config::WebSites const & );
 
@@ -187,6 +188,8 @@ public:
   Config::Hunspell getHunspell() const;
   
   Config::Transliteration getTransliteration() const;
+
+  Config::Forvo getForvo() const;
 
 signals:
 

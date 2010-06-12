@@ -278,6 +278,25 @@ struct Transliteration
   {}
 };
 
+struct Forvo
+{
+  bool enable;
+  QString apiKey;
+  QString languageCodes;
+
+  Forvo(): enable( false )
+  {}
+
+  bool operator == ( Forvo const & other ) const
+  { return enable == other.enable &&
+           apiKey == other.apiKey &&
+           languageCodes == other.languageCodes;
+  }
+
+  bool operator != ( Forvo const & other ) const
+  { return ! operator == ( other ); }
+};
+
 /// Dictionaries which are temporarily disabled via the dictionary bar.
 typedef QSet< QString > MutedDictionaries;
 
@@ -293,6 +312,7 @@ struct Class
   WebSites webSites;
   Hunspell hunspell;
   Transliteration transliteration;
+  Forvo forvo;
 
   unsigned lastMainGroupId; // Last used group in main window
   unsigned lastPopupGroupId; // Last used group in popup window

@@ -16,6 +16,7 @@
 #include "german.hh"
 #include "greektranslit.hh"
 #include "website.hh"
+#include "forvo.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -216,6 +217,15 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   {
     vector< sptr< Dictionary::Class > > dicts =
       WebSite::makeDictionaries( cfg.webSites );
+
+    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+  }
+
+  //// Forvo dictionaries
+
+  {
+    vector< sptr< Dictionary::Class > > dicts =
+      Forvo::makeDictionaries( loadDicts, cfg.forvo, dictNetMgr );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }

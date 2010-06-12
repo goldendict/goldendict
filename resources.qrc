@@ -39,5 +39,6 @@
         <file>article-style-st-lingvo.css</file>
         <file>icons/internet.png</file>
         <file>icons/icon_dsl_native.png</file>
+        <file>icons/forvo.png</file>
     </qresource>
 </RCC>

@@ -433,6 +433,19 @@ Class load() throw( exError )
     }
   }
 
+  QDomNode forvo = root.namedItem( "forvo" );
+
+  if ( !forvo.isNull() )
+  {
+    applyBoolOption( c.forvo.enable,
+                     forvo.namedItem( "enable" ) );
+
+    c.forvo.apiKey = forvo.namedItem( "apiKey" ).toElement().text();
+    c.forvo.languageCodes = forvo.namedItem( "languageCodes" ).toElement().text();
+  }
+  else
+    c.forvo.languageCodes = "en, ru"; // Default demo values
+
   QDomNode mws = root.namedItem( "mediawikis" );
 
   if ( !mws.isNull() )
@@ -781,6 +794,25 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "enableKatakana" );
     opt.appendChild( dd.createTextNode( c.transliteration.romaji.enableKatakana ? "1":"0" ) );
     romaji.appendChild( opt );
+  }
+
+  {
+    // Forvo
+
+    QDomElement forvo = dd.createElement( "forvo" );
+    root.appendChild( forvo );
+
+    QDomElement opt = dd.createElement( "enable" );
+    opt.appendChild( dd.createTextNode( c.forvo.enable ? "1":"0" ) );
+    forvo.appendChild( opt );
+
+    opt = dd.createElement( "apiKey" );
+    opt.appendChild( dd.createTextNode( c.forvo.apiKey ) );
+    forvo.appendChild( opt );
+
+    opt = dd.createElement( "languageCodes" );
+    opt.appendChild( dd.createTextNode( c.forvo.languageCodes ) );
+    forvo.appendChild( opt );
   }
 
   {

@@ -46,7 +46,10 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
 
 bool WebMultimediaDownload::isAudioUrl( QUrl const & url )
 {
-  return url.scheme() == "http" && Filetype::isNameOfSound( url.path().toUtf8().data() );
+  // Note: we check for forvo sound links explicitly, as they don't have extensions
+
+  return url.scheme() == "http" && (
+      Filetype::isNameOfSound( url.path().toUtf8().data() ) || url.host() == "apifree.forvo.com" );
 }
 
 }

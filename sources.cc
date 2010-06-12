@@ -12,6 +12,7 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::SoundDirs const & soundDirs,
                   Config::Hunspell const & hunspell,
                   Config::Transliteration const & trs,
+                  Config::Forvo const & forvo,
                   Config::MediaWikis const & mediawikis,
                   Config::WebSites const & webSites ): QWidget( parent ),
   mediawikisModel( this, mediawikis ),
@@ -59,6 +60,10 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.enableKunreiShiki->setChecked( trs.romaji.enableKunreiShiki );
   ui.enableHiragana->setChecked( trs.romaji.enableHiragana );
   ui.enableKatakana->setChecked( trs.romaji.enableKatakana );
+
+  ui.forvoEnabled->setChecked( forvo.enable );
+  ui.forvoApiKey->setText( forvo.apiKey );
+  ui.forvoLanguageCodes->setText( forvo.languageCodes );
 
   if ( Config::isPortableVersion() )
   {
@@ -246,6 +251,17 @@ Config::Transliteration Sources::getTransliteration() const
   tr.romaji.enableKatakana = ui.enableKatakana->isChecked();
 
   return tr;
+}
+
+Config::Forvo Sources::getForvo() const
+{
+  Config::Forvo forvo;
+
+  forvo.enable = ui.forvoEnabled->isChecked();
+  forvo.apiKey = ui.forvoApiKey->text();
+  forvo.languageCodes = ui.forvoLanguageCodes->text();
+
+  return forvo;
 }
 
 ////////// MediaWikisModel

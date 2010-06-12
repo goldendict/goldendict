@@ -338,6 +338,47 @@ div.sdct_x
   clear:both;
 }
 
+/************* Forvo **************/
+
+.forvo_headword
+{
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* A table which contains a play icon and information about the sound */
+.forvo_play
+{
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.forvo_user
+{
+  text-decoration: none;
+  color: green;
+}
+
+.forvo_location
+{
+  color: grey;
+}
+
+.forvo_positive_votes
+{
+  font-weight: bold;
+  color: green;
+}
+
+.forvo_negative_votes
+{
+  font-weight: bold;
+  color: red;
+}
+
+
 /************* MediaWiki articles *****************
  The following consist of excerpts from different .css files edited
  with a .mwiki prepended to each record.
