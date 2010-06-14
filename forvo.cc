@@ -114,7 +114,7 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
   
   addQuery(  mgr, str );
 
-  // Don't do alts for now -- the api onlu allows 1000 requests a day a key
+  // Don't do alts for now -- the api only allows 1000 requests a day per key
 #if 0
   for( unsigned x = 0; x < alts.size(); ++x )
     addQuery( mgr, alts[ x ] );
