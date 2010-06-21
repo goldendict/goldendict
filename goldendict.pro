@@ -238,7 +238,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/el_GR.ts \
     locale/bg_BG.ts \
     locale/ar_SA.ts \
-    locale/lt_LT.ts
+    locale/lt_LT.ts \
+    locale/uk_UA.ts
 
 # This makes qmake generate translations
 win32:# Windows doesn't seem to have *-qt4 symlinks
