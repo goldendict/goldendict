@@ -1053,7 +1053,7 @@ void MainWindow::updateMatchResults( bool finished )
 
     // Visually mark the input line to mark if there's no results
 
-    bool setMark = results.empty();
+    bool setMark = results.empty() && !wordFinder.wasSearchUncertain();
 
     if ( ui.translateLine->property( "noResults" ).toBool() != setMark )
     {

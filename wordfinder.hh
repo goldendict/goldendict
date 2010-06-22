@@ -28,6 +28,7 @@ private:
 
   SearchResults searchResults;
   QString searchErrorString;
+  bool searchResultsUncertain;
   std::list< sptr< Dictionary::WordSearchRequest > > queuedRequests,
                                                      finishedRequests;
   bool searchInProgress;
@@ -103,6 +104,11 @@ public:
   /// string means it finished without any error.
   QString const & getErrorString()
   { return searchErrorString; }
+
+  /// Returns true if the search was inconclusive -- that is, there may be more
+  /// results than the ones returned.
+  bool wasSearchUncertain() const
+  { return searchResultsUncertain; }
 
   /// Cancels any pending search operation, if any.
   void cancel();

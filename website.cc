@@ -52,12 +52,12 @@ public:
     throw( std::exception );
 };
 
-sptr< WordSearchRequest > WebSiteDictionary::prefixMatch( wstring const & word,
+sptr< WordSearchRequest > WebSiteDictionary::prefixMatch( wstring const & /*word*/,
                                                           unsigned long ) throw( std::exception )
 {
   sptr< WordSearchRequestInstant > sr = new WordSearchRequestInstant;
 
-  sr->getMatches().push_back( WordMatch( word, 1 ) );
+  sr->setUncertain( true );
 
   return sr;
 }

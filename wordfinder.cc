@@ -95,6 +95,7 @@ void WordFinder::startSearch()
   finishedRequests.clear();
 
   searchErrorString.clear();
+  searchResultsUncertain = false;
 
   searchQueued = false;
   searchInProgress = true;
@@ -166,6 +167,9 @@ void WordFinder::requestFinished()
     {
       if ( searchInProgress && !(*i)->getErrorString().isEmpty() )
         searchErrorString = tr( "Failed to query some dictionaries." );
+
+      if ( (*i)->isUncertain() )
+        searchResultsUncertain = true;
 
       if ( (*i)->matchesCount() )
       {

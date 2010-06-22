@@ -131,6 +131,9 @@ class WordSearchRequest: public Request
 
 public:
 
+  WordSearchRequest(): uncertain( false )
+  {}
+
   /// Returns the number of matches found. The value can grow over time
   /// unless isFinished() is true.
   size_t matchesCount();
@@ -143,6 +146,12 @@ public:
   /// done, this can only be called after the request has finished.
   vector< WordMatch > & getAllMatches() throw( exRequestUnfinished );
 
+  /// Returns true if the match was uncertain -- that is, there may be more
+  /// results in the dictionary itself, the dictionary index isn't good enough
+  /// to tell that.
+  bool isUncertain() const
+  { return uncertain; }
+
 protected:
 
   // Subclasses should be filling up the 'matches' array, locking the mutex when
@@ -150,6 +159,7 @@ protected:
   Mutex dataMutex;
 
   vector< WordMatch > matches;
+  bool uncertain;
 };
 
 /// This request type corresponds to any kinds of data responses where a
@@ -202,6 +212,9 @@ public:
 
   vector< WordMatch > & getMatches()
   { return matches; }
+
+  void setUncertain( bool value )
+  { uncertain = value; }
 };
 
 /// A helper class for syncronous data read implementations.

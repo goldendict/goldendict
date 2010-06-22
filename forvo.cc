@@ -54,13 +54,12 @@ public:
 
   virtual QIcon getIcon() throw();
 
-  virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
+  virtual sptr< WordSearchRequest > prefixMatch( wstring const & /*word*/,
                                                  unsigned long /*maxResults*/ ) throw( std::exception )
   {
-    // Dummy
     sptr< WordSearchRequestInstant > sr = new WordSearchRequestInstant;
 
-    sr->getMatches().push_back( WordMatch( word, 1 ) );
+    sr->setUncertain( true );
 
     return sr;
   }
