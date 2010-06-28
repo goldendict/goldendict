@@ -22,11 +22,12 @@
 #include "hotkeywrapper.hh"
 #include "dictionarybar.hh"
 #include "history.hh"
+#include "hotkeywrapper.hh"
 
 using std::string;
 using std::vector;
 
-class MainWindow: public QMainWindow
+class MainWindow: public QMainWindow, public DataCommitter
 {
   Q_OBJECT
 
@@ -35,7 +36,12 @@ public:
   MainWindow( Config::Class & cfg );
   ~MainWindow();
 
+  virtual void commitData( QSessionManager & );
+
 private:
+
+  void commitData();
+  bool commitDataCompleted;
 
   QSystemTrayIcon * trayIcon;
 

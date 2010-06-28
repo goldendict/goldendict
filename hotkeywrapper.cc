@@ -15,6 +15,22 @@ QHotkeyApplication::QHotkeyApplication(int & argc, char ** argv) : QApplication(
 {
 }
 
+void QHotkeyApplication::addDataCommiter( DataCommitter & d )
+{
+  dataCommitters.append( &d );
+}
+
+void QHotkeyApplication::removeDataCommiter( DataCommitter & d )
+{
+  dataCommitters.removeAll( &d );
+}
+
+void QHotkeyApplication::commitData( QSessionManager & s )
+{
+  for( int x = 0; x < dataCommitters.size(); ++x )
+    dataCommitters[ x ]->commitData( s );
+}
+
 void QHotkeyApplication::registerWrapper(HotkeyWrapper *wrapper)
 {
   if (wrapper && !hotkeyWrappers.contains(wrapper))

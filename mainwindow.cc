@@ -22,6 +22,7 @@ using std::map;
 using std::pair;
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
+  commitDataCompleted( false ),
   trayIcon( 0 ),
   groupLabel( &searchPaneTitleBar ),
   groupList( &searchPaneTitleBar ),
@@ -369,16 +370,7 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
 
 MainWindow::~MainWindow()
 {
-  // Save MainWindow state and geometry
-  cfg.mainWindowState = saveState( 1 );
-  cfg.mainWindowGeometry = saveGeometry();
-
-  // Close the popup, so it would save its geometry to config
-
-  scanPopup.reset();
-
-  // Save any changes in last chosen groups etc
-  Config::save( cfg );
+  commitData();
 
   // Close all tabs -- they should be destroyed before network managers
   // do.
@@ -389,6 +381,30 @@ MainWindow::~MainWindow()
     ui.tabWidget->removeTab( 0 );
 
     delete w;
+  }
+}
+
+void MainWindow::commitData( QSessionManager & )
+{
+  commitData();
+}
+
+void MainWindow::commitData()
+{
+  if ( !commitDataCompleted )
+  {
+    commitDataCompleted = true;
+
+    // Save MainWindow state and geometry
+    cfg.mainWindowState = saveState( 1 );
+    cfg.mainWindowGeometry = saveGeometry();
+
+    // Close the popup, so it would save its geometry to config
+
+    scanPopup.reset();
+
+    // Save any changes in last chosen groups etc
+    Config::save( cfg );
   }
 }
 

@@ -127,18 +127,29 @@ signals:
 
 //////////////////////////////////////////////////////////////////////////
 
+class DataCommitter
+{
+public:
+
+  virtual void commitData( QSessionManager & )=0;
+  virtual ~DataCommitter()
+  {}
+};
+
 class QHotkeyApplication : public QApplication
 {
   friend class HotkeyWrapper;
 
+  QList< DataCommitter * > dataCommitters;
+
 public:
   QHotkeyApplication(int & argc, char ** argv);
 
-  /// This allows the application to be closed right away by the session
-  /// manager. The default implementation may refuse to be closed if some
-  /// application windows refuse to be closed.
-  virtual void commitData( QSessionManager & )
-  {}
+  void addDataCommiter( DataCommitter & );
+  void removeDataCommiter( DataCommitter & );
+
+  /// This calls all data committers.
+  virtual void commitData( QSessionManager & );
 
 protected:
   void registerWrapper(HotkeyWrapper *wrapper);

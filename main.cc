@@ -165,7 +165,11 @@ int main( int argc, char ** argv )
 
   MainWindow m( cfg );
 
+  app.addDataCommiter( m );
+
   int r = app.exec();
+
+  app.removeDataCommiter( m );
 
   // remove pid file
   pid_file.remove();
