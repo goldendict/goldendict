@@ -13,6 +13,7 @@
 #include "country.hh"
 #include "language.hh"
 #include "langcoder.hh"
+#include "utf8.hh"
 
 namespace Forvo {
 
@@ -71,9 +72,20 @@ public:
 
 class ForvoArticleRequest: public ForvoDataRequestSlots
 {
-  typedef std::list< std::pair< sptr< QNetworkReply >, bool > > NetReplies;
+  struct NetReply
+  {
+    sptr< QNetworkReply > reply;
+    string word;
+    bool finished;
+
+    NetReply( sptr< QNetworkReply > const & reply_, string const & word_ ):
+      reply( reply_ ), word( word_ ), finished( false )
+    {}
+  };
+
+  typedef std::list< NetReply > NetReplies;
   NetReplies netReplies;
-  QString word, apiKey, languageCode;
+  QString apiKey, languageCode;
   string dictionaryId;
 
 public:
@@ -99,13 +111,13 @@ void ForvoArticleRequest::cancel()
 }
 
 ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
-                                          vector< wstring > const & /*alts*/,
+                                          vector< wstring > const & alts,
                                           QString const & apiKey_,
                                           QString const & languageCode_,
                                           string const & dictionaryId_,
                                           QNetworkAccessManager & mgr ):
-  word( gd::toQString( str ) ), apiKey( apiKey_ ),
-  languageCode( languageCode_ ), dictionaryId( dictionaryId_ )
+  apiKey( apiKey_ ), languageCode( languageCode_ ),
+  dictionaryId( dictionaryId_ )
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
            this, SLOT( requestFinished( QNetworkReply * ) ),
@@ -113,11 +125,8 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
   
   addQuery(  mgr, str );
 
-  // Don't do alts for now -- the api only allows 1000 requests a day per key
-#if 0
   for( unsigned x = 0; x < alts.size(); ++x )
     addQuery( mgr, alts[ x ] );
-#endif
 }
 
 void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
@@ -137,11 +146,11 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
       QString( "http://apifree.forvo.com/key/%1/format/xml/action/word-pronunciations/word/%2/language/%3" )
       .arg( apiKey ).arg( QString::fromAscii( QUrl::toPercentEncoding( gd::toQString( str ) ) ) ).arg( languageCode ).toUtf8() );
 
-  printf( "req: %s\n", reqUrl.toEncoded().data() );
+//  printf( "req: %s\n", reqUrl.toEncoded().data() );
 
   sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
-  netReplies.push_back( std::make_pair( netReply, false ) );
+  netReplies.push_back( NetReply( netReply, Utf8::encode( str ) ) );
 }
 
 void ForvoArticleRequest::requestFinished( QNetworkReply * r )
@@ -157,9 +166,9 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
   
   for( NetReplies::iterator i = netReplies.begin(); i != netReplies.end(); ++i )
   {
-    if ( i->first.get() == r )
+    if ( i->reply.get() == r )
     {
-      i->second = true; // Mark as finished
+      i->finished = true; // Mark as finished
       found = true;
       break;
     }
@@ -173,9 +182,9 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
   
   bool updated = false;
 
-  for( ; netReplies.size() && netReplies.front().second; netReplies.pop_front() )
+  for( ; netReplies.size() && netReplies.front().finished; netReplies.pop_front() )
   {
-    sptr< QNetworkReply > netReply = netReplies.front().first;
+    sptr< QNetworkReply > netReply = netReplies.front().reply;
     
     if ( netReply->error() == QNetworkReply::NoError )
     {
@@ -191,7 +200,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
       }
       else
       {
-        printf( "%s\n", dd.toByteArray().data() );
+//        printf( "%s\n", dd.toByteArray().data() );
 
         QDomNode items = dd.namedItem( "items" );
   
@@ -204,7 +213,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
             string articleBody;
 
             articleBody += "<div class='forvo_headword'>";
-            articleBody += Html::escape( word.toUtf8().data() );
+            articleBody += Html::escape( netReplies.front().word );
             articleBody += "</div>";
 
             articleBody += "<table class=\"forvo_play\">";
