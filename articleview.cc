@@ -386,7 +386,8 @@ bool ArticleView::isFramedArticle( QString const & ca )
 bool ArticleView::isExternalLink( QUrl const & url )
 {
   return url.scheme() == "http" || url.scheme() == "https" ||
-         url.scheme() == "ftp" || url.scheme() == "mailto";
+         url.scheme() == "ftp" || url.scheme() == "mailto" ||
+         url.scheme() == "file";
 }
 
 void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
@@ -720,10 +721,9 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       resourceDownloadFinished(); // Check any requests finished already
   }
   else
-  if ( url.scheme() == "http" || url.scheme() == "https" ||
-      url.scheme() == "ftp" || url.scheme() == "mailto" )
+  if ( isExternalLink( url ) )
   {
-    // Use the system handler for the conventional internet links
+    // Use the system handler for the conventional external links
     QDesktopServices::openUrl( url );
   }
 }

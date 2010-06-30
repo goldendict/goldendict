@@ -17,6 +17,8 @@
 
 #include "termination.hh"
 
+#include <QWebSecurityOrigin>
+
 int main( int argc, char ** argv )
 {
   // The following clause fixes a race in the MinGW runtime where throwing
@@ -162,6 +164,12 @@ int main( int argc, char ** argv )
   // Prevent app from quitting spontaneously when it works with scan popup
   // and with the main window closed.
   app.setQuitOnLastWindowClosed( false );
+
+#if QT_VERSION >= 0x040600
+  // Add the dictionary scheme we use as local, so that the file:// links would
+  // work in the articles. The function was introduced in Qt 4.6.
+  QWebSecurityOrigin::addLocalScheme( "gdlookup" );
+#endif
 
   MainWindow m( cfg );
 
