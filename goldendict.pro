@@ -5,6 +5,18 @@ TEMPLATE = app
 TARGET = goldendict
 VERSION = 0.9.0+git
 
+# Generate version file. We do this here and in a build rule described later.
+# The build rule is required since qmake isn't run each time the project is
+# rebuilt; and doing it here is required too since any other way the RCC
+# compiler would complain if version.txt wouldn't exist (fresh checkouts).
+
+system(git describe --tags --always --dirty > version.txt): hasGit=1
+
+isEmpty( hasGit ) {
+  message(Failed to precisely describe the version via Git -- using the default version string)
+  system(echo $$VERSION > version.txt)
+}
+
 # DEPENDPATH += . generators
 INCLUDEPATH += .
 QT += webkit
@@ -240,6 +252,13 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/ar_SA.ts \
     locale/lt_LT.ts \
     locale/uk_UA.ts
+
+# Build version file
+QMAKE_EXTRA_TARGETS += revtarget
+PRE_TARGETDEPS      += version.txt
+revtarget.target     = version.txt
+revtarget.commands   = git describe --tags --always --dirty > $$revtarget.target
+revtarget.depends = $$SOURCES $$HEADERS $$FORMS
 
 # This makes qmake generate translations
 win32:# Windows doesn't seem to have *-qt4 symlinks

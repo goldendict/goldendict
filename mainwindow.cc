@@ -1614,7 +1614,16 @@ void MainWindow::showAbout()
 
   ui.setupUi( &about );
 
-  ui.version->setText( PROGRAM_VERSION );
+  QFile versionFile( ":/version.txt" );
+
+  QString version;
+
+  if ( !versionFile.open( QFile::ReadOnly ) )
+    version = tr( "[Unknown]" );
+  else
+    version = QString::fromAscii( versionFile.readAll() ).trimmed();
+
+  ui.version->setText( version );
 
   about.show();
   about.exec();
