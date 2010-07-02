@@ -165,6 +165,7 @@ struct Preferences
   bool disallowContentFromOtherSites;
 
   qreal zoomFactor;
+  int wordsZoomLevel;
 
   Preferences();
 };

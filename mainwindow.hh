@@ -54,11 +54,15 @@ private:
   QLabel groupLabel;
   GroupComboBox groupList;
 
+  /// Fonts saved before words zooming is in effect, so it could be reset back.
+  QFont wordListDefaultFont, translateLineDefaultFont;
+
   QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           switchToNextTabAction, switchToPrevTabAction, showDictBarNamesAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
   QAction * zoomIn, * zoomOut, * zoomBase;
+  QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
   QMenu trayIconMenu;
   QToolButton addTab;
   Config::Class & cfg;
@@ -179,6 +183,12 @@ private slots:
   void zoomin();
   void zoomout();
   void unzoom();
+
+  void doWordsZoomIn();
+  void doWordsZoomOut();
+  void doWordsZoomBase();
+
+  void applyWordsZoomLevel();
 
   /// If editDictionaryGroup is specified, the dialog positions on that group
   /// initially.

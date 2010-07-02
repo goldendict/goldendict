@@ -105,7 +105,8 @@ Preferences::Preferences():
 #endif
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
-  zoomFactor( 1 )
+  zoomFactor( 1 ),
+  wordsZoomLevel( 0 )
 {
 }
 
@@ -521,6 +522,9 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "zoomFactor" ).isNull() )
       c.preferences.zoomFactor = preferences.namedItem( "zoomFactor" ).toElement().text().toDouble();
 
+    if ( !preferences.namedItem( "wordsZoomLevel" ).isNull() )
+      c.preferences.wordsZoomLevel = preferences.namedItem( "wordsZoomLevel" ).toElement().text().toInt();
+
     applyBoolOption( c.preferences.enableMainWindowHotkey, preferences.namedItem( "enableMainWindowHotkey" ) );
     if ( !preferences.namedItem( "mainWindowHotkey" ).isNull() )
       c.preferences.mainWindowHotkey = QKeySequence::fromString( preferences.namedItem( "mainWindowHotkey" ).toElement().text() );
@@ -924,6 +928,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "zoomFactor" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.zoomFactor ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "wordsZoomLevel" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.wordsZoomLevel ) ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "enableMainWindowHotkey" );

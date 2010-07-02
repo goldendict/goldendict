@@ -49,6 +49,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.setupUi( this );
 
+  wordListDefaultFont = ui.wordList->font();
+  translateLineDefaultFont = ui.translateLine->font();
+
   // Make the search pane's titlebar
 
   groupLabel.setText( tr( "Look up in:" ) );
@@ -94,8 +97,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // zooming
   navToolbar->addSeparator();
   zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
+  zoomIn->setShortcut( QKeySequence::ZoomIn );
   zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Zoom Out" ) );
+  zoomOut->setShortcut( QKeySequence::ZoomOut );
   zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
+  zoomBase->setShortcut( QKeySequence( "Ctrl+0" ) );
 
   connect( zoomIn, SIGNAL( triggered() ),
            this, SLOT( zoomin() ) );
@@ -103,6 +109,23 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( zoomout() ) );
   connect( zoomBase, SIGNAL( triggered() ),
            this, SLOT( unzoom() ) );
+
+  ui.menuZoom->addAction( zoomIn );
+  ui.menuZoom->addAction( zoomOut );
+  ui.menuZoom->addAction( zoomBase );
+
+  ui.menuZoom->addSeparator();
+
+  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Words Zoom In" ) );
+  wordsZoomIn->setShortcut( QKeySequence( "Alt++" ) );
+  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Words Zoom Out" ) );
+  wordsZoomOut->setShortcut( QKeySequence( "Alt+-" ) );
+  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Words Normal Size" ) );
+  wordsZoomBase->setShortcut( QKeySequence( "Alt+0" ) );
+
+  connect( wordsZoomIn, SIGNAL(triggered()), this, SLOT(doWordsZoomIn()) );
+  connect( wordsZoomOut, SIGNAL(triggered()), this, SLOT(doWordsZoomOut()) );
+  connect( wordsZoomBase, SIGNAL(triggered()), this, SLOT(doWordsZoomBase()) );
 
   // tray icon
   connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( activated() ),
@@ -329,6 +352,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // Update zoomers
   applyZoomFactor();
+  applyWordsZoomLevel();
 
   // Update autostart info
   setAutostart(cfg.preferences.autoStart);
@@ -1810,4 +1834,64 @@ void MainWindow::applyZoomFactor()
 
   if ( scanPopup.get() )
     scanPopup->applyZoomFactor();
+}
+
+void MainWindow::doWordsZoomIn()
+{
+  ++cfg.preferences.wordsZoomLevel;
+
+  applyWordsZoomLevel();
+}
+
+void MainWindow::doWordsZoomOut()
+{
+  --cfg.preferences.wordsZoomLevel;
+
+  applyWordsZoomLevel();
+}
+
+void MainWindow::doWordsZoomBase()
+{
+  cfg.preferences.wordsZoomLevel = 0;
+
+  applyWordsZoomLevel();
+}
+
+void MainWindow::applyWordsZoomLevel()
+{
+  QFont font( wordListDefaultFont );
+
+  int ps = font.pointSize();
+
+  if ( cfg.preferences.wordsZoomLevel != 0 )
+  {
+    ps += cfg.preferences.wordsZoomLevel;
+
+    if ( ps < 1 )
+      ps = 1;
+
+    font.setPointSize( ps );
+  }
+
+  if ( ui.wordList->font().pointSize() != ps )
+    ui.wordList->setFont( font );
+
+  font = translateLineDefaultFont;
+
+  ps = font.pointSize();
+
+  if ( cfg.preferences.wordsZoomLevel != 0 )
+  {
+    ps += cfg.preferences.wordsZoomLevel;
+
+    if ( ps < 1 )
+      ps = 1;
+
+    font.setPointSize( ps );
+  }
+
+  if ( ui.translateLine->font().pointSize() != ps )
+    ui.translateLine->setFont( font );
+
+  wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
 }
