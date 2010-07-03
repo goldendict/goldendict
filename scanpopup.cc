@@ -136,6 +136,11 @@ ScanPopup::ScanPopup( QWidget * parent,
   altModePollingTimer.setInterval( 50 );
   connect( &altModePollingTimer, SIGNAL( timeout() ),
            this, SLOT( altModePoll() ) );
+
+  mouseGrabPollTimer.setSingleShot( false );
+  mouseGrabPollTimer.setInterval( 10 );
+  connect( &mouseGrabPollTimer, SIGNAL( timeout() ),
+           this, SLOT(mouseGrabPoll())  );
 }
 
 ScanPopup::~ScanPopup()
@@ -407,50 +412,53 @@ bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
 
     if ( event->type() == QEvent::MouseMove )
     {
+//    printf( "Object: %s\n", watched->objectName().toUtf8().data() );
       QMouseEvent * mouseEvent = ( QMouseEvent * ) event;
-
-//      printf( "Object: %s\n", watched->objectName().toUtf8().data() );
-
-      if ( geometry().contains( mouseEvent->globalPos() ) )
-      {
-//        printf( "got inside\n" );
-
-        hideTimer.stop();
-        mouseEnteredOnce = true;
-        uninterceptMouse();
-      }
-      else
-      {
-//        printf( "outside\n" );
-        // We're in grab mode and outside the window - calculate the
-        // distance from it. We might want to hide it.
-
-        // When the mouse has entered once, we don't allow it stayng outside,
-        // but we give a grace period for it to return.
-        int proximity = mouseEnteredOnce ? 0 : 60;
-
-        // Note: watched == this ensures no other child objects popping out are
-        // receiving this event, meaning there's basically nothing under the
-        // cursor.
-        if ( watched == this &&
-             !frameGeometry().adjusted( -proximity, -proximity, proximity, proximity ).
-             contains( mouseEvent->globalPos() ) )
-        {
-          // We've way too far from the window -- hide the popup
-
-          // If the mouse never entered the popup, hide the window instantly --
-          // the user just moved the cursor further away from the window.
-
-          if ( !mouseEnteredOnce )
-            hideWindow();
-          else
-            hideTimer.start();
-        }
-      }
+      reactOnMouseMove( mouseEvent->globalPos() );
     }
   }
 
   return QMainWindow::eventFilter( watched, event );
+}
+
+void ScanPopup::reactOnMouseMove( QPoint const & p )
+{
+  if ( geometry().contains( p ) )
+  {
+//        printf( "got inside\n" );
+
+    hideTimer.stop();
+    mouseEnteredOnce = true;
+    uninterceptMouse();
+  }
+  else
+  {
+//        printf( "outside\n" );
+    // We're in grab mode and outside the window - calculate the
+    // distance from it. We might want to hide it.
+
+    // When the mouse has entered once, we don't allow it stayng outside,
+    // but we give a grace period for it to return.
+    int proximity = mouseEnteredOnce ? 0 : 60;
+
+    // Note: watched == this ensures no other child objects popping out are
+    // receiving this event, meaning there's basically nothing under the
+    // cursor.
+    if ( /*watched == this &&*/
+         !frameGeometry().adjusted( -proximity, -proximity, proximity, proximity ).
+         contains( p ) )
+    {
+      // We've way too far from the window -- hide the popup
+
+      // If the mouse never entered the popup, hide the window instantly --
+      // the user just moved the cursor further away from the window.
+
+      if ( !mouseEnteredOnce )
+        hideWindow();
+      else
+        hideTimer.start();
+    }
+  }
 }
 
 void ScanPopup::mousePressEvent( QMouseEvent * ev )
@@ -687,11 +695,23 @@ void ScanPopup::interceptMouse()
 {
   if ( !mouseIntercepted )
   {
-    grabMouse();
+    // We used to grab the mouse -- but this doesn't always work reliably
+    // (e.g. doesn't work at all in Windows 7 for some reason). Therefore
+    // we use a polling timer now.
+
+//    grabMouse();
+    mouseGrabPollTimer.start();
+
     qApp->installEventFilter( this );
 
     mouseIntercepted = true;
   }
+}
+
+void ScanPopup::mouseGrabPoll()
+{
+  if ( mouseIntercepted )
+    reactOnMouseMove( QCursor::pos() );
 }
 
 void ScanPopup::uninterceptMouse()
@@ -699,7 +719,8 @@ void ScanPopup::uninterceptMouse()
   if ( mouseIntercepted )
   {
     qApp->removeEventFilter( this );
-    releaseMouse();
+    mouseGrabPollTimer.stop();
+//    releaseMouse();
 
     mouseIntercepted = false;
   }

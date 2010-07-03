@@ -95,6 +95,8 @@ private:
                     // this timer expires, the window gets hidden.
   QTimer altModeExpirationTimer, altModePollingTimer; // Timers for alt mode
 
+  QTimer mouseGrabPollTimer;
+
   void handleInputWord( QString const & );
   void engagePopup( bool giveFocus = false );
   void initiateTranslation();
@@ -102,6 +104,11 @@ private:
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
 
   virtual bool eventFilter( QObject * watched, QEvent * event );
+
+  /// Called from event filter or from mouseGrabPoll to handle mouse event
+  /// while it is being intercepted.
+  void reactOnMouseMove( QPoint const & p );
+
   virtual void mousePressEvent( QMouseEvent * );
   virtual void mouseMoveEvent( QMouseEvent * );
   virtual void mouseReleaseEvent( QMouseEvent * );
@@ -126,6 +133,12 @@ private slots:
   void hideTimerExpired();
   void altModeExpired();
   void altModePoll();
+
+  /// Called repeatedly once the popup is initially engaged and we monitor the
+  /// mouse as it may move away from the window. This simulates mouse grab, in
+  /// essense, but seems more reliable. Once the mouse enters the window, the
+  /// polling stops.
+  void mouseGrabPoll();
 
   void pageLoaded( ArticleView * );
 
