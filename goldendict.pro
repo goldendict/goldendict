@@ -254,11 +254,13 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/uk_UA.ts
 
 # Build version file
-QMAKE_EXTRA_TARGETS += revtarget
-PRE_TARGETDEPS      += version.txt
-revtarget.target     = version.txt
-revtarget.commands   = git describe --tags --always --dirty > $$revtarget.target
-revtarget.depends = $$SOURCES $$HEADERS $$FORMS
+!isEmpty( hasGit ) {
+  QMAKE_EXTRA_TARGETS += revtarget
+  PRE_TARGETDEPS      += version.txt
+  revtarget.target     = version.txt
+  revtarget.commands   = git describe --tags --always --dirty > $$revtarget.target
+  revtarget.depends = $$SOURCES $$HEADERS $$FORMS
+}
 
 # This makes qmake generate translations
 win32:# Windows doesn't seem to have *-qt4 symlinks
