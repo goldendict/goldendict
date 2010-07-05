@@ -318,10 +318,8 @@ void ArticleView::handleUrlChanged( QUrl const & url )
       {
         // Found it
 
-        if ( groups[ x ].icon.size() )
-          icon = QIcon( ":/flags/" + groups[ x ].icon );
-        else
-          break;
+        icon = groups[ x ].makeIcon();
+        break;
       }
   }
 
