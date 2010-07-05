@@ -36,7 +36,7 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
   if ( !usesIconData )
     ui.groupIcon->addItem( tr( "From file..." ), "" );
   else
-    ui.groupIcon->addItem( Instances::iconFromData( group.iconData ), group.icon );
+    ui.groupIcon->addItem( Instances::iconFromData( group.iconData ), group.icon, group.icon );
 
   for( int x = 0; x < icons.size(); ++x )
   {
@@ -63,11 +63,21 @@ void DictGroupWidget::groupIconActivated( int index )
 {
   if ( index == 1 )
   {
+    QList< QByteArray > supImageFormats = QImageReader::supportedImageFormats();
+
+    QString formatList( " (" );
+
+    for( int x = 0; x < supImageFormats.size(); ++x )
+      formatList += "*." + QString::fromAscii( supImageFormats[ x ] ) + " ";
+
+    formatList.chop( 1 );
+    formatList.append( ")" );
+
     QString chosenFile =
         QFileDialog::getOpenFileName( this, tr( "Choose a file to use as group icon" ),
-                                      tr( "Images" ) +
-                                      " (*.png *.xpm *.jpg *.jpeg *.bmp *.gif);;;" +
-                                      tr( "All files" ) + " (*)" );
+                                      QString(),
+                                      tr( "Images" ) + formatList + ";;" +
+                                      tr( "All files" ) + " (*.*)" );
 
     if ( !chosenFile.isEmpty() )
     {
