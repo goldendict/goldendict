@@ -2,6 +2,8 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "groupcombobox.hh"
+#include <QEvent>
+#include <QShortcutEvent>
 
 GroupComboBox::GroupComboBox( QWidget * parent ): QComboBox( parent ),
   popupAction( this )
@@ -25,6 +27,11 @@ void GroupComboBox::fill( Instances::Groups const & groups )
 
   clear();
 
+  for( QMap< int, int >::iterator i = shortcuts.begin(); i != shortcuts.end(); ++i )
+    releaseShortcut( i.key() );
+
+  shortcuts.clear();
+
   for( unsigned x  = 0; x < groups.size(); ++x )
   {
     addItem( groups[ x ].makeIcon(),
@@ -32,8 +39,39 @@ void GroupComboBox::fill( Instances::Groups const & groups )
 
     if ( prevId == groups[ x ].id )
       setCurrentIndex( x );
+
+    // Create a shortcut
+
+    if ( !groups[ x ].shortcut.isEmpty() )
+    {
+      int id = grabShortcut( groups[ x ].shortcut );
+      setShortcutEnabled( id );
+
+      shortcuts.insert( id, x );
+    }
   }
 }
+
+bool GroupComboBox::event( QEvent * event )
+{
+  if ( event->type() == QEvent::Shortcut )
+  {
+    QShortcutEvent * ev = ( QShortcutEvent * ) event;
+
+    QMap< int, int >::const_iterator i = shortcuts.find( ev->shortcutId() );
+
+    if ( i != shortcuts.end() )
+    {
+      ev->accept();
+      setCurrentIndex( i.value() );
+      return true;
+    }
+  }
+
+  return QComboBox::event( event );
+
+}
+
 
 void GroupComboBox::setCurrentGroup( unsigned id )
 {

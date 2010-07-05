@@ -73,7 +73,9 @@ HotKey::HotKey( QKeySequence const & seq ):
 
 QKeySequence HotKey::toKeySequence() const
 {
-  return QKeySequence( key1 | modifiers, key2 | modifiers );
+  int v2 = key2 ? ( key2 | modifiers ): 0;
+
+  return QKeySequence( key1 | modifiers, v2 );
 }
 
 Preferences::Preferences():
@@ -180,6 +182,9 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
 
   g.name = grp.attribute( "name" );
   g.icon = grp.attribute( "icon" );
+
+  if ( !grp.attribute( "shortcut" ).isEmpty() )
+    g.shortcut = QKeySequence::fromString( grp.attribute( "shortcut" ) );
 
   QDomNodeList dicts = grp.elementsByTagName( "dictionary" );
 
@@ -630,6 +635,15 @@ void saveGroup( Group const & data, QDomElement & group )
     icon.setValue( data.icon );
 
     group.setAttributeNode( icon );
+  }
+
+  if ( !data.shortcut.isEmpty() )
+  {
+    QDomAttr shortcut = dd.createAttribute( "shortcut" );
+
+    shortcut.setValue(  data.shortcut.toString() );
+
+    group.setAttributeNode( shortcut );
   }
 
   for( vector< DictionaryRef >::const_iterator j = data.dictionaries.begin(); j != data.dictionaries.end(); ++j )

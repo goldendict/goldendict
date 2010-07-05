@@ -42,6 +42,8 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
     if ( icons[ x ] == group.icon )
       ui.groupIcon->setCurrentIndex( x + 1 );
   }
+
+  ui.shortcut->setHotKey( Config::HotKey( group.shortcut ) );
 }
 
 Config::Group DictGroupWidget::makeGroup() const
@@ -53,6 +55,8 @@ Config::Group DictGroupWidget::makeGroup() const
   g.dictionaries = ui.dictionaries->getCurrentDictionaries();
 
   g.icon = ui.groupIcon->itemData( ui.groupIcon->currentIndex() ).toString();
+
+  g.shortcut = ui.shortcut->getHotKey().toKeySequence();
 
   return g.makeConfigGroup();
 }

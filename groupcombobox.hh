@@ -24,8 +24,15 @@ public:
   /// does nothing.
   void setCurrentGroup( unsigned id );
 
+
   /// Returns current group.
   unsigned getCurrentGroup() const;
+
+protected:
+
+  /// We handle shortcut events here.
+  virtual bool event( QEvent * event );
+
 private slots:
 
   void popupGroups();
@@ -33,6 +40,7 @@ private slots:
 private:
 
   QAction popupAction;
+  QMap< int, int > shortcuts;
 };
 
 #endif

@@ -22,6 +22,7 @@ struct Group
 {
   unsigned id;
   QString name, icon;
+  QKeySequence shortcut;
   vector< sptr< Dictionary::Class > > dictionaries;
 
   /// Instantiates the given group from its configuration. If some dictionary

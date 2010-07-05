@@ -54,6 +54,16 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Shortcut:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="HotKeyEdit" name="shortcut"/>
+     </item>
     </layout>
    </item>
   </layout>
@@ -63,6 +73,11 @@
    <class>DictListWidget</class>
    <extends>QListWidget</extends>
    <header>groups_widgets.hh</header>
+  </customwidget>
+  <customwidget>
+   <class>HotKeyEdit</class>
+   <extends>QLineEdit</extends>
+   <header>hotkeyedit.hh</header>
   </customwidget>
  </customwidgets>
  <resources/>

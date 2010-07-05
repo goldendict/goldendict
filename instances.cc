@@ -13,7 +13,8 @@ Group::Group( Config::Group const & cfgGroup,
               vector< sptr< Dictionary::Class > > const & allDictionaries ):
   id( cfgGroup.id ),
   name( cfgGroup.name ),
-  icon( cfgGroup.icon )
+  icon( cfgGroup.icon ),
+  shortcut( cfgGroup.shortcut )
 {
   for( unsigned x = 0; x < cfgGroup.dictionaries.size(); ++x )
   {
@@ -56,6 +57,7 @@ Config::Group Group::makeConfigGroup()
   result.id = id;
   result.name = name;
   result.icon = icon;
+  result.shortcut = shortcut;
 
   for( unsigned x = 0; x < dictionaries.size(); ++x )
     result.dictionaries.push_back(
