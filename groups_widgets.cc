@@ -29,7 +29,14 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
 
   QStringList icons = QDir( ":/flags/" ).entryList( QDir::Files, QDir::NoSort );
 
-  ui.groupIcon->addItem( "None", "" );
+  ui.groupIcon->addItem( tr( "None" ), "" );
+
+  bool usesIconData = !group.iconData.isEmpty();
+
+  if ( !usesIconData )
+    ui.groupIcon->addItem( tr( "From file..." ), "" );
+  else
+    ui.groupIcon->addItem( Instances::iconFromData( group.iconData ), group.icon );
 
   for( int x = 0; x < icons.size(); ++x )
   {
@@ -39,11 +46,45 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
 
     ui.groupIcon->addItem( QIcon( ":/flags/" + icons[ x ] ), n, icons[ x ] );
 
-    if ( icons[ x ] == group.icon )
-      ui.groupIcon->setCurrentIndex( x + 1 );
+    if ( !usesIconData && icons[ x ] == group.icon )
+      ui.groupIcon->setCurrentIndex( x + 2 );
   }
 
+  if ( usesIconData )
+    ui.groupIcon->setCurrentIndex( 1 );
+
   ui.shortcut->setHotKey( Config::HotKey( group.shortcut ) );
+
+  connect( ui.groupIcon, SIGNAL(activated(int)),this,SLOT(groupIconActivated(int)),
+           Qt::QueuedConnection );
+}
+
+void DictGroupWidget::groupIconActivated( int index )
+{
+  if ( index == 1 )
+  {
+    QString chosenFile =
+        QFileDialog::getOpenFileName( this, tr( "Choose a file to use as group icon" ),
+                                      tr( "Images" ) +
+                                      " (*.png *.xpm *.jpg *.jpeg *.bmp *.gif);;;" +
+                                      tr( "All files" ) + " (*)" );
+
+    if ( !chosenFile.isEmpty() )
+    {
+      QIcon icon( chosenFile );
+
+      if ( icon.isNull() )
+        QMessageBox::critical( this, tr( "Error" ), tr( "Can't read the specified image file." ) );
+      else
+      {
+        ui.groupIcon->setItemIcon( 1, icon );
+
+        QString baseName = QFileInfo( chosenFile ).completeBaseName();
+        ui.groupIcon->setItemText( 1, baseName );
+        ui.groupIcon->setItemData( 1, baseName );
+      }
+    }
+  }
 }
 
 Config::Group DictGroupWidget::makeGroup() const
@@ -54,7 +95,12 @@ Config::Group DictGroupWidget::makeGroup() const
 
   g.dictionaries = ui.dictionaries->getCurrentDictionaries();
 
-  g.icon = ui.groupIcon->itemData( ui.groupIcon->currentIndex() ).toString();
+  int currentIndex = ui.groupIcon->currentIndex();
+
+  if ( currentIndex == 1 ) // File
+    g.iconData = ui.groupIcon->itemIcon( currentIndex );
+
+  g.icon = ui.groupIcon->itemData( currentIndex ).toString();
 
   g.shortcut = ui.shortcut->getHotKey().toKeySequence();
 

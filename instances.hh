@@ -22,6 +22,7 @@ struct Group
 {
   unsigned id;
   QString name, icon;
+  QIcon iconData;
   QKeySequence shortcut;
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -36,7 +37,7 @@ struct Group
   /// Makes the configuration group from the current contents.
   Config::Group makeConfigGroup();
 
-  /// Makes an icon object for this group, based on the icon's name.
+  /// Makes an icon object for this group, based on the icon's name or iconData.
   QIcon makeIcon() const;
 
   // Some constants
@@ -82,6 +83,9 @@ void updateNames( Config::Groups &,
 void updateNames( Config::Class &,
                   vector< sptr< Dictionary::Class > > const & allDictionaries );
 
+/// Creates icon from icon data. Used by Group, but also by others who work
+/// with icon data directly.
+QIcon iconFromData( QByteArray const & );
 
 }
 

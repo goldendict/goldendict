@@ -74,6 +74,7 @@ struct Group
 {
   unsigned id;
   QString name, icon;
+  QByteArray iconData;
   QKeySequence shortcut;
   vector< DictionaryRef > dictionaries;
 
@@ -81,7 +82,8 @@ struct Group
 
   bool operator == ( Group const & other ) const
   { return id == other.id && name == other.name && icon == other.icon &&
-           dictionaries == other.dictionaries && shortcut == other.shortcut; }
+           dictionaries == other.dictionaries && shortcut == other.shortcut &&
+           iconData == iconData; }
 
   bool operator != ( Group const & other ) const
   { return ! operator == ( other ); }

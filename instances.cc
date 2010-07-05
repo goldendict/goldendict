@@ -3,6 +3,7 @@
 
 #include "instances.hh"
 #include <set>
+#include <QBuffer>
 
 namespace Instances {
 
@@ -16,6 +17,9 @@ Group::Group( Config::Group const & cfgGroup,
   icon( cfgGroup.icon ),
   shortcut( cfgGroup.shortcut )
 {
+  if ( !cfgGroup.iconData.isEmpty() )
+    iconData = iconFromData( cfgGroup.iconData );
+
   for( unsigned x = 0; x < cfgGroup.dictionaries.size(); ++x )
   {
     std::string id = cfgGroup.dictionaries[ x ].id.toStdString();
@@ -59,6 +63,13 @@ Config::Group Group::makeConfigGroup()
   result.icon = icon;
   result.shortcut = shortcut;
 
+  if ( !iconData.isNull() )
+  {
+    QDataStream stream( &result.iconData, QIODevice::WriteOnly );
+
+    stream << iconData;
+  }
+
   for( unsigned x = 0; x < dictionaries.size(); ++x )
     result.dictionaries.push_back(
       Config::DictionaryRef( dictionaries[ x ]->getId().c_str(),
@@ -69,12 +80,14 @@ Config::Group Group::makeConfigGroup()
 
 QIcon Group::makeIcon() const
 {
+  if ( !iconData.isNull() )
+    return iconData;
+
   QIcon i = icon.size() ?
                  QIcon( ":/flags/" + icon ) : QIcon();
 
   return i;
 }
-
 
 Group * Groups::findGroup( unsigned id )
 {
@@ -143,6 +156,17 @@ void updateNames( Config::Class & cfg,
   updateNames( cfg.dictionaryOrder, allDictionaries );
   updateNames( cfg.inactiveDictionaries, allDictionaries );
   updateNames( cfg.groups, allDictionaries );
+}
+
+QIcon iconFromData( QByteArray const & iconData )
+{
+  QDataStream stream( iconData );
+
+  QIcon result;
+
+  stream >> result;
+
+  return result;
 }
 
 }

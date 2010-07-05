@@ -111,6 +111,10 @@ public:
   QItemSelectionModel * getSelectionModel() const
   { return ui.dictionaries->selectionModel(); }
 
+private slots:
+
+  void groupIconActivated( int );
+
 private:
   Ui::DictGroupWidget ui;
   unsigned groupId;
