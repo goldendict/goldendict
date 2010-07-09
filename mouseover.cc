@@ -2,6 +2,7 @@
 #include "utf8.hh"
 #include <QCoreApplication>
 #include <QDir>
+#include <algorithm>
 
 #ifdef Q_OS_WIN32
 #include "mouseover_win32/ThTypes.h"
@@ -179,6 +180,20 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
           break;
       }
       word = wordSeq.mid( begin, end - begin );
+    }
+
+    // See if we have an RTL char. Reverse the whole string if we do.
+
+    for( int x = 0; x < word.size(); ++x )
+    {
+      QChar::Direction d = word[ x ].direction();
+
+      if ( d == QChar::DirR || d == QChar::DirAL ||
+           d == QChar::DirRLE || d == QChar::DirRLO )
+      {
+        std::reverse( word.begin(), word.end() );
+        break;
+      }
     }
 
     emit instance().hovered( word );
