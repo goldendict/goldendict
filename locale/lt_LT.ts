@@ -50,7 +50,7 @@
     <message>
         <location filename="../article_maker.cc" line="115"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gupėje &lt;b&gt;%1&lt;/b&gt; vertimų nerasta.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="134"/>
@@ -108,12 +108,12 @@
     <message>
         <location filename="../article_maker.cc" line="576"/>
         <source>Compound expressions: </source>
-        <translation type="unfinished"></translation>
+        <translation>Žodžių junginių:</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="602"/>
         <source>Individual words: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pavienių žodžių:</translation>
     </message>
 </context>
 <context>
@@ -2421,13 +2421,14 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../scanpopup.ui" line="117"/>
         <source>Shows or hides the dictionary bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Parodo arba paslepia žodynų juostelę</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="140"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudokite, jei norite pritvirtinti šį langą. Tuomet jis nepradigs patrukus pelę, 
+galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus.</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="64"/>
