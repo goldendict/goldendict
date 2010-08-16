@@ -7,6 +7,7 @@ const int WM_MY_SHOW_TRANSLATION = WM_USER + 301;
 
 HINSTANCE g_hInstance = NULL;
 HANDLE hSynhroMutex = 0;
+HANDLE hNewMousePosEvent = 0;
 HINSTANCE hGetWordLib = 0;
 typedef void (*GetWordProc_t)(TCurrentMode *);
 GetWordProc_t GetWordProc = NULL;
@@ -35,32 +36,27 @@ static void SendWordToServer()
 
 void CALLBACK TimerFunc(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime)
 {
-	if (WaitForSingleObject(hSynhroMutex, 0) == WAIT_OBJECT_0) {
-		if (GlobalData->TimerID) {
-			if (KillTimer(0, GlobalData->TimerID))
-				GlobalData->TimerID=0;
-		}
-		ReleaseMutex(hSynhroMutex);
-	}
-	if ((GlobalData->LastWND!=0)&&(GlobalData->LastWND == WindowFromPoint(GlobalData->LastPt))) {
-		if (WaitForSingleObject(hSynhroMutex, 0) == WAIT_OBJECT_0) {
-			SendWordToServer();
-			ReleaseMutex(hSynhroMutex);
+DWORD wso;
+	if (WaitForSingleObject(hNewMousePosEvent, 0) == WAIT_OBJECT_0) {
+		if ((GlobalData->LastWND!=0)&&(GlobalData->LastWND == WindowFromPoint(GlobalData->LastPt))) {
+			wso = WaitForSingleObject(hSynhroMutex, 0);
+			if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+				SendWordToServer();
+				ReleaseMutex(hSynhroMutex);
+			}
 		}
 	}
 }
 
 LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
+DWORD wso;
 	if ((nCode == HC_ACTION) && ((wParam == WM_MOUSEMOVE) || (wParam == WM_NCMOUSEMOVE))) {
-		if (WaitForSingleObject(hSynhroMutex, 0) == WAIT_OBJECT_0) {
+		wso = WaitForSingleObject(hSynhroMutex, 0);
+		if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
 			HWND WND;
 			TCHAR wClassName[64];
 
-			if (GlobalData->TimerID) {
-				if (KillTimer(0, GlobalData->TimerID))
-					GlobalData->TimerID=0;
-			}
 			WND = WindowFromPoint(((PMOUSEHOOKSTRUCT)lParam)->pt);
 			
 			if (GetClassName(WND, wClassName, sizeof(wClassName) / sizeof(TCHAR))) {
@@ -78,9 +74,10 @@ LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
 						return CallNextHookEx(GlobalData->g_hHookMouse, nCode, wParam, lParam);
 					}
 			}
-			GlobalData->TimerID = SetTimer(0, 0, MOUSEOVER_INTERVAL, TimerFunc);
+			GlobalData->TimerID = SetTimer(0, GlobalData->TimerID, MOUSEOVER_INTERVAL, TimerFunc);
 			GlobalData->LastWND = WND;
 			GlobalData->LastPt = ((PMOUSEHOOKSTRUCT)lParam)->pt;
+			SetEvent(hNewMousePosEvent);
 			ReleaseMutex(hSynhroMutex);
 		}
 	}
@@ -92,20 +89,22 @@ DLLIMPORT void ActivateTextOutSpying (int Activate)
 	// After call SetWindowsHookEx(), when you move mouse to a application's window, 
 	// this dll will load into this application automatically. And it is unloaded 
 	// after call UnhookWindowsHookEx().
+DWORD wso;
 	if (Activate) {
 		if (GlobalData->g_hHookMouse != NULL) return;
 		GlobalData->g_hHookMouse = SetWindowsHookEx(WH_MOUSE, MouseHookProc, g_hInstance, 0);
 	}
 	else {
 		if (GlobalData->g_hHookMouse == NULL) return;
-		if (WaitForSingleObject(hSynhroMutex, 0) == WAIT_OBJECT_0) {
+		UnhookWindowsHookEx(GlobalData->g_hHookMouse);
+		wso = WaitForSingleObject(hSynhroMutex, 2*MOUSEOVER_INTERVAL);
+		if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
 			if (GlobalData->TimerID) {
 				if (KillTimer(0, GlobalData->TimerID))
 					GlobalData->TimerID=0;
 			}
 			ReleaseMutex(hSynhroMutex);
 		}
-		UnhookWindowsHookEx(GlobalData->g_hHookMouse);
 		GlobalData->g_hHookMouse = NULL;
 	}
 }
@@ -119,18 +118,32 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
     {
       case DLL_PROCESS_ATTACH:
 			g_hInstance = hInst;
-			hSynhroMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutSpyMutex");
-			ThTypes_Init();
+			if(hSynhroMutex==0) {
+				hSynhroMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutSpyMutex");
+				if(hSynhroMutex==0) return(FALSE);
+				ThTypes_Init();
+			}
+			if(hNewMousePosEvent==0) {
+				hNewMousePosEvent = CreateEvent(NULL, FALSE, FALSE,"GoldenDictTextOutSpyEvent");
+				if(hNewMousePosEvent==0) return(FALSE);
+			}
         break;
 
       case DLL_PROCESS_DETACH:
-			WaitForSingleObject(hSynhroMutex, INFINITE);
+			if(hSynhroMutex) WaitForSingleObject(hSynhroMutex, INFINITE);
 			if (GlobalData->TimerID) {
 				if (KillTimer(0, GlobalData->TimerID))
 					GlobalData->TimerID=0;
 			}
-			ReleaseMutex(hSynhroMutex);
-			CloseHandle(hSynhroMutex);
+			if(hSynhroMutex) {
+				ReleaseMutex(hSynhroMutex);
+				CloseHandle(hSynhroMutex);
+				hSynhroMutex=0;
+			}
+			if(hNewMousePosEvent) {
+				CloseHandle(hNewMousePosEvent);
+				hNewMousePosEvent=0;
+			}
 			{
 			MSG msg ;
 			while (PeekMessage (&msg, 0, WM_TIMER, WM_TIMER, PM_REMOVE)) {}

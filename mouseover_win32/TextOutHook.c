@@ -407,22 +407,34 @@ BOOL WINAPI ExtTextOutWCallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOp
 
 static void InstallTextOutHooks()
 {
-	HookAPI("gdi32.dll", "TextOutA", (PROC)TextOutACallbackProc, (PROC*)&TextOutANextHook);
-	HookAPI("gdi32.dll", "TextOutW", (PROC)TextOutWCallbackProc, (PROC*)&TextOutWNextHook);
-	HookAPI("gdi32.dll", "ExtTextOutA", (PROC)ExtTextOutACallbackProc, (PROC*)&ExtTextOutANextHook);
-	HookAPI("gdi32.dll", "ExtTextOutW", (PROC)ExtTextOutWCallbackProc, (PROC*)&ExtTextOutWNextHook);
+	if (TextOutANextHook==NULL)
+		HookAPI("gdi32.dll", "TextOutA", (PROC)TextOutACallbackProc, (PROC*)&TextOutANextHook);
+	if (TextOutWNextHook==NULL)
+		HookAPI("gdi32.dll", "TextOutW", (PROC)TextOutWCallbackProc, (PROC*)&TextOutWNextHook);
+	if (ExtTextOutANextHook==NULL)
+		HookAPI("gdi32.dll", "ExtTextOutA", (PROC)ExtTextOutACallbackProc, (PROC*)&ExtTextOutANextHook);
+	if (ExtTextOutWNextHook==NULL)
+		HookAPI("gdi32.dll", "ExtTextOutW", (PROC)ExtTextOutWCallbackProc, (PROC*)&ExtTextOutWNextHook);
 }
 
 static void UninstallTextOutHooks()
 {
-	if (TextOutANextHook)
+	if (TextOutANextHook) {
 		HookAPI("gdi32.dll", "TextOutA", (PROC)TextOutANextHook, NULL);
-	if (TextOutWNextHook)
+		TextOutANextHook=NULL;
+	}
+	if (TextOutWNextHook) {
 		HookAPI("gdi32.dll", "TextOutW", (PROC)TextOutWNextHook, NULL);
-	if (ExtTextOutANextHook)
+		TextOutWNextHook=NULL;
+	}
+	if (ExtTextOutANextHook) {
 		HookAPI("gdi32.dll", "ExtTextOutA", (PROC)ExtTextOutANextHook, NULL);
-	if (ExtTextOutWNextHook)
+		ExtTextOutANextHook=NULL;
+	}
+	if (ExtTextOutWNextHook) {
 		HookAPI("gdi32.dll", "ExtTextOutW", (PROC)ExtTextOutWNextHook, NULL);
+		ExtTextOutWNextHook=NULL;
+	}
 }
 
 DLLIMPORT void __gdGetWord (TCurrentMode *P)
