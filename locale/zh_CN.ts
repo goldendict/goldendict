@@ -183,6 +183,38 @@
         <source>Group icon:</source>
         <translation>群组图标：</translation>
     </message>
+    <message>
+        <source>Shortcut:</source>
+        <translation>快捷键：</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>无</translation>
+    </message>
+    <message>
+        <source>From file...</source>
+        <translation>来自文件...</translation>
+    </message>
+    <message>
+        <source>Choose a file to use as group icon</source>
+        <translation>选择一个文件作为群组图标</translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation>图像</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>所有文件</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>错误</translation>
+    </message>
+    <message>
+        <source>Can&apos;t read the specified image file.</source>
+        <translation>无法读取指定的图像文件。</translation>
+    </message>
 </context>
 <context>
     <name>DictListModel</name>
@@ -1444,6 +1476,26 @@
     <message>
         <source>&amp;Clear</source>
         <translation>清除(&amp;C)</translation>
+    </message>
+    <message>
+        <source>&amp;Zoom</source>
+        <translation>缩放(&amp;Z)</translation>
+    </message>
+    <message>
+        <source>Words Zoom In</source>
+        <translation>单词列表 - 放大</translation>
+    </message>
+    <message>
+        <source>Words Zoom Out</source>
+        <translation>单词列表 - 缩小</translation>
+    </message>
+    <message>
+        <source>Words Normal Size</source>
+        <translation>单词列表 - 正常大小</translation>
+    </message>
+    <message>
+        <source>[Unknown]</source>
+        <translation>[未知]</translation>
     </message>
 </context>
 <context>
