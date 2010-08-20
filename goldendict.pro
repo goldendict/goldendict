@@ -251,7 +251,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/bg_BG.ts \
     locale/ar_SA.ts \
     locale/lt_LT.ts \
-    locale/uk_UA.ts
+    locale/uk_UA.ts \
+    locale/vi_VN.ts
 
 # Build version file
 !isEmpty( hasGit ) {
