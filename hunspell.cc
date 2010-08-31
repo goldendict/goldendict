@@ -322,6 +322,11 @@ public:
     isCancelled.ref();
     hasExited.acquire();
   }
+
+private:
+
+  /// Generates suggestions via hunspell
+  QVector< wstring > suggest( wstring & word );
 };
 
 void HunspellHeadwordsRequestRunnable::run()
@@ -337,24 +342,93 @@ void HunspellHeadwordsRequest::run()
     return;
   }
 
+  wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
+
+  if ( trimmedWord.size() > 80 )
+  {
+    // We won't do anything for overly long sentences since that would probably
+    // only waste time.
+    finish();
+    return;
+  }
+
+  if ( containsWhitespace( trimmedWord ) )
+  {
+    // Analyze each word separately and use the first suggestion, if any.
+    // This is useful for compound expressions where one of the words is
+    // in different form, e.g. "dozing off" -> "doze off".
+    // In this mode, we only provide a single suggestion at most.
+
+    wstring result;
+
+    wstring word;
+
+    for( wchar const * c = trimmedWord.c_str(); *c; ++c )
+    {
+      if ( Folding::isPunct( *c ) || Folding::isWhitespace( * c ) )
+      {
+        if ( word.size() )
+        {
+          QVector< wstring > suggestions = suggest( word );
+
+          if ( suggestions.size() )
+            result += suggestions[ 0 ];
+          else
+            result += word;
+
+          word.clear();
+        }
+        result.push_back( *c );
+      }
+      else
+        word.push_back( *c );
+    }
+
+    if ( word.size() )
+    {
+      QVector< wstring > suggestions = suggest( trimmedWord );
+
+      if ( suggestions.size() )
+        result += suggestions[ 0 ];
+      else
+        result += word;
+    }
+
+    if ( result != trimmedWord )
+    {
+      Mutex::Lock _( dataMutex );
+      matches.push_back( result );
+    }
+  }
+  else
+  {
+    QVector< wstring > suggestions = suggest( trimmedWord );
+
+    if ( !suggestions.empty() )
+    {
+      Mutex::Lock _( dataMutex );
+
+      for( int x = 0; x < suggestions.size(); ++x )
+        matches.push_back( suggestions[ x ] );
+    }
+  }
+
+  finish();
+}
+
+QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
+{
+  QVector< wstring > result;
+
   // We'd need to free this if it gets allocated and an exception shows up
   char ** suggestions = 0;
   int suggestionsCount = 0;
 
   try
   {
-    wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
-
-    if ( containsWhitespace( trimmedWord ) )
-    {
-      // For now we don't analyze whitespace-containing phrases
-      finish();
-      return;
-    }
-
     Mutex::Lock _( hunspellMutex );
 
-    string encodedWord = encodeToHunspell( hunspell, trimmedWord );
+    string encodedWord = encodeToHunspell( hunspell, word );
 
     suggestionsCount = hunspell.analyze( &suggestions, encodedWord.c_str() );
 
@@ -364,7 +438,7 @@ void HunspellHeadwordsRequest::run()
 
       wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
 
-      QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:))|\\S+)+)" );
+      static QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:))|\\S+)+)" );
 
       for( int x = 0; x < suggestionsCount; ++x )
       {
@@ -379,10 +453,7 @@ void HunspellHeadwordsRequest::run()
           if ( Folding::applySimpleCaseOnly( alt ) != lowercasedWord ) // No point in providing same word
           {
             printf( ">>>>>Alt: %ls\n", alt.c_str() );
-
-            Mutex::Lock _( dataMutex );
-
-            matches.push_back( alt );
+            result.append( alt );
           }
         }
       }
@@ -400,8 +471,9 @@ void HunspellHeadwordsRequest::run()
     hunspell.free_list( &suggestions, suggestionsCount );
   }
 
-  finish();
+  return result;
 }
+
 
 sptr< WordSearchRequest > HunspellDictionary::findHeadwordsForSynonym( wstring const & word )
   throw( std::exception )
