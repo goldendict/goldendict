@@ -143,8 +143,9 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
   }
 
   QUrl reqUrl = QUrl::fromEncoded(
-      QString( "http://apifree.forvo.com/key/%1/format/xml/action/word-pronunciations/word/%2/language/%3" )
-      .arg( apiKey ).arg( QString::fromAscii( QUrl::toPercentEncoding( gd::toQString( str ) ) ) ).arg( languageCode ).toUtf8() );
+      QString( "http://apifree.forvo.com/key/" + apiKey + "/format/xml/action/word-pronunciations/word/" +
+      QString::fromAscii( QUrl::toPercentEncoding( gd::toQString( str ) ) ) + "/language/" + languageCode
+       ).toUtf8() );
 
 //  printf( "req: %s\n", reqUrl.toEncoded().data() );
 
