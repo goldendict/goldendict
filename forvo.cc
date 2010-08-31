@@ -134,16 +134,20 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
 {
   printf( "Requesting article %ls\n", str.c_str() );
 
+  QString key;
+
   if ( apiKey.simplified().isEmpty() )
   {
     // Use the default api key. That's the key I have just registered myself.
     // It has a limit of 1000 requests a day, and may also get banned in the
     // future. Can't do much about it. Get your own key, it is simple.
-    apiKey = "5efa5d045a16d10ad9c4705bd5d8e56a";
+    key = "5efa5d045a16d10ad9c4705bd5d8e56a";
   }
+  else
+    key = apiKey;
 
   QUrl reqUrl = QUrl::fromEncoded(
-      QString( "http://apifree.forvo.com/key/" + apiKey + "/format/xml/action/word-pronunciations/word/" +
+      QString( "http://apifree.forvo.com/key/" + key + "/format/xml/action/word-pronunciations/word/" +
       QString::fromAscii( QUrl::toPercentEncoding( gd::toQString( str ) ) ) + "/language/" + languageCode
        ).toUtf8() );
 
@@ -312,7 +316,18 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
         QDomNode errors = dd.namedItem( "errors" );
 
         if ( !errors.isNull() )
-          setErrorString( errors.namedItem( "error" ).toElement().text() );
+        {
+          QString text( errors.namedItem( "error" ).toElement().text() );
+
+          if ( text == "Limit/day reached." && apiKey.simplified().isEmpty() )
+          {
+            // Give a hint that the user should apply for his own key.
+
+            text += "\n" + tr( "Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear." );
+          }
+
+          setErrorString( text );
+        }
       }
       printf( "done.\n" );
     }
