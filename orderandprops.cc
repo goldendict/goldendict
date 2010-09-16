@@ -31,6 +31,12 @@ OrderAndProps::OrderAndProps( QWidget * parent,
   ui.inactiveDictionaries->populate( inactive.dictionaries, allDictionaries );
 
   disableDictionaryDescription();
+
+  connect(ui.dictionaryOrder->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+          this, SLOT(dictionaryChanged(QModelIndex,QModelIndex)));
+
+  connect(ui.inactiveDictionaries->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+          this, SLOT(inactiveChanged(QModelIndex,QModelIndex)));
 }
 
 Config::Group OrderAndProps::getCurrentDictionaryOrder() const
@@ -51,15 +57,16 @@ Config::Group OrderAndProps::getCurrentInactiveDictionaries() const
   return g.makeConfigGroup();
 }
 
-void OrderAndProps::on_dictionaryOrder_clicked( QModelIndex const & idx )
+void OrderAndProps::dictionaryChanged( const QModelIndex & current, const QModelIndex & )
 {
-  describeDictionary( ui.dictionaryOrder, idx );
+  describeDictionary( ui.dictionaryOrder, current );
 }
 
-void OrderAndProps::on_inactiveDictionaries_clicked( QModelIndex const & idx )
+void OrderAndProps::inactiveChanged( const QModelIndex & current, const QModelIndex & )
 {
-  describeDictionary( ui.inactiveDictionaries, idx );
+  describeDictionary( ui.inactiveDictionaries, current );
 }
+
 
 void OrderAndProps::disableDictionaryDescription()
 {
