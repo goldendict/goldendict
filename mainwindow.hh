@@ -58,13 +58,15 @@ private:
   QFont wordListDefaultFont, translateLineDefaultFont;
 
   QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
+          closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction, showDictBarNamesAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
   QMenu trayIconMenu;
-  QToolButton addTab;
+  QMenu *tabListMenu, *tabMenu;
+  QToolButton addTab, *tabListButton;
   Config::Class & cfg;
   Config::Events configEvents;
   History history;
@@ -90,7 +92,7 @@ private:
   sptr< QNetworkReply > latestReleaseReply;
 
   sptr< QPrinter > printer; // The printer we use for all printing operations
-  
+
   QPrinter & getPrinter(); // Creates a printer if it's not there and returns it
 
   /// Applies the qt's stylesheet, given the style's name.
@@ -158,8 +160,15 @@ private slots:
   void tabCloseRequested( int );
   // Closes current tab.
   void closeCurrentTab();
+  void closeAllTabs();
+  void closeRestTabs();
   void switchToNextTab();
   void switchToPrevTab();
+
+  // Handling of active tab list
+  void createTabList();
+  void fillWindowsMenu();
+  void switchToWindow(QAction *act);
 
   /// Triggered by the actions in the nav toolbar
   void backClicked();
@@ -172,6 +181,7 @@ private slots:
 
   void pageLoaded( ArticleView * );
   void tabSwitched( int );
+  void tabMenuRequested(QPoint pos);
 
   void dictionaryBarToggled( bool checked );
 
@@ -248,12 +258,12 @@ private slots:
   void on_clearHistory_activated();
 
   void on_actionCloseToTray_activated();
-  
+
   void on_pageSetup_activated();
   void on_printPreview_activated();
   void on_print_activated();
   void printPreviewPaintRequested( QPrinter * );
-  
+
   void on_saveArticle_activated();
 
   void on_rescanFiles_activated();

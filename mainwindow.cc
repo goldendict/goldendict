@@ -30,6 +30,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   focusTranslateLineAction( this ),
   addTabAction( this ),
   closeCurrentTabAction( this ),
+  closeAllTabAction( this ),
+  closeRestTabAction( this ),
   switchToNextTabAction( this ),
   switchToPrevTabAction( this ),
   showDictBarNamesAction( tr( "Show Names in Dictionary Bar" ), this ),
@@ -158,6 +160,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
 
+  // Tab management
+
   connect( &addTabAction, SIGNAL( triggered() ),
            this, SLOT( addNewTab() ) );
 
@@ -165,11 +169,30 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   closeCurrentTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   closeCurrentTabAction.setShortcut( QKeySequence( "Ctrl+W" ) );
+  closeCurrentTabAction.setText( tr("Close current tab") );
+  closeCurrentTabAction.setIcon( QIcon(":/icons/closetab.png") );
 
   connect( &closeCurrentTabAction, SIGNAL( triggered() ),
            this, SLOT( closeCurrentTab() ) );
 
   addAction( &closeCurrentTabAction );
+
+  closeAllTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  closeAllTabAction.setShortcut( QKeySequence( "Ctrl+Shift+W" ) );
+  closeAllTabAction.setText( tr("Close all tabs") );
+
+  connect( &closeAllTabAction, SIGNAL( triggered() ),
+           this, SLOT( closeAllTabs() ) );
+
+  addAction( &closeAllTabAction );
+
+  closeRestTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  closeRestTabAction.setText( tr("Close all tabs except current") );
+
+  connect( &closeRestTabAction, SIGNAL( triggered() ),
+           this, SLOT( closeRestTabs() ) );
+
+  addAction( &closeRestTabAction );
 
   switchToNextTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   switchToNextTabAction.setShortcut( QKeySequence( "Ctrl+PgDown" ) );
@@ -187,6 +210,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addAction( &switchToPrevTabAction );
 
+
+  tabMenu = new QMenu(this);
+  tabMenu->addAction( &closeCurrentTabAction );
+  tabMenu->addAction( &closeRestTabAction );
+  tabMenu->addSeparator();
+  tabMenu->addAction( &closeAllTabAction );
+
+  // Dictionary bar names
 
   showDictBarNamesAction.setCheckable( true );
   showDictBarNamesAction.setChecked( cfg.showingDictBarNames );
@@ -259,6 +290,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.tabWidget->setDocumentMode( true );
 #endif
 
+  ui.tabWidget->setContextMenuPolicy( Qt::CustomContextMenu );
+
   connect( &addTab, SIGNAL( clicked() ),
            this, SLOT( addNewTab() ) );
 
@@ -267,6 +300,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( ui.tabWidget, SIGNAL( currentChanged( int ) ),
            this, SLOT( tabSwitched( int ) ) );
+
+  connect( ui.tabWidget, SIGNAL( customContextMenuRequested(QPoint)) ,
+           this, SLOT( tabMenuRequested(QPoint)) );
 
 #if QT_VERSION >= 0x040500
   ui.tabWidget->setTabsClosable( true );
@@ -326,6 +362,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addNewTab();
 
+  // Create tab list menu
+  createTabList();
+
   // Show the initial welcome text
 
   {
@@ -378,18 +417,18 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
 void MainWindow::mousePressEvent( QMouseEvent *event)
 {
-	if (event->button() != Qt::MidButton)
-		return QMainWindow::mousePressEvent(event);
-	// middle clicked
-  	QString subtype = "plain";
+  if (event->button() != Qt::MidButton)
+    return QMainWindow::mousePressEvent(event);
+  // middle clicked
+    QString subtype = "plain";
 
-  	QString str = QApplication::clipboard()->text(subtype, 
-  		QClipboard::Selection);
-	ui.translateLine->setText(str);
-      
-      	QKeyEvent ev(QEvent::Type(6)/*QEvent::KeyPress*/, Qt::Key_Enter,
-      		 Qt::NoModifier);
-      	QApplication::sendEvent(ui.translateLine, &ev);
+    QString str = QApplication::clipboard()->text(subtype,
+      QClipboard::Selection);
+  ui.translateLine->setText(str);
+
+        QKeyEvent ev(QEvent::Type(6)/*QEvent::KeyPress*/, Qt::Key_Enter,
+           Qt::NoModifier);
+        QApplication::sendEvent(ui.translateLine, &ev);
 }
 
 MainWindow::~MainWindow()
@@ -665,7 +704,7 @@ void MainWindow::makeScanPopup()
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
-{  
+{
   if ( groupInstances.empty() )
     return dictionaries;
 
@@ -698,6 +737,48 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
     return dictionariesUnmuted;
   }
 }
+
+
+void MainWindow::createTabList()
+{
+  tabListMenu = new QMenu(tr("Opened tabs"), ui.tabWidget);
+  tabListMenu->setIcon(QIcon(":/icons/windows-list.png"));
+  connect(tabListMenu, SIGNAL(aboutToShow()), this, SLOT(fillWindowsMenu()));
+  connect(tabListMenu, SIGNAL(triggered(QAction*)), this, SLOT(switchToWindow(QAction*)));
+
+  tabListButton = new QToolButton(ui.tabWidget);
+  tabListButton->setAutoRaise(true);
+  tabListButton->setIcon(tabListMenu->icon());
+  tabListButton->setMenu(tabListMenu);
+  tabListButton->setPopupMode(QToolButton::InstantPopup);
+  ui.tabWidget->setCornerWidget(tabListButton);
+}
+
+void MainWindow::fillWindowsMenu()
+{
+  tabListMenu->clear();
+
+  for (int i = 0; i < ui.tabWidget->count(); i++)
+  {
+    QAction *act = tabListMenu->addAction(ui.tabWidget->tabText(i));
+    act->setData(i);
+    if (ui.tabWidget->currentIndex() == i)
+    {
+      QFont f(act->font());
+      f.setBold(true);
+      act->setFont(f);
+      act->setCheckable(true);
+      act->setChecked(true);
+    }
+  }
+}
+
+void MainWindow::switchToWindow(QAction *act)
+{
+  int idx = act->data().toInt();
+  ui.tabWidget->setCurrentIndex(idx);
+}
+
 
 void MainWindow::addNewTab()
 {
@@ -750,19 +831,48 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
 void MainWindow::tabCloseRequested( int x )
 {
-  if ( ui.tabWidget->count() < 2 )
-    return; // We should always have at least one open tab
+//  if ( ui.tabWidget->count() < 2 )
+//    return; // We should always have at least one open tab
 
   QWidget * w = ui.tabWidget->widget( x );
 
   ui.tabWidget->removeTab( x );
 
   delete w;
+
+  // if everything is closed, add new tab
+  if ( ui.tabWidget->count() == 0 )
+    addNewTab();
 }
 
 void MainWindow::closeCurrentTab()
 {
   tabCloseRequested( ui.tabWidget->currentIndex() );
+}
+
+void MainWindow::closeAllTabs()
+{
+  while (ui.tabWidget->count() > 1)
+    closeCurrentTab();
+
+  // close last tab
+  closeCurrentTab();
+}
+
+void MainWindow::closeRestTabs()
+{
+  if ( ui.tabWidget->count() < 2 )
+    return;
+
+  int idx = ui.tabWidget->currentIndex();
+
+  for (int i = 0; i < idx; i++)
+    tabCloseRequested(0);
+
+  ui.tabWidget->setCurrentIndex(0);
+
+  while (ui.tabWidget->count() > 1)
+    tabCloseRequested(1);
 }
 
 void MainWindow::switchToNextTab()
@@ -828,6 +938,15 @@ void MainWindow::pageLoaded( ArticleView * view )
 void MainWindow::tabSwitched( int )
 {
   updatePronounceAvailability();
+}
+
+void MainWindow::tabMenuRequested(QPoint pos)
+{
+//  // dont show this menu for single tab
+//  if ( ui.tabWidget->count() < 2 )
+//    return;
+
+  tabMenu->popup(ui.tabWidget->mapToGlobal(pos));
 }
 
 void MainWindow::dictionaryBarToggled( bool )
@@ -1556,23 +1675,23 @@ void MainWindow::latestReleaseReplyReady()
 
 void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
 {
-	switch(r) {
-		case QSystemTrayIcon::Trigger:
-			// Left click toggles the visibility of main window
-			toggleMainWindow();
-			break;
+  switch(r) {
+    case QSystemTrayIcon::Trigger:
+      // Left click toggles the visibility of main window
+      toggleMainWindow();
+      break;
 
-		case QSystemTrayIcon::MiddleClick:
-			// Middle mouse click on Tray translates selection
-			// it is functional like as stardict
-			if ( scanPopup.get() ) {
-				scanPopup->translateWordFromSelection();
-			}
-			break;
-		default:
-			break;
+    case QSystemTrayIcon::MiddleClick:
+      // Middle mouse click on Tray translates selection
+      // it is functional like as stardict
+      if ( scanPopup.get() ) {
+        scanPopup->translateWordFromSelection();
+      }
+      break;
+    default:
+      break;
 
-	}
+  }
 }
 
 void MainWindow::scanEnableToggled( bool on )
@@ -1798,7 +1917,7 @@ void MainWindow::on_rescanFiles_activated()
   groupInstances.clear(); // Release all the dictionaries they hold
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
-  
+
   updateGroupList();
 
   makeScanPopup();
