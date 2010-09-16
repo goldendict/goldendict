@@ -145,6 +145,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="autoGroups">
+         <property name="toolTip">
+          <string>Create language-based groups</string>
+         </property>
+         <property name="text">
+          <string>Auto groups</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="renameGroup">
          <property name="toolTip">
           <string>Rename current dictionary group</string>
@@ -203,6 +213,17 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>dictionaries</tabstop>
+  <tabstop>addDictsToGroup</tabstop>
+  <tabstop>removeDictsFromGroup</tabstop>
+  <tabstop>groups</tabstop>
+  <tabstop>addGroup</tabstop>
+  <tabstop>autoGroups</tabstop>
+  <tabstop>renameGroup</tabstop>
+  <tabstop>removeGroup</tabstop>
+  <tabstop>removeAllGroups</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

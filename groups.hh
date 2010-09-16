@@ -45,6 +45,7 @@ private slots:
   void removeAll();
   void addToGroup();
   void removeFromGroup();
+  void addAutoGroups();
 };
 
 #endif

@@ -8,6 +8,8 @@
 #include "langcoder.hh"
 #include "language.hh"
 
+//#include "initializing.hh"
+
 #include <QMenu>
 #include <QDir>
 #include <QIcon>
@@ -222,6 +224,19 @@ bool DictListModel::insertRows( int row, int count, const QModelIndex & parent )
   endInsertRows();
 
   return true;
+}
+
+void DictListModel::addRow(const QModelIndex & parent, sptr< Dictionary::Class > dict)
+{
+  for (int i = 0; i < dictionaries.size(); i++)
+  {
+    if (dictionaries[i]->getId() == dict->getId())
+      return;
+  }
+
+  beginInsertRows( parent, dictionaries.size(), dictionaries.size()+1 );
+  dictionaries.push_back(dict);
+  endInsertRows();
 }
 
 bool DictListModel::removeRows( int row, int count,
@@ -545,6 +560,65 @@ void DictGroupsWidget::addNewGroup( QString const & name )
              escapeAmps( name ) );
 
   setCurrentIndex( idx );
+}
+
+void DictGroupsWidget::addAutoGroups()
+{
+  if ( !allDicts )
+    return;
+
+  QMap< QPair<quint32,quint32>, int > tabMap;
+
+//  ::Initializing init( this, true );
+//  QApplication::processEvents();
+
+  for ( int i = 0; i < allDicts->size(); i++ )
+  {
+    sptr<Dictionary::Class> dict = allDicts->at( i );
+
+    quint32 idfrom = dict->getLangFrom();
+    quint32 idto = dict->getLangTo();
+    QPair<quint32,quint32> key(idfrom, idto);
+
+    if (tabMap.contains(key))
+    {
+      setCurrentIndex(tabMap[key]);
+    }
+    else
+    {
+      QString lfrom = LangCoder::intToCode2( idfrom );
+      QString lto = LangCoder::intToCode2( idto );
+      QString name("Unassigned");
+      if (lfrom.isEmpty() == false && lto.isEmpty() == false)
+        name = lfrom + " - " + lto;
+
+      // search for the language group
+      bool found = false;
+      for (int j = 0; j < count(); j++)
+      {
+        if (tabText(j) == name)
+        {
+          found = true;
+          setCurrentIndex(j);
+          tabMap[key] = j;
+          break;
+        }
+      }
+
+      // group not found - add it
+      if (!found)
+      {
+        addNewGroup(name);
+        int j = currentIndex();
+        tabMap[key] = j;
+      }
+
+    }
+
+    // add dictionary into the current group
+    DictListModel *model = getCurrentModel();
+    model->addRow(QModelIndex(), dict);
+  }
 }
 
 QString DictGroupsWidget::getCurrentGroupName() const

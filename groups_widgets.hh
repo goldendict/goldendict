@@ -44,6 +44,8 @@ public:
   bool removeRows( int row, int count, const QModelIndex & parent );
   bool setData( QModelIndex const & index, const QVariant & value, int role );
 
+  void addRow(const QModelIndex & parent, sptr< Dictionary::Class > dict);
+
   Qt::DropActions supportedDropActions() const;
 
   void filterDuplicates();
@@ -135,6 +137,8 @@ public:
 
   /// Creates new empty group with the given name
   void addNewGroup( QString const & );
+
+  void addAutoGroups();
 
   /// Returns currently chosen group's name
   QString getCurrentGroupName() const;

@@ -31,14 +31,7 @@ QIcon LangCoder::icon(quint32 code)
   if (langCoder.codeMap.contains(code))
   {
     const LangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
-//    QString flag_id( lc.code );
-//    if (flag_id == "en")
-//      flag_id = "gb";
-//    else
-//    if (flag_id == "uk")
-//      flag_id = "ua";
-
-    return QIcon( ":/flags/" + QString( lc.code) + ".png" );
+    return QIcon( ":/flags/" + QString(lc.code) + ".png" );
   }
 
   return QIcon();

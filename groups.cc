@@ -40,6 +40,8 @@ Groups::Groups( QWidget * parent,
            this, SLOT( addToGroup() ) );
   connect( ui.removeDictsFromGroup, SIGNAL( clicked() ),
            this, SLOT( removeFromGroup() ) );
+  connect( ui.autoGroups, SIGNAL( clicked() ),
+           this, SLOT( addAutoGroups() ) );
 
   countChanged();
 }
@@ -98,6 +100,12 @@ void Groups::addNew()
     ui.groups->addNewGroup( name );
     countChanged();
   }
+}
+
+void Groups::addAutoGroups()
+{
+  ui.groups->addAutoGroups();
+  countChanged();
 }
 
 void Groups::renameCurrent()
