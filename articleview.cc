@@ -104,7 +104,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   connect( ui.definition, SIGNAL( loadFinished( bool ) ),
            this, SLOT( loadFinished( bool ) ) );
-  
+
   connect( ui.definition, SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
 
@@ -229,7 +229,7 @@ void ArticleView::loadFinished( bool )
       //printf( "Name: %s\n", (*i)->frameName().toUtf8().data() );
       //printf( "Size: %d\n", (*i)->contentsSize().height() );
       //printf( ">>>>>>>>Height = %s\n", (*i)->evaluateJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
-  
+
       // Set the height
       ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').height = %2;" ).
         arg( (*i)->frameName() ).
@@ -473,7 +473,7 @@ void ArticleView::cleanupTemp()
   {
     QFile( desktopOpenedTempFile ).remove();
     desktopOpenedTempFile.clear();
-  }  
+  }
 }
 
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
@@ -648,28 +648,28 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       if ( activeDicts )
         for( unsigned x = 0; x < activeDicts->size(); ++x )
         {
-          sptr< Dictionary::DataRequest > req = 
+          sptr< Dictionary::DataRequest > req =
             (*activeDicts)[ x ]->getResource(
               url.path().mid( 1 ).toUtf8().data() );
-  
+
           if ( req->isFinished() && req->dataSize() >= 0 )
           {
             // A request was instantly finished with success.
             // If we've managed to spawn some lingering requests already,
             // erase them.
             resourceDownloadRequests.clear();
-  
+
             // Handle the result
             resourceDownloadRequests.push_back( req );
             resourceDownloadFinished();
-  
+
             return;
           }
           else
           if ( !req->isFinished() )
           {
             resourceDownloadRequests.push_back( req );
-  
+
             connect( req.get(), SIGNAL( finished() ),
                      this, SLOT( resourceDownloadFinished() ) );
           }
@@ -680,7 +680,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       // Normal resource download
       QString contentType;
 
-      sptr< Dictionary::DataRequest > req = 
+      sptr< Dictionary::DataRequest > req =
         articleNetMgr.getResource( url, contentType );
 
       if ( !req.get() )
@@ -847,7 +847,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
                                    arg( ui.definition->selectedText() ),
                                    &menu );
     menu.addAction( lookupSelection );
-    
+
     if ( !popupView )
     {
       lookupSelectionNewTab = new QAction( QIcon( ":/icons/addtab.png" ),
@@ -886,7 +886,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
 
   map< QAction *, QString > tableOfContents;
-    
+
   // Add table of contents
   QStringList ids = getArticlesList();
 
@@ -925,7 +925,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
     }
   }
-  
+
   if ( !menu.isEmpty() )
   {
     QAction * result = menu.exec( ui.definition->mapToGlobal( pos ) );
@@ -1039,11 +1039,11 @@ void ArticleView::resourceDownloadFinished()
         else
         {
           // Create a temporary file
-  
-  
+
+
           // Remove the one previously used, if any
           cleanupTemp();
-  
+
           {
             QTemporaryFile tmp(
               QDir::temp().filePath( "XXXXXX-" + resourceDownloadUrl.path().section( '/', -1 ) ), this );
@@ -1053,12 +1053,12 @@ void ArticleView::resourceDownloadFinished()
               QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to create temporary file." ) );
               return;
             }
-  
+
             tmp.setAutoRemove( false );
-  
+
             desktopOpenedTempFile = tmp.fileName();
           }
-  
+
           if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( desktopOpenedTempFile ) ) )
             QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
         }
@@ -1213,7 +1213,14 @@ void ArticleView::doubleClicked()
          selectedText.size() < 40 )
     {
       // Initiate translation
-      showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+      Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
+      if (kmod & Qt::ControlModifier)
+      { // open in new tab
+        emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
+                                     getCurrentArticle(), Contexts() );
+      }
+      else
+        showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
     }
   }
 }
