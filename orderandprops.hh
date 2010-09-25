@@ -22,8 +22,8 @@ public:
 
 private slots:
 
-  void dictionaryChanged( const QModelIndex & current, const QModelIndex & );
-  void inactiveChanged( const QModelIndex & current, const QModelIndex & );
+  void on_dictionaryOrder_clicked( QModelIndex const & );
+  void on_inactiveDictionaries_clicked( QModelIndex const & );
 
 private:
 
