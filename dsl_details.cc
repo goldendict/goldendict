@@ -930,7 +930,11 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
 
           wstring removed( str, 0, x );
 
-          result.push_back( removed );
+          // Limit the amount of results to avoid excessive resource consumption
+          if ( result.size() < 32 )
+            result.push_back( removed );
+          else
+            return;
         }
       }
 
@@ -949,7 +953,9 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
       ++x;
   }
 
-  result.push_back( str );
+  // Limit the amount of results to avoid excessive resource consumption
+  if ( result.size() < 32 )
+    result.push_back( str );
 }
 
 void expandTildes( wstring & str, wstring const & tildeReplacement )
