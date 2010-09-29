@@ -17,11 +17,15 @@
     </message>
     <message>
         <source>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation>© Константин Исаков (ikm@users.berlios.de), 2008-2009</translation>
+        <translation type="obsolete">© Константин Исаков (ikm@users.berlios.de), 2008-2009</translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
         <translation>Лицензирано под GNU GPLv3 или следваща версия</translation>
+    </message>
+    <message>
+        <source>(c) 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</source>
+        <translation type="unfinished">© Константин Исаков (ikm@users.berlios.de), 2008-2009 {2008-2010 ?}</translation>
     </message>
 </context>
 <context>
@@ -36,7 +40,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Добре дошли в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;За да започнете да работите с програмата, първо посетете &lt;b&gt;Редактиране|Речници&lt;/b&gt; за да добавите път за достъп до места, на които да се търсят речници, да настроите различни страници на Уикипедия или други ресруси, да подредите последователността на речниците или да създадете групи от речници.&lt;p&gt;Веднага след това сте готови да търсите думи! Можете да направите това в този прозорец, като използвате левия панел или можете да &lt;a href=&quot;Working with popup&quot;&gt;търсите думи от други активни приложения&lt;/a&gt;. &lt;p&gt;За да настроите програмата, погледнете наличните настройки в &lt;b&gt;Редактиране|Настройки&lt;/b&gt;. Всички настройки там имат подсказки - прочетете ги в случай, че се съмнявате за нещо.&lt;p&gt;Ако имате нужда от допълнителна помощ, имате въпроси, предложения или се чудите какво мислят останалите, сте добре дошли във &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форума&lt;/a&gt; на програмата.&lt;p&gt;Проверете &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;уеб страницата&lt;/a&gt; за обновления. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Лицензирано под GPLv3 или следваща версия.</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Добре дошли в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;За да започнете да работите с програмата, първо посетете &lt;b&gt;Редактиране|Речници&lt;/b&gt; за да добавите път за достъп до места, на които да се търсят речници, да настроите различни страници на Уикипедия или други ресруси, да подредите последователността на речниците или да създадете групи от речници.&lt;p&gt;Веднага след това сте готови да търсите думи! Можете да направите това в този прозорец, като използвате левия панел или можете да &lt;a href=&quot;Working with popup&quot;&gt;търсите думи от други активни приложения&lt;/a&gt;. &lt;p&gt;За да настроите програмата, погледнете наличните настройки в &lt;b&gt;Редактиране|Настройки&lt;/b&gt;. Всички настройки там имат подсказки - прочетете ги в случай, че се съмнявате за нещо.&lt;p&gt;Ако имате нужда от допълнителна помощ, имате въпроси, предложения или се чудите какво мислят останалите, сте добре дошли във &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форума&lt;/a&gt; на програмата.&lt;p&gt;Проверете &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;уеб страницата&lt;/a&gt; за обновления. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Лицензирано под GPLv3 или следваща версия.</translation>
     </message>
     <message>
         <source>Working with popup</source>
@@ -61,6 +65,10 @@
     <message>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Добре дошли в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;За да започнете да работите с програмата, първо посетете &lt;b&gt;Редактиране|Речници&lt;/b&gt; за да добавите път за достъп до места, на които да се търсят речници, да настроите различни страници на Уикипедия или други ресруси, да подредите последователността на речниците или да създадете групи от речници.&lt;p&gt;Веднага след това сте готови да търсите думи! Можете да направите това в този прозорец, като използвате левия панел или можете да &lt;a href=&quot;Working with popup&quot;&gt;търсите думи от други активни приложения&lt;/a&gt;. &lt;p&gt;За да настроите програмата, погледнете наличните настройки в &lt;b&gt;Редактиране|Настройки&lt;/b&gt;. Всички настройки там имат подсказки - прочетете ги в случай, че се съмнявате за нещо.&lt;p&gt;Ако имате нужда от допълнителна помощ, имате въпроси, предложения или се чудите какво мислят останалите, сте добре дошли във &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форума&lt;/a&gt; на програмата.&lt;p&gt;Проверете &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;уеб страницата&lt;/a&gt; за обновления. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Лицензирано под GPLv3 или следваща версия. {3 ?} {3&gt;?} {2008-2010 ?} {3 ?}</translation>
     </message>
 </context>
 <context>
@@ -183,6 +191,38 @@
         <source>Group icon:</source>
         <translation>Икона на групата:</translation>
     </message>
+    <message>
+        <source>Shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From file...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a file to use as group icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Грешка</translation>
+    </message>
+    <message>
+        <source>Can&apos;t read the specified image file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictListModel</name>
@@ -195,6 +235,10 @@
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit this group</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -234,10 +278,48 @@
     </message>
 </context>
 <context>
+    <name>Forvo::ForvoArticleRequest</name>
+    <message>
+        <source>XML parse error: %1 at %2,%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Added %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>from</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GermanTranslit</name>
     <message>
         <source>German Transliteration</source>
         <translation>Германска транслитерация</translation>
+    </message>
+</context>
+<context>
+    <name>GreekTranslit</name>
+    <message>
+        <source>Greek Transliteration</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -359,6 +441,14 @@
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
         <translation type="unfinished">Влачете речниците в и от групите, местете ги вътре в групите, пренареждайте групите, като използвате мишката.</translation>
+    </message>
+    <message>
+        <source>Create language-based groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto groups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1414,6 +1504,42 @@
         <source>&amp;Clear</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words Zoom In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words Normal Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close current tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close all tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close all tabs except current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opened tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[Unknown]</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
@@ -1901,6 +2027,10 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
         <source>Play via DirectShow</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Double-click translates the word clicked</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Romaji</name>
@@ -2148,6 +2278,59 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <source>Wikipedia (MediaWiki) sites:</source>
         <translation>Страници Уикипедия (MediaWiki):</translation>
+    </message>
+    <message>
+        <source>Forvo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable pronunciations from Forvo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>API Key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use of Forvo currently requires an API key. Leave this field
+blank to use the default key, which may become unavailable
+in the future, or register on the site to get your own key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language codes (comma-separated):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Greek transliteration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(not available in portable version)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

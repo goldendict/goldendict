@@ -295,6 +295,10 @@
         <source>from</source>
         <translation>từ</translation>
     </message>
+    <message>
+        <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>
@@ -429,6 +433,14 @@
     <message>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>Bạn có chắc chắn muốn xóa hết các nhóm?</translation>
+    </message>
+    <message>
+        <source>Create language-based groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto groups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1495,6 +1507,22 @@
     <message>
         <source>Can&apos;t save article: %1</source>
         <translation>Không thể lưu bài viết: %1</translation>
+    </message>
+    <message>
+        <source>Close current tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close all tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close all tabs except current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opened tabs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

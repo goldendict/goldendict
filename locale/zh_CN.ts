@@ -295,6 +295,10 @@
         <source>from</source>
         <translation>来自</translation>
     </message>
+    <message>
+        <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>
@@ -429,6 +433,14 @@
     <message>
         <source>Remove all dictionary groups</source>
         <translation>移除全部词典群组</translation>
+    </message>
+    <message>
+        <source>Create language-based groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto groups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1496,6 +1508,22 @@
     <message>
         <source>[Unknown]</source>
         <translation>[未知]</translation>
+    </message>
+    <message>
+        <source>Close current tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close all tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close all tabs except current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opened tabs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -148,71 +148,71 @@
         <translation>&amp;З урахуванням регістру</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="716"/>
-        <location filename="../articleview.cc" line="1037"/>
-        <location filename="../articleview.cc" line="1055"/>
-        <location filename="../articleview.cc" line="1065"/>
-        <location filename="../articleview.cc" line="1088"/>
+        <location filename="../articleview.cc" line="715"/>
+        <location filename="../articleview.cc" line="1035"/>
+        <location filename="../articleview.cc" line="1053"/>
+        <location filename="../articleview.cc" line="1063"/>
+        <location filename="../articleview.cc" line="1086"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="716"/>
+        <location filename="../articleview.cc" line="715"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Вказаний ресур не існує.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="822"/>
+        <location filename="../articleview.cc" line="820"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Відкрити посилання</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="828"/>
+        <location filename="../articleview.cc" line="826"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Відкрити посилання в новій в&amp;кладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="835"/>
+        <location filename="../articleview.cc" line="833"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Відкрити посилання у &amp;зовнішньому переглядачі</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="848"/>
+        <location filename="../articleview.cc" line="846"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Пошук «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="856"/>
+        <location filename="../articleview.cc" line="854"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Пошук «%1» в &amp;новій вкладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="871"/>
+        <location filename="../articleview.cc" line="869"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Пошук «%1» в %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="879"/>
+        <location filename="../articleview.cc" line="877"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Пошук «%1»в %2 в &amp;новій вкладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1037"/>
+        <location filename="../articleview.cc" line="1035"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Не вдалось запустити програвач для відтворення звукового файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1053"/>
         <source>Failed to create temporary file.</source>
         <translation>Не вдалось створити тимчасовий файл.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1065"/>
+        <location filename="../articleview.cc" line="1063"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Не вдалось відкрити файл ресурсу, спробуйте відкрити вручну: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1088"/>
+        <location filename="../articleview.cc" line="1086"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не вдалось звантажити вказаний ресурс.</translation>
     </message>
@@ -229,11 +229,51 @@
         <source>Group icon:</source>
         <translation>Піктограма групи:</translation>
     </message>
+    <message>
+        <location filename="../dictgroupwidget.ui" line="85"/>
+        <source>Shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="34"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="39"/>
+        <source>From file...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="79"/>
+        <source>Choose a file to use as group icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="81"/>
+        <source>Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="82"/>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="89"/>
+        <source>Error</source>
+        <translation type="unfinished">Помилка</translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="89"/>
+        <source>Can&apos;t read the specified image file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="125"/>
+        <location filename="../groups_widgets.cc" line="187"/>
         <source>%1 entries</source>
         <translation>%1 статей</translation>
     </message>
@@ -299,34 +339,39 @@
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="190"/>
+        <location filename="../forvo.cc" line="203"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Помилка аналізу XML: %1 в %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="266"/>
+        <location filename="../forvo.cc" line="279"/>
         <source>Added %1</source>
         <translation>Додано %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="269"/>
+        <location filename="../forvo.cc" line="282"/>
         <source>by</source>
         <translation> </translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="273"/>
+        <location filename="../forvo.cc" line="286"/>
         <source>Male</source>
         <translation>чоловіком</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="273"/>
+        <location filename="../forvo.cc" line="286"/>
         <source>Female</source>
         <translation>жінкою</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="275"/>
+        <location filename="../forvo.cc" line="288"/>
         <source>from</source>
         <translation>з</translation>
+    </message>
+    <message>
+        <location filename="../forvo.cc" line="326"/>
+        <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -348,7 +393,7 @@
 <context>
     <name>GroupComboBox</name>
     <message>
-        <location filename="../groupcombobox.cc" line="10"/>
+        <location filename="../groupcombobox.cc" line="12"/>
         <source>Choose a Group (Alt+G)</source>
         <translation>Вибрати групу (Alt+G)</translation>
     </message>
@@ -425,72 +470,82 @@
     </message>
     <message>
         <location filename="../groups.ui" line="150"/>
+        <source>Create language-based groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups.ui" line="153"/>
+        <source>Auto groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups.ui" line="160"/>
         <source>Rename current dictionary group</source>
         <translation>Перейменувати поточну групу</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="153"/>
+        <location filename="../groups.ui" line="163"/>
         <source>Re&amp;name group</source>
         <translation>&amp;Перейменувати</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="160"/>
+        <location filename="../groups.ui" line="170"/>
         <source>Remove current dictionary group</source>
         <translation>Вилучити поточну групу</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="163"/>
+        <location filename="../groups.ui" line="173"/>
         <source>&amp;Remove group</source>
         <translation>&amp;Вилучити групу</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="170"/>
+        <location filename="../groups.ui" line="180"/>
         <source>Remove all dictionary groups</source>
         <translation>Вилучити всі групи</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="173"/>
-        <location filename="../groups.cc" line="137"/>
+        <location filename="../groups.ui" line="183"/>
+        <location filename="../groups.cc" line="145"/>
         <source>Remove all groups</source>
         <translation>Вилучити всі групи</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="184"/>
+        <location filename="../groups.ui" line="194"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
         <translation>Перено&amp;сьте словники з/в групи, переміщайте їх усередині групи, впорядковуйте використовуючи мишку.</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="92"/>
+        <location filename="../groups.cc" line="94"/>
         <source>Add group</source>
         <translation>Додати групу</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="93"/>
+        <location filename="../groups.cc" line="95"/>
         <source>Give a name for the new group:</source>
         <translation>Надайте назву новій групі:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="112"/>
+        <location filename="../groups.cc" line="120"/>
         <source>Rename group</source>
         <translation>Перейменуйте групу</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="113"/>
+        <location filename="../groups.cc" line="121"/>
         <source>Give a new name for the group:</source>
         <translation>Надайте нову назву групі:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="124"/>
+        <location filename="../groups.cc" line="132"/>
         <source>Remove group</source>
         <translation>Вилучити групу</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="125"/>
+        <location filename="../groups.cc" line="133"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
         <translation>Бажаєте вилучити групу &lt;b&gt;%1&lt;/b&gt;?</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="138"/>
+        <location filename="../groups.cc" line="146"/>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>Бажаєте вилучити всі групи?</translation>
     </message>
@@ -503,7 +558,7 @@
         <translation>Орфографічні підказки: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="661"/>
+        <location filename="../hunspell.cc" line="733"/>
         <source>%1 Morphology</source>
         <translation>Морфологія %1</translation>
     </message>
@@ -1486,13 +1541,13 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1359"/>
+        <location filename="../mainwindow.cc" line="1518"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="43"/>
-        <location filename="../mainwindow.cc" line="311"/>
+        <location filename="../mainwindow.cc" line="374"/>
         <source>Welcome!</source>
         <translation>Ласкаво просимо!</translation>
     </message>
@@ -1517,290 +1572,335 @@
         <translation>П&amp;ерегляд</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="102"/>
+        <location filename="../mainwindow.ui" line="101"/>
+        <source>&amp;Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="108"/>
         <source>H&amp;istory</source>
         <translation>&amp;Журнал</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="116"/>
+        <location filename="../mainwindow.ui" line="122"/>
         <source>Search Pane</source>
         <translation>Панель пошуку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="247"/>
+        <location filename="../mainwindow.ui" line="253"/>
         <source>&amp;Dictionaries...</source>
         <translation>&amp;Словники…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="250"/>
-        <location filename="../mainwindow.ui" line="262"/>
+        <location filename="../mainwindow.ui" line="256"/>
+        <location filename="../mainwindow.ui" line="268"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="259"/>
+        <location filename="../mainwindow.ui" line="265"/>
         <source>&amp;Groups...</source>
         <translation>&amp;Групи…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="271"/>
+        <location filename="../mainwindow.ui" line="277"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Налаштування…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="274"/>
+        <location filename="../mainwindow.ui" line="280"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="279"/>
+        <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;Homepage</source>
         <translation>&amp;Сторінка проекту</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="284"/>
+        <location filename="../mainwindow.ui" line="290"/>
         <source>&amp;About</source>
         <translation>П&amp;ро програму</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="287"/>
+        <location filename="../mainwindow.ui" line="293"/>
         <source>About GoldenDict</source>
         <translation>Про GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="290"/>
+        <location filename="../mainwindow.ui" line="296"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="295"/>
-        <location filename="../mainwindow.cc" line="111"/>
+        <location filename="../mainwindow.ui" line="301"/>
+        <location filename="../mainwindow.cc" line="137"/>
         <source>&amp;Quit</source>
         <translation>&amp;Вихід</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="298"/>
+        <location filename="../mainwindow.ui" line="304"/>
         <source>Quit from application</source>
         <translation>Вийти з програми</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="301"/>
+        <location filename="../mainwindow.ui" line="307"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="306"/>
+        <location filename="../mainwindow.ui" line="312"/>
         <source>&amp;Forum</source>
         <translation>&amp;Форум</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="311"/>
+        <location filename="../mainwindow.ui" line="317"/>
         <source>&amp;Close To Tray</source>
         <translation>&amp;Сховати в лоток</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="314"/>
+        <location filename="../mainwindow.ui" line="320"/>
         <source>Minimizes the window to tray</source>
         <translation>Сховати вікно в лоток</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="317"/>
+        <location filename="../mainwindow.ui" line="323"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="326"/>
+        <location filename="../mainwindow.ui" line="332"/>
         <source>&amp;Save Article</source>
         <translation>&amp;Зберегти статтю</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="329"/>
+        <location filename="../mainwindow.ui" line="335"/>
         <source>Save Article</source>
         <translation>Зберегти статтю</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="332"/>
+        <location filename="../mainwindow.ui" line="338"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../mainwindow.ui" line="347"/>
         <source>&amp;Print</source>
         <translation>&amp;Друк</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="344"/>
+        <location filename="../mainwindow.ui" line="350"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="349"/>
+        <location filename="../mainwindow.ui" line="355"/>
         <source>Page Set&amp;up</source>
         <translation>&amp;Параметри сторінки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="../mainwindow.ui" line="360"/>
         <source>Print Preview</source>
         <translation>Перегляд друку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="359"/>
+        <location filename="../mainwindow.ui" line="365"/>
         <source>Rescan Files</source>
         <translation>Переглянути файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="362"/>
+        <location filename="../mainwindow.ui" line="368"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="367"/>
+        <location filename="../mainwindow.ui" line="373"/>
         <source>&amp;Clear</source>
         <translation>&amp;Очистити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="34"/>
+        <location filename="../mainwindow.cc" line="37"/>
         <source>Show Names in Dictionary Bar</source>
         <translation>Показує назви в панелі словника</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="53"/>
-        <location filename="../mainwindow.cc" line="554"/>
+        <location filename="../mainwindow.cc" line="59"/>
+        <location filename="../mainwindow.cc" line="633"/>
         <source>Look up in:</source>
         <translation>Пошук в:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="65"/>
+        <location filename="../mainwindow.cc" line="71"/>
         <source>Navigation</source>
         <translation>Навігація</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="68"/>
+        <location filename="../mainwindow.cc" line="74"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="69"/>
+        <location filename="../mainwindow.cc" line="75"/>
         <source>Forward</source>
         <translation>Вперед</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="76"/>
+        <location filename="../mainwindow.cc" line="82"/>
         <source>Scan Popup</source>
         <translation>Переглянути</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="86"/>
+        <location filename="../mainwindow.cc" line="92"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Вимовити слово (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="95"/>
+        <location filename="../mainwindow.cc" line="101"/>
         <source>Zoom In</source>
         <translation>Зблизити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="96"/>
+        <location filename="../mainwindow.cc" line="103"/>
         <source>Zoom Out</source>
         <translation>Віддалити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="97"/>
+        <location filename="../mainwindow.cc" line="105"/>
         <source>Normal Size</source>
         <translation>Нормальний розмір</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="107"/>
+        <location filename="../mainwindow.cc" line="121"/>
+        <source>Words Zoom In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="123"/>
+        <source>Words Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="125"/>
+        <source>Words Normal Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="133"/>
         <source>Show &amp;Main Window</source>
         <translation>Показати &amp;головне вікно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="213"/>
+        <location filename="../mainwindow.cc" line="172"/>
+        <source>Close current tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="182"/>
+        <source>Close all tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="190"/>
+        <source>Close all tabs except current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="268"/>
         <source>Loading...</source>
         <translation>Завантаження…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="543"/>
+        <location filename="../mainwindow.cc" line="622"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 словників, %2 статей, %3 слів</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="554"/>
+        <location filename="../mainwindow.cc" line="633"/>
         <source>Look up:</source>
         <translation>Шукати:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="572"/>
+        <location filename="../mainwindow.cc" line="651"/>
         <source>All</source>
         <translation>Усе</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="664"/>
+        <location filename="../mainwindow.cc" line="744"/>
+        <source>Opened tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="785"/>
         <source>(untitled)</source>
         <translation>(без назви)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1065"/>
+        <location filename="../mainwindow.cc" line="1224"/>
         <source>WARNING: %1</source>
         <translation>Попередження: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1360"/>
+        <location filename="../mainwindow.cc" line="1519"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Не вдалось запустити механізм стеження за гарячими клавішами.&lt;br&gt;Переконайтесь, що ваш XServer має розширення RECORD увімкнутим.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1494"/>
+        <location filename="../mainwindow.cc" line="1653"/>
         <source>New Release Available</source>
         <translation>Доступний новий випуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1495"/>
+        <location filename="../mainwindow.cc" line="1654"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версія &lt;b&gt;%1&lt;/b&gt; GoldenDict достуна до звантаження.&lt;br&gt;Натисніть &lt;b&gt;Звантажити&lt;/b&gt;, щоб перейти до сторінки звантаження.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1500"/>
+        <location filename="../mainwindow.cc" line="1659"/>
         <source>Download</source>
         <translation>Звантажити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1501"/>
+        <location filename="../mainwindow.cc" line="1660"/>
         <source>Skip This Release</source>
         <translation>Пропустити цей випуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1683"/>
+        <location filename="../mainwindow.cc" line="1741"/>
+        <source>[Unknown]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1851"/>
         <source>Page Setup</source>
         <translation>Параметри сторінки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1684"/>
+        <location filename="../mainwindow.cc" line="1852"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Не знайдео жодного принтера. Будь ласка, спершу встановіть якийсь.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1701"/>
+        <location filename="../mainwindow.cc" line="1869"/>
         <source>Print Article</source>
         <translation>Друк статті</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1722"/>
+        <location filename="../mainwindow.cc" line="1890"/>
         <source>Save Article As</source>
         <translation>Зберегти статтю як</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1722"/>
+        <location filename="../mainwindow.cc" line="1890"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файли HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1737"/>
+        <location filename="../mainwindow.cc" line="1905"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1738"/>
+        <location filename="../mainwindow.cc" line="1906"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Неможливо зберегти статтю: %1</translation>
     </message>
@@ -2379,12 +2479,12 @@ download page.</source>
 <context>
     <name>Romaji</name>
     <message>
-        <location filename="../romaji.cc" line="137"/>
+        <location filename="../romaji.cc" line="107"/>
         <source>Hepburn Romaji for Hiragana</source>
         <translation>Система романізації Хепбьорна для хіраґани</translation>
     </message>
     <message>
-        <location filename="../romaji.cc" line="146"/>
+        <location filename="../romaji.cc" line="116"/>
         <source>Hepburn Romaji for Katakana</source>
         <translation>Система романізації Хепбьорна для катакани</translation>
     </message>
@@ -2784,7 +2884,7 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WordFinder</name>
     <message>
-        <location filename="../wordfinder.cc" line="168"/>
+        <location filename="../wordfinder.cc" line="169"/>
         <source>Failed to query some dictionaries.</source>
         <translation>Не вдалось здійснити пошук по деяких словниках.</translation>
     </message>
