@@ -297,7 +297,7 @@
     </message>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished"></translation>
+        <translation>进入 编辑|词典|词典来源|Forvo, 申请自己的 API-key 来消除此错误。</translation>
     </message>
 </context>
 <context>
@@ -436,11 +436,11 @@
     </message>
     <message>
         <source>Create language-based groups</source>
-        <translation type="unfinished"></translation>
+        <translation>创建基于语言的群组</translation>
     </message>
     <message>
         <source>Auto groups</source>
-        <translation type="unfinished"></translation>
+        <translation>自动分组</translation>
     </message>
 </context>
 <context>
@@ -1511,19 +1511,19 @@
     </message>
     <message>
         <source>Close current tab</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭当前标签页</translation>
     </message>
     <message>
         <source>Close all tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭所有标签页</translation>
     </message>
     <message>
         <source>Close all tabs except current</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭其它标签页</translation>
     </message>
     <message>
         <source>Opened tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>已打开的标签页</translation>
     </message>
 </context>
 <context>
