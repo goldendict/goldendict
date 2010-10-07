@@ -84,7 +84,7 @@ string convert( string const & in )
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "a" );
-    el.setAttribute( "href", QString( "bword://" ) + el.text() );
+    el.setAttribute( "href", QString( "bword:" ) + el.text() );
     el.setAttribute( "class", "xdxf_kref" );
   }
 

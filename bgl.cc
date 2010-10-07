@@ -670,6 +670,10 @@ void BglArticleRequest::run()
   // Do some cleanups in the text
 
   BglDictionary::replaceCharsetEntities( result );
+  result = QString::fromUtf8( result.c_str() )
+           .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
+                     "\\1bword:" )
+           .toUtf8().data();
 
   Mutex::Lock _( dataMutex );
 

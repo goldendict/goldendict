@@ -220,7 +220,7 @@ void HunspellArticleRequest::run()
         }
         string suggestionUtf8 = Utf8::encode( suggestion );
 
-        result += "<a href=\"bword://";
+        result += "<a href=\"bword:";
         result += Html::escape( suggestionUtf8 ) + "\">";
         result += Html::escape( suggestionUtf8 ) + "</a>";
 

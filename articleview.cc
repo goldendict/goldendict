@@ -560,32 +560,9 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 {
   printf( "clicked %s\n", url.toString().toLocal8Bit().data() );
 
-  if ( url.scheme().compare( "bword", Qt::CaseInsensitive ) == 0 )
+  if ( url.scheme().compare( "bword" ) == 0 )
   {
-    QString host = url.host();
-
-    // If the host has punycode in its domains, decode it
-
-    QStringList domains = host.split( '.' );
-
-    bool hadPunycode = false;
-
-    for( QStringList::iterator i = domains.begin(); i != domains.end(); ++i )
-    {
-      if ( i->startsWith( "xn--" ) )
-      {
-        *i = QUrl::fromPunycode( i->toLatin1() );
-        hadPunycode = true;
-      }
-    }
-
-    if ( hadPunycode )
-    {
-      // Join back the result
-      host = domains.join( "." );
-    }
-
-    showDefinition( host + url.path(),
+    showDefinition( url.path(),
                     getGroup( ref ), scrollTo, contexts );
   }
   else
