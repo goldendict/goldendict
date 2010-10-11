@@ -729,6 +729,10 @@ void StardictArticleRequest::run()
         result += i->second.second;
         result += cleaner;
     }
+    result = QString::fromUtf8( result.c_str() )
+             .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
+                       "\\1bword:" )
+             .toUtf8().data();
 
     Mutex::Lock _( dataMutex );
 
