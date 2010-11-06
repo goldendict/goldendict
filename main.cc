@@ -81,7 +81,7 @@ int main( int argc, char ** argv )
   QHotkeyApplication app( argc, argv );
 
   app.setApplicationName( "GoldenDict" );
-  app.setOrganizationDomain( "http://goldendict.berlios.de/" );
+  app.setOrganizationDomain( "http://goldendict.org/" );
 
   app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
 

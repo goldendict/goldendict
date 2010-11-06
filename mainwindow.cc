@@ -1581,7 +1581,7 @@ void MainWindow::checkForNewRelease()
   latestReleaseReply.reset();
 
   QNetworkRequest req(
-    QUrl( "http://goldendict.berlios.de/latest_release.php?current="
+    QUrl( "http://goldendict.org/latest_release.php?current="
           PROGRAM_VERSION "&platform="
 #ifdef Q_WS_X11
           "x11"
@@ -1717,12 +1717,12 @@ void MainWindow::showMainWindow()
 
 void MainWindow::visitHomepage()
 {
-  QDesktopServices::openUrl( QUrl( "http://goldendict.berlios.de/" ) );
+  QDesktopServices::openUrl( QUrl( "http://goldendict.org/" ) );
 }
 
 void MainWindow::visitForum()
 {
-  QDesktopServices::openUrl( QUrl( "http://goldendict.berlios.de/forum/" ) );
+  QDesktopServices::openUrl( QUrl( "http://goldendict.org/forum/" ) );
 }
 
 void MainWindow::showAbout()
