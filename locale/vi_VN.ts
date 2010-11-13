@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Chào mừng đến với &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Để bắt đầu làm việc với chương trình, trước tiên hãy ghé thăm &lt;b&gt;Biên tập|Từ điển&lt;/b&gt; sau đó thêm một vài đường dẫn chứa từ điển để tìm kiếm các tập tin từ điển, cài đặt thêm các trang Wikipedia hay các nguồn khác, sắp xếp từ điển hay tạo các nhóm từ điển.&lt;p&gt;Và cuối cùng bạn đã sẵn sàng để tra từ rồi đấy! Bạn có thể tra trong cửa sổ này bằng cách sử dụng ô ở bên trái, hoặc bạn có thể &lt;a href=&quot;Working with popup&quot;&gt; để tra từ trong các ứng dụng khác&lt;/a&gt;. &lt;p&gt;Để tùy chỉnh chương trình, hãy thử các tùy chọn khác nhau ở &lt;b&gt;Biên tập|Tùy thích&lt;/b&gt;. Tất cả các cài đặt đều có các mẹo hiện lên, hãy đọc chúng nếu bạn đang phân vân về một chức năng nào đó.&lt;p&gt;Nếu như bạn cần thêm giúp đỡ, có một vài câu hỏi, gợi ý hay chỉ là thắc mắc về một vài vấn đề khác, bạn đều được chào mừng đến với &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; của chương trình.&lt;p&gt;Hãy kiểm tra &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; của chương trình để cập nhật nếu muốn. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Cấp phép bởi giấy phép GPLv3 hoặc mới hơn.</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Chào mừng đến với &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Để bắt đầu làm việc với chương trình, trước tiên hãy ghé thăm &lt;b&gt;Biên tập|Từ điển&lt;/b&gt; sau đó thêm một vài đường dẫn chứa từ điển để tìm kiếm các tập tin từ điển, cài đặt thêm các trang Wikipedia hay các nguồn khác, sắp xếp từ điển hay tạo các nhóm từ điển.&lt;p&gt;Và cuối cùng bạn đã sẵn sàng để tra từ rồi đấy! Bạn có thể tra trong cửa sổ này bằng cách sử dụng ô ở bên trái, hoặc bạn có thể &lt;a href=&quot;Working with popup&quot;&gt; để tra từ trong các ứng dụng khác&lt;/a&gt;. &lt;p&gt;Để tùy chỉnh chương trình, hãy thử các tùy chọn khác nhau ở &lt;b&gt;Biên tập|Tùy thích&lt;/b&gt;. Tất cả các cài đặt đều có các mẹo hiện lên, hãy đọc chúng nếu bạn đang phân vân về một chức năng nào đó.&lt;p&gt;Nếu như bạn cần thêm giúp đỡ, có một vài câu hỏi, gợi ý hay chỉ là thắc mắc về một vài vấn đề khác, bạn đều được chào mừng đến với &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; của chương trình.&lt;p&gt;Hãy kiểm tra &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; của chương trình để cập nhật nếu muốn. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Cấp phép bởi giấy phép GPLv3 hoặc mới hơn.</translation>
     </message>
     <message>
         <source>Working with popup</source>
@@ -61,6 +61,10 @@
     <message>
         <source>(untitled)</source>
         <translation>(chưa đặt tên)</translation>
+    </message>
+    <message>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -214,6 +218,17 @@
     <message>
         <source>Can&apos;t read the specified image file.</source>
         <translation>Không thể đọc tập tin ảnh được chỉ định.</translation>
+    </message>
+</context>
+<context>
+    <name>DictGroupsWidget</name>
+    <message>
+        <source>Confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to generate a set of groups based on language pairs?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

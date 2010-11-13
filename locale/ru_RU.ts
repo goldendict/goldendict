@@ -70,9 +70,13 @@
         <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Добро пожаловать в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Если вы запустили программу в первый раз, укажите пути к словарям в &lt;b&gt;Словари&lt;/b&gt;. Там же вы можете настроить другие источники, изменить порядок словарей и создать группы словарей.&lt;p&gt;Настройка параметров программы доступна в &lt;b&gt;Правка|Параметры&lt;/b&gt;. Все параметры настройки имеют подсказки, показываемые при наведении курсора на них.&lt;p&gt;Теперь всё готово для поиска слов! Введите слово в верхнее поле левой панели. Также вы можете &lt;a href=&quot;Всплывающее окно&quot;&gt;искать слова прямо из других приложений&lt;/a&gt;.&lt;p&gt;Если вы хотите помочь в разработке и улучшении программы, пишите на &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форум GoldenDict&lt;/a&gt;.&lt;p&gt;Последняя версия программы доступна на &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;веб-сайте GoldenDict&lt;/a&gt;.&lt;p&gt;© Константин Исаков, 2008-2009. Лицензия: GPLv3 или более поздняя версия.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Добро пожаловать в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Если вы запустили программу в первый раз, укажите пути к словарям в &lt;b&gt;Словари&lt;/b&gt;. Там же вы можете настроить другие источники, изменить порядок словарей и создать группы словарей.&lt;p&gt;Настройка параметров программы доступна в &lt;b&gt;Правка|Параметры&lt;/b&gt;. Все параметры настройки имеют подсказки, показываемые при наведении курсора на них.&lt;p&gt;Теперь всё готово для поиска слов! Введите слово в верхнее поле левой панели. Также вы можете &lt;a href=&quot;Всплывающее окно&quot;&gt;искать слова прямо из других приложений&lt;/a&gt;.&lt;p&gt;Если вы хотите помочь в разработке и улучшении программы, пишите на &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форум GoldenDict&lt;/a&gt;.&lt;p&gt;Последняя версия программы доступна на &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;веб-сайте GoldenDict&lt;/a&gt;.&lt;p&gt;© Константин Исаков, 2008-2009. Лицензия: GPLv3 или более поздняя версия. {3 ?} {3&gt;?} {2008-2010 ?} {3 ?}</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Добро пожаловать в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Если вы запустили программу в первый раз, укажите пути к словарям в &lt;b&gt;Словари&lt;/b&gt;. Там же вы можете настроить другие источники, изменить порядок словарей и создать группы словарей.&lt;p&gt;Настройка параметров программы доступна в &lt;b&gt;Правка|Параметры&lt;/b&gt;. Все параметры настройки имеют подсказки, показываемые при наведении курсора на них.&lt;p&gt;Теперь всё готово для поиска слов! Введите слово в верхнее поле левой панели. Также вы можете &lt;a href=&quot;Всплывающее окно&quot;&gt;искать слова прямо из других приложений&lt;/a&gt;.&lt;p&gt;Если вы хотите помочь в разработке и улучшении программы, пишите на &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форум GoldenDict&lt;/a&gt;.&lt;p&gt;Последняя версия программы доступна на &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;веб-сайте GoldenDict&lt;/a&gt;.&lt;p&gt;© Константин Исаков, 2008-2009. Лицензия: GPLv3 или более поздняя версия. {3 ?} {3&gt;?} {2008-2010 ?} {3 ?}</translation>
+    </message>
+    <message>
+        <location filename="../article_maker.cc" line="137"/>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
@@ -135,71 +139,71 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="715"/>
-        <location filename="../articleview.cc" line="1035"/>
-        <location filename="../articleview.cc" line="1053"/>
+        <location filename="../articleview.cc" line="692"/>
+        <location filename="../articleview.cc" line="1012"/>
+        <location filename="../articleview.cc" line="1030"/>
+        <location filename="../articleview.cc" line="1040"/>
         <location filename="../articleview.cc" line="1063"/>
-        <location filename="../articleview.cc" line="1086"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="715"/>
+        <location filename="../articleview.cc" line="692"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Запрошенный ресурс не найден.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="820"/>
+        <location filename="../articleview.cc" line="797"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Открыть ссылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="826"/>
+        <location filename="../articleview.cc" line="803"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Открыть ссылку в новой &amp;вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="833"/>
+        <location filename="../articleview.cc" line="810"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Открыть ссылку во внешнем &amp;браузере</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="846"/>
+        <location filename="../articleview.cc" line="823"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Поиск «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="854"/>
+        <location filename="../articleview.cc" line="831"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Поиск «%1» в &amp;новой вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="869"/>
+        <location filename="../articleview.cc" line="846"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Поиск «%1» в %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="877"/>
+        <location filename="../articleview.cc" line="854"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Поиск «%1» в %2 в &amp;новой вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1035"/>
+        <location filename="../articleview.cc" line="1012"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Невозможно запустить проигрыватель звукового файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1053"/>
+        <location filename="../articleview.cc" line="1030"/>
         <source>Failed to create temporary file.</source>
         <translation>Ошибка создания временного файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1063"/>
+        <location filename="../articleview.cc" line="1040"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Ошибка открытия файла ресурса, попробуйте открыть вручную: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1086"/>
+        <location filename="../articleview.cc" line="1063"/>
         <source>The referenced resource failed to download.</source>
         <translation>Невозможно загрузить указанный ресурс.</translation>
     </message>
@@ -294,6 +298,19 @@
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Can&apos;t read the specified image file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DictGroupsWidget</name>
+    <message>
+        <location filename="../groups_widgets.cc" line="570"/>
+        <source>Confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="571"/>
+        <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -70,9 +70,13 @@
         <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Benvenuto in &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prima di iniziare ad usare il programma, apri il menu &lt;b&gt;&lt;i&gt;Modifica|Dizionari&lt;/b&gt;&lt;/i&gt; in modo da inserire il percorso della cartella che contiene i dizionari, impostare gli indirizzi di Wikipedia e delle altre risorse internet di traduzione, stabilire, raggruppare o modificare l&apos;ordine di visualizzazione dei dizionari.&lt;p&gt;Visita anche il sito di &lt;a href=\&quot;http://goldendict.berlios.de/\&quot;&gt;GoldenDict&lt;/a&gt; per sapere se sono uscite versioni più aggiornate del programma, quali nuovi dizionari sono disponibili, e come procurarseli. &lt;p&gt;&lt;b&gt;Personalizzazioni&lt;/b&gt;&lt;br&gt;Personalizza il programma, regolando le impostazioni di puntamento previste dal menu &lt;b&gt;&lt;i&gt;Modifica|Impostazioni&lt;/b&gt;&lt;/i&gt;. Se hai dei dubbi apri il &lt;b&gt;&lt;i&gt;manuale d&apos;uso&lt;/b&gt;&lt;/i&gt; dal menu &lt;b&gt;&lt;i&gt;Guida&lt;/b&gt;&lt;/i&gt;.&lt;p&gt;&lt;b&gt;Uso del programma&lt;/b&gt;&lt;br&gt;Un modo tradizionale per usare un dizionario consiste nel digitare il termine da ricercare nella casellina di ricerca (in alto a sinistra in questa stessa finestra). Tuttavia, a differenza della maggior parte degli altri dizionari elettronici che conosci, non occorre inserire il termine nella sua forma enunciativa (cosa che comporta una conoscenza di base della grammatica della lingua da tradurre); con &apos;GoldenDict&apos; puoi digitare anche la forma flessa che ti appare a video; il programma è in grado di riconoscerne la radice, aprendo il dizionario esattamente alla voce corrispondente.&lt;p&gt;&lt;b&gt;Scansiona e traduci le parole puntate&lt;/b&gt;&lt;br&gt;Altra caratteristica fondamentale di &apos;GoldenDict&apos; è che non serve neppure digitare la parola da cercare nella casellina di ricerca: basta puntarla col mouse in qualunque applicazione essa si trovi. Clicca &lt;a href=\&quot;Puntamento e traduzione\&quot;&gt;scansiona e traduci le parole puntate&lt;/a&gt; per scoprire come usarla. &lt;p&gt;Se hai bisogno di ulteriore aiuto, hai domande o suggerimenti o per qualsiasi altra richiesta, il tuo intervento nel &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; del programma è benvenuto. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licenza GPLv3 o superiori.</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Benvenuto in &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prima di iniziare ad usare il programma, apri il menu &lt;b&gt;&lt;i&gt;Modifica|Dizionari&lt;/b&gt;&lt;/i&gt; in modo da inserire il percorso della cartella che contiene i dizionari, impostare gli indirizzi di Wikipedia e delle altre risorse internet di traduzione, stabilire, raggruppare o modificare l&apos;ordine di visualizzazione dei dizionari.&lt;p&gt;Visita anche il sito di &lt;a href=\&quot;http://goldendict.berlios.de/\&quot;&gt;GoldenDict&lt;/a&gt; per sapere se sono uscite versioni più aggiornate del programma, quali nuovi dizionari sono disponibili, e come procurarseli. &lt;p&gt;&lt;b&gt;Personalizzazioni&lt;/b&gt;&lt;br&gt;Personalizza il programma, regolando le impostazioni di puntamento previste dal menu &lt;b&gt;&lt;i&gt;Modifica|Impostazioni&lt;/b&gt;&lt;/i&gt;. Se hai dei dubbi apri il &lt;b&gt;&lt;i&gt;manuale d&apos;uso&lt;/b&gt;&lt;/i&gt; dal menu &lt;b&gt;&lt;i&gt;Guida&lt;/b&gt;&lt;/i&gt;.&lt;p&gt;&lt;b&gt;Uso del programma&lt;/b&gt;&lt;br&gt;Un modo tradizionale per usare un dizionario consiste nel digitare il termine da ricercare nella casellina di ricerca (in alto a sinistra in questa stessa finestra). Tuttavia, a differenza della maggior parte degli altri dizionari elettronici che conosci, non occorre inserire il termine nella sua forma enunciativa (cosa che comporta una conoscenza di base della grammatica della lingua da tradurre); con &apos;GoldenDict&apos; puoi digitare anche la forma flessa che ti appare a video; il programma è in grado di riconoscerne la radice, aprendo il dizionario esattamente alla voce corrispondente.&lt;p&gt;&lt;b&gt;Scansiona e traduci le parole puntate&lt;/b&gt;&lt;br&gt;Altra caratteristica fondamentale di &apos;GoldenDict&apos; è che non serve neppure digitare la parola da cercare nella casellina di ricerca: basta puntarla col mouse in qualunque applicazione essa si trovi. Clicca &lt;a href=\&quot;Puntamento e traduzione\&quot;&gt;scansiona e traduci le parole puntate&lt;/a&gt; per scoprire come usarla. &lt;p&gt;Se hai bisogno di ulteriore aiuto, hai domande o suggerimenti o per qualsiasi altra richiesta, il tuo intervento nel &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; del programma è benvenuto. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licenza GPLv3 o superiori.</translation>
+    </message>
+    <message>
+        <location filename="../article_maker.cc" line="137"/>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
@@ -135,71 +139,71 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="715"/>
-        <location filename="../articleview.cc" line="1035"/>
-        <location filename="../articleview.cc" line="1053"/>
+        <location filename="../articleview.cc" line="692"/>
+        <location filename="../articleview.cc" line="1012"/>
+        <location filename="../articleview.cc" line="1030"/>
+        <location filename="../articleview.cc" line="1040"/>
         <location filename="../articleview.cc" line="1063"/>
-        <location filename="../articleview.cc" line="1086"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="715"/>
+        <location filename="../articleview.cc" line="692"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>La risorsa di riferimento non esiste.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="820"/>
+        <location filename="../articleview.cc" line="797"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Apri collegamento</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="826"/>
+        <location filename="../articleview.cc" line="803"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Apri collegamento in una nuova &amp;scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="833"/>
+        <location filename="../articleview.cc" line="810"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Apri collegamento in un programma di &amp;navigazione web esterno</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="846"/>
+        <location filename="../articleview.cc" line="823"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Cerca &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="854"/>
+        <location filename="../articleview.cc" line="831"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Cerca &quot;%1&quot; in una &amp;nuova scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="869"/>
+        <location filename="../articleview.cc" line="846"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Cerca «%1» in %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="877"/>
+        <location filename="../articleview.cc" line="854"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Cerca &quot;%1&quot; in %2 in una &amp;nuova scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1035"/>
+        <location filename="../articleview.cc" line="1012"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>L&apos;esecuzione del file sonoro è fallita: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1053"/>
+        <location filename="../articleview.cc" line="1030"/>
         <source>Failed to create temporary file.</source>
         <translation>La creazione del file temporaneo è fallita.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1063"/>
+        <location filename="../articleview.cc" line="1040"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>L&apos;apertura automatica del file di risorsa è fallita. Provare ad aprire il file manualmente: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1086"/>
+        <location filename="../articleview.cc" line="1063"/>
         <source>The referenced resource failed to download.</source>
         <translation>Lo scaricamento della risorsa di riferimento è fallita.</translation>
     </message>
@@ -295,6 +299,19 @@
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>Impossibile leggere il file d&apos;immagine specificato</translation>
+    </message>
+</context>
+<context>
+    <name>DictGroupsWidget</name>
+    <message>
+        <location filename="../groups_widgets.cc" line="570"/>
+        <source>Confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="571"/>
+        <source>Are you sure you want to generate a set of groups based on language pairs?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
