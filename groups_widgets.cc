@@ -567,6 +567,12 @@ void DictGroupsWidget::addAutoGroups()
   if ( !allDicts )
     return;
 
+  if ( QMessageBox::information( this, tr( "Confirmation" ),
+         tr( "Are you sure you want to generate a set of groups "
+             "based on language pairs?" ), QMessageBox::Yes,
+             QMessageBox::Cancel ) != QMessageBox::Yes )
+    return;
+
   QMap< QPair<quint32,quint32>, int > tabMap;
 
 //  ::Initializing init( this, true );
