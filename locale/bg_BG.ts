@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>#.#</source>
-        <translation>#.#</translation>
+        <translation type="obsolete">#.#</translation>
     </message>
     <message>
         <source>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</source>
@@ -25,7 +25,19 @@
     </message>
     <message>
         <source>(c) 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished">© Константин Исаков (ikm@users.berlios.de), 2008-2009 {2008-2010 ?}</translation>
+        <translation type="obsolete">© Константин Исаков (ikm@users.berlios.de), 2008-2009 {2008-2010 ?}</translation>
+    </message>
+    <message>
+        <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
+        <translation type="unfinished">© Константин Исаков (ikm@users.berlios.de), 2008-2009 {2008-2010 ?} {2008-2011 ?}</translation>
+    </message>
+    <message>
+        <source>Credits:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[Unknown]</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -71,7 +83,7 @@
         <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Добре дошли в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;За да започнете да работите с програмата, първо посетете &lt;b&gt;Редактиране|Речници&lt;/b&gt; за да добавите път за достъп до места, на които да се търсят речници, да настроите различни страници на Уикипедия или други ресруси, да подредите последователността на речниците или да създадете групи от речници.&lt;p&gt;Веднага след това сте готови да търсите думи! Можете да направите това в този прозорец, като използвате левия панел или можете да &lt;a href=&quot;Working with popup&quot;&gt;търсите думи от други активни приложения&lt;/a&gt;. &lt;p&gt;За да настроите програмата, погледнете наличните настройки в &lt;b&gt;Редактиране|Настройки&lt;/b&gt;. Всички настройки там имат подсказки - прочетете ги в случай, че се съмнявате за нещо.&lt;p&gt;Ако имате нужда от допълнителна помощ, имате въпроси, предложения или се чудите какво мислят останалите, сте добре дошли във &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форума&lt;/a&gt; на програмата.&lt;p&gt;Проверете &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;уеб страницата&lt;/a&gt; за обновления. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Лицензирано под GPLv3 или следваща версия. {3 ?} {3&gt;?} {2008-2010 ?} {3 ?}</translation>
     </message>
     <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -182,6 +194,14 @@
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Playing a non-WAV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1551,10 +1571,6 @@
         <source>Opened tabs</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>[Unknown]</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
@@ -2044,6 +2060,24 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Windows native playback API. Limited to .wav files only,
+but works very well.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play via Windows native API</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio via Phonon framework. May be somewhat unstable,
+but should support most audio file formats.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use any external program to play audio files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

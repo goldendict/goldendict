@@ -13,15 +13,23 @@
     </message>
     <message>
         <source>#.#</source>
-        <translation>#.#</translation>
-    </message>
-    <message>
-        <source>(c) 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation></translation>
+        <translation type="obsolete">#.#</translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
         <translation>Giấy phép: GNU GPLv3 hoặc mới hơn</translation>
+    </message>
+    <message>
+        <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Credits:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[Unknown]</source>
+        <translation type="unfinished">[Không biết]</translation>
     </message>
 </context>
 <context>
@@ -63,7 +71,7 @@
         <translation>(chưa đặt tên)</translation>
     </message>
     <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -175,6 +183,14 @@
     <message>
         <source>The referenced resource failed to download.</source>
         <translation>Tải xuống nguồn được tham chiếu thất bại.</translation>
+    </message>
+    <message>
+        <source>Playing a non-WAV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1493,7 +1509,7 @@
     </message>
     <message>
         <source>[Unknown]</source>
-        <translation>[Không biết]</translation>
+        <translation type="obsolete">[Không biết]</translation>
     </message>
     <message>
         <source>Page Setup</source>
@@ -2006,6 +2022,24 @@ và gợi ý mở trang tải về.</translation>
     <message>
         <source>Restart the program to apply the language change.</source>
         <translation>Khởi động lại chương trình để áp dụng thay đổi ngôn ngữ.</translation>
+    </message>
+    <message>
+        <source>Use Windows native playback API. Limited to .wav files only,
+but works very well.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play via Windows native API</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio via Phonon framework. May be somewhat unstable,
+but should support most audio file formats.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use any external program to play audio files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
