@@ -42,5 +42,6 @@
         <file>icons/icon_dsl_native.png</file>
         <file>icons/forvo.png</file>
         <file>icons/windows-list.png</file>
+        <file>CREDITS.txt</file>
     </qresource>
 </RCC>

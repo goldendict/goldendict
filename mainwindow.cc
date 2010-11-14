@@ -5,7 +5,7 @@
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
 #include "preferences.hh"
-#include "ui_about.h"
+#include "about.hh"
 #include <limits.h>
 #include <QDir>
 #include <QMessageBox>
@@ -1727,22 +1727,7 @@ void MainWindow::visitForum()
 
 void MainWindow::showAbout()
 {
-  QDialog about( this );
-
-  Ui::About ui;
-
-  ui.setupUi( &about );
-
-  QFile versionFile( ":/version.txt" );
-
-  QString version;
-
-  if ( !versionFile.open( QFile::ReadOnly ) )
-    version = tr( "[Unknown]" );
-  else
-    version = QString::fromAscii( versionFile.readAll() ).trimmed();
-
-  ui.version->setText( version );
+  About about( this );
 
   about.show();
   about.exec();
