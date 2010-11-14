@@ -18,12 +18,12 @@
     <message>
         <location filename="../about.ui" line="70"/>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished">© 2008-2009 Konstantin Isakov (ikm@users.berlios.de) {2008-2011 ?}</translation>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="94"/>
         <source>Credits:</source>
-        <translation type="unfinished"></translation>
+        <translation>Padėkos:</translation>
     </message>
     <message>
         <source>GoldenDict dictionary lookup program, version 0.7</source>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../about.cc" line="16"/>
         <source>[Unknown]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Nežinoma]</translation>
     </message>
 </context>
 <context>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spausdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinksite žodynų tvarką arba kursite žodynų grupes.&lt;p&gt;Po to jau galėsite ieškoti žodžių! Versti žodžius galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad pravers, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p&gt;Programos atnaujinimų ieškokite &lt;a href=&quot;http://goldendict.org/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. GPLv3 arba vėlesnė licencija.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
@@ -195,12 +195,12 @@
     <message>
         <location filename="../articleview.cc" line="1002"/>
         <source>Playing a non-WAV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Groti ne-WAV rinkmeną</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1003"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="unfinished"></translation>
+        <translation>Norėdami įgalinti kitokių nei WAV rinkmenų grojimą, eikite į meniu Keisti &gt; Nuostatos, pasirinkite Garso kortelę ir pažymėkite „Groti per DirectShow“.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1054"/>
@@ -278,42 +278,42 @@
     <message>
         <location filename="../dictgroupwidget.ui" line="85"/>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuoroda:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="34"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieko</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="39"/>
         <source>From file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš rinkmenos...</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="79"/>
         <source>Choose a file to use as group icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasirinkite rinkmeną, naudosimą kaip gruįės ženkliuką</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="81"/>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Paveiksliukai</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="82"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Visos rinkmenos</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Error</source>
-        <translation type="unfinished">Klaida</translation>
+        <translation>Klaida</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta nuskaityti pasirinkto paveiksliuko rinkmenos.</translation>
     </message>
 </context>
 <context>
@@ -321,12 +321,12 @@
     <message>
         <location filename="../groups_widgets.cc" line="570"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Patvirtinimas</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="571"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tikrai norite sukurti grupes pagal kalbų poras?</translation>
     </message>
 </context>
 <context>
@@ -347,7 +347,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
         <source>Edit this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Keisti šią grupę</translation>
     </message>
 </context>
 <context>
@@ -400,37 +400,37 @@
     <message>
         <location filename="../forvo.cc" line="203"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation>XML analizavimo klaida: %1 ties %2,%3</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="279"/>
         <source>Added %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėjo %1</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="282"/>
         <source>by</source>
-        <translation type="unfinished"></translation>
+        <translation>pagal</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="286"/>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>vyras</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="286"/>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>moteris</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="288"/>
         <source>from</source>
-        <translation type="unfinished"></translation>
+        <translation>iš</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="326"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jei nenorite matyti šios klaidos, eikite į meniu Keisti &gt; Žodynai &gt; Ištekliai &gt; Forvo ir nurodykite nuosavą API raktą.</translation>
     </message>
 </context>
 <context>
@@ -446,7 +446,7 @@
     <message>
         <location filename="../greektranslit.cc" line="651"/>
         <source>Greek Transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Transliteracija (graikų)</translation>
     </message>
 </context>
 <context>
@@ -571,12 +571,12 @@
     <message>
         <location filename="../groups.ui" line="150"/>
         <source>Create language-based groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurti grupes pagal kalbas</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="153"/>
         <source>Auto groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatinės grupės</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="160"/>
@@ -1733,32 +1733,32 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="121"/>
         <source>Words Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Padidinti žodžius</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="123"/>
         <source>Words Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumažinti žodžius</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="125"/>
         <source>Words Normal Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Įprastas žodžių dydis</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="172"/>
         <source>Close current tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Užverti veikiamąją kortelę</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="182"/>
         <source>Close all tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Užverti visas korteles</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="190"/>
         <source>Close all tabs except current</source>
-        <translation type="unfinished"></translation>
+        <translation>Užverti visas korteles, iškyrus veikiamąją</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="633"/>
@@ -1773,7 +1773,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="744"/>
         <source>Opened tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Atvertos kortelės</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="785"/>
@@ -1835,7 +1835,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&amp;Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mastelis</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
@@ -2180,7 +2180,7 @@ tiesiog paslepiama.</translation>
     <message>
         <location filename="../preferences.ui" line="241"/>
         <source>Double-click translates the word clicked</source>
-        <translation type="unfinished"></translation>
+        <translation>Versti žodį, jį spragtelėjus du kartus</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="290"/>
@@ -2377,18 +2377,20 @@ po to, kai pasikeis pažymėtas žodis.</translation>
         <location filename="../preferences.ui" line="744"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti Windows sistemos grojimo sąsają. Palikomos
+tik .wav rinkmenos, tačiau gerai groja.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="748"/>
         <source>Play via Windows native API</source>
-        <translation type="unfinished"></translation>
+        <translation>Groti naudojant Windows sąsają</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="755"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Garsą leisti naudojant Phonon. Ji gali būti nestabili,
+tačiau palaiko daugelį garso rinkmenų formatų.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="759"/>
@@ -2398,7 +2400,7 @@ but should support most audio file formats.</source>
     <message>
         <location filename="../preferences.ui" line="771"/>
         <source>Use any external program to play audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti bet kokią išorinę programą garso rinkmenų grojimui</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="774"/>
@@ -2673,7 +2675,7 @@ galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus
     <message>
         <location filename="../sources.cc" line="81"/>
         <source>(not available in portable version)</source>
-        <translation type="unfinished"></translation>
+        <translation>(neprieinama perkeliamoje versijoje)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="117"/>
@@ -2795,29 +2797,31 @@ rašybos spėjimus.
     <message>
         <location filename="../sources.ui" line="343"/>
         <source>Forvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Forvo</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="355"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gyvų žmonių tarimas iš &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Šioje svetainėje asmenims siūloma įrašyti žodžių tarimą ir pasidalinti juo. GoldenDict leidžia pasinaudoti šiais ištekliais.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="368"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Įgalinti tarimą pagal Forvo</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="398"/>
         <source>API Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>API raktas</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="405"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šiuo metu norint naudotis Forvo paslauga, reikia turėti API raktą.
+Jei norite naudoti numatytąjį raktą, palikite tuščią laukelį.
+Deja, ateityje numatytasis raktas gali nebegalioti, tad siūlome užsiregistruoti ir įrašyti nuosavą raktą.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="430"/>
@@ -2829,22 +2833,29 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Nuosavą raktą gausite &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;čia&lt;/span&gt;&lt;/a&gt;. Palikus tuščią laukelį – bus naudojamas numatytasis.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="450"/>
         <source>Language codes (comma-separated):</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalbų kodai (atskirti kableliais):</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="457"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Norimų kalbų kodai. Pavyzdžiui: „en, ru, lt“.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="480"/>
         <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Visas kalbų kodų sąrašas pateiktas &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;čia&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="522"/>
@@ -2859,7 +2870,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="554"/>
         <source>Greek transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Transliteracija (graikų)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="578"/>
