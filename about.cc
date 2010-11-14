@@ -41,8 +41,12 @@ About::About( QWidget * parent ): QDialog( parent )
 
       if ( colon != -1 )
       {
-        str.replace( colon, 1, "</font><br>&nbsp;&nbsp;&nbsp;&nbsp;" );
-        str.prepend( "<font color='blue'>" );
+        QString name( str.left( colon ) );
+
+        name.replace( ", ", "<br>" );
+
+        str = "<font color='blue'>" + name + "</font><br>&nbsp;&nbsp;&nbsp;&nbsp;"
+              + str.mid( colon + 1 );
       }
 
       html += str;
