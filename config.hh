@@ -161,6 +161,7 @@ struct Preferences
   bool pronounceOnLoadMain, pronounceOnLoadPopup;
   QString audioPlaybackProgram;
   bool useExternalPlayer;
+  bool useWindowsPlaySound;
 
   ProxyServer proxyServer;
 

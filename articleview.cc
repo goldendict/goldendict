@@ -15,6 +15,10 @@
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
 
+#ifdef Q_OS_WIN32
+#include <windows.h>
+#include <mmsystem.h> // For PlaySound
+#endif
 #include <QBuffer>
 
 // Phonon headers are a mess. How to include them properly? Send patches if you
@@ -157,6 +161,15 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
+
+#ifdef Q_OS_WIN32
+  if ( winWavData.size() )
+  {
+    // If we were playing some sound some time ago, make sure it stopped
+    // playing before freeing the waveform memory.
+    PlaySoundA( 0, 0, 0 );
+  }
+#endif
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
@@ -971,6 +984,35 @@ void ArticleView::resourceDownloadFinished()
         {
           // Audio data
 
+#ifdef Q_OS_WIN32
+          // If we use Windows PlaySound, use that, not Phonon.
+          if ( !cfg.preferences.useExternalPlayer &&
+               cfg.preferences.useWindowsPlaySound )
+          {
+            // Stop any currently playing sound to make sure the previous data
+            // isn't used anymore
+            if ( winWavData.size() )
+            {
+              PlaySoundA( 0, 0, 0 );
+              winWavData.clear();
+            }
+
+            if ( data.size() < 4 || memcmp( data.data(), "RIFF", 4 ) != 0 )
+            {
+              QMessageBox::information( this, tr( "Playing a non-WAV file" ),
+                tr( "To enable playback of files different than WAV, please go "
+                    "to Edit|Preferences, choose the Audio tab and select "
+                    "\"Play via DirectShow\" there." ) );
+            }
+            else
+            {
+              winWavData = data;
+              PlaySoundA( &winWavData.front(), 0,
+                          SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+            }
+          }
+          else
+#endif
           if ( !cfg.preferences.useExternalPlayer )
           {
             // Play via Phonon

@@ -102,8 +102,10 @@ Preferences::Preferences():
   pronounceOnLoadPopup( false ),
 #ifdef Q_WS_WIN
   useExternalPlayer( false ),
+  useWindowsPlaySound( true ),
 #else
   useExternalPlayer( true ), // Phonon on Linux still feels quite buggy
+  useWindowsPlaySound( false ),
 #endif
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
@@ -553,6 +555,9 @@ Class load() throw( exError )
     
     if ( !preferences.namedItem( "useExternalPlayer" ).isNull() )
       c.preferences.useExternalPlayer = ( preferences.namedItem( "useExternalPlayer" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "useWindowsPlaySound" ).isNull() )
+      c.preferences.useWindowsPlaySound = ( preferences.namedItem( "useWindowsPlaySound" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
       c.preferences.audioPlaybackProgram = preferences.namedItem( "audioPlaybackProgram" ).toElement().text();
@@ -1010,6 +1015,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "useExternalPlayer" );
     opt.appendChild( dd.createTextNode( c.preferences.useExternalPlayer ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "useWindowsPlaySound" );
+    opt.appendChild( dd.createTextNode( c.preferences.useWindowsPlaySound ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "audioPlaybackProgram" );

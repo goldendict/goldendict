@@ -129,6 +129,9 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 #ifdef Q_WS_WIN
   // Since there's only one Phonon backend under Windows, be more precise
   ui.playViaPhonon->setText( tr( "Play via DirectShow" ) );
+#else
+  // This setting is Windows-specific
+  ui.useWindowsPlaySound->hide();
 #endif
 
   ui.pronounceOnLoadPopup->setEnabled( p.enableScanPopup );
@@ -137,6 +140,12 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.pronounceOnLoadPopup->setChecked( p.pronounceOnLoadPopup );
 
   ui.useExternalPlayer->setChecked( p.useExternalPlayer );
+
+#ifdef Q_WS_WIN
+  if ( p.useWindowsPlaySound && !p.useExternalPlayer )
+    ui.useWindowsPlaySound->setChecked( true );
+#endif
+
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
 
   if ( !isRECORDBroken() )
@@ -208,6 +217,9 @@ Config::Preferences Preferences::getPreferences()
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();
   p.useExternalPlayer = ui.useExternalPlayer->isChecked();
+#ifdef Q_WS_WIN
+  p.useWindowsPlaySound = ui.useWindowsPlaySound->isChecked();
+#endif
   p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
 
   p.proxyServer.enabled = ui.useProxyServer->isChecked();

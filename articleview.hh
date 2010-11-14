@@ -31,6 +31,11 @@ class ArticleView: public QFrame
           goBackAction, goForwardAction, openSearchAction;
   bool searchIsOpened;
 
+#ifdef Q_OS_WIN32
+    // Used in Windows only for PlaySound mode
+    vector< char > winWavData;
+#endif
+
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
   /// a multitude of requests.

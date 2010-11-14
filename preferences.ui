@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>572</width>
-    <height>342</height>
+    <height>346</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -739,7 +739,22 @@ p, li { white-space: pre-wrap; }
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_16">
           <item>
+           <widget class="QRadioButton" name="useWindowsPlaySound">
+            <property name="toolTip">
+             <string>Use Windows native playback API. Limited to .wav files only,
+but works very well.</string>
+            </property>
+            <property name="text">
+             <string>Play via Windows native API</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QRadioButton" name="playViaPhonon">
+            <property name="toolTip">
+             <string>Play audio via Phonon framework. May be somewhat unstable,
+but should support most audio file formats.</string>
+            </property>
             <property name="text">
              <string>Play via Phonon</string>
             </property>
@@ -752,6 +767,9 @@ p, li { white-space: pre-wrap; }
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
              <widget class="QRadioButton" name="useExternalPlayer">
+              <property name="toolTip">
+               <string>Use any external program to play audio files</string>
+              </property>
               <property name="text">
                <string>Use external program:</string>
               </property>
