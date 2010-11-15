@@ -761,15 +761,14 @@ void MainWindow::fillWindowsMenu()
 
   for (int i = 0; i < ui.tabWidget->count(); i++)
   {
-    QAction *act = tabListMenu->addAction(ui.tabWidget->tabText(i));
-    act->setData(i);
+    QAction *act = tabListMenu->addAction( ui.tabWidget->tabIcon( i ),
+                                           ui.tabWidget->tabText( i ) );
+    act->setData( i );
     if (ui.tabWidget->currentIndex() == i)
     {
-      QFont f(act->font());
-      f.setBold(true);
-      act->setFont(f);
-      act->setCheckable(true);
-      act->setChecked(true);
+      QFont f( act->font() );
+      f.setBold( true );
+      act->setFont( f );
     }
   }
 }
