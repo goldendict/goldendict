@@ -240,6 +240,8 @@ private:
 
   void performFindOperation( bool restart, bool backwards );
 
+  void reloadStyleSheet();
+
   /// Returns the comma-separated list of dictionary ids which should be muted
   /// for the given group. If there are none, returns empty string.
   QString getMutedForGroup( unsigned group );

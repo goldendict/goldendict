@@ -1183,14 +1183,7 @@ void ArticleView::openSearch()
     ui.searchText->setProperty( "noResults", false );
 
     // Reload stylesheet
-    for( QWidget * w = parentWidget(); w; w = w->parentWidget() )
-    {
-      if ( w->styleSheet().size() )
-      {
-        w->setStyleSheet( w->styleSheet() );
-        break;
-      }
-    }
+    reloadStyleSheet();
   }
 }
 
@@ -1275,16 +1268,22 @@ void ArticleView::performFindOperation( bool restart, bool backwards )
     ui.searchText->setProperty( "noResults", setMark );
 
     // Reload stylesheet
-    for( QWidget * w = parentWidget(); w; w = w->parentWidget() )
+    reloadStyleSheet();
+  }
+}
+
+void ArticleView::reloadStyleSheet()
+{
+  for( QWidget * w = parentWidget(); w; w = w->parentWidget() )
+  {
+    if ( w->styleSheet().size() )
     {
-      if ( w->styleSheet().size() )
-      {
-        w->setStyleSheet( w->styleSheet() );
-        break;
-      }
+      w->setStyleSheet( w->styleSheet() );
+      break;
     }
   }
 }
+
 
 bool ArticleView::closeSearch()
 {

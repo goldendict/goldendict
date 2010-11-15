@@ -136,6 +136,9 @@ private:
 
   void mousePressEvent ( QMouseEvent * event );
 
+  void updateCurrentGroupProperty();
+
+
 private slots:
 
   void hotKeyActivated( int );
