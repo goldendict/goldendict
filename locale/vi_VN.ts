@@ -17,19 +17,19 @@
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>Giấy phép: GNU GPLv3 hoặc mới hơn</translation>
+        <translation>Cấp phép theo GNU GPLv3 hoặc mới hơn</translation>
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Credits:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>[Unknown]</source>
-        <translation type="unfinished">[Không biết]</translation>
+        <translation>[Không biết]</translation>
     </message>
 </context>
 <context>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Chào mừng đến với &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Để bắt đầu làm việc với chương trình, trước tiên hãy ghé thăm &lt;b&gt;Biên tập|Từ điển&lt;/b&gt; sau đó thêm một vài đường dẫn chứa từ điển để tìm kiếm các tập tin từ điển, cài đặt thêm các trang Wikipedia hay các nguồn khác, sắp xếp từ điển hay tạo các nhóm từ điển.&lt;p&gt;Và cuối cùng bạn đã sẵn sàng để tra từ rồi đấy! Bạn có thể tra trong cửa sổ này bằng cách sử dụng ô ở bên trái, hoặc bạn có thể &lt;a href=&quot;Working with popup&quot;&gt;tra từ trong các ứng dụng khác&lt;/a&gt;. &lt;p&gt;Để tùy chỉnh chương trình, hãy thử các tùy chọn khác nhau ở &lt;b&gt;Biên tập|Tùy thích&lt;/b&gt;. Tất cả các cài đặt đều có các mẹo hiện lên, hãy đọc chúng nếu bạn đang phân vân về một chức năng nào đó.&lt;p&gt;Nếu như bạn cần thêm giúp đỡ, có một vài câu hỏi, gợi ý hay chỉ là thắc mắc xem những người khác đang nghĩ gì, bạn đều được chào mừng đến với &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; của chương trình.&lt;p&gt;Hãy kiểm tra &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; của chương trình để cập nhật nếu muốn. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Cấp phép theo GPLv3 hoặc mới hơn.</translation>
     </message>
 </context>
 <context>
@@ -186,11 +186,11 @@
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Chơi một tập tin không phải WAV</translation>
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="unfinished"></translation>
+        <translation>Để bật khả năng chơi các tập tin không phải WAV, hãy vào Biên tập|Tùy thích, mở thẻ Âm thanh và chọn &quot;Chơi qua DirectShow&quot; ở đó.</translation>
     </message>
 </context>
 <context>
@@ -240,11 +240,11 @@
     <name>DictGroupsWidget</name>
     <message>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Xác nhận</translation>
     </message>
     <message>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bạn có chắc chắn muốn tạo một bộ các nhóm dựa trên các cặp ngôn ngữ?</translation>
     </message>
 </context>
 <context>
@@ -328,7 +328,7 @@
     </message>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hãy vào Biên tập|Từ điển|Nguồn|Forvo và nhập khóa API của riêng bạn để tắt lỗi này đi.</translation>
     </message>
 </context>
 <context>
@@ -435,7 +435,7 @@
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Kéo &amp; Thả các từ điển tới và từ các nhóm, di chuyển chúng vào trong các nhóm, sắp sếp lại các nhóm sử dụng con chuột của bạn.</translation>
+        <translation>Kéo &amp;Thả các từ điển tới và từ các nhóm, di chuyển chúng vào trong các nhóm, sắp sếp lại các nhóm sử dụng con chuột của bạn.</translation>
     </message>
     <message>
         <source>Add group</source>
@@ -467,11 +467,11 @@
     </message>
     <message>
         <source>Create language-based groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Tạo các nhóm dựa-trên-ngôn-ngữ</translation>
     </message>
     <message>
         <source>Auto groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Các nhóm tự động</translation>
     </message>
 </context>
 <context>
@@ -1541,19 +1541,19 @@
     </message>
     <message>
         <source>Close current tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Đóng thẻ hiện tại</translation>
     </message>
     <message>
         <source>Close all tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Đóng tất cả các thẻ</translation>
     </message>
     <message>
         <source>Close all tabs except current</source>
-        <translation type="unfinished"></translation>
+        <translation>Đóng hết thẻ trừ thẻ hiện tại</translation>
     </message>
     <message>
         <source>Opened tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Các thẻ đã mở</translation>
     </message>
 </context>
 <context>
@@ -2026,20 +2026,22 @@ và gợi ý mở trang tải về.</translation>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sử dụng API phát lại của Windows. Giới hạn chỉ cho các tập tin .wav,
+nhưng hoạt động rất tốt.</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
-        <translation type="unfinished"></translation>
+        <translation>Chơi bằng API của Windows</translation>
     </message>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Phát âm thanh qua nền tảng Phonon. Có thể sẽ không ổn định một chút,
+nhưng hỗ trợ nhiều định dạng âm thanh nhất.</translation>
     </message>
     <message>
         <source>Use any external program to play audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sử dụng bất cứ chương trình ngoài nào để phát tập tin âm thanh</translation>
     </message>
 </context>
 <context>

@@ -40,15 +40,15 @@
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished">(c) 2008-2009 Konstantin Isakov © (ikm@users.berlios.de) {2008-2010 ?} {2008-2011 ?}</translation>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
     <message>
         <source>Credits:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zásluhy:</translation>
     </message>
     <message>
         <source>[Unknown]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Neznámý]</translation>
     </message>
 </context>
 <context>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ve skupině &lt;b&gt;%1&lt;/b&gt; nebyl nalezen žádný překlad.</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Vítejte v programu  &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Práci s programem začněte v &lt;b&gt;Upravit|Slovníky&lt;/b&gt;, kde můžete přidat cesty ke složkám, kde budou vyhledávány soubory slovníků, nastavíte různé stránky Wikipedie a jiné zdroje, upravíte pořadí adresářů nebo vytvoříte skupiny slovníků.&lt;p&gt;Pak budete moci vyhledávat slovíčka! To můžete provádět v tomto okně použitím pasnelu vlevo, nebo můžete &lt;a href=&quot;Working with popup&quot;&gt;vyhledávat slova z jiných aktivních aplikací&lt;/a&gt;. &lt;p&gt;Upravení vlastností programu provedete v &lt;b&gt;Upravit|Předvolby&lt;/b&gt;. Všechna nastavení mají nápovědu, která vám pomůže v případě, že máte o něčem pochybnosti.&lt;p&gt;Budete-li potřebovat další pomoc, budete mít nějaké návrhy nebo jenom budete chtít vědět co si myslí jiní, budete vítání na stránkách &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskuse&lt;/a&gt; o programu.&lt;p&gt;Aktualizace programu hledejte na &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;jeho stránkách&lt;/a&gt;.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licencováno pod GPLv3 nebo novější.</translation>
     </message>
 </context>
 <context>
@@ -122,11 +122,11 @@
     </message>
     <message>
         <source>Compound expressions: </source>
-        <translation type="unfinished"></translation>
+        <translation>Složené výrazy:</translation>
     </message>
     <message>
         <source>Individual words: </source>
-        <translation type="unfinished"></translation>
+        <translation>Jednotlivá slova:</translation>
     </message>
 </context>
 <context>
@@ -213,15 +213,15 @@
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít odkaz v &amp;externím prohlížeči</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehrávání souboru jiného než WAV</translation>
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro povolení přehrávání jiných souborů než WAV, přejděte, prosím, do Upravit|Předvolby, zvolte kartu Audio a zde zvolte &quot;Přehrát přes DirectShow&quot;.</translation>
     </message>
 </context>
 <context>
@@ -236,46 +236,46 @@
     </message>
     <message>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkratka:</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádná</translation>
     </message>
     <message>
         <source>From file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ze souboru...</translation>
     </message>
     <message>
         <source>Choose a file to use as group icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte soubor pro použití jako ikona skupiny</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázky</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny soubory</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>Can&apos;t read the specified image file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolený obrázek nelze přečíst.</translation>
     </message>
 </context>
 <context>
     <name>DictGroupsWidget</name>
     <message>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrzení</translation>
     </message>
     <message>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete vygenerovat set skupin založený na párech jazyků?</translation>
     </message>
 </context>
 <context>
@@ -289,11 +289,11 @@
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Pruh slovníků</translation>
     </message>
     <message>
         <source>Edit this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit tuto skupinu</translation>
     </message>
 </context>
 <context>
@@ -335,31 +335,31 @@
     <name>Forvo::ForvoArticleRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Chyba při zpracování XML: %1 v %2, %3</translation>
+        <translation>Chyba při zpracování XML: %1 v %2, %3</translation>
     </message>
     <message>
         <source>Added %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidáno %1</translation>
     </message>
     <message>
         <source>by</source>
-        <translation type="unfinished"></translation>
+        <translation>od</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Muž</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Žena</translation>
     </message>
     <message>
         <source>from</source>
-        <translation type="unfinished"></translation>
+        <translation>od</translation>
     </message>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro odstranění této chyby přejděte do Upravit|Slovníky|Zdroje|Forvo a aplikuje na vlasní klíč API.</translation>
     </message>
 </context>
 <context>
@@ -373,7 +373,7 @@
     <name>GreekTranslit</name>
     <message>
         <source>Greek Transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Řecký přepis</translation>
     </message>
 </context>
 <context>
@@ -502,11 +502,11 @@
     </message>
     <message>
         <source>Create language-based groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit skupiny založené na jazycích</translation>
     </message>
     <message>
         <source>Auto groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatické skupiny</translation>
     </message>
 </context>
 <context>
@@ -1550,7 +1550,7 @@
     </message>
     <message>
         <source>Interlingua</source>
-        <translation type="unfinished">Интерлингва</translation>
+        <translation>Interlingua</translation>
     </message>
     <message>
         <source>Indonesian</source>
@@ -1558,7 +1558,7 @@
     </message>
     <message>
         <source>Interlingue</source>
-        <translation type="unfinished">Окциденталь</translation>
+        <translation>Interlingue</translation>
     </message>
     <message>
         <source>Igbo</source>
@@ -1650,7 +1650,7 @@
     </message>
     <message>
         <source>Cornish</source>
-        <translation type="unfinished">Корнуольский</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Kirghiz</source>
@@ -1694,7 +1694,7 @@
     </message>
     <message>
         <source>Malagasy</source>
-        <translation type="unfinished">Мальгашский</translation>
+        <translation>Malgaština</translation>
     </message>
     <message>
         <source>Marshallese</source>
@@ -1906,7 +1906,7 @@
     </message>
     <message>
         <source>Sundanese</source>
-        <translation type="unfinished">Сунданский</translation>
+        <translation>Sundanština</translation>
     </message>
     <message>
         <source>Swedish</source>
@@ -2304,65 +2304,65 @@
     </message>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pohled</translation>
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit názvy v pruhu slovníků</translation>
     </message>
     <message>
         <source>H&amp;istory</source>
-        <translation type="unfinished"></translation>
+        <translation>H&amp;istorie</translation>
     </message>
     <message>
         <source>&amp;Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypráz&amp;dnit</translation>
     </message>
     <message>
         <source>&amp;Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Přib&amp;lížení</translation>
     </message>
     <message>
         <source>Words Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Přiblížit slova</translation>
     </message>
     <message>
         <source>Words Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Oddálit slova</translation>
     </message>
     <message>
         <source>Words Normal Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální velikost slov</translation>
     </message>
     <message>
         <source>Close current tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít současnou kartu</translation>
     </message>
     <message>
         <source>Close all tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít všechny karty</translation>
     </message>
     <message>
         <source>Close all tabs except current</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít všechny karty kromě současné</translation>
     </message>
     <message>
         <source>Opened tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřené karty</translation>
     </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Chyba při zpracování XML: %1 v %2, %3</translation>
+        <translation>Chyba při zpracování XML: %1 v %2, %3</translation>
     </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Chyba při zpracování XML: %1 v %2, %3</translation>
+        <translation>Chyba při zpracování XML: %1 v %2, %3</translation>
     </message>
 </context>
 <context>
@@ -2788,19 +2788,23 @@ a nabídne otevření stránky s aktualizací ke stažení.</translation>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky spustí GoldenDict po spuštění systému.</translation>
     </message>
     <message>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Určuje, zda je vyskakovací okno automaticky povoleno nebo zakázáno. Pokud
+zaškrtnuto, program bude automaticky startovat s aktivovaným vyskakovacím oknem.</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Normálně musíte pro aktivaci vyskakovacího okna
+držet zkratkouvou klávesu během vybírání slova.
+Takto stačí abyste tuto klávesu krátce stiskli až
+po označení slova.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2808,59 +2812,66 @@ be pressed shortly after the selection is done.</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Poznámka: Zdá se, že máte spuštěnu verzi ZServeru X.Org, která ma rozbité rozšíření RECORD. Zkratkové klávesy v GoldenDict nejspíš nebudou fungovat. Toto musí být opraveno v serveru samotném. Prosím, podívejte se na následující &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;chybové hlášení&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; a pokud chcete, zanechte komentář.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto umožní GoldenDictu blokovat většinu reklam nepovolením obsahu
+(obrázky, rámce), který pochází z jiné stránky než kterou prohlížíte.
+Pokud se kvůli tomuto některé stránky rozbijí, zkuste toto vypnout.</translation>
     </message>
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakázat načítání obsahu z jiných stránek (skryje většinu reklam)</translation>
     </message>
     <message>
         <source>Pronunciation</source>
-        <translation type="unfinished"></translation>
+        <translation>Výslovnost</translation>
     </message>
     <message>
         <source>Playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehrání</translation>
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation type="unfinished"></translation>
+        <translation>Pžehrát pomoci Phononu</translation>
     </message>
     <message>
         <source>Use external program:</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít externí program:</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehrát pomocí DirectShow</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojklik přeloží označené slovo</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít nativní API Windows pro přehrávání. Podporuje pouze .wav, ale funguje velice dobře.</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít nativní API Windows</translation>
     </message>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehrát audio pomocí Phononu. Může být poněkud nestabilní,
+ale mělo by podporovat většinu audio formátů.</translation>
     </message>
     <message>
         <source>Use any external program to play audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro přehrání audio souborů použít externí program</translation>
     </message>
 </context>
 <context>
@@ -2929,12 +2940,13 @@ but should support most audio file formats.</source>
     </message>
     <message>
         <source>Shows or hides the dictionary bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazí nebo zkryje pruh slovníků</translation>
     </message>
     <message>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto použijte pro připíchnutí okna, aby zůstalo na obrazovce.
+Lze měnit jeho velikost a může s ním být i jinak manipulováno.</translation>
     </message>
 </context>
 <context>
@@ -3136,25 +3148,27 @@ V GoldenDictu ještě není implementován.</translation>
     </message>
     <message>
         <source>Forvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Forvo</translation>
     </message>
     <message>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation type="unfinished"></translation>
+        <translation>Živá výslovnost z &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Stránky umožňují lidem nahrávat a sdílet výslovnosti slov. V GoldenDictu si je můžete poslechnout.</translation>
     </message>
     <message>
         <source>Enable pronunciations from Forvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit výslovnost z Forvo</translation>
     </message>
     <message>
         <source>API Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klíč API:</translation>
     </message>
     <message>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Použití Forvo vyžaduje API klíč. Ponechte toto pole prázdné
+pro použití výchozího klíče, který se časem může stát nedostupný,
+nebo se na stránkách zaregistrujte a získejte vlastní klíč.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3165,27 +3179,34 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Získejte vlastní klíč &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;zde&lt;/span&gt;&lt;/a&gt;, nebo ponechte prázdné pro použití výchozího.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Language codes (comma-separated):</source>
-        <translation type="unfinished"></translation>
+        <translation>Kódy jazyků (oddělené čárkou):</translation>
     </message>
     <message>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam kódů jazyků, které byste chtěli. Např.: &quot;en, ru&quot;.</translation>
     </message>
     <message>
         <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plný seznam jazyků je dostupný &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;zde&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>Greek transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Řecký přepis</translation>
     </message>
     <message>
         <source>(not available in portable version)</source>
-        <translation type="unfinished"></translation>
+        <translation>(nedostupné v portabilní verzi)</translation>
     </message>
 </context>
 <context>

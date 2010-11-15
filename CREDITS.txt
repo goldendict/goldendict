@@ -1,3 +1,5 @@
 Konstantin Isakov <ikm\users.berlios.de>: Principal author of the program
 Jennie Petoumenou <epetoumenou\gmail.com>: Greek transliteration and Greek translation
-Mindaugas Baranauskas <embar@super.lt>: Lithuanian translation
+Mindaugas Baranauskas <embar\super.lt>: Lithuanian translation
+Vit Pelcak <vit\pelcak.org>: Czech translation
+Hero Phương <herophuong93\gmail.com>: Vietnamese translation
