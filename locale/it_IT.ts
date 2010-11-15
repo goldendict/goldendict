@@ -18,12 +18,12 @@
     <message>
         <location filename="../about.ui" line="70"/>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished">(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de) {2008-2011 ?}</translation>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="94"/>
         <source>Credits:</source>
-        <translation type="unfinished"></translation>
+        <translation>Riconoscimenti:</translation>
     </message>
     <message>
         <source>GoldenDict dictionary lookup program, version 0.7</source>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../about.cc" line="16"/>
         <source>[Unknown]</source>
-        <translation type="unfinished">[Sconosciuto]</translation>
+        <translation>[Sconosciuto]</translation>
     </message>
 </context>
 <context>
@@ -89,7 +89,7 @@
     <message>
         <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Benvenuto in &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prima di iniziare ad usare il programma, apri il menu &lt;b&gt;&lt;i&gt;Modifica|Dizionari&lt;/b&gt;&lt;/i&gt; in modo da inserire il percorso della cartella che contiene i dizionari locali, impostare gli indirizzi di Wikipedia e delle altre risorse di traduzione su web, stabilire, raggruppare o modificare l&apos;ordine di visualizzazione dei dizionari.&lt;p&gt;A questo punto il programma sarà pronto a tradurre le parole che desideri! Un modo tradizionale per usare un dizionario consiste nel digitare il termine da ricercare nella casella di ricerca (in alto a sinistra in questa stessa finestra). Tuttavia, a differenza della maggior parte degli altri dizionari elettronici che conosci, non occorre inserire il termine nella sua forma enunciativa (cosa che comporta una conoscenza di base della grammatica della lingua da tradurre); con &apos;GoldenDict&apos; puoi digitare anche la forma flessa che ti appare a video; il programma è in grado di riconoscerne la radice, aprendo il dizionario esattamente alla voce corrispondente. Altra caratteristica fondamentale di &apos;GoldenDict&apos; è che non serve neppure digitare la parola da cercare nella casella di ricerca: basta puntarla col mouse in qualunque applicazione essa si trovi. Clicca &lt;a href=&quot;Scansiona e traduci le parole puntate&quot;&gt;scansiona e traduci le parole puntate&lt;/a&gt; per scoprire come usarla.&lt;p&gt;Per personalizzare il programma, clicca il menu &lt;b&gt;&lt;i&gt;Modifica|Impostazioni&lt;/b&gt;&lt;/i&gt;. Ogni opzione presenta dei suggerimenti a comparsa che appaiono appoggiandoci sopra il puntatore del mouse.&lt;p&gt;Se hai bisogno di ulteriore aiuto, hai domande o suggerimenti o per qualsiasi altra richiesta, il tuo intervento nel &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt; del programma è benvenuto.&lt;p&gt;&lt;a href=&quot;http://goldendict.org/&quot;&gt;Clicca qui&lt;/a&gt; per controllare se sono disponibili nuovi aggiornamenti del programma.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licenza GPLv3 o superiori.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
@@ -99,7 +99,7 @@
     <message>
         <location filename="../article_maker.cc" line="155"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>Dalla finestra principale, apri il menu &lt;b&gt;Modifica|Impostazioni&lt;/b&gt;, quindi la scheda &lt;b&gt;&lt;i&gt;\&quot;Puntamento\&quot;&lt;/b&gt;&lt;/i&gt;. &lt;p&gt;In questa finestra puoi impostare a piacimento la scansione e traduzione delle parole puntate. Indipendentemente dalle opzioni scelte, puoi attivare o disattivare in qualsiasi momento la scansione di ricerca tipica di questa modalità, cliccando col tasto destro del mouse sull&apos;iconcina del programma che appare nella barra di notifica di Windows.&lt;p&gt;Dal menu della barra di notifica che si apre puoi accedere alla finestra di dialogo principale e ripetere tutte le operazioni descritte sopra, oppure limitarti a cliccare sull&apos;iconcina &lt;b&gt;&lt;i&gt;Scansiona e traduci le parole puntate sì/no&lt;/b&gt;&lt;/i&gt;, sia per attivarla che per disattivarla.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Scansione e traduzione delle parole puntate&lt;/h3&gt;Per tradurre le parole puntate nelle applicazioni attive, è necessario attivarne la funzione nel modo seguente. Dalla finestra principale, apri il menu &lt;b&gt;Modifica|Impostazioni&lt;/b&gt;, quindi la scheda &lt;b&gt;&lt;i&gt;&quot;Puntamento&quot;&lt;/b&gt;&lt;/i&gt;. &lt;p&gt;In questa finestra spunta la casella &quot;Abilita l&apos;attività di scansione e traduzione delle parole puntate&quot;, imposta a piacimento la scansione e traduzione delle parole puntate e conferma il tutto premendo &quot;OK&quot;.&lt;p&gt;Indipendentemente dalle opzioni scelte, potrai attivare o disattivare in qualsiasi momento la scansione di ricerca tipica di questa modalità, cliccando il tasto destro del mouse sull&apos;iconcina del programma che appare nella barra di notifica di Windows. Nel menu che compare puoi cliccare l&apos;iconcina &lt;b&gt;&lt;i&gt;Scansiona e traduci le parole puntate sì/no&lt;/b&gt;&lt;/i&gt;, sia per attivarla che per disattivarla. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="162"/>
@@ -203,12 +203,12 @@
     <message>
         <location filename="../articleview.cc" line="1002"/>
         <source>Playing a non-WAV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Riproduzione di file audio diversi dai WAV</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1003"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per abilitare la riproduzione di file diversi dai WAV, dal menu Modifica|Impostazioni, clicca la scheda Audio e scegli l&apos;opzione &quot;Riproduci utilizzando le DirectShow&quot;.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1054"/>
@@ -276,7 +276,7 @@
     <message>
         <location filename="../dictgroupwidget.ui" line="14"/>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Modulo</translation>
     </message>
     <message>
         <location filename="../dictgroupwidget.ui" line="37"/>
@@ -329,12 +329,12 @@
     <message>
         <location filename="../groups_widgets.cc" line="570"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Conferma</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="571"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sei sicuro di volere generare una serie di gruppi basati sulle coppie di lingue?</translation>
     </message>
 </context>
 <context>
@@ -2647,7 +2647,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="293"/>
         <source>About GoldenDict</source>
-        <translation>Info...</translation>
+        <translation>Info su GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="296"/>
@@ -3202,18 +3202,20 @@ p, li { white-space: pre-wrap; }
         <location filename="../preferences.ui" line="744"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizza l&apos;API di riproduzione audio nativa di Windows.
+Funzione perfettamente funzionante ma limitata solo ai file wav.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="748"/>
         <source>Play via Windows native API</source>
-        <translation type="unfinished"></translation>
+        <translation>Riproduci utilizzando le API native di Windows</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="755"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Riproduce l&apos;audio via Phonon framework. Questa opzione potrebbe
+essere instabile, ma dovrebbe supportare un maggiore scelta di formati audio.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="759"/>
@@ -3223,7 +3225,7 @@ but should support most audio file formats.</source>
     <message>
         <location filename="../preferences.ui" line="771"/>
         <source>Use any external program to play audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa un qualsiasi programma esterno per riprodurre i file audio</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="774"/>
@@ -3332,7 +3334,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../preferences.cc" line="131"/>
         <source>Play via DirectShow</source>
-        <translation>Riproduci con le DirectShow</translation>
+        <translation>Riproduci utilizzando le DirectShow</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="310"/>

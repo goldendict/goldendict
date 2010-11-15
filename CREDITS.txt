@@ -3,3 +3,4 @@ Jennie Petoumenou <epetoumenou\gmail.com>: Greek transliteration and Greek trans
 Mindaugas Baranauskas <embar\super.lt>: Lithuanian translation
 Vit Pelcak <vit\pelcak.org>: Czech translation
 Hero Phương <herophuong93\gmail.com>: Vietnamese translation
+Daniele Di Pisa <daniele\systems.it>: Italian translation
