@@ -2,13 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="de_DE">
 <context>
-    <name></name>
-    <message>
-        <source>XML parse error: %1 at %2,%3</source>
-        <translation type="obsolete">Fehler beim XML parsen: %1 bei %2,%3</translation>
-    </message>
-</context>
-<context>
     <name>About</name>
     <message>
         <location filename="../about.ui" line="17"/>
@@ -23,24 +16,12 @@
     <message>
         <location filename="../about.ui" line="70"/>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished">(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de) {2008-2011 ?}</translation>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="94"/>
         <source>Credits:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>#.#</source>
-        <translation type="obsolete">#.#</translation>
-    </message>
-    <message>
-        <source>(c) 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="obsolete">(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de) {2008-2010 ?}</translation>
-    </message>
-    <message>
-        <source>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="obsolete">(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</translation>
+        <translation>Danksagungen:</translation>
     </message>
     <message>
         <location filename="../about.ui" line="80"/>
@@ -50,7 +31,7 @@
     <message>
         <location filename="../about.cc" line="16"/>
         <source>[Unknown]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Unbekannt]</translation>
     </message>
 </context>
 <context>
@@ -63,7 +44,7 @@
     <message>
         <location filename="../article_maker.cc" line="116"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Eintrag in Gruppe &lt;b&gt;%1&lt;/b&gt; gefunden.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="135"/>
@@ -71,23 +52,12 @@
         <translation>Willkommen!</translation>
     </message>
     <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Willkommen bei &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Damit Sie mit dem Programm beginnen können, besuchen Sie zunächst &lt;b&gt;Bearbeiten|Wörterbücher&lt;/b&gt;, um Pfade zu gespeicherten Wörterbüchern hinzuzufügen, Wikipedia oder andere Seiten einzurichten, oder um die Wörterbücher zu ordnen bzw. um Sie in Gruppen zu unterteilen.&lt;/p&gt;
-&lt;p&gt;Dann sind Sie bereit, um das erste Wort nachzuschlagen! Dies können Sie im Fenster auf der linken Seite, oder &lt;a href=&quot;Mit Popups arbeiten&quot;&gt;mittels der Popup-Funktion in anderen Applikationen.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Um das Programm anzupassen, besuchen Sie &lt;b&gt;Bearbeiten|Einstellungen&lt;/b&gt;. Alle Einstellungen haben Tooltips, die Ihnen helfen, die letzten Zweifel zu nehmen.&lt;/p&gt;
-&lt;p&gt;Sollten Sie trotzdem noch Hilfe brauchen, oder wenn Sie sonstige Fragen und Verbesserungsvorschlage haben, oder wenn Sie nur wissen wollen, wass andere denken, dann finden Sie uns im &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;Forum&lt;/a&gt;. &lt;p&gt;Programmupdates sind auf der &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;Website&lt;/a&gt; zu finden.&lt;p&gt;(c) 2008-2009 Konstantin Isakov. Lizensiert unter der GPLv3 oder neuer.</translation>
-    </message>
-    <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Willkommen bei &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Damit Sie mit dem Programm beginnen können, besuchen Sie zunächst &lt;b&gt;Bearbeiten|Wörterbücher&lt;/b&gt;, um Pfade zu gespeicherten Wörterbüchern hinzuzufügen, Wikipedia oder andere Seiten einzurichten, oder um die Wörterbücher zu ordnen bzw. um Sie in Gruppen zu unterteilen.&lt;/p&gt;
-&lt;p&gt;Dann sind Sie bereit, um das erste Wort nachzuschlagen! Dies können Sie im Fenster auf der linken Seite, oder &lt;a href=&quot;Mit Popups arbeiten&quot;&gt;mittels der Popup-Funktion in anderen Applikationen.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Um das Programm anzupassen, besuchen Sie &lt;b&gt;Bearbeiten|Einstellungen&lt;/b&gt;. Alle Einstellungen haben Tooltips, die Ihnen helfen, die letzten Zweifel zu nehmen.&lt;/p&gt;
-&lt;p&gt;Sollten Sie trotzdem noch Hilfe brauchen, oder wenn Sie sonstige Fragen und Verbesserungsvorschlage haben, oder wenn Sie nur wissen wollen, wass andere denken, dann finden Sie uns im &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;Forum&lt;/a&gt;. &lt;p&gt;Programmupdates sind auf der &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;Website&lt;/a&gt; zu finden.&lt;p&gt;(c) 2008-2009 Konstantin Isakov. Lizensiert unter der GPLv3 oder neuer. {3 ?} {3&gt;?} {2008-2010 ?} {3 ?}</translation>
-    </message>
-    <message>
         <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Willkommen bei &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Damit Sie mit dem Programm beginnen können, besuchen Sie zunächst &lt;b&gt;Bearbeiten » Wörterbücher&lt;/b&gt;, um Pfade zu gespeicherten Wörterbüchern hinzuzufügen, Wikipedia oder andere Seiten einzurichten, oder um die Wörterbücher zu ordnen bzw. um Sie in Gruppen zu unterteilen.&lt;/p&gt;
+&lt;p&gt;Dann sind Sie bereit, um das erste Wort nachzuschlagen! Dies können Sie im Fenster auf der linken Seite, oder &lt;a href=&quot;Mit Popups arbeiten&quot;&gt;mittels der Popup-Funktion in anderen Applikationen.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Um das Programm anzupassen, öffnen Sie &lt;b&gt;Bearbeiten » Einstellungen&lt;/b&gt;. Alle Einstellungen haben Tooltips, die Ihnen helfen, die letzten Zweifel zu nehmen.&lt;/p&gt;
+&lt;p&gt;Sollten Sie trotzdem noch Hilfe brauchen, oder wenn Sie sonstige Fragen und Verbesserungsvorschlage haben, oder wenn Sie nur wissen wollen, was andere denken, dann finden Sie uns im &lt;a href=&quot;hhttp://goldendict.org/forum/&quot;&gt;Forum&lt;/a&gt;. &lt;p&gt;Programmupdates sind auf der &lt;a href=&quot;http://goldendict.org/&quot;&gt;Website&lt;/a&gt; zu finden.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Lizensiert unter der GPLv3 oder neuer.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
@@ -135,12 +105,12 @@
     <message>
         <location filename="../article_maker.cc" line="584"/>
         <source>Compound expressions: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammengesetzte Treffer:</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="612"/>
         <source>Individual words: </source>
-        <translation type="unfinished"></translation>
+        <translation>Einzelne Wörter:</translation>
     </message>
 </context>
 <context>
@@ -167,7 +137,7 @@
     <message>
         <location filename="../articleview.cc" line="816"/>
         <source>Open Link in New &amp;Tab</source>
-        <translation>Link in neuem &amp;Tab öffnen</translation>
+        <translation>Link in neuem Rei&amp;ter öffnen</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="823"/>
@@ -182,7 +152,7 @@
     <message>
         <location filename="../articleview.cc" line="844"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>Schlage &quot;%1&quot; in &amp;neuem Tab nach</translation>
+        <translation>Schlage &quot;%1&quot; in &amp;neuem Reiter nach</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="859"/>
@@ -192,17 +162,17 @@
     <message>
         <location filename="../articleview.cc" line="867"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>Schlage &quot;%1&quot; in %2 in &amp;neuem Tab nach</translation>
+        <translation>Schlage &quot;%1&quot; in %2 in &amp;neuem Reiter nach</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1002"/>
         <source>Playing a non-WAV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Abspielen einer Nicht-WAV-Datei</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1003"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um das Abspielen von Dateien anders als WAV zu akivieren, müssen Sie in Bearbeiten » Einstellungen, im Reiter Audio die Option &quot;Mit DirectShow abspielen&quot; auswählen.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1054"/>
@@ -280,42 +250,42 @@
     <message>
         <location filename="../dictgroupwidget.ui" line="85"/>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastenkürzel:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="34"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keines</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="39"/>
         <source>From file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aus Datei...</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="79"/>
         <source>Choose a file to use as group icon</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="81"/>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="82"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte die angegebene Bilddatei nicht lesen.</translation>
     </message>
 </context>
 <context>
@@ -323,12 +293,12 @@
     <message>
         <location filename="../groups_widgets.cc" line="570"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestätigung</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="571"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich eine Reihe von Gruppen basierend auf den Sprachpaaren erstellen?</translation>
     </message>
 </context>
 <context>
@@ -344,12 +314,12 @@
     <message>
         <location filename="../dictionarybar.cc" line="12"/>
         <source>Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Wörterbuchleiste</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
         <source>Edit this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Gruppe bearbeiten</translation>
     </message>
 </context>
 <context>
@@ -402,37 +372,37 @@
     <message>
         <location filename="../forvo.cc" line="203"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Fehler beim XML parsen: %1 bei %2,%3</translation>
+        <translation>Fehler beim XML parsen: %1 bei %2,%3</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="279"/>
         <source>Added %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzugefügt %1</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="282"/>
         <source>by</source>
-        <translation type="unfinished"></translation>
+        <translation>von</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="286"/>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Mann</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="286"/>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Frau</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="288"/>
         <source>from</source>
-        <translation type="unfinished"></translation>
+        <translation>aus</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="326"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished"></translation>
+        <translation>Damit dieser Fehler verschwindet sollten Sie Bearbeiten » Wörterbücher » Forvo auswählen und ihren eigenen API-Schlüssel eintragen.</translation>
     </message>
 </context>
 <context>
@@ -440,7 +410,7 @@
     <message>
         <location filename="../german.cc" line="48"/>
         <source>German Transliteration</source>
-        <translation>Deutsche Translitaration</translation>
+        <translation>Deutsche Transliteration</translation>
     </message>
 </context>
 <context>
@@ -448,7 +418,7 @@
     <message>
         <location filename="../greektranslit.cc" line="651"/>
         <source>Greek Transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Griechische Transliteration</translation>
     </message>
 </context>
 <context>
@@ -558,7 +528,7 @@
     <message>
         <location filename="../groups.ui" line="130"/>
         <source>Tab 2</source>
-        <translation>Tab 2</translation>
+        <translation>Reiter 2</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="140"/>
@@ -573,12 +543,12 @@
     <message>
         <location filename="../groups.ui" line="150"/>
         <source>Create language-based groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzeugt sprachenbasierte Gruppen</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="153"/>
         <source>Auto groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische Gruppen</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="160"/>
@@ -608,7 +578,7 @@
     <message>
         <location filename="../groups.ui" line="194"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Benutzen Sie Drag und&amp;Drop um Wörterbücher zwischen Gruppen oder innerhalb von Gruppen zu verschieben, oder um die Reihenfolge der Gruppen zu verändern.</translation>
+        <translation>Benutzen Sie Drag &amp; Drop um Wörterbücher zwischen Gruppen oder innerhalb von Gruppen zu verschieben, oder um die Reihenfolge der Gruppen zu verändern.</translation>
     </message>
 </context>
 <context>
@@ -1602,7 +1572,7 @@
     <message>
         <location filename="../mainwindow.cc" line="37"/>
         <source>Show Names in Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Namen in Wörterbuchleiste</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="59"/>
@@ -1653,17 +1623,17 @@
     <message>
         <location filename="../mainwindow.cc" line="121"/>
         <source>Words Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchwörter vergrößern</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="123"/>
         <source>Words Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchwörter verkleinern</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="125"/>
         <source>Words Normal Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchwörter in normaler Größe</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="133"/>
@@ -1673,17 +1643,17 @@
     <message>
         <location filename="../mainwindow.cc" line="172"/>
         <source>Close current tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuellen Reiter schließen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="182"/>
         <source>Close all tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Reiter schließen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="190"/>
         <source>Close all tabs except current</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle anderen Reiter schließen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>
@@ -1718,83 +1688,83 @@
         <translation>Alle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="744"/>
+        <location filename="../mainwindow.cc" line="745"/>
         <source>Opened tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Offene Reiter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="785"/>
+        <location filename="../mainwindow.cc" line="786"/>
         <source>(untitled)</source>
         <translation>(unbenannt)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1224"/>
+        <location filename="../mainwindow.cc" line="1248"/>
         <source>WARNING: %1</source>
         <translation>WARNUNG: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1518"/>
+        <location filename="../mainwindow.cc" line="1542"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1519"/>
+        <location filename="../mainwindow.cc" line="1543"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Der Mechanismus für die Tastenkürzel konnte nicht initialisiert werden.&lt;br&gt;Vergewissern Sie sich, dass der XServer die RECORD Erweiterung aktiviert hat.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1653"/>
+        <location filename="../mainwindow.cc" line="1677"/>
         <source>New Release Available</source>
         <translation>Neue Version verfügbar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1654"/>
+        <location filename="../mainwindow.cc" line="1678"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Version &lt;b&gt;%1&lt;/b&gt; von GoldenDict ist nun zum Herunterladen verfügbar.&lt;br&gt;Klicken Sie auf &lt;b&gt;Herunterladen&lt;/b&gt;, um zur Seite fürs Herunterladen zu gelangen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1659"/>
+        <location filename="../mainwindow.cc" line="1683"/>
         <source>Download</source>
         <translation>Herunterladen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1660"/>
+        <location filename="../mainwindow.cc" line="1684"/>
         <source>Skip This Release</source>
         <translation>Diese Version überspringen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1836"/>
+        <location filename="../mainwindow.cc" line="1860"/>
         <source>Page Setup</source>
         <translation>Seite einrichten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1837"/>
+        <location filename="../mainwindow.cc" line="1861"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Es ist kein Drucker vorhanden. Bitte zuerst einen installieren.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1854"/>
+        <location filename="../mainwindow.cc" line="1878"/>
         <source>Print Article</source>
         <translation>Drucke Artikel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1875"/>
+        <location filename="../mainwindow.cc" line="1899"/>
         <source>Save Article As</source>
         <translation>Artikel speichern als</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1875"/>
+        <location filename="../mainwindow.cc" line="1899"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html Dateien (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1890"/>
+        <location filename="../mainwindow.cc" line="1914"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1891"/>
+        <location filename="../mainwindow.cc" line="1915"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Kann Artikel nicht speichern: %1</translation>
     </message>
@@ -1816,17 +1786,17 @@
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ansicht</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&amp;Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zoom</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
         <source>H&amp;istory</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verlauf</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="122"/>
@@ -1957,7 +1927,7 @@
     <message>
         <location filename="../mainwindow.ui" line="373"/>
         <source>&amp;Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zurücksetzen</translation>
     </message>
 </context>
 <context>
@@ -1965,7 +1935,7 @@
     <message>
         <location filename="../mediawiki.cc" line="271"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Fehler beim XML parsen: %1 bei %2,%3</translation>
+        <translation>Fehler beim XML-parsen: %1 bei %2,%3</translation>
     </message>
 </context>
 <context>
@@ -1973,7 +1943,7 @@
     <message>
         <location filename="../mediawiki.cc" line="149"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Fehler beim XML parsen: %1 bei %2,%3</translation>
+        <translation>Fehler beim XML-parsen: %1 bei %2,%3</translation>
     </message>
 </context>
 <context>
@@ -2081,14 +2051,6 @@
         <translation>Systemvorgabe</translation>
     </message>
     <message>
-        <source>English</source>
-        <translation type="obsolete">Englisch</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="obsolete">Russisch</translation>
-    </message>
-    <message>
         <location filename="../preferences.cc" line="73"/>
         <source>Default</source>
         <translation>Standard</translation>
@@ -2101,7 +2063,7 @@
     <message>
         <location filename="../preferences.cc" line="131"/>
         <source>Play via DirectShow</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit DirectShow abspielen</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="310"/>
@@ -2126,34 +2088,34 @@
     <message>
         <location filename="../preferences.ui" line="60"/>
         <source>Tabbed browsing</source>
-        <translation>Tabbed browsing</translation>
+        <translation>Reiter</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="66"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>Normalerweise werden neue Tabs geöffnet und sofort selektioniert.
-Mit dieser Option werden neue Tabs im Hintergrund geöffnet ohne
+        <translation>Normalerweise werden neue Reiter geöffnet und sofort selektioniert.
+Mit dieser Option werden neue Reiter im Hintergrund geöffnet ohne
 sie zu selektionieren.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="71"/>
         <source>Open new tabs in background</source>
-        <translation>Neue Tabs im Hintergrund öffnen</translation>
+        <translation>Neue Reiter im Hintergrund öffnen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="78"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Mit dieser Option werden neue Tabs nach dem aktuellen, sprich aktiven Tab, geöffnet. 
+        <translation>Mit dieser Option werden neue Reiter nach dem aktuellen, sprich aktiven Reiter, geöffnet. 
 Andernfalls werden sie ans Ende hinzugefügt.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="83"/>
         <source>Open new tabs after the current one</source>
-        <translation>Neue Tabs nach dem aktuellen öffnen</translation>
+        <translation>Neue Reiter nach dem aktuellen öffnen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="93"/>
@@ -2195,10 +2157,6 @@ the application.</source>
         <translation>Start</translation>
     </message>
     <message>
-        <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation type="obsolete">Starten GoldenDict automatisch nach jedem Systemstart</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="149"/>
         <source>Start with system</source>
         <translation>Mit Betriebssystem starten</translation>
@@ -2235,26 +2193,21 @@ und in der Symbolleiste an- und abgeschaltet werden.</translation>
         <translation>Aktiviert die Scan Popup Funktionalität</translation>
     </message>
     <message>
-        <source>Chooses whether the scan popup mode is on by default nor not. If checked,
-the program would always start with the scan popup active.</source>
-        <translation type="obsolete">Gibt an, ob der Scan Popup Modus standardmäßig aktiviert ist oder nicht. Falls aktiviert,
-wird das Programm immer mit aktiviertem Modus gestartet.</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="146"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Startet GoldenDict automatisch nach jedem Systemstart.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="241"/>
         <source>Double-click translates the word clicked</source>
-        <translation type="unfinished"></translation>
+        <translation>Doppelklick übersetzt das angeklickte Wort</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="290"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gibt an, ob der Scan Popup Modus standardmäßig aktiviert ist oder nicht. Falls aktiviert,
+wird das Programm immer mit aktiviertem Modus gestartet.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="294"/>
@@ -2378,54 +2331,49 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalerweise müssen die entsprechenden Tasten, während 
+ein Wort markiert wird, gedrückt bleiben,
+um das Scan Popup zu aktivieren. Mit dieser Option können die
+Tasten auch kurz nach der Markierung gedrückt werden.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="738"/>
         <source>Playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Abspielen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="744"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="unfinished"></translation>
+        <translation>Native Windowswiedergabe benutzen. Diese ist zwar auf .wav Dateien
+beschränkt, funktioniert allerdings sehr gut.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="748"/>
         <source>Play via Windows native API</source>
-        <translation type="unfinished"></translation>
+        <translation>Nativ mit Windows abspielen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="755"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Audiodateien mit den Phonon-Framework abspielen. Dies unterstützt die 
+meisten Audioformate, kann allerdings instabil sein.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="759"/>
         <source>Play via Phonon</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit Phonon abspielen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="771"/>
         <source>Use any external program to play audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein externes Program zum Abspielen der Audiodaten benutzen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="774"/>
         <source>Use external program:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normally, in order to activate a popup you have to
-maintain the chosen keys pressed while you select
-a word. With this enabled, the chosen keys may also
-be pressed shorty after the selection is done.</source>
-        <translation type="obsolete">Normalerweise müssen die entsprechenden Tasten, während 
-ein Wort markiert wird, gedrückt bleiben,
-um das Scan Popup zu aktivieren. Mit dieser Option können die
-Tasten auch kurz nach der Markierung gedrückt werden.</translation>
+        <translation>Externes Programm benutzen:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="477"/>
@@ -2473,7 +2421,11 @@ Sekunden überwacht, wie hier angegeben.</translation>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Achtung: Es scheicht, dass sie eine X.Org-XServer-Version benutzen, welche die RECORD-Erweiterung nicht richtig funktioniert. Deshalb werden Tastenkürzel höchstwahrscheinlich nicht funktionieren. Dies muss am Server selbst korrigiert werden. Dies bezieht sich auf folgenden &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Fehlereintrag&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;, welchen Sie, falls gewünscht, kommentieren können.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="696"/>
@@ -2483,7 +2435,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="715"/>
         <source>Pronunciation</source>
-        <translation type="unfinished"></translation>
+        <translation>Aussprache</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="721"/>
@@ -2494,10 +2446,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../preferences.ui" line="728"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Wörter im Scan Popup automatisch aussprechen</translation>
-    </message>
-    <message>
-        <source>Program to play audio files:</source>
-        <translation type="obsolete">Programm fürs Abspielen von Audiodateien:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="811"/>
@@ -2545,12 +2493,14 @@ for all program&apos;s network requests.</source>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies zu aktivieren lässt GoldenDict die meiste Werbung blockieren, in dem Inhalte (Bilder, Frames) 
+aus Seiten blockiert werden, die nicht der jeweils angezeigten entsprechen. Sollten einige Seiten 
+nicht mehr funktionieren, kann das Deaktivieren dieser Option helfen.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="939"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalte nicht von fremden Seiten laden (unterbindet meist Werbung)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="962"/>
@@ -2588,7 +2538,7 @@ Download-Seite.</translation>
     <message>
         <location filename="../russiantranslit.cc" line="107"/>
         <source>Russian Transliteration</source>
-        <translation>Russische Translitaration</translation>
+        <translation>Russische Transliteration</translation>
     </message>
 </context>
 <context>
@@ -2634,13 +2584,14 @@ Download-Seite.</translation>
     <message>
         <location filename="../scanpopup.ui" line="123"/>
         <source>Shows or hides the dictionary bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeigt oder versteckt die Wörterbuchleiste</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="146"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiermit kann das Fenster fixiert  werden, damit es am Bildschirm bleibt,
+es in der Größe verändert, oder andersweitig verwaltet werden kann.</translation>
     </message>
 </context>
 <context>
@@ -2661,7 +2612,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="81"/>
         <source>(not available in portable version)</source>
-        <translation type="unfinished"></translation>
+        <translation>(nicht in der portablen Version)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="117"/>
@@ -2719,7 +2670,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="81"/>
         <source>Re&amp;scan now</source>
-        <translation>Neu Ein&amp;lesen</translation>
+        <translation>Neu ein&amp;lesen</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="97"/>
@@ -2795,29 +2746,31 @@ der passende Gruppe ein, um sie zu benutzen.</translation>
     <message>
         <location filename="../sources.ui" line="343"/>
         <source>Forvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Forvo</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="355"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aussprachen live von &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Diese Seite erlaubt es Menschen Aussprachen von Wörter aufzunehmen und zu teilen. Diese können in GoldenDict angehört werden.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="368"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Aussprachen von Forvo aktivieren</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="398"/>
         <source>API Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>API Schlüssel:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="405"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Benutzung von Forvo erfordert einen API-Schlüssel. Bei einem leeren
+Wert, wird ein Standardschlüssel verwendet, welcher vielleicht in Zukunft ungültig
+wird. Sie können sich auch auf der Seite registrieren, um ihren eigenen Schlüssel zu erhalten.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="430"/>
@@ -2829,22 +2782,29 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Erhalten Sie ihren eigenen Schlüssel &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;hier&lt;/span&gt;&lt;/a&gt;, oder lassen Sie das Feld leer, um den Standardschlüssel zu verwenden.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="450"/>
         <source>Language codes (comma-separated):</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprachkodes (mit Beistrich getrennt):</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="457"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Liste der Sprachkodes, welche Sie benutzen möchten. Zum Beispiel &quot;de, en&quot;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="480"/>
         <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die vollständige Liste der Sprachkodes ist &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="522"/>
@@ -2854,17 +2814,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="543"/>
         <source>Russian transliteration</source>
-        <translation>Russische Translitaration</translation>
+        <translation>Russische Transliteration</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="554"/>
         <source>Greek transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Griechische Transliteration</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="578"/>
         <source>German transliteration</source>
-        <translation>Deutsche Translitaration</translation>
+        <translation>Deutsche Transliteration</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="604"/>

@@ -1,1 +1,32 @@
 IDI_ICON1 ICON DISCARDABLE "icons/programicon.ico"
+#define GOLDENDICT_VER 1,0,0,0
+#define GOLDENDICT_VER_STR "1.0.0"
+
+1 VERSIONINFO
+ FILEVERSION GOLDENDICT_VER
+ PRODUCTVERSION GOLDENDICT_VER
+ FILEFLAGS 0x0L
+ FILEFLAGSMASK 0x3fL
+ FILEOS 0x00040004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+	BLOCK "StringFileInfo"
+	BEGIN
+		BLOCK "000004b0"
+		BEGIN
+			VALUE "CompanyName", "GoldenDict"
+			VALUE "FileDescription", "GoldenDict dictionary lookup program"
+			VALUE "FileVersion", GOLDENDICT_VER_STR
+			VALUE "LegalCopyright", "www.goldendict.org"
+			VALUE "InternalName", "goldendict"
+			VALUE "OriginalFilename", "goldendict.exe"
+			VALUE "ProductName", "GoldenDict"
+			VALUE "ProductVersion", GOLDENDICT_VER_STR
+		END
+	END
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", 0x0, 1200
+	END
+END
