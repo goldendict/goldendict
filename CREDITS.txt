@@ -5,3 +5,4 @@ Vit Pelcak <vit\pelcak.org>: Czech translation
 Hero Phương <herophuong93\gmail.com>: Vietnamese translation
 Daniele Di Pisa <daniele\systems.it>: Italian translation
 Daniel Kaneider: German translation
+Zhang Jinsong <zhangsong023\gmail.com>: Chinese translation

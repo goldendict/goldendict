@@ -23,12 +23,12 @@
     <message>
         <location filename="../about.ui" line="70"/>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished">(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de) {2008-2011 ?}</translation>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="94"/>
         <source>Credits:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μνεία:</translation>
     </message>
     <message>
         <source>#.#</source>
@@ -50,7 +50,7 @@
     <message>
         <location filename="../about.cc" line="16"/>
         <source>[Unknown]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Άγνωστο]</translation>
     </message>
 </context>
 <context>
@@ -87,7 +87,7 @@
     <message>
         <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Καλώς ήλθατε στο &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Για να ξεκινήσετε, επιλέξτε &lt;b&gt;Επεξεργασία|Λεξικά&lt;/b&gt;. Από εδώ μπορείτε να προσθέσετε φακέλους που περιέχουν λεξικά, να ενεργοποιήσετε την αναζήτηση στη Βικιπαίδεια ή άλλες πηγές, να αλλάξετε τη σειρά των λεξικών ή να δημιουργήσετε ομάδες λεξικών.&lt;/p&gt;&lt;p&gt;Μετά θα είστε έτοιμοι να ξεκινήσετε την αναζήτηση! Μπορείτε να αναζητάτε λέξεις από την αριστερή στήλη αυτού του παραθύρου, ή από &lt;a href=&quot;Χρήση αναδυόμενου παραθύρου&quot;&gt;οποιαδήποτε άλλη ανοιχτή εφαρμογή&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Για να προσαρμόσετε το πρόγραμμα στις απαιτήσεις σας, δείτε τις διαθέσιμες ρυθμίσεις στο μενού &lt;b&gt;Επεξεργασία|Προτιμήσεις&lt;/b&gt;. Όλες οι προτιμήσεις διαθέτουν χρήσιμες συμβουλές οθόνης, που μπορείτε να διαβάσετε τοποθετώντας το ποντίκι σας πάνω στην αντίστοιχη προτίμηση.&lt;/p&gt;&lt;p&gt;Για περαιτέρω βοήθεια, ερωτήματα, υποδείξεις, ή απλά για να διαβάσετε τις γνώμες άλλων χρηστών, μπορείτε να εγγραφείτε στο &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;φόρουμ&lt;/a&gt; του προγράμματος. &lt;p&gt;Ενημερώσεις μπορείτε να βρείτε στον &lt;a href=&quot;http://goldendict.org/&quot;&gt;Ιστότοπο&lt;/a&gt; του προγράμματος.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Διανέμεται υπό τους όρους της GNU GPLv3 ή νεότερης έκδοσής της.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
@@ -197,12 +197,12 @@
     <message>
         <location filename="../articleview.cc" line="1002"/>
         <source>Playing a non-WAV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή μη WAV αρχείου</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1003"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="unfinished"></translation>
+        <translation>Για αναπαραγωγή αρχείων που δεν είναι της μορφής WAV, παρακαλώ επιλέξτε Επεξεργασία|Προτιμήσεις, καρτέλα Ήχος, και σημειώστε την επιλογή &quot;Αναπαραγωγή μέσω DirectShow&quot;.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1054"/>
@@ -280,42 +280,42 @@
     <message>
         <location filename="../dictgroupwidget.ui" line="85"/>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Συντόμευση:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="34"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Κανένα</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="39"/>
         <source>From file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Από αρχείο...</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="79"/>
         <source>Choose a file to use as group icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε ένα αρχείο για να το χρησιμοποιήσετε ως εικονίδιο της ομάδας</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="81"/>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικόνες</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="82"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Όλα τα αρχεία</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Error</source>
-        <translation type="unfinished">Σφάλμα</translation>
+        <translation>Σφάλμα</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αδυναμία ανάγνωσης του επιλεγμένου αρχείου.</translation>
     </message>
 </context>
 <context>
@@ -323,12 +323,12 @@
     <message>
         <location filename="../groups_widgets.cc" line="570"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιβεβαίωση</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="571"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation type="unfinished"></translation>
+        <translation>Σίγουρα θέλετε να δημιουργήσετε ομάδες για τα διαθέσιμα ζεύγη γλωσσών;</translation>
     </message>
 </context>
 <context>
@@ -349,7 +349,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
         <source>Edit this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία αυτής της ομάδας</translation>
     </message>
 </context>
 <context>
@@ -402,37 +402,37 @@
     <message>
         <location filename="../forvo.cc" line="203"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">Σφάλμα ανάλυσης XML: %1 στο %2,%3</translation>
+        <translation>Σφάλμα ανάλυσης XML: %1 στο %2,%3</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="279"/>
         <source>Added %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Προστέθηκε στις %1</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="282"/>
         <source>by</source>
-        <translation type="unfinished"></translation>
+        <translation>από</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="286"/>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανδρική φωνή</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="286"/>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Γυναικεία φωνή</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="288"/>
         <source>from</source>
-        <translation type="unfinished"></translation>
+        <translation>από</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="326"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished"></translation>
+        <translation>Πηγαίνετε στο Επεξεργασία|Λεξικά|Πηγές|Forvo και εισάγετε το δικό σας κλειδί API για πάψει να εμφανίζεται το σφάλμα.</translation>
     </message>
 </context>
 <context>
@@ -440,7 +440,7 @@
     <message>
         <location filename="../german.cc" line="48"/>
         <source>German Transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεταγραφή Γερμανικών</translation>
     </message>
 </context>
 <context>
@@ -448,7 +448,7 @@
     <message>
         <location filename="../greektranslit.cc" line="651"/>
         <source>Greek Transliteration</source>
-        <translation>Ελληνική μεταγραφή</translation>
+        <translation>Μεταγραφή Ελληνικών</translation>
     </message>
 </context>
 <context>
@@ -573,12 +573,12 @@
     <message>
         <location filename="../groups.ui" line="150"/>
         <source>Create language-based groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Δημιουργία ομάδων με βάση τις διαθέσιμες γλώσσες</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="153"/>
         <source>Auto groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτόματες ομάδες</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="160"/>
@@ -1653,17 +1653,17 @@
     <message>
         <location filename="../mainwindow.cc" line="121"/>
         <source>Words Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεγέθυνση λημμάτων</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="123"/>
         <source>Words Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Σμίκρυνση λημμάτων</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="125"/>
         <source>Words Normal Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Κανονικό μέγεθος λημμάτων</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="133"/>
@@ -1673,17 +1673,17 @@
     <message>
         <location filename="../mainwindow.cc" line="172"/>
         <source>Close current tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Κλείσιμο τρέχουσας καρτέλας</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="182"/>
         <source>Close all tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Κλείσιμο όλων των καρτελών</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="190"/>
         <source>Close all tabs except current</source>
-        <translation type="unfinished"></translation>
+        <translation>Κλείσιμο όλων των άλλων καρτελών</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>
@@ -1720,7 +1720,7 @@
     <message>
         <location filename="../mainwindow.cc" line="744"/>
         <source>Opened tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανοιχτές καρτέλες</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="785"/>
@@ -1821,7 +1821,7 @@
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&amp;Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Μεγέθυνση</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
@@ -2251,7 +2251,7 @@ the program would always start with the scan popup active.</source>
     <message>
         <location filename="../preferences.ui" line="241"/>
         <source>Double-click translates the word clicked</source>
-        <translation type="unfinished"></translation>
+        <translation>Μετάφραση λέξεων με διπλό κλικ πάνω τους</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="290"/>
@@ -2398,18 +2398,20 @@ be pressed shortly after the selection is done.</source>
         <location filename="../preferences.ui" line="744"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση μόνο του εγγενούς API των Windows.
+Αναπαράγει μόνο αρχεία wav, αλλά λειτουργεί άψογα.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="748"/>
         <source>Play via Windows native API</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή μέσω του εγγενούς API των Windows</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="755"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή ήχου μέσω του πλαισίου Phonon. Υποστηρίζει
+τις περισσότερες μορφές αρχείων, αλλά δεν είναι απόλυτα αξιόπιστη.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="759"/>
@@ -2419,7 +2421,7 @@ but should support most audio file formats.</source>
     <message>
         <location filename="../preferences.ui" line="771"/>
         <source>Use any external program to play audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση οποιουδήποτε εξωτερικού προγράμματος για την αναπαραγωγή αρχείων ήχου</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="774"/>
@@ -2605,7 +2607,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../russiantranslit.cc" line="107"/>
         <source>Russian Transliteration</source>
-        <translation>Ρωσική μεταγραφή</translation>
+        <translation>Μεταγραφή Ρωσικών</translation>
     </message>
 </context>
 <context>
@@ -2678,7 +2680,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="81"/>
         <source>(not available in portable version)</source>
-        <translation type="unfinished"></translation>
+        <translation>(μη διαθέσιμο στη φορητή έκδοση)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="117"/>
@@ -2810,29 +2812,32 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="343"/>
         <source>Forvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Forvo</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="355"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ζωντανή προφορά από το &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Ο ιστότοπος σας επιτρέπει να ηχογραφείτε και να μοιράζεστε προφορές λέξεων. Μπορείτε να ακούτε τις προφορές του Forvo στο GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="368"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργοποίηση προφορών από το Forvo</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="398"/>
         <source>API Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Κλειδί API:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="405"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η χρήση του Forvo απαιτεί κλεδί API. Αφήστε το πεδίο κενό
+για να χρησιμοποιήσετε το προεπιλεγμένο κλειδί, που όμως
+μπορεί να απενεργοποιηθεί στο μέλλον, ή εγγραφείτε στον
+ιστότοπο, για να αποκτήσετε δικό σας κλειδί.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="430"/>
@@ -2844,22 +2849,29 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Αποκτήστε το προσωπικό σας κλειδί από &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;εδώ&lt;/span&gt;&lt;/a&gt;, ή αφήστε κενό για να χρησιμοποιήσετε το προεπιλεγμένο.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="450"/>
         <source>Language codes (comma-separated):</source>
-        <translation type="unfinished"></translation>
+        <translation>Κωδικοί γλωσσών (χωρισμένοι με κόμματα):</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="457"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Λίστα με τους κωδικούς γλωσσών που επιθυμείτε να χρησιμοποιήσετε. Π.χ.: &quot;en, el&quot;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="480"/>
         <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ο πλήρης κατάλογος των κωδικών γλωσσών είναι διαθέσιμος &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;εδώ&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="522"/>
