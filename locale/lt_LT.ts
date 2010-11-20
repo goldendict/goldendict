@@ -2165,7 +2165,7 @@ tiesiog paslepiama.</translation>
     <message>
         <location filename="../preferences.ui" line="149"/>
         <source>Start with system</source>
-        <translation>Paleisti kraunantis sistemai</translation>
+        <translation>Paleisti kartu su sistema</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="161"/>
@@ -2228,7 +2228,7 @@ praėjus trupučiui laiko po to, kai baigėte žymėti.</translation>
     <message>
         <location filename="../preferences.ui" line="146"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>GoldenDict paleisti kartu su vartotojo darbalaukiu kraunantis opoeracinei sistemai.</translation>
+        <translation>GoldenDict paleisti kartu su naudotojo darbalaukiu sistemos paleidimo metu.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="272"/>
@@ -2507,7 +2507,7 @@ užklausoms naudoti įgaliotąjį serverį.</translation>
     <message>
         <location filename="../preferences.ui" line="889"/>
         <source>User:</source>
-        <translation>Vartotojo vardas:</translation>
+        <translation>Naudotojo vardas:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="899"/>
