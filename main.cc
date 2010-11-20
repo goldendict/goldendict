@@ -78,7 +78,10 @@ int main( int argc, char ** argv )
 
 #endif
 
-  QHotkeyApplication app( argc, argv );
+  QHotkeyApplication app( "GoldenDict", argc, argv );
+
+  if ( app.sendMessage("bringToFront") )
+    return 0; // Another instance is running
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.org/" );
@@ -96,49 +99,6 @@ int main( int argc, char ** argv )
     cfg.soundDirs.clear();
     cfg.hunspell.dictionariesPath = Config::getPortableVersionMorphoDir();
   }
-
-  // Prevent execution of the 2nd copy
-
-  // get pid
-  quint64 current_pid = QCoreApplication::applicationPid();
-
-//  QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
-//  quint64 pid = ProcessWrapper::findProcess(
-//          app_fname.toAscii().data(),
-//          current_pid);
-//
-//  qDebug() << "pid " << pid;
-//  qDebug() << "current_pid " << current_pid;
-
-  // check pid file
-  QFile pid_file( Config::getPidFileName() );
-
-  if ( pid_file.exists() ) // pid file exists, check it
-  {
-    pid_file.open( QIODevice::ReadWrite );
-    QDataStream ds( &pid_file );
-    quint64 tmp; ds >> tmp;
-    pid_file.close();
-
-    bool isExist = ProcessWrapper::processExists(tmp);
-    if ( isExist && tmp != current_pid )
-    {
-      puts( "Another GoldenDict copy started already." );
-      return 1;
-    }
-
-//    if ( tmp == pid ) // it is active - exiting
-//    {
-//      // to do: switch to pid ?
-//      return 1;
-//    }
-  }
-
-  pid_file.open( QIODevice::WriteOnly );
-  QDataStream ds( &pid_file );
-  ds << current_pid;
-  pid_file.close();
-
 
   // Load translations
 
@@ -175,12 +135,12 @@ int main( int argc, char ** argv )
 
   app.addDataCommiter( m );
 
+  QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
+    &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
+
   int r = app.exec();
 
   app.removeDataCommiter( m );
-
-  // remove pid file
-  pid_file.remove();
 
   return r;
 }

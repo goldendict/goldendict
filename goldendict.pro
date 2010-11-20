@@ -281,3 +281,5 @@ QMAKE_EXTRA_COMPILERS += updateqm
 TS_OUT = $$TRANSLATIONS
 TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
+
+include( qtsingleapplication/src/qtsingleapplication.pri )

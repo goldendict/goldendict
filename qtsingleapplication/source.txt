@@ -1,0 +1,3 @@
+This package was copied from the cloned qtsolutions git for GoldenDict:
+
+  git clone git://gitorious.org/qt-solutions/qt-solutions.git

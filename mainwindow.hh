@@ -38,6 +38,10 @@ public:
 
   virtual void commitData( QSessionManager & );
 
+public slots:
+
+  void messageFromAnotherInstanceReceived( QString const & );
+
 private:
 
   void commitData();

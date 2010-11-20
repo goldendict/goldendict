@@ -11,7 +11,14 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-QHotkeyApplication::QHotkeyApplication(int & argc, char ** argv) : QApplication(argc,argv)
+QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
+  QtSingleApplication( argc, argv )
+{
+}
+
+QHotkeyApplication::QHotkeyApplication( QString const & id,
+                                        int & argc, char ** argv ):
+  QtSingleApplication( id, argc, argv )
 {
 }
 

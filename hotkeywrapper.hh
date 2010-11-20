@@ -15,6 +15,7 @@
 
 
 #include "ex.hh"
+#include "qtsingleapplication.h"
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -136,14 +137,15 @@ public:
   {}
 };
 
-class QHotkeyApplication : public QApplication
+class QHotkeyApplication : public QtSingleApplication
 {
   friend class HotkeyWrapper;
 
   QList< DataCommitter * > dataCommitters;
 
 public:
-  QHotkeyApplication(int & argc, char ** argv);
+  QHotkeyApplication( int & argc, char ** argv );
+  QHotkeyApplication( QString const & id, int & argc, char ** argv );
 
   void addDataCommiter( DataCommitter & );
   void removeDataCommiter( DataCommitter & );

@@ -2031,3 +2031,11 @@ void MainWindow::applyWordsZoomLevel()
 
   wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
 }
+
+void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
+{
+  if ( message == "bringToFront" )
+    toggleMainWindow( true );
+  else
+    qWarning() << "Unknown message received from another instance: " << message;
+}
