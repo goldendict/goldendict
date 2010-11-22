@@ -70,40 +70,53 @@ public:
     throw( std::exception );
 };
 
-class ForvoArticleRequest: public ForvoDataRequestSlots
+sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
+                                                 vector< wstring > const & alts,
+                                                 wstring const & )
+  throw( std::exception )
 {
-  struct NetReply
+  if ( word.size() > 80 )
   {
-    sptr< QNetworkReply > reply;
-    string word;
-    bool finished;
+    // Don't make excessively large queries -- they're fruitless anyway
 
-    NetReply( sptr< QNetworkReply > const & reply_, string const & word_ ):
-      reply( reply_ ), word( word_ ), finished( false )
-    {}
-  };
+    return new DataRequestInstant( false );
+  }
+  else
+    return new ForvoArticleRequest( word, alts, apiKey, languageCode, getId(),
+                                    netMgr );
+}
 
-  typedef std::list< NetReply > NetReplies;
-  NetReplies netReplies;
-  QString apiKey, languageCode;
-  string dictionaryId;
+QIcon ForvoDictionary::getIcon() throw()
+{
+// Experimental code to generate icon -- but the flags clutter the interface too
+// much and we're better with a single icon.
+#if 0
+  if ( languageCode.size() == 2 )
+  {
+    QString countryCode = Language::countryCodeForId( LangCoder::code2toInt( languageCode.toAscii().data() ) );
 
-public:
+    if ( countryCode.size() )
+    {
+      QImage flag( QString( ":/flags/%1.png" ).arg( countryCode.toLower() ) );
 
-  ForvoArticleRequest( wstring const & word, vector< wstring > const & alts,
-                       QString const & apiKey_,
-                       QString const & languageCode_,
-                       string const & dictionaryId_,
-                       QNetworkAccessManager & mgr );
+      if ( !flag.isNull() )
+      {
+        QImage img( ":/icons/forvo_icon_base.png" );
 
-  virtual void cancel();
+        {
+          QPainter painter( &img );
+          painter.drawImage( QPoint( 5, 7 ), flag );
+        }
 
-private:
+        return QIcon( QPixmap::fromImage( img ) );
+      }
+    }
+  }
+#endif
+  return QIcon( ":/icons/forvo.png" );
+}
 
-  void addQuery( QNetworkAccessManager & mgr, wstring const & word );
-
-  virtual void requestFinished( QNetworkReply * );
-};
+}
 
 void ForvoArticleRequest::cancel()
 {
@@ -340,54 +353,6 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
   else
   if ( updated )
     update();
-}
-
-sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
-                                                 vector< wstring > const & alts,
-                                                 wstring const & )
-  throw( std::exception )
-{
-  if ( word.size() > 80 )
-  {
-    // Don't make excessively large queries -- they're fruitless anyway
-
-    return new DataRequestInstant( false );
-  }
-  else
-    return new ForvoArticleRequest( word, alts, apiKey, languageCode, getId(),
-                                    netMgr );
-}
-
-QIcon ForvoDictionary::getIcon() throw()
-{
-// Experimental code to generate icon -- but the flags clutter the interface too
-// much and we're better with a single icon.
-#if 0
-  if ( languageCode.size() == 2 )
-  {
-    QString countryCode = Language::countryCodeForId( LangCoder::code2toInt( languageCode.toAscii().data() ) );
-
-    if ( countryCode.size() )
-    {
-      QImage flag( QString( ":/flags/%1.png" ).arg( countryCode.toLower() ) );
-
-      if ( !flag.isNull() )
-      {
-        QImage img( ":/icons/forvo_icon_base.png" );
-
-        {
-          QPainter painter( &img );
-          painter.drawImage( QPoint( 5, 7 ), flag );
-        }
-
-        return QIcon( QPixmap::fromImage( img ) );
-      }
-    }
-  }
-#endif
-  return QIcon( ":/icons/forvo.png" );
-}
-
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
