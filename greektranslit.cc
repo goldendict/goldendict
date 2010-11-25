@@ -1,4 +1,4 @@
-/* This file is (c) 2010 Jennie Petoumenou <epetoumenou@gmail.com>
+﻿/* This file is (c) 2010 Jennie Petoumenou <epetoumenou@gmail.com>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "greektranslit.hh"
@@ -18,15 +18,113 @@ GreekTable::GreekTable()
 {
   // Utf8
 
-    //ANCIENT GREEK DIACRITICS (BETA CODE)
+    //I. LATIN -> MODERN & CLASSICAL GREEK (COMMON CHARACTERS)
+    ins("a",      "α");
+    ins("b",      "β");
+    ins("v",      "β");
+    ins("g",      "γ");
+    ins("d",      "δ");
+    ins("e",      "ε");
+    ins("z",      "ζ");
+    ins("h",      "η");
+    ins("q",      "θ");
+    ins("8",      "θ");
+    ins("i",      "ι");
+    ins("k",      "κ");
+    ins("l",      "λ");
+    ins("m",      "μ");
+    ins("n",      "ν");
+    ins("c",      "ξ");
+    ins("3",      "ξ");
+    ins("ks",     "ξ");
+    ins("o",      "ο");
+    ins("p",      "π");
+    ins("r",      "ρ");
+    ins("s",      "σ");
+    ins("s1",     "σ");
+    ins("j",      "ς");
+    ins("s2",     "ς");
+    ins("s\\n",   "ς");
+    ins("t",      "τ");
+    ins("u",      "υ");
+    ins("f",      "φ");
+    ins("x",      "χ");
+    ins("y",      "ψ");
+    ins("ps",     "ψ");
+    ins("w",      "ω");
+
+    ins("A",      "Α");
+    ins("B",      "Β");
+    ins("V",      "Β");
+    ins("G",      "Γ");
+    ins("D",      "Δ");
+    ins("E",      "Ε");
+    ins("Z",      "Ζ");
+    ins("H",      "Η");
+    ins("Q",      "Θ");
+    ins("I",      "Ι");
+    ins("K",      "Κ");
+    ins("L",      "Λ");
+    ins("M",      "Μ");
+    ins("N",      "Ν");
+    ins("C",      "Ξ");
+    ins("KS",     "Ξ");
+    ins("Ks",     "Ξ");
+    ins("O",      "Ο");
+    ins("P",      "Π");
+    ins("R",      "Τ");
+    ins("S",      "Σ");
+    ins("S1",     "Σ");
+    ins("J",      "Σ");
+    ins("S2",     "Σ");
+    ins("S\\n",   "Σ");
+    ins("T",      "Τ");
+    ins("U",      "Υ");
+    ins("F",      "Φ");
+    ins("X",      "Χ");
+    ins("Y",      "Ψ");
+    ins("PS",     "Ψ");
+    ins("Ps",     "Ψ");
+    ins("W",      "Ω");
+
+    //II. LATIN -> MODERN GREEK (DIACRITICS)
+    
+    ins("'a",      "ά");
+    ins("'e",      "έ");
+    ins("'h",      "ή");
+    ins("'i",      "ί");
+    ins("\"i",     "ϊ");
+    ins("\"'i",    "ΐ");
+    ins("'\"i",    "ΐ");
+    ins("'o",      "ό");
+    ins("'u",      "ύ");
+    ins("\"u",     "ϋ");
+    ins("\"'u",    "ΰ");
+    ins("'\"u",    "ΰ");
+    ins("'w",      "ώ");
+
+    ins("'A",      "Ά");
+    ins("'E",      "Έ");
+    ins("'H",      "Ή");
+    ins("'I",      "Ί");
+    ins("\"I",     "Ϊ");
+    ins("'O",      "Ό");
+    ins("'U",      "Ύ");
+    ins("\"U",     "Ϋ");
+    ins("'W",      "Ώ");
+
+    //IV. LATIN -> CLASSICAL GREEK (DIACRITICS - BETA CODE)
     // Adapted from beta2unicode.py by James Tauber <http://jtauber.com/>
 
+	//ORDER: Breathing - Accent
+	
     //uppercase (asterisk & capitals)
-	//oceia - bareia
+    
+		//oceia - bareia
     ins("*)A",     "Ἀ");
     ins("*(A",     "Ἁ");
     ins("*\\A",     "Ὰ");
-    ins("*/A",      "Ά");
+    ins("*/A",      "Ά");
     ins("*)\\A",   "Ἂ");
     ins("*(\\A",   "Ἃ");
     ins("*)/A",    "Ἄ");
@@ -35,7 +133,7 @@ GreekTable::GreekTable()
     ins("*)E",     "Ἐ");
     ins("*(E",     "Ἑ");
     ins("*\\E",     "Ὲ");
-    ins("*/E",      "Έ");
+    ins("*/E",      "Έ");
     ins("*)\\E",   "Ἒ");
     ins("*(\\E",   "Ἓ");
     ins("*)/E",    "Ἔ");
@@ -44,7 +142,7 @@ GreekTable::GreekTable()
     ins("*)H",     "Ἠ");
     ins("*(H",     "Ἡ");
     ins("*\\H",     "Ὴ");
-    ins("*/H",      "Ή");
+    ins("*/H",      "Ή");
     ins("*)\\H",   "Ἢ");
     ins("*(\\H",   "Ἣ");
     ins("*)/H",    "Ἤ");
@@ -53,7 +151,7 @@ GreekTable::GreekTable()
     ins("*)I",     "Ἰ");
     ins("*(I",     "Ἱ");
     ins("*\\I",     "Ὶ");
-    ins("*/I",      "Ί");
+    ins("*/I",      "Ί");
     ins("*)\\I",   "Ἲ");
     ins("*(\\I",   "Ἳ");
     ins("*)/I",    "Ἴ");
@@ -62,7 +160,7 @@ GreekTable::GreekTable()
     ins("*)O",     "Ὀ");
     ins("*(O",     "Ὁ");
     ins("*\\O",     "Ὸ");
-    ins("*/O",      "Ό");
+    ins("*/O",      "Ό");
     ins("*)\\O",   "Ὂ");
     ins("*(\\O",   "Ὃ");
     ins("*)/O",    "Ὄ");
@@ -72,20 +170,20 @@ GreekTable::GreekTable()
 
     ins("*(U",     "Ὑ");
     ins("*\\U",     "Ὺ");
-    ins("*/U",      "Ύ");
+    ins("*/U",      "Ύ");
     ins("*(\\U",   "Ὓ");
     ins("*(/U",    "Ὕ");
 
     ins("*)W",     "Ὠ");
     ins("*(W",     "Ὡ");
     ins("*\\W",     "Ὼ");
-    ins("*/W",      "Ώ");
+    ins("*/W",      "Ώ");
     ins("*)\\W",   "Ὢ");
     ins("*(\\W",   "Ὣ");
     ins("*)/W",    "Ὤ");
     ins("*(/W",    "Ὥ");
 
-	//perispwmenh
+		//perispwmenh
     ins("*)=A",    "Ἆ");
     ins("*(=A",    "Ἇ");
     
@@ -100,7 +198,7 @@ GreekTable::GreekTable()
     ins("*)=W",    "Ὦ");
     ins("*(=W",    "Ὧ");
 
-	//upogegrammenh
+		//upogegrammenh
     ins("*A|",      "ᾼ");
     ins("*)A|",    "ᾈ");
     ins("*(A|",    "ᾉ");
@@ -149,16 +247,17 @@ GreekTable::GreekTable()
     ins("*)=|W",   "ᾮ");
     ins("*(=|W",   "ᾯ");
 
-	//dialutika
+		//diairesis
     ins("*+I",      "Ϊ");
     ins("*+U",      "Ϋ");
     
     //uppercase (asterisk & small letters)
-	//oceia - bareia
+    
+		//oceia - bareia
     ins("*)a",     "Ἀ");
     ins("*(a",     "Ἁ");
     ins("*\\a",     "Ὰ");
-    ins("*/a",      "Ά");
+    ins("*/a",      "Ά");
     ins("*)\\a",   "Ἂ");
     ins("*(\\a",   "Ἃ");
     ins("*)/a",    "Ἄ");
@@ -167,7 +266,7 @@ GreekTable::GreekTable()
     ins("*)e",     "Ἐ");
     ins("*(e",     "Ἑ");
     ins("*\\e",     "Ὲ");
-    ins("*/e",      "Έ");
+    ins("*/e",      "Έ");
     ins("*)\\e",   "Ἒ");
     ins("*(\\e",   "Ἓ");
     ins("*)/e",    "Ἔ");
@@ -176,7 +275,7 @@ GreekTable::GreekTable()
     ins("*)h",     "Ἠ");
     ins("*(h",     "Ἡ");
     ins("*\\h",     "Ὴ");
-    ins("*/h",      "Ή");
+    ins("*/h",      "Ή");
     ins("*)\\h",   "Ἢ");
     ins("*(\\h",   "Ἣ");
     ins("*)/h",    "Ἤ");
@@ -185,7 +284,7 @@ GreekTable::GreekTable()
     ins("*)i",     "Ἰ");
     ins("*(i",     "Ἱ");
     ins("*\\i",     "Ὶ");
-    ins("*/i",      "Ί");
+    ins("*/i",      "Ί");
     ins("*)\\i",   "Ἲ");
     ins("*(\\i",   "Ἳ");
     ins("*)/i",    "Ἴ");
@@ -194,7 +293,7 @@ GreekTable::GreekTable()
     ins("*)o",     "Ὀ");
     ins("*(o",     "Ὁ");
     ins("*\\o",     "Ὸ");
-    ins("*/o",      "Ό");
+    ins("*/o",      "Ό");
     ins("*)\\o",   "Ὂ");
     ins("*(\\o",   "Ὃ");
     ins("*)/o",    "Ὄ");
@@ -204,20 +303,20 @@ GreekTable::GreekTable()
 
     ins("*(u",     "Ὑ");
     ins("*\\u",     "Ὺ");
-    ins("*/u",      "Ύ");
+    ins("*/u",      "Ύ");
     ins("*(\\u",   "Ὓ");
     ins("*(/u",    "Ὕ");
 
     ins("*)w",     "Ὠ");
     ins("*(w",     "Ὡ");
     ins("*\\w",     "Ὼ");
-    ins("*/w",      "Ώ");
+    ins("*/w",      "Ώ");
     ins("*)\\w",   "Ὢ");
     ins("*(\\w",   "Ὣ");
     ins("*)/w",    "Ὤ");
     ins("*(/w",    "Ὥ");
 
-	//perispwmenh
+		//perispwmenh
     ins("*)=a",    "Ἆ");
     ins("*(=a",    "Ἇ");
     
@@ -232,7 +331,7 @@ GreekTable::GreekTable()
     ins("*)=w",    "Ὦ");
     ins("*(=w",    "Ὧ");
 
-	//upogegrammenh
+		//upogegrammenh
     ins("*a|",      "ᾼ");
     ins("*)a|",    "ᾈ");
     ins("*(a|",    "ᾉ");
@@ -281,147 +380,145 @@ GreekTable::GreekTable()
     ins("*)=|w",   "ᾮ");
     ins("*(=|w",   "ᾯ");
 
-	//dialutika
+		//diairesis
     ins("*+i",      "Ϊ");
     ins("*+u",      "Ϋ");
     
-    //lowercase (capitals)
-	//oceia - bareia
-    ins("A)",     "ἀ");
-    ins("A(",     "ἁ");
-    ins("A\\",     "ὰ");
-    ins("A/",      "ά");
-    ins("A)\\",   "ἂ");
-    ins("A(\\",   "ἃ");
-    ins("A)/",    "ἄ");
-    ins("A(/",    "ἅ");
+    //uppercase (capitals)
+    
+		//oceia - bareia
+    ins("A)",     "Ἀ");
+    ins("A(",     "Ἁ");
+    ins("A\\",     "Ὰ");
+    ins("A/",      "Ά");
+    ins("A)\\",   "Ἂ");
+    ins("A(\\",   "Ἃ");
+    ins("A)/",    "Ἄ");
+    ins("A(/",    "Ἅ");
 
-    ins("E)",     "ἐ");
-    ins("E(",     "ἑ");
-    ins("E\\",     "ὲ");
-    ins("E/",      "έ");
-    ins("E)\\",   "ἒ");
-    ins("E(\\",   "ἓ");
-    ins("E)/",    "ἔ");
-    ins("E(/",    "ἕ");
+    ins("E)",     "Ἐ");
+    ins("E(",     "Ἑ");
+    ins("E\\",     "Ὲ");
+    ins("E/",      "Έ");
+    ins("E)\\",   "Ἒ");
+    ins("E(\\",   "Ἓ");
+    ins("E)/",    "Ἔ");
+    ins("E(/",    "Ἕ");
 
-    ins("H)",     "ἠ");
-    ins("H(",     "ἡ");
-    ins("H\\",     "ὴ");
-    ins("H/",      "ή");
-    ins("H)\\",   "ἢ");
-    ins("H(\\",   "ἣ");
-    ins("H)/",    "ἤ");
-    ins("H(/",    "ἥ");
+    ins("H)",     "Ἠ");
+    ins("H(",     "Ἡ");
+    ins("H\\",     "Ὴ");
+    ins("H/",      "Ή");
+    ins("H)\\",   "Ἢ");
+    ins("H(\\",   "Ἣ");
+    ins("H)/",    "Ἤ");
+    ins("H(/",    "Ἥ");
 
-    ins("I)",     "ἰ");
-    ins("I(",     "ἱ");
-    ins("I\\",     "ὶ");
-    ins("I/",      "ί");
-    ins("I)\\",   "ἲ");
-    ins("I(\\",   "ἳ");
-    ins("I)/",    "ἴ");
-    ins("I(/",    "ἵ");
+    ins("I)",     "Ἰ");
+    ins("I(",     "Ἱ");
+    ins("I\\",     "Ὶ");
+    ins("I/",      "Ί");
+    ins("I)\\",   "Ἲ");
+    ins("I(\\",   "Ἳ");
+    ins("I)/",    "Ἴ");
+    ins("I(/",    "Ἵ");
 
-    ins("O)",     "ὀ");
-    ins("O(",     "ὁ");
-    ins("O\\",     "ὸ");
-    ins("O/",      "ό");
-    ins("O)\\",   "ὂ");
-    ins("O(\\",   "ὃ");
-    ins("O)/",    "ὄ");
-    ins("O(/",    "ὅ");
+    ins("O)",     "Ὀ");
+    ins("O(",     "Ὁ");
+    ins("O\\",     "Ὸ");
+    ins("O/",      "Ό");
+    ins("O)\\",   "Ὂ");
+    ins("O(\\",   "Ὃ");
+    ins("O)/",    "Ὄ");
+    ins("O(/",    "Ὅ");
 
-    ins("R(",     "ῤ");
+    ins("R(",     "Ῥ");
 
     ins("U)",     "ὐ");
-    ins("U(",     "ὑ");
-    ins("U\\",     "ὺ");
-    ins("U/",      "ύ");
+    ins("U(",     "Ὑ");
+    ins("U\\",     "Ὺ");
+    ins("U/",      "Ύ");
     ins("U)\\",   "ὒ");
-    ins("U(\\",   "ὓ");
+    ins("U(\\",   "Ὓ");
     ins("U)/",    "ὔ");
-    ins("U(/",    "ὕ");
+    ins("U(/",    "Ὕ");
 
-    ins("W)",     "ὠ");
-    ins("W(",     "ὡ");
-    ins("W\\",     "ὼ");
-    ins("W/",      "ώ");
-    ins("W)\\",   "ὢ");
-    ins("W(\\",   "ὣ");
-    ins("W)/",    "ὤ");
-    ins("W(/",    "ὥ");
+    ins("W)",     "Ὠ");
+    ins("W(",     "Ὡ");
+    ins("W\\",     "Ὼ");
+    ins("W/",      "Ώ");
+    ins("W)\\",   "Ὢ");
+    ins("W(\\",   "Ὣ");
+    ins("W)/",    "Ὤ");
+    ins("W(/",    "Ὥ");
 
-	//perispwmenh
+		//perispwmenh
     ins("A=",      "ᾶ");
-    ins("A)=",    "ἆ");
-    ins("A(=",    "ἇ");
+    ins("A)=",    "Ἆ");
+    ins("A(=",    "Ἇ");
     
     ins("H=",      "ῆ");
-    ins("H)=",    "ἦ");
-    ins("H(=",    "ἧ");
+    ins("H)=",    "Ἦ");
+    ins("H(=",    "Ἧ");
     
     ins("I=",      "ῖ");
-    ins("I)=",    "ἶ");
-    ins("I(=",    "ἷ");
+    ins("I)=",    "Ἶ");
+    ins("I(=",    "Ἷ");
     
     ins("U=",      "ῦ");
     ins("U)=",    "ὖ");
-    ins("U(=",    "ὗ");
+    ins("U(=",    "Ὗ");
     
     ins("W=",      "ῶ");
-    ins("W)=",    "ὦ");
-    ins("W(=",    "ὧ");
+    ins("W)=",    "Ὦ");
+    ins("W(=",    "Ὧ");
 
-	//upogegrammenh
-    ins("A|",      "ᾳ");
-    ins("A)|",    "ᾀ");
-    ins("A(|",    "ᾁ");
+		//upogegrammenh
+    ins("A|",      "ᾼ");
+    ins("A)|",    "ᾈ");
+    ins("A(|",    "ᾉ");
     ins("A/|",     "ᾴ");
-    ins("A)/|",   "ᾄ");
-    ins("A(/|",   "ᾅ");
+    ins("A)/|",   "ᾌ");
+    ins("A(/|",   "ᾍ");
     ins("A=|",     "ᾷ");
-    ins("A)=|",   "ᾆ");
-    ins("A(=|",   "ᾇ");
+    ins("A)=|",   "ᾎ");
+    ins("A(=|",   "ᾏ");
 
-    ins("H|",      "ῃ");
-    ins("H)|",    "ᾐ");
-    ins("H(|",    "ᾑ");
+    ins("H|",      "ῌ");
+    ins("H)|",    "ᾘ");
+    ins("H(|",    "ᾙ");
     ins("H/|",     "ῄ");
-    ins("H)/|",   "ᾔ");
-    ins("H(/|",   "ᾕ");
+    ins("H)/|",   "ᾜ");
+    ins("H(/|",   "ᾝ");
     ins("H=|",     "ῇ");
-    ins("H)=|",   "ᾖ");
-    ins("H(=|",   "ᾗ");
+    ins("H)=|",   "ᾞ");
+    ins("H(=|",   "ᾟ");
 
-    ins("W|",      "ῳ"); 
-    ins("W)|",    "ᾠ");
-    ins("W(|",    "ᾡ");
+    ins("W|",      "ῼ"); 
+    ins("W)|",    "ᾨ");
+    ins("W(|",    "ᾩ");
     ins("W/|",     "ῴ");
-    ins("W)/|",   "ᾤ");
-    ins("W(/|",   "ᾥ");
+    ins("W)/|",   "ᾬ");
+    ins("W(/|",   "ᾭ");
     ins("W=|",     "ῷ");
-    ins("W)=|",   "ᾦ");
-    ins("W(=|",   "ᾧ");
+    ins("W)=|",   "ᾮ");
+    ins("W(=|",   "ᾯ");
 
-	//dialutika
-    ins("I+",      "ϊ");
-    ins("I\\+",    "ῒ");
+		//diairesis
+    ins("I+",      "Ϊ");
     ins("I+\\",    "ῒ");
-    ins("I/+",     "ΐ");
     ins("I+/",     "ΐ");
-    ins("U+",      "ϋ");
-    ins("U\\+",    "ῢ");
+    ins("U+",      "Ϋ");
     ins("U+\\",    "ῢ");
-    ins("U/+",     "ΰ");
     ins("U+/",     "ΰ");    
 
     //lowercase (small letters)
-	//oceia - bareia
+    
+		//oceia - bareia
     ins("a)",     "ἀ");
     ins("a(",     "ἁ");
     ins("a\\",     "ὰ");
-    ins("a/",      "ά");
+    ins("a/",      "ά");
     ins("a)\\",   "ἂ");
     ins("a(\\",   "ἃ");
     ins("a)/",    "ἄ");
@@ -430,7 +527,7 @@ GreekTable::GreekTable()
     ins("e)",     "ἐ");
     ins("e(",     "ἑ");
     ins("e\\",     "ὲ");
-    ins("e/",      "έ");
+    ins("e/",      "έ");
     ins("e)\\",   "ἒ");
     ins("e(\\",   "ἓ");
     ins("e)/",    "ἔ");
@@ -439,7 +536,7 @@ GreekTable::GreekTable()
     ins("h)",     "ἠ");
     ins("h(",     "ἡ");
     ins("h\\",     "ὴ");
-    ins("h/",      "ή");
+    ins("h/",      "ή");
     ins("h)\\",   "ἢ");
     ins("h(\\",   "ἣ");
     ins("h)/",    "ἤ");
@@ -448,7 +545,7 @@ GreekTable::GreekTable()
     ins("i)",     "ἰ");
     ins("i(",     "ἱ");
     ins("i\\",     "ὶ");
-    ins("i/",      "ί");
+    ins("i/",      "ί");
     ins("i)\\",   "ἲ");
     ins("i(\\",   "ἳ");
     ins("i)/",    "ἴ");
@@ -457,7 +554,7 @@ GreekTable::GreekTable()
     ins("o)",     "ὀ");
     ins("o(",     "ὁ");
     ins("o\\",     "ὸ");
-    ins("o/",      "ό");
+    ins("o/",      "ό");
     ins("o)\\",   "ὂ");
     ins("o(\\",   "ὃ");
     ins("o)/",    "ὄ");
@@ -468,7 +565,7 @@ GreekTable::GreekTable()
     ins("u)",     "ὐ");
     ins("u(",     "ὑ");
     ins("u\\",     "ὺ");
-    ins("u/",      "ύ");
+    ins("u/",      "ύ");
     ins("u)\\",   "ὒ");
     ins("u(\\",   "ὓ");
     ins("u)/",    "ὔ");
@@ -477,13 +574,13 @@ GreekTable::GreekTable()
     ins("w)",     "ὠ");
     ins("w(",     "ὡ");
     ins("w\\",     "ὼ");
-    ins("w/",      "ώ");
+    ins("w/",      "ώ");
     ins("w)\\",   "ὢ");
     ins("w(\\",   "ὣ");
     ins("w)/",    "ὤ");
     ins("w(/",    "ὥ");
 
-	//perispwmenh
+		//perispwmenh
     ins("a=",      "ᾶ");
     ins("a)=",    "ἆ");
     ins("a(=",    "ἇ");
@@ -504,7 +601,7 @@ GreekTable::GreekTable()
     ins("w)=",    "ὦ");
     ins("w(=",    "ὧ");
 
-	//upogegrammenh
+		//upogegrammenh
     ins("a|",      "ᾳ");
     ins("a)|",    "ᾀ");
     ins("a(|",    "ᾁ");
@@ -535,112 +632,203 @@ GreekTable::GreekTable()
     ins("w)=|",   "ᾦ");
     ins("w(=|",   "ᾧ");
 
-	//dialutika
+		//diairesis
     ins("i+",      "ϊ");
-    ins("i\\+",    "ῒ");
     ins("i+\\",    "ῒ");
-    ins("i/+",     "ΐ");
     ins("i+/",     "ΐ");
     ins("u+",      "ϋ");
-    ins("u\\+",    "ῢ");
     ins("u+\\",    "ῢ");
-    ins("u/+",     "ΰ");
     ins("u+/",     "ΰ");
     
-	//MODERN GREEK DIACRITICS
+
+	//ORDER: ACCENT - BREATHING (UNOFFICIAL)
+	
+    //uppercase (capitals)
     
-    ins("'a",      "ά");
-    ins("'e",      "έ");
-    ins("'h",      "ή");
-    ins("'i",      "ί");
-    ins("\"i",     "ϊ");
-    ins("\"'i",    "ΐ");
-    ins("':i",     "ΐ");
-    ins("'o",      "ό");
-    ins("'u",      "ύ");
-    ins("\"u",     "ϋ");
-    ins("\"'u",    "ΰ");
-    ins("':u",     "ΰ");
-    ins("'w",      "ώ");
+		//oceia - bareia
+    ins("A\\)",   "Ἂ");
+    ins("A\\(",   "Ἃ");
+    ins("A/)",    "Ἄ");
+    ins("A/(",    "Ἅ");
 
-    ins("'A",      "ά");
-    ins("'E",      "έ");
-    ins("'H",      "ή");
-    ins("'I",      "ί");
-    ins("\"I",     "ϊ");
-    ins("'O",      "ό");
-    ins("'U",      "ύ");
-    ins("\"U",     "ϋ");
-    ins("'W",      "ώ");
+    ins("E\\)",   "Ἒ");
+    ins("E\\(",   "Ἓ");
+    ins("E/)",    "Ἔ");
+    ins("E/(",    "Ἕ");
 
-    //BASE CHARACTERS
-    ins("a",      "α");
-    ins("b",      "β");
-    ins("v",      "β");
-    ins("g",      "γ");
-    ins("d",      "δ");
-    ins("e",      "ε");
-    ins("z",      "ζ");
-    ins("h",      "η");
-    ins("q",      "θ");
-    ins("8",      "θ");
-    ins("i",      "ι");
-    ins("k",      "κ");
-    ins("l",      "λ");
-    ins("m",      "μ");
-    ins("n",      "ν");
-    ins("c",      "ξ");
-    ins("3",      "ξ");
-    ins("ks",     "ξ");
-    ins("o",      "ο");
-    ins("p",      "π");
-    ins("r",      "ρ");
-    ins("s",      "σ");
-    ins("s1",     "σ");
-    ins("j",      "ς");
-    ins("s2",     "ς");
-    ins("s\\n",   "ς");
-    ins("t",      "τ");
-    ins("u",      "υ");
-    ins("f",      "φ");
-    ins("x",      "χ");
-    ins("y",      "ψ");
-    ins("ps",     "ψ");
-    ins("w",      "ω");
+    ins("H\\)",   "Ἢ");
+    ins("H\\(",   "Ἣ");
+    ins("H/)",    "Ἤ");
+    ins("H/(",    "Ἥ");
 
-    ins("A",      "α");
-    ins("B",      "β");
-    ins("V",      "β");
-    ins("G",      "γ");
-    ins("D",      "δ");
-    ins("E",      "ε");
-    ins("Z",      "ζ");
-    ins("H",      "η");
-    ins("Q",      "θ");
-    ins("I",      "ι");
-    ins("K",      "κ");
-    ins("L",      "λ");
-    ins("M",      "μ");
-    ins("N",      "ν");
-    ins("C",      "ξ");
-    ins("KS",     "ξ");
-    ins("Ks",     "ξ");
-    ins("O",      "ο");
-    ins("P",      "π");
-    ins("R",      "ρ");
-    ins("S",      "σ");
-    ins("S1",     "σ");
-    ins("J",      "ς");
-    ins("S2",     "ς");
-    ins("S\\n",   "ς");
-    ins("T",      "τ");
-    ins("U",      "υ");
-    ins("F",      "φ");
-    ins("X",      "χ");
-    ins("Y",      "ψ");
-    ins("PS",     "ψ");
-    ins("Ps",     "ψ");
-    ins("W",      "ω");
+    ins("I\\)",   "Ἲ");
+    ins("I\\(",   "Ἳ");
+    ins("I/)",    "Ἴ");
+    ins("I/(",    "Ἵ");
+
+    ins("O\\)",   "Ὂ");
+    ins("O\\(",   "Ὃ");
+    ins("O/)",    "Ὄ");
+    ins("O/(",    "Ὅ");
+
+    ins("U\\(",   "Ὓ");
+    ins("U/(",    "Ὕ");
+
+    ins("W\\)",   "Ὢ");
+    ins("W\\(",   "Ὣ");
+    ins("W/)",    "Ὤ");
+    ins("W/(",    "Ὥ");
+
+		//perispwmenh
+    ins("A=)",    "Ἆ");
+    ins("A=(",    "Ἇ");
+    
+    ins("H=)",    "Ἦ");
+    ins("H=(",    "Ἧ");
+    
+    ins("I=)",    "Ἶ");
+    ins("I=(",    "Ἷ");
+    
+    ins("U=(",    "Ὗ");
+    
+    ins("W=)",    "Ὦ");
+    ins("W=(",    "Ὧ");
+
+		//upogegrammenh
+    ins("A/)|",   "ᾌ");
+    ins("A/(|",   "ᾍ");
+    ins("A=)|",   "ᾎ");
+    ins("A=(|",   "ᾏ");
+
+    ins("H/)|",   "ᾜ");
+    ins("H/(|",   "ᾝ");
+    ins("H=)|",   "ᾞ");
+    ins("H=(|",   "ᾟ");
+
+    ins("W/)|",   "ᾬ");
+    ins("W/(|",   "ᾭ");
+    ins("W=)|",   "ᾮ");
+    ins("W=(|",   "ᾯ");
+
+    //lowercase (small letters)
+    
+		//oceia - bareia
+    ins("a\\)",   "ἂ");
+    ins("a\\(",   "ἃ");
+    ins("a/)",    "ἄ");
+    ins("a/(",    "ἅ");
+
+
+    ins("e\\)",   "ἒ");
+    ins("e\\(",   "ἓ");
+    ins("e/)",    "ἔ");
+    ins("e/(",    "ἕ");
+
+    ins("h\\)",   "ἢ");
+    ins("h\\(",   "ἣ");
+    ins("h/)",    "ἤ");
+    ins("h/(",    "ἥ");
+
+    ins("i\\)",   "ἲ");
+    ins("i\\(",   "ἳ");
+    ins("i/)",    "ἴ");
+    ins("i/(",    "ἵ");
+
+    ins("o\\)",   "ὂ");
+    ins("o\\(",   "ὃ");
+    ins("o/)",    "ὄ");
+    ins("o/(",    "ὅ");
+
+    ins("u\\)",   "ὒ");
+    ins("u\\(",   "ὓ");
+    ins("u/)",    "ὔ");
+    ins("u/(",    "ὕ");
+
+    ins("w\\)",   "ὢ");
+    ins("w\\(",   "ὣ");
+    ins("w/)",    "ὤ");
+    ins("w/(",    "ὥ");
+
+		//perispwmenh
+    ins("a=)",    "ἆ");
+    ins("a=(",    "ἇ");
+    
+    ins("h=)",    "ἦ");
+    ins("h=(",    "ἧ");
+    
+    ins("i=)",    "ἶ");
+    ins("i=(",    "ἷ");
+    
+    ins("u=)",    "ὖ");
+    ins("u=(",    "ὗ");
+    
+    ins("w=)",    "ὦ");
+    ins("w=(",    "ὧ");
+
+		//upogegrammenh
+    ins("a/)|",   "ᾄ");
+    ins("a/(|",   "ᾅ");
+    ins("a=)|",   "ᾆ");
+    ins("a=(|",   "ᾇ");
+
+    ins("h/)|",   "ᾔ");
+    ins("h/(|",   "ᾕ");
+    ins("h=)|",   "ᾖ");
+    ins("h=(|",   "ᾗ");
+
+    ins("w/)|",   "ᾤ");
+    ins("w/(|",   "ᾥ");
+    ins("w=)|",   "ᾦ");
+    ins("w=(|",   "ᾧ");
+
+		//diairesis
+    ins("i\\+",    "ῒ");
+    ins("i/+",     "ΐ");
+    ins("u\\+",    "ῢ");
+    ins("u/+",     "ΰ");
+	
+	//IΙI. MODERN GREEK <-> CLASSICAL GREEK
+		//convert tonos to oceia
+  
+    ins("ά",      "ά");
+    ins("έ",      "έ");
+    ins("ή",      "ή");
+    ins("ί",      "ί");
+    ins("ΐ",      "ΐ");
+    ins("ό",      "ό");
+    ins("ύ",      "ύ");
+    ins("ΰ",      "ΰ");
+    ins("ώ",      "ώ");
+
+    ins("Ά",      "Ά");
+    ins("Έ",      "Έ");
+    ins("Ή",      "Ή");
+    ins("Ί",      "Ί");
+    ins("Ό",      "Ό");
+    ins("Ύ",      "Ύ");
+    ins("Ώ",      "Ώ");
+
+		//convert oceia to tonos
+  
+    ins("ά",      "ά");
+    ins("έ",      "έ");
+    ins("ή",      "ή");
+    ins("ί",      "ί");
+    ins("ΐ",      "ΐ");
+    ins("ό",      "ό");
+    ins("ύ",      "ύ");
+    ins("ΰ",      "ΰ");
+    ins("ώ",      "ώ");
+
+    ins("Ά",      "Ά");
+    ins("Έ",      "Έ");
+    ins("Ή",      "Ή");
+    ins("Ί",      "Ί");
+    ins("Ό",      "Ό");
+    ins("Ύ",      "Ύ");
+    ins("Ώ",      "Ώ");
+
+
 }
 
 sptr< Dictionary::Class > makeDictionary() throw( std::exception )
