@@ -477,7 +477,7 @@ p, li { white-space: pre-wrap; }
             <item row="4" column="1">
              <widget class="QLabel" name="label_15">
               <property name="text">
-               <string>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</string>
+               <string>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</string>
               </property>
               <property name="openExternalLinks">
                <bool>true</bool>

@@ -2803,7 +2803,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../sources.ui" line="480"/>
-        <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
+        <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Die vollständige Liste der Sprachkodes ist &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>

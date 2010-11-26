@@ -2317,7 +2317,7 @@ p, li { white-space: pre-wrap; }
         <translation>你所需要的语言代码列表。例如：&quot;en, ru&quot;.</translation>
     </message>
     <message>
-        <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
+        <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>语言代码的完整列表可以从&lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;这里&lt;/a&gt;获取。</translation>
     </message>
     <message>

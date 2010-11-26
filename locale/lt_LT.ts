@@ -2854,7 +2854,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../sources.ui" line="480"/>
-        <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
+        <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Visas kalbų kodų sąrašas pateiktas &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;čia&lt;/a&gt;.</translation>
     </message>
     <message>

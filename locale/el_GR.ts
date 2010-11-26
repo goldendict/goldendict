@@ -2870,7 +2870,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../sources.ui" line="480"/>
-        <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
+        <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Ο πλήρης κατάλογος των κωδικών γλωσσών είναι διαθέσιμος &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;εδώ&lt;/a&gt;.</translation>
     </message>
     <message>

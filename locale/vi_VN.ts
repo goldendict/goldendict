@@ -2244,7 +2244,7 @@ p, li { white-space: pre-wrap; }
         <translation>Danh sách mã ngôn ngữ mà bạn muốn có. Ví dụ: &quot;en, ru&quot;.</translation>
     </message>
     <message>
-        <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
+        <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Danh sách toàn bộ mã ngôn ngữ có tại &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;đây&lt;/a&gt;.</translation>
     </message>
     <message>
