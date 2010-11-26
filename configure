@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo
+echo To build the program, run qmake, then make.
+echo
+echo The following dependency packages are required: libvorbis-dev, zlib1g-dev, libhunspell-dev, x11proto-record-dev, qt4-qmake, libqt4-dev, g++, libxtst-dev, libphonon-dev. They can be named slightly different in different distributions.
