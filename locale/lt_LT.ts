@@ -133,12 +133,12 @@
     <message>
         <location filename="../article_maker.cc" line="584"/>
         <source>Compound expressions: </source>
-        <translation>Žodžių junginių:</translation>
+        <translation>Žodžių junginiai: </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="612"/>
         <source>Individual words: </source>
-        <translation>Pavienių žodžių:</translation>
+        <translation>Pavieniai žodžiai: </translation>
     </message>
 </context>
 <context>
