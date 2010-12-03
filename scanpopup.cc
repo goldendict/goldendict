@@ -235,7 +235,16 @@ void ScanPopup::mouseHovered( QString const & str )
 
 void ScanPopup::handleInputWord( QString const & str )
 {
-  pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
+  QString sanitizedStr = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
+
+  if ( isVisible() && sanitizedStr == inputWord )
+  {
+    // Attempt to translate the same word we already have shown in scan popup.
+    // Ignore it, as it is probably a spurious mouseover event.
+    return;
+  }
+
+  pendingInputWord = sanitizedStr;
 
   if ( !pendingInputWord.size() )
   {
