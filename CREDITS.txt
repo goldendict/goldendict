@@ -7,3 +7,4 @@ Daniele Di Pisa <daniele\systems.it>: Italian translation
 Daniel Kaneider: German translation
 Zhang Jinsong <zhangsong023\gmail.com>: Chinese translation
 Usama Akkad <uahello\gmail.com>: Arabic translation
+Korostil Daniel <ted.korostiled\gmail.com>: Ukrainian translation

@@ -11,17 +11,17 @@
     <message>
         <location filename="../about.ui" line="48"/>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>Програма для роботи зі словниками GoldenDict, версія </translation>
+        <translation>GoldenDict — програма для роботи зі словниками, версія </translation>
     </message>
     <message>
         <location filename="../about.ui" line="70"/>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished">© 2008-2010 Konstantin Isakov (ikm@users.berlios.de) {2008-2011 ?}</translation>
+        <translation>© 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="94"/>
         <source>Credits:</source>
-        <translation type="unfinished"></translation>
+        <translation>Подяки:</translation>
     </message>
     <message>
         <source>#.#</source>
@@ -34,12 +34,12 @@
     <message>
         <location filename="../about.ui" line="80"/>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>Ліцензовано за GNU GPLv3 або старше</translation>
+        <translation>Ліцензовано за GNU GPLv3 або пізніше</translation>
     </message>
     <message>
         <location filename="../about.cc" line="16"/>
         <source>[Unknown]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Невідомий]</translation>
     </message>
 </context>
 <context>
@@ -66,12 +66,12 @@
     <message>
         <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Ласкаво просимо до &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Щоб розпочати роботу з програмою, спочатку відвідайте &lt;b&gt;Правка|Словники&lt;/b&gt;, та додайте деякі шляхи до словників, де їх можна знайти, вкажіть варіанти сайтів Wikipedia або інших джерел, встановити порядок словників або згрупувати словники.&lt;p&gt;І тоді ви зможете шукати самі слова! Ви можете це здійснити в цьому вікні, використовуючи панель зліва, або можете через &lt;a href=&quot;Контекстні вікна&quot;&gt;шукати слова з інших запущених програм&lt;/a&gt;. &lt;p&gt;Щоб налаштувати програму, перевірте доступність налаштувань в &lt;b&gt;Правка|Налаштування&lt;/b&gt;. Всі параметри мають підказки, переконайтесь, що прочитали їх, якщо в чомусь не впевнені.&lt;p&gt;Якщо потрібна допомога, маєте якісь запитання, поради або просто бажаєте поділитись враженнями, ми будемо раді кожному на &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форумі&lt;/a&gt; програми.&lt;p&gt;Відвідайте &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайт&lt;/a&gt; програми щодо оновлень. &lt;p&gt;© 2008–2011 Konstantin Isakov. Ліцензовано за GPLv3 або пізнішої версії.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
         <source>Working with popup</source>
-        <translation>Виринні вікна</translation>
+        <translation>Контекстні вікна</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="155"/>
@@ -176,7 +176,7 @@
     <message>
         <location filename="../articleview.cc" line="705"/>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>Вказаний ресур не існує.</translation>
+        <translation>Вказаного ресурсу не існує.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="810"/>
@@ -216,12 +216,12 @@
     <message>
         <location filename="../articleview.cc" line="1002"/>
         <source>Playing a non-WAV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Програти файл в форматі, який не є WAV</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1003"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="unfinished"></translation>
+        <translation>Щоб увімкнути відворення файлів відмінних від WAV, будь ласка, перейдіть до меню &lt;b&gt;Правка|Налаштування&lt;/b&gt;, натисніть на вкладку &lt;b&gt;Аудіо&lt;/b&gt; та виберіть &lt;b&gt;Програвати через DirectShow&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1054"/>
@@ -259,42 +259,42 @@
     <message>
         <location filename="../dictgroupwidget.ui" line="85"/>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорочення:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="34"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Нема</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="39"/>
         <source>From file...</source>
-        <translation type="unfinished"></translation>
+        <translation>З файла…</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="79"/>
         <source>Choose a file to use as group icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть файл, з якого братиметься групова піктограма</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="81"/>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Зображення</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="82"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Усі файли</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Error</source>
-        <translation type="unfinished">Помилка</translation>
+        <translation>Помилка</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="89"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо прочитати вказане зображення.</translation>
     </message>
 </context>
 <context>
@@ -302,12 +302,12 @@
     <message>
         <location filename="../groups_widgets.cc" line="570"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтвердження</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="571"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation type="unfinished"></translation>
+        <translation>Бажаєте створити групи, впорядковані за різними мовами?</translation>
     </message>
 </context>
 <context>
@@ -411,7 +411,7 @@
     <message>
         <location filename="../forvo.cc" line="326"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейдіть до меню &lt;b&gt;Правка|Словники|Джерела|Forvo&lt;/b&gt; та застосуйте наш власний ключ API, щоб усунти цю проблему.</translation>
     </message>
 </context>
 <context>
@@ -511,12 +511,12 @@
     <message>
         <location filename="../groups.ui" line="150"/>
         <source>Create language-based groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити групи, впорядковані за мовою</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="153"/>
         <source>Auto groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматичне групування</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="160"/>
@@ -1614,7 +1614,7 @@
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&amp;Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Масштаб</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
@@ -1812,17 +1812,17 @@
     <message>
         <location filename="../mainwindow.cc" line="121"/>
         <source>Words Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Зблизити слова</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="123"/>
         <source>Words Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Віддалити слова</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="125"/>
         <source>Words Normal Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Звичайний розмір слів</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="133"/>
@@ -1832,17 +1832,17 @@
     <message>
         <location filename="../mainwindow.cc" line="172"/>
         <source>Close current tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити поточну вкладку</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="182"/>
         <source>Close all tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити всі вкладки</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="190"/>
         <source>Close all tabs except current</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити всі вкладки заодно з поточною</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="268"/>
@@ -1867,7 +1867,7 @@
     <message>
         <location filename="../mainwindow.cc" line="744"/>
         <source>Opened tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкриті вкладки</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="785"/>
@@ -1912,7 +1912,7 @@
     <message>
         <location filename="../mainwindow.cc" line="1837"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>Не знайдео жодного принтера. Будь ласка, спершу встановіть якийсь.</translation>
+        <translation>Не знайдео жодного принтера. Будь ласка, спершу встановіть хоч якийсь.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1854"/>
@@ -2045,7 +2045,7 @@
     <message>
         <location filename="../sources.cc" line="637"/>
         <source>Path</source>
-        <translation>шлях</translation>
+        <translation>Шлях</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="639"/>
@@ -2102,8 +2102,8 @@ be the last ones.</source>
         <location filename="../preferences.ui" line="93"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Коли це ввімкнено, піктограма з&apos;явиться в системному лотку, яким можна
-будк відкривати головне вікно і здійснювати інші задачі.</translation>
+        <translation>Коли це ввімкнено, піктограма з&apos;явиться в системному лотку, якою можна
+буде відкривати головне вікно і здійснювати інші задачі.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="97"/>
@@ -2400,28 +2400,30 @@ p, li { white-space: pre-wrap; }
         <location filename="../preferences.ui" line="744"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати рідне відтворення для Windows. Обмежений « .wav» файлами,
+але працює справно.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="748"/>
         <source>Play via Windows native API</source>
-        <translation type="unfinished"></translation>
+        <translation>Програвати через рідний API для Windows</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="755"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програвати звук через Phonon. Може інколи бути несправним,
+але підтримує більшість звукових форматів.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="759"/>
         <source>Play via Phonon</source>
-        <translation>Програти через Phonon</translation>
+        <translation>Програвати через Phonon</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="771"/>
         <source>Use any external program to play audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати якусь сторонню програму для відтворення звукових файлів</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="774"/>
@@ -2491,7 +2493,7 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>Якщо це ввімкнено, програма переодично
+        <translation>Якщо це ввімкнено, програма періодично
 перевірятиме наявність нової версії GoldenDict
 для звантаження. Якщо це так, то програма
 повідомлятиме користувача про це й запропонує
@@ -2520,7 +2522,7 @@ download page.</source>
     <message>
         <location filename="../preferences.cc" line="131"/>
         <source>Play via DirectShow</source>
-        <translation>Програти через DirectShow</translation>
+        <translation>Програвати через DirectShow</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="310"/>
@@ -2730,7 +2732,7 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="355"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Жива вимова від &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Цей сайт дозволяє людям записувати і ділитись з вимовою слів. Ви можете прослухати їх за допомогою GoldenDict.</translation>
+        <translation>Жива вимова від &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Цей сайт дозволяє людям записувати і ділитись вимовою слів. Ви можете прослухати їх за допомогою GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="368"/>
@@ -2780,7 +2782,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../sources.ui" line="480"/>
-        <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
+        <source>Full list of language codes is avaiable &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Повний перелік кодів мов &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;тут&lt;/a&gt;.</translation>
     </message>
     <message>
@@ -2823,7 +2825,7 @@ p, li { white-space: pre-wrap; }
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Найпоширеніший спосіб транскрибування японської,
-яка ґрунтується на англійській фології</translation>
+яка ґрунтується на англійській фонології</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="630"/>
@@ -2852,7 +2854,7 @@ Not implemented yet in GoldenDict.</source>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Ґрунтується на системі ніхон-сікі, але вдосконаленовідповідно до стандартів сучасної японської.
+        <translation>Ґрунтується на системі ніхон-сікі, але вдосконалено відповідно до стандартів сучасної японської.
 Стандартазивоно як ISO 3602
 
 Ще не реалізовано в GoldenDict.</translation>
