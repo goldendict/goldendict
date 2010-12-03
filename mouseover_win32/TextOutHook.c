@@ -20,20 +20,9 @@ ExtTextOutANextHook_t ExtTextOutANextHook = NULL;
 typedef BOOL (WINAPI *ExtTextOutWNextHook_t)(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCWSTR lpszString, UINT cbString, CONST INT *lpDx);
 ExtTextOutWNextHook_t ExtTextOutWNextHook = NULL;
 
-typedef struct TEverythingParams {
-	HWND WND;
-	POINT Pt;
-	int Active;
-	int WordLen;
-	int Unicode;
-	int BeginPos;
-	char MatchedWordA[256];
-	wchar_t MatchedWordW[256];
-} TEverythingParams;
-
 TEverythingParams *CurParams = NULL;
 
-static void ConvertToMatchedWordA(TEverythingParams *TP)
+void ConvertToMatchedWordA(TEverythingParams *TP)
 {
 	if (TP->WordLen>0) {
 		int BeginPos;
@@ -448,7 +437,7 @@ DLLIMPORT void __gdGetWord (TCurrentMode *P)
 	WndClass = GetWindowType(P->WND, wClassName);
 	p = TryGetWordFromAnyWindow(WndClass, P->WND, P->Pt, &(P->BeginPos));
 	if (p) {
-	    P->WordLen = strlen(p);
+		P->WordLen = strlen(p);
 		strcpy(P->MatchedWord, p);
 		free(p);
 	} else {

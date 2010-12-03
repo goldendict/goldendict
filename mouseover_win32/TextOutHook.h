@@ -9,9 +9,21 @@
 
 #include "ThTypes.h"
 
+typedef struct TEverythingParams {
+	HWND WND;
+	POINT Pt;
+	int Active;
+	int WordLen;
+	int Unicode;
+	int BeginPos;
+	char MatchedWordA[256];
+	wchar_t MatchedWordW[256];
+} TEverythingParams;
+
 char* ExtractFromEverything(HWND WND, POINT Pt, int *BeginPos);
 
 DLLIMPORT void GetWord (TCurrentMode *P);
 
+void ConvertToMatchedWordA(TEverythingParams *TP);
 
 #endif /* _TextOutHook_H_ */

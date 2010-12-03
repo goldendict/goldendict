@@ -7,8 +7,8 @@ const int WM_MY_SHOW_TRANSLATION = WM_USER + 301;
 
 HINSTANCE g_hInstance = NULL;
 HANDLE hSynhroMutex = 0;
-HANDLE hNewMousePosEvent = 0;
 HINSTANCE hGetWordLib = 0;
+UINT_PTR TimerID = 0;
 typedef void (*GetWordProc_t)(TCurrentMode *);
 GetWordProc_t GetWordProc = NULL;
 
@@ -37,14 +37,13 @@ static void SendWordToServer()
 void CALLBACK TimerFunc(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime)
 {
 DWORD wso;
-	if (WaitForSingleObject(hNewMousePosEvent, 0) == WAIT_OBJECT_0) {
+	wso = WaitForSingleObject(hSynhroMutex, 0);
+	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+		KillTimer(0, nTimerid);
 		if ((GlobalData->LastWND!=0)&&(GlobalData->LastWND == WindowFromPoint(GlobalData->LastPt))) {
-			wso = WaitForSingleObject(hSynhroMutex, 0);
-			if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
-				SendWordToServer();
-				ReleaseMutex(hSynhroMutex);
-			}
+			SendWordToServer();
 		}
+		ReleaseMutex(hSynhroMutex);
 	}
 }
 
@@ -66,7 +65,7 @@ DWORD wso;
 					};
 					int i;
 					for (i=0; i<2; i++) {
-						if (strcmp(wClassName, DisableClasses[i])==0)
+						if (lstrcmp(wClassName, DisableClasses[i])==0)
 							break;
 					}
 					if (i<2) {
@@ -74,10 +73,12 @@ DWORD wso;
 						return CallNextHookEx(GlobalData->g_hHookMouse, nCode, wParam, lParam);
 					}
 			}
-			GlobalData->TimerID = SetTimer(0, GlobalData->TimerID, MOUSEOVER_INTERVAL, TimerFunc);
-			GlobalData->LastWND = WND;
-			GlobalData->LastPt = ((PMOUSEHOOKSTRUCT)lParam)->pt;
-			SetEvent(hNewMousePosEvent);
+
+			if(GlobalData->LastPt.x!=((PMOUSEHOOKSTRUCT)lParam)->pt.x || GlobalData->LastPt.y!=((PMOUSEHOOKSTRUCT)lParam)->pt.y || GlobalData->LastWND != WND) {
+				TimerID = SetTimer(0, TimerID, MOUSEOVER_INTERVAL, TimerFunc);
+				GlobalData->LastWND = WND;
+				GlobalData->LastPt = ((PMOUSEHOOKSTRUCT)lParam)->pt;
+			}
 			ReleaseMutex(hSynhroMutex);
 		}
 	}
@@ -97,14 +98,12 @@ DWORD wso;
 	else {
 		if (GlobalData->g_hHookMouse == NULL) return;
 		UnhookWindowsHookEx(GlobalData->g_hHookMouse);
-		wso = WaitForSingleObject(hSynhroMutex, 2*MOUSEOVER_INTERVAL);
-		if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
-			if (GlobalData->TimerID) {
-				if (KillTimer(0, GlobalData->TimerID))
-					GlobalData->TimerID=0;
-			}
-			ReleaseMutex(hSynhroMutex);
+		WaitForSingleObject(hSynhroMutex, 4*MOUSEOVER_INTERVAL);
+		if (TimerID) {
+			if (KillTimer(0, TimerID))
+				TimerID=0;
 		}
+		ReleaseMutex(hSynhroMutex);
 		GlobalData->g_hHookMouse = NULL;
 	}
 }
@@ -123,26 +122,19 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
 				if(hSynhroMutex==0) return(FALSE);
 				ThTypes_Init();
 			}
-			if(hNewMousePosEvent==0) {
-				hNewMousePosEvent = CreateEvent(NULL, FALSE, FALSE,"GoldenDictTextOutSpyEvent");
-				if(hNewMousePosEvent==0) return(FALSE);
-			}
         break;
 
       case DLL_PROCESS_DETACH:
-			if(hSynhroMutex) WaitForSingleObject(hSynhroMutex, INFINITE);
-			if (GlobalData->TimerID) {
-				if (KillTimer(0, GlobalData->TimerID))
-					GlobalData->TimerID=0;
+//			if(hSynhroMutex) WaitForSingleObject(hSynhroMutex, INFINITE);
+			if(hSynhroMutex) WaitForSingleObject(hSynhroMutex, 2000);
+			if (TimerID) {
+				if (KillTimer(0, TimerID))
+					TimerID=0;
 			}
 			if(hSynhroMutex) {
 				ReleaseMutex(hSynhroMutex);
 				CloseHandle(hSynhroMutex);
 				hSynhroMutex=0;
-			}
-			if(hNewMousePosEvent) {
-				CloseHandle(hNewMousePosEvent);
-				hNewMousePosEvent=0;
 			}
 			{
 			MSG msg ;

@@ -5,5 +5,5 @@ wouldn't interfere with each other when running simultaneously. Also,
 Firefox 3 was made to work by implementing ETO_GLYPH_INDEX in ExtTextOutW()
 function.
 
-The Makefile is made for mingw32 cross-compilation, and is completely separate
+The Makefile is made for mingw32 compilation, and is completely separate
 from the main program build.

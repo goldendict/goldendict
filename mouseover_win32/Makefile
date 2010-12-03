@@ -1,4 +1,4 @@
-GCC:=i586-mingw32msvc-gcc -W -Wall
+GCC:=i686-pc-mingw32-gcc.exe -W -Wall -s
 
 .PHONY: all clean
 
