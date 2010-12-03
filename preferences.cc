@@ -55,7 +55,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
     QString lang = i->mid( 0, 2 );
 
     if ( lang == "qt" )
-      continue; // We skip qt's own locations
+      continue; // We skip qt's own localizations
 
     sortedLocs[ Language::localizedNameForId( LangCoder::code2toInt( lang.toAscii().data() ) ) ]
         = QPair< QIcon, QString >( QIcon( QString( ":/flags/%1.png" ).arg( i->mid( 3, 2 ).toLower() ) ),
