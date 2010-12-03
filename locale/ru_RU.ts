@@ -2604,7 +2604,7 @@ GoldenDict. Если новая версия появилась, програм�
         <location filename="../scanpopup.ui" line="146"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation>Нажмите, чтобы закрепить окно, на экране, изменить его размер
+        <translation>Нажмите, чтобы закрепить окно на экране, изменить его размер
 или какие-либо другие свойства.</translation>
     </message>
     <message>
