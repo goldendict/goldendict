@@ -1,7 +1,7 @@
 !include "MUI2.nsh"
 
   Name "GoldenDict"
-  OutFile "GoldenDict-1.0.1-Install.exe"
+  OutFile "GoldenDict-1.0.1-1-Install.exe"
 
   InstallDir "$PROGRAMFILES\GoldenDict"
 
@@ -402,32 +402,14 @@ Section "Uninstall"
 
   skip_cfg:
 
-  Delete $INSTDIR\content\morphology\*
-  RMDir $INSTDIR\content\morphology
-  RMDir $INSTDIR\content
+  !insertmacro MUI_STARTMENU_GETFOLDER GDApplication $StartMenuFolder
 
-  Delete $INSTDIR\locale\*
-  RMDir $INSTDIR\locale
-
-  Delete $INSTDIR\imageformats\*
-  RMDir  $INSTDIR\imageformats
-
-  Delete $INSTDIR\phonon_backend\*
-  RMDir  $INSTDIR\phonon_backend
-
-  Delete $INSTDIR\*.dll
-  Delete $INSTDIR\LICENSE.txt
-  Delete $INSTDIR\GoldenDict.exe
+; This file is auto-generated
+  !include "uninst.nsh"
 
   Delete "$INSTDIR\Uninstall.exe"
 
   RMDir "$INSTDIR"
-
-  !insertmacro MUI_STARTMENU_GETFOLDER GDApplication $StartMenuFolder
-
-  Delete "$SMPROGRAMS\$StartMenuFolder\GoldenDict.lnk"
-  Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
-  RMDir "$SMPROGRAMS\$StartMenuFolder"
   
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\GoldenDict"
 
