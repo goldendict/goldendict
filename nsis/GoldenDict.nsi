@@ -201,6 +201,8 @@ LangString stopMsg ${LANG_ENGLISH} "Stopping ${WND_TITLE}"
     System::Call 'kernel32.dll::TerminateProcess(i r2, i 0) i .r1'
   close:
     System::Call 'kernel32.dll::CloseHandle(i r2) i .r1'
+    ; Make sure all process files are released
+    Sleep 2000
   done:
     Pop $2
     Pop $1
