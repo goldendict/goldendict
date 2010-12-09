@@ -15,8 +15,8 @@
     </message>
     <message>
         <location filename="../about.ui" line="70"/>
-        <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
+        <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="94"/>

@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@users.berlios.de>
+/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __INDEXEDZIP_HH_INCLUDED__

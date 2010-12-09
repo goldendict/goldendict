@@ -15,8 +15,8 @@
     </message>
     <message>
         <location filename="../about.ui" line="70"/>
-        <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation>© 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
+        <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation>© 2008-2011 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="94"/>
@@ -28,8 +28,8 @@
         <translation type="obsolete">#.#</translation>
     </message>
     <message>
-        <source>(c) 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="obsolete">© 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</translation>
+        <source>(c) 2008-2010 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation type="obsolete">© 2008-2010 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="80"/>

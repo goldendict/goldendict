@@ -16,20 +16,20 @@
         <translation type="obsolete">#.#</translation>
     </message>
     <message>
-        <source>(c) 2008-2009 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="obsolete">© Константин Исаков (ikm@users.berlios.de), 2008-2009</translation>
+        <source>(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation type="obsolete">© Константин Исаков (ikm@goldendict.org), 2008-2009</translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
         <translation>Лицензирано под GNU GPLv3 или следваща версия</translation>
     </message>
     <message>
-        <source>(c) 2008-2010 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="obsolete">© Константин Исаков (ikm@users.berlios.de), 2008-2009 {2008-2010 ?}</translation>
+        <source>(c) 2008-2010 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation type="obsolete">© Константин Исаков (ikm@goldendict.org), 2008-2009 {2008-2010 ?}</translation>
     </message>
     <message>
-        <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="unfinished">© Константин Исаков (ikm@users.berlios.de), 2008-2009 {2008-2010 ?} {2008-2011 ?}</translation>
+        <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation type="unfinished">© Константин Исаков (ikm@goldendict.org), 2008-2009 {2008-2010 ?} {2008-2011 ?}</translation>
     </message>
     <message>
         <source>Credits:</source>

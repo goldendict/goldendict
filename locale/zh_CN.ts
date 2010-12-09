@@ -16,8 +16,8 @@
         <translation>授权基于 GNU 公共授权 GPLv3 或更高版本</translation>
     </message>
     <message>
-        <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
+        <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>Credits:</source>

@@ -1,5 +1,5 @@
 /*
- * February 2, 2009: Konstantin Isakov <ikm@users.berlios.de>
+ * February 2, 2009: Konstantin Isakov <ikm@goldendict.org>
  *   Support for ETO_GLYPH_INDEX in ExtTextOutW() function added. This makes
  *   Firefox 3 work.
 */

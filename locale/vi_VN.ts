@@ -20,7 +20,7 @@
         <translation>Cấp phép theo GNU GPLv3 hoặc mới hơn</translation>
     </message>
     <message>
-        <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
+        <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
         <translation></translation>
     </message>
     <message>
