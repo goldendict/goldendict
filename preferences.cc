@@ -57,9 +57,11 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
     if ( lang == "qt" )
       continue; // We skip qt's own localizations
 
-    sortedLocs[ Language::localizedNameForId( LangCoder::code2toInt( lang.toAscii().data() ) ) ]
-        = QPair< QIcon, QString >( QIcon( QString( ":/flags/%1.png" ).arg( i->mid( 3, 2 ).toLower() ) ),
-                                   i->mid( 0, i->size() - 3 ) );
+    sortedLocs.insertMulti(
+      Language::localizedNameForId( LangCoder::code2toInt( lang.toAscii().data() ) ),
+      QPair< QIcon, QString >(
+        QIcon( QString( ":/flags/%1.png" ).arg( i->mid( 3, 2 ).toLower() ) ),
+        i->mid( 0, i->size() - 3 ) ) );
   }
 
   for( QMap< QString, QPair< QIcon, QString > >::iterator i = sortedLocs.begin();
