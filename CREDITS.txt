@@ -9,3 +9,4 @@ Zhang Jinsong <zhangsong023\gmail.com>: Chinese translation
 Usama Akkad <uahello\gmail.com>: Arabic translation
 Korostil Daniel <ted.korostiled\gmail.com>: Ukrainian translation
 Grzegorz Karpowicz <greg.karpowicz\gmail.com>: Polish translation
+Nardog <alphisation\gmail.com>: Japanese translation
