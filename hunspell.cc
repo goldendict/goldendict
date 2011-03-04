@@ -376,9 +376,9 @@ void HunspellHeadwordsRequest::run()
 
     wstring word;
 
-    for( wchar const * c = trimmedWord.c_str(); *c; ++c )
+    for( wchar const * c = trimmedWord.c_str(); ; ++c )
     {
-      if ( Folding::isPunct( *c ) || Folding::isWhitespace( * c ) )
+      if ( !*c || Folding::isPunct( *c ) || Folding::isWhitespace( * c ) )
       {
         if ( word.size() )
         {
@@ -391,7 +391,10 @@ void HunspellHeadwordsRequest::run()
 
           word.clear();
         }
-        result.push_back( *c );
+        if ( *c )
+          result.push_back( *c );
+        else
+          break;
       }
       else
         word.push_back( *c );
