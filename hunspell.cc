@@ -29,7 +29,6 @@ namespace {
 class HunspellDictionary: public Dictionary::Class
 {
   string name;
-  Mutex hunspellMutex;
   Hunspell hunspell;
 
 public:
@@ -69,6 +68,20 @@ public:
                                           vector< wstring > const & alts,
                                           wstring const & )
     throw( std::exception );
+
+private:
+
+  // We used to have a separate mutex for each Hunspell instance, assuming
+  // that its code was reentrant (though probably not thread-safe). However,
+  // crashes were discovered later when using several Hunspell dictionaries
+  // simultaneously, and we've switched to have a single mutex for all hunspell
+  // calls - evidently it's not really reentrant.
+  static Mutex & getHunspellMutex()
+  {
+    static Mutex mutex;
+    return mutex;
+  }
+//  Mutex hunspellMutex;
 };
 
 /// Encodes the given string to be passed to the hunspell object. May throw
@@ -259,7 +272,7 @@ sptr< DataRequest > HunspellDictionary::getArticle( wstring const & word,
                                                     wstring const & )
   throw( std::exception )
 {
-  return new HunspellArticleRequest( word, hunspellMutex, hunspell );
+  return new HunspellArticleRequest( word, getHunspellMutex(), hunspell );
 }
 
 /// HunspellDictionary::findHeadwordsForSynonym()
@@ -478,7 +491,7 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
 sptr< WordSearchRequest > HunspellDictionary::findHeadwordsForSynonym( wstring const & word )
   throw( std::exception )
 {
-  return new HunspellHeadwordsRequest( word, hunspellMutex, hunspell );
+  return new HunspellHeadwordsRequest( word, getHunspellMutex(), hunspell );
 }
 
 
@@ -593,7 +606,7 @@ sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
                                                            unsigned long /*maxResults*/ )
   throw( std::exception )
 {
-  return new HunspellPrefixMatchRequest( word, hunspellMutex, hunspell );
+  return new HunspellPrefixMatchRequest( word, getHunspellMutex(), hunspell );
 }
 
 
