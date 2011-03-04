@@ -5,8 +5,9 @@ Vit Pelcak <vit\pelcak.org>: Czech translation
 Hero Phương <herophuong93\gmail.com>: Vietnamese translation
 Daniele Di Pisa <daniele\systems.it>: Italian translation
 Daniel Kaneider: German translation
-Zhang Jinsong <zhangsong023\gmail.com>: Chinese translation
+Zhang Jinsong <zhangsong023\gmail.com>: Simplified Chinese translation
 Usama Akkad <uahello\gmail.com>: Arabic translation
 Korostil Daniel <ted.korostiled\gmail.com>: Ukrainian translation
 Grzegorz Karpowicz <greg.karpowicz\gmail.com>: Polish translation
 Nardog <alphisation\gmail.com>: Japanese translation
+Maha 吳寶原, Ray Chou 周邦信, Marcus Bingenheimer: Traditional Chinese translation
