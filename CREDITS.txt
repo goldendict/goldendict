@@ -11,3 +11,4 @@ Korostil Daniel <ted.korostiled\gmail.com>: Ukrainian translation
 Grzegorz Karpowicz <greg.karpowicz\gmail.com>: Polish translation
 Nardog <alphisation\gmail.com>: Japanese translation
 Maha 吳寶原, Ray Chou 周邦信, Marcus Bingenheimer: Traditional Chinese translation
+Besmir Godole <bgodole\gmail.com>: Albanian translation
