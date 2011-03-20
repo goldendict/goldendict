@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it">
-<context>
-    <name></name>
-    <message>
-        <source>XML parse error: %1 at %2,%3</source>
-        <translation type="obsolete">XML parse error: %1 at %2,%3</translation>
-    </message>
-</context>
+<TS version="2.0" language="it_IT">
 <context>
     <name>About</name>
     <message>
         <location filename="../about.ui" line="17"/>
         <source>About</source>
         <translation>Info</translation>
+    </message>
+    <message>
+        <location filename="../about.ui" line="48"/>
+        <source>GoldenDict dictionary lookup program, version </source>
+        <translation>GoldenDict, dizionario elettronico, versione </translation>
     </message>
     <message>
         <location filename="../about.ui" line="70"/>
@@ -26,25 +24,8 @@
         <translation>Riconoscimenti:</translation>
     </message>
     <message>
-        <source>GoldenDict dictionary lookup program, version 0.7</source>
-        <translation type="obsolete">GoldenDict dictionary lookup program, version 0.7</translation>
-    </message>
-    <message>
-        <location filename="../about.ui" line="48"/>
-        <source>GoldenDict dictionary lookup program, version </source>
-        <translation>GoldenDict, dizionario elettronico, versione </translation>
-    </message>
-    <message>
         <source>#.#</source>
         <translation type="obsolete">#.#</translation>
-    </message>
-    <message>
-        <source>(c) 2008-2010 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="obsolete">(c) 2008-2010 Konstantin Isakov (ikm@goldendict.org)</translation>
-    </message>
-    <message>
-        <source>(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="obsolete">(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="80"/>
@@ -75,26 +56,14 @@
         <translation>Benvenuto!</translation>
     </message>
     <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Sources&lt;/b&gt; to add some directory paths where to search for the dictionary files, and/or set up various Wikipedia sources. After that, you can optionally organize all the dictionaries found into groups in &lt;b&gt;Edit|Groups&lt;/b&gt;.&lt;p&gt;You can also check out the available program preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;You can also contact the author directly by writing an &lt;a href=&quot;mailto: Konstantin Isakov &lt;ikm@goldendict.org&gt;&quot;&gt;e-mail&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Sources&lt;/b&gt; to add some directory paths where to search for the dictionary files, and/or set up various Wikipedia sources. After that, you can optionally organize all the dictionaries found into groups in &lt;b&gt;Edit|Groups&lt;/b&gt;.&lt;p&gt;You can also check out the available program preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;You can also contact the author directly by writing an &lt;a href=&quot;mailto: Konstantin Isakov &lt;ikm@goldendict.org&gt;&quot;&gt;e-mail&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</translation>
-    </message>
-    <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</translation>
-    </message>
-    <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Benvenuto in &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prima di iniziare ad usare il programma, apri il menu &lt;b&gt;&lt;i&gt;Modifica|Dizionari&lt;/b&gt;&lt;/i&gt; in modo da inserire il percorso della cartella che contiene i dizionari, impostare gli indirizzi di Wikipedia e delle altre risorse internet di traduzione, stabilire, raggruppare o modificare l&apos;ordine di visualizzazione dei dizionari.&lt;p&gt;Visita anche il sito di &lt;a href=\&quot;http://goldendict.berlios.de/\&quot;&gt;GoldenDict&lt;/a&gt; per sapere se sono uscite versioni più aggiornate del programma, quali nuovi dizionari sono disponibili, e come procurarseli. &lt;p&gt;&lt;b&gt;Personalizzazioni&lt;/b&gt;&lt;br&gt;Personalizza il programma, regolando le impostazioni di puntamento previste dal menu &lt;b&gt;&lt;i&gt;Modifica|Impostazioni&lt;/b&gt;&lt;/i&gt;. Se hai dei dubbi apri il &lt;b&gt;&lt;i&gt;manuale d&apos;uso&lt;/b&gt;&lt;/i&gt; dal menu &lt;b&gt;&lt;i&gt;Guida&lt;/b&gt;&lt;/i&gt;.&lt;p&gt;&lt;b&gt;Uso del programma&lt;/b&gt;&lt;br&gt;Un modo tradizionale per usare un dizionario consiste nel digitare il termine da ricercare nella casellina di ricerca (in alto a sinistra in questa stessa finestra). Tuttavia, a differenza della maggior parte degli altri dizionari elettronici che conosci, non occorre inserire il termine nella sua forma enunciativa (cosa che comporta una conoscenza di base della grammatica della lingua da tradurre); con &apos;GoldenDict&apos; puoi digitare anche la forma flessa che ti appare a video; il programma è in grado di riconoscerne la radice, aprendo il dizionario esattamente alla voce corrispondente.&lt;p&gt;&lt;b&gt;Scansiona e traduci le parole puntate&lt;/b&gt;&lt;br&gt;Altra caratteristica fondamentale di &apos;GoldenDict&apos; è che non serve neppure digitare la parola da cercare nella casellina di ricerca: basta puntarla col mouse in qualunque applicazione essa si trovi. Clicca &lt;a href=\&quot;Puntamento e traduzione\&quot;&gt;scansiona e traduci le parole puntate&lt;/a&gt; per scoprire come usarla. &lt;p&gt;Se hai bisogno di ulteriore aiuto, hai domande o suggerimenti o per qualsiasi altra richiesta, il tuo intervento nel &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; del programma è benvenuto. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licenza GPLv3 o superiori.</translation>
-    </message>
-    <message>
         <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Benvenuto in &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prima di iniziare ad usare il programma, apri il menu &lt;b&gt;&lt;i&gt;Modifica|Dizionari&lt;/b&gt;&lt;/i&gt; in modo da inserire il percorso della cartella che contiene i dizionari locali, impostare gli indirizzi di Wikipedia e delle altre risorse di traduzione su web, stabilire, raggruppare o modificare l&apos;ordine di visualizzazione dei dizionari.&lt;p&gt;A questo punto il programma sarà pronto a tradurre le parole che desideri! Un modo tradizionale per usare un dizionario consiste nel digitare il termine da ricercare nella casella di ricerca (in alto a sinistra in questa stessa finestra). Tuttavia, a differenza della maggior parte degli altri dizionari elettronici che conosci, non occorre inserire il termine nella sua forma enunciativa (cosa che comporta una conoscenza di base della grammatica della lingua da tradurre); con &apos;GoldenDict&apos; puoi digitare anche la forma flessa che ti appare a video; il programma è in grado di riconoscerne la radice, aprendo il dizionario esattamente alla voce corrispondente. Altra caratteristica fondamentale di &apos;GoldenDict&apos; è che non serve neppure digitare la parola da cercare nella casella di ricerca: basta puntarla col mouse in qualunque applicazione essa si trovi. Clicca &lt;a href=&quot;Scansiona e traduci le parole puntate&quot;&gt;scansiona e traduci le parole puntate&lt;/a&gt; per scoprire come usarla.&lt;p&gt;Per personalizzare il programma, clicca il menu &lt;b&gt;&lt;i&gt;Modifica|Impostazioni&lt;/b&gt;&lt;/i&gt;. Ogni opzione presenta dei suggerimenti a comparsa che appaiono appoggiandoci sopra il puntatore del mouse.&lt;p&gt;Se hai bisogno di ulteriore aiuto, hai domande o suggerimenti o per qualsiasi altra richiesta, il tuo intervento nel &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt; del programma è benvenuto.&lt;p&gt;&lt;a href=&quot;http://goldendict.org/&quot;&gt;Clicca qui&lt;/a&gt; per controllare se sono disponibili nuovi aggiornamenti del programma.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licenza GPLv3 o superiori.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Benvenuto in &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prima di iniziare ad usare il programma, apri il menu &lt;b&gt;&lt;i&gt;Modifica|Dizionari&lt;/b&gt;&lt;/i&gt; in modo da inserire il percorso della cartella che contiene i dizionari, impostare gli indirizzi di Wikipedia e delle altre risorse internet di traduzione, stabilire, raggruppare o modificare l&apos;ordine di visualizzazione dei dizionari.&lt;p&gt;&lt;p&gt;&lt;b&gt;Personalizzazioni&lt;/b&gt;&lt;br&gt;Personalizza il programma, regolando le impostazioni di puntamento previste dal menu &lt;b&gt;&lt;i&gt;Modifica|Impostazioni&lt;/b&gt;&lt;/i&gt;.&lt;p&gt;&lt;b&gt;Uso del programma&lt;/b&gt;&lt;br&gt;Un modo tradizionale per usare un dizionario consiste nel digitare il termine da ricercare nella casellina di ricerca (in alto a sinistra in questa stessa finestra).&lt;p&gt;&lt;b&gt;Scansiona e traduci le parole puntate&lt;/b&gt;&lt;br&gt;Altra caratteristica fondamentale di &apos;GoldenDict&apos; è che non serve neppure digitare la parola da cercare nella casellina di ricerca: basta puntarla col mouse in qualunque applicazione essa si trovi. Clicca &lt;a href=&quot;Scansione e traduzione delle parole puntate&quot;&gt;scansiona e traduci le parole puntate&lt;/a&gt; per scoprire come usarla. &lt;p&gt;Se hai bisogno di ulteriore aiuto, hai domande o suggerimenti o per qualsiasi altra richiesta, il tuo intervento nel &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt; del programma è benvenuto. &lt;p&gt;Controlla nel &lt;a href=&quot;http://goldendict.org/&quot;&gt;sito web&lt;/a&gt; se ci sono nuovi aggiornamenti del programma. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licenza GPLv3 o superiori.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
         <source>Working with popup</source>
-        <translation>Scansiona e traduci le parole puntate</translation>
+        <translation>Scansione e traduzione delle parole puntate</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="155"/>
@@ -123,10 +92,6 @@
         <location filename="../article_maker.cc" line="401"/>
         <source>From </source>
         <translation>Da </translation>
-    </message>
-    <message>
-        <source>From %1</source>
-        <translation type="obsolete">From %1</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="414"/>
@@ -183,7 +148,7 @@
     <message>
         <location filename="../articleview.cc" line="836"/>
         <source>&amp;Look up &quot;%1&quot;</source>
-        <translation>&amp;Cerca &quot;%1&quot;</translation>
+        <translation>&amp;Cerca «%1»</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="844"/>
@@ -193,7 +158,7 @@
     <message>
         <location filename="../articleview.cc" line="859"/>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>Cerca «%1» in %2</translation>
+        <translation>Cerca &quot;%1&quot; in %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="867"/>
@@ -522,10 +487,6 @@
         <translation>Sei sicuro di volere rimuovere ogni gruppo?</translation>
     </message>
     <message>
-        <source>Groups</source>
-        <translation type="obsolete">Groups</translation>
-    </message>
-    <message>
         <location filename="../groups.ui" line="22"/>
         <source>Dictionaries available:</source>
         <translation>Dizionari disponibili:</translation>
@@ -627,746 +588,6 @@
         <location filename="../hunspell.cc" line="202"/>
         <source>Spelling suggestions: </source>
         <translation>Suggerimenti ortografici: </translation>
-    </message>
-    <message>
-        <source>Afar</source>
-        <translation type="obsolete">Afar</translation>
-    </message>
-    <message>
-        <source>Abkhazian</source>
-        <translation type="obsolete">Abkhazian</translation>
-    </message>
-    <message>
-        <source>Avestan</source>
-        <translation type="obsolete">Avestan</translation>
-    </message>
-    <message>
-        <source>Afrikaans</source>
-        <translation type="obsolete">Afrikaans</translation>
-    </message>
-    <message>
-        <source>Akan</source>
-        <translation type="obsolete">Akan</translation>
-    </message>
-    <message>
-        <source>Amharic</source>
-        <translation type="obsolete">Amharic</translation>
-    </message>
-    <message>
-        <source>Aragonese</source>
-        <translation type="obsolete">Aragonese</translation>
-    </message>
-    <message>
-        <source>Arabic</source>
-        <translation type="obsolete">Arabic</translation>
-    </message>
-    <message>
-        <source>Assamese</source>
-        <translation type="obsolete">Assamese</translation>
-    </message>
-    <message>
-        <source>Avaric</source>
-        <translation type="obsolete">Avaric</translation>
-    </message>
-    <message>
-        <source>Aymara</source>
-        <translation type="obsolete">Aymara</translation>
-    </message>
-    <message>
-        <source>Azerbaijani</source>
-        <translation type="obsolete">Azerbaijani</translation>
-    </message>
-    <message>
-        <source>Bashkir</source>
-        <translation type="obsolete">Bashkir</translation>
-    </message>
-    <message>
-        <source>Belarusian</source>
-        <translation type="obsolete">Belarusian</translation>
-    </message>
-    <message>
-        <source>Bulgarian</source>
-        <translation type="obsolete">Bulgarian</translation>
-    </message>
-    <message>
-        <source>Bihari</source>
-        <translation type="obsolete">Bihari</translation>
-    </message>
-    <message>
-        <source>Bislama</source>
-        <translation type="obsolete">Bislama</translation>
-    </message>
-    <message>
-        <source>Bambara</source>
-        <translation type="obsolete">Bambara</translation>
-    </message>
-    <message>
-        <source>Bengali</source>
-        <translation type="obsolete">Bengali</translation>
-    </message>
-    <message>
-        <source>Tibetan</source>
-        <translation type="obsolete">Tibetan</translation>
-    </message>
-    <message>
-        <source>Breton</source>
-        <translation type="obsolete">Breton</translation>
-    </message>
-    <message>
-        <source>Bosnian</source>
-        <translation type="obsolete">Bosnian</translation>
-    </message>
-    <message>
-        <source>Catalan</source>
-        <translation type="obsolete">Catalan</translation>
-    </message>
-    <message>
-        <source>Chechen</source>
-        <translation type="obsolete">Chechen</translation>
-    </message>
-    <message>
-        <source>Chamorro</source>
-        <translation type="obsolete">Chamorro</translation>
-    </message>
-    <message>
-        <source>Corsican</source>
-        <translation type="obsolete">Corsican</translation>
-    </message>
-    <message>
-        <source>Cree</source>
-        <translation type="obsolete">Cree</translation>
-    </message>
-    <message>
-        <source>Czech</source>
-        <translation type="obsolete">Czech</translation>
-    </message>
-    <message>
-        <source>Church Slavic</source>
-        <translation type="obsolete">Church Slavic</translation>
-    </message>
-    <message>
-        <source>Chuvash</source>
-        <translation type="obsolete">Chuvash</translation>
-    </message>
-    <message>
-        <source>Welsh</source>
-        <translation type="obsolete">Welsh</translation>
-    </message>
-    <message>
-        <source>Danish</source>
-        <translation type="obsolete">Danish</translation>
-    </message>
-    <message>
-        <source>German</source>
-        <translation type="obsolete">German</translation>
-    </message>
-    <message>
-        <source>Divehi</source>
-        <translation type="obsolete">Divehi</translation>
-    </message>
-    <message>
-        <source>Dzongkha</source>
-        <translation type="obsolete">Dzongkha</translation>
-    </message>
-    <message>
-        <source>Ewe</source>
-        <translation type="obsolete">Ewe</translation>
-    </message>
-    <message>
-        <source>Greek</source>
-        <translation type="obsolete">Greek</translation>
-    </message>
-    <message>
-        <source>English</source>
-        <translation type="obsolete">English</translation>
-    </message>
-    <message>
-        <source>Esperanto</source>
-        <translation type="obsolete">Esperanto</translation>
-    </message>
-    <message>
-        <source>Spanish</source>
-        <translation type="obsolete">Spanish</translation>
-    </message>
-    <message>
-        <source>Estonian</source>
-        <translation type="obsolete">Estonian</translation>
-    </message>
-    <message>
-        <source>Basque</source>
-        <translation type="obsolete">Basque</translation>
-    </message>
-    <message>
-        <source>Persian</source>
-        <translation type="obsolete">Persian</translation>
-    </message>
-    <message>
-        <source>Fulah</source>
-        <translation type="obsolete">Fulah</translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation type="obsolete">Finnish</translation>
-    </message>
-    <message>
-        <source>Fijian</source>
-        <translation type="obsolete">Fijian</translation>
-    </message>
-    <message>
-        <source>Faroese</source>
-        <translation type="obsolete">Faroese</translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation type="obsolete">French</translation>
-    </message>
-    <message>
-        <source>Western Frisian</source>
-        <translation type="obsolete">Western Frisian</translation>
-    </message>
-    <message>
-        <source>Irish</source>
-        <translation type="obsolete">Irish</translation>
-    </message>
-    <message>
-        <source>Scottish Gaelic</source>
-        <translation type="obsolete">Scottish Gaelic</translation>
-    </message>
-    <message>
-        <source>Galician</source>
-        <translation type="obsolete">Galician</translation>
-    </message>
-    <message>
-        <source>Guarani</source>
-        <translation type="obsolete">Guarani</translation>
-    </message>
-    <message>
-        <source>Gujarati</source>
-        <translation type="obsolete">Gujarati</translation>
-    </message>
-    <message>
-        <source>Manx</source>
-        <translation type="obsolete">Manx</translation>
-    </message>
-    <message>
-        <source>Hausa</source>
-        <translation type="obsolete">Hausa</translation>
-    </message>
-    <message>
-        <source>Hebrew</source>
-        <translation type="obsolete">Hebrew</translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation type="obsolete">Hindi</translation>
-    </message>
-    <message>
-        <source>Hiri Motu</source>
-        <translation type="obsolete">Hiri Motu</translation>
-    </message>
-    <message>
-        <source>Croatian</source>
-        <translation type="obsolete">Croatian</translation>
-    </message>
-    <message>
-        <source>Haitian</source>
-        <translation type="obsolete">Haitian</translation>
-    </message>
-    <message>
-        <source>Hungarian</source>
-        <translation type="obsolete">Hungarian</translation>
-    </message>
-    <message>
-        <source>Armenian</source>
-        <translation type="obsolete">Armenian</translation>
-    </message>
-    <message>
-        <source>Herero</source>
-        <translation type="obsolete">Herero</translation>
-    </message>
-    <message>
-        <source>Interlingua</source>
-        <translation type="obsolete">Interlingua</translation>
-    </message>
-    <message>
-        <source>Indonesian</source>
-        <translation type="obsolete">Indonesian</translation>
-    </message>
-    <message>
-        <source>Interlingue</source>
-        <translation type="obsolete">Interlingue</translation>
-    </message>
-    <message>
-        <source>Igbo</source>
-        <translation type="obsolete">Igbo</translation>
-    </message>
-    <message>
-        <source>Sichuan Yi</source>
-        <translation type="obsolete">Sichuan Yi</translation>
-    </message>
-    <message>
-        <source>Inupiaq</source>
-        <translation type="obsolete">Inupiaq</translation>
-    </message>
-    <message>
-        <source>Ido</source>
-        <translation type="obsolete">Ido</translation>
-    </message>
-    <message>
-        <source>Icelandic</source>
-        <translation type="obsolete">Icelandic</translation>
-    </message>
-    <message>
-        <source>Italian</source>
-        <translation type="obsolete">Italiano</translation>
-    </message>
-    <message>
-        <source>Inuktitut</source>
-        <translation type="obsolete">Inuktitut</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="obsolete">Japanese</translation>
-    </message>
-    <message>
-        <source>Javanese</source>
-        <translation type="obsolete">Javanese</translation>
-    </message>
-    <message>
-        <source>Georgian</source>
-        <translation type="obsolete">Georgian</translation>
-    </message>
-    <message>
-        <source>Kongo</source>
-        <translation type="obsolete">Kongo</translation>
-    </message>
-    <message>
-        <source>Kikuyu</source>
-        <translation type="obsolete">Kikuyu</translation>
-    </message>
-    <message>
-        <source>Kwanyama</source>
-        <translation type="obsolete">Kwanyama</translation>
-    </message>
-    <message>
-        <source>Kazakh</source>
-        <translation type="obsolete">Kazakh</translation>
-    </message>
-    <message>
-        <source>Kalaallisut</source>
-        <translation type="obsolete">Kalaallisut</translation>
-    </message>
-    <message>
-        <source>Khmer</source>
-        <translation type="obsolete">Khmer</translation>
-    </message>
-    <message>
-        <source>Kannada</source>
-        <translation type="obsolete">Kannada</translation>
-    </message>
-    <message>
-        <source>Korean</source>
-        <translation type="obsolete">Korean</translation>
-    </message>
-    <message>
-        <source>Kanuri</source>
-        <translation type="obsolete">Kanuri</translation>
-    </message>
-    <message>
-        <source>Kashmiri</source>
-        <translation type="obsolete">Kashmiri</translation>
-    </message>
-    <message>
-        <source>Kurdish</source>
-        <translation type="obsolete">Kurdish</translation>
-    </message>
-    <message>
-        <source>Komi</source>
-        <translation type="obsolete">Komi</translation>
-    </message>
-    <message>
-        <source>Cornish</source>
-        <translation type="obsolete">Cornish</translation>
-    </message>
-    <message>
-        <source>Kirghiz</source>
-        <translation type="obsolete">Kirghiz</translation>
-    </message>
-    <message>
-        <source>Latin</source>
-        <translation type="obsolete">Latin</translation>
-    </message>
-    <message>
-        <source>Luxembourgish</source>
-        <translation type="obsolete">Luxembourgish</translation>
-    </message>
-    <message>
-        <source>Ganda</source>
-        <translation type="obsolete">Ganda</translation>
-    </message>
-    <message>
-        <source>Limburgish</source>
-        <translation type="obsolete">Limburgish</translation>
-    </message>
-    <message>
-        <source>Lingala</source>
-        <translation type="obsolete">Lingala</translation>
-    </message>
-    <message>
-        <source>Lao</source>
-        <translation type="obsolete">Lao</translation>
-    </message>
-    <message>
-        <source>Lithuanian</source>
-        <translation type="obsolete">Lithuanian</translation>
-    </message>
-    <message>
-        <source>Luba-Katanga</source>
-        <translation type="obsolete">Luba-Katanga</translation>
-    </message>
-    <message>
-        <source>Latvian</source>
-        <translation type="obsolete">Latvian</translation>
-    </message>
-    <message>
-        <source>Malagasy</source>
-        <translation type="obsolete">Malagasy</translation>
-    </message>
-    <message>
-        <source>Marshallese</source>
-        <translation type="obsolete">Marshallese</translation>
-    </message>
-    <message>
-        <source>Maori</source>
-        <translation type="obsolete">Maori</translation>
-    </message>
-    <message>
-        <source>Macedonian</source>
-        <translation type="obsolete">Macedonian</translation>
-    </message>
-    <message>
-        <source>Malayalam</source>
-        <translation type="obsolete">Malayalam</translation>
-    </message>
-    <message>
-        <source>Mongolian</source>
-        <translation type="obsolete">Mongolian</translation>
-    </message>
-    <message>
-        <source>Marathi</source>
-        <translation type="obsolete">Marathi</translation>
-    </message>
-    <message>
-        <source>Malay</source>
-        <translation type="obsolete">Malay</translation>
-    </message>
-    <message>
-        <source>Maltese</source>
-        <translation type="obsolete">Maltese</translation>
-    </message>
-    <message>
-        <source>Burmese</source>
-        <translation type="obsolete">Burmese</translation>
-    </message>
-    <message>
-        <source>Nauru</source>
-        <translation type="obsolete">Nauru</translation>
-    </message>
-    <message>
-        <source>Norwegian Bokmal</source>
-        <translation type="obsolete">Norwegian Bokmal</translation>
-    </message>
-    <message>
-        <source>North Ndebele</source>
-        <translation type="obsolete">North Ndebele</translation>
-    </message>
-    <message>
-        <source>Nepali</source>
-        <translation type="obsolete">Nepali</translation>
-    </message>
-    <message>
-        <source>Ndonga</source>
-        <translation type="obsolete">Ndonga</translation>
-    </message>
-    <message>
-        <source>Dutch</source>
-        <translation type="obsolete">Dutch</translation>
-    </message>
-    <message>
-        <source>Norwegian Nynorsk</source>
-        <translation type="obsolete">Norwegian Nynorsk</translation>
-    </message>
-    <message>
-        <source>Norwegian</source>
-        <translation type="obsolete">Norwegian</translation>
-    </message>
-    <message>
-        <source>South Ndebele</source>
-        <translation type="obsolete">South Ndebele</translation>
-    </message>
-    <message>
-        <source>Navajo</source>
-        <translation type="obsolete">Navajo</translation>
-    </message>
-    <message>
-        <source>Chichewa</source>
-        <translation type="obsolete">Chichewa</translation>
-    </message>
-    <message>
-        <source>Occitan</source>
-        <translation type="obsolete">Occitan</translation>
-    </message>
-    <message>
-        <source>Ojibwa</source>
-        <translation type="obsolete">Ojibwa</translation>
-    </message>
-    <message>
-        <source>Oromo</source>
-        <translation type="obsolete">Oromo</translation>
-    </message>
-    <message>
-        <source>Oriya</source>
-        <translation type="obsolete">Oriya</translation>
-    </message>
-    <message>
-        <source>Ossetian</source>
-        <translation type="obsolete">Ossetian</translation>
-    </message>
-    <message>
-        <source>Panjabi</source>
-        <translation type="obsolete">Panjabi</translation>
-    </message>
-    <message>
-        <source>Pali</source>
-        <translation type="obsolete">Pali</translation>
-    </message>
-    <message>
-        <source>Polish</source>
-        <translation type="obsolete">Polish</translation>
-    </message>
-    <message>
-        <source>Pashto</source>
-        <translation type="obsolete">Pashto</translation>
-    </message>
-    <message>
-        <source>Portuguese</source>
-        <translation type="obsolete">Portuguese</translation>
-    </message>
-    <message>
-        <source>Quechua</source>
-        <translation type="obsolete">Quechua</translation>
-    </message>
-    <message>
-        <source>Raeto-Romance</source>
-        <translation type="obsolete">Raeto-Romance</translation>
-    </message>
-    <message>
-        <source>Kirundi</source>
-        <translation type="obsolete">Kirundi</translation>
-    </message>
-    <message>
-        <source>Romanian</source>
-        <translation type="obsolete">Romanian</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="obsolete">Russian</translation>
-    </message>
-    <message>
-        <source>Kinyarwanda</source>
-        <translation type="obsolete">Kinyarwanda</translation>
-    </message>
-    <message>
-        <source>Sanskrit</source>
-        <translation type="obsolete">Sanskrit</translation>
-    </message>
-    <message>
-        <source>Sardinian</source>
-        <translation type="obsolete">Sardinian</translation>
-    </message>
-    <message>
-        <source>Sindhi</source>
-        <translation type="obsolete">Sindhi</translation>
-    </message>
-    <message>
-        <source>Northern Sami</source>
-        <translation type="obsolete">Northern Sami</translation>
-    </message>
-    <message>
-        <source>Sango</source>
-        <translation type="obsolete">Sango</translation>
-    </message>
-    <message>
-        <source>Serbo-Croatian</source>
-        <translation type="obsolete">Serbo-Croatian</translation>
-    </message>
-    <message>
-        <source>Sinhala</source>
-        <translation type="obsolete">Sinhala</translation>
-    </message>
-    <message>
-        <source>Slovak</source>
-        <translation type="obsolete">Slovak</translation>
-    </message>
-    <message>
-        <source>Slovenian</source>
-        <translation type="obsolete">Slovenian</translation>
-    </message>
-    <message>
-        <source>Samoan</source>
-        <translation type="obsolete">Samoan</translation>
-    </message>
-    <message>
-        <source>Shona</source>
-        <translation type="obsolete">Shona</translation>
-    </message>
-    <message>
-        <source>Somali</source>
-        <translation type="obsolete">Somali</translation>
-    </message>
-    <message>
-        <source>Albanian</source>
-        <translation type="obsolete">Albanian</translation>
-    </message>
-    <message>
-        <source>Serbian</source>
-        <translation type="obsolete">Serbian</translation>
-    </message>
-    <message>
-        <source>Swati</source>
-        <translation type="obsolete">Swati</translation>
-    </message>
-    <message>
-        <source>Southern Sotho</source>
-        <translation type="obsolete">Southern Sotho</translation>
-    </message>
-    <message>
-        <source>Sundanese</source>
-        <translation type="obsolete">Sundanese</translation>
-    </message>
-    <message>
-        <source>Swedish</source>
-        <translation type="obsolete">Swedish</translation>
-    </message>
-    <message>
-        <source>Swahili</source>
-        <translation type="obsolete">Swahili</translation>
-    </message>
-    <message>
-        <source>Tamil</source>
-        <translation type="obsolete">Tamil</translation>
-    </message>
-    <message>
-        <source>Telugu</source>
-        <translation type="obsolete">Telugu</translation>
-    </message>
-    <message>
-        <source>Tajik</source>
-        <translation type="obsolete">Tajik</translation>
-    </message>
-    <message>
-        <source>Thai</source>
-        <translation type="obsolete">Thai</translation>
-    </message>
-    <message>
-        <source>Tigrinya</source>
-        <translation type="obsolete">Tigrinya</translation>
-    </message>
-    <message>
-        <source>Turkmen</source>
-        <translation type="obsolete">Turkmen</translation>
-    </message>
-    <message>
-        <source>Tagalog</source>
-        <translation type="obsolete">Tagalog</translation>
-    </message>
-    <message>
-        <source>Tswana</source>
-        <translation type="obsolete">Tswana</translation>
-    </message>
-    <message>
-        <source>Tonga</source>
-        <translation type="obsolete">Tonga</translation>
-    </message>
-    <message>
-        <source>Turkish</source>
-        <translation type="obsolete">Turkish</translation>
-    </message>
-    <message>
-        <source>Tsonga</source>
-        <translation type="obsolete">Tsonga</translation>
-    </message>
-    <message>
-        <source>Tatar</source>
-        <translation type="obsolete">Tatar</translation>
-    </message>
-    <message>
-        <source>Twi</source>
-        <translation type="obsolete">Twi</translation>
-    </message>
-    <message>
-        <source>Tahitian</source>
-        <translation type="obsolete">Tahitian</translation>
-    </message>
-    <message>
-        <source>Uighur</source>
-        <translation type="obsolete">Uighur</translation>
-    </message>
-    <message>
-        <source>Ukrainian</source>
-        <translation type="obsolete">Ukrainian</translation>
-    </message>
-    <message>
-        <source>Urdu</source>
-        <translation type="obsolete">Urdu</translation>
-    </message>
-    <message>
-        <source>Uzbek</source>
-        <translation type="obsolete">Uzbek</translation>
-    </message>
-    <message>
-        <source>Venda</source>
-        <translation type="obsolete">Venda</translation>
-    </message>
-    <message>
-        <source>Vietnamese</source>
-        <translation type="obsolete">Vietnamese</translation>
-    </message>
-    <message>
-        <source>Volapuk</source>
-        <translation type="obsolete">Volapuk</translation>
-    </message>
-    <message>
-        <source>Walloon</source>
-        <translation type="obsolete">Walloon</translation>
-    </message>
-    <message>
-        <source>Wolof</source>
-        <translation type="obsolete">Wolof</translation>
-    </message>
-    <message>
-        <source>Xhosa</source>
-        <translation type="obsolete">Xhosa</translation>
-    </message>
-    <message>
-        <source>Yiddish</source>
-        <translation type="obsolete">Yiddish</translation>
-    </message>
-    <message>
-        <source>Yoruba</source>
-        <translation type="obsolete">Yoruba</translation>
-    </message>
-    <message>
-        <source>Zhuang</source>
-        <translation type="obsolete">Zhuang</translation>
-    </message>
-    <message>
-        <source>Chinese</source>
-        <translation type="obsolete">Chinese</translation>
-    </message>
-    <message>
-        <source>Zulu</source>
-        <translation type="obsolete">Zulu</translation>
     </message>
     <message>
         <location filename="../hunspell.cc" line="733"/>
@@ -2370,10 +1591,6 @@
         <translation>Scansiona e traduci le parole puntate sì/no</translation>
     </message>
     <message>
-        <source>Pronounce word</source>
-        <translation type="obsolete">Pronounce word</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="133"/>
         <source>Show &amp;Main Window</source>
         <translation>Mostra finestra &amp;principale</translation>
@@ -2390,52 +1607,44 @@
         <translation>Caricamento...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1660"/>
+        <location filename="../mainwindow.cc" line="1683"/>
         <source>Skip This Release</source>
         <translation>Tralascia questa versione</translation>
     </message>
     <message>
-        <source>[Unknown]</source>
-        <translation type="obsolete">[Sconosciuto]</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1836"/>
+        <location filename="../mainwindow.cc" line="1859"/>
         <source>Page Setup</source>
         <translation>Imposta pagina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1837"/>
+        <location filename="../mainwindow.cc" line="1860"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Non è disponibile alcuna stampante. Per proseguire installarne una.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1854"/>
+        <location filename="../mainwindow.cc" line="1877"/>
         <source>Print Article</source>
         <translation>Stampa voce</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1875"/>
+        <location filename="../mainwindow.cc" line="1898"/>
         <source>Save Article As</source>
         <translation>Salva voce come</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1875"/>
+        <location filename="../mainwindow.cc" line="1898"/>
         <source>Html files (*.html *.htm)</source>
         <translation>File HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1890"/>
+        <location filename="../mainwindow.cc" line="1913"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1891"/>
+        <location filename="../mainwindow.cc" line="1914"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Impossibile salvare la voce: %1</translation>
-    </message>
-    <message>
-        <source>Error loading dictionaries</source>
-        <translation type="obsolete">Error loading dictionaries</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="622"/>
@@ -2443,23 +1652,23 @@
         <translation>%1 dizionari, %2 voci, %3 parole</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1519"/>
+        <location filename="../mainwindow.cc" line="1542"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>L&apos;inizializzazione del meccanismo di monitoraggio dei tasti scorciatoia è fallito.&lt;br&gt;Assicurarsi che nel proprio XServer c&apos;è l&apos;estensione RECORD attiva.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1653"/>
+        <location filename="../mainwindow.cc" line="1676"/>
         <source>New Release Available</source>
         <translation>E&apos; disponibile una nuova versione</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1654"/>
+        <location filename="../mainwindow.cc" line="1677"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>E&apos; disponibile la nuova versione &lt;b&gt;%1&lt;/b&gt; di GoldenDict.&lt;br&gt;
 Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1659"/>
+        <location filename="../mainwindow.cc" line="1682"/>
         <source>Download</source>
         <translation>Scarica</translation>
     </message>
@@ -2535,7 +1744,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation>Tutto</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="744"/>
+        <location filename="../mainwindow.cc" line="745"/>
         <source>Opened tabs</source>
         <translation>Schede aperte</translation>
     </message>
@@ -2545,23 +1754,15 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation>(senza titolo)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1224"/>
+        <location filename="../mainwindow.cc" line="1247"/>
         <source>WARNING: %1</source>
         <translation>ATTENZIONE: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1518"/>
+        <location filename="../mainwindow.cc" line="1541"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
-    </message>
-    <message>
-        <source>Tab 1</source>
-        <translation type="obsolete">Tab 1</translation>
-    </message>
-    <message>
-        <source>Tab 2</source>
-        <translation type="obsolete">Tab 2</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="43"/>
@@ -2590,10 +1791,6 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation>&amp;Impostazioni...</translation>
     </message>
     <message>
-        <source>&amp;Sources...</source>
-        <translation type="obsolete">&amp;Sources...</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="338"/>
         <source>F2</source>
         <translation>F2</translation>
@@ -2611,7 +1808,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&amp;Zoom</source>
-        <translation></translation>
+        <translation>&amp;Zoom</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
@@ -2647,7 +1844,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="293"/>
         <source>About GoldenDict</source>
-        <translation>Info su GoldenDict</translation>
+        <translation>Info...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="296"/>
@@ -2733,10 +1930,6 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <location filename="../mainwindow.ui" line="122"/>
         <source>Search Pane</source>
         <translation>Casella di ricerca</translation>
-    </message>
-    <message>
-        <source>Ctrl+F11</source>
-        <translation type="obsolete">Ctrl+F11</translation>
     </message>
 </context>
 <context>
@@ -3016,10 +2209,6 @@ Opzionalmente, è anche possibile avviare scansione e traduzione, soltanto se co
 si premono i tasti prescelti.</translation>
     </message>
     <message>
-        <source>Scan popup functionality</source>
-        <translation type="obsolete">Scan popup functionality</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="278"/>
         <source>Enable scan popup functionality</source>
         <translation>Abilita l&apos;attività di scansione e traduzione delle parole puntate</translation>
@@ -3233,10 +2422,6 @@ essere instabile, ma dovrebbe supportare un maggiore scelta di formati audio.</t
         <translation>Usa un programma esterno:</translation>
     </message>
     <message>
-        <source>Program to play audio files:</source>
-        <translation type="obsolete">Program to play audio files:</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="811"/>
         <source>&amp;Network</source>
         <translation>&amp;Rete</translation>
@@ -3314,14 +2499,6 @@ e si collega al sito del programma.</translation>
         <translation>Preimpostata</translation>
     </message>
     <message>
-        <source>English</source>
-        <translation type="obsolete">English</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="obsolete">Russian</translation>
-    </message>
-    <message>
         <location filename="../preferences.cc" line="73"/>
         <source>Default</source>
         <translation>Preimpostato</translation>
@@ -3371,14 +2548,6 @@ e si collega al sito del programma.</translation>
 <context>
     <name>ScanPopup</name>
     <message>
-        <source>%1 results differing in diacritic marks</source>
-        <translation type="obsolete">%1 results differing in diacritic marks</translation>
-    </message>
-    <message>
-        <source>%1 result(s) beginning with the search word</source>
-        <translation type="obsolete">%1 result(s) beginning with the search word</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.ui" line="14"/>
         <source>Dialog</source>
         <translation>Finestra di dialogo</translation>
@@ -3421,20 +2590,12 @@ could be resized or managed in other ways.</source>
 in modo che possa essere ridimensionata o gestita liberamente.</translation>
     </message>
     <message>
-        <source>List matches</source>
-        <translation type="obsolete">List matches</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.ui" line="70"/>
         <location filename="../scanpopup.ui" line="93"/>
         <location filename="../scanpopup.ui" line="126"/>
         <location filename="../scanpopup.ui" line="150"/>
         <source>...</source>
         <translation>...</translation>
-    </message>
-    <message>
-        <source>Pronounce word</source>
-        <translation type="obsolete">Pronounce word</translation>
     </message>
 </context>
 <context>
@@ -3483,10 +2644,6 @@ in modo che possa essere ridimensionata o gestita liberamente.</translation>
         <location filename="../sources.cc" line="223"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Rimuovere il sito &lt;b&gt;%1&lt;/b&gt; dall&apos;elenco?</translation>
-    </message>
-    <message>
-        <source>Sources</source>
-        <translation type="obsolete">Sources</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="34"/>
@@ -3582,7 +2739,7 @@ in fondo al gruppo linguistico appropriato.</translation>
     <message>
         <location filename="../sources.ui" line="343"/>
         <source>Forvo</source>
-        <translation></translation>
+        <translation>Forvo</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="355"/>
@@ -3625,7 +2782,7 @@ p, li { white-space: pre-wrap; }
 &lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ottieni &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;qui&lt;/span&gt;&lt;/a&gt; la tua chiave, oppure lasciare il campo vuoto per usarne una preimpostata.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ottieni &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;qui&lt;/span&gt;&lt;/a&gt; la tua chiave, oppure lascia il campo vuoto per usarne una preimpostata.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="450"/>
@@ -3745,10 +2902,6 @@ Non ancora implementato.</translation>
         <location filename="../sources.ui" line="689"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
-    </message>
-    <message>
-        <source>Each morphology dictionary appears as a separate auxiliary dictionary which provides stem words for searches and spelling suggestions for mistyped words. Add appropriate dictionaries to the bottoms of the appropriate groups to use them.</source>
-        <translation type="obsolete">Each morphology dictionary appears as a separate auxiliary dictionary which provides stem words for searches and spelling suggestions for mistyped words. Add appropriate dictionaries to the bottoms of the appropriate groups to use them.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="221"/>
