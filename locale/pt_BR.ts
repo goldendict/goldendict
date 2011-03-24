@@ -123,11 +123,11 @@
     <message>
         <location filename="../article_maker.cc" line="401"/>
         <source>From </source>
-        <translation>Da </translation>
+        <translation>Resultados de: </translation>
     </message>
     <message>
         <source>From %1</source>
-        <translation type="obsolete">Da %1</translation>
+        <translation type="obsolete">Resultados de %1</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="414"/>
@@ -434,7 +434,7 @@
     <message>
         <location filename="../forvo.cc" line="288"/>
         <source>from</source>
-        <translation>da</translation>
+        <translation>de</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="326"/>
@@ -1453,7 +1453,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="57"/>
         <source>Arabic</source>
-        <translation>Arabo</translation>
+        <translation>Árabe</translation>
     </message>
     <message>
         <location filename="../language.cc" line="58"/>
@@ -1488,7 +1488,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="64"/>
         <source>Bulgarian</source>
-        <translation>Bulgaro</translation>
+        <translation>Búlgaro</translation>
     </message>
     <message>
         <location filename="../language.cc" line="65"/>
@@ -1553,7 +1553,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="77"/>
         <source>Czech</source>
-        <translation>Ceco</translation>
+        <translation>Tcheco</translation>
     </message>
     <message>
         <location filename="../language.cc" line="78"/>
@@ -1578,7 +1578,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="82"/>
         <source>German</source>
-        <translation>Tedesco</translation>
+        <translation>Alemão</translation>
     </message>
     <message>
         <location filename="../language.cc" line="83"/>
@@ -1598,7 +1598,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="86"/>
         <source>Greek</source>
-        <translation>Greco</translation>
+        <translation>Grego</translation>
     </message>
     <message>
         <location filename="../language.cc" line="87"/>
@@ -1788,7 +1788,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="124"/>
         <source>Japanese</source>
-        <translation>Giapponese</translation>
+        <translation>Japonês</translation>
     </message>
     <message>
         <location filename="../language.cc" line="125"/>
@@ -2058,7 +2058,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="178"/>
         <source>Polish</source>
-        <translation>Polacco</translation>
+        <translation>Polaco</translation>
     </message>
     <message>
         <location filename="../language.cc" line="179"/>
@@ -2163,7 +2163,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="199"/>
         <source>Albanian</source>
-        <translation>Albanese</translation>
+        <translation>Albanês</translation>
     </message>
     <message>
         <location filename="../language.cc" line="200"/>
@@ -2273,7 +2273,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="221"/>
         <source>Ukrainian</source>
-        <translation>Ucraino</translation>
+        <translation>Ucraniano</translation>
     </message>
     <message>
         <location filename="../language.cc" line="222"/>
@@ -2333,7 +2333,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../language.cc" line="233"/>
         <source>Chinese</source>
-        <translation>Cinese</translation>
+        <translation>Chinês</translation>
     </message>
     <message>
         <location filename="../language.cc" line="234"/>
@@ -2413,12 +2413,12 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../mainwindow.cc" line="1854"/>
         <source>Print Article</source>
-        <translation>Imprimir Artigo</translation>
+        <translation>Imprimir Verbete</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1875"/>
         <source>Save Article As</source>
-        <translation>Salvar Artigo Como</translation>
+        <translation>Salvar Verbete Como</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1875"/>
@@ -2433,7 +2433,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../mainwindow.cc" line="1891"/>
         <source>Can&apos;t save article: %1</source>
-        <translation>Não foi possível salvar artigo: %1</translation>
+        <translation>Não foi possível salvar verbete: %1</translation>
     </message>
     <message>
         <source>Error loading dictionaries</source>
@@ -2442,7 +2442,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../mainwindow.cc" line="622"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
-        <translation>%1 dicionário, %2 artigos, %3 palavras</translation>
+        <translation>%1 dicionário, %2 verbetes, %3 palavras</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1519"/>
@@ -2688,12 +2688,12 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
         <source>&amp;Save Article</source>
-        <translation>&amp;Salvar Artigo</translation>
+        <translation>&amp;Salvar Verbete</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
         <source>Save Article</source>
-        <translation>Salva o artigo atual</translation>
+        <translation>Salva o verbete atual</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
@@ -2812,7 +2812,7 @@ baseados no idioma de cada um em particular</translation>
     <message>
         <location filename="../orderandprops.ui" line="185"/>
         <source>Total articles:</source>
-        <translation>Total de artigos:</translation>
+        <translation>Total de verbetes:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="192"/>
