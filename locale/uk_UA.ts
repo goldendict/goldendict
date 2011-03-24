@@ -66,7 +66,7 @@
     <message>
         <location filename="../article_maker.cc" line="137"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Ласкаво просимо до &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Щоб розпочати роботу з програмою, спочатку відвідайте &lt;b&gt;Правка|Словники&lt;/b&gt;, та додайте деякі шляхи до словників, де їх можна знайти, вкажіть варіанти сайтів Wikipedia або інших джерел, встановити порядок словників або згрупувати словники.&lt;p&gt;І тоді ви зможете шукати самі слова! Ви можете це здійснити в цьому вікні, використовуючи панель зліва, або можете через &lt;a href=&quot;Контекстні вікна&quot;&gt;шукати слова з інших запущених програм&lt;/a&gt;. &lt;p&gt;Щоб налаштувати програму, перевірте доступність налаштувань в &lt;b&gt;Правка|Налаштування&lt;/b&gt;. Всі параметри мають підказки, переконайтесь, що прочитали їх, якщо в чомусь не впевнені.&lt;p&gt;Якщо потрібна допомога, маєте якісь запитання, поради або просто бажаєте поділитись враженнями, ми будемо раді кожному на &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форумі&lt;/a&gt; програми.&lt;p&gt;Відвідайте &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайт&lt;/a&gt; програми щодо оновлень. &lt;p&gt;© 2008–2011 Konstantin Isakov. Ліцензовано за GPLv3 або пізнішої версії.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Ласкаво просимо до &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Щоб розпочати роботу з програмою, спочатку відвідайте &lt;b&gt;Зміни|Словники&lt;/b&gt;, та додайте деякі шляхи до словників, де їх можна знайти, вкажіть варіанти сайтів Wikipedia або інших джерел, встановити порядок словників або згрупувати словники.&lt;p&gt;І тоді ви зможете шукати самі слова! Ви можете це здійснити в цьому вікні, використовуючи панель зліва, або можете через &lt;a href=&quot;Контекстні вікна&quot;&gt;шукати слова з інших запущених програм&lt;/a&gt;. &lt;p&gt;Щоб налаштувати програму, перевірте доступність налаштувань в &lt;b&gt;Зміни|Налаштування&lt;/b&gt;. Всі параметри мають підказки, переконайтесь, що прочитали їх, якщо в чомусь не впевнені.&lt;p&gt;Якщо потрібна допомога, маєте якісь запитання, поради або просто бажаєте поділитись враженнями, ми будемо раді кожному на &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форумі&lt;/a&gt; програми.&lt;p&gt;Відвідайте &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайт&lt;/a&gt; програми щодо оновлень. &lt;p&gt;© 2008–2011 Konstantin Isakov. Ліцензовано за GPLv3 або пізнішої версії.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="153"/>
@@ -76,7 +76,7 @@
     <message>
         <location filename="../article_maker.cc" line="155"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Контекстні вікна&lt;/h3&gt;Для пошуку слів з інших запущених програм вам потрібно ввімкнути &lt;i&gt;«Контекстні вікна»&lt;/i&gt; в меню &lt;b&gt;Налаштування&lt;/b&gt; і потім може увімкнути його в будь-який момент натиснувши піктограму «Контекстне вікно» вище, або натиснувши піктограму в лотку нижче правим клацом мишки і вибравши його в контексному меню. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Контекстні вікна&lt;/h3&gt;Для пошуку слів з інших запущених програм вам потрібно ввімкнути &lt;i&gt;«Контекстні вікна»&lt;/i&gt; в меню &lt;b&gt;Налаштування&lt;/b&gt; і потім може увімкнути його в будь-який момент натиснувши піктограму «Контекстне вікно» вище, або натиснувши піктограму в лотку нижче правим клацом мишки і вибравши його в контекстному меню. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="162"/>
@@ -221,7 +221,7 @@
     <message>
         <location filename="../articleview.cc" line="1003"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Щоб увімкнути відворення файлів відмінних від WAV, будь ласка, перейдіть до меню &lt;b&gt;Правка|Налаштування&lt;/b&gt;, натисніть на вкладку &lt;b&gt;Аудіо&lt;/b&gt; та виберіть &lt;b&gt;Програвати через DirectShow&lt;/b&gt;.</translation>
+        <translation>Щоб увімкнути відтворення файлів відмінних від WAV, будь ласка, перейдіть до меню &lt;b&gt;Зміни|Налаштування&lt;/b&gt;, натисніть на вкладку &lt;b&gt;Аудіо&lt;/b&gt; та виберіть &lt;b&gt;Програвати через DirectShow&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1054"/>
@@ -411,7 +411,7 @@
     <message>
         <location filename="../forvo.cc" line="326"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Перейдіть до меню &lt;b&gt;Правка|Словники|Джерела|Forvo&lt;/b&gt; та застосуйте наш власний ключ API, щоб усунти цю проблему.</translation>
+        <translation>Перейдіть до меню &lt;b&gt;Зміни|Словники|Джерела|Forvo&lt;/b&gt; та застосуйте наш власний ключ API, щоб усунути цю проблему.</translation>
     </message>
 </context>
 <context>
@@ -1599,7 +1599,7 @@
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Правка</translation>
+        <translation>З&amp;міни</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="88"/>
@@ -1726,7 +1726,7 @@
     <message>
         <location filename="../mainwindow.ui" line="347"/>
         <source>&amp;Print</source>
-        <translation>&amp;Друк</translation>
+        <translation>&amp;Надрукувати</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="350"/>
@@ -1761,7 +1761,7 @@
     <message>
         <location filename="../mainwindow.cc" line="37"/>
         <source>Show Names in Dictionary Bar</source>
-        <translation>Показує назви в панелі словника</translation>
+        <translation>Показувати назви в панелі словника</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="59"/>
@@ -1862,7 +1862,7 @@
     <message>
         <location filename="../mainwindow.cc" line="651"/>
         <source>All</source>
-        <translation>Усе</translation>
+        <translation>Усьому</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="744"/>
@@ -1892,7 +1892,7 @@
     <message>
         <location filename="../mainwindow.cc" line="1654"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>Версія &lt;b&gt;%1&lt;/b&gt; GoldenDict достуна до звантаження.&lt;br&gt;Натисніть &lt;b&gt;Звантажити&lt;/b&gt;, щоб перейти до сторінки звантаження.</translation>
+        <translation>Версія &lt;b&gt;%1&lt;/b&gt; GoldenDict доступна до звантаження.&lt;br&gt;Натисніть &lt;b&gt;Звантажити&lt;/b&gt;, щоб перейти до сторінки звантаження.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1659"/>
@@ -1912,12 +1912,12 @@
     <message>
         <location filename="../mainwindow.cc" line="1837"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>Не знайдео жодного принтера. Будь ласка, спершу встановіть хоч якийсь.</translation>
+        <translation>Не знайдено жодного принтера. Будь ласка, спершу встановіть хоч якийсь.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1854"/>
         <source>Print Article</source>
-        <translation>Друк статті</translation>
+        <translation>Надрукувати статтю</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1875"/>
@@ -2182,7 +2182,7 @@ off from main window or tray icon.</source>
     <message>
         <location filename="../preferences.ui" line="278"/>
         <source>Enable scan popup functionality</source>
-        <translation>Увімкнути конекстні вікна</translation>
+        <translation>Увімкнути контекстні вікна</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="290"/>
@@ -2201,7 +2201,7 @@ the program would always start with the scan popup active.</source>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Коли це ввімкнено, контекстні вікна будуть появлятись лише при затисненні
-всіх вибраних клавіш з видіеним словом.</translation>
+всіх вибраних клавіш з виділеним словом.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="305"/>
@@ -2455,7 +2455,7 @@ for all program&apos;s network requests.</source>
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Host:</source>
-        <translation>Вузл:</translation>
+        <translation>Вузол:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="868"/>
@@ -2693,7 +2693,7 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>Кожен мофрологічний словник появляється як
+        <translation>Кожен морфрологічний словник з'являється як
 окремий допоміжний словник, який забезпечує
 корінь слів для пошуку і орфографічні підказки 
 для некоректно введених слів. Додайте відповідні
@@ -2803,7 +2803,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="578"/>
         <source>German transliteration</source>
-        <translation>Німецька транлітерація</translation>
+        <translation>Німецька транслітерація</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="604"/>
@@ -2855,7 +2855,7 @@ Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
         <translation>Ґрунтується на системі ніхон-сікі, але вдосконалено відповідно до стандартів сучасної японської.
-Стандартазивоно як ISO 3602
+Стандартизовано як ISO 3602
 
 Ще не реалізовано в GoldenDict.</translation>
     </message>
@@ -2907,7 +2907,7 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../sources.cc" line="198"/>
         <location filename="../sources.cc" line="222"/>
         <source>Confirm removal</source>
-        <translation>Підвердження вилучення</translation>
+        <translation>Підтвердження вилучення</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="132"/>
