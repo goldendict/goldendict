@@ -71,15 +71,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar = addToolBar( tr( "Navigation" ) );
   navToolbar->setObjectName( "navToolbar" );
 
-  navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
-  navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
+  navBack = navToolbar->addAction( QIcon( ":/icons/go-previous.png" ), tr( "Back" ) );
+  navForward = navToolbar->addAction( QIcon( ":/icons/go-next.png" ), tr( "Forward" ) );
 
   navToolbar->addSeparator();
-  navToolbar->addAction( ui.print );
   navToolbar->addAction( ui.saveArticle );
+  navToolbar->addAction( ui.print );
 
   navToolbar->addSeparator();
-  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
+  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/tools-wizard22.png" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
   if ( cfg.preferences.enableScanPopup && cfg.preferences.startWithScanPopupOn )
@@ -98,11 +98,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // zooming
   navToolbar->addSeparator();
-  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
+  zoomIn = navToolbar->addAction( QIcon( ":/icons/zoom-in.png" ), tr( "Zoom In" ) );
   zoomIn->setShortcut( QKeySequence::ZoomIn );
-  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Zoom Out" ) );
+  zoomOut = navToolbar->addAction( QIcon( ":/icons/zoom-out.png" ), tr( "Zoom Out" ) );
   zoomOut->setShortcut( QKeySequence::ZoomOut );
-  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
+  zoomBase = navToolbar->addAction( QIcon( ":/icons/zoom-original.png" ), tr( "Normal Size" ) );
   zoomBase->setShortcut( QKeySequence( "Ctrl+0" ) );
 
   connect( zoomIn, SIGNAL( triggered() ),
@@ -118,11 +118,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.menuZoom->addSeparator();
 
-  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Words Zoom In" ) );
+  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/zoom-in.png" ), tr( "Words Zoom In" ) );
   wordsZoomIn->setShortcut( QKeySequence( "Alt++" ) );
-  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Words Zoom Out" ) );
+  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/zoom-out.png" ), tr( "Words Zoom Out" ) );
   wordsZoomOut->setShortcut( QKeySequence( "Alt+-" ) );
-  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Words Normal Size" ) );
+  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/zoom-original.png" ), tr( "Words Normal Size" ) );
   wordsZoomBase->setShortcut( QKeySequence( "Alt+0" ) );
 
   connect( wordsZoomIn, SIGNAL(triggered()), this, SLOT(doWordsZoomIn()) );
@@ -130,11 +130,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( wordsZoomBase, SIGNAL(triggered()), this, SLOT(doWordsZoomBase()) );
 
   // tray icon
-  connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( activated() ),
+  connect( trayIconMenu.addAction( QIcon( ":/icons/programicon.png" ), tr( "Show &Main Window" ) ), SIGNAL( activated() ),
            this, SLOT( showMainWindow() ) );
   trayIconMenu.addAction( enableScanPopup );
   trayIconMenu.addSeparator();
-  connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( activated() ),
+  connect( trayIconMenu.addAction( QIcon( ":/icons/application-exit.png" ), tr( "&Quit" ) ), SIGNAL( activated() ),
            qApp, SLOT( quit() ) );
 
   escAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
@@ -170,7 +170,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   closeCurrentTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   closeCurrentTabAction.setShortcut( QKeySequence( "Ctrl+W" ) );
   closeCurrentTabAction.setText( tr("Close current tab") );
-  closeCurrentTabAction.setIcon( QIcon(":/icons/closetab.png") );
+  closeCurrentTabAction.setIcon( QIcon(":/icons/tab-close.png") );
 
   connect( &closeCurrentTabAction, SIGNAL( triggered() ),
            this, SLOT( closeCurrentTab() ) );
@@ -188,6 +188,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   closeRestTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   closeRestTabAction.setText( tr("Close all tabs except current") );
+  closeRestTabAction.setIcon( QIcon(":/icons/tab-close-other.png") );
 
   connect( &closeRestTabAction, SIGNAL( triggered() ),
            this, SLOT( closeRestTabs() ) );
@@ -275,7 +276,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( forwardClicked() ) );
 
   addTab.setAutoRaise( true );
-  addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
+  addTab.setIcon( QIcon( ":/icons/list-add.png" ) );
+  addTab.setStyleSheet( "margin-bottom: 2px; height: 100%;" );
 
   ui.tabWidget->clear();
 
@@ -743,7 +745,7 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
 void MainWindow::createTabList()
 {
   tabListMenu = new QMenu(tr("Opened tabs"), ui.tabWidget);
-  tabListMenu->setIcon(QIcon(":/icons/windows-list.png"));
+  tabListMenu->setIcon(QIcon(":/icons/tab-duplicate.png"));
   connect(tabListMenu, SIGNAL(aboutToShow()), this, SLOT(fillWindowsMenu()));
   connect(tabListMenu, SIGNAL(triggered(QAction*)), this, SLOT(switchToWindow(QAction*)));
 

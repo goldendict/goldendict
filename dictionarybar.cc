@@ -100,7 +100,7 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
     menu.addSeparator();
 
   QAction * editAction =
-      menu.addAction( QIcon( ":/icons/bookcase.png" ), tr( "Edit this group" ) );
+      menu.addAction( QIcon( ":/icons/bookshelf.png" ), tr( "Edit this group" ) );
 
   QAction * result = menu.exec( event->globalPos() );
 

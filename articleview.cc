@@ -812,7 +812,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
       if ( !popupView )
       {
-        followLinkNewTab = new QAction( QIcon( ":/icons/addtab.png" ),
+        followLinkNewTab = new QAction( QIcon( ":/icons/tab-new-background.png" ),
                                         tr( "Open Link in New &Tab" ), &menu );
         menu.addAction( followLinkNewTab );
       }
@@ -840,7 +840,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
     if ( !popupView )
     {
-      lookupSelectionNewTab = new QAction( QIcon( ":/icons/addtab.png" ),
+      lookupSelectionNewTab = new QAction( QIcon( ":/icons/tab-new-background.png" ),
                                            tr( "Look up \"%1\" in &New Tab" ).
                                            arg( ui.definition->selectedText() ),
                                            &menu );
@@ -863,7 +863,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
       if ( !popupView )
       {
-        lookupSelectionNewTabGr = new QAction( QIcon( ":/icons/addtab.png" ),
+        lookupSelectionNewTabGr = new QAction( QIcon( ":/icons/tab-new-background.png" ),
                                                tr( "Look up \"%1\" in %2 in &New Tab" ).
                                                arg( ui.definition->selectedText() ).
                                                arg( altGroup->name ), &menu );

@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
+    <normaloff>:/icons/configure32.png</normaloff>:/icons/configure32.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -35,7 +35,7 @@
      <widget class="QWidget" name="tab">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/interface.png</normaloff>:/icons/interface.png</iconset>
+        <normaloff>:/icons/preferences-desktop-display.png</normaloff>:/icons/preferences-desktop-display.png</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Interface</string>
@@ -247,7 +247,7 @@ the application.</string>
      <widget class="QWidget" name="tab_4">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/wizard.png</normaloff>:/icons/wizard.png</iconset>
+        <normaloff>:/icons/tools-wizard16.png</normaloff>:/icons/tools-wizard16.png</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Scan Popup</string>
@@ -690,7 +690,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
+        <normaloff>:/icons/preferences-desktop-sound.png</normaloff>:/icons/preferences-desktop-sound.png</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Audio</string>
@@ -805,7 +805,7 @@ but should support most audio file formats.</string>
      <widget class="QWidget" name="tab_3">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/network.png</normaloff>:/icons/network.png</iconset>
+        <normaloff>:/icons/preferences-system-network.png</normaloff>:/icons/preferences-system-network.png</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Network</string>

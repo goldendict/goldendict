@@ -1344,11 +1344,11 @@
         <translation>论坛(&amp;F)</translation>
     </message>
     <message>
-        <source>&amp;Print</source>
+        <source>&amp;Print...</source>
         <translation>打印(&amp;P)</translation>
     </message>
     <message>
-        <source>&amp;Save Article</source>
+        <source>&amp;Save Article...</source>
         <translation>保存文章(&amp;S)</translation>
     </message>
     <message>

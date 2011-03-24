@@ -113,7 +113,7 @@ QIcon ForvoDictionary::getIcon() throw()
     }
   }
 #endif
-  return QIcon( ":/icons/forvo.png" );
+  return QIcon( ":/icons/icon32_forvo.png" );
 }
 
 }

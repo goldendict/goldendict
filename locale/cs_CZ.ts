@@ -2263,16 +2263,16 @@
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <source>&amp;Save Article</source>
-        <translation>Uložit článe&amp;k</translation>
+        <source>&amp;Save Article...</source>
+        <translation>Uložit článe&amp;k...</translation>
     </message>
     <message>
         <source>Save Article</source>
         <translation>Uložit článek</translation>
     </message>
     <message>
-        <source>&amp;Print</source>
-        <translation>Vy&amp;tisknout</translation>
+        <source>&amp;Print...</source>
+        <translation>Vy&amp;tisknout...</translation>
     </message>
     <message>
         <source>Ctrl+P</source>

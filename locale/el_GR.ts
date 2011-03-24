@@ -1911,8 +1911,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
-        <source>&amp;Save Article</source>
-        <translation>&amp;Αποθήκευση άρθρου</translation>
+        <source>&amp;Save Article...</source>
+        <translation>&amp;Αποθήκευση άρθρου...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
@@ -1926,8 +1926,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
-        <source>&amp;Print</source>
-        <translation>Εκ&amp;τύπωση</translation>
+        <source>&amp;Print...</source>
+        <translation>Εκ&amp;τύπωση...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="350"/>

@@ -28,7 +28,7 @@
      <widget class="QWidget" name="filesTab">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
+        <normaloff>:/icons/folder.png</normaloff>:/icons/folder.png</iconset>
       </attribute>
       <attribute name="title">
        <string>Files</string>
@@ -91,7 +91,7 @@
      <widget class="QWidget" name="tab">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/fileopen.png</normaloff>:/icons/fileopen.png</iconset>
+        <normaloff>:/icons/folder-sound.png</normaloff>:/icons/folder-sound.png</iconset>
       </attribute>
       <attribute name="title">
        <string>Sound Dirs</string>
@@ -274,7 +274,7 @@ of the appropriate groups to use them.</string>
      <widget class="QWidget" name="tab_4">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/internet.png</normaloff>:/icons/internet.png</iconset>
+        <normaloff>:/icons/applications-internet16.png</normaloff>:/icons/applications-internet16.png</iconset>
       </attribute>
       <attribute name="title">
        <string>Websites</string>
@@ -337,7 +337,7 @@ of the appropriate groups to use them.</string>
      <widget class="QWidget" name="tab_5">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/forvo.png</normaloff>:/icons/forvo.png</iconset>
+        <normaloff>:/icons/icon32_forvo.png</normaloff>:/icons/icon32_forvo.png</iconset>
       </attribute>
       <attribute name="title">
        <string>Forvo</string>

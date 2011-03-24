@@ -41,7 +41,7 @@ public:
   { return 0; }
 
   virtual QIcon getIcon() throw()
-  { return QIcon(":/icons/internet.png"); }
+  { return QIcon(":/icons/applications-internet32.png"); }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long ) throw( std::exception );

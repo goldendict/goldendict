@@ -1881,8 +1881,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
-        <source>&amp;Save Article</source>
-        <translation>Artikel &amp;speichern</translation>
+        <source>&amp;Save Article...</source>
+        <translation>Artikel &amp;speichern...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
@@ -1896,8 +1896,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
-        <source>&amp;Print</source>
-        <translation>&amp;Drucken</translation>
+        <source>&amp;Print...</source>
+        <translation>&amp;Drucken...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="350"/>

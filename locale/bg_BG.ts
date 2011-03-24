@@ -1488,16 +1488,16 @@
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <source>&amp;Save Article</source>
-        <translation>&amp;Запазване на статията</translation>
+        <source>&amp;Save Article...</source>
+        <translation>&amp;Запазване на статията...</translation>
     </message>
     <message>
         <source>Save Article</source>
         <translation>Запазване на статията</translation>
     </message>
     <message>
-        <source>&amp;Print</source>
-        <translation>&amp;Печат</translation>
+        <source>&amp;Print...</source>
+        <translation>&amp;Печат...</translation>
     </message>
     <message>
         <source>Ctrl+P</source>

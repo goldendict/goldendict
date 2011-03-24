@@ -1883,8 +1883,8 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
-        <source>&amp;Save Article</source>
-        <translation>&amp;Salva voce</translation>
+        <source>&amp;Save Article...</source>
+        <translation>&amp;Salva voce...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
@@ -1893,8 +1893,8 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
-        <source>&amp;Print</source>
-        <translation>&amp;Stampa</translation>
+        <source>&amp;Print...</source>
+        <translation>&amp;Stampa...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="350"/>

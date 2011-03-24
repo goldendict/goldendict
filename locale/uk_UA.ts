@@ -1710,8 +1710,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
-        <source>&amp;Save Article</source>
-        <translation>&amp;Зберегти статтю</translation>
+        <source>&amp;Save Article...</source>
+        <translation>&amp;Зберегти статтю...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
@@ -1725,8 +1725,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
-        <source>&amp;Print</source>
-        <translation>&amp;Друк</translation>
+        <source>&amp;Print...</source>
+        <translation>&amp;Друк...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="350"/>

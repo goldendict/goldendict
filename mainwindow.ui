@@ -65,11 +65,10 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="pageSetup"/>
-    <addaction name="printPreview"/>
-    <addaction name="print"/>
-    <addaction name="separator"/>
     <addaction name="saveArticle"/>
+    <addaction name="separator"/>
+    <addaction name="print"/>
+    <addaction name="printPreview"/>
     <addaction name="separator"/>
     <addaction name="rescanFiles"/>
     <addaction name="separator"/>
@@ -97,6 +96,10 @@
      <string>&amp;View</string>
     </property>
     <widget class="QMenu" name="menuZoom">
+     <property name="icon">
+     <iconset resource="resources.qrc">
+       <normaloff>:/icons/page-zoom.png</normaloff>:/icons/page-zoom.png</iconset>
+     </property>
      <property name="title">
       <string>&amp;Zoom</string>
      </property>
@@ -247,7 +250,7 @@
   <action name="dictionaries">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/book.png</normaloff>:/icons/book.png</iconset>
+     <normaloff>:/icons/books.png</normaloff>:/icons/books.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Dictionaries...</string>
@@ -256,22 +259,10 @@
     <string>F3</string>
    </property>
   </action>
-  <action name="groups">
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Groups...</string>
-   </property>
-   <property name="shortcut">
-    <string>F3</string>
-   </property>
-  </action>
   <action name="preferences">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
+     <normaloff>:/icons/configure22.png</normaloff>:/icons/configure22.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Preferences...</string>
@@ -281,11 +272,19 @@
    </property>
   </action>
   <action name="visitHomepage">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/applications-internet16.png</normaloff>:/icons/applications-internet16.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Homepage</string>
    </property>
   </action>
   <action name="about">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/programicon.png</normaloff>:/icons/programicon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;About</string>
    </property>
@@ -297,6 +296,10 @@
    </property>
   </action>
   <action name="quit">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/application-exit.png</normaloff>:/icons/application-exit.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Quit</string>
    </property>
@@ -308,6 +311,10 @@
    </property>
   </action>
   <action name="visitForum">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/applications-internet16.png</normaloff>:/icons/applications-internet16.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Forum</string>
    </property>
@@ -326,13 +333,10 @@
   <action name="saveArticle">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
+     <normaloff>:/icons/document-save.png</normaloff>:/icons/document-save.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Save Article</string>
-   </property>
-   <property name="toolTip">
-    <string>Save Article</string>
+    <string>&amp;Save Article...</string>
    </property>
    <property name="shortcut">
     <string>F2</string>
@@ -341,10 +345,10 @@
   <action name="print">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
+     <normaloff>:/icons/document-print.png</normaloff>:/icons/document-print.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Print</string>
+    <string>&amp;Print...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
@@ -356,11 +360,19 @@
    </property>
   </action>
   <action name="printPreview">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/document-preview.png</normaloff>:/icons/document-preview.png</iconset>
+   </property>
    <property name="text">
     <string>Print Preview</string>
    </property>
   </action>
   <action name="rescanFiles">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/view-refresh.png</normaloff>:/icons/view-refresh.png</iconset>
+   </property>
    <property name="text">
     <string>Rescan Files</string>
    </property>

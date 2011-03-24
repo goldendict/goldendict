@@ -1878,8 +1878,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
-        <source>&amp;Save Article</source>
-        <translation>Zapi&amp;sz artykuł</translation>
+        <source>&amp;Save Article...</source>
+        <translation>Zapi&amp;sz artykuł...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
@@ -1893,8 +1893,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
-        <source>&amp;Print</source>
-        <translation>&amp;Drukuj</translation>
+        <source>&amp;Print...</source>
+        <translation>&amp;Drukuj...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="350"/>

@@ -127,7 +127,7 @@
            </property>
            <property name="icon">
             <iconset resource="resources.qrc">
-             <normaloff>:/icons/bookcase.png</normaloff>:/icons/bookcase.png</iconset>
+             <normaloff>:/icons/books.png</normaloff>:/icons/books.png</iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>

@@ -1711,7 +1711,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
-        <source>&amp;Save Article</source>
+        <source>&amp;Save Article...</source>
         <translation>ا&amp;حفظ المقال</translation>
     </message>
     <message>
@@ -1726,7 +1726,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
-        <source>&amp;Print</source>
+        <source>&amp;Print...</source>
         <translation>ا&amp;طبع</translation>
     </message>
     <message>

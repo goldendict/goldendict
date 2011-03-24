@@ -24,7 +24,13 @@
       </widget>
      </item>
      <item>
-      <widget class="DictListWidget" name="dictionaries"/>
+      <widget class="DictListWidget" name="dictionaries">
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

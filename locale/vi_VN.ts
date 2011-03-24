@@ -1368,8 +1368,8 @@
         <translation></translation>
     </message>
     <message>
-        <source>&amp;Save Article</source>
-        <translation>&amp;Lưu Bài viết</translation>
+        <source>&amp;Save Article...</source>
+        <translation>&amp;Lưu Bài viết...</translation>
     </message>
     <message>
         <source>Save Article</source>
@@ -1380,8 +1380,8 @@
         <translation></translation>
     </message>
     <message>
-        <source>&amp;Print</source>
-        <translation>&amp;In</translation>
+        <source>&amp;Print...</source>
+        <translation>&amp;In...</translation>
     </message>
     <message>
         <source>Ctrl+P</source>

@@ -1910,8 +1910,8 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
-        <source>&amp;Save Article</source>
-        <translation>Į&amp;rašyti straipsnį</translation>
+        <source>&amp;Save Article...</source>
+        <translation>Į&amp;rašyti straipsnį...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
@@ -1920,8 +1920,8 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
-        <source>&amp;Print</source>
-        <translation>&amp;Spausdinti</translation>
+        <source>&amp;Print...</source>
+        <translation>&amp;Spausdinti...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="350"/>
