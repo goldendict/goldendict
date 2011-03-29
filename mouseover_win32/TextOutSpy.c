@@ -12,6 +12,16 @@ UINT_PTR TimerID = 0;
 typedef void (*GetWordProc_t)(TCurrentMode *);
 GetWordProc_t GetWordProc = NULL;
 
+static HWND GetWindowFromPoint(POINT pt) {
+HWND WndParent,WndChild;
+	WndParent = WindowFromPoint(pt);
+	if(WndParent == NULL) return WndParent;
+	ScreenToClient(WndParent, &pt);
+	WndChild=RealChildWindowFromPoint(WndParent, pt);
+	if(WndChild == NULL) return WndParent;
+	return WndChild;
+};
+
 static void SendWordToServer()
 {
 	if (hGetWordLib == 0) {
@@ -40,7 +50,7 @@ DWORD wso;
 	wso = WaitForSingleObject(hSynhroMutex, 0);
 	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
 		KillTimer(0, nTimerid);
-		if ((GlobalData->LastWND!=0)&&(GlobalData->LastWND == WindowFromPoint(GlobalData->LastPt))) {
+		if ((GlobalData->LastWND!=0)&&(GlobalData->LastWND == GetWindowFromPoint(GlobalData->LastPt))) {
 			SendWordToServer();
 		}
 		ReleaseMutex(hSynhroMutex);
@@ -56,13 +66,13 @@ DWORD wso;
 			HWND WND;
 			TCHAR wClassName[64];
 
-			WND = WindowFromPoint(((PMOUSEHOOKSTRUCT)lParam)->pt);
+			WND = GetWindowFromPoint(((PMOUSEHOOKSTRUCT)lParam)->pt);
 
 			if(WND == NULL) {
 				ReleaseMutex(hSynhroMutex);
 				return CallNextHookEx(GlobalData->g_hHookMouse, nCode, wParam, lParam);
 			}
-			
+
 			if (GetClassName(WND, wClassName, sizeof(wClassName) / sizeof(TCHAR))) {
 					const char* DisableClasses[] = {
 						"gdkWindowChild",
