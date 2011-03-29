@@ -93,7 +93,7 @@ static int GetWordFromConsolePack(TConsoleParams *params)
 				Buf = GlobalAlloc(GMEM_FIXED, (csbi.dwSize.X + 1)*sizeof(WCHAR));
 				if (Buf) {
 					DWORD ActualRead;
-					if ((ReadConsoleOutputCharacterW(hStdOut, Buf, csbi.dwSize.X, CurPos, &ActualRead)) && (ActualRead == csbi.dwSize.X)) {
+					if ((ReadConsoleOutputCharacterW(hStdOut, Buf, csbi.dwSize.X, CurPos, &ActualRead)) && (ActualRead == (DWORD)csbi.dwSize.X)) {
 						BegPos=0;
 						WordLen=ActualRead;
 						if(WordLen>85) {
@@ -124,8 +124,9 @@ static char* GetWordFromConsole(HWND WND, POINT Pt, int *BeginPos)
 	char *Result;
 
 	*BeginPos=0;
-	TP = malloc(sizeof(TConsoleParams));
-	memset(TP,0,sizeof(TConsoleParams));
+	if((TP = malloc(sizeof(TConsoleParams))) == NULL)
+		return(NULL);
+	ZeroMemory(TP,sizeof(TConsoleParams));
 	TP->WND = WND;
 	TP->Pt = Pt;
 	ScreenToClient(WND, &(TP->Pt));
@@ -149,7 +150,7 @@ static char* GetWordFromConsole(HWND WND, POINT Pt, int *BeginPos)
 		WordSize = GetWordFromConsolePack(TP);
 	}
 
-	if (WordSize > 0) {
+	if (WordSize > 0 && WordSize <= 255) {
 		TEverythingParams CParams;
 
 		ZeroMemory(&CParams, sizeof(CParams));
