@@ -1813,6 +1813,7 @@ void MainWindow::menuHistoryTriggered( QAction * action )
 void MainWindow::on_clearHistory_activated()
 {
   history.clear();
+  history.save();
 }
 
 void MainWindow::setAutostart(bool autostart)
