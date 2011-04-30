@@ -1148,7 +1148,7 @@ void MainWindow::handleEsc()
   if ( dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).closeSearch() )
     return;
 
-  focusTranslateLine();
+  on_actionCloseToTray_activated();
 }
 
 void MainWindow::focusTranslateLine()

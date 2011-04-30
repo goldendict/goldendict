@@ -218,7 +218,7 @@ private slots:
   void translateInputChanged( QString const & );
   void translateInputFinished();
 
-  /// Closes any opened search in the article view, and focuses the translateLine.
+  /// Closes any opened search in the article view, and close main window to tray.
   void handleEsc();
 
   /// Gives the keyboard focus to the translateLine and selects all the text
