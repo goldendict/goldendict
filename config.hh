@@ -324,6 +324,8 @@ struct Class
   QByteArray popupWindowState; // Binary state saved by QMainWindow
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
 
+  bool pinPopupWindow;
+
   QByteArray mainWindowState; // Binary state saved by QMainWindow
   QByteArray mainWindowGeometry; // Geometry saved by QMainWindow
 
@@ -337,7 +339,7 @@ struct Class
   bool showingDictBarNames;
 
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
-           showingDictBarNames( false )
+           pinPopupWindow( false ), showingDictBarNames( false )
   {}
 };
 

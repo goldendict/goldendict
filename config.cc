@@ -596,6 +596,8 @@ Class load() throw( exError )
   if ( !popupWindowGeometry.isNull() )
     c.popupWindowGeometry = QByteArray::fromBase64( popupWindowGeometry.toElement().text().toLatin1() );
 
+  c.pinPopupWindow = ( root.namedItem( "pinPopupWindow" ).toElement().text() == "1" );
+
   QDomNode mainWindowState = root.namedItem( "mainWindowState" );
 
   if ( !mainWindowState.isNull() )
@@ -1078,6 +1080,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "popupWindowGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.popupWindowGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "pinPopupWindow" );
+    opt.appendChild( dd.createTextNode( c.pinPopupWindow ? "1" : "0" ) );
     root.appendChild( opt );
 
     opt = dd.createElement( "mainWindowState" );

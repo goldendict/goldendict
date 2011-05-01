@@ -65,7 +65,6 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
 
   dictionaryBar.setFloatable( false );
-  dictionaryBar.setMovable( false );
 
   addToolBar( Qt::RightToolBarArea, &dictionaryBar );
 
@@ -78,7 +77,18 @@ ScanPopup::ScanPopup( QWidget * parent,
   if ( cfg.popupWindowState.size() )
     restoreState( cfg.popupWindowState, 1 );
 
-  setWindowFlags( popupWindowFlags );
+  ui.pinButton->setChecked( cfg.pinPopupWindow );
+
+  if ( cfg.pinPopupWindow )
+  {
+    dictionaryBar.setMovable( true );
+    setWindowFlags( Qt::Dialog );
+  }
+  else
+  {
+    dictionaryBar.setMovable( false );
+    setWindowFlags( popupWindowFlags );
+  }
 
   connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
            this, SLOT( mutedDictionariesChanged() ) );
@@ -145,9 +155,10 @@ ScanPopup::ScanPopup( QWidget * parent,
 
 ScanPopup::~ScanPopup()
 {
-  // Save state and geometry
+  // Save state, geometry and pin status
   cfg.popupWindowState = saveState( 1 );
   cfg.popupWindowGeometry = saveGeometry();
+  cfg.pinPopupWindow = ui.pinButton->isChecked();
 
   disableScanning();
 }
