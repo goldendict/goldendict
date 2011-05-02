@@ -1131,7 +1131,7 @@ void MainWindow::translateInputFinished()
   if ( word.size() )
   {
     Qt::KeyboardModifiers mods = QApplication::keyboardModifiers();
-    if ( mods & Qt::ControlModifier )
+    if ( mods & (Qt::ControlModifier | Qt::ShiftModifier) )
       addNewTab();
 
     showTranslationFor( word );
@@ -1305,7 +1305,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       // Handle typing events used to initiate new lookups
 
       if ( keyEvent->modifiers() &
-           ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
+           ( Qt::ControlModifier | Qt::ShiftModifier | Qt::AltModifier | Qt::MetaModifier ) )
         return false; // A non-typing modifier is pressed
 
       if ( keyEvent->key() == Qt::Key_Space ||
