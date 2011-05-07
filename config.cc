@@ -86,6 +86,7 @@ Preferences::Preferences():
   closeToTray( true ),
   autoStart( false ),
   doubleClickTranslates( true ),
+  escKeyHidesMainWindow( false ),
 
   enableMainWindowHotkey( true ),
   mainWindowHotkey( QKeySequence( "Ctrl+F11,F11" ) ),
@@ -529,6 +530,9 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "doubleClickTranslates" ).isNull() )
       c.preferences.doubleClickTranslates = ( preferences.namedItem( "doubleClickTranslates" ).toElement().text() == "1" );
 
+    if ( !preferences.namedItem( "escKeyHidesMainWindow" ).isNull() )
+      c.preferences.escKeyHidesMainWindow = ( preferences.namedItem( "escKeyHidesMainWindow" ).toElement().text() == "1" );
+
     if ( !preferences.namedItem( "zoomFactor" ).isNull() )
       c.preferences.zoomFactor = preferences.namedItem( "zoomFactor" ).toElement().text().toDouble();
 
@@ -957,6 +961,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "doubleClickTranslates" );
     opt.appendChild( dd.createTextNode( c.preferences.doubleClickTranslates ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "escKeyHidesMainWindow" );
+    opt.appendChild( dd.createTextNode( c.preferences.escKeyHidesMainWindow ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "zoomFactor" );

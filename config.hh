@@ -144,6 +144,7 @@ struct Preferences
   bool closeToTray;
   bool autoStart;
   bool doubleClickTranslates;
+  bool escKeyHidesMainWindow;
 
   bool enableMainWindowHotkey;
   HotKey mainWindowHotkey;
@@ -324,7 +325,7 @@ struct Class
   QByteArray popupWindowState; // Binary state saved by QMainWindow
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
 
-  bool pinPopupWindow;
+  bool pinPopupWindow; // Last pin status
 
   QByteArray mainWindowState; // Binary state saved by QMainWindow
   QByteArray mainWindowGeometry; // Geometry saved by QMainWindow

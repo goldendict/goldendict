@@ -93,6 +93,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.closeToTray->setChecked( p.closeToTray );
   ui.cbAutostart->setChecked( p.autoStart );
   ui.doubleClickTranslates->setChecked( p.doubleClickTranslates );
+  ui.escKeyHidesMainWindow->setChecked( p.escKeyHidesMainWindow );
 
   ui.enableMainWindowHotkey->setChecked( p.enableMainWindowHotkey );
   ui.mainWindowHotkey->setHotKey( p.mainWindowHotkey );
@@ -196,6 +197,7 @@ Config::Preferences Preferences::getPreferences()
   p.closeToTray = ui.closeToTray->isChecked();
   p.autoStart = ui.cbAutostart->isChecked();
   p.doubleClickTranslates = ui.doubleClickTranslates->isChecked();
+  p.escKeyHidesMainWindow = ui.escKeyHidesMainWindow->isChecked();
 
   p.enableMainWindowHotkey = ui.enableMainWindowHotkey->isChecked();
   p.mainWindowHotkey = ui.mainWindowHotkey->getHotKey();

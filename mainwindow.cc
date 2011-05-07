@@ -1148,7 +1148,10 @@ void MainWindow::handleEsc()
   if ( dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).closeSearch() )
     return;
 
-  on_actionCloseToTray_activated();
+  if( cfg.preferences.escKeyHidesMainWindow )
+    on_actionCloseToTray_activated();
+  else
+    focusTranslateLine();
 }
 
 void MainWindow::focusTranslateLine()
