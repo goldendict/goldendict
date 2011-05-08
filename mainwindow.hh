@@ -109,6 +109,7 @@ private:
   void closeEvent( QCloseEvent * );
 
   void applyProxySettings();
+  void applyWebSettings();
   void makeDictionaries();
   void updateStatusLine();
   void updateGroupList();

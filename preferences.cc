@@ -176,6 +176,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
   ui.checkForNewReleases->setChecked( p.checkForNewReleases );
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
+  ui.enableWebPlugins->setChecked( p.enableWebPlugins );
 }
 
 Config::Preferences Preferences::getPreferences()
@@ -242,6 +243,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.checkForNewReleases = ui.checkForNewReleases->isChecked();
   p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();
+  p.enableWebPlugins = ui.enableWebPlugins->isChecked();
 
   return p;
 }

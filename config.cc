@@ -110,6 +110,7 @@ Preferences::Preferences():
 #endif
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
+  enableWebPlugins( false ),
   zoomFactor( 1 ),
   wordsZoomLevel( 0 )
 {
@@ -585,6 +586,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "disallowContentFromOtherSites" ).isNull() )
       c.preferences.disallowContentFromOtherSites = ( preferences.namedItem( "disallowContentFromOtherSites" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "enableWebPlugins" ).isNull() )
+      c.preferences.enableWebPlugins = ( preferences.namedItem( "enableWebPlugins" ).toElement().text() == "1" );
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -1070,6 +1074,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "disallowContentFromOtherSites" );
     opt.appendChild( dd.createTextNode( c.preferences.disallowContentFromOtherSites ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "enableWebPlugins" );
+    opt.appendChild( dd.createTextNode( c.preferences.enableWebPlugins ? "1" : "0" ) );
     preferences.appendChild( opt );
   }
 

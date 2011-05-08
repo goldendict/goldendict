@@ -354,6 +354,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     restoreState( cfg.mainWindowState, 1 );
 
   applyProxySettings();
+  applyWebSettings();
 
   makeDictionaries();
 
@@ -592,6 +593,12 @@ void MainWindow::applyProxySettings()
   }
 
   QNetworkProxy::setApplicationProxy( proxy );
+}
+
+void MainWindow::applyWebSettings()
+{
+  QWebSettings *defaultSettings = QWebSettings::globalSettings();
+  defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
 }
 
 void MainWindow::makeDictionaries()
@@ -1042,6 +1049,7 @@ void MainWindow::editPreferences()
 
     updateTrayIcon();
     applyProxySettings();
+    applyWebSettings();
     makeScanPopup();
 
     setAutostart( cfg.preferences.autoStart );
