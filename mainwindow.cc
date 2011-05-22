@@ -35,6 +35,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   switchToNextTabAction( this ),
   switchToPrevTabAction( this ),
   showDictBarNamesAction( tr( "Show Names in Dictionary Bar" ), this ),
+  useSmallIconsInToolbarsAction( tr( "Show Small Icons in Toolbars" ), this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -225,7 +226,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &showDictBarNamesAction, SIGNAL( triggered() ),
            this, SLOT( showDictBarNamesTriggered() ) );
 
-  // Popuplate 'View' menu
+  // Use small icons in toolbars
+
+  useSmallIconsInToolbarsAction.setCheckable( true );
+  useSmallIconsInToolbarsAction.setChecked( cfg.usingSmallIconsInToolbars );
+
+  connect( &useSmallIconsInToolbarsAction, SIGNAL( triggered() ),
+           this, SLOT( useSmallIconsInToolbarsTriggered() ) );
+
+  // Populate 'View' menu
 
   ui.menuView->addAction( ui.searchPane->toggleViewAction() );
   ui.menuView->addSeparator();
@@ -233,11 +242,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.menuView->addAction( navToolbar->toggleViewAction() );
   ui.menuView->addSeparator();
   ui.menuView->addAction( &showDictBarNamesAction );
+  ui.menuView->addAction( &useSmallIconsInToolbarsAction );
 
   // Dictionary bar
 
   showDictBarNamesTriggered(); // Make update its state according to initial
                                // setting
+
+  useSmallIconsInToolbarsTriggered();
 
   addToolBar( &dictionaryBar );
 
@@ -687,8 +699,15 @@ void MainWindow::updateDictionaryBar()
   Instances::Group * grp =
       groupInstances.findGroup( groupList.getCurrentGroup() );
 
-  if ( grp ) // Should always be !0, but check as a safeguard
+  if ( grp ) { // Should always be !0, but check as a safeguard
     dictionaryBar.setDictionaries( grp->dictionaries );
+
+    if ( useSmallIconsInToolbarsAction.isChecked() ) {
+      int extent = QApplication::style()->pixelMetric(QStyle::PM_SmallIconSize);
+      dictionaryBar.setIconSize( QSize( extent, extent ) );
+    }
+  }
+
 }
 
 void MainWindow::makeScanPopup()
@@ -1774,6 +1793,20 @@ void MainWindow::showDictBarNamesTriggered()
   dictionaryBar.setToolButtonStyle( show ? Qt::ToolButtonTextBesideIcon :
                                            Qt::ToolButtonIconOnly );
   cfg.showingDictBarNames = show;
+}
+
+void MainWindow::useSmallIconsInToolbarsTriggered()
+{
+  bool useSmallIcons = useSmallIconsInToolbarsAction.isChecked();
+
+  int extent = useSmallIcons ? QApplication::style()->pixelMetric(QStyle::PM_SmallIconSize) :
+                               QApplication::style()->pixelMetric(QStyle::PM_ToolBarIconSize);
+
+  navToolbar->setIconSize( QSize( extent, extent ) );
+
+  updateDictionaryBar();
+
+  cfg.usingSmallIconsInToolbars = useSmallIcons;
 }
 
 void MainWindow::historyChanged()

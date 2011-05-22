@@ -340,8 +340,10 @@ struct Class
 
   bool showingDictBarNames;
 
+  bool usingSmallIconsInToolbars;
+
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
-           pinPopupWindow( false ), showingDictBarNames( false )
+           pinPopupWindow( false ), showingDictBarNames( false ), usingSmallIconsInToolbars( false )
   {}
 };
 

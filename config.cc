@@ -626,6 +626,8 @@ Class load() throw( exError )
 
   c.showingDictBarNames = ( root.namedItem( "showingDictBarNames" ).toElement().text() == "1" );
 
+  c.usingSmallIconsInToolbars = ( root.namedItem( "usingSmallIconsInToolbars" ).toElement().text() == "1" );
+
   return c;
 }
 
@@ -1120,6 +1122,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "showingDictBarNames" );
     opt.appendChild( dd.createTextNode( c.showingDictBarNames ? "1" : "0" ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "usingSmallIconsInToolbars" );
+    opt.appendChild( dd.createTextNode( c.usingSmallIconsInToolbars ? "1" : "0" ) );
     root.appendChild( opt );
   }
 
