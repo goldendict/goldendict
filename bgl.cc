@@ -584,6 +584,9 @@ void BglArticleRequest::run()
   set< uint32_t > articlesIncluded; // Some synonims make it that the articles
                                     // appear several times. We combat this
                                     // by only allowing them to appear once.
+  // Sometimes the articles are physically duplicated. We store hashes of
+  // the bodies to account for this.
+  set< QByteArray > articleBodiesIncluded;
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
 
@@ -613,15 +616,23 @@ void BglArticleRequest::run()
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( removePostfix( headword ) ) );
 
+    string const & targetHeadword = displayedHeadword.size() ?
+                                    displayedHeadword : headword;
+
+    QCryptographicHash hash( QCryptographicHash::Md5 );
+    hash.addData( targetHeadword.data(), targetHeadword.size() + 1 ); // with 0
+    hash.addData( articleText.data(), articleText.size() );
+
+    if ( !articleBodiesIncluded.insert( hash.result() ).second )
+      continue; // Already had this body
+
     multimap< wstring, pair< string, string > > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
         mainArticles : alternateArticles;
 
     mapToUse.insert( pair< wstring, pair< string, string > >(
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-      pair< string, string >(
-        displayedHeadword.size() ? displayedHeadword : headword,
-        articleText ) ) );
+      pair< string, string >( targetHeadword, articleText ) ) );
 
     articlesIncluded.insert( chain[ x ].articleOffset );
   }
