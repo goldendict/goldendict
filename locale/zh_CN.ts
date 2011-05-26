@@ -2022,6 +2022,26 @@ but should support most audio file formats.</source>
         <source>Use any external program to play audio files</source>
         <translation>使用外部程序播放音频文件。</translation>
     </message>
+    <message>
+        <source>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</source>
+        <translation>通常，按下 ESC 键会将焦点移至翻译输入框，若启用此选项则会隐藏主窗口。</translation>
+    </message>
+    <message>
+        <source>ESC key hides main window</source>
+        <translation>ESC 键隐藏主窗口</translation>
+    </message>
+    <message>
+        <source>Enabling this would allow to listen to sound pronunciations from
+online dictionaries that rely on Flash or other web plugins.
+Plugin must be installed for this option to work.</source>
+        <translation>启用此选项后允许听依赖 Flash 或其它 web 插件的在线词典的发音。必须
+安装相应插件才能使此选项正常工作。</translation>
+    </message>
+    <message>
+        <source>Enable web plugins</source>
+        <translation>启用 web 插件</translation>
+    </message>
 </context>
 <context>
     <name>Romaji</name>
