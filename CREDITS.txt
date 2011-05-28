@@ -14,3 +14,4 @@ Maha 吳寶原, Ray Chou 周邦信, Marcus Bingenheimer: Traditional Chinese tra
 Besmir Godole <bgodole\gmail.com>: Albanian translation
 Leonardo Montenegro <thesolidone\gmail.com>: Brazilian Portuguese translation
 Julian Depetris Chauvin <jdepetris\gmail.com>: Interface enhancements
+Yanina Weingast <yjweingast\gmail.com>: Argentinian Spanish translation
