@@ -628,6 +628,7 @@ void ProgramsModel::addNewProgram()
   Config::Program p;
 
   p.enabled = false;
+  p.type = Config::Program::Audio;
 
   p.id = Dictionary::generateRandomDictionaryId();
 
