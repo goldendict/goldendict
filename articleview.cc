@@ -14,6 +14,7 @@
 #include "folding.hh"
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
+#include "programs.hh"
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -709,6 +710,35 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       resourceDownloadFinished(); // Check any requests finished already
   }
   else
+  if ( url.scheme() == "gdprg" )
+  {
+    // Program. Run it.
+    QString id( url.host() );
+
+    for( Config::Programs::const_iterator i = cfg.programs.begin();
+         i != cfg.programs.end(); ++i )
+    {
+      if ( i->id == id )
+      {
+        // Found the corresponding program.
+        Programs::ArticleRequest * req = new Programs::ArticleRequest(
+          url.path().mid( 1 ), *i );
+
+        connect( req, SIGNAL( finished() ), req, SLOT( deleteLater() ) );
+
+        // Delete the request if it has finished already
+        if ( req->isFinished() )
+          delete req;
+
+        return;
+      }
+    }
+
+    // Still here? No such program exists.
+    QMessageBox::critical( this, tr( "GoldenDict" ),
+                           tr( "The referenced audio program doesn't exist." ) );
+  }
+  else
   if ( isExternalLink( url ) )
   {
     // Use the system handler for the conventional external links
@@ -1037,17 +1067,8 @@ void ArticleView::resourceDownloadFinished()
             {
               ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram.trimmed() );
 
-              try
-              {
-                viewer->start();
-
-                // Once started, it will erase itself
-              }
-              catch( ... )
-              {
-                delete viewer;
-                throw;
-              }
+              // Once started, it will erase itself
+              viewer->start();
             }
             catch( ExternalViewer::Ex & e )
             {
@@ -1091,7 +1112,7 @@ void ArticleView::resourceDownloadFinished()
       }
       else
       {
-        // This one had no data. Erase  it.
+        // This one had no data. Erase it.
         resourceDownloadRequests.erase( i++ );
       }
     }

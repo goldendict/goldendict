@@ -4,8 +4,6 @@
 #include "sources.hh"
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QCryptographicHash>
-#include <QDateTime>
 #include <QStandardItemModel>
 
 Sources::Sources( QWidget * parent, Config::Paths const & paths,
@@ -14,14 +12,27 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::Transliteration const & trs,
                   Config::Forvo const & forvo,
                   Config::MediaWikis const & mediawikis,
-                  Config::WebSites const & webSites ): QWidget( parent ),
+                  Config::WebSites const & webSites,
+                  Config::Programs const & programs ): QWidget( parent ),
+  itemDelegate( new QItemDelegate( this ) ),
+  itemEditorFactory( new QItemEditorFactory() ),
   mediawikisModel( this, mediawikis ),
   webSitesModel( this, webSites ),
+  programsModel( this, programs ),
   pathsModel( this, paths ),
   soundDirsModel( this, soundDirs ),
   hunspellDictsModel( this, hunspell )
 {
   ui.setupUi( this );
+
+  // TODO: will programTypeEditorCreator and itemEditorFactory be destoryed by
+  // anyone?
+  QItemEditorCreatorBase * programTypeEditorCreator =
+         new QStandardItemEditorCreator< ProgramTypeEditor >();
+
+  itemEditorFactory->registerEditor( QVariant::Int, programTypeEditorCreator );
+
+  itemDelegate->setItemEditorFactory( itemEditorFactory );
 
   ui.mediaWikis->setTabKeyNavigation( true );
   ui.mediaWikis->setModel( &mediawikisModel );
@@ -34,6 +45,17 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.webSites->resizeColumnToContents( 0 );
   ui.webSites->resizeColumnToContents( 1 );
   ui.webSites->resizeColumnToContents( 2 );
+
+  ui.programs->setTabKeyNavigation( true );
+  ui.programs->setModel( &programsModel );
+  ui.programs->resizeColumnToContents( 0 );
+  // Make sure this thing will be large enough
+  ui.programs->setColumnWidth( 1,
+    QFontMetrics( QFont() ).width(
+      ProgramTypeEditor::getNameForType( Config::Program::PlainText ) ) + 16 );
+  ui.programs->resizeColumnToContents( 2 );
+  ui.programs->resizeColumnToContents( 3 );
+  ui.programs->setItemDelegate( itemDelegate );
 
   ui.paths->setTabKeyNavigation( true );
   ui.paths->setModel( &pathsModel );
@@ -226,6 +248,30 @@ void Sources::on_removeWebSite_clicked()
     webSitesModel.removeSite( current.row() );
 }
 
+void Sources::on_addProgram_clicked()
+{
+  programsModel.addNewProgram();
+
+  QModelIndex result =
+    programsModel.index( programsModel.rowCount( QModelIndex() ) - 1,
+                         1, QModelIndex() );
+
+  ui.programs->scrollTo( result );
+  ui.programs->edit( result );
+}
+
+void Sources::on_removeProgram_clicked()
+{
+  QModelIndex current = ui.programs->currentIndex();
+
+  if ( current.isValid() &&
+       QMessageBox::question( this, tr( "Confirm removal" ),
+                              tr( "Remove program <b>%1</b> from the list?" ).arg( programsModel.getCurrentPrograms()[ current.row() ].name ),
+                              QMessageBox::Ok,
+                              QMessageBox::Cancel ) == QMessageBox::Ok )
+    programsModel.removeProgram( current.row() );
+}
+
 Config::Hunspell Sources::getHunspell() const
 {
   Config::Hunspell h;
@@ -284,11 +330,7 @@ void MediaWikisModel::addNewWiki()
 
   w.enabled = false;
 
-  // That's quite some rng
-  w.id = QString(
-    QCryptographicHash::hash(
-      QDateTime::currentDateTime().toString( "\"MediaWiki\"dd.MM.yyyy hh:mm:ss.zzz" ).toUtf8(),
-      QCryptographicHash::Md5 ).toHex() );
+  w.id = Dictionary::generateRandomDictionaryId();
 
   w.url = "http://";
 
@@ -437,11 +479,7 @@ void WebSitesModel::addNewSite()
 
   w.enabled = false;
 
-  // That's quite some rng
-  w.id = QString(
-    QCryptographicHash::hash(
-      QDateTime::currentDateTime().toString( "\"WebSite\"dd.MM.yyyy hh:mm:ss.zzz" ).toUtf8(),
-      QCryptographicHash::Md5 ).toHex() );
+  w.id = Dictionary::generateRandomDictionaryId();
 
   w.url = "http://";
 
@@ -569,6 +607,191 @@ bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
   return false;
 }
 
+
+////////// ProgramsModel
+
+ProgramsModel::ProgramsModel( QWidget * parent,
+                              Config::Programs const & programs_ ):
+  QAbstractItemModel( parent ), programs( programs_ )
+{
+}
+
+void ProgramsModel::removeProgram( int index )
+{
+  beginRemoveRows( QModelIndex(), index, index );
+  programs.erase( programs.begin() + index );
+  endRemoveRows();
+}
+
+void ProgramsModel::addNewProgram()
+{
+  Config::Program p;
+
+  p.enabled = false;
+
+  p.id = Dictionary::generateRandomDictionaryId();
+
+  beginInsertRows( QModelIndex(), programs.size(), programs.size() );
+  programs.push_back( p );
+  endInsertRows();
+}
+
+QModelIndex ProgramsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
+{
+  return createIndex( row, column, 0 );
+}
+
+QModelIndex ProgramsModel::parent( QModelIndex const & /*parent*/ ) const
+{
+  return QModelIndex();
+}
+
+Qt::ItemFlags ProgramsModel::flags( QModelIndex const & index ) const
+{
+  Qt::ItemFlags result = QAbstractItemModel::flags( index );
+
+  if ( index.isValid() )
+  {
+    if ( !index.column() )
+      result |= Qt::ItemIsUserCheckable;
+    else
+      result |= Qt::ItemIsEditable;
+  }
+
+  return result;
+}
+
+int ProgramsModel::rowCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return programs.size();
+}
+
+int ProgramsModel::columnCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return 4;
+}
+
+QVariant ProgramsModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
+{
+  if ( role == Qt::DisplayRole )
+    switch( section )
+    {
+      case 0:
+        return tr( "Enabled" );
+      case 1:
+        return tr( "Type" );
+      case 2:
+        return tr( "Name" );
+      case 3:
+        return tr( "Command Line" );
+      default:
+        return QVariant();
+    }
+
+  return QVariant();
+}
+
+QVariant ProgramsModel::data( QModelIndex const & index, int role ) const
+{
+  if ( (unsigned) index.row() >= programs.size() )
+    return QVariant();
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+  {
+    switch( index.column() )
+    {
+      case 1:
+        if ( role == Qt::DisplayRole )
+          return ProgramTypeEditor::getNameForType( programs[ index.row() ].type );
+        else
+          return QVariant( ( int ) programs[ index.row() ].type );
+      case 2:
+        return programs[ index.row() ].name;
+      case 3:
+        return programs[ index.row() ].commandLine;
+      default:
+        return QVariant();
+    }
+  }
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+    return programs[ index.row() ].enabled;
+
+  return QVariant();
+}
+
+bool ProgramsModel::setData( QModelIndex const & index, const QVariant & value,
+                             int role )
+{
+  if ( (unsigned)index.row() >= programs.size() )
+    return false;
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+  {
+    programs[ index.row() ].enabled = !programs[ index.row() ].enabled;
+
+    dataChanged( index, index );
+    return true;
+  }
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+    switch( index.column() )
+    {
+      case 1:
+        programs[ index.row() ].type = Config::Program::Type( value.toInt() );
+        dataChanged( index, index );
+        return true;
+      case 2:
+        programs[ index.row() ].name = value.toString();
+        dataChanged( index, index );
+        return true;
+      case 3:
+        programs[ index.row() ].commandLine = value.toString();
+        dataChanged( index, index );
+        return true;
+      default:
+        return false;
+    }
+
+  return false;
+}
+
+QString ProgramTypeEditor::getNameForType( int v )
+{
+  switch( v )
+  {
+    case Config::Program::Audio:
+      return tr( "Audio" );
+    case Config::Program::PlainText:
+      return tr( "Plain Text" );
+    case Config::Program::Html:
+      return tr( "Html" );
+    default:
+      return tr( "Unknown" );
+  }
+}
+
+ProgramTypeEditor::ProgramTypeEditor( QWidget * widget ): QComboBox( widget )
+{
+  for( int x = 0; x < Config::Program::MaxTypeValue; ++x )
+    addItem( getNameForType( x ) );
+}
+
+int ProgramTypeEditor::getType() const
+{
+  return currentIndex();
+}
+
+void ProgramTypeEditor::setType( int t )
+{
+  setCurrentIndex( t );
+}
 
 ////////// PathsModel
 

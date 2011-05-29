@@ -304,6 +304,39 @@ struct Forvo
   { return ! operator == ( other ); }
 };
 
+struct Program
+{
+  bool enabled;
+  enum Type
+  {
+    Audio,
+    PlainText,
+    Html,
+    MaxTypeValue
+  } type;
+  QString id, name, commandLine;
+
+  Program(): enabled( false )
+  {}
+
+  Program( bool enabled_, Type type_, QString const & id_,
+          QString const & name_, QString const & commandLine_ ):
+    enabled( enabled_ ), type( type_ ), id( id_ ), name( name_ ),
+    commandLine( commandLine_ ) {}
+
+  bool operator == ( Program const & other ) const
+  { return enabled == other.enabled &&
+           type == other.type &&
+           name == other.name &&
+           commandLine == other.commandLine;
+  }
+
+  bool operator != ( Program const & other ) const
+  { return ! operator == ( other ); }
+};
+
+typedef vector< Program > Programs;
+
 /// Dictionaries which are temporarily disabled via the dictionary bar.
 typedef QSet< QString > MutedDictionaries;
 
@@ -320,6 +353,7 @@ struct Class
   Hunspell hunspell;
   Transliteration transliteration;
   Forvo forvo;
+  Programs programs;
 
   unsigned lastMainGroupId; // Last used group in main window
   unsigned lastPopupGroupId; // Last used group in popup window

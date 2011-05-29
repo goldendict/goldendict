@@ -156,7 +156,8 @@ HEADERS += folding.hh \
     webmultimediadownload.hh \
     forvo.hh \
     country.hh \
-    about.hh
+    about.hh \
+    programs.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -238,7 +239,8 @@ SOURCES += folding.cc \
     webmultimediadownload.cc \
     forvo.cc \
     country.cc \
-    about.cc
+    about.cc \
+    programs.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h

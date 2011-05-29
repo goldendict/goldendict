@@ -16,7 +16,7 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   dictNetMgr( dictNetMgr_ ),
   origCfg( cfg ),
   sources( this, cfg.paths, cfg.soundDirs, cfg.hunspell, cfg.transliteration,
-           cfg.forvo, cfg.mediawikis, cfg.webSites ),
+           cfg.forvo, cfg.mediawikis, cfg.webSites, cfg.programs ),
   orderAndProps( new OrderAndProps( this, cfg.dictionaryOrder, cfg.inactiveDictionaries,
                                     dictionaries ) ),
   groups( new Groups( this, dictionaries, cfg.groups, orderAndProps->getCurrentDictionaryOrder() ) ),
@@ -140,7 +140,8 @@ bool EditDictionaries::isSourcesChanged() const
          sources.getTransliteration() != cfg.transliteration ||
          sources.getForvo() != cfg.forvo ||
          sources.getMediaWikis() != cfg.mediawikis ||
-         sources.getWebSites() != cfg.webSites;
+         sources.getWebSites() != cfg.webSites ||
+         sources.getPrograms() != cfg.programs;
 }
 
 void EditDictionaries::acceptChangedSources( bool rebuildGroups )
@@ -158,6 +159,7 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   cfg.forvo = sources.getForvo();
   cfg.mediawikis = sources.getMediaWikis();
   cfg.webSites = sources.getWebSites();
+  cfg.programs = sources.getPrograms();
 
   groupInstances.clear(); // Those hold pointers to dictionaries, we need to
                           // free them.

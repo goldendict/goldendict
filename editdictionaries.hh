@@ -44,7 +44,7 @@ private slots:
   void on_tabs_currentChanged( int index );
 
   void rescanSources();
-  
+
 private:
 
   bool isSourcesChanged() const;

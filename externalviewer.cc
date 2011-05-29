@@ -1,8 +1,8 @@
 /* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include "externalviewer.hh"
 #include <QDir>
+#include "externalviewer.hh"
 
 using std::vector;
 
@@ -23,47 +23,17 @@ ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
   tempFile.close();
 
   printf( "%s\n", tempFile.fileName().toLocal8Bit().data() );
-
-  connect( &viewer, SIGNAL( finished( int, QProcess::ExitStatus ) ),
-           this, SLOT( viewerFinished( int, QProcess::ExitStatus ) ) );
-
-  connect( this, SIGNAL( finished( ExternalViewer * ) ),
-           &ExternalViewerDeleter::instance(), SLOT( deleteExternalViewer( ExternalViewer * ) ),
-           Qt::QueuedConnection );
-}
-
-ExternalViewer::~ExternalViewer()
-{
-  // No need to delete us once we're being destructed. This fixes some
-  // double-free corruption if the object is being freed prematurely.
-  disconnect( this, SIGNAL( finished( ExternalViewer * ) ),
-              &ExternalViewerDeleter::instance(), SLOT( deleteExternalViewer( ExternalViewer * ) ) );
 }
 
 void ExternalViewer::start() throw( exCantRunViewer )
 {
+  connect( &viewer, SIGNAL( finished( int, QProcess::ExitStatus ) ),
+           this, SLOT( deleteLater() ) );
+  connect( &viewer, SIGNAL( error( QProcess::ProcessError ) ),
+           this, SLOT( deleteLater() ) );
+
   viewer.start( viewerProgram, QStringList( tempFileName ), QIODevice::NotOpen );
 
   if ( !viewer.waitForStarted() )
     throw exCantRunViewer( viewerProgram.toStdString() );
 }
-
-void ExternalViewer::viewerFinished( int, QProcess::ExitStatus )
-{
-  emit finished( this );
-}
-
-ExternalViewerDeleter & ExternalViewerDeleter::instance()
-{
-  static ExternalViewerDeleter evd( 0 );
-
-  return evd;
-}
-
-void ExternalViewerDeleter::deleteExternalViewer( ExternalViewer * e )
-{
-  printf( "Deleting external viewer\n" );
-
-  delete e;
-}
-

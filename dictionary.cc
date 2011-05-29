@@ -15,6 +15,8 @@
 #include "config.hh"
 #include <QDir>
 #include <QFileInfo>
+#include <QCryptographicHash>
+#include <QDateTime>
 
 namespace Dictionary {
 
@@ -217,5 +219,14 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
 
   return fileInfo.lastModified().toTime_t() < lastModified;
 }
+
+QString generateRandomDictionaryId()
+{
+  return QString(
+    QCryptographicHash::hash(
+      QDateTime::currentDateTime().toString( "\"Random\"dd.MM.yyyy hh:mm:ss.zzz" ).toUtf8(),
+      QCryptographicHash::Md5 ).toHex() );
+}
+
 
 }

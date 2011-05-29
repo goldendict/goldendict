@@ -403,6 +403,10 @@ string makeDictionaryId( vector< string > const & dictionaryFiles ) throw();
 bool needToRebuildIndex( vector< string > const & dictionaryFiles,
                          string const & indexFile ) throw();
 
+/// Returns a random dictionary id useful for interactively created
+/// dictionaries.
+QString generateRandomDictionaryId();
+
 }
 
 #endif

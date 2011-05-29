@@ -162,6 +162,20 @@ WebSites makeDefaultWebSites()
   return ws;
 }
 
+Programs makeDefaultPrograms()
+{
+  Programs programs;
+
+  // The following list doesn't make a lot of sense under Windows
+#ifndef Q_WS_WIN
+  programs.push_back( Program( false, Program::Audio, "428b4c2b905ef568a43d9a16f59559b0", "Festival", "festival --tts" ) );
+  programs.push_back( Program( false, Program::Audio, "2cf8b3a60f27e1ac812de0b57c148340", "Espeak", "espeak %GDWORD%" ) );
+  programs.push_back( Program( false, Program::PlainText, "4f898f7582596cea518c6b0bfdceb8b3", "Manpages", "man -a %GDWORD%" ) );
+#endif
+
+  return programs;
+}
+
 /// Sets option to true of false if node is "1" or "0" respectively, or leaves
 /// it intact if it's neither "1" nor "0".
 void applyBoolOption( bool & option, QDomNode const & node )
@@ -458,6 +472,30 @@ Class load() throw( exError )
   }
   else
     c.forvo.languageCodes = "en, ru"; // Default demo values
+
+  QDomNode programs = root.namedItem( "programs" );
+
+  if ( !programs.isNull() )
+  {
+    QDomNodeList nl = programs.toElement().elementsByTagName( "program" );
+
+    for( unsigned x = 0; x < nl.length(); ++x )
+    {
+      QDomElement pr = nl.item( x ).toElement();
+
+      Program p;
+
+      p.id = pr.attribute( "id" );
+      p.name = pr.attribute( "name" );
+      p.commandLine = pr.attribute( "commandLine" );
+      p.enabled = ( pr.attribute( "enabled" ) == "1" );
+      p.type = (Program::Type)( pr.attribute( "type" ).toInt() );
+
+      c.programs.push_back( p );
+    }
+  }
+  else
+    c.programs = makeDefaultPrograms();
 
   QDomNode mws = root.namedItem( "mediawikis" );
 
@@ -913,6 +951,37 @@ void save( Class const & c ) throw( exError )
       QDomAttr enabled = dd.createAttribute( "enabled" );
       enabled.setValue( i->enabled ? "1" : "0" );
       ws.setAttributeNode( enabled );
+    }
+  }
+
+  {
+    QDomElement programs = dd.createElement( "programs" );
+    root.appendChild( programs );
+
+    for( Programs::const_iterator i = c.programs.begin(); i != c.programs.end(); ++i )
+    {
+      QDomElement p = dd.createElement( "program" );
+      programs.appendChild( p );
+
+      QDomAttr id = dd.createAttribute( "id" );
+      id.setValue( i->id );
+      p.setAttributeNode( id );
+
+      QDomAttr name = dd.createAttribute( "name" );
+      name.setValue( i->name );
+      p.setAttributeNode( name );
+
+      QDomAttr commandLine = dd.createAttribute( "commandLine" );
+      commandLine.setValue( i->commandLine );
+      p.setAttributeNode( commandLine );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( i->enabled ? "1" : "0" );
+      p.setAttributeNode( enabled );
+
+      QDomAttr type = dd.createAttribute( "type" );
+      type.setValue( QString::number( i->type ) );
+      p.setAttributeNode( type );
     }
   }
 

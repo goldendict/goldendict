@@ -8,6 +8,9 @@
 #include "config.hh"
 #include "hunspell.hh"
 #include <QAbstractItemModel>
+#include <QComboBox>
+#include <QItemDelegate>
+#include <QItemEditorFactory>
 
 /// A model to be projected into the mediawikis view, according to Qt's MVC model
 class MediaWikisModel: public QAbstractItemModel
@@ -67,6 +70,52 @@ public:
 private:
 
   Config::WebSites webSites;
+};
+
+/// A model to be projected into the programs view, according to Qt's MVC model
+class ProgramsModel: public QAbstractItemModel
+{
+  Q_OBJECT
+
+public:
+
+  ProgramsModel( QWidget * parent, Config::Programs const & );
+
+  void removeProgram( int index );
+  void addNewProgram();
+
+  /// Returns the sites the model currently has listed
+  Config::Programs const & getCurrentPrograms() const
+  { return programs; }
+
+  QModelIndex index( int row, int column, QModelIndex const & parent ) const;
+  QModelIndex parent( QModelIndex const & parent ) const;
+  Qt::ItemFlags flags( QModelIndex const & index ) const;
+  int rowCount( QModelIndex const & parent ) const;
+  int columnCount( QModelIndex const & parent ) const;
+  QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+  QVariant data( QModelIndex const & index, int role ) const;
+  bool setData( QModelIndex const & index, const QVariant & value, int role );
+
+private:
+
+  Config::Programs programs;
+};
+
+class ProgramTypeEditor: public QComboBox
+{
+Q_OBJECT
+Q_PROPERTY(int type READ getType WRITE setType USER true)
+
+public:
+  ProgramTypeEditor( QWidget * widget = 0 );
+
+  // Returns localized name for the given program type
+  static QString getNameForType( int );
+
+public:
+  int getType() const;
+  void setType( int );
 };
 
 /// A model to be projected into the paths view, according to Qt's MVC model
@@ -171,7 +220,8 @@ public:
            Config::Transliteration const &,
            Config::Forvo const & forvo,
            Config::MediaWikis const &,
-           Config::WebSites const & );
+           Config::WebSites const &,
+           Config::Programs const &);
 
   Config::Paths const & getPaths() const
   { return pathsModel.getCurrentPaths(); }
@@ -184,6 +234,9 @@ public:
 
   Config::WebSites const & getWebSites() const
   { return webSitesModel.getCurrentWebSites(); }
+
+  Config::Programs const & getPrograms() const
+  { return programsModel.getCurrentPrograms(); }
 
   Config::Hunspell getHunspell() const;
   
@@ -198,8 +251,13 @@ signals:
   
 private:
   Ui::Sources ui;
+
+  QItemDelegate * itemDelegate;
+  QItemEditorFactory * itemEditorFactory;
+
   MediaWikisModel mediawikisModel;
   WebSitesModel webSitesModel;
+  ProgramsModel programsModel;
   PathsModel pathsModel;
   SoundDirsModel soundDirsModel;
   HunspellDictsModel hunspellDictsModel;
@@ -223,6 +281,9 @@ private slots:
 
   void on_addWebSite_clicked();
   void on_removeWebSite_clicked();
+
+  void on_addProgram_clicked();
+  void on_removeProgram_clicked();
 
   void on_rescan_clicked();
 };

@@ -30,35 +30,9 @@ public:
                   QString const & extension, QString const & viewerProgram )
     throw( exCantCreateTempFile );
 
-  ~ExternalViewer();
-
+  // Once this is called, the object will be deleted when it's done, even if
+  // the function throws.
   void start() throw( exCantRunViewer );
-
-private slots:
-
-  void viewerFinished( int, QProcess::ExitStatus );
-
-signals:
-
-  void finished( ExternalViewer * );
-};
-
-class ExternalViewerDeleter: public QObject
-{
-  Q_OBJECT
-
-public:
-
-  static ExternalViewerDeleter & instance();
-
-public slots:
-
-  void deleteExternalViewer( ExternalViewer * e );
-
-private:
-
-  ExternalViewerDeleter( QObject * parent ): QObject( parent )
-  {}
 };
 
 #endif
