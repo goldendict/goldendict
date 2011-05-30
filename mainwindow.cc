@@ -1176,7 +1176,12 @@ void MainWindow::handleEsc()
     return;
 
   if( cfg.preferences.escKeyHidesMainWindow )
-    on_actionCloseToTray_activated();
+  {
+    if( cfg.preferences.enableTrayIcon )
+      hide();
+    else
+      showMinimized();
+  }
   else
     focusTranslateLine();
 }
