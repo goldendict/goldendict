@@ -170,7 +170,7 @@ Programs makeDefaultPrograms()
 #ifndef Q_WS_WIN
   programs.push_back( Program( false, Program::Audio, "428b4c2b905ef568a43d9a16f59559b0", "Festival", "festival --tts" ) );
   programs.push_back( Program( false, Program::Audio, "2cf8b3a60f27e1ac812de0b57c148340", "Espeak", "espeak %GDWORD%" ) );
-  programs.push_back( Program( false, Program::PlainText, "4f898f7582596cea518c6b0bfdceb8b3", "Manpages", "man -a %GDWORD%" ) );
+  programs.push_back( Program( false, Program::Html, "4f898f7582596cea518c6b0bfdceb8b3", "Manpages", "man -a --html=/bin/cat %GDWORD%" ) );
 #endif
 
   return programs;
