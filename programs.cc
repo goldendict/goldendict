@@ -202,7 +202,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
   for( Config::Programs::const_iterator i = programs.begin();
        i != programs.end(); ++i )
-    result.push_back( new ProgramsDictionary( *i ) );
+    if ( i->enabled )
+      result.push_back( new ProgramsDictionary( *i ) );
 
   return result;
 }
