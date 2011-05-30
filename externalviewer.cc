@@ -3,17 +3,18 @@
 
 #include <QDir>
 #include "externalviewer.hh"
+#include "parsecmdline.hh"
 
 using std::vector;
 
 ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
                                 QString const & extension,
-                                QString const & viewerProgram_ )
+                                QString const & viewerCmdLine_ )
     throw( exCantCreateTempFile ):
   QObject( parent ),
   tempFile( QDir::temp().filePath( QString( "gd-XXXXXXXX." ) + extension ) ),
   viewer( this ),
-  viewerProgram( viewerProgram_ )
+  viewerCmdLine( viewerCmdLine_ )
 {
   if ( !tempFile.open() || tempFile.write( &data.front(), data.size() ) != data.size() )
     throw exCantCreateTempFile();
@@ -32,8 +33,17 @@ void ExternalViewer::start() throw( exCantRunViewer )
   connect( &viewer, SIGNAL( error( QProcess::ProcessError ) ),
            this, SLOT( deleteLater() ) );
 
-  viewer.start( viewerProgram, QStringList( tempFileName ), QIODevice::NotOpen );
+  QStringList args = parseCommandLine( viewerCmdLine );
 
-  if ( !viewer.waitForStarted() )
-    throw exCantRunViewer( viewerProgram.toStdString() );
+  if ( !args.isEmpty() )
+  {
+    QString program = args.first();
+    args.pop_front();
+    args.push_back( tempFileName );
+    viewer.start( program, args, QIODevice::NotOpen );
+    if ( !viewer.waitForStarted() )
+      throw exCantRunViewer( viewerCmdLine.toUtf8().data() );
+  }
+  else
+    throw exCantRunViewer( tr( "the viewer program name is empty" ).toUtf8().data() );
 }

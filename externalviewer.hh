@@ -17,7 +17,7 @@ class ExternalViewer: public QObject
 
   QTemporaryFile tempFile;
   QProcess viewer;
-  QString viewerProgram;
+  QString viewerCmdLine;
   QString tempFileName;
 
 public:
@@ -27,7 +27,7 @@ public:
   DEF_EX_STR( exCantRunViewer, "Couldn't run external viewer:", Ex )
 
   ExternalViewer( QObject * parent, std::vector< char > const & data,
-                  QString const & extension, QString const & viewerProgram )
+                  QString const & extension, QString const & viewerCmdLine )
     throw( exCantCreateTempFile );
 
   // Once this is called, the object will be deleted when it's done, even if

@@ -157,7 +157,8 @@ HEADERS += folding.hh \
     forvo.hh \
     country.hh \
     about.hh \
-    programs.hh
+    programs.hh \
+    parsecmdline.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -240,7 +241,8 @@ SOURCES += folding.cc \
     forvo.cc \
     country.cc \
     about.cc \
-    programs.cc
+    programs.cc \
+    parsecmdline.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h

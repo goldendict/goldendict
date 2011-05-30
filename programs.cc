@@ -7,6 +7,7 @@
 #include "htmlescape.hh"
 #include "utf8.hh"
 #include "wstring_qt.hh"
+#include "parsecmdline.hh"
 
 namespace Programs {
 
@@ -105,7 +106,7 @@ ArticleRequest::ArticleRequest( QString const & word,
                                 Config::Program const & prg_ ):
   prg( prg_ ), process( this )
 {
-  QStringList args = prg.commandLine.split( ' ', QString::SkipEmptyParts );
+  QStringList args = parseCommandLine( prg.commandLine );
 
   if ( !args.empty() )
   {
