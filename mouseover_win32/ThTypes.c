@@ -7,7 +7,7 @@ void ThTypes_Init()
 {
 	if (!MMFHandle)
 		MMFHandle = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, sizeof(TGlobalDLLData), "GoldenDictTextOutHookSharedMem");
-	if (!GlobalData)
+	if (!GlobalData && MMFHandle != NULL)
 		GlobalData = MapViewOfFile(MMFHandle, FILE_MAP_ALL_ACCESS, 0, 0, 0);
 }
 

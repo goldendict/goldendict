@@ -106,8 +106,11 @@ static BOOL HookImportFunction(HMODULE hModule, LPCSTR szImportModule, LPCSTR sz
 BOOL HookAPI(LPCSTR szImportModule, LPCSTR szFunc, PROC paHookFuncs, PROC* paOrigFuncs)
 {
 	HANDLE hSnapshot;
-	MODULEENTRY32 me = {sizeof(MODULEENTRY32)};
+	MODULEENTRY32 me;
 	BOOL bOk;
+
+	ZeroMemory(&me,sizeof(me));
+	me.dwSize=sizeof(me);
 
 	if ((szImportModule == NULL) || (szFunc == NULL)) {
 		return FALSE;

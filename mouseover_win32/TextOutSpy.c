@@ -12,6 +12,16 @@ UINT_PTR TimerID = 0;
 typedef void (*GetWordProc_t)(TCurrentMode *);
 GetWordProc_t GetWordProc = NULL;
 
+static HWND GetWindowFromPoint(POINT pt) {
+HWND WndParent,WndChild;
+	WndParent = WindowFromPoint(pt);
+	if(WndParent == NULL) return WndParent;
+	ScreenToClient(WndParent, &pt);
+	WndChild=RealChildWindowFromPoint(WndParent, pt);
+	if(WndChild == NULL) return WndParent;
+	return WndChild;
+};
+
 static void SendWordToServer()
 {
 	if (hGetWordLib == 0) {
@@ -40,7 +50,7 @@ DWORD wso;
 	wso = WaitForSingleObject(hSynhroMutex, 0);
 	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
 		KillTimer(0, nTimerid);
-		if ((GlobalData->LastWND!=0)&&(GlobalData->LastWND == WindowFromPoint(GlobalData->LastPt))) {
+		if ((GlobalData->LastWND!=0)&&(GlobalData->LastWND == GetWindowFromPoint(GlobalData->LastPt))) {
 			SendWordToServer();
 		}
 		ReleaseMutex(hSynhroMutex);
@@ -50,25 +60,32 @@ DWORD wso;
 LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
 DWORD wso;
-	if ((nCode == HC_ACTION) && ((wParam == WM_MOUSEMOVE) || (wParam == WM_NCMOUSEMOVE))) {
+	if ((nCode == HC_ACTION) && ((wParam == WM_MOUSEMOVE) || (wParam == WM_NCMOUSEMOVE)) && (GlobalData != NULL)) {
 		wso = WaitForSingleObject(hSynhroMutex, 0);
 		if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
 			HWND WND;
 			TCHAR wClassName[64];
 
-			WND = WindowFromPoint(((PMOUSEHOOKSTRUCT)lParam)->pt);
-			
+			WND = GetWindowFromPoint(((PMOUSEHOOKSTRUCT)lParam)->pt);
+
+			if(WND == NULL) {
+				ReleaseMutex(hSynhroMutex);
+				return CallNextHookEx(GlobalData->g_hHookMouse, nCode, wParam, lParam);
+			}
+
 			if (GetClassName(WND, wClassName, sizeof(wClassName) / sizeof(TCHAR))) {
 					const char* DisableClasses[] = {
 						"gdkWindowChild",
 						"gdkWindowTemp",
+						"Progman",
+						"WorkerW",
 					};
 					int i;
-					for (i=0; i<2; i++) {
+					for (i=0; i<4; i++) {
 						if (lstrcmp(wClassName, DisableClasses[i])==0)
 							break;
 					}
-					if (i<2) {
+					if (i<4) {
 						ReleaseMutex(hSynhroMutex);
 						return CallNextHookEx(GlobalData->g_hHookMouse, nCode, wParam, lParam);
 					}
@@ -91,6 +108,7 @@ DLLIMPORT void ActivateTextOutSpying (int Activate)
 	// this dll will load into this application automatically. And it is unloaded 
 	// after call UnhookWindowsHookEx().
 DWORD wso;
+	if(GlobalData == NULL) return;
 	if (Activate) {
 		if (GlobalData->g_hHookMouse != NULL) return;
 		GlobalData->g_hHookMouse = SetWindowsHookEx(WH_MOUSE, MouseHookProc, g_hInstance, 0);
@@ -98,12 +116,14 @@ DWORD wso;
 	else {
 		if (GlobalData->g_hHookMouse == NULL) return;
 		UnhookWindowsHookEx(GlobalData->g_hHookMouse);
-		WaitForSingleObject(hSynhroMutex, 4*MOUSEOVER_INTERVAL);
-		if (TimerID) {
-			if (KillTimer(0, TimerID))
-				TimerID=0;
+		wso = WaitForSingleObject(hSynhroMutex, 4*MOUSEOVER_INTERVAL);
+		if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+			if (TimerID) {
+				if (KillTimer(0, TimerID))
+					TimerID=0;
+			}
+			ReleaseMutex(hSynhroMutex);
 		}
-		ReleaseMutex(hSynhroMutex);
 		GlobalData->g_hHookMouse = NULL;
 	}
 }
@@ -120,8 +140,8 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
 			if(hSynhroMutex==0) {
 				hSynhroMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutSpyMutex");
 				if(hSynhroMutex==0) return(FALSE);
-				ThTypes_Init();
 			}
+			ThTypes_Init();
         break;
 
       case DLL_PROCESS_DETACH:

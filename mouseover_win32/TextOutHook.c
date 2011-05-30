@@ -1,5 +1,5 @@
 /*
- * February 2, 2009: Konstantin Isakov <ikm@goldendict.org>
+ * February 2, 2009: Konstantin Isakov <ikm@users.berlios.de>
  *   Support for ETO_GLYPH_INDEX in ExtTextOutW() function added. This makes
  *   Firefox 3 work.
 */
@@ -10,6 +10,7 @@
 #include "GetWord.h"
 #include "HookImportFunction.h"
 
+HANDLE hHookMutex = 0;
 
 typedef BOOL (WINAPI *TextOutANextHook_t)(HDC hdc, int nXStart, int nYStart, LPCSTR lpszString,int cbString);
 TextOutANextHook_t TextOutANextHook = NULL;
@@ -24,45 +25,54 @@ TEverythingParams *CurParams = NULL;
 
 void ConvertToMatchedWordA(TEverythingParams *TP)
 {
-	if (TP->WordLen>0) {
+	if (TP->WordLen > 0 && TP->WordLen < (int)sizeof(TP->MatchedWordA) && TP->BeginPos >= 0 && TP->BeginPos < (int)sizeof(TP->MatchedWordA)) {
 		int BeginPos;
+		int BufSize;
 		if (!TP->Unicode) {
 			BeginPos = TP->BeginPos;
-			if (BeginPos) {
-				TP->BeginPos = MultiByteToWideChar(CP_ACP, 0, TP->MatchedWordA, BeginPos, TP->MatchedWordW, sizeof(TP->MatchedWordW)/sizeof(TP->MatchedWordW[0]) - 1);
+			if (BeginPos > 0) {
+				BufSize = sizeof(TP->MatchedWordW)/sizeof(TP->MatchedWordW[0]) - 1;
+				TP->BeginPos = MultiByteToWideChar(CP_ACP, 0, TP->MatchedWordA, BeginPos, TP->MatchedWordW, BufSize);
 				if (TP->BeginPos == 0) {
 					TP->WordLen=0;
 					TP->MatchedWordA[0] = '\0';
 					return;
 				}
 			}
-			TP->WordLen = MultiByteToWideChar(CP_ACP, 0, TP->MatchedWordA + BeginPos, TP->WordLen - BeginPos, TP->MatchedWordW + TP->BeginPos, sizeof(TP->MatchedWordW)/sizeof(TP->MatchedWordW[0]) - 1 - TP->BeginPos);
+			BufSize = sizeof(TP->MatchedWordW)/sizeof(TP->MatchedWordW[0]) - 1 - TP->BeginPos;
+			if(BufSize > 0)
+				TP->WordLen = MultiByteToWideChar(CP_ACP, 0, TP->MatchedWordA + BeginPos, TP->WordLen - BeginPos, TP->MatchedWordW + TP->BeginPos, BufSize);
+			else TP->WordLen = 0;
 			if (TP->WordLen == 0) {
 				TP->WordLen=TP->BeginPos;
 				TP->MatchedWordA[TP->WordLen] = '\0';
 				return;
 			}
 			TP->WordLen += TP->BeginPos;
+			if(TP->WordLen >= (int)sizeof(TP->MatchedWordA)) TP->WordLen = sizeof(TP->MatchedWordA) - 1;
 		}
 		BeginPos = TP->BeginPos;
-		if (BeginPos) {
+		if (BeginPos > 0) {
 			wchar_t temp = TP->MatchedWordW[BeginPos];
 			TP->MatchedWordW[BeginPos] = 0;
-			TP->BeginPos = WideCharToMultiByte(CP_UTF8, 0, TP->MatchedWordW, BeginPos + 1, TP->MatchedWordA, sizeof(TP->MatchedWordA), NULL, NULL);
+			TP->BeginPos = WideCharToMultiByte(CP_UTF8, 0, TP->MatchedWordW, BeginPos + 1, TP->MatchedWordA, sizeof(TP->MatchedWordA) - 1, NULL, NULL);
 			TP->MatchedWordW[BeginPos] = temp;
 			TP->BeginPos--;
 			if (TP->BeginPos<=0) {
 				TP->WordLen=0;
 				TP->MatchedWordA[0] = '\0';
 				return;
-			} else if (TP->BeginPos == sizeof(TP->MatchedWordA)-1) {
+			} else if (TP->BeginPos >= (int)sizeof(TP->MatchedWordA)-1) {
 				TP->WordLen=sizeof(TP->MatchedWordA)-1;
 				TP->MatchedWordA[sizeof(TP->MatchedWordA)-1] = '\0';
 				return;
 			}
 		}
 		TP->MatchedWordW[TP->WordLen] = 0;
-		TP->WordLen = WideCharToMultiByte(CP_UTF8, 0, TP->MatchedWordW + BeginPos, TP->WordLen - BeginPos + 1, TP->MatchedWordA + TP->BeginPos, sizeof(TP->MatchedWordA) - TP->BeginPos, NULL, NULL);
+		BufSize = sizeof(TP->MatchedWordA) - TP->BeginPos - 1;
+		if( BufSize > 0)
+			TP->WordLen = WideCharToMultiByte(CP_UTF8, 0, TP->MatchedWordW + BeginPos, TP->WordLen - BeginPos + 1, TP->MatchedWordA + TP->BeginPos, BufSize, NULL, NULL);
+		else TP->WordLen = 0;
 		TP->WordLen--;
 		if (TP->WordLen<=0) {
 			TP->WordLen=TP->BeginPos;
@@ -70,8 +80,10 @@ void ConvertToMatchedWordA(TEverythingParams *TP)
 			return;
 		}
 		TP->WordLen += TP->BeginPos;
+		if(TP->WordLen >= (int)sizeof(TP->MatchedWordA)) TP->WordLen = sizeof(TP->MatchedWordA) - 1;
 		TP->MatchedWordA[TP->WordLen] = '\0';
 	} else {
+		TP->WordLen = 0;
 		TP->MatchedWordA[0] = '\0';
 	}
 }
@@ -104,17 +116,19 @@ static void IterateThroughItems(HWND WND, HMENU menu, POINT *p)
 			info.fMask = MIIM_TYPE | MIIM_SUBMENU;
 			info.cch = 256;
 			info.dwTypeData = malloc(256);
-			GetMenuItemInfo(menu, i, TRUE, &info);
-			if (info.cch>0) {
-				if (info.cch > 255)
-					CurParams->WordLen = 255;
-				else
-					CurParams->WordLen = info.cch;
-				CurParams->Unicode = FALSE;
-				CurParams->WordLen = MyCopyMemory(CurParams->MatchedWordA, info.dwTypeData, CurParams->WordLen);
-				CurParams->BeginPos = 0;
+			if(info.dwTypeData != NULL) {
+				GetMenuItemInfo(menu, i, TRUE, &info);
+				if (info.cch>0) {
+					if (info.cch > 255)
+						CurParams->WordLen = 255;
+					else
+						CurParams->WordLen = info.cch;
+					CurParams->Unicode = FALSE;
+					CurParams->WordLen = MyCopyMemory(CurParams->MatchedWordA, info.dwTypeData, CurParams->WordLen);
+					CurParams->BeginPos = 0;
+				}
+				free(info.dwTypeData);
 			}
-			free(info.dwTypeData);
 			break;
 		}
 	}
@@ -122,6 +136,7 @@ static void IterateThroughItems(HWND WND, HMENU menu, POINT *p)
 
 static void GetWordTextOutHook (TEverythingParams *TP)
 {
+DWORD wso;
 	CurParams = TP;
 	ScreenToClient(TP->WND, &(TP->Pt));
 	if (TP->Pt.y<0) {
@@ -157,12 +172,18 @@ static void GetWordTextOutHook (TEverythingParams *TP)
 		GetClientRect(TP->WND, &UpdateRect);
 		UpdateRect.top = TP->Pt.y;
 		UpdateRect.bottom = TP->Pt.y + 1;
-		CurParams->Active = TRUE;
-		InvalidateRect(TP->WND, &UpdateRect, FALSE);
-		UpdateWindow(TP->WND);
-		CurParams->Active = FALSE;
+		if(!GetUpdateRect(TP->WND, NULL, FALSE)) {
+			CurParams->Active = TRUE;
+			InvalidateRect(TP->WND, &UpdateRect, FALSE);
+			UpdateWindow(TP->WND);
+			CurParams->Active = FALSE;
+		}
 	}
+	wso=WaitForSingleObject(hHookMutex, 10000);
 	CurParams = NULL;
+	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+		ReleaseMutex(hHookMutex);
+	}
 }
 
 char* ExtractFromEverything(HWND WND, POINT Pt, int *BeginPos)
@@ -175,7 +196,11 @@ char* ExtractFromEverything(HWND WND, POINT Pt, int *BeginPos)
 	GetWordTextOutHook(&CParams);
 	ConvertToMatchedWordA(&CParams);
 	*BeginPos = CParams.BeginPos;
-	return _strdup(CParams.MatchedWordA);
+	if(CParams.WordLen>0) {
+		return _strdup(CParams.MatchedWordA);
+	} else {
+		return(NULL);
+	}
 }
 
 static void IsInsidePointA(const HDC DC, int X, int Y, LPCSTR Str, int Count)
@@ -224,6 +249,7 @@ static void IsInsidePointA(const HDC DC, int X, int Y, LPCSTR Str, int Count)
 				BegPos--;
 			if (BegPos < Count - 1)
 				BegPos++;
+			if (BegPos>255) BegPos=255;
 			CurParams->BeginPos = BegPos;
 			if (Count > 255)
 				CurParams->WordLen = 255;
@@ -285,6 +311,7 @@ static void IsInsidePointW(const HDC DC, int X, int Y, LPCWSTR Str, int Count)
 				BegPos--;
 			if (BegPos < Count - 1)
 				BegPos++;
+			if (BegPos>255) BegPos=255;
 			CurParams->BeginPos = BegPos;
 			if (Count > 255)
 				CurParams->WordLen = 255;
@@ -298,46 +325,81 @@ static void IsInsidePointW(const HDC DC, int X, int Y, LPCWSTR Str, int Count)
 
 BOOL WINAPI TextOutACallbackProc(HDC hdc, int nXStart, int nYStart, LPCSTR lpszString, int cbString)
 {
-	if (CurParams && CurParams->Active)
-		IsInsidePointA(hdc, nXStart, nYStart, lpszString, cbString);
+DWORD wso;
+	wso = WaitForSingleObject(hHookMutex, 0);
+	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+		if (CurParams && CurParams->Active)
+			IsInsidePointA(hdc, nXStart, nYStart, lpszString, cbString);
+		ReleaseMutex(hHookMutex);
+	}
 	return TextOutANextHook(hdc, nXStart, nYStart, lpszString, cbString);
 }
 
 BOOL WINAPI TextOutWCallbackProc(HDC hdc, int nXStart, int nYStart, LPCWSTR lpszString, int cbString)
 {
-	if (CurParams && CurParams->Active)
-		IsInsidePointW(hdc, nXStart, nYStart, lpszString, cbString);
+DWORD wso;
+	wso = WaitForSingleObject(hHookMutex, 0);
+	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+		if (CurParams && CurParams->Active)
+			IsInsidePointW(hdc, nXStart, nYStart, lpszString, cbString);
+		ReleaseMutex(hHookMutex);
+	}
 	return TextOutWNextHook(hdc, nXStart, nYStart, lpszString, cbString);
 }
 
 BOOL WINAPI ExtTextOutACallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCSTR lpszString, UINT cbString, CONST INT *lpDx)
 {
-	if (CurParams && CurParams->Active)
-		IsInsidePointA(hdc, nXStart, nYStart, lpszString, cbString);
+DWORD wso;
+	wso = WaitForSingleObject(hHookMutex, 0);
+	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+		if (CurParams && CurParams->Active)
+			IsInsidePointA(hdc, nXStart, nYStart, lpszString, cbString);
+		ReleaseMutex(hHookMutex);
+	}
 	return ExtTextOutANextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
 }
 
 BOOL WINAPI ExtTextOutWCallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCWSTR lpszString, UINT cbString, CONST INT *lpDx)
 {
-	if (CurParams && CurParams->Active)
+DWORD wso;
+	wso = WaitForSingleObject(hHookMutex, 0);
+	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+		if (CurParams && CurParams->Active)
   {
     if ( fuOptions & ETO_GLYPH_INDEX )
     {
-      LPGLYPHSET ranges;
-      WCHAR * allChars, * ptr, * restoredString;
+      LPGLYPHSET ranges = NULL;
+      WCHAR * allChars, * ptr, * restoredString = NULL;
       WORD * allIndices;
       unsigned x;
 
       // Here we have to decode glyph indices back to chars. We do this
       // by tedious and ineffective iteration.
       //
-      ranges = malloc( GetFontUnicodeRanges( hdc, 0 ) );
-      GetFontUnicodeRanges( hdc, ranges );
+      x = GetFontUnicodeRanges( hdc, 0 );
+      if(x != 0) ranges = malloc(x);
+      if(ranges == NULL) {
+		ReleaseMutex(hHookMutex);
+		return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+      }
+      x = GetFontUnicodeRanges( hdc, ranges );
+      if(x == 0) {
+		free(ranges);
+		ReleaseMutex(hHookMutex);
+		return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+      }
 
       // Render up all available chars into one ridiculously big string
 
       allChars = malloc( ( ranges->cGlyphsSupported ) * sizeof( WCHAR ) );
       allIndices = malloc( ( ranges->cGlyphsSupported ) * sizeof( WORD ) );
+
+      if(allChars == NULL || allIndices == NULL) {
+		if(allChars != NULL) free(allChars);
+		if(allIndices != NULL) free(allIndices);
+		ReleaseMutex(hHookMutex);
+		return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+      }
 
       ptr = allChars;
 
@@ -352,30 +414,32 @@ BOOL WINAPI ExtTextOutWCallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOp
 
       // Amazing. Now get glyph indices for this one nice string.
 
-      GetGlyphIndicesW( hdc, allChars, ranges->cGlyphsSupported, allIndices,
-                        GGI_MARK_NONEXISTING_GLYPHS );
+      if(GetGlyphIndicesW(hdc, allChars, ranges->cGlyphsSupported, allIndices, GGI_MARK_NONEXISTING_GLYPHS) != GDI_ERROR) {
 
-      // Fascinating. Now translate our original input string back into
-      // its readable form.
+	      // Fascinating. Now translate our original input string back into
+	      // its readable form.
 
-      restoredString = malloc( cbString * sizeof( WCHAR ) );
+	      restoredString = malloc( cbString * sizeof( WCHAR ) );
 
-      for( x = 0; x < cbString; ++x )
-      {
-        unsigned y;
-        WORD idx = lpszString[ x ];
+	      if(restoredString != NULL) {
+		      for( x = 0; x < cbString; ++x )
+		      {
+		        unsigned y;
+	        	WORD idx = lpszString[ x ];
 
-        for( y = 0; y < ranges->cGlyphsSupported; ++y )
-          if ( allIndices[ y ] == idx )
-          {
-            restoredString[ x ] = allChars[ y ];
-            break;
-          }
-        if ( y == ranges->cGlyphsSupported )
-        {
-          // Not found
-          restoredString[ x ] = L'?';
-        }
+		        for( y = 0; y < ranges->cGlyphsSupported; ++y )
+        		  if ( allIndices[ y ] == idx )
+		          {
+        		    restoredString[ x ] = allChars[ y ];
+	        	    break;
+	        	  }
+		        if ( y == ranges->cGlyphsSupported )
+	        	{
+		          // Not found
+	        	  restoredString[ x ] = L'?';
+		        }
+		      }
+		}
       }
 
       // And we're done.
@@ -384,13 +448,18 @@ BOOL WINAPI ExtTextOutWCallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOp
       free( allChars );
       free( ranges );
 
-      IsInsidePointW( hdc, nXStart, nYStart, restoredString, cbString );
+      if(restoredString != NULL) {
+	      IsInsidePointW( hdc, nXStart, nYStart, restoredString, cbString );
+	      free( restoredString );
+      }
 
-      free( restoredString );
     }
     else
       IsInsidePointW(hdc, nXStart, nYStart, lpszString, cbString);
   }
+	
+		ReleaseMutex(hHookMutex);
+	}
 	return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
 }
 
@@ -450,15 +519,28 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
                        DWORD reason        /* Reason this function is being called. */ ,
                        LPVOID reserved     /* Not used. */ )
 {
+DWORD wso;
     switch (reason)
     {
       case DLL_PROCESS_ATTACH:
+			if(hHookMutex==0) {
+				hHookMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutHookMutex");
+				if(hHookMutex==0) return(FALSE);
+			}
 			//ThTypes_Init();
 			InstallTextOutHooks();
         break;
 
       case DLL_PROCESS_DETACH:
 			UninstallTextOutHooks();
+			if(hHookMutex) {
+				wso = WaitForSingleObject(hHookMutex, 5000);
+				if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+					ReleaseMutex(hHookMutex);
+					CloseHandle(hHookMutex);
+					hHookMutex=0;
+				}
+			}
 			//Thtypes_End();
         break;
 
