@@ -65,7 +65,7 @@ private:
           closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction, showDictBarNamesAction, useSmallIconsInToolbarsAction;
   QToolBar * navToolbar;
-  QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
+  QAction * navBack, * navForward, * navPronounce, * enableScanPopup, * scanPopupSeparator;
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
   QMenu trayIconMenu;

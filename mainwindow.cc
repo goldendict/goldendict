@@ -79,7 +79,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar->addAction( ui.print );
   navToolbar->addAction( ui.saveArticle );
 
-  navToolbar->addSeparator();
+  scanPopupSeparator = navToolbar->addSeparator();
+  scanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
+
   enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
@@ -1061,6 +1063,7 @@ void MainWindow::editPreferences()
 
     cfg.preferences = p;
 
+    scanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
     enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
 
     if ( !cfg.preferences.enableScanPopup )
