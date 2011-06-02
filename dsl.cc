@@ -848,7 +848,13 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"'" ) )
   {
-    result += "<span class=\"dsl_stress\">" + processNodeChildren( node ) + Utf8::encode( wstring( 1, 0x301 ) ) + "</span>";
+    // There are two ways to display the stress: by adding an accent sign or via font styles.
+    // We generate two spans, one with accented data and another one without it, so the
+    // user could pick up the best suitable option.
+    string data = processNodeChildren( node );
+    result += "<span class=\"dsl_stress\"><span class=\"dsl_stress_without_accent\">" + data + "</span>"
+        + "<span class=\"dsl_stress_with_accent\">" + data + Utf8::encode( wstring( 1, 0x301 ) )
+        + "</span></span>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"lang" ) )
