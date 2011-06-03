@@ -45,9 +45,12 @@ win32 {
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
     LIBS += -Lwinlibs/lib
-}
-unix {
 
+    # Enable console in Debug mode on Windows, with useful logging messages
+    Debug:CONFIG += console
+}
+
+unix {
   # This is to keep symbols for backtraces
   QMAKE_CXXFLAGS += -rdynamic
   QMAKE_LFLAGS += -rdynamic
