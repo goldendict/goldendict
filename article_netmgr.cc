@@ -88,7 +88,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     //        getHostBase( refererUrl ).toUtf8().data() );
 
     if ( !req.url().host().endsWith( refererUrl.host() ) &&
-         getHostBase( req.url() ) != getHostBase( refererUrl ) )
+         getHostBase( req.url() ) != getHostBase( refererUrl ) && !req.url().scheme().startsWith("data") )
     {
       printf( "Blocking element %s\n", req.url().toEncoded().data() );
 
