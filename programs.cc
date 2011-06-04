@@ -40,8 +40,23 @@ public:
 
   virtual QIcon getIcon() throw();
 
-  virtual sptr< WordSearchRequest > prefixMatch( wstring const & /*word*/,
-                                                 unsigned long /*maxResults*/ ) throw( std::exception )
+  virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
+                                                 unsigned long maxResults )
+    throw( std::exception );
+
+  virtual sptr< DataRequest > getArticle( wstring const &,
+                                          vector< wstring > const & alts,
+                                          wstring const & )
+    throw( std::exception );
+};
+
+sptr< WordSearchRequest > ProgramsDictionary::prefixMatch( wstring const & word,
+                                                           unsigned long /*maxResults*/ )
+  throw( std::exception )
+{
+  if ( prg.type == Config::Program::PrefixMatch )
+    return new ProgramWordSearchRequest( gd::toQString( word ), prg );
+  else
   {
     sptr< WordSearchRequestInstant > sr = new WordSearchRequestInstant;
 
@@ -49,50 +64,52 @@ public:
 
     return sr;
   }
+}
 
-  virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const & )
-    throw( std::exception );
-};
-
-sptr< DataRequest > ProgramsDictionary::getArticle( wstring const & word,
-                                                 vector< wstring > const &,
-                                                 wstring const & )
+sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
+  wstring const & word, vector< wstring > const &, wstring const & )
   throw( std::exception )
 {
-  if ( prg.type == Config::Program::Audio )
+  switch( prg.type )
   {
-    // Audio results are instantaneous
-    string result;
+    case Config::Program::Audio:
+    {
+      // Audio results are instantaneous
+      string result;
 
-    string wordUtf8( Utf8::encode( word ) );
+      string wordUtf8( Utf8::encode( word ) );
 
-    result += "<table class=\"programs_play\"><tr>";
+      result += "<table class=\"programs_play\"><tr>";
 
-    QUrl url;
-    url.setScheme( "gdprg" );
-    url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( QString::fromUtf8( wordUtf8.c_str() ) );
+      QUrl url;
+      url.setScheme( "gdprg" );
+      url.setHost( QString::fromUtf8( getId().c_str() ) );
+      url.setPath( QString::fromUtf8( wordUtf8.c_str() ) );
 
-    string ref = string( "\"" ) + url.toEncoded().data() + "\"";
+      string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
-    result += addAudioLink( ref, getId() );
+      result += addAudioLink( ref, getId() );
 
-    result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" +
-              Html::escape( wordUtf8 ) + "</a></td>";
-    result += "</tr></table>";
+      result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
+      result += "<td><a href=" + ref + ">" +
+                Html::escape( wordUtf8 ) + "</a></td>";
+      result += "</tr></table>";
 
-    sptr< Dictionary::DataRequestInstant > ret =
-      new Dictionary::DataRequestInstant( true );
+      sptr< DataRequestInstant > ret = new DataRequestInstant( true );
 
-    ret->getData().resize( result.size() );
+      ret->getData().resize( result.size() );
 
-    memcpy( &(ret->getData().front()), result.data(), result.size() );
-    return ret;
+      memcpy( &(ret->getData().front()), result.data(), result.size() );
+      return ret;
+    }
+
+    case Config::Program::Html:
+    case Config::Program::PlainText:
+      return new ProgramDataRequest( gd::toQString( word ), prg );
+
+    default:
+      return new DataRequestInstant( false );
   }
-  else
-    return new ArticleRequest( gd::toQString( word ), prg );
 }
 
 QIcon ProgramsDictionary::getIcon() throw()
@@ -102,9 +119,17 @@ QIcon ProgramsDictionary::getIcon() throw()
 
 }
 
-ArticleRequest::ArticleRequest( QString const & word,
-                                Config::Program const & prg_ ):
-  prg( prg_ ), process( this )
+RunInstance::RunInstance(): process( this )
+{
+  connect( this, SIGNAL(processFinished()), this,
+           SLOT(handleProcessFinished()), Qt::QueuedConnection );
+  connect( &process, SIGNAL(finished(int)), this, SIGNAL(processFinished()));
+  connect( &process, SIGNAL(error(QProcess::ProcessError)), this,
+           SIGNAL(processFinished()) );
+}
+
+bool RunInstance::start( Config::Program const & prg, QString const & word,
+                         QString & error )
 {
   QStringList args = parseCommandLine( prg.commandLine );
 
@@ -116,34 +141,65 @@ ArticleRequest::ArticleRequest( QString const & word,
     for( int x = 0; x < args.size(); ++x )
       args[ x ].replace( "%GDWORD%", word );
 
-    connect( this, SIGNAL(processFinished()), this,
-             SLOT(handleProcessFinished()), Qt::QueuedConnection );
-    connect( &process, SIGNAL(finished(int)), this, SIGNAL(processFinished()));
-    connect( &process, SIGNAL(error(QProcess::ProcessError)), this,
-             SIGNAL(processFinished()) );
-
     process.start( programName, args );
     process.write( word.toLocal8Bit() );
     process.closeWriteChannel();
+
+    return true;
   }
   else
   {
-    setErrorString( tr( "No program name was given." ) );
+    error = tr( "No program name was given." );
+    return false;
+  }
+}
+
+void RunInstance::handleProcessFinished()
+{
+  // It seems that sometimes the process isn't finished yet despite being
+  // signalled as such. So we wait for it here, which should hopefully be
+  // nearly instant.
+  process.waitForFinished();
+
+  QByteArray output = process.readAllStandardOutput();
+
+  QString error;
+  if ( process.exitStatus() != QProcess::NormalExit )
+    error = tr( "The program has crashed." );
+  else
+  if ( int code = process.exitCode() )
+    error = tr( "The program has returned exit code %1." ).arg( code );
+
+  if ( !error.isEmpty() )
+  {
+    QByteArray err = process.readAllStandardError();
+
+    if ( !err.isEmpty() )
+      error += "\n\n" + QString::fromLocal8Bit( err );
+  }
+
+  emit finished( output, error );
+}
+
+ProgramDataRequest::ProgramDataRequest( QString const & word,
+                                        Config::Program const & prg_ ):
+  prg( prg_ )
+{
+  connect( &instance, SIGNAL(finished(QByteArray,QString)),
+           this, SLOT(instanceFinished(QByteArray,QString)) );
+
+  QString error;
+  if ( !instance.start( prg, word, error ) )
+  {
+    setErrorString( error );
     finish();
   }
 }
 
-void ArticleRequest::handleProcessFinished()
+void ProgramDataRequest::instanceFinished( QByteArray output, QString error )
 {
   if ( !isFinished() )
   {
-    // It seems that sometimes the process isn't finished yet despite being
-    // signalled as such. So we wait for it here, which should hopefully be
-    // nearly instant.
-    process.waitForFinished();
-
-    QByteArray output = process.readAllStandardOutput();
-
     if ( !output.isEmpty() )
     {
       string result = "<div class='programs_";
@@ -167,32 +223,56 @@ void ArticleRequest::handleProcessFinished()
       hasAnyData = true;
     }
 
-    QString error;
-    if ( process.exitStatus() != QProcess::NormalExit )
-      error = tr( "The program has crashed." );
-    else
-    if ( int code = process.exitCode() )
-      error = tr( "The program has returned exit code %1." ).arg( code );
-
     if ( !error.isEmpty() )
-    {
-      QByteArray err = process.readAllStandardError();
-
-      if ( !err.isEmpty() )
-        error += "\n\n" + QString::fromLocal8Bit( err );
-
       setErrorString( error );
-    }
 
     finish();
   }
 }
 
-void ArticleRequest::cancel()
+void ProgramDataRequest::cancel()
 {
   finish();
 }
 
+ProgramWordSearchRequest::ProgramWordSearchRequest( QString const & word,
+                                                    Config::Program const & prg_ ):
+  prg( prg_ )
+{
+  connect( &instance, SIGNAL(finished(QByteArray,QString)),
+           this, SLOT(instanceFinished(QByteArray,QString)) );
+
+  QString error;
+  if ( !instance.start( prg, word, error ) )
+  {
+    setErrorString( error );
+    finish();
+  }
+}
+
+void ProgramWordSearchRequest::instanceFinished( QByteArray output, QString error )
+{
+  if ( !isFinished() )
+  {
+    // Handle any Windows artifacts
+    output.replace( "\r\n", "\n" );
+    QStringList result =
+      QString::fromUtf8( output ).split( "\n", QString::SkipEmptyParts );
+
+    for( int x = 0; x < result.size(); ++x )
+      matches.push_back( Dictionary::WordMatch( gd::toWString( result[ x ] ) ) );
+
+    if ( !error.isEmpty() )
+      setErrorString( error );
+
+    finish();
+  }
+}
+
+void ProgramWordSearchRequest::cancel()
+{
+  finish();
+}
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
   Config::Programs const & programs )

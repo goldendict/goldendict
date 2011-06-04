@@ -312,6 +312,7 @@ struct Program
     Audio,
     PlainText,
     Html,
+    PrefixMatch,
     MaxTypeValue
   } type;
   QString id, name, commandLine;

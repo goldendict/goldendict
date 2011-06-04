@@ -721,14 +721,21 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       if ( i->id == id )
       {
         // Found the corresponding program.
-        Programs::ArticleRequest * req = new Programs::ArticleRequest(
-          url.path().mid( 1 ), *i );
+        Programs::RunInstance * req = new Programs::RunInstance;
 
-        connect( req, SIGNAL( finished() ), req, SLOT( deleteLater() ) );
+        connect( req, SIGNAL(finished(QByteArray,QString)),
+                 req, SLOT( deleteLater() ) );
 
-        // Delete the request if it has finished already
-        if ( req->isFinished() )
+        QString error;
+
+        // Delete the request if it fails to start
+        if ( !req->start( *i, url.path().mid( 1 ), error ) )
+        {
           delete req;
+
+          QMessageBox::critical( this, tr( "GoldenDict" ),
+                                 error );
+        }
 
         return;
       }

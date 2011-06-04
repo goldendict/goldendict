@@ -52,7 +52,7 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   // Make sure this thing will be large enough
   ui.programs->setColumnWidth( 1,
     QFontMetrics( QFont() ).width(
-      ProgramTypeEditor::getNameForType( Config::Program::PlainText ) ) + 16 );
+      ProgramTypeEditor::getNameForType( Config::Program::PrefixMatch ) ) + 16 );
   ui.programs->resizeColumnToContents( 2 );
   ui.programs->resizeColumnToContents( 3 );
   ui.programs->setItemDelegate( itemDelegate );
@@ -773,6 +773,8 @@ QString ProgramTypeEditor::getNameForType( int v )
       return tr( "Plain Text" );
     case Config::Program::Html:
       return tr( "Html" );
+    case Config::Program::PrefixMatch:
+      return tr( "Prefix Match" );
     default:
       return tr( "Unknown" );
   }
