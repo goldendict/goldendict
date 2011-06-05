@@ -577,7 +577,7 @@ void BglArticleRequest::fixHebString(string & hebStr) // Hebrew support - conver
 void BglArticleRequest::fixHebArticle(string & hebArticle) // Hebrew support - remove extra chars at the end
 {
   int nulls=hebArticle.size()-1;
-  while ((hebArticle[nulls]<=32 && hebArticle[nulls]>=0) || (hebArticle[nulls]>=65 && hebArticle[nulls]<=90)) //special chars and A-Z
+  while ( nulls>=0 && ((hebArticle[nulls]<=32 && hebArticle[nulls]>=0) || (hebArticle[nulls]>=65 && hebArticle[nulls]<=90))) //special chars and A-Z
   {
     nulls--;
   }
