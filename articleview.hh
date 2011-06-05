@@ -142,7 +142,15 @@ public:
   /// Closes search if it's open and returns true. Returns false if it
   /// wasn't open.
   bool closeSearch();
-  
+
+  /// Jumps to the article specified by the dictionary name,
+  /// by executing a javascript code.
+  void jumpToDictionary( QString const & );
+
+  /// Returns all articles current present in view, as a list of dictionary
+  /// string ids.
+  QStringList getArticlesList();
+
 signals:
 
   void iconChanged( ArticleView *, QIcon const & icon );
@@ -201,9 +209,6 @@ private:
   /// returns 0.
   unsigned getGroup( QUrl const & );
 
-  /// Returns all articles current present in view, as a list of dictionary
-  /// string ids.
-  QStringList getArticlesList();
 
   /// Returns current article in the view, in the form of "gdfrom-xxx" id.
   QString getCurrentArticle();

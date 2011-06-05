@@ -26,6 +26,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIcon( 0 ),
   groupLabel( &searchPaneTitleBar ),
   groupList( &searchPaneTitleBar ),
+  foundInDictsLabel( &dictsPaneTitleBar ),
   escAction( this ),
   focusTranslateLineAction( this ),
   addTabAction( this ),
@@ -67,6 +68,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   searchPaneTitleBar.setLayout( &searchPaneTitleBarLayout );
 
   ui.searchPane->setTitleBarWidget( &searchPaneTitleBar );
+
+  // Make the dictionaries pane's titlebar
+  foundInDictsLabel.setText( tr( "Found in Dictionaries:" ) );
+  dictsPaneTitleBarLayout.addWidget( &foundInDictsLabel );
+  dictsPaneTitleBar.setLayout( &dictsPaneTitleBarLayout );
+  ui.dictsPane->setTitleBarWidget( &dictsPaneTitleBar );
+
+  connect( ui.dictsPane, SIGNAL( visibilityChanged( bool ) ),
+           this, SLOT( dictsPaneVisibilityChanged ( bool ) ) );
 
   // Make the toolbar
   navToolbar = addToolBar( tr( "Navigation" ) );
@@ -154,9 +164,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( focusTranslateLine() ) );
 
   ui.centralWidget->addAction( &escAction );
+  ui.dictsPane->addAction( &escAction );
   ui.searchPaneWidget->addAction( &escAction );
   groupList.addAction( &escAction );
+
   ui.centralWidget->addAction( &focusTranslateLineAction );
+  ui.dictsPane->addAction( &focusTranslateLineAction );
   ui.searchPaneWidget->addAction( &focusTranslateLineAction );
   groupList.addAction( &focusTranslateLineAction );
 
@@ -239,6 +252,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Populate 'View' menu
 
   ui.menuView->addAction( ui.searchPane->toggleViewAction() );
+  ui.menuView->addAction( ui.dictsPane->toggleViewAction() );
   ui.menuView->addSeparator();
   ui.menuView->addAction( dictionaryBar.toggleViewAction() );
   ui.menuView->addAction( navToolbar->toggleViewAction() );
@@ -350,6 +364,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
            this, SLOT( wordListSelectionChanged() ) );
 
+  connect( ui.dictsList, SIGNAL( itemSelectionChanged() ),
+           this, SLOT( dictsListSelectionChanged() ) );
+
   connect( &wordFinder, SIGNAL( updated() ),
            this, SLOT( prefixMatchUpdated() ) );
   connect( &wordFinder, SIGNAL( finished() ),
@@ -360,6 +377,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.translateLine->installEventFilter( this );
   ui.wordList->installEventFilter( this );
+  ui.dictsList->installEventFilter(this);
 
   if ( cfg.mainWindowGeometry.size() )
     restoreGeometry( cfg.mainWindowGeometry );
@@ -961,11 +979,14 @@ void MainWindow::pageLoaded( ArticleView * view )
 
   if ( cfg.preferences.pronounceOnLoadMain )
     pronounce( view );
+
+  updateFoundInDictsList();
 }
 
 void MainWindow::tabSwitched( int )
 {
   updatePronounceAvailability();
+  updateFoundInDictsList();
 }
 
 void MainWindow::tabMenuRequested(QPoint pos)
@@ -993,6 +1014,53 @@ void MainWindow::pronounce( ArticleView * view )
     view->playSound();
   else
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).playSound();
+}
+
+void MainWindow::dictsPaneVisibilityChanged( bool visible )
+{
+  if (visible) {
+    updateFoundInDictsList();
+  }
+}
+
+void MainWindow::updateFoundInDictsList()
+{
+  if (!ui.dictsList->isVisible())
+  {
+    // nothing to do, the list is not visible
+    return;
+  }
+
+  ui.dictsList->clear();
+
+  if ( QWidget * cw = ui.tabWidget->currentWidget() )
+  {
+    ArticleView & view = dynamic_cast< ArticleView & >( *( cw ) );
+
+    QStringList ids = view.getArticlesList();
+
+    for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd(); ++i)
+    {
+      // Find this dictionary
+
+      for( unsigned x = dictionaries.size(); x--; )
+      {
+        if ( dictionaries[ x ]->getId() == i->toUtf8().data() )
+        {
+          QString dictName = QString::fromUtf8( dictionaries[ x ]->getName().c_str() );
+          QListWidgetItem * item =
+              new QListWidgetItem(
+                dictionaries[ x ]->getIcon(),
+                dictName,
+                ui.dictsList, QListWidgetItem::Type );
+          item->setToolTip(dictName);
+
+          ui.dictsList->addItem( item );
+          break;
+        }
+      }
+    }
+  }
 }
 
 void MainWindow::updatePronounceAvailability()
@@ -1343,7 +1411,34 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       // Handle typing events used to initiate new lookups
 
       if ( keyEvent->modifiers() &
-           ( Qt::ControlModifier | Qt::ShiftModifier | Qt::AltModifier | Qt::MetaModifier ) )
+           ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
+        return false; // A non-typing modifier is pressed
+
+      if ( keyEvent->key() == Qt::Key_Space ||
+           keyEvent->key() == Qt::Key_Backspace ||
+           keyEvent->key() == Qt::Key_Tab )
+        return false; // Those key have other uses than to start typing
+                      // or don't make sense
+
+      QString text = keyEvent->text();
+
+      if ( text.size() )
+      {
+        typingEvent( text );
+        return true;
+      }
+    }
+  }
+  else
+  if (obj == ui.dictsList) {
+    if ( ev->type() == /*QEvent::KeyPress*/ 6 )
+    {
+      QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
+
+      // Handle typing events used to initiate new lookups
+
+      if ( keyEvent->modifiers() &
+           ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
         return false; // A non-typing modifier is pressed
 
       if ( keyEvent->key() == Qt::Key_Space ||
@@ -1380,6 +1475,20 @@ void MainWindow::wordListSelectionChanged()
     wordListItemActivated( selected.front() );
 }
 
+void MainWindow::dictsListItemActivated( QListWidgetItem * item )
+{
+  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  view.jumpToDictionary( item->text() );
+}
+
+void MainWindow::dictsListSelectionChanged()
+{
+  QList< QListWidgetItem * > selected = ui.dictsList->selectedItems();
+
+  if ( selected.size() )
+    dictsListItemActivated( selected.front() );
+}
+
 void MainWindow::openLinkInNewTab( QUrl const & url,
                                    QUrl const & referrer,
                                    QString const & fromArticle,
@@ -1404,7 +1513,7 @@ void MainWindow::typingEvent( QString const & t )
     focusTranslateLine();
   else
   {
-    if ( ui.searchPane->isFloating() )
+    if ( ui.searchPane->isFloating() || ui.dictsPane->isFloating() )
       ui.searchPane->activateWindow();
 
     ui.translateLine->setText( t );
@@ -1434,6 +1543,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
   view.showDefinition( inWord, group );
 
   updatePronounceAvailability();
+  updateFoundInDictsList();
 
   // Add to history
 

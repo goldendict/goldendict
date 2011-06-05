@@ -161,7 +161,8 @@ HEADERS += folding.hh \
     country.hh \
     about.hh \
     programs.hh \
-    parsecmdline.hh
+    parsecmdline.hh \
+    dictspanewidget.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \

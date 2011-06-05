@@ -58,6 +58,10 @@ private:
   QLabel groupLabel;
   GroupComboBox groupList;
 
+  QWidget dictsPaneTitleBar;
+  QHBoxLayout dictsPaneTitleBarLayout;
+  QLabel foundInDictsLabel;
+
   /// Fonts saved before words zooming is in effect, so it could be reset back.
   QFont wordListDefaultFont, translateLineDefaultFont;
 
@@ -119,6 +123,8 @@ private:
   void updateMatchResults( bool finished );
 
   void updatePronounceAvailability();
+
+  void updateFoundInDictsList();
 
   /// Updates word search request and active article view in response to
   /// muting or unmuting dictionaries, or showing/hiding dictionary bar.
@@ -231,6 +237,11 @@ private slots:
 
   void wordListItemActivated( QListWidgetItem * );
   void wordListSelectionChanged();
+
+  void dictsListItemActivated( QListWidgetItem * );
+  void dictsListSelectionChanged();
+
+  void dictsPaneVisibilityChanged ( bool );
 
   /// Creates a new tab, which is to be populated then with some content.
   ArticleView * createNewTab( bool switchToIt,

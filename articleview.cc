@@ -366,6 +366,32 @@ QString ArticleView::getCurrentArticle()
     return QString();
 }
 
+void ArticleView::jumpToDictionary(QString const & dictName)
+{
+  // Find the dictionary with the specified name
+
+  for( unsigned x = allDictionaries.size(); x--; )
+  {
+
+    if ( QString::fromUtf8( allDictionaries[ x ]->getName().c_str()) == dictName )
+    {
+
+      // Check that one of the articles belongs to the specified dictionary.
+
+      QStringList ids = getArticlesList();
+      for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd(); ++i )
+      {
+        if ( allDictionaries[ x ]->getId() == i->toUtf8().data() ) {
+          setCurrentArticle( "gdfrom-" + *i, true );
+          break;
+        }
+      }
+
+      break;
+    }
+  }
+}
+
 void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 {
   if ( !id.startsWith( "gdfrom-" ) )
