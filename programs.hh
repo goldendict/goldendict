@@ -35,7 +35,7 @@ public:
 
 signals:
   // Connect to this signal to get run results
-  void finished( QByteArray stdout, QString error );
+  void finished( QByteArray output, QString error );
 
   // Used internally only
 signals:
