@@ -1053,6 +1053,8 @@ void MainWindow::updateFoundInDictsList()
                 dictionaries[ x ]->getIcon(),
                 dictName,
                 ui.dictsList, QListWidgetItem::Type );
+          item->setData(Qt::UserRole,
+                QVariant( QString::fromUtf8(dictionaries[ x ]->getId().c_str() ) ) );
           item->setToolTip(dictName);
 
           ui.dictsList->addItem( item );
@@ -1409,6 +1411,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       }
 
       // Handle typing events used to initiate new lookups
+      // TODO: refactor to eliminate duplication (see below)
 
       if ( keyEvent->modifiers() &
            ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
@@ -1436,6 +1439,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
       // Handle typing events used to initiate new lookups
+      // TODO: refactor to eliminate duplication (see above)
 
       if ( keyEvent->modifiers() &
            ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
@@ -1478,7 +1482,8 @@ void MainWindow::wordListSelectionChanged()
 void MainWindow::dictsListItemActivated( QListWidgetItem * item )
 {
   ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
-  view.jumpToDictionary( item->text() );
+  QString id = item->data( Qt::UserRole ).toString();
+  view.jumpToDictionary( id );
 }
 
 void MainWindow::dictsListSelectionChanged()

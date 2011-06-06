@@ -143,7 +143,7 @@ public:
   /// wasn't open.
   bool closeSearch();
 
-  /// Jumps to the article specified by the dictionary name,
+  /// Jumps to the article specified by the dictionary id,
   /// by executing a javascript code.
   void jumpToDictionary( QString const & );
 

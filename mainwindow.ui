@@ -246,7 +246,7 @@
   </widget>
   <widget class="QDockWidget" name="dictsPane">
    <property name="windowTitle">
-    <string>Dictionaries Pane</string>
+    <string>Results Navigation Pane</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
