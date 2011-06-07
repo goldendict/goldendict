@@ -499,6 +499,18 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
   if ( obj == ui.definition )
   {
+    if ( ev->type() == QEvent::MouseButtonPress ) {
+      QMouseEvent * event = static_cast< QMouseEvent * >( ev );
+      if ( event->button() == Qt::XButton1 ) {
+        back();
+        return true;
+      }
+      if ( event->button() == Qt::XButton2 ) {
+        forward();
+        return true;
+      }
+    }
+    else
     if ( ev->type() == QEvent::KeyPress )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );

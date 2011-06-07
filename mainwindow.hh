@@ -149,6 +149,9 @@ private:
 
   void updateCurrentGroupProperty();
 
+  /// Handles backward and forward mouse buttons and
+  /// returns true if the event is handled.
+  bool handleBackForwardMouseButtons(QMouseEvent *ev);
 
 private slots:
 
