@@ -790,6 +790,23 @@ void ArticleView::updateMutedContents()
   }
 }
 
+void ArticleView::back()
+{
+  // Don't allow navigating back to page 0, which is usually the initial
+  // empty page
+  if ( ui.definition->history()->currentItemIndex() > 1 )
+  {
+    saveHistoryUserData();
+    ui.definition->back();
+  }
+}
+
+void ArticleView::forward()
+{
+  saveHistoryUserData();
+  ui.definition->forward();
+}
+
 bool ArticleView::hasSound()
 {
   return ui.definition->page()->mainFrame()->

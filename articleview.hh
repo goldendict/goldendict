@@ -104,12 +104,10 @@ public:
 public slots:
 
   /// Goes back in history
-  void back()
-  { saveHistoryUserData(); ui.definition->back(); }
+  void back();
 
   /// Goes forward in history
-  void forward()
-  { saveHistoryUserData(); ui.definition->forward(); }
+  void forward();
 
 public:
 
