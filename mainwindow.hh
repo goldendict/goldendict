@@ -126,6 +126,8 @@ private:
 
   void updateFoundInDictsList();
 
+  void updateBackForwardButtons();
+
   /// Updates word search request and active article view in response to
   /// muting or unmuting dictionaries, or showing/hiding dictionary bar.
   void applyMutedDictionariesState();

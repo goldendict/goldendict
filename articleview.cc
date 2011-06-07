@@ -790,11 +790,23 @@ void ArticleView::updateMutedContents()
   }
 }
 
+bool ArticleView::canGoBack()
+{
+  // First entry in a history is always an empty page,
+  // so we skip it.
+  return ui.definition->history()->currentItemIndex() > 1;
+}
+
+bool ArticleView::canGoForward()
+{
+  return ui.definition->history()->canGoForward();
+}
+
 void ArticleView::back()
 {
   // Don't allow navigating back to page 0, which is usually the initial
   // empty page
-  if ( ui.definition->history()->currentItemIndex() > 1 )
+  if ( canGoBack() )
   {
     saveHistoryUserData();
     ui.definition->back();

@@ -101,6 +101,9 @@ public:
   /// The function reloads content if the change affects it.
   void updateMutedContents();
 
+  bool canGoBack();
+  bool canGoForward();
+
 public slots:
 
   /// Goes back in history

@@ -975,6 +975,8 @@ void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
 
 void MainWindow::pageLoaded( ArticleView * view )
 {
+  updateBackForwardButtons();
+
   updatePronounceAvailability();
 
   if ( cfg.preferences.pronounceOnLoadMain )
@@ -985,6 +987,7 @@ void MainWindow::pageLoaded( ArticleView * view )
 
 void MainWindow::tabSwitched( int )
 {
+  updateBackForwardButtons();
   updatePronounceAvailability();
   updateFoundInDictsList();
 }
@@ -1062,6 +1065,16 @@ void MainWindow::updateFoundInDictsList()
         }
       }
     }
+  }
+}
+
+void MainWindow::updateBackForwardButtons()
+{
+  if ( QWidget * cw = ui.tabWidget->currentWidget() )
+  {
+    ArticleView & view = dynamic_cast< ArticleView & >( *( cw ) );
+    navBack->setEnabled(view.canGoBack());
+    navForward->setEnabled(view.canGoForward());
   }
 }
 
@@ -1554,6 +1567,8 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
   history.addItem( History::Item( group, inWord.trimmed() ) );
   history.save();
+
+  updateBackForwardButtons();
 
   #if 0
   QUrl req;
