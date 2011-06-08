@@ -548,6 +548,9 @@ public:
     isCancelled.ref();
   }
 
+  void fixHebString(string & hebStr); // Hebrew support
+  void fixHebArticle(string & hebArticle); // Hebrew support
+
   ~BglArticleRequest()
   {
     isCancelled.ref();
@@ -560,6 +563,27 @@ void BglArticleRequestRunnable::run()
   r.run();
 }
 
+void BglArticleRequest::fixHebString(string & hebStr) // Hebrew support - convert non-unicode to unicode
+{
+  wstring hebWStr=Utf8::decode(hebStr);
+  for (unsigned int i=0; i<hebWStr.size();i++)
+  {
+    if (hebWStr[i]>=224 && hebWStr[i]<=250) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8
+        hebWStr[i]+=1488-224; // Convert to Hebrew unicode
+  }
+  hebStr=Utf8::encode(hebWStr);
+}
+
+void BglArticleRequest::fixHebArticle(string & hebArticle) // Hebrew support - remove extra chars at the end
+{
+  int nulls=hebArticle.size()-1;
+  while ( nulls>=0 && ((hebArticle[nulls]<=32 && hebArticle[nulls]>=0) || (hebArticle[nulls]>=65 && hebArticle[nulls]<=90))) //special chars and A-Z
+  {
+    nulls--;
+  }
+    hebArticle.erase (hebArticle.begin()+nulls+1, hebArticle.end());
+}
+
 void BglArticleRequest::run()
 {
   if ( isCancelled )
@@ -569,6 +593,8 @@ void BglArticleRequest::run()
   }
 
   vector< WordArticleLink > chain = dict.findArticles( word );
+
+  static Language::Id hebrew = LangCoder::code2toInt( "he" ); // Hebrew support
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
@@ -616,6 +642,15 @@ void BglArticleRequest::run()
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( removePostfix( headword ) ) );
 
+	// Hebrew support - fix Hebrew text
+    if (dict.idxHeader.langFrom == hebrew)
+    {
+        displayedHeadword= displayedHeadword.size() ? displayedHeadword : headword;
+        fixHebString(articleText);
+        fixHebArticle(articleText);
+        fixHebString(displayedHeadword);
+    }
+
     string const & targetHeadword = displayedHeadword.size() ?
                                     displayedHeadword : headword;
 
@@ -652,12 +687,12 @@ void BglArticleRequest::run()
                    "</font>""</font>""</font>""</font>""</font>""</font>"
                    "</b></b></b></b></b></b></b></b>"
                    "</i></i></i></i></i></i></i></i>";
-
-  static Language::Id hebrew = LangCoder::code2toInt( "he" );
-
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
-      result += "<h3>";
+      if (dict.idxHeader.langFrom == hebrew) // Hebrew support - format as RTL
+        result += "<h3 style=\"text-align:right;direction:rtl\">";
+      else
+        result += "<h3>";
       result += postfixToSuperscript( i->second.first );
       result += "</h3>";
       if ( dict.idxHeader.langTo == hebrew )
@@ -666,10 +701,14 @@ void BglArticleRequest::run()
         result +=  i->second.second ;
       result += cleaner;
   }
+
  
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
-      result += "<h3>";
+      if (dict.idxHeader.langFrom == hebrew) // Hebrew support - format as RTL
+        result += "<h3 style=\"text-align:right;direction:rtl\">";
+      else
+        result += "<h3>";
       result += postfixToSuperscript( i->second.first );
       result += "</h3>";
       if ( dict.idxHeader.langTo == hebrew )
