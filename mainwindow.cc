@@ -1425,7 +1425,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       }
     }
     else
-    if ( ev->type() == QEvent::FocusIn ) {
+    if ( ev->type() == /*QEvent::FocusIn*/ 8 ) {
       QFocusEvent * focusEvent = static_cast< QFocusEvent * >( ev );
 
       // select all on mouse click
