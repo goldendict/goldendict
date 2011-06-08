@@ -377,7 +377,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.translateLine->installEventFilter( this );
   ui.wordList->installEventFilter( this );
-  ui.dictsList->installEventFilter(this);
+  ui.wordList->viewport()->installEventFilter( this );
+  ui.dictsList->installEventFilter( this );
+  ui.dictsList->viewport()->installEventFilter( this );
 
   if ( cfg.mainWindowGeometry.size() )
     restoreGeometry( cfg.mainWindowGeometry );
@@ -450,10 +452,17 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
 void MainWindow::mousePressEvent( QMouseEvent *event)
 {
+
+  if (handleBackForwardMouseButtons( event ) )
+  {
+    return;
+  }
+
   if (event->button() != Qt::MidButton)
     return QMainWindow::mousePressEvent(event);
+
   // middle clicked
-    QString subtype = "plain";
+  QString subtype = "plain";
 
     QString str = QApplication::clipboard()->text(subtype,
       QClipboard::Selection);
@@ -1381,8 +1390,27 @@ void MainWindow::applyMutedDictionariesState()
   view.updateMutedContents();
 }
 
+bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
+  if ( event->button() == Qt::XButton1 ) {
+    backClicked();
+    return true;
+  }
+  else
+  if ( event->button() == Qt::XButton2 ) {
+    forwardClicked();
+    return true;
+  }
+  else
+    return false;
+}
+
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
+  if ( ev->type() == QEvent::MouseButtonPress ) {
+    QMouseEvent * event = static_cast< QMouseEvent * >( ev );
+    return handleBackForwardMouseButtons( event );
+  }
+
   if ( obj == ui.translateLine )
   {
     if ( ev->type() == /*QEvent::KeyPress*/ 6 )
