@@ -1,8 +1,9 @@
 #include "TextOutSpy.h"
 #include "ThTypes.h"
-
+#include "GDDataTranfer.h"
 
 const int MOUSEOVER_INTERVAL = 300;
+const int REQUEST_MESSAGE_INTERVAL = 500;
 const int WM_MY_SHOW_TRANSLATION = WM_USER + 301;
 
 HINSTANCE g_hInstance = NULL;
@@ -11,19 +12,45 @@ HINSTANCE hGetWordLib = 0;
 UINT_PTR TimerID = 0;
 typedef void (*GetWordProc_t)(TCurrentMode *);
 GetWordProc_t GetWordProc = NULL;
+GDDataStruct gds;
+UINT uGdAskMessage;
+WCHAR Buffer[256];
 
-static HWND GetWindowFromPoint(POINT pt) {
+static HWND GetWindowFromPoint(POINT pt)
+{
 HWND WndParent,WndChild;
 	WndParent = WindowFromPoint(pt);
 	if(WndParent == NULL) return WndParent;
 	ScreenToClient(WndParent, &pt);
-	WndChild=RealChildWindowFromPoint(WndParent, pt);
+	WndChild = RealChildWindowFromPoint(WndParent, pt);
 	if(WndChild == NULL) return WndParent;
 	return WndChild;
 };
 
 static void SendWordToServer()
 {
+DWORD SendMsgAnswer;
+	if(uGdAskMessage) {
+		LRESULT lr;
+		int n;
+		gds.dwSize = sizeof(gds);
+		gds.cwData = Buffer;
+		gds.dwMaxLength = sizeof(Buffer) / sizeof(Buffer[0]);
+		Buffer[0] = 0;
+		gds.hWnd = GlobalData->LastWND;
+		gds.Pt = GlobalData->LastPt;
+		lr = SendMessageTimeout(gds.hWnd, uGdAskMessage, 0, (LPARAM)&gds, SMTO_ABORTIFHUNG, REQUEST_MESSAGE_INTERVAL, &SendMsgAnswer);
+		if(lr != 0 && SendMsgAnswer != 0) {
+			n = WideCharToMultiByte(CP_UTF8, 0, gds.cwData, lstrlenW(gds.cwData), GlobalData->CurMod.MatchedWord, sizeof(GlobalData->CurMod.MatchedWord) - 1, 0, 0);
+			GlobalData->CurMod.MatchedWord[n] = 0;
+			GlobalData->CurMod.WordLen = n;
+			GlobalData->CurMod.BeginPos = 0;
+			if(n > 0) {
+				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+			}
+			return;
+		}
+	}
 	if (hGetWordLib == 0) {
 		hGetWordLib = LoadLibrary(GlobalData->LibName);
 		if (hGetWordLib) {
@@ -38,7 +65,6 @@ static void SendWordToServer()
 		GlobalData->CurMod.Pt = GlobalData->LastPt;
 		GetWordProc(&(GlobalData->CurMod));
 		if (GlobalData->CurMod.WordLen > 0) {
-			DWORD SendMsgAnswer;
 			SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
 		}
 	}
@@ -142,6 +168,7 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
 				if(hSynhroMutex==0) return(FALSE);
 			}
 			ThTypes_Init();
+			uGdAskMessage = RegisterWindowMessage(GD_MESSAGE_NAME);
         break;
 
       case DLL_PROCESS_DETACH:
