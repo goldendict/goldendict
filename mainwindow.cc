@@ -468,7 +468,7 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
       QClipboard::Selection);
   ui.translateLine->setText(str);
 
-        QKeyEvent ev(QEvent::Type(6)/*QEvent::KeyPress*/, Qt::Key_Enter,
+        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Enter,
            Qt::NoModifier);
         QApplication::sendEvent(ui.translateLine, &ev);
 }
@@ -1413,7 +1413,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
   if ( obj == ui.translateLine )
   {
-    if ( ev->type() == /*QEvent::KeyPress*/ 6 )
+    if ( ev->type() == QEvent::KeyPress )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -1425,7 +1425,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       }
     }
     else
-    if ( ev->type() == /*QEvent::FocusIn*/ 8 ) {
+    if ( ev->type() == QEvent::FocusIn ) {
       QFocusEvent * focusEvent = static_cast< QFocusEvent * >( ev );
 
       // select all on mouse click
@@ -1438,7 +1438,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   else
   if ( obj == ui.wordList )
   {
-    if ( ev->type() == /*QEvent::KeyPress*/ 6 )
+    if ( ev->type() == QEvent::KeyPress )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -1485,7 +1485,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   }
   else
   if (obj == ui.dictsList) {
-    if ( ev->type() == /*QEvent::KeyPress*/ 6 )
+    if ( ev->type() == QEvent::KeyPress )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
