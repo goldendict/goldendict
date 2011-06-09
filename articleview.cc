@@ -971,7 +971,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd();
        ++i, ++refsAdded )
   {
-    if ( refsAdded == 20 )
+    if ( refsAdded == cfg.maxDictionaryRefsInContextMenu )
     {
       // Enough! Or the menu would become too large.
       menu.addAction( new QAction( ".........", &menu ) );
