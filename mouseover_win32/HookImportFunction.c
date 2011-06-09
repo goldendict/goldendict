@@ -108,6 +108,7 @@ BOOL HookAPI(LPCSTR szImportModule, LPCSTR szFunc, PROC paHookFuncs, PROC* paOri
 	HANDLE hSnapshot;
 	MODULEENTRY32 me;
 	BOOL bOk;
+	DWORD err;
 
 	ZeroMemory(&me,sizeof(me));
 	me.dwSize=sizeof(me);
@@ -115,13 +116,21 @@ BOOL HookAPI(LPCSTR szImportModule, LPCSTR szFunc, PROC paHookFuncs, PROC* paOri
 	if ((szImportModule == NULL) || (szFunc == NULL)) {
 		return FALSE;
 	}
-	
-	hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE,0);
-	
+
+	do {	
+		hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE,0);
+		if(hSnapshot != INVALID_HANDLE_VALUE) break;
+		err = GetLastError();
+		if(err == ERROR_BAD_LENGTH) Sleep(100);
+	} while(err == ERROR_BAD_LENGTH);
+
+	if(hSnapshot == INVALID_HANDLE_VALUE) return FALSE;
+
 	bOk = Module32First(hSnapshot,&me);
 	while (bOk) {
 		HookImportFunction(me.hModule, szImportModule, szFunc, paHookFuncs, paOrigFuncs);
 		bOk = Module32Next(hSnapshot,&me);
 	}
+	CloseHandle(hSnapshot);
 	return TRUE;
 }
