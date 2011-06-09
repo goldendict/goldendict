@@ -19,10 +19,13 @@
 #include "scanpopup.hh"
 #include "articleview.hh"
 #include "wordfinder.hh"
-#include "hotkeywrapper.hh"
 #include "dictionarybar.hh"
 #include "history.hh"
 #include "hotkeywrapper.hh"
+
+#ifdef Q_WS_X11
+#include <fixx11h.h>
+#endif
 
 using std::string;
 using std::vector;
