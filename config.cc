@@ -666,6 +666,9 @@ Class load() throw( exError )
 
   c.usingSmallIconsInToolbars = ( root.namedItem( "usingSmallIconsInToolbars" ).toElement().text() == "1" );
 
+  if ( !root.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
+    c.maxDictionaryRefsInContextMenu = root.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
+
   return c;
 }
 
@@ -1195,6 +1198,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "usingSmallIconsInToolbars" );
     opt.appendChild( dd.createTextNode( c.usingSmallIconsInToolbars ? "1" : "0" ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "maxDictionaryRefsInContextMenu" );
+    opt.appendChild( dd.createTextNode( QString::number( c.maxDictionaryRefsInContextMenu ) ) );
     root.appendChild( opt );
   }
 
