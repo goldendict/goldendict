@@ -377,8 +377,11 @@ struct Class
 
   bool usingSmallIconsInToolbars;
 
+  unsigned short maxDictionaryRefsInContextMenu;
+
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
-           pinPopupWindow( false ), showingDictBarNames( false ), usingSmallIconsInToolbars( false )
+           pinPopupWindow( false ), showingDictBarNames( false ),
+           usingSmallIconsInToolbars( false ), maxDictionaryRefsInContextMenu( 20 )
   {}
 };
 
