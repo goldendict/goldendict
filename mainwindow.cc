@@ -1383,11 +1383,14 @@ void MainWindow::applyMutedDictionariesState()
   // Redo the current search request
   translateInputChanged( ui.translateLine->text() );
 
-  // Update active article view
-  ArticleView & view =
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  if ( QWidget * tabWidget = ui.tabWidget->currentWidget() )
+  {
+    // Update active article view
+    ArticleView & view =
+      dynamic_cast< ArticleView & >( *tabWidget );
 
-  view.updateMutedContents();
+    view.updateMutedContents();
+  }
 }
 
 bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
