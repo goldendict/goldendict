@@ -989,6 +989,10 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
                 allDictionaries[ x ]->getIcon(),
                 QString::fromUtf8( allDictionaries[ x ]->getName().c_str() ),
                 &menu );
+        // Force icons in menu on all platfroms,
+        // since without them it will be much harder
+        // to find things.
+        action->setIconVisibleInMenu( true );
 
         menu.addAction( action );
 
