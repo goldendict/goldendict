@@ -2005,6 +2005,7 @@ void MainWindow::historyChanged()
     QIcon icon = group ? group->makeIcon() : QIcon();
 
     QAction * action = ui.menuHistory->addAction( icon, i->word );
+    action->setIconVisibleInMenu( true );
 
     action->setData( x );
   }

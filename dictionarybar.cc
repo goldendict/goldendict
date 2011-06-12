@@ -94,6 +94,9 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
     action->setCheckable( true );
     action->setChecked( (*i)->isChecked() );
     action->setData( QVariant::fromValue( (void *)*i ) );
+    // Force "icon in menu" on all platforms, for
+    // usability reasons.
+    action->setIconVisibleInMenu( true );
   }
 
   if ( !menu.isEmpty() )
