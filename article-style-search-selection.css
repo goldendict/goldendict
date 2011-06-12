@@ -1,0 +1,10 @@
+/* This stylesheet is used only to highligh current selection when doing a search. 
+   It's programatically set/unset to restore default selection color (e.g. blue under Windows, orange under Ubuntu) */
+
+/* highlight/select color in Windows when a widget is inactive is nearly impossible to read (light gray).
+ * then change it to green to use with the find option. */
+::selection {
+        background: #23DC23;
+        color: white;
+}
+

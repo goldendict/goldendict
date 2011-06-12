@@ -200,6 +200,8 @@ private slots:
   void on_searchText_textEdited();
   void on_searchText_returnPressed();
   void on_searchCloseButton_clicked();
+  void on_searchCaseSensitive_clicked();
+  void on_highlightAllButton_clicked();
 
   /// Handles the double-click from the definition.
   void doubleClicked();
@@ -244,7 +246,7 @@ private:
 
   bool eventFilter( QObject * obj, QEvent * ev );
 
-  void performFindOperation( bool restart, bool backwards );
+  void performFindOperation( bool restart, bool backwards, bool checkHighlight = false );
 
   void reloadStyleSheet();
 

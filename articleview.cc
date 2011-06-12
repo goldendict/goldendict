@@ -214,6 +214,9 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   // Any search opened is probably irrelevant now
   closeSearch();
 
+  // Clear highlight all button selection
+  ui.highlightAllButton->setChecked(false);
+
   ui.definition->load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
@@ -1291,6 +1294,16 @@ void ArticleView::on_searchCloseButton_clicked()
   closeSearch();
 }
 
+void ArticleView::on_searchCaseSensitive_clicked()
+{
+  performFindOperation( false, false, true );
+}
+
+void ArticleView::on_highlightAllButton_clicked()
+{
+  performFindOperation( false, false, true );
+}
+
 void ArticleView::doubleClicked()
 {
   // We might want to initiate translation of the selected word
@@ -1317,19 +1330,40 @@ void ArticleView::doubleClicked()
 }
 
 
-void ArticleView::performFindOperation( bool restart, bool backwards )
+void ArticleView::performFindOperation( bool restart, bool backwards, bool checkHighlight )
 {
   QString text = ui.searchText->text();
 
-  if ( restart )
+  //highlight in a non-default color current selection
+  if( ui.definition->settings()->userStyleSheetUrl().isEmpty() )
+    ui.definition->settings()->setUserStyleSheetUrl(QUrl::fromLocalFile( ":/article-style-search-selection.css" ));
+
+  if ( restart || checkHighlight )
   {
-    // Anyone knows how we reset the search position?
-    // For now we resort to this hack:
-    if ( ui.definition->selectedText().size() )
-    {
-      ui.definition->page()->currentFrame()->
-             evaluateJavaScript( "window.getSelection().removeAllRanges();" );
+    if( restart ) {
+      // Anyone knows how we reset the search position?
+      // For now we resort to this hack:
+      if ( ui.definition->selectedText().size() )
+      {
+        ui.definition->page()->currentFrame()->
+               evaluateJavaScript( "window.getSelection().removeAllRanges();" );
+      }
     }
+
+    QWebPage::FindFlags f( 0 );
+
+    if ( ui.searchCaseSensitive->isChecked() )
+      f |= QWebPage::FindCaseSensitively;
+
+    f |= QWebPage::HighlightAllOccurrences;
+
+    ui.definition->findText( "", f );
+
+    if( ui.highlightAllButton->isChecked() )
+      ui.definition->findText( text, f );
+
+    if( checkHighlight )
+      return;
   }
 
   QWebPage::FindFlags f( 0 );

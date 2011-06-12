@@ -18,6 +18,7 @@
         <file>icons/warning.png</file>
         <file>article-style.css</file>
         <file>article-style-print.css</file>
+        <file>article-style-search-selection.css</file>
         <file>qt-style.css</file>
         <file>icons/icon32_dsl.png</file>
         <file>icons/icon32_stardict.png</file>
@@ -44,5 +45,6 @@
         <file>icons/forvo.png</file>
         <file>icons/windows-list.png</file>
         <file>CREDITS.txt</file>
+        <file>icons/highlighter.png</file>
     </qresource>
 </RCC>

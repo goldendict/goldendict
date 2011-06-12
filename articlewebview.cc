@@ -6,6 +6,10 @@
 
 void ArticleWebView::mousePressEvent( QMouseEvent * event )
 {
+  //restore default color for selection
+  if( !this->settings()->userStyleSheetUrl().isEmpty() )
+    this->settings()->setUserStyleSheetUrl(QUrl());
+
   if ( event->buttons() & Qt::MidButton )
     midButtonPressed = true;
 
