@@ -42,6 +42,9 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   ui.tabs->addTab( orderAndProps.get(), QIcon(":/icons/book.png"), tr( "&Dictionaries" ) );
   ui.tabs->addTab( groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
 
+  connect( ui.buttons, SIGNAL( clicked( QAbstractButton * ) ),
+           this, SLOT( buttonBoxClicked( QAbstractButton * ) ) );
+
   connect( &sources, SIGNAL( rescan() ), this, SLOT( rescanSources() ) );
 }
 
@@ -56,7 +59,7 @@ void EditDictionaries::editGroup( unsigned id )
   }
 }
 
-void EditDictionaries::accept()
+void EditDictionaries::save()
 {
   Config::Groups newGroups = groups->getGroups();
   Config::Group newOrder = orderAndProps->getCurrentDictionaryOrder();
@@ -73,7 +76,11 @@ void EditDictionaries::accept()
     cfg.dictionaryOrder = newOrder;
     cfg.inactiveDictionaries = newInactive;
   }
+}
 
+void EditDictionaries::accept()
+{
+  save();
   QDialog::accept();
 }
 
@@ -130,6 +137,16 @@ void EditDictionaries::on_tabs_currentChanged( int index )
 void EditDictionaries::rescanSources()
 {
   acceptChangedSources( true );
+}
+
+void EditDictionaries::buttonBoxClicked( QAbstractButton * button )
+{
+  if (ui.buttons->buttonRole(button) == QDialogButtonBox::ApplyRole) {
+    if ( isSourcesChanged() ) {
+      acceptChangedSources( true );
+    }
+    save();
+  }
 }
 
 bool EditDictionaries::isSourcesChanged() const

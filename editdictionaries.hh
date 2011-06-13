@@ -43,6 +43,8 @@ private slots:
 
   void on_tabs_currentChanged( int index );
 
+  void buttonBoxClicked( QAbstractButton * button );
+
   void rescanSources();
 
 private:
@@ -50,6 +52,8 @@ private:
   bool isSourcesChanged() const;
 
   void acceptChangedSources( bool rebuildGroups );
+
+  void save();
   
 private:
    
