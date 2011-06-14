@@ -1055,7 +1055,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         if( synFileName.empty() )
         {
           if ( ifo.synwordcount )
-            throw exNoSynFile( *i );
+          {
+            printf( "Warning: dictionary has synwordcount specified, but no "
+                    "corresponding .syn file was found\n" );
+            ifo.synwordcount = 0;  // Pretend it wasn't there
+          }
         }
         else
         if ( !ifo.synwordcount )
