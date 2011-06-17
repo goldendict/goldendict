@@ -33,6 +33,8 @@ signals:
 
   /// Emitted when there was some text under cursor which was hovered over.
   void hovered( QString const & );
+  /// Ask for need to handle word under cursor
+  void askNeedWord( bool * );
 
 private:
 

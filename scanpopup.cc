@@ -151,6 +151,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   mouseGrabPollTimer.setInterval( 10 );
   connect( &mouseGrabPollTimer, SIGNAL( timeout() ),
            this, SLOT(mouseGrabPoll())  );
+
+  connect( &MouseOver::instance(), SIGNAL( askNeedWord( bool * ) ),
+           this, SLOT( needHandleWord( bool * ) ), Qt::DirectConnection );
 }
 
 ScanPopup::~ScanPopup()
@@ -762,4 +765,9 @@ void ScanPopup::mutedDictionariesChanged()
 {
   if ( dictionaryBar.toggleViewAction()->isChecked() )
     definition->updateMutedContents();
+}
+
+void ScanPopup::needHandleWord( bool *pNeed )
+{
+  *pNeed = !cfg.preferences.enableScanPopupModifiers || checkModifiersPressed( cfg.preferences.scanPopupModifiers );
 }

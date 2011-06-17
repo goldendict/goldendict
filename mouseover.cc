@@ -90,6 +90,12 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
 {
   if ( msg == WM_MY_SHOW_TRANSLATION )
   {
+    // Don't handle word without necessity
+
+    bool bNeedHandle = false;
+    emit instance().askNeedWord( &bNeedHandle );
+    if( !bNeedHandle ) return 0;
+
     int wordSeqPos;
     QString wordSeq;
 
