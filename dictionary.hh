@@ -34,6 +34,7 @@ DEF_EX( Ex, "Dictionary error", std::exception )
 DEF_EX( exIndexOutOfRange, "The supplied index is out of range", Ex )
 DEF_EX( exSliceOutOfRange, "The requested data slice is out of range", Ex )
 DEF_EX( exRequestUnfinished, "The request hasn't yet finished", Ex )
+DEF_EX( exCrawlingNotSupported, "This dictionary does not support crawling", Ex )
 
 /// When you request a search to be performed in a dictionary, you get
 /// this structure in return. It accumulates search results over time.
@@ -248,6 +249,29 @@ enum Feature
 Q_DECLARE_FLAGS( Features, Feature )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Features )
 
+/// This class allows iterating through the dictionary, allowing for its
+/// complete traversal. This is handy for full text search indexing or for
+/// creating complete dictionary dumps.
+class Crawler
+{
+public:
+
+  /// Returns the version of this crawler. This value should start with 1, and
+  /// should be bumped up each time the crawler code changes and the crawling
+  /// results can be different from that obtained before.
+  virtual unsigned getVersion() throw()=0;
+
+  /// Fetches the next article from the dictionary. If there's one available,
+  /// its headword and alt forms are stored in the 'headwords' array,
+  /// its html body in 'body', and true is returned. Otherwise this function
+  /// returns false, and the traversal is over.
+  virtual bool fetchNextArticle( vector< string > & headwords, string & body )
+    throw( std::exception )=0;
+
+  virtual ~Crawler()
+  {}
+};
+
 /// A dictionary. Can be used to query words.
 class Class
 {
@@ -368,6 +392,19 @@ public:
   /// response.
   virtual sptr< DataRequest > getResource( string const & /*name*/ )
     throw( std::exception );
+
+  /// Returns true if the dictionary can be crawled, false otherwise. To
+  /// add crawling support, implement the crawl() method and override this
+  /// method to return true.
+  virtual bool isCrawlingSupported() throw()
+  { return false; }
+
+  /// The returned crawler should be able to outlive the dictionary object
+  /// it was created by, and should not block it while the crawling is in
+  /// progress. This allows bulding full text search index in the background,
+  /// enabling the user to use the program at the same time.
+  virtual sptr< Crawler > crawl() throw( std::exception )
+  { throw exCrawlingNotSupported(); }
 
   virtual ~Class()
   {}

@@ -70,7 +70,8 @@ enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
   CurrentFormatVersion = 14 + BtreeIndexing::FormatVersion + Folding::Version,
-  CurrentZipSupportVersion = 1
+  CurrentZipSupportVersion = 1,
+  CurrentCrawlerVersion = 1
 };
 
 struct IdxHeader
@@ -114,6 +115,8 @@ bool indexIsOldOrBad( string const & indexFile, bool hasZipFile )
          ( hasZipFile && header.zipSupportVersion != CurrentZipSupportVersion );
 }
 
+typedef map< string, string > Abbreviations;
+
 class DslDictionary: public BtreeIndexing::BtreeDictionary
 {
   Mutex idxMutex;
@@ -121,7 +124,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   IdxHeader idxHeader;
   sptr< ChunkedStorage::Reader > chunks;
   string dictionaryName;
-  map< string, string > abrv;
+  Abbreviations abrv;
   Mutex dzMutex;
   dictData * dz;
   Mutex resourceZipMutex;
@@ -184,6 +187,11 @@ public:
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
     throw( std::exception );
 
+  virtual bool isCrawlingSupported() throw()
+  { return true; }
+
+  virtual sptr< Dictionary::Crawler > crawl() throw( std::exception );
+
 private:
 
   virtual string const & ensureInitDone();
@@ -199,16 +207,42 @@ private:
                     unsigned & headwordIndex,
                     wstring & articleText );
 
+  friend class DslArticleRequest;
+  friend class DslResourceRequest;
+  friend class DslDeferredInitRunnable;
+};
+
+// Makes html out of dsl
+class DslToHtml
+{
+  string dictionaryId;
+  string dictionaryFileName;
+  Abbreviations const & abrv;
+  bool ignoreResources;
+  IndexedZip * resourceZip;
+public:
+
+  /// If ignoreResources is true, no access to any external resources (files,
+  /// zip files etc) will be made during the conversion. This will make
+  /// resource references inaccurate, but will work faster.
+  DslToHtml( string const & dictionaryId_, string const & dictionaryFileName_,
+             Abbreviations const & abrv_,
+             bool ignoreResources_,
+             IndexedZip * resourceZip_ = 0 ):
+    dictionaryId( dictionaryId_ ), dictionaryFileName( dictionaryFileName_ ),
+    abrv( abrv_ ), ignoreResources( ignoreResources_ ),
+    resourceZip( resourceZip_ )
+  {
+  }
+
   /// Converts DSL language to an Html.
-  string dslToHtml( wstring const & );
+  string convert( wstring const & );
+
+private:
 
   // Parts of dslToHtml()
   string nodeToHtml( ArticleDom::Node const & );
   string processNodeChildren( ArticleDom::Node const & node );
-
-  friend class DslArticleRequest;
-  friend class DslResourceRequest;
-  friend class DslDeferredInitRunnable;
 };
 
 DslDictionary::DslDictionary( string const & id,
@@ -662,7 +696,7 @@ void DslDictionary::loadArticle( uint32_t address,
     articleText.clear();
 }
 
-string DslDictionary::dslToHtml( wstring const & str )
+string DslToHtml::convert( wstring const & str )
 {
  // Normalize the string
   wstring normalizedStr = gd::toWString( gd::toQString( str ).normalized( QString::NormalizationForm_C ) );
@@ -685,7 +719,7 @@ string DslDictionary::dslToHtml( wstring const & str )
          "<p>" + html + "</p>";
 }
 
-string DslDictionary::processNodeChildren( ArticleDom::Node const & node )
+string DslToHtml::processNodeChildren( ArticleDom::Node const & node )
 {
   string result;
 
@@ -695,7 +729,7 @@ string DslDictionary::processNodeChildren( ArticleDom::Node const & node )
 
   return result;
 }
-string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
+string DslToHtml::nodeToHtml( ArticleDom::Node const & node )
 {
   if ( !node.isTag )
     return Html::escape( Utf8::encode( node.text ) );
@@ -752,26 +786,26 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       // Otherwise, make a global 'search' one.
 
       string n =
-        FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+        FsEncoding::dirname( dictionaryFileName ) +
         FsEncoding::separator() +
         FsEncoding::encode( filename );
 
       bool search =
-
-        !File::exists( n ) && !File::exists( getDictionaryFilenames()[ 0 ] + ".files" +
+        !ignoreResources &&
+        !File::exists( n ) && !File::exists( dictionaryFileName + ".files" +
                                              FsEncoding::separator() +
                                              FsEncoding::encode( filename ) ) &&
-          ( !resourceZip.isOpen() ||
-            !resourceZip.hasFile( Utf8::decode( filename ) ) );
+          ( !resourceZip || !resourceZip->isOpen() ||
+            !resourceZip->hasFile( Utf8::decode( filename ) ) );
 
       QUrl url;
       url.setScheme( "gdau" );
-      url.setHost( QString::fromUtf8( search ? "search" : getId().c_str() ) );
+      url.setHost( QString::fromUtf8( search ? "search" : dictionaryId.c_str() ) );
       url.setPath( QString::fromUtf8( filename.c_str() ) );
 
       string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
-      result += addAudioLink( ref, getId() );
+      result += addAudioLink( ref, dictionaryId );
 
       result += "<span class=\"dsl_s_wav\"><a href=" + ref
          + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>";
@@ -781,7 +815,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     {
       QUrl url;
       url.setScheme( "bres" );
-      url.setHost( QString::fromUtf8( getId().c_str() ) );
+      url.setHost( QString::fromUtf8( dictionaryId.c_str() ) );
       url.setPath( QString::fromUtf8( filename.c_str() ) );
 
       result += string( "<img src=\"" ) + url.toEncoded().data()
@@ -793,7 +827,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
       QUrl url;
       url.setScheme( "bres" );
-      url.setHost( QString::fromUtf8( getId().c_str() ) );
+      url.setHost( QString::fromUtf8( dictionaryId.c_str() ) );
       url.setPath( QString::fromUtf8( filename.c_str() ) );
 
       result += string( "<a class=\"dsl_s\" href=\"" ) + url.toEncoded().data()
@@ -1023,6 +1057,9 @@ void DslArticleRequest::run()
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
 
+  DslToHtml dslToHtml( dict.getId(), dict.getDictionaryFilenames()[ 0 ],
+                       dict.abrv, false, &dict.resourceZip );
+
   for( unsigned x = 0; x < chain.size(); ++x )
   {
     // Check if we're cancelled occasionally
@@ -1051,14 +1088,14 @@ void DslArticleRequest::run()
     articleText += "<span class=\"dsl_article\">";
     articleText += "<div class=\"dsl_headwords\">";
 
-    articleText += dict.dslToHtml( displayedHeadword );
+    articleText += dslToHtml.convert( displayedHeadword );
 
     articleText += "</div>";
 
     expandTildes( articleBody, tildeValue );
 
     articleText += "<div class=\"dsl_definition\">";
-    articleText += dict.dslToHtml( articleBody );
+    articleText += dslToHtml.convert( articleBody );
     articleText += "</div>";
     articleText += "</span>";
 
@@ -1270,6 +1307,209 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
   throw( std::exception )
 {
   return new DslResourceRequest( *this, name );
+}
+
+/// Reads the whole dsl file and extracts article bodies from it.
+class DslArticleScanner
+{
+  DslScanner & scanner;
+  bool hasString;
+  wstring curString;
+  size_t curOffset;
+
+public:
+  DslArticleScanner( DslScanner & scanner_ ):
+    scanner( scanner_ ), hasString( false )
+  {}
+
+  /// Reads next article. Returns true if the article was read successfully,
+  /// or false when end of file is reached. Headwords have optional parts
+  /// expanded if expandOptionals is true. Article physical position
+  /// in the file is saved to articleOffset and articleSize. The full body
+  /// of the article is saved to body, if it is provided.
+  bool getNextArticle( bool expandOptionals, list< wstring > & headwords,
+                       uint32_t & articleOffset,
+                       uint32_t & articleSize,
+                       wstring * body = 0 );
+};
+
+bool DslArticleScanner::getNextArticle( bool expandOptionals,
+                                        list< wstring > & headwords,
+                                        uint32_t & articleOffset,
+                                        uint32_t & articleSize,
+                                        wstring * body )
+{
+  headwords.clear();
+
+  if ( body )
+    body->clear();
+
+  for( ; ; )
+  {
+    // Find the main headword
+
+    if ( !hasString && !scanner.readNextLine( curString, curOffset ) )
+      return false; // Clean end of file
+
+    hasString = false;
+
+    // The line read should either consist of pure whitespace, or be a
+    // headword
+
+    if ( curString.empty() )
+      continue;
+
+    if ( isDslWs( curString[ 0 ] ) )
+    {
+      // The first character is blank. Let's make sure that all other
+      // characters are blank, too.
+      for( size_t x = 1; x < curString.size(); ++x )
+      {
+        if ( !isDslWs( curString[ x ] ) )
+        {
+//          fprintf( stderr, "Warning: garbage string in %s at offset 0x%X\n", i->c_str(), curOffset );
+          break;
+        }
+      }
+      continue;
+    }
+
+    // Ok, got the headword
+
+    processUnsortedParts( curString, true );
+
+    list< wstring > expandedForTilde;
+    wstring * tildeValue;
+
+    if ( expandOptionals )
+    {
+      expandOptionalParts( curString, headwords );
+      tildeValue = &headwords.front();
+    }
+    else
+    {
+      headwords.push_back( curString );
+
+      // To make tilde value properly, we need to expand the headword
+      // and use the first, shortest one form
+      expandOptionalParts( curString, expandedForTilde );
+      tildeValue = &expandedForTilde.front();
+    }
+
+    articleOffset = curOffset;
+
+    //printf( "Headword: %ls\n", curString.c_str() );
+
+    // More headwords may follow
+
+    for( ; ; )
+    {
+      if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
+      {
+//        fprintf( stderr, "Warning: premature end of file %s\n", i->c_str() );
+        break;
+      }
+
+      if ( curString.empty() || isDslWs( curString[ 0 ] ) )
+        break; // No more headwords
+
+//      printf( "Alt headword: %ls\n", curString.c_str() );
+
+      processUnsortedParts( curString, true );
+      expandTildes( curString, *tildeValue );
+      if ( expandOptionals )
+        expandOptionalParts( curString, headwords );
+      else
+        headwords.push_back( curString );
+    }
+
+    if ( !hasString )
+      return false;
+
+    for( list< wstring >::iterator j = headwords.begin();
+         j != headwords.end(); ++j )
+    {
+      unescapeDsl( *j );
+      normalizeHeadword( *j );
+    }
+
+    // Skip the article's body
+    for( ; ; )
+    {
+      // Save the body, if requested
+      if ( body )
+      {
+        *body += curString;
+        *body += wchar( '\n' );
+      }
+
+      if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
+        break;
+
+      if ( curString.size() && !isDslWs( curString[ 0 ] ) )
+        break;
+    }
+
+    // Now that we're having read the first string after the article
+    // itself, we can use its offset to calculate the article's size.
+    // An end of file works here, too.
+
+    articleSize = ( curOffset - articleOffset );
+
+    return true;
+  }
+}
+
+class DslCrawler: public Dictionary::Crawler
+{
+  Abbreviations abrv;
+  DslScanner scanner;
+  DslArticleScanner articleScanner;
+  DslToHtml dslToHtml;
+
+public:
+
+  DslCrawler( string const & dictionaryId, string const & dictionaryFile ):
+    scanner( dictionaryFile ),
+    articleScanner( scanner ),
+    dslToHtml( dictionaryId, dictionaryFile, abrv, true )
+  {}
+
+  virtual unsigned getVersion() throw()
+  { return CurrentCrawlerVersion; }
+
+  virtual bool fetchNextArticle( vector< string > & headwords, string & body )
+    throw( std::exception );
+};
+
+bool DslCrawler::fetchNextArticle( vector< string > & headwords,
+                                   string & body )
+  throw( std::exception )
+{
+  list< wstring > headwordsWide;
+  wstring bodyWide;
+
+  uint32_t articleOffset, articleSize;
+
+  if ( !articleScanner.getNextArticle( false, headwordsWide, articleOffset,
+                                       articleSize, &bodyWide ) )
+    return false;
+
+  headwords.clear();
+  headwords.reserve( headwordsWide.size() );
+
+  for( list< wstring >::const_iterator i = headwordsWide.begin();
+       i != headwordsWide.end(); ++i )
+    headwords.push_back( Utf8::encode( *i ) );
+
+  body = dslToHtml.convert( bodyWide );
+
+  return true;
+}
+
+sptr< Dictionary::Crawler > DslDictionary::crawl() throw( std::exception )
+{
+  return new DslCrawler( getId(), getDictionaryFilenames()[ 0 ] );
 }
 
 } // anonymous namespace
@@ -1518,113 +1758,29 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
         }
 
-        bool hasString = false;
-        wstring curString;
-        size_t curOffset;
-
         uint32_t articleCount = 0, wordCount = 0;
 
-        for( ; ; )
+        DslArticleScanner articleScanner( scanner );
+
+        list< wstring > allEntryWords;
+        uint32_t articleOffset, articleSize;
+
+        while ( articleScanner.getNextArticle( true, allEntryWords,
+                                               articleOffset,
+                                               articleSize ) )
         {
-          // Find the main headword
-
-          if ( !hasString && !scanner.readNextLine( curString, curOffset ) )
-            break; // Clean end of file
-
-          hasString = false;
-
-          // The line read should either consist of pure whitespace, or be a
-          // headword
-
-          if ( curString.empty() )
-            continue;
-
-          if ( isDslWs( curString[ 0 ] ) )
-          {
-            // The first character is blank. Let's make sure that all other
-            // characters are blank, too.
-            for( size_t x = 1; x < curString.size(); ++x )
-            {
-              if ( !isDslWs( curString[ x ] ) )
-              {
-                fprintf( stderr, "Warning: garbage string in %s at offset 0x%X\n", i->c_str(), curOffset );
-                break;
-              }
-            }
-            continue;
-          }
-
-          // Ok, got the headword
-
-          list< wstring > allEntryWords;
-
-          processUnsortedParts( curString, true );
-          expandOptionalParts( curString, allEntryWords );
-
-          uint32_t articleOffset = curOffset;
-
-          //printf( "Headword: %ls\n", curString.c_str() );
-
-          // More headwords may follow
-
-          for( ; ; )
-          {
-            if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
-            {
-              fprintf( stderr, "Warning: premature end of file %s\n", i->c_str() );
-              break;
-            }
-
-            if ( curString.empty() || isDslWs( curString[ 0 ] ) )
-              break; // No more headwords
-
-            printf( "Alt headword: %ls\n", curString.c_str() );
-
-            processUnsortedParts( curString, true );
-            expandTildes( curString, allEntryWords.front() );
-            expandOptionalParts( curString, allEntryWords );
-          }
-
-          if ( !hasString )
-            break;
-
-          // Insert new entry
-
           uint32_t descOffset = chunks.startNewBlock();
 
           chunks.addToBlock( &articleOffset, sizeof( articleOffset ) );
 
           for( list< wstring >::iterator j = allEntryWords.begin();
                j != allEntryWords.end(); ++j )
-          {
-            unescapeDsl( *j );
-            normalizeHeadword( *j );
             indexedWords.addWord( *j, descOffset );
-          }
 
           ++articleCount;
           wordCount += allEntryWords.size();
 
-          // Skip the article's body
-          for( ; ; )
-          {
-            if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
-              break;
-
-            if ( curString.size() && !isDslWs( curString[ 0 ] ) )
-              break;
-          }
-
-          // Now that we're having read the first string after the article
-          // itself, we can use its offset to calculate the article's size.
-          // An end of file works here, too.
-
-          uint32_t articleSize = ( curOffset - articleOffset );
-
           chunks.addToBlock( &articleSize, sizeof( articleSize ) );
-
-          if ( !hasString )
-            break;
         }
 
         // Finish with the chunks
