@@ -1462,7 +1462,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 if ( !abrvScanner.readNextLine( curString, curOffset ) || curString.empty() )
                 {
-                  fprintf( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
+                  FDPRINTF( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
                   eof = true;
                   break;
                 }
@@ -1514,7 +1514,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
           catch( std::exception & e )
           {
-            fprintf( stderr, "Error reading abrv file %s: %s. Skipping it.\n",
+            FDPRINTF( stderr, "Error reading abrv file %s: %s. Skipping it.\n",
                      abrvFileName.c_str(), e.what() );
           }
         }
@@ -1548,7 +1548,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               if ( !isDslWs( curString[ x ] ) )
               {
-                fprintf( stderr, "Warning: garbage string in %s at offset 0x%X\n", i->c_str(), curOffset );
+                FDPRINTF( stderr, "Warning: garbage string in %s at offset 0x%X\n", i->c_str(), curOffset );
                 break;
               }
             }
@@ -1572,7 +1572,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           {
             if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
             {
-              fprintf( stderr, "Warning: premature end of file %s\n", i->c_str() );
+              FDPRINTF( stderr, "Warning: premature end of file %s\n", i->c_str() );
               break;
             }
 
@@ -1796,7 +1796,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "DSL dictionary reading failed: %s:%u, error: %s\n",
+      FDPRINTF( stderr, "DSL dictionary reading failed: %s:%u, error: %s\n",
         i->c_str(), atLine, e.what() );
     }
   }

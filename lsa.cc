@@ -459,14 +459,14 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
 
     if ( result <= 0 )
     {
-      fprintf( stderr, "Warning: failed to read Vorbis data (code = %ld)\n", result );
+      FDPRINTF( stderr, "Warning: failed to read Vorbis data (code = %ld)\n", result );
       memset( ptr, 0, left );
       break;
     }
 
     if ( result > left )
     {
-      fprintf( stderr, "Warning: Vorbis decode returned more data than requested.\n" );
+      FDPRINTF( stderr, "Warning: Vorbis decode returned more data than requested.\n" );
 
       result = left;
     }
@@ -599,7 +599,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "Lingo's LSA reading failed: %s, error: %s\n",
+      FDPRINTF( stderr, "Lingo's LSA reading failed: %s, error: %s\n",
         i->c_str(), e.what() );
     }
   }

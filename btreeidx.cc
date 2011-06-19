@@ -845,7 +845,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
                          &compressedData.front(), &compressedSize, workMem )
        != LZO_E_OK )
   {
-    fprintf( stderr, "Failed to compress btree node.\n" );
+    FDPRINTF( stderr, "Failed to compress btree node.\n" );
     abort();
   }
 
@@ -858,7 +858,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
   if ( compress( &compressedData.front(), &compressedSize,
                  &uncompressedData.front(), uncompressedData.size() ) != Z_OK )
   {
-    fprintf( stderr, "Failed to compress btree node.\n" );
+    FDPRINTF( stderr, "Failed to compress btree node.\n" );
     abort();
   }
 

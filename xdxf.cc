@@ -802,7 +802,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "Xdxf dictionary reading failed: %s, error: %s\n",
+      FDPRINTF( stderr, "Xdxf dictionary reading failed: %s, error: %s\n",
         i->c_str(), e.what() );
     }
   }

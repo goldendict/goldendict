@@ -322,7 +322,7 @@ void StardictDictionary::loadArticle( uint32_t address,
       else
       if ( !size )
       {
-        fprintf( stderr, "Warning: short entry for the word %s encountered.\n", headword.c_str() );
+        FDPRINTF( stderr, "Warning: short entry for the word %s encountered.\n", headword.c_str() );
         break;
       }
 
@@ -336,7 +336,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < entrySize )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -357,7 +357,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         {
           if ( size < sizeof( uint32_t ) )
           {
-            fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+            FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
             break;
           }
 
@@ -371,7 +371,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < entrySize )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -382,7 +382,7 @@ void StardictDictionary::loadArticle( uint32_t address,
       }
       else
       {
-        fprintf( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
+        FDPRINTF( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
                          type, headword.c_str() );
         break;
       }
@@ -400,7 +400,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < len + 2 )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -415,7 +415,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         // An entry which havs its size before contents
         if ( size < sizeof( uint32_t ) + 1 )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -427,7 +427,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < sizeof( uint32_t ) + 1 + entrySize )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -438,7 +438,7 @@ void StardictDictionary::loadArticle( uint32_t address,
       }
       else
       {
-        fprintf( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
+        FDPRINTF( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
                          (unsigned)*ptr, headword.c_str() );
         break;
       }
@@ -928,7 +928,7 @@ static void handleIdxSynFile( string const & fileName,
                                            sizeof( uint32_t ) * 2 ) >
          &image.back() )
     {
-      fprintf( stderr, "Warning: sudden end of file %s\n", fileName.c_str() );
+      FDPRINTF( stderr, "Warning: sudden end of file %s\n", fileName.c_str() );
       break;
     }
 
@@ -1156,7 +1156,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "Stardict's dictionary reading failed: %s, error: %s\n",
+      FDPRINTF( stderr, "Stardict's dictionary reading failed: %s, error: %s\n",
         i->c_str(), e.what() );
     }
   }

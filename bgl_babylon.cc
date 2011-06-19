@@ -273,7 +273,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
 
   if ( isUtf8File )
   {
-    //fprintf( stderr, "%s: utf8 file.\n", m_title.c_str() );
+    //FDPRINTF( stderr, "%s: utf8 file.\n", m_title.c_str() );
     m_defaultCharset = "UTF-8";
     m_sourceCharset = "UTF-8";
     m_targetCharset = "UTF-8";
@@ -381,7 +381,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
             if ( length > len - a - 2 )
             {
-              fprintf( stderr, "Hidden displayed headword is too large %s\n", headword.c_str() );
+              FDPRINTF( stderr, "Hidden displayed headword is too large %s\n", headword.c_str() );
               pos += len - a;
               break;
             }
@@ -396,7 +396,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
             if ( length > len - a - 2 )
             {
-              fprintf( stderr, "Displayed headword's length is too large for headword %s\n", headword.c_str() );
+              FDPRINTF( stderr, "Displayed headword's length is too large for headword %s\n", headword.c_str() );
               pos += len - a;
               break;
             }
@@ -416,7 +416,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
             if ( length > len - a - 3 )
             {
-              fprintf( stderr, "2-byte sized displayed headword for %s is too large\n", headword.c_str() );
+              FDPRINTF( stderr, "2-byte sized displayed headword for %s is too large\n", headword.c_str() );
               pos += len - a;
               break;
             }
@@ -434,7 +434,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
             if ( length > len - a - 3 )
             {
-              fprintf( stderr, "1-byte-sized transcription's length is too large for headword %s\n", headword.c_str() );
+              FDPRINTF( stderr, "1-byte-sized transcription's length is too large for headword %s\n", headword.c_str() );
               pos += len - a;
               break;
             }
@@ -456,7 +456,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
             if ( length > len - a - 4)
             {
-              fprintf( stderr, "2-byte-sized transcription's length is too large for headword %s\n", headword.c_str() );
+              FDPRINTF( stderr, "2-byte-sized transcription's length is too large for headword %s\n", headword.c_str() );
               pos += len - a;
               break;
             }
@@ -478,7 +478,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
             if ( length > len - a - 2 )
             {
-              fprintf( stderr, "Hidden transcription is too large %s\n", headword.c_str() );
+              FDPRINTF( stderr, "Hidden transcription is too large %s\n", headword.c_str() );
               pos += len - a;
               break;
             }

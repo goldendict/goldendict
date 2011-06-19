@@ -192,8 +192,8 @@ namespace
 
     if ( result < 0 )
     {
-      fprintf( stderr, "Failed to decode utf8 of headword %s, skipping it.\n",
-               word.c_str() );
+      FDPRINTF( stderr, "Failed to decode utf8 of headword %s, skipping it.\n",
+                word.c_str() );
       return;
     }
 
@@ -956,8 +956,8 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     if ( compress( &compressedData.front(), &compressedSize,
                    (unsigned char const *) data, size ) != Z_OK )
     {
-      fprintf( stderr, "Failed to compress the body of resource %s, dropping it.\n",
-               filename.c_str() );
+      FDPRINTF( stderr, "Failed to compress the body of resource %s, dropping it.\n",
+                filename.c_str() );
       return;
     }
 
@@ -1010,7 +1010,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       if ( !b.read( sourceCharset, targetCharset ) )
       {
-        fprintf( stderr, "Failed to start reading from %s, skipping it\n", i->c_str() );
+        FDPRINTF( stderr, "Failed to start reading from %s, skipping it\n", i->c_str() );
         continue;
       }
 

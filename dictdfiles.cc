@@ -436,7 +436,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "Dictd dictionary reading failed: %s, error: %s\n",
+      FDPRINTF( stderr, "Dictd dictionary reading failed: %s, error: %s\n",
         i->c_str(), e.what() );
     }
   }
