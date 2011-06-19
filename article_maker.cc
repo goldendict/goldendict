@@ -11,6 +11,7 @@
 #include <QUrl>
 #include "folding.hh"
 #include "langcoder.hh"
+#include "dprintf.hh"
 
 using std::vector;
 using std::string;
@@ -308,7 +309,7 @@ void ArticleRequest::altSearchFinished()
 
   if ( altSearches.empty() )
   {
-    printf( "alts finished\n" );
+    DPRINTF( "alts finished\n" );
     
     // They all've finished! Now we can look up bodies
 
@@ -318,7 +319,7 @@ void ArticleRequest::altSearchFinished()
     
     for( unsigned x = 0; x < altsVector.size(); ++x )
     {
-      printf( "Alt: %ls\n", altsVector[ x ].c_str() );
+      DPRINTF( "Alt: %ls\n", altsVector[ x ].c_str() );
     }
 
     wstring wordStd = gd::toWString( word );
@@ -344,7 +345,7 @@ void ArticleRequest::bodyFinished()
   if ( bodyDone )
     return;
 
-  printf( "some body finished\n" );
+  DPRINTF( "some body finished\n" );
   
   bool wasUpdated = false;
   
@@ -355,7 +356,7 @@ void ArticleRequest::bodyFinished()
     {
       // Good
 
-      printf( "one finished.\n" );
+      DPRINTF( "one finished.\n" );
 
       Dictionary::DataRequest & req = *bodyRequests.front();
 
@@ -431,13 +432,13 @@ void ArticleRequest::bodyFinished()
 
         foundAnyDefinitions = true;
       }
-      printf( "erasing..\n" );
+      DPRINTF( "erasing..\n" );
       bodyRequests.pop_front();
-      printf( "erase done..\n" );
+      DPRINTF( "erase done..\n" );
     }
     else
     {
-        printf( "one not finished.\n" );
+        DPRINTF( "one not finished.\n" );
         break;
     }
   }
@@ -575,7 +576,7 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
     if ( lastGoodCompoundResult.size() ) // We have something to append
     {
-//      printf( "Appending\n" );
+//      DPRINTF( "Appending\n" );
 
       if ( !firstCompoundWasFound )
       {
@@ -670,7 +671,7 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
   // Look it up
 
-//  printf( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
+//  DPRINTF( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
 
   stemmedWordFinder->prefixMatch( currentSplittedWordCompound, activeDicts, 40, // Would one be enough? Leave 40 to be safe.
                                   Dictionary::SuitableForCompoundSearching );

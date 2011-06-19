@@ -28,6 +28,7 @@
 #include<stdio.h>
 #include<iconv.h>
 #include <QTextDocument>
+#include "dprintf.hh"
 
 #ifdef _WIN32
 #include <io.h>
@@ -283,7 +284,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
   convertToUtf8( m_email, TARGET_CHARSET );
   convertToUtf8( m_copyright, TARGET_CHARSET );
   convertToUtf8( m_description, TARGET_CHARSET );
-  printf("Default charset: %s\nSource Charset: %s\nTargetCharset: %s\n", m_defaultCharset.c_str(), m_sourceCharset.c_str(), m_targetCharset.c_str());
+  DPRINTF("Default charset: %s\nSource Charset: %s\nTargetCharset: %s\n", m_defaultCharset.c_str(), m_sourceCharset.c_str(), m_targetCharset.c_str());
   return true;
 }
 
@@ -639,7 +640,7 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   iconv_t cd = iconv_open( "UTF-8", charset.c_str() );
   if( cd == (iconv_t)(-1) )
   {
-    printf( "Error openning iconv library\n" );
+    DPRINTF( "Error openning iconv library\n" );
     exit(1);
   }
 
@@ -660,8 +661,8 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   defbuf = outbuf;
   while (inbufbytes) {
     if (iconv(cd, &inbuf, &inbufbytes, &outbuf, &outbufbytes) == (size_t)-1) {
-      printf( "\n%s\n", inbuf );
-      printf( "Error in iconv conversion\n" );
+      DPRINTF( "\n%s\n", inbuf );
+      DPRINTF( "Error in iconv conversion\n" );
       inbuf++;
       inbufbytes--;
     }

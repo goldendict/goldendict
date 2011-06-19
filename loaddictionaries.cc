@@ -18,6 +18,7 @@
 #include "website.hh"
 #include "forvo.hh"
 #include "programs.hh"
+#include "dprintf.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -239,7 +240,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
-  printf( "Load done\n" );
+  DPRINTF( "Load done\n" );
 
   // Remove any stale index files
 

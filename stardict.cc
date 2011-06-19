@@ -10,6 +10,7 @@
 #include "xdxf2html.hh"
 #include "htmlescape.hh"
 #include "langcoder.hh"
+#include "dprintf.hh"
 
 #include <zlib.h>
 #include <map>
@@ -773,8 +774,8 @@ Ifo::Ifo( File::Class & f ):
 
   static string const booknameEq( "bookname=" );
 
-  //printf( "%s<\n", f.gets().c_str() );
-  //printf( "%s<\n", f.gets().c_str() );
+  //DPRINTF( "%s<\n", f.gets().c_str() );
+  //DPRINTF( "%s<\n", f.gets().c_str() );
 
   if ( f.gets() != "StarDict's dict ifo file" ||
        f.gets().compare( 0, versionEq.size(), versionEq ) )
@@ -1001,7 +1002,7 @@ static void handleIdxSynFile( string const & fileName,
     indexedWords.addWord( Utf8::decode( word ), offset );
   }
 
-  printf( "%u entires made\n", indexedWords.size() );
+  DPRINTF( "%u entires made\n", indexedWords.size() );
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
@@ -1056,7 +1057,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           if ( ifo.synwordcount )
           {
-            printf( "Warning: dictionary has synwordcount specified, but no "
+            DPRINTF( "Warning: dictionary has synwordcount specified, but no "
                     "corresponding .syn file was found\n" );
             ifo.synwordcount = 0;  // Pretend it wasn't there
           }
@@ -1064,13 +1065,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         else
         if ( !ifo.synwordcount )
         {
-          printf( "Warning: ignoring .syn file %s, since there's no synwordcount in .ifo specified\n",
+          DPRINTF( "Warning: ignoring .syn file %s, since there's no synwordcount in .ifo specified\n",
                   synFileName.c_str() );
         }
 
 
-        printf( "bookname = %s\n", ifo.bookname.c_str() );
-        printf( "wordcount = %u\n", ifo.wordcount );
+        DPRINTF( "bookname = %s\n", ifo.bookname.c_str() );
+        DPRINTF( "wordcount = %u\n", ifo.wordcount );
 
         initializing.indexingDictionary( ifo.bookname );
 

@@ -6,6 +6,7 @@
 #include "wstring_qt.hh"
 #include <QThreadPool>
 #include <map>
+#include "dprintf.hh"
 
 using std::vector;
 using std::list;
@@ -433,7 +434,7 @@ void WordFinder::updateResults()
   for( ResultsArray::const_iterator i = resultsArray.begin(), j = resultsArray.end();
        i != j; ++i )
   {
-    //printf( "%d: %ls\n", i->second, i->first.c_str() );
+    //DPRINTF( "%d: %ls\n", i->second, i->first.c_str() );
 
     if ( searchResults.size() < maxSearchResults )
       searchResults.push_back( std::pair< QString, bool >( gd::toQString( i->word ), i->wasSuggested ) );

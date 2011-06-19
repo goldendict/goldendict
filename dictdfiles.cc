@@ -16,6 +16,7 @@
 #include <list>
 #include <wctype.h>
 #include <stdlib.h>
+#include "dprintf.hh"
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -388,7 +389,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           if ( !tab || ! ( tab = strchr( tab + 1, '\t' ) ) || strchr( tab + 1, '\t' ) )
           {
-            printf( "Warning: incorrect amount of tabs in a line, skipping: %s\n", buf );
+            DPRINTF( "Warning: incorrect amount of tabs in a line, skipping: %s\n", buf );
             continue;
           }
 

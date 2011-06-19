@@ -15,6 +15,7 @@
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
 #include "programs.hh"
+#include "dprintf.hh"
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -240,9 +241,9 @@ void ArticleView::loadFinished( bool )
   {
     if ( (*i)->frameName().startsWith( "gdexpandframe-" ) )
     {
-      //printf( "Name: %s\n", (*i)->frameName().toUtf8().data() );
-      //printf( "Size: %d\n", (*i)->contentsSize().height() );
-      //printf( ">>>>>>>>Height = %s\n", (*i)->evaluateJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
+      //DPRINTF( "Name: %s\n", (*i)->frameName().toUtf8().data() );
+      //DPRINTF( "Size: %d\n", (*i)->contentsSize().height() );
+      //DPRINTF( ">>>>>>>>Height = %s\n", (*i)->evaluateJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
 
       // Set the height
       ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').height = %2;" ).
@@ -589,7 +590,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts )
 {
-  printf( "clicked %s\n", url.toString().toLocal8Bit().data() );
+  DPRINTF( "clicked %s\n", url.toString().toLocal8Bit().data() );
 
   if ( url.scheme().compare( "bword" ) == 0 )
   {
@@ -1042,10 +1043,10 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 #if 0
-  printf( "%s\n", r.linkUrl().isEmpty() ? "null" : "not null" );
+  DPRINTF( "%s\n", r.linkUrl().isEmpty() ? "null" : "not null" );
 
-  printf( "url = %s\n", r.linkUrl().toString().toLocal8Bit().data() );
-  printf( "title = %s\n", r.title().toLocal8Bit().data() );
+  DPRINTF( "url = %s\n", r.linkUrl().toString().toLocal8Bit().data() );
+  DPRINTF( "title = %s\n", r.title().toLocal8Bit().data() );
 #endif
 }
 

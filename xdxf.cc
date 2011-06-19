@@ -17,6 +17,7 @@
 #include <zlib.h>
 #include <wctype.h>
 #include <stdlib.h>
+#include "dprintf.hh"
 
 #include <QIODevice>
 #include <QXmlStreamReader>
@@ -567,7 +568,7 @@ void indexArticle( GzippedFile & gzFile,
       if ( words.empty() )
       {
         // Nothing to index, this article didn't have any tags
-        printf( "Warning: no <k> tags found in an article at offset 0x%x, article skipped.\n",
+        DPRINTF( "Warning: no <k> tags found in an article at offset 0x%x, article skipped.\n",
                 (unsigned) articleOffset );
       }
       else
@@ -584,7 +585,7 @@ void indexArticle( GzippedFile & gzFile,
         value = gzFile.pos() - 1 - articleOffset;
         chunks.addToBlock( &value, sizeof( value ) );
 
-        printf( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
+        DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
 
         // Add words to index
 
@@ -729,7 +730,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                       chunks.addToBlock( n.data(), n.size() );
                     }
                     else
-                      printf( "Warning: duplicate full_name in %s\n", dictFiles[ 0 ].c_str() );
+                      DPRINTF( "Warning: duplicate full_name in %s\n", dictFiles[ 0 ].c_str() );
                   }
                   else
                   if ( stream.name() == "description" )
@@ -748,7 +749,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                       chunks.addToBlock( n.data(), n.size() );
                     }
                     else
-                      printf( "Warning: duplicate description in %s\n", dictFiles[ 0 ].c_str() );
+                      DPRINTF( "Warning: duplicate description in %s\n", dictFiles[ 0 ].c_str() );
                   }
                   else
                   if ( stream.name() == "ar" )
@@ -790,7 +791,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( stream.hasError() )
         {
-          printf( "Warning: %s had a parse error %ls, and therefore was indexed only up to the point of error.\n",
+          DPRINTF( "Warning: %s had a parse error %ls, and therefore was indexed only up to the point of error.\n",
                   dictFiles[ 0 ].c_str(), stream.errorString().toStdWString().c_str() );
         }
       }

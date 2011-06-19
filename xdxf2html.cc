@@ -3,12 +3,13 @@
 
 #include "xdxf2html.hh"
 #include <QtXml>
+#include "dprintf.hh"
 
 namespace Xdxf2Html {
 
 string convert( string const & in )
 {
-  printf( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
+  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
   // Convert spaces after each end of line to &nbsp;s, and then each end of
   // line to a <br>

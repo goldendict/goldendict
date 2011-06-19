@@ -12,6 +12,7 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QDesktopWidget>
+#include "dprintf.hh"
 
 using std::wstring;
 
@@ -206,7 +207,7 @@ void ScanPopup::editGroupRequested()
 
 void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 {
-  printf( "translating from clipboard or selection\n" );
+  DPRINTF( "translating from clipboard or selection\n" );
 
   QString subtype = "plain";
 
@@ -235,7 +236,7 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
   if ( !isScanningEnabled )
     return;
   
-  printf( "clipboard changed\n" );
+  DPRINTF( "clipboard changed\n" );
 
   QString subtype = "plain";
 
@@ -435,7 +436,7 @@ bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
 
     if ( event->type() == QEvent::MouseMove )
     {
-//    printf( "Object: %s\n", watched->objectName().toUtf8().data() );
+//    DPRINTF( "Object: %s\n", watched->objectName().toUtf8().data() );
       QMouseEvent * mouseEvent = ( QMouseEvent * ) event;
       reactOnMouseMove( mouseEvent->globalPos() );
     }
@@ -448,7 +449,7 @@ void ScanPopup::reactOnMouseMove( QPoint const & p )
 {
   if ( geometry().contains( p ) )
   {
-//        printf( "got inside\n" );
+//        DPRINTF( "got inside\n" );
 
     hideTimer.stop();
     mouseEnteredOnce = true;
@@ -456,7 +457,7 @@ void ScanPopup::reactOnMouseMove( QPoint const & p )
   }
   else
   {
-//        printf( "outside\n" );
+//        DPRINTF( "outside\n" );
     // We're in grab mode and outside the window - calculate the
     // distance from it. We might want to hide it.
 
