@@ -5,8 +5,8 @@
 #define DPRINTF(...)
 #define FDPRINTF(...)
 #else
-#define DPRINTF(...) { printf(__VA_ARGS__); }
-#define FDPRINTF(...) { fprintf(__VA_ARGS__); }
+#define DPRINTF(...) printf(__VA_ARGS__)
+#define FDPRINTF(...) fprintf(__VA_ARGS__)
 #endif
 
 #endif // __DPRINTF_HH_INCLUDED__
