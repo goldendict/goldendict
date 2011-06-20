@@ -3,12 +3,13 @@
 
 #include "xdxf2html.hh"
 #include <QtXml>
+#include "dprintf.hh"
 
 namespace Xdxf2Html {
 
 string convert( string const & in )
 {
-  printf( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
+  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
   // Convert spaces after each end of line to &nbsp;s, and then each end of
   // line to a <br>
@@ -50,8 +51,8 @@ string convert( string const & in )
 
   if ( !dd.setContent( QByteArray( ( "<div class=\"sdct_x\">" + inConverted + "</div>" ).c_str() ), false, &errorStr, &errorLine, &errorColumn  ) )
   {
-    fprintf( stderr, "Xdxf2html error, xml parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
-    fprintf( stderr, "The input was: %s\n", in.c_str() );
+    FDPRINTF( stderr, "Xdxf2html error, xml parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
+    FDPRINTF( stderr, "The input was: %s\n", in.c_str() );
 
     return in;
   }

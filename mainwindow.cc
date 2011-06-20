@@ -15,6 +15,7 @@
 #include <QDesktopServices>
 #include <set>
 #include <map>
+#include "dprintf.hh"
 
 using std::set;
 using std::wstring;
@@ -951,7 +952,7 @@ void MainWindow::switchToPrevTab()
 
 void MainWindow::backClicked()
 {
-  printf( "Back\n" );
+  DPRINTF( "Back\n" );
 
   ArticleView & view =
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
@@ -961,7 +962,7 @@ void MainWindow::backClicked()
 
 void MainWindow::forwardClicked()
 {
-  printf( "Forward\n" );
+  DPRINTF( "Forward\n" );
 
   ArticleView & view =
     dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
@@ -1652,7 +1653,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
-    printf( "Alt: %ls\n", alts[ x ].c_str() );
+    DPRINTF( "Alt: %ls\n", alts[ x ].c_str() );
   }
 
 
@@ -1677,7 +1678,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
     {
       string body = activeDicts[ x ]->getArticle( word, alts );
 
-      printf( "From %s: %s\n", activeDicts[ x ]->getName().c_str(), body.c_str() );
+      DPRINTF( "From %s: %s\n", activeDicts[ x ]->getName().c_str(), body.c_str() );
 
       result += "<div class=\"gddictname\">From " + activeDicts[ x ]->getName() + "</div>" + body;
     }
@@ -1864,7 +1865,7 @@ void MainWindow::latestReleaseReplyReady()
     // Failed -- reschedule to check in two hours
     newReleaseCheckTimer.start( 2 * 60 * 60 * 1000 );
 
-    printf( "Failed to check program version, retry in two hours\n" );
+    DPRINTF( "Failed to check program version, retry in two hours\n" );
   }
   else
   {
@@ -1875,7 +1876,7 @@ void MainWindow::latestReleaseReplyReady()
 
     Config::save( cfg );
 
-    printf( "Program version's check successful, current version is %ls\n",
+    DPRINTF( "Program version's check successful, current version is %ls\n",
             latestVersion.toStdWString().c_str() );
   }
 

@@ -10,6 +10,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include "dprintf.hh"
 
 //#define __BTREE_USE_LZO
 // LZO mode is experimental and unsupported. Tests didn't show any substantial
@@ -223,7 +224,7 @@ void BtreeWordSearchRequest::run()
       if ( isCancelled )
         break;
       
-      //printf( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
+      //DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
   
       vector< WordArticleLink > chain = dict.readChain( chainOffset );
   
@@ -264,7 +265,7 @@ void BtreeWordSearchRequest::run()
       {
         // We're past the current leaf, fetch the next one
   
-        //printf( "advancing\n" );
+        //DPRINTF( "advancing\n" );
   
         if ( nextLeaf )
         {
@@ -280,7 +281,7 @@ void BtreeWordSearchRequest::run()
   
           if ( leafEntries == 0xffffFFFF )
           {
-            //printf( "bah!\n" );
+            //DPRINTF( "bah!\n" );
             exit( 1 );
           }
         }
@@ -324,7 +325,7 @@ void BtreeIndex::readNode( uint32_t offset, vector< char > & out )
   uint32_t uncompressedSize = idxFile->read< uint32_t >();
   uint32_t compressedSize = idxFile->read< uint32_t >();
 
-  //printf( "%x,%x\n", uncompressedSize, compressedSize );
+  //DPRINTF( "%x,%x\n", uncompressedSize, compressedSize );
 
   out.resize( uncompressedSize );
 
@@ -397,7 +398,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
     {
       // A node
 
-      //printf( "=>a node\n" );
+      //DPRINTF( "=>a node\n" );
 
       uint32_t const * offsets = (uint32_t *)leaf + 1;
 
@@ -437,7 +438,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
   
         wcharBuffer[ result ] = 0;
 
-        //printf( "Checking against %s\n", closestString );
+        //DPRINTF( "Checking against %s\n", closestString );
 
         compareResult = target.compare( &wcharBuffer.front() );
   
@@ -468,7 +469,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
       }
 
       #if 0
-      printf( "The winner is %s, compareResult = %d\n", closestString, compareResult );
+      DPRINTF( "The winner is %s, compareResult = %d\n", closestString, compareResult );
 
       if ( closestString != ptr )
       {
@@ -477,19 +478,19 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         while( left != ptr && left[ -1 ] )
           --left;
 
-        printf( "To the left: %s\n", left );
+        DPRINTF( "To the left: %s\n", left );
       }
       else
-        printf( "To the lest -- nothing\n" );
+        DPRINTF( "To the lest -- nothing\n" );
 
       char const * right = closestString + strlen( closestString ) + 1;
 
       if ( right != leafEnd )
       {
-        printf( "To the right: %s\n", right );
+        DPRINTF( "To the right: %s\n", right );
       }
       else
-        printf( "To the right -- nothing\n" );
+        DPRINTF( "To the right -- nothing\n" );
       #endif
 
       // Now, whatever the outcome (compareResult) is, we need to find
@@ -521,14 +522,14 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         currentNodeOffset = offsets[ entry + 1 ];
       }
 
-      //printf( "reading node at %x\n", currentNodeOffset );
+      //DPRINTF( "reading node at %x\n", currentNodeOffset );
       readNode( currentNodeOffset, extLeaf );
       leaf = &extLeaf.front();
       leafEnd = leaf + extLeaf.size();
     }
     else
     {
-      //printf( "=>a leaf\n" );
+      //DPRINTF( "=>a leaf\n" );
       // A leaf
 
       // If this leaf is the root, there's no next leaf, it just can't be.
@@ -561,7 +562,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
 
           memcpy( &chainSize, ptr, sizeof( uint32_t ) );
 
-          //printf( "%s + %s\n", ptr + sizeof( uint32_t ), ptr + sizeof( uint32_t ) + strlen( ptr + sizeof( uint32_t ) ) + 1 );
+          //DPRINTF( "%s + %s\n", ptr + sizeof( uint32_t ), ptr + sizeof( uint32_t ) + strlen( ptr + sizeof( uint32_t ) ) + 1 );
 
           ptr += sizeof( uint32_t ) + chainSize;
         }
@@ -575,7 +576,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
 
       for( ; ; )
       {
-        //printf( "window = %u, ws = %u\n", window - &chainOffsets.front(), windowSize );
+        //DPRINTF( "window = %u, ws = %u\n", window - &chainOffsets.front(), windowSize );
 
         char const ** chainToCheck = window + windowSize/2;
         ptr = *chainToCheck;
@@ -588,7 +589,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         if ( wcharBuffer.size() <= wordSize )
           wcharBuffer.resize( wordSize + 1 );
   
-        //printf( "checking agaist word %s, left = %u\n", ptr, leafEntries );
+        //DPRINTF( "checking agaist word %s, left = %u\n", ptr, leafEntries );
   
         long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
   
@@ -844,7 +845,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
                          &compressedData.front(), &compressedSize, workMem )
        != LZO_E_OK )
   {
-    fprintf( stderr, "Failed to compress btree node.\n" );
+    FDPRINTF( stderr, "Failed to compress btree node.\n" );
     abort();
   }
 
@@ -857,7 +858,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
   if ( compress( &compressedData.front(), &compressedSize,
                  &uncompressedData.front(), uncompressedData.size() ) != Z_OK )
   {
-    fprintf( stderr, "Failed to compress btree node.\n" );
+    FDPRINTF( stderr, "Failed to compress btree node.\n" );
     abort();
   }
 
@@ -995,7 +996,7 @@ IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )
   if ( btreeMaxElements > BtreeMaxElements )
     btreeMaxElements = BtreeMaxElements;
 
-  printf( "Building a tree of %u elements\n", btreeMaxElements );
+  DPRINTF( "Building a tree of %u elements\n", btreeMaxElements );
 
 
   uint32_t lastLeafOffset = 0;

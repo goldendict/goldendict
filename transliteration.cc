@@ -4,6 +4,7 @@
 #include "transliteration.hh"
 #include "utf8.hh"
 #include "folding.hh"
+#include "dprintf.hh"
 
 namespace Transliteration {
 
@@ -118,7 +119,7 @@ sptr< Dictionary::WordSearchRequest > TransliterationDictionary::findHeadwordsFo
 
   vector< wstring > alts = getAlternateWritings( str );
 
-  printf( "alts = %u\n", alts.size() );
+  DPRINTF( "alts = %u\n", alts.size() );
   
   for( unsigned x = 0; x < alts.size(); ++x )
     result->getMatches().push_back( alts[ x ] );

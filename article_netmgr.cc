@@ -9,7 +9,7 @@
 
 #include "article_netmgr.hh"
 #include "wstring_qt.hh"
-
+#include "dprintf.hh"
 using std::string;
 
 namespace
@@ -80,17 +80,17 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   {
     QByteArray referer = req.rawHeader( "Referer" );
 
-    //printf( "Referer: %s\n", referer.data() );
+    //DPRINTF( "Referer: %s\n", referer.data() );
 
     QUrl refererUrl = QUrl::fromEncoded( referer );
 
-    //printf( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
+    //DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
     //        getHostBase( refererUrl ).toUtf8().data() );
 
     if ( !req.url().host().endsWith( refererUrl.host() ) &&
          getHostBase( req.url() ) != getHostBase( refererUrl ) && !req.url().scheme().startsWith("data") )
     {
-      printf( "Blocking element %s\n", req.url().toEncoded().data() );
+      DPRINTF( "Blocking element %s\n", req.url().toEncoded().data() );
 
       return new BlockedNetworkReply( this );
     }
@@ -102,9 +102,9 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   QUrl const & url, QString & contentType )
 {
-  printf( "getResource: %ls\n", url.toString().toStdWString().c_str() );
-  printf( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
-  printf( "host: %ls\n", url.host().toStdWString().c_str() );
+  DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
+  DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
+  DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
 
   if ( url.scheme() == "gdlookup" )
   {
@@ -149,8 +149,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ) &&
        url.path().size() )
   {
-    //printf( "Get %s\n", req.url().host().toLocal8Bit().data() );
-    //printf( "Get %s\n", req.url().path().toLocal8Bit().data() );
+    //DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
+    //DPRINTF( "Get %s\n", req.url().path().toLocal8Bit().data() );
 
     string id = url.host().toStdString();
 
@@ -222,7 +222,7 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
     if ( req->isFinished() )
     {
       emit finishedSignal();
-      printf( "In-place finish.\n" );
+      DPRINTF( "In-place finish.\n" );
     }
   }
 }
@@ -255,7 +255,7 @@ qint64 ArticleResourceReply::bytesAvailable() const
 
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 {
-  printf( "====reading %d bytes\n", (int)maxSize );
+  DPRINTF( "====reading %d bytes\n", (int)maxSize );
 
   bool finished = req->isFinished();
   
