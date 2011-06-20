@@ -17,6 +17,7 @@
 #include "wstring_qt.hh"
 #include "zipfile.hh"
 #include "indexedzip.hh"
+#include "dprintf.hh"
 
 #include <zlib.h>
 #include <map>
@@ -335,7 +336,7 @@ void DslDictionary::doDeferredInit()
         memcpy( &total, abrvBlock, sizeof( uint32_t ) );
         abrvBlock += sizeof( uint32_t );
 
-        printf( "Loading %u abbrv\n", total );
+        DPRINTF( "Loading %u abbrv\n", total );
 
         while( total-- )
         {
@@ -520,7 +521,7 @@ void DslDictionary::loadArticle( uint32_t address,
     memcpy( &articleSize, articleProps + sizeof( articleOffset ),
             sizeof( articleSize ) );
 
-    printf( "offset = %x\n", articleOffset );
+    DPRINTF( "offset = %x\n", articleOffset );
 
 
     char * articleBody;
@@ -1182,7 +1183,7 @@ void DslResourceRequest::run()
     FsEncoding::separator() +
     FsEncoding::encode( resourceName );
 
-  printf( "n is %s\n", n.c_str() );
+  DPRINTF( "n is %s\n", n.c_str() );
 
   try
   {
@@ -1400,7 +1401,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // Building the index
         initializing.indexingDictionary( Utf8::encode( scanner.getDictionaryName() ) );
 
-        printf( "Dictionary name: %ls\n", scanner.getDictionaryName().c_str() );
+        DPRINTF( "Dictionary name: %ls\n", scanner.getDictionaryName().c_str() );
 
         File::Class idx( indexFile, "wb" );
 
@@ -1461,7 +1462,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 if ( !abrvScanner.readNextLine( curString, curOffset ) || curString.empty() )
                 {
-                  fprintf( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
+                  FDPRINTF( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
                   eof = true;
                   break;
                 }
@@ -1501,7 +1502,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             for( map< string, string >::const_iterator i = abrv.begin();
                  i != abrv.end(); ++i )
             {
-//              printf( "%s:%s\n", i->first.c_str(), i->second.c_str() );
+//              DPRINTF( "%s:%s\n", i->first.c_str(), i->second.c_str() );
 
               sz = i->first.size();
               chunks.addToBlock( &sz, sizeof( uint32_t ) );
@@ -1513,7 +1514,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
           catch( std::exception & e )
           {
-            fprintf( stderr, "Error reading abrv file %s: %s. Skipping it.\n",
+            FDPRINTF( stderr, "Error reading abrv file %s: %s. Skipping it.\n",
                      abrvFileName.c_str(), e.what() );
           }
         }
@@ -1547,7 +1548,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               if ( !isDslWs( curString[ x ] ) )
               {
-                fprintf( stderr, "Warning: garbage string in %s at offset 0x%X\n", i->c_str(), curOffset );
+                FDPRINTF( stderr, "Warning: garbage string in %s at offset 0x%X\n", i->c_str(), curOffset );
                 break;
               }
             }
@@ -1563,7 +1564,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           uint32_t articleOffset = curOffset;
 
-          //printf( "Headword: %ls\n", curString.c_str() );
+          //DPRINTF( "Headword: %ls\n", curString.c_str() );
 
           // More headwords may follow
 
@@ -1571,14 +1572,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           {
             if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
             {
-              fprintf( stderr, "Warning: premature end of file %s\n", i->c_str() );
+              FDPRINTF( stderr, "Warning: premature end of file %s\n", i->c_str() );
               break;
             }
 
             if ( curString.empty() || isDslWs( curString[ 0 ] ) )
               break; // No more headwords
 
-            printf( "Alt headword: %ls\n", curString.c_str() );
+            DPRINTF( "Alt headword: %ls\n", curString.c_str() );
 
             processUnsortedParts( curString, true );
             expandTildes( curString, allEntryWords.front() );
@@ -1644,7 +1645,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( zipFileName.size() )
         {
-          printf( "Indexing zip file\n" );
+          DPRINTF( "Indexing zip file\n" );
 
           idxHeader.hasZipFile = 1;
 
@@ -1666,7 +1667,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               if ( entry.compressionMethod == ZipFile::Unsupported )
               {
-                printf( "Warning: compression method unsupported -- skipping file %s\n",
+                DPRINTF( "Warning: compression method unsupported -- skipping file %s\n",
                         entry.fileName.data() );
                 continue;
               }
@@ -1795,7 +1796,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "DSL dictionary reading failed: %s:%u, error: %s\n",
+      FDPRINTF( stderr, "DSL dictionary reading failed: %s:%u, error: %s\n",
         i->c_str(), atLine, e.what() );
     }
   }

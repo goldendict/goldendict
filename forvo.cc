@@ -14,6 +14,7 @@
 #include "language.hh"
 #include "langcoder.hh"
 #include "utf8.hh"
+#include "dprintf.hh"
 
 namespace Forvo {
 
@@ -145,7 +146,7 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
 void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                     wstring const & str )
 {
-  printf( "Requesting article %ls\n", str.c_str() );
+  DPRINTF( "Requesting article %ls\n", str.c_str() );
 
   QString key;
 
@@ -164,7 +165,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
       QString::fromAscii( QUrl::toPercentEncoding( gd::toQString( str ) ) ) + "/language/" + languageCode
        ).toUtf8() );
 
-//  printf( "req: %s\n", reqUrl.toEncoded().data() );
+//  DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );
 
   sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
@@ -173,7 +174,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
 void ForvoArticleRequest::requestFinished( QNetworkReply * r )
 {
-  printf( "Finished.\n" );
+  DPRINTF( "Finished.\n" );
 
   if ( isFinished() ) // Was cancelled
     return;
@@ -218,7 +219,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
       }
       else
       {
-//        printf( "%s\n", dd.toByteArray().data() );
+//        DPRINTF( "%s\n", dd.toByteArray().data() );
 
         QDomNode items = dd.namedItem( "items" );
   
@@ -342,7 +343,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
           setErrorString( text );
         }
       }
-      printf( "done.\n" );
+      DPRINTF( "done.\n" );
     }
     else
       setErrorString( netReply->errorString() );

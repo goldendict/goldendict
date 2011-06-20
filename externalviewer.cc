@@ -4,6 +4,7 @@
 #include <QDir>
 #include "externalviewer.hh"
 #include "parsecmdline.hh"
+#include "dprintf.hh"
 
 using std::vector;
 
@@ -23,7 +24,7 @@ ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
 
   tempFile.close();
 
-  printf( "%s\n", tempFile.fileName().toLocal8Bit().data() );
+  DPRINTF( "%s\n", tempFile.fileName().toLocal8Bit().data() );
 }
 
 void ExternalViewer::start() throw( exCantRunViewer )

@@ -4,6 +4,7 @@
 #endif
 
 #include "hotkeywrapper.hh"
+#include "dprintf.hh"
 
 #ifdef Q_WS_X11
 #include <X11/Xlibint.h>
@@ -384,7 +385,7 @@ void HotkeyWrapper::run() // Runs in a separate thread
   if ( !XRecordEnableContext( dataDisplay, recordContext,
                               recordEventCallback,
                               (XPointer) this ) )
-    printf( "Failed to enable record context\n" );
+    DPRINTF( "Failed to enable record context\n" );
 }
 
 

@@ -48,6 +48,8 @@ win32 {
 
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
+
+    Release:DEFINES += NO_CONSOLE
 }
 
 unix {
@@ -162,7 +164,8 @@ HEADERS += folding.hh \
     about.hh \
     programs.hh \
     parsecmdline.hh \
-    dictspanewidget.hh
+    dictspanewidget.hh \
+    dprintf.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \

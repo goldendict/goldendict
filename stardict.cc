@@ -10,6 +10,7 @@
 #include "xdxf2html.hh"
 #include "htmlescape.hh"
 #include "langcoder.hh"
+#include "dprintf.hh"
 
 #include <zlib.h>
 #include <map>
@@ -321,7 +322,7 @@ void StardictDictionary::loadArticle( uint32_t address,
       else
       if ( !size )
       {
-        fprintf( stderr, "Warning: short entry for the word %s encountered.\n", headword.c_str() );
+        FDPRINTF( stderr, "Warning: short entry for the word %s encountered.\n", headword.c_str() );
         break;
       }
 
@@ -335,7 +336,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < entrySize )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -356,7 +357,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         {
           if ( size < sizeof( uint32_t ) )
           {
-            fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+            FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
             break;
           }
 
@@ -370,7 +371,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < entrySize )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -381,7 +382,7 @@ void StardictDictionary::loadArticle( uint32_t address,
       }
       else
       {
-        fprintf( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
+        FDPRINTF( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
                          type, headword.c_str() );
         break;
       }
@@ -399,7 +400,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < len + 2 )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -414,7 +415,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         // An entry which havs its size before contents
         if ( size < sizeof( uint32_t ) + 1 )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -426,7 +427,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < sizeof( uint32_t ) + 1 + entrySize )
         {
-          fprintf( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
           break;
         }
 
@@ -437,7 +438,7 @@ void StardictDictionary::loadArticle( uint32_t address,
       }
       else
       {
-        fprintf( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
+        FDPRINTF( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
                          (unsigned)*ptr, headword.c_str() );
         break;
       }
@@ -773,8 +774,8 @@ Ifo::Ifo( File::Class & f ):
 
   static string const booknameEq( "bookname=" );
 
-  //printf( "%s<\n", f.gets().c_str() );
-  //printf( "%s<\n", f.gets().c_str() );
+  //DPRINTF( "%s<\n", f.gets().c_str() );
+  //DPRINTF( "%s<\n", f.gets().c_str() );
 
   if ( f.gets() != "StarDict's dict ifo file" ||
        f.gets().compare( 0, versionEq.size(), versionEq ) )
@@ -927,7 +928,7 @@ static void handleIdxSynFile( string const & fileName,
                                            sizeof( uint32_t ) * 2 ) >
          &image.back() )
     {
-      fprintf( stderr, "Warning: sudden end of file %s\n", fileName.c_str() );
+      FDPRINTF( stderr, "Warning: sudden end of file %s\n", fileName.c_str() );
       break;
     }
 
@@ -1001,7 +1002,7 @@ static void handleIdxSynFile( string const & fileName,
     indexedWords.addWord( Utf8::decode( word ), offset );
   }
 
-  printf( "%u entires made\n", indexedWords.size() );
+  DPRINTF( "%u entires made\n", indexedWords.size() );
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
@@ -1056,7 +1057,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           if ( ifo.synwordcount )
           {
-            printf( "Warning: dictionary has synwordcount specified, but no "
+            DPRINTF( "Warning: dictionary has synwordcount specified, but no "
                     "corresponding .syn file was found\n" );
             ifo.synwordcount = 0;  // Pretend it wasn't there
           }
@@ -1064,13 +1065,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         else
         if ( !ifo.synwordcount )
         {
-          printf( "Warning: ignoring .syn file %s, since there's no synwordcount in .ifo specified\n",
+          DPRINTF( "Warning: ignoring .syn file %s, since there's no synwordcount in .ifo specified\n",
                   synFileName.c_str() );
         }
 
 
-        printf( "bookname = %s\n", ifo.bookname.c_str() );
-        printf( "wordcount = %u\n", ifo.wordcount );
+        DPRINTF( "bookname = %s\n", ifo.bookname.c_str() );
+        DPRINTF( "wordcount = %u\n", ifo.wordcount );
 
         initializing.indexingDictionary( ifo.bookname );
 
@@ -1155,7 +1156,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "Stardict's dictionary reading failed: %s, error: %s\n",
+      FDPRINTF( stderr, "Stardict's dictionary reading failed: %s, error: %s\n",
         i->c_str(), e.what() );
     }
   }

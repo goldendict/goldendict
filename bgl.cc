@@ -10,6 +10,7 @@
 #include "chunkedstorage.hh"
 #include "langcoder.hh"
 #include "language.hh"
+#include "dprintf.hh"
 
 #include <map>
 #include <set>
@@ -191,8 +192,8 @@ namespace
 
     if ( result < 0 )
     {
-      fprintf( stderr, "Failed to decode utf8 of headword %s, skipping it.\n",
-               word.c_str() );
+      FDPRINTF( stderr, "Failed to decode utf8 of headword %s, skipping it.\n",
+                word.c_str() );
       return;
     }
 
@@ -873,7 +874,7 @@ void BglResourceRequest::run()
                        compressedData.size() ) != Z_OK ||
            decompressedLength != data.size() )
       {
-        printf( "Failed to decompress resource %s, ignoring it.\n",
+        DPRINTF( "Failed to decompress resource %s, ignoring it.\n",
           name.c_str() );
       }
       else
@@ -907,13 +908,13 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     
     for( int pos = 0; ( pos = charsetExp.indexIn( str, pos ) ) != -1; )
     {
-      //printf( "Match: %s\n", str.mid( pos, charsetExp.matchedLength() ).toUtf8().data() );
+      //DPRINTF( "Match: %s\n", str.mid( pos, charsetExp.matchedLength() ).toUtf8().data() );
       
       QString out;
 
       for( int p = 0; ( p = oneValueExp.indexIn( charsetExp.cap( 1 ), p ) ) != -1; )
       {
-        //printf( "Cap: %s\n", oneValueExp.cap( 1 ).toUtf8().data() );
+        //DPRINTF( "Cap: %s\n", oneValueExp.cap( 1 ).toUtf8().data() );
         out += "&#x" + oneValueExp.cap( 1 ) + ";";
 
         p += oneValueExp.matchedLength();
@@ -946,7 +947,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
   void ResourceHandler::handleBabylonResource( string const & filename,
                                                char const * data, size_t size )
   {
-    //printf( "Handling resource file %s (%u bytes)\n", filename.c_str(), size );
+    //DPRINTF( "Handling resource file %s (%u bytes)\n", filename.c_str(), size );
 
     vector< unsigned char > compressedData( compressBound( size ) );
 
@@ -955,8 +956,8 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     if ( compress( &compressedData.front(), &compressedSize,
                    (unsigned char const *) data, size ) != Z_OK )
     {
-      fprintf( stderr, "Failed to compress the body of resource %s, dropping it.\n",
-               filename.c_str() );
+      FDPRINTF( stderr, "Failed to compress the body of resource %s, dropping it.\n",
+                filename.c_str() );
       return;
     }
 
@@ -1009,7 +1010,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       if ( !b.read( sourceCharset, targetCharset ) )
       {
-        fprintf( stderr, "Failed to start reading from %s, skipping it\n", i->c_str() );
+        FDPRINTF( stderr, "Failed to start reading from %s, skipping it\n", i->c_str() );
         continue;
       }
 
@@ -1085,7 +1086,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       idxHeader.chunksOffset = chunks.finish();
 
-      printf( "Writing index...\n" );
+      DPRINTF( "Writing index...\n" );
 
       // Good. Now build the index
 

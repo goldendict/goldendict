@@ -6,6 +6,7 @@
 #include "langcoder.hh"
 #include <wctype.h>
 #include <stdio.h>
+#include "dprintf.hh"
 
 namespace Dsl {
 namespace Details {
@@ -379,7 +380,7 @@ ArticleDom::ArticleDom( wstring const & str ):
     stack.pop_back();
 
   if ( stack.size() )
-    fprintf( stderr, "Warning: %u tags were unclosed.\n", stack.size() );
+    FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", stack.size() );
 }
 
 void ArticleDom::closeTag( wstring const & name,
@@ -452,7 +453,7 @@ void ArticleDom::closeTag( wstring const & name,
   else
   if ( warn )
   {
-    fprintf( stderr, "Warning: no corresponding opening tag for closing tag \"/%ls\" found.\n",
+    FDPRINTF( stderr, "Warning: no corresponding opening tag for closing tag \"/%ls\" found.\n",
              name.c_str() );
   }
 }
@@ -620,7 +621,7 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
       if ( !needExactEncoding )
       {
         // We don't need that!
-        fprintf( stderr, "Warning: encoding was specified in a Unicode file, ignoring.\n" );
+        FDPRINTF( stderr, "Warning: encoding was specified in a Unicode file, ignoring.\n" );
       }
       else
       if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Latin" ) ) )
@@ -837,7 +838,7 @@ void processUnsortedParts( wstring & str, bool strip )
 
       if ( refCount < 0 )
       {
-        fprintf( stderr, "Warning: an unmatched closing brace was encountered.\n" );
+        FDPRINTF( stderr, "Warning: an unmatched closing brace was encountered.\n" );
         refCount = 0;
         // But we remove that thing either way
         str.erase( x, 1 );
@@ -866,7 +867,7 @@ void processUnsortedParts( wstring & str, bool strip )
 
   if ( strip && refCount )
   {
-    fprintf( stderr, "Warning: unclosed brace(s) encountered.\n" );
+    FDPRINTF( stderr, "Warning: unclosed brace(s) encountered.\n" );
     str.erase( startPos );
   }
 }

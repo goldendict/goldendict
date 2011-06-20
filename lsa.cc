@@ -9,6 +9,7 @@
 #include "btreeidx.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
+#include "dprintf.hh"
 
 #include <set>
 #include <string>
@@ -458,14 +459,14 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
 
     if ( result <= 0 )
     {
-      fprintf( stderr, "Warning: failed to read Vorbis data (code = %ld)\n", result );
+      FDPRINTF( stderr, "Warning: failed to read Vorbis data (code = %ld)\n", result );
       memset( ptr, 0, left );
       break;
     }
 
     if ( result > left )
     {
-      fprintf( stderr, "Warning: Vorbis decode returned more data than requested.\n" );
+      FDPRINTF( stderr, "Warning: Vorbis decode returned more data than requested.\n" );
 
       result = left;
     }
@@ -541,7 +542,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         /// XXX handle big-endian machines here!
         uint32_t entriesCount = f.read< uint32_t >();
 
-        printf( "%s: %u entries\n", i->c_str(), entriesCount );
+        DPRINTF( "%s: %u entries\n", i->c_str(), entriesCount );
 
         idxHeader.soundsCount = entriesCount;
 
@@ -557,7 +558,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           // Remove the extension, no need for that in the index
           e.name = stripExtension( e.name );
 
-          printf( "Read filename %s (%u at %u)<\n", e.name.c_str(), e.samplesLength, e.samplesOffset );
+          DPRINTF( "Read filename %s (%u at %u)<\n", e.name.c_str(), e.samplesLength, e.samplesOffset );
 
           // Insert new entry into an index
 
@@ -598,7 +599,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      fprintf( stderr, "Lingo's LSA reading failed: %s, error: %s\n",
+      FDPRINTF( stderr, "Lingo's LSA reading failed: %s, error: %s\n",
         i->c_str(), e.what() );
     }
   }

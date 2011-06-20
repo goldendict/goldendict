@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QFile>
 #include <QtXml>
+#include "dprintf.hh"
 
 #ifdef _MSC_VER
 #include <stdint_msvc.h>
@@ -346,7 +347,7 @@ Class load() throw( exError )
     // Load the config as usual
     if ( !dd.setContent( &configFile, false, &errorStr, &errorLine, &errorColumn  ) )
     {
-      printf( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
+      DPRINTF( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
         throw exMalformedConfigFile();
     }
   }
@@ -361,7 +362,7 @@ Class load() throw( exError )
 
     if ( !dd.setContent( &bufferedData, false, &errorStr, &errorLine, &errorColumn  ) )
     {
-      printf( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
+      DPRINTF( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
         throw exMalformedConfigFile();
     }
   }

@@ -4,6 +4,7 @@
 #include "indexedzip.hh"
 #include "zipfile.hh"
 #include <zlib.h>
+#include "dprintf.hh"
 
 using namespace BtreeIndexing;
 using std::vector;
@@ -46,7 +47,7 @@ bool IndexedZip::loadFile( gd::wstring const & name, vector< char > & data )
 
   if ( !ZipFile::readLocalHeader( zip, header ) )
   {
-    printf( "Failed to load header\n" );
+    DPRINTF( "Failed to load header\n" );
     return false;
   }
 
@@ -55,13 +56,13 @@ bool IndexedZip::loadFile( gd::wstring const & name, vector< char > & data )
   switch( header.compressionMethod )
   {
     case ZipFile::Uncompressed:
-      printf( "Uncompressed\n" );
+      DPRINTF( "Uncompressed\n" );
       data.resize( header.uncompressedSize );
       return zip.read( &data.front(), data.size() ) == data.size();
 
     case ZipFile::Deflated:
     {
-      printf( "Deflated\n" );
+      DPRINTF( "Deflated\n" );
 
       // Now do the deflation
 
@@ -89,7 +90,7 @@ bool IndexedZip::loadFile( gd::wstring const & name, vector< char > & data )
 
       if ( inflate( &stream, Z_FINISH ) != Z_STREAM_END )
       {
-        printf( "Not zstream end!" );
+        DPRINTF( "Not zstream end!" );
 
         data.clear();
 

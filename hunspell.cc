@@ -17,6 +17,7 @@
 #include <QCoreApplication>
 #include <set>
 #include <hunspell/hunspell.hxx>
+#include "dprintf.hh"
 
 namespace HunspellMorpho {
 
@@ -254,7 +255,7 @@ void HunspellArticleRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    printf( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    DPRINTF( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   if ( suggestions )
@@ -460,7 +461,7 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
       {
         QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ] ) );
 
-        printf( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
+        DPRINTF( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
 
         if ( cutStem.indexIn( suggestion ) != -1 )
         {
@@ -468,7 +469,7 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
 
           if ( Folding::applySimpleCaseOnly( alt ) != lowercasedWord ) // No point in providing same word
           {
-            printf( ">>>>>Alt: %ls\n", alt.c_str() );
+            DPRINTF( ">>>>>Alt: %ls\n", alt.c_str() );
             result.append( alt );
           }
         }
@@ -477,7 +478,7 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
   }
   catch( Iconv::Ex & e )
   {
-    printf( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    DPRINTF( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   if ( suggestions )
@@ -599,7 +600,7 @@ void HunspellPrefixMatchRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    printf( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    DPRINTF( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   finish();

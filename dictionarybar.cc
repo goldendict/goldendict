@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QMenu>
 #include <QContextMenuEvent>
+#include "dprintf.hh"
 
 using std::vector;
 
@@ -118,7 +119,7 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
 
 void DictionaryBar::mutedDictionariesChanged()
 {
-  //printf( "Muted dictionaries changed\n" );
+  //DPRINTF( "Muted dictionaries changed\n" );
 
   // Update actions
 

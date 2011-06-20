@@ -8,6 +8,7 @@
 #include <QUrl>
 #include <QtXml>
 #include <list>
+#include "dprintf.hh"
 
 namespace MediaWiki {
 
@@ -87,7 +88,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
                                                         QNetworkAccessManager & mgr ):
   livedLongEnough( false ), isCancelling( false )
 {
-  printf( "request begin\n" );
+  DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
   reqUrl.addQueryItem( "apfrom", gd::toQString( str ) );
@@ -113,7 +114,7 @@ void MediaWikiWordSearchRequest::timerEvent( QTimerEvent * ev )
 
 MediaWikiWordSearchRequest::~MediaWikiWordSearchRequest()
 {
-  printf( "request end\n" );
+  DPRINTF( "request end\n" );
 }
 
 void MediaWikiWordSearchRequest::cancel()
@@ -129,7 +130,7 @@ void MediaWikiWordSearchRequest::cancel()
     finish();
   }
   else
-    printf("not long enough\n" );
+    DPRINTF("not long enough\n" );
 }
 
 void MediaWikiWordSearchRequest::downloadFinished()
@@ -163,7 +164,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
           matches.push_back( gd::toWString( nl.item( x ).toElement().attribute( "title" ) ) );
       }
     }
-    printf( "done.\n" );
+    DPRINTF( "done.\n" );
   }
   else
     setErrorString( netReply->errorString() );
@@ -215,7 +216,7 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
 void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                         wstring const & str )
 {
-  printf( "Requesting article %ls\n", str.c_str() );
+  DPRINTF( "Requesting article %ls\n", str.c_str() );
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
@@ -228,7 +229,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
 void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 {
-  printf( "Finished.\n" );
+  DPRINTF( "Finished.\n" );
 
   if ( isFinished() ) // Was cancelled
     return;
@@ -304,7 +305,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
   
             QByteArray articleBody = articleString.toUtf8();
   
-            printf( "Article body after: %s\n", articleBody.data() );
+            DPRINTF( "Article body after: %s\n", articleBody.data() );
   
             articleBody.prepend( "<div class=\"mwiki\">" );
             articleBody.append( "</div>" );
@@ -323,7 +324,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
           }
         }
       }
-      printf( "done.\n" );
+      DPRINTF( "done.\n" );
     }
     else
       setErrorString( netReply->errorString() );
