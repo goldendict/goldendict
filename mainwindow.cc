@@ -306,6 +306,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab.setAutoRaise( true );
   addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
 
+  ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
   ui.tabWidget->clear();
 
   ui.tabWidget->setCornerWidget( &addTab, Qt::TopLeftCorner );
@@ -1166,6 +1167,8 @@ void MainWindow::editPreferences()
     applyProxySettings();
     applyWebSettings();
     makeScanPopup();
+
+    ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
 
     setAutostart( cfg.preferences.autoStart );
 

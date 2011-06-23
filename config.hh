@@ -139,6 +139,7 @@ struct Preferences
   QString displayStyle; // Empty value corresponds to the default one
   bool newTabsOpenAfterCurrentOne;
   bool newTabsOpenInBackground;
+  bool hideSingleTab;
   bool enableTrayIcon;
   bool startToTray;
   bool closeToTray;

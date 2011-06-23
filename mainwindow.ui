@@ -25,7 +25,7 @@
      <number>1</number>
     </property>
     <item>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="MainTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -412,6 +412,12 @@
    <class>DictsPaneWidget</class>
    <extends>QWidget</extends>
    <header>dictspanewidget.hh</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MainTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>maintabwidget.hh</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
