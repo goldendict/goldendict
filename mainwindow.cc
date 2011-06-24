@@ -1273,10 +1273,7 @@ void MainWindow::handleEsc()
 
   if( cfg.preferences.escKeyHidesMainWindow )
   {
-    if( cfg.preferences.enableTrayIcon )
-      hide();
-    else
-      showMinimized();
+    toggleMainWindow();
   }
   else
     focusTranslateLine();
@@ -1729,7 +1726,12 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   }
   else
   if ( !onlyShow )
-    hide();
+  {
+    if (cfg.preferences.enableTrayIcon)
+      hide();
+    else
+      showMinimized();
+  }
 
   if ( shown )
     focusTranslateLine();
@@ -1777,7 +1779,7 @@ void MainWindow::installHotKeys()
 void MainWindow::hotKeyActivated( int hk )
 {
   if ( !hk )
-    on_actionCloseToTray_activated();
+    toggleMainWindow();
   else
   if ( scanPopup.get() )
     scanPopup->translateWordFromClipboard();
