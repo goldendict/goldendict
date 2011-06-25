@@ -59,8 +59,8 @@
          <property name="title">
           <string>Tabbed browsing</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_11">
-          <item>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
            <widget class="QCheckBox" name="newTabsOpenInBackground">
             <property name="toolTip">
              <string>Normally, opening a new tab switches to it immediately.
@@ -72,7 +72,7 @@ switching to them.</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="1" column="0">
            <widget class="QCheckBox" name="newTabsOpenAfterCurrentOne">
             <property name="toolTip">
              <string>With this on, new tabs are opened just after the
@@ -81,6 +81,16 @@ be the last ones.</string>
             </property>
             <property name="text">
              <string>Open new tabs after the current one</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="hideSingleTab">
+            <property name="toolTip">
+             <string>Select this option if you don't want to see the main tab bar when only a single tab is opened.</string>
+            </property>
+            <property name="text">
+             <string>Hide single tab</string>
             </property>
            </widget>
           </item>
