@@ -977,11 +977,21 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
   escaped.replace( "&", "&&" );
 
   ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), escaped );
+  updateWindowTitle();
 }
 
 void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
 {
   ui.tabWidget->setTabIcon( ui.tabWidget->indexOf( view ), groupInstances.size() > 1 ? icon : QIcon() );
+}
+
+void MainWindow::updateWindowTitle()
+{
+    if ( QWidget * cw = ui.tabWidget->currentWidget() )
+    {
+      ArticleView & view = dynamic_cast< ArticleView & >( *( cw ) );
+      setWindowTitle( tr( "%1 - %2" ).arg( view.getTitle(), tr ( "GoldenDict" ) ) );
+    }
 }
 
 void MainWindow::pageLoaded( ArticleView * view )
@@ -1001,6 +1011,7 @@ void MainWindow::tabSwitched( int )
   updateBackForwardButtons();
   updatePronounceAvailability();
   updateFoundInDictsList();
+  updateWindowTitle();
 }
 
 void MainWindow::tabMenuRequested(QPoint pos)
