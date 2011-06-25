@@ -2044,6 +2044,11 @@ void MainWindow::on_clearHistory_activated()
   history.save();
 }
 
+void MainWindow::on_newTab_activated()
+{
+  addNewTab();
+}
+
 void MainWindow::setAutostart(bool autostart)
 {
 #ifdef Q_OS_WIN32

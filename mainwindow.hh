@@ -285,6 +285,8 @@ private slots:
   void menuHistoryTriggered( QAction * );
   void on_clearHistory_activated();
 
+  void on_newTab_activated();
+
   void on_actionCloseToTray_activated();
 
   void on_pageSetup_activated();

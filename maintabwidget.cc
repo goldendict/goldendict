@@ -1,3 +1,6 @@
+/* This file is (c) 2011 Tvangeste <i.4m.l33t@yandex.ru>
+ * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
+
 #include "maintabwidget.hh"
 
 MainTabWidget::MainTabWidget( QWidget * parent) : QTabWidget( parent ) {

@@ -65,6 +65,8 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="newTab"/>
+    <addaction name="separator"/>
     <addaction name="pageSetup"/>
     <addaction name="printPreview"/>
     <addaction name="print"/>
@@ -398,6 +400,21 @@
   <action name="clearHistory">
    <property name="text">
     <string>&amp;Clear</string>
+   </property>
+  </action>
+  <action name="newTab">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/addtab.png</normaloff>:/icons/addtab.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetShortcut</enum>
    </property>
   </action>
  </widget>
