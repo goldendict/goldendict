@@ -83,6 +83,7 @@ Preferences::Preferences():
   newTabsOpenAfterCurrentOne( false ),
   newTabsOpenInBackground( true ),
   hideSingleTab( false ),
+  hideMenubar( false ),
   enableTrayIcon( true ),
   startToTray( false ),
   closeToTray( true ),
@@ -564,6 +565,7 @@ Class load() throw( exError )
     c.preferences.newTabsOpenAfterCurrentOne = ( preferences.namedItem( "newTabsOpenAfterCurrentOne" ).toElement().text() == "1" );
     c.preferences.newTabsOpenInBackground = ( preferences.namedItem( "newTabsOpenInBackground" ).toElement().text() == "1" );
     c.preferences.hideSingleTab = ( preferences.namedItem( "hideSingleTab" ).toElement().text() == "1" );
+    c.preferences.hideMenubar = ( preferences.namedItem( "hideMenubar" ).toElement().text() == "1" );
     c.preferences.enableTrayIcon = ( preferences.namedItem( "enableTrayIcon" ).toElement().text() == "1" );
     c.preferences.startToTray = ( preferences.namedItem( "startToTray" ).toElement().text() == "1" );
     c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
@@ -1026,6 +1028,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "hideSingleTab" );
     opt.appendChild( dd.createTextNode( c.preferences.hideSingleTab ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "hideMenubar" );
+    opt.appendChild( dd.createTextNode( c.preferences.hideMenubar ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "enableTrayIcon" );
