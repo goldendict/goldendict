@@ -38,6 +38,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   switchToPrevTabAction( this ),
   showDictBarNamesAction( tr( "Show Names in Dictionary Bar" ), this ),
   useSmallIconsInToolbarsAction( tr( "Show Small Icons in Toolbars" ), this ),
+  toggleMenuBarAction( tr( "&Menubar" ), this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -250,8 +251,17 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &useSmallIconsInToolbarsAction, SIGNAL( triggered() ),
            this, SLOT( useSmallIconsInToolbarsTriggered() ) );
 
+  // Toggle Menubar
+  toggleMenuBarAction.setCheckable( true );
+  toggleMenuBarAction.setChecked( true );
+  toggleMenuBarAction.setShortcut( QKeySequence( "Ctrl+M" ) );
+
+  connect( &toggleMenuBarAction, SIGNAL( triggered() ),
+           this, SLOT( toggleMenuBarTriggered() ) );
+
   // Populate 'View' menu
 
+  ui.menuView->addAction( &toggleMenuBarAction );
   ui.menuView->addAction( ui.searchPane->toggleViewAction() );
   ui.menuView->addAction( ui.dictsPane->toggleViewAction() );
   ui.menuView->addSeparator();
@@ -445,6 +455,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( &newReleaseCheckTimer, SIGNAL( timeout() ),
            this, SLOT( checkForNewRelease() ) );
+
+  if ( cfg.preferences.hideMenubar )
+  {
+    toggleMenuBarTriggered( false );
+  }
 
   prepareNewReleaseChecks();
 
@@ -2003,6 +2018,53 @@ void MainWindow::useSmallIconsInToolbarsTriggered()
   updateDictionaryBar();
 
   cfg.usingSmallIconsInToolbars = useSmallIcons;
+}
+
+void MainWindow::toggleMenuBarTriggered(bool announce)
+{
+  cfg.preferences.hideMenubar = menuBar()->isVisible();
+
+  if ( announce && cfg.preferences.hideMenubar )
+  {
+    statusBar()->showMessage(
+          tr( "You have chosen to hide a menubar. Use %1 to show it back." ).arg( tr( "Ctl+M" ) ), 10000 );
+  }
+  else
+  {
+    statusBar()->clearMessage();
+  }
+
+  // Obtain from the menubar all the actions with shortcuts
+  // and either add them to the main window or remove them,
+  // depending on the menubar state.
+
+  QList<QMenu *> allMenus = menuBar()->findChildren<QMenu *>();
+  QListIterator<QMenu *> menuIter( allMenus );
+  while( menuIter.hasNext() )
+  {
+    QMenu * menu = menuIter.next();
+    QList<QAction *> allMenuActions = menu->actions();
+    QListIterator<QAction *> actionsIter( allMenuActions );
+    while( actionsIter.hasNext() )
+    {
+      QAction * action = actionsIter.next();
+      if ( !action->shortcut().isEmpty() )
+      {
+        if ( cfg.preferences.hideMenubar )
+        {
+          // add all menubar actions to the main window,
+          // before we hide the menubar
+          addAction( action );
+        }
+        else
+        {
+          // remove all menubar actions from the main window
+          removeAction( action );
+        }
+      }
+    }
+  }
+  menuBar()->setVisible( !cfg.preferences.hideMenubar );
 }
 
 void MainWindow::historyChanged()

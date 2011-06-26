@@ -70,7 +70,8 @@ private:
 
   QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           closeAllTabAction, closeRestTabAction,
-          switchToNextTabAction, switchToPrevTabAction, showDictBarNamesAction, useSmallIconsInToolbarsAction;
+          switchToNextTabAction, switchToPrevTabAction,
+          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction;
   QToolBar * navToolbar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup, * scanPopupSeparator;
   QAction * zoomIn, * zoomOut, * zoomBase;
@@ -282,6 +283,7 @@ private slots:
 
   void showDictBarNamesTriggered();
   void useSmallIconsInToolbarsTriggered();
+  void toggleMenuBarTriggered( bool announce = true );
 
   void historyChanged();
   void menuHistoryTriggered( QAction * );
