@@ -22,6 +22,7 @@
 #include "dictionarybar.hh"
 #include "history.hh"
 #include "hotkeywrapper.hh"
+#include "mainstatusbar.hh"
 
 #ifdef Q_WS_X11
 #include <fixx11h.h>
@@ -73,6 +74,7 @@ private:
           switchToNextTabAction, switchToPrevTabAction,
           showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction;
   QToolBar * navToolbar;
+  MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup, * scanPopupSeparator;
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;

@@ -16,6 +16,7 @@
 #include <set>
 #include <map>
 #include "dprintf.hh"
+#include <QDebug>
 
 using std::set;
 using std::wstring;
@@ -54,6 +55,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   applyQtStyleSheet( cfg.preferences.displayStyle );
 
   ui.setupUi( this );
+
+  // use our own, cutsom statusbar
+  setStatusBar(0);
+  mainStatusBar = new MainStatusBar( this );
 
   wordListDefaultFont = ui.wordList->font();
   translateLineDefaultFont = ui.translateLine->font();
@@ -465,6 +470,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // makeDictionaries() didn't do deferred init - we do it here, at the end.
   doDeferredInit( dictionaries );
+
+  updateStatusLine();
 }
 
 void MainWindow::mousePressEvent( QMouseEvent *event)
@@ -684,9 +691,9 @@ void MainWindow::updateStatusLine()
     wordCount += dictionaries[ x ]->getWordCount();
   }
 
-  statusBar()->showMessage( tr( "%1 dictionaries, %2 articles, %3 words" ).
+  mainStatusBar->showMessage( tr( "%1 dictionaries, %2 articles, %3 words" ).
                               arg( dictionaries.size() ).arg( articleCount ).
-                              arg( wordCount ) );
+                              arg( wordCount ), 10000 );
 }
 
 void MainWindow::updateGroupList()
@@ -1244,8 +1251,10 @@ void MainWindow::translateInputChanged( QString const & newValue )
 {
   // If there's some status bar message present, clear it since it may be
   // about the previous search that has failed.
-  if ( !statusBar()->currentMessage().isEmpty() )
-    statusBar()->clearMessage();
+  if ( !mainStatusBar->currentMessage().isEmpty() )
+  {
+    mainStatusBar->clearMessage();
+  }
 
   // If some word is selected in the word list, unselect it. This prevents
   // triggering a set of spurious activation signals when the list changes.
@@ -1401,7 +1410,7 @@ void MainWindow::updateMatchResults( bool finished )
     }
 
     if ( !wordFinder.getErrorString().isEmpty() )
-      statusBar()->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ) );
+      mainStatusBar->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ), 20000 );
   }
 }
 
@@ -2024,14 +2033,17 @@ void MainWindow::toggleMenuBarTriggered(bool announce)
 {
   cfg.preferences.hideMenubar = menuBar()->isVisible();
 
-  if ( announce && cfg.preferences.hideMenubar )
+  if ( announce )
   {
-    statusBar()->showMessage(
-          tr( "You have chosen to hide a menubar. Use %1 to show it back." ).arg( tr( "Ctl+M" ) ), 10000 );
-  }
-  else
-  {
-    statusBar()->clearMessage();
+    if ( cfg.preferences.hideMenubar )
+    {
+      mainStatusBar->showMessage(
+            tr( "You have chosen to hide a menubar. Use %1 to show it back." ).arg( tr( "Ctrl+M" ) ), 10000 );
+    }
+    else
+    {
+      mainStatusBar->clearMessage();
+    }
   }
 
   // Obtain from the menubar all the actions with shortcuts
