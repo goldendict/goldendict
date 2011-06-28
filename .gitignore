@@ -6,6 +6,7 @@ locale/*.qm
 debug/
 build/
 release/
+goldendict
 
 Makefile
 Makefile.Debug
