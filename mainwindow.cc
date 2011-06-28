@@ -63,9 +63,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   wordListDefaultFont = ui.wordList->font();
   translateLineDefaultFont = ui.translateLine->font();
 
+  ui.wordList->setFocusPolicy(Qt::ClickFocus);
+
   // Make the search pane's titlebar
 
   groupLabel.setText( tr( "Look up in:" ) );
+  groupList.setFocusPolicy(Qt::ClickFocus);
 
   searchPaneTitleBarLayout.setContentsMargins( 8, 5, 8, 4 );
   searchPaneTitleBarLayout.addWidget( &groupLabel );
@@ -319,6 +322,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( forwardClicked() ) );
 
   addTab.setAutoRaise( true );
+  addTab.setFocusPolicy(Qt::ClickFocus);
   addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
 
   ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
@@ -832,6 +836,7 @@ void MainWindow::createTabList()
   tabListButton->setMenu(tabListMenu);
   tabListButton->setPopupMode(QToolButton::InstantPopup);
   ui.tabWidget->setCornerWidget(tabListButton);
+  tabListButton->setFocusPolicy(Qt::ClickFocus);
 }
 
 void MainWindow::fillWindowsMenu()

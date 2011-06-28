@@ -443,6 +443,7 @@
  <tabstops>
   <tabstop>translateLine</tabstop>
   <tabstop>tabWidget</tabstop>
+  <tabstop>dictsList</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
