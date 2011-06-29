@@ -69,7 +69,7 @@ private:
   /// Fonts saved before words zooming is in effect, so it could be reset back.
   QFont wordListDefaultFont, translateLineDefaultFont;
 
-  QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
+  QAction escAction, f3Action, shiftF3Action, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction,
           showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction;
@@ -240,6 +240,10 @@ private slots:
 
   /// Closes any opened search in the article view, and focuses the translateLine/close main window to tray.
   void handleEsc();
+
+  /// Either triggers Edit Dictionaries menu option or perform a Find Next action.
+  void handleF3();
+  void handleShiftF3();
 
   /// Gives the keyboard focus to the translateLine and selects all the text
   /// it has.

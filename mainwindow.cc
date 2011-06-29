@@ -30,6 +30,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   groupList( &searchPaneTitleBar ),
   foundInDictsLabel( &dictsPaneTitleBar ),
   escAction( this ),
+  f3Action( this ),
+  shiftF3Action( this ),
   focusTranslateLineAction( this ),
   addTabAction( this ),
   closeCurrentTabAction( this ),
@@ -164,6 +166,20 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   escAction.setShortcut( QKeySequence( "Esc" ) );
   connect( &escAction, SIGNAL( triggered() ),
            this, SLOT( handleEsc() ) );
+
+  f3Action.setShortcutContext( Qt::ApplicationShortcut );
+  f3Action.setShortcut( QKeySequence( "F3" ) );
+  connect( &f3Action, SIGNAL( triggered() ),
+           this, SLOT( handleF3() ) );
+
+  addAction( &f3Action );
+
+  shiftF3Action.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  shiftF3Action.setShortcut( QKeySequence( "Shift+F3" ) );
+  connect( &shiftF3Action, SIGNAL( triggered() ),
+           this, SLOT( handleShiftF3() ) );
+
+  addAction( &shiftF3Action );
 
   focusTranslateLineAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   focusTranslateLineAction.setShortcuts( QList< QKeySequence >() <<
@@ -1320,6 +1336,24 @@ void MainWindow::handleEsc()
   }
   else
     focusTranslateLine();
+}
+
+void MainWindow::handleF3()
+{
+  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+  if( view.isSearchOpened() )
+    view.on_searchNext_clicked();
+  else
+    editDictionaries();
+}
+
+void MainWindow::handleShiftF3()
+{
+  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+
+  if( view.isSearchOpened() )
+    view.on_searchPrevious_clicked();
 }
 
 void MainWindow::focusTranslateLine()

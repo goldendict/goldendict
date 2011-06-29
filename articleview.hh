@@ -144,6 +144,8 @@ public:
   /// wasn't open.
   bool closeSearch();
 
+  bool isSearchOpened();
+
   /// Jumps to the article specified by the dictionary id,
   /// by executing a javascript code.
   void jumpToDictionary( QString const & );
@@ -173,6 +175,11 @@ signals:
   /// switch focus to word input.
   void typingEvent( QString const & text );
 
+public slots:
+
+  void on_searchPrevious_clicked();
+  void on_searchNext_clicked();
+
 private slots:
 
   void loadFinished( bool ok );
@@ -195,8 +202,6 @@ private slots:
   /// Opens the search area
   void openSearch();
 
-  void on_searchPrevious_clicked();
-  void on_searchNext_clicked();
   void on_searchText_textEdited();
   void on_searchText_returnPressed();
   void on_searchCloseButton_clicked();
