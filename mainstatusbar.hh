@@ -31,7 +31,7 @@ private:
   QTimer * timer;
   QString message;
   bool eventFilter(QObject *obj, QEvent * event);
-  void refresh();
+  void refresh(bool forceHide = false);
 };
 
 #endif // MAINSTATUSBAR_HH

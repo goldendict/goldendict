@@ -59,8 +59,14 @@ void MainStatusBar::showMessage(const QString & str, int timeout)
     refresh();
 }
 
-void MainStatusBar::refresh()
+void MainStatusBar::refresh(bool forceHide)
 {
+
+  if ( forceHide )
+  {
+    hide();
+    return;
+  }
 
   if ( !message.isEmpty() )
   {
@@ -72,6 +78,19 @@ void MainStatusBar::refresh()
     adjustSize();
 
     move(pGeom.left(), pGeom.bottom() - size().height() + 1 );
+
+    if ( parentWidget()->isHidden() )
+    {
+      hide();
+      return;
+    }
+
+    if ( parentWidget()->isMinimized() )
+    {
+      hide();
+      return;
+    }
+
     show();
   }
   else
@@ -86,15 +105,23 @@ void MainStatusBar::mousePressEvent ( QMouseEvent * )
   clearMessage();
 }
 
-bool MainStatusBar::eventFilter(QObject *, QEvent * event)
+bool MainStatusBar::eventFilter(QObject *, QEvent * e)
 {
-  switch ( event->type() ) {
-    case QEvent::Move:
+  switch ( e->type() ) {
+    case QEvent::Hide:
     case QEvent::Resize:
     case QEvent::FocusOut:
     case QEvent::WindowDeactivate:
-    case QEvent::Hide:
+#ifdef Q_WS_X11
+      // workaround for X11 idiosyncrasies
+      // qDebug() << e->type();
+      refresh(true);
+      break;
+#endif
+    case QEvent::Move:
+    case QEvent::WindowStateChange:
     case QEvent::WindowActivate:
+      // qDebug() << e->type();
       refresh();
       break;
     default:
