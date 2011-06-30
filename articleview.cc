@@ -1334,10 +1334,6 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 {
   QString text = ui.searchText->text();
 
-  //highlight in a non-default color current selection
-  if( ui.definition->settings()->userStyleSheetUrl().isEmpty() )
-    ui.definition->settings()->setUserStyleSheetUrl(QUrl::fromLocalFile( ":/article-style-search-selection.css" ));
-
   if ( restart || checkHighlight )
   {
     if( restart ) {
