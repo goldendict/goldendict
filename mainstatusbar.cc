@@ -70,14 +70,15 @@ void MainStatusBar::refresh(bool forceHide)
 
   if ( !message.isEmpty() )
   {
-    QRect pGeom = parentWidget()->geometry();
 
-    int maxLabelLength = pGeom.width() - 2 * layout()->margin();
+    int maxLabelLength = parentWidget()->width() - 2 * layout()->margin();
     label->setText( label->fontMetrics().elidedText( message, Qt::ElideRight, maxLabelLength ) );
 
     adjustSize();
 
-    move(pGeom.left(), pGeom.bottom() - size().height() + 1 );
+    // move(pGeom.left(), pGeom.bottom() - size().height() + 1 );
+
+    move(parentWidget()->mapToGlobal(QPoint(0, parentWidget()->height() - height() + 1)));
 
     if ( parentWidget()->isHidden() )
     {
@@ -109,8 +110,6 @@ bool MainStatusBar::eventFilter(QObject *, QEvent * e)
 {
   switch ( e->type() ) {
     case QEvent::Hide:
-    case QEvent::Resize:
-    case QEvent::FocusOut:
     case QEvent::WindowDeactivate:
 #ifdef Q_WS_X11
       // workaround for X11 idiosyncrasies
@@ -118,6 +117,8 @@ bool MainStatusBar::eventFilter(QObject *, QEvent * e)
       refresh(true);
       break;
 #endif
+    case QEvent::Resize:
+    case QEvent::FocusOut:
     case QEvent::Move:
     case QEvent::WindowStateChange:
     case QEvent::WindowActivate:
