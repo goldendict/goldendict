@@ -440,10 +440,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Show the initial welcome text
 
   {
-    ArticleView & view =
-      dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+    ArticleView *view = getCurrentArticleView();
 
-    view.showDefinition( tr( "Welcome!" ), Instances::Group::HelpGroupId );
+    view->showDefinition( tr( "Welcome!" ), Instances::Group::HelpGroupId );
   }
 
   ui.translateLine->setFocus();
@@ -998,20 +997,18 @@ void MainWindow::backClicked()
 {
   DPRINTF( "Back\n" );
 
-  ArticleView & view =
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  ArticleView *view = getCurrentArticleView();
 
-  view.back();
+  view->back();
 }
 
 void MainWindow::forwardClicked()
 {
   DPRINTF( "Forward\n" );
 
-  ArticleView & view =
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  ArticleView *view = getCurrentArticleView();
 
-  view.forward();
+  view->forward();
 }
 
 void MainWindow::titleChanged( ArticleView * view, QString const & title )
@@ -1030,11 +1027,11 @@ void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
 
 void MainWindow::updateWindowTitle()
 {
-    if ( QWidget * cw = ui.tabWidget->currentWidget() )
-    {
-      ArticleView & view = dynamic_cast< ArticleView & >( *( cw ) );
-      setWindowTitle( tr( "%1 - %2" ).arg( view.getTitle(), tr ( "GoldenDict" ) ) );
-    }
+  ArticleView *view = getCurrentArticleView();
+  if ( view )
+  {
+    setWindowTitle( tr( "%1 - %2" ).arg( view->getTitle(), tr ( "GoldenDict" ) ) );
+  }
 }
 
 void MainWindow::pageLoaded( ArticleView * view )
@@ -1081,7 +1078,7 @@ void MainWindow::pronounce( ArticleView * view )
   if ( view )
     view->playSound();
   else
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).playSound();
+    getCurrentArticleView()->playSound();
 }
 
 void MainWindow::dictsPaneVisibilityChanged( bool visible )
@@ -1101,11 +1098,11 @@ void MainWindow::updateFoundInDictsList()
 
   ui.dictsList->clear();
 
-  if ( QWidget * cw = ui.tabWidget->currentWidget() )
-  {
-    ArticleView & view = dynamic_cast< ArticleView & >( *( cw ) );
+  ArticleView *view = getCurrentArticleView();
 
-    QStringList ids = view.getArticlesList();
+  if ( view )
+  {
+    QStringList ids = view->getArticlesList();
 
     for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd(); ++i)
     {
@@ -1135,18 +1132,19 @@ void MainWindow::updateFoundInDictsList()
 
 void MainWindow::updateBackForwardButtons()
 {
-  if ( QWidget * cw = ui.tabWidget->currentWidget() )
+  ArticleView *view = getCurrentArticleView();
+
+  if ( view )
   {
-    ArticleView & view = dynamic_cast< ArticleView & >( *( cw ) );
-    navBack->setEnabled(view.canGoBack());
-    navForward->setEnabled(view.canGoForward());
+    navBack->setEnabled(view->canGoBack());
+    navForward->setEnabled(view->canGoForward());
   }
 }
 
 void MainWindow::updatePronounceAvailability()
 {
   bool pronounceEnabled = ui.tabWidget->count() > 0 &&
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).hasSound();
+    getCurrentArticleView()->hasSound();
 
   navPronounce->setEnabled( pronounceEnabled );
 }
@@ -1321,13 +1319,14 @@ void MainWindow::translateInputFinished()
     if ( ui.searchPane->isFloating() )
       activateWindow();
 
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).focus();
+    getCurrentArticleView()->focus();
   }
 }
 
 void MainWindow::handleEsc()
 {
-  if ( dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).closeSearch() )
+  ArticleView *view = getCurrentArticleView();
+  if ( view && view->closeSearch() )
     return;
 
   if( cfg.preferences.escKeyHidesMainWindow )
@@ -1340,20 +1339,20 @@ void MainWindow::handleEsc()
 
 void MainWindow::handleF3()
 {
-  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  ArticleView *view = getCurrentArticleView();
 
-  if( view.isSearchOpened() )
-    view.on_searchNext_clicked();
+  if( view && view->isSearchOpened() )
+    view->on_searchNext_clicked();
   else
     editDictionaries();
 }
 
 void MainWindow::handleShiftF3()
 {
-  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  ArticleView *view = getCurrentArticleView();
 
-  if( view.isSearchOpened() )
-    view.on_searchPrevious_clicked();
+  if( view && view->isSearchOpened() )
+    view->on_searchPrevious_clicked();
 }
 
 void MainWindow::focusTranslateLine()
@@ -1458,13 +1457,12 @@ void MainWindow::applyMutedDictionariesState()
   // Redo the current search request
   translateInputChanged( ui.translateLine->text() );
 
-  if ( QWidget * tabWidget = ui.tabWidget->currentWidget() )
+  ArticleView *view = getCurrentArticleView();
+
+  if ( view )
   {
     // Update active article view
-    ArticleView & view =
-      dynamic_cast< ArticleView & >( *tabWidget );
-
-    view.updateMutedContents();
+    view->updateMutedContents();
   }
 }
 
@@ -1534,7 +1532,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         if ( ui.searchPane->isFloating() )
           activateWindow();
 
-        dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) ).focus();
+        getCurrentArticleView()->focus();
 
         return true;
       }
@@ -1610,9 +1608,8 @@ void MainWindow::wordListSelectionChanged()
 
 void MainWindow::dictsListItemActivated( QListWidgetItem * item )
 {
-  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
   QString id = item->data( Qt::UserRole ).toString();
-  view.jumpToDictionary( id );
+  getCurrentArticleView()->jumpToDictionary( id );
 }
 
 void MainWindow::dictsListSelectionChanged()
@@ -1665,8 +1662,7 @@ void MainWindow::mutedDictionariesChanged()
 void MainWindow::showTranslationFor( QString const & inWord,
                                      unsigned inGroup )
 {
-  ArticleView & view =
-    dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  ArticleView *view = getCurrentArticleView();
 
   navPronounce->setEnabled( false );
 
@@ -1674,7 +1670,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
                    ( groupInstances.empty() ? 0 :
                         groupInstances[ groupList.currentIndex() ].id );
 
-  view.showDefinition( inWord, group );
+  view->showDefinition( inWord, group );
 
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -2239,21 +2235,21 @@ void MainWindow::on_print_activated()
   if ( dialog.exec() != QDialog::Accepted )
    return;
 
-  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  ArticleView *view = getCurrentArticleView();
 
-  view.print( &getPrinter() );
+  view->print( &getPrinter() );
 }
 
 void MainWindow::printPreviewPaintRequested( QPrinter * printer )
 {
-  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  ArticleView *view = getCurrentArticleView();
 
-  view.print( printer );
+  view->print( printer );
 }
 
 void MainWindow::on_saveArticle_activated()
 {
-  ArticleView & view = dynamic_cast< ArticleView & >( *( ui.tabWidget->currentWidget() ) );
+  ArticleView *view = getCurrentArticleView();
 
   QFileDialog fileDialog( this, tr( "Save Article As" ), QString(), tr( "Html files (*.html *.htm)" ) );
 
@@ -2261,7 +2257,7 @@ void MainWindow::on_saveArticle_activated()
 
   fileDialog.setDefaultSuffix( "html" );
 
-  fileDialog.selectFile( view.getTitle() + ".html" );
+  fileDialog.selectFile( view->getTitle() + ".html" );
 
   if ( fileDialog.exec() && fileDialog.selectedFiles().size() == 1 )
   {
@@ -2273,7 +2269,7 @@ void MainWindow::on_saveArticle_activated()
       QMessageBox::critical( this, tr( "Error" ),
                              tr( "Can't save article: %1" ).arg( file.errorString() ) );
     else
-      file.write( view.toHtml().toUtf8() );
+      file.write( view->toHtml().toUtf8() );
   }
 }
 
@@ -2398,4 +2394,13 @@ void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
     toggleMainWindow( true );
   else
     qWarning() << "Unknown message received from another instance: " << message;
+}
+
+ArticleView * MainWindow::getCurrentArticleView()
+{
+  if ( QWidget * cw = ui.tabWidget->currentWidget() )
+  {
+    return &( dynamic_cast< ArticleView & >( *( cw ) ) );
+  }
+  return 0;
 }

@@ -163,6 +163,8 @@ private:
   /// returns true if the event is handled.
   bool handleBackForwardMouseButtons(QMouseEvent *ev);
 
+  ArticleView * getCurrentArticleView();
+
 private slots:
 
   void hotKeyActivated( int );
