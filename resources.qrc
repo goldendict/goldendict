@@ -44,5 +44,6 @@
         <file>icons/forvo.png</file>
         <file>icons/windows-list.png</file>
         <file>CREDITS.txt</file>
+        <file>icons/highlighter.png</file>
     </qresource>
 </RCC>
