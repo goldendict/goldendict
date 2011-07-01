@@ -739,7 +739,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
       --leftInOut; // Complements the next decremention
     }
 
-    if ( ( r != Iconv::Success && r != Iconv::NeedMoreOut ) || outBytesLeft )
+    if ( outBytesLeft )
       throw exEncodingError();
 
     --leftInOut;
