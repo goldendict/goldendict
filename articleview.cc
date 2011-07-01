@@ -1378,6 +1378,11 @@ bool ArticleView::closeSearch()
     return false;
 }
 
+bool ArticleView::isSearchOpened()
+{
+  return searchIsOpened;
+}
+
 void ArticleView::showEvent( QShowEvent * ev )
 {
   QFrame::showEvent( ev );
