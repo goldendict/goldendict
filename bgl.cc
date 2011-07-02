@@ -702,7 +702,7 @@ void BglArticleRequest::run()
       if ( dict.idxHeader.langTo == hebrew )
         result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
       else
-        result +=  i->second.second ;
+        result += "<div>" + i->second.second + "</div>";
       result += cleaner;
   }
 
@@ -718,7 +718,7 @@ void BglArticleRequest::run()
       if ( dict.idxHeader.langTo == hebrew )
         result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
       else
-        result +=  i->second.second ;
+        result += "<div>" + i->second.second + "</div>";
       result += cleaner;
   }
   // Do some cleanups in the text

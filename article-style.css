@@ -7,6 +7,22 @@ body
   font-size: 13px;
 }
 
+/* This stylesheet is used to highligh current selection when doing a search.
+  It changes the default selection color (e.g. blue under Windows, orange under Ubuntu) */
+
+/* highlight/select color in Windows when a widget is inactive is nearly impossible to read (light gray).
+ * then change it to green to use with the find option. */
+::selection {
+  background: #c00;
+  color: #fff;
+}
+
+/* Don't allow to select [] */
+:before, :after {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* Plaintext dictionaries are usually 80-column formatted and take a lot
  * of space. We try to use smaller fonts for them therefore. */
 pre
@@ -2591,4 +2607,3 @@ in bg url to hide it from iemac */
  
 .mwiki .infl-inline { display: inline }
 .mwiki .infl-table { display: none }
-
