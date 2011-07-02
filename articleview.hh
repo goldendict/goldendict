@@ -175,6 +175,8 @@ signals:
   /// switch focus to word input.
   void typingEvent( QString const & text );
 
+  void statusBarMessage( QString const & message );
+
 public slots:
 
   void on_searchPrevious_clicked();
@@ -186,6 +188,7 @@ private slots:
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
   void linkClicked( QUrl const & );
+  void linkHovered( const QString & link, const QString & title, const QString & textContent );
   void contextMenuRequested( QPoint const & );
 
   void resourceDownloadFinished();

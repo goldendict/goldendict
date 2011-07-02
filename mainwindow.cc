@@ -911,6 +911,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
 
+  connect( view, SIGNAL( statusBarMessage( const QString & ) ),
+           this, SLOT( showStatusBarMessage( const QString & ) ) );
+
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
 
@@ -1044,6 +1047,11 @@ void MainWindow::pageLoaded( ArticleView * view )
     pronounce( view );
 
   updateFoundInDictsList();
+}
+
+void MainWindow::showStatusBarMessage( const QString & message )
+{
+  mainStatusBar->showMessage( message, 5000 );
 }
 
 void MainWindow::tabSwitched( int )

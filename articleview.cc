@@ -16,6 +16,7 @@
 #include "webmultimediadownload.hh"
 #include "programs.hh"
 #include "dprintf.hh"
+#include <QDebug>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -122,6 +123,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
            this, SLOT( linkClicked( QUrl const & ) ) );
+
+  connect( ui.definition->page(), SIGNAL( linkHovered ( const QString &, const QString &, const QString & ) ),
+           this, SLOT( linkHovered ( const QString &, const QString &, const QString & ) ) );
 
   connect( ui.definition, SIGNAL(doubleClicked()),this,SLOT(doubleClicked()) );
 
@@ -571,6 +575,39 @@ QString ArticleView::getMutedForGroup( unsigned group )
   return QString();
 }
 
+void ArticleView::linkHovered ( const QString & link, const QString & , const QString & )
+{
+  QString msg;
+  QUrl url(link);
+
+  if ( url.scheme() == "bres" )
+  {
+    msg = tr( "Resource" );
+  }
+  else
+  if ( url.scheme() == "gdau" || Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
+  {
+    msg = tr( "Audio" );
+  }
+  else
+  if (url.scheme() == "gdlookup" || url.scheme().compare( "bword" ) == 0)
+  {
+    QString def = url.path();
+    if (def.startsWith("/"))
+    {
+      def = def.mid( 1 );
+    }
+    msg = tr( "Definition: %1").arg( def );
+  }
+  else
+  {
+    msg = link;
+  }
+
+  emit statusBarMessage( msg );
+}
+
+
 void ArticleView::linkClicked( QUrl const & url_ )
 {
   updateCurrentArticleFromCurrentFrame();
@@ -593,7 +630,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts )
 {
-  DPRINTF( "clicked %s\n", url.toString().toLocal8Bit().data() );
+  qDebug() << "clicked" << url;
 
   if ( url.scheme().compare( "bword" ) == 0 )
   {
