@@ -911,6 +911,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
 
+  connect( view, SIGNAL( activeArticleChanged( const QString & ) ),
+           this, SLOT( activeArticleChanged( const QString & ) ) );
+
   connect( view, SIGNAL( statusBarMessage( const QString & ) ),
            this, SLOT( showStatusBarMessage( const QString & ) ) );
 
@@ -1111,6 +1114,7 @@ void MainWindow::updateFoundInDictsList()
   if ( view )
   {
     QStringList ids = view->getArticlesList();
+    QString activeId = view->getActiveArticleId();
 
     for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd(); ++i)
     {
@@ -1121,16 +1125,20 @@ void MainWindow::updateFoundInDictsList()
         if ( dictionaries[ x ]->getId() == i->toUtf8().data() )
         {
           QString dictName = QString::fromUtf8( dictionaries[ x ]->getName().c_str() );
+          QString dictId = QString::fromUtf8( dictionaries[ x ]->getId().c_str() );
           QListWidgetItem * item =
               new QListWidgetItem(
                 dictionaries[ x ]->getIcon(),
                 dictName,
                 ui.dictsList, QListWidgetItem::Type );
-          item->setData(Qt::UserRole,
-                QVariant( QString::fromUtf8(dictionaries[ x ]->getId().c_str() ) ) );
+          item->setData(Qt::UserRole, QVariant( dictId ) );
           item->setToolTip(dictName);
 
           ui.dictsList->addItem( item );
+          if (dictId == activeId)
+          {
+            ui.dictsList->setCurrentItem(item);
+          }
           break;
         }
       }
@@ -1644,6 +1652,25 @@ void MainWindow::showDefinitionInNewTab( QString const & word,
 {
   createNewTab( !cfg.preferences.newTabsOpenInBackground, word )->
       showDefinition( word, group, fromArticle, contexts );
+}
+
+void MainWindow::activeArticleChanged( QString const & id )
+{
+  // select the row with the corresponding id
+  for (int i = 0; i < ui.dictsList->count(); ++i) {
+    QListWidgetItem * w = ui.dictsList->item( i );
+    QString dictId = w->data( Qt::UserRole ).toString();
+
+    if ( dictId == id )
+    {
+      // update the current row, but only if necessary
+      if ( i != ui.dictsList->currentRow() )
+      {
+        ui.dictsList->setCurrentRow(i);
+      }
+      return;
+    }
+  }
 }
 
 void MainWindow::typingEvent( QString const & t )

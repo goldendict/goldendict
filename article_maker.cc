@@ -95,7 +95,8 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "document.getElementById( gdCurrentArticle ).className = 'gdarticle';"
             "document.getElementById( 'gdfrom-' + newId ).className = 'gdarticle gdactivearticle';"
-            "gdCurrentArticle = 'gdfrom-' + newId; eval( 'gdActivateAudioLink_' + newId + '();' ); } }"
+            "gdCurrentArticle = 'gdfrom-' + newId; articleview.onJsActiveArticleChanged(gdCurrentArticle);"
+            "eval( 'gdActivateAudioLink_' + newId + '();' ); } }"
             "</script>";
 
   result += "</head><body>";
@@ -381,7 +382,8 @@ void ArticleRequest::bodyFinished()
         {
           // This is the first article
           head += "<script language=\"JavaScript\">"
-                  "var gdCurrentArticle=\"" + gdFrom  + "\";</script>";
+                  "var gdCurrentArticle=\"" + gdFrom  + "\"; "
+                  "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );

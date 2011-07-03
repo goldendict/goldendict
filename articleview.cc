@@ -112,6 +112,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( ui.definition, SIGNAL( loadFinished( bool ) ),
            this, SLOT( loadFinished( bool ) ) );
 
+  attachToJavaScript();
+  connect( ui.definition->page()->mainFrame(), SIGNAL( javaScriptWindowObjectCleared() ),
+           this, SLOT( attachToJavaScript() ) );
+
   connect( ui.definition, SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
 
@@ -363,6 +367,15 @@ QStringList ArticleView::getArticlesList()
              trimmed().split( ' ', QString::SkipEmptyParts );
 }
 
+QString ArticleView::getActiveArticleId()
+{
+  QString currentArticle = getCurrentArticle();
+  if ( !currentArticle.startsWith( "gdfrom-" ) )
+    return QString(); // Incorrect id
+
+  return currentArticle.mid( 7 );
+}
+
 QString ArticleView::getCurrentArticle()
 {
   QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript(
@@ -376,7 +389,13 @@ QString ArticleView::getCurrentArticle()
 
 void ArticleView::jumpToDictionary(QString const & id)
 {
-  setCurrentArticle( "gdfrom-" + id, true );
+  QString targetArticle = "gdfrom-" + id;
+
+  // jump only if neceessary
+  if ( targetArticle != getCurrentArticle() )
+  {
+    setCurrentArticle( targetArticle, true );
+  }
 }
 
 void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
@@ -607,6 +626,10 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
   emit statusBarMessage( msg );
 }
 
+void ArticleView::attachToJavaScript()
+{
+  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( QString( "articleview" ), this );
+}
 
 void ArticleView::linkClicked( QUrl const & url_ )
 {
@@ -1339,6 +1362,14 @@ void ArticleView::on_searchCaseSensitive_clicked()
 void ArticleView::on_highlightAllButton_clicked()
 {
   performFindOperation( false, false, true );
+}
+
+void ArticleView::onJsActiveArticleChanged(QString const & id)
+{
+  if ( !id.startsWith( "gdfrom-" ) )
+    return; // Incorrect id
+
+  emit activeArticleChanged( id.mid( 7 ) );
 }
 
 void ArticleView::doubleClicked()

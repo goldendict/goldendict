@@ -274,6 +274,8 @@ private slots:
                                ArticleView::Contexts const & contexts );
   void typingEvent( QString const & );
 
+  void activeArticleChanged( QString const & id );
+
   void mutedDictionariesChanged();
 
   void showTranslationFor( QString const &, unsigned inGroup = 0 );

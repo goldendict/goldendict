@@ -150,9 +150,12 @@ public:
   /// by executing a javascript code.
   void jumpToDictionary( QString const & );
 
-  /// Returns all articles current present in view, as a list of dictionary
+  /// Returns all articles currently present in view, as a list of dictionary
   /// string ids.
   QStringList getArticlesList();
+
+  /// Returns the dictionary id of the currently active article in the view.
+  QString getActiveArticleId();
 
 signals:
 
@@ -177,16 +180,24 @@ signals:
 
   void statusBarMessage( QString const & message );
 
+  /// Emitted when an article becomes active,
+  /// typically in response to user actions
+  /// (clicking on the article or using shortucts).
+  /// id - the dictionary id of the active article.
+  void activeArticleChanged ( QString const & id );
+
 public slots:
 
   void on_searchPrevious_clicked();
   void on_searchNext_clicked();
+  void onJsActiveArticleChanged(QString const & id);
 
 private slots:
 
   void loadFinished( bool ok );
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
+  void attachToJavaScript();
   void linkClicked( QUrl const & );
   void linkHovered( const QString & link, const QString & title, const QString & textContent );
   void contextMenuRequested( QPoint const & );
