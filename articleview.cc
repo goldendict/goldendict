@@ -548,7 +548,8 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
-           keyEvent->key() == Qt::Key_Tab )
+           keyEvent->key() == Qt::Key_Tab ||
+           keyEvent->key() == Qt::Key_Backtab )
         return false; // Those key have other uses than to start typing
 
       QString text = keyEvent->text();

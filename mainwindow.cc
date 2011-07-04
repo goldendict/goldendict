@@ -1562,7 +1562,8 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
-           keyEvent->key() == Qt::Key_Tab )
+           keyEvent->key() == Qt::Key_Tab ||
+           keyEvent->key() == Qt::Key_Backtab )
         return false; // Those key have other uses than to start typing
                       // or don't make sense
 
@@ -1590,7 +1591,8 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
-           keyEvent->key() == Qt::Key_Tab )
+           keyEvent->key() == Qt::Key_Tab ||
+           keyEvent->key() == Qt::Key_Backtab )
         return false; // Those key have other uses than to start typing
                       // or don't make sense
 
