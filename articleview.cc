@@ -641,9 +641,12 @@ void ArticleView::linkClicked( QUrl const & url_ )
 
   tryMangleWebsiteClickedUrl( url, contexts );
 
-  if ( !popupView && ui.definition->isMidButtonPressed() )
+  Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
+  if ( !popupView &&
+       ( ui.definition->isMidButtonPressed() ||
+         ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
   {
-    // Mid button is currently pressed - open the link in new tab
+    // Mid button or Control/Shift is currently pressed - open the link in new tab
     emit openLinkInNewTab( url, ui.definition->url(), getCurrentArticle(), contexts );
   }
   else
