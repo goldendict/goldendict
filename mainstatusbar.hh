@@ -9,7 +9,7 @@
 #include <QString>
 #include <QTimer>
 
-class MainStatusBar : public QFrame
+class MainStatusBar : public QWidget
 {
   Q_OBJECT
 
@@ -20,18 +20,21 @@ public:
 signals:
 
 public slots:
-  void showMessage(const QString & text, int timeout = 0);
+  void showMessage(const QString & text, int timeout = 0, const QPixmap & pixmap = QPixmap());
   void clearMessage();
 
 protected:
   virtual void mousePressEvent(QMouseEvent * event);
 
 private:
-  QLabel * label;
+  // component to display a small picture
+  QLabel * picWidget;
+
+  // component to display text
+  QLabel * textWidget;
+
   QTimer * timer;
-  QString message;
-  bool eventFilter(QObject *obj, QEvent * event);
-  void refresh(bool forceHide = false);
+  void refresh();
 };
 
 #endif // MAINSTATUSBAR_HH
