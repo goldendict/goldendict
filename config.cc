@@ -102,6 +102,9 @@ Preferences::Preferences():
   scanPopupModifiers( 0 ),
   scanPopupAltMode( false ),
   scanPopupAltModeSecs( 3 ),
+  scanPopupUseUIAutomation( false ),
+  scanPopupUseIAccessibleEx( false ),
+  scanPopupUseGDMessage( false ),
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
 #ifdef Q_WS_WIN
@@ -597,6 +600,9 @@ Class load() throw( exError )
     c.preferences.scanPopupAltMode = ( preferences.namedItem( "scanPopupAltMode" ).toElement().text() == "1" );
     if ( !preferences.namedItem( "scanPopupAltModeSecs" ).isNull() )
       c.preferences.scanPopupAltModeSecs = preferences.namedItem( "scanPopupAltModeSecs" ).toElement().text().toUInt();
+    c.preferences.scanPopupUseUIAutomation = ( preferences.namedItem( "scanPopupUseUIAutomation" ).toElement().text() == "1" );
+    c.preferences.scanPopupUseIAccessibleEx = ( preferences.namedItem( "scanPopupUseIAccessibleEx" ).toElement().text() == "1" );
+    c.preferences.scanPopupUseGDMessage = ( preferences.namedItem( "scanPopupUseGDMessage" ).toElement().text() == "1" );
 
     c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
     c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
@@ -1104,6 +1110,18 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "scanPopupAltModeSecs" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupAltModeSecs ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanPopupUseUIAutomation" );
+    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseUIAutomation ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanPopupUseIAccessibleEx" );
+    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseIAccessibleEx ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanPopupUseGDMessage" );
+    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseGDMessage ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "pronounceOnLoadMain" );

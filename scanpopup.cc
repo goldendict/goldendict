@@ -153,8 +153,18 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &mouseGrabPollTimer, SIGNAL( timeout() ),
            this, SLOT(mouseGrabPoll())  );
 
+#ifdef Q_OS_WIN32
+
   connect( &MouseOver::instance(), SIGNAL( askNeedWord( bool * ) ),
            this, SLOT( needHandleWord( bool * ) ), Qt::DirectConnection );
+  connect( &MouseOver::instance(), SIGNAL( askUseUIAutomation( bool * ) ),
+           this, SLOT( useUIAutomation( bool * ) ), Qt::DirectConnection );
+  connect( &MouseOver::instance(), SIGNAL( askUseIAccessibleEx( bool * ) ),
+           this, SLOT( useIAccessibleEx( bool * ) ), Qt::DirectConnection );
+  connect( &MouseOver::instance(), SIGNAL( askUseGDMessage( bool * ) ),
+           this, SLOT( useGDMessage( bool * ) ), Qt::DirectConnection );
+
+#endif
 }
 
 ScanPopup::~ScanPopup()
@@ -768,7 +778,26 @@ void ScanPopup::mutedDictionariesChanged()
     definition->updateMutedContents();
 }
 
+#ifdef Q_OS_WIN32
+
 void ScanPopup::needHandleWord( bool *pNeed )
 {
   *pNeed = !cfg.preferences.enableScanPopupModifiers || checkModifiersPressed( cfg.preferences.scanPopupModifiers );
 }
+
+void ScanPopup::useUIAutomation( bool *pUse )
+{
+  *pUse = cfg.preferences.scanPopupUseUIAutomation != 0;
+}
+
+void ScanPopup::useIAccessibleEx( bool *pUse )
+{
+  *pUse = cfg.preferences.scanPopupUseIAccessibleEx != 0;
+}
+
+void ScanPopup::useGDMessage( bool *pUse )
+{
+  *pUse = cfg.preferences.scanPopupUseGDMessage != 0;
+}
+
+#endif // Q_OS_WIN32

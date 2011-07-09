@@ -3,6 +3,11 @@
 
 #include <windows.h>
 
+#define GD_FLAG_METHOD_STANDARD		0x00000001
+#define GD_FLAG_METHOD_GD_MESSAGE	0x00000002
+#define GD_FLAG_METHOD_IACCESSIBLEEX	0x00000004
+#define GD_FLAG_METHOD_UI_AUTOMATION	0x00000008
+
 #ifdef __cplusplus
 extern "C"
 {

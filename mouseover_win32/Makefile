@@ -1,4 +1,5 @@
-GCC:=i686-pc-mingw32-gcc.exe -W -Wall -s -O2
+GCC:=gcc.exe -W -Wall -s -O2
+GPP:=g++.exe -W -Wall -s -O2
 
 .PHONY: all clean
 
@@ -16,6 +17,15 @@ HookImportFunction.o: HookImportFunction.c
 GetWord.o: GetWord.c
 	$(GCC) -c $<
 
+IAccEx.o: IAccEx.cc
+	$(GPP) -c $<
+
+GetWordByIAccEx.o: GetWordByIAccEx.cc
+	$(GPP) -c $<
+
+guids.o: guids.c
+	$(GCC) -c $<
+
 GdTextOutHook.dll libGdTextOutHook.a: TextOutHook.o HookImportFunction.o GetWord.o
 	$(GCC) -shared -o GdTextOutHook.dll $^ -lgdi32 -Wl,--out-implib,libGdTextOutHook.a
 
@@ -25,5 +35,5 @@ TextOutSpy.o: TextOutSpy.c
 ThTypes.o: ThTypes.c
 	$(GCC) -c $<
 
-GdTextOutSpy.dll libGdTextOutSpy.a: TextOutSpy.o ThTypes.o
-	 $(GCC) -shared -o GdTextOutSpy.dll $^ -lgdi32 -Wl,--out-implib,libGdTextOutSpy.a
+GdTextOutSpy.dll libGdTextOutSpy.a: TextOutSpy.o ThTypes.o IAccEx.o guids.o GetWordByIAccEx.o
+	$(GPP) -shared -o GdTextOutSpy.dll $^ -lgdi32 -luuid -loleacc -loleaut32 -Wl,--out-implib,libGdTextOutSpy.a

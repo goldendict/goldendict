@@ -33,8 +33,19 @@ signals:
 
   /// Emitted when there was some text under cursor which was hovered over.
   void hovered( QString const & );
+
+#ifdef Q_OS_WIN32
+
   /// Ask for need to handle word under cursor
   void askNeedWord( bool * );
+  /// Ask for use UI Automation interfaces to get word under cursor
+  void askUseUIAutomation( bool * );
+  /// Ask for use IAccessibleEx interface to get word under cursor
+  void askUseIAccessibleEx( bool * );
+  /// Ask for use GD message to get word under cursor
+  void askUseGDMessage( bool * );
+
+#endif
 
 private:
 

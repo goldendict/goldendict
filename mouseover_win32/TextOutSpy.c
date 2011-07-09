@@ -1,13 +1,14 @@
 #include "TextOutSpy.h"
 #include "ThTypes.h"
 #include "GDDataTranfer.h"
+#include "GetWordByIAccEx.h"
 
 const int MOUSEOVER_INTERVAL = 300;
 const int REQUEST_MESSAGE_INTERVAL = 500;
 const int WM_MY_SHOW_TRANSLATION = WM_USER + 301;
 
 HINSTANCE g_hInstance = NULL;
-HANDLE hSynhroMutex = 0;
+HANDLE hSynhroMutex = 0, hHookMutex = 0;
 HINSTANCE hGetWordLib = 0;
 UINT_PTR TimerID = 0;
 typedef void (*GetWordProc_t)(TCurrentMode *);
@@ -29,9 +30,29 @@ HWND WndParent,WndChild;
 
 static void SendWordToServer()
 {
-DWORD SendMsgAnswer;
-	if(uGdAskMessage) {
-		LRESULT lr;
+DWORD SendMsgAnswer, flags;
+LRESULT lr;
+	if (hGetWordLib == 0) {
+		hGetWordLib = LoadLibrary(GlobalData->LibName);
+		if (hGetWordLib) {
+			GetWordProc = (GetWordProc_t)GetProcAddress(hGetWordLib, "__gdGetWord");
+		}
+		else {
+			hGetWordLib = (HINSTANCE)-1;
+		}
+	}
+
+	// Ask for needing to retrieve word - WPARAM = 1
+	lr = SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 1, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+	if( lr == 0 || SendMsgAnswer == 0)	//No answer or no needing
+		return;
+
+	GlobalData->CurMod.MatchedWord[0] = 0;
+	GlobalData->CurMod.WordLen = 0;
+	GlobalData->CurMod.BeginPos = 0;
+	flags = SendMsgAnswer;
+
+	if( ( flags & GD_FLAG_METHOD_GD_MESSAGE ) != 0 && uGdAskMessage != 0 ) {
 		int n;
 		gds.dwSize = sizeof(gds);
 		gds.cwData = Buffer;
@@ -51,23 +72,28 @@ DWORD SendMsgAnswer;
 			return;
 		}
 	}
-	if (hGetWordLib == 0) {
-		hGetWordLib = LoadLibrary(GlobalData->LibName);
-		if (hGetWordLib) {
-			GetWordProc = (GetWordProc_t)GetProcAddress(hGetWordLib, "__gdGetWord");
-		}
-		else {
-			hGetWordLib = (HINSTANCE)-1;
-		}
-	}
-	if (GetWordProc) {
+
+	if( ( flags & GD_FLAG_METHOD_STANDARD ) != 0 && GetWordProc != 0 ) {
 		GlobalData->CurMod.WND = GlobalData->LastWND;
 		GlobalData->CurMod.Pt = GlobalData->LastPt;
 		GetWordProc(&(GlobalData->CurMod));
 		if (GlobalData->CurMod.WordLen > 0) {
 			SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+			return;
 		}
 	}
+
+	if( ( flags & GD_FLAG_METHOD_IACCESSIBLEEX ) != 0 ) {
+		getWordByAccEx( GlobalData->LastPt );
+		if (GlobalData->CurMod.WordLen > 0) {
+			SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+			return;
+		}
+	}
+
+	if( ( flags & GD_FLAG_METHOD_UI_AUTOMATION ) != 0 ) {
+		PostMessage( GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0 );
+	}		
 }
 
 void CALLBACK TimerFunc(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime)
@@ -86,6 +112,7 @@ DWORD wso;
 LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
 DWORD wso;
+	
 	if ((nCode == HC_ACTION) && ((wParam == WM_MOUSEMOVE) || (wParam == WM_NCMOUSEMOVE)) && (GlobalData != NULL)) {
 		wso = WaitForSingleObject(hSynhroMutex, 0);
 		if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
@@ -163,12 +190,18 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
     {
       case DLL_PROCESS_ATTACH:
 			g_hInstance = hInst;
+			if(hHookMutex==0) {
+				hHookMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutHookMutex");
+			}
 			if(hSynhroMutex==0) {
 				hSynhroMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutSpyMutex");
-				if(hSynhroMutex==0) return(FALSE);
+				if(hSynhroMutex==0) {
+					return(FALSE);
+				}
 			}
 			ThTypes_Init();
 			uGdAskMessage = RegisterWindowMessage(GD_MESSAGE_NAME);
+			FindGetPhysicalCursorPos();
         break;
 
       case DLL_PROCESS_DETACH:
@@ -189,6 +222,14 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
 			}
 			if ((hGetWordLib != 0)&&(hGetWordLib != (HINSTANCE)(-1))) {
 				FreeLibrary(hGetWordLib);
+			}
+			if(hHookMutex) {
+				DWORD wso = WaitForSingleObject(hHookMutex, 5000);
+				if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+					ReleaseMutex(hHookMutex);
+					CloseHandle(hHookMutex);
+					hHookMutex=0;
+				}
 			}
 			Thtypes_End();
         break;

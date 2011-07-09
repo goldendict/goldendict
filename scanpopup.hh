@@ -134,7 +134,12 @@ private slots:
   void altModeExpired();
   void altModePoll();
 
+#ifdef Q_OS_WIN32
   void needHandleWord(bool *pNeed);
+  void useUIAutomation(bool *pUse);
+  void useIAccessibleEx(bool *pUse);
+  void useGDMessage(bool *pUse);
+#endif
 
   /// Called repeatedly once the popup is initially engaged and we monitor the
   /// mouse as it may move away from the window. This simulates mouse grab, in
