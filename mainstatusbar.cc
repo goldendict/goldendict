@@ -24,6 +24,7 @@ MainStatusBar::MainStatusBar(QWidget *parent) : QWidget(parent)
   picWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
   timer = new QTimer(this);
+  timer->setSingleShot(true);
 
   // layout
   QHBoxLayout * layout = new QHBoxLayout;
@@ -34,6 +35,8 @@ MainStatusBar::MainStatusBar(QWidget *parent) : QWidget(parent)
   layout->addWidget(picWidget);
   layout->addWidget(textWidget);
   setLayout(layout);
+
+  parentWidget()->installEventFilter( this );
 
   connect( timer, SIGNAL( timeout() ), SLOT( clearMessage() ) );
 }
@@ -93,4 +96,17 @@ void MainStatusBar::refresh()
 void MainStatusBar::mousePressEvent ( QMouseEvent * )
 {
   clearMessage();
+}
+
+bool MainStatusBar::eventFilter(QObject *, QEvent * e)
+{
+  switch ( e->type() ) {
+    case QEvent::Resize:
+      refresh();
+      break;
+    default:
+      break;
+  };
+
+  return false;
 }

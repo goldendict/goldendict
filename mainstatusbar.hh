@@ -34,6 +34,7 @@ private:
   QLabel * textWidget;
 
   QTimer * timer;
+  bool eventFilter(QObject *obj, QEvent * event);
   void refresh();
 };
 
