@@ -290,6 +290,7 @@ private slots:
 
   void visitHomepage();
   void visitForum();
+  void openConfigFolder();
   void showAbout();
 
   void showDictBarNamesTriggered();

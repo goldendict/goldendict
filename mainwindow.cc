@@ -386,6 +386,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( visitHomepage() ) );
   connect( ui.visitForum, SIGNAL( activated() ),
            this, SLOT( visitForum() ) );
+  connect( ui.openConfigFolder, SIGNAL( activated() ),
+           this, SLOT( openConfigFolder() ) );
   connect( ui.about, SIGNAL( activated() ),
            this, SLOT( showAbout() ) );
 
@@ -2063,6 +2065,11 @@ void MainWindow::showMainWindow()
 void MainWindow::visitHomepage()
 {
   QDesktopServices::openUrl( QUrl( "http://goldendict.org/" ) );
+}
+
+void MainWindow::openConfigFolder()
+{
+  QDesktopServices::openUrl( QUrl::fromLocalFile( Config::getConfigDir() ) );
 }
 
 void MainWindow::visitForum()

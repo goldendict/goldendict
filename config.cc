@@ -1228,6 +1228,11 @@ void save( Class const & c ) throw( exError )
   renameAtomically( configFile.fileName(), getConfigFileName() );
 }
 
+QString getConfigDir() throw( exError )
+{
+  return getHomeDir().path() + QDir::separator();
+}
+
 QString getIndexDir() throw( exError )
 {
   QDir result = getHomeDir();
