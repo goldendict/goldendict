@@ -102,9 +102,9 @@ Preferences::Preferences():
   scanPopupModifiers( 0 ),
   scanPopupAltMode( false ),
   scanPopupAltModeSecs( 3 ),
-  scanPopupUseUIAutomation( false ),
-  scanPopupUseIAccessibleEx( false ),
-  scanPopupUseGDMessage( false ),
+  scanPopupUseUIAutomation( true ),
+  scanPopupUseIAccessibleEx( true ),
+  scanPopupUseGDMessage( true ),
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
 #ifdef Q_WS_WIN
