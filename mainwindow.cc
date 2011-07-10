@@ -338,6 +338,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( forwardClicked() ) );
 
   addTab.setAutoRaise( true );
+  addTab.setToolTip( tr( "New Tab"  ) );
   addTab.setFocusPolicy(Qt::ClickFocus);
   addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
 
@@ -851,6 +852,7 @@ void MainWindow::createTabList()
   tabListButton->setAutoRaise(true);
   tabListButton->setIcon(tabListMenu->icon());
   tabListButton->setMenu(tabListMenu);
+  tabListButton->setToolTip( tr( "Open Tabs List" ) );
   tabListButton->setPopupMode(QToolButton::InstantPopup);
   ui.tabWidget->setCornerWidget(tabListButton);
   tabListButton->setFocusPolicy(Qt::ClickFocus);
