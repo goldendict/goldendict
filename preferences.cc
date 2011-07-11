@@ -133,12 +133,12 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.rightCtrl->hide();
   ui.leftShift->hide();
   ui.rightShift->hide();
+#endif
 
-  // This settings is Windows-specific
+  // Hide scan method options
   ui.scanPopupUseUIAutomation->hide();
   ui.scanPopupUseIAccessibleEx->hide();
   ui.scanPopupUseGDMessage->hide();
-#endif
 
   // Sound
 
