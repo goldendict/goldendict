@@ -25,10 +25,10 @@ IDispatch* pDispatch = NULL;
 	*ppAccParent = NULL;
 	if ( pAcc == NULL )
 	       	return E_INVALIDARG;
-	HRESULT hr = pAcc->get_accParent( &pDispatch );
+	HRESULT hr = pAcc->lpVtbl->get_accParent( pAcc, &pDispatch );
 	if ( ( hr == S_OK ) && ( pDispatch != NULL ) ) {
-	        hr = pDispatch->QueryInterface( IID_IAccessible, (void**)ppAccParent );
-	        pDispatch->Release();
+	        hr = pDispatch->lpVtbl->QueryInterface( pDispatch, &IID_IAccessible, (void**)ppAccParent );
+	        pDispatch->lpVtbl->Release( pDispatch );
 	}
 	return hr;
 }
@@ -67,30 +67,30 @@ POINT ppt = { 0, 0 };
 
 	pText = NULL;
 	while( pAcc != NULL) {
-		hr = GetPatternFromIAccessible( pAcc, 0, UIA_TextPatternId, IID_ITextProvider, (void **)&pText );
+		hr = GetPatternFromIAccessible( pAcc, 0, UIA_TextPatternId, &IID_ITextProvider, (void **)&pText );
 		if( hr == S_OK && pText != NULL )
 			break;
 		pAccParent = NULL;
 		hr = GetParentAccessibleObject( pAcc, &pAccParent );
-		pAcc->Release();
+		pAcc->lpVtbl->Release( pAcc );
 		pAcc = pAccParent;
 	}
 	if( pAcc == NULL ) 
 		return FALSE;
 
-	pAcc->Release();
+	pAcc->lpVtbl->Release( pAcc );
 
 	pTextRange = NULL;
-	hr = pText->RangeFromPoint( upt, &pTextRange );
+	hr = pText->lpVtbl->RangeFromPoint( pText, upt, &pTextRange );
 	if( hr != S_OK || pTextRange == NULL ) {
-		pText->Release();
+		pText->lpVtbl->Release( pText );
 		return FALSE;
 	}
 
-	hr = pTextRange->ExpandToEnclosingUnit( TextUnit_Word );
+	hr = pTextRange->lpVtbl->ExpandToEnclosingUnit( pTextRange, TextUnit_Word );
 	if( hr == S_OK) {
 		bstr = NULL;
-		hr = pTextRange->GetText( 255, &bstr );
+		hr = pTextRange->lpVtbl->GetText( pTextRange, 255, &bstr );
 		if (hr == S_OK) {
 			n = SysStringLen( bstr );
 			if( n != 0 ) {
@@ -101,8 +101,8 @@ POINT ppt = { 0, 0 };
 			SysFreeString( bstr );
 		}
 	}
-	pTextRange->Release();
-	pText->Release();
+	pTextRange->lpVtbl->Release( pTextRange );
+	pText->lpVtbl->Release( pText );
 
 	return TRUE;
 }

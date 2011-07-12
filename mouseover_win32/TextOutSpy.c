@@ -190,14 +190,14 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
     {
       case DLL_PROCESS_ATTACH:
 			g_hInstance = hInst;
-			if(hHookMutex==0) {
-				hHookMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutHookMutex");
-			}
 			if(hSynhroMutex==0) {
 				hSynhroMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutSpyMutex");
 				if(hSynhroMutex==0) {
 					return(FALSE);
 				}
+			}
+			if(hHookMutex==0) {
+				hHookMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutHookMutex");
 			}
 			ThTypes_Init();
 			uGdAskMessage = RegisterWindowMessage(GD_MESSAGE_NAME);

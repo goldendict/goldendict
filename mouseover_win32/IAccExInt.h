@@ -11,27 +11,22 @@
 extern "C" {
 #endif
 
-EXTERN_C const IID IID_IAccessibleEx;
-EXTERN_C const IID IID_IRawElementProviderSimple;
-EXTERN_C const IID IID_ITextProvider;
-EXTERN_C const IID IID_ITextRangeProvider;
-
-typedef interface IAccessibleEx IAccessibleEx;
-typedef interface IRawElementProviderSimple IRawElementProviderSimple;
-typedef interface ITextProvider ITextProvider;
-typedef interface ITextRangeProvider ITextRangeProvider;
+extern const IID IID_IAccessibleEx;
+extern const IID IID_IRawElementProviderSimple;
+extern const IID IID_ITextProvider;
+extern const IID IID_ITextRangeProvider;
 
 typedef int PROPERTYID;
 typedef int PATTERNID;
 typedef int TEXTATTRIBUTEID;
 
-struct UiaPoint
+typedef struct _UiaPoint
 {
     double x;
     double y;
-};
+} UiaPoint;
 
-enum ProviderOptions
+typedef enum
 {
     ProviderOptions_ClientSideProvider      = 0x1,
     ProviderOptions_ServerSideProvider      = 0x2,
@@ -39,16 +34,16 @@ enum ProviderOptions
     ProviderOptions_OverrideProvider        = 0x8,
     ProviderOptions_ProviderOwnsSetFocus    = 0x10,
     ProviderOptions_UseComThreading         = 0x20
-};
+} ProviderOptions;
 
-enum SupportedTextSelection
+typedef enum
 {
     SupportedTextSelection_None     = 0,
     SupportedTextSelection_Single   = 1,
     SupportedTextSelection_Multiple = 2
-};
+} SupportedTextSelection;
 
-enum TextUnit
+typedef enum
 {
     TextUnit_Character  = 0,
     TextUnit_Format     = 1,
@@ -57,66 +52,72 @@ enum TextUnit
     TextUnit_Paragraph  = 4,
     TextUnit_Page       = 5,
     TextUnit_Document   = 6
-};
+} TextUnit;
 
-enum TextPatternRangeEndpoint
+typedef enum
 {
     TextPatternRangeEndpoint_Start  = 0,
     TextPatternRangeEndpoint_End    = 1
-};
+} TextPatternRangeEndpoint;
 
 /* UIA_PatternIds */
-const long UIA_InvokePatternId              =   10000;
-const long UIA_SelectionPatternId           =   10001;
-const long UIA_ValuePatternId               =   10002;
-const long UIA_RangeValuePatternId          =   10003;
-const long UIA_ScrollPatternId              =   10004;
-const long UIA_ExpandCollapsePatternId      =   10005;
-const long UIA_GridPatternId                =   10006;
-const long UIA_GridItemPatternId            =   10007;
-const long UIA_MultipleViewPatternId        =   10008;
-const long UIA_WindowPatternId              =   10009;
-const long UIA_SelectionItemPatternId       =   10010;
-const long UIA_DockPatternId                =   10011;
-const long UIA_TablePatternId               =   10012;
-const long UIA_TableItemPatternId           =   10013;
-const long UIA_TextPatternId                =   10014;
-const long UIA_TogglePatternId              =   10015;
-const long UIA_TransformPatternId           =   10016;
-const long UIA_ScrollItemPatternId          =   10017;
-const long UIA_LegacyIAccessiblePatternId   =   10018;
-const long UIA_ItemContainerPatternId       =   10019;
-const long UIA_VirtualizedItemPatternId     =   10020;
-const long UIA_SynchronizedInputPatternId   =   10021;
+extern const long UIA_InvokePatternId;
+extern const long UIA_SelectionPatternId;
+extern const long UIA_ValuePatternId;
+extern const long UIA_RangeValuePatternId;
+extern const long UIA_ScrollPatternId;
+extern const long UIA_ExpandCollapsePatternId;
+extern const long UIA_GridPatternId;
+extern const long UIA_GridItemPatternId;
+extern const long UIA_MultipleViewPatternId;
+extern const long UIA_WindowPatternId;
+extern const long UIA_SelectionItemPatternId;
+extern const long UIA_DockPatternId;
+extern const long UIA_TablePatternId;
+extern const long UIA_TableItemPatternId;
+extern const long UIA_TextPatternId;
+extern const long UIA_TogglePatternId;
+extern const long UIA_TransformPatternId;
+extern const long UIA_ScrollItemPatternId;
+extern const long UIA_LegacyIAccessiblePatternId;
+extern const long UIA_ItemContainerPatternId;
+extern const long UIA_VirtualizedItemPatternId;
+extern const long UIA_SynchronizedInputPatternId;
 
-#define INTERFACE ITextProvider
-DECLARE_INTERFACE_(ITextProvider, IUnknown)
+#define INTERFACE IRawElementProviderSimple
+DECLARE_INTERFACE_(IRawElementProviderSimple, IUnknown)
 {
-    STDMETHOD(GetSelection)(THIS_ SAFEARRAY **) PURE;
-    STDMETHOD(GetVisibleRanges)(THIS_ SAFEARRAY **) PURE;
-    STDMETHOD(RangeFromChild)(THIS_ IRawElementProviderSimple *, ITextRangeProvider **) PURE;
-    STDMETHOD(RangeFromPoint)(THIS_ struct UiaPoint, ITextRangeProvider **pRetVal) PURE;
-    STDMETHOD(get_DocumentRange)(THIS_ ITextRangeProvider **) PURE;
-    STDMETHOD(get_SupportedTextSelection)(THIS_ enum SupportedTextSelection *) PURE;
+    STDMETHOD(QueryInterface)(THIS_ REFIID,PVOID*) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    STDMETHOD(get_ProviderOptions)(THIS_ ProviderOptions *) PURE;
+    STDMETHOD(GetPatternProvider)(THIS_ PATTERNID, IUnknown **) PURE;
+    STDMETHOD(GetPropertyValue)(THIS_ PROPERTYID, VARIANT *) PURE;
+    STDMETHOD(get_HostRawElementProvider)(THIS_ IRawElementProviderSimple **) PURE;
 };
 #undef INTERFACE
 
 #define INTERFACE ITextRangeProvider
 DECLARE_INTERFACE_(ITextRangeProvider, IUnknown)
 {
+    STDMETHOD(QueryInterface)(THIS_ REFIID,PVOID*) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
     STDMETHOD(Clone)(THIS_ ITextRangeProvider **) PURE;
     STDMETHOD(Compare)(THIS_ ITextRangeProvider *, BOOL *) PURE;
-    STDMETHOD(CompareEndpoints)(THIS_ enum TextPatternRangeEndpoint, ITextRangeProvider *, enum TextPatternRangeEndpoint, int *) PURE;
-    STDMETHOD(ExpandToEnclosingUnit)(THIS_ enum TextUnit) PURE;
+    STDMETHOD(CompareEndpoints)(THIS_ TextPatternRangeEndpoint, ITextRangeProvider *, TextPatternRangeEndpoint, int *) PURE;
+    STDMETHOD(ExpandToEnclosingUnit)(THIS_ TextUnit) PURE;
     STDMETHOD(FindAttribute)(THIS_ TEXTATTRIBUTEID, VARIANT, BOOL, ITextRangeProvider **) PURE;
     STDMETHOD(FindText)(THIS_ BSTR, BOOL, BOOL, ITextRangeProvider **) PURE;
     STDMETHOD(GetAttributeValue)(THIS_ TEXTATTRIBUTEID, VARIANT *) PURE;
     STDMETHOD(GetBoundingRectangles)(THIS_ SAFEARRAY **) PURE;
     STDMETHOD(GetEnclosingElement)(THIS_ IRawElementProviderSimple **) PURE;
     STDMETHOD(GetText)(THIS_ int, BSTR *) PURE;
-    STDMETHOD(Move)(THIS_ enum TextUnit, int, int *) PURE;
-    STDMETHOD(MoveEndpointByUnit)(THIS_ enum TextPatternRangeEndpoint, enum TextUnit, int *) PURE;
-    STDMETHOD(MoveEndpointByRange)(THIS_ enum TextPatternRangeEndpoint, ITextRangeProvider *, enum TextPatternRangeEndpoint) PURE;
+    STDMETHOD(Move)(THIS_ TextUnit, int, int *) PURE;
+    STDMETHOD(MoveEndpointByUnit)(THIS_ TextPatternRangeEndpoint, TextUnit, int *) PURE;
+    STDMETHOD(MoveEndpointByRange)(THIS_ TextPatternRangeEndpoint, ITextRangeProvider *, TextPatternRangeEndpoint) PURE;
     STDMETHOD(Select)(THIS) PURE;
     STDMETHOD(AddToSelection)(THIS) PURE;
     STDMETHOD(RemoveFromSelection)(THIS) PURE;
@@ -125,20 +126,29 @@ DECLARE_INTERFACE_(ITextRangeProvider, IUnknown)
 };
 #undef INTERFACE
 
-#define INTERFACE IRawElementProviderSimple
-DECLARE_INTERFACE_(IRawElementProviderSimple, IUnknown)
+#define INTERFACE ITextProvider
+DECLARE_INTERFACE_(ITextProvider, IUnknown)
 {
-    STDMETHOD(get_ProviderOptions)(THIS_ enum ProviderOptions *) PURE;
-    STDMETHOD(GetPatternProvider)(THIS_ PATTERNID, IUnknown **) PURE;
-    STDMETHOD(GetPropertyValue)(THIS_ PROPERTYID, VARIANT *) PURE;
-    STDMETHOD(get_HostRawElementProvider)(THIS_ IRawElementProviderSimple **) PURE;
+    STDMETHOD(QueryInterface)(THIS_ REFIID,PVOID*) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
+    STDMETHOD(GetSelection)(THIS_ SAFEARRAY **) PURE;
+    STDMETHOD(GetVisibleRanges)(THIS_ SAFEARRAY **) PURE;
+    STDMETHOD(RangeFromChild)(THIS_ IRawElementProviderSimple *, ITextRangeProvider **) PURE;
+    STDMETHOD(RangeFromPoint)(THIS_ UiaPoint, ITextRangeProvider **pRetVal) PURE;
+    STDMETHOD(get_DocumentRange)(THIS_ ITextRangeProvider **) PURE;
+    STDMETHOD(get_SupportedTextSelection)(THIS_ SupportedTextSelection *) PURE;
 };
 #undef INTERFACE
-
 
 #define INTERFACE IAccessibleEx
 DECLARE_INTERFACE_(IAccessibleEx, IUnknown)
 {
+    STDMETHOD(QueryInterface)(THIS_ REFIID,PVOID*) PURE;
+    STDMETHOD_(ULONG,AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG,Release)(THIS) PURE;
+
     STDMETHOD(GetObjectForChild)(THIS_ long, IAccessibleEx **) PURE;
     STDMETHOD(GetIAccessiblePair)(THIS_ IAccessible **, long *) PURE;
     STDMETHOD(GetRuntimeId)(THIS_ SAFEARRAY **) PURE;
