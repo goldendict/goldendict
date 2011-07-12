@@ -167,7 +167,8 @@ HEADERS += folding.hh \
     dictspanewidget.hh \
     maintabwidget.hh \
     dprintf.hh \
-    mainstatusbar.hh
+    mainstatusbar.hh \
+    gdappstyle.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -253,7 +254,8 @@ SOURCES += folding.cc \
     programs.cc \
     parsecmdline.cc \
     maintabwidget.cc \
-    mainstatusbar.cc
+    mainstatusbar.cc \
+    gdappstyle.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c
     HEADERS += mouseover_win32/ThTypes.h

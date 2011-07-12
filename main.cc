@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <QIcon>
+#include "gdappstyle.hh"
 #include "mainwindow.hh"
 #include "config.hh"
 
@@ -85,6 +86,7 @@ int main( int argc, char ** argv )
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.org/" );
+  app.setStyle(new GdAppStyle);
 
   app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
 
