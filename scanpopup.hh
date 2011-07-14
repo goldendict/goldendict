@@ -131,7 +131,7 @@ private slots:
   void on_pronounceButton_clicked();
   void pinButtonClicked( bool checked );
   void on_showDictionaryBar_clicked( bool checked );
-  void showStatusBarMessage ( const QString & );
+  void showStatusBarMessage ( QString const &, int, QPixmap const & );
 
   void hideTimerExpired();
   void altModeExpired();

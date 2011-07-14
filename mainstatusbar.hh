@@ -12,6 +12,7 @@
 class MainStatusBar : public QWidget
 {
   Q_OBJECT
+  Q_PROPERTY(bool hasImage READ hasImage)
 
 public:
   explicit MainStatusBar(QWidget * parent);
@@ -36,6 +37,7 @@ private:
   QTimer * timer;
   bool eventFilter(QObject *obj, QEvent * event);
   void refresh();
+  bool hasImage() const;
 };
 
 #endif // MAINSTATUSBAR_HH

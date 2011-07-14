@@ -45,7 +45,7 @@ public:
 public slots:
 
   void messageFromAnotherInstanceReceived( QString const & );
-  void showStatusBarMessage ( const QString & );
+  void showStatusBarMessage ( QString const &, int, QPixmap const & );
 
 private:
 

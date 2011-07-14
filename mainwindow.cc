@@ -918,8 +918,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( activeArticleChanged( const QString & ) ),
            this, SLOT( activeArticleChanged( const QString & ) ) );
 
-  connect( view, SIGNAL( statusBarMessage( const QString & ) ),
-           this, SLOT( showStatusBarMessage( const QString & ) ) );
+  connect( view, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
+           this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
@@ -1056,9 +1056,9 @@ void MainWindow::pageLoaded( ArticleView * view )
   updateFoundInDictsList();
 }
 
-void MainWindow::showStatusBarMessage( const QString & message )
+void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPixmap const & icon )
 {
-  mainStatusBar->showMessage( message, 5000 );
+  mainStatusBar->showMessage( message, timeout, icon );
 }
 
 void MainWindow::tabSwitched( int )

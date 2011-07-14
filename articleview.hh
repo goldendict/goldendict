@@ -178,7 +178,7 @@ signals:
   /// switch focus to word input.
   void typingEvent( QString const & text );
 
-  void statusBarMessage( QString const & message );
+  void statusBarMessage( QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap());
 
   /// Emitted when an article becomes active,
   /// typically in response to user actions

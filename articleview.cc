@@ -1225,7 +1225,8 @@ void ArticleView::resourceDownloadFinished()
           }
 
           if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( desktopOpenedTempFile ) ) )
-            QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
+            QMessageBox::critical( this, tr( "GoldenDict" ),
+                                   tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
         }
 
         // Ok, whatever it was, it's finished. Remove this and any other
@@ -1247,8 +1248,9 @@ void ArticleView::resourceDownloadFinished()
 
   if ( resourceDownloadRequests.empty() )
   {
-    // No requests suceeded.
-    QMessageBox::critical( this, tr( "GoldenDict" ), tr( "The referenced resource failed to download." ) );
+    emit statusBarMessage(
+          tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
+          10000, QPixmap( ":/icons/error.png" ) );
   }
 }
 

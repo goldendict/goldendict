@@ -126,8 +126,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( definition, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
-  connect( definition, SIGNAL( statusBarMessage( const QString & ) ),
-           this, SLOT( showStatusBarMessage( const QString & ) ) );
+  connect( definition, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
+           this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
@@ -705,9 +705,9 @@ void ScanPopup::pageLoaded( ArticleView * )
     definition->playSound();
 }
 
-void ScanPopup::showStatusBarMessage( const QString & message )
+void ScanPopup::showStatusBarMessage( QString const & message, int timeout, QPixmap const & icon )
 {
-  mainStatusBar->showMessage( message, 10000 );
+  mainStatusBar->showMessage( message, timeout, icon );
 }
 
 void ScanPopup::escapePressed()

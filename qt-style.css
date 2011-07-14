@@ -14,16 +14,6 @@ ArticleView #searchText[noResults="true"]
   background: #febb7d;
 }
 
-.ScanPopup #outerFrame
-{
-  border: 1px solid palette(dark);
-}
-
-.ScanPopup MainStatusBar #text
-{
-  border: 1px solid palette(dark);
-}
-
 MainStatusBar #text
 {
   border-top-right-radius: 3px;
@@ -40,4 +30,25 @@ MainStatusBar #icon
   padding: 2px;
   padding-left: 4px;
   padding-right: 0px;
+}
+
+.ScanPopup #outerFrame
+{
+  border: 1px solid palette(dark);
+}
+
+.ScanPopup MainStatusBar #text
+{
+  border-bottom: 1px solid palette(dark);
+}
+
+.ScanPopup MainStatusBar[hasImage="false"] #text
+{
+  border-left: 1px solid palette(dark);
+}
+
+.ScanPopup MainStatusBar #icon
+{
+  border-left: 1px solid palette(dark);
+  border-bottom: 1px solid palette(dark);
 }
