@@ -14,6 +14,7 @@
 #include <QClipboard>
 #include "history.hh"
 #include "dictionarybar.hh"
+#include "mainstatusbar.hh"
 
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
@@ -84,6 +85,7 @@ private:
   WordFinder wordFinder;
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
+  MainStatusBar * mainStatusBar;
 
   bool mouseEnteredOnce;
   bool mouseIntercepted;
@@ -129,6 +131,7 @@ private slots:
   void on_pronounceButton_clicked();
   void pinButtonClicked( bool checked );
   void on_showDictionaryBar_clicked( bool checked );
+  void showStatusBarMessage ( const QString & );
 
   void hideTimerExpired();
   void altModeExpired();

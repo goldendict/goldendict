@@ -16,7 +16,12 @@ ArticleView #searchText[noResults="true"]
 
 .ScanPopup #outerFrame
 {
-  border: 1px solid grey;
+  border: 1px solid palette(dark);
+}
+
+.ScanPopup MainStatusBar #text
+{
+  border: 1px solid palette(dark);
 }
 
 MainStatusBar #text
