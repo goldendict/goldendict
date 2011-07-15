@@ -1132,7 +1132,7 @@ void MainWindow::updateFoundInDictsList()
           QString dictId = QString::fromUtf8( dictionaries[ x ]->getId().c_str() );
           QListWidgetItem * item =
               new QListWidgetItem(
-                dictionaries[ x ]->getIcon(),
+                dictionaries[ x ]->getIcon().pixmap(32).scaledToHeight( 21, Qt::SmoothTransformation ),
                 dictName,
                 ui.dictsList, QListWidgetItem::Type );
           item->setData(Qt::UserRole, QVariant( dictId ) );
