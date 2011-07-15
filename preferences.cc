@@ -142,8 +142,6 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.useWindowsPlaySound->hide();
 #endif
 
-  ui.pronounceOnLoadPopup->setEnabled( p.enableScanPopup );
-
   ui.pronounceOnLoadMain->setChecked( p.pronounceOnLoadMain );
   ui.pronounceOnLoadPopup->setChecked( p.pronounceOnLoadPopup );
 
@@ -253,7 +251,6 @@ Config::Preferences Preferences::getPreferences()
 void Preferences::enableScanPopupToggled( bool b )
 {
   ui.scanPopupModifiers->setEnabled( b && ui.enableScanPopupModifiers->isChecked() );
-  ui.pronounceOnLoadPopup->setEnabled( b );
 }
 
 void Preferences::enableScanPopupModifiersToggled( bool b )
