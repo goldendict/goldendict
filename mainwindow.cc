@@ -1468,7 +1468,8 @@ void MainWindow::updateMatchResults( bool finished )
     }
 
     if ( !wordFinder.getErrorString().isEmpty() )
-      mainStatusBar->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ), 20000 );
+      mainStatusBar->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ),
+                                  20000 , QPixmap( ":/icons/error.png" ) );
   }
 }
 
