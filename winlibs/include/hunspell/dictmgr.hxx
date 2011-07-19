@@ -1,6 +1,8 @@
 #ifndef _DICTMGR_HXX_
 #define _DICTMGR_HXX_
 
+#include "hunvisapi.h"
+
 #define MAXDICTIONARIES 100
 #define MAXDICTENTRYLEN 1024
 
@@ -11,7 +13,7 @@ struct dictentry {
 };
 
 
-class DictMgr
+class LIBHUNSPELL_DLL_EXPORTED DictMgr
 {
 
   int                 numdict;

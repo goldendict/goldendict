@@ -2,6 +2,7 @@
 #define _ATYPES_HXX_
 
 #ifndef HUNSPELL_WARNING
+#include <stdio.h>
 #ifdef HUNSPELL_WARNING_ON
 #define HUNSPELL_WARNING fprintf
 #else
@@ -33,6 +34,15 @@ static inline void HUNSPELL_WARNING(FILE *, const char *, ...) {}
 #define IN_CPD_BEGIN 1
 #define IN_CPD_END   2
 #define IN_CPD_OTHER 3
+
+// info options
+#define  SPELL_COMPOUND  (1 << 0)
+#define  SPELL_FORBIDDEN (1 << 1)
+#define  SPELL_ALLCAP    (1 << 2)
+#define  SPELL_NOCAP     (1 << 3)
+#define  SPELL_INITCAP   (1 << 4)
+#define  SPELL_ORIGCAP   (1 << 5)
+#define  SPELL_WARN      (1 << 6)
 
 #define MAXLNLEN        8192
 
@@ -77,8 +87,7 @@ struct guessword {
 };
 
 struct mapentry {
-  char * set;
-  w_char * set_utf16;
+  char ** set;
   int len;
 };
 

@@ -1,9 +1,13 @@
 /* file manager class - read lines of files [filename] OR [filename.hz] */
 #ifndef _FILEMGR_HXX_
 #define _FILEMGR_HXX_
-#include "hunzip.hxx"
 
-class FileMgr
+#include "hunvisapi.h"
+
+#include "hunzip.hxx"
+#include <stdio.h>
+
+class LIBHUNSPELL_DLL_EXPORTED FileMgr
 {
 protected:
     FILE * fin;
