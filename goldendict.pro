@@ -41,7 +41,7 @@ win32 {
     LIBS += -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.2
+        -lhunspell-1.3.2
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
     LIBS += -Lwinlibs/lib
