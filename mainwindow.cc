@@ -361,6 +361,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &addTab, SIGNAL( clicked() ),
            this, SLOT( addNewTab() ) );
 
+  connect( ui.tabWidget, SIGNAL( doubleClicked() ),
+           this, SLOT( addNewTab() ) );
+
   connect( ui.tabWidget, SIGNAL( tabCloseRequested( int ) ),
            this, SLOT( tabCloseRequested( int ) ) );
 
