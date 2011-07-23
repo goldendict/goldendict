@@ -135,10 +135,12 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.rightShift->hide();
 #endif
 
-  // Hide scan method options
-  ui.scanPopupUseUIAutomation->hide();
-  ui.scanPopupUseIAccessibleEx->hide();
-  ui.scanPopupUseGDMessage->hide();
+//Platform-specific options
+
+#ifndef Q_OS_WIN32
+  //  ui.groupBox_ScanPopupTechnologies->hide();
+  ui.tabWidget->removeTab( 5 );
+#endif
 
   // Sound
 

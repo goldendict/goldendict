@@ -275,19 +275,6 @@ With this on however, it will hide the main window.</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_10">
        <item>
-        <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
         <spacer name="verticalSpacer_16">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -559,70 +546,7 @@ seconds, which is specified here.</string>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QCheckBox" name="scanPopupUseIAccessibleEx">
-              <property name="toolTip">
-               <string>Try to use IAccessibleEx interface to retrieve word under cursor.
-This technology works only with some programs that support it.
-Don't select this option if you don't use such programs.</string>
-              </property>
-              <property name="text">
-               <string>Use IAccessibleE&amp;x</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="scanPopupUseGDMessage">
-              <property name="toolTip">
-               <string>Use special GoldenDict message to ask other programs about a word under cursor.
-This technology works only with some programs that support it.
-Don't select this option if you don't use such programs.</string>
-              </property>
-              <property name="text">
-               <string>Use GD message</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="scanPopupUseUIAutomation">
-            <property name="toolTip">
-             <string>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-Don't select this option if you don't use such programs.</string>
-            </property>
-            <property name="text">
-             <string>Use UI Automation</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_4"/>
           </item>
          </layout>
         </widget>
@@ -1104,6 +1028,72 @@ download page.</string>
           <size>
            <width>20</width>
            <height>39</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_Advanced">
+      <attribute name="title">
+       <string>Ad&amp;vanced</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_11">
+       <item>
+        <widget class="QGroupBox" name="groupBox_ScanPopupTechnologies">
+         <property name="title">
+          <string>ScanPopup extra technologies</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_13">
+          <item>
+           <widget class="QCheckBox" name="scanPopupUseIAccessibleEx">
+            <property name="toolTip">
+             <string>Try to use IAccessibleEx technology to retrieve word under cursor.
+This technology works only with some programs that support it
+ (for example Internet Explorer 9).
+It not needed to select this option if you don't use such programs.</string>
+            </property>
+            <property name="text">
+             <string>Use &amp;IAccessibleEx</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="scanPopupUseUIAutomation">
+            <property name="toolTip">
+             <string>Try to use UI Automation technology to retrieve word under cursor.
+This technology works only with some programs that support it.
+It not needed to select this option if you don't use such programs.</string>
+            </property>
+            <property name="text">
+             <string>Use &amp;UIAutomation</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="scanPopupUseGDMessage">
+            <property name="toolTip">
+             <string>Try to use special GoldenDict message to retrieve word under cursor.
+This technology works only with some programs that support it.
+It not needed to select this option if you don't use such programs.</string>
+            </property>
+            <property name="text">
+             <string>Use &amp;GoldenDict message</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_17">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
         </spacer>
