@@ -2,9 +2,10 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "maintabwidget.hh"
+#include <QDebug>
 
 MainTabWidget::MainTabWidget( QWidget * parent) : QTabWidget( parent ) {
-    hideSingleTab = false;
+  hideSingleTab = false;
 }
 
 void MainTabWidget::setHideSingleTab(bool hide)
@@ -26,4 +27,9 @@ void MainTabWidget::tabRemoved(int index)
 void MainTabWidget::updateTabBarVisibility()
 {
   tabBar()->setVisible( !hideSingleTab || tabBar()->count() > 1 );
+}
+
+void MainTabWidget::mouseDoubleClickEvent ( QMouseEvent * event )
+{
+  emit doubleClicked();
 }

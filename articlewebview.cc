@@ -3,6 +3,7 @@
 
 #include "articlewebview.hh"
 #include <QMouseEvent>
+#include <QWebFrame>
 
 void ArticleWebView::mousePressEvent( QMouseEvent * event )
 {
@@ -26,5 +27,14 @@ void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
 {
   QWebView::mouseDoubleClickEvent( event );
 
-  emit doubleClicked();
+  int scrollBarWidth = page()->mainFrame()->scrollBarGeometry( Qt::Vertical ).width();
+  int scrollBarHeight = page()->mainFrame()->scrollBarGeometry( Qt::Horizontal ).height();
+
+  // emit the signal only if we are not double-clicking on scrollbars
+  if ( ( event->x() < width() - scrollBarWidth ) &&
+       ( event->y() < height() - scrollBarHeight ) )
+  {
+    emit doubleClicked();
+  }
+
 }

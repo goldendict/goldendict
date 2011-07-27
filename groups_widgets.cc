@@ -205,7 +205,8 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
       return QString::fromUtf8( item->getId().c_str() );
 
     case Qt::DecorationRole:
-      return item->getIcon();
+      // make all icons of the same size to avoid visual size/alignment problems
+      return item->getIcon().pixmap( 32 ).scaledToHeight( 21, Qt::SmoothTransformation );
 
     default:;
   }

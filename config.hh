@@ -424,6 +424,9 @@ Class load() throw( exError );
 /// Saves the configuration
 void save( Class const & ) throw( exError );
 
+/// Returns the main configuration directory.
+QString getConfigDir() throw( exError );
+
 /// Returns the index directory, where the indices are to be stored.
 QString getIndexDir() throw( exError );
 

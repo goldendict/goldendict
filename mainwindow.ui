@@ -61,7 +61,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -94,6 +94,8 @@
     </property>
     <addaction name="visitHomepage"/>
     <addaction name="visitForum"/>
+    <addaction name="separator"/>
+    <addaction name="openConfigFolder"/>
     <addaction name="separator"/>
     <addaction name="about"/>
    </widget>
@@ -402,6 +404,11 @@
    </property>
    <property name="shortcutContext">
     <enum>Qt::WidgetShortcut</enum>
+   </property>
+  </action>
+  <action name="openConfigFolder">
+   <property name="text">
+    <string>&amp;Configuration Folder</string>
    </property>
   </action>
  </widget>

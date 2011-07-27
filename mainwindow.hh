@@ -45,7 +45,7 @@ public:
 public slots:
 
   void messageFromAnotherInstanceReceived( QString const & );
-  void showStatusBarMessage ( const QString & );
+  void showStatusBarMessage ( QString const &, int, QPixmap const & );
 
 private:
 
@@ -290,6 +290,7 @@ private slots:
 
   void visitHomepage();
   void visitForum();
+  void openConfigFolder();
   void showAbout();
 
   void showDictBarNamesTriggered();

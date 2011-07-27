@@ -8,97 +8,99 @@
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QEvent>
+#include <QApplication>
 
-MainStatusBar::MainStatusBar(QWidget *parent) : QFrame(parent)
+MainStatusBar::MainStatusBar( QWidget *parent ) : QWidget( parent )
 {
-  // style
-  setWindowFlags( Qt::Tool | Qt::X11BypassWindowManagerHint | Qt::FramelessWindowHint );
-  setFrameStyle( QFrame::Box | QFrame::Plain );
-  setLineWidth(0);
+  textWidget = new QLabel( QString(), this );
+  textWidget->setObjectName( "text" );
+  textWidget->setFont( QApplication::font( "QStatusBar" ) );
+  textWidget->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
 
-  // components
-  label = new QLabel(QString(), this);
-  label->setTextFormat(Qt::PlainText);
-  timer = new QTimer(this);
+  picWidget = new QLabel( QString(), this );
+  picWidget->setObjectName( "icon" );
+  picWidget->setPixmap( QPixmap() );
+  picWidget->setScaledContents( true );
+  picWidget->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Ignored );
+
+  timer = new QTimer( this );
+  timer->setSingleShot( true );
 
   // layout
-  QVBoxLayout * layout = new QVBoxLayout;
-  layout->addWidget(label);
-  layout->setSizeConstraint(QLayout::SetFixedSize);
-  layout->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-  layout->setMargin(4);
-  setLayout(layout);
+  QHBoxLayout * layout = new QHBoxLayout;
+  layout->setSpacing( 0 );
+  layout->setSizeConstraint( QLayout::SetFixedSize );
+  layout->setAlignment( Qt::AlignLeft | Qt::AlignVCenter );
+  layout->setContentsMargins( 0, 0, 0, 0 );
+  layout->addWidget( picWidget );
+  layout->addWidget( textWidget );
+  setLayout( layout );
 
   parentWidget()->installEventFilter( this );
 
   connect( timer, SIGNAL( timeout() ), SLOT( clearMessage() ) );
 }
 
+bool MainStatusBar::hasImage() const
+{
+  return !picWidget->pixmap()->isNull();
+}
+
 void MainStatusBar::clearMessage()
 {
-  message = QString();
-  label->setText(message);
+  textWidget->setText( QString() );
+  picWidget->setPixmap( QPixmap() );
   timer->stop();
   refresh();
 }
 
 QString MainStatusBar::currentMessage() const
 {
-  return message;
+  return textWidget->text();
 }
 
-void MainStatusBar::showMessage(const QString & str, int timeout)
+void MainStatusBar::showMessage(const QString & str, int timeout, const QPixmap & pixmap)
 {
-    message = str;
+  textWidget->setText( str );
+  picWidget->setPixmap( pixmap );
 
-    if ( timeout > 0 )
-    {
-      timer->start( timeout );
-    }
+  // reload stylesheet
+  setStyleSheet( styleSheet() );
 
-    refresh();
-}
-
-void MainStatusBar::refresh(bool forceHide)
-{
-
-  if ( forceHide )
+  if ( timeout > 0 )
   {
-    hide();
-    return;
+    timer->start( timeout );
   }
 
-  if ( !message.isEmpty() )
-  {
+  refresh();
+}
 
-    int maxLabelLength = parentWidget()->width() - 2 * layout()->margin();
-    label->setText( label->fontMetrics().elidedText( message, Qt::ElideRight, maxLabelLength ) );
+void MainStatusBar::refresh()
+{
+  if ( !currentMessage().isEmpty() )
+  {
+    adjustSize();
+
+    if ( !picWidget->pixmap()->isNull() )
+    {
+      picWidget->setFixedSize( textWidget->height(), textWidget->height() );
+    }
+    else
+    {
+      picWidget->setFixedSize( 0, 0 );
+    }
 
     adjustSize();
 
-    // move(pGeom.left(), pGeom.bottom() - size().height() + 1 );
-
-    move(parentWidget()->mapToGlobal(QPoint(0, parentWidget()->height() - height() + 1)));
-
-    if ( parentWidget()->isHidden() )
-    {
-      hide();
-      return;
-    }
-
-    if ( parentWidget()->isMinimized() )
-    {
-      hide();
-      return;
-    }
+    move( QPoint( 0, parentWidget()->height() - height() ) );
 
     show();
+    raise();
   }
   else
   {
     hide();
   }
-
 }
 
 void MainStatusBar::mousePressEvent ( QMouseEvent * )
@@ -106,23 +108,10 @@ void MainStatusBar::mousePressEvent ( QMouseEvent * )
   clearMessage();
 }
 
-bool MainStatusBar::eventFilter(QObject *, QEvent * e)
+bool MainStatusBar::eventFilter( QObject *, QEvent * e )
 {
   switch ( e->type() ) {
-    case QEvent::Hide:
-    case QEvent::WindowDeactivate:
-#ifdef Q_WS_X11
-      // workaround for X11 idiosyncrasies
-      // qDebug() << e->type();
-      refresh(true);
-      break;
-#endif
     case QEvent::Resize:
-    case QEvent::FocusOut:
-    case QEvent::Move:
-    case QEvent::WindowStateChange:
-    case QEvent::WindowActivate:
-      // qDebug() << e->type();
       refresh();
       break;
     default:

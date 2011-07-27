@@ -338,6 +338,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( forwardClicked() ) );
 
   addTab.setAutoRaise( true );
+  addTab.setToolTip( tr( "New Tab"  ) );
   addTab.setFocusPolicy(Qt::ClickFocus);
   addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
 
@@ -358,6 +359,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.tabWidget->setContextMenuPolicy( Qt::CustomContextMenu );
 
   connect( &addTab, SIGNAL( clicked() ),
+           this, SLOT( addNewTab() ) );
+
+  connect( ui.tabWidget, SIGNAL( doubleClicked() ),
            this, SLOT( addNewTab() ) );
 
   connect( ui.tabWidget, SIGNAL( tabCloseRequested( int ) ),
@@ -386,6 +390,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( visitHomepage() ) );
   connect( ui.visitForum, SIGNAL( activated() ),
            this, SLOT( visitForum() ) );
+  connect( ui.openConfigFolder, SIGNAL( activated() ),
+           this, SLOT( openConfigFolder() ) );
   connect( ui.about, SIGNAL( activated() ),
            this, SLOT( showAbout() ) );
 
@@ -849,6 +855,7 @@ void MainWindow::createTabList()
   tabListButton->setAutoRaise(true);
   tabListButton->setIcon(tabListMenu->icon());
   tabListButton->setMenu(tabListMenu);
+  tabListButton->setToolTip( tr( "Open Tabs List" ) );
   tabListButton->setPopupMode(QToolButton::InstantPopup);
   ui.tabWidget->setCornerWidget(tabListButton);
   tabListButton->setFocusPolicy(Qt::ClickFocus);
@@ -914,8 +921,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( activeArticleChanged( const QString & ) ),
            this, SLOT( activeArticleChanged( const QString & ) ) );
 
-  connect( view, SIGNAL( statusBarMessage( const QString & ) ),
-           this, SLOT( showStatusBarMessage( const QString & ) ) );
+  connect( view, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
+           this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
@@ -1052,9 +1059,9 @@ void MainWindow::pageLoaded( ArticleView * view )
   updateFoundInDictsList();
 }
 
-void MainWindow::showStatusBarMessage( const QString & message )
+void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPixmap const & icon )
 {
-  mainStatusBar->showMessage( message, 5000 );
+  mainStatusBar->showMessage( message, timeout, icon );
 }
 
 void MainWindow::tabSwitched( int )
@@ -1128,7 +1135,7 @@ void MainWindow::updateFoundInDictsList()
           QString dictId = QString::fromUtf8( dictionaries[ x ]->getId().c_str() );
           QListWidgetItem * item =
               new QListWidgetItem(
-                dictionaries[ x ]->getIcon(),
+                dictionaries[ x ]->getIcon().pixmap(32).scaledToHeight( 21, Qt::SmoothTransformation ),
                 dictName,
                 ui.dictsList, QListWidgetItem::Type );
           item->setData(Qt::UserRole, QVariant( dictId ) );
@@ -1464,7 +1471,8 @@ void MainWindow::updateMatchResults( bool finished )
     }
 
     if ( !wordFinder.getErrorString().isEmpty() )
-      mainStatusBar->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ), 20000 );
+      mainStatusBar->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ),
+                                  20000 , QPixmap( ":/icons/error.png" ) );
   }
 }
 
@@ -1562,7 +1570,8 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
-           keyEvent->key() == Qt::Key_Tab )
+           keyEvent->key() == Qt::Key_Tab ||
+           keyEvent->key() == Qt::Key_Backtab )
         return false; // Those key have other uses than to start typing
                       // or don't make sense
 
@@ -1590,7 +1599,8 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
-           keyEvent->key() == Qt::Key_Tab )
+           keyEvent->key() == Qt::Key_Tab ||
+           keyEvent->key() == Qt::Key_Backtab )
         return false; // Those key have other uses than to start typing
                       // or don't make sense
 
@@ -2063,6 +2073,11 @@ void MainWindow::visitHomepage()
   QDesktopServices::openUrl( QUrl( "http://goldendict.org/" ) );
 }
 
+void MainWindow::openConfigFolder()
+{
+  QDesktopServices::openUrl( QUrl::fromLocalFile( Config::getConfigDir() ) );
+}
+
 void MainWindow::visitForum()
 {
   QDesktopServices::openUrl( QUrl( "http://goldendict.org/forum/" ) );
@@ -2108,7 +2123,10 @@ void MainWindow::toggleMenuBarTriggered(bool announce)
     if ( cfg.preferences.hideMenubar )
     {
       mainStatusBar->showMessage(
-            tr( "You have chosen to hide a menubar. Use %1 to show it back." ).arg( tr( "Ctrl+M" ) ), 10000 );
+            tr( "You have chosen to hide a menubar. Use %1 to show it back." )
+            .arg( QString( "<b>%1</b>" ) ).arg( tr( "Ctrl+M" ) ),
+            10000,
+            QPixmap( ":/icons/warning.png" ) );
     }
     else
     {

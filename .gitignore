@@ -1,6 +1,8 @@
-*.[oa]
-*.dll
+*.o
 *~
+
+mouseover_win32/*.dll
+mouseover_win32/*.a
 
 locale/*.qm
 debug/

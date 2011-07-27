@@ -1,10 +1,10 @@
 #ifndef _BASEAFF_HXX_
 #define _BASEAFF_HXX_
 
-class AffEntry
-{
-public:
+#include "hunvisapi.h"
 
+class LIBHUNSPELL_DLL_EXPORTED AffEntry
+{
 protected:
     char *         appnd;
     char *         strip;

@@ -548,7 +548,8 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
-           keyEvent->key() == Qt::Key_Tab )
+           keyEvent->key() == Qt::Key_Tab ||
+           keyEvent->key() == Qt::Key_Backtab )
         return false; // Those key have other uses than to start typing
 
       QString text = keyEvent->text();
@@ -640,9 +641,12 @@ void ArticleView::linkClicked( QUrl const & url_ )
 
   tryMangleWebsiteClickedUrl( url, contexts );
 
-  if ( !popupView && ui.definition->isMidButtonPressed() )
+  Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
+  if ( !popupView &&
+       ( ui.definition->isMidButtonPressed() ||
+         ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
   {
-    // Mid button is currently pressed - open the link in new tab
+    // Mid button or Control/Shift is currently pressed - open the link in new tab
     emit openLinkInNewTab( url, ui.definition->url(), getCurrentArticle(), contexts );
   }
   else
@@ -1221,7 +1225,8 @@ void ArticleView::resourceDownloadFinished()
           }
 
           if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( desktopOpenedTempFile ) ) )
-            QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
+            QMessageBox::critical( this, tr( "GoldenDict" ),
+                                   tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
         }
 
         // Ok, whatever it was, it's finished. Remove this and any other
@@ -1243,8 +1248,9 @@ void ArticleView::resourceDownloadFinished()
 
   if ( resourceDownloadRequests.empty() )
   {
-    // No requests suceeded.
-    QMessageBox::critical( this, tr( "GoldenDict" ), tr( "The referenced resource failed to download." ) );
+    emit statusBarMessage(
+          tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
+          10000, QPixmap( ":/icons/error.png" ) );
   }
 }
 

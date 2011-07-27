@@ -15,14 +15,18 @@ class MainTabWidget: public QTabWidget
   Q_PROPERTY(bool hideSingleTab READ isHideSingleTab WRITE setHideSingleTab)
 
 public:
-
   MainTabWidget( QWidget * parent = 0 );
 
   bool isHideSingleTab() const { return hideSingleTab; }
   void setHideSingleTab(bool hide);
 
-private:
+signals:
+  void doubleClicked();
 
+protected:
+  virtual void mouseDoubleClickEvent ( QMouseEvent * event );
+
+private:
   virtual void tabInserted(int index);
   virtual void tabRemoved(int index);
   void updateTabBarVisibility();
