@@ -899,6 +899,11 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
   wchar const * wordBegin = word.c_str();
   string::size_type wordSize = word.size();
 
+  // Safeguard us against various bugs here. Don't attempt adding words
+  // which are freakishly huge.
+  if ( wordSize > 256 )
+    return;
+
   // Skip any leading whitespace
   while( *wordBegin && Folding::isWhitespace( *wordBegin ) )
   {
