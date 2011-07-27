@@ -15,6 +15,10 @@
 #include "history.hh"
 #include "dictionarybar.hh"
 
+#ifdef Q_OS_WIN32
+#include "mouseover_win32/ThTypes.h"
+#endif
+
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
 class ScanPopup: public QMainWindow, KeyboardState
@@ -135,10 +139,7 @@ private slots:
   void altModePoll();
 
 #ifdef Q_OS_WIN32
-  void needHandleWord(bool *pNeed);
-  void useUIAutomation(bool *pUse);
-  void useIAccessibleEx(bool *pUse);
-  void useGDMessage(bool *pUse);
+  void makeScanBitMask( LRESULT *pMask );
 #endif
 
   /// Called repeatedly once the popup is initially engaged and we monitor the

@@ -172,32 +172,21 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
 {
   if ( msg == WM_MY_SHOW_TRANSLATION )
   {
-    /// Don't handle word without necessity
-    bool bNeed = false;
-    emit instance().askNeedWord( &bNeed );
-    if( !bNeed ) return 0;
+    LRESULT res = 0;
+    emit instance().getScanBitMask( &res );
+    if( res == 0 )
+        return 0;  // Don't handle word without necessity
 
-    if( wparam != 0) { //Ask for methods of word retrieving
-        LRESULT ret = GD_FLAG_METHOD_STANDARD;
-        emit instance().askUseGDMessage( &bNeed );
-        if( bNeed )
-            ret |= GD_FLAG_METHOD_GD_MESSAGE;
-        emit instance().askUseIAccessibleEx( &bNeed );
-        if( bNeed )
-            ret |= GD_FLAG_METHOD_IACCESSIBLEEX;
-        emit instance().askUseUIAutomation( &bNeed );
-        if( bNeed )
-            ret |= GD_FLAG_METHOD_UI_AUTOMATION;
-        return ret;
-    }
+    if( wparam != 0) //Ask for methods of word retrieving
+        return res;
 
     int wordSeqPos = 0;
     QString wordSeq;
 
     if( GlobalData->CurMod.WordLen == 0)
     {
-        emit instance().askUseUIAutomation( &bNeed );
-        if( !bNeed ) return 0;
+        if( ( res & GD_FLAG_METHOD_UI_AUTOMATION ) == 0 )
+            return 0;
         POINT pt = GlobalData->CurMod.Pt;
         WCHAR *pwstr = gdGetWordAtPointByAutomation( pt );
         if( pwstr == NULL ) return 0;

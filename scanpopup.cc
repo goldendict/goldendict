@@ -155,14 +155,8 @@ ScanPopup::ScanPopup( QWidget * parent,
 
 #ifdef Q_OS_WIN32
 
-  connect( &MouseOver::instance(), SIGNAL( askNeedWord( bool * ) ),
-           this, SLOT( needHandleWord( bool * ) ), Qt::DirectConnection );
-  connect( &MouseOver::instance(), SIGNAL( askUseUIAutomation( bool * ) ),
-           this, SLOT( useUIAutomation( bool * ) ), Qt::DirectConnection );
-  connect( &MouseOver::instance(), SIGNAL( askUseIAccessibleEx( bool * ) ),
-           this, SLOT( useIAccessibleEx( bool * ) ), Qt::DirectConnection );
-  connect( &MouseOver::instance(), SIGNAL( askUseGDMessage( bool * ) ),
-           this, SLOT( useGDMessage( bool * ) ), Qt::DirectConnection );
+  connect( &MouseOver::instance(), SIGNAL( getScanBitMask( LRESULT * ) ),
+           this, SLOT( makeScanBitMask( LRESULT * ) ), Qt::DirectConnection );
 
 #endif
 }
@@ -780,24 +774,22 @@ void ScanPopup::mutedDictionariesChanged()
 
 #ifdef Q_OS_WIN32
 
-void ScanPopup::needHandleWord( bool *pNeed )
+void ScanPopup::makeScanBitMask( LRESULT *pMask )
 {
-  *pNeed = !cfg.preferences.enableScanPopupModifiers || checkModifiersPressed( cfg.preferences.scanPopupModifiers );
-}
-
-void ScanPopup::useUIAutomation( bool *pUse )
-{
-  *pUse = cfg.preferences.scanPopupUseUIAutomation != 0;
-}
-
-void ScanPopup::useIAccessibleEx( bool *pUse )
-{
-  *pUse = cfg.preferences.scanPopupUseIAccessibleEx != 0;
-}
-
-void ScanPopup::useGDMessage( bool *pUse )
-{
-  *pUse = cfg.preferences.scanPopupUseGDMessage != 0;
+  if( cfg.preferences.enableScanPopupModifiers && !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
+  {
+      *pMask = 0;
+  }
+  else
+  {
+      *pMask = GD_FLAG_METHOD_STANDARD;
+      if( cfg.preferences.scanPopupUseUIAutomation != 0 )
+          *pMask |= GD_FLAG_METHOD_UI_AUTOMATION;
+      if( cfg.preferences.scanPopupUseIAccessibleEx != 0 )
+          *pMask |= GD_FLAG_METHOD_IACCESSIBLEEX;
+      if( cfg.preferences.scanPopupUseGDMessage != 0 )
+          *pMask |= GD_FLAG_METHOD_GD_MESSAGE;
+  }
 }
 
 #endif // Q_OS_WIN32
