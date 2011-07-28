@@ -37,7 +37,10 @@ win32 {
     LIBS += -liconv \
         -lwsock32 \
         -lwinmm \
-        -lpsapi
+        -lpsapi \
+        -lole32 \
+        -loleaut32 \
+        -ladvapi32
     LIBS += -lvorbisfile \
         -lvorbis \
         -logg \
@@ -257,8 +260,12 @@ SOURCES += folding.cc \
     mainstatusbar.cc \
     gdappstyle.cc
 win32 { 
-    SOURCES += mouseover_win32/ThTypes.c
-    HEADERS += mouseover_win32/ThTypes.h
+    SOURCES += mouseover_win32/ThTypes.c \
+               wordbyauto.cc \
+               guids.c
+    HEADERS += mouseover_win32/ThTypes.h \
+               wordbyauto.hh \
+               uiauto.hh
 }
 RESOURCES += resources.qrc \
     flags.qrc

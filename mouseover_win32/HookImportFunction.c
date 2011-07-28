@@ -87,8 +87,10 @@ static BOOL HookImportFunction(HMODULE hModule, LPCSTR szImportModule, LPCSTR sz
 				MEMORY_BASIC_INFORMATION mbi_thunk;
 				DWORD dwOldProtect;
 
-				VirtualQuery(pRealThunk, &mbi_thunk, sizeof(MEMORY_BASIC_INFORMATION));
-				VirtualProtect(mbi_thunk.BaseAddress, mbi_thunk.RegionSize, PAGE_READWRITE, &mbi_thunk.Protect);
+				if( !VirtualQuery(pRealThunk, &mbi_thunk, sizeof(MEMORY_BASIC_INFORMATION)) )
+					return FALSE;
+				if( !VirtualProtect(mbi_thunk.BaseAddress, mbi_thunk.RegionSize, PAGE_READWRITE, &mbi_thunk.Protect) )
+					return FALSE;
 				if (paOrigFuncs)
 					*paOrigFuncs = (PROC)pRealThunk->u1.Function;
 				pRealThunk->u1.Function = (DWORD)paHookFuncs;

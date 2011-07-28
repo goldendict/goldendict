@@ -118,6 +118,9 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
   ui.scanPopupAltMode->setChecked( p.scanPopupAltMode );
   ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
+  ui.scanPopupUseUIAutomation->setChecked( p.scanPopupUseUIAutomation );
+  ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
+  ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
 
   // Different platforms have different keys available
 
@@ -130,6 +133,13 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.rightCtrl->hide();
   ui.leftShift->hide();
   ui.rightShift->hide();
+#endif
+
+//Platform-specific options
+
+#ifndef Q_OS_WIN32
+  //  ui.groupBox_ScanPopupTechnologies->hide();
+  ui.tabWidget->removeTab( 5 );
 #endif
 
   // Sound
@@ -222,6 +232,9 @@ Config::Preferences Preferences::getPreferences()
 
   p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
   p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
+  p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
+  p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
+  p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();
