@@ -153,12 +153,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &mouseGrabPollTimer, SIGNAL( timeout() ),
            this, SLOT(mouseGrabPoll())  );
 
-#ifdef Q_OS_WIN32
-
-  connect( &MouseOver::instance(), SIGNAL( getScanBitMask( LRESULT * ) ),
-           this, SLOT( makeScanBitMask( LRESULT * ) ), Qt::DirectConnection );
-
-#endif
+  MouseOver::instance().setPreferencesPtr( &( cfg.preferences ) );
 }
 
 ScanPopup::~ScanPopup()
@@ -771,25 +766,3 @@ void ScanPopup::mutedDictionariesChanged()
   if ( dictionaryBar.toggleViewAction()->isChecked() )
     definition->updateMutedContents();
 }
-
-#ifdef Q_OS_WIN32
-
-void ScanPopup::makeScanBitMask( LRESULT *pMask )
-{
-  if( cfg.preferences.enableScanPopupModifiers && !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
-  {
-      *pMask = 0;
-  }
-  else
-  {
-      *pMask = GD_FLAG_METHOD_STANDARD;
-      if( cfg.preferences.scanPopupUseUIAutomation != 0 )
-          *pMask |= GD_FLAG_METHOD_UI_AUTOMATION;
-      if( cfg.preferences.scanPopupUseIAccessibleEx != 0 )
-          *pMask |= GD_FLAG_METHOD_IACCESSIBLEEX;
-      if( cfg.preferences.scanPopupUseGDMessage != 0 )
-          *pMask |= GD_FLAG_METHOD_GD_MESSAGE;
-  }
-}
-
-#endif // Q_OS_WIN32

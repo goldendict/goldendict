@@ -2,6 +2,8 @@
 #define __MOUSEOVER_HH_INCLUDED__
 
 #include <QObject>
+#include "config.hh"
+#include "keyboardstate.hh"
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -15,7 +17,7 @@
 /// 
 /// The Windows platform is the only one supported; it works with the help of
 /// two external .dll files,
-class MouseOver: public QObject
+class MouseOver: public QObject, public KeyboardState
 {
   Q_OBJECT
 
@@ -28,23 +30,21 @@ public:
   void enableMouseOver();
   /// Disables mouseover.
   void disableMouseOver();
+
+  /// Set pointer to program configuration
+  void setPreferencesPtr( Config::Preferences const *ppref ) { pPref = ppref; };
   
 signals:
 
   /// Emitted when there was some text under cursor which was hovered over.
   void hovered( QString const & );
 
-#ifdef Q_OS_WIN32
-
-  /// Ask mask for scan methods
-  void getScanBitMask( LRESULT * );
-
-#endif
-
 private:
 
   MouseOver();
   ~MouseOver();
+
+  Config::Preferences const *pPref;
 
 #ifdef Q_OS_WIN32
 
@@ -54,6 +54,9 @@ private:
   ActivateSpyFn activateSpyFn;
   HINSTANCE spyDll;
   bool mouseOverEnabled;
+
+  /// Create mask for scan methods
+  LRESULT makeScanBitMask();
 
 #endif
 

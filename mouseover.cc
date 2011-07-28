@@ -83,7 +83,8 @@ static void SetLowLabelToGDSynchroObjects()
 
 #endif // Q_OS_WIN32
 
-MouseOver::MouseOver()
+MouseOver::MouseOver() :
+  pPref(NULL)
 {
 #ifdef Q_OS_WIN32
 HMODULE hm;
@@ -167,13 +168,30 @@ void MouseOver::disableMouseOver()
 
 #ifdef Q_OS_WIN32
 
+LRESULT MouseOver::makeScanBitMask()
+{
+LRESULT res = 0;
+    if( pPref == NULL )
+        return 0;
+    if( !pPref->enableScanPopupModifiers || checkModifiersPressed( pPref->scanPopupModifiers ) ) {
+        res = GD_FLAG_METHOD_STANDARD;
+        if( pPref->scanPopupUseUIAutomation !=0 )
+            res |= GD_FLAG_METHOD_UI_AUTOMATION;
+        if( pPref->scanPopupUseIAccessibleEx !=0 )
+            res |= GD_FLAG_METHOD_IACCESSIBLEEX;
+        if( pPref->scanPopupUseGDMessage !=0 )
+            res |= GD_FLAG_METHOD_GD_MESSAGE;
+    }
+    return res;
+}
+
 LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
                                           WPARAM wparam, LPARAM lparam )
 {
   if ( msg == WM_MY_SHOW_TRANSLATION )
   {
-    LRESULT res = 0;
-    emit instance().getScanBitMask( &res );
+    LRESULT res = instance().makeScanBitMask();
+
     if( res == 0 )
         return 0;  // Don't handle word without necessity
 
