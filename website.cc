@@ -81,7 +81,11 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
     QString inputWord = gd::toQString( str );
 
     urlString.replace( "%25GDWORD%25", inputWord.toUtf8().toPercentEncoding() );
-    urlString.replace( "%25GD1251%25", QTextCodec::codecForName( "Windows-1251" )->fromUnicode( inputWord ).toPercentEncoding() );
+    urlString.replace( "%25GD1251%25",
+                       QTextCodec::codecForName( "Windows-1251" )->fromUnicode( inputWord ).toPercentEncoding() );
+
+    urlString.replace( "%25GDBIG5%25",
+                       QTextCodec::codecForName( "Big-5" )->fromUnicode( inputWord ).toPercentEncoding() );
 
     // Handle all ISO-8859 encodings
     for( int x = 1; x <= 16; ++x )
