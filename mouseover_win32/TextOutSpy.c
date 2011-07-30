@@ -42,6 +42,9 @@ LRESULT lr;
 		}
 	}
 
+	if( !IsWindow( GlobalData->ServerWND ) )
+		return;
+
 	// Ask for needing to retrieve word - WPARAM = 1
 	lr = SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 1, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
 	if( lr == 0 || SendMsgAnswer == 0)	//No answer or no needing
@@ -67,7 +70,8 @@ LRESULT lr;
 			GlobalData->CurMod.WordLen = n;
 			GlobalData->CurMod.BeginPos = 0;
 			if(n > 0) {
-				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+				if( IsWindow( GlobalData->ServerWND ) )
+					SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
 			}
 			return;
 		}
@@ -78,20 +82,22 @@ LRESULT lr;
 		GlobalData->CurMod.Pt = GlobalData->LastPt;
 		GetWordProc(&(GlobalData->CurMod));
 		if (GlobalData->CurMod.WordLen > 0) {
-			SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+			if( IsWindow( GlobalData->ServerWND ) )
+				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
 			return;
 		}
 	}
 
 	if( ( flags & GD_FLAG_METHOD_IACCESSIBLEEX ) != 0 ) {
 		getWordByAccEx( GlobalData->LastPt );
-		if (GlobalData->CurMod.WordLen > 0) {
-			SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+		if (GlobalData->CurMod.WordLen > 0 ) {
+			if( IsWindow( GlobalData->ServerWND ) )
+				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
 			return;
 		}
 	}
 
-	if( ( flags & GD_FLAG_METHOD_UI_AUTOMATION ) != 0 ) {
+	if( ( flags & GD_FLAG_METHOD_UI_AUTOMATION ) != 0 && IsWindow( GlobalData->ServerWND ) ) {
 		PostMessage( GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0 );
 	}		
 }
