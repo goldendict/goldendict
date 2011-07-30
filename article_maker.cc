@@ -97,6 +97,12 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "document.getElementById( 'gdfrom-' + newId ).className = 'gdarticle gdactivearticle';"
             "gdCurrentArticle = 'gdfrom-' + newId; articleview.onJsActiveArticleChanged(gdCurrentArticle);"
             "eval( 'gdActivateAudioLink_' + newId + '();' ); } }"
+            "var overIframeId = null;"
+            "function processIframeMouseOut() { overIframeId = null; top.focus(); }"
+            "function processIframeMouseOver( newId ) { overIframeId = newId; }"
+            "function processIframeClick() { if( overIframeId != null ) { overIframeId = overIframeId.replace( 'gdexpandframe-', '' ); gdMakeArticleActive( overIframeId ) } }"
+            "function init() { window.addEventListener('blur', processIframeClick, false); top.focus(); }"
+            "window.addEventListener('load', init, false);"
             "</script>";
 
   result += "</head><body>";

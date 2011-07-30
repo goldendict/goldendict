@@ -182,7 +182,7 @@ signals:
 
   /// Emitted when an article becomes active,
   /// typically in response to user actions
-  /// (clicking on the article or using shortucts).
+  /// (clicking on the article or using shortcuts).
   /// id - the dictionary id of the active article.
   void activeArticleChanged ( QString const & id );
 
