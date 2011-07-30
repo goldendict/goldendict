@@ -1035,7 +1035,7 @@ download page.</string>
              <string>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
-It not needed to select this option if you don't use such programs.</string>
+It is not needed to select this option if you don't use such programs.</string>
             </property>
             <property name="text">
              <string>Use &amp;IAccessibleEx</string>
@@ -1047,7 +1047,7 @@ It not needed to select this option if you don't use such programs.</string>
             <property name="toolTip">
              <string>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
-It not needed to select this option if you don't use such programs.</string>
+It is not needed to select this option if you don't use such programs.</string>
             </property>
             <property name="text">
              <string>Use &amp;UIAutomation</string>
@@ -1059,7 +1059,7 @@ It not needed to select this option if you don't use such programs.</string>
             <property name="toolTip">
              <string>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
-It not needed to select this option if you don't use such programs.</string>
+It is not needed to select this option if you don't use such programs.</string>
             </property>
             <property name="text">
              <string>Use &amp;GoldenDict message</string>

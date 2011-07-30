@@ -2475,7 +2475,7 @@ seconds, which is specified here.</source>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
-It not needed to select this option if you don&apos;t use such programs.</source>
+It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Использовать интерфейс IAccessibleEx для поиска слова под курсором.
 Эта технология работает лишь с теми программами, что поддерживают её
 (например Internet Explorer 9).
@@ -2490,7 +2490,7 @@ It not needed to select this option if you don&apos;t use such programs.</source
         <location filename="../preferences.ui" line="1048"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
-It not needed to select this option if you don&apos;t use such programs.</source>
+It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Использовать технологию UI Automation для поиска слова под курсором.
 Эта технология работает лишь с теми программами, что поддерживают её.
 Если вы не пользуетесь такими программами, включать эту опцию не нужно.</translation>
@@ -2504,7 +2504,7 @@ It not needed to select this option if you don&apos;t use such programs.</source
         <location filename="../preferences.ui" line="1060"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
-It not needed to select this option if you don&apos;t use such programs.</source>
+It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Использовать специальный запрос GoldenDict для поиска слова под курсором.
 Эта технология работает лишь с теми программами, что поддерживают её.
 Если вы не пользуетесь такими программами, включать эту опцию не нужно.</translation>

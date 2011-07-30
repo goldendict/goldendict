@@ -3370,7 +3370,7 @@ pero debería funcionar con la mayoría de los formatos de audio.</translation>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
-It not needed to select this option if you don&apos;t use such programs.</source>
+It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Intenta utilizar la tecnología IAccessibleEx para obtener la palabra debajo del cursor del mouse.
 Esta tecnología funciona sólo con los programas que la soportan (Por ejemplo Internet Explorer 9).
 No necesita seleccionar esta opción si no utiliza tales programas.</translation>
@@ -3384,7 +3384,7 @@ No necesita seleccionar esta opción si no utiliza tales programas.</translation
         <location filename="../preferences.ui" line="1048"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
-It not needed to select this option if you don&apos;t use such programs.</source>
+It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Intenta utilizar la tecnología UI Automation para obtener la palabra debajo del cursor del mouse.
 Esta tecnología funciona sólo con los programas que la soportan.
 No necesita seleccionar esta opción si no utiliza tales programas.</translation>
@@ -3398,7 +3398,7 @@ No necesita seleccionar esta opción si no utiliza tales programas.</translation
         <location filename="../preferences.ui" line="1060"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
-It not needed to select this option if you don&apos;t use such programs.</source>
+It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Intenta utilizar la tecnología GoldenDict message para obtener la palabra debajo del cursor del mouse.
 Esta tecnología funciona sólo con los programas que la soportan.
 No necesita seleccionar esta opción si no utiliza tales programas.</translation>
