@@ -28,7 +28,8 @@ HRESULT hr;
     hr = CoCreateInstance( CLSID_CUIAutomation , NULL, CLSCTX_INPROC_SERVER, IID_IUIAutomation, (void**)&pGDAutomation );
     if( hr != S_OK ) pGDAutomation = NULL;
     pTree = NULL;
-    hr = pGDAutomation->get_RawViewWalker( &pTree );
+    if( pGDAutomation != NULL )
+        hr = pGDAutomation->get_RawViewWalker( &pTree );
     memset( buffer, 0, sizeof(buffer) );
 }
 
