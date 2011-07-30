@@ -5,7 +5,13 @@
 #include <algorithm>
 
 #ifdef Q_OS_WIN32
+#undef WINVER
+#define WINVER 0x0500
+#include <sddl.h>
+#include <accctrl.h>
+#include <aclapi.h>
 #include "mouseover_win32/ThTypes.h"
+#include "wordbyauto.hh"
 #endif
 
 MouseOver & MouseOver::instance()
@@ -18,12 +24,72 @@ MouseOver & MouseOver::instance()
 #ifdef Q_OS_WIN32
 const UINT WM_MY_SHOW_TRANSLATION = WM_USER + 301;
 static wchar_t className[] = L"GoldenDictMouseover";
+typedef BOOL WINAPI ( *ChangeWindowMessageFilterFunc )( UINT, DWORD );
+
+#ifndef CHANGEFILTERSTRUCT
+typedef struct tagCHANGEFILTERSTRUCT {
+  DWORD cbSize;
+  DWORD ExtStatus;
+} CHANGEFILTERSTRUCT, *PCHANGEFILTERSTRUCT;
 #endif
 
-MouseOver::MouseOver()
-{
+typedef BOOL WINAPI ( *ChangeWindowMessageFilterExFunc )( HWND, UINT, DWORD, PCHANGEFILTERSTRUCT );
+
+#endif // Q_OS_WIN32
+
 #ifdef Q_OS_WIN32
 
+extern "C" BOOL WINAPI ConvertStringSecurityDescriptorToSecurityDescriptorW(
+                        LPCWSTR StringSecurityDescriptor,
+                        DWORD StringSDRevision,
+                        PSECURITY_DESCRIPTOR *SecurityDescriptor,
+                        PULONG SecurityDescriptorSize );
+
+
+static void SetLowLabelToGDSynchroObjects()
+{
+// The LABEL_SECURITY_INFORMATION SDDL SACL to be set for low integrity
+#define LOW_INTEGRITY_SDDL_SACL_W L"S:(ML;;NW;;;LW)"
+    DWORD dwErr = ERROR_SUCCESS;
+    PSECURITY_DESCRIPTOR pSD = NULL;
+
+    PACL pSacl = NULL; // not allocated
+    BOOL fSaclPresent = FALSE;
+    BOOL fSaclDefaulted = FALSE;
+    LPCWSTR pwszMapFileName = L"GoldenDictTextOutHookSharedMem";
+    LPCWSTR pwszSpyMutexName = L"GoldenDictTextOutSpyMutex";
+    LPCWSTR pwszHookMutexName = L"GoldenDictTextOutHookMutex";
+
+    if( ConvertStringSecurityDescriptorToSecurityDescriptorW( LOW_INTEGRITY_SDDL_SACL_W, 1 /* SDDL_REVISION_1 */, &pSD, NULL ) )
+    {
+        if( GetSecurityDescriptorSacl(pSD, &fSaclPresent, &pSacl, &fSaclDefaulted))
+        {
+// Note that psidOwner, psidGroup, and pDacl are
+// all NULL and set the new LABEL_SECURITY_INFORMATION
+
+            dwErr = SetNamedSecurityInfoW( (LPWSTR)pwszMapFileName,
+                    SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
+
+            dwErr = SetNamedSecurityInfoW( (LPWSTR)pwszSpyMutexName,
+                    SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
+
+            dwErr = SetNamedSecurityInfoW( (LPWSTR)pwszHookMutexName,
+                    SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
+
+        }
+        LocalFree(pSD);
+    }
+}
+
+#endif // Q_OS_WIN32
+
+MouseOver::MouseOver() :
+  pPref(NULL)
+{
+#ifdef Q_OS_WIN32
+HMODULE hm;
+ChangeWindowMessageFilterFunc changeWindowMessageFilterFunc = NULL;
+ChangeWindowMessageFilterExFunc changeWindowMessageFilterExFunc = NULL;
   mouseOverEnabled = false;
   
   ThTypes_Init();
@@ -37,17 +103,17 @@ MouseOver::MouseOver()
 
   wcex.cbSize = sizeof( WNDCLASSEX );
 
-  wcex.style	        = 0;
-  wcex.lpfnWndProc	= ( WNDPROC ) eventHandler;
-  wcex.cbClsExtra		= 0;
-  wcex.cbWndExtra		= 0;
-  wcex.hInstance		= GetModuleHandle( 0 );
-  wcex.hIcon		= NULL;
-  wcex.hCursor		= NULL,
-  wcex.hbrBackground	= NULL;
-  wcex.lpszMenuName	= NULL;
-  wcex.lpszClassName	= className;
-  wcex.hIconSm		= NULL;
+  wcex.style            = 0;
+  wcex.lpfnWndProc      = ( WNDPROC ) eventHandler;
+  wcex.cbClsExtra       = 0;
+  wcex.cbWndExtra       = 0;
+  wcex.hInstance        = GetModuleHandle( 0 );
+  wcex.hIcon            = NULL;
+  wcex.hCursor          = NULL,
+  wcex.hbrBackground    = NULL;
+  wcex.lpszMenuName     = NULL;
+  wcex.lpszClassName    = className;
+  wcex.hIconSm          = NULL;
 
   RegisterClassEx( &wcex );
 
@@ -57,6 +123,23 @@ MouseOver::MouseOver()
 
   if ( spyDll )
     activateSpyFn = ( ActivateSpyFn ) GetProcAddress( spyDll, "ActivateTextOutSpying" );
+
+// Allow messages from low intehrity process - for Vista and Win7
+  hm = GetModuleHandle( __TEXT("user32.dll"));
+  if ( hm != NULL ) {
+      changeWindowMessageFilterExFunc = (ChangeWindowMessageFilterExFunc)GetProcAddress( hm, "ChangeWindowMessageFilterEx" );
+      if( changeWindowMessageFilterExFunc ) {
+          CHANGEFILTERSTRUCT cfs = { sizeof( CHANGEFILTERSTRUCT ), 0 };
+          changeWindowMessageFilterExFunc( GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 1 /* MSGFLT_ALLOW */, &cfs );
+      } else {
+          changeWindowMessageFilterFunc = (ChangeWindowMessageFilterFunc)GetProcAddress( hm, "ChangeWindowMessageFilter" );
+          if( changeWindowMessageFilterFunc )
+              changeWindowMessageFilterFunc( WM_MY_SHOW_TRANSLATION, 1 /* MSGFLT_ADD */ );
+      }
+  }
+
+//Allow object access from low intehrity process - for Vista and Win7
+  SetLowLabelToGDSynchroObjects();
 
 #endif
 }
@@ -85,51 +168,83 @@ void MouseOver::disableMouseOver()
 
 #ifdef Q_OS_WIN32
 
+LRESULT MouseOver::makeScanBitMask()
+{
+LRESULT res = 0;
+    if( pPref == NULL )
+        return 0;
+    if( !pPref->enableScanPopupModifiers || checkModifiersPressed( pPref->scanPopupModifiers ) ) {
+        res = GD_FLAG_METHOD_STANDARD;
+        if( pPref->scanPopupUseUIAutomation !=0 )
+            res |= GD_FLAG_METHOD_UI_AUTOMATION;
+        if( pPref->scanPopupUseIAccessibleEx !=0 )
+            res |= GD_FLAG_METHOD_IACCESSIBLEEX;
+        if( pPref->scanPopupUseGDMessage !=0 )
+            res |= GD_FLAG_METHOD_GD_MESSAGE;
+    }
+    return res;
+}
+
 LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
                                           WPARAM wparam, LPARAM lparam )
 {
   if ( msg == WM_MY_SHOW_TRANSLATION )
   {
-    // Don't handle word without necessity
+    LRESULT res = instance().makeScanBitMask();
 
-    bool bNeedHandle = false;
-    emit instance().askNeedWord( &bNeedHandle );
-    if( !bNeedHandle ) return 0;
+    if( res == 0 )
+        return 0;  // Don't handle word without necessity
 
-    int wordSeqPos;
+    if( wparam != 0) //Ask for methods of word retrieving
+        return res;
+
+    int wordSeqPos = 0;
     QString wordSeq;
 
-    // Is the string in utf8 or in locale encoding?
-
-    gd::wchar testBuf[ 256 ];
-
-    long result = Utf8::decode( GlobalData->CurMod.MatchedWord,
-                                strlen( GlobalData->CurMod.MatchedWord ),
-                                testBuf );
-
-    if ( result >= 0 )
+    if( GlobalData->CurMod.WordLen == 0)
     {
-      // It seems to be
-      QString begin = QString::fromUtf8( GlobalData->CurMod.MatchedWord,
-                                         GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
-
-      QString end = QString::fromUtf8( GlobalData->CurMod.MatchedWord +
-                                       GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
-
-      wordSeq = begin + end;
-      wordSeqPos = begin.size();
+        if( ( res & GD_FLAG_METHOD_UI_AUTOMATION ) == 0 )
+            return 0;
+        POINT pt = GlobalData->CurMod.Pt;
+        WCHAR *pwstr = gdGetWordAtPointByAutomation( pt );
+        if( pwstr == NULL ) return 0;
+        wordSeq = QString::fromWCharArray( pwstr );
     }
     else
     {
-      // It's not, so interpret it as in local encoding
-      QString begin = QString::fromLocal8Bit( GlobalData->CurMod.MatchedWord,
-                                         GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
 
-      QString end = QString::fromLocal8Bit( GlobalData->CurMod.MatchedWord +
-                                       GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+        // Is the string in utf8 or in locale encoding?
 
-      wordSeq = begin + end;
-      wordSeqPos = begin.size();
+        gd::wchar testBuf[ 256 ];
+
+        long result = Utf8::decode( GlobalData->CurMod.MatchedWord,
+                                    strlen( GlobalData->CurMod.MatchedWord ),
+                                    testBuf );
+
+        if ( result >= 0 )
+        {
+          // It seems to be
+          QString begin = QString::fromUtf8( GlobalData->CurMod.MatchedWord,
+                                             GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+
+          QString end = QString::fromUtf8( GlobalData->CurMod.MatchedWord +
+                                           GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+
+          wordSeq = begin + end;
+          wordSeqPos = begin.size();
+        }
+        else
+        {
+        // It's not, so interpret it as in local encoding
+            QString begin = QString::fromLocal8Bit( GlobalData->CurMod.MatchedWord,
+                                                    GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+
+            QString end = QString::fromLocal8Bit( GlobalData->CurMod.MatchedWord +
+                                                  GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+
+            wordSeq = begin + end;
+            wordSeqPos = begin.size();
+        }
     }
 
     // Now locate the word inside the sequence
@@ -139,7 +254,7 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
     if ( wordSeq[ wordSeqPos ].isSpace() )
     {
       // Currently we ignore such cases
-      return DefWindowProc( hwnd, msg, wparam, lparam );
+      return 0;
     }
     else
     if ( !wordSeq[ wordSeqPos ].isLetterOrNumber() )
@@ -163,7 +278,7 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
       if ( end - begin == 1 )
       {
         // Well, turns out it was just a single non-letter char, discard it
-        return DefWindowProc( hwnd, msg, wparam, lparam );
+        return 0;
       }
 
       word = wordSeq.mid( begin, end - begin );
@@ -203,6 +318,7 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
     }
 
     emit instance().hovered( word );
+    return 0;
   }
 
   return DefWindowProc( hwnd, msg, wparam, lparam );

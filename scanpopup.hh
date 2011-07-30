@@ -137,8 +137,6 @@ private slots:
   void altModeExpired();
   void altModePoll();
 
-  void needHandleWord(bool *pNeed);
-
   /// Called repeatedly once the popup is initially engaged and we monitor the
   /// mouse as it may move away from the window. This simulates mouse grab, in
   /// essense, but seems more reliable. Once the mouse enters the window, the

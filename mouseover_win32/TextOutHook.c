@@ -525,9 +525,9 @@ DWORD wso;
       case DLL_PROCESS_ATTACH:
 			if(hHookMutex==0) {
 				hHookMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutHookMutex");
-				if(hHookMutex==0) return(FALSE);
+				if(hHookMutex==0) 
+					return(FALSE);
 			}
-			//ThTypes_Init();
 			InstallTextOutHooks();
         break;
 
@@ -541,7 +541,6 @@ DWORD wso;
 					hHookMutex=0;
 				}
 			}
-			//Thtypes_End();
         break;
 
       case DLL_THREAD_ATTACH:
