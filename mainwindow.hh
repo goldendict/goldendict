@@ -261,6 +261,7 @@ private slots:
   void dictsListItemActivated( QListWidgetItem * );
   void dictsListSelectionChanged();
 
+  void showDictsPane( );
   void dictsPaneVisibilityChanged ( bool );
 
   /// Creates a new tab, which is to be populated then with some content.

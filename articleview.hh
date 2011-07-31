@@ -180,6 +180,9 @@ signals:
 
   void statusBarMessage( QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap());
 
+  /// Signals that the dictionaries pane was requested to be showed
+  void showDictsPane( );
+
   /// Emitted when an article becomes active,
   /// typically in response to user actions
   /// (clicking on the article or using shortcuts).

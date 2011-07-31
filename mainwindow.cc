@@ -924,6 +924,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
+  connect( view, SIGNAL( showDictsPane( ) ), this, SLOT( showDictsPane( ) ) );
+
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
 
@@ -1097,6 +1099,12 @@ void MainWindow::pronounce( ArticleView * view )
     view->playSound();
   else
     getCurrentArticleView()->playSound();
+}
+
+void MainWindow::showDictsPane( )
+{
+  if( !ui.dictsPane->isVisible() )
+    ui.dictsPane->show();
 }
 
 void MainWindow::dictsPaneVisibilityChanged( bool visible )

@@ -948,6 +948,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * lookupSelectionGr = 0;
   QAction * lookupSelectionNewTab = 0;
   QAction * lookupSelectionNewTabGr = 0;
+  QAction * maxDictionaryRefsAction = 0;
 
   QUrl targetUrl( r.linkUrl() );
   Contexts contexts;
@@ -1035,33 +1036,36 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     menu.addSeparator();
 
   unsigned refsAdded = 0;
+  bool maxDictionaryRefsReached = false;
 
   for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd();
        ++i, ++refsAdded )
   {
-    if ( refsAdded == cfg.maxDictionaryRefsInContextMenu )
-    {
-      // Enough! Or the menu would become too large.
-      menu.addAction( new QAction( ".........", &menu ) );
-      break;
-    }
-
     // Find this dictionary
 
     for( unsigned x = allDictionaries.size(); x--; )
     {
       if ( allDictionaries[ x ]->getId() == i->toUtf8().data() )
       {
-        QAction * action =
-          new QAction(
-                allDictionaries[ x ]->getIcon(),
-                QString::fromUtf8( allDictionaries[ x ]->getName().c_str() ),
-                &menu );
-        // Force icons in menu on all platfroms,
-        // since without them it will be much harder
-        // to find things.
-        action->setIconVisibleInMenu( true );
-
+        QAction * action = 0;
+        if ( refsAdded == cfg.maxDictionaryRefsInContextMenu )
+        {
+          // Enough! Or the menu would become too large.
+          maxDictionaryRefsAction = new QAction( ".........", &menu );
+          action = maxDictionaryRefsAction;
+          maxDictionaryRefsReached = true;
+        }
+        else
+        {
+          action = new QAction(
+                  allDictionaries[ x ]->getIcon(),
+                  QString::fromUtf8( allDictionaries[ x ]->getName().c_str() ),
+                  &menu );
+          // Force icons in menu on all platfroms,
+          // since without them it will be much harder
+          // to find things.
+          action->setIconVisibleInMenu( true );
+        }
         menu.addAction( action );
 
         tableOfContents[ action ] = *i;
@@ -1069,6 +1073,8 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
         break;
       }
     }
+    if( maxDictionaryRefsReached )
+      break;
   }
 
   if ( !menu.isEmpty() )
@@ -1102,6 +1108,9 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
                                    QString(), Contexts() );
     else
     {
+      if ( !popupView && result == maxDictionaryRefsAction )
+        emit showDictsPane();
+
       // Match against table of contents
       QString id = tableOfContents[ result ];
 
