@@ -159,8 +159,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   sptr< Dictionary::DataRequest > r = articleNetMgr.getResource( blankPage,
                                                                  contentType );
 
-  ui.definition->setHtml( QByteArray( &( r->getFullData().front() ),
-                                      r->getFullData().size() ), blankPage );
+  ui.definition->setHtml( QString::fromUtf8( &( r->getFullData().front() ),
+                                             r->getFullData().size() ),
+                          blankPage );
 }
 
 void ArticleView::setGroupComboBox( GroupComboBox const * g )
