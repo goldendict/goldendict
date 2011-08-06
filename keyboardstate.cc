@@ -30,7 +30,9 @@ bool KeyboardState::checkModifiersPressed( int mask )
   #else
   XkbStateRec state;
 
+  #ifndef Q_OS_MAC
   XkbGetState( QX11Info::display(), XkbUseCoreKbd, &state );
+  #endif
 
   return !(
     ( mask & Alt && !( state.base_mods & Mod1Mask ) ) ||
