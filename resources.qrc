@@ -46,5 +46,6 @@
         <file>CREDITS.txt</file>
         <file>icons/highlighter.png</file>
         <file>icons/error.png</file>
+        <file>icons/macicon.png</file>
     </qresource>
 </RCC>
