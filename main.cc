@@ -22,6 +22,10 @@
 
 int main( int argc, char ** argv )
 {
+  #ifdef Q_OS_MAC
+    setenv("LANG", "en_US.UTF-8", 1);
+  #endif
+
   // The following clause fixes a race in the MinGW runtime where throwing
   // exceptions for the first time in several threads simultaneously can cause
   // an abort(). This code throws first exception in a safe, single-threaded
@@ -88,7 +92,11 @@ int main( int argc, char ** argv )
   app.setOrganizationDomain( "http://goldendict.org/" );
   app.setStyle(new GdAppStyle);
 
-  app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
+  #ifndef Q_OS_MAC
+    app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
+  #else
+    app.setWindowIcon( QIcon( ":/icons/macicon.png" ) );
+  #endif
 
   Config::Class cfg( Config::load() );
 

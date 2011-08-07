@@ -88,6 +88,17 @@ unix {
     desktops2.files = redist/*.desktop
     INSTALLS += desktops2
 }
+mac {
+    LIBS += -liconv \
+        -lvorbisfile \
+        -lvorbis \
+        -logg \
+        -lhunspell-1.3
+    INCLUDEPATH += maclibs/include
+    LIBS += -Lmaclibs/lib \
+        -L/usr/X11/lib
+    ICON = icons/macicon.icns
+}
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
