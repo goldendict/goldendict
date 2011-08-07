@@ -89,10 +89,15 @@ unix {
     INSTALLS += desktops2
 }
 mac {
-    LIBS += -lvorbisfile \
-        -liconv \
-        -lhunspell-1.2 \
+    LIBS += -liconv \
+        -lvorbisfile \
+        -lvorbis \
+        -logg \
+        -lhunspell-1.3
+    INCLUDEPATH += maclibs/include
+    LIBS += -Lmaclibs/lib \
         -L/usr/X11/lib
+    ICON = icons/macicon.icns
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
