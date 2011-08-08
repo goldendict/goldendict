@@ -14,7 +14,7 @@ namespace Details {
 using gd::wstring;
 using std::list;
 
-#ifdef __WIN32
+#ifndef __linux__
 
 // wcscasecmp() function is a GNU extension, we need to reimplement it
 // for non-GNU systems.
