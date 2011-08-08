@@ -89,6 +89,7 @@ unix {
     INSTALLS += desktops2
 }
 mac {
+    CONFIG += x86 x86_64
     LIBS += -liconv \
         -lvorbisfile \
         -lvorbis \
