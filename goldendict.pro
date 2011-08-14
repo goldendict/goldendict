@@ -90,13 +90,15 @@ unix {
 }
 mac {
     CONFIG += x86 x86_64
-    LIBS += -liconv \
+    LIBS = -lz \
+        -liconv \
         -lvorbisfile \
         -lvorbis \
         -logg \
         -lhunspell-1.3
     INCLUDEPATH += maclibs/include
     LIBS += -Lmaclibs/lib \
+        -L/usr/lib \
         -L/usr/X11/lib
     ICON = icons/macicon.icns
 }
