@@ -96,10 +96,9 @@ mac {
         -lvorbis \
         -logg \
         -lhunspell-1.3
-    INCLUDEPATH += maclibs/include
+    INCLUDEPATH = maclibs/include
     LIBS += -Lmaclibs/lib \
-        -L/usr/lib \
-        -L/usr/X11/lib
+        -L/usr/lib
     ICON = icons/macicon.icns
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
