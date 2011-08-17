@@ -89,7 +89,11 @@ unix {
     INSTALLS += desktops2
 }
 mac {
-    CONFIG += x86 x86_64
+    contains(QMAKE_HOST.arch, x86_64) {
+        CONFIG += x86 x86_64
+    } else {
+        CONFIG += x86
+    }
     LIBS = -lz \
         -liconv \
         -lvorbisfile \
