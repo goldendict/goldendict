@@ -23,6 +23,7 @@
  */
 
 #include <stdlib.h>
+#include <time.h>
 #include "dictzip.h"
 #include <limits.h>
 #include <stdarg.h>
