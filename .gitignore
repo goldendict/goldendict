@@ -22,3 +22,5 @@ object_script.goldendict.Release
 version.txt
 
 .gitattributes
+
+/goldendict.app/
