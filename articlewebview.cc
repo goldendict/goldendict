@@ -38,3 +38,20 @@ void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
   }
 
 }
+
+void ArticleWebView::focusInEvent( QFocusEvent * event )
+{
+  QWebView::focusInEvent( event );
+
+  switch( event->reason() )
+  {
+    case Qt::MouseFocusReason:
+    case Qt::TabFocusReason:
+    case Qt::BacktabFocusReason:
+      page()->mainFrame()->evaluateJavaScript("top.focus();");
+      break;
+
+    default:
+      break;
+  }
+}
