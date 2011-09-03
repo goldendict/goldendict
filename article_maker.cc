@@ -101,7 +101,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "function processIframeMouseOut() { overIframeId = null; top.focus(); }"
             "function processIframeMouseOver( newId ) { overIframeId = newId; }"
             "function processIframeClick() { if( overIframeId != null ) { overIframeId = overIframeId.replace( 'gdexpandframe-', '' ); gdMakeArticleActive( overIframeId ) } }"
-            "function init() { window.addEventListener('blur', processIframeClick, false); top.focus(); }"
+            "function init() { window.addEventListener('blur', processIframeClick, false); }"
             "window.addEventListener('load', init, false);"
             "</script>";
 
