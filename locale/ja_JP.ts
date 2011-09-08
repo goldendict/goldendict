@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="ja">
+<!DOCTYPE TS>
+<TS version="2.0" language="ja">
 <context>
     <name>About</name>
     <message>
@@ -8,22 +9,22 @@
         <translation>バージョン情報</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="48"/>
+        <location filename="../about.ui" line="51"/>
         <source>GoldenDict dictionary lookup program, version </source>
         <translation>GoldenDict 辞書検索プログラム version </translation>
     </message>
     <message>
-        <location filename="../about.ui" line="70"/>
+        <location filename="../about.ui" line="73"/>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
         <translation>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="94"/>
+        <location filename="../about.ui" line="97"/>
         <source>Credits:</source>
         <translation>クレジット:</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="80"/>
+        <location filename="../about.ui" line="83"/>
         <source>Licensed under GNU GPLv3 or later</source>
         <translation>GNU GPLv3 以降の下でライセンスされています</translation>
     </message>
@@ -36,47 +37,47 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="111"/>
+        <location filename="../article_maker.cc" line="119"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>グループ &lt;b&gt;%2&lt;/b&gt; に &lt;b&gt;%1&lt;/b&gt; の翻訳が見つかりません。</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="116"/>
+        <location filename="../article_maker.cc" line="124"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>グループ &lt;b&gt;%1&lt;/b&gt; に翻訳が見つかりません。</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="135"/>
+        <location filename="../article_maker.cc" line="143"/>
         <source>Welcome!</source>
         <translation>ようこそ!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="137"/>
+        <location filename="../article_maker.cc" line="145"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;&lt;b&gt;GoldenDict&lt;/b&gt; へようこそ!&lt;/h3&gt;&lt;p&gt;このプログラムでの作業を開始するには、まず &lt;b&gt;[編集|辞書]&lt;/b&gt; を開いて辞書ファイルを検索するディレクトリのパスを追加したり、さまざまな Wikipedia のサイトやその他のソースを設定したり、辞書の順序を調整したり辞書グループを作成したりします。&lt;p&gt;次にはもう単語を検索する準備ができています! このウィンドウの左のペインを使用するか、&lt;a href=&quot;Working with popup&quot;&gt;他のアクティブなアプリケーションから単語を検索します&lt;/a&gt;。&lt;p&gt;プログラムをカスタマイズするには、&lt;b&gt;[編集|環境設定]&lt;/b&gt; で利用可能なオプションをチェックしてください。そこにある設定にはすべてツールチップがあります、何か疑問に思った場合はそれらを読むようにしてください。&lt;p&gt;さらなるヘルプを必要とする場合、質問、提案やその他気になることがある場合は、プログラムの&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;フォーラム&lt;/a&gt;で歓迎されます。&lt;p&gt;更新はプログラムの&lt;a href=&quot;http://goldendict.org/&quot;&gt;Web サイト&lt;/a&gt;をチェックしてください。&lt;p&gt;(c) 2008-2011 Konstantin Isakov. GPLv3 以降の下でライセンスされています。</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="153"/>
+        <location filename="../article_maker.cc" line="161"/>
         <source>Working with popup</source>
         <translation>ポップアップ作業</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="155"/>
+        <location filename="../article_maker.cc" line="163"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;ポップアップ作業&lt;/h3&gt;他のアクティブなアプリケーションから単語を検索するには、まず &lt;b&gt;[環境設定]&lt;/b&gt; で &lt;i&gt;&quot;スキャン ポップアップ機能&quot;&lt;/i&gt; を有効にする必要があり、次からは上の &apos;ポップアップ アイコンを切り替えるか、または右マウス ボタンで下のトレイ アイコンをクリックしてポップしているメニューで選択することによっていつでも有効にできます。</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="162"/>
+        <location filename="../article_maker.cc" line="170"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>次に他のアプリケーションで検索したい単語の上でカーソルを止めると、説明のウィンドウがポップアップします。</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="165"/>
+        <location filename="../article_maker.cc" line="173"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>次に他のアプリケーションで検索したい単語をマウスで選択 (ダブルクリックまたは長押し) すると、単語を説明するウィンドウがポップアップします。</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="242"/>
+        <location filename="../article_maker.cc" line="250"/>
         <source>(untitled)</source>
         <translation>(無題)</translation>
     </message>
@@ -84,27 +85,27 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="401"/>
+        <location filename="../article_maker.cc" line="410"/>
         <source>From </source>
         <translation>From </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="414"/>
+        <location filename="../article_maker.cc" line="423"/>
         <source>Query error: %1</source>
         <translation>クエリ エラー: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="513"/>
+        <location filename="../article_maker.cc" line="522"/>
         <source>Close words: </source>
         <translation>類似語: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="584"/>
+        <location filename="../article_maker.cc" line="593"/>
         <source>Compound expressions: </source>
         <translation>複合表現: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="612"/>
+        <location filename="../article_maker.cc" line="621"/>
         <source>Individual words: </source>
         <translation>単語ごと: </translation>
     </message>
@@ -112,79 +113,109 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="1105"/>
+        <location filename="../articleview.cc" line="606"/>
+        <source>Resource</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="611"/>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="621"/>
+        <source>Definition: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="792"/>
+        <location filename="../articleview.cc" line="822"/>
+        <location filename="../articleview.cc" line="831"/>
+        <location filename="../articleview.cc" line="1210"/>
+        <location filename="../articleview.cc" line="1228"/>
+        <location filename="../articleview.cc" line="1238"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="705"/>
+        <location filename="../articleview.cc" line="792"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>参照されたりソースが存在しません。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="810"/>
+        <location filename="../articleview.cc" line="832"/>
+        <source>The referenced audio program doesn&apos;t exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="963"/>
         <source>&amp;Open Link</source>
         <translation>リンクを開く(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="816"/>
+        <location filename="../articleview.cc" line="969"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>新しいタブでリンクを開く(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="823"/>
+        <location filename="../articleview.cc" line="976"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>外部ブラウザーでリンクを開く(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="836"/>
+        <location filename="../articleview.cc" line="989"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot; を検索(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="844"/>
+        <location filename="../articleview.cc" line="997"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>新しいタブで &quot;%1&quot; を検索(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="859"/>
+        <location filename="../articleview.cc" line="1012"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>%2 から &quot;%1&quot; を検索</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="867"/>
+        <location filename="../articleview.cc" line="1020"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>新しいタブで %2 から &quot;%1&quot; を検索(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1002"/>
+        <location filename="../articleview.cc" line="1167"/>
         <source>Playing a non-WAV file</source>
         <translation>非 WAV ファイルの再生</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1003"/>
+        <location filename="../articleview.cc" line="1168"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>WAV 以外のファイルの再生を有効にするには、[オーディオ] タブの &quot;DirectShow を通じて再生する&quot; を選択します。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1054"/>
+        <location filename="../articleview.cc" line="1210"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>サウンド ファイルを再生するプレーヤーの実行に失敗しました: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1072"/>
+        <location filename="../articleview.cc" line="1228"/>
         <source>Failed to create temporary file.</source>
         <translation>一時ファイルの作成に失敗しました。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1082"/>
+        <location filename="../articleview.cc" line="1239"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>リソース ファイルの自動オープンに失敗しました、手動で開いています: %1。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1105"/>
+        <location filename="../articleview.cc" line="1262"/>
         <source>The referenced resource failed to download.</source>
         <translation>参照されたリソースのダウンロードに失敗しました。</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1262"/>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">警告: %1</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="14"/>
@@ -225,6 +256,11 @@
         <location filename="../articleview.ui" line="126"/>
         <source>&amp;Case Sensitive</source>
         <translation>大文字と小文字を区別する(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../articleview.ui" line="133"/>
+        <source>Highlight &amp;all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -283,12 +319,12 @@
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="570"/>
+        <location filename="../groups_widgets.cc" line="571"/>
         <source>Confirmation</source>
         <translation>確認</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="571"/>
+        <location filename="../groups_widgets.cc" line="572"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>言語の組み合わせに基づいたグループのセットを生成しますか?</translation>
     </message>
@@ -304,12 +340,12 @@
 <context>
     <name>DictionaryBar</name>
     <message>
-        <location filename="../dictionarybar.cc" line="12"/>
+        <location filename="../dictionarybar.cc" line="13"/>
         <source>Dictionary Bar</source>
         <translation>辞書バー</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="103"/>
+        <location filename="../dictionarybar.cc" line="107"/>
         <source>Edit this group</source>
         <translation>このグループを編集</translation>
     </message>
@@ -322,32 +358,34 @@
         <translation>ソース(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="198"/>
+        <location filename="../editdictionaries.cc" line="42"/>
+        <location filename="../editdictionaries.cc" line="217"/>
         <source>&amp;Dictionaries</source>
         <translation>辞書(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="201"/>
+        <location filename="../editdictionaries.cc" line="43"/>
+        <location filename="../editdictionaries.cc" line="220"/>
         <source>&amp;Groups</source>
         <translation>グループ(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="94"/>
+        <location filename="../editdictionaries.cc" line="101"/>
         <source>Sources changed</source>
         <translation>ソースが変更されました</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="95"/>
+        <location filename="../editdictionaries.cc" line="102"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>いくつかのソースが変更されました。変更を承認しますか?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="98"/>
+        <location filename="../editdictionaries.cc" line="105"/>
         <source>Accept</source>
         <translation>承認</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="100"/>
+        <location filename="../editdictionaries.cc" line="107"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
@@ -358,39 +396,47 @@
     </message>
 </context>
 <context>
+    <name>ExternalViewer</name>
+    <message>
+        <location filename="../externalviewer.cc" line="49"/>
+        <source>the viewer program name is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="203"/>
+        <location filename="../forvo.cc" line="217"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML 分析エラー: %1 at %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="279"/>
+        <location filename="../forvo.cc" line="293"/>
         <source>Added %1</source>
         <translation>%1 を追加しました</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="282"/>
+        <location filename="../forvo.cc" line="296"/>
         <source>by</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="286"/>
+        <location filename="../forvo.cc" line="300"/>
         <source>Male</source>
         <translation>男性</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="286"/>
+        <location filename="../forvo.cc" line="300"/>
         <source>Female</source>
         <translation>女性</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="288"/>
+        <location filename="../forvo.cc" line="302"/>
         <source>from</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="326"/>
+        <location filename="../forvo.cc" line="340"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>このエラーを解消するには [編集|辞書|ソース|Forvo] で私たちの API キーを適用してください。</translation>
     </message>
@@ -406,7 +452,7 @@
 <context>
     <name>GreekTranslit</name>
     <message>
-        <location filename="../greektranslit.cc" line="651"/>
+        <location filename="../greektranslit.cc" line="839"/>
         <source>Greek Transliteration</source>
         <translation>ギリシャ語音訳</translation>
     </message>
@@ -465,6 +511,7 @@
         <translation>グループ &lt;b&gt;%1&lt;/b&gt; を削除してもよろしいですか?</translation>
     </message>
     <message>
+        <location filename="../groups.ui" line="183"/>
         <location filename="../groups.cc" line="145"/>
         <source>Remove all groups</source>
         <translation>すべてのグループを削除</translation>
@@ -573,12 +620,12 @@
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="202"/>
+        <location filename="../hunspell.cc" line="216"/>
         <source>Spelling suggestions: </source>
         <translation>もしかして: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="733"/>
+        <location filename="../hunspell.cc" line="750"/>
         <source>%1 Morphology</source>
         <translation>%1 形態</translation>
     </message>
@@ -586,12 +633,12 @@
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="848"/>
+        <location filename="../sources.cc" line="1075"/>
         <source>Enabled</source>
         <translation>有効</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="850"/>
+        <location filename="../sources.cc" line="1077"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
@@ -599,12 +646,13 @@
 <context>
     <name>Initializing</name>
     <message>
-        <location filename="../initializing.cc" line="17"/>
+        <location filename="../initializing.cc" line="21"/>
         <source>Please wait...</source>
         <translation>お待ちください...</translation>
     </message>
     <message>
-        <location filename="../initializing.cc" line="26"/>
+        <location filename="../initializing.ui" line="22"/>
+        <location filename="../initializing.cc" line="30"/>
         <source>Please wait while indexing dictionary</source>
         <translation>辞書の索引を構築している間お待ちください</translation>
     </message>
@@ -1550,7 +1598,7 @@
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="176"/>
+        <location filename="../loaddictionaries.cc" line="178"/>
         <source>Error loading dictionaries</source>
         <translation>辞書の読み込みエラー</translation>
     </message>
@@ -1558,357 +1606,420 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cc" line="71"/>
+        <location filename="../mainwindow.cc" line="94"/>
         <source>Navigation</source>
         <translation>操作</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="74"/>
+        <location filename="../mainwindow.cc" line="97"/>
         <source>Back</source>
         <translation>戻る</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="75"/>
+        <location filename="../mainwindow.cc" line="98"/>
         <source>Forward</source>
         <translation>進む</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="82"/>
+        <location filename="../mainwindow.cc" line="107"/>
         <source>Scan Popup</source>
         <translation>スキャン ポップアップ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="133"/>
+        <location filename="../mainwindow.cc" line="158"/>
         <source>Show &amp;Main Window</source>
         <translation>メイン ウィンドウの表示(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="137"/>
+        <location filename="../mainwindow.ui" line="319"/>
+        <location filename="../mainwindow.cc" line="162"/>
         <source>&amp;Quit</source>
         <translation>終了(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="268"/>
+        <location filename="../mainwindow.cc" line="331"/>
         <source>Loading...</source>
         <translation>読み込んでいます...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1683"/>
+        <location filename="../mainwindow.cc" line="2021"/>
         <source>Skip This Release</source>
         <translation>このリリースをスキップ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1859"/>
+        <location filename="../mainwindow.cc" line="2134"/>
+        <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2135"/>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2276"/>
         <source>Page Setup</source>
         <translation>ページ設定</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1860"/>
+        <location filename="../mainwindow.cc" line="2277"/>
         <source>No printer is available. Please install one first.</source>
         <translation>利用可能なプリンターがありません。まずインストールしてください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1877"/>
+        <location filename="../mainwindow.cc" line="2294"/>
         <source>Print Article</source>
         <translation>記事の印刷</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1898"/>
+        <location filename="../mainwindow.cc" line="2315"/>
         <source>Save Article As</source>
         <translation>名前を付けて記事を保存</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1898"/>
+        <location filename="../mainwindow.cc" line="2315"/>
         <source>Html files (*.html *.htm)</source>
         <translation>HTML ファイル (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1913"/>
+        <location filename="../mainwindow.cc" line="2330"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1914"/>
+        <location filename="../mainwindow.cc" line="2331"/>
         <source>Can&apos;t save article: %1</source>
         <translation>記事を保存できません: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="622"/>
+        <location filename="../mainwindow.cc" line="719"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 個の辞書、%2 個の記事、 %3 個の単語</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1542"/>
+        <location filename="../mainwindow.cc" line="1880"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>ホットキー監視機構の初期化に失敗しました。&lt;br&gt;XServer の RECORD 拡張がオンになっていることを確認してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1676"/>
+        <location filename="../mainwindow.cc" line="2014"/>
         <source>New Release Available</source>
         <translation>新しいリリースが利用可能です</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1677"/>
+        <location filename="../mainwindow.cc" line="2015"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict のバージョン &lt;b&gt;%1&lt;/b&gt; のダウンロードが利用可能です。&lt;br&gt;ダウンロード ページへ移動するには&lt;b&gt;ダウンロード&lt;/b&gt;をクリックします。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1682"/>
+        <location filename="../mainwindow.cc" line="2020"/>
         <source>Download</source>
         <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="633"/>
+        <location filename="../mainwindow.cc" line="72"/>
+        <location filename="../mainwindow.cc" line="730"/>
         <source>Look up in:</source>
         <translation>検索する場所:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="37"/>
+        <location filename="../mainwindow.cc" line="42"/>
         <source>Show Names in Dictionary Bar</source>
         <translation>辞書バーに名前を表示する</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="92"/>
+        <location filename="../mainwindow.cc" line="43"/>
+        <source>Show Small Icons in Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="44"/>
+        <source>&amp;Menubar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="85"/>
+        <source>Found in Dictionaries:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="117"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>単語の発音 (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="101"/>
+        <location filename="../mainwindow.cc" line="126"/>
         <source>Zoom In</source>
         <translation>拡大</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="103"/>
+        <location filename="../mainwindow.cc" line="128"/>
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="105"/>
+        <location filename="../mainwindow.cc" line="130"/>
         <source>Normal Size</source>
         <translation>通常のサイズ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="121"/>
+        <location filename="../mainwindow.cc" line="146"/>
         <source>Words Zoom In</source>
         <translation>単語の拡大</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="123"/>
+        <location filename="../mainwindow.cc" line="148"/>
         <source>Words Zoom Out</source>
         <translation>単語の縮小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="125"/>
+        <location filename="../mainwindow.cc" line="150"/>
         <source>Words Normal Size</source>
         <translation>通常の単語のサイズ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="172"/>
+        <location filename="../mainwindow.cc" line="214"/>
         <source>Close current tab</source>
         <translation>現在のタブを閉じる</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="182"/>
+        <location filename="../mainwindow.cc" line="224"/>
         <source>Close all tabs</source>
         <translation>すべてのタブを閉じる</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="190"/>
+        <location filename="../mainwindow.cc" line="232"/>
         <source>Close all tabs except current</source>
         <translation>現在以外のすべてのタブを閉じる</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="633"/>
+        <location filename="../mainwindow.cc" line="730"/>
         <source>Look up:</source>
         <translation>検索:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="651"/>
+        <location filename="../mainwindow.cc" line="748"/>
         <source>All</source>
         <translation>すべて</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="745"/>
+        <location filename="../mainwindow.cc" line="849"/>
         <source>Opened tabs</source>
         <translation>開いているタブ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="785"/>
+        <location filename="../mainwindow.cc" line="858"/>
+        <source>Open Tabs List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="891"/>
         <source>(untitled)</source>
         <translation>(無題)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1247"/>
+        <location filename="../mainwindow.cc" line="1048"/>
+        <source>%1 - %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1482"/>
         <source>WARNING: %1</source>
         <translation>警告: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1541"/>
+        <location filename="../mainwindow.ui" line="14"/>
+        <location filename="../mainwindow.cc" line="1048"/>
+        <location filename="../mainwindow.cc" line="1879"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="374"/>
+        <location filename="../mainwindow.ui" line="46"/>
+        <location filename="../mainwindow.cc" line="451"/>
         <source>Welcome!</source>
         <translation>ようこそ!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="66"/>
+        <location filename="../mainwindow.ui" line="69"/>
         <source>&amp;File</source>
         <translation>ファイル(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="81"/>
+        <location filename="../mainwindow.ui" line="86"/>
         <source>&amp;Edit</source>
         <translation>編集(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="88"/>
+        <location filename="../mainwindow.ui" line="93"/>
         <source>&amp;Help</source>
         <translation>ヘルプ(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="277"/>
+        <location filename="../mainwindow.ui" line="255"/>
+        <source>Results Navigation Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="286"/>
+        <source>&amp;Dictionaries...	F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="295"/>
         <source>&amp;Preferences...</source>
         <translation>環境設定(&amp;P)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="338"/>
+        <location filename="../mainwindow.ui" line="356"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="265"/>
         <source>&amp;Groups...</source>
-        <translation>グループ(&amp;G)...</translation>
+        <translation type="obsolete">グループ(&amp;G)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="97"/>
+        <location filename="../mainwindow.ui" line="104"/>
         <source>&amp;View</source>
         <translation>表示(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="101"/>
+        <location filename="../mainwindow.ui" line="108"/>
         <source>&amp;Zoom</source>
         <translation>ズーム&amp;Z)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="108"/>
+        <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
         <translation>履歴(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="253"/>
         <source>&amp;Dictionaries...</source>
-        <translation>辞書(&amp;D)...</translation>
+        <translation type="obsolete">辞書(&amp;D)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="268"/>
         <source>F3</source>
-        <translation>F3</translation>
+        <translation type="obsolete">F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="280"/>
+        <location filename="../mainwindow.ui" line="298"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="285"/>
+        <location filename="../mainwindow.ui" line="303"/>
         <source>&amp;Homepage</source>
         <translation>ホーム ページ(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="290"/>
+        <location filename="../mainwindow.ui" line="308"/>
         <source>&amp;About</source>
         <translation>バージョン情報(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="293"/>
+        <location filename="../mainwindow.ui" line="311"/>
         <source>About GoldenDict</source>
         <translation>GoldenDict のバージョン情報</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="296"/>
+        <location filename="../mainwindow.ui" line="314"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="304"/>
+        <location filename="../mainwindow.ui" line="322"/>
         <source>Quit from application</source>
         <translation>アプリケーションを終了します</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="307"/>
+        <location filename="../mainwindow.ui" line="325"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="312"/>
+        <location filename="../mainwindow.ui" line="330"/>
         <source>&amp;Forum</source>
         <translation>フォーラム(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="317"/>
+        <location filename="../mainwindow.ui" line="335"/>
         <source>&amp;Close To Tray</source>
         <translation>トレイへ閉じる(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="320"/>
+        <location filename="../mainwindow.ui" line="338"/>
         <source>Minimizes the window to tray</source>
         <translation>トレイへウィンドウを最小化します</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="323"/>
+        <location filename="../mainwindow.ui" line="341"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="332"/>
+        <location filename="../mainwindow.ui" line="350"/>
         <source>&amp;Save Article</source>
         <translation>記事の保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="335"/>
+        <location filename="../mainwindow.ui" line="353"/>
         <source>Save Article</source>
         <translation>記事の保存</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="347"/>
+        <location filename="../mainwindow.ui" line="365"/>
         <source>&amp;Print</source>
         <translation>印刷(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="350"/>
+        <location filename="../mainwindow.ui" line="368"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="355"/>
+        <location filename="../mainwindow.ui" line="373"/>
         <source>Page Set&amp;up</source>
         <translation>ページ設定(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="360"/>
+        <location filename="../mainwindow.ui" line="378"/>
         <source>Print Preview</source>
         <translation>印刷プレビュー</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="365"/>
+        <location filename="../mainwindow.ui" line="383"/>
         <source>Rescan Files</source>
         <translation>ファイルの再スキャン</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="368"/>
+        <location filename="../mainwindow.ui" line="386"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="373"/>
+        <location filename="../mainwindow.ui" line="391"/>
         <source>&amp;Clear</source>
         <translation>クリア(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="122"/>
+        <location filename="../mainwindow.ui" line="400"/>
+        <location filename="../mainwindow.cc" line="341"/>
+        <source>New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="403"/>
+        <source>Ctrl+T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="411"/>
+        <source>&amp;Configuration Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="128"/>
         <source>Search Pane</source>
         <translation>検索ペイン</translation>
     </message>
@@ -1916,7 +2027,7 @@
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="271"/>
+        <location filename="../mediawiki.cc" line="272"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML 分析エラー: %1 at %2,%3</translation>
     </message>
@@ -1924,7 +2035,7 @@
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="149"/>
+        <location filename="../mediawiki.cc" line="150"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML 分析エラー: %1 at %2,%3</translation>
     </message>
@@ -1932,17 +2043,17 @@
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="347"/>
+        <location filename="../sources.cc" line="390"/>
         <source>Enabled</source>
         <translation>有効</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="349"/>
+        <location filename="../sources.cc" line="392"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="351"/>
+        <location filename="../sources.cc" line="394"/>
         <source>Address</source>
         <translation>アドレス</translation>
     </message>
@@ -1960,6 +2071,9 @@
         <translation>辞書の順序:</translation>
     </message>
     <message>
+        <location filename="../orderandprops.ui" line="51"/>
+        <location filename="../orderandprops.ui" line="61"/>
+        <location filename="../orderandprops.ui" line="101"/>
         <location filename="../orderandprops.ui" line="111"/>
         <source>...</source>
         <translation>...</translation>
@@ -2013,12 +2127,12 @@
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="637"/>
+        <location filename="../sources.cc" line="864"/>
         <source>Path</source>
         <translation>パス</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="639"/>
+        <location filename="../sources.cc" line="866"/>
         <source>Recursive</source>
         <translation>再帰</translation>
     </message>
@@ -2069,75 +2183,75 @@ be the last ones.</source>
         <translation>現在の後に新しいタブを開く</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="93"/>
+        <location filename="../preferences.ui" line="103"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>有効だと、メイン ウィンドウを開いたりするのに使われる
 アイコンがシステム トレイ領域に表示されます。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="97"/>
+        <location filename="../preferences.ui" line="107"/>
         <source>Enable system tray icon</source>
         <translation>システム トレイ アイコンを有効にする</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="115"/>
+        <location filename="../preferences.ui" line="125"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
         <translation>これがオンだと、アプリケーションはメイン ウィンドウを表示することなく
 直接システム トレイに入って起動します。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="119"/>
+        <location filename="../preferences.ui" line="129"/>
         <source>Start to system tray</source>
         <translation>システム トレイに入れて起動する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="126"/>
+        <location filename="../preferences.ui" line="136"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
         <translation>これがオンだと、メイン ウィンドウを閉じるとアプリケーションを閉じる代わりに
 非表示になります。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="130"/>
+        <location filename="../preferences.ui" line="140"/>
         <source>Close to system tray</source>
         <translation>システム トレイへ閉じる</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="140"/>
+        <location filename="../preferences.ui" line="150"/>
         <source>Startup</source>
         <translation>スタートアップ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="149"/>
+        <location filename="../preferences.ui" line="159"/>
         <source>Start with system</source>
         <translation>システムと起動する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="161"/>
+        <location filename="../preferences.ui" line="171"/>
         <source>Interface language:</source>
         <translation>インターフェイス言語:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="187"/>
+        <location filename="../preferences.ui" line="197"/>
         <source>Display style:</source>
         <translation>表示スタイル:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="241"/>
+        <location filename="../preferences.ui" line="251"/>
         <source>Double-click translates the word clicked</source>
         <translation>ダブルクリックでクリックされた単語を翻訳する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="290"/>
+        <location filename="../preferences.ui" line="311"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>スキャン ポップアップ モードを既定でオンにするかを選択します。チェックされている場合、
 プログラムは常にスキャン ポップアップがアクティブで起動します。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="471"/>
+        <location filename="../preferences.ui" line="492"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -2148,37 +2262,58 @@ be pressed shortly after the selection is done.</source>
 選択が完了した直後にも押すことができます。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="551"/>
+        <location filename="../preferences.ui" line="572"/>
         <source>Hotkeys</source>
         <translation>ホットキー</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="570"/>
+        <location filename="../preferences.ui" line="591"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>メイン ウィンドウを表示または非表示にするのに次のホットキーを使用します:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="601"/>
+        <location filename="../preferences.ui" line="622"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>クリップボードからの単語を翻訳するのに次のホットキーを使用します:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="648"/>
+        <location filename="../preferences.ui" line="669"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>ホットキーはグローバルであり、GoldenDict が背景で起動中であればすべてのプログラムで脈絡なく実行します。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="253"/>
+        <location filename="../preferences.ui" line="274"/>
         <source>&amp;Scan Popup</source>
         <translation>スキャン ポップアップ(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="146"/>
+        <location filename="../preferences.ui" line="90"/>
+        <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="93"/>
+        <source>Hide single tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="156"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
         <translation>オペレーション システムのブートアップの後に GoldenDict が自動的に起動します。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="272"/>
+        <location filename="../preferences.ui" line="258"/>
+        <source>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="262"/>
+        <source>ESC key hides main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="293"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -2189,134 +2324,134 @@ off from main window or tray icon.</source>
 またはトレイ アイコンからオンとオフを切り替えることができます。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="278"/>
+        <location filename="../preferences.ui" line="299"/>
         <source>Enable scan popup functionality</source>
         <translation>スキャン ポップアップ機能を有効にする</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="294"/>
+        <location filename="../preferences.ui" line="315"/>
         <source>Start with scan popup turned on</source>
         <translation>スキャン ポップアップをオンにして起動する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="301"/>
+        <location filename="../preferences.ui" line="322"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>これが有効だと、ポップアップは単語の選択範囲が変更したときに
 すべての選択されたキーが押されている状態でのみ表示されます。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="305"/>
+        <location filename="../preferences.ui" line="326"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>すべての選択されたキーが押されているときのみポップアップを表示する:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="344"/>
+        <location filename="../preferences.ui" line="365"/>
         <source>Left Ctrl only</source>
         <translation>左 Ctrl のみ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="347"/>
+        <location filename="../preferences.ui" line="368"/>
         <source>Left Ctrl</source>
         <translation>左 Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="354"/>
+        <location filename="../preferences.ui" line="375"/>
         <source>Right Shift only</source>
         <translation>右 Shift のみ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="357"/>
+        <location filename="../preferences.ui" line="378"/>
         <source>Right Shift</source>
         <translation>右 Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="364"/>
+        <location filename="../preferences.ui" line="385"/>
         <source>Alt key</source>
         <translation>Alt キー</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="367"/>
+        <location filename="../preferences.ui" line="388"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="374"/>
+        <location filename="../preferences.ui" line="395"/>
         <source>Ctrl key</source>
         <translation>Ctrl キー</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="377"/>
+        <location filename="../preferences.ui" line="398"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="384"/>
+        <location filename="../preferences.ui" line="405"/>
         <source>Left Alt only</source>
         <translation>左 Alt のみ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="387"/>
+        <location filename="../preferences.ui" line="408"/>
         <source>Left Alt</source>
         <translation>左 Al</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="394"/>
+        <location filename="../preferences.ui" line="415"/>
         <source>Shift key</source>
         <translation>Shift キー</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="397"/>
+        <location filename="../preferences.ui" line="418"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="404"/>
+        <location filename="../preferences.ui" line="425"/>
         <source>Right Alt only</source>
         <translation>右 Alt のみ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="407"/>
+        <location filename="../preferences.ui" line="428"/>
         <source>Right Alt</source>
         <translation>右 Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="414"/>
+        <location filename="../preferences.ui" line="435"/>
         <source>Right Ctrl only</source>
         <translation>右 Ctrl のみ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="417"/>
+        <location filename="../preferences.ui" line="438"/>
         <source>Right Ctrl</source>
         <translation>右 Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="424"/>
+        <location filename="../preferences.ui" line="445"/>
         <source>Left Shift only</source>
         <translation>左 Shift のみ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="427"/>
+        <location filename="../preferences.ui" line="448"/>
         <source>Left Shift</source>
         <translation>左 Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="434"/>
+        <location filename="../preferences.ui" line="455"/>
         <source>Windows key or Meta key</source>
         <translation>Windows キーまたは Meta キー</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="437"/>
+        <location filename="../preferences.ui" line="458"/>
         <source>Win/Meta</source>
         <translation>Win/Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="477"/>
+        <location filename="../preferences.ui" line="498"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>キーはその後</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="484"/>
+        <location filename="../preferences.ui" line="505"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -2325,12 +2460,12 @@ seconds, which is specified here.</source>
 後にのみ監視されます。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="508"/>
+        <location filename="../preferences.ui" line="529"/>
         <source>secs</source>
         <translation>秒まで押せる</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="658"/>
+        <location filename="../preferences.ui" line="679"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -2343,108 +2478,108 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;注意: RECORD 拡張が破損した X.Org XServer リリースを実行しているようです。GoldenDict のホットキーが動作しない可能性があります。これはサーバー自体で修正される必要があります。次の&lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;バグ エントリ&lt;/span&gt;&lt;/a&gt;を参照して&lt;span style=&quot; color:#ff0000;&quot;&gt;できればそこにコメントを残してください。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="696"/>
+        <location filename="../preferences.ui" line="717"/>
         <source>&amp;Audio</source>
         <translation>オーディオ(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="715"/>
+        <location filename="../preferences.ui" line="736"/>
         <source>Pronunciation</source>
         <translation>発音</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="721"/>
+        <location filename="../preferences.ui" line="742"/>
         <source>Auto-pronounce words in main window</source>
         <translation>メイン ウィンドウで単語を自動的に発音する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="728"/>
+        <location filename="../preferences.ui" line="749"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>スキャン ポップアップで単語を自動的に発音する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="738"/>
+        <location filename="../preferences.ui" line="759"/>
         <source>Playback</source>
         <translation>再生</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="744"/>
+        <location filename="../preferences.ui" line="765"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
         <translation>Использовать внутренние средства Windows для проигрывания. Поддерживаются
 только файлы типа .wav, однако воспроизведение всегда работает хорошо.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="748"/>
+        <location filename="../preferences.ui" line="769"/>
         <source>Play via Windows native API</source>
         <translation>Windows 標準の API を通じて再生する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="755"/>
+        <location filename="../preferences.ui" line="776"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
         <translation>Phonon フレームワークを通じてオーディオを再生します。やや不安定かもしれませんが、
 ほとんどのオーディオ ファイル フォーマットをサポートします。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="759"/>
+        <location filename="../preferences.ui" line="780"/>
         <source>Play via Phonon</source>
         <translation>Phonon を通じて再生する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="771"/>
+        <location filename="../preferences.ui" line="792"/>
         <source>Use any external program to play audio files</source>
         <translation>オーディオ ファイルの再生に外部プログラムを使用します</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="774"/>
+        <location filename="../preferences.ui" line="795"/>
         <source>Use external program:</source>
         <translation>外部プログラムを使用する:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="811"/>
+        <location filename="../preferences.ui" line="832"/>
         <source>&amp;Network</source>
         <translation>ネットワーク(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="830"/>
+        <location filename="../preferences.ui" line="851"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>すべてのプログラムのネットワーク要求にプロキシ
 サーバーを使用したい場合は有効にします。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="834"/>
+        <location filename="../preferences.ui" line="855"/>
         <source>Use proxy server</source>
         <translation>プロキシ サーバーを使用する</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="848"/>
+        <location filename="../preferences.ui" line="869"/>
         <source>Type:</source>
         <translation>種類:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="858"/>
+        <location filename="../preferences.ui" line="879"/>
         <source>Host:</source>
         <translation>ホスト:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="868"/>
+        <location filename="../preferences.ui" line="889"/>
         <source>Port:</source>
         <translation>ポート:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="889"/>
+        <location filename="../preferences.ui" line="910"/>
         <source>User:</source>
         <translation>ユーザー:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="899"/>
+        <location filename="../preferences.ui" line="920"/>
         <source>Password:</source>
         <translation>パスワード:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="934"/>
+        <location filename="../preferences.ui" line="955"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -2453,12 +2588,24 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
 ブロックします。特定のサイトが破損する場合は、これを無効にしてみてください。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="939"/>
+        <location filename="../preferences.ui" line="960"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>他のサイトからのコンテンツの読み込みを無効にする (ほとんどの広告を非表示にします)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="962"/>
+        <location filename="../preferences.ui" line="967"/>
+        <source>Enabling this would allow to listen to sound pronunciations from
+online dictionaries that rely on Flash or other web plugins.
+Plugin must be installed for this option to work.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="972"/>
+        <source>Enable web plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="995"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -2470,9 +2617,56 @@ download page.</source>
 ダウンロード ページを開くか確認します。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="969"/>
+        <location filename="../preferences.ui" line="1002"/>
         <source>Check for new program releases periodically</source>
         <translation>定期的に新しいプログラム リリースをチェックする</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1023"/>
+        <source>Ad&amp;vanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1029"/>
+        <source>ScanPopup extra technologies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1035"/>
+        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
+This technology works only with some programs that support it
+ (for example Internet Explorer 9).
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1041"/>
+        <source>Use &amp;IAccessibleEx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1048"/>
+        <source>Try to use UI Automation technology to retrieve word under cursor.
+This technology works only with some programs that support it.
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1053"/>
+        <source>Use &amp;UIAutomation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1060"/>
+        <source>Try to use special GoldenDict message to retrieve word under cursor.
+This technology works only with some programs that support it.
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1065"/>
+        <source>Use &amp;GoldenDict message</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="41"/>
@@ -2480,29 +2674,98 @@ download page.</source>
         <translation>システム既定</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="73"/>
+        <location filename="../preferences.cc" line="79"/>
         <source>Default</source>
         <translation>既定</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="74"/>
+        <location filename="../preferences.cc" line="80"/>
         <source>Lingvo</source>
         <translation>Lingvo</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="131"/>
+        <location filename="../preferences.cc" line="149"/>
         <source>Play via DirectShow</source>
         <translation>DirectShow を通じて再生する</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="310"/>
+        <location filename="../preferences.cc" line="332"/>
         <source>Changing Language</source>
         <translation>言語の変更</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="311"/>
+        <location filename="../preferences.cc" line="333"/>
         <source>Restart the program to apply the language change.</source>
         <translation>言語の変更を適用するにはプログラムを再起動します。</translation>
+    </message>
+</context>
+<context>
+    <name>ProgramTypeEditor</name>
+    <message>
+        <location filename="../sources.cc" line="772"/>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="774"/>
+        <source>Plain Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="776"/>
+        <source>Html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="778"/>
+        <source>Prefix Match</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="780"/>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Programs::RunInstance</name>
+    <message>
+        <location filename="../programs.cc" line="152"/>
+        <source>No program name was given.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../programs.cc" line="168"/>
+        <source>The program has crashed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../programs.cc" line="171"/>
+        <source>The program has returned exit code %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProgramsModel</name>
+    <message>
+        <location filename="../sources.cc" line="688"/>
+        <source>Enabled</source>
+        <translation type="unfinished">有効</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="690"/>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="692"/>
+        <source>Name</source>
+        <translation type="unfinished">名前</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="694"/>
+        <source>Command Line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2571,6 +2834,9 @@ could be resized or managed in other ways.</source>
 ようにするにはこのピンを使用します。</translation>
     </message>
     <message>
+        <location filename="../scanpopup.ui" line="70"/>
+        <location filename="../scanpopup.ui" line="93"/>
+        <location filename="../scanpopup.ui" line="126"/>
         <location filename="../scanpopup.ui" line="150"/>
         <source>...</source>
         <translation>...</translation>
@@ -2579,12 +2845,12 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="743"/>
+        <location filename="../sources.cc" line="970"/>
         <source>Path</source>
         <translation>パス</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="745"/>
+        <location filename="../sources.cc" line="972"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
@@ -2592,29 +2858,42 @@ could be resized or managed in other ways.</source>
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="81"/>
+        <location filename="../sources.cc" line="104"/>
         <source>(not available in portable version)</source>
         <translation>(ポータブル バージョンでは利用できません)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="171"/>
+        <location filename="../sources.cc" line="140"/>
+        <location filename="../sources.cc" line="167"/>
+        <location filename="../sources.cc" line="194"/>
         <source>Choose a directory</source>
         <translation>ディレクトリを選択します</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="222"/>
+        <location filename="../sources.cc" line="154"/>
+        <location filename="../sources.cc" line="181"/>
+        <location filename="../sources.cc" line="221"/>
+        <location filename="../sources.cc" line="245"/>
+        <location filename="../sources.cc" line="269"/>
         <source>Confirm removal</source>
         <translation>削除の確認</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="159"/>
+        <location filename="../sources.cc" line="155"/>
+        <location filename="../sources.cc" line="182"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>一覧からディレクトリ &lt;b&gt;%1&lt;/b&gt; を削除しますか?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="223"/>
+        <location filename="../sources.cc" line="222"/>
+        <location filename="../sources.cc" line="246"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>一覧からサイト &lt;b&gt;%1&lt;/b&gt; を削除しますか?</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="270"/>
+        <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../sources.ui" line="34"/>
@@ -2627,12 +2906,20 @@ could be resized or managed in other ways.</source>
         <translation>辞書ファイルを検索するパス:</translation>
     </message>
     <message>
+        <location filename="../sources.ui" line="54"/>
+        <location filename="../sources.ui" line="117"/>
+        <location filename="../sources.ui" line="241"/>
         <location filename="../sources.ui" line="300"/>
+        <location filename="../sources.ui" line="366"/>
         <source>&amp;Add...</source>
         <translation>追加(&amp;A)...</translation>
     </message>
     <message>
+        <location filename="../sources.ui" line="61"/>
+        <location filename="../sources.ui" line="124"/>
+        <location filename="../sources.ui" line="248"/>
         <location filename="../sources.ui" line="307"/>
+        <location filename="../sources.ui" line="373"/>
         <source>&amp;Remove</source>
         <translation>削除(&amp;R)</translation>
     </message>
@@ -2698,26 +2985,36 @@ of the appropriate groups to use them.</source>
     </message>
     <message>
         <location filename="../sources.ui" line="343"/>
+        <source>Programs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="349"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="402"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="355"/>
+        <location filename="../sources.ui" line="414"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>&lt;a href=&quot;http://www.forvo.com/&quot;&gt;Forvo.com&lt;/a&gt; からの生の発音です。このサイトで人々は単語の発音を録音および共有します。GoldenDict からそれらを聴くことができます。</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="368"/>
+        <location filename="../sources.ui" line="427"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Forvo からの発音を有効にする</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="398"/>
+        <location filename="../sources.ui" line="457"/>
         <source>API Key:</source>
         <translation>API キー:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="405"/>
+        <location filename="../sources.ui" line="464"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -2726,7 +3023,7 @@ in the future, or register on the site to get your own key.</source>
 またはサイトで登録して自分のキーを取得します。</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="430"/>
+        <location filename="../sources.ui" line="489"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -2745,68 +3042,68 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;こちら&lt;/span&gt;&lt;/a&gt;で自分のキーを取得するか、または空にして無効のものを使用します。&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="450"/>
+        <location filename="../sources.ui" line="509"/>
         <source>Language codes (comma-separated):</source>
         <translation>言語コード (コンマ区切り):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="457"/>
+        <location filename="../sources.ui" line="516"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>使用したい言語コードの一覧です。例: &quot;en, ja&quot;。</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="480"/>
+        <location filename="../sources.ui" line="539"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>言語コードの完全な一覧は&lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;こちら&lt;/a&gt;です。</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="522"/>
+        <location filename="../sources.ui" line="581"/>
         <source>Transliteration</source>
         <translation>音訳</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="543"/>
+        <location filename="../sources.ui" line="602"/>
         <source>Russian transliteration</source>
         <translation>ロシア語音訳</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="554"/>
+        <location filename="../sources.ui" line="613"/>
         <source>Greek transliteration</source>
         <translation>ギリシャ語音訳</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="578"/>
+        <location filename="../sources.ui" line="637"/>
         <source>German transliteration</source>
         <translation>ドイツ語音訳</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="604"/>
+        <location filename="../sources.ui" line="663"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>日本語の記述のラテン文字の使用を有効にします</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="607"/>
+        <location filename="../sources.ui" line="666"/>
         <source>Japanese Romaji</source>
         <translation>日本語ローマ字</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="619"/>
+        <location filename="../sources.ui" line="678"/>
         <source>Systems:</source>
         <translation>システム:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="626"/>
+        <location filename="../sources.ui" line="685"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>英語の音韻に基づいた、最も広く使われている日本語の音写法です</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="630"/>
+        <location filename="../sources.ui" line="689"/>
         <source>Hepburn</source>
         <translation>ヘボン式</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="640"/>
+        <location filename="../sources.ui" line="699"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -2817,12 +3114,12 @@ ISO 3602 として標準化されています
 GoldenDict にはまだ実装されていません。</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="646"/>
+        <location filename="../sources.ui" line="705"/>
         <source>Nihon-shiki</source>
         <translation>日本式</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="656"/>
+        <location filename="../sources.ui" line="715"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -2833,32 +3130,32 @@ ISO 3602 として標準化されています
 GoldenDict にはまだ実装されていません。</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="662"/>
+        <location filename="../sources.ui" line="721"/>
         <source>Kunrei-shiki</source>
         <translation>訓令式</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="669"/>
+        <location filename="../sources.ui" line="728"/>
         <source>Syllabaries:</source>
         <translation>仮名:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="676"/>
+        <location filename="../sources.ui" line="735"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>ひらがな</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="679"/>
+        <location filename="../sources.ui" line="738"/>
         <source>Hiragana</source>
         <translation>ひらがな</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="686"/>
+        <location filename="../sources.ui" line="745"/>
         <source>Katakana Japanese syllabary</source>
         <translation>カタカナ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="748"/>
         <source>Katakana</source>
         <translation>カタカナ</translation>
     </message>
@@ -2876,17 +3173,17 @@ GoldenDict にはまだ実装されていません。</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="500"/>
+        <location filename="../sources.cc" line="539"/>
         <source>Enabled</source>
         <translation>有効</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="502"/>
+        <location filename="../sources.cc" line="541"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="504"/>
+        <location filename="../sources.cc" line="543"/>
         <source>Address</source>
         <translation>アドレス</translation>
     </message>
@@ -2894,7 +3191,7 @@ GoldenDict にはまだ実装されていません。</translation>
 <context>
     <name>WordFinder</name>
     <message>
-        <location filename="../wordfinder.cc" line="169"/>
+        <location filename="../wordfinder.cc" line="170"/>
         <source>Failed to query some dictionaries.</source>
         <translation>いくつかの辞書のクエリに失敗しました。</translation>
     </message>

@@ -192,6 +192,30 @@
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Để bật khả năng chơi các tập tin không phải WAV, hãy vào Biên tập|Tùy thích, mở thẻ Âm thanh và chọn &quot;Chơi qua DirectShow&quot; ở đó.</translation>
     </message>
+    <message>
+        <source>Highlight &amp;all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Definition: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The referenced audio program doesn&apos;t exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">CẢNH BÁO: %1</translation>
+    </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
@@ -298,6 +322,13 @@
     <message>
         <source>Cancel</source>
         <translation>Hủy bỏ</translation>
+    </message>
+</context>
+<context>
+    <name>ExternalViewer</name>
+    <message>
+        <source>the viewer program name is empty</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1305,15 +1336,15 @@
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation>&amp;Từ điển...</translation>
+        <translation type="obsolete">&amp;Từ điển...</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation>F3</translation>
+        <translation type="obsolete">F3</translation>
     </message>
     <message>
         <source>&amp;Groups...</source>
-        <translation>Nhó&amp;m...</translation>
+        <translation type="obsolete">Nhó&amp;m...</translation>
     </message>
     <message>
         <source>&amp;Preferences...</source>
@@ -1554,6 +1585,54 @@
     <message>
         <source>Opened tabs</source>
         <translation>Các thẻ đã mở</translation>
+    </message>
+    <message>
+        <source>Results Navigation Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Dictionaries...	F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Configuration Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Small Icons in Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Menubar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Found in Dictionaries:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tabs List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2043,6 +2122,129 @@ nhưng hỗ trợ nhiều định dạng âm thanh nhất.</translation>
         <source>Use any external program to play audio files</source>
         <translation>Sử dụng bất cứ chương trình ngoài nào để phát tập tin âm thanh</translation>
     </message>
+    <message>
+        <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide single tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ESC key hides main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling this would allow to listen to sound pronunciations from
+online dictionaries that rely on Flash or other web plugins.
+Plugin must be installed for this option to work.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable web plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ad&amp;vanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ScanPopup extra technologies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
+This technology works only with some programs that support it
+ (for example Internet Explorer 9).
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;IAccessibleEx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try to use UI Automation technology to retrieve word under cursor.
+This technology works only with some programs that support it.
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;UIAutomation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try to use special GoldenDict message to retrieve word under cursor.
+This technology works only with some programs that support it.
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;GoldenDict message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProgramTypeEditor</name>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefix Match</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Programs::RunInstance</name>
+    <message>
+        <source>No program name was given.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The program has crashed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The program has returned exit code %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProgramsModel</name>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished">Bật</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Tên</translation>
+    </message>
+    <message>
+        <source>Command Line</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Romaji</name>
@@ -2351,6 +2553,18 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     <message>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Xóa bỏ trang &lt;b&gt;%1&lt;/b&gt; khỏi danh sách?</translation>
+    </message>
+    <message>
+        <source>Programs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

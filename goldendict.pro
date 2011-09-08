@@ -286,23 +286,26 @@ win32 {
 }
 RESOURCES += resources.qrc \
     flags.qrc
-TRANSLATIONS += locale/ru_RU.ts \
-    locale/zh_CN.ts \
+TRANSLATIONS += locale/ar_SA.ts \
+    locale/bg_BG.ts \
     locale/cs_CZ.ts \
     locale/de_DE.ts \
     locale/el_GR.ts \
-    locale/bg_BG.ts \
-    locale/ar_SA.ts \
+    # to enable autoupdate from English on 
+    # https://www.transifex.net/projects/p/goldendict/resource/goldendict
+    locale/en_GB.ts \
+    locale/es_AR.ts \
+    locale/it_IT.ts \
+    locale/ja_JP.ts \
     locale/lt_LT.ts \
+    locale/pl_PL.ts \
+    locale/pt_BR.ts \
+    locale/sk_SK.ts \
+    locale/sq_AL.ts \
     locale/uk_UA.ts \
     locale/vi_VN.ts \
-    locale/it_IT.ts \
-    locale/pl_PL.ts \
-    locale/ja_JP.ts \
-    locale/zh_TW.ts \
-    locale/sq_AL.ts \
-    locale/pt_BR.ts \
-    locale/es_AR.ts
+    locale/zh_CN.ts \
+    locale/zh_TW.ts
 
 # Build version file
 !isEmpty( hasGit ) {
