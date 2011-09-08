@@ -1336,11 +1336,11 @@
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished">&amp;Từ điển...</translation>
+        <translation type="obsolete">&amp;Từ điển...</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation type="obsolete">F3</translation>
     </message>
     <message>
         <source>&amp;Groups...</source>
@@ -1591,6 +1591,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&amp;Dictionaries...	F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1629,10 +1633,6 @@
     <message>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dictionaries</source>
-        <translation type="unfinished">Từ điển</translation>
     </message>
 </context>
 <context>

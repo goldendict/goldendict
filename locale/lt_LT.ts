@@ -1662,7 +1662,7 @@
         <translation>Rodyti &amp;pagrindinį langą</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="325"/>
+        <location filename="../mainwindow.ui" line="319"/>
         <location filename="../mainwindow.cc" line="162"/>
         <source>&amp;Quit</source>
         <translation>&amp;Baigti</translation>
@@ -1893,12 +1893,17 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="301"/>
+        <location filename="../mainwindow.ui" line="286"/>
+        <source>&amp;Dictionaries...	F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="295"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Nuostatos...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="362"/>
+        <location filename="../mainwindow.ui" line="356"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
@@ -1922,133 +1927,126 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
         <translation>&amp;Istorija</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="286"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished">&amp;Žodynai...</translation>
+        <translation type="obsolete">&amp;Žodynai...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="289"/>
-        <source>Dictionaries</source>
-        <translation type="unfinished">Žodynai</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="292"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation type="obsolete">F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="304"/>
+        <location filename="../mainwindow.ui" line="298"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="309"/>
+        <location filename="../mainwindow.ui" line="303"/>
         <source>&amp;Homepage</source>
         <translation>&amp;Svetainė</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="314"/>
+        <location filename="../mainwindow.ui" line="308"/>
         <source>&amp;About</source>
         <translation>&amp;Apie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="317"/>
+        <location filename="../mainwindow.ui" line="311"/>
         <source>About GoldenDict</source>
         <translation>Apie GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="320"/>
+        <location filename="../mainwindow.ui" line="314"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="328"/>
+        <location filename="../mainwindow.ui" line="322"/>
         <source>Quit from application</source>
         <translation>Užverti programą</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="331"/>
+        <location filename="../mainwindow.ui" line="325"/>
         <source>Ctrl+Q</source>
         <translation>Vald+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="336"/>
+        <location filename="../mainwindow.ui" line="330"/>
         <source>&amp;Forum</source>
         <translation>&amp;Diskusijos</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../mainwindow.ui" line="335"/>
         <source>&amp;Close To Tray</source>
         <translation>&amp;Nuleisti langą</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="344"/>
+        <location filename="../mainwindow.ui" line="338"/>
         <source>Minimizes the window to tray</source>
         <translation>Nuleisti į sistemos dėklą</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="347"/>
+        <location filename="../mainwindow.ui" line="341"/>
         <source>Ctrl+F4</source>
         <translation>Vald+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="356"/>
+        <location filename="../mainwindow.ui" line="350"/>
         <source>&amp;Save Article</source>
         <translation>Į&amp;rašyti straipsnį</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="359"/>
+        <location filename="../mainwindow.ui" line="353"/>
         <source>Save Article</source>
         <translation>Įrašyti straipsnį</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="371"/>
+        <location filename="../mainwindow.ui" line="365"/>
         <source>&amp;Print</source>
         <translation>&amp;Spausdinti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="374"/>
+        <location filename="../mainwindow.ui" line="368"/>
         <source>Ctrl+P</source>
         <translation>Vald+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="379"/>
+        <location filename="../mainwindow.ui" line="373"/>
         <source>Page Set&amp;up</source>
         <translation>&amp;Puslapio parinktys</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="384"/>
+        <location filename="../mainwindow.ui" line="378"/>
         <source>Print Preview</source>
         <translation>Spaudinio peržiūra</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="389"/>
+        <location filename="../mainwindow.ui" line="383"/>
         <source>Rescan Files</source>
         <translation>Peržvelgti rinkmenas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="392"/>
+        <location filename="../mainwindow.ui" line="386"/>
         <source>Ctrl+F5</source>
         <translation>Vald+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="397"/>
+        <location filename="../mainwindow.ui" line="391"/>
         <source>&amp;Clear</source>
         <translation>Iš&amp;valyti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="406"/>
+        <location filename="../mainwindow.ui" line="400"/>
         <location filename="../mainwindow.cc" line="341"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="409"/>
+        <location filename="../mainwindow.ui" line="403"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="417"/>
+        <location filename="../mainwindow.ui" line="411"/>
         <source>&amp;Configuration Folder</source>
         <translation type="unfinished"></translation>
     </message>

@@ -61,7 +61,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -283,13 +283,7 @@
      <normaloff>:/icons/book.png</normaloff>:/icons/book.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Dictionaries...</string>
-   </property>
-   <property name="toolTip">
-    <string>Dictionaries</string>
-   </property>
-   <property name="shortcut">
-    <string>F3</string>
+    <string>&amp;Dictionaries...	F3</string>
    </property>
   </action>
   <action name="preferences">
