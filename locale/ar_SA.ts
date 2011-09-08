@@ -1666,12 +1666,19 @@
         <translation>شريط البحث</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="286"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="obsolete">&amp;قواميس...</translation>
+        <translation type="unfinished">&amp;قواميس...</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="289"/>
+        <source>Dictionaries</source>
+        <translation type="unfinished">قواميس</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="292"/>
         <source>F3</source>
-        <translation type="obsolete">F3</translation>
+        <translation type="unfinished">F3</translation>
     </message>
     <message>
         <source>&amp;Groups...</source>
@@ -1683,139 +1690,134 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="286"/>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="295"/>
+        <location filename="../mainwindow.ui" line="301"/>
         <source>&amp;Preferences...</source>
         <translation>ت&amp;فضيلات...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="298"/>
+        <location filename="../mainwindow.ui" line="304"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="303"/>
+        <location filename="../mainwindow.ui" line="309"/>
         <source>&amp;Homepage</source>
         <translation>&amp;صفحة البداية</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="308"/>
+        <location filename="../mainwindow.ui" line="314"/>
         <source>&amp;About</source>
         <translation>ح&amp;ول</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="311"/>
+        <location filename="../mainwindow.ui" line="317"/>
         <source>About GoldenDict</source>
         <translation>حول القاموس الذهبي</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="314"/>
+        <location filename="../mainwindow.ui" line="320"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="319"/>
+        <location filename="../mainwindow.ui" line="325"/>
         <location filename="../mainwindow.cc" line="162"/>
         <source>&amp;Quit</source>
         <translation>ا&amp;خرج</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="322"/>
+        <location filename="../mainwindow.ui" line="328"/>
         <source>Quit from application</source>
         <translation>اخرج من البرنامج</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="325"/>
+        <location filename="../mainwindow.ui" line="331"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+خ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="330"/>
+        <location filename="../mainwindow.ui" line="336"/>
         <source>&amp;Forum</source>
         <translation>&amp;منتدى</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="335"/>
+        <location filename="../mainwindow.ui" line="341"/>
         <source>&amp;Close To Tray</source>
         <translation>ا&amp;نزل لزاوية النظام</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="338"/>
+        <location filename="../mainwindow.ui" line="344"/>
         <source>Minimizes the window to tray</source>
         <translation>تصغير النافذة إلى الزاوية</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../mainwindow.ui" line="347"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="350"/>
+        <location filename="../mainwindow.ui" line="356"/>
         <source>&amp;Save Article</source>
         <translation>ا&amp;حفظ المقال</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="353"/>
+        <location filename="../mainwindow.ui" line="359"/>
         <source>Save Article</source>
         <translation>حفظ المقال</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="356"/>
+        <location filename="../mainwindow.ui" line="362"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="365"/>
+        <location filename="../mainwindow.ui" line="371"/>
         <source>&amp;Print</source>
         <translation>ا&amp;طبع</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="368"/>
+        <location filename="../mainwindow.ui" line="374"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+ط</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="373"/>
+        <location filename="../mainwindow.ui" line="379"/>
         <source>Page Set&amp;up</source>
         <translation>ا&amp;عداد الصفحة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="378"/>
+        <location filename="../mainwindow.ui" line="384"/>
         <source>Print Preview</source>
         <translation>معاينة الطباعة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="383"/>
+        <location filename="../mainwindow.ui" line="389"/>
         <source>Rescan Files</source>
         <translation>اعد فحص الملفات</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="386"/>
+        <location filename="../mainwindow.ui" line="392"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="391"/>
+        <location filename="../mainwindow.ui" line="397"/>
         <source>&amp;Clear</source>
         <translation>&amp;مسح</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="400"/>
+        <location filename="../mainwindow.ui" line="406"/>
         <location filename="../mainwindow.cc" line="341"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="403"/>
+        <location filename="../mainwindow.ui" line="409"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="411"/>
+        <location filename="../mainwindow.ui" line="417"/>
         <source>&amp;Configuration Folder</source>
         <translation type="unfinished"></translation>
     </message>

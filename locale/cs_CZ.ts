@@ -2243,11 +2243,11 @@
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation type="obsolete">A&amp;dresáře...</translation>
+        <translation type="unfinished">A&amp;dresáře...</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="obsolete">F3</translation>
+        <translation type="unfinished">F3</translation>
     </message>
     <message>
         <source>F4</source>
@@ -2386,10 +2386,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2428,6 +2424,10 @@
     <message>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dictionaries</source>
+        <translation type="unfinished">Slovníky</translation>
     </message>
 </context>
 <context>
