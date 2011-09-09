@@ -375,7 +375,7 @@ void DslDictionary::doDeferredInit()
                                idx, idxMutex );
 
         QString zipName = QDir::fromNativeSeparators(
-            QFile::decodeName( getDictionaryFilenames().back().c_str() ) );
+            FsEncoding::decode( getDictionaryFilenames().back().c_str() ) );
 
         if ( zipName.endsWith( ".zip", Qt::CaseInsensitive ) ) // Sanity check
           resourceZip.openZipFile( zipName );
@@ -416,7 +416,7 @@ void DslDictionary::loadIcon()
     return;
 
   QString fileName =
-    QDir::fromNativeSeparators( QString::fromLocal8Bit( getDictionaryFilenames()[ 0 ].c_str() ) );
+    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
   // Remove the extension
 
@@ -1650,7 +1650,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           idxHeader.hasZipFile = 1;
 
           QFile zipFile( QDir::fromNativeSeparators(
-                           QFile::decodeName( zipFileName.c_str() ) ) );
+                           FsEncoding::decode( zipFileName.c_str() ) ) );
 
           if ( !zipFile.open( QFile::ReadOnly ) )
             throw exCantReadFile( zipFileName );
