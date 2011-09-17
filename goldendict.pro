@@ -55,7 +55,7 @@ win32 {
     Release:DEFINES += NO_CONSOLE
 }
 
-unix {
+unix:!mac {
   # This is to keep symbols for backtraces
   QMAKE_CXXFLAGS += -rdynamic
   QMAKE_LFLAGS += -rdynamic
@@ -89,11 +89,7 @@ unix {
     INSTALLS += desktops2
 }
 mac {
-    contains(QMAKE_HOST.arch, x86_64) {
-        CONFIG += x86 x86_64
-    } else {
-        CONFIG += x86
-    }
+    CONFIG += x86 x86_64
     LIBS = -lz \
         -liconv \
         -lvorbisfile \
@@ -101,8 +97,7 @@ mac {
         -logg \
         -lhunspell-1.3
     INCLUDEPATH = maclibs/include
-    LIBS += -Lmaclibs/lib \
-        -L/usr/lib
+    LIBS += -Lmaclibs/lib
     ICON = icons/macicon.icns
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
