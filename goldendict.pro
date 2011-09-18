@@ -89,16 +89,19 @@ unix:!mac {
     INSTALLS += desktops2
 }
 mac {
+    QMAKE_MAC_SDK = /Developer/SDKs/MacOSX10.6.sdk
     CONFIG += x86 x86_64
     LIBS = -lz \
         -liconv \
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.3
+        -lhunspell-1.2
     INCLUDEPATH = maclibs/include
     LIBS += -Lmaclibs/lib
     ICON = icons/macicon.icns
+    QMAKE_POST_LINK = mkdir -p goldendict.app/Contents/Frameworks & \
+        cp maclibs/lib/* goldendict.app/Contents/Frameworks/ & \
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
