@@ -89,7 +89,6 @@ unix:!mac {
     INSTALLS += desktops2
 }
 mac {
-    QMAKE_MAC_SDK = /Developer/SDKs/MacOSX10.6.sdk
     CONFIG += x86 x86_64
     LIBS = -lz \
         -liconv \
@@ -101,7 +100,7 @@ mac {
     LIBS += -Lmaclibs/lib
     ICON = icons/macicon.icns
     QMAKE_POST_LINK = mkdir -p goldendict.app/Contents/Frameworks & \
-        cp maclibs/lib/* goldendict.app/Contents/Frameworks/ & \
+        cp -nR maclibs/lib/ goldendict.app/Contents/Frameworks/
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 

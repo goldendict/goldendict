@@ -49,7 +49,7 @@ extern LIBICONV_DLL_EXPORTED  int _libiconv_version; /* Likewise */
 
 /* Define iconv_t ourselves. */
 #undef iconv_t
-#define iconv_t libiconv_t
+#define iconv_t iconv_t
 typedef void* iconv_t;
 
 /* Get size_t declaration.
