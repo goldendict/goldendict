@@ -49,7 +49,7 @@ extern LIBICONV_DLL_EXPORTED  int _libiconv_version; /* Likewise */
 
 /* Define iconv_t ourselves. */
 #undef iconv_t
-#define iconv_t libiconv_t
+#define iconv_t iconv_t
 typedef void* iconv_t;
 
 /* Get size_t declaration.
@@ -74,7 +74,7 @@ extern "C" {
 /* Allocates descriptor for code conversion from encoding ‘fromcode’ to
    encoding ‘tocode’. */
 #ifndef LIBICONV_PLUG
-#define iconv_open libiconv_open
+#define iconv_open iconv_open
 #endif
 extern LIBICONV_DLL_EXPORTED iconv_t iconv_open (const char* tocode, const char* fromcode);
 
@@ -84,13 +84,13 @@ extern LIBICONV_DLL_EXPORTED iconv_t iconv_open (const char* tocode, const char*
    Decrements ‘*inbytesleft’ and increments ‘*inbuf’ by the same amount.
    Decrements ‘*outbytesleft’ and increments ‘*outbuf’ by the same amount. */
 #ifndef LIBICONV_PLUG
-#define iconv libiconv
+#define iconv iconv
 #endif
 extern LIBICONV_DLL_EXPORTED size_t iconv (iconv_t cd,  char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
 
 /* Frees resources allocated for conversion descriptor ‘cd’. */
 #ifndef LIBICONV_PLUG
-#define iconv_close libiconv_close
+#define iconv_close iconv_close
 #endif
 extern LIBICONV_DLL_EXPORTED int iconv_close (iconv_t cd);
 
