@@ -89,7 +89,8 @@ unix:!mac {
     INSTALLS += desktops2
 }
 mac {
-    CONFIG += x86 x86_64
+    # Uncomment this line to make a universal binary for Mac OS X >= 10.4
+    # CONFIG += x86 x86_64 ppc
     LIBS = -lz \
         -liconv \
         -lvorbisfile \
