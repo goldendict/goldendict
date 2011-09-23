@@ -89,8 +89,10 @@ unix:!mac {
     INSTALLS += desktops2
 }
 mac {
+    CONFIG += x86 x86_64
     # Uncomment this line to make a universal binary for Mac OS X >= 10.4
-    # CONFIG += x86 x86_64 ppc
+    # with support for 32-bit PowerPC Macs. You will need to use Xcode 3 and Qt 4.6 SDK.
+    # CONFIG += ppc
     LIBS = -lz \
         -liconv \
         -lvorbisfile \
