@@ -89,7 +89,10 @@ unix:!mac {
     INSTALLS += desktops2
 }
 mac {
-    CONFIG += x86 x86_64
+    # Uncomment this line to make a universal binary.
+    # You will need to use Xcode 3 and Qt Carbon SDK
+    # if you want the support for PowerPC and/or Mac OS X 10.4
+    # CONFIG += x86 x86_64 ppc
     LIBS = -lz \
         -liconv \
         -lvorbisfile \
