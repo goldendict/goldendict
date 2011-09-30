@@ -69,7 +69,7 @@ void ConvertToMatchedWordA(TEverythingParams *TP)
 			}
 		}
 		TP->MatchedWordW[TP->WordLen] = 0;
-		BufSize = sizeof(TP->MatchedWordA) - TP->BeginPos - 1;
+		BufSize = sizeof(TP->MatchedWordA) - TP->BeginPos;
 		if( BufSize > 0)
 			TP->WordLen = WideCharToMultiByte(CP_UTF8, 0, TP->MatchedWordW + BeginPos, TP->WordLen - BeginPos + 1, TP->MatchedWordA + TP->BeginPos, BufSize, NULL, NULL);
 		else TP->WordLen = 0;
@@ -238,6 +238,7 @@ static void IsInsidePointA(const HDC DC, int X, int Y, LPCSTR Str, int Count)
 		if (((Rect.left <= Rect.right) && (CurParams->Pt.x >= Rect.left) && (CurParams->Pt.x <= Rect.right)) ||
 			((Rect.left > Rect.right) && (CurParams->Pt.x <= Rect.left) && (CurParams->Pt.x >= Rect.right))) {
 			int BegPos;
+			int Shift = 0;
 
 		//if (PtInRect(&Rect, CurParams->Pt)) {
 			CurParams->Active = !PtInRect(&Rect, CurParams->Pt);
@@ -249,14 +250,24 @@ static void IsInsidePointA(const HDC DC, int X, int Y, LPCSTR Str, int Count)
 				BegPos--;
 			if (BegPos < Count - 1)
 				BegPos++;
+			if( Count > 255 ) {
+				Shift = BegPos - 127;
+				if( Shift <= 0 )
+					Shift = 0;
+				else {
+					if( Shift > Count - 255 ) 
+						Shift = Count - 255;
+				}
+				BegPos -= Shift;
+				Count -= Shift;
+				if( Count > 255 )
+					Count = 255;
+			}
 			if (BegPos>255) BegPos=255;
 			CurParams->BeginPos = BegPos;
-			if (Count > 255)
-				CurParams->WordLen = 255;
-			else
-				CurParams->WordLen = Count;
+			CurParams->WordLen = Count;
 			CurParams->Unicode = FALSE;
-			CopyMemory(CurParams->MatchedWordA, Str, CurParams->WordLen);
+			CopyMemory(CurParams->MatchedWordA, Str + Shift, CurParams->WordLen);
 		}
 	}
 }
@@ -300,6 +311,7 @@ static void IsInsidePointW(const HDC DC, int X, int Y, LPCWSTR Str, int Count)
 		if (((Rect.left <= Rect.right) && (CurParams->Pt.x >= Rect.left) && (CurParams->Pt.x <= Rect.right)) ||
 			((Rect.left > Rect.right) && (CurParams->Pt.x <= Rect.left) && (CurParams->Pt.x >= Rect.right))) {
 			int BegPos;
+			int Shift = 0;
 
 		//if (PtInRect(&Rect, CurParams->Pt)) {
 			CurParams->Active = !PtInRect(&Rect, CurParams->Pt);
@@ -311,14 +323,24 @@ static void IsInsidePointW(const HDC DC, int X, int Y, LPCWSTR Str, int Count)
 				BegPos--;
 			if (BegPos < Count - 1)
 				BegPos++;
+			if( Count > 255 ) {
+				Shift = BegPos - 127;
+				if( Shift <= 0 )
+					Shift = 0;
+				else {
+					if( Shift > Count - 255 ) 
+						Shift = Count - 255;
+				}
+				BegPos -= Shift;
+				Count -= Shift;
+				if( Count > 255 )
+					Count = 255;
+			}
 			if (BegPos>255) BegPos=255;
 			CurParams->BeginPos = BegPos;
-			if (Count > 255)
-				CurParams->WordLen = 255;
-			else
-				CurParams->WordLen = Count;
+			CurParams->WordLen = Count;
 			CurParams->Unicode = TRUE;
-			CopyMemory(CurParams->MatchedWordW, Str, CurParams->WordLen * sizeof(wchar_t));
+			CopyMemory(CurParams->MatchedWordW, Str + Shift, CurParams->WordLen * sizeof(wchar_t));
 		}
 	}
 }
