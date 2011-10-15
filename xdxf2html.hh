@@ -14,7 +14,7 @@ using std::string;
 
 /// Converts the given xdxf markup to an html one. This is currently used
 /// for Stardict's 'x' records.
-string convert( string const & );
+string convert( string const &, string const & );
 
 }
 
