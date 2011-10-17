@@ -17,6 +17,7 @@
 #include <QFileInfo>
 #include <QCryptographicHash>
 #include <QDateTime>
+#include "fsencoding.hh"
 
 namespace Dictionary {
 
@@ -163,10 +164,10 @@ string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
     {
       string const & full( dictionaryFiles[ x ] );
 
-      QFileInfo fileInfo( QString::fromLocal8Bit( full.c_str() ) );
+      QFileInfo fileInfo( FsEncoding::decode( full.c_str() ) );
 
       if ( fileInfo.isAbsolute() )
-        sortedList.push_back( dictionariesDir.relativeFilePath( fileInfo.filePath() ).toLocal8Bit().data() );
+        sortedList.push_back( FsEncoding::encode( dictionariesDir.relativeFilePath( fileInfo.filePath() ) ) );
       else
       {
         // Well, it's relative. We don't technically support those, but
@@ -201,7 +202,7 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
   for( std::vector< string >::const_iterator i = dictionaryFiles.begin();
        i != dictionaryFiles.end(); ++i )
   {
-    QFileInfo fileInfo( QString::fromLocal8Bit( i->c_str() ) );
+    QFileInfo fileInfo( FsEncoding::decode( i->c_str() ) );
 
     if ( !fileInfo.exists() )
       return true;
@@ -212,7 +213,7 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
       lastModified = ts;
   }
 
-  QFileInfo fileInfo( QString::fromLocal8Bit( indexFile.c_str() ) );
+  QFileInfo fileInfo( FsEncoding::decode( indexFile.c_str() ) );
 
   if ( !fileInfo.exists() )
     return true;

@@ -18,6 +18,7 @@
 #include <set>
 #include <hunspell/hunspell.hxx>
 #include "dprintf.hh"
+#include "fsencoding.hh"
 
 namespace HunspellMorpho {
 
@@ -673,9 +674,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & c
         vector< string > dictFiles;
 
         dictFiles.push_back(
-          QDir::toNativeSeparators( dataFiles[ d ].affFileName ).toLocal8Bit().data() );
+          FsEncoding::encode( QDir::toNativeSeparators( dataFiles[ d ].affFileName ) ) );
         dictFiles.push_back(
-          QDir::toNativeSeparators( dataFiles[ d ].dicFileName ).toLocal8Bit().data() );
+          FsEncoding::encode( QDir::toNativeSeparators( dataFiles[ d ].dicFileName ) ) );
 
         result.push_back(
           new HunspellDictionary( Dictionary::makeDictionaryId( dictFiles ),

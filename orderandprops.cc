@@ -5,6 +5,7 @@
 #include "instances.hh"
 #include "langcoder.hh"
 #include "language.hh"
+#include "fsencoding.hh"
 
 OrderAndProps::OrderAndProps( QWidget * parent,
                               Config::Group const & dictionaryOrder,
@@ -110,7 +111,7 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
 
     for( unsigned x = 0; x < filenames.size(); x++ )
     {
-      filenamesText += QString::fromLocal8Bit( filenames[ x ].c_str() );
+      filenamesText += FsEncoding::decode( filenames[ x ].c_str() );
       filenamesText += '\n';
     }
 
