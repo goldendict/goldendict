@@ -32,6 +32,7 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 
+#include "ufile.hh"
 
 namespace Stardict {
 
@@ -886,10 +887,21 @@ static void handleIdxSynFile( string const & fileName,
                               vector< uint32_t > * articleOffsets,
                               bool isSynFile )
 {
+#ifdef __WIN32
+  int id = gd_open( fileName.c_str() );
+  if( id == -1 )
+    throw exCantReadFile( fileName );
+  gzFile stardictIdx = gzdopen( id, "rb");
+  if ( !stardictIdx )
+  {
+    _close( id );
+    throw exCantReadFile( fileName );
+  }
+#else
   gzFile stardictIdx = gzopen( fileName.c_str(), "rb" );
-
   if ( !stardictIdx )
     throw exCantReadFile( fileName );
+#endif
 
   vector< char > image;
 
@@ -913,6 +925,7 @@ static void handleIdxSynFile( string const & fileName,
       break;
     }
   }
+  gzclose( stardictIdx );
 
   // We append one zero byte to catch runaway string at the end, if any
 

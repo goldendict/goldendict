@@ -11,6 +11,7 @@
 #include "htmlescape.hh"
 #include "audiolink.hh"
 #include "wstring_qt.hh"
+#include "fsencoding.hh"
 #include <set>
 #include <QDir>
 #include <QUrl>
@@ -252,7 +253,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & 
 
   chunk.back() = 0; // It must end with 0 anyway, but just in case
 
-  QDir dir( QDir::fromNativeSeparators( QString::fromLocal8Bit( getDictionaryFilenames()[ 0 ].c_str() ) ) );
+  QDir dir( QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) ) );
 
   QString fileName = QDir::toNativeSeparators( dir.filePath( QString::fromUtf8( articleData ) ) );
 
@@ -260,7 +261,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & 
 
   try
   {
-    File::Class f( fileName.toLocal8Bit().data(), "rb" );
+    File::Class f( FsEncoding::encode( fileName ), "rb" );
 
     sptr< Dictionary::DataRequestInstant > dr = new
       Dictionary::DataRequestInstant( true );

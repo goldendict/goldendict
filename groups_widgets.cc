@@ -7,6 +7,7 @@
 #include "config.hh"
 #include "langcoder.hh"
 #include "language.hh"
+#include "fsencoding.hh"
 
 //#include "initializing.hh"
 
@@ -191,7 +192,7 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
       if ( dirs.size() )
       {
         tt += "<hr>";
-        tt += QString::fromLocal8Bit( dirs.at( 0 ).c_str() );
+        tt += FsEncoding::decode( dirs.at( 0 ).c_str() );
       }
 
       tt.replace( " ", "&nbsp;" );

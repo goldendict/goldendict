@@ -10,6 +10,12 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#ifdef __WIN32
+#include <windows.h>
+#endif
+
+#include "ufile.hh"
+
 namespace File {
 
 enum
@@ -23,7 +29,9 @@ bool exists( char const * filename ) throw()
 {
 #ifdef __WIN32
   struct _stat buf;
-  return _stat( filename, &buf ) == 0;
+  wchar_t wname[16384];
+  MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 );
+  return _wstat( wname, &buf ) == 0;
 #else
   struct stat buf;
 
@@ -34,7 +42,7 @@ bool exists( char const * filename ) throw()
 
 void Class::open( char const * filename, char const * mode ) throw( exCantOpen )
 {
-  f = fopen( filename, mode );
+  f = gd_fopen( filename, mode );
 
   if ( !f )
     throw exCantOpen( std::string( filename ) + ": " + strerror( errno ) );

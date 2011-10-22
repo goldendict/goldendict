@@ -19,6 +19,7 @@
 #include "forvo.hh"
 #include "programs.hh"
 #include "dprintf.hh"
+#include "fsencoding.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -51,7 +52,7 @@ void LoadDictionaries::run()
     // Make soundDirs
     {
       vector< sptr< Dictionary::Class > > soundDirDictionaries =
-        SoundDir::makeDictionaries( soundDirs, Config::getIndexDir().toLocal8Bit().data(), *this );
+        SoundDir::makeDictionaries( soundDirs, FsEncoding::encode( Config::getIndexDir() ), *this );
 
       dictionaries.insert( dictionaries.end(), soundDirDictionaries.begin(),
                            soundDirDictionaries.end() );
@@ -95,12 +96,12 @@ void LoadDictionaries::handlePath( Config::Path const & path )
         handlePath( Config::Path( fullName, true ) );
     }
 
-    allFiles.push_back( QDir::toNativeSeparators( fullName ).toLocal8Bit().data() );
+    allFiles.push_back( FsEncoding::encode( QDir::toNativeSeparators( fullName ) ) );
   }
 
   {
     vector< sptr< Dictionary::Class > > bglDictionaries =
-      Bgl::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+      Bgl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
 
     dictionaries.insert( dictionaries.end(), bglDictionaries.begin(),
                          bglDictionaries.end() );
@@ -108,7 +109,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > stardictDictionaries =
-      Stardict::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+      Stardict::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
 
     dictionaries.insert( dictionaries.end(), stardictDictionaries.begin(),
                          stardictDictionaries.end() );
@@ -116,7 +117,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > lsaDictionaries =
-      Lsa::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+      Lsa::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
 
     dictionaries.insert( dictionaries.end(), lsaDictionaries.begin(),
                          lsaDictionaries.end() );
@@ -124,7 +125,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > dslDictionaries =
-      Dsl::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+      Dsl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
 
     dictionaries.insert( dictionaries.end(), dslDictionaries.begin(),
                          dslDictionaries.end() );
@@ -132,7 +133,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > dictdDictionaries =
-      DictdFiles::makeDictionaries( allFiles, Config::getIndexDir().toLocal8Bit().data(), *this );
+      DictdFiles::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
 
     dictionaries.insert( dictionaries.end(), dictdDictionaries.begin(),
                          dictdDictionaries.end() );
@@ -256,7 +257,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   for( QStringList::const_iterator i = allIdxFiles.constBegin();
        i != allIdxFiles.constEnd(); ++i )
   {
-    if ( ids.find( i->toLocal8Bit().data() ) == ids.end() &&
+    if ( ids.find( FsEncoding::encode( *i ) ) == ids.end() &&
          i->size() == 32 )
       indexDir.remove( *i );
   }
