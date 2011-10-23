@@ -16,16 +16,8 @@
 
 using std::wstring;
 
-/// We use different window flags under Windows and X11 due to slight differences
-/// in their behavior on those platforms.
 static Qt::WindowFlags popupWindowFlags =
-
-#ifdef Q_WS_WIN
-Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
-#else
-Qt::Popup
-#endif
-;
+	Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint;
 
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
@@ -227,12 +219,7 @@ void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
   altModeExpirationTimer.stop();
 
   inputWord = str;
-  engagePopup(
-#ifdef Q_WS_WIN
-      true // We only focus popup under Windows when activated via Ctrl+C+C
-           // -- on Linux it already has an implicit focus
-#endif
-      );
+  engagePopup();
 }
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
@@ -294,16 +281,15 @@ void ScanPopup::handleInputWord( QString const & str )
   engagePopup();
 }
 
-void ScanPopup::engagePopup( bool giveFocus )
+void ScanPopup::engagePopup()
 {
   /// Too large strings make window expand which is probably not what user
   /// wants
   ui.word->setText( elideInputWord() );
- 
+
   if ( !isVisible() )
   {
     // Need to show the window
-
     if ( !ui.pinButton->isChecked() )
     {
       // Decide where should the window land
@@ -340,32 +326,22 @@ void ScanPopup::engagePopup( bool giveFocus )
 
       move( x, y );
     }
-
-    show();
-
-    if ( giveFocus )
-    {
-      activateWindow();
-      raise();
-    }
-
-    if ( !ui.pinButton->isChecked() )
-    {
-      mouseEnteredOnce = false;
-      // Need to monitor the mouse so we know when to hide the window
-      interceptMouse();
-    }
-
-    // This produced some funky mouse grip-related bugs so we commented it out
-    //QApplication::processEvents(); // Make window appear immediately no matter what
   }
-  else
-  if ( ui.pinButton->isChecked() )
+
+  show();
+
+  // Pinned-down window isn't always on top, so we need to raise it
+  if ( !isActiveWindow() )
   {
-    // Pinned-down window isn't always on top, so we need to raise it
-    show();
     activateWindow();
     raise();
+  }
+
+  if ( !ui.pinButton->isChecked() )
+  {
+    mouseEnteredOnce = false;
+    // Need to monitor the mouse so we know when to hide the window
+    interceptMouse();
   }
 
   initiateTranslation();
@@ -375,7 +351,6 @@ QString ScanPopup::elideInputWord()
 {
   return inputWord.size() > 32 ? inputWord.mid( 0, 32 ) + "..." : inputWord;
 }
-
 
 void ScanPopup::currentGroupChanged( QString const & )
 {
