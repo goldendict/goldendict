@@ -29,6 +29,7 @@
 #include<iconv.h>
 #include <QTextDocument>
 #include "dprintf.hh"
+#include "ufile.hh"
 
 #ifdef _WIN32
 #include <io.h>
@@ -58,7 +59,7 @@ bool Babylon::open()
   unsigned char buf[6];
   int i;
 
-  f = fopen( m_filename.c_str(), "rb" );
+  f = gd_fopen( m_filename.c_str(), "rb" );
   if( f == NULL )
     return false;
 
@@ -325,7 +326,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
                                                   block.data + pos,
                                                   block.length - pos );
     #if 0
-            FILE *ifile = fopen(filename.c_str(), "w");
+            FILE *ifile = gd_fopen(filename.c_str(), "w");
             fwrite(block.data + pos, 1, block.length -pos, ifile);
             fclose(ifile);
     #endif

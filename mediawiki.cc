@@ -293,6 +293,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             // Replace the href="/foo/bar/Baz" to just href="Baz".
             articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
   
+            // Add "http:" to image source urls
+            articleString.replace( " src=\"//", " src=\"http://" );
+
             // In those strings, change any underscores to spaces
             for( ; ; )
             {

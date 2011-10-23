@@ -188,7 +188,8 @@ HEADERS += folding.hh \
     maintabwidget.hh \
     dprintf.hh \
     mainstatusbar.hh \
-    gdappstyle.hh
+    gdappstyle.hh \
+    ufile.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -275,7 +276,8 @@ SOURCES += folding.cc \
     parsecmdline.cc \
     maintabwidget.cc \
     mainstatusbar.cc \
-    gdappstyle.cc
+    gdappstyle.cc \
+    ufile.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
@@ -302,7 +304,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/zh_TW.ts \
     locale/sq_AL.ts \
     locale/pt_BR.ts \
-    locale/es_AR.ts
+    locale/es_AR.ts \
+    locale/sk_SK.ts
 
 # Build version file
 !isEmpty( hasGit ) {
@@ -330,3 +333,7 @@ TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
+
+
+
+

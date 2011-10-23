@@ -31,6 +31,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "ufile.hh"
+
 #define BUFFERSIZE 10240
 
 #define OUT_BUFFER_SIZE 0xffffL
@@ -270,7 +272,7 @@ static int dict_read_header( const char *filename,
    int           count;
    unsigned long offset;
 
-   if (!(str = fopen( filename, "rb" )))
+   if (!(str = gd_fopen( filename, "rb" )))
       err_fatal_errno( __func__,
 		       "Cannot open data file \"%s\" for read\n", filename );
 
@@ -444,7 +446,7 @@ dictData *dict_data_open( const char *filename, int computeCRC )
      "\"%s\" not in text or dzip format\n", filename );*/
    }
 
-   h->fd = fopen( filename, "rb" );
+   h->fd = gd_fopen( filename, "rb" );
 
    if ( !h->fd )
    {
