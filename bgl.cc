@@ -725,9 +725,12 @@ void BglArticleRequest::run()
 
   BglDictionary::replaceCharsetEntities( result );
   result = QString::fromUtf8( result.c_str() )
-           .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
-                     "\\1bword:" )
-           .toUtf8().data();
+                    .replace( QRegExp( "<([a-z]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>", Qt::CaseInsensitive ),
+                              "<a href=\"\\2\">\\3</a>")
+                    .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
+                    "\\1bword:" )
+                    .replace(QRegExp("(width)|(height)\\s*=\\s*[\"']\\d{7,}[\"'']"),"")
+                     .toUtf8().data();
 
   Mutex::Lock _( dataMutex );
 

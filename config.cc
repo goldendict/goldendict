@@ -1339,4 +1339,21 @@ QString getPortableVersionMorphoDir() throw()
     return QString();
 }
 
+std::string getCustomJs() throw(exError)
+{
+    // set dir iterator
+     QDirIterator dirIterator(QCoreApplication::applicationDirPath() + "/include",
+                              QStringList("*.js"),
+                              QDir::Files|QDir::Readable|QDir::NoSymLinks,
+                              QDirIterator::Subdirectories);
+     QByteArray js("");
+     while(dirIterator.hasNext())
+     {
+         QFile addJs( dirIterator.next() );
+         if(addJs.open( QFile::ReadOnly ))
+            js.append(addJs.readAll());
+
+     }
+     return js.data();
+}
 }

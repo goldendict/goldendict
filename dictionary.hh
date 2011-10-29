@@ -235,6 +235,22 @@ public:
   { return data; }
 };
 
+/// A helper class for syncronous data read icon.
+/*
+class IConRequestInstant: public DataRequest
+{
+public:
+
+  IConRequestInstant( QIcon &ico );
+  virtual void cancel()
+  {}
+
+  vector< char > & getData()
+  { return data; }
+};
+*/
+
+
 /// Dictionary features. Different dictionaries can possess different features,
 /// which hint at some of their aspects.
 enum Feature

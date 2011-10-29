@@ -33,16 +33,44 @@ pre
 /* Dictionary's name heading */
 .gddictname
 {
-  border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;
+  border:none;/* 1px dotted black; padding: 0.2em; padding-left: 0.5em;*/
   margin-top: 1.2em; margin-bottom: 0.1em; font-weight: bold; font-size: 14px;
   /*background: #ffffdd;*/
+	width:100%;
+	background:#EBEBEB;
+	border-collapse:collapse;
+	border-top-left-radius:8px;
+	border-top-right-radius:8px;
+	padding:0;
 }
-
-/* The 'From ' string which preceeds dictionary name in the heading */
-.gdfromprefix
+.gddictname tr
 {
+	vertical-align:middle;
+	padding:0;
 }
-
+.gddictname td
+{
+	text-align:left;
+	padding:5px 2px;
+}
+/* The 'From ' string which preceeds dictionary name in the heading */
+.gddictname td.gdfromprefix
+{
+	width:1.5px;
+	text-align:center;
+	padding-left:8px;
+}
+.gdfromprefix img
+{
+	border:0;
+	width:1.5em;
+	height:auto;
+}
+.gddictname td.bbltoolbar
+{
+	text-align:right;
+	padding-right:8px;
+}
 /* The article span. Here we have a padding/margin hack to make fragment links
    behave better (have some space before the start of article) */
 .gdarticle

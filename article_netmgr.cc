@@ -146,7 +146,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
       return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts );
   }
 
-  if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ) &&
+  if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ||  url.scheme() == "gico") &&
        url.path().size() )
   {
     //DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
@@ -159,8 +159,30 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     if ( !search )
     {
       for( unsigned x = 0; x < dictionaries.size(); ++x )
+      {
         if ( dictionaries[ x ]->getId() == id )
-          return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+        {
+            if( url.scheme() == "gico")
+            {
+                QByteArray byteArray;
+                QBuffer buffer(&byteArray);
+                    //image.save(&buffer, "PNG");
+
+                 buffer.open(QIODevice::WriteOnly);
+                 dictionaries[ x ]->getIcon().pixmap( 32 ).toImage().save(&buffer, "PNG");
+                 buffer.close();
+                 sptr< Dictionary::DataRequestInstant > ico = new Dictionary::DataRequestInstant( true );
+                 ico->getData().resize( byteArray.size() );
+                 memcpy( &( ico->getData().front() ), byteArray.data(), byteArray.size() );
+                 return ico;
+
+            }
+            else
+            {
+                return dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+            }
+        }
+      }
     }
     else
     {

@@ -468,6 +468,9 @@ QString getPortableVersionDictionaryDir() throw();
 /// content/morphology in the application's directory.
 QString getPortableVersionMorphoDir() throw();
 
+/// return add-on js files content in AppDir/include
+std::string getCustomJs() throw(exError);
+
 }
 
 #endif
