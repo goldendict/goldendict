@@ -30,12 +30,14 @@ namespace
 
     QDir result;
 
+    result = QDir::home();
     #ifdef Q_OS_WIN32
+      if ( result.cd( "Application Data/GoldenDict" ) )
+        return result;
       char const * pathInHome = "GoldenDict";
       result = QDir::fromNativeSeparators( QString::fromWCharArray( _wgetenv( L"APPDATA" ) ) );
     #else
       char const * pathInHome = ".goldendict";
-      result = QDir::home();
     #endif
 
     result.mkpath( pathInHome );
