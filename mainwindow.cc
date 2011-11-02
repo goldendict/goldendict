@@ -6,10 +6,12 @@
 #include "loaddictionaries.hh"
 #include "preferences.hh"
 #include "about.hh"
+#include "customqmenu.hh"
 #include <limits.h>
 #include <QDir>
 #include <QMessageBox>
 #include <QIcon>
+#include <QList>
 #include <QToolBar>
 #include <QCloseEvent>
 #include <QDesktopServices>
@@ -203,6 +205,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
 
   // Tab management
+  tabListMenu = new customQMenu(tr("Opened tabs"), ui.tabWidget);
+  mruList = new QList<QWidget*>;
+
+  connect (tabListMenu, SIGNAL(control_released()), this, SLOT(control_released()));
 
   connect( &addTabAction, SIGNAL( triggered() ),
            this, SLOT( addNewTab() ) );
@@ -423,7 +429,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.wordList->viewport()->installEventFilter( this );
   ui.dictsList->installEventFilter( this );
   ui.dictsList->viewport()->installEventFilter( this );
-
+  //tabWidget handles Ctrl+Tab without propagating the event, with eventFilter it gets propagated
+  ui.tabWidget->installEventFilter( this );
   if ( cfg.mainWindowGeometry.size() )
     restoreGeometry( cfg.mainWindowGeometry );
 
@@ -497,6 +504,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   doDeferredInit( dictionaries );
 
   updateStatusLine();
+}
+
+void MainWindow::ctrltabpressed()
+{
+    emit fillWindowsMenu();
+    tabListButton->click();
 }
 
 void MainWindow::mousePressEvent( QMouseEvent *event)
@@ -846,7 +859,6 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
 
 void MainWindow::createTabList()
 {
-  tabListMenu = new QMenu(tr("Opened tabs"), ui.tabWidget);
   tabListMenu->setIcon(QIcon(":/icons/windows-list.png"));
   connect(tabListMenu, SIGNAL(aboutToShow()), this, SLOT(fillWindowsMenu()));
   connect(tabListMenu, SIGNAL(triggered(QAction*)), this, SLOT(switchToWindow(QAction*)));
@@ -865,18 +877,27 @@ void MainWindow::fillWindowsMenu()
 {
   tabListMenu->clear();
 
-  for (int i = 0; i < ui.tabWidget->count(); i++)
+  //fill menu in MRU order
+  for (int i = 0; i < mruList->count(); i++)
   {
-    QAction *act = tabListMenu->addAction( ui.tabWidget->tabIcon( i ),
-                                           ui.tabWidget->tabText( i ) );
-    act->setData( i );
-    if (ui.tabWidget->currentIndex() == i)
-    {
-      QFont f( act->font() );
-      f.setBold( true );
-      act->setFont( f );
-    }
+    QAction *act = tabListMenu->addAction(ui.tabWidget->tabIcon(ui.tabWidget->indexOf(mruList->at(i))), ui.tabWidget->tabText(ui.tabWidget->indexOf(mruList->at(i))));
+
+    //remember the index of the Tab to be later used in control_released()
+    act->setData(ui.tabWidget->indexOf(mruList->at(i)));
+
+    //put current item in bold
+    if (ui.tabWidget->currentIndex() == ui.tabWidget->indexOf(mruList->at(i)))
+      {
+        QFont f( act->font() );
+        f.setBold( true );
+        act->setFont( f );
+      }
   }
+  if (tabListMenu->actions().size() > 1)
+  {
+    tabListMenu->setActiveAction(tabListMenu->actions().at(1));
+  }
+  return;
 }
 
 void MainWindow::switchToWindow(QAction *act)
@@ -933,6 +954,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   escaped.replace( "&", "&&" );
 
   ui.tabWidget->insertTab( index, view, escaped );
+  mruList->append(dynamic_cast<QWidget*>(view));
 
   if ( switchToIt )
     ui.tabWidget->setCurrentIndex( index );
@@ -950,9 +972,23 @@ void MainWindow::tabCloseRequested( int x )
 
   QWidget * w = ui.tabWidget->widget( x );
 
+  //removeTab activates next tab and issues currentChannged SIGNAL
+  //This is not what we want, so disable the signal for a moment
+
+  disconnect( ui.tabWidget, SIGNAL( currentChanged( int ) ),
+           this, SLOT( tabSwitched( int ) ) );
+
   ui.tabWidget->removeTab( x );
 
+  connect( ui.tabWidget, SIGNAL( currentChanged( int ) ),
+           this, SLOT( tabSwitched( int ) ) );
+
+  mruList->removeOne(w);
+
   delete w;
+
+  //activate a tab in accordance with MRU
+  ui.tabWidget->setCurrentWidget(mruList->at(0));
 
   // if everything is closed, add new tab
   if ( ui.tabWidget->count() == 0 )
@@ -1006,6 +1042,16 @@ void MainWindow::switchToPrevTab()
     ui.tabWidget->setCurrentIndex( ui.tabWidget->count() - 1 );
   else
     ui.tabWidget->setCurrentIndex( ui.tabWidget->currentIndex() - 1 );
+}
+
+//emitted by tabListMenu when user releases Ctrl
+void MainWindow::control_released()
+{
+    if (tabListMenu->actions().size() > 1)
+    {
+	ui.tabWidget->setCurrentIndex(tabListMenu->activeAction()->data().toInt());
+    }
+    tabListMenu->hide();
 }
 
 void MainWindow::backClicked()
@@ -1072,6 +1118,10 @@ void MainWindow::tabSwitched( int )
   updatePronounceAvailability();
   updateFoundInDictsList();
   updateWindowTitle();
+  if (mruList->size() > 1)
+  {
+    mruList->move(mruList->indexOf(ui.tabWidget->widget(ui.tabWidget->currentIndex())),0);
+  }
 }
 
 void MainWindow::tabMenuRequested(QPoint pos)
@@ -1519,7 +1569,17 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     return handleBackForwardMouseButtons( event );
   }
 
-  if ( obj == ui.translateLine )
+  if (ev->type() == QEvent::KeyPress)
+  {
+      QKeyEvent *keyevent = static_cast<QKeyEvent*>(ev);
+      if (keyevent->modifiers() == Qt::ControlModifier && keyevent->key() == Qt::Key_Tab)
+      {
+        ctrltabpressed();
+	return true;
+      }
+  }
+
+  if ( obj ==  ui.translateLine )
   {
     if ( ev->type() == QEvent::KeyPress )
     {
@@ -1621,7 +1681,6 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       }
     }
   }
-  else
     return QMainWindow::eventFilter( obj, ev );
 
   return false;
