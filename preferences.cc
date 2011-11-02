@@ -89,6 +89,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.newTabsOpenAfterCurrentOne->setChecked( p.newTabsOpenAfterCurrentOne );
   ui.newTabsOpenInBackground->setChecked( p.newTabsOpenInBackground );
   ui.hideSingleTab->setChecked( p.hideSingleTab );
+  ui.mruTabOrder->setChecked( p.mruTabOrder );
   ui.enableTrayIcon->setChecked( p.enableTrayIcon );
   ui.startToTray->setChecked( p.startToTray );
   ui.closeToTray->setChecked( p.closeToTray );
@@ -203,6 +204,7 @@ Config::Preferences Preferences::getPreferences()
   p.newTabsOpenAfterCurrentOne = ui.newTabsOpenAfterCurrentOne->isChecked();
   p.newTabsOpenInBackground = ui.newTabsOpenInBackground->isChecked();
   p.hideSingleTab = ui.hideSingleTab->isChecked();
+  p.mruTabOrder = ui.mruTabOrder->isChecked();
   p.enableTrayIcon = ui.enableTrayIcon->isChecked();
   p.startToTray = ui.startToTray->isChecked();
   p.closeToTray = ui.closeToTray->isChecked();
