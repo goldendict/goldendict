@@ -28,15 +28,17 @@ namespace
     if ( isPortableVersion() )
       return QDir( QCoreApplication::applicationDirPath() + "/portable" );
 
-    QDir result = QDir::home();
+    QDir result;
 
-    char const * pathInHome =
-      #ifdef Q_OS_WIN32
-      "Application Data/GoldenDict"
-      #else
-      ".goldendict"
-      #endif
-      ;
+    result = QDir::home();
+    #ifdef Q_OS_WIN32
+      if ( result.cd( "Application Data/GoldenDict" ) )
+        return result;
+      char const * pathInHome = "GoldenDict";
+      result = QDir::fromNativeSeparators( QString::fromWCharArray( _wgetenv( L"APPDATA" ) ) );
+    #else
+      char const * pathInHome = ".goldendict";
+    #endif
 
     result.mkpath( pathInHome );
 
