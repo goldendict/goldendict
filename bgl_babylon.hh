@@ -45,7 +45,7 @@ const std::string bgl_language[] = {
 	"Hebrew",
 	"Arabic",
 	"Thai",
-	"Other",
+        "Vietnamese",                           //set other to vietnamese
 	"Other Simplified Chinese dialects",
 	"Other Traditional Chinese dialects",
 	"Other Eastern-European languages",
