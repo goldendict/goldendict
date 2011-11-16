@@ -118,6 +118,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
   ui.scanPopupAltMode->setChecked( p.scanPopupAltMode );
   ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
+  ui.scanToMainWindow->setChecked( p.scanToMainWindow );
   ui.scanPopupUseUIAutomation->setChecked( p.scanPopupUseUIAutomation );
   ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
   ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
@@ -232,6 +233,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
   p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
+  p.scanToMainWindow = ui.scanToMainWindow->isChecked();
   p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
   p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
   p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();

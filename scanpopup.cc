@@ -296,6 +296,13 @@ void ScanPopup::handleInputWord( QString const & str )
 
 void ScanPopup::engagePopup( bool giveFocus )
 {
+  if( cfg.preferences.scanToMainWindow )
+  {
+    // Send translated word to main window istead of show popup
+    emit sendWordToMainWindow( inputWord );
+    return;
+  }
+
   /// Too large strings make window expand which is probably not what user
   /// wants
   ui.word->setText( elideInputWord() );
@@ -775,4 +782,16 @@ void ScanPopup::mutedDictionariesChanged()
 {
   if ( dictionaryBar.toggleViewAction()->isChecked() )
     definition->updateMutedContents();
+}
+
+void ScanPopup::on_sendWordButton_clicked()
+{
+  if ( !isVisible() )
+    return;
+  if( !ui.pinButton->isChecked() )
+  {
+    definition->closeSearch();
+    hideWindow();
+  }
+  emit sendWordToMainWindow( definition->getTitle() );
 }

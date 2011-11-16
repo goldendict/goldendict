@@ -806,6 +806,8 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL(editGroupRequested( unsigned )),
            this,SLOT(editDictionaries( unsigned )), Qt::QueuedConnection );
+  connect( scanPopup.get(), SIGNAL(sendWordToMainWindow( QString const & )),
+           this,SLOT(wordReceived( QString const & )), Qt::QueuedConnection );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -2464,4 +2466,11 @@ ArticleView * MainWindow::getCurrentArticleView()
     return &( dynamic_cast< ArticleView & >( *( cw ) ) );
   }
   return 0;
+}
+
+void MainWindow::wordReceived( const QString & word)
+{
+    toggleMainWindow( true );
+    ui.translateLine->setText( word );
+    translateInputFinished();
 }

@@ -47,6 +47,8 @@ signals:
 
   /// Forwarded from the dictionary bar, so that main window could act on this.
   void editGroupRequested( unsigned id );
+  /// Send word to main window
+  void sendWordToMainWindow( QString const & word );
 
 public slots:
 
@@ -132,6 +134,7 @@ private slots:
   void pinButtonClicked( bool checked );
   void on_showDictionaryBar_clicked( bool checked );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );
+  void on_sendWordButton_clicked();
 
   void hideTimerExpired();
   void altModeExpired();
