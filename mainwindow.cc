@@ -2454,7 +2454,17 @@ void MainWindow::applyWordsZoomLevel()
 void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
 {
   if ( message == "bringToFront" )
+  {
     toggleMainWindow( true );
+    return;
+  }
+  if( message.left( 15 ) == "translateWord: " )
+  {
+    if( scanPopup.get() )
+      scanPopup->translateWord( message.mid( 15 ) );
+    else
+      wordReceived( message.mid( 15 ) );
+  }
   else
     qWarning() << "Unknown message received from another instance: " << message;
 }

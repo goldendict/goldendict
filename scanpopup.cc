@@ -217,7 +217,12 @@ void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 
   QString str = QApplication::clipboard()->text( subtype, m);
 
-  str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
+  translateWord( str );
+}
+
+void ScanPopup::translateWord( QString const & word )
+{
+  QString str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( word ) ) );
 
   if ( !str.size() )
     return; // Nothing there

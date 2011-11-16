@@ -42,7 +42,9 @@ public:
   /// Applies current zoom factor to the popup's view. Should be called when
   /// it's changed.
   void applyZoomFactor();
-  
+  /// Translate the word
+  void translateWord( QString const & word );
+
 signals:
 
   /// Forwarded from the dictionary bar, so that main window could act on this.

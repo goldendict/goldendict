@@ -12,6 +12,10 @@
 
 //#define __DO_DEBUG
 
+#ifdef Q_OS_WIN32
+#include <QtCore/qt_windows.h>
+#endif
+
 #ifdef __DO_DEBUG
 #include <sys/resource.h>
 #endif
@@ -86,8 +90,24 @@ int main( int argc, char ** argv )
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
 
-  if ( app.sendMessage("bringToFront") )
+  if ( app.isRunning() )
+  {
+    if( argc == 2 )
+#ifdef Q_OS_WIN32
+    {
+      LPWSTR * pstr;
+      int num;
+      pstr = CommandLineToArgvW( GetCommandLineW(), &num );
+      if( pstr && num > 0 )
+        app.sendMessage( QString( "translateWord: ") + QString::fromWCharArray( pstr[1] ) );
+    }
+#else
+      app.sendMessage( QString( "translateWord: ") + QString::fromLocal8Bit( argv[1] ) );
+#endif
+    else
+      app.sendMessage("bringToFront");
     return 0; // Another instance is running
+  }
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.org/" );
@@ -148,6 +168,19 @@ int main( int argc, char ** argv )
 
   QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
     &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
+
+  if( argc == 2 )
+#ifdef Q_OS_WIN32
+  {
+    LPWSTR * pstr;
+    int num;
+    pstr = CommandLineToArgvW( GetCommandLineW(), &num );
+    if( pstr && num > 0 )
+      m.wordReceived( QString::fromWCharArray( pstr[1] ) );
+  }
+#else
+    m.wordReceived( QString::fromLocal8Bit( argv[1] ) );
+#endif
 
   int r = app.exec();
 
