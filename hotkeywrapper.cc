@@ -69,8 +69,11 @@ HotkeyStruct::HotkeyStruct( quint32 key_, quint32 key2_, quint32 modifier_,
 HotkeyWrapper::HotkeyWrapper(QObject *parent) : QThread( parent ),
     state2(false)
 {
+#ifdef Q_OS_WIN
+  hwnd=(HWND)((static_cast<QMainWindow*>(parent))->winId());
+#else
   init();
-
+#endif
   (static_cast<QHotkeyApplication*>(qApp))->registerWrapper(this);
 }
 
@@ -182,6 +185,8 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
     return false; // We don't monitor empty combinations
 
   static int id = 0;
+  if( id > 0xBFFF - 1 )
+    id = 0;
 
   quint32 mod = 0;
   if (modifier & Qt::CTRL)
