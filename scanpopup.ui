@@ -105,6 +105,23 @@
           </widget>
          </item>
          <item>
+          <widget class="QToolButton" name="sendWordButton">
+           <property name="toolTip">
+            <string>Send word to main window (Alt+W)</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icons/programicon.png</normaloff>:/icons/programicon.png</iconset>
+           </property>
+           <property name="shortcut">
+            <string>Alt+W</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>

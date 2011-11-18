@@ -806,6 +806,8 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL(editGroupRequested( unsigned )),
            this,SLOT(editDictionaries( unsigned )), Qt::QueuedConnection );
+  connect( scanPopup.get(), SIGNAL(sendWordToMainWindow( QString const & )),
+           this,SLOT(wordReceived( QString const & )), Qt::QueuedConnection );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -2452,7 +2454,17 @@ void MainWindow::applyWordsZoomLevel()
 void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
 {
   if ( message == "bringToFront" )
+  {
     toggleMainWindow( true );
+    return;
+  }
+  if( message.left( 15 ) == "translateWord: " )
+  {
+    if( scanPopup.get() )
+      scanPopup->translateWord( message.mid( 15 ) );
+    else
+      wordReceived( message.mid( 15 ) );
+  }
   else
     qWarning() << "Unknown message received from another instance: " << message;
 }
@@ -2464,4 +2476,11 @@ ArticleView * MainWindow::getCurrentArticleView()
     return &( dynamic_cast< ArticleView & >( *( cw ) ) );
   }
   return 0;
+}
+
+void MainWindow::wordReceived( const QString & word)
+{
+    toggleMainWindow( true );
+    ui.translateLine->setText( word );
+    translateInputFinished();
 }

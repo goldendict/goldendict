@@ -107,6 +107,7 @@ Preferences::Preferences():
   scanPopupUseUIAutomation( true ),
   scanPopupUseIAccessibleEx( true ),
   scanPopupUseGDMessage( true ),
+  scanToMainWindow( false ),
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
 #ifdef Q_WS_WIN
@@ -602,6 +603,7 @@ Class load() throw( exError )
     c.preferences.scanPopupAltMode = ( preferences.namedItem( "scanPopupAltMode" ).toElement().text() == "1" );
     if ( !preferences.namedItem( "scanPopupAltModeSecs" ).isNull() )
       c.preferences.scanPopupAltModeSecs = preferences.namedItem( "scanPopupAltModeSecs" ).toElement().text().toUInt();
+    c.preferences.scanToMainWindow = ( preferences.namedItem( "scanToMainWindow" ).toElement().text() == "1" );
     c.preferences.scanPopupUseUIAutomation = ( preferences.namedItem( "scanPopupUseUIAutomation" ).toElement().text() == "1" );
     c.preferences.scanPopupUseIAccessibleEx = ( preferences.namedItem( "scanPopupUseIAccessibleEx" ).toElement().text() == "1" );
     c.preferences.scanPopupUseGDMessage = ( preferences.namedItem( "scanPopupUseGDMessage" ).toElement().text() == "1" );
@@ -1112,6 +1114,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "scanPopupAltModeSecs" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupAltModeSecs ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanToMainWindow" );
+    opt.appendChild( dd.createTextNode( c.preferences.scanToMainWindow ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "scanPopupUseUIAutomation" );
