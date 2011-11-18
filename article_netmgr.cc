@@ -145,20 +145,6 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     if ( groupIsValid && word.size() ) // Require group and word to be passed
       return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts );
   }
-//add support file:///
-  if(url.scheme() == "file")
-  {
-      sptr< Dictionary::DataRequestInstant > file = new Dictionary::DataRequestInstant( true );
-      QFile f(url.toLocalFile());
-      if(f.open( QFile::ReadOnly ))
-      {
-          QByteArray byteArray(f.readAll());
-          file->getData().resize( byteArray.size() );
-          memcpy( &( file->getData().front() ), byteArray.data(), byteArray.size() );
-          f.close();
-      }
-      return file;
-  }
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ||  url.scheme() == "gico") &&
        url.path().size() )
   {
@@ -179,7 +165,6 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             {
                 QByteArray byteArray;
                 QBuffer buffer(&byteArray);
-                    //image.save(&buffer, "PNG");
 
                  buffer.open(QIODevice::WriteOnly);
                  dictionaries[ x ]->getIcon().pixmap( 32 ).toImage().save(&buffer, "PNG");
