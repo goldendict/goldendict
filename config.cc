@@ -1358,8 +1358,10 @@ std::string getCustomJs() throw(exError)
      while(dirIterator.hasNext())
      {
          QFile addJs( dirIterator.next() );
-         if(addJs.open( QFile::ReadOnly ))
+         if(addJs.open( QFile::ReadOnly )){
             js.append(addJs.readAll());
+            addJs.close();
+         }
 
      }
      return js.data();
