@@ -1350,7 +1350,7 @@ QString getPortableVersionMorphoDir() throw()
 std::string getCustomJs() throw(exError)
 {
     // set dir iterator
-     QDirIterator dirIterator(QCoreApplication::applicationDirPath() + "/include",
+     QDirIterator dirIterator(getHomeDir().filePath("include"),
                               QStringList("*.js"),
                               QDir::Files|QDir::Readable|QDir::NoSymLinks,
                               QDirIterator::Subdirectories);
