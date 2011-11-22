@@ -281,37 +281,37 @@
         <translation>Skratky:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="34"/>
+        <location filename="../groups_widgets.cc" line="35"/>
         <source>None</source>
         <translation>Žiadny</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="39"/>
+        <location filename="../groups_widgets.cc" line="40"/>
         <source>From file...</source>
         <translation>Zo súboru ...</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="79"/>
+        <location filename="../groups_widgets.cc" line="80"/>
         <source>Choose a file to use as group icon</source>
         <translation>Vyberte súbor, ktorý chcete použiť ako ikonu skupiny</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="81"/>
+        <location filename="../groups_widgets.cc" line="82"/>
         <source>Images</source>
         <translation>Obrázky</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="82"/>
+        <location filename="../groups_widgets.cc" line="83"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="89"/>
+        <location filename="../groups_widgets.cc" line="90"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="89"/>
+        <location filename="../groups_widgets.cc" line="90"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>Nemožno prečítať zadaný súbor s obrázkom.</translation>
     </message>
@@ -319,12 +319,12 @@
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="571"/>
+        <location filename="../groups_widgets.cc" line="572"/>
         <source>Confirmation</source>
         <translation>Potvrdenie</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="572"/>
+        <location filename="../groups_widgets.cc" line="573"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>Ste si istí, že chcete vytvoriť sadu skupín na základe jazykových párov?</translation>
     </message>
@@ -332,7 +332,7 @@
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="187"/>
+        <location filename="../groups_widgets.cc" line="188"/>
         <source>%1 entries</source>
         <translation>%1 položiek</translation>
     </message>
@@ -620,12 +620,12 @@
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="216"/>
+        <location filename="../hunspell.cc" line="217"/>
         <source>Spelling suggestions: </source>
         <translation>Návrhy k preklepom:</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="750"/>
+        <location filename="../hunspell.cc" line="751"/>
         <source>%1 Morphology</source>
         <translation>%1 morfológia</translation>
     </message>
@@ -1598,7 +1598,7 @@
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="178"/>
+        <location filename="../loaddictionaries.cc" line="179"/>
         <source>Error loading dictionaries</source>
         <translation>Chyba pri načítavaní slovníkov</translation>
     </message>
@@ -1607,8 +1607,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1048"/>
-        <location filename="../mainwindow.cc" line="1879"/>
+        <location filename="../mainwindow.cc" line="1050"/>
+        <location filename="../mainwindow.cc" line="1881"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
@@ -1917,98 +1917,98 @@
         <translation>Všetko</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="849"/>
+        <location filename="../mainwindow.cc" line="851"/>
         <source>Opened tabs</source>
         <translation>Otvorené karty</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="858"/>
+        <location filename="../mainwindow.cc" line="860"/>
         <source>Open Tabs List</source>
         <translation>Otvorí zoznam kariet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="891"/>
+        <location filename="../mainwindow.cc" line="893"/>
         <source>(untitled)</source>
         <translation>(Bez názvu)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1048"/>
+        <location filename="../mainwindow.cc" line="1050"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1482"/>
+        <location filename="../mainwindow.cc" line="1484"/>
         <source>WARNING: %1</source>
         <translation>VAROVANIE: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1880"/>
+        <location filename="../mainwindow.cc" line="1882"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Nepodarilo sa inicializovať monitorovací mechanizmus klávesových skratiek.&lt;br&gt; Uistite sa, že X server má zapnuté rozšírenie RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2014"/>
+        <location filename="../mainwindow.cc" line="2016"/>
         <source>New Release Available</source>
         <translation>Je dostupná nová verzia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2015"/>
+        <location filename="../mainwindow.cc" line="2017"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict verzia &lt;b&gt;%1&lt;/b&gt; je dostupná na stiahnutie.
 &lt;br&gt;Kliknutím na &lt;b&gt;Stiahnuť&lt;/b&gt; sa dostane na stránku, kde je možné program stiahnuť.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2020"/>
+        <location filename="../mainwindow.cc" line="2022"/>
         <source>Download</source>
         <translation>Stiahnuť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2021"/>
+        <location filename="../mainwindow.cc" line="2023"/>
         <source>Skip This Release</source>
         <translation>Preskočiť toto vydanie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2134"/>
+        <location filename="../mainwindow.cc" line="2136"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Vybrali ste si skrytie panelu s ponukou. Použite %1 ak ho chcete znova zobraziť.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2135"/>
+        <location filename="../mainwindow.cc" line="2137"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2276"/>
+        <location filename="../mainwindow.cc" line="2278"/>
         <source>Page Setup</source>
         <translation>Nastavenie strany</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2277"/>
+        <location filename="../mainwindow.cc" line="2279"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Žiadna tlačiareň nie je k dispozícii. Prosím, nainštalujte aspoň jednu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2294"/>
+        <location filename="../mainwindow.cc" line="2296"/>
         <source>Print Article</source>
         <translation>Vytlačiť článok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2315"/>
+        <location filename="../mainwindow.cc" line="2317"/>
         <source>Save Article As</source>
         <translation>Uložiť článok ako</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2315"/>
+        <location filename="../mainwindow.cc" line="2317"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html súbory (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2330"/>
+        <location filename="../mainwindow.cc" line="2332"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2331"/>
+        <location filename="../mainwindow.cc" line="2333"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Nie je možné uložiť článok: %1</translation>
     </message>
@@ -2425,27 +2425,37 @@ seconds, which is specified here.</source>
         <translation>sek</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="572"/>
+        <location filename="../preferences.ui" line="551"/>
+        <source>Send translated word to main window instead of to show it in popup window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="554"/>
+        <source>Send translated word to main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="582"/>
         <source>Hotkeys</source>
         <translation>Klávesové skratky</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="591"/>
+        <location filename="../preferences.ui" line="601"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>Použite nasledujúcu klávesovú skratku pre zobrazenie alebo skrytie hlavného okna:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="622"/>
+        <location filename="../preferences.ui" line="632"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>Použite nasledujúcu klávesovú skratku pre preklad slova zo schránky:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="669"/>
+        <location filename="../preferences.ui" line="679"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>Klávesové skratky sú globálne a fungujú z akéhokoľvek programu a akomkoľvek kontexte pokiaľ GoldenDict beží na pozadí.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="679"/>
+        <location filename="../preferences.ui" line="689"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -2458,118 +2468,118 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Poznámka: Zdá sa, že používate X.Org XServer verziu, ktorá má poškodené rozšírenie RECORD. Klávesové skratky v Goldendict preto nebudú pravdepodobne fungovať. Toto musí byť najskôr vyriešené v samotnom XServeri. Prosím pozrite sa na následujúce &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;chybové hlásenie&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; a keď chcete, tak tam dajte svoj komentár.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="717"/>
+        <location filename="../preferences.ui" line="727"/>
         <source>&amp;Audio</source>
         <translation>&amp;Audio</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="736"/>
+        <location filename="../preferences.ui" line="746"/>
         <source>Pronunciation</source>
         <translation>Výslovnosť</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="742"/>
+        <location filename="../preferences.ui" line="752"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Automaticky vysloviť slová v hlavnom okne</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="749"/>
+        <location filename="../preferences.ui" line="759"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Automaticky vysloviť slová vo vyskakovacom okne</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="759"/>
+        <location filename="../preferences.ui" line="769"/>
         <source>Playback</source>
         <translation>Prehrávanie</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="765"/>
+        <location filename="../preferences.ui" line="775"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
         <translation>Použiť natívne Windows API pre prehrávanie. Podporuje iba .WAV súbory, ale funguje veľmi dobre.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="769"/>
+        <location filename="../preferences.ui" line="779"/>
         <source>Play via Windows native API</source>
         <translation>Hrať cez natívne Windows API</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="776"/>
+        <location filename="../preferences.ui" line="786"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
         <translation>Prehrať audio pomocou Phononu. Môže to byť trochu nestabilné, ale malo by podpoprovať väčšinu audio formátov.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="780"/>
+        <location filename="../preferences.ui" line="790"/>
         <source>Play via Phonon</source>
         <translation>Hrať cez Phonon</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="792"/>
+        <location filename="../preferences.ui" line="802"/>
         <source>Use any external program to play audio files</source>
         <translation>Použiť pre prehrávanie audio súborov externý program</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="795"/>
+        <location filename="../preferences.ui" line="805"/>
         <source>Use external program:</source>
         <translation>Použiť externý program:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="832"/>
+        <location filename="../preferences.ui" line="842"/>
         <source>&amp;Network</source>
         <translation>&amp;Sieť</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="851"/>
+        <location filename="../preferences.ui" line="861"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Povoliť pokiaľ chcete použiť proxy server
 pre všetky sieťové požiadavky programu.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="855"/>
+        <location filename="../preferences.ui" line="865"/>
         <source>Use proxy server</source>
         <translation>Použiť proxy server</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="869"/>
+        <location filename="../preferences.ui" line="879"/>
         <source>Type:</source>
         <translation>Typ:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="879"/>
+        <location filename="../preferences.ui" line="889"/>
         <source>Host:</source>
         <translation>Hostiteľ:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="889"/>
+        <location filename="../preferences.ui" line="899"/>
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="910"/>
+        <location filename="../preferences.ui" line="920"/>
         <source>User:</source>
         <translation>Používateľ:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="920"/>
+        <location filename="../preferences.ui" line="930"/>
         <source>Password:</source>
         <translation>Heslo:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="955"/>
+        <location filename="../preferences.ui" line="965"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
         <translation>Toto umožní GoldenDictu blokovať väčšinu reklám nepovolením obsahu (obrázky, rámce), ktoré pochádzajú z inej stránky, než je tá, ktorú prezeráte. Pokiaľ sa kvôli tomuto niektoré stránky pokazia, skúste túto voľmu zakázať.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="960"/>
+        <location filename="../preferences.ui" line="970"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>Zakázať načítanie obsahu z iných webov (skryje väčšinu reklám)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="967"/>
+        <location filename="../preferences.ui" line="977"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -2577,12 +2587,12 @@ Plugin must be installed for this option to work.</source>
 Zásuvný modul musí byť nainštalovaný, aby táto voľba fungovala.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="972"/>
+        <location filename="../preferences.ui" line="982"/>
         <source>Enable web plugins</source>
         <translation>Povoliť web zásuvné moduly</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="995"/>
+        <location filename="../preferences.ui" line="1005"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -2595,22 +2605,22 @@ a ponúkne mu možnosť otvoriť stánku s programom
 na stiahnutie.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1002"/>
+        <location filename="../preferences.ui" line="1012"/>
         <source>Check for new program releases periodically</source>
         <translation>Pravidelne kontrolovať dostupnosť nových verzií</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1023"/>
+        <location filename="../preferences.ui" line="1033"/>
         <source>Ad&amp;vanced</source>
         <translation>&amp;Pokročilé</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1029"/>
+        <location filename="../preferences.ui" line="1039"/>
         <source>ScanPopup extra technologies</source>
         <translation>Extra technolódie pre vyskakovacie okno</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1035"/>
+        <location filename="../preferences.ui" line="1045"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -2621,12 +2631,12 @@ Táto technológia funguje len s niektorými programami, ktoré ju podporujú
 Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1041"/>
+        <location filename="../preferences.ui" line="1051"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>Použiť &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1048"/>
+        <location filename="../preferences.ui" line="1058"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -2635,12 +2645,12 @@ Táto technológia funguje len s niektorými programami, ktoré ju podporujú.
 Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1053"/>
+        <location filename="../preferences.ui" line="1063"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Použiť &amp;UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1060"/>
+        <location filename="../preferences.ui" line="1070"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -2649,7 +2659,7 @@ Táto technológia funguje len s niektorými programami, ktoré ju podporujú.
 Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1065"/>
+        <location filename="../preferences.ui" line="1075"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Použiť &amp;GoldenDict správu</translation>
     </message>
@@ -2669,17 +2679,17 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <translation>Lingvo</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="149"/>
+        <location filename="../preferences.cc" line="150"/>
         <source>Play via DirectShow</source>
         <translation>Hrať cez DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="332"/>
+        <location filename="../preferences.cc" line="334"/>
         <source>Changing Language</source>
         <translation>Zmena jazyka</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="333"/>
+        <location filename="../preferences.cc" line="335"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Reštartovať program pre aplikovanie zmeny jazyka.</translation>
     </message>
@@ -2794,8 +2804,8 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../scanpopup.ui" line="70"/>
         <location filename="../scanpopup.ui" line="93"/>
-        <location filename="../scanpopup.ui" line="126"/>
-        <location filename="../scanpopup.ui" line="150"/>
+        <location filename="../scanpopup.ui" line="143"/>
+        <location filename="../scanpopup.ui" line="167"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -2815,12 +2825,22 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <translation>Alt+S</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="123"/>
+        <location filename="../scanpopup.ui" line="110"/>
+        <source>Send word to main window (Alt+W)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scanpopup.ui" line="120"/>
+        <source>Alt+W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scanpopup.ui" line="140"/>
         <source>Shows or hides the dictionary bar</source>
         <translation>Zobrazí alebo skryje panel slovníkov</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="146"/>
+        <location filename="../scanpopup.ui" line="163"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
         <translation>Pomocou tohto môžete prišpendliť okno, tak že zostane na obrazovke,
