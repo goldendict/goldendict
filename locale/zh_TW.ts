@@ -184,6 +184,30 @@
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>要播放非 WAV 檔案，請進入 編輯|選項，選取音訊標籤，選擇「透過 DirectShow 播放」。</translation>
     </message>
+    <message>
+        <source>Highlight &amp;all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Definition: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The referenced audio program doesn&apos;t exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">警告： %1</translation>
+    </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
@@ -290,6 +314,13 @@
     <message>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>某些詞典檔案的所在資料夾已變更，是否接受變更？</translation>
+    </message>
+</context>
+<context>
+    <name>ExternalViewer</name>
+    <message>
+        <source>the viewer program name is empty</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1269,7 +1300,7 @@
     </message>
     <message>
         <source>F3</source>
-        <translation>F3</translation>
+        <translation type="obsolete">F3</translation>
     </message>
     <message>
         <source>F4</source>
@@ -1333,7 +1364,7 @@
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation>詞典...(&amp;D)</translation>
+        <translation type="obsolete">詞典...(&amp;D)</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -1393,7 +1424,7 @@
     </message>
     <message>
         <source>&amp;Groups...</source>
-        <translation>群組...(&amp;G)</translation>
+        <translation type="obsolete">群組...(&amp;G)</translation>
     </message>
     <message>
         <source>Show &amp;Main Window</source>
@@ -1543,6 +1574,54 @@
     <message>
         <source>Opened tabs</source>
         <translation>已開啟的標籤頁</translation>
+    </message>
+    <message>
+        <source>Results Navigation Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Dictionaries...	F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Configuration Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Small Icons in Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Menubar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Found in Dictionaries:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tabs List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2022,6 +2101,137 @@ but should support most audio file formats.</source>
         <source>Use any external program to play audio files</source>
         <translation>使用外部程式播放音訊檔案。</translation>
     </message>
+    <message>
+        <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide single tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ESC key hides main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send translated word to main window instead of to show it in popup window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send translated word to main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling this would allow to listen to sound pronunciations from
+online dictionaries that rely on Flash or other web plugins.
+Plugin must be installed for this option to work.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable web plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ad&amp;vanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ScanPopup extra technologies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
+This technology works only with some programs that support it
+ (for example Internet Explorer 9).
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;IAccessibleEx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try to use UI Automation technology to retrieve word under cursor.
+This technology works only with some programs that support it.
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;UIAutomation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try to use special GoldenDict message to retrieve word under cursor.
+This technology works only with some programs that support it.
+It is not needed to select this option if you don&apos;t use such programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;GoldenDict message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProgramTypeEditor</name>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefix Match</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Programs::RunInstance</name>
+    <message>
+        <source>No program name was given.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The program has crashed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The program has returned exit code %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProgramsModel</name>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished">已啟用</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">名稱</translation>
+    </message>
+    <message>
+        <source>Command Line</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Romaji</name>
@@ -2079,6 +2289,14 @@ but should support most audio file formats.</source>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
         <translation>使用此按鈕可以固定視窗，以便它能停留在螢幕上進行改變大小等相關視窗管理操作。</translation>
+    </message>
+    <message>
+        <source>Send word to main window (Alt+W)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+W</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2327,6 +2545,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>(not available in portable version)</source>
         <translation>（免安裝版中不可用）</translation>
+    </message>
+    <message>
+        <source>Programs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
