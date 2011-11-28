@@ -75,17 +75,23 @@
         <translation>Jus sveikina GoldenDict!</translation>
     </message>
     <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spusdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinkite žodynų tvarką arba kurkite žodynų grupes.&lt;p&gt;Po to jau galėsite peržvelgti žodžius! Ieškoti žodžių galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad skaitykite, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p&gt;Programos atnaujinimų ieškokite &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. GPLv3 arba vėlesnė licencija.</translation>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/fo
+ rum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spusdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinkite žodynų tvarką arba kurkite žodynų grupes.&lt;p&gt;Po to jau galėsite peržvelgti žodžius! Ieškoti žodžių galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad skaitykite, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p
+ &gt;Programos atnaujinimų ieškokite &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. GPLv3 arba vėlesnė licencija.</translation>
     </message>
     <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spusdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinkite žodynų tvarką arba kurkite žodynų grupes.&lt;p&gt;Po to jau galėsite peržvelgti žodžius! Ieškoti žodžių galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad skaitykite, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p&gt;Programos atnaujinimų ieškokite &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. GPLv3 arba vėlesnė licencija. {3 ?} {3&gt;?} {2008-2010 ?} {3 ?}</translation>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/fo
+ rum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spusdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinkite žodynų tvarką arba kurkite žodynų grupes.&lt;p&gt;Po to jau galėsite peržvelgti žodžius! Ieškoti žodžių galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad skaitykite, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p
+ &gt;Programos atnaujinimų ieškokite &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2009 Konstantin Isakov. GPLv3 arba vėlesnė licencija. {3 ?} {3&gt;?} {2008-2010 ?} {3 ?}</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="145"/>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spausdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinksite žodynų tvarką arba kursite žodynų grupes.&lt;p&gt;Po to jau galėsite ieškoti žodžių! Versti žodžius galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad pravers, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p&gt;Programos atnaujinimų ieškokite &lt;a href=&quot;http://goldendict.org/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. GPLv3 arba vėlesnė licencija.</translation>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&qu
+ ot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spausdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinksite žodynų tvarką arba kursite žodynų grupes.&lt;p&gt;Po to jau galėsite ieškoti žodžių! Versti žodžius galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad pravers, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p&gt;Programos atnaujinimų ie
+ škokite &lt;a href=&quot;http://goldendict.org/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. GPLv3 arba vėlesnė licencija.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="161"/>
@@ -146,17 +152,17 @@
     <message>
         <location filename="../articleview.cc" line="606"/>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Šaltinis</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="611"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Garsas</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="621"/>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Apibrėžimas: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="792"/>
@@ -176,7 +182,7 @@
     <message>
         <location filename="../articleview.cc" line="832"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra nurodytos garso programos.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="963"/>
@@ -246,7 +252,7 @@
     <message>
         <location filename="../articleview.cc" line="1262"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">Įspėjimas: %1</translation>
+        <translation>ĮSPĖJIMAS: %1</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="14"/>
@@ -291,7 +297,7 @@
     <message>
         <location filename="../articleview.ui" line="133"/>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Viską pažymėti</translation>
     </message>
 </context>
 <context>
@@ -431,7 +437,7 @@
     <message>
         <location filename="../externalviewer.cc" line="49"/>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>nėra peržiūros programos vardo</translation>
     </message>
 </context>
 <context>
@@ -1680,12 +1686,12 @@
     <message>
         <location filename="../mainwindow.cc" line="2136"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jūs paslepiate meniu juostą. Norėdami ją vėl matyti, spauskite %1.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2137"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald+M</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2278"/>
@@ -1762,17 +1768,17 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="43"/>
         <source>Show Small Icons in Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrankių juostoje rodyti mažus ženkliukus</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="44"/>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meniu juosta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="85"/>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodynuose rasta:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="117"/>
@@ -1842,7 +1848,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="860"/>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>Atverti kortelių sąrašą</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="893"/>
@@ -1852,7 +1858,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="1050"/>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1484"/>
@@ -1890,12 +1896,12 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="255"/>
         <source>Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigacijos tarp rezultatų skydelis</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="286"/>
         <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Žo&amp;dynai...	F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="295"/>
@@ -2038,17 +2044,17 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
         <location filename="../mainwindow.ui" line="400"/>
         <location filename="../mainwindow.cc" line="341"/>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Nauja kortelė</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald+T</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nuostatų aplankas</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="128"/>
@@ -2217,12 +2223,12 @@ prie paskutiniųjų.</translation>
     <message>
         <location filename="../preferences.ui" line="90"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rinkitės, jei nenorite matyti kortelių juostos tuomet, kai atverta tik viena kortelė.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="93"/>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Slėpti vienintelę kortelę</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="103"/>
@@ -2293,12 +2299,13 @@ tiesiog paslepiama.</translation>
         <location filename="../preferences.ui" line="258"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paprastai, nuspaudus Gr(įžties) klavišą, fokusas perkeliamas į verčiamą eilutę.
+Tačiau įgalinus šią parinktį, būtų paslepiamas pagrindinis langas.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="262"/>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Gr (Esc) klavišas paslepia pagrindinį langą</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="311"/>
@@ -2489,12 +2496,12 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="551"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodžio vertimas pagrindiniame lange, o ne iškylančiame lange</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="554"/>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Perduoti į pagrindinį langą</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="769"/>
@@ -2538,12 +2545,12 @@ tačiau palaiko daugelį garso rinkmenų formatų.</translation>
     <message>
         <location filename="../preferences.ui" line="1033"/>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Su&amp;dėtingesni</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1039"/>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Ypatingos iškylančių langų technologijos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1045"/>
@@ -2551,36 +2558,43 @@ tačiau palaiko daugelį garso rinkmenų formatų.</translation>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodžio, esančio po pelės žymekliu, nuskaitymui bandyti naudoti „IAccessibleEx“ 
+technologiją. Ši technoogija veikia tik su kai kuriomis ją palaikančiomis programomis
+ (pavyzdžiui, Internet Explorer 9).
+Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1051"/>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti „&amp;IAccessibleEx“</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1058"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodžio, esančio po pelės žymekliu, nuskaitymui bandyti naudoti „UI Automation“ 
+technologiją. Ši technoogija veikia tik su kai kuriomis ją palaikančiomis programomis.
+Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1063"/>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti „&amp;UIAutomation“</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1070"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodžio, esančio po pelės žymekliu, nuskaitymui bandyti naudoti „GoldenDict message“ 
+technologiją. Ši technoogija veikia tik su kai kuriomis ją palaikančiomis programomis.
+Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1075"/>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti „&amp;GoldenDict message“</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
@@ -2706,12 +2720,14 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Įgalinus šią parinktį, bus leidžiama klausyti žodžių tarimo 
+internetiniuose žodynuose, veikiančiuose naudojant Flash ar kitokį 
+saityno papildinį. Norint, kad parinktis veiktų, turi būti įdiegtas papildinys.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="982"/>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Įgalinti saityno papildinius</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1005"/>
@@ -2775,27 +2791,27 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../sources.cc" line="772"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Garsas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="774"/>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Paprastas tekstas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="776"/>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="778"/>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>Priešdėlio atitikimas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="780"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Nežinoma</translation>
     </message>
 </context>
 <context>
@@ -2803,17 +2819,17 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../programs.cc" line="152"/>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neduotas joks programos vardas.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="168"/>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa užstrigo.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="171"/>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa baigė darbą ir grąžino kodą %1.</translation>
     </message>
 </context>
 <context>
@@ -2821,22 +2837,22 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../sources.cc" line="688"/>
         <source>Enabled</source>
-        <translation type="unfinished">Įgalinta</translation>
+        <translation>Įgalinta</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="690"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="692"/>
         <source>Name</source>
-        <translation type="unfinished">Pavadinimas</translation>
+        <translation>Pavadinimas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="694"/>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Komandinė eilutė</translation>
     </message>
 </context>
 <context>
@@ -2895,12 +2911,12 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../scanpopup.ui" line="110"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Perduoti į pagrindinį langą (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="120"/>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="140"/>
@@ -2974,7 +2990,7 @@ galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus
     <message>
         <location filename="../sources.cc" line="270"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Programą &lt;b&gt;%1&lt;/b&gt; pašalinti iš sąrašo?</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="34"/>
@@ -3071,12 +3087,12 @@ rašybos spėjimus.
     <message>
         <location filename="../sources.ui" line="343"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programos</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="349"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bet kokia išorinė programa. Norėdami perduoti užklausos žodį, rašykite %GDWORD%. Žodis taip pat perduodamas į standartinę įvedimą.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="402"/>
