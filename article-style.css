@@ -13,7 +13,7 @@ body
 /* highlight/select color in Windows when a widget is inactive is nearly impossible to read (light gray).
  * then change it to green to use with the find option. */
 ::selection{
-	background:#1084BC;
+	background:#4492E8;
 	color:#fff;
 }
 /* Don't allow to select [] */
