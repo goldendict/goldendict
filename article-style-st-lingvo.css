@@ -20,6 +20,9 @@ a:hover
   border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;
   margin-top: 1.2em; margin-bottom: 0.1em; font-weight: bold; font-size: 14px;
   background: #87CEEB;
+  border-top-left-radius:0;
+  border-top-right-radius:0;
+  width:auto;
 }
 
 /* The 'From ' string which preceeds dictionary name in the heading */
@@ -39,7 +42,9 @@ a:hover
   color: #7f7f7f;
   background: white;
 }
-
+.gddictname td{
+	padding:2px;
+}
 .gdarticleseparator + script + .gdarticle .gddictname
 {
   border-top: 1px solid #ccc;

@@ -12,12 +12,10 @@ body
 
 /* highlight/select color in Windows when a widget is inactive is nearly impossible to read (light gray).
  * then change it to green to use with the find option. */
-/*
-::selection {
-  background: #c00;
-  color: #fff;
+::selection{
+	background:#1084BC;
+	color:#fff;
 }
-*/
 /* Don't allow to select [] */
 :before, :after {
   -webkit-user-select: none;
@@ -37,40 +35,35 @@ pre
   border:none;/* 1px dotted black; padding: 0.2em; padding-left: 0.5em;*/
   margin-top: 1.2em; margin-bottom: 0.1em; font-weight: bold; font-size: 14px;
   /*background: #ffffdd;*/
-	width:100%;
 	background:#EBEBEB;
 	border-collapse:collapse;
 	border-top-left-radius:8px;
 	border-top-right-radius:8px;
-	padding:0;
+	width:100%;
 }
-.gddictname tr
-{
-	vertical-align:middle;
-	padding:0;
-}
-.gddictname td
-{
-	text-align:left;
-	padding:5px 2px;
-}
+
+
 /* The 'From ' string which preceeds dictionary name in the heading */
-.gddictname td.gdfromprefix
+.gdfromprefix
 {
-	width:1.5px;
-	text-align:center;
-	padding-left:8px;
 }
-.gdfromprefix img
+.gddicticon
 {
+	padding-right:2px;
+}
+.gddicticon img{
 	border:0;
-	width:1.5em;
-	height:auto;
+	height:16px;
+	vertical-align:text-top;
 }
-.gddictname td.bbltoolbar
-{
+.gddictname tr{
+	vertical-align:middle;
+}
+.gddictname td{
+	padding: 5px 8px;
+}
+.bbltoolbar{
 	text-align:right;
-	padding-right:8px;
 }
 /* The article span. Here we have a padding/margin hack to make fragment links
    behave better (have some space before the start of article) */
@@ -2636,3 +2629,16 @@ in bg url to hide it from iemac */
  
 .mwiki .infl-inline { display: inline }
 .mwiki .infl-table { display: none }
+/***web tts***/
+.webtssview{
+	padding-left:10px;
+	font-weight:normal;
+	font-size:11px;
+	color:#1D9C8F;
+}
+.tssflag{
+	height:11px!important;
+}
+.webtssview label{
+	padding-left:5px;
+}

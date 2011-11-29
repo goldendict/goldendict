@@ -158,7 +158,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
 public:
 
   DslDictionary( string const & id, string const & indexFile,
-                 vector< string > const & dictionaryFiles );
+                 vector< string > const & dictionaryFiles,Config::WebTtss const & );
 
   virtual void deferredInit();
 
@@ -231,7 +231,8 @@ private:
 
 DslDictionary::DslDictionary( string const & id,
                               string const & indexFile,
-                              vector< string > const & dictionaryFiles ):
+                              vector< string > const & dictionaryFiles,
+                               Config::WebTtss const &webTtss):
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
@@ -246,7 +247,7 @@ DslDictionary::DslDictionary( string const & id,
   vector< char > dName( idx.read< uint32_t >() );
   idx.read( &dName.front(), dName.size() );
   dictionaryName = string( &dName.front(), dName.size() );
-
+   setWebTssMaker(webTtss);
   // Everything else would be done in deferred init
 }
 
@@ -1070,6 +1071,7 @@ void DslArticleRequest::run()
     articleText += "<div class=\"dsl_headwords\">";
 
     articleText += dict.dslToHtml( displayedHeadword );
+    articleText += dict.MakeTssView(gd::toQString(displayedHeadword));
 
     articleText += "</div>";
 
@@ -1344,7 +1346,8 @@ static void findCorrespondingFiles( string const & ifo,
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                        Config::WebTtss const &webTtss)
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1810,7 +1813,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       dictionaries.push_back( new DslDictionary( dictId,
                                                  indexFile,
-                                                 dictFiles ) );
+                                                 dictFiles,webTtss ) );
     }
     catch( std::exception & e )
     {

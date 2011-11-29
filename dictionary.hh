@@ -13,6 +13,7 @@
 #include "ex.hh"
 #include "mutex.hh"
 #include "wstring.hh"
+#include "wtts.hh"
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {
@@ -269,6 +270,7 @@ class Class
 {
   string id;
   vector< string > dictionaryFiles;
+  WebTTS::WebTssMaker wtssMaker;
 
 public:
 
@@ -384,6 +386,19 @@ public:
   /// response.
   virtual sptr< DataRequest > getResource( string const & /*name*/ )
     throw( std::exception );
+
+  std::string MakeTssView(QString word)
+  {
+     return wtssMaker.MakeTssView(word);
+  }
+  std::string MakeTssView(std::string word)
+  {
+     return wtssMaker.MakeTssView(QString::fromUtf8(word.c_str()));
+  }
+  void setWebTssMaker(Config::WebTtss const &wst_)
+  {
+      wtssMaker = WebTTS::WebTssMaker(wst_,getLangFrom());
+  }
 
   virtual ~Class()
   {}

@@ -33,7 +33,7 @@ using std::vector;
 
 LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell ),
-  transliteration( cfg.transliteration ),
+    transliteration( cfg.transliteration ),webTtss(cfg.webTtss),
   exceptionText( "Load did not finish" ) // Will be cleared upon success
 {
   // Populate name filters
@@ -101,7 +101,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > bglDictionaries =
-      Bgl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      Bgl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this,webTtss );
 
     dictionaries.insert( dictionaries.end(), bglDictionaries.begin(),
                          bglDictionaries.end() );
@@ -109,7 +109,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > stardictDictionaries =
-      Stardict::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      Stardict::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this,webTtss );
 
     dictionaries.insert( dictionaries.end(), stardictDictionaries.begin(),
                          stardictDictionaries.end() );
@@ -125,7 +125,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > dslDictionaries =
-      Dsl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      Dsl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this,webTtss );
 
     dictionaries.insert( dictionaries.end(), dslDictionaries.begin(),
                          dslDictionaries.end() );

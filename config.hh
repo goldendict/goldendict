@@ -221,6 +221,22 @@ struct WebSite
 /// All the WebSites
 typedef vector< WebSite > WebSites;
 
+
+/// Any web tts
+struct WebTts{
+    QString name, url, langlist;
+    bool enabled;
+    WebTts():enabled(false)
+    {}
+    WebTts(QString const &name_,QString const &url_, QString const &langlist_,bool enabled_):
+        name(name_),url(url_),langlist(langlist_),enabled(enabled_){}
+    bool operator == ( WebTts const & other ) const
+    { return name == other.name && url == other.url && langlist == other.langlist &&
+             enabled == other.enabled; }
+};
+//All web tss
+typedef vector< WebTts > WebTtss;
+
 /// Hunspell configuration
 struct Hunspell
 {
@@ -357,6 +373,7 @@ struct Class
   Preferences preferences;
   MediaWikis mediawikis;
   WebSites webSites;
+  WebTtss webTtss;
   Hunspell hunspell;
   Transliteration transliteration;
   Forvo forvo;

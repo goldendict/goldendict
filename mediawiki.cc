@@ -310,7 +310,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               if ( articleString == before )
                 break;
             }
-  
+
             QByteArray articleBody = articleString.toUtf8();
   
             DPRINTF( "Article body after: %s\n", articleBody.data() );

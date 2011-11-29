@@ -50,7 +50,9 @@ bool WebMultimediaDownload::isAudioUrl( QUrl const & url )
 
   return (url.scheme() == "http"  && (
               Filetype::isNameOfSound( url.path().toUtf8().data() ) || url.host() == "apifree.forvo.com" ))
-          || (url.scheme() == "file" && Filetype::isNameOfSound(url.path().toUtf8().data() ));
+          || (url.scheme() == "file" && Filetype::isNameOfSound(url.path().toUtf8().data() )
+            ||  url.hasQueryItem("webtts")
+              );
 }
 
 }

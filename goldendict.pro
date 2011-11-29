@@ -189,7 +189,8 @@ HEADERS += folding.hh \
     dprintf.hh \
     mainstatusbar.hh \
     gdappstyle.hh \
-    ufile.hh
+    ufile.hh \
+    wtts.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -277,7 +278,8 @@ SOURCES += folding.cc \
     maintabwidget.cc \
     mainstatusbar.cc \
     gdappstyle.cc \
-    ufile.cc
+    ufile.cc \
+    wtts.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
@@ -295,7 +297,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/el_GR.ts \
     locale/bg_BG.ts \
     locale/ar_SA.ts \
-    locale/lt_LT.ts \
+#    locale/lt_LT.ts \
     locale/uk_UA.ts \
     locale/vi_VN.ts \
     locale/it_IT.ts \
@@ -334,6 +336,8 @@ TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
+
+
 
 
 

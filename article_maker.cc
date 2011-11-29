@@ -408,23 +408,14 @@ void ArticleRequest::bodyFinished()
                 + ">";
 
         closePrevSpan = true;
-/*
-        head += string( "<div class=\"gddictname\"><span class=\"gdfromprefix\">" ) +
-          //Html::escape( tr( "From " ).toUtf8().data() )
-               // activeDict->getIcon()
-                + "<img src=\"gico://" +
-                activeDict->getId()
-                + "/icon.png\"></span>" +
-          Html::escape( activeDict->getName().c_str() )
-           + "<span class=\"bbltoolbar\"></span></div><span>";
 
-  */
-        head += string( "<table class=\"gddictname\"><tbody><tr><td class=\"gdfromprefix\"><span>" ) +
-                + "<img src=\"gico://" +
-                activeDict->getId()
-                + "/icon.png\"></span></td><td>" +
-          Html::escape( activeDict->getName().c_str() )
-           + "</td><td class=\"bbltoolbar\"><span><label></label></span></td></tr></tbody></table><span>";
+        head += string( "<table class=\"gddictname\"><tbody><tr><td><span class=\"gddicticon\"><img src=\"gico://" )
+                        + activeDict->getId()
+                        + "/icon.png\"></span><span class=\"gdfromprefix\">"
+                        +Html::escape( tr( "From " ).toUtf8().data() )
+                        + "</span>"
+                +Html::escape( activeDict->getName().c_str() )
+            + "</td><td class=\"bbltoolbar\"><span><label></label></span></td></tr></tbody></table><span>";
         head += "<span class=\"gdarticlebody gdlangfrom-";
         head += LangCoder::intToCode2( activeDict->getLangFrom() ).toAscii().data();
         head += "\" lang=\"";

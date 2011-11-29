@@ -14,7 +14,8 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
                   Config::Forvo const & forvo,
                   Config::MediaWikis const & mediawikis,
                   Config::WebSites const & webSites,
-                  Config::Programs const & programs ): QWidget( parent ),
+                  Config::Programs const & programs,
+                  Config::WebTtss const &webttss): QWidget( parent ),
   itemDelegate( new QItemDelegate( this ) ),
   itemEditorFactory( new QItemEditorFactory() ),
   mediawikisModel( this, mediawikis ),
@@ -22,7 +23,8 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   programsModel( this, programs ),
   pathsModel( this, paths ),
   soundDirsModel( this, soundDirs ),
-  hunspellDictsModel( this, hunspell )
+  hunspellDictsModel( this, hunspell ),
+  webTsssModel(this,webttss)
 {
   ui.setupUi( this );
 
@@ -46,6 +48,13 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.webSites->resizeColumnToContents( 0 );
   ui.webSites->resizeColumnToContents( 1 );
   ui.webSites->resizeColumnToContents( 2 );
+
+  ui.webTtsView->setTabKeyNavigation( true );
+  ui.webTtsView->setModel( &webTsssModel );
+  ui.webTtsView->resizeColumnToContents( 0 );
+  ui.webTtsView->resizeColumnToContents( 1 );
+  ui.webTtsView->resizeColumnToContents( 2 );
+  ui.webTtsView->resizeColumnToContents( 4 );
 
   ui.programs->setTabKeyNavigation( true );
   ui.programs->setModel( &programsModel );
@@ -608,6 +617,158 @@ bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
   return false;
 }
 
+////////// WebTtsssModel
+
+WebTSSsModel::WebTSSsModel( QWidget * parent,
+                              Config::WebTtss const & webTtss_ ):
+  QAbstractItemModel( parent ), webTtss( webTtss_ )
+{
+}
+void WebTSSsModel::removeTss(int index )
+{
+  beginRemoveRows( QModelIndex(), index, index );
+  webTtss.erase( webTtss.begin() + index );
+  endRemoveRows();
+}
+
+void WebTSSsModel::addNewTss()
+{
+  Config::WebTts w;
+
+  w.enabled = false;
+  w.url = "http://";
+
+  beginInsertRows( QModelIndex(), webTtss.size(), webTtss.size() );
+  webTtss.push_back( w );
+  endInsertRows();
+}
+
+QModelIndex WebTSSsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
+{
+  return createIndex( row, column, 0 );
+}
+
+QModelIndex WebTSSsModel::parent( QModelIndex const & /*parent*/ ) const
+{
+  return QModelIndex();
+}
+
+Qt::ItemFlags WebTSSsModel::flags( QModelIndex const & index ) const
+{
+  Qt::ItemFlags result = QAbstractItemModel::flags( index );
+
+  if ( index.isValid() )
+  {
+    if ( !index.column() )
+      result |= Qt::ItemIsUserCheckable;
+    else
+      result |= Qt::ItemIsEditable;
+  }
+
+  return result;
+}
+
+int WebTSSsModel::rowCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return webTtss.size();
+}
+
+int WebTSSsModel::columnCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return 4;
+}
+
+QVariant WebTSSsModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
+{
+  if ( role == Qt::DisplayRole )
+    switch( section )
+    {
+      case 0:
+        return tr( "Enabled" );
+      case 1:
+        return tr( "Name" );
+      case 2:
+        return tr( "URL" );
+      case 3:
+        return tr("Languages");
+      default:
+        return QVariant();
+    }
+
+  return QVariant();
+}
+
+QVariant WebTSSsModel::data( QModelIndex const & index, int role ) const
+{
+  if ( (unsigned)index.row() >= webTtss.size() )
+    return QVariant();
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+  {
+    switch( index.column() )
+    {
+      case 1:
+        return webTtss[ index.row() ].name;
+      case 2:
+        return webTtss[ index.row() ].url;
+      case 3:
+        return webTtss[ index.row() ].langlist;
+      default:
+        return QVariant();
+    }
+  }
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+    return webTtss[ index.row() ].enabled;
+
+  return QVariant();
+}
+
+bool WebTSSsModel::setData( QModelIndex const & index, const QVariant & value,
+                               int role )
+{
+  if ( (unsigned)index.row() >= webTtss.size() )
+    return false;
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+  {
+    //DPRINTF( "type = %d\n", (int)value.type() );
+    //DPRINTF( "value = %d\n", (int)value.toInt() );
+
+    // XXX it seems to be always passing Int( 2 ) as a value, so we just toggle
+    webTtss[ index.row() ].enabled = !webTtss[ index.row() ].enabled;
+
+    dataChanged( index, index );
+    return true;
+  }
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+    switch( index.column() )
+    {
+      case 1:
+        webTtss[ index.row() ].name =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 2:
+        webTtss[ index.row() ].url =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 3:
+          webTtss[ index.row() ].langlist =  value.toString();
+          dataChanged( index, index );
+          return true;
+      default:
+        return false;
+    }
+
+  return false;
+}
 
 ////////// ProgramsModel
 
@@ -1139,3 +1300,27 @@ void Sources::on_rescan_clicked()
   emit rescan();
 }
 
+
+void Sources::on_addWTSS_clicked()
+{
+    webTsssModel.addNewTss();
+
+    QModelIndex result =
+      webTsssModel.index( webTsssModel.rowCount( QModelIndex() ) - 1,
+                           1, QModelIndex() );
+
+    ui.webTtsView->scrollTo( result );
+    ui.webTtsView->edit( result );
+}
+
+void Sources::on_removeWTss_clicked()
+{
+    QModelIndex current = ui.webTtsView->currentIndex();
+
+    if ( current.isValid() &&
+         QMessageBox::question( this, tr( "Confirm removal" ),
+                                tr( "Remove web ttss <b>%1</b> from the list?" ).arg( webTsssModel.getCurrentWebTtss()[ current.row() ].name ),
+                                QMessageBox::Ok,
+                                QMessageBox::Cancel ) == QMessageBox::Ok )
+      webTsssModel.removeTss(current.row() );
+}

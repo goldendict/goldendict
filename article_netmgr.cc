@@ -64,7 +64,6 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
-
     QString contentType;
 
     sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );
@@ -207,7 +206,6 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 #endif      
     }
   }
-
   return sptr< Dictionary::DataRequest >();
 }
 
