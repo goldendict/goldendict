@@ -22,6 +22,7 @@ namespace WebTTS
         }
         else
         {
+            flag = QString("<img src=\"qrcx://localhost/icons/internet.png\" class=\"tssflag\">");
             lang.append("other");
         }
         QRegExp regex = QRegExp( QString(",? ?%1 ?,?").arg(lang), Qt::CaseInsensitive );
@@ -55,7 +56,7 @@ namespace WebTTS
                         + Html::escape(i->name.toUtf8().data())
                         +"</label><a href=\""
                         +url.data()
-                        +"&webtts\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\" class=\"tssplay\"></a>";
+                        +"&webtts\"><img src=\"qrcx://localhost/icons/tssspeacker.png\" alt=\"Play\" class=\"tssplay\"></a>";
             }
 
         }
@@ -71,7 +72,7 @@ namespace WebTTS
                         + Html::escape(i->name.toUtf8().data())
                         +"</label><a href=\""
                         +url.data()
-                        +"&webtts\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\" align=\"top\" height=\"22\"></a>";
+                        +"&webtts\"><img src=\"qrcx://localhost/icons/tssspeacker.png\" alt=\"Play\"  class=\"tssplay\"></a>";
             }
         }
         result +="</span>";

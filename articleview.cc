@@ -606,6 +606,11 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
     msg = tr( "Resource" );
   }
   else
+      if(url.hasQueryItem("webtts"))
+      {
+           msg = tr( "Text To Speech" );
+      }
+  else
   if ( url.scheme() == "gdau" || Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     msg = tr( "Audio" );
@@ -1150,12 +1155,14 @@ void ArticleView::resourceDownloadFinished()
           // Audio data
 
 #ifdef Q_OS_WIN32
-          // If we use Windows PlaySound, use that, not Phonon.
+
+          // If we use Windows PlaySound, use that, not Phonon.            
           if ( !cfg.preferences.useExternalPlayer &&
                cfg.preferences.useWindowsPlaySound )
           {
             // Stop any currently playing sound to make sure the previous data
             // isn't used anymore
+
             if ( winWavData.size() )
             {
               PlaySoundA( 0, 0, 0 );
@@ -1164,10 +1171,12 @@ void ArticleView::resourceDownloadFinished()
 
             if ( data.size() < 4 || memcmp( data.data(), "RIFF", 4 ) != 0 )
             {
+
               QMessageBox::information( this, tr( "Playing a non-WAV file" ),
                 tr( "To enable playback of files different than WAV, please go "
                     "to Edit|Preferences, choose the Audio tab and select "
                     "\"Play via DirectShow\" there." ) );
+
             }
             else
             {
@@ -1175,13 +1184,36 @@ void ArticleView::resourceDownloadFinished()
               PlaySoundA( &winWavData.front(), 0,
                           SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
             }
+
           }
           else
 #endif
           if ( !cfg.preferences.useExternalPlayer )
           {
             // Play via Phonon
-
+#ifdef Q_OS_WIN32
+             //first, check for wav file and use playsound
+             if ( data.size() > 4 && memcmp( data.data(), "RIFF", 4 ) == 0 )
+             {
+                 AudioPlayer::instance().object.stop();
+                 AudioPlayer::instance().object.clear();
+                 if ( winWavData.size() )
+                 {
+                   PlaySoundA( 0, 0, 0 );
+                   winWavData.clear();
+                 }
+                 winWavData = data;
+                 PlaySoundA( &winWavData.front(), 0,
+                             SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+             }
+             else
+             {
+                 if ( winWavData.size() )
+                 {
+                   PlaySoundA( 0, 0, 0 );
+                   winWavData.clear();
+                 }
+#endif
             QBuffer * buf = new QBuffer;
 
             buf->buffer().append( &data.front(), data.size() );
@@ -1193,6 +1225,9 @@ void ArticleView::resourceDownloadFinished()
             AudioPlayer::instance().object.clear();
             AudioPlayer::instance().object.enqueue( source );
             AudioPlayer::instance().object.play();
+#ifdef Q_OS_WIN32
+             }
+#endif
           }
           else
           {
