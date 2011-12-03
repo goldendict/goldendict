@@ -4,7 +4,7 @@
 namespace Dictionary {
 
 WebMultimediaDownload::WebMultimediaDownload( QUrl const & url,
-                                              QNetworkAccessManager & mgr )
+                                              QNetworkAccessManager & mgr ):isRedirect(false)
 {
   connect( &mgr, SIGNAL(finished(QNetworkReply*)),
            this, SLOT(replyFinished(QNetworkReply*)), Qt::QueuedConnection );
@@ -21,12 +21,34 @@ void WebMultimediaDownload::cancel()
 
 void WebMultimediaDownload::replyFinished( QNetworkReply * r )
 {
-  if ( r != reply.get() )
+   QUrl redirectUrl = r->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+
+   if(!redirectUrl.isEmpty())
+   {
+       //CHECK THAT URL IS VALID
+       if(redirectUrl.scheme().isEmpty())
+       {
+           redirectUrl.setScheme(r->url().scheme());
+           if(redirectUrl.host().isEmpty())
+           {
+            redirectUrl.setHost(r->url().host());
+           }
+       }
+
+       //reply.reset();
+      r->manager()->get(QNetworkRequest (redirectUrl));
+      if (r != reply.get()  )
+        r->deleteLater();
+      // todel->deleteLater();
+      isRedirect =true;
+       return;
+   }
+  if (!isRedirect && r != reply.get()  )
     return; // Not our reply
 
-  if ( reply->error() == QNetworkReply::NoError )
+  if ( r->error() == QNetworkReply::NoError )
   {
-    QByteArray all = reply->readAll();
+    QByteArray all = r->readAll();
 
     Mutex::Lock _( dataMutex );
 
@@ -37,11 +59,17 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
     hasAnyData = true;
   }
   else
-    setErrorString( reply->errorString() );
+    setErrorString( r->errorString() );
 
   finish();
-
+  if(isRedirect)
+  {
+    isRedirect =false;
+    r->deleteLater();
+  }
+  else
   reply.reset();
+
 }
 
 bool WebMultimediaDownload::isAudioUrl( QUrl const & url )
@@ -50,9 +78,8 @@ bool WebMultimediaDownload::isAudioUrl( QUrl const & url )
 
   return (url.scheme() == "http"  && (
               Filetype::isNameOfSound( url.path().toUtf8().data() ) || url.host() == "apifree.forvo.com" ))
-          || (url.scheme() == "file" && Filetype::isNameOfSound(url.path().toUtf8().data() )
-            ||  url.hasQueryItem("webtts")
-              );
+          || (url.scheme() == "file" && Filetype::isNameOfSound(url.path().toUtf8().data() ))
+            ||  url.hasQueryItem("webtts");
 }
 
 }

@@ -13,6 +13,7 @@ class WebMultimediaDownload: public DataRequest
   Q_OBJECT
 
   sptr< QNetworkReply > reply;
+  bool isRedirect;
 
 public:
 
