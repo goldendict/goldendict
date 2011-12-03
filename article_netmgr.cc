@@ -50,6 +50,10 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 {
   if ( op == GetOperation )
   {
+      if(req.url().hasQueryItem("gdpost"))
+      {
+          return QNetworkAccessManager::post(QNetworkRequest(req), req.url().encodedQuery() );
+      }
     if ( req.url().scheme() == "qrcx" )
     {
       // We have to override the local load policy for the qrc scheme, hence

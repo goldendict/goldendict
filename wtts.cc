@@ -41,41 +41,23 @@ namespace WebTTS
         //QString lang = LangCoder::intToCode2(langcode);
         std::string result("<span class=\"webtssview\">");
 
-        if(flag.size())
-        {
-            result += flag.toUtf8().data();//QString("<img src=\"qrcx://localhost/flags/%1.png\" class=\"tssflag\" border=\"0\" alt=\"flag\">").arg(Language::countryCodeForId(langCode)).toUtf8().data();
+       result += flag.toUtf8().data();
 
-            for( Config::WebTtss::const_iterator i = wts.begin(); i != wts.end(); ++i )
-            {
-                QByteArray url = QUrl(i->url).toEncoded();
+       for( Config::WebTtss::const_iterator i = wts.begin(); i != wts.end(); ++i )
+       {
+           QByteArray url = QUrl(i->url).toEncoded();
 
-                url.replace( "%25GDWORD%25", word.toUtf8().toPercentEncoding() )
-                        .replace("%25GDLANG%25",lang.toUtf8().toPercentEncoding());
+           url.replace( "%25GDWORD%25", word.toUtf8().toPercentEncoding() )
+                   .replace("%25GDLANG%25",lang.toUtf8().toPercentEncoding());
 
-                result += std::string("<label>")
-                        + Html::escape(i->name.toUtf8().data())
-                        +"</label><a href=\""
-                        +url.data()
-                        +"&webtts\"><img src=\"qrcx://localhost/icons/tssspeacker.png\" alt=\"Play\" class=\"tssplay\"></a>";
-            }
+           result += std::string("<label>")
+                   + Html::escape(i->name.toUtf8().data())
+                   +"</label><a href=\""
+                   +url.data()
+                   +"&webtts\"><img src=\"qrcx://localhost/icons/tssspeacker.png\" alt=\"Play\" class=\"tssplay\"></a>";
+       }
 
-        }
-        else
-        {
-            for( Config::WebTtss::const_iterator i = wts.begin(); i != wts.end(); ++i )
-            {
-                QByteArray url = QUrl(i->url).toEncoded();
-
-                url.replace( "%25GDWORD%25", word.toUtf8().toPercentEncoding() );
-
-                result +=  std::string("<label>")
-                        + Html::escape(i->name.toUtf8().data())
-                        +"</label><a href=\""
-                        +url.data()
-                        +"&webtts\"><img src=\"qrcx://localhost/icons/tssspeacker.png\" alt=\"Play\"  class=\"tssplay\"></a>";
-            }
-        }
-        result +="</span>";
+       result +="</span>";
         return result;
 
     }

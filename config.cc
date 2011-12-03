@@ -16,7 +16,6 @@
 #ifdef Q_OS_WIN32
 #include "shlobj.h"
 #endif
-
 #include "atomic_rename.hh"
 
 namespace Config {
@@ -173,7 +172,16 @@ WebSites makeDefaultWebSites()
 WebTtss makeDefaultWebTtss(bool enable)
 {
     WebTtss wt;
-    wt.push_back(WebTts("Bing","http://api.microsofttranslator.com/v2/Http.svc/Speak?appId=41C3A878AFE34CB3F02B0E467C40F26E1580305F&text=%GDWORD%&language=%GDLANG%","ca,da,de,en,es,fi,fr,it,ja,ko,nb,nl,no,pl,pt,ru,sv,zh",enable));
+#ifdef PRIVATE_TSS
+    wt.push_back(WebTts("Julie","http://www.neospeech.com/GetAudio1.ashx?speaker=103&content=%GDWORD%","en,fr",enable));
+    wt.push_back(WebTts("Kate","http://www.neospeech.com/GetAudio1.ashx?speaker=100&content=%GDWORD%","en,fr",enable));
+    wt.push_back(WebTts("Paul","http://www.neospeech.com/GetAudio1.ashx?speaker=101&content=%GDWORD%","en,fr",enable));
+    wt.push_back(WebTts("Bridget","http://www.neospeech.com/GetAudio1.ashx?speaker=500&content=%GDWORD%","en,fr",enable));
+    wt.push_back(WebTts("Misaki","http://www.neospeech.com/GetAudio1.ashx?speaker=302&content=%GDWORD%","ja",enable));
+    wt.push_back(WebTts("Show","http://www.neospeech.com/GetAudio1.ashx?speaker=301&content=%GDWORD%","ja",enable));
+    wt.push_back(WebTts("Google","http://translate.google.com/translate_tts?tl=%GDLANG%&q=%GDWORD%","",enable));
+#endif
+    wt.push_back(WebTts("Bing","http://api.microsofttranslator.com/v2/Http.svc/Speak?appId=41C3A878AFE34CB3F02B0E467C40F26E1580305F&text=%GDWORD%&language=%GDLANG%","ca,da,de,en,es,fi,fr,it,ja,ko,nb,nl,no,pl,pt,ru,sv",enable));
     return wt;
 }
 

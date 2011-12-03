@@ -52,7 +52,7 @@ win32 {
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
 
-    Release:DEFINES += NO_CONSOLE
+    Release:DEFINES += NO_CONSOLE # PRIVATE_TSS
 }
 
 unix:!mac {
