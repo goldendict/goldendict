@@ -1437,6 +1437,7 @@ QString getFileInHomeDir(QString const &filepath)
     if(f.open( QFile::ReadOnly))
     {
         result = QString::fromUtf8(f.readAll());
+        f.close();
     }
     return result;
 }

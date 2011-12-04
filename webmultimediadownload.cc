@@ -4,7 +4,7 @@
 namespace Dictionary {
 
 WebMultimediaDownload::WebMultimediaDownload( QUrl const & url,
-                                              QNetworkAccessManager & mgr ):isRedirect(false)
+                                              QNetworkAccessManager & mgr )
 {
   connect( &mgr, SIGNAL(finished(QNetworkReply*)),
            this, SLOT(replyFinished(QNetworkReply*)), Qt::QueuedConnection );
@@ -14,62 +14,53 @@ WebMultimediaDownload::WebMultimediaDownload( QUrl const & url,
 
 void WebMultimediaDownload::cancel()
 {
-  reply.reset();
-
+  //reply.reset();
+  if(reply)reply->deleteLater();
   finish();
 }
 
 void WebMultimediaDownload::replyFinished( QNetworkReply * r )
 {
-   QUrl redirectUrl = r->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+    if ( r->error() == QNetworkReply::NoError )
+    {
 
-   if(!redirectUrl.isEmpty())
-   {
-       //CHECK THAT URL IS VALID
-       if(redirectUrl.scheme().isEmpty())
-       {
-           redirectUrl.setScheme(r->url().scheme());
-           if(redirectUrl.host().isEmpty())
-           {
-            redirectUrl.setHost(r->url().host());
-           }
-       }
+        QUrl redirectUrl = r->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+        if(!redirectUrl.isEmpty())
+        {
+            if(redirectUrl.scheme().isEmpty())
+            {
+                if(redirectUrl.host().isEmpty())
+                {
+                    if(redirectUrl.toString().indexOf("/")!=0)
+                    {
+                        redirectUrl.setPath(r->url().path().left(r->url().path().lastIndexOf("/"))+redirectUrl.path());
+                    }
+                    redirectUrl.setHost(r->url().host());
+                }
+                redirectUrl.setScheme(r->url().scheme());
+            }
+            QString nurl(redirectUrl.toString());
+           //QNetworkAccessManager *mrg = reply->manager();
+            //reply.reset();
+            reply=r->manager()->get(QNetworkRequest(redirectUrl));
+            //isRedirect = true;
+            r->deleteLater();
+            return;
+        }
+      QByteArray all = r->readAll();
 
-       //reply.reset();
-      r->manager()->get(QNetworkRequest (redirectUrl));
-      if (r != reply.get()  )
-        r->deleteLater();
-      // todel->deleteLater();
-      isRedirect =true;
-       return;
-   }
-  if (!isRedirect && r != reply.get()  )
-    return; // Not our reply
+      Mutex::Lock _( dataMutex );
 
-  if ( r->error() == QNetworkReply::NoError )
-  {
-    QByteArray all = r->readAll();
+      data.resize( all.size() );
 
-    Mutex::Lock _( dataMutex );
+      memcpy( data.data(), all.data(), all.size() );
 
-    data.resize( all.size() );
-
-    memcpy( data.data(), all.data(), all.size() );
-
-    hasAnyData = true;
-  }
-  else
-    setErrorString( r->errorString() );
-
-  finish();
-  if(isRedirect)
-  {
-    isRedirect =false;
+      hasAnyData = true;
+    }
+    else
+      setErrorString( r->errorString() );
     r->deleteLater();
-  }
-  else
-  reply.reset();
-
+    finish();
 }
 
 bool WebMultimediaDownload::isAudioUrl( QUrl const & url )
