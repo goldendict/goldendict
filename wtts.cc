@@ -45,8 +45,10 @@ namespace WebTTS
 
        for( Config::WebTtss::const_iterator i = wts.begin(); i != wts.end(); ++i )
        {
-           QByteArray url = QUrl(i->url).toEncoded();
-           QString ttsWord = word.size() > i->maxlength? word.left( i->maxlength):word;
+           QUrl tmpUrl(i->url);
+           tmpUrl.addQueryItem("webtts","");
+           QByteArray url = tmpUrl.toEncoded();
+           QString ttsWord = word.size() > (int)i->maxlength? word.left( i->maxlength):word;
            url.replace( "%25GDWORD%25", ttsWord.toUtf8().toPercentEncoding() )
                    .replace("%25GDLANG%25",lang.toUtf8().toPercentEncoding());
 
@@ -54,7 +56,7 @@ namespace WebTTS
                    + Html::escape(i->name.toUtf8().data())
                    +"</label><a href=\""
                    +url.data()
-                   +"&webtts\"><img src=\"qrcx://localhost/icons/tssspeacker.png\" alt=\"Play\" class=\"tssplay\"></a>";
+                   +"\"><img src=\"qrcx://localhost/icons/tssspeacker.png\" alt=\"Play\" class=\"tssplay\"></a>";
        }
 
        result +="</span>";
@@ -64,8 +66,10 @@ namespace WebTTS
     QByteArray WebTssMaker::getTTsEncodedUrl(unsigned ttsIndex,QString word)
     {
         if(ttsIndex>=wts.size()) return QByteArray();
-        QByteArray url = QUrl(wts[ttsIndex].url).toEncoded();
-        QString ttsWord = word.size() > wts[ttsIndex].maxlength? word.left( wts[ttsIndex].maxlength):word;
+        QUrl tmpUrl(wts[ttsIndex].url);
+        tmpUrl.addQueryItem("webtts","");
+        QByteArray url = tmpUrl.toEncoded();
+        QString ttsWord = word.size() > (int)wts[ttsIndex].maxlength? word.left( wts[ttsIndex].maxlength):word;
         url.replace( "%25GDWORD%25", ttsWord.toUtf8().toPercentEncoding() )
                 .replace("%25GDLANG%25",lang.toUtf8().toPercentEncoding());
         return url.append("&webtts");
@@ -78,8 +82,10 @@ namespace WebTTS
         {
             if(wts[ttsIndex].name==ttsName)
             {
-                QByteArray url = QUrl(wts[ttsIndex].url).toEncoded();
-                QString ttsWord = word.size() >wts[ttsIndex].maxlength? word.left(wts[ttsIndex].maxlength):word;
+                QUrl tmpUrl(wts[ttsIndex].url);
+                tmpUrl.addQueryItem("webtts","");
+                QByteArray url = tmpUrl.toEncoded();
+                QString ttsWord = word.size() >(int)wts[ttsIndex].maxlength? word.left(wts[ttsIndex].maxlength):word;
                 url.replace( "%25GDWORD%25", ttsWord.toUtf8().toPercentEncoding() )
                         .replace("%25GDLANG%25",lang.toUtf8().toPercentEncoding());
                 return url.append("&webtts");

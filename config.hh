@@ -489,7 +489,7 @@ QString getPortableVersionMorphoDir() throw();
 
 /// return add-on js files content in AppDir/include
 std::string getCustomJs() throw(exError);
-
+QString getFileInHomeDir(QString const &);
 }
 
 #endif

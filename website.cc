@@ -6,7 +6,7 @@
 #include "utf8.hh"
 #include <QUrl>
 #include <QTextCodec>
-
+#include "langcoder.hh"
 namespace WebSite {
 
 using namespace Dictionary;
@@ -21,11 +21,30 @@ class WebSiteDictionary: public Dictionary::Class
 public:
 
   WebSiteDictionary( string const & id, string const & name_,
-                     QString const & urlTemplate_ ):
+                     QString const & urlTemplate_,Config::WebTtss const &webTTss ):
     Dictionary::Class( id, vector< string >() ),
-    name( name_ ),
-    urlTemplate( QUrl( urlTemplate_ ).toEncoded() )
+    name( name_ )//,
+    //urlTemplate( QUrl( urlTemplate_ ).toEncoded() )
   {
+      // urlTemplate_.mid(urlTemplate_.indexOf("gdfilter"))
+      QUrl tmpUrl(urlTemplate_);
+      if(tmpUrl.hasQueryItem("gdfilter"))
+      {
+            QString gdUrl=urlTemplate_;
+            //int gdFilterIndex = gdUrl.indexOf("&gdfilter=");
+            QRegExp regEx("([&?])gdfilter=([^&]+)&?");
+            int pos = regEx.indexIn(gdUrl);
+            if(pos!=-1)
+            {
+                QStringList list = regEx.capturedTexts();
+                gdUrl.replace(regEx,"\\1");
+                tmpUrl.setUrl(gdUrl);
+                tmpUrl.addQueryItem("gdfilter",regEx.capturedTexts().at(2));
+            }
+
+      }
+      urlTemplate= tmpUrl.toEncoded();
+      setWebTssMaker(webTTss);
   }
 
   virtual string getName() throw()
@@ -42,6 +61,22 @@ public:
 
   virtual QIcon getIcon() throw()
   { return QIcon(":/icons/internet.png"); }
+  virtual quint32 getLangFrom() const
+  {
+      QUrl url;
+      url.setEncodedUrl(urlTemplate);
+      if(url.hasQueryItem("gdlf"))
+          return LangCoder::code2toInt(url.queryItemValue("gdlf").left(2).toAscii().data());
+      return 0;
+  }
+  virtual quint32 getLangTo() const
+  {
+      QUrl url;
+      url.setEncodedUrl(urlTemplate);
+      if(url.hasQueryItem("gdlt"))
+          return LangCoder::code2toInt(url.queryItemValue("gdlt").left(2).toAscii().data());
+      return 0;
+  }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long ) throw( std::exception );
@@ -118,7 +153,7 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
 
 }
 
-vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & ws )
+vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & ws,Config::WebTtss const &webTtss )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
@@ -128,7 +163,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & w
     if ( ws[ x ].enabled )
       result.push_back( new WebSiteDictionary( ws[ x ].id.toUtf8().data(),
                                                ws[ x ].name.toUtf8().data(),
-                                               ws[ x ].url ) );
+                                               ws[ x ].url,
+                                               webTtss) );
   }
 
   return result;

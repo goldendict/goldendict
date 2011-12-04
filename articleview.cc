@@ -18,6 +18,7 @@
 #include "dprintf.hh"
 #include <QDebug>
 #include "language.hh"
+#include <QWebElement>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -266,7 +267,34 @@ void ArticleView::loadFinished( bool )
       // Show it
       ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
         arg( (*i)->frameName() ) );
+      //add css
+      QWebElement body = (*i)->findFirstElement("body");
+      if(!body.isNull())
+      {
+          QUrl requredUrl = (*i)->requestedUrl();
+          if(requredUrl.hasQueryItem("gdfilter"))
+          {
+              QWebElementCollection toRemoves = body.findAll(requredUrl.queryItemValue("gdfilter"));
+              if(toRemoves.count()>0)
+              {
+                  for(int idx =0; idx < toRemoves.count();idx++)
+                  {
+                      toRemoves[idx].removeFromDocument();
+                  }
+              }
+          }
+          if(requredUrl.hasQueryItem("gdcss"))
+          {
+              QString css  = Config::getFileInHomeDir(QString("website/%1.css").arg(requredUrl.queryItemValue("gdcss")));
+              if(!css.isEmpty())
+              {
+                     body.appendInside(QString("<style type=\"text/css\">%1</style>").arg(css));
+              }
 
+             // body.prependInside(QString::fromUtf8( cssUrl.toEncoded()));
+          }
+
+      }
       (*i)->evaluateJavaScript( "var gdLastUrlText;" );
       (*i)->evaluateJavaScript( "document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
       (*i)->evaluateJavaScript( "document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );

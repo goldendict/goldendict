@@ -1430,4 +1430,14 @@ std::string getCustomJs() throw(exError)
      }
      return js.data();
 }
+QString getFileInHomeDir(QString const &filepath)
+{
+    QString result;
+    QFile f(getHomeDir().filePath(filepath));
+    if(f.open( QFile::ReadOnly))
+    {
+        result = QString::fromUtf8(f.readAll());
+    }
+    return result;
+}
 }
