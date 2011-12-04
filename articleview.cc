@@ -17,6 +17,7 @@
 #include "programs.hh"
 #include "dprintf.hh"
 #include <QDebug>
+#include "language.hh"
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -1029,9 +1030,81 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
     }
   }
-
+    map< QAction *, unsigned > ttsFromActions;
+    map< QAction *, unsigned > ttsToActions;
+    sptr< Dictionary::Class > currentDict;
   if ( selectedText.size() )
+  {
+    std::string ttsDictID = getActiveArticleId().toUtf8().data();
+    if(ttsDictID.size() && selectedText.size()<= 1000) //tts
+    {
+        for( unsigned x = 0; x< allDictionaries.size(); x++ )
+        {
+            if(allDictionaries[ x ]->getId() ==ttsDictID)
+            {
+                currentDict  = allDictionaries[ x ];
+                Config::WebTtss wts = currentDict->getWebTTSs();
+                Config::WebTtss wtsToLang = currentDict->getToLangWebTTSs();
+                if(wts.size() || wtsToLang.size())
+                {
+                    QIcon ttsico(":/icons/tssspeacker.png");
+                    QMenu *ttsMenu =  menu.addMenu(ttsico,"Text To Speech");
+                    if(wts.size())
+                    {
+                        QMenu *ttsFrom = 0;
+                        QString langFrom = Language::countryCodeForId(currentDict->getLangFrom());
+                        if(langFrom.isEmpty())
+                        {
+                            ttsFrom = ttsMenu->addMenu(QIcon(QString(":/icons/internet.png")),
+                                                       QString("Other"));
+                        }
+                        else
+                        {
+                            ttsFrom = ttsMenu->addMenu(QIcon(QString(":/flags/%1.png").arg(langFrom)),
+                                     Language::englishNameForId(currentDict->getLangFrom()));
+                        }
+                        for(unsigned idx=0;idx<wts.size();idx++)
+                        {
+                            QAction *action = new QAction(ttsico,
+                                                          QString("%1(Max:%2)").arg(wts[idx].name).arg(wts[idx].maxlength),
+                                    ttsMenu );
+                             action->setIconVisibleInMenu( true );
+                            ttsFrom->addAction(action);
+                            ttsFromActions[action] = idx+1;
+                        }
+                    }
+                    if(wtsToLang.size())
+                    {
+                        QMenu *ttsTo = 0;
+                        QString langTo = Language::countryCodeForId(currentDict->getLangTo());
+                        if(langTo.isEmpty())
+                        {
+                            ttsTo = ttsMenu->addMenu(QIcon(QString(":/icons/internet.png")),
+                                                       QString("Other"));
+                        }
+                        else
+                        {
+                            ttsTo = ttsMenu->addMenu(QIcon(QString(":/flags/%1.png").arg(langTo)),
+                                     Language::englishNameForId(currentDict->getLangTo()));
+                        }
+                        for(unsigned idx=0;idx<wtsToLang.size();idx++)
+                        {
+                            QAction *action = new QAction(ttsico,
+                                                          QString("%1(Max:%2)").arg(wtsToLang[idx].name).arg(wtsToLang[idx].maxlength),
+                                    ttsMenu );
+                             action->setIconVisibleInMenu( true );
+                            ttsTo->addAction(action);
+                            ttsToActions[action] = idx+1;
+                        }
+                    }
+
+                }
+            }
+
+        }
+    }
     menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
+  }
 
   map< QAction *, QString > tableOfContents;
 
@@ -1083,6 +1156,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       break;
   }
 
+
   if ( !menu.isEmpty() )
   {
     QAction * result = menu.exec( ui.definition->mapToGlobal( pos ) );
@@ -1122,6 +1196,24 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
       if ( id.size() )
         setCurrentArticle( "gdfrom-" + id, true );
+
+      if(currentDict.get())
+      {
+          unsigned ttsIndex = ttsFromActions[result];
+          if(ttsIndex)
+          {
+              QUrl ttsUrl;
+              ttsUrl.setEncodedUrl(currentDict->getTTsEncodedUrl(ttsIndex-1,selectedText));
+              openLink( ttsUrl, ui.definition->url(), getCurrentArticle(), contexts );
+          }
+          ttsIndex = ttsToActions[result];
+          if(ttsIndex)
+          {
+              QUrl ttsUrl;
+              ttsUrl.setEncodedUrl(currentDict->getToLangTTsEncodedUrl(ttsIndex-1,selectedText));
+              openLink( ttsUrl, ui.definition->url(), getCurrentArticle(), contexts );
+          }
+      }
     }
   }
 #if 0

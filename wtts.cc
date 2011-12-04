@@ -26,7 +26,7 @@ namespace WebTTS
             lang.append("other");
         }
         QRegExp regex = QRegExp( QString(",? ?%1 ?,?").arg(lang), Qt::CaseInsensitive );
-        for(int i =0; i < tss.size(); i++ )
+        for(unsigned i =0; i < tss.size(); i++ )
         {
             if(tss[i].enabled && tss[i].url.size() && (!tss[i].langlist.size() || tss[i].langlist.contains(regex)))
             {
@@ -46,8 +46,8 @@ namespace WebTTS
        for( Config::WebTtss::const_iterator i = wts.begin(); i != wts.end(); ++i )
        {
            QByteArray url = QUrl(i->url).toEncoded();
-
-           url.replace( "%25GDWORD%25", word.toUtf8().toPercentEncoding() )
+           QString ttsWord = word.size() > i->maxlength? word.left( i->maxlength):word;
+           url.replace( "%25GDWORD%25", ttsWord.toUtf8().toPercentEncoding() )
                    .replace("%25GDLANG%25",lang.toUtf8().toPercentEncoding());
 
            result += std::string("<label>")
@@ -60,6 +60,32 @@ namespace WebTTS
        result +="</span>";
         return result;
 
+    }
+    QByteArray WebTssMaker::getTTsEncodedUrl(unsigned ttsIndex,QString word)
+    {
+        if(ttsIndex>=wts.size()) return QByteArray();
+        QByteArray url = QUrl(wts[ttsIndex].url).toEncoded();
+        QString ttsWord = word.size() > wts[ttsIndex].maxlength? word.left( wts[ttsIndex].maxlength):word;
+        url.replace( "%25GDWORD%25", ttsWord.toUtf8().toPercentEncoding() )
+                .replace("%25GDLANG%25",lang.toUtf8().toPercentEncoding());
+        return url.append("&webtts");
+    }
+
+    QByteArray WebTssMaker::getTTsEncodedUrl(QString ttsName,QString word)
+    {
+        if(ttsName.isEmpty()) return QByteArray();
+        for(unsigned ttsIndex = 0; ttsIndex < wts.size();ttsIndex++)
+        {
+            if(wts[ttsIndex].name==ttsName)
+            {
+                QByteArray url = QUrl(wts[ttsIndex].url).toEncoded();
+                QString ttsWord = word.size() >wts[ttsIndex].maxlength? word.left(wts[ttsIndex].maxlength):word;
+                url.replace( "%25GDWORD%25", ttsWord.toUtf8().toPercentEncoding() )
+                        .replace("%25GDLANG%25",lang.toUtf8().toPercentEncoding());
+                return url.append("&webtts");
+            }
+        }
+        return QByteArray();
     }
 
 }

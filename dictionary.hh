@@ -271,7 +271,7 @@ class Class
   string id;
   vector< string > dictionaryFiles;
   WebTTS::WebTssMaker wtssMaker;
-
+  WebTTS::WebTssMaker wttsToLang;
 public:
 
   /// Creates a dictionary. The id should be made using
@@ -398,8 +398,22 @@ public:
   void setWebTssMaker(Config::WebTtss const &wst_)
   {
       wtssMaker = WebTTS::WebTssMaker(wst_,getLangFrom());
+      if(getLangFrom()!=getLangTo())
+      wttsToLang = WebTTS::WebTssMaker(wst_,getLangTo());
   }
+  Config::WebTtss getWebTTSs()
+  {return wtssMaker.getWebTTSs();}
+  QByteArray getTTsEncodedUrl(unsigned ttsIdx,QString word)
+  {return wtssMaker.getTTsEncodedUrl(ttsIdx,word);}
+  QByteArray getTTsEncodedUrl(QString ttsName,QString word)
+  {return wtssMaker.getTTsEncodedUrl(ttsName,word);}
 
+  Config::WebTtss getToLangWebTTSs()
+  {return wttsToLang.getWebTTSs();}
+  QByteArray getToLangTTsEncodedUrl(unsigned ttsIdx,QString word)
+  {return wttsToLang.getTTsEncodedUrl(ttsIdx,word);}
+  QByteArray getToLangTTsEncodedUrl(QString ttsName,QString word)
+  {return wttsToLang.getTTsEncodedUrl(ttsName,word);}
   virtual ~Class()
   {}
 };

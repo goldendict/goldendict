@@ -55,6 +55,7 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.webTtsView->resizeColumnToContents( 1 );
   ui.webTtsView->resizeColumnToContents( 2 );
   ui.webTtsView->resizeColumnToContents( 4 );
+  ui.webTtsView->resizeColumnToContents( 5 );
 
   ui.programs->setTabKeyNavigation( true );
   ui.programs->setModel( &programsModel );
@@ -681,7 +682,7 @@ int WebTSSsModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 4;
+    return 5;
 }
 
 QVariant WebTSSsModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
@@ -697,6 +698,8 @@ QVariant WebTSSsModel::headerData( int section, Qt::Orientation /*orientation*/,
         return tr( "URL" );
       case 3:
         return tr("Languages");
+       case 4:
+        return tr("Maxlength");
       default:
         return QVariant();
     }
@@ -719,6 +722,8 @@ QVariant WebTSSsModel::data( QModelIndex const & index, int role ) const
         return webTtss[ index.row() ].url;
       case 3:
         return webTtss[ index.row() ].langlist;
+       case 4:
+        return webTtss[index.row()].maxlength;
       default:
         return QVariant();
     }
@@ -763,6 +768,10 @@ bool WebTSSsModel::setData( QModelIndex const & index, const QVariant & value,
           webTtss[ index.row() ].langlist =  value.toString();
           dataChanged( index, index );
           return true;
+      case 4:
+        webTtss[ index.row() ].maxlength =  value.toUInt();
+        dataChanged( index, index );
+        return true;
       default:
         return false;
     }
@@ -1319,7 +1328,7 @@ void Sources::on_removeWTss_clicked()
 
     if ( current.isValid() &&
          QMessageBox::question( this, tr( "Confirm removal" ),
-                                tr( "Remove web ttss <b>%1</b> from the list?" ).arg( webTsssModel.getCurrentWebTtss()[ current.row() ].name ),
+                                tr( "Remove WebTTS <b>%1</b> from the list?" ).arg( webTsssModel.getCurrentWebTtss()[ current.row() ].name ),
                                 QMessageBox::Ok,
                                 QMessageBox::Cancel ) == QMessageBox::Ok )
       webTsssModel.removeTss(current.row() );

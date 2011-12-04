@@ -172,16 +172,7 @@ WebSites makeDefaultWebSites()
 WebTtss makeDefaultWebTtss(bool enable)
 {
     WebTtss wt;
-#ifdef PRIVATE_TSS
-    wt.push_back(WebTts("Julie","http://www.neospeech.com/GetAudio1.ashx?speaker=103&content=%GDWORD%","en,fr",enable));
-    wt.push_back(WebTts("Kate","http://www.neospeech.com/GetAudio1.ashx?speaker=100&content=%GDWORD%","en,fr",enable));
-    wt.push_back(WebTts("Paul","http://www.neospeech.com/GetAudio1.ashx?speaker=101&content=%GDWORD%","en,fr",enable));
-    wt.push_back(WebTts("Bridget","http://www.neospeech.com/GetAudio1.ashx?speaker=500&content=%GDWORD%","en,fr",enable));
-    wt.push_back(WebTts("Misaki","http://www.neospeech.com/GetAudio1.ashx?speaker=302&content=%GDWORD%","ja",enable));
-    wt.push_back(WebTts("Show","http://www.neospeech.com/GetAudio1.ashx?speaker=301&content=%GDWORD%","ja",enable));
-    wt.push_back(WebTts("Google","http://translate.google.com/translate_tts?tl=%GDLANG%&q=%GDWORD%","",enable));
-#endif
-    wt.push_back(WebTts("Bing","http://api.microsofttranslator.com/v2/Http.svc/Speak?appId=41C3A878AFE34CB3F02B0E467C40F26E1580305F&text=%GDWORD%&language=%GDLANG%","ca,da,de,en,es,fi,fr,it,ja,ko,nb,nl,no,pl,pt,ru,sv",enable));
+    wt.push_back(WebTts("Bing","http://api.microsofttranslator.com/v2/Http.svc/Speak?appId=41C3A878AFE34CB3F02B0E467C40F26E1580305F&text=%GDWORD%&language=%GDLANG%","ca,da,de,en,es,fi,fr,it,ja,ko,nb,nl,no,pl,pt,ru,sv",enable,500));
     return wt;
 }
 
@@ -590,7 +581,7 @@ Class load() throw( exError )
       w.url = ws.attribute( "url" );
       w.langlist = ws.attribute( "lang" );
       w.enabled = ( ws.attribute( "enabled" ) == "1" );
-
+      w.maxlength = ws.attribute("maxlength").toUInt();
       c.webTtss.push_back( w );
     }
   }
@@ -1038,6 +1029,10 @@ void save( Class const & c ) throw( exError )
       QDomAttr enabled = dd.createAttribute( "enabled" );
       enabled.setValue( i->enabled ? "1" : "0" );
       ws.setAttributeNode( enabled );
+
+      QDomAttr maxlength = dd.createAttribute( "maxlength" );
+      maxlength.setValue(QString("%1").arg(i->maxlength));
+      ws.setAttributeNode( maxlength );
     }
   }
 

@@ -226,12 +226,13 @@ typedef vector< WebSite > WebSites;
 struct WebTts{
     QString name, url, langlist;
     bool enabled;
+    unsigned maxlength;
     WebTts():enabled(false)
     {}
-    WebTts(QString const &name_,QString const &url_, QString const &langlist_,bool enabled_):
-        name(name_),url(url_),langlist(langlist_),enabled(enabled_){}
+    WebTts(QString const &name_,QString const &url_, QString const &langlist_,bool enabled_,unsigned maxlength_):
+        name(name_),url(url_),langlist(langlist_),enabled(enabled_),maxlength(maxlength_){}
     bool operator == ( WebTts const & other ) const
-    { return name == other.name && url == other.url && langlist == other.langlist &&
+    { return name == other.name && url == other.url && langlist == other.langlist && maxlength == other.maxlength &&
              enabled == other.enabled; }
 };
 //All web tss

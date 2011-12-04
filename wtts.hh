@@ -13,6 +13,10 @@ class WebTssMaker
     WebTssMaker();
     WebTssMaker(Config::WebTtss const &,qint32);
     std::string MakeTssView(QString);
+    Config::WebTtss getWebTTSs()
+    {return wts;}
+    QByteArray getTTsEncodedUrl(unsigned,QString);
+    QByteArray getTTsEncodedUrl(QString,QString);
 private:
     Config::WebTtss wts;
     QString lang;
