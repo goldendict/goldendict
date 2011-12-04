@@ -86,7 +86,7 @@ class DictdDictionary: public BtreeIndexing::BtreeDictionary
 public:
 
   DictdDictionary( string const & id, string const & indexFile,
-                   vector< string > const & dictionaryFiles );
+                   vector< string > const & dictionaryFiles,Config::WebTtss const & );
 
   ~DictdDictionary();
 
@@ -118,7 +118,8 @@ public:
 
 DictdDictionary::DictdDictionary( string const & id,
                                   string const & indexFile,
-                                  vector< string > const & dictionaryFiles ):
+                                  vector< string > const & dictionaryFiles,
+                                  Config::WebTtss const &wts):
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
   indexFile( dictionaryFiles[ 0 ], "rb" ),
@@ -136,6 +137,7 @@ DictdDictionary::DictdDictionary( string const & id,
   openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                         idxHeader.indexRootOffset ),
              idx, idxMutex );
+  setWebTssMaker(wts);
 }
 
 DictdDictionary::~DictdDictionary()
@@ -317,7 +319,8 @@ static bool tryPossibleName( string const & name, string & copyTo )
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                        Config::WebTtss const &wts)
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -432,7 +435,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       dictionaries.push_back( new DictdDictionary( dictId,
                                                    indexFile,
-                                                   dictFiles ) );
+                                                   dictFiles,wts ) );
     }
     catch( std::exception & e )
     {

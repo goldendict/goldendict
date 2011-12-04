@@ -10,6 +10,7 @@
 #include <list>
 #include "dprintf.hh"
 #include "audiolink.hh"
+#include "langcoder.hh"
 
 namespace MediaWiki {
 
@@ -27,12 +28,14 @@ public:
 
   MediaWikiDictionary( string const & id, string const & name_,
                        QString const & url_,
-                       QNetworkAccessManager & netMgr_ ):
+                       QNetworkAccessManager & netMgr_ ,
+                       Config::WebTtss const & webTTss):
     Dictionary::Class( id, vector< string >() ),
     name( name_ ),
     url( url_ ),
     netMgr( netMgr_ )
   {
+      setWebTssMaker(webTTss);
   }
 
   virtual string getName() throw()
@@ -49,6 +52,10 @@ public:
 
   virtual QIcon getIcon() throw()
   { return QIcon(":/icons/icon32_wiki.png"); }
+  virtual quint32 getLangFrom() const
+  { return LangCoder::code2toInt(url.mid(7,2).toAscii().data()); }
+  virtual quint32 getLangTo() const
+  { return getLangFrom(); }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) throw( std::exception );
@@ -379,7 +386,8 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
-                                      QNetworkAccessManager & mgr )
+                                      QNetworkAccessManager & mgr,
+                                       Config::WebTtss const & webTTss)
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
@@ -390,7 +398,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       result.push_back( new MediaWikiDictionary( wikis[ x ].id.toStdString(),
                                                  wikis[ x ].name.toUtf8().data(),
                                                  wikis[ x ].url,
-                                                 mgr ) );
+                                                 mgr,
+                                                 webTTss) );
   }
 
   return result;

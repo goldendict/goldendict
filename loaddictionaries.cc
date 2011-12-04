@@ -133,7 +133,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > dictdDictionaries =
-      DictdFiles::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      DictdFiles::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this,webTtss );
 
     dictionaries.insert( dictionaries.end(), dictdDictionaries.begin(),
                          dictdDictionaries.end() );
@@ -211,7 +211,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
 
   {
     vector< sptr< Dictionary::Class > > dicts =
-      MediaWiki::makeDictionaries( loadDicts, cfg.mediawikis, dictNetMgr );
+      MediaWiki::makeDictionaries( loadDicts, cfg.mediawikis, dictNetMgr,cfg.webTtss );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
