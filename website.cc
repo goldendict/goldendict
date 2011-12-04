@@ -108,7 +108,18 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
 
   // Context contains the right url to go to
   if ( context.size() )
-    urlString = Utf8::encode( context ).c_str();
+  {
+      QUrl bUrl;
+      bUrl.setEncodedUrl(urlTemplate);
+      QUrl nUrl;
+      nUrl.setEncodedUrl(Utf8::encode( context ).c_str());
+
+      if(bUrl.hasQueryItem("gdfilter"))
+          nUrl.addQueryItem("gdfilter",bUrl.queryItemValue("gdfilter"));
+      if(bUrl.hasQueryItem("gdcss"))
+          nUrl.addQueryItem("gdcss",bUrl.queryItemValue("gdcss"));
+      urlString = nUrl.toEncoded();//Utf8::encode( context ).c_str();
+  }
   else
   {
     urlString = urlTemplate;

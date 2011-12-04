@@ -638,7 +638,7 @@ void WebTSSsModel::addNewTss()
 
   w.enabled = false;
   w.url = "http://";
-
+  w.maxlength = 50;
   beginInsertRows( QModelIndex(), webTtss.size(), webTtss.size() );
   webTtss.push_back( w );
   endInsertRows();
