@@ -61,6 +61,7 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
       setErrorString( r->errorString() );
     r->deleteLater();
     finish();
+    reply = 0;
 }
 
 bool WebMultimediaDownload::isAudioUrl( QUrl const & url )

@@ -25,46 +25,14 @@
 #include <mmsystem.h> // For PlaySound
 #endif
 #include <QBuffer>
-
-// Phonon headers are a mess. How to include them properly? Send patches if you
-// know.
-#ifdef __WIN32
-#include <Phonon/AudioOutput>
-#include <Phonon/MediaObject>
-#else
-#include <phonon/audiooutput.h>
-#include <phonon/mediaobject.h>
-#endif
-
-using std::map;
-using std::list;
-
-/// A phonon-based audio player, created on demand
-struct AudioPlayer
-{
-  Phonon::AudioOutput output;
-  Phonon::MediaObject object;
-
-  static AudioPlayer & instance();
-
-private:
-
-  AudioPlayer();
-};
-
 AudioPlayer::AudioPlayer():
     output( Phonon::AccessibilityCategory )
 {
   Phonon::createPath( &object, &output );
 }
 
-AudioPlayer & AudioPlayer::instance()
-{
-  static AudioPlayer a;
-
-  return a;
-}
-
+using std::map;
+using std::list;
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
@@ -88,7 +56,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   mutedDictionaries( mutedDictionaries_ ),
-  groupComboBox( groupComboBox_ )
+    groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
 
@@ -164,6 +132,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->setHtml( QString::fromUtf8( &( r->getFullData().front() ),
                                              r->getFullData().size() ),
                           blankPage );
+  audioPlayer = 0;
 }
 
 void ArticleView::setGroupComboBox( GroupComboBox const * g )
@@ -183,6 +152,71 @@ ArticleView::~ArticleView()
     PlaySoundA( 0, 0, 0 );
   }
 #endif
+  if(audioPlayer)
+  {
+      AudioPlayStop();
+      delete audioPlayer;
+  }
+}
+void ArticleView::AudioPlayStop()
+{
+    //isStopCommand = true;
+    if(audioPlayer)
+    {
+        audioPlayer->object.stop();
+        audioPlayer->object.clear();
+    }
+}
+
+AudioPlayer * ArticleView::getAudioPlayer()
+{
+    if(audioPlayer) return audioPlayer;
+
+    audioPlayer = new AudioPlayer();
+    Phonon::MediaObject *mediaObject = &(audioPlayer->object);
+    connect(mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)),
+                 this, SLOT(AudioPlayerStateChanged(Phonon::State,Phonon::State)));
+    connect(mediaObject, SIGNAL(finished ()),
+                 this, SLOT(AudioPlayerfinished()));
+    return audioPlayer;
+}
+void ArticleView::AudioPlayerStateChanged ( Phonon::State newstate, Phonon::State /* oldState */)
+{
+    //if(isStopCommand) return;
+    switch(newstate)
+    {
+    case Phonon::LoadingState:
+    case Phonon::BufferingState:
+         emit statusBarMessage("Audio is loading to play....",3600000);
+         break;
+    case Phonon::StoppedState:
+        emit statusBarMessage("Audio is ready to play....",3600000);
+        break;
+    case Phonon::PlayingState:
+        emit statusBarMessage("Audio is playing....",3600000);
+        break;
+    //case Phonon::ErrorState:
+    //    emit statusBarMessage(
+    //          tr( "WARNING: %1" ).arg( tr( "The referenced audio failed to play." ) ),
+    //          10000, QPixmap( ":/icons/error.png" ) );
+     //   break;
+    //default:
+        //emit statusBarMessage("");
+    }
+}
+void ArticleView::AudioPlayerfinished()
+{
+   // if(isStopCommand) return;
+    if(audioPlayer->object.errorType()==Phonon::NoError)
+    {
+        emit statusBarMessage("");
+    }
+    else
+    {
+        emit statusBarMessage(
+                    tr( "WARNING: An error occurred while  playing audio:%2" ).arg( audioPlayer->object.errorString() ),
+                    10000, QPixmap( ":/icons/error.png" ) );
+    }
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
@@ -232,6 +266,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
+  emit statusBarMessage("Loading...",600000);
 }
 
 void ArticleView::showAnticipation()
@@ -353,6 +388,7 @@ void ArticleView::loadFinished( bool )
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
   emit pageLoaded( this );
+  emit statusBarMessage("Finished!",3000);
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -461,14 +497,14 @@ bool ArticleView::isExternalLink( QUrl const & url )
 {
   return url.scheme() == "http" || url.scheme() == "https" ||
          url.scheme() == "ftp" || url.scheme() == "mailto" ||
-         url.scheme() == "file";
+          url.scheme() == "file" || url.scheme()=="file";
 }
 
 void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 {
   // Don't try mangling audio urls, even if they are from the framed websites
 
-  if( ( url.scheme() == "http" || url.scheme() == "https" )
+    if( ( url.scheme() == "http" || url.scheme() == "https" || url.scheme()=="file")
       && ! Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Maybe a link inside a website was clicked?
@@ -716,7 +752,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
        Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Download it
-
+      QString statusMsg("Resource Loading...");
     // Clear any pending ones
 
     resourceDownloadRequests.clear();
@@ -725,6 +761,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
     if ( Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
     {
+        if(url.hasQueryItem("webtts"))
+            statusMsg =  tr("TTS loading from:%1://%2...").arg(url.scheme()).arg(url.host());
+        else
+            statusMsg =  tr("Audio loading from:%1://%2...").arg(url.scheme()).arg(url.host());
       sptr< Dictionary::DataRequest > req =
         new Dictionary::WebMultimediaDownload( url, articleNetMgr );
 
@@ -828,6 +868,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
     else
       resourceDownloadFinished(); // Check any requests finished already
+     emit statusBarMessage(statusMsg,600000 );
   }
   else
   if ( url.scheme() == "gdprg" )
@@ -870,7 +911,9 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   {
     // Use the system handler for the conventional external links
     QDesktopServices::openUrl( url );
+    return;
   }
+
 }
 
 void ArticleView::updateMutedContents()
@@ -947,6 +990,17 @@ void ArticleView::playSound()
 
   if ( v.type() == QVariant::String )
     openLink( QUrl::fromEncoded( v.toString().toUtf8() ), ui.definition->url() );
+}
+void ArticleView::StopSound()
+{
+    AudioPlayStop();
+#ifdef Q_OS_WIN32
+    if ( winWavData.size() )
+    {
+      PlaySoundA( 0, 0, 0 );
+      winWavData.clear();
+    }
+#endif
 }
 
 QString ArticleView::toHtml()
@@ -1256,8 +1310,8 @@ void ArticleView::resourceDownloadFinished()
 {
   if ( resourceDownloadRequests.empty() )
     return; // Stray signal
-
   // Find any finished resources
+  bool isPlayStatus=false;
   for( list< sptr< Dictionary::DataRequest > >::iterator i =
        resourceDownloadRequests.begin(); i != resourceDownloadRequests.end(); )
   {
@@ -1272,6 +1326,7 @@ void ArticleView::resourceDownloadFinished()
         if ( resourceDownloadUrl.scheme() == "gdau" ||
              Dictionary::WebMultimediaDownload::isAudioUrl( resourceDownloadUrl ) )
         {
+            isPlayStatus =true;
           // Audio data
 
 #ifdef Q_OS_WIN32
@@ -1301,8 +1356,19 @@ void ArticleView::resourceDownloadFinished()
             else
             {
               winWavData = data;
-              PlaySoundA( &winWavData.front(), 0,
-                          SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+
+              if(!PlaySoundA( &winWavData.front(), 0,
+                          SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT ))
+              {
+                  emit statusBarMessage(
+                        tr( "WARNING: %1" ).arg( tr( "The referenced audio failed to play." ) ),
+                        10000, QPixmap( ":/icons/error.png" ) );
+              }
+              else
+              {
+                  emit statusBarMessage(
+                        tr( "Playing..." ), 10000, QPixmap( ":/icons/tssspeacker.png" ) );
+              }
             }
 
           }
@@ -1315,16 +1381,29 @@ void ArticleView::resourceDownloadFinished()
              //first, check for wav file and use playsound
              if ( data.size() > 4 && memcmp( data.data(), "RIFF", 4 ) == 0 )
              {
-                 AudioPlayer::instance().object.stop();
-                 AudioPlayer::instance().object.clear();
+                // getAudioPlayer()->object.stop();
+                 //getAudioPlayer()->object.clear();
+                 AudioPlayStop();
                  if ( winWavData.size() )
                  {
                    PlaySoundA( 0, 0, 0 );
                    winWavData.clear();
                  }
                  winWavData = data;
-                 PlaySoundA( &winWavData.front(), 0,
-                             SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+
+                 if(!PlaySoundA( &winWavData.front(), 0,
+                             SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT ))
+                 {
+                     emit statusBarMessage(
+                           tr( "WARNING: %1" ).arg( tr( "The referenced audio failed to play." ) ),
+                           10000, QPixmap( ":/icons/error.png" ) );
+                 }
+                 else
+                 {
+                     emit statusBarMessage(
+                           tr( "Playing..." ), 10000, QPixmap( ":/icons/tssspeacker.png" ) );
+                 }
+
              }
              else
              {
@@ -1340,11 +1419,29 @@ void ArticleView::resourceDownloadFinished()
 
             Phonon::MediaSource source( buf );
             source.setAutoDelete( true ); // Dispose of our buf when done
-
+            AudioPlayStop();
+           // isStopCommand = false;
+            getAudioPlayer()->object.enqueue(source);
+            getAudioPlayer()->object.play();
+/*
             AudioPlayer::instance().object.stop();
             AudioPlayer::instance().object.clear();
             AudioPlayer::instance().object.enqueue( source );
             AudioPlayer::instance().object.play();
+            Sleep(100);
+            if(AudioPlayer::instance().object.errorType()==Phonon::NoError )
+            {
+                emit statusBarMessage(
+                      tr( "Playing..." ), 10000, QPixmap( ":/icons/tssspeacker.png" ) );
+            }
+            else
+            {
+                emit statusBarMessage(
+                      tr( "WARNING: %1" ).arg( tr( "The referenced audio failed to play." ) ),
+                      10000, QPixmap( ":/icons/error.png" ) );
+            }
+            */
+
 #ifdef Q_OS_WIN32
              }
 #endif
@@ -1353,6 +1450,8 @@ void ArticleView::resourceDownloadFinished()
           {
 
             // Use external viewer to play the file
+              emit statusBarMessage(
+                    tr( "Playing..." ), 10000, QPixmap( ":/icons/tssspeacker.png" ) );
             try
             {
               ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram.trimmed() );
@@ -1416,7 +1515,11 @@ void ArticleView::resourceDownloadFinished()
     emit statusBarMessage(
           tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
           10000, QPixmap( ":/icons/error.png" ) );
+  }else if(!isPlayStatus)
+  {
+      emit statusBarMessage("");
   }
+
 }
 
 void ArticleView::pasteTriggered()
