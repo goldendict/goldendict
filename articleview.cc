@@ -163,7 +163,11 @@ void ArticleView::AudioPlayStop()
     //isStopCommand = true;
     if(audioPlayer)
     {
-        audioPlayer->object.stop();
+        if(audioPlayer->object.state()!=Phonon::StoppedState)
+        {
+            audioPlayer->object.stop();
+            emit statusBarMessage("");
+        }
         audioPlayer->object.clear();
     }
 }
@@ -190,7 +194,7 @@ void ArticleView::AudioPlayerStateChanged ( Phonon::State newstate, Phonon::Stat
          emit statusBarMessage("Audio is loading to play....",3600000);
          break;
     case Phonon::StoppedState:
-        emit statusBarMessage("Audio is ready to play....",3600000);
+        emit statusBarMessage("Audio is ready to play....",1000);
         break;
     case Phonon::PlayingState:
         emit statusBarMessage("Audio is playing....",3600000);
