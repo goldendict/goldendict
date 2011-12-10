@@ -305,7 +305,7 @@ private:
   QString getMutedForGroup( unsigned group );
 
   AudioPlayer * getAudioPlayer();
- // bool isStopCommand;
+  QString statusMsg;
   void AudioPlayStop();
 protected:
 

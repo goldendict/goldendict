@@ -166,7 +166,7 @@ void ArticleView::AudioPlayStop()
         if(audioPlayer->object.state()!=Phonon::StoppedState)
         {
             audioPlayer->object.stop();
-            emit statusBarMessage("");
+            //emit statusBarMessage("");
         }
         audioPlayer->object.clear();
     }
@@ -186,41 +186,19 @@ AudioPlayer * ArticleView::getAudioPlayer()
 }
 void ArticleView::AudioPlayerStateChanged ( Phonon::State newstate, Phonon::State /* oldState */)
 {
-    //if(isStopCommand) return;
     switch(newstate)
     {
-    case Phonon::LoadingState:
-    case Phonon::BufferingState:
-         emit statusBarMessage("Audio is loading to play....",3600000);
-         break;
-    case Phonon::StoppedState:
-        emit statusBarMessage("Audio is ready to play....",1000);
-        break;
     case Phonon::PlayingState:
-        emit statusBarMessage("Audio is playing....",3600000);
+        statusMsg = "Playing...";
+        emit statusBarMessage("Playing...");
         break;
-    //case Phonon::ErrorState:
-    //    emit statusBarMessage(
-    //          tr( "WARNING: %1" ).arg( tr( "The referenced audio failed to play." ) ),
-    //          10000, QPixmap( ":/icons/error.png" ) );
-     //   break;
-    //default:
-        //emit statusBarMessage("");
     }
 }
 void ArticleView::AudioPlayerfinished()
 {
-   // if(isStopCommand) return;
-    if(audioPlayer->object.errorType()==Phonon::NoError)
-    {
-        emit statusBarMessage("");
-    }
-    else
-    {
-        emit statusBarMessage(
-                    tr( "WARNING: An error occurred while  playing audio:%2" ).arg( audioPlayer->object.errorString() ),
-                    10000, QPixmap( ":/icons/error.png" ) );
-    }
+    if(statusMsg!="Playing...") return;
+    statusMsg = "";
+    emit statusBarMessage("Play Finished.",1000);
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
@@ -270,7 +248,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
-  emit statusBarMessage("Loading...",600000);
+  emit statusBarMessage("Loading...");
+  statusMsg = "Loading...";
 }
 
 void ArticleView::showAnticipation()
@@ -393,6 +372,7 @@ void ArticleView::loadFinished( bool )
   //QApplication::restoreOverrideCursor();
   emit pageLoaded( this );
   emit statusBarMessage("Finished!",3000);
+  statusMsg = "";
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -697,9 +677,12 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
   else
   {
     msg = link;
-  }
 
-  emit statusBarMessage( msg );
+  }
+  if(msg.isEmpty() && !statusMsg.isEmpty())
+      emit statusBarMessage( statusMsg );
+  else
+      emit statusBarMessage( msg );
 }
 
 void ArticleView::attachToJavaScript()
@@ -756,7 +739,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
        Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Download it
-      QString statusMsg("Resource Loading...");
+     // statusMsg="Resource Loading...";
     // Clear any pending ones
 
     resourceDownloadRequests.clear();
@@ -872,7 +855,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
     else
       resourceDownloadFinished(); // Check any requests finished already
-     emit statusBarMessage(statusMsg,600000 );
+     emit statusBarMessage(statusMsg );
   }
   else
   if ( url.scheme() == "gdprg" )
@@ -1005,6 +988,9 @@ void ArticleView::StopSound()
       winWavData.clear();
     }
 #endif
+    //
+    if(statusMsg.isEmpty() || statusMsg == "Playing...")
+        emit statusBarMessage("Stopped.",1000);
 }
 
 QString ArticleView::toHtml()
@@ -1316,6 +1302,7 @@ void ArticleView::resourceDownloadFinished()
     return; // Stray signal
   // Find any finished resources
   bool isPlayStatus=false;
+
   for( list< sptr< Dictionary::DataRequest > >::iterator i =
        resourceDownloadRequests.begin(); i != resourceDownloadRequests.end(); )
   {
@@ -1331,6 +1318,8 @@ void ArticleView::resourceDownloadFinished()
              Dictionary::WebMultimediaDownload::isAudioUrl( resourceDownloadUrl ) )
         {
             isPlayStatus =true;
+            emit statusBarMessage("");
+            statusMsg ="";
           // Audio data
 
 #ifdef Q_OS_WIN32
@@ -1405,7 +1394,7 @@ void ArticleView::resourceDownloadFinished()
                  else
                  {
                      emit statusBarMessage(
-                           tr( "Playing..." ), 10000, QPixmap( ":/icons/tssspeacker.png" ) );
+                           tr( "Playing..." ), 5000, QPixmap( ":/icons/tssspeacker.png" ) );
                  }
 
              }
@@ -1519,6 +1508,7 @@ void ArticleView::resourceDownloadFinished()
     emit statusBarMessage(
           tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
           10000, QPixmap( ":/icons/error.png" ) );
+    statusMsg = "";
   }else if(!isPlayStatus)
   {
       emit statusBarMessage("");
