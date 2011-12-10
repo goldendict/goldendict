@@ -990,7 +990,10 @@ void ArticleView::StopSound()
 #endif
     //
     if(statusMsg.isEmpty() || statusMsg == "Playing...")
+    {
+        statusMsg = "";
         emit statusBarMessage("Stopped.",1000);
+    }
 }
 
 QString ArticleView::toHtml()
@@ -1108,7 +1111,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   if ( selectedText.size() )
   {
     std::string ttsDictID = getActiveArticleId().toUtf8().data();
-    if(ttsDictID.size() && selectedText.size()<= 1000) //tts
+    if(ttsDictID.size())//remove limit size && selectedText.size()<= 1000) //tts
     {
         for( unsigned x = 0; x< allDictionaries.size(); x++ )
         {
