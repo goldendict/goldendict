@@ -425,9 +425,6 @@ void BglHeadwordsRequest::run()
     return;
   }
 
-  sptr< Dictionary::WordSearchRequestInstant > result =
-    new Dictionary::WordSearchRequestInstant;
-
   vector< WordArticleLink > chain = dict.findArticles( str );
 
   wstring caseFolded = Folding::applySimpleCaseOnly( str );
