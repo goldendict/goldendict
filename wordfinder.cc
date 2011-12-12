@@ -24,7 +24,7 @@ WordFinder::WordFinder( QObject * parent ):
   updateResultsTimer.setSingleShot( true );
 
   connect( &updateResultsTimer, SIGNAL( timeout() ),
-           this, SLOT( updateResults() ) );
+           this, SLOT( updateResults() ), Qt::QueuedConnection );
 }
 
 WordFinder::~WordFinder()

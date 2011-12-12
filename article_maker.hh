@@ -110,8 +110,8 @@ public:
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
                   std::string const & header );
 
-  virtual void cancel()
-  { finish(); } // Add our own requests cancellation here
+  virtual void cancel();
+//  { finish(); } // Add our own requests cancellation here
 
 private slots:
 
