@@ -10,18 +10,21 @@
 #include "GetWord.h"
 #include "HookImportFunction.h"
 
-HANDLE hHookMutex = 0;
-
 typedef BOOL (WINAPI *TextOutANextHook_t)(HDC hdc, int nXStart, int nYStart, LPCSTR lpszString,int cbString);
-TextOutANextHook_t TextOutANextHook = NULL;
+TextOutANextHook_t TextOutANextHook __attribute__ ((aligned (4))) = NULL;
 typedef BOOL (WINAPI *TextOutWNextHook_t)(HDC hdc, int nXStart, int nYStart, LPCWSTR lpszString,int cbString);
-TextOutWNextHook_t TextOutWNextHook = NULL; 
+TextOutWNextHook_t TextOutWNextHook __attribute__ ((aligned (4))) = NULL; 
 typedef BOOL (WINAPI *ExtTextOutANextHook_t)(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCSTR lpszString, UINT cbString, CONST INT *lpDx);
-ExtTextOutANextHook_t ExtTextOutANextHook = NULL;
+ExtTextOutANextHook_t ExtTextOutANextHook __attribute__ ((aligned (4))) = NULL;
 typedef BOOL (WINAPI *ExtTextOutWNextHook_t)(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCWSTR lpszString, UINT cbString, CONST INT *lpDx);
-ExtTextOutWNextHook_t ExtTextOutWNextHook = NULL;
+ExtTextOutWNextHook_t ExtTextOutWNextHook __attribute__ ((aligned (4))) = NULL;
+
+#define HOOKS_NUM 4
 
 TEverythingParams *CurParams = NULL;
+HANDLE installEvent = 0;
+volatile long hookCounts[HOOKS_NUM] __attribute__ ((aligned (4))) = { 0, 0, 0, 0 };
+CRITICAL_SECTION hookCS;
 
 void ConvertToMatchedWordA(TEverythingParams *TP)
 {
@@ -105,29 +108,31 @@ static int MyCopyMemory(char *a, const char *b, int len)
 
 static void IterateThroughItems(HWND WND, HMENU menu, POINT *p)
 {
-	int count = GetMenuItemCount(menu);
 	RECT rec;
 	MENUITEMINFO info;
 	int i;
+	int count = GetMenuItemCount(menu);
 	for (i=0; i<count; i++) {
 		if (GetMenuItemRect(WND, menu, i, &rec) && (rec.left<=p->x) && (p->x<=rec.right) && (rec.top<=p->y) && (p->y<=rec.bottom)) {
 			ZeroMemory(&info, sizeof(info));
 			info.cbSize = sizeof(info);
-			info.fMask = MIIM_TYPE | MIIM_SUBMENU;
-			info.cch = 256;
-			info.dwTypeData = malloc(256);
-			if(info.dwTypeData != NULL) {
-				GetMenuItemInfo(menu, i, TRUE, &info);
-				if (info.cch>0) {
-					if (info.cch > 255)
-						CurParams->WordLen = 255;
-					else
-						CurParams->WordLen = info.cch;
+			info.fMask = MIIM_STRING | MIIM_SUBMENU;
+			if( !GetMenuItemInfo(menu, i, TRUE, &info) )
+				break;
+			if (info.cch > 0 && info.cch < 255) {
+				char buf[256];
+				ZeroMemory(buf, sizeof(buf));
+				info.cch += 1;
+				info.dwTypeData = buf;
+				info.fMask = MIIM_STRING | MIIM_SUBMENU;
+				if( GetMenuItemInfo(menu, i, TRUE, &info) ) {
+					if( info.cch > 255 )
+						break;
+					CurParams->WordLen = info.cch;
 					CurParams->Unicode = FALSE;
-					CurParams->WordLen = MyCopyMemory(CurParams->MatchedWordA, info.dwTypeData, CurParams->WordLen);
+					CurParams->WordLen = MyCopyMemory(CurParams->MatchedWordA, buf, CurParams->WordLen + 1);
 					CurParams->BeginPos = 0;
 				}
-				free(info.dwTypeData);
 			}
 			break;
 		}
@@ -136,33 +141,37 @@ static void IterateThroughItems(HWND WND, HMENU menu, POINT *p)
 
 static void GetWordTextOutHook (TEverythingParams *TP)
 {
-DWORD wso;
+	EnterCriticalSection(&hookCS);
 	CurParams = TP;
 	ScreenToClient(TP->WND, &(TP->Pt));
 	if (TP->Pt.y<0) {
 		char buffer[256];
-		HMENU menu;
+		HMENU menu=NULL;
 		char buffer2[256];
+		int n, n2;
+		ZeroMemory(buffer, sizeof(buffer));
+		ZeroMemory(buffer2, sizeof(buffer2));
 
-		GetWindowText(TP->WND, buffer, sizeof(buffer)-1);
-		SetWindowText(TP->WND, "");
-		
-		GetWindowText(TP->WND, buffer2, sizeof(buffer2)-1);
-		if (buffer2[0]) { // MDI window.
-			char *p = strstr(buffer, buffer2);
-			if (p) {
-				if (p == buffer) { // FWS_PREFIXTITLE
-					strcpy(buffer, buffer+strlen(buffer2));
-				} else {
-					*p = '\0';
+		if( ( n = GetWindowText(TP->WND, buffer, sizeof(buffer)-1) ) > 0 ) {
+			SetWindowText(TP->WND, "");
+			if ( ( n2 = GetWindowText(TP->WND, buffer2, sizeof(buffer2)-1) ) > 0 ) { // MDI window.
+				char *p = strstr(buffer, buffer2);
+				if (p) {
+					if (p == buffer) { // FWS_PREFIXTITLE
+						if( n > n2 && n - n2 < (int)sizeof( buffer ) )
+							memmove( buffer, buffer + n2, n - n2 + 1 );
+//						strncpy(buffer, buffer+strlen(buffer2), sizeof(buffer)-1);
+					} else {
+						*p = '\0';
+					}
 				}
 			}
+			CurParams->Active = TRUE;
+			SetWindowText(TP->WND, buffer);
+			CurParams->Active = FALSE;
 		}
-		CurParams->Active = TRUE;
-		SetWindowText(TP->WND, buffer);
-		CurParams->Active = FALSE;
 		menu = GetMenu(TP->WND);
-		if (menu) {
+		if (menu && IsMenu( menu ) ) {
 			ClientToScreen(TP->WND, &(TP->Pt));
 			IterateThroughItems(TP->WND, menu, &(TP->Pt));
 		}
@@ -179,11 +188,8 @@ DWORD wso;
 			CurParams->Active = FALSE;
 		}
 	}
-	wso=WaitForSingleObject(hHookMutex, 10000);
 	CurParams = NULL;
-	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
-		ReleaseMutex(hHookMutex);
-	}
+	LeaveCriticalSection(&hookCS);
 }
 
 char* ExtractFromEverything(HWND WND, POINT Pt, int *BeginPos)
@@ -347,142 +353,182 @@ static void IsInsidePointW(const HDC DC, int X, int Y, LPCWSTR Str, int Count)
 
 BOOL WINAPI TextOutACallbackProc(HDC hdc, int nXStart, int nYStart, LPCSTR lpszString, int cbString)
 {
-DWORD wso;
-	wso = WaitForSingleObject(hHookMutex, 0);
-	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+BOOL res = FALSE;
+	WaitForSingleObject(installEvent, INFINITE);
+	InterlockedIncrement(hookCounts + 0);
+	if(TryEnterCriticalSection(&hookCS)) {
 		if (CurParams && CurParams->Active)
 			IsInsidePointA(hdc, nXStart, nYStart, lpszString, cbString);
-		ReleaseMutex(hHookMutex);
+		LeaveCriticalSection(&hookCS);
 	}
-	return TextOutANextHook(hdc, nXStart, nYStart, lpszString, cbString);
+	if(TextOutANextHook)
+		res = TextOutANextHook(hdc, nXStart, nYStart, lpszString, cbString);
+	InterlockedDecrement(hookCounts + 0);
+	return res;
 }
 
 BOOL WINAPI TextOutWCallbackProc(HDC hdc, int nXStart, int nYStart, LPCWSTR lpszString, int cbString)
 {
-DWORD wso;
-	wso = WaitForSingleObject(hHookMutex, 0);
-	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+BOOL res = FALSE;
+	WaitForSingleObject(installEvent, INFINITE);
+	InterlockedIncrement(hookCounts + 1);
+	if(TryEnterCriticalSection(&hookCS)) {
 		if (CurParams && CurParams->Active)
 			IsInsidePointW(hdc, nXStart, nYStart, lpszString, cbString);
-		ReleaseMutex(hHookMutex);
+		LeaveCriticalSection(&hookCS);
 	}
-	return TextOutWNextHook(hdc, nXStart, nYStart, lpszString, cbString);
+	if(TextOutWNextHook)
+		res = TextOutWNextHook(hdc, nXStart, nYStart, lpszString, cbString);
+	InterlockedDecrement(hookCounts + 1);
+	return res;
 }
 
 BOOL WINAPI ExtTextOutACallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCSTR lpszString, UINT cbString, CONST INT *lpDx)
 {
-DWORD wso;
-	wso = WaitForSingleObject(hHookMutex, 0);
-	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+BOOL res = FALSE;
+	WaitForSingleObject(installEvent, INFINITE);
+	InterlockedIncrement(hookCounts + 2);
+	if(TryEnterCriticalSection(&hookCS)) {
 		if (CurParams && CurParams->Active)
 			IsInsidePointA(hdc, nXStart, nYStart, lpszString, cbString);
-		ReleaseMutex(hHookMutex);
+		LeaveCriticalSection(&hookCS);
 	}
-	return ExtTextOutANextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+	if(ExtTextOutANextHook)
+		res = ExtTextOutANextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+	InterlockedDecrement(hookCounts + 2);
+	return res;
 }
 
 BOOL WINAPI ExtTextOutWCallbackProc(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCWSTR lpszString, UINT cbString, CONST INT *lpDx)
 {
-DWORD wso;
-	wso = WaitForSingleObject(hHookMutex, 0);
-	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
+BOOL res = FALSE;
+	WaitForSingleObject(installEvent, INFINITE);
+	InterlockedIncrement(hookCounts + 3);
+	if(TryEnterCriticalSection(&hookCS)) {
 		if (CurParams && CurParams->Active)
-  {
-    if ( fuOptions & ETO_GLYPH_INDEX )
-    {
-      LPGLYPHSET ranges = NULL;
-      WCHAR * allChars, * ptr, * restoredString = NULL;
-      WORD * allIndices;
-      unsigned x;
+		{
+			if ( fuOptions & ETO_GLYPH_INDEX )
+			{
+				LPGLYPHSET ranges = NULL;
+				WCHAR * allChars, * ptr, * restoredString = NULL;
+				WORD * allIndices;
+				unsigned x;
 
-      // Here we have to decode glyph indices back to chars. We do this
-      // by tedious and ineffective iteration.
-      //
-      x = GetFontUnicodeRanges( hdc, 0 );
-      if(x != 0) ranges = malloc(x);
-      if(ranges == NULL) {
-		ReleaseMutex(hHookMutex);
-		return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
-      }
-      x = GetFontUnicodeRanges( hdc, ranges );
-      if(x == 0) {
-		free(ranges);
-		ReleaseMutex(hHookMutex);
-		return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
-      }
+				// Here we have to decode glyph indices back to chars. We do this
+				// by tedious and ineffective iteration.
 
-      // Render up all available chars into one ridiculously big string
+				x = GetFontUnicodeRanges( hdc, 0 );
+				if(x != 0) ranges = malloc(x);
+				if(ranges == NULL) {
+					LeaveCriticalSection(&hookCS);
+					if(ExtTextOutWNextHook)
+						res = ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+					InterlockedDecrement(hookCounts + 3);
+					return res;
+				}
+				x = GetFontUnicodeRanges( hdc, ranges );
+				if(x == 0) {
+					free(ranges);
+					LeaveCriticalSection(&hookCS);
+					if(ExtTextOutWNextHook)
+						res = ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+					InterlockedDecrement(hookCounts + 3);
+					return res;
+				}
 
-      allChars = malloc( ( ranges->cGlyphsSupported ) * sizeof( WCHAR ) );
-      allIndices = malloc( ( ranges->cGlyphsSupported ) * sizeof( WORD ) );
+				// Render up all available chars into one ridiculously big string
 
-      if(allChars == NULL || allIndices == NULL) {
-		if(allChars != NULL) free(allChars);
-		if(allIndices != NULL) free(allIndices);
-		ReleaseMutex(hHookMutex);
-		return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
-      }
+				allChars = malloc( ( ranges->cGlyphsSupported ) * sizeof( WCHAR ) );
+				allIndices = malloc( ( ranges->cGlyphsSupported ) * sizeof( WORD ) );
 
-      ptr = allChars;
+				if(allChars == NULL || allIndices == NULL) {
+					if(allChars != NULL) free(allChars);
+					if(allIndices != NULL) free(allIndices);
+					free(ranges);
+					LeaveCriticalSection(&hookCS);
+					if(ExtTextOutWNextHook)
+						res = ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+					InterlockedDecrement(hookCounts + 3);
+					return res;
+				}
 
-      for( x = 0; x < ranges->cRanges; ++x )
-      {
-        WCHAR c = ranges->ranges[ x ].wcLow;
-        unsigned y = ranges->ranges[ x ].cGlyphs;
+				ptr = allChars;
 
-        while( y-- )
-          *ptr++ = c++;
-      }
+				for( x = 0; x < ranges->cRanges; ++x ) {
+					WCHAR c = ranges->ranges[ x ].wcLow;
+					unsigned y = ranges->ranges[ x ].cGlyphs;
 
-      // Amazing. Now get glyph indices for this one nice string.
+					while( y-- )
+						*ptr++ = c++;
+				}
 
-      if(GetGlyphIndicesW(hdc, allChars, ranges->cGlyphsSupported, allIndices, GGI_MARK_NONEXISTING_GLYPHS) != GDI_ERROR) {
+				// Amazing. Now get glyph indices for this one nice string.
 
-	      // Fascinating. Now translate our original input string back into
-	      // its readable form.
+				if(GetGlyphIndicesW(hdc, allChars, ranges->cGlyphsSupported, allIndices, GGI_MARK_NONEXISTING_GLYPHS) != GDI_ERROR) {
 
-	      restoredString = malloc( cbString * sizeof( WCHAR ) );
+					// Fascinating. Now translate our original input string back into
+					// its readable form.
 
-	      if(restoredString != NULL) {
-		      for( x = 0; x < cbString; ++x )
-		      {
-		        unsigned y;
-	        	WORD idx = lpszString[ x ];
+					restoredString = malloc( cbString * sizeof( WCHAR ) );
 
-		        for( y = 0; y < ranges->cGlyphsSupported; ++y )
-        		  if ( allIndices[ y ] == idx )
-		          {
-        		    restoredString[ x ] = allChars[ y ];
-	        	    break;
-	        	  }
-		        if ( y == ranges->cGlyphsSupported )
-	        	{
-		          // Not found
-	        	  restoredString[ x ] = L'?';
-		        }
-		      }
+					if(restoredString != NULL) {
+						for( x = 0; x < cbString; ++x ) {
+							unsigned y;
+							WORD idx = lpszString[ x ];
+
+							for( y = 0; y < ranges->cGlyphsSupported; ++y )
+								if ( allIndices[ y ] == idx ) {
+									restoredString[ x ] = allChars[ y ];
+									break;
+								}
+							if ( y == ranges->cGlyphsSupported ) {
+								// Not found
+								restoredString[ x ] = L'?';
+							}
+						}
+					}
+				}
+
+				// And we're done.
+
+				free( allIndices );
+				free( allChars );
+				free( ranges );
+
+				if(restoredString != NULL) {
+					IsInsidePointW( hdc, nXStart, nYStart, restoredString, cbString );
+					free( restoredString );
+				}
+			}
+			else    // fuOptions & ETO_GLYPH_INDEX
+				IsInsidePointW(hdc, nXStart, nYStart, lpszString, cbString);
 		}
-      }
-
-      // And we're done.
-
-      free( allIndices );
-      free( allChars );
-      free( ranges );
-
-      if(restoredString != NULL) {
-	      IsInsidePointW( hdc, nXStart, nYStart, restoredString, cbString );
-	      free( restoredString );
-      }
-
-    }
-    else
-      IsInsidePointW(hdc, nXStart, nYStart, lpszString, cbString);
-  }
 	
-		ReleaseMutex(hHookMutex);
+		LeaveCriticalSection(&hookCS);
 	}
-	return ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+	if(ExtTextOutWNextHook)
+		res = ExtTextOutWNextHook(hdc, nXStart, nYStart, fuOptions, lprc, lpszString, cbString, lpDx);
+	InterlockedDecrement(hookCounts + 3);
+	return res;
+}
+
+void WaitForAllHooks()
+{
+HANDLE hTimer;
+LARGE_INTEGER waitTime;
+	waitTime.LowPart = 50000000; // 5 s
+	waitTime.HighPart = 0;
+	waitTime.QuadPart = -waitTime.QuadPart; // RelativeTime
+	hTimer = CreateWaitableTimer(NULL, TRUE, NULL);
+	if(hTimer)
+		SetWaitableTimer(hTimer, &waitTime, 0, NULL, NULL, FALSE);
+
+	while((hookCounts[0] > 0 || hookCounts[1] > 0 || hookCounts[2] > 0 || hookCounts[3] > 0) && 
+	       (!hTimer || WaitForSingleObject(hTimer, 0) != WAIT_OBJECT_0)) {
+		SwitchToThread();
+	}
+	if(hTimer)
+		CloseHandle(hTimer);
 }
 
 static void InstallTextOutHooks()
@@ -495,25 +541,26 @@ static void InstallTextOutHooks()
 		HookAPI("gdi32.dll", "ExtTextOutA", (PROC)ExtTextOutACallbackProc, (PROC*)&ExtTextOutANextHook);
 	if (ExtTextOutWNextHook==NULL)
 		HookAPI("gdi32.dll", "ExtTextOutW", (PROC)ExtTextOutWCallbackProc, (PROC*)&ExtTextOutWNextHook);
+	SetEvent(installEvent);
 }
 
 static void UninstallTextOutHooks()
 {
 	if (TextOutANextHook) {
 		HookAPI("gdi32.dll", "TextOutA", (PROC)TextOutANextHook, NULL);
-		TextOutANextHook=NULL;
+//		TextOutANextHook=NULL;
 	}
 	if (TextOutWNextHook) {
 		HookAPI("gdi32.dll", "TextOutW", (PROC)TextOutWNextHook, NULL);
-		TextOutWNextHook=NULL;
+//		TextOutWNextHook=NULL;
 	}
 	if (ExtTextOutANextHook) {
 		HookAPI("gdi32.dll", "ExtTextOutA", (PROC)ExtTextOutANextHook, NULL);
-		ExtTextOutANextHook=NULL;
+//		ExtTextOutANextHook=NULL;
 	}
 	if (ExtTextOutWNextHook) {
 		HookAPI("gdi32.dll", "ExtTextOutW", (PROC)ExtTextOutWNextHook, NULL);
-		ExtTextOutWNextHook=NULL;
+//		ExtTextOutWNextHook=NULL;
 	}
 }
 
@@ -541,28 +588,20 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
                        DWORD reason        /* Reason this function is being called. */ ,
                        LPVOID reserved     /* Not used. */ )
 {
-DWORD wso;
     switch (reason)
     {
       case DLL_PROCESS_ATTACH:
-			if(hHookMutex==0) {
-				hHookMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutHookMutex");
-				if(hHookMutex==0) 
-					return(FALSE);
-			}
+			if((installEvent = CreateEvent(0, TRUE, FALSE, 0)) == 0)
+				return FALSE;
+			InitializeCriticalSection(&hookCS);
 			InstallTextOutHooks();
         break;
 
       case DLL_PROCESS_DETACH:
 			UninstallTextOutHooks();
-			if(hHookMutex) {
-				wso = WaitForSingleObject(hHookMutex, 5000);
-				if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
-					ReleaseMutex(hHookMutex);
-					CloseHandle(hHookMutex);
-					hHookMutex=0;
-				}
-			}
+			WaitForAllHooks();
+			CloseHandle(installEvent);
+			DeleteCriticalSection(&hookCS);
         break;
 
       case DLL_THREAD_ATTACH:
