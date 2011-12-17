@@ -99,7 +99,8 @@
         <location filename="../article_maker.cc" line="145"/>
         <source>&lt;h3 align="center"&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you're ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href="Working with popup"&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program's &lt;a href="http://goldendict.org/forum/"&gt;forum&lt;/a&gt;.&lt;p&gt;Check program's &lt;a href="http://goldendict.org/"&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         
-    <translation>&lt;h3 align="center"&gt;Seja bem-vindo ao GoldenDict!&lt;/h3&gt;&lt;p&gt;Antes de usar o programa, clique em &lt;b&gt;Editar|Dicionários&lt;/b&gt; para indicar o caminho da pasta que contenha os dicionários de consulta local, adicionar endereços da Wikipedia se desejar ou especificar outras fontes de tradução online. Se quiser usar o programa como portátil, como em outra partição do sistema ou em pendrives, crie a subpasta 'Portable' na pasta principal dele. Você pode também ordenar os dicionários para determinar a prioridade da exibição das definições nos resultados da busca.&lt;p&gt;Feito isto, o programa estará pronto para exibir as definições/tradução das palavras que você quiser! A forma tradicional de consultar os dicionários especificados na configuração do GoldenDict é digitar o termo/expressão no campo de pesquisa (canto superior esquerdo desta mesma janela). No entanto, ao contrário da maioria dos outros dicionários eletrônicos, não há necessidade de especificar a palavra no seu contexto exato (que requer um conhecimento básico de gramática do idioma para o qual se deseja traduzir). Com o GoldenDict, você pode digitar a forma flexionada de uma determinada palavra que o programa é capaz de reconhecer as suas raízes e efetuar a correção morfologicamente. Outra característica fundamental do GoldenDict é que o campo de pesquisa não é a única forma de fazer consultas: É possível também traduzir palavras em outros programas por meio de janelas secundárias (popups). Clique em &lt;a href="Trabalhando com janelas secundárias"&gt;Trabalhando com janelas secundárias&lt;/a&gt; para saber como usar essa forma de consulta.&lt;p&gt;Para personalizar o programa, clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;. Cada opção tem suas próprias dicas em forma de balão informativo, exibido ao se pairar o ponteiro do mouse sobre alguma opção por alguns segundos.&lt;p&gt;Se precisar de mais ajuda, tiver dúvidas, sugestões ou quiser fazer qualquer outro pedido, sua participação no &lt;a href="http://goldendict.org/forum/"&gt;fórum&lt;/a&gt; do programa é bem-vinda!&lt;p&gt;Clique &lt;a href="http://goldendict.org/"&gt;aqui&lt;/a&gt; para ver se há atualizações do programa.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licença sob GPLv3 ou superior. &lt;br&gt;&lt;br&gt;&lt;center&gt;&lt;a href="http://MCHAL.azok.org/"&gt;Traduzido por MCHAL&lt;/a&gt;&lt;/center&gt;</translation></message>
+    <translation>&lt;h3 align="center"&gt;Seja bem-vindo ao GoldenDict!&lt;/h3&gt;&lt;p&gt;Antes de usar o programa, clique em &lt;b&gt;Editar|Dicionários&lt;/b&gt; para indicar o caminho da pasta que contenha os dicionários de consulta local, adicionar endereços da Wikipedia se desejar ou especificar outras fontes de tradução online. Se quiser usar o programa como portátil, como em outra partição do sistema ou em pendrives, crie a subpasta 'Portable' na pasta principal dele. Você pode também ordenar os dicionários para determinar a prioridade da exibição das definições nos resultados da busca.&lt;p&gt;Feito isto, o programa estará pronto para exibir as definições/tradução das palavras que você consultar! A forma tradicional de consultar os dicionários especificados na configuração do GoldenDict é digitar o termo/expressão no campo de pesquisa (canto superior esquerdo desta mesma janela). No entanto, ao contrário da maioria dos outros dicionários eletrônicos, não há necessidade de especificar a palavra no seu contexto exato (que requer um conhecimento básico de gramática do idioma para o qual se deseja traduzir). Com o GoldenDict, você pode digitar a forma flexionada de uma determinada palavra que o programa é capaz de reconhecer as suas raízes e efetuar a correção morfologicamente. Outra característica fundamental do GoldenDict é que o campo de pesquisa não é a única forma de fazer consultas: É possível também traduzir/consultar palavras exibidas em outros programas por meio de janelas secundárias (popups). Clique em &lt;a href="Trabalhando com janelas de definições/tradução semiautomáticas"&gt;Trabalhando com janelas secundárias&lt;/a&gt; para saber como usar essa forma de consulta/tradução.&lt;p&gt;Para personalizar o programa, clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;. Cada opção tem suas próprias dicas em forma de balão informativo, exibido ao se pairar o ponteiro do mouse sobre alguma opção por alguns segundos.&lt;p&gt;Se precisar de mais ajuda, tiver dúvidas, sugestões ou quiser fazer qualquer outro pedido, sua participação no &lt;a href="http://goldendict.org/forum/"&gt;fórum&lt;/a&gt; do programa é bem-vinda!&lt;p&gt;Clique &lt;a href="http://goldendict.org/"&gt;aqui&lt;/a&gt; para ver se há atualizações do programa.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licença sob GPLv3 ou superior. &lt;br&gt;&lt;br&gt;&lt;center&gt;&lt;a href="http://MCHAL.azok.org/"&gt;Traduzido por MCHAL&lt;/a&gt;&lt;/center&gt;</translation>
+    </message>
     <message>
         <location filename="../article_maker.cc" line="161"/>
         <source>Working with popup</source>
@@ -1434,7 +1435,7 @@
     <message>
         <source>Urdu</source>
         
-    <translation type="unfinished"></translation>
+    <translation type="unfinished"/>
     </message>
     <message>
         <source>Uzbek</source>
@@ -1494,7 +1495,8 @@
         <location filename="../hunspell.cc" line="751"/>
         <source>%1 Morphology</source>
         
-    <translation>Morfologia de %1</translation></message>
+    <translation>Ortografia de %1</translation>
+    </message>
 </context>
 <context>
     <name>HunspellDictsModel</name>
@@ -3969,7 +3971,8 @@ das outras janelas, redimensioná-la ou geri-la à vontade.</translation></messa
         <location filename="../sources.ui" line="153"/>
         <source>Morphology</source>
         
-    <translation>Morfologia</translation></message>
+    <translation>Ortografia</translation>
+    </message>
     <message>
         <location filename="../sources.ui" line="159"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
@@ -3984,7 +3987,8 @@ das outras janelas, redimensioná-la ou geri-la à vontade.</translation></messa
         <location filename="../sources.ui" line="184"/>
         <source>Available morphology dictionaries:</source>
         
-    <translation>Dicionários de morfologia disponíveis:</translation></message>
+    <translation>Dicionários de ortografia disponíveis:</translation>
+    </message>
     <message>
         <location filename="../sources.ui" line="196"/>
         <source>Each morphology dictionary appears as a
@@ -3994,14 +3998,15 @@ spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
         
-    <translation>Cada dicionário de morfologia aparece como
+    <translation>Cada dicionário de ortografia aparece como
 um dicionário auxiliar separado que fornece
 radicais para consultas e sugestões de
 ortografia de palavras digitadas
 incorretamente.
 
 Adicione dicionários compatíveis ao fim
-dos grupos apropriados para usá-los.</translation></message>
+dos grupos apropriados para usá-los.</translation>
+    </message>
     <message>
         <location filename="../sources.ui" line="280"/>
         <source>Websites</source>
@@ -4206,7 +4211,8 @@ Ainda não implementado no GoldenDict.</translation></message>
     <message>
         <source>Each morphology dictionary appears as a separate auxiliary dictionary which provides stem words for searches and spelling suggestions for mistyped words. Add appropriate dictionaries to the bottoms of the appropriate groups to use them.</source>
         
-    <translation>Cada dicionário de morfologia aparece como dicionário auxiliar separado, o qual fornece radicais para pesquisas e sugestões de ortografia no caso de erros de digitação. Acrescente dicionários compatíveis ao fim dos devidos grupos para usá-los.</translation></message>
+    <translation>Cada dicionário de ortografia aparece como dicionário auxiliar separado, o qual fornece radicais para pesquisas e sugestões de ortografia no caso de erros de digitação. Acrescente dicionários compatíveis ao fim dos devidos grupos para usá-los.</translation>
+    </message>
     <message>
         <location filename="../sources.ui" line="221"/>
         <source>Wikipedia</source>
