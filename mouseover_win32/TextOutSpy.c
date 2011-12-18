@@ -118,7 +118,13 @@ DWORD wso;
 			if( !GetCursorPos( &curPt ) ) 
 				break;
 
+			if( GlobalData == NULL || GlobalData->LastPt.x != curPt.x || GlobalData->LastPt.y != curPt.y) 
+				break;
+
 			if( ( targetWnd = GetWindowFromPoint( curPt ) ) == NULL )
+				break;
+
+			if( GlobalData->LastWND != targetWnd ) 
 				break;
 
 			GetWindowThreadProcessId( targetWnd, &winProcessID );
@@ -129,10 +135,6 @@ DWORD wso;
 				if( lstrcmpi( className, "ConsoleWindowClass" ) != 0 )
 					break;
 			}
-
-			if( GlobalData == NULL || GlobalData->LastWND != targetWnd || 
-			    GlobalData->LastPt.x != curPt.x || GlobalData->LastPt.y != curPt.y) 
-				break;
 
 			SendWordToServer();
 
