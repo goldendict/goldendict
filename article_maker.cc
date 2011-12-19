@@ -288,7 +288,7 @@ ArticleRequest::ArticleRequest(
     sptr< Dictionary::WordSearchRequest > s = activeDicts[ x ]->findHeadwordsForSynonym( gd::toWString( word ) );
 
     connect( s.get(), SIGNAL( finished() ),
-             this, SLOT( altSearchFinished() ) );
+             this, SLOT( altSearchFinished() ), Qt::QueuedConnection );
 
     altSearches.push_back( s );
   }
@@ -341,7 +341,7 @@ void ArticleRequest::altSearchFinished()
                                       gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
 
       connect( r.get(), SIGNAL( finished() ),
-               this, SLOT( bodyFinished() ) );
+               this, SLOT( bodyFinished() ), Qt::QueuedConnection );
 
       bodyRequests.push_back( r );
     }
@@ -816,4 +816,28 @@ std::string ArticleRequest::escapeSpacing( QString const & str )
   spacing.replace( "\n", "<br>" );
 
   return spacing.data();
+}
+
+void ArticleRequest::cancel()
+{
+    if( isFinished() )
+        return;
+    if( !altSearches.empty() )
+    {
+        for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
+               altSearches.begin(); i != altSearches.end(); ++i )
+        {
+            (*i)->cancel();
+        }
+    }
+    if( !bodyRequests.empty() )
+    {
+        for( list< sptr< Dictionary::DataRequest > >::iterator i =
+               bodyRequests.begin(); i != bodyRequests.end(); ++i )
+        {
+            (*i)->cancel();
+        }
+    }
+    if( stemmedWordFinder.get() ) stemmedWordFinder->cancel();
+    finish();
 }
