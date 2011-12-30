@@ -91,9 +91,9 @@ static BOOL HookImportFunction(HMODULE hModule, LPCSTR szImportModule, LPCSTR sz
 				if( !VirtualProtect(mbi_thunk.BaseAddress, mbi_thunk.RegionSize, PAGE_READWRITE, &mbi_thunk.Protect) )
 					return FALSE;
 				if (paOrigFuncs)
-					*paOrigFuncs = (PROC)InterlockedExchange((long *)&(pRealThunk->u1.Function), (long)paHookFuncs);
+					*paOrigFuncs = (PROC)InterlockedExchangePointer(&(pRealThunk->u1.Function), paHookFuncs);
 				else
-					InterlockedExchange((long *)&(pRealThunk->u1.Function), (long)paHookFuncs);
+					InterlockedExchangePointer(&(pRealThunk->u1.Function), paHookFuncs);
 
 				VirtualProtect(mbi_thunk.BaseAddress, mbi_thunk.RegionSize, mbi_thunk.Protect, &dwOldProtect);
 				return TRUE;
