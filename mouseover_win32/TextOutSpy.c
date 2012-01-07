@@ -153,7 +153,7 @@ DWORD wso;
 			HWND WND;
 			TCHAR wClassName[64];
 
-			if(TimerID) {
+			if(TimerID && ( GlobalData->LastPt.x!=((PMOUSEHOOKSTRUCT)lParam)->pt.x || GlobalData->LastPt.y!=((PMOUSEHOOKSTRUCT)lParam)->pt.y ) ) {
 				KillTimer(0, TimerID);
 				TimerID = 0;
 			}
