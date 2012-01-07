@@ -13,7 +13,7 @@ namespace WebSite {
 using std::vector;
 using std::string;
 
-vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & )
+vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & ,Config::WebTtss const &)
     throw( std::exception );
 
 }

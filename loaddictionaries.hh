@@ -21,6 +21,7 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
   Config::SoundDirs const & soundDirs;
   Config::Hunspell const & hunspell;
   Config::Transliteration const & transliteration;
+  Config::WebTtss const &webTtss;
   std::vector< sptr< Dictionary::Class > > dictionaries;
   std::string exceptionText;
 

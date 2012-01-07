@@ -17,52 +17,22 @@
 #include "programs.hh"
 #include "dprintf.hh"
 #include <QDebug>
+#include "language.hh"
+#include <QWebElement>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <mmsystem.h> // For PlaySound
 #endif
 #include <QBuffer>
-
-// Phonon headers are a mess. How to include them properly? Send patches if you
-// know.
-#ifdef __WIN32
-#include <Phonon/AudioOutput>
-#include <Phonon/MediaObject>
-#else
-#include <phonon/audiooutput.h>
-#include <phonon/mediaobject.h>
-#endif
-
-using std::map;
-using std::list;
-
-/// A phonon-based audio player, created on demand
-struct AudioPlayer
-{
-  Phonon::AudioOutput output;
-  Phonon::MediaObject object;
-
-  static AudioPlayer & instance();
-
-private:
-
-  AudioPlayer();
-};
-
 AudioPlayer::AudioPlayer():
     output( Phonon::AccessibilityCategory )
 {
   Phonon::createPath( &object, &output );
 }
 
-AudioPlayer & AudioPlayer::instance()
-{
-  static AudioPlayer a;
-
-  return a;
-}
-
+using std::map;
+using std::list;
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
@@ -86,7 +56,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   mutedDictionaries( mutedDictionaries_ ),
-  groupComboBox( groupComboBox_ )
+    groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
 
@@ -162,6 +132,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->setHtml( QString::fromUtf8( &( r->getFullData().front() ),
                                              r->getFullData().size() ),
                           blankPage );
+  audioPlayer = 0;
 }
 
 void ArticleView::setGroupComboBox( GroupComboBox const * g )
@@ -181,6 +152,53 @@ ArticleView::~ArticleView()
     PlaySoundA( 0, 0, 0 );
   }
 #endif
+  if(audioPlayer)
+  {
+      AudioPlayStop();
+      delete audioPlayer;
+  }
+}
+void ArticleView::AudioPlayStop()
+{
+    //isStopCommand = true;
+    if(audioPlayer)
+    {
+        if(audioPlayer->object.state()!=Phonon::StoppedState)
+        {
+            audioPlayer->object.stop();
+            //emit statusBarMessage("");
+        }
+        audioPlayer->object.clear();
+    }
+}
+
+AudioPlayer * ArticleView::getAudioPlayer()
+{
+    if(audioPlayer) return audioPlayer;
+
+    audioPlayer = new AudioPlayer();
+    Phonon::MediaObject *mediaObject = &(audioPlayer->object);
+    connect(mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)),
+                 this, SLOT(AudioPlayerStateChanged(Phonon::State,Phonon::State)));
+    connect(mediaObject, SIGNAL(finished ()),
+                 this, SLOT(AudioPlayerfinished()));
+    return audioPlayer;
+}
+void ArticleView::AudioPlayerStateChanged ( Phonon::State newstate, Phonon::State /* oldState */)
+{
+    switch(newstate)
+    {
+    case Phonon::PlayingState:
+        statusMsg = "Playing...";
+        emit statusBarMessage("Playing...");
+        break;
+    }
+}
+void ArticleView::AudioPlayerfinished()
+{
+    if(statusMsg!="Playing...") return;
+    statusMsg = "";
+    emit statusBarMessage("Play Finished.",1000);
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
@@ -230,6 +248,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
+  emit statusBarMessage("Loading...");
+  statusMsg = "Loading...";
 }
 
 void ArticleView::showAnticipation()
@@ -265,7 +285,34 @@ void ArticleView::loadFinished( bool )
       // Show it
       ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
         arg( (*i)->frameName() ) );
+      //add css
+      QWebElement body = (*i)->findFirstElement("body");
+      if(!body.isNull())
+      {
+          QUrl requredUrl = (*i)->requestedUrl();
+          if(requredUrl.hasQueryItem("gdfilter"))
+          {
+              QWebElementCollection toRemoves = body.findAll(requredUrl.queryItemValue("gdfilter"));
+              if(toRemoves.count()>0)
+              {
+                  for(int idx =0; idx < toRemoves.count();idx++)
+                  {
+                      toRemoves[idx].removeFromDocument();
+                  }
+              }
+          }
+          if(requredUrl.hasQueryItem("gdcss"))
+          {
+              QString css  = Config::getFileInHomeDir(QString("website/%1.css").arg(requredUrl.queryItemValue("gdcss")));
+              if(!css.isEmpty())
+              {
+                     body.appendInside(QString("<style type=\"text/css\">%1</style>").arg(css));
+              }
 
+             // body.prependInside(QString::fromUtf8( cssUrl.toEncoded()));
+          }
+
+      }
       (*i)->evaluateJavaScript( "var gdLastUrlText;" );
       (*i)->evaluateJavaScript( "document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
       (*i)->evaluateJavaScript( "document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
@@ -324,6 +371,8 @@ void ArticleView::loadFinished( bool )
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
   emit pageLoaded( this );
+  emit statusBarMessage("Finished!",3000);
+  statusMsg = "";
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -432,14 +481,14 @@ bool ArticleView::isExternalLink( QUrl const & url )
 {
   return url.scheme() == "http" || url.scheme() == "https" ||
          url.scheme() == "ftp" || url.scheme() == "mailto" ||
-         url.scheme() == "file";
+          url.scheme() == "file" || url.scheme()=="file";
 }
 
 void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 {
   // Don't try mangling audio urls, even if they are from the framed websites
 
-  if( ( url.scheme() == "http" || url.scheme() == "https" )
+    if( ( url.scheme() == "http" || url.scheme() == "https" || url.scheme()=="file")
       && ! Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Maybe a link inside a website was clicked?
@@ -606,6 +655,11 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
     msg = tr( "Resource" );
   }
   else
+      if(url.hasQueryItem("webtts"))
+      {
+           msg = tr( "Text To Speech" );
+      }
+  else
   if ( url.scheme() == "gdau" || Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     msg = tr( "Audio" );
@@ -623,9 +677,12 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
   else
   {
     msg = link;
-  }
 
-  emit statusBarMessage( msg );
+  }
+  if(msg.isEmpty() && !statusMsg.isEmpty())
+      emit statusBarMessage( statusMsg );
+  else
+      emit statusBarMessage( msg );
 }
 
 void ArticleView::attachToJavaScript()
@@ -682,7 +739,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
        Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Download it
-
+     // statusMsg="Resource Loading...";
     // Clear any pending ones
 
     resourceDownloadRequests.clear();
@@ -691,6 +748,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
     if ( Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
     {
+        if(url.hasQueryItem("webtts"))
+            statusMsg =  tr("TTS loading from:%1://%2...").arg(url.scheme()).arg(url.host());
+        else
+            statusMsg =  tr("Audio loading from:%1://%2...").arg(url.scheme()).arg(url.host());
       sptr< Dictionary::DataRequest > req =
         new Dictionary::WebMultimediaDownload( url, articleNetMgr );
 
@@ -794,6 +855,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
     else
       resourceDownloadFinished(); // Check any requests finished already
+     emit statusBarMessage(statusMsg );
   }
   else
   if ( url.scheme() == "gdprg" )
@@ -836,7 +898,9 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   {
     // Use the system handler for the conventional external links
     QDesktopServices::openUrl( url );
+    return;
   }
+
 }
 
 void ArticleView::updateMutedContents()
@@ -913,6 +977,23 @@ void ArticleView::playSound()
 
   if ( v.type() == QVariant::String )
     openLink( QUrl::fromEncoded( v.toString().toUtf8() ), ui.definition->url() );
+}
+void ArticleView::StopSound()
+{
+    AudioPlayStop();
+#ifdef Q_OS_WIN32
+    if ( winWavData.size() )
+    {
+      PlaySoundA( 0, 0, 0 );
+      winWavData.clear();
+    }
+#endif
+    //
+    if(statusMsg.isEmpty() || statusMsg == "Playing...")
+    {
+        statusMsg = "";
+        emit statusBarMessage("Stopped.",1000);
+    }
 }
 
 QString ArticleView::toHtml()
@@ -1024,9 +1105,81 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
     }
   }
-
+    map< QAction *, unsigned > ttsFromActions;
+    map< QAction *, unsigned > ttsToActions;
+    sptr< Dictionary::Class > currentDict;
   if ( selectedText.size() )
+  {
+    std::string ttsDictID = getActiveArticleId().toUtf8().data();
+    if(ttsDictID.size())//remove limit size && selectedText.size()<= 1000) //tts
+    {
+        for( unsigned x = 0; x< allDictionaries.size(); x++ )
+        {
+            if(allDictionaries[ x ]->getId() ==ttsDictID)
+            {
+                currentDict  = allDictionaries[ x ];
+                Config::WebTtss wts = currentDict->getWebTTSs();
+                Config::WebTtss wtsToLang = currentDict->getToLangWebTTSs();
+                if(wts.size() || wtsToLang.size())
+                {
+                    QIcon ttsico(":/icons/tssspeacker.png");
+                    QMenu *ttsMenu =  menu.addMenu(ttsico,"Text To Speech");
+                    if(wts.size())
+                    {
+                        QMenu *ttsFrom = 0;
+                        QString langFrom = Language::countryCodeForId(currentDict->getLangFrom());
+                        if(langFrom.isEmpty())
+                        {
+                            ttsFrom = ttsMenu->addMenu(QIcon(QString(":/icons/internet.png")),
+                                                       QString("Other"));
+                        }
+                        else
+                        {
+                            ttsFrom = ttsMenu->addMenu(QIcon(QString(":/flags/%1.png").arg(langFrom)),
+                                     Language::englishNameForId(currentDict->getLangFrom()));
+                        }
+                        for(unsigned idx=0;idx<wts.size();idx++)
+                        {
+                            QAction *action = new QAction(ttsico,
+                                                          QString("%1(Max:%2)").arg(wts[idx].name).arg(wts[idx].maxlength),
+                                    ttsMenu );
+                             action->setIconVisibleInMenu( true );
+                            ttsFrom->addAction(action);
+                            ttsFromActions[action] = idx+1;
+                        }
+                    }
+                    if(wtsToLang.size())
+                    {
+                        QMenu *ttsTo = 0;
+                        QString langTo = Language::countryCodeForId(currentDict->getLangTo());
+                        if(langTo.isEmpty())
+                        {
+                            ttsTo = ttsMenu->addMenu(QIcon(QString(":/icons/internet.png")),
+                                                       QString("Other"));
+                        }
+                        else
+                        {
+                            ttsTo = ttsMenu->addMenu(QIcon(QString(":/flags/%1.png").arg(langTo)),
+                                     Language::englishNameForId(currentDict->getLangTo()));
+                        }
+                        for(unsigned idx=0;idx<wtsToLang.size();idx++)
+                        {
+                            QAction *action = new QAction(ttsico,
+                                                          QString("%1(Max:%2)").arg(wtsToLang[idx].name).arg(wtsToLang[idx].maxlength),
+                                    ttsMenu );
+                             action->setIconVisibleInMenu( true );
+                            ttsTo->addAction(action);
+                            ttsToActions[action] = idx+1;
+                        }
+                    }
+
+                }
+            }
+
+        }
+    }
     menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
+  }
 
   map< QAction *, QString > tableOfContents;
 
@@ -1078,6 +1231,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       break;
   }
 
+
   if ( !menu.isEmpty() )
   {
     QAction * result = menu.exec( ui.definition->mapToGlobal( pos ) );
@@ -1117,6 +1271,24 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
       if ( id.size() )
         setCurrentArticle( "gdfrom-" + id, true );
+
+      if(currentDict.get())
+      {
+          unsigned ttsIndex = ttsFromActions[result];
+          if(ttsIndex)
+          {
+              QUrl ttsUrl;
+              ttsUrl.setEncodedUrl(currentDict->getTTsEncodedUrl(ttsIndex-1,selectedText));
+              openLink( ttsUrl, ui.definition->url(), getCurrentArticle(), contexts );
+          }
+          ttsIndex = ttsToActions[result];
+          if(ttsIndex)
+          {
+              QUrl ttsUrl;
+              ttsUrl.setEncodedUrl(currentDict->getToLangTTsEncodedUrl(ttsIndex-1,selectedText));
+              openLink( ttsUrl, ui.definition->url(), getCurrentArticle(), contexts );
+          }
+      }
     }
   }
 #if 0
@@ -1131,8 +1303,9 @@ void ArticleView::resourceDownloadFinished()
 {
   if ( resourceDownloadRequests.empty() )
     return; // Stray signal
-
   // Find any finished resources
+  bool isPlayStatus=false;
+
   for( list< sptr< Dictionary::DataRequest > >::iterator i =
        resourceDownloadRequests.begin(); i != resourceDownloadRequests.end(); )
   {
@@ -1147,15 +1320,20 @@ void ArticleView::resourceDownloadFinished()
         if ( resourceDownloadUrl.scheme() == "gdau" ||
              Dictionary::WebMultimediaDownload::isAudioUrl( resourceDownloadUrl ) )
         {
+            isPlayStatus =true;
+            emit statusBarMessage("");
+            statusMsg ="";
           // Audio data
 
 #ifdef Q_OS_WIN32
-          // If we use Windows PlaySound, use that, not Phonon.
+
+          // If we use Windows PlaySound, use that, not Phonon.            
           if ( !cfg.preferences.useExternalPlayer &&
                cfg.preferences.useWindowsPlaySound )
           {
             // Stop any currently playing sound to make sure the previous data
             // isn't used anymore
+
             if ( winWavData.size() )
             {
               PlaySoundA( 0, 0, 0 );
@@ -1164,40 +1342,112 @@ void ArticleView::resourceDownloadFinished()
 
             if ( data.size() < 4 || memcmp( data.data(), "RIFF", 4 ) != 0 )
             {
+
               QMessageBox::information( this, tr( "Playing a non-WAV file" ),
                 tr( "To enable playback of files different than WAV, please go "
                     "to Edit|Preferences, choose the Audio tab and select "
                     "\"Play via DirectShow\" there." ) );
+
             }
             else
             {
               winWavData = data;
-              PlaySoundA( &winWavData.front(), 0,
-                          SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+
+              if(!PlaySoundA( &winWavData.front(), 0,
+                          SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT ))
+              {
+                  emit statusBarMessage(
+                        tr( "WARNING: %1" ).arg( tr( "The referenced audio failed to play." ) ),
+                        10000, QPixmap( ":/icons/error.png" ) );
+              }
+              else
+              {
+                  emit statusBarMessage(
+                        tr( "Playing..." ), 10000, QPixmap( ":/icons/tssspeacker.png" ) );
+              }
             }
+
           }
           else
 #endif
           if ( !cfg.preferences.useExternalPlayer )
           {
             // Play via Phonon
+#ifdef Q_OS_WIN32
+             //first, check for wav file and use playsound
+             if ( data.size() > 4 && memcmp( data.data(), "RIFF", 4 ) == 0 )
+             {
+                // getAudioPlayer()->object.stop();
+                 //getAudioPlayer()->object.clear();
+                 AudioPlayStop();
+                 if ( winWavData.size() )
+                 {
+                   PlaySoundA( 0, 0, 0 );
+                   winWavData.clear();
+                 }
+                 winWavData = data;
 
+                 if(!PlaySoundA( &winWavData.front(), 0,
+                             SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT ))
+                 {
+                     emit statusBarMessage(
+                           tr( "WARNING: %1" ).arg( tr( "The referenced audio failed to play." ) ),
+                           10000, QPixmap( ":/icons/error.png" ) );
+                 }
+                 else
+                 {
+                     emit statusBarMessage(
+                           tr( "Playing..." ), 5000, QPixmap( ":/icons/tssspeacker.png" ) );
+                 }
+
+             }
+             else
+             {
+                 if ( winWavData.size() )
+                 {
+                   PlaySoundA( 0, 0, 0 );
+                   winWavData.clear();
+                 }
+#endif
             QBuffer * buf = new QBuffer;
 
             buf->buffer().append( &data.front(), data.size() );
 
             Phonon::MediaSource source( buf );
             source.setAutoDelete( true ); // Dispose of our buf when done
-
+            AudioPlayStop();
+           // isStopCommand = false;
+            getAudioPlayer()->object.enqueue(source);
+            getAudioPlayer()->object.play();
+/*
             AudioPlayer::instance().object.stop();
             AudioPlayer::instance().object.clear();
             AudioPlayer::instance().object.enqueue( source );
             AudioPlayer::instance().object.play();
+            Sleep(100);
+            if(AudioPlayer::instance().object.errorType()==Phonon::NoError )
+            {
+                emit statusBarMessage(
+                      tr( "Playing..." ), 10000, QPixmap( ":/icons/tssspeacker.png" ) );
+            }
+            else
+            {
+                emit statusBarMessage(
+                      tr( "WARNING: %1" ).arg( tr( "The referenced audio failed to play." ) ),
+                      10000, QPixmap( ":/icons/error.png" ) );
+            }
+            */
+
+#ifdef Q_OS_WIN32
+             }
+#endif
           }
           else
           {
 
             // Use external viewer to play the file
+              emit statusBarMessage(
+                    tr( "Playing..." ), 10000, QPixmap( ":/icons/tssspeacker.png" ) );
             try
             {
               ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram.trimmed() );
@@ -1261,7 +1511,12 @@ void ArticleView::resourceDownloadFinished()
     emit statusBarMessage(
           tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
           10000, QPixmap( ":/icons/error.png" ) );
+    statusMsg = "";
+  }else if(!isPlayStatus)
+  {
+      emit statusBarMessage("");
   }
+
 }
 
 void ArticleView::pasteTriggered()

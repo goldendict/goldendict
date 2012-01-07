@@ -121,6 +121,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( navPronounce, SIGNAL( triggered() ),
            this, SLOT( pronounce() ) );
 
+  stopPlayAdio = navToolbar->addAction(QIcon(":/icons/stopaudio.png"),tr("Stop"));
+  stopPlayAdio->setEnabled( true );
+  connect(stopPlayAdio,SIGNAL(triggered()),
+          this, SLOT(StopPlaySound()));
+
   // zooming
   navToolbar->addSeparator();
   zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
@@ -1101,6 +1106,15 @@ void MainWindow::pronounce( ArticleView * view )
     view->playSound();
   else
     getCurrentArticleView()->playSound();
+}
+void MainWindow::StopPlaySound(ArticleView *view)
+{
+    if(view)
+    {
+        view->StopSound();
+    }
+    else
+        getCurrentArticleView()->StopSound();
 }
 
 void MainWindow::showDictsPane( )

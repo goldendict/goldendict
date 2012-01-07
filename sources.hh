@@ -72,6 +72,36 @@ private:
   Config::WebSites webSites;
 };
 
+/// A model to be projected into the webtts view, according to Qt's MVC model
+class WebTSSsModel: public QAbstractItemModel
+{
+  Q_OBJECT
+
+public:
+
+  WebTSSsModel( QWidget * parent, Config::WebTtss const & );
+
+  void removeTss( int index );
+  void addNewTss();
+
+  /// Returns the sites the model currently has listed
+  Config::WebTtss const & getCurrentWebTtss() const
+  { return webTtss; }
+
+  QModelIndex index( int row, int column, QModelIndex const & parent ) const;
+  QModelIndex parent( QModelIndex const & parent ) const;
+  Qt::ItemFlags flags( QModelIndex const & index ) const;
+  int rowCount( QModelIndex const & parent ) const;
+  int columnCount( QModelIndex const & parent ) const;
+  QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+  QVariant data( QModelIndex const & index, int role ) const;
+  bool setData( QModelIndex const & index, const QVariant & value, int role );
+
+private:
+
+  Config::WebTtss webTtss;
+};
+
 /// A model to be projected into the programs view, according to Qt's MVC model
 class ProgramsModel: public QAbstractItemModel
 {
@@ -221,7 +251,8 @@ public:
            Config::Forvo const & forvo,
            Config::MediaWikis const &,
            Config::WebSites const &,
-           Config::Programs const &);
+           Config::Programs const &,
+           Config::WebTtss const &);
 
   Config::Paths const & getPaths() const
   { return pathsModel.getCurrentPaths(); }
@@ -244,6 +275,8 @@ public:
 
   Config::Forvo getForvo() const;
 
+  Config::WebTtss const &getWebTsss() const
+  {return webTsssModel.getCurrentWebTtss();}
 signals:
 
   /// Emitted when a 'Rescan' button is clicked.
@@ -261,6 +294,7 @@ private:
   PathsModel pathsModel;
   SoundDirsModel soundDirsModel;
   HunspellDictsModel hunspellDictsModel;
+  WebTSSsModel webTsssModel;
 
   void fitPathsColumns();
   void fitSoundDirsColumns();
@@ -286,6 +320,8 @@ private slots:
   void on_removeProgram_clicked();
 
   void on_rescan_clicked();
+  void on_addWTSS_clicked();
+  void on_removeWTss_clicked();
 };
 
 #endif

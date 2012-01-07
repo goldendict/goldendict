@@ -16,7 +16,6 @@
 #ifdef Q_OS_WIN32
 #include "shlobj.h"
 #endif
-
 #include "atomic_rename.hh"
 
 namespace Config {
@@ -169,6 +168,12 @@ WebSites makeDefaultWebSites()
   ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false ) );
 
   return ws;
+}
+WebTtss makeDefaultWebTtss(bool enable)
+{
+    WebTtss wt;
+    wt.push_back(WebTts("Bing","http://api.microsofttranslator.com/v2/Http.svc/Speak?appId=41C3A878AFE34CB3F02B0E467C40F26E1580305F&text=%GDWORD%&language=%GDLANG%","ca,da,de,en,es,fi,fr,it,ja,ko,nb,nl,no,pl,pt,ru,sv",enable,500));
+    return wt;
 }
 
 Programs makeDefaultPrograms()
@@ -326,6 +331,7 @@ Class load() throw( exError )
 
     c.mediawikis = makeDefaultMediaWikis( true );
     c.webSites = makeDefaultWebSites();
+    c.webTtss = makeDefaultWebTtss(true);
 
     // Check if we have a template config file. If we do, load it instead
 
@@ -558,6 +564,33 @@ Class load() throw( exError )
     // Upgrading
     c.webSites = makeDefaultWebSites();
   }
+
+  QDomNode wts = root.namedItem( "webttss" );
+
+  if ( !wts.isNull() )
+  {
+    QDomNodeList nl = wts.toElement().elementsByTagName( "webtts" );
+
+    for( unsigned x = 0; x < nl.length(); ++x )
+    {
+      QDomElement ws = nl.item( x ).toElement();
+
+      WebTts w;
+
+      w.name = ws.attribute( "name" );
+      w.url = ws.attribute( "url" );
+      w.langlist = ws.attribute( "lang" );
+      w.enabled = ( ws.attribute( "enabled" ) == "1" );
+      w.maxlength = ws.attribute("maxlength").toUInt();
+      c.webTtss.push_back( w );
+    }
+  }
+  else
+  {
+    // Upgrading
+    c.webTtss = makeDefaultWebTtss(true);
+  }
+
 
   c.mutedDictionaries = loadMutedDictionaries( root.namedItem( "mutedDictionaries" ) );
   c.popupMutedDictionaries = loadMutedDictionaries( root.namedItem( "popupMutedDictionaries" ) );
@@ -973,6 +1006,37 @@ void save( Class const & c ) throw( exError )
   }
 
   {
+    QDomElement wts = dd.createElement( "webttss" );
+    root.appendChild( wts );
+
+    for( WebTtss::const_iterator i = c.webTtss.begin(); i != c.webTtss.end(); ++i )
+    {
+      QDomElement ws = dd.createElement( "webtts" );
+      wts.appendChild( ws );
+
+      QDomAttr name = dd.createAttribute( "name" );
+      name.setValue( i->name );
+      ws.setAttributeNode( name );
+
+      QDomAttr url = dd.createAttribute( "url" );
+      url.setValue( i->url );
+      ws.setAttributeNode( url );
+
+      QDomAttr lang = dd.createAttribute( "lang" );
+      lang.setValue( i->langlist );
+      ws.setAttributeNode( lang );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( i->enabled ? "1" : "0" );
+      ws.setAttributeNode( enabled );
+
+      QDomAttr maxlength = dd.createAttribute( "maxlength" );
+      maxlength.setValue(QString("%1").arg(i->maxlength));
+      ws.setAttributeNode( maxlength );
+    }
+  }
+
+  {
     QDomElement programs = dd.createElement( "programs" );
     root.appendChild( programs );
 
@@ -1347,4 +1411,34 @@ QString getPortableVersionMorphoDir() throw()
     return QString();
 }
 
+std::string getCustomJs() throw(exError)
+{
+    // set dir iterator
+     QDirIterator dirIterator(getHomeDir().filePath("include"),
+                              QStringList("*.js"),
+                              QDir::Files|QDir::Readable|QDir::NoSymLinks,
+                              QDirIterator::Subdirectories);
+     QByteArray js("");
+     while(dirIterator.hasNext())
+     {
+         QFile addJs( dirIterator.next() );
+         if(addJs.open( QFile::ReadOnly )){
+            js.append(addJs.readAll());
+            addJs.close();
+         }
+
+     }
+     return js.data();
+}
+QString getFileInHomeDir(QString const &filepath)
+{
+    QString result;
+    QFile f(getHomeDir().filePath(filepath));
+    if(f.open( QFile::ReadOnly))
+    {
+        result = QString::fromUtf8(f.readAll());
+        f.close();
+    }
+    return result;
+}
 }

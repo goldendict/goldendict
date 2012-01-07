@@ -114,7 +114,24 @@ bool indexIsOldOrBad( string const & indexFile, bool hasZipFile )
          (bool) header.hasZipFile != hasZipFile ||
          ( hasZipFile && header.zipSupportVersion != CurrentZipSupportVersion );
 }
-
+string getBaseDictionaryFileName(string fname)
+ {
+    // string fname = getDictionaryFilenames()[0];
+    // string dirName = FsEncoding::separator()
+     size_t found = fname.find(".files.");
+     if(found==string::npos)
+         return fname;
+     else
+     {
+         string basename = fname.substr(found+7);
+         size_t x = fname.rfind( FsEncoding::separator() );
+         if ( x != string::npos )
+         {
+             basename = fname.substr(0,x) +FsEncoding::separator()+ basename;
+         }
+         return basename;
+     }
+ }
 class DslDictionary: public BtreeIndexing::BtreeDictionary
 {
   Mutex idxMutex;
@@ -141,7 +158,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
 public:
 
   DslDictionary( string const & id, string const & indexFile,
-                 vector< string > const & dictionaryFiles );
+                 vector< string > const & dictionaryFiles,Config::WebTtss const & );
 
   virtual void deferredInit();
 
@@ -214,7 +231,8 @@ private:
 
 DslDictionary::DslDictionary( string const & id,
                               string const & indexFile,
-                              vector< string > const & dictionaryFiles ):
+                              vector< string > const & dictionaryFiles,
+                               Config::WebTtss const &webTtss):
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
@@ -229,7 +247,7 @@ DslDictionary::DslDictionary( string const & id,
   vector< char > dName( idx.read< uint32_t >() );
   idx.read( &dName.front(), dName.size() );
   dictionaryName = string( &dName.front(), dName.size() );
-
+   setWebTssMaker(webTtss);
   // Everything else would be done in deferred init
 }
 
@@ -759,7 +777,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
       bool search =
 
-        !File::exists( n ) && !File::exists( getDictionaryFilenames()[ 0 ] + ".files" +
+        !File::exists( n ) && !File::exists( getBaseDictionaryFileName(getDictionaryFilenames()[ 0 ]) + ".files" +
                                              FsEncoding::separator() +
                                              FsEncoding::encode( filename ) ) &&
           ( !resourceZip.isOpen() ||
@@ -1053,6 +1071,7 @@ void DslArticleRequest::run()
     articleText += "<div class=\"dsl_headwords\">";
 
     articleText += dict.dslToHtml( displayedHeadword );
+    articleText += dict.MakeTssView(gd::toQString(displayedHeadword));
 
     articleText += "</div>";
 
@@ -1195,7 +1214,7 @@ void DslResourceRequest::run()
     }
     catch( File::exCantOpen & )
     {
-      n = dict.getDictionaryFilenames()[ 0 ] + ".files" +
+      n = getBaseDictionaryFileName(dict.getDictionaryFilenames()[ 0 ]) + ".files" +
           FsEncoding::separator() +
           FsEncoding::encode( resourceName );
 
@@ -1327,7 +1346,8 @@ static void findCorrespondingFiles( string const & ifo,
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                        Config::WebTtss const &webTtss)
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1379,11 +1399,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string zipFileName;
 
-      if ( tryPossibleName( baseName + ".dsl.files.zip", zipFileName ) ||
-           tryPossibleName( baseName + ".dsl.dz.files.zip", zipFileName ) ||
-           tryPossibleName( baseName + ".DSL.FILES.ZIP", zipFileName ) ||
-           tryPossibleName( baseName + ".DSL.DZ.FILES.ZIP", zipFileName ) )
-        dictFiles.push_back( zipFileName );
+      string mediafiles =getBaseDictionaryFileName(baseName);
+        if ( tryPossibleName( mediafiles + ".dsl.files.zip", zipFileName ) ||
+             tryPossibleName( mediafiles + ".dsl.dz.files.zip", zipFileName ) ||
+             tryPossibleName( mediafiles + ".DSL.FILES.ZIP", zipFileName ) ||
+             tryPossibleName( mediafiles + ".DSL.DZ.FILES.ZIP", zipFileName ) )
+          dictFiles.push_back( zipFileName );
 
       string indexFile = indicesDir + dictId;
 
@@ -1792,7 +1813,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       dictionaries.push_back( new DslDictionary( dictId,
                                                  indexFile,
-                                                 dictFiles ) );
+                                                 dictFiles,webTtss ) );
     }
     catch( std::exception & e )
     {

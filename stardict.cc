@@ -126,7 +126,7 @@ class StardictDictionary: public BtreeIndexing::BtreeDictionary
 public:
 
   StardictDictionary( string const & id, string const & indexFile,
-                      vector< string > const & dictionaryFiles );
+                      vector< string > const & dictionaryFiles,Config::WebTtss const & );
 
   ~StardictDictionary();
 
@@ -180,7 +180,7 @@ private:
 
 StardictDictionary::StardictDictionary( string const & id,
                                         string const & indexFile,
-                                        vector< string > const & dictionaryFiles ):
+                                        vector< string > const & dictionaryFiles,Config::WebTtss const &webTtss ):
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
@@ -200,6 +200,7 @@ StardictDictionary::StardictDictionary( string const & id,
   openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                         idxHeader.indexRootOffset ),
              idx, idxMutex );
+  setWebTssMaker(webTtss);
 }
 
 StardictDictionary::~StardictDictionary()
@@ -718,6 +719,7 @@ void StardictArticleRequest::run()
     {
         result += "<h3>";
         result += i->second.first;
+        result += dict.MakeTssView(i->second.first);
         result += "</h3>";
         result += i->second.second;
         result += cleaner;
@@ -727,6 +729,7 @@ void StardictArticleRequest::run()
     {
         result += "<h3>";
         result += i->second.first;
+        result += dict.MakeTssView(i->second.first);
         result += "</h3>";
         result += i->second.second;
         result += cleaner;
@@ -1021,7 +1024,7 @@ static void handleIdxSynFile( string const & fileName,
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,Config::WebTtss const &webTtss )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1165,7 +1168,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       dictionaries.push_back( new StardictDictionary( dictId,
                                                       indexFile,
-                                                      dictFiles ) );
+                                                      dictFiles,webTtss ) );
     }
     catch( std::exception & e )
     {

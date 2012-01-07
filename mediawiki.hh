@@ -17,7 +17,8 @@ using std::string;
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
-                                      QNetworkAccessManager & )
+                                      QNetworkAccessManager &,
+                                      Config::WebTtss const &)
     throw( std::exception );
 
 /// Exposed here for moc

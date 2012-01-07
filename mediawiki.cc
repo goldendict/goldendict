@@ -9,6 +9,8 @@
 #include <QtXml>
 #include <list>
 #include "dprintf.hh"
+#include "audiolink.hh"
+#include "langcoder.hh"
 
 namespace MediaWiki {
 
@@ -26,12 +28,14 @@ public:
 
   MediaWikiDictionary( string const & id, string const & name_,
                        QString const & url_,
-                       QNetworkAccessManager & netMgr_ ):
+                       QNetworkAccessManager & netMgr_ ,
+                       Config::WebTtss const & webTTss):
     Dictionary::Class( id, vector< string >() ),
     name( name_ ),
     url( url_ ),
     netMgr( netMgr_ )
   {
+      setWebTssMaker(webTTss);
   }
 
   virtual string getName() throw()
@@ -48,6 +52,10 @@ public:
 
   virtual QIcon getIcon() throw()
   { return QIcon(":/icons/icon32_wiki.png"); }
+  virtual quint32 getLangFrom() const
+  { return LangCoder::code2toInt(url.mid(7,2).toAscii().data()); }
+  virtual quint32 getLangTo() const
+  { return getLangFrom(); }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) throw( std::exception );
@@ -181,10 +189,11 @@ class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 public:
 
   MediaWikiArticleRequest( wstring const & word, vector< wstring > const & alts,
-                           QString const & url, QNetworkAccessManager & mgr );
+                           QString const & url, QNetworkAccessManager & mgr,string wikidictID );
 
   virtual void cancel();
-
+protected:
+  string dictID;
 private:
 
   void addQuery( QNetworkAccessManager & mgr, wstring const & word );
@@ -200,8 +209,8 @@ void MediaWikiArticleRequest::cancel()
 MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
                                                   vector< wstring > const & alts,
                                                   QString const & url_,
-                                                  QNetworkAccessManager & mgr ):
-  url( url_ )
+                                                  QNetworkAccessManager & mgr,string wikidictID ):
+    url( url_ ),dictID(wikidictID)
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
            this, SLOT( requestFinished( QNetworkReply * ) ),
@@ -295,7 +304,10 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
   
             // Add "http:" to image source urls
             articleString.replace( " src=\"//", " src=\"http://" );
-
+            //change player
+                        articleString.replace( QRegExp("<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
+                                                       QString::fromStdString(addAudioLink("\"http://\\1\"",this->dictID)+
+                                                                              "<a href=\"http://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>"));
             // In those strings, change any underscores to spaces
             for( ; ; )
             {
@@ -305,7 +317,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               if ( articleString == before )
                 break;
             }
-  
+
             QByteArray articleBody = articleString.toUtf8();
   
             DPRINTF( "Article body after: %s\n", articleBody.data() );
@@ -366,7 +378,7 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
     return new DataRequestInstant( false );
   }
   else
-    return new MediaWikiArticleRequest( word, alts, url, netMgr );
+    return new MediaWikiArticleRequest( word, alts, url, netMgr,this->getId() );
 }
 
 }
@@ -374,7 +386,8 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
-                                      QNetworkAccessManager & mgr )
+                                      QNetworkAccessManager & mgr,
+                                       Config::WebTtss const & webTTss)
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
@@ -385,7 +398,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       result.push_back( new MediaWikiDictionary( wikis[ x ].id.toStdString(),
                                                  wikis[ x ].name.toUtf8().data(),
                                                  wikis[ x ].url,
-                                                 mgr ) );
+                                                 mgr,
+                                                 webTTss) );
   }
 
   return result;

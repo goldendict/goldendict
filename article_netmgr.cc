@@ -50,6 +50,10 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 {
   if ( op == GetOperation )
   {
+      if(req.url().hasQueryItem("gdpost"))
+      {
+          return QNetworkAccessManager::post(QNetworkRequest(req), req.url().encodedQuery() );
+      }
     if ( req.url().scheme() == "qrcx" )
     {
       // We have to override the local load policy for the qrc scheme, hence
@@ -64,7 +68,6 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
-
     QString contentType;
 
     sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );
@@ -145,8 +148,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     if ( groupIsValid && word.size() ) // Require group and word to be passed
       return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts );
   }
-
-  if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ) &&
+  if ( ( url.scheme() == "bres" || url.scheme() == "gdau" ||  url.scheme() == "gico") &&
        url.path().size() )
   {
     //DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
@@ -159,8 +161,29 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     if ( !search )
     {
       for( unsigned x = 0; x < dictionaries.size(); ++x )
+      {
         if ( dictionaries[ x ]->getId() == id )
-          return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+        {
+            if( url.scheme() == "gico")
+            {
+                QByteArray byteArray;
+                QBuffer buffer(&byteArray);
+
+                 buffer.open(QIODevice::WriteOnly);
+                 dictionaries[ x ]->getIcon().pixmap( 32 ).toImage().save(&buffer, "PNG");
+                 buffer.close();
+                 sptr< Dictionary::DataRequestInstant > ico = new Dictionary::DataRequestInstant( true );
+                 ico->getData().resize( byteArray.size() );
+                 memcpy( &( ico->getData().front() ), byteArray.data(), byteArray.size() );
+                 return ico;
+
+            }
+            else
+            {
+                return dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+            }
+        }
+      }
     }
     else
     {
@@ -187,7 +210,6 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 #endif      
     }
   }
-
   return sptr< Dictionary::DataRequest >();
 }
 

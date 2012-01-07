@@ -52,7 +52,7 @@ win32 {
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
 
-    Release:DEFINES += NO_CONSOLE
+    Release:DEFINES += NO_CONSOLE # PRIVATE_TSS
 }
 
 unix:!mac {
@@ -189,7 +189,8 @@ HEADERS += folding.hh \
     dprintf.hh \
     mainstatusbar.hh \
     gdappstyle.hh \
-    ufile.hh
+    ufile.hh \
+    wtts.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -277,7 +278,8 @@ SOURCES += folding.cc \
     maintabwidget.cc \
     mainstatusbar.cc \
     gdappstyle.cc \
-    ufile.cc
+    ufile.cc \
+    wtts.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
@@ -334,6 +336,8 @@ TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
+
+
 
 
 

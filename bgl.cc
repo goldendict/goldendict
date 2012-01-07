@@ -217,7 +217,7 @@ namespace
   public:
 
     BglDictionary( string const & id, string const & indexFile,
-                   string const & dictionaryFile );
+                   string const & dictionaryFile, Config::WebTtss const &);
 
     virtual string getName() throw()
     { return dictionaryName; }
@@ -265,7 +265,7 @@ namespace
   };
 
   BglDictionary::BglDictionary( string const & id, string const & indexFile,
-                                string const & dictionaryFile ):
+                                string const & dictionaryFile, Config::WebTtss const &webttss):
     BtreeDictionary( id, vector< string >( 1, dictionaryFile ) ),
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
@@ -289,6 +289,9 @@ namespace
     openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                         idxHeader.indexRootOffset ),
                idx, idxMutex );
+
+    setWebTssMaker(webttss);
+
   }
 
   QIcon BglDictionary::getIcon() throw()
@@ -695,6 +698,7 @@ void BglArticleRequest::run()
       else
         result += "<h3>";
       result += postfixToSuperscript( i->second.first );
+      result += dict.MakeTssView(i->second.first);
       result += "</h3>";
       if ( dict.idxHeader.langTo == hebrew )
         result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
@@ -711,6 +715,7 @@ void BglArticleRequest::run()
       else
         result += "<h3>";
       result += postfixToSuperscript( i->second.first );
+      result += dict.MakeTssView(i->second.first);
       result += "</h3>";
       if ( dict.idxHeader.langTo == hebrew )
         result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
@@ -722,9 +727,12 @@ void BglArticleRequest::run()
 
   BglDictionary::replaceCharsetEntities( result );
   result = QString::fromUtf8( result.c_str() )
-           .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
-                     "\\1bword:" )
-           .toUtf8().data();
+                    .replace( QRegExp( "<([a-z]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>", Qt::CaseInsensitive ),
+                              "<a href=\"\\2\">\\3</a>")
+                    .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
+                    "\\1bword:" )
+                    .replace(QRegExp("(width)|(height)\\s*=\\s*[\"']\\d{7,}[\"'']"),"")
+                     .toUtf8().data();
 
   Mutex::Lock _( dataMutex );
 
@@ -971,7 +979,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,Config::WebTtss const &webTtss )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1124,7 +1132,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
     dictionaries.push_back( new BglDictionary( dictId,
                                                indexFile,
-                                               *i ) );
+                                               *i ,webTtss) );
   }
 
   return dictionaries;

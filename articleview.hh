@@ -13,6 +13,30 @@
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
 
+// Phonon headers are a mess. How to include them properly? Send patches if you
+// know.
+
+#ifdef __WIN32
+#include <Phonon/AudioOutput>
+#include <Phonon/MediaObject>
+#else
+#include <phonon/audiooutput.h>
+#include <phonon/mediaobject.h>
+#endif
+
+/// A phonon-based audio player, created on demand
+struct AudioPlayer
+{
+  Phonon::AudioOutput output;
+  Phonon::MediaObject object;
+  //static AudioPlayer & instance();
+
+public:
+
+  AudioPlayer();
+};
+
+
 /// A widget with the web view tailored to view and handle articles -- it
 /// uses the appropriate netmgr, handles link clicks, rmb clicks etc
 class ArticleView: public QFrame
@@ -35,7 +59,7 @@ class ArticleView: public QFrame
     // Used in Windows only for PlaySound mode
     vector< char > winWavData;
 #endif
-
+    AudioPlayer * audioPlayer;
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
   /// a multitude of requests.
@@ -157,6 +181,8 @@ public:
   /// Returns the dictionary id of the currently active article in the view.
   QString getActiveArticleId();
 
+  void StopSound();
+
 signals:
 
   void iconChanged( ArticleView *, QIcon const & icon );
@@ -228,6 +254,8 @@ private slots:
   /// Handles the double-click from the definition.
   void doubleClicked();
 
+  void AudioPlayerStateChanged ( Phonon::State newstate, Phonon::State);
+  void AudioPlayerfinished();
 private:
 
   /// Deduces group from the url. If there doesn't seem to be any group,
@@ -276,6 +304,9 @@ private:
   /// for the given group. If there are none, returns empty string.
   QString getMutedForGroup( unsigned group );
 
+  AudioPlayer * getAudioPlayer();
+  QString statusMsg;
+  void AudioPlayStop();
 protected:
 
   // We need this to hide the search bar when we're showed

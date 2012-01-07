@@ -47,5 +47,7 @@
         <file>icons/highlighter.png</file>
         <file>icons/error.png</file>
         <file>icons/macicon.png</file>
+        <file>icons/tssspeacker.png</file>
+        <file>icons/stopaudio.png</file>
     </qresource>
 </RCC>

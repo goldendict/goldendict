@@ -77,7 +77,7 @@ private:
           showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction;
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
-  QAction * navBack, * navForward, * navPronounce, * enableScanPopup, * scanPopupSeparator;
+  QAction * navBack, * navForward, * navPronounce, * enableScanPopup, * scanPopupSeparator,*stopPlayAdio;
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
   QMenu trayIconMenu;
@@ -220,6 +220,7 @@ private slots:
   /// reference, if it has any.
   /// If view is 0, the operation is done for the currently open tab.
   void pronounce( ArticleView * view = 0 );
+  void StopPlaySound(ArticleView *view=0);
 
   void zoomin();
   void zoomout();
