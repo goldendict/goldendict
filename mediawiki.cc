@@ -183,7 +183,7 @@ public:
 
   MediaWikiArticleRequest( wstring const & word, vector< wstring > const & alts,
                            QString const & url, QNetworkAccessManager & mgr,
-                           string wikidictID );
+                           string const & wikidictID );
 
   virtual void cancel();
 
@@ -204,8 +204,8 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
                                                   vector< wstring > const & alts,
                                                   QString const & url_,
                                                   QNetworkAccessManager & mgr,
-                                                  string wikidictID ):
-  url( url_ ),dictID(wikidictID)
+                                                  string const & wikidictID ):
+  url( url_ ), dictID( wikidictID )
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
            this, SLOT( requestFinished( QNetworkReply * ) ),
