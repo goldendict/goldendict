@@ -9,6 +9,7 @@
 #include <QtXml>
 #include <list>
 #include "dprintf.hh"
+#include "audiolink.hh"
 
 namespace MediaWiki {
 
@@ -181,7 +182,8 @@ class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 public:
 
   MediaWikiArticleRequest( wstring const & word, vector< wstring > const & alts,
-                           QString const & url, QNetworkAccessManager & mgr );
+                           QString const & url, QNetworkAccessManager & mgr,
+                           string const & wikidictID );
 
   virtual void cancel();
 
@@ -190,6 +192,7 @@ private:
   void addQuery( QNetworkAccessManager & mgr, wstring const & word );
 
   virtual void requestFinished( QNetworkReply * );
+  string dictID;
 };
 
 void MediaWikiArticleRequest::cancel()
@@ -200,8 +203,9 @@ void MediaWikiArticleRequest::cancel()
 MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
                                                   vector< wstring > const & alts,
                                                   QString const & url_,
-                                                  QNetworkAccessManager & mgr ):
-  url( url_ )
+                                                  QNetworkAccessManager & mgr,
+                                                  string const & wikidictID ):
+  url( url_ ), dictID( wikidictID )
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
            this, SLOT( requestFinished( QNetworkReply * ) ),
@@ -295,7 +299,10 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
   
             // Add "http:" to image source urls
             articleString.replace( " src=\"//", " src=\"http://" );
-
+            //fix audio
+            articleString.replace( QRegExp("<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
+                                            QString::fromStdString(addAudioLink("\"http://\\1\"",this->dictID)+
+                                           "<a href=\"http://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>"));
             // In those strings, change any underscores to spaces
             for( ; ; )
             {
@@ -366,7 +373,7 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
     return new DataRequestInstant( false );
   }
   else
-    return new MediaWikiArticleRequest( word, alts, url, netMgr );
+    return new MediaWikiArticleRequest( word, alts, url, netMgr,this->getId() );
 }
 
 }
