@@ -10,6 +10,8 @@
 #include "xdxf2html.hh"
 #include "htmlescape.hh"
 #include "langcoder.hh"
+#include "fsencoding.hh"
+#include "filetype.hh"
 #include "dprintf.hh"
 
 #include <zlib.h>
@@ -159,12 +161,17 @@ public:
                                                       wstring const & )
     throw( std::exception );
 
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name )
+    throw( std::exception );
+
 private:
 
   /// Retrives the article's offset/size in .dict file, and its headword.
   void getArticleProps( uint32_t articleAddress,
                         string & headword,
                         uint32_t & offset, uint32_t & size );
+
+  string handleResource( char type, char const * resource, size_t size );
 
   /// Loads the article, storing its headword and formatting the data it has
   /// into an html.
@@ -237,12 +244,12 @@ void StardictDictionary::getArticleProps( uint32_t articleAddress,
 
 /// This function tries to make an html of the Stardict's resource typed
 /// 'type', contained in a block pointed to by 'resource', 'size' bytes long.
-static string handleResource( char type, char const * resource, size_t size )
+string StardictDictionary::handleResource( char type, char const * resource, size_t size )
 {
   switch( type )
   {
     case 'x': // Xdxf content
-      return Xdxf2Html::convert( string( resource, size ) );
+      return Xdxf2Html::convert( getId(), string( resource, size ) );
     case 'h': // Html content
       return "<div class=\"sdct_h\">" + string( resource, size ) + "</div>";
     case 'm': // Pure meaning, usually means preformatted text
@@ -760,6 +767,161 @@ sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & 
   return new StardictArticleRequest( word, alts, *this );
 }
 
+void loadFromFile( string const & n, vector< char > & data )
+{
+  File::Class f( n, "rb" );
+
+  f.seekEnd();
+
+  data.resize( f.tell() );
+
+  f.rewind();
+
+  f.read( &data.front(), data.size() );
+}
+
+//// StardictDictionary::getResource()
+
+class StardictResourceRequest;
+
+class StardictResourceRequestRunnable: public QRunnable
+{
+  StardictResourceRequest & r;
+  QSemaphore & hasExited;
+
+public:
+
+  StardictResourceRequestRunnable( StardictResourceRequest & r_,
+                              QSemaphore & hasExited_ ): r( r_ ),
+                                                         hasExited( hasExited_ )
+  {}
+
+  ~StardictResourceRequestRunnable()
+  {
+    hasExited.release();
+  }
+
+  virtual void run();
+};
+
+class StardictResourceRequest: public Dictionary::DataRequest
+{
+  friend class StardictResourceRequestRunnable;
+
+  StardictDictionary & dict;
+
+  string resourceName;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  StardictResourceRequest( StardictDictionary & dict_,
+                      string const & resourceName_ ):
+    dict( dict_ ),
+    resourceName( resourceName_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new StardictResourceRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by StardictResourceRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+
+  ~StardictResourceRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void StardictResourceRequestRunnable::run()
+{
+  r.run();
+}
+
+void StardictResourceRequest::run()
+{
+  // Some runnables linger enough that they are cancelled before they start
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  string n =
+    FsEncoding::dirname( dict.getDictionaryFilenames()[ 0 ] ) +
+    FsEncoding::separator() +
+    FsEncoding::encode( resourceName );
+
+  DPRINTF( "Path is %s.\n", n.c_str() );
+
+  try
+  {
+    try
+    {
+      Mutex::Lock _( dataMutex );
+      loadFromFile( n, data );
+    }
+    catch( File::exCantOpen & )
+    {
+      throw;
+    }
+
+    if ( Filetype::isNameOfTiff( resourceName ) )
+    {
+      // Convert it
+
+      dataMutex.lock();
+
+      QImage img = QImage::fromData( (unsigned char *) &data.front(),
+                                     data.size() );
+
+      dataMutex.unlock();
+
+      if ( !img.isNull() )
+      {
+        // Managed to load -- now store it back as BMP
+
+        QByteArray ba;
+        QBuffer buffer( &ba );
+        buffer.open( QIODevice::WriteOnly );
+        img.save( &buffer, "BMP" );
+
+        Mutex::Lock _( dataMutex );
+
+        data.resize( buffer.size() );
+
+        memcpy( &data.front(), buffer.data(), data.size() );
+      }
+    }
+
+    Mutex::Lock _( dataMutex );
+
+    hasAnyData = true;
+  }
+  catch( File::Ex & )
+  {
+    // No such resource -- we don't set the hasAnyData flag then
+  }
+  catch( Utf8::exCantDecode )
+  {
+    // Failed to decode some utf8 -- probably the resource name is no good
+  }
+
+  finish();
+}
+
+sptr< Dictionary::DataRequest > StardictDictionary::getResource( string const & name )
+  throw( std::exception )
+{
+  return new StardictResourceRequest( *this, name );
+}
 
 static char const * beginsWith( char const * substr, char const * str )
 {

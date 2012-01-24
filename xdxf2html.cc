@@ -7,7 +7,17 @@
 
 namespace Xdxf2Html {
 
-string convert( string const & in )
+static void fixLink( QDomElement & el, string const & dictId, const char *attrName )
+{
+  QUrl url;
+  url.setScheme( "bres" );
+  url.setHost( QString::fromStdString(dictId) );
+  url.setPath( el.attribute(attrName) );
+
+  el.setAttribute( attrName, url.toEncoded().data() );
+}
+
+string convert( string const & dictId, string const & in )
 {
   DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
@@ -155,6 +165,32 @@ string convert( string const & in )
 
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_rref" );
+  }
+
+  // Ensure that ArticleNetworkAccessManager can deal with XDXF images.
+  // We modify the URL by using the dictionary ID as the hostname.
+  // This is necessary to determine from which dictionary a requested
+  // image originates.
+  nodes = dd.elementsByTagName( "img" );
+
+  for( int i = 0; i < nodes.size(); i++ )
+  {
+    QDomElement el = nodes.at( i ).toElement();
+
+    if ( el.hasAttribute( "src" ) )
+    {
+      fixLink( el, dictId, "src" );
+    }
+
+    if ( el.hasAttribute( "losrc" ) )
+    {
+      fixLink( el, dictId, "losrc" );
+    }
+
+    if ( el.hasAttribute( "hisrc" ) )
+    {
+      fixLink( el, dictId, "hisrc" );
+    }
   }
 
   return dd.toByteArray().data();
