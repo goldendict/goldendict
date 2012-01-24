@@ -204,6 +204,18 @@ div.sdct_x
   display: none;
 }
 
+.xdxf_headwords
+{
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.xdxf_opt
+{
+  color: grey;
+}
+
 /************* LSA audio archives **************/
 
 /* A table which contains a play icon and a word's link */

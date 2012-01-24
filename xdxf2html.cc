@@ -4,10 +4,13 @@
 #include "xdxf2html.hh"
 #include <QtXml>
 #include "dprintf.hh"
+#include "utf8.hh"
+#include "wstring_qt.hh"
+#include "folding.hh"
 
 namespace Xdxf2Html {
 
-string convert( string const & in )
+string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv )
 {
   DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
@@ -73,10 +76,27 @@ string convert( string const & in )
   {
     QDomElement el = nodes.at( 0 ).toElement();
 
-    el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_k" );
+    if( type == STARDICT )
+    {
+        el.setTagName( "span" );
+        el.setAttribute( "class", "xdxf_k" );
+    }
+    else
+    {
+        el.setTagName( "div" );
+        el.setAttribute( "class", "xdxf_headwords" );
+    }
   }
 
+  nodes = dd.elementsByTagName( "opt" ); // Optional headword part
+
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_opt" );
+  }
 
   nodes = dd.elementsByTagName( "kref" ); // Reference to another word
 
@@ -89,6 +109,16 @@ string convert( string const & in )
     el.setAttribute( "class", "xdxf_kref" );
   }
 
+  nodes = dd.elementsByTagName( "iref" ); // Reference to internet site
+
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "a" );
+    el.setAttribute( "href", el.text() );
+  }
+
   nodes = dd.elementsByTagName( "abr" ); // Abbreviation
 
   while( nodes.size() )
@@ -97,6 +127,39 @@ string convert( string const & in )
 
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_abr" );
+    if( type == XDXF && pAbrv != NULL )
+    {
+        string val = Utf8::encode( Folding::trimWhitespace( gd::toWString( el.text() ) ) );
+
+        // If we have such a key, display a title
+
+        map< string, string >::const_iterator i = pAbrv->find( val );
+
+        if ( i != pAbrv->end() )
+        {
+          string title;
+
+          if ( Utf8::decode( i->second ).size() < 70 )
+          {
+            // Replace all spaces with non-breakable ones, since that's how
+            // Lingvo shows tooltips
+            title.reserve( i->second.size() );
+
+            for( char const * c = i->second.c_str(); *c; ++c )
+              if ( *c == ' ' || *c == '\t' )
+              {
+                // u00A0 in utf8
+                title.push_back( 0xC2 );
+                title.push_back( 0xA0 );
+              }
+              else
+                title.push_back( *c );
+          }
+          else
+            title = i->second;
+          el.setAttribute( "title", title.c_str() );
+        }
+    }
   }
 
   nodes = dd.elementsByTagName( "dtrn" ); // Direct translation

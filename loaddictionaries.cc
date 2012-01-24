@@ -20,6 +20,7 @@
 #include "programs.hh"
 #include "dprintf.hh"
 #include "fsencoding.hh"
+#include "xdxf.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -39,7 +40,7 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   // Populate name filters
 
   nameFilters << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
-              << "*.dsl" << "*.dsl.dz"  << "*.index";
+              << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf" << "*.xdxf.dz";
 }
 
 void LoadDictionaries::run()
@@ -137,6 +138,13 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), dictdDictionaries.begin(),
                          dictdDictionaries.end() );
+  }
+  {
+    vector< sptr< Dictionary::Class > > xdxfDictionaries =
+      Xdxf::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), xdxfDictionaries.begin(),
+                         xdxfDictionaries.end() );
   }
 }
 

@@ -14,14 +14,20 @@
 #include <string>
 #include <vector>
 #include <list>
-#include <zlib.h>
 #include <wctype.h>
 #include <stdlib.h>
 #include "dprintf.hh"
+#include "wstring_qt.hh"
+#include "xdxf2html.hh"
+#include "ufile.hh"
+#include "dictzip.h"
 
 #include <QIODevice>
 #include <QXmlStreamReader>
 #include <QTextDocument>
+#include <QFileInfo>
+#include <QDir>
+#include <QPainter>
 
 #include <QSemaphore>
 #include <QThreadPool>
@@ -74,7 +80,8 @@ struct IdxHeader
   uint32_t nameSize; // And its size
   uint32_t descriptionAddress; // Address of an utf8 description string, in chunks
   uint32_t descriptionSize; // And its size
-  uint32_t abbreviationsCount; // Number of abbreviations
+  uint32_t hasAbrv; // Non-zero means file has abrvs at abrvAddress
+  uint32_t abrvAddress; // Address of abrv map in the chunked storage
   uint32_t chunksOffset; // The offset to chunks' storage
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
@@ -99,10 +106,13 @@ class XdxfDictionary: public BtreeIndexing::BtreeDictionary
   Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
-  ChunkedStorage::Reader chunks;
+  sptr< ChunkedStorage::Reader > chunks;
   Mutex dzMutex;
   dictData * dz;
   string dictionaryName;
+  map< string, string > abrv;
+  QIcon dictionaryNativeIcon, dictionaryIcon;
+  bool dictionaryIconLoaded;
 
 public:
 
@@ -123,14 +133,18 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
 
-  virtual QIcon getIcon() throw()
-  { return QIcon(":/icons/icon32_xdxf.png"); }
+  virtual QIcon getIcon() throw();
+
+  virtual QIcon getNativeIcon() throw();
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                      vector< wstring > const & alts )
+                                                      vector< wstring > const & alts,
+                                                      wstring const & )
     throw( std::exception );
 
 private:
+
+  void loadIcon();
 
   /// Loads the article, storing its headword and formatting the data it has
   /// into an html.
@@ -147,15 +161,17 @@ XdxfDictionary::XdxfDictionary( string const & id,
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
-  chunks( idx, idxHeader.chunksOffset )
+  dictionaryIconLoaded( false )
 {
   // Read the dictionary name
+
+  chunks = new ChunkedStorage::Reader( idx, idxHeader.chunksOffset );
 
   if ( idxHeader.nameSize )
   {
     vector< char > chunk;
 
-    dictionaryName = string( chunks.getBlock( idxHeader.nameAddress, chunk ),
+    dictionaryName = string( chunks->getBlock( idxHeader.nameAddress, chunk ),
                              idxHeader.nameSize );
   }
 
@@ -165,6 +181,38 @@ XdxfDictionary::XdxfDictionary( string const & id,
 
   if ( !dz )
     throw exCantReadFile( dictionaryFiles[ 0 ] );
+
+  // Read the abrv, if any
+
+  if ( idxHeader.hasAbrv )
+  {
+    vector< char > chunk;
+
+    char * abrvBlock = chunks->getBlock( idxHeader.abrvAddress, chunk );
+
+    uint32_t total;
+    memcpy( &total, abrvBlock, sizeof( uint32_t ) );
+    abrvBlock += sizeof( uint32_t );
+
+    while( total-- )
+    {
+      uint32_t keySz;
+      memcpy( &keySz, abrvBlock, sizeof( uint32_t ) );
+      abrvBlock += sizeof( uint32_t );
+
+      char * key = abrvBlock;
+
+      abrvBlock += keySz;
+
+      uint32_t valueSz;
+      memcpy( &valueSz, abrvBlock, sizeof( uint32_t ) );
+      abrvBlock += sizeof( uint32_t );
+
+      abrv[ string( key, keySz ) ] = string( abrvBlock, valueSz );
+
+      abrvBlock += valueSz;
+    }
+  }
 
   // Initialize the index
 
@@ -177,6 +225,89 @@ XdxfDictionary::~XdxfDictionary()
 {
   if ( dz )
     dict_data_close( dz );
+}
+
+QIcon XdxfDictionary::getNativeIcon() throw()
+{
+  loadIcon();
+  return dictionaryNativeIcon;
+}
+
+QIcon XdxfDictionary::getIcon() throw()
+{
+  loadIcon();
+  return dictionaryIcon;
+}
+
+void XdxfDictionary::loadIcon()
+{
+  if ( dictionaryIconLoaded )
+    return;
+
+  QString fileName =
+    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+  // Remove the extension
+
+  QString lc = fileName.toLower();
+
+  if ( fileName.endsWith( ".xdxf.dz", Qt::CaseInsensitive ) )
+    fileName.chop( 7 );
+  else
+    fileName.chop( 4 );
+
+  fileName += "bmp";
+
+  QFileInfo info( fileName );
+  if( !info.exists() )
+  {
+      fileName.chop( 3 );
+      fileName += "png";
+      info = QFileInfo( fileName );
+  }
+
+  if ( info.exists() )
+  {
+    QImage img( fileName );
+
+    if ( !img.isNull() )
+    {
+      // Load successful
+
+      // Apply the color key
+
+      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
+                                                    Qt::MaskOutColor ) );
+
+      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
+
+      // Transform it to be square
+      int max = img.width() > img.height() ? img.width() : img.height();
+
+      QImage result( max, max, QImage::Format_ARGB32 );
+      result.fill( 0 ); // Black transparent
+
+      QPainter painter( &result );
+
+      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                         img );
+
+      painter.end();
+
+      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+    }
+  }
+
+  if ( dictionaryIcon.isNull() )
+  {
+    // Load failed -- use default icons
+
+    dictionaryIcon = QIcon(":/icons/icon32_xdxf.png");
+    dictionaryNativeIcon = QIcon(":/icons/icon32_xdxf.png");
+  }
+
+  dictionaryIconLoaded = true;
 }
 
 /// XdxfDictionary::getArticle()
@@ -353,7 +484,8 @@ void XdxfArticleRequest::run()
 }
 
 sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word,
-                                                            vector< wstring > const & alts )
+                                                            vector< wstring > const & alts,
+                                                            wstring const & )
   throw( std::exception )
 {
   return new XdxfArticleRequest( word, alts, *this );
@@ -372,13 +504,13 @@ void XdxfDictionary::loadArticle( uint32_t address,
   {
     Mutex::Lock _( idxMutex );
   
-    propertiesData = chunks.getBlock( address, chunk );
+    propertiesData = chunks->getBlock( address, chunk );
   }
 
   if ( &chunk.front() + chunk.size() - propertiesData < 9 )
     throw exCorruptedIndex();
 
-  unsigned char fType = (unsigned char) *propertiesData;
+//  unsigned char fType = (unsigned char) *propertiesData;
 
   uint32_t articleOffset, articleSize;
 
@@ -399,9 +531,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   if ( !articleBody )
     throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
 
-  articleText = Html::escape( articleBody );
-
-  headword = "foo";
+  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL );
 
   free( articleBody );
 }
@@ -418,7 +548,11 @@ public:
 
   size_t gzTell();
 
+  char * readDataArray( unsigned long startPos, unsigned long size );
+
 protected:
+
+  dictData *dz;
 
   virtual bool isSequential () const
   { return false; } // Which is a lie, but else pos() won't work
@@ -426,10 +560,10 @@ protected:
   bool waitForReadyRead ( int )
   { return !gzeof( gz ); }
 
- qint64 bytesAvailable() const
- {
+  qint64 bytesAvailable() const
+  {
      return ( gzeof( gz ) ? 0 : 1 ) + QIODevice::bytesAvailable();
- }
+  }
 
   virtual qint64 readData( char * data, qint64 maxSize );
 
@@ -441,15 +575,31 @@ protected:
 
 GzippedFile::GzippedFile( char const * fileName ) throw( exCantReadFile )
 {
+#ifdef __WIN32
+  int id = gd_open( fileName );
+  if( id == -1 )
+    throw exCantReadFile( fileName );
+  gz = gzdopen( id, "rb");
+  if ( !gz )
+  {
+    _close( id );
+    throw exCantReadFile( fileName );
+  }
+#else
   gz = gzopen( fileName, "rb" );
-
   if ( !gz )
     throw exCantReadFile( fileName );
+#endif
+
+  dz = dict_data_open( fileName, 0 );
+
 }
 
 GzippedFile::~GzippedFile()
 {
   gzclose( gz );
+  if( dz )
+      dict_data_close( dz );
 }
 
 bool GzippedFile::atEnd()
@@ -469,6 +619,13 @@ qint64 GzippedFile::readData( char * data, qint64 maxSize )
 
   // The returning value translates directly to QIODevice semantics
   return gzread( gz, data, maxSize );
+}
+
+char * GzippedFile::readDataArray( unsigned long startPos, unsigned long size )
+{
+  if( dz == NULL )
+      return NULL;
+  return dict_data_read_( dz, startPos, size, 0, 0 );
 }
 
 QString readXhtmlData( QXmlStreamReader & stream )
@@ -516,7 +673,7 @@ void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
 {
   if ( stream.name() == "k" )
   {
-    words.push_back( stream.readElementText() );
+    words.push_back( stream.readElementText( QXmlStreamReader::SkipChildElements ) );
     return;
   }
 
@@ -530,6 +687,25 @@ void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
     if ( stream.isEndElement() )
       return;
   }
+}
+
+void checkArticlePosition( GzippedFile & gzFile,
+                           size_t *pOffset,
+                           size_t *pSize )
+{
+    char * data = gzFile.readDataArray( *pOffset, *pSize );
+    if( data == NULL )
+        return;
+    QString s = QString::fromUtf8( data );
+    free( data );
+    int n = s.lastIndexOf( "</ar" );
+    if( n > 0 )
+        *pSize -= s.size() - n;
+    if( s.at( 0 ) == '>')
+    {
+        *pOffset += 1;
+        *pSize -= 1;
+    }
 }
 
 void indexArticle( GzippedFile & gzFile,
@@ -551,8 +727,8 @@ void indexArticle( GzippedFile & gzFile,
 
   size_t articleOffset = gzFile.pos() - 1; // stream.characterOffset() is loony
 
-  uint32_t lineNumber = stream.lineNumber();
-  uint32_t columnNumber = stream.columnNumber();
+  // uint32_t lineNumber = stream.lineNumber();
+  // uint32_t columnNumber = stream.columnNumber();
 
   list< QString > words;
 
@@ -577,13 +753,15 @@ void indexArticle( GzippedFile & gzFile,
 
         uint32_t offset = chunks.startNewBlock();
 
-        uint32_t value = articleOffset;
+        uint32_t offs = articleOffset;
+        uint32_t size = gzFile.pos() - 1 - articleOffset;
+
+        checkArticlePosition( gzFile, &offs, &size );
 
         unsigned char f = format;
         chunks.addToBlock( &f, 1 );
-        chunks.addToBlock( &value, sizeof( value ) );
-        value = gzFile.pos() - 1 - articleOffset;
-        chunks.addToBlock( &value, sizeof( value ) );
+        chunks.addToBlock( &offs, sizeof( offs ) );
+        chunks.addToBlock( &size, sizeof( size ) );
 
         DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
 
@@ -591,7 +769,7 @@ void indexArticle( GzippedFile & gzFile,
 
         for( list< QString >::const_iterator i = words.begin(); i != words.end();
              ++i )
-          indexedWords.addWord( i->toStdWString(), offset );
+            indexedWords.addWord( gd::toWString( *i ), offset );
 
         ++articleCount;
 
@@ -646,6 +824,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         File::Class idx( indexFile, "wb" );
 
         IdxHeader idxHeader;
+        map< string, string > abrv;
 
         memset( &idxHeader, 0, sizeof( idxHeader ) );
 
@@ -752,12 +931,66 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                       DPRINTF( "Warning: duplicate description in %s\n", dictFiles[ 0 ].c_str() );
                   }
                   else
+                  if ( stream.name() == "abbreviations" )
+                  {
+                      QString s;
+                      string value;
+                      list < wstring > keys;
+                      while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
+                      {
+                          stream.readNext();
+                          while ( !( stream.isEndElement() && stream.name() == "abr_def" ) && !stream.atEnd() )
+                          {
+                               stream.readNext();
+                               if ( stream.isStartElement() && stream.name() == "k" )
+                               {
+                                   s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                                   keys.push_back( gd::toWString( s ) );
+                               }
+                               else if ( stream.isStartElement() && stream.name() == "v" )
+                               {
+                                   s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                                   value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
+                                   for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
+                                   {
+                                       abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
+                                   }
+                                   keys.clear();
+                               }
+                               else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                                   break;
+                          }
+                      }
+                  }
+                  else
                   if ( stream.name() == "ar" )
                   {
                     indexArticle( gzFile, stream, indexedWords, chunks,
                                   articleCount, wordCount );
                   }
                 }
+              }
+
+              // Write abbreviations if presented
+
+              if( !abrv.empty() ) {
+                  idxHeader.hasAbrv = 1;
+                  idxHeader.abrvAddress = chunks.startNewBlock();
+
+                  uint32_t sz = abrv.size();
+
+                  chunks.addToBlock( &sz, sizeof( uint32_t ) );
+
+                  for( map< string, string >::const_iterator i = abrv.begin();
+                       i != abrv.end(); ++i )
+                  {
+                    sz = i->first.size();
+                    chunks.addToBlock( &sz, sizeof( uint32_t ) );
+                    chunks.addToBlock( i->first.data(), sz );
+                    sz = i->second.size();
+                    chunks.addToBlock( &sz, sizeof( uint32_t ) );
+                    chunks.addToBlock( i->second.data(), sz );
+                  }
               }
 
               // Finish with the chunks
@@ -791,8 +1024,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( stream.hasError() )
         {
-          DPRINTF( "Warning: %s had a parse error %ls, and therefore was indexed only up to the point of error.\n",
-                  dictFiles[ 0 ].c_str(), stream.errorString().toStdWString().c_str() );
+          DPRINTF( "Warning: %s had a parse error %ls at line %I64u, and therefore was indexed only up to the point of error.",
+                  dictFiles[ 0 ].c_str(), stream.errorString().toStdWString().c_str(), stream.lineNumber() );
         }
       }
 
