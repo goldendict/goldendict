@@ -70,7 +70,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 14 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 15 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2
 };
 
@@ -1576,7 +1576,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               break;
             }
 
-            if ( curString.empty() || isDslWs( curString[ 0 ] ) )
+            // Lingvo skips empty strings between the headwords
+            if ( curString.empty() )
+              continue;
+
+            if ( isDslWs( curString[ 0 ] ) )
               break; // No more headwords
 
             DPRINTF( "Alt headword: %ls\n", curString.c_str() );
