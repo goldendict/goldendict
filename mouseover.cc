@@ -12,6 +12,7 @@
 #include <aclapi.h>
 #include "mouseover_win32/ThTypes.h"
 #include "wordbyauto.hh"
+#include "x64.hh"
 #endif
 
 MouseOver & MouseOver::instance()
@@ -58,7 +59,6 @@ static void SetLowLabelToGDSynchroObjects()
     BOOL fSaclDefaulted = FALSE;
     LPCWSTR pwszMapFileName = L"GoldenDictTextOutHookSharedMem";
     LPCWSTR pwszSpyMutexName = L"GoldenDictTextOutSpyMutex";
-    LPCWSTR pwszHookMutexName = L"GoldenDictTextOutHookMutex";
 
     if( ConvertStringSecurityDescriptorToSecurityDescriptorW( LOW_INTEGRITY_SDDL_SACL_W, 1 /* SDDL_REVISION_1 */, &pSD, NULL ) )
     {
@@ -71,9 +71,6 @@ static void SetLowLabelToGDSynchroObjects()
                     SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
 
             dwErr = SetNamedSecurityInfoW( (LPWSTR)pwszSpyMutexName,
-                    SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
-
-            dwErr = SetNamedSecurityInfoW( (LPWSTR)pwszHookMutexName,
                     SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
 
         }
@@ -94,8 +91,9 @@ ChangeWindowMessageFilterExFunc changeWindowMessageFilterExFunc = NULL;
   
   ThTypes_Init();
   memset( GlobalData, 0, sizeof( TGlobalDLLData ) );
-  strcpy( GlobalData->LibName,
-    QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutHook.dll" ) ).toLocal8Bit().data() );
+//  strcpy( GlobalData->LibName,
+//    QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutHook.dll" ) ).toLocal8Bit().data() );
+  QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutHook.dll" ) ).toWCharArray( GlobalData->LibName );
 
   // Create the window to recive spying results to
 
@@ -150,6 +148,7 @@ void MouseOver::enableMouseOver()
   if ( !mouseOverEnabled && activateSpyFn )
   {
     activateSpyFn( true );
+    installx64Hooks();
     mouseOverEnabled = true;
   }
 #endif
@@ -161,6 +160,7 @@ void MouseOver::disableMouseOver()
   if ( mouseOverEnabled && activateSpyFn )
   {
     activateSpyFn( false );
+    removex64Hooks();
     mouseOverEnabled = false;
   }
 #endif
@@ -338,7 +338,7 @@ MouseOver::~MouseOver()
 
   UnregisterClass( className, GetModuleHandle( 0 ) );
 
-  Thtypes_End();
+  ThTypes_End();
 
 #endif
 }

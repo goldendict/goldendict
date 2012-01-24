@@ -11,13 +11,20 @@
 #include "HookImportFunction.h"
 
 typedef BOOL (WINAPI *TextOutANextHook_t)(HDC hdc, int nXStart, int nYStart, LPCSTR lpszString,int cbString);
-TextOutANextHook_t TextOutANextHook __attribute__ ((aligned (4))) = NULL;
 typedef BOOL (WINAPI *TextOutWNextHook_t)(HDC hdc, int nXStart, int nYStart, LPCWSTR lpszString,int cbString);
-TextOutWNextHook_t TextOutWNextHook __attribute__ ((aligned (4))) = NULL; 
 typedef BOOL (WINAPI *ExtTextOutANextHook_t)(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCSTR lpszString, UINT cbString, CONST INT *lpDx);
-ExtTextOutANextHook_t ExtTextOutANextHook __attribute__ ((aligned (4))) = NULL;
 typedef BOOL (WINAPI *ExtTextOutWNextHook_t)(HDC hdc, int nXStart, int nYStart, UINT fuOptions, CONST RECT *lprc, LPCWSTR lpszString, UINT cbString, CONST INT *lpDx);
+#ifdef __WIN64
+TextOutANextHook_t TextOutANextHook __attribute__ ((aligned (8))) = NULL;
+TextOutWNextHook_t TextOutWNextHook __attribute__ ((aligned (8))) = NULL; 
+ExtTextOutANextHook_t ExtTextOutANextHook __attribute__ ((aligned (8))) = NULL;
+ExtTextOutWNextHook_t ExtTextOutWNextHook __attribute__ ((aligned (8))) = NULL;
+#else
+TextOutANextHook_t TextOutANextHook __attribute__ ((aligned (4))) = NULL;
+TextOutWNextHook_t TextOutWNextHook __attribute__ ((aligned (4))) = NULL; 
+ExtTextOutANextHook_t ExtTextOutANextHook __attribute__ ((aligned (4))) = NULL;
 ExtTextOutWNextHook_t ExtTextOutWNextHook __attribute__ ((aligned (4))) = NULL;
+#endif
 
 #define HOOKS_NUM 4
 
@@ -192,7 +199,7 @@ static void GetWordTextOutHook (TEverythingParams *TP)
 	LeaveCriticalSection(&hookCS);
 }
 
-char* ExtractFromEverything(HWND WND, POINT Pt, int *BeginPos)
+char* ExtractFromEverything(HWND WND, POINT Pt, DWORD *BeginPos)
 {
 	TEverythingParams CParams;
 
@@ -588,6 +595,8 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
                        DWORD reason        /* Reason this function is being called. */ ,
                        LPVOID reserved     /* Not used. */ )
 {
+(void) hInst;
+(void) reserved;
     switch (reason)
     {
       case DLL_PROCESS_ATTACH:

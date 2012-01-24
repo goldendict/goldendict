@@ -281,10 +281,12 @@ SOURCES += folding.cc \
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
-               guids.c
+               guids.c \
+               x64.cc
     HEADERS += mouseover_win32/ThTypes.h \
                wordbyauto.hh \
-               uiauto.hh
+               uiauto.hh \
+               x64.hh
 }
 RESOURCES += resources.qrc \
     flags.qrc
@@ -334,6 +336,8 @@ TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
+
+
 
 
 

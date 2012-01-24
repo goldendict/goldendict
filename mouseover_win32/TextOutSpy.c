@@ -1,3 +1,5 @@
+#include <tchar.h>
+#include <windowsx.h>
 #include "TextOutSpy.h"
 #include "ThTypes.h"
 #include "GDDataTranfer.h"
@@ -31,17 +33,9 @@ HWND WndParent,WndChild;
 
 static void SendWordToServer()
 {
-DWORD SendMsgAnswer, flags;
+DWORD_PTR SendMsgAnswer;
+DWORD flags;
 LRESULT lr;
-	if (hGetWordLib == 0) {
-		hGetWordLib = LoadLibrary(GlobalData->LibName);
-		if (hGetWordLib) {
-			GetWordProc = (GetWordProc_t)GetProcAddress(hGetWordLib, "__gdGetWord");
-		}
-		else {
-			hGetWordLib = (HINSTANCE)-1;
-		}
-	}
 
 	if( !IsWindow( GlobalData->ServerWND ) )
 		return;
@@ -51,10 +45,21 @@ LRESULT lr;
 	if( lr == 0 || SendMsgAnswer == 0)	//No answer or no needing
 		return;
 
+	flags = SendMsgAnswer;
+
+	if (hGetWordLib == 0 && ( flags & GD_FLAG_METHOD_STANDARD ) ) {
+		hGetWordLib = LoadLibraryW(GlobalData->LibName);
+		if (hGetWordLib) {
+			GetWordProc = (GetWordProc_t)GetProcAddress(hGetWordLib, "__gdGetWord");
+		}
+		else {
+			hGetWordLib = INVALID_HANDLE_VALUE;
+		}
+	}
+
 	GlobalData->CurMod.MatchedWord[0] = 0;
 	GlobalData->CurMod.WordLen = 0;
 	GlobalData->CurMod.BeginPos = 0;
-	flags = SendMsgAnswer;
 
 	if( ( flags & GD_FLAG_METHOD_GD_MESSAGE ) != 0 && uGdAskMessage != 0 ) {
 		int n;
@@ -71,8 +76,14 @@ LRESULT lr;
 			GlobalData->CurMod.WordLen = n;
 			GlobalData->CurMod.BeginPos = 0;
 			if(n > 0) {
-				if( IsWindow( GlobalData->ServerWND ) )
+				if( IsWindow( GlobalData->ServerWND ) ) {
+#ifdef __WIN64
+					GlobalData32->CurMod.WordLen = n;
+					GlobalData32->CurMod.BeginPos = 0;
+					lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
+#endif
 					SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+				}
 			}
 			return;
 		}
@@ -81,10 +92,18 @@ LRESULT lr;
 	if( ( flags & GD_FLAG_METHOD_STANDARD ) != 0 && GetWordProc != 0 ) {
 		GlobalData->CurMod.WND = GlobalData->LastWND;
 		GlobalData->CurMod.Pt = GlobalData->LastPt;
+
 		GetWordProc(&(GlobalData->CurMod));
+
 		if (GlobalData->CurMod.WordLen > 0) {
-			if( IsWindow( GlobalData->ServerWND ) )
+			if( IsWindow( GlobalData->ServerWND ) ) {
+#ifdef __WIN64
+				GlobalData32->CurMod.WordLen = GlobalData->CurMod.WordLen;
+				GlobalData32->CurMod.BeginPos = GlobalData->CurMod.BeginPos;
+				lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
+#endif
 				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+			}
 			return;
 		}
 	}
@@ -92,8 +111,14 @@ LRESULT lr;
 	if( ( flags & GD_FLAG_METHOD_IACCESSIBLEEX ) != 0 ) {
 		getWordByAccEx( GlobalData->LastPt );
 		if (GlobalData->CurMod.WordLen > 0 ) {
-			if( IsWindow( GlobalData->ServerWND ) )
+			if( IsWindow( GlobalData->ServerWND ) ) {
+#ifdef __WIN64
+				GlobalData32->CurMod.WordLen = GlobalData->CurMod.WordLen;
+				GlobalData32->CurMod.BeginPos = GlobalData->CurMod.BeginPos;
+				lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
+#endif
 				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+			}
 			return;
 		}
 	}
@@ -103,8 +128,11 @@ LRESULT lr;
 	}		
 }
 
-void CALLBACK TimerFunc(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime)
+void CALLBACK TimerFunc(HWND hWnd,UINT nMsg,UINT_PTR nTimerid,DWORD dwTime)
 {
+(void) hWnd;
+(void) nMsg;
+(void) dwTime;
 DWORD wso;
 	wso = WaitForSingleObject(hSynhroMutex, 0);
 	if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
@@ -144,55 +172,92 @@ DWORD wso;
 	}
 }
 
+void HookProc( POINT *ppt )
+{
+HWND WND;
+TCHAR wClassName[64];
+DWORD winProcessID;
+	WND = GetWindowFromPoint( *ppt );
+	if(WND == NULL) return;
+
+	if ( !GetClassName(WND, wClassName, sizeof(wClassName) / sizeof(TCHAR)) ) 
+		return;
+
+	GetWindowThreadProcessId( WND, &winProcessID );
+
+	if( winProcessID != ourProcessID && lstrcmpi( wClassName, _T("ConsoleWindowClass") ) != 0 )
+		return;
+
+	if(TimerID && ( GlobalData->LastPt.x != ppt->x || GlobalData->LastPt.y != ppt->y ) ) 
+	{
+		KillTimer(0, TimerID);
+		TimerID = 0;
+	}
+
+	const char* DisableClasses[] = {
+				"gdkWindowChild",
+				"gdkWindowTemp",
+				"Progman",
+				"WorkerW",
+				};
+	int i;
+	for (i=0; i<4; i++) {
+		if (lstrcmp(wClassName, DisableClasses[i])==0)
+			break;
+	}
+	if (i<4) return;
+
+	if(GlobalData->LastPt.x != ppt->x || GlobalData->LastPt.y != ppt->y || GlobalData->LastWND != WND ) 
+	{
+		GlobalData->LastWND = WND;
+		GlobalData->LastPt = *ppt;
+		TimerID = SetTimer(0, TimerID, MOUSEOVER_INTERVAL, TimerFunc);
+	}
+}
+
+#ifdef __WIN64
+
+LRESULT CALLBACK GetMessageHookProc(int nCode, WPARAM wParam, LPARAM lParam)
+{
+PMSG pMsg;
+DWORD wso;
+	if( nCode == HC_ACTION && wParam == PM_REMOVE ) 
+	{
+		pMsg = (PMSG)lParam;
+		if( pMsg && ( pMsg->message == WM_MOUSEMOVE || pMsg->message == WM_NCMOUSEMOVE ) ) 
+		{
+			wso = WaitForSingleObject(hSynhroMutex, 0);
+			if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) 
+			{
+				POINT pt;
+				pt.x = GET_X_LPARAM( pMsg->lParam );
+				pt.y = GET_Y_LPARAM( pMsg->lParam );
+				if( pMsg->message == WM_MOUSEMOVE && pMsg->hwnd != NULL )
+					ClientToScreen( pMsg->hwnd, &pt );
+				HookProc( &pt );
+				ReleaseMutex(hSynhroMutex);
+			}
+		}
+	}
+	return CallNextHookEx(GlobalData->g_hHook, nCode, wParam, lParam);
+}
+
+#else
+
 LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
 DWORD wso;
-	if ((nCode == HC_ACTION) && ((wParam == WM_MOUSEMOVE) || (wParam == WM_NCMOUSEMOVE)) && (GlobalData != NULL)) {
+	if ( (nCode == HC_ACTION) && ((wParam == WM_MOUSEMOVE) || (wParam == WM_NCMOUSEMOVE)) ) {
 		wso = WaitForSingleObject(hSynhroMutex, 0);
 		if (wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED) {
-			HWND WND;
-			TCHAR wClassName[64];
-
-			if(TimerID && ( GlobalData->LastPt.x!=((PMOUSEHOOKSTRUCT)lParam)->pt.x || GlobalData->LastPt.y!=((PMOUSEHOOKSTRUCT)lParam)->pt.y ) ) {
-				KillTimer(0, TimerID);
-				TimerID = 0;
-			}
-
-			WND = GetWindowFromPoint(((PMOUSEHOOKSTRUCT)lParam)->pt);
-
-			if(WND == NULL) {
-				ReleaseMutex(hSynhroMutex);
-				return CallNextHookEx(GlobalData->g_hHookMouse, nCode, wParam, lParam);
-			}
-
-			if (GetClassName(WND, wClassName, sizeof(wClassName) / sizeof(TCHAR))) {
-					const char* DisableClasses[] = {
-						"gdkWindowChild",
-						"gdkWindowTemp",
-						"Progman",
-						"WorkerW",
-					};
-					int i;
-					for (i=0; i<4; i++) {
-						if (lstrcmp(wClassName, DisableClasses[i])==0)
-							break;
-					}
-					if (i<4) {
-						ReleaseMutex(hSynhroMutex);
-						return CallNextHookEx(GlobalData->g_hHookMouse, nCode, wParam, lParam);
-					}
-			}
-
-			if(GlobalData->LastPt.x!=((PMOUSEHOOKSTRUCT)lParam)->pt.x || GlobalData->LastPt.y!=((PMOUSEHOOKSTRUCT)lParam)->pt.y || GlobalData->LastWND != WND) {
-				GlobalData->LastWND = WND;
-				GlobalData->LastPt = ((PMOUSEHOOKSTRUCT)lParam)->pt;
-				TimerID = SetTimer(0, TimerID, MOUSEOVER_INTERVAL, TimerFunc);
-			}
+			HookProc( &(((PMOUSEHOOKSTRUCT)lParam)->pt) );
 			ReleaseMutex(hSynhroMutex);
 		}
 	}
-	return CallNextHookEx(GlobalData->g_hHookMouse, nCode, wParam, lParam);
+	return CallNextHookEx(GlobalData->g_hHook, nCode, wParam, lParam);
 }
+
+#endif
 
 DLLIMPORT void ActivateTextOutSpying (int Activate)
 {
@@ -201,19 +266,23 @@ DLLIMPORT void ActivateTextOutSpying (int Activate)
 	// after call UnhookWindowsHookEx().
 	if(GlobalData == NULL) return;
 	if (Activate) {
-		if (GlobalData->g_hHookMouse != NULL) return;
-		GlobalData->g_hHookMouse = SetWindowsHookEx(WH_MOUSE, MouseHookProc, g_hInstance, 0);
+		if (GlobalData->g_hHook != NULL) return;
+#ifdef __WIN64
+		GlobalData->g_hHook = SetWindowsHookEx(WH_GETMESSAGE, GetMessageHookProc, g_hInstance, 0);
+#else
+		GlobalData->g_hHook = SetWindowsHookEx(WH_MOUSE, MouseHookProc, g_hInstance, 0);
+#endif
 	}
 	else {
-		if (GlobalData->g_hHookMouse == NULL) return;
+		if (GlobalData->g_hHook == NULL) return;
 		WaitForSingleObject(hSynhroMutex, 2000);
-		UnhookWindowsHookEx(GlobalData->g_hHookMouse);
+		UnhookWindowsHookEx(GlobalData->g_hHook);
 		if (TimerID) {
 			KillTimer(0, TimerID);
 			TimerID=0;
 		}
 		ReleaseMutex(hSynhroMutex);
-		GlobalData->g_hHookMouse = NULL;
+		GlobalData->g_hHook = NULL;
 	}
 }
 
@@ -222,10 +291,20 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
                        DWORD reason        /* Reason this function is being called. */ ,
                        LPVOID reserved     /* Not used. */ )
 {
+(void) reserved;
     switch (reason)
     {
       case DLL_PROCESS_ATTACH:
 			g_hInstance = hInst;
+			ThTypes_Init();
+#ifdef __WIN64
+			if( GlobalData == NULL || GlobalData32 == NULL ) {
+#else
+			if( GlobalData == NULL ) {
+#endif
+				ThTypes_End();
+				return FALSE;
+			}
 			ourProcessID = GetCurrentProcessId();
 			if(hSynhroMutex==0) {
 				hSynhroMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutSpyMutex");
@@ -233,7 +312,6 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
 					return(FALSE);
 				}
 			}
-			ThTypes_Init();
 			uGdAskMessage = RegisterWindowMessage(GD_MESSAGE_NAME);
 			FindGetPhysicalCursorPos();
         break;
@@ -254,10 +332,10 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
 				MSG msg ;
 				while (PeekMessage (&msg, 0, WM_TIMER, WM_TIMER, PM_REMOVE));
 			}
-			if ((hGetWordLib != 0)&&(hGetWordLib != (HINSTANCE)(-1))) {
+			if ( (hGetWordLib != 0) && (hGetWordLib != INVALID_HANDLE_VALUE) ) {
 				FreeLibrary(hGetWordLib);
 			}
-			Thtypes_End();
+			ThTypes_End();
         break;
 
       case DLL_THREAD_ATTACH:
