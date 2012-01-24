@@ -71,7 +71,7 @@ enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
   CurrentFormatVersion = 14 + BtreeIndexing::FormatVersion + Folding::Version,
-  CurrentZipSupportVersion = 1
+  CurrentZipSupportVersion = 2
 };
 
 struct IdxHeader
