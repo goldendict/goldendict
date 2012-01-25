@@ -171,8 +171,8 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
     {
       QString tt = "<b>" + QString::fromUtf8( item->getName().c_str() ) + "</b>";
 
-      QString lfrom( Language::localizedNameForId( item->getLangFrom() ) );
-      QString lto( Language::localizedNameForId( item->getLangTo() ) );
+      QString lfrom( item->getLocalizedNameFrom() );// Language::localizedNameForId( item->getLangFrom() ) );
+      QString lto( item->getLocalizedNameTo() );//Language::localizedNameForId( item->getLangTo() ) );
       if ( !lfrom.isEmpty() )
       {
         if ( lfrom == lto )

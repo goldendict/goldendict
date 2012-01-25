@@ -13,7 +13,7 @@
 #include "ex.hh"
 #include "mutex.hh"
 #include "wstring.hh"
-
+#include "language.hh"
 /// Abstract dictionary-related stuff
 namespace Dictionary {
 
@@ -313,6 +313,14 @@ public:
   /// Returns the dictionary's target language.
   virtual quint32 getLangTo() const
   { return 0; }
+
+  /// Returns the dictionary's source localized name
+  virtual QString getLocalizedNameFrom() const
+  { return Language::localizedNameForId( getLangFrom() );  }
+
+  /// Returns the dictionary's target localized name
+  virtual QString getLocalizedNameTo() const
+  { return Language::localizedNameForId( getLangTo() );  }
 
   /// Looks up a given word in the dictionary, aiming for exact matches and
   /// prefix matches. If it's not possible to locate any prefix matches, no

@@ -75,9 +75,9 @@ void OrderAndProps::disableDictionaryDescription()
 }
 
 namespace {
-  QString makeLangText( Language::Id langId )
+  QString makeLangText(const QString &name, Language::Id langId )
   {
-    QString name = Language::localizedNameForId( langId );
+   // QString name = Language::localizedNameForId( langId );
 
     if ( name.isEmpty() )
       return name;
@@ -102,8 +102,8 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
 
     ui.dictionaryTotalArticles->setText( QString::number( dict->getArticleCount() ) );
     ui.dictionaryTotalWords->setText( QString::number( dict->getWordCount() ) );
-    ui.dictionaryTranslatesFrom->setText( makeLangText( dict->getLangFrom() ) );
-    ui.dictionaryTranslatesTo->setText( makeLangText( dict->getLangTo() ) );
+    ui.dictionaryTranslatesFrom->setText( makeLangText( dict->getLocalizedNameFrom(), dict->getLangFrom() ) );
+    ui.dictionaryTranslatesTo->setText( makeLangText( dict->getLocalizedNameTo(), dict->getLangTo() ) );
 
     std::vector< std::string > const & filenames = dict->getDictionaryFilenames();
 

@@ -1,0 +1,5 @@
+body{background: ##FFFFFF;font-size: 16px;}
+::selection{background:#4492E8;color:#fff;}
+.gddictname{border:none;background:#EBEBEB;border-top-left-radius:8px;border-top-right-radius:8px;padding-top:8px;padding-bottom:5px}
+.gddicticon{display:inline;padding-right:2px;}
+.gddicticon img{border:0;height:16px;}

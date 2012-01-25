@@ -27,7 +27,7 @@
 #include <string>
 #include <vector>
 
-const std::string bgl_language[] = {
+const std::string bgl_language[] ={
 	"English", 
 	"French",
 	"Italian",
@@ -37,26 +37,26 @@ const std::string bgl_language[] = {
 	"German",
 	"Russian",
 	"Japanese",
-	"Traditional Chinese",
-	"Simplified Chinese",
+    "\x01",//"Traditional Chinese",
+    "\x02",//"Simplified Chinese",
 	"Greek",
 	"Korean",
 	"Turkish",
 	"Hebrew",
 	"Arabic",
 	"Thai",
-	"Other",
-	"Other Simplified Chinese dialects",
-	"Other Traditional Chinese dialects",
-	"Other Eastern-European languages",
-	"Other Western-European languages",
-	"Other Russian languages",
-	"Other Japanese languages",
-	"Other Baltic languages",
-	"Other Greek languages",
-	"Other Korean dialects",
-	"Other Turkish dialects",
-	"Other Thai dialects",
+    "\x03",//"Other",
+    "\x04",//"Other Simplified Chinese dialects",
+    "\x05",//Other Traditional Chinese dialects",
+    "\x06",//Other Eastern-European languages",
+    "\x07",//Other Western-European languages",
+    "\x08",//Other Russian languages",
+    "\x09",//Other Japanese languages",
+    "\x0A",//"Other Baltic languages",
+    "\x0B",//Other Greek languages",
+    "\x0C",//"Other Korean dialects",
+    "\x0D",//Other Turkish dialects",
+    "\x0E",//"Other Thai dialects",
 	"Polish",
 	"Hungarian",
 	"Czech",
@@ -88,7 +88,6 @@ const std::string bgl_language[] = {
 	"Esperanto",
 	"Tamazight",
 	"Armenian"};
-
 
 const std::string bgl_charsetname[] = {
 	"Default" ,
@@ -176,24 +175,24 @@ public:
     bool read(std::string &source_charset, std::string &target_charset);
     bgl_entry readEntry( ResourceHandler * = 0 );
 
-    inline std::string title() const { return m_title; };
-    inline std::string author() const { return m_author; };
-    inline std::string email() const { return m_email; };
-    inline std::string description() const { return m_description; };
-    inline std::string copyright() const { return m_copyright; };
-    inline std::string sourceLang() const { return m_sourceLang; };
-    inline std::string targetLang() const { return m_targetLang; };
-    inline unsigned int numEntries() const { return m_numEntries; };
-    inline std::string charset() const { return m_defaultCharset; };
+    inline std::string title() const { return m_title; }
+    inline std::string author() const { return m_author; }
+    inline std::string email() const { return m_email; }
+    inline std::string description() const { return m_description; }
+    inline std::string copyright() const { return m_copyright; }
+    inline std::string sourceLang() const { return m_sourceLang; }
+    inline std::string targetLang() const { return m_targetLang; }
+    inline unsigned int numEntries() const { return m_numEntries; }
+    inline std::string charset() const { return m_defaultCharset; }
 
-    inline std::string filename() const { return m_filename; };
+    inline std::string filename() const { return m_filename; }
 
     std::vector< char > const & getIcon() const
     { return icon; }
     
     enum
     {
-      ParserVersion = 12
+      ParserVersion = 14
     };
 
 private:

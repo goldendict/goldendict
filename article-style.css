@@ -51,6 +51,8 @@ pre
   padding-top: 1px;
   margin-top: -9px;
   margin-bottom: 8px;
+/*fix for invalid blg*/
+  font-style:normal;
 }
 
 /* Appears between the articles */
@@ -2607,3 +2609,5 @@ in bg url to hide it from iemac */
  
 .mwiki .infl-inline { display: inline }
 .mwiki .infl-table { display: none }
+/****default hide dict icon ***/
+.gddicticon{display:none;}
