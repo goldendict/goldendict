@@ -500,21 +500,10 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
-#ifdef __WIN32
-  int id = gd_open( fileName.c_str() );
-  if( id == -1 )
-    throw exCantOpen( fileName );
-  f = gzdopen( id, "rb");
-  if ( !f )
-  {
-    _close( id );
-    throw exCantOpen( fileName );
-  }
-#else
-  f = gzopen( fileName.c_str(), "rb");
+
+  f = gd_gzopen( fileName.c_str() );
   if ( !f )
     throw exCantOpen( fileName );
-#endif
 
   // Now try guessing the encoding by reading the first two bytes
 

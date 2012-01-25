@@ -887,21 +887,9 @@ static void handleIdxSynFile( string const & fileName,
                               vector< uint32_t > * articleOffsets,
                               bool isSynFile )
 {
-#ifdef __WIN32
-  int id = gd_open( fileName.c_str() );
-  if( id == -1 )
-    throw exCantReadFile( fileName );
-  gzFile stardictIdx = gzdopen( id, "rb");
-  if ( !stardictIdx )
-  {
-    _close( id );
-    throw exCantReadFile( fileName );
-  }
-#else
-  gzFile stardictIdx = gzopen( fileName.c_str(), "rb" );
+  gzFile stardictIdx = gd_gzopen( fileName.c_str() );
   if ( !stardictIdx )
     throw exCantReadFile( fileName );
-#endif
 
   vector< char > image;
 

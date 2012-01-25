@@ -575,21 +575,9 @@ protected:
 
 GzippedFile::GzippedFile( char const * fileName ) throw( exCantReadFile )
 {
-#ifdef __WIN32
-  int id = gd_open( fileName );
-  if( id == -1 )
-    throw exCantReadFile( fileName );
-  gz = gzdopen( id, "rb");
-  if ( !gz )
-  {
-    _close( id );
-    throw exCantReadFile( fileName );
-  }
-#else
-  gz = gzopen( fileName, "rb" );
+  gz = gd_gzopen( fileName );
   if ( !gz )
     throw exCantReadFile( fileName );
-#endif
 
   dz = dict_data_open( fileName, 0 );
 
@@ -763,7 +751,7 @@ void indexArticle( GzippedFile & gzFile,
         chunks.addToBlock( &offs, sizeof( offs ) );
         chunks.addToBlock( &size, sizeof( size ) );
 
-        DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
+//        DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
 
         // Add words to index
 
