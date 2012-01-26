@@ -310,7 +310,9 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/pt_BR.ts \
     locale/es_AR.ts \
     locale/sk_SK.ts \
-    locale/tr_TR.ts
+    locale/tr_TR.ts \
+    locale/es_BO.ts \
+    locale/qu_WI.ts
 
 # Build version file
 !isEmpty( hasGit ) {
