@@ -2464,6 +2464,76 @@
         <source>Zulu</source>
         
     <translation/></message>
+	    <message>
+        <location filename="../language.cc" line="365"/>
+        <source>Traditional Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="366"/>
+        <source>Simplified Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="367"/>
+        <source>Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="368"/>
+        <source>Other Simplified Chinese dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="369"/>
+        <source>Other Traditional Chinese dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="370"/>
+        <source>Other Eastern-European languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="371"/>
+        <source>Other Western-European languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="372"/>
+        <source>Other Russian languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="373"/>
+        <source>Other Japanese languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="374"/>
+        <source>Other Baltic languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="375"/>
+        <source>Other Greek languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="376"/>
+        <source>Other Korean dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="377"/>
+        <source>Other Turkish dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="378"/>
+        <source>Other Thai dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoadDictionaries</name>

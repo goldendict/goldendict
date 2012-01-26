@@ -204,58 +204,6 @@ namespace
   DEF_EX( exFailedToDecompressArticle, "Failed to decompress article's body", Dictionary::Ex )
   DEF_EX( exChunkIndexOutOfRange, "Chunk index is out of range", Dictionary::Ex )
 
-
-    #define blgCode2Int( index, code0, code1 ) (((uint32_t)index) << 16 ) + (((uint32_t)code1) << 8 ) + (uint32_t)code0
-    struct BlgLangCode
-    {
-        uint32_t code; // babylon code //[(1byte)blglangcode index,(2byte)iso2code,0x00]
-        char const * lang; // Language name in English
-    };
-
-    const BlgLangCode BlgLangCodes[] ={
-        { blgCode2Int( 1, 'z', 'h' ), "Traditional Chinese" },
-        { blgCode2Int( 2, 'z', 'h' ), "Simplified Chinese" },
-        { blgCode2Int( 3, 0 , 0 ), "Other" },
-        { blgCode2Int( 4, 'z', 'h' ), "Other Simplified Chinese dialects" },
-        { blgCode2Int( 5, 'z', 'h' ), "Other Traditional Chinese dialects" },
-        { blgCode2Int( 6, 0, 0 ), "Other Eastern-European languages" },
-        { blgCode2Int( 7, 0, 0 ), "Other Western-European languages" },
-        { blgCode2Int( 8, 'r', 'u' ), "Other Russian languages" },
-        { blgCode2Int( 9, 'j', 'a' ), "Other Japanese languages" },
-        { blgCode2Int( 10, 0, 0 ), "Other Baltic languages" },
-        { blgCode2Int( 11, 'e', 'l' ), "Other Greek languages" },
-        { blgCode2Int( 12, 'k', 'o' ), "Other Korean dialects" },
-        { blgCode2Int( 13, 't', 'r' ), "Other Turkish dialects" },
-        { blgCode2Int( 14, 't', 'h' ), "Other Thai dialects" }
-        };
-
-  /// Find Language Code
-  quint32 findIdForLanguage( const std::string &lang )
-  {
-      if( lang.length() == 1 ) //not in langcoders
-      {
-          const char &index = lang[0];
-          if( index > 0 && index < 15 )
-          {
-              return BlgLangCodes[ index - 1 ].code;
-          }
-          return 0;
-      }
-      return LangCoder::findIdForLanguage( Utf8::decode( lang ) );
-  }
-
-  QString getLocalizedFromId( quint32 id )
-  {
-      if( id < 0x010000) //normal
-        return Language::localizedNameForId( id );
-      int index = (id >> 16) & 0xFF;
-      if( index > 0 && index < 15 )
-      {
-          return QString(BlgLangCodes[ index - 1 ].lang);
-      }
-      return QString();
-  }
-
   class BglDictionary: public BtreeIndexing::BtreeDictionary
   {
     Mutex idxMutex;
@@ -290,14 +238,6 @@ namespace
 
     inline virtual quint32 getLangTo() const
     { return idxHeader.langTo; }
-
-    /// Returns the dictionary's source localized name
-    virtual QString getLocalizedNameFrom() const
-    { return getLocalizedFromId( getLangFrom() );  }
-
-    /// Returns the dictionary's target localized name
-    virtual QString getLocalizedNameTo() const
-    { return getLocalizedFromId( getLangTo() );  }
 
     virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
       throw( std::exception );
@@ -1183,8 +1123,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       idxHeader.foldingVersion = Folding::Version;
       idxHeader.articleCount = articleCount;
       idxHeader.wordCount = wordCount;
-      idxHeader.langFrom = findIdForLanguage ( b.sourceLang() );//LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
-      idxHeader.langTo = findIdForLanguage( b.targetLang() );//LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
+      idxHeader.langFrom = LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
+      idxHeader.langTo = LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
 
       idx.rewind();
 
