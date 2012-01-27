@@ -21,6 +21,7 @@
 #include "xdxf2html.hh"
 #include "ufile.hh"
 #include "dictzip.h"
+#include "langcoder.hh"
 
 #include <QIODevice>
 #include <QXmlStreamReader>
@@ -57,7 +58,7 @@ DEF_EX( exCorruptedIndex, "The index file is corrupted", Dictionary::Ex )
 enum
 {
   Signature = 0x46584458, // XDXF on little-endian, FXDX on big-endian
-  CurrentFormatVersion = 1 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 enum ArticleFormat
@@ -72,8 +73,8 @@ struct IdxHeader
   uint32_t signature; // First comes the signature, XDXF
   uint32_t formatVersion; // File format version (CurrentFormatVersion)
   uint32_t articleFormat; // ArticleFormat value, except that 0 = bad file
-  char fromLang[ 4 ]; // 3-letter ISO-639.2 language code
-  char toLang[ 4 ]; // 3-letter ISO-639.2 language code
+  uint32_t langFrom; // Source language
+  uint32_t langTo;   // Target language
   uint32_t articleCount; // Total number of articles
   uint32_t wordCount; // Total number of words
   uint32_t nameAddress; // Address of an utf8 name string, in chunks
@@ -128,7 +129,7 @@ public:
   { return map< Dictionary::Property, string >(); }
 
   virtual unsigned long getArticleCount() throw()
-  { return idxHeader.wordCount; }
+  { return idxHeader.articleCount; }
 
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
@@ -136,6 +137,12 @@ public:
   virtual QIcon getIcon() throw();
 
   virtual QIcon getNativeIcon() throw();
+
+  inline virtual quint32 getLangFrom() const
+  { return idxHeader.langFrom; }
+
+  inline virtual quint32 getLangTo() const
+  { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
@@ -855,14 +862,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               if ( str.size() > 3 )
                 str.resize( 3 );
 
-              strcpy( idxHeader.fromLang, str.c_str() );
+              idxHeader.langFrom = LangCoder::findIdForLanguageCode3( str.c_str() );
 
               str = stream.attributes().value( "lang_to" ).toString().toAscii().data();
 
               if ( str.size() > 3 )
                 str.resize( 3 );
 
-              strcpy( idxHeader.toLang, str.c_str() );
+              idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
 
               bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
 
@@ -996,6 +1003,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               idxHeader.signature = Signature;
               idxHeader.formatVersion = CurrentFormatVersion;
+
+              idxHeader.articleCount = articleCount;
+              idxHeader.wordCount = wordCount;
 
               idx.rewind();
 
