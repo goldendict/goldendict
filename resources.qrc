@@ -47,5 +47,7 @@
         <file>icons/highlighter.png</file>
         <file>icons/error.png</file>
         <file>icons/macicon.png</file>
+        <file>article-style-st-babylon.css</file>
+        <file>qt-style-st-babylon.css</file>
     </qresource>
 </RCC>

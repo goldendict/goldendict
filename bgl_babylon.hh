@@ -37,26 +37,26 @@ const std::string bgl_language[] = {
 	"German",
 	"Russian",
 	"Japanese",
-	"Traditional Chinese",
-	"Simplified Chinese",
+    "\x01",//"Traditional Chinese",
+    "\x02",//"Simplified Chinese",
 	"Greek",
 	"Korean",
 	"Turkish",
 	"Hebrew",
 	"Arabic",
 	"Thai",
-	"Other",
-	"Other Simplified Chinese dialects",
-	"Other Traditional Chinese dialects",
-	"Other Eastern-European languages",
-	"Other Western-European languages",
-	"Other Russian languages",
-	"Other Japanese languages",
-	"Other Baltic languages",
-	"Other Greek languages",
-	"Other Korean dialects",
-	"Other Turkish dialects",
-	"Other Thai dialects",
+    "\x03",//"Other",
+    "\x04",//"Other Simplified Chinese dialects",
+    "\x05",//Other Traditional Chinese dialects",
+    "\x06",//Other Eastern-European languages",
+    "\x07",//Other Western-European languages",
+    "\x08",//Other Russian languages",
+    "\x09",//Other Japanese languages",
+    "\x0A",//"Other Baltic languages",
+    "\x0B",//Other Greek languages",
+    "\x0C",//"Other Korean dialects",
+    "\x0D",//Other Turkish dialects",
+    "\x0E",//"Other Thai dialects",
 	"Polish",
 	"Hungarian",
 	"Czech",
@@ -193,7 +193,7 @@ public:
     
     enum
     {
-      ParserVersion = 12
+      ParserVersion = 13
     };
 
 private:

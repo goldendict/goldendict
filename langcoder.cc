@@ -1,6 +1,7 @@
 #include "langcoder.hh"
 #include "folding.hh"
 #include "wstring_qt.hh"
+#include "language.hh"
 
 #include <cctype>
 
@@ -79,6 +80,12 @@ quint32 LangCoder::code3toInt(const std::string& code3)
 
 quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
 {
+    //fix for babylon
+    if( lang.length() == 1 )
+    {
+        quint16 index = lang[ 0 ];
+        if( index > 0 && index < 14 ) return Language::getBabylonLangByIndex( index - 1 ).id;
+    }
   gd::wstring langFolded = Folding::apply( lang );
 
   for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
