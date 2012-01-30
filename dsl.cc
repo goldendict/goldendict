@@ -1084,19 +1084,6 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
   return new DslArticleRequest( word, alts, *this );
 }
 
-void loadFromFile( string const & n, vector< char > & data )
-{
-  File::Class f( n, "rb" );
-
-  f.seekEnd();
-
-  data.resize( f.tell() );
-
-  f.rewind();
-
-  f.read( &data.front(), data.size() );
-}
-
 //// DslDictionary::getResource()
 
 class DslResourceRequest;
@@ -1191,7 +1178,7 @@ void DslResourceRequest::run()
     {
       Mutex::Lock _( dataMutex );
 
-      loadFromFile( n, data );
+      File::loadFromFile( n, data );
     }
     catch( File::exCantOpen & )
     {
@@ -1203,7 +1190,7 @@ void DslResourceRequest::run()
       {
         Mutex::Lock _( dataMutex );
 
-        loadFromFile( n, data );
+        File::loadFromFile( n, data );
       }
       catch( File::exCantOpen & )
       {
@@ -1274,18 +1261,6 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
 }
 
 } // anonymous namespace
-
-static bool tryPossibleName( string const & name, string & copyTo )
-{
-  if ( File::exists( name ) )
-  {
-    copyTo = name;
-
-    return true;
-  }
-  else
-    return false;
-}
 
 #if 0
 static void findCorrespondingFiles( string const & ifo,
@@ -1366,11 +1341,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string abrvFileName;
 
-      if ( tryPossibleName( baseName + "_abrv.dsl", abrvFileName ) ||
-           tryPossibleName( baseName + "_abrv.dsl.dz", abrvFileName ) ||
-           tryPossibleName( baseName + "_ABRV.DSL", abrvFileName ) ||
-           tryPossibleName( baseName + "_ABRV.DSL.DZ", abrvFileName ) ||
-           tryPossibleName( baseName + "_ABRV.DSL.dz", abrvFileName ) )
+      if ( File::tryPossibleName( baseName + "_abrv.dsl", abrvFileName ) ||
+           File::tryPossibleName( baseName + "_abrv.dsl.dz", abrvFileName ) ||
+           File::tryPossibleName( baseName + "_ABRV.DSL", abrvFileName ) ||
+           File::tryPossibleName( baseName + "_ABRV.DSL.DZ", abrvFileName ) ||
+           File::tryPossibleName( baseName + "_ABRV.DSL.dz", abrvFileName ) )
         dictFiles.push_back( abrvFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
@@ -1379,10 +1354,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string zipFileName;
 
-      if ( tryPossibleName( baseName + ".dsl.files.zip", zipFileName ) ||
-           tryPossibleName( baseName + ".dsl.dz.files.zip", zipFileName ) ||
-           tryPossibleName( baseName + ".DSL.FILES.ZIP", zipFileName ) ||
-           tryPossibleName( baseName + ".DSL.DZ.FILES.ZIP", zipFileName ) )
+      if ( File::tryPossibleName( baseName + ".dsl.files.zip", zipFileName ) ||
+           File::tryPossibleName( baseName + ".dsl.dz.files.zip", zipFileName ) ||
+           File::tryPossibleName( baseName + ".DSL.FILES.ZIP", zipFileName ) ||
+           File::tryPossibleName( baseName + ".DSL.DZ.FILES.ZIP", zipFileName ) )
         dictFiles.push_back( zipFileName );
 
       string indexFile = indicesDir + dictId;
