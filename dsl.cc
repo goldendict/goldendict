@@ -1628,104 +1628,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           idxHeader.hasZipFile = 1;
 
-          QFile zipFile( QDir::fromNativeSeparators(
-                           FsEncoding::decode( zipFileName.c_str() ) ) );
+          IndexedWords zipFileNames;
+          IndexedZip zipFile;
+          if( zipFile.openZipFile( QDir::fromNativeSeparators(
+                                   FsEncoding::decode( zipFileName.c_str() ) ) ) )
+              zipFile.indexFile( zipFileNames );
 
-          if ( !zipFile.open( QFile::ReadOnly ) )
-            throw exCantReadFile( zipFileName );
-
-          if ( ZipFile::positionAtCentralDir( zipFile ) )
+          if( !zipFileNames.empty() )
           {
-            // File seems to be a valid zip file
-
-            IndexedWords zipFileNames;
-
-            ZipFile::CentralDirEntry entry;
-
-            while( ZipFile::readNextEntry( zipFile, entry ) )
-            {
-              if ( entry.compressionMethod == ZipFile::Unsupported )
-              {
-                DPRINTF( "Warning: compression method unsupported -- skipping file %s\n",
-                        entry.fileName.data() );
-                continue;
-              }
-
-              // Check if the file name has some non-ascii letters.
-
-              unsigned char const * ptr = ( unsigned char const * )
-                                            entry.fileName.constData();
-
-              bool hasNonAscii = false;
-
-              for( ; ; )
-              {
-                if ( *ptr & 0x80 )
-                {
-                  hasNonAscii = true;
-                  break;
-                }
-                else
-                if ( !*ptr++ )
-                  break;
-              }
-
-              if ( !hasNonAscii )
-              {
-                // Add entry as is
-
-                zipFileNames.addSingleWord( Utf8::decode( entry.fileName.data() ),
-                                            entry.localHeaderOffset );
-              }
-              else
-              {
-                // Try assuming different encodings. Those are UTF8 and two
-                // Russian ones (Windows and Windows OEM). Unfortunately, zip
-                // files do not say which encoding they utilize.
-
-                // Utf8
-                try
-                {
-                  wstring decoded = Utf8::decode( entry.fileName.constData() );
-
-                  zipFileNames.addSingleWord( decoded,
-                                              entry.localHeaderOffset );
-                }
-                catch( Utf8::exCantDecode )
-                {
-                  // Failed to decode
-                }
-
-                // CP866
-                try
-                {
-                  wstring decoded = Iconv::toWstring( "CP866", entry.fileName.constData(),
-                                                      entry.fileName.size() );
-
-                  zipFileNames.addSingleWord( decoded,
-                                              entry.localHeaderOffset );
-                }
-                catch( Iconv::Ex )
-                {
-                  // Failed to decode
-                }
-
-                // CP1251
-                try
-                {
-                  wstring decoded = Iconv::toWstring( "CP1251", entry.fileName.constData(),
-                                                      entry.fileName.size() );
-
-                  zipFileNames.addSingleWord( decoded,
-                                              entry.localHeaderOffset );
-                }
-                catch( Iconv::Ex )
-                {
-                  // Failed to decode
-                }
-              }
-            }
-
             // Build the resulting zip file index
 
             IndexInfo idxInfo = BtreeIndexing::buildIndex( zipFileNames, idx );
