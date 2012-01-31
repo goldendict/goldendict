@@ -7,12 +7,17 @@
 #include "utf8.hh"
 #include "wstring_qt.hh"
 #include "folding.hh"
+#include "fsencoding.hh"
+#include "audiolink.hh"
+#include "file.hh"
+#include "filetype.hh"
+#include "htmlescape.hh"
 
 namespace Xdxf2Html {
 
-string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv )
+string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv, Dictionary::Class *dictPtr )
 {
-  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
+//  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
   // Convert spaces after each end of line to &nbsp;s, and then each end of
   // line to a <br>
@@ -52,7 +57,14 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
   QString errorStr;
   int errorLine, errorColumn;
 
-  if ( !dd.setContent( QByteArray( ( "<div class=\"sdct_x\">" + inConverted + "</div>" ).c_str() ), false, &errorStr, &errorLine, &errorColumn  ) )
+  string in_data;
+  if( type == XDXF )
+      in_data = "<div class=\"xdxf\">";
+  else
+      in_data = "<div class=\"sdct_x\">";
+  in_data += inConverted + "</div>";
+
+  if ( !dd.setContent( QByteArray( in_data.c_str() ), false, &errorStr, &errorLine, &errorColumn  ) )
   {
     FDPRINTF( stderr, "Xdxf2html error, xml parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
     FDPRINTF( stderr, "The input was: %s\n", in.c_str() );
@@ -210,15 +222,42 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
   nodes = dd.elementsByTagName( "rref" ); // Resource reference
 
-  // We don't really know how to handle this at the moment, so we'll just
-  // convert it to a span and leave it as is for now.
   while( nodes.size() )
   {
     QDomElement el = nodes.at( 0 ).toElement();
 
+    if( type == XDXF && dictPtr != NULL && !el.hasAttribute( "start" ) )
+    {
+        string filename = Utf8::encode( gd::toWString( el.text() ) );
+
+        if ( Filetype::isNameOfPicture( filename ) )
+        {
+          QUrl url;
+          url.setScheme( "bres" );
+          url.setHost( QString::fromUtf8( dictPtr->getId().c_str() ) );
+          url.setPath( QString::fromUtf8( filename.c_str() ) );
+
+          QDomElement newEl = dd.createElement( "img" );
+          newEl.setAttribute( "src", url.toEncoded().data() );
+          newEl.setAttribute( "alt", Html::escape( filename ).c_str() );
+
+          QDomNode parent = el.parentNode();
+          if( !parent.isNull() )
+          {
+            parent.replaceChild( newEl, el );
+            continue;
+          }
+        }
+    }
+
+    // We don't really know how to handle this at the moment, so we'll just
+    // convert it to a span and leave it as is for now.
+
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_rref" );
   }
+
+//  DPRINTF( "Result>>>>>>>>>>: %s\n\n\n", dd.toByteArray().data() );
 
   return dd.toByteArray().data();
 }

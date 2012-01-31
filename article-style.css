@@ -135,6 +135,10 @@ div.sdct_x
 
 /******** XDXF markup classes *********/
 
+div.xdxf
+{
+}
+
 /* Key -- keys shouldn't normally be present in the article's body since they
  * are accounted for separately, hence we hide them */
 .xdxf_k
