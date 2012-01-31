@@ -248,6 +248,42 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
             continue;
           }
         }
+        else if( Filetype::isNameOfSound( filename ) )
+        {
+          QUrl url;
+          url.setScheme( "gdau" );
+          url.setHost( QString::fromUtf8( dictPtr->getId().c_str() ) );
+          url.setPath( QString::fromUtf8( filename.c_str() ) );
+
+          QDomElement el_script = dd.createElement( "script" );
+          QDomNode parent = el.parentNode();
+          if( !parent.isNull() )
+          {
+            el_script.setAttribute( "language", "JavaScript" );
+            parent.replaceChild( el_script, el );
+
+            QDomText el_txt = dd.createTextNode( makeAudioLinkScript( string( "\"" ) + url.toEncoded().data() + "\"",
+                                                                      dictPtr->getId() ).c_str() );
+            el_script.appendChild( el_txt );
+
+            QDomElement el_span = dd.createElement( "span" );
+            el_span.setAttribute( "class", "xdxf_wav" );
+            parent.insertAfter( el_span, el_script );
+
+            QDomElement el_a = dd.createElement( "a" );
+            el_a.setAttribute( "href", url.toEncoded().data() );
+            el_span.appendChild( el_a );
+
+            QDomElement el_img = dd.createElement( "img");
+            el_img.setAttribute( "src", "qrcx://localhost/icons/playsound.png" );
+            el_img.setAttribute( "border", "0" );
+            el_img.setAttribute( "align", "absmiddle" );
+            el_img.setAttribute( "alt", "Play" );
+            el_a.appendChild( el_img );
+
+            continue;
+          }
+        }
     }
 
     // We don't really know how to handle this at the moment, so we'll just
