@@ -1288,6 +1288,76 @@
         <source>Zulu</source>
         <translation></translation>
     </message>
+	<message>
+    <location filename="../language.cc" line="365"/>
+    <source>Traditional Chinese</source>
+    <translation>Hán phồn thể</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="366"/>
+    <source>Simplified Chinese</source>
+    <translation>Hán giản thể</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="367"/>
+    <source>Other</source>
+    <translation>Khác</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="368"/>
+    <source>Other Simplified Chinese dialects</source>
+    <translation>Tiếng Hán giản thể địa phương</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="369"/>
+    <source>Other Traditional Chinese dialects</source>
+    <translation>Tiếng Hán phồn thể địa phương</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="370"/>
+    <source>Other Eastern-European languages</source>
+    <translation>Tiếng vùng Đông Âu</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="371"/>
+    <source>Other Western-European languages</source>
+    <translation>Tiếng vùng Tây Âu</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="372"/>
+    <source>Other Russian languages</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <location filename="../language.cc" line="373"/>
+    <source>Other Japanese languages</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <location filename="../language.cc" line="374"/>
+    <source>Other Baltic languages</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <location filename="../language.cc" line="375"/>
+    <source>Other Greek languages</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <location filename="../language.cc" line="376"/>
+    <source>Other Korean dialects</source>
+    <translation>Tiếng Hàn Quốc(địa phương)</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="377"/>
+    <source>Other Turkish dialects</source>
+    <translation>Tiếng Thổ Nhĩ Kỳ(địa phương)</translation>
+</message>
+<message>
+    <location filename="../language.cc" line="378"/>
+    <source>Other Thai dialects</source>
+    <translation>Tiếng Thái (địa phương)</translation>
+</message>
 </context>
 <context>
     <name>LoadDictionaries</name>

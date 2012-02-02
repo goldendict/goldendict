@@ -719,13 +719,22 @@ void BglArticleRequest::run()
       result += cleaner;
   }
   // Do some cleanups in the text
-
   BglDictionary::replaceCharsetEntities( result );
   result = QString::fromUtf8( result.c_str() )
-           .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
-                     "\\1bword:" )
-           .toUtf8().data();
-
+          // onclick location to link
+          .replace( QRegExp( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>", Qt::CaseInsensitive ),
+                    "<a href=\"\\2\">\\3</a>")
+          .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
+                    "\\1bword:" )
+          //remove invalid width, height attrs
+          .replace(QRegExp( "(width)|(height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
+                   "" )
+          //remove invalid <br> tag
+          .replace( QRegExp( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)", Qt::CaseInsensitive ),
+                    "\\1" )
+          .replace( QRegExp( "(AUTOSTATUS, WRAP\\);\" |</DIV>|addScript\\('JS_FILE_PHONG_VT_45634'\\);|appendChild\\(scNode\\);|atag\\.firstChild;)<br>", Qt::CaseInsensitive ),
+                    " \\1 " )
+          .toUtf8().data();
   Mutex::Lock _( dataMutex );
 
   data.resize( result.size() );

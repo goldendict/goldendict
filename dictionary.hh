@@ -13,7 +13,6 @@
 #include "ex.hh"
 #include "mutex.hh"
 #include "wstring.hh"
-
 /// Abstract dictionary-related stuff
 namespace Dictionary {
 

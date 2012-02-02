@@ -78,6 +78,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
   ui.displayStyle->addItem( QIcon( ":/icons/programicon.png" ), tr( "Default" ), QString() );
   ui.displayStyle->addItem( QIcon( ":/icons/icon32_dsl.png" ), tr( "Lingvo" ), QString( "lingvo" ) );
+  ui.displayStyle->addItem( QIcon( ":/icons/icon32_bgl.png" ), tr( "Babylon" ), QString( "babylon" ) );
 
   for( int x = 0; x < ui.displayStyle->count(); ++x )
     if ( ui.displayStyle->itemData( x ).toString() == p.displayStyle )
