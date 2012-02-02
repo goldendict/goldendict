@@ -168,7 +168,6 @@ private:
   /// Loads the article, storing its headword and formatting the data it has
   /// into an html.
   void loadArticle( uint32_t address,
-                    string & headword,
                     string & articleText );
 
   friend class XdxfArticleRequest;
@@ -446,7 +445,8 @@ void XdxfArticleRequest::run()
 
     string headword, articleText;
 
-    dict.loadArticle( chain[ x ].articleOffset, headword, articleText );
+    headword = chain[ x ].word;
+    dict.loadArticle( chain[ x ].articleOffset, articleText );
 
     // Ok. Now, does it go to main articles, or to alternate ones? We list
     // main ones first, and alternates after.
@@ -485,18 +485,18 @@ void XdxfArticleRequest::run()
 
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
-      result += "<h3>";
-      result += i->second.first;
-      result += "</h3>";
+//      result += "<h3>";
+//      result += i->second.first;
+//      result += "</h3>";
       result += i->second.second;
       result += cleaner;
   }
 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
-      result += "<h3>";
-      result += i->second.first;
-      result += "</h3>";
+//      result += "<h3>";
+//      result += i->second.first;
+//      result += "</h3>";
       result += i->second.second;
       result += cleaner;
   }
@@ -521,7 +521,6 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word
 }
 
 void XdxfDictionary::loadArticle( uint32_t address,
-                                  string & headword,
                                   string & articleText )
 {
   // Read the properties
