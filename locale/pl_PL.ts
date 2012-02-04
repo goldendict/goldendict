@@ -115,17 +115,17 @@
     <message>
         <location filename="../articleview.cc" line="606"/>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Zasób</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="611"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Dźwięk</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="621"/>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Definicja: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="792"/>
@@ -140,12 +140,12 @@
     <message>
         <location filename="../articleview.cc" line="792"/>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>Wskazywane źródło nie istnieje.</translation>
+        <translation>Wskazywany zasób nie istnieje.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="832"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wskazywany program obsługi audio nie istnieje.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="963"/>
@@ -215,7 +215,7 @@
     <message>
         <location filename="../articleview.cc" line="1262"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">OSTRZEŻENIE: %1</translation>
+        <translation>OSTRZEŻENIE: %1</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="14"/>
@@ -260,7 +260,7 @@
     <message>
         <location filename="../articleview.ui" line="133"/>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Podświetl &amp;wszystko</translation>
     </message>
 </context>
 <context>
@@ -400,7 +400,7 @@
     <message>
         <location filename="../externalviewer.cc" line="49"/>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa programu przeglądarki jest pusta</translation>
     </message>
 </context>
 <context>
@@ -1613,12 +1613,12 @@
     <message>
         <location filename="../mainwindow.cc" line="43"/>
         <source>Show Small Icons in Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetlaj małe ikony na paskach narzędzi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="44"/>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasek &amp;menu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="72"/>
@@ -1629,7 +1629,7 @@
     <message>
         <location filename="../mainwindow.cc" line="85"/>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Znaleziono w słownikach:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="94"/>
@@ -1746,7 +1746,7 @@
     <message>
         <location filename="../mainwindow.cc" line="860"/>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista otwartych kart</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="893"/>
@@ -1756,7 +1756,7 @@
     <message>
         <location filename="../mainwindow.cc" line="1050"/>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1484"/>
@@ -1798,12 +1798,12 @@
     <message>
         <location filename="../mainwindow.cc" line="2136"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybrano opcję ukrycia paska menu. Użyj %1, aby ponownie wyświetlić.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2137"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2278"/>
@@ -1890,12 +1890,12 @@
     <message>
         <location filename="../mainwindow.ui" line="255"/>
         <source>Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Okienko nawigacji po wynikach</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="286"/>
         <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Słowniki...	F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="295"/>
@@ -1945,7 +1945,7 @@
     <message>
         <location filename="../mainwindow.ui" line="335"/>
         <source>&amp;Close To Tray</source>
-        <translation>&amp;Zamknij do paska zadań</translation>
+        <translation>Z&amp;amknij do paska zadań</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="338"/>
@@ -2011,17 +2011,17 @@
         <location filename="../mainwindow.ui" line="400"/>
         <location filename="../mainwindow.cc" line="341"/>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowa karta</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Folder &amp;konfiguracji</translation>
     </message>
 </context>
 <context>
@@ -2295,12 +2295,12 @@ głównego lub z paska zadań.</translation>
     <message>
         <location filename="../preferences.ui" line="90"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznacz tę opcję, aby nie wyświetlać głównego paska kart, gdy otwarta jest tylko jedna karta.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="93"/>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukryj pojedynczą kartę</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="251"/>
@@ -2311,12 +2311,13 @@ głównego lub z paska zadań.</translation>
         <location filename="../preferences.ui" line="258"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwykle naciśnięcie klawisza ESC aktywuje wiersz tłumaczenia.
+Zaznaczenie tej opcji powoduje, że ukrywane jest okno głowne.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="262"/>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Naciśnięcie klawisza ESC powoduje ukrycie okna głównego</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="311"/>
@@ -2455,12 +2456,12 @@ wybrane klawisze w momencie zaznaczania słowa. Włączenie tej opcji powoduje,
     <message>
         <location filename="../preferences.ui" line="551"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyślij przetłumaczone słowo do okna głównego, a nie wyświetlaj w okienku wyskakującym</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="554"/>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyślij przetłumaczone słowo do okna głównego</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="769"/>
@@ -2502,12 +2503,12 @@ but should support most audio file formats.</source>
     <message>
         <location filename="../preferences.ui" line="1033"/>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zaawansowane</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1039"/>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodatkowe technologie skanowania automatycznego</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1045"/>
@@ -2515,36 +2516,43 @@ but should support most audio file formats.</source>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Technologia IAccessibleEx umożliwia wczytanie słowa znajdującego
+się pod kursorem. Technologię tę obsługują tylko niektóre programy
+(na przykład Internet Explorer 9).
+Nie ma potrzeby włączania tej opcji, gdy takie programy nie są używane.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1051"/>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>Używaj &amp;IAccessibleEx</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1058"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Technologia UI Automation umożliwia wczytanie słowa znajdującego
+się pod kursorem. Technologię tę obsługują tylko niektóre programy.
+Nie ma potrzeby włączania tej opcji, gdy takie programy nie są używane.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1063"/>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>Używaj &amp;UIAutomation</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1070"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Specjalny komunikat programu GoldenDict umożliwia wczytanie słowa znajdującego
+się pod kursorem. Technologię tę obsługują tylko niektóre programy.
+Nie ma potrzeby włączania tej opcji, gdy takie programy nie są używane.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1075"/>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>Używaj komunikatu programu &amp;GoldenDict</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="498"/>
@@ -2679,12 +2687,14 @@ niedziałania niektórych witryn.</translation>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Włączenie tej opcji umożliwia wysłuchiwanie wymowy dźwięków ze słowników
+internetowych działających w oparciu o wtyczkę Flash lub inne wtyczki internetowe.
+Działanie tej opcji wymaga zainstalowania odpowiedniej wtyczki.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="982"/>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz wtyczki internetowe</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1005"/>
@@ -2710,27 +2720,27 @@ otwarcia strony pobierania.</translation>
     <message>
         <location filename="../sources.cc" line="772"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Dźwięk</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="774"/>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwykły tekst</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="776"/>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="778"/>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgodność przedrostków</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="780"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieznane</translation>
     </message>
 </context>
 <context>
@@ -2738,17 +2748,17 @@ otwarcia strony pobierania.</translation>
     <message>
         <location filename="../programs.cc" line="152"/>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie określono nazwy programu.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="168"/>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program uległ awarii.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="171"/>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program zwrócił kod wyjścia %1.</translation>
     </message>
 </context>
 <context>
@@ -2756,22 +2766,22 @@ otwarcia strony pobierania.</translation>
     <message>
         <location filename="../sources.cc" line="688"/>
         <source>Enabled</source>
-        <translation type="unfinished">Włączone</translation>
+        <translation>Włączone</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="690"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="692"/>
         <source>Name</source>
-        <translation type="unfinished">Nazwa</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="694"/>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiersz komend</translation>
     </message>
 </context>
 <context>
@@ -2800,7 +2810,7 @@ otwarcia strony pobierania.</translation>
     <message>
         <location filename="../scanpopup.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation>Okno dialogowe</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="60"/>
@@ -2838,12 +2848,12 @@ otwarcia strony pobierania.</translation>
     <message>
         <location filename="../scanpopup.ui" line="110"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyślij słowo do okna głównego (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="120"/>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="140"/>
@@ -2909,7 +2919,7 @@ temu można zmieniać jego wielkość i zarządzać nim w inny sposób.</transla
     <message>
         <location filename="../sources.cc" line="270"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy usunąć program &lt;b&gt;%1&lt;/b&gt; z listy?</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="34"/>
@@ -3018,12 +3028,12 @@ właściwej grupy.</translation>
     <message>
         <location filename="../sources.ui" line="343"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programy</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="349"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie programy zewnętrzne. Ciąg znaków %GDWORD% zostaje zastąpiony wyszukiwanym słowem. To słowo zostaje także umieszczone w standardowym wejściu.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="402"/>
