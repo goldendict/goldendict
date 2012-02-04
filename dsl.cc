@@ -1084,19 +1084,6 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
   return new DslArticleRequest( word, alts, *this );
 }
 
-void loadFromFile( string const & n, vector< char > & data )
-{
-  File::Class f( n, "rb" );
-
-  f.seekEnd();
-
-  data.resize( f.tell() );
-
-  f.rewind();
-
-  f.read( &data.front(), data.size() );
-}
-
 //// DslDictionary::getResource()
 
 class DslResourceRequest;
@@ -1191,7 +1178,7 @@ void DslResourceRequest::run()
     {
       Mutex::Lock _( dataMutex );
 
-      loadFromFile( n, data );
+      File::loadFromFile( n, data );
     }
     catch( File::exCantOpen & )
     {
@@ -1203,7 +1190,7 @@ void DslResourceRequest::run()
       {
         Mutex::Lock _( dataMutex );
 
-        loadFromFile( n, data );
+        File::loadFromFile( n, data );
       }
       catch( File::exCantOpen & )
       {
@@ -1274,18 +1261,6 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
 }
 
 } // anonymous namespace
-
-static bool tryPossibleName( string const & name, string & copyTo )
-{
-  if ( File::exists( name ) )
-  {
-    copyTo = name;
-
-    return true;
-  }
-  else
-    return false;
-}
 
 #if 0
 static void findCorrespondingFiles( string const & ifo,
@@ -1366,11 +1341,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string abrvFileName;
 
-      if ( tryPossibleName( baseName + "_abrv.dsl", abrvFileName ) ||
-           tryPossibleName( baseName + "_abrv.dsl.dz", abrvFileName ) ||
-           tryPossibleName( baseName + "_ABRV.DSL", abrvFileName ) ||
-           tryPossibleName( baseName + "_ABRV.DSL.DZ", abrvFileName ) ||
-           tryPossibleName( baseName + "_ABRV.DSL.dz", abrvFileName ) )
+      if ( File::tryPossibleName( baseName + "_abrv.dsl", abrvFileName ) ||
+           File::tryPossibleName( baseName + "_abrv.dsl.dz", abrvFileName ) ||
+           File::tryPossibleName( baseName + "_ABRV.DSL", abrvFileName ) ||
+           File::tryPossibleName( baseName + "_ABRV.DSL.DZ", abrvFileName ) ||
+           File::tryPossibleName( baseName + "_ABRV.DSL.dz", abrvFileName ) )
         dictFiles.push_back( abrvFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
@@ -1379,10 +1354,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string zipFileName;
 
-      if ( tryPossibleName( baseName + ".dsl.files.zip", zipFileName ) ||
-           tryPossibleName( baseName + ".dsl.dz.files.zip", zipFileName ) ||
-           tryPossibleName( baseName + ".DSL.FILES.ZIP", zipFileName ) ||
-           tryPossibleName( baseName + ".DSL.DZ.FILES.ZIP", zipFileName ) )
+      if ( File::tryPossibleName( baseName + ".dsl.files.zip", zipFileName ) ||
+           File::tryPossibleName( baseName + ".dsl.dz.files.zip", zipFileName ) ||
+           File::tryPossibleName( baseName + ".DSL.FILES.ZIP", zipFileName ) ||
+           File::tryPossibleName( baseName + ".DSL.DZ.FILES.ZIP", zipFileName ) )
         dictFiles.push_back( zipFileName );
 
       string indexFile = indicesDir + dictId;
@@ -1653,104 +1628,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           idxHeader.hasZipFile = 1;
 
-          QFile zipFile( QDir::fromNativeSeparators(
-                           FsEncoding::decode( zipFileName.c_str() ) ) );
+          IndexedWords zipFileNames;
+          IndexedZip zipFile;
+          if( zipFile.openZipFile( QDir::fromNativeSeparators(
+                                   FsEncoding::decode( zipFileName.c_str() ) ) ) )
+              zipFile.indexFile( zipFileNames );
 
-          if ( !zipFile.open( QFile::ReadOnly ) )
-            throw exCantReadFile( zipFileName );
-
-          if ( ZipFile::positionAtCentralDir( zipFile ) )
+          if( !zipFileNames.empty() )
           {
-            // File seems to be a valid zip file
-
-            IndexedWords zipFileNames;
-
-            ZipFile::CentralDirEntry entry;
-
-            while( ZipFile::readNextEntry( zipFile, entry ) )
-            {
-              if ( entry.compressionMethod == ZipFile::Unsupported )
-              {
-                DPRINTF( "Warning: compression method unsupported -- skipping file %s\n",
-                        entry.fileName.data() );
-                continue;
-              }
-
-              // Check if the file name has some non-ascii letters.
-
-              unsigned char const * ptr = ( unsigned char const * )
-                                            entry.fileName.constData();
-
-              bool hasNonAscii = false;
-
-              for( ; ; )
-              {
-                if ( *ptr & 0x80 )
-                {
-                  hasNonAscii = true;
-                  break;
-                }
-                else
-                if ( !*ptr++ )
-                  break;
-              }
-
-              if ( !hasNonAscii )
-              {
-                // Add entry as is
-
-                zipFileNames.addSingleWord( Utf8::decode( entry.fileName.data() ),
-                                            entry.localHeaderOffset );
-              }
-              else
-              {
-                // Try assuming different encodings. Those are UTF8 and two
-                // Russian ones (Windows and Windows OEM). Unfortunately, zip
-                // files do not say which encoding they utilize.
-
-                // Utf8
-                try
-                {
-                  wstring decoded = Utf8::decode( entry.fileName.constData() );
-
-                  zipFileNames.addSingleWord( decoded,
-                                              entry.localHeaderOffset );
-                }
-                catch( Utf8::exCantDecode )
-                {
-                  // Failed to decode
-                }
-
-                // CP866
-                try
-                {
-                  wstring decoded = Iconv::toWstring( "CP866", entry.fileName.constData(),
-                                                      entry.fileName.size() );
-
-                  zipFileNames.addSingleWord( decoded,
-                                              entry.localHeaderOffset );
-                }
-                catch( Iconv::Ex )
-                {
-                  // Failed to decode
-                }
-
-                // CP1251
-                try
-                {
-                  wstring decoded = Iconv::toWstring( "CP1251", entry.fileName.constData(),
-                                                      entry.fileName.size() );
-
-                  zipFileNames.addSingleWord( decoded,
-                                              entry.localHeaderOffset );
-                }
-                catch( Iconv::Ex )
-                {
-                  // Failed to decode
-                }
-              }
-            }
-
             // Build the resulting zip file index
 
             IndexInfo idxInfo = BtreeIndexing::buildIndex( zipFileNames, idx );

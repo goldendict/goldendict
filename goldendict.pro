@@ -189,7 +189,8 @@ HEADERS += folding.hh \
     dprintf.hh \
     mainstatusbar.hh \
     gdappstyle.hh \
-    ufile.hh
+    ufile.hh \
+    xdxf.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -277,7 +278,8 @@ SOURCES += folding.cc \
     maintabwidget.cc \
     mainstatusbar.cc \
     gdappstyle.cc \
-    ufile.cc
+    ufile.cc \
+    xdxf.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
@@ -308,7 +310,9 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/pt_BR.ts \
     locale/es_AR.ts \
     locale/sk_SK.ts \
-    locale/tr_TR.ts
+    locale/tr_TR.ts \
+    locale/es_BO.ts \
+    locale/qu_WI.ts
 
 # Build version file
 !isEmpty( hasGit ) {

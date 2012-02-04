@@ -36,6 +36,9 @@ public:
   /// Attempts loading the given file into the given vector. Returns true on
   /// success, false otherwise.
   bool loadFile( gd::wstring const & name, std::vector< char > & );
+
+  /// Index compressed files in zip file
+  bool indexFile( BtreeIndexing::IndexedWords &zipFileNames );
 };
 
 #endif

@@ -15,4 +15,7 @@
 std::string addAudioLink( std::string const & url,
                           std::string const & dictionaryId );
 
+std::string makeAudioLinkScript( std::string const & url,
+                                 std::string const & dictionaryId );
+
 #endif

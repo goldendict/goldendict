@@ -6,6 +6,7 @@
 
 #include <cstdio>
 #include <string>
+#include <vector>
 #include "ex.hh"
 
 /// A simple wrapper over FILE * operations with added write-buffering,
@@ -20,6 +21,11 @@ DEF_EX( exWriteError, "Error writing to the file", Ex )
 DEF_EX( exSeekError, "File seek error", Ex )
 
 /// Checks if the file exists or not.
+
+bool tryPossibleName( std::string const & name, std::string & copyTo );
+
+void loadFromFile( std::string const & n, std::vector< char > & data );
+
 bool exists( char const * filename ) throw();
 
 inline bool exists( std::string const & filename ) throw()
