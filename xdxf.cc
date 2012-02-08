@@ -706,8 +706,8 @@ void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
 }
 
 void checkArticlePosition( GzippedFile & gzFile,
-                           size_t *pOffset,
-                           size_t *pSize )
+                           uint32_t *pOffset,
+                           uint32_t *pSize )
 {
     char * data = gzFile.readDataArray( *pOffset, *pSize );
     if( data == NULL )
