@@ -32,6 +32,7 @@ MOC_DIR = build
 RCC_DIR = build
 LIBS += \
         -lz \
+        -lbz2
 
 win32 { 
     LIBS += -liconv \
@@ -190,7 +191,8 @@ HEADERS += folding.hh \
     mainstatusbar.hh \
     gdappstyle.hh \
     ufile.hh \
-    xdxf.hh
+    xdxf.hh \
+    sdict.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -279,7 +281,8 @@ SOURCES += folding.cc \
     mainstatusbar.cc \
     gdappstyle.cc \
     ufile.cc \
-    xdxf.cc
+    xdxf.cc \
+    sdict.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
