@@ -48,5 +48,6 @@
         <file>icons/error.png</file>
         <file>icons/macicon.png</file>
         <file>icons/icon32_sdict.png</file>
+        <file>icons/icon32_aard.png</file>
     </qresource>
 </RCC>

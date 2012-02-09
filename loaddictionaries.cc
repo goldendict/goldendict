@@ -22,6 +22,7 @@
 #include "fsencoding.hh"
 #include "xdxf.hh"
 #include "sdict.hh"
+#include "aard.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -42,7 +43,7 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
 
   nameFilters << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
               << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf"
-              << "*.xdxf.dz" << "*.dct";
+              << "*.xdxf.dz" << "*.dct" << "*.aar";
 }
 
 void LoadDictionaries::run()
@@ -154,6 +155,13 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), sdictDictionaries.begin(),
                          sdictDictionaries.end() );
+  }
+  {
+    vector< sptr< Dictionary::Class > > aardDictionaries =
+      Aard::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), aardDictionaries.begin(),
+                         aardDictionaries.end() );
   }
 }
 

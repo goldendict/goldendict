@@ -1,7 +1,7 @@
 /* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include "sdict.hh"
+#include "aard.hh"
 #include "btreeidx.hh"
 #include "folding.hh"
 #include "utf8.hh"
@@ -26,8 +26,9 @@
 #include <QDomDocument>
 
 #include "ufile.hh"
+#include "wstring_qt.hh"
 
-namespace Sdict {
+namespace Aard {
 
 using std::map;
 using std::multimap;
@@ -51,21 +52,67 @@ DEF_EX_STR( exSuddenEndOfFile, "Sudden end of file", Dictionary::Ex )
 #pragma pack( push, 1 )
 #endif
 
-/// DCT file header
-struct DCT_header
+// Big-Endian template
+// http://habrahabr.ru/blogs/cpp/121811/
+
+template<typename T>
+struct BigEndian
+{
+    union
+    {
+        unsigned char bytes[sizeof(T)];
+        T raw_value;
+    };
+
+    BigEndian(T t = T())
+    {
+        operator =(t);
+    }
+
+    BigEndian(const BigEndian<T> & t)
+    {
+        raw_value = t.raw_value;
+    }
+
+    operator const T() const
+    {
+        T t = T();
+        for (unsigned i = 0; i < sizeof(T); i++)
+            t |= T(bytes[sizeof(T) - 1 - i]) << (i << 3);
+        return t;
+    }
+
+    const T operator = (const T t)
+    {
+        for (unsigned i = 0; i < sizeof(T); i++)
+            bytes[sizeof(T) - 1 - i] = (unsigned char)( t >> (i << 3) );
+        return t;
+    }
+
+}
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
+
+typedef BigEndian< uint16_t > uint16_be;
+typedef BigEndian< uint32_t > uint32_be;
+
+/// AAR file header
+struct AAR_header
 {
     char signature[4];
-    char inputLang[3];
-    char outputLang[3];
-    uint8_t compression;
-    uint32_t wordCount;
-    uint32_t shortIndexLength;
-    uint32_t titleOffset;
-    uint32_t copyrightOffset;
-    uint32_t versionOffset;
-    uint32_t shortIndexOffset;
-    uint32_t fullIndexOffset;
-    uint32_t articlesOffset;
+    char checksum[40];
+    uint16_be version;
+    char uuid[16];
+    uint16_be volume;
+    uint16_be totalVolumes;
+    uint32_be metaLength;
+    uint32_be wordsCount;
+    uint32_be articleOffset;
+    char indexItemFormat[4];
+    char keyLengthFormat[2];
+    char articleLengthFormat[2];
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -74,9 +121,8 @@ __attribute__((packed))
 
 struct IndexElement
 {
-    uint16_t nextWord;
-    uint16_t previousWord;
-    uint32_t articleOffset;
+    uint32_be wordOffset;
+    uint32_be articleOffset;
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -85,20 +131,19 @@ __attribute__((packed))
 
 enum
 {
-  Signature = 0x43494453, // SDIC on little-endian, CIDS on big-endian
+  Signature = 0x58524141, // AARX on little-endian, XRAA on big-endian
   CurrentFormatVersion = 1 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
 {
-  uint32_t signature; // First comes the signature, SDIC
+  uint32_t signature; // First comes the signature, AARX
   uint32_t formatVersion; // File format version (CurrentFormatVersion)
   uint32_t chunksOffset; // The offset to chunks' storage
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
   uint32_t wordCount;
   uint32_t articleCount;
-  uint32_t compressionType; // Data compression in file. 0 - no compression, 1 - zip, 2 - bzip2
   uint32_t langFrom;  // Source language
   uint32_t langTo;    // Target language
 }
@@ -122,7 +167,45 @@ bool indexIsOldOrBad( string const & indexFile )
          header.formatVersion != CurrentFormatVersion;
 }
 
-class SdictDictionary: public BtreeIndexing::BtreeDictionary
+void readJSONValue( string const & source, string & str, uint32_t & pos)
+{
+    int level = 1;
+    char endChar;
+    str.push_back( source[pos] );
+    if( source[pos] == '{')
+        endChar = '}';
+    else if( source[pos] == '[' )
+        endChar = ']';
+    else if( source[pos] == '\"' )
+    {
+        str.clear();
+        endChar = '\"';
+    }
+    else
+        endChar = ',';
+
+    pos++;
+    char ch = 0;
+    char lastCh = 0;
+    while( !( ch == endChar && lastCh != '\\' && level == 0 )
+           && pos < source.size() )
+    {
+        lastCh = ch;
+        ch = source[ pos++ ];
+        if( ( ch == '{' || ch == '[' ) && lastCh != '\\' )
+          level++;
+        if( ( ch == '}' || ch == ']' ) && lastCh != '\\' )
+          level--;
+
+        if( ch == endChar &&
+            ( ( ch == '\"' && lastCh != '\\' ) || ch == ',' )
+            && level == 1)
+          break;
+        str.push_back( ch );
+    }
+}
+
+class AardDictionary: public BtreeIndexing::BtreeDictionary
 {
     Mutex idxMutex;
     File::Class idx;
@@ -135,10 +218,10 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
 
   public:
 
-    SdictDictionary( string const & id, string const & indexFile,
+    AardDictionary( string const & id, string const & indexFile,
                      vector< string > const & dictionaryFiles );
 
-    ~SdictDictionary();
+    ~AardDictionary();
 
     virtual string getName() throw()
     { return dictionaryName; }
@@ -176,12 +259,12 @@ private:
                       string & articleText );
     string convert( string const & in_data );
 
-    friend class SdictArticleRequest;
+    friend class AardArticleRequest;
 };
 
-SdictDictionary::SdictDictionary( string const & id,
-                                  string const & indexFile,
-                                  vector< string > const & dictionaryFiles ):
+AardDictionary::AardDictionary( string const & id,
+                                string const & indexFile,
+                                vector< string > const & dictionaryFiles ):
     BtreeDictionary( id, dictionaryFiles ),
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
@@ -193,8 +276,11 @@ SdictDictionary::SdictDictionary( string const & id,
 
     idx.seek( sizeof( idxHeader ) );
     vector< char > dName( idx.read< uint32_t >() );
-    idx.read( &dName.front(), dName.size() );
-    dictionaryName = string( &dName.front(), dName.size() );
+    if( dName.size() )
+    {
+        idx.read( &dName.front(), dName.size() );
+        dictionaryName = string( &dName.front(), dName.size() );
+    }
 
     // Initialize the index
 
@@ -203,24 +289,24 @@ SdictDictionary::SdictDictionary( string const & id,
                idx, idxMutex );
 }
 
-SdictDictionary::~SdictDictionary()
+AardDictionary::~AardDictionary()
 {
     df.close();
 }
 
-QIcon SdictDictionary::getNativeIcon() throw()
+QIcon AardDictionary::getNativeIcon() throw()
 {
   loadIcon();
   return dictionaryNativeIcon;
 }
 
-QIcon SdictDictionary::getIcon() throw()
+QIcon AardDictionary::getIcon() throw()
 {
   loadIcon();
   return dictionaryIcon;
 }
 
-void SdictDictionary::loadIcon()
+void AardDictionary::loadIcon()
 {
   if ( dictionaryIconLoaded )
     return;
@@ -277,43 +363,42 @@ void SdictDictionary::loadIcon()
   if ( dictionaryIcon.isNull() )
   {
     // Load failed -- use default icons
-    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_sdict.png");
+    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_aard.png");
   }
 
   dictionaryIconLoaded = true;
 }
 
-string SdictDictionary::convert( string const & in )
+string AardDictionary::convert( const string & in )
 {
-//    DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
-
     string inConverted;
-
-    inConverted.reserve( in.size() );
-
+    char inCh, lastCh = 0;
     bool afterEol = false;
 
     for( string::const_iterator i = in.begin(), j = in.end(); i != j; ++i )
     {
-      switch( *i )
-      {
-        case '\n':
-          afterEol = true;
-          inConverted.append( "<br/>" );
-        break;
-
-        case ' ':
-          if ( afterEol )
-          {
+        inCh = *i;
+        if( lastCh == '\\' )
+        {
+            inConverted.erase( inConverted.size() - 1 );
+            lastCh = 0;
+            if( inCh == 'n' )
+            {
+                inConverted.append( "<br/>");
+                afterEol = true;
+                continue;
+            }
+            else if( inCh == 'r')
+                continue;
+        }
+        else if( inCh == ' ' && afterEol )
+        {
             inConverted.append( "&nbsp;" );
-            break;
-          }
-          // Fall-through
-
-        default:
-          inConverted.push_back( *i );
-          afterEol = false;
-      }
+            continue;
+        } else
+            lastCh = inCh;
+        afterEol = false;
+        inConverted.push_back( inCh );
     }
 
     QDomDocument dd;
@@ -322,100 +407,105 @@ string SdictDictionary::convert( string const & in )
 
     if( !dd.setContent( QByteArray( inConverted.c_str() ), false, &errorStr, &errorLine, &errorColumn ) )
     {
-        FDPRINTF( stderr, "Sdictionary article parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
+        FDPRINTF( stderr, "Aard article parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
         FDPRINTF( stderr, "The input was: %s\n", in.c_str() );
-        return in;
+        return inConverted;
     }
 
-    QDomNodeList nodes = dd.elementsByTagName( "r" ); // Reference to another word
-
-    while( nodes.size() )
+    QDomNodeList nodes = dd.elementsByTagName( "a" ); // References
+    for( int i = 0; i < nodes.count(); i++ )
     {
-      QDomElement el = nodes.at( 0 ).toElement();
-
-      el.setTagName( "a" );
-      el.setAttribute( "href", QString( "bword:" ) + el.text() );
-      el.setAttribute( "class", "sdict_wordref" );
+        QDomElement el = nodes.at( i ).toElement();
+        QString ref = el.attribute( "href", "" );
+        if( ref.size() == 0 || ref.indexOf( "http://") != -1 || ref[0] == '#' )
+            continue;
+        if( ref.indexOf( "w:") == 0 || ref.indexOf( "s:") == 0 )
+            ref.replace( 0, 2, "bword:" );
+        else
+            ref.insert( 0, "bword:" );
+        el.setAttribute( "href", ref );
     }
-
-    nodes = dd.elementsByTagName( "t" ); // Transcription
-
-    while( nodes.size() )
-    {
-      QDomElement el = nodes.at( 0 ).toElement();
-
-      el.setTagName( "span" );
-      el.setAttribute( "class", "sdict_tr" );
-    }
-
-    nodes = dd.elementsByTagName( "l" ); // List
-
-    while( nodes.size() )
-    {
-      QDomElement el = nodes.at( 0 ).toElement();
-
-      el.setTagName( "ul" );
-    }
-
-    nodes = dd.elementsByTagName( "f" ); // Word forms
-
-    while( nodes.size() )
-    {
-      QDomElement el = nodes.at( 0 ).toElement();
-
-      el.setTagName( "span" );
-      el.setAttribute( "class", "sdict_forms" );
-    }
-
-//    DPRINTF( "Result>>>>>>>>>>: %s\n\n\n", dd.toByteArray().data() );
 
     return dd.toByteArray().data();
 }
 
-void SdictDictionary::loadArticle( uint32_t address,
+void AardDictionary::loadArticle( uint32_t address,
                                    string & articleText )
 {
     uint32_t articleOffset = address;
     uint32_t articleSize;
+    uint32_be size;
 
     vector< char > articleBody;
 
+    articleText.clear();
+
     df.seek( articleOffset );
-    df.read( &articleSize, sizeof(articleSize) );
+    df.read( &size, sizeof(size) );
+    articleSize = size;
     articleBody.resize( articleSize );
     df.read( &articleBody.front(), articleSize );
 
     if ( articleBody.empty() )
       throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
 
-    if( idxHeader.compressionType == 1 )
-        articleText = decompressZlib( articleBody.data(), articleSize );
-    else if( idxHeader.compressionType == 2 )
-        articleText = decompressBzip2( articleBody.data(), articleSize );
-    else
-        articleText = string( articleBody.data(), articleSize );
+    string text = decompressBzip2( articleBody.data(), articleSize );
+    if( text.empty() )
+        text = decompressZlib( articleBody.data(), articleSize );
+    if( text.empty() )
+        text = string( articleBody.data(), articleSize );
+
+    uint32_t n = 0;
+    while( n < text.size() && text[n] != '\"' )
+        n++;
+
+    if( n >= text.size() )
+        return;
+
+    readJSONValue( text, articleText, n );
+
+    if( articleText.empty() )
+    {
+        n = text.find( "\"r\"" );
+        if( n != string::npos )
+        {
+            n += 3;
+            while( n < text.size() && text[n] != '\"' )
+                n++;
+
+            if( n >= text.size() )
+                return;
+
+            string link;
+            readJSONValue( text, link, n );
+            if( !link.empty() )
+                articleText = "<a href=\"" + link + "\">" + link + "</a>";
+        }
+    }
+
+    if( !articleText.empty() )
+        articleText = convert( articleText );
 
     articleText = "<div class=\"sdict\">" + articleText + "</div>";
-    articleText = convert( articleText );
 }
 
-/// SdictDictionary::getArticle()
+/// AardDictionary::getArticle()
 
-class SdictArticleRequest;
+class AardArticleRequest;
 
-class SdictArticleRequestRunnable: public QRunnable
+class AardArticleRequestRunnable: public QRunnable
 {
-  SdictArticleRequest & r;
+  AardArticleRequest & r;
   QSemaphore & hasExited;
 
 public:
 
-  SdictArticleRequestRunnable( SdictArticleRequest & r_,
-                               QSemaphore & hasExited_ ): r( r_ ),
-                                                          hasExited( hasExited_ )
+  AardArticleRequestRunnable( AardArticleRequest & r_,
+                              QSemaphore & hasExited_ ): r( r_ ),
+                                                         hasExited( hasExited_ )
   {}
 
-  ~SdictArticleRequestRunnable()
+  ~AardArticleRequestRunnable()
   {
     hasExited.release();
   }
@@ -423,26 +513,26 @@ public:
   virtual void run();
 };
 
-class SdictArticleRequest: public Dictionary::DataRequest
+class AardArticleRequest: public Dictionary::DataRequest
 {
-  friend class SdictArticleRequestRunnable;
+  friend class AardArticleRequestRunnable;
 
   wstring word;
   vector< wstring > alts;
-  SdictDictionary & dict;
+  AardDictionary & dict;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
 
 public:
 
-  SdictArticleRequest( wstring const & word_,
-                       vector< wstring > const & alts_,
-                       SdictDictionary & dict_ ):
+  AardArticleRequest( wstring const & word_,
+                      vector< wstring > const & alts_,
+                      AardDictionary & dict_ ):
     word( word_ ), alts( alts_ ), dict( dict_ )
   {
     QThreadPool::globalInstance()->start(
-      new SdictArticleRequestRunnable( *this, hasExited ) );
+      new AardArticleRequestRunnable( *this, hasExited ) );
   }
 
   void run(); // Run from another thread by DslArticleRequestRunnable
@@ -452,19 +542,19 @@ public:
     isCancelled.ref();
   }
 
-  ~SdictArticleRequest()
+  ~AardArticleRequest()
   {
     isCancelled.ref();
     hasExited.acquire();
   }
 };
 
-void SdictArticleRequestRunnable::run()
+void AardArticleRequestRunnable::run()
 {
   r.run();
 }
 
-void SdictArticleRequest::run()
+void AardArticleRequest::run()
 {
   if ( isCancelled )
   {
@@ -566,12 +656,65 @@ void SdictArticleRequest::run()
   finish();
 }
 
-sptr< Dictionary::DataRequest > SdictDictionary::getArticle( wstring const & word,
-                                                             vector< wstring > const & alts,
-                                                             wstring const & )
+map< string, string > parseMetaData( string const & metaData )
+{
+// Parsing JSON string
+    map< string, string > data;
+    string name, value;
+    uint32_t n = 0;
+
+    while( metaData[n] != '{' && n < metaData.length() )
+        n++;
+    while( n < metaData.length() )
+    {
+        // Skip to '"'
+        while( metaData[n] != '\"' && n < metaData.length() )
+            n++;
+        if( ++n >= metaData.length() )
+            break;
+
+        // Read name
+        while( !( ( metaData[n] == '\"' || metaData[n] == '{' ) && metaData[n-1] != '\\' )
+               && n < metaData.length() )
+            name.push_back( metaData[n++]);
+
+        // Skip to ':'
+        if( ++n >= metaData.length() )
+            break;
+        while( metaData[n] != ':' && n < metaData.length() )
+            n++;
+        if( ++n >= metaData.length() )
+            break;
+
+        // Find value start after ':'
+        while( !( ( metaData[n] == '\"'
+                    || metaData[n] == '{'
+                    || metaData[n] == '['
+                    || ( metaData[n] >= '0' && metaData[n] <= '9' ) )
+               && metaData[n-1] != '\\' )
+               && n < metaData.length() )
+            n++;
+        if( n >= metaData.length() )
+            break;
+
+        readJSONValue( metaData, value, n);
+
+        data[name] = value;
+
+        name.clear();
+        value.clear();
+        if( ++n >= metaData.length() )
+            break;
+    }
+    return data;
+}
+
+sptr< Dictionary::DataRequest > AardDictionary::getArticle( wstring const & word,
+                                                            vector< wstring > const & alts,
+                                                            wstring const & )
   throw( std::exception )
 {
-  return new SdictArticleRequest( word, alts, *this );
+  return new AardArticleRequest( word, alts, *this );
 }
 
 } // anonymous namespace
@@ -587,10 +730,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
   for( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end();
        ++i )
   {
-      // Skip files with the extensions different to .dct to speed up the
+      // Skip files with the extensions different to .aar to speed up the
       // scanning
       if ( i->size() < 4 ||
-          strcasecmp( i->c_str() + ( i->size() - 4 ), ".dct" ) != 0 )
+          strcasecmp( i->c_str() + ( i->size() - 4 ), ".aar" ) != 0 )
         continue;
 
       // Got the file -- check if we need to rebuid the index
@@ -608,32 +751,57 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           File::Class df( *i, "rb" );
 
-          DCT_header dictHeader;
+          AAR_header dictHeader;
 
           df.read( &dictHeader, sizeof(dictHeader) );
-          if( strncmp( dictHeader.signature, "sdct", 4 ) )
+          if( strncmp( dictHeader.signature, "aard", 4 )
+              || strncmp( dictHeader.indexItemFormat, ">LL", 4 )
+              || strncmp( dictHeader.keyLengthFormat, ">H", 2 )
+              || strncmp( dictHeader.articleLengthFormat, ">L", 2) )
           {
-              DPRINTF( "File %s is not valid sdictionary file", i->c_str() );
+              DPRINTF( "File %s is not in supported aard format", i->c_str() );
               continue;
           }
-          int compression = dictHeader.compression & 0x0F;
 
           vector< char > data;
-          uint32_t size;
+          uint32_t size = dictHeader.metaLength;
 
-          df.seek( dictHeader.titleOffset );
-          df.read( &size, sizeof( size ) );
           data.resize( size );
           df.read( &data.front(), size );
+          string metaStr = decompressBzip2( data.data(), size );
+          if( metaStr.empty() )
+              metaStr = decompressZlib( data.data(), size );
+
+          map< string, string > meta = parseMetaData( metaStr );
+
+          if( meta.empty() )
+          {
+              DPRINTF( "File %s has invalid metadata", i->c_str() );
+              continue;
+          }
 
           string dictName;
+          map< string, string >::const_iterator iter = meta.find( "title" );
+          if( iter != meta.end() )
+              dictName = iter->second;
 
-          if( compression == 1 )
-              dictName = decompressZlib( data.data(), size );
-          else if( compression == 2 )
-              dictName = decompressBzip2( data.data(), size );
-          else
-              dictName = string( data.data(), size );
+          uint16_t volumes = dictHeader.totalVolumes;
+          if( volumes > 1 )
+          {
+              QString ss;
+              ss.sprintf( " (%i/%i)", (uint16_t)(dictHeader.volume), volumes );
+              dictName += ss.toLocal8Bit().data();
+          }
+
+          string langFrom;
+          iter = meta.find( "index_language" );
+          if( iter != meta.end() )
+              langFrom = iter->second;
+
+          string langTo;
+          iter = meta.find( "article_language" );
+          if( iter != meta.end() )
+              langTo = iter->second;
 
           initializing.indexingDictionary( dictName );
 
@@ -647,37 +815,43 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           idx.write( idxHeader );
 
           idx.write( (uint32_t) dictName.size() );
-          idx.write( dictName.data(), dictName.size() );
+          if( !dictName.empty() )
+              idx.write( dictName.data(), dictName.size() );
 
           IndexedWords indexedWords;
 
           ChunkedStorage::Writer chunks( idx );
 
-          uint32_t wordCount = 0;
+          uint32_t wordCount = dictHeader.wordsCount;
           set< uint32_t > articleOffsets;
-          uint32_t pos = dictHeader.fullIndexOffset;
+          uint32_t pos = df.tell();
+          uint32_t wordsBase = pos + wordCount * sizeof( IndexElement );
+          uint32_t articlesBase = dictHeader.articleOffset;
 
-          for( uint32_t j = 0; j < dictHeader.wordCount; j++ )
+          for( uint32_t j = 0; j < wordCount; j++ )
           {
             IndexElement el;
+
             df.seek( pos );
             df.read( &el, sizeof(el) );
-            uint32_t articleOffset = dictHeader.articlesOffset + el.articleOffset;
-            size = el.nextWord - sizeof(el);
-            if( size < 0 )
-                break;
-            wordCount++;
-            data.resize( size );
-            df.read( &data.front(), size );
+            uint32_t articleOffset = articlesBase + el.articleOffset;
+            uint32_t wordOffset = wordsBase + el.wordOffset;
+
+            df.seek( wordOffset );
+
+            uint16_be sizeBE;
+            df.read( &sizeBE, sizeof(sizeBE) );
+            uint16_t wordSize = sizeBE;
+            data.resize( wordSize );
+            df.read( &data.front(), wordSize );
 
             if( articleOffsets.find( articleOffset ) == articleOffsets.end() )
                 articleOffsets.insert( articleOffset );
 
             // Insert new entry
+            indexedWords.addWord( Utf8::decode( string( data.data(), wordSize ) ), articleOffset);
 
-            indexedWords.addWord( Utf8::decode( string( data.data(), size ) ), articleOffset);
-
-            pos += el.nextWord;
+            pos += sizeof(el);
           }
           // Finish with the chunks
 
@@ -700,9 +874,15 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           idxHeader.articleCount = articleOffsets.size();
           idxHeader.wordCount = wordCount;
 
-          idxHeader.langFrom = LangCoder::code2toInt( dictHeader.inputLang );
-          idxHeader.langTo = LangCoder::code2toInt( dictHeader.outputLang );
-          idxHeader.compressionType = compression;
+          if( langFrom.size() == 3)
+              idxHeader.langFrom = LangCoder::code3toInt( langFrom.c_str() );
+          else if( langFrom.size() == 2 )
+              idxHeader.langFrom = LangCoder::code2toInt( langFrom.c_str() );
+
+          if( langTo.size() == 3)
+              idxHeader.langTo = LangCoder::code3toInt( langTo.c_str() );
+          else if( langTo.size() == 2 )
+              idxHeader.langTo = LangCoder::code2toInt( langTo.c_str() );
 
           idx.rewind();
 
@@ -710,17 +890,17 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         }
         catch( std::exception & e )
         {
-          FDPRINTF( stderr, "Sdictionary dictionary indexing failed: %s, error: %s\n",
+          FDPRINTF( stderr, "Aard dictionary indexing failed: %s, error: %s\n",
             i->c_str(), e.what() );
           continue;
         }
         catch( ... )
         {
-          FDPRINTF( stderr, "Sdictionary dictionary indexing failed\n" );
+          FDPRINTF( stderr, "Aard dictionary indexing failed\n" );
           continue;
         }
       } // if need to rebuild
-      dictionaries.push_back( new SdictDictionary( dictId,
+      dictionaries.push_back( new AardDictionary( dictId,
                                                    indexFile,
                                                    dictFiles ) );
   }

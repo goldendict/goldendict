@@ -192,7 +192,9 @@ HEADERS += folding.hh \
     gdappstyle.hh \
     ufile.hh \
     xdxf.hh \
-    sdict.hh
+    sdict.hh \
+    decompress.hh \
+    aard.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -282,7 +284,9 @@ SOURCES += folding.cc \
     gdappstyle.cc \
     ufile.cc \
     xdxf.cc \
-    sdict.cc
+    sdict.cc \
+    decompress.cc \
+    aard.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
