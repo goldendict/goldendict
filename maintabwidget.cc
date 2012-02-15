@@ -17,11 +17,17 @@ void MainTabWidget::setHideSingleTab(bool hide)
 void MainTabWidget::tabInserted(int index)
 {
   updateTabBarVisibility();
+
+  // Avoid bug in Qt 4.8.0
+  setUsesScrollButtons( count() > 10 );
 }
 
 void MainTabWidget::tabRemoved(int index)
 {
   updateTabBarVisibility();
+
+  // Avoid bug in Qt 4.8.0
+  setUsesScrollButtons( count() > 10 );
 }
 
 void MainTabWidget::updateTabBarVisibility()
