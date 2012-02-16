@@ -53,6 +53,10 @@ public:
   /// item gets removed from the end of the list.
   void addItem( Item const & );
 
+  /// Remove item with given index from list
+  void removeItem( int index )
+  { items.removeAt( index ); }
+
   /// Attempts saving history. Returns true if succeeded - false otherwise.
   /// Since history isn't really that valuable, failures can be ignored.
   bool save() const;
@@ -64,6 +68,12 @@ public:
   QList< Item > const & getItems() const
   { return items; }
 
+  /// Enable/disable add words to hystory
+  void enableAdd( bool enable )
+  { addingEnabled = enable; }
+  bool enabled()
+  { return addingEnabled; }
+
 signals:
 
   /// Signals the changes in items in response to addItem() or clear().
@@ -73,6 +83,7 @@ private:
 
   QList< Item > items;
   unsigned maxSize;
+  bool addingEnabled;
 };
 
 #endif

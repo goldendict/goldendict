@@ -6,11 +6,13 @@
 #include "atomic_rename.hh"
 #include <QFile>
 
-History::History( unsigned size ): maxSize( size )
+History::History( unsigned size ): maxSize( size ),
+addingEnabled( true )
 {
 }
 
-History::History( Load, unsigned size ): maxSize( size )
+History::History( Load, unsigned size ): maxSize( size ),
+addingEnabled( true )
 {
   QFile file( Config::getHistoryFileName() );
 
@@ -48,6 +50,9 @@ History::History( Load, unsigned size ): maxSize( size )
 
 void History::addItem( Item const & item )
 {
+  if( !enabled() )
+    return;
+
   if ( item.word.size() > 60 )
   {
     // The search looks bogus. Don't save it.

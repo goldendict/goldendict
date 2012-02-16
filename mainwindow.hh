@@ -53,6 +53,8 @@ private:
   void commitData();
   bool commitDataCompleted;
 
+  bool showHistory;
+
   QSystemTrayIcon * trayIcon;
 
   Ui::MainWindow ui;
@@ -299,8 +301,8 @@ private slots:
   void useSmallIconsInToolbarsTriggered();
   void toggleMenuBarTriggered( bool announce = true );
 
-  void historyChanged();
-  void menuHistoryTriggered( QAction * );
+//  void historyChanged();
+//  void menuHistoryTriggered( QAction * );
   void on_clearHistory_activated();
 
   void on_newTab_activated();
@@ -315,6 +317,8 @@ private slots:
   void on_saveArticle_activated();
 
   void on_rescanFiles_activated();
+
+  void on_showHideHistory_activated();
 };
 
 #endif

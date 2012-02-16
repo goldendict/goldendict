@@ -409,7 +409,7 @@ void ScanPopup::initiateTranslation()
 
   history.addItem( History::Item( ui.groupList->getCurrentGroup(),
                                   inputWord.trimmed() ) );
-  history.save();
+//  history.save();
 }
 
 vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()

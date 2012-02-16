@@ -61,7 +61,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -114,7 +114,7 @@
     <property name="title">
      <string>H&amp;istory</string>
     </property>
-    <addaction name="separator"/>
+    <addaction name="showHideHistory"/>
     <addaction name="clearHistory"/>
    </widget>
    <addaction name="menuFile"/>
@@ -409,6 +409,11 @@
   <action name="openConfigFolder">
    <property name="text">
     <string>&amp;Configuration Folder</string>
+   </property>
+  </action>
+  <action name="showHideHistory">
+   <property name="text">
+    <string>&amp;Show</string>
    </property>
   </action>
  </widget>

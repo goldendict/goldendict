@@ -179,6 +179,8 @@ struct Preferences
   qreal zoomFactor;
   int wordsZoomLevel;
 
+  unsigned maxStringsInHistory;
+
   Preferences();
 };
 
