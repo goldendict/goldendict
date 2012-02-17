@@ -2597,3 +2597,53 @@ static bool needHideSearchPane;
         ui.wordList->setUpdatesEnabled( true );
     }
 }
+
+void MainWindow::on_exportHistory_activated()
+{
+    QString fileName = QFileDialog::getSaveFileName( this, tr( "Export history to file" ),
+                                                     QDir::homePath(),
+                                                     tr( "Text files (*.txt);;All files (*.*)" ) );
+    if( fileName.size() == 0)
+        return;
+
+    QFile file( fileName );
+
+    for(;;)
+    {
+        if ( !file.open( QFile::WriteOnly | QIODevice::Text ) )
+          break;
+
+        // Write UTF-8 BOM
+        QByteArray line;
+        line.append( 0xEF ).append( 0xBB ).append( 0xBF );
+        if ( file.write( line ) != line.size() )
+          break;
+
+        // Write history
+        QList< History::Item > const & items = history.getItems();
+
+        QList< History::Item >::const_iterator i;
+        for( i = items.constBegin(); i != items.constEnd(); ++i )
+        {
+          line = i->word.toUtf8();
+
+          line.replace( '\n', ' ' );
+          line.replace( '\r', ' ' );
+
+          line += "\n";
+
+          if ( file.write( line ) != line.size() )
+            break;
+        }
+
+        if( i != items.constEnd() )
+          break;
+
+        file.close();
+        mainStatusBar->showMessage( tr( "History export complete" ), 5000 );
+        return;
+    }
+    QString errStr = QString( tr( "Export error: ") ) + file.errorString();
+    file.close();
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+}

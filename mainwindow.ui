@@ -115,6 +115,8 @@
      <string>H&amp;istory</string>
     </property>
     <addaction name="showHideHistory"/>
+    <addaction name="exportHistory"/>
+    <addaction name="separator"/>
     <addaction name="clearHistory"/>
    </widget>
    <addaction name="menuFile"/>
@@ -414,6 +416,11 @@
   <action name="showHideHistory">
    <property name="text">
     <string>&amp;Show</string>
+   </property>
+  </action>
+  <action name="exportHistory">
+   <property name="text">
+    <string>&amp;Export</string>
    </property>
   </action>
  </widget>

@@ -319,6 +319,7 @@ private slots:
   void on_rescanFiles_activated();
 
   void on_showHideHistory_activated();
+  void on_exportHistory_activated();
 };
 
 #endif
