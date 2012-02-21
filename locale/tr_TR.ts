@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Create language-based groups</source>
-        <translation>Dil-tabanlı gruplarını oluştur</translation>
+        <translation>Dil-tabanlı grupları oluştur</translation>
     </message>
     <message>
         <source>Rename current dictionary group</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Remove all groups</source>
-        <translation>Tüm grupları  kaldır</translation>
+        <translation>Tüm grupları kaldır</translation>
     </message>
     <message>
         <source>Remove selected dictionaries from group (Del)</source>
@@ -188,7 +188,7 @@
     </message>
     <message>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Kaynak otomatik olarak açılamadı, elle deneyin: %1.</translation>
+        <translation>Kaynak, otomatik olarak açılamadı, elle deneyin: %1.</translation>
     </message>
     <message>
         <source>Look up &quot;%1&quot; in %2</source>
@@ -196,7 +196,8 @@
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>WAV dosyalarını oynatmayı etkinleştirmek için, Düzen|Tercihler&apos;e gidin Ses sekmesini seçin ve &quot;DirectShow ile çal&quot; seçeneğini seçin.</translation>
+        <translation>WAV dosyalarını oynatmayı etkinleştirmek için,Düzen|Tercihler&apos;e gidin
+Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translation>
     </message>
     <message>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
@@ -204,7 +205,7 @@
     </message>
     <message>
         <source>Open Link in New &amp;Tab</source>
-        <translation>Bağlanıyı Yeni &amp;Sekmede Aç</translation>
+        <translation>Bağlantıyı Yeni &amp;Sekmede Aç</translation>
     </message>
 </context>
 <context>
@@ -431,7 +432,7 @@
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation>Sözlük Çubuğunda İsimleri Göster</translation>
+        <translation>Sözlük Çubuğu&apos;nda İsimleri Göster</translation>
     </message>
     <message>
         <source>Opened tabs</source>
@@ -487,7 +488,7 @@
     </message>
     <message>
         <source>Words Zoom In</source>
-        <translation>Sözcükleri  Büyült</translation>
+        <translation>Sözcükleri Büyült</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -541,23 +542,23 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>İsim:</translation>
+        <translation>İsim: </translation>
     </message>
     <message>
         <source>Total articles:</source>
-        <translation>Toplam Madde:</translation>
+        <translation>Toplam Madde: </translation>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation>Bu Dilden:</translation>
+        <translation>Bu Dilden: </translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation>Bu Dile:</translation>
+        <translation>Bu Dile: </translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation>Toplam sözcük:</translation>
+        <translation>Toplam sözcük: </translation>
     </message>
     <message>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
@@ -569,7 +570,7 @@
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation>Bu sözlüğü kapsayan dosyalar:</translation>
+        <translation>Bu sözlüğü içeren dosyalar:</translation>
     </message>
     <message>
         <source>Dictionary information</source>
@@ -596,7 +597,7 @@
     </message>
     <message>
         <source>Shows or hides the dictionary bar</source>
-        <translation>Sözlükler çubuğunu Göster/Gizle</translation>
+        <translation>Sözlükler Çubuğu&apos;nu Göster/Gizle</translation>
     </message>
     <message>
         <source>Use this to pin down the window so it would stay on screen,
@@ -606,7 +607,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation>İletişim</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
@@ -692,7 +693,7 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
-        <translation>Çift tıklandığında sözcüğü tercüme eder</translation>
+        <translation>Çift tıklandığında sözcüğü seslendirir</translation>
     </message>
     <message>
         <source>Only show popup when all selected keys are kept pressed:</source>
@@ -705,7 +706,7 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Start with system</source>
-        <translation>Açılışta  otomatik olarak başlat</translation>
+        <translation>Açılışta otomatik olarak başlat</translation>
     </message>
     <message>
         <source>Left Alt only</source>
@@ -713,7 +714,7 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Tabbed browsing</source>
-        <translation>Sekmeli gözatma</translation>
+        <translation>Sekmeli Gözatma</translation>
     </message>
     <message>
         <source>Right Shift only</source>
@@ -772,7 +773,7 @@ yorum yapabilirsiniz.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translat
     </message>
     <message>
         <source>Open new tabs in background</source>
-        <translation>Arka planda Yeni sekme aç</translation>
+        <translation>Arka planda yeni sekme aç</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -793,7 +794,8 @@ yorum yapabilirsiniz.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translat
     <message>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Ekranda Kelime Yakala modunun varsayılan olarak etkin olup olmadığını gösterir. Etkinse, program her zaman aktif mod ile başlar.</translation>
+        <translation>Ekranda Kelime Yakala modunun varsayılan olarak etkin olup olmadığını gösterir.
+Etkinse, program her zaman aktif mod ile başlar.</translation>
     </message>
     <message>
         <source>Left Shift</source>
@@ -802,7 +804,7 @@ the program would always start with the scan popup active.</source>
     <message>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>Sadece seçilen tüm tuşlar basılı durumdayken Açılır Pencere&apos;de gösterecektir. 
+        <translation>Sadece seçilen tüm tuşlar basılı durumdayken Açılır Pencere&apos;de gösterecektir.
 Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translation>
     </message>
     <message>
@@ -811,7 +813,7 @@ Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translati
     </message>
     <message>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Ekranda Kelime Yakala&apos;rken kelimeleri otomatik seslendir</translation>
+        <translation>Ekranda Kelime Yakalarken kelimeleri otomatik seslendir</translation>
     </message>
     <message>
         <source>Enable scan popup functionality</source>
@@ -819,7 +821,7 @@ Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translati
     </message>
     <message>
         <source>Open new tabs after the current one</source>
-        <translation>Gerçerli sekmeden sonra yeni sekme aç</translation>
+        <translation>Geçerli sekmeden sonra yeni sekme aç</translation>
     </message>
     <message>
         <source>Restart the program to apply the language change.</source>
@@ -833,23 +835,21 @@ Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translati
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>Bu GoldenDict blok birçok reklamları, içeriği (resim, kare) etkinleştirmeyi sağlar.
-Şu anda görüntülenen uymayan siteler engellenir. Eğer bazı sayfalarda
- işe yaramazsa, bu seçeneği devre dışı bırakmakmayı deneyin.</translation>
+        <translation>Bunun etkinleştirilmesi birçok reklamları, içeriği (resim, kare) GoldenDict tarafından engellemeyi sağlar.
+Bazı siteler bu nedenle bozulursa, bunu devre dışı bırakmayı deneyin.</translation>
     </message>
     <message>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>Etkinleştirildinde, her zaman Açılır Pencere&apos;de görüntülenir, 
-ekranda (Windows) bir kelimenin üzerine tutun veya 
-fare (Linux) ile bir kelime seçin. 
+        <translation>Etkinleştirildinde, çeviri her zaman Açılır Pencere&apos;de görüntülenir, ekranda
+(Windows) bir kelimenin üzerine tutun veya fare (Linux) ile bir kelime seçin.
 Eğer etkinleştirilmiş ise ana pencere ve araç çubuğunundan açıp kapatabilirsiniz.</translation>
     </message>
     <message>
         <source>Check for new program releases periodically</source>
-        <translation>Düzenli olarak yeni sürümleri kontrol</translation>
+        <translation>Düzenli olarak yeni sürümleri kontrol et</translation>
     </message>
     <message>
         <source>With this on, new tabs are opened just after the
@@ -873,8 +873,8 @@ Aksi takdirde sekmelerin sonuna eklenecektir.</translation>
     <message>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Etkinleştirildiğinde, ana pencereyi açın ve diğer görevleri gerçekleştirmek 
-için kullanılabilecek sistem tepsisindeki alanda bir simge belirir.</translation>
+        <translation>Etkinleştirildiğinde, ana pencereyi açın, diğer görevleri gerçekleştirmek
+ve kullanabilmek için sistem tepsisinde bir simge belirir.</translation>
     </message>
     <message>
         <source>When this is enabled, the program periodically
@@ -898,7 +898,7 @@ ve muhtemelen indirme sayfasını açar.</translation>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
         <translation>Windows yerel çalma programını kullanın.
-Sınırlıdır. sadece Wav dosyaları ama çok iyi çalışıyor.</translation>
+Sınırlıdır, (sadece Wav dosyaları) ama çok iyi çalışmakta.</translation>
     </message>
     <message>
         <source>Default</source>
@@ -912,8 +912,7 @@ Sınırlıdır. sadece Wav dosyaları ama çok iyi çalışıyor.</translation>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>Hataları önlemek için
-tuşlar sadece belirtilen
+        <translation>Hataları önlemek için tuşlar sadece belirtilen
 saniye boyunca izlenmektedir.</translation>
     </message>
     <message>
@@ -937,12 +936,13 @@ saniye boyunca izlenmektedir.</translation>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation>Tuşlar bu süre içinde daha sonra da basılabilir.</translation>
+        <translation>Tuşlara belirtilen süre içinde olmak şartıyla
+daha sonra da basılabilir.</translation>
     </message>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>Ses dosyalarını Phonon Framework ile oynat. Bu pek çok ses 
+        <translation>Ses dosyalarını Phonon Framework ile oynat. Bu pek çok ses
 formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
@@ -1762,7 +1762,7 @@ its main window.</source>
     </message>
     <message>
         <source>None</source>
-        <translation>Hiç</translation>
+        <translation>Yok</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1890,7 +1890,7 @@ its main window.</source>
     </message>
     <message>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>GoldenDict, sözlükte arama yapmak için bir program, sürüm</translation>
+        <translation>GoldenDict, sözlük arama programı, sürüm </translation>
     </message>
     <message>
         <source>[Unknown]</source>
@@ -1937,7 +1937,7 @@ its main window.</source>
     </message>
     <message>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Site &lt;b&gt;%1 &lt;/b&gt; listesinden kaldırılsın mı?</translation>
+        <translation>Listeden &lt;b&gt;%1 &lt;/b&gt; sitesi kaldırılsın mı?</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1973,7 +1973,7 @@ bırakın.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&g
     </message>
     <message>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Dizin &lt;b&gt;%1 &lt;/b&gt; listesinden kaldırılsın mı?</translation>
+        <translation>Listeden &lt;b&gt;%1 &lt;/b&gt; dizini kaldırılsın mı?</translation>
     </message>
     <message>
         <source>Japanese Romaji</source>
@@ -1991,7 +1991,7 @@ Henüz GoldenDict uygulanmamıştır.</translation>
     </message>
     <message>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation>Dil kodlarının tam listesi &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;burada&lt;/a&gt;.</translation>
+        <translation>Dil kodlarının tam listesi için &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;buraya tıklayın&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>Wikipedia (MediaWiki) sites:</source>
@@ -2024,7 +2024,7 @@ en yaygın olarak kullanılan yöntem</translation>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>En düzenli sistem, kana yazı sistemleri içinbire bir 
+        <translation>En düzenli sistem, kana yazı sistemleri için bire bir
 ISO 3602 gibi standart.
 
 GoldenDict için henüz uygulanmadı.</translation>
@@ -2063,11 +2063,11 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>&lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt; dan canlı telafuzlar. Bu site, insanların kelime telaffuzlarını kaydetmeye ve paylaşmaya izin verir. GoldenDict ile onları dinleyebilirsiniz.</translation>
+        <translation>&lt;a href=&quot;http://www.forvo.com/&quot;&gt;Forvo.com&lt;/a&gt; dan canlı telafuzlar. Bu site, insanların kelime telaffuzlarını kaydetmeye ve paylaşmaya izin verir. GoldenDict ile onları dinleyebilirsiniz.</translation>
     </message>
     <message>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Her web sitesi.Metin %GDWORD% arama kelimesi ile değiştirilir:</translation>
+        <translation>Herhangi bir web sitesi. Metin, %GDWORD% arama kelimesi ile değiştirilir:</translation>
     </message>
     <message>
         <source>(not available in portable version)</source>
@@ -2118,8 +2118,8 @@ GoldenDict için henüz uygulanmadı.</translation>
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
         <translation>Forvo kullanımı için şu an bir API anahtarı gerekmektedir.
-Gelecekte erişelemeyebilir veya kendi anahtarı almak için siteye kaydolun,
-varsayılan olarak kullanmak için bu alanı boş bırakın.</translation>
+Gelecekte kullanılamayabilir veya kendi anahtarı almak için
+siteye kaydolun, varsayılan olarak kullanmak için bu alanı boş bırakın.</translation>
     </message>
     <message>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
@@ -2202,7 +2202,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>Bazı kaynaklar değiştirildi.Değişiklikleri kabul etmek ister misiniz?</translation>
+        <translation>Bazı kaynaklar değiştirildi. Değişiklikleri kabul etmek ister misiniz?</translation>
     </message>
 </context>
 <context>
@@ -2257,10 +2257,10 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Ekranda Kelime Yakala ile Çalışma&lt;/h3&gt;Diğer aktif uygulamalarda kelimeleri aramak için, 
-ilk öne &lt;b&gt;Tercihler&lt;/b&gt;&apos;de &lt;i&gt;&quot;Ekranda Kelime Yakala Özelliğini&quot;&lt;/i&gt; etkinleştirmelisiniz ve daha sonra 
-yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir zaman etkinleştirebilirsiniz veya Görev 
-Çubuğu&apos;ndaki simgesine sağ fare tuşuyla tıklatarak seçimini değiştirebilirsiniz.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Ekranda Kelime Yakala ile Çalışma&lt;/h3&gt;Diğer aktif uygulamalarda kelimeleri aramak için,
+ilk önce &lt;b&gt;Tercihler&lt;/b&gt;&apos;de &lt;i&gt;&quot;Ekranda Kelime Yakala Özelliğini&quot;&lt;/i&gt; etkinleştirmelisiniz ve daha sonra
+yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak veya Görev Çubuğu&apos;ndaki simgesine sağ fare tuşuyla
+tıklatarak seçimini değiştirebilirsiniz.</translation>
     </message>
     <message>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
@@ -2299,7 +2299,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Please wait while indexing dictionary</source>
-        <translation>Lütfen sözlükler indeklenirken bekleyin</translation>
+        <translation>Lütfen sözlükler indekslenirken bekleyin</translation>
     </message>
     <message>
         <source>Please wait...</source>
@@ -2310,7 +2310,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     <name>Hunspell</name>
     <message>
         <source>Spelling suggestions: </source>
-        <translation>Yazım Önerileri:</translation>
+        <translation>Yazım Önerileri: </translation>
     </message>
     <message>
         <source>%1 Morphology</source>
