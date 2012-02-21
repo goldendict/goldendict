@@ -20,16 +20,16 @@
         <translation>Cấp phép theo GNU GPLv3 hoặc mới hơn</translation>
     </message>
     <message>
-        <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Credits:</source>
         <translation></translation>
     </message>
     <message>
         <source>[Unknown]</source>
         <translation>[Không biết]</translation>
+    </message>
+    <message>
+        <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -72,7 +72,11 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Chào mừng đến với &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Để bắt đầu làm việc với chương trình, trước tiên hãy ghé thăm &lt;b&gt;Biên tập|Từ điển&lt;/b&gt; sau đó thêm một vài đường dẫn chứa từ điển để tìm kiếm các tập tin từ điển, cài đặt thêm các trang Wikipedia hay các nguồn khác, sắp xếp từ điển hay tạo các nhóm từ điển.&lt;p&gt;Và cuối cùng bạn đã sẵn sàng để tra từ rồi đấy! Bạn có thể tra trong cửa sổ này bằng cách sử dụng ô ở bên trái, hoặc bạn có thể &lt;a href=&quot;Working with popup&quot;&gt;tra từ trong các ứng dụng khác&lt;/a&gt;. &lt;p&gt;Để tùy chỉnh chương trình, hãy thử các tùy chọn khác nhau ở &lt;b&gt;Biên tập|Tùy thích&lt;/b&gt;. Tất cả các cài đặt đều có các mẹo hiện lên, hãy đọc chúng nếu bạn đang phân vân về một chức năng nào đó.&lt;p&gt;Nếu như bạn cần thêm giúp đỡ, có một vài câu hỏi, gợi ý hay chỉ là thắc mắc xem những người khác đang nghĩ gì, bạn đều được chào mừng đến với &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; của chương trình.&lt;p&gt;Hãy kiểm tra &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; của chương trình để cập nhật nếu muốn. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Cấp phép theo GPLv3 hoặc mới hơn.</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Chào mừng đến với &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Để bắt đầu làm việc với chương trình, trước tiên hãy ghé thăm &lt;b&gt;Biên tập|Từ điển&lt;/b&gt; sau đó thêm một vài đường dẫn chứa từ điển để tìm kiếm các tập tin từ điển, cài đặt thêm các trang Wikipedia hay các nguồn khác, sắp xếp từ điển hay tạo các nhóm từ điển.&lt;p&gt;Và cuối cùng bạn đã sẵn sàng để tra từ rồi đấy! Bạn có thể tra trong cửa sổ này bằng cách sử dụng ô ở bên trái, hoặc bạn có thể &lt;a href=&quot;Working with popup&quot;&gt;tra từ trong các ứng dụng khác&lt;/a&gt;. &lt;p&gt;Để tùy chỉnh chương trình, hãy thử các tùy chọn khác nhau ở &lt;b&gt;Biên tập|Tùy thích&lt;/b&gt;. Tất cả các cài đặt đều có các mẹo hiện lên, hãy đọc chúng nếu bạn đang phân vân về một chức năng nào đó.&lt;p&gt;Nếu như bạn cần thêm giúp đỡ, có một vài câu hỏi, gợi ý hay chỉ là thắc mắc xem những người khác đang nghĩ gì, bạn đều được chào mừng đến với &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; của chương trình.&lt;p&gt;Hãy kiểm tra &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; của chương trình để cập nhật nếu muốn. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Cấp phép theo GPLv3 hoặc mới hơn.</translation>
+    </message>
+    <message>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Chào mừng đến với &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Để bắt đầu làm việc với chương trình, trước tiên hãy ghé thăm &lt;b&gt;Biên tập|Từ điển&lt;/b&gt; sau đó thêm một vài đường dẫn chứa từ điển để tìm kiếm các tập tin từ điển, cài đặt thêm các trang Wikipedia hay các nguồn khác, sắp xếp từ điển hay tạo các nhóm từ điển.&lt;p&gt;Và cuối cùng bạn đã sẵn sàng để tra từ rồi đấy! Bạn có thể tra trong cửa sổ này bằng cách sử dụng ô ở bên trái, hoặc bạn có thể &lt;a href=&quot;Working with popup&quot;&gt;tra từ trong các ứng dụng khác&lt;/a&gt;. &lt;p&gt;Để tùy chỉnh chương trình, hãy thử các tùy chọn khác nhau ở &lt;b&gt;Biên tập|Tùy thích&lt;/b&gt;. Tất cả các cài đặt đều có các mẹo hiện lên, hãy đọc chúng nếu bạn đang phân vân về một chức năng nào đó.&lt;p&gt;Nếu như bạn cần thêm giúp đỡ, có một vài câu hỏi, gợi ý hay chỉ là thắc mắc xem những người khác đang nghĩ gì, bạn đều được chào mừng đến với &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; của chương trình.&lt;p&gt;Hãy kiểm tra &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; của chương trình để cập nhật nếu muốn. &lt;p&gt;(c) 2008-2010 Konstantin Isakov. Cấp phép theo GPLv3 hoặc mới hơn. {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
     </message>
 </context>
 <context>
@@ -1632,6 +1636,38 @@
     </message>
     <message>
         <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History view mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export history to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text files (*.txt);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History export complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
