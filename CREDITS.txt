@@ -19,3 +19,4 @@ Tvangeste <i.4m.l33t\yandex.ru>: Interface enhancements
 Zdenko Podobný <zdenop\gmail.com>: Slovak translation
 Şükrü Yekta Karabulut <sukruyekta\gmail.com>: Turkish translation
 Amos Batto <amosbatto\yahoo.com>: Quechua and Bolivian Spanish translations
+Carlos A. Cortijo Bon: Spanish from Spain translation
