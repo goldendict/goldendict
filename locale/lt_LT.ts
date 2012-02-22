@@ -18,7 +18,7 @@
     <message>
         <location filename="../about.ui" line="73"/>
         <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">© 2008-2009 Konstantin Isakov (ikm@goldendict.org) {2008-2012 ?}</translation>
+        <translation>© 2008-2012 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
@@ -98,8 +98,7 @@
     <message>
         <location filename="../article_maker.cc" line="145"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spausdami &lt;b&gt;Keisti &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų rinkmenų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinksite žodynų tvarką arba kursite žodynų grupes.&lt;p&gt;Po to jau galėsite ieškoti žodžių! Versti žodžius galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Keisti &gt; Nuostatos&lt;/b&gt;. Visos nuostatos yra paaiškintos, tad pravers, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p&gt;Programos atnaujinimų ie
- škokite &lt;a href=&quot;http://goldendict.org/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. GPLv3 arba vėlesnė licencija. {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Jus sveikina &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Dirbti žodynu pradėkite spausdami &lt;b&gt;Taisa &gt; Žodynai&lt;/b&gt; – nurodysite kelius, kur ieškoti žodynų failų, nurodysite įvairias Vikipedijos svetaines ar kitus šaltinius, pasirinksite žodynų tvarką arba kursite žodynų grupes.&lt;p&gt;Po to jau galėsite ieškoti žodžių! Versti žodžius galite tiek šio lango kairėje pusėje, tiek &lt;a href=&quot;Iškylantys langai&quot;&gt;kitomis veikiančiomis programomis&lt;/a&gt;. &lt;p&gt;Programą galite derinti per meniu &lt;b&gt;Taisa &gt; Nuostatos&lt;/b&gt;. Visos nuostatos turi paaiškinimus, kurios pravers, jei abejojate, ar nežinote.&lt;p&gt;Jei reikia daugiau pagalbos, arba turite klausimų, pasiūlymų ar tiesiog norite sužinoti kitų nuomonę, apsilankykite programos &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusijose&lt;/a&gt;.&lt;p&gt;Programos atnaujinimų ieškokite &lt;a href=&quot;http://goldendict.org/&quot;&gt;GoldenDict svetainėje&lt;/a&gt;. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. GPLv3 arba vėlesnė licencija.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="161"/>
@@ -230,27 +229,27 @@
     <message>
         <location filename="../articleview.cc" line="1167"/>
         <source>Playing a non-WAV file</source>
-        <translation>Groti ne-WAV rinkmeną</translation>
+        <translation>Groti ne-WAV failą</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1168"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Norėdami įgalinti kitokių nei WAV rinkmenų grojimą, eikite į meniu Keisti &gt; Nuostatos, pasirinkite Garso kortelę ir pažymėkite „Groti per DirectShow“.</translation>
+        <translation>Norėdami įgalinti kitokių nei WAV failų grojimą, eikite į meniu Taisa &gt; Nuostatos, pasirinkite Garso kortelę ir pažymėkite „Groti per DirectShow“.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1210"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Nepavyko paleisti grotuvo garso rinkmenai atkurti: %1</translation>
+        <translation>Nepavyko paleisti grotuvo garso failui atkurti: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1228"/>
         <source>Failed to create temporary file.</source>
-        <translation>Nepavyko sukurti laikinosios rinkmenos.</translation>
+        <translation>Nepavyko sukurti laikinojo failo.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1239"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Nepavyko automatiškai atverti šaltinio rinkmenos, mėginkite rankiniu būdu: %1.</translation>
+        <translation>Nepavyko automatiškai atverti šaltinio failo, mėginkite rankiniu būdu: %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1262"/>
@@ -333,12 +332,12 @@
     <message>
         <location filename="../groups_widgets.cc" line="40"/>
         <source>From file...</source>
-        <translation>Iš rinkmenos...</translation>
+        <translation>Iš failo...</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="80"/>
         <source>Choose a file to use as group icon</source>
-        <translation>Pasirinkite rinkmeną, naudosimą kaip gruįės ženkliuką</translation>
+        <translation>Pasirinkite failą, naudosimą kaip grupės ženkliuką</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="82"/>
@@ -348,7 +347,7 @@
     <message>
         <location filename="../groups_widgets.cc" line="83"/>
         <source>All files</source>
-        <translation>Visos rinkmenos</translation>
+        <translation>Visi failai</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="90"/>
@@ -358,7 +357,7 @@
     <message>
         <location filename="../groups_widgets.cc" line="90"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation>Nepavyksta nuskaityti pasirinkto paveiksliuko rinkmenos.</translation>
+        <translation>Nepavyksta nuskaityti pasirinkto paveiksliuko failo.</translation>
     </message>
 </context>
 <context>
@@ -483,7 +482,7 @@
     <message>
         <location filename="../forvo.cc" line="340"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Jei nenorite matyti šios klaidos, eikite į meniu Keisti &gt; Žodynai &gt; Ištekliai &gt; Forvo ir nurodykite nuosavą API raktą.</translation>
+        <translation>Jei nenorite matyti šios klaidos, eikite į meniu Taisa &gt; Žodynai &gt; Ištekliai &gt; Forvo ir nurodykite nuosavą API raktą.</translation>
     </message>
 </context>
 <context>
@@ -1876,32 +1875,32 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="2574"/>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Slėpti</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2578"/>
         <source>History view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Istorijos rodymas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2603"/>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Istoriją įrašyti į failą</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2605"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstiniai failai (*.txt);;Visi failai (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2643"/>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Istorija įrašyta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2646"/>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Eksporto klaida:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -1919,12 +1918,12 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="69"/>
         <source>&amp;File</source>
-        <translation>&amp;Rinkmena</translation>
+        <translation>&amp;Failas</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="86"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Keisti</translation>
+        <translation>&amp;Taisa</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
@@ -1958,7 +1957,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>&amp;View</source>
-        <translation>Ro&amp;dinys</translation>
+        <translation>Ro&amp;dymas</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
@@ -2066,7 +2065,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="385"/>
         <source>Rescan Files</source>
-        <translation>Peržvelgti rinkmenas</translation>
+        <translation>Peržvelgti failus</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="388"/>
@@ -2098,12 +2097,12 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
         <location filename="../mainwindow.ui" line="418"/>
         <location filename="../mainwindow.cc" line="2544"/>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rodyti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="423"/>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Eksportuoti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="130"/>
@@ -2203,7 +2202,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../orderandprops.ui" line="271"/>
         <source>Files comprising this dictionary:</source>
-        <translation>Žodyną sudarančios rinkmenos:</translation>
+        <translation>Žodyną sudarantys failai:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="336"/>
@@ -2561,8 +2560,8 @@ po to, kai pasikeis pažymėtas žodis.</translation>
         <location filename="../preferences.ui" line="775"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation>Naudoti Windows sistemos grojimo sąsają. Palikomos
-tik .wav rinkmenos, tačiau gerai groja.</translation>
+        <translation>Naudoti Windows sistemos grojimo sąsają. Palaikomi
+tik .wav failai, tačiau groja labai gerai.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="779"/>
@@ -2573,8 +2572,8 @@ tik .wav rinkmenos, tačiau gerai groja.</translation>
         <location filename="../preferences.ui" line="786"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>Garsą leisti naudojant Phonon. Ji gali būti nestabili,
-tačiau palaiko daugelį garso rinkmenų formatų.</translation>
+        <translation>Garsą leisti naudojant Phonon sistemą. Ji gali būti nestabili,
+tačiau palaiko daugelį garso failų formatų.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="790"/>
@@ -2584,7 +2583,7 @@ tačiau palaiko daugelį garso rinkmenų formatų.</translation>
     <message>
         <location filename="../preferences.ui" line="802"/>
         <source>Use any external program to play audio files</source>
-        <translation>Naudoti bet kokią išorinę programą garso rinkmenų grojimui</translation>
+        <translation>Naudoti bet kokią išorinę programą garso failų grojimui</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="805"/>
@@ -3044,12 +3043,12 @@ galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus
     <message>
         <location filename="../sources.ui" line="34"/>
         <source>Files</source>
-        <translation>Rinkmenos</translation>
+        <translation>Failai</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="40"/>
         <source>Paths to search for the dictionary files:</source>
-        <translation>Keliai, kuriuose ieškoma žodynų rinkmenų:</translation>
+        <translation>Keliai, kuriuose ieškoma žodynų failų:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="54"/>
@@ -3082,7 +3081,7 @@ galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus
     <message>
         <location filename="../sources.ui" line="103"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>Nurodydami kelius, sukurkite žodynus iš garsų rinkmenų rinkinių:</translation>
+        <translation>Nurodydami kelius, sukurkite žodynus iš garsų failų rinkinių:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="153"/>
@@ -3097,7 +3096,7 @@ galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus
     <message>
         <location filename="../sources.ui" line="175"/>
         <source>&amp;Change...</source>
-        <translation>&amp;Keisti...</translation>
+        <translation>&amp;Taisa...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="184"/>
