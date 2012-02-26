@@ -22,6 +22,8 @@
 #include "ufile.hh"
 #include "dictzip.h"
 #include "langcoder.hh"
+#include "indexedzip.hh"
+#include "filetype.hh"
 
 #include <QIODevice>
 #include <QXmlStreamReader>
@@ -58,7 +60,7 @@ DEF_EX( exCorruptedIndex, "The index file is corrupted", Dictionary::Ex )
 enum
 {
   Signature = 0x46584458, // XDXF on little-endian, FXDX on big-endian
-  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 enum ArticleFormat
@@ -86,6 +88,11 @@ struct IdxHeader
   uint32_t chunksOffset; // The offset to chunks' storage
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
+  uint32_t hasZipFile; // Non-zero means there's a zip file with resources
+                       // present
+  uint32_t zipIndexBtreeMaxElements; // Two fields from IndexInfo of the zip
+                                     // resource index.
+  uint32_t zipIndexRootOffset;
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -110,6 +117,8 @@ class XdxfDictionary: public BtreeIndexing::BtreeDictionary
   sptr< ChunkedStorage::Reader > chunks;
   Mutex dzMutex;
   dictData * dz;
+  Mutex resourceZipMutex;
+  IndexedZip resourceZip;
   string dictionaryName;
   map< string, string > abrv;
   QIcon dictionaryNativeIcon, dictionaryIcon;
@@ -149,6 +158,9 @@ public:
                                                       wstring const & )
     throw( std::exception );
 
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name )
+    throw( std::exception );
+
 private:
 
   void loadIcon();
@@ -156,10 +168,10 @@ private:
   /// Loads the article, storing its headword and formatting the data it has
   /// into an html.
   void loadArticle( uint32_t address,
-                    string & headword,
                     string & articleText );
 
   friend class XdxfArticleRequest;
+  friend class XdxfResourceRequest;
 };
 
 XdxfDictionary::XdxfDictionary( string const & id,
@@ -219,6 +231,23 @@ XdxfDictionary::XdxfDictionary( string const & id,
 
       abrvBlock += valueSz;
     }
+
+    // Open a resource zip file, if there's one
+
+    if ( idxHeader.hasZipFile &&
+         ( idxHeader.zipIndexBtreeMaxElements ||
+           idxHeader.zipIndexRootOffset ) )
+    {
+      resourceZip.openIndex( IndexInfo( idxHeader.zipIndexBtreeMaxElements,
+                                        idxHeader.zipIndexRootOffset ),
+                             idx, idxMutex );
+
+      QString zipName = QDir::fromNativeSeparators(
+          FsEncoding::decode( getDictionaryFilenames().back().c_str() ) );
+
+      if ( zipName.endsWith( ".zip", Qt::CaseInsensitive ) ) // Sanity check
+        resourceZip.openZipFile( zipName );
+    }
   }
 
   // Initialize the index
@@ -254,22 +283,14 @@ void XdxfDictionary::loadIcon()
   QString fileName =
     QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
-  // Remove the extension
+  QFileInfo baseInfo( fileName );
 
-  QString lc = fileName.toLower();
-
-  if ( fileName.endsWith( ".xdxf.dz", Qt::CaseInsensitive ) )
-    fileName.chop( 7 );
-  else
-    fileName.chop( 4 );
-
-  fileName += "bmp";
-
+  fileName = baseInfo.absoluteDir().absoluteFilePath( "icon32.png" );
   QFileInfo info( fileName );
+
   if( !info.exists() )
   {
-      fileName.chop( 3 );
-      fileName += "png";
+      fileName = baseInfo.absoluteDir().absoluteFilePath( "icon16.png" );
       info = QFileInfo( fileName );
   }
 
@@ -424,7 +445,8 @@ void XdxfArticleRequest::run()
 
     string headword, articleText;
 
-    dict.loadArticle( chain[ x ].articleOffset, headword, articleText );
+    headword = chain[ x ].word;
+    dict.loadArticle( chain[ x ].articleOffset, articleText );
 
     // Ok. Now, does it go to main articles, or to alternate ones? We list
     // main ones first, and alternates after.
@@ -463,18 +485,18 @@ void XdxfArticleRequest::run()
 
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
-      result += "<h3>";
-      result += i->second.first;
-      result += "</h3>";
+//      result += "<h3>";
+//      result += i->second.first;
+//      result += "</h3>";
       result += i->second.second;
       result += cleaner;
   }
 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
-      result += "<h3>";
-      result += i->second.first;
-      result += "</h3>";
+//      result += "<h3>";
+//      result += i->second.first;
+//      result += "</h3>";
       result += i->second.second;
       result += cleaner;
   }
@@ -499,7 +521,6 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word
 }
 
 void XdxfDictionary::loadArticle( uint32_t address,
-                                  string & headword,
                                   string & articleText )
 {
   // Read the properties
@@ -538,7 +559,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   if ( !articleBody )
     throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
 
-  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL );
+  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this );
 
   free( articleBody );
 }
@@ -685,8 +706,8 @@ void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
 }
 
 void checkArticlePosition( GzippedFile & gzFile,
-                           size_t *pOffset,
-                           size_t *pSize )
+                           uint32_t *pOffset,
+                           uint32_t *pSize )
 {
     char * data = gzFile.readDataArray( *pOffset, *pSize );
     if( data == NULL )
@@ -781,6 +802,182 @@ void indexArticle( GzippedFile & gzFile,
   }
 }
 
+//// XdxfDictionary::getResource()
+
+class XdxfResourceRequest;
+
+class XdxfResourceRequestRunnable: public QRunnable
+{
+  XdxfResourceRequest & r;
+  QSemaphore & hasExited;
+
+public:
+
+  XdxfResourceRequestRunnable( XdxfResourceRequest & r_,
+                               QSemaphore & hasExited_ ): r( r_ ),
+                                                          hasExited( hasExited_ )
+  {}
+
+  ~XdxfResourceRequestRunnable()
+  {
+    hasExited.release();
+  }
+
+  virtual void run();
+};
+
+class XdxfResourceRequest: public Dictionary::DataRequest
+{
+  friend class XdxfResourceRequestRunnable;
+
+  XdxfDictionary & dict;
+
+  string resourceName;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  XdxfResourceRequest( XdxfDictionary & dict_,
+                      string const & resourceName_ ):
+    dict( dict_ ),
+    resourceName( resourceName_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new XdxfResourceRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by XdxfResourceRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+
+  ~XdxfResourceRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void XdxfResourceRequestRunnable::run()
+{
+  r.run();
+}
+
+void XdxfResourceRequest::run()
+{
+  // Some runnables linger enough that they are cancelled before they start
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  if ( dict.ensureInitDone().size() )
+  {
+    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    finish();
+    return;
+  }
+
+  string n =
+    FsEncoding::dirname( dict.getDictionaryFilenames()[ 0 ] ) +
+    FsEncoding::separator() +
+    FsEncoding::encode( resourceName );
+
+  DPRINTF( "n is %s\n", n.c_str() );
+
+  try
+  {
+    try
+    {
+      Mutex::Lock _( dataMutex );
+
+      File::loadFromFile( n, data );
+    }
+    catch( File::exCantOpen & )
+    {
+      n = dict.getDictionaryFilenames()[ 0 ] + ".files" +
+          FsEncoding::separator() +
+          FsEncoding::encode( resourceName );
+
+      try
+      {
+        Mutex::Lock _( dataMutex );
+
+        File::loadFromFile( n, data );
+      }
+      catch( File::exCantOpen & )
+      {
+        // Try reading from zip file
+
+        if ( dict.resourceZip.isOpen() )
+        {
+          Mutex::Lock _( dict.resourceZipMutex );
+
+          Mutex::Lock __( dataMutex );
+
+          if ( !dict.resourceZip.loadFile( Utf8::decode( resourceName ), data ) )
+            throw; // Make it fail since we couldn't read the archive
+        }
+        else
+          throw;
+      }
+    }
+
+    if ( Filetype::isNameOfTiff( resourceName ) )
+    {
+      // Convert it
+
+      dataMutex.lock();
+
+      QImage img = QImage::fromData( (unsigned char *) &data.front(),
+                                     data.size() );
+
+      dataMutex.unlock();
+
+      if ( !img.isNull() )
+      {
+        // Managed to load -- now store it back as BMP
+
+        QByteArray ba;
+        QBuffer buffer( &ba );
+        buffer.open( QIODevice::WriteOnly );
+        img.save( &buffer, "BMP" );
+
+        Mutex::Lock _( dataMutex );
+
+        data.resize( buffer.size() );
+
+        memcpy( &data.front(), buffer.data(), data.size() );
+      }
+    }
+
+    Mutex::Lock _( dataMutex );
+
+    hasAnyData = true;
+  }
+  catch( File::Ex & )
+  {
+    // No such resource -- we don't set the hasAnyData flag then
+  }
+  catch( Utf8::exCantDecode )
+  {
+    // Failed to decode some utf8 -- probably the resource name is no good
+  }
+
+  finish();
+}
+
+sptr< Dictionary::DataRequest > XdxfDictionary::getResource( string const & name )
+  throw( std::exception )
+{
+  return new XdxfResourceRequest( *this, name );
+}
+
 } // anonymous namespace
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
@@ -804,6 +1001,19 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     try
     {
       vector< string > dictFiles( 1, *i );
+
+      string baseName = ( (*i)[ i->size() - 5 ] == '.' ) ?
+               string( *i, 0, i->size() - 5 ) : string( *i, 0, i->size() - 8 );
+
+      // See if there's a zip file with resources present. If so, include it.
+
+      string zipFileName;
+
+      if ( File::tryPossibleName( baseName + ".xdxf.files.zip", zipFileName ) ||
+           File::tryPossibleName( baseName + ".xdxf.dz.files.zip", zipFileName ) ||
+           File::tryPossibleName( baseName + ".XDXF.FILES.ZIP", zipFileName ) ||
+           File::tryPossibleName( baseName + ".XDXF.DZ.FILES.ZIP", zipFileName ) )
+        dictFiles.push_back( zipFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
 
@@ -999,6 +1209,41 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
               idxHeader.indexRootOffset = idxInfo.rootOffset;
 
+              indexedWords.clear(); // Release memory -- no need for this data
+
+              // If there was a zip file, index it too
+
+              if ( zipFileName.size() )
+              {
+                DPRINTF( "Indexing zip file\n" );
+
+                idxHeader.hasZipFile = 1;
+
+                IndexedWords zipFileNames;
+                IndexedZip zipFile;
+                if( zipFile.openZipFile( QDir::fromNativeSeparators(
+                                         FsEncoding::decode( zipFileName.c_str() ) ) ) )
+                    zipFile.indexFile( zipFileNames );
+
+                if( !zipFileNames.empty() )
+                {
+                  // Build the resulting zip file index
+
+                  IndexInfo idxInfo = BtreeIndexing::buildIndex( zipFileNames, idx );
+
+                  idxHeader.zipIndexBtreeMaxElements = idxInfo.btreeMaxElements;
+                  idxHeader.zipIndexRootOffset = idxInfo.rootOffset;
+                }
+                else
+                {
+                  // Bad zip file -- no index (though the mark that we have one
+                  // remains)
+                  idxHeader.zipIndexBtreeMaxElements = 0;
+                  idxHeader.zipIndexRootOffset = 0;
+                }
+              }
+              else
+                idxHeader.hasZipFile = 0;
               // That concludes it. Update the header.
 
               idxHeader.signature = Signature;

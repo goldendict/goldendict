@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __INDEXEDZIP_HH_INCLUDED__
@@ -36,6 +36,9 @@ public:
   /// Attempts loading the given file into the given vector. Returns true on
   /// success, false otherwise.
   bool loadFile( gd::wstring const & name, std::vector< char > & );
+
+  /// Index compressed files in zip file
+  bool indexFile( BtreeIndexing::IndexedWords &zipFileNames );
 };
 
 #endif

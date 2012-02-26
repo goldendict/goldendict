@@ -362,7 +362,9 @@ Db::Db()
 }
 
 /// babylon languages
+#ifndef blgCode2Int
 #define blgCode2Int( index, code0, code1 ) (((uint32_t)index) << 16 ) + (((uint32_t)code1) << 8 ) + (uint32_t)code0
+#endif
 const BabylonLang BabylonDb[] ={
     { blgCode2Int( 1, 'z', 'h' ), "tw", "Traditional Chinese", QT_TR_NOOP( "Traditional Chinese" ) },
     { blgCode2Int( 2, 'z', 'h' ), "cn", "Simplified Chinese", QT_TR_NOOP( "Simplified Chinese" ) },
@@ -377,7 +379,8 @@ const BabylonLang BabylonDb[] ={
     { blgCode2Int( 11, 'e', 'l' ), "gr", "Other Greek languages", QT_TR_NOOP( "Other Greek languages" ) },
     { blgCode2Int( 12, 'k', 'o' ), "kr", "Other Korean dialects", QT_TR_NOOP( "Other Korean dialects" ) },
     { blgCode2Int( 13, 't', 'r' ), "tr", "Other Turkish dialects", QT_TR_NOOP( "Other Turkish dialects" ) },
-    { blgCode2Int( 14, 't', 'h' ), "th", "Other Thai dialects", QT_TR_NOOP( "Other Thai dialects" ) }
+    { blgCode2Int( 14, 't', 'h' ), "th", "Other Thai dialects", QT_TR_NOOP( "Other Thai dialects" ) },
+    { blgCode2Int( 15, 0, 0 ), "dz", "Tamazight", QT_TR_NOOP( "Tamazight" ) }
 };
 
 BabylonLang getBabylonLangByIndex( int index )
@@ -385,9 +388,20 @@ BabylonLang getBabylonLangByIndex( int index )
     return BabylonDb[ index ];
 }
 
+quint32 findBlgLangIDByEnglishName( gd::wstring const & lang )
+{
+    QString enName = gd::toQString( lang );
+    for( int idx=0;idx < 15 ; ++idx )
+    {
+        if( QString::compare( BabylonDb[ idx ].englishName, enName, Qt::CaseInsensitive  ) == 0 )
+            return BabylonDb[ idx ].id;
+    }
+    return 0;
+}
+
 QString englishNameForId( Id id )
 {
-    if(  id >= 0x010000 && id <= 0x0effff ) //babylon
+    if(  id >= 0x010000 && id <= 0x0fffff ) //babylon
     {
         return BabylonDb[ ( (id >> 16 ) & 0x0f) - 1 ].englishName;
     }
@@ -402,7 +416,7 @@ QString englishNameForId( Id id )
 
 QString localizedNameForId( Id id )
 {
-    if(  id >= 0x010000 && id <= 0x0effff ) //babylon
+    if(  id >= 0x010000 && id <= 0x0fffff ) //babylon
     {
         return QCoreApplication::translate( "Language", BabylonDb[ ( ( id >> 16 ) & 0x0f ) - 1 ].localizedName );
     }
@@ -417,7 +431,7 @@ QString localizedNameForId( Id id )
 
 QString countryCodeForId( Id id )
 {
-    if(  id >= 0x010000 && id <= 0x0effff ) //babylon
+    if(  id >= 0x010000 && id <= 0x0fffff ) //babylon
     {
         return BabylonDb[ ( ( id >> 16 ) & 0x0f ) - 1 ].contryCode;
     }

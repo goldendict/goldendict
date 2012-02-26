@@ -80,12 +80,6 @@ quint32 LangCoder::code3toInt(const std::string& code3)
 
 quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
 {
-    //fix for babylon
-    if( lang.length() == 1 )
-    {
-        quint16 index = lang[ 0 ];
-        if( index > 0 && index < 14 ) return Language::getBabylonLangByIndex( index - 1 ).id;
-    }
   gd::wstring langFolded = Folding::apply( lang );
 
   for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
@@ -97,7 +91,8 @@ quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
     }
   }
 
-  return 0;
+  return Language::findBlgLangIDByEnglishName( lang );
+  //return 0;
 }
 
 quint32 LangCoder::findIdForLanguageCode3( const char * code3 )

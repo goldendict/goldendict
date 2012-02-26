@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "article_maker.hh"
@@ -153,7 +153,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
 "<p>Should you need further help, have any questions, "
 "suggestions or just wonder what the others think, you are welcome at the program's <a href=\"http://goldendict.org/forum/\">forum</a>."
 "<p>Check program's <a href=\"http://goldendict.org/\">website</a> for the updates. "
-"<p>(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later."
+"<p>(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later."
         
         ).toUtf8().data();
     }

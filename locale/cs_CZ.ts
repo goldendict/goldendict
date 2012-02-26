@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</translation>
+        <translation type="obsolete">(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>Credits:</source>
@@ -49,6 +49,10 @@
     <message>
         <source>[Unknown]</source>
         <translation>[Neznámý]</translation>
+    </message>
+    <message>
+        <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation type="unfinished">(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org) {2008-2012 ?}</translation>
     </message>
 </context>
 <context>
@@ -99,7 +103,11 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Vítejte v programu  &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Práci s programem začněte v &lt;b&gt;Upravit|Slovníky&lt;/b&gt;, kde můžete přidat cesty ke složkám, kde budou vyhledávány soubory slovníků, nastavíte různé stránky Wikipedie a jiné zdroje, upravíte pořadí adresářů nebo vytvoříte skupiny slovníků.&lt;p&gt;Pak budete moci vyhledávat slovíčka! To můžete provádět v tomto okně použitím pasnelu vlevo, nebo můžete &lt;a href=&quot;Working with popup&quot;&gt;vyhledávat slova z jiných aktivních aplikací&lt;/a&gt;. &lt;p&gt;Upravení vlastností programu provedete v &lt;b&gt;Upravit|Předvolby&lt;/b&gt;. Všechna nastavení mají nápovědu, která vám pomůže v případě, že máte o něčem pochybnosti.&lt;p&gt;Budete-li potřebovat další pomoc, budete mít nějaké návrhy nebo jenom budete chtít vědět co si myslí jiní, budete vítání na stránkách &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskuse&lt;/a&gt; o programu.&lt;p&gt;Aktualizace programu hledejte na &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;jeho stránkách&lt;/a&gt;.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licencováno pod GPLv3 nebo novější.</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Vítejte v programu  &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Práci s programem začněte v &lt;b&gt;Upravit|Slovníky&lt;/b&gt;, kde můžete přidat cesty ke složkám, kde budou vyhledávány soubory slovníků, nastavíte různé stránky Wikipedie a jiné zdroje, upravíte pořadí adresářů nebo vytvoříte skupiny slovníků.&lt;p&gt;Pak budete moci vyhledávat slovíčka! To můžete provádět v tomto okně použitím pasnelu vlevo, nebo můžete &lt;a href=&quot;Working with popup&quot;&gt;vyhledávat slova z jiných aktivních aplikací&lt;/a&gt;. &lt;p&gt;Upravení vlastností programu provedete v &lt;b&gt;Upravit|Předvolby&lt;/b&gt;. Všechna nastavení mají nápovědu, která vám pomůže v případě, že máte o něčem pochybnosti.&lt;p&gt;Budete-li potřebovat další pomoc, budete mít nějaké návrhy nebo jenom budete chtít vědět co si myslí jiní, budete vítání na stránkách &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskuse&lt;/a&gt; o programu.&lt;p&gt;Aktualizace programu hledejte na &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;jeho stránkách&lt;/a&gt;.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licencováno pod GPLv3 nebo novější.</translation>
+    </message>
+    <message>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Vítejte v programu  &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Práci s programem začněte v &lt;b&gt;Upravit|Slovníky&lt;/b&gt;, kde můžete přidat cesty ke složkám, kde budou vyhledávány soubory slovníků, nastavíte různé stránky Wikipedie a jiné zdroje, upravíte pořadí adresářů nebo vytvoříte skupiny slovníků.&lt;p&gt;Pak budete moci vyhledávat slovíčka! To můžete provádět v tomto okně použitím pasnelu vlevo, nebo můžete &lt;a href=&quot;Working with popup&quot;&gt;vyhledávat slova z jiných aktivních aplikací&lt;/a&gt;. &lt;p&gt;Upravení vlastností programu provedete v &lt;b&gt;Upravit|Předvolby&lt;/b&gt;. Všechna nastavení mají nápovědu, která vám pomůže v případě, že máte o něčem pochybnosti.&lt;p&gt;Budete-li potřebovat další pomoc, budete mít nějaké návrhy nebo jenom budete chtít vědět co si myslí jiní, budete vítání na stránkách &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskuse&lt;/a&gt; o programu.&lt;p&gt;Aktualizace programu hledejte na &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;jeho stránkách&lt;/a&gt;.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licencováno pod GPLv3 nebo novější. {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
     </message>
 </context>
 <context>
@@ -2427,6 +2435,38 @@
     </message>
     <message>
         <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History view mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export history to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text files (*.txt);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History export complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

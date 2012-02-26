@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "bgl.hh"
@@ -1125,8 +1125,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       idxHeader.foldingVersion = Folding::Version;
       idxHeader.articleCount = articleCount;
       idxHeader.wordCount = wordCount;
-      idxHeader.langFrom = LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
-      idxHeader.langTo = LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
+      idxHeader.langFrom = b.sourceLang();//LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
+      idxHeader.langTo = b.targetLang();//LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
 
       idx.rewind();
 

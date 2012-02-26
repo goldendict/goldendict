@@ -32,6 +32,7 @@ MOC_DIR = build
 RCC_DIR = build
 LIBS += \
         -lz \
+        -lbz2
 
 win32 { 
     LIBS += -liconv \
@@ -190,7 +191,10 @@ HEADERS += folding.hh \
     mainstatusbar.hh \
     gdappstyle.hh \
     ufile.hh \
-    xdxf.hh
+    xdxf.hh \
+    sdict.hh \
+    decompress.hh \
+    aard.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -279,7 +283,10 @@ SOURCES += folding.cc \
     mainstatusbar.cc \
     gdappstyle.cc \
     ufile.cc \
-    xdxf.cc
+    xdxf.cc \
+    sdict.cc \
+    decompress.cc \
+    aard.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
@@ -309,9 +316,10 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/sq_AL.ts \
     locale/pt_BR.ts \
     locale/es_AR.ts \
+    locale/es_BO.ts \
+    locale/es_ES.ts \
     locale/sk_SK.ts \
     locale/tr_TR.ts \
-    locale/es_BO.ts \
     locale/qu_WI.ts
 
 # Build version file

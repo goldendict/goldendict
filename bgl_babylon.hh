@@ -26,68 +26,73 @@
 
 #include <string>
 #include <vector>
-
-const std::string bgl_language[] = {
-	"English", 
-	"French",
-	"Italian",
-	"Spanish",
-	"Dutch",
-	"Portuguese",
-	"German",
-	"Russian",
-	"Japanese",
-    "\x01",//"Traditional Chinese",
-    "\x02",//"Simplified Chinese",
-	"Greek",
-	"Korean",
-	"Turkish",
-	"Hebrew",
-	"Arabic",
-	"Thai",
-    "\x03",//"Other",
-    "\x04",//"Other Simplified Chinese dialects",
-    "\x05",//Other Traditional Chinese dialects",
-    "\x06",//Other Eastern-European languages",
-    "\x07",//Other Western-European languages",
-    "\x08",//Other Russian languages",
-    "\x09",//Other Japanese languages",
-    "\x0A",//"Other Baltic languages",
-    "\x0B",//Other Greek languages",
-    "\x0C",//"Other Korean dialects",
-    "\x0D",//Other Turkish dialects",
-    "\x0E",//"Other Thai dialects",
-	"Polish",
-	"Hungarian",
-	"Czech",
-	"Lithuanian",
-	"Latvian",
-	"Catalan",
-	"Croatian",
-	"Serbian",
-	"Slovak",
-	"Albanian",
-	"Urdu",
-	"Slovenian",
-	"Estonian",
-	"Bulgarian",
-	"Danish",
-	"Finnish",
-	"Icelandic",
-	"Norwegian",
-	"Romanian",
-	"Swedish",
-	"Ukrainian",
-	"Belarusian",
-	"Farsi",
-	"Basque",
-	"Macedonian",
-	"Afrikaans",
-	"Faeroese",
-	"Latin",
-	"Esperanto",
-	"Tamazight",
-	"Armenian"};
+#include <qglobal.h>
+//const std::string bgl_language[] = {
+#ifndef blgCode2Int
+#define blgCode2Int( index, code0, code1 ) (((uint32_t)index) << 16 ) + (((uint32_t)code1) << 8 ) + (uint32_t)code0
+#endif
+const quint32 bgl_language[] = {
+    blgCode2Int( 0, 'e', 'n' ),// "English",
+    blgCode2Int( 0, 'f', 'r' ),//"French",
+    blgCode2Int( 0, 'i', 't' ),//"Italian",
+    blgCode2Int( 0, 'e', 's' ),//"Spanish",
+    blgCode2Int( 0, 'n', 'l' ),//"Dutch",
+    blgCode2Int( 0, 'p', 't' ),//"Portuguese",
+    blgCode2Int( 0, 'd', 'e' ),//"German",
+    blgCode2Int( 0, 'r', 'u' ),//"Russian",
+    blgCode2Int( 0, 'j', 'a' ),//"Japanese",
+    blgCode2Int( 1, 'z', 'h' ),//"\x01",//"Traditional Chinese",
+    blgCode2Int( 2, 'z', 'h' ),//"\x02",//"Simplified Chinese",
+    blgCode2Int( 0, 'e', 'l' ),//"Greek",
+    blgCode2Int( 0, 'k', 'o' ),//"Korean",
+    blgCode2Int( 0, 't', 'r' ),//"Turkish",
+    blgCode2Int( 0, 'h', 'e' ),//"Hebrew",
+    blgCode2Int( 0, 'a', 'r' ),//"Arabic",
+    blgCode2Int( 0, 't', 'h' ),//"Thai",
+    blgCode2Int( 3, 0, 0 ),//"\x03",//"Other",
+    blgCode2Int( 4, 'z', 'h' ),//"\x04",//"Other Simplified Chinese dialects",
+    blgCode2Int( 5, 'z', 'h' ),//"\x05",//Other Traditional Chinese dialects",
+    blgCode2Int( 6, 0, 0 ),//"\x06",//Other Eastern-European languages",
+    blgCode2Int( 7, 0, 0 ),//"\x07",//Other Western-European languages",
+    blgCode2Int( 8, 'r', 'u' ),//"\x08",//Other Russian languages",
+    blgCode2Int( 9, 'j', 'a' ),//"\x09",//Other Japanese languages",
+    blgCode2Int( 10, 0, 0 ),//"\x0A",//"Other Baltic languages",
+    blgCode2Int( 11, 'e', 'l' ),//"\x0B",//Other Greek languages",
+    blgCode2Int( 12, 'k', 'o' ),//"\x0C",//"Other Korean dialects",
+    blgCode2Int( 13, 't', 'r' ),//"\x0D",//Other Turkish dialects",
+    blgCode2Int( 14, 't', 'h' ),//"\x0E",//"Other Thai dialects",
+    blgCode2Int( 0, 'p', 'l' ),//"Polish",
+    blgCode2Int( 0, 'h', 'u' ),//"Hungarian",
+    blgCode2Int( 0, 'c', 's' ),//"Czech",
+    blgCode2Int( 0, 'l', 't' ),//"Lithuanian",
+    blgCode2Int( 0, 'l', 'v' ),//"Latvian",
+    blgCode2Int( 0, 'c', 'a' ),//"Catalan",
+    blgCode2Int( 0, 'h', 'r' ),//"Croatian",
+    blgCode2Int( 0, 's', 'r' ),//"Serbian",
+    blgCode2Int( 0, 's', 'k' ),//"Slovak",
+    blgCode2Int( 0, 's', 'q' ),//"Albanian",
+    blgCode2Int( 0, 'u', 'r' ),//"Urdu",
+    blgCode2Int( 0, 's', 'l' ),//"Slovenian",
+    blgCode2Int( 0, 'e', 't' ),//"Estonian",
+    blgCode2Int( 0, 'b', 'g' ),//"Bulgarian",
+    blgCode2Int( 0, 'd', 'a' ),//"Danish",
+    blgCode2Int( 0, 'f', 'i' ),//"Finnish",
+    blgCode2Int( 0, 'i', 's' ),//"Icelandic",
+    blgCode2Int( 0, 'n', 'o' ),//"Norwegian",
+    blgCode2Int( 0, 'r', 'o' ),//"Romanian",
+    blgCode2Int( 0, 's', 'v' ),//"Swedish",
+    blgCode2Int( 0, 'u', 'k' ),//"Ukrainian",
+    blgCode2Int( 0, 'b', 'e' ),//"Belarusian",
+    blgCode2Int( 0, 'f', 'a' ),//"Farsi"=Persian,
+    blgCode2Int( 0, 'e', 'u' ),//"Basque",
+    blgCode2Int( 0, 'm', 'k' ),//"Macedonian",
+    blgCode2Int( 0, 'a', 'f' ),//"Afrikaans",
+    blgCode2Int( 0, 'f', 'o' ),//"Faeroese"=Faroese,
+    blgCode2Int( 0, 'l', 'a' ),//"Latin",
+    blgCode2Int( 0, 'e', 'o' ),//"Esperanto",
+    blgCode2Int( 15, 0, 0 ),//"Tamazight",
+    blgCode2Int( 0, 'h', 'y' )//"Armenian"
+};
 
 
 const std::string bgl_charsetname[] = {
@@ -181,8 +186,8 @@ public:
     inline std::string email() const { return m_email; };
     inline std::string description() const { return m_description; };
     inline std::string copyright() const { return m_copyright; };
-    inline std::string sourceLang() const { return m_sourceLang; };
-    inline std::string targetLang() const { return m_targetLang; };
+    inline quint32 sourceLang() const { return m_sourceLang; }//std::string sourceLang() const { return m_sourceLang; };
+    inline quint32 targetLang() const { return m_targetLang; }//inline std::string targetLang() const { return m_targetLang; };
     inline unsigned int numEntries() const { return m_numEntries; };
     inline std::string charset() const { return m_defaultCharset; };
 
@@ -193,7 +198,7 @@ public:
     
     enum
     {
-      ParserVersion = 13
+      ParserVersion = 14
     };
 
 private:
@@ -208,8 +213,8 @@ private:
     std::string m_email;
     std::string m_description;
     std::string m_copyright;
-    std::string m_sourceLang;
-    std::string m_targetLang;
+    quint32 m_sourceLang; //std::string m_sourceLang;
+    quint32 m_targetLang;//std::string m_targetLang;
     unsigned int m_numEntries;
     std::string m_defaultCharset;
     std::string m_sourceCharset;

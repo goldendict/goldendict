@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "stardict.hh"
@@ -835,48 +835,36 @@ Ifo::Ifo( File::Class & f ):
 
 } // anonymous namespace
 
-static bool tryPossibleName( string const & name, string & copyTo )
-{
-  if ( File::exists( name ) )
-  {
-    copyTo = name;
-
-    return true;
-  }
-  else
-    return false;
-}
-
 static void findCorrespondingFiles( string const & ifo,
                                     string & idx, string & dict, string & syn )
 {
   string base( ifo, 0, ifo.size() - 3 );
 
   if ( !(
-          tryPossibleName( base + "idx", idx ) ||
-          tryPossibleName( base + "idx.gz", idx ) ||
-          tryPossibleName( base + "idx.dz", idx ) ||
-          tryPossibleName( base + "IDX", idx ) ||
-          tryPossibleName( base + "IDX.GZ", idx ) ||
-          tryPossibleName( base + "IDX.DZ", idx )
+          File::tryPossibleName( base + "idx", idx ) ||
+          File::tryPossibleName( base + "idx.gz", idx ) ||
+          File::tryPossibleName( base + "idx.dz", idx ) ||
+          File::tryPossibleName( base + "IDX", idx ) ||
+          File::tryPossibleName( base + "IDX.GZ", idx ) ||
+          File::tryPossibleName( base + "IDX.DZ", idx )
       ) )
     throw exNoIdxFile( ifo );
 
   if ( !(
-          tryPossibleName( base + "dict", dict ) ||
-          tryPossibleName( base + "dict.dz", dict ) ||
-          tryPossibleName( base + "DICT", dict ) ||
-          tryPossibleName( base + "dict.DZ", dict )
+          File::tryPossibleName( base + "dict", dict ) ||
+          File::tryPossibleName( base + "dict.dz", dict ) ||
+          File::tryPossibleName( base + "DICT", dict ) ||
+          File::tryPossibleName( base + "dict.DZ", dict )
       ) )
     throw exNoDictFile( ifo );
 
   if ( !(
-         tryPossibleName( base + "syn", syn ) ||
-         tryPossibleName( base + "syn.gz", syn ) ||
-         tryPossibleName( base + "syn.dz", syn ) ||
-         tryPossibleName( base + "SYN", syn ) ||
-         tryPossibleName( base + "SYN.GZ", syn ) ||
-         tryPossibleName( base + "SYN.DZ", syn )
+         File::tryPossibleName( base + "syn", syn ) ||
+         File::tryPossibleName( base + "syn.gz", syn ) ||
+         File::tryPossibleName( base + "syn.dz", syn ) ||
+         File::tryPossibleName( base + "SYN", syn ) ||
+         File::tryPossibleName( base + "SYN.GZ", syn ) ||
+         File::tryPossibleName( base + "SYN.DZ", syn )
      ) )
     syn.clear();
 }

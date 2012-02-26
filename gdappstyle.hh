@@ -1,4 +1,4 @@
-/* This file is (c) 2011 Tvangeste <i.4m.l33t@yandex.ru>
+/* This file is (c) 2012 Tvangeste <i.4m.l33t@yandex.ru>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef GDAPPSTYLE_HH

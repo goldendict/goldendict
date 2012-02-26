@@ -12,6 +12,23 @@
 
 typedef void ( *ActivateSpyFn )( BOOL );
 
+HANDLE hGDProcess;
+UINT_PTR timerID;
+
+void CALLBACK TimerFunc(HWND hWnd,UINT nMsg,UINT_PTR nTimerID,DWORD dwTime)
+{
+(void) hWnd;
+(void) nMsg;
+(void) dwTime;
+	if( nTimerID == timerID )
+	{
+		DWORD wso = WaitForSingleObject( hGDProcess, 0 );
+		if( wso == WAIT_OBJECT_0 || wso == WAIT_ABANDONED )
+			PostThreadMessage( GetCurrentThreadId(), WM_QUIT, 0, 0 );
+	}
+}
+
+
 BOOL parentIsGD()
 {
 HANDLE hSnapshot, hModuleSnapshot;
@@ -41,6 +58,8 @@ BOOL b;
 				b = n >= 14 && lstrcmpi( me.szExePath + n - 14, _T("GoldenDict.exe") ) == 0;
 			}
 			CloseHandle( hModuleSnapshot );
+			if( b )
+				hGDProcess = OpenProcess( SYNCHRONIZE, FALSE, pe.th32ParentProcessID );
 			break;
 		}
 		b = Process32Next( hSnapshot, &pe );
@@ -93,13 +112,15 @@ MSG msg;
 
 	if( !parentIsGD() )
 		return -1;
+	if( hGDProcess == NULL )
+		return -1;
 
 	while( 1 ) {
 		ThTypes_Init();
 		if( GlobalData == NULL || GlobalData32 == NULL) 
 			break;
 		hServerWnd = LongToHandle( GlobalData32->ServerWND );
-
+		              
 		GetModuleFileName( NULL, dir, MAX_PATH );
 		pch = dir + lstrlen( dir );
 		while( pch != dir && *pch != '\\' ) pch--;
@@ -122,10 +143,15 @@ MSG msg;
 			break;
 		}
 
+		timerID = SetTimer( 0, 0, 1000, TimerFunc );
+
 		activateSpyFn( TRUE );
 
 		while( GetMessage( &msg, 0, 0, 0 ) )
 			DispatchMessage( &msg );
+
+		if( timerID )
+			KillTimer( NULL, timerID);
 
 		activateSpyFn( FALSE );
 
@@ -133,6 +159,7 @@ MSG msg;
 		break;
 	}
 
+	CloseHandle( hGDProcess );
 	if( spyDll )
 		FreeLibrary( spyDll );
 	ThTypes_End();

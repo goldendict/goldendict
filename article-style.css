@@ -137,6 +137,10 @@ div.sdct_x
 
 /******** XDXF markup classes *********/
 
+div.xdxf
+{
+}
+
 /* Key -- keys shouldn't normally be present in the article's body since they
  * are accounted for separately, hence we hide them */
 .xdxf_k
@@ -208,6 +212,7 @@ div.sdct_x
 
 .xdxf_headwords
 {
+  font-size: 116%;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -216,6 +221,29 @@ div.sdct_x
 .xdxf_opt
 {
   color: grey;
+}
+
+/******** SDictionary markup classes *********/
+
+.sdict_forms
+{
+  font-style: italic;
+}
+
+/* Transcription */
+.sdict_tr:before
+{
+  content:"[";
+}
+
+.sdict_tr:after
+{
+  content:"] ";
+}
+
+.sdict_tr
+{
+  font-weight: bold;
 }
 
 /************* LSA audio archives **************/

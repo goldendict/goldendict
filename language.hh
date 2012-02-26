@@ -1,11 +1,11 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __LANGUAGE_HH_INCLUDED__
 #define __LANGUAGE_HH_INCLUDED__
 
 #include <QString>
-
+#include "wstring_qt.hh"
 /// Language-specific stuff - codes, names, ids etc.
 namespace Language {
 
@@ -44,7 +44,7 @@ struct BabylonLang{
     const char * localizedName;
 };
 BabylonLang getBabylonLangByIndex( int index );
-
+quint32 findBlgLangIDByEnglishName( gd::wstring const & lang );
 }
 
 #endif
