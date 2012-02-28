@@ -18,7 +18,7 @@
     <message>
         <location filename="../about.ui" line="73"/>
         <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org) {2008-2012 ?}</translation>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org) {2008-2012 ?}</translation>
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../article_maker.cc" line="119"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>Não achei nenhuma definição da palavra &lt;b&gt;%1&lt;/b&gt; no grupo &lt;b&gt;%2&lt;/b&gt;.</translation>
+        <translation>Não achei nenhuma definição ou tradução da palavra/expressão &lt;b&gt;%1&lt;/b&gt; no grupo &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="124"/>
@@ -84,12 +84,12 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Seja bem-vindo ao GoldenDict!&lt;/h3&gt;&lt;p&gt;Antes de usar o programa, clique em &lt;b&gt;Editar|Dicionários&lt;/b&gt; para indicar o caminho da pasta que contenha os dicionários de consulta local, adicionar endereços da Wikipedia se desejar ou especificar outras fontes de tradução online. Se quiser usar o programa como portátil, como em outra partição do sistema ou em pendrives, crie a subpasta &apos;Portable&apos; na pasta principal dele. Você pode também ordenar os dicionários para determinar a prioridade da exibição das definições nos resultados da busca.&lt;p&gt;Feito isto, o programa estará pronto para exibir as definições/tradução das palavras que você consultar! A forma tradicional de consultar os dicionários especificados na configuração do GoldenDict é digitar o termo/expressão no campo de pesquisa (canto superior esquerdo desta mesma janela). No entanto, ao contrário da maioria dos outros dicionários eletrônicos, não há necessidade de especificar a palavra no seu contexto exato (que requer um conhecimento básico de gramática do idioma para o qual se deseja traduzir). Com o GoldenDict, você pode digitar a forma flexionada de uma determinada palavra que o programa é capaz de reconhecer as suas raízes e efetuar a correção morfologicamente. Outra característica fundamental do GoldenDict é que o campo de pesquisa não é a única forma de fazer consultas: É possível também traduzir/consultar palavras exibidas em outros programas por meio de janelas secundárias (popups). Clique em &lt;a href=&quot;Trabalhando com janelas de definições/tradução semiautomáticas&quot;&gt;Trabalhando com janelas secundárias&lt;/a&gt; para saber como usar essa forma de consulta/tradução.&lt;p&gt;Para personalizar o programa, clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;. Cada opção tem suas próprias dicas em forma de balão informativo, exibido ao se pairar o ponteiro do mouse sobre alguma opção por alguns segundos.&lt;p&gt;Se precisar de mais ajuda, tiver dúvidas, sugestões ou quiser fazer qualquer outro pedido, sua participação no &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;fórum&lt;/a&gt; do programa é bem-vinda!&lt;p&gt;Clique &lt;a href=&quot;http://goldendict.org/&quot;&gt;aqui&lt;/a&gt; para ver se há atualizações do programa.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licença sob GPLv3 ou superior. &lt;br&gt;&lt;br&gt;&lt;center&gt;&lt;a href=&quot;http://MCHAL.azok.org/&quot;&gt;Traduzido por MCHAL&lt;/a&gt;&lt;/center&gt;</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Seja bem-vindo ao GoldenDict!&lt;/h3&gt;&lt;p&gt;Antes de usar o programa, clique em &lt;b&gt;Editar|Dicionários&lt;/b&gt; para indicar o caminho da pasta que contenha os dicionários de consulta local, adicionar endereços da Wikipedia se desejar ou especificar outras fontes de tradução online. Se quiser usar o programa como portátil, como em outra partição do sistema ou em pendrives, crie a subpasta &apos;Portable&apos; na pasta principal dele. Você pode também ordenar os dicionários para determinar a prioridade da exibição das definições nos resultados da busca.&lt;p&gt;Feito isto, o programa estará pronto para exibir as definições/tradução das palavras que você consultar! A forma tradicional de consultar os dicionários especificados na configuração do GoldenDict é digitar o termo/expressão no campo de pesquisa (canto superior esquerdo desta mesma janela). No entanto, ao contrário da maioria dos outros dicionários eletrônicos, não há necessidade de especificar a palavra no seu contexto exato (que requer um conhecimento básico de gramática do idioma para o qual se deseja traduzir). Com o GoldenDict, você pode digitar a forma flexionada de uma determinada palavra que o programa é capaz de reconhecer as suas raízes e efetuar a correção morfologicamente. Outra característica fundamental do GoldenDict é que o campo de pesquisa não é a única forma de fazer consultas: É possível também traduzir/consultar palavras exibidas em outros programas por meio de janelas secundárias (popups). Clique em &lt;a href=&quot;Trabalhando com janelas secundárias&quot;&gt;Trabalhando com janelas secundárias&lt;/a&gt; para saber como usar essa forma de consulta/tradução.&lt;p&gt;Para personalizar o programa, clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;. Cada opção tem suas próprias dicas em forma de balão informativo, exibido ao se pairar o ponteiro do mouse sobre alguma opção por alguns segundos.&lt;p&gt;Se precisar de mais ajuda, tiver dúvidas, sugestões ou quiser fazer qualquer outro pedido, sua participação no &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;fórum&lt;/a&gt; do programa é bem-vinda!&lt;p&gt;Clique &lt;a href=&quot;http://goldendict.org/&quot;&gt;aqui&lt;/a&gt; para ver se há atualizações do programa.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licença sob GPLv3 ou superior. &lt;br&gt;&lt;br&gt;&lt;center&gt;&lt;a href=&quot;http://MCHAL.azok.org/&quot;&gt;Traduzido por MCHAL&lt;/a&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="145"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Seja bem-vindo ao GoldenDict!&lt;/h3&gt;&lt;p&gt;Antes de usar o programa, clique em &lt;b&gt;Editar|Dicionários&lt;/b&gt; para indicar o caminho da pasta que contenha os dicionários de consulta local, adicionar endereços da Wikipedia se desejar ou especificar outras fontes de tradução online. Se quiser usar o programa como portátil, como em outra partição do sistema ou em pendrives, crie a subpasta &apos;Portable&apos; na pasta principal dele. Você pode também ordenar os dicionários para determinar a prioridade da exibição das definições nos resultados da busca.&lt;p&gt;Feito isto, o programa estará pronto para exibir as definições/tradução das palavras que você consultar! A forma tradicional de consultar os dicionários especificados na configuração do GoldenDict é digitar o termo/expressão no campo de pesquisa (canto superior esquerdo desta mesma janela). No entanto, ao contrário da maioria dos outros dicionários eletrônicos, não há necessidade de especificar a palavra no seu contexto exato (que requer um conhecimento básico de gramática do idioma para o qual se deseja traduzir). Com o GoldenDict, você pode digitar a forma flexionada de uma determinada palavra que o programa é capaz de reconhecer as suas raízes e efetuar a correção morfologicamente. Outra característica fundamental do GoldenDict é que o campo de pesquisa não é a única forma de fazer consultas: É possível também traduzir/consultar palavras exibidas em outros programas por meio de janelas secundárias (popups). Clique em &lt;a href=&quot;Trabalhando com janelas de definições/tradução semiautomáticas&quot;&gt;Trabalhando com janelas secundárias&lt;/a&gt; para saber como usar essa forma de consulta/tradução.&lt;p&gt;Para personalizar o programa, clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;. Cada opção tem suas próprias dicas em forma de balão informativo, exibido ao se pairar o ponteiro do mouse sobre alguma opção por alguns segundos.&lt;p&gt;Se precisar de mais ajuda, tiver dúvidas, sugestões ou quiser fazer qualquer outro pedido, sua participação no &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;fórum&lt;/a&gt; do programa é bem-vinda!&lt;p&gt;Clique &lt;a href=&quot;http://goldendict.org/&quot;&gt;aqui&lt;/a&gt; para ver se há atualizações do programa.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licença sob GPLv3 ou superior. &lt;br&gt;&lt;br&gt;&lt;center&gt;&lt;a href=&quot;http://MCHAL.azok.org/&quot;&gt;Traduzido por MCHAL&lt;/a&gt;&lt;/center&gt; {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Seja bem-vindo ao GoldenDict!&lt;/h3&gt;&lt;p&gt;Antes de usar o programa, clique em &lt;b&gt;Editar|Dicionários&lt;/b&gt; para indicar o caminho da pasta que contenha os dicionários de consulta local, adicionar endereços da Wikipedia se desejar ou especificar outras fontes de tradução online. Se quiser usar o programa como portátil, como em outra partição do sistema ou em pendrives, crie a subpasta &apos;Portable&apos; na pasta principal dele. Você pode também ordenar os dicionários para determinar a prioridade da exibição das definições nos resultados da busca.&lt;p&gt;Feito isto, o programa estará pronto para exibir as definições/tradução das palavras que você consultar! A forma tradicional de consultar os dicionários especificados na configuração do GoldenDict é digitar o termo/expressão no campo de pesquisa (canto superior esquerdo desta mesma janela). No entanto, ao contrário da maioria dos outros dicionários eletrônicos, não há necessidade de especificar a palavra no seu contexto exato (que requer um conhecimento básico de gramática do idioma para o qual se deseja traduzir). Com o GoldenDict, você pode digitar a forma flexionada de uma determinada palavra que o programa é capaz de reconhecer as suas raízes e efetuar a correção morfologicamente. Outra característica fundamental do GoldenDict é que o campo de pesquisa não é a única forma de fazer consultas: É possível também traduzir/consultar palavras exibidas em outros programas por meio de janelas secundárias (popups). Clique em &lt;a href=&quot;Trabalhando com janelas secundárias&quot;&gt;Trabalhando com janelas secundárias&lt;/a&gt; para saber como usar essa forma de consulta/tradução.&lt;p&gt;Para personalizar o programa, clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;. Cada opção tem suas próprias dicas em forma de balão informativo, exibido ao se pairar o ponteiro do mouse sobre alguma opção por alguns segundos.&lt;p&gt;Se precisar de mais ajuda, tiver dúvidas, sugestões ou quiser fazer qualquer outro pedido, sua participação no &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;fórum&lt;/a&gt; do programa é bem-vinda!&lt;p&gt;Clique &lt;a href=&quot;http://goldendict.org/&quot;&gt;aqui&lt;/a&gt; para ver se há atualizações do programa.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licença sob GPLv3 ou superior. &lt;br&gt;&lt;br&gt;&lt;center&gt;&lt;a href=&quot;http://MCHAL.azok.org/&quot;&gt;Traduzido por MCHAL&lt;/a&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="161"/>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../article_maker.cc" line="410"/>
         <source>From </source>
-        <translation>Resultados de: </translation>
+        <translation>Resultados de </translation>
     </message>
     <message>
         <source>From %1</source>
@@ -142,12 +142,12 @@
     <message>
         <location filename="../article_maker.cc" line="593"/>
         <source>Compound expressions: </source>
-        <translation>Expressões Compostas:</translation>
+        <translation>Termos compostos: </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="621"/>
         <source>Individual words: </source>
-        <translation>Palavras individuais:</translation>
+        <translation>Palavras independentes: </translation>
     </message>
 </context>
 <context>
@@ -185,7 +185,7 @@
     <message>
         <location filename="../articleview.cc" line="832"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation>O programa de áudio especificado não existe</translation>
+        <translation>O programa de áudio especificado não existe.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="963"/>
@@ -382,7 +382,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="13"/>
         <source>Dictionary Bar</source>
-        <translation>Barra de &amp;Dicionários</translation>
+        <translation>Barra de Dicionários</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="107"/>
@@ -628,7 +628,7 @@
     <message>
         <location filename="../groups.ui" line="153"/>
         <source>Auto groups</source>
-        <translation>Agr&amp;upar automaticamente</translation>
+        <translation>Agrupar automaticamente</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="160"/>
@@ -658,7 +658,7 @@
     <message>
         <location filename="../groups.ui" line="194"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Arraste os dicionários para os grupos, organize-os e reordene-os com o ponteiro do mouse.</translation>
+        <translation>Arraste e solte os &amp;dicionários nos grupos, organize-os e reordene-os com o ponteiro do mouse.</translation>
     </message>
 </context>
 <context>
@@ -1896,7 +1896,7 @@
     <message>
         <location filename="../language.cc" line="234"/>
         <source>Zulu</source>
-        <translation></translation>
+        <translation>Zulu</translation>
     </message>
 </context>
 <context>
@@ -1912,7 +1912,7 @@
     <message>
         <location filename="../mainwindow.cc" line="95"/>
         <source>Navigation</source>
-        <translation>Barra de &amp;Navegação</translation>
+        <translation>Barra de Navegação</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="98"/>
@@ -1927,7 +1927,7 @@
     <message>
         <location filename="../mainwindow.cc" line="108"/>
         <source>Scan Popup</source>
-        <translation>&amp;Definição Semiautomática</translation>
+        <translation>Definição Semiautomática</translation>
     </message>
     <message>
         <source>Pronounce word</source>
@@ -2005,7 +2005,7 @@
     <message>
         <location filename="../mainwindow.cc" line="1915"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Não foi possível acionar o mecanismo de monitoramento por atalho. Veja se seu XServer está com a extensão RECORD ativada.&lt;br&gt;</translation>
+        <translation>Não foi possível acionar o mecanismo de monitoramento por atalho.&lt;br&gt;Veja se seu XServer está com a extensão RECORD ativada.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2049"/>
@@ -2031,7 +2031,7 @@
     <message>
         <location filename="../mainwindow.cc" line="43"/>
         <source>Show Names in Dictionary Bar</source>
-        <translation>&amp;Mostrar Nomes na Barra de Dicionários</translation>
+        <translation>Mostrar os nomes dos dicionários na Barra</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="44"/>
@@ -2056,32 +2056,32 @@
     <message>
         <location filename="../mainwindow.cc" line="127"/>
         <source>Zoom In</source>
-        <translation>&amp;Aumenta o tamanho das letras</translation>
+        <translation>Aumentar as letras das definições</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="129"/>
         <source>Zoom Out</source>
-        <translation>&amp;Diminui o tamanho das letras</translation>
+        <translation>Diminuir as letras das definições</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="131"/>
         <source>Normal Size</source>
-        <translation>&amp;Tamanho Normal</translation>
+        <translation>Restaurar as letras das definições</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="147"/>
         <source>Words Zoom In</source>
-        <translation>A&amp;mpliar as letras das definições</translation>
+        <translation>Aumentar as letras dos verbetes</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="149"/>
         <source>Words Zoom Out</source>
-        <translation>&amp;Diminuir o tamanho das letras das definições</translation>
+        <translation>Diminuir as letras dos verbetes</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="151"/>
         <source>Words Normal Size</source>
-        <translation>Tama&amp;nho Normal das Palavras das Definições</translation>
+        <translation>Restaurar as letras dos verbetes</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="215"/>
@@ -2146,32 +2146,32 @@
     <message>
         <location filename="../mainwindow.cc" line="2574"/>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ocultar</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2578"/>
         <source>History view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de Histórico</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2603"/>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar o histórico</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2605"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivos de texto (*.txt);;Todos os arquivos (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2643"/>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Feita a exportação do histórico</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2646"/>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de exportação:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -2207,7 +2207,7 @@
     <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>&amp;Help</source>
-        <translation>A&amp;juda</translation>
+        <translation>Aj&amp;uda</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="257"/>
@@ -2240,17 +2240,17 @@
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>&amp;View</source>
-        <translation>E&amp;xibir</translation>
+        <translation>Exi&amp;bir</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
         <source>&amp;Zoom</source>
-        <translation>&amp;Ampliar</translation>
+        <translation>&amp;Zoom</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
-        <translation>&amp;Histórico</translation>
+        <translation>His&amp;tórico</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
@@ -2303,7 +2303,7 @@
     <message>
         <location filename="../mainwindow.ui" line="337"/>
         <source>&amp;Close To Tray</source>
-        <translation>Pôr na Área de Notificação</translation>
+        <translation>&amp;Pôr na Área de Notificação</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="340"/>
@@ -2318,7 +2318,7 @@
     <message>
         <location filename="../mainwindow.ui" line="352"/>
         <source>&amp;Save Article</source>
-        <translation>&amp;Salvar Verbete</translation>
+        <translation>&amp;Salvar verbete</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="355"/>
@@ -2343,12 +2343,12 @@
     <message>
         <location filename="../mainwindow.ui" line="380"/>
         <source>Print Preview</source>
-        <translation>&amp;Visualizar Impressão</translation>
+        <translation>Visualizar Impressão</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="385"/>
         <source>Rescan Files</source>
-        <translation>Atua&amp;lizar a lista de dicionários...</translation>
+        <translation>Atualizar a lista de dicionários...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="388"/>
@@ -2380,12 +2380,12 @@
         <location filename="../mainwindow.ui" line="418"/>
         <location filename="../mainwindow.cc" line="2544"/>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;xibir</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="423"/>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exportar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="130"/>
@@ -2484,7 +2484,7 @@
     <message>
         <location filename="../orderandprops.ui" line="216"/>
         <source>Translates to:</source>
-        <translation>Traduz para o:</translation>
+        <translation>Para o:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="271"/>
@@ -2495,7 +2495,7 @@
         <location filename="../orderandprops.ui" line="336"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
         <translation>Para ordenar os dicionários, arraste-os como desejar.
-Arraste dicionários para o grupo de inativos para desativá-los.</translation>
+Se quiser desativar dicionários, arraste-os para o grupo de desativados.</translation>
     </message>
 </context>
 <context>
@@ -2534,7 +2534,7 @@ Arraste dicionários para o grupo de inativos para desativá-los.</translation>
 With this on however, new tabs will be opened without
 switching to them.</source>
         <translation>Normalmente, ao se abrir uma nova guia, o programa a exibe imediatamente.
-Porém, se está opção for habilitada, novas guias serão abertas sem que o 
+Porém, se está opção for habilitada, novas guias serão abertas sem que o
 programa as exiba automaticamente.</translation>
     </message>
     <message>
@@ -2547,8 +2547,8 @@ programa as exiba automaticamente.</translation>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Se habilitada esta opção, as novas guias abertas 
-serão posicionadas ao lado da guia ativa atual. 
+        <translation>Se habilitada esta opção, as novas guias abertas
+serão posicionadas ao lado da guia ativa atual.
 Do contrário, serão enfileiradas ao lado da
 última.</translation>
     </message>
@@ -2616,7 +2616,7 @@ ser fechado.</translation>
     <message>
         <location filename="../preferences.ui" line="159"/>
         <source>Start with system</source>
-        <translation>Abrir o GoldenDcit com o Windows</translation>
+        <translation>Abrir o GoldenDict com o Windows</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="171"/>
@@ -2664,7 +2664,7 @@ teclas de atalho podem ser premidas também pouco depois da seleção da palavra
     <message>
         <location filename="../preferences.ui" line="582"/>
         <source>Hotkeys</source>
-        <translation>Atalhos de &amp;Teclado</translation>
+        <translation>Atalhos de Teclado</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="601"/>
@@ -2674,7 +2674,7 @@ teclas de atalho podem ser premidas também pouco depois da seleção da palavra
     <message>
         <location filename="../preferences.ui" line="632"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Usar o seguinte atalho de teclado para traduzir palavra da Área de Transferência:</translation>
+        <translation>Usar o seguinte atalho de teclado para consultar nos dicionários ou traduzir texto da Área de Transferência:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="679"/>
@@ -2690,7 +2690,7 @@ em qualquer situação ou contexto, desde que o GoldenDict esteja em execução.
     <message>
         <location filename="../preferences.ui" line="156"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>Abrir o GoldenDict com o Windows</translation>
+        <translation>Abrir o GoldenDict com o Windows.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="293"/>
@@ -2947,8 +2947,8 @@ instável, mas deve funcionar com a maioria dos formatos de áudio.</translation
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Tentar usar a tecnologia IAccessibleEx para consultar/traduzir a palavra sob o
-ponteiro. Esta tecnologia só funciona com alguns programas que a aceitam 
+        <translation>Se marcada, o programa tenta usar a tecnologia IAccessibleEx para consultar/traduzir a
+palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a aceitam
 (por ex.: o Internet Explorer 9).
 Não é necessário habilitar esta opção se você não usa programas desse tipo.</translation>
     </message>
@@ -2962,8 +2962,8 @@ Não é necessário habilitar esta opção se você não usa programas desse tip
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Tentar usar a tecnologia UI Automation para consultar/traduzir a palavra sob o ponteiro.
-Esta tecnologia só funciona com alguns programas que a aceitam.
+        <translation>Se marcada, o programa tenta usar a tecnologia UI Automation para consultar/traduzir a
+palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a aceitam.
 Não é necessário habilitar esta opção se você não usa esses tipos de programa.</translation>
     </message>
     <message>
@@ -2976,8 +2976,8 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Tentar usar um comando especial do GoldenDict para consultar/traduzir a palavra sob o ponteiro.
-Esta tecnologia só funciona com alguns programas que a aceitam.
+        <translation>Se marcada, o programa tenta usar um comando especial do GoldenDict para consultar/traduzir
+palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a aceitam.
 Não é necessário habilitar esta opção se você não usa esses tipos de programas.</translation>
     </message>
     <message>
@@ -3068,7 +3068,7 @@ is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
         <translation>Se habilitada esta opção, o programa procura atualizações periodicamente
-no servidor do GoldenDict. Se houver atualizações, ele informa ao usuário 
+no servidor do GoldenDict. Se houver atualizações, ele informa ao usuário
 e pergunta se ele deseja visitar a página de download.</translation>
     </message>
     <message>
@@ -3233,12 +3233,12 @@ e pergunta se ele deseja visitar a página de download.</translation>
     <message>
         <location filename="../scanpopup.ui" line="83"/>
         <source>Alt+M</source>
-        <translation></translation>
+        <translation>Alt+M</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="90"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Pronuncia a palavra da consulta atual (Alt+S)</translation>
+        <translation>Pronunciar a palavra da consulta atual (Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="100"/>
@@ -3493,7 +3493,7 @@ p, li { white-space: pre-wrap; }
 &lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Obtenha sua própria chave &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;aqui&lt;/span&gt;&lt;/a&gt;, ou deixe em branco para usar a chave padrão.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Obtenha sua própria chave &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;aqui&lt;/span&gt;&lt;/a&gt; ou deixe o campo acima em branco para usar a chave padrão.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="509"/>
@@ -3551,7 +3551,7 @@ p, li { white-space: pre-wrap; }
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>O método de transcrição japonesa mais amplamente
-usado, baseado na fonologia inglesa.</translation>
+usado, baseado na fonologia inglesa</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="689"/>
