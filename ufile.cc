@@ -26,4 +26,15 @@ int gd_open( const char *filename)
     return _wopen( wname, _O_RDONLY | _O_BINARY );
 }
 
+gzFile gd_gzopen( const char *filename )
+{
+    int id = gd_open( filename );
+    if( id == -1 )
+        return NULL;
+    gzFile f = gzdopen( id, "rb");
+    if( f == NULL )
+        _close( id );
+    return f;
+}
+
 #endif

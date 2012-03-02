@@ -93,6 +93,20 @@ quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
   return 0;
 }
 
+quint32 LangCoder::findIdForLanguageCode3( const char * code3 )
+{
+  for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
+  {
+    if ( strcasecmp( code3, lc->code3 ) == 0 )
+    {
+      // We've got a match
+      return code2toInt( lc->code );
+    }
+  }
+
+  return 0;
+}
+
 quint32 LangCoder::guessId( const QString & lang )
 {
   QString lstr = lang.simplified().toLower();

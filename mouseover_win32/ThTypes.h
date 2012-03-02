@@ -13,29 +13,58 @@ extern "C"
 {
 #endif				/* __cplusplus */
 
+#pragma pack(push,4)
+
 typedef struct TCurrentMode {
 	HWND WND;
 	POINT Pt;
-	size_t WordLen;
+	DWORD WordLen;
 	char MatchedWord[256];
-	int BeginPos;
+	DWORD BeginPos;
 } TCurrentMode;
 
 typedef struct TGlobalDLLData {
 	HWND ServerWND;
-	HHOOK g_hHookMouse;
-	UINT_PTR TimerID;
+	HHOOK g_hHook;
 	HWND LastWND;
 	POINT LastPt;
 	TCurrentMode CurMod;
-	char LibName[256];
+	WCHAR LibName[256];
 } TGlobalDLLData;
+
+#pragma pack(pop)
 
 extern TGlobalDLLData *GlobalData;
 
+#ifdef __WIN64
+
+#pragma pack(push,4)
+
+typedef struct TCurrentMode32 {
+	DWORD WND;
+	POINT Pt;
+	DWORD WordLen;
+	char MatchedWord[256];
+	DWORD BeginPos;
+} TCurrentMode32;
+
+typedef struct TGlobalDLLData32 {
+	DWORD ServerWND;
+	DWORD g_hHook;
+	DWORD LastWND;
+	POINT LastPt;
+	TCurrentMode32 CurMod;
+	WCHAR LibName[256];
+} TGlobalDLLData32;
+
+#pragma pack(pop)
+
+extern TGlobalDLLData32 *GlobalData32;
+
+#endif
 
 void ThTypes_Init();
-void Thtypes_End();
+void ThTypes_End();
 
 #ifdef __cplusplus
 }

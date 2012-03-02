@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "loaddictionaries.hh"
@@ -20,6 +20,9 @@
 #include "programs.hh"
 #include "dprintf.hh"
 #include "fsencoding.hh"
+#include "xdxf.hh"
+#include "sdict.hh"
+#include "aard.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -39,7 +42,8 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   // Populate name filters
 
   nameFilters << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
-              << "*.dsl" << "*.dsl.dz"  << "*.index";
+              << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf"
+              << "*.xdxf.dz" << "*.dct" << "*.aar";
 }
 
 void LoadDictionaries::run()
@@ -137,6 +141,27 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), dictdDictionaries.begin(),
                          dictdDictionaries.end() );
+  }
+  {
+    vector< sptr< Dictionary::Class > > xdxfDictionaries =
+      Xdxf::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), xdxfDictionaries.begin(),
+                         xdxfDictionaries.end() );
+  }
+  {
+    vector< sptr< Dictionary::Class > > sdictDictionaries =
+      Sdict::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), sdictDictionaries.begin(),
+                         sdictDictionaries.end() );
+  }
+  {
+    vector< sptr< Dictionary::Class > > aardDictionaries =
+      Aard::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), aardDictionaries.begin(),
+                         aardDictionaries.end() );
   }
 }
 

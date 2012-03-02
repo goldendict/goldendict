@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "article_maker.hh"
@@ -153,7 +153,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
 "<p>Should you need further help, have any questions, "
 "suggestions or just wonder what the others think, you are welcome at the program's <a href=\"http://goldendict.org/forum/\">forum</a>."
 "<p>Check program's <a href=\"http://goldendict.org/\">website</a> for the updates. "
-"<p>(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later."
+"<p>(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later."
         
         ).toUtf8().data();
     }
@@ -285,7 +285,7 @@ ArticleRequest::ArticleRequest(
     sptr< Dictionary::WordSearchRequest > s = activeDicts[ x ]->findHeadwordsForSynonym( gd::toWString( word ) );
 
     connect( s.get(), SIGNAL( finished() ),
-             this, SLOT( altSearchFinished() ) );
+             this, SLOT( altSearchFinished() ), Qt::QueuedConnection );
 
     altSearches.push_back( s );
   }
@@ -338,7 +338,7 @@ void ArticleRequest::altSearchFinished()
                                       gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
 
       connect( r.get(), SIGNAL( finished() ),
-               this, SLOT( bodyFinished() ) );
+               this, SLOT( bodyFinished() ), Qt::QueuedConnection );
 
       bodyRequests.push_back( r );
     }
@@ -811,4 +811,28 @@ std::string ArticleRequest::escapeSpacing( QString const & str )
   spacing.replace( "\n", "<br>" );
 
   return spacing.data();
+}
+
+void ArticleRequest::cancel()
+{
+    if( isFinished() )
+        return;
+    if( !altSearches.empty() )
+    {
+        for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
+               altSearches.begin(); i != altSearches.end(); ++i )
+        {
+            (*i)->cancel();
+        }
+    }
+    if( !bodyRequests.empty() )
+    {
+        for( list< sptr< Dictionary::DataRequest > >::iterator i =
+               bodyRequests.begin(); i != bodyRequests.end(); ++i )
+        {
+            (*i)->cancel();
+        }
+    }
+    if( stemmedWordFinder.get() ) stemmedWordFinder->cancel();
+    finish();
 }

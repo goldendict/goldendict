@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "mainwindow.hh"
@@ -25,6 +25,7 @@ using std::pair;
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
   commitDataCompleted( false ),
+  showHistory( false ),
   trayIcon( 0 ),
   groupLabel( &searchPaneTitleBar ),
   groupList( &searchPaneTitleBar ),
@@ -45,7 +46,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
-  history( History::Load() ),
+  history( History::Load(), cfg_.preferences.maxStringsInHistory ),
   dictionaryBar( this, cfg.mutedDictionaries, configEvents ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
@@ -315,12 +316,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT(editCurrentGroup()) );
 
   // History
-
+/*
   connect( &history, SIGNAL( itemsChanged() ),
            this, SLOT( historyChanged() ) );
 
   connect( ui.menuHistory, SIGNAL(triggered(QAction*)),
            this, SLOT(menuHistoryTriggered(QAction*)), Qt::QueuedConnection );
+*/
 
   // Show tray icon early so the user would be happy. It won't be functional
   // though until the program inits fully.
@@ -436,7 +438,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   makeDictionaries();
 
   // After we have dictionaries and groups, we can populate history
-  historyChanged();
+//  historyChanged();
 
   addNewTab();
 
@@ -536,6 +538,8 @@ MainWindow::~MainWindow()
 
     delete w;
   }
+
+  history.save();
 }
 
 void MainWindow::commitData( QSessionManager & )
@@ -1273,7 +1277,8 @@ void MainWindow::currentGroupChanged( QString const & )
 
   // Update word search results
 
-  translateInputChanged( ui.translateLine->text() );
+  if( !showHistory )
+    translateInputChanged( ui.translateLine->text() );
 
   updateCurrentGroupProperty();
 }
@@ -1489,7 +1494,8 @@ void MainWindow::updateMatchResults( bool finished )
 void MainWindow::applyMutedDictionariesState()
 {
   // Redo the current search request
-  translateInputChanged( ui.translateLine->text() );
+  if( !showHistory )
+    translateInputChanged( ui.translateLine->text() );
 
   ArticleView *view = getCurrentArticleView();
 
@@ -1567,6 +1573,24 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
           activateWindow();
 
         getCurrentArticleView()->focus();
+
+        return true;
+      }
+
+      if( showHistory && keyEvent->matches( QKeySequence::Delete ) && ui.wordList->count() )
+      {
+        // Delete word from history
+
+        QList<QListWidgetItem *> selectedItems = ui.wordList->selectedItems();
+
+        if( selectedItems.size() )
+        {
+          int index = ui.wordList->row( selectedItems.at( 0 ) );
+          history.removeItem( index );
+          QListWidgetItem *item = ui.wordList->takeItem( index );
+          if( item )
+            delete item;
+        }
 
         return true;
       }
@@ -1696,15 +1720,21 @@ void MainWindow::activeArticleChanged( QString const & id )
 void MainWindow::typingEvent( QString const & t )
 {
   if ( t == "\n" || t == "\r" )
-    focusTranslateLine();
+  {
+    if( ui.translateLine->isEnabled() )
+      focusTranslateLine();
+  }
   else
   {
     if ( ui.searchPane->isFloating() || ui.dictsPane->isFloating() )
       ui.searchPane->activateWindow();
 
-    ui.translateLine->setText( t );
-    ui.translateLine->setFocus();
-    ui.translateLine->setCursorPosition( t.size() );
+    if( ui.translateLine->isEnabled() )
+    {
+      ui.translateLine->setText( t );
+      ui.translateLine->setFocus();
+      ui.translateLine->setCursorPosition( t.size() );
+    }
   }
 }
 
@@ -1732,8 +1762,11 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
   // Add to history
 
-  history.addItem( History::Item( group, inWord.trimmed() ) );
-  history.save();
+  if( !showHistory )
+  {
+      history.addItem( History::Item( group, inWord.trimmed() ) );
+//      history.save();
+  }
 
   updateBackForwardButtons();
 
@@ -1828,21 +1861,29 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
 void MainWindow::toggleMainWindow( bool onlyShow )
 {
-  if ( isHidden() )
+  bool shown = false;
+
+  if ( !isVisible() )
   {
     show();
+    activateWindow();
+    raise();
+    shown = true;
   }
   else
   if ( isMinimized() )
   {
     showNormal();
+    activateWindow();
+    raise();
+    shown = true;
   }
-
+  else
   if ( !isActiveWindow() )
   {
     activateWindow();
     raise();
-    focusTranslateLine();
+    shown = true;
   }
   else
   if ( !onlyShow )
@@ -1852,6 +1893,9 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     else
       showMinimized();
   }
+
+  if ( shown )
+    focusTranslateLine();
 }
 
 void MainWindow::installHotKeys()
@@ -2166,6 +2210,7 @@ void MainWindow::toggleMenuBarTriggered(bool announce)
   menuBar()->setVisible( !cfg.preferences.hideMenubar );
 }
 
+/*
 void MainWindow::historyChanged()
 {
   // Rebuild history menu
@@ -2194,7 +2239,9 @@ void MainWindow::historyChanged()
 
   ui.clearHistory->setEnabled( items.size() );
 }
+*/
 
+/*
 void MainWindow::menuHistoryTriggered( QAction * action )
 {
   if ( action->data().type() != QVariant::Int )
@@ -2211,11 +2258,15 @@ void MainWindow::menuHistoryTriggered( QAction * action )
 
   showTranslationFor( item.word, item.groupId );
 }
+*/
 
 void MainWindow::on_clearHistory_activated()
 {
   history.clear();
   history.save();
+
+  if( showHistory )
+      ui.wordList->clear();
 }
 
 void MainWindow::on_newTab_activated()
@@ -2469,7 +2520,130 @@ ArticleView * MainWindow::getCurrentArticleView()
 
 void MainWindow::wordReceived( const QString & word)
 {
+    if( showHistory )
+        return;
+
     toggleMainWindow( true );
     ui.translateLine->setText( word );
     translateInputFinished();
+}
+
+void MainWindow::on_showHideHistory_activated()
+{
+static bool needHideSearchPane;
+    if( showHistory )
+    {
+        if( needHideSearchPane )
+        {
+            ui.searchPane->hide();
+            needHideSearchPane = false;
+            ui.searchPane->toggleViewAction()->setChecked( false );
+        }
+        ui.searchPane->toggleViewAction()->setEnabled( true );
+
+        ui.showHideHistory->setText( tr( "&Show" ) );
+        showHistory = false;
+
+        connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
+                 this, SLOT( translateInputChanged( QString const & ) ) );
+
+        ui.translateLine->clear();
+        ui.translateLine->setEnabled( true );
+        ui.translateLine->setProperty( "noResults", false );
+        setStyleSheet( styleSheet() );
+
+        ui.wordList->clear();
+
+        history.enableAdd( true );
+    }
+    else
+    {
+        history.enableAdd( false );
+
+        disconnect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
+                    this, SLOT( translateInputChanged( QString const & ) ) );
+
+        if( !ui.searchPane->isVisible() )
+        {
+          ui.searchPane->show();
+          ui.searchPane->toggleViewAction()->setChecked( true );
+          needHideSearchPane = true;
+        }
+        ui.searchPane->toggleViewAction()->setEnabled( false );
+
+        ui.showHideHistory->setText( tr( "&Hide" ) );
+        showHistory = true;
+
+        ui.translateLine->setEnabled( false );
+        ui.translateLine->setText( tr( "History view mode" ) );
+        ui.translateLine->setProperty( "noResults", true );
+        setStyleSheet( styleSheet() );
+
+        ui.wordList->setUpdatesEnabled( false );
+        ui.wordList->clear();
+
+        QList< History::Item > const & items = history.getItems();
+        for( int x = 0; x < items.size(); ++x )
+        {
+          History::Item const * i = &items[ x ];
+          QListWidgetItem * s = new QListWidgetItem( i->word, ui.wordList );
+          if (s->text().at(0).direction() == QChar::DirR)
+              s->setTextAlignment(Qt::AlignRight);
+          if (s->text().at(0).direction() == QChar::DirL)
+              s->setTextAlignment(Qt::AlignLeft);
+          ui.wordList->addItem( s );
+        }
+
+        ui.wordList->setUpdatesEnabled( true );
+    }
+}
+
+void MainWindow::on_exportHistory_activated()
+{
+    QString fileName = QFileDialog::getSaveFileName( this, tr( "Export history to file" ),
+                                                     QDir::homePath(),
+                                                     tr( "Text files (*.txt);;All files (*.*)" ) );
+    if( fileName.size() == 0)
+        return;
+
+    QFile file( fileName );
+
+    for(;;)
+    {
+        if ( !file.open( QFile::WriteOnly | QIODevice::Text ) )
+          break;
+
+        // Write UTF-8 BOM
+        QByteArray line;
+        line.append( 0xEF ).append( 0xBB ).append( 0xBF );
+        if ( file.write( line ) != line.size() )
+          break;
+
+        // Write history
+        QList< History::Item > const & items = history.getItems();
+
+        QList< History::Item >::const_iterator i;
+        for( i = items.constBegin(); i != items.constEnd(); ++i )
+        {
+          line = i->word.toUtf8();
+
+          line.replace( '\n', ' ' );
+          line.replace( '\r', ' ' );
+
+          line += "\n";
+
+          if ( file.write( line ) != line.size() )
+            break;
+        }
+
+        if( i != items.constEnd() )
+          break;
+
+        file.close();
+        mainStatusBar->showMessage( tr( "History export complete" ), 5000 );
+        return;
+    }
+    QString errStr = QString( tr( "Export error: ") ) + file.errorString();
+    file.close();
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
 }

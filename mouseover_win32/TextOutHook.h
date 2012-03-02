@@ -20,7 +20,7 @@ typedef struct TEverythingParams {
 	wchar_t MatchedWordW[256];
 } TEverythingParams;
 
-char* ExtractFromEverything(HWND WND, POINT Pt, int *BeginPos);
+char* ExtractFromEverything(HWND WND, POINT Pt, DWORD *BeginPos);
 
 DLLIMPORT void GetWord (TCurrentMode *P);
 

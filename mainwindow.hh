@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __MAINWINDOW_HH_INCLUDED__
@@ -52,6 +52,8 @@ private:
 
   void commitData();
   bool commitDataCompleted;
+
+  bool showHistory;
 
   QSystemTrayIcon * trayIcon;
 
@@ -299,8 +301,8 @@ private slots:
   void useSmallIconsInToolbarsTriggered();
   void toggleMenuBarTriggered( bool announce = true );
 
-  void historyChanged();
-  void menuHistoryTriggered( QAction * );
+//  void historyChanged();
+//  void menuHistoryTriggered( QAction * );
   void on_clearHistory_activated();
 
   void on_newTab_activated();
@@ -315,6 +317,9 @@ private slots:
   void on_saveArticle_activated();
 
   void on_rescanFiles_activated();
+
+  void on_showHideHistory_activated();
+  void on_exportHistory_activated();
 };
 
 #endif

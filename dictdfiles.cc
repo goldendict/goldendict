@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "dictdfiles.hh"
@@ -302,18 +302,6 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
 } // anonymous namespace
 
-static bool tryPossibleName( string const & name, string & copyTo )
-{
-  if ( File::exists( name ) )
-  {
-    copyTo = name;
-
-    return true;
-  }
-  else
-    return false;
-}
-
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
@@ -340,8 +328,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       dictFiles.push_back( string() );
 
-      if ( !tryPossibleName( baseName + "dict", dictFiles[ 1 ] ) &&
-           !tryPossibleName( baseName + "dict.dz", dictFiles[ 1 ] ) )
+      if ( !File::tryPossibleName( baseName + "dict", dictFiles[ 1 ] ) &&
+           !File::tryPossibleName( baseName + "dict.dz", dictFiles[ 1 ] ) )
       {
         // No corresponding .dict file, skipping
         continue;

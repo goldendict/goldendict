@@ -13,6 +13,6 @@ typedef enum TKnownWndClass {
 } TKnownWndClass;
 
 TKnownWndClass GetWindowType(HWND WND, const char* WNDClass);
-char* TryGetWordFromAnyWindow(TKnownWndClass WndType, HWND WND, POINT Pt, int *BeginPos);
+char* TryGetWordFromAnyWindow(TKnownWndClass WndType, HWND WND, POINT Pt, DWORD *BeginPos);
 
 #endif
