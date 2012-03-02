@@ -28,7 +28,7 @@
         <translation>GNU GPLv3 veya daha üst lisanslıdır</translation>
     </message>
     <message>
-        <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
+        <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -40,25 +40,25 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;GoldenDict&apos;e &lt;b&gt;Hoşgeldiniz&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Program ile çalışmaya başlamak için, 
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;GoldenDict&apos;e &lt;b&gt;Hoşgeldiniz&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Program ile çalışmaya başlamak için, 
 &lt;b&gt;Düzen|Sözlükler&lt;/b&gt; menüsünden, çeşitli Wikipedia siteleri ya da diğer kaynaklardan sözlük dosyaları 
 aramak için bazı dizin yollarını seçerek, sözlük sırasını ayarlayıp veya sözlük grupları 
 oluşturabilirsiniz.&lt;p&gt;Ve sonra kelimelere bakmak için hazırsınız! Bu pencerenin sol bölmesini kullanarak 
-burada &lt;a href=&quot;Working with popup&quot;&gt;ya da diğer aktif uygulamalarda kelime arayabilirsin&lt;/a&gt;. &lt;p&gt; Programı 
-özelleştirmek için, &lt;b&gt;Düzen|Tercihler&lt;/b&gt;  menüsünden mevcut tercihleri kontrol edin. Oradaki tüm ayarların 
+burada &lt;a href=&quot;Working with popup&quot;&gt;ya da diğer aktif uygulamalarda kelime arayabilirsiniz&lt;/a&gt;. &lt;p&gt; Programı 
+özelleştirmek için, &lt;b&gt;Düzen|Tercihler&lt;/b&gt; menüsünden mevcut tercihleri kontrol edin. Oradaki tüm ayarların 
 araç ipuçları var, eğer herhangi bir şey hakkında kararsızsanız (imleci üzerinde bekletip) ipuçlarını okuyarak 
 fikir sahibi olabilirsiniz.&lt;p&gt;Eğer herhangi bir soru, öneri ya da sadece başkalarının ne düşündüğünü merak 
 ediyorsanız veya daha fazla yardıma ihtiyacınız varsa, programın &lt;a
 href=&quot;http://goldendict.org/forum/&quot;&gt;forumu&lt;/a&gt; açıktır.&lt;p&gt;Güncellemeler için programın &lt;a
 href=&quot;http://goldendict.org/&quot;&gt;web sitesinden&lt;/a&gt; güncellemelere bakın. &lt;p&gt;(c) 2008-2011 Konstantin İsakov. 
-GPLv3 veya daha altında lisanslanmıştır.</translation>
+GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Ekranda Kelime Yakala ile Çalışma&lt;/h3&gt;Diğer aktif uygulamalarda kelimeleri aramak için, 
 ilk öne &lt;b&gt;Tercihler&lt;/b&gt;&apos;de &lt;i&gt;&quot;Ekranda Kelime Yakala Özelliğini&quot;&lt;/i&gt; etkinleştirmelisiniz ve daha sonra 
 yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir zaman etkinleştirebilirsiniz veya Görev 
-Çubuğundaki simgesine sağ fare tuşuyla tıklatarak seçimini değiştirebilirsiniz.</translation>
+Çubuğu&apos;ndaki simgesine sağ fare tuşuyla tıklatarak seçimini değiştirebilirsiniz.</translation>
     </message>
     <message>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
@@ -84,12 +84,27 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; grubunda hiçbir çeviri bulunamadı.</translation>
     </message>
+    <message>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;GoldenDict&apos;e &lt;b&gt;Hoşgeldiniz&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Program ile çalışmaya başlamak için, 
+&lt;b&gt;Düzen|Sözlükler&lt;/b&gt; menüsünden, çeşitli Wikipedia siteleri ya da diğer kaynaklardan sözlük dosyaları 
+aramak için bazı dizin yollarını seçerek, sözlük sırasını ayarlayıp veya sözlük grupları 
+oluşturabilirsiniz.&lt;p&gt;Ve sonra kelimelere bakmak için hazırsınız! Bu pencerenin sol bölmesini kullanarak 
+burada &lt;a href=&quot;Working with popup&quot;&gt;ya da diğer aktif uygulamalarda kelime arayabilirsiniz&lt;/a&gt;. &lt;p&gt; Programı 
+özelleştirmek için, &lt;b&gt;Düzen|Tercihler&lt;/b&gt; menüsünden mevcut tercihleri kontrol edin. Oradaki tüm ayarların 
+araç ipuçları var, eğer herhangi bir şey hakkında kararsızsanız (imleci üzerinde bekletip) ipuçlarını okuyarak 
+fikir sahibi olabilirsiniz.&lt;p&gt;Eğer herhangi bir soru, öneri ya da sadece başkalarının ne düşündüğünü merak 
+ediyorsanız veya daha fazla yardıma ihtiyacınız varsa, programın &lt;a
+href=&quot;http://goldendict.org/forum/&quot;&gt;forumu&lt;/a&gt; açıktır.&lt;p&gt;Güncellemeler için programın &lt;a
+href=&quot;http://goldendict.org/&quot;&gt;web sitesinden&lt;/a&gt; güncellemelere bakın. &lt;p&gt;(c) 2008-2011 Konstantin İsakov. 
+GPLv3 veya daha üst lisanslıdır. {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
     <message>
         <source>From </source>
-        <translation>Bundan </translation>
+        <translation> </translation>
     </message>
     <message>
         <source>Compound expressions: </source>
@@ -105,7 +120,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Individual words: </source>
-        <translation>Tekil kelimeler:</translation>
+        <translation>Ayrı kelimeler:</translation>
     </message>
 </context>
 <context>
@@ -357,7 +372,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Düzen|Sözlükler|Kaynaklar|Forvo seçeneğine gidin ve bu hata yok etmek için kendi API anahtarınızı uygulayın.</translation>
+        <translation>Düzen|Sözlükler|Kaynaklar|Forvo seçeneğine gidin ve bu hatayı yok etmek için kendi API anahtarınızı uygulayın.</translation>
     </message>
     <message>
         <source>Female</source>
@@ -468,7 +483,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Sözlükleri, grupların içine sürükleyin ve bırakın.</translation>
+        <translation>Sözlükleri, grupların içine sürükleyin ve &amp;bırakın.</translation>
     </message>
     <message>
         <source>Create language-based groups</source>
@@ -484,7 +499,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Give a name for the new group:</source>
-        <translation>Yeni Gruba bir isim verin:</translation>
+        <translation>Yeni gruba bir isim verin:</translation>
     </message>
     <message>
         <source>Remove all groups</source>
@@ -549,7 +564,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Please wait while indexing dictionary</source>
-        <translation>Lütfen sözlükler başlatılırken bekleyin</translation>
+        <translation>Lütfen sözlükler indeklenirken bekleyin</translation>
     </message>
     <message>
         <source>Please wait...</source>
@@ -1334,7 +1349,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Print Preview</source>
-        <translation>Baskı Önİzleme</translation>
+        <translation>Baskı Önizleme</translation>
     </message>
     <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
@@ -1374,11 +1389,11 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Quit from application</source>
-        <translation>Uygulamada çık</translation>
+        <translation>Uygulamadan çık</translation>
     </message>
     <message>
         <source>&amp;Close To Tray</source>
-        <translation>Kapatıldığında &amp;Görev Çubuğuna yerleş</translation>
+        <translation>Kapatıldığında &amp;Görev Çubuğu&apos;na yerleş</translation>
     </message>
     <message>
         <source>Can&apos;t save article: %1</source>
@@ -1434,7 +1449,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Minimizes the window to tray</source>
-        <translation>Küçültüldüğünde Görev Çubuğuna yerleş</translation>
+        <translation>Küçültüldüğünde Görev Çubuğu&apos;na yerleş</translation>
     </message>
     <message>
         <source>Words Zoom Out</source>
@@ -1590,7 +1605,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Navigation</source>
-        <translation>Gezinti</translation>
+        <translation>Yönlendirici</translation>
     </message>
     <message>
         <source>Results Navigation Pane</source>
@@ -1610,6 +1625,14 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1638,6 +1661,30 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History view mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export history to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text files (*.txt);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History export complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1740,7 +1787,7 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
     </message>
     <message>
         <source>Start to system tray</source>
-        <translation>Görev Çubuğunda başlat</translation>
+        <translation>Görev Çubuğu&apos;nda başlat</translation>
     </message>
     <message>
         <source>Left Shift only</source>
@@ -1790,7 +1837,8 @@ yukarıda &apos;Ekranda Kelime Yakala&apos; simgesine tıklayarak herhangi bir z
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>Normalde, yeni bir sekme açmadan hemen gelir.Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
+        <translation>Normalde, yeni bir sekme açmadan hemen gelir.
+Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Use proxy server</source>
@@ -1907,7 +1955,7 @@ yorum yapabilirsiniz.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translat
     <message>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Ekranda Kelime Yakala  modunun varsayılan olarak etkin olup olmadığını gösterir. Etkinse, program her zaman aktif mod ile başlar.</translation>
+        <translation>Ekranda Kelime Yakala modunun varsayılan olarak etkin olup olmadığını gösterir. Etkinse, program her zaman aktif mod ile başlar.</translation>
     </message>
     <message>
         <source>Left Shift</source>
@@ -1925,11 +1973,11 @@ Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translati
     </message>
     <message>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Ekranda Kelime Yakala&apos;rken kelimleri otomatik telaffuz et</translation>
+        <translation>Ekranda Kelime Yakala&apos;rken kelimeleri otomatik seslendir</translation>
     </message>
     <message>
         <source>Enable scan popup functionality</source>
-        <translation>Ekranda Kelime Yakalama özelliğini etkinleştir</translation>
+        <translation>Ekranda Kelime Yakala özelliğini etkinleştir</translation>
     </message>
     <message>
         <source>Open new tabs after the current one</source>
@@ -1956,7 +2004,10 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>Etkinleştirildinde, her zaman Açılır Pencere&apos;de görüntülenir, ekranda (Windows) bir kelimenin üzerine tutun veya fare (Linux) ile bir kelime seçin. Eğer etkinleştirilmiş ise ana pencere ve araç çubuğunundan açıp kapatabilirsiniz.</translation>
+        <translation>Etkinleştirildinde, her zaman Açılır Pencere&apos;de görüntülenir, 
+ekranda (Windows) bir kelimenin üzerine tutun veya 
+fare (Linux) ile bir kelime seçin. 
+Eğer etkinleştirilmiş ise ana pencere ve araç çubuğunundan açıp kapatabilirsiniz.</translation>
     </message>
     <message>
         <source>Check for new program releases periodically</source>
@@ -1975,7 +2026,7 @@ Aksi takdirde sekmelerin sonuna eklenecektir.</translation>
     </message>
     <message>
         <source>Close to system tray</source>
-        <translation>Kapatılınca Görev Çubuğuna yerleş</translation>
+        <translation>Kapatılınca Görev Çubuğu&apos;na yerleş</translation>
     </message>
     <message>
         <source>System default</source>
@@ -1984,8 +2035,8 @@ Aksi takdirde sekmelerin sonuna eklenecektir.</translation>
     <message>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Etkinleştirildiğinde, bir simge, Görev Çubuğunda alanda kullanılabilecek
- diğer görevleri gerçekleştirmek için ana pencereyi açın.</translation>
+        <translation>Etkinleştirildiğinde, ana pencereyi açın ve diğer görevleri gerçekleştirmek 
+için kullanılabilecek sistem tepsisindeki alanda bir simge belirir.</translation>
     </message>
     <message>
         <source>When this is enabled, the program periodically
@@ -2025,7 +2076,7 @@ after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
         <translation>Hataları önlemek için
 tuşlar sadece belirtilen
-saniye boyunca  izlenmektedir.</translation>
+saniye boyunca izlenmektedir.</translation>
     </message>
     <message>
         <source>Changing Language</source>
@@ -2106,12 +2157,12 @@ formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Start with scan popup turned on</source>
-        <translation>Ekranda Kelime Yakalama&apos;yı etkinleştir</translation>
+        <translation>Ekranda Kelime Yakala&apos;mayı etkinleştir</translation>
     </message>
     <message>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Uygulama, ana penceresini göstermeden, doğrudan Görev Çubuğunda başlar.</translation>
+        <translation>Uygulama, ana penceresini göstermeden, doğrudan Görev Çubuğu&apos;nda başlar.</translation>
     </message>
     <message>
         <source>Shift key</source>
@@ -2279,7 +2330,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>word</source>
-        <translation>Sözük</translation>
+        <translation>Sözcük</translation>
     </message>
     <message>
         <source>Alt+M</source>
@@ -2434,7 +2485,7 @@ Henüz GoldenDict uygulanmamıştır.</translation>
     <message>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation>İngilizce telaffuz göre, Japon harf çevirisinde
+        <translation>İngilizce telaffuza göre, Japon harf çevirisinde
 en yaygın olarak kullanılan yöntem</translation>
     </message>
     <message>
@@ -2489,7 +2540,7 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>&lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt; dan canlı telafuzlar. Bu site, insanların kelime telaffuzlarını kaydetmeye ve paylaşmaya için izin verir. GoldenDict ile onları dinleyebilirsiniz.</translation>
+        <translation>&lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt; dan canlı telafuzlar. Bu site, insanların kelime telaffuzlarını kaydetmeye ve paylaşmaya izin verir. GoldenDict ile onları dinleyebilirsiniz.</translation>
     </message>
     <message>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
@@ -2525,7 +2576,7 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>Confirm removal</source>
-        <translation>Kaldımayı Onayla</translation>
+        <translation>Kaldırmayı Onayla</translation>
     </message>
     <message>
         <source>Language codes (comma-separated):</source>

@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __ARTICLE_MAKER_HH_INCLUDED__
@@ -110,8 +110,8 @@ public:
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
                   std::string const & header );
 
-  virtual void cancel()
-  { finish(); } // Add our own requests cancellation here
+  virtual void cancel();
+//  { finish(); } // Add our own requests cancellation here
 
 private slots:
 

@@ -32,6 +32,7 @@ MOC_DIR = build
 RCC_DIR = build
 LIBS += \
         -lz \
+        -lbz2
 
 win32 { 
     LIBS += -liconv \
@@ -189,7 +190,11 @@ HEADERS += folding.hh \
     dprintf.hh \
     mainstatusbar.hh \
     gdappstyle.hh \
-    ufile.hh
+    ufile.hh \
+    xdxf.hh \
+    sdict.hh \
+    decompress.hh \
+    aard.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -277,14 +282,20 @@ SOURCES += folding.cc \
     maintabwidget.cc \
     mainstatusbar.cc \
     gdappstyle.cc \
-    ufile.cc
+    ufile.cc \
+    xdxf.cc \
+    sdict.cc \
+    decompress.cc \
+    aard.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
-               guids.c
+               guids.c \
+               x64.cc
     HEADERS += mouseover_win32/ThTypes.h \
                wordbyauto.hh \
-               uiauto.hh
+               uiauto.hh \
+               x64.hh
 }
 RESOURCES += resources.qrc \
     flags.qrc
@@ -305,8 +316,11 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/sq_AL.ts \
     locale/pt_BR.ts \
     locale/es_AR.ts \
+    locale/es_BO.ts \
+    locale/es_ES.ts \
     locale/sk_SK.ts \
-    locale/tr_TR.ts
+    locale/tr_TR.ts \
+    locale/qu_WI.ts
 
 # Build version file
 !isEmpty( hasGit ) {
@@ -334,6 +348,8 @@ TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
+
+
 
 
 

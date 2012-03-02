@@ -7,6 +7,10 @@
 #include <oleacc.h>
 #include <servprov.h>
 
+#ifdef INTERFACE
+#undef INTERFACE
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

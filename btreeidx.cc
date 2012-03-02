@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "btreeidx.hh"
@@ -968,12 +968,8 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
 
 void IndexedWords::addSingleWord( wstring const & word, uint32_t articleOffset )
 {
-  vector< WordArticleLink > links( 1, WordArticleLink( Utf8::encode( word ),
-                                                       articleOffset ) );
-
-  insert(
-      IndexedWords::value_type(
-          Utf8::encode( Folding::apply( word ) ), links ) );
+  operator []( Utf8::encode( Folding::apply( word ) ) ).push_back(
+    WordArticleLink( Utf8::encode( word ), articleOffset ) );
 }
 
 IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )

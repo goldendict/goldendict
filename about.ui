@@ -70,7 +70,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</string>
+          <string>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

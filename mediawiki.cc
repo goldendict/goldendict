@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "mediawiki.hh"
@@ -9,6 +9,7 @@
 #include <QtXml>
 #include <list>
 #include "dprintf.hh"
+#include "audiolink.hh"
 
 namespace MediaWiki {
 
@@ -181,7 +182,8 @@ class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 public:
 
   MediaWikiArticleRequest( wstring const & word, vector< wstring > const & alts,
-                           QString const & url, QNetworkAccessManager & mgr );
+                           QString const & url, QNetworkAccessManager & mgr,
+                           string const & wikidictID );
 
   virtual void cancel();
 
@@ -190,6 +192,7 @@ private:
   void addQuery( QNetworkAccessManager & mgr, wstring const & word );
 
   virtual void requestFinished( QNetworkReply * );
+  string dictID;
 };
 
 void MediaWikiArticleRequest::cancel()
@@ -200,8 +203,9 @@ void MediaWikiArticleRequest::cancel()
 MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
                                                   vector< wstring > const & alts,
                                                   QString const & url_,
-                                                  QNetworkAccessManager & mgr ):
-  url( url_ )
+                                                  QNetworkAccessManager & mgr,
+                                                  string const & wikidictID ):
+  url( url_ ), dictID( wikidictID )
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
            this, SLOT( requestFinished( QNetworkReply * ) ),
@@ -290,12 +294,21 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             // Update any special index.php pages to be absolute
             articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
                                    QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
-            // Replace the href="/foo/bar/Baz" to just href="Baz".
-            articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
-  
+
+            // audio url
+            articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)" ),
+                                   QString::fromStdString( addAudioLink( "\"http:\\1\"",this->dictID )+ "<a href=\"http:\\1" ) );
+
             // Add "http:" to image source urls
             articleString.replace( " src=\"//", " src=\"http://" );
 
+            // Replace the href="/foo/bar/Baz" to just href="Baz".
+            articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
+
+            //fix audio
+            articleString.replace( QRegExp("<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
+                                            QString::fromStdString(addAudioLink("\"http://\\1\"",this->dictID)+
+                                           "<a href=\"http://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>"));
             // In those strings, change any underscores to spaces
             for( ; ; )
             {
@@ -305,7 +318,11 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               if ( articleString == before )
                 break;
             }
-  
+
+            //fix file: url
+            articleString.replace( QRegExp("<a\\s+href=\"([^:/\"]+:[^/\"]+\")" ),
+                                   QString( "<a href=\"%1/index.php?title=\\1" ).arg( url ));
+
             QByteArray articleBody = articleString.toUtf8();
   
             DPRINTF( "Article body after: %s\n", articleBody.data() );
@@ -366,7 +383,7 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
     return new DataRequestInstant( false );
   }
   else
-    return new MediaWikiArticleRequest( word, alts, url, netMgr );
+    return new MediaWikiArticleRequest( word, alts, url, netMgr,this->getId() );
 }
 
 }

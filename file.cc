@@ -1,10 +1,11 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "file.hh"
 
 #include <cstring>
 #include <cerrno>
+#include <string>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -24,6 +25,30 @@ enum
   // they consists of many small writes. The default size for the buffer is 64k
   WriteBufferSize = 65536
 };
+
+bool tryPossibleName( std::string const & name, std::string & copyTo )
+{
+  if ( File::exists( name ) )
+  {
+    copyTo = name;
+    return true;
+  }
+  else
+    return false;
+}
+
+void loadFromFile( std::string const & n, std::vector< char > & data )
+{
+  File::Class f( n, "rb" );
+
+  f.seekEnd();
+
+  data.resize( f.tell() );
+
+  f.rewind();
+
+  f.read( &data.front(), data.size() );
+}
 
 bool exists( char const * filename ) throw()
 {

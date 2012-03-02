@@ -50,17 +50,17 @@ static BOOL Is_XP_And_Later()
 	return (VER_PLATFORM_WIN32_NT == stOSVI.dwPlatformId && (5 < stOSVI.dwMajorVersion || (5 == stOSVI.dwMajorVersion && 1 <= stOSVI.dwMinorVersion)));
 }
 
-static char* ExtractWordFromRichEditPos(HWND WND, POINT Pt, int *BeginPos)
+static char* ExtractWordFromRichEditPos(HWND WND, POINT Pt, DWORD *BeginPos)
 {
 	return ExtractFromEverything(WND, Pt, BeginPos);
 }
 
-static char* ExtractWordFromEditPos(HWND hEdit, POINT Pt, int *BeginPos)
+static char* ExtractWordFromEditPos(HWND hEdit, POINT Pt, DWORD *BeginPos)
 {
 	return ExtractFromEverything(hEdit, Pt, BeginPos);
 }
 
-static char* ExtractWordFromIE(HWND WND, POINT Pt, int *BeginPos)
+static char* ExtractWordFromIE(HWND WND, POINT Pt, DWORD *BeginPos)
 {	
 	return ExtractFromEverything(WND, Pt, BeginPos);
 }
@@ -116,7 +116,7 @@ static int GetWordFromConsolePack(TConsoleParams *params)
 	return WordLen;
 }
 
-static char* GetWordFromConsole(HWND WND, POINT Pt, int *BeginPos)
+static char* GetWordFromConsole(HWND WND, POINT Pt, DWORD *BeginPos)
 {
 	TConsoleParams *TP;
 	DWORD pid;
@@ -169,9 +169,9 @@ static char* GetWordFromConsole(HWND WND, POINT Pt, int *BeginPos)
 	return Result;
 }
 
-char* TryGetWordFromAnyWindow(TKnownWndClass WndType, HWND WND, POINT Pt, int *BeginPos)
+char* TryGetWordFromAnyWindow(TKnownWndClass WndType, HWND WND, POINT Pt, DWORD *BeginPos)
 {
-	typedef char* (*GetWordFunction_t)(HWND, POINT, int*);
+	typedef char* (*GetWordFunction_t)(HWND, POINT, DWORD*);
 	const GetWordFunction_t GetWordFunction[]= {
 		ExtractFromEverything,
 		ExtractWordFromRichEditPos,

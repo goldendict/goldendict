@@ -1,4 +1,4 @@
-/* This file is (c) 2011 Tvangeste <i.4m.l33t@yandex.ru>
+/* This file is (c) 2012 Tvangeste <i.4m.l33t@yandex.ru>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "maintabwidget.hh"
@@ -17,11 +17,17 @@ void MainTabWidget::setHideSingleTab(bool hide)
 void MainTabWidget::tabInserted(int index)
 {
   updateTabBarVisibility();
+
+  // Avoid bug in Qt 4.8.0
+  setUsesScrollButtons( count() > 10 );
 }
 
 void MainTabWidget::tabRemoved(int index)
 {
   updateTabBarVisibility();
+
+  // Avoid bug in Qt 4.8.0
+  setUsesScrollButtons( count() > 10 );
 }
 
 void MainTabWidget::updateTabBarVisibility()

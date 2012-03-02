@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2011 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __SCANPOPUP_HH_INCLUDED__
@@ -104,7 +104,7 @@ private:
   QTimer mouseGrabPollTimer;
 
   void handleInputWord( QString const & );
-  void engagePopup();
+  void engagePopup( bool giveFocus = false );
   void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();

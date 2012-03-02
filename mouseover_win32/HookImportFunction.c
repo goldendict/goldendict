@@ -86,14 +86,14 @@ static BOOL HookImportFunction(HMODULE hModule, LPCSTR szImportModule, LPCSTR sz
 			if (bDoHook) {
 				MEMORY_BASIC_INFORMATION mbi_thunk;
 				DWORD dwOldProtect;
-
-				if( !VirtualQuery(pRealThunk, &mbi_thunk, sizeof(MEMORY_BASIC_INFORMATION)) )
+				if( VirtualQuery(pRealThunk, &mbi_thunk, sizeof(MEMORY_BASIC_INFORMATION)) != sizeof(MEMORY_BASIC_INFORMATION))
 					return FALSE;
 				if( !VirtualProtect(mbi_thunk.BaseAddress, mbi_thunk.RegionSize, PAGE_READWRITE, &mbi_thunk.Protect) )
 					return FALSE;
 				if (paOrigFuncs)
-					*paOrigFuncs = (PROC)pRealThunk->u1.Function;
-				pRealThunk->u1.Function = (DWORD)paHookFuncs;
+					*paOrigFuncs = (PROC)InterlockedExchangePointer((PVOID)&(pRealThunk->u1.Function), paHookFuncs);
+				else
+					InterlockedExchangePointer((PVOID)&(pRealThunk->u1.Function), paHookFuncs);
 
 				VirtualProtect(mbi_thunk.BaseAddress, mbi_thunk.RegionSize, mbi_thunk.Protect, &dwOldProtect);
 				return TRUE;
@@ -128,10 +128,10 @@ BOOL HookAPI(LPCSTR szImportModule, LPCSTR szFunc, PROC paHookFuncs, PROC* paOri
 
 	if(hSnapshot == INVALID_HANDLE_VALUE) return FALSE;
 
-	bOk = Module32First(hSnapshot,&me);
+	bOk = Module32First(hSnapshot, &me);
 	while (bOk) {
 		HookImportFunction(me.hModule, szImportModule, szFunc, paHookFuncs, paOrigFuncs);
-		bOk = Module32Next(hSnapshot,&me);
+		bOk = Module32Next(hSnapshot, &me);
 	}
 	CloseHandle(hSnapshot);
 	return TRUE;
