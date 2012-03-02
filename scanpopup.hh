@@ -104,7 +104,7 @@ private:
   QTimer mouseGrabPollTimer;
 
   void handleInputWord( QString const & );
-  void engagePopup( bool giveFocus = false );
+  void engagePopup();
   void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
