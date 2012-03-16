@@ -8,10 +8,6 @@
         <translation>Hakkında</translation>
     </message>
     <message>
-        <source>(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</source>
-        <translation type="obsolete">(c) 2008-2011 Konstantin Isakov (ikm@users.berlios.de)</translation>
-    </message>
-    <message>
         <source>GoldenDict dictionary lookup program, version </source>
         <translation>GoldenDict, sözlük arama programı, sürüm </translation>
     </message>
@@ -29,7 +25,7 @@
     </message>
     <message>
         <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished"></translation>
+        <translation>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
 </context>
 <context>
@@ -37,21 +33,6 @@
     <message>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Sonra başka bir uygulamada aramak istediğiniz kelimenin üzerine imleci durdurun ve bir pencere açılır.</translation>
-    </message>
-    <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;GoldenDict&apos;e &lt;b&gt;Hoşgeldiniz&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Program ile çalışmaya başlamak için, 
-&lt;b&gt;Düzen|Sözlükler&lt;/b&gt; menüsünden, çeşitli Wikipedia siteleri ya da diğer kaynaklardan sözlük dosyaları 
-aramak için bazı dizin yollarını seçerek, sözlük sırasını ayarlayıp veya sözlük grupları 
-oluşturabilirsiniz.&lt;p&gt;Ve sonra kelimelere bakmak için hazırsınız! Bu pencerenin sol bölmesini kullanarak 
-burada &lt;a href=&quot;Working with popup&quot;&gt;ya da diğer aktif uygulamalarda kelime arayabilirsiniz&lt;/a&gt;. &lt;p&gt; Programı 
-özelleştirmek için, &lt;b&gt;Düzen|Tercihler&lt;/b&gt; menüsünden mevcut tercihleri kontrol edin. Oradaki tüm ayarların 
-araç ipuçları var, eğer herhangi bir şey hakkında kararsızsanız (imleci üzerinde bekletip) ipuçlarını okuyarak 
-fikir sahibi olabilirsiniz.&lt;p&gt;Eğer herhangi bir soru, öneri ya da sadece başkalarının ne düşündüğünü merak 
-ediyorsanız veya daha fazla yardıma ihtiyacınız varsa, programın &lt;a
-href=&quot;http://goldendict.org/forum/&quot;&gt;forumu&lt;/a&gt; açıktır.&lt;p&gt;Güncellemeler için programın &lt;a
-href=&quot;http://goldendict.org/&quot;&gt;web sitesinden&lt;/a&gt; güncellemelere bakın. &lt;p&gt;(c) 2008-2011 Konstantin İsakov. 
-GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
@@ -86,7 +67,7 @@ tıklatarak seçimini değiştirebilirsiniz.</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;GoldenDict&apos;e &lt;b&gt;Hoşgeldiniz&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Program ile çalışmaya başlamak için, 
+        <translation>&lt;h3 align=&quot;center&quot;&gt;GoldenDict&apos;e &lt;b&gt;Hoşgeldiniz&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Program ile çalışmaya başlamak için, 
 &lt;b&gt;Düzen|Sözlükler&lt;/b&gt; menüsünden, çeşitli Wikipedia siteleri ya da diğer kaynaklardan sözlük dosyaları 
 aramak için bazı dizin yollarını seçerek, sözlük sırasını ayarlayıp veya sözlük grupları 
 oluşturabilirsiniz.&lt;p&gt;Ve sonra kelimelere bakmak için hazırsınız! Bu pencerenin sol bölmesini kullanarak 
@@ -96,8 +77,8 @@ araç ipuçları var, eğer herhangi bir şey hakkında kararsızsanız (imleci 
 fikir sahibi olabilirsiniz.&lt;p&gt;Eğer herhangi bir soru, öneri ya da sadece başkalarının ne düşündüğünü merak 
 ediyorsanız veya daha fazla yardıma ihtiyacınız varsa, programın &lt;a
 href=&quot;http://goldendict.org/forum/&quot;&gt;forumu&lt;/a&gt; açıktır.&lt;p&gt;Güncellemeler için programın &lt;a
-href=&quot;http://goldendict.org/&quot;&gt;web sitesinden&lt;/a&gt; güncellemelere bakın. &lt;p&gt;(c) 2008-2011 Konstantin İsakov. 
-GPLv3 veya daha üst lisanslıdır. {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
+href=&quot;http://goldendict.org/&quot;&gt;web sitesinden&lt;/a&gt; güncellemelere bakın. &lt;p&gt;(c) 2008-2012 Konstantin İsakov. 
+GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
 </context>
 <context>
@@ -220,27 +201,27 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tümünü vurgul&amp;ayın</translation>
     </message>
     <message>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaynağı yenile</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ses</translation>
     </message>
     <message>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanım: %1</translation>
     </message>
     <message>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Referans gösterilen ses programı yok.</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">UYARI: %1</translation>
+        <translation>UYARI: %1</translation>
     </message>
 </context>
 <context>
@@ -354,7 +335,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     <name>ExternalViewer</name>
     <message>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>görüntüleyici program ismi boş</translation>
     </message>
 </context>
 <context>
@@ -1333,10 +1314,6 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <translation>F2</translation>
     </message>
     <message>
-        <source>F3</source>
-        <translation type="obsolete">F3</translation>
-    </message>
-    <message>
         <source>F4</source>
         <translation>F4</translation>
     </message>
@@ -1409,10 +1386,6 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <translation>Tüm Sekmeleri Kapat</translation>
     </message>
     <message>
-        <source>&amp;Dictionaries...</source>
-        <translation type="obsolete">&amp;Sözlükler...</translation>
-    </message>
-    <message>
         <source>&amp;About</source>
         <translation>&amp;Hakkında</translation>
     </message>
@@ -1479,10 +1452,6 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     <message>
         <source>Zoom Out</source>
         <translation>Uzaklaş</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation type="obsolete">&amp;Gruplar...</translation>
     </message>
     <message>
         <source>Show &amp;Main Window</source>
@@ -1610,83 +1579,83 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonuçlar Gezinti Paneli</translation>
     </message>
     <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Dictionaries...    F3</source>
+        <translation>&amp;Sözlükler... 	F3</translation>
     </message>
     <message>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Sekme</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Yapılandırma Klasörü</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Göster</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Gn&amp;nder</translation>
     </message>
     <message>
         <source>Show Small Icons in Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Araç Çubuklarında Küçük İkonları Göster</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Menü Çubuğu</translation>
     </message>
     <message>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlükler Bulundu:</translation>
     </message>
     <message>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekmeler Listesini Aç</translation>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir menü çubuğunu gizlemeyi seçtiniz. Geri göstermek için %1 kullanın.</translation>
     </message>
     <message>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>G&amp;izle</translation>
     </message>
     <message>
         <source>History view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmişi görüntüleme modu</translation>
     </message>
     <message>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş dosyasını gönder</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Metin Dosyaları (*.txt);;Tüm Dosyalar (*.*)</translation>
     </message>
     <message>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş gönderimi tamam</translation>
     </message>
     <message>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Göndermede hata: </translation>
     </message>
 </context>
 <context>
@@ -2174,134 +2143,150 @@ its main window.</source>
     </message>
     <message>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnızca tek bir sekme açtığınızda ana sekme çubuğunun görmek istemiyorsanız bu seçeneği seçin.</translation>
     </message>
     <message>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tek sekmeyi gizle</translation>
     </message>
     <message>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalde, ESC tuşuna basarak odak çeviri satırına hareket eder.
+Bununla birlikte ilgili ana pencere gizlenmiş olacaktır.</translation>
     </message>
     <message>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>ESC tuşu ana pencereyi gizler</translation>
     </message>
     <message>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana pencereye çevrilmiş kelime göndermek yerine açılır pencerede göster</translation>
     </message>
     <message>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana pencereye çevrilmiş kelime gönder</translation>
     </message>
     <message>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkinleştirildiğinde, güvenilen Flash veya diğer web eklentileri
+çevrimiçi sözlüklerden telaffuzlar dinlemek için izin verecek.
+Eklenti, bu seçeneğin çalışması için yüklü olmalıdır.</translation>
     </message>
     <message>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Web eklentilerini etkinleştir</translation>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Geli&amp;şmiş</translation>
     </message>
     <message>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Açılır Pencerede Tarama ekstra teknolojileri</translation>
     </message>
     <message>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Imlecin altındaki kelimeyi almak için IAccessibleEx teknolojisini
+ kullanmayı deneyin.
+Bu teknoloji onu destekleyen (örneğin Internet Explorer 9 için)
+ bazı programlar ile çalışır.
+Siz bu tür programları kullanmak istemiyorsanız bu seçeneği 
+ seçmeyebilirsiniz.</translation>
     </message>
     <message>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;IAccessibleEx Kullan</translation>
     </message>
     <message>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Imlecin altındaki kelimeyi almak için UI Automation teknolojisini
+ kullanmayı deneyin.
+Bu teknoloji onu destekleyen bazı programlar ile çalışır.
+Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
+ seçmeyebilirsiniz.</translation>
     </message>
     <message>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;UIAutomation Kullan</translation>
     </message>
     <message>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Imlecin altındaki kelimeyi almak için özel GoldenDict mesaj teknolojisini
+ kullanmayı deneyin.
+Bu teknoloji onu destekleyen bazı programlar ile çalışır.
+Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
+ seçmeyebilirsiniz.</translation>
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;GoldenDict Mesajını Kullan</translation>
     </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ses</translation>
     </message>
     <message>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Düz Metin</translation>
     </message>
     <message>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>ÖnEk Eşleme</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilinmeyen</translation>
     </message>
 </context>
 <context>
     <name>Programs::RunInstance</name>
     <message>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiçbir program ismi, verilmedi.</translation>
     </message>
     <message>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program çöktü.</translation>
     </message>
     <message>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program %1 çıkış koduna geri döndü.</translation>
     </message>
 </context>
 <context>
     <name>ProgramsModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Etkin</translation>
+        <translation>Etkin</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tip</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">İsim</translation>
+        <translation>İsim</translation>
     </message>
     <message>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Komut Satırı</translation>
     </message>
 </context>
 <context>
@@ -2364,11 +2349,11 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana pencereye kelimeyi gönder (Alt+W)</translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
 </context>
 <context>
@@ -2544,7 +2529,7 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Herhangi bir web sitesi. Metin, %GDWORD% arama kelimesi ile değiştirilir:</translation>
+        <translation>Herhangi bir web sitesi. Metin, %GDWORD% arama kelimesi ile değiştirilecektir:</translation>
     </message>
     <message>
         <source>(not available in portable version)</source>
@@ -2625,15 +2610,15 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programlar</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Her türlü harici programlar. Metin %GDWORD% arama kelimesi ile değiştirilecektir. Bu kelime de standart girişten girecektir.</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Programı &lt;b&gt;%1&lt;/b&gt; listeden çıkar?</translation>
     </message>
 </context>
 <context>
