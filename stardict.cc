@@ -336,7 +336,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       string articleText = "<div class=\"sdct_h\">" + string( resource, size ) + "</div>";
 
       return ( QString::fromUtf8( articleText.c_str() )
-               .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']*)([^\"']*)", Qt::CaseInsensitive ),
+               .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
                          "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
                .toUtf8().data() );
     }
