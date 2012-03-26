@@ -5,7 +5,7 @@
 #define __LANGUAGE_HH_INCLUDED__
 
 #include <QString>
-
+#include "wstring_qt.hh"
 /// Language-specific stuff - codes, names, ids etc.
 namespace Language {
 
@@ -37,6 +37,14 @@ QString countryCodeForId( Id );
 // All other functions are to be used from LangCoder, which is supposed to
 // be migrated here over time.
 
+struct BabylonLang{
+    Id id;
+    const QString contryCode;
+    const QString englishName;
+    const char * localizedName;
+};
+BabylonLang getBabylonLangByIndex( int index );
+quint32 findBlgLangIDByEnglishName( gd::wstring const & lang );
 }
 
 #endif

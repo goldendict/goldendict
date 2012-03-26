@@ -361,8 +361,50 @@ Db::Db()
 
 }
 
+/// babylon languages
+#ifndef blgCode2Int
+#define blgCode2Int( index, code0, code1 ) (((uint32_t)index) << 16 ) + (((uint32_t)code1) << 8 ) + (uint32_t)code0
+#endif
+const BabylonLang BabylonDb[] ={
+    { blgCode2Int( 1, 'z', 'h' ), "tw", "Traditional Chinese", QT_TR_NOOP( "Traditional Chinese" ) },
+    { blgCode2Int( 2, 'z', 'h' ), "cn", "Simplified Chinese", QT_TR_NOOP( "Simplified Chinese" ) },
+    { blgCode2Int( 3, 0, 0 ), "other", "Other", QT_TR_NOOP( "Other" ) },
+    { blgCode2Int( 4, 'z', 'h' ), "cn", "Other Simplified Chinese dialects", QT_TR_NOOP( "Other Simplified Chinese dialects" ) },
+    { blgCode2Int( 5, 'z', 'h' ), "tw", "Other Traditional Chinese dialects", QT_TR_NOOP( "Other Traditional Chinese dialects" ) },
+    { blgCode2Int( 6, 0, 0 ), "other", "Other Eastern-European languages", QT_TR_NOOP( "Other Eastern-European languages" ) },
+    { blgCode2Int( 7, 0, 0 ), "other", "Other Western-European languages", QT_TR_NOOP( "Other Western-European languages" )},
+    { blgCode2Int( 8, 'r', 'u' ), "ru", "Other Russian languages", QT_TR_NOOP( "Other Russian languages" ) },
+    { blgCode2Int( 9, 'j', 'a' ), "jp", "Other Japanese languages", QT_TR_NOOP( "Other Japanese languages" ) },
+    { blgCode2Int( 10, 0, 0 ), "other", "Other Baltic languages", QT_TR_NOOP( "Other Baltic languages" )},
+    { blgCode2Int( 11, 'e', 'l' ), "gr", "Other Greek languages", QT_TR_NOOP( "Other Greek languages" ) },
+    { blgCode2Int( 12, 'k', 'o' ), "kr", "Other Korean dialects", QT_TR_NOOP( "Other Korean dialects" ) },
+    { blgCode2Int( 13, 't', 'r' ), "tr", "Other Turkish dialects", QT_TR_NOOP( "Other Turkish dialects" ) },
+    { blgCode2Int( 14, 't', 'h' ), "th", "Other Thai dialects", QT_TR_NOOP( "Other Thai dialects" ) },
+    { blgCode2Int( 15, 0, 0 ), "dz", "Tamazight", QT_TR_NOOP( "Tamazight" ) }
+};
+
+BabylonLang getBabylonLangByIndex( int index )
+{
+    return BabylonDb[ index ];
+}
+
+quint32 findBlgLangIDByEnglishName( gd::wstring const & lang )
+{
+    QString enName = gd::toQString( lang );
+    for( int idx=0;idx < 15 ; ++idx )
+    {
+        if( QString::compare( BabylonDb[ idx ].englishName, enName, Qt::CaseInsensitive  ) == 0 )
+            return BabylonDb[ idx ].id;
+    }
+    return 0;
+}
+
 QString englishNameForId( Id id )
 {
+    if(  id >= 0x010000 && id <= 0x0fffff ) //babylon
+    {
+        return BabylonDb[ ( (id >> 16 ) & 0x0f) - 1 ].englishName;
+    }
   map< QString, QString >::const_iterator i =
       Db::instance().getIso2ToEnglish().find( LangCoder::intToCode2( id ) );
 
@@ -374,6 +416,10 @@ QString englishNameForId( Id id )
 
 QString localizedNameForId( Id id )
 {
+    if(  id >= 0x010000 && id <= 0x0fffff ) //babylon
+    {
+        return QCoreApplication::translate( "Language", BabylonDb[ ( ( id >> 16 ) & 0x0f ) - 1 ].localizedName );
+    }
   map< QString, QString >::const_iterator i =
       Db::instance().getIso2ToLocalized().find( LangCoder::intToCode2( id ) );
 
@@ -385,6 +431,10 @@ QString localizedNameForId( Id id )
 
 QString countryCodeForId( Id id )
 {
+    if(  id >= 0x010000 && id <= 0x0fffff ) //babylon
+    {
+        return BabylonDb[ ( ( id >> 16 ) & 0x0f ) - 1 ].contryCode;
+    }
   map< QString, QString >::const_iterator i =
       Db::instance().getIso2ToCountry().find( LangCoder::intToCode2( id ) );
 

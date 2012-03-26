@@ -217,12 +217,12 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
             m_copyright = headword;
             break;
           case 7:
-            headword = bgl_language[(unsigned char)(block.data[5])];
-            m_sourceLang = headword;
+            m_sourceLang = bgl_language[(unsigned char)(block.data[5])];
+            //m_sourceLang = headword;
             break;
           case 8:
-            headword = bgl_language[(unsigned char)(block.data[5])];
-            m_targetLang = headword;
+            m_targetLang = bgl_language[(unsigned char)(block.data[5])];
+            //m_targetLang = headword;
             break;
           case 9:
             headword.reserve( block.length - 2 );
