@@ -95,6 +95,7 @@ mac {
     # if you want the support for PowerPC and/or Mac OS X 10.4
     # CONFIG += x86 x86_64 ppc
     LIBS = -lz \
+        -lbz2 \
         -liconv \
         -lvorbisfile \
         -lvorbis \
