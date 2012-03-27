@@ -1009,7 +1009,9 @@ void MainWindow::tabCloseRequested( int x )
   delete w;
 
   //activate a tab in accordance with MRU
-  ui.tabWidget->setCurrentWidget(mruList.at(0));
+  if ( mruList.size() > 0 ) {
+    ui.tabWidget->setCurrentWidget(mruList.at(0));
+  }
 
   // if everything is closed, add new tab
   if ( ui.tabWidget->count() == 0 )
