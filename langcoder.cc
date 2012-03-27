@@ -1,6 +1,7 @@
 #include "langcoder.hh"
 #include "folding.hh"
 #include "wstring_qt.hh"
+#include "language.hh"
 
 #include <cctype>
 
@@ -90,7 +91,8 @@ quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
     }
   }
 
-  return 0;
+  return Language::findBlgLangIDByEnglishName( lang );
+  //return 0;
 }
 
 quint32 LangCoder::findIdForLanguageCode3( const char * code3 )
