@@ -3,3 +3,7 @@ MainWindow #searchPane #translateLine, MainWindow #searchPane #wordList, MainWin
   background: white;
 }
 
+MainWindow #searchPane #translateLine
+{
+  font-weight: bold;
+}

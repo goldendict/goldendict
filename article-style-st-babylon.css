@@ -1,6 +1,57 @@
-body{background: ##FFFFFF;font-size: 16px;}
-::selection{background:#4492E8;color:#fff;}
-.gddictname{border:none;background:#EBEBEB;border-top-left-radius:8px;border-top-right-radius:8px;padding-top:8px;padding-bottom:5px}
-.gddicticon{display:inline;padding-right:2px;}
-.gddicticon img{border:0;height:16px;}
-.gdfromprefix{display:none}
+body
+{
+	background: white;
+	font-size: 13px;
+}
+
+h3 {
+	font-size: 1em;
+}
+
+::selection
+{
+	background: #4492E8;
+	color: white;
+}
+
+/* Dictionary's name heading */
+.gddictname
+{
+	font-weight: normal; 
+	font-size: 11px;
+	border: none; 
+	border-top-left-radius: 8px; 
+	border-top-right-radius: 0px;
+	background: #F0EDED;
+	padding-top: 5px; 
+	padding-bottom: 5px;
+}
+
+.gddicticon
+{
+	display: inline;
+	padding-right: 5px;
+}
+
+.gddicticon img
+{
+	border: 0;
+	height: 16px;
+	vertical-align: text-top;
+}
+
+/* The 'From ' string which preceeds dictionary name in the heading */
+.gdfromprefix
+{
+	display: none;
+}
+
+.bglpos { color: black; font-weight: bold; font-size: 11px; background: #F0EDED; display: inline; }
+
+.bgltrn { color: #808080; font-size: 12px; display: inline; }
+
+a, .mwiki a
+{
+	color: #0066CC;
+}
+
