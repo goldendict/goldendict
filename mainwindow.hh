@@ -23,6 +23,7 @@
 #include "history.hh"
 #include "hotkeywrapper.hh"
 #include "mainstatusbar.hh"
+#include "mruqmenu.hh"
 
 #ifdef Q_WS_X11
 #include <fixx11h.h>
@@ -83,7 +84,10 @@ private:
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
   QMenu trayIconMenu;
-  QMenu *tabListMenu, *tabMenu;
+  QMenu *tabMenu;
+  MRUQMenu *tabListMenu;
+  //List that contains indexes of tabs arranged in a most-recently-used order
+  QList<QWidget*> mruList;
   QToolButton addTab, *tabListButton;
   Config::Class & cfg;
   Config::Events configEvents;
@@ -168,6 +172,7 @@ private:
   bool handleBackForwardMouseButtons(QMouseEvent *ev);
 
   ArticleView * getCurrentArticleView();
+  void ctrlTabPressed();
 
 private slots:
 
@@ -197,6 +202,7 @@ private slots:
   void closeRestTabs();
   void switchToNextTab();
   void switchToPrevTab();
+  void ctrlReleased();
 
   // Handling of active tab list
   void createTabList();

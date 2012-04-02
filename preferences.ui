@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>572</width>
-    <height>357</height>
+    <height>376</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,6 +91,13 @@ be the last ones.</string>
             </property>
             <property name="text">
              <string>Hide single tab</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="mruTabOrder">
+            <property name="text">
+             <string>Ctrl-Tab navigates tabs in MRU order</string>
             </property>
            </widget>
           </item>

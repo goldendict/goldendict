@@ -140,6 +140,7 @@ struct Preferences
   bool newTabsOpenAfterCurrentOne;
   bool newTabsOpenInBackground;
   bool hideSingleTab;
+  bool mruTabOrder;
   bool hideMenubar;
   bool enableTrayIcon;
   bool startToTray;

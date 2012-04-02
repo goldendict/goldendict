@@ -195,7 +195,8 @@ HEADERS += folding.hh \
     xdxf.hh \
     sdict.hh \
     decompress.hh \
-    aard.hh
+    aard.hh \
+    mruqmenu.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -287,7 +288,8 @@ SOURCES += folding.cc \
     xdxf.cc \
     sdict.cc \
     decompress.cc \
-    aard.cc
+    aard.cc \
+    mruqmenu.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
