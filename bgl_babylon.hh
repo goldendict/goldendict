@@ -27,6 +27,12 @@
 #include <string>
 #include <vector>
 #include <qglobal.h>
+#ifdef _MSC_VER
+#include <stdint_msvc.h>
+#else
+#include <stdint.h>
+#endif
+
 //const std::string bgl_language[] = {
 #ifndef blgCode2Int
 #define blgCode2Int( index, code0, code1 ) (((uint32_t)index) << 16 ) + (((uint32_t)code1) << 8 ) + (uint32_t)code0
