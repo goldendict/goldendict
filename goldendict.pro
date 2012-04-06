@@ -90,6 +90,7 @@ unix:!mac {
     INSTALLS += desktops2
 }
 mac {
+    TARGET = GoldenDict
     # Uncomment this line to make a universal binary.
     # You will need to use Xcode 3 and Qt Carbon SDK
     # if you want the support for PowerPC and/or Mac OS X 10.4
@@ -104,8 +105,10 @@ mac {
     INCLUDEPATH = maclibs/include
     LIBS += -Lmaclibs/lib
     ICON = icons/macicon.icns
-    QMAKE_POST_LINK = mkdir -p goldendict.app/Contents/Frameworks & \
-        cp -nR maclibs/lib/ goldendict.app/Contents/Frameworks/
+    QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
+                      cp -nR maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
+                      mkdir -p GoldenDict.app/Contents/MacOS/locale & \
+                      cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
