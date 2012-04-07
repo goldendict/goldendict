@@ -94,6 +94,8 @@ unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip
 
 #else
 
+#include <unistd.h>
+
 unsigned int ProcessWrapper::currentProcessId()
 {
     return getpid();
