@@ -10,6 +10,7 @@ typedef enum TKnownWndClass {
 	kwcSingleLineEdit,
 	kwcInternetExplorer_Server,
 	kwcConsole,
+	kwcConEmu,
 } TKnownWndClass;
 
 TKnownWndClass GetWindowType(HWND WND, const char* WNDClass);

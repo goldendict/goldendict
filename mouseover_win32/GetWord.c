@@ -13,6 +13,7 @@ TKnownWndClass GetWindowType(HWND WND, const char* WNDClass)
 		"INTERNET EXPLORER_SERVER",
 		"CONSOLEWINDOWCLASS", // NT
 		"TTYGRAB", // 9x
+		"VIRTUALCONSOLECLASS", // ConEmu
 		};
 	TKnownWndClass KnownClasses[] = {
 		kwcRichEdit,
@@ -22,16 +23,22 @@ TKnownWndClass GetWindowType(HWND WND, const char* WNDClass)
 		kwcInternetExplorer_Server,
 		kwcConsole,
 		kwcConsole,
+		kwcConEmu,
 	};
 	int i;
-	for (i=0; i<7; i++) {
+	for (i=0; i<8; i++) {
 		if (_stricmp(WNDClass, StrKnownClasses[i])==0)
 			break;
 	}
-	if (i<7) {
+	if (i<8) {
 		if (KnownClasses[i] == kwcMultiLineEdit) {
 			if ((GetWindowLong(WND, GWL_STYLE) & ES_MULTILINE) == 0)
 				return kwcSingleLineEdit;
+		}
+		else if (KnownClasses[i] == kwcConEmu) {
+			HWND hConsole = (HWND)(DWORD_PTR)GetWindowLongPtr(WND, 0);
+			if (!hConsole || !IsWindow(hConsole))
+				return kwcUnknown;
 		}
 		return KnownClasses[i];
 	} else
@@ -169,6 +176,26 @@ static char* GetWordFromConsole(HWND WND, POINT Pt, DWORD *BeginPos)
 	return Result;
 }
 
+static char* GetWordFromConEmu(HWND WND, POINT Pt, DWORD *BeginPos)
+{
+	HWND hConsole = (HWND)(DWORD_PTR)GetWindowLongPtr(WND, 0);
+	if (!hConsole || !IsWindow(hConsole))
+		return NULL;
+	
+	RECT rcConEmu;
+	if (!GetWindowRect(WND, &rcConEmu) || rcConEmu.right <= rcConEmu.left || rcConEmu.bottom <= rcConEmu.top)
+		return NULL;
+	RECT rcConsole;
+	if (!GetClientRect(hConsole, &rcConsole) || rcConsole.right <= rcConsole.left || rcConsole.bottom <= rcConsole.top)
+		return NULL;
+
+	POINT ptReal = { (Pt.x - rcConEmu.left) * (rcConsole.right - rcConsole.left + 1) / ( rcConEmu.right - rcConEmu.left + 1),
+					(Pt.y - rcConEmu.top) * (rcConsole.bottom - rcConsole.top + 1 ) / (rcConEmu.bottom - rcConEmu.top + 1) };
+	ClientToScreen(hConsole, &ptReal);
+
+	return GetWordFromConsole(hConsole, ptReal, BeginPos);
+}
+
 char* TryGetWordFromAnyWindow(TKnownWndClass WndType, HWND WND, POINT Pt, DWORD *BeginPos)
 {
 	typedef char* (*GetWordFunction_t)(HWND, POINT, DWORD*);
@@ -179,6 +206,7 @@ char* TryGetWordFromAnyWindow(TKnownWndClass WndType, HWND WND, POINT Pt, DWORD 
 		ExtractWordFromEditPos,
 		ExtractWordFromIE,
 		GetWordFromConsole,
+		GetWordFromConEmu,
 	};
 	return GetWordFunction[WndType](WND, Pt, BeginPos);
 }
