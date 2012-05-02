@@ -69,7 +69,7 @@ tıklatarak seçimini değiştirebilirsiniz.</translation>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;GoldenDict&apos;e &lt;b&gt;Hoşgeldiniz&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Program ile çalışmaya başlamak için, 
 &lt;b&gt;Düzen|Sözlükler&lt;/b&gt; menüsünden, çeşitli Wikipedia siteleri ya da diğer kaynaklardan sözlük dosyaları 
-aramak için bazı dizin yollarını seçerek, sözlük sırasını ayarlayıp veya sözlük grupları 
+aramak için bazı dizin yollarını seçerek, sözlük sırasını ayarlayıp sözlük grupları 
 oluşturabilirsiniz.&lt;p&gt;Ve sonra kelimelere bakmak için hazırsınız! Bu pencerenin sol bölmesini kullanarak 
 burada &lt;a href=&quot;Working with popup&quot;&gt;ya da diğer aktif uygulamalarda kelime arayabilirsiniz&lt;/a&gt;. &lt;p&gt; Programı 
 özelleştirmek için, &lt;b&gt;Düzen|Tercihler&lt;/b&gt; menüsünden mevcut tercihleri kontrol edin. Oradaki tüm ayarların 
@@ -132,7 +132,7 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
-        <translation>Bağlantığı Harıci &amp;Tarayıcıda Aç</translation>
+        <translation>Bağlantıyı Harici &amp;Tarayıcıda Aç</translation>
     </message>
     <message>
         <source>The referenced resource failed to download.</source>
@@ -520,7 +520,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>%1 Morphology</source>
-        <translation>%1  Morfoloji</translation>
+        <translation>%1 Morfoloji</translation>
     </message>
 </context>
 <context>
@@ -1575,15 +1575,15 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Navigation</source>
-        <translation>Yönlendirici</translation>
+        <translation>Gezinti</translation>
     </message>
     <message>
         <source>Results Navigation Pane</source>
-        <translation>Sonuçlar Gezinti Paneli</translation>
+        <translation>Gezinti Panelinde Sonuçlar</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...    F3</source>
-        <translation>&amp;Sözlükler... 	F3</translation>
+        <translation>&amp;Sözlükler...     F3</translation>
     </message>
     <message>
         <source>New Tab</source>
@@ -1603,7 +1603,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation>Gn&amp;nder</translation>
+        <translation>Gön&amp;nder</translation>
     </message>
     <message>
         <source>Show Small Icons in Toolbars</source>
@@ -1746,7 +1746,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Recursive</source>
-        <translation>Klasör Değişiklerini İzle</translation>
+        <translation>Klasör Değişikliklerini İzle</translation>
     </message>
 </context>
 <context>
@@ -1867,7 +1867,8 @@ the application.</source>
     <message>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>Bir proxy sunucusu programın tüm ağ bağlantıları için kullanılacaksa etkinleştirin.</translation>
+        <translation>Eğer tüm programın ağ istekleri için bir
+proxy sunucusu kullanmak istiyorsanız etkinleştirin.</translation>
     </message>
     <message>
         <source>Interface language:</source>
@@ -1875,7 +1876,7 @@ for all program&apos;s network requests.</source>
     </message>
     <message>
         <source>Left Ctrl only</source>
-        <translation>Sadece Sol CTRL</translation>
+        <translation>Sadece Sol Ctrl</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
@@ -1944,7 +1945,7 @@ Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translati
     </message>
     <message>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Ekranda Kelime Yakalarken kelimeleri otomatik seslendir</translation>
+        <translation>Ekranda Kelime Yakala&apos;rken kelimeleri otomatik seslendir</translation>
     </message>
     <message>
         <source>Enable scan popup functionality</source>
@@ -1975,7 +1976,7 @@ you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
         <translation>Etkinleştirildinde, çeviri her zaman Açılır Pencere&apos;de görüntülenir, ekranda
-(Windows) bir kelimenin üzerine tutun veya fare (Linux) ile bir kelime seçin.
+bir kelimenin üzerine tutun (Windows) veya fare ile bir kelime seçin (Linux).
 Eğer etkinleştirilmiş ise ana pencere ve araç çubuğunundan açıp kapatabilirsiniz.</translation>
     </message>
     <message>
@@ -2106,7 +2107,7 @@ formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Pronunciation</source>
-        <translation>Telaffuz</translation>
+        <translation>Telaffuz (Seslendirme)</translation>
     </message>
     <message>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
@@ -2152,7 +2153,7 @@ its main window.</source>
     <message>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation>Normalde, ESC tuşuna basarak odak çeviri satırına hareket eder.
+        <translation>Normalde, ESC tuşuna basarak odak çeviri satırına geçer.
 Bununla birlikte ilgili ana pencere gizlenmiş olacaktır.</translation>
     </message>
     <message>
@@ -2185,7 +2186,7 @@ Eklenti, bu seçeneğin çalışması için yüklü olmalıdır.</translation>
     </message>
     <message>
         <source>ScanPopup extra technologies</source>
-        <translation>Açılır Pencerede Tarama ekstra teknolojileri</translation>
+        <translation>Açılır Pencerede Ekstra Tarama teknolojileri</translation>
     </message>
     <message>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
@@ -2201,7 +2202,7 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Use &amp;IAccessibleEx</source>
-        <translation>&amp;IAccessibleEx Kullan</translation>
+        <translation>&amp;IAccessibleEx Teknolojisini Kullan</translation>
     </message>
     <message>
         <source>Try to use UI Automation technology to retrieve word under cursor.
@@ -2215,7 +2216,7 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Use &amp;UIAutomation</source>
-        <translation>&amp;UIAutomation Kullan</translation>
+        <translation>&amp;UIAutomation Teknolojisini Kullan</translation>
     </message>
     <message>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
@@ -2229,7 +2230,7 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
-        <translation>&amp;GoldenDict Mesajını Kullan</translation>
+        <translation>&amp;GoldenDict Mesaj Teknolojisini Kullan</translation>
     </message>
 </context>
 <context>
@@ -2449,7 +2450,7 @@ Not implemented yet in GoldenDict.</source>
         <translation>Nippon sistemine dayalı, çağdaş Japon için değiştirilmiş.
 ISO 3602 gibi standart
 
-Henüz GoldenDict uygulanmamıştır.</translation>
+Henüz GoldenDict uygulanmadı.</translation>
     </message>
     <message>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
@@ -2580,7 +2581,7 @@ GoldenDict için henüz uygulanmadı.</translation>
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
         <translation>Forvo kullanımı için şu an bir API anahtarı gerekmektedir.
-Gelecekte kullanılamayabilir veya kendi anahtarı almak için
+İlerde kullanılamayabilir bundan dolayı kendi anahtarınızı almak için
 siteye kaydolun, varsayılan olarak kullanmak için bu alanı boş bırakın.</translation>
     </message>
     <message>
