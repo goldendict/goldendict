@@ -1295,6 +1295,66 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <source>Yiddish</source>
         <translation>Jiddisch</translation>
     </message>
+    <message>
+        <source>Traditional Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simplified Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Simplified Chinese dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Traditional Chinese dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Eastern-European languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Western-European languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Russian languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Japanese languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Baltic languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Greek languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Korean dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Turkish dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Thai dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tamazight</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoadDictionaries</name>
@@ -1583,7 +1643,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>&amp;Dictionaries...    F3</source>
-        <translation>&amp;Sözlükler...     F3</translation>
+        <translation type="obsolete">&amp;Sözlükler...     F3</translation>
     </message>
     <message>
         <source>New Tab</source>
@@ -1656,6 +1716,10 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     <message>
         <source>Export error: </source>
         <translation>Göndermede hata: </translation>
+    </message>
+    <message>
+        <source>&amp;Dictionaries...	F3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2231,6 +2295,14 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     <message>
         <source>Use &amp;GoldenDict message</source>
         <translation>&amp;GoldenDict Mesaj Teknolojisini Kullan</translation>
+    </message>
+    <message>
+        <source>Ctrl-Tab navigates tabs in MRU order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Babylon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

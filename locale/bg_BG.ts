@@ -1316,6 +1316,66 @@
         <source>Zulu</source>
         <translation>Зулу</translation>
     </message>
+    <message>
+        <source>Traditional Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simplified Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Simplified Chinese dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Traditional Chinese dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Eastern-European languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Western-European languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Russian languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Japanese languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Baltic languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Greek languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Korean dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Turkish dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Thai dialects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tamazight</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoadDictionaries</name>
@@ -2271,6 +2331,14 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl-Tab navigates tabs in MRU order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Babylon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
