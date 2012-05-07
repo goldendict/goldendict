@@ -1597,77 +1597,77 @@
     <message>
         <location filename="../language.cc" line="374"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Китайский</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Упрощённый китайский</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Другой</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекты упрощённого китайского</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекты китайского</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Другие восточноевропейские языки</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Другие западноевропейские языки</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекты русского</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекты японского</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Другие прибалтийские языки</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекты греческого</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекты корейского</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекты турецкого</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекты тайского</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Берберские языки</translation>
     </message>
 </context>
 <context>
@@ -2410,7 +2410,7 @@ be pressed shortly after the selection is done.</source>
     <message>
         <location filename="../preferences.ui" line="100"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl-Tab переключает закладки в порядке использования</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="163"/>
@@ -2824,7 +2824,7 @@ GoldenDict. Если новая версия появилась, програм�
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="152"/>
