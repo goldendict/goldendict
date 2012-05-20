@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org) {2008-2012 ?}</translation>
+        <translation>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
 </context>
 <context>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;欢迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 词典程序！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用时请首先打开&lt;b&gt;编辑 | 词典&lt;/b&gt;菜单以添加并扫描含有词典文件的目录，添加维基百科网站查询或其它资源，调整词典排序或创建新的词典群组。&lt;p style=&quot;text-indent:2em&quot;&gt;这些设置都完成以后，就可以开始使用了。你可以使用左侧的查询面板，或者&lt;a href=&quot;使用屏幕取词功能&quot;&gt;直接从其它程序中抓词查询&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要改变设置，可以在&lt;b&gt;编辑 | 首选项&lt;/b&gt;菜单中查看一下可用的系统设置。所有的设置都有鼠标指针提示信息，如果有不明之处，请仔细阅读提示信息。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要更多帮助，有任何疑问、建议，或者仅仅想了解其他人的想法，欢迎访问此程序的&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;官方论坛&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;访问此程序的&lt;a href=&quot;http://goldendict.org/&quot;&gt;官方网站&lt;/a&gt;以获取更新。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2011 Konstantin Isakov. 授权基于 GPLv3 或更高版本。 {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;欢迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 词典程序！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用时请首先打开&lt;b&gt;编辑 | 词典&lt;/b&gt;菜单以添加并扫描含有词典文件的目录，添加维基百科网站查询或其它资源，调整词典排序或创建新的词典群组。&lt;p style=&quot;text-indent:2em&quot;&gt;这些设置都完成以后，就可以开始使用了。你可以使用左侧的查询面板，或者&lt;a href=&quot;使用屏幕取词功能&quot;&gt;直接从其它程序中抓词查询&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要改变设置，可以在&lt;b&gt;编辑 | 首选项&lt;/b&gt;菜单中查看一下可用的系统设置。所有的设置都有鼠标指针提示信息，如果有不明之处，请仔细阅读提示信息。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要更多帮助，有任何疑问、建议，或者仅仅想了解其他人的想法，欢迎访问此程序的&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;官方论坛&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;访问此程序的&lt;a href=&quot;http://goldendict.org/&quot;&gt;官方网站&lt;/a&gt;以获取更新。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2012 Konstantin Isakov. 授权基于 GPLv3 或更高版本。</translation>
     </message>
 </context>
 <context>
@@ -194,27 +194,27 @@
     </message>
     <message>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>高亮所有结果(&amp;a)</translation>
     </message>
     <message>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>资源</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>音频</translation>
     </message>
     <message>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>定义：%1</translation>
     </message>
     <message>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>引用的音频播放程序不存在。</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">警告： %1</translation>
+        <translation>警告： %1</translation>
     </message>
 </context>
 <context>
@@ -328,7 +328,7 @@
     <name>ExternalViewer</name>
     <message>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>外部播放程序名为空</translation>
     </message>
 </context>
 <context>
@@ -1290,63 +1290,63 @@
     </message>
     <message>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>繁体中文</translation>
     </message>
     <message>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>简体中文</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>其它</translation>
     </message>
     <message>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>简体中文其它方言</translation>
     </message>
     <message>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>繁体中文其它方言</translation>
     </message>
     <message>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>东欧其它语言</translation>
     </message>
     <message>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>西欧其它语言</translation>
     </message>
     <message>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>俄罗斯其它语言</translation>
     </message>
     <message>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>日本其它语言</translation>
     </message>
     <message>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>波罗地海其它语言</translation>
     </message>
     <message>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>希腊其它语言</translation>
     </message>
     <message>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>韩国其它语言</translation>
     </message>
     <message>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>土尔其其它语言</translation>
     </message>
     <message>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>泰国其它语言</translation>
     </message>
     <message>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>塔马塞特语</translation>
     </message>
 </context>
 <context>
@@ -1645,83 +1645,83 @@
     </message>
     <message>
         <source>Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>查询结果导航面板</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
+        <translation>词典...(&amp;D)   	F3</translation>
     </message>
     <message>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>新建标签页</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>配置文件夹(&amp;C)</translation>
     </message>
     <message>
         <source>Show Small Icons in Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>在工具栏上显示小图标</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>菜单栏(&amp;M)</translation>
     </message>
     <message>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>在以下词典中找到：</translation>
     </message>
     <message>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>打开标签页列表</translation>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>你选择了隐藏菜单栏，使用 %1 再次显示。</translation>
     </message>
     <message>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>显示(&amp;S)</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>导出(&amp;E)</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏(&amp;H)</translation>
     </message>
     <message>
         <source>History view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>历史记录查看模式</translation>
     </message>
     <message>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>导出历史记录到文件</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>文本文件 (*.txt);;所有文件 (*.*)</translation>
     </message>
     <message>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>历史记录导出完成</translation>
     </message>
     <message>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>导出错误：</translation>
     </message>
 </context>
 <context>
@@ -2223,123 +2223,129 @@ Plugin must be installed for this option to work.</source>
     </message>
     <message>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果你不想在单标签页时见到主标签栏，请启用此选项。</translation>
     </message>
     <message>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>单标签页时隐藏主标签栏</translation>
     </message>
     <message>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>将翻译词条发送至主窗口，而非在取词窗口中显示</translation>
     </message>
     <message>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>发送翻译词条到主窗口</translation>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>高级(&amp;v)</translation>
     </message>
     <message>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>附加取词技术</translation>
     </message>
     <message>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>尝试使用 IAccessibleEx 技术取词。此技术仅对某些支持它的
+程序有效（比如 Internet Explorer 9）。
+如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 &amp;IAccessibleEx</translation>
     </message>
     <message>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>尝试使用 UI Automation 技术取词。此技术仅对某些支持它的
+程序有效。
+如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 &amp;UIAutomation</translation>
     </message>
     <message>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>尝试使用 special GoldenDict message 技术取词。此技术仅对
+某些支持它的程序有效。
+如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 &amp;GoldenDict message</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>用 Ctrl-tab 浏览标签页时，以“最近使用”为序</translation>
     </message>
     <message>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>音频</translation>
     </message>
     <message>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>纯文本</translation>
     </message>
     <message>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>匹配前缀</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>未知</translation>
     </message>
 </context>
 <context>
     <name>Programs::RunInstance</name>
     <message>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>未指定程序名。</translation>
     </message>
     <message>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>程序已崩溃。</translation>
     </message>
     <message>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>程序返回，退出代码为 %1.</translation>
     </message>
 </context>
 <context>
     <name>ProgramsModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">已启用</translation>
+        <translation>已启用</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>类型</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">名称</translation>
+        <translation>名称</translation>
     </message>
     <message>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>命令</translation>
     </message>
 </context>
 <context>
@@ -2401,11 +2407,11 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>将词条发送到主窗口 (Alt+W)</translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
 </context>
 <context>
@@ -2657,15 +2663,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>程序</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>任意外部程序均可。字符串 %GDWORD% 会被所查词条替换，词条会写入标准输入。</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>从列表中删除程序 &lt;b&gt;%1&lt;/b&gt;？</translation>
     </message>
 </context>
 <context>
