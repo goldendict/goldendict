@@ -20,6 +20,10 @@
 #include "dprintf.hh"
 #include <QDebug>
 
+#ifdef Q_OS_MAC
+#include "lionsupport.h"
+#endif
+
 using std::set;
 using std::wstring;
 using std::map;
@@ -506,6 +510,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   doDeferredInit( dictionaries );
 
   updateStatusLine();
+
+  #ifdef Q_OS_MAC
+    LionSupport::addFullscreen(this);
+  #endif
 }
 
 void MainWindow::ctrlTabPressed()
