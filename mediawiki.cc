@@ -54,7 +54,7 @@ public:
       if( !icon.isNull() && !icon.isEmpty() )
       {
           QFileInfo fInfo(  QDir( Config::getConfigDir() ), icon );
-          if( fInfo.exists() )
+          if( fInfo.isFile() )
               return QIcon( fInfo.absoluteFilePath() );
       }
       return QIcon(":/icons/icon32_wiki.png");
