@@ -2,7 +2,7 @@
 
 body
 {
-  background: #fefdeb;
+  background: #fefdeb!important; /*fix for noiframe website style*/
   font-family: Tahoma, Verdana, "Lucida Sans Unicode", sans-serif;
   font-size: 13px;
 }
@@ -2651,3 +2651,11 @@ in bg url to hide it from iemac */
 .mwiki .infl-table { display: none }
 /****default hide dict icon ***/
 .gddicticon{display:none;}
+/**noiframe website**/
+.website_article{}
+.website_article .website_term
+{
+	font-weight: bold!important;
+	margin: 10px;
+	font-size: 15px!important;
+}

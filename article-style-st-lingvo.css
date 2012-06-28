@@ -1,6 +1,6 @@
 body
 {
-  background: white;
+  background: white!important; /*fix for noiframe website style*/;
 }
 
 a
@@ -73,7 +73,7 @@ a:hover
   clear: both;
 }
 
-.gddictname + h3, .gddictname + .dsl_article > .dsl_headwords
+.gddictname + h3, .gddictname + .dsl_article > .dsl_headwords, .website_term
 {
   margin-top: 10px;
 }

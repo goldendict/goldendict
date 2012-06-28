@@ -551,6 +551,14 @@ Class load() throw( exError )
       w.name = ws.attribute( "name" );
       w.url = ws.attribute( "url" );
       w.enabled = ( ws.attribute( "enabled" ) == "1" );
+      w.resultselectors = ws.attribute( "resultselectors" );
+      w.noresulttext = ws.attribute( "noresulttext" );
+      w.filter = ws.attribute( "filter" );
+      w.icon = ws.attribute( "icon" );
+      w.customcss = ws.attribute( "customcss" );
+      w.fromlang = ws.attribute( "fromlang" );
+      w.tolang = ws.attribute( "tolang" );
+      w.usepost = ( ws.attribute( "usepost" ) == "1" );
 
       c.webSites.push_back( w );
     }
@@ -975,6 +983,38 @@ void save( Class const & c ) throw( exError )
       QDomAttr enabled = dd.createAttribute( "enabled" );
       enabled.setValue( i->enabled ? "1" : "0" );
       ws.setAttributeNode( enabled );
+
+      QDomAttr rslt = dd.createAttribute( "resultselectors" );
+      rslt.setValue( i->resultselectors );
+      ws.setAttributeNode( rslt );
+
+      QDomAttr nrslt = dd.createAttribute( "noresulttext" );
+      nrslt.setValue( i->noresulttext );
+      ws.setAttributeNode( nrslt );
+
+      QDomAttr fltr = dd.createAttribute( "filter" );
+      fltr.setValue( i->filter );
+      ws.setAttributeNode( fltr );
+
+      QDomAttr ico = dd.createAttribute( "icon" );
+      ico.setValue( i->icon );
+      ws.setAttributeNode( ico );
+
+      QDomAttr css = dd.createAttribute( "customcss" );
+      css.setValue( i->customcss );
+      ws.setAttributeNode( css );
+
+      QDomAttr flng = dd.createAttribute( "fromlang" );
+      flng.setValue( i->fromlang );
+      ws.setAttributeNode( flng );
+
+      QDomAttr tlng = dd.createAttribute( "tolang" );
+      tlng.setValue( i->tolang );
+      ws.setAttributeNode( tlng );
+
+      QDomAttr upost = dd.createAttribute( "usepost" );
+      upost.setValue( i->usepost? "1":"0" );
+      ws.setAttributeNode( upost );
     }
   }
 

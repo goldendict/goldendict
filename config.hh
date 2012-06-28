@@ -206,19 +206,30 @@ struct MediaWiki
 /// Any website which can be queried though a simple template substitution
 struct WebSite
 {
-  QString id, name, url;
-  bool enabled;
+  QString id, name, url, resultselectors, noresulttext, filter, icon, customcss, fromlang, tolang;
+  bool enabled, usepost;
 
-  WebSite(): enabled( false )
+  WebSite(): enabled( false ), usepost( false )
   {}
 
   WebSite( QString const & id_, QString const & name_, QString const & url_,
-           bool enabled_ ):
-    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ) {}
+           bool enabled_, QString const & resultselectors_ = "style,body", QString const noresulttext_="",
+           QString const & filter_="", QString const icon_="",
+           QString const & customcss_="",
+          bool usepost_ =  false, QString  const & fromlang_="", QString const & toLang_=""  ):
+    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ),
+      resultselectors( resultselectors_ ), noresulttext( noresulttext_ ),
+      filter( filter_ ), icon( icon_ ), customcss( customcss_ ),
+      usepost( usepost_ ),
+      fromlang( fromlang_ ), tolang( toLang_ ){}
 
   bool operator == ( WebSite const & other ) const
   { return id == other.id && name == other.name && url == other.url &&
-           enabled == other.enabled; }
+           enabled == other.enabled && usepost == other.usepost &&
+              resultselectors == other.resultselectors && noresulttext == other.noresulttext &&
+              filter == other.filter && customcss == other.customcss &&
+              icon == other.icon
+              && fromlang == other.fromlang && tolang == other.tolang; }
 };
 
 /// All the WebSites

@@ -46,6 +46,14 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.webSites->resizeColumnToContents( 0 );
   ui.webSites->resizeColumnToContents( 1 );
   ui.webSites->resizeColumnToContents( 2 );
+  ui.webSites->resizeColumnToContents( 3 );
+  ui.webSites->resizeColumnToContents( 4 );
+  ui.webSites->resizeColumnToContents( 5 );
+  ui.webSites->resizeColumnToContents( 6 );
+  ui.webSites->resizeColumnToContents( 7 );
+  ui.webSites->resizeColumnToContents( 8 );
+  ui.webSites->resizeColumnToContents( 9 );
+  ui.webSites->resizeColumnToContents( 10 );
 
   ui.programs->setTabKeyNavigation( true );
   ui.programs->setModel( &programsModel );
@@ -484,6 +492,9 @@ void WebSitesModel::addNewSite()
 
   w.url = "http://";
 
+  w.resultselectors ="style,body,link[rel=stylesheet]";
+  w.filter = "script";
+
   beginInsertRows( QModelIndex(), webSites.size(), webSites.size() );
   webSites.push_back( w );
   endInsertRows();
@@ -505,7 +516,7 @@ Qt::ItemFlags WebSitesModel::flags( QModelIndex const & index ) const
 
   if ( index.isValid() )
   {
-    if ( !index.column() )
+    if ( !index.column() || index.column() == 10 )
       result |= Qt::ItemIsUserCheckable;
     else
       result |= Qt::ItemIsEditable;
@@ -527,7 +538,7 @@ int WebSitesModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 3;
+    return 11;// 3;
 }
 
 QVariant WebSitesModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
@@ -541,6 +552,22 @@ QVariant WebSitesModel::headerData( int section, Qt::Orientation /*orientation*/
         return tr( "Name" );
       case 2:
         return tr( "Address" );
+    case 3:
+        return tr( "Result Selectors" );
+    case 4:
+        return tr( "NoResult Text" );
+    case 5:
+        return tr( "Filters" );
+    case 6:
+        return tr( "Icon" );
+    case 7:
+        return tr( "Css File" );
+    case 8:
+        return tr( "From Language" );
+    case 9:
+        return tr( "To Language" );
+    case 10:
+        return tr( "Post Method" );
       default:
         return QVariant();
     }
@@ -561,13 +588,32 @@ QVariant WebSitesModel::data( QModelIndex const & index, int role ) const
         return webSites[ index.row() ].name;
       case 2:
         return webSites[ index.row() ].url;
+    case 3:
+         return webSites[ index.row() ].resultselectors;
+    case 4:
+        return webSites[ index.row() ].noresulttext;
+    case 5:
+        return webSites[ index.row() ].filter;
+    case 6:
+         return webSites[ index.row() ].icon;
+    case 7:
+        return webSites[ index.row() ].customcss;
+   case 8:
+        return webSites[ index.row() ].fromlang;
+    case 9:
+        return webSites[ index.row() ].tolang;
       default:
         return QVariant();
     }
   }
 
-  if ( role == Qt::CheckStateRole && !index.column() )
-    return webSites[ index.row() ].enabled;
+  if ( role == Qt::CheckStateRole)
+  {
+    if(!index.column() )
+        return webSites[ index.row() ].enabled;
+    else if( index.column() == 10)
+        return webSites[ index.row() ].usepost;
+  }
 
   return QVariant();
 }
@@ -578,16 +624,24 @@ bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
   if ( (unsigned)index.row() >= webSites.size() )
     return false;
 
-  if ( role == Qt::CheckStateRole && !index.column() )
+  if ( role == Qt::CheckStateRole) // &&  )
   {
     //DPRINTF( "type = %d\n", (int)value.type() );
     //DPRINTF( "value = %d\n", (int)value.toInt() );
 
     // XXX it seems to be always passing Int( 2 ) as a value, so we just toggle
-    webSites[ index.row() ].enabled = !webSites[ index.row() ].enabled;
-
-    dataChanged( index, index );
-    return true;
+      if(!index.column())
+      {
+        webSites[ index.row() ].enabled = !webSites[ index.row() ].enabled;
+        dataChanged( index, index );
+        return true;
+      }
+      else if( index.column() == 10)
+      {
+          webSites[ index.row() ].usepost = !webSites[ index.row() ].usepost;
+          dataChanged( index, index );
+          return true;
+      }
   }
 
   if ( role == Qt::DisplayRole || role == Qt::EditRole )
@@ -599,6 +653,34 @@ bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
         return true;
       case 2:
         webSites[ index.row() ].url =  value.toString();
+        dataChanged( index, index );
+        return true;
+    case 3:
+        webSites[ index.row() ].resultselectors =  value.toString();
+        dataChanged( index, index );
+         return true;
+    case 4:
+        webSites[ index.row() ].noresulttext =  value.toString();
+        dataChanged( index, index );
+        return true;
+    case 5:
+        webSites[ index.row() ].filter =  value.toString();
+        dataChanged( index, index );
+        return true;
+    case 6:
+        webSites[ index.row() ].icon =  value.toString();
+        dataChanged( index, index );
+         return true;
+    case 7:
+        webSites[ index.row() ].customcss =  value.toString();
+        dataChanged( index, index );
+        return true;
+    case 8:
+        webSites[ index.row() ].fromlang =  value.toString();
+        dataChanged( index, index );
+        return true;
+    case 9:
+        webSites[ index.row() ].tolang =  value.toString();
         dataChanged( index, index );
         return true;
       default:
