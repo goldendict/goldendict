@@ -118,8 +118,8 @@ const std::string bgl_charsetname[] = {
 	"Thai" };
 
 const std::string bgl_charset[] = {
-	"ISO-8859-1", /*Default*/
-	"ISO-8859-1", /*Latin*/
+	"WINDOWS-1252", /*Default*/
+	"WINDOWS-1252", /*Latin*/
 	"ISO-8859-2", /*Eastern European*/
 	"WINDOWS-1251", /*Cyriilic*/
 	"CP932", /*Japanese*/
@@ -201,7 +201,7 @@ public:
 
     std::vector< char > const & getIcon() const
     { return icon; }
-    
+
     enum
     {
       ParserVersion = 14
