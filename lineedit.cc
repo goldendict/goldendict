@@ -19,15 +19,17 @@ LineEdit::LineEdit(QWidget *parent)
     clearButton->setIcon( QIcon(pixmap) );
     clearButton->setIconSize( pixmap.size() );
     clearButton->setCursor( Qt::ArrowCursor );
-    clearButton->setStyleSheet( "QToolButton { border: none; padding: 0px; }" );
+    clearButton->setStyleSheet( "QToolButton {border: none; padding-top: 2px; \
+                                  padding-bottom: -2px;}" );
     clearButton->hide();
     connect(clearButton, SIGNAL( clicked() ),
              this, SLOT( clear() ) );
     connect(this, SIGNAL( textChanged(const QString&) ),
              this, SLOT( updateCloseButton(const QString&) ) );
     int frameWidth = style()->pixelMetric( QStyle::PM_DefaultFrameWidth );
-    setStyleSheet(QString("QLineEdit { padding-right: %1px; } ").arg(
+    setStyleSheet(QString("QLineEdit { padding-right: %1px; ").arg(
                       clearButton->sizeHint().width() + frameWidth + 1));
+        
     QSize msz = minimumSizeHint();
     setMinimumSize( qMax(msz.width(),
                     clearButton->sizeHint().height() + frameWidth * 2 + 2 ),
