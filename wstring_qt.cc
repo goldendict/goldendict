@@ -14,6 +14,12 @@ namespace gd
   {
     QVector< unsigned int > v = in.toUcs4();
 
+    // Fix for CJK Extension B characters
+    int n = v.size();
+    while( n > 0 && v[ n - 1 ] == 0 ) n--;
+    if( n != v.size() )
+        v.resize( n );
+
     return wstring( v.constData(), v.size() );
   }
 
