@@ -1597,77 +1597,77 @@
     <message>
         <location filename="../language.cc" line="374"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Cinese tradizionale</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Cinese semplificato</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Altro</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Altro dialetto cinese semplificato</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Altro dialetto cinese tradizionale</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Altra lingua dell&apos;est europeo</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Altra lingua dell&apos;ovest europeo</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Altra lingua russa</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Altra lingua giapponese</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Altra lingua baltica</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Altra lingua greca</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Altro dialetto coreano</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Altro dialetto turco</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Altro dialetto thailandese</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamazight</translation>
     </message>
 </context>
 <context>
@@ -1675,7 +1675,7 @@
     <message>
         <location filename="../loaddictionaries.cc" line="204"/>
         <source>Error loading dictionaries</source>
-        <translation>Errore di lettura dei dizionari</translation>
+        <translation>Errore di caricamento dei dizionari</translation>
     </message>
 </context>
 <context>
@@ -2405,7 +2405,7 @@ Questa funzione consente di premere tali tasti anche qualche secondo più tardi.
     <message>
         <location filename="../preferences.ui" line="100"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Tab naviga in ordine cronologico tra le schede aperte</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="163"/>
@@ -2816,7 +2816,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="152"/>
@@ -2849,7 +2849,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../sources.cc" line="776"/>
         <source>Html</source>
-        <translation>Html</translation>
+        <translation>HTML</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="778"/>
@@ -2929,7 +2929,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../scanpopup.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Finestra di dialogo</translation>
+        <translation>Dizionario</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="60"/>
