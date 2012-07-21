@@ -873,7 +873,7 @@ Ifo::Ifo( File::Class & f ):
   //DPRINTF( "%s<\n", f.gets().c_str() );
   //DPRINTF( "%s<\n", f.gets().c_str() );
 
-  if ( f.gets() != "StarDict's dict ifo file" ||
+  if ( QString::fromUtf8(f.gets().c_str()) != "StarDict's dict ifo file" ||
        f.gets().compare( 0, versionEq.size(), versionEq ) )
     throw exNotAnIfoFile();
 
