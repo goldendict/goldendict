@@ -2,6 +2,8 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "htmlescape.hh"
+#include <QString>
+#include <QTextDocument>
 
 namespace Html {
 
@@ -115,6 +117,23 @@ string escapeForJavaScript( string const & str )
     }
 
   return result;
+}
+
+QString unescape( QString const & str )
+{
+  // Does it contain HTML? If it does, we need to strip it
+  if ( str.contains( '<' ) || str.contains( '&' ) )
+  {
+    QTextDocument d;
+    d.setHtml(str);
+    QString result = d.toPlainText();
+
+    return result;
+  }
+  else
+  {
+    return str;
+  }
 }
 
 }
