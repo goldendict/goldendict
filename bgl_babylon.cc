@@ -619,6 +619,9 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   if( s.size() < 1 ) return;
   if( type > 2 ) return;
 
+  if( s.compare( 0, 13, "<charset c=U>") == 0 )
+      return;
+
   std::string charset;
   switch( type )
   {
