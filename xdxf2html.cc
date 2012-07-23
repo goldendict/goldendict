@@ -179,7 +179,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
           }
           else
             title = i->second;
-          el.setAttribute( "title", title.c_str() );
+          el.setAttribute( "title", gd::toQString( Utf8::decode( title ) ) );
         }
     }
   }

@@ -160,6 +160,7 @@ div.xdxf
 {
   font-style: italic;
   color: green;
+  cursor: default;
 }
 
 /* Color-highlighted */
