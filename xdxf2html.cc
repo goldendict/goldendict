@@ -110,6 +110,61 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     }
   }
 
+  nodes = dd.elementsByTagName( "def" ); // Optional headword part
+  // let's compute the maximum nesting depth of the article
+  int max_nesting_depth = 1; // maximum nesting depth of the article
+  for( int i = 0; i < nodes.size(); i++ )
+  {
+    QDomElement el = nodes.at( i ).toElement();
+    QDomElement nesting_node = el;
+    int nesting_count = 0;
+    while (nesting_node.parentNode().toElement().tagName() == "def") {nesting_count++; nesting_node = nesting_node.parentNode().toElement();}
+    if (nesting_count > max_nesting_depth) {max_nesting_depth = nesting_count;}
+  }
+  // in this loop we go through all <def> and insert right numbers according to its structure
+  for (int j = max_nesting_depth; j>0; j--) // j symbolizes special depth to be processed at this iteration
+  {
+    int sibling_count = 0; // counter that counts the number of among all siblings of this depth
+    QString number_text = ""; // the number to be inserted into the beginning of <def> (I,II,IV,1,2,3,a),b),c)...)
+    for( int i = 0; i < nodes.size(); i++ )
+    {
+      QDomElement el = nodes.at( i ).toElement();
+      QDomElement nesting_node = el;
+      // computing the depth @nesting_depth of a current node @el
+      int nesting_depth = 0;
+      while (nesting_node.parentNode().toElement().tagName() == "def") {nesting_depth++; nesting_node=nesting_node.parentNode().toElement();}
+
+      // we process nodes on of current depth @j
+      // we di this in order not to break the numbering at this depth level
+      if (nesting_depth == j)
+      {
+        sibling_count++;
+        if (max_nesting_depth == 1)
+        {
+          number_text = number_text.setNum(sibling_count)+".";
+        }
+        else
+        {
+          if (nesting_depth == 1) {number_text = "^"+number_text.setNum(sibling_count)+".";} // TODO realize generation of Roman numerals from @sibling_count
+          if (nesting_depth == 2) {number_text = number_text.setNum(sibling_count)+".";}
+          if (nesting_depth == 3) {number_text = number_text.setNum(sibling_count)+")";}
+        }
+        QDomElement node_num = dd.createElement("span");
+        node_num.setAttribute( "class", "xdxf_num" );
+        QDomText text_num = dd.createTextNode(number_text);
+        node_num.appendChild(text_num);
+        el.insertBefore(node_num,el.firstChild());
+      }
+    }
+  }
+  // we finally change all <def> tags into 'xdxf_def' <span>s
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_def" );
+  }
+
   nodes = dd.elementsByTagName( "opt" ); // Optional headword part
 
   while( nodes.size() )
@@ -218,6 +273,32 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_co" );
+  }
+
+  // grammar information
+  nodes = dd.elementsByTagName( "gr" );
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_gr" );
+  }
+  nodes = dd.elementsByTagName( "pos" );
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_abr" );
+  }
+  nodes = dd.elementsByTagName( "tense" );
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_gr" );
   }
 
   nodes = dd.elementsByTagName( "tr" ); // Transcription

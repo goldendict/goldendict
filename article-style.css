@@ -155,6 +155,21 @@ div.xdxf
   display: none;
 }
 
+/* Article structure tag */
+.xdxf_num
+{
+    color: red;
+    font-weight: bold;
+}
+.xdxf_def
+{
+    display: block;
+    margin-left: 13px;
+}
+.xdxf_def:before
+{
+    /*content: "%%%"*/
+}
 /* Abbreviation */
 .xdxf_abr
 {
@@ -168,12 +183,34 @@ div.xdxf
   color: blue;
 }
 
+/* Editorial comment */
+.xdxf_co
+{
+    color: blue;
+    font-style: italic;
+}
+.xdxf_co:before
+{
+    content:"("
+}
+.xdxf_co:after
+{
+    content:")"
+}
+
+/* Grammar information */
+.xdxf_gr
+{
+    color: #90ee90;
+    display: block;
+}
+
 /* Example */
 .xdxf_ex
 {
   color: grey;
-/*  display: block;
-  margin: 8px;*/
+  display: block;
+  margin-left: 14px;
 }
 
 /* Direct translation */
@@ -201,6 +238,7 @@ div.xdxf
 .xdxf_tr
 {
   font-weight: bold;
+    font-size: 120%
 }
 
 /* Resource reference -- for now just a span. Since there's not yet a mechanism
