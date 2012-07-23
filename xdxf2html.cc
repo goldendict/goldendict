@@ -298,7 +298,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_gr" );
+    el.setAttribute( "class", "xdxf_abr" );
   }
 
   nodes = dd.elementsByTagName( "tr" ); // Transcription
