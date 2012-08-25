@@ -2306,7 +2306,7 @@ be the last ones.</source>
         <location filename="../preferences.ui" line="110"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation type="unfinished">Агар имконоти зерин фаъол бошад, нишонаи луғат дар панели система пайдо мешавад,
+        <translation>Агар имконоти зерин фаъол бошад, нишонаи луғат дар панели система пайдо мешавад,
 ва шумо аз он ҷо метавонед равзанаи асосии барномаро кушоед ва амалҳои дигарро иҷро кунед.</translation>
     </message>
     <message>
@@ -2372,13 +2372,13 @@ the application.</source>
         <location filename="../preferences.ui" line="265"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished">Одатан, бо зеркунии тугмаи ESC нишондиҳандаи муш ба сатри тарҷума гузаронида мешавад.
+        <translation>Одатан, бо зеркунии тугмаи ESC нишондиҳандаи муш ба сатри тарҷума гузаронида мешавад.
 Вале бо фаъолкунии ин имконот, равзанаи асосӣ пинҳон карда мешавад.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="269"/>
         <source>ESC key hides main window</source>
-        <translation type="unfinished">Тугмаи ESC равзанаи асосиро пинҳон мекунад</translation>
+        <translation>Тугмаи ESC равзанаи асосиро пинҳон мекунад</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="281"/>
@@ -2391,7 +2391,7 @@ With this on however, it will hide the main window.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation type="unfinished">Агар имконоти зерин фаъол бошад, ҳангоми нишондиҳии ягон калима (дар Windows)
+        <translation>Агар имконоти зерин фаъол бошад, ҳангоми нишондиҳии ягон калима (дар Windows)
 ё интихоб кардани ягон калима (дар Linux) бо муш равзанаи пайдошаванда бо тарҷумаи
 он калима намоиш дода мешавад. Агар фаъол бошад, шумо метавонед инро аз равзанаи асосӣ
 ё панели система хомӯш кунед ё аз нав фаъол созед.</translation>
@@ -2549,7 +2549,7 @@ seconds, which is specified here.</source>
         <translatorcomment>Чтобы избавитӣся  ложных срабатываний, после выделения слова
 клавиши опрашиваются только в течение ограниченного
 промежутка времени, который и задается здесь.</translatorcomment>
-        <translation type="unfinished">Барои намоиш додани тарҷумаи пайдошаванда баъд аз
+        <translation>Барои намоиш додани тарҷумаи пайдошаванда баъд аз
 интихобкунии калима, шумо бояд тугмаҳои интихобшударо дар
 муддати сонияҳои таъйиншуда зер кунед. Агар тугмаҳоро баъд
 аз муддати таъйиншуда зер мекунед, тарҷума пайдо намешавад.</translation>
@@ -2562,12 +2562,12 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="558"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished">Калимаи тарҷумашударо ба ҷои равзанаи пайдошаванда дар равзанаи асосӣ нишон диҳед</translation>
+        <translation>Калимаи тарҷумашударо ба ҷои равзанаи пайдошаванда дар равзанаи асосӣ нишон диҳед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="561"/>
         <source>Send translated word to main window</source>
-        <translation type="unfinished">Калимаи тарҷумашударо дар равзанаи нишон диҳед</translation>
+        <translation>Калимаи тарҷумашударо дар равзанаи нишон диҳед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="589"/>
@@ -2577,7 +2577,7 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="608"/>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation type="unfinished">Барои пинҳон ва намоиш додани равзанаи асосӣ тугмаҳои зеринро истифода баред:</translation>
+        <translation>Барои пинҳон ва намоиш додани равзанаи асосӣ тугмаҳои зеринро истифода баред:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="639"/>
@@ -2779,7 +2779,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished">Барои тарҷума кардани калимаҳои зери курсор, технологияи UI Automation-ро истифода баред.
+        <translation>Барои тарҷума кардани калимаҳои зери курсор, технологияи UI Automation-ро истифода баред.
 Ин технология танҳо бо баъзе барномаҳои дастгиришаванда кор мекунад.
 Агар шумо чунин барномаҳо истифода намебаред, имконоти зеринро истифода набаред.</translation>
     </message>
@@ -2987,7 +2987,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../scanpopup.ui" line="163"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation type="unfinished">Барои мустаҳкам кардан равзана дар экран, иваз кардани ҳаҷм,
+        <translation>Барои мустаҳкам кардан равзана дар экран, иваз кардани ҳаҷм,
 ё идоракунии хусусиятҳои дигар инро зер кунед.</translation>
     </message>
 </context>
