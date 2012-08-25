@@ -2227,7 +2227,7 @@ Plugin must be installed for this option to work.</source>
     </message>
     <message>
         <source>Hide single tab</source>
-        <translation>单标签页时隐藏主标签栏</translation>
+        <translation>隐藏单标签页</translation>
     </message>
     <message>
         <source>Send translated word to main window instead of to show it in popup window</source>
@@ -2345,7 +2345,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Command Line</source>
-        <translation>命令</translation>
+        <translation>命令行</translation>
     </message>
 </context>
 <context>
@@ -2614,7 +2614,7 @@ of the appropriate groups to use them.</source>
     </message>
     <message>
         <source>API Key:</source>
-        <translation>API Key:</translation>
+        <translation>API 密钥：</translation>
     </message>
     <message>
         <source>Use of Forvo currently requires an API key. Leave this field
