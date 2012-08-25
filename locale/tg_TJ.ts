@@ -39,12 +39,12 @@
     <message>
         <location filename="../article_maker.cc" line="119"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>Ягон тарҷума барои &lt;b&gt;%1&lt;/b&gt; дар гурӯҳи &lt;b&gt;%2&lt;/b&gt; ёфт нашуд.</translation>
+        <translation>Ягон тарҷума барои &lt;b&gt;%1&lt;/b&gt; дар гурӯҳи &lt;b&gt;%2&lt;/b&gt; ёфт нашудааст.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="124"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation>Ягон тарҷума дар гурӯҳи &lt;b&gt;%1&lt;/b&gt; ёфт нашуд.</translation>
+        <translation>Ягон тарҷума дар гурӯҳи &lt;b&gt;%1&lt;/b&gt; ёфт нашудааст.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="143"/>
@@ -54,27 +54,27 @@
     <message>
         <location filename="../article_maker.cc" line="145"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Хуш омадед ба луғати &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Барои оғози кор бо луғат, пеш аз ҳама ба &lt;b&gt;Танзимот|Луғатҳо&lt;/b&gt; гузаред ва файлҳои луғатҳои лозимиро илова кунед, сайтҳои Wikipedia ё сайтҳои дигарро насб кунед, тартиби луғатҳоро таъйин кунед ё гурӯҳҳои луғатро эҷод кунед.&lt;p&gt;Баъд аз ин шумо метавонед калимаҳоро тарҷума кунед! Шумо метавонед калимаҳоро бо истифодаи лавҳаи чапи ин тиреза тарҷума кунед, ё шумо метавонед &lt;a href=&quot;Working with popup&quot;&gt;калимаҳоро дар барномаҳои кушодашудаи дигар тарҷума кунед&lt;/a&gt;. &lt;p&gt;Барои насб кардани танзимоти шахсӣ, хусусиятҳои дастрасиро дар &lt;b&gt;Танзимот|Хусусиятҳо&lt;/b&gt; истифода баред. Ҳамаи танзимоти ин барнома дорои маслиҳат мебошанд. Агар ягон мушкилӣ дошта бошед, мутмаин шавед, ки онҳоро хонед.&lt;p&gt;Барои маълумоти муфассал, гирифтани кумак, ҷавобу саволҳо, маслиҳатҳо ё ҳалли масъалаҳои дигар, шумо метавонед &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форуми луғатро&lt;/a&gt; истифода баред.&lt;p&gt;Барои гирифтани навсозиҳои барнома &lt;a href=&quot;http://goldendict.org/&quot;&gt;вебсайти луғатро&lt;/a&gt; дидан кунед. &lt;p&gt;(c) 2008-2012 Константин Исаков. Иҷозатномаи GPLv3 ё навтар.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Хуш омадед ба луғати &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Барои оғози кор бо луғат, пеш аз ҳама ба &lt;b&gt;Танзимот|Луғатҳо&lt;/b&gt; гузаред ва файлҳои луғатҳои лозимиро илова кунед, сайтҳои Wikipedia ё сайтҳои дигарро насб кунед, тартиби луғатҳоро таъин кунед ё гурӯҳҳои луғатро эҷод кунед.&lt;p&gt;Баъд аз ин шумо метавонед калимаҳоро тарҷума кунед! Шумо метавонед калимаҳоро бо истифодаи лавҳаи чапи ин равзана тарҷума кунед, ё шумо метавонед &lt;a href=&quot;Working with popup&quot;&gt;калимаҳоро дар барномаҳои дигар тарҷума кунед&lt;/a&gt;. &lt;p&gt;Барои насб кардани танзимоти шахсӣ, хусусиятҳои дастрасиро дар &lt;b&gt;Танзимот|Хусусиятҳо&lt;/b&gt; истифода баред. Ҳамаи танзимоти ин барнома дорои маслиҳат мебошанд. Агар ягон мушкилӣ дошта бошед, мутмаин шавед, ки он маслиҳатҳоро хонед.&lt;p&gt;Барои маълумоти муфассал, гирифтани кӯмак, ҷавобу саволҳо, маслиҳатҳо ё ҳалли масъалаҳои дигар, шумо метавонед &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форуми луғатро&lt;/a&gt; истифода баред.&lt;p&gt;Барои гирифтани навсозиҳои барнома &lt;a href=&quot;http://goldendict.org/&quot;&gt;вебсайти луғатро&lt;/a&gt; истифода баред. &lt;p&gt;(c) 2008-2012 Константин Исаков. Иҷозатномаи GPLv3 ё навтар.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="161"/>
         <source>Working with popup</source>
-        <translation>Тарҷума бо тирезаи пайдошаванда</translation>
+        <translation>Тарҷума бо равзанаи пайдошаванда</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="163"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Тарҷума бо тирезаи пайдошаванда&lt;/h3&gt;Барои тарҷума кардани калимаҳо дар барномаҳои дигар, пеш аз ҳама шумо бояд &lt;i&gt;&quot;Хусусияти тарҷумаи пайдошавандаро&quot;&lt;/i&gt; дар &lt;b&gt;Хусусиятҳо&lt;/b&gt; фаъол кунед. Дар оянда шумо метавонед ин хусусиятро ба воситаи зеркунии тугмаи &apos;Тарҷумаи пайдошаванда&apos; фаъол кунед, ё шумо метавонед ин хусусиятро бо зеркунии нишонаи панел аз менюи пайдошуда фаъол кунед. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Тарҷума бо равзанаи пайдошаванда&lt;/h3&gt;Барои тарҷума кардани калимаҳо дар барномаҳои дигар, пеш аз ҳама шумо бояд &lt;i&gt;&quot;Хусусияти тарҷумаи пайдошавандаро&quot;&lt;/i&gt; дар &lt;b&gt;Хусусиятҳо&lt;/b&gt; фаъол кунед. Дар оянда шумо метавонед ин хусусиятро ба воситаи зеркунии тугмаи &apos;Тарҷумаи пайдошаванда&apos; фаъол кунед, ё шумо метавонед ин хусусиятро бо зеркунии нишонаи панел аз менюи пайдошуда фаъол кунед. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="170"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>Баъд аз фаъол кардани хусусияти тарҷумаи пайдошаванда курсори мушро ба болои калимаи дилхоҳ ҷойгир кунед, ва тиреза бо тарҷумаҳо бояд барои шумо пайдо шавад.</translation>
+        <translation>Баъд аз фаъол кардани хусусияти тарҷумаи пайдошаванда курсори мушро ба болои калимаи дилхоҳ ҷойгир кунед, ва равзана бо тарҷумаҳо бояд барои шумо пайдо шавад.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="173"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Баъд аз фаъол кардани хусусияти тарҷумаи пайдошаванда калимаи дилхоҳро дар барномаи дигар бо курсори муш интихоб кунед (ба калимаи дилхоҳ пахши дубора бо курсори муш кунед) ва тиреза бо тарҷумаҳо бояд барои шумо пайдо шавад.</translation>
+        <translation>Баъд аз фаъол кардани хусусияти тарҷумаи пайдошаванда, калимаи дилхоҳро дар барномаи дигар бо нишондиҳандаи муш интихоб кунед (ба калимаи дилхоҳ дубора зер кунед) ва равзана бо тарҷумаҳо бояд барои шумо пайдо шавад.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="250"/>
@@ -195,37 +195,37 @@
     <message>
         <location filename="../articleview.cc" line="963"/>
         <source>&amp;Open Link</source>
-        <translation>&amp;Пайвандро кушоед</translation>
+        <translation>&amp;Пайвандро кушодан</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="969"/>
         <source>Open Link in New &amp;Tab</source>
-        <translation>Пайвандро дар &amp;варақаи нав кушоед</translation>
+        <translation>Пайвандро дар &amp;варақаи нав кушодан</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="976"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation>Пайвандро дар &amp;браузер кушоед</translation>
+        <translation>Пайвандро дар &amp;браузер кушодан</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="989"/>
         <source>&amp;Look up &quot;%1&quot;</source>
-        <translation>&quot;%1&quot;-ро &amp;дарёфт кунед</translation>
+        <translation>&quot;%1&quot;-ро &amp;дарёфт кардан</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="997"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>&quot;%1&quot;-ро дар варақаи &amp;нав дарёфт кунед</translation>
+        <translation>&quot;%1&quot;-ро дар варақаи &amp;нав дарёфт кардан</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1012"/>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>&quot;%1&quot;-ро дар %2 дарёфт кунед</translation>
+        <translation>&quot;%1&quot;-ро дар %2 дарёфт кардан</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1020"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>&quot;%1&quot;-ро дар %2 дар варақаи &amp;нав дарёфт кунед</translation>
+        <translation>&quot;%1&quot;-ро дар %2 дар варақаи &amp;нав дарёфт кардан</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1167"/>
@@ -347,7 +347,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="107"/>
         <source>Edit this group</source>
-        <translation>Гурӯҳи зеринро таҳрир кунед</translation>
+        <translation>Гурӯҳи зеринро таҳрир кардан</translation>
     </message>
 </context>
 <context>
@@ -360,7 +360,7 @@
     <message>
         <location filename="../editdictionaries.cc" line="41"/>
         <source>&amp;Sources</source>
-        <translation>&amp;Манбаъҳо</translation>
+        <translation>&amp;Сарчашмаҳо</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
@@ -377,22 +377,22 @@
     <message>
         <location filename="../editdictionaries.cc" line="101"/>
         <source>Sources changed</source>
-        <translation>Манбаъ иваз шуд</translation>
+        <translation>Сарчашмаҳо тағйир дода шудаанд</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="102"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>Баъзе манбаъҳо иваз карда шудаанд. Шумо мехоҳед ин таъғиротро қабул кунед?</translation>
+        <translation>Баъзе сарчашмаҳо тағйир дода шудаанд. Шумо мехоҳед ин тағйиротро қабул кунед?</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="105"/>
         <source>Accept</source>
-        <translation>Қабул кунед</translation>
+        <translation>Қабул кардан</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="107"/>
         <source>Cancel</source>
-        <translation>Бекор кунед</translation>
+        <translation>Бекор кардан</translation>
     </message>
 </context>
 <context>
@@ -438,7 +438,7 @@
     <message>
         <location filename="../forvo.cc" line="340"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Ба Танзимот|Луғатҳо|Манбаъҳо||Forvo гузаред ва барои ҳал кардани ин хато калиди API-и худро татбиқ кунед.</translation>
+        <translation>Ба Танзимот|Луғатҳо|Сарчашмаҳо||Forvo гузаред ва барои ҳал кардани ин хато калиди API-и худро татбиқ кунед.</translation>
     </message>
 </context>
 <context>
@@ -462,7 +462,7 @@
     <message>
         <location filename="../groupcombobox.cc" line="12"/>
         <source>Choose a Group (Alt+G)</source>
-        <translation>Гурӯҳро интихоб кунед (Alt+G)</translation>
+        <translation>Интихоб кардани гурӯҳ (Alt+G)</translation>
     </message>
 </context>
 <context>
@@ -488,7 +488,7 @@
     <message>
         <location filename="../groups.ui" line="61"/>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>Луғатҳои интихобшударо ба гурӯҳ илова кунед (гутмаи Ins)</translation>
+        <translation>Луғатҳои интихобшударо ба гурӯҳ илова кардан (тугмаи Ins)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="64"/>
@@ -503,7 +503,7 @@
     <message>
         <location filename="../groups.ui" line="86"/>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>Луғатҳои интихобшударо аз гурӯҳ тоза кунед (гутмаи Del)</translation>
+        <translation>Луғатҳои интихобшударо аз гурӯҳ тоза кардан (тугмаи Del)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="89"/>
@@ -513,7 +513,7 @@
     <message>
         <location filename="../groups.ui" line="92"/>
         <source>Del</source>
-        <translation>Тутмаи Del</translation>
+        <translation>Тугмаи Del</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="116"/>
@@ -528,17 +528,17 @@
     <message>
         <location filename="../groups.ui" line="140"/>
         <source>Create new dictionary group</source>
-        <translation>Гурӯҳи луғати навро эҷод кунед</translation>
+        <translation>Гурӯҳи нави луғатро эҷод кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
         <source>&amp;Add group</source>
-        <translation>&amp;Гурӯҳро илова кунед</translation>
+        <translation>&amp;Гурӯҳро илова кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="150"/>
         <source>Create language-based groups</source>
-        <translation>Гурӯҳи забондонро эҷод кунед</translation>
+        <translation>Гурӯҳи забондонро эҷод кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="153"/>
@@ -548,63 +548,63 @@
     <message>
         <location filename="../groups.ui" line="160"/>
         <source>Rename current dictionary group</source>
-        <translation>Номи гурӯҳи луғати ҷориро иваз кунед</translation>
+        <translation>Номи гурӯҳи луғати ҷориро иваз кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="163"/>
         <source>Re&amp;name group</source>
-        <translation>&amp;Номи гурӯҳро иваз кунед</translation>
+        <translation>&amp;Номи гурӯҳро иваз кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="170"/>
         <source>Remove current dictionary group</source>
-        <translation>Гурӯҳи луғати ҷориро тоза кунед</translation>
+        <translation>Гурӯҳи луғати ҷориро тоза кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="173"/>
         <source>&amp;Remove group</source>
-        <translation>&amp;Гурӯҳро тоза кунед</translation>
+        <translation>&amp;Гурӯҳро тоза кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="180"/>
         <source>Remove all dictionary groups</source>
-        <translation>Ҳамаи гурӯҳҳои луғатро тоза кунед</translation>
+        <translation>Ҳамаи гурӯҳҳои луғатро тоза кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="183"/>
         <location filename="../groups.cc" line="145"/>
         <source>Remove all groups</source>
-        <translation>Ҳамаи гурӯҳҳоро тоза кунед</translation>
+        <translation>Ҳамаи гурӯҳҳоро тоза кардан</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="194"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Луғатҳоро аз гурӯҳҳо ва ба гурӯҳҳо &amp;кашида монед, онҳоро дар гурӯҳҳо таҳвил кунед ва тартиби гурӯҳҳоро ба воситаи муш иваз кунед.</translation>
+        <translation>Луғатҳоро аз гурӯҳҳо ва ба гурӯҳҳо кашида монед, онҳоро дар дохили гурӯҳҳо таҳвил диҳед ва тартиби гурӯҳҳоро тав&amp;ассути муш иваз кунед.</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="94"/>
         <source>Add group</source>
-        <translation>Гурӯҳро илова кунед</translation>
+        <translation>Гурӯҳро илова кардан</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="95"/>
         <source>Give a name for the new group:</source>
-        <translation>Ба гурӯҳи нав номро гузоред:</translation>
+        <translation>Ба гурӯҳи нав ном гузоштан:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="120"/>
         <source>Rename group</source>
-        <translation>Номи гурӯҳро иваз кунед</translation>
+        <translation>Номи гурӯҳро иваз кардан</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="121"/>
         <source>Give a new name for the group:</source>
-        <translation>Ба гурӯҳ номи навро гузоред:</translation>
+        <translation>Ба гурӯҳ номи нав гузоштан:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="132"/>
         <source>Remove group</source>
-        <translation>Гурӯҳро тоза кунед</translation>
+        <translation>Гурӯҳро тоза кардан</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="133"/>
@@ -1667,7 +1667,7 @@
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Tamazight</source>
-        <translation>Тамазайд</translation>
+        <translation>Тамазайт</translation>
     </message>
 </context>
 <context>
@@ -1675,7 +1675,7 @@
     <message>
         <location filename="../loaddictionaries.cc" line="204"/>
         <source>Error loading dictionaries</source>
-        <translation>Ҳангоми боркунии луғатҳо хато ба вуҷуд омад</translation>
+        <translation>Ҳангоми боркунии луғатҳо хатогӣ ба вуҷуд омад</translation>
     </message>
 </context>
 <context>
@@ -1706,7 +1706,7 @@
     <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>&amp;Help</source>
-        <translation>&amp;Роҳнамо</translation>
+        <translation>&amp;Кӯмак</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
@@ -1716,7 +1716,7 @@
     <message>
         <location filename="../mainwindow.ui" line="108"/>
         <source>&amp;Zoom</source>
-        <translation>&amp;Андозаи ҳарфҳоро иваз кунед</translation>
+        <translation>&amp;Танзими андозаи шрифт</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
@@ -1772,12 +1772,12 @@
         <location filename="../mainwindow.ui" line="321"/>
         <location filename="../mainwindow.cc" line="165"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Хомӯш кунед</translation>
+        <translation>&amp;Баромад</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="324"/>
         <source>Quit from application</source>
-        <translation>Аз барнома хомӯш кунед</translation>
+        <translation>Аз барнома баромадан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="327"/>
@@ -1792,12 +1792,12 @@
     <message>
         <location filename="../mainwindow.ui" line="337"/>
         <source>&amp;Close To Tray</source>
-        <translation>&amp;Ба панел печонед</translation>
+        <translation>&amp;Ба панҷараки огоҳиҳо печондан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="340"/>
         <source>Minimizes the window to tray</source>
-        <translation>Тирезаро ба панел печонад</translation>
+        <translation>Равзанаро ба панҷараки огоҳиҳо мепечонад</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="343"/>
@@ -1807,12 +1807,12 @@
     <message>
         <location filename="../mainwindow.ui" line="352"/>
         <source>&amp;Save Article</source>
-        <translation>&amp;Мақоларо захира кунед</translation>
+        <translation>&amp;Мақоларо захира кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="355"/>
         <source>Save Article</source>
-        <translation>Мақоларо захира кунед</translation>
+        <translation>Мақоларо захира кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
@@ -1822,7 +1822,7 @@
     <message>
         <location filename="../mainwindow.ui" line="367"/>
         <source>&amp;Print</source>
-        <translation>&amp;Чоп кунед</translation>
+        <translation>&amp;Чоп кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="370"/>
@@ -1842,7 +1842,7 @@
     <message>
         <location filename="../mainwindow.ui" line="385"/>
         <source>Rescan Files</source>
-        <translation>Файлҳоро аз нав коркард кунед</translation>
+        <translation>Файлҳоро аз нав коркард кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="388"/>
@@ -1852,7 +1852,7 @@
     <message>
         <location filename="../mainwindow.ui" line="393"/>
         <source>&amp;Clear</source>
-        <translation>&amp;Пок кунед</translation>
+        <translation>&amp;Пок кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="402"/>
@@ -1879,17 +1879,17 @@
     <message>
         <location filename="../mainwindow.ui" line="423"/>
         <source>&amp;Export</source>
-        <translation>&amp;Захира кунед</translation>
+        <translation>&amp;Содир кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="45"/>
         <source>Show Names in Dictionary Bar</source>
-        <translation>Номҳоро дар лавҳаи луғат нишон диҳед</translation>
+        <translation>Номҳоро дар лавҳаи луғат намоиш додан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="46"/>
         <source>Show Small Icons in Toolbars</source>
-        <translation>Нишонаҳои хурдро дар лавҳаи асбобҳо нишон диҳед</translation>
+        <translation>Дар наворҳои абзорҳо нишонаҳои хурдро намоиш додан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="47"/>
@@ -1905,7 +1905,7 @@
     <message>
         <location filename="../mainwindow.cc" line="88"/>
         <source>Found in Dictionaries:</source>
-        <translation>Дар луғатҳои зерин дарёфт шуд:</translation>
+        <translation>Натиҷа дар луғатҳои зерин дарёфт шуд:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="97"/>
@@ -1915,12 +1915,12 @@
     <message>
         <location filename="../mainwindow.cc" line="100"/>
         <source>Back</source>
-        <translation>Ақиб</translation>
+        <translation>Ба қафо</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="101"/>
         <source>Forward</source>
-        <translation>Пеш</translation>
+        <translation>Ба пеш</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="110"/>
@@ -1930,17 +1930,17 @@
     <message>
         <location filename="../mainwindow.cc" line="120"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Калимаро талаффуз кунед (Alt+S)</translation>
+        <translation>Калимаро талаффуз кардан (Alt+S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="129"/>
         <source>Zoom In</source>
-        <translation>Бузург кунед</translation>
+        <translation>Бузург кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="131"/>
         <source>Zoom Out</source>
-        <translation>Хурд кунед</translation>
+        <translation>Хурд кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="133"/>
@@ -1950,12 +1950,12 @@
     <message>
         <location filename="../mainwindow.cc" line="149"/>
         <source>Words Zoom In</source>
-        <translation>Калимаҳоро бузург кунед</translation>
+        <translation>Калимаҳоро бузург кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="151"/>
         <source>Words Zoom Out</source>
-        <translation>Калимаҳоро хурд кунед</translation>
+        <translation>Калимаҳоро хурд кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="153"/>
@@ -1965,7 +1965,7 @@
     <message>
         <location filename="../mainwindow.cc" line="161"/>
         <source>Show &amp;Main Window</source>
-        <translation>&amp;Тирезаи асосиро намоиш диҳед</translation>
+        <translation>&amp;Равзанаи асосиро намоиш додан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="209"/>
@@ -1975,17 +1975,17 @@
     <message>
         <location filename="../mainwindow.cc" line="220"/>
         <source>Close current tab</source>
-        <translation>Варақаи ҷориро пӯшед</translation>
+        <translation>Варақаи ҷориро пӯшидан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="230"/>
         <source>Close all tabs</source>
-        <translation>Ҳамаи варақаҳоро пӯшед</translation>
+        <translation>Ҳамаи варақаҳоро пӯшидан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="238"/>
         <source>Close all tabs except current</source>
-        <translation>Ҳамаи варақаҳоро ғайр аз ҷорӣ пӯшед</translation>
+        <translation>Ҳамаи варақаҳоро ба ғайр аз ҷорӣ пӯшидан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="338"/>
@@ -2000,7 +2000,7 @@
     <message>
         <location filename="../mainwindow.cc" line="747"/>
         <source>Look up:</source>
-        <translation>Тарҷума кунед:</translation>
+        <translation>Тарҷума кардан:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="765"/>
@@ -2010,7 +2010,7 @@
     <message>
         <location filename="../mainwindow.cc" line="876"/>
         <source>Open Tabs List</source>
-        <translation>Рӯйхати варақаҳоро кушоед</translation>
+        <translation>Рӯйхати варақаҳоро кушодан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="934"/>
@@ -2050,7 +2050,7 @@
     <message>
         <location filename="../mainwindow.cc" line="2142"/>
         <source>Skip This Release</source>
-        <translation>Ин версияро гузаред</translation>
+        <translation>Ин версияро нодида гузарондан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2255"/>
@@ -2070,17 +2070,17 @@
     <message>
         <location filename="../mainwindow.cc" line="2405"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>Ягон принтер дастрас нест. Пеш аз ҳамам шумо бояд принтерро танзим кунед.</translation>
+        <translation>Ягон принтер дастрас нест. Пеш аз ҳама шумо бояд принтерро танзим кунед.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2422"/>
         <source>Print Article</source>
-        <translation>Мақоларо чоп кунед</translation>
+        <translation>Мақоларо чоп кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2443"/>
         <source>Save Article As</source>
-        <translation>Мақоларо ҳамчун ... захира кунед</translation>
+        <translation>Мақоларо захира кардан ҳамчун</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2443"/>
@@ -2100,7 +2100,7 @@
     <message>
         <location filename="../mainwindow.cc" line="2660"/>
         <source>&amp;Hide</source>
-        <translation>&amp;Пинҳон кунед</translation>
+        <translation>&amp;Пинҳон кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2664"/>
@@ -2110,7 +2110,7 @@
     <message>
         <location filename="../mainwindow.cc" line="2689"/>
         <source>Export history to file</source>
-        <translation>Таърихро дар файл захира кунед</translation>
+        <translation>Таърихро ба файл содир кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2691"/>
@@ -2120,12 +2120,12 @@
     <message>
         <location filename="../mainwindow.cc" line="2729"/>
         <source>History export complete</source>
-        <translation>Захиракунии таърих ба анҷом расид</translation>
+        <translation>Содиркунии таърих ба анҷом расид</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2732"/>
         <source>Export error: </source>
-        <translation>Хатои захиракунӣ: </translation>
+        <translation>Хатои содиркунӣ: </translation>
     </message>
 </context>
 <context>
@@ -2200,22 +2200,22 @@
     <message>
         <location filename="../orderandprops.ui" line="185"/>
         <source>Total articles:</source>
-        <translation>Мақолаҳои ҳамагӣ:</translation>
+        <translation>Ҳамагӣ мақолаҳо:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="192"/>
         <source>Total words:</source>
-        <translation>Калимаҳои ҳамагӣ:</translation>
+        <translation>Ҳамагӣ калимаҳо:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="209"/>
         <source>Translates from:</source>
-        <translation>Тарҷумашуда аз:</translation>
+        <translation>Тарҷума аз забони:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="216"/>
         <source>Translates to:</source>
-        <translation>Тарҷумашуда ба:</translation>
+        <translation>Тарҷума ба забони:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="271"/>
@@ -2225,7 +2225,7 @@
     <message>
         <location filename="../orderandprops.ui" line="336"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translatorcomment> Ба воситаи ҷойивазкунии чизҳо тартибро танзим кунед. Барои хомӯш кардани луғатҳо, онҳоро ба гурӯҳи ғайрифаъол ҷойиваз кунед.</translatorcomment>
+        <translatorcomment> Ба воситаи ҷойгузин кардани объектҳо тартибро танзим намоед. Барои хомӯш кардани луғатҳо, онҳоро ба гурӯҳи ғайрифаъол интиқол диҳед.</translatorcomment>
         <translation> Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</translation>
     </message>
 </context>
@@ -2234,12 +2234,12 @@
     <message>
         <location filename="../sources.cc" line="864"/>
         <source>Path</source>
-        <translation>Роҳ</translation>
+        <translation>Масир</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="866"/>
         <source>Recursive</source>
-        <translation>Бозгаштӣ</translation>
+        <translation>Фаъол/ғайрифаъол кардани луғат</translation>
     </message>
 </context>
 <context>
@@ -2265,37 +2265,37 @@
 With this on however, new tabs will be opened without
 switching to them.</source>
         <translation>Одатан, ҳангоми кушодани варақаи нав шумо онро ба воситаи табдилдиҳӣ
-дарҳол дидан мекунед. Аммо, фаъол кардани ин мконот варақаҳои
+дарҳол дидан мекунед. Аммо, фаъол кардани ин имконот варақаҳои
 навро бе табдилдиҳӣ кушода мекунад.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="71"/>
         <source>Open new tabs in background</source>
-        <translation>Варақаҳои навро дар тирезаи асосӣ кушоед</translation>
+        <translation>Варақаҳои навро дар равзанаи асосӣ кушодан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="78"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Фаъол кардани ин мконот варақаҳои навро пас аз варақаи
-кушодашуда кушода мекунад. Агар ин имконотро фаъол намекунед
+        <translation>Фаъол кардани ин имконот варақаҳои навро пас аз варақаи
+кушодашуда мекушояд. Агар ин имконотро фаъол намекунед
 варақаҳои нав дар охири рӯйхат кушода мешаванд.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="83"/>
         <source>Open new tabs after the current one</source>
-        <translation>Варақаҳои навро пас аз варақаи кушодашуда кушоед</translation>
+        <translation>Варақаҳои навро пас аз варақаи ҷорӣ кушодан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="90"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation>Имконоти зеринро интихоб кунед, агар варақаи ягона кушода аст ва шумо намехоҳед лавҳаи варақаҳоро дидан кунед.</translation>
+        <translation>Имконоти зеринро интихоб кунед, агар ҳангоми кушода будани варақаи ягона нахоҳед лавҳаи варақаҳоро намоиш диҳед.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="93"/>
         <source>Hide single tab</source>
-        <translation>Варақаи ягонаро пинҳон кунед</translation>
+        <translation>Варақаи ягонаро пинҳон кардан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="100"/>
@@ -2306,25 +2306,25 @@ be the last ones.</source>
         <location filename="../preferences.ui" line="110"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Агар имконоти зерин фаъол бошад, нишонаи луғат дар панели система пайдо мешавад,
-ва шумо аз он ҷо метавонед тирезаи асосии барномаро кушоед ва амалҳои дигарро иҷро кунед.</translation>
+        <translation type="unfinished">Агар имконоти зерин фаъол бошад, нишонаи луғат дар панели система пайдо мешавад,
+ва шумо аз он ҷо метавонед равзанаи асосии барномаро кушоед ва амалҳои дигарро иҷро кунед.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="114"/>
         <source>Enable system tray icon</source>
-        <translation>Нишонаи луғатро дар панел фаъол кунед</translation>
+        <translation>Нишонаи луғатро дар панҷараки огоҳиҳо фаъол кардан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="132"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Агар имконоти зерин фаъол бошад, ҳангоми кушоиши луғат танҳо нишонааш дар панели система
-пайдо мешавад ва тирезаи асосиаш нишон дода намешавад.</translation>
+        <translation>Агар имконоти зерин фаъол бошад, ҳангоми кушоиши луғат танҳо нишонаи он дар панҷараки огоҳиҳо
+пайдо мешавад ва равзанаи асосии он нишон дода намешавад.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="136"/>
         <source>Start to system tray</source>
-        <translation>Танҳо нишонаи луғатро дар панели система нишон диҳед</translation>
+        <translation>Баъд аз оғози барнома онро танҳо дар панҷараки огоҳиҳо намоиш додан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="143"/>
@@ -2336,7 +2336,7 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="147"/>
         <source>Close to system tray</source>
-        <translation>Луғатро ба панели система пинҳон кунед</translation>
+        <translation>Ҳангоми пӯшидани луғат онро ба панҷараки огоҳиҳо пинҳон кардан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="157"/>
@@ -2346,12 +2346,12 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="163"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>Луғати GoldenDict-ро ҳангоми боркунии системаи оператсионӣ ба худкор оғоз мекунад.</translation>
+        <translation>Луғати GoldenDict-ро ҳангоми боркунии системаи оператсионӣ ба таври худкор оғоз мекунад.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="166"/>
         <source>Start with system</source>
-        <translation>Луғатро бо системаи оператсионӣ оғоз кунед</translation>
+        <translation>Луғатро якҷоя бо системаи оператсионӣ оғоз кардан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="178"/>
@@ -2361,24 +2361,24 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="204"/>
         <source>Display style:</source>
-        <translation>Мавзӯъи луғат:</translation>
+        <translation>Мавзӯи луғат:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="258"/>
         <source>Double-click translates the word clicked</source>
-        <translation>Пахши дубора калимаи пахшшударо тарҷума мекунад</translation>
+        <translation>Зеркунии дубора калимаи зершударо тарҷума мекунад</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="265"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation>Одатан, бо зеркунии тугмаи ESC нишондиҳандаи муш ба сатри тарҷума гузаронида мешавад.
-Вале бо фаъолкунии ин имконот, тирезаи асосӣ пинҳон карда мешавад.</translation>
+        <translation type="unfinished">Одатан, бо зеркунии тугмаи ESC нишондиҳандаи муш ба сатри тарҷума гузаронида мешавад.
+Вале бо фаъолкунии ин имконот, равзанаи асосӣ пинҳон карда мешавад.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="269"/>
         <source>ESC key hides main window</source>
-        <translation>Тугмаи ESC тирезаи асосиро пинҳон мекунад</translation>
+        <translation type="unfinished">Тугмаи ESC равзанаи асосиро пинҳон мекунад</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="281"/>
@@ -2391,15 +2391,15 @@ With this on however, it will hide the main window.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>Агар имконоти зерин фаъол бошад, ҳангоми нишондиҳии ягон калима (дар Windows)
-ё интихоб кардани ягон калима (дар Linux) бо муш тирезаи пайдошаванда бо тарҷумаи
-он калима намоиш дода мешавад. Агар фаъол бошад, шумо метавонед инро аз тирезаи асосӣ
+        <translation type="unfinished">Агар имконоти зерин фаъол бошад, ҳангоми нишондиҳии ягон калима (дар Windows)
+ё интихоб кардани ягон калима (дар Linux) бо муш равзанаи пайдошаванда бо тарҷумаи
+он калима намоиш дода мешавад. Агар фаъол бошад, шумо метавонед инро аз равзанаи асосӣ
 ё панели система хомӯш кунед ё аз нав фаъол созед.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="306"/>
         <source>Enable scan popup functionality</source>
-        <translation>Хусусияти тарҷумаи пайдошавандаро фаъол кунед</translation>
+        <translation>Хусусияти тарҷумаи пайдошавандаро фаъол кардан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="318"/>
@@ -2411,19 +2411,19 @@ the program would always start with the scan popup active.</source>
     <message>
         <location filename="../preferences.ui" line="322"/>
         <source>Start with scan popup turned on</source>
-        <translation>Бо хусусияти тарҷумаи пайдошаванда барномаро оғоз кунед</translation>
+        <translation>Барномаро бо хусусияти тарҷумаи пайдошаванда оғоз кардан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="329"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Бо имконоти фаъолшудаи зерин, тарҷумаи пайдошаванда намоиш дода мешавад,
-агар ҳангоми интихоби калима ҳамаи тугмаҳои интихобшуда зер шуда истодаанд.</translation>
+агар ҳангоми интихоби калима ҳамаи тугмаҳои интихобшуда зер карда шаванд.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="333"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
-        <translation>Тарҷумаи пайдошавандаро намоиш диҳед, агар ҳамаи тугмаҳои интихобшуда зер шуда истодаанд:</translation>
+        <translation>Тарҷумаи пайдошаваандаро танҳо ҳангоми зеркунии тугмаҳои интихобшуда намоиш додан:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="372"/>
@@ -2549,10 +2549,10 @@ seconds, which is specified here.</source>
         <translatorcomment>Чтобы избавитӣся  ложных срабатываний, после выделения слова
 клавиши опрашиваются только в течение ограниченного
 промежутка времени, который и задается здесь.</translatorcomment>
-        <translation>Барои намоиш додани тарҷумаи пайдошаванда баъд аз
+        <translation type="unfinished">Барои намоиш додани тарҷумаи пайдошаванда баъд аз
 интихобкунии калима, шумо бояд тугмаҳои интихобшударо дар
 муддати сонияҳои таъйиншуда зер кунед. Агар тугмаҳоро баъд
-аз муддати таъйиншуда  зер мекунед, тарҷума пайдо намешавад.</translation>
+аз муддати таъйиншуда зер мекунед, тарҷума пайдо намешавад.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="536"/>
@@ -2562,12 +2562,12 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="558"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation>Калимаи тарҷумашударо ба ҷои тирезаи пайдошаванда дар тирезаи асосӣ нишон диҳед</translation>
+        <translation type="unfinished">Калимаи тарҷумашударо ба ҷои равзанаи пайдошаванда дар равзанаи асосӣ нишон диҳед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="561"/>
         <source>Send translated word to main window</source>
-        <translation>Калимаи тарҷумашударо дар тирезаи асосӣ нишон диҳед</translation>
+        <translation type="unfinished">Калимаи тарҷумашударо дар равзанаи нишон диҳед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="589"/>
@@ -2577,12 +2577,12 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="608"/>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>Барои пинҳон ва намоиш додани тирезаи асосӣ тугмаҳои зеринро истифода баред:</translation>
+        <translation type="unfinished">Барои пинҳон ва намоиш додани равзанаи асосӣ тугмаҳои зеринро истифода баред:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="639"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Барои таҷума кардани калимаҳо аз ҳофизаи система тугмаҳои зеринро истифода баред:</translation>
+        <translation>Барои тарҷума кардани калимаҳо аз ҳофизаи система тугмаҳои зеринро истифода баред:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="686"/>
@@ -2615,7 +2615,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="759"/>
         <source>Auto-pronounce words in main window</source>
-        <translation>Талаффузи худкори калимаҳо дар тирезаи асосӣ</translation>
+        <translation>Талаффузи худкори калимаҳо дар равзанаи асосӣ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="766"/>
@@ -2730,7 +2730,7 @@ Plugin must be installed for this option to work.</source>
     <message>
         <location filename="../preferences.ui" line="989"/>
         <source>Enable web plugins</source>
-        <translation>Плагини вебро фаъол кунед</translation>
+        <translation>Ҷузъи иловагии вебро фаъол кардан</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1012"/>
@@ -2779,7 +2779,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Барои тарҷума кардани калимаҳои зери курсор, технологияи  UI Automation-ро истифода баред.
+        <translation type="unfinished">Барои тарҷума кардани калимаҳои зери курсор, технологияи UI Automation-ро истифода баред.
 Ин технология танҳо бо баъзе барномаҳои дастгиришаванда кор мекунад.
 Агар шумо чунин барномаҳо истифода намебаред, имконоти зеринро истифода набаред.</translation>
     </message>
@@ -2961,7 +2961,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="90"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Калимаро талаффуз кунед (Alt+S)</translation>
+        <translation>Калимаро талаффуз кардан (Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="100"/>
@@ -2971,7 +2971,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="110"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation>Калимаро ба тирезаи асосӣ гузоред (Alt+W)</translation>
+        <translation>Калимаро ба равзанаи асосӣ гузоштан (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="120"/>
@@ -2987,7 +2987,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../scanpopup.ui" line="163"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation>Барои мустаҳкам кардан тиреза дар экран, иваз кардани ҳаҷм,
+        <translation type="unfinished">Барои мустаҳкам кардан равзана дар экран, иваз кардани ҳаҷм,
 ё идоракунии хусусиятҳои дигар инро зер кунед.</translation>
     </message>
 </context>
@@ -2996,7 +2996,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="970"/>
         <source>Path</source>
-        <translation>Роҳ</translation>
+        <translation>Масир</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="972"/>
@@ -3014,7 +3014,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="40"/>
         <source>Paths to search for the dictionary files:</source>
-        <translation>Ҷойҳо барои ҷустуҷӯи файлҳои луғат:</translation>
+        <translation>Масирҳо барои ҷустуҷӯи файлҳои луғат:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="54"/>
@@ -3023,7 +3023,7 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="300"/>
         <location filename="../sources.ui" line="366"/>
         <source>&amp;Add...</source>
-        <translation>&amp;Илова кунед...</translation>
+        <translation>&amp;Илова кардан...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="61"/>
@@ -3032,22 +3032,22 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="307"/>
         <location filename="../sources.ui" line="373"/>
         <source>&amp;Remove</source>
-        <translation>&amp;Тоза кунед</translation>
+        <translation>&amp;Тоза кардан</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="81"/>
         <source>Re&amp;scan now</source>
-        <translation>&amp;Аз нав коркард кунед</translation>
+        <translation>&amp;Аз нав коркард кардан</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="97"/>
         <source>Sound Dirs</source>
-        <translation>Ҷузвдони овоздор</translation>
+        <translation>Ҷузвдонҳои овозҳо</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="103"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>Луғатҳоро аз файлҳои аудиоӣ (овоздор) эҷод кунед. Ҷои файлҳои аудиоиро илова кунед:</translation>
+        <translation>Луғатҳоро аз файлҳои аудиоӣ (овоздор) эҷод кунед. Масирҳои файлҳои аудиоиро дар зер илова кунед:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="153"/>
@@ -3057,17 +3057,17 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="159"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>Ҷой феҳрист бо луғатҳои Hunspell/Myspel:</translation>
+        <translation>Масири феҳрист бо луғатҳои Hunspell/Myspel:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="175"/>
         <source>&amp;Change...</source>
-        <translation>&amp;Таъғир диҳед...</translation>
+        <translation>&amp;Тағйир додан...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="184"/>
         <source>Available morphology dictionaries:</source>
-        <translation>Луғатҳои морфологияи дастоас:</translation>
+        <translation>Луғатҳои морфологии дастрас:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="196"/>
@@ -3079,10 +3079,10 @@ Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
         <translation>Ҳар як луғати морфология ҳамчун луғати иловагии
 ягона истифода мешавад ва решаҳои калимаҳои
-нодуруст воридшуда ва вариантҳои навиштанашро
+нодуруст воридшуда ва вариантҳои навиштани онро
 ҳангоми ҷустуҷӯ намоиш медиҳад.
-Барои истифода кардани луғатҳои муносиб онҳоро
-ба поёни рӯйхати гурӯҳҳои муносиб илова кунед.</translation>
+Барои истифодаи луғатҳои муносиб, онҳоро
+ба поёни гурӯҳҳои муносиб илова кунед.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="221"/>
@@ -3102,12 +3102,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="286"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Ҳамаи вебсайтҳо. Сатри %GDWORD% бо калимаи воридшуда ҷойиваз мешавад:</translation>
+        <translation>Тамоми вебсайтҳо. Сатри %GDWORD% бо калимаи воридшуда ҷойгузин карда мешавад:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Шумо ҳамчун метавонед сатри %GD1251%-ро барои рамзгузории CP1251 истифода баред. Сатри %GDISO1% барои рамзгузории ISO 8859-1 истифода мешавад.</translation>
+        <translation>Шумо ҳамчунин метавонед сатри %GD1251%-ро барои рамзгузории CP1251 ва сатри %GDISO1%-ро барои рамзгузории ISO 8859-1 истифода баред.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="343"/>
@@ -3117,7 +3117,7 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="349"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Ҳамаи барномаҳои берунӣ. Сатри %GDWORD% бо калимаи дархостшуда ҷойиваз мешавад. Ҳамон калима ҳам ба сатри вуруди калимаҳо ворид мешавад.</translation>
+        <translation>Тамоми барномаҳои берунӣ. Сатри %GDWORD% бо калимаи дархостшуда ҷойгузин карда мешавад. Худи калима низ ба сатри вуруди калимаҳо дохил карда мешавад.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="402"/>
@@ -3127,12 +3127,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="414"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Талаффузи фаврӣ аз &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Вебсайти зерин ба одамон иҷозат медиҳад, ки онҳо тавонанд талаффузи калимаҳоро сабт ва пахш  кунанд. Шумо метавонед калимаҳои сабтшударо аз луғати GoldenDict гӯш кунед.</translation>
+        <translation>Талаффузи фаврӣ аз &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Вебсайти зерин ба одамон иҷозат медиҳад, ки онҳо тавонанд талаффузи калимаҳоро сабт ва бо дигарон мубодила намоянд. Шумо метавонед калимаҳои сабтшударо аз луғати GoldenDict гӯш кунед.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="427"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation>Талаффузро аз Forvo фаъол кунед</translation>
+        <translation>Талаффузро аз Forvo фаъол кардан</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="457"/>
@@ -3145,8 +3145,8 @@ of the appropriate groups to use them.</source>
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
         <translation>Барои истифодабарии хадамоти Forvo калиди API лозим аст. Сатри зеринро холӣ монед,
-агар шумо мехоҳед калиди пешфарзро истифода баред, вале калиди пешфарз метавонад дар
-оянда дастнорас шавад, барои ин шумо метавонед калиди шихсиро дар вебсайт дархост кунед.</translation>
+агар хоҳед, ки калиди пешфарзро истифода баред, ки метавонад дар
+оянда дастнорас шавад, ё ки барои дархости калиди шахсӣ дар сайт қайд шавед.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="489"/>
@@ -3165,7 +3165,7 @@ p, li { white-space: pre-wrap; }
 &lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Калиди шахсиро аз &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ин ҷо&lt;/span&gt;&lt;/a&gt; дархост кунед, ё инро холӣ монед барои он ки тавонед калиди пешфарзро истифода баред.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Калиди шахсиро аз &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ин ҷо&lt;/span&gt;&lt;/a&gt; дархост кунед, ё ки ин майдонро холӣ монед, то ки калиди пешфарзро истифода баред.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="509"/>
@@ -3205,7 +3205,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="663"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
-        <translation>Барои навиштан дар забони ҷопонӣ, истифодаи алифбои лотиниро фаъол мекунад</translation>
+        <translation>Истифодаи алифбои лотиниро барои навиштан бо забони ҷопонӣ фаъол мекунад</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="666"/>
