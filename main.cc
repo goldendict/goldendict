@@ -5,6 +5,7 @@
 #include <QIcon>
 #include "gdappstyle.hh"
 #include "mainwindow.hh"
+#include "lineedit.hh"
 #include "config.hh"
 
 #include "processwrapper.hh"

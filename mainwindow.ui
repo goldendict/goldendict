@@ -153,7 +153,7 @@
       <number>1</number>
      </property>
      <item>
-      <widget class="QLineEdit" name="translateLine">
+      <widget class="LineEdit" name="translateLine">
        <property name="minimumSize">
         <size>
          <width>200</width>
@@ -442,6 +442,11 @@
    <extends>QTabWidget</extends>
    <header>maintabwidget.hh</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>lineedit.hh</header>
   </customwidget>
  </customwidgets>
  <tabstops>
