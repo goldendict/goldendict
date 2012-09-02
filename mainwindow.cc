@@ -54,7 +54,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   cfg( cfg_ ),
   history( History::Load(), cfg_.preferences.maxStringsInHistory ),
   dictionaryBar( this, cfg.mutedDictionaries, configEvents ),
-  articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
+  articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle, cfg ),
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites ),
   dictNetMgr( this ),

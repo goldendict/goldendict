@@ -24,7 +24,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="iconSize">
       <size>
@@ -987,6 +987,16 @@ Plugin must be installed for this option to work.</string>
          </property>
          <property name="text">
           <string>Enable web plugins</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="disableWebDictsWhenOffline">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled, the program checks for internet connectivity before searching in web-based dictionaries. If no network connectivity is found, web-based dictionaries are skipped. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:7pt;&quot;&gt;(Network connectivity is checked by conecting to www.google.com. If the server does not respond within 0.3sec [configurable in the configuration file] we assume there is no connectivity)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Disable web dictionaries when offline</string>
          </property>
         </widget>
        </item>

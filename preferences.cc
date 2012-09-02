@@ -189,6 +189,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.checkForNewReleases->setChecked( p.checkForNewReleases );
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
   ui.enableWebPlugins->setChecked( p.enableWebPlugins );
+  ui.disableWebDictsWhenOffline->setChecked( p.disableWebDictsWhenOffline );
+ 
 }
 
 Config::Preferences Preferences::getPreferences()
@@ -262,6 +264,7 @@ Config::Preferences Preferences::getPreferences()
   p.checkForNewReleases = ui.checkForNewReleases->isChecked();
   p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();
   p.enableWebPlugins = ui.enableWebPlugins->isChecked();
+  p.disableWebDictsWhenOffline = ui.disableWebDictsWhenOffline->isChecked();
 
   return p;
 }

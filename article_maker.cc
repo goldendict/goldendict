@@ -12,6 +12,8 @@
 #include "folding.hh"
 #include "langcoder.hh"
 #include "dprintf.hh"
+#include "is_online.hh"
+#include "website.hh"
 
 using std::vector;
 using std::string;
@@ -21,10 +23,12 @@ using std::list;
 
 ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictionaries_,
                             vector< Instances::Group > const & groups_,
-                            QString const & displayStyle_ ):
+                            QString const & displayStyle_,
+			    Config::Class const & cfg_ ):
   dictionaries( dictionaries_ ),
   groups( groups_ ),
-  displayStyle( displayStyle_ )
+  displayStyle( displayStyle_ ),
+  cfg(cfg_)
 {
 }
 
@@ -211,7 +215,11 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   string header = makeHtmlHeader( inWord.trimmed(),
                                   activeGroup && activeGroup->icon.size() ?
                                     activeGroup->icon : QString() );
-
+  
+  bool disableWebPlugins = false;
+  if ( cfg.preferences.disableWebDictsWhenOffline ) { 
+    disableWebPlugins = !network_status::checkNetworkAccess( cfg.preferences.networkCheckTimeout );
+  }
   if ( mutedDicts.size() )
   {
     std::vector< sptr< Dictionary::Class > > unmutedDicts;
@@ -220,11 +228,23 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
 
     for( unsigned x = 0; x < activeDicts.size(); ++x )
       if ( !mutedDicts.contains(
-              QString::fromStdString( activeDicts[ x ]->getId() ) ) )
+              QString::fromStdString( activeDicts[ x ]->getId() ) ) &&
+              ( ! activeDicts[x]->needNetwork() || ! disableWebPlugins )
+	 )
         unmutedDicts.push_back( activeDicts[ x ] );
 
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
                                contexts, unmutedDicts, header );
+  } else if ( disableWebPlugins ) {
+    std::vector< sptr< Dictionary::Class > > unmutedDicts;
+
+    unmutedDicts.reserve( activeDicts.size() );
+
+    for( unsigned x = 0; x < activeDicts.size(); ++x )
+      if ( ! activeDicts[x]->needNetwork() )
+        unmutedDicts.push_back( activeDicts[ x ] );
+    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+                               contexts, unmutedDicts, header );    
   }
   else
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",

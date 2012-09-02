@@ -121,6 +121,8 @@ Preferences::Preferences():
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
+  disableWebDictsWhenOffline( true ),
+  networkCheckTimeout( 300 ),
   zoomFactor( 1 ),
   wordsZoomLevel( 0 ),
   maxStringsInHistory( 500 )
@@ -591,6 +593,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "wordsZoomLevel" ).isNull() )
       c.preferences.wordsZoomLevel = preferences.namedItem( "wordsZoomLevel" ).toElement().text().toInt();
+    
+    if ( !preferences.namedItem( "networkCheckTimeout" ).isNull() )
+      c.preferences.networkCheckTimeout = preferences.namedItem( "networkCheckTimeout" ).toElement().text().toInt();
 
     applyBoolOption( c.preferences.enableMainWindowHotkey, preferences.namedItem( "enableMainWindowHotkey" ) );
     if ( !preferences.namedItem( "mainWindowHotkey" ).isNull() )
@@ -645,6 +650,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "enableWebPlugins" ).isNull() )
       c.preferences.enableWebPlugins = ( preferences.namedItem( "enableWebPlugins" ).toElement().text() == "1" );
+    
+    if ( !preferences.namedItem( "disableWebDictsWhenOffline" ).isNull() )
+      c.preferences.disableWebDictsWhenOffline = ( preferences.namedItem( "disableWebDictsWhenOffline" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
@@ -1085,6 +1093,11 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "wordsZoomLevel" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.wordsZoomLevel ) ) );
     preferences.appendChild( opt );
+    
+    opt = dd.createElement( "networkCheckTimeout" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.networkCheckTimeout ) ) );
+    preferences.appendChild( opt );
+    
 
     opt = dd.createElement( "enableMainWindowHotkey" );
     opt.appendChild( dd.createTextNode( c.preferences.enableMainWindowHotkey ? "1":"0" ) );
@@ -1201,6 +1214,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "enableWebPlugins" );
     opt.appendChild( dd.createTextNode( c.preferences.enableWebPlugins ? "1" : "0" ) );
+    preferences.appendChild( opt );
+    
+    opt = dd.createElement( "disableWebDictsWhenOffline" );
+    opt.appendChild( dd.createTextNode( c.preferences.disableWebDictsWhenOffline ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "maxStringsInHistory" );

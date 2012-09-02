@@ -11,6 +11,7 @@
 #include "dictionary.hh"
 #include "instances.hh"
 #include "wordfinder.hh"
+#include "config.hh"
 
 /// This class generates the article's body for the given lookup request
 class ArticleMaker: public QObject
@@ -21,6 +22,8 @@ class ArticleMaker: public QObject
   std::vector< Instances::Group > const & groups;
 
   QString displayStyle;
+  
+  Config::Class const & cfg;
 
 public:
 
@@ -30,7 +33,9 @@ public:
   /// of the inquiries, although those changes are perfectly legal.
   ArticleMaker( std::vector< sptr< Dictionary::Class > > const & dictionaries,
                 std::vector< Instances::Group > const & groups,
-                QString const & displayStyle );
+                QString const & displayStyle,
+		Config::Class const & cfg_
+	      );
 
   /// Sets the display style to use for any new requests. This affects the
   /// choice of the stylesheet file.

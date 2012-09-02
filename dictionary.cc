@@ -121,6 +121,12 @@ void Class::deferredInit()
 {
 }
 
+bool Class::needNetwork() throw()
+{
+  return false;
+}
+
+
 sptr< WordSearchRequest > Class::stemmedMatch( wstring const & /*str*/,
                                                unsigned /*minLength*/,
                                                unsigned /*maxSuffixVariation*/,
