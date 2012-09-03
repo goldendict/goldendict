@@ -1359,7 +1359,10 @@ void MainWindow::currentGroupChanged( QString const & )
   // Update word search results
 
   if( !showHistory )
+  {
     translateInputChanged( ui.translateLine->text() );
+    translateInputFinished( false );
+  }
 
   updateCurrentGroupProperty();
 }
@@ -1423,14 +1426,14 @@ void MainWindow::translateInputChanged( QString const & newValue )
   wordFinder.prefixMatch( req, getActiveDicts() );
 }
 
-void MainWindow::translateInputFinished()
+void MainWindow::translateInputFinished( bool checkModifiers )
 {
   QString word = ui.translateLine->text();
 
   if ( word.size() )
   {
     Qt::KeyboardModifiers mods = QApplication::keyboardModifiers();
-    if ( mods & (Qt::ControlModifier | Qt::ShiftModifier) )
+    if ( checkModifiers && ( mods & (Qt::ControlModifier | Qt::ShiftModifier) ) )
       addNewTab();
 
     showTranslationFor( word );

@@ -248,7 +248,7 @@ private slots:
 
   void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );
-  void translateInputFinished();
+  void translateInputFinished( bool checkModifiers = true );
 
   /// Closes any opened search in the article view, and focuses the translateLine/close main window to tray.
   void handleEsc();
