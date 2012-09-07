@@ -873,9 +873,13 @@ void processUnsortedParts( wstring & str, bool strip )
   }
 }
 
-void expandOptionalParts( wstring & str, list< wstring > & result,
-                          size_t x )
+void expandOptionalParts( wstring & str, list< wstring > * result,
+                          size_t x, bool inside_recurse )
 {
+  list< wstring > expanded;
+  list< wstring > * headwords;
+  headwords = inside_recurse ? result : &expanded;
+
   for( ; x < str.size(); )
   {
     wchar ch = str[ x ];
@@ -918,7 +922,7 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
                 wstring removed( str, 0, x );
                 removed.append( str, y + 1, str.size() - y - 1 );
 
-                expandOptionalParts( removed, result, x );
+                expandOptionalParts( removed, headwords, x, true );
               }
 
               break;
@@ -933,10 +937,14 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
           wstring removed( str, 0, x );
 
           // Limit the amount of results to avoid excessive resource consumption
-          if ( result.size() < 32 )
-            result.push_back( removed );
+          if ( headwords->size() < 32 )
+            headwords->push_back( removed );
           else
+          {
+            if( !inside_recurse )
+              result->merge( expanded );
             return;
+          }
         }
       }
 
@@ -956,8 +964,10 @@ void expandOptionalParts( wstring & str, list< wstring > & result,
   }
 
   // Limit the amount of results to avoid excessive resource consumption
-  if ( result.size() < 32 )
-    result.push_back( str );
+  if ( headwords->size() < 32 )
+    headwords->push_back( str );
+  if( !inside_recurse )
+    result->merge( expanded );
 }
 
 void expandTildes( wstring & str, wstring const & tildeReplacement )

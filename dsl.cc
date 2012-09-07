@@ -577,7 +577,7 @@ void DslDictionary::loadArticle( uint32_t address,
 
         list< wstring > lst;
 
-        expandOptionalParts( tildeValue, lst );
+        expandOptionalParts( tildeValue, &lst );
 
         if ( lst.size() ) // Should always be
           tildeValue = lst.front();
@@ -597,7 +597,7 @@ void DslDictionary::loadArticle( uint32_t address,
       str = Folding::applySimpleCaseOnly( str );
 
       list< wstring > lst;
-      expandOptionalParts( str, lst );
+      expandOptionalParts( str, &lst );
 
       // Does one of the results match the requested word? If so, we'd choose
       // it as our headword.
@@ -1500,7 +1500,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 if ( keys.size() )
                   expandTildes( curString, keys.front() );
 
-                expandOptionalParts( curString, keys );
+                expandOptionalParts( curString, &keys );
 
                 if ( !abrvScanner.readNextLine( curString, curOffset ) || curString.empty() )
                 {
@@ -1602,7 +1602,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           list< wstring > allEntryWords;
 
           processUnsortedParts( curString, true );
-          expandOptionalParts( curString, allEntryWords );
+          expandOptionalParts( curString, &allEntryWords );
 
           uint32_t articleOffset = curOffset;
 
@@ -1629,7 +1629,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             processUnsortedParts( curString, true );
             expandTildes( curString, allEntryWords.front() );
-            expandOptionalParts( curString, allEntryWords );
+            expandOptionalParts( curString, &allEntryWords );
           }
 
           if ( !hasString )

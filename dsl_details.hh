@@ -161,8 +161,8 @@ void processUnsortedParts( wstring & str, bool strip );
 
 /// Expands optional parts of a headword (ones marked with parentheses),
 /// producing all possible combinations where they are present or absent.
-void expandOptionalParts( wstring & str, list< wstring > & result,
-                          size_t x = 0 );
+void expandOptionalParts( wstring & str, list< wstring > * result,
+                          size_t x = 0, bool inside_recurse = false );
 
 /// Expands all unescaped tildes, inserting tildeReplacement text instead of
 /// them.
