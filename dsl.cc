@@ -185,6 +185,8 @@ public:
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
     throw( std::exception );
 
+  virtual QString const& getDescription();
+
 private:
 
   virtual string const & ensureInitDone();
@@ -419,8 +421,6 @@ void DslDictionary::loadIcon()
     QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
   // Remove the extension
-
-  QString lc = fileName.toLower();
 
   if ( fileName.endsWith( ".dsl.dz", Qt::CaseInsensitive ) )
     fileName.chop( 6 );
@@ -892,6 +892,73 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += "<span class=\"dsl_unknown\">" + processNodeChildren( node ) + "</span>";
 
   return result;
+}
+
+QString const& DslDictionary::getDescription()
+{
+    if( !dictionaryDescription.isEmpty() )
+        return dictionaryDescription;
+
+    dictionaryDescription = "NONE";
+
+    QString fileName =
+      QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+    // Remove the extension
+    if ( fileName.endsWith( ".dsl.dz", Qt::CaseInsensitive ) )
+      fileName.chop( 6 );
+    else
+      fileName.chop( 3 );
+
+    fileName += "ann";
+    QFileInfo info( fileName );
+
+    if ( info.exists() )
+    {
+        QFile annFile( fileName );
+        if( !annFile.open( QFile::ReadOnly | QFile::Text ) )
+            return dictionaryDescription;
+
+        QTextStream annStream( &annFile );
+        QString data, str;
+
+        str = annStream.readLine();
+
+        if( str.left( 10 ).compare( "#LANGUAGE " ) != 0 )
+        {
+            annStream.seek( 0 );
+            dictionaryDescription = annStream.readAll();
+        }
+        else
+        {
+            // Multilanguage annotation
+
+            qint32 gdLang, annLang;
+            QString langStr;
+            gdLang = LangCoder::code2toInt( QLocale::system().name().left( 2 ).toAscii().data() );
+            for(;;)
+            {
+                data.clear();
+                langStr = str.mid( 10 ).replace( '\"', ' ').trimmed();
+                annLang = LangCoder::findIdForLanguage( gd::toWString( langStr ) );
+                do
+                {
+                    str = annStream.readLine();
+                    if( str.left( 10 ).compare( "#LANGUAGE " ) == 0 )
+                        break;
+                    if( !str.endsWith( '\n' ) )
+                        str.append( '\n' );
+                    data += str;
+                }
+                while ( !annStream.atEnd() );
+                if( dictionaryDescription.compare( "NONE ") == 0 || langStr.compare( "English", Qt::CaseInsensitive ) == 0 || gdLang == annLang )
+                    dictionaryDescription = data.trimmed();
+                if( gdLang == annLang || annStream.atEnd() )
+                    break;
+            }
+        }
+    }
+    return dictionaryDescription;
 }
 
 #if 0
