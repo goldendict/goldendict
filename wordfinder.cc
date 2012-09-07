@@ -4,6 +4,7 @@
 #include "wordfinder.hh"
 #include "folding.hh"
 #include "wstring_qt.hh"
+#include "htmlescape.hh"
 #include <QThreadPool>
 #include <map>
 #include "dprintf.hh"
@@ -437,7 +438,7 @@ void WordFinder::updateResults()
     //DPRINTF( "%d: %ls\n", i->second, i->first.c_str() );
 
     if ( searchResults.size() < maxSearchResults )
-      searchResults.push_back( std::pair< QString, bool >( gd::toQString( i->word ), i->wasSuggested ) );
+      searchResults.push_back( std::pair< QString, bool >( Html::unescape(gd::toQString( i->word )), i->wasSuggested ) );
     else
       break;
   }
