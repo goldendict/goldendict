@@ -205,9 +205,63 @@ void readJSONValue( string const & source, string & str, uint32_t & pos)
     }
 }
 
+map< string, string > parseMetaData( string const & metaData )
+{
+// Parsing JSON string
+    map< string, string > data;
+    string name, value;
+    uint32_t n = 0;
+
+    while( metaData[n] != '{' && n < metaData.length() )
+        n++;
+    while( n < metaData.length() )
+    {
+        // Skip to '"'
+        while( metaData[n] != '\"' && n < metaData.length() )
+            n++;
+        if( ++n >= metaData.length() )
+            break;
+
+        // Read name
+        while( !( ( metaData[n] == '\"' || metaData[n] == '{' ) && metaData[n-1] != '\\' )
+               && n < metaData.length() )
+            name.push_back( metaData[n++]);
+
+        // Skip to ':'
+        if( ++n >= metaData.length() )
+            break;
+        while( metaData[n] != ':' && n < metaData.length() )
+            n++;
+        if( ++n >= metaData.length() )
+            break;
+
+        // Find value start after ':'
+        while( !( ( metaData[n] == '\"'
+                    || metaData[n] == '{'
+                    || metaData[n] == '['
+                    || ( metaData[n] >= '0' && metaData[n] <= '9' ) )
+               && metaData[n-1] != '\\' )
+               && n < metaData.length() )
+            n++;
+        if( n >= metaData.length() )
+            break;
+
+        readJSONValue( metaData, value, n);
+
+        data[name] = value;
+
+        name.clear();
+        value.clear();
+        if( ++n >= metaData.length() )
+            break;
+    }
+    return data;
+}
+
 class AardDictionary: public BtreeIndexing::BtreeDictionary
 {
     Mutex idxMutex;
+    Mutex aardMutex;
     File::Class idx;
     IdxHeader idxHeader;
     ChunkedStorage::Reader chunks;
@@ -250,6 +304,8 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
                                                         wstring const & )
       throw( std::exception );
 
+    virtual QString const& getDescription();
+
 private:
 
     void loadIcon();
@@ -287,6 +343,9 @@ AardDictionary::AardDictionary( string const & id,
     openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                           idxHeader.indexRootOffset ),
                idx, idxMutex );
+
+    // Read decription
+
 }
 
 AardDictionary::~AardDictionary()
@@ -440,11 +499,14 @@ void AardDictionary::loadArticle( uint32_t address,
 
     articleText.clear();
 
-    df.seek( articleOffset );
-    df.read( &size, sizeof(size) );
-    articleSize = size;
-    articleBody.resize( articleSize );
-    df.read( &articleBody.front(), articleSize );
+    {
+        Mutex::Lock _( aardMutex );
+        df.seek( articleOffset );
+        df.read( &size, sizeof(size) );
+        articleSize = size;
+        articleBody.resize( articleSize );
+        df.read( &articleBody.front(), articleSize );
+    }
 
     if ( articleBody.empty() )
       throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
@@ -487,6 +549,43 @@ void AardDictionary::loadArticle( uint32_t address,
         articleText = convert( articleText );
 
     articleText = "<div class=\"sdict\">" + articleText + "</div>";
+}
+
+QString const& AardDictionary::getDescription()
+{
+    if( !dictionaryDescription.isEmpty() )
+        return dictionaryDescription;
+
+    dictionaryDescription = "NONE";
+
+    AAR_header dictHeader;
+    uint32_t size;
+    vector< char > data;
+
+    {
+        Mutex::Lock _( aardMutex );
+        df.seek( 0 );
+        df.read( &dictHeader, sizeof(dictHeader) );
+        size = dictHeader.metaLength;
+        data.resize( size );
+        df.read( &data.front(), size );
+    }
+
+    string metaStr = decompressBzip2( data.data(), size );
+    if( metaStr.empty() )
+        metaStr = decompressZlib( data.data(), size );
+
+    map< string, string > meta = parseMetaData( metaStr );
+
+    if( !meta.empty() )
+    {
+        map< string, string >::const_iterator iter = meta.find( "description" );
+        if( iter != meta.end() )
+            dictionaryDescription = QString::fromUtf8( iter->second.c_str() );
+        dictionaryDescription.replace( "\\n", "\n" );
+        dictionaryDescription.replace( "\\t", "\t" );
+    }
+    return dictionaryDescription;
 }
 
 /// AardDictionary::getArticle()
@@ -656,59 +755,6 @@ void AardArticleRequest::run()
   finish();
 }
 
-map< string, string > parseMetaData( string const & metaData )
-{
-// Parsing JSON string
-    map< string, string > data;
-    string name, value;
-    uint32_t n = 0;
-
-    while( metaData[n] != '{' && n < metaData.length() )
-        n++;
-    while( n < metaData.length() )
-    {
-        // Skip to '"'
-        while( metaData[n] != '\"' && n < metaData.length() )
-            n++;
-        if( ++n >= metaData.length() )
-            break;
-
-        // Read name
-        while( !( ( metaData[n] == '\"' || metaData[n] == '{' ) && metaData[n-1] != '\\' )
-               && n < metaData.length() )
-            name.push_back( metaData[n++]);
-
-        // Skip to ':'
-        if( ++n >= metaData.length() )
-            break;
-        while( metaData[n] != ':' && n < metaData.length() )
-            n++;
-        if( ++n >= metaData.length() )
-            break;
-
-        // Find value start after ':'
-        while( !( ( metaData[n] == '\"'
-                    || metaData[n] == '{'
-                    || metaData[n] == '['
-                    || ( metaData[n] >= '0' && metaData[n] <= '9' ) )
-               && metaData[n-1] != '\\' )
-               && n < metaData.length() )
-            n++;
-        if( n >= metaData.length() )
-            break;
-
-        readJSONValue( metaData, value, n);
-
-        data[name] = value;
-
-        name.clear();
-        value.clear();
-        if( ++n >= metaData.length() )
-            break;
-    }
-    return data;
-}
-
 sptr< Dictionary::DataRequest > AardDictionary::getArticle( wstring const & word,
                                                             vector< wstring > const & alts,
                                                             wstring const & )
@@ -765,6 +811,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           vector< char > data;
           uint32_t size = dictHeader.metaLength;
+
+          if( size == 0 )
+          {
+              DPRINTF( "File %s has invalid metadata", i->c_str() );
+              continue;
+          }
 
           data.resize( size );
           df.read( &data.front(), size );
