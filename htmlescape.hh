@@ -22,6 +22,9 @@ string preformat( string const & );
 // Escapes the given string to be included in JavaScript.
 string escapeForJavaScript( string const & );
 
+// Replace html entities
+QString unescape( QString const & str );
+
 }
 
 #endif

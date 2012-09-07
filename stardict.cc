@@ -72,7 +72,7 @@ struct Ifo
   string version;
   string bookname;
   uint32_t wordcount, synwordcount, idxfilesize, idxoffsetbits;
-  string sametypesequence, dicttype;
+  string sametypesequence, dicttype, description;
 
   Ifo( File::Class & );
 };
@@ -166,6 +166,8 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
     throw( std::exception );
+
+  virtual QString const& getDescription();
 
 private:
 
@@ -544,6 +546,26 @@ void StardictDictionary::loadArticle( uint32_t address,
   free( articleBody );
 }
 
+QString const& StardictDictionary::getDescription()
+{
+    if( !dictionaryDescription.isEmpty() )
+        return dictionaryDescription;
+
+    dictionaryDescription = "NONE";
+
+    File::Class ifoFile( getDictionaryFilenames()[ 0 ], "r" );
+    Ifo ifo( ifoFile );
+
+    if( !ifo.description.empty() )
+    {
+        dictionaryDescription = QString::fromUtf8( ifo.description.c_str() );
+        dictionaryDescription.replace( "\t", "<br/>" );
+        dictionaryDescription.replace( "\\n", "<br/>" );
+        dictionaryDescription = Html::unescape( dictionaryDescription );
+    }
+
+    return dictionaryDescription;
+}
 
 /// StardictDictionary::findHeadwordsForSynonym()
 
@@ -921,6 +943,9 @@ Ifo::Ifo( File::Class & f ):
       else
       if ( char const * val = beginsWith( "dicttype=", option ) )
         dicttype = val;
+      else
+      if ( char const * val = beginsWith( "description=", option ) )
+        description = val;
     }
   }
   catch( File::exReadError & )
