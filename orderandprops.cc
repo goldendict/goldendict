@@ -72,6 +72,10 @@ void OrderAndProps::disableDictionaryDescription()
   ui.dictionaryTranslatesFrom->clear();
   ui.dictionaryTranslatesTo->clear();
   ui.dictionaryFileList->clear();
+
+  ui.dictionaryDescription->clear();
+  ui.dictionaryDescription->setVisible( false );
+  ui.dictionaryDescriptionLabel->setVisible( false );
 }
 
 namespace {
@@ -116,5 +120,18 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
     }
 
     ui.dictionaryFileList->setPlainText( filenamesText );
+
+    QString const& descText = dict->getDescription();
+    if( !descText.isEmpty() && descText.compare( "NONE" ) != 0 )
+    {
+      ui.dictionaryDescription->setPlainText( descText );
+      ui.dictionaryDescription->setVisible( true );
+      ui.dictionaryDescriptionLabel->setVisible( true );
+    }
+    else
+    {
+      ui.dictionaryDescription->setVisible( false );
+      ui.dictionaryDescriptionLabel->setVisible( false );
+    }
   }
 }

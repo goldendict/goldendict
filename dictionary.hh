@@ -254,6 +254,9 @@ class Class
   string id;
   vector< string > dictionaryFiles;
 
+protected:
+  QString dictionaryDescription;
+
 public:
 
   /// Creates a dictionary. The id should be made using
@@ -368,6 +371,9 @@ public:
   /// response.
   virtual sptr< DataRequest > getResource( string const & /*name*/ )
     throw( std::exception );
+
+  // Return dictionary description if presented
+  virtual QString const& getDescription();
 
   virtual ~Class()
   {}

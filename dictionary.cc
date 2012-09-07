@@ -148,6 +148,10 @@ sptr< DataRequest > Class::getResource( string const & /*name*/ )
   return new DataRequestInstant( false );
 }
 
+QString const& Class::getDescription()
+{
+    return dictionaryDescription;
+}
 
 string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
 {

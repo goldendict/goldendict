@@ -240,6 +240,60 @@
          </layout>
         </item>
         <item>
+         <widget class="QLabel" name="dictionaryDescriptionLabel">
+          <property name="text">
+           <string>Description:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPlainTextEdit" name="dictionaryDescription">
+          <property name="palette">
+           <palette>
+            <active>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>224</red>
+                <green>223</green>
+                <blue>223</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>224</red>
+                <green>223</green>
+                <blue>223</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>212</red>
+                <green>208</green>
+                <blue>200</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -247,7 +301,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>434</height>
+            <height>5</height>
            </size>
           </property>
          </spacer>
@@ -260,7 +314,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>256</width>
-            <height>20</height>
+            <height>5</height>
            </size>
           </property>
          </spacer>
@@ -274,6 +328,24 @@
         </item>
         <item>
          <widget class="QPlainTextEdit" name="dictionaryFileList">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>65</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>65</height>
+           </size>
+          </property>
           <property name="palette">
            <palette>
             <active>
@@ -313,9 +385,6 @@
           </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="horizontalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
           <property name="lineWrapMode">
            <enum>QPlainTextEdit::NoWrap</enum>

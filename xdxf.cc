@@ -161,6 +161,8 @@ public:
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
     throw( std::exception );
 
+  virtual QString const& getDescription();
+
 private:
 
   void loadIcon();
@@ -336,6 +338,32 @@ void XdxfDictionary::loadIcon()
   }
 
   dictionaryIconLoaded = true;
+}
+
+QString const& XdxfDictionary::getDescription()
+{
+    if( !dictionaryDescription.isEmpty() )
+        return dictionaryDescription;
+
+    if( idxHeader.descriptionAddress == 0 )
+        dictionaryDescription = "NONE";
+    else
+    {
+        try
+        {
+            vector< char > chunk;
+            char * descr;
+            {
+              Mutex::Lock _( idxMutex );
+              descr = chunks->getBlock( idxHeader.descriptionAddress, chunk );
+            }
+            dictionaryDescription = QString::fromUtf8( descr );
+        }
+        catch(...)
+        {
+        }
+    }
+    return dictionaryDescription;
 }
 
 /// XdxfDictionary::getArticle()
