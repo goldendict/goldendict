@@ -1810,6 +1810,10 @@
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
         <translation>Tùy chỉnh thứ tự bằng cách kéo và thả các mục trong nó. Thả các từ điển vào nhóm không hoạt động để tắt chúng.</translation>
     </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PathsModel</name>

@@ -1830,6 +1830,10 @@
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
         <translation>Подредете последователността чрез влачене и пускане на елементи. Пускайте речници в неактивната група за да изключите от използване.</translation>
     </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PathsModel</name>

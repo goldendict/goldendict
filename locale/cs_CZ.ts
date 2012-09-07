@@ -2610,6 +2610,10 @@
         <translatorcomment>Trochu divna formulace.</translatorcomment>
         <translation>Upravte pořadí uchopením a přesunutím na požadované místo. Pšesuňte slovníky do neaktivní skupiny pro zakázání jejich použití.</translation>
     </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PathsModel</name>

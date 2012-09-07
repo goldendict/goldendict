@@ -1803,6 +1803,10 @@
         <source>Dictionary information</source>
         <translation>词典信息</translation>
     </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PathsModel</name>
