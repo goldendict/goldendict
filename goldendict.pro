@@ -200,7 +200,8 @@ HEADERS += folding.hh \
     sdict.hh \
     decompress.hh \
     aard.hh \
-    mruqmenu.hh
+    mruqmenu.hh \
+    is_online.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -293,7 +294,8 @@ SOURCES += folding.cc \
     sdict.cc \
     decompress.cc \
     aard.cc \
-    mruqmenu.cc
+    mruqmenu.cc \
+    is_online.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \

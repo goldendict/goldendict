@@ -28,6 +28,9 @@ public:
   {
   }
 
+  virtual bool needNetwork() throw()
+  { return true; }
+  
   virtual string getName() throw()
   { return name; }
 

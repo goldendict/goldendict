@@ -176,6 +176,11 @@ struct Preferences
   bool checkForNewReleases;
   bool disallowContentFromOtherSites;
   bool enableWebPlugins;
+  bool disableWebDictsWhenOffline;
+  
+  // How long to wait (in msecs) before we assume there
+  // is no network connection available
+  int networkCheckTimeout;
 
   qreal zoomFactor;
   int wordsZoomLevel;

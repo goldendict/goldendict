@@ -280,6 +280,11 @@ public:
   vector< string > const & getDictionaryFilenames() throw()
   { return dictionaryFiles; }
 
+  /// Returns true if the dictionary should be muted when
+  /// no network access is available
+  /// The default implementation returns false.
+  virtual bool needNetwork() throw();
+  
   /// Returns the dictionary's full name, utf8.
   virtual string getName() throw()=0;
 
