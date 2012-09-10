@@ -1721,6 +1721,30 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <source>&amp;Dictionaries...	F3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import history from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import error: invalid data in file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History import complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import error: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
