@@ -23,18 +23,18 @@ addingEnabled( true )
   {
     QByteArray lineUtf8 = file.readLine( 4096 );
 
-    if ( lineUtf8.isEmpty() )
-      break;
-
     if ( lineUtf8.endsWith( '\n' ) )
       lineUtf8.chop( 1 );
+
+    if ( lineUtf8.isEmpty() )
+      break;
 
     QString line = QString::fromUtf8( lineUtf8 );
 
     int firstSpace = line.indexOf( ' ' );
 
-    if ( firstSpace < 0 )
-      // No spaces? Bad line. End this.
+    if ( firstSpace < 0 || firstSpace + 1 == line.size() )
+      // No spaces or value? Bad line. End this.
       break;
 
     bool isNumber;
@@ -53,7 +53,7 @@ void History::addItem( Item const & item )
   if( !enabled() )
     return;
 
-  if ( item.word.size() > 60 )
+  if ( item.word.size() > 60 || item.word.isEmpty() )
   {
     // The search looks bogus. Don't save it.
     return;
