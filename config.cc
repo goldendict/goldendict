@@ -648,6 +648,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
+
+    if ( !preferences.namedItem( "historyExportPath" ).isNull() )
+      c.preferences.historyExportPath = preferences.namedItem( "historyExportPath" ).toElement().text();
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -1206,6 +1209,13 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "maxStringsInHistory" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.maxStringsInHistory ) ) );
     preferences.appendChild( opt );
+
+    if( !c.preferences.historyExportPath.isEmpty() )
+    {
+        opt = dd.createElement( "historyExportPath" );
+        opt.appendChild( dd.createTextNode( c.preferences.historyExportPath ) );
+        preferences.appendChild( opt );
+    }
   }
 
   {

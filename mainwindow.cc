@@ -2683,12 +2683,23 @@ static bool needHideSearchPane;
 
 void MainWindow::on_exportHistory_activated()
 {
+    QString exportPath;
+    if( cfg.preferences.historyExportPath.isEmpty() )
+        exportPath = QDir::homePath();
+    else
+    {
+        exportPath = QDir::fromNativeSeparators( cfg.preferences.historyExportPath );
+        if( !QDir( exportPath ).exists() )
+            exportPath = QDir::homePath();
+    }
+
     QString fileName = QFileDialog::getSaveFileName( this, tr( "Export history to file" ),
-                                                     QDir::homePath(),
+                                                     exportPath,
                                                      tr( "Text files (*.txt);;All files (*.*)" ) );
     if( fileName.size() == 0)
         return;
 
+    cfg.preferences.historyExportPath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
     QFile file( fileName );
 
     for(;;)
@@ -2733,12 +2744,23 @@ void MainWindow::on_exportHistory_activated()
 
 void MainWindow::on_importHistory_activated()
 {
+    QString importPath;
+    if( cfg.preferences.historyExportPath.isEmpty() )
+        importPath = QDir::homePath();
+    else
+    {
+        importPath = QDir::fromNativeSeparators( cfg.preferences.historyExportPath );
+        if( !QDir( importPath ).exists() )
+            importPath = QDir::homePath();
+    }
+
     QString fileName = QFileDialog::getOpenFileName( this, tr( "Import history from file" ),
-                                                     QDir::homePath(),
+                                                     importPath,
                                                      tr( "Text files (*.txt);;All files (*.*)" ) );
     if( fileName.size() == 0)
         return;
 
+    cfg.preferences.historyExportPath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
     QString errStr;
     QFile file( fileName );
 

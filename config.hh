@@ -181,6 +181,7 @@ struct Preferences
   int wordsZoomLevel;
 
   unsigned maxStringsInHistory;
+  QString historyExportPath;
 
   Preferences();
 };
