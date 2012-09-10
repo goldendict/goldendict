@@ -2653,11 +2653,9 @@ static bool needHideSearchPane;
         ui.wordList->clear();
 
         history.enableAdd( true );
-        ui.importHistory->setDisabled( false );
     }
     else
     {
-        ui.importHistory->setDisabled( true );
         history.enableAdd( false );
 
         disconnect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
@@ -2679,22 +2677,7 @@ static bool needHideSearchPane;
         ui.translateLine->setProperty( "noResults", true );
         setStyleSheet( styleSheet() );
 
-        ui.wordList->setUpdatesEnabled( false );
-        ui.wordList->clear();
-
-        QList< History::Item > const & items = history.getItems();
-        for( int x = 0; x < items.size(); ++x )
-        {
-          History::Item const * i = &items[ x ];
-          QListWidgetItem * s = new QListWidgetItem( i->word, ui.wordList );
-          if (s->text().at(0).direction() == QChar::DirR)
-              s->setTextAlignment(Qt::AlignRight);
-          if (s->text().at(0).direction() == QChar::DirL)
-              s->setTextAlignment(Qt::AlignLeft);
-          ui.wordList->addItem( s );
-        }
-
-        ui.wordList->setUpdatesEnabled( true );
+        fillWordListFromHistory();
     }
 }
 
@@ -2785,8 +2768,14 @@ void MainWindow::on_importHistory_activated()
 
         } while( !fileStream.atEnd() && itemList.size() < (int)history.getMaxSize() );
 
+        history.enableAdd( true );
         for( QList< QString >::const_iterator i = itemList.constBegin(); i != itemList.constEnd(); ++i )
             history.addItem( History::Item( 1, *i ) );
+        if( showHistory )
+        {
+            history.enableAdd( false );
+            fillWordListFromHistory();
+        }
 
         if( file.error() != QFile::NoError )
             break;
@@ -2805,3 +2794,22 @@ void MainWindow::on_importHistory_activated()
     mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
 }
 
+void MainWindow::fillWordListFromHistory()
+{
+    ui.wordList->setUpdatesEnabled( false );
+    ui.wordList->clear();
+
+    QList< History::Item > const & items = history.getItems();
+    for( int x = 0; x < items.size(); ++x )
+    {
+      History::Item const * i = &items[ x ];
+      QListWidgetItem * s = new QListWidgetItem( i->word, ui.wordList );
+      if (s->text().at(0).direction() == QChar::DirR)
+          s->setTextAlignment(Qt::AlignRight);
+      if (s->text().at(0).direction() == QChar::DirL)
+          s->setTextAlignment(Qt::AlignLeft);
+      ui.wordList->addItem( s );
+    }
+
+    ui.wordList->setUpdatesEnabled( true );
+}

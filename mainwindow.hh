@@ -174,6 +174,8 @@ private:
   ArticleView * getCurrentArticleView();
   void ctrlTabPressed();
 
+  void fillWordListFromHistory();
+
 private slots:
 
   void hotKeyActivated( int );
