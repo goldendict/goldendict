@@ -116,6 +116,7 @@
     </property>
     <addaction name="showHideHistory"/>
     <addaction name="exportHistory"/>
+    <addaction name="importHistory"/>
     <addaction name="separator"/>
     <addaction name="clearHistory"/>
    </widget>
@@ -424,6 +425,11 @@
   <action name="exportHistory">
    <property name="text">
     <string>&amp;Export</string>
+   </property>
+  </action>
+  <action name="importHistory">
+   <property name="text">
+    <string>&amp;Import</string>
    </property>
   </action>
  </widget>

@@ -326,6 +326,7 @@ private slots:
 
   void on_showHideHistory_activated();
   void on_exportHistory_activated();
+  void on_importHistory_activated();
 };
 
 #endif

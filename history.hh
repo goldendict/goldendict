@@ -8,6 +8,8 @@
 #include <QList>
 #include <QString>
 
+#define MAX_HISTORY_ITEM_LENGTH 60
+
 /// Search history
 class History: public QObject
 {
@@ -73,6 +75,9 @@ public:
   { addingEnabled = enable; }
   bool enabled()
   { return addingEnabled; }
+
+  unsigned getMaxSize()
+  { return maxSize; }
 
 signals:
 

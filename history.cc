@@ -53,7 +53,7 @@ void History::addItem( Item const & item )
   if( !enabled() )
     return;
 
-  if ( item.word.size() > 60 || item.word.isEmpty() )
+  if ( item.word.size() > MAX_HISTORY_ITEM_LENGTH || item.word.isEmpty() )
   {
     // The search looks bogus. Don't save it.
     return;

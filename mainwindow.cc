@@ -19,6 +19,7 @@
 #include <map>
 #include "dprintf.hh"
 #include <QDebug>
+#include <QTextStream>
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -2652,9 +2653,11 @@ static bool needHideSearchPane;
         ui.wordList->clear();
 
         history.enableAdd( true );
+        ui.importHistory->setDisabled( false );
     }
     else
     {
+        ui.importHistory->setDisabled( true );
         history.enableAdd( false );
 
         disconnect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
@@ -2740,7 +2743,65 @@ void MainWindow::on_exportHistory_activated()
         mainStatusBar->showMessage( tr( "History export complete" ), 5000 );
         return;
     }
-    QString errStr = QString( tr( "Export error: ") ) + file.errorString();
+    QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
     file.close();
     mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
 }
+
+void MainWindow::on_importHistory_activated()
+{
+    QString fileName = QFileDialog::getOpenFileName( this, tr( "Import history from file" ),
+                                                     QDir::homePath(),
+                                                     tr( "Text files (*.txt);;All files (*.*)" ) );
+    if( fileName.size() == 0)
+        return;
+
+    QString errStr;
+    QFile file( fileName );
+
+    for(;;)
+    {
+        if ( !file.open( QFile::ReadOnly | QIODevice::Text ) )
+          break;
+
+        QTextStream fileStream( & file );
+        QString itemStr, trimmedStr;
+        QList< QString > itemList;
+
+        history.clear();
+
+        do
+        {
+            itemStr = fileStream.readLine();
+            if( fileStream.status() >= QTextStream::ReadCorruptData )
+                break;
+
+            trimmedStr = itemStr.trimmed();
+            if( trimmedStr.isEmpty() )
+                continue;
+
+            if( trimmedStr.size() <= MAX_HISTORY_ITEM_LENGTH )
+                itemList.prepend( trimmedStr );
+
+        } while( !fileStream.atEnd() && itemList.size() < (int)history.getMaxSize() );
+
+        for( QList< QString >::const_iterator i = itemList.constBegin(); i != itemList.constEnd(); ++i )
+            history.addItem( History::Item( 1, *i ) );
+
+        if( file.error() != QFile::NoError )
+            break;
+
+        if( fileStream.status() >= QTextStream::ReadCorruptData )
+        {
+            errStr = QString ( tr( "Import error: invalid data in file" ) );
+            mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+        }
+        else
+            mainStatusBar->showMessage( tr( "History import complete" ), 5000 );
+        return;
+    }
+    errStr = QString( tr( "Import error: " ) ) + file.errorString();
+    file.close();
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+}
+
