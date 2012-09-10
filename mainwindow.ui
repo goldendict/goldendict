@@ -417,6 +417,9 @@
    <property name="text">
     <string>&amp;Show</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
   </action>
   <action name="exportHistory">
    <property name="text">
