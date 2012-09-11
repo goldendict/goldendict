@@ -125,6 +125,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
   ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
 
+  ui.storeHistory->setChecked( p.storeHistory );
+
   // Different platforms have different keys available
 
 #ifdef Q_OS_WIN32
@@ -141,8 +143,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 //Platform-specific options
 
 #ifndef Q_OS_WIN32
-  //  ui.groupBox_ScanPopupTechnologies->hide();
-  ui.tabWidget->removeTab( 5 );
+  ui.groupBox_ScanPopupTechnologies->hide();
+//  ui.tabWidget->removeTab( 5 );
 #endif
 
   // Sound
@@ -240,6 +242,8 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
   p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
   p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
+
+  p.storeHistory = ui.storeHistory->isChecked();
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();

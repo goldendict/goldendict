@@ -182,6 +182,7 @@ struct Preferences
 
   unsigned maxStringsInHistory;
   QString historyExportPath;
+  unsigned storeHistory;
 
   Preferences();
 };

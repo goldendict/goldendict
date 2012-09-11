@@ -123,7 +123,8 @@ Preferences::Preferences():
   enableWebPlugins( false ),
   zoomFactor( 1 ),
   wordsZoomLevel( 0 ),
-  maxStringsInHistory( 500 )
+  maxStringsInHistory( 500 ),
+  storeHistory( 1 )
 {
 }
 
@@ -651,6 +652,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "historyExportPath" ).isNull() )
       c.preferences.historyExportPath = preferences.namedItem( "historyExportPath" ).toElement().text();
+
+    if ( !preferences.namedItem( "storeHistory" ).isNull() )
+      c.preferences.storeHistory = preferences.namedItem( "storeHistory" ).toElement().text().toUInt() ;
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -1208,6 +1212,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "maxStringsInHistory" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.maxStringsInHistory ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "storeHistory" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.storeHistory ) ) );
     preferences.appendChild( opt );
 
     if( !c.preferences.historyExportPath.isEmpty() )

@@ -326,6 +326,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT(editCurrentGroup()) );
 
   // History
+  history.enableAdd( cfg.preferences.storeHistory );
 /*
   connect( &history, SIGNAL( itemsChanged() ),
            this, SLOT( historyChanged() ) );
@@ -1344,6 +1345,8 @@ void MainWindow::editPreferences()
     setAutostart( cfg.preferences.autoStart );
 
     prepareNewReleaseChecks();
+
+    history.enableAdd( cfg.preferences.storeHistory );
 
     Config::save( cfg );
   }
@@ -2652,7 +2655,7 @@ static bool needHideSearchPane;
 
         ui.wordList->clear();
 
-        history.enableAdd( true );
+        history.enableAdd( cfg.preferences.storeHistory );
     }
     else
     {
@@ -2800,6 +2803,8 @@ void MainWindow::on_importHistory_activated()
             fillWordListFromHistory();
             ui.translateLine->setText( tr( "Imported from file: " ) + fileInfo.fileName() );
         }
+        else
+            history.enableAdd( cfg.preferences.storeHistory );
 
         if( file.error() != QFile::NoError )
             break;

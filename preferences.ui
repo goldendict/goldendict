@@ -1087,6 +1087,25 @@ It is not needed to select this option if you don't use such programs.</string>
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>History</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_14">
+          <item>
+           <widget class="QCheckBox" name="storeHistory">
+            <property name="toolTip">
+             <string>Turn this option on to store history of the translated words</string>
+            </property>
+            <property name="text">
+             <string>Store &amp;history</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_17">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
