@@ -2760,7 +2760,8 @@ void MainWindow::on_importHistory_activated()
     if( fileName.size() == 0)
         return;
 
-    cfg.preferences.historyExportPath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
+    QFileInfo fileInfo( fileName );
+    cfg.preferences.historyExportPath = QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() );
     QString errStr;
     QFile file( fileName );
 
@@ -2797,6 +2798,7 @@ void MainWindow::on_importHistory_activated()
         {
             history.enableAdd( false );
             fillWordListFromHistory();
+            ui.translateLine->setText( tr( "Imported from file: " ) + fileInfo.fileName() );
         }
 
         if( file.error() != QFile::NoError )
