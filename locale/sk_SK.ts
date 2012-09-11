@@ -1690,14 +1690,14 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1132"/>
-        <location filename="../mainwindow.cc" line="2012"/>
+        <location filename="../mainwindow.cc" line="1133"/>
+        <location filename="../mainwindow.cc" line="2015"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="465"/>
+        <location filename="../mainwindow.cc" line="466"/>
         <source>Welcome!</source>
         <translation>Vitajte!</translation>
     </message>
@@ -1864,7 +1864,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
-        <location filename="../mainwindow.cc" line="353"/>
+        <location filename="../mainwindow.cc" line="354"/>
         <source>New Tab</source>
         <translation>Nová karta</translation>
     </message>
@@ -1880,7 +1880,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
-        <location filename="../mainwindow.cc" line="2642"/>
+        <location filename="../mainwindow.cc" line="2645"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1916,7 +1916,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cc" line="80"/>
-        <location filename="../mainwindow.cc" line="756"/>
+        <location filename="../mainwindow.cc" line="757"/>
         <source>Look up in:</source>
         <translation>Hľadať v:</translation>
     </message>
@@ -2001,22 +2001,22 @@
         <translation>Zatvoriť všetky karty okrem aktuálnej</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="343"/>
+        <location filename="../mainwindow.cc" line="344"/>
         <source>Loading...</source>
         <translation>Načítavanie ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="745"/>
+        <location filename="../mainwindow.cc" line="746"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>Slovníky: %1, články: %2, slová: %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="756"/>
+        <location filename="../mainwindow.cc" line="757"/>
         <source>Look up:</source>
         <translation>Hľadať:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="774"/>
+        <location filename="../mainwindow.cc" line="775"/>
         <source>All</source>
         <translation>Všetko</translation>
     </message>
@@ -2026,144 +2026,149 @@
         <translation>Otvorené karty</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="885"/>
+        <location filename="../mainwindow.cc" line="886"/>
         <source>Open Tabs List</source>
         <translation>Otvorí zoznam kariet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="943"/>
+        <location filename="../mainwindow.cc" line="944"/>
         <source>(untitled)</source>
         <translation>(Bez názvu)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1132"/>
+        <location filename="../mainwindow.cc" line="1133"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1574"/>
+        <location filename="../mainwindow.cc" line="1577"/>
         <source>WARNING: %1</source>
         <translation>VAROVANIE: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2013"/>
+        <location filename="../mainwindow.cc" line="2016"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Nepodarilo sa inicializovať monitorovací mechanizmus klávesových skratiek.&lt;br&gt; Uistite sa, že X server má zapnuté rozšírenie RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2147"/>
+        <location filename="../mainwindow.cc" line="2150"/>
         <source>New Release Available</source>
         <translation>Je dostupná nová verzia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2148"/>
+        <location filename="../mainwindow.cc" line="2151"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict verzia &lt;b&gt;%1&lt;/b&gt; je dostupná na stiahnutie.
 &lt;br&gt;Kliknutím na &lt;b&gt;Stiahnuť&lt;/b&gt; sa dostane na stránku, kde je možné program stiahnuť.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2153"/>
+        <location filename="../mainwindow.cc" line="2156"/>
         <source>Download</source>
         <translation>Stiahnuť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2154"/>
+        <location filename="../mainwindow.cc" line="2157"/>
         <source>Skip This Release</source>
         <translation>Preskočiť toto vydanie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2267"/>
+        <location filename="../mainwindow.cc" line="2270"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Vybrali ste si skrytie panelu s ponukou. Použite %1 ak ho chcete znova zobraziť.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2268"/>
+        <location filename="../mainwindow.cc" line="2271"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2416"/>
+        <location filename="../mainwindow.cc" line="2419"/>
         <source>Page Setup</source>
         <translation>Nastavenie strany</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2417"/>
+        <location filename="../mainwindow.cc" line="2420"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Žiadna tlačiareň nie je k dispozícii. Prosím, nainštalujte aspoň jednu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2434"/>
+        <location filename="../mainwindow.cc" line="2437"/>
         <source>Print Article</source>
         <translation>Vytlačiť článok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2455"/>
+        <location filename="../mainwindow.cc" line="2458"/>
         <source>Save Article As</source>
         <translation>Uložiť článok ako</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2455"/>
+        <location filename="../mainwindow.cc" line="2458"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html súbory (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2470"/>
+        <location filename="../mainwindow.cc" line="2473"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2471"/>
+        <location filename="../mainwindow.cc" line="2474"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Nie je možné uložiť článok: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2674"/>
+        <location filename="../mainwindow.cc" line="2675"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2678"/>
+        <location filename="../mainwindow.cc" line="2679"/>
         <source>History view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2703"/>
+        <location filename="../mainwindow.cc" line="2699"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2705"/>
-        <location filename="../mainwindow.cc" line="2755"/>
+        <location filename="../mainwindow.cc" line="2701"/>
+        <location filename="../mainwindow.cc" line="2762"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2743"/>
+        <location filename="../mainwindow.cc" line="2740"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2746"/>
+        <location filename="../mainwindow.cc" line="2743"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2753"/>
+        <location filename="../mainwindow.cc" line="2760"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2796"/>
+        <location filename="../mainwindow.cc" line="2804"/>
+        <source>Imported from file: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2814"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2800"/>
+        <location filename="../mainwindow.cc" line="2818"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2803"/>
+        <location filename="../mainwindow.cc" line="2821"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2829,6 +2834,21 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <translation>Použiť &amp;GoldenDict správu</translation>
     </message>
     <message>
+        <location filename="../preferences.ui" line="1092"/>
+        <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1098"/>
+        <source>Turn this option on to store history of the translated words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1101"/>
+        <source>Store &amp;history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../preferences.cc" line="41"/>
         <source>System default</source>
         <translation>Systémové nastavenie</translation>
@@ -2849,17 +2869,17 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="152"/>
+        <location filename="../preferences.cc" line="154"/>
         <source>Play via DirectShow</source>
         <translation>Hrať cez DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="337"/>
+        <location filename="../preferences.cc" line="341"/>
         <source>Changing Language</source>
         <translation>Zmena jazyka</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="338"/>
+        <location filename="../preferences.cc" line="342"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Reštartovať program pre aplikovanie zmeny jazyka.</translation>
     </message>

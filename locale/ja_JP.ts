@@ -1720,88 +1720,88 @@
         <translation>終了(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="343"/>
+        <location filename="../mainwindow.cc" line="344"/>
         <source>Loading...</source>
         <translation>読み込んでいます...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2154"/>
+        <location filename="../mainwindow.cc" line="2157"/>
         <source>Skip This Release</source>
         <translation>このリリースをスキップ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2267"/>
+        <location filename="../mainwindow.cc" line="2270"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2268"/>
+        <location filename="../mainwindow.cc" line="2271"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2416"/>
+        <location filename="../mainwindow.cc" line="2419"/>
         <source>Page Setup</source>
         <translation>ページ設定</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2417"/>
+        <location filename="../mainwindow.cc" line="2420"/>
         <source>No printer is available. Please install one first.</source>
         <translation>利用可能なプリンターがありません。まずインストールしてください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2434"/>
+        <location filename="../mainwindow.cc" line="2437"/>
         <source>Print Article</source>
         <translation>記事の印刷</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2455"/>
+        <location filename="../mainwindow.cc" line="2458"/>
         <source>Save Article As</source>
         <translation>名前を付けて記事を保存</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2455"/>
+        <location filename="../mainwindow.cc" line="2458"/>
         <source>Html files (*.html *.htm)</source>
         <translation>HTML ファイル (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2470"/>
+        <location filename="../mainwindow.cc" line="2473"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2471"/>
+        <location filename="../mainwindow.cc" line="2474"/>
         <source>Can&apos;t save article: %1</source>
         <translation>記事を保存できません: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="745"/>
+        <location filename="../mainwindow.cc" line="746"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 個の辞書、%2 個の記事、 %3 個の単語</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2013"/>
+        <location filename="../mainwindow.cc" line="2016"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>ホットキー監視機構の初期化に失敗しました。&lt;br&gt;XServer の RECORD 拡張がオンになっていることを確認してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2147"/>
+        <location filename="../mainwindow.cc" line="2150"/>
         <source>New Release Available</source>
         <translation>新しいリリースが利用可能です</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2148"/>
+        <location filename="../mainwindow.cc" line="2151"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict のバージョン &lt;b&gt;%1&lt;/b&gt; のダウンロードが利用可能です。&lt;br&gt;ダウンロード ページへ移動するには&lt;b&gt;ダウンロード&lt;/b&gt;をクリックします。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2153"/>
+        <location filename="../mainwindow.cc" line="2156"/>
         <source>Download</source>
         <translation>ダウンロード</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="80"/>
-        <location filename="../mainwindow.cc" line="756"/>
+        <location filename="../mainwindow.cc" line="757"/>
         <source>Look up in:</source>
         <translation>検索する場所:</translation>
     </message>
@@ -1876,32 +1876,37 @@
         <translation>現在以外のすべてのタブを閉じる</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="756"/>
+        <location filename="../mainwindow.cc" line="757"/>
         <source>Look up:</source>
         <translation>検索:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="774"/>
+        <location filename="../mainwindow.cc" line="775"/>
         <source>All</source>
         <translation>すべて</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2753"/>
+        <location filename="../mainwindow.cc" line="2760"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2796"/>
+        <location filename="../mainwindow.cc" line="2804"/>
+        <source>Imported from file: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2814"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2800"/>
+        <location filename="../mainwindow.cc" line="2818"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2803"/>
+        <location filename="../mainwindow.cc" line="2821"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -1911,66 +1916,66 @@
         <translation>開いているタブ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="885"/>
+        <location filename="../mainwindow.cc" line="886"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="943"/>
+        <location filename="../mainwindow.cc" line="944"/>
         <source>(untitled)</source>
         <translation>(無題)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1132"/>
+        <location filename="../mainwindow.cc" line="1133"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1574"/>
+        <location filename="../mainwindow.cc" line="1577"/>
         <source>WARNING: %1</source>
         <translation>警告: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2674"/>
+        <location filename="../mainwindow.cc" line="2675"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2678"/>
+        <location filename="../mainwindow.cc" line="2679"/>
         <source>History view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2703"/>
+        <location filename="../mainwindow.cc" line="2699"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2705"/>
-        <location filename="../mainwindow.cc" line="2755"/>
+        <location filename="../mainwindow.cc" line="2701"/>
+        <location filename="../mainwindow.cc" line="2762"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2743"/>
+        <location filename="../mainwindow.cc" line="2740"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2746"/>
+        <location filename="../mainwindow.cc" line="2743"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1132"/>
-        <location filename="../mainwindow.cc" line="2012"/>
+        <location filename="../mainwindow.cc" line="1133"/>
+        <location filename="../mainwindow.cc" line="2015"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="465"/>
+        <location filename="../mainwindow.cc" line="466"/>
         <source>Welcome!</source>
         <translation>ようこそ!</translation>
     </message>
@@ -2138,7 +2143,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
-        <location filename="../mainwindow.cc" line="353"/>
+        <location filename="../mainwindow.cc" line="354"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2154,7 +2159,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
-        <location filename="../mainwindow.cc" line="2642"/>
+        <location filename="../mainwindow.cc" line="2645"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2844,6 +2849,21 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../preferences.ui" line="1092"/>
+        <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1098"/>
+        <source>Turn this option on to store history of the translated words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1101"/>
+        <source>Store &amp;history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../preferences.cc" line="41"/>
         <source>System default</source>
         <translation>システム既定</translation>
@@ -2864,17 +2884,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="152"/>
+        <location filename="../preferences.cc" line="154"/>
         <source>Play via DirectShow</source>
         <translation>DirectShow を通じて再生する</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="337"/>
+        <location filename="../preferences.cc" line="341"/>
         <source>Changing Language</source>
         <translation>言語の変更</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="338"/>
+        <location filename="../preferences.cc" line="342"/>
         <source>Restart the program to apply the language change.</source>
         <translation>言語の変更を適用するにはプログラムを再起動します。</translation>
     </message>

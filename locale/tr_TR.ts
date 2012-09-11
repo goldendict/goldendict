@@ -1745,6 +1745,10 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Imported from file: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
@@ -2330,6 +2334,18 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Babylon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on to store history of the translated words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Store &amp;history</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

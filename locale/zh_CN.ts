@@ -1747,6 +1747,10 @@
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Imported from file: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
@@ -2317,6 +2321,18 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <source>Babylon</source>
         <translation>Babylon</translation>
+    </message>
+    <message>
+        <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on to store history of the translated words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Store &amp;history</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
