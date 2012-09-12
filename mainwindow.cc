@@ -2705,11 +2705,11 @@ static bool needHideSearchPane;
 void MainWindow::on_exportHistory_activated()
 {
     QString exportPath;
-    if( cfg.preferences.historyExportPath.isEmpty() )
+    if( cfg.historyExportPath.isEmpty() )
         exportPath = QDir::homePath();
     else
     {
-        exportPath = QDir::fromNativeSeparators( cfg.preferences.historyExportPath );
+        exportPath = QDir::fromNativeSeparators( cfg.historyExportPath );
         if( !QDir( exportPath ).exists() )
             exportPath = QDir::homePath();
     }
@@ -2720,7 +2720,7 @@ void MainWindow::on_exportHistory_activated()
     if( fileName.size() == 0)
         return;
 
-    cfg.preferences.historyExportPath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
+    cfg.historyExportPath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
     QFile file( fileName );
 
     for(;;)
@@ -2766,11 +2766,11 @@ void MainWindow::on_exportHistory_activated()
 void MainWindow::on_importHistory_activated()
 {
     QString importPath;
-    if( cfg.preferences.historyExportPath.isEmpty() )
+    if( cfg.historyExportPath.isEmpty() )
         importPath = QDir::homePath();
     else
     {
-        importPath = QDir::fromNativeSeparators( cfg.preferences.historyExportPath );
+        importPath = QDir::fromNativeSeparators( cfg.historyExportPath );
         if( !QDir( importPath ).exists() )
             importPath = QDir::homePath();
     }
@@ -2782,7 +2782,7 @@ void MainWindow::on_importHistory_activated()
         return;
 
     QFileInfo fileInfo( fileName );
-    cfg.preferences.historyExportPath = QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() );
+    cfg.historyExportPath = QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() );
     QString errStr;
     QFile file( fileName );
 
@@ -2884,8 +2884,10 @@ void MainWindow::forceAddWordToHistory( const QString & word )
 
         fillWordListFromHistory();
 
-        if( index < 0 || index >= ui.wordList->count() || currentWord.compare( ui.wordList->item( index )->text() ) != 0 )
+        if( index < 0 || index >= ui.wordList->count() )
             index = 0;
+        if( index && currentWord.compare( ui.wordList->item( index )->text() ) != 0 )
+            index = currentWord.compare( ui.wordList->item( index - 1 )->text() ) == 0 ? index - 1 : 0;
 
         if( index )
             disconnect( ui.wordList, SIGNAL( itemSelectionChanged() ),

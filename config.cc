@@ -650,9 +650,6 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
 
-    if ( !preferences.namedItem( "historyExportPath" ).isNull() )
-      c.preferences.historyExportPath = preferences.namedItem( "historyExportPath" ).toElement().text();
-
     if ( !preferences.namedItem( "storeHistory" ).isNull() )
       c.preferences.storeHistory = preferences.namedItem( "storeHistory" ).toElement().text().toUInt() ;
   }
@@ -696,6 +693,9 @@ Class load() throw( exError )
 
   if ( !root.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
     c.maxDictionaryRefsInContextMenu = root.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
+
+  if ( !root.namedItem( "historyExportPath" ).isNull() )
+    c.historyExportPath = root.namedItem( "historyExportPath" ).toElement().text();
 
   return c;
 }
@@ -1218,12 +1218,6 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.storeHistory ) ) );
     preferences.appendChild( opt );
 
-    if( !c.preferences.historyExportPath.isEmpty() )
-    {
-        opt = dd.createElement( "historyExportPath" );
-        opt.appendChild( dd.createTextNode( c.preferences.historyExportPath ) );
-        preferences.appendChild( opt );
-    }
   }
 
   {
@@ -1274,6 +1268,13 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "maxDictionaryRefsInContextMenu" );
     opt.appendChild( dd.createTextNode( QString::number( c.maxDictionaryRefsInContextMenu ) ) );
     root.appendChild( opt );
+
+    if( !c.historyExportPath.isEmpty() )
+    {
+        opt = dd.createElement( "historyExportPath" );
+        opt.appendChild( dd.createTextNode( c.historyExportPath ) );
+        root.appendChild( opt );
+    }
   }
 
   QByteArray result( dd.toByteArray() );

@@ -181,7 +181,6 @@ struct Preferences
   int wordsZoomLevel;
 
   unsigned maxStringsInHistory;
-  QString historyExportPath;
   unsigned storeHistory;
 
   Preferences();
@@ -371,6 +370,8 @@ struct Class
   unsigned lastPopupGroupId; // Last used group in popup window
   QByteArray popupWindowState; // Binary state saved by QMainWindow
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
+
+  QString historyExportPath; // Path for export/import history
 
   bool pinPopupWindow; // Last pin status
 
