@@ -2645,12 +2645,19 @@ static bool needHideSearchPane;
         ui.showHideHistory->setText( tr( "&Show" ) );
         showHistory = false;
 
+        disconnect( &focusTranslateLineAction, SIGNAL( triggered() ),
+                    this, SLOT( focusWordList() ) );
+
+        connect( &focusTranslateLineAction, SIGNAL( triggered() ),
+                 this, SLOT( focusTranslateLine() ) );
+
         connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
                  this, SLOT( translateInputChanged( QString const & ) ) );
 
         ui.translateLine->clear();
         ui.translateLine->setEnabled( true );
         ui.translateLine->setProperty( "noResults", false );
+        focusTranslateLine();
         setStyleSheet( styleSheet() );
 
         ui.wordList->clear();
@@ -2663,6 +2670,12 @@ static bool needHideSearchPane;
 
         disconnect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
                     this, SLOT( translateInputChanged( QString const & ) ) );
+
+        disconnect( &focusTranslateLineAction, SIGNAL( triggered() ),
+                    this, SLOT( focusTranslateLine() ) );
+
+        connect( &focusTranslateLineAction, SIGNAL( triggered() ),
+                 this, SLOT( focusWordList() ) );
 
         if( !ui.searchPane->isVisible() )
         {
@@ -2681,6 +2694,8 @@ static bool needHideSearchPane;
         setStyleSheet( styleSheet() );
 
         fillWordListFromHistory();
+        focusWordList();
+
     }
 }
 
@@ -2841,4 +2856,10 @@ void MainWindow::fillWordListFromHistory()
     }
 
     ui.wordList->setUpdatesEnabled( true );
+}
+
+void MainWindow::focusWordList()
+{
+    if( ui.wordList->count() > 0 )
+        ui.wordList->setFocus();
 }
