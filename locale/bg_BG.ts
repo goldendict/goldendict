@@ -236,6 +236,10 @@
         <source>WARNING: %1</source>
         <translation type="unfinished">Внимание: %1</translation>
     </message>
+    <message>
+        <source>&amp;Add &quot;%1&quot; to history</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
