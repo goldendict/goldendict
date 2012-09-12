@@ -941,7 +941,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   QMenu menu( this );
 
-
   QAction * followLink = 0;
   QAction * followLinkExternal = 0;
   QAction * followLinkNewTab = 0;
@@ -1086,6 +1085,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   if ( !menu.isEmpty() )
   {
+    connect( this, SIGNAL( closePopupMenu() ), &menu, SLOT( close() ) );
     QAction * result = menu.exec( ui.definition->mapToGlobal( pos ) );
 
     if ( !result )
@@ -1395,6 +1395,11 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
     return; // Incorrect id
 
   emit activeArticleChanged( id.mid( 7 ) );
+}
+
+void ArticleView::closeMenu()
+{
+  emit closePopupMenu();
 }
 
 void ArticleView::doubleClicked()

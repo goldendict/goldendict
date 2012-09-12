@@ -192,11 +192,17 @@ signals:
   /// Signal to add word to history even if history is disabled
   void forceAddWordToHistory( const QString & word);
 
+  /// Signal to close popup menu
+  void closePopupMenu();
+
 public slots:
 
   void on_searchPrevious_clicked();
   void on_searchNext_clicked();
   void onJsActiveArticleChanged(QString const & id);
+
+  /// Receive signal from ScanPopup to close context menu
+  void closeMenu();
 
 private slots:
 

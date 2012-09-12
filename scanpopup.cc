@@ -636,6 +636,8 @@ void ScanPopup::on_wordListButton_clicked()
       menu.addAction( results[ x ].first );
   }
 
+  connect( this, SIGNAL( closeMenu() ), &menu, SLOT( close() ) );
+
   QAction * result = menu.exec( mapToGlobal( ui.wordListButton->pos() ) +
                                   QPoint( 0, ui.wordListButton->height() ) );
 
@@ -731,6 +733,7 @@ void ScanPopup::hideWindow()
 {
   uninterceptMouse();
 
+  emit closeMenu();
   hideTimer.stop();
   unsetCursor();
   hide();

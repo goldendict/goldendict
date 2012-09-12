@@ -51,6 +51,8 @@ signals:
   void editGroupRequested( unsigned id );
   /// Send word to main window
   void sendWordToMainWindow( QString const & word );
+  /// Close opened menus when window hide
+  void closeMenu();
 
 public slots:
 
