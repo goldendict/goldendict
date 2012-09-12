@@ -979,6 +979,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   connect( view, SIGNAL( showDictsPane( ) ), this, SLOT( showDictsPane( ) ) );
 
+  connect( view, SIGNAL( forceAddWordToHistory( const QString & ) ),
+           this, SLOT( forceAddWordToHistory( const QString & ) ) );
+
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
 
@@ -2862,4 +2865,36 @@ void MainWindow::focusWordList()
 {
     if( ui.wordList->count() > 0 )
         ui.wordList->setFocus();
+}
+
+void MainWindow::forceAddWordToHistory( const QString & word )
+{
+    history.enableAdd( true );
+    history.addItem( History::Item( 1, word.trimmed() ) );
+
+    if( showHistory )
+    {
+        int index = ui.wordList->currentRow();
+        QListWidgetItem *item = ui.wordList->item( index );
+        QString currentWord;
+        if( item )
+            currentWord = item->text();
+        if( index < (int) history.getMaxSize() - 1 )
+            index += 1;
+
+        fillWordListFromHistory();
+
+        if( index < 0 || index >= ui.wordList->count() || currentWord.compare( ui.wordList->item( index )->text() ) != 0 )
+            index = 0;
+
+        if( index )
+            disconnect( ui.wordList, SIGNAL( itemSelectionChanged() ),
+                        this, SLOT( wordListSelectionChanged() ) );
+        ui.wordList->setCurrentRow( index, QItemSelectionModel::Select );
+        if( index )
+            connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
+                     this, SLOT( wordListSelectionChanged() ) );
+    }
+
+    history.enableAdd( cfg.preferences.storeHistory );
 }

@@ -950,6 +950,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * lookupSelectionNewTab = 0;
   QAction * lookupSelectionNewTabGr = 0;
   QAction * maxDictionaryRefsAction = 0;
+  QAction * addWordToHistoryAction = 0;
 
   QUrl targetUrl( r.linkUrl() );
   Contexts contexts;
@@ -998,6 +999,11 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
                                            arg( ui.definition->selectedText() ),
                                            &menu );
       menu.addAction( lookupSelectionNewTab );
+
+      addWordToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
+                                            arg( ui.definition->selectedText() ),
+                                            &menu );
+      menu.addAction( addWordToHistoryAction );
     }
 
     Instances::Group const * altGroup =
@@ -1096,6 +1102,9 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if ( result == lookupSelectionGr && groupComboBox )
       showDefinition( selectedText, groupComboBox->getCurrentGroup(), QString() );
+    else
+    if ( result == addWordToHistoryAction )
+      emit forceAddWordToHistory( selectedText );
     else
     if ( !popupView && result == followLinkNewTab )
       emit openLinkInNewTab( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );

@@ -330,6 +330,9 @@ private slots:
   void on_exportHistory_activated();
   void on_importHistory_activated();
   void focusWordList();
+
+  /// Add word to history even if history is disabled in options
+  void forceAddWordToHistory( const QString & word);
 };
 
 #endif

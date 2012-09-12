@@ -189,6 +189,9 @@ signals:
   /// id - the dictionary id of the active article.
   void activeArticleChanged ( QString const & id );
 
+  /// Signal to add word to history even if history is disabled
+  void forceAddWordToHistory( const QString & word);
+
 public slots:
 
   void on_searchPrevious_clicked();
