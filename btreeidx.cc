@@ -80,6 +80,8 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
   vector< WordArticleLink > result;
 
   wstring folded = Folding::apply( str );
+  if( folded.empty() )
+    folded = Folding::applyWhitespaceOnly( str );
 
   bool exactMatch;
 
@@ -190,6 +192,8 @@ void BtreeWordSearchRequest::run()
   }
   
   wstring folded = Folding::apply( str );
+  if( folded.empty() )
+    folded = Folding::applyWhitespaceOnly( str );
 
   int initialFoldedSize = folded.size();
 
@@ -231,7 +235,9 @@ void BtreeWordSearchRequest::run()
       wstring chainHead = Utf8::decode( chain[ 0 ].word );
   
       wstring resultFolded = Folding::apply( chainHead );
-  
+      if( resultFolded.empty() )
+        resultFolded = Folding::applyWhitespaceOnly( chainHead );
+
       if ( resultFolded.size() >= folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
       {
         // Exact or prefix match
@@ -368,9 +374,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
   
   // Lookup the index by traversing the index btree
 
-  vector< char > charBuffer;
   vector< wchar > wcharBuffer;
-  vector< char > wordsBuffer;
 
   exactMatch = false;
 
@@ -432,7 +436,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
           wcharBuffer.resize( wordSize + 1 );
   
         long result = Utf8::decode( closestString, wordSize, &wcharBuffer.front() );
-  
+
         if ( result < 0 )
           throw Utf8::exCantDecode( closestString );
   
@@ -599,6 +603,8 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         wcharBuffer[ result ] = 0;
   
         wstring foldedWord = Folding::apply( &wcharBuffer.front() );
+        if( foldedWord.empty() )
+          foldedWord = Folding::applyWhitespaceOnly( &wcharBuffer.front() );
   
         int compareResult = target.compare( foldedWord );
   
@@ -919,13 +925,37 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
 
   vector< char > utfBuffer( wordSize * 4 );
 
+  int wordsAdded = 0; // Number of stored parts
+
   for( ; ; )
   {
     // Skip any whitespace/punctuation
     for( ; ; ++nextChar )
     {
-      if ( !*nextChar )
-        return; // End of string ends everything
+      if ( !*nextChar ) // End of string ends everything
+      {
+          if( wordsAdded == 0)
+          {
+              wstring folded = Folding::applyWhitespaceOnly( wstring( wordBegin, wordSize ) );
+              if( !folded.empty() )
+              {
+                  iterator i = insert(
+                    IndexedWords::value_type(
+                      string( &utfBuffer.front(),
+                              Utf8::encode( folded.data(), folded.size(), &utfBuffer.front() ) ),
+                      vector< WordArticleLink >() ) ).first;
+
+                  // Try to conserve memory somewhat -- slow insertions are ok
+                  i->second.reserve( i->second.size() + 1 );
+
+                  string utfWord( &utfBuffer.front(),
+                                  Utf8::encode( wordBegin, wordSize, &utfBuffer.front() ) );
+                  string utfPrefix;
+                  i->second.push_back( WordArticleLink( utfWord, articleOffset, utfPrefix ) );
+              }
+          }
+          return;
+      }
   
       if ( !Folding::isWhitespace( *nextChar ) && !Folding::isPunct( *nextChar ) )
         break;
@@ -954,6 +984,8 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
       i->second.push_back( WordArticleLink( utfWord, articleOffset, utfPrefix ) );
     }
 
+    wordsAdded += 1;
+
     // Skip all non-whitespace/punctuation
     for( ++nextChar; ; ++nextChar )
     {
@@ -968,7 +1000,10 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
 
 void IndexedWords::addSingleWord( wstring const & word, uint32_t articleOffset )
 {
-  operator []( Utf8::encode( Folding::apply( word ) ) ).push_back(
+  wstring folded = Folding::apply( word );
+  if( folded.empty() )
+      folded = Folding::applyWhitespaceOnly( word );
+  operator []( Utf8::encode( folded ) ).push_back(
     WordArticleLink( Utf8::encode( word ), articleOffset ) );
 }
 
