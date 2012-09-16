@@ -1157,8 +1157,8 @@ void DslArticleRequest::run()
       string prefix = "O" + dict.getId().substr( 0, 7 ) + "_" + QString::number( dict.articleNom ).toStdString();
       string id1 = prefix + "_expand";
       string id2 = prefix + "_opt_";
-      string button = "<span class=\"hidden_expand_opt\" id=\"" + id1 +
-                      "\" onclick=\"gdExpandOptPart('" + id1 + "','" + id2 +"')\">[+]</span>";
+      string button = "<img src=\"qrcx://localhost/icons/expand_opt.png\" class=\"hidden_expand_opt\" id=\"" + id1 +
+                      "\" onclick=\"gdExpandOptPart('" + id1 + "','" + id2 +"')\" alt=\"[+]\"/>";
       if( articleText.compare( articleText.size() - 4, 4, "</p>" ) == 0 )
         articleText.insert( articleText.size() - 4, " " + button );
       else

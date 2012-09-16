@@ -49,6 +49,8 @@
         <file>icons/macicon.png</file>
         <file>icons/icon32_sdict.png</file>
         <file>icons/icon32_aard.png</file>
+        <file>icons/expand_opt.png</file>
+        <file>icons/collapse_opt.png</file>
         <file>article-style-st-babylon.css</file>
         <file>qt-style-st-babylon.css</file>
     </qresource>

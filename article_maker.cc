@@ -109,9 +109,9 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "function processIframeClick() { if( overIframeId != null ) { overIframeId = overIframeId.replace( 'gdexpandframe-', '' ); gdMakeArticleActive( overIframeId ) } }"
             "function init() { window.addEventListener('blur', processIframeClick, false); }"
             "window.addEventListener('load', init, false);"
-            "function gdExpandOptPart( expanderId, optionalId ) {  var d1=document.getElementById(expanderId); var i = 0; if( d1.innerHTML == '[+]' ) {"
-            "d1.innerHTML = '[-]'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
-            "else { d1.innerHTML = '[+]'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } }"
+            "function gdExpandOptPart( expanderId, optionalId ) {  var d1=document.getElementById(expanderId); var i = 0; if( d1.alt == '[+]' ) {"
+            "d1.alt = '[-]'; d1.src = 'qrcx://localhost/icons/collapse_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
+            "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } }"
             "</script>";
 
   result += "</head><body>";

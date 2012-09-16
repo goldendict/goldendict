@@ -369,6 +369,7 @@ div.xdxf
 {
   color: blue;
   cursor: pointer;
+  vertical-align: center;
 }
 
 /************* Spelling suggestions *****************/
