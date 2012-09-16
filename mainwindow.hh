@@ -48,6 +48,7 @@ public slots:
   void messageFromAnotherInstanceReceived( QString const & );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );
   void wordReceived( QString const & );
+  void setExpandMode( bool expand );
 
 private:
 
@@ -77,7 +78,7 @@ private:
   QAction escAction, f3Action, shiftF3Action, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction,
-          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction;
+          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction, switchExpandModeAction;
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup, * scanPopupSeparator;
@@ -206,6 +207,9 @@ private slots:
   void switchToPrevTab();
   void ctrlReleased();
 
+  // Switch optional parts expand mode for current tab
+  void switchExpandOptionalPartsMode();
+
   // Handling of active tab list
   void createTabList();
   void fillWindowsMenu();
@@ -333,6 +337,10 @@ private slots:
 
   /// Add word to history even if history is disabled in options
   void forceAddWordToHistory( const QString & word);
+
+signals:
+  /// Set optional parts expand mode for all tabs
+  void setExpandOptionalParts( bool expand );
 };
 
 #endif

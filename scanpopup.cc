@@ -40,6 +40,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   groups( groups_ ),
   history( history_ ),
   escapeAction( this ),
+  switchExpandModeAction( this ),
   wordFinder( this ),
   dictionaryBar( this, cfg.popupMutedDictionaries, configEvents ),
   mouseEnteredOnce( false ),
@@ -56,6 +57,13 @@ ScanPopup::ScanPopup( QWidget * parent,
                                 groups, true, cfg,
                                 dictionaryBar.toggleViewAction(),
                                 &cfg.popupMutedDictionaries );
+
+  connect( this, SIGNAL(switchExpandMode() ),
+           definition, SLOT( switchExpandOptionalParts() ) );
+  connect( this, SIGNAL(setViewExpandMode( bool ) ),
+           definition, SLOT( receiveExpandOptionalParts( bool ) ) );
+  connect( definition, SIGNAL( setExpandMode( bool ) ),
+           this, SIGNAL( setExpandMode( bool ) ) );
 
   applyZoomFactor();
   
@@ -113,6 +121,16 @@ ScanPopup::ScanPopup( QWidget * parent,
   addAction( &escapeAction );
   connect( &escapeAction, SIGNAL( triggered() ),
            this, SLOT( escapePressed() ) );
+
+
+  switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
+                                       QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
+                                       QKeySequence( Qt::CTRL + Qt::Key_Asterisk ) <<
+                                       QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_8 ) );
+
+  addAction( &switchExpandModeAction );
+  connect( &switchExpandModeAction, SIGNAL( triggered() ),
+           this, SLOT(switchExpandOptionalPartsMode() ) );
 
   connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
@@ -802,4 +820,10 @@ void ScanPopup::on_sendWordButton_clicked()
     hideWindow();
   }
   emit sendWordToMainWindow( definition->getTitle() );
+}
+
+void ScanPopup::switchExpandOptionalPartsMode()
+{
+  if( isVisible() )
+    emit switchExpandMode();
 }

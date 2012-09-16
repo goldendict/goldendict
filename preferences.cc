@@ -126,6 +126,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
 
   ui.storeHistory->setChecked( p.storeHistory );
+  ui.alwaysExpandOptionalParts->setChecked( p.alwaysExpandOptionalParts );
 
   // Different platforms have different keys available
 
@@ -244,6 +245,7 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
 
   p.storeHistory = ui.storeHistory->isChecked();
+  p.alwaysExpandOptionalParts = ui.alwaysExpandOptionalParts->isChecked();
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();

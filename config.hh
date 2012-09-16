@@ -182,6 +182,7 @@ struct Preferences
 
   unsigned maxStringsInHistory;
   unsigned storeHistory;
+  bool alwaysExpandOptionalParts;
 
   Preferences();
 };

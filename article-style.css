@@ -358,6 +358,19 @@ div.xdxf
   margin: 0;
 }
 
+.dsl_opt
+{
+  display: none;
+  color: grey;
+}
+
+/* Style for expand optional parts button */
+.hidden_expand_opt
+{
+  color: blue;
+  cursor: pointer;
+}
+
 /************* Spelling suggestions *****************/
 
 .gdspellsuggestion

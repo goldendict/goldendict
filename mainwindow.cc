@@ -50,6 +50,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   showDictBarNamesAction( tr( "Show Names in Dictionary Bar" ), this ),
   useSmallIconsInToolbarsAction( tr( "Show Small Icons in Toolbars" ), this ),
   toggleMenuBarAction( tr( "&Menubar" ), this ),
+  switchExpandModeAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -263,6 +264,16 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addAction( &switchToPrevTabAction );
 
+  switchExpandModeAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
+                                       QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
+                                       QKeySequence( Qt::CTRL + Qt::Key_Asterisk ) <<
+                                       QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_8 ) );
+
+  connect( &switchExpandModeAction, SIGNAL( triggered() ),
+           this, SLOT(switchExpandOptionalPartsMode() ) );
+
+  addAction( &switchExpandModeAction );
 
   tabMenu = new QMenu(this);
   tabMenu->addAction( &closeCurrentTabAction );
@@ -812,7 +823,6 @@ void MainWindow::updateDictionaryBar()
       dictionaryBar.setIconSize( QSize( extent, extent ) );
     }
   }
-
 }
 
 void MainWindow::makeScanPopup()
@@ -831,10 +841,17 @@ void MainWindow::makeScanPopup()
   if ( cfg.preferences.enableScanPopup && enableScanPopup->isChecked() )
     scanPopup->enableScanning();
 
-  connect( scanPopup.get(), SIGNAL(editGroupRequested( unsigned )),
-           this,SLOT(editDictionaries( unsigned )), Qt::QueuedConnection );
-  connect( scanPopup.get(), SIGNAL(sendWordToMainWindow( QString const & )),
-           this,SLOT(wordReceived( QString const & )), Qt::QueuedConnection );
+  connect( scanPopup.get(), SIGNAL(editGroupRequested( unsigned ) ),
+           this, SLOT(editDictionaries( unsigned )), Qt::QueuedConnection );
+
+  connect( scanPopup.get(), SIGNAL(sendWordToMainWindow( QString const & ) ),
+           this, SLOT(wordReceived( QString const & )), Qt::QueuedConnection );
+
+  connect( this, SIGNAL( setExpandOptionalParts( bool ) ),
+           scanPopup.get(), SIGNAL( setViewExpandMode( bool ) ) );
+
+  connect( scanPopup.get(), SIGNAL( setExpandMode( bool ) ),
+           this, SLOT( setExpandMode( bool ) ) );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -982,6 +999,11 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( forceAddWordToHistory( const QString & ) ),
            this, SLOT( forceAddWordToHistory( const QString & ) ) );
 
+  connect( this, SIGNAL( setExpandOptionalParts( bool ) ),
+           view, SLOT( receiveExpandOptionalParts( bool ) ) );
+
+  connect( view, SIGNAL( setExpandMode( bool ) ), this, SLOT( setExpandMode( bool ) ) );
+
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
 
@@ -998,7 +1020,6 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   return view;
 }
-
 
 void MainWindow::tabCloseRequested( int x )
 {
@@ -1315,12 +1336,26 @@ void MainWindow::editPreferences()
   {
     Config::Preferences p = preferences.getPreferences();
 
+    bool needReload = false;
+
     // See if we need to reapply stylesheets
     if ( cfg.preferences.displayStyle != p.displayStyle )
     {
       applyQtStyleSheet( p.displayStyle );
       articleMaker.setDisplayStyle( p.displayStyle );
+      needReload = true;
+    }
 
+    // See if we need to reapply expand optional parts mode
+    if( cfg.preferences.alwaysExpandOptionalParts != p.alwaysExpandOptionalParts )
+    {
+      emit setExpandOptionalParts( p.alwaysExpandOptionalParts );
+      // Signal setExpandOptionalParts reload all articles
+      needReload = false;
+    }
+
+    if( needReload )
+    {
       for( int x = 0; x < ui.tabWidget->count(); ++x )
       {
         ArticleView & view =
@@ -1625,8 +1660,8 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     {
       if (cfg.preferences.mruTabOrder)
       {
-      ctrlTabPressed();
-      return true;
+        ctrlTabPressed();
+        return true;
       }
       return false;
     }
@@ -2899,4 +2934,16 @@ void MainWindow::forceAddWordToHistory( const QString & word )
     }
 
     history.enableAdd( cfg.preferences.storeHistory );
+}
+
+void MainWindow::setExpandMode( bool expand )
+{
+  articleMaker.setExpandOptionalParts( expand );
+}
+
+void MainWindow::switchExpandOptionalPartsMode()
+{
+  ArticleView * view = getCurrentArticleView();
+  if( view )
+    view->switchExpandOptionalParts();
 }

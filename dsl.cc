@@ -138,6 +138,9 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
 
   string initError;
 
+  int optionalPartNom;
+  quint8 articleNom;
+
 public:
 
   DslDictionary( string const & id, string const & indexFile,
@@ -209,6 +212,9 @@ private:
   string nodeToHtml( ArticleDom::Node const & );
   string processNodeChildren( ArticleDom::Node const & node );
 
+  bool hasHiddenZones()           /// Return true if article has hidden zones
+  { return optionalPartNom != 0; }
+
   friend class DslArticleRequest;
   friend class DslResourceRequest;
   friend class DslDeferredInitRunnable;
@@ -222,7 +228,9 @@ DslDictionary::DslDictionary( string const & id,
   idxHeader( idx.read< IdxHeader >() ),
   dz( 0 ),
   dictionaryIconLoaded( false ),
-  deferredInitRunnableStarted( false )
+  deferredInitRunnableStarted( false ),
+  optionalPartNom( 0 ),
+  articleNom( 0 )
 {
   // Read the dictionary name
 
@@ -670,6 +678,8 @@ string DslDictionary::dslToHtml( wstring const & str )
 
   ArticleDom dom( normalizedStr );
 
+  optionalPartNom = 0;
+
   string html = processNodeChildren( dom.root );
 
   // Lines seem to indicate paragraphs in Dsls, so we enclose each line within
@@ -728,7 +738,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"*" ) )
-    result += "<span class=\"dsl_opt\">" + processNodeChildren( node ) + "</span>";
+  {
+      string id = "O" + getId().substr( 0, 7 ) + "_" +
+                QString::number( articleNom ).toStdString() +
+                "_opt_" + QString::number( optionalPartNom++ ).toStdString();
+    result += "<div class=\"dsl_opt\" id=\"" + id + "\">" + processNodeChildren( node ) + "</div>";
+  }
   else
   if ( node.tagName.size() == 2 && node.tagName[ 0 ] == L'm' &&
        iswdigit( node.tagName[ 1 ] ) )
@@ -1114,21 +1129,43 @@ void DslArticleRequest::run()
                                                    headwordIndex ) ).second )
       continue; // We already have this article in the body.
 
-    string articleText;
+    dict.articleNom += 1;
+
+    string articleText, articleAfter;
 
     articleText += "<span class=\"dsl_article\">";
     articleText += "<div class=\"dsl_headwords\">";
 
-    articleText += dict.dslToHtml( displayedHeadword );
+    if( displayedHeadword.size() == 1 && displayedHeadword[0] == '<' )  // Fix special case - "<" header
+        articleText += "<";                                             // dslToHtml can't handle it correctly.
+    else
+      articleText += dict.dslToHtml( displayedHeadword );
 
-    articleText += "</div>";
+    /// After this may be expand button will be inserted
+
+    articleAfter += "</div>";
 
     expandTildes( articleBody, tildeValue );
 
-    articleText += "<div class=\"dsl_definition\">";
-    articleText += dict.dslToHtml( articleBody );
-    articleText += "</div>";
-    articleText += "</span>";
+    articleAfter += "<div class=\"dsl_definition\">";
+    articleAfter += dict.dslToHtml( articleBody );
+    articleAfter += "</div>";
+    articleAfter += "</span>";
+
+    if( dict.hasHiddenZones() )
+    {
+      string prefix = "O" + dict.getId().substr( 0, 7 ) + "_" + QString::number( dict.articleNom ).toStdString();
+      string id1 = prefix + "_expand";
+      string id2 = prefix + "_opt_";
+      string button = "<span class=\"hidden_expand_opt\" id=\"" + id1 +
+                      "\" onclick=\"gdExpandOptPart('" + id1 + "','" + id2 +"')\">[+]</span>";
+      if( articleText.compare( articleText.size() - 4, 4, "</p>" ) == 0 )
+        articleText.insert( articleText.size() - 4, " " + button );
+      else
+        articleText += button;
+    }
+
+    articleText += articleAfter;
 
     Mutex::Lock _( dataMutex );
 

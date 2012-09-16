@@ -162,6 +162,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->setHtml( QString::fromUtf8( &( r->getFullData().front() ),
                                              r->getFullData().size() ),
                           blankPage );
+
+  expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
+
 }
 
 void ArticleView::setGroupComboBox( GroupComboBox const * g )
@@ -225,6 +228,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   // Clear highlight all button selection
   ui.highlightAllButton->setChecked(false);
+
+  emit setExpandMode( expandOptionalParts );
 
   ui.definition->load( req );
 
@@ -323,6 +328,14 @@ void ArticleView::loadFinished( bool )
 
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
+
+  // Jump to current article after page reloading
+  if( !articleToJump.isEmpty() )
+  {
+    setCurrentArticle( articleToJump, true );
+    articleToJump.clear();
+  }
+
   emit pageLoaded( this );
 }
 
@@ -388,7 +401,7 @@ QString ArticleView::getCurrentArticle()
     return QString();
 }
 
-void ArticleView::jumpToDictionary(QString const & id)
+void ArticleView::jumpToDictionary( QString const & id )
 {
   QString targetArticle = "gdfrom-" + id;
 
@@ -1528,4 +1541,30 @@ void ArticleView::showEvent( QShowEvent * ev )
 
   if ( !searchIsOpened )
     ui.searchFrame->hide();
+}
+
+void ArticleView::receiveExpandOptionalParts( bool expand )
+{
+  if( expandOptionalParts != expand )
+  {
+    int n = getArticlesList().indexOf( getActiveArticleId() );
+    if( n > 0 )
+       articleToJump = getCurrentArticle();
+
+    emit setExpandMode( expand );
+    expandOptionalParts = expand;
+    reload();
+  }
+}
+
+void ArticleView::switchExpandOptionalParts()
+{
+  expandOptionalParts = !expandOptionalParts;
+
+  int n = getArticlesList().indexOf( getActiveArticleId() );
+  if( n > 0 )
+    articleToJump = getCurrentArticle();
+
+  emit setExpandMode( expandOptionalParts );
+  reload();
 }

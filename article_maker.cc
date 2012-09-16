@@ -24,7 +24,8 @@ ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictiona
                             QString const & displayStyle_ ):
   dictionaries( dictionaries_ ),
   groups( groups_ ),
-  displayStyle( displayStyle_ )
+  displayStyle( displayStyle_ ),
+  needExpandOptionalParts( true )
 {
 }
 
@@ -63,6 +64,11 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     
     result += "<style type=\"text/css\" media=\"all\">\n";
     result += css.data();
+
+    // Turn on/off expanding of article optional parts
+    if( needExpandOptionalParts )
+      result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none;\n}\n";
+
     result += "</style>\n";
   }
 
@@ -103,6 +109,9 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "function processIframeClick() { if( overIframeId != null ) { overIframeId = overIframeId.replace( 'gdexpandframe-', '' ); gdMakeArticleActive( overIframeId ) } }"
             "function init() { window.addEventListener('blur', processIframeClick, false); }"
             "window.addEventListener('load', init, false);"
+            "function gdExpandOptPart( expanderId, optionalId ) {  var d1=document.getElementById(expanderId); var i = 0; if( d1.innerHTML == '[+]' ) {"
+            "d1.innerHTML = '[-]'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
+            "else { d1.innerHTML = '[+]'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } }"
             "</script>";
 
   result += "</head><body>";
@@ -257,6 +266,11 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
   memcpy( &( r->getData().front() ), result.data(), result.size() );
 
   return r;
+}
+
+void ArticleMaker::setExpandOptionalParts( bool expand )
+{
+  needExpandOptionalParts = expand;
 }
 
 //////// ArticleRequest

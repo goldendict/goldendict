@@ -124,7 +124,8 @@ Preferences::Preferences():
   zoomFactor( 1 ),
   wordsZoomLevel( 0 ),
   maxStringsInHistory( 500 ),
-  storeHistory( 1 )
+  storeHistory( 1 ),
+  alwaysExpandOptionalParts( true )
 {
 }
 
@@ -652,6 +653,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "storeHistory" ).isNull() )
       c.preferences.storeHistory = preferences.namedItem( "storeHistory" ).toElement().text().toUInt() ;
+
+    if ( !preferences.namedItem( "alwaysExpandOptionalParts" ).isNull() )
+      c.preferences.alwaysExpandOptionalParts = preferences.namedItem( "alwaysExpandOptionalParts" ).toElement().text().toUInt() ;
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -1218,6 +1222,9 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.storeHistory ) ) );
     preferences.appendChild( opt );
 
+    opt = dd.createElement( "alwaysExpandOptionalParts" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.alwaysExpandOptionalParts ) ) );
+    preferences.appendChild( opt );
   }
 
   {

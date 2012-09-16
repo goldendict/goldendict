@@ -30,6 +30,8 @@ class ArticleView: public QFrame
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, openSearchAction;
   bool searchIsOpened;
+  bool expandOptionalParts;
+  QString articleToJump;
 
 #ifdef Q_OS_WIN32
     // Used in Windows only for PlaySound mode
@@ -195,6 +197,9 @@ signals:
   /// Signal to close popup menu
   void closePopupMenu();
 
+  /// Signal to set optional parts expand mode
+  void setExpandMode ( bool  expand );
+
 public slots:
 
   void on_searchPrevious_clicked();
@@ -203,6 +208,10 @@ public slots:
 
   /// Receive signal from ScanPopup to close context menu
   void closeMenu();
+
+  /// Control optional parts expanding
+  void receiveExpandOptionalParts( bool expand );
+  void switchExpandOptionalParts();
 
 private slots:
 

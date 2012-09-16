@@ -53,6 +53,11 @@ signals:
   void sendWordToMainWindow( QString const & word );
   /// Close opened menus when window hide
   void closeMenu();
+  /// Signals to set expand optional parts mode (retranslation from/to MainWindow)
+  void setExpandMode( bool expand );
+  void setViewExpandMode( bool expand );
+  /// Signal to switch expand optional parts mode
+  void switchExpandMode();
 
 public slots:
 
@@ -86,7 +91,7 @@ private:
   History & history;
   Ui::ScanPopup ui;
   ArticleView * definition;
-  QAction escapeAction;
+  QAction escapeAction, switchExpandModeAction;
   QString pendingInputWord, inputWord;
   WordFinder wordFinder;
   Config::Events configEvents;
@@ -155,6 +160,8 @@ private slots:
   void escapePressed();
 
   void mutedDictionariesChanged();
+
+  void switchExpandOptionalPartsMode();
 };
 
 #endif
