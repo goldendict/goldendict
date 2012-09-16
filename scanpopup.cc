@@ -64,6 +64,8 @@ ScanPopup::ScanPopup( QWidget * parent,
            definition, SLOT( receiveExpandOptionalParts( bool ) ) );
   connect( definition, SIGNAL( setExpandMode( bool ) ),
            this, SIGNAL( setExpandMode( bool ) ) );
+  connect( definition, SIGNAL( forceAddWordToHistory( QString ) ),
+           this, SIGNAL( forceAddWordToHistory( QString ) ) );
 
   applyZoomFactor();
   

@@ -852,6 +852,9 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL( setExpandMode( bool ) ),
            this, SLOT( setExpandMode( bool ) ) );
+
+  connect( scanPopup.get(), SIGNAL( forceAddWordToHistory( const QString & ) ),
+           this, SLOT( forceAddWordToHistory( const QString & ) ) );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()

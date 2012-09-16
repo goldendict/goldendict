@@ -1012,12 +1012,12 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
                                            arg( ui.definition->selectedText() ),
                                            &menu );
       menu.addAction( lookupSelectionNewTab );
-
-      addWordToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
-                                            arg( ui.definition->selectedText() ),
-                                            &menu );
-      menu.addAction( addWordToHistoryAction );
     }
+
+    addWordToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
+                                          arg( ui.definition->selectedText() ),
+                                          &menu );
+    menu.addAction( addWordToHistoryAction );
 
     Instances::Group const * altGroup =
       ( groupComboBox && groupComboBox->getCurrentGroup() !=  getGroup( ui.definition->url() )  ) ?
@@ -1047,7 +1047,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   if ( selectedText.size() )
     menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
 
-  if( !popupView && menu.isEmpty() )
+  if( menu.isEmpty() )
   {
       addHeaderToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
                                             arg( ui.definition->title() ),

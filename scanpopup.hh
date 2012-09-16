@@ -58,6 +58,8 @@ signals:
   void setViewExpandMode( bool expand );
   /// Signal to switch expand optional parts mode
   void switchExpandMode();
+  /// Signal to add word to history even if history is disabled
+  void forceAddWordToHistory( const QString & word);
 
 public slots:
 
