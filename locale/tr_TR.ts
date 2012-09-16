@@ -2352,6 +2352,18 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
         <source>Store &amp;history</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on to always expand optional parts of articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expand optional &amp;parts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
