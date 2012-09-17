@@ -97,6 +97,7 @@ __attribute__((packed))
 
 typedef BigEndian< uint16_t > uint16_be;
 typedef BigEndian< uint32_t > uint32_be;
+typedef BigEndian< uint64_t > uint64_be;
 
 /// AAR file header
 struct AAR_header
@@ -123,6 +124,16 @@ struct IndexElement
 {
     uint32_be wordOffset;
     uint32_be articleOffset;
+}
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
+
+struct IndexElement64
+{
+    uint32_be wordOffset;
+    uint64_be articleOffset;
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -795,13 +806,23 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         try
         {
+          {
+            QFileInfo info( FsEncoding::decode( i->c_str() ) );
+            if( info.size() > ULONG_MAX )
+            {
+              DPRINTF( "File %s is too large", i->c_str() );
+              continue;
+            }
+          }
+
           File::Class df( *i, "rb" );
 
           AAR_header dictHeader;
 
           df.read( &dictHeader, sizeof(dictHeader) );
+          bool has64bitIndex = !strncmp( dictHeader.indexItemFormat, ">LQ", 4 );
           if( strncmp( dictHeader.signature, "aard", 4 )
-              || strncmp( dictHeader.indexItemFormat, ">LL", 4 )
+              || ( !has64bitIndex && strncmp( dictHeader.indexItemFormat, ">LL", 4 ) )
               || strncmp( dictHeader.keyLengthFormat, ">H", 2 )
               || strncmp( dictHeader.articleLengthFormat, ">L", 2) )
           {
@@ -877,17 +898,32 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           uint32_t wordCount = dictHeader.wordsCount;
           set< uint32_t > articleOffsets;
           uint32_t pos = df.tell();
-          uint32_t wordsBase = pos + wordCount * sizeof( IndexElement );
+          uint32_t wordsBase = pos + wordCount * ( has64bitIndex ? sizeof( IndexElement64 ) : sizeof( IndexElement ) );
           uint32_t articlesBase = dictHeader.articleOffset;
 
           for( uint32_t j = 0; j < wordCount; j++ )
           {
-            IndexElement el;
+            uint32_t articleOffset;
+            uint32_t wordOffset;
 
-            df.seek( pos );
-            df.read( &el, sizeof(el) );
-            uint32_t articleOffset = articlesBase + el.articleOffset;
-            uint32_t wordOffset = wordsBase + el.wordOffset;
+            if( has64bitIndex )
+            {
+              IndexElement64 el64;
+
+              df.seek( pos );
+              df.read( &el64, sizeof(el64) );
+              articleOffset = articlesBase + el64.articleOffset;
+              wordOffset = wordsBase + el64.wordOffset;
+            }
+            else
+            {
+              IndexElement el;
+
+              df.seek( pos );
+              df.read( &el, sizeof(el) );
+              articleOffset = articlesBase + el.articleOffset;
+              wordOffset = wordsBase + el.wordOffset;
+            }
 
             df.seek( wordOffset );
 
@@ -903,7 +939,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             // Insert new entry
             indexedWords.addWord( Utf8::decode( string( data.data(), wordSize ) ), articleOffset);
 
-            pos += sizeof(el);
+            pos += has64bitIndex ? sizeof( IndexElement64 ) : sizeof( IndexElement );
           }
           // Finish with the chunks
 
