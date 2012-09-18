@@ -21,7 +21,11 @@
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <mmsystem.h> // For PlaySound
+
+#include <QWebElement>
+#include <QPainter>
 #endif
+
 #include <QBuffer>
 
 // Phonon headers are a mess. How to include them properly? Send patches if you
@@ -1568,3 +1572,173 @@ void ArticleView::switchExpandOptionalParts()
   emit setExpandMode( expandOptionalParts );
   reload();
 }
+
+#ifdef Q_OS_WIN32
+
+void ArticleView::readTag( const QString & from, QString & to, int & count )
+{
+    QChar ch, prev_ch;
+    bool inQuote = false, inDoublequote = false;
+
+    to.append( ch = prev_ch = from[ count++ ] );
+    while( count < from.size() )
+    {
+        ch = from[ count ];
+        if( ch == '>' && !( inQuote || inDoublequote ) )
+        {
+            to.append( ch );
+            break;
+        }
+        if( ch == '\'' )
+            inQuote = !inQuote;
+        if( ch == '\"' )
+            inDoublequote = !inDoublequote;
+        to.append( prev_ch = ch );
+        count++;
+    }
+}
+
+QString ArticleView::insertSpans( QString const & html )
+{
+    QChar ch;
+    QString newContent;
+    bool inSpan = false, escaped = false;
+
+    /// Enclose every word in string (exclude tags) with <span></span>
+
+    for( int i = 0; i < html.size(); i++ )
+    {
+        ch = html[ i ];
+        if( ch == '&' )
+        {
+            escaped = true;
+            if( inSpan )
+            {
+                newContent.append( "</span>" );
+                inSpan = false;
+            }
+            newContent.append( ch );
+            continue;
+        }
+
+        if( ch == '<' ) // Skip tag
+        {
+            escaped = false;
+            if( inSpan )
+            {
+                newContent.append( "</span>" );
+                inSpan = false;
+            }
+            readTag( html, newContent, i );
+            continue;
+        }
+
+        if( escaped )
+        {
+            if( ch == ';' )
+                escaped = false;
+            newContent.append( ch );
+            continue;
+        }
+
+        if( !inSpan && ( ch.isLetterOrNumber() || ch.isLowSurrogate() ) )
+        {
+            newContent.append( "<span>");
+            inSpan = true;
+        }
+
+        if( inSpan && !( ch.isLetterOrNumber() || ch.isLowSurrogate() ) )
+        {
+            newContent.append( "</span>");
+            inSpan = false;
+        }
+
+        if( ch.isLowSurrogate() )
+        {
+            newContent.append( ch );
+            ch = html[ ++i ];
+        }
+
+        newContent.append( ch );
+    }
+    if( inSpan )
+        newContent.append( "</span>" );
+    return newContent;
+}
+
+QString ArticleView::checkElement( QWebElement & elem, QPoint const & pt )
+{
+    /// Search for lower-level matching element
+
+    QWebElement parentElem = elem;
+    QWebElement childElem = elem.firstChild();
+    while( !childElem.isNull() )
+    {
+      if( childElem.geometry().contains( pt ) )
+      {
+        parentElem = childElem;
+        childElem = parentElem.firstChild();
+        continue;
+      }
+      childElem = childElem.nextSibling();
+    }
+
+    return parentElem.toPlainText();
+}
+
+QString ArticleView::wordAtPoint( int x, int y )
+{
+  QString word;
+
+  if( popupView )
+    return word;
+
+  QPoint pos = mapFromGlobal( QPoint( x, y ) );
+  QWebFrame *frame = ui.definition->page()->frameAt( pos );
+  if( !frame )
+    return word;
+
+  QPoint posWithScroll = pos + frame->scrollPosition();
+
+  /// Find target HTML element
+
+  QWebHitTestResult result = frame->hitTestContent( pos );
+  QWebElement baseElem = result.enclosingBlockElement();
+
+  if( baseElem.tagName().compare( "BODY" ) == 0 ||      /// Assume empty field position
+      baseElem.tagName().compare( "HTML" ) == 0 ||
+      baseElem.tagName().compare( "HEAD" ) == 0 )
+    return word;
+
+  /// Enclose every word be <span> </span>
+
+  QString content = baseElem.toInnerXml();
+  QString newContent = insertSpans( content );
+
+  /// Set new code and re-render it to fill geometry
+
+  QImage img( baseElem.geometry().width(), baseElem.geometry().height(), QImage::Format_Mono );
+  img.fill( 0 );
+  QPainter painter( & img );
+
+  baseElem.setInnerXml( newContent );
+  baseElem.render( &painter );
+
+  /// Search in all child elements and check it
+
+  QWebElementCollection elemCollection = baseElem.findAll( "*" );
+  foreach ( QWebElement elem, elemCollection )
+  {
+      if( elem.geometry().contains( posWithScroll ) )
+          word = checkElement( elem, posWithScroll );
+      if( !word.isEmpty() )
+          break;
+  }
+
+  /// Restore old content
+  baseElem.setInnerXml( content );
+
+  return word;
+}
+
+#endif

@@ -25,6 +25,11 @@
 #include "lionsupport.h"
 #endif
 
+#ifdef Q_OS_WIN32
+#include <windows.h>
+#include "mouseover_win32/GDDataTranfer.h"
+#endif
+
 using std::set;
 using std::wstring;
 using std::map;
@@ -527,6 +532,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   #ifdef Q_OS_MAC
     LionSupport::addFullscreen(this);
   #endif
+#ifdef Q_OS_WIN32
+  gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
+#endif
 }
 
 void MainWindow::ctrlTabPressed()
@@ -1021,6 +1029,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   view->setZoomFactor( cfg.preferences.zoomFactor );
 
+#ifdef Q_OS_WIN32
+  view->installEventFilter( this );
+#endif
   return view;
 }
 
@@ -2950,3 +2961,28 @@ void MainWindow::switchExpandOptionalPartsMode()
   if( view )
     view->switchExpandOptionalParts();
 }
+
+#ifdef Q_OS_WIN32
+
+bool MainWindow::winEvent( MSG * message, long * result )
+{
+  if( message->message != gdAskMessage )
+    return false;
+  *result = 0;
+  ArticleView * view = getCurrentArticleView();
+  if( !view )
+    return true;
+
+  LPGDDataStruct lpdata = ( LPGDDataStruct ) message->lParam;
+
+  QString str = view->wordAtPoint( lpdata->Pt.x, lpdata->Pt.y );
+
+  str.truncate( lpdata->dwMaxLength - 1 );
+  memset( lpdata->cwData, 0, lpdata->dwMaxLength * sizeof( WCHAR ) );
+  str.toWCharArray( lpdata->cwData );
+
+  *result = 1;
+  return true;
+}
+
+#endif

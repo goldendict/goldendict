@@ -341,6 +341,13 @@ private slots:
 signals:
   /// Set optional parts expand mode for all tabs
   void setExpandOptionalParts( bool expand );
+
+#ifdef Q_OS_WIN32
+  /// For receiving message from scan libraries
+protected:
+  unsigned gdAskMessage;
+  bool winEvent( MSG * message, long * result );
+#endif
 };
 
 #endif

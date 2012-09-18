@@ -298,6 +298,19 @@ protected:
 
   // We need this to hide the search bar when we're showed
   void showEvent( QShowEvent * );
+
+#ifdef Q_OS_WIN32
+
+  /// Search inside web page for word under cursor
+
+private:
+  QString insertSpans( QString const & html );
+  void readTag( QString const & from, QString & to, int & count );
+  QString checkElement( QWebElement & elem, const QPoint & pt );
+public:
+  QString wordAtPoint( int x, int y );
+#endif
+
 };
 
 #endif
