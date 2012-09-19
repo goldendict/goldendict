@@ -61,6 +61,11 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     }
   }
 
+  // Strip "<nu />" tags - QDomDocument don't handle it correctly
+  unsigned n;
+  while( ( n = inConverted.find( "<nu />" ) ) != string::npos )
+      inConverted.erase( n, 6 );
+
   // We build a dom representation of the given xml, then do some transforms
   QDomDocument dd;
 
