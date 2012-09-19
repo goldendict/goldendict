@@ -217,3 +217,16 @@ void DictionaryBar::actionWasTriggered( QAction * action )
   }
 }
 
+void DictionaryBar::dictsPaneClicked( const QString & id )
+{
+  for( QList< QAction * >::iterator i = dictActions.begin();
+       i != dictActions.end(); ++i )
+  {
+    QString dictId = (*i)->data().toString();
+    if ( dictId == id )
+    {
+      (*i)->activate( QAction::Trigger );
+      break;
+    }
+  }
+}

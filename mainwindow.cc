@@ -104,6 +104,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.dictsPane, SIGNAL( visibilityChanged( bool ) ),
            this, SLOT( dictsPaneVisibilityChanged ( bool ) ) );
 
+  connect( ui.dictsList, SIGNAL( itemClicked( QListWidgetItem * ) ),
+           this, SLOT( dictsPaneClicked( QListWidgetItem * ) ) );
+
   // Make the toolbar
   navToolbar = addToolBar( tr( "Navigation" ) );
   navToolbar->setObjectName( "navToolbar" );
@@ -328,6 +331,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
                                // setting
 
   useSmallIconsInToolbarsTriggered();
+
+  connect( this, SIGNAL( clickOnDictPane( QString const & ) ),
+           &dictionaryBar, SLOT( dictsPaneClicked( QString const & ) ) );
 
   addToolBar( &dictionaryBar );
 
@@ -2960,6 +2966,16 @@ void MainWindow::switchExpandOptionalPartsMode()
   ArticleView * view = getCurrentArticleView();
   if( view )
     view->switchExpandOptionalParts();
+}
+
+void MainWindow::dictsPaneClicked( QListWidgetItem * item )
+{
+  if ( QApplication::keyboardModifiers() &
+       ( Qt::ControlModifier | Qt::ShiftModifier ) )
+  {
+    QString id = item->data( Qt::UserRole ).toString();
+    emit clickOnDictPane( id );
+  }
 }
 
 #ifdef Q_OS_WIN32

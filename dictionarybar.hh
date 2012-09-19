@@ -47,6 +47,8 @@ private slots:
   void mutedDictionariesChanged();
 
   void actionWasTriggered( QAction * );
+
+  void dictsPaneClicked( QString const & );
 };
 
 #endif

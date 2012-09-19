@@ -193,6 +193,9 @@ private slots:
   /// Signalled when the lastestReleaseReply is finished()
   void latestReleaseReplyReady();
 
+  /// Receive click on "Found in:" pane
+  void dictsPaneClicked( QListWidgetItem * item );
+
 private slots:
 
   // Executed in response to a user click on an 'add tab' tool button
@@ -341,6 +344,9 @@ private slots:
 signals:
   /// Set optional parts expand mode for all tabs
   void setExpandOptionalParts( bool expand );
+
+  /// Retranslate Ctrl(Shift) + Click on dictionary pane to dictionary toolbar
+  void clickOnDictPane( QString const & id );
 
 #ifdef Q_OS_WIN32
   /// For receiving message from scan libraries
