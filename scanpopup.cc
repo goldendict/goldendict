@@ -152,8 +152,13 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
 
-  connect( &MouseOver::instance(), SIGNAL( hovered( QString const & ) ),
-           this, SLOT( mouseHovered( QString const & ) ) );
+  connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),
+           this, SLOT( mouseHovered( QString const &, bool ) ) );
+
+#ifdef Q_OS_WIN32
+  connect( &MouseOver::instance(), SIGNAL( isGoldenDictWindow( HWND ) ),
+           this, SIGNAL( isGoldenDictWindow( HWND ) ) );
+#endif
 
   hideTimer.setSingleShot( true );
   hideTimer.setInterval( 400 );
@@ -252,10 +257,12 @@ void ScanPopup::translateWord( QString const & word )
   altModeExpirationTimer.stop();
 
   inputWord = str;
-  engagePopup(
+  engagePopup( false,
 #ifdef Q_WS_WIN
       true // We only focus popup under Windows when activated via Ctrl+C+C
            // -- on Linux it already has an implicit focus
+#else
+      false
 #endif
       );
 }
@@ -272,12 +279,12 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
   handleInputWord( QApplication::clipboard()->text( subtype, m ) );
 }
 
-void ScanPopup::mouseHovered( QString const & str )
+void ScanPopup::mouseHovered( QString const & str, bool forcePopup )
 {
-  handleInputWord( str );
+  handleInputWord( str, forcePopup );
 }
 
-void ScanPopup::handleInputWord( QString const & str )
+void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
 {
   QString sanitizedStr = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
 
@@ -316,12 +323,12 @@ void ScanPopup::handleInputWord( QString const & str )
   }
 
   inputWord = pendingInputWord;
-  engagePopup();
+  engagePopup( forcePopup );
 }
 
-void ScanPopup::engagePopup( bool giveFocus )
+void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 {
-  if( cfg.preferences.scanToMainWindow )
+  if( cfg.preferences.scanToMainWindow && !forcePopup )
   {
     // Send translated word to main window istead of show popup
     emit sendWordToMainWindow( inputWord );
@@ -726,7 +733,7 @@ void ScanPopup::altModePoll()
     altModeExpirationTimer.stop();
 
     inputWord = pendingInputWord;
-    engagePopup();
+    engagePopup( false );
   }
 }
 

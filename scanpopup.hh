@@ -61,6 +61,11 @@ signals:
   /// Signal to add word to history even if history is disabled
   void forceAddWordToHistory( const QString & word);
 
+#ifdef Q_OS_WIN32
+  /// Ask for source window is current translate tab
+  bool isGoldenDictWindow( HWND hwnd );
+#endif
+
 public slots:
 
   /// Translates the word from the clipboard, showing the window etc.
@@ -112,8 +117,8 @@ private:
 
   QTimer mouseGrabPollTimer;
 
-  void handleInputWord( QString const & );
-  void engagePopup( bool giveFocus = false );
+  void handleInputWord( QString const & , bool forcePopup = false );
+  void engagePopup( bool forcePopup, bool giveFocus = false );
   void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
@@ -137,7 +142,7 @@ private:
 private slots:
 
   void clipboardChanged( QClipboard::Mode );
-  void mouseHovered( QString const & );
+  void mouseHovered( QString const & , bool forcePopup);
   void currentGroupChanged( QString const & );
   void prefixMatchFinished();
   void on_wordListButton_clicked();

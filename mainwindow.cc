@@ -874,6 +874,11 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL( forceAddWordToHistory( const QString & ) ),
            this, SLOT( forceAddWordToHistory( const QString & ) ) );
+
+#ifdef Q_OS_WIN32
+  connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
+           this, SLOT( isGoldenDictWindow( HWND ) ) );
+#endif
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -3025,6 +3030,11 @@ bool MainWindow::winEvent( MSG * message, long * result )
 
   *result = 1;
   return true;
+}
+
+bool MainWindow::isGoldenDictWindow( HWND hwnd )
+{
+    return hwnd == (HWND)winId();
 }
 
 #endif

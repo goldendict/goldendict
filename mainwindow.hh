@@ -356,6 +356,10 @@ signals:
 protected:
   unsigned gdAskMessage;
   bool winEvent( MSG * message, long * result );
+
+private slots:
+  /// Return true while scanning GoldenDict window
+  bool isGoldenDictWindow( HWND hwnd );
 #endif
 };
 

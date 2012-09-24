@@ -37,7 +37,12 @@ public:
 signals:
 
   /// Emitted when there was some text under cursor which was hovered over.
-  void hovered( QString const & );
+  void hovered( QString const &, bool forcePopup );
+
+#ifdef Q_OS_WIN32
+  /// Ask for source window is GoldenDict window
+  bool isGoldenDictWindow( HWND hwnd );
+#endif
 
 private:
 

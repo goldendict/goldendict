@@ -201,6 +201,8 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
     int wordSeqPos = 0;
     QString wordSeq;
 
+    HWND hwnd = GlobalData->LastWND;
+
     if( GlobalData->CurMod.WordLen == 0)
     {
         if( ( res & GD_FLAG_METHOD_UI_AUTOMATION ) == 0 )
@@ -317,7 +319,9 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
       }
     }
 
-    emit instance().hovered( word );
+    bool forcePopup = false;
+    forcePopup = emit instance().isGoldenDictWindow( hwnd );
+    emit instance().hovered( word, forcePopup );
     return 0;
   }
 
