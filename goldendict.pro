@@ -200,7 +200,8 @@ HEADERS += folding.hh \
     sdict.hh \
     decompress.hh \
     aard.hh \
-    mruqmenu.hh
+    mruqmenu.hh \
+    dictinfo.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -212,7 +213,8 @@ FORMS += groups.ui \
     preferences.ui \
     about.ui \
     editdictionaries.ui \
-    orderandprops.ui
+    orderandprops.ui \
+    dictinfo.ui
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -293,7 +295,8 @@ SOURCES += folding.cc \
     sdict.cc \
     decompress.cc \
     aard.cc \
-    mruqmenu.cc
+    mruqmenu.cc \
+    dictinfo.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \

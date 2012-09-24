@@ -20,6 +20,7 @@
 #include "dprintf.hh"
 #include <QDebug>
 #include <QTextStream>
+#include "dictinfo.hh"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -100,12 +101,16 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   dictsPaneTitleBarLayout.addWidget( &foundInDictsLabel );
   dictsPaneTitleBar.setLayout( &dictsPaneTitleBarLayout );
   ui.dictsPane->setTitleBarWidget( &dictsPaneTitleBar );
+  ui.dictsList->setContextMenuPolicy( Qt::CustomContextMenu );
 
   connect( ui.dictsPane, SIGNAL( visibilityChanged( bool ) ),
            this, SLOT( dictsPaneVisibilityChanged ( bool ) ) );
 
   connect( ui.dictsList, SIGNAL( itemClicked( QListWidgetItem * ) ),
-           this, SLOT( dictsPaneClicked( QListWidgetItem * ) ) );
+           this, SLOT( foundDictsPaneClicked( QListWidgetItem * ) ) );
+
+  connect( ui.dictsList, SIGNAL( customContextMenuRequested( const QPoint & ) ),
+           this, SLOT( foundDictsContextMenuRequested( const QPoint & ) ) );
 
   // Make the toolbar
   navToolbar = addToolBar( tr( "Navigation" ) );
@@ -2968,13 +2973,34 @@ void MainWindow::switchExpandOptionalPartsMode()
     view->switchExpandOptionalParts();
 }
 
-void MainWindow::dictsPaneClicked( QListWidgetItem * item )
+void MainWindow::foundDictsPaneClicked( QListWidgetItem * item )
 {
   if ( QApplication::keyboardModifiers() &
        ( Qt::ControlModifier | Qt::ShiftModifier ) )
   {
     QString id = item->data( Qt::UserRole ).toString();
     emit clickOnDictPane( id );
+  }
+}
+
+void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
+{
+  QListWidgetItem *item = ui.dictsList->itemAt( pos );
+  if( item )
+  {
+    QString id = item->data( Qt::UserRole ).toString();
+    for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
+      if( dictionaries[ x ]->getId() == id.toUtf8().data() )
+      {
+        scanPopup.get()->blockSignals( true );
+        DictInfo infoMsg;
+        infoMsg.showInfo( dictionaries[ x ] );
+        infoMsg.exec();
+        scanPopup.get()->blockSignals( false );
+        break;
+      }
+    }
   }
 }
 

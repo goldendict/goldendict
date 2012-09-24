@@ -449,4 +449,15 @@ QString countryCodeForId( Id id )
   return i->second;
 }
 
+QString localizedStringForId( Id langId )
+{
+    QString name = localizedNameForId( langId );
+
+    if ( name.isEmpty() )
+      return name;
+
+    QString iconId = countryCodeForId( langId );
+
+    return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId ).arg( name );
+  }
 }

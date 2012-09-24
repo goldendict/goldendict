@@ -194,7 +194,10 @@ private slots:
   void latestReleaseReplyReady();
 
   /// Receive click on "Found in:" pane
-  void dictsPaneClicked( QListWidgetItem * item );
+  void foundDictsPaneClicked( QListWidgetItem * item );
+
+  /// Receive right click on "Found in:" pane
+  void foundDictsContextMenuRequested( const QPoint & pos );
 
 private slots:
 

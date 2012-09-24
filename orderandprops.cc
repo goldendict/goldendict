@@ -78,20 +78,6 @@ void OrderAndProps::disableDictionaryDescription()
   ui.dictionaryDescriptionLabel->setVisible( false );
 }
 
-namespace {
-  QString makeLangText( Language::Id langId )
-  {
-    QString name = Language::localizedNameForId( langId );
-
-    if ( name.isEmpty() )
-      return name;
-
-    QString iconId = Language::countryCodeForId( langId );
-
-    return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId ).arg( name );
-  }
-}
-
 void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const & idx )
 {
   if ( !idx.isValid() || (unsigned) idx.row() >= lst->getCurrentDictionaries().size() )
@@ -106,8 +92,8 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
 
     ui.dictionaryTotalArticles->setText( QString::number( dict->getArticleCount() ) );
     ui.dictionaryTotalWords->setText( QString::number( dict->getWordCount() ) );
-    ui.dictionaryTranslatesFrom->setText( makeLangText( dict->getLangFrom() ) );
-    ui.dictionaryTranslatesTo->setText( makeLangText( dict->getLangTo() ) );
+    ui.dictionaryTranslatesFrom->setText( Language::localizedStringForId( dict->getLangFrom() ) );
+    ui.dictionaryTranslatesTo->setText( Language::localizedStringForId( dict->getLangTo() ) );
 
     std::vector< std::string > const & filenames = dict->getDictionaryFilenames();
 
