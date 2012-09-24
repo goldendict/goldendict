@@ -78,6 +78,7 @@ LRESULT lr;
 			if(n > 0) {
 				if( IsWindow( GlobalData->ServerWND ) ) {
 #ifdef __WIN64
+					GlobalData32->LastWND = HandleToLong( GlobalData->LastWND );
 					GlobalData32->CurMod.WordLen = n;
 					GlobalData32->CurMod.BeginPos = 0;
 					lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
@@ -98,6 +99,7 @@ LRESULT lr;
 		if (GlobalData->CurMod.WordLen > 0) {
 			if( IsWindow( GlobalData->ServerWND ) ) {
 #ifdef __WIN64
+				GlobalData32->LastWND = HandleToLong( GlobalData->LastWND );
 				GlobalData32->CurMod.WordLen = GlobalData->CurMod.WordLen;
 				GlobalData32->CurMod.BeginPos = GlobalData->CurMod.BeginPos;
 				lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
@@ -113,6 +115,7 @@ LRESULT lr;
 		if (GlobalData->CurMod.WordLen > 0 ) {
 			if( IsWindow( GlobalData->ServerWND ) ) {
 #ifdef __WIN64
+				GlobalData32->LastWND = HandleToLong( GlobalData->LastWND );
 				GlobalData32->CurMod.WordLen = GlobalData->CurMod.WordLen;
 				GlobalData32->CurMod.BeginPos = GlobalData->CurMod.BeginPos;
 				lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
