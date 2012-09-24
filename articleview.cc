@@ -1710,6 +1710,46 @@ QString ArticleView::wordAtPoint( int x, int y )
       baseElem.tagName().compare( "HEAD" ) == 0 )
     return word;
 
+  bool block = blockSignals( true );
+
+  /// Save selection position
+
+  baseElem.evaluateJavaScript( "var __gd_sel=window.getSelection();"
+                               "if(__gd_sel && __gd_sel.rangeCount>0) {"
+                                 "__gd_StartTree=[]; __gd_EndTree=[];"
+                                 "__gd_SelRange=__gd_sel.getRangeAt(0);"
+                                 "var __gd_baseRange=document.createRange();"
+                                 "__gd_baseRange.selectNode(this);"
+                                 "if(__gd_baseRange.comparePoint(__gd_SelRange.startContainer,0)==0) {"
+                                   "__gd_StartOffset=__gd_SelRange.startOffset;"
+                                   "var __gd_child=__gd_SelRange.startContainer;"
+                                   ""
+                                   "var __gd_parent='';"
+                                   "if(__gd_child==this) __gd_StartTree.push(-1);"
+                                   "else while(__gd_parent!=this) {"
+                                     "var n=0; __gd_parent=__gd_child.parentNode;"
+                                     "var __gd_el=__gd_parent.firstChild;"
+                                     "while(__gd_el!=__gd_child) { n++; __gd_el=__gd_el.nextSibling; }"
+                                     "__gd_StartTree.push(n);"
+                                     "__gd_child=__gd_parent;"
+                                   "}"
+                                 "}"
+                                 "if(__gd_baseRange.comparePoint(__gd_SelRange.endContainer,0)==0) {"
+                                   "__gd_EndOffset=__gd_SelRange.endOffset;"
+                                   "var __gd_child=__gd_SelRange.endContainer;"
+                                   "var __gd_parent='';"
+                                   "if(__gd_child==this) __gd_EndTree.push(-1);"
+                                   "else while(__gd_parent!=this) {"
+                                     "var n=0; __gd_parent=__gd_child.parentNode;"
+                                     "var __gd_el=__gd_parent.firstChild;"
+                                     "while(__gd_el!=__gd_child) { n++; __gd_el=__gd_el.nextSibling; }"
+                                     "__gd_EndTree.push(n);"
+                                     "__gd_child=__gd_parent;"
+                                   "}"
+                                 "}"
+                               "}"
+                               );
+
   /// Enclose every word be <span> </span>
 
   QString content = baseElem.toInnerXml();
@@ -1737,6 +1777,41 @@ QString ArticleView::wordAtPoint( int x, int y )
 
   /// Restore old content
   baseElem.setInnerXml( content );
+
+  /// Restore selection
+
+  baseElem.evaluateJavaScript( "var flag=0;"
+                               "if(__gd_StartTree && __gd_StartTree.length) {"
+                               "  var __gd_el=this;"
+                               "  while(__gd_StartTree.length) {"
+                               "    __gd_el=__gd_el.firstChild;"
+                               "    var n=__gd_StartTree.pop();"
+                               "    if(n<0) __gd_el=this;"
+                               "    else for(var i=0;i<n;i++) __gd_el=__gd_el.nextSibling;"
+                               "  }"
+                               "  __gd_SelRange.setStart(__gd_el, __gd_StartOffset);"
+                               "  __gd_StartTree.splice(0,__gd_StartTree.length);"
+                               "  flag+=1;"
+                               "}"
+                               "if(__gd_EndTree && __gd_EndTree.length) {"
+                               "  var __gd_el=this;"
+                               "  while(__gd_EndTree.length) {"
+                               "    __gd_el=__gd_el.firstChild;"
+                               "    var n=__gd_EndTree.pop();"
+                               "    if(n<0) __gd_el=this;"
+                               "    else for(var i=0;i<n;i++) __gd_el=__gd_el.nextSibling;"
+                               "  }"
+                               "  __gd_SelRange.setEnd(__gd_el, __gd_EndOffset);"
+                               "  __gd_EndTree.splice(0,__gd_EndTree.length);"
+                               "  flag+=1;"
+                               "}"
+                               "if(flag>0) {"
+                               "  var __gd_sel=window.getSelection();"
+                               "  __gd_sel.removeAllRanges();"
+                               "  __gd_sel.addRange(__gd_SelRange);"
+                               "}"
+                               );
+  blockSignals( block );
 
   return word;
 }
