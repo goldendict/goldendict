@@ -106,7 +106,21 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
   QAction * editAction =
       menu.addAction( QIcon( ":/icons/bookcase.png" ), tr( "Edit this group" ) );
 
+  QAction * infoAction = NULL;
+  QAction * dictAction = actionAt( event->x(), event->y() );
+  if( dictAction )
+    infoAction =  menu.addAction( tr( "Dictionary info" ) );
+
+  connect( this, SIGNAL( closePopupMenu() ), &menu, SLOT( close() ) );
+
   QAction * result = menu.exec( event->globalPos() );
+
+  if( result && result == infoAction )
+  {
+    QString id = dictAction->data().toString();
+    emit showDictionaryInfo( id );
+    return;
+  }
 
   if ( result == editAction )
     emit editGroupRequested();

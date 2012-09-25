@@ -30,6 +30,12 @@ signals:
   /// shows.
   void editGroupRequested();
 
+  /// Signal for show dictionary info command from context menu
+  void showDictionaryInfo( QString const & id );
+
+  /// Signal to close context menu
+  void closePopupMenu();
+
 private:
 
   Config::MutedDictionaries & mutedDictionaries;

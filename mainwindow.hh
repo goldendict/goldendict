@@ -199,6 +199,8 @@ private slots:
   /// Receive right click on "Found in:" pane
   void foundDictsContextMenuRequested( const QPoint & pos );
 
+  void showDictionaryInfo( QString const & id );
+
 private slots:
 
   // Executed in response to a user click on an 'add tab' tool button

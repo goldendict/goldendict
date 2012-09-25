@@ -66,6 +66,8 @@ ScanPopup::ScanPopup( QWidget * parent,
            this, SIGNAL( setExpandMode( bool ) ) );
   connect( definition, SIGNAL( forceAddWordToHistory( QString ) ),
            this, SIGNAL( forceAddWordToHistory( QString ) ) );
+  connect( this, SIGNAL( closeMenu() ),
+           definition, SIGNAL( closePopupMenu() ) );
 
   applyZoomFactor();
   
@@ -83,6 +85,10 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   connect( &dictionaryBar, SIGNAL(editGroupRequested()),
            this, SLOT(editGroupRequested()) );
+  connect( this, SIGNAL( closeMenu() ),
+           &dictionaryBar, SIGNAL( closePopupMenu() ) );
+  connect( &dictionaryBar, SIGNAL( showDictionaryInfo( QString const & ) ),
+           this, SIGNAL( showDictionaryInfo( QString const & ) ) );
 
   if ( cfg.popupWindowGeometry.size() )
     restoreGeometry( cfg.popupWindowGeometry );

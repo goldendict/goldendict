@@ -352,6 +352,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &dictionaryBar, SIGNAL(editGroupRequested()),
            this, SLOT(editCurrentGroup()) );
 
+  connect( &dictionaryBar, SIGNAL( showDictionaryInfo( QString const & ) ),
+           this, SLOT( showDictionaryInfo( QString const & ) ) );
+
   // History
   history.enableAdd( cfg.preferences.storeHistory );
 /*
@@ -874,6 +877,9 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL( forceAddWordToHistory( const QString & ) ),
            this, SLOT( forceAddWordToHistory( const QString & ) ) );
+
+  connect( scanPopup.get(), SIGNAL( showDictionaryInfo( const QString & ) ),
+           this, SLOT( showDictionaryInfo( const QString & ) ) );
 
 #ifdef Q_OS_WIN32
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
@@ -2988,24 +2994,29 @@ void MainWindow::foundDictsPaneClicked( QListWidgetItem * item )
   }
 }
 
+void MainWindow::showDictionaryInfo( const QString & id )
+{
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
+    if( dictionaries[ x ]->getId() == id.toUtf8().data() )
+    {
+      DictInfo infoMsg;
+      infoMsg.showInfo( dictionaries[ x ] );
+      infoMsg.exec();
+      break;
+    }
+  }
+}
+
 void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 {
   QListWidgetItem *item = ui.dictsList->itemAt( pos );
   if( item )
   {
+    scanPopup.get()->blockSignals( true );
     QString id = item->data( Qt::UserRole ).toString();
-    for( unsigned x = 0; x < dictionaries.size(); x++ )
-    {
-      if( dictionaries[ x ]->getId() == id.toUtf8().data() )
-      {
-        scanPopup.get()->blockSignals( true );
-        DictInfo infoMsg;
-        infoMsg.showInfo( dictionaries[ x ] );
-        infoMsg.exec();
-        scanPopup.get()->blockSignals( false );
-        break;
-      }
-    }
+    showDictionaryInfo( id );
+    scanPopup.get()->blockSignals( false );
   }
 }
 

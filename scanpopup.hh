@@ -53,13 +53,15 @@ signals:
   void sendWordToMainWindow( QString const & word );
   /// Close opened menus when window hide
   void closeMenu();
-  /// Signals to set expand optional parts mode (retranslation from/to MainWindow)
+  /// Signals to set expand optional parts mode (retranslation from/to MainWindow and dictionary bar)
   void setExpandMode( bool expand );
   void setViewExpandMode( bool expand );
   /// Signal to switch expand optional parts mode
   void switchExpandMode();
   /// Signal to add word to history even if history is disabled
   void forceAddWordToHistory( const QString & word);
+  /// Retranslate signal from dictionary bar
+  void showDictionaryInfo( QString const & id );
 
 #ifdef Q_OS_WIN32
   /// Ask for source window is current translate tab

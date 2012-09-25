@@ -206,9 +206,6 @@ public slots:
   void on_searchNext_clicked();
   void onJsActiveArticleChanged(QString const & id);
 
-  /// Receive signal from ScanPopup to close context menu
-  void closeMenu();
-
   /// Control optional parts expanding
   void receiveExpandOptionalParts( bool expand );
   void switchExpandOptionalParts();

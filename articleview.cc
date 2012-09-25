@@ -1425,11 +1425,6 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
   emit activeArticleChanged( id.mid( 7 ) );
 }
 
-void ArticleView::closeMenu()
-{
-  emit closePopupMenu();
-}
-
 void ArticleView::doubleClicked()
 {
   // We might want to initiate translation of the selected word
