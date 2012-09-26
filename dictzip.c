@@ -429,7 +429,7 @@ static int dict_read_header( const char *filename,
 dictData *dict_data_open( const char *filename, int computeCRC )
 {
    dictData    *h = NULL;
-   struct stat sb;
+//   struct stat sb;
    int         j;
 
    if (!filename)

@@ -230,7 +230,7 @@ bool DictListModel::insertRows( int row, int count, const QModelIndex & parent )
 
 void DictListModel::addRow(const QModelIndex & parent, sptr< Dictionary::Class > dict)
 {
-  for (int i = 0; i < dictionaries.size(); i++)
+  for (unsigned i = 0; i < dictionaries.size(); i++)
   {
     if (dictionaries[i]->getId() == dict->getId())
       return;
@@ -580,7 +580,7 @@ void DictGroupsWidget::addAutoGroups()
 //  ::Initializing init( this, true );
 //  QApplication::processEvents();
 
-  for ( int i = 0; i < allDicts->size(); i++ )
+  for ( unsigned i = 0; i < allDicts->size(); i++ )
   {
     sptr<Dictionary::Class> dict = allDicts->at( i );
 
