@@ -1052,6 +1052,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   connect( view, SIGNAL( setExpandMode( bool ) ), this, SLOT( setExpandMode( bool ) ) );
 
+  view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
+
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
               ui.tabWidget->currentIndex() + 1 : ui.tabWidget->count();
 
