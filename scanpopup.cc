@@ -42,7 +42,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   escapeAction( this ),
   switchExpandModeAction( this ),
   wordFinder( this ),
-  dictionaryBar( this, cfg.popupMutedDictionaries, configEvents ),
+  dictionaryBar( this, configEvents ),
   mouseEnteredOnce( false ),
   mouseIntercepted( false ),
   hideTimer( this )
@@ -55,8 +55,8 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   definition = new ArticleView( ui.outerFrame, articleNetMgr, allDictionaries,
                                 groups, true, cfg,
-                                dictionaryBar.toggleViewAction(),
-                                &cfg.popupMutedDictionaries );
+                                dictionaryBar.toggleViewAction()
+                                );
 
   connect( this, SIGNAL(switchExpandMode() ),
            definition, SLOT( switchExpandOptionalParts() ) );
@@ -80,6 +80,21 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
 
   dictionaryBar.setFloatable( false );
+
+  Instances::Group const * igrp = groups.findGroup( cfg.lastPopupGroupId );
+  if( cfg.lastPopupGroupId == Instances::Group::AllGroupId )
+  {
+    if( igrp )
+      igrp->checkMutedDictionaries( &cfg.popupMutedDictionaries );
+    dictionaryBar.setMutedDictionaries( &cfg.popupMutedDictionaries );
+  }
+  else
+  {
+    Config::Group * grp = cfg.getGroup( cfg.lastPopupGroupId );
+    if( igrp && grp )
+      igrp->checkMutedDictionaries( &grp->popupMutedDictionaries );
+    dictionaryBar.setMutedDictionaries( grp ? &grp->popupMutedDictionaries : 0 );
+  }
 
   addToolBar( Qt::RightToolBarArea, &dictionaryBar );
 
@@ -421,9 +436,29 @@ QString ScanPopup::elideInputWord()
   return inputWord.size() > 32 ? inputWord.mid( 0, 32 ) + "..." : inputWord;
 }
 
-
 void ScanPopup::currentGroupChanged( QString const & )
 {
+    cfg.lastPopupGroupId = ui.groupList->getCurrentGroup();
+    Instances::Group const * igrp = groups.findGroup( cfg.lastPopupGroupId );
+    if( cfg.lastPopupGroupId == Instances::Group::AllGroupId )
+    {
+      if( igrp )
+        igrp->checkMutedDictionaries( &cfg.popupMutedDictionaries );
+      dictionaryBar.setMutedDictionaries( &cfg.popupMutedDictionaries );
+    }
+    else
+    {
+      Config::Group * grp = cfg.getGroup( cfg.lastPopupGroupId );
+      if( grp )
+      {
+        if( igrp )
+          igrp->checkMutedDictionaries( &grp->popupMutedDictionaries );
+        dictionaryBar.setMutedDictionaries( &grp->popupMutedDictionaries );
+      }
+      else
+        dictionaryBar.setMutedDictionaries( 0 );
+    }
+
   updateDictionaryBar();
 
   if ( isVisible() )
@@ -455,7 +490,8 @@ vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
     return allDictionaries;
   }
 
-  if ( !dictionaryBar.toggleViewAction()->isChecked() )
+  Config::MutedDictionaries const * mutedDictionaries = dictionaryBar.getMutedDictionaries();
+  if ( !dictionaryBar.toggleViewAction()->isChecked() || mutedDictionaries == 0 )
     return groups[ current ].dictionaries;
   else
   {
@@ -469,7 +505,7 @@ vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
     dictionariesUnmuted.reserve( activeDicts.size() );
 
     for( unsigned x = 0; x < activeDicts.size(); ++x )
-      if ( !cfg.popupMutedDictionaries.contains(
+      if ( !mutedDictionaries->contains(
               QString::fromStdString( activeDicts[ x ]->getId() ) ) )
         dictionariesUnmuted.push_back( activeDicts[ x ] );
 
@@ -812,11 +848,19 @@ void ScanPopup::updateDictionaryBar()
   if ( !dictionaryBar.toggleViewAction()->isChecked() )
     return; // It's not enabled, therefore hidden -- don't waste time
 
-  Instances::Group const * grp =
-      groups.findGroup( ui.groupList->getCurrentGroup() );
+  unsigned currentId = ui.groupList->getCurrentGroup();
+  Instances::Group const * grp = groups.findGroup( currentId );
 
   if ( grp ) // Should always be !0, but check as a safeguard
     dictionaryBar.setDictionaries( grp->dictionaries );
+
+  if( currentId == Instances::Group::AllGroupId )
+    dictionaryBar.setMutedDictionaries( &cfg.popupMutedDictionaries );
+  else
+  {
+    Config::Group * grp = cfg.getGroup( currentId );
+    dictionaryBar.setMutedDictionaries( grp ? &grp->popupMutedDictionaries : 0 );
+  }
 }
 
 void ScanPopup::mutedDictionariesChanged()

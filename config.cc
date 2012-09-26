@@ -139,6 +139,22 @@ Romaji::Romaji():
 {
 }
 
+Group * Class::getGroup( unsigned id )
+{
+  for( unsigned x = 0; x < groups.size(); x++ )
+    if( groups[ x ].id == id )
+      return &groups[ x ];
+  return 0;
+}
+
+Group const * Class::getGroup( unsigned id ) const
+{
+  for( unsigned x = 0; x < groups.size(); x++ )
+    if( groups[ x ].id == id )
+      return &groups[ x ];
+  return 0;
+}
+
 void Events::signalMutedDictionariesChanged()
 {
   emit mutedDictionariesChanged();
@@ -225,6 +241,15 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
   for( unsigned y = 0; y < dicts.length(); ++y )
     g.dictionaries.push_back( DictionaryRef( dicts.item( y ).toElement().text(),
                                              dicts.item( y ).toElement().attribute( "name" ) ) );
+
+  QDomNode muted = grp.namedItem( "mutedDictionaries" );
+  dicts = muted.toElement().elementsByTagName( "mutedDictionary" );
+  for( unsigned x = 0; x < dicts.length(); ++x )
+    g.mutedDictionaries.insert( dicts.item( x ).toElement().text() );
+
+  dicts = muted.toElement().elementsByTagName( "popupMutedDictionary" );
+  for( unsigned x = 0; x < dicts.length(); ++x )
+    g.popupMutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   return g;
 }
@@ -763,6 +788,29 @@ void saveGroup( Group const & data, QDomElement & group )
     name.setValue( j->name );
 
     dictionary.setAttributeNode( name );
+  }
+
+  QDomElement muted = dd.createElement( "mutedDictionaries" );
+  group.appendChild( muted );
+
+  for( MutedDictionaries::const_iterator i = data.mutedDictionaries.begin();
+       i != data.mutedDictionaries.end(); ++i )
+  {
+    QDomElement dict = dd.createElement( "mutedDictionary" );
+    muted.appendChild( dict );
+
+    QDomText value = dd.createTextNode( *i );
+    dict.appendChild( value );
+  }
+
+  for( MutedDictionaries::const_iterator i = data.popupMutedDictionaries.begin();
+       i != data.popupMutedDictionaries.end(); ++i )
+  {
+    QDomElement dict = dd.createElement( "popupMutedDictionary" );
+    muted.appendChild( dict );
+
+    QDomText value = dd.createTextNode( *i );
+    dict.appendChild( value );
   }
 }
 

@@ -321,8 +321,6 @@ private slots:
   void useSmallIconsInToolbarsTriggered();
   void toggleMenuBarTriggered( bool announce = true );
 
-//  void historyChanged();
-//  void menuHistoryTriggered( QAction * );
   void on_clearHistory_activated();
 
   void on_newTab_activated();

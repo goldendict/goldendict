@@ -61,7 +61,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab( this ),
   cfg( cfg_ ),
   history( History::Load(), cfg_.preferences.maxStringsInHistory ),
-  dictionaryBar( this, cfg.mutedDictionaries, configEvents ),
+  dictionaryBar( this, configEvents ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites ),
@@ -332,6 +332,21 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // Dictionary bar
 
+  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
+  if( cfg.lastMainGroupId == Instances::Group::AllGroupId )
+  {
+    if( igrp )
+      igrp->checkMutedDictionaries( &cfg.mutedDictionaries );
+    dictionaryBar.setMutedDictionaries( &cfg.mutedDictionaries );
+  }
+  else
+  {
+    Config::Group * grp = cfg.getGroup( cfg.lastMainGroupId );
+    if( igrp && grp )
+      igrp->checkMutedDictionaries( &grp->mutedDictionaries );
+    dictionaryBar.setMutedDictionaries( grp ? &grp->mutedDictionaries : 0 );
+  }
+
   showDictBarNamesTriggered(); // Make update its state according to initial
                                // setting
 
@@ -357,13 +372,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // History
   history.enableAdd( cfg.preferences.storeHistory );
-/*
-  connect( &history, SIGNAL( itemsChanged() ),
-           this, SLOT( historyChanged() ) );
-
-  connect( ui.menuHistory, SIGNAL(triggered(QAction*)),
-           this, SLOT(menuHistoryTriggered(QAction*)), Qt::QueuedConnection );
-*/
 
   // Show tray icon early so the user would be happy. It won't be functional
   // though until the program inits fully.
@@ -834,11 +842,19 @@ void MainWindow::updateDictionaryBar()
   if ( !dictionaryBar.toggleViewAction()->isChecked() )
     return; // It's not enabled, therefore hidden -- don't waste time
 
-  Instances::Group * grp =
-      groupInstances.findGroup( groupList.getCurrentGroup() );
+  unsigned currentId = groupList.getCurrentGroup();
+  Instances::Group * igrp = groupInstances.findGroup( currentId );
 
-  if ( grp ) { // Should always be !0, but check as a safeguard
-    dictionaryBar.setDictionaries( grp->dictionaries );
+  if ( igrp ) { // Should always be !0, but check as a safeguard
+    dictionaryBar.setDictionaries( igrp->dictionaries );
+
+    if( currentId == Instances::Group::AllGroupId )
+      dictionaryBar.setMutedDictionaries( &cfg.mutedDictionaries );
+    else
+    {
+      Config::Group * grp = cfg.getGroup( currentId );
+      dictionaryBar.setMutedDictionaries( grp ? &grp->mutedDictionaries : 0 );
+    }
 
     if ( useSmallIconsInToolbarsAction.isChecked() ) {
       int extent = QApplication::style()->pixelMetric(QStyle::PM_SmallIconSize);
@@ -900,7 +916,8 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
     return dictionaries;
   }
 
-  if ( !dictionaryBar.toggleViewAction()->isChecked() )
+  Config::MutedDictionaries const * mutedDictionaries = dictionaryBar.getMutedDictionaries();
+  if ( !dictionaryBar.toggleViewAction()->isChecked() || mutedDictionaries == 0 )
     return groupInstances[ current ].dictionaries;
   else
   {
@@ -914,14 +931,13 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
     dictionariesUnmuted.reserve( activeDicts.size() );
 
     for( unsigned x = 0; x < activeDicts.size(); ++x )
-      if ( !cfg.mutedDictionaries.contains(
+      if ( !mutedDictionaries->contains(
               QString::fromStdString( activeDicts[ x ]->getId() ) ) )
         dictionariesUnmuted.push_back( activeDicts[ x ] );
 
     return dictionariesUnmuted;
   }
 }
-
 
 void MainWindow::createTabList()
 {
@@ -1000,7 +1016,6 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
                                         groupInstances, false, cfg,
                                         dictionaryBar.toggleViewAction(),
-                                        &cfg.mutedDictionaries,
                                         &groupList );
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
@@ -1337,7 +1352,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   wordFinder.clear();
   dictionariesUnmuted.clear();
 
-  EditDictionaries dicts( this, cfg, dictionaries, groupInstances, dictNetMgr );
+  Config::Class newCfg = cfg;
+  EditDictionaries dicts( this, newCfg, dictionaries, groupInstances, dictNetMgr );
 
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );
@@ -1346,6 +1362,24 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   if ( dicts.areDictionariesChanged() || dicts.areGroupsChanged() )
   {
+
+    // Set muted dictionaries from old groups
+    for( unsigned x = 0; x < newCfg.groups.size(); x++ )
+    {
+      unsigned id = newCfg.groups[ x ].id;
+      if( id != Instances::Group::NoGroupId )
+      {
+        Config::Group const * grp = cfg.getGroup( id );
+        if( grp )
+        {
+          newCfg.groups[ x ].mutedDictionaries = grp->mutedDictionaries;
+          newCfg.groups[ x ].popupMutedDictionaries = grp->popupMutedDictionaries;
+        }
+      }
+    }
+
+    cfg = newCfg;
+
     updateGroupList();
 
     Config::save( cfg );
@@ -1431,6 +1465,25 @@ void MainWindow::editPreferences()
 void MainWindow::currentGroupChanged( QString const & )
 {
   cfg.lastMainGroupId = groupList.getCurrentGroup();
+  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
+  if( cfg.lastMainGroupId == Instances::Group::AllGroupId )
+  {
+    if( igrp )
+      igrp->checkMutedDictionaries( &cfg.mutedDictionaries );
+    dictionaryBar.setMutedDictionaries( &cfg.mutedDictionaries );
+  }
+  else
+  {
+    Config::Group * grp = cfg.getGroup( cfg.lastMainGroupId );
+    if( grp )
+    {
+      if( igrp )
+        igrp->checkMutedDictionaries( &grp->mutedDictionaries );
+      dictionaryBar.setMutedDictionaries( &grp->mutedDictionaries );
+    }
+    else
+      dictionaryBar.setMutedDictionaries( 0 );
+  }
 
   updateDictionaryBar();
 
@@ -2384,56 +2437,6 @@ void MainWindow::toggleMenuBarTriggered(bool announce)
   }
   menuBar()->setVisible( !cfg.preferences.hideMenubar );
 }
-
-/*
-void MainWindow::historyChanged()
-{
-  // Rebuild history menu
-
-  ui.menuHistory->clear();
-
-  QList< History::Item > const & items = history.getItems();
-
-  for( int x = 0; x < items.size(); ++x )
-  {
-    History::Item const * i = &items[ x ];
-
-    Instances::Group const * group = groupInstances.findGroup( i->groupId );
-
-    QIcon icon = group ? group->makeIcon() : QIcon();
-
-    QAction * action = ui.menuHistory->addAction( icon, i->word );
-    action->setIconVisibleInMenu( true );
-
-    action->setData( x );
-  }
-
-  ui.menuHistory->addSeparator();
-
-  ui.menuHistory->addAction( ui.clearHistory );
-
-  ui.clearHistory->setEnabled( items.size() );
-}
-*/
-
-/*
-void MainWindow::menuHistoryTriggered( QAction * action )
-{
-  if ( action->data().type() != QVariant::Int )
-    return; // Not the item we added
-
-  int index = action->data().toInt();
-
-  QList< History::Item > const & items = history.getItems();
-
-  if ( index < 0 || index >= items.size() )
-    return; // Something's not right
-
-  History::Item const & item = items[ index ];
-
-  showTranslationFor( item.word, item.groupId );
-}
-*/
 
 void MainWindow::on_clearHistory_activated()
 {

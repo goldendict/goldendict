@@ -40,6 +40,9 @@ struct Group
   /// Makes an icon object for this group, based on the icon's name or iconData.
   QIcon makeIcon() const;
 
+  /// Remove id's if not presented in group dictionaries
+  void checkMutedDictionaries( Config::MutedDictionaries * mutedDictionaries ) const;
+
   // Some constants
 
   /// The id of the 'All' group

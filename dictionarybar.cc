@@ -8,10 +8,9 @@
 using std::vector;
 
 DictionaryBar::DictionaryBar( QWidget * parent,
-                              Config::MutedDictionaries & mutedDictionaries_,
                               Config::Events & events ):
   QToolBar( tr( "Dictionary Bar" ), parent ),
-  mutedDictionaries( mutedDictionaries_ ),
+  mutedDictionaries( 0 ),
   configEvents( events )
 {
   setObjectName( "dictionaryBar" );
@@ -64,7 +63,7 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
 
     action->setCheckable( true );
 
-    action->setChecked( !mutedDictionaries.contains( id ) );
+    action->setChecked( mutedDictionaries ? !mutedDictionaries->contains( id ) : true );
 
     QList< QSize > sizes = icon.availableSizes();
 
@@ -135,6 +134,9 @@ void DictionaryBar::mutedDictionariesChanged()
 {
   //DPRINTF( "Muted dictionaries changed\n" );
 
+  if( !mutedDictionaries )
+    return;
+
   // Update actions
 
   setUpdatesEnabled( false );
@@ -142,7 +144,7 @@ void DictionaryBar::mutedDictionariesChanged()
   for( QList< QAction * >::iterator i = dictActions.begin();
        i != dictActions.end(); ++i )
   {
-    bool isUnmuted = !mutedDictionaries.contains( (*i)->data().toString() );
+    bool isUnmuted = !mutedDictionaries->contains( (*i)->data().toString() );
 
     if ( isUnmuted != (*i)->isChecked() )
       (*i)->setChecked( isUnmuted );
@@ -153,6 +155,9 @@ void DictionaryBar::mutedDictionariesChanged()
 
 void DictionaryBar::actionWasTriggered( QAction * action )
 {
+  if( !mutedDictionaries )
+    return;
+
   QString id = action->data().toString();
 
   if ( id.isEmpty() )
@@ -186,7 +191,7 @@ void DictionaryBar::actionWasTriggered( QAction * action )
       // Toggle back all the dictionaries
       for( QList< QAction * >::iterator i = dictActions.begin();
            i != dictActions.end(); ++i )
-        mutedDictionaries.remove( (*i)->data().toString() );
+        mutedDictionaries->remove( (*i)->data().toString() );
     }
     else
     {
@@ -197,9 +202,9 @@ void DictionaryBar::actionWasTriggered( QAction * action )
         QString dictId = (*i)->data().toString();
 
         if ( dictId == id )
-          mutedDictionaries.remove( dictId );
+          mutedDictionaries->remove( dictId );
         else
-          mutedDictionaries.insert( dictId );
+          mutedDictionaries->insert( dictId );
       }
     }
     configEvents.signalMutedDictionariesChanged();
@@ -212,9 +217,9 @@ void DictionaryBar::actionWasTriggered( QAction * action )
     {
       // Unmute the dictionary
 
-      if ( mutedDictionaries.contains( id ) )
+      if ( mutedDictionaries->contains( id ) )
       {
-        mutedDictionaries.remove( id );
+        mutedDictionaries->remove( id );
         configEvents.signalMutedDictionariesChanged();
       }
     }
@@ -222,9 +227,9 @@ void DictionaryBar::actionWasTriggered( QAction * action )
     {
       // Mute the dictionary
 
-      if ( !mutedDictionaries.contains( id ) )
+      if ( !mutedDictionaries->contains( id ) )
       {
-        mutedDictionaries.insert( id );
+        mutedDictionaries->insert( id );
         configEvents.signalMutedDictionariesChanged();
       }
     }

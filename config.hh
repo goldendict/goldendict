@@ -17,6 +17,9 @@ namespace Config {
 
 using std::vector;
 
+/// Dictionaries which are temporarily disabled via the dictionary bar.
+typedef QSet< QString > MutedDictionaries;
+
 /// A path where to search for the dictionaries
 struct Path
 {
@@ -77,6 +80,8 @@ struct Group
   QByteArray iconData;
   QKeySequence shortcut;
   vector< DictionaryRef > dictionaries;
+  Config::MutedDictionaries mutedDictionaries; // Disabled via dictionary bar
+  Config::MutedDictionaries popupMutedDictionaries; // Disabled via dictionary bar in popup
 
   Group(): id( 0 ) {}
 
@@ -349,9 +354,6 @@ struct Program
 
 typedef vector< Program > Programs;
 
-/// Dictionaries which are temporarily disabled via the dictionary bar.
-typedef QSet< QString > MutedDictionaries;
-
 struct Class
 {
   Paths paths;
@@ -396,6 +398,8 @@ struct Class
            pinPopupWindow( false ), showingDictBarNames( false ),
            usingSmallIconsInToolbars( false ), maxDictionaryRefsInContextMenu( 20 )
   {}
+  Group * getGroup( unsigned id );
+  Group const * getGroup( unsigned id ) const;
 };
 
 /// Configuration-specific events. Some parts of the program need to react

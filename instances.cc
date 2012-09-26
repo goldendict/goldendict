@@ -89,6 +89,19 @@ QIcon Group::makeIcon() const
   return i;
 }
 
+void Group::checkMutedDictionaries( Config::MutedDictionaries * mutedDictionaries ) const
+{
+  Config::MutedDictionaries temp;
+
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
+    QString id = QString::fromStdString( dictionaries[ x ]->getId() );
+    if( mutedDictionaries->contains( id ) )
+      temp.insert( id );
+  }
+  * mutedDictionaries = temp;
+}
+
 Group * Groups::findGroup( unsigned id )
 {
   for( unsigned x = 0; x < size(); ++x )
