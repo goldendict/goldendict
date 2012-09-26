@@ -104,6 +104,9 @@ public:
   bool canGoBack();
   bool canGoForward();
 
+  /// Called when preference changes
+  void setSelectionBySingleClick( bool set );
+
 public slots:
 
   /// Goes back in history

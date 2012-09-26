@@ -19,11 +19,14 @@ class ArticleWebView: public QWebView
 public:
 
   ArticleWebView( QWidget * parent ): QWebView( parent ),
-                                      midButtonPressed( false )
+                                      midButtonPressed( false ),
+                                      selectionBySingleClick( false )
   {}
 
   bool isMidButtonPressed() const
   { return midButtonPressed; }
+  void setSelectionBySingleClick( bool set )
+  { selectionBySingleClick = set; }
 
 signals:
 
@@ -43,6 +46,7 @@ protected:
 private:
 
   bool midButtonPressed;
+  bool selectionBySingleClick;
 };
 
 #endif

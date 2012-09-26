@@ -908,6 +908,11 @@ bool ArticleView::canGoForward()
   return ui.definition->history()->canGoForward();
 }
 
+void ArticleView::setSelectionBySingleClick( bool set )
+{
+  ui.definition->setSelectionBySingleClick( set );
+}
+
 void ArticleView::back()
 {
   // Don't allow navigating back to page 0, which is usually the initial

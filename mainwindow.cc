@@ -843,10 +843,10 @@ void MainWindow::updateDictionaryBar()
     return; // It's not enabled, therefore hidden -- don't waste time
 
   unsigned currentId = groupList.getCurrentGroup();
-  Instances::Group * igrp = groupInstances.findGroup( currentId );
+  Instances::Group * grp = groupInstances.findGroup( currentId );
 
-  if ( igrp ) { // Should always be !0, but check as a safeguard
-    dictionaryBar.setDictionaries( igrp->dictionaries );
+  if ( grp ) { // Should always be !0, but check as a safeguard
+    dictionaryBar.setDictionaries( grp->dictionaries );
 
     if( currentId == Instances::Group::AllGroupId )
       dictionaryBar.setMutedDictionaries( &cfg.mutedDictionaries );
@@ -1424,15 +1424,15 @@ void MainWindow::editPreferences()
       needReload = false;
     }
 
-    if( needReload )
+    for( int x = 0; x < ui.tabWidget->count(); ++x )
     {
-      for( int x = 0; x < ui.tabWidget->count(); ++x )
-      {
-        ArticleView & view =
-          dynamic_cast< ArticleView & >( *( ui.tabWidget->widget( x ) ) );
+      ArticleView & view =
+        dynamic_cast< ArticleView & >( *( ui.tabWidget->widget( x ) ) );
 
+      view.setSelectionBySingleClick( p.selectWordBySingleClick );
+
+      if( needReload )
         view.reload();
-      }
     }
 
     cfg.preferences = p;

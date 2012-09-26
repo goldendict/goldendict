@@ -356,6 +356,8 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
     return;
   }
 
+  definition->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
+
   /// Too large strings make window expand which is probably not what user
   /// wants
   ui.word->setText( elideInputWord() );

@@ -88,6 +88,8 @@ struct Group
   bool operator == ( Group const & other ) const
   { return id == other.id && name == other.name && icon == other.icon &&
            dictionaries == other.dictionaries && shortcut == other.shortcut &&
+           mutedDictionaries == other.mutedDictionaries &&
+           popupMutedDictionaries == other.popupMutedDictionaries &&
            iconData == iconData; }
 
   bool operator != ( Group const & other ) const
@@ -152,6 +154,7 @@ struct Preferences
   bool closeToTray;
   bool autoStart;
   bool doubleClickTranslates;
+  bool selectWordBySingleClick;
   bool escKeyHidesMainWindow;
 
   bool enableMainWindowHotkey;

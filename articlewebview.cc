@@ -4,6 +4,7 @@
 #include "articlewebview.hh"
 #include <QMouseEvent>
 #include <QWebFrame>
+#include <QApplication>
 
 void ArticleWebView::mousePressEvent( QMouseEvent * event )
 {
@@ -11,6 +12,12 @@ void ArticleWebView::mousePressEvent( QMouseEvent * event )
     midButtonPressed = true;
 
   QWebView::mousePressEvent( event );
+
+  if ( selectionBySingleClick && ( event->buttons() & Qt::LeftButton ) )
+  {
+    QMouseEvent ev( QEvent::MouseButtonDblClick, event->pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers() );
+    QApplication::sendEvent( page(), &ev );
+  }
 }
 
 void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )

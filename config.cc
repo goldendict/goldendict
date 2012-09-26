@@ -92,6 +92,7 @@ Preferences::Preferences():
   closeToTray( true ),
   autoStart( false ),
   doubleClickTranslates( true ),
+  selectWordBySingleClick( false ),
   escKeyHidesMainWindow( false ),
 
   enableMainWindowHotkey( true ),
@@ -609,6 +610,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "doubleClickTranslates" ).isNull() )
       c.preferences.doubleClickTranslates = ( preferences.namedItem( "doubleClickTranslates" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "selectWordBySingleClick" ).isNull() )
+      c.preferences.selectWordBySingleClick = ( preferences.namedItem( "selectWordBySingleClick" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "escKeyHidesMainWindow" ).isNull() )
       c.preferences.escKeyHidesMainWindow = ( preferences.namedItem( "escKeyHidesMainWindow" ).toElement().text() == "1" );
@@ -1131,6 +1135,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "doubleClickTranslates" );
     opt.appendChild( dd.createTextNode( c.preferences.doubleClickTranslates ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "selectWordBySingleClick" );
+    opt.appendChild( dd.createTextNode( c.preferences.selectWordBySingleClick ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "escKeyHidesMainWindow" );
