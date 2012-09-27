@@ -4,9 +4,13 @@
 #include "fsencoding.hh"
 #include <QString>
 
-DictInfo::DictInfo( QWidget *parent )
+DictInfo::DictInfo( Config::Class &cfg_, QWidget *parent ) :
+cfg( cfg_)
 {
   ui.setupUi( this );
+  if( cfg.dictInfoGeometry.size() > 0 )
+    restoreGeometry( cfg.dictInfoGeometry );
+  connect( this, SIGNAL( finished( int ) ), this, SLOT( savePos( int ) ) );
 }
 
 void DictInfo::showInfo( sptr<Dictionary::Class> dict )
@@ -36,4 +40,9 @@ void DictInfo::showInfo( sptr<Dictionary::Class> dict )
     ui.infoLabel->setPlainText( info );
   else
     ui.infoLabel->clear();
+}
+
+void DictInfo::savePos( int )
+{
+  cfg.dictInfoGeometry = saveGeometry();
 }

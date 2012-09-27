@@ -376,6 +376,7 @@ struct Class
   unsigned lastPopupGroupId; // Last used group in popup window
   QByteArray popupWindowState; // Binary state saved by QMainWindow
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
+  QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
 
   QString historyExportPath; // Path for export/import history
 
