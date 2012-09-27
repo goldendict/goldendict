@@ -43,6 +43,7 @@ private:
 
   Config::MutedDictionaries * mutedDictionaries;
   Config::Events & configEvents;
+  Config::MutedDictionaries storedMutedSet;
 
   /// All the actions we have added to the toolbar
   QList< QAction * > dictActions;

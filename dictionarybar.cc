@@ -188,13 +188,15 @@ void DictionaryBar::actionWasTriggered( QAction * action )
 
     if ( isSolo )
     {
-      // Toggle back all the dictionaries
-      for( QList< QAction * >::iterator i = dictActions.begin();
-           i != dictActions.end(); ++i )
-        mutedDictionaries->remove( (*i)->data().toString() );
+      // Restore or clear all the dictionaries
+      *mutedDictionaries = storedMutedSet;
+      storedMutedSet.clear();
     }
     else
     {
+      // Save dictionaries state
+      storedMutedSet = *mutedDictionaries;
+
       // Make dictionary solo
       for( QList< QAction * >::iterator i = dictActions.begin();
            i != dictActions.end(); ++i )
@@ -212,6 +214,8 @@ void DictionaryBar::actionWasTriggered( QAction * action )
   else
   {
     // Normal mode
+
+    storedMutedSet.clear();
 
     if ( action->isChecked() )
     {
