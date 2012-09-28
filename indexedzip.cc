@@ -40,9 +40,17 @@ bool IndexedZip::loadFile( gd::wstring const & name, vector< char > & data )
   if ( links.empty() )
     return false;
 
+  return loadFile( links[ 0 ].articleOffset, data );
+}
+
+bool IndexedZip::loadFile( uint32_t offset, vector< char > & data )
+{
+  if ( !zipIsOpen )
+    return false;
+
   // Now seek into the zip file and read its header
 
-  if ( !zip.seek( links[ 0 ].articleOffset ) )
+  if ( !zip.seek( offset ) )
     return false;
 
   ZipFile::LocalFileHeader header;
