@@ -189,7 +189,14 @@ void DictionaryBar::actionWasTriggered( QAction * action )
     if ( isSolo )
     {
       // Restore or clear all the dictionaries
-      *mutedDictionaries = storedMutedSet;
+      if ( QApplication::keyboardModifiers() & Qt::ShiftModifier )
+        *mutedDictionaries = storedMutedSet;
+      else
+      {
+        for( QList< QAction * >::iterator i = dictActions.begin();
+             i != dictActions.end(); ++i )
+          mutedDictionaries->remove( (*i)->data().toString() );
+      }
       storedMutedSet.clear();
     }
     else
@@ -208,7 +215,7 @@ void DictionaryBar::actionWasTriggered( QAction * action )
         else
           mutedDictionaries->insert( dictId );
       }
-    }
+    }  
     configEvents.signalMutedDictionariesChanged();
   }
   else
