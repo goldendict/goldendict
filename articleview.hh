@@ -32,6 +32,7 @@ class ArticleView: public QFrame
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
+  QString soundScript;
 
 #ifdef Q_OS_WIN32
     // Used in Windows only for PlaySound mode

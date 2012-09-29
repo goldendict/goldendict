@@ -932,17 +932,18 @@ void ArticleView::forward()
 
 bool ArticleView::hasSound()
 {
-  return ui.definition->page()->mainFrame()->
-    evaluateJavaScript( "gdAudioLink;" ).type() == QVariant::String;
+  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLink;" );
+  if ( v.type() == QVariant::String )
+    soundScript = v.toString();
+  else
+    soundScript.clear();
+  return !soundScript.isEmpty();
 }
 
 void ArticleView::playSound()
 {
-  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript(
-    QString( "gdAudioLink;" ) );
-
-  if ( v.type() == QVariant::String )
-    openLink( QUrl::fromEncoded( v.toString().toUtf8() ), ui.definition->url() );
+  if ( !soundScript.isEmpty() )
+    openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
 }
 
 QString ArticleView::toHtml()
