@@ -283,6 +283,33 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
 </context>
 <context>
+    <name>DictInfo</name>
+    <message>
+        <source>Total articles:</source>
+        <translation type="unfinished">Toplam Madde: </translation>
+    </message>
+    <message>
+        <source>Translates from:</source>
+        <translation type="unfinished">Bu Dilden: </translation>
+    </message>
+    <message>
+        <source>Total words:</source>
+        <translation type="unfinished">Toplam sözcük: </translation>
+    </message>
+    <message>
+        <source>Translates to:</source>
+        <translation type="unfinished">Bu Dile: </translation>
+    </message>
+    <message>
+        <source>Files comprising this dictionary:</source>
+        <translation type="unfinished">Bu sözlüğü içeren dosyalar:</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictListModel</name>
     <message>
         <source>%1 entries</source>
@@ -298,6 +325,10 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     <message>
         <source>Dictionary Bar</source>
         <translation>Sözlük Çubuğu</translation>
+    </message>
+    <message>
+        <source>Dictionary info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2362,6 +2393,14 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Expand optional &amp;parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on if you want to select words by single mouse click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select word by single click</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

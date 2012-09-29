@@ -276,6 +276,33 @@
     </message>
 </context>
 <context>
+    <name>DictInfo</name>
+    <message>
+        <source>Total articles:</source>
+        <translation type="unfinished">文章总数：</translation>
+    </message>
+    <message>
+        <source>Translates from:</source>
+        <translation type="unfinished">词条语言：</translation>
+    </message>
+    <message>
+        <source>Total words:</source>
+        <translation type="unfinished">词条总数：</translation>
+    </message>
+    <message>
+        <source>Translates to:</source>
+        <translation type="unfinished">释义语言：</translation>
+    </message>
+    <message>
+        <source>Files comprising this dictionary:</source>
+        <translation type="unfinished">此词典包含的文件：</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictListModel</name>
     <message>
         <source>%1 entries</source>
@@ -291,6 +318,10 @@
     <message>
         <source>Edit this group</source>
         <translation>编辑此群组</translation>
+    </message>
+    <message>
+        <source>Dictionary info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2348,6 +2379,14 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Expand optional &amp;parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on if you want to select words by single mouse click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select word by single click</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

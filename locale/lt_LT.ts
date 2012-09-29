@@ -157,113 +157,113 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="619"/>
+        <location filename="../articleview.cc" line="631"/>
         <source>Resource</source>
         <translation>Šaltinis</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="624"/>
+        <location filename="../articleview.cc" line="636"/>
         <source>Audio</source>
         <translation>Garsas</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="634"/>
+        <location filename="../articleview.cc" line="646"/>
         <source>Definition: %1</source>
         <translation>Apibrėžimas: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="805"/>
-        <location filename="../articleview.cc" line="835"/>
-        <location filename="../articleview.cc" line="844"/>
-        <location filename="../articleview.cc" line="1243"/>
-        <location filename="../articleview.cc" line="1261"/>
-        <location filename="../articleview.cc" line="1271"/>
+        <location filename="../articleview.cc" line="817"/>
+        <location filename="../articleview.cc" line="847"/>
+        <location filename="../articleview.cc" line="856"/>
+        <location filename="../articleview.cc" line="1260"/>
+        <location filename="../articleview.cc" line="1278"/>
+        <location filename="../articleview.cc" line="1288"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="805"/>
+        <location filename="../articleview.cc" line="817"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Nurodyto šaltinio nėra.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="845"/>
+        <location filename="../articleview.cc" line="857"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Nėra nurodytos garso programos.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="977"/>
+        <location filename="../articleview.cc" line="994"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Atverti nuorodą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="983"/>
+        <location filename="../articleview.cc" line="1000"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Atverti nuorodą naujoje &amp;kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="990"/>
+        <location filename="../articleview.cc" line="1007"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Atv&amp;erti nuorodą naršyklėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1003"/>
+        <location filename="../articleview.cc" line="1020"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Ieškoti „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1011"/>
+        <location filename="../articleview.cc" line="1028"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Ieškoti „%1“ &amp;naujoje kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1017"/>
-        <location filename="../articleview.cc" line="1052"/>
+        <location filename="../articleview.cc" line="1034"/>
+        <location filename="../articleview.cc" line="1069"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1031"/>
+        <location filename="../articleview.cc" line="1048"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Ieškoti „%1“ grupėje %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1039"/>
+        <location filename="../articleview.cc" line="1056"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Ieškoti „%1“ grupėje %2 &amp;naujoje kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1200"/>
+        <location filename="../articleview.cc" line="1217"/>
         <source>Playing a non-WAV file</source>
         <translation>Groti ne-WAV failą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1201"/>
+        <location filename="../articleview.cc" line="1218"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Norėdami įgalinti kitokių nei WAV failų grojimą, eikite į meniu Taisa &gt; Nuostatos, pasirinkite Garso kortelę ir pažymėkite „Groti per DirectShow“.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1243"/>
+        <location filename="../articleview.cc" line="1260"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Nepavyko paleisti grotuvo garso failui atkurti: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1261"/>
+        <location filename="../articleview.cc" line="1278"/>
         <source>Failed to create temporary file.</source>
         <translation>Nepavyko sukurti laikinojo failo.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1272"/>
+        <location filename="../articleview.cc" line="1289"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Nepavyko automatiškai atverti šaltinio failo, mėginkite rankiniu būdu: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1295"/>
+        <location filename="../articleview.cc" line="1312"/>
         <source>The referenced resource failed to download.</source>
         <translation>Nepavyko parsiųsti nurodytų šaltinių.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1295"/>
+        <location filename="../articleview.cc" line="1312"/>
         <source>WARNING: %1</source>
         <translation>ĮSPĖJIMAS: %1</translation>
     </message>
@@ -380,6 +380,39 @@
     </message>
 </context>
 <context>
+    <name>DictInfo</name>
+    <message>
+        <location filename="../dictinfo.ui" line="29"/>
+        <source>Total articles:</source>
+        <translation type="unfinished">Iš viso straipsnių:</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="43"/>
+        <source>Translates from:</source>
+        <translation type="unfinished">Verčia iš:</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="57"/>
+        <source>Total words:</source>
+        <translation type="unfinished">Iš viso žodžių:</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="71"/>
+        <source>Translates to:</source>
+        <translation type="unfinished">Verčia į:</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="88"/>
+        <source>Files comprising this dictionary:</source>
+        <translation type="unfinished">Žodyną sudarantys failai:</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="163"/>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictListModel</name>
     <message>
         <location filename="../groups_widgets.cc" line="188"/>
@@ -390,14 +423,19 @@
 <context>
     <name>DictionaryBar</name>
     <message>
-        <location filename="../dictionarybar.cc" line="13"/>
+        <location filename="../dictionarybar.cc" line="12"/>
         <source>Dictionary Bar</source>
         <translation>Žodynų juosta</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="107"/>
+        <location filename="../dictionarybar.cc" line="89"/>
         <source>Edit this group</source>
         <translation>Keisti šią grupę</translation>
+    </message>
+    <message>
+        <location filename="../dictionarybar.cc" line="94"/>
+        <source>Dictionary info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1723,7 +1761,7 @@
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="204"/>
+        <location filename="../loaddictionaries.cc" line="212"/>
         <source>Error loading dictionaries</source>
         <translation>Žodynų įkelti nepavyko</translation>
     </message>
@@ -1731,294 +1769,294 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cc" line="103"/>
+        <location filename="../mainwindow.cc" line="116"/>
         <source>Navigation</source>
         <translation>Navigacija</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="106"/>
+        <location filename="../mainwindow.cc" line="119"/>
         <source>Back</source>
         <translation>Atgal</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="107"/>
+        <location filename="../mainwindow.cc" line="120"/>
         <source>Forward</source>
         <translation>Pirmyn</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="116"/>
+        <location filename="../mainwindow.cc" line="129"/>
         <source>Scan Popup</source>
         <translation>Iškylantis langas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="167"/>
+        <location filename="../mainwindow.cc" line="180"/>
         <source>Show &amp;Main Window</source>
         <translation>Rodyti &amp;pagrindinį langą</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
-        <location filename="../mainwindow.cc" line="171"/>
+        <location filename="../mainwindow.cc" line="184"/>
         <source>&amp;Quit</source>
         <translation>&amp;Baigti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="355"/>
+        <location filename="../mainwindow.cc" line="382"/>
         <source>Loading...</source>
         <translation>Įkeliama...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2198"/>
+        <location filename="../mainwindow.cc" line="2286"/>
         <source>Skip This Release</source>
         <translation>Praleisti šią versiją</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2311"/>
+        <location filename="../mainwindow.cc" line="2399"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Jūs paslepiate meniu juostą. Norėdami ją vėl matyti, spauskite %1.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2312"/>
+        <location filename="../mainwindow.cc" line="2400"/>
         <source>Ctrl+M</source>
         <translation>Vald+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2460"/>
+        <location filename="../mainwindow.cc" line="2498"/>
         <source>Page Setup</source>
         <translation>Puslapio parinktys</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2461"/>
+        <location filename="../mainwindow.cc" line="2499"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Nera jokio spausdintuvo. Įdiekite kokį nors.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2478"/>
+        <location filename="../mainwindow.cc" line="2516"/>
         <source>Print Article</source>
         <translation>Spausdinti straipsnį</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2499"/>
+        <location filename="../mainwindow.cc" line="2537"/>
         <source>Save Article As</source>
         <translation>Įrašyti straipsnį kaip</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2499"/>
+        <location filename="../mainwindow.cc" line="2537"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html rikmenos (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2514"/>
+        <location filename="../mainwindow.cc" line="2552"/>
         <source>Error</source>
         <translation>Klaida</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2515"/>
+        <location filename="../mainwindow.cc" line="2553"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Nepavyksta įrašyti straipsnio: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="757"/>
+        <location filename="../mainwindow.cc" line="787"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>Žodynų: %1, straipsnių: %2, žodžių: %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2057"/>
+        <location filename="../mainwindow.cc" line="2145"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Nepavyko paruošti sparčiųjų klavišų stebėjimo mechanizmo&lt;br&gt;Įsitikinkite, kad XServer turi įjungtą RECORD plėtinį.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2191"/>
+        <location filename="../mainwindow.cc" line="2279"/>
         <source>New Release Available</source>
         <translation>Yra nauja versija</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2192"/>
+        <location filename="../mainwindow.cc" line="2280"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Galite parsisųstiGoldenDict &lt;b&gt;%1&lt;/b&gt; versiją.&lt;br&gt;
 Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2197"/>
+        <location filename="../mainwindow.cc" line="2285"/>
         <source>Download</source>
         <translation>Parsisiųsti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="81"/>
-        <location filename="../mainwindow.cc" line="768"/>
+        <location filename="../mainwindow.cc" line="87"/>
+        <location filename="../mainwindow.cc" line="798"/>
         <source>Look up in:</source>
         <translation>Ieškoti grupėje:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="50"/>
+        <location filename="../mainwindow.cc" line="56"/>
         <source>Show Names in Dictionary Bar</source>
         <translation>Žodynų juostelėje rodyti pavadinimus</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="51"/>
+        <location filename="../mainwindow.cc" line="57"/>
         <source>Show Small Icons in Toolbars</source>
         <translation>Įrankių juostoje rodyti mažus ženkliukus</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="52"/>
+        <location filename="../mainwindow.cc" line="58"/>
         <source>&amp;Menubar</source>
         <translation>&amp;Meniu juosta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="94"/>
+        <location filename="../mainwindow.cc" line="100"/>
         <source>Found in Dictionaries:</source>
         <translation>Žodynuose rasta:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="126"/>
+        <location filename="../mainwindow.cc" line="139"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Ištarti žodį (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="135"/>
+        <location filename="../mainwindow.cc" line="148"/>
         <source>Zoom In</source>
         <translation>Padidinti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="137"/>
+        <location filename="../mainwindow.cc" line="150"/>
         <source>Zoom Out</source>
         <translation>Sumažinti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="139"/>
+        <location filename="../mainwindow.cc" line="152"/>
         <source>Normal Size</source>
         <translation>Įprastas dydis</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="155"/>
+        <location filename="../mainwindow.cc" line="168"/>
         <source>Words Zoom In</source>
         <translation>Padidinti žodžius</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="157"/>
+        <location filename="../mainwindow.cc" line="170"/>
         <source>Words Zoom Out</source>
         <translation>Sumažinti žodžius</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="159"/>
+        <location filename="../mainwindow.cc" line="172"/>
         <source>Words Normal Size</source>
         <translation>Įprastas žodžių dydis</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="226"/>
+        <location filename="../mainwindow.cc" line="239"/>
         <source>Close current tab</source>
         <translation>Užverti veikiamąją kortelę</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="236"/>
+        <location filename="../mainwindow.cc" line="249"/>
         <source>Close all tabs</source>
         <translation>Užverti visas korteles</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="244"/>
+        <location filename="../mainwindow.cc" line="257"/>
         <source>Close all tabs except current</source>
         <translation>Užverti visas korteles, iškyrus veikiamąją</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="768"/>
+        <location filename="../mainwindow.cc" line="798"/>
         <source>Look up:</source>
         <translation>Ieškoti:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="786"/>
+        <location filename="../mainwindow.cc" line="816"/>
         <source>All</source>
         <translation>Visi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2816"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2860"/>
+        <location filename="../mainwindow.cc" line="2898"/>
         <source>Imported from file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2870"/>
+        <location filename="../mainwindow.cc" line="2908"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2874"/>
+        <location filename="../mainwindow.cc" line="2912"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2877"/>
+        <location filename="../mainwindow.cc" line="2915"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="215"/>
+        <location filename="../mainwindow.cc" line="228"/>
         <source>Opened tabs</source>
         <translation>Atvertos kortelės</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="906"/>
+        <location filename="../mainwindow.cc" line="952"/>
         <source>Open Tabs List</source>
         <translation>Atverti kortelių sąrašą</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="964"/>
+        <location filename="../mainwindow.cc" line="1010"/>
         <source>(untitled)</source>
         <translation>(nepavadinta)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1160"/>
+        <location filename="../mainwindow.cc" line="1210"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1618"/>
+        <location filename="../mainwindow.cc" line="1706"/>
         <source>WARNING: %1</source>
         <translation>Įspėjimas: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2729"/>
+        <location filename="../mainwindow.cc" line="2767"/>
         <source>&amp;Hide</source>
         <translation>&amp;Slėpti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2733"/>
+        <location filename="../mainwindow.cc" line="2771"/>
         <source>History view mode</source>
         <translation>Istorijos rodymas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2755"/>
+        <location filename="../mainwindow.cc" line="2793"/>
         <source>Export history to file</source>
         <translation>Istoriją įrašyti į failą</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2757"/>
-        <location filename="../mainwindow.cc" line="2818"/>
+        <location filename="../mainwindow.cc" line="2795"/>
+        <location filename="../mainwindow.cc" line="2856"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Tekstiniai failai (*.txt);;Visi failai (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2796"/>
+        <location filename="../mainwindow.cc" line="2834"/>
         <source>History export complete</source>
         <translation>Istorija įrašyta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2799"/>
+        <location filename="../mainwindow.cc" line="2837"/>
         <source>Export error: </source>
         <translation>Eksporto klaida:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1160"/>
-        <location filename="../mainwindow.cc" line="2056"/>
+        <location filename="../mainwindow.cc" line="1210"/>
+        <location filename="../mainwindow.cc" line="2144"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="477"/>
+        <location filename="../mainwindow.cc" line="504"/>
         <source>Welcome!</source>
         <translation>Jus sveikina GoldenDict!</translation>
     </message>
@@ -2186,7 +2224,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
-        <location filename="../mainwindow.cc" line="365"/>
+        <location filename="../mainwindow.cc" line="392"/>
         <source>New Tab</source>
         <translation>Nauja kortelė</translation>
     </message>
@@ -2202,7 +2240,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
-        <location filename="../mainwindow.cc" line="2686"/>
+        <location filename="../mainwindow.cc" line="2724"/>
         <source>&amp;Show</source>
         <translation>&amp;Rodyti</translation>
     </message>
@@ -2483,14 +2521,24 @@ Tačiau įgalinus šią parinktį, būtų paslepiamas pagrindinis langas.</trans
         <translation>Gr (Esc) klavišas paslepia pagrindinį langą</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="318"/>
+        <location filename="../preferences.ui" line="276"/>
+        <source>Turn this option on if you want to select words by single mouse click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="279"/>
+        <source>Select word by single click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="328"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>Nurodykite, ar ši iškylančių langų funkcija yra numatytoji.
 Jei pažymėta, iškylančių langų funkcija bus įjungta vos paleistoje programoje.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="499"/>
+        <location filename="../preferences.ui" line="509"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -2501,27 +2549,27 @@ Jei įgalinta ši parinktis, klavišai suveiks ir
 praėjus trupučiui laiko po to, kai baigėte žymėti.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="589"/>
+        <location filename="../preferences.ui" line="599"/>
         <source>Hotkeys</source>
         <translation>Spartieji klavišai</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="608"/>
+        <location filename="../preferences.ui" line="618"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>Nuspaudus spartųjį klavišą parodyti ar paslėpti pagrindinį langą:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="639"/>
+        <location filename="../preferences.ui" line="649"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>Nuspaudus spartųjį klavišą išversti iškarpinės turinį:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="686"/>
+        <location filename="../preferences.ui" line="696"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>Spartieji klavišai yra bendri sitemai ir veikia dirbant bet kuria programa, bet kokioje aplinkoje, kol fone paleistas GoldenDict žodynas.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="281"/>
+        <location filename="../preferences.ui" line="291"/>
         <source>&amp;Scan Popup</source>
         <translation>&amp;Iškylantis langas</translation>
     </message>
@@ -2531,7 +2579,7 @@ praėjus trupučiui laiko po to, kai baigėte žymėti.</translation>
         <translation>GoldenDict paleisti kartu su naudotojo darbalaukiu sistemos paleidimo metu.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="300"/>
+        <location filename="../preferences.ui" line="310"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -2542,7 +2590,7 @@ Jei įgalinta, galite vėliau tiek šią funkciją įjungti, tiek išjungti
 pagrindiniame lange arba nuspaudę ženkliuką sistemos dėkle.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="306"/>
+        <location filename="../preferences.ui" line="316"/>
         <source>Enable scan popup functionality</source>
         <translation>Įgalinti iškylančius langus</translation>
     </message>
@@ -2552,183 +2600,183 @@ the program would always start with the scan popup active.</source>
         <translation type="obsolete">Nurodykite, ar iškylančių langų funkcija bus įjungta vos paleistoje programoje.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="322"/>
+        <location filename="../preferences.ui" line="332"/>
         <source>Start with scan popup turned on</source>
         <translation>Paleisti su įjungta iškylančių langų funkcija</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="329"/>
+        <location filename="../preferences.ui" line="339"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Jei įgalinta, langas su vertimu iškils tik nuspaudus visus nurodytus klavišus
 po to, kai pasikeis pažymėtas žodis.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="333"/>
+        <location filename="../preferences.ui" line="343"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>Iškylantis langas pasirodys tik nuspaudus visus šiuos klavišus:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="372"/>
+        <location filename="../preferences.ui" line="382"/>
         <source>Left Ctrl only</source>
         <translation>Tik kairysis Vald</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="375"/>
+        <location filename="../preferences.ui" line="385"/>
         <source>Left Ctrl</source>
         <translation>Kairysis Vald</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="382"/>
+        <location filename="../preferences.ui" line="392"/>
         <source>Right Shift only</source>
         <translation>Tik dešinysis Lyg2</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="385"/>
+        <location filename="../preferences.ui" line="395"/>
         <source>Right Shift</source>
         <translation>Dešinysis Lyg2</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="392"/>
+        <location filename="../preferences.ui" line="402"/>
         <source>Alt key</source>
         <translation>Alt klavišas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="395"/>
+        <location filename="../preferences.ui" line="405"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="402"/>
+        <location filename="../preferences.ui" line="412"/>
         <source>Ctrl key</source>
         <translation>Vald klavišas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="405"/>
+        <location filename="../preferences.ui" line="415"/>
         <source>Ctrl</source>
         <translation>Vald</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="412"/>
+        <location filename="../preferences.ui" line="422"/>
         <source>Left Alt only</source>
         <translation>Tik kairysis Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="415"/>
+        <location filename="../preferences.ui" line="425"/>
         <source>Left Alt</source>
         <translation>Kairysis Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="422"/>
+        <location filename="../preferences.ui" line="432"/>
         <source>Shift key</source>
         <translation>Lyg2 klavišas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="425"/>
+        <location filename="../preferences.ui" line="435"/>
         <source>Shift</source>
         <translation>Lyg2</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="432"/>
+        <location filename="../preferences.ui" line="442"/>
         <source>Right Alt only</source>
         <translation>Tik dešinysis Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="435"/>
+        <location filename="../preferences.ui" line="445"/>
         <source>Right Alt</source>
         <translation>Dešinysis Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="442"/>
+        <location filename="../preferences.ui" line="452"/>
         <source>Right Ctrl only</source>
         <translation>Tik dešinysis Vald</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="445"/>
+        <location filename="../preferences.ui" line="455"/>
         <source>Right Ctrl</source>
         <translation>Dešin. Vald</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="452"/>
+        <location filename="../preferences.ui" line="462"/>
         <source>Left Shift only</source>
         <translation>Tik kairysis Lyg2</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="455"/>
+        <location filename="../preferences.ui" line="465"/>
         <source>Left Shift</source>
         <translation>Kairysis Lyg2</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="462"/>
+        <location filename="../preferences.ui" line="472"/>
         <source>Windows key or Meta key</source>
         <translation>Windows arba Meta klavišas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="465"/>
+        <location filename="../preferences.ui" line="475"/>
         <source>Win/Meta</source>
         <translation>Win arba Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="558"/>
+        <location filename="../preferences.ui" line="568"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
         <translation>Žodžio vertimas pagrindiniame lange, o ne iškylančiame lange</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="561"/>
+        <location filename="../preferences.ui" line="571"/>
         <source>Send translated word to main window</source>
         <translation>Perduoti į pagrindinį langą</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="776"/>
+        <location filename="../preferences.ui" line="786"/>
         <source>Playback</source>
         <translation>Grojimas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="782"/>
+        <location filename="../preferences.ui" line="792"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
         <translation>Naudoti Windows sistemos grojimo sąsają. Palaikomi
 tik .wav failai, tačiau groja labai gerai.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="786"/>
+        <location filename="../preferences.ui" line="796"/>
         <source>Play via Windows native API</source>
         <translation>Groti naudojant Windows sąsają</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="793"/>
+        <location filename="../preferences.ui" line="803"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
         <translation>Garsą leisti naudojant Phonon sistemą. Ji gali būti nestabili,
 tačiau palaiko daugelį garso failų formatų.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="797"/>
+        <location filename="../preferences.ui" line="807"/>
         <source>Play via Phonon</source>
         <translation>Groti per Phonon</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="809"/>
+        <location filename="../preferences.ui" line="819"/>
         <source>Use any external program to play audio files</source>
         <translation>Naudoti bet kokią išorinę programą garso failų grojimui</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="812"/>
+        <location filename="../preferences.ui" line="822"/>
         <source>Use external program:</source>
         <translation>Naudoti išorinę programą:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1040"/>
+        <location filename="../preferences.ui" line="1050"/>
         <source>Ad&amp;vanced</source>
         <translation>Su&amp;dėtingesni</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1046"/>
+        <location filename="../preferences.ui" line="1056"/>
         <source>ScanPopup extra technologies</source>
         <translation>Ypatingos iškylančių langų technologijos</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1052"/>
+        <location filename="../preferences.ui" line="1062"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -2739,12 +2787,12 @@ technologiją. Ši technoogija veikia tik su kai kuriomis ją palaikančiomis pr
 Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1058"/>
+        <location filename="../preferences.ui" line="1068"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>Naudoti „&amp;IAccessibleEx“</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1065"/>
+        <location filename="../preferences.ui" line="1075"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -2753,12 +2801,12 @@ technologiją. Ši technoogija veikia tik su kai kuriomis ją palaikančiomis pr
 Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1070"/>
+        <location filename="../preferences.ui" line="1080"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Naudoti „&amp;UIAutomation“</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1077"/>
+        <location filename="../preferences.ui" line="1087"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -2767,37 +2815,37 @@ technologiją. Ši technoogija veikia tik su kai kuriomis ją palaikančiomis pr
 Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1082"/>
+        <location filename="../preferences.ui" line="1092"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Naudoti „&amp;GoldenDict message“</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1092"/>
+        <location filename="../preferences.ui" line="1102"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1098"/>
+        <location filename="../preferences.ui" line="1108"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1101"/>
+        <location filename="../preferences.ui" line="1111"/>
         <source>Store &amp;history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1111"/>
+        <location filename="../preferences.ui" line="1121"/>
         <source>Articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1117"/>
+        <location filename="../preferences.ui" line="1127"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1120"/>
+        <location filename="../preferences.ui" line="1130"/>
         <source>Expand optional &amp;parts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2811,12 +2859,12 @@ be pressed shorty after the selection is done.</source>
 praėjus trupučiui laiko po to, kai baigėte žymėti.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="505"/>
+        <location filename="../preferences.ui" line="515"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Klavišai gali būti paspausti per</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="512"/>
+        <location filename="../preferences.ui" line="522"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -2825,12 +2873,12 @@ seconds, which is specified here.</source>
 baigimo žymėti. Laiką nurodykie čia.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="536"/>
+        <location filename="../preferences.ui" line="546"/>
         <source>secs</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="696"/>
+        <location filename="../preferences.ui" line="706"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -2843,22 +2891,22 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Pastaba: regis naudojate X.Org XServerio versiją, kurios RECORD plėtinys yra sugadintas. Spartieji klavišai GoldenDict programai greičiausiai neveiks. Tai pirmiausia turėų būti ištaisyta pačiame Xserveryje. Žiūrėkite pranešimą apie &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;ydą&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; bei, jei norite, palikite savo komentarą .&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="734"/>
+        <location filename="../preferences.ui" line="744"/>
         <source>&amp;Audio</source>
         <translation>&amp;Garsas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="753"/>
+        <location filename="../preferences.ui" line="763"/>
         <source>Pronunciation</source>
         <translation>Tarimas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="759"/>
+        <location filename="../preferences.ui" line="769"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Automatiškai ištarti pagrindinio lango žodžius</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="766"/>
+        <location filename="../preferences.ui" line="776"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Automatiškai ištarti iškylančio lango žodžius</translation>
     </message>
@@ -2867,61 +2915,61 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Garso rinkmenas groti su programa:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="849"/>
+        <location filename="../preferences.ui" line="859"/>
         <source>&amp;Network</source>
         <translation>&amp;Tinklas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="868"/>
+        <location filename="../preferences.ui" line="878"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Įgalinkite, jei norite programos visoms tinklo
 užklausoms naudoti įgaliotąjį serverį.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="872"/>
+        <location filename="../preferences.ui" line="882"/>
         <source>Use proxy server</source>
         <translation>Naudoti įgaliotąjį serverį</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="886"/>
+        <location filename="../preferences.ui" line="896"/>
         <source>Type:</source>
         <translation>Tipas:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="896"/>
+        <location filename="../preferences.ui" line="906"/>
         <source>Host:</source>
         <translation>Serveris:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="906"/>
+        <location filename="../preferences.ui" line="916"/>
         <source>Port:</source>
         <translation>Prievadas:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="927"/>
+        <location filename="../preferences.ui" line="937"/>
         <source>User:</source>
         <translation>Naudotojo vardas:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="937"/>
+        <location filename="../preferences.ui" line="947"/>
         <source>Password:</source>
         <translation>Slaptažodis:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="972"/>
+        <location filename="../preferences.ui" line="982"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
         <translation>Įgalinus šią parinktį, GoldenDict blokuos didžiąją dalį reklamos, neleisdama turinio (paveikslėlių, kadrų) esančio iš kito šaltinio, nei jūsų naršomas puslapis. Jei kuri svetainė neveiks su šia parinktimi, ją išjunkite.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="977"/>
+        <location filename="../preferences.ui" line="987"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>Neleisti įkelti turinio iš kitų svetainių (dažniausiai reklamos)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="984"/>
+        <location filename="../preferences.ui" line="994"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -2930,12 +2978,12 @@ internetiniuose žodynuose, veikiančiuose naudojant Flash ar kitokį
 saityno papildinį. Norint, kad parinktis veiktų, turi būti įdiegtas papildinys.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="989"/>
+        <location filename="../preferences.ui" line="999"/>
         <source>Enable web plugins</source>
         <translation>Įgalinti saityno papildinius</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1012"/>
+        <location filename="../preferences.ui" line="1022"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -2948,7 +2996,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
 </translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1019"/>
+        <location filename="../preferences.ui" line="1029"/>
         <source>Check for new program releases periodically</source>
         <translation>Periodiškai tikrinti, ar yra naujų programos versijų</translation>
     </message>
@@ -2981,17 +3029,17 @@ ir pasiūlys atverti parsisiuntimo puslapį.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="155"/>
+        <location filename="../preferences.cc" line="156"/>
         <source>Play via DirectShow</source>
         <translation>Groti per DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="343"/>
+        <location filename="../preferences.cc" line="345"/>
         <source>Changing Language</source>
         <translation>Kalbos keitimas</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="344"/>
+        <location filename="../preferences.cc" line="346"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Naująją kalbą programa naudos po to, kai ją atversite iš naujo.</translation>
     </message>

@@ -280,6 +280,33 @@
     </message>
 </context>
 <context>
+    <name>DictInfo</name>
+    <message>
+        <source>Total articles:</source>
+        <translation type="unfinished">Tổng số bài viết:</translation>
+    </message>
+    <message>
+        <source>Translates from:</source>
+        <translation type="unfinished">Dịch từ:</translation>
+    </message>
+    <message>
+        <source>Total words:</source>
+        <translation type="unfinished">Tổng số từ:</translation>
+    </message>
+    <message>
+        <source>Translates to:</source>
+        <translation type="unfinished">Dịch sang:</translation>
+    </message>
+    <message>
+        <source>Files comprising this dictionary:</source>
+        <translation type="unfinished">Tập tin chứa từ điển này:</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictListModel</name>
     <message>
         <source>%1 entries</source>
@@ -295,6 +322,10 @@
     <message>
         <source>Edit this group</source>
         <translation>Chỉnh sửa nhóm này</translation>
+    </message>
+    <message>
+        <source>Dictionary info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2358,6 +2389,14 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Expand optional &amp;parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on if you want to select words by single mouse click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select word by single click</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
