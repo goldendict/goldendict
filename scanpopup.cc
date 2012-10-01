@@ -268,7 +268,7 @@ void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 
 void ScanPopup::translateWord( QString const & word )
 {
-  QString str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( word ) ) );
+  QString str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( word ) ) ).simplified();
 
   if ( !str.size() )
     return; // Nothing there
