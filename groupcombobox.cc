@@ -6,7 +6,9 @@
 #include <QShortcutEvent>
 
 GroupComboBox::GroupComboBox( QWidget * parent ): QComboBox( parent ),
-  popupAction( this )
+  popupAction( this ),
+  selectNextAction( this ),
+  selectPreviousAction( this )
 {
   setSizeAdjustPolicy( AdjustToContents );
   setToolTip( tr( "Choose a Group (Alt+G)" ) );
@@ -16,6 +18,16 @@ GroupComboBox::GroupComboBox( QWidget * parent ): QComboBox( parent ),
            this, SLOT( popupGroups() ) );
 
   addAction( &popupAction );
+
+  selectNextAction.setShortcut( QKeySequence( "Alt+PgDown" ) );
+  connect( &selectNextAction, SIGNAL( triggered() ),
+           this, SLOT( selectNextGroup() ) );
+  addAction( &selectNextAction );
+
+  selectPreviousAction.setShortcut( QKeySequence( "Alt+PgUp" ) );
+  connect( &selectPreviousAction, SIGNAL( triggered() ),
+           this, SLOT( selectPreviousGroup() ) );
+  addAction( &selectPreviousAction );
 }
 
 void GroupComboBox::fill( Instances::Groups const & groups )
@@ -96,4 +108,24 @@ unsigned GroupComboBox::getCurrentGroup() const
 void GroupComboBox::popupGroups()
 {
   showPopup();
+}
+
+void GroupComboBox::selectNextGroup()
+{
+  if( count() <= 1 )
+    return;
+  int n = currentIndex() + 1;
+  if( n >= count() )
+    n = 0;
+  setCurrentIndex( n );
+}
+
+void GroupComboBox::selectPreviousGroup()
+{
+  if( count() <= 1 )
+    return;
+  int n = currentIndex() - 1;
+  if( n < 0 )
+    n = count() - 1;
+  setCurrentIndex( n );
 }

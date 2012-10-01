@@ -36,10 +36,13 @@ protected:
 private slots:
 
   void popupGroups();
+  void selectNextGroup();
+  void selectPreviousGroup();
 
 private:
 
   QAction popupAction;
+  QAction selectNextAction, selectPreviousAction;
   QMap< int, int > shortcuts;
 };
 
