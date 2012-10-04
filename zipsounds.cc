@@ -250,7 +250,13 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
 sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const & name )
   throw( std::exception )
 {
-  vector< WordArticleLink > chain = findArticles( Utf8::decode( name ) );
+  // See if the name ends in .wav. Remove that extension then
+
+  string strippedName =
+    ( name.size() > 3 && ( name.compare( name.size() - 4, 4, ".wav" ) == 0 ) ) ?
+      string( name, 0, name.size() - 4 ) : name;
+
+  vector< WordArticleLink > chain = findArticles( Utf8::decode( strippedName ) );
 
   if ( chain.empty() )
     return new Dictionary::DataRequestInstant( false ); // No such resource
