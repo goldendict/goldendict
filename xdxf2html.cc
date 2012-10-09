@@ -337,7 +337,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
 //  DPRINTF( "Result>>>>>>>>>>: %s\n\n\n", dd.toByteArray().data() );
 
-  return dd.toString(-1).remove('\n').toUtf8().data();
+  return dd.toString().remove('\n').toUtf8().data();
 }
 
 }
