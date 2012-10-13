@@ -50,6 +50,7 @@ void HotKeyEdit::renderCurrentValue()
 void HotKeyEdit::keyPressEvent( QKeyEvent * event )
 {
   int key = event->key();
+  Qt::KeyboardModifiers modifiers = event->modifiers() & ~Qt::KeypadModifier;
 
   switch( key )
   {
@@ -66,7 +67,7 @@ void HotKeyEdit::keyPressEvent( QKeyEvent * event )
 
     default:
     {
-      if ( !event->modifiers() &&
+      if ( !modifiers &&
            ( ( key == Qt::Key_Backspace ) || ( key == Qt::Key_Delete  ) ) )
       {
         // Delete current combo
@@ -78,11 +79,11 @@ void HotKeyEdit::keyPressEvent( QKeyEvent * event )
       else
       if ( !continuingCombo )
       {
-        if ( event->modifiers() || event->text().isEmpty() ) // Don't allow plain letters
+        if ( modifiers || event->text().isEmpty() ) // Don't allow plain letters
         {
           currentKey2 = 0;
           currentKey1 = key;
-          currentModifiers = event->modifiers();
+          currentModifiers = modifiers;
           continuingCombo = true;
         }
       }
