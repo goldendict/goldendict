@@ -562,6 +562,8 @@ void DictGroupsWidget::addNewGroup( QString const & name )
              escapeAmps( name ) );
 
   setCurrentIndex( idx );
+
+  setUsesScrollButtons( count() > 3 );
 }
 
 void DictGroupsWidget::addAutoGroups()
@@ -657,6 +659,8 @@ void DictGroupsWidget::removeCurrentGroup()
     removeTab( current );
     delete w;
   }
+
+  setUsesScrollButtons( count() > 3 );
 }
 
 void DictGroupsWidget::removeAllGroups()
