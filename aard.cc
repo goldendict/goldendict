@@ -178,7 +178,7 @@ bool indexIsOldOrBad( string const & indexFile )
          header.formatVersion != CurrentFormatVersion;
 }
 
-void readJSONValue( string const & source, string & str, uint32_t & pos)
+void readJSONValue( string const & source, string & str, string::size_type & pos)
 {
     int level = 1;
     char endChar;
