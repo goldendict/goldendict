@@ -62,7 +62,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
   }
 
   // Strip "<nu />" tags - QDomDocument don't handle it correctly
-  unsigned n;
+  string::size_type n;
   while( ( n = inConverted.find( "<nu />" ) ) != string::npos )
       inConverted.erase( n, 6 );
 

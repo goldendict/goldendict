@@ -528,7 +528,7 @@ void AardDictionary::loadArticle( uint32_t address,
     if( text.empty() )
         text = string( articleBody.data(), articleSize );
 
-    uint32_t n = 0;
+    string::size_type n = 0;
     while( n < text.size() && text[n] != '\"' )
         n++;
 
