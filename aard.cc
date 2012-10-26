@@ -221,7 +221,7 @@ map< string, string > parseMetaData( string const & metaData )
 // Parsing JSON string
     map< string, string > data;
     string name, value;
-    uint32_t n = 0;
+    string::size_type n = 0;
 
     while( metaData[n] != '{' && n < metaData.length() )
         n++;
