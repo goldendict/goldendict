@@ -119,7 +119,7 @@ sptr< Dictionary::WordSearchRequest > TransliterationDictionary::findHeadwordsFo
 
   vector< wstring > alts = getAlternateWritings( str );
 
-  DPRINTF( "alts = %u\n", alts.size() );
+  DPRINTF( "alts = %u\n", (unsigned) alts.size() );
   
   for( unsigned x = 0; x < alts.size(); ++x )
     result->getMatches().push_back( alts[ x ] );

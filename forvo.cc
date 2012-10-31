@@ -146,7 +146,13 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
 void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                     wstring const & str )
 {
-  DPRINTF( "Requesting article %ls\n", str.c_str() );
+  DPRINTF( "Requesting article %ls\n",
+#ifdef Q_OS_WIN
+           gd::toQString( str ).toStdWString().c_str()
+#else
+           str.c_str()
+#endif
+           );
 
   QString key;
 

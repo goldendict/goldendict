@@ -278,6 +278,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing & initializing )
   throw( std::exception )
 {
+  (void) initializing;
   vector< sptr< Dictionary::Class > > dictionaries;
 
   for( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end();

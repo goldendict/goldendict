@@ -223,36 +223,36 @@ map< string, string > parseMetaData( string const & metaData )
     string name, value;
     string::size_type n = 0;
 
-    while( metaData[n] != '{' && n < metaData.length() )
+    while( n < metaData.length() && metaData[n] != '{' )
         n++;
     while( n < metaData.length() )
     {
         // Skip to '"'
-        while( metaData[n] != '\"' && n < metaData.length() )
+        while( n < metaData.length() && metaData[n] != '\"' )
             n++;
         if( ++n >= metaData.length() )
             break;
 
         // Read name
-        while( !( ( metaData[n] == '\"' || metaData[n] == '{' ) && metaData[n-1] != '\\' )
-               && n < metaData.length() )
+        while(  n < metaData.length() &&
+                !( ( metaData[n] == '\"' || metaData[n] == '{' ) && metaData[n-1] != '\\' ) )
             name.push_back( metaData[n++]);
 
         // Skip to ':'
         if( ++n >= metaData.length() )
             break;
-        while( metaData[n] != ':' && n < metaData.length() )
+        while( n < metaData.length() && metaData[n] != ':' )
             n++;
         if( ++n >= metaData.length() )
             break;
 
         // Find value start after ':'
-        while( !( ( metaData[n] == '\"'
-                    || metaData[n] == '{'
-                    || metaData[n] == '['
-                    || ( metaData[n] >= '0' && metaData[n] <= '9' ) )
-               && metaData[n-1] != '\\' )
-               && n < metaData.length() )
+        while( n < metaData.length()
+               && !( ( metaData[n] == '\"'
+                       || metaData[n] == '{'
+                       || metaData[n] == '['
+                       || ( metaData[n] >= '0' && metaData[n] <= '9' ) )
+               && metaData[n-1] != '\\' ) )
             n++;
         if( n >= metaData.length() )
             break;

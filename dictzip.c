@@ -502,6 +502,8 @@ char *dict_data_read_ (
    dictData *h, unsigned long start, unsigned long size,
    const char *preFilter, const char *postFilter )
 {
+   (void) preFilter;
+   (void) postFilter;
    char          *buffer, *pt;
    unsigned long end;
    int           count;

@@ -1480,7 +1480,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // Building the index
         initializing.indexingDictionary( Utf8::encode( scanner.getDictionaryName() ) );
 
-        DPRINTF( "Dictionary name: %ls\n", scanner.getDictionaryName().c_str() );
+        DPRINTF( "Dictionary name: %ls\n",
+#ifdef Q_OS_WIN
+                 gd::toQString( scanner.getDictionaryName() ).toStdWString().c_str()
+#else
+                 scanner.getDictionaryName().c_str()
+#endif
+        );
 
         File::Class idx( indexFile, "wb" );
 
@@ -1627,7 +1633,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               if ( !isDslWs( curString[ x ] ) )
               {
-                FDPRINTF( stderr, "Warning: garbage string in %s at offset 0x%X\n", i->c_str(), curOffset );
+                FDPRINTF( stderr, "Warning: garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
                 break;
               }
             }
@@ -1662,7 +1668,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             if ( isDslWs( curString[ 0 ] ) )
               break; // No more headwords
 
-            DPRINTF( "Alt headword: %ls\n", curString.c_str() );
+            DPRINTF( "Alt headword: %ls\n",
+#ifdef Q_OS_WIN
+                     gd::toQString( curString ).toStdWString().c_str()
+#else
+                     curString.c_str()
+#endif
+                     );
 
             processUnsortedParts( curString, true );
             expandTildes( curString, allEntryWords.front() );

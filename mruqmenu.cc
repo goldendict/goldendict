@@ -9,6 +9,7 @@ MRUQMenu::MRUQMenu(const QString title, QWidget *parent):
 
 bool MRUQMenu::eventFilter(QObject *obj, QEvent *event)
 {
+    (void) obj;
     if (event->type() == QEvent::KeyRelease){
         QKeyEvent *keyevent = static_cast<QKeyEvent*>(event);
         if (keyevent->key() == Qt::Key_Control){

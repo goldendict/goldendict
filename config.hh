@@ -90,7 +90,7 @@ struct Group
            dictionaries == other.dictionaries && shortcut == other.shortcut &&
            mutedDictionaries == other.mutedDictionaries &&
            popupMutedDictionaries == other.popupMutedDictionaries &&
-           iconData == iconData; }
+           iconData == other.iconData; }
 
   bool operator != ( Group const & other ) const
   { return ! operator == ( other ); }

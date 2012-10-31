@@ -16,6 +16,7 @@ void MainTabWidget::setHideSingleTab(bool hide)
 
 void MainTabWidget::tabInserted(int index)
 {
+  (void) index;
   updateTabBarVisibility();
 
   // Avoid bug in Qt 4.8.0
@@ -24,6 +25,7 @@ void MainTabWidget::tabInserted(int index)
 
 void MainTabWidget::tabRemoved(int index)
 {
+  (void) index;
   updateTabBarVisibility();
 
   // Avoid bug in Qt 4.8.0
@@ -37,5 +39,6 @@ void MainTabWidget::updateTabBarVisibility()
 
 void MainTabWidget::mouseDoubleClickEvent ( QMouseEvent * event )
 {
+  (void) event;
   emit doubleClicked();
 }

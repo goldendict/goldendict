@@ -10,7 +10,6 @@ LangCoder langCoder;
 
 LangCoder::LangCoder()
 {
-  LangStruct ls;
   for (int i = 0; true; i++) {
     const LangCode &lc = LangCodes[i];
     if (lc.lang[0] == 0)

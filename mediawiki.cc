@@ -220,7 +220,13 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
 void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                         wstring const & str )
 {
-  DPRINTF( "Requesting article %ls\n", str.c_str() );
+  DPRINTF( "Requesting article %ls\n",
+#ifdef Q_OS_WIN
+           gd::toQString( str ).toStdWString().c_str()
+#else
+           str.c_str()
+#endif
+           );
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
@@ -361,6 +367,7 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
                                                             unsigned long maxResults )
   throw( std::exception )
 {
+  (void) maxResults;
   if ( word.size() > 80 )
   {
     // Don't make excessively large queries -- they're fruitless anyway

@@ -9,6 +9,10 @@
 #include "dprintf.hh"
 #include "ufile.hh"
 
+#ifdef Q_OS_WIN
+#include "wstring_qt.hh"
+#endif
+
 namespace Dsl {
 namespace Details {
 
@@ -381,7 +385,7 @@ ArticleDom::ArticleDom( wstring const & str ):
     stack.pop_back();
 
   if ( stack.size() )
-    FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", stack.size() );
+    FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", (unsigned) stack.size() );
 }
 
 void ArticleDom::closeTag( wstring const & name,
@@ -455,7 +459,12 @@ void ArticleDom::closeTag( wstring const & name,
   if ( warn )
   {
     FDPRINTF( stderr, "Warning: no corresponding opening tag for closing tag \"/%ls\" found.\n",
-             name.c_str() );
+#ifdef Q_OS_WIN
+              gd::toQString( name ).toStdWString().c_str()
+#else
+              name.c_str()
+#endif
+              );
   }
 }
 

@@ -1295,8 +1295,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( stream.hasError() )
         {
-          DPRINTF( "Warning: %s had a parse error %ls at line %I64u, and therefore was indexed only up to the point of error.",
-                  dictFiles[ 0 ].c_str(), stream.errorString().toStdWString().c_str(), stream.lineNumber() );
+          DPRINTF( "Warning: %s had a parse error %ls at line %lu, and therefore was indexed only up to the point of error.",
+                   dictFiles[ 0 ].c_str(), stream.errorString().toStdWString().c_str(),
+                   (unsigned long) stream.lineNumber() );
         }
       }
 

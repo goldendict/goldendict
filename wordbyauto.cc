@@ -57,7 +57,7 @@ bool bGoUp;
     buffer[0] = 0;
     pElement = NULL;
     hr = pGDAutomation->ElementFromPoint( pt, &pElement );
-    DPRINTF("ElementFromPoint return hr=%08X, ptr=%p\n", hr, pElement);
+    DPRINTF("ElementFromPoint return hr=%08lX, ptr=%p\n", hr, pElement);
     if( hr != S_OK || pElement == NULL )
         return false;
 

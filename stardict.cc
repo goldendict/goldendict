@@ -1111,7 +1111,7 @@ static void handleIdxSynFile( string const & fileName,
     indexedWords.addWord( Utf8::decode( word ), offset );
   }
 
-  DPRINTF( "%u entires made\n", indexedWords.size() );
+  DPRINTF( "%u entires made\n", (unsigned) indexedWords.size() );
 }
 
 

@@ -664,7 +664,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             df.read( &el, sizeof(el) );
             uint32_t articleOffset = dictHeader.articlesOffset + el.articleOffset;
             size = el.nextWord - sizeof(el);
-            if( size < 0 )
+            if( el.nextWord < sizeof(el) )
                 break;
             wordCount++;
             data.resize( size );

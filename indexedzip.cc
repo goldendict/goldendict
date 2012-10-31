@@ -68,7 +68,7 @@ bool IndexedZip::loadFile( uint32_t offset, vector< char > & data )
     case ZipFile::Uncompressed:
       DPRINTF( "Uncompressed\n" );
       data.resize( header.uncompressedSize );
-      return zip.read( &data.front(), data.size() ) == data.size();
+      return (size_t) zip.read( &data.front(), data.size() ) == data.size();
 
     case ZipFile::Deflated:
     {

@@ -40,18 +40,21 @@ typedef BOOL WINAPI ( *ChangeWindowMessageFilterExFunc )( HWND, UINT, DWORD, PCH
 
 #ifdef Q_OS_WIN32
 
+#ifndef ConvertStringSecurityDescriptorToSecurityDescriptor
+
 extern "C" BOOL WINAPI ConvertStringSecurityDescriptorToSecurityDescriptorW(
                         LPCWSTR StringSecurityDescriptor,
                         DWORD StringSDRevision,
                         PSECURITY_DESCRIPTOR *SecurityDescriptor,
                         PULONG SecurityDescriptorSize );
 
+#endif
 
 static void SetLowLabelToGDSynchroObjects()
 {
 // The LABEL_SECURITY_INFORMATION SDDL SACL to be set for low integrity
 #define LOW_INTEGRITY_SDDL_SACL_W L"S:(ML;;NW;;;LW)"
-    DWORD dwErr = ERROR_SUCCESS;
+//    DWORD dwErr = ERROR_SUCCESS;
     PSECURITY_DESCRIPTOR pSD = NULL;
 
     PACL pSacl = NULL; // not allocated
@@ -67,10 +70,10 @@ static void SetLowLabelToGDSynchroObjects()
 // Note that psidOwner, psidGroup, and pDacl are
 // all NULL and set the new LABEL_SECURITY_INFORMATION
 
-            dwErr = SetNamedSecurityInfoW( (LPWSTR)pwszMapFileName,
+           /* dwErr = */ SetNamedSecurityInfoW( (LPWSTR)pwszMapFileName,
                     SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
 
-            dwErr = SetNamedSecurityInfoW( (LPWSTR)pwszSpyMutexName,
+           /* dwErr = */ SetNamedSecurityInfoW( (LPWSTR)pwszSpyMutexName,
                     SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
 
         }

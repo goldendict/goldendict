@@ -7,6 +7,7 @@
 DictInfo::DictInfo( Config::Class &cfg_, QWidget *parent ) :
 cfg( cfg_)
 {
+ (void) parent;
   ui.setupUi( this );
   if( cfg.dictInfoGeometry.size() > 0 )
     restoreGeometry( cfg.dictInfoGeometry );

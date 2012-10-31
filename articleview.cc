@@ -1274,7 +1274,7 @@ void ArticleView::resourceDownloadFinished()
             QTemporaryFile tmp(
               QDir::temp().filePath( "XXXXXX-" + resourceDownloadUrl.path().section( '/', -1 ) ), this );
 
-            if ( !tmp.open() || tmp.write( &data.front(), data.size() ) != data.size() )
+            if ( !tmp.open() || (size_t) tmp.write( &data.front(), data.size() ) != data.size() )
             {
               QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to create temporary file." ) );
               return;

@@ -118,6 +118,10 @@ const long UIA_ItemContainerPatternId       =   10019;
 const long UIA_VirtualizedItemPatternId     =   10020;
 const long UIA_SynchronizedInputPatternId   =   10021;
 
+#ifdef INTERFACE
+#undef INTERFACE
+#endif
+
 #define INTERFACE IUIAutomation
 DECLARE_INTERFACE_(IUIAutomation, IUnknown)
 {

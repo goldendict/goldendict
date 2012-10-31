@@ -60,7 +60,7 @@ bool positionAtCentralDir( QFile & zip )
   if ( zip.size() > maxEofBufferSize )
     zip.seek( zip.size() - maxEofBufferSize );
   else
-  if ( zip.size() < sizeof( EndOfCdirRecord ) )
+  if ( (size_t) zip.size() < sizeof( EndOfCdirRecord ) )
     return false;
   else
     zip.seek( 0 );

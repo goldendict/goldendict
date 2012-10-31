@@ -17,7 +17,7 @@ ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
   viewer( this ),
   viewerCmdLine( viewerCmdLine_ )
 {
-  if ( !tempFile.open() || tempFile.write( &data.front(), data.size() ) != data.size() )
+  if ( !tempFile.open() || (size_t) tempFile.write( &data.front(), data.size() ) != data.size() )
     throw exCantCreateTempFile();
 
   tempFileName = tempFile.fileName(); // For some reason it loses it after it was closed()
