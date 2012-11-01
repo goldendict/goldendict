@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2003, 2005-2006, 2008-2009 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2003, 2005-2006, 2008-2011 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -21,9 +21,9 @@
 #ifndef _LIBICONV_H
 #define _LIBICONV_H
 
-#define _LIBICONV_VERSION 0x010D    /* version number: (major<<8) + minor */
+#define _LIBICONV_VERSION 0x010E    /* version number: (major<<8) + minor */
 
-#if 1 && BUILDING_LIBICONV
+#if 0 && BUILDING_LIBICONV
 #define LIBICONV_DLL_EXPORTED __attribute__((__visibility__("default")))
 #else
 #define LIBICONV_DLL_EXPORTED
@@ -95,6 +95,11 @@ extern LIBICONV_DLL_EXPORTED size_t iconv (iconv_t cd,  char* * inbuf, size_t *i
 extern LIBICONV_DLL_EXPORTED int iconv_close (iconv_t cd);
 
 
+#ifdef __cplusplus
+}
+#endif
+
+
 #ifndef LIBICONV_PLUG
 
 /* Nonstandard extensions. */
@@ -110,6 +115,10 @@ extern LIBICONV_DLL_EXPORTED int iconv_close (iconv_t cd);
 #include <time.h>
 #endif
 #include <wchar.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 /* A type that holds all memory needed by a conversion descriptor.
@@ -227,13 +236,12 @@ extern LIBICONV_DLL_EXPORTED const char * iconv_canonicalize (const char * name)
    prefixes should be directory names without trailing slash (i.e. use ""
    instead of "/").  */
 extern LIBICONV_DLL_EXPORTED void libiconv_set_relocation_prefix (const char *orig_prefix,
-					    const char *curr_prefix);
-
-#endif
-
+                                            const char *curr_prefix);
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 
