@@ -64,7 +64,7 @@
     <message>
         <location filename="../article_maker.cc" line="172"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Тарҷума бо равзанаи пайдошаванда&lt;/h3&gt;Барои тарҷума кардани калимаҳо дар барномаҳои дигар, пеш аз ҳама шумо бояд &lt;i&gt;&quot;Хусусияти тарҷумаи пайдошавандаро&quot;&lt;/i&gt; дар &lt;b&gt;Хусусиятҳо&lt;/b&gt; фаъол кунед. Дар оянда шумо метавонед ин хусусиятро ба воситаи зеркунии тугмаи &apos;Тарҷумаи пайдошаванда&apos; фаъол кунед, ё шумо метавонед ин хусусиятро бо зеркунии нишонаи панел аз менюи пайдошуда фаъол кунед. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Тарҷума бо равзанаи пайдошаванда&lt;/h3&gt;Барои тарҷума кардани калимаҳо дар барномаҳои дигар, пеш аз ҳама шумо бояд &lt;i&gt;&quot;Хусусияти тарҷумаи пайдошавандаро&quot;&lt;/i&gt; дар &lt;b&gt;Хусусиятҳо&lt;/b&gt; фаъол кунед. Дар оянда шумо метавонед ин хусусиятро ба воситаи зеркунии тугмаи &quot;Тарҷумаи пайдошаванда&quot; фаъол кунед, ё шумо метавонед ин хусусиятро бо зеркунии нишонаи панел аз менюи пайдошуда фаъол кунед. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="179"/>
@@ -221,7 +221,7 @@
         <location filename="../articleview.cc" line="1034"/>
         <location filename="../articleview.cc" line="1069"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Илова кардани &quot;%1&quot; ба таърих</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1048"/>
@@ -340,32 +340,32 @@
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">Ҳамагӣ мақолаҳо:</translation>
+        <translation>Ҳамагӣ мақолаҳо:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation type="unfinished">Тарҷума аз забони:</translation>
+        <translation>Тарҷума аз забони:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
         <source>Total words:</source>
-        <translation type="unfinished">Ҳамагӣ калимаҳо:</translation>
+        <translation>Ҳамагӣ калимаҳо:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="71"/>
         <source>Translates to:</source>
-        <translation type="unfinished">Тарҷума ба забони:</translation>
+        <translation>Тарҷума ба забони:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="88"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Файлҳои луғат:</translation>
+        <translation>Файлҳои ин луғат:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="163"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тавсиф:</translation>
     </message>
 </context>
 <context>
@@ -391,7 +391,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="94"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Иттилооти луғат</translation>
     </message>
 </context>
 <context>
@@ -1923,7 +1923,7 @@
     <message>
         <location filename="../mainwindow.ui" line="422"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="427"/>
@@ -1933,7 +1933,7 @@
     <message>
         <location filename="../mainwindow.ui" line="432"/>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ворид кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="56"/>
@@ -2185,27 +2185,27 @@
     <message>
         <location filename="../mainwindow.cc" line="2854"/>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ворид кардани таърих аз файл</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2898"/>
         <source>Imported from file: </source>
-        <translation type="unfinished"></translation>
+        <translation>Воридшуда аз файл:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2908"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Хатои воридот: маълумоти беэътибор дар файл</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2912"/>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Воридоти таърих ба анҷом расид</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2915"/>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Хатои воридот: </translation>
     </message>
 </context>
 <context>
@@ -2300,7 +2300,7 @@
     <message>
         <location filename="../orderandprops.ui" line="245"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тавсиф:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="325"/>
@@ -2468,12 +2468,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="276"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Агар шумо мехоҳед калимаҳоро бо зеркунии ягонаи тугмаи муш интихоб намоед, шумо бояд ин имконотро фаъол созед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="279"/>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Зеркунии ягона калимаро интихоб мекунад</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="291"/>
@@ -2900,32 +2900,32 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1102"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Таърих</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1108"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Барои захира кардани таърихи калимаҳои тарҷумашуда ин имконотро фаъол созед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1111"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Захира кардани &amp;таърих</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1121"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Муколамаҳо</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1127"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Барои густариш додани қисмҳои интихобии муколамаҳо ин имконотро фаъол созед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Густариш додани &amp;қисмҳои интихобӣ</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="41"/>
