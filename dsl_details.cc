@@ -654,6 +654,8 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
   // We need to rewind to that line so readNextLine() would return it again
   // next time it's called. To do that, we just use the slow gzseek() and
   // empty the read buffer.
+  if( gzdirect( f ) )                    // Without this ZLib 1.2.7 gzread() return 0
+    gzrewind( f );                       // after gzseek() call on uncompressed files
   gzseek( f, offset, SEEK_SET );
   readBufferPtr = readBuffer;
   readBufferLeft = 0;
