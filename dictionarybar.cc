@@ -11,7 +11,8 @@ DictionaryBar::DictionaryBar( QWidget * parent,
                               Config::Events & events ):
   QToolBar( tr( "Dictionary Bar" ), parent ),
   mutedDictionaries( 0 ),
-  configEvents( events )
+  configEvents( events ),
+  use14x21( false )
 {
   setObjectName( "dictionaryBar" );
 
@@ -44,7 +45,7 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
   clear();
   dictActions.clear();
 
-  bool use14x21 = false;
+  use14x21 = false;
 
   for( unsigned x = 0; x < dictionaries.size(); ++x )
   {
@@ -75,11 +76,15 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
     dictActions.append( action );
   }
 
-  setIconSize( use14x21 ? QSize( 14, 21 ) : QSize( 21, 21 ) );
+  setDictionaryIconSize( 21 );
 
   setUpdatesEnabled( true );
 }
 
+void DictionaryBar::setDictionaryIconSize( int extent )
+{
+  setIconSize( QSize( use14x21 ? extent*2/3 : extent, extent  ) );
+}
 
 void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
 {

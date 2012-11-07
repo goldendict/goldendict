@@ -26,6 +26,7 @@ public:
   { mutedDictionaries = mutedDictionaries_; }
   Config::MutedDictionaries const * getMutedDictionaries() const
   { return mutedDictionaries; }
+  void setDictionaryIconSize( int extent );
 
 signals:
 
@@ -47,6 +48,8 @@ private:
 
   /// All the actions we have added to the toolbar
   QList< QAction * > dictActions;
+
+  bool use14x21;
 
 protected:
 

@@ -858,7 +858,7 @@ void MainWindow::updateDictionaryBar()
 
     if ( useSmallIconsInToolbarsAction.isChecked() ) {
       int extent = QApplication::style()->pixelMetric(QStyle::PM_SmallIconSize);
-      dictionaryBar.setIconSize( QSize( extent, extent ) );
+      dictionaryBar.setDictionaryIconSize( extent );
     }
   }
 }
