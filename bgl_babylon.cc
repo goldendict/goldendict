@@ -23,13 +23,14 @@
 
 #include "bgl_babylon.hh"
 #include <algorithm>
-#include<stdlib.h>
-#include<string.h>
-#include<stdio.h>
-#include<iconv.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <iconv.h>
 #include <QTextDocument>
 #include "dprintf.hh"
 #include "ufile.hh"
+#include "iconv.hh"
 
 #ifdef _WIN32
 #include <io.h>
@@ -309,6 +310,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
   std::string alternate;
   std::string root;
   bool defBodyEnded = false;
+  std::string transcription;
 
   while( readBlock( block ) )
   {
@@ -440,9 +442,20 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               break;
             }
 
-            std::string transcription( block.data + pos + 3, length );
-
-            definition = std::string( "<span class=\"bgltrn\">" ) +  transcription + "</span>" + definition;
+            if( m_targetCharset.compare( "UTF-8" ) != 0 )
+            {
+              try
+              {
+                transcription = Iconv::toUtf8( "CP1252", block.data + pos + 3, length );
+              }
+              catch( Iconv::Ex & e )
+              {
+                DPRINTF("Bgl: charset convertion error, no trancription processing's done: %s\n", e.what());
+                transcription = std::string( block.data + pos + 3, length );
+              }
+            }
+            else
+              transcription = std::string( block.data + pos + 3, length );
 
             pos += length + 3;
             a += length + 2;
@@ -462,9 +475,20 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               break;
             }
 
-            std::string transcription( block.data + pos + 4, length );
-
-            definition = std::string( "<span class=\"bgltrn\">" ) +  transcription + "</span>" + definition;
+            if( m_targetCharset.compare( "UTF-8" ) != 0 )
+            {
+              try
+              {
+                transcription = Iconv::toUtf8( "CP1252", block.data + pos + 4, length );
+              }
+              catch( Iconv::Ex & e )
+              {
+                DPRINTF("Bgl: charset convertion error, no trancription processing's done: %s\n", e.what());
+                transcription = std::string( block.data + pos + 4, length );
+              }
+            }
+            else
+              transcription = std::string( block.data + pos + 4, length );
 
             pos += length + 4;
             a += length + 3;
@@ -535,6 +559,8 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           }else definition += block.data[pos++];
         }
         convertToUtf8( definition, TARGET_CHARSET );
+        if( !transcription.empty() )
+          definition = std::string( "<span class=\"bgltrn\">" ) +  transcription + "</span>" + definition;
 
         if ( displayedHeadword.size() )
           convertToUtf8( displayedHeadword, TARGET_CHARSET );

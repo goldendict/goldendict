@@ -48,7 +48,7 @@ namespace
   enum
   {
     Signature = 0x584c4742, // BGLX on little-endian, XLGB on big-endian
-    CurrentFormatVersion = 15 + BtreeIndexing::FormatVersion
+    CurrentFormatVersion = 16 + BtreeIndexing::FormatVersion
   };
 
   struct IdxHeader
