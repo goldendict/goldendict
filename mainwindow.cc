@@ -1414,6 +1414,12 @@ void MainWindow::editPreferences()
   {
     Config::Preferences p = preferences.getPreferences();
 
+    // These parameters are not set in dialog
+    p.maxStringsInHistory = cfg.preferences.maxStringsInHistory;
+    p.zoomFactor = cfg.preferences.zoomFactor;
+    p.wordsZoomLevel = cfg.preferences.wordsZoomLevel;
+    p.hideMenubar = cfg.preferences.hideMenubar;
+
     bool needReload = false;
 
     // See if we need to reapply stylesheets
