@@ -49,8 +49,11 @@ typedef struct dictCache {
 } dictCache;
 
 typedef struct dictData {
-
+#ifdef __WIN32
+   HANDLE        fd;		/* file handle */
+#else
    FILE *        fd;		/* file descriptor */
+#endif
 
    unsigned long size;		/* size of file */
    

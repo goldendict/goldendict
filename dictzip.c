@@ -446,6 +446,18 @@ dictData *dict_data_open( const char *filename, int computeCRC )
      "\"%s\" not in text or dzip format\n", filename );*/
    }
 
+#ifdef __WIN32
+   wchar_t wname[16384];
+   if( MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 ) == 0 )
+     return 0;
+
+   h->fd = CreateFileW( wname, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0,
+                        OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, 0);
+   if( h->fd == INVALID_HANDLE_VALUE )
+     return 0;
+
+   h->size = GetFileSize( h->fd, 0 );
+#else
    h->fd = gd_fopen( filename, "rb" );
 
    if ( !h->fd )
@@ -458,6 +470,7 @@ dictData *dict_data_open( const char *filename, int computeCRC )
    fseek( h->fd, 0, SEEK_END );
 
    h->size = ftell( h->fd );
+#endif
 
    for (j = 0; j < DICT_CACHE_SIZE; j++) {
       h->cache[j].chunk    = -1;
@@ -476,8 +489,13 @@ void dict_data_close( dictData *header )
    if (!header)
       return;
 
+#ifdef __WIN32
+   if ( header->fd != INVALID_HANDLE_VALUE )
+     CloseHandle( header->fd );
+#else
    if ( header->fd )
      fclose( header->fd );
+#endif
 
    if (header->chunks)       xfree( header->chunks );
    if (header->offsets)      xfree( header->offsets );
@@ -539,8 +557,16 @@ char *dict_data_read_ (
       break;
    case DICT_TEXT:
    {
+#ifdef __WIN32
+     DWORD pos = SetFilePointer( h->fd, start, 0, FILE_BEGIN );
+     DWORD readed = 0;
+     if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
+       ReadFile( h->fd, buffer, size, &readed, 0 );
+     if( size != readed )
+#else
      if ( fseek( h->fd, start, SEEK_SET ) != 0 ||
           fread( buffer, size, 1, h->fd ) != 1 )
+#endif
      {
        xfree( buffer );
        return 0;
@@ -609,8 +635,16 @@ char *dict_data_read_ (
 			     i, h->chunks[i], OUT_BUFFER_SIZE );
 	    }
 
+#ifdef __WIN32
+      DWORD pos = SetFilePointer( h->fd, h->offsets[ i ], 0, FILE_BEGIN );
+      DWORD readed = 0;
+      if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
+        ReadFile( h->fd, outBuffer, h->chunks[ i ], &readed, 0 );
+      if( h->chunks[ i ] != readed )
+#else
       if ( fseek( h->fd, h->offsets[ i ], SEEK_SET ) != 0 ||
            fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
+#endif
       {
         xfree( buffer );
         return 0;
