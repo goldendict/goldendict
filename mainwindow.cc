@@ -897,6 +897,9 @@ void MainWindow::makeScanPopup()
   connect( scanPopup.get(), SIGNAL( showDictionaryInfo( const QString & ) ),
            this, SLOT( showDictionaryInfo( const QString & ) ) );
 
+  connect( scanPopup.get(), SIGNAL( sendWordToHistory( QString ) ),
+           this, SLOT( addWordToHistory( QString ) ) );
+
 #ifdef Q_OS_WIN32
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
            this, SLOT( isGoldenDictWindow( HWND ) ) );
@@ -1051,6 +1054,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
            view, SLOT( receiveExpandOptionalParts( bool ) ) );
 
   connect( view, SIGNAL( setExpandMode( bool ) ), this, SLOT( setExpandMode( bool ) ) );
+
+  connect( view, SIGNAL( sendWordToHistory( QString ) ),
+           this, SLOT( addWordToHistory( QString ) ) );
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -1992,11 +1998,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
   // Add to history
 
-  if( !showHistory )
-  {
-      history.addItem( History::Item( group, inWord.trimmed() ) );
-//      history.save();
-  }
+  addWordToHistory( inWord );
 
   updateBackForwardButtons();
 
@@ -2941,6 +2943,14 @@ void MainWindow::focusWordList()
 {
     if( ui.wordList->count() > 0 )
         ui.wordList->setFocus();
+}
+
+void MainWindow::addWordToHistory( const QString & word )
+{
+  if( !showHistory )
+  {
+      history.addItem( History::Item( 1, word.trimmed() ) );
+  }
 }
 
 void MainWindow::forceAddWordToHistory( const QString & word )

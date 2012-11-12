@@ -341,6 +341,8 @@ private slots:
   void on_importHistory_activated();
   void focusWordList();
 
+  /// Add word to history
+  void addWordToHistory( const QString & word );
   /// Add word to history even if history is disabled in options
   void forceAddWordToHistory( const QString & word);
 

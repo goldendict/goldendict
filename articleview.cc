@@ -689,6 +689,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   {
     showDefinition( url.path(),
                     getGroup( ref ), scrollTo, contexts );
+    emit sendWordToHistory( url.path() );
   }
   else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
@@ -699,8 +700,11 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
     else
-    showDefinition( url.path().mid( 1 ),
-                    getGroup( ref ), scrollTo, contexts );
+    {
+      showDefinition( url.path().mid( 1 ),
+                      getGroup( ref ), scrollTo, contexts );
+      emit sendWordToHistory( url.path().mid( 1 ) );
+    }
   }
   else
   if ( url.scheme() == "bres" || url.scheme() == "gdau" ||
@@ -1460,6 +1464,7 @@ void ArticleView::doubleClicked()
       }
       else
         showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+      emit sendWordToHistory( selectedText );
     }
   }
 }

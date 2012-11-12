@@ -62,6 +62,8 @@ signals:
   void forceAddWordToHistory( const QString & word);
   /// Retranslate signal from dictionary bar
   void showDictionaryInfo( QString const & id );
+  /// Put translated word into history
+  void sendWordToHistory( QString const & word );
 
 #ifdef Q_OS_WIN32
   /// Ask for source window is current translate tab

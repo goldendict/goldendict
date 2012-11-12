@@ -68,6 +68,8 @@ ScanPopup::ScanPopup( QWidget * parent,
            this, SIGNAL( forceAddWordToHistory( QString ) ) );
   connect( this, SIGNAL( closeMenu() ),
            definition, SIGNAL( closePopupMenu() ) );
+  connect( definition, SIGNAL( sendWordToHistory( QString ) ),
+           this, SIGNAL( sendWordToHistory( QString ) ) );
 
   applyZoomFactor();
   
@@ -477,9 +479,7 @@ void ScanPopup::initiateTranslation()
   definition->showDefinition( inputWord, ui.groupList->getCurrentGroup() );
   wordFinder.prefixMatch( inputWord, getActiveDicts() );
 
-  history.addItem( History::Item( ui.groupList->getCurrentGroup(),
-                                  inputWord.trimmed() ) );
-//  history.save();
+  emit sendWordToHistory( inputWord.trimmed() );
 }
 
 vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()

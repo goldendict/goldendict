@@ -169,14 +169,17 @@ signals:
 
   void pageLoaded( ArticleView * );
 
-  /// Singals that the following link was requested to be opened in new tab
+  /// Signals that the following link was requested to be opened in new tab
   void openLinkInNewTab( QUrl const &, QUrl const & referrer,
                          QString const & fromArticle,
                          ArticleView::Contexts const & contexts );
-  /// Singals that the following definition was requested to be showed in new tab
+  /// Signals that the following definition was requested to be showed in new tab
   void showDefinitionInNewTab( QString const & word, unsigned group,
                                QString const & fromArticle,
                                ArticleView::Contexts const & contexts );
+
+  /// Put translated word into history
+  void sendWordToHistory( QString const & word );
 
   /// Emitted when user types a text key. This should typically be used to
   /// switch focus to word input.
