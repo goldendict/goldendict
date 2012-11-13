@@ -177,6 +177,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
         {
           case 8:
             type = (unsigned int)block.data[2];
+            if( type == 67 ) type = 1;
             if( type > 64 ) type -= 65;
 
             if ( type >= 14 )
@@ -248,6 +249,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
           break;
           case 26:
             type = (unsigned int)block.data[2];
+            if( type == 67 ) type = 1;
             if( type > 64 ) type -= 65;
             if ( type >= 14 )
               type = 0;
@@ -256,6 +258,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
             break;
           case 27:
             type = (unsigned int)block.data[2];
+            if( type == 67 ) type = 1;
             if( type > 64 ) type -= 65;
             if ( type >= 14 )
               type = 0;
