@@ -31,6 +31,8 @@
 #include "dprintf.hh"
 #include "ufile.hh"
 #include "iconv.hh"
+#include "htmlescape.hh"
+#include <QString>
 
 #ifdef _WIN32
 #include <io.h>
@@ -190,6 +192,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
         }
         break;
       case 1:
+      case 7:
       case 10:
         // Only count entries
         m_numEntries++;
@@ -244,7 +247,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
             memcpy( &icon.front(), &(block.data[ 2 ]), icon.size() );
           break;
           case 17:
-            if ( block.length >= 5 && (unsigned char) block.data[ 4 ] == 0x80 )
+            if ( block.length >= 5 && ( (unsigned char) block.data[ 4 ] & 0x80 ) != 0 )
               isUtf8File = true;
           break;
           case 26:
@@ -338,6 +341,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         break;
       }
       case 1:
+      case 7:
       case 10:
         alternate.clear();
         headword.clear();
@@ -356,6 +360,10 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           headword += block.data[pos++];
 
         convertToUtf8( headword, SOURCE_CHARSET );
+
+        // Try to repair malformed headwords
+        if( headword.find( "&#" ) != std::string::npos )
+          headword = Html::unescape( QString::fromUtf8( headword.c_str() ) ).toUtf8().data();
 
         // Definition
         len = 0;
@@ -670,6 +678,9 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
       ;
   }
 
+  if( charset == "UTF-8" )
+    return;
+
   iconv_t cd = iconv_open( "UTF-8", charset.c_str() );
   if( cd == (iconv_t)(-1) )
   {
@@ -682,13 +693,9 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
 
   inbufbytes = s.size();
   outbufbytes = s.size() * 6;
-//#ifdef _WIN32
-//  const char *inbuf;
-//  inbuf = s.data();
-//#else
+
   char *inbuf;
   inbuf = (char *)s.data();
-//#endif
   outbuf = (char*)malloc( outbufbytes + 1 );
   memset( outbuf, '\0', outbufbytes + 1 );
   defbuf = outbuf;
@@ -696,15 +703,17 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
     if (iconv(cd, &inbuf, &inbufbytes, &outbuf, &outbufbytes) == (size_t)-1) {
       DPRINTF( "\n%s\n", inbuf );
       DPRINTF( "Error in iconv conversion\n" );
-      inbuf++;
-      inbufbytes--;
+      break;
+//      inbuf++;
+//      inbufbytes--;
     }
   }
   
   // Flush the state. This fixes CP1255 problems.
   iconv( cd, 0, 0, &outbuf, &outbufbytes );
   
-  s = std::string( defbuf );
+  if( inbufbytes == 0 )
+    s = std::string( defbuf );
 
   free( defbuf );
   iconv_close( cd );
