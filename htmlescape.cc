@@ -127,4 +127,9 @@ QString unescape( QString const & str )
   return str;
 }
 
+string unescapeUtf8( const string &str )
+{
+  return string( unescape( QString::fromUtf8( str.c_str(), str.size() ) ).toUtf8().data() );
+}
+
 }

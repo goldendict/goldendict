@@ -24,6 +24,7 @@ string escapeForJavaScript( string const & );
 
 // Replace html entities
 QString unescape( QString const & str );
+string unescapeUtf8( string const & str );
 
 }
 

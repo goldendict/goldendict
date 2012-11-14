@@ -43,9 +43,9 @@
 
 using std::string;
 
-Babylon::Babylon( std::string filename )
+Babylon::Babylon( std::string filename ) :
+m_filename( filename )
 {
-  m_filename = filename;
   file = NULL;
 }
 
@@ -133,7 +133,13 @@ bool Babylon::readBlock( bgl_block &block )
   if( block.length )
   {
     block.data = (char *)malloc( block.length );
-    gzread( file, block.data, block.length );
+    unsigned res = gzread( file, block.data, block.length );
+    if( block.length != res )
+    {
+      free( block.data );
+      block.length = 0;
+      return false;
+    }
   }
 
   return true;
@@ -326,6 +332,8 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
       {
         pos = 0;
         len = (unsigned char)block.data[pos++];
+        if( pos + len > block.length )
+          break;
         std::string filename( block.data+pos, len );
         //if (filename != "8EAF66FD.bmp" && filename != "C2EEF3F6.html") {
             pos += len;
@@ -354,6 +362,8 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         // Headword
         len = 0;
         len = (unsigned char)block.data[pos++];
+        if( pos + len > block.length )
+          break;
 
         headword.reserve( len );
         for(unsigned int a=0;a<len;a++)
@@ -362,13 +372,16 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         convertToUtf8( headword, SOURCE_CHARSET );
 
         // Try to repair malformed headwords
-        if( headword.find( "&#" ) != std::string::npos )
-          headword = Html::unescape( QString::fromUtf8( headword.c_str() ) ).toUtf8().data();
+        if( headword.find( "&#" ) != string::npos )
+          headword = Html::unescapeUtf8( headword );
 
         // Definition
         len = 0;
         len = (unsigned char)block.data[pos++] << 8;
         len |= (unsigned char)block.data[pos++];
+        if( pos + len > block.length )
+          break;
+
         definition.reserve( len );
 
         for(unsigned int a=0;a<len;a++)
@@ -577,9 +590,10 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           convertToUtf8( displayedHeadword, TARGET_CHARSET );
 
         // Alternate forms
-        while( pos != block.length )
+        while( pos < block.length )
         {
           len = (unsigned char)block.data[pos++];
+          if( pos + len > block.length ) break;
           alternate.reserve( len );
           for(unsigned int a=0;a<len;a++) alternate += block.data[pos++];
           convertToUtf8( alternate, SOURCE_CHARSET );
@@ -610,13 +624,10 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
             if ( displayedHeadword.find( '<' ) != string::npos ||
                  displayedHeadword.find( '&' ) != string::npos )
             {
-              QTextDocument d;
-              d.setHtml( QString::fromUtf8( displayedHeadword.data(), displayedHeadword.size() ) );
-
-              string result = d.toPlainText().toUtf8().data();
+              string result = Html::unescapeUtf8( displayedHeadword );
 
               if ( result != headword )
-              alternates.push_back( result );
+                alternates.push_back( result );
             }
             else
               alternates.push_back(displayedHeadword);
