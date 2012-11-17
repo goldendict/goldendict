@@ -20,17 +20,19 @@ namespace {
 class MediaWikiDictionary: public Dictionary::Class
 {
   string name;
-  QString url;
+  QString url, icon;
   QNetworkAccessManager & netMgr;
 
 public:
 
   MediaWikiDictionary( string const & id, string const & name_,
                        QString const & url_,
+                       QString const & icon_,
                        QNetworkAccessManager & netMgr_ ):
     Dictionary::Class( id, vector< string >() ),
     name( name_ ),
     url( url_ ),
+    icon( icon_ ),
     netMgr( netMgr_ )
   {
   }
@@ -48,7 +50,15 @@ public:
   { return 0; }
 
   virtual QIcon getIcon() throw()
-  { return QIcon(":/icons/icon32_wiki.png"); }
+  {
+      if( !icon.isNull() && !icon.isEmpty() )
+      {
+          QFileInfo fInfo(  QDir( Config::getConfigDir() ), icon );
+          if( fInfo.isFile() )
+              return QIcon( fInfo.absoluteFilePath() );
+      }
+      return QIcon(":/icons/icon32_wiki.png");
+  }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) throw( std::exception );
@@ -307,6 +317,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
             // Add "http:" to image source urls
             articleString.replace( " src=\"//", " src=\"http://" );
+            //fix src="/foo/bar/Baz.png"
+            articleString.replace( "src=\"/", "src=\"" + url +"/" );
 
             // Replace the href="/foo/bar/Baz" to just href="Baz".
             articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
@@ -409,6 +421,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       result.push_back( new MediaWikiDictionary( wikis[ x ].id.toStdString(),
                                                  wikis[ x ].name.toUtf8().data(),
                                                  wikis[ x ].url,
+                                                 wikis[ x ].icon,
                                                  mgr ) );
   }
 

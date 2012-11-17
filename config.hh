@@ -198,19 +198,19 @@ struct Preferences
 /// A MediaWiki network dictionary definition
 struct MediaWiki
 {
-  QString id, name, url;
+  QString id, name, url, icon;
   bool enabled;
 
   MediaWiki(): enabled( false )
   {}
 
   MediaWiki( QString const & id_, QString const & name_, QString const & url_,
-             bool enabled_ ):
-    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ) {}
+             bool enabled_, QString icon_ ):
+    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ), icon( icon_ ) {}
 
   bool operator == ( MediaWiki const & other ) const
   { return id == other.id && name == other.name && url == other.url &&
-           enabled == other.enabled; }
+           enabled == other.enabled && icon == other.icon ; }
 };
 
 /// Any website which can be queried though a simple template substitution
