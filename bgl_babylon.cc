@@ -597,6 +597,11 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           alternate.reserve( len );
           for(unsigned int a=0;a<len;a++) alternate += block.data[pos++];
           convertToUtf8( alternate, SOURCE_CHARSET );
+
+          // Try to repair malformed forms
+          if( alternate.find( "&#" ) != string::npos )
+            alternate = Html::unescapeUtf8( alternate );
+
           alternates.push_back( alternate );
           alternate.clear();
         }
