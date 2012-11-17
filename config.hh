@@ -198,14 +198,15 @@ struct Preferences
 /// A MediaWiki network dictionary definition
 struct MediaWiki
 {
-  QString id, name, url, icon;
+  QString id, name, url;
   bool enabled;
+  QString icon;
 
   MediaWiki(): enabled( false )
   {}
 
   MediaWiki( QString const & id_, QString const & name_, QString const & url_,
-             bool enabled_, QString icon_ ):
+             bool enabled_, QString const & icon_ ):
     id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ), icon( icon_ ) {}
 
   bool operator == ( MediaWiki const & other ) const
