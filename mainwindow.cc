@@ -845,9 +845,8 @@ void MainWindow::updateDictionaryBar()
   unsigned currentId = groupList.getCurrentGroup();
   Instances::Group * grp = groupInstances.findGroup( currentId );
 
+  dictionaryBar.setMutedDictionaries( 0 );
   if ( grp ) { // Should always be !0, but check as a safeguard
-    dictionaryBar.setDictionaries( grp->dictionaries );
-
     if( currentId == Instances::Group::AllGroupId )
       dictionaryBar.setMutedDictionaries( &cfg.mutedDictionaries );
     else
@@ -855,6 +854,8 @@ void MainWindow::updateDictionaryBar()
       Config::Group * grp = cfg.getGroup( currentId );
       dictionaryBar.setMutedDictionaries( grp ? &grp->mutedDictionaries : 0 );
     }
+
+    dictionaryBar.setDictionaries( grp->dictionaries );
 
     if ( useSmallIconsInToolbarsAction.isChecked() ) {
       int extent = QApplication::style()->pixelMetric(QStyle::PM_SmallIconSize);
