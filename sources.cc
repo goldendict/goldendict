@@ -40,6 +40,7 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.mediaWikis->resizeColumnToContents( 0 );
   ui.mediaWikis->resizeColumnToContents( 1 );
   ui.mediaWikis->resizeColumnToContents( 2 );
+  ui.mediaWikis->resizeColumnToContents( 3 );
 
   ui.webSites->setTabKeyNavigation( true );
   ui.webSites->setModel( &webSitesModel );
@@ -378,7 +379,7 @@ int MediaWikisModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 3;
+    return 4;
 }
 
 QVariant MediaWikisModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
@@ -392,6 +393,8 @@ QVariant MediaWikisModel::headerData( int section, Qt::Orientation /*orientation
         return tr( "Name" );
       case 2:
         return tr( "Address" );
+      case 3:
+        return tr( "Icon" );
       default:
         return QVariant();
     }
@@ -412,6 +415,8 @@ QVariant MediaWikisModel::data( QModelIndex const & index, int role ) const
         return mediawikis[ index.row() ].name;
       case 2:
         return mediawikis[ index.row() ].url;
+      case 3:
+        return mediawikis[ index.row() ].icon;
       default:
         return QVariant();
     }
@@ -450,6 +455,10 @@ bool MediaWikisModel::setData( QModelIndex const & index, const QVariant & value
         return true;
       case 2:
         mediawikis[ index.row() ].url =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 3:
+        mediawikis[ index.row() ].icon =  value.toString();
         dataChanged( index, index );
         return true;
       default:
