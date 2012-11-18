@@ -11,6 +11,7 @@
 #include "langcoder.hh"
 #include "language.hh"
 #include "dprintf.hh"
+#include "htmlescape.hh"
 
 #include <map>
 #include <set>
@@ -48,7 +49,7 @@ namespace
   enum
   {
     Signature = 0x584c4742, // BGLX on little-endian, XLGB on big-endian
-    CurrentFormatVersion = 16 + BtreeIndexing::FormatVersion
+    CurrentFormatVersion = 17 + BtreeIndexing::FormatVersion
   };
 
   struct IdxHeader
@@ -73,6 +74,8 @@ namespace
     uint32_t langTo;    // Target language
     uint32_t iconAddress; // Address of the icon in the chunks' storage
     uint32_t iconSize; // Size of the icon in the chunks' storage, 0 = no icon
+    uint32_t descriptionAddress; // Address of the dictionary description in the chunks' storage
+    uint32_t descriptionSize; // Size of the description in the chunks' storage, 0 = no description
   }
   #ifndef _MSC_VER
   __attribute__((packed))
@@ -250,6 +253,8 @@ namespace
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
       throw( std::exception );
 
+    virtual QString const& getDescription();
+
   private:
 
 
@@ -352,6 +357,23 @@ namespace
     articleText =
       string( articleData + headword.size() +
                 displayedHeadword.size() + 2 );
+  }
+
+  QString const& BglDictionary::getDescription()
+  {
+    if( !dictionaryDescription.isEmpty() )
+      return dictionaryDescription;
+
+    if( idxHeader.descriptionSize == 0 )
+      dictionaryDescription = "NONE";
+    else
+    {
+      vector< char > chunk;
+      char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
+      dictionaryDescription = Html::unescape( QString::fromUtf8( dictDescription, idxHeader.descriptionSize ) );
+    }
+
+    return dictionaryDescription;
   }
 
 /// BglDictionary::findHeadwordsForSynonym()
@@ -1064,6 +1086,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idxHeader.iconSize = sz;
       }
       
+      // Save dictionary description if there's one
+      if ( size_t sz = b.description().size() )
+      {
+        idxHeader.descriptionAddress = chunks.startNewBlock();
+        chunks.addToBlock( b.description().data(), sz );
+        idxHeader.descriptionSize = sz;
+      }
+
       for( ; ; )
       {
         bgl_entry e = b.readEntry( &resourceHandler );
