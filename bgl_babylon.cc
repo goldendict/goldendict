@@ -138,6 +138,7 @@ bool Babylon::readBlock( bgl_block &block )
     {
       free( block.data );
       block.length = 0;
+      gzclearerr( file );
       return false;
     }
   }
@@ -153,7 +154,14 @@ unsigned int Babylon::bgl_readnum( int bytes )
 
   if ( bytes < 1 || bytes > 4 ) return (0);
 
-  gzread( file, buf, bytes );
+  int res = gzread( file, buf, bytes );
+
+  if( res != bytes )
+  {
+    gzclearerr( file );
+    return 4;  // Read error - return end of file marker
+  }
+
   for(int i=0;i<bytes;i++) val= (val << 8) | buf[i];
   return val;
 }
