@@ -73,6 +73,7 @@ struct Ifo
   string bookname;
   uint32_t wordcount, synwordcount, idxfilesize, idxoffsetbits;
   string sametypesequence, dicttype, description;
+  string copyright, author, email;
 
   Ifo( File::Class & );
 };
@@ -551,18 +552,28 @@ QString const& StardictDictionary::getDescription()
     if( !dictionaryDescription.isEmpty() )
         return dictionaryDescription;
 
-    dictionaryDescription = "NONE";
-
     File::Class ifoFile( getDictionaryFilenames()[ 0 ], "r" );
     Ifo ifo( ifoFile );
 
+    if( !ifo.copyright.empty() )
+      dictionaryDescription += "Copyright: " + QString::fromUtf8( ifo.copyright.c_str() ) + "\n\n";
+
+    if( !ifo.author.empty() )
+      dictionaryDescription += "Author: " + QString::fromUtf8( ifo.author.c_str() ) + "\n\n";
+
+    if( !ifo.email.empty() )
+      dictionaryDescription += "E-mail: " + QString::fromUtf8( ifo.email.c_str() ) + "\n\n";
+
     if( !ifo.description.empty() )
     {
-        dictionaryDescription = QString::fromUtf8( ifo.description.c_str() );
-        dictionaryDescription.replace( "\t", "<br/>" );
-        dictionaryDescription.replace( "\\n", "<br/>" );
-        dictionaryDescription = Html::unescape( dictionaryDescription );
+      QString desc = QString::fromUtf8( ifo.description.c_str() );
+      desc.replace( "\t", "<br/>" );
+      desc.replace( "\\n", "<br/>" );
+      dictionaryDescription += Html::unescape( desc );
     }
+
+    if( dictionaryDescription.isEmpty() )
+      dictionaryDescription = "NONE";
 
     return dictionaryDescription;
 }
@@ -946,6 +957,15 @@ Ifo::Ifo( File::Class & f ):
       else
       if ( char const * val = beginsWith( "description=", option ) )
         description = val;
+      else
+      if ( char const * val = beginsWith( "copyright=", option ) )
+        copyright = val;
+      else
+      if ( char const * val = beginsWith( "author=", option ) )
+        author = val;
+      else
+      if ( char const * val = beginsWith( "email=", option ) )
+        email = val;
     }
   }
   catch( File::exReadError & )

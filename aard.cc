@@ -567,8 +567,6 @@ QString const& AardDictionary::getDescription()
     if( !dictionaryDescription.isEmpty() )
         return dictionaryDescription;
 
-    dictionaryDescription = "NONE";
-
     AAR_header dictHeader;
     uint32_t size;
     vector< char > data;
@@ -590,12 +588,27 @@ QString const& AardDictionary::getDescription()
 
     if( !meta.empty() )
     {
-        map< string, string >::const_iterator iter = meta.find( "description" );
+        map< string, string >::const_iterator iter = meta.find( "copyright" );
         if( iter != meta.end() )
-            dictionaryDescription = QString::fromUtf8( iter->second.c_str() );
-        dictionaryDescription.replace( "\\n", "\n" );
-        dictionaryDescription.replace( "\\t", "\t" );
+          dictionaryDescription = "Copyright: " + QString::fromUtf8( iter->second.c_str() ) + "\n\n";
+
+        iter = meta.find( "version" );
+        if( iter != meta.end() )
+          dictionaryDescription = "Version: " + QString::fromUtf8( iter->second.c_str() ) + "\n\n";
+
+        iter = meta.find( "description" );
+        if( iter != meta.end() )
+        {
+          QString desc = QString::fromUtf8( iter->second.c_str() );
+          desc.replace( "\\n", "\n" );
+          desc.replace( "\\t", "\t" );
+          dictionaryDescription += desc;
+        }
     }
+
+    if( dictionaryDescription.isEmpty() )
+      dictionaryDescription = "NONE";
+
     return dictionaryDescription;
 }
 

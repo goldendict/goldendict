@@ -39,6 +39,7 @@ using gd::wstring;
 using gd::wchar;
 using std::list;
 using std::pair;
+using std::string;
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
@@ -49,7 +50,7 @@ namespace
   enum
   {
     Signature = 0x584c4742, // BGLX on little-endian, XLGB on big-endian
-    CurrentFormatVersion = 17 + BtreeIndexing::FormatVersion
+    CurrentFormatVersion = 18 + BtreeIndexing::FormatVersion
   };
 
   struct IdxHeader
@@ -370,7 +371,24 @@ namespace
     {
       vector< char > chunk;
       char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
-      dictionaryDescription = Html::unescape( QString::fromUtf8( dictDescription, idxHeader.descriptionSize ) );
+      string str( dictDescription );
+      if( !str.empty() )
+        dictionaryDescription += "Copyright: " + QString::fromUtf8( str.data(), str.size() ) + "\n\n";
+      dictDescription += str.size() + 1;
+
+      str = string( dictDescription );
+      if( !str.empty() )
+        dictionaryDescription += "Author: " + QString::fromUtf8( str.data(), str.size() ) + "\n\n";
+      dictDescription += str.size() + 1;
+
+      str = string( dictDescription );
+      if( !str.empty() )
+        dictionaryDescription += "E-mail: " + QString::fromUtf8( str.data(), str.size() ) + "\n\n";
+      dictDescription += str.size() + 1;
+
+      str = string( dictDescription );
+      if( !str.empty() )
+        dictionaryDescription += Html::unescape( QString::fromUtf8( str.data(), str.size() ) );
     }
 
     return dictionaryDescription;
@@ -1087,12 +1105,20 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       }
       
       // Save dictionary description if there's one
-      if ( size_t sz = b.description().size() )
-      {
-        idxHeader.descriptionAddress = chunks.startNewBlock();
-        chunks.addToBlock( b.description().data(), sz );
-        idxHeader.descriptionSize = sz;
-      }
+      idxHeader.descriptionSize = 0;
+      idxHeader.descriptionAddress = chunks.startNewBlock();
+
+      chunks.addToBlock( b.copyright().c_str(), b.copyright().size() + 1 );
+      idxHeader.descriptionSize += b.copyright().size() + 1;
+
+      chunks.addToBlock( b.author().c_str(), b.author().size() + 1 );
+      idxHeader.descriptionSize += b.author().size() + 1;
+
+      chunks.addToBlock( b.email().c_str(), b.email().size() + 1 );
+      idxHeader.descriptionSize += b.email().size() + 1;
+
+      chunks.addToBlock( b.description().c_str(), b.description().size() + 1 );
+      idxHeader.descriptionSize += b.description().size() + 1;
 
       for( ; ; )
       {
