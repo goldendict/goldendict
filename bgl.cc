@@ -373,7 +373,7 @@ namespace
       char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
       string str( dictDescription );
       if( !str.empty() )
-        dictionaryDescription += "Copyright: " + QString::fromUtf8( str.data(), str.size() ) + "\n\n";
+        dictionaryDescription += "Copyright: " + Html::unescape( QString::fromUtf8( str.data(), str.size() ) ) + "\n\n";
       dictDescription += str.size() + 1;
 
       str = string( dictDescription );
