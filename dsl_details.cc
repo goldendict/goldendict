@@ -76,6 +76,66 @@ ArticleDom::ArticleDom( wstring const & str ):
     {
       nextChar();
 
+      if ( ch == L'@' && !escaped )
+      {
+        // Insided card
+        wstring linkTo;
+        nextChar();
+        for( ; ; nextChar() )
+        {
+          if( ch == L'\n' )
+            break;
+          if( ch != L'\r' )
+            linkTo.push_back( ch );
+        }
+        linkTo = Folding::trimWhitespace( linkTo );
+
+        if( !linkTo.empty() )
+        {
+          if ( !textNode )
+          {
+            Node text = Node( Node::Text(), wstring() );
+
+            if ( stack.empty() )
+            {
+              root.push_back( text );
+              stack.push_back( &root.back() );
+            }
+            else
+            {
+              stack.back()->push_back( text );
+              stack.push_back( &stack.back()->back() );
+            }
+
+            textNode = stack.back();
+          }
+          textNode->text.push_back( L'-' );
+          textNode->text.push_back( L' ' );
+
+          // Close the currently opened text node
+          stack.pop_back();
+          textNode = 0;
+
+          Node link( Node::Tag(), GD_NATIVE_TO_WS( L"ref" ), wstring() );
+          link.push_back( Node( Node::Text(), linkTo ) );
+
+          if ( stack.empty() )
+            root.push_back( link );
+          else
+            stack.back()->push_back( link );
+
+          // Skip to next '@'
+
+          while( !( ch == L'@' && !escaped ) )
+            nextChar();
+
+          stringPos--;
+          ch = L'\n';
+          escaped = false;
+        }
+
+      } // if ( ch == L'@' )
+
       if ( ch == L'[' && !escaped )
       {
         // Beginning of a tag.

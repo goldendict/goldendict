@@ -70,7 +70,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 15 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 16 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2
 };
 
@@ -101,6 +101,21 @@ struct IdxHeader
 __attribute__((packed))
 #endif
 ;
+
+struct InsidedCard
+{
+  uint32_t offset;
+  uint32_t size;
+  wstring headword;
+  InsidedCard( uint32_t _offset, uint32_t _size, wstring const & word ) :
+  offset( _offset ), size( _size ), headword( word )
+  {}
+  InsidedCard( InsidedCard const & e ) :
+  offset( e.offset ), size( e.size ), headword( e.headword )
+  {}
+  InsidedCard() {}
+
+};
 
 bool indexIsOldOrBad( string const & indexFile, bool hasZipFile )
 {
@@ -1131,6 +1146,9 @@ void DslArticleRequest::run()
 
     dict.articleNom += 1;
 
+    if( displayedHeadword.empty() || isDslWs( displayedHeadword[ 0 ] ) )
+      displayedHeadword = word; // Special case - insided card
+
     string articleText, articleAfter;
 
     articleText += "<span class=\"dsl_article\">";
@@ -1701,14 +1719,45 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           ++articleCount;
           wordCount += allEntryWords.size();
 
+          int insideInsided = 0;
+          wstring headword;
+          QVector< InsidedCard > insidedCards;
+          uint32_t offset = curOffset;
+
           // Skip the article's body
           for( ; ; )
           {
-            if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
-              break;
 
-            if ( curString.size() && !isDslWs( curString[ 0 ] ) )
+            if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) )
+                 || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
+            {
+              if( insideInsided )
+                insidedCards.append( InsidedCard( offset, curOffset - offset, headword ) );
               break;
+            }
+
+            // Find embedded cards
+
+            wstring::size_type n = curString.find( L'@' );
+            if( n == wstring::npos || curString[ n - 1 ] == L'\\' )
+              continue;
+
+            // Handle embedded card
+
+            if( insideInsided )
+              insidedCards.append( InsidedCard( offset, curOffset - offset, headword ) );
+
+            offset = curOffset;
+            headword = Folding::trimWhitespace( curString.substr( n + 1 ) );
+
+            if( !headword.empty() )
+            {
+              processUnsortedParts( headword, true );
+              expandTildes( headword, allEntryWords.front() );
+              insideInsided = true;
+            }
+            else
+              insideInsided = false;
           }
 
           // Now that we're having read the first string after the article
@@ -1718,6 +1767,21 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           uint32_t articleSize = ( curOffset - articleOffset );
 
           chunks.addToBlock( &articleSize, sizeof( articleSize ) );
+
+          for( QVector< InsidedCard >::iterator i = insidedCards.begin(); i != insidedCards.end(); ++i )
+          {
+            uint32_t descOffset = chunks.startNewBlock();
+            chunks.addToBlock( &(*i).offset, sizeof( (*i).offset ) );
+            chunks.addToBlock( &(*i).size, sizeof( (*i).size ) );
+
+            unescapeDsl( (*i).headword );
+            normalizeHeadword( (*i).headword );
+
+            indexedWords.addWord( (*i).headword, descOffset );
+
+            ++articleCount;
+            ++wordCount;
+          }
 
           if ( !hasString )
             break;
