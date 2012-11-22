@@ -78,6 +78,7 @@ typedef struct dictData {
    unsigned long crc;
    unsigned long length;
    unsigned long compressedLength;
+   int           stamp;
    dictCache     cache[DICT_CACHE_SIZE];
 } dictData;
 

@@ -293,7 +293,7 @@ static int dict_read_header( const char *filename,
 	 rewind( str );
 	 while (!feof( str )) {
 	    if ((count = fread( buffer, 1, BUFFERSIZE, str ))) {
-	       crc = crc32( crc, buffer, count );
+	       crc = crc32( crc, (Bytef *)buffer, count );
 	    }
 	 }
       }
@@ -438,48 +438,56 @@ dictData *dict_data_open( const char *filename, int computeCRC )
    h = xmalloc( sizeof( struct dictData ) );
 
    memset( h, 0, sizeof( struct dictData ) );
+#ifdef __WIN32
+   h->fd = INVALID_HANDLE_VALUE;
+#endif
    h->initialized = 0;
 
-   if (dict_read_header( filename, h, computeCRC )) {
-     return 0; /*
-      err_fatal( __func__,
-     "\"%s\" not in text or dzip format\n", filename );*/
-   }
+   for(;;)
+   {
+     if (dict_read_header( filename, h, computeCRC )) {
+       break; /*
+        err_fatal( __func__,
+       "\"%s\" not in text or dzip format\n", filename );*/
+     }
 
 #ifdef __WIN32
-   wchar_t wname[16384];
-   if( MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 ) == 0 )
-     return 0;
+     wchar_t wname[16384];
+     if( MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 ) == 0 )
+       break;
 
-   h->fd = CreateFileW( wname, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0,
-                        OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, 0);
-   if( h->fd == INVALID_HANDLE_VALUE )
-     return 0;
+     h->fd = CreateFileW( wname, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0,
+                          OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, 0);
+     if( h->fd == INVALID_HANDLE_VALUE )
+       break;
 
-   h->size = GetFileSize( h->fd, 0 );
+     h->size = GetFileSize( h->fd, 0 );
 #else
-   h->fd = gd_fopen( filename, "rb" );
+     h->fd = gd_fopen( filename, "rb" );
 
-   if ( !h->fd )
-   {
-     return 0;
-      /*err_fatal_errno( __func__,
-           "Cannot open data file \"%s\"\n", filename );*/
-    }
+     if ( !h->fd )
+     {
+       break;
+        /*err_fatal_errno( __func__,
+             "Cannot open data file \"%s\"\n", filename );*/
+      }
 
-   fseek( h->fd, 0, SEEK_END );
+     fseek( h->fd, 0, SEEK_END );
 
-   h->size = ftell( h->fd );
+     h->size = ftell( h->fd );
 #endif
 
-   for (j = 0; j < DICT_CACHE_SIZE; j++) {
-      h->cache[j].chunk    = -1;
-      h->cache[j].stamp    = -1;
-      h->cache[j].inBuffer = NULL;
-      h->cache[j].count    = 0;
+     for (j = 0; j < DICT_CACHE_SIZE; j++) {
+        h->cache[j].chunk    = -1;
+        h->cache[j].stamp    = -1;
+        h->cache[j].inBuffer = NULL;
+        h->cache[j].count    = 0;
+     }
+
+     return h;
    }
-   
-   return h;
+   dict_data_close( h );
+   return( 0 );
 }
 
 void dict_data_close( dictData *header )
@@ -531,7 +539,6 @@ char *dict_data_read_ (
    int           firstOffset, lastOffset;
    int           i, j;
    int           found, target, lastStamp;
-   static int    stamp = 0;
 
    end  = start + size;
 
@@ -542,7 +549,7 @@ char *dict_data_read_ (
      *buffer = 0;
      return buffer;
    }
-   
+
    PRINTF(DBG_UNZIP,
 	  ("dict_data_read( %p, %lu, %lu, %s, %s )\n",
 	   h, start, size, preFilter, postFilter ));
@@ -577,7 +584,6 @@ char *dict_data_read_ (
    break;
    case DICT_DZIP:
       if (!h->initialized) {
-	 ++h->initialized;
 	 h->zStream.zalloc    = NULL;
 	 h->zStream.zfree     = NULL;
 	 h->zStream.opaque    = NULL;
@@ -589,6 +595,7 @@ char *dict_data_read_ (
 	    err_internal( __func__,
 			  "Cannot initialize inflation engine: %s\n",
 			  h->zStream.msg );
+	 ++h->initialized;
       }
       firstChunk  = start / h->chunkLength;
       firstOffset = start - firstChunk * h->chunkLength;
@@ -619,14 +626,20 @@ char *dict_data_read_ (
 	    }
 	 }
 
-	 h->cache[target].stamp = ++stamp;
+	 h->cache[target].stamp = ++h->stamp;
+	 if( h->stamp < 0 )
+	 {
+	    h->stamp = 0;
+	    for (j = 0; j < DICT_CACHE_SIZE; j++)
+	      h->cache[j].stamp = -1;
+	 }
 	 if (found) {
 	    count = h->cache[target].count;
 	    inBuffer = h->cache[target].inBuffer;
 	 } else {
-	    h->cache[target].chunk = i;
+	    h->cache[target].chunk = -1;
 	    if (!h->cache[target].inBuffer)
-	       h->cache[target].inBuffer = xmalloc( IN_BUFFER_SIZE );
+	       h->cache[target].inBuffer = xmalloc( h->chunkLength );
 	    inBuffer = h->cache[target].inBuffer;
 
 	    if (h->chunks[i] >= OUT_BUFFER_SIZE ) {
@@ -652,10 +665,10 @@ char *dict_data_read_ (
 
       dict_data_filter( outBuffer, &count, OUT_BUFFER_SIZE, preFilter );
 	 
-	    h->zStream.next_in   = outBuffer;
+	    h->zStream.next_in   = (Bytef *)outBuffer;
 	    h->zStream.avail_in  = h->chunks[i];
-	    h->zStream.next_out  = inBuffer;
-	    h->zStream.avail_out = IN_BUFFER_SIZE;
+	    h->zStream.next_out  = (Bytef *)inBuffer;
+	    h->zStream.avail_out = h->chunkLength;
 	    if (inflate( &h->zStream,  Z_PARTIAL_FLUSH ) != Z_OK)
 	       err_fatal( __func__, "inflate: %s\n", h->zStream.msg );
 	    if (h->zStream.avail_in)
@@ -663,10 +676,11 @@ char *dict_data_read_ (
 			     "inflate did not flush (%d pending, %d avail)\n",
 			     h->zStream.avail_in, h->zStream.avail_out );
 	    
-	    count = IN_BUFFER_SIZE - h->zStream.avail_out;
-      dict_data_filter( inBuffer, &count, IN_BUFFER_SIZE, postFilter );
+	    count = h->chunkLength - h->zStream.avail_out;
+      dict_data_filter( inBuffer, &count, h->chunkLength, postFilter );
 
 	    h->cache[target].count = count;
+	    h->cache[target].chunk = i;
 	 }
 	 
 	 if (i == firstChunk) {
