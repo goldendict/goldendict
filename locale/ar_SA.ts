@@ -105,27 +105,27 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="426"/>
+        <location filename="../article_maker.cc" line="432"/>
         <source>From </source>
         <translation>من</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="439"/>
+        <location filename="../article_maker.cc" line="445"/>
         <source>Query error: %1</source>
         <translation>أخطاء الطلب: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="538"/>
+        <location filename="../article_maker.cc" line="544"/>
         <source>Close words: </source>
         <translation type="unfinished">كلمات قريبة:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="609"/>
+        <location filename="../article_maker.cc" line="615"/>
         <source>Compound expressions: </source>
         <translation type="unfinished">تعبيرات مركبة:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="637"/>
+        <location filename="../article_maker.cc" line="643"/>
         <source>Individual words: </source>
         <translation type="unfinished">كلمات مفردة:</translation>
     </message>
@@ -178,113 +178,125 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="631"/>
+        <location filename="../articleview.cc" line="632"/>
         <source>Resource</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="636"/>
+        <location filename="../articleview.cc" line="637"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="646"/>
+        <location filename="../articleview.cc" line="647"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="817"/>
-        <location filename="../articleview.cc" line="847"/>
-        <location filename="../articleview.cc" line="856"/>
-        <location filename="../articleview.cc" line="1260"/>
-        <location filename="../articleview.cc" line="1278"/>
-        <location filename="../articleview.cc" line="1288"/>
+        <location filename="../articleview.cc" line="822"/>
+        <location filename="../articleview.cc" line="852"/>
+        <location filename="../articleview.cc" line="861"/>
+        <location filename="../articleview.cc" line="1279"/>
+        <location filename="../articleview.cc" line="1297"/>
+        <location filename="../articleview.cc" line="1307"/>
         <source>GoldenDict</source>
         <translation>القاموس الذهبي</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="817"/>
+        <location filename="../articleview.cc" line="822"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>المرجع المشار إليه غير موجود.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="857"/>
+        <location filename="../articleview.cc" line="862"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="994"/>
+        <location filename="../articleview.cc" line="1000"/>
         <source>&amp;Open Link</source>
         <translation>ا&amp;فتح الرابط</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1000"/>
+        <location filename="../articleview.cc" line="1006"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>افتح الرابط في لسا&amp;ن جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1007"/>
+        <location filename="../articleview.cc" line="1013"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>افتح الرابط في &amp;متصفح خارجي</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1020"/>
+        <location filename="../articleview.cc" line="1026"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>ا&amp;نظر &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1028"/>
+        <location filename="../articleview.cc" line="1034"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>انظر &quot;%1&quot; في &amp;لسان جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1034"/>
-        <location filename="../articleview.cc" line="1069"/>
+        <location filename="../articleview.cc" line="1040"/>
+        <location filename="../articleview.cc" line="1075"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1048"/>
+        <location filename="../articleview.cc" line="1054"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>انظر &quot;%1&quot; في %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1056"/>
+        <location filename="../articleview.cc" line="1062"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>انظر &quot;%1&quot;في %2 في لسان &amp;جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1217"/>
+        <location filename="../articleview.cc" line="1223"/>
         <source>Playing a non-WAV file</source>
         <translation type="unfinished">تشغيل ملف غير WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1218"/>
+        <location filename="../articleview.cc" line="1224"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation type="unfinished">لتمكين تشغيل ملفات غير WAV، اذهب إلى تحرير|تفضيلات، اختر لسان الصوت وانتق &quot;شغل عبر DirectShow&quot; من هناك.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1260"/>
+        <location filename="../articleview.cc" line="1239"/>
+        <source>Bass library not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1244"/>
+        <source>Bass library can&apos;t play this sound.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1279"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>فشل بدء مشغل لتشغيل ملف الصوت: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1278"/>
+        <location filename="../articleview.cc" line="1297"/>
         <source>Failed to create temporary file.</source>
         <translation>فشل إنشاء ملف مؤقت.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1289"/>
+        <location filename="../articleview.cc" line="1308"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>تعذر فتح ملف المصدر آليا, حاول فتحه يدويا: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1312"/>
+        <location filename="../articleview.cc" line="1331"/>
         <source>The referenced resource failed to download.</source>
         <translation>فشل تنزيل المرجع المشار إليه.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1312"/>
+        <location filename="../articleview.cc" line="1239"/>
+        <location filename="../articleview.cc" line="1244"/>
+        <location filename="../articleview.cc" line="1331"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">تحذير: %1</translation>
     </message>
@@ -345,12 +357,12 @@
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="572"/>
+        <location filename="../groups_widgets.cc" line="574"/>
         <source>Confirmation</source>
         <translation type="unfinished">التأكد</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="573"/>
+        <location filename="../groups_widgets.cc" line="575"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation type="unfinished">أمتأكد من رغبتك بتوليد مجموعات حسب أزواج اللغة؟</translation>
     </message>
@@ -404,12 +416,12 @@
         <translation>شريط القاموس</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="89"/>
+        <location filename="../dictionarybar.cc" line="94"/>
         <source>Edit this group</source>
         <translation type="unfinished">حرر هذه المجموعة</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="94"/>
+        <location filename="../dictionarybar.cc" line="99"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
@@ -470,37 +482,37 @@
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="217"/>
+        <location filename="../forvo.cc" line="223"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation type="unfinished">خطأ عبارة XML: %1 في %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="293"/>
+        <location filename="../forvo.cc" line="299"/>
         <source>Added %1</source>
         <translation type="unfinished">اُضيف %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="296"/>
+        <location filename="../forvo.cc" line="302"/>
         <source>by</source>
         <translation type="unfinished">من</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="300"/>
+        <location filename="../forvo.cc" line="306"/>
         <source>Male</source>
         <translation type="unfinished">ذكر</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="300"/>
+        <location filename="../forvo.cc" line="306"/>
         <source>Female</source>
         <translation type="unfinished">انثى</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="302"/>
+        <location filename="../forvo.cc" line="308"/>
         <source>from</source>
         <translation type="unfinished">من</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="340"/>
+        <location filename="../forvo.cc" line="346"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation type="unfinished">اذهب إلى تحرير|قواميس|مصادر|فروفو وطبّق لمفتحاح API الخاص بنا لإذهاب هذا الخطأ.</translation>
     </message>
@@ -524,7 +536,7 @@
 <context>
     <name>GroupComboBox</name>
     <message>
-        <location filename="../groupcombobox.cc" line="12"/>
+        <location filename="../groupcombobox.cc" line="14"/>
         <source>Choose a Group (Alt+G)</source>
         <translation>اختر مجموعة (Alt+G)</translation>
     </message>
@@ -689,7 +701,7 @@
         <translation>اقتراحات التهجئة:</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="751"/>
+        <location filename="../hunspell.cc" line="757"/>
         <source>%1 Morphology</source>
         <translation type="unfinished">%1 صرف</translation>
     </message>
@@ -697,12 +709,12 @@
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1075"/>
+        <location filename="../sources.cc" line="1084"/>
         <source>Enabled</source>
         <translation>مفعل</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1077"/>
+        <location filename="../sources.cc" line="1086"/>
         <source>Name</source>
         <translation>الاسم</translation>
     </message>
@@ -1746,8 +1758,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1210"/>
-        <location filename="../mainwindow.cc" line="2144"/>
+        <location filename="../mainwindow.cc" line="1217"/>
+        <location filename="../mainwindow.cc" line="2153"/>
         <source>GoldenDict</source>
         <translation>القاموس الذهبي</translation>
     </message>
@@ -1948,7 +1960,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
-        <location filename="../mainwindow.cc" line="2724"/>
+        <location filename="../mainwindow.cc" line="2733"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2094,148 +2106,148 @@
         <translation type="unfinished">الألسنة المفتوحة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="952"/>
+        <location filename="../mainwindow.cc" line="956"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1010"/>
+        <location filename="../mainwindow.cc" line="1014"/>
         <source>(untitled)</source>
         <translation>(بلا عنوان)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1210"/>
+        <location filename="../mainwindow.cc" line="1217"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1706"/>
+        <location filename="../mainwindow.cc" line="1719"/>
         <source>WARNING: %1</source>
         <translation>تحذير: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2145"/>
+        <location filename="../mainwindow.cc" line="2154"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>فشل بدء آلية مراقبة المفاتيح السريعة.&lt;br&gt;تأكد من ان خادم الرسوميات مفعّل للاحقة RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2279"/>
+        <location filename="../mainwindow.cc" line="2288"/>
         <source>New Release Available</source>
         <translation>اصدار جديد متوفر</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2280"/>
+        <location filename="../mainwindow.cc" line="2289"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>الاصدار &lt;b&gt;%1&lt;/b&gt; من القاموس الذهبي متوفر للتنزيل.&lt;br&gt;انقر &lt;b&gt;نزّل&lt;/b&gt; للوصول لصفحة التنزيل.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2285"/>
+        <location filename="../mainwindow.cc" line="2294"/>
         <source>Download</source>
         <translation>نزّل</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2286"/>
+        <location filename="../mainwindow.cc" line="2295"/>
         <source>Skip This Release</source>
         <translation>تجاهل هذا الاصدار</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2399"/>
+        <location filename="../mainwindow.cc" line="2408"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2400"/>
+        <location filename="../mainwindow.cc" line="2409"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2498"/>
+        <location filename="../mainwindow.cc" line="2507"/>
         <source>Page Setup</source>
         <translation>اعداد الصفحة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2499"/>
+        <location filename="../mainwindow.cc" line="2508"/>
         <source>No printer is available. Please install one first.</source>
         <translation>لا يوجد طابعة. ركب واحدة أولا.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2516"/>
+        <location filename="../mainwindow.cc" line="2525"/>
         <source>Print Article</source>
         <translation>اطبع المقال</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2537"/>
+        <location filename="../mainwindow.cc" line="2546"/>
         <source>Save Article As</source>
         <translation>احفظ المقال كـ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2537"/>
+        <location filename="../mainwindow.cc" line="2546"/>
         <source>Html files (*.html *.htm)</source>
         <translation>ملفات Html ‏(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2552"/>
+        <location filename="../mainwindow.cc" line="2561"/>
         <source>Error</source>
         <translation>خطأ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2553"/>
+        <location filename="../mainwindow.cc" line="2562"/>
         <source>Can&apos;t save article: %1</source>
         <translation>تعذر حفظ المقال: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2767"/>
+        <location filename="../mainwindow.cc" line="2776"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2771"/>
+        <location filename="../mainwindow.cc" line="2780"/>
         <source>History view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2793"/>
+        <location filename="../mainwindow.cc" line="2802"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2795"/>
-        <location filename="../mainwindow.cc" line="2856"/>
+        <location filename="../mainwindow.cc" line="2804"/>
+        <location filename="../mainwindow.cc" line="2865"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2834"/>
+        <location filename="../mainwindow.cc" line="2843"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2837"/>
+        <location filename="../mainwindow.cc" line="2846"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2854"/>
+        <location filename="../mainwindow.cc" line="2863"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2898"/>
+        <location filename="../mainwindow.cc" line="2907"/>
         <source>Imported from file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2908"/>
+        <location filename="../mainwindow.cc" line="2917"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2912"/>
+        <location filename="../mainwindow.cc" line="2921"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2915"/>
+        <location filename="../mainwindow.cc" line="2924"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2243,7 +2255,7 @@
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="276"/>
+        <location filename="../mediawiki.cc" line="292"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>خطأ عبارة XML: %1 في %2,%3</translation>
     </message>
@@ -2251,7 +2263,7 @@
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="151"/>
+        <location filename="../mediawiki.cc" line="161"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>خطأ عبارة XML: %1 في %2,%3</translation>
     </message>
@@ -2259,19 +2271,24 @@
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="390"/>
+        <location filename="../sources.cc" line="391"/>
         <source>Enabled</source>
         <translation>مفعل</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="392"/>
+        <location filename="../sources.cc" line="393"/>
         <source>Name</source>
         <translation>الاسم</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="394"/>
+        <location filename="../sources.cc" line="395"/>
         <source>Address</source>
         <translation>العنوان</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="397"/>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2348,12 +2365,12 @@
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="864"/>
+        <location filename="../sources.cc" line="873"/>
         <source>Path</source>
         <translation>المسار</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="866"/>
+        <location filename="../sources.cc" line="875"/>
         <source>Recursive</source>
         <translation>تداخل</translation>
     </message>
@@ -2769,59 +2786,70 @@ but should support most audio file formats.</source>
         <translation>شغل عبر Phonon</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="819"/>
+        <location filename="../preferences.ui" line="817"/>
+        <source>Play audio via Bass library. Optimal choice. To use this mode
+you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="821"/>
+        <source>Play via Bass library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="830"/>
         <source>Use any external program to play audio files</source>
         <translation>استخدم أيّة برنامج خارجي لتشغيل ملفات الصوت</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="822"/>
+        <location filename="../preferences.ui" line="833"/>
         <source>Use external program:</source>
         <translation>استخدم برنامجا خارجيا:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="859"/>
+        <location filename="../preferences.ui" line="870"/>
         <source>&amp;Network</source>
         <translation>ال&amp;شبكة</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="878"/>
+        <location filename="../preferences.ui" line="889"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>مكن استخدام خادوم بروكسي لكل طلبات
 البرنامج الشبكية.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="882"/>
+        <location filename="../preferences.ui" line="893"/>
         <source>Use proxy server</source>
         <translation>استخدم خادوم بروكسي</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="896"/>
+        <location filename="../preferences.ui" line="907"/>
         <source>Type:</source>
         <translation>النوع:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="906"/>
+        <location filename="../preferences.ui" line="917"/>
         <source>Host:</source>
         <translation>المضيف:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="916"/>
+        <location filename="../preferences.ui" line="927"/>
         <source>Port:</source>
         <translation>المنفذ:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="937"/>
+        <location filename="../preferences.ui" line="948"/>
         <source>User:</source>
         <translation>المستخدم:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="947"/>
+        <location filename="../preferences.ui" line="958"/>
         <source>Password:</source>
         <translation>كلمة المرور:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="982"/>
+        <location filename="../preferences.ui" line="993"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -2830,24 +2858,24 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
 ان كانت بعض المواقع تتشوه بسبب ذلك, جرب تعطيله.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="987"/>
+        <location filename="../preferences.ui" line="998"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>لا تسمح بتحميل المحتوى من المواقع الاخرى (يخفي معظم الاعلانات)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="994"/>
+        <location filename="../preferences.ui" line="1005"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="999"/>
+        <location filename="../preferences.ui" line="1010"/>
         <source>Enable web plugins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1022"/>
+        <location filename="../preferences.ui" line="1033"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -2859,22 +2887,22 @@ download page.</source>
 التنزيل.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1029"/>
+        <location filename="../preferences.ui" line="1040"/>
         <source>Check for new program releases periodically</source>
         <translation type="unfinished">تحقق من الاصدارات الحديثة غِبّا</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1050"/>
+        <location filename="../preferences.ui" line="1061"/>
         <source>Ad&amp;vanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1056"/>
+        <location filename="../preferences.ui" line="1067"/>
         <source>ScanPopup extra technologies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1062"/>
+        <location filename="../preferences.ui" line="1073"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -2882,96 +2910,96 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1068"/>
+        <location filename="../preferences.ui" line="1079"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1075"/>
+        <location filename="../preferences.ui" line="1086"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1080"/>
+        <location filename="../preferences.ui" line="1091"/>
         <source>Use &amp;UIAutomation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1087"/>
+        <location filename="../preferences.ui" line="1098"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1092"/>
+        <location filename="../preferences.ui" line="1103"/>
         <source>Use &amp;GoldenDict message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1102"/>
+        <location filename="../preferences.ui" line="1113"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1108"/>
+        <location filename="../preferences.ui" line="1119"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1111"/>
+        <location filename="../preferences.ui" line="1122"/>
         <source>Store &amp;history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1121"/>
+        <location filename="../preferences.ui" line="1132"/>
         <source>Articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1127"/>
+        <location filename="../preferences.ui" line="1138"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1130"/>
+        <location filename="../preferences.ui" line="1141"/>
         <source>Expand optional &amp;parts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="41"/>
+        <location filename="../preferences.cc" line="42"/>
         <source>System default</source>
         <translation>افتراضيات النظام</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="79"/>
+        <location filename="../preferences.cc" line="80"/>
         <source>Default</source>
         <translation>الافتراضيات</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="80"/>
+        <location filename="../preferences.cc" line="81"/>
         <source>Lingvo</source>
         <translation type="unfinished">لينغفو</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="81"/>
+        <location filename="../preferences.cc" line="82"/>
         <source>Babylon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="156"/>
+        <location filename="../preferences.cc" line="157"/>
         <source>Play via DirectShow</source>
         <translation>اعرض خلال DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="345"/>
+        <location filename="../preferences.cc" line="351"/>
         <source>Changing Language</source>
         <translation>تغيير اللغة</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="346"/>
+        <location filename="../preferences.cc" line="352"/>
         <source>Restart the program to apply the language change.</source>
         <translation>اعد تشغيل البرنامج لتطبيق تغيير اللغة.</translation>
     </message>
@@ -2979,27 +3007,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="772"/>
+        <location filename="../sources.cc" line="781"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="774"/>
+        <location filename="../sources.cc" line="783"/>
         <source>Plain Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="776"/>
+        <location filename="../sources.cc" line="785"/>
         <source>Html</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="778"/>
+        <location filename="../sources.cc" line="787"/>
         <source>Prefix Match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="780"/>
+        <location filename="../sources.cc" line="789"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3025,22 +3053,22 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="688"/>
+        <location filename="../sources.cc" line="697"/>
         <source>Enabled</source>
         <translation type="unfinished">مفعل</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="690"/>
+        <location filename="../sources.cc" line="699"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="692"/>
+        <location filename="../sources.cc" line="701"/>
         <source>Name</source>
         <translation type="unfinished">الاسم</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="694"/>
+        <location filename="../sources.cc" line="703"/>
         <source>Command Line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3132,12 +3160,12 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="970"/>
+        <location filename="../sources.cc" line="979"/>
         <source>Path</source>
         <translation>المسار</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="972"/>
+        <location filename="../sources.cc" line="981"/>
         <source>Name</source>
         <translation>الاسم</translation>
     </message>
@@ -3425,40 +3453,40 @@ Not implemented yet in GoldenDict.</source>
         <translation>الكتكانا</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="104"/>
+        <location filename="../sources.cc" line="105"/>
         <source>(not available in portable version)</source>
         <translation>(غير متوفر في النسخة المتنقلة)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="140"/>
-        <location filename="../sources.cc" line="167"/>
-        <location filename="../sources.cc" line="194"/>
+        <location filename="../sources.cc" line="141"/>
+        <location filename="../sources.cc" line="168"/>
+        <location filename="../sources.cc" line="195"/>
         <source>Choose a directory</source>
         <translation>اختر قاموسا</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="154"/>
-        <location filename="../sources.cc" line="181"/>
-        <location filename="../sources.cc" line="221"/>
-        <location filename="../sources.cc" line="245"/>
-        <location filename="../sources.cc" line="269"/>
+        <location filename="../sources.cc" line="155"/>
+        <location filename="../sources.cc" line="182"/>
+        <location filename="../sources.cc" line="222"/>
+        <location filename="../sources.cc" line="246"/>
+        <location filename="../sources.cc" line="270"/>
         <source>Confirm removal</source>
         <translation>أكد الحذف</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="155"/>
-        <location filename="../sources.cc" line="182"/>
+        <location filename="../sources.cc" line="156"/>
+        <location filename="../sources.cc" line="183"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>اأزيل القاموس &lt;b&gt;%1&lt;/b&gt; من القائمة؟</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="222"/>
-        <location filename="../sources.cc" line="246"/>
+        <location filename="../sources.cc" line="223"/>
+        <location filename="../sources.cc" line="247"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>اأزيل القاموس &lt;b&gt;%1&lt;/b&gt; من القائمة؟</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="270"/>
+        <location filename="../sources.cc" line="271"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3466,17 +3494,17 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="539"/>
+        <location filename="../sources.cc" line="548"/>
         <source>Enabled</source>
         <translation>مفعل</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="541"/>
+        <location filename="../sources.cc" line="550"/>
         <source>Name</source>
         <translation>الاسم</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="543"/>
+        <location filename="../sources.cc" line="552"/>
         <source>Address</source>
         <translation>العنوان</translation>
     </message>

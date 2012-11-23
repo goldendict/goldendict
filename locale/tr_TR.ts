@@ -227,6 +227,14 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bass library not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass library can&apos;t play this sound.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
@@ -1813,6 +1821,10 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <source>Enabled</source>
         <translation>Etkin</translation>
     </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OrderAndProps</name>
@@ -2401,6 +2413,15 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Select word by single click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio via Bass library. Optimal choice. To use this mode
+you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play via Bass library</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

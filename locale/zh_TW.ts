@@ -220,6 +220,14 @@
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bass library not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass library can&apos;t play this sound.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
@@ -1815,6 +1823,10 @@
         <source>Enabled</source>
         <translation>已啟用</translation>
     </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OrderAndProps</name>
@@ -2380,6 +2392,15 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Select word by single click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio via Bass library. Optimal choice. To use this mode
+you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play via Bass library</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
