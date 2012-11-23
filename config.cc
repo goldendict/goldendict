@@ -119,6 +119,7 @@ Preferences::Preferences():
   useExternalPlayer( true ), // Phonon on Linux still feels quite buggy
   useWindowsPlaySound( false ),
 #endif
+  useBassLibrary( false ),
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
@@ -651,6 +652,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "useWindowsPlaySound" ).isNull() )
       c.preferences.useWindowsPlaySound = ( preferences.namedItem( "useWindowsPlaySound" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "useBassLibrary" ).isNull() )
+      c.preferences.useBassLibrary = ( preferences.namedItem( "useBassLibrary" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
       c.preferences.audioPlaybackProgram = preferences.namedItem( "audioPlaybackProgram" ).toElement().text();
@@ -1233,6 +1237,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "useWindowsPlaySound" );
     opt.appendChild( dd.createTextNode( c.preferences.useWindowsPlaySound ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "useBassLibrary" );
+    opt.appendChild( dd.createTextNode( c.preferences.useBassLibrary ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "audioPlaybackProgram" );

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>572</width>
-    <height>376</height>
+    <height>381</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -808,6 +808,17 @@ but should support most audio file formats.</string>
             </property>
             <property name="checked">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="playViaBass">
+            <property name="toolTip">
+             <string>Play audio via Bass library. Optimal choice. To use this mode
+you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</string>
+            </property>
+            <property name="text">
+             <string>Play via Bass library</string>
             </property>
            </widget>
           </item>

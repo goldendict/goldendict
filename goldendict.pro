@@ -303,11 +303,13 @@ win32 {
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
                guids.c \
-               x64.cc
+               x64.cc \
+               bass.cc
     HEADERS += mouseover_win32/ThTypes.h \
                wordbyauto.hh \
                uiauto.hh \
-               x64.hh
+               x64.hh \
+               bass.hh
 }
 RESOURCES += resources.qrc \
     flags.qrc

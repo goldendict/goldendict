@@ -21,6 +21,7 @@
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <mmsystem.h> // For PlaySound
+#include "bass.hh"
 
 #include <QWebElement>
 #include <QPainter>
@@ -1229,6 +1230,19 @@ void ArticleView::resourceDownloadFinished()
               winWavData = data;
               PlaySoundA( &winWavData.front(), 0,
                           SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
+            }
+          }
+          else if ( !cfg.preferences.useExternalPlayer &&
+                     cfg.preferences.useBassLibrary )
+          {
+            if( !BassAudioPlayer::instance().canBeUsed() )
+              emit statusBarMessage( tr( "WARNING: %1" ).arg( tr( "Bass library not found." ) ),
+                                     10000, QPixmap( ":/icons/error.png" ) );
+            else
+            {
+              if( !BassAudioPlayer::instance().playMemory( data.data(), data.size() ) )
+                emit statusBarMessage( tr( "WARNING: %1" ).arg( tr( "Bass library can't play this sound." ) ),
+                                       10000, QPixmap( ":/icons/error.png" ) );
             }
           }
           else

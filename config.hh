@@ -178,6 +178,7 @@ struct Preferences
   QString audioPlaybackProgram;
   bool useExternalPlayer;
   bool useWindowsPlaySound;
+  bool useBassLibrary;
 
   ProxyServer proxyServer;
 
