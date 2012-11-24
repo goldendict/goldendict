@@ -900,6 +900,17 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
     url.setPath( gd::toQString( node.renderAsText() ) );
+    if( !node.tagAttrs.empty() )
+    {
+      QString attr = gd::toQString( node.tagAttrs ).remove( '\"' );
+      int n = attr.indexOf( '=' );
+      if( n > 0 )
+      {
+        QList< QPair< QString, QString > > query;
+        query.append( QPair< QString, QString >( attr.left( n ), attr.mid( n + 1 ) ) );
+        url.setQueryItems( query );
+      }
+    }
 
     result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
   }

@@ -702,8 +702,22 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
     else
     {
+      QString newScrollTo( scrollTo );
+      if( url.hasQueryItem( "dict" ) )
+      {
+        // Link to other dictionary
+        QString dictName( url.queryItemValue( "dict" ) );
+        for( unsigned i = 0; i < allDictionaries.size(); i++ )
+        {
+          if( dictName.compare( QString::fromUtf8( allDictionaries[ i ]->getName().c_str() ) ) == 0 )
+          {
+            newScrollTo = QString( "gdfrom-" ) + QString::fromUtf8( allDictionaries[ i ]->getId().c_str() );
+            break;
+          }
+        }
+      }
       showDefinition( url.path().mid( 1 ),
-                      getGroup( ref ), scrollTo, contexts );
+                      getGroup( ref ), newScrollTo, contexts );
       emit sendWordToHistory( url.path().mid( 1 ) );
     }
   }
@@ -814,8 +828,6 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                  this, SLOT( resourceDownloadFinished() ) );
       }
     }
-
-    QString contentType;
 
     if ( resourceDownloadRequests.empty() ) // No requests were queued
     {
