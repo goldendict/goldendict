@@ -67,7 +67,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
                  cfg.preferences.disallowContentFromOtherSites ),
   dictNetMgr( this ),
   wordFinder( this ),
-  newReleaseCheckTimer( this )
+  newReleaseCheckTimer( this ),
+  wordListSelChanged( false )
 {
   applyQtStyleSheet( cfg.preferences.displayStyle );
 
@@ -457,6 +458,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
            this, SLOT( wordListSelectionChanged() ) );
+
+  connect( ui.wordList, SIGNAL( itemClicked( QListWidgetItem * ) ),
+           this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
 
   connect( ui.dictsList, SIGNAL( itemSelectionChanged() ),
            this, SLOT( dictsListSelectionChanged() ) );
@@ -1898,7 +1902,10 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
 void MainWindow::wordListItemActivated( QListWidgetItem * item )
 {
-  showTranslationFor( item->text() );
+  if( wordListSelChanged )
+    wordListSelChanged = false;
+  else
+    showTranslationFor( item->text() );
 }
 
 void MainWindow::wordListSelectionChanged()
@@ -1906,7 +1913,10 @@ void MainWindow::wordListSelectionChanged()
   QList< QListWidgetItem * > selected = ui.wordList->selectedItems();
 
   if ( selected.size() )
-    wordListItemActivated( selected.front() );
+  {
+    wordListSelChanged = true;
+    showTranslationFor( selected.front()->text() );
+  }
 }
 
 void MainWindow::dictsListItemActivated( QListWidgetItem * item )
