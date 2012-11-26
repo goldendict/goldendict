@@ -44,6 +44,24 @@ namespace
   }
 }
 
+bool ArticleNetworkAccessManager::RelativeUrl2Absolute( QUrl &url, QUrl const &baseurl )
+{
+    if(url.scheme().isEmpty())
+    {
+        if(url.host().isEmpty())
+        {
+            if(url.toString().indexOf("/")!=0)
+            {
+                url.setPath(baseurl.path().left(baseurl.path().lastIndexOf("/"))+"/"+url.path());
+            }
+            url.setHost(baseurl.host());
+        }
+        url.setScheme(baseurl.scheme());
+        return true;
+    }
+    return false;
+}
+
 QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
                                                             QNetworkRequest const & req,
                                                             QIODevice * outgoingData )
@@ -71,6 +89,12 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 
     if ( dr.get() )
       return new ArticleResourceReply( this, req, dr, contentType );
+    if ( req.url().hasQueryItem( POSTQUERYITEM ) )
+    {
+        QNetworkRequest postReq( req );
+        postReq.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded" );
+        return QNetworkAccessManager::post ( postReq , postReq.url().encodedQuery() );
+    }
   }
 
   // Check the Referer. If the user has opted-in to block elements from external

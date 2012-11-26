@@ -1,6 +1,6 @@
 body
 {
-	background: white;
+	background: white!important; /*fix for noiframe website style*/;
 	font-size: 13px;
 }
 

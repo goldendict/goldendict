@@ -13,7 +13,9 @@
 #include "ex.hh"
 #include "mutex.hh"
 #include "wstring.hh"
-
+#ifndef POSTQUERYITEM
+#define POSTQUERYITEM "gdpost"
+#endif
 /// Abstract dictionary-related stuff
 namespace Dictionary {
 

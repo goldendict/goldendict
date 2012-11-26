@@ -2,7 +2,7 @@
 
 body
 {
-  background: white;
+  background: white!important; /*fix for noiframe website style*/;
 }
 
 /* Hide audio icons */

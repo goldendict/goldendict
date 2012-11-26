@@ -7,7 +7,6 @@
 #include <QtNetwork>
 #include "dictionary.hh"
 #include "article_maker.hh"
-
 using std::vector;
 
 /// A custom QNetworkAccessManager version which fetches images from the
@@ -37,7 +36,7 @@ public:
   /// The function can optionally set the Content-Type header correspondingly.
   sptr< Dictionary::DataRequest > getResource( QUrl const & url,
                                                QString & contentType );
-
+  static bool RelativeUrl2Absolute( QUrl &url, QUrl const &baseurl );
 protected:
 
   virtual QNetworkReply * createRequest( Operation op,
