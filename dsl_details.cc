@@ -1049,8 +1049,18 @@ void expandTildes( wstring & str, wstring const & tildeReplacement )
     else
     if ( str[ x ] == L'~' )
     {
-      str.replace( x, 1, tildeReplacement );
-      x += tildeReplacement.size();
+      if( x > 0 && str[ x - 1 ] == '^' && ( x < 2 || str[ x - 2 ] != '\\' ) )
+      {
+        str.replace( x - 1, 2, tildeReplacement );
+        str[ x - 1 ] = QChar( str[ x - 1 ] ).isUpper() ? QChar::toLower( str[ x - 1 ] )
+                                                       : QChar::toUpper( str[ x - 1 ] );
+        x = x - 1 + tildeReplacement.size();
+      }
+      else
+      {
+        str.replace( x, 1, tildeReplacement );
+        x += tildeReplacement.size();
+      }
     }
     else
       ++x;
