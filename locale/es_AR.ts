@@ -176,7 +176,7 @@
     <message>
         <location filename="../articleview.cc" line="653"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Definición de diccionario &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="657"/>
@@ -231,13 +231,13 @@
     <message>
         <location filename="../articleview.cc" line="1062"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar &quot;%1&quot; a búsqueda</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1068"/>
         <location filename="../articleview.cc" line="1103"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Agregar &quot;%1&quot; a historial</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1082"/>
@@ -262,12 +262,12 @@
     <message>
         <location filename="../articleview.cc" line="1270"/>
         <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Biblioteca Bass no encontrada.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1275"/>
         <source>Bass library can&apos;t play this sound.</source>
-        <translation type="unfinished"></translation>
+        <translation>La biblioteca Bass no puede reproducir este sonido.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1310"/>
@@ -413,32 +413,32 @@
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">Total de artículos:</translation>
+        <translation>Total de artículos:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation type="unfinished">Traduce de:</translation>
+        <translation>Traduce de:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
         <source>Total words:</source>
-        <translation type="unfinished">Total de palabras:</translation>
+        <translation>Total de palabras:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="71"/>
         <source>Translates to:</source>
-        <translation type="unfinished">Traduce a:</translation>
+        <translation>Traduce a:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="88"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Archivos que componen este diccionario:</translation>
+        <translation>Archivos que componen este diccionario:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="163"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción:</translation>
     </message>
 </context>
 <context>
@@ -464,7 +464,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="99"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Información del diccionario</translation>
     </message>
 </context>
 <context>
@@ -2744,27 +2744,27 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.cc" line="2876"/>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar historial desde archivo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2920"/>
         <source>Imported from file: </source>
-        <translation type="unfinished"></translation>
+        <translation>Importado desde archivo:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2930"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de importación: datos inválidos en el archivo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2934"/>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Importación de historial finalizada</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2937"/>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Error de importación: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="229"/>
@@ -2825,7 +2825,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.cc" line="2856"/>
         <source>History export complete</source>
-        <translation>Exportación de histsorial finalizada</translation>
+        <translation>Exportación de historial finalizada</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2859"/>
@@ -3044,7 +3044,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.ui" line="422"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="427"/>
@@ -3054,7 +3054,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.ui" line="432"/>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
@@ -3102,7 +3102,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../sources.cc" line="397"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ícono</translation>
     </message>
 </context>
 <context>
@@ -3163,7 +3163,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../orderandprops.ui" line="245"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="325"/>
@@ -3327,12 +3327,12 @@ Sin embargo, si esta opción se activa se cerrará la ventana principal.</transl
     <message>
         <location filename="../preferences.ui" line="276"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar esta opción si desea seleccionar palabras por medio de un click simple</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="279"/>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar palabra con un click simple</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="328"/>
@@ -3610,12 +3610,12 @@ pero debería funcionar con la mayoría de los formatos de audio.</translation>
         <location filename="../preferences.ui" line="817"/>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir audio vía la biblioteca Bass. Opción óptima. Para utilizar este modo debe copiar bass.dll (http://www.un4seen.com) en la carpeta de GoldenDict.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="821"/>
         <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir vía biblioteca Bass</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="830"/>
@@ -3683,32 +3683,32 @@ No necesita seleccionar esta opción si no utiliza tales programas.</translation
     <message>
         <location filename="../preferences.ui" line="1113"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historial</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1119"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar esta opción para guardar el historial de las palabras traducidas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1122"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar &amp;historial</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1132"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Artículos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1138"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar esta opción para expandir siempre las partes opcionales de artículos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1141"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir &amp;partes opcionales</translation>
     </message>
     <message>
         <source>Program to play audio files:</source>
