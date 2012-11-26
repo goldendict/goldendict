@@ -1063,6 +1063,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( sendWordToHistory( QString ) ),
            this, SLOT( addWordToHistory( QString ) ) );
 
+  connect( view, SIGNAL( sendWordToInputLine( QString const & ) ),
+           this, SLOT(sendWordToInputLine( QString const & ) ) );
+
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
   int index = cfg.preferences.newTabsOpenAfterCurrentOne ?
@@ -3050,6 +3053,12 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
     showDictionaryInfo( id );
     scanPopup.get()->blockSignals( false );
   }
+}
+
+void MainWindow::sendWordToInputLine( const QString & word )
+{
+  ui.translateLine->clear();
+  ui.translateLine->setText( word );
 }
 
 #ifdef Q_OS_WIN32

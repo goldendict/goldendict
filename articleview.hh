@@ -205,6 +205,8 @@ signals:
   /// Signal to set optional parts expand mode
   void setExpandMode ( bool  expand );
 
+  void sendWordToInputLine( QString const & word );
+
 public slots:
 
   void on_searchPrevious_clicked();

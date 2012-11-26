@@ -999,6 +999,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * maxDictionaryRefsAction = 0;
   QAction * addWordToHistoryAction = 0;
   QAction * addHeaderToHistoryAction = 0;
+  QAction * sendWordToInputLineAction = 0;
 
   QUrl targetUrl( r.linkUrl() );
   Contexts contexts;
@@ -1047,6 +1048,11 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
                                            arg( ui.definition->selectedText() ),
                                            &menu );
       menu.addAction( lookupSelectionNewTab );
+
+      sendWordToInputLineAction = new QAction( tr( "Send \"%1\" to input line" ).
+                                               arg( ui.definition->selectedText() ),
+                                               &menu );
+      menu.addAction( sendWordToInputLineAction );
     }
 
     addWordToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
@@ -1164,6 +1170,9 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       emit forceAddWordToHistory( selectedText );
     if ( result == addHeaderToHistoryAction )
       emit forceAddWordToHistory( ui.definition->title() );
+    else
+    if( result == sendWordToInputLineAction )
+      emit sendWordToInputLine( selectedText );
     else
     if ( !popupView && result == followLinkNewTab )
       emit openLinkInNewTab( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );

@@ -348,6 +348,8 @@ private slots:
   /// Add word to history even if history is disabled in options
   void forceAddWordToHistory( const QString & word);
 
+  void sendWordToInputLine( QString const & word );
+
 signals:
   /// Set optional parts expand mode for all tabs
   void setExpandOptionalParts( bool expand );
