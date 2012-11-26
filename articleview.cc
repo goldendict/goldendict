@@ -644,7 +644,17 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
     {
       def = def.mid( 1 );
     }
-    msg = tr( "Definition: %1").arg( def );
+
+    if( url.hasQueryItem( "dict" ) )
+    {
+      // Link to other dictionary
+      QString dictName( url.queryItemValue( "dict" ) );
+      if( !dictName.isEmpty() )
+        msg = tr( "Definition from dictionary \"%1\": %2" ).arg( dictName ).arg( def );
+    }
+
+    if( msg.isEmpty() )
+      msg = tr( "Definition: %1").arg( def );
   }
   else
   {
