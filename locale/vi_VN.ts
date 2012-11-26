@@ -232,6 +232,14 @@
         <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Definition from dictionary &quot;%1&quot;: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send &quot;%1&quot; to input line</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
