@@ -116,7 +116,7 @@ ArticleDom::ArticleDom( wstring const & str ):
           stack.pop_back();
           textNode = 0;
 
-          Node link( Node::Tag(), GD_NATIVE_TO_WS( L"ref" ), wstring() );
+          Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
           link.push_back( Node( Node::Text(), linkTo ) );
 
           if ( stack.empty() )

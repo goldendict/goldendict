@@ -915,6 +915,21 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
   }
   else
+  if ( node.tagName == GD_NATIVE_TO_WS( L"@" ) )
+  {
+    // Special case - insided card header was not parsed
+
+    QUrl url;
+
+    url.setScheme( "gdlookup" );
+    url.setHost( "localhost" );
+    wstring nodeStr = node.renderAsText();
+    ArticleDom nodeDom( nodeStr );
+    url.setPath( gd::toQString( nodeDom.root.renderAsText() ) );
+
+    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( nodeDom.root ) + "</a>";
+  }
+  else
   if ( node.tagName == GD_NATIVE_TO_WS( L"sub" ) )
   {
     result += "<sub>" + processNodeChildren( node ) + "</sub>";
