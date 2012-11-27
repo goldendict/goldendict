@@ -645,6 +645,30 @@ void DslDictionary::loadArticle( uint32_t address,
         }
       }
 
+      if( !rawHeadword.empty() && isDslWs( rawHeadword[ 0 ] ) )
+      {
+        // Headword of the insided card
+        // Take it from card if no '~' presented
+        string::size_type pos = rawHeadword.find( L'@' );
+        if( pos != string::npos )
+        {
+          wstring head = Folding::trimWhitespace( rawHeadword.substr( pos + 1 ) );
+          string::size_type tildaPos = head.find( L'~' );
+          while( tildaPos != string::npos )
+          {
+            if( tildaPos == 0 || head[ tildaPos ] != L'\\' )
+              break;
+            tildaPos = head.find( L'~', tildaPos + 1 );
+          }
+          if( tildaPos == string::npos )
+          {
+            processUnsortedParts( head, false );
+            displayedHeadword = head;
+            foundDisplayedHeadword = true;
+          }
+        }
+      }
+
       if ( !foundDisplayedHeadword )
       {
         ++headwordIndex;
