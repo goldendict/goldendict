@@ -501,6 +501,8 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
     addTab( new DictGroupWidget( this, *allDicts, groups[ x ] ), escapeAmps( groups[ x ].name ) );
 
   nextId = groups.nextId;
+
+  setUsesScrollButtons( count() > 3 );
 }
 
 /// Creates groups from what is currently set up
