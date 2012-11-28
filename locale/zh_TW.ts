@@ -339,6 +339,10 @@
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditDictionaries</name>
@@ -1800,6 +1804,14 @@
     </message>
     <message>
         <source>Imported from file: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dictionary info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
