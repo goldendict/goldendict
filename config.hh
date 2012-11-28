@@ -400,6 +400,8 @@ struct Class
 
   unsigned short maxDictionaryRefsInContextMenu;
 
+  QString editDictionaryCommandLine; // Command line to call external editor for dictionary
+
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
            pinPopupWindow( false ), showingDictBarNames( false ),
            usingSmallIconsInToolbars( false ), maxDictionaryRefsInContextMenu( 20 )

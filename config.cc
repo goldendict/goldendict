@@ -740,6 +740,9 @@ Class load() throw( exError )
   if ( !root.namedItem( "historyExportPath" ).isNull() )
     c.historyExportPath = root.namedItem( "historyExportPath" ).toElement().text();
 
+  if ( !root.namedItem( "editDictionaryCommandLine" ).isNull() )
+    c.editDictionaryCommandLine = root.namedItem( "editDictionaryCommandLine" ).toElement().text();
+
   return c;
 }
 
@@ -1360,6 +1363,11 @@ void save( Class const & c ) throw( exError )
         opt.appendChild( dd.createTextNode( c.historyExportPath ) );
         root.appendChild( opt );
     }
+
+    opt = dd.createElement( "editDictionaryCommandLine" );
+    opt.appendChild( dd.createTextNode( c.editDictionaryCommandLine ) );
+    root.appendChild( opt );
+
   }
 
   QByteArray result( dd.toByteArray() );

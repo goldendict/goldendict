@@ -21,6 +21,8 @@
 #include <QDebug>
 #include <QTextStream>
 #include "dictinfo.hh"
+#include "fsencoding.hh"
+#include <QProcess>
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -61,7 +63,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab( this ),
   cfg( cfg_ ),
   history( History::Load(), cfg_.preferences.maxStringsInHistory ),
-  dictionaryBar( this, configEvents ),
+  dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites ),
@@ -3048,10 +3050,50 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
   QListWidgetItem *item = ui.dictsList->itemAt( pos );
   if( item )
   {
-    scanPopup.get()->blockSignals( true );
     QString id = item->data( Qt::UserRole ).toString();
-    showDictionaryInfo( id );
-    scanPopup.get()->blockSignals( false );
+    if( cfg.editDictionaryCommandLine.isEmpty() )
+    {
+      scanPopup.get()->blockSignals( true );
+      showDictionaryInfo( id );
+      scanPopup.get()->blockSignals( false );
+    }
+    else
+    {
+      QMenu menu( ui.dictsList );
+      QAction * infoAction = menu.addAction( tr( "Dictionary info" ) );
+      QAction * editAction = menu.addAction( tr( "Edit dictionary" ) );
+
+      QAction * result = menu.exec( ui.dictsList->mapToGlobal( pos ) );
+
+      if( result && result == infoAction )
+      {
+        scanPopup.get()->blockSignals( true );
+        showDictionaryInfo( id );
+        scanPopup.get()->blockSignals( false );
+      }
+      else
+      if( result && result == editAction )
+      {
+        for( unsigned i = 0; i < dictionaries.size(); i++ )
+        {
+          if( id.compare( dictionaries[ i ]->getId().c_str() ) == 0 )
+          {
+            QString command( cfg.editDictionaryCommandLine );
+            QString dictName = FsEncoding::decode( dictionaries[ i ]->getDictionaryFilenames().at( 0 ).c_str() );
+
+            if( dictName.endsWith( ".ifo" ) ) // Stardict dictionary
+              dictName = FsEncoding::decode( dictionaries[ i ]->getDictionaryFilenames().at( 2 ).c_str() );
+
+            command.replace( "%GDDICT%", "\"" + dictName + "\"" );
+
+            if( !QProcess::startDetached( command ) )
+              QApplication::beep();
+
+            break;
+          }
+        }
+      }
+    }
   }
 }
 

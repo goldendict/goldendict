@@ -42,7 +42,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   escapeAction( this ),
   switchExpandModeAction( this ),
   wordFinder( this ),
-  dictionaryBar( this, configEvents ),
+  dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine ),
   mouseEnteredOnce( false ),
   mouseIntercepted( false ),
   hideTimer( this )

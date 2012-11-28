@@ -4,6 +4,7 @@
 #include <QToolBar>
 #include <QSize>
 #include <QList>
+#include <QString>
 #include "dictionary.hh"
 #include "config.hh"
 
@@ -17,7 +18,7 @@ public:
 
   /// Constructs an empty dictionary bar
   DictionaryBar( QWidget * parent,
-                 Config::Events & );
+                 Config::Events &, QString const & _editDictionaryCommand );
 
   /// Sets dictionaries to be displayed in the bar. Their statuses (enabled/
   /// disabled) are taken from the configuration data.
@@ -45,7 +46,8 @@ private:
   Config::MutedDictionaries * mutedDictionaries;
   Config::Events & configEvents;
   Config::MutedDictionaries storedMutedSet;
-
+  QString editDictionaryCommand;
+  std::vector< sptr< Dictionary::Class > > allDictionaries;
   /// All the actions we have added to the toolbar
   QList< QAction * > dictActions;
 

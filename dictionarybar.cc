@@ -3,15 +3,18 @@
 #include <QApplication>
 #include <QMenu>
 #include <QContextMenuEvent>
+#include <QProcess>
 #include "dprintf.hh"
+#include "fsencoding.hh"
 
 using std::vector;
 
 DictionaryBar::DictionaryBar( QWidget * parent,
-                              Config::Events & events ):
+                              Config::Events & events, QString const & _editDictionaryCommand ):
   QToolBar( tr( "Dictionary Bar" ), parent ),
   mutedDictionaries( 0 ),
   configEvents( events ),
+  editDictionaryCommand( _editDictionaryCommand ),
   use14x21( false )
 {
   setObjectName( "dictionaryBar" );
@@ -41,6 +44,9 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
                                      const & dictionaries )
 {
   setUpdatesEnabled( false );
+
+  allDictionaries.clear();
+  allDictionaries = dictionaries;
 
   clear();
   dictActions.clear();
@@ -98,6 +104,10 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
   if( dictAction )
     infoAction =  menu.addAction( tr( "Dictionary info" ) );
 
+  QAction * editDictAction = NULL;
+  if( !editDictionaryCommand.isEmpty() )
+    editDictAction = menu.addAction( tr( "Edit dictionary" ) );
+
   if ( !dictActions.empty() )
     menu.addSeparator();
 
@@ -124,6 +134,29 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
     QString id = dictAction->data().toString();
     emit showDictionaryInfo( id );
     return;
+  }
+
+  if( result && result == editDictAction )
+  {
+    QString id = dictAction->data().toString();
+    for( unsigned i = 0; i < allDictionaries.size(); i++ )
+    {
+      if( id.compare( allDictionaries[ i ]->getId().c_str() ) == 0 )
+      {
+        QString command( editDictionaryCommand );
+        QString dictName = FsEncoding::decode( allDictionaries[ i ]->getDictionaryFilenames().at( 0 ).c_str() );
+
+        if( dictName.endsWith( ".ifo" ) ) // Stardict dictionary
+          dictName = FsEncoding::decode( allDictionaries[ i ]->getDictionaryFilenames().at( 2 ).c_str() );
+
+        command.replace( "%GDDICT%", "\"" + dictName + "\"" );
+
+        if( !QProcess::startDetached( command ) )
+          QApplication::beep();
+
+        break;
+      }
+    }
   }
 
   if ( result == editAction )
