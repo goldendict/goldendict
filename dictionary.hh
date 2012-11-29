@@ -375,6 +375,9 @@ public:
   // Return dictionary description if presented
   virtual QString const& getDescription();
 
+  // Return dictionary main file name
+  virtual QString getMainFilename();
+
   virtual ~Class()
   {}
 };

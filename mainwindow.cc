@@ -3051,7 +3051,21 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
   if( item )
   {
     QString id = item->data( Qt::UserRole ).toString();
-    if( cfg.editDictionaryCommandLine.isEmpty() )
+    QString dictFilename;
+
+    if( !cfg.editDictionaryCommandLine.isEmpty() )
+    {
+      for( unsigned i = 0; i < dictionaries.size(); i++ )
+      {
+        if( id.compare( dictionaries[ i ]->getId().c_str() ) == 0 )
+        {
+          dictFilename = dictionaries[ i ]->getMainFilename();
+          break;
+        }
+      }
+    }
+
+    if( cfg.editDictionaryCommandLine.isEmpty() || dictFilename.isEmpty() )
     {
       scanPopup.get()->blockSignals( true );
       showDictionaryInfo( id );
@@ -3074,24 +3088,10 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
       else
       if( result && result == editAction )
       {
-        for( unsigned i = 0; i < dictionaries.size(); i++ )
-        {
-          if( id.compare( dictionaries[ i ]->getId().c_str() ) == 0 )
-          {
-            QString command( cfg.editDictionaryCommandLine );
-            QString dictName = FsEncoding::decode( dictionaries[ i ]->getDictionaryFilenames().at( 0 ).c_str() );
-
-            if( dictName.endsWith( ".ifo" ) ) // Stardict dictionary
-              dictName = FsEncoding::decode( dictionaries[ i ]->getDictionaryFilenames().at( 2 ).c_str() );
-
-            command.replace( "%GDDICT%", "\"" + dictName + "\"" );
-
-            if( !QProcess::startDetached( command ) )
-              QApplication::beep();
-
-            break;
-          }
-        }
+        QString command( cfg.editDictionaryCommandLine );
+        command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
+        if( !QProcess::startDetached( command ) )
+          QApplication::beep();
       }
     }
   }

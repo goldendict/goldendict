@@ -153,6 +153,11 @@ QString const& Class::getDescription()
     return dictionaryDescription;
 }
 
+QString Class::getMainFilename()
+{
+  return QString();
+}
+
 string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
 {
   std::vector< string > sortedList;

@@ -100,13 +100,29 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
       menu.addAction( QIcon( ":/icons/bookcase.png" ), tr( "Edit this group" ) );
 
   QAction * infoAction = NULL;
+  QAction * editDictAction = NULL;
+  QString dictFilename;
+
   QAction * dictAction = actionAt( event->x(), event->y() );
   if( dictAction )
+  {
     infoAction =  menu.addAction( tr( "Dictionary info" ) );
 
-  QAction * editDictAction = NULL;
-  if( !editDictionaryCommand.isEmpty() )
-    editDictAction = menu.addAction( tr( "Edit dictionary" ) );
+    if( !editDictionaryCommand.isEmpty() )
+    {
+      QString id = dictAction->data().toString();
+      for( unsigned i = 0; i < allDictionaries.size(); i++ )
+      {
+        if( id.compare( allDictionaries[ i ]->getId().c_str() ) == 0 )
+        {
+          dictFilename = allDictionaries[ i ]->getMainFilename();
+          break;
+        }
+      }
+      if( !dictFilename.isEmpty() )
+        editDictAction = menu.addAction( tr( "Edit dictionary" ) );
+    }
+  }
 
   if ( !dictActions.empty() )
     menu.addSeparator();
@@ -138,25 +154,10 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
 
   if( result && result == editDictAction )
   {
-    QString id = dictAction->data().toString();
-    for( unsigned i = 0; i < allDictionaries.size(); i++ )
-    {
-      if( id.compare( allDictionaries[ i ]->getId().c_str() ) == 0 )
-      {
-        QString command( editDictionaryCommand );
-        QString dictName = FsEncoding::decode( allDictionaries[ i ]->getDictionaryFilenames().at( 0 ).c_str() );
-
-        if( dictName.endsWith( ".ifo" ) ) // Stardict dictionary
-          dictName = FsEncoding::decode( allDictionaries[ i ]->getDictionaryFilenames().at( 2 ).c_str() );
-
-        command.replace( "%GDDICT%", "\"" + dictName + "\"" );
-
-        if( !QProcess::startDetached( command ) )
-          QApplication::beep();
-
-        break;
-      }
-    }
+    QString command( editDictionaryCommand );
+    command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
+    if( !QProcess::startDetached( command ) )
+      QApplication::beep();
   }
 
   if ( result == editAction )

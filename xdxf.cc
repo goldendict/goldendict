@@ -163,6 +163,8 @@ public:
 
   virtual QString const& getDescription();
 
+  virtual QString getMainFilename();
+
 private:
 
   void loadIcon();
@@ -364,6 +366,11 @@ QString const& XdxfDictionary::getDescription()
         }
     }
     return dictionaryDescription;
+}
+
+QString XdxfDictionary::getMainFilename()
+{
+  return FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
 }
 
 /// XdxfDictionary::getArticle()

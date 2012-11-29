@@ -205,6 +205,8 @@ public:
 
   virtual QString const& getDescription();
 
+  virtual QString getMainFilename();
+
 private:
 
   virtual string const & ensureInitDone();
@@ -1039,6 +1041,11 @@ QString const& DslDictionary::getDescription()
         }
     }
     return dictionaryDescription;
+}
+
+QString DslDictionary::getMainFilename()
+{
+  return FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
 }
 
 #if 0
