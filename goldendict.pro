@@ -48,7 +48,7 @@ win32 {
         -lhunspell-1.3.2
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
-    LIBS += -Lwinlibs/lib
+    LIBS += -L$${PWD}/winlibs/lib
 
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
@@ -340,22 +340,27 @@ TRANSLATIONS += locale/ru_RU.ts \
 # Build version file
 !isEmpty( hasGit ) {
   QMAKE_EXTRA_TARGETS += revtarget
-  PRE_TARGETDEPS      += version.txt
-  revtarget.target     = version.txt
-  revtarget.commands   = git describe --tags --always --dirty > $$revtarget.target
-  revtarget.depends = $$SOURCES $$HEADERS $$FORMS
+  PRE_TARGETDEPS      += $$PWD/version.txt
+  revtarget.target     = $$PWD/version.txt
+  revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
+  ALL_SOURCES = $$SOURCES $$HEADERS $$FORMS
+  for(src, ALL_SOURCES) {
+    QUALIFIED_SOURCES += $${PWD}/$${src}
+  }
+  revtarget.depends = $$QUALIFIED_SOURCES
 }
 
 # This makes qmake generate translations
+
 win32:# Windows doesn't seem to have *-qt4 symlinks
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
 updateqm.input = TRANSLATIONS
-updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
+updateqm.output = locale/${QMAKE_FILE_BASE}.qm
 updateqm.commands = $$QMAKE_LRELEASE \
     ${QMAKE_FILE_IN} \
     -qm \
-    ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
+    ${QMAKE_FILE_OUT}
 updateqm.CONFIG += no_link
 QMAKE_EXTRA_COMPILERS += updateqm
 TS_OUT = $$TRANSLATIONS
