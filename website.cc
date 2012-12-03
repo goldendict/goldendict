@@ -6,6 +6,8 @@
 #include "utf8.hh"
 #include <QUrl>
 #include <QTextCodec>
+#include <Qdir>
+#include <QFileInfo>
 
 namespace WebSite {
 
@@ -17,14 +19,17 @@ class WebSiteDictionary: public Dictionary::Class
 {
   string name;
   QByteArray urlTemplate;
+  QString iconFilename;
 
 public:
 
   WebSiteDictionary( string const & id, string const & name_,
-                     QString const & urlTemplate_ ):
+                     QString const & urlTemplate_,
+                     QString const & iconFilename_ ):
     Dictionary::Class( id, vector< string >() ),
     name( name_ ),
-    urlTemplate( QUrl( urlTemplate_ ).toEncoded() )
+    urlTemplate( QUrl( urlTemplate_ ).toEncoded() ),
+    iconFilename( iconFilename_ )
   {
   }
 
@@ -50,9 +55,7 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw()
-  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/internet.png");
-    dictionaryIconLoaded = true; }
+  virtual void loadIcon() throw();
 };
 
 sptr< WordSearchRequest > WebSiteDictionary::prefixMatch( wstring const & /*word*/,
@@ -119,6 +122,19 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
   return dr;
 }
 
+void WebSiteDictionary::loadIcon() throw()
+{
+  if( !iconFilename.isEmpty() )
+  {
+    QFileInfo fInfo(  QDir( Config::getConfigDir() ), iconFilename );
+    if( fInfo.isFile() )
+      loadIconFromFile( fInfo.absoluteFilePath(), true );
+  }
+  if( dictionaryIcon.isNull() )
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/internet.png");
+  dictionaryIconLoaded = true;
+}
+
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & ws )
@@ -131,7 +147,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & w
     if ( ws[ x ].enabled )
       result.push_back( new WebSiteDictionary( ws[ x ].id.toUtf8().data(),
                                                ws[ x ].name.toUtf8().data(),
-                                               ws[ x ].url ) );
+                                               ws[ x ].url,
+                                               ws[ x ].iconFilename ) );
   }
 
   return result;

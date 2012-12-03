@@ -47,6 +47,7 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.webSites->resizeColumnToContents( 0 );
   ui.webSites->resizeColumnToContents( 1 );
   ui.webSites->resizeColumnToContents( 2 );
+  ui.webSites->resizeColumnToContents( 3 );
 
   ui.programs->setTabKeyNavigation( true );
   ui.programs->setModel( &programsModel );
@@ -536,7 +537,7 @@ int WebSitesModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 3;
+    return 4;
 }
 
 QVariant WebSitesModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
@@ -550,6 +551,8 @@ QVariant WebSitesModel::headerData( int section, Qt::Orientation /*orientation*/
         return tr( "Name" );
       case 2:
         return tr( "Address" );
+      case 3:
+        return tr( "Icon" );
       default:
         return QVariant();
     }
@@ -570,6 +573,8 @@ QVariant WebSitesModel::data( QModelIndex const & index, int role ) const
         return webSites[ index.row() ].name;
       case 2:
         return webSites[ index.row() ].url;
+      case 3:
+        return webSites[ index.row() ].iconFilename;
       default:
         return QVariant();
     }
@@ -608,6 +613,10 @@ bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
         return true;
       case 2:
         webSites[ index.row() ].url =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 3:
+        webSites[ index.row() ].iconFilename =  value.toString();
         dataChanged( index, index );
         return true;
       default:

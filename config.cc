@@ -184,11 +184,11 @@ WebSites makeDefaultWebSites()
 {
   WebSites ws;
 
-  ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "http://www.google.com/dictionary?aq=f&langpair=en|en&q=%GDWORD%&hl=en", false ) );
-  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "http://www.urbandictionary.com/define.php?term=%GDWORD%", false ) );
-  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "http://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false ) );
-  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%", false ) );
-  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false ) );
+  ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "http://www.google.com/dictionary?aq=f&langpair=en|en&q=%GDWORD%&hl=en", false, "" ) );
+  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "http://www.urbandictionary.com/define.php?term=%GDWORD%", false, "" ) );
+  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "http://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false, "" ) );
+  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%", false, "" ) );
+  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false, "" ) );
 
   return ws;
 }
@@ -581,6 +581,7 @@ Class load() throw( exError )
       w.name = ws.attribute( "name" );
       w.url = ws.attribute( "url" );
       w.enabled = ( ws.attribute( "enabled" ) == "1" );
+      w.iconFilename = ws.attribute( "icon" );
 
       c.webSites.push_back( w );
     }
@@ -1055,6 +1056,10 @@ void save( Class const & c ) throw( exError )
       QDomAttr enabled = dd.createAttribute( "enabled" );
       enabled.setValue( i->enabled ? "1" : "0" );
       ws.setAttributeNode( enabled );
+
+      QDomAttr icon = dd.createAttribute( "icon" );
+      icon.setValue( i->iconFilename );
+      ws.setAttributeNode( icon );
     }
   }
 

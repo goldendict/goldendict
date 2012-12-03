@@ -220,17 +220,18 @@ struct WebSite
 {
   QString id, name, url;
   bool enabled;
+  QString iconFilename;
 
   WebSite(): enabled( false )
   {}
 
   WebSite( QString const & id_, QString const & name_, QString const & url_,
-           bool enabled_ ):
-    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ) {}
+           bool enabled_, QString iconFilename_ ):
+    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ), iconFilename( iconFilename_ ) {}
 
   bool operator == ( WebSite const & other ) const
   { return id == other.id && name == other.name && url == other.url &&
-           enabled == other.enabled; }
+           enabled == other.enabled && iconFilename == other.iconFilename; }
 };
 
 /// All the WebSites
