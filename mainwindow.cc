@@ -2615,12 +2615,12 @@ void MainWindow::unzoom()
 
 void MainWindow::applyZoomFactor()
 {
-  if ( cfg.preferences.zoomFactor >= 3 )
-    cfg.preferences.zoomFactor = 3;
+  if ( cfg.preferences.zoomFactor >= 5 )
+    cfg.preferences.zoomFactor = 5;
   else if ( cfg.preferences.zoomFactor <= 0.7 )
     cfg.preferences.zoomFactor = 0.7;
 
-  zoomIn->setEnabled( cfg.preferences.zoomFactor < 3 );
+  zoomIn->setEnabled( cfg.preferences.zoomFactor < 5 );
   zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.7 );
   zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
 
