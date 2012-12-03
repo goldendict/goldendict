@@ -323,24 +323,24 @@ private slots:
   void useSmallIconsInToolbarsTriggered();
   void toggleMenuBarTriggered( bool announce = true );
 
-  void on_clearHistory_activated();
+  void on_clearHistory_triggered();
 
-  void on_newTab_activated();
+  void on_newTab_triggered();
 
-  void on_actionCloseToTray_activated();
+  void on_actionCloseToTray_triggered();
 
-  void on_pageSetup_activated();
-  void on_printPreview_activated();
-  void on_print_activated();
+  void on_pageSetup_triggered();
+  void on_printPreview_triggered();
+  void on_print_triggered();
   void printPreviewPaintRequested( QPrinter * );
 
-  void on_saveArticle_activated();
+  void on_saveArticle_triggered();
 
-  void on_rescanFiles_activated();
+  void on_rescanFiles_triggered();
 
-  void on_showHideHistory_activated();
-  void on_exportHistory_activated();
-  void on_importHistory_activated();
+  void on_showHideHistory_triggered();
+  void on_exportHistory_triggered();
+  void on_importHistory_triggered();
   void focusWordList();
 
   /// Add word to history

@@ -2464,7 +2464,7 @@ void MainWindow::toggleMenuBarTriggered(bool announce)
   menuBar()->setVisible( !cfg.preferences.hideMenubar );
 }
 
-void MainWindow::on_clearHistory_activated()
+void MainWindow::on_clearHistory_triggered()
 {
   history.clear();
   history.save();
@@ -2473,7 +2473,7 @@ void MainWindow::on_clearHistory_activated()
       ui.wordList->clear();
 }
 
-void MainWindow::on_newTab_activated()
+void MainWindow::on_newTab_triggered()
 {
   addNewTab();
 }
@@ -2505,12 +2505,12 @@ void MainWindow::setAutostart(bool autostart)
 #endif
 }
 
-void MainWindow::on_actionCloseToTray_activated()
+void MainWindow::on_actionCloseToTray_triggered()
 {
   toggleMainWindow( !cfg.preferences.enableTrayIcon );
 }
 
-void MainWindow::on_pageSetup_activated()
+void MainWindow::on_pageSetup_triggered()
 {
   if ( getPrinter().isValid() )
   {
@@ -2523,7 +2523,7 @@ void MainWindow::on_pageSetup_activated()
                            tr( "No printer is available. Please install one first." ) );
 }
 
-void MainWindow::on_printPreview_activated()
+void MainWindow::on_printPreview_triggered()
 {
   QPrintPreviewDialog dialog( &getPrinter(), this );
 
@@ -2533,7 +2533,7 @@ void MainWindow::on_printPreview_activated()
   dialog.exec();
 }
 
-void MainWindow::on_print_activated()
+void MainWindow::on_print_triggered()
 {
   QPrintDialog dialog( &getPrinter(), this );
 
@@ -2554,7 +2554,7 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
   view->print( printer );
 }
 
-void MainWindow::on_saveArticle_activated()
+void MainWindow::on_saveArticle_triggered()
 {
   ArticleView *view = getCurrentArticleView();
 
@@ -2580,7 +2580,7 @@ void MainWindow::on_saveArticle_activated()
   }
 }
 
-void MainWindow::on_rescanFiles_activated()
+void MainWindow::on_rescanFiles_triggered()
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
@@ -2732,7 +2732,7 @@ void MainWindow::wordReceived( const QString & word)
     translateInputFinished();
 }
 
-void MainWindow::on_showHideHistory_activated()
+void MainWindow::on_showHideHistory_triggered()
 {
 static bool needHideSearchPane;
     if( showHistory )
@@ -2802,7 +2802,7 @@ static bool needHideSearchPane;
     }
 }
 
-void MainWindow::on_exportHistory_activated()
+void MainWindow::on_exportHistory_triggered()
 {
     QString exportPath;
     if( cfg.historyExportPath.isEmpty() )
@@ -2863,7 +2863,7 @@ void MainWindow::on_exportHistory_activated()
     mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
 }
 
-void MainWindow::on_importHistory_activated()
+void MainWindow::on_importHistory_triggered()
 {
     QString importPath;
     if( cfg.historyExportPath.isEmpty() )
