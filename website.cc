@@ -6,7 +6,7 @@
 #include "utf8.hh"
 #include <QUrl>
 #include <QTextCodec>
-#include <Qdir>
+#include <QDir>
 #include <QFileInfo>
 
 namespace WebSite {
