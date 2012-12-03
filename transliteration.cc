@@ -27,9 +27,12 @@ TransliterationDictionary::TransliterationDictionary( string const & id,
                                                       Table const & table_,
                                                       bool caseSensitive_ ):
   Dictionary::Class( id, vector< string >() ),
-  name( name_ ), icon( icon_ ), table( table_ ),
+  name( name_ ), table( table_ ),
   caseSensitive( caseSensitive_ )
-{}
+{
+  dictionaryIcon = dictionaryNativeIcon = icon_;
+  dictionaryIconLoaded = true;
+}
 
 string TransliterationDictionary::getName() throw()
 { return name; }

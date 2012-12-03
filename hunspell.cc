@@ -56,9 +56,6 @@ public:
   virtual unsigned long getWordCount() throw()
   { return 0; }
 
-  virtual QIcon getIcon() throw()
-  { return QIcon(":/icons/icon32_hunspell.png"); }
-
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults )
     throw( std::exception );
@@ -70,6 +67,12 @@ public:
                                           vector< wstring > const & alts,
                                           wstring const & )
     throw( std::exception );
+
+protected:
+
+  virtual void loadIcon() throw()
+  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_hunspell.png");
+    dictionaryIconLoaded = true; }
 
 private:
 

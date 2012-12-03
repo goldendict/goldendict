@@ -121,8 +121,6 @@ class XdxfDictionary: public BtreeIndexing::BtreeDictionary
   IndexedZip resourceZip;
   string dictionaryName;
   map< string, string > abrv;
-  QIcon dictionaryNativeIcon, dictionaryIcon;
-  bool dictionaryIconLoaded;
 
 public:
 
@@ -143,10 +141,6 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
 
-  virtual QIcon getIcon() throw();
-
-  virtual QIcon getNativeIcon() throw();
-
   inline virtual quint32 getLangFrom() const
   { return idxHeader.langFrom; }
 
@@ -165,9 +159,11 @@ public:
 
   virtual QString getMainFilename();
 
-private:
+protected:
 
-  void loadIcon();
+  void loadIcon() throw();
+
+private:
 
   /// Loads the article, storing its headword and formatting the data it has
   /// into an html.
@@ -183,8 +179,7 @@ XdxfDictionary::XdxfDictionary( string const & id,
                                 vector< string > const & dictionaryFiles ):
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
-  idxHeader( idx.read< IdxHeader >() ),
-  dictionaryIconLoaded( false )
+  idxHeader( idx.read< IdxHeader >() )
 {
   // Read the dictionary name
 
@@ -267,19 +262,7 @@ XdxfDictionary::~XdxfDictionary()
     dict_data_close( dz );
 }
 
-QIcon XdxfDictionary::getNativeIcon() throw()
-{
-  loadIcon();
-  return dictionaryNativeIcon;
-}
-
-QIcon XdxfDictionary::getIcon() throw()
-{
-  loadIcon();
-  return dictionaryIcon;
-}
-
-void XdxfDictionary::loadIcon()
+void XdxfDictionary::loadIcon() throw()
 {
   if ( dictionaryIconLoaded )
     return;
@@ -292,44 +275,14 @@ void XdxfDictionary::loadIcon()
   fileName = baseInfo.absoluteDir().absoluteFilePath( "icon32.png" );
   QFileInfo info( fileName );
 
-  if( !info.exists() )
+  if( !info.isFile() )
   {
       fileName = baseInfo.absoluteDir().absoluteFilePath( "icon16.png" );
       info = QFileInfo( fileName );
   }
 
-  if ( info.exists() )
-  {
-    QImage img( fileName );
-
-    if ( !img.isNull() )
-    {
-      // Load successful
-
-      // Apply the color key
-
-      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
-                                                    Qt::MaskOutColor ) );
-
-      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
-
-      // Transform it to be square
-      int max = img.width() > img.height() ? img.width() : img.height();
-
-      QImage result( max, max, QImage::Format_ARGB32 );
-      result.fill( 0 ); // Black transparent
-
-      QPainter painter( &result );
-
-      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                         img );
-
-      painter.end();
-
-      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
-    }
-  }
+  if ( info.isFile() )
+    loadIconFromFile( fileName, true );
 
   if ( dictionaryIcon.isNull() )
   {

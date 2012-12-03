@@ -143,8 +143,6 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   Mutex resourceZipMutex;
   IndexedZip resourceZip;
   BtreeIndex resourceZipIndex;
-  QIcon dictionaryNativeIcon, dictionaryIcon;
-  bool dictionaryIconLoaded;
 
   QAtomicInt deferredInitDone;
   Mutex deferredInitMutex;
@@ -177,10 +175,6 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
 
-  virtual QIcon getIcon() throw();
-
-  virtual QIcon getNativeIcon() throw();
-
   inline virtual quint32 getLangFrom() const
   { return idxHeader.langFrom; }
 
@@ -207,12 +201,14 @@ public:
 
   virtual QString getMainFilename();
 
+protected:
+
+  virtual void loadIcon() throw();
+
 private:
 
   virtual string const & ensureInitDone();
   void doDeferredInit();
-
-  void loadIcon();
 
   /// Loads the article. Does not process the DSL language.
   void loadArticle( uint32_t address,
@@ -244,7 +240,6 @@ DslDictionary::DslDictionary( string const & id,
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
   dz( 0 ),
-  dictionaryIconLoaded( false ),
   deferredInitRunnableStarted( false ),
   optionalPartNom( 0 ),
   articleNom( 0 )
@@ -422,22 +417,7 @@ void DslDictionary::doDeferredInit()
 }
 
 
-
-QIcon DslDictionary::getNativeIcon() throw()
-{
-  loadIcon();
-
-  return dictionaryNativeIcon;
-}
-
-QIcon DslDictionary::getIcon() throw()
-{
-  loadIcon();
-
-  return dictionaryIcon;
-}
-
-void DslDictionary::loadIcon()
+void DslDictionary::loadIcon() throw()
 {
   if ( dictionaryIconLoaded )
     return;
@@ -452,44 +432,7 @@ void DslDictionary::loadIcon()
   else
     fileName.chop( 3 );
 
-  fileName += "bmp";
-
-  QFileInfo info( fileName );
-
-  if ( info.exists() )
-  {
-    QImage img( fileName );
-
-    if ( !img.isNull() )
-    {
-      // Load successful
-
-      // Apply the color key
-
-      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
-                                                    Qt::MaskOutColor ) );
-
-      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
-
-      // Transform it to be square
-      int max = img.width() > img.height() ? img.width() : img.height();
-
-      QImage result( max, max, QImage::Format_ARGB32 );
-      result.fill( 0 ); // Black transparent
-
-      QPainter painter( &result );
-
-      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                         img );
-
-      painter.end();
-
-      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
-    }
-  }
-
-  if ( dictionaryIcon.isNull() )
+  if ( !loadIconFromFile( fileName ) )
   {
     // Load failed -- use default icons
 

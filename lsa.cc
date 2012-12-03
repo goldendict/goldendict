@@ -170,9 +170,6 @@ public:
   virtual unsigned long getWordCount() throw()
   { return getArticleCount(); }
 
-  virtual QIcon getIcon() throw()
-  { return QIcon(":/icons/playsound.png"); }
-
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const & )
@@ -180,6 +177,12 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
     throw( std::exception );
+
+protected:
+
+  virtual void loadIcon() throw()
+  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/playsound.png");
+    dictionaryIconLoaded = true; }
 };
 
 string LsaDictionary::getName() throw()

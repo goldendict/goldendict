@@ -19,6 +19,9 @@
 #include <QDateTime>
 #include "fsencoding.hh"
 
+#include <QImage>
+#include <QPainter>
+
 namespace Dictionary {
 
 bool Request::isFinished()
@@ -113,7 +116,7 @@ vector< char > & DataRequest::getFullData() throw( exRequestUnfinished )
 }
 
 Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
-  id( id_ ), dictionaryFiles( dictionaryFiles_ )
+  id( id_ ), dictionaryFiles( dictionaryFiles_ ), dictionaryIconLoaded( false )
 {
 }
 
@@ -156,6 +159,87 @@ QString const& Class::getDescription()
 QString Class::getMainFilename()
 {
   return QString();
+}
+
+QIcon const & Class::getIcon() throw()
+{
+  if( !dictionaryIconLoaded )
+    loadIcon();
+  return dictionaryIcon;
+}
+
+QIcon const & Class::getNativeIcon() throw()
+{
+  if( !dictionaryIconLoaded )
+    loadIcon();
+  return dictionaryNativeIcon;
+}
+
+void Class::loadIcon() throw()
+{
+  dictionaryIconLoaded = true;
+}
+
+bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
+{
+  QFileInfo info;
+  QString fileName( _filename );
+
+  if( isFullName )
+    info = QFileInfo( fileName );
+  else
+  {
+    fileName += "bmp";
+    info = QFileInfo( fileName );
+    if ( !info.isFile() )
+    {
+      fileName.chop( 3 );
+      fileName += "png";
+      info = QFileInfo( fileName );
+    }
+    if ( !info.isFile() )
+    {
+      fileName.chop( 3 );
+      fileName += "ico";
+      info = QFileInfo( fileName );
+    }
+  }
+
+  if ( info.isFile() )
+  {
+    QImage img( fileName );
+
+    if ( !img.isNull() )
+    {
+      // Load successful
+
+      // Apply the color key
+
+      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
+                                                    Qt::MaskOutColor ) );
+
+      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
+
+      // Transform it to be square
+      int max = img.width() > img.height() ? img.width() : img.height();
+
+      QImage result( max, max, QImage::Format_ARGB32 );
+      result.fill( 0 ); // Black transparent
+
+      QPainter painter( &result );
+
+      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                         img );
+
+      painter.end();
+
+      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+
+      return !dictionaryIcon.isNull();
+    }
+  }
+  return false;
 }
 
 string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()

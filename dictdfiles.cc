@@ -101,8 +101,9 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
 
-  virtual QIcon getIcon() throw()
-  { return QIcon(":/icons/icon32_dictd.png"); }
+  virtual void loadIcon() throw()
+  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_dictd.png");
+    dictionaryIconLoaded = true; }
 
   inline virtual quint32 getLangFrom() const
   { return idxHeader.langFrom; }

@@ -37,7 +37,6 @@ protected:
 class TransliterationDictionary: public Dictionary::Class
 {
   string name;
-  QIcon icon;
   Table const & table;
   bool caseSensitive;
   
@@ -49,9 +48,6 @@ public:
                              bool caseSensitive = true );
 
   virtual string getName() throw();
-
-  virtual QIcon getIcon() throw()
-  { return icon; }
 
   virtual map< Dictionary::Property, string > getProperties() throw();
   

@@ -54,8 +54,6 @@ public:
   virtual unsigned long getWordCount() throw()
   { return 0; }
 
-  virtual QIcon getIcon() throw();
-
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & /*word*/,
                                                  unsigned long /*maxResults*/ ) throw( std::exception )
   {
@@ -69,6 +67,11 @@ public:
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
                                           wstring const & )
     throw( std::exception );
+
+protected:
+
+  virtual void loadIcon() throw();
+
 };
 
 sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
@@ -87,7 +90,7 @@ sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
                                     netMgr );
 }
 
-QIcon ForvoDictionary::getIcon() throw()
+void ForvoDictionary::loadIcon() throw()
 {
 // Experimental code to generate icon -- but the flags clutter the interface too
 // much and we're better with a single icon.
@@ -114,7 +117,8 @@ QIcon ForvoDictionary::getIcon() throw()
     }
   }
 #endif
-  return QIcon( ":/icons/forvo.png" );
+  dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/forvo.png" );
+  dictionaryIconLoaded = true;
 }
 
 }

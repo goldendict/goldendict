@@ -125,8 +125,6 @@ class StardictDictionary: public BtreeIndexing::BtreeDictionary
   ChunkedStorage::Reader chunks;
   Mutex dzMutex;
   dictData * dz;
-  QIcon dictionaryIcon, dictionaryNativeIcon;
-  bool dictionaryIconLoaded;
 
 public:
 
@@ -147,10 +145,6 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount + idxHeader.synWordCount; }
 
-  virtual QIcon getIcon() throw();
-
-  virtual QIcon getNativeIcon() throw();
-
   inline virtual quint32 getLangFrom() const
   { return idxHeader.langFrom; }
 
@@ -170,9 +164,11 @@ public:
 
   virtual QString const& getDescription();
 
-private:
+protected:
 
-  void loadIcon();
+  void loadIcon() throw();
+
+private:
 
   /// Retrives the article's offset/size in .dict file, and its headword.
   void getArticleProps( uint32_t articleAddress,
@@ -201,8 +197,7 @@ StardictDictionary::StardictDictionary( string const & id,
   idxHeader( idx.read< IdxHeader >() ),
   bookName( loadString( idxHeader.bookNameSize ) ),
   sameTypeSequence( loadString( idxHeader.sameTypeSequenceSize ) ),
-  chunks( idx, idxHeader.chunksOffset ),
-  dictionaryIconLoaded( false )
+  chunks( idx, idxHeader.chunksOffset )
 {
   // Open the .dict file
 
@@ -224,19 +219,7 @@ StardictDictionary::~StardictDictionary()
     dict_data_close( dz );
 }
 
-QIcon StardictDictionary::getNativeIcon() throw()
-{
-  loadIcon();
-  return dictionaryNativeIcon;
-}
-
-QIcon StardictDictionary::getIcon() throw()
-{
-  loadIcon();
-  return dictionaryIcon;
-}
-
-void StardictDictionary::loadIcon()
+void StardictDictionary::loadIcon() throw()
 {
   if ( dictionaryIconLoaded )
     return;
@@ -247,50 +230,7 @@ void StardictDictionary::loadIcon()
   // Remove the extension
   fileName.chop( 3 );
 
-  fileName += "bmp";
-  QFileInfo info( fileName );
-
-  if ( !info.exists() )
-  {
-      fileName.chop( 3 );
-      fileName += "png";
-      info = QFileInfo( fileName );
-  }
-
-  if ( info.exists() )
-  {
-    QImage img( fileName );
-
-    if ( !img.isNull() )
-    {
-      // Load successful
-
-      // Apply the color key
-
-      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
-                                                    Qt::MaskOutColor ) );
-
-      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
-
-      // Transform it to be square
-      int max = img.width() > img.height() ? img.width() : img.height();
-
-      QImage result( max, max, QImage::Format_ARGB32 );
-      result.fill( 0 ); // Black transparent
-
-      QPainter painter( &result );
-
-      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                         img );
-
-      painter.end();
-
-      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
-    }
-  }
-
-  if ( dictionaryIcon.isNull() )
+  if( !loadIconFromFile( fileName ) )
   {
     // Load failed -- use default icons
     dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_stardict.png");

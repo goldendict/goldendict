@@ -49,24 +49,31 @@ public:
   virtual unsigned long getWordCount() throw()
   { return 0; }
 
-  virtual QIcon getIcon() throw()
-  {
-      if( !icon.isNull() && !icon.isEmpty() )
-      {
-          QFileInfo fInfo(  QDir( Config::getConfigDir() ), icon );
-          if( fInfo.isFile() )
-              return QIcon( fInfo.absoluteFilePath() );
-      }
-      return QIcon(":/icons/icon32_wiki.png");
-  }
-
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) throw( std::exception );
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
                                           wstring const & )
     throw( std::exception );
+
+protected:
+
+  virtual void loadIcon() throw();
+
 };
+
+void MediaWikiDictionary::loadIcon() throw()
+{
+  if( !icon.isEmpty() )
+  {
+    QFileInfo fInfo(  QDir( Config::getConfigDir() ), icon );
+    if( fInfo.isFile() )
+      loadIconFromFile( fInfo.absoluteFilePath(), true );
+  }
+  if( dictionaryIcon.isNull() )
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_wiki.png");
+  dictionaryIconLoaded = true;
+}
 
 class MediaWikiWordSearchRequest: public MediaWikiWordSearchRequestSlots
 {

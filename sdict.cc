@@ -130,8 +130,6 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
     ChunkedStorage::Reader chunks;
     string dictionaryName;
     File::Class df;
-    QIcon dictionaryIcon, dictionaryNativeIcon;
-    bool dictionaryIconLoaded;
 
   public:
 
@@ -152,10 +150,6 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
     virtual unsigned long getWordCount() throw()
     { return idxHeader.wordCount; }
 
-    virtual QIcon getIcon() throw();
-
-    virtual QIcon getNativeIcon() throw();
-
     inline virtual quint32 getLangFrom() const
     { return idxHeader.langFrom; }
 
@@ -167,9 +161,11 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
                                                         wstring const & )
       throw( std::exception );
 
-private:
+protected:
 
-    void loadIcon();
+    void loadIcon() throw();
+
+private:
 
     /// Loads the article.
     void loadArticle( uint32_t address,
@@ -186,8 +182,7 @@ SdictDictionary::SdictDictionary( string const & id,
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
     chunks( idx, idxHeader.chunksOffset ),
-    df( dictionaryFiles[ 0 ], "rb" ),
-    dictionaryIconLoaded( false )
+    df( dictionaryFiles[ 0 ], "rb" )
 {
     // Read dictionary name
 
@@ -208,19 +203,7 @@ SdictDictionary::~SdictDictionary()
     df.close();
 }
 
-QIcon SdictDictionary::getNativeIcon() throw()
-{
-  loadIcon();
-  return dictionaryNativeIcon;
-}
-
-QIcon SdictDictionary::getIcon() throw()
-{
-  loadIcon();
-  return dictionaryIcon;
-}
-
-void SdictDictionary::loadIcon()
+void SdictDictionary::loadIcon() throw()
 {
   if ( dictionaryIconLoaded )
     return;
@@ -231,50 +214,8 @@ void SdictDictionary::loadIcon()
   // Remove the extension
 
   fileName.chop( 3 );
-  fileName += "bmp";
-  QFileInfo info( fileName );
 
-  if ( !info.exists() )
-  {
-      fileName.chop( 3 );
-      fileName += "png";
-      info = QFileInfo( fileName );
-  }
-
-  if ( info.exists() )
-  {
-    QImage img( fileName );
-
-    if ( !img.isNull() )
-    {
-      // Load successful
-
-      // Apply the color key
-
-      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
-                                                    Qt::MaskOutColor ) );
-
-      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
-
-      // Transform it to be square
-      int max = img.width() > img.height() ? img.width() : img.height();
-
-      QImage result( max, max, QImage::Format_ARGB32 );
-      result.fill( 0 ); // Black transparent
-
-      QPainter painter( &result );
-
-      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                         img );
-
-      painter.end();
-
-      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
-    }
-  }
-
-  if ( dictionaryIcon.isNull() )
+  if( !loadIconFromFile( fileName ) )
   {
     // Load failed -- use default icons
     dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_sdict.png");

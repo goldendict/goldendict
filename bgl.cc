@@ -215,8 +215,6 @@ namespace
     IdxHeader idxHeader;
     string dictionaryName;
     ChunkedStorage::Reader chunks;
-    QIcon dictionaryIcon;
-    bool dictionaryIconLoaded;
 
   public:
 
@@ -234,8 +232,6 @@ namespace
 
     virtual unsigned long getWordCount() throw()
     { return idxHeader.wordCount; }
-
-    virtual QIcon getIcon() throw();
 
     inline virtual quint32 getLangFrom() const
     { return idxHeader.langFrom; }
@@ -256,6 +252,10 @@ namespace
 
     virtual QString const& getDescription();
 
+  protected:
+
+    virtual void loadIcon() throw();
+
   private:
 
 
@@ -275,8 +275,7 @@ namespace
     BtreeDictionary( id, vector< string >( 1, dictionaryFile ) ),
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
-    chunks( idx, idxHeader.chunksOffset ),
-    dictionaryIconLoaded( !idxHeader.iconSize )
+    chunks( idx, idxHeader.chunksOffset )
   {
     idx.seek( sizeof( idxHeader ) );
 
@@ -297,10 +296,11 @@ namespace
                idx, idxMutex );
   }
 
-  QIcon BglDictionary::getIcon() throw()
+  void BglDictionary::loadIcon() throw()
   {
-    if ( !dictionaryIconLoaded )
+    if( idxHeader.iconSize )
     {
+
       // Try loading icon now
 
       vector< char > chunk;
@@ -314,6 +314,8 @@ namespace
       if (img.loadFromData( ( unsigned char *) iconData, idxHeader.iconSize  ) )
       {
         // Load successful
+
+        dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
 
         // Transform it to be square
         int max = img.width() > img.height() ? img.width() : img.height();
@@ -331,14 +333,12 @@ namespace
 
         dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
       }
-
-      dictionaryIconLoaded = true;
     }
 
-    if ( !dictionaryIcon.isNull() )
-      return dictionaryIcon;
-    else
-      return QIcon(":/icons/icon32_bgl.png");
+    if ( dictionaryIcon.isNull() )
+      dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_bgl.png");
+
+    dictionaryIconLoaded = true;
   }
 
   void BglDictionary::loadArticle( uint32_t offset, string & headword,

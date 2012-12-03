@@ -300,10 +300,6 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
     virtual unsigned long getWordCount() throw()
     { return idxHeader.wordCount; }
 
-    virtual QIcon getIcon() throw();
-
-    virtual QIcon getNativeIcon() throw();
-
     inline virtual quint32 getLangFrom() const
     { return idxHeader.langFrom; }
 
@@ -317,9 +313,11 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
 
     virtual QString const& getDescription();
 
-private:
+protected:
 
-    void loadIcon();
+    virtual void loadIcon() throw();
+
+private:
 
     /// Loads the article.
     void loadArticle( uint32_t address,
@@ -364,73 +362,15 @@ AardDictionary::~AardDictionary()
     df.close();
 }
 
-QIcon AardDictionary::getNativeIcon() throw()
+void AardDictionary::loadIcon() throw()
 {
-  loadIcon();
-  return dictionaryNativeIcon;
-}
-
-QIcon AardDictionary::getIcon() throw()
-{
-  loadIcon();
-  return dictionaryIcon;
-}
-
-void AardDictionary::loadIcon()
-{
-  if ( dictionaryIconLoaded )
-    return;
-
   QString fileName =
     QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
   // Remove the extension
-
   fileName.chop( 3 );
-  fileName += "bmp";
-  QFileInfo info( fileName );
 
-  if ( !info.exists() )
-  {
-      fileName.chop( 3 );
-      fileName += "png";
-      info = QFileInfo( fileName );
-  }
-
-  if ( info.exists() )
-  {
-    QImage img( fileName );
-
-    if ( !img.isNull() )
-    {
-      // Load successful
-
-      // Apply the color key
-
-      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
-                                                    Qt::MaskOutColor ) );
-
-      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
-
-      // Transform it to be square
-      int max = img.width() > img.height() ? img.width() : img.height();
-
-      QImage result( max, max, QImage::Format_ARGB32 );
-      result.fill( 0 ); // Black transparent
-
-      QPainter painter( &result );
-
-      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                         img );
-
-      painter.end();
-
-      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
-    }
-  }
-
-  if ( dictionaryIcon.isNull() )
+  if( !loadIconFromFile( fileName ) )
   {
     // Load failed -- use default icons
     dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_aard.png");

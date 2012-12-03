@@ -38,8 +38,6 @@ public:
   virtual unsigned long getWordCount() throw()
   { return 0; }
 
-  virtual QIcon getIcon() throw();
-
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long maxResults )
     throw( std::exception );
@@ -48,6 +46,12 @@ public:
                                           vector< wstring > const & alts,
                                           wstring const & )
     throw( std::exception );
+
+protected:
+
+  virtual void loadIcon() throw()
+  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/programs.png");
+    dictionaryIconLoaded = true; }
 };
 
 sptr< WordSearchRequest > ProgramsDictionary::prefixMatch( wstring const & word,
@@ -110,11 +114,6 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
     default:
       return new DataRequestInstant( false );
   }
-}
-
-QIcon ProgramsDictionary::getIcon() throw()
-{
-  return QIcon( ":/icons/programs.png" );
 }
 
 }

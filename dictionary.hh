@@ -256,6 +256,16 @@ class Class
 
 protected:
   QString dictionaryDescription;
+  QIcon dictionaryIcon, dictionaryNativeIcon;
+  bool dictionaryIconLoaded;
+
+  // Load user icon if it exist
+  // By default set icon to empty
+  virtual void loadIcon() throw();
+
+  // Load icon from filename directly if isFullName == true
+  // else treat filename as name without extension
+  bool loadIconFromFile( QString const & filename, bool isFullName = false );
 
 public:
 
@@ -300,14 +310,12 @@ public:
   virtual unsigned long getWordCount() throw()=0;
 
   /// Returns the dictionary's icon.
-  virtual QIcon getIcon() throw()
-  { return QIcon(); }
+  virtual QIcon const & getIcon() throw();
 
   /// Returns the dictionary's native icon. Dsl icons are usually rectangular,
   /// and are adapted by getIcon() to be square. This function allows getting
   /// the original icon with no geometry transformations applied.
-  virtual QIcon getNativeIcon() throw()
-  { return getIcon(); }
+  virtual QIcon const & getNativeIcon() throw();
 
   /// Returns the dictionary's source language.
   virtual quint32 getLangFrom() const

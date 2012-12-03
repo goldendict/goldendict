@@ -40,9 +40,6 @@ public:
   virtual unsigned long getWordCount() throw()
   { return 0; }
 
-  virtual QIcon getIcon() throw()
-  { return QIcon(":/icons/internet.png"); }
-
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long ) throw( std::exception );
 
@@ -50,6 +47,12 @@ public:
                                           vector< wstring > const & alts,
                                           wstring const & context )
     throw( std::exception );
+
+protected:
+
+  virtual void loadIcon() throw()
+  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/internet.png");
+    dictionaryIconLoaded = true; }
 };
 
 sptr< WordSearchRequest > WebSiteDictionary::prefixMatch( wstring const & /*word*/,
