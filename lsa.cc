@@ -21,6 +21,7 @@
 #include <vorbis/vorbisfile.h>
 
 #include <QUrl>
+#include <QDir>
 
 namespace Lsa {
 
@@ -180,9 +181,7 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw()
-  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/playsound.png");
-    dictionaryIconLoaded = true; }
+  virtual void loadIcon() throw();
 };
 
 string LsaDictionary::getName() throw()
@@ -481,6 +480,23 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
   ov_clear( &vf );
 
   return dr;
+}
+
+void LsaDictionary::loadIcon() throw()
+{
+  QString fileName =
+    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+  // Remove the extension
+  fileName.chop( 3 );
+
+  if( !loadIconFromFile( fileName ) )
+  {
+    // Load failed -- use default icons
+    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/playsound.png");
+  }
+
+  dictionaryIconLoaded = true;
 }
 
 }

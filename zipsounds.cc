@@ -109,9 +109,7 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw()
-  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/playsound.png");
-    dictionaryIconLoaded = true; }
+  virtual void loadIcon() throw();
 };
 
 ZipSoundsDictionary::ZipSoundsDictionary( string const & id,
@@ -271,6 +269,23 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const &
     return dr;
 
   return new Dictionary::DataRequestInstant( false );
+}
+
+void ZipSoundsDictionary::loadIcon() throw()
+{
+  QString fileName =
+    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+  // Remove the extension
+  fileName.chop( 4 );
+
+  if( !loadIconFromFile( fileName ) )
+  {
+    // Load failed -- use default icons
+    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/playsound.png");
+  }
+
+  dictionaryIconLoaded = true;
 }
 
 }
