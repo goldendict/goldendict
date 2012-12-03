@@ -3701,6 +3701,10 @@ p, li { white-space: pre-wrap; }
         <source>Address</source>
         <translation>Adresa</translation>
     </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WordFinder</name>

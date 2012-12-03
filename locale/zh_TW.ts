@@ -2821,6 +2821,10 @@ p, li { white-space: pre-wrap; }
         <source>Enabled</source>
         <translation>已啟用</translation>
     </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WordFinder</name>

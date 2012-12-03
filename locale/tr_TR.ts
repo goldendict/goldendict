@@ -2848,6 +2848,10 @@ uygun grupların altlarına ekleyin.</translation>
         <source>Enabled</source>
         <translation>Etkin</translation>
     </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WordFinder</name>

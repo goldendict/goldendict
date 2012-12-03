@@ -2841,6 +2841,10 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
         <source>Address</source>
         <translation>Địa chỉ</translation>
     </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WordFinder</name>

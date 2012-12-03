@@ -411,12 +411,12 @@
         <translation>Изменить эту группу</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="105"/>
+        <location filename="../dictionarybar.cc" line="109"/>
         <source>Dictionary info</source>
         <translation>Информация о словаре</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="109"/>
+        <location filename="../dictionarybar.cc" line="123"/>
         <source>Edit dictionary</source>
         <translation>Редактировать словарь</translation>
     </message>
@@ -477,37 +477,37 @@
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="223"/>
+        <location filename="../forvo.cc" line="227"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Ошибка разбора XML: %1 на строке %2, столбце %3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="299"/>
+        <location filename="../forvo.cc" line="303"/>
         <source>Added %1</source>
         <translation>Добавлено %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="302"/>
+        <location filename="../forvo.cc" line="306"/>
         <source>by</source>
         <translation>от</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="310"/>
         <source>Male</source>
         <translation>Мужчина</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="310"/>
         <source>Female</source>
         <translation>Женщина</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="308"/>
+        <location filename="../forvo.cc" line="312"/>
         <source>from</source>
         <translation>из</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="346"/>
+        <location filename="../forvo.cc" line="350"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Перейдите в Правка|Словари|Источники|Forvo и подайте заявку на свой собственный ключ API, чтобы устранить данную проблему.</translation>
     </message>
@@ -691,12 +691,12 @@
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="217"/>
+        <location filename="../hunspell.cc" line="220"/>
         <source>Spelling suggestions: </source>
         <translation>Варианты написания: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="757"/>
+        <location filename="../hunspell.cc" line="760"/>
         <source>%1 Morphology</source>
         <translation>%1 (морфология)</translation>
     </message>
@@ -704,12 +704,12 @@
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1084"/>
+        <location filename="../sources.cc" line="1093"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1086"/>
+        <location filename="../sources.cc" line="1095"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
@@ -1975,12 +1975,12 @@
         <translation>Ошибка импорта:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3063"/>
+        <location filename="../mainwindow.cc" line="3077"/>
         <source>Dictionary info</source>
         <translation>Информация о словаре</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3064"/>
+        <location filename="../mainwindow.cc" line="3078"/>
         <source>Edit dictionary</source>
         <translation>Редактировать словарь</translation>
     </message>
@@ -2249,7 +2249,7 @@
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="292"/>
+        <location filename="../mediawiki.cc" line="299"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Ошибка разбора XML: %1 на строке %2, столбце %3</translation>
     </message>
@@ -2257,7 +2257,7 @@
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="161"/>
+        <location filename="../mediawiki.cc" line="168"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Ошибка разбора XML: %1 на строке %2, столбце %3</translation>
     </message>
@@ -2265,22 +2265,22 @@
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="391"/>
+        <location filename="../sources.cc" line="392"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="393"/>
+        <location filename="../sources.cc" line="394"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="395"/>
+        <location filename="../sources.cc" line="396"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="397"/>
+        <location filename="../sources.cc" line="398"/>
         <source>Icon</source>
         <translation>Значок</translation>
     </message>
@@ -2359,12 +2359,12 @@
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="873"/>
+        <location filename="../sources.cc" line="882"/>
         <source>Path</source>
         <translation>Путь</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="875"/>
+        <location filename="../sources.cc" line="884"/>
         <source>Recursive</source>
         <translation>Рекурсивно</translation>
     </message>
@@ -3024,27 +3024,27 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="781"/>
+        <location filename="../sources.cc" line="790"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="783"/>
+        <location filename="../sources.cc" line="792"/>
         <source>Plain Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="785"/>
+        <location filename="../sources.cc" line="794"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="787"/>
+        <location filename="../sources.cc" line="796"/>
         <source>Prefix Match</source>
         <translation>По префиксу</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="789"/>
+        <location filename="../sources.cc" line="798"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
@@ -3052,17 +3052,17 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="152"/>
+        <location filename="../programs.cc" line="151"/>
         <source>No program name was given.</source>
         <translation>Программа не указана.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="168"/>
+        <location filename="../programs.cc" line="167"/>
         <source>The program has crashed.</source>
         <translation>Программа завершилась с ошибкой</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="171"/>
+        <location filename="../programs.cc" line="170"/>
         <source>The program has returned exit code %1.</source>
         <translation>Программа вернула значение %1.</translation>
     </message>
@@ -3070,22 +3070,22 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="697"/>
+        <location filename="../sources.cc" line="706"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="699"/>
+        <location filename="../sources.cc" line="708"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="701"/>
+        <location filename="../sources.cc" line="710"/>
         <source>Name</source>
         <translation>Имя программы</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="703"/>
+        <location filename="../sources.cc" line="712"/>
         <source>Command Line</source>
         <translation>Командная строка</translation>
     </message>
@@ -3177,12 +3177,12 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="979"/>
+        <location filename="../sources.cc" line="988"/>
         <source>Path</source>
         <translation>Путь</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="981"/>
+        <location filename="../sources.cc" line="990"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
@@ -3190,40 +3190,40 @@ could be resized or managed in other ways.</source>
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="105"/>
+        <location filename="../sources.cc" line="106"/>
         <source>(not available in portable version)</source>
         <translation>(не реализовано в переносимой версии)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="141"/>
-        <location filename="../sources.cc" line="168"/>
-        <location filename="../sources.cc" line="195"/>
+        <location filename="../sources.cc" line="142"/>
+        <location filename="../sources.cc" line="169"/>
+        <location filename="../sources.cc" line="196"/>
         <source>Choose a directory</source>
         <translation>Выбор пути</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="155"/>
-        <location filename="../sources.cc" line="182"/>
-        <location filename="../sources.cc" line="222"/>
-        <location filename="../sources.cc" line="246"/>
-        <location filename="../sources.cc" line="270"/>
+        <location filename="../sources.cc" line="156"/>
+        <location filename="../sources.cc" line="183"/>
+        <location filename="../sources.cc" line="223"/>
+        <location filename="../sources.cc" line="247"/>
+        <location filename="../sources.cc" line="271"/>
         <source>Confirm removal</source>
         <translation>Подтверждение удаления</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="156"/>
-        <location filename="../sources.cc" line="183"/>
+        <location filename="../sources.cc" line="157"/>
+        <location filename="../sources.cc" line="184"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Удалить путь &lt;b&gt;%1&lt;/b&gt; из списка?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="223"/>
-        <location filename="../sources.cc" line="247"/>
+        <location filename="../sources.cc" line="224"/>
+        <location filename="../sources.cc" line="248"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Удалить веб-сайт &lt;b&gt;%1&lt;/b&gt; из списка?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="271"/>
+        <location filename="../sources.cc" line="272"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Удалить программу &lt;b&gt;%1&lt;/b&gt; из списка?</translation>
     </message>
@@ -3509,19 +3509,24 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="548"/>
+        <location filename="../sources.cc" line="549"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="550"/>
+        <location filename="../sources.cc" line="551"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="552"/>
+        <location filename="../sources.cc" line="553"/>
         <source>Address</source>
         <translation>Адрес</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="555"/>
+        <source>Icon</source>
+        <translation>Значок</translation>
     </message>
 </context>
 <context>

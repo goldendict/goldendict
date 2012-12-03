@@ -425,12 +425,12 @@
         <translation>Diese Gruppe bearbeiten</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="105"/>
+        <location filename="../dictionarybar.cc" line="109"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="109"/>
+        <location filename="../dictionarybar.cc" line="123"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -491,37 +491,37 @@
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="223"/>
+        <location filename="../forvo.cc" line="227"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Fehler beim XML parsen: %1 bei %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="299"/>
+        <location filename="../forvo.cc" line="303"/>
         <source>Added %1</source>
         <translation>Hinzugefügt %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="302"/>
+        <location filename="../forvo.cc" line="306"/>
         <source>by</source>
         <translation>von</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="310"/>
         <source>Male</source>
         <translation>Mann</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="310"/>
         <source>Female</source>
         <translation>Frau</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="308"/>
+        <location filename="../forvo.cc" line="312"/>
         <source>from</source>
         <translation>aus</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="346"/>
+        <location filename="../forvo.cc" line="350"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Damit dieser Fehler verschwindet sollten Sie Bearbeiten » Wörterbücher » Forvo auswählen und ihren eigenen API-Schlüssel eintragen.</translation>
     </message>
@@ -705,12 +705,12 @@
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="217"/>
+        <location filename="../hunspell.cc" line="220"/>
         <source>Spelling suggestions: </source>
         <translation>Rechtschreibvorschläge:</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="757"/>
+        <location filename="../hunspell.cc" line="760"/>
         <source>%1 Morphology</source>
         <translation>%1 Morphologie</translation>
     </message>
@@ -718,12 +718,12 @@
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1084"/>
+        <location filename="../sources.cc" line="1093"/>
         <source>Enabled</source>
         <translation>Aktiv</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1086"/>
+        <location filename="../sources.cc" line="1095"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
@@ -1923,12 +1923,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3063"/>
+        <location filename="../mainwindow.cc" line="3077"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3064"/>
+        <location filename="../mainwindow.cc" line="3078"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2274,7 +2274,7 @@
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="292"/>
+        <location filename="../mediawiki.cc" line="299"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Fehler beim XML-parsen: %1 bei %2,%3</translation>
     </message>
@@ -2282,7 +2282,7 @@
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="161"/>
+        <location filename="../mediawiki.cc" line="168"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Fehler beim XML-parsen: %1 bei %2,%3</translation>
     </message>
@@ -2290,22 +2290,22 @@
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="391"/>
+        <location filename="../sources.cc" line="392"/>
         <source>Enabled</source>
         <translation>Aktiv</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="393"/>
+        <location filename="../sources.cc" line="394"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="395"/>
+        <location filename="../sources.cc" line="396"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="397"/>
+        <location filename="../sources.cc" line="398"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2384,12 +2384,12 @@
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="873"/>
+        <location filename="../sources.cc" line="882"/>
         <source>Path</source>
         <translation>Pfad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="875"/>
+        <location filename="../sources.cc" line="884"/>
         <source>Recursive</source>
         <translation>Rekursiv</translation>
     </message>
@@ -3025,27 +3025,27 @@ Download-Seite.</translation>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="781"/>
+        <location filename="../sources.cc" line="790"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="783"/>
+        <location filename="../sources.cc" line="792"/>
         <source>Plain Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="785"/>
+        <location filename="../sources.cc" line="794"/>
         <source>Html</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="787"/>
+        <location filename="../sources.cc" line="796"/>
         <source>Prefix Match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="789"/>
+        <location filename="../sources.cc" line="798"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3053,17 +3053,17 @@ Download-Seite.</translation>
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="152"/>
+        <location filename="../programs.cc" line="151"/>
         <source>No program name was given.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="168"/>
+        <location filename="../programs.cc" line="167"/>
         <source>The program has crashed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="171"/>
+        <location filename="../programs.cc" line="170"/>
         <source>The program has returned exit code %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3071,22 +3071,22 @@ Download-Seite.</translation>
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="697"/>
+        <location filename="../sources.cc" line="706"/>
         <source>Enabled</source>
         <translation type="unfinished">Aktiv</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="699"/>
+        <location filename="../sources.cc" line="708"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="701"/>
+        <location filename="../sources.cc" line="710"/>
         <source>Name</source>
         <translation type="unfinished">Name</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="703"/>
+        <location filename="../sources.cc" line="712"/>
         <source>Command Line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3178,12 +3178,12 @@ es in der Größe verändert, oder andersweitig verwaltet werden kann.</translat
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="979"/>
+        <location filename="../sources.cc" line="988"/>
         <source>Path</source>
         <translation>Pfad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="981"/>
+        <location filename="../sources.cc" line="990"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
@@ -3191,40 +3191,40 @@ es in der Größe verändert, oder andersweitig verwaltet werden kann.</translat
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="105"/>
+        <location filename="../sources.cc" line="106"/>
         <source>(not available in portable version)</source>
         <translation>(nicht in der portablen Version)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="141"/>
-        <location filename="../sources.cc" line="168"/>
-        <location filename="../sources.cc" line="195"/>
+        <location filename="../sources.cc" line="142"/>
+        <location filename="../sources.cc" line="169"/>
+        <location filename="../sources.cc" line="196"/>
         <source>Choose a directory</source>
         <translation>Verzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="155"/>
-        <location filename="../sources.cc" line="182"/>
-        <location filename="../sources.cc" line="222"/>
-        <location filename="../sources.cc" line="246"/>
-        <location filename="../sources.cc" line="270"/>
+        <location filename="../sources.cc" line="156"/>
+        <location filename="../sources.cc" line="183"/>
+        <location filename="../sources.cc" line="223"/>
+        <location filename="../sources.cc" line="247"/>
+        <location filename="../sources.cc" line="271"/>
         <source>Confirm removal</source>
         <translation>Löschung bestätigen</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="156"/>
-        <location filename="../sources.cc" line="183"/>
+        <location filename="../sources.cc" line="157"/>
+        <location filename="../sources.cc" line="184"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Soll das Verzeichnis &lt;b&gt;%1&lt;/b&gt; von der Liste entfernt werden?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="223"/>
-        <location filename="../sources.cc" line="247"/>
+        <location filename="../sources.cc" line="224"/>
+        <location filename="../sources.cc" line="248"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Soll die Seite &lt;b&gt;%1&lt;/b&gt; von der Liste entfernt werden?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="271"/>
+        <location filename="../sources.cc" line="272"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3513,19 +3513,24 @@ Noch nicht in GoldenDict implementiert.</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="548"/>
+        <location filename="../sources.cc" line="549"/>
         <source>Enabled</source>
         <translation>Aktiv</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="550"/>
+        <location filename="../sources.cc" line="551"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="552"/>
+        <location filename="../sources.cc" line="553"/>
         <source>Address</source>
         <translation>Adresse</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="555"/>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
