@@ -180,11 +180,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( wordsZoomBase, SIGNAL(triggered()), this, SLOT(doWordsZoomBase()) );
 
   // tray icon
-  connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( activated() ),
+  connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( triggered() ),
            this, SLOT( showMainWindow() ) );
   trayIconMenu.addAction( enableScanPopup );
   trayIconMenu.addSeparator();
-  connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( activated() ),
+  connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( triggered() ),
            qApp, SLOT( quit() ) );
 
   escAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
@@ -386,9 +386,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     trayIcon->show();
   }
 
-  connect( navBack, SIGNAL( activated() ),
+  connect( navBack, SIGNAL( triggered() ),
            this, SLOT( backClicked() ) );
-  connect( navForward, SIGNAL( activated() ),
+  connect( navForward, SIGNAL( triggered() ),
            this, SLOT( forwardClicked() ) );
 
   addTab.setAutoRaise( true );
@@ -431,22 +431,22 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.tabWidget->setTabsClosable( true );
 #endif
 
-  connect( ui.quit, SIGNAL( activated() ),
+  connect( ui.quit, SIGNAL( triggered() ),
            qApp, SLOT( quit() ) );
 
-  connect( ui.dictionaries, SIGNAL( activated() ),
+  connect( ui.dictionaries, SIGNAL( triggered() ),
            this, SLOT( editDictionaries() ) );
 
-  connect( ui.preferences, SIGNAL( activated() ),
+  connect( ui.preferences, SIGNAL( triggered() ),
            this, SLOT( editPreferences() ) );
 
-  connect( ui.visitHomepage, SIGNAL( activated() ),
+  connect( ui.visitHomepage, SIGNAL( triggered() ),
            this, SLOT( visitHomepage() ) );
-  connect( ui.visitForum, SIGNAL( activated() ),
+  connect( ui.visitForum, SIGNAL( triggered() ),
            this, SLOT( visitForum() ) );
-  connect( ui.openConfigFolder, SIGNAL( activated() ),
+  connect( ui.openConfigFolder, SIGNAL( triggered() ),
            this, SLOT( openConfigFolder() ) );
-  connect( ui.about, SIGNAL( activated() ),
+  connect( ui.about, SIGNAL( triggered() ),
            this, SLOT( showAbout() ) );
 
   connect( &groupList, SIGNAL( currentIndexChanged( QString const & ) ),
