@@ -32,7 +32,7 @@ struct HotkeyStruct
 
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef Q_OS_MAC
+#if !defined(Q_OS_MAC) && !defined(Q_WS_QWS)
 class HotkeyWrapper : public QThread // Thread is actually only used on X11
 {
   Q_OBJECT

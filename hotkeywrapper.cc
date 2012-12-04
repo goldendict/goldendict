@@ -65,7 +65,7 @@ HotkeyStruct::HotkeyStruct( quint32 key_, quint32 key2_, quint32 modifier_,
 
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef Q_WS_MAC
+#if !defined(Q_OS_MAC) && !defined(Q_WS_QWS)
 HotkeyWrapper::HotkeyWrapper(QObject *parent) : QThread( parent ),
     state2(false)
 {

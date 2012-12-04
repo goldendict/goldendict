@@ -6,7 +6,7 @@
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
-#else
+#elif defined(Q_WS_X11)
 #include <QX11Info>
 #include <X11/X.h>
 #include <X11/XKBlib.h>
@@ -14,7 +14,7 @@
 
 bool KeyboardState::checkModifiersPressed( int mask )
 {
-  #ifdef Q_OS_MAC
+  #if defined(Q_OS_MAC) || defined(Q_WS_QWS)
     return false;
   #elif defined Q_OS_WIN32
 

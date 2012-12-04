@@ -66,8 +66,11 @@ unix:!mac {
     	vorbis \
 	ogg \
 	hunspell
-    LIBS += -lX11 \
-        -lXtst
+    arm {
+        LIBS += -liconv
+    } else {
+        LIBS += -lX11 -lXtst
+    }
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr/local
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/apps/goldendict/\\\"
