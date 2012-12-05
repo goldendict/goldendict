@@ -278,8 +278,6 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
     ChunkedStorage::Reader chunks;
     string dictionaryName;
     File::Class df;
-    QIcon dictionaryIcon, dictionaryNativeIcon;
-    bool dictionaryIconLoaded;
 
   public:
 
@@ -334,8 +332,7 @@ AardDictionary::AardDictionary( string const & id,
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
     chunks( idx, idxHeader.chunksOffset ),
-    df( dictionaryFiles[ 0 ], "rb" ),
-    dictionaryIconLoaded( false )
+    df( dictionaryFiles[ 0 ], "rb" )
 {
     // Read dictionary name
 
