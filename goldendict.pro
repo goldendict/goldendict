@@ -345,7 +345,12 @@ TRANSLATIONS += locale/ru_RU.ts \
   QMAKE_EXTRA_TARGETS += revtarget
   PRE_TARGETDEPS      += $$PWD/version.txt
   revtarget.target     = $$PWD/version.txt
-  revtarget.commands   = cd $$PWD && git describe --tags --always --dirty > $$revtarget.target
+!win32 {
+  revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
+}
+win32 {
+  revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
+}
   ALL_SOURCES = $$SOURCES $$HEADERS $$FORMS
   for(src, ALL_SOURCES) {
     QUALIFIED_SOURCES += $${PWD}/$${src}
