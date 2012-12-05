@@ -37,15 +37,35 @@ Group::Group( Config::Group const & cfgGroup,
     if ( !added )
     {
       // Try matching by name instead
-      std::string name = cfgGroup.dictionaries[ x ].name.toUtf8().data();
+      QString qname = cfgGroup.dictionaries[ x ].name;
+      std::string name = qname.toUtf8().data();
 
-      if ( name.size() )
+      if ( !qname.isEmpty() )
+      {
+
+        // To avoid duplicates in dictionaries list we don't add dictionary
+        // if it with such name was already added or presented in rest of list
+
+        unsigned n;
+        for( n = 0; n < dictionaries.size(); n++ )
+          if( dictionaries[ n ]->getName() == name )
+            break;
+        if( n < dictionaries.size() )
+          continue;
+
+        for( n = x + 1; n < cfgGroup.dictionaries.size(); n++ )
+          if( cfgGroup.dictionaries[ n ].name == qname )
+            break;
+        if( n < cfgGroup.dictionaries.size() )
+          continue;
+
         for( unsigned y = 0; y < allDictionaries.size(); ++y )
           if ( allDictionaries[ y ]->getName() == name )
           {
             dictionaries.push_back( allDictionaries[ y ] );
             break;
           }
+      }
     }
   }
 }
