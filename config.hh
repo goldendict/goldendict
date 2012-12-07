@@ -342,20 +342,22 @@ struct Program
     MaxTypeValue
   } type;
   QString id, name, commandLine;
+  QString iconFilename;
 
   Program(): enabled( false )
   {}
 
   Program( bool enabled_, Type type_, QString const & id_,
-          QString const & name_, QString const & commandLine_ ):
+          QString const & name_, QString const & commandLine_, QString iconFilename_ ):
     enabled( enabled_ ), type( type_ ), id( id_ ), name( name_ ),
-    commandLine( commandLine_ ) {}
+    commandLine( commandLine_ ), iconFilename( iconFilename_ ) {}
 
   bool operator == ( Program const & other ) const
   { return enabled == other.enabled &&
            type == other.type &&
            name == other.name &&
-           commandLine == other.commandLine;
+           commandLine == other.commandLine &&
+           iconFilename == other.iconFilename;
   }
 
   bool operator != ( Program const & other ) const
@@ -381,6 +383,7 @@ struct Class
 
   unsigned lastMainGroupId; // Last used group in main window
   unsigned lastPopupGroupId; // Last used group in popup window
+
   QByteArray popupWindowState; // Binary state saved by QMainWindow
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window

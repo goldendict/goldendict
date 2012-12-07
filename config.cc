@@ -530,6 +530,7 @@ Class load() throw( exError )
       p.commandLine = pr.attribute( "commandLine" );
       p.enabled = ( pr.attribute( "enabled" ) == "1" );
       p.type = (Program::Type)( pr.attribute( "type" ).toInt() );
+      p.iconFilename = pr.attribute( "icon" );
 
       c.programs.push_back( p );
     }
@@ -1094,6 +1095,10 @@ void save( Class const & c ) throw( exError )
       QDomAttr type = dd.createAttribute( "type" );
       type.setValue( QString::number( i->type ) );
       p.setAttributeNode( type );
+
+      QDomAttr icon = dd.createAttribute( "icon" );
+      icon.setValue( i->iconFilename );
+      p.setAttributeNode( icon );
     }
   }
 

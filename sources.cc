@@ -58,6 +58,7 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
       ProgramTypeEditor::getNameForType( Config::Program::PrefixMatch ) ) + 16 );
   ui.programs->resizeColumnToContents( 2 );
   ui.programs->resizeColumnToContents( 3 );
+  ui.programs->resizeColumnToContents( 4 );
   ui.programs->setItemDelegate( itemDelegate );
 
   ui.paths->setTabKeyNavigation( true );
@@ -694,7 +695,7 @@ int ProgramsModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 4;
+    return 5;
 }
 
 QVariant ProgramsModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
@@ -710,6 +711,8 @@ QVariant ProgramsModel::headerData( int section, Qt::Orientation /*orientation*/
         return tr( "Name" );
       case 3:
         return tr( "Command Line" );
+      case 4:
+        return tr( "Icon" );
       default:
         return QVariant();
     }
@@ -735,6 +738,8 @@ QVariant ProgramsModel::data( QModelIndex const & index, int role ) const
         return programs[ index.row() ].name;
       case 3:
         return programs[ index.row() ].commandLine;
+      case 4:
+        return programs[ index.row() ].iconFilename;
       default:
         return QVariant();
     }
@@ -773,6 +778,10 @@ bool ProgramsModel::setData( QModelIndex const & index, const QVariant & value,
         return true;
       case 3:
         programs[ index.row() ].commandLine = value.toString();
+        dataChanged( index, index );
+        return true;
+      case 4:
+        programs[ index.row() ].iconFilename = value.toString();
         dataChanged( index, index );
         return true;
       default:

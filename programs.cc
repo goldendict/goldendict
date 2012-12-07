@@ -8,6 +8,8 @@
 #include "utf8.hh"
 #include "wstring_qt.hh"
 #include "parsecmdline.hh"
+#include <QDir>
+#include <QFileInfo>
 
 namespace Programs {
 
@@ -49,9 +51,7 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw()
-  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/programs.png");
-    dictionaryIconLoaded = true; }
+  virtual void loadIcon() throw();
 };
 
 sptr< WordSearchRequest > ProgramsDictionary::prefixMatch( wstring const & word,
@@ -114,6 +114,19 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
     default:
       return new DataRequestInstant( false );
   }
+}
+
+void ProgramsDictionary::loadIcon() throw()
+{
+  if( !prg.iconFilename.isEmpty() )
+  {
+    QFileInfo fInfo(  QDir( Config::getConfigDir() ), prg.iconFilename );
+    if( fInfo.isFile() )
+      loadIconFromFile( fInfo.absoluteFilePath(), true );
+  }
+  if( dictionaryIcon.isNull() )
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/programs.png");
+  dictionaryIconLoaded = true;
 }
 
 }
