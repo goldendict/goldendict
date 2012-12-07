@@ -268,6 +268,21 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
   return r;
 }
 
+sptr< Dictionary::DataRequest > ArticleMaker::makePicturePage( string const & url ) const
+{
+  string result = makeHtmlHeader( tr( "(picture)" ), QString() )
+                  + "<img src=\"" + url + "\" />"
+                  + "</body></html>";
+
+  sptr< Dictionary::DataRequestInstant > r =
+      new Dictionary::DataRequestInstant( true );
+
+  r->getData().resize( result.size() );
+  memcpy( &( r->getData().front() ), result.data(), result.size() );
+
+  return r;
+}
+
 void ArticleMaker::setExpandOptionalParts( bool expand )
 {
   needExpandOptionalParts = expand;

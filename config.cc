@@ -744,6 +744,9 @@ Class load() throw( exError )
   if ( !root.namedItem( "editDictionaryCommandLine" ).isNull() )
     c.editDictionaryCommandLine = root.namedItem( "editDictionaryCommandLine" ).toElement().text();
 
+  if ( !root.namedItem( "maxPictureWidth" ).isNull() )
+    c.maxPictureWidth = root.namedItem( "maxPictureWidth" ).toElement().text().toInt();
+
   return c;
 }
 
@@ -1373,6 +1376,9 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.editDictionaryCommandLine ) );
     root.appendChild( opt );
 
+    opt = dd.createElement( "maxPictureWidth" );
+    opt.appendChild( dd.createTextNode( QString::number( c.maxPictureWidth ) ) );
+    root.appendChild( opt );
   }
 
   QByteArray result( dd.toByteArray() );

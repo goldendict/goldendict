@@ -38,7 +38,8 @@ using std::vector;
 LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell ),
   transliteration( cfg.transliteration ),
-  exceptionText( "Load did not finish" ) // Will be cleared upon success
+  exceptionText( "Load did not finish" ), // Will be cleared upon success
+  maxPictureWidth( cfg.maxPictureWidth )
 {
   // Populate name filters
 
@@ -130,7 +131,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > dslDictionaries =
-      Dsl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      Dsl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxPictureWidth );
 
     dictionaries.insert( dictionaries.end(), dslDictionaries.begin(),
                          dslDictionaries.end() );

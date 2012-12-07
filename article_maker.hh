@@ -60,6 +60,9 @@ public:
   /// Creates an 'untitled' page. The result is guaranteed to be instant.
   sptr< Dictionary::DataRequest > makeEmptyPage() const;
 
+  /// Create page with one picture
+  sptr< Dictionary::DataRequest > makePicturePage( std::string const & url ) const;
+
   /// Set auto expanding optional parts of articles
   void setExpandOptionalParts( bool expand );
 

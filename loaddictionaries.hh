@@ -23,6 +23,7 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
   Config::Transliteration const & transliteration;
   std::vector< sptr< Dictionary::Class > > dictionaries;
   std::string exceptionText;
+  int maxPictureWidth;
 
 public:
 

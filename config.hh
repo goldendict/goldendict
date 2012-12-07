@@ -20,6 +20,10 @@ using std::vector;
 /// Dictionaries which are temporarily disabled via the dictionary bar.
 typedef QSet< QString > MutedDictionaries;
 
+#ifdef Q_OS_WIN
+#pragma pack(push,4)
+#endif
+
 /// A path where to search for the dictionaries
 struct Path
 {
@@ -401,15 +405,22 @@ struct Class
 
   unsigned short maxDictionaryRefsInContextMenu;
 
+  int maxPictureWidth; // Maximum picture width
+
   QString editDictionaryCommandLine; // Command line to call external editor for dictionary
 
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
            pinPopupWindow( false ), showingDictBarNames( false ),
-           usingSmallIconsInToolbars( false ), maxDictionaryRefsInContextMenu( 20 )
+           usingSmallIconsInToolbars( false ), maxDictionaryRefsInContextMenu( 20 ),
+           maxPictureWidth( 0 )
   {}
   Group * getGroup( unsigned id );
   Group const * getGroup( unsigned id ) const;
 };
+
+#ifdef Q_OS_WIN
+#pragma pack(pop)
+#endif
 
 /// Configuration-specific events. Some parts of the program need to react
 /// to specific changes in configuration. The object of this class is used

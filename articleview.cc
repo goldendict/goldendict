@@ -637,6 +637,11 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
     msg = tr( "Audio" );
   }
   else
+  if ( url.scheme() == "gdpicture" )
+  {
+    msg = tr( "Picture" );
+  }
+  else
   if (url.scheme() == "gdlookup" || url.scheme().compare( "bword" ) == 0)
   {
     QString def = url.path();
@@ -696,6 +701,9 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 {
   qDebug() << "clicked" << url;
 
+  if( url.scheme().compare( "gdpicture" ) == 0 )
+    ui.definition->load( url );
+  else
   if ( url.scheme().compare( "bword" ) == 0 )
   {
     showDefinition( url.path(),

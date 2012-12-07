@@ -153,11 +153,13 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
 
   int optionalPartNom;
   quint8 articleNom;
+  int maxPictureWidth;
 
 public:
 
   DslDictionary( string const & id, string const & indexFile,
-                 vector< string > const & dictionaryFiles );
+                 vector< string > const & dictionaryFiles,
+                 int maxPictureWidth_ );
 
   virtual void deferredInit();
 
@@ -235,14 +237,16 @@ private:
 
 DslDictionary::DslDictionary( string const & id,
                               string const & indexFile,
-                              vector< string > const & dictionaryFiles ):
+                              vector< string > const & dictionaryFiles,
+                              int maxPictureWidth_ ):
   BtreeDictionary( id, dictionaryFiles ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
   dz( 0 ),
   deferredInitRunnableStarted( false ),
   optionalPartNom( 0 ),
-  articleNom( 0 )
+  articleNom( 0 ),
+  maxPictureWidth( maxPictureWidth_ )
 {
   // Read the dictionary name
 
@@ -745,22 +749,20 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) )
   {
     string filename = Utf8::encode( node.renderAsText() );
+    string n =
+      getDictionaryFilenames()[ 0 ] + ".files" +
+      FsEncoding::separator() +
+      FsEncoding::encode( filename );
 
     if ( Filetype::isNameOfSound( filename ) )
     {
       // If we have the file here, do the exact reference to this dictionary.
       // Otherwise, make a global 'search' one.
 
-      string n =
-        FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
-        FsEncoding::separator() +
-        FsEncoding::encode( filename );
-
       bool search =
-
-        !File::exists( n ) && !File::exists( getDictionaryFilenames()[ 0 ] + ".files" +
-                                             FsEncoding::separator() +
-                                             FsEncoding::encode( filename ) ) &&
+          !File::exists( n ) && !File::exists( FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+                                               FsEncoding::separator() +
+                                               FsEncoding::encode( filename ) ) &&
           ( !resourceZip.isOpen() ||
             !resourceZip.hasFile( Utf8::decode( filename ) ) );
 
@@ -784,8 +786,47 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       url.setHost( QString::fromUtf8( getId().c_str() ) );
       url.setPath( QString::fromUtf8( filename.c_str() ) );
 
-      result += string( "<img src=\"" ) + url.toEncoded().data()
-             + "\" alt=\"" + Html::escape( filename ) + "\"/>";
+      vector< char > imgdata;
+      bool resize = false;
+
+      try
+      {
+        File::loadFromFile( n, imgdata );
+      }
+      catch( File::exCantOpen & )
+      {
+        // Try reading from zip file
+        if ( resourceZip.isOpen() )
+        {
+          Mutex::Lock _( resourceZipMutex );
+          resourceZip.loadFile( Utf8::decode( filename ), imgdata );
+        }
+      }
+      catch(...)
+      {
+      }
+
+      if( !imgdata.empty() )
+      {
+        QImage img = QImage::fromData( (unsigned char *) &imgdata.front(),
+                                       imgdata.size() );
+        resize = maxPictureWidth > 0
+                 && img.width() > maxPictureWidth;
+      }
+
+      if( resize )
+      {
+        string link( url.toEncoded().data() );
+        link.replace( 0, 4, "gdpicture" );
+        result += string( "<a href=\"" ) + link + "\">"
+                          + "<img src=\"" + url.toEncoded().data()
+                          + "\" alt=\"" + Html::escape( filename ) + "\""
+                          + "width=" + QString::number( maxPictureWidth).toStdString() + "/>"
+                          + "</a>";
+      }
+      else
+        result += string( "<img src=\"" ) + url.toEncoded().data()
+                  + "\" alt=\"" + Html::escape( filename ) + "\"/>";
     }
     else
     {
@@ -1424,7 +1465,8 @@ static void findCorrespondingFiles( string const & ifo,
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                      int maxPictureWidth )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1861,7 +1903,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       dictionaries.push_back( new DslDictionary( dictId,
                                                  indexFile,
-                                                 dictFiles ) );
+                                                 dictFiles,
+                                                 maxPictureWidth ) );
     }
     catch( std::exception & e )
     {
