@@ -19,6 +19,7 @@
 #include <hunspell/hunspell.hxx>
 #include "dprintf.hh"
 #include "fsencoding.hh"
+#include <QFileInfo>
 
 namespace HunspellMorpho {
 
@@ -70,9 +71,7 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw()
-  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_hunspell.png");
-    dictionaryIconLoaded = true; }
+  virtual void loadIcon() throw();
 
 private:
 
@@ -107,6 +106,23 @@ bool containsWhitespace( wstring const & str )
       return true;
 
   return false;
+}
+
+void HunspellDictionary::loadIcon() throw()
+{
+  QString fileName =
+    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+  // Remove the extension
+  fileName.chop( 3 );
+
+  if( !loadIconFromFile( fileName ) )
+  {
+    // Load failed -- use default icons
+    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_hunspell.png");
+  }
+
+  dictionaryIconLoaded = true;
 }
 
 /// HunspellDictionary::getArticle()
