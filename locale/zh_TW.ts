@@ -74,6 +74,10 @@
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;歡迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 詞典程式！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用時請首先開啟&lt;b&gt;編輯 | 詞典&lt;/b&gt;功能表以新增並掃描含有詞典檔案的資料夾，然後新增維基百科網站查詢或其它資源，再調整詞典排序或建立新的詞典群組。&lt;p style=&quot;text-indent:2em&quot;&gt;這些設定都完成以後，就可以開始使用了。你可以使用左側的查詢面板，或是&lt;a href=&quot;使用螢幕取詞功能&quot;&gt;直接從其它程式中抓詞查詢&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要改變設定，可以在&lt;b&gt;編輯 | 選項&lt;/b&gt;功能表中檢視一下可用的系統設定。所有的設定都有滑鼠指標提示資訊，如果有不明之處，請仔細閱讀提示資訊。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要更多說明，有任何疑問、建議，或是僅僅想了解其他人的想法，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;官方論壇&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要取得程式更新的訊息，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/&quot;&gt;官方網站&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2011 Konstantin Isakov. 授權基於 GPLv3 或更高版本。 {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
     </message>
+    <message>
+        <source>(picture)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
@@ -234,6 +238,10 @@
     </message>
     <message>
         <source>Send &quot;%1&quot; to input line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2478,6 +2486,10 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Command Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

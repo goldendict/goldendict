@@ -128,11 +128,16 @@
         <source>(untitled)</source>
         <translation>(sin título)</translation>
     </message>
+    <message>
+        <location filename="../article_maker.cc" line="273"/>
+        <source>(picture)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="432"/>
+        <location filename="../article_maker.cc" line="447"/>
         <source>From </source>
         <translation>Resultados de </translation>
     </message>
@@ -141,22 +146,22 @@
         <translation type="obsolete">From %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="445"/>
+        <location filename="../article_maker.cc" line="460"/>
         <source>Query error: %1</source>
         <translation>Error de consulta: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="544"/>
+        <location filename="../article_maker.cc" line="559"/>
         <source>Close words: </source>
         <translation>Palabras aproximadas: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="615"/>
+        <location filename="../article_maker.cc" line="630"/>
         <source>Compound expressions: </source>
         <translation>Expresiones compuestas:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="643"/>
+        <location filename="../article_maker.cc" line="658"/>
         <source>Individual words: </source>
         <translation>Palabras individuales:</translation>
     </message>
@@ -174,125 +179,130 @@
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="653"/>
+        <location filename="../articleview.cc" line="642"/>
+        <source>Picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="658"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Definición de diccionario &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="657"/>
+        <location filename="../articleview.cc" line="662"/>
         <source>Definition: %1</source>
         <translation>Definición: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="844"/>
-        <location filename="../articleview.cc" line="874"/>
-        <location filename="../articleview.cc" line="883"/>
-        <location filename="../articleview.cc" line="1310"/>
-        <location filename="../articleview.cc" line="1328"/>
-        <location filename="../articleview.cc" line="1338"/>
+        <location filename="../articleview.cc" line="852"/>
+        <location filename="../articleview.cc" line="882"/>
+        <location filename="../articleview.cc" line="891"/>
+        <location filename="../articleview.cc" line="1318"/>
+        <location filename="../articleview.cc" line="1336"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="844"/>
+        <location filename="../articleview.cc" line="852"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>El recurso referenciado no existe.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="884"/>
+        <location filename="../articleview.cc" line="892"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>El programa de audio referenciado no existe.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1023"/>
+        <location filename="../articleview.cc" line="1031"/>
         <source>&amp;Open Link</source>
         <translation>Abrir &amp;vínculo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1029"/>
+        <location filename="../articleview.cc" line="1037"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Abrir vínculo en nueva &amp;pestaña</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1036"/>
+        <location filename="../articleview.cc" line="1044"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Abrir vínculo en Navegador &amp;Web externo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1049"/>
+        <location filename="../articleview.cc" line="1057"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Buscar &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1057"/>
+        <location filename="../articleview.cc" line="1065"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Buscar &quot;%1&quot; en una &amp;nueva pestaña</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1062"/>
+        <location filename="../articleview.cc" line="1070"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Enviar &quot;%1&quot; a búsqueda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1068"/>
-        <location filename="../articleview.cc" line="1103"/>
+        <location filename="../articleview.cc" line="1076"/>
+        <location filename="../articleview.cc" line="1111"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Agregar &quot;%1&quot; a historial</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1082"/>
+        <location filename="../articleview.cc" line="1090"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Buscar &quot;%1&quot; en %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1090"/>
+        <location filename="../articleview.cc" line="1098"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Buscar &quot;%1&quot; en %2 en una nueva p&amp;estaña</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1254"/>
+        <location filename="../articleview.cc" line="1262"/>
         <source>Playing a non-WAV file</source>
         <translation>Reproducir un archivo que no es WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1255"/>
+        <location filename="../articleview.cc" line="1263"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Para activar la reproducción de archivos que no estén en formato WAV, ingrese a Editar|Preferencias, haga click en la pestaña Audio y marque la opción &quot;Reproducit vía DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1270"/>
+        <location filename="../articleview.cc" line="1278"/>
         <source>Bass library not found.</source>
         <translation>Biblioteca Bass no encontrada.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1275"/>
+        <location filename="../articleview.cc" line="1283"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>La biblioteca Bass no puede reproducir este sonido.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1310"/>
+        <location filename="../articleview.cc" line="1318"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>No fue posible ejecutar un programa reproductor de sonidos: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1328"/>
+        <location filename="../articleview.cc" line="1336"/>
         <source>Failed to create temporary file.</source>
         <translation>No fue posible crear archivo temporal.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1339"/>
+        <location filename="../articleview.cc" line="1347"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>No fue posible abrir el archivo automáticamente, Intente abrirlo manualmente: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1362"/>
+        <location filename="../articleview.cc" line="1370"/>
         <source>The referenced resource failed to download.</source>
         <translation>No fue posible descargar el recurso referenciado.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1270"/>
-        <location filename="../articleview.cc" line="1275"/>
-        <location filename="../articleview.cc" line="1362"/>
+        <location filename="../articleview.cc" line="1278"/>
+        <location filename="../articleview.cc" line="1283"/>
+        <location filename="../articleview.cc" line="1370"/>
         <source>WARNING: %1</source>
         <translation>ATENCIÓN: %1</translation>
     </message>
@@ -747,7 +757,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="220"/>
+        <location filename="../hunspell.cc" line="236"/>
         <source>Spelling suggestions: </source>
         <translation>Sugerencias ortográficas: </translation>
     </message>
@@ -1492,7 +1502,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
         <translation type="obsolete">Zulu</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="760"/>
+        <location filename="../hunspell.cc" line="776"/>
         <source>%1 Morphology</source>
         <translation>Morfología de %1</translation>
     </message>
@@ -1500,12 +1510,12 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1093"/>
+        <location filename="../sources.cc" line="1102"/>
         <source>Enabled</source>
         <translation>Activado</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1095"/>
+        <location filename="../sources.cc" line="1104"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
@@ -2540,7 +2550,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="212"/>
+        <location filename="../loaddictionaries.cc" line="213"/>
         <source>Error loading dictionaries</source>
         <translation>Error al cargar diccionarios</translation>
     </message>
@@ -3100,22 +3110,22 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="392"/>
+        <location filename="../sources.cc" line="393"/>
         <source>Enabled</source>
         <translation>Activado</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="394"/>
+        <location filename="../sources.cc" line="395"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="396"/>
+        <location filename="../sources.cc" line="397"/>
         <source>Address</source>
         <translation>Dirección</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="398"/>
+        <location filename="../sources.cc" line="399"/>
         <source>Icon</source>
         <translation>Ícono</translation>
     </message>
@@ -3194,12 +3204,12 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="882"/>
+        <location filename="../sources.cc" line="891"/>
         <source>Path</source>
         <translation>Ruta de directorio</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="884"/>
+        <location filename="../sources.cc" line="893"/>
         <source>Recursive</source>
         <translation>Búsqueda recursiva</translation>
     </message>
@@ -3863,27 +3873,27 @@ página web de descarga utilizando el navegador de internet.</translation>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="790"/>
+        <location filename="../sources.cc" line="799"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="792"/>
+        <location filename="../sources.cc" line="801"/>
         <source>Plain Text</source>
         <translation>Texto simple</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="794"/>
+        <location filename="../sources.cc" line="803"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="796"/>
+        <location filename="../sources.cc" line="805"/>
         <source>Prefix Match</source>
         <translation>Coincidencia prefijo</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="798"/>
+        <location filename="../sources.cc" line="807"/>
         <source>Unknown</source>
         <translation>Desconocido</translation>
     </message>
@@ -3891,17 +3901,17 @@ página web de descarga utilizando el navegador de internet.</translation>
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="151"/>
+        <location filename="../programs.cc" line="164"/>
         <source>No program name was given.</source>
         <translation>No se ha ingresado el nombre del programa.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="180"/>
         <source>The program has crashed.</source>
         <translation>Ha ocurrido un error en el programa.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="170"/>
+        <location filename="../programs.cc" line="183"/>
         <source>The program has returned exit code %1.</source>
         <translation>El programa ha retornado un error %1.</translation>
     </message>
@@ -3909,24 +3919,29 @@ página web de descarga utilizando el navegador de internet.</translation>
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="706"/>
+        <location filename="../sources.cc" line="707"/>
         <source>Enabled</source>
         <translation>Activado</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="708"/>
+        <location filename="../sources.cc" line="709"/>
         <source>Type</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="710"/>
+        <location filename="../sources.cc" line="711"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="712"/>
+        <location filename="../sources.cc" line="713"/>
         <source>Command Line</source>
         <translation>Línea de comando</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="715"/>
+        <source>Icon</source>
+        <translation type="unfinished">Ícono</translation>
     </message>
 </context>
 <context>
@@ -4033,12 +4048,12 @@ o pueda ser manipulada de otras formas.</translation>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="988"/>
+        <location filename="../sources.cc" line="997"/>
         <source>Path</source>
         <translation>Ruta de directorio</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="990"/>
+        <location filename="../sources.cc" line="999"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
@@ -4046,40 +4061,40 @@ o pueda ser manipulada de otras formas.</translation>
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="106"/>
+        <location filename="../sources.cc" line="107"/>
         <source>(not available in portable version)</source>
         <translation>(no disponible en versión portátil)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="142"/>
-        <location filename="../sources.cc" line="169"/>
-        <location filename="../sources.cc" line="196"/>
+        <location filename="../sources.cc" line="143"/>
+        <location filename="../sources.cc" line="170"/>
+        <location filename="../sources.cc" line="197"/>
         <source>Choose a directory</source>
         <translation>Elija un directorio</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="156"/>
-        <location filename="../sources.cc" line="183"/>
-        <location filename="../sources.cc" line="223"/>
-        <location filename="../sources.cc" line="247"/>
-        <location filename="../sources.cc" line="271"/>
+        <location filename="../sources.cc" line="157"/>
+        <location filename="../sources.cc" line="184"/>
+        <location filename="../sources.cc" line="224"/>
+        <location filename="../sources.cc" line="248"/>
+        <location filename="../sources.cc" line="272"/>
         <source>Confirm removal</source>
         <translation>Confirmar eliminación</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="157"/>
-        <location filename="../sources.cc" line="184"/>
+        <location filename="../sources.cc" line="158"/>
+        <location filename="../sources.cc" line="185"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>¿Eliminar el directorio &lt;b&gt;%1&lt;/b&gt; de la lista?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="224"/>
-        <location filename="../sources.cc" line="248"/>
+        <location filename="../sources.cc" line="225"/>
+        <location filename="../sources.cc" line="249"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>¿Eliminar el sitio &lt;b&gt;%1&lt;/b&gt; de la lista?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="272"/>
+        <location filename="../sources.cc" line="273"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>¿Eliminar el programa &lt;b&gt;%1&lt;/b&gt; de la lista?</translation>
     </message>
@@ -4375,22 +4390,22 @@ Todavía no está implementado en GoldenDict.</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="549"/>
+        <location filename="../sources.cc" line="550"/>
         <source>Enabled</source>
         <translation>Activado</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="551"/>
+        <location filename="../sources.cc" line="552"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="553"/>
+        <location filename="../sources.cc" line="554"/>
         <source>Address</source>
         <translation>Dirección</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="555"/>
+        <location filename="../sources.cc" line="556"/>
         <source>Icon</source>
         <translation type="unfinished">Ícono</translation>
     </message>

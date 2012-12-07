@@ -89,31 +89,36 @@
         <source>(untitled)</source>
         <translation>(無題)</translation>
     </message>
+    <message>
+        <location filename="../article_maker.cc" line="273"/>
+        <source>(picture)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="432"/>
+        <location filename="../article_maker.cc" line="447"/>
         <source>From </source>
         <translation>From </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="445"/>
+        <location filename="../article_maker.cc" line="460"/>
         <source>Query error: %1</source>
         <translation>クエリ エラー: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="544"/>
+        <location filename="../article_maker.cc" line="559"/>
         <source>Close words: </source>
         <translation>類似語: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="615"/>
+        <location filename="../article_maker.cc" line="630"/>
         <source>Compound expressions: </source>
         <translation>複合表現: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="643"/>
+        <location filename="../article_maker.cc" line="658"/>
         <source>Individual words: </source>
         <translation>単語ごと: </translation>
     </message>
@@ -131,125 +136,130 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="653"/>
+        <location filename="../articleview.cc" line="642"/>
+        <source>Picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="658"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="657"/>
+        <location filename="../articleview.cc" line="662"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="844"/>
-        <location filename="../articleview.cc" line="874"/>
-        <location filename="../articleview.cc" line="883"/>
-        <location filename="../articleview.cc" line="1310"/>
-        <location filename="../articleview.cc" line="1328"/>
-        <location filename="../articleview.cc" line="1338"/>
+        <location filename="../articleview.cc" line="852"/>
+        <location filename="../articleview.cc" line="882"/>
+        <location filename="../articleview.cc" line="891"/>
+        <location filename="../articleview.cc" line="1318"/>
+        <location filename="../articleview.cc" line="1336"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="844"/>
+        <location filename="../articleview.cc" line="852"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>参照されたりソースが存在しません。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="884"/>
+        <location filename="../articleview.cc" line="892"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1023"/>
+        <location filename="../articleview.cc" line="1031"/>
         <source>&amp;Open Link</source>
         <translation>リンクを開く(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1029"/>
+        <location filename="../articleview.cc" line="1037"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>新しいタブでリンクを開く(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1036"/>
+        <location filename="../articleview.cc" line="1044"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>外部ブラウザーでリンクを開く(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1049"/>
+        <location filename="../articleview.cc" line="1057"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot; を検索(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1057"/>
+        <location filename="../articleview.cc" line="1065"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>新しいタブで &quot;%1&quot; を検索(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1062"/>
+        <location filename="../articleview.cc" line="1070"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1068"/>
-        <location filename="../articleview.cc" line="1103"/>
+        <location filename="../articleview.cc" line="1076"/>
+        <location filename="../articleview.cc" line="1111"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1082"/>
+        <location filename="../articleview.cc" line="1090"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>%2 から &quot;%1&quot; を検索</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1090"/>
+        <location filename="../articleview.cc" line="1098"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>新しいタブで %2 から &quot;%1&quot; を検索(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1254"/>
+        <location filename="../articleview.cc" line="1262"/>
         <source>Playing a non-WAV file</source>
         <translation>非 WAV ファイルの再生</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1255"/>
+        <location filename="../articleview.cc" line="1263"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>WAV 以外のファイルの再生を有効にするには、[オーディオ] タブの &quot;DirectShow を通じて再生する&quot; を選択します。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1270"/>
+        <location filename="../articleview.cc" line="1278"/>
         <source>Bass library not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1275"/>
+        <location filename="../articleview.cc" line="1283"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1310"/>
+        <location filename="../articleview.cc" line="1318"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>サウンド ファイルを再生するプレーヤーの実行に失敗しました: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1328"/>
+        <location filename="../articleview.cc" line="1336"/>
         <source>Failed to create temporary file.</source>
         <translation>一時ファイルの作成に失敗しました。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1339"/>
+        <location filename="../articleview.cc" line="1347"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>リソース ファイルの自動オープンに失敗しました、手動で開いています: %1。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1362"/>
+        <location filename="../articleview.cc" line="1370"/>
         <source>The referenced resource failed to download.</source>
         <translation>参照されたリソースのダウンロードに失敗しました。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1270"/>
-        <location filename="../articleview.cc" line="1275"/>
-        <location filename="../articleview.cc" line="1362"/>
+        <location filename="../articleview.cc" line="1278"/>
+        <location filename="../articleview.cc" line="1283"/>
+        <location filename="../articleview.cc" line="1370"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">警告: %1</translation>
     </message>
@@ -699,12 +709,12 @@
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="220"/>
+        <location filename="../hunspell.cc" line="236"/>
         <source>Spelling suggestions: </source>
         <translation>もしかして: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="760"/>
+        <location filename="../hunspell.cc" line="776"/>
         <source>%1 Morphology</source>
         <translation>%1 形態</translation>
     </message>
@@ -712,12 +722,12 @@
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1093"/>
+        <location filename="../sources.cc" line="1102"/>
         <source>Enabled</source>
         <translation>有効</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1095"/>
+        <location filename="../sources.cc" line="1104"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
@@ -1752,7 +1762,7 @@
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="212"/>
+        <location filename="../loaddictionaries.cc" line="213"/>
         <source>Error loading dictionaries</source>
         <translation>辞書の読み込みエラー</translation>
     </message>
@@ -2284,22 +2294,22 @@
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="392"/>
+        <location filename="../sources.cc" line="393"/>
         <source>Enabled</source>
         <translation>有効</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="394"/>
+        <location filename="../sources.cc" line="395"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="396"/>
+        <location filename="../sources.cc" line="397"/>
         <source>Address</source>
         <translation>アドレス</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="398"/>
+        <location filename="../sources.cc" line="399"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2378,12 +2388,12 @@
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="882"/>
+        <location filename="../sources.cc" line="891"/>
         <source>Path</source>
         <translation>パス</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="884"/>
+        <location filename="../sources.cc" line="893"/>
         <source>Recursive</source>
         <translation>再帰</translation>
     </message>
@@ -3024,27 +3034,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="790"/>
+        <location filename="../sources.cc" line="799"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="792"/>
+        <location filename="../sources.cc" line="801"/>
         <source>Plain Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="794"/>
+        <location filename="../sources.cc" line="803"/>
         <source>Html</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="796"/>
+        <location filename="../sources.cc" line="805"/>
         <source>Prefix Match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="798"/>
+        <location filename="../sources.cc" line="807"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3052,17 +3062,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="151"/>
+        <location filename="../programs.cc" line="164"/>
         <source>No program name was given.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="180"/>
         <source>The program has crashed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="170"/>
+        <location filename="../programs.cc" line="183"/>
         <source>The program has returned exit code %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3070,23 +3080,28 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="706"/>
+        <location filename="../sources.cc" line="707"/>
         <source>Enabled</source>
         <translation type="unfinished">有効</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="708"/>
+        <location filename="../sources.cc" line="709"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="710"/>
+        <location filename="../sources.cc" line="711"/>
         <source>Name</source>
         <translation type="unfinished">名前</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="712"/>
+        <location filename="../sources.cc" line="713"/>
         <source>Command Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="715"/>
+        <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3177,12 +3192,12 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="988"/>
+        <location filename="../sources.cc" line="997"/>
         <source>Path</source>
         <translation>パス</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="990"/>
+        <location filename="../sources.cc" line="999"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
@@ -3190,40 +3205,40 @@ could be resized or managed in other ways.</source>
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="106"/>
+        <location filename="../sources.cc" line="107"/>
         <source>(not available in portable version)</source>
         <translation>(ポータブル バージョンでは利用できません)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="142"/>
-        <location filename="../sources.cc" line="169"/>
-        <location filename="../sources.cc" line="196"/>
+        <location filename="../sources.cc" line="143"/>
+        <location filename="../sources.cc" line="170"/>
+        <location filename="../sources.cc" line="197"/>
         <source>Choose a directory</source>
         <translation>ディレクトリを選択します</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="156"/>
-        <location filename="../sources.cc" line="183"/>
-        <location filename="../sources.cc" line="223"/>
-        <location filename="../sources.cc" line="247"/>
-        <location filename="../sources.cc" line="271"/>
+        <location filename="../sources.cc" line="157"/>
+        <location filename="../sources.cc" line="184"/>
+        <location filename="../sources.cc" line="224"/>
+        <location filename="../sources.cc" line="248"/>
+        <location filename="../sources.cc" line="272"/>
         <source>Confirm removal</source>
         <translation>削除の確認</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="157"/>
-        <location filename="../sources.cc" line="184"/>
+        <location filename="../sources.cc" line="158"/>
+        <location filename="../sources.cc" line="185"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>一覧からディレクトリ &lt;b&gt;%1&lt;/b&gt; を削除しますか?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="224"/>
-        <location filename="../sources.cc" line="248"/>
+        <location filename="../sources.cc" line="225"/>
+        <location filename="../sources.cc" line="249"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>一覧からサイト &lt;b&gt;%1&lt;/b&gt; を削除しますか?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="272"/>
+        <location filename="../sources.cc" line="273"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3505,22 +3520,22 @@ GoldenDict にはまだ実装されていません。</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="549"/>
+        <location filename="../sources.cc" line="550"/>
         <source>Enabled</source>
         <translation>有効</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="551"/>
+        <location filename="../sources.cc" line="552"/>
         <source>Name</source>
         <translation>名前</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="553"/>
+        <location filename="../sources.cc" line="554"/>
         <source>Address</source>
         <translation>アドレス</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="555"/>
+        <location filename="../sources.cc" line="556"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>

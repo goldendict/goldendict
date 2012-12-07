@@ -80,6 +80,10 @@ href=&quot;http://goldendict.org/forum/&quot;&gt;forumu&lt;/a&gt; açıktır.&lt
 href=&quot;http://goldendict.org/&quot;&gt;web sitesinden&lt;/a&gt; güncellemelere bakın. &lt;p&gt;(c) 2008-2012 Konstantin İsakov. 
 GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
+    <message>
+        <source>(picture)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
@@ -241,6 +245,10 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Send &quot;%1&quot; to input line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2500,6 +2508,10 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <source>Command Line</source>
         <translation>Komut Satırı</translation>
+    </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
