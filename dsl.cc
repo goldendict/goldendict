@@ -821,7 +821,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
         result += string( "<a href=\"" ) + link + "\">"
                           + "<img src=\"" + url.toEncoded().data()
                           + "\" alt=\"" + Html::escape( filename ) + "\""
-                          + "width=" + QString::number( maxPictureWidth).toStdString() + "/>"
+                          + "width=\"" + QString::number( maxPictureWidth).toStdString() + "\"/>"
                           + "</a>";
       }
       else
