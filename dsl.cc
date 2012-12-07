@@ -795,11 +795,21 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       }
       catch( File::exCantOpen & )
       {
-        // Try reading from zip file
-        if ( resourceZip.isOpen() )
+        try
         {
-          Mutex::Lock _( resourceZipMutex );
-          resourceZip.loadFile( Utf8::decode( filename ), imgdata );
+          n = FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+              FsEncoding::separator() +
+              FsEncoding::encode( filename );
+          File::loadFromFile( n, imgdata );
+        }
+        catch( File::exCantOpen & )
+        {
+          // Try reading from zip file
+          if ( resourceZip.isOpen() )
+          {
+            Mutex::Lock _( resourceZipMutex );
+            resourceZip.loadFile( Utf8::decode( filename ), imgdata );
+          }
         }
       }
       catch(...)
