@@ -271,7 +271,8 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
 sptr< Dictionary::DataRequest > ArticleMaker::makePicturePage( string const & url ) const
 {
   string result = makeHtmlHeader( tr( "(picture)" ), QString() )
-                  + "<img src=\"" + url + "\" />"
+                  + "<a href=\"javascript: if(history.length>2) history.go(-1)\">"
+                  + "<img src=\"" + url + "\" /></a>"
                   + "</body></html>";
 
   sptr< Dictionary::DataRequestInstant > r =
