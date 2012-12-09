@@ -230,7 +230,7 @@ struct WebSite
   {}
 
   WebSite( QString const & id_, QString const & name_, QString const & url_,
-           bool enabled_, QString iconFilename_ ):
+           bool enabled_, QString const & iconFilename_ ):
     id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ), iconFilename( iconFilename_ ) {}
 
   bool operator == ( WebSite const & other ) const
@@ -348,7 +348,7 @@ struct Program
   {}
 
   Program( bool enabled_, Type type_, QString const & id_,
-          QString const & name_, QString const & commandLine_, QString iconFilename_ ):
+          QString const & name_, QString const & commandLine_, QString const & iconFilename_ ):
     enabled( enabled_ ), type( type_ ), id( id_ ), name( name_ ),
     commandLine( commandLine_ ), iconFilename( iconFilename_ ) {}
 
