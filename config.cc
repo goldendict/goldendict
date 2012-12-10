@@ -371,6 +371,8 @@ Class load() throw( exError )
     }
   }
 
+  getStylesDir();
+
   QFile configFile( configName );
 
   if ( !configFile.open( QFile::ReadOnly ) )
@@ -692,6 +694,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "alwaysExpandOptionalParts" ).isNull() )
       c.preferences.alwaysExpandOptionalParts = preferences.namedItem( "alwaysExpandOptionalParts" ).toElement().text().toUInt() ;
+
+    if ( !preferences.namedItem( "addonStyle" ).isNull() )
+      c.preferences.addonStyle = preferences.namedItem( "addonStyle" ).toElement().text();
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -1315,6 +1320,10 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "alwaysExpandOptionalParts" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.alwaysExpandOptionalParts ) ) );
     preferences.appendChild( opt );
+
+    opt = dd.createElement( "addonStyle" );
+    opt.appendChild( dd.createTextNode( c.preferences.addonStyle ) );
+    preferences.appendChild( opt );
   }
 
   {
@@ -1487,6 +1496,18 @@ QString getPortableVersionMorphoDir() throw()
     return getPortableVersionDictionaryDir() + "/morphology";
   else
     return QString();
+}
+
+QString getStylesDir() throw()
+{
+  QDir result = getHomeDir();
+
+  result.mkpath( "styles" );
+
+  if ( !result.cd( "styles" ) )
+    return QString();
+
+  return result.path() + QDir::separator();
 }
 
 }

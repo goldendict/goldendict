@@ -205,7 +205,8 @@ HEADERS += folding.hh \
     aard.hh \
     mruqmenu.hh \
     dictinfo.hh \
-    zipsounds.hh
+    zipsounds.hh \
+    stylescombobox.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -301,7 +302,8 @@ SOURCES += folding.cc \
     aard.cc \
     mruqmenu.cc \
     dictinfo.cc \
-    zipsounds.cc
+    zipsounds.cc \
+    stylescombobox.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \

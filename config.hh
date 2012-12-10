@@ -195,6 +195,8 @@ struct Preferences
   unsigned storeHistory;
   bool alwaysExpandOptionalParts;
 
+  QString addonStyle;
+
   Preferences();
 };
 
@@ -500,6 +502,9 @@ QString getPortableVersionDictionaryDir() throw();
 /// Returns directory with morpgologies for portable version. It is
 /// content/morphology in the application's directory.
 QString getPortableVersionMorphoDir() throw();
+
+/// Returns the add-on styles directory.
+QString getStylesDir() throw();
 
 }
 

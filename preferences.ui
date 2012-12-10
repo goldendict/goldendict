@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>572</width>
-    <height>381</height>
+    <height>394</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,19 +41,6 @@
        <string>&amp;Interface</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0" colspan="2">
-        <spacer name="verticalSpacer_8">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="1" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
@@ -151,6 +138,16 @@ the application.</string>
          </layout>
         </widget>
        </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="selectBySingleClick">
+         <property name="toolTip">
+          <string>Turn this option on if you want to select words by single mouse click</string>
+         </property>
+         <property name="text">
+          <string>Select word by single click</string>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="1">
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
@@ -170,7 +167,20 @@ the application.</string>
          </layout>
         </widget>
        </item>
-       <item row="7" column="0" colspan="2">
+       <item row="0" column="0" colspan="2">
+        <spacer name="verticalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="6" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="QLabel" name="label_6">
@@ -223,7 +233,7 @@ the application.</string>
          </item>
         </layout>
        </item>
-       <item row="8" column="0" colspan="2">
+       <item row="10" column="0" colspan="2">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -232,22 +242,6 @@ the application.</string>
           <size>
            <width>20</width>
            <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="6" column="0">
-        <spacer name="verticalSpacer_9">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>9</height>
           </size>
          </property>
         </spacer>
@@ -270,15 +264,32 @@ With this on however, it will hide the main window.</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="selectBySingleClick">
-         <property name="toolTip">
-          <string>Turn this option on if you want to select words by single mouse click</string>
-         </property>
-         <property name="text">
-          <string>Select word by single click</string>
-         </property>
-        </widget>
+       <item row="8" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="addonStylesLabel">
+           <property name="text">
+            <string>Add-on style:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="StylesComboBox" name="addonStyles"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -1179,6 +1190,11 @@ It is not needed to select this option if you don't use such programs.</string>
    <class>HotKeyEdit</class>
    <extends>QLineEdit</extends>
    <header>hotkeyedit.hh</header>
+  </customwidget>
+  <customwidget>
+   <class>StylesComboBox</class>
+   <extends>QComboBox</extends>
+   <header>stylescombobox.hh</header>
   </customwidget>
  </customwidgets>
  <tabstops>

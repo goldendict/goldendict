@@ -121,7 +121,7 @@ private:
   QPrinter & getPrinter(); // Creates a printer if it's not there and returns it
 
   /// Applies the qt's stylesheet, given the style's name.
-  void applyQtStyleSheet( QString const & displayStyle );
+  void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
 
   /// Creates, destroys or otherwise updates tray icon, according to the
   /// current configuration and situation.

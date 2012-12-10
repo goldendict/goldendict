@@ -64,7 +64,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   cfg( cfg_ ),
   history( History::Load(), cfg_.preferences.maxStringsInHistory ),
   dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine ),
-  articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle ),
+  articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle,
+                cfg.preferences.addonStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites ),
   dictNetMgr( this ),
@@ -72,7 +73,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   newReleaseCheckTimer( this ),
   wordListSelChanged( false )
 {
-  applyQtStyleSheet( cfg.preferences.displayStyle );
+  applyQtStyleSheet( cfg.preferences.displayStyle, cfg.preferences.addonStyle );
 
   ui.setupUi( this );
 
@@ -646,7 +647,7 @@ QPrinter & MainWindow::getPrinter()
   return *printer;
 }
 
-void MainWindow::applyQtStyleSheet( QString const & displayStyle )
+void MainWindow::applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle )
 {
   QFile builtInCssFile( ":/qt-style.css" );
   builtInCssFile.open( QFile::ReadOnly );
@@ -665,6 +666,15 @@ void MainWindow::applyQtStyleSheet( QString const & displayStyle )
 
   if ( cssFile.open( QFile::ReadOnly ) )
     css += cssFile.readAll();
+
+  if( !addonStyle.isEmpty() )
+  {
+    QString name = Config::getStylesDir() + addonStyle
+                   + QDir::separator() + "qt-style.css";
+    QFile addonCss( name );
+    if( addonCss.open( QFile::ReadOnly ) )
+      css += addonCss.readAll();
+  }
 
   setStyleSheet( css );
 }
@@ -1433,10 +1443,10 @@ void MainWindow::editPreferences()
     bool needReload = false;
 
     // See if we need to reapply stylesheets
-    if ( cfg.preferences.displayStyle != p.displayStyle )
+    if ( cfg.preferences.displayStyle != p.displayStyle || cfg.preferences.addonStyle != p.addonStyle )
     {
-      applyQtStyleSheet( p.displayStyle );
-      articleMaker.setDisplayStyle( p.displayStyle );
+      applyQtStyleSheet( p.displayStyle, p.addonStyle );
+      articleMaker.setDisplayStyle( p.displayStyle, p.addonStyle );
       needReload = true;
     }
 

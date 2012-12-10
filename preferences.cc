@@ -198,6 +198,10 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.checkForNewReleases->setChecked( p.checkForNewReleases );
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
   ui.enableWebPlugins->setChecked( p.enableWebPlugins );
+
+  // Add-on styles
+  ui.addonStylesLabel->setVisible( ui.addonStyles->count() > 1 );
+  ui.addonStyles->setCurrentStyle( p.addonStyle );
 }
 
 Config::Preferences Preferences::getPreferences()
@@ -276,6 +280,8 @@ Config::Preferences Preferences::getPreferences()
   p.checkForNewReleases = ui.checkForNewReleases->isChecked();
   p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();
   p.enableWebPlugins = ui.enableWebPlugins->isChecked();
+
+  p.addonStyle = ui.addonStyles->getCurrentStyle();
 
   return p;
 }

@@ -21,17 +21,20 @@ using std::list;
 
 ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictionaries_,
                             vector< Instances::Group > const & groups_,
-                            QString const & displayStyle_ ):
+                            QString const & displayStyle_,
+                            QString const & addonStyle_):
   dictionaries( dictionaries_ ),
   groups( groups_ ),
   displayStyle( displayStyle_ ),
+  addonStyle( addonStyle_ ),
   needExpandOptionalParts( true )
 {
 }
 
-void ArticleMaker::setDisplayStyle( QString const & st )
+void ArticleMaker::setDisplayStyle( QString const & st, QString const & adst )
 {
   displayStyle = st;
+  addonStyle = adst;
 }
 
 std::string ArticleMaker::makeHtmlHeader( QString const & word,
@@ -48,7 +51,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     QFile builtInCssFile( ":/article-style.css" );
     builtInCssFile.open( QFile::ReadOnly );
     QByteArray css = builtInCssFile.readAll();
-    
+
     if ( displayStyle.size() )
     {
       // Load an additional stylesheet
@@ -58,10 +61,19 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     }
 
     QFile cssFile( Config::getUserCssFileName() );
-  
+
     if ( cssFile.open( QFile::ReadOnly ) )
       css += cssFile.readAll();
-    
+
+    if( !addonStyle.isEmpty() )
+    {
+      QString name = Config::getStylesDir() + addonStyle
+                     + QDir::separator() + "article-style.css";
+      QFile addonCss( name );
+      if( addonCss.open( QFile::ReadOnly ) )
+        css += addonCss.readAll();
+    }
+
     result += "<style type=\"text/css\" media=\"all\">\n";
     result += css.data();
 
@@ -73,7 +85,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   }
 
   // Add print-only css
-  
+
   {
     QFile builtInCssFile( ":/article-style-print.css" );
     builtInCssFile.open( QFile::ReadOnly );
@@ -83,12 +95,21 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
 
     if ( cssFile.open( QFile::ReadOnly ) )
       css += cssFile.readAll();
-    
+
+    if( !addonStyle.isEmpty() )
+    {
+      QString name = Config::getStylesDir() + addonStyle
+                     + QDir::separator() + "article-style-print.css";
+      QFile addonCss( name );
+      if( addonCss.open( QFile::ReadOnly ) )
+        css += addonCss.readAll();
+    }
+
     result += "<style type=\"text/css\" media=\"print\">\n";
     result += css.data();
     result += "</style>\n";
   }
-  
+
   result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
 
   // This doesn't seem to be much of influence right now, but we'll keep

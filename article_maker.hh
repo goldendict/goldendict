@@ -20,7 +20,7 @@ class ArticleMaker: public QObject
   std::vector< sptr< Dictionary::Class > > const & dictionaries;
   std::vector< Instances::Group > const & groups;
 
-  QString displayStyle;
+  QString displayStyle, addonStyle;
 
   bool needExpandOptionalParts;
 
@@ -32,11 +32,12 @@ public:
   /// of the inquiries, although those changes are perfectly legal.
   ArticleMaker( std::vector< sptr< Dictionary::Class > > const & dictionaries,
                 std::vector< Instances::Group > const & groups,
-                QString const & displayStyle );
+                QString const & displayStyle,
+                QString const & addonStyle);
 
   /// Sets the display style to use for any new requests. This affects the
   /// choice of the stylesheet file.
-  void setDisplayStyle( QString const & );
+  void setDisplayStyle( QString const &, QString const & addonStyle );
 
   /// Looks up the given word within the given group, and creates a full html
   /// page text containing its definition.
