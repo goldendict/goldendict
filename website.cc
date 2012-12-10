@@ -142,7 +142,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & w
 {
   vector< sptr< Dictionary::Class > > result;
 
-  for( unsigned x = 0; x < ws.size(); ++x )
+  for( int x = 0; x < ws.size(); ++x )
   {
     if ( ws[ x ].enabled )
       result.push_back( new WebSiteDictionary( ws[ x ].id.toUtf8().data(),

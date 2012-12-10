@@ -143,17 +143,17 @@ Romaji::Romaji():
 
 Group * Class::getGroup( unsigned id )
 {
-  for( unsigned x = 0; x < groups.size(); x++ )
-    if( groups[ x ].id == id )
+  for( int x = 0; x < groups.size(); x++ )
+    if( groups.at( x ).id == id )
       return &groups[ x ];
   return 0;
 }
 
 Group const * Class::getGroup( unsigned id ) const
 {
-  for( unsigned x = 0; x < groups.size(); x++ )
-    if( groups[ x ].id == id )
-      return &groups[ x ];
+  for( int x = 0; x < groups.size(); x++ )
+    if( groups.at( x ).id == id )
+      return &groups.at( x );
   return 0;
 }
 
@@ -795,7 +795,7 @@ void saveGroup( Group const & data, QDomElement & group )
     group.setAttributeNode( shortcut );
   }
 
-  for( vector< DictionaryRef >::const_iterator j = data.dictionaries.begin(); j != data.dictionaries.end(); ++j )
+  for( QVector< DictionaryRef >::const_iterator j = data.dictionaries.begin(); j != data.dictionaries.end(); ++j )
   {
     QDomElement dictionary = dd.createElement( "dictionary" );
 
@@ -924,10 +924,10 @@ void save( Class const & c ) throw( exError )
     hunspell.setAttributeNode( path );
     root.appendChild( hunspell );
 
-    for( unsigned x = 0; x < c.hunspell.enabledDictionaries.size(); ++x )
+    for( int x = 0; x < c.hunspell.enabledDictionaries.size(); ++x )
     {
       QDomElement en = dd.createElement( "enabled" );
-      QDomText value = dd.createTextNode( c.hunspell.enabledDictionaries[ x ] );
+      QDomText value = dd.createTextNode( c.hunspell.enabledDictionaries.at( x ) );
 
       en.appendChild( value );
       hunspell.appendChild( en );

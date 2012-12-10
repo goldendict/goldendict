@@ -20,7 +20,7 @@ Group::Group( Config::Group const & cfgGroup,
   if ( !cfgGroup.iconData.isEmpty() )
     iconData = iconFromData( cfgGroup.iconData );
 
-  for( unsigned x = 0; x < cfgGroup.dictionaries.size(); ++x )
+  for( unsigned x = 0; x < (unsigned)cfgGroup.dictionaries.size(); ++x )
   {
     std::string id = cfgGroup.dictionaries[ x ].id.toStdString();
 
@@ -53,10 +53,10 @@ Group::Group( Config::Group const & cfgGroup,
         if( n < dictionaries.size() )
           continue;
 
-        for( n = x + 1; n < cfgGroup.dictionaries.size(); n++ )
+        for( n = x + 1; n < (unsigned)cfgGroup.dictionaries.size(); n++ )
           if( cfgGroup.dictionaries[ n ].name == qname )
             break;
-        if( n < cfgGroup.dictionaries.size() )
+        if( n < (unsigned)cfgGroup.dictionaries.size() )
           continue;
 
         for( unsigned y = 0; y < allDictionaries.size(); ++y )
@@ -179,7 +179,7 @@ void updateNames( Config::Group & group,
 void updateNames( Config::Groups & groups,
                   vector< sptr< Dictionary::Class > > const & allDictionaries )
 {
-  for( unsigned x = 0; x < groups.size(); ++x )
+  for( int x = 0; x < groups.size(); ++x )
     updateNames( groups[ x ], allDictionaries );
 }
 

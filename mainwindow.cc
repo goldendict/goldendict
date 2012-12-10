@@ -826,7 +826,7 @@ void MainWindow::updateGroupList()
     groupInstances.push_back( g );
   }
 
-  for( unsigned x  = 0; x < cfg.groups.size(); ++x )
+  for( int x  = 0; x < cfg.groups.size(); ++x )
     groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
 
   // Update names for dictionaries that are present, so that they could be
@@ -1382,7 +1382,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   {
 
     // Set muted dictionaries from old groups
-    for( unsigned x = 0; x < newCfg.groups.size(); x++ )
+    for( int x = 0; x < newCfg.groups.size(); x++ )
     {
       unsigned id = newCfg.groups[ x ].id;
       if( id != Instances::Group::NoGroupId )

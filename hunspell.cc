@@ -688,7 +688,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & c
   vector< DataFiles > dataFiles = findDataFiles( cfg.dictionariesPath );
 
 
-  for( unsigned x = 0; x < cfg.enabledDictionaries.size(); ++x )
+  for( int x = 0; x < cfg.enabledDictionaries.size(); ++x )
   {
     for( unsigned d = dataFiles.size(); d--; )
     {

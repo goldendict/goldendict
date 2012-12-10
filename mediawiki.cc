@@ -422,7 +422,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 {
   vector< sptr< Dictionary::Class > > result;
 
-  for( unsigned x = 0; x < wikis.size(); ++x )
+  for( int x = 0; x < wikis.size(); ++x )
   {
     if ( wikis[ x ].enabled )
       result.push_back( new MediaWikiDictionary( wikis[ x ].id.toStdString(),

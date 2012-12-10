@@ -497,7 +497,7 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
 
   allDicts = &allDicts_;
 
-  for( unsigned x = 0; x < groups.size(); ++x )
+  for( int x = 0; x < groups.size(); ++x )
     addTab( new DictGroupWidget( this, *allDicts, groups[ x ] ), escapeAmps( groups[ x ].name ) );
 
   nextId = groups.nextId;

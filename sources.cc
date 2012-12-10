@@ -406,7 +406,7 @@ QVariant MediaWikisModel::headerData( int section, Qt::Orientation /*orientation
 
 QVariant MediaWikisModel::data( QModelIndex const & index, int role ) const
 {
-  if ( (unsigned)index.row() >= mediawikis.size() )
+  if ( index.row() >= mediawikis.size() )
     return QVariant();
 
   if ( role == Qt::DisplayRole || role == Qt::EditRole )
@@ -433,7 +433,7 @@ QVariant MediaWikisModel::data( QModelIndex const & index, int role ) const
 bool MediaWikisModel::setData( QModelIndex const & index, const QVariant & value,
                                int role )
 {
-  if ( (unsigned)index.row() >= mediawikis.size() )
+  if ( index.row() >= mediawikis.size() )
     return false;
 
   if ( role == Qt::CheckStateRole && !index.column() )
@@ -563,7 +563,7 @@ QVariant WebSitesModel::headerData( int section, Qt::Orientation /*orientation*/
 
 QVariant WebSitesModel::data( QModelIndex const & index, int role ) const
 {
-  if ( (unsigned)index.row() >= webSites.size() )
+  if ( index.row() >= webSites.size() )
     return QVariant();
 
   if ( role == Qt::DisplayRole || role == Qt::EditRole )
@@ -590,7 +590,7 @@ QVariant WebSitesModel::data( QModelIndex const & index, int role ) const
 bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
                                int role )
 {
-  if ( (unsigned)index.row() >= webSites.size() )
+  if ( index.row() >= webSites.size() )
     return false;
 
   if ( role == Qt::CheckStateRole && !index.column() )
@@ -722,7 +722,7 @@ QVariant ProgramsModel::headerData( int section, Qt::Orientation /*orientation*/
 
 QVariant ProgramsModel::data( QModelIndex const & index, int role ) const
 {
-  if ( (unsigned) index.row() >= programs.size() )
+  if ( index.row() >= programs.size() )
     return QVariant();
 
   if ( role == Qt::DisplayRole || role == Qt::EditRole )
@@ -754,7 +754,7 @@ QVariant ProgramsModel::data( QModelIndex const & index, int role ) const
 bool ProgramsModel::setData( QModelIndex const & index, const QVariant & value,
                              int role )
 {
-  if ( (unsigned)index.row() >= programs.size() )
+  if ( index.row() >= programs.size() )
     return false;
 
   if ( role == Qt::CheckStateRole && !index.column() )
@@ -900,7 +900,7 @@ QVariant PathsModel::headerData( int section, Qt::Orientation /*orientation*/, i
 
 QVariant PathsModel::data( QModelIndex const & index, int role ) const
 {
-  if ( (unsigned)index.row() >= paths.size() )
+  if ( index.row() >= paths.size() )
     return QVariant();
 
   if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && !index.column() )
@@ -915,7 +915,7 @@ QVariant PathsModel::data( QModelIndex const & index, int role ) const
 bool PathsModel::setData( QModelIndex const & index, const QVariant & /*value*/,
                           int role )
 {
-  if ( (unsigned)index.row() >= paths.size() )
+  if ( index.row() >= paths.size() )
     return false;
 
   if ( role == Qt::CheckStateRole && index.column() == 1 )
@@ -1006,7 +1006,7 @@ QVariant SoundDirsModel::headerData( int section, Qt::Orientation /*orientation*
 
 QVariant SoundDirsModel::data( QModelIndex const & index, int role ) const
 {
-  if ( (unsigned)index.row() >= soundDirs.size() )
+  if ( index.row() >= soundDirs.size() )
     return QVariant();
 
   if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && !index.column() )
@@ -1021,7 +1021,7 @@ QVariant SoundDirsModel::data( QModelIndex const & index, int role ) const
 bool SoundDirsModel::setData( QModelIndex const & index, const QVariant & value,
                               int role )
 {
-  if ( (unsigned)index.row() >= soundDirs.size() )
+  if ( index.row() >= soundDirs.size() )
     return false;
 
   if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() < 2 )

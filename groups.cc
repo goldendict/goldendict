@@ -48,7 +48,7 @@ Groups::Groups( QWidget * parent,
 
 void Groups::editGroup( unsigned id )
 {
-  for( unsigned x = 0; x < groups.size(); ++x )
+  for( int x = 0; x < groups.size(); ++x )
   {
     if ( groups[ x ].id == id )
     {

@@ -4,7 +4,7 @@
 #ifndef __CONFIG_HH_INCLUDED__
 #define __CONFIG_HH_INCLUDED__
 
-#include <vector>
+#include <QVector>
 #include <QString>
 #include <QSize>
 #include <QDateTime>
@@ -14,8 +14,6 @@
 
 /// GoldenDict's configuration
 namespace Config {
-
-using std::vector;
 
 /// Dictionaries which are temporarily disabled via the dictionary bar.
 typedef QSet< QString > MutedDictionaries;
@@ -39,7 +37,7 @@ struct Path
 };
 
 /// A list of paths where to search for the dictionaries
-typedef vector< Path > Paths;
+typedef QVector< Path > Paths;
 
 /// A directory holding bunches of audiofiles, which is indexed into a separate
 /// dictionary.
@@ -59,7 +57,7 @@ struct SoundDir
 };
 
 /// A list of SoundDirs
-typedef vector< SoundDir > SoundDirs;
+typedef QVector< SoundDir > SoundDirs;
 
 struct DictionaryRef
 {
@@ -83,7 +81,7 @@ struct Group
   QString name, icon;
   QByteArray iconData;
   QKeySequence shortcut;
-  vector< DictionaryRef > dictionaries;
+  QVector< DictionaryRef > dictionaries;
   Config::MutedDictionaries mutedDictionaries; // Disabled via dictionary bar
   Config::MutedDictionaries popupMutedDictionaries; // Disabled via dictionary bar in popup
 
@@ -101,7 +99,7 @@ struct Group
 };
 
 /// All the groups
-struct Groups: public vector< Group >
+struct Groups: public QVector< Group >
 {
   unsigned nextId; // Id to use to create the group next time
 
@@ -239,14 +237,14 @@ struct WebSite
 };
 
 /// All the WebSites
-typedef vector< WebSite > WebSites;
+typedef QVector< WebSite > WebSites;
 
 /// Hunspell configuration
 struct Hunspell
 {
   QString dictionariesPath;
 
-  typedef vector< QString > Dictionaries;
+  typedef QVector< QString > Dictionaries;
 
   Dictionaries enabledDictionaries;
 
@@ -259,7 +257,7 @@ struct Hunspell
 };
 
 /// All the MediaWikis
-typedef vector< MediaWiki > MediaWikis;
+typedef QVector< MediaWiki > MediaWikis;
 
 /// Romaji transliteration configuration
 struct Romaji
@@ -364,7 +362,7 @@ struct Program
   { return ! operator == ( other ); }
 };
 
-typedef vector< Program > Programs;
+typedef QVector< Program > Programs;
 
 struct Class
 {
