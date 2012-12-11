@@ -2452,6 +2452,10 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <source>Play via Bass library</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add-on style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
@@ -2844,6 +2848,13 @@ uygun grupların altlarına ekleyin.</translation>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Programı &lt;b&gt;%1&lt;/b&gt; listeden çıkar?</translation>
+    </message>
+</context>
+<context>
+    <name>StylesComboBox</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Yok</translation>
     </message>
 </context>
 <context>

@@ -37,52 +37,52 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="128"/>
+        <location filename="../article_maker.cc" line="149"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>Ягон тарҷума барои &lt;b&gt;%1&lt;/b&gt; дар гурӯҳи &lt;b&gt;%2&lt;/b&gt; ёфт нашудааст.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="133"/>
+        <location filename="../article_maker.cc" line="154"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>Ягон тарҷума дар гурӯҳи &lt;b&gt;%1&lt;/b&gt; ёфт нашудааст.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="152"/>
+        <location filename="../article_maker.cc" line="173"/>
         <source>Welcome!</source>
         <translation>Хуш омадед!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="154"/>
+        <location filename="../article_maker.cc" line="175"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Хуш омадед ба луғати &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Барои оғози кор бо луғат, пеш аз ҳама ба &lt;b&gt;Танзимот|Луғатҳо&lt;/b&gt; гузаред ва файлҳои луғатҳои лозимиро илова кунед, сайтҳои Wikipedia ё сайтҳои дигарро насб кунед, тартиби луғатҳоро таъин кунед ё гурӯҳҳои луғатро эҷод кунед.&lt;p&gt;Баъд аз ин шумо метавонед калимаҳоро тарҷума кунед! Шумо метавонед калимаҳоро бо истифодаи лавҳаи чапи ин равзана тарҷума кунед, ё шумо метавонед &lt;a href=&quot;Тарҷума бо равзанаи пайдошаванда&quot;&gt;калимаҳоро дар барномаҳои дигар тарҷума кунед&lt;/a&gt;. &lt;p&gt;Барои насб кардани танзимоти шахсӣ, хусусиятҳои дастрасиро дар &lt;b&gt;Танзимот|Хусусиятҳо&lt;/b&gt; истифода баред. Ҳамаи танзимоти ин барнома дорои маслиҳат мебошанд. Агар ягон мушкилӣ дошта бошед, мутмаин шавед, ки он маслиҳатҳоро хонед.&lt;p&gt;Барои маълумоти муфассал, гирифтани кӯмак, ҷавобу саволҳо, маслиҳатҳо ё ҳалли масъалаҳои дигар, шумо метавонед &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форуми луғатро&lt;/a&gt; истифода баред.&lt;p&gt;Барои гирифтани навсозиҳои барнома &lt;a href=&quot;http://goldendict.org/&quot;&gt;вебсайти луғатро&lt;/a&gt; истифода баред. &lt;p&gt;(c) 2008-2012 Константин Исаков. Иҷозатномаи GPLv3 ё навтар.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="170"/>
+        <location filename="../article_maker.cc" line="191"/>
         <source>Working with popup</source>
         <translation>Тарҷума бо равзанаи пайдошаванда</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="172"/>
+        <location filename="../article_maker.cc" line="193"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Тарҷума бо равзанаи пайдошаванда&lt;/h3&gt;Барои тарҷума кардани калимаҳо дар барномаҳои дигар, пеш аз ҳама шумо бояд &lt;i&gt;&quot;Хусусияти тарҷумаи пайдошавандаро&quot;&lt;/i&gt; дар &lt;b&gt;Хусусиятҳо&lt;/b&gt; фаъол кунед. Дар оянда шумо метавонед ин хусусиятро ба воситаи зеркунии тугмаи &quot;Тарҷумаи пайдошаванда&quot; фаъол кунед, ё шумо метавонед ин хусусиятро бо зеркунии нишонаи панел аз менюи пайдошуда фаъол кунед. </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="179"/>
+        <location filename="../article_maker.cc" line="200"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Баъд аз фаъол кардани хусусияти тарҷумаи пайдошаванда курсори мушро ба болои калимаи дилхоҳ ҷойгир кунед, ва равзана бо тарҷумаҳо бояд барои шумо пайдо шавад.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="182"/>
+        <location filename="../article_maker.cc" line="203"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Баъд аз фаъол кардани хусусияти тарҷумаи пайдошаванда, калимаи дилхоҳро дар барномаи дигар бо нишондиҳандаи муш интихоб кунед (ба калимаи дилхоҳ дубора зер кунед) ва равзана бо тарҷумаҳо бояд барои шумо пайдо шавад.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="259"/>
+        <location filename="../article_maker.cc" line="280"/>
         <source>(untitled)</source>
         <translation>(беном)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="273"/>
+        <location filename="../article_maker.cc" line="294"/>
         <source>(picture)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -90,27 +90,27 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="447"/>
+        <location filename="../article_maker.cc" line="469"/>
         <source>From </source>
         <translation>Аз </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="460"/>
+        <location filename="../article_maker.cc" line="482"/>
         <source>Query error: %1</source>
         <translation>Хатои дархост: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="559"/>
+        <location filename="../article_maker.cc" line="581"/>
         <source>Close words: </source>
         <translation>Калимаҳои наздик: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="630"/>
+        <location filename="../article_maker.cc" line="652"/>
         <source>Compound expressions: </source>
         <translation>Ифодаҳои алоқадор: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="658"/>
+        <location filename="../article_maker.cc" line="680"/>
         <source>Individual words: </source>
         <translation>Калимаҳои шахсӣ: </translation>
     </message>
@@ -1763,14 +1763,14 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1226"/>
-        <location filename="../mainwindow.cc" line="2168"/>
+        <location filename="../mainwindow.cc" line="1236"/>
+        <location filename="../mainwindow.cc" line="2178"/>
         <source>GoldenDict</source>
         <translation>Луғати GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="510"/>
+        <location filename="../mainwindow.cc" line="511"/>
         <source>Welcome!</source>
         <translation>Хуш омадед!</translation>
     </message>
@@ -1851,7 +1851,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
-        <location filename="../mainwindow.cc" line="187"/>
+        <location filename="../mainwindow.cc" line="188"/>
         <source>&amp;Quit</source>
         <translation>&amp;Баромад</translation>
     </message>
@@ -1937,7 +1937,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
-        <location filename="../mainwindow.cc" line="395"/>
+        <location filename="../mainwindow.cc" line="396"/>
         <source>New Tab</source>
         <translation>Варақаи нав</translation>
     </message>
@@ -1953,7 +1953,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
-        <location filename="../mainwindow.cc" line="2748"/>
+        <location filename="../mainwindow.cc" line="2758"/>
         <source>&amp;Show</source>
         <translation>&amp;Намоиш диҳед</translation>
     </message>
@@ -1988,269 +1988,269 @@
         <translation>&amp;Лавҳаи меню</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="90"/>
-        <location filename="../mainwindow.cc" line="804"/>
+        <location filename="../mainwindow.cc" line="91"/>
+        <location filename="../mainwindow.cc" line="814"/>
         <source>Look up in:</source>
         <translation>Тарҷума дар:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="103"/>
+        <location filename="../mainwindow.cc" line="104"/>
         <source>Found in Dictionaries:</source>
         <translation>Натиҷа дар луғатҳои зерин дарёфт шуд:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="119"/>
+        <location filename="../mainwindow.cc" line="120"/>
         <source>Navigation</source>
         <translation>Лавҳаи идоракунӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="122"/>
+        <location filename="../mainwindow.cc" line="123"/>
         <source>Back</source>
         <translation>Ба қафо</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="123"/>
+        <location filename="../mainwindow.cc" line="124"/>
         <source>Forward</source>
         <translation>Ба пеш</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="132"/>
+        <location filename="../mainwindow.cc" line="133"/>
         <source>Scan Popup</source>
         <translation>Тарҷумаи пайдошаванда</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="142"/>
+        <location filename="../mainwindow.cc" line="143"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Калимаро талаффуз кардан (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="151"/>
+        <location filename="../mainwindow.cc" line="152"/>
         <source>Zoom In</source>
         <translation>Бузург кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="153"/>
+        <location filename="../mainwindow.cc" line="154"/>
         <source>Zoom Out</source>
         <translation>Хурд кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="155"/>
+        <location filename="../mainwindow.cc" line="156"/>
         <source>Normal Size</source>
         <translation>Андозаи муқаррарӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="171"/>
+        <location filename="../mainwindow.cc" line="172"/>
         <source>Words Zoom In</source>
         <translation>Калимаҳоро бузург кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="173"/>
+        <location filename="../mainwindow.cc" line="174"/>
         <source>Words Zoom Out</source>
         <translation>Калимаҳоро хурд кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="175"/>
+        <location filename="../mainwindow.cc" line="176"/>
         <source>Words Normal Size</source>
         <translation>Андозаи муқаррарӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="183"/>
+        <location filename="../mainwindow.cc" line="184"/>
         <source>Show &amp;Main Window</source>
         <translation>&amp;Равзанаи асосиро намоиш додан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="231"/>
+        <location filename="../mainwindow.cc" line="232"/>
         <source>Opened tabs</source>
         <translation>Варақаҳои кушодашуда</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="242"/>
+        <location filename="../mainwindow.cc" line="243"/>
         <source>Close current tab</source>
         <translation>Варақаи ҷориро пӯшидан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="252"/>
+        <location filename="../mainwindow.cc" line="253"/>
         <source>Close all tabs</source>
         <translation>Ҳамаи варақаҳоро пӯшидан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="260"/>
+        <location filename="../mainwindow.cc" line="261"/>
         <source>Close all tabs except current</source>
         <translation>Ҳамаи варақаҳоро ба ғайр аз ҷорӣ пӯшидан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="385"/>
+        <location filename="../mainwindow.cc" line="386"/>
         <source>Loading...</source>
         <translation>Бор шуда истодааст...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="793"/>
+        <location filename="../mainwindow.cc" line="803"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 луғат, %2 мақола, %3 калима</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="804"/>
+        <location filename="../mainwindow.cc" line="814"/>
         <source>Look up:</source>
         <translation>Тарҷума кардан:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="822"/>
+        <location filename="../mainwindow.cc" line="832"/>
         <source>All</source>
         <translation>Умумӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="962"/>
+        <location filename="../mainwindow.cc" line="972"/>
         <source>Open Tabs List</source>
         <translation>Рӯйхати варақаҳоро кушодан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1020"/>
+        <location filename="../mainwindow.cc" line="1030"/>
         <source>(untitled)</source>
         <translation>(беном)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1226"/>
+        <location filename="../mainwindow.cc" line="1236"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1728"/>
+        <location filename="../mainwindow.cc" line="1738"/>
         <source>WARNING: %1</source>
         <translation>ОГОҲӢ: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2169"/>
+        <location filename="../mainwindow.cc" line="2179"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Омодасозии механизми назорати тугмаҳои зеркор қатъ карда шуд.&lt;br&gt;Мутмаин шавед, ки имконоти RECORD дар XServer фаъол аст.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2303"/>
+        <location filename="../mainwindow.cc" line="2313"/>
         <source>New Release Available</source>
         <translation>Версияи барномаи нав дастрас аст</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2304"/>
+        <location filename="../mainwindow.cc" line="2314"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версияи навтарини луғати GoldenDict &lt;b&gt;%1&lt;/b&gt; барои боргирӣ дастрас аст.&lt;br&gt;Барои кушодани саҳифаи боргирии барнома, тугмаи &lt;b&gt;Боргириро&lt;/b&gt; зер кунед.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2309"/>
+        <location filename="../mainwindow.cc" line="2319"/>
         <source>Download</source>
         <translation>Боргирӣ кунед</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2310"/>
+        <location filename="../mainwindow.cc" line="2320"/>
         <source>Skip This Release</source>
         <translation>Ин версияро нодида гузарондан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2423"/>
+        <location filename="../mainwindow.cc" line="2433"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Шумо пинҳон кардани лавҳаи менюро интихоб кардед. Барои аз нав намоиш додани лавҳаи меню, %1-ро истифода баред.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2424"/>
+        <location filename="../mainwindow.cc" line="2434"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2522"/>
+        <location filename="../mainwindow.cc" line="2532"/>
         <source>Page Setup</source>
         <translation>Танзими саҳифа</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2523"/>
+        <location filename="../mainwindow.cc" line="2533"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Ягон принтер дастрас нест. Пеш аз ҳама шумо бояд принтерро танзим кунед.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2540"/>
+        <location filename="../mainwindow.cc" line="2550"/>
         <source>Print Article</source>
         <translation>Мақоларо чоп кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2561"/>
+        <location filename="../mainwindow.cc" line="2571"/>
         <source>Save Article As</source>
         <translation>Мақоларо захира кардан ҳамчун</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2561"/>
+        <location filename="../mainwindow.cc" line="2571"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлҳои html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2576"/>
+        <location filename="../mainwindow.cc" line="2586"/>
         <source>Error</source>
         <translation>Хато</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2577"/>
+        <location filename="../mainwindow.cc" line="2587"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Мақола захира нашуд: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2791"/>
+        <location filename="../mainwindow.cc" line="2801"/>
         <source>&amp;Hide</source>
         <translation>&amp;Пинҳон кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2795"/>
+        <location filename="../mainwindow.cc" line="2805"/>
         <source>History view mode</source>
         <translation>Ҳолати намоиши таърих</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2817"/>
+        <location filename="../mainwindow.cc" line="2827"/>
         <source>Export history to file</source>
         <translation>Таърихро ба файл содир кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2819"/>
-        <location filename="../mainwindow.cc" line="2880"/>
+        <location filename="../mainwindow.cc" line="2829"/>
+        <location filename="../mainwindow.cc" line="2890"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Файлҳои матнӣ (*.txt);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2858"/>
+        <location filename="../mainwindow.cc" line="2868"/>
         <source>History export complete</source>
         <translation>Содиркунии таърих ба анҷом расид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2861"/>
+        <location filename="../mainwindow.cc" line="2871"/>
         <source>Export error: </source>
         <translation>Хатои содиркунӣ: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2878"/>
+        <location filename="../mainwindow.cc" line="2888"/>
         <source>Import history from file</source>
         <translation>Ворид кардани таърих аз файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2922"/>
+        <location filename="../mainwindow.cc" line="2932"/>
         <source>Imported from file: </source>
         <translation>Воридшуда аз файл:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2932"/>
+        <location filename="../mainwindow.cc" line="2942"/>
         <source>Import error: invalid data in file</source>
         <translation>Хатои воридот: маълумоти беэътибор дар файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2936"/>
+        <location filename="../mainwindow.cc" line="2946"/>
         <source>History import complete</source>
         <translation>Воридоти таърих ба анҷом расид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2939"/>
+        <location filename="../mainwindow.cc" line="2949"/>
         <source>Import error: </source>
         <translation>Хатои воридот: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3077"/>
+        <location filename="../mainwindow.cc" line="3087"/>
         <source>Dictionary info</source>
         <translation type="unfinished">Иттилооти луғат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3078"/>
+        <location filename="../mainwindow.cc" line="3088"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2392,12 +2392,12 @@
         <translation>&amp;Интерфейс</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="60"/>
+        <location filename="../preferences.ui" line="47"/>
         <source>Tabbed browsing</source>
         <translation>Варақаҳои тарҷума</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="66"/>
+        <location filename="../preferences.ui" line="53"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
@@ -2406,12 +2406,12 @@ switching to them.</source>
 навро бе табдилдиҳӣ кушода мекунад.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="71"/>
+        <location filename="../preferences.ui" line="58"/>
         <source>Open new tabs in background</source>
         <translation>Варақаҳои навро дар равзанаи асосӣ кушодан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="78"/>
+        <location filename="../preferences.ui" line="65"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
@@ -2420,120 +2420,125 @@ be the last ones.</source>
 варақаҳои нав дар охири рӯйхат кушода мешаванд.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="83"/>
+        <location filename="../preferences.ui" line="70"/>
         <source>Open new tabs after the current one</source>
         <translation>Варақаҳои навро пас аз варақаи ҷорӣ кушодан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="90"/>
+        <location filename="../preferences.ui" line="77"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
         <translation>Имконоти зеринро интихоб кунед, агар ҳангоми кушода будани варақаи ягона нахоҳед лавҳаи варақаҳоро намоиш диҳед.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="93"/>
+        <location filename="../preferences.ui" line="80"/>
         <source>Hide single tab</source>
         <translation>Варақаи ягонаро пинҳон кардан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="100"/>
+        <location filename="../preferences.ui" line="87"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
         <translation>Тугмабандии Ctrl-Tab варақаҳоро дар тартиби MRU табдил мекунад</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="110"/>
+        <location filename="../preferences.ui" line="97"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Агар имконоти зерин фаъол бошад, нишонаи луғат дар панели система пайдо мешавад,
 ва шумо аз он ҷо метавонед равзанаи асосии барномаро кушоед ва амалҳои дигарро иҷро кунед.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="114"/>
+        <location filename="../preferences.ui" line="101"/>
         <source>Enable system tray icon</source>
         <translation>Нишонаи луғатро дар панҷараки огоҳиҳо фаъол кардан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="132"/>
+        <location filename="../preferences.ui" line="119"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
         <translation>Агар имконоти зерин фаъол бошад, ҳангоми кушоиши луғат танҳо нишонаи он дар панҷараки огоҳиҳо
 пайдо мешавад ва равзанаи асосии он нишон дода намешавад.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="136"/>
+        <location filename="../preferences.ui" line="123"/>
         <source>Start to system tray</source>
         <translation>Баъд аз оғози барнома онро танҳо дар панҷараки огоҳиҳо намоиш додан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="143"/>
+        <location filename="../preferences.ui" line="130"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
         <translation>Агар имконоти зерин фаъол бошад, кӯшиши хомушкунӣ барномаро танҳо
 пинҳон мекунад.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="147"/>
+        <location filename="../preferences.ui" line="134"/>
         <source>Close to system tray</source>
         <translation>Ҳангоми пӯшидани луғат онро ба панҷараки огоҳиҳо пинҳон кардан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="157"/>
+        <location filename="../preferences.ui" line="154"/>
         <source>Startup</source>
         <translation>Оғози кор</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="163"/>
+        <location filename="../preferences.ui" line="160"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
         <translation>Луғати GoldenDict-ро ҳангоми боркунии системаи оператсионӣ ба таври худкор оғоз мекунад.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="166"/>
+        <location filename="../preferences.ui" line="163"/>
         <source>Start with system</source>
         <translation>Луғатро якҷоя бо системаи оператсионӣ оғоз кардан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="178"/>
+        <location filename="../preferences.ui" line="188"/>
         <source>Interface language:</source>
         <translation>Забони интерфейс:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="204"/>
+        <location filename="../preferences.ui" line="214"/>
         <source>Display style:</source>
         <translation>Мавзӯи луғат:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="258"/>
+        <location filename="../preferences.ui" line="252"/>
         <source>Double-click translates the word clicked</source>
         <translation>Зеркунии дубора калимаи зершударо тарҷума мекунад</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="265"/>
+        <location filename="../preferences.ui" line="259"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
         <translation>Одатан, бо зеркунии тугмаи ESC нишондиҳандаи муш ба сатри тарҷума гузаронида мешавад.
 Вале бо фаъолкунии ин имконот, равзанаи асосӣ пинҳон карда мешавад.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="269"/>
+        <location filename="../preferences.ui" line="263"/>
         <source>ESC key hides main window</source>
         <translation>Тугмаи ESC равзанаи асосиро пинҳон мекунад</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="276"/>
+        <location filename="../preferences.ui" line="144"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
         <translation>Агар шумо мехоҳед калимаҳоро бо зеркунии ягонаи тугмаи муш интихоб намоед, шумо бояд ин имконотро фаъол созед</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="279"/>
+        <location filename="../preferences.ui" line="147"/>
         <source>Select word by single click</source>
         <translation>Зеркунии ягона калимаро интихоб мекунад</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="291"/>
+        <location filename="../preferences.ui" line="272"/>
+        <source>Add-on style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="302"/>
         <source>&amp;Scan Popup</source>
         <translation>&amp;Тарҷумаи пайдошаванда</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="310"/>
+        <location filename="../preferences.ui" line="321"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -2544,136 +2549,136 @@ off from main window or tray icon.</source>
 ё панели система хомӯш кунед ё аз нав фаъол созед.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="316"/>
+        <location filename="../preferences.ui" line="327"/>
         <source>Enable scan popup functionality</source>
         <translation>Хусусияти тарҷумаи пайдошавандаро фаъол кардан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="328"/>
+        <location filename="../preferences.ui" line="339"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>Барои фаъол ё хомӯш кардани тарҷумаи пайдошаванда, имконоти зеринро истифода баред.
 Агар ин имконотро интихоб мекунед, тарҷумаи пайдошаванда ба худкор фаъол мешавад.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="332"/>
+        <location filename="../preferences.ui" line="343"/>
         <source>Start with scan popup turned on</source>
         <translation>Барномаро бо хусусияти тарҷумаи пайдошаванда оғоз кардан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="339"/>
+        <location filename="../preferences.ui" line="350"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Бо имконоти фаъолшудаи зерин, тарҷумаи пайдошаванда намоиш дода мешавад,
 агар ҳангоми интихоби калима ҳамаи тугмаҳои интихобшуда зер карда шаванд.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="343"/>
+        <location filename="../preferences.ui" line="354"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>Тарҷумаи пайдошаваандаро танҳо ҳангоми зеркунии тугмаҳои интихобшуда намоиш додан:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="382"/>
+        <location filename="../preferences.ui" line="393"/>
         <source>Left Ctrl only</source>
         <translation>Танҳо Ctrl-и чап</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="385"/>
+        <location filename="../preferences.ui" line="396"/>
         <source>Left Ctrl</source>
         <translation>Ctrl-и чап</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="392"/>
+        <location filename="../preferences.ui" line="403"/>
         <source>Right Shift only</source>
         <translation>Танҳо Shift-и рост</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="395"/>
+        <location filename="../preferences.ui" line="406"/>
         <source>Right Shift</source>
         <translation>Shift-и рост</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="402"/>
+        <location filename="../preferences.ui" line="413"/>
         <source>Alt key</source>
         <translation>Тугмаи Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="405"/>
+        <location filename="../preferences.ui" line="416"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="412"/>
+        <location filename="../preferences.ui" line="423"/>
         <source>Ctrl key</source>
         <translation>Тугмаи Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="415"/>
+        <location filename="../preferences.ui" line="426"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="422"/>
+        <location filename="../preferences.ui" line="433"/>
         <source>Left Alt only</source>
         <translation>Танҳо Alt-и чап</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="425"/>
+        <location filename="../preferences.ui" line="436"/>
         <source>Left Alt</source>
         <translation>Alt-и чап</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="432"/>
+        <location filename="../preferences.ui" line="443"/>
         <source>Shift key</source>
         <translation>Тугмаи Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="435"/>
+        <location filename="../preferences.ui" line="446"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="442"/>
+        <location filename="../preferences.ui" line="453"/>
         <source>Right Alt only</source>
         <translation>Танҳо Alt-и рост</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="445"/>
+        <location filename="../preferences.ui" line="456"/>
         <source>Right Alt</source>
         <translation>Alt-и рост</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="452"/>
+        <location filename="../preferences.ui" line="463"/>
         <source>Right Ctrl only</source>
         <translation>Танҳо Ctrl-и рост</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="455"/>
+        <location filename="../preferences.ui" line="466"/>
         <source>Right Ctrl</source>
         <translation>Ctrl-и рост</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="462"/>
+        <location filename="../preferences.ui" line="473"/>
         <source>Left Shift only</source>
         <translation>Танҳо Shift-и чап</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="465"/>
+        <location filename="../preferences.ui" line="476"/>
         <source>Left Shift</source>
         <translation>Shift-и чап</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="472"/>
+        <location filename="../preferences.ui" line="483"/>
         <source>Windows key or Meta key</source>
         <translation>Тугмаи Windows ё Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="475"/>
+        <location filename="../preferences.ui" line="486"/>
         <source>Win/Meta</source>
         <translation>Win/Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="509"/>
+        <location filename="../preferences.ui" line="520"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -2684,12 +2689,12 @@ be pressed shortly after the selection is done.</source>
 тугмаҳои интихобшударо баъд аз интихобкунии калима зер кунед.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="515"/>
+        <location filename="../preferences.ui" line="526"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Зеркунии тугмаҳои интихобшуда баъд аз</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="522"/>
+        <location filename="../preferences.ui" line="533"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -2702,42 +2707,42 @@ seconds, which is specified here.</source>
 аз муддати таъйиншуда зер мекунед, тарҷума пайдо намешавад.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="546"/>
+        <location filename="../preferences.ui" line="557"/>
         <source>secs</source>
         <translation>сония</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="568"/>
+        <location filename="../preferences.ui" line="579"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
         <translation>Калимаи тарҷумашударо ба ҷои равзанаи пайдошаванда дар равзанаи асосӣ нишон диҳед</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="571"/>
+        <location filename="../preferences.ui" line="582"/>
         <source>Send translated word to main window</source>
         <translation>Калимаи тарҷумашударо дар равзанаи нишон диҳед</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="599"/>
+        <location filename="../preferences.ui" line="610"/>
         <source>Hotkeys</source>
         <translation>Тугмаҳои тезкор</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="618"/>
+        <location filename="../preferences.ui" line="629"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>Барои пинҳон ва намоиш додани равзанаи асосӣ тугмаҳои зеринро истифода баред:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="649"/>
+        <location filename="../preferences.ui" line="660"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>Барои тарҷума кардани калимаҳо аз ҳофизаи система тугмаҳои зеринро истифода баред:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="696"/>
+        <location filename="../preferences.ui" line="707"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>Тугмаҳои интихобшудаи тезкор ҳамаҷониба мебошанд, вале танҳо ҳангоми фаъол будани луғати GoldenDict бо ягон барнома ё матн кор мекунанд.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="706"/>
+        <location filename="../preferences.ui" line="717"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -2750,119 +2755,119 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Дар хотир доред, ки: Шумо версияи барномаи X.Org XServer-ро истифода мебаред, ки дорои RECORD-и вайроншуда мебошад. Эҳтимол, тугмаҳои тезкор дар GoldenDict кор намекунанд. Ин мушкилӣ бояд дар худи сервер ҳал карда шавад. Гузоришро барои &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;ворид кардани маълумоти хато дар ин ҷо&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; пайдо кунед ва агар хоҳиш доред маслиҳати худро дар он ҷо пешниҳод кунед.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="744"/>
+        <location filename="../preferences.ui" line="755"/>
         <source>&amp;Audio</source>
         <translation>&amp;Аудио</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="763"/>
+        <location filename="../preferences.ui" line="774"/>
         <source>Pronunciation</source>
         <translation>Талаффуз</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="769"/>
+        <location filename="../preferences.ui" line="780"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Талаффузи худкори калимаҳо дар равзанаи асосӣ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="776"/>
+        <location filename="../preferences.ui" line="787"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Талаффузи худкори калимаҳо дар тарҷумаи пайдошаванда</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="786"/>
+        <location filename="../preferences.ui" line="797"/>
         <source>Playback</source>
         <translation>Иҷрои аудио</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="792"/>
+        <location filename="../preferences.ui" line="803"/>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
         <translation>Windows API-ро барои иҷрои аудио истифода баред. Танҳо файлҳои .wav иҷро мешаванд,
 вале сифати ин имконот хеле баланд аст.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="796"/>
+        <location filename="../preferences.ui" line="807"/>
         <source>Play via Windows native API</source>
         <translation>Ба воситаи Windows API иҷро кунед</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="803"/>
+        <location filename="../preferences.ui" line="814"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
         <translation>Файлҳои аудиоиро ба воситаи барномаи Phonon иҷро кунед. Ин имконот бисёр файлҳои
 аудиоиро дастгирӣ мекунад, вале баъзе файлҳо иҷро карда намешаванд.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="807"/>
+        <location filename="../preferences.ui" line="818"/>
         <source>Play via Phonon</source>
         <translation>Ба воситаи Phonon иҷро кунед</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="817"/>
+        <location filename="../preferences.ui" line="828"/>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="821"/>
+        <location filename="../preferences.ui" line="832"/>
         <source>Play via Bass library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="830"/>
+        <location filename="../preferences.ui" line="841"/>
         <source>Use any external program to play audio files</source>
         <translation>Ягон барномаи беруниро барои иҷрои файлҳои аудиоӣ истифода баред</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="833"/>
+        <location filename="../preferences.ui" line="844"/>
         <source>Use external program:</source>
         <translation>Ба воситаи барномаи дигар иҷро кунед:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="870"/>
+        <location filename="../preferences.ui" line="881"/>
         <source>&amp;Network</source>
         <translation>&amp;Шабака</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="889"/>
+        <location filename="../preferences.ui" line="900"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Агар шумо мехоҳед сервери proxy-ро барои ҳамаи дархостҳои
 шабака истифода баред шумо бояд ин имконотиро фаъол кунед.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="893"/>
+        <location filename="../preferences.ui" line="904"/>
         <source>Use proxy server</source>
         <translation>Сервери proxy-ро истифода баред</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="907"/>
+        <location filename="../preferences.ui" line="918"/>
         <source>Type:</source>
         <translation>Намуд:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="917"/>
+        <location filename="../preferences.ui" line="928"/>
         <source>Host:</source>
         <translation>Мизбон:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="927"/>
+        <location filename="../preferences.ui" line="938"/>
         <source>Port:</source>
         <translation>Порт:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="948"/>
+        <location filename="../preferences.ui" line="959"/>
         <source>User:</source>
         <translation>Корбар:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="958"/>
+        <location filename="../preferences.ui" line="969"/>
         <source>Password:</source>
         <translation>Парол:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="993"/>
+        <location filename="../preferences.ui" line="1004"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -2872,12 +2877,12 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
 имконпазир нест, кӯшиш кунед, ки ин имконотро ғайрифаъол созед.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="998"/>
+        <location filename="../preferences.ui" line="1009"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>Намоиши мӯҳтавои тиҷориро аз вебсайтҳои дигар қатъ кунед (рекламаро пинҳон мекунад)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1005"/>
+        <location filename="../preferences.ui" line="1016"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -2886,12 +2891,12 @@ Plugin must be installed for this option to work.</source>
 гӯш кунед. Барои ин имконот шумо бояд плагини мувофиқро сабт кунед.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1010"/>
+        <location filename="../preferences.ui" line="1021"/>
         <source>Enable web plugins</source>
         <translation>Ҷузъи иловагии вебро фаъол кардан</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1033"/>
+        <location filename="../preferences.ui" line="1044"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -2903,22 +2908,22 @@ download page.</source>
 шуморо огоҳ мекунад ва кушодани сайти луғатро пешниҳод мекунад.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1040"/>
+        <location filename="../preferences.ui" line="1051"/>
         <source>Check for new program releases periodically</source>
         <translation>Мавҷуд будани версияи навро такроран тафтиш кунед</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1061"/>
+        <location filename="../preferences.ui" line="1072"/>
         <source>Ad&amp;vanced</source>
         <translation>&amp;Иловагӣ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1067"/>
+        <location filename="../preferences.ui" line="1078"/>
         <source>ScanPopup extra technologies</source>
         <translation>Технологияҳои тарҷумаи пайдошавандаи иловагӣ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1073"/>
+        <location filename="../preferences.ui" line="1084"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -2928,12 +2933,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Агар шумо чунин барномаҳо истифода намебаред, имконоти зеринро истифода набаред.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1079"/>
+        <location filename="../preferences.ui" line="1090"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>&amp;IAccessibleEx-ро истифода баред</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1086"/>
+        <location filename="../preferences.ui" line="1097"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -2942,12 +2947,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Агар шумо чунин барномаҳо истифода намебаред, имконоти зеринро истифода набаред.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1091"/>
+        <location filename="../preferences.ui" line="1102"/>
         <source>Use &amp;UIAutomation</source>
         <translation>&amp;UIAutomation-ро истифода баред</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1098"/>
+        <location filename="../preferences.ui" line="1109"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -2956,37 +2961,37 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Агар шумо чунин барномаҳо истифода намебаред, имконоти зеринро истифода набаред.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1103"/>
+        <location filename="../preferences.ui" line="1114"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>&amp;Дархости GoldenDict-ро истифода баред</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1113"/>
+        <location filename="../preferences.ui" line="1124"/>
         <source>History</source>
         <translation>Таърих</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1119"/>
+        <location filename="../preferences.ui" line="1130"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Барои захира кардани таърихи калимаҳои тарҷумашуда ин имконотро фаъол созед</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1122"/>
+        <location filename="../preferences.ui" line="1133"/>
         <source>Store &amp;history</source>
         <translation>Захира кардани &amp;таърих</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1132"/>
+        <location filename="../preferences.ui" line="1143"/>
         <source>Articles</source>
         <translation>Муколамаҳо</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1138"/>
+        <location filename="../preferences.ui" line="1149"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Барои густариш додани қисмҳои интихобии муколамаҳо ин имконотро фаъол созед</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1141"/>
+        <location filename="../preferences.ui" line="1152"/>
         <source>Expand optional &amp;parts</source>
         <translation>Густариш додани &amp;қисмҳои интихобӣ</translation>
     </message>
@@ -3016,12 +3021,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Ба воситаи DirectShow иҷро кунед</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="351"/>
+        <location filename="../preferences.cc" line="357"/>
         <source>Changing Language</source>
         <translation>Забонро иваз кунед</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="352"/>
+        <location filename="../preferences.cc" line="358"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Барои татбиқ кардани забони интихобшуда барномаро аз нав оғоз кунед.</translation>
     </message>
@@ -3516,6 +3521,14 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../sources.cc" line="273"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Барномаи &lt;b&gt;%1&lt;/b&gt;-ро аз рӯйхат тоза мекунед?</translation>
+    </message>
+</context>
+<context>
+    <name>StylesComboBox</name>
+    <message>
+        <location filename="../stylescombobox.cc" line="17"/>
+        <source>None</source>
+        <translation type="unfinished">Ҳеҷ чиз</translation>
     </message>
 </context>
 <context>
