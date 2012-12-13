@@ -72,6 +72,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   wordFinder( this ),
   newReleaseCheckTimer( this ),
   wordListSelChanged( false )
+#ifdef Q_OS_WIN32
+, gdAskMessage( 0xFFFFFFFF )
+#endif
 {
   applyQtStyleSheet( cfg.preferences.displayStyle, cfg.preferences.addonStyle );
 
