@@ -96,6 +96,22 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     }
   }
 
+  if( req.url().scheme() == "file" )
+  {
+    // Check file presence and adjust path if necessary
+    QString fileName = req.url().toLocalFile();
+    if( req.url().host().isEmpty() && articleMaker.adjustFilePath( fileName ) )
+    {
+      QUrl newUrl( req.url() );
+      newUrl.setPath( QUrl::fromLocalFile( fileName ).path() );
+
+      QNetworkRequest newReq( req );
+      newReq.setUrl( newUrl );
+
+      return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
+    }
+  }
+
   return QNetworkAccessManager::createRequest( op, req, outgoingData );
 }
 

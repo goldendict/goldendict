@@ -67,6 +67,10 @@ public:
   /// Set auto expanding optional parts of articles
   void setExpandOptionalParts( bool expand );
 
+  /// Add base path to file path if it's relative and file not found
+  /// Return true if path successfully adjusted
+  static bool adjustFilePath( QString & fileName );
+
 private:
 
   /// Makes everything up to and including the opening body tag.

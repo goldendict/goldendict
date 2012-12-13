@@ -310,6 +310,23 @@ void ArticleMaker::setExpandOptionalParts( bool expand )
   needExpandOptionalParts = expand;
 }
 
+bool ArticleMaker::adjustFilePath( QString & fileName )
+{
+  QFileInfo info( fileName );
+  if( !info.isFile() )
+  {
+    QString dir = Config::getConfigDir();
+    dir.chop( 1 );
+    info.setFile( dir + fileName);
+    if( info.isFile() )
+    {
+      fileName = info.canonicalFilePath();
+      return true;
+    }
+  }
+  return false;
+}
+
 //////// ArticleRequest
 
 ArticleRequest::ArticleRequest(
