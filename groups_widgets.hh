@@ -26,6 +26,7 @@ public:
   /// ought to be part of construction process.
   void populate( std::vector< sptr< Dictionary::Class > > const & active,
                  std::vector< sptr< Dictionary::Class > > const & available );
+  void populate( std::vector< sptr< Dictionary::Class > > const & active );
 
   /// Marks that this model is used as an immutable dictionary source
   void setAsSource();
@@ -69,6 +70,7 @@ public:
   /// Populates the current list with the given dictionaries.
   void populate( std::vector< sptr< Dictionary::Class > > const & active,
                  std::vector< sptr< Dictionary::Class > > const & available );
+  void populate( std::vector< sptr< Dictionary::Class > > const & active );
 
   /// Marks that this widget is used as an immutable dictionary source
   void setAsSource();

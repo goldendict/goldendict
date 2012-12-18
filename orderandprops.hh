@@ -24,6 +24,7 @@ private slots:
 
   void on_dictionaryOrder_clicked( QModelIndex const & );
   void on_inactiveDictionaries_clicked( QModelIndex const & );
+  void contextMenuRequested( const QPoint & pos );
 
 private:
 

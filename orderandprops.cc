@@ -6,6 +6,60 @@
 #include "langcoder.hh"
 #include "language.hh"
 #include "fsencoding.hh"
+#include <algorithm>
+
+using std::vector;
+using std::sort;
+
+namespace {
+
+bool dictNameLessThan( sptr< Dictionary::Class > const & dict1,
+                       sptr< Dictionary::Class > const & dict2 )
+{
+  QString str1 = QString::fromUtf8( dict1->getName().c_str() );
+  QString str2 = QString::fromUtf8( dict2->getName().c_str() );
+  if( str1.isEmpty() && !str2.isEmpty() )
+    return false;
+  if( !str1.isEmpty() && str2.isEmpty() )
+    return true;
+
+  return str1.compare( str2, Qt::CaseInsensitive ) < 0;
+}
+
+bool dictLessThan( sptr< Dictionary::Class > const & dict1,
+                   sptr< Dictionary::Class > const & dict2 )
+{
+  QString str1 = LangCoder::decode( dict1->getLangFrom() );
+  QString str2 = LangCoder::decode( dict2->getLangFrom() );
+  if( str1.isEmpty() && !str2.isEmpty() )
+    return false;
+  if( !str1.isEmpty() && str2.isEmpty() )
+    return true;
+  int res = str1.compare( str2, Qt::CaseInsensitive );
+  if( res )
+    return res < 0;
+
+  str1 = LangCoder::decode( dict1->getLangTo() );
+  str2 = LangCoder::decode( dict2->getLangTo() );
+  if( str1.isEmpty() && !str2.isEmpty() )
+    return false;
+  if( !str1.isEmpty() && str2.isEmpty() )
+    return true;
+  res = str1.compare( str2, Qt::CaseInsensitive );
+  if( res )
+    return res < 0;
+
+  str1 = QString::fromUtf8( dict1->getName().c_str() );
+  str2 = QString::fromUtf8( dict2->getName().c_str() );
+  if( str1.isEmpty() && !str2.isEmpty() )
+    return false;
+  if( !str1.isEmpty() && str2.isEmpty() )
+    return true;
+
+  return str1.compare( str2, Qt::CaseInsensitive ) < 0;
+}
+
+} // namespace
 
 OrderAndProps::OrderAndProps( QWidget * parent,
                               Config::Group const & dictionaryOrder,
@@ -32,6 +86,10 @@ OrderAndProps::OrderAndProps( QWidget * parent,
   ui.inactiveDictionaries->populate( inactive.dictionaries, allDictionaries );
 
   disableDictionaryDescription();
+
+  ui.dictionaryOrder->setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( ui.dictionaryOrder, SIGNAL( customContextMenuRequested( QPoint ) ),
+           this, SLOT( contextMenuRequested( QPoint ) ) );
 }
 
 Config::Group OrderAndProps::getCurrentDictionaryOrder() const
@@ -119,5 +177,26 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
       ui.dictionaryDescription->setVisible( false );
       ui.dictionaryDescriptionLabel->setVisible( false );
     }
+  }
+}
+
+void OrderAndProps::contextMenuRequested( const QPoint & pos )
+{
+  QMenu menu( this );
+  QAction * sortNameAction = new QAction( tr( "Sort by name" ), &menu );
+  menu.addAction( sortNameAction );
+  QAction * sortLangAction = new QAction( tr( "Sort by languages" ), &menu );
+  menu.addAction( sortLangAction );
+
+  QAction * result = menu.exec( ui.dictionaryOrder->mapToGlobal( pos ) );
+
+  if( result == sortNameAction || result == sortLangAction )
+  {
+    vector< sptr< Dictionary::Class > > sortedDicts = ui.dictionaryOrder->getCurrentDictionaries();
+    if( result == sortNameAction )
+      sort( sortedDicts.begin(), sortedDicts.end(), dictNameLessThan );
+    else
+      sort( sortedDicts.begin(), sortedDicts.end(), dictLessThan );
+    ui.dictionaryOrder->populate( sortedDicts );
   }
 }

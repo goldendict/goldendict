@@ -132,6 +132,13 @@ void DictListModel::populate(
   reset();
 }
 
+void DictListModel::populate(
+  std::vector< sptr< Dictionary::Class > > const & active )
+{
+  dictionaries = active;
+  reset();
+}
+
 void DictListModel::setAsSource()
 {
   isSource = true;
@@ -411,6 +418,12 @@ void DictListWidget::populate(
   std::vector< sptr< Dictionary::Class > > const & available )
 {
   model.populate( active, available );
+}
+
+void DictListWidget::populate(
+  std::vector< sptr< Dictionary::Class > > const & active )
+{
+  model.populate( active );
 }
 
 void DictListWidget::setAsSource()
