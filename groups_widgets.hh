@@ -135,7 +135,8 @@ public:
 
   /// Creates all the tabs with the groups
   void populate( Config::Groups const &,
-                 std::vector< sptr< Dictionary::Class > > const & allDicts );
+                 std::vector< sptr< Dictionary::Class > > const & allDicts,
+                 std::vector< sptr< Dictionary::Class > > const & activeDicts );
 
   /// Creates new empty group with the given name
   void addNewGroup( QString const & );
@@ -165,6 +166,7 @@ private:
 
   unsigned nextId;
   std::vector< sptr< Dictionary::Class > > const * allDicts;
+  std::vector< sptr< Dictionary::Class > > const * activeDicts;
 };
 
 #endif

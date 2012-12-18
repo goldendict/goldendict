@@ -3,6 +3,7 @@
 
 #include "groups.hh"
 #include "instances.hh"
+#include "dictionary.hh"
 #include <QMessageBox>
 #include <QInputDialog>
 
@@ -24,7 +25,7 @@ Groups::Groups( QWidget * parent,
 
   // Populate groups' widget
 
-  ui.groups->populate( groups, dicts );
+  ui.groups->populate( groups, dicts, ui.dictionaries->getCurrentDictionaries() );
 
   connect( ui.addGroup, SIGNAL( clicked() ),
            this, SLOT( addNew() ) );

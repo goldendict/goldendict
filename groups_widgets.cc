@@ -14,6 +14,8 @@
 #include <QMenu>
 #include <QDir>
 #include <QIcon>
+#include <QMap>
+#include <QVector>
 
 using std::vector;
 
@@ -477,7 +479,7 @@ void DictListWidget::rowsAboutToBeRemoved( QModelIndex const & parent, int start
 // DictGroupsWidget
 
 DictGroupsWidget::DictGroupsWidget( QWidget * parent ):
-  QTabWidget( parent ), nextId( 1 ), allDicts( 0 )
+  QTabWidget( parent ), nextId( 1 ), allDicts( 0 ), activeDicts( 0 )
 {
 #if QT_VERSION >= 0x040500
   setMovable( true );
@@ -503,12 +505,14 @@ QString unescapeAmps( QString const & str )
 }
 
 void DictGroupsWidget::populate( Config::Groups const & groups,
-                                 vector< sptr< Dictionary::Class > > const & allDicts_ )
+                                 vector< sptr< Dictionary::Class > > const & allDicts_,
+                                 vector< sptr< Dictionary::Class > > const & activeDicts_ )
 {
   while( count() )
     removeCurrentGroup();
 
   allDicts = &allDicts_;
+  activeDicts = &activeDicts_;
 
   for( int x = 0; x < groups.size(); ++x )
     addTab( new DictGroupWidget( this, *allDicts, groups[ x ] ), escapeAmps( groups[ x ].name ) );
@@ -583,7 +587,7 @@ void DictGroupsWidget::addNewGroup( QString const & name )
 
 void DictGroupsWidget::addAutoGroups()
 {
-  if ( !allDicts )
+  if( !activeDicts )
     return;
 
   if ( QMessageBox::information( this, tr( "Confirmation" ),
@@ -592,57 +596,51 @@ void DictGroupsWidget::addAutoGroups()
              QMessageBox::Cancel ) != QMessageBox::Yes )
     return;
 
-  QMap< QPair<quint32,quint32>, int > tabMap;
+  QMap< QString, QVector< sptr<Dictionary::Class> > > dictMap;
 
-//  ::Initializing init( this, true );
-//  QApplication::processEvents();
-
-  for ( unsigned i = 0; i < allDicts->size(); i++ )
+  for ( unsigned i = 0; i < activeDicts->size(); i++ )
   {
-    sptr<Dictionary::Class> dict = allDicts->at( i );
+    sptr<Dictionary::Class> dict = activeDicts->at( i );
 
-    quint32 idfrom = dict->getLangFrom();
-    quint32 idto = dict->getLangTo();
-    QPair<quint32,quint32> key(idfrom, idto);
-
-    if (tabMap.contains(key))
+    QString lfrom = LangCoder::intToCode2( dict->getLangFrom() );
+    QString lto = LangCoder::intToCode2( dict->getLangTo() );
+    QString name("Unassigned");
+    if ( !lfrom.isEmpty() && !lto.isEmpty() )
     {
-      setCurrentIndex(tabMap[key]);
+      lfrom[ 0 ] = lfrom[ 0 ].toTitleCase();
+      lto[ 0 ] = lto[ 0 ].toTitleCase();
+      name = lfrom + " - " + lto;
     }
-    else
-    {
-      QString lfrom = LangCoder::intToCode2( idfrom );
-      QString lto = LangCoder::intToCode2( idto );
-      QString name("Unassigned");
-      if (lfrom.isEmpty() == false && lto.isEmpty() == false)
-        name = lfrom + " - " + lto;
 
-      // search for the language group
-      bool found = false;
-      for (int j = 0; j < count(); j++)
+    QVector<sptr<Dictionary::Class> > vd = dictMap[ name ];
+    vd.append( dict );
+    dictMap[ name ] = vd;
+  }
+
+  QStringList groupList = dictMap.uniqueKeys();
+  for( QStringList::ConstIterator gr = groupList.begin(); gr != groupList.end(); ++gr )
+  {
+    int n;
+    for( n = 0; n < count(); n++ )
+      if( *gr == tabText( n ) )
       {
-        if (tabText(j) == name)
-        {
-          found = true;
-          setCurrentIndex(j);
-          tabMap[key] = j;
-          break;
-        }
+        setCurrentIndex( n );
+        break;
       }
 
+    if( n >= count() )
+    {
       // group not found - add it
-      if (!found)
-      {
-        addNewGroup(name);
-        int j = currentIndex();
-        tabMap[key] = j;
-      }
-
+      if( count() )
+        setCurrentIndex( count() - 1 );
+      addNewGroup( *gr );
     }
 
-    // add dictionary into the current group
+    // add dictionaries into the current group
+    QVector< sptr<Dictionary::Class> > vd = dictMap[ *gr ];
     DictListModel *model = getCurrentModel();
-    model->addRow(QModelIndex(), dict);
+    for( int i = 0; i < vd.count(); i++ )
+      model->addRow(QModelIndex(), vd.at( i ) );
   }
 }
 
