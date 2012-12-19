@@ -482,9 +482,16 @@ void BglHeadwordsRequest::run()
     dict.loadArticle( chain[ x ].articleOffset,
                       headword, displayedHeadword, articleText );
 
-    wstring headwordDecoded = Utf8::decode( removePostfix(  headword ) );
+    wstring headwordDecoded;
+    try
+    {
+      headwordDecoded = Utf8::decode( removePostfix(  headword ) );
+    }
+    catch( Utf8::exCantDecode )
+    {
+    }
 
-    if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) )
+    if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) && !headwordDecoded.empty() )
     {
       // The headword seems to differ from the input word, which makes the
       // input word its synonym.
@@ -603,7 +610,17 @@ void BglArticleRequestRunnable::run()
 
 void BglArticleRequest::fixHebString(string & hebStr) // Hebrew support - convert non-unicode to unicode
 {
-  wstring hebWStr=Utf8::decode(hebStr);
+  wstring hebWStr;
+  try
+  {
+    hebWStr = Utf8::decode(hebStr);
+  }
+  catch( Utf8::exCantDecode )
+  {
+    hebStr = "Utf-8 decoding error";
+    return;
+  }
+
   for (unsigned int i=0; i<hebWStr.size();i++)
   {
     if (hebWStr[i]>=224 && hebWStr[i]<=250) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8
@@ -665,6 +682,9 @@ void BglArticleRequest::run()
       return;
     }
 
+    try
+    {
+
     if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
       continue; // We already have this article in the body.
 
@@ -711,6 +731,11 @@ void BglArticleRequest::run()
       pair< string, string >( targetHeadword, articleText ) ) );
 
     articlesIncluded.insert( chain[ x ].articleOffset );
+
+    } // try
+    catch( Utf8::exCantDecode )
+    {
+    }
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
