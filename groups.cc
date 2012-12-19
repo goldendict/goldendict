@@ -86,6 +86,10 @@ void Groups::countChanged()
   ui.renameGroup->setEnabled( en );
   ui.removeGroup->setEnabled( en );
   ui.removeAllGroups->setEnabled( en );
+
+  int stretch = ui.groups->count() / 5;
+  if( stretch > 3 ) stretch = 3;
+  ui.gridLayout->setColumnStretch( 2, stretch );
 }
 
 void Groups::addNew()
