@@ -235,6 +235,7 @@ public:
 
   static quint32 findIdForLanguageCode3( const char * );
 
+  static QPair<quint32,quint32> findIdsForName( QString const & );
   static QPair<quint32,quint32> findIdsForFilename( QString const & );
 
   static quint32 guessId( const QString & lang );

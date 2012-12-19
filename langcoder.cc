@@ -133,19 +133,14 @@ quint32 LangCoder::guessId( const QString & lang )
   return code2toInt( lstr.left(2).toAscii().data() );
 }
 
-QPair<quint32,quint32> LangCoder::findIdsForFilename( QString const & name )
+QPair<quint32,quint32> LangCoder::findIdsForName( QString const & name )
 {
-  QString nameFolded = "|" + QFileInfo( name ).fileName().toCaseFolded() + "|";
-
-//  qDebug() << nameFolded;
-
+  QString nameFolded = "|" + name.toCaseFolded() + "|";
   QRegExp reg( "[^a-z]([a-z]{2,3})-([a-z]{2,3})[^a-z]" ); reg.setMinimal(true);
   int off = 0;
+
   while ( reg.indexIn( nameFolded, off ) >= 0 )
   {
-//    qDebug() << reg.cap(1);
-//    qDebug() << reg.cap(2);
-
     quint32 from = guessId( reg.cap(1) );
     quint32 to = guessId( reg.cap(2) );
     if (from && to)
@@ -155,6 +150,11 @@ QPair<quint32,quint32> LangCoder::findIdsForFilename( QString const & name )
   }
 
   return QPair<quint32,quint32>(0, 0);
+}
+
+QPair<quint32,quint32> LangCoder::findIdsForFilename( QString const & name )
+{
+  return findIdsForName( QFileInfo( name ).fileName() );
 }
 
 /*

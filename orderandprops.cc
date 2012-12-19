@@ -7,6 +7,7 @@
 #include "language.hh"
 #include "fsencoding.hh"
 #include <algorithm>
+#include <QPair>
 
 using std::vector;
 using std::sort;
@@ -29,8 +30,26 @@ bool dictNameLessThan( sptr< Dictionary::Class > const & dict1,
 bool dictLessThan( sptr< Dictionary::Class > const & dict1,
                    sptr< Dictionary::Class > const & dict2 )
 {
-  QString str1 = LangCoder::decode( dict1->getLangFrom() );
-  QString str2 = LangCoder::decode( dict2->getLangFrom() );
+  int idFrom1 = dict1->getLangFrom();
+  int idTo1 = dict1->getLangTo();
+  if( idFrom1 == 0)
+  {
+    QPair<quint32,quint32> ids = LangCoder::findIdsForName( QString::fromUtf8( dict1->getName().c_str() ) );
+    idFrom1 = ids.first;
+    idTo1 = ids.second;
+  }
+
+  int idFrom2 = dict2->getLangFrom();
+  int idTo2 = dict2->getLangTo();
+  if( idFrom2 == 0)
+  {
+    QPair<quint32,quint32> ids = LangCoder::findIdsForName( QString::fromUtf8( dict2->getName().c_str() ) );
+    idFrom2 = ids.first;
+    idTo2 = ids.second;
+  }
+
+  QString str1 = LangCoder::decode( idFrom1 );
+  QString str2 = LangCoder::decode( idFrom2 );
   if( str1.isEmpty() && !str2.isEmpty() )
     return false;
   if( !str1.isEmpty() && str2.isEmpty() )
@@ -39,8 +58,8 @@ bool dictLessThan( sptr< Dictionary::Class > const & dict1,
   if( res )
     return res < 0;
 
-  str1 = LangCoder::decode( dict1->getLangTo() );
-  str2 = LangCoder::decode( dict2->getLangTo() );
+  str1 = LangCoder::decode( idTo1 );
+  str2 = LangCoder::decode( idTo2 );
   if( str1.isEmpty() && !str2.isEmpty() )
     return false;
   if( !str1.isEmpty() && str2.isEmpty() )

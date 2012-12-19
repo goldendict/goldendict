@@ -16,6 +16,7 @@
 #include <QIcon>
 #include <QMap>
 #include <QVector>
+#include <QFileInfo>
 
 using std::vector;
 
@@ -597,19 +598,47 @@ void DictGroupsWidget::addAutoGroups()
     return;
 
   QMap< QString, QVector< sptr<Dictionary::Class> > > dictMap;
+  QMap< QString, QVector< sptr<Dictionary::Class> > > morphoMap;
+
+  // Put active dictionaries into lists
 
   for ( unsigned i = 0; i < activeDicts->size(); i++ )
   {
     sptr<Dictionary::Class> dict = activeDicts->at( i );
 
-    QString lfrom = LangCoder::intToCode2( dict->getLangFrom() );
-    QString lto = LangCoder::intToCode2( dict->getLangTo() );
-    QString name("Unassigned");
-    if ( !lfrom.isEmpty() && !lto.isEmpty() )
+    int idFrom = dict->getLangFrom();
+    int idTo = dict->getLangTo();
+    if( idFrom == 0)
     {
+      // Attempt to find language pair in dictionary name
+
+      QPair<quint32,quint32> ids = LangCoder::findIdsForName( QString::fromUtf8( dict->getName().c_str() ) );
+      idFrom = ids.first;
+      idTo = ids.second;
+    }
+
+    QString name("Unassigned");
+    if ( idFrom != 0 && idTo != 0 )
+    {
+      QString lfrom = LangCoder::intToCode2( idFrom );
+      QString lto = LangCoder::intToCode2( idTo );
       lfrom[ 0 ] = lfrom[ 0 ].toTitleCase();
       lto[ 0 ] = lto[ 0 ].toTitleCase();
       name = lfrom + " - " + lto;
+    }
+    else if( !dict->getDictionaryFilenames().empty() )
+    {
+      // Handle special case - morphology dictionaries
+
+      QString fileName = QFileInfo( FsEncoding::decode( dict->getDictionaryFilenames()[ 0 ].c_str() ) ).fileName();
+      if( fileName.endsWith( ".aff", Qt::CaseInsensitive ) )
+      {
+        QString code = fileName.left( 2 ).toLower();
+        QVector<sptr<Dictionary::Class> > vd = morphoMap[ code ];
+        vd.append( dict );
+        morphoMap[ code ] = vd;
+        continue;
+      }
     }
 
     QVector<sptr<Dictionary::Class> > vd = dictMap[ name ];
@@ -618,6 +647,23 @@ void DictGroupsWidget::addAutoGroups()
   }
 
   QStringList groupList = dictMap.uniqueKeys();
+  QStringList morphoList = morphoMap.uniqueKeys();
+
+  // Insert morphology dictionaries into corresponding lists
+
+  for( QStringList::ConstIterator ln = morphoList.begin(); ln != morphoList.end(); ++ln )
+  {
+    for( QStringList::ConstIterator gr = groupList.begin(); gr != groupList.end(); ++gr )
+      if( ln->compare( gr->left( 2 ), Qt::CaseInsensitive ) == 0 )
+      {
+        QVector<sptr<Dictionary::Class> > vdg = dictMap[ *gr ];
+        vdg += morphoMap[ *ln ];
+        dictMap[ *gr ] = vdg;
+      }
+  }
+
+  // Make groups
+
   for( QStringList::ConstIterator gr = groupList.begin(); gr != groupList.end(); ++gr )
   {
     int n;
