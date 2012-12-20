@@ -67,6 +67,9 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
   ui.dictionaries->setContextMenuPolicy( Qt::CustomContextMenu );
   connect( ui.dictionaries, SIGNAL( customContextMenuRequested( QPoint ) ),
            this, SLOT( showDictInfo( QPoint ) ) );
+
+  connect( ui.dictionaries, SIGNAL( doubleClicked( QModelIndex ) ),
+           this, SLOT( removeCurrentItem( QModelIndex ) ) );
 }
 
 void DictGroupWidget::groupIconActivated( int index )
@@ -144,6 +147,12 @@ void DictGroupWidget::showDictInfo( QPoint const & pos )
     if( n < dicts.size() )
       emit showDictionaryInfo( id );
   }
+}
+
+void DictGroupWidget::removeCurrentItem( QModelIndex const & index )
+{
+  (void)index;
+  ui.dictionaries->getModel()->removeSelectedRows( ui.dictionaries->selectionModel() );
 }
 
 /// DictListModel

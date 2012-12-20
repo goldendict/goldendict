@@ -119,6 +119,7 @@ private slots:
 
   void groupIconActivated( int );
   void showDictInfo( const QPoint & pos );
+  void removeCurrentItem( QModelIndex const & );
 
 private:
   Ui::DictGroupWidget ui;
