@@ -118,10 +118,14 @@ public:
 private slots:
 
   void groupIconActivated( int );
+  void showDictInfo( const QPoint & pos );
 
 private:
   Ui::DictGroupWidget ui;
   unsigned groupId;
+
+signals:
+  void showDictionaryInfo( QString const & id );
 };
 
 /// A tab widget with groups inside
@@ -167,6 +171,9 @@ private:
   unsigned nextId;
   std::vector< sptr< Dictionary::Class > > const * allDicts;
   std::vector< sptr< Dictionary::Class > > const * activeDicts;
+
+signals:
+  void showDictionaryInfo( QString const & id );
 };
 
 #endif

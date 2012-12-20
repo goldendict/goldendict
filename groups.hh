@@ -46,6 +46,10 @@ private slots:
   void addToGroup();
   void removeFromGroup();
   void addAutoGroups();
+  void showDictInfo( const QPoint & pos );
+
+signals:
+  void showDictionaryInfo( QString const & id );
 };
 
 #endif

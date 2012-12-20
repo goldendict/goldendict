@@ -43,6 +43,12 @@ Groups::Groups( QWidget * parent,
            this, SLOT( removeFromGroup() ) );
   connect( ui.autoGroups, SIGNAL( clicked() ),
            this, SLOT( addAutoGroups() ) );
+  connect( ui.groups, SIGNAL( showDictionaryInfo( QString const & ) ),
+           this, SIGNAL( showDictionaryInfo( QString const & ) ) );
+
+  ui.dictionaries->setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( ui.dictionaries, SIGNAL( customContextMenuRequested( QPoint ) ),
+           this, SLOT( showDictInfo( QPoint ) ) );
 
   countChanged();
 }
@@ -175,3 +181,23 @@ void Groups::removeFromGroup()
     ui.groups->getCurrentModel()->removeSelectedRows( ui.groups->getCurrentSelectionModel() );
   }
 }
+
+void Groups::showDictInfo( QPoint const & pos )
+{
+  QVariant data = ui.dictionaries->getModel()->data( ui.dictionaries->indexAt( pos ), Qt::EditRole );
+  QString id;
+  if( data.canConvert< QString >() )
+    id = data.toString();
+
+  if( !id.isEmpty() )
+  {
+    vector< sptr< Dictionary::Class > > const & dicts = ui.dictionaries->getCurrentDictionaries();
+    unsigned n;
+    for( n = 0; n < dicts.size(); n++ )
+      if( id.compare( QString::fromUtf8( dicts.at( n )->getId().c_str() ) ) == 0 )
+        break;
+    if( n < dicts.size() )
+      emit showDictionaryInfo( id );
+  }
+}
+

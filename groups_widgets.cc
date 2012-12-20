@@ -63,6 +63,10 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
 
   connect( ui.groupIcon, SIGNAL(activated(int)),this,SLOT(groupIconActivated(int)),
            Qt::QueuedConnection );
+
+  ui.dictionaries->setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( ui.dictionaries, SIGNAL( customContextMenuRequested( QPoint ) ),
+           this, SLOT( showDictInfo( QPoint ) ) );
 }
 
 void DictGroupWidget::groupIconActivated( int index )
@@ -123,6 +127,25 @@ Config::Group DictGroupWidget::makeGroup() const
   return g.makeConfigGroup();
 }
 
+void DictGroupWidget::showDictInfo( QPoint const & pos )
+{
+  QVariant data = ui.dictionaries->getModel()->data( ui.dictionaries->indexAt( pos ), Qt::EditRole );
+  QString id;
+  if( data.canConvert< QString >() )
+    id = data.toString();
+
+  if( !id.isEmpty() )
+  {
+    vector< sptr< Dictionary::Class > > const & dicts = ui.dictionaries->getCurrentDictionaries();
+    unsigned n;
+    for( n = 0; n < dicts.size(); n++ )
+      if( id.compare( QString::fromUtf8( dicts.at( n )->getId().c_str() ) ) == 0 )
+        break;
+    if( n < dicts.size() )
+      emit showDictionaryInfo( id );
+  }
+}
+
 /// DictListModel
 
 void DictListModel::populate(
@@ -170,6 +193,9 @@ int DictListModel::rowCount( QModelIndex const & ) const
 
 QVariant DictListModel::data( QModelIndex const & index, int role ) const
 {
+  if( index.row() < 0 )
+    return QVariant();
+  
   sptr< Dictionary::Class > const & item = dictionaries[ index.row() ];
 
   if ( !item )
@@ -516,7 +542,12 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
   activeDicts = &activeDicts_;
 
   for( int x = 0; x < groups.size(); ++x )
-    addTab( new DictGroupWidget( this, *allDicts, groups[ x ] ), escapeAmps( groups[ x ].name ) );
+  {
+    DictGroupWidget *gr = new DictGroupWidget( this, *allDicts, groups[ x ] );
+    addTab( gr, escapeAmps( groups[ x ].name ) );
+    connect( gr, SIGNAL( showDictionaryInfo( QString const & ) ),
+             this, SIGNAL( showDictionaryInfo( QString const & ) ) );
+  }
 
   nextId = groups.nextId;
 
@@ -577,9 +608,10 @@ void DictGroupsWidget::addNewGroup( QString const & name )
 
   newGroup.id = nextId++;
 
-  insertTab( idx,
-             new DictGroupWidget( this, *allDicts, newGroup ),
-             escapeAmps( name ) );
+  DictGroupWidget *gr = new DictGroupWidget( this, *allDicts, newGroup );
+  insertTab( idx, gr, escapeAmps( name ) );
+  connect( gr, SIGNAL( showDictionaryInfo( QString const & ) ),
+           this, SIGNAL( showDictionaryInfo( QString const & ) ) );
 
   setCurrentIndex( idx );
 

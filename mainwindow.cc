@@ -3050,7 +3050,7 @@ void MainWindow::showDictionaryInfo( const QString & id )
   {
     if( dictionaries[ x ]->getId() == id.toUtf8().data() )
     {
-      DictInfo infoMsg( cfg );
+      DictInfo infoMsg( cfg, this );
       infoMsg.showInfo( dictionaries[ x ] );
       infoMsg.exec();
       break;

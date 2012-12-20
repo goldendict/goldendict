@@ -3,6 +3,7 @@
 
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
+#include "dictinfo.hh"
 #include <QMessageBox>
 
 using std::vector;
@@ -46,6 +47,9 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
            this, SLOT( buttonBoxClicked( QAbstractButton * ) ) );
 
   connect( &sources, SIGNAL( rescan() ), this, SLOT( rescanSources() ) );
+
+  connect( groups.get(), SIGNAL( showDictionaryInfo( QString const & ) ),
+           this, SLOT( showDictionaryInfo(QString const & ) ) );
 }
 
 void EditDictionaries::editGroup( unsigned id )
@@ -232,3 +236,16 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   }
 }
 
+void EditDictionaries::showDictionaryInfo( QString const & dictId )
+{
+  unsigned n;
+  for( n = 0; n < dictionaries.size(); n++ )
+    if( dictId.compare( QString::fromUtf8( dictionaries[ n ]->getId().c_str() ) ) == 0 )
+      break;
+  if( n < dictionaries.size() )
+  {
+    DictInfo infoMsg( cfg, this );
+    infoMsg.showInfo( dictionaries[ n ] );
+    infoMsg.exec();
+  }
+}
