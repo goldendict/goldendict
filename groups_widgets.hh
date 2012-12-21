@@ -56,6 +56,9 @@ private:
   bool isSource;
   std::vector< sptr< Dictionary::Class > > dictionaries;
   std::vector< sptr< Dictionary::Class > > const * allDicts;
+
+signals:
+  void contentChanged();
 };
 
 /// This widget is for dictionaries' lists, it handles drag-n-drop operations
@@ -182,6 +185,7 @@ private:
 
 private slots:
   void contextMenu( QPoint const & );
+  void tabDataChanged();
 
 signals:
   void showDictionaryInfo( QString const & id );

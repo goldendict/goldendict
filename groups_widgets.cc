@@ -269,7 +269,7 @@ bool DictListModel::insertRows( int row, int count, const QModelIndex & parent )
   dictionaries.insert( dictionaries.begin() + row, count,
                        sptr< Dictionary::Class >() );
   endInsertRows();
-
+  emit contentChanged();
   return true;
 }
 
@@ -284,6 +284,7 @@ void DictListModel::addRow(const QModelIndex & parent, sptr< Dictionary::Class >
   beginInsertRows( parent, dictionaries.size(), dictionaries.size()+1 );
   dictionaries.push_back(dict);
   endInsertRows();
+  emit contentChanged();
 }
 
 bool DictListModel::removeRows( int row, int count,
@@ -296,7 +297,7 @@ bool DictListModel::removeRows( int row, int count,
   dictionaries.erase( dictionaries.begin() + row,
                       dictionaries.begin() + row + count );
   endRemoveRows();
-
+  emit contentChanged();
   return true;
 }
 
@@ -356,6 +357,7 @@ void DictListModel::removeSelectedRows( QItemSelectionModel * source )
   }
 
   reset();
+  emit contentChanged();
 }
 
 void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
@@ -399,6 +401,7 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
         if ( list.isEmpty() )
         {
           reset();
+          emit contentChanged();
           return;
         }
         break;
@@ -407,6 +410,7 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
   }
 
   reset();
+  emit contentChanged();
 }
 
 void DictListModel::filterDuplicates()
@@ -429,7 +433,10 @@ void DictListModel::filterDuplicates()
   }
 
   if ( doReset )
+  {
     reset();
+    emit contentChanged();
+  }
 }
 
 /// DictListWidget
@@ -559,9 +566,17 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
     addTab( gr, escapeAmps( groups[ x ].name ) );
     connect( gr, SIGNAL( showDictionaryInfo( QString const & ) ),
              this, SIGNAL( showDictionaryInfo( QString const & ) ) );
+    connect( gr->getModel(), SIGNAL( contentChanged() ), this, SLOT( tabDataChanged() ) );
+
+    setCurrentIndex( x );
+    QString toolTipStr = "\"" + tabText( x ) + "\"\n" + tr( "Dictionaries: " )
+                         + QString::number( getCurrentModel()->getCurrentDictionaries().size() );
+    setTabToolTip( x, toolTipStr );
   }
 
   nextId = groups.nextId;
+
+  setCurrentIndex( 0 );
 
   setUsesScrollButtons( count() > 3 );
 }
@@ -626,6 +641,12 @@ void DictGroupsWidget::addNewGroup( QString const & name )
            this, SIGNAL( showDictionaryInfo( QString const & ) ) );
 
   setCurrentIndex( idx );
+
+  connect( gr->getModel(), SIGNAL( contentChanged() ), this, SLOT( tabDataChanged() ) );
+
+  QString toolTipStr = "\"" + tabText( idx ) + "\"\n" + tr( "Dictionaries: " )
+                       + QString::number( getCurrentModel()->getCurrentDictionaries().size() );
+  setTabToolTip( idx, toolTipStr );
 
   setUsesScrollButtons( count() > 3 );
 }
@@ -789,8 +810,16 @@ void DictGroupsWidget::combineGroups( int source, int target )
   setCurrentIndex( target );
   DictListModel *model = getCurrentModel();
 
+  disconnect( model, SIGNAL( contentChanged() ), this, SLOT( tabDataChanged() ) );
+
   for( unsigned i = 0; i < dicts.size(); i++ )
     model->addRow( QModelIndex(), dicts[ i ] );
+
+  connect( model, SIGNAL( contentChanged() ), this, SLOT( tabDataChanged() ) );
+
+  QString toolTipStr = "\"" + tabText( target ) + "\"\n" + tr( "Dictionaries: " )
+                       + QString::number( model->getCurrentDictionaries().size() );
+  setTabToolTip( target, toolTipStr );
 }
 
 void DictGroupsWidget::contextMenu( QPoint const & pos )
@@ -959,4 +988,11 @@ void DictGroupsWidget::contextMenu( QPoint const & pos )
   }
 
   setUpdatesEnabled( true );
+}
+
+void DictGroupsWidget::tabDataChanged()
+{
+  QString toolTipStr = "\"" + tabText( currentIndex() ) + "\"\n" + tr( "Dictionaries: " )
+                       + QString::number( getCurrentModel()->getCurrentDictionaries().size() );
+  setTabToolTip( currentIndex(), toolTipStr );
 }
