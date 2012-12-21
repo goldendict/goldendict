@@ -520,6 +520,9 @@ DictGroupsWidget::DictGroupsWidget( QWidget * parent ):
 #if QT_VERSION >= 0x040500
   setMovable( true );
 #endif
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( this, SIGNAL( customContextMenuRequested( QPoint ) ),
+           this, SLOT( contextMenu( QPoint ) ) );
 }
 
 namespace {
@@ -627,6 +630,19 @@ void DictGroupsWidget::addNewGroup( QString const & name )
   setUsesScrollButtons( count() > 3 );
 }
 
+int DictGroupsWidget::addUniqueGroup( const QString & name )
+{
+  for( int n = 0; n < count(); n++ )
+    if( tabText( n ) == name )
+    {
+      setCurrentIndex( n );
+      return n;
+    }
+
+  addNewGroup( name );
+  return currentIndex();
+}
+
 void DictGroupsWidget::addAutoGroups()
 {
   if( !activeDicts )
@@ -707,21 +723,10 @@ void DictGroupsWidget::addAutoGroups()
 
   for( QStringList::ConstIterator gr = groupList.begin(); gr != groupList.end(); ++gr )
   {
-    int n;
-    for( n = 0; n < count(); n++ )
-      if( *gr == tabText( n ) )
-      {
-        setCurrentIndex( n );
-        break;
-      }
+    if( count() )
+      setCurrentIndex( count() - 1 );
 
-    if( n >= count() )
-    {
-      // group not found - add it
-      if( count() )
-        setCurrentIndex( count() - 1 );
-      addNewGroup( *gr );
-    }
+    addUniqueGroup( *gr );
 
     // add dictionaries into the current group
     QVector< sptr<Dictionary::Class> > vd = dictMap[ *gr ];
@@ -771,4 +776,146 @@ void DictGroupsWidget::removeAllGroups()
     removeTab( 0 );
     delete w;
   }
+}
+
+void DictGroupsWidget::contextMenu( QPoint const & pos )
+{
+  int clickedGroup = tabBar()->tabAt( pos );
+  if( clickedGroup < 0 )
+    return;
+  QString name = tabText( clickedGroup );
+  if( name.length() != 7 || name.mid( 2, 3 ) != " - " )
+    return;
+
+  QMenu menu( this );
+
+  QAction *combineSourceAction = new QAction( QString( tr( "Combine groups by source language to \"%1->\"" ) )
+                                              .arg( name.left( 2 ) ), &menu );
+  combineSourceAction->setEnabled( false );
+  for( int i = 0; i < count(); i++ )
+  {
+    QString str = tabText( i );
+    if( i != clickedGroup && str.length() == 7 && str.mid( 2, 3 ) == " - " && str.startsWith( name.left( 2 ) ) )
+    {
+      combineSourceAction->setEnabled( true );
+      break;
+    }
+  }
+  menu.addAction( combineSourceAction );
+
+  QAction *combineTargetAction = new QAction( QString( tr( "Combine groups by target language to \"->%1\"" ) )
+                                              .arg( name.right( 2 ) ), &menu );
+  combineTargetAction->setEnabled( false );
+  for( int i = 0; i < count(); i++ )
+  {
+    QString str = tabText( i );
+    if( i != clickedGroup && str.length() == 7 && str.mid( 2, 3 ) == " - " && str.endsWith( name.right( 2 ) ) )
+    {
+      combineTargetAction->setEnabled( true );
+      break;
+    }
+  }
+  menu.addAction( combineTargetAction );
+
+  QAction *combineTwoSidedAction = NULL;
+  int secondGroup = -1;
+  if( name.left( 2 ) != name.right( 2 ) )
+  {
+     combineTwoSidedAction = new QAction( QString( tr( "Make two-side translate group \"%1-%2-%1\"" ) )
+                                          .arg( name.left( 2 ) ).arg( name.right( 2 ) ), &menu );
+
+    combineTwoSidedAction->setEnabled( false );
+
+    QString str = name.right( 2 ) + " - " + name.left( 2 );
+    for( int i = 0; i < count(); i++ )
+    {
+      if( str == tabText( i ) )
+      {
+        secondGroup = i;
+        combineTwoSidedAction->setEnabled( true );
+        break;
+      }
+    }
+
+    menu.addAction( combineTwoSidedAction );
+  }
+
+  QAction *result = menu.exec( mapToGlobal( pos ) );
+
+  setUpdatesEnabled( false );
+  int targetGroup;
+
+  if( result && result == combineSourceAction )
+  {
+    QString grBase = name.left( 2 );
+    setCurrentIndex( clickedGroup );
+    targetGroup = addUniqueGroup( grBase + "->" );
+
+    for( int i = 0; i < count(); i++ )
+    {
+      QString str = tabText( i );
+      if( str.length() == 7 && str.mid( 2, 3 ) == " - " && str.startsWith( grBase ) )
+      {
+        setCurrentIndex( i );
+        vector< sptr< Dictionary::Class > > const & dicts = getCurrentModel()->getCurrentDictionaries();
+
+        setCurrentIndex( targetGroup );
+        DictListModel *model = getCurrentModel();
+
+        for( unsigned j = 0; j < dicts.size(); j++ )
+          model->addRow( QModelIndex(), dicts[ j ] );
+      }
+    }
+    setCurrentIndex( targetGroup );
+  }
+  else
+  if( result && result == combineTargetAction )
+  {
+    QString grBase = name.right( 2 );
+
+    setCurrentIndex( clickedGroup );
+    targetGroup = addUniqueGroup( "->" + grBase );
+
+    for( int i = 0; i < count(); i++ )
+    {
+      QString str = tabText( i );
+      if( str.length() == 7 && str.mid( 2, 3 ) == " - " && str.endsWith( grBase ) )
+      {
+        setCurrentIndex( i );
+        vector< sptr< Dictionary::Class > > const & dicts = getCurrentModel()->getCurrentDictionaries();
+
+        setCurrentIndex( targetGroup );
+        DictListModel *model = getCurrentModel();
+
+        for( unsigned j = 0; j < dicts.size(); j++ )
+          model->addRow( QModelIndex(), dicts[ j ] );
+      }
+    }
+    setCurrentIndex( targetGroup );
+  }
+  else
+  if( result && result == combineTwoSidedAction )
+  {
+    setCurrentIndex( clickedGroup );
+    targetGroup = addUniqueGroup( name + " - " + name.left( 2 ) );
+    QString str = name.right( 2 ) + " - " + name.left( 2 );
+
+    for( int i = 0; i < count(); i++ )
+    {
+      if( tabText( i ) == name || tabText( i ) == str )
+      {
+        setCurrentIndex( i );
+        vector< sptr< Dictionary::Class > > const & dicts = getCurrentModel()->getCurrentDictionaries();
+
+        setCurrentIndex( targetGroup );
+        DictListModel *model = getCurrentModel();
+
+        for( unsigned j = 0; j < dicts.size(); j++ )
+          model->addRow( QModelIndex(), dicts[ j ] );
+      }
+    }
+    setCurrentIndex( targetGroup );
+  }
+
+  setUpdatesEnabled( true );
 }

@@ -146,6 +146,10 @@ public:
   /// Creates new empty group with the given name
   void addNewGroup( QString const & );
 
+  /// Creates new empty group with the given name if no such group
+  /// and return it index
+  int addUniqueGroup( QString const & name );
+
   void addAutoGroups();
 
   /// Returns currently chosen group's name
@@ -172,6 +176,9 @@ private:
   unsigned nextId;
   std::vector< sptr< Dictionary::Class > > const * allDicts;
   std::vector< sptr< Dictionary::Class > > const * activeDicts;
+
+private slots:
+  void contextMenu( QPoint const & );
 
 signals:
   void showDictionaryInfo( QString const & id );
