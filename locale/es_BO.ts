@@ -366,37 +366,37 @@
         <translation>Tecla de acceso rápido:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="37"/>
+        <location filename="../groups_widgets.cc" line="38"/>
         <source>None</source>
         <translation>Ningún</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="42"/>
+        <location filename="../groups_widgets.cc" line="43"/>
         <source>From file...</source>
         <translation>De archivo...</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="82"/>
+        <location filename="../groups_widgets.cc" line="90"/>
         <source>Choose a file to use as group icon</source>
         <translation>Seleccione un archivo para usarlo como el icono de un grupo</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="84"/>
+        <location filename="../groups_widgets.cc" line="92"/>
         <source>Images</source>
         <translation>Imágenes</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="85"/>
+        <location filename="../groups_widgets.cc" line="93"/>
         <source>All files</source>
         <translation>Todos los archivos</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="100"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>No puede leer el archivo especificado de imagen</translation>
     </message>
@@ -404,14 +404,43 @@
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="593"/>
+        <location filename="../groups_widgets.cc" line="572"/>
+        <location filename="../groups_widgets.cc" line="647"/>
+        <location filename="../groups_widgets.cc" line="820"/>
+        <location filename="../groups_widgets.cc" line="995"/>
+        <source>Dictionaries: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="672"/>
         <source>Confirmation</source>
         <translation>Confirmación</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="594"/>
+        <location filename="../groups_widgets.cc" line="673"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>¿Estás seguro que quiere generar un conjunto de grupos basado en pares de lengua?</translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="836"/>
+        <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="853"/>
+        <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="871"/>
+        <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="889"/>
+        <location filename="../groups_widgets.cc" line="908"/>
+        <source>Combine groups with &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -450,7 +479,7 @@
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="197"/>
+        <location filename="../groups_widgets.cc" line="233"/>
         <source>%1 entries</source>
         <translation>%1 entradas</translation>
     </message>
@@ -481,39 +510,39 @@
 <context>
     <name>EditDictionaries</name>
     <message>
-        <location filename="../editdictionaries.cc" line="41"/>
+        <location filename="../editdictionaries.cc" line="42"/>
         <source>&amp;Sources</source>
         <translation>&amp;Fuentes</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="42"/>
-        <location filename="../editdictionaries.cc" line="217"/>
+        <location filename="../editdictionaries.cc" line="43"/>
+        <location filename="../editdictionaries.cc" line="221"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Diccionarios</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="220"/>
+        <location filename="../editdictionaries.cc" line="44"/>
+        <location filename="../editdictionaries.cc" line="224"/>
         <source>&amp;Groups</source>
         <translation>&amp;Grupos</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="101"/>
+        <location filename="../editdictionaries.cc" line="105"/>
         <source>Sources changed</source>
         <translation>Fuentes modificados</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="102"/>
+        <location filename="../editdictionaries.cc" line="106"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>Algunos fuentes fueron cambiados. ¿Quieres aceptar los cambios?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="105"/>
+        <location filename="../editdictionaries.cc" line="109"/>
         <source>Accept</source>
         <translation>Aceptar</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="107"/>
+        <location filename="../editdictionaries.cc" line="111"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -609,43 +638,43 @@
 <context>
     <name>Groups</name>
     <message>
-        <location filename="../groups.cc" line="95"/>
+        <location filename="../groups.cc" line="105"/>
         <source>Add group</source>
         <translation>Añadir grupo</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="96"/>
+        <location filename="../groups.cc" line="106"/>
         <source>Give a name for the new group:</source>
         <translation>Asignar un nombre al grupo nuevo:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="121"/>
+        <location filename="../groups.cc" line="131"/>
         <source>Rename group</source>
         <translation>Renombrar grupo</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="122"/>
+        <location filename="../groups.cc" line="132"/>
         <source>Give a new name for the group:</source>
         <translation>Asignar un nombre nuevo al grupo:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="133"/>
+        <location filename="../groups.cc" line="143"/>
         <source>Remove group</source>
         <translation>Eliminar grupo</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="134"/>
+        <location filename="../groups.cc" line="144"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
         <translation>¿Está seguro que quiera eliminar el grupo &lt;b&gt;%1&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="183"/>
-        <location filename="../groups.cc" line="146"/>
+        <location filename="../groups.cc" line="156"/>
         <source>Remove all groups</source>
         <translation>Eliminar todos los grupos</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="147"/>
+        <location filename="../groups.cc" line="157"/>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>¿Está seguro que quiera eliminar todos los grupos?</translation>
     </message>
@@ -3196,12 +3225,12 @@
         <translation>Ajuste el orden, arrastrando y soltando los diccionarios con el ratón. Mueva diccionarios al grupo deshabilitado para desactivar su uso</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="186"/>
+        <location filename="../orderandprops.cc" line="205"/>
         <source>Sort by name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="188"/>
+        <location filename="../orderandprops.cc" line="207"/>
         <source>Sort by languages</source>
         <translation type="unfinished"></translation>
     </message>

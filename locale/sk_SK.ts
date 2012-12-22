@@ -327,37 +327,37 @@
         <translation>Skratky:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="37"/>
+        <location filename="../groups_widgets.cc" line="38"/>
         <source>None</source>
         <translation>Žiadny</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="42"/>
+        <location filename="../groups_widgets.cc" line="43"/>
         <source>From file...</source>
         <translation>Zo súboru ...</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="82"/>
+        <location filename="../groups_widgets.cc" line="90"/>
         <source>Choose a file to use as group icon</source>
         <translation>Vyberte súbor, ktorý chcete použiť ako ikonu skupiny</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="84"/>
+        <location filename="../groups_widgets.cc" line="92"/>
         <source>Images</source>
         <translation>Obrázky</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="85"/>
+        <location filename="../groups_widgets.cc" line="93"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="100"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>Nemožno prečítať zadaný súbor s obrázkom.</translation>
     </message>
@@ -365,14 +365,43 @@
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="593"/>
+        <location filename="../groups_widgets.cc" line="572"/>
+        <location filename="../groups_widgets.cc" line="647"/>
+        <location filename="../groups_widgets.cc" line="820"/>
+        <location filename="../groups_widgets.cc" line="995"/>
+        <source>Dictionaries: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="672"/>
         <source>Confirmation</source>
         <translation>Potvrdenie</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="594"/>
+        <location filename="../groups_widgets.cc" line="673"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>Ste si istí, že chcete vytvoriť sadu skupín na základe jazykových párov?</translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="836"/>
+        <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="853"/>
+        <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="871"/>
+        <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="889"/>
+        <location filename="../groups_widgets.cc" line="908"/>
+        <source>Combine groups with &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -411,7 +440,7 @@
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="197"/>
+        <location filename="../groups_widgets.cc" line="233"/>
         <source>%1 entries</source>
         <translation>%1 položiek</translation>
     </message>
@@ -447,39 +476,39 @@
         <translation>Slovníky</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="41"/>
+        <location filename="../editdictionaries.cc" line="42"/>
         <source>&amp;Sources</source>
         <translation>&amp;Zdroje</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="42"/>
-        <location filename="../editdictionaries.cc" line="217"/>
+        <location filename="../editdictionaries.cc" line="43"/>
+        <location filename="../editdictionaries.cc" line="221"/>
         <source>&amp;Dictionaries</source>
         <translation>S&amp;lovníky</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="220"/>
+        <location filename="../editdictionaries.cc" line="44"/>
+        <location filename="../editdictionaries.cc" line="224"/>
         <source>&amp;Groups</source>
         <translation>S&amp;kupiny</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="101"/>
+        <location filename="../editdictionaries.cc" line="105"/>
         <source>Sources changed</source>
         <translation>Zdroje sa zmenili</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="102"/>
+        <location filename="../editdictionaries.cc" line="106"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>Niektoré zdroje boli zmenené. Chcete akceptovať zmeny?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="105"/>
+        <location filename="../editdictionaries.cc" line="109"/>
         <source>Accept</source>
         <translation>Prijať</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="107"/>
+        <location filename="../editdictionaries.cc" line="111"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>
@@ -661,7 +690,7 @@
     </message>
     <message>
         <location filename="../groups.ui" line="183"/>
-        <location filename="../groups.cc" line="146"/>
+        <location filename="../groups.cc" line="156"/>
         <source>Remove all groups</source>
         <translation>Odstrániť všetky skupiny</translation>
     </message>
@@ -671,37 +700,37 @@
         <translation>Chyťte a pretiahnite slovníky do a zo skupín, posuňte ich dovnútra skupiny a meňte ich poradenie pomocou myši.</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="95"/>
+        <location filename="../groups.cc" line="105"/>
         <source>Add group</source>
         <translation>Pridať skupinu</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="96"/>
+        <location filename="../groups.cc" line="106"/>
         <source>Give a name for the new group:</source>
         <translation>Zadajte názov novej skupiny:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="121"/>
+        <location filename="../groups.cc" line="131"/>
         <source>Rename group</source>
         <translation>Premenovať skupinu</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="122"/>
+        <location filename="../groups.cc" line="132"/>
         <source>Give a new name for the group:</source>
         <translation>Zadajte nový názov skupine:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="133"/>
+        <location filename="../groups.cc" line="143"/>
         <source>Remove group</source>
         <translation>Odstrániť skupinu</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="134"/>
+        <location filename="../groups.cc" line="144"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
         <translation>Ste si istí, že chcete odstrániť skupinu &lt;b&gt;%1&lt;/b&gt;?</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="147"/>
+        <location filename="../groups.cc" line="157"/>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>Ste si istí, že chcete odstrániť všetky skupiny?</translation>
     </message>
@@ -2374,12 +2403,12 @@
         <translation>Upravte poradie uchopením a presunutím položky na požadované miesto. Presuňte slovníky do neaktívnej skupiny pre zakázanie ich použitia.</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="186"/>
+        <location filename="../orderandprops.cc" line="205"/>
         <source>Sort by name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="188"/>
+        <location filename="../orderandprops.cc" line="207"/>
         <source>Sort by languages</source>
         <translation type="unfinished"></translation>
     </message>

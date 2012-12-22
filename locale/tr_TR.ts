@@ -305,6 +305,26 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <source>Confirmation</source>
         <translation>Onayla</translation>
     </message>
+    <message>
+        <source>Dictionaries: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Combine groups with &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictInfo</name>

@@ -337,6 +337,26 @@
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>Opravdu chcete vygenerovat set skupin založený na párech jazyků?</translation>
     </message>
+    <message>
+        <source>Dictionaries: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Combine groups with &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictInfo</name>

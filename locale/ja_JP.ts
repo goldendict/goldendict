@@ -327,37 +327,37 @@
         <translation>ショートカット:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="37"/>
+        <location filename="../groups_widgets.cc" line="38"/>
         <source>None</source>
         <translation>なし</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="42"/>
+        <location filename="../groups_widgets.cc" line="43"/>
         <source>From file...</source>
         <translation>ファイルから...</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="82"/>
+        <location filename="../groups_widgets.cc" line="90"/>
         <source>Choose a file to use as group icon</source>
         <translation>グループ アイコンとして使用するファイルを選択します</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="84"/>
+        <location filename="../groups_widgets.cc" line="92"/>
         <source>Images</source>
         <translation>イメージ</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="85"/>
+        <location filename="../groups_widgets.cc" line="93"/>
         <source>All files</source>
         <translation>すべてのファイル</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="100"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>指定されたイメージ ファイルを読み取ることができません。</translation>
     </message>
@@ -365,14 +365,43 @@
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="593"/>
+        <location filename="../groups_widgets.cc" line="572"/>
+        <location filename="../groups_widgets.cc" line="647"/>
+        <location filename="../groups_widgets.cc" line="820"/>
+        <location filename="../groups_widgets.cc" line="995"/>
+        <source>Dictionaries: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="672"/>
         <source>Confirmation</source>
         <translation>確認</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="594"/>
+        <location filename="../groups_widgets.cc" line="673"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>言語の組み合わせに基づいたグループのセットを生成しますか?</translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="836"/>
+        <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="853"/>
+        <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="871"/>
+        <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="889"/>
+        <location filename="../groups_widgets.cc" line="908"/>
+        <source>Combine groups with &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -411,7 +440,7 @@
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="197"/>
+        <location filename="../groups_widgets.cc" line="233"/>
         <source>%1 entries</source>
         <translation>%1 個のエントリ</translation>
     </message>
@@ -442,39 +471,39 @@
 <context>
     <name>EditDictionaries</name>
     <message>
-        <location filename="../editdictionaries.cc" line="41"/>
+        <location filename="../editdictionaries.cc" line="42"/>
         <source>&amp;Sources</source>
         <translation>ソース(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="42"/>
-        <location filename="../editdictionaries.cc" line="217"/>
+        <location filename="../editdictionaries.cc" line="43"/>
+        <location filename="../editdictionaries.cc" line="221"/>
         <source>&amp;Dictionaries</source>
         <translation>辞書(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="220"/>
+        <location filename="../editdictionaries.cc" line="44"/>
+        <location filename="../editdictionaries.cc" line="224"/>
         <source>&amp;Groups</source>
         <translation>グループ(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="101"/>
+        <location filename="../editdictionaries.cc" line="105"/>
         <source>Sources changed</source>
         <translation>ソースが変更されました</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="102"/>
+        <location filename="../editdictionaries.cc" line="106"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>いくつかのソースが変更されました。変更を承認しますか?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="105"/>
+        <location filename="../editdictionaries.cc" line="109"/>
         <source>Accept</source>
         <translation>承認</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="107"/>
+        <location filename="../editdictionaries.cc" line="111"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
@@ -570,43 +599,43 @@
 <context>
     <name>Groups</name>
     <message>
-        <location filename="../groups.cc" line="95"/>
+        <location filename="../groups.cc" line="105"/>
         <source>Add group</source>
         <translation>グループの追加</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="96"/>
+        <location filename="../groups.cc" line="106"/>
         <source>Give a name for the new group:</source>
         <translation>新しいグループの名前:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="121"/>
+        <location filename="../groups.cc" line="131"/>
         <source>Rename group</source>
         <translation>グループ名の変更</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="122"/>
+        <location filename="../groups.cc" line="132"/>
         <source>Give a new name for the group:</source>
         <translation>グループの新しい名前:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="133"/>
+        <location filename="../groups.cc" line="143"/>
         <source>Remove group</source>
         <translation>グループの削除</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="134"/>
+        <location filename="../groups.cc" line="144"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
         <translation>グループ &lt;b&gt;%1&lt;/b&gt; を削除してもよろしいですか?</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="183"/>
-        <location filename="../groups.cc" line="146"/>
+        <location filename="../groups.cc" line="156"/>
         <source>Remove all groups</source>
         <translation>すべてのグループを削除</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="147"/>
+        <location filename="../groups.cc" line="157"/>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>すべてのグループを削除してもよろしいですか?</translation>
     </message>
@@ -2385,12 +2414,12 @@
         <translation>アイテムをドラッグ アンド ドロップして順序を調整します。使用を無効にするには非アクティブなグループへ辞書をドロップします。</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="186"/>
+        <location filename="../orderandprops.cc" line="205"/>
         <source>Sort by name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="188"/>
+        <location filename="../orderandprops.cc" line="207"/>
         <source>Sort by languages</source>
         <translation type="unfinished"></translation>
     </message>
