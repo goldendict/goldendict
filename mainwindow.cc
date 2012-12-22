@@ -1383,6 +1383,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   wordFinder.clear();
   dictionariesUnmuted.clear();
 
+  { // Limit existence of newCfg
+
   Config::Class newCfg = cfg;
   EditDictionaries dicts( this, newCfg, dictionaries, groupInstances, dictNetMgr );
 
@@ -1414,6 +1416,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
     updateGroupList();
 
     Config::save( cfg );
+  }
+
   }
 
   makeScanPopup();
