@@ -143,6 +143,8 @@ private:
   /// Returns inputWord, chopped with appended ... if it's too long/
   QString elideInputWord();
 
+  void updateBackForwardButtons();
+
 private slots:
 
   void clipboardChanged( QClipboard::Mode );
@@ -155,6 +157,8 @@ private slots:
   void on_showDictionaryBar_clicked( bool checked );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );
   void on_sendWordButton_clicked();
+  void on_goBackButton_clicked();
+  void on_goForwardButton_clicked();
 
   void hideTimerExpired();
   void altModeExpired();

@@ -207,6 +207,9 @@ ScanPopup::ScanPopup( QWidget * parent,
            this, SLOT(mouseGrabPoll())  );
 
   MouseOver::instance().setPreferencesPtr( &( cfg.preferences ) );
+
+  ui.goBackButton->setEnabled( false );
+  ui.goForwardButton->setEnabled( false );
 }
 
 ScanPopup::~ScanPopup()
@@ -785,6 +788,8 @@ void ScanPopup::pageLoaded( ArticleView * )
 {
   ui.pronounceButton->setVisible( definition->hasSound() );
 
+  updateBackForwardButtons();
+
   if ( cfg.preferences.pronounceOnLoadPopup )
     definition->playSound();
 }
@@ -887,4 +892,20 @@ void ScanPopup::switchExpandOptionalPartsMode()
 {
   if( isVisible() )
     emit switchExpandMode();
+}
+
+void ScanPopup::updateBackForwardButtons()
+{
+  ui.goBackButton->setEnabled(definition->canGoBack());
+  ui.goForwardButton->setEnabled(definition->canGoForward());
+}
+
+void ScanPopup::on_goBackButton_clicked()
+{
+  definition->back();
+}
+
+void ScanPopup::on_goForwardButton_clicked()
+{
+  definition->forward();
 }

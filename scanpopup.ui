@@ -62,6 +62,34 @@
           </widget>
          </item>
          <item>
+          <widget class="QToolButton" name="goBackButton">
+           <property name="toolTip">
+            <string>Back</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icons/previous.png</normaloff>:/icons/previous.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="goForwardButton">
+           <property name="toolTip">
+            <string>Forward</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icons/next.png</normaloff>:/icons/next.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QToolButton" name="wordListButton">
            <property name="toolTip">
             <string>List Matches (Alt+M)</string>
