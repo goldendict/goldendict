@@ -206,7 +206,9 @@ HEADERS += folding.hh \
     mruqmenu.hh \
     dictinfo.hh \
     zipsounds.hh \
-    stylescombobox.hh
+    stylescombobox.hh \
+    extlineedit.hh \
+    translatebox.hh
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -303,7 +305,9 @@ SOURCES += folding.cc \
     mruqmenu.cc \
     dictinfo.cc \
     zipsounds.cc \
-    stylescombobox.cc
+    stylescombobox.cc \
+    extlineedit.cc \
+    translatebox.cc
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \

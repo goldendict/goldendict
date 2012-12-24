@@ -53,5 +53,7 @@
         <file>icons/collapse_opt.png</file>
         <file>article-style-st-babylon.css</file>
         <file>qt-style-st-babylon.css</file>
+        <file>icons/1downarrow.png</file>
+        <file>icons/system-search.png</file>
     </qresource>
 </RCC>

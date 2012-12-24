@@ -43,7 +43,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   showHistory( false ),
   trayIcon( 0 ),
   groupLabel( &searchPaneTitleBar ),
-  groupList( &searchPaneTitleBar ),
   foundInDictsLabel( &dictsPaneTitleBar ),
   escAction( this ),
   f3Action( this ),
@@ -69,6 +68,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites ),
   dictNetMgr( this ),
+  searchInDock( false ),
   wordFinder( this ),
   newReleaseCheckTimer( this ),
   wordListSelChanged( false )
@@ -83,41 +83,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // use our own, cutsom statusbar
   setStatusBar(0);
   mainStatusBar = new MainStatusBar( this );
-
-  wordListDefaultFont = ui.wordList->font();
-  translateLineDefaultFont = ui.translateLine->font();
-
-  ui.wordList->setFocusPolicy(Qt::ClickFocus);
-
-  // Make the search pane's titlebar
-
-  groupLabel.setText( tr( "Look up in:" ) );
-  groupList.setFocusPolicy(Qt::ClickFocus);
-
-  searchPaneTitleBarLayout.setContentsMargins( 8, 5, 8, 4 );
-  searchPaneTitleBarLayout.addWidget( &groupLabel );
-  searchPaneTitleBarLayout.addWidget( &groupList );
-  searchPaneTitleBarLayout.addStretch();
-
-  searchPaneTitleBar.setLayout( &searchPaneTitleBarLayout );
-
-  ui.searchPane->setTitleBarWidget( &searchPaneTitleBar );
-
-  // Make the dictionaries pane's titlebar
-  foundInDictsLabel.setText( tr( "Found in Dictionaries:" ) );
-  dictsPaneTitleBarLayout.addWidget( &foundInDictsLabel );
-  dictsPaneTitleBar.setLayout( &dictsPaneTitleBarLayout );
-  ui.dictsPane->setTitleBarWidget( &dictsPaneTitleBar );
-  ui.dictsList->setContextMenuPolicy( Qt::CustomContextMenu );
-
-  connect( ui.dictsPane, SIGNAL( visibilityChanged( bool ) ),
-           this, SLOT( dictsPaneVisibilityChanged ( bool ) ) );
-
-  connect( ui.dictsList, SIGNAL( itemClicked( QListWidgetItem * ) ),
-           this, SLOT( foundDictsPaneClicked( QListWidgetItem * ) ) );
-
-  connect( ui.dictsList, SIGNAL( customContextMenuRequested( const QPoint & ) ),
-           this, SLOT( foundDictsContextMenuRequested( const QPoint & ) ) );
 
   // Make the toolbar
   navToolbar = addToolBar( tr( "Navigation" ) );
@@ -142,6 +107,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( enableScanPopup, SIGNAL( toggled( bool ) ),
            this, SLOT( scanEnableToggled( bool ) ) );
 
+  groupListInToolbar = new GroupComboBox( navToolbar );
+
+  groupListInToolbar->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
+  groupListToolBarAction = navToolbar->addWidget( groupListInToolbar );
+  translateBox = new TranslateBox( this );
+  translateBox->setObjectName( "translateBox" );
+  translateBox->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed );
+  navToolbar->addWidget( translateBox );
+
   navToolbar->addSeparator();
   navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound.png" ), tr( "Pronounce Word (Alt+S)" ) );
   navPronounce->setShortcut( QKeySequence( "Alt+S" ) );
@@ -158,6 +132,56 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   zoomOut->setShortcut( QKeySequence::ZoomOut );
   zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
   zoomBase->setShortcut( QKeySequence( "Ctrl+0" ) );
+
+  // Make the search pane's titlebar
+  groupLabel.setText( tr( "Look up in:" ) );
+  groupListInDock = new GroupComboBox( &searchPaneTitleBar );
+
+  searchPaneTitleBarLayout.setContentsMargins( 8, 5, 8, 4 );
+  searchPaneTitleBarLayout.addWidget( &groupLabel );
+  searchPaneTitleBarLayout.addWidget( groupListInDock );
+  searchPaneTitleBarLayout.addStretch();
+
+  searchPaneTitleBar.setLayout( &searchPaneTitleBarLayout );
+
+  ui.searchPane->setTitleBarWidget( &searchPaneTitleBar );
+  connect( ui.searchPane, SIGNAL( visibilityChanged( bool ) ),
+           this, SLOT( updateSearchPaneAndBar() ) );
+
+  if (searchInDock)
+  {
+    groupList = groupListInDock;
+    translateLine = ui.translateLine;
+    wordList = ui.wordList;
+  }
+  else
+  {
+    groupList = groupListInToolbar;
+    translateLine = translateBox->translateLine();
+    wordList = translateBox->wordList();
+  }
+
+  groupList->setFocusPolicy(Qt::ClickFocus);
+  wordList->setFocusPolicy(Qt::ClickFocus);
+
+  wordListDefaultFont = wordList->font();
+  translateLineDefaultFont = translateLine->font();
+
+  // Make the dictionaries pane's titlebar
+  foundInDictsLabel.setText( tr( "Found in Dictionaries:" ) );
+  dictsPaneTitleBarLayout.addWidget( &foundInDictsLabel );
+  dictsPaneTitleBar.setLayout( &dictsPaneTitleBarLayout );
+  ui.dictsPane->setTitleBarWidget( &dictsPaneTitleBar );
+  ui.dictsList->setContextMenuPolicy( Qt::CustomContextMenu );
+
+  connect( ui.dictsPane, SIGNAL( visibilityChanged( bool ) ),
+           this, SLOT( dictsPaneVisibilityChanged ( bool ) ) );
+
+  connect( ui.dictsList, SIGNAL( itemClicked( QListWidgetItem * ) ),
+           this, SLOT( foundDictsPaneClicked( QListWidgetItem * ) ) );
+
+  connect( ui.dictsList, SIGNAL( customContextMenuRequested( const QPoint & ) ),
+           this, SLOT( foundDictsContextMenuRequested( const QPoint & ) ) );
 
   connect( zoomIn, SIGNAL( triggered() ),
            this, SLOT( zoomin() ) );
@@ -221,12 +245,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.centralWidget->addAction( &escAction );
   ui.dictsPane->addAction( &escAction );
   ui.searchPaneWidget->addAction( &escAction );
-  groupList.addAction( &escAction );
+  groupList->addAction( &escAction );
 
   ui.centralWidget->addAction( &focusTranslateLineAction );
   ui.dictsPane->addAction( &focusTranslateLineAction );
   ui.searchPaneWidget->addAction( &focusTranslateLineAction );
-  groupList.addAction( &focusTranslateLineAction );
+  groupList->addAction( &focusTranslateLineAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -453,17 +477,34 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.about, SIGNAL( triggered() ),
            this, SLOT( showAbout() ) );
 
-  connect( &groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+  connect( groupListInDock, SIGNAL( currentIndexChanged( QString const & ) ),
+           this, SLOT( currentGroupChanged( QString const & ) ) );
+
+  connect( groupListInToolbar, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
 
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
 
+  connect( translateBox->translateLine(), SIGNAL( textChanged( QString const & ) ),
+           this, SLOT( translateInputChanged( QString const & ) ) );
+
   connect( ui.translateLine, SIGNAL( returnPressed() ),
            this, SLOT( translateInputFinished() ) );
 
-  connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
-           this, SLOT( wordListSelectionChanged() ) );
+  connect( translateBox->translateLine(), SIGNAL( returnPressed() ),
+           this, SLOT( translateInputFinished() ) );
+
+  if (searchInDock)
+  {
+    connect( wordList, SIGNAL( itemSelectionChanged() ),
+             this, SLOT( wordListSelectionChanged() ) );
+  }
+  else
+  {
+    connect( wordList, SIGNAL( itemDoubleClicked ( QListWidgetItem * ) ),
+             this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
+  }
 
   connect( ui.wordList, SIGNAL( itemClicked( QListWidgetItem * ) ),
            this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
@@ -480,8 +521,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( mutedDictionariesChanged() ) );
 
   ui.translateLine->installEventFilter( this );
+  translateBox->translateLine()->installEventFilter( this );
+
   ui.wordList->installEventFilter( this );
+  translateBox->wordList()->installEventFilter( this );
+
   ui.wordList->viewport()->installEventFilter( this );
+  translateBox->wordList()->viewport()->installEventFilter( this );
+
   ui.dictsList->installEventFilter( this );
   ui.dictsList->viewport()->installEventFilter( this );
   //tabWidget doesn't propagate Ctrl+Tab to the parent widget unless event filter is installed
@@ -514,7 +561,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     view->showDefinition( tr( "Welcome!" ), Instances::Group::HelpGroupId );
   }
 
-  ui.translateLine->setFocus();
+  translateLine->setFocus();
 
   if ( trayIcon )
   {
@@ -575,6 +622,41 @@ void MainWindow::ctrlTabPressed()
     tabListButton->click();
 }
 
+void MainWindow::updateSearchPaneAndBar()
+{
+
+  if ( ui.searchPane->isVisible() )
+  {
+    searchInDock = true;
+
+    groupList = groupListInDock;
+    translateLine = ui.translateLine;
+    wordList = ui.wordList;
+
+    groupListToolBarAction->setVisible( false );
+
+    translateBox->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed );
+    translateBox->setVisible( false );
+    translateBox->translateLine()->setVisible( false );
+  }
+  else
+  {
+    searchInDock = false;
+
+    groupList = groupListInToolbar;
+    translateLine = translateBox->translateLine();
+    wordList = translateBox->wordList();
+
+    groupListToolBarAction->setVisible( true );
+
+    translateBox->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed );
+    translateBox->setVisible( true );
+    translateBox->translateLine()->setVisible( true );
+  }
+
+  updateGroupList();
+}
+
 void MainWindow::mousePressEvent( QMouseEvent *event)
 {
 
@@ -591,11 +673,11 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
 
     QString str = QApplication::clipboard()->text(subtype,
       QClipboard::Selection);
-  ui.translateLine->setText(str);
+  translateLine->setText(str);
 
         QKeyEvent ev(QEvent::KeyPress, Qt::Key_Enter,
            Qt::NoModifier);
-        QApplication::sendEvent(ui.translateLine, &ev);
+        QApplication::sendEvent(translateLine, &ev);
 }
 
 MainWindow::~MainWindow()
@@ -812,13 +894,13 @@ void MainWindow::updateGroupList()
 {
   bool haveGroups = cfg.groups.size();
 
-  groupList.setVisible( haveGroups );
+  groupList->setVisible( haveGroups );
 
   groupLabel.setText( haveGroups ? tr( "Look up in:" ) : tr( "Look up:" ) );
 
   // currentIndexChanged() signal is very trigger-happy. To avoid triggering
   // it, we disconnect it while we're clearing and filling back groups.
-  disconnect( &groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+  disconnect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
               this, SLOT( currentGroupChanged( QString const & ) ) );
 
   groupInstances.clear();
@@ -846,13 +928,13 @@ void MainWindow::updateGroupList()
   // found in case they got moved.
   Instances::updateNames( cfg, dictionaries );
 
-  groupList.fill( groupInstances );
-  groupList.setCurrentGroup( cfg.lastMainGroupId );
+  groupList->fill( groupInstances );
+  groupList->setCurrentGroup( cfg.lastMainGroupId );
   updateCurrentGroupProperty();
 
   updateDictionaryBar();
 
-  connect( &groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+  connect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
 }
 
@@ -861,7 +943,7 @@ void MainWindow::updateDictionaryBar()
   if ( !dictionaryBar.toggleViewAction()->isChecked() )
     return; // It's not enabled, therefore hidden -- don't waste time
 
-  unsigned currentId = groupList.getCurrentGroup();
+  unsigned currentId = groupList -> getCurrentGroup();
   Instances::Group * grp = groupInstances.findGroup( currentId );
 
   dictionaryBar.setMutedDictionaries( 0 );
@@ -931,7 +1013,7 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
   if ( groupInstances.empty() )
     return dictionaries;
 
-  int current = groupList.currentIndex();
+  int current = groupList->currentIndex();
 
   if ( current < 0 || current >= (int) groupInstances.size() )
   {
@@ -1039,7 +1121,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
                                         groupInstances, false, cfg,
                                         dictionaryBar.toggleViewAction(),
-                                        &groupList );
+                                        groupList );
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
@@ -1426,7 +1508,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
 void MainWindow::editCurrentGroup()
 {
-  editDictionaries( groupList.getCurrentGroup() );
+  editDictionaries( groupList->getCurrentGroup() );
 }
 
 void MainWindow::editPreferences()
@@ -1478,7 +1560,9 @@ void MainWindow::editPreferences()
 
     cfg.preferences = p;
 
-    scanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
+    if ( searchInDock )
+      scanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
+
     enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
 
     if ( !cfg.preferences.enableScanPopup )
@@ -1505,7 +1589,7 @@ void MainWindow::editPreferences()
 
 void MainWindow::currentGroupChanged( QString const & )
 {
-  cfg.lastMainGroupId = groupList.getCurrentGroup();
+  cfg.lastMainGroupId = groupList->getCurrentGroup();
   Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
   if( cfg.lastMainGroupId == Instances::Group::AllGroupId )
   {
@@ -1544,13 +1628,13 @@ void MainWindow::updateCurrentGroupProperty()
   // We maintain currentGroup property so styles could use that to change
   // fonts based on group names
   Instances::Group * grp =
-      groupInstances.findGroup( groupList.getCurrentGroup() );
+      groupInstances.findGroup( groupList->getCurrentGroup() );
 
-  if ( grp && ui.translateLine->property( "currentGroup" ).toString() !=
+  if ( grp && translateLine->property( "currentGroup" ).toString() !=
        grp->name )
   {
-    ui.translateLine->setProperty( "currentGroup", grp->name );
-    ui.wordList->setProperty( "currentGroup", grp->name );
+    translateLine->setProperty( "currentGroup", grp->name );
+    wordList->setProperty( "currentGroup", grp->name );
     QString ss = styleSheet();
 
     // Only update stylesheet if it mentions currentGroup, as updating the
@@ -1572,8 +1656,8 @@ void MainWindow::translateInputChanged( QString const & newValue )
   // If some word is selected in the word list, unselect it. This prevents
   // triggering a set of spurious activation signals when the list changes.
 
-  if ( ui.wordList->selectionModel()->hasSelection() )
-    ui.wordList->setCurrentItem( 0, QItemSelectionModel::Clear );
+  if ( wordList->selectionModel()->hasSelection() )
+    wordList->setCurrentItem( 0, QItemSelectionModel::Clear );
 
   QString req = newValue.trimmed();
 
@@ -1581,26 +1665,26 @@ void MainWindow::translateInputChanged( QString const & newValue )
   {
     // An empty request always results in an empty result
     wordFinder.cancel();
-    ui.wordList->clear();
-    ui.wordList->unsetCursor();
+    wordList->clear();
+    wordList->unsetCursor();
 
     // Reset the noResults mark if it's on right now
-    if ( ui.translateLine->property( "noResults" ).toBool() )
+    if ( translateLine->property( "noResults" ).toBool() )
     {
-      ui.translateLine->setProperty( "noResults", false );
+      translateLine->setProperty( "noResults", false );
       setStyleSheet( styleSheet() );
     }
     return;
   }
 
-  ui.wordList->setCursor( Qt::WaitCursor );
+  wordList->setCursor( Qt::WaitCursor );
 
   wordFinder.prefixMatch( req, getActiveDicts() );
 }
 
 void MainWindow::translateInputFinished( bool checkModifiers )
 {
-  QString word = ui.translateLine->text();
+  QString word = translateLine->text();
 
   if ( word.size() )
   {
@@ -1610,8 +1694,11 @@ void MainWindow::translateInputFinished( bool checkModifiers )
 
     showTranslationFor( word );
 
-    if ( ui.searchPane->isFloating() )
-      activateWindow();
+    if ( searchInDock )
+    {
+      if ( ui.searchPane->isFloating() )
+        activateWindow();
+    }
 
     getCurrentArticleView()->focus();
   }
@@ -1651,11 +1738,14 @@ void MainWindow::handleShiftF3()
 
 void MainWindow::focusTranslateLine()
 {
-  if ( ui.searchPane->isFloating() )
-    ui.searchPane->activateWindow();
+  if ( searchInDock )
+  {
+    if ( ui.searchPane->isFloating() )
+      ui.searchPane->activateWindow();
+  }
 
-  ui.translateLine->setFocus();
-  ui.translateLine->selectAll();
+  translateLine->setFocus();
+  translateLine->selectAll();
 }
 
 void MainWindow::prefixMatchUpdated()
@@ -1672,15 +1762,15 @@ void MainWindow::updateMatchResults( bool finished )
 {
   WordFinder::SearchResults const & results = wordFinder.getResults();
 
-  ui.wordList->setUpdatesEnabled( false );
+  wordList->setUpdatesEnabled( false );
 
   for( unsigned x = 0; x < results.size(); ++x )
   {
-    QListWidgetItem * i = ui.wordList->item( x );
+    QListWidgetItem * i = wordList->item( x );
 
     if ( !i )
     {
-      i = new QListWidgetItem( results[ x ].first, ui.wordList );
+      i = new QListWidgetItem( results[ x ].first, wordList );
 
       if ( results[ x ].second )
       {
@@ -1688,7 +1778,7 @@ void MainWindow::updateMatchResults( bool finished )
         f.setItalic( true );
         i->setFont( f );
       }
-      ui.wordList->addItem( i );
+      wordList->addItem( i );
     }
     else
     {
@@ -1708,10 +1798,10 @@ void MainWindow::updateMatchResults( bool finished )
         i->setTextAlignment(Qt::AlignLeft);
   }
 
-  while ( ui.wordList->count() > (int) results.size() )
+  while ( wordList->count() > (int) results.size() )
   {
     // Chop off any extra items that were there
-    QListWidgetItem * i = ui.wordList->takeItem( ui.wordList->count() - 1 );
+    QListWidgetItem * i = wordList->takeItem( wordList->count() - 1 );
 
     if ( i )
       delete i;
@@ -1719,25 +1809,25 @@ void MainWindow::updateMatchResults( bool finished )
       break;
   }
 
-  if ( ui.wordList->count() )
+  if ( wordList->count() )
   {
-    ui.wordList->scrollToItem( ui.wordList->item( 0 ), QAbstractItemView::PositionAtTop );
-    ui.wordList->setCurrentItem( 0, QItemSelectionModel::Clear );
+    wordList->scrollToItem( wordList->item( 0 ), QAbstractItemView::PositionAtTop );
+    wordList->setCurrentItem( 0, QItemSelectionModel::Clear );
   }
 
-  ui.wordList->setUpdatesEnabled( true );
+  wordList->setUpdatesEnabled( true );
 
   if ( finished )
   {
-    ui.wordList->unsetCursor();
+    wordList->unsetCursor();
 
     // Visually mark the input line to mark if there's no results
 
     bool setMark = results.empty() && !wordFinder.wasSearchUncertain();
 
-    if ( ui.translateLine->property( "noResults" ).toBool() != setMark )
+    if ( translateLine->property( "noResults" ).toBool() != setMark )
     {
-      ui.translateLine->setProperty( "noResults", setMark );
+      translateLine->setProperty( "noResults", setMark );
       setStyleSheet( styleSheet() );
     }
 
@@ -1797,20 +1887,22 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     }
   }
 
-  if ( obj ==  ui.translateLine )
+  if ( obj == translateLine )
   {
     if ( ev->type() == QEvent::KeyPress )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
-      if ( keyEvent->matches( QKeySequence::MoveToNextLine ) && ui.wordList->count() )
+      if (searchInDock)
       {
-        ui.wordList->setFocus( Qt::ShortcutFocusReason );
-        ui.wordList->setCurrentRow( 0, QItemSelectionModel::ClearAndSelect );
-        return true;
+        if ( keyEvent->matches( QKeySequence::MoveToNextLine ) && wordList->count() )
+        {
+          wordList->setFocus( Qt::ShortcutFocusReason );
+          return true;
+        }
       }
     }
-    else
+
     if ( ev->type() == QEvent::FocusIn ) {
       QFocusEvent * focusEvent = static_cast< QFocusEvent * >( ev );
 
@@ -1820,31 +1912,40 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       }
       return false;
     }
+
+    if ( ev->type() == QEvent::Resize ) {
+      QResizeEvent * resizeEvent = static_cast< QResizeEvent * >( ev );
+      groupList->setFixedHeight( resizeEvent->size().height() );
+      return false;
+    }
   }
   else
-  if ( obj == ui.wordList )
+  if ( obj == wordList )
   {
     if ( ev->type() == QEvent::KeyPress )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
       if ( keyEvent->matches( QKeySequence::MoveToPreviousLine ) &&
-           !ui.wordList->currentRow() )
+           !wordList->currentRow() )
       {
-        ui.wordList->setCurrentRow( 0, QItemSelectionModel::Clear );
-        ui.translateLine->setFocus( Qt::ShortcutFocusReason );
+        wordList->setCurrentRow( 0, QItemSelectionModel::Clear );
+        translateLine->setFocus( Qt::ShortcutFocusReason );
         return true;
       }
 
       if ( keyEvent->matches( QKeySequence::InsertParagraphSeparator ) &&
-           ui.wordList->selectedItems().size() )
+           wordList->selectedItems().size() )
       {
-        if ( ui.searchPane->isFloating() )
-          activateWindow();
+        if ( searchInDock )
+        {
+          if ( ui.searchPane->isFloating() )
+            activateWindow();
+        }
 
         getCurrentArticleView()->focus();
 
-        return true;
+        return searchInDock;
       }
 
       if( showHistory && keyEvent->matches( QKeySequence::Delete ) && ui.wordList->count() )
@@ -1926,13 +2027,21 @@ void MainWindow::wordListItemActivated( QListWidgetItem * item )
 {
   if( wordListSelChanged )
     wordListSelChanged = false;
-  else
+  else {
+    // TODO: code duplication with translateInputFinished!
+
+    Qt::KeyboardModifiers mods = QApplication::keyboardModifiers();
+    if ( mods & (Qt::ControlModifier | Qt::ShiftModifier) )
+      addNewTab();
+
     showTranslationFor( item->text() );
+    getCurrentArticleView()->focus();
+  }
 }
 
 void MainWindow::wordListSelectionChanged()
 {
-  QList< QListWidgetItem * > selected = ui.wordList->selectedItems();
+  QList< QListWidgetItem * > selected = wordList->selectedItems();
 
   if ( selected.size() )
   {
@@ -1996,19 +2105,19 @@ void MainWindow::typingEvent( QString const & t )
 {
   if ( t == "\n" || t == "\r" )
   {
-    if( ui.translateLine->isEnabled() )
+    if( translateLine->isEnabled() )
       focusTranslateLine();
   }
   else
   {
-    if ( ui.searchPane->isFloating() || ui.dictsPane->isFloating() )
+    if ( ( searchInDock && ui.searchPane->isFloating() ) || ui.dictsPane->isFloating() )
       ui.searchPane->activateWindow();
 
-    if( ui.translateLine->isEnabled() )
+    if( translateLine->isEnabled() )
     {
-      ui.translateLine->setText( t );
-      ui.translateLine->setFocus();
-      ui.translateLine->setCursorPosition( t.size() );
+      translateLine->setText( t );
+      translateLine->setFocus();
+      translateLine->setCursorPosition( t.size() );
     }
   }
 }
@@ -2028,7 +2137,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
   unsigned group = inGroup ? inGroup :
                    ( groupInstances.empty() ? 0 :
-                        groupInstances[ groupList.currentIndex() ].id );
+                        groupInstances[ groupList->currentIndex() ].id );
 
   view->showDefinition( inWord, group );
 
@@ -2049,7 +2158,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
   req.addQueryItem( "word", inWord );
   req.addQueryItem( "group",
                     cfg.groups.empty() ? "" :
-                      groupInstances[ groupList.currentIndex() ].name );
+                      groupInstances[ groupList->currentIndex() ].name );
 
   ui.definition->load( req );
 
@@ -2689,8 +2798,8 @@ void MainWindow::applyWordsZoomLevel()
     font.setPointSize( ps );
   }
 
-  if ( ui.wordList->font().pointSize() != ps )
-    ui.wordList->setFont( font );
+  if ( wordList->font().pointSize() != ps )
+    wordList->setFont( font );
 
   font = translateLineDefaultFont;
 
@@ -2706,10 +2815,14 @@ void MainWindow::applyWordsZoomLevel()
     font.setPointSize( ps );
   }
 
-  if ( ui.translateLine->font().pointSize() != ps )
-    ui.translateLine->setFont( font );
+  if ( translateLine->font().pointSize() != ps )
+    translateLine->setFont( font );
+
+  groupList->setFont(font);
 
   wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
+  // groupList->setFixedHeight(translateLine->height());
+  groupList->parentWidget()->layout()->activate();
 }
 
 void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
@@ -2745,7 +2858,7 @@ void MainWindow::wordReceived( const QString & word)
         return;
 
     toggleMainWindow( true );
-    ui.translateLine->setText( word );
+    translateLine->setText( word );
     translateInputFinished();
 }
 

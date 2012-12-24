@@ -24,6 +24,7 @@
 #include "hotkeywrapper.hh"
 #include "mainstatusbar.hh"
 #include "mruqmenu.hh"
+#include "translatebox.hh"
 
 #ifdef Q_WS_X11
 #include <fixx11h.h>
@@ -31,6 +32,26 @@
 
 using std::string;
 using std::vector;
+
+class ExpandableToolBar : public QToolBar
+{
+  Q_OBJECT
+
+public:
+  explicit ExpandableToolBar(QString const & title, QWidget * parent = 0)
+    : QToolBar(title, parent) {}
+  virtual QSize sizeHint() const
+  {
+    if ( !isFloating() && parentWidget() )
+    {
+      return QSize( parentWidget()->width(), QToolBar::sizeHint().height() );
+    }
+    else
+    {
+      return QToolBar::sizeHint();
+    }
+  }
+};
 
 class MainWindow: public QMainWindow, public DataCommitter
 {
@@ -66,11 +87,17 @@ private:
   QWidget searchPaneTitleBar;
   QHBoxLayout searchPaneTitleBarLayout;
   QLabel groupLabel;
-  GroupComboBox groupList;
+  GroupComboBox * groupList, * groupListInToolbar, * groupListInDock;
+
+  // Needed to be able to show/hide the group list in the toolbar, since hiding
+  // the list expilictily doesn't work, see docs for QToolBar::addWidget().
+  QAction * groupListToolBarAction;
 
   QWidget dictsPaneTitleBar;
   QHBoxLayout dictsPaneTitleBarLayout;
   QLabel foundInDictsLabel;
+
+  TranslateBox * translateBox;
 
   /// Fonts saved before words zooming is in effect, so it could be reset back.
   QFont wordListDefaultFont, translateLineDefaultFont;
@@ -103,6 +130,13 @@ private:
   QNetworkAccessManager dictNetMgr; // We give dictionaries a separate manager,
                                     // since their requests can be destroyed
                                     // in a separate thread
+
+  /// An old UI mode when tranlateLine and wordList
+  /// are in the dockable side panel, not on the toolbar.
+  bool searchInDock;
+
+  QListWidget * wordList;
+  QLineEdit * translateLine;
 
   WordFinder wordFinder;
 
@@ -342,6 +376,8 @@ private slots:
   void on_exportHistory_triggered();
   void on_importHistory_triggered();
   void focusWordList();
+
+  void updateSearchPaneAndBar();
 
   /// Add word to history
   void addWordToHistory( const QString & word );

@@ -1,5 +1,4 @@
-MainWindow #searchPane #translateLine, MainWindow #searchPane #wordList, MainWindow #dictsPane #dictsList
+MainWindow #translateLine, MainWindow #wordList, MainWindow #dictsPane #dictsList
 {
   background: white;
 }
-
