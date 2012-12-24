@@ -2608,6 +2608,14 @@ thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translat
         <source>Alt+W</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">Trở lại</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">Tiếp tục</translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>
@@ -2876,6 +2884,21 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     <message>
         <source>None</source>
         <translation type="unfinished">Không</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateBox</name>
+    <message>
+        <source>Type a word or phrase to search dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop-down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

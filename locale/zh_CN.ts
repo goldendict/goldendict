@@ -2597,6 +2597,14 @@ could be resized or managed in other ways.</source>
         <source>Alt+W</source>
         <translation>Alt+W</translation>
     </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">回退</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">前进</translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>
@@ -2863,6 +2871,21 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>None</source>
         <translation type="unfinished">无</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateBox</name>
+    <message>
+        <source>Type a word or phrase to search dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop-down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

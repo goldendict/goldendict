@@ -3458,6 +3458,14 @@ Lze měnit jeho velikost a může s ním být i jinak manipulováno.</translatio
         <source>Alt+W</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">Zpět</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">Vpřed</translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>
@@ -3736,6 +3744,21 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>None</source>
         <translation type="unfinished">Žádná</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateBox</name>
+    <message>
+        <source>Type a word or phrase to search dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop-down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

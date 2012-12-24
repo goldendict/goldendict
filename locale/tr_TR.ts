@@ -2612,6 +2612,14 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
         <source>Alt+W</source>
         <translation>Alt+W</translation>
     </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">Önceki</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">Sonraki</translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>
@@ -2883,6 +2891,21 @@ uygun grupların altlarına ekleyin.</translation>
     <message>
         <source>None</source>
         <translation type="unfinished">Yok</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateBox</name>
+    <message>
+        <source>Type a word or phrase to search dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop-down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
