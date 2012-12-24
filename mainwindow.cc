@@ -495,16 +495,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( translateBox->translateLine(), SIGNAL( returnPressed() ),
            this, SLOT( translateInputFinished() ) );
 
-  if (searchInDock)
-  {
-    connect( wordList, SIGNAL( itemSelectionChanged() ),
-             this, SLOT( wordListSelectionChanged() ) );
-  }
-  else
-  {
-    connect( wordList, SIGNAL( itemDoubleClicked ( QListWidgetItem * ) ),
-             this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
-  }
+  connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
+           this, SLOT( wordListSelectionChanged() ) );
+
+  connect( translateBox->wordList(), SIGNAL( itemDoubleClicked ( QListWidgetItem * ) ),
+           this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
 
   connect( ui.wordList, SIGNAL( itemClicked( QListWidgetItem * ) ),
            this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
@@ -1898,6 +1893,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         if ( keyEvent->matches( QKeySequence::MoveToNextLine ) && wordList->count() )
         {
           wordList->setFocus( Qt::ShortcutFocusReason );
+          wordList->setCurrentRow( 0, QItemSelectionModel::ClearAndSelect );
           return true;
         }
       }
