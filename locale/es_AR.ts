@@ -131,7 +131,7 @@
     <message>
         <location filename="../article_maker.cc" line="294"/>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(imagen)</translation>
     </message>
 </context>
 <context>
@@ -181,7 +181,7 @@
     <message>
         <location filename="../articleview.cc" line="642"/>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="658"/>
@@ -413,7 +413,7 @@
         <location filename="../groups_widgets.cc" line="820"/>
         <location filename="../groups_widgets.cc" line="995"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Diccionarios: </translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="672"/>
@@ -428,23 +428,23 @@
     <message>
         <location filename="../groups_widgets.cc" line="836"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Combinar grupos por idioma origen a &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="853"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Combinar grupos por idioma destino a &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear un grupo para traducir &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <location filename="../groups_widgets.cc" line="908"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Combinar grupos con &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -508,7 +508,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="123"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar diccionario</translation>
     </message>
 </context>
 <context>
@@ -2813,12 +2813,12 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.cc" line="3207"/>
         <source>Dictionary info</source>
-        <translation type="unfinished">Información del diccionario</translation>
+        <translation>Información del diccionario</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3208"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar diccionario</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="259"/>
@@ -3232,12 +3232,12 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../orderandprops.cc" line="205"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordenar por nombre</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="207"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordenar por idiomas</translation>
     </message>
 </context>
 <context>
@@ -3401,7 +3401,7 @@ Sin embargo, si esta opción se activa se cerrará la ventana principal.</transl
     <message>
         <location filename="../preferences.ui" line="272"/>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo complementario:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="339"/>
@@ -3985,7 +3985,7 @@ página web de descarga utilizando el navegador de internet.</translation>
     <message>
         <location filename="../sources.cc" line="715"/>
         <source>Icon</source>
-        <translation type="unfinished">Ícono</translation>
+        <translation>Ícono</translation>
     </message>
 </context>
 <context>
@@ -4032,12 +4032,12 @@ página web de descarga utilizando el navegador de internet.</translation>
     <message>
         <location filename="../scanpopup.ui" line="67"/>
         <source>Back</source>
-        <translation type="unfinished">Atrás</translation>
+        <translation>Atrás</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="81"/>
         <source>Forward</source>
-        <translation type="unfinished">Adelante</translation>
+        <translation>Adelante</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="95"/>
@@ -4448,7 +4448,7 @@ Todavía no está implementado en GoldenDict.</translation>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">Ninguno</translation>
+        <translation>Ninguno</translation>
     </message>
 </context>
 <context>
@@ -4456,17 +4456,17 @@ Todavía no está implementado en GoldenDict.</translation>
     <message>
         <location filename="../translatebox.cc" line="72"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Escriba la palabra o frase a buscar</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="86"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="92"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Desplegar resultados</translation>
     </message>
 </context>
 <context>
@@ -4489,7 +4489,7 @@ Todavía no está implementado en GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="556"/>
         <source>Icon</source>
-        <translation type="unfinished">Ícono</translation>
+        <translation>Ícono</translation>
     </message>
 </context>
 <context>
