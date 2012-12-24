@@ -344,7 +344,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/sk_SK.ts \
     locale/tr_TR.ts \
     locale/qu_WI.ts \
-    locale/tg_TJ.ts
+    locale/tg_TJ.ts \
+    locale/ay_WI.ts
 
 # Build version file
 !isEmpty( hasGit ) {
