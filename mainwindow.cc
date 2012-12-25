@@ -1338,6 +1338,7 @@ void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPi
 
 void MainWindow::tabSwitched( int )
 {
+  translateBox->wordList()->hide();
   updateBackForwardButtons();
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -1878,6 +1879,12 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
   if ( ev->type() == QEvent::MouseButtonPress ) {
     QMouseEvent * event = static_cast< QMouseEvent * >( ev );
+
+    // clicks outside of the word list should hide it.
+    if (obj != translateBox->wordList() && obj != translateBox->wordList()->viewport()) {
+      translateBox->wordList()->hide();
+    }
+
     return handleBackForwardMouseButtons( event );
   }
 
