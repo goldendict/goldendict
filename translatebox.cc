@@ -83,7 +83,7 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
 
   QPixmap image(":/icons/system-search.png");
   translate_line->setButtonPixmap(ExtLineEdit::Left, image.scaled(18, 18, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  translate_line->setButtonToolTip(ExtLineEdit::Left, tr("Options"));
+  // translate_line->setButtonToolTip(ExtLineEdit::Left, tr("Options"));
   translate_line->setButtonVisible(ExtLineEdit::Left, true);
   translate_line->setButtonFocusPolicy(ExtLineEdit::Left, Qt::ClickFocus);
 
