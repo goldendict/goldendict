@@ -515,6 +515,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
            this, SLOT( mutedDictionariesChanged() ) );
 
+  this->installEventFilter( this );
+
   ui.translateLine->installEventFilter( this );
   translateBox->translateLine()->installEventFilter( this );
 
@@ -1863,6 +1865,17 @@ bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
 
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
+
+  // when the main window is moved or resized, hide the word list suggestions
+  if ( obj == this && ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize ) )
+  {
+    if ( !searchInDock )
+    {
+        wordList->hide();
+        return false;
+    }
+  }
+
   if ( ev->type() == QEvent::MouseButtonPress ) {
     QMouseEvent * event = static_cast< QMouseEvent * >( ev );
     return handleBackForwardMouseButtons( event );
