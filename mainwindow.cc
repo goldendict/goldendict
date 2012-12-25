@@ -1613,7 +1613,7 @@ void MainWindow::currentGroupChanged( QString const & )
 
   if( !showHistory )
   {
-    translateInputChanged( ui.translateLine->text() );
+    translateInputChanged( translateLine->text() );
     translateInputFinished( false );
   }
 
@@ -1838,7 +1838,7 @@ void MainWindow::applyMutedDictionariesState()
 {
   // Redo the current search request
   if( !showHistory )
-    translateInputChanged( ui.translateLine->text() );
+    translateInputChanged( translateLine->text() );
 
   ArticleView *view = getCurrentArticleView();
 
@@ -3238,8 +3238,8 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 
 void MainWindow::sendWordToInputLine( const QString & word )
 {
-  ui.translateLine->clear();
-  ui.translateLine->setText( word );
+  translateLine->clear();
+  translateLine->setText( word );
 }
 
 #ifdef Q_OS_WIN32
