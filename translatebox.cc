@@ -107,6 +107,13 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
 
 bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
 {
+    // hide the suggestions list when the window is not active
+    if ( event->type() == QEvent::WindowDeactivate )
+    {
+      word_list->hide();
+      return false;
+    }
+
     if (obj == translate_line && event->type() == QEvent::KeyPress) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
         switch (keyEvent->key()) {
