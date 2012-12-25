@@ -110,7 +110,10 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
     // hide the suggestions list when the window is not active
     if ( event->type() == QEvent::WindowDeactivate )
     {
-      word_list->hide();
+      if (!word_list->isActiveWindow())
+      {
+        word_list->hide();
+      }
       return false;
     }
 
@@ -193,9 +196,9 @@ void TranslateBox::showPopup()
     if (word_list->isVisible())
       hide();
 
-    translate_line->setFocus();
     return;
   }
+
 
   const QSize size(width(), word_list->preferredHeight());
 
@@ -203,6 +206,7 @@ void TranslateBox::showPopup()
 
   word_list->setGeometry(rect);
   word_list->show();
+  translate_line->setFocus();
 }
 
 QLineEdit * TranslateBox::translateLine()

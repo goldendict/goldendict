@@ -122,6 +122,7 @@ IconButton::IconButton(QWidget *parent)
 {
     setCursor(Qt::ArrowCursor);
     setFocusPolicy(Qt::NoFocus);
+    setFocusProxy(parent);
 }
 
 void IconButton::paintEvent(QPaintEvent *)
