@@ -91,12 +91,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
 
-  navToolbar->addSeparator();
-  navToolbar->addAction( ui.print );
-  navToolbar->addAction( ui.saveArticle );
-
-  scanPopupSeparator = navToolbar->addSeparator();
-  scanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
+  beforeScanPopupSeparator = navToolbar->addSeparator();
+  beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
 
   enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
@@ -107,6 +103,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( enableScanPopup, SIGNAL( toggled( bool ) ),
            this, SLOT( scanEnableToggled( bool ) ) );
 
+  afterScanPopupSeparator = navToolbar->addSeparator();
+  afterScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
+
   groupListInToolbar = new GroupComboBox( navToolbar );
 
   groupListInToolbar->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
@@ -116,7 +115,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   translateBox->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed );
   navToolbar->addWidget( translateBox );
 
-  navToolbar->addSeparator();
   navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound.png" ), tr( "Pronounce Word (Alt+S)" ) );
   navPronounce->setShortcut( QKeySequence( "Alt+S" ) );
   navPronounce->setEnabled( false );
@@ -132,6 +130,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   zoomOut->setShortcut( QKeySequence::ZoomOut );
   zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
   zoomBase->setShortcut( QKeySequence( "Ctrl+0" ) );
+
+  navToolbar->addSeparator();
+  navToolbar->addAction( ui.saveArticle );
+  navToolbar->addAction( ui.print );
 
   // Make the search pane's titlebar
   groupLabel.setText( tr( "Look up in:" ) );
@@ -1558,10 +1560,9 @@ void MainWindow::editPreferences()
 
     cfg.preferences = p;
 
-    if ( searchInDock )
-      scanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
-
+    beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
     enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
+    afterScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
 
     if ( !cfg.preferences.enableScanPopup )
       enableScanPopup->setChecked( false );

@@ -108,7 +108,8 @@ private:
           showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction, switchExpandModeAction;
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
-  QAction * navBack, * navForward, * navPronounce, * enableScanPopup, * scanPopupSeparator;
+  QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
+  QAction * beforeScanPopupSeparator, * afterScanPopupSeparator;
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
   QMenu trayIconMenu;
