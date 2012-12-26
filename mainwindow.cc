@@ -123,17 +123,29 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( pronounce() ) );
 
   // zooming
-  navToolbar->addSeparator();
+  // named separator (to be able to hide it via CSS)
+  navToolbar->widgetForAction( navToolbar->addSeparator() )->setObjectName( "separatorBeforeZoom" );
+
   zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
   zoomIn->setShortcut( QKeySequence::ZoomIn );
+  navToolbar->widgetForAction( zoomIn )->setObjectName( "zoomInButton" );
+
   zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Zoom Out" ) );
   zoomOut->setShortcut( QKeySequence::ZoomOut );
+  navToolbar->widgetForAction( zoomOut )->setObjectName( "zoomOutButton" );
+
   zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
   zoomBase->setShortcut( QKeySequence( "Ctrl+0" ) );
+  navToolbar->widgetForAction( zoomBase )->setObjectName( "zoomBaseButton" );
 
-  navToolbar->addSeparator();
+  // named separator (to be able to hide it via CSS)
+  navToolbar->widgetForAction( navToolbar->addSeparator() )->setObjectName( "separatorBeforeSave" );
+
   navToolbar->addAction( ui.saveArticle );
+  navToolbar->widgetForAction( ui.saveArticle )->setObjectName( "saveArticleButton" );
+
   navToolbar->addAction( ui.print );
+  navToolbar->widgetForAction( ui.print )->setObjectName( "printButton" );
 
   // Make the search pane's titlebar
   groupLabel.setText( tr( "Look up in:" ) );
