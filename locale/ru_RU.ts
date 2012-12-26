@@ -3185,12 +3185,12 @@ GoldenDict. Если новая версия появилась, програм�
     <message>
         <location filename="../scanpopup.ui" line="67"/>
         <source>Back</source>
-        <translation type="unfinished">Назад</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="81"/>
         <source>Forward</source>
-        <translation type="unfinished">Вперёд</translation>
+        <translation>Вперёд</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="95"/>
@@ -3590,17 +3590,17 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="72"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите слово или словосочестание для поиска в словарях</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="86"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="92"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Выпадающий список</translation>
     </message>
 </context>
 <context>
