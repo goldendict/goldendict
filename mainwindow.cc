@@ -189,7 +189,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Make the dictionaries pane's titlebar
   foundInDictsLabel.setText( tr( "Found in Dictionaries:" ) );
   dictsPaneTitleBarLayout.addWidget( &foundInDictsLabel );
+  dictsPaneTitleBarLayout.setContentsMargins(5, 5, 5, 5);
   dictsPaneTitleBar.setLayout( &dictsPaneTitleBarLayout );
+  dictsPaneTitleBar.setObjectName("dictsPaneTitleBar");
   ui.dictsPane->setTitleBarWidget( &dictsPaneTitleBar );
   ui.dictsList->setContextMenuPolicy( Qt::CustomContextMenu );
 
