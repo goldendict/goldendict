@@ -89,10 +89,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar->setObjectName( "navToolbar" );
 
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
+  navToolbar->widgetForAction( navBack )->setObjectName( "backButton" );
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
+  navToolbar->widgetForAction( navForward )->setObjectName( "forwardButton" );
 
   beforeScanPopupSeparator = navToolbar->addSeparator();
   beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
+  navToolbar->widgetForAction( beforeScanPopupSeparator )->setObjectName( "beforeScanPopupSeparator" );
 
   enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
@@ -105,6 +108,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   afterScanPopupSeparator = navToolbar->addSeparator();
   afterScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
+  navToolbar->widgetForAction( afterScanPopupSeparator )->setObjectName( "afterScanPopupSeparator" );
 
   groupListInToolbar = new GroupComboBox( navToolbar );
 
@@ -118,6 +122,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound.png" ), tr( "Pronounce Word (Alt+S)" ) );
   navPronounce->setShortcut( QKeySequence( "Alt+S" ) );
   navPronounce->setEnabled( false );
+  navToolbar->widgetForAction( navPronounce )->setObjectName( "soundButton" );
 
   connect( navPronounce, SIGNAL( triggered() ),
            this, SLOT( pronounce() ) );
