@@ -70,6 +70,8 @@ public:
   /// group. Setting this to 0 disables this. It is 0 by default.
   void setGroupComboBox( GroupComboBox const * );
 
+  virtual QSize minimumSizeHint() const;
+
   ~ArticleView();
 
   typedef QMap< QString, QString > Contexts;

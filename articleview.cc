@@ -170,6 +170,13 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
 }
 
+// explicitly report the minimum size, to avoid
+// sidebar widgets' improper resize during restore
+QSize ArticleView::minimumSizeHint() const
+{
+  return ui.searchFrame->minimumSizeHint();
+}
+
 void ArticleView::setGroupComboBox( GroupComboBox const * g )
 {
   groupComboBox = g;
