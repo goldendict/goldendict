@@ -24,12 +24,13 @@ signals:
   void doubleClicked();
 
 protected:
-  virtual void mouseDoubleClickEvent ( QMouseEvent * event );
+//  virtual void mouseDoubleClickEvent ( QMouseEvent * event );
 
 private:
   virtual void tabInserted(int index);
   virtual void tabRemoved(int index);
   void updateTabBarVisibility();
+  virtual bool eventFilter( QObject * obj, QEvent * ev );
 
   bool hideSingleTab;
 };

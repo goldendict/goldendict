@@ -3,9 +3,13 @@
 
 #include "maintabwidget.hh"
 #include <QDebug>
+#include <QEvent>
+#include <QMouseEvent>
 
 MainTabWidget::MainTabWidget( QWidget * parent) : QTabWidget( parent ) {
   hideSingleTab = false;
+  installEventFilter( this );
+  tabBar()->installEventFilter( this );
 }
 
 void MainTabWidget::setHideSingleTab(bool hide)
@@ -37,8 +41,25 @@ void MainTabWidget::updateTabBarVisibility()
   tabBar()->setVisible( !hideSingleTab || tabBar()->count() > 1 );
 }
 
+/*
 void MainTabWidget::mouseDoubleClickEvent ( QMouseEvent * event )
 {
   (void) event;
   emit doubleClicked();
+}
+*/
+
+bool MainTabWidget::eventFilter( QObject * obj, QEvent * ev )
+{
+  // mouseDoubleClickEvent don't called under Ubuntu
+  if( ev->type() == QEvent::MouseButtonDblClick )
+  {
+    QMouseEvent * mev = static_cast< QMouseEvent *>( ev );
+    if( tabBar()->tabAt( mev->pos() ) == -1 )
+    {
+      emit doubleClicked();
+      return true;
+    }
+  }
+  return QTabWidget::eventFilter( obj, ev );
 }
