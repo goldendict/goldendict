@@ -18,7 +18,7 @@
     <message>
         <location filename="../about.ui" line="73"/>
         <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org) {2008-2012 ?}</translation>
+        <translation>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>

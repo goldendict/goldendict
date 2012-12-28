@@ -16,7 +16,7 @@
     <message>
         <location filename="../about.ui" line="73"/>
         <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org) {2008-2012 ?}</translation>
+        <translation type="unfinished">(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
@@ -68,7 +68,7 @@
         <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Willkommen bei &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Damit Sie mit dem Programm beginnen können, besuchen Sie zunächst &lt;b&gt;Bearbeiten » Wörterbücher&lt;/b&gt;, um Pfade zu gespeicherten Wörterbüchern hinzuzufügen, Wikipedia oder andere Seiten einzurichten, oder um die Wörterbücher zu ordnen bzw. um Sie in Gruppen zu unterteilen.&lt;/p&gt;
 &lt;p&gt;Dann sind Sie bereit, um das erste Wort nachzuschlagen! Dies können Sie im Fenster auf der linken Seite, oder &lt;a href=&quot;Mit Popups arbeiten&quot;&gt;mittels der Popup-Funktion in anderen Applikationen.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Um das Programm anzupassen, öffnen Sie &lt;b&gt;Bearbeiten » Einstellungen&lt;/b&gt;. Alle Einstellungen haben Tooltips, die Ihnen helfen, die letzten Zweifel zu nehmen.&lt;/p&gt;
-&lt;p&gt;Sollten Sie trotzdem noch Hilfe brauchen, oder wenn Sie sonstige Fragen und Verbesserungsvorschlage haben, oder wenn Sie nur wissen wollen, was andere denken, dann finden Sie uns im &lt;a href=&quot;hhttp://goldendict.org/forum/&quot;&gt;Forum&lt;/a&gt;. &lt;p&gt;Programmupdates sind auf der &lt;a href=&quot;http://goldendict.org/&quot;&gt;Website&lt;/a&gt; zu finden.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Lizensiert unter der GPLv3 oder neuer. {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
+&lt;p&gt;Sollten Sie trotzdem noch Hilfe brauchen, oder wenn Sie sonstige Fragen und Verbesserungsvorschlage haben, oder wenn Sie nur wissen wollen, was andere denken, dann finden Sie uns im &lt;a href=&quot;hhttp://goldendict.org/forum/&quot;&gt;Forum&lt;/a&gt;. &lt;p&gt;Programmupdates sind auf der &lt;a href=&quot;http://goldendict.org/&quot;&gt;Website&lt;/a&gt; zu finden.&lt;p&gt;(c) 2008-2011 Konstantin Isakov. Lizensiert unter der GPLv3 oder neuer.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="191"/>

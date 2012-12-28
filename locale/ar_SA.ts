@@ -16,11 +16,11 @@
     <message>
         <location filename="../about.ui" line="73"/>
         <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org) {2008-2012 ?}</translation>
+        <translation type="unfinished">(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="obsolete">(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org) {2008-2011 ?}</translation>
+        <translation type="obsolete">(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="97"/>
@@ -33,7 +33,7 @@
     </message>
     <message>
         <source>(c) 2008-2010 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="obsolete">(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org) {2008-2010 ?}</translation>
+        <translation type="obsolete">(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>(c) 2008-2009 Konstantin Isakov (ikm@goldendict.org)</source>
@@ -74,7 +74,7 @@
     <message>
         <location filename="../article_maker.cc" line="175"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">ت&lt;h3 align=&quot;center&quot;&gt;مرحبا في &lt;b&gt;القاموس الذهبي&lt;/b&gt;!&lt;p&gt;لتبدأ العمل مع البرنامج، اذهب إلى &lt;b&gt;تحرير|قواميس&lt;/b&gt; لاضافة بعض مسارات القواميس لأبحث فيها، اعدّ قواميس ويكيبيديا متنوعة أو مصادر  أخرى، غير ترتيب القواميس أو أنشئ مجموعة للقواميس.&lt;p&gt;وعندها انت جاهز للبحث عن كلمات! يمكنك عمل ذلك من هذه النافذة باستخدام اللوح الأيمن، أو يمكنك &lt;a href=&quot;Working with popup&quot;&gt; البحث عن كلمات أثناء عملك على برامج أخرى &lt;/a&gt;. &lt;p&gt; لتخصيص برنامج، تحقق من التفضيلات عند &lt;b&gt;تحرير|تفضيلات &lt;/b&gt;. كل الاعدادات هناك لها تلمحيات، تأكد من قرائتها إن كنت في شك من أي شيء.&lt;p&gt;ان احتجت لمزيد من المساعدة، أو عندك أي سؤال، اقتراح أو تريد أن تعرف ماذا يقول الآخرون، فأنت مرحب بك في في &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;منتدى&lt;/a&gt; البرنامج. &lt;p&gt;تحقق من &lt;a href=&quot;http://goldendict.org/&quot;&gt;موقع&lt;/a&gt; البرنامج لأجل التحديثات. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. مرخص تحت GPLv3 أو أحدث. {3 ?} {3&gt;?} {2008-2012 ?} {3 ?}</translation>
+        <translation type="unfinished">ت&lt;h3 align=&quot;center&quot;&gt;مرحبا في &lt;b&gt;القاموس الذهبي&lt;/b&gt;!&lt;p&gt;لتبدأ العمل مع البرنامج، اذهب إلى &lt;b&gt;تحرير|قواميس&lt;/b&gt; لاضافة بعض مسارات القواميس لأبحث فيها، اعدّ قواميس ويكيبيديا متنوعة أو مصادر  أخرى، غير ترتيب القواميس أو أنشئ مجموعة للقواميس.&lt;p&gt;وعندها انت جاهز للبحث عن كلمات! يمكنك عمل ذلك من هذه النافذة باستخدام اللوح الأيمن، أو يمكنك &lt;a href=&quot;Working with popup&quot;&gt; البحث عن كلمات أثناء عملك على برامج أخرى &lt;/a&gt;. &lt;p&gt; لتخصيص برنامج، تحقق من التفضيلات عند &lt;b&gt;تحرير|تفضيلات &lt;/b&gt;. كل الاعدادات هناك لها تلمحيات، تأكد من قرائتها إن كنت في شك من أي شيء.&lt;p&gt;ان احتجت لمزيد من المساعدة، أو عندك أي سؤال، اقتراح أو تريد أن تعرف ماذا يقول الآخرون، فأنت مرحب بك في في &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;منتدى&lt;/a&gt; البرنامج. &lt;p&gt;تحقق من &lt;a href=&quot;http://goldendict.org/&quot;&gt;موقع&lt;/a&gt; البرنامج لأجل التحديثات. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. مرخص تحت GPLv3 أو أحدث.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="191"/>
