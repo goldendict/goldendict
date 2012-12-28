@@ -2277,29 +2277,21 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
 void MainWindow::toggleMainWindow( bool onlyShow )
 {
-  bool shown = false;
-
-  if ( !isVisible() )
+  if ( isHidden() )
   {
     show();
-    activateWindow();
-    raise();
-    shown = true;
   }
   else
   if ( isMinimized() )
   {
     showNormal();
-    activateWindow();
-    raise();
-    shown = true;
   }
-  else
+
   if ( !isActiveWindow() )
   {
     activateWindow();
     raise();
-    shown = true;
+    focusTranslateLine();
   }
   else
   if ( !onlyShow )
@@ -2309,9 +2301,6 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     else
       showMinimized();
   }
-
-  if ( shown )
-    focusTranslateLine();
 }
 
 void MainWindow::installHotKeys()
