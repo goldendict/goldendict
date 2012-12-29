@@ -386,6 +386,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.menuView->addSeparator();
   ui.menuView->addAction( &showDictBarNamesAction );
   ui.menuView->addAction( &useSmallIconsInToolbarsAction );
+  ui.menuView->addSeparator();
+  ui.alwaysOnTop->setChecked( cfg.preferences.alwaysOnTop );
+  ui.menuView->addAction( ui.alwaysOnTop );
 
   // Dictionary bar
 
@@ -608,6 +611,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // Initialize global hotkeys
   installHotKeys();
+
+  if ( cfg.preferences.alwaysOnTop )
+  {
+    on_alwaysOnTop_triggered( true );
+  }
 
   // Only show window initially if it wasn't configured differently
   if ( !cfg.preferences.enableTrayIcon || !cfg.preferences.startToTray )
@@ -2770,6 +2778,35 @@ void MainWindow::on_rescanFiles_triggered()
 
   makeScanPopup();
   installHotKeys();
+}
+
+void MainWindow::on_alwaysOnTop_triggered( bool checked )
+{
+    cfg.preferences.alwaysOnTop = checked;
+
+    bool wasVisible = isVisible();
+
+    Qt::WindowFlags flags = this->windowFlags();
+    if (checked)
+    {
+        setWindowFlags(flags | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
+        mainStatusBar->showMessage(
+              tr( "The main window is set to be always on top." ),
+              10000,
+              QPixmap( ":/icons/warning.png" ) );
+    }
+    else
+    {
+        setWindowFlags(flags ^ (Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint));
+        mainStatusBar->clearMessage();
+    }
+
+    if ( wasVisible )
+    {
+      show();
+    }
+
+    installHotKeys();
 }
 
 void MainWindow::zoomin()

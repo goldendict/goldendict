@@ -376,6 +376,7 @@ private slots:
   void on_showHideHistory_triggered();
   void on_exportHistory_triggered();
   void on_importHistory_triggered();
+  void on_alwaysOnTop_triggered( bool checked );
   void focusWordList();
 
   void updateSearchPaneAndBar();

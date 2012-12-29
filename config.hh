@@ -158,6 +158,7 @@ struct Preferences
   bool doubleClickTranslates;
   bool selectWordBySingleClick;
   bool escKeyHidesMainWindow;
+  bool alwaysOnTop;
 
   bool enableMainWindowHotkey;
   HotKey mainWindowHotkey;
