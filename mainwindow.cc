@@ -33,6 +33,11 @@
 #include "mouseover_win32/GDDataTranfer.h"
 #endif
 
+#ifdef Q_WS_X11
+#include <QX11Info>
+#include <X11/Xlib.h>
+#endif
+
 using std::set;
 using std::wstring;
 using std::map;
@@ -2282,6 +2287,7 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   if ( !isVisible() )
   {
     show();
+    qApp->setActiveWindow( this );
     activateWindow();
     raise();
     shown = true;
@@ -2311,7 +2317,16 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   }
 
   if ( shown )
+  {
     focusTranslateLine();
+#ifdef Q_WS_X11
+    Window wh = 0;
+    int rev = 0;
+    XGetInputFocus( QX11Info::display(), &wh, &rev );
+    if( wh != translateLine->internalWinId() )
+      XSetInputFocus( QX11Info::display(), translateLine->internalWinId(), RevertToParent, CurrentTime );
+#endif
+  }
 }
 
 void MainWindow::installHotKeys()
