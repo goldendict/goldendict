@@ -55,5 +55,6 @@
         <file>qt-style-st-babylon.css</file>
         <file>icons/1downarrow.png</file>
         <file>icons/system-search.png</file>
+        <file>icons/menu_button.png</file>
     </qresource>
 </RCC>

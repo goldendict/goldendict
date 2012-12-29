@@ -446,6 +446,18 @@
     <string>Ctrl+O</string>
    </property>
   </action>
+  <action name="menuOptions">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/menu_button.png</normaloff>:/icons/menu_button.png</iconset>
+   </property>
+   <property name="text">
+    <string>Menu Button</string>
+   </property>
+   <property name="toolTip">
+    <string>Menu Button</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

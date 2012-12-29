@@ -9,6 +9,10 @@ MainWindow #translateLine[noResults="true"]
   background: #febb7d;
 }
 
+#navToolbar #menuButton::menu-indicator {
+  image: none;
+}
+
 #navToolbar #translateLine
 {
   border: 1px solid gray;

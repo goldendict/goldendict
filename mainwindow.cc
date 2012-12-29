@@ -157,6 +157,31 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar->addAction( ui.print );
   navToolbar->widgetForAction( ui.print )->setObjectName( "printButton" );
 
+  beforeOptionsSeparator = navToolbar->addSeparator();
+  navToolbar->widgetForAction( beforeOptionsSeparator )->setObjectName( "beforeOptionsSeparator" );
+  beforeOptionsSeparator->setVisible( cfg.preferences.hideMenubar);
+
+  QMenu * buttonMenu = new QMenu( this );
+  buttonMenu->addAction( ui.dictionaries );
+  buttonMenu->addAction( ui.preferences );
+  buttonMenu->addSeparator();
+  buttonMenu->addMenu( ui.menuHistory );
+  buttonMenu->addSeparator();
+  buttonMenu->addMenu( ui.menuFile );
+  buttonMenu->addMenu( ui.menuView );
+  buttonMenu->addMenu( ui.menu_Help );
+
+  QToolButton * menuButton = new QToolButton( navToolbar );
+  menuButton->setPopupMode( QToolButton::InstantPopup );
+  menuButton->setMenu( buttonMenu );
+  menuButton->setIcon( QIcon (":/icons/menu_button.png") );
+  menuButton->addAction( ui.menuOptions );
+  menuButton->setToolTip( tr( "Menu Button" ) );
+  menuButton->setObjectName( "menuButton" );
+
+  menuButtonAction = navToolbar->addWidget(menuButton);
+  menuButtonAction->setVisible( cfg.preferences.hideMenubar );
+
   // Make the search pane's titlebar
   groupLabel.setText( tr( "Look up in:" ) );
   groupListInDock = new GroupComboBox( &searchPaneTitleBar );
@@ -2616,37 +2641,9 @@ void MainWindow::toggleMenuBarTriggered(bool announce)
     }
   }
 
-  // Obtain from the menubar all the actions with shortcuts
-  // and either add them to the main window or remove them,
-  // depending on the menubar state.
-
-  QList<QMenu *> allMenus = menuBar()->findChildren<QMenu *>();
-  QListIterator<QMenu *> menuIter( allMenus );
-  while( menuIter.hasNext() )
-  {
-    QMenu * menu = menuIter.next();
-    QList<QAction *> allMenuActions = menu->actions();
-    QListIterator<QAction *> actionsIter( allMenuActions );
-    while( actionsIter.hasNext() )
-    {
-      QAction * action = actionsIter.next();
-      if ( !action->shortcut().isEmpty() )
-      {
-        if ( cfg.preferences.hideMenubar )
-        {
-          // add all menubar actions to the main window,
-          // before we hide the menubar
-          addAction( action );
-        }
-        else
-        {
-          // remove all menubar actions from the main window
-          removeAction( action );
-        }
-      }
-    }
-  }
   menuBar()->setVisible( !cfg.preferences.hideMenubar );
+  beforeOptionsSeparator->setVisible( cfg.preferences.hideMenubar);
+  menuButtonAction->setVisible( cfg.preferences.hideMenubar );
 }
 
 void MainWindow::on_clearHistory_triggered()

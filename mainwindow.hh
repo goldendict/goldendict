@@ -109,11 +109,12 @@ private:
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
-  QAction * beforeScanPopupSeparator, * afterScanPopupSeparator;
+  QAction * beforeScanPopupSeparator, * afterScanPopupSeparator, * beforeOptionsSeparator;
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
   QMenu trayIconMenu;
-  QMenu *tabMenu;
+  QMenu * tabMenu;
+  QAction * menuButtonAction;
   MRUQMenu *tabListMenu;
   //List that contains indexes of tabs arranged in a most-recently-used order
   QList<QWidget*> mruList;
