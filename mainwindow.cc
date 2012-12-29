@@ -394,7 +394,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   // Toggle Menubar
   toggleMenuBarAction.setCheckable( true );
-  toggleMenuBarAction.setChecked( true );
+  toggleMenuBarAction.setChecked( !cfg.preferences.hideMenubar );
   toggleMenuBarAction.setShortcut( QKeySequence( "Ctrl+M" ) );
 
   connect( &toggleMenuBarAction, SIGNAL( triggered() ),
