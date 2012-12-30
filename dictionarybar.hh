@@ -5,6 +5,7 @@
 #include <QSize>
 #include <QList>
 #include <QString>
+#include <QTimer>
 #include "dictionary.hh"
 #include "config.hh"
 
@@ -52,6 +53,9 @@ private:
   QList< QAction * > dictActions;
 
   bool use14x21;
+  int timerId;
+
+  virtual bool eventFilter( QObject *, QEvent * );
 
 protected:
 

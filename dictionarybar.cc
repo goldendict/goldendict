@@ -15,7 +15,8 @@ DictionaryBar::DictionaryBar( QWidget * parent,
   mutedDictionaries( 0 ),
   configEvents( events ),
   editDictionaryCommand( _editDictionaryCommand ),
-  use14x21( false )
+  use14x21( false ),
+  timerId( 0 )
 {
   setObjectName( "dictionaryBar" );
 
@@ -24,6 +25,8 @@ DictionaryBar::DictionaryBar( QWidget * parent,
 
   connect( this, SIGNAL(actionTriggered(QAction*)),
            this, SLOT(actionWasTriggered(QAction*)) );
+
+  installEventFilter( this );
 }
 
 static QString elideDictName( QString const & name )
@@ -298,4 +301,41 @@ void DictionaryBar::dictsPaneClicked( const QString & id )
       break;
     }
   }
+}
+
+bool DictionaryBar::eventFilter( QObject * obj, QEvent * ev )
+{
+  if(obj == this && !isFloating() )
+  {
+    QPoint pt = parentWidget()->mapFromGlobal( QCursor::pos() );
+    switch( ev->type() )
+    {
+      case QEvent::Leave : if( geometry().contains( pt ) )
+                           {
+                             timerId = startTimer( 500 );
+                             return true;
+                           }
+                           break;
+     case QEvent::Enter :  if( timerId != 0)
+                           {
+                             killTimer( timerId );
+                             timerId = 0;
+                           }
+                           break;
+      case QEvent::Timer:  if( static_cast< QTimerEvent * >( ev )->timerId() == timerId )
+                           {
+                             if( !geometry().contains( pt ) )
+                             {
+                               killTimer( timerId );
+                               timerId = 0;
+                               QEvent event( QEvent::Leave );
+                               QApplication::sendEvent( this, &event );
+                             }
+                             return true;
+                           }
+                           break;
+      default:             break;
+    }
+  }
+  return false;
 }
