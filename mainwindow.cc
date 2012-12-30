@@ -404,7 +404,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.menuView->addAction( &toggleMenuBarAction );
   ui.menuView->addAction( ui.searchPane->toggleViewAction() );
+  ui.searchPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+S" ) );
   ui.menuView->addAction( ui.dictsPane->toggleViewAction() );
+  ui.dictsPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+R" ) );
   ui.menuView->addSeparator();
   ui.menuView->addAction( dictionaryBar.toggleViewAction() );
   ui.menuView->addAction( navToolbar->toggleViewAction() );
