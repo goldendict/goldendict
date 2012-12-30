@@ -128,7 +128,7 @@
   </widget>
   <widget class="QDockWidget" name="searchPane">
    <property name="windowTitle">
-    <string>Search Pane</string>
+    <string>&amp;Search Pane</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -255,7 +255,7 @@
   </widget>
   <widget class="QDockWidget" name="dictsPane">
    <property name="windowTitle">
-    <string>Results Navigation Pane</string>
+    <string>&amp;Results Navigation Pane</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -378,12 +378,12 @@
   </action>
   <action name="printPreview">
    <property name="text">
-    <string>Print Preview</string>
+    <string>Print Pre&amp;view</string>
    </property>
   </action>
   <action name="rescanFiles">
    <property name="text">
-    <string>Rescan Files</string>
+    <string>&amp;Rescan Files</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+F5</string>
@@ -400,7 +400,7 @@
      <normaloff>:/icons/addtab.png</normaloff>:/icons/addtab.png</iconset>
    </property>
    <property name="text">
-    <string>New Tab</string>
+    <string>&amp;New Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+T</string>
@@ -437,7 +437,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Always on Top</string>
+    <string>&amp;Always on Top</string>
    </property>
    <property name="toolTip">
     <string>Always on Top</string>

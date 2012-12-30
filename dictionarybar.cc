@@ -11,7 +11,7 @@ using std::vector;
 
 DictionaryBar::DictionaryBar( QWidget * parent,
                               Config::Events & events, QString const & _editDictionaryCommand ):
-  QToolBar( tr( "Dictionary Bar" ), parent ),
+  QToolBar( tr( "&Dictionary Bar" ), parent ),
   mutedDictionaries( 0 ),
   configEvents( events ),
   editDictionaryCommand( _editDictionaryCommand ),

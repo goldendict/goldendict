@@ -59,8 +59,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   closeRestTabAction( this ),
   switchToNextTabAction( this ),
   switchToPrevTabAction( this ),
-  showDictBarNamesAction( tr( "Show Names in Dictionary Bar" ), this ),
-  useSmallIconsInToolbarsAction( tr( "Show Small Icons in Toolbars" ), this ),
+  showDictBarNamesAction( tr( "Show Names in Dictionary &Bar" ), this ),
+  useSmallIconsInToolbarsAction( tr( "Show Small Icons in &Toolbars" ), this ),
   toggleMenuBarAction( tr( "&Menubar" ), this ),
   switchExpandModeAction( this ),
   trayIconMenu( this ),
@@ -90,7 +90,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   mainStatusBar = new MainStatusBar( this );
 
   // Make the toolbar
-  navToolbar = addToolBar( tr( "Navigation" ) );
+  navToolbar = addToolBar( tr( "&Navigation" ) );
   navToolbar->setObjectName( "navToolbar" );
 
   navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
