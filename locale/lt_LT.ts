@@ -128,7 +128,7 @@
     <message>
         <location filename="../article_maker.cc" line="294"/>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(paveikslėlis)</translation>
     </message>
 </context>
 <context>
@@ -174,12 +174,12 @@
     <message>
         <location filename="../articleview.cc" line="642"/>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Paveikslėlis</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="658"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>„%1“ žodyne esantis apibrėžimas: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="662"/>
@@ -234,13 +234,13 @@
     <message>
         <location filename="../articleview.cc" line="1070"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>„%1“ siųsti į įvedimo eilutę</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1076"/>
         <location filename="../articleview.cc" line="1111"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>žodį „%1“ į&amp;traukti į žurnalą</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1090"/>
@@ -265,12 +265,12 @@
     <message>
         <location filename="../articleview.cc" line="1278"/>
         <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko rasti „Bass“ bibliotekos.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1283"/>
         <source>Bass library can&apos;t play this sound.</source>
-        <translation type="unfinished"></translation>
+        <translation>„Bass“ biblioteka negali groti šio garso.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1318"/>
@@ -406,7 +406,7 @@
         <location filename="../groups_widgets.cc" line="820"/>
         <location filename="../groups_widgets.cc" line="995"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Žodynai: </translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="672"/>
@@ -421,23 +421,23 @@
     <message>
         <location filename="../groups_widgets.cc" line="836"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Apjungti grupes pagal kalbą, iš kurios verčiama („%1-&gt;“)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="853"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Apjungti grupes pagal kalbą, į kurią verčiama („-&gt;%1“)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurti dvikrypčio vertimo grupę „%1-%2-%1“</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <location filename="../groups_widgets.cc" line="908"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Apjungti grupes pagal „%1“</translation>
     </message>
 </context>
 <context>
@@ -445,32 +445,32 @@
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">Iš viso straipsnių:</translation>
+        <translation>Iš viso straipsnių:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation type="unfinished">Verčia iš:</translation>
+        <translation>Verčia iš:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
         <source>Total words:</source>
-        <translation type="unfinished">Iš viso žodžių:</translation>
+        <translation>Iš viso žodžių:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="71"/>
         <source>Translates to:</source>
-        <translation type="unfinished">Verčia į:</translation>
+        <translation>Verčia į:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="88"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Žodyną sudarantys failai:</translation>
+        <translation>Žodyną sudarantys failai:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="163"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprašas:</translation>
     </message>
 </context>
 <context>
@@ -496,12 +496,12 @@
     <message>
         <location filename="../dictionarybar.cc" line="109"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacija apie žodyną</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="123"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Keisti žodyną</translation>
     </message>
 </context>
 <context>
@@ -1751,77 +1751,77 @@
     <message>
         <location filename="../language.cc" line="374"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>kinų (tradicinė)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>kinų (supaprastinta)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>kita</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>kinų (kitas supaprastintas dialektas)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>kinų (kitas tradicinis dialektas)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>kita Rytų Europos kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>kita Vakarų Europos kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>kita Rusijos kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>kita Japonijos kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>kita baltų kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>kita graikų kalba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>kita korėjiečių tarmė</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>kita turkų tarmė</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>kita tajų tarmė</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamazight</translation>
     </message>
 </context>
 <context>
@@ -1970,7 +1970,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="171"/>
         <source>Found in Dictionaries:</source>
-        <translation>Žodynuose rasta:</translation>
+        <translation>Rasta žodynuose:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="120"/>
@@ -2035,37 +2035,37 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="3008"/>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Įkelti žurnalą iš failo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3052"/>
         <source>Imported from file: </source>
-        <translation type="unfinished"></translation>
+        <translation>Įkelti iš failo: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3062"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida įkeliant: failo duomenys netinkami</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3066"/>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Įkėlimas į žurnalą baigtas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3069"/>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida įkeliant: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3207"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacija apie žodyną</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3208"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Keisti žodyną</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="259"/>
@@ -2100,12 +2100,12 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="2925"/>
         <source>History view mode</source>
-        <translation>Istorijos rodymas</translation>
+        <translation>Žurnalo rodymas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2947"/>
         <source>Export history to file</source>
-        <translation>Istoriją įrašyti į failą</translation>
+        <translation>Žurnalą įrašyti į failą</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2949"/>
@@ -2116,7 +2116,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="2988"/>
         <source>History export complete</source>
-        <translation>Istorija įrašyta</translation>
+        <translation>Žurnalas įrašytas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2991"/>
@@ -2158,7 +2158,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     </message>
     <message>
         <location filename="../mainwindow.ui" line="289"/>
-        <source>&amp;Dictionaries...	F3</source>
+        <source>&amp;Dictionaries...    F3</source>
         <translation>Žo&amp;dynai...	F3</translation>
     </message>
     <message>
@@ -2188,7 +2188,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
-        <translation>&amp;Istorija</translation>
+        <translation>Ž&amp;urnalas</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
@@ -2318,22 +2318,22 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
         <location filename="../mainwindow.ui" line="419"/>
         <location filename="../mainwindow.cc" line="2878"/>
         <source>&amp;Show</source>
-        <translation>&amp;Rodyti</translation>
+        <translation>Ro&amp;dyti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="422"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="427"/>
         <source>&amp;Export</source>
-        <translation>&amp;Eksportuoti</translation>
+        <translation>Į&amp;rašyti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="432"/>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Į&amp;kelti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
@@ -2377,7 +2377,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../sources.cc" line="399"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ženkliukas</translation>
     </message>
 </context>
 <context>
@@ -2438,7 +2438,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../orderandprops.ui" line="245"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprašas:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="325"/>
@@ -2453,12 +2453,12 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../orderandprops.cc" line="205"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Rikiuoti pagal pavadinimą</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="207"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Rikiuoti pagal kalbą</translation>
     </message>
 </context>
 <context>
@@ -2532,7 +2532,7 @@ prie paskutiniųjų.</translation>
     <message>
         <location filename="../preferences.ui" line="87"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald-Tab naršymui kortelėse pagal MRU</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="97"/>
@@ -2614,17 +2614,17 @@ Tačiau įgalinus šią parinktį, būtų paslepiamas pagrindinis langas.</trans
     <message>
         <location filename="../preferences.ui" line="144"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Įgalinkite šią parinktį, jei žodį norite pasirinkti vieną kartą spustelėdami ties juo</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="147"/>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodį pasirinkti jį spragtelint</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="272"/>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Papildomas stilius:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="339"/>
@@ -2837,7 +2837,7 @@ tik .wav failai, tačiau groja labai gerai.</translation>
     <message>
         <location filename="../preferences.ui" line="807"/>
         <source>Play via Windows native API</source>
-        <translation>Groti naudojant Windows sąsają</translation>
+        <translation>Garsą leisti naudojant Windows sąsają</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="814"/>
@@ -2849,18 +2849,19 @@ tačiau palaiko daugelį garso failų formatų.</translation>
     <message>
         <location filename="../preferences.ui" line="818"/>
         <source>Play via Phonon</source>
-        <translation>Groti per Phonon</translation>
+        <translation>Garsą leisti per Phonon</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="828"/>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Garsą leisti per „Bass“ biblioteką. Optimalus pasirinkimas. Šia funkcija galėsite naudotis
+bass.dll (http://www.un4seen.com) nukopijavę į GoldenDict aplanką.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="832"/>
         <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
+        <translation>Garsą leisti per „Bass“ biblioteką</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="841"/>
@@ -2929,32 +2930,32 @@ Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translatio
     <message>
         <location filename="../preferences.ui" line="1124"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Žurnalas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Įgalinkite, jei norite įsiminti verčiamus žodžius</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1133"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Įsi&amp;minti verstus žodžius</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1143"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Straipsneliai</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1149"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Įgalinkite, jei norite visada matyti visas straipsnelio dalis</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1152"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Išplėsti papildomas &amp;dalis</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
@@ -3133,7 +3134,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../preferences.cc" line="82"/>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="157"/>
@@ -3222,7 +3223,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../sources.cc" line="715"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ženkliukas</translation>
     </message>
 </context>
 <context>
@@ -3261,12 +3262,12 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../scanpopup.ui" line="67"/>
         <source>Back</source>
-        <translation type="unfinished">Atgal</translation>
+        <translation>Atgal</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="81"/>
         <source>Forward</source>
-        <translation type="unfinished">Pirmyn</translation>
+        <translation>Pirmyn</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="95"/>
@@ -3447,7 +3448,7 @@ Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
         <translation>Kiekvienas morfologijos žodynas rodomas kaip
 atskiras pagalbinis žodynas, kuris paieškai 
-pateikia žodžių kaminus ir klaidingai įvestų žodžių
+pateikia žodžių kamienus ir klaidingai įvestų žodžių
 rašybos spėjimus.
 Žodynus pridėkite atitinkamų grupių apačioje.</translation>
     </message>
@@ -3660,7 +3661,7 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">Nieko</translation>
+        <translation>Nieko</translation>
     </message>
 </context>
 <context>
@@ -3668,17 +3669,17 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../translatebox.cc" line="72"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Įveskite žodyne norimą rasti žodį ar frazę</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="86"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinktys</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="92"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Išskleisti</translation>
     </message>
 </context>
 <context>
@@ -3701,7 +3702,7 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="556"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ženkliukas</translation>
     </message>
 </context>
 <context>
