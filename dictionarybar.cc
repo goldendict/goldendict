@@ -312,6 +312,8 @@ bool DictionaryBar::eventFilter( QObject * obj, QEvent * ev )
     {
       case QEvent::Leave : if( geometry().contains( pt ) )
                            {
+                             if( timerId )
+                               killTimer( timerId );
                              timerId = startTimer( 500 );
                              return true;
                            }
