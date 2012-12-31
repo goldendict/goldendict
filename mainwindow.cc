@@ -178,6 +178,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   menuButton->addAction( ui.menuOptions );
   menuButton->setToolTip( tr( "Menu Button" ) );
   menuButton->setObjectName( "menuButton" );
+  menuButton->setFocusPolicy( Qt::NoFocus );
 
   menuButtonAction = navToolbar->addWidget(menuButton);
   menuButtonAction->setVisible( cfg.preferences.hideMenubar );
