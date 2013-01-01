@@ -163,6 +163,7 @@ private:
   /// current configuration and situation.
   void updateTrayIcon();
 
+  void wheelEvent( QWheelEvent * );
   void closeEvent( QCloseEvent * );
 
   void applyProxySettings();

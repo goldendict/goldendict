@@ -62,3 +62,16 @@ void ArticleWebView::focusInEvent( QFocusEvent * event )
       break;
   }
 }
+
+void ArticleWebView::wheelEvent( QWheelEvent *ev )
+{
+  if ( ev->modifiers().testFlag( Qt::ControlModifier ) )
+  {
+     ev->ignore();
+  }
+  else
+  {
+     QWebView::wheelEvent( ev );
+  }
+
+}

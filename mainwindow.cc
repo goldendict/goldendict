@@ -859,6 +859,26 @@ void MainWindow::updateTrayIcon()
   ui.actionCloseToTray->setVisible( cfg.preferences.enableTrayIcon );
 }
 
+void MainWindow::wheelEvent( QWheelEvent *ev )
+{
+  if ( ev->modifiers().testFlag( Qt::ControlModifier ) )
+  {
+    if ( ev->delta() > 0 )
+    {
+        zoomin();
+    }
+    else if ( ev->delta() < 0 )
+    {
+        zoomout();
+    }
+    ev->accept();
+  }
+  else
+  {
+    ev->ignore();
+  }
+}
+
 void MainWindow::closeEvent( QCloseEvent * ev )
 {
   if ( cfg.preferences.enableTrayIcon && cfg.preferences.closeToTray )

@@ -42,6 +42,7 @@ protected:
   void mouseReleaseEvent( QMouseEvent * event );
   void mouseDoubleClickEvent( QMouseEvent * event );
   void focusInEvent( QFocusEvent * event );
+  void wheelEvent( QWheelEvent * event );
 
 private:
 
