@@ -177,7 +177,7 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
       // showPopup();
     } else if (obj == this && event->type() == QEvent::ShortcutOverride) {
         QKeyEvent *ke = static_cast<QKeyEvent *>(event);
-        if (ke->key() == Qt::Key_Escape && !ke->modifiers()) {
+        if (ke->key() == Qt::Key_Escape && !ke->modifiers() && word_list->isVisible() ) {
             event->accept();
             return true;
         }

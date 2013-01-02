@@ -298,6 +298,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.dictsPane->addAction( &escAction );
   ui.searchPaneWidget->addAction( &escAction );
   groupList->addAction( &escAction );
+  translateBox->addAction( &escAction );
 
   ui.centralWidget->addAction( &focusTranslateLineAction );
   ui.dictsPane->addAction( &focusTranslateLineAction );
