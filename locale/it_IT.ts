@@ -84,7 +84,7 @@
     <message>
         <location filename="../article_maker.cc" line="294"/>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(immagine)</translation>
     </message>
 </context>
 <context>
@@ -130,12 +130,12 @@
     <message>
         <location filename="../articleview.cc" line="642"/>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagine</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="658"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Definizione dal dizionario &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="662"/>
@@ -190,13 +190,13 @@
     <message>
         <location filename="../articleview.cc" line="1070"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Invia &quot;%1&quot; alla linea di comando</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1076"/>
         <location filename="../articleview.cc" line="1111"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aggiungi &quot;%1&quot; alla cronologia</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1090"/>
@@ -211,22 +211,22 @@
     <message>
         <location filename="../articleview.cc" line="1262"/>
         <source>Playing a non-WAV file</source>
-        <translation>Riproduzione di file audio diversi dai WAV</translation>
+        <translation>Riproduzione di file audio diverso dal WAV</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1263"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Per abilitare la riproduzione di file diversi dai WAV, dal menu Modifica|Impostazioni, clicca la scheda Audio e scegli l&apos;opzione &quot;Riproduci utilizzando le DirectShow&quot;.</translation>
+        <translation>Per abilitare la riproduzione di file diversi dal WAV, dal menu Modifica|Impostazioni, clicca la scheda Audio e scegli l&apos;opzione &quot;Riproduci utilizzando le DirectShow&quot;.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1278"/>
         <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>La libreria Bass non è stata trovata.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1283"/>
         <source>Bass library can&apos;t play this sound.</source>
-        <translation type="unfinished"></translation>
+        <translation>La libreria Bass non è in grado di riprodurre questo suono.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1318"/>
@@ -362,7 +362,7 @@
         <location filename="../groups_widgets.cc" line="820"/>
         <location filename="../groups_widgets.cc" line="995"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Dizionari: </translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="672"/>
@@ -377,23 +377,23 @@
     <message>
         <location filename="../groups_widgets.cc" line="836"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Combina i gruppi in base alla lingua sorgente in &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="853"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Combina i gruppi in base alla lingua di destinazione in &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea gruppo di traduzione bidirezionale &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <location filename="../groups_widgets.cc" line="908"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Combina i gruppi con &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -401,32 +401,32 @@
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">Totale voci:</translation>
+        <translation>Totale voci:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation type="unfinished">Traduzione da:</translation>
+        <translation>Traduzione da:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
         <source>Total words:</source>
-        <translation type="unfinished">Parole totali:</translation>
+        <translation>Parole totali:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="71"/>
         <source>Translates to:</source>
-        <translation type="unfinished">Traduzione in:</translation>
+        <translation>Traduzione in:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="88"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">File relativi a questo dizionario:</translation>
+        <translation>File relativi a questo dizionario:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="163"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrizione:</translation>
     </message>
 </context>
 <context>
@@ -452,12 +452,12 @@
     <message>
         <location filename="../dictionarybar.cc" line="109"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info sul dizionario</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="123"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica dizionario</translation>
     </message>
 </context>
 <context>
@@ -1991,37 +1991,37 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.cc" line="3008"/>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa cronologia da file</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3052"/>
         <source>Imported from file: </source>
-        <translation type="unfinished"></translation>
+        <translation>Importata dal file: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3062"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore d&apos;importazione: i dati nel file sono invalidi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3066"/>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Importazione della cronologia completata</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3069"/>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Errore d&apos;importazione: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3207"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info sul dizionario</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3208"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica dizionario</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="259"/>
@@ -2267,7 +2267,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="422"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="427"/>
@@ -2277,7 +2277,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="432"/>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importa</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
@@ -2321,7 +2321,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../sources.cc" line="399"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icona</translation>
     </message>
 </context>
 <context>
@@ -2382,7 +2382,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../orderandprops.ui" line="245"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrizione:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="325"/>
@@ -2397,12 +2397,12 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../orderandprops.cc" line="205"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordina per nome</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="207"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordina per lingua</translation>
     </message>
 </context>
 <context>
@@ -2571,7 +2571,7 @@ Questa funzione consente di premere tali tasti anche qualche secondo più tardi.
     <message>
         <location filename="../preferences.ui" line="77"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation>Seleziona questa opzione se non vuoi visualizzare la barra delle schede principale quando una sola scheda è aperta.</translation>
+        <translation>Spuntando questa casella, quando c&apos;è aperta una sola scheda la barra delle schede principale viene automaticamente nascosta.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="80"/>
@@ -2602,17 +2602,17 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="144"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuntando questa casella, è possibile selezionare una parola con un singolo clic del mouse</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="147"/>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>seleziona le parole con un singolo clic del mouse</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="272"/>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stile dei moduli aggiuntivi (add-on):</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="321"/>
@@ -2781,12 +2781,13 @@ entro il limite di secondi qui specificato.</translation>
         <location filename="../preferences.ui" line="828"/>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Riproduce l&apos;audio utilizzando le librerie Bass. Questa è un&apos;opzione raccomandata.
+Per utilizzare questa modalità è necessario aggiungere il file bass.dll (http://www.un4seen.com) nella cartella di GoldenDict.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="832"/>
         <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
+        <translation>Riproduci utilizzando le librerie Bass</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1072"/>
@@ -2845,32 +2846,32 @@ Non è necessario attivare questa opzione se non si usano tali programmi.</trans
     <message>
         <location filename="../preferences.ui" line="1124"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Cronologia</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuntando questa casella, viene memorizzata la cronologia delle parole tradotte</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1133"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>memorizza la &amp;cronologia</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1143"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Voci</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1149"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuntando questa casella, vengono espansi i contesti opzionali delle voci tradotte</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1152"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>espandi i &amp;contesti opzionali delle voci tradotte</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="717"/>
@@ -3137,7 +3138,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../sources.cc" line="715"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icona</translation>
     </message>
 </context>
 <context>
@@ -3176,12 +3177,12 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../scanpopup.ui" line="67"/>
         <source>Back</source>
-        <translation type="unfinished">Traduzione precedente</translation>
+        <translation>Traduzione precedente</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="81"/>
         <source>Forward</source>
-        <translation type="unfinished">Traduzione successiva</translation>
+        <translation>Traduzione successiva</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="95"/>
@@ -3576,7 +3577,7 @@ Non ancora implementato.</translation>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">Nessuno</translation>
+        <translation>Nessuno</translation>
     </message>
 </context>
 <context>
@@ -3584,17 +3585,17 @@ Non ancora implementato.</translation>
     <message>
         <location filename="../translatebox.cc" line="72"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Digita una parola o una frase da cercare nei dizionari</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="86"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="92"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Elenco a discesa</translation>
     </message>
 </context>
 <context>
@@ -3617,7 +3618,7 @@ Non ancora implementato.</translation>
     <message>
         <location filename="../sources.cc" line="556"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icona</translation>
     </message>
 </context>
 <context>
