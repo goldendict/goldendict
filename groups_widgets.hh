@@ -6,10 +6,14 @@
 
 // Various custom widgets used in the Groups dialog
 
+#include <vector>
+
 #include <QListWidget>
+#include <QSortFilterProxyModel>
+
 #include "config.hh"
 #include "dictionary.hh"
-#include <vector>
+#include "extlineedit.hh"
 
 /// A model to be projected into the view, according to Qt's MVC model
 class DictListModel: public QAbstractListModel
@@ -191,5 +195,35 @@ signals:
   void showDictionaryInfo( QString const & id );
 };
 
-#endif
+class QuickFilterLine: public ExtLineEdit
+{
+  Q_OBJECT
 
+public:
+
+  QuickFilterLine( QWidget * parent );
+  ~QuickFilterLine();
+
+  /// Sets the source view to filter
+  void applyTo( QAbstractItemView * source );
+
+  QAction * getFocusAction() { return & m_focusAction; }
+
+  QModelIndex mapToSource( QModelIndex const & idx );
+
+private:
+  QSortFilterProxyModel m_proxyModel;
+  QAction m_focusAction;
+
+private slots:
+  void filterChangedInternal();
+  void emitFilterChanged();
+  void focusFilterLine();
+
+signals:
+  void filterChanged(QString const & filter);
+
+
+};
+
+#endif

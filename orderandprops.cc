@@ -104,11 +104,16 @@ OrderAndProps::OrderAndProps( QWidget * parent,
   ui.dictionaryOrder->populate( order.dictionaries, allDictionaries );
   ui.inactiveDictionaries->populate( inactive.dictionaries, allDictionaries );
 
+  ui.searchLine->applyTo( ui.dictionaryOrder );
+  addAction( ui.searchLine->getFocusAction() );
+
   disableDictionaryDescription();
 
   ui.dictionaryOrder->setContextMenuPolicy( Qt::CustomContextMenu );
   connect( ui.dictionaryOrder, SIGNAL( customContextMenuRequested( QPoint ) ),
            this, SLOT( contextMenuRequested( QPoint ) ) );
+  connect (ui.searchLine, SIGNAL( filterChanged( QString const & ) ),
+      this, SLOT( filterChanged( QString const &) ) );
 }
 
 Config::Group OrderAndProps::getCurrentDictionaryOrder() const
@@ -129,9 +134,16 @@ Config::Group OrderAndProps::getCurrentInactiveDictionaries() const
   return g.makeConfigGroup();
 }
 
+void OrderAndProps::filterChanged( QString const & filterText)
+{
+  // when the filter is active, disable the possibility
+  // to drop dictionaries to this filtered list
+  ui.dictionaryOrder->setAcceptDrops(filterText.isEmpty());
+}
+
 void OrderAndProps::on_dictionaryOrder_clicked( QModelIndex const & idx )
 {
-  describeDictionary( ui.dictionaryOrder, idx );
+  describeDictionary( ui.dictionaryOrder, ui.searchLine->mapToSource( idx ) );
 }
 
 void OrderAndProps::on_inactiveDictionaries_clicked( QModelIndex const & idx )

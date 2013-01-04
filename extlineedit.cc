@@ -10,9 +10,10 @@ ExtLineEdit::ExtLineEdit(QWidget *parent) :
 {
 
   for (int i = 0; i < 2; ++i) {
-      iconButtons[i] = new IconButton(parent);
+      iconButtons[i] = new IconButton(this);
       iconButtons[i]->installEventFilter(this);
       iconButtons[i]->hide();
+      iconButtons[i]->setAutoHide(false);
       iconEnabled[i] = false;
   }
 
@@ -21,6 +22,8 @@ ExtLineEdit::ExtLineEdit(QWidget *parent) :
 
     connect(iconButtons[Left], SIGNAL(clicked()), this, SLOT(iconClicked()));
     connect(iconButtons[Right], SIGNAL(clicked()), this, SLOT(iconClicked()));
+
+    connect(this, SIGNAL( textChanged( QString ) ), this, SLOT( updateButtons( QString ) ) );
 }
 
 ExtLineEdit::~ExtLineEdit()
@@ -37,6 +40,33 @@ void ExtLineEdit::setButtonVisible(Side side, bool visible)
 bool ExtLineEdit::isButtonVisible(Side side) const
 {
     return iconEnabled[side];
+}
+
+void ExtLineEdit::setButtonAutoHide(Side side, bool autohide)
+{
+    iconButtons[side]->setAutoHide(autohide);
+
+    if (autohide)
+    {
+      iconButtons[side]->setOpacity( text().isEmpty() ? 0.0 : 1.0 );
+    }
+    else
+    {
+      iconButtons[side]->setOpacity( 1.0 );
+    }
+}
+
+void ExtLineEdit::updateButtons(QString text)
+{
+  if ( oldText.isEmpty() || text.isEmpty() ) {
+    for (int i = 0; i < 2; ++i) {
+      if ( iconButtons[i]->isAutoHide() )
+      {
+       iconButtons[i]->animate( !text.isEmpty() );
+      }
+    }
+    oldText = text;
+  }
 }
 
 void ExtLineEdit::iconClicked()
@@ -65,8 +95,8 @@ void ExtLineEdit::updateMargins()
     int leftMargin = iconButtons[realLeft]->pixmap().width() + 8;
     int rightMargin = iconButtons[realRight]->pixmap().width() + 8;
 
-    QMargins margins((iconEnabled[realLeft] ? leftMargin : 0), 0,
-                     (iconEnabled[realRight] ? rightMargin : 0), 0);
+    QMargins margins((iconEnabled[realLeft] ? leftMargin : 0), 1,
+                     (iconEnabled[realRight] ? rightMargin : 0), 1);
 
     setTextMargins(margins);
 }
@@ -128,11 +158,29 @@ IconButton::IconButton(QWidget *parent)
 void IconButton::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    QIcon::Mode state = QIcon::Disabled;
-    if (isEnabled())
-        state = isDown() ? QIcon::Selected : QIcon::Normal;
+
     QRect pixmapRect = QRect(0, 0, m_pixmap.width(), m_pixmap.height());
     pixmapRect.moveCenter(rect().center());
 
+    if (m_autohide)
+    {
+      painter.setOpacity(m_opacity);
+    }
+
     painter.drawPixmap(pixmapRect, m_pixmap);
+}
+
+void IconButton::animate(bool visible)
+{
+  QPropertyAnimation *animation = new QPropertyAnimation(this, "opacity");
+  animation->setDuration(250);
+  if (visible)
+  {
+    animation->setEndValue(1.0);
+  }
+  else
+  {
+    animation->setEndValue(0.0);
+  }
+  animation->start(QAbstractAnimation::DeleteWhenStopped);
 }

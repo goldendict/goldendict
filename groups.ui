@@ -24,6 +24,9 @@
       </widget>
      </item>
      <item>
+      <widget class="QuickFilterLine" name="searchLine"/>
+     </item>
+     <item>
       <widget class="DictListWidget" name="dictionaries"/>
      </item>
     </layout>
@@ -207,6 +210,11 @@
    <header>groups_widgets.hh</header>
   </customwidget>
   <customwidget>
+   <class>QuickFilterLine</class>
+   <extends>QLineEdit</extends>
+   <header>groups_widgets.hh</header>
+  </customwidget>
+  <customwidget>
    <class>DictGroupsWidget</class>
    <extends>QTabWidget</extends>
    <header>groups_widgets.hh</header>
@@ -223,6 +231,7 @@
   <tabstop>renameGroup</tabstop>
   <tabstop>removeGroup</tabstop>
   <tabstop>removeAllGroups</tabstop>
+  <tabstop>searchLine</tabstop>
  </tabstops>
  <resources/>
  <connections/>

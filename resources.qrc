@@ -56,5 +56,6 @@
         <file>icons/1downarrow.png</file>
         <file>icons/system-search.png</file>
         <file>icons/menu_button.png</file>
+        <file>icons/clear.png</file>
     </qresource>
 </RCC>

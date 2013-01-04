@@ -19,68 +19,8 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,10,0,0,2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Dictionary order:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="DictListWidget" name="dictionaryOrder"/>
-         </item>
-         <item row="1" column="1">
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QToolButton" name="moveActiveUp">
-             <property name="text">
-              <string>...</string>
-             </property>
-             <property name="arrowType">
-              <enum>Qt::UpArrow</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="moveActiveDown">
-             <property name="text">
-              <string>...</string>
-             </property>
-             <property name="arrowType">
-              <enum>Qt::DownArrow</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item row="2" column="0">
+        <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,10,10,0,0,2">
+         <item row="3" column="0">
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
             <spacer name="horizontalSpacer">
@@ -130,15 +70,78 @@
            </item>
           </layout>
          </item>
-         <item row="3" column="0">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Dictionary order:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="DictListWidget" name="dictionaryOrder"/>
+         </item>
+         <item row="2" column="1">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QToolButton" name="moveActiveUp">
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="arrowType">
+              <enum>Qt::UpArrow</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="moveActiveDown">
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="arrowType">
+              <enum>Qt::DownArrow</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item row="5" column="0">
+          <widget class="DictListWidget" name="inactiveDictionaries"/>
+         </item>
+         <item row="4" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
             <string>Inactive (disabled) dictionaries:</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="DictListWidget" name="inactiveDictionaries"/>
+         <item row="1" column="0">
+          <widget class="QuickFilterLine" name="searchLine"/>
          </item>
         </layout>
        </item>
@@ -417,7 +420,23 @@
    <extends>QListWidget</extends>
    <header>groups_widgets.hh</header>
   </customwidget>
+  <customwidget>
+   <class>QuickFilterLine</class>
+   <extends>QLineEdit</extends>
+   <header>groups_widgets.hh</header>
+  </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>dictionaryOrder</tabstop>
+  <tabstop>moveActiveUp</tabstop>
+  <tabstop>moveActiveDown</tabstop>
+  <tabstop>moveToActive</tabstop>
+  <tabstop>moveToInactive</tabstop>
+  <tabstop>inactiveDictionaries</tabstop>
+  <tabstop>dictionaryDescription</tabstop>
+  <tabstop>dictionaryFileList</tabstop>
+  <tabstop>searchLine</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

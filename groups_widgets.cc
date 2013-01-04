@@ -370,7 +370,19 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
   if ( !rows.count() )
     return;
 
-  const DictListModel * baseModel = dynamic_cast< const DictListModel * > ( source->model() );
+  const QSortFilterProxyModel * proxyModel = dynamic_cast< const QSortFilterProxyModel * > ( source->model() );
+
+  const DictListModel * baseModel;
+
+  if ( proxyModel )
+  {
+    baseModel = dynamic_cast< const DictListModel * > ( proxyModel->sourceModel() );
+  }
+  else
+  {
+    baseModel = dynamic_cast< const DictListModel * > ( source->model() );
+  }
+
   if ( !baseModel )
     return;
 
@@ -381,7 +393,8 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
 
   for ( int i = 0; i < rows.count(); i++ )
   {
-    std::string id = baseModel->dictionaries.at( rows.at( i ).row() )->getId();
+    QModelIndex idx = proxyModel ? proxyModel->mapToSource(rows.at( i )) : rows.at( i );
+    std::string id = baseModel->dictionaries.at( idx.row() )->getId();
 
     if ( !dicts.contains( id ) )
       list.append( id );
@@ -995,4 +1008,67 @@ void DictGroupsWidget::tabDataChanged()
   QString toolTipStr = "\"" + tabText( currentIndex() ) + "\"\n" + tr( "Dictionaries: " )
                        + QString::number( getCurrentModel()->getCurrentDictionaries().size() );
   setTabToolTip( currentIndex(), toolTipStr );
+}
+
+QuickFilterLine::QuickFilterLine( QWidget * parent ): ExtLineEdit( parent ), m_focusAction(this)
+{
+  m_proxyModel.setFilterCaseSensitivity( Qt::CaseInsensitive );
+
+#if QT_VERSION >= 0x040700
+  setPlaceholderText( tr( "Dictionary search/filter (Ctrl+F)" ) );
+#endif
+
+  m_focusAction.setShortcut( QKeySequence( "Ctrl+F" ) );
+  connect( &m_focusAction, SIGNAL( triggered() ),
+           this, SLOT( focusFilterLine() ) );
+
+  QPixmap image(":/icons/system-search.png");
+  setButtonPixmap(ExtLineEdit::Left, image.scaled(18, 18, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  setButtonToolTip(ExtLineEdit::Left, tr("Quick Search"));
+  setButtonVisible(ExtLineEdit::Left, true);
+
+  QPixmap right(":/icons/clear.png");
+  setButtonPixmap(ExtLineEdit::Right, right);
+  setButtonToolTip(ExtLineEdit::Right, tr("Clear Search"));
+  setButtonVisible(ExtLineEdit::Right, true);
+  setButtonAutoHide(ExtLineEdit::Right, true);
+  connect( this, SIGNAL( rightButtonClicked() ), this, SLOT( clear() ) );
+
+  setFocusPolicy(Qt::StrongFocus);
+
+  connect (this, SIGNAL( textChanged( QString const & ) ),
+      this, SLOT( filterChangedInternal() ) );
+}
+
+QuickFilterLine::~QuickFilterLine()
+{
+}
+
+void QuickFilterLine::applyTo( QAbstractItemView * source )
+{
+  m_proxyModel.setSourceModel( source->model() );
+  source->setModel( &m_proxyModel );
+}
+
+QModelIndex QuickFilterLine::mapToSource( QModelIndex const & idx )
+{
+  return m_proxyModel.mapToSource( idx );
+}
+
+void QuickFilterLine::filterChangedInternal()
+{
+  // emit signal in async manner, to avoid UI slowdown
+  QTimer::singleShot( 1, this, SLOT( emitFilterChanged() ) );
+}
+
+void QuickFilterLine::emitFilterChanged()
+{
+  m_proxyModel.setFilterFixedString(text());
+  emit filterChanged( text() );
+}
+
+void QuickFilterLine::focusFilterLine()
+{
+  setFocus();
+  selectAll();
 }

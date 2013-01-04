@@ -23,6 +23,9 @@ Groups::Groups( QWidget * parent,
   ui.dictionaries->populate( Instances::Group( order, dicts ).dictionaries,
                              dicts );
 
+  ui.searchLine->applyTo( ui.dictionaries );
+  addAction( ui.searchLine->getFocusAction() );
+
   // Populate groups' widget
 
   ui.groups->populate( groups, dicts, ui.dictionaries->getCurrentDictionaries() );
@@ -200,4 +203,5 @@ void Groups::showDictInfo( QPoint const & pos )
       emit showDictionaryInfo( id );
   }
 }
+
 

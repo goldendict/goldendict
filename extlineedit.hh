@@ -6,20 +6,32 @@
 
 #include <QLineEdit>
 #include <QAbstractButton>
+#include <QPropertyAnimation>
 
 class IconButton: public QAbstractButton
 {
     Q_OBJECT
     Q_PROPERTY(QPixmap pixmap READ pixmap WRITE setPixmap)
+    Q_PROPERTY(float opacity READ opacity WRITE setOpacity)
 
 public:
     explicit IconButton(QWidget * parent = 0);
     void paintEvent(QPaintEvent * event);
+    void animate(bool visible);
+
     void setPixmap(const QPixmap & pixmap) { m_pixmap = pixmap; update(); }
     QPixmap pixmap() const { return m_pixmap; }
 
+    void setAutoHide(bool autohide) { m_autohide = autohide; update(); }
+    bool isAutoHide() const { return m_autohide; }
+
+    float opacity() { return m_opacity; }
+    void setOpacity(float opacity) { m_opacity = opacity; update(); }
+
 private:
     QPixmap m_pixmap;
+    bool m_autohide;
+    float m_opacity;
 };
 
 class ExtLineEdit : public QLineEdit
@@ -42,12 +54,15 @@ public:
     void setButtonToolTip(Side side, const QString &);
     void setButtonFocusPolicy(Side side, Qt::FocusPolicy policy);
 
+    void setButtonAutoHide(Side side, bool autohide);
+
 signals:
     void leftButtonClicked();
     void rightButtonClicked();
 
 private slots:
     void iconClicked();
+    void updateButtons(QString text);
 
 protected:
     virtual void resizeEvent( QResizeEvent * e );
@@ -58,6 +73,7 @@ private:
     QPixmap pixmaps[2];
     IconButton * iconButtons[2];
     bool iconEnabled[2];
+    QString oldText;
 };
 
 #endif // EXTLINEEDIT_H

@@ -6,6 +6,7 @@
 
 #include "ui_orderandprops.h"
 #include "groups_widgets.hh"
+#include <QSortFilterProxyModel>
 
 class OrderAndProps: public QWidget
 {
@@ -25,6 +26,7 @@ private slots:
   void on_dictionaryOrder_clicked( QModelIndex const & );
   void on_inactiveDictionaries_clicked( QModelIndex const & );
   void contextMenuRequested( const QPoint & pos );
+  void filterChanged( QString const & filterText );
 
 private:
 
