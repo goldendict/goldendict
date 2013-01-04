@@ -2647,7 +2647,7 @@ void MainWindow::useSmallIconsInToolbarsTriggered()
 
 void MainWindow::toggleMenuBarTriggered(bool announce)
 {
-  cfg.preferences.hideMenubar = menuBar()->isVisible();
+  cfg.preferences.hideMenubar = !toggleMenuBarAction.isChecked();
 
   if ( announce )
   {
