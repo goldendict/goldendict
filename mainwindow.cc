@@ -73,7 +73,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites ),
   dictNetMgr( this ),
-  searchInDock( false ),
   wordFinder( this ),
   newReleaseCheckTimer( this ),
   wordListSelChanged( false )
@@ -195,10 +194,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   searchPaneTitleBar.setLayout( &searchPaneTitleBarLayout );
 
   ui.searchPane->setTitleBarWidget( &searchPaneTitleBar );
-  connect( ui.searchPane, SIGNAL( visibilityChanged( bool ) ),
-           this, SLOT( updateSearchPaneAndBar() ) );
+  connect( ui.searchPane->toggleViewAction(), SIGNAL( triggered( bool ) ),
+           this, SLOT( updateSearchPaneAndBar( bool ) ) );
 
-  if (searchInDock)
+  if ( cfg.preferences.searchInDock )
   {
     groupList = groupListInDock;
     translateLine = ui.translateLine;
@@ -595,6 +594,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   if ( cfg.mainWindowState.size() )
     restoreState( cfg.mainWindowState, 1 );
 
+  updateSearchPaneAndBar( cfg.preferences.searchInDock );
+  ui.searchPane->setVisible( cfg.preferences.searchInDock );
+
   applyProxySettings();
   applyWebSettings();
 
@@ -682,12 +684,11 @@ void MainWindow::ctrlTabPressed()
     tabListButton->click();
 }
 
-void MainWindow::updateSearchPaneAndBar()
+void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 {
-
-  if ( ui.searchPane->isVisible() )
+  if ( searchInDock )
   {
-    searchInDock = true;
+    cfg.preferences.searchInDock = true;
 
     groupList = groupListInDock;
     translateLine = ui.translateLine;
@@ -701,7 +702,7 @@ void MainWindow::updateSearchPaneAndBar()
   }
   else
   {
-    searchInDock = false;
+    cfg.preferences.searchInDock = false;
 
     groupList = groupListInToolbar;
     translateLine = translateBox->translateLine();
@@ -1774,7 +1775,7 @@ void MainWindow::translateInputFinished( bool checkModifiers )
 
     showTranslationFor( word );
 
-    if ( searchInDock )
+    if ( cfg.preferences.searchInDock )
     {
       if ( ui.searchPane->isFloating() )
         activateWindow();
@@ -1818,7 +1819,7 @@ void MainWindow::handleShiftF3()
 
 void MainWindow::focusTranslateLine()
 {
-  if ( searchInDock )
+  if ( cfg.preferences.searchInDock )
   {
     if ( ui.searchPane->isFloating() )
       ui.searchPane->activateWindow();
@@ -1952,7 +1953,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   // when the main window is moved or resized, hide the word list suggestions
   if ( obj == this && ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize ) )
   {
-    if ( !searchInDock )
+    if ( !cfg.preferences.searchInDock )
     {
         wordList->hide();
         return false;
@@ -1990,7 +1991,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
-      if (searchInDock)
+      if ( cfg.preferences.searchInDock )
       {
         if ( keyEvent->matches( QKeySequence::MoveToNextLine ) && wordList->count() )
         {
@@ -2035,7 +2036,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       if ( keyEvent->matches( QKeySequence::InsertParagraphSeparator ) &&
            wordList->selectedItems().size() )
       {
-        if ( searchInDock )
+        if ( cfg.preferences.searchInDock )
         {
           if ( ui.searchPane->isFloating() )
             activateWindow();
@@ -2043,7 +2044,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
         getCurrentArticleView()->focus();
 
-        return searchInDock;
+        return cfg.preferences.searchInDock;
       }
 
       if( showHistory && keyEvent->matches( QKeySequence::Delete ) && ui.wordList->count() )
@@ -2208,7 +2209,7 @@ void MainWindow::typingEvent( QString const & t )
   }
   else
   {
-    if ( ( searchInDock && ui.searchPane->isFloating() ) || ui.dictsPane->isFloating() )
+    if ( ( cfg.preferences.searchInDock && ui.searchPane->isFloating() ) || ui.dictsPane->isFloating() )
       ui.searchPane->activateWindow();
 
     if( translateLine->isEnabled() )

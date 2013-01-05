@@ -95,6 +95,7 @@ Preferences::Preferences():
   selectWordBySingleClick( false ),
   escKeyHidesMainWindow( false ),
   alwaysOnTop ( false ),
+  searchInDock ( false ),
 
   enableMainWindowHotkey( true ),
   mainWindowHotkey( QKeySequence( "Ctrl+F11,F11" ) ),
@@ -615,6 +616,7 @@ Class load() throw( exError )
     c.preferences.closeToTray = ( preferences.namedItem( "closeToTray" ).toElement().text() == "1" );
     c.preferences.autoStart = ( preferences.namedItem( "autoStart" ).toElement().text() == "1" );
     c.preferences.alwaysOnTop = ( preferences.namedItem( "alwaysOnTop" ).toElement().text() == "1" );
+    c.preferences.searchInDock = ( preferences.namedItem( "searchInDock" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "doubleClickTranslates" ).isNull() )
       c.preferences.doubleClickTranslates = ( preferences.namedItem( "doubleClickTranslates" ).toElement().text() == "1" );
@@ -1272,6 +1274,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "alwaysOnTop" );
     opt.appendChild( dd.createTextNode( c.preferences.alwaysOnTop ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "searchInDock" );
+    opt.appendChild( dd.createTextNode( c.preferences.searchInDock ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     {

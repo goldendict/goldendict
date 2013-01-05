@@ -133,10 +133,6 @@ private:
                                     // since their requests can be destroyed
                                     // in a separate thread
 
-  /// An old UI mode when tranlateLine and wordList
-  /// are in the dockable side panel, not on the toolbar.
-  bool searchInDock;
-
   QListWidget * wordList;
   QLineEdit * translateLine;
 
@@ -381,7 +377,7 @@ private slots:
   void on_alwaysOnTop_triggered( bool checked );
   void focusWordList();
 
-  void updateSearchPaneAndBar();
+  void updateSearchPaneAndBar( bool searchInDock );
 
   /// Add word to history
   void addWordToHistory( const QString & word );

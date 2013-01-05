@@ -160,6 +160,10 @@ struct Preferences
   bool escKeyHidesMainWindow;
   bool alwaysOnTop;
 
+  /// An old UI mode when tranlateLine and wordList
+  /// are in the dockable side panel, not on the toolbar.
+  bool searchInDock;
+
   bool enableMainWindowHotkey;
   HotKey mainWindowHotkey;
   bool enableClipboardHotkey;
