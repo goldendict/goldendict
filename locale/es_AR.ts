@@ -4056,17 +4056,17 @@ página web de descarga utilizando el navegador de internet.</translation>
     <message>
         <location filename="../groups_widgets.cc" line="1018"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Búsqueda/filtro de diccionarios (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1027"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Búsqueda rápida</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar búsqueda</translation>
     </message>
 </context>
 <context>
