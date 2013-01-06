@@ -361,7 +361,7 @@
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
-        <translation>Thanh từ điển</translation>
+        <translation type="obsolete">Thanh từ điển</translation>
     </message>
     <message>
         <source>Edit this group</source>
@@ -373,6 +373,10 @@
     </message>
     <message>
         <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Dictionary Bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1479,7 +1483,7 @@
     </message>
     <message>
         <source>Search Pane</source>
-        <translation>Ô tìm kiếm</translation>
+        <translation type="obsolete">Ô tìm kiếm</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
@@ -1571,11 +1575,11 @@
     </message>
     <message>
         <source>Print Preview</source>
-        <translation>Xem trước khi in</translation>
+        <translation type="obsolete">Xem trước khi in</translation>
     </message>
     <message>
         <source>Rescan Files</source>
-        <translation>Quét lại các tập tin</translation>
+        <translation type="obsolete">Quét lại các tập tin</translation>
     </message>
     <message>
         <source>Ctrl+F5</source>
@@ -1587,7 +1591,7 @@
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation>Hiện tên trên Thanh Từ điển</translation>
+        <translation type="obsolete">Hiện tên trên Thanh Từ điển</translation>
     </message>
     <message>
         <source>Look up in:</source>
@@ -1595,7 +1599,7 @@
     </message>
     <message>
         <source>Navigation</source>
-        <translation>Điều hướng</translation>
+        <translation type="obsolete">Điều hướng</translation>
     </message>
     <message>
         <source>Back</source>
@@ -1734,10 +1738,6 @@
         <translation>Các thẻ đã mở</translation>
     </message>
     <message>
-        <source>Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Dictionaries...	F3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1751,10 +1751,6 @@
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Small Icons in Toolbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1847,6 +1843,58 @@
     </message>
     <message>
         <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Results Navigation Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rescan Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menu Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Names in Dictionary &amp;Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Small Icons in &amp;Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2543,6 +2591,21 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
 </context>
 <context>
+    <name>QuickFilterLine</name>
+    <message>
+        <source>Dictionary search/filter (Ctrl+F)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Romaji</name>
     <message>
         <source>Hepburn Romaji for Hiragana</source>
@@ -2890,10 +2953,6 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

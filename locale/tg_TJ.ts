@@ -128,175 +128,175 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="65"/>
+        <location filename="../articleview.ui" line="74"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="79"/>
+        <location filename="../articleview.ui" line="64"/>
         <source>Find:</source>
         <translation>Ҷустуҷӯ:</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="89"/>
+        <location filename="../articleview.ui" line="92"/>
         <source>&amp;Previous</source>
         <translation>&amp;Пешина</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="106"/>
+        <location filename="../articleview.ui" line="109"/>
         <source>&amp;Next</source>
         <translation>&amp;Навбатӣ</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="113"/>
+        <location filename="../articleview.ui" line="116"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="126"/>
+        <location filename="../articleview.ui" line="152"/>
         <source>&amp;Case Sensitive</source>
         <translation>&amp;Аломатҳои хурду калон</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="133"/>
+        <location filename="../articleview.ui" line="129"/>
         <source>Highlight &amp;all</source>
         <translation>Ҳамаашро ҷу&amp;до кунед</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="632"/>
+        <location filename="../articleview.cc" line="639"/>
         <source>Resource</source>
         <translation>Манбаъ</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="637"/>
+        <location filename="../articleview.cc" line="644"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="642"/>
+        <location filename="../articleview.cc" line="649"/>
         <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="658"/>
+        <location filename="../articleview.cc" line="665"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="662"/>
+        <location filename="../articleview.cc" line="669"/>
         <source>Definition: %1</source>
         <translation>Маъно: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="852"/>
-        <location filename="../articleview.cc" line="882"/>
-        <location filename="../articleview.cc" line="891"/>
-        <location filename="../articleview.cc" line="1318"/>
-        <location filename="../articleview.cc" line="1336"/>
-        <location filename="../articleview.cc" line="1346"/>
+        <location filename="../articleview.cc" line="859"/>
+        <location filename="../articleview.cc" line="889"/>
+        <location filename="../articleview.cc" line="898"/>
+        <location filename="../articleview.cc" line="1325"/>
+        <location filename="../articleview.cc" line="1343"/>
+        <location filename="../articleview.cc" line="1353"/>
         <source>GoldenDict</source>
         <translation>Луғати GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="852"/>
+        <location filename="../articleview.cc" line="859"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Манбаъи ишорашуда вуҷуд надорад.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="892"/>
+        <location filename="../articleview.cc" line="899"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Барномаи аудиоии ишорашуда вуҷуд надорад.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1031"/>
+        <location filename="../articleview.cc" line="1038"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Пайвандро кушодан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1037"/>
+        <location filename="../articleview.cc" line="1044"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Пайвандро дар &amp;варақаи нав кушодан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1044"/>
+        <location filename="../articleview.cc" line="1051"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Пайвандро дар &amp;браузер кушодан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1057"/>
+        <location filename="../articleview.cc" line="1064"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot;-ро &amp;дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1065"/>
+        <location filename="../articleview.cc" line="1072"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>&quot;%1&quot;-ро дар варақаи &amp;нав дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1070"/>
+        <location filename="../articleview.cc" line="1077"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1076"/>
-        <location filename="../articleview.cc" line="1111"/>
+        <location filename="../articleview.cc" line="1083"/>
+        <location filename="../articleview.cc" line="1118"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Илова кардани &quot;%1&quot; ба таърих</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1090"/>
+        <location filename="../articleview.cc" line="1097"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>&quot;%1&quot;-ро дар %2 дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1098"/>
+        <location filename="../articleview.cc" line="1105"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>&quot;%1&quot;-ро дар %2 дар варақаи &amp;нав дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1262"/>
+        <location filename="../articleview.cc" line="1269"/>
         <source>Playing a non-WAV file</source>
         <translation>Файли ғайри-WAV иҷро шуда истодааст</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1263"/>
+        <location filename="../articleview.cc" line="1270"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Барои фаъол кардани иҷрои файлҳои ғайри WAV, лутфан ба Танзимот|Хусусиятҳо гузаред, варақаи аудиоро интихоб кунед ва имконоти &quot;Ба воситаи DirectShow иҷро кунед&quot;-ро дар он ҷо интихоб кунед.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1278"/>
+        <location filename="../articleview.cc" line="1285"/>
         <source>Bass library not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1283"/>
+        <location filename="../articleview.cc" line="1290"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1318"/>
+        <location filename="../articleview.cc" line="1325"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Барои иҷрои файли аудиоӣ кушоиши плеер қатъ карда шуд: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1336"/>
+        <location filename="../articleview.cc" line="1343"/>
         <source>Failed to create temporary file.</source>
         <translation>Эҷодкунии файли муваққатӣ қатъ карда шуд.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1347"/>
+        <location filename="../articleview.cc" line="1354"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Кушоиши файл ба таври худкор қатъ карда шуд, кӯшиш кунед, ки онро ба таври дастӣ кушоед: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1278"/>
-        <location filename="../articleview.cc" line="1283"/>
-        <location filename="../articleview.cc" line="1370"/>
+        <location filename="../articleview.cc" line="1285"/>
+        <location filename="../articleview.cc" line="1290"/>
+        <location filename="../articleview.cc" line="1377"/>
         <source>WARNING: %1</source>
         <translation>ОГОҲӢ: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1370"/>
+        <location filename="../articleview.cc" line="1377"/>
         <source>The referenced resource failed to download.</source>
         <translation>Боргирии манбаъи ишорашуда қатъ карда шуд.</translation>
     </message>
@@ -357,41 +357,41 @@
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="572"/>
-        <location filename="../groups_widgets.cc" line="647"/>
-        <location filename="../groups_widgets.cc" line="820"/>
-        <location filename="../groups_widgets.cc" line="995"/>
+        <location filename="../groups_widgets.cc" line="585"/>
+        <location filename="../groups_widgets.cc" line="660"/>
+        <location filename="../groups_widgets.cc" line="833"/>
+        <location filename="../groups_widgets.cc" line="1008"/>
         <source>Dictionaries: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="672"/>
+        <location filename="../groups_widgets.cc" line="685"/>
         <source>Confirmation</source>
         <translation>Тасдиқ</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="673"/>
+        <location filename="../groups_widgets.cc" line="686"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>Шумо мутмаин ҳастед, ки мехоҳед дастаи гурӯҳҳоро дар асоси ҷуфтҳои забонӣ эҷод кунед?</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="836"/>
+        <location filename="../groups_widgets.cc" line="849"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="853"/>
+        <location filename="../groups_widgets.cc" line="866"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="871"/>
+        <location filename="../groups_widgets.cc" line="884"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="889"/>
-        <location filename="../groups_widgets.cc" line="908"/>
+        <location filename="../groups_widgets.cc" line="902"/>
+        <location filename="../groups_widgets.cc" line="921"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -424,7 +424,7 @@
         <translation>Файлҳои ин луғат:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="163"/>
+        <location filename="../dictinfo.ui" line="169"/>
         <source>Description:</source>
         <translation>Тавсиф:</translation>
     </message>
@@ -440,22 +440,26 @@
 <context>
     <name>DictionaryBar</name>
     <message>
-        <location filename="../dictionarybar.cc" line="14"/>
         <source>Dictionary Bar</source>
-        <translation>Лавҳаи луғат</translation>
+        <translation type="obsolete">Лавҳаи луғат</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="100"/>
+        <location filename="../dictionarybar.cc" line="14"/>
+        <source>&amp;Dictionary Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictionarybar.cc" line="103"/>
         <source>Edit this group</source>
         <translation>Гурӯҳи зеринро таҳрир кардан</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="109"/>
+        <location filename="../dictionarybar.cc" line="112"/>
         <source>Dictionary info</source>
         <translation>Иттилооти луғат</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="123"/>
+        <location filename="../dictionarybar.cc" line="126"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -596,133 +600,133 @@
         <translation>Луғатҳои дастрас:</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="61"/>
+        <location filename="../groups.ui" line="64"/>
         <source>Add selected dictionaries to group (Ins)</source>
         <translation>Луғатҳои интихобшударо ба гурӯҳ илова кардан (тугмаи Ins)</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="64"/>
+        <location filename="../groups.ui" line="67"/>
         <source>&gt;</source>
         <translation>&gt;</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="67"/>
+        <location filename="../groups.ui" line="70"/>
         <source>Ins</source>
         <translation>Тугмаи Ins</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="86"/>
+        <location filename="../groups.ui" line="89"/>
         <source>Remove selected dictionaries from group (Del)</source>
         <translation>Луғатҳои интихобшударо аз гурӯҳ тоза кардан (тугмаи Del)</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="89"/>
+        <location filename="../groups.ui" line="92"/>
         <source>&lt;</source>
         <translation>&lt;</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="92"/>
+        <location filename="../groups.ui" line="95"/>
         <source>Del</source>
         <translation>Тугмаи Del</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="116"/>
+        <location filename="../groups.ui" line="119"/>
         <source>Groups:</source>
         <translation>Гурӯҳҳо:</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="130"/>
+        <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
         <translation>Варақаи 2</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="140"/>
+        <location filename="../groups.ui" line="143"/>
         <source>Create new dictionary group</source>
         <translation>Гурӯҳи нави луғатро эҷод кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="143"/>
+        <location filename="../groups.ui" line="146"/>
         <source>&amp;Add group</source>
         <translation>&amp;Гурӯҳро илова кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="150"/>
+        <location filename="../groups.ui" line="153"/>
         <source>Create language-based groups</source>
         <translation>Гурӯҳи забондонро эҷод кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="153"/>
+        <location filename="../groups.ui" line="156"/>
         <source>Auto groups</source>
         <translation>Гурӯҳҳои худкор</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="160"/>
+        <location filename="../groups.ui" line="163"/>
         <source>Rename current dictionary group</source>
         <translation>Номи гурӯҳи луғати ҷориро иваз кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="163"/>
+        <location filename="../groups.ui" line="166"/>
         <source>Re&amp;name group</source>
         <translation>&amp;Номи гурӯҳро иваз кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="170"/>
+        <location filename="../groups.ui" line="173"/>
         <source>Remove current dictionary group</source>
         <translation>Гурӯҳи луғати ҷориро тоза кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="173"/>
+        <location filename="../groups.ui" line="176"/>
         <source>&amp;Remove group</source>
         <translation>&amp;Гурӯҳро тоза кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="180"/>
+        <location filename="../groups.ui" line="183"/>
         <source>Remove all dictionary groups</source>
         <translation>Ҳамаи гурӯҳҳои луғатро тоза кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="183"/>
-        <location filename="../groups.cc" line="156"/>
+        <location filename="../groups.ui" line="186"/>
+        <location filename="../groups.cc" line="159"/>
         <source>Remove all groups</source>
         <translation>Ҳамаи гурӯҳҳоро тоза кардан</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="194"/>
+        <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
         <translation>Луғатҳоро аз гурӯҳҳо ва ба гурӯҳҳо кашида монед, онҳоро дар дохили гурӯҳҳо таҳвил диҳед ва тартиби гурӯҳҳоро тав&amp;ассути муш иваз кунед.</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="105"/>
+        <location filename="../groups.cc" line="108"/>
         <source>Add group</source>
         <translation>Гурӯҳро илова кардан</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="106"/>
+        <location filename="../groups.cc" line="109"/>
         <source>Give a name for the new group:</source>
         <translation>Ба гурӯҳи нав ном гузоштан:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="131"/>
+        <location filename="../groups.cc" line="134"/>
         <source>Rename group</source>
         <translation>Номи гурӯҳро иваз кардан</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="132"/>
+        <location filename="../groups.cc" line="135"/>
         <source>Give a new name for the group:</source>
         <translation>Ба гурӯҳ номи нав гузоштан:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="143"/>
+        <location filename="../groups.cc" line="146"/>
         <source>Remove group</source>
         <translation>Гурӯҳро тоза кардан</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="144"/>
+        <location filename="../groups.cc" line="147"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
         <translation>Шумо мутмаин ҳастед, ки мехоҳед гурӯҳи &lt;b&gt;%1&lt;/b&gt;-ро тоза кунед?</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="157"/>
+        <location filename="../groups.cc" line="160"/>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>Шумо мутмаин ҳастед, ки мехоҳед ҳамаи гурӯҳҳоро тоза кунед?</translation>
     </message>
@@ -1792,14 +1796,14 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1321"/>
-        <location filename="../mainwindow.cc" line="2294"/>
+        <location filename="../mainwindow.cc" line="1405"/>
+        <location filename="../mainwindow.cc" line="2406"/>
         <source>GoldenDict</source>
         <translation>Луғати GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="561"/>
+        <location filename="../mainwindow.cc" line="621"/>
         <source>Welcome!</source>
         <translation>Хуш омадед!</translation>
     </message>
@@ -1834,14 +1838,22 @@
         <translation>&amp;Таърих</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="131"/>
         <source>Search Pane</source>
-        <translation>Лавҳаи ҷустуҷӯ</translation>
+        <translation type="obsolete">Лавҳаи ҷустуҷӯ</translation>
+    </message>
+    <message>
+        <source>Results Navigation Pane</source>
+        <translation type="obsolete">Лавҳаи натиҷаҳои ҷустуҷӯ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="131"/>
+        <source>&amp;Search Pane</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
-        <source>Results Navigation Pane</source>
-        <translation>Лавҳаи натиҷаҳои ҷустуҷӯ</translation>
+        <source>&amp;Results Navigation Pane</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="289"/>
@@ -1880,7 +1892,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
-        <location filename="../mainwindow.cc" line="215"/>
+        <location filename="../mainwindow.cc" line="269"/>
         <source>&amp;Quit</source>
         <translation>&amp;Баромад</translation>
     </message>
@@ -1946,13 +1958,48 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="381"/>
-        <source>Print Preview</source>
-        <translation>Пешнамоиши чоп</translation>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="386"/>
+        <source>&amp;Rescan Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="403"/>
+        <source>&amp;New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="440"/>
+        <source>&amp;Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="443"/>
+        <source>Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="446"/>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="455"/>
+        <location filename="../mainwindow.ui" line="458"/>
+        <location filename="../mainwindow.cc" line="181"/>
+        <source>Menu Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Preview</source>
+        <translation type="obsolete">Пешнамоиши чоп</translation>
+    </message>
+    <message>
         <source>Rescan Files</source>
-        <translation>Файлҳоро аз нав коркард кардан</translation>
+        <translation type="obsolete">Файлҳоро аз нав коркард кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="389"/>
@@ -1965,8 +2012,7 @@
         <translation>&amp;Пок кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="403"/>
-        <location filename="../mainwindow.cc" line="423"/>
+        <location filename="../mainwindow.cc" line="483"/>
         <source>New Tab</source>
         <translation>Варақаи нав</translation>
     </message>
@@ -1982,7 +2028,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
-        <location filename="../mainwindow.cc" line="2878"/>
+        <location filename="../mainwindow.cc" line="3022"/>
         <source>&amp;Show</source>
         <translation>&amp;Намоиш диҳед</translation>
     </message>
@@ -2002,284 +2048,301 @@
         <translation>&amp;Ворид кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="57"/>
         <source>Show Names in Dictionary Bar</source>
-        <translation>Номҳоро дар лавҳаи луғат намоиш додан</translation>
+        <translation type="obsolete">Номҳоро дар лавҳаи луғат намоиш додан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="58"/>
         <source>Show Small Icons in Toolbars</source>
-        <translation>Дар наворҳои абзорҳо нишонаҳои хурдро намоиш додан</translation>
+        <translation type="obsolete">Дар наворҳои абзорҳо нишонаҳои хурдро намоиш додан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="59"/>
+        <location filename="../mainwindow.cc" line="64"/>
         <source>&amp;Menubar</source>
         <translation>&amp;Лавҳаи меню</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="137"/>
-        <location filename="../mainwindow.cc" line="899"/>
+        <location filename="../mainwindow.cc" line="189"/>
+        <location filename="../mainwindow.cc" line="983"/>
         <source>Look up in:</source>
         <translation>Тарҷума дар:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="171"/>
+        <location filename="../mainwindow.cc" line="223"/>
         <source>Found in Dictionaries:</source>
         <translation>Натиҷа дар луғатҳои зерин дарёфт шуд:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="88"/>
         <source>Navigation</source>
-        <translation>Лавҳаи идоракунӣ</translation>
+        <translation type="obsolete">Лавҳаи идоракунӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="91"/>
+        <location filename="../mainwindow.cc" line="62"/>
+        <source>Show Names in Dictionary &amp;Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="63"/>
+        <source>Show Small Icons in &amp;Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="92"/>
+        <source>&amp;Navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="95"/>
         <source>Back</source>
         <translation>Ба қафо</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="92"/>
+        <location filename="../mainwindow.cc" line="97"/>
         <source>Forward</source>
         <translation>Ба пеш</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="101"/>
+        <location filename="../mainwindow.cc" line="114"/>
         <source>Scan Popup</source>
         <translation>Тарҷумаи пайдошаванда</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="120"/>
+        <location filename="../mainwindow.cc" line="129"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Калимаро талаффуз кардан (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="129"/>
+        <location filename="../mainwindow.cc" line="141"/>
         <source>Zoom In</source>
         <translation>Бузург кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="131"/>
+        <location filename="../mainwindow.cc" line="145"/>
         <source>Zoom Out</source>
         <translation>Хурд кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="133"/>
+        <location filename="../mainwindow.cc" line="149"/>
         <source>Normal Size</source>
         <translation>Андозаи муқаррарӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="199"/>
+        <location filename="../mainwindow.cc" line="253"/>
         <source>Words Zoom In</source>
         <translation>Калимаҳоро бузург кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="201"/>
+        <location filename="../mainwindow.cc" line="255"/>
         <source>Words Zoom Out</source>
         <translation>Калимаҳоро хурд кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="203"/>
+        <location filename="../mainwindow.cc" line="257"/>
         <source>Words Normal Size</source>
         <translation>Андозаи муқаррарӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="211"/>
+        <location filename="../mainwindow.cc" line="265"/>
         <source>Show &amp;Main Window</source>
         <translation>&amp;Равзанаи асосиро намоиш додан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="259"/>
+        <location filename="../mainwindow.cc" line="314"/>
         <source>Opened tabs</source>
         <translation>Варақаҳои кушодашуда</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="270"/>
+        <location filename="../mainwindow.cc" line="325"/>
         <source>Close current tab</source>
         <translation>Варақаи ҷориро пӯшидан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="280"/>
+        <location filename="../mainwindow.cc" line="335"/>
         <source>Close all tabs</source>
         <translation>Ҳамаи варақаҳоро пӯшидан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="288"/>
+        <location filename="../mainwindow.cc" line="343"/>
         <source>Close all tabs except current</source>
         <translation>Ҳамаи варақаҳоро ба ғайр аз ҷорӣ пӯшидан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="413"/>
+        <location filename="../mainwindow.cc" line="473"/>
         <source>Loading...</source>
         <translation>Бор шуда истодааст...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="888"/>
+        <location filename="../mainwindow.cc" line="972"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 луғат, %2 мақола, %3 калима</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="899"/>
+        <location filename="../mainwindow.cc" line="983"/>
         <source>Look up:</source>
         <translation>Тарҷума кардан:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="917"/>
+        <location filename="../mainwindow.cc" line="1001"/>
         <source>All</source>
         <translation>Умумӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1057"/>
+        <location filename="../mainwindow.cc" line="1141"/>
         <source>Open Tabs List</source>
         <translation>Рӯйхати варақаҳоро кушодан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1115"/>
+        <location filename="../mainwindow.cc" line="1199"/>
         <source>(untitled)</source>
         <translation>(беном)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1321"/>
+        <location filename="../mainwindow.cc" line="1405"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1835"/>
+        <location filename="../mainwindow.cc" line="1919"/>
         <source>WARNING: %1</source>
         <translation>ОГОҲӢ: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2295"/>
+        <location filename="../mainwindow.cc" line="2407"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Омодасозии механизми назорати тугмаҳои зеркор қатъ карда шуд.&lt;br&gt;Мутмаин шавед, ки имконоти RECORD дар XServer фаъол аст.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2429"/>
+        <location filename="../mainwindow.cc" line="2541"/>
         <source>New Release Available</source>
         <translation>Версияи барномаи нав дастрас аст</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2430"/>
+        <location filename="../mainwindow.cc" line="2542"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версияи навтарини луғати GoldenDict &lt;b&gt;%1&lt;/b&gt; барои боргирӣ дастрас аст.&lt;br&gt;Барои кушодани саҳифаи боргирии барнома, тугмаи &lt;b&gt;Боргириро&lt;/b&gt; зер кунед.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2435"/>
+        <location filename="../mainwindow.cc" line="2547"/>
         <source>Download</source>
         <translation>Боргирӣ кунед</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2436"/>
+        <location filename="../mainwindow.cc" line="2548"/>
         <source>Skip This Release</source>
         <translation>Ин версияро нодида гузарондан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2549"/>
+        <location filename="../mainwindow.cc" line="2661"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Шумо пинҳон кардани лавҳаи менюро интихоб кардед. Барои аз нав намоиш додани лавҳаи меню, %1-ро истифода баред.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2550"/>
+        <location filename="../mainwindow.cc" line="2662"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2648"/>
+        <location filename="../mainwindow.cc" line="2763"/>
         <source>Page Setup</source>
         <translation>Танзими саҳифа</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2649"/>
+        <location filename="../mainwindow.cc" line="2764"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Ягон принтер дастрас нест. Пеш аз ҳама шумо бояд принтерро танзим кунед.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2666"/>
+        <location filename="../mainwindow.cc" line="2781"/>
         <source>Print Article</source>
         <translation>Мақоларо чоп кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2687"/>
+        <location filename="../mainwindow.cc" line="2802"/>
         <source>Save Article As</source>
         <translation>Мақоларо захира кардан ҳамчун</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2687"/>
+        <location filename="../mainwindow.cc" line="2802"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлҳои html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2702"/>
+        <location filename="../mainwindow.cc" line="2817"/>
         <source>Error</source>
         <translation>Хато</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2703"/>
+        <location filename="../mainwindow.cc" line="2818"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Мақола захира нашуд: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2921"/>
+        <location filename="../mainwindow.cc" line="2850"/>
+        <source>The main window is set to be always on top.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3065"/>
         <source>&amp;Hide</source>
         <translation>&amp;Пинҳон кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2925"/>
+        <location filename="../mainwindow.cc" line="3069"/>
         <source>History view mode</source>
         <translation>Ҳолати намоиши таърих</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2947"/>
+        <location filename="../mainwindow.cc" line="3091"/>
         <source>Export history to file</source>
         <translation>Таърихро ба файл содир кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2949"/>
-        <location filename="../mainwindow.cc" line="3010"/>
+        <location filename="../mainwindow.cc" line="3093"/>
+        <location filename="../mainwindow.cc" line="3154"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Файлҳои матнӣ (*.txt);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2988"/>
+        <location filename="../mainwindow.cc" line="3132"/>
         <source>History export complete</source>
         <translation>Содиркунии таърих ба анҷом расид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2991"/>
+        <location filename="../mainwindow.cc" line="3135"/>
         <source>Export error: </source>
         <translation>Хатои содиркунӣ: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3008"/>
+        <location filename="../mainwindow.cc" line="3152"/>
         <source>Import history from file</source>
         <translation>Ворид кардани таърих аз файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3052"/>
+        <location filename="../mainwindow.cc" line="3196"/>
         <source>Imported from file: </source>
         <translation>Воридшуда аз файл:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3062"/>
+        <location filename="../mainwindow.cc" line="3206"/>
         <source>Import error: invalid data in file</source>
         <translation>Хатои воридот: маълумоти беэътибор дар файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3066"/>
+        <location filename="../mainwindow.cc" line="3210"/>
         <source>History import complete</source>
         <translation>Воридоти таърих ба анҷом расид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3069"/>
+        <location filename="../mainwindow.cc" line="3213"/>
         <source>Import error: </source>
         <translation>Хатои воридот: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3207"/>
+        <location filename="../mainwindow.cc" line="3351"/>
         <source>Dictionary info</source>
         <translation type="unfinished">Иттилооти луғат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3208"/>
+        <location filename="../mainwindow.cc" line="3352"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2331,76 +2394,76 @@
         <translation>Шакл</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="26"/>
+        <location filename="../orderandprops.ui" line="76"/>
         <source>Dictionary order:</source>
         <translation>Тартиби луғатҳо:</translation>
     </message>
     <message>
+        <location filename="../orderandprops.ui" line="41"/>
         <location filename="../orderandprops.ui" line="51"/>
-        <location filename="../orderandprops.ui" line="61"/>
         <location filename="../orderandprops.ui" line="101"/>
         <location filename="../orderandprops.ui" line="111"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="136"/>
+        <location filename="../orderandprops.ui" line="139"/>
         <source>Inactive (disabled) dictionaries:</source>
         <translation>Луғатҳои ғайрифаъол (хомӯшшуда):</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="150"/>
+        <location filename="../orderandprops.ui" line="153"/>
         <source>Dictionary information</source>
         <translation>Маълумоти луғат</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="158"/>
+        <location filename="../orderandprops.ui" line="161"/>
         <source>Name:</source>
         <translation>Ном:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="185"/>
+        <location filename="../orderandprops.ui" line="188"/>
         <source>Total articles:</source>
         <translation>Ҳамагӣ мақолаҳо:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="192"/>
+        <location filename="../orderandprops.ui" line="195"/>
         <source>Total words:</source>
         <translation>Ҳамагӣ калимаҳо:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="209"/>
+        <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
         <translation>Тарҷума аз забони:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="216"/>
+        <location filename="../orderandprops.ui" line="219"/>
         <source>Translates to:</source>
         <translation>Тарҷума ба забони:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="245"/>
+        <location filename="../orderandprops.ui" line="248"/>
         <source>Description:</source>
         <translation>Тавсиф:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="325"/>
+        <location filename="../orderandprops.ui" line="328"/>
         <source>Files comprising this dictionary:</source>
         <translation>Файлҳои луғат:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="405"/>
+        <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
         <translatorcomment> Ба воситаи ҷойгузин кардани объектҳо тартибро танзим намоед. Барои хомӯш кардани луғатҳо, онҳоро ба гурӯҳи ғайрифаъол интиқол диҳед.</translatorcomment>
         <translation> Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="205"/>
+        <location filename="../orderandprops.cc" line="217"/>
         <source>Sort by name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="207"/>
+        <location filename="../orderandprops.cc" line="219"/>
         <source>Sort by languages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3145,6 +3208,24 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
 </context>
 <context>
+    <name>QuickFilterLine</name>
+    <message>
+        <location filename="../groups_widgets.cc" line="1018"/>
+        <source>Dictionary search/filter (Ctrl+F)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="1027"/>
+        <source>Quick Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="1032"/>
+        <source>Clear Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Romaji</name>
     <message>
         <location filename="../romaji.cc" line="107"/>
@@ -3587,11 +3668,6 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="72"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../translatebox.cc" line="86"/>
-        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

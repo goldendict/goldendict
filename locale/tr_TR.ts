@@ -368,7 +368,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Dictionary Bar</source>
-        <translation>Sözlük Çubuğu</translation>
+        <translation type="obsolete">Sözlük Çubuğu</translation>
     </message>
     <message>
         <source>Dictionary info</source>
@@ -376,6 +376,10 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Dictionary Bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1470,7 +1474,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Print Preview</source>
-        <translation>Baskı Önizleme</translation>
+        <translation type="obsolete">Baskı Önizleme</translation>
     </message>
     <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
@@ -1574,7 +1578,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Rescan Files</source>
-        <translation>Dosyaları Tekrar Tara</translation>
+        <translation type="obsolete">Dosyaları Tekrar Tara</translation>
     </message>
     <message>
         <source>Page Set&amp;up</source>
@@ -1634,7 +1638,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Search Pane</source>
-        <translation>Pencerede Ara</translation>
+        <translation type="obsolete">Pencerede Ara</translation>
     </message>
     <message>
         <source>Ctrl+F4</source>
@@ -1658,7 +1662,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation>Sözlük Çubuğu&apos;nda İsimleri Göster</translation>
+        <translation type="obsolete">Sözlük Çubuğu&apos;nda İsimleri Göster</translation>
     </message>
     <message>
         <source>Opened tabs</source>
@@ -1718,11 +1722,11 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Navigation</source>
-        <translation>Gezinti</translation>
+        <translation type="obsolete">Gezinti</translation>
     </message>
     <message>
         <source>Results Navigation Pane</source>
-        <translation>Gezinti Panelinde Sonuçlar</translation>
+        <translation type="obsolete">Gezinti Panelinde Sonuçlar</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...    F3</source>
@@ -1750,7 +1754,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Show Small Icons in Toolbars</source>
-        <translation>Araç Çubuklarında Küçük İkonları Göster</translation>
+        <translation type="obsolete">Araç Çubuklarında Küçük İkonları Göster</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
@@ -1838,6 +1842,58 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Results Navigation Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rescan Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menu Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Names in Dictionary &amp;Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Small Icons in &amp;Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2547,6 +2603,21 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
 </context>
 <context>
+    <name>QuickFilterLine</name>
+    <message>
+        <source>Dictionary search/filter (Ctrl+F)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Romaji</name>
     <message>
         <source>Hepburn Romaji for Katakana</source>
@@ -2897,10 +2968,6 @@ uygun grupların altlarına ekleyin.</translation>
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

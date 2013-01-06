@@ -377,7 +377,7 @@
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
-        <translation>Лента Речник</translation>
+        <translation type="obsolete">Лента Речник</translation>
     </message>
     <message>
         <source>Edit this group</source>
@@ -389,6 +389,10 @@
     </message>
     <message>
         <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Dictionary Bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1471,7 +1475,7 @@
     <name>MainWindow</name>
     <message>
         <source>Navigation</source>
-        <translation>Навигация</translation>
+        <translation type="obsolete">Навигация</translation>
     </message>
     <message>
         <source>Back</source>
@@ -1691,11 +1695,11 @@
     </message>
     <message>
         <source>Print Preview</source>
-        <translation>Мостра на страница</translation>
+        <translation type="obsolete">Мостра на страница</translation>
     </message>
     <message>
         <source>Rescan Files</source>
-        <translation>Повторно сканиране на файловете</translation>
+        <translation type="obsolete">Повторно сканиране на файловете</translation>
     </message>
     <message>
         <source>Ctrl+F5</source>
@@ -1703,11 +1707,11 @@
     </message>
     <message>
         <source>Search Pane</source>
-        <translation>Панел Търсене</translation>
+        <translation type="obsolete">Панел Търсене</translation>
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation>Показване на имена в лентата Речник</translation>
+        <translation type="obsolete">Показване на имена в лентата Речник</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -1754,10 +1758,6 @@
         <translation>Отворени подпрозорци</translation>
     </message>
     <message>
-        <source>Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Dictionaries...	F3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1771,10 +1771,6 @@
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Small Icons in Toolbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1867,6 +1863,58 @@
     </message>
     <message>
         <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Results Navigation Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rescan Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menu Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Names in Dictionary &amp;Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Small Icons in &amp;Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2584,6 +2632,21 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
 </context>
 <context>
+    <name>QuickFilterLine</name>
+    <message>
+        <source>Dictionary search/filter (Ctrl+F)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Romaji</name>
     <message>
         <source>Hepburn Romaji for Hiragana</source>
@@ -2930,10 +2993,6 @@ p, li { white-space: pre-wrap; }
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

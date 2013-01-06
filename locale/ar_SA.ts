@@ -148,175 +148,175 @@
         <translation>about:blank</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="65"/>
+        <location filename="../articleview.ui" line="74"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="79"/>
+        <location filename="../articleview.ui" line="64"/>
         <source>Find:</source>
         <translation>ابحث:</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="89"/>
+        <location filename="../articleview.ui" line="92"/>
         <source>&amp;Previous</source>
         <translation>ال&amp;سابق</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="106"/>
+        <location filename="../articleview.ui" line="109"/>
         <source>&amp;Next</source>
         <translation>ال&amp;لاحق</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="113"/>
+        <location filename="../articleview.ui" line="116"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="126"/>
+        <location filename="../articleview.ui" line="152"/>
         <source>&amp;Case Sensitive</source>
         <translation>&amp;حساس للحالة</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="133"/>
+        <location filename="../articleview.ui" line="129"/>
         <source>Highlight &amp;all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="632"/>
+        <location filename="../articleview.cc" line="639"/>
         <source>Resource</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="637"/>
+        <location filename="../articleview.cc" line="644"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="642"/>
+        <location filename="../articleview.cc" line="649"/>
         <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="658"/>
+        <location filename="../articleview.cc" line="665"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="662"/>
+        <location filename="../articleview.cc" line="669"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="852"/>
-        <location filename="../articleview.cc" line="882"/>
-        <location filename="../articleview.cc" line="891"/>
-        <location filename="../articleview.cc" line="1318"/>
-        <location filename="../articleview.cc" line="1336"/>
-        <location filename="../articleview.cc" line="1346"/>
+        <location filename="../articleview.cc" line="859"/>
+        <location filename="../articleview.cc" line="889"/>
+        <location filename="../articleview.cc" line="898"/>
+        <location filename="../articleview.cc" line="1325"/>
+        <location filename="../articleview.cc" line="1343"/>
+        <location filename="../articleview.cc" line="1353"/>
         <source>GoldenDict</source>
         <translation>القاموس الذهبي</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="852"/>
+        <location filename="../articleview.cc" line="859"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>المرجع المشار إليه غير موجود.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="892"/>
+        <location filename="../articleview.cc" line="899"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1031"/>
+        <location filename="../articleview.cc" line="1038"/>
         <source>&amp;Open Link</source>
         <translation>ا&amp;فتح الرابط</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1037"/>
+        <location filename="../articleview.cc" line="1044"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>افتح الرابط في لسا&amp;ن جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1044"/>
+        <location filename="../articleview.cc" line="1051"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>افتح الرابط في &amp;متصفح خارجي</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1057"/>
+        <location filename="../articleview.cc" line="1064"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>ا&amp;نظر &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1065"/>
+        <location filename="../articleview.cc" line="1072"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>انظر &quot;%1&quot; في &amp;لسان جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1070"/>
+        <location filename="../articleview.cc" line="1077"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1076"/>
-        <location filename="../articleview.cc" line="1111"/>
+        <location filename="../articleview.cc" line="1083"/>
+        <location filename="../articleview.cc" line="1118"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1090"/>
+        <location filename="../articleview.cc" line="1097"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>انظر &quot;%1&quot; في %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1098"/>
+        <location filename="../articleview.cc" line="1105"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>انظر &quot;%1&quot;في %2 في لسان &amp;جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1262"/>
+        <location filename="../articleview.cc" line="1269"/>
         <source>Playing a non-WAV file</source>
         <translation type="unfinished">تشغيل ملف غير WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1263"/>
+        <location filename="../articleview.cc" line="1270"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation type="unfinished">لتمكين تشغيل ملفات غير WAV، اذهب إلى تحرير|تفضيلات، اختر لسان الصوت وانتق &quot;شغل عبر DirectShow&quot; من هناك.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1278"/>
+        <location filename="../articleview.cc" line="1285"/>
         <source>Bass library not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1283"/>
+        <location filename="../articleview.cc" line="1290"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1318"/>
+        <location filename="../articleview.cc" line="1325"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>فشل بدء مشغل لتشغيل ملف الصوت: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1336"/>
+        <location filename="../articleview.cc" line="1343"/>
         <source>Failed to create temporary file.</source>
         <translation>فشل إنشاء ملف مؤقت.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1347"/>
+        <location filename="../articleview.cc" line="1354"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>تعذر فتح ملف المصدر آليا, حاول فتحه يدويا: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1370"/>
+        <location filename="../articleview.cc" line="1377"/>
         <source>The referenced resource failed to download.</source>
         <translation>فشل تنزيل المرجع المشار إليه.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1278"/>
-        <location filename="../articleview.cc" line="1283"/>
-        <location filename="../articleview.cc" line="1370"/>
+        <location filename="../articleview.cc" line="1285"/>
+        <location filename="../articleview.cc" line="1290"/>
+        <location filename="../articleview.cc" line="1377"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">تحذير: %1</translation>
     </message>
@@ -377,41 +377,41 @@
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="572"/>
-        <location filename="../groups_widgets.cc" line="647"/>
-        <location filename="../groups_widgets.cc" line="820"/>
-        <location filename="../groups_widgets.cc" line="995"/>
+        <location filename="../groups_widgets.cc" line="585"/>
+        <location filename="../groups_widgets.cc" line="660"/>
+        <location filename="../groups_widgets.cc" line="833"/>
+        <location filename="../groups_widgets.cc" line="1008"/>
         <source>Dictionaries: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="672"/>
+        <location filename="../groups_widgets.cc" line="685"/>
         <source>Confirmation</source>
         <translation type="unfinished">التأكد</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="673"/>
+        <location filename="../groups_widgets.cc" line="686"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation type="unfinished">أمتأكد من رغبتك بتوليد مجموعات حسب أزواج اللغة؟</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="836"/>
+        <location filename="../groups_widgets.cc" line="849"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="853"/>
+        <location filename="../groups_widgets.cc" line="866"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="871"/>
+        <location filename="../groups_widgets.cc" line="884"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="889"/>
-        <location filename="../groups_widgets.cc" line="908"/>
+        <location filename="../groups_widgets.cc" line="902"/>
+        <location filename="../groups_widgets.cc" line="921"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -444,7 +444,7 @@
         <translation type="unfinished">الملفات المشتملة على هذا القاموس:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="163"/>
+        <location filename="../dictinfo.ui" line="169"/>
         <source>Description:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -460,22 +460,26 @@
 <context>
     <name>DictionaryBar</name>
     <message>
-        <location filename="../dictionarybar.cc" line="14"/>
         <source>Dictionary Bar</source>
-        <translation>شريط القاموس</translation>
+        <translation type="obsolete">شريط القاموس</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="100"/>
+        <location filename="../dictionarybar.cc" line="14"/>
+        <source>&amp;Dictionary Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictionarybar.cc" line="103"/>
         <source>Edit this group</source>
         <translation type="unfinished">حرر هذه المجموعة</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="109"/>
+        <location filename="../dictionarybar.cc" line="112"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="123"/>
+        <location filename="../dictionarybar.cc" line="126"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -616,133 +620,133 @@
         <translation>القواميس المتوفرة:</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="61"/>
+        <location filename="../groups.ui" line="64"/>
         <source>Add selected dictionaries to group (Ins)</source>
         <translation>أضف القواميس المحددة للمجموعة (Ins)</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="64"/>
+        <location filename="../groups.ui" line="67"/>
         <source>&gt;</source>
         <translation>&gt;</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="67"/>
+        <location filename="../groups.ui" line="70"/>
         <source>Ins</source>
         <translation>Ins</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="86"/>
+        <location filename="../groups.ui" line="89"/>
         <source>Remove selected dictionaries from group (Del)</source>
         <translation>أزل القواميس المحددة من المجموعة (Del)</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="89"/>
+        <location filename="../groups.ui" line="92"/>
         <source>&lt;</source>
         <translation>&lt;</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="92"/>
+        <location filename="../groups.ui" line="95"/>
         <source>Del</source>
         <translation>Del</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="116"/>
+        <location filename="../groups.ui" line="119"/>
         <source>Groups:</source>
         <translation>المجموعات:</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="130"/>
+        <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
         <translation>Tab 2</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="140"/>
+        <location filename="../groups.ui" line="143"/>
         <source>Create new dictionary group</source>
         <translation>أنشئ مجموعة قواميس جديدة</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="143"/>
+        <location filename="../groups.ui" line="146"/>
         <source>&amp;Add group</source>
         <translation>أ&amp;ضف مجموعة</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="150"/>
+        <location filename="../groups.ui" line="153"/>
         <source>Create language-based groups</source>
         <translation type="unfinished">أنشئ مجموعات بحسب اللغة</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="153"/>
+        <location filename="../groups.ui" line="156"/>
         <source>Auto groups</source>
         <translation type="unfinished">مجموعات تلقائية</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="160"/>
+        <location filename="../groups.ui" line="163"/>
         <source>Rename current dictionary group</source>
         <translation>غير تسمية مجموعة القواميس الحالية</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="163"/>
+        <location filename="../groups.ui" line="166"/>
         <source>Re&amp;name group</source>
         <translation>&amp;غير تسمية المجموعة</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="170"/>
+        <location filename="../groups.ui" line="173"/>
         <source>Remove current dictionary group</source>
         <translation>أزل مجموعة القواميس الحالية</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="173"/>
+        <location filename="../groups.ui" line="176"/>
         <source>&amp;Remove group</source>
         <translation>أ&amp;زل المجموعة</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="180"/>
+        <location filename="../groups.ui" line="183"/>
         <source>Remove all dictionary groups</source>
         <translation>أزل كل مجموعات القواميس</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="183"/>
-        <location filename="../groups.cc" line="156"/>
+        <location filename="../groups.ui" line="186"/>
+        <location filename="../groups.cc" line="159"/>
         <source>Remove all groups</source>
         <translation>أزل كل المجموعات</translation>
     </message>
     <message>
-        <location filename="../groups.ui" line="194"/>
+        <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
         <translation>اسحب و أ&amp;فلت القواميس إلى ومن المجموعات, انقلهم داخل المجموعات, أعد ترتيب المجموعة باستخدام الفأرة.</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="105"/>
+        <location filename="../groups.cc" line="108"/>
         <source>Add group</source>
         <translation>أضف مجموعة</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="106"/>
+        <location filename="../groups.cc" line="109"/>
         <source>Give a name for the new group:</source>
         <translation>أعط المجموعة الجديدة اسما:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="131"/>
+        <location filename="../groups.cc" line="134"/>
         <source>Rename group</source>
         <translation>غير اسم المجموعة</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="132"/>
+        <location filename="../groups.cc" line="135"/>
         <source>Give a new name for the group:</source>
         <translation>أعط المجموعة الجديدة اسما:</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="143"/>
+        <location filename="../groups.cc" line="146"/>
         <source>Remove group</source>
         <translation>أزل المجموعة</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="144"/>
+        <location filename="../groups.cc" line="147"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
         <translation>أمتأكد من رغبتك بازالة المجموعة &lt;b&gt;%1&lt;/b&gt;؟</translation>
     </message>
     <message>
-        <location filename="../groups.cc" line="157"/>
+        <location filename="../groups.cc" line="160"/>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>أمتأكد من رغبتك بازالة كل المجموعات؟</translation>
     </message>
@@ -1812,14 +1816,14 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1321"/>
-        <location filename="../mainwindow.cc" line="2294"/>
+        <location filename="../mainwindow.cc" line="1405"/>
+        <location filename="../mainwindow.cc" line="2406"/>
         <source>GoldenDict</source>
         <translation>القاموس الذهبي</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="561"/>
+        <location filename="../mainwindow.cc" line="621"/>
         <source>Welcome!</source>
         <translation>مرحبا!</translation>
     </message>
@@ -1854,9 +1858,8 @@
         <translation>&amp;تاريخ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="131"/>
         <source>Search Pane</source>
-        <translation>شريط البحث</translation>
+        <translation type="obsolete">شريط البحث</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
@@ -1871,8 +1874,13 @@
         <translation type="obsolete">م&amp;جموعات...</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="131"/>
+        <source>&amp;Search Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="258"/>
-        <source>Results Navigation Pane</source>
+        <source>&amp;Results Navigation Pane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1912,7 +1920,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
-        <location filename="../mainwindow.cc" line="215"/>
+        <location filename="../mainwindow.cc" line="269"/>
         <source>&amp;Quit</source>
         <translation>ا&amp;خرج</translation>
     </message>
@@ -1978,13 +1986,48 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="381"/>
-        <source>Print Preview</source>
-        <translation>معاينة الطباعة</translation>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="386"/>
+        <source>&amp;Rescan Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="403"/>
+        <source>&amp;New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="440"/>
+        <source>&amp;Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="443"/>
+        <source>Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="446"/>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="455"/>
+        <location filename="../mainwindow.ui" line="458"/>
+        <location filename="../mainwindow.cc" line="181"/>
+        <source>Menu Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Preview</source>
+        <translation type="obsolete">معاينة الطباعة</translation>
+    </message>
+    <message>
         <source>Rescan Files</source>
-        <translation>اعد فحص الملفات</translation>
+        <translation type="obsolete">اعد فحص الملفات</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="389"/>
@@ -1997,8 +2040,7 @@
         <translation>&amp;مسح</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="403"/>
-        <location filename="../mainwindow.cc" line="423"/>
+        <location filename="../mainwindow.cc" line="483"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2014,7 +2056,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
-        <location filename="../mainwindow.cc" line="2878"/>
+        <location filename="../mainwindow.cc" line="3022"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2034,284 +2076,297 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="57"/>
         <source>Show Names in Dictionary Bar</source>
-        <translation>اعرض الاسماء في شريط القواميس</translation>
+        <translation type="obsolete">اعرض الاسماء في شريط القواميس</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="58"/>
-        <source>Show Small Icons in Toolbars</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="59"/>
+        <location filename="../mainwindow.cc" line="64"/>
         <source>&amp;Menubar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="137"/>
-        <location filename="../mainwindow.cc" line="899"/>
+        <location filename="../mainwindow.cc" line="189"/>
+        <location filename="../mainwindow.cc" line="983"/>
         <source>Look up in:</source>
         <translation>انظر في:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="171"/>
+        <location filename="../mainwindow.cc" line="223"/>
         <source>Found in Dictionaries:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="88"/>
         <source>Navigation</source>
-        <translation>التنقل</translation>
+        <translation type="obsolete">التنقل</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="91"/>
+        <location filename="../mainwindow.cc" line="95"/>
         <source>Back</source>
         <translation>ارجع</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="92"/>
+        <location filename="../mainwindow.cc" line="97"/>
         <source>Forward</source>
         <translation>تقدم</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="101"/>
+        <location filename="../mainwindow.cc" line="114"/>
         <source>Scan Popup</source>
         <translation>انبثاق النتائج</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="120"/>
+        <location filename="../mainwindow.cc" line="129"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>انطق الكلمة (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="129"/>
+        <location filename="../mainwindow.cc" line="141"/>
         <source>Zoom In</source>
         <translation>تكبير</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="131"/>
+        <location filename="../mainwindow.cc" line="145"/>
         <source>Zoom Out</source>
         <translation>تصغير</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="133"/>
+        <location filename="../mainwindow.cc" line="149"/>
         <source>Normal Size</source>
         <translation>حجم طبيعي</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="199"/>
+        <location filename="../mainwindow.cc" line="253"/>
         <source>Words Zoom In</source>
         <translation type="unfinished">تكبير الكلمات</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="201"/>
+        <location filename="../mainwindow.cc" line="255"/>
         <source>Words Zoom Out</source>
         <translation type="unfinished">تصغير الكلمات</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="203"/>
+        <location filename="../mainwindow.cc" line="257"/>
         <source>Words Normal Size</source>
         <translation type="unfinished">الحجم الطبيعي للكلمات</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="211"/>
+        <location filename="../mainwindow.cc" line="265"/>
         <source>Show &amp;Main Window</source>
         <translation>اعرض النافذة ال&amp;رئيسية</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="270"/>
+        <location filename="../mainwindow.cc" line="325"/>
         <source>Close current tab</source>
         <translation type="unfinished">أغلق اللسان الحالي</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="280"/>
+        <location filename="../mainwindow.cc" line="335"/>
         <source>Close all tabs</source>
         <translation type="unfinished">أغلق كل الألسنة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="288"/>
+        <location filename="../mainwindow.cc" line="343"/>
         <source>Close all tabs except current</source>
         <translation type="unfinished">أغلق كل الألسنة عدا الحالي</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="413"/>
+        <location filename="../mainwindow.cc" line="473"/>
         <source>Loading...</source>
         <translation>تحميل...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="888"/>
+        <location filename="../mainwindow.cc" line="972"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 قواميس, %2 مقالات, %3 كلمات</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="899"/>
+        <location filename="../mainwindow.cc" line="983"/>
         <source>Look up:</source>
         <translation>انظر:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="917"/>
+        <location filename="../mainwindow.cc" line="1001"/>
         <source>All</source>
         <translation>الكل</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="259"/>
+        <location filename="../mainwindow.cc" line="314"/>
         <source>Opened tabs</source>
         <translation type="unfinished">الألسنة المفتوحة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1057"/>
+        <location filename="../mainwindow.cc" line="62"/>
+        <source>Show Names in Dictionary &amp;Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="63"/>
+        <source>Show Small Icons in &amp;Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="92"/>
+        <source>&amp;Navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1141"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1115"/>
+        <location filename="../mainwindow.cc" line="1199"/>
         <source>(untitled)</source>
         <translation>(بلا عنوان)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1321"/>
+        <location filename="../mainwindow.cc" line="1405"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1835"/>
+        <location filename="../mainwindow.cc" line="1919"/>
         <source>WARNING: %1</source>
         <translation>تحذير: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2295"/>
+        <location filename="../mainwindow.cc" line="2407"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>فشل بدء آلية مراقبة المفاتيح السريعة.&lt;br&gt;تأكد من ان خادم الرسوميات مفعّل للاحقة RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2429"/>
+        <location filename="../mainwindow.cc" line="2541"/>
         <source>New Release Available</source>
         <translation>اصدار جديد متوفر</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2430"/>
+        <location filename="../mainwindow.cc" line="2542"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>الاصدار &lt;b&gt;%1&lt;/b&gt; من القاموس الذهبي متوفر للتنزيل.&lt;br&gt;انقر &lt;b&gt;نزّل&lt;/b&gt; للوصول لصفحة التنزيل.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2435"/>
+        <location filename="../mainwindow.cc" line="2547"/>
         <source>Download</source>
         <translation>نزّل</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2436"/>
+        <location filename="../mainwindow.cc" line="2548"/>
         <source>Skip This Release</source>
         <translation>تجاهل هذا الاصدار</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2549"/>
+        <location filename="../mainwindow.cc" line="2661"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2550"/>
+        <location filename="../mainwindow.cc" line="2662"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2648"/>
+        <location filename="../mainwindow.cc" line="2763"/>
         <source>Page Setup</source>
         <translation>اعداد الصفحة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2649"/>
+        <location filename="../mainwindow.cc" line="2764"/>
         <source>No printer is available. Please install one first.</source>
         <translation>لا يوجد طابعة. ركب واحدة أولا.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2666"/>
+        <location filename="../mainwindow.cc" line="2781"/>
         <source>Print Article</source>
         <translation>اطبع المقال</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2687"/>
+        <location filename="../mainwindow.cc" line="2802"/>
         <source>Save Article As</source>
         <translation>احفظ المقال كـ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2687"/>
+        <location filename="../mainwindow.cc" line="2802"/>
         <source>Html files (*.html *.htm)</source>
         <translation>ملفات Html ‏(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2702"/>
+        <location filename="../mainwindow.cc" line="2817"/>
         <source>Error</source>
         <translation>خطأ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2703"/>
+        <location filename="../mainwindow.cc" line="2818"/>
         <source>Can&apos;t save article: %1</source>
         <translation>تعذر حفظ المقال: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2921"/>
+        <location filename="../mainwindow.cc" line="2850"/>
+        <source>The main window is set to be always on top.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3065"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2925"/>
+        <location filename="../mainwindow.cc" line="3069"/>
         <source>History view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2947"/>
+        <location filename="../mainwindow.cc" line="3091"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2949"/>
-        <location filename="../mainwindow.cc" line="3010"/>
+        <location filename="../mainwindow.cc" line="3093"/>
+        <location filename="../mainwindow.cc" line="3154"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2988"/>
+        <location filename="../mainwindow.cc" line="3132"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2991"/>
+        <location filename="../mainwindow.cc" line="3135"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3008"/>
+        <location filename="../mainwindow.cc" line="3152"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3052"/>
+        <location filename="../mainwindow.cc" line="3196"/>
         <source>Imported from file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3062"/>
+        <location filename="../mainwindow.cc" line="3206"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3066"/>
+        <location filename="../mainwindow.cc" line="3210"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3069"/>
+        <location filename="../mainwindow.cc" line="3213"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3207"/>
+        <location filename="../mainwindow.cc" line="3351"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3208"/>
+        <location filename="../mainwindow.cc" line="3352"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2363,75 +2418,75 @@
         <translation type="unfinished">صيغة</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="26"/>
+        <location filename="../orderandprops.ui" line="76"/>
         <source>Dictionary order:</source>
         <translation>ترتيب القواميس:</translation>
     </message>
     <message>
+        <location filename="../orderandprops.ui" line="41"/>
         <location filename="../orderandprops.ui" line="51"/>
-        <location filename="../orderandprops.ui" line="61"/>
         <location filename="../orderandprops.ui" line="101"/>
         <location filename="../orderandprops.ui" line="111"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="136"/>
+        <location filename="../orderandprops.ui" line="139"/>
         <source>Inactive (disabled) dictionaries:</source>
         <translation>القواميس غير العاملة (معطلة):</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="150"/>
+        <location filename="../orderandprops.ui" line="153"/>
         <source>Dictionary information</source>
         <translation>معلومات  القاموس</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="158"/>
+        <location filename="../orderandprops.ui" line="161"/>
         <source>Name:</source>
         <translation>الاسم:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="185"/>
+        <location filename="../orderandprops.ui" line="188"/>
         <source>Total articles:</source>
         <translation>مجموع المقالات:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="192"/>
+        <location filename="../orderandprops.ui" line="195"/>
         <source>Total words:</source>
         <translation>مجموع الكلمات:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="209"/>
+        <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
         <translation>ترجم من:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="216"/>
+        <location filename="../orderandprops.ui" line="219"/>
         <source>Translates to:</source>
         <translation>ترجم إلى:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="245"/>
+        <location filename="../orderandprops.ui" line="248"/>
         <source>Description:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="325"/>
+        <location filename="../orderandprops.ui" line="328"/>
         <source>Files comprising this dictionary:</source>
         <translation>الملفات المشتملة على هذا القاموس:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="405"/>
+        <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
         <translation>غير الترتيب بسحب وافلات العناصر. اسحب القواميس إلى المجموعة غير الفعالة لتعطيل استخدامها.</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="205"/>
+        <location filename="../orderandprops.cc" line="217"/>
         <source>Sort by name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="207"/>
+        <location filename="../orderandprops.cc" line="219"/>
         <source>Sort by languages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3158,6 +3213,24 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
 </context>
 <context>
+    <name>QuickFilterLine</name>
+    <message>
+        <location filename="../groups_widgets.cc" line="1018"/>
+        <source>Dictionary search/filter (Ctrl+F)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="1027"/>
+        <source>Quick Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groups_widgets.cc" line="1032"/>
+        <source>Clear Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Romaji</name>
     <message>
         <location filename="../romaji.cc" line="107"/>
@@ -3600,11 +3673,6 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="72"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../translatebox.cc" line="86"/>
-        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

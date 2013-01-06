@@ -357,7 +357,7 @@
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
-        <translation>词典栏</translation>
+        <translation type="obsolete">词典栏</translation>
     </message>
     <message>
         <source>Edit this group</source>
@@ -369,6 +369,10 @@
     </message>
     <message>
         <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Dictionary Bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1467,7 +1471,7 @@
     </message>
     <message>
         <source>Print Preview</source>
-        <translation>打印预览</translation>
+        <translation type="obsolete">打印预览</translation>
     </message>
     <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
@@ -1551,7 +1555,7 @@
     </message>
     <message>
         <source>Rescan Files</source>
-        <translation>重新扫描文件</translation>
+        <translation type="obsolete">重新扫描文件</translation>
     </message>
     <message>
         <source>Page Set&amp;up</source>
@@ -1612,7 +1616,7 @@
     </message>
     <message>
         <source>Search Pane</source>
-        <translation>查询面板</translation>
+        <translation type="obsolete">查询面板</translation>
     </message>
     <message>
         <source>Ctrl+F4</source>
@@ -1676,7 +1680,7 @@
     </message>
     <message>
         <source>Navigation</source>
-        <translation>导航栏</translation>
+        <translation type="obsolete">导航栏</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -1684,7 +1688,7 @@
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation>在词典栏中显示词典名称</translation>
+        <translation type="obsolete">在词典栏中显示词典名称</translation>
     </message>
     <message>
         <source>H&amp;istory</source>
@@ -1728,7 +1732,7 @@
     </message>
     <message>
         <source>Results Navigation Pane</source>
-        <translation>查询结果导航面板</translation>
+        <translation type="obsolete">查询结果导航面板</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...	F3</source>
@@ -1748,7 +1752,7 @@
     </message>
     <message>
         <source>Show Small Icons in Toolbars</source>
-        <translation>在工具栏上显示小图标</translation>
+        <translation type="obsolete">在工具栏上显示小图标</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
@@ -1840,6 +1844,58 @@
     </message>
     <message>
         <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Results Navigation Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rescan Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menu Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Names in Dictionary &amp;Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Small Icons in &amp;Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2533,6 +2589,21 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
 </context>
 <context>
+    <name>QuickFilterLine</name>
+    <message>
+        <source>Dictionary search/filter (Ctrl+F)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Romaji</name>
     <message>
         <source>Hepburn Romaji for Katakana</source>
@@ -2877,10 +2948,6 @@ p, li { white-space: pre-wrap; }
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
