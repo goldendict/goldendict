@@ -97,6 +97,16 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
   navToolbar->widgetForAction( navForward )->setObjectName( "forwardButton" );
 
+  // translate box
+  groupListInToolbar = new GroupComboBox( navToolbar );
+  groupListInToolbar->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
+  groupListToolBarAction = navToolbar->addWidget( groupListInToolbar );
+
+  translateBox = new TranslateBox( navToolbar );
+  translateBox->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed );
+  navToolbar->addWidget( translateBox );
+
+  // scan popup
   beforeScanPopupSeparator = navToolbar->addSeparator();
   beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( beforeScanPopupSeparator )->setObjectName( "beforeScanPopupSeparator" );
@@ -104,6 +114,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
+  navToolbar->widgetForAction( enableScanPopup )->setObjectName( "scanPopupButton" );
   if ( cfg.preferences.enableScanPopup && cfg.preferences.startWithScanPopupOn )
     enableScanPopup->setChecked( true );
 
@@ -114,15 +125,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   afterScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( afterScanPopupSeparator )->setObjectName( "afterScanPopupSeparator" );
 
-  groupListInToolbar = new GroupComboBox( navToolbar );
-
-  groupListInToolbar->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-  groupListToolBarAction = navToolbar->addWidget( groupListInToolbar );
-  translateBox = new TranslateBox( this );
-  translateBox->setObjectName( "translateBox" );
-  translateBox->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed );
-  navToolbar->addWidget( translateBox );
-
+  // sound
   navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound.png" ), tr( "Pronounce Word (Alt+S)" ) );
   navPronounce->setShortcut( QKeySequence( "Alt+S" ) );
   navPronounce->setEnabled( false );

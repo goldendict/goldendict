@@ -20,10 +20,12 @@ MainWindow #translateLine[noResults="true"]
   padding: 1px 3px 2px 3px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+  margin-left: 0px;
 }
 
 #navToolbar GroupComboBox
 {
+  margin-right: 0px;
   border: 1px solid gray;
   border-right: 1px transparent;
   border-radius: 3px;
