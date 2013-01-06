@@ -2669,6 +2669,37 @@ void MainWindow::toggleMenuBarTriggered(bool announce)
     }
   }
 
+  // Obtain from the menubar all the actions with shortcuts
+  // and either add them to the main window or remove them,
+  // depending on the menubar state.
+
+  QList<QMenu *> allMenus = menuBar()->findChildren<QMenu *>();
+  QListIterator<QMenu *> menuIter( allMenus );
+  while( menuIter.hasNext() )
+  {
+    QMenu * menu = menuIter.next();
+    QList<QAction *> allMenuActions = menu->actions();
+    QListIterator<QAction *> actionsIter( allMenuActions );
+    while( actionsIter.hasNext() )
+    {
+      QAction * action = actionsIter.next();
+      if ( !action->shortcut().isEmpty() )
+      {
+        if ( cfg.preferences.hideMenubar )
+        {
+          // add all menubar actions to the main window,
+          // before we hide the menubar
+          addAction( action );
+        }
+        else
+        {
+          // remove all menubar actions from the main window
+          removeAction( action );
+        }
+      }
+    }
+  }
+
   menuBar()->setVisible( !cfg.preferences.hideMenubar );
   beforeOptionsSeparator->setVisible( cfg.preferences.hideMenubar);
   menuButtonAction->setVisible( cfg.preferences.hideMenubar );
