@@ -351,7 +351,7 @@
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation>Невозможно прочитать выбранный файл изображения</translation>
+        <translation>Невозможно прочитать выбранный файл изображения.</translation>
     </message>
 </context>
 <context>
@@ -440,13 +440,9 @@
 <context>
     <name>DictionaryBar</name>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">Панель словарей</translation>
-    </message>
-    <message>
         <location filename="../dictionarybar.cc" line="14"/>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Панель словарей</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
@@ -1795,10 +1791,6 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Navigation</source>
-        <translation type="obsolete">Навигация</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="95"/>
         <source>Back</source>
         <translation>Назад</translation>
@@ -1912,17 +1904,9 @@
         <translation>Поиск в:</translation>
     </message>
     <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">Показывать названия в панели словарей</translation>
-    </message>
-    <message>
-        <source>Show Small Icons in Toolbars</source>
-        <translation type="obsolete">Маленькие значки в панели инструментов</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="64"/>
         <source>&amp;Menubar</source>
-        <translation>Главное меню</translation>
+        <translation>&amp;Главное меню</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="223"/>
@@ -1937,17 +1921,17 @@
     <message>
         <location filename="../mainwindow.cc" line="62"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>По&amp;казывать названия в панели словарей</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="63"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Маленькие значки в панели инструментов</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="92"/>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Навигация</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="141"/>
@@ -2007,7 +1991,7 @@
     <message>
         <location filename="../mainwindow.cc" line="2850"/>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Главное окно всегда поверх других окон.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3152"/>
@@ -2072,7 +2056,7 @@
     <message>
         <location filename="../mainwindow.cc" line="3065"/>
         <source>&amp;Hide</source>
-        <translation>Спрятать</translation>
+        <translation>&amp;Спрятать</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3069"/>
@@ -2131,12 +2115,12 @@
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Панель по&amp;иска</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Панель на&amp;вигации по переводу</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="289"/>
@@ -2167,10 +2151,6 @@
         <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
         <translation>&amp;Журнал</translation>
-    </message>
-    <message>
-        <source>Results Navigation Pane</source>
-        <translation type="obsolete">Панель навигации по переводу</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>
@@ -2255,47 +2235,39 @@
     <message>
         <location filename="../mainwindow.ui" line="381"/>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>Пр&amp;едварительный просмотр</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="386"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Пе&amp;ресканировать файлы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Новая вкладка</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="440"/>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">П&amp;оверх других окон</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="443"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Поверх других окон</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="446"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="455"/>
         <location filename="../mainwindow.ui" line="458"/>
         <location filename="../mainwindow.cc" line="181"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">Предварительный просмотр</translation>
-    </message>
-    <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">Пересканировать файлы</translation>
+        <translation>Кнопка меню</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="389"/>
@@ -2320,13 +2292,13 @@
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>&amp;Configuration Folder</source>
-        <translation>Папка конфигурации</translation>
+        <translation>&amp;Папка конфигурации</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
         <location filename="../mainwindow.cc" line="3022"/>
         <source>&amp;Show</source>
-        <translation>Показать</translation>
+        <translation>&amp;Показать</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="422"/>
@@ -2336,16 +2308,12 @@
     <message>
         <location filename="../mainwindow.ui" line="427"/>
         <source>&amp;Export</source>
-        <translation>Экспортировать</translation>
+        <translation>&amp;Экспортировать</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="432"/>
         <source>&amp;Import</source>
-        <translation>Импортировать</translation>
-    </message>
-    <message>
-        <source>Search Pane</source>
-        <translation type="obsolete">Панель поиска</translation>
+        <translation>&amp;Импортировать</translation>
     </message>
 </context>
 <context>
@@ -3217,17 +3185,17 @@ GoldenDict. Если новая версия появилась, програм�
     <message>
         <location filename="../groups_widgets.cc" line="1018"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск по названию словарей (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1027"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Быстрый поиск</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
 </context>
 <context>
@@ -3672,10 +3640,6 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../translatebox.cc" line="72"/>
         <source>Type a word or phrase to search dictionaries</source>
         <translation>Введите слово или словосочестание для поиска в словарях</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Настройки</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="92"/>
