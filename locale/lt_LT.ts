@@ -490,7 +490,7 @@
     <message>
         <location filename="../dictionarybar.cc" line="14"/>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Žo&amp;dynų juosta</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
@@ -1981,17 +1981,17 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="62"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pavadinimai žodynų juostoje</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="63"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Įran&amp;kių juostoje maži ženkliukai</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="92"/>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagri&amp;ndiniai mygtukai</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="141"/>
@@ -2051,7 +2051,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="2850"/>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagrindinis langas visada rodomas virš kitų programų langų.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3152"/>
@@ -2178,7 +2178,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     </message>
     <message>
         <source>&amp;Dictionaries...    F3</source>
-        <translation type="obsolete">Žo&amp;dynai...	F3</translation>
+        <translation type="obsolete">Žo&amp;dynai...    F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="298"/>
@@ -2202,7 +2202,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="108"/>
         <source>&amp;Zoom</source>
-        <translation>&amp;Mastelis</translation>
+        <translation>M&amp;astelis</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
@@ -2220,17 +2220,17 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Paieškos polangis</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Ž&amp;odynų polangis</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="289"/>
         <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Žo&amp;dynai...	F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>
@@ -2270,12 +2270,12 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="333"/>
         <source>&amp;Forum</source>
-        <translation>&amp;Diskusijos</translation>
+        <translation>&amp;Diskusijos internete</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="338"/>
         <source>&amp;Close To Tray</source>
-        <translation>&amp;Nuleisti langą</translation>
+        <translation>Nuleisti &amp;langą</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
@@ -2315,39 +2315,39 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="381"/>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaudinio p&amp;eržiūra</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="386"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Perž&amp;velgti failus</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nauja kortelė</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="440"/>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Visada viršuje</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="443"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Visada viršuje</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="446"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald+O</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="455"/>
         <location filename="../mainwindow.ui" line="458"/>
         <location filename="../mainwindow.cc" line="181"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Meniu mygtukas</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -3298,17 +3298,17 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../groups_widgets.cc" line="1018"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodynų paieška (Vald+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1027"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Greitoji pieška</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Išvalyti paiešką</translation>
     </message>
 </context>
 <context>
