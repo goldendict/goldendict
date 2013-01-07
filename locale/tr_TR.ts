@@ -24,8 +24,8 @@
         <translation>GNU GPLv3 veya daha üst lisanslıdır</translation>
     </message>
     <message>
-        <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</translation>
+        <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
+        <translation>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
 </context>
 <context>
@@ -66,7 +66,7 @@ tıklatarak seçimini değiştirebilirsiniz.</translation>
         <translation>&lt;b&gt;%1&lt;/b&gt; grubunda hiçbir çeviri bulunamadı.</translation>
     </message>
     <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
+        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;GoldenDict&apos;e &lt;b&gt;Hoşgeldiniz&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Program ile çalışmaya başlamak için, 
 &lt;b&gt;Düzen|Sözlükler&lt;/b&gt; menüsünden, çeşitli Wikipedia siteleri ya da diğer kaynaklardan sözlük dosyaları 
 aramak için bazı dizin yollarını seçerek, sözlük sırasını ayarlayıp sözlük grupları 
@@ -77,7 +77,7 @@ araç ipuçları var, eğer herhangi bir şey hakkında kararsızsanız (imleci 
 fikir sahibi olabilirsiniz.&lt;p&gt;Eğer herhangi bir soru, öneri ya da sadece başkalarının ne düşündüğünü merak 
 ediyorsanız veya daha fazla yardıma ihtiyacınız varsa, programın &lt;a
 href=&quot;http://goldendict.org/forum/&quot;&gt;forumu&lt;/a&gt; açıktır.&lt;p&gt;Güncellemeler için programın &lt;a
-href=&quot;http://goldendict.org/&quot;&gt;web sitesinden&lt;/a&gt; güncellemelere bakın. &lt;p&gt;(c) 2008-2012 Konstantin İsakov. 
+href=&quot;http://goldendict.org/&quot;&gt;web sitesinden&lt;/a&gt; güncellemelere bakın. &lt;p&gt;(c) 2008-2013 Konstantin İsakov. 
 GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
