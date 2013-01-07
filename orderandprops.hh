@@ -23,10 +23,12 @@ public:
 
 private slots:
 
-  void on_dictionaryOrder_clicked( QModelIndex const & );
-  void on_inactiveDictionaries_clicked( QModelIndex const & );
+  void dictionarySelectionChanged( const QItemSelection &current );
+  void inactiveDictionarySelectionChanged( const QItemSelection &current );
   void contextMenuRequested( const QPoint & pos );
   void filterChanged( QString const & filterText );
+  void dictListFocused();
+  void inactiveDictListFocused();
 
 private:
 

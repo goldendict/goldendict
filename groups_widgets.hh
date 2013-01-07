@@ -88,8 +88,12 @@ public:
   DictListModel * getModel()
   { return & model; }
 
+signals:
+  void gotFocus();
+
 protected:
   virtual void dropEvent( QDropEvent * event );
+  virtual void focusInEvent(QFocusEvent *);
 
   // We need these to to handle drag-and-drop focus issues
   virtual void rowsInserted( QModelIndex const & parent, int start, int end );
@@ -211,9 +215,13 @@ public:
 
   QModelIndex mapToSource( QModelIndex const & idx );
 
+protected:
+  virtual void keyPressEvent( QKeyEvent * event );
+
 private:
   QSortFilterProxyModel m_proxyModel;
   QAction m_focusAction;
+  QAbstractItemView * m_source;
 
 private slots:
   void filterChangedInternal();

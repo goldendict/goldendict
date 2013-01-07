@@ -112,6 +112,17 @@ OrderAndProps::OrderAndProps( QWidget * parent,
   ui.dictionaryOrder->setContextMenuPolicy( Qt::CustomContextMenu );
   connect( ui.dictionaryOrder, SIGNAL( customContextMenuRequested( QPoint ) ),
            this, SLOT( contextMenuRequested( QPoint ) ) );
+
+  connect( ui.dictionaryOrder, SIGNAL( gotFocus() ),
+           this, SLOT( dictListFocused() ) );
+  connect( ui.inactiveDictionaries, SIGNAL( gotFocus() ),
+           this, SLOT( inactiveDictListFocused() ) );
+
+  connect ( ui.dictionaryOrder->selectionModel(), SIGNAL( selectionChanged ( const QItemSelection & , const QItemSelection & ) ),
+      this, SLOT( dictionarySelectionChanged( const QItemSelection & ) ) );
+  connect ( ui.inactiveDictionaries->selectionModel(), SIGNAL( selectionChanged( const QItemSelection &, const QItemSelection & ) ),
+      this, SLOT( inactiveDictionarySelectionChanged( QItemSelection const & ) ) );
+
   connect (ui.searchLine, SIGNAL( filterChanged( QString const & ) ),
       this, SLOT( filterChanged( QString const &) ) );
 }
@@ -141,14 +152,29 @@ void OrderAndProps::filterChanged( QString const & filterText)
   ui.dictionaryOrder->setAcceptDrops(filterText.isEmpty());
 }
 
-void OrderAndProps::on_dictionaryOrder_clicked( QModelIndex const & idx )
+void OrderAndProps::dictListFocused()
 {
-  describeDictionary( ui.dictionaryOrder, ui.searchLine->mapToSource( idx ) );
+  describeDictionary( ui.dictionaryOrder, ui.searchLine->mapToSource( ui.dictionaryOrder->currentIndex() ) );
 }
 
-void OrderAndProps::on_inactiveDictionaries_clicked( QModelIndex const & idx )
+void OrderAndProps::inactiveDictListFocused()
 {
-  describeDictionary( ui.inactiveDictionaries, idx );
+  describeDictionary( ui.inactiveDictionaries, ui.inactiveDictionaries->currentIndex() );
+}
+
+void OrderAndProps::dictionarySelectionChanged( const QItemSelection & current )
+{
+  if ( current.empty() )
+    return;
+
+  describeDictionary( ui.dictionaryOrder, ui.searchLine->mapToSource( current.front().topLeft() ) );
+}
+
+void OrderAndProps::inactiveDictionarySelectionChanged( QItemSelection const & current )
+{
+  if ( current.empty() )
+    return;
+  describeDictionary( ui.inactiveDictionaries, current.front().topLeft() );
 }
 
 void OrderAndProps::disableDictionaryDescription()
@@ -174,6 +200,11 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
   else
   {
     sptr< Dictionary::Class > dict = lst->getCurrentDictionaries()[ idx.row() ];
+
+    if ( !dict )
+    {
+      return;
+    }
 
     ui.dictionaryInformation->setEnabled( true );
 

@@ -508,6 +508,11 @@ void DictListWidget::dropEvent( QDropEvent * event )
   }
 }
 
+void DictListWidget::focusInEvent( QFocusEvent * )
+{
+  emit gotFocus();
+}
+
 void DictListWidget::rowsInserted( QModelIndex const & parent, int start, int end )
 {
   QListView::rowsInserted( parent, start, end );
@@ -1046,13 +1051,21 @@ QuickFilterLine::~QuickFilterLine()
 
 void QuickFilterLine::applyTo( QAbstractItemView * source )
 {
+  m_source = source;
   m_proxyModel.setSourceModel( source->model() );
   source->setModel( &m_proxyModel );
 }
 
 QModelIndex QuickFilterLine::mapToSource( QModelIndex const & idx )
 {
-  return m_proxyModel.mapToSource( idx );
+  if ( &m_proxyModel == idx.model() )
+  {
+    return m_proxyModel.mapToSource( idx );
+  }
+  else
+  {
+    return idx;
+  }
 }
 
 void QuickFilterLine::filterChangedInternal()
@@ -1071,4 +1084,20 @@ void QuickFilterLine::focusFilterLine()
 {
   setFocus();
   selectAll();
+}
+
+void QuickFilterLine::keyPressEvent( QKeyEvent * event )
+{
+  switch ( event->key() )
+  {
+    case Qt::Key_Down:
+      if ( m_source )
+      {
+        m_source->setCurrentIndex( m_source->model()->index( 0,0 ) );
+        m_source->setFocus();
+      }
+      break;
+    default:
+      ExtLineEdit::keyPressEvent( event );
+  }
 }
