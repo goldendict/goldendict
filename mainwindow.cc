@@ -1613,6 +1613,8 @@ void MainWindow::editPreferences()
     p.zoomFactor = cfg.preferences.zoomFactor;
     p.wordsZoomLevel = cfg.preferences.wordsZoomLevel;
     p.hideMenubar = cfg.preferences.hideMenubar;
+    p.searchInDock = cfg.preferences.searchInDock;
+    p.alwaysOnTop = cfg.preferences.alwaysOnTop;
 
     bool needReload = false;
 
