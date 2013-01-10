@@ -3000,7 +3000,7 @@ ArticleView * MainWindow::getCurrentArticleView()
 
 void MainWindow::wordReceived( const QString & word)
 {
-    if( showHistory )
+    if( showHistory && cfg.preferences.searchInDock )
         return;
 
     toggleMainWindow( true );
