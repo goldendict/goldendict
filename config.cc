@@ -757,6 +757,15 @@ Class load() throw( exError )
   if ( !root.namedItem( "maxPictureWidth" ).isNull() )
     c.maxPictureWidth = root.namedItem( "maxPictureWidth" ).toElement().text().toInt();
 
+  if ( !root.namedItem( "maxHeadwordSize" ).isNull() )
+  {
+    unsigned int value = root.namedItem( "maxHeadwordSize" ).toElement().text().toUInt();
+    if ( value != 0 ) // 0 is invalid value for our purposes
+    {
+      c.maxHeadwordSize = value;
+    }
+  }
+
   return c;
 }
 
@@ -1404,6 +1413,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "maxPictureWidth" );
     opt.appendChild( dd.createTextNode( QString::number( c.maxPictureWidth ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "maxHeadwordSize" );
+    opt.appendChild( dd.createTextNode( QString::number( c.maxHeadwordSize ) ) );
     root.appendChild( opt );
   }
 

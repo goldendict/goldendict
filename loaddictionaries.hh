@@ -24,6 +24,7 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
   std::vector< sptr< Dictionary::Class > > dictionaries;
   std::string exceptionText;
   int maxPictureWidth;
+  unsigned int maxHeadwordSize;
 
 public:
 

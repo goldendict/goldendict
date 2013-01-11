@@ -900,14 +900,14 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
   return offset;
 }
 
-void IndexedWords::addWord( wstring const & word, uint32_t articleOffset )
+void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsigned int maxHeadwordSize )
 {
   wchar const * wordBegin = word.c_str();
   string::size_type wordSize = word.size();
 
   // Safeguard us against various bugs here. Don't attempt adding words
   // which are freakishly huge.
-  if ( wordSize > 256 )
+  if ( wordSize > maxHeadwordSize )
     return;
 
   // Skip any leading whitespace

@@ -415,12 +415,16 @@ struct Class
 
   int maxPictureWidth; // Maximum picture width
 
+  /// Maximum size for the headwords.
+  /// Bigger headwords won't be indexed. For now, only in DSL.
+  unsigned int maxHeadwordSize;
+
   QString editDictionaryCommandLine; // Command line to call external editor for dictionary
 
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
            pinPopupWindow( false ), showingDictBarNames( false ),
            usingSmallIconsInToolbars( false ), maxDictionaryRefsInContextMenu( 20 ),
-           maxPictureWidth( 0 )
+           maxPictureWidth( 0 ), maxHeadwordSize ( 256U )
   {}
   Group * getGroup( unsigned id );
   Group const * getGroup( unsigned id ) const;

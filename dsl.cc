@@ -1476,7 +1476,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
-                                      int maxPictureWidth )
+                                      int maxPictureWidth, unsigned int maxHeadwordSize )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1765,7 +1765,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           {
             unescapeDsl( *j );
             normalizeHeadword( *j );
-            indexedWords.addWord( *j, descOffset );
+            indexedWords.addWord( *j, descOffset, maxHeadwordSize );
           }
 
           ++articleCount;
@@ -1829,7 +1829,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             unescapeDsl( (*i).headword );
             normalizeHeadword( (*i).headword );
 
-            indexedWords.addWord( (*i).headword, descOffset );
+            indexedWords.addWord( (*i).headword, descOffset, maxHeadwordSize );
 
             ++articleCount;
             ++wordCount;

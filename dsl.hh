@@ -16,7 +16,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing &,
-                                      int maxPictureWidth )
+                                      int maxPictureWidth, unsigned int maxHeadwordSize )
     throw( std::exception );
 
 }

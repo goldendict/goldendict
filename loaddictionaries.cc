@@ -39,7 +39,8 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell ),
   transliteration( cfg.transliteration ),
   exceptionText( "Load did not finish" ), // Will be cleared upon success
-  maxPictureWidth( cfg.maxPictureWidth )
+  maxPictureWidth( cfg.maxPictureWidth ),
+  maxHeadwordSize( cfg.maxHeadwordSize )
 {
   // Populate name filters
 
@@ -131,7 +132,8 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > dslDictionaries =
-      Dsl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxPictureWidth );
+      Dsl::makeDictionaries(
+          allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxPictureWidth, maxHeadwordSize );
 
     dictionaries.insert( dictionaries.end(), dslDictionaries.begin(),
                          dslDictionaries.end() );
