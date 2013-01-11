@@ -194,7 +194,10 @@ void TranslateBox::showPopup()
   {
     // nothing to show
     if (word_list->isVisible())
+    {
       hide();
+      translate_line->setFocus();
+    }
 
     return;
   }
