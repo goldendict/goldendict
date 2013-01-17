@@ -5,6 +5,7 @@
 #include "config.hh"
 #include "atomic_rename.hh"
 #include <QFile>
+#include <QDebug>
 
 History::History( unsigned size ): maxSize( size ),
 addingEnabled( true )
@@ -48,8 +49,18 @@ addingEnabled( true )
   }
 }
 
+History::Item History::getItem( int index )
+{
+  if ( index < 0 || index >= items.size() )
+  {
+    return Item();
+  }
+  return items.at( index );
+}
+
 void History::addItem( Item const & item )
 {
+  // qDebug() << "adding item " << item.word << ", enabled=" << enabled();
   if( !enabled() )
     return;
 
@@ -70,10 +81,35 @@ void History::addItem( Item const & item )
 
   items.push_front( item );
 
-  while( items.size() > (int)maxSize )
-    items.pop_back();
+  ensureSizeConstraints();
 
   emit itemsChanged();
+}
+
+bool History::ensureSizeConstraints()
+{
+  bool changed = false;
+  while( items.size() > (int)maxSize )
+  {
+    items.pop_back();
+    changed = true;
+  }
+
+  return changed;
+}
+
+void History::setMaxSize( unsigned maxSize_ )
+{
+  maxSize = maxSize_;
+  if ( ensureSizeConstraints() )
+  {
+    emit itemsChanged();
+  }
+}
+
+int History::size() const
+{
+  return items.size();
 }
 
 bool History::save() const

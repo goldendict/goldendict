@@ -1,4 +1,4 @@
-MainWindow #translateLine, MainWindow #wordList, MainWindow #dictsPane #dictsList
+MainWindow #translateLine, MainWindow #wordList, MainWindow #dictsPane #dictsList, MainWindow #historyPane #historyList
 {
   background: #fefdeb;
   color: black;

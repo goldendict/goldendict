@@ -55,9 +55,11 @@ public:
   /// item gets removed from the end of the list.
   void addItem( Item const & );
 
+  Item getItem( int index );
+
   /// Remove item with given index from list
   void removeItem( int index )
-  { items.removeAt( index ); }
+  { items.removeAt( index ); emit itemsChanged(); }
 
   /// Attempts saving history. Returns true if succeeded - false otherwise.
   /// Since history isn't really that valuable, failures can be ignored.
@@ -65,6 +67,9 @@ public:
 
   /// Clears history.
   void clear();
+
+  /// History size.
+  int size() const;
 
   /// Gets the current items. The first one is the newest one on the list.
   QList< Item > const & getItems() const
@@ -76,6 +81,8 @@ public:
   bool enabled()
   { return addingEnabled; }
 
+  void setMaxSize( unsigned maxSize_ );
+
   unsigned getMaxSize()
   { return maxSize; }
 
@@ -86,9 +93,14 @@ signals:
 
 private:
 
+  /// Returns true if the items list has been modified
+  /// in order to fit into the constraints.
+  bool ensureSizeConstraints();
+
   QList< Item > items;
   unsigned maxSize;
   bool addingEnabled;
+
 };
 
 #endif

@@ -53,7 +53,7 @@ bool CompletionList::acceptCurrentEntry()
 }
 
 TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
-  word_list(new CompletionList(this))
+  word_list(new CompletionList(this)), m_popupEnabled(true)
 {
   // initially hidden
   word_list->hide();
@@ -185,6 +185,11 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj, event);
 }
 
+void TranslateBox::setPopupEnabled( bool enable )
+{
+  m_popupEnabled = enable;
+}
+
 void TranslateBox::showPopup()
 {
   // completer->setCompletionPrefix( m_fileLineEdit->text() );
@@ -202,6 +207,11 @@ void TranslateBox::showPopup()
     return;
   }
 
+  if ( !m_popupEnabled )
+  {
+    word_list->hide();
+    return;
+  }
 
   const QSize size(width(), word_list->preferredHeight());
 

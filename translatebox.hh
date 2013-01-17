@@ -42,6 +42,7 @@ public:
 signals:
 
 public slots:
+  void setPopupEnabled(bool enable);
 
 private slots:
   void showPopup();
@@ -51,6 +52,7 @@ private:
   bool eventFilter(QObject *obj, QEvent *event);
   CompletionList * word_list;
   ExtLineEdit * translate_line;
+  bool m_popupEnabled;
   // QCompleter * completer; // disabled for now
 };
 

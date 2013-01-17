@@ -280,6 +280,36 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="historyPane">
+   <property name="windowTitle">
+    <string>&amp;History Pane</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="HistoryPaneWidget" name="historyPaneWidget">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="spacing">
+      <number>2</number>
+     </property>
+     <property name="leftMargin">
+      <number>2</number>
+     </property>
+     <property name="topMargin">
+      <number>1</number>
+     </property>
+     <property name="rightMargin">
+      <number>2</number>
+     </property>
+     <property name="bottomMargin">
+      <number>1</number>
+     </property>
+     <item>
+      <widget class="QListView" name="historyList"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="dictionaries">
    <property name="icon">
     <iconset resource="resources.qrc">
@@ -476,6 +506,12 @@
    <class>MainTabWidget</class>
    <extends>QTabWidget</extends>
    <header>maintabwidget.hh</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HistoryPaneWidget</class>
+   <extends>QWidget</extends>
+   <header>historypanewidget.hh</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

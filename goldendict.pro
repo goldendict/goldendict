@@ -208,7 +208,9 @@ HEADERS += folding.hh \
     zipsounds.hh \
     stylescombobox.hh \
     extlineedit.hh \
-    translatebox.hh
+    translatebox.hh \
+    historypanewidget.hh
+
 FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
@@ -307,7 +309,9 @@ SOURCES += folding.cc \
     zipsounds.cc \
     stylescombobox.cc \
     extlineedit.cc \
-    translatebox.cc
+    translatebox.cc \
+    historypanewidget.cc
+
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \

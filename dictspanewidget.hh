@@ -10,6 +10,7 @@
 /// A widget holding the contents of the 'Dictionaries pane' docklet.
 class DictsPaneWidget: public QWidget
 {
+  Q_OBJECT
 public:
 
   DictsPaneWidget( QWidget * parent = 0 ): QWidget( parent )

@@ -76,8 +76,6 @@ private:
   void commitData();
   bool commitDataCompleted;
 
-  bool showHistory;
-
   QSystemTrayIcon * trayIcon;
 
   Ui::MainWindow ui;
@@ -339,6 +337,8 @@ private slots:
 
   void showTranslationFor( QString const &, unsigned inGroup = 0 );
 
+  void showHistoryItem( QString const & );
+
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
 
   void scanEnableToggled( bool );
@@ -378,6 +378,8 @@ private slots:
   void focusWordList();
 
   void updateSearchPaneAndBar( bool searchInDock );
+
+  void updateHistoryMenu();
 
   /// Add word to history
   void addWordToHistory( const QString & word );

@@ -23,6 +23,7 @@
 #include "dictinfo.hh"
 #include "fsencoding.hh"
 #include <QProcess>
+#include "historypanewidget.hh"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -45,7 +46,6 @@ using std::pair;
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
   commitDataCompleted( false ),
-  showHistory( false ),
   trayIcon( 0 ),
   groupLabel( &searchPaneTitleBar ),
   foundInDictsLabel( &dictsPaneTitleBar ),
@@ -299,12 +299,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.centralWidget->addAction( &escAction );
   ui.dictsPane->addAction( &escAction );
   ui.searchPaneWidget->addAction( &escAction );
+  ui.historyPane->addAction( &escAction );
   groupList->addAction( &escAction );
   translateBox->addAction( &escAction );
 
   ui.centralWidget->addAction( &focusTranslateLineAction );
   ui.dictsPane->addAction( &focusTranslateLineAction );
   ui.searchPaneWidget->addAction( &focusTranslateLineAction );
+  ui.historyPane->addAction( &focusTranslateLineAction );
   groupList->addAction( &focusTranslateLineAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
@@ -407,10 +409,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Populate 'View' menu
 
   ui.menuView->addAction( &toggleMenuBarAction );
+  ui.menuView->addSeparator();
   ui.menuView->addAction( ui.searchPane->toggleViewAction() );
   ui.searchPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+S" ) );
   ui.menuView->addAction( ui.dictsPane->toggleViewAction() );
   ui.dictsPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+R" ) );
+  ui.menuView->addAction( ui.historyPane->toggleViewAction() );
+  ui.historyPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+H" ) );
   ui.menuView->addSeparator();
   ui.menuView->addAction( dictionaryBar.toggleViewAction() );
   ui.menuView->addAction( navToolbar->toggleViewAction() );
@@ -462,7 +467,17 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( showDictionaryInfo( QString const & ) ) );
 
   // History
+  ui.historyPaneWidget->setUp( &cfg, &history, ui.menuHistory );
   history.enableAdd( cfg.preferences.storeHistory );
+
+  connect( ui.historyPaneWidget, SIGNAL( historyItemRequested( QString const & ) ),
+           this, SLOT( showHistoryItem( QString const & ) ) );
+
+  connect( ui.historyPane, SIGNAL( visibilityChanged( bool ) ),
+           this, SLOT( updateHistoryMenu() ) );
+
+  connect( ui.menuHistory, SIGNAL( aboutToShow() ),
+           this, SLOT( updateHistoryMenu() ) );
 
   // Show tray icon early so the user would be happy. It won't be functional
   // though until the program inits fully.
@@ -590,6 +605,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.dictsList->viewport()->installEventFilter( this );
   //tabWidget doesn't propagate Ctrl+Tab to the parent widget unless event filter is installed
   ui.tabWidget->installEventFilter( this );
+
+  ui.historyList->installEventFilter( this );
 
   if ( cfg.mainWindowGeometry.size() )
     restoreGeometry( cfg.mainWindowGeometry );
@@ -1609,7 +1626,6 @@ void MainWindow::editPreferences()
     Config::Preferences p = preferences.getPreferences();
 
     // These parameters are not set in dialog
-    p.maxStringsInHistory = cfg.preferences.maxStringsInHistory;
     p.zoomFactor = cfg.preferences.zoomFactor;
     p.wordsZoomLevel = cfg.preferences.wordsZoomLevel;
     p.hideMenubar = cfg.preferences.hideMenubar;
@@ -1666,6 +1682,8 @@ void MainWindow::editPreferences()
     prepareNewReleaseChecks();
 
     history.enableAdd( cfg.preferences.storeHistory );
+    history.setMaxSize( cfg.preferences.maxStringsInHistory );
+    ui.historyPaneWidget->updateHistoryCounts();
 
     Config::save( cfg );
   }
@@ -1699,12 +1717,8 @@ void MainWindow::currentGroupChanged( QString const & )
   updateDictionaryBar();
 
   // Update word search results
-
-  if( !showHistory )
-  {
-    translateInputChanged( translateLine->text() );
-    translateInputFinished( false );
-  }
+  translateInputChanged( translateLine->text() );
+  translateInputFinished( false );
 
   updateCurrentGroupProperty();
 }
@@ -1829,6 +1843,11 @@ void MainWindow::focusTranslateLine()
     if ( ui.searchPane->isFloating() )
       ui.searchPane->activateWindow();
   }
+  else
+  {
+    if ( !isActiveWindow() )
+      activateWindow();
+  }
 
   translateLine->setFocus();
   translateLine->selectAll();
@@ -1926,8 +1945,7 @@ void MainWindow::updateMatchResults( bool finished )
 void MainWindow::applyMutedDictionariesState()
 {
   // Redo the current search request
-  if( !showHistory )
-    translateInputChanged( translateLine->text() );
+  translateInputChanged( translateLine->text() );
 
   ArticleView *view = getCurrentArticleView();
 
@@ -1954,6 +1972,17 @@ bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
 
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
+
+  // Handle Ctrl+H to show the History Pane.
+  if ( ev->type() == QEvent::ShortcutOverride) {
+    QKeyEvent * ke = static_cast<QKeyEvent*>( ev );
+    if ( ke->key() == Qt::Key_H && ke->modifiers() == Qt::ControlModifier )
+    {
+      on_showHideHistory_triggered();
+      ev->accept();
+      return true;
+    }
+  }
 
   // when the main window is moved or resized, hide the word list suggestions
   if ( obj == this && ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize ) )
@@ -2050,24 +2079,6 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         getCurrentArticleView()->focus();
 
         return cfg.preferences.searchInDock;
-      }
-
-      if( showHistory && keyEvent->matches( QKeySequence::Delete ) && ui.wordList->count() )
-      {
-        // Delete word from history
-
-        QList<QListWidgetItem *> selectedItems = ui.wordList->selectedItems();
-
-        if( selectedItems.size() )
-        {
-          int index = ui.wordList->row( selectedItems.at( 0 ) );
-          history.removeItem( index );
-          QListWidgetItem *item = ui.wordList->takeItem( index );
-          if( item )
-            delete item;
-        }
-
-        return true;
       }
 
       // Handle typing events used to initiate new lookups
@@ -2230,6 +2241,20 @@ void MainWindow::mutedDictionariesChanged()
 {
   if ( dictionaryBar.toggleViewAction()->isChecked() )
     applyMutedDictionariesState();
+}
+
+void MainWindow::showHistoryItem( QString const & word )
+{
+  // qDebug() << "Showing history item" << word;
+
+  translateBox->setPopupEnabled( false );
+  history.enableAdd( false );
+
+  translateLine->setText( word );
+  showTranslationFor( word );
+
+  translateBox->setPopupEnabled( true );
+  history.enableAdd( cfg.preferences.storeHistory );
 }
 
 void MainWindow::showTranslationFor( QString const & inWord,
@@ -2711,9 +2736,6 @@ void MainWindow::on_clearHistory_triggered()
 {
   history.clear();
   history.save();
-
-  if( showHistory )
-      ui.wordList->clear();
 }
 
 void MainWindow::on_newTab_triggered()
@@ -3000,82 +3022,27 @@ ArticleView * MainWindow::getCurrentArticleView()
 
 void MainWindow::wordReceived( const QString & word)
 {
-    if( showHistory && cfg.preferences.searchInDock )
-        return;
-
     toggleMainWindow( true );
     translateLine->setText( word );
     translateInputFinished();
 }
 
+void MainWindow::updateHistoryMenu()
+{
+  if ( ui.historyPane->toggleViewAction()->isChecked() )
+  {
+    ui.showHideHistory->setText( tr( "&Hide" ) );
+  }
+  else
+  {
+    ui.showHideHistory->setText( tr( "&Show" ) );
+  }
+}
+
 void MainWindow::on_showHideHistory_triggered()
 {
-static bool needHideSearchPane;
-    if( showHistory )
-    {
-        if( needHideSearchPane )
-        {
-            ui.searchPane->hide();
-            needHideSearchPane = false;
-            ui.searchPane->toggleViewAction()->setChecked( false );
-        }
-        ui.searchPane->toggleViewAction()->setEnabled( true );
-
-        ui.showHideHistory->setText( tr( "&Show" ) );
-        showHistory = false;
-
-        disconnect( &focusTranslateLineAction, SIGNAL( triggered() ),
-                    this, SLOT( focusWordList() ) );
-
-        connect( &focusTranslateLineAction, SIGNAL( triggered() ),
-                 this, SLOT( focusTranslateLine() ) );
-
-        connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
-                 this, SLOT( translateInputChanged( QString const & ) ) );
-
-        ui.translateLine->clear();
-        ui.translateLine->setEnabled( true );
-        ui.translateLine->setProperty( "noResults", false );
-        focusTranslateLine();
-        setStyleSheet( styleSheet() );
-
-        ui.wordList->clear();
-
-        history.enableAdd( cfg.preferences.storeHistory );
-    }
-    else
-    {
-        history.enableAdd( false );
-
-        disconnect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
-                    this, SLOT( translateInputChanged( QString const & ) ) );
-
-        disconnect( &focusTranslateLineAction, SIGNAL( triggered() ),
-                    this, SLOT( focusTranslateLine() ) );
-
-        connect( &focusTranslateLineAction, SIGNAL( triggered() ),
-                 this, SLOT( focusWordList() ) );
-
-        if( !ui.searchPane->isVisible() )
-        {
-          ui.searchPane->show();
-          ui.searchPane->toggleViewAction()->setChecked( true );
-          needHideSearchPane = true;
-        }
-        ui.searchPane->toggleViewAction()->setEnabled( false );
-
-        ui.showHideHistory->setText( tr( "&Hide" ) );
-        showHistory = true;
-
-        ui.translateLine->setEnabled( false );
-        ui.translateLine->setText( tr( "History view mode" ) );
-        ui.translateLine->setProperty( "noResults", true );
-        setStyleSheet( styleSheet() );
-
-        fillWordListFromHistory();
-        focusWordList();
-
-    }
+  ui.historyPane->toggleViewAction()->trigger();
+  ui.historyPane->raise(); // useful when the Pane is tabbed.
 }
 
 void MainWindow::on_exportHistory_triggered()
@@ -3139,6 +3106,7 @@ void MainWindow::on_exportHistory_triggered()
     mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
 }
 
+// TODO: consider moving parts of this method into History class.
 void MainWindow::on_importHistory_triggered()
 {
     QString importPath;
@@ -3189,16 +3157,11 @@ void MainWindow::on_importHistory_triggered()
         } while( !fileStream.atEnd() && itemList.size() < (int)history.getMaxSize() );
 
         history.enableAdd( true );
+
         for( QList< QString >::const_iterator i = itemList.constBegin(); i != itemList.constEnd(); ++i )
             history.addItem( History::Item( 1, *i ) );
-        if( showHistory )
-        {
-            history.enableAdd( false );
-            fillWordListFromHistory();
-            ui.translateLine->setText( tr( "Imported from file: " ) + fileInfo.fileName() );
-        }
-        else
-            history.enableAdd( cfg.preferences.storeHistory );
+
+        history.enableAdd( cfg.preferences.storeHistory );
 
         if( file.error() != QFile::NoError )
             break;
@@ -3245,43 +3208,13 @@ void MainWindow::focusWordList()
 
 void MainWindow::addWordToHistory( const QString & word )
 {
-  if( !showHistory )
-  {
-      history.addItem( History::Item( 1, word.trimmed() ) );
-  }
+  history.addItem( History::Item( 1, word.trimmed() ) );
 }
 
 void MainWindow::forceAddWordToHistory( const QString & word )
 {
     history.enableAdd( true );
     history.addItem( History::Item( 1, word.trimmed() ) );
-
-    if( showHistory )
-    {
-        int index = ui.wordList->currentRow();
-        QListWidgetItem *item = ui.wordList->item( index );
-        QString currentWord;
-        if( item )
-            currentWord = item->text();
-        if( index < (int) history.getMaxSize() - 1 )
-            index += 1;
-
-        fillWordListFromHistory();
-
-        if( index < 0 || index >= ui.wordList->count() )
-            index = 0;
-        if( index && currentWord.compare( ui.wordList->item( index )->text() ) != 0 )
-            index = currentWord.compare( ui.wordList->item( index - 1 )->text() ) == 0 ? index - 1 : 0;
-
-        if( index )
-            disconnect( ui.wordList, SIGNAL( itemSelectionChanged() ),
-                        this, SLOT( wordListSelectionChanged() ) );
-        ui.wordList->setCurrentRow( index, QItemSelectionModel::Select );
-        if( index )
-            connect( ui.wordList, SIGNAL( itemSelectionChanged() ),
-                     this, SLOT( wordListSelectionChanged() ) );
-    }
-
     history.enableAdd( cfg.preferences.storeHistory );
 }
 
