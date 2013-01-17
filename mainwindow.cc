@@ -66,7 +66,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
-  history( History::Load(), cfg_.preferences.maxStringsInHistory ),
+  history( History::Load(), cfg_.preferences.maxStringsInHistory, cfg_.maxHeadwordSize ),
   dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle,
                 cfg.preferences.addonStyle ),
@@ -3151,7 +3151,7 @@ void MainWindow::on_importHistory_triggered()
             if( trimmedStr.isEmpty() )
                 continue;
 
-            if( trimmedStr.size() <= MAX_HISTORY_ITEM_LENGTH )
+            if( (unsigned)trimmedStr.size() <= history.getMaxItemLength( ) )
                 itemList.prepend( trimmedStr );
 
         } while( !fileStream.atEnd() && itemList.size() < (int)history.getMaxSize() );

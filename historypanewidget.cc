@@ -239,7 +239,7 @@ QVariant HistoryModel::data( QModelIndex const & index, int role ) const
     return QVariant();
   }
 
-  if ( role == Qt::DisplayRole )
+  if ( role == Qt::DisplayRole || role == Qt::ToolTipRole )
   {
     return m_history->getItem( index.row() ).word;
   }

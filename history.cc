@@ -7,13 +7,13 @@
 #include <QFile>
 #include <QDebug>
 
-History::History( unsigned size ): maxSize( size ),
-addingEnabled( true )
+History::History( unsigned size, unsigned maxItemLength_ ): maxSize( size ),
+  maxItemLength( maxItemLength_ ), addingEnabled( true )
 {
 }
 
-History::History( Load, unsigned size ): maxSize( size ),
-addingEnabled( true )
+History::History( Load, unsigned size, unsigned maxItemLength_ ): maxSize( size ),
+   maxItemLength( maxItemLength_ ), addingEnabled( true )
 {
   QFile file( Config::getHistoryFileName() );
 
@@ -64,7 +64,7 @@ void History::addItem( Item const & item )
   if( !enabled() )
     return;
 
-  if ( item.word.size() > MAX_HISTORY_ITEM_LENGTH || item.word.isEmpty() )
+  if ( (unsigned)item.word.size() > getMaxItemLength() || item.word.isEmpty() )
   {
     // The search looks bogus. Don't save it.
     return;
