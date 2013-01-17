@@ -41,6 +41,7 @@ private slots:
   void onItemClicked(QModelIndex const & idx);
   void showCustomMenu(QPoint const & pos);
   void deleteSelectedItems();
+  void copySelectedItems();
 
 private:
   virtual bool eventFilter( QObject *, QEvent * );
@@ -51,6 +52,7 @@ private:
   QMenu * m_historyMenu;
   QAction * m_deleteSelectedAction;
   QAction * m_separator;
+  QAction * m_copySelectedToClipboard;
 
   QWidget historyPaneTitleBar;
   QHBoxLayout historyPaneTitleBarLayout;

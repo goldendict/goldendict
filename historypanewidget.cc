@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QDockWidget>
 #include <QKeyEvent>
+#include <QClipboard>
 
 #include "historypanewidget.hh"
 
@@ -23,6 +24,16 @@ void HistoryPaneWidget::setUp( Config::Class * cfg,  History * history, QMenu * 
   addAction( m_deleteSelectedAction );
   connect( m_deleteSelectedAction, SIGNAL( triggered() ),
            this, SLOT( deleteSelectedItems() ) );
+
+  // Copy selected items to clipboard
+  m_copySelectedToClipboard = new QAction( this );
+  m_copySelectedToClipboard->setText( tr( "Copy Selected" ) );
+  m_copySelectedToClipboard->setShortcut( QKeySequence( QKeySequence::Copy ) );
+  m_copySelectedToClipboard->setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addAction( m_copySelectedToClipboard );
+  connect( m_copySelectedToClipboard, SIGNAL( triggered() ),
+           this, SLOT( copySelectedItems() ) );
+
 
   // Handle context menu, reusing some of the top-level window's History menu
   m_historyMenu = new QMenu( this );
@@ -78,6 +89,26 @@ void HistoryPaneWidget::setUp( Config::Class * cfg,  History * history, QMenu * 
 
 }
 
+void HistoryPaneWidget::copySelectedItems()
+{
+  QModelIndexList selectedIdxs = m_historyList->selectionModel()->selectedIndexes();
+
+  if ( selectedIdxs.isEmpty() )
+  {
+    // nothing to do
+    return;
+  }
+
+  QStringList selectedStrings;
+  QListIterator<QModelIndex> i( selectedIdxs );
+  while ( i.hasNext() )
+  {
+    selectedStrings << m_historyList->model()->data( i.next() ).toString();
+  }
+
+  QApplication::clipboard()->setText( selectedStrings.join( QString::fromLatin1( "\n" ) ) );
+}
+
 void HistoryPaneWidget::deleteSelectedItems()
 {
   QModelIndexList selectedIdxs = m_historyList->selectionModel()->selectedIndexes();
@@ -90,7 +121,7 @@ void HistoryPaneWidget::deleteSelectedItems()
 
   QList<int> idxsToDelete;
 
-  QListIterator<QModelIndex> i( m_historyList->selectionModel()->selectedIndexes() );
+  QListIterator<QModelIndex> i( selectedIdxs );
   while ( i.hasNext() )
   {
     idxsToDelete << i.next().row();
@@ -129,12 +160,16 @@ void HistoryPaneWidget::showCustomMenu(QPoint const & pos)
 {
   bool selectionEmpty = m_historyList->selectionModel()->selection().empty();
 
+  m_historyMenu->removeAction( m_copySelectedToClipboard );
   m_historyMenu->removeAction( m_deleteSelectedAction );
+
   m_separator->setVisible( !selectionEmpty );
 
   if ( !selectionEmpty )
+  {
+    m_historyMenu->insertAction( m_separator, m_copySelectedToClipboard );
     m_historyMenu->insertAction( m_separator, m_deleteSelectedAction );
-
+  }
 
   m_historyMenu->exec( m_historyList->mapToGlobal( pos ) );
 }
