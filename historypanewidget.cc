@@ -135,12 +135,13 @@ void HistoryPaneWidget::deleteSelectedItems()
   while ( idxs.hasNext() )
     m_history->removeItem( idxs.next() );
 
-  if (idxsToDelete.size() == 1)
+  if ( idxsToDelete.size() == 1 )
   {
     // We've just removed a single entry,
     // keep the selection at the same index.
+    m_historyList->setCurrentIndex(selectedIdxs.front());
     m_historyList->selectionModel()->select(
-          selectedIdxs.front(), QItemSelectionModel::Select );
+          selectedIdxs.front(), QItemSelectionModel::SelectCurrent );
   }
   else
   {
