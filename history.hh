@@ -33,7 +33,7 @@ public:
     {}
 
     bool operator == ( Item const & other ) const
-    { return word == other.word && groupId == other.groupId; }
+    { return QString::compare( word, other.word, Qt::CaseInsensitive) == 0 && groupId == other.groupId; }
 
     bool operator != ( Item const & other ) const
     { return ! operator == ( other ); }
