@@ -1113,14 +1113,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   if ( selectedText.size() )
     menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
 
-  if( menu.isEmpty() )
-  {
-      addHeaderToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
-                                            arg( ui.definition->title() ),
-                                            &menu );
-      menu.addAction( addHeaderToHistoryAction );
-  }
-
   map< QAction *, QString > tableOfContents;
 
   // Add table of contents
