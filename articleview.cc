@@ -1113,7 +1113,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   if ( selectedText.size() )
     menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
 
-  if( menu.isEmpty() )
+  if( menu.isEmpty() && !cfg.preferences.storeHistory)
   {
       addHeaderToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
                                             arg( ui.definition->title() ),
