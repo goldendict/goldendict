@@ -589,6 +589,29 @@
     </message>
 </context>
 <context>
+    <name>HistoryPaneWidget</name>
+    <message>
+        <source>&amp;Delete Selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1/%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History size: %1 entries out of maximum %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Hunspell</name>
     <message>
         <source>Spelling suggestions: </source>
@@ -1786,10 +1809,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>History view mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1827,10 +1846,6 @@
     </message>
     <message>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Imported from file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1891,6 +1906,10 @@
     </message>
     <message>
         <source>The main window is set to be always on top.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;History Pane</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2543,6 +2562,14 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Add-on style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify the maximum number of entries to keep in history.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum history size:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
