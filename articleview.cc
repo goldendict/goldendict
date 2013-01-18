@@ -106,6 +106,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->pageAction( QWebPage::Copy )->setShortcut( QKeySequence::Copy );
   ui.definition->addAction( ui.definition->pageAction( QWebPage::Copy ) );
 
+  QAction * selectAll = ui.definition->pageAction( QWebPage::SelectAll );
+  selectAll->setShortcut( QKeySequence::SelectAll );
+  selectAll->setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  ui.definition->addAction( selectAll );
+
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
   ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
@@ -1109,15 +1114,21 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
-  if ( selectedText.size() )
-    menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
-
-  if( menu.isEmpty() && !cfg.preferences.storeHistory)
+  if( selectedText.isEmpty() && !cfg.preferences.storeHistory)
   {
       addHeaderToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
                                             arg( ui.definition->title() ),
                                             &menu );
       menu.addAction( addHeaderToHistoryAction );
+  }
+
+  if ( selectedText.size() )
+  {
+    menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
+  }
+  else
+  {
+    menu.addAction( ui.definition->pageAction( QWebPage::SelectAll ) );
   }
 
   map< QAction *, QString > tableOfContents;
