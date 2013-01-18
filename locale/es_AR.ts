@@ -760,27 +760,27 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Eliminar seleccionados</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Copiar seleccionados</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Historial:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="210"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="214"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño del historial: %1 entradas de un máximo de %2</translation>
     </message>
 </context>
 <context>
@@ -3000,7 +3000,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuadro de &amp;historial</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="331"/>
@@ -3829,12 +3829,12 @@ No necesita seleccionar esta opción si no utiliza tales programas.</translation
     <message>
         <location filename="../preferences.ui" line="1148"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indicar el máximo número de entradas para el historial.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1151"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño máximo del historial:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1189"/>
