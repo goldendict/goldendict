@@ -208,6 +208,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
       case 1:
       case 7:
       case 10:
+      case 11:
         // Only count entries
         m_numEntries++;
         break;
@@ -323,6 +324,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
   bgl_block block;
   unsigned int len, pos;
+  unsigned int alts_num;
   std::string headword, displayedHeadword;
   std::string definition;
   std::string temp;
@@ -359,6 +361,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
       case 1:
       case 7:
       case 10:
+      case 11:
         alternate.clear();
         headword.clear();
         displayedHeadword.clear();
@@ -368,8 +371,23 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         pos = 0;
 
         // Headword
-        len = 0;
-        len = (unsigned char)block.data[pos++];
+        if( block.type == 11 )
+        {
+          pos = 1;
+          len = 0;
+          if( pos + 4 > block.length )
+            break;
+          for( int i = 0; i < 4; i++ )
+          {
+            len = len << 8;
+            len |= (unsigned char)block.data[ pos++ ];
+          }
+        }
+        else
+        {
+          len = (unsigned char)block.data[pos++];
+        }
+
         if( pos + len > block.length )
           break;
 
@@ -383,10 +401,63 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         if( headword.find( "&#" ) != string::npos )
           headword = Html::unescapeUtf8( headword );
 
+        if( block.type == 11 )
+        {
+          // Alternate forms
+          if( pos + 4 >= block.length )
+            break;
+
+          alts_num = 0;
+          for( int i = 0; i < 4; i++ )
+          {
+            alts_num = alts_num << 8;
+            alts_num |= (unsigned char)block.data[ pos++ ];
+          }
+
+          for( unsigned j = 0; j < alts_num; j++ )
+          {
+            len = 0;
+            if( pos + 4 > block.length )
+              break;
+            for( int i = 0; i < 4; i++ )
+            {
+              len = len << 8;
+              len |= (unsigned char)block.data[ pos++ ];
+            }
+            if( pos + len >= block.length )
+              break;
+            alternate.reserve( len );
+            for(unsigned int a=0;a<len;a++) alternate += block.data[pos++];
+            convertToUtf8( alternate, SOURCE_CHARSET );
+
+            // Try to repair malformed forms
+            if( alternate.find( "&#" ) != string::npos )
+              alternate = Html::unescapeUtf8( alternate );
+
+            alternates.push_back( alternate );
+            alternate.clear();
+          }
+        }
+
         // Definition
-        len = 0;
-        len = (unsigned char)block.data[pos++] << 8;
-        len |= (unsigned char)block.data[pos++];
+
+        if( block.type == 11 )
+        {
+          len = 0;
+          if( pos + 4 > block.length )
+            break;
+          for( int i = 0; i < 4; i++ )
+          {
+            len = len << 8;
+            len |= (unsigned char)block.data[ pos++ ];
+          }
+        }
+        else
+        {
+          len = (unsigned char)block.data[pos++] << 8;
+          len |= (unsigned char)block.data[pos++];
+        }
+
         if( pos + len > block.length )
           break;
 
