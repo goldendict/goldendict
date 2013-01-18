@@ -15,6 +15,7 @@
 #include "russiantranslit.hh"
 #include "german.hh"
 #include "greektranslit.hh"
+#include "belarusiantranslit.hh"
 #include "website.hh"
 #include "forvo.hh"
 #include "programs.hh"
@@ -242,6 +243,13 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   // Make Greek transliteration
   if ( cfg.transliteration.enableGreekTransliteration )
     dictionaries.push_back( GreekTranslit::makeDictionary() );
+
+  // Make Belarusian transliteration
+  if ( cfg.transliteration.enableBelarusianTransliteration )
+  {
+    vector< sptr< Dictionary::Class > > dicts = BelarusianTranslit::makeDictionaries();
+    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+  }
 
   ///// We create MediaWiki dicts syncronously, since they use netmgr
 

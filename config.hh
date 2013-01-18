@@ -297,13 +297,15 @@ struct Transliteration
   bool enableRussianTransliteration;
   bool enableGermanTransliteration;
   bool enableGreekTransliteration;
+  bool enableBelarusianTransliteration;
   Romaji romaji;
 
   bool operator == ( Transliteration const & other ) const
   { return enableRussianTransliteration == other.enableRussianTransliteration &&
            romaji == other.romaji &&
            enableGermanTransliteration == other.enableGermanTransliteration &&
-           enableGreekTransliteration == other.enableGreekTransliteration;
+           enableGreekTransliteration == other.enableGreekTransliteration &&
+           enableBelarusianTransliteration == other.enableBelarusianTransliteration;
   }
 
   bool operator != ( Transliteration const & other ) const
@@ -312,7 +314,8 @@ struct Transliteration
   Transliteration():
       enableRussianTransliteration( false ),
       enableGermanTransliteration( false ),
-      enableGreekTransliteration( false )
+      enableGreekTransliteration( false ),
+      enableBelarusianTransliteration( false )
   {}
 };
 

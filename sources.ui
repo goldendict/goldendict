@@ -642,6 +642,17 @@ p, li { white-space: pre-wrap; }
            </property>
           </widget>
          </item>
+         <item row="2" column="1">
+          <widget class="QCheckBox" name="enableBelarusianTransliteration">
+           <property name="text">
+            <string>Belarusian transliteration</string>
+           </property>
+           <property name="icon">
+            <iconset resource="flags.qrc">
+             <normaloff>:/flags/by.png</normaloff>:/flags/by.png</iconset>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
