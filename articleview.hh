@@ -28,7 +28,7 @@ class ArticleView: public QFrame
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,
-          goBackAction, goForwardAction, openSearchAction;
+          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction;
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
@@ -218,6 +218,9 @@ public slots:
   /// Control optional parts expanding
   void receiveExpandOptionalParts( bool expand );
   void switchExpandOptionalParts();
+
+  /// Selects an entire text of the current article
+  void selectCurrentArticle();
 
 private slots:
 

@@ -87,6 +87,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   goBackAction( this ),
   goForwardAction( this ),
   openSearchAction( this ),
+  selectCurrentArticleAction( this ),
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ )
@@ -156,6 +157,12 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   openSearchAction.setShortcut( QKeySequence( "Ctrl+F" ) );
   ui.definition->addAction( &openSearchAction );
   connect( &openSearchAction, SIGNAL( triggered() ), this, SLOT( openSearch() ) );
+
+  selectCurrentArticleAction.setShortcut( QKeySequence( "Ctrl+Shift+A" ));
+  selectCurrentArticleAction.setText( tr( "Select Current Article" ) );
+  ui.definition->addAction( &selectCurrentArticleAction );
+  connect( &selectCurrentArticleAction, SIGNAL( triggered() ),
+           this, SLOT( selectCurrentArticle() ) );
 
   ui.definition->installEventFilter( this );
 
@@ -446,6 +453,12 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     ui.definition->page()->mainFrame()->evaluateJavaScript(
       QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
   }
+}
+
+void ArticleView::selectCurrentArticle()
+{
+  ui.definition->page()->mainFrame()->evaluateJavaScript(
+        QString( "gdSelectArticle( '%1' );" ).arg( getActiveArticleId() ) );
 }
 
 bool ArticleView::isFramedArticle( QString const & ca )
@@ -1128,6 +1141,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   }
   else
   {
+    menu.addAction( &selectCurrentArticleAction );
     menu.addAction( ui.definition->pageAction( QWebPage::SelectAll ) );
   }
 
