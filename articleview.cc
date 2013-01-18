@@ -230,8 +230,9 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   if ( mutedDicts.size() )
     req.addQueryItem( "muted", mutedDicts );
 
-  // Update history
+  // Update both histories (pages history and headwords history)
   saveHistoryUserData();
+  emit sendWordToHistory( word );
 
   // Any search opened is probably irrelevant now
   closeSearch();
@@ -715,7 +716,6 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   {
     showDefinition( url.path(),
                     getGroup( ref ), scrollTo, contexts );
-    emit sendWordToHistory( url.path() );
   }
   else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
@@ -743,7 +743,6 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       }
       showDefinition( url.path().mid( 1 ),
                       getGroup( ref ), newScrollTo, contexts );
-      emit sendWordToHistory( url.path().mid( 1 ) );
     }
   }
   else
@@ -1513,7 +1512,7 @@ void ArticleView::doubleClicked()
 
     // Do some checks to make sure there's a sensible selection indeed
     if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
-         selectedText.size() < 40 )
+         selectedText.size() < 60 )
     {
       // Initiate translation
       Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
@@ -1524,7 +1523,6 @@ void ArticleView::doubleClicked()
       }
       else
         showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
-      emit sendWordToHistory( selectedText );
     }
   }
 }
