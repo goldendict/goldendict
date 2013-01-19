@@ -41,52 +41,52 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="149"/>
+        <location filename="../article_maker.cc" line="153"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>لم يجد ترجمة لـ &lt;b&gt;%1&lt;/b&gt; في المجموعة &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="154"/>
+        <location filename="../article_maker.cc" line="158"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>لم يُعثر على ترجمة في مجموعة &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="173"/>
+        <location filename="../article_maker.cc" line="177"/>
         <source>Welcome!</source>
         <translation>مرحبا!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="175"/>
+        <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation type="unfinished">ت&lt;h3 align=&quot;center&quot;&gt;مرحبا في &lt;b&gt;القاموس الذهبي&lt;/b&gt;!&lt;p&gt;لتبدأ العمل مع البرنامج، اذهب إلى &lt;b&gt;تحرير|قواميس&lt;/b&gt; لاضافة بعض مسارات القواميس لأبحث فيها، اعدّ قواميس ويكيبيديا متنوعة أو مصادر  أخرى، غير ترتيب القواميس أو أنشئ مجموعة للقواميس.&lt;p&gt;وعندها انت جاهز للبحث عن كلمات! يمكنك عمل ذلك من هذه النافذة باستخدام اللوح الأيمن، أو يمكنك &lt;a href=&quot;Working with popup&quot;&gt; البحث عن كلمات أثناء عملك على برامج أخرى &lt;/a&gt;. &lt;p&gt; لتخصيص برنامج، تحقق من التفضيلات عند &lt;b&gt;تحرير|تفضيلات &lt;/b&gt;. كل الاعدادات هناك لها تلمحيات، تأكد من قرائتها إن كنت في شك من أي شيء.&lt;p&gt;ان احتجت لمزيد من المساعدة، أو عندك أي سؤال، اقتراح أو تريد أن تعرف ماذا يقول الآخرون، فأنت مرحب بك في في &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;منتدى&lt;/a&gt; البرنامج. &lt;p&gt;تحقق من &lt;a href=&quot;http://goldendict.org/&quot;&gt;موقع&lt;/a&gt; البرنامج لأجل التحديثات. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. مرخص تحت GPLv3 أو أحدث.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="191"/>
+        <location filename="../article_maker.cc" line="195"/>
         <source>Working with popup</source>
         <translation>العمل مع المنبثقات</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="193"/>
+        <location filename="../article_maker.cc" line="197"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;العمل مع المنبثقات&lt;/h3&gt;لنظر كلمة من برنامج نشط آخر, عليك أولا تفعيل &lt;i&gt;&quot;خاصية منبثقة المسح&quot;&lt;/i&gt; في &lt;b&gt;التفضيلات&lt;/b&gt;, ثم تفعيلها في أي وقت إما بضغط أيقونة ‘المنبثقة‘ فوق, أو بالنقر على أيقونة  الزاوية بزر الفأرة الأيمن واختيار ذلك من القائمة التي أظهرتها. </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="200"/>
+        <location filename="../article_maker.cc" line="204"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>ثم اوقف المؤشر على الكلمة التي تريد نظرها في البرنامج الآخر, و ستنبثق نافذة تصفها لك.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="203"/>
+        <location filename="../article_maker.cc" line="207"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>ثم اختر أية كلمة لنظرها في البرنامج الآخر بالفأرة (نقرتين عليها او حددها بالفأرة و الزر مضغوط), و ستظهر لك نافذة تصفها لك.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="280"/>
+        <location filename="../article_maker.cc" line="284"/>
         <source>(untitled)</source>
         <translation>(بلا عنوان)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="294"/>
+        <location filename="../article_maker.cc" line="298"/>
         <source>(picture)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -94,27 +94,27 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="486"/>
+        <location filename="../article_maker.cc" line="490"/>
         <source>From </source>
         <translation>من</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="499"/>
+        <location filename="../article_maker.cc" line="503"/>
         <source>Query error: %1</source>
         <translation>أخطاء الطلب: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="598"/>
+        <location filename="../article_maker.cc" line="602"/>
         <source>Close words: </source>
         <translation type="unfinished">كلمات قريبة:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="669"/>
+        <location filename="../article_maker.cc" line="673"/>
         <source>Compound expressions: </source>
         <translation type="unfinished">تعبيرات مركبة:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="697"/>
+        <location filename="../article_maker.cc" line="701"/>
         <source>Individual words: </source>
         <translation type="unfinished">كلمات مفردة:</translation>
     </message>
@@ -167,140 +167,145 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="639"/>
+        <location filename="../articleview.cc" line="162"/>
+        <source>Select Current Article</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="658"/>
         <source>Resource</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="644"/>
+        <location filename="../articleview.cc" line="663"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="649"/>
+        <location filename="../articleview.cc" line="668"/>
         <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="665"/>
+        <location filename="../articleview.cc" line="684"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="669"/>
+        <location filename="../articleview.cc" line="688"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="859"/>
-        <location filename="../articleview.cc" line="889"/>
-        <location filename="../articleview.cc" line="898"/>
-        <location filename="../articleview.cc" line="1325"/>
-        <location filename="../articleview.cc" line="1343"/>
-        <location filename="../articleview.cc" line="1353"/>
+        <location filename="../articleview.cc" line="876"/>
+        <location filename="../articleview.cc" line="906"/>
+        <location filename="../articleview.cc" line="915"/>
+        <location filename="../articleview.cc" line="1349"/>
+        <location filename="../articleview.cc" line="1367"/>
+        <location filename="../articleview.cc" line="1377"/>
         <source>GoldenDict</source>
         <translation>القاموس الذهبي</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="859"/>
+        <location filename="../articleview.cc" line="876"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>المرجع المشار إليه غير موجود.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="899"/>
+        <location filename="../articleview.cc" line="916"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1038"/>
+        <location filename="../articleview.cc" line="1055"/>
         <source>&amp;Open Link</source>
         <translation>ا&amp;فتح الرابط</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1044"/>
+        <location filename="../articleview.cc" line="1061"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>افتح الرابط في لسا&amp;ن جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1051"/>
+        <location filename="../articleview.cc" line="1068"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>افتح الرابط في &amp;متصفح خارجي</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1064"/>
+        <location filename="../articleview.cc" line="1081"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>ا&amp;نظر &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1072"/>
+        <location filename="../articleview.cc" line="1089"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>انظر &quot;%1&quot; في &amp;لسان جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1077"/>
+        <location filename="../articleview.cc" line="1094"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1083"/>
-        <location filename="../articleview.cc" line="1118"/>
+        <location filename="../articleview.cc" line="1100"/>
+        <location filename="../articleview.cc" line="1132"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1097"/>
+        <location filename="../articleview.cc" line="1114"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>انظر &quot;%1&quot; في %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1105"/>
+        <location filename="../articleview.cc" line="1122"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>انظر &quot;%1&quot;في %2 في لسان &amp;جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1269"/>
+        <location filename="../articleview.cc" line="1293"/>
         <source>Playing a non-WAV file</source>
         <translation type="unfinished">تشغيل ملف غير WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1270"/>
+        <location filename="../articleview.cc" line="1294"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation type="unfinished">لتمكين تشغيل ملفات غير WAV، اذهب إلى تحرير|تفضيلات، اختر لسان الصوت وانتق &quot;شغل عبر DirectShow&quot; من هناك.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1285"/>
+        <location filename="../articleview.cc" line="1309"/>
         <source>Bass library not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1290"/>
+        <location filename="../articleview.cc" line="1314"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1325"/>
+        <location filename="../articleview.cc" line="1349"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>فشل بدء مشغل لتشغيل ملف الصوت: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1343"/>
+        <location filename="../articleview.cc" line="1367"/>
         <source>Failed to create temporary file.</source>
         <translation>فشل إنشاء ملف مؤقت.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1354"/>
+        <location filename="../articleview.cc" line="1378"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>تعذر فتح ملف المصدر آليا, حاول فتحه يدويا: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1377"/>
+        <location filename="../articleview.cc" line="1401"/>
         <source>The referenced resource failed to download.</source>
         <translation>فشل تنزيل المرجع المشار إليه.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1285"/>
-        <location filename="../articleview.cc" line="1290"/>
-        <location filename="../articleview.cc" line="1377"/>
+        <location filename="../articleview.cc" line="1309"/>
+        <location filename="../articleview.cc" line="1314"/>
+        <location filename="../articleview.cc" line="1401"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">تحذير: %1</translation>
     </message>
@@ -753,12 +758,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="210"/>
+        <location filename="../historypanewidget.cc" line="211"/>
         <source>%1/%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="214"/>
+        <location filename="../historypanewidget.cc" line="215"/>
         <source>History size: %1 entries out of maximum %2</source>
         <translation type="unfinished"></translation>
     </message>
