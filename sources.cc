@@ -80,6 +80,7 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.enableRussianTransliteration->setChecked( trs.enableRussianTransliteration );
   ui.enableGermanTransliteration->setChecked( trs.enableGermanTransliteration );
   ui.enableGreekTransliteration->setChecked( trs.enableGreekTransliteration );
+  ui.enableBelarusianTransliteration->setChecked( trs.enableBelarusianTransliteration );
   ui.enableRomaji->setChecked( trs.romaji.enable );
   ui.enableHepburn->setChecked( trs.romaji.enableHepburn );
   ui.enableNihonShiki->setChecked( trs.romaji.enableNihonShiki );
@@ -293,6 +294,7 @@ Config::Transliteration Sources::getTransliteration() const
   tr.enableRussianTransliteration = ui.enableRussianTransliteration->isChecked();
   tr.enableGermanTransliteration = ui.enableGermanTransliteration->isChecked();
   tr.enableGreekTransliteration = ui.enableGreekTransliteration->isChecked();
+  tr.enableBelarusianTransliteration = ui.enableBelarusianTransliteration->isChecked();
   tr.romaji.enable = ui.enableRomaji->isChecked();
   tr.romaji.enableHepburn = ui.enableHepburn->isChecked();
   tr.romaji.enableNihonShiki = ui.enableNihonShiki->isChecked();

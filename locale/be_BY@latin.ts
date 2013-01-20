@@ -307,6 +307,26 @@
     </message>
 </context>
 <context>
+    <name>BelarusianTranslit</name>
+    <message>
+        <location filename="../belarusiantranslit.cc" line="416"/>
+        <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
+        <translation>Biełaruskaja tranśliteracyja z łaciny ŭ kirylicu (klasyčny pravapis)</translation>
+    </message>
+    <message>
+        <location filename="../belarusiantranslit.cc" line="419"/>
+        <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
+        <translation>Biełaruskaja tranśliteracyja z łaciny ŭ kirylicu (školny pravapis)</translation>
+    </message>
+    <message>
+        <location filename="../belarusiantranslit.cc" line="422"/>
+        <source>Belarusian transliteration (smoothes out the difference
+between classic and school orthography in cyrillic)</source>
+        <translation>Biełaruskaja tranśliteracyja (zhładžvaje roźnicu
+miž klasyčnym i školnym pravapisam)</translation>
+    </message>
+</context>
+<context>
     <name>DictGroupWidget</name>
     <message>
         <location filename="../dictgroupwidget.ui" line="14"/>
@@ -776,12 +796,12 @@
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1102"/>
+        <location filename="../sources.cc" line="1104"/>
         <source>Enabled</source>
         <translation>Ułučana</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1104"/>
+        <location filename="../sources.cc" line="1106"/>
         <source>Name</source>
         <translation>Nazva</translation>
     </message>
@@ -1816,7 +1836,7 @@
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="215"/>
+        <location filename="../loaddictionaries.cc" line="216"/>
         <source>Error loading dictionaries</source>
         <translation>Pamyłka pry ładavańnia słoŭnikaŭ</translation>
     </message>
@@ -2370,22 +2390,22 @@
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="393"/>
+        <location filename="../sources.cc" line="395"/>
         <source>Enabled</source>
         <translation>Ułučany</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="395"/>
+        <location filename="../sources.cc" line="397"/>
         <source>Name</source>
         <translation>Nazva</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="397"/>
+        <location filename="../sources.cc" line="399"/>
         <source>Address</source>
         <translation>Adras</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="399"/>
+        <location filename="../sources.cc" line="401"/>
         <source>Icon</source>
         <translation>Značak</translation>
     </message>
@@ -2474,12 +2494,12 @@
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="891"/>
+        <location filename="../sources.cc" line="893"/>
         <source>Path</source>
         <translation>Šlach</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="893"/>
+        <location filename="../sources.cc" line="895"/>
         <source>Recursive</source>
         <translation>Rekursiŭna</translation>
     </message>
@@ -3142,27 +3162,27 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="799"/>
+        <location filename="../sources.cc" line="801"/>
         <source>Audio</source>
         <translation>Aŭdyjo</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="801"/>
+        <location filename="../sources.cc" line="803"/>
         <source>Plain Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="803"/>
+        <location filename="../sources.cc" line="805"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="805"/>
+        <location filename="../sources.cc" line="807"/>
         <source>Prefix Match</source>
         <translation>Pavodle prefiksu</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="807"/>
+        <location filename="../sources.cc" line="809"/>
         <source>Unknown</source>
         <translation>Niaviedama</translation>
     </message>
@@ -3188,27 +3208,27 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="707"/>
+        <location filename="../sources.cc" line="709"/>
         <source>Enabled</source>
         <translation>Ułučana</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="709"/>
+        <location filename="../sources.cc" line="711"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="711"/>
+        <location filename="../sources.cc" line="713"/>
         <source>Name</source>
         <translation>Nazva</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="713"/>
+        <location filename="../sources.cc" line="715"/>
         <source>Command Line</source>
         <translation>Zahadny radok</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="715"/>
+        <location filename="../sources.cc" line="717"/>
         <source>Icon</source>
         <translation>Značak</translation>
     </message>
@@ -3218,7 +3238,7 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation>Filtr słoŭnikaŭ pavodle nazvy (Ctrl+F)</translation>
+        <translation>Filtravać słoŭniki pavodle nazvy (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
@@ -3330,12 +3350,12 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="997"/>
+        <location filename="../sources.cc" line="999"/>
         <source>Path</source>
         <translation>Šlach</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="999"/>
+        <location filename="../sources.cc" line="1001"/>
         <source>Name</source>
         <translation>Nazva</translation>
     </message>
@@ -3532,34 +3552,39 @@ p, li { white-space: pre-wrap; }
         <translation>Niamieckaja tranśliteracyja</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="663"/>
+        <location filename="../sources.ui" line="648"/>
+        <source>Belarusian transliteration</source>
+        <translation>Biełaruskaja tranśliteracyja</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="674"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Ułučaje łacinski alfabet dla japonskaje movy</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="666"/>
+        <location filename="../sources.ui" line="677"/>
         <source>Japanese Romaji</source>
         <translation>Japonski ramadzi</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="678"/>
+        <location filename="../sources.ui" line="689"/>
         <source>Systems:</source>
         <translation>Systemy:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="685"/>
+        <location filename="../sources.ui" line="696"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Najbolš užyvany metad transkrypcyi japonskaj movy
 na padstavie angielskaje fanalogii</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="700"/>
         <source>Hepburn</source>
         <translation>Hepbiorn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="699"/>
+        <location filename="../sources.ui" line="710"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -3570,12 +3595,12 @@ Standartyzavanaja u ISO 3602.
 U GoldenDict pokul nie padtrymlivajecca.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="705"/>
+        <location filename="../sources.ui" line="716"/>
         <source>Nihon-shiki</source>
         <translation>Nichon-siki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="715"/>
+        <location filename="../sources.ui" line="726"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -3586,70 +3611,70 @@ Standartyzavanaja u ISO 3602.
 U GoldenDict pokul nie padtrymlivajecca.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="721"/>
+        <location filename="../sources.ui" line="732"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrej-siki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="728"/>
+        <location filename="../sources.ui" line="739"/>
         <source>Syllabaries:</source>
         <translation>Składovyja abecedy:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="735"/>
+        <location filename="../sources.ui" line="746"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Składovaja abeceda Chiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="738"/>
+        <location filename="../sources.ui" line="749"/>
         <source>Hiragana</source>
         <translation>Chiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="745"/>
+        <location filename="../sources.ui" line="756"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Składovaja abeceda Kitakana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="748"/>
+        <location filename="../sources.ui" line="759"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="107"/>
+        <location filename="../sources.cc" line="108"/>
         <source>(not available in portable version)</source>
         <translation>(nie dastupna ŭ pieranosnaj versii)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="143"/>
-        <location filename="../sources.cc" line="170"/>
-        <location filename="../sources.cc" line="197"/>
+        <location filename="../sources.cc" line="144"/>
+        <location filename="../sources.cc" line="171"/>
+        <location filename="../sources.cc" line="198"/>
         <source>Choose a directory</source>
         <translation>Vybar katalogu</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="157"/>
-        <location filename="../sources.cc" line="184"/>
-        <location filename="../sources.cc" line="224"/>
-        <location filename="../sources.cc" line="248"/>
-        <location filename="../sources.cc" line="272"/>
+        <location filename="../sources.cc" line="158"/>
+        <location filename="../sources.cc" line="185"/>
+        <location filename="../sources.cc" line="225"/>
+        <location filename="../sources.cc" line="249"/>
+        <location filename="../sources.cc" line="273"/>
         <source>Confirm removal</source>
         <translation>Paćvierdžańnie prybirańnia</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="158"/>
-        <location filename="../sources.cc" line="185"/>
+        <location filename="../sources.cc" line="159"/>
+        <location filename="../sources.cc" line="186"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Prybrać katalog &lt;b&gt;%1&lt;/b&gt; sa śpisu?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="225"/>
-        <location filename="../sources.cc" line="249"/>
+        <location filename="../sources.cc" line="226"/>
+        <location filename="../sources.cc" line="250"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Prybrać sajt &lt;b&gt;%1&lt;/b&gt; sa śpisu?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="273"/>
+        <location filename="../sources.cc" line="274"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Prybrać pragramu &lt;b&gt;%1&lt;/b&gt; sa śpisu?</translation>
     </message>
@@ -3678,22 +3703,22 @@ U GoldenDict pokul nie padtrymlivajecca.</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="550"/>
+        <location filename="../sources.cc" line="552"/>
         <source>Enabled</source>
         <translation>Ułučany</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="552"/>
+        <location filename="../sources.cc" line="554"/>
         <source>Name</source>
         <translation>Nazva</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="554"/>
+        <location filename="../sources.cc" line="556"/>
         <source>Address</source>
         <translation>Adras</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="556"/>
+        <location filename="../sources.cc" line="558"/>
         <source>Icon</source>
         <translation>Značak</translation>
     </message>
