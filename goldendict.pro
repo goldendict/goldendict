@@ -173,6 +173,7 @@ HEADERS += folding.hh \
     loaddictionaries.hh \
     transliteration.hh \
     romaji.hh \
+    belarusiantranslit.hh \
     russiantranslit.hh \
     german.hh \
     website.hh \
@@ -276,6 +277,7 @@ SOURCES += folding.cc \
     loaddictionaries.cc \
     transliteration.cc \
     romaji.cc \
+    belarusiantranslit.cc \
     russiantranslit.cc \
     german.cc \
     website.cc \
