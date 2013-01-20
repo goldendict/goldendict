@@ -24,4 +24,5 @@ version.txt
 .gitattributes
 
 /goldendict.app/
+/GoldenDict.app/
 *.dmg
