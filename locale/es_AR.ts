@@ -139,7 +139,7 @@
     <message>
         <location filename="../articleview.cc" line="162"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar artículo actual</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="658"/>
