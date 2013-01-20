@@ -635,7 +635,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   {
     ArticleView *view = getCurrentArticleView();
 
+    history.enableAdd( false );
+
     view->showDefinition( tr( "Welcome!" ), Instances::Group::HelpGroupId );
+
+    history.enableAdd( cfg.preferences.storeHistory );
   }
 
   translateLine->setFocus();
