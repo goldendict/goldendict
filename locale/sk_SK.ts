@@ -307,6 +307,25 @@
     </message>
 </context>
 <context>
+    <name>BelarusianTranslit</name>
+    <message>
+        <location filename="../belarusiantranslit.cc" line="417"/>
+        <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../belarusiantranslit.cc" line="420"/>
+        <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../belarusiantranslit.cc" line="423"/>
+        <source>Belarusian transliteration (smoothes out the difference
+between classic and school orthography in cyrillic)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictGroupWidget</name>
     <message>
         <location filename="../dictgroupwidget.ui" line="14"/>
@@ -780,12 +799,12 @@
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1102"/>
+        <location filename="../sources.cc" line="1104"/>
         <source>Enabled</source>
         <translation>Povolené</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1104"/>
+        <location filename="../sources.cc" line="1106"/>
         <source>Name</source>
         <translation>Meno</translation>
     </message>
@@ -1820,7 +1839,7 @@
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="215"/>
+        <location filename="../loaddictionaries.cc" line="216"/>
         <source>Error loading dictionaries</source>
         <translation>Chyba pri načítavaní slovníkov</translation>
     </message>
@@ -1829,14 +1848,14 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1422"/>
-        <location filename="../mainwindow.cc" line="2433"/>
+        <location filename="../mainwindow.cc" line="1426"/>
+        <location filename="../mainwindow.cc" line="2437"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="638"/>
+        <location filename="../mainwindow.cc" line="640"/>
         <source>Welcome!</source>
         <translation>Vitajte!</translation>
     </message>
@@ -2066,7 +2085,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="449"/>
-        <location filename="../mainwindow.cc" line="3038"/>
+        <location filename="../mainwindow.cc" line="3042"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2100,7 +2119,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cc" line="189"/>
-        <location filename="../mainwindow.cc" line="1000"/>
+        <location filename="../mainwindow.cc" line="1004"/>
         <source>Look up in:</source>
         <translation>Hľadať v:</translation>
     </message>
@@ -2189,17 +2208,17 @@
         <translation>Načítavanie ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="989"/>
+        <location filename="../mainwindow.cc" line="993"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>Slovníky: %1, články: %2, slová: %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1000"/>
+        <location filename="../mainwindow.cc" line="1004"/>
         <source>Look up:</source>
         <translation>Hľadať:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1018"/>
+        <location filename="../mainwindow.cc" line="1022"/>
         <source>All</source>
         <translation>Všetko</translation>
     </message>
@@ -2224,154 +2243,154 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1158"/>
+        <location filename="../mainwindow.cc" line="1162"/>
         <source>Open Tabs List</source>
         <translation>Otvorí zoznam kariet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1216"/>
+        <location filename="../mainwindow.cc" line="1220"/>
         <source>(untitled)</source>
         <translation>(Bez názvu)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1422"/>
+        <location filename="../mainwindow.cc" line="1426"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1940"/>
+        <location filename="../mainwindow.cc" line="1944"/>
         <source>WARNING: %1</source>
         <translation>VAROVANIE: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2434"/>
+        <location filename="../mainwindow.cc" line="2438"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Nepodarilo sa inicializovať monitorovací mechanizmus klávesových skratiek.&lt;br&gt; Uistite sa, že X server má zapnuté rozšírenie RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2568"/>
+        <location filename="../mainwindow.cc" line="2572"/>
         <source>New Release Available</source>
         <translation>Je dostupná nová verzia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2569"/>
+        <location filename="../mainwindow.cc" line="2573"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict verzia &lt;b&gt;%1&lt;/b&gt; je dostupná na stiahnutie.
 &lt;br&gt;Kliknutím na &lt;b&gt;Stiahnuť&lt;/b&gt; sa dostane na stránku, kde je možné program stiahnuť.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2574"/>
+        <location filename="../mainwindow.cc" line="2578"/>
         <source>Download</source>
         <translation>Stiahnuť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2575"/>
+        <location filename="../mainwindow.cc" line="2579"/>
         <source>Skip This Release</source>
         <translation>Preskočiť toto vydanie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2688"/>
+        <location filename="../mainwindow.cc" line="2692"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Vybrali ste si skrytie panelu s ponukou. Použite %1 ak ho chcete znova zobraziť.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2689"/>
+        <location filename="../mainwindow.cc" line="2693"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2787"/>
+        <location filename="../mainwindow.cc" line="2791"/>
         <source>Page Setup</source>
         <translation>Nastavenie strany</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2788"/>
+        <location filename="../mainwindow.cc" line="2792"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Žiadna tlačiareň nie je k dispozícii. Prosím, nainštalujte aspoň jednu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2805"/>
+        <location filename="../mainwindow.cc" line="2809"/>
         <source>Print Article</source>
         <translation>Vytlačiť článok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2826"/>
+        <location filename="../mainwindow.cc" line="2830"/>
         <source>Save Article As</source>
         <translation>Uložiť článok ako</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2826"/>
+        <location filename="../mainwindow.cc" line="2830"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html súbory (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2841"/>
+        <location filename="../mainwindow.cc" line="2845"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2842"/>
+        <location filename="../mainwindow.cc" line="2846"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Nie je možné uložiť článok: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2874"/>
+        <location filename="../mainwindow.cc" line="2878"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3034"/>
+        <location filename="../mainwindow.cc" line="3038"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3060"/>
+        <location filename="../mainwindow.cc" line="3064"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3062"/>
-        <location filename="../mainwindow.cc" line="3124"/>
+        <location filename="../mainwindow.cc" line="3066"/>
+        <location filename="../mainwindow.cc" line="3128"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3101"/>
+        <location filename="../mainwindow.cc" line="3105"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3104"/>
+        <location filename="../mainwindow.cc" line="3108"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3122"/>
+        <location filename="../mainwindow.cc" line="3126"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3171"/>
+        <location filename="../mainwindow.cc" line="3175"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3175"/>
+        <location filename="../mainwindow.cc" line="3179"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3178"/>
+        <location filename="../mainwindow.cc" line="3182"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3286"/>
+        <location filename="../mainwindow.cc" line="3290"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3287"/>
+        <location filename="../mainwindow.cc" line="3291"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2395,22 +2414,22 @@
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="393"/>
+        <location filename="../sources.cc" line="395"/>
         <source>Enabled</source>
         <translation>Povolené</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="395"/>
+        <location filename="../sources.cc" line="397"/>
         <source>Name</source>
         <translation>Meno</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="397"/>
+        <location filename="../sources.cc" line="399"/>
         <source>Address</source>
         <translation>Adresa</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="399"/>
+        <location filename="../sources.cc" line="401"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2499,12 +2518,12 @@
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="891"/>
+        <location filename="../sources.cc" line="893"/>
         <source>Path</source>
         <translation>Cesta</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="893"/>
+        <location filename="../sources.cc" line="895"/>
         <source>Recursive</source>
         <translation>Rekurzívne</translation>
     </message>
@@ -3156,27 +3175,27 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="799"/>
+        <location filename="../sources.cc" line="801"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="801"/>
+        <location filename="../sources.cc" line="803"/>
         <source>Plain Text</source>
         <translation>Obyčajný text</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="803"/>
+        <location filename="../sources.cc" line="805"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="805"/>
+        <location filename="../sources.cc" line="807"/>
         <source>Prefix Match</source>
         <translation>Zhoda predpony</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="807"/>
+        <location filename="../sources.cc" line="809"/>
         <source>Unknown</source>
         <translation>Neznámy</translation>
     </message>
@@ -3202,27 +3221,27 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="707"/>
+        <location filename="../sources.cc" line="709"/>
         <source>Enabled</source>
         <translation>Povolené</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="709"/>
+        <location filename="../sources.cc" line="711"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="711"/>
+        <location filename="../sources.cc" line="713"/>
         <source>Name</source>
         <translation>Meno</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="713"/>
+        <location filename="../sources.cc" line="715"/>
         <source>Command Line</source>
         <translation>Príkazový riadok</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="715"/>
+        <location filename="../sources.cc" line="717"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3274,67 +3293,67 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <translation>Dialóg</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="60"/>
+        <location filename="../scanpopup.ui" line="63"/>
         <source>word</source>
         <translation>slovo</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="95"/>
+        <location filename="../scanpopup.ui" line="98"/>
         <source>List Matches (Alt+M)</source>
         <translation>Zoznam zhôd (Alt + M)</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="70"/>
-        <location filename="../scanpopup.ui" line="84"/>
-        <location filename="../scanpopup.ui" line="98"/>
-        <location filename="../scanpopup.ui" line="121"/>
-        <location filename="../scanpopup.ui" line="171"/>
-        <location filename="../scanpopup.ui" line="195"/>
+        <location filename="../scanpopup.ui" line="73"/>
+        <location filename="../scanpopup.ui" line="87"/>
+        <location filename="../scanpopup.ui" line="101"/>
+        <location filename="../scanpopup.ui" line="124"/>
+        <location filename="../scanpopup.ui" line="174"/>
+        <location filename="../scanpopup.ui" line="198"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="67"/>
+        <location filename="../scanpopup.ui" line="70"/>
         <source>Back</source>
         <translation type="unfinished">Späť</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="81"/>
+        <location filename="../scanpopup.ui" line="84"/>
         <source>Forward</source>
         <translation type="unfinished">Vpred</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="111"/>
+        <location filename="../scanpopup.ui" line="114"/>
         <source>Alt+M</source>
         <translation>Alt+M</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="118"/>
+        <location filename="../scanpopup.ui" line="121"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Vysloviť slovo (Alt + S)</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="128"/>
+        <location filename="../scanpopup.ui" line="131"/>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="138"/>
+        <location filename="../scanpopup.ui" line="141"/>
         <source>Send word to main window (Alt+W)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="148"/>
+        <location filename="../scanpopup.ui" line="151"/>
         <source>Alt+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="168"/>
+        <location filename="../scanpopup.ui" line="171"/>
         <source>Shows or hides the dictionary bar</source>
         <translation>Zobrazí alebo skryje panel slovníkov</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="191"/>
+        <location filename="../scanpopup.ui" line="194"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
         <translation>Pomocou tohto môžete prišpendliť okno, tak že zostane na obrazovke,
@@ -3344,12 +3363,12 @@ môžete mu zmeniť veľkosť, alebo ho inak spravovať.</translation>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="997"/>
+        <location filename="../sources.cc" line="999"/>
         <source>Path</source>
         <translation>Cesta</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="999"/>
+        <location filename="../sources.cc" line="1001"/>
         <source>Name</source>
         <translation>Meno</translation>
     </message>
@@ -3551,34 +3570,39 @@ p, li { white-space: pre-wrap; }
         <translation>Nemecký prepis</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="663"/>
+        <location filename="../sources.ui" line="648"/>
+        <source>Belarusian transliteration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="674"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Umožňuje využívať latinku v japončine</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="666"/>
+        <location filename="../sources.ui" line="677"/>
         <source>Japanese Romaji</source>
         <translation>Japonské Romaji</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="678"/>
+        <location filename="../sources.ui" line="689"/>
         <source>Systems:</source>
         <translation>Systémy:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="685"/>
+        <location filename="../sources.ui" line="696"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Najrozšírenejší spôsob japonskej transkripcie,
 založený na anglickej fonológií</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="700"/>
         <source>Hepburn</source>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="699"/>
+        <location filename="../sources.ui" line="710"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -3589,12 +3613,12 @@ k systému písania kana. Štandardizovaný ako ISO 3602.
 Zatiaľ nie je implementovaný v GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="705"/>
+        <location filename="../sources.ui" line="716"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="715"/>
+        <location filename="../sources.ui" line="726"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -3605,70 +3629,70 @@ Not implemented yet in GoldenDict.</source>
 Zzatiaľ nie je implementovaný v GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="721"/>
+        <location filename="../sources.ui" line="732"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="728"/>
+        <location filename="../sources.ui" line="739"/>
         <source>Syllabaries:</source>
         <translation>Šlabikáre:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="735"/>
+        <location filename="../sources.ui" line="746"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Japonský šlabikár Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="738"/>
+        <location filename="../sources.ui" line="749"/>
         <source>Hiragana</source>
         <translation>Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="745"/>
+        <location filename="../sources.ui" line="756"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Japonský šlabikár Katakana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="748"/>
+        <location filename="../sources.ui" line="759"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="107"/>
+        <location filename="../sources.cc" line="108"/>
         <source>(not available in portable version)</source>
         <translation>(Nie je k dispozícii v prenosnej verzií)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="143"/>
-        <location filename="../sources.cc" line="170"/>
-        <location filename="../sources.cc" line="197"/>
+        <location filename="../sources.cc" line="144"/>
+        <location filename="../sources.cc" line="171"/>
+        <location filename="../sources.cc" line="198"/>
         <source>Choose a directory</source>
         <translation>Vyberte si priečinok</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="157"/>
-        <location filename="../sources.cc" line="184"/>
-        <location filename="../sources.cc" line="224"/>
-        <location filename="../sources.cc" line="248"/>
-        <location filename="../sources.cc" line="272"/>
+        <location filename="../sources.cc" line="158"/>
+        <location filename="../sources.cc" line="185"/>
+        <location filename="../sources.cc" line="225"/>
+        <location filename="../sources.cc" line="249"/>
+        <location filename="../sources.cc" line="273"/>
         <source>Confirm removal</source>
         <translation>Potvrdiť odstránenie</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="158"/>
-        <location filename="../sources.cc" line="185"/>
+        <location filename="../sources.cc" line="159"/>
+        <location filename="../sources.cc" line="186"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Odstrániť priečinok &lt;b&gt;%1&lt;/b&gt; zo zoznamu?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="225"/>
-        <location filename="../sources.cc" line="249"/>
+        <location filename="../sources.cc" line="226"/>
+        <location filename="../sources.cc" line="250"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Odstrániť stránku &lt;b&gt;%1&lt;/b&gt; zo zoznamu?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="273"/>
+        <location filename="../sources.cc" line="274"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Odobrať program &lt;b&gt;%1&lt;/b&gt; zo zoznamu?</translation>
     </message>
@@ -3697,22 +3721,22 @@ Zzatiaľ nie je implementovaný v GoldenDict.</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="550"/>
+        <location filename="../sources.cc" line="552"/>
         <source>Enabled</source>
         <translation>Povolené</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="552"/>
+        <location filename="../sources.cc" line="554"/>
         <source>Name</source>
         <translation>Meno</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="554"/>
+        <location filename="../sources.cc" line="556"/>
         <source>Address</source>
         <translation>Adresa</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="556"/>
+        <location filename="../sources.cc" line="558"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>

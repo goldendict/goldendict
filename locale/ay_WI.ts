@@ -262,6 +262,22 @@
     </message>
 </context>
 <context>
+    <name>BelarusianTranslit</name>
+    <message>
+        <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Belarusian transliteration (smoothes out the difference
+between classic and school orthography in cyrillic)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictGroupWidget</name>
     <message>
         <source>Form</source>
@@ -3786,6 +3802,10 @@ Not implemented yet in GoldenDict.</source>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Belarusian transliteration</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
