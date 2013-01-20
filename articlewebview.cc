@@ -15,6 +15,7 @@ void ArticleWebView::mousePressEvent( QMouseEvent * event )
 
   if ( selectionBySingleClick && ( event->buttons() & Qt::LeftButton ) )
   {
+    findText(""); // clear the selection first, if any
     QMouseEvent ev( QEvent::MouseButtonDblClick, event->pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers() );
     QApplication::sendEvent( page(), &ev );
   }
