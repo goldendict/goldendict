@@ -30,8 +30,11 @@
        <number>0</number>
       </property>
       <layout class="QVBoxLayout" name="mainLayout">
+       <property name="spacing">
+        <number>3</number>
+       </property>
        <property name="margin">
-        <number>9</number>
+        <number>3</number>
        </property>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
