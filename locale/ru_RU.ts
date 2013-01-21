@@ -311,18 +311,19 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Белорусская транслитерация (классическая орфография)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Белорусская транслитерация (школьная орфография)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Белорусская транслитерация (сглаживание разницы
+между классической и школьной орфографией)</translation>
     </message>
 </context>
 <context>
@@ -3590,7 +3591,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="648"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитерация (Белорусский)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="674"/>
