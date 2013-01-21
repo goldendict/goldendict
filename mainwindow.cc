@@ -757,6 +757,7 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
   }
 
   updateGroupList();
+  applyWordsZoomLevel();
 }
 
 void MainWindow::mousePressEvent( QMouseEvent *event)
