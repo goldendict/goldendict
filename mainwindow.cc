@@ -714,6 +714,8 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
   {
     cfg.preferences.searchInDock = true;
 
+    navToolbar->setAllowedAreas( Qt::AllToolBarAreas );
+
     groupList = groupListInDock;
     translateLine = ui.translateLine;
     wordList = ui.wordList;
@@ -727,6 +729,21 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
   else
   {
     cfg.preferences.searchInDock = false;
+
+    // handle the main toolbar, it must not be on the side, since it should
+    // contain the group widget and the translate line. Valid locations: Top and Bottom.
+    navToolbar->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+    if ( toolBarArea( navToolbar ) & ( Qt::LeftToolBarArea | Qt::RightToolBarArea ) )
+    {
+      if ( toolBarArea( &dictionaryBar ) == Qt::TopToolBarArea )
+      {
+        insertToolBar( &dictionaryBar, navToolbar );
+      }
+      else
+      {
+        addToolBar( Qt::TopToolBarArea, navToolbar );
+      }
+    }
 
     groupList = groupListInToolbar;
     translateLine = translateBox->translateLine();
