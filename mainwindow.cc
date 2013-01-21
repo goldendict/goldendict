@@ -139,7 +139,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar->widgetForAction( navToolbar->addSeparator() )->setObjectName( "separatorBeforeZoom" );
 
   zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
-  zoomIn->setShortcut( QKeySequence::ZoomIn );
+  zoomIn->setShortcuts( QList< QKeySequence >() <<
+                       QKeySequence::ZoomIn <<
+                       QKeySequence( "Ctrl+=" ) );
   navToolbar->widgetForAction( zoomIn )->setObjectName( "zoomInButton" );
 
   zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Zoom Out" ) );
@@ -251,7 +253,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.menuZoom->addSeparator();
 
   wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Words Zoom In" ) );
-  wordsZoomIn->setShortcut( QKeySequence( "Alt++" ) );
+  wordsZoomIn->setShortcuts( QList< QKeySequence >() <<
+                            QKeySequence( "Alt++" ) <<
+                            QKeySequence( "Alt+=" ) );
   wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Words Zoom Out" ) );
   wordsZoomOut->setShortcut( QKeySequence( "Alt+-" ) );
   wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Words Normal Size" ) );
