@@ -402,7 +402,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочие</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
