@@ -88,6 +88,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   goForwardAction( this ),
   openSearchAction( this ),
   selectCurrentArticleAction( this ),
+  shiftF3Action( this ),
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ )
@@ -164,7 +165,14 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( &selectCurrentArticleAction, SIGNAL( triggered() ),
            this, SLOT( selectCurrentArticle() ) );
 
+  shiftF3Action.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  shiftF3Action.setShortcut( QKeySequence( "Shift+F3" ) );
+  connect( &shiftF3Action, SIGNAL( triggered() ),
+           this, SLOT( on_searchPrevious_clicked() ) );
+  addAction( &shiftF3Action );
+
   ui.definition->installEventFilter( this );
+  ui.searchFrame->installEventFilter( this );
 
   // Load the default blank page instantly, so there would be no flicker.
 
@@ -567,6 +575,16 @@ void ArticleView::cleanupTemp()
 
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
+
+  if ( ev->type() == QEvent::ShortcutOverride ) {
+    QKeyEvent *ke = static_cast<QKeyEvent *>( ev );
+    if ( ke->key() == Qt::Key_F3 && !ke->modifiers() && isSearchOpened() ) {
+      on_searchNext_clicked();
+      ev->accept();
+      return true;
+    }
+  }
+
   if ( obj == ui.definition )
   {
     if ( ev->type() == QEvent::MouseButtonPress ) {
@@ -1486,12 +1504,14 @@ void ArticleView::openSearch()
 
 void ArticleView::on_searchPrevious_clicked()
 {
-  performFindOperation( false, true );
+  if ( searchIsOpened )
+    performFindOperation( false, true );
 }
 
 void ArticleView::on_searchNext_clicked()
 {
-  performFindOperation( false, false );
+  if ( searchIsOpened )
+    performFindOperation( false, false );
 }
 
 void ArticleView::on_searchText_textEdited()

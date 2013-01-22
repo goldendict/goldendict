@@ -28,7 +28,8 @@ class ArticleView: public QFrame
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,
-          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction;
+          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction,
+          shiftF3Action;
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;

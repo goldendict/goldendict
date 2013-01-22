@@ -316,7 +316,10 @@
      <normaloff>:/icons/book.png</normaloff>:/icons/book.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Dictionaries...	F3</string>
+    <string>&amp;Dictionaries...</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
   <action name="preferences">
