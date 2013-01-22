@@ -713,7 +713,7 @@ void DictGroupsWidget::addAutoGroups()
       idTo = ids.second;
     }
 
-    QString name("Unassigned");
+    QString name( tr( "Unassigned" ) );
     if ( idFrom != 0 && idTo != 0 )
     {
       QString lfrom = LangCoder::intToCode2( idFrom );
