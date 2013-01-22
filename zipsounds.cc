@@ -10,6 +10,7 @@
 #include "audiolink.hh"
 #include "dprintf.hh"
 #include "indexedzip.hh"
+#include "filetype.hh"
 
 #include <set>
 #include <string>
@@ -40,7 +41,7 @@ DEF_EX( exInvalidData, "Invalid data encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x5350495a, // ZIPS on little-endian, SPIZ on big-endian
-  CurrentFormatVersion = 1
+  CurrentFormatVersion = 1 + BtreeIndexing::FormatVersion
 };
 
 struct IdxHeader
@@ -67,13 +68,25 @@ bool indexIsOldOrBad( string const & indexFile )
          header.formatVersion != CurrentFormatVersion;
 }
 
-string stripExtension( string const & str )
+wstring stripExtension( string const & str )
 {
-  if ( str.size() > 3 &&
-      ( strcasecmp( str.c_str() + ( str.size() - 4 ), ".wav" ) == 0 ) )
-    return string( str, 0, str.size() - 4 );
-  else
-    return str;
+  wstring name;
+  try
+  {
+    name = Utf8::decode( str );
+  }
+  catch( Utf8::exCantDecode )
+  {
+    return name;
+  }
+
+  if( Filetype::isNameOfSound( str ) )
+  {
+    wstring::size_type pos = name.rfind( L'.' );
+    if ( pos != wstring::npos )
+      name.erase( pos );
+  }
+  return name;
 }
 
 class ZipSoundsDictionary: public BtreeIndexing::BtreeDictionary
@@ -214,7 +227,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     result += addAudioLink( ref, getId() );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" + stripExtension( i->second ) + "</a></td>";
+    result += "<td><a href=" + ref + ">" + i->second + "</a></td>";
     result += "</tr>";
   }
 
@@ -232,7 +245,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     result += addAudioLink( ref, getId() );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" + stripExtension( i->second ) + "</a></td>";
+    result += "<td><a href=" + ref + ">" + i->second + "</a></td>";
     result += "</tr>";
   }
 
@@ -251,13 +264,11 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
 sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const & name )
   throw( std::exception )
 {
-  // See if the name ends in .wav. Remove that extension then
+  // Remove extension for sound files (like in sound dirs)
 
-  string strippedName =
-    ( name.size() > 3 && ( name.compare( name.size() - 4, 4, ".wav" ) == 0 ) ) ?
-      string( name, 0, name.size() - 4 ) : name;
+  wstring strippedName = stripExtension( name );
 
-  vector< WordArticleLink > chain = findArticles( Utf8::decode( strippedName ) );
+  vector< WordArticleLink > chain = findArticles( strippedName );
 
   if ( chain.empty() )
     return new Dictionary::DataRequestInstant( false ); // No such resource
@@ -333,15 +344,16 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if( !zipFileNames.empty() )
         {
-          // See if the name ends in .wav. Remove that extension then
+          // Remove extension for sound files (like in sound dirs)
 
           for( IndexedWords::iterator i = zipFileNames.begin(); i != zipFileNames.end(); ++i )
           {
             vector< WordArticleLink > links = i->second;
             for( unsigned x = 0; x < links.size(); x++ )
             {
-              string word = stripExtension( links[ x ].word );
-              names.addSingleWord( Utf8::decode( word ), links[ x ].articleOffset );
+              wstring word = stripExtension( links[ x ].word );
+              if( !word.empty() )
+                names.addSingleWord( word, links[ x ].articleOffset );
             }
           }
 
