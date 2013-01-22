@@ -2207,12 +2207,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Словари...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
