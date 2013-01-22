@@ -137,145 +137,145 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="162"/>
+        <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="658"/>
+        <location filename="../articleview.cc" line="676"/>
         <source>Resource</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="663"/>
+        <location filename="../articleview.cc" line="681"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="668"/>
+        <location filename="../articleview.cc" line="686"/>
         <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="684"/>
+        <location filename="../articleview.cc" line="702"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="688"/>
+        <location filename="../articleview.cc" line="706"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="876"/>
-        <location filename="../articleview.cc" line="906"/>
-        <location filename="../articleview.cc" line="915"/>
-        <location filename="../articleview.cc" line="1349"/>
+        <location filename="../articleview.cc" line="894"/>
+        <location filename="../articleview.cc" line="924"/>
+        <location filename="../articleview.cc" line="933"/>
         <location filename="../articleview.cc" line="1367"/>
-        <location filename="../articleview.cc" line="1377"/>
+        <location filename="../articleview.cc" line="1385"/>
+        <location filename="../articleview.cc" line="1395"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="876"/>
+        <location filename="../articleview.cc" line="894"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>El recurso referido no existe.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="916"/>
+        <location filename="../articleview.cc" line="934"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1073"/>
         <source>&amp;Open Link</source>
         <translation>&amp;T&apos;inkisqata kichay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1061"/>
+        <location filename="../articleview.cc" line="1079"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Musuq pestañapi t&apos;inkisqata kichay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1068"/>
+        <location filename="../articleview.cc" line="1086"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Abrir enlace en un &amp;navegador web externo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1081"/>
+        <location filename="../articleview.cc" line="1099"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot;ta &amp;mask&apos;ay </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1089"/>
+        <location filename="../articleview.cc" line="1107"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>&amp;Musuq pestañapi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1094"/>
+        <location filename="../articleview.cc" line="1112"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1100"/>
-        <location filename="../articleview.cc" line="1132"/>
+        <location filename="../articleview.cc" line="1118"/>
+        <location filename="../articleview.cc" line="1150"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1114"/>
+        <location filename="../articleview.cc" line="1132"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>%2pi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1122"/>
+        <location filename="../articleview.cc" line="1140"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>&amp;Musuq pestañapi %2pi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1293"/>
+        <location filename="../articleview.cc" line="1311"/>
         <source>Playing a non-WAV file</source>
         <translation>Mana WAVchu archivota takichichkan</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1294"/>
+        <location filename="../articleview.cc" line="1312"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Para activar reproducción de archivos no WAV, por favor vaya a Editar|Preferencias, escoja la pestaña Audio y seleccione &quot;Reproducir con DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1309"/>
+        <location filename="../articleview.cc" line="1327"/>
         <source>Bass library not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1314"/>
+        <location filename="../articleview.cc" line="1332"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1349"/>
+        <location filename="../articleview.cc" line="1367"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Fallo ejecutando un reproductor para reproducir el archivo de audio: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1367"/>
+        <location filename="../articleview.cc" line="1385"/>
         <source>Failed to create temporary file.</source>
         <translation>Temporal archiwuta yurichispa pantay.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1378"/>
+        <location filename="../articleview.cc" line="1396"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Fallo abriendo automáticamente el archivo de recursos. Intente abrirlo manualmente: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1401"/>
+        <location filename="../articleview.cc" line="1419"/>
         <source>The referenced resource failed to download.</source>
         <translation>El recurso ha fallado de descargar.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1309"/>
-        <location filename="../articleview.cc" line="1314"/>
-        <location filename="../articleview.cc" line="1401"/>
+        <location filename="../articleview.cc" line="1327"/>
+        <location filename="../articleview.cc" line="1332"/>
+        <location filename="../articleview.cc" line="1419"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">WILLAY: %1</translation>
     </message>
@@ -2619,17 +2619,17 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Wamp&apos;unapaq chumpi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="95"/>
+        <location filename="../mainwindow.cc" line="93"/>
         <source>Back</source>
         <translation>Ñawpaq</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="97"/>
+        <location filename="../mainwindow.cc" line="95"/>
         <source>Forward</source>
         <translation>Qhipa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="114"/>
+        <location filename="../mainwindow.cc" line="112"/>
         <source>Scan Popup</source>
         <translation>Juch&apos;uy qhawanapi mask&apos;ay</translation>
     </message>
@@ -2638,23 +2638,23 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Pronounce word</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="269"/>
+        <location filename="../mainwindow.cc" line="267"/>
         <source>Show &amp;Main Window</source>
         <translation>Qhapaq qhawanata &amp;rikhuchiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="352"/>
-        <location filename="../mainwindow.cc" line="273"/>
+        <location filename="../mainwindow.ui" line="355"/>
+        <location filename="../mainwindow.cc" line="271"/>
         <source>&amp;Quit</source>
         <translation>&amp;Lluqsiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="492"/>
+        <location filename="../mainwindow.cc" line="476"/>
         <source>Loading...</source>
         <translation>Jap&apos;ikuchkan...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2601"/>
+        <location filename="../mainwindow.cc" line="2567"/>
         <source>Skip This Release</source>
         <translation>Saltar esta versión</translation>
     </message>
@@ -2663,37 +2663,37 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">[Sconosciuto]</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2813"/>
+        <location filename="../mainwindow.cc" line="2779"/>
         <source>Page Setup</source>
         <translation>Raphita kamachina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2814"/>
+        <location filename="../mainwindow.cc" line="2780"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Mana impresora nisqaqa kanchu. Por favor instale una impresora.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2831"/>
+        <location filename="../mainwindow.cc" line="2797"/>
         <source>Print Article</source>
         <translation>Raphipi articulota ñit&apos;iy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2852"/>
+        <location filename="../mainwindow.cc" line="2818"/>
         <source>Save Article As</source>
         <translation>Jinata articulota jallch&apos;ay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2852"/>
+        <location filename="../mainwindow.cc" line="2818"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Archiwukuna HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2867"/>
+        <location filename="../mainwindow.cc" line="2833"/>
         <source>Error</source>
         <translation>Pantay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2868"/>
+        <location filename="../mainwindow.cc" line="2834"/>
         <source>Can&apos;t save article: %1</source>
         <translation>&quot;%1&quot; articulota mana jallch&apos;ayta atinchu </translation>
     </message>
@@ -2702,33 +2702,33 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Error loading dictionaries</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1015"/>
+        <location filename="../mainwindow.cc" line="999"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 simi-pirwakuna, %2 articulokuna, %3 simikuna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2460"/>
+        <location filename="../mainwindow.cc" line="2426"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Fallo de inicializar monitoreo de teclas de acceso rápido.&lt;br&gt;Asegúrese que su XServer tiene activada la extensión RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2594"/>
+        <location filename="../mainwindow.cc" line="2560"/>
         <source>New Release Available</source>
         <translation>Una nueva versión está disponible</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2595"/>
+        <location filename="../mainwindow.cc" line="2561"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Ahora versión &lt;b&gt;%1&lt;/b&gt; de GoldenDict está disponible para descargar.&lt;br&gt;Haga clic en &lt;b&gt;Descargar&lt;/b&gt; para ir a página de descargas.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2600"/>
+        <location filename="../mainwindow.cc" line="2566"/>
         <source>Download</source>
         <translation>Urayachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="191"/>
-        <location filename="../mainwindow.cc" line="1026"/>
+        <location filename="../mainwindow.cc" line="189"/>
+        <location filename="../mainwindow.cc" line="1010"/>
         <source>Look up in:</source>
         <translation>Mask&apos;ay:</translation>
     </message>
@@ -2737,190 +2737,190 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Simi-pirwaqpa chumpinpi sutikunata rikhurichiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="64"/>
+        <location filename="../mainwindow.cc" line="62"/>
         <source>&amp;Menubar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="225"/>
+        <location filename="../mainwindow.cc" line="223"/>
         <source>Found in Dictionaries:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="129"/>
+        <location filename="../mainwindow.cc" line="127"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Simita parlachiy (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="62"/>
+        <location filename="../mainwindow.cc" line="60"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="63"/>
+        <location filename="../mainwindow.cc" line="61"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="92"/>
+        <location filename="../mainwindow.cc" line="90"/>
         <source>&amp;Navigation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="141"/>
+        <location filename="../mainwindow.cc" line="139"/>
         <source>Zoom In</source>
         <translation>Jatunyachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="147"/>
+        <location filename="../mainwindow.cc" line="145"/>
         <source>Zoom Out</source>
         <translation>Juch&apos;uyyachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="151"/>
+        <location filename="../mainwindow.cc" line="149"/>
         <source>Normal Size</source>
         <translation>Mana aqllasqa chhikan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="255"/>
+        <location filename="../mainwindow.cc" line="253"/>
         <source>Words Zoom In</source>
         <translation>Simikunata jatunyachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="259"/>
+        <location filename="../mainwindow.cc" line="257"/>
         <source>Words Zoom Out</source>
         <translation>Simikunata juch&apos;uyyachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="261"/>
+        <location filename="../mainwindow.cc" line="259"/>
         <source>Words Normal Size</source>
         <translation>Mana aqllasqa chhikanpa simikunan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="331"/>
+        <location filename="../mainwindow.cc" line="315"/>
         <source>Close current tab</source>
         <translation>Kunan pestañata wisq&apos;ay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="341"/>
+        <location filename="../mainwindow.cc" line="325"/>
         <source>Close all tabs</source>
         <translation>Tukuy pestañakunata wisq&apos;ay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="349"/>
+        <location filename="../mainwindow.cc" line="333"/>
         <source>Close all tabs except current</source>
         <translation>Tukuy pestañakunata wisq&apos;ay, mana kunan pestañachu </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1026"/>
+        <location filename="../mainwindow.cc" line="1010"/>
         <source>Look up:</source>
         <translation>Mask&apos;ay:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1044"/>
+        <location filename="../mainwindow.cc" line="1028"/>
         <source>All</source>
         <translation>Tukuy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2900"/>
+        <location filename="../mainwindow.cc" line="2866"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3148"/>
+        <location filename="../mainwindow.cc" line="3114"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3197"/>
+        <location filename="../mainwindow.cc" line="3163"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3201"/>
+        <location filename="../mainwindow.cc" line="3167"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3204"/>
+        <location filename="../mainwindow.cc" line="3170"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3312"/>
+        <location filename="../mainwindow.cc" line="3278"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3313"/>
+        <location filename="../mainwindow.cc" line="3279"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="320"/>
+        <location filename="../mainwindow.cc" line="304"/>
         <source>Opened tabs</source>
         <translation>Kichasqa Pestañas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1184"/>
+        <location filename="../mainwindow.cc" line="1168"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1242"/>
+        <location filename="../mainwindow.cc" line="1226"/>
         <source>(untitled)</source>
         <translation>(Mana sutiyuq)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1448"/>
+        <location filename="../mainwindow.cc" line="1432"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1966"/>
+        <location filename="../mainwindow.cc" line="1932"/>
         <source>WARNING: %1</source>
         <translation>WILLAY: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2714"/>
+        <location filename="../mainwindow.cc" line="2680"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2715"/>
+        <location filename="../mainwindow.cc" line="2681"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3060"/>
+        <location filename="../mainwindow.cc" line="3026"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3086"/>
+        <location filename="../mainwindow.cc" line="3052"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3088"/>
-        <location filename="../mainwindow.cc" line="3150"/>
+        <location filename="../mainwindow.cc" line="3054"/>
+        <location filename="../mainwindow.cc" line="3116"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3127"/>
+        <location filename="../mainwindow.cc" line="3093"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3130"/>
+        <location filename="../mainwindow.cc" line="3096"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1448"/>
-        <location filename="../mainwindow.cc" line="2459"/>
+        <location filename="../mainwindow.cc" line="1432"/>
+        <location filename="../mainwindow.cc" line="2425"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
@@ -2934,7 +2934,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="644"/>
+        <location filename="../mainwindow.cc" line="628"/>
         <source>Welcome!</source>
         <translation>¡Bienvenido!</translation>
     </message>
@@ -2954,7 +2954,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Yanapa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="328"/>
+        <location filename="../mainwindow.ui" line="331"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Aqllanakuna...</translation>
     </message>
@@ -2963,7 +2963,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">&amp;Sources...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="389"/>
+        <location filename="../mainwindow.ui" line="392"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
@@ -2987,12 +2987,14 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Yuyaynin</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="obsolete">&amp;Simi-pirwakuna...</translation>
+        <translation type="unfinished">&amp;Simi-pirwakuna...</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="obsolete">F3</translation>
+        <translation type="unfinished">F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
@@ -3010,124 +3012,119 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="319"/>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="331"/>
+        <location filename="../mainwindow.ui" line="334"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="336"/>
+        <location filename="../mainwindow.ui" line="339"/>
         <source>&amp;Homepage</source>
         <translation>&amp;GoldenDictpa raphin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../mainwindow.ui" line="344"/>
         <source>&amp;About</source>
         <translation>&amp;GoldenDictmanta willaway</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="344"/>
+        <location filename="../mainwindow.ui" line="347"/>
         <source>About GoldenDict</source>
         <translation>GoldenDictmanta willaway</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="347"/>
+        <location filename="../mainwindow.ui" line="350"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="355"/>
+        <location filename="../mainwindow.ui" line="358"/>
         <source>Quit from application</source>
         <translation>Programa nisqamanta lluqsiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="358"/>
+        <location filename="../mainwindow.ui" line="361"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="363"/>
+        <location filename="../mainwindow.ui" line="366"/>
         <source>&amp;Forum</source>
         <translation>&amp;Foro (Rimanakusun)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="368"/>
+        <location filename="../mainwindow.ui" line="371"/>
         <source>&amp;Close To Tray</source>
         <translation>&amp;Sistema nisqaqpa chumpinman wisq&apos;ay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="371"/>
+        <location filename="../mainwindow.ui" line="374"/>
         <source>Minimizes the window to tray</source>
         <translation>Sistema nisqaqpa chumpinman programata juch&apos;uyyachin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="374"/>
+        <location filename="../mainwindow.ui" line="377"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="383"/>
+        <location filename="../mainwindow.ui" line="386"/>
         <source>&amp;Save Article</source>
         <translation>&amp;Articulo nisqata jallch&apos;ay </translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="386"/>
+        <location filename="../mainwindow.ui" line="389"/>
         <source>Save Article</source>
         <translation>Articulo nisqata jallch&apos;ay </translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="398"/>
+        <location filename="../mainwindow.ui" line="401"/>
         <source>&amp;Print</source>
         <translation>&amp;Raphipi ñit&apos;iy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="401"/>
+        <location filename="../mainwindow.ui" line="404"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="406"/>
+        <location filename="../mainwindow.ui" line="409"/>
         <source>Page Set&amp;up</source>
         <translation>Raphita kamachina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="411"/>
+        <location filename="../mainwindow.ui" line="414"/>
         <source>Print Pre&amp;view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="416"/>
+        <location filename="../mainwindow.ui" line="419"/>
         <source>&amp;Rescan Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="433"/>
+        <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="470"/>
+        <location filename="../mainwindow.ui" line="473"/>
         <source>&amp;Always on Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="473"/>
+        <location filename="../mainwindow.ui" line="476"/>
         <source>Always on Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="476"/>
+        <location filename="../mainwindow.ui" line="479"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="485"/>
         <location filename="../mainwindow.ui" line="488"/>
-        <location filename="../mainwindow.cc" line="183"/>
+        <location filename="../mainwindow.ui" line="491"/>
+        <location filename="../mainwindow.cc" line="181"/>
         <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3140,48 +3137,48 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Hukmanta archiwukunata ñawichay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="419"/>
+        <location filename="../mainwindow.ui" line="422"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="424"/>
+        <location filename="../mainwindow.ui" line="427"/>
         <source>&amp;Clear</source>
         <translation>&amp;Pichay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="502"/>
+        <location filename="../mainwindow.cc" line="486"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="436"/>
+        <location filename="../mainwindow.ui" line="439"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="444"/>
+        <location filename="../mainwindow.ui" line="447"/>
         <source>&amp;Configuration Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="449"/>
-        <location filename="../mainwindow.cc" line="3064"/>
+        <location filename="../mainwindow.ui" line="452"/>
+        <location filename="../mainwindow.cc" line="3030"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="452"/>
+        <location filename="../mainwindow.ui" line="455"/>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="457"/>
+        <location filename="../mainwindow.ui" line="460"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="462"/>
+        <location filename="../mainwindow.ui" line="465"/>
         <source>&amp;Import</source>
         <translation type="unfinished"></translation>
     </message>

@@ -122,145 +122,145 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="162"/>
+        <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="658"/>
+        <location filename="../articleview.cc" line="676"/>
         <source>Resource</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="663"/>
+        <location filename="../articleview.cc" line="681"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="668"/>
+        <location filename="../articleview.cc" line="686"/>
         <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="684"/>
+        <location filename="../articleview.cc" line="702"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="688"/>
+        <location filename="../articleview.cc" line="706"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="876"/>
-        <location filename="../articleview.cc" line="906"/>
-        <location filename="../articleview.cc" line="915"/>
-        <location filename="../articleview.cc" line="1349"/>
+        <location filename="../articleview.cc" line="894"/>
+        <location filename="../articleview.cc" line="924"/>
+        <location filename="../articleview.cc" line="933"/>
         <location filename="../articleview.cc" line="1367"/>
-        <location filename="../articleview.cc" line="1377"/>
+        <location filename="../articleview.cc" line="1385"/>
+        <location filename="../articleview.cc" line="1395"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="876"/>
+        <location filename="../articleview.cc" line="894"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Burimi i referuar nuk ekziston.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="916"/>
+        <location filename="../articleview.cc" line="934"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1073"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Hap Lidhësin</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1061"/>
+        <location filename="../articleview.cc" line="1079"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Hap Lidhësin në Fushën e &amp;Re</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1068"/>
+        <location filename="../articleview.cc" line="1086"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Hap Lidhësin në &amp;Shfletuesin e Jashtëm</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1081"/>
+        <location filename="../articleview.cc" line="1099"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Shikoj &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1089"/>
+        <location filename="../articleview.cc" line="1107"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Shikoj &quot;%1&quot; në Fushën e &amp;Re</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1094"/>
+        <location filename="../articleview.cc" line="1112"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1100"/>
-        <location filename="../articleview.cc" line="1132"/>
+        <location filename="../articleview.cc" line="1118"/>
+        <location filename="../articleview.cc" line="1150"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1114"/>
+        <location filename="../articleview.cc" line="1132"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Shikoj &quot;%1&quot; në %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1122"/>
+        <location filename="../articleview.cc" line="1140"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Shikoj &quot;%1&quot; në %2 në Fushën e &amp;Re</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1293"/>
+        <location filename="../articleview.cc" line="1311"/>
         <source>Playing a non-WAV file</source>
         <translation>Luan një skedë jo-WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1294"/>
+        <location filename="../articleview.cc" line="1312"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Për të aktivizuar leximin e skedave të ndryshme nga WAV, ju lutem shkoni te Editoj|Pëlqime, zgjidhni fushën Audio dhe seleksiononi atje &quot;Luaj via DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1309"/>
+        <location filename="../articleview.cc" line="1327"/>
         <source>Bass library not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1314"/>
+        <location filename="../articleview.cc" line="1332"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1349"/>
+        <location filename="../articleview.cc" line="1367"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Dështon ekzekutimi i lexuesit për skedën zanore: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1367"/>
+        <location filename="../articleview.cc" line="1385"/>
         <source>Failed to create temporary file.</source>
         <translation>Dështon krijimi i skedës kohëshkurtër.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1378"/>
+        <location filename="../articleview.cc" line="1396"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Dështon autohapja e skedës burimore, provoni ta hapni vetë: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1401"/>
+        <location filename="../articleview.cc" line="1419"/>
         <source>The referenced resource failed to download.</source>
         <translation>Dështon shkarkimi i burimit të referuar.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1309"/>
-        <location filename="../articleview.cc" line="1314"/>
-        <location filename="../articleview.cc" line="1401"/>
+        <location filename="../articleview.cc" line="1327"/>
+        <location filename="../articleview.cc" line="1332"/>
+        <location filename="../articleview.cc" line="1419"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">KUJDES: %1</translation>
     </message>
@@ -1860,114 +1860,114 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Lundrimi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="95"/>
+        <location filename="../mainwindow.cc" line="93"/>
         <source>Back</source>
         <translation>Pas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="97"/>
+        <location filename="../mainwindow.cc" line="95"/>
         <source>Forward</source>
         <translation>Para</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="114"/>
+        <location filename="../mainwindow.cc" line="112"/>
         <source>Scan Popup</source>
         <translation>Skanimi i Jashtëm</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="269"/>
+        <location filename="../mainwindow.cc" line="267"/>
         <source>Show &amp;Main Window</source>
         <translation>Tregoj Dritaren &amp;Kryesore</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="352"/>
-        <location filename="../mainwindow.cc" line="273"/>
+        <location filename="../mainwindow.ui" line="355"/>
+        <location filename="../mainwindow.cc" line="271"/>
         <source>&amp;Quit</source>
         <translation>&amp;Dal</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="492"/>
+        <location filename="../mainwindow.cc" line="476"/>
         <source>Loading...</source>
         <translation>Hap...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2601"/>
+        <location filename="../mainwindow.cc" line="2567"/>
         <source>Skip This Release</source>
         <translation>Kapërcej Këtë Lëshimin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2714"/>
+        <location filename="../mainwindow.cc" line="2680"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2715"/>
+        <location filename="../mainwindow.cc" line="2681"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2813"/>
+        <location filename="../mainwindow.cc" line="2779"/>
         <source>Page Setup</source>
         <translation>Sistemimi i Faqes</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2814"/>
+        <location filename="../mainwindow.cc" line="2780"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Nuk mundëson asnjë printer. Ju lutem instalojeni një.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2831"/>
+        <location filename="../mainwindow.cc" line="2797"/>
         <source>Print Article</source>
         <translation>Shtyp Artikullin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2852"/>
+        <location filename="../mainwindow.cc" line="2818"/>
         <source>Save Article As</source>
         <translation>Ruaj Artikullin Si</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2852"/>
+        <location filename="../mainwindow.cc" line="2818"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Skeda Html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2867"/>
+        <location filename="../mainwindow.cc" line="2833"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2868"/>
+        <location filename="../mainwindow.cc" line="2834"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Nuk ruan artikullin: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1015"/>
+        <location filename="../mainwindow.cc" line="999"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 fjalorë, %2 artikuj, %3 fjalë</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2460"/>
+        <location filename="../mainwindow.cc" line="2426"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Dështon nisja e mekanizmit monitorues të tasteve kryesore.&lt;br&gt;Sigurohuni që XServer e ka të ndezur zgjatimin RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2594"/>
+        <location filename="../mainwindow.cc" line="2560"/>
         <source>New Release Available</source>
         <translation>Ka Dalë Version i Ri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2595"/>
+        <location filename="../mainwindow.cc" line="2561"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Versioni &lt;b&gt;%1&lt;/b&gt; për GoldenDict është gati për t&apos;u shkarkuar.&lt;br&gt;Klikoni &lt;b&gt;Shkarkoj&lt;/b&gt;, që të shkoni te faqja e shkarkimit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2600"/>
+        <location filename="../mainwindow.cc" line="2566"/>
         <source>Download</source>
         <translation>Shkarkoj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="191"/>
-        <location filename="../mainwindow.cc" line="1026"/>
+        <location filename="../mainwindow.cc" line="189"/>
+        <location filename="../mainwindow.cc" line="1010"/>
         <source>Look up in:</source>
         <translation>Shikoj në:</translation>
     </message>
@@ -1976,186 +1976,186 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Tregoj Emrat në Brezin e Fjalorit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="64"/>
+        <location filename="../mainwindow.cc" line="62"/>
         <source>&amp;Menubar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="225"/>
+        <location filename="../mainwindow.cc" line="223"/>
         <source>Found in Dictionaries:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="129"/>
+        <location filename="../mainwindow.cc" line="127"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Shqiptoj Fjalën (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="62"/>
+        <location filename="../mainwindow.cc" line="60"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="63"/>
+        <location filename="../mainwindow.cc" line="61"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="92"/>
+        <location filename="../mainwindow.cc" line="90"/>
         <source>&amp;Navigation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="141"/>
+        <location filename="../mainwindow.cc" line="139"/>
         <source>Zoom In</source>
         <translation>Zmadhoj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="147"/>
+        <location filename="../mainwindow.cc" line="145"/>
         <source>Zoom Out</source>
         <translation>Zvogëloj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="151"/>
+        <location filename="../mainwindow.cc" line="149"/>
         <source>Normal Size</source>
         <translation>Masa Normale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="255"/>
+        <location filename="../mainwindow.cc" line="253"/>
         <source>Words Zoom In</source>
         <translation>Zmadhoj Fjalët</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="259"/>
+        <location filename="../mainwindow.cc" line="257"/>
         <source>Words Zoom Out</source>
         <translation>Zvogëloj Fjalët</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="261"/>
+        <location filename="../mainwindow.cc" line="259"/>
         <source>Words Normal Size</source>
         <translation>Fjalët në Masën Normale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="331"/>
+        <location filename="../mainwindow.cc" line="315"/>
         <source>Close current tab</source>
         <translation>Mbyll fushën</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="341"/>
+        <location filename="../mainwindow.cc" line="325"/>
         <source>Close all tabs</source>
         <translation>Mbyll tërë fushat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="349"/>
+        <location filename="../mainwindow.cc" line="333"/>
         <source>Close all tabs except current</source>
         <translation>Mbyll tërë fushat veç kësaj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1026"/>
+        <location filename="../mainwindow.cc" line="1010"/>
         <source>Look up:</source>
         <translation>Shikoj:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1044"/>
+        <location filename="../mainwindow.cc" line="1028"/>
         <source>All</source>
         <translation>Gjithçka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2900"/>
+        <location filename="../mainwindow.cc" line="2866"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3148"/>
+        <location filename="../mainwindow.cc" line="3114"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3197"/>
+        <location filename="../mainwindow.cc" line="3163"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3201"/>
+        <location filename="../mainwindow.cc" line="3167"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3204"/>
+        <location filename="../mainwindow.cc" line="3170"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3312"/>
+        <location filename="../mainwindow.cc" line="3278"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3313"/>
+        <location filename="../mainwindow.cc" line="3279"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="320"/>
+        <location filename="../mainwindow.cc" line="304"/>
         <source>Opened tabs</source>
         <translation>Fushat e hapura</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1184"/>
+        <location filename="../mainwindow.cc" line="1168"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1242"/>
+        <location filename="../mainwindow.cc" line="1226"/>
         <source>(untitled)</source>
         <translation>(pa titull)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1448"/>
+        <location filename="../mainwindow.cc" line="1432"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1966"/>
+        <location filename="../mainwindow.cc" line="1932"/>
         <source>WARNING: %1</source>
         <translation>KUJDES: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3060"/>
+        <location filename="../mainwindow.cc" line="3026"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3086"/>
+        <location filename="../mainwindow.cc" line="3052"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3088"/>
-        <location filename="../mainwindow.cc" line="3150"/>
+        <location filename="../mainwindow.cc" line="3054"/>
+        <location filename="../mainwindow.cc" line="3116"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3127"/>
+        <location filename="../mainwindow.cc" line="3093"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3130"/>
+        <location filename="../mainwindow.cc" line="3096"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1448"/>
-        <location filename="../mainwindow.cc" line="2459"/>
+        <location filename="../mainwindow.cc" line="1432"/>
+        <location filename="../mainwindow.cc" line="2425"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="644"/>
+        <location filename="../mainwindow.cc" line="628"/>
         <source>Welcome!</source>
         <translation>Mirë se erdhët!</translation>
     </message>
@@ -2175,17 +2175,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Ndihmë</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="319"/>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="328"/>
+        <location filename="../mainwindow.ui" line="331"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Pëlqime...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="389"/>
+        <location filename="../mainwindow.ui" line="392"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
@@ -2209,12 +2204,14 @@ between classic and school orthography in cyrillic)</source>
         <translation>H&amp;istoriku</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="obsolete">&amp;Fjalorët...</translation>
+        <translation type="unfinished">&amp;Fjalorët...</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="obsolete">F3</translation>
+        <translation type="unfinished">F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
@@ -2232,119 +2229,119 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="331"/>
+        <location filename="../mainwindow.ui" line="334"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="336"/>
+        <location filename="../mainwindow.ui" line="339"/>
         <source>&amp;Homepage</source>
         <translation>&amp;Faqja e Shtëpisë</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../mainwindow.ui" line="344"/>
         <source>&amp;About</source>
         <translation>&amp;Për</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="344"/>
+        <location filename="../mainwindow.ui" line="347"/>
         <source>About GoldenDict</source>
         <translation>Për GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="347"/>
+        <location filename="../mainwindow.ui" line="350"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="355"/>
+        <location filename="../mainwindow.ui" line="358"/>
         <source>Quit from application</source>
         <translation>Dal nga aplikimi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="358"/>
+        <location filename="../mainwindow.ui" line="361"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="363"/>
+        <location filename="../mainwindow.ui" line="366"/>
         <source>&amp;Forum</source>
         <translation>&amp;Forumi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="368"/>
+        <location filename="../mainwindow.ui" line="371"/>
         <source>&amp;Close To Tray</source>
         <translation>&amp;Mbyll Në Shirit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="371"/>
+        <location filename="../mainwindow.ui" line="374"/>
         <source>Minimizes the window to tray</source>
         <translation>Minimizon dritaren në shiritin e sistemit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="374"/>
+        <location filename="../mainwindow.ui" line="377"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="383"/>
+        <location filename="../mainwindow.ui" line="386"/>
         <source>&amp;Save Article</source>
         <translation>&amp;Ruaj Artikullin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="386"/>
+        <location filename="../mainwindow.ui" line="389"/>
         <source>Save Article</source>
         <translation>Ruaj Artikullin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="398"/>
+        <location filename="../mainwindow.ui" line="401"/>
         <source>&amp;Print</source>
         <translation>&amp;Shtyp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="401"/>
+        <location filename="../mainwindow.ui" line="404"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="406"/>
+        <location filename="../mainwindow.ui" line="409"/>
         <source>Page Set&amp;up</source>
         <translation>Sistem&amp;oj Faqen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="411"/>
+        <location filename="../mainwindow.ui" line="414"/>
         <source>Print Pre&amp;view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="416"/>
+        <location filename="../mainwindow.ui" line="419"/>
         <source>&amp;Rescan Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="433"/>
+        <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="470"/>
+        <location filename="../mainwindow.ui" line="473"/>
         <source>&amp;Always on Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="473"/>
+        <location filename="../mainwindow.ui" line="476"/>
         <source>Always on Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="476"/>
+        <location filename="../mainwindow.ui" line="479"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="485"/>
         <location filename="../mainwindow.ui" line="488"/>
-        <location filename="../mainwindow.cc" line="183"/>
+        <location filename="../mainwindow.ui" line="491"/>
+        <location filename="../mainwindow.cc" line="181"/>
         <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2357,48 +2354,48 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Riskanoj Skedat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="419"/>
+        <location filename="../mainwindow.ui" line="422"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="424"/>
+        <location filename="../mainwindow.ui" line="427"/>
         <source>&amp;Clear</source>
         <translation>&amp;Pastroj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="502"/>
+        <location filename="../mainwindow.cc" line="486"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="436"/>
+        <location filename="../mainwindow.ui" line="439"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="444"/>
+        <location filename="../mainwindow.ui" line="447"/>
         <source>&amp;Configuration Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="449"/>
-        <location filename="../mainwindow.cc" line="3064"/>
+        <location filename="../mainwindow.ui" line="452"/>
+        <location filename="../mainwindow.cc" line="3030"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="452"/>
+        <location filename="../mainwindow.ui" line="455"/>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="457"/>
+        <location filename="../mainwindow.ui" line="460"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="462"/>
+        <location filename="../mainwindow.ui" line="465"/>
         <source>&amp;Import</source>
         <translation type="unfinished"></translation>
     </message>

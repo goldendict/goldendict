@@ -1852,10 +1852,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>Göndermede hata: </translation>
     </message>
     <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1942,6 +1938,14 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>&amp;History Pane</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Dictionaries...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F3</source>
+        <translation type="unfinished">F3</translation>
     </message>
 </context>
 <context>

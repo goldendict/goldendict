@@ -1646,11 +1646,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation type="obsolete">&amp;Речници...</translation>
+        <translation type="unfinished">&amp;Речници...</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="obsolete">F3</translation>
+        <translation type="unfinished">F3</translation>
     </message>
     <message>
         <source>F4</source>
@@ -1779,10 +1779,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Opened tabs</source>
         <translation>Отворени подпрозорци</translation>
-    </message>
-    <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New Tab</source>

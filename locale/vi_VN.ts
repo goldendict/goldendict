@@ -1526,11 +1526,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation type="obsolete">&amp;Từ điển...</translation>
+        <translation type="unfinished">&amp;Từ điển...</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="obsolete">F3</translation>
+        <translation type="unfinished">F3</translation>
     </message>
     <message>
         <source>&amp;Groups...</source>
@@ -1775,10 +1775,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Opened tabs</source>
         <translation>Các thẻ đã mở</translation>
-    </message>
-    <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New Tab</source>
