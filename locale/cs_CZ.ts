@@ -349,6 +349,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unassigned</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictInfo</name>

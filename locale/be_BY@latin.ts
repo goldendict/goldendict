@@ -400,6 +400,11 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>Ci peŭna chočacie zgieneravać zbor grupaŭ na padstavie moŭnych par?</translation>
     </message>
     <message>
+        <location filename="../groups_widgets.cc" line="716"/>
+        <source>Unassigned</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation>Sabrać grupu „%1-&gt;“ pavodle zychodnaj movy</translation>
@@ -1845,14 +1850,14 @@ miž klasyčnym i školnym pravapisam)</translation>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1426"/>
-        <location filename="../mainwindow.cc" line="2437"/>
+        <location filename="../mainwindow.cc" line="1448"/>
+        <location filename="../mainwindow.cc" line="2459"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="640"/>
+        <location filename="../mainwindow.cc" line="644"/>
         <source>Welcome!</source>
         <translation>Vitajem!</translation>
     </message>
@@ -1938,7 +1943,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="352"/>
-        <location filename="../mainwindow.cc" line="269"/>
+        <location filename="../mainwindow.cc" line="273"/>
         <source>&amp;Quit</source>
         <translation>&amp;Vyjści</translation>
     </message>
@@ -2039,7 +2044,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="449"/>
-        <location filename="../mainwindow.cc" line="3042"/>
+        <location filename="../mainwindow.cc" line="3064"/>
         <source>&amp;Show</source>
         <translation>&amp;Pakazać</translation>
     </message>
@@ -2076,7 +2081,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="485"/>
         <location filename="../mainwindow.ui" line="488"/>
-        <location filename="../mainwindow.cc" line="181"/>
+        <location filename="../mainwindow.cc" line="183"/>
         <source>Menu Button</source>
         <translation>Knopka meniu</translation>
     </message>
@@ -2126,188 +2131,188 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation type="unfinished">Pavialičyć</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="145"/>
+        <location filename="../mainwindow.cc" line="147"/>
         <source>Zoom Out</source>
         <translation type="unfinished">Pamienšyć</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="149"/>
+        <location filename="../mainwindow.cc" line="151"/>
         <source>Normal Size</source>
         <translation>Zvyčajny pamier</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="189"/>
-        <location filename="../mainwindow.cc" line="1004"/>
+        <location filename="../mainwindow.cc" line="191"/>
+        <location filename="../mainwindow.cc" line="1026"/>
         <source>Look up in:</source>
         <translation>Šukać u:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="223"/>
+        <location filename="../mainwindow.cc" line="225"/>
         <source>Found in Dictionaries:</source>
         <translation>Znojdziena ŭ nastupnych słoŭnikach:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="253"/>
+        <location filename="../mainwindow.cc" line="255"/>
         <source>Words Zoom In</source>
         <translation type="unfinished">Pavialičyć radok šukańnia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="255"/>
+        <location filename="../mainwindow.cc" line="259"/>
         <source>Words Zoom Out</source>
         <translation type="unfinished">Pamienšyć radok šukańnia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="257"/>
+        <location filename="../mainwindow.cc" line="261"/>
         <source>Words Normal Size</source>
         <translation type="unfinished">Zvyčajny pamier radka šukańnia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="265"/>
+        <location filename="../mainwindow.cc" line="269"/>
         <source>Show &amp;Main Window</source>
         <translation>Pakazać &amp;hałoŭnaje akno</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="316"/>
+        <location filename="../mainwindow.cc" line="320"/>
         <source>Opened tabs</source>
         <translation>Adčynienyja ŭkładki</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="327"/>
+        <location filename="../mainwindow.cc" line="331"/>
         <source>Close current tab</source>
         <translation>Začynić dziejnuju ŭkładku</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="337"/>
+        <location filename="../mainwindow.cc" line="341"/>
         <source>Close all tabs</source>
         <translation>Začynić usie ŭkładki</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="345"/>
+        <location filename="../mainwindow.cc" line="349"/>
         <source>Close all tabs except current</source>
         <translation>Začynić usie ŭkładki aproč dziejnaj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="488"/>
+        <location filename="../mainwindow.cc" line="492"/>
         <source>Loading...</source>
         <translation>Ładavańnie...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="498"/>
+        <location filename="../mainwindow.cc" line="502"/>
         <source>New Tab</source>
         <translation>Novaja ŭkładka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="993"/>
+        <location filename="../mainwindow.cc" line="1015"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 słoŭnikaŭ, %2 artykułaŭ, %3 słovaŭ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1004"/>
+        <location filename="../mainwindow.cc" line="1026"/>
         <source>Look up:</source>
         <translation>Šukać:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1022"/>
+        <location filename="../mainwindow.cc" line="1044"/>
         <source>All</source>
         <translation>Usie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1162"/>
+        <location filename="../mainwindow.cc" line="1184"/>
         <source>Open Tabs List</source>
         <translation>Adčynić śpis układak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1220"/>
+        <location filename="../mainwindow.cc" line="1242"/>
         <source>(untitled)</source>
         <translation>(biaz nazvy)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1426"/>
+        <location filename="../mainwindow.cc" line="1448"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1944"/>
+        <location filename="../mainwindow.cc" line="1966"/>
         <source>WARNING: %1</source>
         <translation>UVAHA: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2438"/>
+        <location filename="../mainwindow.cc" line="2460"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Pamyłka inicyjalizacyi sačeńnia za klavišnymi skarotami.&lt;br&gt;Pierakanajciesia, što vaš XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2572"/>
+        <location filename="../mainwindow.cc" line="2594"/>
         <source>New Release Available</source>
         <translation>Dastuny novy vypusk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2573"/>
+        <location filename="../mainwindow.cc" line="2595"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict versii &lt;b&gt;%1&lt;/b&gt; dastupny dla zładavańnia.&lt;br&gt;Pstrykni pa &lt;b&gt;Zładavać&lt;/b&gt;, kab pierajści na bačynu zładavańnia.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2578"/>
+        <location filename="../mainwindow.cc" line="2600"/>
         <source>Download</source>
         <translation>Zładavać</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2579"/>
+        <location filename="../mainwindow.cc" line="2601"/>
         <source>Skip This Release</source>
         <translation>Praminuć hety vypusk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2692"/>
+        <location filename="../mainwindow.cc" line="2714"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Vy schavali palicu meniu. Skarystacie %1, kab pavaracić jaje nazad.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2693"/>
+        <location filename="../mainwindow.cc" line="2715"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2791"/>
+        <location filename="../mainwindow.cc" line="2813"/>
         <source>Page Setup</source>
         <translation>Nałady bačyny</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2792"/>
+        <location filename="../mainwindow.cc" line="2814"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Niama dasiažnych drukarak. Spačatku ŭstalujcie choć adnu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2809"/>
+        <location filename="../mainwindow.cc" line="2831"/>
         <source>Print Article</source>
         <translation>Nadrukavać artykuł</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2830"/>
+        <location filename="../mainwindow.cc" line="2852"/>
         <source>Save Article As</source>
         <translation>Zachavać artykuł jak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2830"/>
+        <location filename="../mainwindow.cc" line="2852"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Fajły HTML(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2845"/>
+        <location filename="../mainwindow.cc" line="2867"/>
         <source>Error</source>
         <translation>Pamyłka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2846"/>
+        <location filename="../mainwindow.cc" line="2868"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Niemažliva zachavać artykuł: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2878"/>
+        <location filename="../mainwindow.cc" line="2900"/>
         <source>The main window is set to be always on top.</source>
         <translation>Hałoŭnaje akno ciapier zaŭsiody znachodzicca vyšej inšych.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3038"/>
+        <location filename="../mainwindow.cc" line="3060"/>
         <source>&amp;Hide</source>
         <translation>S&amp;chavać</translation>
     </message>
@@ -2316,28 +2321,28 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation type="obsolete">Režym prahladu historyi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3064"/>
+        <location filename="../mainwindow.cc" line="3086"/>
         <source>Export history to file</source>
         <translation>Ekspartavańnie historyi ŭ fajł</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3066"/>
-        <location filename="../mainwindow.cc" line="3128"/>
+        <location filename="../mainwindow.cc" line="3088"/>
+        <location filename="../mainwindow.cc" line="3150"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Tekstavyja fajły (*.txt);;Usie fajły (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3105"/>
+        <location filename="../mainwindow.cc" line="3127"/>
         <source>History export complete</source>
         <translation>Ekspartavańnie historyi skončyłasia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3108"/>
+        <location filename="../mainwindow.cc" line="3130"/>
         <source>Export error: </source>
         <translation>Pamyłka ekspartu: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3126"/>
+        <location filename="../mainwindow.cc" line="3148"/>
         <source>Import history from file</source>
         <translation>Impartavańnie historyi z fajła</translation>
     </message>
@@ -2346,27 +2351,27 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation type="obsolete">Zympartavanaje z fajła: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3175"/>
+        <location filename="../mainwindow.cc" line="3197"/>
         <source>Import error: invalid data in file</source>
         <translation>Pamyłka impartavańnia: niasłušnyja źviestki ŭ fajle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3179"/>
+        <location filename="../mainwindow.cc" line="3201"/>
         <source>History import complete</source>
         <translation>Impartavańnie historyja skončyłasia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3182"/>
+        <location filename="../mainwindow.cc" line="3204"/>
         <source>Import error: </source>
         <translation>Pamyłka impartavańnia: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3290"/>
+        <location filename="../mainwindow.cc" line="3312"/>
         <source>Dictionary info</source>
         <translation>Infarmacyja pra słoŭnik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3291"/>
+        <location filename="../mainwindow.cc" line="3313"/>
         <source>Edit dictionary</source>
         <translation>Redahavać słoŭnik</translation>
     </message>

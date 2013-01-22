@@ -402,6 +402,11 @@ between classic and school orthography in cyrillic)</source>
         <translation>Möchten Sie wirklich eine Reihe von Gruppen basierend auf den Sprachpaaren erstellen?</translation>
     </message>
     <message>
+        <location filename="../groups_widgets.cc" line="716"/>
+        <source>Unassigned</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation type="unfinished"></translation>
@@ -1859,13 +1864,13 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="189"/>
-        <location filename="../mainwindow.cc" line="1004"/>
+        <location filename="../mainwindow.cc" line="191"/>
+        <location filename="../mainwindow.cc" line="1026"/>
         <source>Look up in:</source>
         <translation>Suche in:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="223"/>
+        <location filename="../mainwindow.cc" line="225"/>
         <source>Found in Dictionaries:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1899,145 +1904,145 @@ between classic and school orthography in cyrillic)</source>
         <translation>Vergrößern</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="145"/>
+        <location filename="../mainwindow.cc" line="147"/>
         <source>Zoom Out</source>
         <translation>Verkleinern</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="149"/>
+        <location filename="../mainwindow.cc" line="151"/>
         <source>Normal Size</source>
         <translation>Normale Größe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="253"/>
+        <location filename="../mainwindow.cc" line="255"/>
         <source>Words Zoom In</source>
         <translation>Suchwörter vergrößern</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="255"/>
+        <location filename="../mainwindow.cc" line="259"/>
         <source>Words Zoom Out</source>
         <translation>Suchwörter verkleinern</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="257"/>
+        <location filename="../mainwindow.cc" line="261"/>
         <source>Words Normal Size</source>
         <translation>Suchwörter in normaler Größe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="265"/>
+        <location filename="../mainwindow.cc" line="269"/>
         <source>Show &amp;Main Window</source>
         <translation>Im &amp;Hauptfenster zeigen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="327"/>
+        <location filename="../mainwindow.cc" line="331"/>
         <source>Close current tab</source>
         <translation>Aktuellen Reiter schließen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="337"/>
+        <location filename="../mainwindow.cc" line="341"/>
         <source>Close all tabs</source>
         <translation>Alle Reiter schließen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="345"/>
+        <location filename="../mainwindow.cc" line="349"/>
         <source>Close all tabs except current</source>
         <translation>Alle anderen Reiter schließen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2878"/>
+        <location filename="../mainwindow.cc" line="2900"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3038"/>
+        <location filename="../mainwindow.cc" line="3060"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3064"/>
+        <location filename="../mainwindow.cc" line="3086"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3066"/>
-        <location filename="../mainwindow.cc" line="3128"/>
+        <location filename="../mainwindow.cc" line="3088"/>
+        <location filename="../mainwindow.cc" line="3150"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3105"/>
+        <location filename="../mainwindow.cc" line="3127"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3108"/>
+        <location filename="../mainwindow.cc" line="3130"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3126"/>
+        <location filename="../mainwindow.cc" line="3148"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3175"/>
+        <location filename="../mainwindow.cc" line="3197"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3179"/>
+        <location filename="../mainwindow.cc" line="3201"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3182"/>
+        <location filename="../mainwindow.cc" line="3204"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3290"/>
+        <location filename="../mainwindow.cc" line="3312"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3291"/>
+        <location filename="../mainwindow.cc" line="3313"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="352"/>
-        <location filename="../mainwindow.cc" line="269"/>
+        <location filename="../mainwindow.cc" line="273"/>
         <source>&amp;Quit</source>
         <translation>B&amp;eenden</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="488"/>
+        <location filename="../mainwindow.cc" line="492"/>
         <source>Loading...</source>
         <translation>Lade...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="640"/>
+        <location filename="../mainwindow.cc" line="644"/>
         <source>Welcome!</source>
         <translation>Willkommen!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="993"/>
+        <location filename="../mainwindow.cc" line="1015"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 Wörterbücher, %2 Artikel, %3 Wörter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1004"/>
+        <location filename="../mainwindow.cc" line="1026"/>
         <source>Look up:</source>
         <translation>Nachschlagen:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1022"/>
+        <location filename="../mainwindow.cc" line="1044"/>
         <source>All</source>
         <translation>Alle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="316"/>
+        <location filename="../mainwindow.cc" line="320"/>
         <source>Opened tabs</source>
         <translation>Offene Reiter</translation>
     </message>
@@ -2057,99 +2062,99 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1162"/>
+        <location filename="../mainwindow.cc" line="1184"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1220"/>
+        <location filename="../mainwindow.cc" line="1242"/>
         <source>(untitled)</source>
         <translation>(unbenannt)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1426"/>
+        <location filename="../mainwindow.cc" line="1448"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1944"/>
+        <location filename="../mainwindow.cc" line="1966"/>
         <source>WARNING: %1</source>
         <translation>WARNUNG: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="1426"/>
-        <location filename="../mainwindow.cc" line="2437"/>
+        <location filename="../mainwindow.cc" line="1448"/>
+        <location filename="../mainwindow.cc" line="2459"/>
         <source>GoldenDict</source>
         <translation>GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2438"/>
+        <location filename="../mainwindow.cc" line="2460"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Der Mechanismus für die Tastenkürzel konnte nicht initialisiert werden.&lt;br&gt;Vergewissern Sie sich, dass der XServer die RECORD Erweiterung aktiviert hat.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2572"/>
+        <location filename="../mainwindow.cc" line="2594"/>
         <source>New Release Available</source>
         <translation>Neue Version verfügbar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2573"/>
+        <location filename="../mainwindow.cc" line="2595"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Version &lt;b&gt;%1&lt;/b&gt; von GoldenDict ist nun zum Herunterladen verfügbar.&lt;br&gt;Klicken Sie auf &lt;b&gt;Herunterladen&lt;/b&gt;, um zur Seite fürs Herunterladen zu gelangen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2578"/>
+        <location filename="../mainwindow.cc" line="2600"/>
         <source>Download</source>
         <translation>Herunterladen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2579"/>
+        <location filename="../mainwindow.cc" line="2601"/>
         <source>Skip This Release</source>
         <translation>Diese Version überspringen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2692"/>
+        <location filename="../mainwindow.cc" line="2714"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2693"/>
+        <location filename="../mainwindow.cc" line="2715"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2791"/>
+        <location filename="../mainwindow.cc" line="2813"/>
         <source>Page Setup</source>
         <translation>Seite einrichten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2792"/>
+        <location filename="../mainwindow.cc" line="2814"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Es ist kein Drucker vorhanden. Bitte zuerst einen installieren.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2809"/>
+        <location filename="../mainwindow.cc" line="2831"/>
         <source>Print Article</source>
         <translation>Drucke Artikel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2830"/>
+        <location filename="../mainwindow.cc" line="2852"/>
         <source>Save Article As</source>
         <translation>Artikel speichern als</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2830"/>
+        <location filename="../mainwindow.cc" line="2852"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html Dateien (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2845"/>
+        <location filename="../mainwindow.cc" line="2867"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2846"/>
+        <location filename="../mainwindow.cc" line="2868"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Kann Artikel nicht speichern: %1</translation>
     </message>
@@ -2342,7 +2347,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="485"/>
         <location filename="../mainwindow.ui" line="488"/>
-        <location filename="../mainwindow.cc" line="181"/>
+        <location filename="../mainwindow.cc" line="183"/>
         <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2365,7 +2370,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="498"/>
+        <location filename="../mainwindow.cc" line="502"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2381,7 +2386,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="449"/>
-        <location filename="../mainwindow.cc" line="3042"/>
+        <location filename="../mainwindow.cc" line="3064"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
