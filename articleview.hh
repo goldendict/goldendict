@@ -28,8 +28,7 @@ class ArticleView: public QFrame
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,
-          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction,
-          shiftF3Action;
+          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction;
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
@@ -214,7 +213,11 @@ public slots:
 
   void on_searchPrevious_clicked();
   void on_searchNext_clicked();
+
   void onJsActiveArticleChanged(QString const & id);
+
+  /// Handles F3 and Shift+F3 for search navigation
+  bool handleF3( QObject * obj, QEvent * ev );
 
   /// Control optional parts expanding
   void receiveExpandOptionalParts( bool expand );

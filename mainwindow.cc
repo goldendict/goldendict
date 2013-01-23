@@ -1965,14 +1965,22 @@ bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
 
-  // Handle Ctrl+H to show the History Pane.
-  if ( ev->type() == QEvent::ShortcutOverride) {
+  if ( ev->type() == QEvent::ShortcutOverride ) {
+    // Handle Ctrl+H to show the History Pane.
     QKeyEvent * ke = static_cast<QKeyEvent*>( ev );
     if ( ke->key() == Qt::Key_H && ke->modifiers() == Qt::ControlModifier )
     {
       on_showHideHistory_triggered();
       ev->accept();
       return true;
+    }
+
+    // Handle F3/Shift+F3 shortcuts
+    if ( ke->key() == Qt::Key_F3 )
+    {
+      ArticleView  * view = getCurrentArticleView();
+      if ( view  && view->handleF3( obj, ev ) )
+        return true;
     }
   }
 

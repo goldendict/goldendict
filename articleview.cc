@@ -88,7 +88,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   goForwardAction( this ),
   openSearchAction( this ),
   selectCurrentArticleAction( this ),
-  shiftF3Action( this ),
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ )
@@ -164,12 +163,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &selectCurrentArticleAction );
   connect( &selectCurrentArticleAction, SIGNAL( triggered() ),
            this, SLOT( selectCurrentArticle() ) );
-
-  shiftF3Action.setShortcutContext( Qt::WidgetWithChildrenShortcut );
-  shiftF3Action.setShortcut( QKeySequence( "Shift+F3" ) );
-  connect( &shiftF3Action, SIGNAL( triggered() ),
-           this, SLOT( on_searchPrevious_clicked() ) );
-  addAction( &shiftF3Action );
 
   ui.definition->installEventFilter( this );
   ui.searchFrame->installEventFilter( this );
@@ -573,16 +566,36 @@ void ArticleView::cleanupTemp()
   }
 }
 
+bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
+{
+  if ( ev->type() == QEvent::ShortcutOverride ) {
+    QKeyEvent * ke = static_cast<QKeyEvent *>( ev );
+    if ( ke->key() == Qt::Key_F3 && isSearchOpened() ) {
+      if ( !ke->modifiers() )
+      {
+        on_searchNext_clicked();
+        ev->accept();
+        return true;
+      }
+
+      if ( ke->modifiers() == Qt::ShiftModifier )
+      {
+        on_searchPrevious_clicked();
+        ev->accept();
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
 
-  if ( ev->type() == QEvent::ShortcutOverride ) {
-    QKeyEvent *ke = static_cast<QKeyEvent *>( ev );
-    if ( ke->key() == Qt::Key_F3 && !ke->modifiers() && isSearchOpened() ) {
-      on_searchNext_clicked();
-      ev->accept();
-      return true;
-    }
+  if ( handleF3( obj, ev ) )
+  {
+    return true;
   }
 
   if ( obj == ui.definition )
