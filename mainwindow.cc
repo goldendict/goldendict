@@ -74,6 +74,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   wordFinder( this ),
   newReleaseCheckTimer( this ),
   wordListSelChanged( false )
+, wasMaximized( false )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -681,6 +682,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   doDeferredInit( dictionaries );
 
   updateStatusLine();
+
+  wasMaximized = isMaximized();
 
   #ifdef Q_OS_MAC
     LionSupport::addFullscreen(this);
@@ -2000,6 +2003,12 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     }
   }
 
+  if ( obj == this && ev->type() == QEvent::WindowStateChange )
+  {
+    QWindowStateChangeEvent *stev = static_cast< QWindowStateChangeEvent *>( ev );
+    wasMaximized = ( stev->oldState() == Qt::WindowMaximized && isMinimized() );
+  }
+
   if ( ev->type() == QEvent::MouseButtonPress ) {
     QMouseEvent * event = static_cast< QMouseEvent * >( ev );
 
@@ -2389,7 +2398,10 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   else
   if ( isMinimized() )
   {
-    showNormal();
+    if( wasMaximized )
+      showMaximized();
+    else
+      showNormal();
     activateWindow();
     raise();
     shown = true;
