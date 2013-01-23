@@ -173,7 +173,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   buttonMenu->addMenu( ui.menuView );
   buttonMenu->addMenu( ui.menu_Help );
 
-  QToolButton * menuButton = new QToolButton( navToolbar );
+  menuButton = new QToolButton( navToolbar );
   menuButton->setPopupMode( QToolButton::InstantPopup );
   menuButton->setMenu( buttonMenu );
   menuButton->setIcon( QIcon (":/icons/menu_button.png") );
@@ -2662,6 +2662,9 @@ void MainWindow::useSmallIconsInToolbarsTriggered()
                                QApplication::style()->pixelMetric(QStyle::PM_ToolBarIconSize);
 
   navToolbar->setIconSize( QSize( extent, extent ) );
+
+  // additional fix for #176
+  menuButton->setIconSize( QSize( extent, extent ) );
 
   updateDictionaryBar();
 

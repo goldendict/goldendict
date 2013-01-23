@@ -113,6 +113,7 @@ private:
   QMenu trayIconMenu;
   QMenu * tabMenu;
   QAction * menuButtonAction;
+  QToolButton * menuButton;
   MRUQMenu *tabListMenu;
   //List that contains indexes of tabs arranged in a most-recently-used order
   QList<QWidget*> mruList;
