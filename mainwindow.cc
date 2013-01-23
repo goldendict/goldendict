@@ -698,6 +698,8 @@ void MainWindow::ctrlTabPressed()
 
 void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 {
+  QString text = translateLine->text();
+
   if ( searchInDock )
   {
     cfg.preferences.searchInDock = true;
@@ -746,6 +748,10 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 
   updateGroupList();
   applyWordsZoomLevel();
+  translateBox->setPopupEnabled( false );
+  translateLine->setText( text );
+  translateBox->setPopupEnabled( true );
+  focusTranslateLine();
 }
 
 void MainWindow::mousePressEvent( QMouseEvent *event)
