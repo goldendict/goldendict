@@ -4,13 +4,14 @@
 #ifndef TRANSLATEBOX_HH
 #define TRANSLATEBOX_HH
 
-#include <extlineedit.hh>
+#include "extlineedit.hh"
+#include "wordlist.hh"
 
 #include <QWidget>
 #include <QListWidget>
 #include <QFocusEvent>
 
-class CompletionList : public QListWidget
+class CompletionList : public WordList
 {
   Q_OBJECT
 
@@ -27,6 +28,9 @@ public:
 
 public slots:
   bool acceptCurrentEntry();
+
+private:
+  virtual bool eventFilter( QObject *, QEvent * );
 };
 
 class TranslateBox : public QWidget
@@ -37,7 +41,9 @@ public:
   explicit TranslateBox(QWidget * parent = 0);
   void setPlaceholderText(const QString &text);
   QLineEdit * translateLine();
-  QListWidget * wordList();
+  WordList * wordList();
+  void setText(QString text, bool showPopup=true)
+  { setPopupEnabled( showPopup ); translate_line->setText( text ); setPopupEnabled( true ); }
 
 signals:
 

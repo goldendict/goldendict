@@ -102,7 +102,7 @@ private:
   History & history;
   Ui::ScanPopup ui;
   ArticleView * definition;
-  QAction escapeAction, switchExpandModeAction;
+  QAction escapeAction, switchExpandModeAction, focusTranslateLineAction;
   QString pendingInputWord, inputWord;
   WordFinder wordFinder;
   Config::Events configEvents;
@@ -145,13 +145,14 @@ private:
 
   void updateBackForwardButtons();
 
+  void showTranslationFor( QString const & inputWord );
+
 private slots:
 
   void clipboardChanged( QClipboard::Mode );
   void mouseHovered( QString const & , bool forcePopup);
   void currentGroupChanged( QString const & );
   void prefixMatchFinished();
-  void on_wordListButton_clicked();
   void on_pronounceButton_clicked();
   void pinButtonClicked( bool checked );
   void on_showDictionaryBar_clicked( bool checked );
@@ -177,6 +178,14 @@ private slots:
   void mutedDictionariesChanged();
 
   void switchExpandOptionalPartsMode();
+
+  void translateInputChanged(QString const & text);
+  void translateInputFinished();
+  void wordListItemActivated( QListWidgetItem * );
+
+  void focusTranslateLine();
+
+  void typingEvent( QString const & );
 };
 
 #endif

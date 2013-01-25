@@ -25,6 +25,7 @@
 #include "mainstatusbar.hh"
 #include "mruqmenu.hh"
 #include "translatebox.hh"
+#include "wordlist.hh"
 
 #ifdef Q_WS_X11
 #include <fixx11h.h>
@@ -132,7 +133,7 @@ private:
                                     // since their requests can be destroyed
                                     // in a separate thread
 
-  QListWidget * wordList;
+  WordList * wordList;
   QLineEdit * translateLine;
 
   WordFinder wordFinder;
@@ -170,8 +171,6 @@ private:
   void updateGroupList();
   void updateDictionaryBar();
   void makeScanPopup();
-
-  void updateMatchResults( bool finished );
 
   void updatePronounceAvailability();
 
@@ -306,9 +305,6 @@ private slots:
   /// Gives the keyboard focus to the translateLine and selects all the text
   /// it has.
   void focusTranslateLine();
-
-  void prefixMatchUpdated();
-  void prefixMatchFinished();
 
   void wordListItemActivated( QListWidgetItem * );
   void wordListSelectionChanged();

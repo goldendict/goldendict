@@ -213,6 +213,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     translateLine = translateBox->translateLine();
     wordList = translateBox->wordList();
   }
+  wordList->attachFinder( &wordFinder );
+
+  // for the old UI:
+  ui.wordList->setTranslateLine( ui.translateLine );
 
   groupList->setFocusPolicy(Qt::ClickFocus);
   wordList->setFocusPolicy(Qt::ClickFocus);
@@ -568,13 +572,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.wordList, SIGNAL( itemClicked( QListWidgetItem * ) ),
            this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
 
+  connect( ui.wordList, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
+           this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
+
+  connect( translateBox->wordList(), SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
+           this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
+
   connect( ui.dictsList, SIGNAL( itemSelectionChanged() ),
            this, SLOT( dictsListSelectionChanged() ) );
-
-  connect( &wordFinder, SIGNAL( updated() ),
-           this, SLOT( prefixMatchUpdated() ) );
-  connect( &wordFinder, SIGNAL( finished() ),
-           this, SLOT( prefixMatchFinished() ) );
 
   connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
            this, SLOT( mutedDictionariesChanged() ) );
@@ -748,6 +753,8 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
     translateBox->setVisible( true );
     translateBox->translateLine()->setVisible( true );
   }
+
+  wordList->attachFinder( &wordFinder );
 
   updateGroupList();
   applyWordsZoomLevel();
@@ -1852,95 +1859,6 @@ void MainWindow::focusTranslateLine()
 
   translateLine->setFocus();
   translateLine->selectAll();
-}
-
-void MainWindow::prefixMatchUpdated()
-{
-  updateMatchResults( false );
-}
-
-void MainWindow::prefixMatchFinished()
-{
-  updateMatchResults( true );
-}
-
-void MainWindow::updateMatchResults( bool finished )
-{
-  WordFinder::SearchResults const & results = wordFinder.getResults();
-
-  wordList->setUpdatesEnabled( false );
-
-  for( unsigned x = 0; x < results.size(); ++x )
-  {
-    QListWidgetItem * i = wordList->item( x );
-
-    if ( !i )
-    {
-      i = new QListWidgetItem( results[ x ].first, wordList );
-
-      if ( results[ x ].second )
-      {
-        QFont f = i->font();
-        f.setItalic( true );
-        i->setFont( f );
-      }
-      wordList->addItem( i );
-    }
-    else
-    {
-      if ( i->text() != results[ x ].first )
-        i->setText( results[ x ].first );
-
-      QFont f = i->font();
-      if ( f.italic() != results[ x ].second )
-      {
-        f.setItalic( results[ x ].second );
-        i->setFont( f );
-      }
-    }
-    if (i->text().at(0).direction() == QChar::DirR)
-        i->setTextAlignment(Qt::AlignRight);
-    if (i->text().at(0).direction() == QChar::DirL)
-        i->setTextAlignment(Qt::AlignLeft);
-  }
-
-  while ( wordList->count() > (int) results.size() )
-  {
-    // Chop off any extra items that were there
-    QListWidgetItem * i = wordList->takeItem( wordList->count() - 1 );
-
-    if ( i )
-      delete i;
-    else
-      break;
-  }
-
-  if ( wordList->count() )
-  {
-    wordList->scrollToItem( wordList->item( 0 ), QAbstractItemView::PositionAtTop );
-    wordList->setCurrentItem( 0, QItemSelectionModel::Clear );
-  }
-
-  wordList->setUpdatesEnabled( true );
-
-  if ( finished )
-  {
-    wordList->unsetCursor();
-
-    // Visually mark the input line to mark if there's no results
-
-    bool setMark = results.empty() && !wordFinder.wasSearchUncertain();
-
-    if ( translateLine->property( "noResults" ).toBool() != setMark )
-    {
-      translateLine->setProperty( "noResults", setMark );
-      setStyleSheet( styleSheet() );
-    }
-
-    if ( !wordFinder.getErrorString().isEmpty() )
-      mainStatusBar->showMessage( tr( "WARNING: %1" ).arg( wordFinder.getErrorString() ),
-                                  20000 , QPixmap( ":/icons/error.png" ) );
-  }
 }
 
 void MainWindow::applyMutedDictionariesState()

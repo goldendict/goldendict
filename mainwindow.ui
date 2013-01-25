@@ -210,7 +210,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="wordList">
+      <widget class="WordList" name="wordList">
        <property name="palette">
         <palette>
          <active>
@@ -516,6 +516,11 @@
    <extends>QWidget</extends>
    <header>historypanewidget.hh</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>WordList</class>
+   <extends>QListWidget</extends>
+   <header>wordlist.hh</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -210,7 +210,8 @@ HEADERS += folding.hh \
     stylescombobox.hh \
     extlineedit.hh \
     translatebox.hh \
-    historypanewidget.hh
+    historypanewidget.hh \
+    wordlist.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -312,7 +313,8 @@ SOURCES += folding.cc \
     stylescombobox.cc \
     extlineedit.cc \
     translatebox.cc \
-    historypanewidget.cc
+    historypanewidget.cc \
+    wordlist.cc
 
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \

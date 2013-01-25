@@ -41,6 +41,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   history( history_ ),
   escapeAction( this ),
   switchExpandModeAction( this ),
+  focusTranslateLineAction( this ),
   wordFinder( this ),
   dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine ),
   mouseEnteredOnce( false ),
@@ -70,12 +71,31 @@ ScanPopup::ScanPopup( QWidget * parent,
            definition, SIGNAL( closePopupMenu() ) );
   connect( definition, SIGNAL( sendWordToHistory( QString ) ),
            this, SIGNAL( sendWordToHistory( QString ) ) );
+  connect( definition, SIGNAL( typingEvent( QString const & ) ),
+           this, SLOT( typingEvent( QString const & ) ) );
 
   applyZoomFactor();
   
   ui.mainLayout->addWidget( definition );
 
-  ui.wordListButton->hide();
+  ui.translateBox->wordList()->attachFinder( &wordFinder );
+  ui.translateBox->translateLine()->installEventFilter( this );
+
+  connect( ui.translateBox->translateLine(), SIGNAL( textChanged( QString const & ) ),
+           this, SLOT( translateInputChanged( QString const & ) ) );
+
+  connect( ui.translateBox->translateLine(), SIGNAL( returnPressed() ),
+           this, SLOT( translateInputFinished() ) );
+
+  connect( ui.translateBox->wordList(), SIGNAL( itemClicked( QListWidgetItem * ) ),
+           this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
+
+  connect( ui.translateBox->wordList(), SIGNAL( itemDoubleClicked ( QListWidgetItem * ) ),
+           this, SLOT( wordListItemActivated( QListWidgetItem * ) ) );
+
+  connect( ui.translateBox->wordList(), SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
+           this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
+
   ui.pronounceButton->hide();
 
   ui.groupList->fill( groups );
@@ -146,6 +166,15 @@ ScanPopup::ScanPopup( QWidget * parent,
   addAction( &escapeAction );
   connect( &escapeAction, SIGNAL( triggered() ),
            this, SLOT( escapePressed() ) );
+
+  focusTranslateLineAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addAction( &focusTranslateLineAction );
+  focusTranslateLineAction.setShortcuts( QList< QKeySequence >() <<
+                                         QKeySequence( "Alt+D" ) <<
+                                         QKeySequence( "Ctrl+L" ) );
+
+  connect( &focusTranslateLineAction, SIGNAL( triggered() ),
+           this, SLOT( focusTranslateLine() ) );
 
 
   switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
@@ -365,7 +394,7 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
   /// Too large strings make window expand which is probably not what user
   /// wants
-  ui.word->setText( elideInputWord() );
+  ui.translateBox->setText( inputWord, false );
  
   if ( !isVisible() )
   {
@@ -474,14 +503,59 @@ void ScanPopup::currentGroupChanged( QString const & )
   cfg.lastPopupGroupId = ui.groupList->getCurrentGroup();
 }
 
+void ScanPopup::wordListItemActivated( QListWidgetItem * item )
+{
+  showTranslationFor( item->text() );
+}
+
+void ScanPopup::translateInputChanged( QString const & text )
+{
+  mainStatusBar->clearMessage();
+  ui.translateBox->wordList()->setCurrentItem( 0, QItemSelectionModel::Clear );
+
+  QString req = text.trimmed();
+
+  if ( !req.size() )
+  {
+    // An empty request always results in an empty result
+    wordFinder.cancel();
+    ui.translateBox->wordList()->clear();
+    ui.translateBox->wordList()->unsetCursor();
+
+    // Reset the noResults mark if it's on right now
+    if ( ui.translateBox->translateLine()->property( "noResults" ).toBool() )
+    {
+      ui.translateBox->translateLine()->setProperty( "noResults", false );
+      setStyleSheet( styleSheet() );
+    }
+    return;
+  }
+
+  ui.translateBox->wordList()->setCursor( Qt::WaitCursor );
+
+  wordFinder.prefixMatch( req, getActiveDicts() );
+}
+
+void ScanPopup::translateInputFinished()
+{
+  inputWord = ui.translateBox->translateLine()->text().trimmed();
+  showTranslationFor( inputWord );
+}
+
 void ScanPopup::initiateTranslation()
 {
-  ui.wordListButton->hide();
+  showTranslationFor(inputWord);
+  wordFinder.prefixMatch( inputWord, getActiveDicts() );
+}
+
+void ScanPopup::showTranslationFor( QString const & inputWord )
+{
   ui.pronounceButton->hide();
 
   definition->showDefinition( inputWord, ui.groupList->getCurrentGroup() );
-  wordFinder.prefixMatch( inputWord, getActiveDicts() );
+  definition->focus();
 
+  // Add to history
   emit sendWordToHistory( inputWord.trimmed() );
 }
 
@@ -518,8 +592,33 @@ vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
   }
 }
 
+void ScanPopup::typingEvent( QString const & t )
+{
+  if ( t == "\n" || t == "\r" )
+  {
+    focusTranslateLine();
+  }
+  else
+  {
+    ui.translateBox->translateLine()->setText( t );
+    ui.translateBox->translateLine()->setFocus();
+    ui.translateBox->translateLine()->setCursorPosition( t.size() );
+  }
+}
+
 bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
 {
+  if ( event->type() == QEvent::FocusIn && watched == ui.translateBox->translateLine() )
+  {
+    QFocusEvent * focusEvent = static_cast< QFocusEvent * >( event );
+
+    // select all on mouse click
+    if ( focusEvent->reason() == Qt::MouseFocusReason ) {
+      QTimer::singleShot(0, this, SLOT(focusTranslateLine()));
+    }
+    return false;
+  }
+
   if ( mouseIntercepted )
   {
     // We're only interested in our events
@@ -678,45 +777,7 @@ void ScanPopup::prefixMatchFinished()
     }
     else
       ui.queryError->hide();
-
-    ui.wordListButton->setVisible( wordFinder.getResults().size() );
   }
-}
-
-void ScanPopup::on_wordListButton_clicked()
-{
-  if ( !isVisible() )
-    return;
-
-  WordFinder::SearchResults const & results = wordFinder.getResults();
-
-  if ( results.empty() )
-    return;
-
-  QMenu menu( this );
-
-  unsigned total = results.size() < 40 ? results.size() : 40;
-
-  for( unsigned x = 0; x < total; ++x )
-  {
-    // Some items are just too large! For now skip them.
-
-    if ( results[ x ].first.size() > 64 )
-    {
-      if ( total < results.size() )
-        ++total;
-    }
-    else
-      menu.addAction( results[ x ].first );
-  }
-
-  connect( this, SIGNAL( closeMenu() ), &menu, SLOT( close() ) );
-
-  QAction * result = menu.exec( mapToGlobal( ui.wordListButton->pos() ) +
-                                  QPoint( 0, ui.wordListButton->height() ) );
-
-  if ( result )
-    definition->showDefinition( result->text(), ui.groupList->getCurrentGroup() );
 }
 
 void ScanPopup::on_pronounceButton_clicked()
@@ -744,6 +805,15 @@ void ScanPopup::pinButtonClicked( bool checked )
   }
 
   show();
+}
+
+void ScanPopup::focusTranslateLine()
+{
+  if ( !isActiveWindow() )
+    activateWindow();
+
+  ui.translateBox->translateLine()->setFocus();
+  ui.translateBox->translateLine()->selectAll();
 }
 
 void ScanPopup::on_showDictionaryBar_clicked( bool checked )

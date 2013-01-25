@@ -15,7 +15,7 @@ namespace
 #define MAX_POPUP_ROWS 17
 }
 
-CompletionList::CompletionList(QWidget *parent) : QListWidget(parent)
+CompletionList::CompletionList(QWidget *parent) : WordList(parent)
 {
   setWindowFlags(Qt::ToolTip);
   setMaximumWidth(1000);
@@ -25,6 +25,20 @@ CompletionList::CompletionList(QWidget *parent) : QListWidget(parent)
 
   connect(this, SIGNAL( itemClicked( QListWidgetItem * ) ),
           this, SLOT( acceptCurrentEntry() ) );
+
+  parent->window()->installEventFilter(this);
+}
+
+bool CompletionList::eventFilter( QObject * obj, QEvent * ev )
+{
+  // when the main window is moved or resized, hide the word list suggestions
+  if ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize )
+  {
+    hide();
+    return false;
+  }
+
+  return QWidget::eventFilter( obj, ev );
 }
 
 int CompletionList::preferredHeight() const
@@ -71,6 +85,8 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
 #if QT_VERSION >= 0x040700
   translate_line->setPlaceholderText( tr( "Type a word or phrase to search dictionaries" ) );
 #endif
+
+  word_list->setTranslateLine(translate_line);
 
   // completer = new QCompleter(m_completionList->model(), this);
   // completer->setCaseSensitivity(Qt::CaseInsensitive);
@@ -200,7 +216,7 @@ void TranslateBox::showPopup()
     // nothing to show
     if (word_list->isVisible())
     {
-      hide();
+      word_list->hide();
       translate_line->setFocus();
     }
 
@@ -227,7 +243,7 @@ QLineEdit * TranslateBox::translateLine()
   return translate_line;
 }
 
-QListWidget * TranslateBox::wordList()
+WordList * TranslateBox::wordList()
 {
   return word_list;
 }
