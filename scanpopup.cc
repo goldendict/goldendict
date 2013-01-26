@@ -464,6 +464,9 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
     raise();
   }
 
+  if ( ui.pinButton->isChecked() )
+       setWindowTitle( QString( "%1 - %2" ).arg( elideInputWord(), "GoldenDict" ) );
+
   initiateTranslation();
 }
 
@@ -792,7 +795,7 @@ void ScanPopup::pinButtonClicked( bool checked )
     uninterceptMouse();
 
     setWindowFlags( Qt::Dialog );
-    setWindowTitle( elideInputWord() );
+    setWindowTitle( QString( "%1 - %2" ).arg( elideInputWord(), "GoldenDict" ) );
     dictionaryBar.setMovable( true );
     hideTimer.stop();
   }
