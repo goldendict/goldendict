@@ -32,6 +32,8 @@
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include "mouseover_win32/GDDataTranfer.h"
+#include "wstring.hh"
+#include "wstring_qt.hh"
 #endif
 
 #ifdef Q_WS_X11
@@ -3266,8 +3268,14 @@ bool MainWindow::winEvent( MSG * message, long * result )
 
   QString str = view->wordAtPoint( lpdata->Pt.x, lpdata->Pt.y );
 
-  str.truncate( lpdata->dwMaxLength - 1 );
   memset( lpdata->cwData, 0, lpdata->dwMaxLength * sizeof( WCHAR ) );
+  if( str.isRightToLeft() )
+  {
+    gd::wstring wstr = gd::toWString( str );
+    wstr.assign( wstr.rbegin(), wstr.rend() );
+    str = gd::toQString( wstr );
+  }
+  str.truncate( lpdata->dwMaxLength - 1 );
   str.toWCharArray( lpdata->cwData );
 
   *result = 1;
