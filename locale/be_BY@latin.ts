@@ -1913,7 +1913,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Słoŭniki...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>

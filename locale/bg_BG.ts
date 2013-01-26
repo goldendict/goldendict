@@ -1646,7 +1646,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished">&amp;Речници...</translation>
+        <translation>&amp;Речници...</translation>
     </message>
     <message>
         <source>F3</source>

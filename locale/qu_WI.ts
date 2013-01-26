@@ -2989,7 +2989,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished">&amp;Simi-pirwakuna...</translation>
+        <translation>&amp;Simi-pirwakuna...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>

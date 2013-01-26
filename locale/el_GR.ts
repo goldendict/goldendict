@@ -2203,7 +2203,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished">&amp;Λεξικά...</translation>
+        <translation>&amp;Λεξικά...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>

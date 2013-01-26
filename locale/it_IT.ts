@@ -2234,7 +2234,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dizionari...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>

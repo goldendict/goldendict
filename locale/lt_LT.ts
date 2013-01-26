@@ -2238,7 +2238,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished">&amp;Žodynai...</translation>
+        <translation>Žo&amp;dynai...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>

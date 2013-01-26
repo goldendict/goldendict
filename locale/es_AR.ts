@@ -3010,7 +3010,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished">&amp;Diccionarios...</translation>
+        <translation>&amp;Diccionarios...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
