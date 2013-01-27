@@ -16,16 +16,7 @@
 
 using std::wstring;
 
-/// We use different window flags under Windows and X11 due to slight differences
-/// in their behavior on those platforms.
-static Qt::WindowFlags popupWindowFlags =
-
-#ifdef Q_WS_WIN
-Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
-#else
-Qt::Popup
-#endif
-;
+static Qt::WindowFlags popupWindowFlags = Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint;
 
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
@@ -313,14 +304,7 @@ void ScanPopup::translateWord( QString const & word )
   altModeExpirationTimer.stop();
 
   inputWord = str;
-  engagePopup( false,
-#ifdef Q_WS_WIN
-      true // We only focus popup under Windows when activated via Ctrl+C+C
-           // -- on Linux it already has an implicit focus
-#else
-      false
-#endif
-      );
+  engagePopup( false, true );
 }
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
