@@ -123,7 +123,6 @@ private:
 
   void handleInputWord( QString const & , bool forcePopup = false );
   void engagePopup( bool forcePopup, bool giveFocus = false );
-  void initiateTranslation();
 
   vector< sptr< Dictionary::Class > > const & getActiveDicts();
 

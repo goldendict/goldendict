@@ -19,13 +19,6 @@ public:
   CompletionList(QWidget *parent = 0);
   int preferredHeight() const;
 
-#if defined(Q_OS_WIN)
-  void focusOutEvent (QFocusEvent * event)  {
-    if (event->reason() == Qt::ActiveWindowFocusReason)
-      hide();
-  }
-#endif
-
 public slots:
   bool acceptCurrentEntry();
 
@@ -42,8 +35,7 @@ public:
   void setPlaceholderText(const QString &text);
   QLineEdit * translateLine();
   WordList * wordList();
-  void setText(QString text, bool showPopup=true)
-  { setPopupEnabled( showPopup ); translate_line->setText( text ); setPopupEnabled( true ); }
+  void setText(QString text, bool showPopup=true);
 
 signals:
 
@@ -53,6 +45,7 @@ public slots:
 private slots:
   void showPopup();
   void rightButtonClicked();
+  void onTextEdit();
 
 private:
   bool eventFilter(QObject *obj, QEvent *event);

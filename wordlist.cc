@@ -113,6 +113,8 @@ void WordList::updateMatchResults( bool finished )
       emit statusBarMessage( tr( "WARNING: %1" ).arg( wordFinder->getErrorString() ),
                              20000 , QPixmap( ":/icons/error.png" ) );
   }
+
+  emit contentChanged();
 }
 
 void WordList::refreshTranslateLine()

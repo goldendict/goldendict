@@ -760,9 +760,12 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 
   updateGroupList();
   applyWordsZoomLevel();
-  translateBox->setPopupEnabled( false );
-  translateLine->setText( text );
-  translateBox->setPopupEnabled( true );
+
+  if ( cfg.preferences.searchInDock )
+    translateLine->setText( text );
+  else
+    translateBox->setText( text, false );
+
   focusTranslateLine();
 }
 
@@ -1470,7 +1473,7 @@ void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPi
 
 void MainWindow::tabSwitched( int )
 {
-  translateBox->wordList()->hide();
+  translateBox->setPopupEnabled( false );
   updateBackForwardButtons();
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -1745,6 +1748,7 @@ void MainWindow::currentGroupChanged( QString const & )
   updateDictionaryBar();
 
   // Update word search results
+  translateBox->setPopupEnabled( false );
   translateInputChanged( translateLine->text() );
   translateInputFinished( false );
 
@@ -1865,6 +1869,8 @@ void MainWindow::focusTranslateLine()
 
 void MainWindow::applyMutedDictionariesState()
 {
+  translateBox->setPopupEnabled( false );
+
   // Redo the current search request
   translateInputChanged( translateLine->text() );
 
@@ -1918,7 +1924,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   {
     if ( !cfg.preferences.searchInDock )
     {
-        wordList->hide();
+        translateBox->setPopupEnabled( false );
         return false;
     }
   }
@@ -1934,7 +1940,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 
     // clicks outside of the word list should hide it.
     if (obj != translateBox->wordList() && obj != translateBox->wordList()->viewport()) {
-      translateBox->wordList()->hide();
+      translateBox->setPopupEnabled( false );
     }
 
     return handleBackForwardMouseButtons( event );
@@ -2165,8 +2171,11 @@ void MainWindow::typingEvent( QString const & t )
 
     if( translateLine->isEnabled() )
     {
-      translateLine->setText( t );
       translateLine->setFocus();
+      if ( cfg.preferences.searchInDock )
+        translateLine->setText( t );
+      else
+        translateBox->setText( t, true );
       translateLine->setCursorPosition( t.size() );
     }
   }
@@ -2182,13 +2191,15 @@ void MainWindow::showHistoryItem( QString const & word )
 {
   // qDebug() << "Showing history item" << word;
 
-  translateBox->setPopupEnabled( false );
   history.enableAdd( false );
 
-  translateLine->setText( word );
+  if ( cfg.preferences.searchInDock )
+    translateLine->setText( word );
+  else
+    translateBox->setText( word, false );
+
   showTranslationFor( word );
 
-  translateBox->setPopupEnabled( true );
   history.enableAdd( cfg.preferences.storeHistory );
 }
 

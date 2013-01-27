@@ -79,6 +79,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.mainLayout->addWidget( definition );
 
   ui.translateBox->wordList()->attachFinder( &wordFinder );
+  ui.translateBox->wordList()->setFocusPolicy(Qt::ClickFocus);
   ui.translateBox->translateLine()->installEventFilter( this );
 
   connect( ui.translateBox->translateLine(), SIGNAL( textChanged( QString const & ) ),
@@ -467,7 +468,7 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
   if ( ui.pinButton->isChecked() )
        setWindowTitle( QString( "%1 - %2" ).arg( elideInputWord(), "GoldenDict" ) );
 
-  initiateTranslation();
+  showTranslationFor( inputWord );
 }
 
 QString ScanPopup::elideInputWord()
@@ -501,7 +502,10 @@ void ScanPopup::currentGroupChanged( QString const & )
   updateDictionaryBar();
 
   if ( isVisible() )
-    initiateTranslation();
+  {
+    translateInputChanged( ui.translateBox->translateLine()->text() );
+    translateInputFinished();
+  }
 
   cfg.lastPopupGroupId = ui.groupList->getCurrentGroup();
 }
@@ -543,12 +547,6 @@ void ScanPopup::translateInputFinished()
 {
   inputWord = ui.translateBox->translateLine()->text().trimmed();
   showTranslationFor( inputWord );
-}
-
-void ScanPopup::initiateTranslation()
-{
-  showTranslationFor(inputWord);
-  wordFinder.prefixMatch( inputWord, getActiveDicts() );
 }
 
 void ScanPopup::showTranslationFor( QString const & inputWord )
@@ -603,8 +601,8 @@ void ScanPopup::typingEvent( QString const & t )
   }
   else
   {
-    ui.translateBox->translateLine()->setText( t );
     ui.translateBox->translateLine()->setFocus();
+    ui.translateBox->setText( t, true );
     ui.translateBox->translateLine()->setCursorPosition( t.size() );
   }
 }
@@ -885,6 +883,7 @@ void ScanPopup::hideWindow()
   emit closeMenu();
   hideTimer.stop();
   unsetCursor();
+  ui.translateBox->setPopupEnabled( false );
   hide();
 }
 

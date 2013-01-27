@@ -9,6 +9,8 @@
 #include <QApplication>
 #include <QDebug>
 #include <QModelIndex>
+#include <QScrollBar>
+#include <QStyle>
 
 namespace
 {
@@ -44,7 +46,16 @@ bool CompletionList::eventFilter( QObject * obj, QEvent * ev )
 int CompletionList::preferredHeight() const
 {
   const QSize itemSizeHint = itemDelegate()->sizeHint(viewOptions(), model()->index( 0, 0 ) );
-  return itemSizeHint.height() * MAX_POPUP_ROWS + frameWidth() * 2;
+  int rows = qMin( count(), MAX_POPUP_ROWS );
+
+  int scrollBarHeight = 0;
+
+  bool hBarIsVisible = horizontalScrollBar()->maximum() > 0;
+
+  if ( hBarIsVisible )
+    scrollBarHeight += QApplication::style()->pixelMetric( QStyle::PM_ScrollBarExtent );
+
+  return rows == 0 ? 0 : itemSizeHint.height() * rows + frameWidth() * 2 + scrollBarHeight;
 }
 
 bool CompletionList::acceptCurrentEntry()
@@ -67,7 +78,7 @@ bool CompletionList::acceptCurrentEntry()
 }
 
 TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
-  word_list(new CompletionList(this)), m_popupEnabled(true)
+  word_list(new CompletionList(this)), m_popupEnabled(false)
 {
   // initially hidden
   word_list->hide();
@@ -115,10 +126,13 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
   this->installEventFilter( this );
 
   connect(translate_line, SIGNAL( textChanged( QString const & ) ),
-          this, SLOT( showPopup() ) );
+          this, SLOT( onTextEdit() ) );
 
   connect(translate_line, SIGNAL( rightButtonClicked() ),
           this, SLOT( rightButtonClicked() ) );
+
+  connect(word_list, SIGNAL( contentChanged() ),
+          this, SLOT( showPopup() ) );
 }
 
 bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
@@ -128,7 +142,7 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
     {
       if (!word_list->isActiveWindow())
       {
-        word_list->hide();
+        setPopupEnabled( false );
       }
       return false;
     }
@@ -142,7 +156,7 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
         case Qt::Key_PageDown:
           if ( !word_list->isVisible() )
           {
-            showPopup();
+            setPopupEnabled( true );
           }
           else
           {
@@ -153,12 +167,12 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
         case Qt::Key_Return:
           return word_list->acceptCurrentEntry();
         case Qt::Key_Escape:
-          word_list->hide();
+          setPopupEnabled( false );
           return true;
         case Qt::Key_Tab:
           if ( !word_list->isVisible() )
           {
-            showPopup();
+            setPopupEnabled( true );
           }
           else
           {
@@ -169,7 +183,7 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
         case Qt::Key_Backtab:
           if ( !word_list->isVisible() )
           {
-            showPopup();
+            setPopupEnabled( true );
           }
           else
           {
@@ -186,11 +200,10 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
         if (fev->reason() != Qt::ActiveWindowFocusReason ||
             (fev->reason() == Qt::ActiveWindowFocusReason && !word_list->isActiveWindow()))
 #endif
-          word_list->hide();
+          setPopupEnabled( false );
     } else if (obj == translate_line && event->type() == QEvent::FocusIn) {
       // By default, focusing the traslate line does not show
       // the popup window.
-      // showPopup();
     } else if (obj == this && event->type() == QEvent::ShortcutOverride) {
         QKeyEvent *ke = static_cast<QKeyEvent *>(event);
         if (ke->key() == Qt::Key_Escape && !ke->modifiers() && word_list->isVisible() ) {
@@ -201,9 +214,16 @@ bool TranslateBox::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj, event);
 }
 
+void TranslateBox::setText( QString text, bool showPopup )
+{
+  setPopupEnabled( showPopup );
+  translate_line->setText( text );
+}
+
 void TranslateBox::setPopupEnabled( bool enable )
 {
   m_popupEnabled = enable;
+  showPopup();
 }
 
 void TranslateBox::showPopup()
@@ -211,7 +231,7 @@ void TranslateBox::showPopup()
   // completer->setCompletionPrefix( m_fileLineEdit->text() );
   // qDebug() << "COMPLETION:" << completer->currentCompletion();
 
-  if (translate_line->text().trimmed().isEmpty())
+  if (translate_line->text().trimmed().isEmpty() || word_list->count() == 0)
   {
     // nothing to show
     if (word_list->isVisible())
@@ -250,12 +270,11 @@ WordList * TranslateBox::wordList()
 
 void TranslateBox::rightButtonClicked()
 {
-  if ( word_list->isVisible() )
-  {
-    word_list->hide();
-  }
-  else
-  {
-    showPopup();
-  }
+  setPopupEnabled( !m_popupEnabled );
+}
+
+void TranslateBox::onTextEdit()
+{
+  if ( translate_line->hasFocus() )
+    setPopupEnabled( true );
 }

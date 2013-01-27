@@ -20,6 +20,7 @@ public:
 
 signals:
   void statusBarMessage(QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap());
+  void contentChanged();
 
 public slots:
 
@@ -30,6 +31,7 @@ private slots:
 
 private:
   void refreshTranslateLine();
+
   WordFinder * wordFinder;
   QLineEdit * translateLine;
 };
