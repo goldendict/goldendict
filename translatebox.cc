@@ -17,7 +17,8 @@ namespace
 #define MAX_POPUP_ROWS 17
 }
 
-CompletionList::CompletionList(QWidget *parent) : WordList(parent)
+CompletionList::CompletionList(TranslateBox * parent) : WordList(parent),
+  translateBox(parent)
 {
   setWindowFlags(Qt::ToolTip);
   setMaximumWidth(1000);
@@ -28,7 +29,7 @@ CompletionList::CompletionList(QWidget *parent) : WordList(parent)
   connect(this, SIGNAL( itemClicked( QListWidgetItem * ) ),
           this, SLOT( acceptCurrentEntry() ) );
 
-  parent->window()->installEventFilter(this);
+  translateBox->window()->installEventFilter(this);
 }
 
 bool CompletionList::eventFilter( QObject * obj, QEvent * ev )
@@ -36,7 +37,7 @@ bool CompletionList::eventFilter( QObject * obj, QEvent * ev )
   // when the main window is moved or resized, hide the word list suggestions
   if ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize )
   {
-    hide();
+    translateBox->setPopupEnabled( false );
     return false;
   }
 
@@ -72,7 +73,7 @@ bool CompletionList::acceptCurrentEntry()
   }
 
   emit doubleClicked(index);
-  hide();
+  translateBox->setPopupEnabled( false );
 
   return true;
 }

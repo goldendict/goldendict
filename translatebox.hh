@@ -11,12 +11,14 @@
 #include <QListWidget>
 #include <QFocusEvent>
 
+class TranslateBox;
+
 class CompletionList : public WordList
 {
   Q_OBJECT
 
 public:
-  CompletionList(QWidget *parent = 0);
+  CompletionList(TranslateBox * parent);
   int preferredHeight() const;
 
 public slots:
@@ -24,6 +26,7 @@ public slots:
 
 private:
   virtual bool eventFilter( QObject *, QEvent * );
+  TranslateBox * translateBox;
 };
 
 class TranslateBox : public QWidget
