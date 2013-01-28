@@ -20,7 +20,13 @@ namespace
 CompletionList::CompletionList(TranslateBox * parent) : WordList(parent),
   translateBox(parent)
 {
+#ifdef Q_WS_WIN
   setWindowFlags(Qt::ToolTip);
+#else
+  setParent( parent->window() );
+  setAutoFillBackground( true );
+#endif
+
   setMaximumWidth(1000);
 
   connect(this, SIGNAL( activated( QModelIndex ) ),
@@ -250,9 +256,14 @@ void TranslateBox::showPopup()
     return;
   }
 
-  const QSize size(width(), word_list->preferredHeight());
+  QPoint origin( 0, translate_line->y() + translate_line->height() );
+  if ( word_list->isWindow() )
+    origin = mapToGlobal( origin );
+  else
+    origin = mapToParent( origin );
 
-  const QRect rect(mapToGlobal( QPoint( 0, translate_line->y() + translate_line->height() ) ), size );
+  const QSize size(width(), word_list->preferredHeight());
+  const QRect rect( origin, size );
 
   word_list->setGeometry(rect);
   word_list->show();

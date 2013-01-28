@@ -16,7 +16,7 @@ public:
   explicit WordList(QWidget * parent = 0);
   void attachFinder(WordFinder * finder);
   void setTranslateLine(QLineEdit * line)
-  { translateLine = line; }
+  { translateLine = line; setFocusProxy( translateLine ); }
 
 signals:
   void statusBarMessage(QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap());
