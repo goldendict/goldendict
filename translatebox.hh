@@ -20,6 +20,11 @@ class CompletionList : public WordList
 public:
   CompletionList(TranslateBox * parent);
   int preferredHeight() const;
+  virtual void setTranslateLine(QLineEdit * line)
+  {
+    WordList::setTranslateLine( line );
+    setFocusProxy( line );
+  }
 
 public slots:
   bool acceptCurrentEntry();
