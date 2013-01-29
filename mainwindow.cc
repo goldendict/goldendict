@@ -604,11 +604,24 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.historyList->installEventFilter( this );
 
-  if ( cfg.mainWindowGeometry.size() )
-    restoreGeometry( cfg.mainWindowGeometry );
-
-  if ( cfg.mainWindowState.size() )
-    restoreState( cfg.mainWindowState, 1 );
+  QRect baseGeometry;
+  if( cfg.maximizedMainWindowGeometry.width() > 0 )
+  {
+    if ( cfg.mainWindowGeometry.size() )
+      restoreGeometry( cfg.mainWindowGeometry );
+    baseGeometry = geometry();
+    setGeometry( cfg.maximizedMainWindowGeometry );
+    if ( cfg.mainWindowState.size() )
+      restoreState( cfg.mainWindowState, 1 );
+    setWindowState( windowState() | Qt::WindowMaximized );
+  }
+  else
+  {
+    if ( cfg.mainWindowGeometry.size() )
+      restoreGeometry( cfg.mainWindowGeometry );
+    if ( cfg.mainWindowState.size() )
+      restoreState( cfg.mainWindowState, 1 );
+  }
 
   updateSearchPaneAndBar( cfg.preferences.searchInDock );
   ui.searchPane->setVisible( cfg.preferences.searchInDock );
@@ -673,6 +686,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   {
     show();
     focusTranslateLine();
+    if( baseGeometry.width() > 0 )
+    {
+      hide();
+      setGeometry( baseGeometry );
+      showMaximized();
+    }
   }
 
   connect( &newReleaseCheckTimer, SIGNAL( timeout() ),
@@ -794,6 +813,11 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
 
 MainWindow::~MainWindow()
 {
+  if( isMaximized() )
+    cfg.maximizedMainWindowGeometry = geometry();
+  else
+    cfg.maximizedMainWindowGeometry = QRect();
+
   commitData();
 
   // Close all tabs -- they should be destroyed before network managers

@@ -10,6 +10,7 @@
 #include <QDateTime>
 #include <QKeySequence>
 #include <QSet>
+#include <QRect>
 #include "ex.hh"
 
 /// GoldenDict's configuration
@@ -421,6 +422,8 @@ struct Class
   /// Maximum size for the headwords.
   /// Bigger headwords won't be indexed. For now, only in DSL.
   unsigned int maxHeadwordSize;
+
+  QRect maximizedMainWindowGeometry;
 
   QString editDictionaryCommandLine; // Command line to call external editor for dictionary
 
