@@ -902,6 +902,7 @@ void ScanPopup::hideWindow()
   hideTimer.stop();
   unsetCursor();
   ui.translateBox->setPopupEnabled( false );
+  ui.translateBox->translateLine()->deselect();
   hide();
 }
 
