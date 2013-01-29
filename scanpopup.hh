@@ -71,6 +71,7 @@ signals:
 #endif
 
 public slots:
+  void requestWindowFocus();
 
   /// Translates the word from the clipboard, showing the window etc.
   void translateWordFromClipboard();
