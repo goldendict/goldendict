@@ -2406,7 +2406,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation>akataraki : %1</translation>
+        <translation type="obsolete">akataraki : %1</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -3469,15 +3469,15 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>word</source>
-        <translation>Aru</translation>
+        <translation type="obsolete">Aru</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation>Kikpa amuyt&apos;awan sinru qillqa (Alt+M)</translation>
+        <translation type="obsolete">Kikpa amuyt&apos;awan sinru qillqa (Alt+M)</translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3851,6 +3851,13 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <source>Failed to query some dictionaries.</source>
         <translation>Phantiw aru pirwa thaqawi.</translation>
+    </message>
+</context>
+<context>
+    <name>WordList</name>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">akataraki : %1</translation>
     </message>
 </context>
 </TS>

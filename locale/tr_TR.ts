@@ -1753,7 +1753,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation>UYARI: %1</translation>
+        <translation type="obsolete">UYARI: %1</translation>
     </message>
     <message>
         <source>Print Article</source>
@@ -2702,11 +2702,11 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>word</source>
-        <translation>Sözcük</translation>
+        <translation type="obsolete">Sözcük</translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Alt+S</source>
@@ -2728,7 +2728,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation>Eşlenenler Listesi (Alt+M)</translation>
+        <translation type="obsolete">Eşlenenler Listesi (Alt+M)</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3062,6 +3062,13 @@ uygun grupların altlarına ekleyin.</translation>
     <message>
         <source>Failed to query some dictionaries.</source>
         <translation>Bazı sözlükler sorgulamak için başarısız oldu.</translation>
+    </message>
+</context>
+<context>
+    <name>WordList</name>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">UYARI: %1</translation>
     </message>
 </context>
 </TS>

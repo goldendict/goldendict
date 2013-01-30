@@ -1706,7 +1706,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation>CẢNH BÁO: %1</translation>
+        <translation type="obsolete">CẢNH BÁO: %1</translation>
     </message>
     <message>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
@@ -2670,11 +2670,11 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>word</source>
-        <translation>từ</translation>
+        <translation type="obsolete">từ</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation>Danh sách từ phù hợp (Alt+M)</translation>
+        <translation type="obsolete">Danh sách từ phù hợp (Alt+M)</translation>
     </message>
     <message>
         <source>...</source>
@@ -2682,7 +2682,7 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3027,6 +3027,13 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     <message>
         <source>Failed to query some dictionaries.</source>
         <translation>Truy vấn một vài từ điển thất bại.</translation>
+    </message>
+</context>
+<context>
+    <name>WordList</name>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">CẢNH BÁO: %1</translation>
     </message>
 </context>
 </TS>

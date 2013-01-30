@@ -1707,7 +1707,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation>警告： %1</translation>
+        <translation type="obsolete">警告： %1</translation>
     </message>
     <message>
         <source>Print Article</source>
@@ -2653,11 +2653,11 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>word</source>
-        <translation>詞條</translation>
+        <translation type="obsolete">詞條</translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Alt+S</source>
@@ -2669,7 +2669,7 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation>列出符合條件的詞條(Alt+M)</translation>
+        <translation type="obsolete">列出符合條件的詞條(Alt+M)</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3007,6 +3007,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Failed to query some dictionaries.</source>
         <translation>在某些詞典中進行查詢時失敗。</translation>
+    </message>
+</context>
+<context>
+    <name>WordList</name>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">警告： %1</translation>
     </message>
 </context>
 </TS>

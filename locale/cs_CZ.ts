@@ -2369,7 +2369,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation>VAROVÁNÍ: %1</translation>
+        <translation type="obsolete">VAROVÁNÍ: %1</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -3492,15 +3492,15 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>word</source>
-        <translation>slovo</translation>
+        <translation type="obsolete">slovo</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation>Vypsat shody (Alt+M)</translation>
+        <translation type="obsolete">Vypsat shody (Alt+M)</translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3867,6 +3867,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Failed to query some dictionaries.</source>
         <translation>Některé slovníky se nepovedlo zpracovat.</translation>
+    </message>
+</context>
+<context>
+    <name>WordList</name>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">VAROVÁNÍ: %1</translation>
     </message>
 </context>
 </TS>

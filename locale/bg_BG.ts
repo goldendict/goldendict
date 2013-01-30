@@ -1610,7 +1610,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation>Внимание: %1</translation>
+        <translation type="obsolete">Внимание: %1</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -2695,15 +2695,15 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>word</source>
-        <translation>дума</translation>
+        <translation type="obsolete">дума</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation>Списък с резултати (Alt+M)</translation>
+        <translation type="obsolete">Списък с резултати (Alt+M)</translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3051,6 +3051,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Failed to query some dictionaries.</source>
         <translation>Неуспех при търсенето в някои речници.</translation>
+    </message>
+</context>
+<context>
+    <name>WordList</name>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">Внимание: %1</translation>
     </message>
 </context>
 </TS>
