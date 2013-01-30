@@ -2102,10 +2102,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">Внимание: %1</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="3010"/>
         <source>&amp;Hide</source>
         <translation>&amp;Спрятать</translation>
@@ -2168,10 +2164,6 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
         <translation>Панель на&amp;вигации по переводу</translation>
-    </message>
-    <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="obsolete">&amp;Словари...	F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="331"/>
@@ -3298,10 +3290,6 @@ GoldenDict. Если новая версия появилась, програм�
         <translation>Диалог</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">слово</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.ui" line="86"/>
         <source>Back</source>
         <translation>Назад</translation>
@@ -3310,14 +3298,6 @@ GoldenDict. Если новая версия появилась, програм�
         <location filename="../scanpopup.ui" line="100"/>
         <source>Forward</source>
         <translation>Вперёд</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Список совпадений (Alt+M)</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="114"/>
@@ -3755,7 +3735,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Внимание: %1</translation>
     </message>
 </context>
 </TS>
