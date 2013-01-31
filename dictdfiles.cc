@@ -101,9 +101,7 @@ public:
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
 
-  virtual void loadIcon() throw()
-  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_dictd.png");
-    dictionaryIconLoaded = true; }
+  virtual void loadIcon() throw();
 
   inline virtual quint32 getLangFrom() const
   { return idxHeader.langFrom; }
@@ -161,6 +159,26 @@ string nameFromFileName( string const & indexFileName )
     dot = indexFileName.c_str() + indexFileName.size();
 
   return Utf8::encode( FsEncoding::decode( string( sep + 1, dot - sep - 1 ) ) );
+}
+
+void DictdDictionary::loadIcon() throw()
+{
+  if ( dictionaryIconLoaded )
+    return;
+
+  QString fileName =
+    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+  // Remove the extension
+  fileName.chop( 5 );
+
+  if( !loadIconFromFile( fileName ) )
+  {
+    // Load failed -- use default icons
+    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_dictd.png");
+  }
+
+  dictionaryIconLoaded = true;
 }
 
 string DictdDictionary::getName() throw()

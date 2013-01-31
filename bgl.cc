@@ -11,6 +11,7 @@
 #include "langcoder.hh"
 #include "language.hh"
 #include "dprintf.hh"
+#include "fsencoding.hh"
 #include "htmlescape.hh"
 
 #include <map>
@@ -298,45 +299,57 @@ namespace
 
   void BglDictionary::loadIcon() throw()
   {
-    if( idxHeader.iconSize )
+    if ( dictionaryIconLoaded )
+      return;
+
+    QString fileName =
+      QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+
+    // Remove the extension
+    fileName.chop( 3 );
+
+    if( !loadIconFromFile( fileName ) )
     {
-
-      // Try loading icon now
-
-      vector< char > chunk;
-
-      Mutex::Lock _( idxMutex );
-
-      char * iconData = chunks.getBlock( idxHeader.iconAddress, chunk );
-
-      QImage img;
-
-      if (img.loadFromData( ( unsigned char *) iconData, idxHeader.iconSize  ) )
+      if( idxHeader.iconSize )
       {
-        // Load successful
 
-        dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
+        // Try loading icon now
 
-        // Transform it to be square
-        int max = img.width() > img.height() ? img.width() : img.height();
+        vector< char > chunk;
 
-        QImage result( max, max, QImage::Format_ARGB32 );
-        result.fill( 0 ); // Black transparent
+        Mutex::Lock _( idxMutex );
 
-        QPainter painter( &result );
+        char * iconData = chunks.getBlock( idxHeader.iconAddress, chunk );
 
-        painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                   img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                           img );
+        QImage img;
 
-        painter.end();
+        if (img.loadFromData( ( unsigned char *) iconData, idxHeader.iconSize  ) )
+        {
+          // Load successful
 
-        dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+          dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
+
+          // Transform it to be square
+          int max = img.width() > img.height() ? img.width() : img.height();
+
+          QImage result( max, max, QImage::Format_ARGB32 );
+          result.fill( 0 ); // Black transparent
+
+          QPainter painter( &result );
+
+          painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                                     img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                             img );
+
+          painter.end();
+
+          dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+        }
       }
-    }
 
-    if ( dictionaryIcon.isNull() )
-      dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_bgl.png");
+      if ( dictionaryIcon.isNull() )
+        dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_bgl.png");
+    }
 
     dictionaryIconLoaded = true;
   }
