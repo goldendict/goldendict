@@ -430,7 +430,6 @@ void DslDictionary::loadIcon() throw()
     QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
   // Remove the extension
-
   if ( fileName.endsWith( ".dsl.dz", Qt::CaseInsensitive ) )
     fileName.chop( 6 );
   else
@@ -439,7 +438,6 @@ void DslDictionary::loadIcon() throw()
   if ( !loadIconFromFile( fileName ) )
   {
     // Load failed -- use default icons
-
     dictionaryIcon = QIcon(":/icons/icon32_dsl.png");
     dictionaryNativeIcon = QIcon(":/icons/icon_dsl_native.png");
   }

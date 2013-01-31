@@ -124,6 +124,9 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
 
 void WebSiteDictionary::loadIcon() throw()
 {
+  if ( dictionaryIconLoaded )
+    return;
+
   if( !iconFilename.isEmpty() )
   {
     QFileInfo fInfo(  QDir( Config::getConfigDir() ), iconFilename );

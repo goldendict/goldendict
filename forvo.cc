@@ -92,6 +92,9 @@ sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
 
 void ForvoDictionary::loadIcon() throw()
 {
+  if ( dictionaryIconLoaded )
+    return;
+
 // Experimental code to generate icon -- but the flags clutter the interface too
 // much and we're better with a single icon.
 #if 0

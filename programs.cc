@@ -118,6 +118,9 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
 
 void ProgramsDictionary::loadIcon() throw()
 {
+  if ( dictionaryIconLoaded )
+    return;
+
   if( !prg.iconFilename.isEmpty() )
   {
     QFileInfo fInfo(  QDir( Config::getConfigDir() ), prg.iconFilename );

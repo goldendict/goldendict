@@ -64,6 +64,9 @@ protected:
 
 void MediaWikiDictionary::loadIcon() throw()
 {
+  if ( dictionaryIconLoaded )
+    return;
+
   if( !icon.isEmpty() )
   {
     QFileInfo fInfo(  QDir( Config::getConfigDir() ), icon );

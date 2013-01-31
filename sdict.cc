@@ -212,7 +212,6 @@ void SdictDictionary::loadIcon() throw()
     QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
   // Remove the extension
-
   fileName.chop( 3 );
 
   if( !loadIconFromFile( fileName ) )

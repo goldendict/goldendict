@@ -284,6 +284,9 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const &
 
 void ZipSoundsDictionary::loadIcon() throw()
 {
+  if ( dictionaryIconLoaded )
+    return;
+
   QString fileName =
     QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 

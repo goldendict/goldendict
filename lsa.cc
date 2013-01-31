@@ -484,6 +484,9 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
 
 void LsaDictionary::loadIcon() throw()
 {
+  if ( dictionaryIconLoaded )
+    return;
+
   QString fileName =
     QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
