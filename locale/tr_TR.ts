@@ -2750,6 +2750,10 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
         <source>Forward</source>
         <translation type="unfinished">Sonraki</translation>
     </message>
+    <message>
+        <source>GoldenDict</source>
+        <translation type="unfinished">GoldenDict</translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>

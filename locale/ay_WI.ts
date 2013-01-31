@@ -3524,6 +3524,10 @@ could be resized or managed in other ways.</source>
         <source>Alt+W</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>GoldenDict</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>

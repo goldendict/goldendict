@@ -2742,6 +2742,10 @@ could be resized or managed in other ways.</source>
         <source>Forward</source>
         <translation type="unfinished">Напред</translation>
     </message>
+    <message>
+        <source>GoldenDict</source>
+        <translation type="unfinished">GoldenDict</translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>

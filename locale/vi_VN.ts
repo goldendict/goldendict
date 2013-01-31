@@ -2718,6 +2718,10 @@ thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translat
         <source>Forward</source>
         <translation type="unfinished">Tiếp tục</translation>
     </message>
+    <message>
+        <source>GoldenDict</source>
+        <translation type="unfinished">Từ điển Vàng</translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>

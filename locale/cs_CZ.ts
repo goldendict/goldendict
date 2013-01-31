@@ -3548,6 +3548,10 @@ Lze měnit jeho velikost a může s ním být i jinak manipulováno.</translatio
         <source>Forward</source>
         <translation type="unfinished">Vpřed</translation>
     </message>
+    <message>
+        <source>GoldenDict</source>
+        <translation type="unfinished">GoldenDict</translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>
