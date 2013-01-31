@@ -635,7 +635,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // After we have dictionaries and groups, we can populate history
 //  historyChanged();
 
-  setWindowTitle( "GoldenDict" );
+  setWindowTitle( tr( "GoldenDict" ) );
 
   blockUpdateWindowTitle = true;
   addNewTab();
