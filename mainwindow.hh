@@ -152,6 +152,8 @@ private:
 
   bool wasMaximized; // Window state before minimization
 
+  bool blockUpdateWindowTitle;
+
   QPrinter & getPrinter(); // Creates a printer if it's not there and returns it
 
   /// Applies the qt's stylesheet, given the style's name.

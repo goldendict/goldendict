@@ -77,6 +77,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   newReleaseCheckTimer( this ),
   wordListSelChanged( false )
 , wasMaximized( false )
+, blockUpdateWindowTitle( false )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -634,6 +635,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // After we have dictionaries and groups, we can populate history
 //  historyChanged();
 
+  setWindowTitle( "GoldenDict" );
+
+  blockUpdateWindowTitle = true;
   addNewTab();
 
   // Create tab list menu
@@ -645,6 +649,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     ArticleView *view = getCurrentArticleView();
 
     history.enableAdd( false );
+
+    blockUpdateWindowTitle = true;
 
     view->showDefinition( tr( "Welcome!" ), Instances::Group::HelpGroupId );
 
@@ -1474,7 +1480,13 @@ void MainWindow::updateWindowTitle()
   ArticleView *view = getCurrentArticleView();
   if ( view )
   {
-    setWindowTitle( tr( "%1 - %2" ).arg( view->getTitle(), tr ( "GoldenDict" ) ) );
+    QString str = view->getTitle();
+    if( !str.isEmpty() )
+    {
+      if( !blockUpdateWindowTitle )
+        setWindowTitle( tr( "%1 - %2" ).arg( str, tr ( "GoldenDict" ) ) );
+      blockUpdateWindowTitle = false;
+    }
   }
 }
 
