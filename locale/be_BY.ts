@@ -193,14 +193,8 @@
         <translation>Азначэньне: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="907"/>
-        <location filename="../articleview.cc" line="937"/>
-        <location filename="../articleview.cc" line="946"/>
-        <location filename="../articleview.cc" line="1380"/>
-        <location filename="../articleview.cc" line="1398"/>
-        <location filename="../articleview.cc" line="1408"/>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="907"/>
@@ -1849,12 +1843,8 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="638"/>
-        <location filename="../mainwindow.cc" line="1487"/>
-        <location filename="../mainwindow.cc" line="2418"/>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -3329,10 +3319,14 @@ could be resized or managed in other ways.</source>
 ягоны памер, ды кіраваць ім кожным зручным спосабам.</translation>
     </message>
     <message>
+        <source>GoldenDict</source>
+        <translation type="obsolete">GoldenDict</translation>
+    </message>
+    <message>
         <location filename="../scanpopup.cc" line="469"/>
         <location filename="../scanpopup.cc" line="814"/>
-        <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <source>%1 - %2</source>
+        <translation type="unfinished">%1 - %2</translation>
     </message>
 </context>
 <context>

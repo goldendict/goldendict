@@ -201,14 +201,8 @@
         <translation>Définition : %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="907"/>
-        <location filename="../articleview.cc" line="937"/>
-        <location filename="../articleview.cc" line="946"/>
-        <location filename="../articleview.cc" line="1380"/>
-        <location filename="../articleview.cc" line="1398"/>
-        <location filename="../articleview.cc" line="1408"/>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="907"/>
@@ -557,37 +551,37 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="227"/>
+        <location filename="../forvo.cc" line="230"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Erreur de lecture XML : %1 à la position %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="303"/>
+        <location filename="../forvo.cc" line="306"/>
         <source>Added %1</source>
         <translation>Ajouté %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="309"/>
         <source>by</source>
         <translation>par</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="310"/>
+        <location filename="../forvo.cc" line="313"/>
         <source>Male</source>
         <translation>Homme</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="310"/>
+        <location filename="../forvo.cc" line="313"/>
         <source>Female</source>
         <translation>Femme</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="312"/>
+        <location filename="../forvo.cc" line="315"/>
         <source>from</source>
         <translation>de</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="350"/>
+        <location filename="../forvo.cc" line="353"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Allez dans Édition|Dictionnaires|Sources|Forvo puis faites une requête pour obtenir votre clé API afin de faire disparâitre ce message d&apos;erreur.</translation>
     </message>
@@ -800,12 +794,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="236"/>
+        <location filename="../hunspell.cc" line="239"/>
         <source>Spelling suggestions: </source>
         <translation>Orthographes suggérées :</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="776"/>
+        <location filename="../hunspell.cc" line="779"/>
         <source>%1 Morphology</source>
         <translation>%1 Morphologie</translation>
     </message>
@@ -1861,12 +1855,8 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="638"/>
-        <location filename="../mainwindow.cc" line="1487"/>
-        <location filename="../mainwindow.cc" line="2418"/>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -2428,7 +2418,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="299"/>
+        <location filename="../mediawiki.cc" line="302"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Erreur de lecture XML  : %1 à la position %2,%3</translation>
     </message>
@@ -2436,7 +2426,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="168"/>
+        <location filename="../mediawiki.cc" line="171"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Erreur de lecture XML : %1 à la position %2,%3</translation>
     </message>
@@ -3229,17 +3219,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="164"/>
+        <location filename="../programs.cc" line="167"/>
         <source>No program name was given.</source>
         <translation>Aucun nom d&apos;application n&apos;a été renseigné.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="180"/>
+        <location filename="../programs.cc" line="183"/>
         <source>The program has crashed.</source>
         <translation>L&apos;application a planté.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="186"/>
         <source>The program has returned exit code %1.</source>
         <translation>L&apos;application a renvoyé le code de sortie %1.</translation>
     </message>
@@ -3381,10 +3371,14 @@ could be resized or managed in other ways.</source>
         <translation>Utiliser pour épingler la fenêtre de manière à ce qu&apos;elle reste à l&apos;écran, puisse être redimensionnée ou gérée par d&apos;autres moyens.</translation>
     </message>
     <message>
+        <source>GoldenDict</source>
+        <translation type="obsolete">GoldenDict</translation>
+    </message>
+    <message>
         <location filename="../scanpopup.cc" line="469"/>
         <location filename="../scanpopup.cc" line="814"/>
-        <source>GoldenDict</source>
-        <translation type="unfinished">GoldenDict</translation>
+        <source>%1 - %2</source>
+        <translation type="unfinished">%1 - %2</translation>
     </message>
 </context>
 <context>

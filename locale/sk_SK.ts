@@ -188,14 +188,8 @@
         <translation>Definícia: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="907"/>
-        <location filename="../articleview.cc" line="937"/>
-        <location filename="../articleview.cc" line="946"/>
-        <location filename="../articleview.cc" line="1380"/>
-        <location filename="../articleview.cc" line="1398"/>
-        <location filename="../articleview.cc" line="1408"/>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="907"/>
@@ -549,37 +543,37 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="227"/>
+        <location filename="../forvo.cc" line="230"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Chyba spracovania XML: %1 v %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="303"/>
+        <location filename="../forvo.cc" line="306"/>
         <source>Added %1</source>
         <translation>Pridané %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="309"/>
         <source>by</source>
         <translation>od</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="310"/>
+        <location filename="../forvo.cc" line="313"/>
         <source>Male</source>
         <translation>Muž</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="310"/>
+        <location filename="../forvo.cc" line="313"/>
         <source>Female</source>
         <translation>Žena</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="312"/>
+        <location filename="../forvo.cc" line="315"/>
         <source>from</source>
         <translation>z</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="350"/>
+        <location filename="../forvo.cc" line="353"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Prejsť na Upraviť | Slovníky | Zdroje | Forvo a aplikovať náš vlastný API kľúč, aby táto chyba zmizla.</translation>
     </message>
@@ -791,12 +785,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="236"/>
+        <location filename="../hunspell.cc" line="239"/>
         <source>Spelling suggestions: </source>
         <translation>Návrhy k preklepom:</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="776"/>
+        <location filename="../hunspell.cc" line="779"/>
         <source>%1 Morphology</source>
         <translation>%1 morfológia</translation>
     </message>
@@ -1852,12 +1846,8 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cc" line="638"/>
-        <location filename="../mainwindow.cc" line="1487"/>
-        <location filename="../mainwindow.cc" line="2418"/>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -2412,7 +2402,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="299"/>
+        <location filename="../mediawiki.cc" line="302"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Chyba pri spracovaní XML: %1 v %2, %3</translation>
     </message>
@@ -2420,7 +2410,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="168"/>
+        <location filename="../mediawiki.cc" line="171"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Chyba pri spracovaní XML: %1 v %2, %3</translation>
     </message>
@@ -3217,17 +3207,17 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="164"/>
+        <location filename="../programs.cc" line="167"/>
         <source>No program name was given.</source>
         <translation>Názov programu nebol zadaný.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="180"/>
+        <location filename="../programs.cc" line="183"/>
         <source>The program has crashed.</source>
         <translation>Program spadol.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="186"/>
         <source>The program has returned exit code %1.</source>
         <translation>Program vrátil návratový kód %1.</translation>
     </message>
@@ -3370,10 +3360,14 @@ could be resized or managed in other ways.</source>
 môžete mu zmeniť veľkosť, alebo ho inak spravovať.</translation>
     </message>
     <message>
+        <source>GoldenDict</source>
+        <translation type="obsolete">GoldenDict</translation>
+    </message>
+    <message>
         <location filename="../scanpopup.cc" line="469"/>
         <location filename="../scanpopup.cc" line="814"/>
-        <source>GoldenDict</source>
-        <translation type="unfinished">GoldenDict</translation>
+        <source>%1 - %2</source>
+        <translation type="unfinished">%1 - %2</translation>
     </message>
 </context>
 <context>

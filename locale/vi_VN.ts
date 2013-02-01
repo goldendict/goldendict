@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>GoldenDict</source>
-        <translation>Từ điển Vàng</translation>
+        <translation type="obsolete">Từ điển Vàng</translation>
     </message>
     <message>
         <source>The referenced resource doesn&apos;t exist.</source>
@@ -1490,7 +1490,7 @@ between classic and school orthography in cyrillic)</source>
     <name>MainWindow</name>
     <message>
         <source>GoldenDict</source>
-        <translation>Từ điển Vàng</translation>
+        <translation type="obsolete">Từ điển Vàng</translation>
     </message>
     <message>
         <source>Welcome!</source>
@@ -2720,7 +2720,11 @@ thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translat
     </message>
     <message>
         <source>GoldenDict</source>
-        <translation type="unfinished">Từ điển Vàng</translation>
+        <translation type="obsolete">Từ điển Vàng</translation>
+    </message>
+    <message>
+        <source>%1 - %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

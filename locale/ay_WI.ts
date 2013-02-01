@@ -118,7 +118,7 @@
     <name>ArticleView</name>
     <message>
         <source>GoldenDict</source>
-        <translation>Quri aru pirwa</translation>
+        <translation type="obsolete">Quri aru pirwa</translation>
     </message>
     <message>
         <source>The referenced resource doesn&apos;t exist.</source>
@@ -2410,7 +2410,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <source>Tab 1</source>
@@ -3525,7 +3525,7 @@ could be resized or managed in other ways.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GoldenDict</source>
+        <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
