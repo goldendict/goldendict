@@ -256,13 +256,20 @@ void TranslateBox::showPopup()
     return;
   }
 
+  int preferredHeight = word_list->preferredHeight();
+
   QPoint origin( 0, translate_line->y() + translate_line->height() );
   if ( word_list->isWindow() )
+  {
     origin = mapToGlobal( origin );
+  }
   else
+  {
     origin = mapToParent( origin );
+    preferredHeight = qMin( translate_line->window()->height() - origin.y(), preferredHeight );
+  }
 
-  const QSize size(width(), word_list->preferredHeight());
+  const QSize size(width(), preferredHeight);
   const QRect rect( origin, size );
 
   word_list->setGeometry(rect);
