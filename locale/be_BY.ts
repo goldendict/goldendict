@@ -21,12 +21,12 @@
     <message>
         <location filename="../about.ui" line="83"/>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>Ліцэнзаваны пад GNU GPLv3 і пазьнейшай</translation>
+        <translation>Ліцэнзія GNU GPLv3 ці пазьнейшая</translation>
     </message>
     <message>
         <location filename="../about.ui" line="97"/>
         <source>Credits:</source>
-        <translation>Удзельнікі:</translation>
+        <translation>Удзельнікі праекту:</translation>
     </message>
     <message>
         <location filename="../about.cc" line="16"/>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation>GoldenDict не знайшоў перакладу для &lt;b&gt;%1&lt;/b&gt;.</translation>
+        <translation>GoldenDict не знайшоў перакладу ў ґрупе &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="177"/>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Вітаем у &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Перш за ўсё ваша мае наведаць &lt;b&gt;Зьмены|Слоўнікі&lt;/b&gt;, каб пазначыць колькі шляхоў да слоўнікавых файлаў, зь якіх будзе станавіцца бібліятэка слоўнікаў, дадаць розныя сайты Вікіпэдыі й іншыя крыніцы, вызначыць парадак слоўнікаў ды стварыць слоўнікавыя ґрупы.&lt;p&gt;Пасьля гэтага ваша зможа праглядаць слоўнікавыя артыкулы ў гэтым акне — упішыце шуканае слова ў панэлі шуканьня — ці шукаць словы ў вонкавых праґрама з дапамогаю &lt;a href=&quot;Карыстаньне слоўнікам у вонкавых праґрамах&quot;&gt;выплыўных вокнаў&lt;/a&gt;. &lt;p&gt;Каб дапасаваць да сябе праґраму, настаўце даступныя налады ў &lt;b&gt;Зьменах|Наладах&lt;/b&gt;. Усе зьмешчаныя там налады маюць падказкі. Канечне чытайце іх для ўпэўненасьці ў зробленых зьменах.&lt;p&gt;Калі ў вашай узьніклі пытаньні, прапановы, ці проста захацелася знаць меркаваньні людзей, тады запрашаем на наш &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форум&lt;/a&gt;.&lt;p&gt;Новыя вэрсіі праґрамы заўсёды можна знайсьці на нашым &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайце&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Канстанцін Ісакаў. Ліцэнзавана пад GPLv3 ці пазьнейшай.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Вітаем у &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Перш за ўсё наведай &lt;b&gt;Зьмены|Слоўнікі&lt;/b&gt;, каб пазначыць шляхі да слоўнікавых файлаў, зь якіх будзе станавіцца бібліятэка слоўнікаў, дадай розныя сайты Вікіпэдыі й іншыя крыніцы, вызначы парадак слоўнікаў ды ствары слоўнікавыя ґрупы.&lt;p&gt;Па наладжваньні праґрама будзе гатовая да прагляду слоўнікавых артыкулаў. Можна тое рабіць у гэтым акне (упішы шуканае слова ў радку шуканьня) ці ў вонкавых праґрамах з дапамогаю &lt;a href=&quot;Карыстаньне слоўнікам у вонкавых праґрамах&quot;&gt;выплыўных вокнаў&lt;/a&gt;. &lt;p&gt;Каб дапасаваць да сябе праґраму, скарыстай даступныя налады ў &lt;b&gt;Зьменах|Наладах&lt;/b&gt;. Усе зьмешчаныя там налады маюць падказкі. Чытай іх для ўпэўненасьці ў зробленых зьменах.&lt;p&gt;Калі ўзьніклі пытаньні, прапановы, ці проста захацелася знаць меркаваньні людзей, тады запрашаем на наш &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форум&lt;/a&gt;.&lt;p&gt;Новыя вэрсіі праґрамы заўсёды можна знайсьці на нашым &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайце&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Канстанцін Ісакаў. Ліцэнзія GPLv3 ці пазьнейшая.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="195"/>
@@ -64,17 +64,17 @@
     <message>
         <location filename="../article_maker.cc" line="197"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Карыстаньне слоўнікам у вонкавых праґрамах&lt;/h3&gt;Каб шукаць словы ў слоўніку з-пад іншых праґрамаў, трэба ўлучыць &lt;i&gt;мэханізм выплыўных вокнаў&lt;/i&gt; у &lt;b&gt;Наладах&lt;/b&gt;, і пасьля таго заціснуць кнопку „Выплыўныя вокны“ ў галоўным акне, ці ўлучыць адпаведны пункт кантэкстнага мэню значка ў сыстэмны лотку. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Карыстаньне слоўнікам у вонкавых праґрамах&lt;/h3&gt;Каб шукаць словы ў слоўніку з-пад іншых праґрамаў, трэба ўлучыць &lt;i&gt;мэханізм выплыўных вокнаў&lt;/i&gt; у &lt;b&gt;Наладах&lt;/b&gt;, і заціснуць кнопку „Выплыўныя вокны“ ў галоўным акне, ці ўлучыць адпаведны пункт кантэкстнага мэню значка ў сыстэмны лотку. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="204"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>Затым у кожнай праґраме проста спыніце курсор мышы над словам, і праз хвілю зьявіцца выплыўное акно з адпаведным артыкулам.</translation>
+        <translation>Затым у кожнай праґраме проста спыні курсор мышы над словам, і праз хвілю зьявіцца выплыўное акно з адпаведным артыкулам.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="207"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Затым у кожнай праґраме проста выдзеліце слова мышшу (зрабіце падвойны пстрык ці правядзіце па слову курсорам мышы з заціснутай левай кнопкай), і праз хвілю зьявіцца выплыўное акно з адпаведным артыкулам.</translation>
+        <translation>Затым у кожнай праґраме проста выберы слова мышшу (двойчы прстрыкні ці правядзі па слову курсорам мышы з заціснутай левай кнопкай), і праз хвілю зьявіцца выплыўное акно з адпаведным артыкулам.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="284"/>
@@ -140,12 +140,12 @@
     <message>
         <location filename="../articleview.ui" line="92"/>
         <source>&amp;Previous</source>
-        <translation>&amp;Папярэдняе</translation>
+        <translation>&amp;Папярэдні</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="109"/>
         <source>&amp;Next</source>
-        <translation>&amp;Наступнае</translation>
+        <translation>&amp;Наступны</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="116"/>
@@ -160,12 +160,12 @@
     <message>
         <location filename="../articleview.ui" line="152"/>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished">Меркаваць &amp;рэґістр</translation>
+        <translation>Меркаваць &amp;рэґістр</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="162"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбраць дзейны артыкул</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="689"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../articleview.cc" line="1125"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation>Зьмясьціць „%1“ у ўводны радок</translation>
+        <translation>Зьмясьціць „%1“ у ўводным радоку</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1131"/>
@@ -251,12 +251,12 @@
     <message>
         <location filename="../articleview.cc" line="1145"/>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>Шукаць „%1“ у %2</translation>
+        <translation>Шукаць „%1“ у ґрупе %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1153"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>Шукаць „%1“ у %2 у новай у&amp;кладцы</translation>
+        <translation>Шукаць „%1“ у ґрупе %2 у новай у&amp;кладцы</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1324"/>
@@ -266,7 +266,7 @@
     <message>
         <location filename="../articleview.cc" line="1325"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Каб улучыць прайграваньне файлаў розных ад WAV, перайдзіце да Зьмены|Налады, абярыце ўкладку Аўдыё і ўлучыце „Прайграваць цераз DirectShow“.</translation>
+        <translation>Каб улучыць прайграваньне файлаў розных ад WAV, перайдзі да Зьменаў|Наладаў, абяры ўкладку Аўдыё і ўлучы „Прайграваць цераз DirectShow“.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1340"/>
@@ -288,7 +288,7 @@
     <message>
         <location filename="../articleview.cc" line="1380"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation type="unfinished">Немажліва ўрухоміць прайгравальніка гукавага файла: %1</translation>
+        <translation>Немажліва ўрухоміць прайгравальніка гукавага файла: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1398"/>
@@ -298,7 +298,7 @@
     <message>
         <location filename="../articleview.cc" line="1409"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Не атрымалася аўтаматычна адчыніць рэсурсавага файла. Паспрабуйце адчыніць уручную %1.</translation>
+        <translation>Не атрымалася аўтаматычна адчыніць рэсурсавага файла. Паспрабуй адчыніць ручна %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1432"/>
@@ -356,7 +356,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="90"/>
         <source>Choose a file to use as group icon</source>
-        <translation>Выберыце файл выявы, якая будзе значкам ґрупы</translation>
+        <translation>Абяры файл выявы, якая будзе значкам ґрупы</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="92"/>
@@ -376,7 +376,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation>Немагчыма прачытаць выбраны файл выявы.</translation>
+        <translation>Немагчыма прачытаць абраны файл выявы.</translation>
     </message>
 </context>
 <context>
@@ -397,22 +397,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="691"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation>Ці пэўна хочаце зґенэраваць збор ґрупаў на падставе моўных пар?</translation>
+        <translation>Ці напэўна хочаш зґенэраваць збор ґрупаў на падставе моўных пар?</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Па-за ґрупамі</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation>Сабраць ґрупу „%1-&gt;“ паводле зыходнай мовы</translation>
+        <translation>Сабраць ґрупы „%1-&gt;“ паводле выходнае мовы</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation>Сабраць ґрупу „-&gt;%1“ паводле мэтавай мовы</translation>
+        <translation>Сабраць ґрупы „-&gt;%1“ паводле мэтавае мовы</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
@@ -423,7 +423,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation>Сабраць ґрупу „%1“</translation>
+        <translation>Сабраць ґрупы з „%1“</translation>
     </message>
 </context>
 <context>
@@ -436,7 +436,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation>Пераклад з:</translation>
+        <translation>Выходная мова:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
@@ -446,7 +446,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="71"/>
         <source>Translates to:</source>
-        <translation>Пераклад на:</translation>
+        <translation>Мэтавая мова:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="88"/>
@@ -540,45 +540,45 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../externalviewer.cc" line="49"/>
         <source>the viewer program name is empty</source>
-        <translation>Назва праґрамы праглядальніка парожняя</translation>
+        <translation>назва праґрамы праглядальніка парожняя</translation>
     </message>
 </context>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="227"/>
+        <location filename="../forvo.cc" line="230"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Памылка разбору файла XML: %1 — радок %2, слупок %3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="303"/>
+        <location filename="../forvo.cc" line="306"/>
         <source>Added %1</source>
-        <translation>Дадана %1</translation>
+        <translation>Даданы %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="309"/>
         <source>by</source>
         <translation> </translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="310"/>
+        <location filename="../forvo.cc" line="313"/>
         <source>Male</source>
         <translation>Мужчына</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="310"/>
+        <location filename="../forvo.cc" line="313"/>
         <source>Female</source>
         <translation>Жанчына</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="312"/>
+        <location filename="../forvo.cc" line="315"/>
         <source>from</source>
         <translation>з</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="350"/>
+        <location filename="../forvo.cc" line="353"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Прайдзіце да Зьмены|Слоўнікі|Крыніцы|Forvo і атрымаце свой уласны API-ключ, каб прыбраць гэтую памылку.</translation>
+        <translation>Прайдзі ў Зьмены|Слоўнікі|Крыніцы|Forvo і атрымай свой уласны API-ключ, каб прыбраць гэтую памылку.</translation>
     </message>
 </context>
 <context>
@@ -602,7 +602,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groupcombobox.cc" line="14"/>
         <source>Choose a Group (Alt+G)</source>
-        <translation>Выберыце ґрупу (Alt+G)</translation>
+        <translation>Абяры ґрупу (Alt+G)</translation>
     </message>
 </context>
 <context>
@@ -663,7 +663,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
-        <translation>Tab 2</translation>
+        <translation>Укладка</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
@@ -719,7 +719,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Перацягвайце слоўнікі ў/з ґрупы. Разьмяркоўвайце іх у ґрупе з дапамогай мышы.</translation>
+        <translation>Перацягвай слоўнікі ў/з ґрупы. Разьмяркоўвай іх у ґрупе з дапамогаю мышы.</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="108"/>
@@ -729,7 +729,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="109"/>
         <source>Give a name for the new group:</source>
-        <translation>Задайце назву новай ґрупы:</translation>
+        <translation>Задай назву новай ґрупы:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="134"/>
@@ -739,7 +739,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="135"/>
         <source>Give a new name for the group:</source>
-        <translation>Задайце новую назву ґрупы:</translation>
+        <translation>Задай новую назву ґрупы:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="146"/>
@@ -749,12 +749,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="147"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>Вы сапраўды жадаеце выдаліць ґрупу &lt;b&gt;%1&lt;/b&gt;?</translation>
+        <translation>Сапраўды жадаеш выдаліць ґрупу &lt;b&gt;%1&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="160"/>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>Вы сапраўды жадаеце выдаліць усе ґрупы?</translation>
+        <translation>Сапраўды жадаеш выдаліць усе ґрупы?</translation>
     </message>
 </context>
 <context>
@@ -762,38 +762,38 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выдаліць выбранае</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Скапіяваць выбранае</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Гісторыя:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="211"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="215"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Памер гісторыі: %1 запісаў з %2 магчымых</translation>
     </message>
 </context>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="236"/>
+        <location filename="../hunspell.cc" line="239"/>
         <source>Spelling suggestions: </source>
         <translation>Артаґрафічныя падказкі: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="776"/>
+        <location filename="../hunspell.cc" line="779"/>
         <source>%1 Morphology</source>
         <translation>Марфалёґія %1</translation>
     </message>
@@ -822,7 +822,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../initializing.ui" line="22"/>
         <location filename="../initializing.cc" line="30"/>
         <source>Please wait while indexing dictionary</source>
-        <translation>Чакайце. Ідзе індэксаваньне слоўнікаў</translation>
+        <translation>Чакай. Ідзе індэксаваньне слоўнікаў</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="38"/>
@@ -1843,7 +1843,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../loaddictionaries.cc" line="216"/>
         <source>Error loading dictionaries</source>
-        <translation>Памылка пры ладаваньня слоўнікаў</translation>
+        <translation>Памылка пры ладаваньні слоўнікаў</translation>
     </message>
 </context>
 <context>
@@ -1870,7 +1870,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="86"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Зьмены</translation>
+        <translation>Зь&amp;мены</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
@@ -1895,21 +1895,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished">Панэль &amp;прагляду</translation>
+        <translation>Панэль &amp;прагляду</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished">Панэль &amp;навіґацыі па выніках</translation>
+        <translation>Панэль &amp;навіґацыі па выніках</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="obsolete">&amp;Слоўнікі...	F3</translation>
+        <translation>Панэль &amp;гісторыі</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
@@ -1919,7 +1915,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="331"/>
@@ -1970,17 +1966,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="366"/>
         <source>&amp;Forum</source>
-        <translation type="unfinished">&amp;Форум</translation>
+        <translation>&amp;Форум</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="371"/>
         <source>&amp;Close To Tray</source>
-        <translation type="unfinished">Зьвінуць у &amp;лотак</translation>
+        <translation>Зьвінуць у &amp;лотак</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="374"/>
         <source>Minimizes the window to tray</source>
-        <translation type="unfinished">Зьвінуць акно ў лотак</translation>
+        <translation>Зьвінуць акно ў лотак</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="377"/>
@@ -2020,7 +2016,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Print Pre&amp;view</source>
-        <translation>Перад&amp;агляд друку</translation>
+        <translation>Перадпр&amp;агляд друку</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
@@ -2035,12 +2031,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="427"/>
         <source>&amp;Clear</source>
-        <translation type="unfinished">&amp;Ачысьціць</translation>
+        <translation>&amp;Ачысьціць</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished">&amp;Новая ўстаўка</translation>
+        <translation>&amp;Новая ўкладка</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="439"/>
@@ -2050,7 +2046,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="447"/>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished">Тэчка &amp;канфіґурацыі</translation>
+        <translation>Тэчка &amp;канфіґурацыі</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
@@ -2066,12 +2062,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="460"/>
         <source>&amp;Export</source>
-        <translation type="unfinished">З&amp;экспартаваць</translation>
+        <translation>З&amp;экспартаваць</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <source>&amp;Import</source>
-        <translation type="unfinished">З&amp;ымпартаваць</translation>
+        <translation>З&amp;ымпартаваць</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="473"/>
@@ -2103,7 +2099,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="63"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation>Адлюстроўваць малыя значкі у паліцы &amp;інструмэнтаў</translation>
+        <translation>Адлюстроўваць малыя значкі ў паліцы &amp;інструмэнтаў</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="64"/>
@@ -2138,12 +2134,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="143"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Павялічыць</translation>
+        <translation>Павялічыць</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="149"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Паменшыць</translation>
+        <translation>Паменшыць</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="153"/>
@@ -2164,17 +2160,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="261"/>
         <source>Words Zoom In</source>
-        <translation type="unfinished">Павялічыць радок шуканьня</translation>
+        <translation>Павялічыць радок шуканьня</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="265"/>
         <source>Words Zoom Out</source>
-        <translation type="unfinished">Паменшыць радок шуканьня</translation>
+        <translation>Паменшыць радок шуканьня</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="267"/>
         <source>Words Normal Size</source>
-        <translation type="unfinished">Звычайны памер радка шуканьня</translation>
+        <translation>Звычайны памер радка шуканьня</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="275"/>
@@ -2242,13 +2238,9 @@ between classic and school orthography in cyrillic)</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">УВАГА: %1</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="2419"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Памылка ініцыялізацыі сачэньня за клявішнымі скаротамі.&lt;br&gt;Пераканайцеся, што ваш XServer мае ўлучанае пашырэньне RECORD.</translation>
+        <translation>Памылка ініцыялізацыі сачэньня за клявішнымі скаротамі.&lt;br&gt;Пераканайся, што XServer мае ўлучанае пашырэньне RECORD.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2553"/>
@@ -2273,7 +2265,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2676"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation>Вы схавалі паліцу мэню. Скарыстаце %1, каб павараціць яе назад.</translation>
+        <translation>Паліца мэню ёсьць схаваная. Скарыстай %1, каб павараціць назад.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2677"/>
@@ -2288,7 +2280,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2776"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>Няма дасяжных друкарак. Спачатку ўсталюйце хоць адну.</translation>
+        <translation>Няма дасяжных друкарак. Спачатку ўсталюй хоць адну.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2793"/>
@@ -2326,10 +2318,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>С&amp;хаваць</translation>
     </message>
     <message>
-        <source>History view mode</source>
-        <translation type="obsolete">Рэжым прагляду гісторыі</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="3048"/>
         <source>Export history to file</source>
         <translation>Экспартаваньне гісторыі ў файл</translation>
@@ -2356,18 +2344,14 @@ between classic and school orthography in cyrillic)</source>
         <translation>Імпартаваньне гісторыі з файла</translation>
     </message>
     <message>
-        <source>Imported from file: </source>
-        <translation type="obsolete">Зымпартаванае з файла: </translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="3159"/>
         <source>Import error: invalid data in file</source>
-        <translation>Памылка імпартаваньня: няслушныя зьвесткі ў файле</translation>
+        <translation>Памылка імпартаваньня: хібныя зьвесткі ў файле</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3163"/>
         <source>History import complete</source>
-        <translation>Імпартаваньне гісторыя скончылася</translation>
+        <translation>Імпартаваньне гісторыі скончылася</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3166"/>
@@ -2382,13 +2366,13 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3275"/>
         <source>Edit dictionary</source>
-        <translation>Рэдагаваць слоўнік</translation>
+        <translation>Рэдаґаваць слоўнік</translation>
     </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="299"/>
+        <location filename="../mediawiki.cc" line="302"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Памылка разбору файла XML: %1 — радок %2, слупок %3</translation>
     </message>
@@ -2396,7 +2380,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="168"/>
+        <location filename="../mediawiki.cc" line="171"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Памылка разбору файла XML: %1 — радок %2, слупок %3</translation>
     </message>
@@ -2447,7 +2431,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="139"/>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>Вылучаныя слоўнікі:</translation>
+        <translation>Неўжываныя (вылучаныя) слоўнікі:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="153"/>
@@ -2472,12 +2456,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
-        <translation>Пераклад з:</translation>
+        <translation>Выходная мова:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="219"/>
         <source>Translates to:</source>
-        <translation>Пераклад на:</translation>
+        <translation>Мэтавая мова:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="248"/>
@@ -2492,7 +2476,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Упарадкуйце слоўнікі, разьмеркаваўшы іх мышшу. Каб не ўжываць слоўніка, перацягніце яго ў ґрупу вылучаных слоўнікаў.</translation>
+        <translation>Упарадкуй слоўнікі, разьмеркаваўшы іх мышшу. Каб не ўжываць слоўніка, перацягні яго ў ґрупу вылучаных слоўнікаў.</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
@@ -2542,7 +2526,7 @@ With this on however, new tabs will be opened without
 switching to them.</source>
         <translation>Звычайна, адчыненая ўкладка адразу становіцца дзейнай.
 Па ўлучэньню гэтае опцыі, новыя ўкладкі будуць адчыняцца
-безь пераходу стан дзейнай.</translation>
+безь пераходу ў стан дзейнай.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="58"/>
@@ -2554,7 +2538,7 @@ switching to them.</source>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Па ўлучэньню гэтае опцыі, новы ўкладкі будуць
+        <translation>Па ўлучэньню гэтае опцыі, новыя ўкладкі будуць
 адчыняцца адразу за дзейнай, а не ў канцы.</translation>
     </message>
     <message>
@@ -2565,8 +2549,8 @@ be the last ones.</source>
     <message>
         <location filename="../preferences.ui" line="77"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation>Улучыце гэтую опцыю, калі не жадаеце бачыць паліцы ўкладак,
-калі толькі адна ўкладка ёсьць адчыненай.</translation>
+        <translation>Улучы гэтую опцыю, калі не жадаеш бачыць паліцы ўкладак,
+калі толькі адна ўкладка ёсьць адчыненая.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="80"/>
@@ -2616,27 +2600,27 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="144"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation>Улучыце гэтую опцыю, калі вы хочаце выдзеляць словы адзным пстрыкам</translation>
+        <translation>Улучы гэтую опцыю, калі вы хочаш выбіраць словы адным пстрыкам</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="147"/>
         <source>Select word by single click</source>
-        <translation>Выдзеляць слова адным пстрыкам</translation>
+        <translation>Выбіраць словы адным пстрыкам</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="154"/>
         <source>Startup</source>
-        <translation type="unfinished">Стартаваньне</translation>
+        <translation>Стартаваньне</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="160"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation type="unfinished">Аўтаматычна стартаваць GoldenDict пасьля таго, як сыстэма заладуецца.</translation>
+        <translation>Аўтаматычна стартаваць GoldenDict пасьля таго, як сыстэма заладуецца.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="163"/>
         <source>Start with system</source>
-        <translation type="unfinished">Стартаваць разам з сыстэмаю</translation>
+        <translation>Стартаваць разам з сыстэмаю</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="188"/>
@@ -2646,7 +2630,7 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="214"/>
         <source>Display style:</source>
-        <translation>Стыль інтэрфэйсу:</translation>
+        <translation>Стыль артыкулаў:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="252"/>
@@ -2681,10 +2665,10 @@ With this on however, it will hide the main window.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation type="unfinished">Калі ўлучана, выплыўное акно будзе паказвацца кожны раз, калі ваша
-перамясьціць мышку на слова на экране (Windows) ці выдзеліць яго (Linux).
-Калі ўлучана, можна адлучыць ці ўлучыць працу выплыўнога акна ў галоўным
-акне ці ў сыстэмным лотку.</translation>
+        <translation>Калі ўлучана, выплыўное акно будзе паказвацца кожны раз, калі
+перамясьціць курсор мышы на слова на экране (Windows) ці выбраць
+яго (Linux). Калі ўлучана, можна адлучыць ці ўлучыць працу выплыўнога
+акна ў галоўным акне ці ў сыстэмным лотку.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="327"/>
@@ -2819,8 +2803,8 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation>Звычайна, каб выклікаць выплыўное акно, вы мусіце трымаць
-націснутымі адпаведныя клявішы ў час выдзяленьня слова.
+        <translation>Звычайна, каб выклікаць выплыўное акно, трэба трымаць
+націснутымі адпаведныя клявішы ў час выбіраньня слова.
 Разам з гэтай опцыяй, клявішы могуць быць націснутымі
 й праз пэўны час.</translation>
     </message>
@@ -2834,7 +2818,7 @@ be pressed shortly after the selection is done.</source>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>Каб унікаць памылковы выклікаў, клявішы назіраюцца толькі
+        <translation>Каб унікаць памылковых выклікаў, GoldenDict цікуе за клявішамі
 абмежаваную колькасьць сэкундаў, якая й задаецца тут.</translation>
     </message>
     <message>
@@ -2845,7 +2829,7 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="579"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation>Слаць перакладанае слова ў галоўнае акно замест выкліку ўсплыўнога</translation>
+        <translation>Слаць перакладанае слова ў галоўнае акно замест выкліканьня выплыўнога</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="582"/>
@@ -2860,12 +2844,12 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="629"/>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>Выкарыстоўваць наступны скарот для выкліку галоўнага акна:</translation>
+        <translation>Выкарыстоўваць наступны скарот для выкліканьня галоўнага акна:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="660"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Выкарыстоўваць наступны скарот для перакладу слова з кішэні абмену:</translation>
+        <translation>Выкарыстоўваць наступны скарот для перакладу слова з кішэні:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="707"/>
@@ -2883,7 +2867,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Заўвага: Падобна на тое, што ў вашым выпуску X.Org XServer не працуе пашырэньне RECORD. Клявішныя скароты GoldenDict імаверна працаваць ня будуть. Гэта трэба выпраўляць на баку сэрвэру. Падрабязную інфармацыю ваша знойдзе &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;тут&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;. Пры жаданьні там можа пакінуць свой камэнтар.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Заўвага: Падобна на тое, што дзейны  выпуск X.Org XServer мае непрацаздольнае пашырэньне RECORD. Клявішныя скароты GoldenDict імаверна рабіць ня будуть. Гэта трэба выпраўляць на баку сэрвэру. Падрабязная інфармацыя &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;тут&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;. Пры жаданьні там можна пакінуць свой камэнтар.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="755"/>
@@ -2939,7 +2923,7 @@ but should support most audio file formats.</source>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
         <translation>Прайграваць аўдыё празь бібліятэку Bass. Найлепшы выбар. Каб ужыць гэты рэжым,
-ваша мусіць разьмясьціць bass.dll (http://www.un4seen.com) у каталёзе GoldenDict.</translation>
+трэба разьмясьціць bass.dll (http://www.un4seen.com) у каталёзе GoldenDict.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="832"/>
@@ -3005,7 +2989,7 @@ by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
         <translation>Дазволіць GoldenDict блякаваць большасьць рэклямы праз забарону
 пэўнага зьмесьціва (выяваў, рамак), якое не належыць уласна сайтам.
-Калі нейкія сайты зламаюцца, паспрабуйце вылучыць гэтую опцыю.</translation>
+Калі нейкія сайты зламаюцца, паспрабуй вылучыць гэтую опцыю.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1009"/>
@@ -3034,7 +3018,7 @@ is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
         <translation>Калі опцыя ўлучаная, праґрама будзе правяраць
-наяўнаць абнаўленьняў GoldenDict. Калі наяўнасьць
+наяўнасьць абнаўленьняў GoldenDict. Калі наяўнасьць
 пацьвердзіцца, праґрама нагадае пра гэта
 й прапануе наведаць бачыну зладаваньня.</translation>
     </message>
@@ -3059,10 +3043,10 @@ download page.</source>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Скарыстайце тэхналёґію IAccessibleEx, каб вызначаць словы пад курсорам.
-Яна працуе толькі з тымі праґрамамі, якія падтрымліваюць яе (прыкладам
+        <translation>Скарыстай тэхналёґію IAccessibleEx, каб вызначаць словы пад курсорам.
+Яна працуе толькі з тымі праґрамамі, якія падтрымліваюць яе (прыкладам,
 Internet Explorer 9).
-Ня трэба ўлучаць гэтае опцыі, калі ваша не карыстаецца такімі праґрамамі.</translation>
+Ня трэба ўлучаць гэтае опцыі, калі не карыстаешся такімі праґрамамі.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1090"/>
@@ -3074,9 +3058,9 @@ Internet Explorer 9).
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Скарыстайце тэхналёґію UI Automation, каб вызначаць словы пад курсорам.
+        <translation>Скарыстай тэхналёґію UI Automation, каб вызначаць словы пад курсорам.
 Яна працуе толькі з тымі праґрамамі, якія падтрымліваюць яе.
-Ня трэба ўлучаць гэтае опцыю, калі ваша не карыстаецца такімі праґрамамі.</translation>
+Ня трэба ўлучаць гэтае опцыю, калі не карыстаешся такімі праґрамамі.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1102"/>
@@ -3088,9 +3072,9 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Скарыстайце адмысловыя запыты GoldenDict, каб вызначаць словы пад курсорам.
+        <translation>Скарыстай адмысловыя запыты GoldenDict, каб вызначаць словы пад курсорам.
 Яны працуюць толькі з тымі праґрамамі, якія іх падтрымліваюць.
-Ня трэба ўлучаць гэтае опцыі, калі ваша не карыстаецца такімі праґрамамі.</translation>
+Ня трэба ўлучаць гэтае опцыі, калі не карыстаешся такімі праґрамамі.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1114"/>
@@ -3105,7 +3089,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation>Улучыце гэтую опцыю, каб захоўваць гісторыю перакладаных словаў</translation>
+        <translation>Улучы гэтую опцыю, каб захоўваць гісторыю перакладаных словаў</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1133"/>
@@ -3115,12 +3099,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1148"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пазначае максымальную колькасьць запісаў у гісторыі.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1151"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Памер гісторыі:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1189"/>
@@ -3130,12 +3114,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1195"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Улучыце гэтую опцыю, каб заўсёды раскрываць дадатковыя разьдзелы артыкулаў</translation>
+        <translation>Улучы гэтую опцыю, каб заўсёды разьвінаць дадатковыя разьдзелы артыкулаў</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1198"/>
         <source>Expand optional &amp;parts</source>
-        <translation>Раскрываць дадатковыя &amp;разьдзелы</translation>
+        <translation>Разьвінаць дадатковыя &amp;разьдзелы</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="42"/>
@@ -3170,7 +3154,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.cc" line="360"/>
         <source>Restart the program to apply the language change.</source>
-        <translation>Перастартуйце праґраму, каб ужыць зьмену мовы.</translation>
+        <translation>Перастартуй праґраму, каб ужыць зьмененую мовы.</translation>
     </message>
 </context>
 <context>
@@ -3183,7 +3167,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../sources.cc" line="803"/>
         <source>Plain Text</source>
-        <translation>Тэкст</translation>
+        <translation>Звычайны тэкст</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="805"/>
@@ -3204,17 +3188,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="164"/>
+        <location filename="../programs.cc" line="167"/>
         <source>No program name was given.</source>
         <translation>Назва праґрамы не зададзеная.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="180"/>
+        <location filename="../programs.cc" line="183"/>
         <source>The program has crashed.</source>
         <translation>Праґрама нечакана скасавалася.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="186"/>
         <source>The program has returned exit code %1.</source>
         <translation>Праґрама павараціла выходны код %1.</translation>
     </message>
@@ -3294,10 +3278,6 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Дыялёґ</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">слова</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.ui" line="86"/>
         <source>Back</source>
         <translation>Назад</translation>
@@ -3315,14 +3295,6 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../scanpopup.ui" line="100"/>
         <source>Forward</source>
         <translation>Наперад</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Сьпіс зьбежнасьцяў (Alt+M)</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="114"/>
@@ -3347,20 +3319,20 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="164"/>
         <source>Shows or hides the dictionary bar</source>
-        <translation>Паказаць або схаваць слоўнікаву паліцу</translation>
+        <translation>Паказаць або схаваць слоўнікавую паліцу</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="187"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation>Выкарыстаце шпільку, каб замацаваць акно на экране,
-зьмяняць ягоны памер, ды кіраваць ім любым зручным для вас спосабам.</translation>
+        <translation>Скарыстай шпільку, каб замацаваць акно на экране, зьмяняць
+ягоны памер, ды кіраваць ім кожным зручным спосабам.</translation>
     </message>
     <message>
         <location filename="../scanpopup.cc" line="469"/>
         <location filename="../scanpopup.cc" line="814"/>
         <source>GoldenDict</source>
-        <translation type="unfinished">GoldenDict</translation>
+        <translation>GoldenDict</translation>
     </message>
 </context>
 <context>
@@ -3434,7 +3406,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="175"/>
         <source>&amp;Change...</source>
-        <translation>&amp;Зьмяніць...</translation>
+        <translation>Зь&amp;мяніць...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="184"/>
@@ -3450,11 +3422,11 @@ spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
         <translation>Кожны марфаляґічны слоўнік ёсьць
-асобным дапаможным слоўнікам, які
+асобны дапаможны слоўнік, які
 забесьпячае падставовыя формы
 словаў для шуканьня і прапаноўвае
-падобныя слушныя выразы для
-памылкова напісаных. Дадавайце
+падобныя правільныя выразы для
+памылкова напісаных. Дадавай
 адпаведныя слоўнікі ў канец
 адпаведных ґруп.</translation>
     </message>
@@ -3476,12 +3448,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="286"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Усякія сайты. %GDWORD% заменіцца на запытанае слова:</translation>
+        <translation>Розныя сайты. %GDWORD% заменіцца на запытанае слова:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Таксама выкарыстоўвайце %GD1251% для знаказбору CP1251 і  %GDISO1% для ISO 8859-1.</translation>
+        <translation>Таксама выкарыстоўвай %GD1251% для знаказбору CP1251 і  %GDISO1% для ISO 8859-1.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="343"/>
@@ -3491,7 +3463,7 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="349"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Усякія вонкавыя праґрамы. %GDWORD% заменіцца на запытанае слова. Апроч таго гэтае слова будзе пададзена ў стандартны ўвод.</translation>
+        <translation>Розныя вонкавыя праґрамы. %GDWORD% заменіцца на запытанае слова. Апроч таго гэтае слова будзе пададзена ў стандартны ўвод.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="402"/>
@@ -3501,7 +3473,7 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="414"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Жывое вымаўленьне ад &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Гэты сайт дазваляе людзям запісваць і дзяліцца вымаўленьнем словаў. Вы можаце праслухаць іх пры дапамозе GoldenDict.</translation>
+        <translation>Жывое вымаўленьне ад &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Гэты сайт дазваляе людзям запісваць і дзяліцца вымаўленьнем словаў. Іх можна праслухаць пры дапамозе GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="427"/>
@@ -3518,7 +3490,7 @@ of the appropriate groups to use them.</source>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation>Карыстаньне сайтам Forvo патрабуе ключ API. Пакіньце поле пустым, каб карыстацца стандартным ключом, які пазьней можа стаць недаступным, ці зарэґіструйцеся на сайце і атрымайце ўласны ключ.</translation>
+        <translation>Карыстаньне сайтам Forvo патрабуе ключ API. Пакінь поле пустым, каб карыстацца стандартным ключом, які пазьней можа стаць недаступным, ці зарэґіструйся на сайце і атрымай уласны ключ.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="489"/>
@@ -3530,7 +3502,7 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Атрымайце ваш уласны ключ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;тут&lt;/a&gt;, ці пакіньце поле пустым для стандартнага значэньня</translation>
+        <translation>Атрымай свой уласны ключ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;тут&lt;/a&gt;, ці пакінь поле пустым для стандартнага значэньня</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="509"/>
@@ -3540,7 +3512,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="516"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation>Пералік моўнык кодаў, якія вы хочаце мець. Напрыклад: „en, ru“.</translation>
+        <translation>Пералік выбраных моўнык кодаў. Прыкладам: „en, ru“.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="539"/>
@@ -3591,7 +3563,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="696"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation>Найбольш ужываны мэтад транскрыпцыі японскай мовы
+        <translation>Найбольш ужываны мэтад транскрыпцыі японскае мовы
 на падставе анґельскае фаналёґіі</translation>
     </message>
     <message>
@@ -3606,9 +3578,9 @@ kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
         <translation>Гэта сыстэма найбольш дакладна адлюстроўвае знакі каны.
-Стандартызаваная у ISO 3602.
+Стандартызаваная ў ISO 3602.
 
-У GoldenDict покуль не падтрымліваецца.</translation>
+У GoldenDict яшчэ не падтрымліваецца.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="716"/>
@@ -3621,10 +3593,10 @@ Not implemented yet in GoldenDict.</source>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Створана на падставе сыстэмы Ніхон-сікі і адаптаваная да сучаснай Японскай.
-Стандартызаваная у ISO 3602.
+        <translation>Створаная на падставе сыстэмы Ніхон-сікі і адаптаваная да сучаснай Японскай.
+Стандартызаваная ў ISO 3602.
 
-У GoldenDict покуль не падтрымліваецца.</translation>
+У GoldenDict яшчэ не падтрымліваецца.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="732"/>
@@ -3708,7 +3680,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="104"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation>Упішыце слова ці выраз для шуканьня ў слоўніках</translation>
+        <translation>Упішы слова ці выраз для шуканьня ў слоўніках</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="126"/>
@@ -3752,7 +3724,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">УВАГА: %1</translation>
+        <translation>УВАГА: %1</translation>
     </message>
 </context>
 </TS>

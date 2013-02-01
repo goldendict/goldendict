@@ -21,12 +21,12 @@
     <message>
         <location filename="../about.ui" line="83"/>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>Licenzavany pad GNU GPLv3 i paźniejšaj</translation>
+        <translation>Licenzija GNU GPLv3 ci paźniejšaja</translation>
     </message>
     <message>
         <location filename="../about.ui" line="97"/>
         <source>Credits:</source>
-        <translation>Udzielniki:</translation>
+        <translation>Udzielniki prajektu:</translation>
     </message>
     <message>
         <location filename="../about.cc" line="16"/>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation>GoldenDict nie znajšoŭ pierakładu dla &lt;b&gt;%1&lt;/b&gt;.</translation>
+        <translation>GoldenDict nie znajšoŭ pierakładu ŭ grupie &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="177"/>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajem u &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Pierš za ŭsio vaša maje naviedać &lt;b&gt;Źmieny|Słoŭniki&lt;/b&gt;, kab paznačyć kolki šlachoŭ da słoŭnikavych fajłaŭ, ź jakich budzie stanavicca biblijateka słoŭnikaŭ, dadać roznyja sajty Wikipedyi j inšyja krynicy, vyznačyć paradak słoŭnikaŭ dy stvaryć słoŭnikavyja grupy.&lt;p&gt;Paśla hetaha vaša zmoža prahladać słoŭnikavyja artykuły ŭ hetym aknie — upišycie šukanaje słova ŭ paneli šukańnia — ci šukać słovy ŭ vonkavych pragrama z dapamohaju &lt;a href=&quot;Karystańnie słoŭnikam u vonkavych pragramach&quot;&gt;vypłyŭnych voknaŭ&lt;/a&gt;. &lt;p&gt;Kab dapasavać da siabie pragramu, nastaŭcie dastupnyja nałady ŭ &lt;b&gt;Źmienach|Naładach&lt;/b&gt;. Usie źmieščanyja tam nałady majuć padkazki. Kaniečnie čytajcie ich dla ŭpeŭnienaści ŭ zroblenych źmienach.&lt;p&gt;Kali ŭ vašaj uźnikli pytańni, prapanovy, ci prosta zachaciełasia znać mierkavańni ludziej, tady zaprašajem na naš &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Novyja versii pragramy zaŭsiody možna znajści na našym &lt;a href=&quot;http://goldendict.org/&quot;&gt;sajcie&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Kanstancin Isakaŭ. Licenzavana pad GPLv3 ci paźniejšaj.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajem u &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Pierš za ŭsio naviedaj &lt;b&gt;Źmieny|Słoŭniki&lt;/b&gt;, kab paznačyć šlachi da słoŭnikavych fajłaŭ, ź jakich budzie stanavicca biblijateka słoŭnikaŭ, dadaj roznyja sajty Wikipedyi j inšyja krynicy, vyznačy paradak słoŭnikaŭ dy stvary słoŭnikavyja grupy.&lt;p&gt;Pa naładžvańni pragrama budzie hatovaja da prahladu słoŭnikavych artykułaŭ. Možna toje rabić u hetym aknie (upišy šukanaje słova ŭ radku šukańnia) ci ŭ vonkavych pragramach z dapamohaju &lt;a href=&quot;Karystańnie słoŭnikam u vonkavych pragramach&quot;&gt;vypłyŭnych voknaŭ&lt;/a&gt;. &lt;p&gt;Kab dapasavać da siabie pragramu, skarystaj dastupnyja nałady ŭ &lt;b&gt;Źmienach|Naładach&lt;/b&gt;. Usie źmieščanyja tam nałady majuć padkazki. Čytaj ich dla ŭpeŭnienaści ŭ zroblenych źmienach.&lt;p&gt;Kali ŭźnikli pytańni, prapanovy, ci prosta zachaciełasia znać mierkavańni ludziej, tady zaprašajem na naš &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Novyja versii pragramy zaŭsiody možna znajści na našym &lt;a href=&quot;http://goldendict.org/&quot;&gt;sajcie&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Kanstancin Isakaŭ. Licenzija GPLv3 ci paźniejšaja.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="195"/>
@@ -64,17 +64,17 @@
     <message>
         <location filename="../article_maker.cc" line="197"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Karystańnie słoŭnikam u vonkavych pragramach&lt;/h3&gt;Kab šukać słovy ŭ słoŭniku z-pad inšych pragramaŭ, treba ŭłučyć &lt;i&gt;mechanizm vypłyŭnych voknaŭ&lt;/i&gt; u &lt;b&gt;Naładach&lt;/b&gt;, i paśla taho zacisnuć knopku „Vypłyŭnyja vokny“ ŭ hałoŭnym aknie, ci ŭłučyć adpaviedny punkt kantekstnaha meniu značka ŭ systemny łotku. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Karystańnie słoŭnikam u vonkavych pragramach&lt;/h3&gt;Kab šukać słovy ŭ słoŭniku z-pad inšych pragramaŭ, treba ŭłučyć &lt;i&gt;mechanizm vypłyŭnych voknaŭ&lt;/i&gt; u &lt;b&gt;Naładach&lt;/b&gt;, i zacisnuć knopku „Vypłyŭnyja vokny“ ŭ hałoŭnym aknie, ci ŭłučyć adpaviedny punkt kantekstnaha meniu značka ŭ systemny łotku. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="204"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>Zatym u kožnaj pragramie prosta spynicie kursor myšy nad słovam, i praz chvilu źjavicca vypłyŭnoje akno z adpaviednym artykułam.</translation>
+        <translation>Zatym u kožnaj pragramie prosta spyni kursor myšy nad słovam, i praz chvilu źjavicca vypłyŭnoje akno z adpaviednym artykułam.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="207"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Zatym u kožnaj pragramie prosta vydzielicie słova myššu (zrabicie padvojny pstryk ci praviadzicie pa słovu kursoram myšy z zacisnutaj levaj knopkaj), i praz chvilu źjavicca vypłyŭnoje akno z adpaviednym artykułam.</translation>
+        <translation>Zatym u kožnaj pragramie prosta vybiery słova myššu (dvojčy prstrykni ci praviadzi pa słovu kursoram myšy z zacisnutaj levaj knopkaj), i praz chvilu źjavicca vypłyŭnoje akno z adpaviednym artykułam.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="284"/>
@@ -140,12 +140,12 @@
     <message>
         <location filename="../articleview.ui" line="92"/>
         <source>&amp;Previous</source>
-        <translation>&amp;Papiaredniaje</translation>
+        <translation>&amp;Papiaredni</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="109"/>
         <source>&amp;Next</source>
-        <translation>&amp;Nastupnaje</translation>
+        <translation>&amp;Nastupny</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="116"/>
@@ -160,12 +160,12 @@
     <message>
         <location filename="../articleview.ui" line="152"/>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished">Mierkavać &amp;registr</translation>
+        <translation>Mierkavać &amp;registr</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="162"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrać dziejny artykuł</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="689"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../articleview.cc" line="1125"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation>Źmiaścić „%1“ u ŭvodny radok</translation>
+        <translation>Źmiaścić „%1“ u ŭvodnym radoku</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1131"/>
@@ -251,12 +251,12 @@
     <message>
         <location filename="../articleview.cc" line="1145"/>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>Šukać „%1“ u %2</translation>
+        <translation>Šukać „%1“ u grupie %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1153"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>Šukać „%1“ u %2 u novaj u&amp;kładcy</translation>
+        <translation>Šukać „%1“ u grupie %2 u novaj u&amp;kładcy</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1324"/>
@@ -266,7 +266,7 @@
     <message>
         <location filename="../articleview.cc" line="1325"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Kab ułučyć prajhravańnie fajłaŭ roznych ad WAV, pierajdzicie da Źmieny|Nałady, abiarycie ŭkładku Aŭdyjo i ŭłučycie „Prajhravać cieraz DirectShow“.</translation>
+        <translation>Kab ułučyć prajhravańnie fajłaŭ roznych ad WAV, pierajdzi da Źmienaŭ|Naładaŭ, abiary ŭkładku Aŭdyjo i ŭłučy „Prajhravać cieraz DirectShow“.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1340"/>
@@ -288,7 +288,7 @@
     <message>
         <location filename="../articleview.cc" line="1380"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation type="unfinished">Niemažliva ŭruchomić prajhravalnika hukavaha fajła: %1</translation>
+        <translation>Niemažliva ŭruchomić prajhravalnika hukavaha fajła: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1398"/>
@@ -298,7 +298,7 @@
     <message>
         <location filename="../articleview.cc" line="1409"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Nie atrymałasia aŭtamatyčna adčynić resursavaha fajła. Pasprabujcie adčynić uručnuju %1.</translation>
+        <translation>Nie atrymałasia aŭtamatyčna adčynić resursavaha fajła. Pasprabuj adčynić ručna %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1432"/>
@@ -356,7 +356,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups_widgets.cc" line="90"/>
         <source>Choose a file to use as group icon</source>
-        <translation>Vybierycie fajł vyjavy, jakaja budzie značkam grupy</translation>
+        <translation>Abiary fajł vyjavy, jakaja budzie značkam grupy</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="92"/>
@@ -376,7 +376,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation>Niemahčyma pračytać vybrany fajł vyjavy.</translation>
+        <translation>Niemahčyma pračytać abrany fajł vyjavy.</translation>
     </message>
 </context>
 <context>
@@ -397,22 +397,22 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups_widgets.cc" line="691"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation>Ci peŭna chočacie zgieneravać zbor grupaŭ na padstavie moŭnych par?</translation>
+        <translation>Ci napeŭna chočaš zgieneravać zbor grupaŭ na padstavie moŭnych par?</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Pa-za grupami</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation>Sabrać grupu „%1-&gt;“ pavodle zychodnaj movy</translation>
+        <translation>Sabrać grupy „%1-&gt;“ pavodle vychodnaje movy</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation>Sabrać grupu „-&gt;%1“ pavodle metavaj movy</translation>
+        <translation>Sabrać grupy „-&gt;%1“ pavodle metavaje movy</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
@@ -423,7 +423,7 @@ miž klasyčnym i školnym pravapisam)</translation>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation>Sabrać grupu „%1“</translation>
+        <translation>Sabrać grupy z „%1“</translation>
     </message>
 </context>
 <context>
@@ -436,7 +436,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation>Pierakład z:</translation>
+        <translation>Vychodnaja mova:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
@@ -446,7 +446,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictinfo.ui" line="71"/>
         <source>Translates to:</source>
-        <translation>Pierakład na:</translation>
+        <translation>Metavaja mova:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="88"/>
@@ -540,45 +540,45 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../externalviewer.cc" line="49"/>
         <source>the viewer program name is empty</source>
-        <translation>Nazva pragramy prahladalnika parožniaja</translation>
+        <translation>nazva pragramy prahladalnika parožniaja</translation>
     </message>
 </context>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="227"/>
+        <location filename="../forvo.cc" line="230"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Pamyłka razboru fajła XML: %1 — radok %2, słupok %3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="303"/>
+        <location filename="../forvo.cc" line="306"/>
         <source>Added %1</source>
-        <translation>Dadana %1</translation>
+        <translation>Dadany %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="309"/>
         <source>by</source>
         <translation> </translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="310"/>
+        <location filename="../forvo.cc" line="313"/>
         <source>Male</source>
         <translation>Mužčyna</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="310"/>
+        <location filename="../forvo.cc" line="313"/>
         <source>Female</source>
         <translation>Žančyna</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="312"/>
+        <location filename="../forvo.cc" line="315"/>
         <source>from</source>
         <translation>z</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="350"/>
+        <location filename="../forvo.cc" line="353"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Prajdzicie da Źmieny|Słoŭniki|Krynicy|Forvo i atrymacie svoj ułasny API-kluč, kab prybrać hetuju pamyłku.</translation>
+        <translation>Prajdzi ŭ Źmieny|Słoŭniki|Krynicy|Forvo i atrymaj svoj ułasny API-kluč, kab prybrać hetuju pamyłku.</translation>
     </message>
 </context>
 <context>
@@ -602,7 +602,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groupcombobox.cc" line="14"/>
         <source>Choose a Group (Alt+G)</source>
-        <translation>Vybierycie grupu (Alt+G)</translation>
+        <translation>Abiary grupu (Alt+G)</translation>
     </message>
 </context>
 <context>
@@ -663,7 +663,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
-        <translation>Tab 2</translation>
+        <translation>Układka</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
@@ -719,7 +719,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Pieraciahvajcie słoŭniki ŭ/z grupy. Raźmiarkoŭvajcie ich u grupie z dapamohaj myšy.</translation>
+        <translation>Pieraciahvaj słoŭniki ŭ/z grupy. Raźmiarkoŭvaj ich u grupie z dapamohaju myšy.</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="108"/>
@@ -729,7 +729,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups.cc" line="109"/>
         <source>Give a name for the new group:</source>
-        <translation>Zadajcie nazvu novaj grupy:</translation>
+        <translation>Zadaj nazvu novaj grupy:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="134"/>
@@ -739,7 +739,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups.cc" line="135"/>
         <source>Give a new name for the group:</source>
-        <translation>Zadajcie novuju nazvu grupy:</translation>
+        <translation>Zadaj novuju nazvu grupy:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="146"/>
@@ -749,12 +749,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups.cc" line="147"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>Vy sapraŭdy žadajecie vydalić grupu &lt;b&gt;%1&lt;/b&gt;?</translation>
+        <translation>Sapraŭdy žadaješ vydalić grupu &lt;b&gt;%1&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="160"/>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>Vy sapraŭdy žadajecie vydalić usie grupy?</translation>
+        <translation>Sapraŭdy žadaješ vydalić usie grupy?</translation>
     </message>
 </context>
 <context>
@@ -762,38 +762,38 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vydalić vybranaje</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapijavać vybranaje</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Historyja:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="211"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="215"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamier historyi: %1 zapisaŭ z %2 mahčymych</translation>
     </message>
 </context>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="236"/>
+        <location filename="../hunspell.cc" line="239"/>
         <source>Spelling suggestions: </source>
         <translation>Artagrafičnyja padkazki: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="776"/>
+        <location filename="../hunspell.cc" line="779"/>
         <source>%1 Morphology</source>
         <translation>Marfalogija %1</translation>
     </message>
@@ -822,7 +822,7 @@ miž klasyčnym i školnym pravapisam)</translation>
         <location filename="../initializing.ui" line="22"/>
         <location filename="../initializing.cc" line="30"/>
         <source>Please wait while indexing dictionary</source>
-        <translation>Čakajcie. Idzie indeksavańnie słoŭnikaŭ</translation>
+        <translation>Čakaj. Idzie indeksavańnie słoŭnikaŭ</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="38"/>
@@ -1843,7 +1843,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../loaddictionaries.cc" line="216"/>
         <source>Error loading dictionaries</source>
-        <translation>Pamyłka pry ładavańnia słoŭnikaŭ</translation>
+        <translation>Pamyłka pry ładavańni słoŭnikaŭ</translation>
     </message>
 </context>
 <context>
@@ -1870,7 +1870,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="86"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Źmieny</translation>
+        <translation>Ź&amp;mieny</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
@@ -1895,21 +1895,17 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished">Panel &amp;prahladu</translation>
+        <translation>Panel &amp;prahladu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished">Panel &amp;navigacyi pa vynikach</translation>
+        <translation>Panel &amp;navigacyi pa vynikach</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="obsolete">&amp;Słoŭniki...	F3</translation>
+        <translation>Panel &amp;historyi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
@@ -1919,7 +1915,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="331"/>
@@ -1970,17 +1966,17 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="366"/>
         <source>&amp;Forum</source>
-        <translation type="unfinished">&amp;Forum</translation>
+        <translation>&amp;Forum</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="371"/>
         <source>&amp;Close To Tray</source>
-        <translation type="unfinished">Źvinuć u &amp;łotak</translation>
+        <translation>Źvinuć u &amp;łotak</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="374"/>
         <source>Minimizes the window to tray</source>
-        <translation type="unfinished">Źvinuć akno ŭ łotak</translation>
+        <translation>Źvinuć akno ŭ łotak</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="377"/>
@@ -2020,7 +2016,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Print Pre&amp;view</source>
-        <translation>Pierad&amp;ahlad druku</translation>
+        <translation>Pieradpr&amp;ahlad druku</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
@@ -2035,12 +2031,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="427"/>
         <source>&amp;Clear</source>
-        <translation type="unfinished">&amp;Ačyścić</translation>
+        <translation>&amp;Ačyścić</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished">&amp;Novaja ŭstaŭka</translation>
+        <translation>&amp;Novaja ŭkładka</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="439"/>
@@ -2050,7 +2046,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="447"/>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished">Tečka &amp;kanfiguracyi</translation>
+        <translation>Tečka &amp;kanfiguracyi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
@@ -2066,12 +2062,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="460"/>
         <source>&amp;Export</source>
-        <translation type="unfinished">Z&amp;ekspartavać</translation>
+        <translation>Z&amp;ekspartavać</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <source>&amp;Import</source>
-        <translation type="unfinished">Z&amp;ympartavać</translation>
+        <translation>Z&amp;ympartavać</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="473"/>
@@ -2103,7 +2099,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="63"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation>Adlustroŭvać małyja znački u palicy &amp;instrumentaŭ</translation>
+        <translation>Adlustroŭvać małyja znački ŭ palicy &amp;instrumentaŭ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="64"/>
@@ -2138,12 +2134,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="143"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Pavialičyć</translation>
+        <translation>Pavialičyć</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="149"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Pamienšyć</translation>
+        <translation>Pamienšyć</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="153"/>
@@ -2164,17 +2160,17 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="261"/>
         <source>Words Zoom In</source>
-        <translation type="unfinished">Pavialičyć radok šukańnia</translation>
+        <translation>Pavialičyć radok šukańnia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="265"/>
         <source>Words Zoom Out</source>
-        <translation type="unfinished">Pamienšyć radok šukańnia</translation>
+        <translation>Pamienšyć radok šukańnia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="267"/>
         <source>Words Normal Size</source>
-        <translation type="unfinished">Zvyčajny pamier radka šukańnia</translation>
+        <translation>Zvyčajny pamier radka šukańnia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="275"/>
@@ -2242,13 +2238,9 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">UVAHA: %1</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="2419"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Pamyłka inicyjalizacyi sačeńnia za klavišnymi skarotami.&lt;br&gt;Pierakanajciesia, što vaš XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
+        <translation>Pamyłka inicyjalizacyi sačeńnia za klavišnymi skarotami.&lt;br&gt;Pierakanajsia, što XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2553"/>
@@ -2273,7 +2265,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2676"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation>Vy schavali palicu meniu. Skarystacie %1, kab pavaracić jaje nazad.</translation>
+        <translation>Palica meniu jość schavanaja. Skarystaj %1, kab pavaracić nazad.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2677"/>
@@ -2288,7 +2280,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2776"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>Niama dasiažnych drukarak. Spačatku ŭstalujcie choć adnu.</translation>
+        <translation>Niama dasiažnych drukarak. Spačatku ŭstaluj choć adnu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2793"/>
@@ -2326,10 +2318,6 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>S&amp;chavać</translation>
     </message>
     <message>
-        <source>History view mode</source>
-        <translation type="obsolete">Režym prahladu historyi</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="3048"/>
         <source>Export history to file</source>
         <translation>Ekspartavańnie historyi ŭ fajł</translation>
@@ -2356,18 +2344,14 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>Impartavańnie historyi z fajła</translation>
     </message>
     <message>
-        <source>Imported from file: </source>
-        <translation type="obsolete">Zympartavanaje z fajła: </translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="3159"/>
         <source>Import error: invalid data in file</source>
-        <translation>Pamyłka impartavańnia: niasłušnyja źviestki ŭ fajle</translation>
+        <translation>Pamyłka impartavańnia: chibnyja źviestki ŭ fajle</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3163"/>
         <source>History import complete</source>
-        <translation>Impartavańnie historyja skončyłasia</translation>
+        <translation>Impartavańnie historyi skončyłasia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3166"/>
@@ -2382,13 +2366,13 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3275"/>
         <source>Edit dictionary</source>
-        <translation>Redahavać słoŭnik</translation>
+        <translation>Redagavać słoŭnik</translation>
     </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="299"/>
+        <location filename="../mediawiki.cc" line="302"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Pamyłka razboru fajła XML: %1 — radok %2, słupok %3</translation>
     </message>
@@ -2396,7 +2380,7 @@ miž klasyčnym i školnym pravapisam)</translation>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="168"/>
+        <location filename="../mediawiki.cc" line="171"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Pamyłka razboru fajła XML: %1 — radok %2, słupok %3</translation>
     </message>
@@ -2447,7 +2431,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../orderandprops.ui" line="139"/>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>Vyłučanyja słoŭniki:</translation>
+        <translation>Nieŭžyvanyja (vyłučanyja) słoŭniki:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="153"/>
@@ -2472,12 +2456,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
-        <translation>Pierakład z:</translation>
+        <translation>Vychodnaja mova:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="219"/>
         <source>Translates to:</source>
-        <translation>Pierakład na:</translation>
+        <translation>Metavaja mova:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="248"/>
@@ -2492,7 +2476,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Uparadkujcie słoŭniki, raźmierkavaŭšy ich myššu. Kab nie ŭžyvać słoŭnika, pieraciahnicie jaho ŭ grupu vyłučanych słoŭnikaŭ.</translation>
+        <translation>Uparadkuj słoŭniki, raźmierkavaŭšy ich myššu. Kab nie ŭžyvać słoŭnika, pieraciahni jaho ŭ grupu vyłučanych słoŭnikaŭ.</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
@@ -2542,7 +2526,7 @@ With this on however, new tabs will be opened without
 switching to them.</source>
         <translation>Zvyčajna, adčynienaja ŭkładka adrazu stanovicca dziejnaj.
 Pa ŭłučeńniu hetaje opcyi, novyja ŭkładki buduć adčyniacca
-bieź pierachodu stan dziejnaj.</translation>
+bieź pierachodu ŭ stan dziejnaj.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="58"/>
@@ -2554,7 +2538,7 @@ bieź pierachodu stan dziejnaj.</translation>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Pa ŭłučeńniu hetaje opcyi, novy ŭkładki buduć
+        <translation>Pa ŭłučeńniu hetaje opcyi, novyja ŭkładki buduć
 adčyniacca adrazu za dziejnaj, a nie ŭ kancy.</translation>
     </message>
     <message>
@@ -2565,8 +2549,8 @@ adčyniacca adrazu za dziejnaj, a nie ŭ kancy.</translation>
     <message>
         <location filename="../preferences.ui" line="77"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation>Ułučycie hetuju opcyju, kali nie žadajecie bačyć palicy ŭkładak,
-kali tolki adna ŭkładka jość adčynienaj.</translation>
+        <translation>Ułučy hetuju opcyju, kali nie žadaješ bačyć palicy ŭkładak,
+kali tolki adna ŭkładka jość adčynienaja.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="80"/>
@@ -2616,27 +2600,27 @@ budzie źvinać jaho ŭ systemny łotak.</translation>
     <message>
         <location filename="../preferences.ui" line="144"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation>Ułučycie hetuju opcyju, kali vy chočacie vydzielać słovy adznym pstrykam</translation>
+        <translation>Ułučy hetuju opcyju, kali vy chočaš vybirać słovy adnym pstrykam</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="147"/>
         <source>Select word by single click</source>
-        <translation>Vydzielać słova adnym pstrykam</translation>
+        <translation>Vybirać słovy adnym pstrykam</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="154"/>
         <source>Startup</source>
-        <translation type="unfinished">Startavańnie</translation>
+        <translation>Startavańnie</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="160"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation type="unfinished">Aŭtamatyčna startavać GoldenDict paśla taho, jak systema załadujecca.</translation>
+        <translation>Aŭtamatyčna startavać GoldenDict paśla taho, jak systema załadujecca.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="163"/>
         <source>Start with system</source>
-        <translation type="unfinished">Startavać razam z systemaju</translation>
+        <translation>Startavać razam z systemaju</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="188"/>
@@ -2646,7 +2630,7 @@ budzie źvinać jaho ŭ systemny łotak.</translation>
     <message>
         <location filename="../preferences.ui" line="214"/>
         <source>Display style:</source>
-        <translation>Styl interfejsu:</translation>
+        <translation>Styl artykułaŭ:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="252"/>
@@ -2681,10 +2665,10 @@ Razam z hetaj opcyjaj, nacisk klaviša budzie chavać hałoŭnaje akno.</transla
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation type="unfinished">Kali ŭłučana, vypłyŭnoje akno budzie pakazvacca kožny raz, kali vaša
-pieramiaścić myšku na słova na ekranie (Windows) ci vydzielić jaho (Linux).
-Kali ŭłučana, možna adłučyć ci ŭłučyć pracu vypłyŭnoha akna ŭ hałoŭnym
-aknie ci ŭ systemnym łotku.</translation>
+        <translation>Kali ŭłučana, vypłyŭnoje akno budzie pakazvacca kožny raz, kali
+pieramiaścić kursor myšy na słova na ekranie (Windows) ci vybrać
+jaho (Linux). Kali ŭłučana, možna adłučyć ci ŭłučyć pracu vypłyŭnoha
+akna ŭ hałoŭnym aknie ci ŭ systemnym łotku.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="327"/>
@@ -2819,8 +2803,8 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation>Zvyčajna, kab vyklikać vypłyŭnoje akno, vy musicie trymać
-nacisnutymi adpaviednyja klavišy ŭ čas vydzialeńnia słova.
+        <translation>Zvyčajna, kab vyklikać vypłyŭnoje akno, treba trymać
+nacisnutymi adpaviednyja klavišy ŭ čas vybirańnia słova.
 Razam z hetaj opcyjaj, klavišy mohuć być nacisnutymi
 j praz peŭny čas.</translation>
     </message>
@@ -2834,7 +2818,7 @@ j praz peŭny čas.</translation>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>Kab unikać pamyłkovy vyklikaŭ, klavišy nazirajucca tolki
+        <translation>Kab unikać pamyłkovych vyklikaŭ, GoldenDict cikuje za klavišami
 abmiežavanuju kolkaść sekundaŭ, jakaja j zadajecca tut.</translation>
     </message>
     <message>
@@ -2845,7 +2829,7 @@ abmiežavanuju kolkaść sekundaŭ, jakaja j zadajecca tut.</translation>
     <message>
         <location filename="../preferences.ui" line="579"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation>Słać pierakładanaje słova ŭ hałoŭnaje akno zamiest vykliku ŭspłyŭnoha</translation>
+        <translation>Słać pierakładanaje słova ŭ hałoŭnaje akno zamiest vyklikańnia vypłyŭnoha</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="582"/>
@@ -2860,12 +2844,12 @@ abmiežavanuju kolkaść sekundaŭ, jakaja j zadajecca tut.</translation>
     <message>
         <location filename="../preferences.ui" line="629"/>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>Vykarystoŭvać nastupny skarot dla vykliku hałoŭnaha akna:</translation>
+        <translation>Vykarystoŭvać nastupny skarot dla vyklikańnia hałoŭnaha akna:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="660"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Vykarystoŭvać nastupny skarot dla pierakładu słova z kišeni abmienu:</translation>
+        <translation>Vykarystoŭvać nastupny skarot dla pierakładu słova z kišeni:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="707"/>
@@ -2883,7 +2867,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Zaŭvaha: Padobna na toje, što ŭ vašym vypusku X.Org XServer nie pracuje pašyreńnie RECORD. Klavišnyja skaroty GoldenDict imavierna pracavać nia budutь. Heta treba vypraŭlać na baku serveru. Padrabiaznuju infarmacyju vaša znojdzie &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;tut&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;. Pry žadańni tam moža pakinuć svoj kamentar.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Zaŭvaha: Padobna na toje, što dziejny  vypusk X.Org XServer maje niepracazdolnaje pašyreńnie RECORD. Klavišnyja skaroty GoldenDict imavierna rabić nia budutь. Heta treba vypraŭlać na baku serveru. Padrabiaznaja infarmacyja &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;tut&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;. Pry žadańni tam možna pakinuć svoj kamentar.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="755"/>
@@ -2939,7 +2923,7 @@ ale padtrymlivajucca bolšaść aŭdyjo farmataŭ.</translation>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
         <translation>Prajhravać aŭdyjo praź biblijateku Bass. Najlepšy vybar. Kab užyć hety režym,
-vaša musić raźmiaścić bass.dll (http://www.un4seen.com) u katalozie GoldenDict.</translation>
+treba raźmiaścić bass.dll (http://www.un4seen.com) u katalozie GoldenDict.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="832"/>
@@ -3005,7 +2989,7 @@ by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
         <translation>Dazvolić GoldenDict blakavać bolšaść reklamy praz zabaronu
 peŭnaha źmieściva (vyjavaŭ, ramak), jakoje nie naležyć ułasna sajtam.
-Kali niejkija sajty złamajucca, pasprabujcie vyłučyć hetuju opcyju.</translation>
+Kali niejkija sajty złamajucca, pasprabuj vyłučyć hetuju opcyju.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1009"/>
@@ -3034,7 +3018,7 @@ is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
         <translation>Kali opcyja ŭłučanaja, pragrama budzie praviarać
-najaŭnać abnaŭleńniaŭ GoldenDict. Kali najaŭnaść
+najaŭnaść abnaŭleńniaŭ GoldenDict. Kali najaŭnaść
 paćvierdzicca, pragrama nahadaje pra heta
 j prapanuje naviedać bačynu zładavańnia.</translation>
     </message>
@@ -3059,10 +3043,10 @@ j prapanuje naviedać bačynu zładavańnia.</translation>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Skarystajcie technalogiju IAccessibleEx, kab vyznačać słovy pad kursoram.
-Jana pracuje tolki z tymi pragramami, jakija padtrymlivajuć jaje (prykładam
+        <translation>Skarystaj technalogiju IAccessibleEx, kab vyznačać słovy pad kursoram.
+Jana pracuje tolki z tymi pragramami, jakija padtrymlivajuć jaje (prykładam,
 Internet Explorer 9).
-Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami.</translation>
+Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1090"/>
@@ -3074,9 +3058,9 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Skarystajcie technalogiju UI Automation, kab vyznačać słovy pad kursoram.
+        <translation>Skarystaj technalogiju UI Automation, kab vyznačać słovy pad kursoram.
 Jana pracuje tolki z tymi pragramami, jakija padtrymlivajuć jaje.
-Nia treba ŭłučać hetaje opcyju, kali vaša nie karystajecca takimi pragramami.</translation>
+Nia treba ŭłučać hetaje opcyju, kali nie karystaješsia takimi pragramami.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1102"/>
@@ -3088,9 +3072,9 @@ Nia treba ŭłučać hetaje opcyju, kali vaša nie karystajecca takimi pragramam
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Skarystajcie admysłovyja zapyty GoldenDict, kab vyznačać słovy pad kursoram.
+        <translation>Skarystaj admysłovyja zapyty GoldenDict, kab vyznačać słovy pad kursoram.
 Jany pracujuć tolki z tymi pragramami, jakija ich padtrymlivajuć.
-Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami.</translation>
+Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1114"/>
@@ -3105,7 +3089,7 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation>Ułučycie hetuju opcyju, kab zachoŭvać historyju pierakładanych słovaŭ</translation>
+        <translation>Ułučy hetuju opcyju, kab zachoŭvać historyju pierakładanych słovaŭ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1133"/>
@@ -3115,12 +3099,12 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
     <message>
         <location filename="../preferences.ui" line="1148"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paznačaje maksymalnuju kolkaść zapisaŭ u historyi.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1151"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamier historyi:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1189"/>
@@ -3130,12 +3114,12 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
     <message>
         <location filename="../preferences.ui" line="1195"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Ułučycie hetuju opcyju, kab zaŭsiody raskryvać dadatkovyja raździeły artykułaŭ</translation>
+        <translation>Ułučy hetuju opcyju, kab zaŭsiody raźvinać dadatkovyja raździeły artykułaŭ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1198"/>
         <source>Expand optional &amp;parts</source>
-        <translation>Raskryvać dadatkovyja &amp;raździeły</translation>
+        <translation>Raźvinać dadatkovyja &amp;raździeły</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="42"/>
@@ -3170,7 +3154,7 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
     <message>
         <location filename="../preferences.cc" line="360"/>
         <source>Restart the program to apply the language change.</source>
-        <translation>Pierastartujcie pragramu, kab užyć źmienu movy.</translation>
+        <translation>Pierastartuj pragramu, kab užyć źmienienuju movy.</translation>
     </message>
 </context>
 <context>
@@ -3183,7 +3167,7 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
     <message>
         <location filename="../sources.cc" line="803"/>
         <source>Plain Text</source>
-        <translation>Tekst</translation>
+        <translation>Zvyčajny tekst</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="805"/>
@@ -3204,17 +3188,17 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="164"/>
+        <location filename="../programs.cc" line="167"/>
         <source>No program name was given.</source>
         <translation>Nazva pragramy nie zadadzienaja.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="180"/>
+        <location filename="../programs.cc" line="183"/>
         <source>The program has crashed.</source>
         <translation>Pragrama niečakana skasavałasia.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="186"/>
         <source>The program has returned exit code %1.</source>
         <translation>Pragrama pavaraciła vychodny kod %1.</translation>
     </message>
@@ -3294,10 +3278,6 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
         <translation>Dyjalog</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">słova</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.ui" line="86"/>
         <source>Back</source>
         <translation>Nazad</translation>
@@ -3315,14 +3295,6 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
         <location filename="../scanpopup.ui" line="100"/>
         <source>Forward</source>
         <translation>Napierad</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Śpis źbiežnaściaŭ (Alt+M)</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="114"/>
@@ -3347,20 +3319,20 @@ Nia treba ŭłučać hetaje opcyi, kali vaša nie karystajecca takimi pragramami
     <message>
         <location filename="../scanpopup.ui" line="164"/>
         <source>Shows or hides the dictionary bar</source>
-        <translation>Pakazać abo schavać słoŭnikavu palicu</translation>
+        <translation>Pakazać abo schavać słoŭnikavuju palicu</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="187"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation>Vykarystacie špilku, kab zamacavać akno na ekranie,
-źmianiać jahony pamier, dy kiravać im lubym zručnym dla vas sposabam.</translation>
+        <translation>Skarystaj špilku, kab zamacavać akno na ekranie, źmianiać
+jahony pamier, dy kiravać im kožnym zručnym sposabam.</translation>
     </message>
     <message>
         <location filename="../scanpopup.cc" line="469"/>
         <location filename="../scanpopup.cc" line="814"/>
         <source>GoldenDict</source>
-        <translation type="unfinished">GoldenDict</translation>
+        <translation>GoldenDict</translation>
     </message>
 </context>
 <context>
@@ -3434,7 +3406,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="175"/>
         <source>&amp;Change...</source>
-        <translation>&amp;Źmianić...</translation>
+        <translation>Ź&amp;mianić...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="184"/>
@@ -3450,11 +3422,11 @@ spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
         <translation>Kožny marfalagičny słoŭnik jość
-asobnym dapamožnym słoŭnikam, jaki
+asobny dapamožny słoŭnik, jaki
 zabieśpiačaje padstavovyja formy
 słovaŭ dla šukańnia i prapanoŭvaje
-padobnyja słušnyja vyrazy dla
-pamyłkova napisanych. Dadavajcie
+padobnyja pravilnyja vyrazy dla
+pamyłkova napisanych. Dadavaj
 adpaviednyja słoŭniki ŭ kaniec
 adpaviednych grup.</translation>
     </message>
@@ -3476,12 +3448,12 @@ adpaviednych grup.</translation>
     <message>
         <location filename="../sources.ui" line="286"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Usiakija sajty. %GDWORD% zamienicca na zapytanaje słova:</translation>
+        <translation>Roznyja sajty. %GDWORD% zamienicca na zapytanaje słova:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Taksama vykarystoŭvajcie %GD1251% dla znakazboru CP1251 i  %GDISO1% dla ISO 8859-1.</translation>
+        <translation>Taksama vykarystoŭvaj %GD1251% dla znakazboru CP1251 i  %GDISO1% dla ISO 8859-1.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="343"/>
@@ -3491,7 +3463,7 @@ adpaviednych grup.</translation>
     <message>
         <location filename="../sources.ui" line="349"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Usiakija vonkavyja pragramy. %GDWORD% zamienicca na zapytanaje słova. Aproč taho hetaje słova budzie padadziena ŭ standartny ŭvod.</translation>
+        <translation>Roznyja vonkavyja pragramy. %GDWORD% zamienicca na zapytanaje słova. Aproč taho hetaje słova budzie padadziena ŭ standartny ŭvod.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="402"/>
@@ -3501,7 +3473,7 @@ adpaviednych grup.</translation>
     <message>
         <location filename="../sources.ui" line="414"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Žyvoje vymaŭleńnie ad &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Hety sajt dazvalaje ludziam zapisvać i dzialicca vymaŭleńniem słovaŭ. Vy možacie prasłuchać ich pry dapamozie GoldenDict.</translation>
+        <translation>Žyvoje vymaŭleńnie ad &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Hety sajt dazvalaje ludziam zapisvać i dzialicca vymaŭleńniem słovaŭ. Ich možna prasłuchać pry dapamozie GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="427"/>
@@ -3518,7 +3490,7 @@ adpaviednych grup.</translation>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation>Karystańnie sajtam Forvo patrabuje kluč API. Pakińcie pole pustym, kab karystacca standartnym klučom, jaki paźniej moža stać niedastupnym, ci zaregistrujciesia na sajcie i atrymajcie ŭłasny kluč.</translation>
+        <translation>Karystańnie sajtam Forvo patrabuje kluč API. Pakiń pole pustym, kab karystacca standartnym klučom, jaki paźniej moža stać niedastupnym, ci zaregistrujsia na sajcie i atrymaj ułasny kluč.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="489"/>
@@ -3530,7 +3502,7 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Atrymajcie vaš ułasny kluč &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;tut&lt;/a&gt;, ci pakińcie pole pustym dla standartnaha značeńnia</translation>
+        <translation>Atrymaj svoj ułasny kluč &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;tut&lt;/a&gt;, ci pakiń pole pustym dla standartnaha značeńnia</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="509"/>
@@ -3540,7 +3512,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="516"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation>Pieralik moŭnyk kodaŭ, jakija vy chočacie mieć. Naprykład: „en, ru“.</translation>
+        <translation>Pieralik vybranych moŭnyk kodaŭ. Prykładam: „en, ru“.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="539"/>
@@ -3591,7 +3563,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="696"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation>Najbolš užyvany metad transkrypcyi japonskaj movy
+        <translation>Najbolš užyvany metad transkrypcyi japonskaje movy
 na padstavie angielskaje fanalogii</translation>
     </message>
     <message>
@@ -3606,9 +3578,9 @@ kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
         <translation>Heta systema najbolš dakładna adlustroŭvaje znaki kany.
-Standartyzavanaja u ISO 3602.
+Standartyzavanaja ŭ ISO 3602.
 
-U GoldenDict pokul nie padtrymlivajecca.</translation>
+U GoldenDict jašče nie padtrymlivajecca.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="716"/>
@@ -3621,10 +3593,10 @@ U GoldenDict pokul nie padtrymlivajecca.</translation>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Stvorana na padstavie systemy Nichon-siki i adaptavanaja da sučasnaj Japonskaj.
-Standartyzavanaja u ISO 3602.
+        <translation>Stvoranaja na padstavie systemy Nichon-siki i adaptavanaja da sučasnaj Japonskaj.
+Standartyzavanaja ŭ ISO 3602.
 
-U GoldenDict pokul nie padtrymlivajecca.</translation>
+U GoldenDict jašče nie padtrymlivajecca.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="732"/>
@@ -3708,7 +3680,7 @@ U GoldenDict pokul nie padtrymlivajecca.</translation>
     <message>
         <location filename="../translatebox.cc" line="104"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation>Upišycie słova ci vyraz dla šukańnia ŭ słoŭnikach</translation>
+        <translation>Upišy słova ci vyraz dla šukańnia ŭ słoŭnikach</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="126"/>
@@ -3752,7 +3724,7 @@ U GoldenDict pokul nie padtrymlivajecca.</translation>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">UVAHA: %1</translation>
+        <translation>UVAHA: %1</translation>
     </message>
 </context>
 </TS>
