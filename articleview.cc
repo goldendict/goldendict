@@ -904,7 +904,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
     if ( resourceDownloadRequests.empty() ) // No requests were queued
     {
-      QMessageBox::critical( this, tr( "GoldenDict" ), tr( "The referenced resource doesn't exist." ) );
+      QMessageBox::critical( this, "GoldenDict", tr( "The referenced resource doesn't exist." ) );
       return;
     }
     else
@@ -934,7 +934,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         {
           delete req;
 
-          QMessageBox::critical( this, tr( "GoldenDict" ),
+          QMessageBox::critical( this, "GoldenDict",
                                  error );
         }
 
@@ -943,7 +943,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
 
     // Still here? No such program exists.
-    QMessageBox::critical( this, tr( "GoldenDict" ),
+    QMessageBox::critical( this, "GoldenDict",
                            tr( "The referenced audio program doesn't exist." ) );
   }
   else
@@ -1377,7 +1377,7 @@ void ArticleView::resourceDownloadFinished()
             }
             catch( ExternalViewer::Ex & e )
             {
-              QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
+              QMessageBox::critical( this, "GoldenDict", tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
             }
           }
         }
@@ -1395,7 +1395,7 @@ void ArticleView::resourceDownloadFinished()
 
             if ( !tmp.open() || (size_t) tmp.write( &data.front(), data.size() ) != data.size() )
             {
-              QMessageBox::critical( this, tr( "GoldenDict" ), tr( "Failed to create temporary file." ) );
+              QMessageBox::critical( this, "GoldenDict", tr( "Failed to create temporary file." ) );
               return;
             }
 
@@ -1405,7 +1405,7 @@ void ArticleView::resourceDownloadFinished()
           }
 
           if ( !QDesktopServices::openUrl( QUrl::fromLocalFile( desktopOpenedTempFile ) ) )
-            QMessageBox::critical( this, tr( "GoldenDict" ),
+            QMessageBox::critical( this, "GoldenDict",
                                    tr( "Failed to auto-open resource file, try opening manually: %1." ).arg( desktopOpenedTempFile ) );
         }
 

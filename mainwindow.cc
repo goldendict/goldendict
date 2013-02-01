@@ -635,7 +635,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // After we have dictionaries and groups, we can populate history
 //  historyChanged();
 
-  setWindowTitle( tr( "GoldenDict" ) );
+  setWindowTitle( "GoldenDict" );
 
   blockUpdateWindowTitle = true;
   addNewTab();
@@ -1484,7 +1484,7 @@ void MainWindow::updateWindowTitle()
     if( !str.isEmpty() )
     {
       if( !blockUpdateWindowTitle )
-        setWindowTitle( tr( "%1 - %2" ).arg( str, tr ( "GoldenDict" ) ) );
+        setWindowTitle( tr( "%1 - %2" ).arg( str, "GoldenDict" ) );
       blockUpdateWindowTitle = false;
     }
   }
@@ -2415,7 +2415,7 @@ void MainWindow::installHotKeys()
     }
     catch( HotkeyWrapper::exInit & )
     {
-      QMessageBox::critical( this, tr( "GoldenDict" ),
+      QMessageBox::critical( this, "GoldenDict",
         tr( "Failed to initialize hotkeys monitoring mechanism.<br>"
             "Make sure your XServer has RECORD extension turned on." ) );
 
