@@ -130,6 +130,7 @@ void Sources::fitSoundDirsColumns()
 {
   ui.soundDirs->resizeColumnToContents( 0 );
   ui.soundDirs->resizeColumnToContents( 1 );
+  ui.soundDirs->resizeColumnToContents( 2 );
 }
 
 void Sources::fitHunspellDictsColumns()
@@ -950,7 +951,7 @@ void SoundDirsModel::removeSoundDir( int index )
 void SoundDirsModel::addNewSoundDir( QString const & path, QString const & name )
 {
   beginInsertRows( QModelIndex(), soundDirs.size(), soundDirs.size() );
-  soundDirs.push_back( Config::SoundDir( path, name ) );
+  soundDirs.push_back( Config::SoundDir( path, name, "" ) );
   endInsertRows();
 }
 
@@ -968,7 +969,7 @@ Qt::ItemFlags SoundDirsModel::flags( QModelIndex const & index ) const
 {
   Qt::ItemFlags result = QAbstractItemModel::flags( index );
 
-  if ( index.isValid() && index.column() < 2 )
+  if ( index.isValid() && index.column() < 3 )
     result |= Qt::ItemIsEditable;
 
   return result;
@@ -987,7 +988,7 @@ int SoundDirsModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 2;
+    return 3;
 }
 
 QVariant SoundDirsModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
@@ -999,6 +1000,8 @@ QVariant SoundDirsModel::headerData( int section, Qt::Orientation /*orientation*
         return tr( "Path" );
       case 1:
         return tr( "Name" );
+      case 2:
+        return tr( "Icon" );
       default:
         return QVariant();
     }
@@ -1017,6 +1020,9 @@ QVariant SoundDirsModel::data( QModelIndex const & index, int role ) const
   if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() == 1 )
     return soundDirs[ index.row() ].name;
 
+  if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() == 2 )
+    return soundDirs[ index.row() ].iconFilename;
+
   return QVariant();
 }
 
@@ -1026,12 +1032,14 @@ bool SoundDirsModel::setData( QModelIndex const & index, const QVariant & value,
   if ( index.row() >= soundDirs.size() )
     return false;
 
-  if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() < 2 )
+  if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() < 3 )
   {
     if ( !index.column() )
       soundDirs[ index.row() ].path = value.toString();
-    else
+    else if ( index.column() == 1 )
       soundDirs[ index.row() ].name = value.toString();
+    else
+      soundDirs[ index.row() ].iconFilename = value.toString();
 
     dataChanged( index, index );
     return true;

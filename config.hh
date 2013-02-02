@@ -45,16 +45,17 @@ typedef QVector< Path > Paths;
 struct SoundDir
 {
   QString path, name;
+  QString iconFilename;
 
   SoundDir()
   {}
 
-  SoundDir( QString const & path_, QString const & name_ ):
-    path( path_ ), name( name_ )
+  SoundDir( QString const & path_, QString const & name_, QString iconFilename_ ):
+    path( path_ ), name( name_ ), iconFilename( iconFilename_ )
   {}
 
   bool operator == ( SoundDir const & other ) const
-  { return path == other.path && name == other.name; }
+  { return path == other.path && name == other.name && iconFilename == other.iconFilename; }
 };
 
 /// A list of SoundDirs

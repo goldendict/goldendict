@@ -14,6 +14,7 @@
 #include "fsencoding.hh"
 #include <set>
 #include <QDir>
+#include <QFileInfo>
 #include <QUrl>
 
 namespace SoundDir {
@@ -63,6 +64,7 @@ bool indexIsOldOrBad( string const & indexFile )
 class SoundDirDictionary: public BtreeIndexing::BtreeDictionary
 {
   string name;
+  QString iconFilename;
   Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
@@ -72,7 +74,8 @@ public:
 
   SoundDirDictionary( string const & id, string const & name,
                       string const & indexFile,
-                      vector< string > const & dictionaryFiles );
+                      vector< string > const & dictionaryFiles,
+                      QString const & iconFilename_ );
 
   virtual string getName() throw()
   { return name; }
@@ -96,20 +99,20 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw()
-  { dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/playsound.png");
-    dictionaryIconLoaded = true; }
+  virtual void loadIcon() throw();
 };
 
 SoundDirDictionary::SoundDirDictionary( string const & id,
                                         string const & name_,
                                         string const & indexFile,
-                                        vector< string > const & dictionaryFiles ):
+                                        vector< string > const & dictionaryFiles,
+                                        QString const & iconFilename_ ):
   BtreeDictionary( id, dictionaryFiles ),
   name( name_ ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
-  chunks( idx, idxHeader.chunksOffset )
+  chunks( idx, idxHeader.chunksOffset ),
+  iconFilename( iconFilename_ )
 {
   // Initialize the index
 
@@ -220,6 +223,22 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
   memcpy( &(ret->getData().front()), result.data(), result.size() );
 
   return ret;
+}
+
+void SoundDirDictionary::loadIcon() throw()
+{
+  if ( dictionaryIconLoaded )
+    return;
+
+  if( !iconFilename.isEmpty() )
+  {
+    QFileInfo fInfo(  QDir( Config::getConfigDir() ), iconFilename );
+    if( fInfo.isFile() )
+      loadIconFromFile( fInfo.absoluteFilePath(), true );
+  }
+  if( dictionaryIcon.isNull() )
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/playsound.png");
+  dictionaryIconLoaded = true;
 }
 
 sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & name )
@@ -399,7 +418,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::SoundDirs const & 
     dictionaries.push_back( new SoundDirDictionary( dictId,
                                                     i->name.toUtf8().data(),
                                                     indexFile,
-                                                    dictFiles ) );
+                                                    dictFiles,
+                                                    i->iconFilename ) );
   }
 
   return dictionaries;
