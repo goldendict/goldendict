@@ -951,7 +951,7 @@ void SoundDirsModel::removeSoundDir( int index )
 void SoundDirsModel::addNewSoundDir( QString const & path, QString const & name )
 {
   beginInsertRows( QModelIndex(), soundDirs.size(), soundDirs.size() );
-  soundDirs.push_back( Config::SoundDir( path, name, "" ) );
+  soundDirs.push_back( Config::SoundDir( path, name ) );
   endInsertRows();
 }
 

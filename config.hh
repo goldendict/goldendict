@@ -50,7 +50,7 @@ struct SoundDir
   SoundDir()
   {}
 
-  SoundDir( QString const & path_, QString const & name_, QString iconFilename_ ):
+  SoundDir( QString const & path_, QString const & name_, QString iconFilename_ = "" ):
     path( path_ ), name( name_ ), iconFilename( iconFilename_ )
   {}
 

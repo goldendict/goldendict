@@ -309,7 +309,7 @@ Class load() throw( exError )
       c.paths.push_back( Path( "/usr/share/dictd", true ) );
 
     if ( QDir( "/usr/share/WyabdcRealPeopleTTS" ).exists() )
-      c.soundDirs.push_back( SoundDir( "/usr/share/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS", "" ) );
+      c.soundDirs.push_back( SoundDir( "/usr/share/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
 
     if ( QDir( "/usr/share/myspell/dicts" ).exists() )
       c.hunspell.dictionariesPath = "/usr/share/myspell/dicts";
@@ -329,10 +329,10 @@ Class load() throw( exError )
       c.paths.push_back( Path( pathToProgramFiles + "\\StarDict\\dic", true ) );
 
     if ( QDir( pathToProgramFiles + "\\StarDict\\WyabdcRealPeopleTTS" ).exists() )
-      c.soundDirs.push_back( SoundDir( pathToProgramFiles + "\\StarDict\\WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS", "" ) );
+      c.soundDirs.push_back( SoundDir( pathToProgramFiles + "\\StarDict\\WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
     else
     if ( QDir( pathToProgramFiles + "\\WyabdcRealPeopleTTS" ).exists() )
-      c.soundDirs.push_back( SoundDir( pathToProgramFiles + "\\WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS", "" ) );
+      c.soundDirs.push_back( SoundDir( pathToProgramFiles + "\\WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
 
     // #### "C:/Program Files" is bad! will not work for German Windows etc.
     // #### should be replaced to system path
@@ -341,10 +341,10 @@ Class load() throw( exError )
 //      c.paths.push_back( Path( "C:/Program Files/StarDict/dic", true ) );
 //
 //    if ( QDir( "C:/Program Files/StarDict/WyabdcRealPeopleTTS" ).exists() )
-//      c.soundDirs.push_back( SoundDir( "C:/Program Files/StarDict/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS", "" ) );
+//      c.soundDirs.push_back( SoundDir( "C:/Program Files/StarDict/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
 //    else
 //    if ( QDir( "C:/Program Files/WyabdcRealPeopleTTS" ).exists() )
-//      c.soundDirs.push_back( SoundDir( "C:/Program Files/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS", "" ) );
+//      c.soundDirs.push_back( SoundDir( "C:/Program Files/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
 
     #endif
 
