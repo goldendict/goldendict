@@ -54,6 +54,8 @@ win32 {
     Debug:CONFIG += console
 
     Release:DEFINES += NO_CONSOLE
+
+    QMAKE_LFLAGS += -Wl,--large-address-aware
 }
 
 unix:!mac {
