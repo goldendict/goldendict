@@ -81,7 +81,7 @@ void DictGroupWidget::groupIconActivated( int index )
     QString formatList( " (" );
 
     for( int x = 0; x < supImageFormats.size(); ++x )
-      formatList += "*." + QString::fromAscii( supImageFormats[ x ] ) + " ";
+      formatList += "*." + QString::fromLatin1( supImageFormats[ x ] ) + " ";
 
     formatList.chop( 1 );
     formatList.append( ")" );

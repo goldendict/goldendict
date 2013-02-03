@@ -147,7 +147,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     if ( contextsEncoded.size() )
     {
-      QByteArray ba = QByteArray::fromBase64( contextsEncoded.toAscii() );
+      QByteArray ba = QByteArray::fromBase64( contextsEncoded.toLatin1() );
 
       QBuffer buf( & ba );
 

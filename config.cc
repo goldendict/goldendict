@@ -235,7 +235,7 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
   g.icon = grp.attribute( "icon" );
 
   if ( !grp.attribute( "iconData" ).isEmpty() )
-    g.iconData = QByteArray::fromBase64( grp.attribute( "iconData" ).toAscii() );
+    g.iconData = QByteArray::fromBase64( grp.attribute( "iconData" ).toLatin1() );
 
   if ( !grp.attribute( "shortcut" ).isEmpty() )
     g.shortcut = QKeySequence::fromString( grp.attribute( "shortcut" ) );
@@ -819,7 +819,7 @@ void saveGroup( Group const & data, QDomElement & group )
   {
     QDomAttr iconData = dd.createAttribute( "iconData" );
 
-    iconData.setValue( QString::fromAscii( data.iconData.toBase64() ) );
+    iconData.setValue( QString::fromLatin1( data.iconData.toBase64() ) );
 
     group.setAttributeNode( iconData );
   }

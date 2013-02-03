@@ -15,7 +15,7 @@ About::About( QWidget * parent ): QDialog( parent )
   if ( !versionFile.open( QFile::ReadOnly ) )
     version = tr( "[Unknown]" );
   else
-    version = QString::fromAscii( versionFile.readAll() ).trimmed();
+    version = QString::fromLatin1( versionFile.readAll() ).trimmed();
 
   ui.version->setText( version );
 

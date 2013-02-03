@@ -1009,7 +1009,7 @@ QString const& DslDictionary::getDescription()
 
             qint32 gdLang, annLang;
             QString langStr;
-            gdLang = LangCoder::code2toInt( QLocale::system().name().left( 2 ).toAscii().data() );
+            gdLang = LangCoder::code2toInt( QLocale::system().name().left( 2 ).toLatin1().data() );
             for(;;)
             {
                 data.clear();

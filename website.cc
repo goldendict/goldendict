@@ -97,7 +97,7 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
     for( int x = 1; x <= 16; ++x )
     {
       urlString.replace( QString( "%25GDISO%1%25" ).arg( x ),
-                         QTextCodec::codecForName( QString( "ISO 8859-%1" ).arg( x ).toAscii() )->fromUnicode( inputWord ).toPercentEncoding() );
+                         QTextCodec::codecForName( QString( "ISO 8859-%1" ).arg( x ).toLatin1() )->fromUnicode( inputWord ).toPercentEncoding() );
 
       if ( x == 10 )
         x = 12; // Skip encodings 11..12, they don't exist

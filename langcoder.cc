@@ -62,7 +62,7 @@ QString LangCoder::intToCode2( quint32 val )
   code[ 0 ] = val & 0xFF;
   code[ 1 ] = ( val >> 8 ) & 0xFF;
 
-  return QString::fromAscii( code, 2 );
+  return QString::fromLatin1( code, 2 );
 }
 
 quint32 LangCoder::code3toInt(const std::string& code3)
@@ -130,7 +130,7 @@ quint32 LangCoder::guessId( const QString & lang )
   }
 
   // still not found - try to match by 2-symbol code
-  return code2toInt( lstr.left(2).toAscii().data() );
+  return code2toInt( lstr.left(2).toLatin1().data() );
 }
 
 QPair<quint32,quint32> LangCoder::findIdsForName( QString const & name )

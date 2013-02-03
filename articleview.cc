@@ -235,7 +235,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
     buf.close();
 
-    req.addQueryItem( "contexts", QString::fromAscii( buf.buffer().toBase64() ) );
+    req.addQueryItem( "contexts", QString::fromLatin1( buf.buffer().toBase64() ) );
   }
 
   QString mutedDicts = getMutedForGroup( group );
@@ -497,7 +497,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
       {
         // Looks this way
 
-        contexts[ ca.mid( 7 ) ] = QString::fromAscii( url.toEncoded() );
+        contexts[ ca.mid( 7 ) ] = QString::fromLatin1( url.toEncoded() );
 
         QUrl target;
 

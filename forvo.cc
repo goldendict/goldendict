@@ -100,7 +100,7 @@ void ForvoDictionary::loadIcon() throw()
 #if 0
   if ( languageCode.size() == 2 )
   {
-    QString countryCode = Language::countryCodeForId( LangCoder::code2toInt( languageCode.toAscii().data() ) );
+    QString countryCode = Language::countryCodeForId( LangCoder::code2toInt( languageCode.toLatin1().data() ) );
 
     if ( countryCode.size() )
     {
@@ -175,7 +175,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
   QUrl reqUrl = QUrl::fromEncoded(
       QString( "http://apifree.forvo.com/key/" + key + "/format/xml/action/word-pronunciations/word/" +
-      QString::fromAscii( QUrl::toPercentEncoding( gd::toQString( str ) ) ) + "/language/" + languageCode
+      QString::fromLatin1( QUrl::toPercentEncoding( gd::toQString( str ) ) ) + "/language/" + languageCode
        ).toUtf8() );
 
 //  DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );

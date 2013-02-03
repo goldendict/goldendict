@@ -492,9 +492,9 @@ void ArticleRequest::bodyFinished()
            + "</div>";
 
         head += "<span class=\"gdarticlebody gdlangfrom-";
-        head += LangCoder::intToCode2( activeDict->getLangFrom() ).toAscii().data();
+        head += LangCoder::intToCode2( activeDict->getLangFrom() ).toLatin1().data();
         head += "\" lang=\"";
-        head += LangCoder::intToCode2( activeDict->getLangTo() ).toAscii().data();
+        head += LangCoder::intToCode2( activeDict->getLangTo() ).toLatin1().data();
         head += "\">";
 
         if ( errorString.size() )

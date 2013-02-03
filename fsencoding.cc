@@ -56,7 +56,7 @@ QString decode( const char *str )
 
 char separator()
 {
-  return QDir::separator().toAscii();
+  return QDir::separator().toLatin1();
 }
 
 string dirname( string const & str )

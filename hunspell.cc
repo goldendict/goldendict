@@ -763,7 +763,7 @@ vector< DataFiles > findDataFiles( QString const & path )
     QString localizedName;
 
     if ( dictBaseId.size() == 2 )
-      localizedName = Language::localizedNameForId( LangCoder::code2toInt( dictBaseId.toAscii().data() ) );
+      localizedName = Language::localizedNameForId( LangCoder::code2toInt( dictBaseId.toLatin1().data() ) );
 
     QString dictName = dictId;
 

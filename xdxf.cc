@@ -1055,14 +1055,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               // Read the xdxf
 
-              string str = stream.attributes().value( "lang_from" ).toString().toAscii().data();
+              string str = stream.attributes().value( "lang_from" ).toString().toLatin1().data();
 
               if ( str.size() > 3 )
                 str.resize( 3 );
 
               idxHeader.langFrom = LangCoder::findIdForLanguageCode3( str.c_str() );
 
-              str = stream.attributes().value( "lang_to" ).toString().toAscii().data();
+              str = stream.attributes().value( "lang_to" ).toString().toLatin1().data();
 
               if ( str.size() > 3 )
                 str.resize( 3 );
