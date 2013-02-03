@@ -64,11 +64,11 @@ bool indexIsOldOrBad( string const & indexFile )
 class SoundDirDictionary: public BtreeIndexing::BtreeDictionary
 {
   string name;
-  QString iconFilename;
   Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
   ChunkedStorage::Reader chunks;
+  QString iconFilename;
 
 public:
 
