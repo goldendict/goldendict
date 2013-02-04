@@ -445,7 +445,9 @@ ArticleDom::ArticleDom( wstring const & str ):
     stack.pop_back();
 
   if ( stack.size() )
+  {
     FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", (unsigned) stack.size() );
+  }
 }
 
 void ArticleDom::closeTag( wstring const & name,

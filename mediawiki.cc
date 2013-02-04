@@ -151,7 +151,9 @@ void MediaWikiWordSearchRequest::cancel()
     finish();
   }
   else
+  {
     DPRINTF("not long enough\n" );
+  }
 }
 
 void MediaWikiWordSearchRequest::downloadFinished()

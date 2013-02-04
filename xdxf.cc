@@ -1102,7 +1102,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                       chunks.addToBlock( n.data(), n.size() );
                     }
                     else
+                    {
                       DPRINTF( "Warning: duplicate full_name in %s\n", dictFiles[ 0 ].c_str() );
+                    }
                   }
                   else
                   if ( stream.name() == "description" )
@@ -1121,7 +1123,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                       chunks.addToBlock( n.data(), n.size() );
                     }
                     else
+                    {
                       DPRINTF( "Warning: duplicate description in %s\n", dictFiles[ 0 ].c_str() );
+                    }
                   }
                   else
                   if ( stream.name() == "abbreviations" )
