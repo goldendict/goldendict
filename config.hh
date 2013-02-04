@@ -10,8 +10,11 @@
 #include <QDateTime>
 #include <QKeySequence>
 #include <QSet>
-#include <QRect>
 #include "ex.hh"
+
+#ifdef Q_OS_WIN
+#include <QRect>
+#endif
 
 /// GoldenDict's configuration
 namespace Config {
@@ -424,7 +427,9 @@ struct Class
   /// Bigger headwords won't be indexed. For now, only in DSL.
   unsigned int maxHeadwordSize;
 
+#ifdef Q_OS_WIN
   QRect maximizedMainWindowGeometry;
+#endif
 
   QString editDictionaryCommandLine; // Command line to call external editor for dictionary
 

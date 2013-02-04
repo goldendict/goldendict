@@ -605,6 +605,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.historyList->installEventFilter( this );
 
+#ifdef Q_OS_WIN
   QRect baseGeometry;
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
   {
@@ -617,6 +618,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     setWindowState( windowState() | Qt::WindowMaximized );
   }
   else
+#endif
   {
     if ( cfg.mainWindowGeometry.size() )
       restoreGeometry( cfg.mainWindowGeometry );
@@ -692,12 +694,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   {
     show();
     focusTranslateLine();
+#ifdef Q_OS_WIN
     if( baseGeometry.width() > 0 )
     {
       hide();
       setGeometry( baseGeometry );
       showMaximized();
     }
+#endif
   }
 
   connect( &newReleaseCheckTimer, SIGNAL( timeout() ),
@@ -819,10 +823,12 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
 
 MainWindow::~MainWindow()
 {
+#ifdef Q_OS_WIN
   if( isMaximized() )
     cfg.maximizedMainWindowGeometry = geometry();
   else
     cfg.maximizedMainWindowGeometry = QRect();
+#endif
 
   commitData();
 

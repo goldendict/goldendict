@@ -732,6 +732,7 @@ Class load() throw( exError )
   if ( !mainWindowGeometry.isNull() )
     c.mainWindowGeometry = QByteArray::fromBase64( mainWindowGeometry.toElement().text().toLatin1() );
 
+#ifdef Q_OS_WIN
   QDomNode maximizedMainWindowGeometry = root.namedItem( "maximizedMainWindowGeometry" );
 
   if ( !maximizedMainWindowGeometry.isNull() )
@@ -747,6 +748,7 @@ Class load() throw( exError )
       height = maximizedMainWindowGeometry.namedItem( "height" ).toElement().text().toInt();
     c.maximizedMainWindowGeometry = QRect( x, y, width, height );
   }
+#endif
 
   QDomNode dictInfoGeometry = root.namedItem( "dictInfoGeometry" );
 
@@ -1406,6 +1408,7 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.mainWindowGeometry.toBase64() ) ) );
     root.appendChild( opt );
 
+#ifdef Q_OS_WIN
     {
       QDomElement maximizedMainWindowGeometry = dd.createElement( "maximizedMainWindowGeometry" );
       root.appendChild( maximizedMainWindowGeometry );
@@ -1426,6 +1429,7 @@ void save( Class const & c ) throw( exError )
       opt.appendChild( dd.createTextNode( QString::number( c.maximizedMainWindowGeometry.height() ) ) );
       maximizedMainWindowGeometry.appendChild( opt );
     }
+#endif
 
     opt = dd.createElement( "dictInfoGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.dictInfoGeometry.toBase64() ) ) );
