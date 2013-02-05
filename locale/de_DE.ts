@@ -801,12 +801,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1104"/>
+        <location filename="../sources.cc" line="1112"/>
         <source>Enabled</source>
         <translation>Aktiv</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1106"/>
+        <location filename="../sources.cc" line="1114"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
@@ -1859,7 +1859,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="193"/>
-        <location filename="../mainwindow.cc" line="1061"/>
+        <location filename="../mainwindow.cc" line="1069"/>
         <source>Look up in:</source>
         <translation>Suche in:</translation>
     </message>
@@ -1943,63 +1943,63 @@ between classic and school orthography in cyrillic)</source>
         <translation>Alle anderen Reiter schließen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2862"/>
+        <location filename="../mainwindow.cc" line="2873"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3022"/>
+        <location filename="../mainwindow.cc" line="3033"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3048"/>
+        <location filename="../mainwindow.cc" line="3059"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3050"/>
-        <location filename="../mainwindow.cc" line="3112"/>
+        <location filename="../mainwindow.cc" line="3061"/>
+        <location filename="../mainwindow.cc" line="3123"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3089"/>
+        <location filename="../mainwindow.cc" line="3100"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3092"/>
+        <location filename="../mainwindow.cc" line="3103"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3110"/>
+        <location filename="../mainwindow.cc" line="3121"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3159"/>
+        <location filename="../mainwindow.cc" line="3170"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3163"/>
+        <location filename="../mainwindow.cc" line="3174"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3166"/>
+        <location filename="../mainwindow.cc" line="3177"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3274"/>
+        <location filename="../mainwindow.cc" line="3285"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3275"/>
+        <location filename="../mainwindow.cc" line="3286"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2016,22 +2016,22 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="655"/>
+        <location filename="../mainwindow.cc" line="657"/>
         <source>Welcome!</source>
         <translation>Willkommen!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1050"/>
+        <location filename="../mainwindow.cc" line="1058"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 Wörterbücher, %2 Artikel, %3 Wörter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1061"/>
+        <location filename="../mainwindow.cc" line="1069"/>
         <source>Look up:</source>
         <translation>Nachschlagen:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1079"/>
+        <location filename="../mainwindow.cc" line="1087"/>
         <source>All</source>
         <translation>Alle</translation>
     </message>
@@ -2056,17 +2056,17 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1219"/>
+        <location filename="../mainwindow.cc" line="1227"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1277"/>
+        <location filename="../mainwindow.cc" line="1285"/>
         <source>(untitled)</source>
         <translation>(unbenannt)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1487"/>
+        <location filename="../mainwindow.cc" line="1495"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2079,72 +2079,72 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2419"/>
+        <location filename="../mainwindow.cc" line="2430"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Der Mechanismus für die Tastenkürzel konnte nicht initialisiert werden.&lt;br&gt;Vergewissern Sie sich, dass der XServer die RECORD Erweiterung aktiviert hat.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2553"/>
+        <location filename="../mainwindow.cc" line="2564"/>
         <source>New Release Available</source>
         <translation>Neue Version verfügbar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2554"/>
+        <location filename="../mainwindow.cc" line="2565"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Version &lt;b&gt;%1&lt;/b&gt; von GoldenDict ist nun zum Herunterladen verfügbar.&lt;br&gt;Klicken Sie auf &lt;b&gt;Herunterladen&lt;/b&gt;, um zur Seite fürs Herunterladen zu gelangen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2559"/>
+        <location filename="../mainwindow.cc" line="2570"/>
         <source>Download</source>
         <translation>Herunterladen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2560"/>
+        <location filename="../mainwindow.cc" line="2571"/>
         <source>Skip This Release</source>
         <translation>Diese Version überspringen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2676"/>
+        <location filename="../mainwindow.cc" line="2687"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2677"/>
+        <location filename="../mainwindow.cc" line="2688"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2775"/>
+        <location filename="../mainwindow.cc" line="2786"/>
         <source>Page Setup</source>
         <translation>Seite einrichten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2776"/>
+        <location filename="../mainwindow.cc" line="2787"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Es ist kein Drucker vorhanden. Bitte zuerst einen installieren.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2793"/>
+        <location filename="../mainwindow.cc" line="2804"/>
         <source>Print Article</source>
         <translation>Drucke Artikel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2814"/>
+        <location filename="../mainwindow.cc" line="2825"/>
         <source>Save Article As</source>
         <translation>Artikel speichern als</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2814"/>
+        <location filename="../mainwindow.cc" line="2825"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html Dateien (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2829"/>
+        <location filename="../mainwindow.cc" line="2840"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2830"/>
+        <location filename="../mainwindow.cc" line="2841"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Kann Artikel nicht speichern: %1</translation>
     </message>
@@ -2373,7 +2373,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
-        <location filename="../mainwindow.cc" line="3026"/>
+        <location filename="../mainwindow.cc" line="3037"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2396,7 +2396,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="302"/>
+        <location filename="../mediawiki.cc" line="304"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Fehler beim XML-parsen: %1 bei %2,%3</translation>
     </message>
@@ -2404,7 +2404,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="171"/>
+        <location filename="../mediawiki.cc" line="173"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Fehler beim XML-parsen: %1 bei %2,%3</translation>
     </message>
@@ -2412,22 +2412,22 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="395"/>
+        <location filename="../sources.cc" line="396"/>
         <source>Enabled</source>
         <translation>Aktiv</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="397"/>
+        <location filename="../sources.cc" line="398"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="399"/>
+        <location filename="../sources.cc" line="400"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="401"/>
+        <location filename="../sources.cc" line="402"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2516,12 +2516,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="893"/>
+        <location filename="../sources.cc" line="894"/>
         <source>Path</source>
         <translation>Pfad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="895"/>
+        <location filename="../sources.cc" line="896"/>
         <source>Recursive</source>
         <translation>Rekursiv</translation>
     </message>
@@ -2549,17 +2549,17 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="158"/>
+        <location filename="../preferences.cc" line="159"/>
         <source>Play via DirectShow</source>
         <translation>Mit DirectShow abspielen</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="359"/>
+        <location filename="../preferences.cc" line="361"/>
         <source>Changing Language</source>
         <translation>Sprache ändern</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="360"/>
+        <location filename="../preferences.cc" line="362"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Starten Sie das Programm neu, um den Sprachwechsel abzuschließen.</translation>
     </message>
@@ -2998,17 +2998,32 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1189"/>
+        <location filename="../preferences.ui" line="1188"/>
+        <source>History saving interval. If set to 0 history will be saved only during exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1194"/>
+        <source>Save every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1211"/>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1236"/>
         <source>Articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1195"/>
+        <location filename="../preferences.ui" line="1242"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1198"/>
+        <location filename="../preferences.ui" line="1245"/>
         <source>Expand optional &amp;parts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3172,27 +3187,27 @@ Download-Seite.</translation>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="801"/>
+        <location filename="../sources.cc" line="802"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="803"/>
+        <location filename="../sources.cc" line="804"/>
         <source>Plain Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="805"/>
+        <location filename="../sources.cc" line="806"/>
         <source>Html</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="807"/>
+        <location filename="../sources.cc" line="808"/>
         <source>Prefix Match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="809"/>
+        <location filename="../sources.cc" line="810"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3218,27 +3233,27 @@ Download-Seite.</translation>
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="709"/>
+        <location filename="../sources.cc" line="710"/>
         <source>Enabled</source>
         <translation type="unfinished">Aktiv</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="711"/>
+        <location filename="../sources.cc" line="712"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="713"/>
+        <location filename="../sources.cc" line="714"/>
         <source>Name</source>
         <translation type="unfinished">Name</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="715"/>
+        <location filename="../sources.cc" line="716"/>
         <source>Command Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="717"/>
+        <location filename="../sources.cc" line="718"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3366,14 +3381,19 @@ es in der Größe verändert, oder andersweitig verwaltet werden kann.</translat
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="999"/>
+        <location filename="../sources.cc" line="1000"/>
         <source>Path</source>
         <translation>Pfad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1001"/>
+        <location filename="../sources.cc" line="1002"/>
         <source>Name</source>
         <translation>Name</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="1004"/>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3384,35 +3404,35 @@ es in der Größe verändert, oder andersweitig verwaltet werden kann.</translat
         <translation>(nicht in der portablen Version)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="144"/>
-        <location filename="../sources.cc" line="171"/>
-        <location filename="../sources.cc" line="198"/>
+        <location filename="../sources.cc" line="145"/>
+        <location filename="../sources.cc" line="172"/>
+        <location filename="../sources.cc" line="199"/>
         <source>Choose a directory</source>
         <translation>Verzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="158"/>
-        <location filename="../sources.cc" line="185"/>
-        <location filename="../sources.cc" line="225"/>
-        <location filename="../sources.cc" line="249"/>
-        <location filename="../sources.cc" line="273"/>
+        <location filename="../sources.cc" line="159"/>
+        <location filename="../sources.cc" line="186"/>
+        <location filename="../sources.cc" line="226"/>
+        <location filename="../sources.cc" line="250"/>
+        <location filename="../sources.cc" line="274"/>
         <source>Confirm removal</source>
         <translation>Löschung bestätigen</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="159"/>
-        <location filename="../sources.cc" line="186"/>
+        <location filename="../sources.cc" line="160"/>
+        <location filename="../sources.cc" line="187"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Soll das Verzeichnis &lt;b&gt;%1&lt;/b&gt; von der Liste entfernt werden?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="226"/>
-        <location filename="../sources.cc" line="250"/>
+        <location filename="../sources.cc" line="227"/>
+        <location filename="../sources.cc" line="251"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Soll die Seite &lt;b&gt;%1&lt;/b&gt; von der Liste entfernt werden?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="274"/>
+        <location filename="../sources.cc" line="275"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3727,22 +3747,22 @@ Noch nicht in GoldenDict implementiert.</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="552"/>
+        <location filename="../sources.cc" line="553"/>
         <source>Enabled</source>
         <translation>Aktiv</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="554"/>
+        <location filename="../sources.cc" line="555"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="556"/>
+        <location filename="../sources.cc" line="557"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="558"/>
+        <location filename="../sources.cc" line="559"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>

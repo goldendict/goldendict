@@ -2592,6 +2592,18 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <source>Maximum history size:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>History saving interval. If set to 0 history will be saved only during exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
@@ -2760,6 +2772,10 @@ could be resized or managed in other ways.</source>
     <message>
         <source>Name</source>
         <translation>Име</translation>
+    </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
