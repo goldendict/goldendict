@@ -205,6 +205,8 @@ struct Preferences
   unsigned storeHistory;
   bool alwaysExpandOptionalParts;
 
+  unsigned historyStoreInterval;
+
   QString addonStyle;
 
   Preferences();

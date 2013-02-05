@@ -129,6 +129,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
   ui.storeHistory->setChecked( p.storeHistory );
   ui.historyMaxSizeField->setValue( p.maxStringsInHistory );
+  ui.historySaveIntervalField->setValue( p.historyStoreInterval );
   ui.alwaysExpandOptionalParts->setChecked( p.alwaysExpandOptionalParts );
 
   // Different platforms have different keys available
@@ -258,6 +259,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.storeHistory = ui.storeHistory->isChecked();
   p.maxStringsInHistory = ui.historyMaxSizeField->text().toUInt();
+  p.historyStoreInterval = ui.historySaveIntervalField->text().toUInt();
   p.alwaysExpandOptionalParts = ui.alwaysExpandOptionalParts->isChecked();
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();

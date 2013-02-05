@@ -14,6 +14,8 @@ History::History( unsigned size, unsigned maxItemLength_ ): maxSize( size ),
 
 History::History( Load, unsigned size, unsigned maxItemLength_ ): maxSize( size ),
    maxItemLength( maxItemLength_ ), addingEnabled( true )
+ , dirty( false )
+ , timerId ( 0 )
 {
   QFile file( Config::getHistoryFileName() );
 
@@ -83,6 +85,8 @@ void History::addItem( Item const & item )
 
   ensureSizeConstraints();
 
+  dirty = true;
+
   emit itemsChanged();
 }
 
@@ -93,6 +97,7 @@ bool History::ensureSizeConstraints()
   {
     items.pop_back();
     changed = true;
+    dirty = true;
   }
 
   return changed;
@@ -112,8 +117,11 @@ int History::size() const
   return items.size();
 }
 
-bool History::save() const
+bool History::save()
 {
+  if( !dirty )
+    return true;
+
   QFile file( Config::getHistoryFileName() + ".tmp" );
 
   if ( !file.open( QFile::WriteOnly | QIODevice::Text ) )
@@ -137,6 +145,8 @@ bool History::save() const
 
   file.close();
 
+  dirty = false;
+
   return renameAtomically( file.fileName(), Config::getHistoryFileName() );
 }
 
@@ -145,4 +155,25 @@ void History::clear()
   items.clear();
 
   emit itemsChanged();
+}
+
+void History::setSaveInterval( unsigned interval )
+{
+  if( timerId )
+  {
+    killTimer( timerId );
+    timerId = 0;
+  }
+  if( interval )
+  {
+    if( dirty )
+      save();
+    timerId = startTimer( interval * 60000 );
+  }
+}
+
+void History::timerEvent( QTimerEvent * ev )
+{
+  Q_UNUSED( ev );
+  save();
 }

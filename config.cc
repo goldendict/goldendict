@@ -130,6 +130,7 @@ Preferences::Preferences():
   maxStringsInHistory( 500 ),
   storeHistory( 1 ),
   alwaysExpandOptionalParts( true )
+, historyStoreInterval( 0 )
 {
 }
 
@@ -705,6 +706,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "addonStyle" ).isNull() )
       c.preferences.addonStyle = preferences.namedItem( "addonStyle" ).toElement().text();
+
+    if ( !preferences.namedItem( "historyStoreInterval" ).isNull() )
+      c.preferences.historyStoreInterval = preferences.namedItem( "historyStoreInterval" ).toElement().text().toUInt() ;
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -1319,6 +1323,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "searchInDock" );
     opt.appendChild( dd.createTextNode( c.preferences.searchInDock ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "historyStoreInterval" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.historyStoreInterval ) ) );
     preferences.appendChild( opt );
 
     {

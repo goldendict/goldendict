@@ -721,6 +721,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   wasMaximized = isMaximized();
 
+  history.setSaveInterval( cfg.preferences.historyStoreInterval );
+
   #ifdef Q_OS_MAC
     LionSupport::addFullscreen(this);
   #endif
@@ -1733,6 +1735,9 @@ void MainWindow::editPreferences()
       if( needReload )
         view.reload();
     }
+
+    if( cfg.preferences.historyStoreInterval != p.historyStoreInterval )
+      history.setSaveInterval( p.historyStoreInterval );
 
     cfg.preferences = p;
 

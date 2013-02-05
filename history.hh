@@ -63,7 +63,7 @@ public:
 
   /// Attempts saving history. Returns true if succeeded - false otherwise.
   /// Since history isn't really that valuable, failures can be ignored.
-  bool save() const;
+  bool save();
 
   /// Clears history.
   void clear();
@@ -82,6 +82,8 @@ public:
   { return addingEnabled; }
 
   void setMaxSize( unsigned maxSize_ );
+
+  void setSaveInterval( unsigned interval );
 
   unsigned getMaxSize()
   { return maxSize; }
@@ -104,7 +106,11 @@ private:
   unsigned maxSize;
   unsigned maxItemLength;
   bool addingEnabled;
+  bool dirty;
+  int timerId;
 
+protected:
+  virtual void timerEvent( QTimerEvent * );
 };
 
 #endif
