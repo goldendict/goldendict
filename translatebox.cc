@@ -258,14 +258,15 @@ void TranslateBox::showPopup()
 
   int preferredHeight = word_list->preferredHeight();
 
-  QPoint origin( 0, translate_line->y() + translate_line->height() );
+  QPoint origin( translate_line->x(), translate_line->y() + translate_line->height() );
+
   if ( word_list->isWindow() )
   {
     origin = mapToGlobal( origin );
   }
   else
   {
-    origin = mapToParent( origin );
+    origin = mapTo( window(), origin );
     preferredHeight = qMin( translate_line->window()->height() - origin.y(), preferredHeight );
   }
 

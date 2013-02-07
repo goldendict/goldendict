@@ -99,14 +99,22 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
   navToolbar->widgetForAction( navForward )->setObjectName( "forwardButton" );
 
+  QWidget * translateBoxWidget = new QWidget( this );
+  QHBoxLayout * translateBoxLayout = new QHBoxLayout( translateBoxWidget );
+  translateBoxWidget->setLayout( translateBoxLayout );
+  translateBoxLayout->setContentsMargins( 0, 0, 0, 0 );
+  translateBoxLayout->setSpacing( 0 );
+
   // translate box
   groupListInToolbar = new GroupComboBox( navToolbar );
-  groupListInToolbar->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-  groupListToolBarAction = navToolbar->addWidget( groupListInToolbar );
+  groupListInToolbar->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Preferred );
+  groupListInToolbar->setSizeAdjustPolicy( QComboBox::AdjustToContents );
+  translateBoxLayout->addWidget( groupListInToolbar );
 
   translateBox = new TranslateBox( navToolbar );
-  translateBox->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed );
-  navToolbar->addWidget( translateBox );
+  translateBox->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Preferred );
+  translateBoxLayout->addWidget( translateBox );
+  translateBoxToolBarAction = navToolbar->addWidget( translateBoxWidget );
 
   // scan popup
   beforeScanPopupSeparator = navToolbar->addSeparator();
@@ -751,11 +759,7 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
     translateLine = ui.translateLine;
     wordList = ui.wordList;
 
-    groupListToolBarAction->setVisible( false );
-
-    translateBox->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed );
-    translateBox->setVisible( false );
-    translateBox->translateLine()->setVisible( false );
+    translateBoxToolBarAction->setVisible( false );
   }
   else
   {
@@ -780,11 +784,7 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
     translateLine = translateBox->translateLine();
     wordList = translateBox->wordList();
 
-    groupListToolBarAction->setVisible( true );
-
-    translateBox->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed );
-    translateBox->setVisible( true );
-    translateBox->translateLine()->setVisible( true );
+    translateBoxToolBarAction->setVisible( true );
   }
 
   wordList->attachFinder( &wordFinder );

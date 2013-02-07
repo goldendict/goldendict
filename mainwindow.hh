@@ -88,9 +88,9 @@ private:
   QLabel groupLabel;
   GroupComboBox * groupList, * groupListInToolbar, * groupListInDock;
 
-  // Needed to be able to show/hide the group list in the toolbar, since hiding
+  // Needed to be able to show/hide the translate box in the toolbar, since hiding
   // the list expilictily doesn't work, see docs for QToolBar::addWidget().
-  QAction * groupListToolBarAction;
+  QAction * translateBoxToolBarAction;
 
   QWidget dictsPaneTitleBar;
   QHBoxLayout dictsPaneTitleBarLayout;

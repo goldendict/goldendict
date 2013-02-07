@@ -87,23 +87,23 @@ MainStatusBar #icon
 
 ScanPopup #translateLine
 {
+  margin: 0px;
+  padding: 1px 3px 1px 3px;
   border: 1px solid gray;
   border-radius: 3px;
-  padding: 0px 3px 2px 3px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  margin-left: 0px;
 }
 
 ScanPopup GroupComboBox
 {
-  margin-right: 0px;
+  margin: 1px 0px 1px 1px;
+  padding: 1px 4px 1px 4px;
   border: 1px solid gray;
   border-right: 1px transparent;
   border-radius: 3px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  padding: 1px 4px 1px 4px;
   background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                               stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
                               stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
