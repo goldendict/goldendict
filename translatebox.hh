@@ -44,6 +44,9 @@ public:
   QLineEdit * translateLine();
   WordList * wordList();
   void setText(QString text, bool showPopup=true);
+  void setSizePolicy(QSizePolicy policy);
+  inline void setSizePolicy(QSizePolicy::Policy hor, QSizePolicy::Policy ver)
+  { setSizePolicy(QSizePolicy(hor, ver)); }
 
 signals:
 

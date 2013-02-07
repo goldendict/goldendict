@@ -85,7 +85,7 @@ bool CompletionList::acceptCurrentEntry()
 }
 
 TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
-  word_list(new CompletionList(this)), m_popupEnabled(false)
+  word_list(new CompletionList(this)), translate_line(new ExtLineEdit(this)), m_popupEnabled(false)
 {
   // initially hidden
   word_list->hide();
@@ -97,7 +97,6 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
   setSizePolicy(sizePolicy);
   // setMinimumSize(QSize(800, 0));
 
-  translate_line = new ExtLineEdit(this);
   setFocusProxy(translate_line);
   translate_line->setObjectName("translateLine");
 #if QT_VERSION >= 0x040700
@@ -231,6 +230,13 @@ void TranslateBox::setPopupEnabled( bool enable )
 {
   m_popupEnabled = enable;
   showPopup();
+}
+
+void TranslateBox::setSizePolicy( QSizePolicy policy )
+{
+  QWidget::setSizePolicy( policy );
+  if ( translate_line )
+    translate_line->setSizePolicy( policy );
 }
 
 void TranslateBox::showPopup()
