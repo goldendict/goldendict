@@ -22,3 +22,4 @@ Amos Batto <amosbatto\yahoo.com>: Quechua, Aymara and Bolivian Spanish translati
 Carlos A. Cortijo Bon: Spanish from Spain translation
 Victor Ibragimov <victor.ibragimov\gmail.com>: Tajik translation
 Maksim Tamkovič <quendimax\gmail.com>: Belarusian translation and transliteration
+VirtualTam <virtualtam\myopera.com>: French translation
