@@ -787,6 +787,9 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
     translateBoxToolBarAction->setVisible( true );
   }
 
+  // reset the flag when switching UI modes
+  wordListSelChanged = false;
+
   wordList->attachFinder( &wordFinder );
 
   updateGroupList();
