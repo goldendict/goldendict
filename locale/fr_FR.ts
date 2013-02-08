@@ -1506,12 +1506,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="187"/>
         <source>Raeto-Romance</source>
-        <translation type="unfinished"></translation>
+        <translation>Romanche</translation>
     </message>
     <message>
         <location filename="../language.cc" line="188"/>
         <source>Kirundi</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirundi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="189"/>
@@ -1526,7 +1526,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="191"/>
         <source>Kinyarwanda</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinyarwanda</translation>
     </message>
     <message>
         <location filename="../language.cc" line="192"/>
@@ -1536,12 +1536,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="193"/>
         <source>Sardinian</source>
-        <translation type="unfinished"></translation>
+        <translation>Sarde</translation>
     </message>
     <message>
         <location filename="../language.cc" line="194"/>
         <source>Sindhi</source>
-        <translation type="unfinished"></translation>
+        <translation>Sindhî</translation>
     </message>
     <message>
         <location filename="../language.cc" line="195"/>
@@ -1551,7 +1551,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="196"/>
         <source>Sango</source>
-        <translation type="unfinished"></translation>
+        <translation>Sango</translation>
     </message>
     <message>
         <location filename="../language.cc" line="197"/>
@@ -1561,7 +1561,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="198"/>
         <source>Sinhala</source>
-        <translation type="unfinished"></translation>
+        <translation>Cingalais</translation>
     </message>
     <message>
         <location filename="../language.cc" line="199"/>
@@ -1581,7 +1581,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="202"/>
         <source>Shona</source>
-        <translation type="unfinished"></translation>
+        <translation>Shona</translation>
     </message>
     <message>
         <location filename="../language.cc" line="203"/>
@@ -1601,17 +1601,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="206"/>
         <source>Swati</source>
-        <translation type="unfinished"></translation>
+        <translation>Swati</translation>
     </message>
     <message>
         <location filename="../language.cc" line="207"/>
         <source>Southern Sotho</source>
-        <translation type="unfinished"></translation>
+        <translation>Sotho du Sud</translation>
     </message>
     <message>
         <location filename="../language.cc" line="208"/>
         <source>Sundanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundanais</translation>
     </message>
     <message>
         <location filename="../language.cc" line="209"/>
@@ -1626,17 +1626,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="211"/>
         <source>Tamil</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamoul</translation>
     </message>
     <message>
         <location filename="../language.cc" line="212"/>
         <source>Telugu</source>
-        <translation type="unfinished"></translation>
+        <translation>Télougou</translation>
     </message>
     <message>
         <location filename="../language.cc" line="213"/>
         <source>Tajik</source>
-        <translation type="unfinished"></translation>
+        <translation>Tadjik</translation>
     </message>
     <message>
         <location filename="../language.cc" line="214"/>
@@ -1646,27 +1646,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="215"/>
         <source>Tigrinya</source>
-        <translation type="unfinished"></translation>
+        <translation>Tigrigna</translation>
     </message>
     <message>
         <location filename="../language.cc" line="216"/>
         <source>Turkmen</source>
-        <translation type="unfinished"></translation>
+        <translation>Turkmène</translation>
     </message>
     <message>
         <location filename="../language.cc" line="217"/>
         <source>Tagalog</source>
-        <translation type="unfinished"></translation>
+        <translation>Tagalog</translation>
     </message>
     <message>
         <location filename="../language.cc" line="218"/>
         <source>Tswana</source>
-        <translation type="unfinished"></translation>
+        <translation>Tswana</translation>
     </message>
     <message>
         <location filename="../language.cc" line="219"/>
         <source>Tonga</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonguien</translation>
     </message>
     <message>
         <location filename="../language.cc" line="220"/>
@@ -1676,17 +1676,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="221"/>
         <source>Tsonga</source>
-        <translation type="unfinished"></translation>
+        <translation>Tsonga</translation>
     </message>
     <message>
         <location filename="../language.cc" line="222"/>
         <source>Tatar</source>
-        <translation type="unfinished"></translation>
+        <translation>Tatar</translation>
     </message>
     <message>
         <location filename="../language.cc" line="223"/>
         <source>Twi</source>
-        <translation type="unfinished"></translation>
+        <translation>Twi (Akan)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="224"/>
@@ -1696,27 +1696,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="225"/>
         <source>Uighur</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouïghour</translation>
     </message>
     <message>
         <location filename="../language.cc" line="226"/>
         <source>Ukrainian</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrainien</translation>
     </message>
     <message>
         <location filename="../language.cc" line="227"/>
         <source>Urdu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ourdou</translation>
     </message>
     <message>
         <location filename="../language.cc" line="228"/>
         <source>Uzbek</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouzbek</translation>
     </message>
     <message>
         <location filename="../language.cc" line="229"/>
         <source>Venda</source>
-        <translation type="unfinished"></translation>
+        <translation>Venda</translation>
     </message>
     <message>
         <location filename="../language.cc" line="230"/>
@@ -1726,42 +1726,42 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="231"/>
         <source>Volapuk</source>
-        <translation type="unfinished"></translation>
+        <translation>Volapük</translation>
     </message>
     <message>
         <location filename="../language.cc" line="232"/>
         <source>Walloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Wallon</translation>
     </message>
     <message>
         <location filename="../language.cc" line="233"/>
         <source>Wolof</source>
-        <translation type="unfinished"></translation>
+        <translation>Wolof</translation>
     </message>
     <message>
         <location filename="../language.cc" line="234"/>
         <source>Xhosa</source>
-        <translation type="unfinished"></translation>
+        <translation>Xhosa</translation>
     </message>
     <message>
         <location filename="../language.cc" line="235"/>
         <source>Yiddish</source>
-        <translation type="unfinished"></translation>
+        <translation>Yiddish</translation>
     </message>
     <message>
         <location filename="../language.cc" line="236"/>
         <source>Yoruba</source>
-        <translation type="unfinished"></translation>
+        <translation>Yoruba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="237"/>
         <source>Zhuang</source>
-        <translation type="unfinished"></translation>
+        <translation>Zhuang</translation>
     </message>
     <message>
         <location filename="../language.cc" line="238"/>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinois</translation>
     </message>
     <message>
         <location filename="../language.cc" line="239"/>
@@ -1841,7 +1841,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamazight (Berbère)</translation>
     </message>
 </context>
 <context>
@@ -2577,7 +2577,7 @@ sans basculer vers ceux-ci.</translation>
     <message>
         <location filename="../preferences.ui" line="58"/>
         <source>Open new tabs in background</source>
-        <translation>Ouvrir les nouveaux onglets en arrière-plan</translation>
+        <translation>Nouveaux onglets en arrière-plan</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="65"/>
@@ -2591,7 +2591,7 @@ en fin de liste.</translation>
     <message>
         <location filename="../preferences.ui" line="70"/>
         <source>Open new tabs after the current one</source>
-        <translation>Ouvrir les nouveaux onglets après l&apos;onglet courant</translation>
+        <translation>Nouveaux onglets après l&apos;onglet courant</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="77"/>
@@ -2618,7 +2618,7 @@ pour ouvrir la fenâtre principale et accomplir d&apos;autres tâches.</translat
     <message>
         <location filename="../preferences.ui" line="101"/>
         <source>Enable system tray icon</source>
-        <translation>Activer l&apos;icône de la barre des tâches</translation>
+        <translation>Activer l&apos;icône système</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="119"/>
@@ -2666,7 +2666,7 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="163"/>
         <source>Start with system</source>
-        <translation>Lancer au démarrage de l&apos;ordinateur</translation>
+        <translation>Lancer au démarrage du système</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="188"/>
@@ -3073,7 +3073,7 @@ download page.</source>
     <message>
         <location filename="../preferences.ui" line="1078"/>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonctionnalités ScanPopup supplémentaires</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
