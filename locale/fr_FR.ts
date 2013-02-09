@@ -25,7 +25,7 @@
     <message>
         <location filename="../about.ui" line="83"/>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>Sous licence GPLv3 ou plus récente</translation>
+        <translation>Sous licence GPLv3 ou ultérieure</translation>
     </message>
     <message>
         <location filename="../about.ui" line="97"/>
@@ -62,7 +62,12 @@
     <message>
         <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Bienvenue dans &lt;b&gt;GoldenDict&lt;/b&gt; !&lt;/h3&gt;&lt;p&gt;Pour commencer à utiliser le logiciel, visitez d&apos;abord &lt;b&gt;Édition|Dictionnaires&lt;/b&gt; pour ajouter des emplacements où trouver les fichiers de dictionnaires, configurer divers sites Wikipédia ou d&apos;autres sources, ajuster l&apos;ordre des dictionnaires ou créer des groupes de dictionnaires.&lt;p&gt;Vous êtes paré pour lancer de nouvelles recherches ! Vous pouvez faire cela en utilisant le panneau à gauche de cette fenêtre, ou vous pouvez &lt;a href=&quot;Working with popup&quot;&gt;chercher les mots d&apos;autres applications actives&lt;/a&gt;. &lt;p&gt;Pour personnaliser le logiciel, vérifiez les options disponibles dans &lt;b&gt;Édition|Préférences&lt;/b&gt;. Tous les paramètres y disposent d&apos;une aide, lisez-les bien en cas de doute !&lt;p&gt;Si vous avez besoin d&apos;aide, avez des questions, des suggestions ou désirez vous enquérir de l&apos;avis d&apos;autrui, vous serez les bienvenus sur le&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Visitez le &apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;site&lt;/a&gt; du logiciel pour les mises à jour. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Sous licence GPLv3 ou plus récente.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Bienvenue dans &lt;b&gt;GoldenDict&lt;/b&gt; !&lt;/h3&gt;
+&lt;p&gt;Pour commencer à utiliser le logiciel, visitez d&apos;abord &lt;b&gt;Édition|Dictionnaires&lt;/b&gt; pour ajouter des emplacements où trouver les fichiers de dictionnaires, configurer divers sites Wikipédia ou d&apos;autres sources, ajuster l&apos;ordre des dictionnaires ou créer des groupes de dictionnaires.&lt;p&gt;Vous êtes paré pour lancer de nouvelles recherches ! Vous pouvez faire cela en utilisant le panneau à gauche de cette fenêtre, ou vous pouvez &lt;a href=&quot;Working with popup&quot;&gt;chercher les mots d&apos;autres applications actives&lt;/a&gt;.
+&lt;p&gt;Pour personnaliser le logiciel, vérifiez les options disponibles dans &lt;b&gt;Édition|Préférences&lt;/b&gt;. Tous les paramètres y disposent d&apos;une aide, lisez-la bien en cas de doute !
+&lt;p&gt;Si vous avez besoin d&apos;aide, avez des questions ou des suggestions, vous serez les bienvenus sur le &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.
+&lt;p&gt;Consultez le &lt;a href=&quot;http://goldendict.org/&quot;&gt;site&lt;/a&gt; du logiciel pour les mises à jour.
+&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Sous licence GPLv3 ou ultérieure.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="195"/>
@@ -72,7 +77,7 @@
     <message>
         <location filename="../article_maker.cc" line="197"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Utilisation avec pop-up&lt;/h3&gt;Pour rechercher des mots à partir d&apos;autres applications actives, vous devez d&apos;abord activer la fonctionnalité &lt;i&gt;&quot;Fonction de scan avec pop-up&quot;&lt;/i&gt; dans les &lt;b&gt;Préférences&lt;/b&gt;, et ensuite l&apos;activer à tout moment en cliquant sur l&apos;icône &apos;Pop-up&apos;, ou par clic droit sur l&apos;icône de la barre des tâches, puis sélection de la fonctionnalité dans le menu déroulant.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Utilisation avec fenêtre de scan&lt;/h3&gt;Pour rechercher des mots à partir d&apos;autres applications actives, vous devez d&apos;abord activer la fonctionnalité &lt;i&gt;&quot;Fonction de scan avec fenêtre pop-up&quot;&lt;/i&gt; dans les &lt;b&gt;Préférences&lt;/b&gt;, et ensuite l&apos;activer à tout moment en cliquant sur l&apos;icône &apos;Fenêtre de scan&apos;, ou par clic droit sur l&apos;icône de la barre des tâches, puis sélection de la fonctionnalité dans le menu déroulant.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="204"/>
@@ -1872,7 +1877,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="86"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Edition</translation>
+        <translation>Éditio&amp;n</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
@@ -1892,7 +1897,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
-        <translation>H&amp;istorique</translation>
+        <translation>&amp;Historique</translation>
     </message>
     <message>
         <source>Search Pane</source>
@@ -2703,7 +2708,7 @@ Avec cette otion activée, Echap cachera la fenêtre principale.</translation>
     <message>
         <location filename="../preferences.ui" line="302"/>
         <source>&amp;Scan Popup</source>
-        <translation>Pop-up de &amp;scan</translation>
+        <translation>Fenêtre de &amp;scan</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="321"/>
@@ -2719,19 +2724,19 @@ Lorsque cette option est active, il est possible de l&apos;activer/désactiver �
     <message>
         <location filename="../preferences.ui" line="327"/>
         <source>Enable scan popup functionality</source>
-        <translation>Activer la fonction de scan par pop-up</translation>
+        <translation>Activer le scan par fenêtre pop-up</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="339"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Définit si la fonctionnalité de scan par pop-up est activée par défaut ou non.
-Si cette option est active, GoldenDict démarrera toujours avec la pop-up de scan activée.</translation>
+        <translation>Définit si la fonctionnalité de scan par fenêtre pop-up est activée par défaut ou non.
+Si cette option est active, GoldenDict démarrera toujours avec la fenêtre de scan activée.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="343"/>
         <source>Start with scan popup turned on</source>
-        <translation>Démarrer avec la pop-up de scan activée</translation>
+        <translation>Démarrer avec la fenêtre de scan activée</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="350"/>
@@ -2850,12 +2855,14 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalement, il faut maintenir appuyées les touches sélectionnées pour activer la pop-up
+lors de la sélection d&apos;un mot. Si cette option est activée, il est aussi possible de presser les
+touches après avoir effectué la sélection.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="526"/>
         <source>Keys may also be pressed afterwards, within</source>
-        <translation type="unfinished"></translation>
+        <translation>Les touches peuvent être pressées dans un délai de</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="533"/>
@@ -2932,7 +2939,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="787"/>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Prononciation automatique dans la pop-up de scan</translation>
+        <translation>Prononciation automatique dans la fenêtre de scan</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="797"/>
@@ -3032,7 +3039,9 @@ pour toutes les requêtes passant par le réseau.</translation>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict bloquera la plupart des publicités en désactivant le contenu
+(images, frames) ne provenant pas du site visité. Si vous remarquez
+que du contenu est manquant, essayez de désactiver cette option.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1009"/>
@@ -3044,7 +3053,9 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorise les prononciations en provenance de dictionnaires en ligne
+se basant sur Flash ou d&apos;autres greffons web.
+Le greffon approprié doit être installé pour que cette option fonctionne.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1021"/>
@@ -3058,7 +3069,10 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le programme vérifiera régulièrement si une nouvelle
+version de GoldenDict est disponible, auquel cas l&apos;utilisateur
+en sera informé, et invité à se rendre sur la page de
+téléchargement.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1051"/>
@@ -3073,7 +3087,7 @@ download page.</source>
     <message>
         <location filename="../preferences.ui" line="1078"/>
         <source>ScanPopup extra technologies</source>
-        <translation>Fonctionnalités ScanPopup supplémentaires</translation>
+        <translation>Fenêtre de scan</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3081,7 +3095,10 @@ download page.</source>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la fonction IAccessibleEx pour retrouver le mot sous le curseur.
+Cette fonction marche uniquement avec certains programmes la supportant
+(par exemple, Internet Explorer 9).
+Il n&apos;est pas nécessaire d&apos;activer cette option si vous n&apos;utilisez pas de tels programmes.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1090"/>
@@ -3093,7 +3110,8 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser l&apos;automatisation IHM pour retrouver le mot sous le curseur.
+Cette fonction marche uniquement avec les programmes qui la supportent.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1102"/>
@@ -3105,7 +3123,9 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>wtf is a &quot;special GoldenDict message&quot;? some kind of software illumination? anyway, i lol&apos;d</translatorcomment>
+        <translation>Utiliser le message spécial GoldenDict pour retrouver le mot sous le curseur.
+Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1114"/>
