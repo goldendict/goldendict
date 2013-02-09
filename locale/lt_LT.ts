@@ -135,7 +135,7 @@
     <message>
         <location filename="../articleview.cc" line="162"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Dabartinio straipsnio pasirinkimas</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="689"/>
@@ -410,7 +410,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepriskirta</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
@@ -774,27 +774,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ša&amp;linti pasirinktus</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopijuoti pasirinktus</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Žurnalas:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="211"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="215"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Žurnalo dydis įrašais: %1 iš %2 galimų</translation>
     </message>
 </context>
 <context>
@@ -2233,7 +2233,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
@@ -2248,10 +2248,10 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Žurnalo polangis</translation>
     </message>
     <message>
-        <source>&amp;Dictionaries...	F3</source>
+        <source>&amp;Dictionaries...    F3</source>
         <translation type="obsolete">Žo&amp;dynai...	F3</translation>
     </message>
     <message>
@@ -3034,27 +3034,27 @@ Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translatio
     <message>
         <location filename="../preferences.ui" line="1148"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nurodykite didžiausią leistiną žurnalo įrašų kiekį.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1151"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Žurnalo įrašų didžiausias kiekis:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Žurnalo įrašymo dažnumas. 0 reiškia įrašymą tik užveriant programą.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1194"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti kas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1211"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1236"/>
@@ -3457,7 +3457,7 @@ galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus
         <location filename="../scanpopup.cc" line="469"/>
         <location filename="../scanpopup.cc" line="814"/>
         <source>%1 - %2</source>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -3475,7 +3475,7 @@ galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus
     <message>
         <location filename="../sources.cc" line="1004"/>
         <source>Icon</source>
-        <translation type="unfinished">Ženkliukas</translation>
+        <translation>Ženkliukas</translation>
     </message>
 </context>
 <context>
@@ -3706,7 +3706,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="648"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Transliteracija (baltarusių)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="674"/>
@@ -3865,7 +3865,7 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ĮSPĖJIMAS: %1</translation>
     </message>
 </context>
 </TS>
