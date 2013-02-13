@@ -99,7 +99,14 @@ bool Babylon::open()
 
   fflush( f );
 
+#ifdef Q_OS_MACX
+  /* Under Mac OS X the above technique don't set reopen position properly */
+  int fn = DUP( fileno( f ) );
+  lseek( fn, i, SEEK_SET );
+  file = gzdopen( fn, "r" );
+#else
   file = gzdopen( DUP( fileno( f ) ), "r" );
+#endif
 
   fclose( f );
 
