@@ -3859,17 +3859,17 @@ No necesita seleccionar esta opción si no utiliza tales programas.</translation
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Intervalo para grabar historial. Si se configura en 0, el historial sólo se grabará al cerrar el programa.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1194"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar cada</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1211"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minutos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1236"/>
@@ -4229,7 +4229,7 @@ o pueda ser manipulada de otras formas.</translation>
         <location filename="../scanpopup.cc" line="469"/>
         <location filename="../scanpopup.cc" line="814"/>
         <source>%1 - %2</source>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -4247,7 +4247,7 @@ o pueda ser manipulada de otras formas.</translation>
     <message>
         <location filename="../sources.cc" line="1004"/>
         <source>Icon</source>
-        <translation type="unfinished">Ícono</translation>
+        <translation>Ícono</translation>
     </message>
 </context>
 <context>
