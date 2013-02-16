@@ -281,6 +281,7 @@ void TranslateBox::showPopup()
 
   word_list->setGeometry(rect);
   word_list->show();
+  word_list->raise();
   translate_line->setFocus();
 }
 
