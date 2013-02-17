@@ -281,6 +281,8 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       return ( QString::fromUtf8( articleText.c_str() )
                .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
                          "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
+               .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
+                         "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
                .toUtf8().data() );
     }
     case 'm': // Pure meaning, usually means preformatted text
