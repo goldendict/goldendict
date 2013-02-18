@@ -81,7 +81,7 @@ struct Ifo
 enum
 {
   Signature = 0x58444953, // SIDX on little-endian, XDIS on big-endian
-  CurrentFormatVersion = 7 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 8 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -1008,6 +1008,14 @@ static void handleIdxSynFile( string const & fileName,
     ptr += wordLen + 1;
 
     uint32_t offset;
+
+    if( strstr( word, "&#" ) )
+    {
+      // Decode some html-coded symbols in headword
+      string unescapedWord = Html::unescapeUtf8( word );
+      strncpy( (char *)word, unescapedWord.c_str(), wordLen );
+      wordLen = strlen( word );
+    }
 
     if ( !isSynFile )
     {
