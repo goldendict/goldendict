@@ -2875,6 +2875,9 @@ void MainWindow::on_rescanFiles_triggered()
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
 
   groupInstances.clear(); // Release all the dictionaries they hold
+  dictionaries.clear();
+  dictionariesUnmuted.clear();
+  dictionaryBar.setDictionaries( dictionaries );
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
 
