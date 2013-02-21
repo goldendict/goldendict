@@ -708,6 +708,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
       hide();
       setGeometry( baseGeometry );
       showMaximized();
+      activateWindow();
     }
 #endif
   }
