@@ -186,32 +186,32 @@
         <location filename="../articleview.cc" line="1153"/>
         <location filename="../articleview.cc" line="1168"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1118"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar audio</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1120"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos de audio (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Todos los archivos (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1133"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar imagen</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1135"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos de imagen (*.bmp *.jpg *.png *.tif);;Todos los archivos (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1153"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Error al guardar recurso: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1304"/>
@@ -231,12 +231,12 @@
     <message>
         <location filename="../articleview.cc" line="1330"/>
         <source>Save &amp;image</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar &amp;imagen</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1338"/>
         <source>Save s&amp;ound</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar &amp;audio</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1349"/>
@@ -287,12 +287,12 @@
     <message>
         <location filename="../articleview.cc" line="1588"/>
         <source>Bass library can&apos;t play this sound.</source>
-        <translation>La biblioteca Bass no puede reproducir este sonido.</translation>
+        <translation>La biblioteca Bass no puede reproducir este audio.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1623"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>No fue posible ejecutar un programa reproductor de sonidos: %1</translation>
+        <translation>No fue posible ejecutar un programa reproductor de audios: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1641"/>
@@ -3903,7 +3903,7 @@ No necesita seleccionar esta opción si no utiliza tales programas.</translation
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished">Intervalo para grabar historial. Si se configura en 0, el historial sólo se grabará al cerrar el programa.</translation>
+        <translation>Intervalo para grabar historial. Si se configura en 0, el historial sólo se grabará al cerrar el programa.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1194"/>
@@ -4379,7 +4379,7 @@ o pueda ser manipulada de otras formas.</translation>
     <message>
         <location filename="../sources.ui" line="103"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>Cree diccionarios de un conjunto de archivos de sonido al agregar rutas de directorios aquí:</translation>
+        <translation>Cree diccionarios de un conjunto de archivos de audio al agregar rutas de directorios aquí:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="153"/>
