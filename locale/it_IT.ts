@@ -118,32 +118,32 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="162"/>
+        <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="689"/>
+        <location filename="../articleview.cc" line="690"/>
         <source>Resource</source>
         <translation>Risorsa</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="694"/>
+        <location filename="../articleview.cc" line="695"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="699"/>
+        <location filename="../articleview.cc" line="700"/>
         <source>Picture</source>
         <translation>Immagine</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="715"/>
+        <location filename="../articleview.cc" line="716"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Definizione dal dizionario &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="719"/>
+        <location filename="../articleview.cc" line="720"/>
         <source>Definition: %1</source>
         <translation>Definizione: %1</translation>
     </message>
@@ -152,105 +152,149 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="907"/>
+        <location filename="../articleview.cc" line="908"/>
+        <location filename="../articleview.cc" line="1055"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>La risorsa di riferimento non esiste.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="947"/>
+        <location filename="../articleview.cc" line="948"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Il programma audio di riferimento non esiste.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1086"/>
+        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1168"/>
+        <source>ERROR: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1118"/>
+        <source>Save sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1120"/>
+        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1133"/>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1135"/>
+        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1153"/>
+        <source>Resource saving error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1304"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Apri collegamento</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1092"/>
+        <location filename="../articleview.cc" line="1310"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Apri collegamento in una nuova &amp;scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1099"/>
+        <location filename="../articleview.cc" line="1317"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Apri collegamento in un programma di &amp;navigazione web esterno</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1112"/>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1349"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Cerca «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1120"/>
+        <location filename="../articleview.cc" line="1357"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Cerca &quot;%1&quot; in una &amp;nuova scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1125"/>
+        <location filename="../articleview.cc" line="1362"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Invia &quot;%1&quot; alla linea di comando</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1131"/>
-        <location filename="../articleview.cc" line="1163"/>
+        <location filename="../articleview.cc" line="1368"/>
+        <location filename="../articleview.cc" line="1400"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Aggiungi &quot;%1&quot; alla cronologia</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1145"/>
+        <location filename="../articleview.cc" line="1382"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Cerca &quot;%1&quot; in %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1390"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Cerca &quot;%1&quot; in %2 in una &amp;nuova scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1324"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>Playing a non-WAV file</source>
         <translation>Riproduzione di file audio diverso dal WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1325"/>
+        <location filename="../articleview.cc" line="1568"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Per abilitare la riproduzione di file diversi dal WAV, dal menu Modifica|Impostazioni, clicca la scheda Audio e scegli l&apos;opzione &quot;Riproduci utilizzando le DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1340"/>
+        <location filename="../articleview.cc" line="1583"/>
         <source>Bass library not found.</source>
         <translation>La libreria Bass non è stata trovata.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1345"/>
+        <location filename="../articleview.cc" line="1588"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>La libreria Bass non è in grado di riprodurre questo suono.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1380"/>
+        <location filename="../articleview.cc" line="1623"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>L&apos;esecuzione del file sonoro è fallita: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1398"/>
+        <location filename="../articleview.cc" line="1641"/>
         <source>Failed to create temporary file.</source>
         <translation>La creazione del file temporaneo è fallita.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1409"/>
+        <location filename="../articleview.cc" line="1652"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>L&apos;apertura automatica del file di risorsa è fallita. Provare ad aprire il file manualmente: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1168"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>Lo scaricamento della risorsa di riferimento è fallita.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1340"/>
-        <location filename="../articleview.cc" line="1345"/>
-        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1583"/>
+        <location filename="../articleview.cc" line="1588"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>WARNING: %1</source>
         <translation>ATTENZIONE: %1</translation>
     </message>
@@ -1860,110 +1904,110 @@ between classic and school orthography in cyrillic)</source>
         <translation>Traduzione successiva</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="116"/>
+        <location filename="../mainwindow.cc" line="124"/>
         <source>Scan Popup</source>
         <translation>Scansiona e traduci le parole puntate sì/no</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="275"/>
+        <location filename="../mainwindow.cc" line="283"/>
         <source>Show &amp;Main Window</source>
         <translation>Mostra finestra &amp;principale</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="355"/>
-        <location filename="../mainwindow.cc" line="279"/>
+        <location filename="../mainwindow.cc" line="287"/>
         <source>&amp;Quit</source>
         <translation>&amp;Esci</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="484"/>
+        <location filename="../mainwindow.cc" line="492"/>
         <source>Loading...</source>
         <translation>Caricamento...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2571"/>
+        <location filename="../mainwindow.cc" line="2600"/>
         <source>Skip This Release</source>
         <translation>Tralascia questa versione</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2687"/>
+        <location filename="../mainwindow.cc" line="2716"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Hai scelto di nascondere la barra dei menu. Utilizza %1 per mostrarla nuovamente.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2688"/>
+        <location filename="../mainwindow.cc" line="2717"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2786"/>
+        <location filename="../mainwindow.cc" line="2815"/>
         <source>Page Setup</source>
         <translation>Imposta pagina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2787"/>
+        <location filename="../mainwindow.cc" line="2816"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Non è disponibile alcuna stampante. Per proseguire installarne una.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2804"/>
+        <location filename="../mainwindow.cc" line="2833"/>
         <source>Print Article</source>
         <translation>Stampa voce</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2825"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Save Article As</source>
         <translation>Salva voce come</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2825"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Html files (*.html *.htm)</source>
         <translation>File HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2840"/>
+        <location filename="../mainwindow.cc" line="2869"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2841"/>
+        <location filename="../mainwindow.cc" line="2870"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Impossibile salvare la voce: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2873"/>
+        <location filename="../mainwindow.cc" line="2905"/>
         <source>The main window is set to be always on top.</source>
         <translation>La finestra principale è impostata per essere mostrata sempre in primo piano.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1058"/>
+        <location filename="../mainwindow.cc" line="1062"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 dizionari, %2 voci, %3 parole</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2430"/>
+        <location filename="../mainwindow.cc" line="2459"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>L&apos;inizializzazione del meccanismo di monitoraggio dei tasti scorciatoia è fallito.&lt;br&gt;Assicurarsi che nel proprio XServer c&apos;è l&apos;estensione RECORD attiva.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2564"/>
+        <location filename="../mainwindow.cc" line="2593"/>
         <source>New Release Available</source>
         <translation>E&apos; disponibile una nuova versione</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2565"/>
+        <location filename="../mainwindow.cc" line="2594"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>E&apos; disponibile la nuova versione &lt;b&gt;%1&lt;/b&gt; di GoldenDict.&lt;br&gt;
 Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2570"/>
+        <location filename="../mainwindow.cc" line="2599"/>
         <source>Download</source>
         <translation>Scarica</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="193"/>
-        <location filename="../mainwindow.cc" line="1069"/>
+        <location filename="../mainwindow.cc" line="201"/>
+        <location filename="../mainwindow.cc" line="1073"/>
         <source>Look up in:</source>
         <translation>Cerca in:</translation>
     </message>
@@ -1981,12 +2025,12 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation>Barra dei &amp;menu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="231"/>
+        <location filename="../mainwindow.cc" line="239"/>
         <source>Found in Dictionaries:</source>
         <translation>Trovato nei dizionari:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="131"/>
+        <location filename="../mainwindow.cc" line="139"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Ascolta la pronuncia (Alt+S)</translation>
     </message>
@@ -2006,62 +2050,62 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation>Barra degli &amp;strumenti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="143"/>
+        <location filename="../mainwindow.cc" line="151"/>
         <source>Zoom In</source>
         <translation>Ingrandisci</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="149"/>
+        <location filename="../mainwindow.cc" line="157"/>
         <source>Zoom Out</source>
         <translation>Riduci</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="153"/>
+        <location filename="../mainwindow.cc" line="161"/>
         <source>Normal Size</source>
         <translation>Ripristina zoom</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="261"/>
+        <location filename="../mainwindow.cc" line="269"/>
         <source>Words Zoom In</source>
         <translation>Ingrandisci parole da cercare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="265"/>
+        <location filename="../mainwindow.cc" line="273"/>
         <source>Words Zoom Out</source>
         <translation>Riduci parole da cercare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="267"/>
+        <location filename="../mainwindow.cc" line="275"/>
         <source>Words Normal Size</source>
         <translation>Ripristina zoom delle parole da cercare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="323"/>
+        <location filename="../mainwindow.cc" line="331"/>
         <source>Close current tab</source>
         <translation>Chiudi scheda corrente</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="333"/>
+        <location filename="../mainwindow.cc" line="341"/>
         <source>Close all tabs</source>
         <translation>Chiudi ogni scheda</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="341"/>
+        <location filename="../mainwindow.cc" line="349"/>
         <source>Close all tabs except current</source>
         <translation>Chiudi ogni scheda eccetto la corrente</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1069"/>
+        <location filename="../mainwindow.cc" line="1073"/>
         <source>Look up:</source>
         <translation>Cerca:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1087"/>
+        <location filename="../mainwindow.cc" line="1091"/>
         <source>All</source>
         <translation>Tutto</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3121"/>
+        <location filename="../mainwindow.cc" line="3153"/>
         <source>Import history from file</source>
         <translation>Importa cronologia da file</translation>
     </message>
@@ -2070,47 +2114,47 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation type="obsolete">Importata dal file: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3170"/>
+        <location filename="../mainwindow.cc" line="3202"/>
         <source>Import error: invalid data in file</source>
         <translation>Errore d&apos;importazione: i dati nel file sono invalidi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3174"/>
+        <location filename="../mainwindow.cc" line="3206"/>
         <source>History import complete</source>
         <translation>Importazione della cronologia completata</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3177"/>
+        <location filename="../mainwindow.cc" line="3209"/>
         <source>Import error: </source>
         <translation>Errore d&apos;importazione: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3285"/>
+        <location filename="../mainwindow.cc" line="3317"/>
         <source>Dictionary info</source>
         <translation>Info sul dizionario</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3286"/>
+        <location filename="../mainwindow.cc" line="3318"/>
         <source>Edit dictionary</source>
         <translation>Modifica dizionario</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="312"/>
+        <location filename="../mainwindow.cc" line="320"/>
         <source>Opened tabs</source>
         <translation>Schede aperte</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1227"/>
+        <location filename="../mainwindow.cc" line="1231"/>
         <source>Open Tabs List</source>
         <translation>Apri l&apos;elenco delle schede</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1285"/>
+        <location filename="../mainwindow.cc" line="1289"/>
         <source>(untitled)</source>
         <translation>(senza titolo)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1495"/>
+        <location filename="../mainwindow.cc" line="1502"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -2119,7 +2163,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation type="obsolete">ATTENZIONE: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3033"/>
+        <location filename="../mainwindow.cc" line="3065"/>
         <source>&amp;Hide</source>
         <translation>&amp;Nascondi</translation>
     </message>
@@ -2128,23 +2172,23 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation type="obsolete">Modalità visualizza cronologia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3059"/>
+        <location filename="../mainwindow.cc" line="3091"/>
         <source>Export history to file</source>
         <translation>Esporta cronologia come file</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3061"/>
-        <location filename="../mainwindow.cc" line="3123"/>
+        <location filename="../mainwindow.cc" line="3093"/>
+        <location filename="../mainwindow.cc" line="3155"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>File di testo (*.txt);;Tutti i file (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3100"/>
+        <location filename="../mainwindow.cc" line="3132"/>
         <source>History export complete</source>
         <translation>Esportazione cronologia completata</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3103"/>
+        <location filename="../mainwindow.cc" line="3135"/>
         <source>Export error: </source>
         <translation>Errore di esportazione: </translation>
     </message>
@@ -2154,7 +2198,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="657"/>
+        <location filename="../mainwindow.cc" line="665"/>
         <source>Welcome!</source>
         <translation>Benvenuto!</translation>
     </message>
@@ -2344,7 +2388,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="488"/>
         <location filename="../mainwindow.ui" line="491"/>
-        <location filename="../mainwindow.cc" line="185"/>
+        <location filename="../mainwindow.cc" line="193"/>
         <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2367,7 +2411,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <translation>&amp;Elimina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="494"/>
+        <location filename="../mainwindow.cc" line="502"/>
         <source>New Tab</source>
         <translation>Nuova scheda</translation>
     </message>
@@ -2383,7 +2427,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
-        <location filename="../mainwindow.cc" line="3037"/>
+        <location filename="../mainwindow.cc" line="3069"/>
         <source>&amp;Show</source>
         <translation>&amp;Mostra</translation>
     </message>
@@ -3339,12 +3383,12 @@ e si collega al sito del programma.</translation>
         <translation type="obsolete">parola</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="86"/>
+        <location filename="../scanpopup.ui" line="107"/>
         <source>Back</source>
         <translation>Traduzione precedente</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="100"/>
+        <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
         <translation>Traduzione successiva</translation>
     </message>
@@ -3357,43 +3401,43 @@ e si collega al sito del programma.</translation>
         <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="114"/>
+        <location filename="../scanpopup.ui" line="135"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Ascolta la pronuncia (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="124"/>
+        <location filename="../scanpopup.ui" line="145"/>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="134"/>
+        <location filename="../scanpopup.ui" line="155"/>
         <source>Send word to main window (Alt+W)</source>
         <translation>Mostra la traduzione nella finestra principale del programma (Alt+W)</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="144"/>
+        <location filename="../scanpopup.ui" line="165"/>
         <source>Alt+W</source>
         <translation>Alt+W</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="164"/>
+        <location filename="../scanpopup.ui" line="185"/>
         <source>Shows or hides the dictionary bar</source>
         <translation>Mostra o nasconde la barra dei dizionari</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="187"/>
+        <location filename="../scanpopup.ui" line="208"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
         <translation>Fissa sullo schermo la finestra dei risultati tradotti,
 in modo che possa essere ridimensionata o gestita liberamente.</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="89"/>
-        <location filename="../scanpopup.ui" line="103"/>
-        <location filename="../scanpopup.ui" line="117"/>
-        <location filename="../scanpopup.ui" line="167"/>
-        <location filename="../scanpopup.ui" line="191"/>
+        <location filename="../scanpopup.ui" line="110"/>
+        <location filename="../scanpopup.ui" line="124"/>
+        <location filename="../scanpopup.ui" line="138"/>
+        <location filename="../scanpopup.ui" line="188"/>
+        <location filename="../scanpopup.ui" line="212"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -3764,7 +3808,7 @@ Non ancora implementato.</translation>
 <context>
     <name>TranslateBox</name>
     <message>
-        <location filename="../translatebox.cc" line="104"/>
+        <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
         <translation>Digita una parola o una frase da cercare nei dizionari</translation>
     </message>
@@ -3773,7 +3817,7 @@ Non ancora implementato.</translation>
         <translation type="obsolete">Opzioni</translation>
     </message>
     <message>
-        <location filename="../translatebox.cc" line="126"/>
+        <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
         <translation>Elenco a discesa</translation>
     </message>

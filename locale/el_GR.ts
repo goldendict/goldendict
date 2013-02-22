@@ -129,32 +129,32 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="162"/>
+        <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="689"/>
+        <location filename="../articleview.cc" line="690"/>
         <source>Resource</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="694"/>
+        <location filename="../articleview.cc" line="695"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="699"/>
+        <location filename="../articleview.cc" line="700"/>
         <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="715"/>
+        <location filename="../articleview.cc" line="716"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="719"/>
+        <location filename="../articleview.cc" line="720"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,105 +163,149 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="907"/>
+        <location filename="../articleview.cc" line="908"/>
+        <location filename="../articleview.cc" line="1055"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Δεν υπάρχει ο ζητούμενος πόρος.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="947"/>
+        <location filename="../articleview.cc" line="948"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1086"/>
+        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1168"/>
+        <source>ERROR: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1118"/>
+        <source>Save sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1120"/>
+        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1133"/>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1135"/>
+        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1153"/>
+        <source>Resource saving error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1304"/>
         <source>&amp;Open Link</source>
         <translation>Άνοι&amp;γμα συνδέσμου</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1092"/>
+        <location filename="../articleview.cc" line="1310"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Άνοιγμα συνδέσμου σε νέα &amp;καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1099"/>
+        <location filename="../articleview.cc" line="1317"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Άνοιγμα συνδέσμου σε &amp;εξωτερικό περιηγητή</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1112"/>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1349"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>Ανα&amp;ζήτηση του &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1120"/>
+        <location filename="../articleview.cc" line="1357"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Αναζήτηση του &quot;%1&quot; σε &amp;νέα καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1125"/>
+        <location filename="../articleview.cc" line="1362"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1131"/>
-        <location filename="../articleview.cc" line="1163"/>
+        <location filename="../articleview.cc" line="1368"/>
+        <location filename="../articleview.cc" line="1400"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1145"/>
+        <location filename="../articleview.cc" line="1382"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Αναζήτηση του &quot;%1&quot; στο %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1390"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Αναζήτηση του &quot;%1&quot; στο %2 σε &amp;νέα καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1324"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>Playing a non-WAV file</source>
         <translation>Αναπαραγωγή μη WAV αρχείου</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1325"/>
+        <location filename="../articleview.cc" line="1568"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Για αναπαραγωγή αρχείων που δεν είναι της μορφής WAV, παρακαλώ επιλέξτε Επεξεργασία|Προτιμήσεις, καρτέλα Ήχος, και σημειώστε την επιλογή &quot;Αναπαραγωγή μέσω DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1340"/>
+        <location filename="../articleview.cc" line="1583"/>
         <source>Bass library not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1345"/>
+        <location filename="../articleview.cc" line="1588"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1380"/>
+        <location filename="../articleview.cc" line="1623"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Δεν ήταν δυνατή η αναπαραγωγή του αρχείου ήχου: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1398"/>
+        <location filename="../articleview.cc" line="1641"/>
         <source>Failed to create temporary file.</source>
         <translation>Απέτυχε η δημιουργία προσωρινού αρχείου.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1409"/>
+        <location filename="../articleview.cc" line="1652"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Απέτυχε το αυτόματο άνοιγμα του αρχείου· δοκιμάστε να το ανοίξετε χειροκίνητα: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1168"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>Απέτυχε η λήψη του ζητούμενου πόρου.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1340"/>
-        <location filename="../articleview.cc" line="1345"/>
-        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1583"/>
+        <location filename="../articleview.cc" line="1588"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">ΠΡΟΣΟΧΗ: %1</translation>
     </message>
@@ -1866,13 +1910,13 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="193"/>
-        <location filename="../mainwindow.cc" line="1069"/>
+        <location filename="../mainwindow.cc" line="201"/>
+        <location filename="../mainwindow.cc" line="1073"/>
         <source>Look up in:</source>
         <translation>Αναζήτηση σε:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="231"/>
+        <location filename="../mainwindow.cc" line="239"/>
         <source>Found in Dictionaries:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1891,160 +1935,160 @@ between classic and school orthography in cyrillic)</source>
         <translation>Μπροστά</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="116"/>
+        <location filename="../mainwindow.cc" line="124"/>
         <source>Scan Popup</source>
         <translation>Αναδυόμενο παράθυρο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="131"/>
+        <location filename="../mainwindow.cc" line="139"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Εκφώνηση λήμματος (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="143"/>
+        <location filename="../mainwindow.cc" line="151"/>
         <source>Zoom In</source>
         <translation>Μεγέθυνση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="149"/>
+        <location filename="../mainwindow.cc" line="157"/>
         <source>Zoom Out</source>
         <translation>Σμίκρυνση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="153"/>
+        <location filename="../mainwindow.cc" line="161"/>
         <source>Normal Size</source>
         <translation>Κανονικό μέγεθος</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="261"/>
+        <location filename="../mainwindow.cc" line="269"/>
         <source>Words Zoom In</source>
         <translation>Μεγέθυνση λημμάτων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="265"/>
+        <location filename="../mainwindow.cc" line="273"/>
         <source>Words Zoom Out</source>
         <translation>Σμίκρυνση λημμάτων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="267"/>
+        <location filename="../mainwindow.cc" line="275"/>
         <source>Words Normal Size</source>
         <translation>Κανονικό μέγεθος λημμάτων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="275"/>
+        <location filename="../mainwindow.cc" line="283"/>
         <source>Show &amp;Main Window</source>
         <translation>Εμφάνιση &amp;κύριου παραθύρου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="323"/>
+        <location filename="../mainwindow.cc" line="331"/>
         <source>Close current tab</source>
         <translation>Κλείσιμο τρέχουσας καρτέλας</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="333"/>
+        <location filename="../mainwindow.cc" line="341"/>
         <source>Close all tabs</source>
         <translation>Κλείσιμο όλων των καρτελών</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="341"/>
+        <location filename="../mainwindow.cc" line="349"/>
         <source>Close all tabs except current</source>
         <translation>Κλείσιμο όλων των άλλων καρτελών</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2873"/>
+        <location filename="../mainwindow.cc" line="2905"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3033"/>
+        <location filename="../mainwindow.cc" line="3065"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3059"/>
+        <location filename="../mainwindow.cc" line="3091"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3061"/>
-        <location filename="../mainwindow.cc" line="3123"/>
+        <location filename="../mainwindow.cc" line="3093"/>
+        <location filename="../mainwindow.cc" line="3155"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3100"/>
+        <location filename="../mainwindow.cc" line="3132"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3103"/>
+        <location filename="../mainwindow.cc" line="3135"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3121"/>
+        <location filename="../mainwindow.cc" line="3153"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3170"/>
+        <location filename="../mainwindow.cc" line="3202"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3174"/>
+        <location filename="../mainwindow.cc" line="3206"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3177"/>
+        <location filename="../mainwindow.cc" line="3209"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3285"/>
+        <location filename="../mainwindow.cc" line="3317"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3286"/>
+        <location filename="../mainwindow.cc" line="3318"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="355"/>
-        <location filename="../mainwindow.cc" line="279"/>
+        <location filename="../mainwindow.cc" line="287"/>
         <source>&amp;Quit</source>
         <translation>Έ&amp;ξοδος</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="484"/>
+        <location filename="../mainwindow.cc" line="492"/>
         <source>Loading...</source>
         <translation>Φόρτωση...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="657"/>
+        <location filename="../mainwindow.cc" line="665"/>
         <source>Welcome!</source>
         <translation>Καλώς ήλθατε!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1058"/>
+        <location filename="../mainwindow.cc" line="1062"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 λεξικά, %2 άρθρα, %3 λήμματα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1069"/>
+        <location filename="../mainwindow.cc" line="1073"/>
         <source>Look up:</source>
         <translation>Αναζήτηση:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1087"/>
+        <location filename="../mainwindow.cc" line="1091"/>
         <source>All</source>
         <translation>Όλα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="312"/>
+        <location filename="../mainwindow.cc" line="320"/>
         <source>Opened tabs</source>
         <translation>Ανοιχτές καρτέλες</translation>
     </message>
@@ -2064,17 +2108,17 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1227"/>
+        <location filename="../mainwindow.cc" line="1231"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1285"/>
+        <location filename="../mainwindow.cc" line="1289"/>
         <source>(untitled)</source>
         <translation>(ανώνυμο)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1495"/>
+        <location filename="../mainwindow.cc" line="1502"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2087,72 +2131,72 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2430"/>
+        <location filename="../mainwindow.cc" line="2459"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Απέτυχε η φόρτωση του μηχανισμού παρακολούθησης πλήκτρων συντομεύσεων.&lt;br&gt;Βεβαιωθείτε ότι η επέκταση RECORD του XServer είναι ενεργοποιημένη.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2564"/>
+        <location filename="../mainwindow.cc" line="2593"/>
         <source>New Release Available</source>
         <translation>Νέα έκδοση διαθέσιμη</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2565"/>
+        <location filename="../mainwindow.cc" line="2594"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Η έκδοση &lt;b&gt;%1&lt;/b&gt; του GoldenDict είναι διαθέσιμη.&lt;br&gt;Κάντε κλικ στο &lt;b&gt;Λήψη&lt;/b&gt; για να επισκεφτείτε την ιστοσελίδα λήψης.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2570"/>
+        <location filename="../mainwindow.cc" line="2599"/>
         <source>Download</source>
         <translation>Λήψη</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2571"/>
+        <location filename="../mainwindow.cc" line="2600"/>
         <source>Skip This Release</source>
         <translation>Παράβλεψη αυτής της έκδοσης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2687"/>
+        <location filename="../mainwindow.cc" line="2716"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2688"/>
+        <location filename="../mainwindow.cc" line="2717"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2786"/>
+        <location filename="../mainwindow.cc" line="2815"/>
         <source>Page Setup</source>
         <translation>Διάταξη σελίδας</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2787"/>
+        <location filename="../mainwindow.cc" line="2816"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Δε βρέθηκε εκτυπωτής. Παρακαλώ εγκαταστήστε έναν εκτυπωτή.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2804"/>
+        <location filename="../mainwindow.cc" line="2833"/>
         <source>Print Article</source>
         <translation>Εκτύπωση άρθρου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2825"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Save Article As</source>
         <translation>Αποθήκευση άρθρου ως</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2825"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html αρχεία (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2840"/>
+        <location filename="../mainwindow.cc" line="2869"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2841"/>
+        <location filename="../mainwindow.cc" line="2870"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Αδύνατη η αποθήκευση του άρθρου: %1</translation>
     </message>
@@ -2342,7 +2386,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="488"/>
         <location filename="../mainwindow.ui" line="491"/>
-        <location filename="../mainwindow.cc" line="185"/>
+        <location filename="../mainwindow.cc" line="193"/>
         <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2365,7 +2409,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Εκκαθάριση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="494"/>
+        <location filename="../mainwindow.cc" line="502"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2381,7 +2425,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
-        <location filename="../mainwindow.cc" line="3037"/>
+        <location filename="../mainwindow.cc" line="3069"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3360,21 +3404,21 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <translation type="obsolete">Εμφάνιση αποτελεσμάτων (Alt+M)</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="89"/>
-        <location filename="../scanpopup.ui" line="103"/>
-        <location filename="../scanpopup.ui" line="117"/>
-        <location filename="../scanpopup.ui" line="167"/>
-        <location filename="../scanpopup.ui" line="191"/>
+        <location filename="../scanpopup.ui" line="110"/>
+        <location filename="../scanpopup.ui" line="124"/>
+        <location filename="../scanpopup.ui" line="138"/>
+        <location filename="../scanpopup.ui" line="188"/>
+        <location filename="../scanpopup.ui" line="212"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="86"/>
+        <location filename="../scanpopup.ui" line="107"/>
         <source>Back</source>
         <translation type="unfinished">Πίσω</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="100"/>
+        <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
         <translation type="unfinished">Μπροστά</translation>
     </message>
@@ -3383,32 +3427,32 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="114"/>
+        <location filename="../scanpopup.ui" line="135"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Εκφώνηση λήμματος (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="124"/>
+        <location filename="../scanpopup.ui" line="145"/>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="134"/>
+        <location filename="../scanpopup.ui" line="155"/>
         <source>Send word to main window (Alt+W)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="144"/>
+        <location filename="../scanpopup.ui" line="165"/>
         <source>Alt+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="164"/>
+        <location filename="../scanpopup.ui" line="185"/>
         <source>Shows or hides the dictionary bar</source>
         <translation>Εμφάνιση ή απόκρυψη της γραμμής λεξικών</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="187"/>
+        <location filename="../scanpopup.ui" line="208"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
         <translation>Χρησιμοποιήστε το για να μετατρέψετε το αναδυόμενο σε κανονικό παράθυρο, που δεν εξαφανίζεται από την οθόνη και μπορεί π.χ. να αλλάξει μέγεθος.</translation>
@@ -3779,12 +3823,12 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>TranslateBox</name>
     <message>
-        <location filename="../translatebox.cc" line="104"/>
+        <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../translatebox.cc" line="126"/>
+        <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
         <translation type="unfinished"></translation>
     </message>

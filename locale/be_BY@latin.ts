@@ -163,135 +163,179 @@
         <translation>Mierkavać &amp;registr</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="162"/>
+        <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
         <translation>Vybrać dziejny artykuł</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="689"/>
+        <location filename="../articleview.cc" line="690"/>
         <source>Resource</source>
         <translation>Resurs</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="694"/>
+        <location filename="../articleview.cc" line="695"/>
         <source>Audio</source>
         <translation>Aŭdyjo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="699"/>
+        <location filename="../articleview.cc" line="700"/>
         <source>Picture</source>
         <translation>Vidarys</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="715"/>
+        <location filename="../articleview.cc" line="716"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Aznačeńnie z słoŭnika „%1“: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="719"/>
+        <location filename="../articleview.cc" line="720"/>
         <source>Definition: %1</source>
         <translation>Aznačeńnie: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="907"/>
+        <location filename="../articleview.cc" line="908"/>
+        <location filename="../articleview.cc" line="1055"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Zapytanaha resursu nie isnuje.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="947"/>
+        <location filename="../articleview.cc" line="948"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Paznačanaj pragramy nie isnuje.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1086"/>
+        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1168"/>
+        <source>ERROR: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1118"/>
+        <source>Save sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1120"/>
+        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1133"/>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1135"/>
+        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1153"/>
+        <source>Resource saving error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1304"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Adčynić spasyłku</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1092"/>
+        <location filename="../articleview.cc" line="1310"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ačynić spasyłku ŭ novaj &amp;układcy</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1099"/>
+        <location filename="../articleview.cc" line="1317"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Adčynić spasyłku ŭ &amp;vonkavym ahladalniku</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1112"/>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1349"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Šukać „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1120"/>
+        <location filename="../articleview.cc" line="1357"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Šukać „%1“ u &amp;novaj układcy</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1125"/>
+        <location filename="../articleview.cc" line="1362"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Źmiaścić „%1“ u ŭvodnym radoku</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1131"/>
-        <location filename="../articleview.cc" line="1163"/>
+        <location filename="../articleview.cc" line="1368"/>
+        <location filename="../articleview.cc" line="1400"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Dadać „%1“ u historyju</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1145"/>
+        <location filename="../articleview.cc" line="1382"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Šukać „%1“ u grupie %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1390"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Šukać „%1“ u grupie %2 u novaj u&amp;kładcy</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1324"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>Playing a non-WAV file</source>
         <translation>Prajhravańnie farmataŭ roznych ad WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1325"/>
+        <location filename="../articleview.cc" line="1568"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Kab ułučyć prajhravańnie fajłaŭ roznych ad WAV, pierajdzi da Źmienaŭ|Naładaŭ, abiary ŭkładku Aŭdyjo i ŭłučy „Prajhravać cieraz DirectShow“.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1340"/>
-        <location filename="../articleview.cc" line="1345"/>
-        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1583"/>
+        <location filename="../articleview.cc" line="1588"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>WARNING: %1</source>
         <translation>UVAHA: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1340"/>
+        <location filename="../articleview.cc" line="1583"/>
         <source>Bass library not found.</source>
         <translation>GoldenDict nie znajšoŭ biblijateki Bass.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1345"/>
+        <location filename="../articleview.cc" line="1588"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>Biblijateka Bass nie patrapiła prajhrać hetaha zapisu.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1380"/>
+        <location filename="../articleview.cc" line="1623"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Niemažliva ŭruchomić prajhravalnika hukavaha fajła: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1398"/>
+        <location filename="../articleview.cc" line="1641"/>
         <source>Failed to create temporary file.</source>
         <translation>Nie atrymałasia stvaryć časovaha fajła.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1409"/>
+        <location filename="../articleview.cc" line="1652"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Nie atrymałasia aŭtamatyčna adčynić resursavaha fajła. Pasprabuj adčynić ručna %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1168"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>Nie atrymałasia zładavać paznačanaha resursu.</translation>
     </message>
@@ -2032,7 +2076,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
-        <location filename="../mainwindow.cc" line="3062"/>
+        <location filename="../mainwindow.cc" line="3069"/>
         <source>&amp;Show</source>
         <translation>&amp;Pakazać</translation>
     </message>
@@ -2130,7 +2174,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="201"/>
-        <location filename="../mainwindow.cc" line="1072"/>
+        <location filename="../mainwindow.cc" line="1073"/>
         <source>Look up in:</source>
         <translation>Šukać u:</translation>
     </message>
@@ -2190,163 +2234,163 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>Novaja ŭkładka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1061"/>
+        <location filename="../mainwindow.cc" line="1062"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 słoŭnikaŭ, %2 artykułaŭ, %3 słovaŭ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1072"/>
+        <location filename="../mainwindow.cc" line="1073"/>
         <source>Look up:</source>
         <translation>Šukać:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1090"/>
+        <location filename="../mainwindow.cc" line="1091"/>
         <source>All</source>
         <translation>Usie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1230"/>
+        <location filename="../mainwindow.cc" line="1231"/>
         <source>Open Tabs List</source>
         <translation>Adčynić śpis układak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1288"/>
+        <location filename="../mainwindow.cc" line="1289"/>
         <source>(untitled)</source>
         <translation>(biaz nazvy)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1498"/>
+        <location filename="../mainwindow.cc" line="1502"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2455"/>
+        <location filename="../mainwindow.cc" line="2459"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Pamyłka inicyjalizacyi sačeńnia za klavišnymi skarotami.&lt;br&gt;Pierakanajsia, što XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2589"/>
+        <location filename="../mainwindow.cc" line="2593"/>
         <source>New Release Available</source>
         <translation>Dastuny novy vypusk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2590"/>
+        <location filename="../mainwindow.cc" line="2594"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict versii &lt;b&gt;%1&lt;/b&gt; dastupny dla zładavańnia.&lt;br&gt;Pstrykni pa &lt;b&gt;Zładavać&lt;/b&gt;, kab pierajści na bačynu zładavańnia.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2595"/>
+        <location filename="../mainwindow.cc" line="2599"/>
         <source>Download</source>
         <translation>Zładavać</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2596"/>
+        <location filename="../mainwindow.cc" line="2600"/>
         <source>Skip This Release</source>
         <translation>Praminuć hety vypusk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2712"/>
+        <location filename="../mainwindow.cc" line="2716"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Palica meniu jość schavanaja. Skarystaj %1, kab pavaracić nazad.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2713"/>
+        <location filename="../mainwindow.cc" line="2717"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2811"/>
+        <location filename="../mainwindow.cc" line="2815"/>
         <source>Page Setup</source>
         <translation>Nałady bačyny</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2812"/>
+        <location filename="../mainwindow.cc" line="2816"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Niama dasiažnych drukarak. Spačatku ŭstaluj choć adnu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2829"/>
+        <location filename="../mainwindow.cc" line="2833"/>
         <source>Print Article</source>
         <translation>Nadrukavać artykuł</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2850"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Save Article As</source>
         <translation>Zachavać artykuł jak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2850"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Fajły HTML(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2865"/>
+        <location filename="../mainwindow.cc" line="2869"/>
         <source>Error</source>
         <translation>Pamyłka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2866"/>
+        <location filename="../mainwindow.cc" line="2870"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Niemažliva zachavać artykuł: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2898"/>
+        <location filename="../mainwindow.cc" line="2905"/>
         <source>The main window is set to be always on top.</source>
         <translation>Hałoŭnaje akno ciapier zaŭsiody znachodzicca vyšej inšych.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3058"/>
+        <location filename="../mainwindow.cc" line="3065"/>
         <source>&amp;Hide</source>
         <translation>S&amp;chavać</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3084"/>
+        <location filename="../mainwindow.cc" line="3091"/>
         <source>Export history to file</source>
         <translation>Ekspartavańnie historyi ŭ fajł</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3086"/>
-        <location filename="../mainwindow.cc" line="3148"/>
+        <location filename="../mainwindow.cc" line="3093"/>
+        <location filename="../mainwindow.cc" line="3155"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Tekstavyja fajły (*.txt);;Usie fajły (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3125"/>
+        <location filename="../mainwindow.cc" line="3132"/>
         <source>History export complete</source>
         <translation>Ekspartavańnie historyi skončyłasia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3128"/>
+        <location filename="../mainwindow.cc" line="3135"/>
         <source>Export error: </source>
         <translation>Pamyłka ekspartu: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3146"/>
+        <location filename="../mainwindow.cc" line="3153"/>
         <source>Import history from file</source>
         <translation>Impartavańnie historyi z fajła</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3195"/>
+        <location filename="../mainwindow.cc" line="3202"/>
         <source>Import error: invalid data in file</source>
         <translation>Pamyłka impartavańnia: chibnyja źviestki ŭ fajle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3199"/>
+        <location filename="../mainwindow.cc" line="3206"/>
         <source>History import complete</source>
         <translation>Impartavańnie historyi skončyłasia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3202"/>
+        <location filename="../mainwindow.cc" line="3209"/>
         <source>Import error: </source>
         <translation>Pamyłka impartavańnia: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3310"/>
+        <location filename="../mainwindow.cc" line="3317"/>
         <source>Dictionary info</source>
         <translation>Infarmacyja pra słoŭnik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3311"/>
+        <location filename="../mainwindow.cc" line="3318"/>
         <source>Edit dictionary</source>
         <translation>Redagavać słoŭnik</translation>
     </message>

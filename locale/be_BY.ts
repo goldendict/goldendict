@@ -163,135 +163,179 @@
         <translation>Меркаваць &amp;рэґістр</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="162"/>
+        <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
         <translation>Выбраць дзейны артыкул</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="689"/>
+        <location filename="../articleview.cc" line="690"/>
         <source>Resource</source>
         <translation>Рэсурс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="694"/>
+        <location filename="../articleview.cc" line="695"/>
         <source>Audio</source>
         <translation>Аўдыё</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="699"/>
+        <location filename="../articleview.cc" line="700"/>
         <source>Picture</source>
         <translation>Відарыс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="715"/>
+        <location filename="../articleview.cc" line="716"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Азначэньне з слоўніка „%1“: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="719"/>
+        <location filename="../articleview.cc" line="720"/>
         <source>Definition: %1</source>
         <translation>Азначэньне: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="907"/>
+        <location filename="../articleview.cc" line="908"/>
+        <location filename="../articleview.cc" line="1055"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Запытанага рэсурсу не існуе.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="947"/>
+        <location filename="../articleview.cc" line="948"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Пазначанай праґрамы не існуе.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1086"/>
+        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1168"/>
+        <source>ERROR: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1118"/>
+        <source>Save sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1120"/>
+        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1133"/>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1135"/>
+        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1153"/>
+        <source>Resource saving error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1304"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Адчыніць спасылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1092"/>
+        <location filename="../articleview.cc" line="1310"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ачыніць спасылку ў новай &amp;укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1099"/>
+        <location filename="../articleview.cc" line="1317"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Адчыніць спасылку ў &amp;вонкавым аглядальніку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1112"/>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1349"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Шукаць „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1120"/>
+        <location filename="../articleview.cc" line="1357"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Шукаць „%1“ у &amp;новай укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1125"/>
+        <location filename="../articleview.cc" line="1362"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Зьмясьціць „%1“ у ўводным радоку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1131"/>
-        <location filename="../articleview.cc" line="1163"/>
+        <location filename="../articleview.cc" line="1368"/>
+        <location filename="../articleview.cc" line="1400"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Дадаць „%1“ у гісторыю</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1145"/>
+        <location filename="../articleview.cc" line="1382"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Шукаць „%1“ у ґрупе %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1390"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Шукаць „%1“ у ґрупе %2 у новай у&amp;кладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1324"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>Playing a non-WAV file</source>
         <translation>Прайграваньне фарматаў розных ад WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1325"/>
+        <location filename="../articleview.cc" line="1568"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Каб улучыць прайграваньне файлаў розных ад WAV, перайдзі да Зьменаў|Наладаў, абяры ўкладку Аўдыё і ўлучы „Прайграваць цераз DirectShow“.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1340"/>
-        <location filename="../articleview.cc" line="1345"/>
-        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1583"/>
+        <location filename="../articleview.cc" line="1588"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>WARNING: %1</source>
         <translation>УВАГА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1340"/>
+        <location filename="../articleview.cc" line="1583"/>
         <source>Bass library not found.</source>
         <translation>GoldenDict не знайшоў бібліятэкі Bass.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1345"/>
+        <location filename="../articleview.cc" line="1588"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>Бібліятэка Bass не патрапіла прайграць гэтага запісу.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1380"/>
+        <location filename="../articleview.cc" line="1623"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Немажліва ўрухоміць прайгравальніка гукавага файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1398"/>
+        <location filename="../articleview.cc" line="1641"/>
         <source>Failed to create temporary file.</source>
         <translation>Не атрымалася стварыць часовага файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1409"/>
+        <location filename="../articleview.cc" line="1652"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Не атрымалася аўтаматычна адчыніць рэсурсавага файла. Паспрабуй адчыніць ручна %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1168"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
     </message>
@@ -2032,7 +2076,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
-        <location filename="../mainwindow.cc" line="3062"/>
+        <location filename="../mainwindow.cc" line="3069"/>
         <source>&amp;Show</source>
         <translation>&amp;Паказаць</translation>
     </message>
@@ -2130,7 +2174,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="201"/>
-        <location filename="../mainwindow.cc" line="1072"/>
+        <location filename="../mainwindow.cc" line="1073"/>
         <source>Look up in:</source>
         <translation>Шукаць у:</translation>
     </message>
@@ -2190,163 +2234,163 @@ between classic and school orthography in cyrillic)</source>
         <translation>Новая ўкладка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1061"/>
+        <location filename="../mainwindow.cc" line="1062"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 слоўнікаў, %2 артыкулаў, %3 словаў</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1072"/>
+        <location filename="../mainwindow.cc" line="1073"/>
         <source>Look up:</source>
         <translation>Шукаць:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1090"/>
+        <location filename="../mainwindow.cc" line="1091"/>
         <source>All</source>
         <translation>Усе</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1230"/>
+        <location filename="../mainwindow.cc" line="1231"/>
         <source>Open Tabs List</source>
         <translation>Адчыніць сьпіс укладак</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1288"/>
+        <location filename="../mainwindow.cc" line="1289"/>
         <source>(untitled)</source>
         <translation>(бяз назвы)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1498"/>
+        <location filename="../mainwindow.cc" line="1502"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2455"/>
+        <location filename="../mainwindow.cc" line="2459"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Памылка ініцыялізацыі сачэньня за клявішнымі скаротамі.&lt;br&gt;Пераканайся, што XServer мае ўлучанае пашырэньне RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2589"/>
+        <location filename="../mainwindow.cc" line="2593"/>
         <source>New Release Available</source>
         <translation>Дастуны новы выпуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2590"/>
+        <location filename="../mainwindow.cc" line="2594"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict вэрсіі &lt;b&gt;%1&lt;/b&gt; даступны для зладаваньня.&lt;br&gt;Пстрыкні па &lt;b&gt;Зладаваць&lt;/b&gt;, каб перайсьці на бачыну зладаваньня.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2595"/>
+        <location filename="../mainwindow.cc" line="2599"/>
         <source>Download</source>
         <translation>Зладаваць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2596"/>
+        <location filename="../mainwindow.cc" line="2600"/>
         <source>Skip This Release</source>
         <translation>Прамінуць гэты выпуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2712"/>
+        <location filename="../mainwindow.cc" line="2716"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Паліца мэню ёсьць схаваная. Скарыстай %1, каб павараціць назад.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2713"/>
+        <location filename="../mainwindow.cc" line="2717"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2811"/>
+        <location filename="../mainwindow.cc" line="2815"/>
         <source>Page Setup</source>
         <translation>Налады бачыны</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2812"/>
+        <location filename="../mainwindow.cc" line="2816"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Няма дасяжных друкарак. Спачатку ўсталюй хоць адну.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2829"/>
+        <location filename="../mainwindow.cc" line="2833"/>
         <source>Print Article</source>
         <translation>Надрукаваць артыкул</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2850"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Save Article As</source>
         <translation>Захаваць артыкул як</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2850"/>
+        <location filename="../mainwindow.cc" line="2854"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлы HTML(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2865"/>
+        <location filename="../mainwindow.cc" line="2869"/>
         <source>Error</source>
         <translation>Памылка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2866"/>
+        <location filename="../mainwindow.cc" line="2870"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Немажліва захаваць артыкул: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2898"/>
+        <location filename="../mainwindow.cc" line="2905"/>
         <source>The main window is set to be always on top.</source>
         <translation>Галоўнае акно цяпер заўсёды знаходзіцца вышэй іншых.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3058"/>
+        <location filename="../mainwindow.cc" line="3065"/>
         <source>&amp;Hide</source>
         <translation>С&amp;хаваць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3084"/>
+        <location filename="../mainwindow.cc" line="3091"/>
         <source>Export history to file</source>
         <translation>Экспартаваньне гісторыі ў файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3086"/>
-        <location filename="../mainwindow.cc" line="3148"/>
+        <location filename="../mainwindow.cc" line="3093"/>
+        <location filename="../mainwindow.cc" line="3155"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Тэкставыя файлы (*.txt);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3125"/>
+        <location filename="../mainwindow.cc" line="3132"/>
         <source>History export complete</source>
         <translation>Экспартаваньне гісторыі скончылася</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3128"/>
+        <location filename="../mainwindow.cc" line="3135"/>
         <source>Export error: </source>
         <translation>Памылка экспарту: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3146"/>
+        <location filename="../mainwindow.cc" line="3153"/>
         <source>Import history from file</source>
         <translation>Імпартаваньне гісторыі з файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3195"/>
+        <location filename="../mainwindow.cc" line="3202"/>
         <source>Import error: invalid data in file</source>
         <translation>Памылка імпартаваньня: хібныя зьвесткі ў файле</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3199"/>
+        <location filename="../mainwindow.cc" line="3206"/>
         <source>History import complete</source>
         <translation>Імпартаваньне гісторыі скончылася</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3202"/>
+        <location filename="../mainwindow.cc" line="3209"/>
         <source>Import error: </source>
         <translation>Памылка імпартаваньня: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3310"/>
+        <location filename="../mainwindow.cc" line="3317"/>
         <source>Dictionary info</source>
         <translation>Інфармацыя пра слоўнік</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3311"/>
+        <location filename="../mainwindow.cc" line="3318"/>
         <source>Edit dictionary</source>
         <translation>Рэдаґаваць слоўнік</translation>
     </message>

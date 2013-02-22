@@ -255,6 +255,38 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <source>Select Current Article</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>ERROR: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource saving error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save &amp;image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save s&amp;ound</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
