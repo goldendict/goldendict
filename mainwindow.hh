@@ -385,6 +385,8 @@ private slots:
 
   void sendWordToInputLine( QString const & word );
 
+  void storeResourceSavePath( QString const & );
+
 signals:
   /// Set optional parts expand mode for all tabs
   void setExpandOptionalParts( bool expand );

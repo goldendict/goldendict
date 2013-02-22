@@ -1335,7 +1335,10 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
            this, SLOT( addWordToHistory( QString ) ) );
 
   connect( view, SIGNAL( sendWordToInputLine( QString const & ) ),
-           this, SLOT(sendWordToInputLine( QString const & ) ) );
+           this, SLOT( sendWordToInputLine( QString const & ) ) );
+
+  connect( view, SIGNAL( storeResourceSavePath( QString const & ) ),
+           this, SLOT( storeResourceSavePath( QString const & ) ) );
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -3338,6 +3341,11 @@ void MainWindow::sendWordToInputLine( const QString & word )
 {
   translateLine->clear();
   translateLine->setText( word );
+}
+
+void MainWindow::storeResourceSavePath( const QString & newPath )
+{
+  cfg.resourceSavePath = newPath;
 }
 
 #ifdef Q_OS_WIN32

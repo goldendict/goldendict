@@ -777,6 +777,9 @@ Class load() throw( exError )
   if ( !root.namedItem( "historyExportPath" ).isNull() )
     c.historyExportPath = root.namedItem( "historyExportPath" ).toElement().text();
 
+  if ( !root.namedItem( "resourceSavePath" ).isNull() )
+    c.resourceSavePath = root.namedItem( "resourceSavePath" ).toElement().text();
+
   if ( !root.namedItem( "editDictionaryCommandLine" ).isNull() )
     c.editDictionaryCommandLine = root.namedItem( "editDictionaryCommandLine" ).toElement().text();
 
@@ -1467,6 +1470,13 @@ void save( Class const & c ) throw( exError )
     {
         opt = dd.createElement( "historyExportPath" );
         opt.appendChild( dd.createTextNode( c.historyExportPath ) );
+        root.appendChild( opt );
+    }
+
+    if( !c.resourceSavePath.isEmpty() )
+    {
+        opt = dd.createElement( "resourceSavePath" );
+        opt.appendChild( dd.createTextNode( c.resourceSavePath ) );
         root.appendChild( opt );
     }
 

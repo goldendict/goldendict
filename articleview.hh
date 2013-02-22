@@ -46,6 +46,9 @@ class ArticleView: public QFrame
   /// Url of the resourceDownloadRequests
   QUrl resourceDownloadUrl;
 
+  std::list< sptr< Dictionary::DataRequest > > resourceToSaveDownloadRequests;
+  QUrl resourceToSaveUrl;
+
   /// For resources opened via desktop services
   QString desktopOpenedTempFile;
 
@@ -209,6 +212,8 @@ signals:
 
   void sendWordToInputLine( QString const & word );
 
+  void storeResourceSavePath(QString const & );
+
 public slots:
 
   void on_searchPrevious_clicked();
@@ -237,6 +242,7 @@ private slots:
   void contextMenuRequested( QPoint const & );
 
   void resourceDownloadFinished();
+  void resourceToSaveDownloadFinished();
 
   /// We handle pasting by attempting to define the word in clipboard.
   void pasteTriggered();
@@ -306,6 +312,8 @@ private:
   /// Returns the comma-separated list of dictionary ids which should be muted
   /// for the given group. If there are none, returns empty string.
   QString getMutedForGroup( unsigned group );
+
+  void saveResource( QUrl const &, QUrl const & );
 
 protected:
 

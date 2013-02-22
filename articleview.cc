@@ -11,6 +11,7 @@
 #include <QWebHistory>
 #include <QClipboard>
 #include <QKeyEvent>
+#include <QFileDialog>
 #include "folding.hh"
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
@@ -954,6 +955,221 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   }
 }
 
+void ArticleView::saveResource( const QUrl & url, QUrl const & ref )
+{
+  resourceToSaveDownloadRequests.clear();
+  resourceToSaveUrl = url;
+  sptr< Dictionary::DataRequest > req;
+
+  if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau")
+  {
+    if ( url.host() == "search" )
+    {
+      // Since searches should be limited to current group, we just do them
+      // here ourselves since otherwise we'd need to pass group id to netmgr
+      // and it should've been having knowledge of the current groups, too.
+
+      unsigned currentGroup = getGroup( ref );
+
+      std::vector< sptr< Dictionary::Class > > const * activeDicts = 0;
+
+      if ( groups.size() )
+      {
+        for( unsigned x = 0; x < groups.size(); ++x )
+          if ( groups[ x ].id == currentGroup )
+          {
+            activeDicts = &( groups[ x ].dictionaries );
+            break;
+          }
+      }
+      else
+        activeDicts = &allDictionaries;
+
+      if ( activeDicts )
+      {
+        for( unsigned x = 0; x < activeDicts->size(); ++x )
+        {
+          req = (*activeDicts)[ x ]->getResource(
+                  url.path().mid( 1 ).toUtf8().data() );
+
+          if ( req->isFinished() && req->dataSize() >= 0 )
+          {
+            // A request was instantly finished with success.
+            // If we've managed to spawn some lingering requests already,
+            // erase them.
+            resourceToSaveDownloadRequests.clear();
+
+            // Handle the result
+            resourceToSaveDownloadRequests.push_back( req );
+            resourceToSaveDownloadFinished();
+            return;
+          }
+          else
+          if ( !req->isFinished() )
+          {
+            resourceToSaveDownloadRequests.push_back( req );
+            connect( req.get(), SIGNAL( finished() ),
+                     this, SLOT( resourceToSaveDownloadFinished() ) );
+          }
+        }
+      }
+    }
+    else
+    {
+      // Normal resource download
+      QString contentType;
+      req = articleNetMgr.getResource( url, contentType );
+    }
+  }
+  else
+    req = new Dictionary::WebMultimediaDownload( url, articleNetMgr );
+
+  if( url.host().compare( "search" ) != 0 )
+  {
+    if ( !req.get() )
+    {
+      // Request failed, fail
+    }
+    else
+    if ( req->isFinished() && req->dataSize() >= 0 )
+    {
+      // Have data ready, handle it
+      resourceToSaveDownloadRequests.push_back( req );
+      resourceToSaveDownloadFinished();
+      return;
+    }
+    else
+    if ( !req->isFinished() )
+    {
+      // Queue to be handled when done
+
+      resourceToSaveDownloadRequests.push_back( req );
+      connect( req.get(), SIGNAL( finished() ),
+               this, SLOT( resourceToSaveDownloadFinished() ) );
+    }
+  }
+
+  if ( resourceToSaveDownloadRequests.empty() ) // No requests were queued
+  {
+    emit statusBarMessage(
+          tr( "ERROR: %1" ).arg( tr( "The referenced resource doesn't exist." ) ),
+          10000, QPixmap( ":/icons/error.png" ) );
+    return;
+  }
+  else
+    resourceToSaveDownloadFinished(); // Check any requests finished already
+}
+
+void ArticleView::resourceToSaveDownloadFinished()
+{
+  if ( resourceToSaveDownloadRequests.empty() )
+    return; // Stray signal
+
+  QByteArray resourceData;
+
+  // Find any finished resources
+
+  for( list< sptr< Dictionary::DataRequest > >::iterator i =
+       resourceToSaveDownloadRequests.begin(); i != resourceToSaveDownloadRequests.end(); )
+  {
+    if ( (*i)->isFinished() )
+    {
+      if ( (*i)->dataSize() >= 0 )
+      {
+        // Ok, got one finished, all others are irrelevant now
+
+        vector< char > const & data = (*i)->getFullData();
+        resourceData = QByteArray::fromRawData( data.data(), data.size() );
+        break;
+      }
+      else
+      {
+        // This one had no data. Erase it.
+        resourceToSaveDownloadRequests.erase( i++ );
+      }
+    }
+    else // Unfinished, try the next one.
+      i++;
+  }
+
+  if( !resourceData.isEmpty() )
+  {
+    QString fileName;
+    QString savePath;
+    if( cfg.resourceSavePath.isEmpty() )
+      savePath = QDir::homePath();
+    else
+    {
+      savePath = QDir::fromNativeSeparators( cfg.resourceSavePath );
+      if( !QDir( savePath ).exists() )
+        savePath = QDir::homePath();
+    }
+
+    QString name = resourceToSaveUrl.path().section( '/', -1 );
+
+    if ( resourceToSaveUrl.scheme() == "gdau" ||
+         Dictionary::WebMultimediaDownload::isAudioUrl( resourceToSaveUrl ) )
+    {
+      // Audio data
+      if( name.indexOf( '.' ) < 0 )
+        name += ".wav";
+
+      fileName = savePath + "/" + name;
+      fileName = QFileDialog::getSaveFileName( parentWidget(), tr( "Save sound" ),
+                                               fileName,
+                                               tr( "Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)" ) );
+    }
+    else
+    {
+      // Image data
+
+      // Check for babylon image name
+      if( name[ 0 ] == '\x1E' )
+        name.remove( 0, 1 );
+      if( name[ name.length() - 1 ] == '\x1F' )
+        name.chop( 1 );
+
+      fileName = savePath + "/" + name;
+      fileName = QFileDialog::getSaveFileName( parentWidget(), tr( "Save image" ),
+                                               fileName,
+                                               tr( "Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)" ) );
+    }
+
+    // Write data to file
+
+    if( !fileName.isEmpty() )
+    {
+      QFileInfo fileInfo( fileName );
+      emit storeResourceSavePath( QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() ) );
+      QFile file( fileName );
+      if ( file.open( QFile::WriteOnly ) )
+      {
+        file.write( resourceData.data(), resourceData.size() );
+        file.close();
+      }
+      if( file.error() )
+      {
+        emit statusBarMessage(
+              tr( "ERROR: %1" ).arg( tr( "Resource saving error: " ) + file.errorString() ),
+              10000, QPixmap( ":/icons/error.png" ) );
+      }
+    }
+
+    // Ok, whatever it was, it's finished. Remove this and any other
+    // requests and finish.
+
+    resourceToSaveDownloadRequests.clear();
+    return;
+  }
+
+  if ( resourceToSaveDownloadRequests.empty() )
+  {
+    emit statusBarMessage(
+          tr( "ERROR: %1" ).arg( tr( "The referenced resource failed to download." ) ),
+          10000, QPixmap( ":/icons/error.png" ) );
+  }
+}
+
 void ArticleView::updateMutedContents()
 {
   QUrl currentUrl = ui.definition->url();
@@ -1073,6 +1289,8 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * addWordToHistoryAction = 0;
   QAction * addHeaderToHistoryAction = 0;
   QAction * sendWordToInputLineAction = 0;
+  QAction * saveImageAction = 0;
+  QAction * saveSoundAction = 0;
 
   QUrl targetUrl( r.linkUrl() );
   Contexts contexts;
@@ -1100,6 +1318,25 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       menu.addAction( followLinkExternal );
       menu.addAction( ui.definition->pageAction( QWebPage::CopyLinkToClipboard ) );
     }
+  }
+
+  QWebElement el = r.element();
+  QUrl imageUrl;
+  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
+  {
+    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
+    if( !imageUrl.isEmpty() )
+    {
+      saveImageAction = new QAction( tr( "Save &image" ), &menu );
+      menu.addAction( saveImageAction );
+    }
+  }
+
+  if( !popupView && ( targetUrl.scheme() == "gdau"
+                      || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
+  {
+    saveSoundAction = new QAction( tr( "Save s&ound" ), &menu );
+    menu.addAction( saveSoundAction );
   }
 
   QString selectedText = ui.definition->selectedText();
@@ -1264,6 +1501,12 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     if ( !popupView && result == lookupSelectionNewTabGr && groupComboBox )
       emit showDefinitionInNewTab( selectedText, groupComboBox->getCurrentGroup(),
                                    QString(), Contexts() );
+    else
+    if( result == saveImageAction )
+      saveResource( imageUrl, ui.definition->url() );
+    else
+    if( result == saveSoundAction )
+      saveResource( targetUrl, ui.definition->url() );
     else
     {
       if ( !popupView && result == maxDictionaryRefsAction )
