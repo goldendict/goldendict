@@ -18,13 +18,13 @@
 #include "programs.hh"
 #include "dprintf.hh"
 #include <QDebug>
+#include <QWebElement>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <mmsystem.h> // For PlaySound
 #include "bass.hh"
 
-#include <QWebElement>
 #include <QPainter>
 #endif
 
