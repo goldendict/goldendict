@@ -265,11 +265,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save &amp;image</source>
+        <source>Save &amp;image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save s&amp;ound</source>
+        <source>Save s&amp;ound...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

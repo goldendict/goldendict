@@ -211,16 +211,6 @@
         <translation>Abrir Ligação em &amp;Navegador da Web Externo </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1330"/>
-        <source>Save &amp;image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1338"/>
-        <source>Save s&amp;ound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../articleview.cc" line="1349"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Procurar &quot;%1&quot;</translation>
@@ -291,6 +281,16 @@
         <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>Não foi possível efetuar o download do arquivo de fontes de dados.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1583"/>

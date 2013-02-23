@@ -210,16 +210,6 @@
         <translation>外部ブラウザーでリンクを開く(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1330"/>
-        <source>Save &amp;image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1338"/>
-        <source>Save s&amp;ound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../articleview.cc" line="1349"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot; を検索(&amp;L)</translation>
@@ -290,6 +280,16 @@
         <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>参照されたリソースのダウンロードに失敗しました。</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1583"/>

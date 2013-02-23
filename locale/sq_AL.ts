@@ -214,16 +214,6 @@
         <translation>Hap Lidhësin në &amp;Shfletuesin e Jashtëm</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1330"/>
-        <source>Save &amp;image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1338"/>
-        <source>Save s&amp;ound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../articleview.cc" line="1349"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Shikoj &quot;%1&quot;</translation>
@@ -294,6 +284,16 @@
         <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>Dështon shkarkimi i burimit të referuar.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1583"/>

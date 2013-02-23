@@ -210,16 +210,6 @@
         <translation>Otwórz łącze w z&amp;ewnętrznej przeglądarce</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1330"/>
-        <source>Save &amp;image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1338"/>
-        <source>Save s&amp;ound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../articleview.cc" line="1349"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Wyszukaj „%1”</translation>
@@ -290,6 +280,16 @@
         <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>Nie powiodło się pobranie wskazywanego zasobu.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1583"/>

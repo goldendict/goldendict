@@ -252,12 +252,12 @@
     </message>
     <message>
         <location filename="../articleview.cc" line="1330"/>
-        <source>Save &amp;image</source>
+        <source>Save &amp;image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1338"/>
-        <source>Save s&amp;ound</source>
+        <source>Save s&amp;ound...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

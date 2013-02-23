@@ -229,14 +229,12 @@
         <translation>Abrir vínculo en Navegador &amp;Web externo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1330"/>
         <source>Save &amp;image</source>
-        <translation>Guardar &amp;imagen</translation>
+        <translation type="obsolete">Guardar &amp;imagen</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1338"/>
         <source>Save s&amp;ound</source>
-        <translation>Guardar &amp;audio</translation>
+        <translation type="obsolete">Guardar &amp;audio</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1349"/>
@@ -309,6 +307,16 @@
         <location filename="../articleview.cc" line="1675"/>
         <source>The referenced resource failed to download.</source>
         <translation>No fue posible descargar el recurso referenciado.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1330"/>
+        <source>Save &amp;image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1338"/>
+        <source>Save s&amp;ound...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1583"/>
