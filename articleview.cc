@@ -1327,7 +1327,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
     if( !imageUrl.isEmpty() )
     {
-      saveImageAction = new QAction( tr( "Save &image" ), &menu );
+      saveImageAction = new QAction( tr( "Save &image..." ), &menu );
       menu.addAction( saveImageAction );
     }
   }
@@ -1335,7 +1335,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   if( !popupView && ( targetUrl.scheme() == "gdau"
                       || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
   {
-    saveSoundAction = new QAction( tr( "Save s&ound" ), &menu );
+    saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
     menu.addAction( saveSoundAction );
   }
 
