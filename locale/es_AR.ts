@@ -311,12 +311,12 @@
     <message>
         <location filename="../articleview.cc" line="1330"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar &amp;imagen...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1338"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar &amp;audio...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1583"/>
