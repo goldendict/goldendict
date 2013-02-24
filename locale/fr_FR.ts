@@ -225,32 +225,32 @@
         <location filename="../articleview.cc" line="1153"/>
         <location filename="../articleview.cc" line="1168"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ERREUR : %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1118"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer le fichier audio</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1120"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers audio (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1133"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer l&apos;image</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1135"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers image (*.bmp *.jpg *.png *.tif);;Tous les fichiers (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1153"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de l&apos;enregistrement de la ressource :</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1304"/>
@@ -270,12 +270,12 @@
     <message>
         <location filename="../articleview.cc" line="1330"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer l&apos;&amp;image...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1338"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer le fichier audi&amp;o...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1349"/>
