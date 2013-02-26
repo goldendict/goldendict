@@ -1130,33 +1130,33 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   else
                   if ( stream.name() == "abbreviations" )
                   {
-                      QString s;
-                      string value;
-                      list < wstring > keys;
-                      while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
+                    QString s;
+                    string value;
+                    list < wstring > keys;
+                    while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
+                    {
+                      stream.readNext();
+                      while ( !( stream.isEndElement() && stream.name() == "abr_def" ) || !stream.atEnd() )
                       {
-                          stream.readNext();
-                          while ( !( stream.isEndElement() && stream.name() == "abr_def" ) && !stream.atEnd() )
-                          {
-                               stream.readNext();
-                               if ( stream.isStartElement() && stream.name() == "k" )
-                               {
-                                   s = stream.readElementText( QXmlStreamReader::SkipChildElements );
-                                   keys.push_back( gd::toWString( s ) );
-                               }
-                               else if ( stream.isStartElement() && stream.name() == "v" )
-                               {
-                                   s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
-                                   value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
-                                   for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
-                                   {
-                                       abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
-                                   }
-                                   keys.clear();
-                               }
-                               else if ( stream.isEndElement() && stream.name() == "abbreviations" )
-                                   break;
-                          }
+                        stream.readNext();
+                        if ( stream.isStartElement() && stream.name() == "k" )
+                        {
+                          s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            keys.push_back( gd::toWString( s ) );
+                        }
+                        else if ( stream.isStartElement() && stream.name() == "v" )
+                        {
+                          s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
+                            for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
+                            {
+                              abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
+                            }
+                            keys.clear();
+                        }
+                        else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                          break;
+                      }
                       }
                   }
                   else
@@ -1170,24 +1170,24 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               // Write abbreviations if presented
 
-              if( !abrv.empty() ) {
-                  idxHeader.hasAbrv = 1;
-                  idxHeader.abrvAddress = chunks.startNewBlock();
+              if( !abrv.empty() )
+              {
+                idxHeader.hasAbrv = 1;
+                idxHeader.abrvAddress = chunks.startNewBlock();
 
-                  uint32_t sz = abrv.size();
+                uint32_t sz = abrv.size();
 
+                chunks.addToBlock( &sz, sizeof( uint32_t ) );
+
+                for( map< string, string >::const_iterator i = abrv.begin();  i != abrv.end(); ++i )
+                {
+                  sz = i->first.size();
                   chunks.addToBlock( &sz, sizeof( uint32_t ) );
-
-                  for( map< string, string >::const_iterator i = abrv.begin();
-                       i != abrv.end(); ++i )
-                  {
-                    sz = i->first.size();
-                    chunks.addToBlock( &sz, sizeof( uint32_t ) );
-                    chunks.addToBlock( i->first.data(), sz );
-                    sz = i->second.size();
-                    chunks.addToBlock( &sz, sizeof( uint32_t ) );
-                    chunks.addToBlock( i->second.data(), sz );
-                  }
+                  chunks.addToBlock( i->first.data(), sz );
+                  sz = i->second.size();
+                  chunks.addToBlock( &sz, sizeof( uint32_t ) );
+                  chunks.addToBlock( i->second.data(), sz );
+                }
               }
 
               // Finish with the chunks

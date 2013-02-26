@@ -168,8 +168,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
           if ( Utf8::decode( i->second ).size() < 70 )
           {
-            // Replace all spaces with non-breakable ones, since that's how
-            // Lingvo shows tooltips
+            // Replace all spaces with non-breakable ones, since that's how Lingvo shows tooltips
             title.reserve( i->second.size() );
 
             for( char const * c = i->second.c_str(); *c; ++c )
@@ -224,6 +223,33 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_co" );
   }
+
+  /* grammar information */
+  nodes = dd.elementsByTagName( "gr" ); // proper grammar tag
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_gr" );
+  }
+  nodes = dd.elementsByTagName( "pos" ); // deprecated grammar tag
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_gr" );
+  }
+  nodes = dd.elementsByTagName( "tense" ); // deprecated grammar tag
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_gr" );
+  }
+  /* end of grammar generation */
 
   nodes = dd.elementsByTagName( "tr" ); // Transcription
 
