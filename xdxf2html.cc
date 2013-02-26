@@ -25,13 +25,14 @@ static void fixLink( QDomElement & el, string const & dictId, const char *attrNa
   el.setAttribute( attrName, url.toEncoded().data() );
 }
 
-string decimal2roman(int input, int lower_case)
+// converting a number into roman representation
+string convertToRoman(int input, int lower_case)
 {
     string romanvalue = "";
     if(input >= 4000)
     {
         int x = (input - input % 4000) / 1000;
-        romanvalue = "(" + decimal2roman(x,lower_case) + ")" ;
+        romanvalue = "(" + convertToRoman(x,lower_case) + ")" ;
         input %= 4000;
     }
 
@@ -147,63 +148,63 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
   // if this is a logical type of XDXF then we need to render proper numbering
   // we will do it this way:
   // 1. we compute the maximum nesting depth of the article
-  int max_nesting_depth = 1; // maximum nesting depth of the article
+  int maxNestingDepth = 1; // maximum nesting depth of the article
   for( int i = 0; i < nodes.size(); i++ )
   {
     QDomElement el = nodes.at( i ).toElement();
-    QDomElement nesting_node = el;
-    int nesting_count = 0;
-    while (nesting_node.parentNode().toElement().tagName() == "def") {nesting_count++; nesting_node = nesting_node.parentNode().toElement();}
-    if (nesting_count > max_nesting_depth) {max_nesting_depth = nesting_count;}
+    QDomElement nestingNode = el;
+    int nestingCount = 0;
+    while (nestingNode.parentNode().toElement().tagName() == "def") {nestingCount++; nestingNode = nestingNode.parentNode().toElement();}
+    if (nestingCount > maxNestingDepth) {maxNestingDepth = nestingCount;}
   }
-  // 2. in this loop we go layer-by-layer through all <def> and insert right numbers according to its structure
-  for (int j = max_nesting_depth; j>0; j--) // j symbolizes special depth to be processed at this iteration
+  // 2. in this loop we go layer-by-layer through all <def> and insert proper numbers according to its structure
+  for (int j = maxNestingDepth; j>0; j--) // j symbolizes special depth to be processed at this iteration
   {
-    int sibling_count = 0; // this  that counts the number of among all siblings of this depth
-    QString number_text = ""; // the number to be inserted into the beginning of <def> (I,II,IV,1,2,3,a),b),c)...)
+    int siblingCount = 0; // this  that counts the number of among all siblings of this depth
+    QString numberText = ""; // the number to be inserted into the beginning of <def> (I,II,IV,1,2,3,a),b),c)...)
     for( int i = 0; i < nodes.size(); i++ )
     {
       QDomElement el = nodes.at( i ).toElement();
-      QDomElement nesting_node = el;
-      // computing the depth @nesting_depth of a current node @el
-      int nesting_depth = 0;
-      while (nesting_node.parentNode().toElement().tagName() == "def") {nesting_depth++; nesting_node=nesting_node.parentNode().toElement();}
+      QDomElement nestingNode = el;
+      // computing the depth @nestingDepth of a current node @el
+      int nestingDepth = 0;
+      while (nestingNode.parentNode().toElement().tagName() == "def") {nestingDepth++; nestingNode=nestingNode.parentNode().toElement();}
 
       // we process nodes on of current depth @j
       // we do this in order not to break the numbering at this depth level
-      if (nesting_depth == j)
+      if (nestingDepth == j)
       {
-        sibling_count++;
-        if (max_nesting_depth == 1)
+        siblingCount++;
+        if (maxNestingDepth == 1)
         {
-          number_text = number_text.setNum(sibling_count)+". ";
+          numberText = numberText.setNum(siblingCount)+". ";
         }
-        else if (max_nesting_depth == 2)
+        else if (maxNestingDepth == 2)
         {
-          if (nesting_depth == 1)
-            number_text = number_text.setNum(sibling_count)+". ";
-          if (nesting_depth == 2)
-            number_text = number_text.setNum(sibling_count)+") ";
+          if (nestingDepth == 1)
+            numberText = numberText.setNum(siblingCount)+". ";
+          if (nestingDepth == 2)
+            numberText = numberText.setNum(siblingCount)+") ";
         }
         else
         {
-          if (nesting_depth == 1)
-            number_text = QString::fromStdString(decimal2roman(sibling_count,0) + ". ");
-          if (nesting_depth == 2)
-            number_text = number_text.setNum(sibling_count)+". ";
-          if (nesting_depth == 3)
-            number_text = number_text.setNum(sibling_count)+") ";
-          if (nesting_depth == 4)
-            number_text = QString::fromStdString(decimal2roman(sibling_count,1) + ") ");
+          if (nestingDepth == 1)
+            numberText = QString::fromStdString(convertToRoman(siblingCount,0) + ". ");
+          if (nestingDepth == 2)
+            numberText = numberText.setNum(siblingCount)+". ";
+          if (nestingDepth == 3)
+            numberText = numberText.setNum(siblingCount)+") ";
+          if (nestingDepth == 4)
+            numberText = QString::fromStdString(convertToRoman(siblingCount,1) + ") ");
         }
         QDomElement node_num = dd.createElement("span");
         node_num.setAttribute( "class", "xdxf_num" );
-        QDomText text_num = dd.createTextNode(number_text);
+        QDomText text_num = dd.createTextNode(numberText);
         node_num.appendChild(text_num);
         el.insertBefore(node_num,el.firstChild());
       }
-      else if (nesting_depth < j) // this if means that it goes one level up
-        sibling_count = 0;
+      else if (nestingDepth < j) // if it goes one level up @siblingCount needs to be reset
+        siblingCount = 0;
     }
   }
   // we finally change all <def> tags into 'xdxf_def' <span>s
