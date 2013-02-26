@@ -155,8 +155,29 @@ div.xdxf
   display: none;
 }
 
+/* Article structure tag */
+.xdxf_num
+{
+    color: red;
+    font-weight: bold;
+    padding-left:-15px;
+}
+.xdxf_def
+{
+    display: block;
+    border-color: #e3e3e3;
+    border-width: 1px;
+    border-style: dashed;
+    margin: 1px;
+    margin-left: 15px;
+}
+.xdxf_def:before
+{
+    /*content: "%%%"*/
+}
+
 /* Abbreviation */
-.xdxf_abr
+.xdxf_abbr
 {
   font-style: italic;
   color: seagreen;
@@ -204,7 +225,7 @@ div.xdxf
 .xdxf_dtrn
 {
     font-weight: bold;
-    color: #dd3400;
+    color: #dd7800;
 }
 
 /* Transcription */
