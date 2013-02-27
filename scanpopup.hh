@@ -45,6 +45,8 @@ public:
   /// Translate the word
   void translateWord( QString const & word );
 
+  void setDictionaryIconSize();
+
 signals:
 
   /// Forwarded from the dictionary bar, so that main window could act on this.

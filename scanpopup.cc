@@ -240,6 +240,7 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.goBackButton->setEnabled( false );
   ui.goForwardButton->setEnabled( false );
+
 }
 
 ScanPopup::~ScanPopup()
@@ -959,6 +960,8 @@ void ScanPopup::updateDictionaryBar()
     Config::Group * grp = cfg.getGroup( currentId );
     dictionaryBar.setMutedDictionaries( grp ? &grp->popupMutedDictionaries : 0 );
   }
+
+  setDictionaryIconSize();
 }
 
 void ScanPopup::mutedDictionariesChanged()
@@ -999,4 +1002,12 @@ void ScanPopup::on_goBackButton_clicked()
 void ScanPopup::on_goForwardButton_clicked()
 {
   definition->forward();
+}
+
+void ScanPopup::setDictionaryIconSize()
+{
+  int extent = cfg.usingSmallIconsInToolbars ?
+               QApplication::style()->pixelMetric( QStyle::PM_SmallIconSize ) :
+               21;
+  dictionaryBar.setDictionaryIconSize( extent );
 }

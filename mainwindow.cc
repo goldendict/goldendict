@@ -2702,6 +2702,9 @@ void MainWindow::useSmallIconsInToolbarsTriggered()
   updateDictionaryBar();
 
   cfg.usingSmallIconsInToolbars = useSmallIcons;
+
+  if( scanPopup.get() )
+    scanPopup->setDictionaryIconSize();
 }
 
 void MainWindow::toggleMenuBarTriggered(bool announce)
