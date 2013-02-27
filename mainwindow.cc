@@ -2826,6 +2826,7 @@ void MainWindow::on_printPreview_triggered()
   connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
            this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
 
+  dialog.showMaximized();
   dialog.exec();
 }
 
