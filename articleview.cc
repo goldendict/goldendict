@@ -1079,7 +1079,7 @@ void ArticleView::resourceToSaveDownloadFinished()
         // Ok, got one finished, all others are irrelevant now
 
         vector< char > const & data = (*i)->getFullData();
-        resourceData = QByteArray::fromRawData( data.data(), data.size() );
+        resourceData = QByteArray( data.data(), data.size() );
         break;
       }
       else
