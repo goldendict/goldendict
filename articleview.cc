@@ -1009,7 +1009,7 @@ void ArticleView::saveResource( const QUrl & url, QUrl const & ref )
           {
             resourceToSaveDownloadRequests.push_back( req );
             connect( req.get(), SIGNAL( finished() ),
-                     this, SLOT( resourceToSaveDownloadFinished() ) );
+                     this, SLOT( resourceToSaveDownloadFinished() ), Qt::QueuedConnection );
           }
         }
       }
@@ -1045,7 +1045,7 @@ void ArticleView::saveResource( const QUrl & url, QUrl const & ref )
 
       resourceToSaveDownloadRequests.push_back( req );
       connect( req.get(), SIGNAL( finished() ),
-               this, SLOT( resourceToSaveDownloadFinished() ) );
+               this, SLOT( resourceToSaveDownloadFinished() ), Qt::QueuedConnection );
     }
   }
 
@@ -1094,6 +1094,9 @@ void ArticleView::resourceToSaveDownloadFinished()
 
   if( !resourceData.isEmpty() )
   {
+    // Resource found, clear all requests
+    resourceToSaveDownloadRequests.clear();
+
     QString fileName;
     QString savePath;
     if( cfg.resourceSavePath.isEmpty() )
@@ -1155,10 +1158,6 @@ void ArticleView::resourceToSaveDownloadFinished()
       }
     }
 
-    // Ok, whatever it was, it's finished. Remove this and any other
-    // requests and finish.
-
-    resourceToSaveDownloadRequests.clear();
     return;
   }
 
