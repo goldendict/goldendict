@@ -63,8 +63,8 @@
         <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Bienvenue dans &lt;b&gt;GoldenDict&lt;/b&gt; !&lt;/h3&gt;
-&lt;p&gt;Pour commencer à utiliser le logiciel, visitez d&apos;abord &lt;b&gt;Édition|Dictionnaires&lt;/b&gt; pour ajouter des emplacements où trouver les fichiers de dictionnaires, configurer divers sites Wikipédia ou d&apos;autres sources, ajuster l&apos;ordre des dictionnaires ou créer des groupes de dictionnaires.&lt;p&gt;Vous êtes paré pour lancer de nouvelles recherches ! Vous pouvez faire cela en utilisant le panneau à gauche de cette fenêtre, ou vous pouvez &lt;a href=&quot;Working with popup&quot;&gt;chercher les mots d&apos;autres applications actives&lt;/a&gt;.
-&lt;p&gt;Pour personnaliser le logiciel, vérifiez les options disponibles dans &lt;b&gt;Édition|Préférences&lt;/b&gt;. Tous les paramètres y disposent d&apos;une aide, lisez-la bien en cas de doute !
+&lt;p&gt;Pour commencer à utiliser GoldenDict, visitez d&apos;abord &lt;b&gt;Édition|Dictionnaires&lt;/b&gt; pour ajouter des emplacements où trouver les fichiers de dictionnaires, configurer des sites Wikipédia ou d&apos;autres sources, ajuster l&apos;ordre des dictionnaires ou créer des groupes de dictionnaires.&lt;p&gt;Vous êtes paré pour lancer de nouvelles recherches ! Vous pouvez faire cela en utilisant le panneau à gauche de cette fenêtre, ou vous pouvez &lt;a href=&quot;Working with popup&quot;&gt;chercher les mots à partir d&apos;autres applications actives&lt;/a&gt;.
+&lt;p&gt;Pour personnaliser GoldenDict, vérifiez les options disponibles dans &lt;b&gt;Édition|Préférences&lt;/b&gt;. Tous les paramètres y disposent d&apos;une aide, lisez-la bien en cas de doute !
 &lt;p&gt;Si vous avez besoin d&apos;aide, avez des questions ou des suggestions, vous serez les bienvenus sur le &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.
 &lt;p&gt;Consultez le &lt;a href=&quot;http://goldendict.org/&quot;&gt;site&lt;/a&gt; du logiciel pour les mises à jour.
 &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Sous licence GPLv3 ou ultérieure.</translation>
@@ -2655,7 +2655,7 @@ en fin de liste.</translation>
     <message>
         <location filename="../preferences.ui" line="87"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation>Ctrl-Tab parcourt les onglets dans l&apos;ordres des éléments les plus récents</translation>
+        <translation>Ctrl-Tab parcourt les onglets dans l&apos;ordre des éléments les plus récents</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="97"/>
@@ -2763,7 +2763,7 @@ off from main window or tray icon.</source>
         <translation>Une pop-up de traduction apparaît lorsque :
 - la souris survole un mot à l&apos;écran (Windows) ;
 - un mot est sélescionné à la souris (Linux).
-Lorsque cette option est active, il est possible de l&apos;activer/désactiver à partir de la fenêtre principale ou l&apos;icône de la barre des tâches.</translation>
+Lorsque cette option est active, il est possible d&apos;activer/désactiver la fenêtre de scan à partir de la fenêtre principale ou de l&apos;icône de la barre des tâches.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="327"/>
@@ -2925,7 +2925,7 @@ de temps limité, ici spécifié en secondes.</translation>
     <message>
         <location filename="../preferences.ui" line="579"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation>Envoyer la traduction du mot vers la fenêtre principale au lieu de le montrer dans une pop-up</translation>
+        <translation>Envoyer la traduction du mot vers la fenêtre principale de GoldenDict au lieu de la montrer dans une pop-up</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="582"/>
@@ -2950,7 +2950,7 @@ de temps limité, ici spécifié en secondes.</translation>
     <message>
         <location filename="../preferences.ui" line="707"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>Les raccourcis sont gloabaux et utilisables à partir de n&apos;importe quel programme, quel que soit le contexte, tant que GoldenDict est actif en arrière-plan.</translation>
+        <translation>Les raccourcis sont globaux et utilisables à partir de n&apos;importe quel programme, quel que soit le contexte, tant que GoldenDict est actif en arrière-plan.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="717"/>
@@ -2988,7 +2988,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="797"/>
         <source>Playback</source>
-        <translation>Playback</translation>
+        <translation>Lecture</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="803"/>
@@ -3104,7 +3104,7 @@ Le greffon approprié doit être installé pour que cette option fonctionne.</tr
     <message>
         <location filename="../preferences.ui" line="1021"/>
         <source>Enable web plugins</source>
-        <translation>Activer les plugins web</translation>
+        <translation>Activer les greffons web</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1044"/>
@@ -3264,7 +3264,7 @@ Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
     <message>
         <location filename="../preferences.cc" line="362"/>
         <source>Restart the program to apply the language change.</source>
-        <translation>Redémarrez le programme pour applique les changement de langue.</translation>
+        <translation>Redémarrez le programme pour appliquer le changement de langue.</translation>
     </message>
 </context>
 <context>
