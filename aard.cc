@@ -450,56 +450,69 @@ void AardDictionary::loadArticle( uint32_t address,
 
     articleText.clear();
 
+
+    while( 1 )
     {
+      articleText = "Article loading error";
+      try
+      {
         Mutex::Lock _( aardMutex );
         df.seek( articleOffset );
         df.read( &size, sizeof(size) );
         articleSize = size;
         articleBody.resize( articleSize );
         df.read( &articleBody.front(), articleSize );
-    }
+      }
+      catch(...)
+      {
+        break;
+      }
 
-    if ( articleBody.empty() )
-      throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
+      if ( articleBody.empty() )
+        break;
 
-    string text = decompressBzip2( articleBody.data(), articleSize );
-    if( text.empty() )
+      articleText.clear();
+
+      string text = decompressBzip2( articleBody.data(), articleSize );
+      if( text.empty() )
         text = decompressZlib( articleBody.data(), articleSize );
-    if( text.empty() )
+      if( text.empty() )
         text = string( articleBody.data(), articleSize );
 
-    string::size_type n = 0;
-    while( n < text.size() && text[n] != '\"' )
-        n++;
+      if( text.empty() || text[ 0 ] != '[' )
+        break;
 
-    if( n >= text.size() )
-        return;
+      string::size_type n = text.find( '\"' );
+      if( n == string::npos )
+        break;
 
-    readJSONValue( text, articleText, n );
+      readJSONValue( text, articleText, n );
 
-    if( articleText.empty() )
-    {
+      if( articleText.empty() )
+      {
         n = text.find( "\"r\"" );
-        if( n != string::npos )
+        if( n != string::npos && n + 3 < text.size() )
         {
-            n += 3;
-            while( n < text.size() && text[n] != '\"' )
-                n++;
+          n = text.find( '\"', n + 3 );
+          if( n == string::npos )
+            break;
 
-            if( n >= text.size() )
-                return;
-
-            string link;
-            readJSONValue( text, link, n );
-            if( !link.empty() )
-                articleText = "<a href=\"" + link + "\">" + link + "</a>";
+          string link;
+          readJSONValue( text, link, n );
+          if( !link.empty() )
+            articleText = "<a href=\"" + link + "\">" + link + "</a>";
         }
+      }
+
+      break;
     }
 
     if( !articleText.empty() )
-        articleText = convert( articleText );
+      articleText = convert( articleText );
+    else
+      articleText = "Article decoding error";
 
-    articleText = "<div class=\"sdict\">" + articleText + "</div>";
+    articleText = "<div class=\"aard\">" + articleText + "</div>";
 }
 
 QString const& AardDictionary::getDescription()
@@ -660,7 +673,13 @@ void AardArticleRequest::run()
     string headword, articleText;
 
     headword = chain[ x ].word;
-    dict.loadArticle( chain[ x ].articleOffset, articleText );
+    try
+    {
+      dict.loadArticle( chain[ x ].articleOffset, articleText );
+    }
+    catch(...)
+    {
+    }
 
     // Ok. Now, does it go to main articles, or to alternate ones? We list
     // main ones first, and alternates after.
