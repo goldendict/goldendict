@@ -59,7 +59,7 @@ public:
 
   /// Remove item with given index from list
   void removeItem( int index )
-  { items.removeAt( index ); emit itemsChanged(); }
+  { items.removeAt( index ); dirty = true; emit itemsChanged(); }
 
   /// Attempts saving history. Returns true if succeeded - false otherwise.
   /// Since history isn't really that valuable, failures can be ignored.

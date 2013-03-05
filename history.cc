@@ -153,6 +153,7 @@ bool History::save()
 void History::clear()
 {
   items.clear();
+  dirty = true;
 
   emit itemsChanged();
 }
