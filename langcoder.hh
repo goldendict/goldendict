@@ -200,6 +200,7 @@ const LangCode LangCodes[] = {
     { "za", "zha", "Zhuang" },
     { "zh", "chi", "Chinese" },
     { "zu", "zul", "Zulu" },
+    { "jb", "jbo", "Lojban" },
 
     { "", "", "" }
 

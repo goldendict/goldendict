@@ -237,6 +237,7 @@ Db::Db()
   addEntry( "za", "Zhuang", QCoreApplication::translate( "Language", "Zhuang" ) );
   addEntry( "zh", "Chinese", QCoreApplication::translate( "Language", "Chinese" ) );
   addEntry( "zu", "Zulu", QCoreApplication::translate( "Language", "Zulu" ) );
+  addEntry( "jb", "Lojban", QCoreApplication::translate( "Language", "Lojban" ) );
 
   // Countries
 
@@ -458,6 +459,9 @@ QString localizedStringForId( Id langId )
 
     QString iconId = countryCodeForId( langId );
 
-    return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId ).arg( name );
+    if( iconId.isEmpty() )
+      return name;
+    else
+      return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId ).arg( name );
   }
 }
