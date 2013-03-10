@@ -23,7 +23,7 @@
     <message>
         <location filename="../about.ui" line="73"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
+        <translation>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="97"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation>Δε βρέθηκαν μεταφράσεις στην ομάδα &lt;b&gt;%2&lt;/b&gt;.</translation>
+        <translation>Δε βρέθηκαν μεταφράσεις στην ομάδα &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="177"/>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Καλώς ήλθατε στο &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Για να ξεκινήσετε, επιλέξτε &lt;b&gt;Επεξεργασία|Λεξικά&lt;/b&gt;. Από εδώ μπορείτε να προσθέσετε φακέλους που περιέχουν λεξικά, να ενεργοποιήσετε την αναζήτηση στη Βικιπαίδεια ή άλλες πηγές, να αλλάξετε τη σειρά των λεξικών ή να δημιουργήσετε ομάδες λεξικών.&lt;/p&gt;&lt;p&gt;Μετά θα είστε έτοιμοι να ξεκινήσετε την αναζήτηση! Μπορείτε να αναζητάτε λέξεις από την αριστερή στήλη αυτού του παραθύρου, ή από &lt;a href=&quot;Χρήση αναδυόμενου παραθύρου&quot;&gt;οποιαδήποτε άλλη ανοιχτή εφαρμογή&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Για να προσαρμόσετε το πρόγραμμα στις απαιτήσεις σας, δείτε τις διαθέσιμες ρυθμίσεις στο μενού &lt;b&gt;Επεξεργασία|Προτιμήσεις&lt;/b&gt;. Όλες οι προτιμήσεις διαθέτουν χρήσιμες συμβουλές οθόνης, που μπορείτε να διαβάσετε τοποθετώντας το ποντίκι σας πάνω στην αντίστοιχη προτίμηση.&lt;/p&gt;&lt;p&gt;Για περαιτέρω βοήθεια, ερωτήματα, υποδείξεις, ή απλά για να διαβάσετε τις γνώμες άλλων χρηστών, μπορείτε να εγγραφείτε στο &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;φόρουμ&lt;/a&gt; του προγράμματος. &lt;p&gt;Ενημερώσεις μπορείτε να βρείτε στον &lt;a href=&quot;http://goldendict.org/&quot;&gt;Ιστότοπο&lt;/a&gt; του προγράμματος.&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Διανέμεται υπό τους όρους της GNU GPLv3 ή νεότερης έκδοσής της.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Καλώς ήλθατε στο &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Για να ξεκινήσετε, επιλέξτε &lt;b&gt;Επεξεργασία|Λεξικά&lt;/b&gt;. Από εδώ μπορείτε να προσθέσετε φακέλους που περιέχουν λεξικά, να ενεργοποιήσετε την αναζήτηση στη Βικιπαίδεια ή άλλες πηγές, να αλλάξετε τη σειρά των λεξικών ή να δημιουργήσετε ομάδες λεξικών.&lt;p&gt;Μετά θα είστε έτοιμοι να ξεκινήσετε την αναζήτηση! Μπορείτε να αναζητάτε λέξεις από την αριστερή στήλη αυτού του παραθύρου, ή από &lt;a href=&quot;Χρήση αναδυόμενου παραθύρου&quot;&gt;οποιαδήποτε άλλη ανοιχτή εφαρμογή&lt;/a&gt;.&lt;p&gt;Για να προσαρμόσετε το πρόγραμμα στις απαιτήσεις σας, δείτε τις διαθέσιμες ρυθμίσεις στο μενού &lt;b&gt;Επεξεργασία|Προτιμήσεις&lt;/b&gt;. Όλες οι προτιμήσεις διαθέτουν χρήσιμες συμβουλές οθόνης, που μπορείτε να διαβάσετε τοποθετώντας το ποντίκι σας πάνω στην αντίστοιχη προτίμηση.&lt;p&gt;Για περαιτέρω βοήθεια, ερωτήματα, υποδείξεις, ή απλά για να διαβάσετε τις γνώμες άλλων χρηστών, μπορείτε να εγγραφείτε στο &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;φόρουμ&lt;/a&gt; του προγράμματος. &lt;p&gt;Ενημερώσεις μπορείτε να βρείτε στον &lt;a href=&quot;http://goldendict.org/&quot;&gt;ιστότοπο&lt;/a&gt; του προγράμματος.&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Διανέμεται υπό τους όρους της GNU GPLv3 ή νεότερης έκδοσής της.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="195"/>
@@ -95,7 +95,7 @@
     <message>
         <location filename="../article_maker.cc" line="298"/>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(εικόνα)</translation>
     </message>
 </context>
 <context>
@@ -131,32 +131,32 @@
     <message>
         <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή τρέχοντος άρθρου</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="690"/>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Πόρος</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="695"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ήχος</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="700"/>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικόνα</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="716"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορισμός στο λεξικό &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="720"/>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορισμός: %1</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -171,39 +171,39 @@
     <message>
         <location filename="../articleview.cc" line="948"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν υπάρχει το ζητούμενο πρόγραμμα ήχου.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1055"/>
         <location filename="../articleview.cc" line="1153"/>
         <location filename="../articleview.cc" line="1168"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ΣΦΑΛΜΑ: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1118"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση ήχου</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1120"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Αρχείο ήχου (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Όλα τα αρχεία (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1133"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση εικόνας</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1135"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Αρχείο εικόνας (*.bmp *.jpg *.png *.tif);;Όλα τα αρχεία (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1153"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα αποθήκευσης:</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1304"/>
@@ -233,13 +233,13 @@
     <message>
         <location filename="../articleview.cc" line="1362"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποστολή του &quot;%1&quot; στη γραμμή εισόδου</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1368"/>
         <location filename="../articleview.cc" line="1400"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Προσθήκη του &quot;%1&quot; στο ιστορικό</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1382"/>
@@ -264,12 +264,12 @@
     <message>
         <location filename="../articleview.cc" line="1583"/>
         <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε βρέθηκε η βιβλιοθήκη Bass.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1588"/>
         <source>Bass library can&apos;t play this sound.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η βιβλιοθήκη Bass δεν μπορεί να αναπαράγει αυτόν τον ήχο.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1623"/>
@@ -295,19 +295,19 @@
     <message>
         <location filename="../articleview.cc" line="1330"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση &amp;Εικόνας...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1338"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση ή&amp;χου...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1583"/>
         <location filename="../articleview.cc" line="1588"/>
         <location filename="../articleview.cc" line="1675"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">ΠΡΟΣΟΧΗ: %1</translation>
+        <translation>ΠΡΟΣΟΧΗ: %1</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="14"/>
@@ -352,7 +352,7 @@
     <message>
         <location filename="../articleview.ui" line="129"/>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Επι&amp;σήμανση Όλων</translation>
     </message>
 </context>
 <context>
@@ -360,18 +360,21 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεταγραφή λευκορωσικών (λατινικό προς κυριλλικό αλφάβητο, 
+κλασική ορθογραφία)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεταγραφή λευκορωσικών (λατινικό προς κυριλλικό αλφάβητο, 
+σχολική ορθογραφία)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεταγραφή λευκορωσικών (απαλείφει τις διαφορές μεταξύ 
+κλασικής και σχολικής ορθογραφίας στο κυριλλικό αλφάβητο)</translation>
     </message>
 </context>
 <context>
@@ -435,7 +438,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groups_widgets.cc" line="838"/>
         <location filename="../groups_widgets.cc" line="1013"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Λεξικά: </translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="690"/>
@@ -445,33 +448,33 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="691"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation>Σίγουρα θέλετε να δημιουργήσετε ομάδες για τα διαθέσιμα ζεύγη γλωσσών;</translation>
+        <translation>Σίγουρα θέλετε να δημιουργήσετε ομάδες για όλα τα διαθέσιμα ζεύγη γλωσσών;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Αταξινόμητα</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Συνδυασμός ομάδων ανά γλώσσα πηγή ως &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Συνδυασμός ομάδων ανά γλώσσα στόχο ως &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Δημιουργία ομάδας αμφίδρομης μετάφρασης &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Συνδυασμός των ομάδων με &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -479,32 +482,32 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">Σύνολο άρθρων:</translation>
+        <translation>Σύνολο άρθρων:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation type="unfinished">Μεταφράζει από:</translation>
+        <translation>Μεταφράζει από:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
         <source>Total words:</source>
-        <translation type="unfinished">Σύνολο λημμάτων:</translation>
+        <translation>Σύνολο λημμάτων:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="71"/>
         <source>Translates to:</source>
-        <translation type="unfinished">Μεταφράζει σε:</translation>
+        <translation>Μεταφράζει σε:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="88"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Αρχεία λεξικού:</translation>
+        <translation>Αρχεία λεξικού:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="169"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Περιγραφή:</translation>
     </message>
 </context>
 <context>
@@ -524,7 +527,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="14"/>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή &amp;λεξικών</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
@@ -534,12 +537,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Πληροφορίες λεξικού</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="126"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία λεξικού</translation>
     </message>
 </context>
 <context>
@@ -592,7 +595,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../externalviewer.cc" line="49"/>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>δεν έχει οριστεί πρόγραμμα προβολής</translation>
     </message>
 </context>
 <context>
@@ -711,7 +714,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="160"/>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>Σίγουρα θέλετε να διαγράψετε όλες τις ομάδες;</translation>
+        <translation>Σίγουρα θέλετε να αφαιρέσετε όλες τις ομάδες;</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="22"/>
@@ -776,7 +779,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="156"/>
         <source>Auto groups</source>
-        <translation>Αυτόματες ομάδες</translation>
+        <translation>Αυτόματη ομαδοποίηση</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="163"/>
@@ -814,27 +817,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Διαγραφή επιλεγμένων</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή επιλεγμένων</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ιστορικό:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="211"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="215"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Μέγεθος ιστορικού: %1 λήμματα από μέγιστο αριθμό %2</translation>
     </message>
 </context>
 <context>
@@ -1817,77 +1820,77 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="374"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Κινέζικα (παραδοσιακά)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Κινέζικα (απλοποιημένα)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλη</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες διάλεκτοι απλοποιημένων Κινέζικων</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες διάλεκτοι παραδοσιακών Κινέζικών</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες γλώσσες Ανατολική Ευρώπης</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες γλώσσες Δυτικής Ευρώπης</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες Ρωσικές γλώσσες</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες Ιαπωνικές γλώσσες</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες Βαλτικές γλώσσες</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες Ελληνικές γλώσσες</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες Κορεατικές διάλεκτοι</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες Τουρκικές διάλεκτοι</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλλες Ταϊλανδικές διάλεκτοι</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamazight</translation>
     </message>
 </context>
 <context>
@@ -1907,7 +1910,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="64"/>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή &amp;μενού</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="201"/>
@@ -1918,7 +1921,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="239"/>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Λεξικά:</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -1997,63 +2000,63 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2905"/>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το κύριο παράθυρο βρίσκεται πάντα στο προσκήνιο.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3065"/>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Απόκρυψη</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3091"/>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Εξαγωγή ιστορικού σε αρχείο</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3093"/>
         <location filename="../mainwindow.cc" line="3155"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Αρχεία κειμένου (*.txt);;Όλα τα αρχεία (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3132"/>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Ολοκληρώθηκε η εξαγωγή του ιστορικού</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3135"/>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα εξαγωγής:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3153"/>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισαγωγή ιστορικού από αρχείο</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3202"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα εισαγωγής: μη έγκυρα δεδομένα</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3206"/>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Ολοκληρώθηκε η εισαγωγή του ιστορικού</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3209"/>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα εισαγωγής:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3317"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Πληροφορίες λεξικού</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3318"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία λεξικού</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="355"/>
@@ -2095,22 +2098,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="62"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση &amp;ονομάτων λεξικών</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="63"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Μι&amp;κρά εικονίδια</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="94"/>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή &amp;αναζήτησης</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1231"/>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>Λίστα ανοιχτών καρτελών</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1289"/>
@@ -2120,7 +2123,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="1502"/>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
@@ -2158,12 +2161,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2716"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξατε απόκρυψη μιας γραμμής εργαλείων. Πατήστε %1 για να την επαναφέρετε.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2717"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2815"/>
@@ -2178,17 +2181,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2833"/>
         <source>Print Article</source>
-        <translation>Εκτύπωση άρθρου</translation>
+        <translation>Εκτύπωση αποτελέσματος</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2854"/>
         <source>Save Article As</source>
-        <translation>Αποθήκευση άρθρου ως</translation>
+        <translation>Αποθήκευση αποτελέσματος ως</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2854"/>
         <source>Html files (*.html *.htm)</source>
-        <translation>Html αρχεία (*.html *.htm)</translation>
+        <translation>Αρχείο html (*.html *.htm)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2869"/>
@@ -2223,7 +2226,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
         <source>&amp;Zoom</source>
-        <translation>&amp;Μεγέθυνση</translation>
+        <translation>Με&amp;γέθυνση</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
@@ -2242,7 +2245,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <source>&amp;Groups...</source>
@@ -2251,17 +2254,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Στήλη ανα&amp;ζήτησης</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Στήλη περιήγησης αποτελε&amp;σμάτων</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Στήλη &amp;ιστορικού</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="331"/>
@@ -2281,7 +2284,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="344"/>
         <source>&amp;About</source>
-        <translation>Πε&amp;ρί</translation>
+        <translation>&amp;Περί</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
@@ -2356,39 +2359,39 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Προεπισκόπηση εκτύπωσης</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Νέα &amp;σάρωση αρχείων</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Νέα καρτέλα</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="473"/>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Πάντα στο &amp;προσκήνιο</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="476"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Πάντα στο προσκήνιο</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="479"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="488"/>
         <location filename="../mainwindow.ui" line="491"/>
         <location filename="../mainwindow.cc" line="193"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί μενού</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -2406,43 +2409,43 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="427"/>
         <source>&amp;Clear</source>
-        <translation>&amp;Εκκαθάριση</translation>
+        <translation>Εκκα&amp;θάριση</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="502"/>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Νέα καρτέλα</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="439"/>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="447"/>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Φάκελος &amp;ρυθμίσεων</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
         <location filename="../mainwindow.cc" line="3069"/>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμ&amp;φάνιση</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="455"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="460"/>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Ε&amp;ξαγωγή</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Εισαγωγή</translation>
     </message>
 </context>
 <context>
@@ -2481,7 +2484,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="402"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικονίδιο</translation>
     </message>
 </context>
 <context>
@@ -2542,7 +2545,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="248"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Περιγραφή:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="328"/>
@@ -2552,17 +2555,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Μπορείτε να αλλάξετε τη σειρά εμφάνισης των λεξικών, σύροντάς τα με το ποντίκι. Σύρετε λεξικά στην ομάδα των ανενεργών για να τα απενεργοποιήσετε.</translation>
+        <translation>Μπορείτε να αλλάξετε τη σειρά εμφάνισης των λεξικών, σέρνοντάς τα με το ποντίκι. Σύρετε λεξικά στην ομάδα των ανενεργών για να τα απενεργοποιήσετε.</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ταξινόμηση κατά όνομα</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="250"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ταξινόμηση κατά γλώσσα</translation>
     </message>
 </context>
 <context>
@@ -2606,7 +2609,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../preferences.cc" line="82"/>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="159"/>
@@ -2668,17 +2671,17 @@ be the last ones.</source>
     <message>
         <location filename="../preferences.ui" line="77"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν ενεργοποιηθεί, η γραμμή καρτελών δεν θα εμφανίζεται όταν είναι ανοιχτή μόνο μία καρτέλα.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="80"/>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη μοναδικής καρτέλας</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="87"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Το Ctrl-Tab εμφανίζει τις πιο πρόσφατες καρτέλες</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="97"/>
@@ -2751,10 +2754,11 @@ the application.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>Αν ενεργοποιηθεί, κάθε φορά που δείχνετε μια λέξη με το ποντίκι (Windows),
+        <translation>Αν ενεργοποιηθεί, κάθε φορά που δείχνετε μια λέξη με το ποντίκι (Windows), 
 ή επιλέγετε μια λέξη με το ποντίκι (Linux), θα εμφανίζεται ένα αναδυόμενο 
-παράθυρο. Στη συνέχεια, θα μπορείτε να το ενεργοποιείτε ή να το απενεργοποιείτε
-από το κύριο παράθυρο ή από το εικονίδιο της περιοχής ειδοποιήσεων.</translation>
+παράθυρο. Αφού ενεργοποιήσετε το αναδυόμενο παράθυρο στις προτιμήσεις, 
+θα μπορείτε να το ενεργοποιείτε ή να το απενεργοποιείτε και από το κύριο 
+παράθυρο ή από το εικονίδιο της περιοχής ειδοποιήσεων.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="327"/>
@@ -2771,38 +2775,39 @@ the program would always start with the scan popup active.</source>
     <message>
         <location filename="../preferences.ui" line="160"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>Εκκινεί αυτόματα το GoldenDict κατά την εκκίνηση του συστήματος</translation>
+        <translation>Εκκινεί αυτόματα το GoldenDict κατά την εκκίνηση του συστήματος.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="252"/>
         <source>Double-click translates the word clicked</source>
-        <translation>Μετάφραση λέξεων με διπλό κλικ πάνω τους</translation>
+        <translation>Μετάφραση λέξεων με διπλό κλικ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="259"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Κανονικά, όταν πατάτε ESC, ενεργοποιείται το πεδίο αναζήτησης. 
+Αντιθέτως, με αυτή την επιλογή το ESC κρύβει το κύριο παράθυρο.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="263"/>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη κύριου παραθύρου με ESC</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="144"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν ενεργοποιηθεί, θα επιλέγετε λέξεις με μονό κλικ πάνω τους</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="147"/>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή λέξεων με μονό κλικ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="272"/>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Στιλ πρόσθετων:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="339"/>
@@ -2943,12 +2948,12 @@ be pressed shortly after the selection is done.</source>
     <message>
         <location filename="../preferences.ui" line="579"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση της μετάφρασης στο κύριο παράθυρο αντί για το αναδυόμενο</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="582"/>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση μετάφρασης στο κύριο παράθυρο</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="797"/>
@@ -2983,12 +2988,13 @@ but should support most audio file formats.</source>
         <location filename="../preferences.ui" line="828"/>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή ήχου μέσω βιβλιοθήκης Bass. Η καλύτερη επιλογή.
+Θα πρέπει να τοποθετήσετε το bass.dll (http://www.un4seen.com) στο φάκελο του GoldenDict.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="832"/>
         <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή μέσω βιβλιοθήκης Bass</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="841"/>
@@ -3003,12 +3009,12 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <location filename="../preferences.ui" line="1072"/>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Για &amp;προχωρημένους</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1078"/>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Προχωρημένες τεχνολογίες αναδυόμενου παραθύρου</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3016,91 +3022,101 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσπαθεί να χρησιμοποιήσει την τεχνολογία IAccessibleEx για να εντοπίσει 
+τη λέξη κάτω από τον δείκτη. Λειτουργεί μόνο με προγράμματα που υποστηρίζουν 
+αυτή την τεχνολογία (π.χ. Internet Explorer 9). Αν δεν χρησιμοποιείτε κάποιο από 
+αυτά τα προγράμματα, δεν χρειάζεται να ενεργοποιήσετε την επιλογή.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1090"/>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Χρήση IAccessibleEx</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1097"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσπαθεί να χρησιμοποιήσει την τεχνολογία UI Automation για να εντοπίσει 
+τη λέξη κάτω από τον δείκτη. Λειτουργεί μόνο με προγράμματα που υποστηρίζουν 
+αυτή την τεχνολογία. Αν δεν χρησιμοποιείτε κάποιο από αυτά τα προγράμματα, 
+δεν χρειάζεται να ενεργοποιήσετε την επιλογή.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1102"/>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>Χ&amp;ρήση UIAutomation</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1109"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσπαθεί να χρησιμοποιήσει ειδικά μηνύματα του Goldendict για να εντοπίσει 
+τη λέξη κάτω από τον δείκτη. Λειτουργεί μόνο με προγράμματα που υποστηρίζουν 
+αυτή την τεχνολογία. Αν δεν χρησιμοποιείτε κάποιο από αυτά τα προγράμματα, 
+δεν χρειάζεται να ενεργοποιήσετε την επιλογή.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1114"/>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση &amp;μηνυμάτων Goldendict</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1124"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Ιστορικό</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν ενεργοποιηθεί, θα αποθηκεύεται το ιστορικό των μεταφρασμένων λέξεων</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1133"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση &amp;ιστορικού</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1148"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορίστε το μέγιστο αριθμό λημμάτων που θα αποθηκεύονται στο ιστορικό.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1151"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μέγιστο μέγεθος ιστορικού:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Συχνότητα αποθήκευσης ιστορικού. Αν χρησιμοποιήσετε 0, 
+το ιστορικό θα αποθηκεύεται μόνο κατά την έξοδο.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1194"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση κάθε</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1211"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>λεπτά</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1236"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Άρθρα</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1242"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν ενεργοποιηθεί, θα εμφανίζονται πάντα τα προαιρετικά τμήματα των άρθρων</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1245"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση &amp;προαιρετικών τμημάτων</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
@@ -3250,12 +3266,14 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν ενεργοποιηθεί, θα μπορείτε να ακούτε την προφορά από online λεξικά 
+που χρησιμοποιούν Flash ή άλλα πρόσθετα. Πρέπει πρώτα να έχετε εγκαταστήσει 
+το κατάλληλο πρόσθετο για να χρησιμοποιήσετε αυτή την επιλογή.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1021"/>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργοποίηση διαδικτυακών προσθέτων</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1044"/>
@@ -3280,27 +3298,27 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../sources.cc" line="802"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ήχος</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="804"/>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Απλό κείμενο</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="806"/>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="808"/>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανάλογα με την επέκταση</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="810"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Άγνωστο</translation>
     </message>
 </context>
 <context>
@@ -3308,17 +3326,17 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../programs.cc" line="167"/>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν ορίστηκε όνομα προγράμματος.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="183"/>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το πρόγραμμα κατέρρευσε.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="186"/>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το πρόγραμμα επέστρεψε κωδικό εξόδου %1.</translation>
     </message>
 </context>
 <context>
@@ -3326,27 +3344,27 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../sources.cc" line="710"/>
         <source>Enabled</source>
-        <translation type="unfinished">Ενεργή</translation>
+        <translation>Ενεργό</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="712"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Τύπος</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="714"/>
         <source>Name</source>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="716"/>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή εντολών</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="718"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικονίδιο</translation>
     </message>
 </context>
 <context>
@@ -3354,17 +3372,17 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Εύρεση λεξικού/φίλτρο (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Γρήγορη αναζήτηση</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Εκκαθάριση αναζήτησης</translation>
     </message>
 </context>
 <context>
@@ -3415,12 +3433,12 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../scanpopup.ui" line="107"/>
         <source>Back</source>
-        <translation type="unfinished">Πίσω</translation>
+        <translation>Πίσω</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
-        <translation type="unfinished">Μπροστά</translation>
+        <translation>Μπροστά</translation>
     </message>
     <message>
         <source>Alt+M</source>
@@ -3439,12 +3457,12 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../scanpopup.ui" line="155"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση στο κύριο παράθυρο (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="165"/>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="185"/>
@@ -3465,7 +3483,7 @@ could be resized or managed in other ways.</source>
         <location filename="../scanpopup.cc" line="469"/>
         <location filename="../scanpopup.cc" line="814"/>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3483,7 +3501,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="1004"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικονίδιο</translation>
     </message>
 </context>
 <context>
@@ -3524,7 +3542,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="275"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Να αφαιρεθεί το πρόγραμμα &lt;b&gt;%1&lt;/b&gt; από τη λίστα;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="34"/>
@@ -3631,12 +3649,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="343"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Προγράμματα</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="349"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθέστε οποιοδήποτε εξωτερικό πρόγραμμα. Οι χαρακτήρες %GDWORD% αντικαθίστανται από τη ζητούμενη λέξη. Η λέξη στέλνεται και στη συνήθη είσοδο.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="402"/>
@@ -3710,22 +3728,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="602"/>
         <source>Russian transliteration</source>
-        <translation>Μεταγραφή Ρωσικών</translation>
+        <translation>Ρωσικά</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="637"/>
         <source>German transliteration</source>
-        <translation>Μεταγραφή Γερμανικών</translation>
+        <translation>Γερμανικά</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="613"/>
         <source>Greek transliteration</source>
-        <translation>Μεταγραφή Ελληνικών</translation>
+        <translation>Ελληνικά</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="648"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Λευκορωσικά</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="674"/>
@@ -3817,7 +3835,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">Κανένα</translation>
+        <translation>Κανένα</translation>
     </message>
 </context>
 <context>
@@ -3825,12 +3843,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισάγετε λέξη ή φράση για να ξεκινήσετε την αναζήτηση</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Λίστα</translation>
     </message>
 </context>
 <context>
@@ -3853,7 +3871,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="559"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικονίδιο</translation>
     </message>
 </context>
 <context>
@@ -3869,7 +3887,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">ΠΡΟΣΟΧΗ: %1</translation>
+        <translation>ΠΡΟΣΟΧΗ: %1</translation>
     </message>
 </context>
 </TS>
