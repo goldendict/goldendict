@@ -2368,7 +2368,11 @@ void MainWindow::showTranslationFor( QString const & inWord,
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
 
+#ifdef Q_WS_X11
+void MainWindow::toggleMainWindow( bool onlyShow, bool byIconClick )
+#else
 void MainWindow::toggleMainWindow( bool onlyShow )
+#endif
 {
   bool shown = false;
 
@@ -2414,7 +2418,7 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     Window wh = 0;
     int rev = 0;
     XGetInputFocus( QX11Info::display(), &wh, &rev );
-    if( wh != translateLine->internalWinId() )
+    if( wh != translateLine->internalWinId() && !byIconClick )
     {
         QPoint p( 1, 1 );
         mapToGlobal( p );
@@ -2618,7 +2622,11 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
   switch(r) {
     case QSystemTrayIcon::Trigger:
       // Left click toggles the visibility of main window
+#ifdef Q_WS_X11
+      toggleMainWindow( false, true );
+#else
       toggleMainWindow();
+#endif
       break;
 
     case QSystemTrayIcon::MiddleClick:
