@@ -54,7 +54,7 @@
     <message>
         <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajem u &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Pierš za ŭsio naviedaj &lt;b&gt;Źmieny|Słoŭniki&lt;/b&gt;, kab paznačyć šlachi da słoŭnikavych fajłaŭ, ź jakich budzie stanavicca biblijateka słoŭnikaŭ, dadaj roznyja sajty Wikipedyi j inšyja krynicy, vyznačy paradak słoŭnikaŭ dy stvary słoŭnikavyja grupy.&lt;p&gt;Pa naładžvańni pragrama budzie hatovaja da prahladu słoŭnikavych artykułaŭ. Možna toje rabić u hetym aknie (upišy šukanaje słova ŭ radku šukańnia) ci ŭ vonkavych pragramach z dapamohaju &lt;a href=&quot;Karystańnie słoŭnikam u vonkavych pragramach&quot;&gt;vypłyŭnych voknaŭ&lt;/a&gt;. &lt;p&gt;Kab dapasavać da siabie pragramu, skarystaj dastupnyja nałady ŭ &lt;b&gt;Źmienach|Naładach&lt;/b&gt;. Usie źmieščanyja tam nałady majuć padkazki. Čytaj ich dla ŭpeŭnienaści ŭ zroblenych źmienach.&lt;p&gt;Kali ŭźnikli pytańni, prapanovy, ci prosta zachaciełasia znać mierkavańni ludziej, tady zaprašajem na naš &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Novyja versii pragramy zaŭsiody možna znajści na našym &lt;a href=&quot;http://goldendict.org/&quot;&gt;sajcie&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Kanstancin Isakaŭ. Licenzija GPLv3 ci paźniejšaja.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajem u &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Pierš za ŭsio naviedaj &lt;b&gt;Źmieny|Słoŭniki&lt;/b&gt;, kab paznačyć šlachi da słoŭnikavych fajłaŭ, ź jakich budzie stanavicca biblijateka słoŭnikaŭ, dadaj roznyja sajty Wikipedyi j inšyja krynicy, vyznačy paradak słoŭnikaŭ dy stvary słoŭnikavyja grupy.&lt;p&gt;Pa naładžvańni pragrama budzie hatovaja da prahladu słoŭnikavych artykułaŭ. Toje možna rabić u hetym aknie (upišy šukanaje słova ŭ radok šukańnia) ci ŭ vonkavych pragramach z dapamohaju &lt;a href=&quot;Karystańnie słoŭnikam u vonkavych pragramach&quot;&gt;vypłyŭnych voknaŭ&lt;/a&gt;. &lt;p&gt;Kab dapasavać da siabie pragramu, skarystaj dastupnyja nałady ŭ &lt;b&gt;Źmienach|Naładach&lt;/b&gt;. Usie źmieščanyja tam nałady majuć padkazki. Čytaj ich dla ŭpeŭnienaści ŭ zroblenych źmienach.&lt;p&gt;Kali ŭźnikli pytańni, prapanovy, ci prosta zachaciełasia znać mierkavańni ludziej, to zaprašajem na naš &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Novyja versii pragramy zaŭsiody možna znajści na našym &lt;a href=&quot;http://goldendict.org/&quot;&gt;sajcie&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Kanstancin Isakaŭ. Licenzija GPLv3 ci paźniejšaja.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="195"/>
@@ -74,7 +74,7 @@
     <message>
         <location filename="../article_maker.cc" line="207"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Zatym u kožnaj pragramie prosta vybiery słova myššu (dvojčy prstrykni ci praviadzi pa słovu kursoram myšy z zacisnutaj levaj knopkaj), i praz chvilu źjavicca vypłyŭnoje akno z adpaviednym artykułam.</translation>
+        <translation>Zatym u kožnaj pragramie prosta abiary słova myššu (dvojčy prstrykni ci praviadzi pa słovu kursoram myšy z zacisnutaj levaj knopkaj), i praz chvilu źjavicca vypłyŭnoje akno z adpaviednym artykułam.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="284"/>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../article_maker.cc" line="701"/>
         <source>Individual words: </source>
-        <translation>Asobnyja słovy: </translation>
+        <translation>Słovy asobna: </translation>
     </message>
 </context>
 <context>
@@ -205,137 +205,137 @@
     </message>
     <message>
         <location filename="../articleview.cc" line="1055"/>
-        <location filename="../articleview.cc" line="1153"/>
-        <location filename="../articleview.cc" line="1168"/>
+        <location filename="../articleview.cc" line="1156"/>
+        <location filename="../articleview.cc" line="1167"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ABMYŁA: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1118"/>
+        <location filename="../articleview.cc" line="1121"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachavańnie huku</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1120"/>
+        <location filename="../articleview.cc" line="1123"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hukavyja fajły (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Usie fajły (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1133"/>
+        <location filename="../articleview.cc" line="1136"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachavańnie vyjavy</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1135"/>
+        <location filename="../articleview.cc" line="1138"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fajły vyjavaŭ (*.bmp *.jpg *.png *.tif);;Usie fajły (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1156"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka zachavańnia resursu: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1304"/>
+        <location filename="../articleview.cc" line="1303"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Adčynić spasyłku</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1310"/>
+        <location filename="../articleview.cc" line="1309"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ačynić spasyłku ŭ novaj &amp;układcy</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1317"/>
+        <location filename="../articleview.cc" line="1316"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Adčynić spasyłku ŭ &amp;vonkavym ahladalniku</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1330"/>
+        <location filename="../articleview.cc" line="1329"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachavać &amp;vyjavu...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1338"/>
+        <location filename="../articleview.cc" line="1337"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachavać &amp;huk...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1349"/>
+        <location filename="../articleview.cc" line="1348"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Šukać „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1357"/>
+        <location filename="../articleview.cc" line="1356"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Šukać „%1“ u &amp;novaj układcy</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1362"/>
+        <location filename="../articleview.cc" line="1361"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Źmiaścić „%1“ u ŭvodnym radoku</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1368"/>
-        <location filename="../articleview.cc" line="1400"/>
+        <location filename="../articleview.cc" line="1367"/>
+        <location filename="../articleview.cc" line="1399"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Dadać „%1“ u historyju</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1382"/>
+        <location filename="../articleview.cc" line="1381"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Šukać „%1“ u grupie %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1390"/>
+        <location filename="../articleview.cc" line="1389"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Šukać „%1“ u grupie %2 u novaj u&amp;kładcy</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1567"/>
+        <location filename="../articleview.cc" line="1566"/>
         <source>Playing a non-WAV file</source>
         <translation>Prajhravańnie farmataŭ roznych ad WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1568"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Kab ułučyć prajhravańnie fajłaŭ roznych ad WAV, pierajdzi da Źmienaŭ|Naładaŭ, abiary ŭkładku Aŭdyjo i ŭłučy „Prajhravać cieraz DirectShow“.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1583"/>
-        <location filename="../articleview.cc" line="1588"/>
-        <location filename="../articleview.cc" line="1675"/>
+        <location filename="../articleview.cc" line="1582"/>
+        <location filename="../articleview.cc" line="1587"/>
+        <location filename="../articleview.cc" line="1674"/>
         <source>WARNING: %1</source>
         <translation>UVAHA: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1583"/>
+        <location filename="../articleview.cc" line="1582"/>
         <source>Bass library not found.</source>
         <translation>GoldenDict nie znajšoŭ biblijateki Bass.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1588"/>
+        <location filename="../articleview.cc" line="1587"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>Biblijateka Bass nie patrapiła prajhrać hetaha zapisu.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1623"/>
+        <location filename="../articleview.cc" line="1622"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Niemažliva ŭruchomić prajhravalnika hukavaha fajła: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1641"/>
+        <location filename="../articleview.cc" line="1640"/>
         <source>Failed to create temporary file.</source>
         <translation>Nie atrymałasia stvaryć časovaha fajła.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1652"/>
+        <location filename="../articleview.cc" line="1651"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Nie atrymałasia aŭtamatyčna adčynić resursavaha fajła. Pasprabuj adčynić ručna %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1168"/>
-        <location filename="../articleview.cc" line="1675"/>
+        <location filename="../articleview.cc" line="1167"/>
+        <location filename="../articleview.cc" line="1674"/>
         <source>The referenced resource failed to download.</source>
         <translation>Nie atrymałasia zładavać paznačanaha resursu.</translation>
     </message>
@@ -470,7 +470,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation>Vychodnaja mova:</translation>
+        <translation>Kryničnaja mova:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
@@ -1797,77 +1797,82 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>Zułu</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="374"/>
+        <location filename="../language.cc" line="240"/>
+        <source>Lojban</source>
+        <translation>Łožban</translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="375"/>
         <source>Traditional Chinese</source>
         <translation>Tradycyjnaja kitajskaja</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="375"/>
+        <location filename="../language.cc" line="376"/>
         <source>Simplified Chinese</source>
         <translation>Sproščanaja kitajskaja</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="376"/>
+        <location filename="../language.cc" line="377"/>
         <source>Other</source>
         <translation>Inšaja</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="377"/>
+        <location filename="../language.cc" line="378"/>
         <source>Other Simplified Chinese dialects</source>
         <translation>Inšyja dyjalekty sproščanaj kitajskaj</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="378"/>
+        <location filename="../language.cc" line="379"/>
         <source>Other Traditional Chinese dialects</source>
         <translation>Inšyja dyjalekty tradycyjnaj kitajskaj</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="379"/>
+        <location filename="../language.cc" line="380"/>
         <source>Other Eastern-European languages</source>
         <translation>Inšyja ŭschodnieeŭrapiejskija movy</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="380"/>
+        <location filename="../language.cc" line="381"/>
         <source>Other Western-European languages</source>
         <translation>Inšyja zachodnieeŭrapiejskija movy</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="381"/>
+        <location filename="../language.cc" line="382"/>
         <source>Other Russian languages</source>
         <translation>Inšyja rasiejskija movy</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="382"/>
+        <location filename="../language.cc" line="383"/>
         <source>Other Japanese languages</source>
         <translation>Inšyja japonskija movy</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="383"/>
+        <location filename="../language.cc" line="384"/>
         <source>Other Baltic languages</source>
         <translation>Inšyja bałckija movy</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="384"/>
+        <location filename="../language.cc" line="385"/>
         <source>Other Greek languages</source>
         <translation>Inšyja hreckija movy</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="385"/>
+        <location filename="../language.cc" line="386"/>
         <source>Other Korean dialects</source>
         <translation>Inšyja karejskija dyjalekty</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="386"/>
+        <location filename="../language.cc" line="387"/>
         <source>Other Turkish dialects</source>
         <translation>Inšyja tureckija dyjalekty</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="387"/>
+        <location filename="../language.cc" line="388"/>
         <source>Other Thai dialects</source>
         <translation>Inšyja tajskija dyjalekty</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="388"/>
+        <location filename="../language.cc" line="389"/>
         <source>Tamazight</source>
         <translation>Berberskaja</translation>
     </message>
@@ -2076,7 +2081,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
-        <location filename="../mainwindow.cc" line="3069"/>
+        <location filename="../mainwindow.cc" line="3081"/>
         <source>&amp;Show</source>
         <translation>&amp;Pakazać</translation>
     </message>
@@ -2264,133 +2269,133 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2459"/>
+        <location filename="../mainwindow.cc" line="2463"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Pamyłka inicyjalizacyi sačeńnia za klavišnymi skarotami.&lt;br&gt;Pierakanajsia, što XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2593"/>
+        <location filename="../mainwindow.cc" line="2597"/>
         <source>New Release Available</source>
         <translation>Dastuny novy vypusk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2594"/>
+        <location filename="../mainwindow.cc" line="2598"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict versii &lt;b&gt;%1&lt;/b&gt; dastupny dla zładavańnia.&lt;br&gt;Pstrykni pa &lt;b&gt;Zładavać&lt;/b&gt;, kab pierajści na bačynu zładavańnia.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2599"/>
+        <location filename="../mainwindow.cc" line="2603"/>
         <source>Download</source>
         <translation>Zładavać</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2600"/>
+        <location filename="../mainwindow.cc" line="2604"/>
         <source>Skip This Release</source>
         <translation>Praminuć hety vypusk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2716"/>
+        <location filename="../mainwindow.cc" line="2727"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Palica meniu jość schavanaja. Skarystaj %1, kab pavaracić nazad.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2717"/>
+        <location filename="../mainwindow.cc" line="2728"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2815"/>
+        <location filename="../mainwindow.cc" line="2826"/>
         <source>Page Setup</source>
         <translation>Nałady bačyny</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2816"/>
+        <location filename="../mainwindow.cc" line="2827"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Niama dasiažnych drukarak. Spačatku ŭstaluj choć adnu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2833"/>
+        <location filename="../mainwindow.cc" line="2845"/>
         <source>Print Article</source>
         <translation>Nadrukavać artykuł</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2854"/>
+        <location filename="../mainwindow.cc" line="2866"/>
         <source>Save Article As</source>
         <translation>Zachavać artykuł jak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2854"/>
+        <location filename="../mainwindow.cc" line="2866"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Fajły HTML(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2869"/>
+        <location filename="../mainwindow.cc" line="2881"/>
         <source>Error</source>
         <translation>Pamyłka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2870"/>
+        <location filename="../mainwindow.cc" line="2882"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Niemažliva zachavać artykuł: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2905"/>
+        <location filename="../mainwindow.cc" line="2917"/>
         <source>The main window is set to be always on top.</source>
         <translation>Hałoŭnaje akno ciapier zaŭsiody znachodzicca vyšej inšych.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3065"/>
+        <location filename="../mainwindow.cc" line="3077"/>
         <source>&amp;Hide</source>
         <translation>S&amp;chavać</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3091"/>
+        <location filename="../mainwindow.cc" line="3103"/>
         <source>Export history to file</source>
         <translation>Ekspartavańnie historyi ŭ fajł</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3093"/>
-        <location filename="../mainwindow.cc" line="3155"/>
+        <location filename="../mainwindow.cc" line="3105"/>
+        <location filename="../mainwindow.cc" line="3167"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Tekstavyja fajły (*.txt);;Usie fajły (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3132"/>
+        <location filename="../mainwindow.cc" line="3144"/>
         <source>History export complete</source>
         <translation>Ekspartavańnie historyi skončyłasia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3135"/>
+        <location filename="../mainwindow.cc" line="3147"/>
         <source>Export error: </source>
         <translation>Pamyłka ekspartu: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3153"/>
+        <location filename="../mainwindow.cc" line="3165"/>
         <source>Import history from file</source>
         <translation>Impartavańnie historyi z fajła</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3202"/>
+        <location filename="../mainwindow.cc" line="3214"/>
         <source>Import error: invalid data in file</source>
         <translation>Pamyłka impartavańnia: chibnyja źviestki ŭ fajle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3206"/>
+        <location filename="../mainwindow.cc" line="3218"/>
         <source>History import complete</source>
         <translation>Impartavańnie historyi skončyłasia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3209"/>
+        <location filename="../mainwindow.cc" line="3221"/>
         <source>Import error: </source>
         <translation>Pamyłka impartavańnia: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3317"/>
+        <location filename="../mainwindow.cc" line="3329"/>
         <source>Dictionary info</source>
         <translation>Infarmacyja pra słoŭnik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3318"/>
+        <location filename="../mainwindow.cc" line="3330"/>
         <source>Edit dictionary</source>
         <translation>Redagavać słoŭnik</translation>
     </message>
@@ -2482,7 +2487,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
-        <translation>Vychodnaja mova:</translation>
+        <translation>Kryničnaja mova:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="219"/>
@@ -2726,7 +2731,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="393"/>
         <source>Left Ctrl only</source>
-        <translation>Tolki levy Ctrl</translation>
+        <translation>Adno levy Ctrl</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="396"/>
@@ -2736,7 +2741,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="403"/>
         <source>Right Shift only</source>
-        <translation>Tolki pravy Shift</translation>
+        <translation>Adno pravy Shift</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="406"/>
@@ -2766,7 +2771,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="433"/>
         <source>Left Alt only</source>
-        <translation>Tolki levy Alt</translation>
+        <translation>Adno levy Alt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="436"/>
@@ -2786,7 +2791,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="453"/>
         <source>Right Alt only</source>
-        <translation>Tolki pravy Alt</translation>
+        <translation>Adno pravy Alt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="456"/>
@@ -2796,7 +2801,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="463"/>
         <source>Right Ctrl only</source>
-        <translation>Tolki pravy Ctrl</translation>
+        <translation>Adno pravy Ctrl</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="466"/>
@@ -2806,7 +2811,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="473"/>
         <source>Left Shift only</source>
-        <translation>Tolki levy Shift</translation>
+        <translation>Adno levy Shift</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="476"/>
@@ -3370,8 +3375,8 @@ could be resized or managed in other ways.</source>
 jahony pamier, dy kiravać im kožnym zručnym sposabam.</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="469"/>
-        <location filename="../scanpopup.cc" line="814"/>
+        <location filename="../scanpopup.cc" line="470"/>
+        <location filename="../scanpopup.cc" line="815"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>

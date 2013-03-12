@@ -54,7 +54,7 @@
     <message>
         <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Вітаем у &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Перш за ўсё наведай &lt;b&gt;Зьмены|Слоўнікі&lt;/b&gt;, каб пазначыць шляхі да слоўнікавых файлаў, зь якіх будзе станавіцца бібліятэка слоўнікаў, дадай розныя сайты Вікіпэдыі й іншыя крыніцы, вызначы парадак слоўнікаў ды ствары слоўнікавыя ґрупы.&lt;p&gt;Па наладжваньні праґрама будзе гатовая да прагляду слоўнікавых артыкулаў. Можна тое рабіць у гэтым акне (упішы шуканае слова ў радку шуканьня) ці ў вонкавых праґрамах з дапамогаю &lt;a href=&quot;Карыстаньне слоўнікам у вонкавых праґрамах&quot;&gt;выплыўных вокнаў&lt;/a&gt;. &lt;p&gt;Каб дапасаваць да сябе праґраму, скарыстай даступныя налады ў &lt;b&gt;Зьменах|Наладах&lt;/b&gt;. Усе зьмешчаныя там налады маюць падказкі. Чытай іх для ўпэўненасьці ў зробленых зьменах.&lt;p&gt;Калі ўзьніклі пытаньні, прапановы, ці проста захацелася знаць меркаваньні людзей, тады запрашаем на наш &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форум&lt;/a&gt;.&lt;p&gt;Новыя вэрсіі праґрамы заўсёды можна знайсьці на нашым &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайце&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Канстанцін Ісакаў. Ліцэнзія GPLv3 ці пазьнейшая.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Вітаем у &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Перш за ўсё наведай &lt;b&gt;Зьмены|Слоўнікі&lt;/b&gt;, каб пазначыць шляхі да слоўнікавых файлаў, зь якіх будзе станавіцца бібліятэка слоўнікаў, дадай розныя сайты Вікіпэдыі й іншыя крыніцы, вызначы парадак слоўнікаў ды ствары слоўнікавыя ґрупы.&lt;p&gt;Па наладжваньні праґрама будзе гатовая да прагляду слоўнікавых артыкулаў. Тое можна рабіць у гэтым акне (упішы шуканае слова ў радок шуканьня) ці ў вонкавых праґрамах з дапамогаю &lt;a href=&quot;Карыстаньне слоўнікам у вонкавых праґрамах&quot;&gt;выплыўных вокнаў&lt;/a&gt;. &lt;p&gt;Каб дапасаваць да сябе праґраму, скарыстай даступныя налады ў &lt;b&gt;Зьменах|Наладах&lt;/b&gt;. Усе зьмешчаныя там налады маюць падказкі. Чытай іх для ўпэўненасьці ў зробленых зьменах.&lt;p&gt;Калі ўзьніклі пытаньні, прапановы, ці проста захацелася знаць меркаваньні людзей, то запрашаем на наш &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форум&lt;/a&gt;.&lt;p&gt;Новыя вэрсіі праґрамы заўсёды можна знайсьці на нашым &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайце&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Канстанцін Ісакаў. Ліцэнзія GPLv3 ці пазьнейшая.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="195"/>
@@ -74,7 +74,7 @@
     <message>
         <location filename="../article_maker.cc" line="207"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Затым у кожнай праґраме проста выберы слова мышшу (двойчы прстрыкні ці правядзі па слову курсорам мышы з заціснутай левай кнопкай), і праз хвілю зьявіцца выплыўное акно з адпаведным артыкулам.</translation>
+        <translation>Затым у кожнай праґраме проста абяры слова мышшу (двойчы прстрыкні ці правядзі па слову курсорам мышы з заціснутай левай кнопкай), і праз хвілю зьявіцца выплыўное акно з адпаведным артыкулам.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="284"/>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../article_maker.cc" line="701"/>
         <source>Individual words: </source>
-        <translation>Асобныя словы: </translation>
+        <translation>Словы асобна: </translation>
     </message>
 </context>
 <context>
@@ -205,137 +205,137 @@
     </message>
     <message>
         <location filename="../articleview.cc" line="1055"/>
-        <location filename="../articleview.cc" line="1153"/>
-        <location filename="../articleview.cc" line="1168"/>
+        <location filename="../articleview.cc" line="1156"/>
+        <location filename="../articleview.cc" line="1167"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>АБМЫЛА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1118"/>
+        <location filename="../articleview.cc" line="1121"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Захаваньне гуку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1120"/>
+        <location filename="../articleview.cc" line="1123"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Гукавыя файлы (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1133"/>
+        <location filename="../articleview.cc" line="1136"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Захаваньне выявы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1135"/>
+        <location filename="../articleview.cc" line="1138"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы выяваў (*.bmp *.jpg *.png *.tif);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1156"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Памылка захаваньня рэсурсу: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1304"/>
+        <location filename="../articleview.cc" line="1303"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Адчыніць спасылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1310"/>
+        <location filename="../articleview.cc" line="1309"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ачыніць спасылку ў новай &amp;укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1317"/>
+        <location filename="../articleview.cc" line="1316"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Адчыніць спасылку ў &amp;вонкавым аглядальніку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1330"/>
+        <location filename="../articleview.cc" line="1329"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Захаваць &amp;выяву...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1338"/>
+        <location filename="../articleview.cc" line="1337"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Захаваць &amp;гук...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1349"/>
+        <location filename="../articleview.cc" line="1348"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Шукаць „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1357"/>
+        <location filename="../articleview.cc" line="1356"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Шукаць „%1“ у &amp;новай укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1362"/>
+        <location filename="../articleview.cc" line="1361"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Зьмясьціць „%1“ у ўводным радоку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1368"/>
-        <location filename="../articleview.cc" line="1400"/>
+        <location filename="../articleview.cc" line="1367"/>
+        <location filename="../articleview.cc" line="1399"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Дадаць „%1“ у гісторыю</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1382"/>
+        <location filename="../articleview.cc" line="1381"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Шукаць „%1“ у ґрупе %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1390"/>
+        <location filename="../articleview.cc" line="1389"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Шукаць „%1“ у ґрупе %2 у новай у&amp;кладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1567"/>
+        <location filename="../articleview.cc" line="1566"/>
         <source>Playing a non-WAV file</source>
         <translation>Прайграваньне фарматаў розных ад WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1568"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Каб улучыць прайграваньне файлаў розных ад WAV, перайдзі да Зьменаў|Наладаў, абяры ўкладку Аўдыё і ўлучы „Прайграваць цераз DirectShow“.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1583"/>
-        <location filename="../articleview.cc" line="1588"/>
-        <location filename="../articleview.cc" line="1675"/>
+        <location filename="../articleview.cc" line="1582"/>
+        <location filename="../articleview.cc" line="1587"/>
+        <location filename="../articleview.cc" line="1674"/>
         <source>WARNING: %1</source>
         <translation>УВАГА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1583"/>
+        <location filename="../articleview.cc" line="1582"/>
         <source>Bass library not found.</source>
         <translation>GoldenDict не знайшоў бібліятэкі Bass.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1588"/>
+        <location filename="../articleview.cc" line="1587"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>Бібліятэка Bass не патрапіла прайграць гэтага запісу.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1623"/>
+        <location filename="../articleview.cc" line="1622"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Немажліва ўрухоміць прайгравальніка гукавага файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1641"/>
+        <location filename="../articleview.cc" line="1640"/>
         <source>Failed to create temporary file.</source>
         <translation>Не атрымалася стварыць часовага файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1652"/>
+        <location filename="../articleview.cc" line="1651"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Не атрымалася аўтаматычна адчыніць рэсурсавага файла. Паспрабуй адчыніць ручна %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1168"/>
-        <location filename="../articleview.cc" line="1675"/>
+        <location filename="../articleview.cc" line="1167"/>
+        <location filename="../articleview.cc" line="1674"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
     </message>
@@ -470,7 +470,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation>Выходная мова:</translation>
+        <translation>Крынічная мова:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
@@ -1797,77 +1797,82 @@ between classic and school orthography in cyrillic)</source>
         <translation>Зулу</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="374"/>
+        <location filename="../language.cc" line="240"/>
+        <source>Lojban</source>
+        <translation>Ложбан</translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="375"/>
         <source>Traditional Chinese</source>
         <translation>Традыцыйная кітайская</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="375"/>
+        <location filename="../language.cc" line="376"/>
         <source>Simplified Chinese</source>
         <translation>Спрошчаная кітайская</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="376"/>
+        <location filename="../language.cc" line="377"/>
         <source>Other</source>
         <translation>Іншая</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="377"/>
+        <location filename="../language.cc" line="378"/>
         <source>Other Simplified Chinese dialects</source>
         <translation>Іншыя дыялекты спрошчанай кітайскай</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="378"/>
+        <location filename="../language.cc" line="379"/>
         <source>Other Traditional Chinese dialects</source>
         <translation>Іншыя дыялекты традыцыйнай кітайскай</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="379"/>
+        <location filename="../language.cc" line="380"/>
         <source>Other Eastern-European languages</source>
         <translation>Іншыя ўсходнеэўрапейскія мовы</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="380"/>
+        <location filename="../language.cc" line="381"/>
         <source>Other Western-European languages</source>
         <translation>Іншыя заходнеэўрапейскія мовы</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="381"/>
+        <location filename="../language.cc" line="382"/>
         <source>Other Russian languages</source>
         <translation>Іншыя расейскія мовы</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="382"/>
+        <location filename="../language.cc" line="383"/>
         <source>Other Japanese languages</source>
         <translation>Іншыя японскія мовы</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="383"/>
+        <location filename="../language.cc" line="384"/>
         <source>Other Baltic languages</source>
         <translation>Іншыя балцкія мовы</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="384"/>
+        <location filename="../language.cc" line="385"/>
         <source>Other Greek languages</source>
         <translation>Іншыя грэцкія мовы</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="385"/>
+        <location filename="../language.cc" line="386"/>
         <source>Other Korean dialects</source>
         <translation>Іншыя карэйскія дыялекты</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="386"/>
+        <location filename="../language.cc" line="387"/>
         <source>Other Turkish dialects</source>
         <translation>Іншыя турэцкія дыялекты</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="387"/>
+        <location filename="../language.cc" line="388"/>
         <source>Other Thai dialects</source>
         <translation>Іншыя тайскія дыялекты</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="388"/>
+        <location filename="../language.cc" line="389"/>
         <source>Tamazight</source>
         <translation>Бэрбэрская</translation>
     </message>
@@ -2076,7 +2081,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
-        <location filename="../mainwindow.cc" line="3069"/>
+        <location filename="../mainwindow.cc" line="3081"/>
         <source>&amp;Show</source>
         <translation>&amp;Паказаць</translation>
     </message>
@@ -2264,133 +2269,133 @@ between classic and school orthography in cyrillic)</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2459"/>
+        <location filename="../mainwindow.cc" line="2463"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Памылка ініцыялізацыі сачэньня за клявішнымі скаротамі.&lt;br&gt;Пераканайся, што XServer мае ўлучанае пашырэньне RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2593"/>
+        <location filename="../mainwindow.cc" line="2597"/>
         <source>New Release Available</source>
         <translation>Дастуны новы выпуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2594"/>
+        <location filename="../mainwindow.cc" line="2598"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict вэрсіі &lt;b&gt;%1&lt;/b&gt; даступны для зладаваньня.&lt;br&gt;Пстрыкні па &lt;b&gt;Зладаваць&lt;/b&gt;, каб перайсьці на бачыну зладаваньня.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2599"/>
+        <location filename="../mainwindow.cc" line="2603"/>
         <source>Download</source>
         <translation>Зладаваць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2600"/>
+        <location filename="../mainwindow.cc" line="2604"/>
         <source>Skip This Release</source>
         <translation>Прамінуць гэты выпуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2716"/>
+        <location filename="../mainwindow.cc" line="2727"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Паліца мэню ёсьць схаваная. Скарыстай %1, каб павараціць назад.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2717"/>
+        <location filename="../mainwindow.cc" line="2728"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2815"/>
+        <location filename="../mainwindow.cc" line="2826"/>
         <source>Page Setup</source>
         <translation>Налады бачыны</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2816"/>
+        <location filename="../mainwindow.cc" line="2827"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Няма дасяжных друкарак. Спачатку ўсталюй хоць адну.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2833"/>
+        <location filename="../mainwindow.cc" line="2845"/>
         <source>Print Article</source>
         <translation>Надрукаваць артыкул</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2854"/>
+        <location filename="../mainwindow.cc" line="2866"/>
         <source>Save Article As</source>
         <translation>Захаваць артыкул як</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2854"/>
+        <location filename="../mainwindow.cc" line="2866"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлы HTML(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2869"/>
+        <location filename="../mainwindow.cc" line="2881"/>
         <source>Error</source>
         <translation>Памылка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2870"/>
+        <location filename="../mainwindow.cc" line="2882"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Немажліва захаваць артыкул: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2905"/>
+        <location filename="../mainwindow.cc" line="2917"/>
         <source>The main window is set to be always on top.</source>
         <translation>Галоўнае акно цяпер заўсёды знаходзіцца вышэй іншых.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3065"/>
+        <location filename="../mainwindow.cc" line="3077"/>
         <source>&amp;Hide</source>
         <translation>С&amp;хаваць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3091"/>
+        <location filename="../mainwindow.cc" line="3103"/>
         <source>Export history to file</source>
         <translation>Экспартаваньне гісторыі ў файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3093"/>
-        <location filename="../mainwindow.cc" line="3155"/>
+        <location filename="../mainwindow.cc" line="3105"/>
+        <location filename="../mainwindow.cc" line="3167"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Тэкставыя файлы (*.txt);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3132"/>
+        <location filename="../mainwindow.cc" line="3144"/>
         <source>History export complete</source>
         <translation>Экспартаваньне гісторыі скончылася</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3135"/>
+        <location filename="../mainwindow.cc" line="3147"/>
         <source>Export error: </source>
         <translation>Памылка экспарту: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3153"/>
+        <location filename="../mainwindow.cc" line="3165"/>
         <source>Import history from file</source>
         <translation>Імпартаваньне гісторыі з файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3202"/>
+        <location filename="../mainwindow.cc" line="3214"/>
         <source>Import error: invalid data in file</source>
         <translation>Памылка імпартаваньня: хібныя зьвесткі ў файле</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3206"/>
+        <location filename="../mainwindow.cc" line="3218"/>
         <source>History import complete</source>
         <translation>Імпартаваньне гісторыі скончылася</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3209"/>
+        <location filename="../mainwindow.cc" line="3221"/>
         <source>Import error: </source>
         <translation>Памылка імпартаваньня: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3317"/>
+        <location filename="../mainwindow.cc" line="3329"/>
         <source>Dictionary info</source>
         <translation>Інфармацыя пра слоўнік</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3318"/>
+        <location filename="../mainwindow.cc" line="3330"/>
         <source>Edit dictionary</source>
         <translation>Рэдаґаваць слоўнік</translation>
     </message>
@@ -2482,7 +2487,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
-        <translation>Выходная мова:</translation>
+        <translation>Крынічная мова:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="219"/>
@@ -2726,7 +2731,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="393"/>
         <source>Left Ctrl only</source>
-        <translation>Толькі левы Ctrl</translation>
+        <translation>Адно левы Ctrl</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="396"/>
@@ -2736,7 +2741,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="403"/>
         <source>Right Shift only</source>
-        <translation>Толькі правы Shift</translation>
+        <translation>Адно правы Shift</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="406"/>
@@ -2766,7 +2771,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="433"/>
         <source>Left Alt only</source>
-        <translation>Толькі левы Alt</translation>
+        <translation>Адно левы Alt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="436"/>
@@ -2786,7 +2791,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="453"/>
         <source>Right Alt only</source>
-        <translation>Толькі правы Alt</translation>
+        <translation>Адно правы Alt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="456"/>
@@ -2796,7 +2801,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="463"/>
         <source>Right Ctrl only</source>
-        <translation>Толькі правы Ctrl</translation>
+        <translation>Адно правы Ctrl</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="466"/>
@@ -2806,7 +2811,7 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="473"/>
         <source>Left Shift only</source>
-        <translation>Толькі левы Shift</translation>
+        <translation>Адно левы Shift</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="476"/>
@@ -3370,8 +3375,8 @@ could be resized or managed in other ways.</source>
 ягоны памер, ды кіраваць ім кожным зручным спосабам.</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="469"/>
-        <location filename="../scanpopup.cc" line="814"/>
+        <location filename="../scanpopup.cc" line="470"/>
+        <location filename="../scanpopup.cc" line="815"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
