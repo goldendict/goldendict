@@ -406,7 +406,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             continue;
           }
 
-          if ( !strncmp( buf, "00databaseshort", 15 ) ) // Check for proper dictionary name
+          // Check for proper dictionary name
+          if ( !strncmp( buf, "00databaseshort", 15 ) || !strncmp( buf, "00-database-short", 17 ) )
           {
             char * tab1 = strchr( buf, '\t' );
             if ( tab1 )
