@@ -2954,11 +2954,11 @@ void MainWindow::applyZoomFactor()
 {
   if ( cfg.preferences.zoomFactor >= 5 )
     cfg.preferences.zoomFactor = 5;
-  else if ( cfg.preferences.zoomFactor <= 0.7 )
-    cfg.preferences.zoomFactor = 0.7;
+  else if ( cfg.preferences.zoomFactor <= 0.1 )
+    cfg.preferences.zoomFactor = 0.1;
 
   zoomIn->setEnabled( cfg.preferences.zoomFactor < 5 );
-  zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.7 );
+  zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.1 );
   zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
 
   for ( int i = 0; i < ui.tabWidget->count(); i++ )
