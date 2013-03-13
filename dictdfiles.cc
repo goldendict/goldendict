@@ -47,7 +47,7 @@ DEF_EX( exInvalidBase64, "Invalid base64 sequence encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x58444344, // DCDX on little-endian, XDCD on big-endian
-  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -82,6 +82,7 @@ class DictdDictionary: public BtreeIndexing::BtreeDictionary
   File::Class idx, indexFile; // The later is .index file
   IdxHeader idxHeader;
   dictData * dz;
+  string dictionaryName;
 
 public:
 
@@ -90,7 +91,8 @@ public:
 
   ~DictdDictionary();
 
-  virtual string getName() throw();
+  virtual string getName() throw()
+  { return dictionaryName; }
 
   virtual map< Dictionary::Property, string > getProperties() throw()
   { return map< Dictionary::Property, string >(); }
@@ -123,6 +125,14 @@ DictdDictionary::DictdDictionary( string const & id,
   indexFile( dictionaryFiles[ 0 ], "rb" ),
   idxHeader( idx.read< IdxHeader >() )
 {
+
+  // Read the dictionary name
+  idx.seek( sizeof( idxHeader ) );
+
+  vector< char > dName( idx.read< uint32_t >() );
+  idx.read( &dName.front(), dName.size() );
+  dictionaryName = string( &dName.front(), dName.size() );
+
   // Open the .dict file
 
   dz = dict_data_open( dictionaryFiles[ 1 ].c_str(), 0 );
@@ -179,11 +189,6 @@ void DictdDictionary::loadIcon() throw()
   }
 
   dictionaryIconLoaded = true;
-}
-
-string DictdDictionary::getName() throw()
-{
-  return nameFromFileName( getDictionaryFilenames()[ 0 ] );
 }
 
 uint32_t decodeBase64( string const & str )
@@ -362,7 +367,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
            indexIsOldOrBad( indexFile ) )
       {
         // Building the index
-        initializing.indexingDictionary( nameFromFileName( dictFiles[ 0 ] ) );
+        string dictionaryName = nameFromFileName( dictFiles[ 0 ] );
+        initializing.indexingDictionary( dictionaryName );
 
         File::Class idx( indexFile, "wb" );
 
@@ -400,11 +406,56 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             continue;
           }
 
+          if ( !strncmp( buf, "00databaseshort", 15 ) ) // Check for proper dictionary name
+          {
+            char * tab1 = strchr( buf, '\t' );
+            if ( tab1 )
+            {
+              char * tab2 = strchr( tab1 + 1, '\t' );
+              if ( tab2 )
+              {
+                // After tab1 should be article offset, after tab2 -- article size
+                uint32_t articleOffset = decodeBase64( string( tab1 + 1, tab2 - tab1 - 1 ) );
+                uint32_t articleSize = decodeBase64( tab2 + 1 );
+
+                dictData * dz = dict_data_open( dictFiles[ 1 ].c_str(), 0 );
+
+                if ( dz )
+                {
+                  char * articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+                  if ( articleBody )
+                  {
+                    char * eol = strchr( articleBody, '\n'  ); // skip the first line (headword itself)
+                    if ( eol )
+                    {
+                      while( *eol && isspace( *eol ) ) ++eol; // skip spaces
+
+                      // use only the single line for the dictionary title
+                      char * endEol = strchr( eol, '\n' );
+                      if ( endEol )
+                        *endEol = 0;
+
+                      DPRINTF( "DICT NAME: '%s'\n", eol );
+                      dictionaryName = eol;
+                    }
+                  }
+                  dict_data_close( dz );
+                }
+              }
+            }
+          }
+
           indexedWords.addWord( Utf8::decode( string( buf, strchr( buf, '\t' ) - buf ) ), curOffset );
 
           ++idxHeader.wordCount;
 
         } while( !indexFile.eof() );
+
+
+        // Write dictionary name
+
+        idx.write( (uint32_t) dictionaryName.size() );
+        idx.write( dictionaryName.data(), dictionaryName.size() );
 
         // Build index
 
