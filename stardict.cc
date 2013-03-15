@@ -341,7 +341,11 @@ void StardictDictionary::loadArticle( uint32_t address,
   }
 
   if ( !articleBody )
-    throw exCantReadFile( getDictionaryFilenames()[ 2 ] );
+  {
+//    throw exCantReadFile( getDictionaryFilenames()[ 2 ] );
+    articleText = string( "<div class=\"sdict_m\">DICTZIP error: " ) + dict_error_str( dz ) + "</div>";
+    return;
+  }
 
   articleText.clear();
 

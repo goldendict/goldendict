@@ -80,6 +80,7 @@ typedef struct dictData {
    unsigned long compressedLength;
    int           stamp;
    dictCache     cache[DICT_CACHE_SIZE];
+   char          errorString[512];
 } dictData;
 
 
@@ -95,6 +96,8 @@ extern char *dict_data_read_ (
    unsigned long start, unsigned long end,
    const char *preFilter,
    const char *postFilter );
+
+extern char *dict_error_str( dictData *data );
 
 extern int        mmap_mode;
 

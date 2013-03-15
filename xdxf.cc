@@ -545,7 +545,11 @@ void XdxfDictionary::loadArticle( uint32_t address,
   }
 
   if ( !articleBody )
-    throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
+  {
+//    throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
+      articleText = string( "<div class=\"xdxf\">DICTZIP error: " ) + dict_error_str( dz ) + "</div>";
+    return;
+  }
 
   articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this );
 

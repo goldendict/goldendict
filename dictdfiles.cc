@@ -264,18 +264,24 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
       uint32_t articleOffset = decodeBase64( string( tab1 + 1, tab2 - tab1 - 1 ) );
       uint32_t articleSize = decodeBase64( tab2 + 1 );
+      string articleText;
 
       char * articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
 
       if ( !articleBody )
-        throw exCantReadFile( getDictionaryFilenames()[ 1 ] );
-
+      {
+//        throw exCantReadFile( getDictionaryFilenames()[ 1 ] );
+        articleText = string( "<div class=\"dictd_article\">DICTZIP error: " )
+                      + dict_error_str( dz ) + "</div>";
+      }
+      else
+      {
       //sprintf( buf, "Offset: %u, Size: %u\n", articleOffset, articleSize );
 
-      string articleText = string( "<div class=\"dictd_article\">" ) +
-        Html::preformat( articleBody ) + "</div>";
-
-      free( articleBody );
+        articleText = string( "<div class=\"dictd_article\">" ) +
+          Html::preformat( articleBody ) + "</div>";
+        free( articleBody );
+      }
 
       // Ok. Now, does it go to main articles, or to alternate ones? We list
       // main ones first, and alternates after.

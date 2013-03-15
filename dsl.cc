@@ -503,20 +503,25 @@ void DslDictionary::loadArticle( uint32_t address,
     }
 
     if ( !articleBody )
-      throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
-
-    try
     {
-      articleData =
-        DslIconv::toWstring(
-          DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
-          articleBody, articleSize );
-      free( articleBody );
+//      throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
+      articleData = GD_NATIVE_TO_WS( L"\n\r\t" ) + gd::toWString( QString( "DICTZIP error: " ) + dict_error_str( dz ) );
     }
-    catch( ... )
+    else
     {
-      free( articleBody );
-      throw;
+      try
+      {
+        articleData =
+          DslIconv::toWstring(
+            DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+            articleBody, articleSize );
+        free( articleBody );
+      }
+      catch( ... )
+      {
+        free( articleBody );
+        throw;
+      }
     }
   }
 
