@@ -22,6 +22,11 @@ ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
 
   tempFileName = tempFile.fileName(); // For some reason it loses it after it was closed()
 
+#ifdef Q_OS_WIN32
+  // Issue #239
+  tempFileName = QDir::toNativeSeparators(tempFileName);
+#endif
+
   tempFile.close();
 
   DPRINTF( "%s\n", tempFile.fileName().toLocal8Bit().data() );
