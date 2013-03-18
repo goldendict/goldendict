@@ -1799,7 +1799,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Ложбан</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
