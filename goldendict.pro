@@ -358,7 +358,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/ay_WI.ts \
     locale/be_BY.ts \
     locale/be_BY@latin.ts \
-    locale/fr_FR.ts
+    locale/fr_FR.ts \
+    locale/ko_KR.ts
 
 # Build version file
 !isEmpty( hasGit ) {
