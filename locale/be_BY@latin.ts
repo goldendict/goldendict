@@ -572,7 +572,7 @@ miž klasyčnym i školnym pravapisam)</translation>
 <context>
     <name>ExternalViewer</name>
     <message>
-        <location filename="../externalviewer.cc" line="49"/>
+        <location filename="../externalviewer.cc" line="54"/>
         <source>the viewer program name is empty</source>
         <translation>nazva pragramy prahladalnika parožniaja</translation>
     </message>

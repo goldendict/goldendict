@@ -1518,6 +1518,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Tamazight</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Lojban</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoadDictionaries</name>

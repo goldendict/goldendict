@@ -1506,6 +1506,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Tamazight</source>
         <translation>塔马塞特语</translation>
     </message>
+    <message>
+        <source>Lojban</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoadDictionaries</name>
