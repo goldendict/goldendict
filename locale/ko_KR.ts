@@ -11,7 +11,7 @@
     <message>
         <location filename="../about.ui" line="51"/>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>GoldenDict 사전검색 프로그램，버전 </translation>
+        <translation>골든딕 사전검색 프로그램，버전 </translation>
     </message>
     <message>
         <location filename="../about.ui" line="73"/>
@@ -92,7 +92,7 @@
     <message>
         <location filename="../article_maker.cc" line="490"/>
         <source>From </source>
-        <translation type="unfinished"></translation>
+        <translation>From </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="503"/>
@@ -269,7 +269,7 @@
     <message>
         <location filename="../articleview.cc" line="1651"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>리소스파일을 여는데 실패했습니다. 수동으로 열기를 시도해 보십시오: %1.</translation>
+        <translation>리소스파일을 여는데 실패했습니다. 수동으로 열어 보십시오: %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1167"/>
@@ -337,7 +337,7 @@
     <message>
         <location filename="../articleview.ui" line="129"/>
         <source>Highlight &amp;all</source>
-        <translation>전체 선택(&amp;a)</translation>
+        <translation>전체 강조표시(&amp;a)</translation>
     </message>
 </context>
 <context>
@@ -345,18 +345,18 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation>벨라루스어 문자변환 (라틴-&gt; 키릴) (고전 철자법)</translation>
+        <translation>벨로루시어 문자변환 (라틴-&gt; 키릴) (고전 철자법)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation>벨라루스어 문자변환 (라틴-&gt; 키릴) (학교 철자법)</translation>
+        <translation>벨로루시어 문자변환 (라틴-&gt; 키릴) (학교 철자법)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation>벨라루스어 문자변환 (키릴문자에서 고전 철자법과 학교 철자법의 차이를
+        <translation>벨로루시어 문자변환 (키릴문자에서 고전 철자법과 학교 철자법의 차이를
 순화)</translation>
     </message>
 </context>
@@ -385,7 +385,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="43"/>
         <source>From file...</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 지정...</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="90"/>
@@ -506,7 +506,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="14"/>
         <source>&amp;Dictionary Bar</source>
-        <translation>사전 도구상자(&amp;D)</translation>
+        <translation>사전모음(&amp;D)</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
@@ -574,7 +574,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../externalviewer.cc" line="54"/>
         <source>the viewer program name is empty</source>
-        <translation>외부 프로그램이 지정되지 않았습니다.</translation>
+        <translation>외부 프로그램이 지정되지 않았습니다</translation>
     </message>
 </context>
 <context>
@@ -592,7 +592,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../forvo.cc" line="309"/>
         <source>by</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">by</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="313"/>
@@ -607,7 +607,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../forvo.cc" line="315"/>
         <source>from</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">from</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="353"/>
@@ -644,12 +644,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groupselectorwidget.ui" line="13"/>
         <source>Form</source>
-        <translation>형태</translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../groupselectorwidget.ui" line="19"/>
         <source>Look in</source>
-        <translation type="unfinished"></translation>
+        <translation>Look in</translation>
     </message>
 </context>
 <context>
@@ -788,7 +788,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>사전을 마우스로 끌어 그룹에 지정/삭제, 그룹내 순서 변경을 할 수 있습니다.</translation>
+        <translation>사전을 마우스로 끌어 그룹으로 지정/삭제, 그룹내에서 순서 변경을 할 수 있습니다(&amp;D).</translation>
     </message>
 </context>
 <context>
@@ -824,12 +824,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../hunspell.cc" line="239"/>
         <source>Spelling suggestions: </source>
-        <translation>철자 제안: </translation>
+        <translation>철자법 제안: </translation>
     </message>
     <message>
         <location filename="../hunspell.cc" line="779"/>
         <source>%1 Morphology</source>
-        <translation>%1 어형 사전</translation>
+        <translation>%1 철자법사전</translation>
     </message>
 </context>
 <context>
@@ -1799,7 +1799,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>로지반어</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
@@ -1921,7 +1921,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2604"/>
         <source>Skip This Release</source>
-        <translation>이 버전을 무시합니다.</translation>
+        <translation>이 버전을 무시합니다</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2727"/>
@@ -2444,7 +2444,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="14"/>
         <source>Form</source>
-        <translation>형태</translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="76"/>
@@ -2487,7 +2487,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
-        <translation>표제언어:</translation>
+        <translation>검색언어:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="219"/>
@@ -2989,7 +2989,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1194"/>
         <source>Save every</source>
-        <translation>저장 주기: </translation>
+        <translation type="unfinished">저장 간격은</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1211"/>
@@ -3177,7 +3177,7 @@ download page.</source>
     <message>
         <location filename="../preferences.cc" line="80"/>
         <source>Default</source>
-        <translation></translation>
+        <translation>기본값</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="81"/>
@@ -3289,12 +3289,12 @@ download page.</source>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation>빠른 찾기</translation>
+        <translation>빠른 검색</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>검색어 지우기</translation>
     </message>
 </context>
 <context>
@@ -3338,7 +3338,7 @@ download page.</source>
     <message>
         <location filename="../scanpopup.ui" line="135"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>음성 재생(Alt+S)</translation>
+        <translation>발음 듣기(Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="145"/>
@@ -3487,7 +3487,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="153"/>
         <source>Morphology</source>
-        <translation>어형사전</translation>
+        <translation>철자법사전</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="159"/>
@@ -3502,7 +3502,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="184"/>
         <source>Available morphology dictionaries:</source>
-        <translation>사용가능한 어형 사전:</translation>
+        <translation>사용가능한 철자법사전:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="196"/>
@@ -3512,7 +3512,7 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>각 어형 사전은 별도의 
+        <translation>각 철자법사전은 별도의 
 분리된 보조사전 역할을 하며 
 검색을 위한 어간과 오타에 
 대해서 수정된 철자를 
@@ -3560,7 +3560,7 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="427"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation>Forvo에서 발음 듣기 활성화</translation>
+        <translation>Forvo에서 발음 듣기 사용</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="457"/>
@@ -3573,8 +3573,8 @@ of the appropriate groups to use them.</source>
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
         <translation>현재 Forvo 사용을 위해서는 API 키가 필요합니다. 기본키를 사용하려면 
-여기를 비워면 됩니다.기본키는 앞으로 사용할 수 없게 될 수 있습니다. 
-자신만의 키를 얻으려면 사이트에 등록하십시오.</translation>
+여기를 비워두면 됩니다.기본키는 앞으로 사용할 수 없게 될 수 있습니다. 
+개인키를 얻으려면 사이트에 등록하십시오.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="489"/>
@@ -3586,7 +3586,14 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;여기&lt;/a&gt;서 자신만의 코드를 얻거나, 아니면 빈 칸으로 두고 기본키를 사용하십시오</translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;여기&lt;/a&gt;서 개인키를 얻거나, 아니면 비워두고 기본키를 사용하십시오..&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="509"/>
