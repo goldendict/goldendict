@@ -84,7 +84,7 @@
     <message>
         <location filename="../article_maker.cc" line="298"/>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(тасвир)</translation>
     </message>
 </context>
 <context>
@@ -175,12 +175,12 @@
     <message>
         <location filename="../articleview.cc" line="700"/>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Тасвир</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="716"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Таъриф аз луғати &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="720"/>
@@ -207,32 +207,32 @@
         <location filename="../articleview.cc" line="1156"/>
         <location filename="../articleview.cc" line="1167"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ХАТОГӢ: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1121"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Захира кардани садо</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1123"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлҳои садоӣ (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1136"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Захира кардани тасвир</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1138"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлҳои тасвирӣ (*.bmp *.jpg *.png *.tif);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1156"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Хатои захиракунии манбаъ: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1303"/>
@@ -252,12 +252,12 @@
     <message>
         <location filename="../articleview.cc" line="1329"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Захира &amp;кардани тасвир...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1337"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Захира &amp;кардани садо...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1348"/>
@@ -272,7 +272,7 @@
     <message>
         <location filename="../articleview.cc" line="1361"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Фиристодани &quot;%1&quot; ба хати ворида</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1367"/>
@@ -303,12 +303,12 @@
     <message>
         <location filename="../articleview.cc" line="1582"/>
         <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Китобхонаи басс ёфт нашудааст.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1587"/>
         <source>Bass library can&apos;t play this sound.</source>
-        <translation type="unfinished"></translation>
+        <translation>Китобхои басс ин садоро пахш карда наметавонад.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1622"/>
@@ -335,7 +335,7 @@
     <message>
         <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Интихоб кардани мақолаи ҷорӣ</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1167"/>
@@ -349,18 +349,19 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитератсияи забони белорусӣ аз лотинӣ ба кириликӣ (классикӣ ё дурустнависӣ)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитератсияи забони белорусӣ аз лотинӣ ба кириликӣ (мактабӣ ё дурустнависӣ)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитератсияи белорусӣ (ҳамворкунии фарқият байни
+классикӣ ва мактабӣ ё дурустнависӣ дар кириликӣ)</translation>
     </message>
 </context>
 <context>
@@ -424,7 +425,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groups_widgets.cc" line="838"/>
         <location filename="../groups_widgets.cc" line="1013"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Луғатҳо: </translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="690"/>
@@ -439,28 +440,28 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Азқайдгирифта</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Муттаҳид кардани гурӯҳҳо аз рӯи забони аслӣ ба &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Муттаҳид кардани гурӯҳҳо аз рӯи забони тарҷума ба &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохтани гурӯҳи тарҷумаи дусамта &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Муттаҳид кардани гурӯҳҳо бо &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -513,7 +514,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="14"/>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Лавҳаи луғат</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
@@ -528,7 +529,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="126"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Таҳрир кардани луғат</translation>
     </message>
 </context>
 <context>
@@ -803,27 +804,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Нест кардани интихобшуда</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Нусха бардоштани интихобшуда</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Таърих:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="211"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="215"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Андозаи таърих: %1 аз %2</translation>
     </message>
 </context>
 <context>
@@ -1806,7 +1807,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Лоҷбанӣ</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
@@ -1945,17 +1946,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Лавҳаи ҷустуҷӯ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Лавҳаи натиҷаҳои ҷустуҷӯ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Лавҳаи таърих</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...	F3</source>
@@ -1969,7 +1970,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="331"/>
@@ -2070,39 +2071,39 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Пешнамоиши чоп</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Файлҳоро аз нав коркард кардан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Варақаи нав</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="473"/>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳамеша дар &amp;боло</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="476"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳамеша дар боло</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="479"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="488"/>
         <location filename="../mainwindow.ui" line="491"/>
         <location filename="../mainwindow.cc" line="193"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Тугмаи меню</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -2141,7 +2142,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.ui" line="452"/>
         <location filename="../mainwindow.cc" line="3081"/>
         <source>&amp;Show</source>
-        <translation>&amp;Намоиш диҳед</translation>
+        <translation>&amp;Намоиш додан</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="455"/>
@@ -2189,17 +2190,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="62"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Номҳоро дар &amp;лавҳаи луғат намоиш додан</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="63"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="94"/>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Лавҳаи идоракунӣ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="97"/>
@@ -2388,7 +2389,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2917"/>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Равзанаи асосӣ ҳамеша дар боло ҷойгир мешавад.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3077"/>
@@ -2447,12 +2448,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3329"/>
         <source>Dictionary info</source>
-        <translation type="unfinished">Иттилооти луғат</translation>
+        <translation>Иттилооти луғат</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3330"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Таҳрир кардани луғат</translation>
     </message>
 </context>
 <context>
@@ -2491,7 +2492,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="402"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Аломат</translation>
     </message>
 </context>
 <context>
@@ -2568,12 +2569,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Мураттабсозӣ аз рӯи ном</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="250"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Мураттабсозӣ аз рӯи забон</translation>
     </message>
 </context>
 <context>
@@ -2740,7 +2741,7 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="272"/>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сабки иловагӣ:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="302"/>
@@ -3017,12 +3018,13 @@ but should support most audio file formats.</source>
         <location filename="../preferences.ui" line="828"/>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлҳои аудиоиро таввасути Китобхонаи басс пахш кунед. Интихоби беҳтарин: Барои истифодаи ин ҳолат
+шумо бояд файли &quot;bass.dll&quot;-ро (http://www.un4seen.com) ба ҷузвдони GoldenDict ҷойгир кунед.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="832"/>
         <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
+        <translation>Ба воситаи Китобхонаи басс иҷро кунед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="841"/>
@@ -3193,37 +3195,37 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1148"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Муайян кардани ҳаҷми иттилооти захирашуда дар таърих.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1151"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Андозаи калонтарини таърих:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Фосилаи вақти захиракунии таърих. Агар ба 0 танзим кунед, таърих танҳо дар хуруҷ захира мешавад.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1194"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Захира кардан баъд аз</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1211"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>дақиқа</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1236"/>
         <source>Articles</source>
-        <translation>Муколамаҳо</translation>
+        <translation>Мақолаҳо</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1242"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Барои густариш додани қисмҳои интихобии муколамаҳо ин имконотро фаъол созед</translation>
+        <translation>Барои густариш додани қисмҳои интихобии мақолаҳо ин имконотро фаъол созед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1245"/>
@@ -3337,7 +3339,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../sources.cc" line="718"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Аломат</translation>
     </message>
 </context>
 <context>
@@ -3345,17 +3347,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯ/филтри луғат (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯи фаврӣ</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Пок кардани ҷустуҷӯ</translation>
     </message>
 </context>
 <context>
@@ -3406,12 +3408,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="107"/>
         <source>Back</source>
-        <translation type="unfinished">Ба қафо</translation>
+        <translation>Ба қафо</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
-        <translation type="unfinished">Ба пеш</translation>
+        <translation>Ба пеш</translation>
     </message>
     <message>
         <source>Alt+M</source>
@@ -3457,7 +3459,7 @@ could be resized or managed in other ways.</source>
         <location filename="../scanpopup.cc" line="470"/>
         <location filename="../scanpopup.cc" line="815"/>
         <source>%1 - %2</source>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -3475,7 +3477,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="1004"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Аломат</translation>
     </message>
 </context>
 <context>
@@ -3679,7 +3681,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="648"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитератсияи белорусӣ</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="674"/>
@@ -3809,7 +3811,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">Ҳеҷ чиз</translation>
+        <translation>Ҳеҷ чиз</translation>
     </message>
 </context>
 <context>
@@ -3817,12 +3819,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Барои ҷустуҷӯ дар луғат, калима ё ибораеро ворид кунед</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Зоҳиршаванда</translation>
     </message>
 </context>
 <context>
@@ -3845,7 +3847,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="559"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Аломат</translation>
     </message>
 </context>
 <context>
@@ -3861,7 +3863,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">ОГОҲӢ: %1</translation>
+        <translation>ОГОҲӢ: %1</translation>
     </message>
 </context>
 </TS>
