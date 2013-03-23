@@ -1,0 +1,75 @@
+MainWindow {
+    background-color: #CFDDF0;
+}
+
+MainWindow #menubar {
+    background-color: #CFDDF0;
+}
+
+MainWindow #translateLine, ScanPopup #translateLine, MainWindow #wordList {
+    background-color: #fff;
+}
+
+MainWindow #centralWidget QTabBar::tab {
+    border: 1px solid #667B9B;
+    border-bottom-color: #667B9B;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 1px 3px;
+    margin-left: 1px;
+    margin-bottom: 4px;
+    background-color: #EAF0F8;
+    color: darkslategray;
+}
+
+MainWindow #centralWidget QTabBar::tab:selected {
+    background-color: #839EC7;
+    color: #fff;
+    border-bottom-style: none;
+}
+
+MainWindow #dictsPane #dictsList {
+   background: 	#EAF0F8; 
+   color: darkblue;
+}
+
+ArticleView #searchFrame QMenu {background-color: none}
+ArticleView QMenu {background-color: none} 
+
+MainWindow #dictionaryBar QToolTip {
+   background: #f14040;
+   color: white;
+   border-style: none;
+}
+
+QMainWindow::separator {
+     width:  1px; /* when vertical */
+     height: 1px; /* when horizontal */
+} 
+
+#dictsPaneTitleBar {
+  background: #A8C0E4;
+  margin: 2px;
+} 
+
+/* Colored header for the History Pane */
+#historyPaneTitleBar {
+  background: #A8C0E4;
+  margin: 2px;
+} 
+
+MainWindow #historyPane #historyList {
+   background: 	#EAF0F8; 
+   color: #52627C;
+}
+
+MainStatusBar #text
+{
+  background: #839EC7;
+  color: #fff;
+}
+
+ScanPopup #outerFrame
+{
+   background-color: #CEDDEF;
+}
