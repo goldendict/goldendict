@@ -57,5 +57,7 @@
         <file>icons/system-search.png</file>
         <file>icons/menu_button.png</file>
         <file>icons/clear.png</file>
+        <file>article-style-st-modern.css</file>
+        <file>qt-style-st-modern.css</file>
     </qresource>
 </RCC>

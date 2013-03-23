@@ -1,0 +1,68 @@
+MainWindow #translateLine, ScanPopup #translateLine, MainWindow #wordList, MainWindow #dictsPane #dictsList,
+MainWindow #historyPane #historyList
+{
+  background: white;
+}
+
+/* WARNING: hides all separators! */
+#navToolbar::separator {
+  width: 0px;
+}
+
+/* Another way to hide specific separators */
+#navToolbar #beforeOptionsSeparator, #navToolbar #beforeScanPopupSeparator, #navToolbar #afterScanPopupSeparator, #navToolbar #separatorBeforeZoom, #navToolbar #separatorBeforeSave {
+  background: rgba(0,0,0,0%);
+  width: 0px;
+  margin: -3px;
+}
+
+
+/* Hide various buttons in the toolbar: */
+#navToolbar #menuButtonXX, #navToolbar #soundButtonXX, #navToolbar #backButtonXX, #navToolbar #forwardButtonXX, #navToolbar #zoomInButtonXX, #navToolbar #zoomOutButtonXX, #navToolbar #zoomBaseButtonXX, #navToolbar #saveArticleButton, #navToolbar #printButton {
+  width:   0px;
+  height:  0px;
+  margin:  -3px;
+}
+
+/* remove the main toolbar handle */
+#navToolbar::handle, #dictionaryBar::handle {
+  image: none;
+  width:  0px;
+  margin-left: 1px;
+}
+
+#navToolbar #scanPopupButton {
+  margin-left: 5px;
+}
+
+/* Colored header for the "Found in Dictionaries:" pane */
+#dictsPaneTitleBar {
+  background: lightblue;
+  margin: 2px;
+}
+
+/* Colored header for the History Pane */
+#historyPaneTitleBar {
+  background: lightsteelblue;
+  margin: 2px;
+}
+
+/* Thin separators between the main UI and sidebars */
+QMainWindow::separator {
+     width:  1px; /* when vertical */
+     height: 1px; /* when horizontal */
+}
+
+ScanPopup #goBackButtonAA,
+/* ScanPopup #queryError,        */
+ScanPopup #goForwardButtonAA,
+ScanPopup #wordListButtonXX,
+ScanPopup #pronounceButtonAA,
+ScanPopup #sendWordButtonXX
+/* ScanPopup #showDictionaryBar, */
+/* ScanPopup #pinButton */
+{
+  width: 0px;
+  height: 0px;
+  margin: -4px;
+}
