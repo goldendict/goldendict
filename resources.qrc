@@ -60,7 +60,8 @@
         <file>article-style-st-modern.css</file>
         <file>qt-style-st-modern.css</file>
         <file>article-style-st-lingoes.css</file>
-        <file>qt-style-st-lingoes.css</file>
         <file>icons/icon32_lingoes.png</file>
+        <file>article-style-st-lingoes-blue.css</file>
+        <file>qt-style-st-lingoes-blue.css</file>
     </qresource>
 </RCC>

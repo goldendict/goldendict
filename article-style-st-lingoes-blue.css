@@ -1,0 +1,318 @@
+body { 
+	background: #EAF0F8;
+	margin: 0.4em;
+	font-family: "Arial Unicode MS", "Lucida Sans Unicode", Tahoma, "Palatino Linotype"; 
+	line-height: 120%;
+}
+ 
+a { 
+	text-decoration: none; 
+	color: darkblue; 
+}
+ 
+a:hover { 
+	text-decoration: underline; 
+}
+ 
+.gdarticle { 
+	background: #FFFEF2;
+	margin-top: 0.1em;
+	margin-bottom: 0.4em; 
+	padding: 5px;
+	padding-top: -10px;
+	border: 1px solid #C7D4DC;
+	border-radius: 8px;
+}
+ 
+.gdactivearticle { 
+	background: #FFFEF2; 
+	border: 1px solid #92B0DD; 
+}
+
+.gdarticleseparator + script + .gdactivearticle .gddictname {
+	border-top: 1px solid #92B0DD;
+	border-right: 1px solid #92B0DD;
+}
+ 
+.gddictname { 
+	font-size: 12px;
+	font-weight: normal;
+	float: right;
+	border: 0px;
+	border-top: 1px solid #C7D4DC;
+	border-right: 1px solid #C7D4DC;
+	border-top-right-radius: 8px;
+	border-bottom-left-radius: 6px;
+	margin: -6px;
+	margin-bottom: 5px;
+	margin-left: 2px;
+	padding-right: 0.4em;
+	color: #34517D;
+	background: #DDE6F5; 
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+ 
+.gdactivearticle .gddictname { 
+	border-top: 1px solid #92B0DD;
+	border-right: 1px solid #92B0DD;
+	color: darkblue;
+	background: #CFDDF0;
+}
+
+.gdarticleseparator { 
+	display: none; 
+}
+ 
+/* The 'From ' string which preceeds dictionary name in the heading */ 
+.gdfromprefix { 
+	display: none; 
+}
+ 
+/* The first headword in a (possibly) multi-headword DSL article */
+.gdarticlebody > span:first-child .dsl_headwords,
+.gdarticlebody > h3:first-child {
+	margin-top: -3px;
+	display: inline-block;
+}
+ 
+.mwiki .toc, .mwiki .metadata mbox-small plainlinks {
+	display:none 
+} 
+
+/* ÄÎÁÀÂËÅÍÈÅ ÈÊÎÍÊÈ ÑËÎÂÀÐß ÑÏÐÀÂÀ ÎÒ ÈÌÅÍÈ ÑËÎÂÀÐÈÊÀ Â ÊÀÐÒÎ×ÊÅ */	
+.gddicticon {
+	display: inline;
+	vertical-align: center;
+	float: right;
+	padding-right: 5px;
+	padding-left: 0.3em;
+}
+
+.gddicticon img {
+	border: 0;
+	height: 15px;
+	vertical-align: text-top; 
+}
+
+/* ÍÀÑÒÐÎÉÊÈ ÎÒÎÁÐÀÆÅÍÈß ÂÛÄÅËÅÍÈß */
+::selection {
+	background: #839EC7;
+	color:#fff;
+}
+
+code::selection {
+	background: #839EC7;
+}
+
+/* ÍÀÑÒÐÎÉÊÈ ÎÒÎÁÐÀÆÅÍÈß ÇÀÃÎËÎÂÊÎÂ ÑÒÀÒÅÉ */
+h3 {
+	color: inherit; 
+	font-family: Arial;
+}
+
+/******** DSL Dictionaries ****************/
+
+/* Íàñòðîéêè îòîáðàæåíèÿ çàãîëîâêîâ ñòàòåé */
+.dsl_headwords {
+	color: inherit;
+	font-family: Arial;
+}
+
+/* Íàñòðîéêè îòîáðàæåíèÿ ôîðìàòèðîâàííîãî òåêñòà */
+.dsl_b {
+	font-family: Arial;
+}
+
+.dsl_ex {
+	color: slategray;
+}
+
+.dsl_m0 {
+	text-align: left;
+	padding-left: 10px;
+	border: 1px inset gray; padding: 0.1em; padding-left: 0.1em;
+	margin-top: 1em; margin-bottom: 1em;
+	background: #FFFFDD;
+}
+
+.dsl_ref {
+	color: #0000DD; 
+}
+
+.dsl_url { 
+	color: #0000DD; 
+}
+
+/* Íàñòðîéêè îòîáðàæåíèÿ óäàðåíèÿ â ñëîâàõ */
+.dsl_stress_without_accent {
+	display: none;
+	color: green;
+}
+
+.dsl_stress_with_accent {
+	display: inline;
+	color: #DD0000;
+}
+.dsl_stress {
+	display: inline;
+	color: blue;
+}
+
+/* Íàñòðîéêè îòîáðàæåíèÿ èêîíêè çâóêà */
+.dsl_s_wav img {
+	display: none;
+}
+
+.dsl_s_wav a {
+	text-decoration: none;
+	-webkit-user-select: none;
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	-webkit-border-radius: 100px;
+	text-align: center;
+	vertical-align: text-bottom;
+}
+
+.dsl_s_wav a {
+	color: #FFF;
+	border: 1px solid #798415;
+	-webkit-box-shadow: 1px 1px #CCC, inset -1px -1px #4E7500;
+
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(191,210,85,1)), color-stop(50%,rgba(142,185,42,1)), color-stop(51%,rgba(114,170,0,1)), color-stop(100%,rgba(158,203,45,1)));
+}
+
+.dsl_s_wav a:hover {
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#e6f0a3), color-stop(50%,#d2e638), color-stop(51%,#c3d825), color-stop(100%,#dbf043));
+
+	border: 1px solid #A2B01C;
+	-webkit-box-shadow: 1px 1px #CCC, inset -1px -1px #8A991A;
+}
+
+.dsl_s_wav a:active {
+	-webkit-box-shadow: 1px 1px #CCC, inset 1px 1px #B1C421;
+}
+
+.dsl_s_wav a:after {
+	display: inline-block;
+	font-family: "Webdings";
+	content:"X";
+	width: 18px;
+	height: 18px;
+	font-size: 16px;
+	text-align: center;
+	vertical-align: center;
+	-webkit-background-clip: text;
+	color: #E6EF8F;
+	-webkit-text-stroke: 1px #51580E;
+}
+
+.dsl_s_wav a:hover:after {
+	-webkit-text-stroke: 1px #656E11;
+}
+
+
+/******** Verbix Dictionaries ****************/
+
+.sdct_h .normal {
+	font-family: Arial;
+	font-size: 10pt;
+	color:#000000;
+	font-weight: normal;
+	text-decoration:none;
+}
+
+.sdct_h .irregular {
+	font-family: Arial;
+	font-size: 10pt;
+	color:#FF0000;
+	font-weight: bold;
+	text-decoration:none;
+}
+
+.sdct_h .orto {
+	font-family: Arial;
+	font-size: 10pt;
+	color:#0000FF;
+	font-weight: normal;
+	text-decoration:none;
+}
+
+.sdct_h .archaic {
+	font-family: Arial;
+	font-size: 10pt;
+	color:#800080;
+	font-weight: normal;
+	text-decoration:none;
+}
+
+.sdct_h .notused {
+	font-family: Arial;
+	font-size: 10pt;
+	color:#808080;
+	font-weight: normal;
+	text-decoration:none;
+}
+
+.sdct_h .pronoun {
+	font-family: Arial;
+	font-size: 10pt;
+	color:#008000;
+	font-weight: normal;
+	text-decoration:none;
+}
+
+
+.sdct_h > table {
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+.sdct_h td.verbtable {
+	border: 1px solid #444444;
+}
+
+.sdct_h th {
+	background-color: #A6C9EF;
+	font-weight: bold;
+}
+
+.sdct_h .mini {
+	font-size: 8pt; font-weight: normal; color: #808080;
+}
+
+.sdct_h div.spacerline {
+	clear: both;
+	margin-left: 8px;
+	width:100%;
+	border-top: 1px solid #ccc;
+}
+
+.sdct_h div.spacer {
+	clear: both;
+}
+
+.sdct_h div.float {
+	margin-left: 8px;
+	float: left;
+}
+
+.sdct_h div.float400 {
+	margin-left: 8px;
+	float: left;
+	width: 400px;
+}
+	
+.sdct_h div.float250color {
+	margin-left: 8px;
+	float: left;
+	width: 250px;
+	border-style: dashed;
+	border-color:#0033CC;
+	border-collapse:collapse;
+	border-width:1px;
+	background-color:#eeeeee;
+	padding: 8px 8px 8px 8px;
+} 
