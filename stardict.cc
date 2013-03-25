@@ -13,6 +13,7 @@
 #include "dprintf.hh"
 #include "fsencoding.hh"
 #include "filetype.hh"
+#include "indexedzip.hh"
 
 #include <zlib.h>
 #include <map>
@@ -81,7 +82,7 @@ struct Ifo
 enum
 {
   Signature = 0x58444953, // SIDX on little-endian, XDIS on big-endian
-  CurrentFormatVersion = 8 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 9 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -97,6 +98,10 @@ struct IdxHeader
   uint32_t sameTypeSequenceSize; // That string's size. Used to read it then.
   uint32_t langFrom;  // Source language
   uint32_t langTo;    // Target language
+  uint32_t hasZipFile; // Non-zero means there's a zip file with resources present
+  uint32_t zipIndexBtreeMaxElements; // Two fields from IndexInfo of the zip
+                                     // resource index.
+  uint32_t zipIndexRootOffset;
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -114,7 +119,6 @@ bool indexIsOldOrBad( string const & indexFile )
          header.formatVersion != CurrentFormatVersion;
 }
 
-
 class StardictDictionary: public BtreeIndexing::BtreeDictionary
 {
   Mutex idxMutex;
@@ -125,6 +129,8 @@ class StardictDictionary: public BtreeIndexing::BtreeDictionary
   ChunkedStorage::Reader chunks;
   Mutex dzMutex;
   dictData * dz;
+  Mutex resourceZipMutex;
+  IndexedZip resourceZip;
 
 public:
 
@@ -185,6 +191,7 @@ private:
 
   string handleResource( char type, char const * resource, size_t size );
 
+  friend class StardictResourceRequest;
   friend class StardictArticleRequest;
   friend class StardictHeadwordsRequest;
 };
@@ -211,6 +218,23 @@ StardictDictionary::StardictDictionary( string const & id,
   openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                         idxHeader.indexRootOffset ),
              idx, idxMutex );
+
+  // Open a resource zip file, if there's one
+
+  if ( idxHeader.hasZipFile &&
+       ( idxHeader.zipIndexBtreeMaxElements ||
+         idxHeader.zipIndexRootOffset ) )
+  {
+    resourceZip.openIndex( IndexInfo( idxHeader.zipIndexBtreeMaxElements,
+                                      idxHeader.zipIndexRootOffset ),
+                           idx, idxMutex );
+
+    QString zipName = QDir::fromNativeSeparators(
+        FsEncoding::decode( getDictionaryFilenames().back().c_str() ) );
+
+    if ( zipName.endsWith( ".zip", Qt::CaseInsensitive ) ) // Sanity check
+      resourceZip.openZipFile( zipName );
+  }
 }
 
 StardictDictionary::~StardictDictionary()
@@ -919,6 +943,172 @@ Ifo::Ifo( File::Class & f ):
   }
 }
 
+//// StardictDictionary::getResource()
+
+class StardictResourceRequest;
+
+class StardictResourceRequestRunnable: public QRunnable
+{
+  StardictResourceRequest & r;
+  QSemaphore & hasExited;
+
+public:
+
+  StardictResourceRequestRunnable( StardictResourceRequest & r_,
+                               QSemaphore & hasExited_ ): r( r_ ),
+                                                          hasExited( hasExited_ )
+  {}
+
+  ~StardictResourceRequestRunnable()
+  {
+    hasExited.release();
+  }
+
+  virtual void run();
+};
+
+class StardictResourceRequest: public Dictionary::DataRequest
+{
+  friend class StardictResourceRequestRunnable;
+
+  StardictDictionary & dict;
+
+  string resourceName;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  StardictResourceRequest( StardictDictionary & dict_,
+                      string const & resourceName_ ):
+    dict( dict_ ),
+    resourceName( resourceName_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new StardictResourceRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by StardictResourceRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+
+  ~StardictResourceRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void StardictResourceRequestRunnable::run()
+{
+  r.run();
+}
+
+void StardictResourceRequest::run()
+{
+  // Some runnables linger enough that they are cancelled before they start
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  try
+  {
+    if( resourceName.at( 0 ) == '\x1E' )
+      resourceName = resourceName.erase( 0, 1 );
+    if( resourceName.at( resourceName.length() - 1 ) == '\x1F' )
+      resourceName.erase( resourceName.length() - 1, 1 );
+
+    string n =
+      FsEncoding::dirname( dict.getDictionaryFilenames()[ 0 ] ) +
+      FsEncoding::separator() +
+      "res" +
+      FsEncoding::separator() +
+      FsEncoding::encode( resourceName );
+
+    DPRINTF( "n is %s\n", n.c_str() );
+
+    try
+    {
+      Mutex::Lock _( dataMutex );
+
+      File::loadFromFile( n, data );
+    }
+    catch( File::exCantOpen )
+    {
+      // Try reading from zip file
+
+      if ( dict.resourceZip.isOpen() )
+      {
+        Mutex::Lock _( dict.resourceZipMutex );
+
+        Mutex::Lock __( dataMutex );
+
+        if ( !dict.resourceZip.loadFile( Utf8::decode( resourceName ), data ) )
+          throw; // Make it fail since we couldn't read the archive
+      }
+      else
+        throw;
+    }
+
+    if ( Filetype::isNameOfTiff( resourceName ) )
+    {
+      // Convert it
+
+      dataMutex.lock();
+
+      QImage img = QImage::fromData( (unsigned char *) &data.front(),
+                                     data.size() );
+
+      dataMutex.unlock();
+
+      if ( !img.isNull() )
+      {
+        // Managed to load -- now store it back as BMP
+
+        QByteArray ba;
+        QBuffer buffer( &ba );
+        buffer.open( QIODevice::WriteOnly );
+        img.save( &buffer, "BMP" );
+
+        Mutex::Lock _( dataMutex );
+
+        data.resize( buffer.size() );
+
+        memcpy( &data.front(), buffer.data(), data.size() );
+      }
+    }
+
+    Mutex::Lock _( dataMutex );
+
+    hasAnyData = true;
+  }
+  catch( File::Ex & )
+  {
+    // No such resource -- we don't set the hasAnyData flag then
+  }
+  catch( Utf8::exCantDecode )
+  {
+    // Failed to decode some utf8 -- probably the resource name is no good
+  }
+  catch( ... )
+  {
+  }
+
+  finish();
+}
+
+sptr< Dictionary::DataRequest > StardictDictionary::getResource( string const & name )
+  throw( std::exception )
+{
+  return new StardictResourceRequest( *this, name );
+}
+
 } // anonymous namespace
 
 static void findCorrespondingFiles( string const & ifo,
@@ -1089,156 +1279,6 @@ static void handleIdxSynFile( string const & fileName,
 }
 
 
-//// StardictDictionary::getResource()
-
-class StardictResourceRequest;
-
-class StardictResourceRequestRunnable: public QRunnable
-{
-  StardictResourceRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  StardictResourceRequestRunnable( StardictResourceRequest & r_,
-                               QSemaphore & hasExited_ ): r( r_ ),
-                                                          hasExited( hasExited_ )
-  {}
-
-  ~StardictResourceRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
-class StardictResourceRequest: public Dictionary::DataRequest
-{
-  friend class StardictResourceRequestRunnable;
-
-  StardictDictionary & dict;
-
-  string resourceName;
-
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
-
-public:
-
-  StardictResourceRequest( StardictDictionary & dict_,
-                      string const & resourceName_ ):
-    dict( dict_ ),
-    resourceName( resourceName_ )
-  {
-    QThreadPool::globalInstance()->start(
-      new StardictResourceRequestRunnable( *this, hasExited ) );
-  }
-
-  void run(); // Run from another thread by StardictResourceRequestRunnable
-
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
-
-  ~StardictResourceRequest()
-  {
-    isCancelled.ref();
-    hasExited.acquire();
-  }
-};
-
-void StardictResourceRequestRunnable::run()
-{
-  r.run();
-}
-
-void StardictResourceRequest::run()
-{
-  // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
-  {
-    finish();
-    return;
-  }
-
-  try
-  {
-    if( resourceName.at( 0 ) == '\x1E' )
-      resourceName = resourceName.erase( 0, 1 );
-    if( resourceName.at( resourceName.length() - 1 ) == '\x1F' )
-      resourceName.erase( resourceName.length() - 1, 1 );
-
-    string n =
-      FsEncoding::dirname( dict.getDictionaryFilenames()[ 0 ] ) +
-      FsEncoding::separator() +
-      "res" +
-      FsEncoding::separator() +
-      FsEncoding::encode( resourceName );
-
-    DPRINTF( "n is %s\n", n.c_str() );
-
-    {
-      Mutex::Lock _( dataMutex );
-
-      File::loadFromFile( n, data );
-    }
-
-    if ( Filetype::isNameOfTiff( resourceName ) )
-    {
-      // Convert it
-
-      dataMutex.lock();
-
-      QImage img = QImage::fromData( (unsigned char *) &data.front(),
-                                     data.size() );
-
-      dataMutex.unlock();
-
-      if ( !img.isNull() )
-      {
-        // Managed to load -- now store it back as BMP
-
-        QByteArray ba;
-        QBuffer buffer( &ba );
-        buffer.open( QIODevice::WriteOnly );
-        img.save( &buffer, "BMP" );
-
-        Mutex::Lock _( dataMutex );
-
-        data.resize( buffer.size() );
-
-        memcpy( &data.front(), buffer.data(), data.size() );
-      }
-    }
-
-    Mutex::Lock _( dataMutex );
-
-    hasAnyData = true;
-  }
-  catch( File::Ex & )
-  {
-    // No such resource -- we don't set the hasAnyData flag then
-  }
-  catch( Utf8::exCantDecode )
-  {
-    // Failed to decode some utf8 -- probably the resource name is no good
-  }
-  catch( ... )
-  {
-  }
-
-  finish();
-}
-
-sptr< Dictionary::DataRequest > StardictDictionary::getResource( string const & name )
-  throw( std::exception )
-{
-  return new StardictResourceRequest( *this, name );
-}
-
-
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
@@ -1267,6 +1307,16 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       if ( synFileName.size() )
         dictFiles.push_back( synFileName );
+
+      // See if there's a zip file with resources present. If so, include it.
+
+      string zipFileName;
+      string baseName = FsEncoding::dirname( idxFileName ) + FsEncoding::separator();
+
+      if ( File::tryPossibleName( baseName + "res.zip", zipFileName ) ||
+           File::tryPossibleName( baseName + "RES.ZIP", zipFileName ) ||
+           File::tryPossibleName( baseName + "res" + FsEncoding::separator() + "res.zip", zipFileName ) )
+        dictFiles.push_back( zipFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
 
@@ -1378,6 +1428,41 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idxHeader.langFrom = langs.first;
         idxHeader.langTo = langs.second;
 
+        // If there was a zip file, index it too
+
+        if ( zipFileName.size() )
+        {
+          DPRINTF( "Indexing zip file\n" );
+
+          idxHeader.hasZipFile = 1;
+
+          IndexedWords zipFileNames;
+          IndexedZip zipFile;
+          if( zipFile.openZipFile( QDir::fromNativeSeparators(
+                                   FsEncoding::decode( zipFileName.c_str() ) ) ) )
+              zipFile.indexFile( zipFileNames );
+
+          if( !zipFileNames.empty() )
+          {
+            // Build the resulting zip file index
+
+            IndexInfo idxInfo = BtreeIndexing::buildIndex( zipFileNames, idx );
+
+            idxHeader.zipIndexBtreeMaxElements = idxInfo.btreeMaxElements;
+            idxHeader.zipIndexRootOffset = idxInfo.rootOffset;
+          }
+          else
+          {
+            // Bad zip file -- no index (though the mark that we have one
+            // remains)
+            idxHeader.zipIndexBtreeMaxElements = 0;
+            idxHeader.zipIndexRootOffset = 0;
+          }
+        }
+        else
+          idxHeader.hasZipFile = 0;
+
+        // That concludes it. Update the header.
 
         idx.rewind();
 
