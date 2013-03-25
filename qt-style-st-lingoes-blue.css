@@ -17,8 +17,9 @@ MainWindow #centralWidget QTabBar::tab {
     border-top-right-radius: 4px;
     padding: 1px 3px;
     margin-left: 1px;
-    margin-bottom: 4px;
-    background-color: #EAF0F8;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    background-color: #CFDDF0;
     color: darkslategray;
 }
 
@@ -72,4 +73,9 @@ MainStatusBar #text
 ScanPopup #outerFrame
 {
    background-color: #CEDDEF;
+}
+
+ScanPopup #dictionaryBar
+{
+   background: #CEDDEF;
 }

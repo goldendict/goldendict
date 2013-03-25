@@ -1,40 +1,40 @@
-body { 
+body {
 	background: #EAF0F8;
-	margin: 0.4em;
+	margin: 0.3em;
 	font-family: "Arial Unicode MS", "Lucida Sans Unicode", Tahoma, "Palatino Linotype"; 
 	line-height: 120%;
 }
- 
-a { 
-	text-decoration: none; 
-	color: darkblue; 
+
+a {
+	text-decoration: none;
+	color: darkblue;
 }
  
-a:hover { 
-	text-decoration: underline; 
+a:hover {
+	text-decoration: underline;
 }
- 
-.gdarticle { 
+
+.gdarticle {
 	background: #FFFEF2;
 	margin-top: 0.1em;
-	margin-bottom: 0.4em; 
+	margin-bottom: 0.35em;
 	padding: 5px;
 	padding-top: -10px;
 	border: 1px solid #C7D4DC;
 	border-radius: 8px;
 }
- 
-.gdactivearticle { 
-	background: #FFFEF2; 
-	border: 1px solid #92B0DD; 
+
+.gdactivearticle {
+	background: #FFFEF2;
+	border: 1px solid #92B0DD;
 }
 
 .gdarticleseparator + script + .gdactivearticle .gddictname {
 	border-top: 1px solid #92B0DD;
 	border-right: 1px solid #92B0DD;
 }
- 
-.gddictname { 
+
+.gddictname {
 	font-size: 12px;
 	font-weight: normal;
 	float: right;
@@ -48,40 +48,40 @@ a:hover {
 	margin-left: 2px;
 	padding-right: 0.4em;
 	color: #34517D;
-	background: #DDE6F5; 
+	background: #DDE6F5;
 	-webkit-user-select: none;
 	user-select: none;
 	cursor: default;
 }
- 
-.gdactivearticle .gddictname { 
+
+.gdactivearticle .gddictname {
 	border-top: 1px solid #92B0DD;
 	border-right: 1px solid #92B0DD;
 	color: darkblue;
 	background: #CFDDF0;
 }
 
-.gdarticleseparator { 
-	display: none; 
+.gdarticleseparator {
+	display: none;
 }
- 
-/* The 'From ' string which preceeds dictionary name in the heading */ 
-.gdfromprefix { 
-	display: none; 
+
+/* The 'From ' string which preceeds dictionary name in the heading */
+.gdfromprefix {
+	display: none;
 }
- 
+
 /* The first headword in a (possibly) multi-headword DSL article */
 .gdarticlebody > span:first-child .dsl_headwords,
 .gdarticlebody > h3:first-child {
 	margin-top: -3px;
 	display: inline-block;
 }
- 
-.mwiki .toc, .mwiki .metadata mbox-small plainlinks {
-	display:none 
-} 
 
-/* ДОБАВЛЕНИЕ ИКОНКИ СЛОВАРЯ СПРАВА ОТ ИМЕНИ СЛОВАРИКА В КАРТОЧКЕ */	
+.mwiki .toc, .mwiki .metadata mbox-small plainlinks {
+	display:none
+}
+
+/* Dictionary icon is to the right */
 .gddicticon {
 	display: inline;
 	vertical-align: center;
@@ -96,7 +96,7 @@ a:hover {
 	vertical-align: text-top; 
 }
 
-/* НАСТРОЙКИ ОТОБРАЖЕНИЯ ВЫДЕЛЕНИЯ */
+/* Text selection */
 ::selection {
 	background: #839EC7;
 	color:#fff;
@@ -106,7 +106,7 @@ code::selection {
 	background: #839EC7;
 }
 
-/* НАСТРОЙКИ ОТОБРАЖЕНИЯ ЗАГОЛОВКОВ СТАТЕЙ */
+/* Headers */
 h3 {
 	color: inherit; 
 	font-family: Arial;
@@ -114,27 +114,19 @@ h3 {
 
 /******** DSL Dictionaries ****************/
 
-/* Настройки отображения заголовков статей */
+/* DSL headwords */
 .dsl_headwords {
 	color: inherit;
 	font-family: Arial;
 }
 
-/* Настройки отображения форматированного текста */
+/* Formatting */
 .dsl_b {
 	font-family: Arial;
 }
 
 .dsl_ex {
 	color: slategray;
-}
-
-.dsl_m0 {
-	text-align: left;
-	padding-left: 10px;
-	border: 1px inset gray; padding: 0.1em; padding-left: 0.1em;
-	margin-top: 1em; margin-bottom: 1em;
-	background: #FFFFDD;
 }
 
 .dsl_ref {
@@ -145,7 +137,7 @@ h3 {
 	color: #0000DD; 
 }
 
-/* Настройки отображения ударения в словах */
+/* Stress settings */
 .dsl_stress_without_accent {
 	display: none;
 	color: green;
@@ -160,7 +152,7 @@ h3 {
 	color: blue;
 }
 
-/* Настройки отображения иконки звука */
+/* Sound icon */
 .dsl_s_wav img {
 	display: none;
 }
