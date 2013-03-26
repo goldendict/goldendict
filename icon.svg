@@ -1,0 +1,868 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- (c) 2010 GoldenDict project. Author: Tatiana Pavlova. This artwork is licensed to community under GPLv2 or later-->
+<!--Generator: Xara Xtreme (www.xara.com), SVG filter version: 1.0.0.13-->
+<svg stroke-width="0.501" stroke-linejoin="bevel" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" overflow="visible" width="595.277pt" height="841.891pt" viewBox="0 0 595.277 841.891">
+ <defs>
+  <marker id="DefaultArrow2" markerUnits="strokeWidth" viewBox="0 0 1 1" markerWidth="1" markerHeight="1" overflow="visible" orient="auto">
+   <!-- REF_ARROW_STRAIGHT (-2) -->
+   <g transform="scale(0.0092592592)">
+    <!-- 1/108 -->
+    <path d="M -9 54 L -9 -54 L 117 0 z"/>
+   </g>
+  </marker>
+  <marker id="DefaultArrow3" markerUnits="strokeWidth" viewBox="0 0 1 1" markerWidth="1" markerHeight="1" overflow="visible" orient="auto">
+   <!-- REF_ARROW_ANGLED -->
+   <g transform="scale(0.0092592592)">
+    <path d="M -27 54 L -9 0 L -27 -54 L 135 0 z"/>
+   </g>
+  </marker>
+  <marker id="DefaultArrow4" markerUnits="strokeWidth" viewBox="0 0 1 1" markerWidth="1" markerHeight="1" overflow="visible" orient="auto">
+   <!-- REF_ARROW_ROUNDED -->
+   <g transform="scale(0.0092592592)">
+    <path d="M -9,0 L -9,-45 C -9,-51.708 2.808,-56.580 9,-54 L 117,-9 C 120.916,-7.369 126.000,-4.242 126,0 C 126,4.242 120.916,7.369 117,9 L 9,54 C 2.808,56.580 -9,51.708 -9,45 z"/>
+   </g>
+  </marker>
+  <marker id="DefaultArrow5" markerUnits="strokeWidth" viewBox="0 0 1 1" markerWidth="1" markerHeight="1" overflow="visible" orient="auto">
+   <!-- REF_ARROW_SPOT -->
+   <g transform="scale(0.0092592592)">
+    <path d="M -54, 0 C -54,29.807 -29.807,54 0,54 C 29.807,54 54,29.807 54,0 C 54,-29.807 29.807,-54 0,-54 C -29.807,-54 -54,-29.807 -54,0 z"/>
+   </g>
+  </marker>
+  <marker id="DefaultArrow6" markerUnits="strokeWidth" viewBox="0 0 1 1" markerWidth="1" markerHeight="1" overflow="visible" orient="auto">
+   <!-- REF_ARROW_DIAMOND -->
+   <g transform="scale(0.0092592592)">
+    <path d="M -63,0 L 0,63 L 63,0 L 0,-63 z"/>
+   </g>
+  </marker>
+  <marker id="DefaultArrow7" markerUnits="strokeWidth" viewBox="0 0 1 1" markerWidth="1" markerHeight="1" overflow="visible" orient="auto">
+   <!-- REF_ARROW_FEATHER -->
+   <g transform="scale(0.0092592592)">
+    <path d="M 18,-54 L 108,-54 L 63,0 L 108,54 L 18, 54 L -36,0 z"/>
+   </g>
+  </marker>
+  <marker id="DefaultArrow8" markerUnits="strokeWidth" viewBox="0 0 1 1" markerWidth="1" markerHeight="1" overflow="visible" orient="auto">
+   <!-- REF_ARROW_FEATHER2 -->
+   <g transform="scale(0.0092592592)">
+    <path d="M -36,0 L 18,-54 L 54,-54 L 18,-18 L 27,-18 L 63,-54 L 99,-54 L 63,-18 L 72,-18 L 108,-54 L 144,-54 L 90,0 L 144,54 L 108,54 L 72,18 L 63,18 L 99,54 L 63,54 L 27,18 L 18,18 L 54,54 L 18,54 z"/>
+   </g>
+  </marker>
+  <marker id="DefaultArrow9" markerUnits="strokeWidth" viewBox="0 0 1 1" markerWidth="1" markerHeight="1" overflow="visible" orient="auto">
+   <!-- REF_ARROW_HOLLOWDIAMOND -->
+   <g transform="scale(0.0092592592)">
+    <path d="M 0,45 L -45,0 L 0, -45 L 45, 0 z M 0, 63 L-63, 0 L 0, -63 L 63, 0 z"/>
+   </g>
+  </marker>
+  <filter id="StainedFilter">
+   <feBlend mode="multiply" in2="BackgroundImage" in="SourceGraphic" result="blend"/>
+   <feComposite in="blend" in2="SourceAlpha" operator="in" result="comp"/>
+  </filter>
+  <filter id="BleachFilter">
+   <feBlend mode="screen" in2="BackgroundImage" in="SourceGraphic" result="blend"/>
+   <feComposite in="blend" in2="SourceAlpha" operator="in" result="comp"/>
+  </filter>
+  <filter id="InvertTransparencyBitmapFilter">
+   <feComponentTransfer>
+    <feFuncR type="gamma" amplitude="1.055" exponent=".416666666" offset="-0.055"/>
+    <feFuncG type="gamma" amplitude="1.055" exponent=".416666666" offset="-0.055"/>
+    <feFuncB type="gamma" amplitude="1.055" exponent=".416666666" offset="-0.055"/>
+   </feComponentTransfer>
+   <feComponentTransfer>
+    <feFuncR type="linear" slope="-1" intercept="1"/>
+    <feFuncG type="linear" slope="-1" intercept="1"/>
+    <feFuncB type="linear" slope="-1" intercept="1"/>
+    <feFuncA type="linear" slope="1" intercept="0"/>
+   </feComponentTransfer>
+   <feComponentTransfer>
+    <feFuncR type="gamma" amplitude="1" exponent="2.4" offset="0"/>
+    <feFuncG type="gamma" amplitude="1" exponent="2.4" offset="0"/>
+    <feFuncB type="gamma" amplitude="1" exponent="2.4" offset="0"/>
+   </feComponentTransfer>
+  </filter>
+  <radialGradient id="RadialGradient" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="81.842" gradientTransform="translate(290.642 395) rotate(-90.747) skewX(-0.511858) scale(1 4.51343)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <radialGradient id="RadialGradient_1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="83.086" gradientTransform="translate(290.642 405.373) rotate(-87.4049) skewX(1.4516) scale(1 4.44325)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="62.525" y2="0" gradientTransform="translate(277.334 376.092) rotate(-89.2926) skewX(-0.134618)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="30.41" y2="0" gradientTransform="translate(328.963 377.397) rotate(-146.808) skewX(3.6147)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_2" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="23.98" y2="0" gradientTransform="translate(261.809 371.74) rotate(-48.2726) skewX(-4.0347)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_3" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="29.235" y2="0" gradientTransform="translate(291.568 380.219) rotate(-91.568) skewX(0.17624)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_4" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="207.657" y2="0" gradientTransform="translate(175.453 314.385) rotate(92.3553) skewX(-1.66648)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_5" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="32.883" y2="0" gradientTransform="translate(152.334 335.763) rotate(96.3973) skewX(-2.03374)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_6" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="47.464" y2="0" gradientTransform="translate(74.063 318.554) rotate(96.2994) skewX(-1.61527)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_7" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="68.877" y2="0" gradientTransform="translate(196.074 357.9) rotate(92.2541) skewX(-3.5584)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_8" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="49.105" y2="0" gradientTransform="translate(194.642 420.926) rotate(-77.9386) skewX(3.07201)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_9" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="199.84" y2="0" gradientTransform="translate(242.831 326.92) rotate(120.656) skewX(-6.23808)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_10" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="324.851" y2="0" gradientTransform="translate(230.844 859.796) rotate(-92.1546) skewX(0.537516)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_11" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="123.846" y2="0" gradientTransform="translate(81.166 486.578) rotate(-6.73062) skewX(-0.483324)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_12" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="28.054" y2="0" gradientTransform="translate(137.988 550.559) rotate(145.849) skewX(-5.64958)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="274.616" gradientTransform="translate(216.708 365.283) rotate(87.2459) skewX(-0.452306) scale(1 0.123485)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_13" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="67.495" y2="0" gradientTransform="translate(112.342 503.282) rotate(-11.4311) skewX(-1.40495)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_14" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="14.472" y2="0" gradientTransform="translate(296.888 499.955) rotate(180) skewX(0.897113)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_15" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="56.399" y2="0" gradientTransform="translate(303.85 499.394) rotate(177.161) skewX(0.298008)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_16" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="8.24" y2="0" gradientTransform="translate(298.741 499.225) rotate(180) skewX(1.04684)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_3" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="69.066" gradientTransform="translate(243.365 465.41) rotate(-88.7074) skewX(-4.20825) scale(1 5.52512)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_17" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="46.168" y2="42.954" gradientTransform="translate(80.422 387.139)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_4" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="68.885" gradientTransform="translate(165.304 409.079) rotate(-79.8114) skewX(1.80594) scale(1 6.90028)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_18" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="45.479" y2="0" gradientTransform="translate(216.245 435.89) rotate(-78.2468) skewX(2.86014)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_5" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52.82" gradientTransform="translate(243.786 440.185) rotate(-97.5903) skewX(-10.1059) scale(1 3.29055)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <radialGradient id="RadialGradient_6" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="62.907" gradientTransform="translate(84.142 392.768) rotate(-27.9432) skewX(30.087) scale(1 0.968875)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <radialGradient id="RadialGradient_7" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="83.296" gradientTransform="translate(210.63 458.419) rotate(-90.2125) skewX(-5.20914) scale(1 2.53388)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_19" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="34.419" y2="0" gradientTransform="translate(256.644 442.459) rotate(-108.229) skewX(-16.8587)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_8" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="74.621" gradientTransform="translate(106.124 638.375) rotate(-56.9135) skewX(-6.35382) scale(1 0.977044)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_20" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="22.273" y2="0" gradientTransform="translate(208.847 372.021) rotate(102.519) skewX(3.38566)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_9" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="9.744" gradientTransform="translate(276.113 389.343) rotate(109.346) skewX(7.93526) scale(1 3.99548)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_21" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="67.133" y2="0" gradientTransform="translate(184.367 439.02) rotate(-89.1141) skewX(-4.47187)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_10" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="40.577" gradientTransform="translate(249.078 408.181) rotate(-104.627) skewX(-14.6514) scale(1 1.58841)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <radialGradient id="RadialGradient_11" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="29.855" gradientTransform="translate(77.446 384.542) rotate(-36.3955) skewX(27.4978) scale(1 1.14112)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_22" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="31.998" y2="0" gradientTransform="translate(246.509 423.523) rotate(-88.7178) skewX(-4.21934)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_23" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="296.378" y2="0" gradientTransform="translate(346.425 400.334) rotate(-176.799) skewX(8.81266)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_24" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="30.651" y2="0" gradientTransform="translate(236.571 383.503) rotate(98.427) skewX(0.628527)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_25" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="138.268" y2="0" gradientTransform="translate(215.824 379.615) rotate(-69.3608) skewX(-5.72533)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_12" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="287.695" gradientTransform="translate(256.11 331.678) rotate(93.9364) skewX(-2.05417) scale(1 0.898434)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_26" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="14.514" y2="0" gradientTransform="translate(292.972 353.324) rotate(98.7342) skewX(4.81311)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_27" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="14.984" y2="0" gradientTransform="translate(291.582 371.67) rotate(93.8688) skewX(-0.565777)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_13" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32.605" gradientTransform="translate(293.463 407.619) rotate(-88.4956) skewX(-0.298021) scale(1 0.931207)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <radialGradient id="RadialGradient_14" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="34.105" gradientTransform="translate(292.93 377.945) rotate(94.5574) skewX(-0.693699) scale(1 1.89327)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_28" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="12.119" y2="0" gradientTransform="translate(81.054 333.756) rotate(95.051) skewX(-1.10058)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_29" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="3.902" y2="0" gradientTransform="translate(79.987 336.507) rotate(94.9538) skewX(-1.71493)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_30" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="3.902" y2="0" gradientTransform="translate(79.987 336.507) rotate(94.9538) skewX(-1.71493)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_31" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="9.078" y2="0" gradientTransform="translate(73.375 352.86) rotate(-81.1032) skewX(-2.109)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_32" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="32.758" y2="0" gradientTransform="translate(81.166 344.972) rotate(101.368) skewX(-2.74897)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_15" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="49.072" gradientTransform="translate(291.793 329.517) rotate(91.935) skewX(-0.293324) scale(1 5.06171)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_33" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="50.476" y2="0" gradientTransform="translate(252.727 354.334) rotate(109.815) skewX(-17.2865)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_34" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="16.244" y2="0" gradientTransform="translate(82.682 400.629) rotate(-39.1087) skewX(26.6594)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_35" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="-21.421" y2="5.166" gradientTransform="translate(105.984 422.063)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_36" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="207.657" y2="0" gradientTransform="translate(413.677 314.385) rotate(87.6447) skewX(1.66648)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_37" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="32.882" y2="0" gradientTransform="translate(436.81 335.763) rotate(83.6286) skewX(2.06356)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_38" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="47.464" y2="0" gradientTransform="translate(515.067 318.554) rotate(83.7018) skewX(1.61647)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_39" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="68.876" y2="0" gradientTransform="translate(393.07 357.9) rotate(87.7576) skewX(3.57071)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_40" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="49.105" y2="0" gradientTransform="translate(394.488 420.926) rotate(-102.061) skewX(-3.07201)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_41" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="199.833" y2="0" gradientTransform="translate(346.313 326.92) rotate(59.3476) skewX(6.24154)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_42" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="324.851" y2="0" gradientTransform="translate(358.286 859.796) rotate(-87.8454) skewX(-0.537645)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_43" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="123.846" y2="0" gradientTransform="translate(507.964 486.578) rotate(-173.269) skewX(0.489079)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_44" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="28.066" y2="0" gradientTransform="translate(451.142 550.559) rotate(34.1345) skewX(5.63354)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_16" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="274.616" gradientTransform="translate(368.225 426.92) rotate(92.757) skewX(0.455224) scale(1 0.123485)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_45" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="67.509" y2="0" gradientTransform="translate(476.802 503.282) rotate(-168.571) skewX(1.3921)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_46" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="14.472" y2="0" gradientTransform="translate(292.242 499.955) skewX(-0.893567)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_47" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="56.4" y2="0" gradientTransform="translate(285.279 499.394) rotate(2.83851) skewX(-0.298965)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_48" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="8.226" y2="0" gradientTransform="translate(290.403 499.225) skewX(-0.959618)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_17" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="69.066" gradientTransform="translate(345.765 465.41) rotate(-91.2926) skewX(4.20825) scale(1 5.52512)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_49" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="-61.146" y2="77.878" gradientTransform="translate(519.348 383.784)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_18" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="68.885" gradientTransform="translate(423.84 409.079) rotate(-100.189) skewX(-1.80594) scale(1 6.90028)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_50" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="45.479" y2="0" gradientTransform="translate(372.885 435.89) rotate(-101.754) skewX(-2.86137)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_19" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52.822" gradientTransform="translate(345.344 440.185) rotate(-82.3947) skewX(10.121) scale(1 3.29026)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <radialGradient id="RadialGradient_20" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="62.919" gradientTransform="translate(505.002 392.768) rotate(-152.063) skewX(-30.099) scale(1 0.968738)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <radialGradient id="RadialGradient_21" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="83.296" gradientTransform="translate(378.5 458.419) rotate(-89.7875) skewX(5.20914) scale(1 2.53388)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_51" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="34.423" y2="0" gradientTransform="translate(332.486 442.459) rotate(-71.7487) skewX(16.8806)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_22" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="74.621" gradientTransform="translate(483.006 638.375) rotate(-123.087) skewX(6.35382) scale(1 0.977044)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_52" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="22.27" y2="0" gradientTransform="translate(380.296 372.021) rotate(77.5139) skewX(-3.34998)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_23" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="9.744" gradientTransform="translate(313.017 389.343) rotate(70.6539) skewX(-7.93526) scale(1 3.99548)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_53" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="67.133" y2="0" gradientTransform="translate(404.763 439.02) rotate(-90.8868) skewX(4.47101)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_24" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="40.573" gradientTransform="translate(340.066 408.181) rotate(-75.3918) skewX(14.6323) scale(1 1.58904)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <radialGradient id="RadialGradient_25" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="29.866" gradientTransform="translate(511.698 384.542) rotate(-143.62) skewX(-27.5137) scale(1 1.14053)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_54" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="31.998" y2="0" gradientTransform="translate(342.621 423.523) rotate(-91.2822) skewX(4.22072)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_55" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="296.378" y2="0" gradientTransform="translate(242.705 400.334) rotate(-3.20111) skewX(-8.81266)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_56" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="30.649" y2="0" gradientTransform="translate(352.573 383.503) rotate(81.5989) skewX(-0.600618)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_57" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="138.263" y2="0" gradientTransform="translate(373.306 379.615) rotate(-110.634) skewX(5.73348)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient id="RadialGradient_26" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="287.696" gradientTransform="translate(333.02 331.678) rotate(86.0608) skewX(2.05139) scale(1 0.898431)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </radialGradient>
+  <linearGradient id="LinearGradient_58" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="12.117" y2="0" gradientTransform="translate(508.09 333.756) rotate(85.0149) skewX(1.17444)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_59" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="3.902" y2="0" gradientTransform="translate(509.143 336.507) rotate(85.0462) skewX(1.71493)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_60" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="3.902" y2="0" gradientTransform="translate(509.143 336.507) rotate(85.0462) skewX(1.71493)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_61" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="9.078" y2="0" gradientTransform="translate(515.754 352.86) rotate(-98.8906) skewX(2.11658)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_62" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="32.761" y2="0" gradientTransform="translate(507.964 344.972) rotate(78.6081) skewX(2.71837)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_63" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="51.931" y2="0" gradientTransform="translate(336.402 353.282) rotate(70.7608) skewX(18.7503)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_64" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="16.244" y2="0" gradientTransform="translate(506.448 400.629) rotate(-140.891) skewX(-26.644)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_65" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="22.035" y2="0" gradientTransform="translate(483.146 422.063) rotate(13.5588)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_66" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="34.315" y2="0" gradientTransform="translate(295.26 412.027) rotate(-92.649)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_67" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="-22.052" y2="626.644" gradientTransform="translate(314.575 364.385)">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+ </defs>
+ <g id="Document" fill="none" stroke="black" font-family="Times New Roman" font-size="16" transform="scale(1 -1)">
+  <g id="Spread" transform="translate(0 -841.891)">
+   <g id="Layer 1">
+    <mask id="TranspMask">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient)" stroke="none"/>
+    </mask>
+    <path d="M 187.595,326.415 C 161.276,328.211 131.924,326.611 117.269,325.811 C 116.371,326.106 114.574,326.709 112.974,328.52 C 111.36,330.317 91.483,333.924 90.43,334.837 C 89.35,335.735 77.179,336.142 71.101,336.339 C 63.942,335.833 61.935,338.22 61.977,341.757 L 123.179,435.623 L 291.175,350.488 C 292.003,349.534 293.042,348.34 293.968,346.951 C 294.867,348.34 295.905,349.534 296.72,350.488 L 464.744,435.623 L 525.917,341.757 C 525.973,338.22 523.952,335.833 516.793,336.339 C 510.701,336.142 498.545,335.735 497.492,334.837 C 496.411,333.924 476.549,330.317 474.935,328.52 C 473.334,326.709 471.524,326.106 470.639,325.811 C 455.97,326.611 426.633,328.211 400.313,326.415 C 374.022,324.604 306.391,321.291 296.72,330.317 C 295.583,331.384 294.67,332.422 293.968,333.433 C 293.224,332.422 292.312,331.384 291.175,330.317 C 281.517,321.291 213.873,324.604 187.595,326.415 Z" stroke="none" stroke-width="0.5" fill="#000000" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask)"/>
+    <mask id="TranspMask_1">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_1)" stroke="none"/>
+    </mask>
+    <path d="M 187.595,333.77 C 161.276,335.904 136.219,330.443 121.551,329.489 C 120.666,329.854 118.856,330.57 117.269,332.703 C 115.655,334.837 91.483,335.553 90.43,336.62 C 89.35,337.7 77.179,335.665 71.101,335.904 C 63.942,335.314 61.935,338.136 61.977,342.319 L 123.179,453.478 L 293.421,371.909 C 294.235,370.786 295.274,369.368 296.186,367.726 C 297.113,369.368 298.137,370.786 298.966,371.909 L 464.744,453.478 L 525.917,342.319 C 525.973,338.136 523.952,335.314 516.793,335.904 C 510.701,335.665 497.296,338.037 496.229,336.984 C 487.638,336.62 476.9,335.553 475.3,333.419 C 473.685,331.285 471.903,330.57 471.004,330.205 C 456.335,331.159 426.45,336.984 400.145,334.837 C 373.825,332.703 305.675,324.155 296.018,334.837 C 294.867,336.1 293.968,337.321 293.238,338.529 C 292.508,337.321 291.61,336.1 290.459,334.837 C 280.788,324.155 213.873,331.636 187.595,333.77 Z" stroke="none" stroke-width="0.5" fill="#000000" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_1)"/>
+    <mask id="TranspMask_2">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient)" stroke="none"/>
+    </mask>
+    <path d="M 42.367,341.687 C 42.367,340.002 40.023,332.872 42.746,331.622 C 43.027,331.496 43.378,328.899 46.663,329.096 C 77.278,331.019 251.562,349.66 251.941,349.66 C 257.935,348.256 269.909,345.463 291.793,344.621 C 313.676,343.764 326.183,348.663 333.216,351.766 L 544.657,329.152 C 546.734,330.134 545.12,335.665 543.871,343.006 C 528.809,431.875 183.412,414.09 42.367,341.687 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_2)"/>
+    <path d="M 257.556,389.82 C 257.556,389.188 256.686,372.962 256.237,364.82 C 256.433,361.788 256.826,355.71 274.246,354.152 C 291.652,352.566 324.583,349.899 331.153,359.654 C 337.736,369.382 330.732,399.407 330.577,399.562 L 257.556,389.82 Z" stroke="none" fill="#bf0000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_3">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_1)" stroke="none"/>
+    </mask>
+    <path d="M 257.556,389.82 C 257.556,389.188 256.686,372.962 256.237,364.82 C 256.433,361.788 256.826,355.71 274.246,354.152 C 291.652,352.566 324.583,349.899 331.153,359.654 C 337.736,369.382 330.732,399.407 330.577,399.562 L 257.556,389.82 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_3)"/>
+    <mask id="TranspMask_4">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_2)" stroke="none"/>
+    </mask>
+    <path d="M 257.556,389.82 C 257.556,389.188 256.686,372.962 256.237,364.82 C 256.433,361.788 256.826,355.71 274.246,354.152 C 291.652,352.566 324.583,349.899 331.153,359.654 C 337.736,369.382 330.732,399.407 330.577,399.562 L 257.556,389.82 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_4)"/>
+    <mask id="TranspMask_5">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_3)" stroke="none"/>
+    </mask>
+    <path d="M 257.556,389.82 C 257.556,389.188 256.686,372.962 256.237,364.82 C 256.433,361.788 256.826,355.71 274.246,354.152 C 291.652,352.566 324.583,349.899 331.153,359.654 C 337.736,369.382 330.732,399.407 330.577,399.562 L 257.556,389.82 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_5)"/>
+    <path d="M 49.049,334.682 L 49.288,349.548 L 254.398,372.962 L 254.356,369.522 C 254.749,367.824 255.773,366.196 257.318,364.68 C 262.652,360.44 275.903,357.563 290.122,356.987 L 290.024,349 C 274.204,349.716 259.241,353.618 251.941,359.43 L 49.049,334.682 Z" stroke="none" stroke-width="0.312" fill="#000000" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <path d="M 253.724,368.933 L 272.562,597.232 L 114.616,573.931 L 48.038,347.54 L 253.724,368.933 Z" stroke="none" fill="#bf0000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_6">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_4)" stroke="none"/>
+    </mask>
+    <path d="M 253.724,368.933 L 272.562,597.232 L 114.616,573.931 L 48.038,347.54 L 253.724,368.933 Z" stroke="none" fill="#400000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_6)"/>
+    <mask id="TranspMask_7">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_5)" stroke="none"/>
+    </mask>
+    <path d="M 254.735,372.119 L 283.862,620.225 L 119.501,594.93 L 49.611,346.824 L 254.735,372.119 Z" stroke="none" fill="#fff7c8" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_7)"/>
+    <path d="M 42.339,339.623 L 43.729,346.628 L 56.629,386.395 L 109.423,354.04 C 84.016,346.572 58.356,338.922 42.339,339.623 Z" fill="#e46700" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_8">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_6)" stroke="none"/>
+    </mask>
+    <path d="M 42.339,339.623 L 43.729,346.628 L 56.629,386.395 L 109.423,354.04 C 84.016,346.572 58.356,338.922 42.339,339.623 Z" stroke="none" fill="#bf0000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_8)"/>
+    <mask id="TranspMask_9">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_7)" stroke="none"/>
+    </mask>
+    <path d="M 256.026,388.192 C 256.223,388.206 131.054,372.246 68.476,364.273 L 75.327,369.214 C 134.507,377.327 258.44,394.508 258.637,394.312 C 258.805,394.115 255.086,389.834 256.026,388.192 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_9)"/>
+    <mask id="TranspMask_10">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_8)" stroke="none"/>
+    </mask>
+    <path d="M 85.11,392.347 C 81.601,384.163 74.962,373.944 67.325,363.079 C 66.946,362.476 65.894,359.177 73.726,361.283 C 80.141,362.995 196.846,378.239 255.17,385.932 L 258.384,393.947 L 87.104,392.501 L 85.11,392.347 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_10)"/>
+    <mask id="TranspMask_11">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_9)" stroke="none"/>
+    </mask>
+    <path d="M 255.689,388.234 L 254.398,382.465 C 191.119,375.334 64.504,361.128 64.125,362.897 C 63.774,364.68 119.698,564.554 121.691,564.554 C 123.67,564.554 141.624,544.116 150.622,533.911 L 255.689,388.234 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_11)"/>
+    <path d="M 295.19,398.27 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 67.901,364.16 L 135.335,388.753 L 294.684,397.021 L 295.19,398.27 Z" fill="#ffffff" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_12">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_10)" stroke="none"/>
+    </mask>
+    <path d="M 294.754,425.783 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 85.658,429.405 L 135.686,417.221 L 294.249,424.534 L 294.754,425.783 Z" stroke="none" fill="#ffda00" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_12)"/>
+    <mask id="TranspMask_13">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_11)" stroke="none"/>
+    </mask>
+    <path d="M 295.19,402.229 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 68.294,366.533 L 132.556,383.195 L 294.684,400.994 L 295.19,402.229 Z" stroke="none" fill="#ce7e2b" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_13)"/>
+    <path d="M 107.528,554.658 L 133.96,578.366 C 126.674,577.061 113.943,577.243 113.606,574.015 L 107.528,554.658 Z" fill="#ff8200" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_14">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_12)" stroke="none"/>
+    </mask>
+    <path d="M 107.528,554.658 L 133.96,578.366 C 126.674,577.061 113.943,577.243 113.606,574.015 L 107.528,554.658 Z" stroke="none" stroke-width="0.5" fill="#bf0000" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_14)"/>
+    <path d="M 123.642,569.186 L 107.514,554.63 L 108.019,552.131 L 108.805,554.054 L 122.618,566.112 L 123.642,569.186 Z" stroke="none" stroke-width="0.5" fill="#7f0000" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_15">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_2)" stroke="none"/>
+    </mask>
+    <path d="M 294.516,399.913 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 67.901,365.339 L 135.728,387.953 L 293.996,398.663 L 294.516,399.913 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_15)"/>
+    <mask id="TranspMask_16">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_13)" stroke="none"/>
+    </mask>
+    <path d="M 295.19,400.643 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 67.901,365.746 L 131.77,389.539 L 294.684,399.407 L 295.19,400.643 Z" stroke="none" fill="#fff3ab" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_16)"/>
+    <mask id="TranspMask_17">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_14)" stroke="none"/>
+    </mask>
+    <path d="M 294.404,403.422 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 85.658,429.405 L 135.686,417.221 L 293.884,402.187 L 294.404,403.422 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_17)"/>
+    <mask id="TranspMask_18">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_15)" stroke="none"/>
+    </mask>
+    <path d="M 295.19,398.663 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 85.658,429.405 L 135.686,417.221 L 294.684,397.414 L 295.19,398.663 Z" stroke="none" fill="#ce7e2b" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_18)"/>
+    <mask id="TranspMask_19">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_16)" stroke="none"/>
+    </mask>
+    <path d="M 294.909,400.699 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 85.658,429.405 L 135.686,417.221 L 294.404,399.464 L 294.909,400.699 Z" stroke="none" fill="#7f4100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_19)"/>
+    <path d="M 85.911,398.074 C 138.943,399.674 180.408,412.434 207.416,422.723 C 244.6,434.318 276.113,434.205 291.624,419.101 C 295.007,410.946 293.842,403.254 290.922,395.8 C 278.149,394.691 265.445,392.768 254.328,389.385 L 69.712,365.396 C 79.861,377.355 83.229,382.788 85.911,398.074 Z" stroke="none" fill="#fff7c8" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_20">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_3)" stroke="none"/>
+    </mask>
+    <path d="M 85.911,398.074 C 138.943,399.674 180.408,412.434 207.416,422.723 C 244.6,434.318 276.113,434.205 291.624,419.101 C 295.007,410.946 293.842,403.254 290.922,395.8 C 278.149,394.691 265.445,392.768 254.328,389.385 L 69.712,365.396 C 79.861,377.355 83.229,382.788 85.911,398.074 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_20)"/>
+    <mask id="TranspMask_21">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_17)" stroke="none"/>
+    </mask>
+    <path d="M 294.516,400.699 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 68.294,365.746 L 130.97,382.802 L 293.996,399.464 L 294.516,400.699 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_21)"/>
+    <mask id="TranspMask_22">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_4)" stroke="none"/>
+    </mask>
+    <path d="M 85.911,398.074 C 138.943,399.674 180.408,412.434 207.416,422.723 C 244.6,434.318 276.113,434.205 291.624,419.101 C 295.007,410.946 296.874,403.506 293.954,396.067 C 281.195,394.944 265.445,392.768 254.328,389.385 L 69.712,365.396 C 79.861,377.355 83.229,382.788 85.911,398.074 Z" stroke="none" fill="#7f4100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_22)"/>
+    <mask id="TranspMask_23">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_18)" stroke="none"/>
+    </mask>
+    <path d="M 290.122,419.13 C 288.634,420.842 286.683,422.344 284.156,423.678 C 283.272,424.155 282.318,424.604 281.363,425.025 L 278.556,426.26 L 277.938,426.457 C 277.475,426.583 277.04,426.724 276.562,426.85 C 275.173,427.229 273.755,427.608 272.309,427.917 C 268.28,428.815 264.013,429.405 259.479,429.671 C 254.328,429.98 248.643,429.812 242.901,429.194 C 237.104,428.577 231.644,427.608 226.352,426.457 C 223.614,425.867 220.947,425.222 218.28,424.548 C 217.508,424.351 216.764,424.155 216.006,423.958 C 215.782,423.902 215.529,423.832 215.29,423.762 L 215.192,423.748 L 202.376,419.438 C 198.067,417.993 193.786,416.547 189.448,415.143 C 182.598,412.925 175.636,410.806 168.364,409.051 C 168.112,408.995 167.859,408.939 167.592,408.868 L 167.55,408.854 L 166.736,408.644 C 165.234,408.209 163.704,407.802 162.174,407.409 C 157.57,406.244 152.924,405.135 148.165,404.124 C 139.813,402.369 131.166,400.937 122.168,399.815 C 117.719,399.267 113.143,398.818 108.524,398.481 C 104.65,398.214 100.846,397.99 97.084,397.849 C 93.575,397.709 90.136,397.667 86.711,397.653 L 86.879,398.565 C 90.473,398.678 94.108,398.818 97.828,399.057 C 103.976,399.45 110.237,400.011 116.203,400.727 C 122.168,401.443 128.008,402.341 133.707,403.338 C 138.788,404.222 143.785,405.275 148.684,406.37 C 152.952,407.338 157.135,408.391 161.248,409.5 C 162.272,409.781 163.311,410.062 164.336,410.356 C 165.052,410.553 165.725,410.763 166.441,410.946 C 168.828,411.535 171.186,412.167 173.502,412.813 C 179.271,414.427 184.9,416.238 190.459,418.091 C 197.548,420.449 204.58,422.877 211.697,425.194 C 212.371,425.418 213.03,425.657 213.718,425.853 C 214.504,426.092 215.333,426.288 216.133,426.485 C 217.578,426.836 219.01,427.201 220.47,427.552 C 223.783,428.324 227.138,429.026 230.591,429.671 C 234.016,430.303 237.539,430.822 241.161,431.201 C 243.112,431.426 245.133,431.609 247.098,431.721 C 254.033,432.114 260.504,431.903 266.428,431.019 C 269.642,430.528 272.716,429.91 275.678,429.11 C 276.829,428.801 277.98,428.45 279.117,428.085 C 279.524,427.959 279.973,427.833 280.352,427.678 C 280.689,427.552 281.012,427.383 281.321,427.243 C 284.156,425.938 286.852,424.534 288.929,422.934 C 291.807,420.73 293.617,418.147 294.432,415.227 C 294.67,414.399 294.853,413.529 294.965,412.658 C 295.007,412.251 295.021,411.816 295.063,411.395 L 293.491,411.227 C 293.154,414.16 292.144,416.813 290.122,419.13 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_23)"/>
+    <mask id="TranspMask_24">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_5)" stroke="none"/>
+    </mask>
+    <path d="M 292.256,407.928 C 276.268,414.806 259.816,420.884 237.244,416.448 C 222.52,413.051 193.084,406.258 182.107,403.857 C 171.158,401.443 141.104,394.551 129.468,393.119 C 117.087,391.617 94.066,390.325 84.563,390.971 L 84.016,388.838 C 95.989,389.259 124.316,391.041 133.314,392.445 C 142.326,393.849 189.869,403.619 201.815,406.665 C 213.788,409.697 241.835,414.427 252.475,414.989 C 264.533,415.62 284.83,411.662 292.256,407.928 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_24)"/>
+    <mask id="TranspMask_25">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_6)" stroke="none"/>
+    </mask>
+    <path d="M 292.256,407.928 C 276.268,414.806 259.816,420.884 237.244,416.448 C 222.52,413.051 193.084,406.258 182.107,403.857 C 171.158,401.443 141.104,394.551 129.468,393.119 C 117.087,391.617 94.066,390.325 84.563,390.971 L 84.016,388.838 C 95.989,389.259 124.316,391.041 133.314,392.445 C 142.326,393.849 189.869,403.619 201.815,406.665 C 213.788,409.697 241.835,414.427 252.475,414.989 C 264.533,415.62 284.83,411.662 292.256,407.928 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_25)"/>
+    <mask id="TranspMask_26">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_7)" stroke="none"/>
+    </mask>
+    <path d="M 117.719,390.522 C 113.999,390.241 110.279,390.031 106.601,389.806 C 99.148,389.371 91.75,388.964 84.254,388.459 L 84.254,388.683 C 87.483,388.922 90.697,389.146 93.94,389.357 C 101.857,389.876 109.76,390.339 117.719,390.943 C 119.88,391.112 122.028,391.266 124.105,391.505 C 125.172,391.617 126.225,391.729 127.292,391.87 C 127.531,391.898 127.741,391.912 127.966,391.954 C 128.078,391.968 128.176,391.982 128.289,391.996 C 128.303,391.996 128.331,391.996 128.345,392.01 C 128.373,392.01 128.429,392.01 128.415,392.01 C 129.383,392.136 130.38,392.319 131.335,392.487 C 134.17,392.964 136.963,393.512 139.771,394.031 C 143.14,394.635 146.453,395.323 149.793,395.968 C 154.215,396.839 158.623,397.723 162.988,398.621 C 166.905,399.421 170.765,400.222 174.625,401.05 C 176.941,401.569 179.187,402.117 181.517,402.636 C 183.974,403.169 186.486,403.773 188.971,404.334 C 195.639,405.822 202.334,407.282 209.072,408.644 C 214.659,409.795 220.26,410.89 225.945,411.886 C 230.043,412.616 234.156,413.304 238.381,413.88 C 241.512,414.301 244.754,414.68 248.025,414.862 C 253.092,415.157 257.823,415.101 262.371,414.82 C 266.638,414.553 270.751,414.062 274.667,413.346 C 278.345,412.672 281.939,411.816 285.237,410.651 C 286.444,410.258 287.652,409.795 288.718,409.233 C 289.252,408.953 289.743,408.672 290.234,408.391 L 289.94,408.223 C 289.575,408.433 289.224,408.63 288.845,408.826 C 287.736,409.416 286.487,409.893 285.237,410.328 C 283.721,410.876 282.121,411.325 280.521,411.718 C 275.018,413.094 269.081,413.992 262.778,414.371 C 259.395,414.582 255.9,414.68 252.292,414.567 C 251.225,414.539 250.187,414.497 249.134,414.427 L 245.919,414.231 L 243.337,413.978 C 237.357,413.318 231.644,412.364 225.987,411.339 C 215.333,409.416 204.917,407.198 194.628,404.966 C 190.711,404.096 186.823,403.226 182.949,402.341 C 180.282,401.724 177.587,401.092 174.864,400.502 C 170.302,399.506 165.74,398.593 161.107,397.653 C 153.345,396.081 145.582,394.579 137.764,393.133 C 136.29,392.852 134.816,392.599 133.314,392.333 C 131.349,391.982 129.383,391.659 127.334,391.392 C 124.246,390.985 120.975,390.761 117.719,390.522 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_26)"/>
+    <mask id="TranspMask_27">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_19)" stroke="none"/>
+    </mask>
+    <path d="M 281.953,412.42 C 267.017,417.235 251.52,421.502 222.856,413.08 C 242.705,417.417 262.413,417.684 281.953,412.42 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_27)"/>
+    <mask id="TranspMask_28">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_8)" stroke="none"/>
+    </mask>
+    <path d="M 294.754,425.783 L 294.333,617.853 C 262.652,651.093 247.463,650.531 198.853,623.159 C 175.888,610.441 155.226,600.727 132.472,602.398 L 85.658,429.405 L 135.686,417.221 L 294.249,424.534 L 294.754,425.783 Z" stroke="none" fill="#edbc00" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_28)"/>
+    <mask id="TranspMask_29">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_20)" stroke="none"/>
+    </mask>
+    <path d="M 85.911,398.074 C 138.943,399.674 180.408,412.434 207.416,422.723 C 244.6,434.318 276.113,434.205 291.624,419.101 C 295.007,410.946 297.618,403.52 294.698,396.081 C 281.925,394.972 265.445,392.768 254.328,389.385 L 69.712,365.396 C 79.861,377.355 83.229,382.788 85.911,398.074 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_29)"/>
+    <mask id="TranspMask_30">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_9)" stroke="none"/>
+    </mask>
+    <path d="M 85.911,398.074 C 138.943,399.674 180.408,412.434 207.416,422.723 C 244.6,434.318 276.113,434.205 291.624,419.101 C 295.007,410.946 293.842,403.254 290.922,395.8 C 278.149,394.691 265.445,392.768 254.328,389.385 L 69.712,365.396 C 79.861,377.355 83.229,382.788 85.911,398.074 Z" stroke="none" fill="#7f4100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_30)"/>
+    <mask id="TranspMask_31">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_21)" stroke="none"/>
+    </mask>
+    <path d="M 293,402.72 C 280.212,404.587 267.817,408.054 252.755,407.114 C 239.125,406.286 181.503,395.842 163.48,392.108 C 145.512,388.402 103.092,382.493 81.054,381.538 L 79.65,379.868 C 93.392,381.412 120.849,384.472 136.725,386.704 C 152.615,388.936 230.773,403.871 243.252,404.615 C 263.789,405.85 284.704,403.492 291.961,401.85 L 293,402.72 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_31)"/>
+    <mask id="TranspMask_32">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_10)" stroke="none"/>
+    </mask>
+    <path d="M 293,402.72 C 280.212,404.587 267.817,408.054 252.755,407.114 C 239.125,406.286 181.503,395.842 163.48,392.108 C 145.512,388.402 103.092,382.493 81.054,381.538 L 79.65,379.868 C 93.392,381.412 120.849,384.472 136.725,386.704 C 152.615,388.936 230.773,403.871 243.252,404.615 C 263.789,405.85 284.704,403.492 291.961,401.85 L 293,402.72 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_32)"/>
+    <mask id="TranspMask_33">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_11)" stroke="none"/>
+    </mask>
+    <path d="M 293,402.72 C 280.212,404.587 267.817,408.054 252.755,407.114 C 239.125,406.286 181.503,395.842 163.48,392.108 C 145.512,388.402 103.092,382.493 81.054,381.538 L 79.65,379.868 C 93.392,381.412 120.849,384.472 136.725,386.704 C 152.615,388.936 230.773,403.871 243.252,404.615 C 263.789,405.85 284.704,403.492 291.961,401.85 L 293,402.72 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_33)"/>
+    <mask id="TranspMask_34">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_22)" stroke="none"/>
+    </mask>
+    <path d="M 80.675,379.629 L 80.661,379.868 C 90.136,381.019 99.541,382.268 109.016,383.447 C 112.469,383.868 115.894,384.318 119.333,384.711 C 123.881,385.23 128.541,385.735 132.991,386.367 C 139.546,387.251 146.074,388.304 152.531,389.357 C 156.601,390.031 160.7,390.718 164.771,391.378 C 166.947,391.757 169.151,392.108 171.354,392.487 C 173.684,392.894 176.001,393.273 178.345,393.652 C 178.962,393.75 179.594,393.835 180.212,393.947 C 181.77,394.228 183.216,394.494 184.774,394.803 C 189.294,395.702 193.828,396.67 198.348,397.597 C 207.71,399.478 217.185,401.316 226.955,402.832 C 230.422,403.366 233.904,403.871 237.455,404.264 C 240.375,404.601 243.463,404.91 246.453,405.078 C 250.018,405.261 253.387,405.219 256.742,405.149 C 259.311,405.106 261.823,405.022 264.35,404.91 C 269.628,404.657 274.878,404.306 279.959,403.801 C 283.062,403.492 286.094,403.127 289.041,402.594 C 290.066,402.411 291.049,402.187 292.045,401.962 L 291.849,401.752 C 291.386,401.864 290.908,401.962 290.417,402.06 C 289.013,402.355 287.581,402.552 286.122,402.776 C 284.479,403.015 282.795,403.211 281.068,403.366 C 276.576,403.815 271.972,404.124 267.326,404.363 C 263.746,404.545 260.153,404.657 256.489,404.713 C 255.001,404.727 253.471,404.742 251.927,404.742 C 251.534,404.727 251.141,404.727 250.734,404.742 C 250.552,404.727 250.355,404.727 250.173,404.727 C 250.131,404.713 250.088,404.713 250.046,404.727 C 250.004,404.727 249.92,404.713 249.962,404.727 C 248.994,404.699 247.983,404.671 247,404.615 C 244.221,404.475 241.385,404.194 238.676,403.899 C 235.658,403.548 232.71,403.155 229.791,402.72 C 219.459,401.176 209.395,399.211 199.513,397.204 C 195.512,396.403 191.498,395.575 187.525,394.747 C 185.967,394.438 184.409,394.115 182.865,393.835 C 181.98,393.638 181.012,393.442 180.071,393.315 C 177.531,392.894 174.99,392.501 172.421,392.08 C 168.364,391.392 164.336,390.733 160.279,390.059 C 153.289,388.894 146.242,387.771 139.125,386.718 C 135.532,386.199 131.896,385.665 128.218,385.258 C 122.758,384.64 117.283,384.051 111.921,383.391 C 101.506,382.128 91.076,380.864 80.675,379.629 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_34)"/>
+    <mask id="TranspMask_35">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_23)" stroke="none"/>
+    </mask>
+    <path d="M 76.758,373.509 L 76.8,373.748 C 77.544,373.734 78.288,373.748 79.018,373.776 C 80.843,373.846 82.654,373.944 84.563,374.099 C 88.493,374.435 92.382,375.011 95.989,375.601 C 97.547,375.867 99.204,376.078 100.832,376.316 C 103.724,376.752 106.601,377.145 109.521,377.58 C 112.427,378.015 115.318,378.408 118.196,378.815 C 121.438,379.278 124.667,379.756 127.924,380.205 C 130.352,380.528 132.78,380.893 135.223,381.229 C 140.782,382.015 146.354,382.816 151.899,383.588 C 170.596,386.213 189.294,388.809 208.005,391.378 C 221.621,393.273 235.321,395.14 248.867,397.035 C 254.65,397.835 260.953,398.313 266.849,398.565 C 275.173,398.902 283.132,398.762 291.554,399.211 L 291.54,399 C 284.957,398.579 278.64,398.537 272.253,398.383 C 269.965,398.327 267.663,398.256 265.333,398.116 C 262.82,397.962 260.209,397.793 257.654,397.569 C 254.145,397.26 250.762,396.825 247.435,396.361 C 243.968,395.828 240.403,395.365 236.936,394.859 C 231.363,394.073 225.762,393.287 220.189,392.515 C 213.087,391.519 205.942,390.536 198.783,389.511 C 182.963,387.293 167.073,385.132 151.225,382.928 C 137.427,381.005 123.726,379.124 109.97,377.215 C 106.012,376.681 102.011,376.12 98.053,375.544 C 97.281,375.446 96.495,375.32 95.751,375.222 C 95.386,375.165 95.049,375.081 94.698,375.053 C 88.999,374.141 82.528,373.467 76.758,373.509 Z" stroke="none" stroke-width="0.5" fill="#402100" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_35)"/>
+    <mask id="TranspMask_36">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_24)" stroke="none"/>
+    </mask>
+    <path d="M 80.492,372.583 C 79.229,372.526 77.952,372.47 76.73,372.484 L 76.758,372.597 C 77.797,372.583 78.85,372.639 79.903,372.681 C 83.468,372.835 87.216,373.228 90.655,373.691 C 92.452,373.958 94.277,374.253 95.975,374.506 C 100.327,375.165 104.776,375.825 109.226,376.457 C 115.346,377.327 121.396,378.197 127.502,379.082 C 135.279,380.205 143.056,381.286 150.804,382.394 C 167.663,384.795 184.535,387.167 201.366,389.539 C 208.426,390.522 215.487,391.547 222.477,392.501 C 229.314,393.442 236.164,394.452 242.986,395.393 C 245.049,395.674 247.042,395.968 249.12,396.263 C 254.875,397.021 261.093,397.597 267.017,397.863 C 275.257,398.242 283.216,398.214 291.54,398.734 L 291.512,398.621 C 284.957,398.186 278.64,398.102 272.253,397.891 C 269.965,397.821 267.663,397.737 265.333,397.583 C 262.792,397.428 260.195,397.246 257.626,397.007 C 254.117,396.684 250.734,396.235 247.393,395.786 C 245.961,395.561 244.516,395.379 243.084,395.168 C 241.049,394.859 239.041,394.579 237.02,394.298 C 231.517,393.526 226.015,392.726 220.526,391.954 C 196.888,388.613 173.165,385.272 149.456,381.917 C 136.163,380.036 122.884,378.183 109.675,376.316 C 105.745,375.755 101.857,375.193 97.954,374.632 C 96.831,374.464 95.708,374.267 94.656,374.141 C 90.613,373.495 86.458,372.976 82.106,372.681 C 81.559,372.639 81.012,372.611 80.492,372.583 Z" stroke="none" stroke-width="0.5" fill="#402100" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_36)"/>
+    <mask id="TranspMask_37">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_25)" stroke="none"/>
+    </mask>
+    <path d="M 254.356,373.341 L 49.877,347.428 C 49.611,346.965 49.049,346.066 49.835,344.27 C 50.621,342.473 186.936,359.767 255.086,368.385 L 254.356,373.341 Z" stroke="none" fill="#bf0000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_37)"/>
+    <mask id="TranspMask_38">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_12)" stroke="none"/>
+    </mask>
+    <path d="M 51.478,345.21 L 51.393,346.052 L 102.18,352.832 L 152.952,359.977 L 203.696,367.108 L 254.482,373.874 L 254.959,369.551 L 204.103,363.276 L 153.218,357.366 L 102.334,351.457 L 51.478,345.21 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_38)"/>
+    <path d="M 273.334,357.577 C 267.761,358.714 262.511,360.483 257.711,363.262 L 258.286,364.652 C 260.462,363.739 262.722,363.023 265.024,362.434 C 267.368,361.858 269.768,361.367 272.239,361.044 C 277.615,360.286 283.258,359.991 288.985,359.963 C 291.175,359.963 293.309,359.991 295.47,359.991 C 300.046,359.991 304.566,360.047 309.016,360.258 C 312.287,360.412 315.473,360.707 318.561,361.213 C 320.877,361.563 323.151,362.083 325.257,362.855 C 326.408,363.262 327.517,363.767 328.57,364.469 C 328.991,364.764 329.412,365.059 329.777,365.424 L 330.788,364.273 C 330.31,363.809 329.861,363.318 329.342,362.911 C 327.292,361.213 324.934,360.16 322.464,359.289 C 321.074,358.798 319.614,358.377 318.14,358.04 C 314.589,357.226 310.855,356.679 307.037,356.342 C 303.71,356.061 300.299,355.921 296.86,355.892 L 293.435,355.892 C 286.444,355.794 279.693,356.271 273.334,357.577 Z" stroke="none" stroke-width="0.5" fill="#bf0000" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_39">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_26)" stroke="none"/>
+    </mask>
+    <path d="M 273.446,358.377 C 267.916,359.416 262.666,361.03 257.851,363.613 L 258.132,364.301 C 262.497,362.279 267.214,361.086 272.099,360.258 C 277.503,359.332 283.188,358.995 288.985,358.953 C 291.161,358.924 293.309,358.967 295.47,358.967 C 300.074,358.967 304.637,359.079 309.086,359.332 C 313.62,359.626 318.126,360.132 322.281,361.269 C 323.853,361.704 325.411,362.251 326.843,362.953 C 327.994,363.529 329.075,364.202 330.03,365.143 L 330.535,364.567 C 330.184,364.23 329.847,363.894 329.496,363.571 C 327.306,361.746 324.667,360.665 322.029,359.837 C 317.326,358.377 312.217,357.675 306.995,357.31 C 303.668,357.058 300.271,356.931 296.832,356.917 L 293.421,356.917 C 286.515,356.833 279.791,357.212 273.446,358.377 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_39)"/>
+    <path d="M 257.472,381.089 C 279.749,389.638 304.173,390.059 330.086,382.296 C 330.493,381.173 330.886,380.05 329.089,378.941 C 305.647,385.314 282.598,386.325 258.834,378.127 C 257.191,378.927 257.051,379.952 257.472,381.089 Z" stroke="none" fill="#ff8200" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_40">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_27)" stroke="none"/>
+    </mask>
+    <path d="M 257.472,381.089 C 279.749,389.638 304.173,390.059 330.086,382.296 C 330.493,381.173 330.886,380.05 329.089,378.941 C 305.647,385.314 282.598,386.325 258.834,378.127 C 257.191,378.927 257.051,379.952 257.472,381.089 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_40)"/>
+    <mask id="TranspMask_41">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_13)" stroke="none"/>
+    </mask>
+    <path d="M 258.202,380.008 C 280.507,388.557 304.286,388.978 330.198,381.215 C 330.619,380.092 330.746,381.005 328.949,379.896 C 305.521,386.269 282.458,387.658 258.707,379.475 C 257.051,380.247 257.809,378.885 258.202,380.008 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_41)"/>
+    <mask id="TranspMask_42">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_14)" stroke="none"/>
+    </mask>
+    <path d="M 257.654,379.559 C 279.468,388.655 302.966,389.932 328.738,380.64 L 374.275,374.73 C 367.102,412.981 355.156,445.323 293.94,416.364 C 249.162,442.052 210.771,395.21 218.126,373.649 L 257.654,379.559 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_42)"/>
+    <path d="M 109.296,341.139 C 109.731,345.589 110.237,349.997 107.556,355.598 L 46.859,347.4 L 43.364,345.814 C 42.62,341.897 40.823,333.391 45.343,332.97 C 49.863,332.577 89.237,339.357 109.296,341.139 Z" fill="#e46700" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_43">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_28)" stroke="none"/>
+    </mask>
+    <path d="M 109.296,341.139 C 109.731,345.589 110.237,349.997 107.556,355.598 L 46.859,347.4 L 43.364,345.814 C 42.62,341.897 40.823,333.391 45.343,332.97 C 49.863,332.577 89.237,339.357 109.296,341.139 Z" fill="#400000" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_43)"/>
+    <mask id="TranspMask_44">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_29)" stroke="none"/>
+    </mask>
+    <path d="M 109.296,341.139 C 109.731,345.589 110.237,349.997 107.556,355.598 L 46.859,347.4 L 43.364,345.814 C 42.62,341.897 40.823,333.391 45.343,332.97 C 49.863,332.577 89.237,339.357 109.296,341.139 Z" stroke="none" fill="#ffba00" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_44)"/>
+    <mask id="TranspMask_45">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_30)" stroke="none"/>
+    </mask>
+    <path d="M 109.296,341.139 C 109.731,345.589 110.237,349.997 107.556,355.598 L 46.859,347.4 L 43.364,345.814 C 42.62,341.897 40.823,333.391 45.343,332.97 C 49.863,332.577 89.237,339.357 109.296,341.139 Z" fill="#e46700" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_45)"/>
+    <mask id="TranspMask_46">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_31)" stroke="none"/>
+    </mask>
+    <path d="M 109.296,341.139 C 109.731,345.589 110.237,349.997 107.556,355.598 L 46.859,347.4 L 43.364,345.814 C 42.62,341.897 40.823,333.391 45.343,332.97 C 49.863,332.577 89.237,339.357 109.296,341.139 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_46)"/>
+    <mask id="TranspMask_47">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_32)" stroke="none"/>
+    </mask>
+    <path d="M 46.242,347.161 L 46.2,347.582 L 60.868,349.8 L 75.579,351.878 L 90.304,353.717 L 105.029,355.387 L 105.071,354.952 L 90.402,352.734 L 75.706,350.685 L 60.981,348.846 L 46.242,347.161 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_47)"/>
+    <mask id="TranspMask_48">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_15)" stroke="none"/>
+    </mask>
+    <path d="M 69.431,333.335 L 69.333,334.079 C 72.421,334.5 75.523,334.879 78.611,335.286 C 81.713,335.707 84.802,336.086 87.89,336.507 C 90.992,336.9 94.08,337.293 97.168,337.7 C 100.27,338.107 103.359,338.5 106.447,338.908 C 109.549,339.315 112.637,339.736 115.725,340.115 C 118.828,340.522 121.916,340.901 125.004,341.308 C 128.106,341.701 131.194,342.094 134.282,342.515 C 137.385,342.894 140.473,343.301 143.561,343.68 C 146.663,344.087 149.751,344.48 152.839,344.887 C 155.942,345.294 159.03,345.673 162.118,346.081 C 165.22,346.474 168.308,346.867 171.396,347.26 C 174.499,347.653 177.587,348.046 180.689,348.453 C 183.777,348.832 186.865,349.239 189.968,349.604 C 193.056,349.997 196.158,350.404 199.26,350.783 C 202.348,351.19 205.436,351.569 208.539,351.976 C 211.627,352.369 214.715,352.762 217.817,353.141 C 220.905,353.52 223.993,353.927 227.096,354.32 C 230.184,354.685 233.272,355.092 236.374,355.471 C 239.462,355.85 242.55,356.257 245.653,356.636 C 248.741,357.015 251.857,357.422 254.959,357.801 C 254.959,357.801 255.001,357.787 255.043,357.787 C 255.31,357.83 255.619,357.633 255.858,357.535 C 256.784,357.086 257.711,356.664 258.665,356.229 C 260.771,355.317 262.918,354.475 265.094,353.689 C 270.962,351.597 277.11,350.123 283.595,349.407 C 285.63,349.169 287.694,349.042 289.785,348.944 C 293.238,348.818 296.762,348.944 300.089,349.281 C 307.107,349.941 313.761,351.401 320.105,353.52 C 323.895,354.798 327.601,356.257 331.237,357.886 C 331.433,357.998 331.63,358.096 331.897,358.138 C 331.967,358.166 332.079,358.209 332.163,358.18 C 341.975,357.1 351.787,355.963 361.613,354.84 C 366.751,354.264 371.2,353.731 376.338,353.155 C 410.743,349.239 445.106,345.224 479.455,341.238 L 479.37,340.452 C 454.791,343.049 430.198,345.659 405.633,348.298 L 332.205,356.229 L 328.921,354.769 C 320.765,351.33 312.231,348.734 302.98,347.554 C 298.404,346.951 293.477,346.712 288.634,346.951 C 285.813,347.077 283.062,347.372 280.366,347.751 C 277.391,348.172 274.485,348.79 271.663,349.548 C 267.228,350.699 262.932,352.187 258.777,353.969 L 254.917,355.752 L 171.593,345.561 C 137.567,341.434 103.499,337.378 69.431,333.335 Z" stroke="none" stroke-width="0.5" fill="#bf0000" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_48)"/>
+    <mask id="TranspMask_49">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_33)" stroke="none"/>
+    </mask>
+    <path d="M 255.605,372.821 L 251.745,372.723 L 252.264,376.12 L 253.106,379.531 L 253.949,382.9 L 254.482,386.311 L 255.254,386.339 L 255.184,382.956 L 255.437,379.573 L 255.675,376.19 L 255.605,372.821 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_49)"/>
+    <mask id="TranspMask_50">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_34)" stroke="none"/>
+    </mask>
+    <path d="M 86.149,398.186 C 85.518,393.357 84.816,388.543 82.359,384.079 L 117.045,399.534 C 105.38,398.186 94.361,397.274 86.149,398.186 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_50)"/>
+    <mask id="TranspMask_51">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_35)" stroke="none"/>
+    </mask>
+    <path d="M 131.77,602.159 L 86.542,397.47 C 81.91,381.819 77.418,370.393 67.101,364.553 L 131.77,602.159 Z" fill="#7f4100" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_51)"/>
+    <path d="M 540.081,334.682 L 539.856,349.548 L 334.732,372.962 L 334.774,369.522 C 334.381,367.824 333.356,366.196 331.812,364.68 C 328.584,358.896 308.749,353.997 289.827,356.215 L 289.603,348.649 C 305.633,348.425 329.889,353.618 337.189,359.43 L 540.081,334.682 Z" stroke="none" stroke-width="0.312" fill="#000000" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <path d="M 335.406,368.933 L 316.568,597.232 L 474.513,573.931 L 541.091,347.54 L 335.406,368.933 Z" stroke="none" fill="#bf0000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_52">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_36)" stroke="none"/>
+    </mask>
+    <path d="M 335.406,368.933 L 316.568,597.232 L 474.513,573.931 L 541.091,347.54 L 335.406,368.933 Z" stroke="none" fill="#400000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_52)"/>
+    <mask id="TranspMask_53">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_37)" stroke="none"/>
+    </mask>
+    <path d="M 334.395,372.119 L 305.268,620.225 L 469.629,594.93 L 539.533,346.824 L 334.395,372.119 Z" stroke="none" fill="#fff7c8" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_53)"/>
+    <path d="M 546.79,339.623 L 545.401,346.628 L 532.501,386.395 L 479.707,354.04 C 505.128,346.572 530.774,338.922 546.79,339.623 Z" fill="#e46700" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_54">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_38)" stroke="none"/>
+    </mask>
+    <path d="M 546.79,339.623 L 545.401,346.628 L 532.501,386.395 L 479.707,354.04 C 505.128,346.572 530.774,338.922 546.79,339.623 Z" stroke="none" fill="#bf0000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_54)"/>
+    <mask id="TranspMask_55">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_39)" stroke="none"/>
+    </mask>
+    <path d="M 333.104,388.192 C 332.907,388.206 458.09,372.246 520.667,364.273 L 513.803,369.214 C 454.623,377.327 330.703,394.508 330.507,394.312 C 330.338,394.115 334.058,389.834 333.104,388.192 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_55)"/>
+    <mask id="TranspMask_56">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_40)" stroke="none"/>
+    </mask>
+    <path d="M 504.019,392.347 C 507.529,384.163 514.168,373.944 521.804,363.079 C 522.183,362.476 523.236,359.177 515.404,361.283 C 508.989,362.995 392.284,378.239 333.974,385.932 L 330.76,393.947 L 502.026,392.501 L 504.019,392.347 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_56)"/>
+    <mask id="TranspMask_57">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_41)" stroke="none"/>
+    </mask>
+    <path d="M 333.441,388.234 L 334.732,382.465 C 398.011,375.334 524.626,361.128 525.005,362.897 C 525.356,364.68 469.432,564.554 467.439,564.554 C 465.46,564.554 447.506,544.116 438.508,533.911 L 333.441,388.234 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_57)"/>
+    <path d="M 293.94,398.27 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 521.229,364.16 L 453.795,388.753 L 294.446,397.021 L 293.94,398.27 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_58">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_42)" stroke="none"/>
+    </mask>
+    <path d="M 294.375,425.783 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 503.472,429.405 L 453.444,417.221 L 294.881,424.534 L 294.375,425.783 Z" stroke="none" fill="#ffda00" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_58)"/>
+    <mask id="TranspMask_59">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_43)" stroke="none"/>
+    </mask>
+    <path d="M 293.94,402.229 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 520.836,366.533 L 456.574,383.195 L 294.446,400.994 L 293.94,402.229 Z" stroke="none" fill="#ce7e2b" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_59)"/>
+    <path d="M 481.602,554.658 L 455.184,578.366 C 462.456,577.061 475.187,577.243 475.524,574.015 L 481.602,554.658 Z" fill="#ff8200" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_60">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_44)" stroke="none"/>
+    </mask>
+    <path d="M 481.602,554.658 L 455.184,578.366 C 462.456,577.061 475.187,577.243 475.524,574.015 L 481.602,554.658 Z" stroke="none" stroke-width="0.5" fill="#bf0000" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_60)"/>
+    <path d="M 465.488,569.186 L 481.616,554.63 L 481.111,552.131 L 480.339,554.054 L 466.512,566.112 L 465.488,569.186 Z" stroke="none" stroke-width="0.5" fill="#7f0000" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_61">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_16)" stroke="none"/>
+    </mask>
+    <path d="M 294.628,399.913 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 521.229,365.339 L 453.402,387.953 L 295.133,398.663 L 294.628,399.913 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_61)"/>
+    <mask id="TranspMask_62">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_45)" stroke="none"/>
+    </mask>
+    <path d="M 293.94,400.643 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 521.229,365.746 L 457.374,389.539 L 294.446,399.407 L 293.94,400.643 Z" stroke="none" fill="#fff3ab" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_62)"/>
+    <mask id="TranspMask_63">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_46)" stroke="none"/>
+    </mask>
+    <path d="M 294.74,403.422 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 503.472,429.405 L 453.444,417.221 L 295.246,402.187 L 294.74,403.422 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_63)"/>
+    <mask id="TranspMask_64">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_47)" stroke="none"/>
+    </mask>
+    <path d="M 293.94,398.663 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 503.472,429.405 L 453.444,417.221 L 294.446,397.414 L 293.94,398.663 Z" stroke="none" fill="#ce7e2b" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_64)"/>
+    <mask id="TranspMask_65">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_48)" stroke="none"/>
+    </mask>
+    <path d="M 294.221,400.699 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 503.472,429.405 L 453.444,417.221 L 294.74,399.464 L 294.221,400.699 Z" stroke="none" fill="#7f4100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_65)"/>
+    <path d="M 503.219,398.074 C 450.187,399.674 408.736,412.434 381.714,422.723 C 344.53,434.318 313.017,434.205 297.506,419.101 C 294.123,410.946 295.288,403.254 298.208,395.8 C 310.981,394.691 323.685,392.768 334.802,389.385 L 519.418,365.396 C 509.269,377.355 505.9,382.788 503.219,398.074 Z" stroke="none" fill="#fff7c8" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_66">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_17)" stroke="none"/>
+    </mask>
+    <path d="M 503.219,398.074 C 450.187,399.674 408.736,412.434 381.714,422.723 C 344.53,434.318 313.017,434.205 297.506,419.101 C 294.123,410.946 295.288,403.254 298.208,395.8 C 310.981,394.691 323.685,392.768 334.802,389.385 L 519.418,365.396 C 509.269,377.355 505.9,382.788 503.219,398.074 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_66)"/>
+    <mask id="TranspMask_67">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_49)" stroke="none"/>
+    </mask>
+    <path d="M 294.628,400.699 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 520.836,365.746 L 458.16,382.802 L 295.133,399.464 L 294.628,400.699 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_67)"/>
+    <mask id="TranspMask_68">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_18)" stroke="none"/>
+    </mask>
+    <path d="M 503.219,398.074 C 450.187,399.674 408.736,412.434 381.714,422.723 C 344.53,434.318 313.017,434.205 297.506,419.101 C 294.123,410.946 292.256,403.506 295.176,396.067 C 307.935,394.944 323.685,392.768 334.802,389.385 L 519.418,365.396 C 509.269,377.355 505.9,382.788 503.219,398.074 Z" stroke="none" fill="#7f4100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_68)"/>
+    <mask id="TranspMask_69">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_50)" stroke="none"/>
+    </mask>
+    <path d="M 299.008,419.13 C 300.496,420.842 302.461,422.344 304.973,423.678 C 305.872,424.155 306.812,424.604 307.767,425.025 L 310.574,426.26 L 311.192,426.457 C 311.655,426.583 312.104,426.724 312.568,426.85 C 313.957,427.229 315.389,427.608 316.821,427.917 C 320.849,428.815 325.117,429.405 329.651,429.671 C 334.802,429.98 340.487,429.812 346.242,429.194 C 352.04,428.577 357.486,427.608 362.778,426.457 C 365.515,425.867 368.197,425.222 370.864,424.548 C 371.622,424.351 372.366,424.155 373.124,423.958 C 373.348,423.902 373.601,423.832 373.853,423.762 L 373.938,423.748 L 386.768,419.438 C 391.063,417.993 395.344,416.547 399.696,415.143 C 406.532,412.925 413.494,410.806 420.765,409.051 C 421.032,408.995 421.285,408.939 421.537,408.868 L 421.58,408.854 L 422.394,408.644 C 423.91,408.209 425.426,407.802 426.956,407.409 C 431.56,406.244 436.206,405.135 440.965,404.124 C 449.331,402.369 457.978,400.937 466.962,399.815 C 471.411,399.267 475.987,398.818 480.606,398.481 C 484.48,398.214 488.284,397.99 492.046,397.849 C 495.569,397.709 499.008,397.667 502.433,397.653 L 502.265,398.565 C 498.657,398.678 495.022,398.818 491.302,399.057 C 485.154,399.45 478.893,400.011 472.927,400.727 C 466.962,401.443 461.122,402.341 455.437,403.338 C 450.342,404.222 445.344,405.275 440.445,406.37 C 436.178,407.338 431.995,408.391 427.896,409.5 C 426.858,409.781 425.819,410.062 424.794,410.356 C 424.092,410.553 423.404,410.763 422.689,410.946 C 420.302,411.535 417.958,412.167 415.628,412.813 C 409.859,414.427 404.23,416.238 398.671,418.091 C 391.582,420.449 384.55,422.877 377.447,425.194 C 376.759,425.418 376.099,425.657 375.412,425.853 C 374.625,426.092 373.797,426.288 372.997,426.485 C 371.565,426.836 370.12,427.201 368.66,427.552 C 365.347,428.324 362.006,429.026 358.553,429.671 C 355.114,430.303 351.591,430.822 347.969,431.201 C 346.032,431.426 343.997,431.609 342.031,431.721 C 335.097,432.114 328.626,431.903 322.702,431.019 C 319.488,430.528 316.414,429.91 313.452,429.11 C 312.301,428.801 311.15,428.45 310.013,428.085 C 309.606,427.959 309.171,427.833 308.792,427.678 C 308.441,427.552 308.118,427.383 307.809,427.243 C 304.973,425.938 302.278,424.534 300.201,422.934 C 297.323,420.73 295.512,418.147 294.698,415.227 C 294.46,414.399 294.277,413.529 294.165,412.658 C 294.123,412.251 294.109,411.816 294.067,411.395 L 295.639,411.227 C 295.976,414.16 296.986,416.813 299.008,419.13 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_69)"/>
+    <mask id="TranspMask_70">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_19)" stroke="none"/>
+    </mask>
+    <path d="M 296.874,407.928 C 312.862,414.806 329.314,420.884 351.885,416.448 C 366.61,413.051 396.06,406.258 407.023,403.857 C 417.986,401.443 448.025,394.551 459.662,393.119 C 472.043,391.617 495.064,390.325 504.567,390.971 L 505.128,388.838 C 493.155,389.259 464.828,391.041 455.816,392.445 C 446.804,393.849 399.275,403.619 387.315,406.665 C 375.341,409.697 347.295,414.427 336.655,414.989 C 324.611,415.62 304.3,411.662 296.874,407.928 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_70)"/>
+    <mask id="TranspMask_71">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_20)" stroke="none"/>
+    </mask>
+    <path d="M 296.874,407.928 C 312.862,414.806 329.314,420.884 351.885,416.448 C 366.61,413.051 396.06,406.258 407.023,403.857 C 417.986,401.443 448.025,394.551 459.662,393.119 C 472.043,391.617 495.064,390.325 504.567,390.971 L 505.128,388.838 C 493.155,389.259 464.828,391.041 455.816,392.445 C 446.804,393.849 399.275,403.619 387.315,406.665 C 375.341,409.697 347.295,414.427 336.655,414.989 C 324.611,415.62 304.3,411.662 296.874,407.928 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_71)"/>
+    <mask id="TranspMask_72">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_21)" stroke="none"/>
+    </mask>
+    <path d="M 471.411,390.522 C 475.131,390.241 478.851,390.031 482.529,389.806 C 489.996,389.371 497.38,388.964 504.89,388.459 L 504.89,388.683 C 501.647,388.922 498.433,389.146 495.19,389.357 C 487.273,389.876 479.37,390.339 471.411,390.943 C 469.25,391.112 467.102,391.266 465.038,391.505 C 463.958,391.617 462.905,391.729 461.852,391.87 C 461.613,391.898 461.403,391.912 461.164,391.954 C 461.052,391.968 460.954,391.982 460.841,391.996 C 460.827,391.996 460.799,391.996 460.785,392.01 C 460.757,392.01 460.701,392.01 460.715,392.01 C 459.746,392.136 458.764,392.319 457.795,392.487 C 454.96,392.964 452.18,393.512 449.373,394.031 C 445.99,394.635 442.691,395.323 439.337,395.968 C 434.915,396.839 430.521,397.723 426.142,398.621 C 422.225,399.421 418.365,400.222 414.505,401.05 C 412.189,401.569 409.943,402.117 407.613,402.636 C 405.156,403.169 402.658,403.773 400.159,404.334 C 393.491,405.822 386.81,407.282 380.058,408.644 C 374.485,409.795 368.87,410.89 363.185,411.886 C 359.1,412.616 354.974,413.304 350.748,413.88 C 347.618,414.301 344.376,414.68 341.105,414.862 C 336.038,415.157 331.307,415.101 326.759,414.82 C 322.492,414.553 318.393,414.062 314.463,413.346 C 310.785,412.672 307.191,411.816 303.893,410.651 C 302.699,410.258 301.478,409.795 300.411,409.233 C 299.878,408.953 299.401,408.672 298.895,408.391 L 299.19,408.223 C 299.569,408.433 299.906,408.63 300.285,408.826 C 301.394,409.416 302.657,409.893 303.893,410.328 C 305.409,410.876 307.009,411.325 308.623,411.718 C 314.112,413.094 320.049,413.992 326.352,414.371 C 329.735,414.582 333.23,414.68 336.852,414.567 C 337.904,414.539 338.943,414.497 340.01,414.427 L 343.225,414.231 L 345.807,413.978 C 351.773,413.318 357.486,412.364 363.143,411.339 C 373.797,409.416 384.213,407.198 394.502,404.966 C 398.418,404.096 402.321,403.226 406.181,402.341 C 408.862,401.724 411.543,401.092 414.266,400.502 C 418.828,399.506 423.39,398.593 428.023,397.653 C 435.785,396.081 443.548,394.579 451.366,393.133 C 452.84,392.852 454.314,392.599 455.816,392.333 C 457.781,391.982 459.746,391.659 461.81,391.392 C 464.898,390.985 468.155,390.761 471.411,390.522 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_72)"/>
+    <mask id="TranspMask_73">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_51)" stroke="none"/>
+    </mask>
+    <path d="M 307.177,412.42 C 322.113,417.235 337.61,421.502 366.273,413.08 C 346.439,417.417 326.717,417.684 307.177,412.42 Z" stroke="none" fill="#000000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_73)"/>
+    <mask id="TranspMask_74">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_22)" stroke="none"/>
+    </mask>
+    <path d="M 294.375,425.783 L 294.797,617.853 C 326.478,651.093 341.666,650.531 390.277,623.159 C 413.242,610.441 433.904,600.727 456.658,602.398 L 503.472,429.405 L 453.444,417.221 L 294.881,424.534 L 294.375,425.783 Z" stroke="none" fill="#edbc00" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_74)"/>
+    <mask id="TranspMask_75">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_52)" stroke="none"/>
+    </mask>
+    <path d="M 503.219,398.074 C 450.187,399.674 408.736,412.434 381.714,422.723 C 344.53,434.318 313.017,434.205 297.506,419.101 C 294.123,410.946 293.912,403.099 294.432,396.249 C 307.205,395.14 323.685,392.768 334.802,389.385 L 519.418,365.396 C 509.269,377.355 505.9,382.788 503.219,398.074 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_75)"/>
+    <mask id="TranspMask_76">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_23)" stroke="none"/>
+    </mask>
+    <path d="M 503.219,398.074 C 450.187,399.674 408.736,412.434 381.714,422.723 C 344.53,434.318 313.017,434.205 297.506,419.101 C 294.123,410.946 295.288,403.254 298.208,395.8 C 310.981,394.691 323.685,392.768 334.802,389.385 L 519.418,365.396 C 509.269,377.355 505.9,382.788 503.219,398.074 Z" stroke="none" fill="#7f4100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_76)"/>
+    <mask id="TranspMask_77">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_53)" stroke="none"/>
+    </mask>
+    <path d="M 296.144,402.72 C 308.932,404.587 321.327,408.054 336.374,407.114 C 350.004,406.286 407.627,395.842 425.65,392.108 C 443.618,388.402 486.038,382.493 508.09,381.538 L 509.48,379.868 C 495.752,381.412 468.281,384.472 452.419,386.704 C 436.529,388.936 358.357,403.871 345.878,404.615 C 325.341,405.85 304.426,403.492 297.169,401.85 L 296.144,402.72 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_77)"/>
+    <mask id="TranspMask_78">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_24)" stroke="none"/>
+    </mask>
+    <path d="M 296.144,402.72 C 308.932,404.587 321.327,408.054 336.374,407.114 C 350.004,406.286 407.627,395.842 425.65,392.108 C 443.618,388.402 486.038,382.493 508.09,381.538 L 509.48,379.868 C 495.752,381.412 468.281,384.472 452.419,386.704 C 436.529,388.936 358.357,403.871 345.878,404.615 C 325.341,405.85 304.426,403.492 297.169,401.85 L 296.144,402.72 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_78)"/>
+    <mask id="TranspMask_79">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_25)" stroke="none"/>
+    </mask>
+    <path d="M 296.144,402.72 C 308.932,404.587 321.327,408.054 336.374,407.114 C 350.004,406.286 407.627,395.842 425.65,392.108 C 443.618,388.402 486.038,382.493 508.09,381.538 L 509.48,379.868 C 495.752,381.412 468.281,384.472 452.419,386.704 C 436.529,388.936 358.357,403.871 345.878,404.615 C 325.341,405.85 304.426,403.492 297.169,401.85 L 296.144,402.72 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_79)"/>
+    <mask id="TranspMask_80">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_54)" stroke="none"/>
+    </mask>
+    <path d="M 508.469,379.629 L 508.483,379.868 C 499.008,381.019 489.603,382.268 480.128,383.447 C 476.661,383.868 473.236,384.318 469.797,384.711 C 465.249,385.23 460.589,385.735 456.139,386.367 C 449.598,387.251 443.07,388.304 436.613,389.357 C 432.529,390.031 428.43,390.718 424.373,391.378 C 422.183,391.757 419.979,392.108 417.79,392.487 C 415.445,392.894 413.129,393.273 410.785,393.652 C 410.167,393.75 409.536,393.835 408.932,393.947 C 407.36,394.228 405.914,394.494 404.356,394.803 C 399.836,395.702 395.302,396.67 390.782,397.597 C 381.419,399.478 371.944,401.316 362.175,402.832 C 358.721,403.366 355.226,403.871 351.675,404.264 C 348.755,404.601 345.667,404.91 342.677,405.078 C 339.112,405.261 335.743,405.219 332.388,405.149 C 329.819,405.106 327.32,405.022 324.794,404.91 C 319.502,404.657 314.252,404.306 309.185,403.801 C 306.082,403.492 303.036,403.127 300.089,402.594 C 299.064,402.411 298.081,402.187 297.085,401.962 L 297.281,401.752 C 297.744,401.864 298.222,401.962 298.713,402.06 C 300.117,402.355 301.548,402.552 303.008,402.776 C 304.651,403.015 306.349,403.211 308.062,403.366 C 312.553,403.815 317.158,404.124 321.818,404.363 C 325.383,404.545 328.977,404.657 332.641,404.713 C 334.143,404.727 335.659,404.742 337.217,404.742 C 337.596,404.727 337.989,404.727 338.396,404.742 C 338.578,404.727 338.775,404.727 338.957,404.727 C 338.999,404.713 339.041,404.713 339.084,404.727 C 339.126,404.727 339.21,404.713 339.168,404.727 C 340.15,404.699 341.147,404.671 342.13,404.615 C 344.909,404.475 347.744,404.194 350.454,403.899 C 353.472,403.548 356.419,403.155 359.339,402.72 C 369.67,401.176 379.735,399.211 389.631,397.204 C 393.618,396.403 397.632,395.575 401.605,394.747 C 403.163,394.438 404.721,394.115 406.265,393.835 C 407.149,393.638 408.118,393.442 409.058,393.315 C 411.613,392.894 414.14,392.501 416.709,392.08 C 420.765,391.392 424.794,390.733 428.851,390.059 C 435.841,388.894 442.902,387.771 450.005,386.718 C 453.598,386.199 457.234,385.665 460.912,385.258 C 466.372,384.64 471.846,384.051 477.223,383.391 C 487.624,382.128 498.054,380.864 508.469,379.629 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_80)"/>
+    <mask id="TranspMask_81">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_55)" stroke="none"/>
+    </mask>
+    <path d="M 512.372,373.509 L 512.329,373.748 C 511.599,373.734 510.841,373.748 510.112,373.776 C 508.301,373.846 506.476,373.944 504.567,374.099 C 500.636,374.435 496.748,375.011 493.155,375.601 C 491.583,375.867 489.94,376.078 488.298,376.316 C 485.406,376.752 482.529,377.145 479.609,377.58 C 476.703,378.015 473.812,378.408 470.948,378.815 C 467.691,379.278 464.477,379.756 461.22,380.205 C 458.778,380.528 456.349,380.893 453.907,381.229 C 448.348,382.015 442.79,382.816 437.231,383.588 C 418.534,386.213 399.836,388.809 381.125,391.378 C 367.509,393.273 353.808,395.14 340.277,397.035 C 334.479,397.835 328.177,398.313 322.281,398.565 C 313.957,398.902 305.998,398.762 297.576,399.211 L 297.59,399 C 304.173,398.579 310.49,398.537 316.877,398.383 C 319.165,398.327 321.481,398.256 323.797,398.116 C 326.31,397.962 328.921,397.793 331.475,397.569 C 334.985,397.26 338.368,396.825 341.694,396.361 C 345.162,395.828 348.727,395.365 352.208,394.859 C 357.767,394.073 363.368,393.287 368.94,392.515 C 376.043,391.519 383.188,390.536 390.347,389.511 C 406.167,387.293 422.057,385.132 437.905,382.928 C 451.703,381.005 465.403,379.124 479.16,377.215 C 483.132,376.681 487.119,376.12 491.077,375.544 C 491.849,375.446 492.649,375.32 493.379,375.222 C 493.744,375.165 494.081,375.081 494.432,375.053 C 500.131,374.141 506.602,373.467 512.372,373.509 Z" stroke="none" stroke-width="0.5" fill="#402100" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_81)"/>
+    <mask id="TranspMask_82">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_56)" stroke="none"/>
+    </mask>
+    <path d="M 508.652,372.583 C 509.901,372.526 511.178,372.47 512.4,372.484 L 512.372,372.597 C 511.347,372.583 510.28,372.639 509.227,372.681 C 505.676,372.835 501.914,373.228 498.475,373.691 C 496.678,373.958 494.853,374.253 493.169,374.506 C 488.803,375.165 484.353,375.825 479.904,376.457 C 473.784,377.327 467.748,378.197 461.641,379.082 C 453.851,380.205 446.088,381.286 438.326,382.394 C 421.467,384.795 404.595,387.167 387.764,389.539 C 380.718,390.522 373.643,391.547 366.652,392.501 C 359.816,393.442 352.966,394.452 346.158,395.393 C 344.081,395.674 342.088,395.968 340.024,396.263 C 334.255,397.021 328.05,397.597 322.113,397.863 C 313.873,398.242 305.928,398.214 297.59,398.734 L 297.618,398.621 C 304.173,398.186 310.49,398.102 316.877,397.891 C 319.165,397.821 321.481,397.737 323.797,397.583 C 326.338,397.428 328.935,397.246 331.504,397.007 C 335.013,396.684 338.396,396.235 341.737,395.786 C 343.182,395.561 344.614,395.379 346.06,395.168 C 348.081,394.859 350.089,394.579 352.11,394.298 C 357.613,393.526 363.115,392.726 368.604,391.954 C 392.242,388.613 415.965,385.272 439.687,381.917 C 452.967,380.036 466.246,378.183 479.455,376.316 C 483.399,375.755 487.273,375.193 491.175,374.632 C 492.312,374.464 493.421,374.267 494.474,374.141 C 498.517,373.495 502.686,372.976 507.023,372.681 C 507.571,372.639 508.118,372.611 508.652,372.583 Z" stroke="none" stroke-width="0.5" fill="#402100" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_82)"/>
+    <mask id="TranspMask_83">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_57)" stroke="none"/>
+    </mask>
+    <path d="M 334.774,373.341 L 539.267,347.428 C 539.533,346.965 540.081,346.066 539.309,344.27 C 538.509,342.473 402.208,359.767 334.044,368.385 L 334.774,373.341 Z" stroke="none" fill="#bf0000" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_83)"/>
+    <mask id="TranspMask_84">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#RadialGradient_26)" stroke="none"/>
+    </mask>
+    <path d="M 537.652,345.21 L 537.737,346.052 L 486.95,352.832 L 436.178,359.977 L 385.434,367.108 L 334.648,373.874 L 334.185,369.551 L 385.027,363.276 L 435.911,357.366 L 486.81,351.457 L 537.652,345.21 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_84)"/>
+    <path d="M 479.834,341.139 C 479.398,345.589 478.893,349.997 481.574,355.598 L 542.271,347.4 L 545.78,345.814 C 546.51,341.897 548.306,333.391 543.787,332.97 C 539.281,332.577 499.893,339.357 479.834,341.139 Z" fill="#e46700" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775"/>
+    <mask id="TranspMask_85">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_58)" stroke="none"/>
+    </mask>
+    <path d="M 479.834,341.139 C 479.398,345.589 478.893,349.997 481.574,355.598 L 542.271,347.4 L 545.78,345.814 C 546.51,341.897 548.306,333.391 543.787,332.97 C 539.281,332.577 499.893,339.357 479.834,341.139 Z" fill="#400000" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_85)"/>
+    <mask id="TranspMask_86">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_59)" stroke="none"/>
+    </mask>
+    <path d="M 479.834,341.139 C 479.398,345.589 478.893,349.997 481.574,355.598 L 542.271,347.4 L 545.78,345.814 C 546.51,341.897 548.306,333.391 543.787,332.97 C 539.281,332.577 499.893,339.357 479.834,341.139 Z" stroke="none" fill="#ffba00" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_86)"/>
+    <mask id="TranspMask_87">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_60)" stroke="none"/>
+    </mask>
+    <path d="M 479.834,341.139 C 479.398,345.589 478.893,349.997 481.574,355.598 L 542.271,347.4 L 545.78,345.814 C 546.51,341.897 548.306,333.391 543.787,332.97 C 539.281,332.577 499.893,339.357 479.834,341.139 Z" fill="#e46700" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_87)"/>
+    <mask id="TranspMask_88">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_61)" stroke="none"/>
+    </mask>
+    <path d="M 479.834,341.139 C 479.398,345.589 478.893,349.997 481.574,355.598 L 542.271,347.4 L 545.78,345.814 C 546.51,341.897 548.306,333.391 543.787,332.97 C 539.281,332.577 499.893,339.357 479.834,341.139 Z" stroke="none" fill="#ffffff" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_88)"/>
+    <mask id="TranspMask_89">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_62)" stroke="none"/>
+    </mask>
+    <path d="M 542.902,347.161 L 542.944,347.582 L 528.261,349.8 L 513.551,351.878 L 498.84,353.717 L 484.101,355.387 L 484.059,354.952 L 498.741,352.734 L 513.424,350.685 L 528.149,348.846 L 542.902,347.161 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_89)"/>
+    <mask id="TranspMask_90">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_63)" stroke="none"/>
+    </mask>
+    <path d="M 333.539,372.372 L 337.399,372.288 L 336.88,375.783 L 336.023,379.306 L 335.181,382.802 L 334.648,386.311 L 333.89,386.339 L 333.96,382.844 L 333.707,379.362 L 333.469,375.867 L 333.539,372.372 Z" stroke="none" stroke-width="0.5" fill="#ffffff" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_90)"/>
+    <mask id="TranspMask_91">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_64)" stroke="none"/>
+    </mask>
+    <path d="M 502.981,398.186 C 503.612,393.357 504.314,388.543 506.771,384.079 L 472.085,399.534 C 483.764,398.186 494.769,397.274 502.981,398.186 Z" stroke="none" fill="#402100" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_91)"/>
+    <mask id="TranspMask_92">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_65)" stroke="none"/>
+    </mask>
+    <path d="M 457.374,602.159 L 502.588,397.47 C 507.22,381.819 511.726,370.393 522.029,364.553 L 457.374,602.159 Z" fill="#7f4100" stroke="none" stroke-width="0.5" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_92)"/>
+    <mask id="TranspMask_93">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_66)" stroke="none"/>
+    </mask>
+    <path d="M 293.646,396.053 L 293.688,400.937 L 293.94,405.836 L 294.179,410.721 L 294.221,415.606 L 294.712,415.62 L 294.951,410.735 L 295.4,405.865 L 295.849,400.98 L 296.088,396.095 L 293.646,396.053 Z" stroke-width="0.5" stroke="none" fill="#000000" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_93)"/>
+    <mask id="TranspMask_94">
+     <rect x="-10%" y="-10%" width="120%" height="120%" fill="url(#LinearGradient_67)" stroke="none"/>
+    </mask>
+    <path d="M 293.646,416.098 L 293.688,466.603 L 293.94,517.123 L 294.179,567.628 L 294.221,618.133 L 294.712,618.133 L 294.951,567.628 L 295.4,517.123 L 295.849,466.617 L 296.088,416.112 L 293.646,416.098 Z" stroke-width="0.5" stroke="none" fill="#000000" fill-rule="evenodd" marker-start="none" marker-end="none" stroke-miterlimit="79.8403193612775" mask="url(#TranspMask_94)"/>
+   </g>
+  </g>
+ </g>
+</svg>
