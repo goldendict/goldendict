@@ -41,7 +41,6 @@ IAccessible *pAcc, *pAccParent;
 ITextProvider *pText;
 ITextRangeProvider *pTextRange;
 VARIANT var;
-long idChild;
 BSTR bstr = NULL;
 int n;
 UiaPoint upt;
@@ -58,7 +57,6 @@ POINT ppt = { 0, 0 };
 
 	pAcc = NULL;
 	hr = AccessibleObjectFromPoint( ppt, &pAcc, &var );
-	idChild = var.lVal;
 
 	if( hr != S_OK || pAcc == NULL) {
 		VariantClear( &var );

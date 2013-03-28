@@ -55,7 +55,8 @@ win32 {
 
     Release:DEFINES += NO_CONSOLE
 
-    QMAKE_LFLAGS += -Wl,--large-address-aware
+    !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
+    gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 }
 
 unix:!mac {

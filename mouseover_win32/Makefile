@@ -1,9 +1,10 @@
-GCC:=gcc.exe -W -Wall -s -O2
-GCC64:=x86_64-w64-mingw32-gcc.exe -W -Wall -s -O2
+# Build x86 target by mingw 4.8
+GCC:=gcc.exe -m32 -W -Wall -s -O2 -fno-omit-frame-pointer -static
+GCC64:=gcc.exe -m64 -W -Wall -s -O2 -fno-omit-frame-pointer -static
 
-.PHONY: all x64 clean
+.PHONY: x86 x64 clean
 
-all: GdTextOutHook.dll libGdTextOutHook.a GdTextOutSpy.dll libGdTextOutSpy.a
+x86: GdTextOutHook.dll libGdTextOutHook.a GdTextOutSpy.dll libGdTextOutSpy.a x86helper.exe
 
 x64: x64helper.exe GdTextOutHook64.dll libGdTextOutHook64.a GdTextOutSpy64.dll libGdTextOutSpy64.a
 
@@ -75,3 +76,9 @@ guids64.o: guids.c
 
 GdTextOutSpy64.dll libGdTextOutSpy64.a: TextOutSpy64.o ThTypes64.o IAccEx64.o guids64.o GetWordByIAccEx64.o
 	$(GCC64) -shared -o GdTextOutSpy64.dll $^ -lgdi32 -luuid -loleacc -loleaut32 -Wl,--out-implib,libGdTextOutSpy64.a
+
+x64hooks86.o: x64hooks.c
+	$(GCC) -o $@ -c $<
+
+x86helper.exe: x64hooks86.o ThTypes.o
+	$(GCC) -Wl,--subsystem,windows -mwindows -o $@ $^

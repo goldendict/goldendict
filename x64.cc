@@ -12,6 +12,7 @@
 typedef BOOL (WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
 PROCESS_INFORMATION pInfo;
 
+#ifndef Q_OS_WIN64
 bool isWow64()
 {
     static LPFN_ISWOW64PROCESS fnIsWow64Process;
@@ -26,18 +27,27 @@ bool isWow64()
     }
     return bIsWow64;
 }
+#endif
 
 bool installx64Hooks()
 {
 STARTUPINFO startup;
+#ifndef Q_OS_WIN64
     if( !isWow64() )
         return false;
+#endif
     if( pInfo.hProcess != NULL )
         removex64Hooks();
     QDir dir =  QCoreApplication::applicationDirPath();
+#ifdef Q_OS_WIN64
+    if( !dir.cd("x86") )
+        return false;
+    QString starterProc = QDir::toNativeSeparators( dir.filePath( "x86helper.exe" ) );
+#else
     if( !dir.cd("x64") )
         return false;
     QString starterProc = QDir::toNativeSeparators( dir.filePath( "x64helper.exe" ) );
+#endif
 
     memset( &startup, 0, sizeof(startup) );
     startup.cb = sizeof(startup);

@@ -60,6 +60,9 @@ static void SetLowLabelToGDSynchroObjects()
     PACL pSacl = NULL; // not allocated
     BOOL fSaclPresent = FALSE;
     BOOL fSaclDefaulted = FALSE;
+#ifdef Q_OS_WIN64
+    LPCWSTR pwszMapFileName64 = L"GoldenDictTextOutHookSharedMem64";
+#endif
     LPCWSTR pwszMapFileName = L"GoldenDictTextOutHookSharedMem";
     LPCWSTR pwszSpyMutexName = L"GoldenDictTextOutSpyMutex";
 
@@ -70,6 +73,10 @@ static void SetLowLabelToGDSynchroObjects()
 // Note that psidOwner, psidGroup, and pDacl are
 // all NULL and set the new LABEL_SECURITY_INFORMATION
 
+#ifdef Q_OS_WIN64
+           /* dwErr = */ SetNamedSecurityInfoW( (LPWSTR)pwszMapFileName64,
+                     SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
+#endif
            /* dwErr = */ SetNamedSecurityInfoW( (LPWSTR)pwszMapFileName,
                     SE_KERNEL_OBJECT, LABEL_SECURITY_INFORMATION, NULL, NULL, NULL, pSacl);
 
@@ -94,9 +101,17 @@ ChangeWindowMessageFilterExFunc changeWindowMessageFilterExFunc = NULL;
   
   ThTypes_Init();
   memset( GlobalData, 0, sizeof( TGlobalDLLData ) );
+#ifdef Q_OS_WIN64
+  memset( GlobalData32, 0, sizeof( TGlobalDLLData32 ) );
+#endif
 //  strcpy( GlobalData->LibName,
 //    QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutHook.dll" ) ).toLocal8Bit().data() );
+#ifdef Q_OS_WIN64
+  QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutHook64.dll" ) ).toWCharArray( GlobalData->LibName );
+  QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() + "/x86" ).filePath( "GdTextOutHook.dll" ) ).toWCharArray( GlobalData32->LibName );
+#else
   QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutHook.dll" ) ).toWCharArray( GlobalData->LibName );
+#endif
 
   // Create the window to recive spying results to
 
@@ -119,8 +134,15 @@ ChangeWindowMessageFilterExFunc changeWindowMessageFilterExFunc = NULL;
   RegisterClassEx( &wcex );
 
   GlobalData->ServerWND = CreateWindow( className, L"", 0, 0, 0, 0, 0, GetDesktopWindow(), NULL, GetModuleHandle( 0 ), 0 );
+#ifdef Q_OS_WIN64
+  GlobalData32->ServerWND = HandleToLong( GlobalData->ServerWND );
+#endif
 
+#ifdef Q_OS_WIN64
+  spyDll = LoadLibrary( QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutSpy64.dll" ) ).toStdWString().c_str() );
+#else
   spyDll = LoadLibrary( QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutSpy.dll" ) ).toStdWString().c_str() );
+#endif
 
   if ( spyDll )
     activateSpyFn = ( ActivateSpyFn ) GetProcAddress( spyDll, "ActivateTextOutSpying" );
@@ -188,7 +210,13 @@ LRESULT res = 0;
     return res;
 }
 
-LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
+#ifdef Q_OS_WIN64
+#define Global_Data GlobalData32
+#else
+#define Global_Data GlobalData
+#endif
+
+LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd_, UINT msg,
                                           WPARAM wparam, LPARAM lparam )
 {
   if ( msg == WM_MY_SHOW_TRANSLATION )
@@ -204,13 +232,17 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
     int wordSeqPos = 0;
     QString wordSeq;
 
-    HWND hwnd = GlobalData->LastWND;
+#ifdef Q_OS_WIN64
+    HWND hwnd = ( HWND )LongToHandle( Global_Data->LastWND );
+#else
+    HWND hwnd = Global_Data->LastWND;
+#endif
 
-    if( GlobalData->CurMod.WordLen == 0)
+    if( Global_Data->CurMod.WordLen == 0)
     {
         if( ( res & GD_FLAG_METHOD_UI_AUTOMATION ) == 0 )
             return 0;
-        POINT pt = GlobalData->CurMod.Pt;
+        POINT pt = Global_Data->CurMod.Pt;
         WCHAR *pwstr = gdGetWordAtPointByAutomation( pt );
         if( pwstr == NULL ) return 0;
         wordSeq = QString::fromWCharArray( pwstr );
@@ -222,18 +254,18 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
 
         gd::wchar testBuf[ 256 ];
 
-        long result = Utf8::decode( GlobalData->CurMod.MatchedWord,
-                                    strlen( GlobalData->CurMod.MatchedWord ),
+        long result = Utf8::decode( Global_Data->CurMod.MatchedWord,
+                                    strlen( Global_Data->CurMod.MatchedWord ),
                                     testBuf );
 
         if ( result >= 0 )
         {
           // It seems to be
-          QString begin = QString::fromUtf8( GlobalData->CurMod.MatchedWord,
-                                             GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+          QString begin = QString::fromUtf8( Global_Data->CurMod.MatchedWord,
+                                             Global_Data->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
 
-          QString end = QString::fromUtf8( GlobalData->CurMod.MatchedWord +
-                                           GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+          QString end = QString::fromUtf8( Global_Data->CurMod.MatchedWord +
+                                           Global_Data->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
 
           wordSeq = begin + end;
           wordSeqPos = begin.size();
@@ -241,11 +273,11 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
         else
         {
         // It's not, so interpret it as in local encoding
-            QString begin = QString::fromLocal8Bit( GlobalData->CurMod.MatchedWord,
-                                                    GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+            QString begin = QString::fromLocal8Bit( Global_Data->CurMod.MatchedWord,
+                                                    Global_Data->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
 
-            QString end = QString::fromLocal8Bit( GlobalData->CurMod.MatchedWord +
-                                                  GlobalData->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
+            QString end = QString::fromLocal8Bit( Global_Data->CurMod.MatchedWord +
+                                                  Global_Data->CurMod.BeginPos ).normalized( QString::NormalizationForm_C );
 
             wordSeq = begin + end;
             wordSeqPos = begin.size();
@@ -328,7 +360,7 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd, UINT msg,
     return 0;
   }
 
-  return DefWindowProc( hwnd, msg, wparam, lparam );
+  return DefWindowProc( hwnd_, msg, wparam, lparam );
 }
 
 #endif

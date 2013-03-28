@@ -17,6 +17,10 @@ About::About( QWidget * parent ): QDialog( parent )
   else
     version = QString::fromLatin1( versionFile.readAll() ).trimmed();
 
+#ifdef _M_X64
+  version += " (64-bit)";
+#endif
+
   ui.version->setText( version );
 
   QFile creditsFile( ":/CREDITS.txt" );

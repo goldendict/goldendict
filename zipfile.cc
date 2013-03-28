@@ -7,6 +7,8 @@
 
 namespace ZipFile {
 
+#pragma pack( push, 1 )
+
 /// End-of-central-directory record, as is
 struct EndOfCdirRecord
 {
@@ -33,6 +35,8 @@ struct LocalFileHeaderRecord
   quint32 crc32, compressedSize, uncompressedSize;
   quint16 fileNameLength, extraFieldLength;
 } __attribute__((packed));
+
+#pragma pack( pop )
 
 static quint32 const endOfCdirRecordSignatureValue = qToLittleEndian( 0x06054b50 );
 static quint32 const centralFileHeaderSignature = qToLittleEndian( 0x02014b50 );
