@@ -24,6 +24,7 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 #include <QDomDocument>
+#include <QUrl>
 
 #include "ufile.hh"
 #include "wstring_qt.hh"
@@ -500,7 +501,26 @@ void AardDictionary::loadArticle( uint32_t address,
           string link;
           readJSONValue( text, link, n );
           if( !link.empty() )
-            articleText = "<a href=\"" + link + "\">" + link + "</a>";
+          {
+            string encodedLink;
+            encodedLink.reserve( link.size() );
+            bool prev = false;
+            for( string::const_iterator i = link.begin(); i != link.end(); ++i )
+            {
+              if( *i == '\\' )
+              {
+                if( !prev )
+                {
+                  prev = true;
+                  continue;
+                }
+              }
+              encodedLink.push_back( *i );
+              prev = false;
+            }
+            encodedLink = string( QUrl::toPercentEncoding( QString::fromUtf8( encodedLink.c_str() ) ).data() );
+            articleText = "<a href=\"" + encodedLink + "\">" + link + "</a>";
+          }
         }
       }
 
