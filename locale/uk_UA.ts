@@ -3229,26 +3229,41 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <location filename="../preferences.cc" line="81"/>
+        <source>Modern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="82"/>
         <source>Lingvo</source>
         <translation>Lingvo</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="82"/>
+        <location filename="../preferences.cc" line="83"/>
         <source>Babylon</source>
         <translation>Babylon</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="159"/>
+        <location filename="../preferences.cc" line="84"/>
+        <source>Lingoes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="85"/>
+        <source>Lingoes-Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="162"/>
         <source>Play via DirectShow</source>
         <translation>Програвати через DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="361"/>
+        <location filename="../preferences.cc" line="364"/>
         <source>Changing Language</source>
         <translation>Зміна мови</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="362"/>
+        <location filename="../preferences.cc" line="365"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Перезапустіть програму, щоб змінити мову.</translation>
     </message>
@@ -3608,6 +3623,10 @@ in the future, or register on the site to get your own key.</source>
     </message>
     <message>
         <location filename="../sources.ui" line="489"/>
+        <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3616,7 +3635,7 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -3626,74 +3645,74 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Одержайте ваш власний ключ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;тут&lt;/span&gt;&lt;/a&gt;, або залиште порожнім, щоб використовувати типовий.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="509"/>
+        <location filename="../sources.ui" line="502"/>
         <source>Language codes (comma-separated):</source>
         <translation>Коди мов (виділяючи комою):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="516"/>
+        <location filename="../sources.ui" line="509"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Перелік кодів мов, які б ви воліли мати. Наприклад: &quot;en, uk&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="539"/>
+        <location filename="../sources.ui" line="532"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Повний перелік кодів мов &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;тут&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="581"/>
+        <location filename="../sources.ui" line="574"/>
         <source>Transliteration</source>
         <translation>Транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="602"/>
+        <location filename="../sources.ui" line="595"/>
         <source>Russian transliteration</source>
         <translation>Російська транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="613"/>
+        <location filename="../sources.ui" line="606"/>
         <source>Greek transliteration</source>
         <translation>Грецька транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="637"/>
+        <location filename="../sources.ui" line="630"/>
         <source>German transliteration</source>
         <translation>Німецька транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="648"/>
+        <location filename="../sources.ui" line="641"/>
         <source>Belarusian transliteration</source>
         <translation>Білоруська транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="674"/>
+        <location filename="../sources.ui" line="667"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Вмикає латинську абетку для японського письма</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="677"/>
+        <location filename="../sources.ui" line="670"/>
         <source>Japanese Romaji</source>
         <translation>Японська романдзі</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="682"/>
         <source>Systems:</source>
         <translation>Системи:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="696"/>
+        <location filename="../sources.ui" line="689"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Найпоширеніший спосіб транскрибування японської,
 яка ґрунтується на англійській фонології</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="700"/>
+        <location filename="../sources.ui" line="693"/>
         <source>Hepburn</source>
         <translation>Хепбьорн</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="710"/>
+        <location filename="../sources.ui" line="703"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -3704,12 +3723,12 @@ Not implemented yet in GoldenDict.</source>
 Поки що не підтримується в GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="716"/>
+        <location filename="../sources.ui" line="709"/>
         <source>Nihon-shiki</source>
         <translation>Ніхон-сікі</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="726"/>
+        <location filename="../sources.ui" line="719"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -3720,32 +3739,32 @@ Not implemented yet in GoldenDict.</source>
 Ще не реалізовано в GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="732"/>
+        <location filename="../sources.ui" line="725"/>
         <source>Kunrei-shiki</source>
         <translation>Кунрей-сікі</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="739"/>
+        <location filename="../sources.ui" line="732"/>
         <source>Syllabaries:</source>
         <translation>Складові азбуки:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="746"/>
+        <location filename="../sources.ui" line="739"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Складова азбука японської хіраґани</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="749"/>
+        <location filename="../sources.ui" line="742"/>
         <source>Hiragana</source>
         <translation>Хіраґана</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="756"/>
+        <location filename="../sources.ui" line="749"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Складова азбука японської катакани</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="759"/>
+        <location filename="../sources.ui" line="752"/>
         <source>Katakana</source>
         <translation>Катакана</translation>
     </message>
