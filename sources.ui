@@ -328,7 +328,8 @@ of the appropriate groups to use them.</string>
        <item>
         <widget class="QLabel" name="label_10">
          <property name="text">
-          <string>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</string>
+          <string>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</string>
          </property>
         </widget>
        </item>
