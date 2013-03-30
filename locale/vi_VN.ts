@@ -2879,7 +2879,7 @@ phù hợp để sử dụng chúng.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Như một sự lựa chọn, sử dụng %GD1251% cho mã CP1251, %GDISO1% cho mã ISO 8859-1.</translation>
+        <translation type="obsolete">Như một sự lựa chọn, sử dụng %GD1251% cho mã CP1251, %GDISO1% cho mã ISO 8859-1.</translation>
     </message>
     <message>
         <source>Forvo</source>
@@ -3058,6 +3058,11 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

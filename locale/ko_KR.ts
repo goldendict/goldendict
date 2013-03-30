@@ -3471,7 +3471,7 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="117"/>
         <location filename="../sources.ui" line="241"/>
         <location filename="../sources.ui" line="300"/>
-        <location filename="../sources.ui" line="366"/>
+        <location filename="../sources.ui" line="367"/>
         <source>&amp;Add...</source>
         <translation>추가...(&amp;A)</translation>
     </message>
@@ -3480,7 +3480,7 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="124"/>
         <location filename="../sources.ui" line="248"/>
         <location filename="../sources.ui" line="307"/>
-        <location filename="../sources.ui" line="373"/>
+        <location filename="../sources.ui" line="374"/>
         <source>&amp;Remove</source>
         <translation>제거(&amp;R)</translation>
     </message>
@@ -3547,43 +3547,42 @@ of the appropriate groups to use them.</source>
         <translation>웹사이트. 문자열 %GDWORD%는 검색어로 대체됩니다.:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>또 다른 방법으로 CP1251코드에는 %GD1251%, ISO 8859-1코드에는 %GDISO1%를 대신 쓸 수 있습니다.</translation>
+        <translation type="obsolete">또 다른 방법으로 CP1251코드에는 %GD1251%, ISO 8859-1코드에는 %GDISO1%를 대신 쓸 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="343"/>
+        <location filename="../sources.ui" line="344"/>
         <source>Programs</source>
         <translation>프로그램</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="349"/>
+        <location filename="../sources.ui" line="350"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
         <translation>외부 프로그램. 문자열 %GDWORD%는 검색어로 대체되어 표준 입력으로 전달됩니다.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="402"/>
+        <location filename="../sources.ui" line="403"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="414"/>
+        <location filename="../sources.ui" line="415"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>&lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;에서 라이브 음성 듣기. 이 사이트에서는 누구나 자기 목소리로 세계 각 언어의 단어들을 녹음하고 공유할 수 있는 기능을 제공하고 있으며. 그것들을 골든딕에서 연결하여 들을 수 있습니다.
 </translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="427"/>
+        <location filename="../sources.ui" line="428"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Forvo에서 발음 듣기 사용</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="457"/>
+        <location filename="../sources.ui" line="458"/>
         <source>API Key:</source>
         <translation>API 키:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="464"/>
+        <location filename="../sources.ui" line="465"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -3592,7 +3591,7 @@ in the future, or register on the site to get your own key.</source>
 개인키를 얻으려면 사이트에 등록하십시오.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="489"/>
+        <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3615,74 +3614,80 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;여기&lt;/a&gt;서 개인키를 얻거나, 아니면 비워두고 기본키를 사용하십시오..&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="502"/>
+        <location filename="../sources.ui" line="331"/>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="503"/>
         <source>Language codes (comma-separated):</source>
         <translation>언어코드 (콤마로 구분):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="509"/>
+        <location filename="../sources.ui" line="510"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>사용할 언어코드 목록. 예: &quot;en, ru&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="532"/>
+        <location filename="../sources.ui" line="533"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>언어코드의 전체목록은 &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;여기&lt;/a&gt;서 얻을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="574"/>
+        <location filename="../sources.ui" line="575"/>
         <source>Transliteration</source>
         <translation>문자변환</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="595"/>
+        <location filename="../sources.ui" line="596"/>
         <source>Russian transliteration</source>
         <translation>러시아어 문자변환</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="606"/>
+        <location filename="../sources.ui" line="607"/>
         <source>Greek transliteration</source>
         <translation>그리스어 문자변환</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="630"/>
+        <location filename="../sources.ui" line="631"/>
         <source>German transliteration</source>
         <translation>독일어 문자변환</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="641"/>
+        <location filename="../sources.ui" line="642"/>
         <source>Belarusian transliteration</source>
         <translation>벨라루스어 문자변환</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="667"/>
+        <location filename="../sources.ui" line="668"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>알파벳으로 일본어를 입력할 수 있게 합니다</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="670"/>
+        <location filename="../sources.ui" line="671"/>
         <source>Japanese Romaji</source>
         <translation>일본어 로마자 입력</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="682"/>
+        <location filename="../sources.ui" line="683"/>
         <source>Systems:</source>
         <translation>로마자 표기법:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="690"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>가장 널리 사용되는 일본어 로마자 표기방법으로서, 
 영어 음성학을 기초로 하고 있습니다 </translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="694"/>
         <source>Hepburn</source>
         <translation>헵번식</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="703"/>
+        <location filename="../sources.ui" line="704"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -3693,12 +3698,12 @@ ISO 3602에서 표준으로 승인되었습니다.
 골든딕에는 아직 도입되어 있지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="709"/>
+        <location filename="../sources.ui" line="710"/>
         <source>Nihon-shiki</source>
         <translation>일본식</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="719"/>
+        <location filename="../sources.ui" line="720"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -3709,32 +3714,32 @@ Not implemented yet in GoldenDict.</source>
 골든딕에는 아직 도입되어 있지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="725"/>
+        <location filename="../sources.ui" line="726"/>
         <source>Kunrei-shiki</source>
         <translation>훈령식</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="732"/>
+        <location filename="../sources.ui" line="733"/>
         <source>Syllabaries:</source>
         <translation>문자표:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="739"/>
+        <location filename="../sources.ui" line="740"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>히라가나 일본어 문자표</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="742"/>
+        <location filename="../sources.ui" line="743"/>
         <source>Hiragana</source>
         <translation>히라가나</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="749"/>
+        <location filename="../sources.ui" line="750"/>
         <source>Katakana Japanese syllabary</source>
         <translation>가타가나 일본어 문자표</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="752"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Katakana</source>
         <translation>가타가나</translation>
     </message>

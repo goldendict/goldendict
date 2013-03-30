@@ -3484,7 +3484,7 @@ môžete mu zmeniť veľkosť, alebo ho inak spravovať.</translation>
         <location filename="../sources.ui" line="117"/>
         <location filename="../sources.ui" line="241"/>
         <location filename="../sources.ui" line="300"/>
-        <location filename="../sources.ui" line="366"/>
+        <location filename="../sources.ui" line="367"/>
         <source>&amp;Add...</source>
         <translation>&amp;Pridať ...</translation>
     </message>
@@ -3493,7 +3493,7 @@ môžete mu zmeniť veľkosť, alebo ho inak spravovať.</translation>
         <location filename="../sources.ui" line="124"/>
         <location filename="../sources.ui" line="248"/>
         <location filename="../sources.ui" line="307"/>
-        <location filename="../sources.ui" line="373"/>
+        <location filename="../sources.ui" line="374"/>
         <source>&amp;Remove</source>
         <translation>Odst&amp;rániť</translation>
     </message>
@@ -3566,42 +3566,41 @@ vhodné slovníky dole k vhodným skupinám.</translation>
         <translation>Akákoľvek webová stránka. Reťazec %GDWORD% bude nahradený hľadaným slovom:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Prípadne môžete použiť %GD1251% pre CP1251, %GDISO1% pre ISO 8859-1.</translation>
+        <translation type="obsolete">Prípadne môžete použiť %GD1251% pre CP1251, %GDISO1% pre ISO 8859-1.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="343"/>
+        <location filename="../sources.ui" line="344"/>
         <source>Programs</source>
         <translation>Programy</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="349"/>
+        <location filename="../sources.ui" line="350"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
         <translation>Akýkoľvek externý program. Reťazec %GDWORD% bude nahradený so slovom z požiadavky. Slovo bude tiež prevedené do štandardného vstupu.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="402"/>
+        <location filename="../sources.ui" line="403"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="414"/>
+        <location filename="../sources.ui" line="415"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Živá výslovnosť z &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Stánky umožňujú ľuďom nahrávať a zdieľa výslovnosť slov. V GoldenDicte si ich môžete vypočuť.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="427"/>
+        <location filename="../sources.ui" line="428"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Povoliť výslovnosť z Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="457"/>
+        <location filename="../sources.ui" line="458"/>
         <source>API Key:</source>
         <translation>API kľúč:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="464"/>
+        <location filename="../sources.ui" line="465"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -3610,7 +3609,7 @@ prázdne pre použitie štandardného  kľúča, ktorý sa po čase môže stať
 alebo sa na stránkach zaregistrujte a získajte vlastný kľúč.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="489"/>
+        <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3633,74 +3632,80 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Tu&lt;/span&gt;&lt;/a&gt; môžete získať vlastný kľúč, alebo ponechajte prázdne pre použitie štandardného.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="502"/>
+        <location filename="../sources.ui" line="331"/>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="503"/>
         <source>Language codes (comma-separated):</source>
         <translation>Jazykové kódy (oddelené čiarkou):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="509"/>
+        <location filename="../sources.ui" line="510"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Zoznam kódov jazykov, ktoré by ste chceli mať. Príklad: &quot;en, sk&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="532"/>
+        <location filename="../sources.ui" line="533"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Úplný zoznam jazykových kódov je k dispozícii &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;tu&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="574"/>
+        <location filename="../sources.ui" line="575"/>
         <source>Transliteration</source>
         <translation>Prepis</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="595"/>
+        <location filename="../sources.ui" line="596"/>
         <source>Russian transliteration</source>
         <translation>Ruský prepis</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="606"/>
+        <location filename="../sources.ui" line="607"/>
         <source>Greek transliteration</source>
         <translation>Grécky prepis</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="630"/>
+        <location filename="../sources.ui" line="631"/>
         <source>German transliteration</source>
         <translation>Nemecký prepis</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="641"/>
+        <location filename="../sources.ui" line="642"/>
         <source>Belarusian transliteration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="667"/>
+        <location filename="../sources.ui" line="668"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Umožňuje využívať latinku v japončine</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="670"/>
+        <location filename="../sources.ui" line="671"/>
         <source>Japanese Romaji</source>
         <translation>Japonské Romaji</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="682"/>
+        <location filename="../sources.ui" line="683"/>
         <source>Systems:</source>
         <translation>Systémy:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="690"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Najrozšírenejší spôsob japonskej transkripcie,
 založený na anglickej fonológií</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="694"/>
         <source>Hepburn</source>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="703"/>
+        <location filename="../sources.ui" line="704"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -3711,12 +3716,12 @@ k systému písania kana. Štandardizovaný ako ISO 3602.
 Zatiaľ nie je implementovaný v GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="709"/>
+        <location filename="../sources.ui" line="710"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="719"/>
+        <location filename="../sources.ui" line="720"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -3727,32 +3732,32 @@ Not implemented yet in GoldenDict.</source>
 Zzatiaľ nie je implementovaný v GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="725"/>
+        <location filename="../sources.ui" line="726"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="732"/>
+        <location filename="../sources.ui" line="733"/>
         <source>Syllabaries:</source>
         <translation>Šlabikáre:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="739"/>
+        <location filename="../sources.ui" line="740"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Japonský šlabikár Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="742"/>
+        <location filename="../sources.ui" line="743"/>
         <source>Hiragana</source>
         <translation>Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="749"/>
+        <location filename="../sources.ui" line="750"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Japonský šlabikár Katakana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="752"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>

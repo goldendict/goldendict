@@ -2858,7 +2858,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Alternatif olarak %GD1251% için CP1251, %GDISO1% için ISO 8859-1 kullanılabilir.</translation>
+        <translation type="obsolete">Alternatif olarak %GD1251% için CP1251, %GDISO1% için ISO 8859-1 kullanılabilir.</translation>
     </message>
     <message>
         <source>Greek transliteration</source>
@@ -3093,6 +3093,11 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

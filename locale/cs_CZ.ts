@@ -3722,7 +3722,7 @@ na spodek vhodných skupin.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Případně použijte %GD1251% pro CP1251, %GDISO1% pro ISO 8859-1.</translation>
+        <translation type="obsolete">Případně použijte %GD1251% pro CP1251, %GDISO1% pro ISO 8859-1.</translation>
     </message>
     <message>
         <source>Transliteration</source>
@@ -3898,6 +3898,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

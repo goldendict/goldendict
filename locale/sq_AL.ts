@@ -3515,7 +3515,7 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
         <location filename="../sources.ui" line="117"/>
         <location filename="../sources.ui" line="241"/>
         <location filename="../sources.ui" line="300"/>
-        <location filename="../sources.ui" line="366"/>
+        <location filename="../sources.ui" line="367"/>
         <source>&amp;Add...</source>
         <translation>&amp;Shtoj...</translation>
     </message>
@@ -3524,7 +3524,7 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
         <location filename="../sources.ui" line="124"/>
         <location filename="../sources.ui" line="248"/>
         <location filename="../sources.ui" line="307"/>
-        <location filename="../sources.ui" line="373"/>
+        <location filename="../sources.ui" line="374"/>
         <source>&amp;Remove</source>
         <translation>&amp;Heq</translation>
     </message>
@@ -3588,42 +3588,41 @@ të caktuara për t&apos;i përdorur ata.</translation>
         <translation>Çdo faqe në rrjetë. Rreshti %GDWORD% do zëvendësohet me fjalën e kërkuar:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Si alternativë, përdorni %GD1251% për CP1251, %GDISO1% për ISO 8859-1.</translation>
+        <translation type="obsolete">Si alternativë, përdorni %GD1251% për CP1251, %GDISO1% për ISO 8859-1.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="343"/>
+        <location filename="../sources.ui" line="344"/>
         <source>Programs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="349"/>
+        <location filename="../sources.ui" line="350"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="402"/>
+        <location filename="../sources.ui" line="403"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="414"/>
+        <location filename="../sources.ui" line="415"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Shqiptimet direkte nga &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Kjo faqe lejon që personat të regjistrojnë shqiptimet e fjalëve dhe t&apos;i ndajnë ato me të tjerët. Mund të dëgjohen në GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="427"/>
+        <location filename="../sources.ui" line="428"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Aktivizoj shqiptimet nga Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="457"/>
+        <location filename="../sources.ui" line="458"/>
         <source>API Key:</source>
         <translation>Кodi API:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="464"/>
+        <location filename="../sources.ui" line="465"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -3631,7 +3630,7 @@ in the future, or register on the site to get your own key.</source>
 që mund të mos lejohet në të ardhmen, ose regjistrohuni te faqja për të marrë kodin tuaj.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="489"/>
+        <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3654,74 +3653,80 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Gjeni kodin tuaj &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;këtu&lt;/span&gt;&lt;/a&gt;, ose lëreni bosh për të përdorur atë normal.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="502"/>
+        <location filename="../sources.ui" line="331"/>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="503"/>
         <source>Language codes (comma-separated):</source>
         <translation>Kodet e gjuhëve (të ndara me presje):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="509"/>
+        <location filename="../sources.ui" line="510"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Lista e kodeve të gjuhëve që doni të keni. Shembull: &quot;en, ru&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="532"/>
+        <location filename="../sources.ui" line="533"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Lista e plotë e kodeve të gjuhëve jepet &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;këtu&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="574"/>
+        <location filename="../sources.ui" line="575"/>
         <source>Transliteration</source>
         <translation>Përkthimi</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="595"/>
+        <location filename="../sources.ui" line="596"/>
         <source>Russian transliteration</source>
         <translation>Përkthimi Rusisht</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="606"/>
+        <location filename="../sources.ui" line="607"/>
         <source>Greek transliteration</source>
         <translation>Përkthimi Greqisht</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="630"/>
+        <location filename="../sources.ui" line="631"/>
         <source>German transliteration</source>
         <translation>Përkthimi Gjermanisht</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="641"/>
+        <location filename="../sources.ui" line="642"/>
         <source>Belarusian transliteration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="667"/>
+        <location filename="../sources.ui" line="668"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Aktivizoni përdorimin e alfabetit latin për të shkruar japonishten</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="670"/>
+        <location filename="../sources.ui" line="671"/>
         <source>Japanese Romaji</source>
         <translation>Japonishtja Romaji</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="682"/>
+        <location filename="../sources.ui" line="683"/>
         <source>Systems:</source>
         <translation>Sisteme:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="690"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Metoda më e përhapur e tejshkrimit të japonishtes,
 e bazuar në fonologjinë japoneze</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="694"/>
         <source>Hepburn</source>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="703"/>
+        <location filename="../sources.ui" line="704"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -3732,12 +3737,12 @@ I standardizuar si ISO 3602.
 Akoma i pafutur në GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="709"/>
+        <location filename="../sources.ui" line="710"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="719"/>
+        <location filename="../sources.ui" line="720"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -3748,32 +3753,32 @@ I standardizuar si ISO 3602.
 Akoma i pafutur në GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="725"/>
+        <location filename="../sources.ui" line="726"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="732"/>
+        <location filename="../sources.ui" line="733"/>
         <source>Syllabaries:</source>
         <translation>Rrokjezime:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="739"/>
+        <location filename="../sources.ui" line="740"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Rrokjezimi i Japonishtes Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="742"/>
+        <location filename="../sources.ui" line="743"/>
         <source>Hiragana</source>
         <translation>Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="749"/>
+        <location filename="../sources.ui" line="750"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Rrokjezimi i Japonishtes Katakana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="752"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>

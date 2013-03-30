@@ -3512,7 +3512,7 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="117"/>
         <location filename="../sources.ui" line="241"/>
         <location filename="../sources.ui" line="300"/>
-        <location filename="../sources.ui" line="366"/>
+        <location filename="../sources.ui" line="367"/>
         <source>&amp;Add...</source>
         <translation>&amp;Илова кардан...</translation>
     </message>
@@ -3521,7 +3521,7 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="124"/>
         <location filename="../sources.ui" line="248"/>
         <location filename="../sources.ui" line="307"/>
-        <location filename="../sources.ui" line="373"/>
+        <location filename="../sources.ui" line="374"/>
         <source>&amp;Remove</source>
         <translation>&amp;Тоза кардан</translation>
     </message>
@@ -3596,42 +3596,41 @@ of the appropriate groups to use them.</source>
         <translation>Тамоми вебсайтҳо. Сатри %GDWORD% бо калимаи воридшуда ҷойгузин карда мешавад:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Шумо ҳамчунин метавонед сатри %GD1251%-ро барои рамзгузории CP1251 ва сатри %GDISO1%-ро барои рамзгузории ISO 8859-1 истифода баред.</translation>
+        <translation type="obsolete">Шумо ҳамчунин метавонед сатри %GD1251%-ро барои рамзгузории CP1251 ва сатри %GDISO1%-ро барои рамзгузории ISO 8859-1 истифода баред.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="343"/>
+        <location filename="../sources.ui" line="344"/>
         <source>Programs</source>
         <translation>Барномаҳо</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="349"/>
+        <location filename="../sources.ui" line="350"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
         <translation>Тамоми барномаҳои берунӣ. Сатри %GDWORD% бо калимаи дархостшуда ҷойгузин карда мешавад. Худи калима низ ба сатри вуруди калимаҳо дохил карда мешавад.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="402"/>
+        <location filename="../sources.ui" line="403"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="414"/>
+        <location filename="../sources.ui" line="415"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Талаффузи фаврӣ аз &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Вебсайти зерин ба одамон иҷозат медиҳад, ки онҳо тавонанд талаффузи калимаҳоро сабт ва бо дигарон мубодила намоянд. Шумо метавонед калимаҳои сабтшударо аз луғати GoldenDict гӯш кунед.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="427"/>
+        <location filename="../sources.ui" line="428"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Талаффузро аз Forvo фаъол кардан</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="457"/>
+        <location filename="../sources.ui" line="458"/>
         <source>API Key:</source>
         <translation>Калиди API:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="464"/>
+        <location filename="../sources.ui" line="465"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -3640,7 +3639,7 @@ in the future, or register on the site to get your own key.</source>
 оянда дастнорас шавад, ё ки барои дархости калиди шахсӣ дар сайт қайд шавед.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="489"/>
+        <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3663,74 +3662,80 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Калиди шахсиро аз &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ин ҷо&lt;/span&gt;&lt;/a&gt; дархост кунед, ё ки ин майдонро холӣ монед, то ки калиди пешфарзро истифода баред.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="502"/>
+        <location filename="../sources.ui" line="331"/>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="503"/>
         <source>Language codes (comma-separated):</source>
         <translation>Рамзҳои забон (бо вергул ҷудо мешаванд):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="509"/>
+        <location filename="../sources.ui" line="510"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Рӯйхати рамзҳои забоне, ки шумо мехоҳед дар бар гиред. Масалан: &quot;en, tg&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="532"/>
+        <location filename="../sources.ui" line="533"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Рӯйхати рамзҳои забонҳои пур дар &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;ин ҷо&lt;/a&gt; дастрас аст.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="574"/>
+        <location filename="../sources.ui" line="575"/>
         <source>Transliteration</source>
         <translation>Транслитератсия</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="595"/>
+        <location filename="../sources.ui" line="596"/>
         <source>Russian transliteration</source>
         <translation>Транслитератсияи русӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="606"/>
+        <location filename="../sources.ui" line="607"/>
         <source>Greek transliteration</source>
         <translation>Транслитератсияи юнонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="630"/>
+        <location filename="../sources.ui" line="631"/>
         <source>German transliteration</source>
         <translation>Транслитератсияи олмонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="641"/>
+        <location filename="../sources.ui" line="642"/>
         <source>Belarusian transliteration</source>
         <translation>Транслитератсияи белорусӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="667"/>
+        <location filename="../sources.ui" line="668"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Истифодаи алифбои лотиниро барои навиштан бо забони ҷопонӣ фаъол мекунад</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="670"/>
+        <location filename="../sources.ui" line="671"/>
         <source>Japanese Romaji</source>
         <translation>Ромаҷии ҷопонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="682"/>
+        <location filename="../sources.ui" line="683"/>
         <source>Systems:</source>
         <translation>Системаҳо:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="690"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Машҳуртарин тарзи транскрипткунонии калимаҳои Ҷопонӣ
 дар асоси фонологияи Англисӣ иҷро мешавад</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="694"/>
         <source>Hepburn</source>
         <translation>Хэпбёрн</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="703"/>
+        <location filename="../sources.ui" line="704"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -3741,12 +3746,12 @@ Not implemented yet in GoldenDict.</source>
 Системаи дар боло зикршуда ҳоло дар луғати GoldenDict вуҷуд надорад.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="709"/>
+        <location filename="../sources.ui" line="710"/>
         <source>Nihon-shiki</source>
         <translation>Ниҳон-шикӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="719"/>
+        <location filename="../sources.ui" line="720"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -3757,32 +3762,32 @@ Not implemented yet in GoldenDict.</source>
 Системаи дар боло зикршуда ҳоло дар луғати GoldenDict вуҷуд надорад.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="725"/>
+        <location filename="../sources.ui" line="726"/>
         <source>Kunrei-shiki</source>
         <translation>Канрей-шикӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="732"/>
+        <location filename="../sources.ui" line="733"/>
         <source>Syllabaries:</source>
         <translation>Алифбои ҳиҷо:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="739"/>
+        <location filename="../sources.ui" line="740"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Алифбои ҳиҷои Хираганаи ҷопонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="742"/>
+        <location filename="../sources.ui" line="743"/>
         <source>Hiragana</source>
         <translation>Хирагана</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="749"/>
+        <location filename="../sources.ui" line="750"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Алифбои ҳиҷои Катаканаи ҷопонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="752"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Katakana</source>
         <translation>Катакана</translation>
     </message>

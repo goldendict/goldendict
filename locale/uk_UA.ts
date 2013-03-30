@@ -3497,7 +3497,7 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="117"/>
         <location filename="../sources.ui" line="241"/>
         <location filename="../sources.ui" line="300"/>
-        <location filename="../sources.ui" line="366"/>
+        <location filename="../sources.ui" line="367"/>
         <source>&amp;Add...</source>
         <translation>&amp;Додати…</translation>
     </message>
@@ -3506,7 +3506,7 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="124"/>
         <location filename="../sources.ui" line="248"/>
         <location filename="../sources.ui" line="307"/>
-        <location filename="../sources.ui" line="373"/>
+        <location filename="../sources.ui" line="374"/>
         <source>&amp;Remove</source>
         <translation>&amp;Вилучити</translation>
     </message>
@@ -3580,49 +3580,48 @@ of the appropriate groups to use them.</source>
         <translation>Будь-які сайти. Рядок %GDWORD% буде замінено на потрібне слово:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Також використовуйте %GD1251% для CP1251 та %GDISO1% для ISO 8859-1.</translation>
+        <translation type="obsolete">Також використовуйте %GD1251% для CP1251 та %GDISO1% для ISO 8859-1.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="343"/>
+        <location filename="../sources.ui" line="344"/>
         <source>Programs</source>
         <translation>Програми</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="349"/>
+        <location filename="../sources.ui" line="350"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
         <translation>Будь які зовнішні програми. %GWORD% рядок буде замінено запитуваним словом. Слово також буде поміщено до стандартного уведення.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="402"/>
+        <location filename="../sources.ui" line="403"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="414"/>
+        <location filename="../sources.ui" line="415"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Жива вимова від &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Цей сайт дозволяє людям записувати і ділитись вимовою слів. Ви можете прослухати їх за допомогою GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="427"/>
+        <location filename="../sources.ui" line="428"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Увімкнути вимову з Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="457"/>
+        <location filename="../sources.ui" line="458"/>
         <source>API Key:</source>
         <translation>Ключ API:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="464"/>
+        <location filename="../sources.ui" line="465"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
         <translation>Використання Forvo зараз вимагає ключ API. Залиште це поле порожнім, щоб використовувати типовий ключ, який може стати недоступний з часом, або зареєструйтесь на сайті, щоб одержати власний ключ.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="489"/>
+        <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3645,74 +3644,80 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Одержайте ваш власний ключ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;тут&lt;/span&gt;&lt;/a&gt;, або залиште порожнім, щоб використовувати типовий.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="502"/>
+        <location filename="../sources.ui" line="331"/>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="503"/>
         <source>Language codes (comma-separated):</source>
         <translation>Коди мов (виділяючи комою):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="509"/>
+        <location filename="../sources.ui" line="510"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Перелік кодів мов, які б ви воліли мати. Наприклад: &quot;en, uk&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="532"/>
+        <location filename="../sources.ui" line="533"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Повний перелік кодів мов &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;тут&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="574"/>
+        <location filename="../sources.ui" line="575"/>
         <source>Transliteration</source>
         <translation>Транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="595"/>
+        <location filename="../sources.ui" line="596"/>
         <source>Russian transliteration</source>
         <translation>Російська транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="606"/>
+        <location filename="../sources.ui" line="607"/>
         <source>Greek transliteration</source>
         <translation>Грецька транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="630"/>
+        <location filename="../sources.ui" line="631"/>
         <source>German transliteration</source>
         <translation>Німецька транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="641"/>
+        <location filename="../sources.ui" line="642"/>
         <source>Belarusian transliteration</source>
         <translation>Білоруська транслітерація</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="667"/>
+        <location filename="../sources.ui" line="668"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Вмикає латинську абетку для японського письма</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="670"/>
+        <location filename="../sources.ui" line="671"/>
         <source>Japanese Romaji</source>
         <translation>Японська романдзі</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="682"/>
+        <location filename="../sources.ui" line="683"/>
         <source>Systems:</source>
         <translation>Системи:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="689"/>
+        <location filename="../sources.ui" line="690"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Найпоширеніший спосіб транскрибування японської,
 яка ґрунтується на англійській фонології</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="694"/>
         <source>Hepburn</source>
         <translation>Хепбьорн</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="703"/>
+        <location filename="../sources.ui" line="704"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -3723,12 +3728,12 @@ Not implemented yet in GoldenDict.</source>
 Поки що не підтримується в GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="709"/>
+        <location filename="../sources.ui" line="710"/>
         <source>Nihon-shiki</source>
         <translation>Ніхон-сікі</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="719"/>
+        <location filename="../sources.ui" line="720"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -3739,32 +3744,32 @@ Not implemented yet in GoldenDict.</source>
 Ще не реалізовано в GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="725"/>
+        <location filename="../sources.ui" line="726"/>
         <source>Kunrei-shiki</source>
         <translation>Кунрей-сікі</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="732"/>
+        <location filename="../sources.ui" line="733"/>
         <source>Syllabaries:</source>
         <translation>Складові азбуки:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="739"/>
+        <location filename="../sources.ui" line="740"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Складова азбука японської хіраґани</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="742"/>
+        <location filename="../sources.ui" line="743"/>
         <source>Hiragana</source>
         <translation>Хіраґана</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="749"/>
+        <location filename="../sources.ui" line="750"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Складова азбука японської катакани</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="752"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Katakana</source>
         <translation>Катакана</translation>
     </message>
