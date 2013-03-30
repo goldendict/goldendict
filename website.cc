@@ -87,17 +87,34 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
     QString inputWord = gd::toQString( str );
 
     urlString.replace( "%25GDWORD%25", inputWord.toUtf8().toPercentEncoding() );
-    urlString.replace( "%25GD1251%25",
-                       QTextCodec::codecForName( "Windows-1251" )->fromUnicode( inputWord ).toPercentEncoding() );
 
-    urlString.replace( "%25GDBIG5%25",
-                       QTextCodec::codecForName( "Big-5" )->fromUnicode( inputWord ).toPercentEncoding() );
+    QTextCodec *codec = QTextCodec::codecForName( "Windows-1251" );
+    if( codec )
+      urlString.replace( "%25GD1251%25", codec->fromUnicode( inputWord ).toPercentEncoding() );
+
+    codec = QTextCodec::codecForName( "Big-5" );
+    if( codec )
+      urlString.replace( "%25GDBIG5%25", codec->fromUnicode( inputWord ).toPercentEncoding() );
+
+    codec = QTextCodec::codecForName( "Big5-HKSCS" );
+    if( codec )
+      urlString.replace( "%25GDBIG5HKSCS%25", codec->fromUnicode( inputWord ).toPercentEncoding() );
+
+    codec = QTextCodec::codecForName( "Shift-JIS" );
+    if( codec )
+      urlString.replace( "%25GDSHIFTJIS%25", codec->fromUnicode( inputWord ).toPercentEncoding() );
+
+    codec = QTextCodec::codecForName( "GB18030" );
+    if( codec )
+      urlString.replace( "%25GDGBK%25", codec->fromUnicode( inputWord ).toPercentEncoding() );
+
 
     // Handle all ISO-8859 encodings
     for( int x = 1; x <= 16; ++x )
     {
-      urlString.replace( QString( "%25GDISO%1%25" ).arg( x ),
-                         QTextCodec::codecForName( QString( "ISO 8859-%1" ).arg( x ).toLatin1() )->fromUnicode( inputWord ).toPercentEncoding() );
+      codec = QTextCodec::codecForName( QString( "ISO 8859-%1" ).arg( x ).toLatin1() );
+      if( codec )
+        urlString.replace( QString( "%25GDISO%1%25" ).arg( x ), codec->fromUnicode( inputWord ).toPercentEncoding() );
 
       if ( x == 10 )
         x = 12; // Skip encodings 11..12, they don't exist
