@@ -43,6 +43,12 @@ a:hover
   display: none;
 }
 
+/* Hide the 'From ' string which preceeds dictionary name in the heading */
+.gdfromprefix
+{
+  display: none;
+}
+
 .gddictname
 {
   font-size: 12px;
@@ -103,19 +109,6 @@ a:hover
 .dsl_ex
 {
   color: steelblue;
-}
-
-.dsl_stress
-{
-  color: darkblue;
-}
-
-.dsl_stress_without_accent {
-  display:inline;
-}
-
-.dsl_stress_with_accent {
-  display: none;
 }
 
 .dsl_p .dsl_ex .dsl_lang
