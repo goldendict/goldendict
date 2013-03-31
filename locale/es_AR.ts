@@ -2578,7 +2578,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
@@ -4055,7 +4055,7 @@ página web de descarga utilizando el navegador de internet.</translation>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Modern</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -4070,12 +4070,12 @@ página web de descarga utilizando el navegador de internet.</translation>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blu</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="162"/>
@@ -4500,7 +4500,7 @@ obtener su propia clave.</translation>
     <message>
         <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtenga su propia clave &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;aquí&lt;/a&gt;, o deje este campo en blanco para utilizar la clave por defecto.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -4524,7 +4524,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Como alternativa, puede utilizar %GD1251% para codificación CP1251 y %GDISO1%...%GDISO16% para codificación ISO-8859-1...ISO 8859-16 respectivamente, %GDBIG5% para Big-5, %GDBIG5HKSCS% para Big5-HKSCS, %GDGBK% para GBK y GB18030, %GDSHIFTJIS% para Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="503"/>
