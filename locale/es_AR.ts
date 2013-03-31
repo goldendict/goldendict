@@ -4524,7 +4524,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation>Como alternativa, puede utilizar %GD1251% para codificación CP1251 y %GDISO1%...%GDISO16% para codificación ISO-8859-1...ISO 8859-16 respectivamente, %GDBIG5% para Big-5, %GDBIG5HKSCS% para Big5-HKSCS, %GDGBK% para GBK y GB18030, %GDSHIFTJIS% para Shift-JIS.</translation>
+        <translation type="unfinished">Como alternativa, puede utilizar %GD1251% para codificación CP1251 y %GDISO1%...%GDISO16% para codificación ISO-8859-1...ISO 8859-16 
+respectivamente, %GDBIG5% para Big-5, %GDBIG5HKSCS% para Big5-HKSCS, %GDGBK% para GBK y GB18030, %GDSHIFTJIS% para Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="503"/>
