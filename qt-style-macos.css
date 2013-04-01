@@ -1,0 +1,16 @@
+#navToolbar #translateLine
+{
+  margin-top: 1px;
+}
+
+#navToolbar GroupComboBox
+{
+  margin-bottom: 1px;
+  margin-top: 0px;
+  padding: 2px 18px 2px 4px;
+}
+
+#navToolbar GroupComboBox::drop-down {
+  padding-right: 2px;
+  border-right: 1px solid darkgray;
+}

@@ -63,5 +63,6 @@
         <file>icons/icon32_lingoes.png</file>
         <file>article-style-st-lingoes-blue.css</file>
         <file>qt-style-st-lingoes-blue.css</file>
+        <file>qt-style-macos.css</file>
     </qresource>
 </RCC>

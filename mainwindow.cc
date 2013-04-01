@@ -892,6 +892,12 @@ void MainWindow::applyQtStyleSheet( QString const & displayStyle, QString const 
   builtInCssFile.open( QFile::ReadOnly );
   QByteArray css = builtInCssFile.readAll();
 
+#if defined(Q_OS_MAC)
+  QFile macCssFile( ":/qt-style-macos.css" );
+  macCssFile.open( QFile::ReadOnly );
+  css += macCssFile.readAll();
+#endif
+
   if ( displayStyle.size() )
   {
     // Load an additional stylesheet
