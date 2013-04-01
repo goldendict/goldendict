@@ -16,7 +16,7 @@
     <message>
         <location filename="../about.ui" line="73"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
+        <translation>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="83"/>
@@ -31,7 +31,7 @@
     <message>
         <location filename="../about.cc" line="16"/>
         <source>[Unknown]</source>
-        <translation>[Neznámý]</translation>
+        <translation>[Neznámy]</translation>
     </message>
 </context>
 <context>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../article_maker.cc" line="179"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Vitajte v programe&lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prácu v programe začnite v &lt;b&gt;Upraviť|Slovníky&lt;/b&gt;, kde môžete pridať cesty k priečinkom v ktorých budú vyhľadané slovníky, nastaviť rôzne stránky Wikipedie a iné zdroje, upraviť poradenie poradenie slovníkov alebo vytvoriť slovníkové skupiny.&lt;/p&gt;&lt;p&gt;Potom budete môcť začať vyhľadať slová! Môžete tak robiť v tomto okne s použitím panela vľavo, alebo môžete &lt;a href=&quot;Working with popup&quot;&gt;vyhľadávať slová z iných aktívnych aplikácií&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Úpravu vlastností programu môžete urobiť &lt;b&gt;Upraviť|Nastavenia…&lt;/b&gt;. Všetky nastavenia majú popisy, ktoré vám pomôžu, pokiaľ si nebudete niečim istý.&lt;/p&gt;&lt;p&gt;Pokiaľ budete potrebovať ďalšiu pomoc, máte nejaké návrhy, alebo len chcete vedieť, čo si myslia iný, tak ste vítaní na &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusnom fóre&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Aktualizácie hľadajte na &lt;a href=&quot;http://goldendict.org/&quot;&gt;stránkach GoldenDict&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licencované pod GPLv3 alebo novšou.&lt;/p&gt;</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajte v programe&lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prácu v programe začnite v &lt;b&gt;Upraviť|Slovníky&lt;/b&gt;, kde môžete pridať cesty k priečinkom v ktorých budú vyhľadané slovníky, nastaviť rôzne stránky Wikipedie a iné zdroje, upraviť poradenie poradenie slovníkov alebo vytvoriť slovníkové skupiny.&lt;/p&gt;&lt;p&gt;Potom budete môcť začať vyhľadať slová! Môžete tak robiť v tomto okne s použitím panela vľavo, alebo môžete &lt;a href=&quot;Working with popup&quot;&gt;vyhľadávať slová z iných aktívnych aplikácií&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Úpravu vlastností programu môžete urobiť &lt;b&gt;Upraviť|Nastavenia…&lt;/b&gt;. Všetky nastavenia majú popisy, ktoré vám pomôžu, pokiaľ si nebudete niečim istý.&lt;/p&gt;&lt;p&gt;Pokiaľ budete potrebovať ďalšiu pomoc, máte nejaké návrhy, alebo len chcete vedieť, čo si myslia iný, tak ste vítaní na &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusnom fóre&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Aktualizácie hľadajte na &lt;a href=&quot;http://goldendict.org/&quot;&gt;stránkach GoldenDict&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licencované pod GPLv3 alebo novšou.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="195"/>
@@ -84,7 +84,7 @@
     <message>
         <location filename="../article_maker.cc" line="298"/>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(obrázok)</translation>
     </message>
 </context>
 <context>
@@ -175,12 +175,12 @@
     <message>
         <location filename="../articleview.cc" line="700"/>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázok</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="716"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Definícia zo slovníka &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="720"/>
@@ -207,32 +207,32 @@
         <location filename="../articleview.cc" line="1156"/>
         <location filename="../articleview.cc" line="1167"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>CHYBA: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1121"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť zvuk</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1123"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvukové súbory (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Všetky súbory (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1136"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť obrázok</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1138"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť obrázky (*.bmp *.jpg *.png *.tif);;Všetky súbory (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1156"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba ukladania zdroja: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1303"/>
@@ -252,12 +252,12 @@
     <message>
         <location filename="../articleview.cc" line="1329"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť &amp;obrázok…</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1337"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť &amp;zvuk…</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1348"/>
@@ -272,13 +272,13 @@
     <message>
         <location filename="../articleview.cc" line="1361"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Odoslať &quot;%1&quot; do vstupného riadku</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1367"/>
         <location filename="../articleview.cc" line="1399"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>Prid&amp;ať &quot;%1&quot; do histórie</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1381"/>
@@ -303,12 +303,12 @@
     <message>
         <location filename="../articleview.cc" line="1582"/>
         <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Knižnica Bass nebola nájdená.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1587"/>
         <source>Bass library can&apos;t play this sound.</source>
-        <translation type="unfinished"></translation>
+        <translation>Knižnica Bass nevie prehrať tento zvuk.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1622"/>
@@ -335,7 +335,7 @@
     <message>
         <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Označiť aktuálny článok</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1167"/>
@@ -349,18 +349,19 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bieloruský prepis z latinky do azbuky (klasická ortografia)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bieloruský prepis z latinky do azbuky (školská ortografia)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bieloruský prepis (vyhladzuje rozdiely
+medzi klasickou a školskou ortografiou v azbuke)</translation>
     </message>
 </context>
 <context>
@@ -424,7 +425,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groups_widgets.cc" line="838"/>
         <location filename="../groups_widgets.cc" line="1013"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Slovníky:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="690"/>
@@ -439,28 +440,28 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepriradené</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kombinovať skupiny podľa zdrojového jazyka do &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kombinovať skupiny podľa cieľového jazyka do &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Urobiť dvojstrannú prekladovú skupinu &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kombinovať skupiny s &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -468,32 +469,32 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">Počet článkov:</translation>
+        <translation>Počet článkov:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="43"/>
         <source>Translates from:</source>
-        <translation type="unfinished">Prekladá z:</translation>
+        <translation>Prekladá z:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="57"/>
         <source>Total words:</source>
-        <translation type="unfinished">Počet slov:</translation>
+        <translation>Počet slov:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="71"/>
         <source>Translates to:</source>
-        <translation type="unfinished">Prekladá do:</translation>
+        <translation>Prekladá do:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="88"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Súbory obsiahnuté v slovníku:</translation>
+        <translation>Súbory obsiahnuté v slovníku:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="169"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis:</translation>
     </message>
 </context>
 <context>
@@ -513,22 +514,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="14"/>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel s&amp;lovníkov</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="103"/>
         <source>Edit this group</source>
-        <translation>Úpraviť túto skupinu</translation>
+        <translation>Upraviť túto skupinu</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info o slovníku</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="126"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť slovník</translation>
     </message>
 </context>
 <context>
@@ -803,27 +804,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zmazať označené</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovať označené</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>História:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="211"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="215"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť histórie: %1 položiek z maxima %2</translation>
     </message>
 </context>
 <context>
@@ -1041,7 +1042,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="87"/>
         <source>German</source>
-        <translation>Nemečina</translation>
+        <translation>Nemčina</translation>
     </message>
     <message>
         <location filename="../language.cc" line="88"/>
@@ -1291,7 +1292,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="137"/>
         <source>Khmer</source>
-        <translation>Khmérsky</translation>
+        <translation>Kmérsky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="138"/>
@@ -1806,82 +1807,82 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradičná čínština</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Zjednodušená čínština</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Iný</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné dialekty zjednodušenej čínštiny</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné dialekty tradičnej čínštiny</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné východoeurópske jazyky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné západoeurópske jazyky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné ruské jazyky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné japonské jazyky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné baltické jazyky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné grécke jazyky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné kórejské jazyky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné turecké jazyky</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatné thajské dialekty</translation>
     </message>
     <message>
         <location filename="../language.cc" line="389"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamazight</translation>
     </message>
 </context>
 <context>
@@ -1945,17 +1946,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Vy&amp;hľadávací panel</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Panel výsledkov</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel &amp;histórie</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...	F3</source>
@@ -1969,7 +1970,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="331"/>
@@ -2070,39 +2071,39 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhľad pred &amp;tlačou</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Znovu vyhľadať súbory</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nová karta</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="473"/>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vždy na vrchu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="476"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Vždy na vrchu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="479"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="488"/>
         <location filename="../mainwindow.ui" line="491"/>
         <location filename="../mainwindow.cc" line="193"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačidlo Menu</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -2141,22 +2142,22 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.ui" line="452"/>
         <location filename="../mainwindow.cc" line="3081"/>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zobraziť</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="455"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="460"/>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exportovať</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importovať</translation>
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
@@ -2284,17 +2285,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="62"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť názvy v &amp;panely slovníka</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="63"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť malé ikony v panely nás&amp;trojov</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="94"/>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Navigácia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1231"/>
@@ -2389,63 +2390,63 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2917"/>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavné okno je nastavené, aby bolo vždy na vrchu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3077"/>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;kryť</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3103"/>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovať históriu do súboru</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3105"/>
         <location filename="../mainwindow.cc" line="3167"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Textové súbory (*.txt);;Všetky súbory (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3144"/>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Export histórie ukončený</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3147"/>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba exportu:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3165"/>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Import histórie zo súboru</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3214"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba importu: neplatné dáta v súbore</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3218"/>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Import histórie je ukončený</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3221"/>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba importu:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3329"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info o slovníku</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3330"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť slovník</translation>
     </message>
 </context>
 <context>
@@ -2453,7 +2454,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mediawiki.cc" line="304"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>Chyba pri spracovaní XML: %1 v %2, %3</translation>
+        <translation>Chyba spracovania XML: %1 v %2,%3</translation>
     </message>
 </context>
 <context>
@@ -2461,7 +2462,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mediawiki.cc" line="173"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>Chyba pri spracovaní XML: %1 v %2, %3</translation>
+        <translation>Chyba spracovania XML: %1 v %2,%3</translation>
     </message>
 </context>
 <context>
@@ -2484,7 +2485,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="402"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -2545,7 +2546,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="248"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="328"/>
@@ -2560,12 +2561,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoradiť podľa názvu</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="250"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoradiť podľa jazyka</translation>
     </message>
 </context>
 <context>
@@ -2637,7 +2638,7 @@ Inak sú pridané za poslednú kartu.</translation>
     <message>
         <location filename="../preferences.ui" line="87"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl-Tab prepína karty podľa MRU</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="97"/>
@@ -2717,17 +2718,17 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="144"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnite túto voľbu, ak chcete označiť slovo pomocou jedného kliknutia myšou</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="147"/>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Označiť slovo jedným kliknutím</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="272"/>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Štýl rozšírenia:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="302"/>
@@ -2741,7 +2742,7 @@ you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
         <translation>Pokiaľ je povolené, prekladové vyskakovacie okno sa vždy zobrazí,
-keď sa postavíte s myšou nad slovo (Widnows) alebo ho označíte (Linux). Ak je povolené, môžete ho zapnúť a vypnúť z hlavného okna alebo ikony v systémovej oblasti.</translation>
+keď sa postavíte s myšou nad slovo (Windows) alebo ho označíte (Linux). Ak je povolené, môžete ho zapnúť a vypnúť z hlavného okna alebo ikony v systémovej oblasti.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="327"/>
@@ -2885,7 +2886,7 @@ až po označení slova.</translation>
     <message>
         <location filename="../preferences.ui" line="526"/>
         <source>Keys may also be pressed afterwards, within</source>
-        <translation>Klávesy môžu byť sltačené postupne po</translation>
+        <translation>Klávesy môžu byť stlačené postupne po</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="533"/>
@@ -2902,12 +2903,12 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="579"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Odoslať preložené slovo do hlavného okna namiesto jeho zobrazenia vo vyskakovacom okne</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="582"/>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Odoslať preložené slovo do hlavného okna</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="610"/>
@@ -2982,7 +2983,7 @@ but works very well.</source>
         <location filename="../preferences.ui" line="814"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>Prehrať audio pomocou Phononu. Môže to byť trochu nestabilné, ale malo by podpoprovať väčšinu audio formátov.</translation>
+        <translation>Prehrať audio pomocou Phononu. Môže to byť trochu nestabilné, ale malo by podporovať väčšinu audio formátov.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="818"/>
@@ -2993,12 +2994,13 @@ but should support most audio file formats.</source>
         <location filename="../preferences.ui" line="828"/>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať audio cez Bass knižnicu. Optimálna voľba. Ak ju chcete použiť
+musíte umiestniť bass.dll (http://www.un4seen.com) do priečinka GoldenDict.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="832"/>
         <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať cez Bass knižnicu</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="841"/>
@@ -3057,7 +3059,7 @@ pre všetky sieťové požiadavky programu.</translation>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>Toto umožní GoldenDictu blokovať väčšinu reklám nepovolením obsahu (obrázky, rámce), ktoré pochádzajú z inej stránky, než je tá, ktorú prezeráte. Pokiaľ sa kvôli tomuto niektoré stránky pokazia, skúste túto voľmu zakázať.</translation>
+        <translation>Toto umožní GoldenDictu blokovať väčšinu reklám nepovolením obsahu (obrázky, rámce), ktoré pochádzajú z inej stránky, než je tá, ktorú prezeráte. Pokiaľ sa kvôli tomuto niektoré stránky pokazia, skúste túto voľbu zakázať.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1009"/>
@@ -3103,7 +3105,7 @@ na stiahnutie.</translation>
     <message>
         <location filename="../preferences.ui" line="1078"/>
         <source>ScanPopup extra technologies</source>
-        <translation>Extra technolódie pre vyskakovacie okno</translation>
+        <translation>Extra technológie pre vyskakovacie okno</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3140,7 +3142,7 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Pokúsi sa získať slovo pod kurzorom pomocou špecialnej GoldenDict správy.
+        <translation>Pokúsi sa získať slovo pod kurzorom pomocou špeciálnej GoldenDict správy.
 Táto technológia funguje len s niektorými programami, ktoré ju podporujú.
 Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</translation>
     </message>
@@ -3152,57 +3154,57 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../preferences.ui" line="1124"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>História</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnite túto voľbu pre uchovanie histórie preložených slov</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1133"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Uchovať &amp;históriu</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1148"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaví maximálny počet položiek pre uchovanie v histórií.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1151"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximálna veľkosť histórie:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Interval ukladania histórie. Ak je nastavený na 0, história sa bude ukladať pri ukončení.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1194"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť každých</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1211"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minút</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1236"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Články</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1242"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnite túto voľbu, aby sa vždy vždy rozbalili voliteľné časti článkov</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1245"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozbaliť voliteľné &amp;časti</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="42"/>
@@ -3217,7 +3219,7 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Moderné</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3227,17 +3229,17 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../preferences.cc" line="83"/>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="162"/>
@@ -3326,7 +3328,7 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../sources.cc" line="718"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -3334,17 +3336,17 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyhľadávanie/filter v slovníku (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Rýchle hľadanie</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazať hľadanie</translation>
     </message>
 </context>
 <context>
@@ -3390,17 +3392,17 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <location filename="../scanpopup.ui" line="188"/>
         <location filename="../scanpopup.ui" line="212"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation>…</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="107"/>
         <source>Back</source>
-        <translation type="unfinished">Späť</translation>
+        <translation>Späť</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
-        <translation type="unfinished">Vpred</translation>
+        <translation>Vpred</translation>
     </message>
     <message>
         <source>Alt+M</source>
@@ -3419,12 +3421,12 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../scanpopup.ui" line="155"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslať slovo do hlavného okna (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="165"/>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="185"/>
@@ -3446,7 +3448,7 @@ môžete mu zmeniť veľkosť, alebo ho inak spravovať.</translation>
         <location filename="../scanpopup.cc" line="470"/>
         <location filename="../scanpopup.cc" line="815"/>
         <source>%1 - %2</source>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -3464,7 +3466,7 @@ môžete mu zmeniť veľkosť, alebo ho inak spravovať.</translation>
     <message>
         <location filename="../sources.cc" line="1004"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -3611,7 +3613,7 @@ alebo sa na stránkach zaregistrujte a získajte vlastný kľúč.</translation>
     <message>
         <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Získajte svoj vlastný kľuč &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;tu&lt;/a&gt;, alebo ponechajte prázdne pre použitie štandardného kľúča.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3635,7 +3637,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alternatívne použite %GD1251% pre CP1251, %GDISO1%...%GDISO16% pre ISO 8859-1...ISO 8859-16 respektíve
+%GDBIG5% pre Big-5, %GDBIG5HKSCS% pre Big5-HKSCS, %GDGBK% pre GBK a GB18030, %GDSHIFTJIS% pre Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="503"/>
@@ -3675,7 +3678,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="642"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Bieloruský prepis</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="668"/>
@@ -3729,7 +3732,7 @@ Not implemented yet in GoldenDict.</source>
         <translation>Na základe Nihon-Shiki systému, ale upravený pre štandardnú modernú japončinu.
 Štandardizovaný ako ISO 3602
 
-Zzatiaľ nie je implementovaný v GoldenDict.</translation>
+Zatiaľ nie je implementovaný v GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="726"/>
@@ -3805,7 +3808,7 @@ Zzatiaľ nie je implementovaný v GoldenDict.</translation>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">Žiadny</translation>
+        <translation>Žiadny</translation>
     </message>
 </context>
 <context>
@@ -3813,12 +3816,12 @@ Zzatiaľ nie je implementovaný v GoldenDict.</translation>
     <message>
         <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Napíšte slovo alebo frázu pre vyhľadanie v slovníkoch</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozbaliť</translation>
     </message>
 </context>
 <context>
@@ -3841,7 +3844,7 @@ Zzatiaľ nie je implementovaný v GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="559"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -3857,7 +3860,7 @@ Zzatiaľ nie je implementovaný v GoldenDict.</translation>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">VAROVANIE: %1</translation>
+        <translation>VAROVANIE: %1</translation>
     </message>
 </context>
 </TS>
