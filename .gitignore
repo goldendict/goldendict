@@ -26,3 +26,7 @@ version.txt
 /goldendict.app/
 /GoldenDict.app/
 *.dmg
+
+.DS_Store
+Info.plist
+GoldenDict.xcodeproj/
