@@ -321,6 +321,9 @@
    <property name="shortcut">
     <string>F3</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="preferences">
    <property name="icon">
@@ -333,10 +336,16 @@
    <property name="shortcut">
     <string>F4</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
   </action>
   <action name="visitHomepage">
    <property name="text">
     <string>&amp;Homepage</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="about">
@@ -349,6 +358,9 @@
    <property name="shortcut">
     <string>F1</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
   </action>
   <action name="quit">
    <property name="text">
@@ -360,10 +372,16 @@
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
   </action>
   <action name="visitForum">
    <property name="text">
     <string>&amp;Forum</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionCloseToTray">
@@ -375,6 +393,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F4</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="saveArticle">
@@ -391,6 +412,9 @@
    <property name="shortcut">
     <string>F2</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="print">
    <property name="icon">
@@ -403,15 +427,24 @@
    <property name="shortcut">
     <string>Ctrl+P</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="pageSetup">
    <property name="text">
     <string>Page Set&amp;up</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="printPreview">
    <property name="text">
     <string>Print Pre&amp;view</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="rescanFiles">
@@ -421,10 +454,16 @@
    <property name="shortcut">
     <string>Ctrl+F5</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="clearHistory">
    <property name="text">
     <string>&amp;Clear</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="newTab">
@@ -441,10 +480,16 @@
    <property name="shortcutContext">
     <enum>Qt::WidgetShortcut</enum>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="openConfigFolder">
    <property name="text">
     <string>&amp;Configuration Folder</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="showHideHistory">
@@ -454,15 +499,24 @@
    <property name="shortcut">
     <string>Ctrl+H</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="exportHistory">
    <property name="text">
     <string>&amp;Export</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="importHistory">
    <property name="text">
     <string>&amp;Import</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="alwaysOnTop">
