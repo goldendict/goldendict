@@ -850,14 +850,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           if( iter != meta.end() )
               dictName = iter->second;
 
-          uint16_t volumes = dictHeader.totalVolumes;
-          if( volumes > 1 )
-          {
-              QString ss;
-              ss.sprintf( " (%i/%i)", (uint16_t)(dictHeader.volume), volumes );
-              dictName += ss.toLocal8Bit().data();
-          }
-
           string langFrom;
           iter = meta.find( "index_language" );
           if( iter != meta.end() )
@@ -867,6 +859,20 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           iter = meta.find( "article_language" );
           if( iter != meta.end() )
               langTo = iter->second;
+
+          if( ( dictName.compare( "Wikipedia") == 0 || dictName.compare( "Wikiquote" ) == 0 )
+              && !langTo.empty() )
+          {
+            dictName = dictName + " (" + langTo + ")";
+          }
+
+          uint16_t volumes = dictHeader.totalVolumes;
+          if( volumes > 1 )
+          {
+            QString ss;
+            ss.sprintf( " (%i/%i)", (uint16_t)(dictHeader.volume), volumes );
+            dictName += ss.toLocal8Bit().data();
+          }
 
           initializing.indexingDictionary( dictName );
 
