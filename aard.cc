@@ -144,7 +144,7 @@ __attribute__((packed))
 enum
 {
   Signature = 0x58524141, // AARX on little-endian, XRAA on big-endian
-  CurrentFormatVersion = 1 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
