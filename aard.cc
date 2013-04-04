@@ -144,7 +144,7 @@ __attribute__((packed))
 enum
 {
   Signature = 0x58524141, // AARX on little-endian, XRAA on big-endian
-  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -860,7 +860,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           if( iter != meta.end() )
               langTo = iter->second;
 
-          if( ( dictName.compare( "Wikipedia") == 0 || dictName.compare( "Wikiquote" ) == 0 )
+          if( ( dictName.compare( "Wikipedia") == 0 || dictName.compare( "Wikiquote" ) == 0 || dictName.compare( "Wiktionary" ) == 0 )
               && !langTo.empty() )
           {
             dictName = dictName + " (" + langTo + ")";
