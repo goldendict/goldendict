@@ -202,8 +202,10 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( definition, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
+#ifdef Q_WS_X11
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
+#endif
 
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),
            this, SLOT( mouseHovered( QString const &, bool ) ) );
