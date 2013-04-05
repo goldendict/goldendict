@@ -13,6 +13,10 @@
 
 #endif
 
+#ifdef Q_OS_MACX
+#define __SECURITYHI__
+#include <Carbon/Carbon.h>
+#endif
 
 #include "ex.hh"
 #include "qtsingleapplication.h"
@@ -28,11 +32,14 @@ struct HotkeyStruct
   quint32 modifier;
   int handle;
   int id;
+#ifdef Q_OS_MACX
+  EventHotKeyRef hkRef, hkRef2;
+#endif
 };
 
 //////////////////////////////////////////////////////////////////////////
 
-#if !defined(Q_OS_MAC) && !defined(Q_WS_QWS)
+#if !defined(Q_WS_QWS)
 class HotkeyWrapper : public QThread // Thread is actually only used on X11
 {
   Q_OBJECT
@@ -62,9 +69,11 @@ protected slots:
 
   void waitKey2();
 
+#ifndef Q_OS_MACX
 private slots:
 
   bool checkState( quint32 vk, quint32 mod );
+#endif
 
 private:
 
@@ -79,6 +88,18 @@ private:
 #ifdef Q_OS_WIN32
   virtual bool winEvent ( MSG * message, long * result );
   HWND hwnd;
+
+#elif defined(Q_OS_MACX)
+
+public:
+  void activated( int hkId );
+private:
+  void sendCmdC();
+
+  static EventHandlerUPP hotKeyFunction;
+  quint32 keyC;
+  EventHandlerRef handlerRef;
+
 #else
 
   static void recordEventCallback( XPointer, XRecordInterceptData * );

@@ -109,8 +109,9 @@ mac {
         -logg \
         -lhunspell-1.2
     INCLUDEPATH = maclibs/include
-    LIBS += -Lmaclibs/lib -framework AppKit
-    OBJECTIVE_SOURCES += lionsupport.mm
+    LIBS += -Lmaclibs/lib -framework AppKit -framework Carbon
+    OBJECTIVE_SOURCES += lionsupport.mm \
+                         machotkeywrapper.mm
     ICON = icons/macicon.icns
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
                       cp -nR maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
