@@ -14,3 +14,19 @@
   padding-right: 2px;
   border-right: 1px solid darkgray;
 }
+
+ScanPopup #translateLine
+{
+  padding: 3px 3px 3px 3px;
+}
+
+ScanPopup GroupComboBox
+{
+  margin: 2px 0px 4px 1px;
+  padding: 1px 18px 1px 4px;
+}
+
+ScanPopup GroupComboBox::drop-down {
+  padding-right: 2px;
+  border-right: 1px solid darkgray;
+}
