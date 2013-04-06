@@ -3245,7 +3245,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳозира</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3260,12 +3260,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="162"/>
@@ -3641,7 +3641,7 @@ in the future, or register on the site to get your own key.</source>
     <message>
         <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Калиди шахсии худро аз &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;ин ҷо&lt;/a&gt; гиред, ё барои истифодаи калиди пешфарз ин амалро нодида гузаронед.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3665,7 +3665,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Шумо инчунин метавонед инҳоро истифода баред: %GD1251% барои CP1251, %GDISO1%...%GDISO16% барои ISO 8859-1...ISO 8859-16 ба таври мувофиқ,
+%GDBIG5% барои Big-5, %GDBIG5HKSCS% барои Big5-HKSCS, %GDGBK% барои GBK ва GB18030, %GDSHIFTJIS% барои Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="503"/>
