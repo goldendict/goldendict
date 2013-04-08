@@ -144,7 +144,7 @@ __attribute__((packed))
 enum
 {
   Signature = 0x58524141, // AARX on little-endian, XRAA on big-endian
-  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -863,7 +863,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           if( ( dictName.compare( "Wikipedia") == 0 || dictName.compare( "Wikiquote" ) == 0 || dictName.compare( "Wiktionary" ) == 0 )
               && !langTo.empty() )
           {
-            dictName = dictName + " (" + langTo + ")";
+            string capitalized = langTo.c_str();
+            capitalized[0] = toupper( capitalized[0] );
+            dictName = dictName + " (" + capitalized + ")";
           }
 
           uint16_t volumes = dictHeader.totalVolumes;
