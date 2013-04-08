@@ -1909,7 +1909,7 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="201"/>
-        <location filename="../mainwindow.cc" line="1073"/>
+        <location filename="../mainwindow.cc" line="1079"/>
         <source>Look up in:</source>
         <translation type="unfinished">Opzoeken in:</translation>
     </message>
@@ -1993,68 +1993,68 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="unfinished">Alle andere tabbladen sluiten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2917"/>
+        <location filename="../mainwindow.cc" line="2923"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished">Het hoofdvenster wordt nu altijd op de voorgrond weergegeven.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3077"/>
+        <location filename="../mainwindow.cc" line="3083"/>
         <source>&amp;Hide</source>
         <translation type="unfinished">&amp;Verbergen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3103"/>
+        <location filename="../mainwindow.cc" line="3109"/>
         <source>Export history to file</source>
         <translation type="unfinished">Geschiedenis opslaan als bestand</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3105"/>
-        <location filename="../mainwindow.cc" line="3167"/>
+        <location filename="../mainwindow.cc" line="3111"/>
+        <location filename="../mainwindow.cc" line="3173"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">Tekst bestanden (*.txt);;Alle bestanden (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3144"/>
+        <location filename="../mainwindow.cc" line="3150"/>
         <source>History export complete</source>
         <translation type="unfinished">Geschiedenis exporteren voltooid</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3147"/>
+        <location filename="../mainwindow.cc" line="3153"/>
         <source>Export error: </source>
         <translation type="unfinished">Fout bij exporteren:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3165"/>
+        <location filename="../mainwindow.cc" line="3171"/>
         <source>Import history from file</source>
         <translation type="unfinished">Geschiedenis importeren uit bestand</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3214"/>
+        <location filename="../mainwindow.cc" line="3220"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished">Fout bij importeren: bestand bevat onjuiste gegevens</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3218"/>
+        <location filename="../mainwindow.cc" line="3224"/>
         <source>History import complete</source>
         <translation type="unfinished">Geschiedenis importeren voltooid</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3221"/>
+        <location filename="../mainwindow.cc" line="3227"/>
         <source>Import error: </source>
         <translation type="unfinished">Fout bij importeren:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3329"/>
+        <location filename="../mainwindow.cc" line="3335"/>
         <source>Dictionary info</source>
         <translation type="unfinished">Woordenboekinformatie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3330"/>
+        <location filename="../mainwindow.cc" line="3336"/>
         <source>Edit dictionary</source>
         <translation type="unfinished">Woordenboek bewerken</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="355"/>
+        <location filename="../mainwindow.ui" line="367"/>
         <location filename="../mainwindow.cc" line="287"/>
         <source>&amp;Quit</source>
         <translation type="unfinished">&amp;Afsluiten</translation>
@@ -2071,17 +2071,17 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="unfinished">Welkom!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1062"/>
+        <location filename="../mainwindow.cc" line="1068"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation type="unfinished">%1 Woordenboeken, %2 Artikelen, %3 Woorden</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1073"/>
+        <location filename="../mainwindow.cc" line="1079"/>
         <source>Look up:</source>
         <translation type="unfinished">Opzoeken:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1091"/>
+        <location filename="../mainwindow.cc" line="1097"/>
         <source>All</source>
         <translation type="unfinished">Alle groepen</translation>
     </message>
@@ -2106,17 +2106,17 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="unfinished">&amp;Navigatiewerkbalk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1231"/>
+        <location filename="../mainwindow.cc" line="1237"/>
         <source>Open Tabs List</source>
         <translation type="unfinished">Tabbladlijst openen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1289"/>
+        <location filename="../mainwindow.cc" line="1295"/>
         <source>(untitled)</source>
         <translation type="unfinished">(naamloos)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1502"/>
+        <location filename="../mainwindow.cc" line="1508"/>
         <source>%1 - %2</source>
         <translation type="unfinished">%1 - %2</translation>
     </message>
@@ -2129,72 +2129,72 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2463"/>
+        <location filename="../mainwindow.cc" line="2469"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation type="unfinished">Bewakingsmechanisme voor sneltoetsen kan niet worden geïnitialiseerd.&lt;br&gt;Zorg ervoor dat de RECORD-extensie van uw XServer is ingeschakeld.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2597"/>
+        <location filename="../mainwindow.cc" line="2603"/>
         <source>New Release Available</source>
         <translation type="unfinished">Nieuwe versie beschikbaar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2598"/>
+        <location filename="../mainwindow.cc" line="2604"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation type="unfinished">Versie &lt;b&gt;%1&lt;/b&gt; van GoldenDict kan nu gedownload worden.&lt;br&gt;Klik op &lt;b&gt;downloaden&lt;/b&gt; om naar de downloadpagina te gaan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2603"/>
+        <location filename="../mainwindow.cc" line="2609"/>
         <source>Download</source>
         <translation type="unfinished">Downloaden</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2604"/>
+        <location filename="../mainwindow.cc" line="2610"/>
         <source>Skip This Release</source>
         <translation type="unfinished">Deze versie overslaan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2727"/>
+        <location filename="../mainwindow.cc" line="2733"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished">De menubalk wordt verborgen. Gebruik %1 om deze opnieuw weer te geven.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2728"/>
+        <location filename="../mainwindow.cc" line="2734"/>
         <source>Ctrl+M</source>
         <translation type="unfinished">Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2826"/>
+        <location filename="../mainwindow.cc" line="2832"/>
         <source>Page Setup</source>
         <translation type="unfinished">Pagina-instelling</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2827"/>
+        <location filename="../mainwindow.cc" line="2833"/>
         <source>No printer is available. Please install one first.</source>
         <translation type="unfinished">Geen printer beschikbaar. U moet er eerst één installeren.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2845"/>
+        <location filename="../mainwindow.cc" line="2851"/>
         <source>Print Article</source>
         <translation type="unfinished">Artikel afdrukken</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2866"/>
+        <location filename="../mainwindow.cc" line="2872"/>
         <source>Save Article As</source>
         <translation type="unfinished">Artikel opslaan als</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2866"/>
+        <location filename="../mainwindow.cc" line="2872"/>
         <source>Html files (*.html *.htm)</source>
         <translation type="unfinished">Html bestanden (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2881"/>
+        <location filename="../mainwindow.cc" line="2887"/>
         <source>Error</source>
         <translation type="unfinished">Fout</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2882"/>
+        <location filename="../mainwindow.cc" line="2888"/>
         <source>Can&apos;t save article: %1</source>
         <translation type="unfinished">Kan artikel niet opslaan: %1</translation>
     </message>
@@ -2262,128 +2262,128 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="unfinished">&amp;Geschiedenisvenster</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="331"/>
+        <location filename="../mainwindow.ui" line="334"/>
         <source>&amp;Preferences...</source>
         <translation type="unfinished">&amp;Instellingen...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="334"/>
+        <location filename="../mainwindow.ui" line="337"/>
         <source>F4</source>
         <translation type="unfinished">F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="339"/>
+        <location filename="../mainwindow.ui" line="345"/>
         <source>&amp;Homepage</source>
         <translation type="unfinished">&amp;Website</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="344"/>
+        <location filename="../mainwindow.ui" line="353"/>
         <source>&amp;About</source>
         <translation type="unfinished">&amp;Over</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="347"/>
+        <location filename="../mainwindow.ui" line="356"/>
         <source>About GoldenDict</source>
         <translation type="unfinished">Over GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="350"/>
+        <location filename="../mainwindow.ui" line="359"/>
         <source>F1</source>
         <translation type="unfinished">F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="358"/>
+        <location filename="../mainwindow.ui" line="370"/>
         <source>Quit from application</source>
         <translation type="unfinished">Programma afsluiten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="361"/>
+        <location filename="../mainwindow.ui" line="373"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="366"/>
+        <location filename="../mainwindow.ui" line="381"/>
         <source>&amp;Forum</source>
         <translation type="unfinished">&amp;Forum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="371"/>
+        <location filename="../mainwindow.ui" line="389"/>
         <source>&amp;Close To Tray</source>
         <translation type="unfinished">&amp;Sluiten naar systeemvak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="374"/>
+        <location filename="../mainwindow.ui" line="392"/>
         <source>Minimizes the window to tray</source>
         <translation type="unfinished">Minimaliseren naar systeemvak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="377"/>
+        <location filename="../mainwindow.ui" line="395"/>
         <source>Ctrl+F4</source>
         <translation type="unfinished">Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="386"/>
+        <location filename="../mainwindow.ui" line="407"/>
         <source>&amp;Save Article</source>
         <translation type="unfinished">Artikel &amp;opslaan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="389"/>
+        <location filename="../mainwindow.ui" line="410"/>
         <source>Save Article</source>
         <translation type="unfinished">Artikel opslaan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="392"/>
+        <location filename="../mainwindow.ui" line="413"/>
         <source>F2</source>
         <translation type="unfinished">F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="401"/>
+        <location filename="../mainwindow.ui" line="425"/>
         <source>&amp;Print</source>
         <translation type="unfinished">Af&amp;drukken</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="404"/>
+        <location filename="../mainwindow.ui" line="428"/>
         <source>Ctrl+P</source>
         <translation type="unfinished">Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="409"/>
+        <location filename="../mainwindow.ui" line="436"/>
         <source>Page Set&amp;up</source>
         <translation type="unfinished">&amp;Pagina-instelling</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="414"/>
+        <location filename="../mainwindow.ui" line="444"/>
         <source>Print Pre&amp;view</source>
         <translation type="unfinished">Afdruk&amp;voorbeeld</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="419"/>
+        <location filename="../mainwindow.ui" line="452"/>
         <source>&amp;Rescan Files</source>
         <translation type="unfinished">Bestanden opnieuw &amp;inlezen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="436"/>
+        <location filename="../mainwindow.ui" line="475"/>
         <source>&amp;New Tab</source>
         <translation type="unfinished">&amp;Nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="473"/>
+        <location filename="../mainwindow.ui" line="527"/>
         <source>&amp;Always on Top</source>
         <translation type="unfinished">&amp;Altijd op de voorgrond</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="476"/>
+        <location filename="../mainwindow.ui" line="530"/>
         <source>Always on Top</source>
         <translation type="unfinished">Altijd op de voorgrond</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="479"/>
+        <location filename="../mainwindow.ui" line="533"/>
         <source>Ctrl+O</source>
         <translation type="unfinished">Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="488"/>
-        <location filename="../mainwindow.ui" line="491"/>
+        <location filename="../mainwindow.ui" line="542"/>
+        <location filename="../mainwindow.ui" line="545"/>
         <location filename="../mainwindow.cc" line="193"/>
         <source>Menu Button</source>
         <translation type="unfinished">Menuknop</translation>
@@ -2397,12 +2397,12 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="obsolete">Dateien neu einlesen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="422"/>
+        <location filename="../mainwindow.ui" line="455"/>
         <source>Ctrl+F5</source>
         <translation type="unfinished">Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="427"/>
+        <location filename="../mainwindow.ui" line="463"/>
         <source>&amp;Clear</source>
         <translation type="unfinished">&amp;Wissen</translation>
     </message>
@@ -2412,33 +2412,33 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="unfinished">Nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="439"/>
+        <location filename="../mainwindow.ui" line="478"/>
         <source>Ctrl+T</source>
         <translation type="unfinished">Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="447"/>
+        <location filename="../mainwindow.ui" line="489"/>
         <source>&amp;Configuration Folder</source>
         <translation type="unfinished">&amp;Configuratiemap</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="452"/>
-        <location filename="../mainwindow.cc" line="3081"/>
+        <location filename="../mainwindow.ui" line="497"/>
+        <location filename="../mainwindow.cc" line="3087"/>
         <source>&amp;Show</source>
         <translation type="unfinished">&amp;Weergeven</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="455"/>
+        <location filename="../mainwindow.ui" line="500"/>
         <source>Ctrl+H</source>
         <translation type="unfinished">Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="460"/>
+        <location filename="../mainwindow.ui" line="508"/>
         <source>&amp;Export</source>
         <translation type="unfinished">&amp;Exporteren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="465"/>
+        <location filename="../mainwindow.ui" line="516"/>
         <source>&amp;Import</source>
         <translation type="unfinished">&amp;Importeren</translation>
     </message>
@@ -3451,8 +3451,8 @@ en u het in grootte of anderszins kunt aanpassen.</translation>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="470"/>
-        <location filename="../scanpopup.cc" line="815"/>
+        <location filename="../scanpopup.cc" line="472"/>
+        <location filename="../scanpopup.cc" line="817"/>
         <source>%1 - %2</source>
         <translation type="unfinished">%1 - %2</translation>
     </message>
