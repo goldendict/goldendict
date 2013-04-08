@@ -112,6 +112,14 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     }
   }
 
+  // spoof User-Agent
+  if ( hideGoldenDictHeader && req.url().scheme().startsWith("http", Qt::CaseInsensitive))
+  {
+    QNetworkRequest newReq( req );
+    newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
+    return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
+  }
+
   return QNetworkAccessManager::createRequest( op, req, outgoingData );
 }
 

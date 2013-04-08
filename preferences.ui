@@ -997,6 +997,17 @@ Plugin must be installed for this option to work.</string>
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="hideGoldenDictHeader">
+         <property name="toolTip">
+          <string>Some sites detect GoldenDict via HTTP headers and block the requests.
+Enable this option to workaround the problem.</string>
+         </property>
+         <property name="text">
+          <string>Do not identify GoldenDict in HTTP headers</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_10">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

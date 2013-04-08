@@ -115,6 +115,7 @@ Preferences::Preferences():
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
+  hideGoldenDictHeader( false ),
   zoomFactor( 1 ),
   wordsZoomLevel( 0 ),
   maxStringsInHistory( 500 ),
@@ -706,6 +707,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "enableWebPlugins" ).isNull() )
       c.preferences.enableWebPlugins = ( preferences.namedItem( "enableWebPlugins" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "hideGoldenDictHeader" ).isNull() )
+      c.preferences.hideGoldenDictHeader = ( preferences.namedItem( "hideGoldenDictHeader" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
@@ -1416,6 +1420,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "enableWebPlugins" );
     opt.appendChild( dd.createTextNode( c.preferences.enableWebPlugins ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "hideGoldenDictHeader" );
+    opt.appendChild( dd.createTextNode( c.preferences.hideGoldenDictHeader ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "maxStringsInHistory" );

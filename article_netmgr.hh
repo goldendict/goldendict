@@ -18,6 +18,7 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   vector< sptr< Dictionary::Class > > const & dictionaries;
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
+  bool const & hideGoldenDictHeader;
 
 public:
 
@@ -25,10 +26,12 @@ public:
                                vector< sptr< Dictionary::Class > > const &
                                dictionaries_,
                                ArticleMaker const & articleMaker_,
-                               bool const & disallowContentFromOtherSites_ ):
+                               bool const & disallowContentFromOtherSites_,
+                               bool const & hideGoldenDictHeader_ ):
     QNetworkAccessManager( parent ), dictionaries( dictionaries_ ),
     articleMaker( articleMaker_ ),
-    disallowContentFromOtherSites( disallowContentFromOtherSites_ )
+    disallowContentFromOtherSites( disallowContentFromOtherSites_ ),
+    hideGoldenDictHeader( hideGoldenDictHeader_ )
   {}
 
   /// Tries handling any kind of internal resources referenced by dictionaries.

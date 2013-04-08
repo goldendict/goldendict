@@ -71,7 +71,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle,
                 cfg.preferences.addonStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
-                 cfg.preferences.disallowContentFromOtherSites ),
+                 cfg.preferences.disallowContentFromOtherSites, cfg.preferences.hideGoldenDictHeader ),
   dictNetMgr( this ),
   wordFinder( this ),
   newReleaseCheckTimer( this ),

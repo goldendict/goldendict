@@ -196,6 +196,7 @@ struct Preferences
   bool checkForNewReleases;
   bool disallowContentFromOtherSites;
   bool enableWebPlugins;
+  bool hideGoldenDictHeader;
 
   qreal zoomFactor;
   int wordsZoomLevel;
