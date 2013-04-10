@@ -3,7 +3,6 @@
 
 #include "scanpopup.hh"
 #include "folding.hh"
-#include "mouseover.hh"
 #include "wstring_qt.hh"
 #include <QUrl>
 #include <QCursor>
@@ -13,6 +12,13 @@
 #include <QMouseEvent>
 #include <QDesktopWidget>
 #include "dprintf.hh"
+
+#ifdef Q_OS_MACX
+#include "macmouseover.hh"
+#define MouseOver MacMouseOver
+#else
+#include "mouseover.hh"
+#endif
 
 using std::wstring;
 

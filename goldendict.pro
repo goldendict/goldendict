@@ -111,7 +111,8 @@ mac {
     INCLUDEPATH = maclibs/include
     LIBS += -Lmaclibs/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
-                         machotkeywrapper.mm
+                         machotkeywrapper.mm \
+                         macmouseover.mm
     ICON = icons/macicon.icns
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
                       cp -nR maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
@@ -332,6 +333,11 @@ win32 {
                x64.hh \
                bass.hh
 }
+
+mac {
+    HEADERS += macmouseover.hh
+}
+
 RESOURCES += resources.qrc \
     flags.qrc
 TRANSLATIONS += locale/ru_RU.ts \
@@ -400,9 +406,4 @@ TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
-
-
-
-
-
 

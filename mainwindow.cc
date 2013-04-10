@@ -2656,7 +2656,14 @@ void MainWindow::scanEnableToggled( bool on )
   if ( scanPopup )
   {
     if ( on )
+    {
       scanPopup->enableScanning();
+#ifdef Q_OS_MACX
+      if( !AXAPIEnabled() )
+          mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
+                                          QPixmap( ":/icons/error.png" ) );
+#endif
+    }
     else
       scanPopup->disableScanning();
   }

@@ -10,11 +10,14 @@
 #include <QX11Info>
 #include <X11/X.h>
 #include <X11/XKBlib.h>
+#elif defined Q_OS_MACX
+#define __SECURITYHI__
+#include <Carbon/Carbon.h>
 #endif
 
 bool KeyboardState::checkModifiersPressed( int mask )
 {
-  #if defined(Q_OS_MAC) || defined(Q_WS_QWS)
+  #if defined(Q_WS_QWS)
     return false;
   #elif defined Q_OS_WIN32
 
@@ -29,6 +32,13 @@ bool KeyboardState::checkModifiersPressed( int mask )
     ( mask & LeftShift && !( GetAsyncKeyState( VK_LSHIFT ) & 0x8000 ) ) ||
     ( mask & RightShift && !( GetAsyncKeyState( VK_RSHIFT ) & 0x8000 ) ) );
 
+  #elif defined Q_OS_MACX
+  UInt32 keys = GetCurrentKeyModifiers();
+  return !(
+    ( mask & Alt && !( keys & ( 1 << optionKeyBit ) ) ) ||
+    ( mask & Ctrl && !( keys & ( 1 << cmdKeyBit ) ) ) ||
+    ( mask & Shift && !( keys & ( 1 << shiftKeyBit ) ) ) ||
+    ( mask & Win && !( keys & ( 1 << controlKeyBit ) ) ) );
   #else
   XkbStateRec state;
 
