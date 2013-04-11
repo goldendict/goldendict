@@ -2140,7 +2140,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3094"/>
         <source>&amp;Show</source>
         <translation>&amp;Намоиш додан</translation>
     </message>
@@ -2342,57 +2342,62 @@ between classic and school orthography in cyrillic)</source>
         <translation>Ин версияро нодида гузарондан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2733"/>
+        <location filename="../mainwindow.cc" line="2663"/>
+        <source>Accessibility API is not enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2740"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Шумо пинҳон кардани лавҳаи менюро интихоб кардед. Барои аз нав намоиш додани лавҳаи меню, %1-ро истифода баред.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2734"/>
+        <location filename="../mainwindow.cc" line="2741"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2832"/>
+        <location filename="../mainwindow.cc" line="2839"/>
         <source>Page Setup</source>
         <translation>Танзими саҳифа</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2833"/>
+        <location filename="../mainwindow.cc" line="2840"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Ягон принтер дастрас нест. Пеш аз ҳама шумо бояд принтерро танзим кунед.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2851"/>
+        <location filename="../mainwindow.cc" line="2858"/>
         <source>Print Article</source>
         <translation>Мақоларо чоп кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Save Article As</source>
         <translation>Мақоларо захира кардан ҳамчун</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлҳои html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2887"/>
+        <location filename="../mainwindow.cc" line="2894"/>
         <source>Error</source>
         <translation>Хато</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2888"/>
+        <location filename="../mainwindow.cc" line="2895"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Мақола захира нашуд: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2923"/>
+        <location filename="../mainwindow.cc" line="2930"/>
         <source>The main window is set to be always on top.</source>
         <translation>Равзанаи асосӣ ҳамеша дар боло ҷойгир мешавад.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3083"/>
+        <location filename="../mainwindow.cc" line="3090"/>
         <source>&amp;Hide</source>
         <translation>&amp;Пинҳон кардан</translation>
     </message>
@@ -2401,28 +2406,28 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Ҳолати намоиши таърих</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3109"/>
+        <location filename="../mainwindow.cc" line="3116"/>
         <source>Export history to file</source>
         <translation>Таърихро ба файл содир кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3111"/>
-        <location filename="../mainwindow.cc" line="3173"/>
+        <location filename="../mainwindow.cc" line="3118"/>
+        <location filename="../mainwindow.cc" line="3180"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Файлҳои матнӣ (*.txt);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3150"/>
+        <location filename="../mainwindow.cc" line="3157"/>
         <source>History export complete</source>
         <translation>Содиркунии таърих ба анҷом расид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3153"/>
+        <location filename="../mainwindow.cc" line="3160"/>
         <source>Export error: </source>
         <translation>Хатои содиркунӣ: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3171"/>
+        <location filename="../mainwindow.cc" line="3178"/>
         <source>Import history from file</source>
         <translation>Ворид кардани таърих аз файл</translation>
     </message>
@@ -2431,27 +2436,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Воридшуда аз файл:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3220"/>
+        <location filename="../mainwindow.cc" line="3227"/>
         <source>Import error: invalid data in file</source>
         <translation>Хатои воридот: маълумоти беэътибор дар файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3224"/>
+        <location filename="../mainwindow.cc" line="3231"/>
         <source>History import complete</source>
         <translation>Воридоти таърих ба анҷом расид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3227"/>
+        <location filename="../mainwindow.cc" line="3234"/>
         <source>Import error: </source>
         <translation>Хатои воридот: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3335"/>
+        <location filename="../mainwindow.cc" line="3342"/>
         <source>Dictionary info</source>
         <translation>Иттилооти луғат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3336"/>
+        <location filename="../mainwindow.cc" line="3343"/>
         <source>Edit dictionary</source>
         <translation>Таҳрир кардани луғат</translation>
     </message>
@@ -3471,8 +3476,8 @@ could be resized or managed in other ways.</source>
         <translation type="obsolete">Луғати GoldenDict</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="472"/>
-        <location filename="../scanpopup.cc" line="817"/>
+        <location filename="../scanpopup.cc" line="478"/>
+        <location filename="../scanpopup.cc" line="823"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>

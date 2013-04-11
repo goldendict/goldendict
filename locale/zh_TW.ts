@@ -1957,6 +1957,10 @@ between classic and school orthography in cyrillic)</source>
         <source>&amp;History Pane</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Accessibility API is not enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>

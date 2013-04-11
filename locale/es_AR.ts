@@ -2715,37 +2715,37 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
         <translation type="obsolete">[Unknown]</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2832"/>
+        <location filename="../mainwindow.cc" line="2839"/>
         <source>Page Setup</source>
         <translation>Configurar página</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2833"/>
+        <location filename="../mainwindow.cc" line="2840"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Impresora no disponible. Por favor instale una primero.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2851"/>
+        <location filename="../mainwindow.cc" line="2858"/>
         <source>Print Article</source>
         <translation>Imprimir artículo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Save Article As</source>
         <translation>Guardar artículo como</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Archivos HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2887"/>
+        <location filename="../mainwindow.cc" line="2894"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2888"/>
+        <location filename="../mainwindow.cc" line="2895"/>
         <source>Can&apos;t save article: %1</source>
         <translation>No es posible guardar el artículo: %1</translation>
     </message>
@@ -2878,12 +2878,17 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
         <translation>Todos</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2923"/>
+        <location filename="../mainwindow.cc" line="2663"/>
+        <source>Accessibility API is not enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2930"/>
         <source>The main window is set to be always on top.</source>
         <translation>La ventana principal del programa se ha configurado para aparecer siempre visible.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3171"/>
+        <location filename="../mainwindow.cc" line="3178"/>
         <source>Import history from file</source>
         <translation>Importar historial desde archivo</translation>
     </message>
@@ -2892,27 +2897,27 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
         <translation type="obsolete">Importado desde archivo:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3220"/>
+        <location filename="../mainwindow.cc" line="3227"/>
         <source>Import error: invalid data in file</source>
         <translation>Error de importación: datos inválidos en el archivo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3224"/>
+        <location filename="../mainwindow.cc" line="3231"/>
         <source>History import complete</source>
         <translation>Importación de historial finalizada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3227"/>
+        <location filename="../mainwindow.cc" line="3234"/>
         <source>Import error: </source>
         <translation>Error de importación: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3335"/>
+        <location filename="../mainwindow.cc" line="3342"/>
         <source>Dictionary info</source>
         <translation>Información del diccionario</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3336"/>
+        <location filename="../mainwindow.cc" line="3343"/>
         <source>Edit dictionary</source>
         <translation>Editar diccionario</translation>
     </message>
@@ -2941,17 +2946,17 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
         <translation type="obsolete">ATENCIÓN: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2733"/>
+        <location filename="../mainwindow.cc" line="2740"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Ha elegido ocultar la barra de menú. Utilice %1 para mostrarla nuevamente.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2734"/>
+        <location filename="../mainwindow.cc" line="2741"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3083"/>
+        <location filename="../mainwindow.cc" line="3090"/>
         <source>&amp;Hide</source>
         <translation>&amp;Ocultar</translation>
     </message>
@@ -2960,23 +2965,23 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
         <translation type="obsolete">Modo vista historial</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3109"/>
+        <location filename="../mainwindow.cc" line="3116"/>
         <source>Export history to file</source>
         <translation>Exportar historial a archivo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3111"/>
-        <location filename="../mainwindow.cc" line="3173"/>
+        <location filename="../mainwindow.cc" line="3118"/>
+        <location filename="../mainwindow.cc" line="3180"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Documentos de texto (*.txt);;Todos los archivos (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3150"/>
+        <location filename="../mainwindow.cc" line="3157"/>
         <source>History export complete</source>
         <translation>Exportación de historial finalizada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3153"/>
+        <location filename="../mainwindow.cc" line="3160"/>
         <source>Export error: </source>
         <translation>Error de exportación:</translation>
     </message>
@@ -3231,7 +3236,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3094"/>
         <source>&amp;Show</source>
         <translation>&amp;Mostrar</translation>
     </message>
@@ -4298,8 +4303,8 @@ o pueda ser manipulada de otras formas.</translation>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="472"/>
-        <location filename="../scanpopup.cc" line="817"/>
+        <location filename="../scanpopup.cc" line="478"/>
+        <location filename="../scanpopup.cc" line="823"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>

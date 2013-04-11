@@ -1937,47 +1937,47 @@ entre as ortografias clássica e escolar de caracteres cilíricos)</translation>
         <translation>Ignorar esta versão</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2733"/>
+        <location filename="../mainwindow.cc" line="2740"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Você optou por ocultar a barra de menus. Use %1 para exibi-la de novo.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2734"/>
+        <location filename="../mainwindow.cc" line="2741"/>
         <source>Ctrl+M</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2832"/>
+        <location filename="../mainwindow.cc" line="2839"/>
         <source>Page Setup</source>
         <translation>Configuração de Página</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2833"/>
+        <location filename="../mainwindow.cc" line="2840"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Não achei nenhuma impressora. Favor instalar uma.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2851"/>
+        <location filename="../mainwindow.cc" line="2858"/>
         <source>Print Article</source>
         <translation>Imprimir Verbete</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Save Article As</source>
         <translation>Salvar Verbete como</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Arquivos HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2887"/>
+        <location filename="../mainwindow.cc" line="2894"/>
         <source>Error</source>
         <translation>Erro!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2888"/>
+        <location filename="../mainwindow.cc" line="2895"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Não foi possível salvar o verbete: %1</translation>
     </message>
@@ -2106,12 +2106,17 @@ entre as ortografias clássica e escolar de caracteres cilíricos)</translation>
         <translation>Todos os Dicionários</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2923"/>
+        <location filename="../mainwindow.cc" line="2663"/>
+        <source>Accessibility API is not enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2930"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished">A janela principal do programa é exibida sempre na frente das outras.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3171"/>
+        <location filename="../mainwindow.cc" line="3178"/>
         <source>Import history from file</source>
         <translation>Importar histórico de arquivo</translation>
     </message>
@@ -2120,27 +2125,27 @@ entre as ortografias clássica e escolar de caracteres cilíricos)</translation>
         <translation type="obsolete">Importado de:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3220"/>
+        <location filename="../mainwindow.cc" line="3227"/>
         <source>Import error: invalid data in file</source>
         <translation>Erro ao tentar importar: dados inválidos no arquivo.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3224"/>
+        <location filename="../mainwindow.cc" line="3231"/>
         <source>History import complete</source>
         <translation>Feita a importação do histórico.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3227"/>
+        <location filename="../mainwindow.cc" line="3234"/>
         <source>Import error: </source>
         <translation>Erro de importação:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3335"/>
+        <location filename="../mainwindow.cc" line="3342"/>
         <source>Dictionary info</source>
         <translation>Inform. do Dicionário</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3336"/>
+        <location filename="../mainwindow.cc" line="3343"/>
         <source>Edit dictionary</source>
         <translation>Editar dicionário</translation>
     </message>
@@ -2169,7 +2174,7 @@ entre as ortografias clássica e escolar de caracteres cilíricos)</translation>
         <translation type="obsolete">ATENÇÃO: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3083"/>
+        <location filename="../mainwindow.cc" line="3090"/>
         <source>&amp;Hide</source>
         <translation>&amp;Ocultar</translation>
     </message>
@@ -2178,23 +2183,23 @@ entre as ortografias clássica e escolar de caracteres cilíricos)</translation>
         <translation type="obsolete">Modo de Histórico</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3109"/>
+        <location filename="../mainwindow.cc" line="3116"/>
         <source>Export history to file</source>
         <translation>Exportar o histórico</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3111"/>
-        <location filename="../mainwindow.cc" line="3173"/>
+        <location filename="../mainwindow.cc" line="3118"/>
+        <location filename="../mainwindow.cc" line="3180"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Arquivos de texto (*.txt);;Todos os arquivos (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3150"/>
+        <location filename="../mainwindow.cc" line="3157"/>
         <source>History export complete</source>
         <translation>Feita a exportação do histórico</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3153"/>
+        <location filename="../mainwindow.cc" line="3160"/>
         <source>Export error: </source>
         <translation>Erro de exportação:</translation>
     </message>
@@ -2429,7 +2434,7 @@ entre as ortografias clássica e escolar de caracteres cilíricos)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3094"/>
         <source>&amp;Show</source>
         <translation>E&amp;xibir</translation>
     </message>
@@ -3468,8 +3473,8 @@ das outras janelas, redimensioná-la ou geri-la à vontade.</translation>
         <translation type="obsolete">Golden</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="472"/>
-        <location filename="../scanpopup.cc" line="817"/>
+        <location filename="../scanpopup.cc" line="478"/>
+        <location filename="../scanpopup.cc" line="823"/>
         <source>%1 - %2</source>
         <translation type="unfinished">%1 - %2</translation>
     </message>

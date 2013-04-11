@@ -1983,6 +1983,10 @@ between classic and school orthography in cyrillic)</source>
         <source>F3</source>
         <translation type="unfinished">F3</translation>
     </message>
+    <message>
+        <source>Accessibility API is not enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>

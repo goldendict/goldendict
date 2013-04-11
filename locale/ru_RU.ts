@@ -1924,47 +1924,47 @@ between classic and school orthography in cyrillic)</source>
         <translation>Пропустить данную версию</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2733"/>
+        <location filename="../mainwindow.cc" line="2740"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Вы скрыли главное меню. Чтобы вернуть его, используйте %1.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2734"/>
+        <location filename="../mainwindow.cc" line="2741"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2832"/>
+        <location filename="../mainwindow.cc" line="2839"/>
         <source>Page Setup</source>
         <translation>Параметры страницы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2833"/>
+        <location filename="../mainwindow.cc" line="2840"/>
         <source>No printer is available. Please install one first.</source>
         <translation>В системе не установлено ни одного принтера.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2851"/>
+        <location filename="../mainwindow.cc" line="2858"/>
         <source>Print Article</source>
         <translation>Печать статьи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Save Article As</source>
         <translation>Сохранить статью как</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлы Html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2887"/>
+        <location filename="../mainwindow.cc" line="2894"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2888"/>
+        <location filename="../mainwindow.cc" line="2895"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Невозможно сохранить статью: %1</translation>
     </message>
@@ -2086,37 +2086,42 @@ between classic and school orthography in cyrillic)</source>
         <translation>Все</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2923"/>
+        <location filename="../mainwindow.cc" line="2663"/>
+        <source>Accessibility API is not enabled</source>
+        <translation>Интерфейс Accessibility не включён</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2930"/>
         <source>The main window is set to be always on top.</source>
         <translation>Главное окно всегда поверх других окон.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3171"/>
+        <location filename="../mainwindow.cc" line="3178"/>
         <source>Import history from file</source>
         <translation>Импорт журнала из файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3220"/>
+        <location filename="../mainwindow.cc" line="3227"/>
         <source>Import error: invalid data in file</source>
         <translation>Ошибка импорта: некорректные данные в файле</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3224"/>
+        <location filename="../mainwindow.cc" line="3231"/>
         <source>History import complete</source>
         <translation>Импорт журнала завершён</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3227"/>
+        <location filename="../mainwindow.cc" line="3234"/>
         <source>Import error: </source>
         <translation>Ошибка импорта:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3335"/>
+        <location filename="../mainwindow.cc" line="3342"/>
         <source>Dictionary info</source>
         <translation>Информация о словаре</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3336"/>
+        <location filename="../mainwindow.cc" line="3343"/>
         <source>Edit dictionary</source>
         <translation>Редактировать словарь</translation>
     </message>
@@ -2141,28 +2146,28 @@ between classic and school orthography in cyrillic)</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3083"/>
+        <location filename="../mainwindow.cc" line="3090"/>
         <source>&amp;Hide</source>
         <translation>&amp;Спрятать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3109"/>
+        <location filename="../mainwindow.cc" line="3116"/>
         <source>Export history to file</source>
         <translation>Экспорт журнала в файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3111"/>
-        <location filename="../mainwindow.cc" line="3173"/>
+        <location filename="../mainwindow.cc" line="3118"/>
+        <location filename="../mainwindow.cc" line="3180"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Текстовые файлы (*.txt);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3150"/>
+        <location filename="../mainwindow.cc" line="3157"/>
         <source>History export complete</source>
         <translation>Экспорт журнала завершён</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3153"/>
+        <location filename="../mainwindow.cc" line="3160"/>
         <source>Export error: </source>
         <translation>Ошибка при экспорте: </translation>
     </message>
@@ -2381,7 +2386,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3094"/>
         <source>&amp;Show</source>
         <translation>&amp;Показать</translation>
     </message>
@@ -3404,8 +3409,8 @@ could be resized or managed in other ways.</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="472"/>
-        <location filename="../scanpopup.cc" line="817"/>
+        <location filename="../scanpopup.cc" line="478"/>
+        <location filename="../scanpopup.cc" line="823"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>

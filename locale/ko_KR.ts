@@ -1924,47 +1924,47 @@ between classic and school orthography in cyrillic)</source>
         <translation>이 버전을 무시합니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2733"/>
+        <location filename="../mainwindow.cc" line="2740"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>메뉴 모음 숨기기를 선택하셨습니다. 다시 보이게 하려면 %1을 사용하십시오.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2734"/>
+        <location filename="../mainwindow.cc" line="2741"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2832"/>
+        <location filename="../mainwindow.cc" line="2839"/>
         <source>Page Setup</source>
         <translation>페이지 설정</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2833"/>
+        <location filename="../mainwindow.cc" line="2840"/>
         <source>No printer is available. Please install one first.</source>
         <translation>프린터가 없습니다. 먼저 프린터를 설치하십시오.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2851"/>
+        <location filename="../mainwindow.cc" line="2858"/>
         <source>Print Article</source>
         <translation>항목 인쇄</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Save Article As</source>
         <translation>다른 이름으로 항목 저장</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html 파일(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2887"/>
+        <location filename="../mainwindow.cc" line="2894"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2888"/>
+        <location filename="../mainwindow.cc" line="2895"/>
         <source>Can&apos;t save article: %1</source>
         <translation>항목을 저장할 수 없습니다: %1</translation>
     </message>
@@ -2085,37 +2085,42 @@ between classic and school orthography in cyrillic)</source>
         <translation>All</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2923"/>
+        <location filename="../mainwindow.cc" line="2663"/>
+        <source>Accessibility API is not enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2930"/>
         <source>The main window is set to be always on top.</source>
         <translation>메인창이 항상 위에 보이도록 설정합니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3171"/>
+        <location filename="../mainwindow.cc" line="3178"/>
         <source>Import history from file</source>
         <translation>검색기록을 파일에서 불러옵니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3220"/>
+        <location filename="../mainwindow.cc" line="3227"/>
         <source>Import error: invalid data in file</source>
         <translation>불러오기 오류: 파일의 데이타가 유효하지 않습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3224"/>
+        <location filename="../mainwindow.cc" line="3231"/>
         <source>History import complete</source>
         <translation>검색기록 불러오기를 완료했습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3227"/>
+        <location filename="../mainwindow.cc" line="3234"/>
         <source>Import error: </source>
         <translation>불러오기 오류: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3335"/>
+        <location filename="../mainwindow.cc" line="3342"/>
         <source>Dictionary info</source>
         <translation>사전 정보</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3336"/>
+        <location filename="../mainwindow.cc" line="3343"/>
         <source>Edit dictionary</source>
         <translation>Редактировать словарь</translation>
     </message>
@@ -2140,28 +2145,28 @@ between classic and school orthography in cyrillic)</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3083"/>
+        <location filename="../mainwindow.cc" line="3090"/>
         <source>&amp;Hide</source>
         <translation>숨기기(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3109"/>
+        <location filename="../mainwindow.cc" line="3116"/>
         <source>Export history to file</source>
         <translation>검색기록을 파일로 저장합니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3111"/>
-        <location filename="../mainwindow.cc" line="3173"/>
+        <location filename="../mainwindow.cc" line="3118"/>
+        <location filename="../mainwindow.cc" line="3180"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>텍스트파일(*.txt);;모든 파일(*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3150"/>
+        <location filename="../mainwindow.cc" line="3157"/>
         <source>History export complete</source>
         <translation>검색기록 저장을 완료했습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3153"/>
+        <location filename="../mainwindow.cc" line="3160"/>
         <source>Export error: </source>
         <translation>저장 오류: </translation>
     </message>
@@ -2380,7 +2385,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3094"/>
         <source>&amp;Show</source>
         <translation>보이기(&amp;S)</translation>
     </message>
@@ -3392,8 +3397,8 @@ could be resized or managed in other ways.</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="472"/>
-        <location filename="../scanpopup.cc" line="817"/>
+        <location filename="../scanpopup.cc" line="478"/>
+        <location filename="../scanpopup.cc" line="823"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
