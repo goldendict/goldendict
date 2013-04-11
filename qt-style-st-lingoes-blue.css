@@ -3,7 +3,22 @@ MainWindow {
 }
 
 MainWindow #menubar {
-    background-color: #CFDDF0;
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                      stop:0 #F0F6FF, stop:0.5 #D2E0F5, stop:0.9 #DCEBFF, stop:1 #F0F6FF);
+}
+
+MainWindow #menubar::item {
+    spacing: 3px;
+    padding: 2px 4px;
+    background: transparent;
+}
+
+MainWindow #menubar::item:selected { /* when selected using mouse or keyboard */
+    background: #839EC7;
+}
+
+MainWindow #menubar::item:pressed {
+    background: #728AAD;
 }
 
 MainWindow #translateLine, ScanPopup #translateLine, MainWindow #wordList {
@@ -38,7 +53,7 @@ ArticleView #searchFrame QMenu {background-color: none}
 ArticleView QMenu {background-color: none} 
 
 MainWindow #dictionaryBar QToolTip {
-   background: #f14040;
+   background: #839EC7;
    color: white;
    border-style: none;
 }
