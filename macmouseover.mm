@@ -130,6 +130,7 @@ void MacMouseOver::handlePosition()
 
   QString strToTranslate;
   CGPoint pt = carbonScreenPointFromCocoaScreenPoint( [NSEvent mouseLocation] );
+  CFArrayRef names = 0;
 
   AXUIElementRef elem = 0;
   AXError err = AXUIElementCopyElementAtPosition( elementSystemWide, pt.x, pt.y, &elem );
@@ -141,63 +142,100 @@ void MacMouseOver::handlePosition()
   {
     CFTypeRef parameter = AXValueCreate( kAXValueCGPointType, &pt );
     CFTypeRef rangeValue;
-    err = AXUIElementCopyParameterizedAttributeValue( elem, kAXRangeForPositionParameterizedAttribute,
-                                                      parameter, &rangeValue );
-    CFRelease( parameter );
+    err = AXUIElementCopyParameterizedAttributeNames( elem, &names );
     if( err != kAXErrorSuccess )
       break;
 
-    CFStringRef stringValue;
-
-    CFRange decodedRange = CFRangeMake( 0, 0 );
-    bool b = AXValueGetValue( (AXValueRef)rangeValue, kAXValueCFRangeType, &decodedRange );
-    CFRelease( rangeValue );
-    if( b )
+    int numOfAttributes = CFArrayGetCount( names );
+    if( CFArrayContainsValue( names, CFRangeMake( 0, numOfAttributes ), CFSTR( "AXRangeForPosition" ) ) )
     {
-      int fromPos = decodedRange.location - 127;
-      if( fromPos < 0 )
-        fromPos = 0;
-      int wordPos = decodedRange.location - fromPos;  // Cursor position in result string
-
-      CFRange range = CFRangeMake( fromPos, wordPos + 1 );
-      parameter = AXValueCreate( kAXValueCFRangeType, &range );
-      err = AXUIElementCopyParameterizedAttributeValue( elem, kAXStringForRangeParameterizedAttribute,
-                                                        parameter, (CFTypeRef *)&stringValue );
+      // Standard interface
+      err = AXUIElementCopyParameterizedAttributeValue( elem, kAXRangeForPositionParameterizedAttribute,
+                                                            parameter, ( CFTypeRef * )&rangeValue );
       CFRelease( parameter );
       if( err != kAXErrorSuccess )
         break;
 
-      strToTranslate = CFStringRefToQString( stringValue );
-      CFRelease( stringValue );
+      CFStringRef stringValue;
 
-      // Read string further
-      for( int i = 1; i < 128; i++ )
+      CFRange decodedRange = CFRangeMake( 0, 0 );
+      bool b = AXValueGetValue( (AXValueRef)rangeValue, kAXValueCFRangeType, &decodedRange );
+      CFRelease( rangeValue );
+      if( b )
       {
-        range = CFRangeMake( decodedRange.location + i, 1 );
+        int fromPos = decodedRange.location - 127;
+        if( fromPos < 0 )
+          fromPos = 0;
+        int wordPos = decodedRange.location - fromPos;  // Cursor position in result string
+
+        CFRange range = CFRangeMake( fromPos, wordPos + 1 );
         parameter = AXValueCreate( kAXValueCFRangeType, &range );
         err = AXUIElementCopyParameterizedAttributeValue( elem, kAXStringForRangeParameterizedAttribute,
-                                                          parameter, (CFTypeRef *)&stringValue );
+                                                            parameter, (CFTypeRef *)&stringValue );
         CFRelease( parameter );
-
         if( err != kAXErrorSuccess )
           break;
 
-        QString s = CFStringRefToQString( stringValue );
+        strToTranslate = CFStringRefToQString( stringValue );
         CFRelease( stringValue );
 
-        if( s[ 0 ].isLetterOrNumber() || s[ 0 ] == '-' )
-          strToTranslate += s;
-        else
-          break;
+        // Read string further
+        for( int i = 1; i < 128; i++ )
+        {
+          range = CFRangeMake( decodedRange.location + i, 1 );
+          parameter = AXValueCreate( kAXValueCFRangeType, &range );
+          err = AXUIElementCopyParameterizedAttributeValue( elem, kAXStringForRangeParameterizedAttribute,
+                                                              parameter, (CFTypeRef *)&stringValue );
+          CFRelease( parameter );
+
+          if( err != kAXErrorSuccess )
+            break;
+
+          QString s = CFStringRefToQString( stringValue );
+          CFRelease( stringValue );
+
+          if( s[ 0 ].isLetterOrNumber() || s[ 0 ] == '-' )
+            strToTranslate += s;
+          else
+            break;
+        }
+
+        handleRetrievedString( strToTranslate, wordPos );
       }
-
-      handleRetrievedString( strToTranslate, wordPos );
     }
+    else if( CFArrayContainsValue( names, CFRangeMake( 0, numOfAttributes ), CFSTR( "AXTextMarkerForPosition" ) ) )
+    {
+      // Safari interface
+      CFTypeRef marker, range;
+      CFStringRef str;
+      err = AXUIElementCopyParameterizedAttributeValue( elem, CFSTR( "AXTextMarkerForPosition" ),
+                                                            parameter, ( CFTypeRef * )&marker );
+      CFRelease( parameter );
+      if( err != kAXErrorSuccess )
+        break;
 
+      err = AXUIElementCopyParameterizedAttributeValue( elem, CFSTR( "AXLeftWordTextMarkerRangeForTextMarker" ),
+                                                        marker, ( CFTypeRef * )&range );
+      CFRelease( marker );
+      if( err != kAXErrorSuccess )
+        break;
+
+      err = AXUIElementCopyParameterizedAttributeValue( elem, CFSTR( "AXStringForTextMarkerRange" ),
+                                                        range, ( CFTypeRef * )&str );
+      CFRelease( range );
+      if( err == kAXErrorSuccess )
+      {
+        strToTranslate = CFStringRefToQString( str );
+        CFRelease( str );
+        handleRetrievedString( strToTranslate, 0 );
+      }
+    }
     break;
   }
   if( elem )
     CFRelease( elem );
+  if( names )
+    CFRelease( names );
 }
 
 void MacMouseOver::handleRetrievedString( QString & wordSeq, int wordSeqPos )
