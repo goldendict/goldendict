@@ -404,7 +404,8 @@ struct Class
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
 
   QString historyExportPath; // Path for export/import history
-  QString resourceSavePath; // Path to save images/audio
+  QString resourceSavePath;  // Path to save images/audio
+  QString articleSavePath;   // Path to save articles
 
   bool pinPopupWindow; // Last pin status
 

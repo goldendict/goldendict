@@ -780,6 +780,9 @@ Class load() throw( exError )
   if ( !root.namedItem( "resourceSavePath" ).isNull() )
     c.resourceSavePath = root.namedItem( "resourceSavePath" ).toElement().text();
 
+  if ( !root.namedItem( "articleSavePath" ).isNull() )
+    c.articleSavePath = root.namedItem( "articleSavePath" ).toElement().text();
+
   if ( !root.namedItem( "editDictionaryCommandLine" ).isNull() )
     c.editDictionaryCommandLine = root.namedItem( "editDictionaryCommandLine" ).toElement().text();
 
@@ -1477,6 +1480,13 @@ void save( Class const & c ) throw( exError )
     {
         opt = dd.createElement( "resourceSavePath" );
         opt.appendChild( dd.createTextNode( c.resourceSavePath ) );
+        root.appendChild( opt );
+    }
+
+    if( !c.articleSavePath.isEmpty() )
+    {
+        opt = dd.createElement( "articleSavePath" );
+        opt.appendChild( dd.createTextNode( c.articleSavePath ) );
         root.appendChild( opt );
     }
 

@@ -2876,25 +2876,38 @@ void MainWindow::on_saveArticle_triggered()
 {
   ArticleView *view = getCurrentArticleView();
 
-  QFileDialog fileDialog( this, tr( "Save Article As" ), QString(), tr( "Html files (*.html *.htm)" ) );
+  QString fileName = view->getTitle() + ".html";
+  QString savePath;
 
-  fileDialog.setAcceptMode( QFileDialog::AcceptSave );
-
-  fileDialog.setDefaultSuffix( "html" );
-
-  fileDialog.selectFile( view->getTitle() + ".html" );
-
-  if ( fileDialog.exec() && fileDialog.selectedFiles().size() == 1 )
+  if ( cfg.articleSavePath.isEmpty() )
+    savePath = QDir::homePath();
+  else
   {
-    QString fileName = fileDialog.selectedFiles().front();
+    savePath = QDir::fromNativeSeparators( cfg.articleSavePath );
+    if ( !QDir( savePath ).exists() )
+      savePath = QDir::homePath();
+  }
+
+  fileName = savePath + "/" + fileName;
+  fileName = QFileDialog::getSaveFileName( this, tr(  "Save Article As" ),
+                                                   fileName,
+                                                   tr( "Html files (*.html *.htm)" ) );
+
+  if ( !fileName.isEmpty() )
+  {
 
     QFile file( fileName );
 
     if ( !file.open( QIODevice::WriteOnly ) )
+    {
       QMessageBox::critical( this, tr( "Error" ),
                              tr( "Can't save article: %1" ).arg( file.errorString() ) );
+    }
     else
+    {
       file.write( view->toHtml().toUtf8() );
+      cfg.articleSavePath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
+    }
   }
 }
 
