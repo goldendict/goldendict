@@ -728,6 +728,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   updateStatusLine();
 
+#ifdef Q_OS_MACX
+  if( cfg.preferences.startWithScanPopupOn && !AXAPIEnabled() )
+      mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
+                                      QPixmap( ":/icons/error.png" ) );
+#endif
+
   wasMaximized = isMaximized();
 
   history.setSaveInterval( cfg.preferences.historyStoreInterval );
