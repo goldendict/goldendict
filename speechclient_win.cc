@@ -56,7 +56,7 @@ static bool enumEngines( void * /* token */,
     QString::fromWCharArray( name )
   };
   pEngines->push_back( engine );
-  return false;
+  return true;
 }
 
 SpeechClient::Engines SpeechClient::availableEngines()

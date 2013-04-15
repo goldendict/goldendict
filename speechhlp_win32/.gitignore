@@ -1,0 +1,7 @@
+Tools/
+Debug/
+Release/
+*.user.*
+*.user
+*.sdf
+*.suo

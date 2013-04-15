@@ -38,10 +38,10 @@ static bool findByEngineName(void *token, const wchar_t *id, const wchar_t *name
     {
         sp->voice->SetVoice((ISpObjectToken *)token);
         sp->engineName = name;
-        return TRUE;
+        return false;
     }
 
-    return FALSE;
+    return true;
 }
 
 SPEECHHLP_EXPORTS SpeechHelper
@@ -79,7 +79,8 @@ speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
     hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
     bool willInvokeCoUninitialize = (hr != RPC_E_CHANGED_MODE);
     hr = SpEnumTokens(SPCAT_VOICES, NULL, NULL, &enumSpTokens);
-    hr = enumSpTokens->GetCount(&count);
+    if (SUCCEEDED(hr))
+        hr = enumSpTokens->GetCount(&count);
 
     for (ULONG i = 0; i < count && next; i++)
     {
@@ -95,9 +96,7 @@ speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
             hr = spToken->GetId(&engineId);
 
         if (SUCCEEDED(hr))
-        {
             next = callback(spToken, engineId, engineName, userData);
-        }
 
         spToken.Release();
 
