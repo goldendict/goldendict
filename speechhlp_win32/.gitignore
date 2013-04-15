@@ -5,3 +5,7 @@ Release/
 *.user
 *.sdf
 *.suo
+*.dll
+*.exp
+*.lib
+*.obj
