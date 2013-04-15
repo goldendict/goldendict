@@ -123,7 +123,7 @@
       <item>
        <widget class="QLineEdit" name="previewText">
         <property name="text">
-         <string>GoldenDict is a feature-rich dictionary lookup tool.</string>
+         <string>Type text to be previewed here.</string>
         </property>
        </widget>
       </item>

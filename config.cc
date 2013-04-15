@@ -616,7 +616,7 @@ Class load() throw( exError )
       v.enabled = ve.attribute( "enabled" ) == "1";
       v.id = ve.attribute( "id" );
       v.name = ve.attribute( "name" );
-
+      v.iconFilename = ve.attribute( "icon" );
       c.voiceEngines.push_back( v );
     }
   }
@@ -1201,6 +1201,10 @@ void save( Class const & c ) throw( exError )
       QDomAttr enabled = dd.createAttribute( "enabled" );
       enabled.setValue( i->enabled ? "1" : "0" );
       v.setAttributeNode( enabled );
+
+      QDomAttr icon = dd.createAttribute( "icon" );
+      icon.setValue( i->iconFilename );
+      v.setAttributeNode( icon );
     }
   }
 

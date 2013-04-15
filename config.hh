@@ -386,18 +386,18 @@ struct VoiceEngine
 	bool enabled;
 	QString id;
 	QString name;
+  QString iconFilename;
 
 	VoiceEngine(): enabled( false )
-	{}
-
-	VoiceEngine( bool enabled, QString const & id, QString const & name ) :
-    enabled( enabled ), id( id ), name( name ) {}
+  {
+  }
 
 	bool operator == ( VoiceEngine const & other ) const
 	{
 		return enabled == other.enabled &&
            id == other.id &&
-           name == other.name;
+           name == other.name &&
+           iconFilename == other.iconFilename;
 	}
 
 	bool operator != ( VoiceEngine const & other ) const

@@ -8,6 +8,8 @@
 #include "wstring_qt.hh"
 
 #include <QUrl>
+#include <QDir>
+#include <QFileInfo>
 
 namespace VoiceEngines {
 
@@ -24,7 +26,10 @@ inline QString toMd5( QByteArray const & b )
 
 class VoiceEnginesDictionary: public Dictionary::Class
 {
+private:
+
   Config::VoiceEngine voiceEngine;
+
 public:
 
   VoiceEnginesDictionary( Config::VoiceEngine const & voiceEngine ):
@@ -106,7 +111,14 @@ void VoiceEnginesDictionary::loadIcon() throw()
   if ( dictionaryIconLoaded )
     return;
 
-  dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/playsound.png" );
+  if ( !voiceEngine.iconFilename.isEmpty() )
+  {
+    QFileInfo fInfo(  QDir( Config::getConfigDir() ), voiceEngine.iconFilename );
+    if ( fInfo.isFile() )
+      loadIconFromFile( fInfo.absoluteFilePath(), true );
+  }
+  if ( dictionaryIcon.isNull() )
+    dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/playsound.png" );
   dictionaryIconLoaded = true;
 }
 

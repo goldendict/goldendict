@@ -129,8 +129,17 @@ Qt::ItemFlags VoiceEnginesModel::flags( QModelIndex const & index ) const
 {
   Qt::ItemFlags result = QAbstractItemModel::flags( index );
 
-  if ( index.isValid() && !index.column() )
-    result |= Qt::ItemIsUserCheckable;
+  if ( index.isValid() )
+  {
+    switch ( index.column() ) {
+    case 0:
+      result |= Qt::ItemIsUserCheckable;
+      break;
+    case 2:
+      result |= Qt::ItemIsEditable;
+      break;
+    }
+  }
 
   return result;
 }
@@ -148,7 +157,7 @@ int VoiceEnginesModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 2;
+    return 3;
 }
 
 QVariant VoiceEnginesModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
@@ -160,6 +169,8 @@ QVariant VoiceEnginesModel::headerData( int section, Qt::Orientation /*orientati
         return tr( "Enabled" );
       case 1:
         return tr( "Name" );
+      case 2:
+        return tr( "Icon" );
       default:
         return QVariant();
     }
@@ -172,8 +183,18 @@ QVariant VoiceEnginesModel::data( QModelIndex const & index, int role ) const
   if ( index.row() >= voiceEngines.size() )
     return QVariant();
 
-  if ( role == Qt::DisplayRole && index.column() == 1 )
-    return voiceEngines[ index.row() ].name;
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+  {
+    switch ( index.column() )
+    {
+      case 1:
+        return voiceEngines[ index.row() ].name;
+      case 2:
+        return voiceEngines[ index.row() ].iconFilename;
+      default:
+        return QVariant();
+    }
+  }
 
   if ( role == Qt::CheckStateRole && !index.column() )
     return voiceEngines[ index.row() ].enabled;
@@ -181,7 +202,7 @@ QVariant VoiceEnginesModel::data( QModelIndex const & index, int role ) const
   return QVariant();
 }
 
-bool VoiceEnginesModel::setData( QModelIndex const & index, const QVariant & /*value*/,
+bool VoiceEnginesModel::setData( QModelIndex const & index, const QVariant & value,
                               int role )
 {
   if ( index.row() >= voiceEngines.size() )
@@ -192,6 +213,19 @@ bool VoiceEnginesModel::setData( QModelIndex const & index, const QVariant & /*v
     voiceEngines[ index.row() ].enabled = !voiceEngines[ index.row() ].enabled;
     dataChanged( index, index );
     return true;
+  }
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+  {
+    switch ( index.column() )
+    {
+      case 2:
+        voiceEngines[ index.row() ].iconFilename = value.toString();
+        dataChanged( index, index );
+        return true;
+      default:
+        return false;
+    }
   }
 
   return false;
