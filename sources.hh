@@ -7,6 +7,7 @@
 #include "ui_sources.h"
 #include "config.hh"
 #include "hunspell.hh"
+#include "texttospeechsource.hh"
 #include <QAbstractItemModel>
 #include <QComboBox>
 #include <QItemDelegate>
@@ -214,18 +215,11 @@ class Sources: public QWidget
   Q_OBJECT
 
 public:
-  Sources( QWidget * parent, Config::Paths const &,
-           Config::SoundDirs const &,
-           Config::Hunspell const &,
-           Config::Transliteration const &,
-           Config::Forvo const & forvo,
-           Config::MediaWikis const &,
-           Config::WebSites const &,
-           Config::Programs const &);
+  Sources( QWidget * parent, Config::Class const &);
 
   Config::Paths const & getPaths() const
   { return pathsModel.getCurrentPaths(); }
-  
+
   Config::SoundDirs const & getSoundDirs() const
   { return soundDirsModel.getCurrentSoundDirs(); }
 
@@ -238,8 +232,10 @@ public:
   Config::Programs const & getPrograms() const
   { return programsModel.getCurrentPrograms(); }
 
+  Config::VoiceEngines getVoiceEngines() const;
+
   Config::Hunspell getHunspell() const;
-  
+
   Config::Transliteration getTransliteration() const;
 
   Config::Forvo getForvo() const;
@@ -248,10 +244,11 @@ signals:
 
   /// Emitted when a 'Rescan' button is clicked.
   void rescan();
-  
+
 private:
   Ui::Sources ui;
 
+  TextToSpeechSource *textToSpeechSource;
   QItemDelegate * itemDelegate;
   QItemEditorFactory * itemEditorFactory;
 
@@ -270,7 +267,7 @@ private slots:
 
   void on_addPath_clicked();
   void on_removePath_clicked();
-  
+
   void on_addSoundDir_clicked();
   void on_removeSoundDir_clicked();
 

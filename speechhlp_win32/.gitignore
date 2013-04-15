@@ -1,0 +1,11 @@
+Tools/
+Debug/
+Release/
+*.user.*
+*.user
+*.sdf
+*.suo
+*.dll
+*.exp
+*.lib
+*.obj
