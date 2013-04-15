@@ -19,6 +19,7 @@
 #include "website.hh"
 #include "forvo.hh"
 #include "programs.hh"
+#include "voiceengines.hh"
 #include "dprintf.hh"
 #include "fsencoding.hh"
 #include "xdxf.hh"
@@ -281,6 +282,14 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   {
     vector< sptr< Dictionary::Class > > dicts =
       Programs::makeDictionaries( cfg.programs );
+
+    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+  }
+
+  //// Text to Speech
+  {
+    vector< sptr< Dictionary::Class > > dicts =
+      VoiceEngines::makeDictionaries( cfg.voiceEngines );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }

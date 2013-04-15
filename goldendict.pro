@@ -34,7 +34,8 @@ LIBS += \
         -lz \
         -lbz2
 
-win32 { 
+win32 {
+	TARGET = GoldenDict
     LIBS += -liconv \
         -lwsock32 \
         -lwinmm \
@@ -45,7 +46,8 @@ win32 {
     LIBS += -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.3.2
+        -lhunspell-1.3.2 \
+        -lspeechhlp
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
     LIBS += -L$${PWD}/winlibs/lib
@@ -216,7 +218,9 @@ HEADERS += folding.hh \
     extlineedit.hh \
     translatebox.hh \
     historypanewidget.hh \
-    wordlist.hh
+    wordlist.hh \
+    speechclient.hh \
+    voiceengines.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -319,19 +323,24 @@ SOURCES += folding.cc \
     extlineedit.cc \
     translatebox.cc \
     historypanewidget.cc \
-    wordlist.cc
+    wordlist.cc \
+    voiceengines.cc
 
-win32 { 
+win32 {
+	FORMS   += texttospeechsource.ui
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
                guids.c \
                x64.cc \
-               bass.cc
+               bass.cc \
+               speechclient_win.cc \
+               texttospeechsource.cc
     HEADERS += mouseover_win32/ThTypes.h \
                wordbyauto.hh \
                uiauto.hh \
                x64.hh \
-               bass.hh
+               bass.hh \
+               texttospeechsource.hh
 }
 
 mac {

@@ -602,6 +602,25 @@ Class load() throw( exError )
     c.webSites = makeDefaultWebSites();
   }
 
+  QDomNode ves = root.namedItem( "voiceEngines" );
+
+	if ( !wss.isNull() )
+  {
+    QDomNodeList nl = ves.toElement().elementsByTagName( "voiceEngine" );
+
+    for ( unsigned x = 0; x < nl.length(); ++x )
+    {
+      QDomElement ve = nl.item( x ).toElement();
+      VoiceEngine v;
+
+      v.enabled = ve.attribute( "enabled" ) == "1";
+      v.id = ve.attribute( "id" );
+      v.name = ve.attribute( "name" );
+
+      c.voiceEngines.push_back( v );
+    }
+  }
+
   c.mutedDictionaries = loadMutedDictionaries( root.namedItem( "mutedDictionaries" ) );
   c.popupMutedDictionaries = loadMutedDictionaries( root.namedItem( "popupMutedDictionaries" ) );
 
@@ -659,7 +678,7 @@ Class load() throw( exError )
 
     c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
     c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
-    
+
     if ( !preferences.namedItem( "useExternalPlayer" ).isNull() )
       c.preferences.useExternalPlayer = ( preferences.namedItem( "useExternalPlayer" ).toElement().text() == "1" );
 
@@ -1162,6 +1181,28 @@ void save( Class const & c ) throw( exError )
     }
   }
 
+  {
+    QDomNode ves = dd.createElement( "voiceEngines" );
+    root.appendChild( ves );
+
+    for ( VoiceEngines::const_iterator i = c.voiceEngines.begin(); i != c.voiceEngines.end(); ++i )
+    {
+      QDomElement v = dd.createElement( "voiceEngine" );
+      ves.appendChild( v );
+
+      QDomAttr id = dd.createAttribute( "id" );
+      id.setValue( i->id );
+      v.setAttributeNode( id );
+
+      QDomAttr name = dd.createAttribute( "name" );
+      name.setValue( i->name );
+      v.setAttributeNode( name );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( i->enabled ? "1" : "0" );
+      v.setAttributeNode( enabled );
+    }
+  }
 
   {
     QDomElement muted = dd.createElement( "mutedDictionaries" );
