@@ -163,27 +163,27 @@
         <translation>Ҳамаашро ҷу&amp;до кунед</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="690"/>
+        <location filename="../articleview.cc" line="692"/>
         <source>Resource</source>
         <translation>Манбаъ</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="695"/>
+        <location filename="../articleview.cc" line="697"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="700"/>
+        <location filename="../articleview.cc" line="702"/>
         <source>Picture</source>
         <translation>Тасвир</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="716"/>
+        <location filename="../articleview.cc" line="718"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Таъриф аз луғати &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="720"/>
+        <location filename="../articleview.cc" line="722"/>
         <source>Definition: %1</source>
         <translation>Маъно: %1</translation>
     </message>
@@ -192,154 +192,154 @@
         <translation type="obsolete">Луғати GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="908"/>
-        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="910"/>
+        <location filename="../articleview.cc" line="1083"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Манбаъи ишорашуда вуҷуд надорад.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="948"/>
+        <location filename="../articleview.cc" line="950"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Барномаи аудиоии ишорашуда вуҷуд надорад.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1055"/>
-        <location filename="../articleview.cc" line="1156"/>
-        <location filename="../articleview.cc" line="1167"/>
+        <location filename="../articleview.cc" line="1083"/>
+        <location filename="../articleview.cc" line="1184"/>
+        <location filename="../articleview.cc" line="1195"/>
         <source>ERROR: %1</source>
         <translation>ХАТОГӢ: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1121"/>
+        <location filename="../articleview.cc" line="1149"/>
         <source>Save sound</source>
         <translation>Захира кардани садо</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1123"/>
+        <location filename="../articleview.cc" line="1151"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Файлҳои садоӣ (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1136"/>
+        <location filename="../articleview.cc" line="1164"/>
         <source>Save image</source>
         <translation>Захира кардани тасвир</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1138"/>
+        <location filename="../articleview.cc" line="1166"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Файлҳои тасвирӣ (*.bmp *.jpg *.png *.tif);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1156"/>
+        <location filename="../articleview.cc" line="1184"/>
         <source>Resource saving error: </source>
         <translation>Хатои захиракунии манбаъ: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1303"/>
+        <location filename="../articleview.cc" line="1331"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Пайвандро кушодан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1309"/>
+        <location filename="../articleview.cc" line="1337"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Пайвандро дар &amp;варақаи нав кушодан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1316"/>
+        <location filename="../articleview.cc" line="1344"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Пайвандро дар &amp;браузер кушодан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1329"/>
+        <location filename="../articleview.cc" line="1357"/>
         <source>Save &amp;image...</source>
         <translation>Захира &amp;кардани тасвир...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1337"/>
+        <location filename="../articleview.cc" line="1365"/>
         <source>Save s&amp;ound...</source>
         <translation>Захира &amp;кардани садо...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1348"/>
+        <location filename="../articleview.cc" line="1376"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot;-ро &amp;дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1356"/>
+        <location filename="../articleview.cc" line="1384"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>&quot;%1&quot;-ро дар варақаи &amp;нав дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1361"/>
+        <location filename="../articleview.cc" line="1389"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Фиристодани &quot;%1&quot; ба хати ворида</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1367"/>
-        <location filename="../articleview.cc" line="1399"/>
+        <location filename="../articleview.cc" line="1395"/>
+        <location filename="../articleview.cc" line="1427"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Илова кардани &quot;%1&quot; ба таърих</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1381"/>
+        <location filename="../articleview.cc" line="1409"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>&quot;%1&quot;-ро дар %2 дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1389"/>
+        <location filename="../articleview.cc" line="1417"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>&quot;%1&quot;-ро дар %2 дар варақаи &amp;нав дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1566"/>
+        <location filename="../articleview.cc" line="1594"/>
         <source>Playing a non-WAV file</source>
         <translation>Файли ғайри-WAV иҷро шуда истодааст</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1567"/>
+        <location filename="../articleview.cc" line="1595"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Барои фаъол кардани иҷрои файлҳои ғайри WAV, лутфан ба Танзимот|Хусусиятҳо гузаред, варақаи аудиоро интихоб кунед ва имконоти &quot;Ба воситаи DirectShow иҷро кунед&quot;-ро дар он ҷо интихоб кунед.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1582"/>
+        <location filename="../articleview.cc" line="1610"/>
         <source>Bass library not found.</source>
         <translation>Китобхонаи басс ёфт нашудааст.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1587"/>
+        <location filename="../articleview.cc" line="1615"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>Китобхои басс ин садоро пахш карда наметавонад.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1622"/>
+        <location filename="../articleview.cc" line="1650"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Барои иҷрои файли аудиоӣ кушоиши плеер қатъ карда шуд: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1640"/>
+        <location filename="../articleview.cc" line="1668"/>
         <source>Failed to create temporary file.</source>
         <translation>Эҷодкунии файли муваққатӣ қатъ карда шуд.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1651"/>
+        <location filename="../articleview.cc" line="1679"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Кушоиши файл ба таври худкор қатъ карда шуд, кӯшиш кунед, ки онро ба таври дастӣ кушоед: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1582"/>
-        <location filename="../articleview.cc" line="1587"/>
-        <location filename="../articleview.cc" line="1674"/>
+        <location filename="../articleview.cc" line="1610"/>
+        <location filename="../articleview.cc" line="1615"/>
+        <location filename="../articleview.cc" line="1702"/>
         <source>WARNING: %1</source>
         <translation>ОГОҲӢ: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="163"/>
+        <location filename="../articleview.cc" line="165"/>
         <source>Select Current Article</source>
         <translation>Интихоб кардани мақолаи ҷорӣ</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1167"/>
-        <location filename="../articleview.cc" line="1674"/>
+        <location filename="../articleview.cc" line="1195"/>
+        <location filename="../articleview.cc" line="1702"/>
         <source>The referenced resource failed to download.</source>
         <translation>Боргирии манбаъи ишорашуда қатъ карда шуд.</translation>
     </message>
@@ -540,39 +540,39 @@ between classic and school orthography in cyrillic)</source>
         <translation>Луғатҳо</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="42"/>
+        <location filename="../editdictionaries.cc" line="41"/>
         <source>&amp;Sources</source>
         <translation>&amp;Сарчашмаҳо</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="221"/>
+        <location filename="../editdictionaries.cc" line="42"/>
+        <location filename="../editdictionaries.cc" line="222"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Луғатҳо</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="44"/>
-        <location filename="../editdictionaries.cc" line="224"/>
+        <location filename="../editdictionaries.cc" line="43"/>
+        <location filename="../editdictionaries.cc" line="225"/>
         <source>&amp;Groups</source>
         <translation>&amp;Гурӯҳҳо</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="105"/>
+        <location filename="../editdictionaries.cc" line="104"/>
         <source>Sources changed</source>
         <translation>Сарчашмаҳо тағйир дода шудаанд</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="106"/>
+        <location filename="../editdictionaries.cc" line="105"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>Баъзе сарчашмаҳо тағйир дода шудаанд. Шумо мехоҳед ин тағйиротро қабул кунед?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="109"/>
+        <location filename="../editdictionaries.cc" line="108"/>
         <source>Accept</source>
         <translation>Қабул кардан</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="111"/>
+        <location filename="../editdictionaries.cc" line="110"/>
         <source>Cancel</source>
         <translation>Бекор кардан</translation>
     </message>
@@ -843,12 +843,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1112"/>
+        <location filename="../sources.cc" line="1125"/>
         <source>Enabled</source>
         <translation>Фаъолшуда</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1114"/>
+        <location filename="../sources.cc" line="1127"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
@@ -1888,7 +1888,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="216"/>
+        <location filename="../loaddictionaries.cc" line="217"/>
         <source>Error loading dictionaries</source>
         <translation>Ҳангоми боркунии луғатҳо хатогӣ ба вуҷуд омад</translation>
     </message>
@@ -2140,7 +2140,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3094"/>
+        <location filename="../mainwindow.cc" line="3113"/>
         <source>&amp;Show</source>
         <translation>&amp;Намоиш додан</translation>
     </message>
@@ -2174,7 +2174,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="201"/>
-        <location filename="../mainwindow.cc" line="1079"/>
+        <location filename="../mainwindow.cc" line="1085"/>
         <source>Look up in:</source>
         <translation>Тарҷума дар:</translation>
     </message>
@@ -2283,32 +2283,32 @@ between classic and school orthography in cyrillic)</source>
         <translation>Бор шуда истодааст...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1068"/>
+        <location filename="../mainwindow.cc" line="1074"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 луғат, %2 мақола, %3 калима</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1079"/>
+        <location filename="../mainwindow.cc" line="1085"/>
         <source>Look up:</source>
         <translation>Тарҷума кардан:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1097"/>
+        <location filename="../mainwindow.cc" line="1103"/>
         <source>All</source>
         <translation>Умумӣ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1237"/>
+        <location filename="../mainwindow.cc" line="1243"/>
         <source>Open Tabs List</source>
         <translation>Рӯйхати варақаҳоро кушодан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1295"/>
+        <location filename="../mainwindow.cc" line="1301"/>
         <source>(untitled)</source>
         <translation>(беном)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1508"/>
+        <location filename="../mainwindow.cc" line="1514"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -2317,87 +2317,88 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">ОГОҲӢ: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2469"/>
+        <location filename="../mainwindow.cc" line="2475"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Омодасозии механизми назорати тугмаҳои зеркор қатъ карда шуд.&lt;br&gt;Мутмаин шавед, ки имконоти RECORD дар XServer фаъол аст.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2603"/>
+        <location filename="../mainwindow.cc" line="2609"/>
         <source>New Release Available</source>
         <translation>Версияи барномаи нав дастрас аст</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2604"/>
+        <location filename="../mainwindow.cc" line="2610"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версияи навтарини луғати GoldenDict &lt;b&gt;%1&lt;/b&gt; барои боргирӣ дастрас аст.&lt;br&gt;Барои кушодани саҳифаи боргирии барнома, тугмаи &lt;b&gt;Боргириро&lt;/b&gt; зер кунед.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2609"/>
+        <location filename="../mainwindow.cc" line="2615"/>
         <source>Download</source>
         <translation>Боргирӣ кунед</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2610"/>
+        <location filename="../mainwindow.cc" line="2616"/>
         <source>Skip This Release</source>
         <translation>Ин версияро нодида гузарондан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2663"/>
+        <location filename="../mainwindow.cc" line="733"/>
+        <location filename="../mainwindow.cc" line="2669"/>
         <source>Accessibility API is not enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2740"/>
+        <location filename="../mainwindow.cc" line="2746"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Шумо пинҳон кардани лавҳаи менюро интихоб кардед. Барои аз нав намоиш додани лавҳаи меню, %1-ро истифода баред.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2741"/>
+        <location filename="../mainwindow.cc" line="2747"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2839"/>
+        <location filename="../mainwindow.cc" line="2845"/>
         <source>Page Setup</source>
         <translation>Танзими саҳифа</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2840"/>
+        <location filename="../mainwindow.cc" line="2846"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Ягон принтер дастрас нест. Пеш аз ҳама шумо бояд принтерро танзим кунед.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2858"/>
+        <location filename="../mainwindow.cc" line="2864"/>
         <source>Print Article</source>
         <translation>Мақоларо чоп кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2879"/>
+        <location filename="../mainwindow.cc" line="2898"/>
         <source>Save Article As</source>
         <translation>Мақоларо захира кардан ҳамчун</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2879"/>
+        <location filename="../mainwindow.cc" line="2900"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Файлҳои html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2894"/>
+        <location filename="../mainwindow.cc" line="2909"/>
         <source>Error</source>
         <translation>Хато</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2895"/>
+        <location filename="../mainwindow.cc" line="2910"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Мақола захира нашуд: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2930"/>
+        <location filename="../mainwindow.cc" line="2949"/>
         <source>The main window is set to be always on top.</source>
         <translation>Равзанаи асосӣ ҳамеша дар боло ҷойгир мешавад.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3090"/>
+        <location filename="../mainwindow.cc" line="3109"/>
         <source>&amp;Hide</source>
         <translation>&amp;Пинҳон кардан</translation>
     </message>
@@ -2406,28 +2407,28 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Ҳолати намоиши таърих</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3116"/>
+        <location filename="../mainwindow.cc" line="3135"/>
         <source>Export history to file</source>
         <translation>Таърихро ба файл содир кардан</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3118"/>
-        <location filename="../mainwindow.cc" line="3180"/>
+        <location filename="../mainwindow.cc" line="3137"/>
+        <location filename="../mainwindow.cc" line="3199"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Файлҳои матнӣ (*.txt);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3157"/>
+        <location filename="../mainwindow.cc" line="3176"/>
         <source>History export complete</source>
         <translation>Содиркунии таърих ба анҷом расид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3160"/>
+        <location filename="../mainwindow.cc" line="3179"/>
         <source>Export error: </source>
         <translation>Хатои содиркунӣ: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3178"/>
+        <location filename="../mainwindow.cc" line="3197"/>
         <source>Import history from file</source>
         <translation>Ворид кардани таърих аз файл</translation>
     </message>
@@ -2436,27 +2437,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Воридшуда аз файл:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3227"/>
+        <location filename="../mainwindow.cc" line="3246"/>
         <source>Import error: invalid data in file</source>
         <translation>Хатои воридот: маълумоти беэътибор дар файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3231"/>
+        <location filename="../mainwindow.cc" line="3250"/>
         <source>History import complete</source>
         <translation>Воридоти таърих ба анҷом расид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3234"/>
+        <location filename="../mainwindow.cc" line="3253"/>
         <source>Import error: </source>
         <translation>Хатои воридот: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3342"/>
+        <location filename="../mainwindow.cc" line="3361"/>
         <source>Dictionary info</source>
         <translation>Иттилооти луғат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3343"/>
+        <location filename="../mainwindow.cc" line="3362"/>
         <source>Edit dictionary</source>
         <translation>Таҳрир кардани луғат</translation>
     </message>
@@ -2480,22 +2481,22 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="396"/>
+        <location filename="../sources.cc" line="409"/>
         <source>Enabled</source>
         <translation>Фаъолшуда</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="398"/>
+        <location filename="../sources.cc" line="411"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="400"/>
+        <location filename="../sources.cc" line="413"/>
         <source>Address</source>
         <translation>Суроға</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="402"/>
+        <location filename="../sources.cc" line="415"/>
         <source>Icon</source>
         <translation>Аломат</translation>
     </message>
@@ -2585,12 +2586,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="894"/>
+        <location filename="../sources.cc" line="907"/>
         <source>Path</source>
         <translation>Масир</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="896"/>
+        <location filename="../sources.cc" line="909"/>
         <source>Recursive</source>
         <translation>Фаъол/ғайрифаъол кардани луғат</translation>
     </message>
@@ -3291,27 +3292,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="802"/>
+        <location filename="../sources.cc" line="815"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="804"/>
+        <location filename="../sources.cc" line="817"/>
         <source>Plain Text</source>
         <translation>Матни оддӣ</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="806"/>
+        <location filename="../sources.cc" line="819"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="808"/>
+        <location filename="../sources.cc" line="821"/>
         <source>Prefix Match</source>
         <translation>Аз рӯи префикс</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="810"/>
+        <location filename="../sources.cc" line="823"/>
         <source>Unknown</source>
         <translation>Номаълум</translation>
     </message>
@@ -3337,27 +3338,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="710"/>
+        <location filename="../sources.cc" line="723"/>
         <source>Enabled</source>
         <translation>Фаъолшуда</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="712"/>
+        <location filename="../sources.cc" line="725"/>
         <source>Type</source>
         <translation>Намуд</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="714"/>
+        <location filename="../sources.cc" line="727"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="716"/>
+        <location filename="../sources.cc" line="729"/>
         <source>Command Line</source>
         <translation>Сатри иҷрои фармон</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="718"/>
+        <location filename="../sources.cc" line="731"/>
         <source>Icon</source>
         <translation>Аломат</translation>
     </message>
@@ -3485,17 +3486,17 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1000"/>
+        <location filename="../sources.cc" line="1013"/>
         <source>Path</source>
         <translation>Масир</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1002"/>
+        <location filename="../sources.cc" line="1015"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1004"/>
+        <location filename="../sources.cc" line="1017"/>
         <source>Icon</source>
         <translation>Аломат</translation>
     </message>
@@ -3798,40 +3799,45 @@ Not implemented yet in GoldenDict.</source>
         <translation>Катакана</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="108"/>
+        <location filename="../sources.cc" line="98"/>
+        <source>Text to Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="114"/>
         <source>(not available in portable version)</source>
         <translation>(дар версияи кӯчондашаванда дастрас нест)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="145"/>
-        <location filename="../sources.cc" line="172"/>
-        <location filename="../sources.cc" line="199"/>
+        <location filename="../sources.cc" line="151"/>
+        <location filename="../sources.cc" line="178"/>
+        <location filename="../sources.cc" line="205"/>
         <source>Choose a directory</source>
         <translation>Ҷузвдонро интихоб кунед</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="159"/>
-        <location filename="../sources.cc" line="186"/>
-        <location filename="../sources.cc" line="226"/>
-        <location filename="../sources.cc" line="250"/>
-        <location filename="../sources.cc" line="274"/>
+        <location filename="../sources.cc" line="165"/>
+        <location filename="../sources.cc" line="192"/>
+        <location filename="../sources.cc" line="232"/>
+        <location filename="../sources.cc" line="256"/>
+        <location filename="../sources.cc" line="280"/>
         <source>Confirm removal</source>
         <translation>Тозакуниро тасдиқ кунед</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="160"/>
-        <location filename="../sources.cc" line="187"/>
+        <location filename="../sources.cc" line="166"/>
+        <location filename="../sources.cc" line="193"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Ҷузвдони &lt;b&gt;%1&lt;/b&gt;-ро аз рӯйхат тоза мекунед?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="227"/>
-        <location filename="../sources.cc" line="251"/>
+        <location filename="../sources.cc" line="233"/>
+        <location filename="../sources.cc" line="257"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Вебсайти &lt;b&gt;%1&lt;/b&gt;-ро аз рӯйхат тоза мекунед?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="275"/>
+        <location filename="../sources.cc" line="281"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Барномаи &lt;b&gt;%1&lt;/b&gt;-ро аз рӯйхат тоза мекунед?</translation>
     </message>
@@ -3842,6 +3848,74 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
         <translation>Ҳеҷ чиз</translation>
+    </message>
+</context>
+<context>
+    <name>TextToSpeechSource</name>
+    <message>
+        <location filename="../texttospeechsource.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Шакл</translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="33"/>
+        <source>Selected voice engines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="53"/>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="60"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="84"/>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="98"/>
+        <source>Available voice engines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="116"/>
+        <source>Text to be previewed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="123"/>
+        <source>Type text to be previewed here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="157"/>
+        <source>&amp;Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="34"/>
+        <source>No TTS voice available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="35"/>
+        <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="52"/>
+        <source>Confirm removal</source>
+        <translation type="unfinished">Тозакуниро тасдиқ кунед</translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="53"/>
+        <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3858,24 +3932,47 @@ Not implemented yet in GoldenDict.</source>
     </message>
 </context>
 <context>
+    <name>VoiceEnginesModel</name>
+    <message>
+        <location filename="../texttospeechsource.cc" line="173"/>
+        <source>Enabled</source>
+        <translation type="unfinished">Фаъолшуда</translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="175"/>
+        <source>Name</source>
+        <translation type="unfinished">Ном</translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="177"/>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="179"/>
+        <source>Icon</source>
+        <translation type="unfinished">Аломат</translation>
+    </message>
+</context>
+<context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="553"/>
+        <location filename="../sources.cc" line="566"/>
         <source>Enabled</source>
         <translation>Фаъолшуда</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="555"/>
+        <location filename="../sources.cc" line="568"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="557"/>
+        <location filename="../sources.cc" line="570"/>
         <source>Address</source>
         <translation>Суроға</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="559"/>
+        <location filename="../sources.cc" line="572"/>
         <source>Icon</source>
         <translation>Аломат</translation>
     </message>
