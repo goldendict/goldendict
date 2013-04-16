@@ -12,10 +12,15 @@ TextToSpeechSource::TextToSpeechSource( QWidget * parent,
 {
   ui.setupUi( this );
 
+  SpeechClient::Engines engines = SpeechClient::availableEngines();
+
   ui.selectedVoiceEngines->setTabKeyNavigation( true );
   ui.selectedVoiceEngines->setModel( &voiceEnginesModel );
+  ui.selectedVoiceEngines->hideColumn( VoiceEnginesModel::kColumnEngineId );
+  fitSelectedVoiceEnginesColumns();
+  ui.selectedVoiceEngines->setItemDelegateForColumn( VoiceEnginesModel::kColumnEngineName,
+                                                     new VoiceEngineItemDelegate( engines, this ) );
 
-  SpeechClient::Engines engines = SpeechClient::availableEngines();
   foreach ( SpeechClient::Engine engine, engines )
   {
     ui.availableVoiceEngines->addItem( engine.name, engine.id );
@@ -24,12 +29,17 @@ TextToSpeechSource::TextToSpeechSource( QWidget * parent,
 
 void TextToSpeechSource::on_addVoiceEngine_clicked()
 {
-  int idx = ui.availableVoiceEngines->currentIndex();
-  if ( idx < 0 )
+  if ( ui.availableVoiceEngines->count() == 0 )
+  {
+    QMessageBox::information( this, tr( "No TTS voice available" ),
+                              tr( "Cannot find availble TTS voice.<br>"
+                                  "Please make sure that at least one TTS engine installed on your computer already." ) );
     return;
+  }
 
-  QString name = ui.availableVoiceEngines->itemText( idx );
-  QString id = ui.availableVoiceEngines->itemData( idx ).toString();
+  // Fake id and name
+  QString name = ui.availableVoiceEngines->itemText( 0 );
+  QString id = ui.availableVoiceEngines->itemData( 0 ).toString();
   voiceEnginesModel.addNewVoiceEngine( id, name );
   fitSelectedVoiceEnginesColumns();
 }
@@ -76,8 +86,9 @@ void TextToSpeechSource::previewVoiceFinished( SpeechClient * speechClient )
 
 void TextToSpeechSource::fitSelectedVoiceEnginesColumns()
 {
-  ui.selectedVoiceEngines->resizeColumnToContents( 0 );
-  ui.selectedVoiceEngines->resizeColumnToContents( 1 );
+  ui.selectedVoiceEngines->resizeColumnToContents( VoiceEnginesModel::kColumnEnabled );
+  ui.selectedVoiceEngines->resizeColumnToContents( VoiceEnginesModel::kColumnEngineName );
+  ui.selectedVoiceEngines->resizeColumnToContents( VoiceEnginesModel::kColumnIcon );
 }
 
 VoiceEnginesModel::VoiceEnginesModel( QWidget * parent,
@@ -98,17 +109,10 @@ void VoiceEnginesModel::addNewVoiceEngine( QString const & id, QString const & n
   if ( id.isEmpty() || name.isEmpty() )
     return;
 
-	Config::VoiceEngine v;
+  Config::VoiceEngine v;
 	v.enabled = true;
 	v.id = id;
 	v.name = name;
-
-  // Check dupliates
-  foreach ( Config::VoiceEngine engine, voiceEngines )
-  {
-    if ( v.id == engine.id )
-      return;
-  }
 
   beginInsertRows( QModelIndex(), voiceEngines.size(), voiceEngines.size() );
   voiceEngines.push_back( v );
@@ -132,10 +136,11 @@ Qt::ItemFlags VoiceEnginesModel::flags( QModelIndex const & index ) const
   if ( index.isValid() )
   {
     switch ( index.column() ) {
-    case 0:
+    case kColumnEnabled:
       result |= Qt::ItemIsUserCheckable;
       break;
-    case 2:
+    case kColumnEngineName:
+    case kColumnIcon:
       result |= Qt::ItemIsEditable;
       break;
     }
@@ -148,32 +153,32 @@ int VoiceEnginesModel::rowCount( QModelIndex const & parent ) const
 {
   if ( parent.isValid() )
     return 0;
-  else
-    return voiceEngines.size();
+  return voiceEngines.size();
 }
 
 int VoiceEnginesModel::columnCount( QModelIndex const & parent ) const
 {
   if ( parent.isValid() )
     return 0;
-  else
-    return 3;
+  return kColumnCount;
 }
 
 QVariant VoiceEnginesModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
 {
   if ( role == Qt::DisplayRole )
+  {
     switch( section )
     {
-      case 0:
+      case kColumnEnabled:
         return tr( "Enabled" );
-      case 1:
+      case kColumnEngineName:
         return tr( "Name" );
-      case 2:
+      case kColumnEngineId:
+        return tr( "Id" );
+      case kColumnIcon:
         return tr( "Icon" );
-      default:
-        return QVariant();
     }
+  }
 
   return QVariant();
 }
@@ -187,16 +192,18 @@ QVariant VoiceEnginesModel::data( QModelIndex const & index, int role ) const
   {
     switch ( index.column() )
     {
-      case 1:
+      case kColumnEngineId:
+        return voiceEngines[ index.row() ].id;
+      case kColumnEngineName:
         return voiceEngines[ index.row() ].name;
-      case 2:
+      case kColumnIcon:
         return voiceEngines[ index.row() ].iconFilename;
       default:
         return QVariant();
     }
   }
 
-  if ( role == Qt::CheckStateRole && !index.column() )
+  if ( role == Qt::CheckStateRole && index.column() == kColumnEnabled )
     return voiceEngines[ index.row() ].enabled;
 
   return QVariant();
@@ -208,7 +215,7 @@ bool VoiceEnginesModel::setData( QModelIndex const & index, const QVariant & val
   if ( index.row() >= voiceEngines.size() )
     return false;
 
-  if ( role == Qt::CheckStateRole && !index.column() )
+  if ( role == Qt::CheckStateRole && index.column() == kColumnEnabled )
   {
     voiceEngines[ index.row() ].enabled = !voiceEngines[ index.row() ].enabled;
     dataChanged( index, index );
@@ -219,7 +226,15 @@ bool VoiceEnginesModel::setData( QModelIndex const & index, const QVariant & val
   {
     switch ( index.column() )
     {
-      case 2:
+      case kColumnEngineId:
+        voiceEngines[ index.row() ].id = value.toString();
+        dataChanged( index, index );
+        return true;
+      case kColumnEngineName:
+        voiceEngines[ index.row() ].name = value.toString();
+        dataChanged( index, index );
+        return true;
+      case kColumnIcon:
         voiceEngines[ index.row() ].iconFilename = value.toString();
         dataChanged( index, index );
         return true;
@@ -229,4 +244,83 @@ bool VoiceEnginesModel::setData( QModelIndex const & index, const QVariant & val
   }
 
   return false;
+}
+
+VoiceEngineEditor::VoiceEngineEditor( SpeechClient::Engines const & engines, QWidget * parent ):
+  QComboBox( parent )
+{
+  foreach ( SpeechClient::Engine engine, engines )
+  {
+    addItem( engine.name, engine.id );
+  }
+}
+
+QString VoiceEngineEditor::engineName() const
+{
+  int idx = currentIndex();
+  if ( idx < 0 )
+    return "";
+  return itemText( idx );
+}
+
+QString VoiceEngineEditor::engineId() const
+{
+  int idx = currentIndex();
+  if ( idx < 0 )
+    return "";
+  return itemData( idx ).toString();
+}
+
+void VoiceEngineEditor::setEngineId( QString const & engineId )
+{
+  // Find index for the id
+  int idx = -1;
+  for ( int i = 0; i < count(); ++i ) {
+    if ( engineId == itemData(i).toString() ) {
+      idx = i;
+      break;
+    }
+  }
+  setCurrentIndex( idx );
+}
+
+VoiceEngineItemDelegate::VoiceEngineItemDelegate( SpeechClient::Engines const & engines, QObject *parent ) :
+  QStyledItemDelegate( parent ),
+  engines( engines )
+{
+}
+
+QWidget * VoiceEngineItemDelegate::createEditor( QWidget *parent,
+                                                 QStyleOptionViewItem const & option,
+                                                 QModelIndex const & index ) const
+{
+  if( index.column() != VoiceEnginesModel::kColumnEngineName )
+    return QStyledItemDelegate::createEditor( parent, option, index );
+  return new VoiceEngineEditor( engines, parent );
+}
+
+void VoiceEngineItemDelegate::setEditorData( QWidget *uncastedEditor, const QModelIndex & index ) const
+{
+  VoiceEngineEditor * editor = qobject_cast< VoiceEngineEditor * >( uncastedEditor );
+  if ( !editor )
+    return;
+
+  int currentRow = index.row();
+  QModelIndex engineIdIndex = index.sibling( currentRow, VoiceEnginesModel::kColumnEngineId );
+  QString engineId = index.model()->data( engineIdIndex ).toString();
+  editor->setEngineId( engineId );
+}
+
+void VoiceEngineItemDelegate::setModelData( QWidget *uncastedEditor, QAbstractItemModel * model,
+                                            const QModelIndex & index ) const
+{
+  VoiceEngineEditor * editor = qobject_cast< VoiceEngineEditor * >( uncastedEditor );
+  if ( !editor )
+    return;
+
+  int currentRow = index.row();
+  QModelIndex engineIdIndex = index.sibling( currentRow, VoiceEnginesModel::kColumnEngineId );
+  QModelIndex engineNameIndex = index.sibling( currentRow, VoiceEnginesModel::kColumnEngineName );
+  model->setData( engineIdIndex, editor->engineId() );
+  model->setData( engineNameIndex, editor->engineName() );
 }
