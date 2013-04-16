@@ -2344,7 +2344,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2663"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Қобилияти API фаъол нашудааст</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2740"/>
