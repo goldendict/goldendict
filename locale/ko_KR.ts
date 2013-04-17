@@ -118,179 +118,179 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="165"/>
+        <location filename="../articleview.cc" line="163"/>
         <source>Select Current Article</source>
         <translation>현재 항목 선택</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="692"/>
+        <location filename="../articleview.cc" line="690"/>
         <source>Resource</source>
         <translation>리소스</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="697"/>
+        <location filename="../articleview.cc" line="695"/>
         <source>Audio</source>
         <translation>오디오</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="702"/>
+        <location filename="../articleview.cc" line="700"/>
         <source>Picture</source>
         <translation>그림</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="718"/>
+        <location filename="../articleview.cc" line="716"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>사전의 정의 &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="722"/>
+        <location filename="../articleview.cc" line="720"/>
         <source>Definition: %1</source>
         <translation>정의: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="910"/>
-        <location filename="../articleview.cc" line="1083"/>
+        <location filename="../articleview.cc" line="908"/>
+        <location filename="../articleview.cc" line="1055"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>참조할 리소스가 존재하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="950"/>
+        <location filename="../articleview.cc" line="948"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>참조할 오디오 프로그램이 존재하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1083"/>
-        <location filename="../articleview.cc" line="1184"/>
-        <location filename="../articleview.cc" line="1195"/>
+        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1156"/>
+        <location filename="../articleview.cc" line="1167"/>
         <source>ERROR: %1</source>
         <translation>오류: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1149"/>
+        <location filename="../articleview.cc" line="1121"/>
         <source>Save sound</source>
         <translation>사운드 저장</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1151"/>
+        <location filename="../articleview.cc" line="1123"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>사운드 파일 (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;모든 파일 (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1164"/>
+        <location filename="../articleview.cc" line="1136"/>
         <source>Save image</source>
         <translation>이미지 저장</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1166"/>
+        <location filename="../articleview.cc" line="1138"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>이미지 파일 (*.bmp *.jpg *.png *.tif);;모든 파일 (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1184"/>
+        <location filename="../articleview.cc" line="1156"/>
         <source>Resource saving error: </source>
         <translation>리소스 저장 오류: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1331"/>
+        <location filename="../articleview.cc" line="1303"/>
         <source>&amp;Open Link</source>
         <translation>링크 열기(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1337"/>
+        <location filename="../articleview.cc" line="1309"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>새 탭에서 링크 열기(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1344"/>
+        <location filename="../articleview.cc" line="1316"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>외부 브라우저에서 링크 열기(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1376"/>
+        <location filename="../articleview.cc" line="1348"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 검색(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1384"/>
+        <location filename="../articleview.cc" line="1356"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>새 탭에서 &quot;%1&quot; 검색(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1389"/>
+        <location filename="../articleview.cc" line="1361"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>&quot;%1&quot;을 입력줄로 보냄</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1395"/>
-        <location filename="../articleview.cc" line="1427"/>
+        <location filename="../articleview.cc" line="1367"/>
+        <location filename="../articleview.cc" line="1399"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>검색기록에 &quot;%1&quot; 추가(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1409"/>
+        <location filename="../articleview.cc" line="1381"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>%2에서 &quot;%1&quot; 검색</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1417"/>
+        <location filename="../articleview.cc" line="1389"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>새 탭을 열고 %2에서 &quot;%1&quot; 검색(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1594"/>
+        <location filename="../articleview.cc" line="1566"/>
         <source>Playing a non-WAV file</source>
         <translation>WAV 아닌 파일 재생</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1595"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>WAV 아닌 파일을 재생할 수 있게 하려면 편집|설정 메뉴의 오디오탭에서 &quot;DirectShow로 재생&quot;을 선택하십시오.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1610"/>
+        <location filename="../articleview.cc" line="1582"/>
         <source>Bass library not found.</source>
         <translation>Bass library를 찾을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1615"/>
+        <location filename="../articleview.cc" line="1587"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>Bass library가 이 사운드를 재생할 수 없습니다. </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1650"/>
+        <location filename="../articleview.cc" line="1622"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>사운드를 재생할 플레이어를 실행할 수 없습니다: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1668"/>
+        <location filename="../articleview.cc" line="1640"/>
         <source>Failed to create temporary file.</source>
         <translation>임시파일을 만들 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1679"/>
+        <location filename="../articleview.cc" line="1651"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>리소스파일을 여는데 실패했습니다. 수동으로 열어 보십시오: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1195"/>
-        <location filename="../articleview.cc" line="1702"/>
+        <location filename="../articleview.cc" line="1167"/>
+        <location filename="../articleview.cc" line="1674"/>
         <source>The referenced resource failed to download.</source>
         <translation>참조할 리소스를 다운로드하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1357"/>
+        <location filename="../articleview.cc" line="1329"/>
         <source>Save &amp;image...</source>
         <translation>이미지 저장(&amp;i)...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1365"/>
+        <location filename="../articleview.cc" line="1337"/>
         <source>Save s&amp;ound...</source>
         <translation>사운드 저장(&amp;o)...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1610"/>
-        <location filename="../articleview.cc" line="1615"/>
-        <location filename="../articleview.cc" line="1702"/>
+        <location filename="../articleview.cc" line="1582"/>
+        <location filename="../articleview.cc" line="1587"/>
+        <location filename="../articleview.cc" line="1674"/>
         <source>WARNING: %1</source>
         <translation>경고: %1</translation>
     </message>
@@ -527,39 +527,39 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>EditDictionaries</name>
     <message>
-        <location filename="../editdictionaries.cc" line="41"/>
+        <location filename="../editdictionaries.cc" line="42"/>
         <source>&amp;Sources</source>
         <translation>사전소스(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="42"/>
-        <location filename="../editdictionaries.cc" line="222"/>
+        <location filename="../editdictionaries.cc" line="43"/>
+        <location filename="../editdictionaries.cc" line="221"/>
         <source>&amp;Dictionaries</source>
         <translation>사전(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="225"/>
+        <location filename="../editdictionaries.cc" line="44"/>
+        <location filename="../editdictionaries.cc" line="224"/>
         <source>&amp;Groups</source>
         <translation>그룹(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="104"/>
+        <location filename="../editdictionaries.cc" line="105"/>
         <source>Sources changed</source>
         <translation>소스가 변경되었습니다</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="105"/>
+        <location filename="../editdictionaries.cc" line="106"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>일부 소스가 변경되었습니다. 변경을 수락하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="108"/>
+        <location filename="../editdictionaries.cc" line="109"/>
         <source>Accept</source>
         <translation>수락</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="110"/>
+        <location filename="../editdictionaries.cc" line="111"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -835,12 +835,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1125"/>
+        <location filename="../sources.cc" line="1112"/>
         <source>Enabled</source>
         <translation>사용</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1127"/>
+        <location filename="../sources.cc" line="1114"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
@@ -1880,7 +1880,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="217"/>
+        <location filename="../loaddictionaries.cc" line="216"/>
         <source>Error loading dictionaries</source>
         <translation>사전 호출 실패</translation>
     </message>
@@ -1919,83 +1919,83 @@ between classic and school orthography in cyrillic)</source>
         <translation>불러오는 중...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2616"/>
+        <location filename="../mainwindow.cc" line="2610"/>
         <source>Skip This Release</source>
         <translation>이 버전을 무시합니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2746"/>
+        <location filename="../mainwindow.cc" line="2740"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>메뉴 모음 숨기기를 선택하셨습니다. 다시 보이게 하려면 %1을 사용하십시오.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2747"/>
+        <location filename="../mainwindow.cc" line="2741"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2845"/>
+        <location filename="../mainwindow.cc" line="2839"/>
         <source>Page Setup</source>
         <translation>페이지 설정</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2846"/>
+        <location filename="../mainwindow.cc" line="2840"/>
         <source>No printer is available. Please install one first.</source>
         <translation>프린터가 없습니다. 먼저 프린터를 설치하십시오.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2864"/>
+        <location filename="../mainwindow.cc" line="2858"/>
         <source>Print Article</source>
         <translation>항목 인쇄</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2898"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Save Article As</source>
         <translation>다른 이름으로 항목 저장</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2900"/>
+        <location filename="../mainwindow.cc" line="2879"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Html 파일(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2909"/>
+        <location filename="../mainwindow.cc" line="2894"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2910"/>
+        <location filename="../mainwindow.cc" line="2895"/>
         <source>Can&apos;t save article: %1</source>
         <translation>항목을 저장할 수 없습니다: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1074"/>
+        <location filename="../mainwindow.cc" line="1068"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>사전수: %1，항목수: %2，어휘수: %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2475"/>
+        <location filename="../mainwindow.cc" line="2469"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>단축키 감시메커니즘을 시작할 수없습니다..&lt;br&gt;XServer에서 RECORD extension이 활성화 되어 있는지 확인하십시오.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2609"/>
+        <location filename="../mainwindow.cc" line="2603"/>
         <source>New Release Available</source>
         <translation>새 버전이 있습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2610"/>
+        <location filename="../mainwindow.cc" line="2604"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>골든딕 &lt;b&gt;%1&lt;/b&gt;버전을 다운로드할 수 있습니다.&lt;br&gt;&lt;b&gt;다운로드&lt;/b&gt;를 누르면 다운로드 페이지로 연결됩니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2615"/>
+        <location filename="../mainwindow.cc" line="2609"/>
         <source>Download</source>
         <translation>다운로드</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="201"/>
-        <location filename="../mainwindow.cc" line="1085"/>
+        <location filename="../mainwindow.cc" line="1079"/>
         <source>Look up in:</source>
         <translation>검색그룹:</translation>
     </message>
@@ -2075,53 +2075,52 @@ between classic and school orthography in cyrillic)</source>
         <translation>다른 탭 닫기</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1085"/>
+        <location filename="../mainwindow.cc" line="1079"/>
         <source>Look up:</source>
         <translation>검색:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1103"/>
+        <location filename="../mainwindow.cc" line="1097"/>
         <source>All</source>
         <translation>All</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="733"/>
-        <location filename="../mainwindow.cc" line="2669"/>
+        <location filename="../mainwindow.cc" line="2663"/>
         <source>Accessibility API is not enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2949"/>
+        <location filename="../mainwindow.cc" line="2930"/>
         <source>The main window is set to be always on top.</source>
         <translation>메인창이 항상 위에 보이도록 설정합니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3197"/>
+        <location filename="../mainwindow.cc" line="3178"/>
         <source>Import history from file</source>
         <translation>검색기록을 파일에서 불러옵니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3246"/>
+        <location filename="../mainwindow.cc" line="3227"/>
         <source>Import error: invalid data in file</source>
         <translation>불러오기 오류: 파일의 데이타가 유효하지 않습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3250"/>
+        <location filename="../mainwindow.cc" line="3231"/>
         <source>History import complete</source>
         <translation>검색기록 불러오기를 완료했습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3253"/>
+        <location filename="../mainwindow.cc" line="3234"/>
         <source>Import error: </source>
         <translation>불러오기 오류: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3361"/>
+        <location filename="../mainwindow.cc" line="3342"/>
         <source>Dictionary info</source>
         <translation>사전 정보</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3362"/>
+        <location filename="../mainwindow.cc" line="3343"/>
         <source>Edit dictionary</source>
         <translation>Редактировать словарь</translation>
     </message>
@@ -2131,43 +2130,43 @@ between classic and school orthography in cyrillic)</source>
         <translation>열린 탭</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1243"/>
+        <location filename="../mainwindow.cc" line="1237"/>
         <source>Open Tabs List</source>
         <translation>탭 목록을 엽니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1301"/>
+        <location filename="../mainwindow.cc" line="1295"/>
         <source>(untitled)</source>
         <translation>(제목없음)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1514"/>
+        <location filename="../mainwindow.cc" line="1508"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3109"/>
+        <location filename="../mainwindow.cc" line="3090"/>
         <source>&amp;Hide</source>
         <translation>숨기기(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3135"/>
+        <location filename="../mainwindow.cc" line="3116"/>
         <source>Export history to file</source>
         <translation>검색기록을 파일로 저장합니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3137"/>
-        <location filename="../mainwindow.cc" line="3199"/>
+        <location filename="../mainwindow.cc" line="3118"/>
+        <location filename="../mainwindow.cc" line="3180"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>텍스트파일(*.txt);;모든 파일(*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3176"/>
+        <location filename="../mainwindow.cc" line="3157"/>
         <source>History export complete</source>
         <translation>검색기록 저장을 완료했습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3179"/>
+        <location filename="../mainwindow.cc" line="3160"/>
         <source>Export error: </source>
         <translation>저장 오류: </translation>
     </message>
@@ -2386,7 +2385,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3113"/>
+        <location filename="../mainwindow.cc" line="3094"/>
         <source>&amp;Show</source>
         <translation>보이기(&amp;S)</translation>
     </message>
@@ -2425,22 +2424,22 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="409"/>
+        <location filename="../sources.cc" line="396"/>
         <source>Enabled</source>
         <translation>사용</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="411"/>
+        <location filename="../sources.cc" line="398"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="413"/>
+        <location filename="../sources.cc" line="400"/>
         <source>Address</source>
         <translation>주소</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="415"/>
+        <location filename="../sources.cc" line="402"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>
@@ -2529,12 +2528,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="907"/>
+        <location filename="../sources.cc" line="894"/>
         <source>Path</source>
         <translation>경로</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="909"/>
+        <location filename="../sources.cc" line="896"/>
         <source>Recursive</source>
         <translation>재귀 검색</translation>
     </message>
@@ -3229,27 +3228,27 @@ download page.</source>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="815"/>
+        <location filename="../sources.cc" line="802"/>
         <source>Audio</source>
         <translation>오디오</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="817"/>
+        <location filename="../sources.cc" line="804"/>
         <source>Plain Text</source>
         <translation>텍스트</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="819"/>
+        <location filename="../sources.cc" line="806"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="821"/>
+        <location filename="../sources.cc" line="808"/>
         <source>Prefix Match</source>
         <translation>접두사 검색</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="823"/>
+        <location filename="../sources.cc" line="810"/>
         <source>Unknown</source>
         <translation>모름</translation>
     </message>
@@ -3275,27 +3274,27 @@ download page.</source>
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="723"/>
+        <location filename="../sources.cc" line="710"/>
         <source>Enabled</source>
         <translation>사용</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="725"/>
+        <location filename="../sources.cc" line="712"/>
         <source>Type</source>
         <translation>종류</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="727"/>
+        <location filename="../sources.cc" line="714"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="729"/>
+        <location filename="../sources.cc" line="716"/>
         <source>Command Line</source>
         <translation>명령행</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="731"/>
+        <location filename="../sources.cc" line="718"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>
@@ -3407,17 +3406,17 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1013"/>
+        <location filename="../sources.cc" line="1000"/>
         <source>Path</source>
         <translation>경로</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1015"/>
+        <location filename="../sources.cc" line="1002"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1017"/>
+        <location filename="../sources.cc" line="1004"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>
@@ -3425,45 +3424,40 @@ could be resized or managed in other ways.</source>
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="98"/>
-        <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../sources.cc" line="114"/>
+        <location filename="../sources.cc" line="108"/>
         <source>(not available in portable version)</source>
         <translation>(포터블 버전에서는 설정할 수 없습니다)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="151"/>
-        <location filename="../sources.cc" line="178"/>
-        <location filename="../sources.cc" line="205"/>
+        <location filename="../sources.cc" line="145"/>
+        <location filename="../sources.cc" line="172"/>
+        <location filename="../sources.cc" line="199"/>
         <source>Choose a directory</source>
         <translation>폴더 선택</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="165"/>
-        <location filename="../sources.cc" line="192"/>
-        <location filename="../sources.cc" line="232"/>
-        <location filename="../sources.cc" line="256"/>
-        <location filename="../sources.cc" line="280"/>
+        <location filename="../sources.cc" line="159"/>
+        <location filename="../sources.cc" line="186"/>
+        <location filename="../sources.cc" line="226"/>
+        <location filename="../sources.cc" line="250"/>
+        <location filename="../sources.cc" line="274"/>
         <source>Confirm removal</source>
         <translation>삭제 확인</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="166"/>
-        <location filename="../sources.cc" line="193"/>
+        <location filename="../sources.cc" line="160"/>
+        <location filename="../sources.cc" line="187"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>&lt;b&gt;%1&lt;/b&gt;폴더를 목록에서 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="233"/>
-        <location filename="../sources.cc" line="257"/>
+        <location filename="../sources.cc" line="227"/>
+        <location filename="../sources.cc" line="251"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>&lt;b&gt;%1&lt;/b&gt;사이트를 목록에서 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="281"/>
+        <location filename="../sources.cc" line="275"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>프로그램 &lt;b&gt;%1&lt;/b&gt;을 목록에서 삭제하시겠습니까?</translation>
     </message>
@@ -3774,74 +3768,6 @@ Not implemented yet in GoldenDict.</source>
     </message>
 </context>
 <context>
-    <name>TextToSpeechSource</name>
-    <message>
-        <location filename="../texttospeechsource.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.ui" line="33"/>
-        <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.ui" line="53"/>
-        <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.ui" line="60"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.ui" line="84"/>
-        <source>Preview</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.ui" line="98"/>
-        <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.ui" line="116"/>
-        <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.ui" line="123"/>
-        <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.ui" line="157"/>
-        <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.cc" line="34"/>
-        <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.cc" line="35"/>
-        <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.cc" line="52"/>
-        <source>Confirm removal</source>
-        <translation type="unfinished">삭제 확인</translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.cc" line="53"/>
-        <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TranslateBox</name>
     <message>
         <location filename="../translatebox.cc" line="103"/>
@@ -3855,47 +3781,24 @@ Not implemented yet in GoldenDict.</source>
     </message>
 </context>
 <context>
-    <name>VoiceEnginesModel</name>
-    <message>
-        <location filename="../texttospeechsource.cc" line="173"/>
-        <source>Enabled</source>
-        <translation type="unfinished">사용</translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.cc" line="175"/>
-        <source>Name</source>
-        <translation type="unfinished">이름</translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.cc" line="177"/>
-        <source>Id</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texttospeechsource.cc" line="179"/>
-        <source>Icon</source>
-        <translation type="unfinished">아이콘</translation>
-    </message>
-</context>
-<context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="566"/>
+        <location filename="../sources.cc" line="553"/>
         <source>Enabled</source>
         <translation>사용</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="568"/>
+        <location filename="../sources.cc" line="555"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="570"/>
+        <location filename="../sources.cc" line="557"/>
         <source>Address</source>
         <translation>주소</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="572"/>
+        <location filename="../sources.cc" line="559"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>
