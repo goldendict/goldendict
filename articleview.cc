@@ -16,7 +16,6 @@
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
 #include "programs.hh"
-#include "speechclient.hh"
 #include "dprintf.hh"
 #include <QDebug>
 #include <QWebElement>
@@ -26,6 +25,8 @@
 #include <windows.h>
 #include <mmsystem.h> // For PlaySound
 #include "bass.hh"
+
+#include "speechclient.hh"
 
 #include <QPainter>
 #endif

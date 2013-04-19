@@ -10,7 +10,9 @@
 
 Sources::Sources( QWidget * parent, Config::Class const & cfg):
   QWidget( parent ),
+#ifdef Q_OS_WIN32
   textToSpeechSource( NULL ),
+#endif
   itemDelegate( new QItemDelegate( this ) ),
   itemEditorFactory( new QItemEditorFactory() ),
   mediawikisModel( this, cfg.mediawikis ),
@@ -286,9 +288,13 @@ void Sources::on_removeProgram_clicked()
 
 Config::VoiceEngines Sources::getVoiceEngines() const
 {
+#ifdef Q_OS_WIN32
   if ( !textToSpeechSource )
     return Config::VoiceEngines();
   return textToSpeechSource->getVoiceEnginesModel().getCurrentVoiceEngines();
+#else
+  return Config::VoiceEngines();
+#endif
 }
 
 Config::Hunspell Sources::getHunspell() const

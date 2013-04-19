@@ -2,7 +2,7 @@
 #include <QtCore>
 
 #include <windows.h>
-#include "speechhlp_win32/speechhlp.h"
+#include "speechhlp.hh"
 
 struct SpeechClient::InternalData
 {
@@ -114,6 +114,6 @@ void SpeechClient::timerEvent( QTimerEvent * evt )
       internalData->waitingFinish = false;
       finished();
       finished( this );
-      internalData->onFinishObj = NULL;
+//      internalData->onFinishObj = NULL;
   }
 }

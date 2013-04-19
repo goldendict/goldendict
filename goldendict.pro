@@ -46,8 +46,7 @@ win32 {
     LIBS += -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.3.2 \
-        -lspeechhlp
+        -lhunspell-1.3.2
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
     LIBS += -L$${PWD}/winlibs/lib
@@ -219,7 +218,6 @@ HEADERS += folding.hh \
     translatebox.hh \
     historypanewidget.hh \
     wordlist.hh \
-    speechclient.hh \
     voiceengines.hh
 
 FORMS += groups.ui \
@@ -334,13 +332,17 @@ win32 {
                x64.cc \
                bass.cc \
                speechclient_win.cc \
-               texttospeechsource.cc
+               texttospeechsource.cc \
+               speechhlp.cc
     HEADERS += mouseover_win32/ThTypes.h \
                wordbyauto.hh \
                uiauto.hh \
                x64.hh \
                bass.hh \
-               texttospeechsource.hh
+               texttospeechsource.hh \
+               sapi.hh \
+               sphelper.hh \
+               speechclient.hh
 }
 
 mac {

@@ -7,11 +7,14 @@
 #include "ui_sources.h"
 #include "config.hh"
 #include "hunspell.hh"
-#include "texttospeechsource.hh"
 #include <QAbstractItemModel>
 #include <QComboBox>
 #include <QItemDelegate>
 #include <QItemEditorFactory>
+
+#ifdef Q_OS_WIN32
+#include "texttospeechsource.hh"
+#endif
 
 /// A model to be projected into the mediawikis view, according to Qt's MVC model
 class MediaWikisModel: public QAbstractItemModel
@@ -248,7 +251,10 @@ signals:
 private:
   Ui::Sources ui;
 
+#ifdef Q_OS_WIN32
   TextToSpeechSource *textToSpeechSource;
+#endif
+
   QItemDelegate * itemDelegate;
   QItemEditorFactory * itemEditorFactory;
 

@@ -1,14 +1,16 @@
-#include "speechhlp.h"
+#define WINVER 0x0500 // At least WinXP required
+#include <windows.h>
 
+#include "speechhlp.hh"
 #include <string>
-#include <sapi.h>
-#include <sphelper.h>
+#include "sapi.hh"
+#include "sphelper.hh"
 
 using std::wstring;
 
 struct _SpeechHelper
 {
-    CComPtr<ISpVoice> voice;
+    ISpVoice * voice;
     wstring engineId;
     wstring engineName;
     bool willInvokeCoUninitialize;
@@ -18,13 +20,13 @@ struct _SpeechHelper
         HRESULT hr;
         hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
         willInvokeCoUninitialize = (hr != RPC_E_CHANGED_MODE);
-        voice.CoCreateInstance(CLSID_SpVoice);
+        CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_INPROC_SERVER, IID_ISpVoice, (void**)&voice );
     }
 
     ~_SpeechHelper()
     {
         if (voice)
-            voice.Release();
+            voice->Release();
 
         if (willInvokeCoUninitialize)
             CoUninitialize();
@@ -44,8 +46,7 @@ static bool findByEngineName(void *token, const wchar_t *id, const wchar_t *name
     return true;
 }
 
-SPEECHHLP_EXPORTS SpeechHelper
-speechCreate(const wchar_t *engineId)
+SpeechHelper speechCreate(const wchar_t *engineId)
 {
     SpeechHelper sp = new _SpeechHelper();
 
@@ -54,14 +55,12 @@ speechCreate(const wchar_t *engineId)
     return sp;
 }
 
-SPEECHHLP_EXPORTS void
-speechDestroy(SpeechHelper sp)
+void speechDestroy(SpeechHelper sp)
 {
     delete sp;
 }
 
-SPEECHHLP_EXPORTS bool
-speechAvailable(SpeechHelper sp)
+bool speechAvailable(SpeechHelper sp)
 {
     if (!sp)
         return false;
@@ -69,11 +68,10 @@ speechAvailable(SpeechHelper sp)
     return !!(sp->voice);
 }
 
-SPEECHHLP_EXPORTS void
-speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
+void speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
 {
     HRESULT hr;
-    CComPtr<IEnumSpObjectTokens> enumSpTokens;
+    IEnumSpObjectTokens * enumSpTokens;
     ULONG count = 0;
     bool next = true;
     hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
@@ -84,7 +82,7 @@ speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
 
     for (ULONG i = 0; i < count && next; i++)
     {
-        CComPtr<ISpObjectToken> spToken;
+        ISpObjectToken * spToken = NULL;
         WCHAR * engineName = NULL;
         WCHAR * engineId = NULL;
 
@@ -98,7 +96,8 @@ speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
         if (SUCCEEDED(hr))
             next = callback(spToken, engineId, engineName, userData);
 
-        spToken.Release();
+        if( spToken )
+          spToken->Release();
 
         if (engineName)
             CoTaskMemFree(engineName);
@@ -106,12 +105,14 @@ speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
             CoTaskMemFree(engineId);
     }
 
+    if( enumSpTokens )
+      enumSpTokens->Release();
+
     if (willInvokeCoUninitialize)
         CoUninitialize();
 }
 
-SPEECHHLP_EXPORTS const wchar_t *
-speechEngineId(SpeechHelper sp)
+const wchar_t * speechEngineId(SpeechHelper sp)
 {
     if (!sp)
         return NULL;
@@ -119,8 +120,7 @@ speechEngineId(SpeechHelper sp)
     return sp->engineId.c_str();
 }
 
-SPEECHHLP_EXPORTS const wchar_t *
-speechEngineName(SpeechHelper sp)
+const wchar_t * speechEngineName(SpeechHelper sp)
 {
     if (!sp)
         return NULL;
@@ -128,8 +128,7 @@ speechEngineName(SpeechHelper sp)
     return sp->engineName.c_str();
 }
 
-SPEECHHLP_EXPORTS bool
-speechTell(SpeechHelper sp, const wchar_t *text)
+bool speechTell(SpeechHelper sp, const wchar_t *text)
 {
     if (!sp || !sp->voice || !text)
         return false;
@@ -138,8 +137,7 @@ speechTell(SpeechHelper sp, const wchar_t *text)
     return !!SUCCEEDED(hr);
 }
 
-SPEECHHLP_EXPORTS bool
-speechTellFinished(SpeechHelper sp)
+bool speechTellFinished(SpeechHelper sp)
 {
     if (!sp || !sp->voice)
         return true;
@@ -149,8 +147,7 @@ speechTellFinished(SpeechHelper sp)
     return es.dwRunningState == SPRS_DONE;
 }
 
-SPEECHHLP_EXPORTS bool
-speechSay(SpeechHelper sp, const wchar_t *text)
+bool speechSay(SpeechHelper sp, const wchar_t *text)
 {
     if (!sp || !sp->voice || !text)
         return false;
