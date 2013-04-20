@@ -187,7 +187,8 @@ void Groups::removeFromGroup()
 
 void Groups::showDictInfo( QPoint const & pos )
 {
-  QVariant data = ui.dictionaries->getModel()->data( ui.dictionaries->indexAt( pos ), Qt::EditRole );
+  QVariant data = ui.dictionaries->getModel()->data(
+        ui.searchLine->mapToSource(ui.dictionaries->indexAt( pos ) ), Qt::EditRole );
   QString id;
   if( data.canConvert< QString >() )
     id = data.toString();
