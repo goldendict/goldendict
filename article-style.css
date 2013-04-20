@@ -323,7 +323,7 @@ div.xdxf
   color: gray;
 }
 
-.dsl_p
+.dsl_p, .dsl_p :not(a) /* DSL Feature: Enforce the style even if the childen tags say otherwise, except links */
 {
   color: green;
   font-style: italic;
