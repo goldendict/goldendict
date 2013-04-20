@@ -328,6 +328,7 @@ div.xdxf
   color: green;
   font-style: italic;
   cursor: default;
+  font-weight: normal; /* DSL feature: labels are always of normal weight */
 }
 
 .dsl_stress_without_accent {
