@@ -318,7 +318,8 @@ div.xdxf
   padding-left: 81px;
 }
 
-.dsl_ex
+.dsl_ex,
+.dsl_ex font[color] /* DSL Feature: Enforce the example color even if the childen tags say otherwise */
 {
   color: gray;
 }

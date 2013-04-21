@@ -106,14 +106,10 @@ a:hover
   margin-top: 1.5em;
 }
 
-.dsl_ex
+.dsl_ex,
+.dsl_ex font[color]
 {
   color: steelblue;
-}
-
-.dsl_p .dsl_ex .dsl_lang
-{
-  color: green;
 }
 
 ::selection {

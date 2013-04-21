@@ -125,7 +125,9 @@ h3 {
 	font-family: Arial;
 }
 
-.dsl_ex {
+.dsl_ex,
+.dsl_ex font[color]
+{
 	color: slategray;
 }
 
