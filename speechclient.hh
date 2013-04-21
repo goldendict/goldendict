@@ -23,12 +23,12 @@ public:
   static Engines availableEngines();
 
   const Engine & engine() const;
-  bool tell( QString const & text, QObject * obj = 0L, const char * slot = 0L ) const;
-  bool say( QString const & text ) const;
+  bool tell( QString const & text );
+  bool say( QString const & text );
 
 signals:
+  void started( bool ok );
   void finished();
-  void finished(SpeechClient *client);
 
 protected:
   virtual void timerEvent( QTimerEvent * evt );

@@ -172,6 +172,7 @@ typedef enum SPRUNSTATE
 EXTERN_C const IID CLSID_SpVoice;
 EXTERN_C const IID IID_ISpVoice;
 EXTERN_C const IID IID_ISpObjectToken;
+EXTERN_C const IID CLSID_SpObjectToken;
 EXTERN_C const IID IID_IEnumSpObjectTokens;
 EXTERN_C const IID IID_ISpEventSource;
 EXTERN_C const IID IID_ISpNotifySource;

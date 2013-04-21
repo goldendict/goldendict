@@ -697,6 +697,10 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
   {
     msg = tr( "Audio" );
   }
+  if ( url.scheme() == "gdtts" )
+  {
+    msg = tr( "TTS Voice" );
+  }
   else
   if ( url.scheme() == "gdpicture" )
   {
@@ -964,13 +968,13 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     {
       QString itemMd5Id = QString( QCryptographicHash::hash(
                                      i->id.toUtf8(),
-                                     QCryptographicHash::Md5 ).toHex());
+                                     QCryptographicHash::Md5 ).toHex() );
 
-      if ( itemMd5Id == md5Id ) {
-        SpeechClient * speechClinet = new SpeechClient( i->id, this );
-        if ( !speechClinet->tell( text, speechClinet, SLOT( deleteLater() ) ) ) {
-          delete speechClinet;
-        }
+      if ( itemMd5Id == md5Id )
+      {
+        SpeechClient * speechClient = new SpeechClient( i->id, this );
+        connect( speechClient, SIGNAL( finished() ), speechClient, SLOT( deleteLater() ) );
+        speechClient->tell( text );
         break;
       }
     }

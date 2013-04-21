@@ -1,5 +1,6 @@
 #define WINVER 0x0500 // At least WinXP required
 #include <windows.h>
+#include <limits.h>
 
 #include "speechhlp.hh"
 #include <string>
@@ -15,12 +16,13 @@ struct _SpeechHelper
     wstring engineName;
     bool willInvokeCoUninitialize;
 
-    _SpeechHelper() : willInvokeCoUninitialize(false)
+    _SpeechHelper() :
+        willInvokeCoUninitialize(false)
     {
         HRESULT hr;
         hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
         willInvokeCoUninitialize = (hr != RPC_E_CHANGED_MODE);
-        CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_INPROC_SERVER, IID_ISpVoice, (void**)&voice );
+        CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_INPROC_SERVER, IID_ISpVoice, (void**)&voice);
     }
 
     ~_SpeechHelper()
@@ -33,25 +35,33 @@ struct _SpeechHelper
     }
 };
 
-static bool findByEngineName(void *token, const wchar_t *id, const wchar_t *name, void *userData)
-{
-    SpeechHelper sp = (SpeechHelper)userData;
-    if (sp->engineId == id)
-    {
-        sp->voice->SetVoice((ISpObjectToken *)token);
-        sp->engineName = name;
-        return false;
-    }
-
-    return true;
-}
-
 SpeechHelper speechCreate(const wchar_t *engineId)
 {
     SpeechHelper sp = new _SpeechHelper();
+    HRESULT hr;
+    ISpObjectToken * spToken;
 
-    sp->engineId = engineId;
-    speechEnumerateAvailableEngines(findByEngineName, sp);
+    hr = SpGetTokenFromId(engineId, &spToken);
+
+    if (SUCCEEDED(hr))
+    {
+        if (SUCCEEDED(hr) && sp->voice)
+        {
+            sp->voice->SetVoice(spToken);
+
+            WCHAR * engineName = NULL;
+            SpGetDescription( spToken, &engineName );
+            sp->engineId = engineId;
+            if (engineName)
+            {
+                sp->engineName = engineName;
+                CoTaskMemFree(engineName);
+            }
+        }
+
+        spToken->Release();
+    }
+
     return sp;
 }
 
