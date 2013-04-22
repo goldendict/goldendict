@@ -697,6 +697,7 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
   {
     msg = tr( "Audio" );
   }
+  else
   if ( url.scheme() == "gdtts" )
   {
     msg = tr( "TTS Voice" );
