@@ -140,9 +140,9 @@ int main( int argc, char ** argv )
   if ( localeName.isEmpty() )
     localeName = QLocale::system().name();
 
-  if ( !qtTranslator.load( "qt_" + localeName,
-                           QLibraryInfo::location( QLibraryInfo::TranslationsPath ) ) )
-    qtTranslator.load( "qt_" + localeName, Config::getProgramDataDir() + "/locale/" );
+  if ( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
+    qtTranslator.load( "qt_" + localeName,
+                               QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
 
   app.installTranslator( &qtTranslator );
 
