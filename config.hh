@@ -381,6 +381,31 @@ struct Program
 
 typedef QVector< Program > Programs;
 
+struct VoiceEngine
+{
+	bool enabled;
+	QString id;
+	QString name;
+  QString iconFilename;
+
+	VoiceEngine(): enabled( false )
+  {
+  }
+
+	bool operator == ( VoiceEngine const & other ) const
+	{
+		return enabled == other.enabled &&
+           id == other.id &&
+           name == other.name &&
+           iconFilename == other.iconFilename;
+	}
+
+	bool operator != ( VoiceEngine const & other ) const
+	{ return ! operator == ( other ); }
+};
+
+typedef QVector< VoiceEngine> VoiceEngines;
+
 struct Class
 {
   Paths paths;
@@ -395,6 +420,7 @@ struct Class
   Transliteration transliteration;
   Forvo forvo;
   Programs programs;
+  VoiceEngines voiceEngines;
 
   unsigned lastMainGroupId; // Last used group in main window
   unsigned lastPopupGroupId; // Last used group in popup window

@@ -12,6 +12,10 @@
 #include <QItemDelegate>
 #include <QItemEditorFactory>
 
+#ifdef Q_OS_WIN32
+#include "texttospeechsource.hh"
+#endif
+
 /// A model to be projected into the mediawikis view, according to Qt's MVC model
 class MediaWikisModel: public QAbstractItemModel
 {
@@ -214,18 +218,11 @@ class Sources: public QWidget
   Q_OBJECT
 
 public:
-  Sources( QWidget * parent, Config::Paths const &,
-           Config::SoundDirs const &,
-           Config::Hunspell const &,
-           Config::Transliteration const &,
-           Config::Forvo const & forvo,
-           Config::MediaWikis const &,
-           Config::WebSites const &,
-           Config::Programs const &);
+  Sources( QWidget * parent, Config::Class const &);
 
   Config::Paths const & getPaths() const
   { return pathsModel.getCurrentPaths(); }
-  
+
   Config::SoundDirs const & getSoundDirs() const
   { return soundDirsModel.getCurrentSoundDirs(); }
 
@@ -238,8 +235,10 @@ public:
   Config::Programs const & getPrograms() const
   { return programsModel.getCurrentPrograms(); }
 
+  Config::VoiceEngines getVoiceEngines() const;
+
   Config::Hunspell getHunspell() const;
-  
+
   Config::Transliteration getTransliteration() const;
 
   Config::Forvo getForvo() const;
@@ -248,9 +247,13 @@ signals:
 
   /// Emitted when a 'Rescan' button is clicked.
   void rescan();
-  
+
 private:
   Ui::Sources ui;
+
+#ifdef Q_OS_WIN32
+  TextToSpeechSource *textToSpeechSource;
+#endif
 
   QItemDelegate * itemDelegate;
   QItemEditorFactory * itemEditorFactory;
@@ -270,7 +273,7 @@ private slots:
 
   void on_addPath_clicked();
   void on_removePath_clicked();
-  
+
   void on_addSoundDir_clicked();
   void on_removeSoundDir_clicked();
 

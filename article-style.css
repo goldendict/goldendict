@@ -476,6 +476,19 @@ div.xdxf
   margin-top: 15px;
 }
 
+/************* Voice engines **************/
+
+.voiceengines_play
+{
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.voiceengines_play a
+{
+  text-decoration: none;
+}
+
 /************* MediaWiki articles *****************
  The following consist of excerpts from different .css files edited
  with a .mwiki prepended to each record.
@@ -673,29 +686,29 @@ div.xdxf
 	padding-right: 1.5em;
 }
 
-/* 
+/*
  * OpenSearch ajax suggestions
  */
 .mwiki .os-suggest {
-	overflow: auto; 
-	overflow-x: hidden; 
+	overflow: auto;
+	overflow-x: hidden;
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	width: 0px;
-	background-color: white; 
+	background-color: white;
 	background-color: Window;
 	border-style: solid;
 	border-color: #AAAAAA;
 	border-width: 1px;
-	z-index:99; 
-	visibility:hidden; 
-	font-size:95%;	
+	z-index:99;
+	visibility:hidden;
+	font-size:95%;
 }
 
 .mwiki table.os-suggest-results {
 	font-size: 95%;
-	cursor: pointer; 
+	cursor: pointer;
 	border: 0;
 	border-collapse: collapse;
 	width: 100%;
@@ -703,7 +716,7 @@ div.xdxf
 
 .mwiki td.os-suggest-result, .mwiki td.os-suggest-result-hl {
 	white-space: nowrap;
-	background-color: white; 
+	background-color: white;
 	background-color: Window;
 	color: black;
 	color: WindowText;
@@ -711,7 +724,7 @@ div.xdxf
 }
 .mwiki td.os-suggest-result-hl,
 .mwiki td.os-suggest-result-hl-webkit {
-	background-color: #4C59A6; 
+	background-color: #4C59A6;
 	color: white;
 }
 .mwiki td.os-suggest-result-hl {
@@ -722,7 +735,7 @@ div.xdxf
 }
 
 .mwiki .os-suggest-toggle {
-	position: relative; 
+	position: relative;
 	left: 1ex;
 	font-size: 65%;
 }
@@ -750,7 +763,7 @@ div.xdxf
 
 /*
  * Special:ListGroupRights styling
- * Special:Statistics styling 
+ * Special:Statistics styling
 */
 
 .mwiki table.mw-listgrouprights-table,
@@ -1849,7 +1862,7 @@ in bg url to hide it from iemac */
 	margin-right: 2em;
 }
 .mwiki .prefsection legend {
-	font-weight: bold;   
+	font-weight: bold;
 }
 .mwiki .prefsection table, .mwiki .prefsection legend {
 	background-color: #F9F9F9;
@@ -2272,7 +2285,7 @@ in bg url to hide it from iemac */
 .mwiki .TablePager { min-width: 80%; }
 .mwiki .TablePager_nav a { text-decoration: none; }
 .mwiki .TablePager { border-collapse: collapse; }
-.mwiki .TablePager, .mwiki .TablePager td, .mwiki .TablePager th { 
+.mwiki .TablePager, .mwiki .TablePager td, .mwiki .TablePager th {
 	border: 1px solid #aaaaaa;
 	padding: 0 0.15em 0 0.15em;
 }
@@ -2351,10 +2364,10 @@ in bg url to hide it from iemac */
 .mwiki ol.references {
     font-size: 100%;
 }
-.mwiki .references-small { 
+.mwiki .references-small {
     font-size: 90%;
 }
- 
+
 /* VALIDATOR NOTICE: the following is correct, but the W3C validator doesn't accept it */
 /* -moz-* is a vendor-specific extension (CSS 2.1 4.1.2.1) */
 /* column-count is from the CSS3 module "CSS Multi-column Layout" */
@@ -2365,24 +2378,24 @@ in bg url to hide it from iemac */
     -webkit-column-count: 2;
     column-count: 2;
 }
- 
+
 /* Highlight clicked reference in blue to help navigation */
 .mwiki ol.references > li:target {
     background-color: #DEF;
 }
- 
-.mwiki sup.reference:target { 
+
+.mwiki sup.reference:target {
     background-color: #DEF;
 }
- 
+
 /* Styling for citations */
 .mwiki cite {
     font-style: normal;
     word-wrap: break-word;
 }
- 
+
 /* If there is an inline link to a full citation, the full citation will turn blue when the inline link is clicked */
-.mwiki cite:target { 
+.mwiki cite:target {
     background-color: #DEF;
 }
 
@@ -2412,7 +2425,7 @@ in bg url to hide it from iemac */
 /* default skin for navigation boxes */
 .mwiki table.navbox {            /* navbox container style */
   border:1px solid #aaa;
-  width:100%; 
+  width:100%;
   margin:auto;
   clear:both;
   font-size:88%;
@@ -2455,7 +2468,7 @@ in bg url to hide it from iemac */
 .mwiki .navbox-odd {
   background:transparent; /* Odd row striping */
 }
- 
+
 .mwiki .collapseButton {         /* 'show'/'hide' buttons created dynamically by the        */
     float: right;         /* CollapsibleTables javascript in [[MediaWiki:Common.js]] */
     font-weight: normal;  /* are styled here so they can be customised.              */
@@ -2499,12 +2512,12 @@ in bg url to hide it from iemac */
 .mwiki .infobox.bordered .borderless th {
     border: 0;
 }
- 
+
 .mwiki .infobox.sisterproject {
     width: 20em;
     font-size: 90%;
 }
- 
+
 .mwiki .infobox.standard-talk {
     border: 1px solid #c0c090;
     background-color: #f8eaba;
@@ -2513,7 +2526,7 @@ in bg url to hide it from iemac */
 .mwiki .infobox.standard-talk.bordered th {
     border: 1px solid #c0c090;
 }
- 
+
 /* styles for bordered infobox with merged rows */
 .mwiki .infobox.bordered .mergedtoprow td,
 .mwiki .infobox.bordered .mergedtoprow th {
@@ -2521,21 +2534,21 @@ in bg url to hide it from iemac */
     border-top: 1px solid #aaa;
     border-right: 1px solid #aaa;
 }
- 
+
 .mwiki .infobox.bordered .mergedrow td,
 .mwiki .infobox.bordered .mergedrow th {
     border: 0;
     border-right: 1px solid #aaa;
 }
- 
+
 /* Styles for geography infoboxes, e.g. countries, country subdivisions, cities, etc. */
 .mwiki .infobox.geography {
     text-align: left;
     border-collapse: collapse;
-    line-height: 1.2em; 
+    line-height: 1.2em;
     font-size: 90%;
 }
- 
+
 .mwiki .infobox.geography  td,
 .mwiki .infobox.geography  th {
     border-top: solid 1px #aaa;
@@ -2546,34 +2559,34 @@ in bg url to hide it from iemac */
     border-top: solid 1px #aaa;
     padding: 0.4em 0.6em 0.2em 0.6em;
 }
- 
+
 .mwiki .infobox.geography .mergedrow td,
 .mwiki .infobox.geography .mergedrow th {
     border: 0;
     padding: 0 0.6em 0.2em 0.6em;
 }
- 
+
 .mwiki .infobox.geography .mergedbottomrow td,
 .mwiki .infobox.geography .mergedbottomrow th {
     border-top: 0;
     border-bottom: solid 1px #aaa;
     padding: 0 0.6em 0.4em 0.6em;
 }
- 
+
 .mwiki .infobox.geography .maptable td,
 .mwiki .infobox.geography .maptable th {
     border: 0;
     padding: 0;
 }
- 
+
 /* Style for "notices" */
 .mwiki .notice {
     margin: 1em;
     padding: 0.2em;
 }
- 
+
 .mwiki #disambig {
-    border-top: 1px solid #ccc; 
+    border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 
@@ -2590,11 +2603,11 @@ in bg url to hide it from iemac */
 /* Article message box styles */
 .mwiki table.ambox {            /* 10% = Will not overlap with other elements */
     margin: -1px 10% 0px;    /* -1px = Single border between stacked boxes in all browsers */
-    border: 1px solid #aaa; 
+    border: 1px solid #aaa;
     border-left: 10px solid #1e90ff;    /* Default "notice" blue */
-    background: #fbfbfb; 
+    background: #fbfbfb;
 }
-.mwiki .ambox th.mbox-text, 
+.mwiki .ambox th.mbox-text,
 .mwiki .ambox td.mbox-text {            /* The message body cell(s) */
     padding: 0.25em 0.5em;       /* 0.5em left/right */
 }
@@ -2663,7 +2676,7 @@ in bg url to hide it from iemac */
 }
 
 /* default setting for [[:Category:Inflection templates]] */
- 
+
 .mwiki .infl-inline { display: inline }
 .mwiki .infl-table { display: none }
 /****default hide dict icon ***/
