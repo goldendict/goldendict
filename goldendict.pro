@@ -108,7 +108,8 @@ mac {
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.2
+        -lhunspell-1.2 \
+        -llzo2
     INCLUDEPATH = maclibs/include
     LIBS += -Lmaclibs/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
