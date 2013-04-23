@@ -25,6 +25,7 @@
 #include "sdict.hh"
 #include "aard.hh"
 #include "zipsounds.hh"
+#include "mdx.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -47,7 +48,8 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
 
   nameFilters << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
               << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf"
-              << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips";
+              << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
+              << "*.mdx";
 }
 
 void LoadDictionaries::run()
@@ -174,6 +176,13 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), zipSoundsDictionaries.begin(),
                          zipSoundsDictionaries.end() );
+  }
+  {
+    vector< sptr< Dictionary::Class > > mdxDictionaries =
+      Mdx::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), mdxDictionaries.begin(),
+                         mdxDictionaries.end() );
   }
 }
 
