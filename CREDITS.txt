@@ -24,3 +24,4 @@ Victor Ibragimov <victor.ibragimov\gmail.com>: Tajik translation
 Maksim Tamkovič <quendimax\gmail.com>: Belarusian translation and transliteration
 VirtualTam <virtualtam\myopera.com>: French translation
 Panho Ku <maranamho\gmail.com>: Korean translation
+Timon Wong <timon86.wang\gmail.com>: MDict (*.mdx/*.mdd) dictionary format

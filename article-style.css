@@ -372,6 +372,12 @@ div.xdxf
   vertical-align: center;
 }
 
+/************* MDict dictionaries **************/
+.mdict
+{
+  margin-top: 1em;
+}
+
 /************* Spelling suggestions *****************/
 
 .gdspellsuggestion

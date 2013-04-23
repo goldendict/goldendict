@@ -64,5 +64,6 @@
         <file>article-style-st-lingoes-blue.css</file>
         <file>qt-style-st-lingoes-blue.css</file>
         <file>qt-style-macos.css</file>
+        <file>icons/mdict.png</file>
     </qresource>
 </RCC>

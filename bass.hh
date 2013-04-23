@@ -38,6 +38,8 @@ private:
   typedef BOOL BASSDEF( ( *pBASS_MusicFree ) )( HMUSIC );
   typedef BOOL BASSDEF( ( *pBASS_ChannelPlay ) )( DWORD, BOOL );
   typedef BOOL BASSDEF( ( *pBASS_ChannelStop ) )( DWORD );
+  typedef BOOL BASSDEF( ( *pBASS_PluginLoad ) )( const char *, DWORD );
+  typedef BOOL BASSDEF( ( *pBASS_PluginFree ) )( HPLUGIN );
 
   pBASS_Init fBASS_Init;
   pBASS_Free fBASS_Free;
@@ -49,10 +51,13 @@ private:
   pBASS_MusicFree fBASS_MusicFree;
   pBASS_ChannelPlay fBASS_ChannelPlay;
   pBASS_ChannelStop fBASS_ChannelStop;
+  pBASS_PluginLoad fBASS_PluginLoad;
+  pBASS_PluginFree fBASS_PluginFree;
 
   DWORD currentHandle;
   void * data;
   HWND hwnd;
+  HPLUGIN spxPluginHandle;
 
   Mutex mt;
 
