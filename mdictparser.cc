@@ -36,51 +36,7 @@
 
 #include <QDebug>
 
-static QByteArray zlibDecompress( const char * data, quint32 nbytes )
-{
-  QByteArray result;
-
-  static const int CHUNK_SIZE = 2048;
-  char buf[CHUNK_SIZE];
-  int ret;
-  z_stream strm;
-
-  /* allocate inflate state */
-  strm.zalloc = Z_NULL;
-  strm.zfree = Z_NULL;
-  strm.opaque = Z_NULL;
-  strm.avail_in = nbytes;
-  strm.next_in = ( Bytef * )data;
-
-  ret = inflateInit( &strm ); // gzip decoding
-  if ( ret != Z_OK )
-    return QByteArray();
-
-  do
-  {
-    strm.avail_out = CHUNK_SIZE;
-    strm.next_out = ( Bytef * )buf;
-
-    ret = inflate( &strm, Z_NO_FLUSH );
-    Q_ASSERT( ret != Z_STREAM_ERROR ); // state not clobbered
-
-    switch ( ret )
-    {
-      case Z_NEED_DICT:
-        ret = Z_DATA_ERROR; // and fall through
-      case Z_DATA_ERROR:
-      case Z_MEM_ERROR:
-        inflateEnd( &strm );
-        return QByteArray();
-    }
-
-    result.append( buf, CHUNK_SIZE - strm.avail_out );
-  }
-  while ( strm.avail_out == 0 );
-
-  inflateEnd( &strm );
-  return result;
-}
+#include "decompress.hh"
 
 static inline int u16StrSize( const ushort * unicode )
 {
