@@ -12,7 +12,8 @@ BassAudioPlayer::BassAudioPlayer() :
   fBASS_Free( 0 ),
   currentHandle( 0 ),
   data( 0 ),
-  hwnd( 0 )
+  hwnd( 0 ),
+  spxPluginHandle( 0 )
 {
   Mutex::Lock _( mt );
 
@@ -60,6 +61,16 @@ BassAudioPlayer::BassAudioPlayer() :
     if( fBASS_ChannelStop == 0 )
       break;
 
+    fBASS_PluginLoad = ( pBASS_PluginLoad )GetProcAddress( hBass, "BASS_PluginLoad" );
+    if ( fBASS_PluginLoad == 0 )
+      break;
+
+    fBASS_PluginFree = ( pBASS_PluginFree )GetProcAddress( hBass, "BASS_PluginFree" );
+    if ( fBASS_PluginFree == 0 )
+      break;
+
+    spxPluginHandle = fBASS_PluginLoad( ( const char * )L"bass_spx.dll", BASS_UNICODE );
+
     QWidget *root = qApp->topLevelWidgets().value(0);
     hwnd = (HWND)root->winId();
 
@@ -75,6 +86,8 @@ BassAudioPlayer::~BassAudioPlayer()
   {
     if( currentHandle )
       fBASS_Stop();
+    if ( spxPluginHandle )
+      fBASS_PluginFree( spxPluginHandle );
     if( fBASS_Free )
       fBASS_Free();
     FreeLibrary( hBass );

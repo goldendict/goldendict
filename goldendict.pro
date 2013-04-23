@@ -32,7 +32,8 @@ MOC_DIR = build
 RCC_DIR = build
 LIBS += \
         -lz \
-        -lbz2
+        -lbz2 \
+        -llzo2
 
 win32 { 
     LIBS += -liconv \
@@ -216,7 +217,9 @@ HEADERS += folding.hh \
     extlineedit.hh \
     translatebox.hh \
     historypanewidget.hh \
-    wordlist.hh
+    wordlist.hh \
+    mdictparser.hh \
+    mdx.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -319,7 +322,9 @@ SOURCES += folding.cc \
     extlineedit.cc \
     translatebox.cc \
     historypanewidget.cc \
-    wordlist.cc
+    wordlist.cc \
+    mdictparser.cc \
+    mdx.cc
 
 win32 { 
     SOURCES += mouseover_win32/ThTypes.c \
