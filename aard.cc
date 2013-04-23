@@ -461,6 +461,12 @@ void AardDictionary::loadArticle( uint32_t address,
         df.seek( articleOffset );
         df.read( &size, sizeof(size) );
         articleSize = size;
+
+        // Don't try to read and decode too big articles,
+        // it is most likely error in dictionary
+        if( articleSize > 1048576 )
+          break;
+
         articleBody.resize( articleSize );
         df.read( &articleBody.front(), articleSize );
       }
