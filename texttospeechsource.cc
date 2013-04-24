@@ -32,7 +32,7 @@ void TextToSpeechSource::on_addVoiceEngine_clicked()
   if ( ui.availableVoiceEngines->count() == 0 )
   {
     QMessageBox::information( this, tr( "No TTS voice available" ),
-                              tr( "Cannot find available TTS voice.<br>"
+                              tr( "Cannot find availble TTS voice.<br>"
                                   "Please make sure that at least one TTS engine installed on your computer already." ) );
     return;
   }
@@ -54,8 +54,9 @@ void TextToSpeechSource::on_removeVoiceEngine_clicked()
                                 voiceEnginesModel.getCurrentVoiceEngines()[ current.row() ].name ),
                               QMessageBox::Ok,
                               QMessageBox::Cancel ) == QMessageBox::Ok )
-
-  voiceEnginesModel.removeVoiceEngine( current.row() );
+  {
+    voiceEnginesModel.removeVoiceEngine( current.row() );
+  }
 }
 
 void TextToSpeechSource::on_previewVoice_clicked()
@@ -66,23 +67,17 @@ void TextToSpeechSource::on_previewVoice_clicked()
 
   QString engineId = ui.availableVoiceEngines->itemData( idx ).toString();
   QString text = ui.previewText->text();
-  SpeechClient *speechClient = new SpeechClient( engineId, this );
+  SpeechClient * speechClient = new SpeechClient( engineId, this );
 
-  ui.previewVoice->setEnabled( false );
-  connect( speechClient, SIGNAL( finished( SpeechClient * ) ),
-           this, SLOT( previewVoiceFinished( SpeechClient * ) ) );
-  if ( !speechClient->tell( text ) ) {
-    ui.previewVoice->setEnabled( true );
-    delete speechClient;
-  }
+  connect( speechClient, SIGNAL( started( bool ) ), ui.previewVoice, SLOT( setDisabled( bool ) ) );
+  connect( speechClient, SIGNAL( finished() ), this, SLOT( previewVoiceFinished() ) );
+  connect( speechClient, SIGNAL( finished() ), speechClient, SLOT( deleteLater() ) );
+  speechClient->tell( text );
 }
 
-void TextToSpeechSource::previewVoiceFinished( SpeechClient * speechClient )
+void TextToSpeechSource::previewVoiceFinished()
 {
-  ui.previewVoice->setEnabled( true );
-
-  if (speechClient)
-    speechClient->deleteLater();
+  ui.previewVoice->setDisabled( false );
 }
 
 void TextToSpeechSource::fitSelectedVoiceEnginesColumns()
@@ -100,7 +95,7 @@ VoiceEnginesModel::VoiceEnginesModel( QWidget * parent,
 
 void VoiceEnginesModel::removeVoiceEngine( int index )
 {
-	beginRemoveRows( QModelIndex(), index, index );
+  beginRemoveRows( QModelIndex(), index, index );
   voiceEngines.erase( voiceEngines.begin() + index );
   endRemoveRows();
 }
@@ -111,9 +106,9 @@ void VoiceEnginesModel::addNewVoiceEngine( QString const & id, QString const & n
     return;
 
   Config::VoiceEngine v;
-	v.enabled = true;
-	v.id = id;
-	v.name = name;
+  v.enabled = true;
+  v.id = id;
+  v.name = name;
 
   beginInsertRows( QModelIndex(), voiceEngines.size(), voiceEngines.size() );
   voiceEngines.push_back( v );
@@ -136,14 +131,15 @@ Qt::ItemFlags VoiceEnginesModel::flags( QModelIndex const & index ) const
 
   if ( index.isValid() )
   {
-    switch ( index.column() ) {
-    case kColumnEnabled:
-      result |= Qt::ItemIsUserCheckable;
-      break;
-    case kColumnEngineName:
-    case kColumnIcon:
-      result |= Qt::ItemIsEditable;
-      break;
+    switch ( index.column() )
+    {
+      case kColumnEnabled:
+        result |= Qt::ItemIsUserCheckable;
+        break;
+      case kColumnEngineName:
+      case kColumnIcon:
+        result |= Qt::ItemIsEditable;
+        break;
     }
   }
 
@@ -168,7 +164,7 @@ QVariant VoiceEnginesModel::headerData( int section, Qt::Orientation /*orientati
 {
   if ( role == Qt::DisplayRole )
   {
-    switch( section )
+    switch ( section )
     {
       case kColumnEnabled:
         return tr( "Enabled" );
@@ -211,7 +207,7 @@ QVariant VoiceEnginesModel::data( QModelIndex const & index, int role ) const
 }
 
 bool VoiceEnginesModel::setData( QModelIndex const & index, const QVariant & value,
-                              int role )
+                                 int role )
 {
   if ( index.row() >= voiceEngines.size() )
     return false;
@@ -276,8 +272,10 @@ void VoiceEngineEditor::setEngineId( QString const & engineId )
 {
   // Find index for the id
   int idx = -1;
-  for ( int i = 0; i < count(); ++i ) {
-    if ( engineId == itemData(i).toString() ) {
+  for ( int i = 0; i < count(); ++i )
+  {
+    if ( engineId == itemData( i ).toString() )
+    {
       idx = i;
       break;
     }
@@ -285,22 +283,22 @@ void VoiceEngineEditor::setEngineId( QString const & engineId )
   setCurrentIndex( idx );
 }
 
-VoiceEngineItemDelegate::VoiceEngineItemDelegate( SpeechClient::Engines const & engines, QObject *parent ) :
+VoiceEngineItemDelegate::VoiceEngineItemDelegate( SpeechClient::Engines const & engines, QObject * parent ) :
   QStyledItemDelegate( parent ),
   engines( engines )
 {
 }
 
-QWidget * VoiceEngineItemDelegate::createEditor( QWidget *parent,
+QWidget * VoiceEngineItemDelegate::createEditor( QWidget * parent,
                                                  QStyleOptionViewItem const & option,
                                                  QModelIndex const & index ) const
 {
-  if( index.column() != VoiceEnginesModel::kColumnEngineName )
+  if ( index.column() != VoiceEnginesModel::kColumnEngineName )
     return QStyledItemDelegate::createEditor( parent, option, index );
   return new VoiceEngineEditor( engines, parent );
 }
 
-void VoiceEngineItemDelegate::setEditorData( QWidget *uncastedEditor, const QModelIndex & index ) const
+void VoiceEngineItemDelegate::setEditorData( QWidget * uncastedEditor, const QModelIndex & index ) const
 {
   VoiceEngineEditor * editor = qobject_cast< VoiceEngineEditor * >( uncastedEditor );
   if ( !editor )
@@ -312,7 +310,7 @@ void VoiceEngineItemDelegate::setEditorData( QWidget *uncastedEditor, const QMod
   editor->setEngineId( engineId );
 }
 
-void VoiceEngineItemDelegate::setModelData( QWidget *uncastedEditor, QAbstractItemModel * model,
+void VoiceEngineItemDelegate::setModelData( QWidget * uncastedEditor, QAbstractItemModel * model,
                                             const QModelIndex & index ) const
 {
   VoiceEngineEditor * editor = qobject_cast< VoiceEngineEditor * >( uncastedEditor );

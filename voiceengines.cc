@@ -7,21 +7,24 @@
 #include "utf8.hh"
 #include "wstring_qt.hh"
 
+#include <string>
+#include <map>
+
 #include <QUrl>
 #include <QDir>
 #include <QFileInfo>
+#include <QCryptographicHash>
 
-namespace VoiceEngines {
+namespace VoiceEngines
+{
 
 using namespace Dictionary;
+using std::string;
+using std::map;
 
-namespace StringConv {
-
-inline QString toMd5( QByteArray const & b )
+inline string toMd5( QByteArray const & b )
 {
-  return QString( QCryptographicHash::hash( b, QCryptographicHash::Md5 ).toHex() );
-}
-
+  return string( QCryptographicHash::hash( b, QCryptographicHash::Md5 ).toHex().constData() );
 }
 
 class VoiceEnginesDictionary: public Dictionary::Class
@@ -34,7 +37,7 @@ public:
 
   VoiceEnginesDictionary( Config::VoiceEngine const & voiceEngine ):
     Dictionary::Class(
-      StringConv::toMd5( voiceEngine.id.toUtf8() ).toStdString(),
+      toMd5( voiceEngine.id.toUtf8() ),
       vector< string >() ),
     voiceEngine( voiceEngine )
   {
@@ -67,10 +70,10 @@ protected:
 };
 
 sptr< WordSearchRequest > VoiceEnginesDictionary::prefixMatch( wstring const & /*word*/,
-                                                           unsigned long /*maxResults*/ )
+                                                               unsigned long /*maxResults*/ )
   throw( std::exception )
 {
-  WordSearchRequestInstant *sr = new WordSearchRequestInstant();
+  WordSearchRequestInstant * sr = new WordSearchRequestInstant();
   sr->setUncertain( true );
   return sr;
 }
@@ -102,7 +105,7 @@ sptr< Dictionary::DataRequest > VoiceEnginesDictionary::getArticle(
 
   sptr< DataRequestInstant > ret = new DataRequestInstant( true );
   ret->getData().resize( result.size() );
-  memcpy( &(ret->getData().front()), result.data(), result.size() );
+  memcpy( &( ret->getData().front() ), result.data(), result.size() );
   return ret;
 }
 
@@ -123,12 +126,12 @@ void VoiceEnginesDictionary::loadIcon() throw()
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
-    Config::VoiceEngines const & voiceEngines )
+  Config::VoiceEngines const & voiceEngines )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
 
-  for( Config::VoiceEngines::const_iterator i = voiceEngines.begin(); i != voiceEngines.end(); ++i )
+  for ( Config::VoiceEngines::const_iterator i = voiceEngines.begin(); i != voiceEngines.end(); ++i )
   {
     if ( i->enabled )
       result.push_back( new VoiceEnginesDictionary( *i ) );

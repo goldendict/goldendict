@@ -1,15 +1,16 @@
 #include "speechclient.hh"
-#include <QtCore>
 
 #include <windows.h>
 #include "speechhlp.hh"
+
+#include <QtCore>
 
 struct SpeechClient::InternalData
 {
   InternalData( QString const & engineId ):
     waitingFinish( false )
   {
-    sp = speechCreate( reinterpret_cast<const wchar_t*>( engineId.utf16() ) );
+    sp = speechCreate( engineId.toStdWString().c_str() );
   }
 
   ~InternalData()
@@ -19,27 +20,17 @@ struct SpeechClient::InternalData
 
   SpeechHelper sp;
   Engine engine;
-  typedef QPointer<SpeechClient> Ptr;
-  static QList<Ptr> ptrs;
   bool waitingFinish;
 };
-
-QList<SpeechClient::InternalData::Ptr> SpeechClient::InternalData::ptrs =
-    QList<SpeechClient::InternalData::Ptr>();
 
 SpeechClient::SpeechClient( QString const & engineId, QObject * parent ):
   QObject( parent ),
   internalData( new InternalData( engineId ) )
 {
-  Engine engine;
-  engine.id = QString::fromWCharArray( speechEngineId( internalData->sp ) );
-  engine.name = QString::fromWCharArray( speechEngineName( internalData->sp ) );
-  internalData->ptrs.push_back( this );
 }
 
 SpeechClient::~SpeechClient()
 {
-  internalData->ptrs.removeAll( this );
   delete internalData;
 }
 
@@ -48,7 +39,7 @@ static bool enumEngines( void * /* token */,
                          const wchar_t * name,
                          void * userData )
 {
-  SpeechClient::Engines *pEngines = (SpeechClient::Engines *)userData;
+  SpeechClient::Engines * pEngines = ( SpeechClient::Engines * )userData;
   SpeechClient::Engine engine =
   {
     QString::fromWCharArray( id ),
@@ -70,7 +61,7 @@ const SpeechClient::Engine & SpeechClient::engine() const
   return internalData->engine;
 }
 
-bool SpeechClient::tell( QString const & text ) const
+bool SpeechClient::tell( QString const & text )
 {
   if ( !speechAvailable( internalData->sp ) )
     return false;
@@ -78,17 +69,27 @@ bool SpeechClient::tell( QString const & text ) const
   if ( internalData->waitingFinish )
     return false;
 
-  internalData->waitingFinish = true;
-  const_cast<SpeechClient *>( this )->startTimer( 50 );
-  return speechTell( internalData->sp, reinterpret_cast<const wchar_t*>( text.utf16() ) );
+  bool ok = speechTell( internalData->sp, text.toStdWString().c_str() );
+  emit started( ok );
+
+  if ( ok )
+  {
+    internalData->waitingFinish = true;
+    startTimer( 50 );
+  }
+  else
+  {
+    emit finished();
+  }
+  return ok;
 }
 
-bool SpeechClient::say( QString const & text ) const
+bool SpeechClient::say( QString const & text )
 {
   if ( !speechAvailable( internalData->sp ) )
     return false;
 
-  return speechSay( internalData->sp, reinterpret_cast<const wchar_t*>( text.utf16() ) );
+  return speechSay( internalData->sp, text.toStdWString().c_str() );
 }
 
 void SpeechClient::timerEvent( QTimerEvent * evt )
@@ -100,9 +101,8 @@ void SpeechClient::timerEvent( QTimerEvent * evt )
 
   if ( speechTellFinished( internalData->sp ) )
   {
-      killTimer( evt->timerId() ) ;
-      internalData->waitingFinish = false;
-      emit finished();
-      emit finished( this );
+    killTimer( evt->timerId() ) ;
+    internalData->waitingFinish = false;
+    emit finished();
   }
 }

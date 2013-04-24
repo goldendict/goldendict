@@ -28,17 +28,41 @@ inline void SpHexFromUlong(WCHAR * psz, ULONG ul)
     }
 }
 
+inline HRESULT SpGetTokenFromId(
+    const WCHAR * pszTokenId,
+    ISpObjectToken ** ppToken,
+    BOOL fCreateIfNotExist = FALSE)
+{
+    HRESULT hr;
+    ISpObjectToken * cpToken;
+    hr = CoCreateInstance(CLSID_SpObjectToken, NULL, CLSCTX_INPROC_SERVER,
+                          IID_ISpObjectToken, (void**)&cpToken);
+
+    if (SUCCEEDED(hr))
+    {
+        hr = cpToken->SetId(NULL, pszTokenId, fCreateIfNotExist);
+        if (SUCCEEDED(hr))
+        {
+            *ppToken = cpToken;
+        }
+        else
+            cpToken->Release();
+    }
+
+    return hr;
+}
+
 inline HRESULT SpGetCategoryFromId(
     const WCHAR * pszCategoryId,
     ISpObjectTokenCategory ** ppCategory,
     BOOL fCreateIfNotExist = FALSE)
 {
     HRESULT hr;
-    
+
     ISpObjectTokenCategory * cpTokenCategory;
-    hr = CoCreateInstance(CLSID_SpObjectTokenCategory, NULL, CLSCTX_INPROC_SERVER, 
+    hr = CoCreateInstance(CLSID_SpObjectTokenCategory, NULL, CLSCTX_INPROC_SERVER,
                           IID_ISpObjectTokenCategory, (void**)&cpTokenCategory );
-    
+
     if (SUCCEEDED(hr))
     {
       hr = cpTokenCategory->SetId(pszCategoryId, fCreateIfNotExist);
@@ -49,21 +73,21 @@ inline HRESULT SpGetCategoryFromId(
       else
         cpTokenCategory->Release();
     }
-    
+
     return hr;
 }
 
 HRESULT SpEnumTokens(
-    const WCHAR * pszCategoryId, 
-    const WCHAR * pszReqAttribs, 
-    const WCHAR * pszOptAttribs, 
+    const WCHAR * pszCategoryId,
+    const WCHAR * pszReqAttribs,
+    const WCHAR * pszOptAttribs,
     IEnumSpObjectTokens ** ppEnum)
 {
     HRESULT hr = S_OK;
-    
+
     ISpObjectTokenCategory * cpCategory;
     hr = SpGetCategoryFromId(pszCategoryId, &cpCategory);
-    
+
     if (SUCCEEDED(hr))
     {
         hr = cpCategory->EnumTokens(
@@ -72,7 +96,7 @@ HRESULT SpEnumTokens(
                     ppEnum);
         cpCategory->Release();
     }
-    
+
     return hr;
 }
 
@@ -80,6 +104,8 @@ inline HRESULT SpGetDescription(ISpObjectToken * pObjToken, WCHAR ** ppszDescrip
 {
     WCHAR szLangId[10];
     HRESULT hr = S_OK;
+
+#if _SAPI_VER >= 0x053
     WCHAR* pRegKeyPath = 0;
     WCHAR* pszTemp = 0;
     HKEY   Handle = NULL;
@@ -101,7 +127,7 @@ inline HRESULT SpGetDescription(ISpObjectToken * pObjToken, WCHAR ** ppszDescrip
         HMODULE hmodAdvapi32Dll = NULL;
         typedef HRESULT (WINAPI* LPFN_RegLoadMUIStringW)(HKEY, LPCWSTR, LPWSTR, DWORD, LPDWORD, DWORD, LPCWSTR);
         LPFN_RegLoadMUIStringW pfnRegLoadMUIStringW = NULL;
-                
+
         // Delay bind with RegLoadMUIStringW since this function is not supported on previous versions of advapi32.dll
         // RegLoadMUIStringW is supported only on advapi32.dll that ships with Windows Vista  and above
         // Calling RegLoadMUIStringW directly makes the loader try to resolve the function reference at load time which breaks,
@@ -121,7 +147,7 @@ inline HRESULT SpGetDescription(ISpObjectToken * pObjToken, WCHAR ** ppszDescrip
         {
             hr = HRESULT_FROM_WIN32(ERROR_DLL_NOT_FOUND);
         }
-        
+
         if (SUCCEEDED(hr))
         {
             hr = pObjToken->GetId(&pszTemp);
@@ -151,7 +177,7 @@ inline HRESULT SpGetDescription(ISpObjectToken * pObjToken, WCHAR ** ppszDescrip
                 {
                     lErrorCode = ERROR_BAD_ARGUMENTS;
                 }
-                
+
                 // Use MUI RegLoadMUIStringW API to load the localized string
                 if(ERROR_SUCCESS == lErrorCode)
                 {
@@ -190,6 +216,9 @@ inline HRESULT SpGetDescription(ISpObjectToken * pObjToken, WCHAR ** ppszDescrip
 
     // If running on OSes released before Windows Vista query the localized string from the registry
     // If RegLoadMUIStringW failed to retrieved the localized Engine name retrieve the localized string from the fallback (Default) attribute
+#else
+    hr = E_FAIL;
+#endif // _SAPI_VER >= 0x053
     if (FAILED(hr))
     {
         // Free memory allocated above if necessary

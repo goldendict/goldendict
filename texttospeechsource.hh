@@ -93,7 +93,7 @@ private slots:
   void on_addVoiceEngine_clicked();
   void on_removeVoiceEngine_clicked();
   void on_previewVoice_clicked();
-  void previewVoiceFinished( SpeechClient * speechClient );
+  void previewVoiceFinished();
 
 private:
   Ui::TextToSpeechSource ui;
