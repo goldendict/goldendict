@@ -780,11 +780,11 @@ string MdxDictionary::filterResource( const char * article )
                            QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
                            "\\1gdau://" + QString::fromStdString( getId() ) + "/\\2" )
                  // stylesheets
-                 .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
-                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
+                 .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(file://)?([^\"']*)", Qt::CaseInsensitive ),
+                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\3" )
                  // images
-                 .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
-                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
+                 .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(file://)?([^\"']*)", Qt::CaseInsensitive ),
+                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\3" )
                  .toUtf8().constData() );
 }
 
