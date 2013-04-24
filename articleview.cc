@@ -19,11 +19,14 @@
 #include "dprintf.hh"
 #include <QDebug>
 #include <QWebElement>
+#include <QCryptographicHash>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <mmsystem.h> // For PlaySound
 #include "bass.hh"
+
+#include "speechclient.hh"
 
 #include <QPainter>
 #endif
@@ -946,6 +949,33 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     // Still here? No such program exists.
     QMessageBox::critical( this, "GoldenDict",
                            tr( "The referenced audio program doesn't exist." ) );
+  }
+  else
+  if ( url.scheme() == "gdtts" )
+  {
+// TODO: Port TTS
+#ifdef Q_OS_WIN32
+    // Text to speech
+    QString md5Id = url.queryItemValue( "engine" );
+    QString text( url.path().mid( 1 ) );
+
+    for ( Config::VoiceEngines::const_iterator i = cfg.voiceEngines.begin();
+          i != cfg.voiceEngines.end(); ++i )
+    {
+      QString itemMd5Id = QString( QCryptographicHash::hash(
+                                     i->id.toUtf8(),
+                                     QCryptographicHash::Md5 ).toHex());
+
+      if ( itemMd5Id == md5Id ) {
+        SpeechClient * speechClient = new SpeechClient( i->id, this );
+        connect( speechClient, SIGNAL( finished() ), speechClient, SLOT( deleteLater() ) );
+        if ( !speechClient->tell( text ) ) {
+          delete speechClient;
+        }
+        break;
+      }
+    }
+#endif
   }
   else
   if ( isExternalLink( url ) )

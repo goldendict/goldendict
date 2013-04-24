@@ -7,24 +7,26 @@
 #include <QStandardItemModel>
 #include "dprintf.hh"
 
-Sources::Sources( QWidget * parent, Config::Paths const & paths,
-                  Config::SoundDirs const & soundDirs,
-                  Config::Hunspell const & hunspell,
-                  Config::Transliteration const & trs,
-                  Config::Forvo const & forvo,
-                  Config::MediaWikis const & mediawikis,
-                  Config::WebSites const & webSites,
-                  Config::Programs const & programs ): QWidget( parent ),
+
+Sources::Sources( QWidget * parent, Config::Class const & cfg):
+  QWidget( parent ),
+#ifdef Q_OS_WIN32
+  textToSpeechSource( NULL ),
+#endif
   itemDelegate( new QItemDelegate( this ) ),
   itemEditorFactory( new QItemEditorFactory() ),
-  mediawikisModel( this, mediawikis ),
-  webSitesModel( this, webSites ),
-  programsModel( this, programs ),
-  pathsModel( this, paths ),
-  soundDirsModel( this, soundDirs ),
-  hunspellDictsModel( this, hunspell )
+  mediawikisModel( this, cfg.mediawikis ),
+  webSitesModel( this, cfg.webSites ),
+  programsModel( this, cfg.programs ),
+  pathsModel( this, cfg.paths ),
+  soundDirsModel( this, cfg.soundDirs ),
+  hunspellDictsModel( this, cfg.hunspell )
 {
   ui.setupUi( this );
+
+  Config::Hunspell const & hunspell = cfg.hunspell;
+  Config::Transliteration const & trs = cfg.transliteration;
+  Config::Forvo const & forvo = cfg.forvo;
 
   // TODO: will programTypeEditorCreator and itemEditorFactory be destoryed by
   // anyone?
@@ -91,6 +93,12 @@ Sources::Sources( QWidget * parent, Config::Paths const & paths,
   ui.forvoEnabled->setChecked( forvo.enable );
   ui.forvoApiKey->setText( forvo.apiKey );
   ui.forvoLanguageCodes->setText( forvo.languageCodes );
+
+  // Text to speech
+#ifdef Q_OS_WIN32
+  textToSpeechSource = new TextToSpeechSource( this, cfg.voiceEngines );
+  ui.tabWidget->addTab( textToSpeechSource, tr( "Text to Speech" ) );
+#endif
 
   if ( Config::isPortableVersion() )
   {
@@ -276,6 +284,17 @@ void Sources::on_removeProgram_clicked()
                               QMessageBox::Ok,
                               QMessageBox::Cancel ) == QMessageBox::Ok )
     programsModel.removeProgram( current.row() );
+}
+
+Config::VoiceEngines Sources::getVoiceEngines() const
+{
+#ifdef Q_OS_WIN32
+  if ( !textToSpeechSource )
+    return Config::VoiceEngines();
+  return textToSpeechSource->getVoiceEnginesModel().getCurrentVoiceEngines();
+#else
+  return Config::VoiceEngines();
+#endif
 }
 
 Config::Hunspell Sources::getHunspell() const

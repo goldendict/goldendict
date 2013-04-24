@@ -35,7 +35,8 @@ LIBS += \
         -lbz2 \
         -llzo2
 
-win32 { 
+win32 {
+	TARGET = GoldenDict
     LIBS += -liconv \
         -lwsock32 \
         -lwinmm \
@@ -220,7 +221,8 @@ HEADERS += folding.hh \
     historypanewidget.hh \
     wordlist.hh \
     mdictparser.hh \
-    mdx.hh
+    mdx.hh \
+    voiceengines.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -325,19 +327,28 @@ SOURCES += folding.cc \
     historypanewidget.cc \
     wordlist.cc \
     mdictparser.cc \
-    mdx.cc
+    mdx.cc \
+    voiceengines.cc
 
-win32 { 
+win32 {
+	FORMS   += texttospeechsource.ui
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
                guids.c \
                x64.cc \
-               bass.cc
+               bass.cc \
+               speechclient_win.cc \
+               texttospeechsource.cc \
+               speechhlp.cc
     HEADERS += mouseover_win32/ThTypes.h \
                wordbyauto.hh \
                uiauto.hh \
                x64.hh \
-               bass.hh
+               bass.hh \
+               texttospeechsource.hh \
+               sapi.hh \
+               sphelper.hh \
+               speechclient.hh
 }
 
 mac {
