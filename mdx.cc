@@ -19,6 +19,7 @@
 #include <set>
 #include <list>
 #include <ctype.h>
+#include <stdlib.h>
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -265,7 +266,7 @@ private:
   void loadArticle( uint32_t offset, string & headword, string & articleText );
 
   /// Process resource links (images, audios, etc)
-  string filterResource( const char * article );
+  string filterResource( const char * articleId, const char * article );
 
   friend class MdxHeadwordsRequest;
   friend class MdxArticleRequest;
@@ -760,21 +761,30 @@ void MdxDictionary::loadArticle( uint32_t offset, string & headword, string & ar
   Mutex::Lock _( idxMutex );
 
   char * articleData = chunks.getBlock( offset, chunk );
+
+  // Make an sub unique id for this article
+  char articleId[32] = { 0 };
+  _ui64toa( ( uintptr_t )articleData,  articleId, 16 );
+
   headword = articleData;
   articleText = string( articleData + headword.size() + 1 );
   articleText = MdxParser::substituteStylesheet( articleText, styleSheets );
-  articleText = filterResource( articleText.c_str() );
+  articleText = filterResource( articleId, articleText.c_str() );
 }
 
-string MdxDictionary::filterResource( const char * article )
+string MdxDictionary::filterResource( const char * articleId, const char * article )
 {
+  QString uniquePrefix = QString::fromStdString( getId() + "_" + articleId + "_" );
+
   return string( QString::fromUtf8( article )
                  // word cross links
                  .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://([^#\"']+)#?[^\"']*", Qt::CaseInsensitive ),
                            "\\1gdlookup://localhost/\\2" )
                  // anchors
-                 .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#" , Qt::CaseInsensitive ),
-                           "\\1#" )
+                 .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
+                           "\\1#" + uniquePrefix )
+                 .replace( QRegExp( "(<\\s*a\\s+[^>]*(name|id)\\s*=\\s*\")", Qt::CaseInsensitive ),
+                           "\\1" + uniquePrefix )
                  // sounds, and audio link script
                  .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
                            QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
