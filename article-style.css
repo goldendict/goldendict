@@ -383,6 +383,7 @@ div.xdxf
 .mdict a[name]
 {
   text-decoration: none;
+  color: inherit;
 }
 
 /************* Spelling suggestions *****************/
