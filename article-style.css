@@ -380,6 +380,11 @@ div.xdxf
   margin-top: 1em;
 }
 
+.mdict a[name]
+{
+  text-decoration: none;
+}
+
 /************* Spelling suggestions *****************/
 
 .gdspellsuggestion
