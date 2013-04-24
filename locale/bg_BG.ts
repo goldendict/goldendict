@@ -276,6 +276,10 @@
         <source>Save s&amp;ound...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>TTS Voice</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
@@ -3144,15 +3148,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Confirm removal</source>
         <translation type="unfinished">Потвърждаване на премахването</translation>
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

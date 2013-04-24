@@ -149,16 +149,21 @@
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
+        <source>TTS Voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="708"/>
         <source>Picture</source>
         <translation>Paveikslėlis</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="719"/>
+        <location filename="../articleview.cc" line="724"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>„%1“ žodyne esantis apibrėžimas: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="723"/>
+        <location filename="../articleview.cc" line="728"/>
         <source>Definition: %1</source>
         <translation>Apibrėžimas: %1</translation>
     </message>
@@ -167,149 +172,149 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="911"/>
-        <location filename="../articleview.cc" line="1085"/>
+        <location filename="../articleview.cc" line="916"/>
+        <location filename="../articleview.cc" line="1089"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Nurodyto šaltinio nėra.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="951"/>
+        <location filename="../articleview.cc" line="956"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Nėra nurodytos garso programos.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1085"/>
-        <location filename="../articleview.cc" line="1186"/>
-        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1089"/>
+        <location filename="../articleview.cc" line="1190"/>
+        <location filename="../articleview.cc" line="1201"/>
         <source>ERROR: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1151"/>
+        <location filename="../articleview.cc" line="1155"/>
         <source>Save sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1153"/>
+        <location filename="../articleview.cc" line="1157"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1166"/>
+        <location filename="../articleview.cc" line="1170"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1168"/>
+        <location filename="../articleview.cc" line="1172"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1186"/>
+        <location filename="../articleview.cc" line="1190"/>
         <source>Resource saving error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1333"/>
+        <location filename="../articleview.cc" line="1337"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Atverti nuorodą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1339"/>
+        <location filename="../articleview.cc" line="1343"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Atverti nuorodą naujoje &amp;kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1346"/>
+        <location filename="../articleview.cc" line="1350"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Atv&amp;erti nuorodą naršyklėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1378"/>
+        <location filename="../articleview.cc" line="1382"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Ieškoti „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1386"/>
+        <location filename="../articleview.cc" line="1390"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Ieškoti „%1“ &amp;naujoje kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1391"/>
+        <location filename="../articleview.cc" line="1395"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>„%1“ siųsti į įvedimo eilutę</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1397"/>
-        <location filename="../articleview.cc" line="1429"/>
+        <location filename="../articleview.cc" line="1401"/>
+        <location filename="../articleview.cc" line="1433"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>žodį „%1“ į&amp;traukti į žurnalą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1411"/>
+        <location filename="../articleview.cc" line="1415"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Ieškoti „%1“ grupėje %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1419"/>
+        <location filename="../articleview.cc" line="1423"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Ieškoti „%1“ grupėje %2 &amp;naujoje kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1596"/>
+        <location filename="../articleview.cc" line="1600"/>
         <source>Playing a non-WAV file</source>
         <translation>Groti ne-WAV failą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1597"/>
+        <location filename="../articleview.cc" line="1601"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Norėdami įgalinti kitokių nei WAV failų grojimą, eikite į meniu Taisa &gt; Nuostatos, pasirinkite Garso kortelę ir pažymėkite „Groti per DirectShow“.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1612"/>
+        <location filename="../articleview.cc" line="1616"/>
         <source>Bass library not found.</source>
         <translation>Nepavyko rasti „Bass“ bibliotekos.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1617"/>
+        <location filename="../articleview.cc" line="1621"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>„Bass“ biblioteka negali groti šio garso.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1652"/>
+        <location filename="../articleview.cc" line="1656"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Nepavyko paleisti grotuvo garso failui atkurti: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1670"/>
+        <location filename="../articleview.cc" line="1674"/>
         <source>Failed to create temporary file.</source>
         <translation>Nepavyko sukurti laikinojo failo.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1681"/>
+        <location filename="../articleview.cc" line="1685"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Nepavyko automatiškai atverti šaltinio failo, mėginkite rankiniu būdu: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1197"/>
-        <location filename="../articleview.cc" line="1704"/>
+        <location filename="../articleview.cc" line="1201"/>
+        <location filename="../articleview.cc" line="1708"/>
         <source>The referenced resource failed to download.</source>
         <translation>Nepavyko parsiųsti nurodytų šaltinių.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1359"/>
+        <location filename="../articleview.cc" line="1363"/>
         <source>Save &amp;image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1367"/>
+        <location filename="../articleview.cc" line="1371"/>
         <source>Save s&amp;ound...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1612"/>
-        <location filename="../articleview.cc" line="1617"/>
-        <location filename="../articleview.cc" line="1704"/>
+        <location filename="../articleview.cc" line="1616"/>
+        <location filename="../articleview.cc" line="1621"/>
+        <location filename="../articleview.cc" line="1708"/>
         <source>WARNING: %1</source>
         <translation>ĮSPĖJIMAS: %1</translation>
     </message>
@@ -3941,7 +3946,7 @@ Dar įtraukta į GoldenDict.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="35"/>
-        <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
+        <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3975,22 +3980,22 @@ Dar įtraukta į GoldenDict.</translation>
 <context>
     <name>VoiceEnginesModel</name>
     <message>
-        <location filename="../texttospeechsource.cc" line="174"/>
+        <location filename="../texttospeechsource.cc" line="170"/>
         <source>Enabled</source>
         <translation type="unfinished">Įgalinta</translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="176"/>
+        <location filename="../texttospeechsource.cc" line="172"/>
         <source>Name</source>
         <translation type="unfinished">Pavadinimas</translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="178"/>
+        <location filename="../texttospeechsource.cc" line="174"/>
         <source>Id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="180"/>
+        <location filename="../texttospeechsource.cc" line="176"/>
         <source>Icon</source>
         <translation type="unfinished">Ženkliukas</translation>
     </message>
