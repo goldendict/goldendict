@@ -3889,12 +3889,67 @@ Not implemented yet in GoldenDict.</source>
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Text to Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StylesComboBox</name>
     <message>
         <source>None</source>
         <translation type="unfinished">Ni maya</translation>
+    </message>
+</context>
+<context>
+    <name>TextToSpeechSource</name>
+    <message>
+        <source>Selected voice engines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available voice engines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text to be previewed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type text to be previewed here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No TTS voice available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm removal</source>
+        <translation type="unfinished">Chhaqtayapunitati</translation>
+    </message>
+    <message>
+        <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3905,6 +3960,25 @@ Not implemented yet in GoldenDict.</source>
     </message>
     <message>
         <source>Drop-down</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VoiceEnginesModel</name>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Suti</translation>
+    </message>
+    <message>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

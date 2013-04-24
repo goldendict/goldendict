@@ -163,179 +163,179 @@
         <translation>Меркаваць &amp;рэґістр</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="163"/>
+        <location filename="../articleview.cc" line="166"/>
         <source>Select Current Article</source>
         <translation>Выбраць дзейны артыкул</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="690"/>
+        <location filename="../articleview.cc" line="693"/>
         <source>Resource</source>
         <translation>Рэсурс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="695"/>
+        <location filename="../articleview.cc" line="698"/>
         <source>Audio</source>
         <translation>Аўдыё</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="700"/>
+        <location filename="../articleview.cc" line="703"/>
         <source>Picture</source>
         <translation>Відарыс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="716"/>
+        <location filename="../articleview.cc" line="719"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Азначэньне з слоўніка „%1“: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="720"/>
+        <location filename="../articleview.cc" line="723"/>
         <source>Definition: %1</source>
         <translation>Азначэньне: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="908"/>
-        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="911"/>
+        <location filename="../articleview.cc" line="1085"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Запытанага рэсурсу не існуе.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="948"/>
+        <location filename="../articleview.cc" line="951"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Пазначанай праґрамы не існуе.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1055"/>
-        <location filename="../articleview.cc" line="1156"/>
-        <location filename="../articleview.cc" line="1167"/>
+        <location filename="../articleview.cc" line="1085"/>
+        <location filename="../articleview.cc" line="1186"/>
+        <location filename="../articleview.cc" line="1197"/>
         <source>ERROR: %1</source>
         <translation>АБМЫЛА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1121"/>
+        <location filename="../articleview.cc" line="1151"/>
         <source>Save sound</source>
         <translation>Захаваньне гуку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1123"/>
+        <location filename="../articleview.cc" line="1153"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Гукавыя файлы (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1136"/>
+        <location filename="../articleview.cc" line="1166"/>
         <source>Save image</source>
         <translation>Захаваньне выявы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1138"/>
+        <location filename="../articleview.cc" line="1168"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Файлы выяваў (*.bmp *.jpg *.png *.tif);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1156"/>
+        <location filename="../articleview.cc" line="1186"/>
         <source>Resource saving error: </source>
         <translation>Памылка захаваньня рэсурсу: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1303"/>
+        <location filename="../articleview.cc" line="1333"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Адчыніць спасылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1309"/>
+        <location filename="../articleview.cc" line="1339"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ачыніць спасылку ў новай &amp;укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1316"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Адчыніць спасылку ў &amp;вонкавым аглядальніку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1329"/>
+        <location filename="../articleview.cc" line="1359"/>
         <source>Save &amp;image...</source>
         <translation>Захаваць &amp;выяву...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1337"/>
+        <location filename="../articleview.cc" line="1367"/>
         <source>Save s&amp;ound...</source>
         <translation>Захаваць &amp;гук...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1348"/>
+        <location filename="../articleview.cc" line="1378"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Шукаць „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1356"/>
+        <location filename="../articleview.cc" line="1386"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Шукаць „%1“ у &amp;новай укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1361"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Зьмясьціць „%1“ у ўводным радку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1367"/>
-        <location filename="../articleview.cc" line="1399"/>
+        <location filename="../articleview.cc" line="1397"/>
+        <location filename="../articleview.cc" line="1429"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Дадаць „%1“ у гісторыю</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1381"/>
+        <location filename="../articleview.cc" line="1411"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Шукаць „%1“ у ґрупе %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1389"/>
+        <location filename="../articleview.cc" line="1419"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Шукаць „%1“ у ґрупе %2 у новай у&amp;кладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1566"/>
+        <location filename="../articleview.cc" line="1596"/>
         <source>Playing a non-WAV file</source>
         <translation>Прайграваньне фарматаў розных ад WAV</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1567"/>
+        <location filename="../articleview.cc" line="1597"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
         <translation>Каб улучыць прайграваньне файлаў розных ад WAV, перайдзі да Зьменаў|Наладаў, абяры ўкладку Аўдыё і ўлучы „Прайграваць цераз DirectShow“.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1582"/>
-        <location filename="../articleview.cc" line="1587"/>
-        <location filename="../articleview.cc" line="1674"/>
+        <location filename="../articleview.cc" line="1612"/>
+        <location filename="../articleview.cc" line="1617"/>
+        <location filename="../articleview.cc" line="1704"/>
         <source>WARNING: %1</source>
         <translation>УВАГА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1582"/>
+        <location filename="../articleview.cc" line="1612"/>
         <source>Bass library not found.</source>
         <translation>GoldenDict не знайшоў бібліятэкі Bass.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1587"/>
+        <location filename="../articleview.cc" line="1617"/>
         <source>Bass library can&apos;t play this sound.</source>
         <translation>Бібліятэка Bass не патрапіла прайграць гэтага запісу.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1622"/>
+        <location filename="../articleview.cc" line="1652"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Немажліва ўрухоміць прайгравальніка гукавага файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1640"/>
+        <location filename="../articleview.cc" line="1670"/>
         <source>Failed to create temporary file.</source>
         <translation>Не атрымалася стварыць часовага файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1651"/>
+        <location filename="../articleview.cc" line="1681"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Не атрымалася аўтаматычна адчыніць рэсурсавага файла. Паспрабуй адчыніць ручна %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1167"/>
-        <location filename="../articleview.cc" line="1674"/>
+        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1704"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
     </message>
@@ -532,39 +532,39 @@ between classic and school orthography in cyrillic)</source>
         <translation>Слоўнікі</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="42"/>
+        <location filename="../editdictionaries.cc" line="41"/>
         <source>&amp;Sources</source>
         <translation>&amp;Крыніцы</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="221"/>
+        <location filename="../editdictionaries.cc" line="42"/>
+        <location filename="../editdictionaries.cc" line="222"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Слоўнікі</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="44"/>
-        <location filename="../editdictionaries.cc" line="224"/>
+        <location filename="../editdictionaries.cc" line="43"/>
+        <location filename="../editdictionaries.cc" line="225"/>
         <source>&amp;Groups</source>
         <translation>Ґ&amp;рупы</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="105"/>
+        <location filename="../editdictionaries.cc" line="104"/>
         <source>Sources changed</source>
         <translation>Крыніцы зьмяніліся</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="106"/>
+        <location filename="../editdictionaries.cc" line="105"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>Колькі крыніц зьмяніліся. Ці ўжыць зьмены?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="109"/>
+        <location filename="../editdictionaries.cc" line="108"/>
         <source>Accept</source>
         <translation>Ужыць</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="111"/>
+        <location filename="../editdictionaries.cc" line="110"/>
         <source>Cancel</source>
         <translation>Скасаваць</translation>
     </message>
@@ -835,12 +835,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1112"/>
+        <location filename="../sources.cc" line="1131"/>
         <source>Enabled</source>
         <translation>Улучана</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1114"/>
+        <location filename="../sources.cc" line="1133"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
@@ -1880,7 +1880,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="216"/>
+        <location filename="../loaddictionaries.cc" line="226"/>
         <source>Error loading dictionaries</source>
         <translation>Памылка пры ладаваньні слоўнікаў</translation>
     </message>
@@ -2425,22 +2425,22 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="396"/>
+        <location filename="../sources.cc" line="415"/>
         <source>Enabled</source>
         <translation>Улучаны</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="398"/>
+        <location filename="../sources.cc" line="417"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="400"/>
+        <location filename="../sources.cc" line="419"/>
         <source>Address</source>
         <translation>Адрас</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="402"/>
+        <location filename="../sources.cc" line="421"/>
         <source>Icon</source>
         <translation>Значак</translation>
     </message>
@@ -2529,12 +2529,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="894"/>
+        <location filename="../sources.cc" line="913"/>
         <source>Path</source>
         <translation>Шлях</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="896"/>
+        <location filename="../sources.cc" line="915"/>
         <source>Recursive</source>
         <translation>Рэкурсіўна</translation>
     </message>
@@ -3227,27 +3227,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="802"/>
+        <location filename="../sources.cc" line="821"/>
         <source>Audio</source>
         <translation>Аўдыё</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="804"/>
+        <location filename="../sources.cc" line="823"/>
         <source>Plain Text</source>
         <translation>Звычайны тэкст</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="806"/>
+        <location filename="../sources.cc" line="825"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="808"/>
+        <location filename="../sources.cc" line="827"/>
         <source>Prefix Match</source>
         <translation>Паводле прэфіксу</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="810"/>
+        <location filename="../sources.cc" line="829"/>
         <source>Unknown</source>
         <translation>Няведама</translation>
     </message>
@@ -3273,27 +3273,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="710"/>
+        <location filename="../sources.cc" line="729"/>
         <source>Enabled</source>
         <translation>Улучана</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="712"/>
+        <location filename="../sources.cc" line="731"/>
         <source>Type</source>
         <translation>Тып</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="714"/>
+        <location filename="../sources.cc" line="733"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="716"/>
+        <location filename="../sources.cc" line="735"/>
         <source>Command Line</source>
         <translation>Загадны радок</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="718"/>
+        <location filename="../sources.cc" line="737"/>
         <source>Icon</source>
         <translation>Значак</translation>
     </message>
@@ -3405,17 +3405,17 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1000"/>
+        <location filename="../sources.cc" line="1019"/>
         <source>Path</source>
         <translation>Шлях</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1002"/>
+        <location filename="../sources.cc" line="1021"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1004"/>
+        <location filename="../sources.cc" line="1023"/>
         <source>Icon</source>
         <translation>Значак</translation>
     </message>
@@ -3695,40 +3695,45 @@ Not implemented yet in GoldenDict.</source>
         <translation>Катакана</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="108"/>
+        <location filename="../sources.cc" line="100"/>
+        <source>Text to Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="116"/>
         <source>(not available in portable version)</source>
         <translation>(не даступна ў пераноснай вэрсіі)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="145"/>
-        <location filename="../sources.cc" line="172"/>
-        <location filename="../sources.cc" line="199"/>
+        <location filename="../sources.cc" line="153"/>
+        <location filename="../sources.cc" line="180"/>
+        <location filename="../sources.cc" line="207"/>
         <source>Choose a directory</source>
         <translation>Выбар каталёґу</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="159"/>
-        <location filename="../sources.cc" line="186"/>
-        <location filename="../sources.cc" line="226"/>
-        <location filename="../sources.cc" line="250"/>
-        <location filename="../sources.cc" line="274"/>
+        <location filename="../sources.cc" line="167"/>
+        <location filename="../sources.cc" line="194"/>
+        <location filename="../sources.cc" line="234"/>
+        <location filename="../sources.cc" line="258"/>
+        <location filename="../sources.cc" line="282"/>
         <source>Confirm removal</source>
         <translation>Пацьверджаньне прыбіраньня</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="160"/>
-        <location filename="../sources.cc" line="187"/>
+        <location filename="../sources.cc" line="168"/>
+        <location filename="../sources.cc" line="195"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Прыбраць каталёґ &lt;b&gt;%1&lt;/b&gt; са сьпісу?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="227"/>
-        <location filename="../sources.cc" line="251"/>
+        <location filename="../sources.cc" line="235"/>
+        <location filename="../sources.cc" line="259"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Прыбраць сайт &lt;b&gt;%1&lt;/b&gt; са сьпісу?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="275"/>
+        <location filename="../sources.cc" line="283"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Прыбраць праґраму &lt;b&gt;%1&lt;/b&gt; са сьпісу?</translation>
     </message>
@@ -3739,6 +3744,69 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
         <translation>Няма</translation>
+    </message>
+</context>
+<context>
+    <name>TextToSpeechSource</name>
+    <message>
+        <location filename="../texttospeechsource.ui" line="33"/>
+        <source>Selected voice engines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="53"/>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="60"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="84"/>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="98"/>
+        <source>Available voice engines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="116"/>
+        <source>Text to be previewed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="123"/>
+        <source>Type text to be previewed here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="157"/>
+        <source>&amp;Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="34"/>
+        <source>No TTS voice available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="35"/>
+        <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="52"/>
+        <source>Confirm removal</source>
+        <translation type="unfinished">Пацьверджаньне прыбіраньня</translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="53"/>
+        <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3755,24 +3823,47 @@ Not implemented yet in GoldenDict.</source>
     </message>
 </context>
 <context>
+    <name>VoiceEnginesModel</name>
+    <message>
+        <location filename="../texttospeechsource.cc" line="174"/>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="176"/>
+        <source>Name</source>
+        <translation type="unfinished">Назва</translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="178"/>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.cc" line="180"/>
+        <source>Icon</source>
+        <translation type="unfinished">Значак</translation>
+    </message>
+</context>
+<context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="553"/>
+        <location filename="../sources.cc" line="572"/>
         <source>Enabled</source>
         <translation>Улучаны</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="555"/>
+        <location filename="../sources.cc" line="574"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="557"/>
+        <location filename="../sources.cc" line="576"/>
         <source>Address</source>
         <translation>Адрас</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="559"/>
+        <location filename="../sources.cc" line="578"/>
         <source>Icon</source>
         <translation>Значак</translation>
     </message>
