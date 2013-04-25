@@ -554,7 +554,12 @@ void MdxArticleRequest::run()
       continue;
     }
 
-    articleText += "<div class=\"mdict\">" + articleBody + "</div>\n";
+    // See Issue #271: A mechanism to clean-up invalid HTML cards.
+    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</b></b></b></b></b></b></b></b>"
+                     "</i></i></i></i></i></i></i></i>";
+    articleText += "<div class=\"mdict\">" + articleBody + cleaner + "</div>\n";
     hasAnyData = true;
   }
 
