@@ -412,32 +412,11 @@ string AardDictionary::convert( const string & in )
         inConverted.push_back( inCh );
     }
 
-    QDomDocument dd;
-    QString errorStr;
-    int errorLine, errorColumn;
+    QString text = QString::fromUtf8( inConverted.c_str() );
+    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*[\\\"'](w:|s:){0,1}([^#](?!ttp://)[^\\\"']*)(.)" ),
+                  "<a href=\"bword:\\2\"");
 
-    if( !dd.setContent( QByteArray( inConverted.c_str() ), false, &errorStr, &errorLine, &errorColumn ) )
-    {
-        FDPRINTF( stderr, "Aard article parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
-        FDPRINTF( stderr, "The input was: %s\n", in.c_str() );
-        return inConverted;
-    }
-
-    QDomNodeList nodes = dd.elementsByTagName( "a" ); // References
-    for( int i = 0; i < nodes.count(); i++ )
-    {
-        QDomElement el = nodes.at( i ).toElement();
-        QString ref = el.attribute( "href", "" );
-        if( ref.size() == 0 || ref.indexOf( "http://") != -1 || ref[0] == '#' )
-            continue;
-        if( ref.indexOf( "w:") == 0 || ref.indexOf( "s:") == 0 )
-            ref.replace( 0, 2, "bword:" );
-        else
-            ref.insert( 0, "bword:" );
-        el.setAttribute( "href", ref );
-    }
-
-    return dd.toByteArray().data();
+    return text.toUtf8().data();
 }
 
 void AardDictionary::loadArticle( uint32_t address,
