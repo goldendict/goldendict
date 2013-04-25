@@ -763,13 +763,13 @@ void MdxDictionary::loadArticle( uint32_t offset, string & headword, string & ar
   char * articleData = chunks.getBlock( offset, chunk );
 
   // Make an sub unique id for this article
-  char articleId[32] = { 0 };
-  _ui64toa( ( uintptr_t )articleData,  articleId, 16 );
+  QString articleId;
+  articleId.setNum( ( quint64 )articleData, 16 );
 
   headword = articleData;
   articleText = string( articleData + headword.size() + 1 );
   articleText = MdxParser::substituteStylesheet( articleText, styleSheets );
-  articleText = filterResource( articleId, articleText.c_str() );
+  articleText = filterResource( articleId.toLatin1().constData(), articleText.c_str() );
 }
 
 string MdxDictionary::filterResource( const char * articleId, const char * article )
