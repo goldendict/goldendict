@@ -24,6 +24,7 @@
 #include "fsencoding.hh"
 #include <QProcess>
 #include "historypanewidget.hh"
+#include "bass.hh"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -743,6 +744,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   #endif
 #ifdef Q_OS_WIN32
   gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
+  BassAudioPlayer::instance().setMainWindow( winId() );
 #endif
 }
 
@@ -1965,6 +1967,11 @@ bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
 
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
+
+#ifdef Q_OS_WIN32
+  if( ev->type() == QEvent::WinIdChange )
+    BassAudioPlayer::instance().setMainWindow( this->internalWinId() );
+#endif
 
   if ( ev->type() == QEvent::ShortcutOverride ) {
     // Handle Ctrl+H to show the History Pane.

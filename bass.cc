@@ -71,9 +71,6 @@ BassAudioPlayer::BassAudioPlayer() :
 
     spxPluginHandle = fBASS_PluginLoad( ( const char * )L"bass_spx.dll", BASS_UNICODE );
 
-    QWidget *root = qApp->topLevelWidgets().value(0);
-    hwnd = (HWND)root->winId();
-
     return;
   }
   FreeLibrary( hBass );
@@ -96,9 +93,11 @@ BassAudioPlayer::~BassAudioPlayer()
   }
 }
 
-BOOL BassAudioPlayer::playMemory( const void * ptr, size_t size )
+BOOL BassAudioPlayer::playMemory( const void * ptr, size_t size, int * errorCodePtr )
 {
   Mutex::Lock _( mt );
+  if( errorCodePtr )
+    *errorCodePtr = -2;
 
   if( ptr == 0 || size == 0 )
     return( false );
@@ -108,12 +107,17 @@ BOOL BassAudioPlayer::playMemory( const void * ptr, size_t size )
   if( currentHandle )
   {
     fBASS_Stop();
-    fBASS_Free();
     currentHandle = 0;
   }
 
+  fBASS_Free();
+
   if( !fBASS_Init( -1, 44100, 0, hwnd, 0 ) )
+  {
+    if( errorCodePtr )
+      *errorCodePtr = fBASS_ErrorGetCode();
     return false;
+  }
 
   if( data )
     free( data );
@@ -130,7 +134,15 @@ BOOL BassAudioPlayer::playMemory( const void * ptr, size_t size )
   }
 
   if( currentHandle )
-    return( fBASS_ChannelPlay( currentHandle, TRUE ) );
+  {
+    bool res = fBASS_ChannelPlay( currentHandle, TRUE );
+    if( !res && errorCodePtr != 0 )
+      *errorCodePtr = fBASS_ErrorGetCode();
+    return res;
+  }
+
+  if( errorCodePtr )
+    *errorCodePtr = fBASS_ErrorGetCode();
 
   return false ;
 }
@@ -139,6 +151,50 @@ BassAudioPlayer & BassAudioPlayer::instance()
 {
   static BassAudioPlayer a;
   return a;
+}
+
+const char * BassAudioPlayer::errorText( int errorCode )
+{
+  switch( errorCode )
+  {
+    case 0:  return( "BASS_OK" );
+    case 1:  return( "BASS_ERROR_MEM" );
+    case 2:  return( "BASS_ERROR_FILEOPEN" );
+    case 3:  return( "BASS_ERROR_DRIVER" );
+    case 4:  return( "BASS_ERROR_BUFLOST" );
+    case 5:  return( "BASS_ERROR_HANDLE" );
+    case 6:  return( "BASS_ERROR_FORMAT" );
+    case 7:  return( "BASS_ERROR_POSITION" );
+    case 8:  return( "BASS_ERROR_INIT" );
+    case 9:  return( "BASS_ERROR_START" );
+    case 14: return( "BASS_ERROR_ALREADY" );
+    case 18: return( "BASS_ERROR_NOCHAN" );
+    case 19: return( "BASS_ERROR_ILLTYPE" );
+    case 20: return( "BASS_ERROR_ILLPARAM" );
+    case 21: return( "BASS_ERROR_NO3D" );
+    case 22: return( "BASS_ERROR_NOEAX" );
+    case 23: return( "BASS_ERROR_DEVICE" );
+    case 24: return( "BASS_ERROR_NOPLAY" );
+    case 25: return( "BASS_ERROR_FREQ" );
+    case 27: return( "BASS_ERROR_NOTFILE" );
+    case 29: return( "BASS_ERROR_NOHW" );
+    case 31: return( "BASS_ERROR_EMPTY" );
+    case 32: return( "BASS_ERROR_NONET" );
+    case 33: return( "BASS_ERROR_CREATE" );
+    case 34: return( "BASS_ERROR_NOFX" );
+    case 37: return( "BASS_ERROR_NOTAVAIL");
+    case 38: return( "BASS_ERROR_DECODE" );
+    case 39: return( "BASS_ERROR_DX" );
+    case 40: return( "BASS_ERROR_TIMEOUT" );
+    case 41: return( "BASS_ERROR_FILEFORM" );
+    case 42: return( "BASS_ERROR_SPEAKER" );
+    case 43: return( "BASS_ERROR_VERSION" );
+    case 44: return( "BASS_ERROR_CODEC" );
+    case 45: return( "BASS_ERROR_ENDED" );
+    case 46: return( "BASS_ERROR_BUSY" );
+    case -1: return( "BASS_ERROR_UNKNOWN" );
+  }
+  return "Unknown error";
 }
 
 #endif

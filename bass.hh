@@ -15,7 +15,10 @@ public:
   bool canBeUsed()
   { return hBass != 0; }
 
-  BOOL playMemory( const void * ptr, size_t size );
+  BOOL playMemory( const void * ptr, size_t size, int *errorCodePtr = 0 );
+  const char * errorText( int errorCode );
+  void setMainWindow( HWND hwnd_ )
+  { hwnd = hwnd_; }
 
   static BassAudioPlayer & instance();
 

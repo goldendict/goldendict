@@ -1617,8 +1617,10 @@ void ArticleView::resourceDownloadFinished()
                                      10000, QPixmap( ":/icons/error.png" ) );
             else
             {
-              if( !BassAudioPlayer::instance().playMemory( data.data(), data.size() ) )
-                emit statusBarMessage( tr( "WARNING: %1" ).arg( tr( "Bass library can't play this sound." ) ),
+              int bassErrorCode;
+              if( !BassAudioPlayer::instance().playMemory( data.data(), data.size(), &bassErrorCode ) )
+                emit statusBarMessage( tr( "WARNING: %1" ).arg( tr( "Bass library can't play this sound." ) )
+                                       + " " + QString( BassAudioPlayer::instance().errorText( bassErrorCode ) ),
                                        10000, QPixmap( ":/icons/error.png" ) );
             }
           }
