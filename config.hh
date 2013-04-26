@@ -383,25 +383,37 @@ typedef QVector< Program > Programs;
 
 struct VoiceEngine
 {
-	bool enabled;
-	QString id;
-	QString name;
+  bool enabled;
+  QString id;
+  QString name;
   QString iconFilename;
+  int volume; // 0-100 allowed
+  int rate;   // 0-100 allowed
 
-	VoiceEngine(): enabled( false )
+  VoiceEngine(): enabled( false )
+    , volume( 50 )
+    , rate( 50 )
+  {}
+  VoiceEngine( QString id_, QString name_, int volume_, int rate_ ):
+    enabled( false )
+    , id( id_ )
+    , name( name_ )
+    , volume( volume_ )
+    , rate( rate_ )
+  {}
+
+  bool operator == ( VoiceEngine const & other ) const
   {
-  }
-
-	bool operator == ( VoiceEngine const & other ) const
-	{
-		return enabled == other.enabled &&
+    return enabled == other.enabled &&
            id == other.id &&
            name == other.name &&
-           iconFilename == other.iconFilename;
-	}
+           iconFilename == other.iconFilename &&
+           volume == other.volume &&
+           rate == other.rate;
+  }
 
-	bool operator != ( VoiceEngine const & other ) const
-	{ return ! operator == ( other ); }
+  bool operator != ( VoiceEngine const & other ) const
+    { return ! operator == ( other ); }
 };
 
 typedef QVector< VoiceEngine> VoiceEngines;

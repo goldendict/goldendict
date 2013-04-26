@@ -29,10 +29,12 @@ public:
   VoiceEnginesModel( QWidget * parent, Config::VoiceEngines const & voiceEngines );
 
   void removeVoiceEngine( int index );
-  void addNewVoiceEngine( QString const & id, QString const & name );
+  void addNewVoiceEngine( QString const & id, QString const & name,
+                          int volume, int rate );
 
   Config::VoiceEngines const & getCurrentVoiceEngines() const
   { return voiceEngines; }
+  void setEngineParams( QModelIndex idx, int volume, int rate );
 
   QModelIndex index( int row, int column, QModelIndex const & parent ) const;
   QModelIndex parent( QModelIndex const & parent ) const;
@@ -94,12 +96,15 @@ private slots:
   void on_removeVoiceEngine_clicked();
   void on_previewVoice_clicked();
   void previewVoiceFinished();
+  void slidersChanged();
+  void selectionChanged();
 
 private:
   Ui::TextToSpeechSource ui;
   VoiceEnginesModel voiceEnginesModel;
 
   void fitSelectedVoiceEnginesColumns();
+  void adjustSliders();
 };
 
 #endif // __TEXTTOSPEECHSOURCE_HH_INCLUDED__

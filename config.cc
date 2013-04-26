@@ -604,7 +604,7 @@ Class load() throw( exError )
 
   QDomNode ves = root.namedItem( "voiceEngines" );
 
-	if ( !wss.isNull() )
+  if ( !ves.isNull() )
   {
     QDomNodeList nl = ves.toElement().elementsByTagName( "voiceEngine" );
 
@@ -617,6 +617,12 @@ Class load() throw( exError )
       v.id = ve.attribute( "id" );
       v.name = ve.attribute( "name" );
       v.iconFilename = ve.attribute( "icon" );
+      v.volume = ve.attribute( "volume", "50" ).toInt();
+      if( v.volume < 0 || v.volume > 100 )
+        v.volume = 50;
+      v.rate = ve.attribute( "rate", "50" ).toInt();
+      if( v.rate < 0 || v.rate > 100 )
+        v.rate = 50;
       c.voiceEngines.push_back( v );
     }
   }
@@ -1205,6 +1211,14 @@ void save( Class const & c ) throw( exError )
       QDomAttr icon = dd.createAttribute( "icon" );
       icon.setValue( i->iconFilename );
       v.setAttributeNode( icon );
+
+      QDomAttr volume = dd.createAttribute( "volume" );
+      volume.setValue( QString::number( i->volume ) );
+      v.setAttributeNode( volume );
+
+      QDomAttr rate = dd.createAttribute( "rate" );
+      rate.setValue( QString::number( i->rate ) );
+      v.setAttributeNode( rate );
     }
   }
 

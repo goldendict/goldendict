@@ -7,10 +7,13 @@
 
 struct SpeechClient::InternalData
 {
-  InternalData( QString const & engineId ):
+  InternalData( Config::VoiceEngine const & e ):
     waitingFinish( false )
+    , engine( e )
+    , oldVolume( -1 )
+    , oldRate( -1 )
   {
-    sp = speechCreate( engineId.toStdWString().c_str() );
+    sp = speechCreate( e.id.toStdWString().c_str() );
   }
 
   ~InternalData()
@@ -19,13 +22,15 @@ struct SpeechClient::InternalData
   }
 
   SpeechHelper sp;
-  Engine engine;
   bool waitingFinish;
+  Engine engine;
+  int oldVolume;
+  int oldRate;
 };
 
-SpeechClient::SpeechClient( QString const & engineId, QObject * parent ):
+SpeechClient::SpeechClient( Config::VoiceEngine const & e, QObject * parent ):
   QObject( parent ),
-  internalData( new InternalData( engineId ) )
+  internalData( new InternalData( e ) )
 {
 }
 
@@ -40,11 +45,10 @@ static bool enumEngines( void * /* token */,
                          void * userData )
 {
   SpeechClient::Engines * pEngines = ( SpeechClient::Engines * )userData;
-  SpeechClient::Engine engine =
-  {
+  SpeechClient::Engine engine( Config::VoiceEngine(
     QString::fromWCharArray( id ),
-    QString::fromWCharArray( name )
-  };
+    QString::fromWCharArray( name ),
+    50, 50 ) );
   pEngines->push_back( engine );
   return true;
 }
@@ -61,7 +65,7 @@ const SpeechClient::Engine & SpeechClient::engine() const
   return internalData->engine;
 }
 
-bool SpeechClient::tell( QString const & text )
+bool SpeechClient::tell( QString const & text, int volume, int rate )
 {
   if ( !speechAvailable( internalData->sp ) )
     return false;
@@ -69,7 +73,16 @@ bool SpeechClient::tell( QString const & text )
   if ( internalData->waitingFinish )
     return false;
 
+  if( volume < 0 )
+    volume = engine().volume;
+  if( rate < 0 )
+    rate = engine().rate;
+
+  internalData->oldVolume = setSpeechVolume( internalData->sp, volume );
+  internalData->oldRate = setSpeechRate( internalData->sp, rate );
+
   bool ok = speechTell( internalData->sp, text.toStdWString().c_str() );
+
   emit started( ok );
 
   if ( ok )
@@ -84,12 +97,27 @@ bool SpeechClient::tell( QString const & text )
   return ok;
 }
 
-bool SpeechClient::say( QString const & text )
+bool SpeechClient::say( QString const & text, int volume, int rate )
 {
   if ( !speechAvailable( internalData->sp ) )
     return false;
 
-  return speechSay( internalData->sp, text.toStdWString().c_str() );
+  if( volume < 0 )
+    volume = engine().volume;
+  if( rate < 0 )
+    rate = engine().rate;
+
+  int oldVolume = setSpeechVolume( internalData->sp, volume );
+  int oldRate = setSpeechRate( internalData->sp, rate );
+
+  bool ok = speechSay( internalData->sp, text.toStdWString().c_str() );
+
+  if( oldVolume >=0 )
+    setSpeechVolume( internalData->sp, oldVolume );
+  if( oldRate >=0 )
+    setSpeechRate( internalData->sp, oldRate );
+
+  return ok;
 }
 
 void SpeechClient::timerEvent( QTimerEvent * evt )
@@ -103,6 +131,14 @@ void SpeechClient::timerEvent( QTimerEvent * evt )
   {
     killTimer( evt->timerId() ) ;
     internalData->waitingFinish = false;
+
+    if( internalData->oldVolume >=0 )
+      setSpeechVolume( internalData->sp, internalData->oldVolume );
+    if( internalData->oldRate >=0 )
+      setSpeechRate( internalData->sp, internalData->oldRate );
+    internalData->oldVolume = -1;
+    internalData->oldRate = -1;
+
     emit finished();
   }
 }

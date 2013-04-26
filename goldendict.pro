@@ -348,7 +348,8 @@ win32 {
                texttospeechsource.hh \
                sapi.hh \
                sphelper.hh \
-               speechclient.hh
+               speechclient.hh \
+               speechhlp.hh
 }
 
 mac {

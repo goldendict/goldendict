@@ -17,6 +17,11 @@
 #define SPERR_NOT_FOUND                MAKE_SAPI_ERROR(0x03a)
 #endif
 
+#ifdef _SAPI_VER
+#undef _SAPI_VER
+#endif
+#define _SAPI_VER 0503
+
 inline void SpHexFromUlong(WCHAR * psz, ULONG ul)
 {
     // If for some reason we cannot convert a number, set it to 0

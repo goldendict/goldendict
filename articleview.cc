@@ -973,7 +973,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
       if ( itemMd5Id == md5Id )
       {
-        SpeechClient * speechClient = new SpeechClient( i->id, this );
+        SpeechClient * speechClient = new SpeechClient( *i, this );
         connect( speechClient, SIGNAL( finished() ), speechClient, SLOT( deleteLater() ) );
         speechClient->tell( text );
         break;

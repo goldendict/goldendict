@@ -165,3 +165,27 @@ bool speechSay(SpeechHelper sp, const wchar_t *text)
     HRESULT hr = sp->voice->Speak(text, SPF_IS_NOT_XML, 0);
     return !!SUCCEEDED(hr);
 }
+
+int setSpeechVolume( SpeechHelper sp, int newVolume )
+{
+  if( !sp || !sp->voice || newVolume < 0 || newVolume > 100 )
+    return -1;
+  unsigned short oldVolume;
+  HRESULT hr = sp->voice->GetVolume( &oldVolume );
+  if( !SUCCEEDED( hr ) )
+    return -1;
+  sp->voice->SetVolume( (unsigned short) newVolume );
+  return oldVolume;
+}
+
+int setSpeechRate( SpeechHelper sp, int newRate )
+{
+  if( !sp || !sp->voice || newRate < 0 || newRate > 100 )
+    return -1;
+  long oldRate;
+  HRESULT hr = sp->voice->GetRate( &oldRate );
+  if( !SUCCEEDED( hr ) )
+    return -1;
+  sp->voice->SetRate( ( newRate - 50 ) / 5 );
+  return oldRate * 5 + 50;
+}
