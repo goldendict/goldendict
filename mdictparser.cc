@@ -654,7 +654,7 @@ QString & MdxParser::substituteStylesheet( QString & article, MdxParser::StyleSh
       endStyle = "";
     }
   }
-
+  article += endStyle;
   return article;
 }
 
