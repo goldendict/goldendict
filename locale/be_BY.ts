@@ -3770,46 +3770,61 @@ Not implemented yet in GoldenDict.</source>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
+        <source>Preferences</source>
+        <translation type="unfinished">Налады</translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="90"/>
+        <source>Volume:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="119"/>
+        <source>Rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.ui" line="98"/>
+        <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.ui" line="116"/>
+        <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.ui" line="123"/>
+        <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.ui" line="157"/>
+        <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="34"/>
+        <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="35"/>
+        <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="52"/>
+        <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
         <translation type="unfinished">Пацьверджаньне прыбіраньня</translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="53"/>
+        <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3830,22 +3845,22 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>VoiceEnginesModel</name>
     <message>
-        <location filename="../texttospeechsource.cc" line="170"/>
+        <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="172"/>
+        <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
         <translation type="unfinished">Назва</translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="174"/>
+        <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="176"/>
+        <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
         <translation type="unfinished">Значак</translation>
     </message>
