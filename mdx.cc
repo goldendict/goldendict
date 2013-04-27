@@ -558,7 +558,8 @@ void MdxArticleRequest::run()
     string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
                      "</font>""</font>""</font>""</font>""</font>""</font>"
                      "</b></b></b></b></b></b></b></b>"
-                     "</i></i></i></i></i></i></i></i>";
+                     "</i></i></i></i></i></i></i></i>"
+                     "</a></a></a></a></a></a></a></a>";
     articleText += "<div class=\"mdict\">" + articleBody + cleaner + "</div>\n";
     hasAnyData = true;
   }
