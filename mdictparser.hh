@@ -27,10 +27,38 @@
 #include <QPointer>
 #include <QFile>
 
+namespace Mdict
+{
+
 using std::string;
 using std::vector;
 using std::pair;
 using std::map;
+
+// A helper class to handle memory map for QFile
+class ScopedMemMap
+{
+  QFile & file;
+  uchar * address;
+
+public:
+  ScopedMemMap( QFile & file, qint64 offset, qint64 size ) :
+    file( file ),
+    address( file.map( offset, size ) )
+  {
+  }
+
+  ~ScopedMemMap()
+  {
+    if ( address )
+      file.unmap( address );
+  }
+
+  inline uchar * startAddress()
+  {
+    return address;
+  }
+};
 
 class MdictParser
 {
@@ -38,7 +66,7 @@ public:
 
   enum
   {
-    kParserVersion = 0x0000009
+    kParserVersion = 0x000000b
   };
 
   struct RecordIndex
@@ -66,6 +94,22 @@ public:
     }
 
     static size_t bsearch( vector<RecordIndex> const & offsets, qint64 val );
+  };
+
+  struct RecordInfo
+  {
+    qint64 compressedBlockPos;
+    qint64 recordOffset;
+
+    size_t decompressedBlockSize;
+    size_t compressedBlockSize;
+    size_t recordSize;
+  };
+
+  class RecordHandler
+  {
+  public:
+    virtual void handleRecord( QString const & name, RecordInfo const & recordInfo ) = 0;
   };
 
   typedef vector< pair<qint64, qint64> > BlockInfoVector;
@@ -107,9 +151,13 @@ public:
     return rtl_;
   }
 
+  MdictParser( char const * filename );
+  ~MdictParser() {}
+
   bool open();
   void close();
   bool readNextHeadWordIndex( HeadWordIndex & headWordIndex );
+  bool readRecordBlock( HeadWordIndex & headWordIndex, RecordHandler & recordHandler );
 
   // helpers
   static QString toUtf16( const char * fromCode, const char * from, size_t fromSize );
@@ -120,11 +168,15 @@ public:
   static bool parseCompressedBlock( size_t compressedBlockSize, const char * compressedBlockPtr,
                                     size_t decompressedBlockSize, QByteArray & decompressedBlock );
 
+  static QString & substituteStylesheet( QString & article, StyleSheets const & styleSheets );
+  static inline string substituteStylesheet( string const & article, StyleSheets const & styleSheets )
+  {
+    QString s = QString::fromUtf8( article.c_str() );
+    substituteStylesheet( s, styleSheets );
+    return string( s.toUtf8().constData() );
+  }
+
 protected:
-  MdictParser( char const * filename );
-
-  ~MdictParser() {}
-
   qint64 readNumber( QDataStream & in );
   static quint32 readU8OrU16( QDataStream & in, bool isU16 );
   bool readHeader( QDataStream & in );
@@ -161,46 +213,6 @@ protected:
   bool bruteForceEnd_;
 };
 
-class MdxParser: public MdictParser
-{
-public:
-  class ArticleHandler
-  {
-  public:
-    virtual void handleAritcle( QString const & headWord, QString const & article ) = 0;
-  };
-
-  MdxParser( const char * filename ): MdictParser( filename ) {}
-  ~MdxParser() {}
-
-  bool readRecordBlock( HeadWordIndex & headWordIndex, ArticleHandler & articleHandler );
-  static QString & substituteStylesheet( QString & article, StyleSheets const & styleSheets );
-  static inline string substituteStylesheet( string const & article, StyleSheets const & styleSheets )
-  {
-    QString s = QString::fromUtf8( article.c_str() );
-    substituteStylesheet( s, styleSheets );
-    return string( s.toUtf8().constData() );
-  }
-};
-
-class MddParser: public MdictParser
-{
-public:
-  class ResourceHandler
-  {
-  public:
-    virtual void handleResource( QString const & fileName, quint32 decompressedBlockSize,
-                                 quint32 compressedBlockPos, quint32 compressedBlockSize,
-                                 quint32 resourceOffset, quint32 resourceSize ) = 0;
-  };
-
-  MddParser( const char * filename ) : MdictParser( filename ) {}
-  ~MddParser() {}
-
-  bool readRecordBlock( HeadWordIndex & headWordIndex, ResourceHandler & resourceHandler );
-
-private:
-
-};
+}
 
 #endif // __MDICTPARSER_HH_INCLUDED__

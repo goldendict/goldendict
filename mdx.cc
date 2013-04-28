@@ -13,6 +13,7 @@
 #include "langcoder.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
+#include "ex.hh"
 #include "mdictparser.hh"
 
 #include <map>
@@ -49,22 +50,20 @@ using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
 using BtreeIndexing::IndexInfo;
 
-namespace
-{
+using namespace Mdict;
+
 
 /// Checks if the given string ends with the given substring
-bool endsWith( string const & str, string const & tail )
+static bool endsWith( string const & str, string const & tail )
 {
   return str.size() >= tail.size() &&
          str.compare( str.size() - tail.size(), tail.size(), tail ) == 0;
 }
 
-}
-
 enum
 {
   kSignature = 0x4349444d,  // MDIC
-  kCurrentFormatVersion = 4 + BtreeIndexing::FormatVersion
+  kCurrentFormatVersion = 7 + BtreeIndexing::FormatVersion
 };
 
 struct IdxHeader
@@ -103,15 +102,6 @@ struct IdxHeader
 __attribute__( ( packed ) )
 #endif
 ;
-
-struct MddIndexEntry
-{
-  size_t decompressedBlockSize;
-  size_t compressedBlockPos;
-  size_t compressedBlockSize;
-  size_t resourceOffset;
-  size_t resourceSize;
-};
 
 // A helper method to read resources from .mdd file
 class IndexedMdd: public BtreeIndexing::BtreeIndex
@@ -167,26 +157,27 @@ public:
     if ( links.empty() )
       return false;
 
-    MddIndexEntry indexEntry;
+    MdictParser::RecordInfo indexEntry;
+    vector< char > chunk;
+    Mutex::Lock _( idxMutex );
+    const char * indexEntryPtr = chunks.getBlock( links[ 0 ].articleOffset, chunk );
+    memcpy( &indexEntry, indexEntryPtr, sizeof( indexEntry ) );
+
+    ScopedMemMap compressed( mddFile, indexEntry.compressedBlockPos, indexEntry.compressedBlockSize );
+    if ( !compressed.startAddress() )
     {
-      vector< char > chunk;
-      Mutex::Lock _( idxMutex );
-      const char * indexEntryPtr = chunks.getBlock( links[ 0 ].articleOffset, chunk );
-      memcpy( &indexEntry, indexEntryPtr, sizeof( indexEntry ) );
+      return false;
     }
 
     QByteArray decompressed;
-    mddFile.seek( indexEntry.compressedBlockPos );
-    QByteArray compressed = mddFile.read( indexEntry.compressedBlockSize );
-    if ( !MdictParser::parseCompressedBlock( compressed.size(), compressed.constData(),
+    if ( !MdictParser::parseCompressedBlock( indexEntry.compressedBlockSize, ( char * )compressed.startAddress(),
                                              indexEntry.decompressedBlockSize, decompressed ) )
     {
       return false;
     }
 
-    compressed.clear();
-    result.resize( indexEntry.resourceSize );
-    memcpy( &result.front(), decompressed.constData() + indexEntry.resourceOffset, indexEntry.resourceSize );
+    result.resize( indexEntry.recordSize );
+    memcpy( &result.front(), decompressed.constData() + indexEntry.recordOffset, indexEntry.recordSize );
     return true;
   }
 
@@ -198,7 +189,9 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
   File::Class idx;
   IdxHeader idxHeader;
   string dictionaryName;
+  string encoding;
   ChunkedStorage::Reader chunks;
+  QFile dictFile;
   IndexedMdd mddResource;
   MdictParser::StyleSheets styleSheets;
 
@@ -263,7 +256,7 @@ private:
   void doDeferredInit();
 
   /// Loads an article with the given offset, filling the given strings.
-  void loadArticle( uint32_t offset, string & headword, string & articleText );
+  void loadArticle( uint32_t offset, string & articleText );
 
   /// Process resource links (images, audios, etc)
   string filterResource( const char * articleId, const char * article );
@@ -283,14 +276,21 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
   mddResource( idxMutex, chunks ),
   deferredInitRunnableStarted( false )
 {
-  idx.seek( sizeof( idxHeader ) );
-
   // Read the dictionary's name
+  idx.seek( sizeof( idxHeader ) );
   size_t len = idx.read< uint32_t >();
-  vector< char > nameBuf( len );
-  idx.read( &nameBuf.front(), len );
+  vector< char > buf( len );
+  idx.read( &buf.front(), len );
+  dictionaryName = string( &buf.front(), len );
 
-  dictionaryName = string( &nameBuf.front(), len );
+  // then read the dictionary's encoding
+  len = idx.read< uint32_t >();
+  buf.resize( len );
+  idx.read( &buf.front(), len );
+  encoding = string( &buf.front(), len );
+
+  dictFile.setFileName( QString::fromUtf8( dictionaryFiles[ 0 ].c_str() ) );
+  dictFile.open( QIODevice::ReadOnly );
 }
 
 MdxDictionary::~MdxDictionary()
@@ -300,6 +300,8 @@ MdxDictionary::~MdxDictionary()
   // Wait for init runnable to complete if it was ever started
   if ( deferredInitRunnableStarted )
     deferredInitRunnableExited.acquire();
+
+  dictFile.close();
 }
 
 //////// MdxDictionary::deferredInit()
@@ -530,10 +532,9 @@ void MdxArticleRequest::run()
       continue; // We already have this article in the body.
 
     // Grab that article
-    string headword;
     string articleBody;
 
-    dict.loadArticle( chain[ x ].articleOffset, headword, articleBody );
+    dict.loadArticle( chain[ x ].articleOffset, articleBody );
 
     if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
       continue; // We already have this article in the body.
@@ -700,8 +701,8 @@ void MddResourceRequest::run()
         {
           data.push_back( '\0' );
           data.push_back( '\0' );
-          QString target = MdxParser::toUtf16( "UTF-16LE", &data.front() + sizeof( pattern ),
-                                               data.size() - sizeof( pattern ) );
+          QString target = MdictParser::toUtf16( "UTF-16LE", &data.front() + sizeof( pattern ),
+                                                 data.size() - sizeof( pattern ) );
           resourceName = gd::toWString( target.trimmed() );
           continue;
         }
@@ -761,21 +762,52 @@ void MdxDictionary::loadIcon() throw()
   dictionaryIconLoaded = true;
 }
 
-void MdxDictionary::loadArticle( uint32_t offset, string & headword, string & articleText )
+DEF_EX( exCorruptDictionary, "dictionary file tampered or corrupted", std::exception )
+
+void MdxDictionary::loadArticle( uint32_t offset, string & articleText )
 {
   vector< char > chunk;
   Mutex::Lock _( idxMutex );
 
-  char * articleData = chunks.getBlock( offset, chunk );
+  // Load record info from index
+  MdictParser::RecordInfo recordInfo;
+  char * pRecordInfo = chunks.getBlock( offset, chunk );
+  memcpy( &recordInfo, pRecordInfo, sizeof( recordInfo ) );
 
   // Make an sub unique id for this article
   QString articleId;
-  articleId.setNum( ( quint64 )articleData, 16 );
+  articleId.setNum( ( quint64 )pRecordInfo, 16 );
 
-  headword = articleData;
-  articleText = string( articleData + headword.size() + 1 );
-  articleText = MdxParser::substituteStylesheet( articleText, styleSheets );
-  articleText = filterResource( articleId.toLatin1().constData(), articleText.c_str() );
+  articleText = "Article loading error";
+
+  try
+  {
+    ScopedMemMap compressed( dictFile, recordInfo.compressedBlockPos, recordInfo.compressedBlockSize );
+    if ( !compressed.startAddress() )
+      throw exCorruptDictionary();
+
+    QByteArray decompressed;
+    if ( !MdictParser::parseCompressedBlock( recordInfo.compressedBlockSize, ( char * )compressed.startAddress(),
+                                             recordInfo.decompressedBlockSize, decompressed ) )
+      return;
+
+    QString article = MdictParser::toUtf16( encoding.c_str(),
+                                            decompressed.constData() + recordInfo.recordOffset,
+                                            recordInfo.recordSize );
+
+    article = MdictParser::substituteStylesheet( article, styleSheets );
+    articleText = filterResource( articleId.toLatin1().constData(), article.toUtf8().constData() );
+  }
+  catch ( std::exception & e )
+  {
+    FDPRINTF( stderr, "MDict: load article from %s failed, error: %s\n",
+              getDictionaryFilenames()[ 0 ].c_str(), e.what() );
+  }
+  catch ( ... )
+  {
+    FDPRINTF( stderr, "MDict: load article from %s failed, error: %s\n",
+              getDictionaryFilenames()[ 0 ].c_str(), "unknown error" );
+  }
 }
 
 string MdxDictionary::filterResource( const char * articleId, const char * article )
@@ -820,36 +852,20 @@ static void addEntryToIndexSingle( QString const & word, uint32_t offset, Indexe
   indexedWords.addSingleWord( gd::toWString( wordTrimmed ), offset );
 }
 
-class ArticleHandler: public MdxParser::ArticleHandler
+class ArticleHandler: public MdictParser::RecordHandler
 {
 public:
   ArticleHandler( ChunkedStorage::Writer & chunks, IndexedWords & indexedWords ) :
     chunks( chunks ),
-    indexedWords( indexedWords ),
-    articleCount_( 0 )
+    indexedWords( indexedWords )
   {
   }
 
-  inline size_t articleCount()
+  virtual void handleRecord( QString const & headWord, MdictParser::RecordInfo const & recordInfo )
   {
-    return articleCount_;
-  }
-
-  void handleAritcle( QString const & headWord, QString const & article )
-  {
-    if ( !article.startsWith( "@@@LINK=" ) )
-    {
-      articleCount_++;
-    }
-
-    // Save the article's body itself first
+    // Save the article's record info
     uint32_t articleAddress = chunks.startNewBlock();
-    string headWordU8 = string( headWord.toUtf8().constData() );
-    string articleU8 = string( article.toUtf8().constData() );
-
-    chunks.addToBlock( headWordU8.c_str(), headWordU8.size() + 1 );
-    chunks.addToBlock( articleU8.c_str(), articleU8.size() + 1 );
-
+    chunks.addToBlock( &recordInfo, sizeof( recordInfo ) );
     // Add entries to the index
     addEntryToIndex( headWord, articleAddress, indexedWords );
   }
@@ -857,10 +873,9 @@ public:
 private:
   ChunkedStorage::Writer & chunks;
   IndexedWords & indexedWords;
-  size_t articleCount_;
 };
 
-class ResourceHandler: public MddParser::ResourceHandler
+class ResourceHandler: public MdictParser::RecordHandler
 {
 public:
   ResourceHandler( ChunkedStorage::Writer & chunks, IndexedWords & indexedWords ):
@@ -869,18 +884,10 @@ public:
   {
   }
 
-  void handleResource( QString const & fileName, quint32 decompressedBlockSize,
-                       quint32 compressedBlockPos, quint32 compressedBlockSize,
-                       quint32 resourceOffset, quint32 resourceSize )
+  virtual void handleRecord( QString const & fileName, MdictParser::RecordInfo const & recordInfo )
   {
     uint32_t resourceInfoAddress = chunks.startNewBlock();
-    MddIndexEntry mddIndexEntry;
-    mddIndexEntry.decompressedBlockSize = decompressedBlockSize;
-    mddIndexEntry.compressedBlockPos = compressedBlockPos;
-    mddIndexEntry.compressedBlockSize = compressedBlockSize;
-    mddIndexEntry.resourceOffset = resourceOffset;
-    mddIndexEntry.resourceSize = resourceSize;
-    chunks.addToBlock( &mddIndexEntry, sizeof( mddIndexEntry ) );
+    chunks.addToBlock( &recordInfo, sizeof( recordInfo ) );
     // Add entries to the index
     addEntryToIndexSingle( fileName, resourceInfoAddress, indexedWords );
   }
@@ -935,15 +942,15 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
          indexIsOldOrBad( indexFile, !mddFileName.empty() ) )
     {
       // Building the index
-      MdxParser parser( i->c_str() );
-      sptr<MddParser> mddParser = NULL;
+      MdictParser parser( i->c_str() );
+      sptr<MdictParser> mddParser = NULL;
 
       if ( !parser.open() )
         continue;
 
       if ( File::exists( mddFileName ) )
       {
-        mddParser = new MddParser( mddFileName.c_str() );
+        mddParser = new MdictParser( mddFileName.c_str() );
         if ( !mddParser->open() )
         {
           FDPRINTF( stderr, "Warning: Invalid mdd (resource) file: %s\n", mddFileName.c_str() );
@@ -960,8 +967,17 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       // We write a dummy header first. At the end of the process the header
       // will be rewritten with the right values.
       idx.write( idxHeader );
+
+      // Write the title first
       idx.write< uint32_t >( title.size() );
       idx.write( title.data(), title.size() );
+
+      // then the encoding
+      {
+        string encoding = string( parser.encoding().toUtf8().constData() );
+        idx.write< uint32_t >( encoding.size() );
+        idx.write( encoding.data(), encoding.size() );
+      }
 
       // This is our index data that we accumulate during the loading process.
       // For each new word encountered, we emit the article's body to the file
@@ -976,10 +992,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       // Save dictionary description if there's one
       {
         string description = string( parser.description().toUtf8().constData() );
-        idxHeader.descriptionSize = 0;
         idxHeader.descriptionAddress = chunks.startNewBlock();
         chunks.addToBlock( description.c_str(), description.size() + 1 );
-        idxHeader.descriptionSize += description.size() + 1;
+        idxHeader.descriptionSize = description.size() + 1;
       }
 
       ArticleHandler articleHandler( chunks, indexedWords );
@@ -1062,7 +1077,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       idxHeader.formatVersion = kCurrentFormatVersion;
       idxHeader.parserVersion = MdictParser::kParserVersion;
       idxHeader.foldingVersion = Folding::Version;
-      idxHeader.articleCount = articleHandler.articleCount();
+      idxHeader.articleCount = parser.wordCount();
       idxHeader.wordCount = parser.wordCount();
 
       idx.rewind();
