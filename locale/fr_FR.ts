@@ -193,7 +193,7 @@
     <message>
         <location filename="../articleview.cc" line="703"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Synthèse vocale TTS</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="708"/>
@@ -1825,7 +1825,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
@@ -2363,7 +2363,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="733"/>
         <location filename="../mainwindow.cc" line="2669"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;API d&apos;accessibilité n&apos;est pas activée</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2746"/>
@@ -3260,7 +3260,7 @@ Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Moderne</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3275,12 +3275,12 @@ Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Bleu</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="162"/>
@@ -3651,7 +3651,7 @@ in the future, or register on the site to get your own key.</source>
     <message>
         <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtenez une nouvelle clé &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;ici&lt;/a&gt;, ou laissez le champ vide pour utiliser la clé par défaut.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3675,7 +3675,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="331"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisez %GD1251% pour CP1251, %GDISO1%...%GDISO16% pour ISO 8859-1...ISO 8859-16 respectivement,
+%GDBIG5% pour Big-5, %GDBIG5HKSCS% pour Big5-HKSCS, %GDGBK% pour GBK et GB18030, %GDSHIFTJIS% pour Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="503"/>
@@ -3804,7 +3805,7 @@ Pas encore implémenté dans GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Synthèse vocale TTS</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -3858,77 +3859,77 @@ Pas encore implémenté dans GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Moteurs de synthèse vocale sélectionnés :</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ajouter</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Préférences</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume :</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vitesse :</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Aperçu</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Moteurs disponibles :</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte de l&apos;aperçu :</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisissez le texte à synthétiser ici.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;perçu</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune voix de synthèse disponible</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Synthèse vocale non disponible.&lt;br&gt;Vérifiez qu&apos;au moins un logiciel de synthèse vocale est installé sur votre ordinateur.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Confirmer la suppression</translation>
+        <translation>Confirmer la suppression</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Retirer le moteur &lt;b&gt;%1&lt;/b&gt; de la liste ?</translation>
     </message>
 </context>
 <context>
@@ -3949,22 +3950,22 @@ Pas encore implémenté dans GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">Activé</translation>
+        <translation>Activé</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>ID</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">Icône</translation>
+        <translation>Icône</translation>
     </message>
 </context>
 <context>
