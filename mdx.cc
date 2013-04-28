@@ -778,7 +778,7 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText )
   QString articleId;
   articleId.setNum( ( quint64 )pRecordInfo, 16 );
 
-  articleText = "Article loading error";
+  articleText = string( QObject::tr( "Article loading error" ).toUtf8().constData() );
 
   try
   {
