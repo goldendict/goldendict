@@ -812,6 +812,7 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText )
 
 string MdxDictionary::filterResource( const char * articleId, const char * article )
 {
+  QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromStdString( getId() + "_" + articleId + "_" );
 
   return string( QString::fromUtf8( article )
@@ -826,15 +827,21 @@ string MdxDictionary::filterResource( const char * articleId, const char * artic
                  // sounds, and audio link script
                  .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
                            QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
-                           "\\1gdau://" + QString::fromStdString( getId() ) + "/\\2" )
+                           "\\1gdau://" + id + "/\\2" )
                  // stylesheets
-                 .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
-                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\3" )
+                 .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+                                    Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                           "\\1bres://" + id + "/\\2" )
+                 .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
+                                    Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                           "\\1\"bres://" + id + "/\\\"" )
                  // images
-                 .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
-                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\3" )
+                 .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+                                    Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                           "\\1bres://" + id + "/\\2" )
+                 .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
+                                    Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                           "\\1\"bres://" + id + "/\\2\"" )
                  .toUtf8().constData() );
 }
 
