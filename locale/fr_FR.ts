@@ -3868,7 +3868,7 @@ Pas encore implémenté dans GoldenDict.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
-        <source>Remove</source>
+        <source>&amp;Remove</source>
         <translation>Supprimer</translation>
     </message>
     <message>
@@ -3918,7 +3918,7 @@ Pas encore implémenté dans GoldenDict.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
-        <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
+        <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
         <translation>Synthèse vocale non disponible.&lt;br&gt;Vérifiez qu&apos;au moins un logiciel de synthèse vocale est installé sur votre ordinateur.</translation>
     </message>
     <message>

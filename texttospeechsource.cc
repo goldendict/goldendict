@@ -56,7 +56,7 @@ void TextToSpeechSource::on_addVoiceEngine_clicked()
   if ( ui.availableVoiceEngines->count() == 0 )
   {
     QMessageBox::information( this, tr( "No TTS voice available" ),
-                              tr( "Cannot find availble TTS voice.<br>"
+                              tr( "Cannot find available TTS voice.<br>"
                                   "Please make sure that at least one TTS engine installed on your computer already." ) );
     return;
   }

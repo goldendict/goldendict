@@ -3916,7 +3916,7 @@ Not implemented yet in GoldenDict.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove</source>
+        <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3952,7 +3952,7 @@ Not implemented yet in GoldenDict.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
+        <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

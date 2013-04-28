@@ -57,7 +57,7 @@
        <item>
         <widget class="QPushButton" name="removeVoiceEngine">
          <property name="text">
-          <string>Remove</string>
+          <string>&amp;Remove</string>
          </property>
         </widget>
        </item>

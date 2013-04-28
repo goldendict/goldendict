@@ -4704,7 +4704,7 @@ Todavía no está implementado en GoldenDict.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
-        <source>Remove</source>
+        <source>&amp;Remove</source>
         <translation>&amp;Eliminar</translation>
     </message>
     <message>
@@ -4754,7 +4754,7 @@ Todavía no está implementado en GoldenDict.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
-        <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
+        <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
         <translation>No se encuentra disponible ninguna opción de Texto a Voz. Por favor asegúrese de instalar al menos un motor de voz en su computadora.</translation>
     </message>
     <message>

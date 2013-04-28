@@ -3852,7 +3852,7 @@ Todavía no implementado en GoldenDict.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
-        <source>Remove</source>
+        <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3902,7 +3902,7 @@ Todavía no implementado en GoldenDict.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
-        <source>Cannot find availble TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
+        <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
