@@ -38,6 +38,9 @@
 
 #include "decompress.hh"
 
+namespace Mdict
+{
+
 static inline int u16StrSize( const ushort * unicode )
 {
   int size = 0;
@@ -141,10 +144,12 @@ bool MdictParser::readNextHeadWordIndex( MdictParser::HeadWordIndex & headWordIn
 
     headWordIndex.clear();
 
-    file_->seek( headWordPos_ );
-    QByteArray data = file_->read( headWordBlockSize_ );
-    const char * pDataStart = data.constData();
-    const char * pDataEnd = pDataStart + data.size();
+    ScopedMemMap mapping( *file_, headWordPos_, headWordBlockSize_ );
+    if ( !mapping.startAddress() )
+      return false;
+
+    const char * pDataStart = ( const char * )mapping.startAddress();
+    const char * pDataEnd = pDataStart + headWordBlockSize_;
     const char pattern[] = {0x02, 0x00, 0x00, 0x00};
     const char * patternBegin = pattern;
     const char * patternEnd = pattern + 4;
@@ -168,17 +173,20 @@ bool MdictParser::readNextHeadWordIndex( MdictParser::HeadWordIndex & headWordIn
     if ( headWordBlockInfosIter_ == headWordBlockInfos_.end() )
       return false;
 
-    file_->seek( headWordPos_ );
     qint64 compressedSize = headWordBlockInfosIter_->first;
     qint64 decompressedSize = headWordBlockInfosIter_->second;
 
     if ( compressedSize < 8 )
       return false;
 
-    QByteArray compressed = file_->read( compressedSize );
-    headWordPos_ = file_->pos();
+    ScopedMemMap compressed( *file_, headWordPos_, compressedSize );
+    if ( !compressed.startAddress() )
+      return false;
+
+    headWordPos_ += compressedSize;
     QByteArray decompressed;
-    if ( !parseCompressedBlock( compressedSize, compressed, decompressedSize, decompressed ) )
+    if ( !parseCompressedBlock( compressedSize, ( char * )compressed.startAddress(),
+                                decompressedSize, decompressed ) )
       return false;
 
     headWordIndex = splitHeadWordBlock( decompressed );
@@ -381,7 +389,7 @@ bool MdictParser::readHeader( QDataStream & in )
   // Read metadata
   rtl_ = headerAttributes.namedItem( "Left2Right" ).toAttr().value() != "Yes";
   QString title = headerAttributes.namedItem( "Title" ).toAttr().value();
-  if ( title == "Title (No HTML code allowed)" )
+  if ( title.isEmpty() || title.length() < 5 || title == "Title (No HTML code allowed)" )
   {
     // Use filename instead
     QFileInfo fi( filename_ );
@@ -587,49 +595,42 @@ MdictParser::HeadWordIndex MdictParser::splitHeadWordBlock( QByteArray const & b
   return index;
 }
 
-bool MdxParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
-                                 MdxParser::ArticleHandler & articleHandler )
+bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
+                                   MdictParser::RecordHandler & recordHandler )
 {
-  size_t prevIdx = ( size_t ) ( -1 );
-  QByteArray decompressed;
+  // cache the index, the headWordIndex is already sorted
+  size_t idx = 0;
 
   for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); i++ )
   {
-    size_t idx = RecordIndex::bsearch( recordBlockInfos_, i->first );
-    RecordIndex const & recordIndex = recordBlockInfos_[idx];
+    if ( recordBlockInfos_[idx].endPos <= i->first )
+      idx = RecordIndex::bsearch( recordBlockInfos_, i->first );
 
     if ( idx == ( size_t )( -1 ) )
       return false;
 
-    // Reload if index changes
-    if ( prevIdx != idx )
-    {
-      prevIdx = idx;
-      file_->seek( recordPos_ + recordIndex.startPos );
-
-      QByteArray compressed;
-      compressed.resize( recordIndex.compressedSize );
-      file_->read( compressed.data(), recordIndex.compressedSize );
-
-      if ( !parseCompressedBlock( recordIndex.compressedSize, compressed,
-                                  recordIndex.decompressedSize, decompressed ) )
-        return false;
-    }
-
+    RecordIndex const & recordIndex = recordBlockInfos_[idx];
     HeadWordIndex::const_iterator iNext = i + 1;
-    size_t articleSize;
+    size_t recordSize;
     if ( iNext == headWordIndex.end() )
-      articleSize = recordIndex.shadowEndPos - i->first;
+      recordSize = recordIndex.shadowEndPos - i->first;
     else
-      articleSize = iNext->first - i->first;
-    QString article = toUtf16( encoding_, decompressed.constData() + i->first - recordIndex.shadowStartPos, articleSize );
-    articleHandler.handleAritcle( i->second, article );
+      recordSize = iNext->first - i->first;
+
+    RecordInfo recordInfo;
+    recordInfo.compressedBlockPos = recordPos_ + recordIndex.startPos;
+    recordInfo.recordOffset = i->first - recordIndex.shadowStartPos;
+    recordInfo.decompressedBlockSize = recordIndex.decompressedSize;
+    recordInfo.compressedBlockSize = recordIndex.compressedSize;
+    recordInfo.recordSize = recordSize;
+
+    recordHandler.handleRecord( i->second, recordInfo );
   }
 
   return true;
 }
 
-QString & MdxParser::substituteStylesheet( QString & article, MdxParser::StyleSheets const & styleSheets )
+QString & MdictParser::substituteStylesheet( QString & article, MdictParser::StyleSheets const & styleSheets )
 {
   QRegExp rx( "`(\\d+)`" );
   QString endStyle;
@@ -658,28 +659,4 @@ QString & MdxParser::substituteStylesheet( QString & article, MdxParser::StyleSh
   return article;
 }
 
-bool MddParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
-                                 MddParser::ResourceHandler & resourceHandler  )
-{
-  for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); i++ )
-  {
-    size_t idx = RecordIndex::bsearch( recordBlockInfos_, i->first );
-    RecordIndex const & recordIndex = recordBlockInfos_[idx];
-
-    if ( idx == ( size_t )( -1 ) )
-      return false;
-
-    HeadWordIndex::const_iterator iNext = i + 1;
-    size_t resourceSize;
-    if ( iNext == headWordIndex.end() )
-      resourceSize = recordIndex.shadowEndPos - i->first;
-    else
-      resourceSize = iNext->first - i->first;
-
-    resourceHandler.handleResource( i->second, recordIndex.decompressedSize,
-                                    recordPos_ + recordIndex.startPos, recordIndex.compressedSize,
-                                    i->first - recordIndex.shadowStartPos, resourceSize );
-  }
-
-  return true;
 }
