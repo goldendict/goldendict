@@ -2084,17 +2084,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>Page Set&amp;up</source>
-        <translation>Paramètres d&apos;impressio&amp;n</translation>
+        <translation>Paramètres d&apos;&amp;impression</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="444"/>
         <source>Print Pre&amp;view</source>
-        <translation>Aperçu a&amp;vant impression</translation>
+        <translation>&amp;Aperçu avant impression</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
         <source>&amp;Rescan Files</source>
-        <translation>&amp;Rescanner les fichier</translation>
+        <translation>&amp;Rescanner les fichiers</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="475"/>
@@ -2104,7 +2104,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="527"/>
         <source>&amp;Always on Top</source>
-        <translation>Toujours &amp;au-dessus</translation>
+        <translation>Toujours au-&amp;dessus</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="530"/>
@@ -3869,7 +3869,7 @@ Pas encore implémenté dans GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation>Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
