@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>（图片）</translation>
     </message>
 </context>
 <context>
@@ -348,7 +348,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>词典：</translation>
     </message>
     <message>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
@@ -368,34 +368,34 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>未分配</translation>
     </message>
 </context>
 <context>
     <name>DictInfo</name>
     <message>
         <source>Total articles:</source>
-        <translation type="unfinished">文章总数：</translation>
+        <translation>文章总数：</translation>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation type="unfinished">词条语言：</translation>
+        <translation>词条语言：</translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation type="unfinished">词条总数：</translation>
+        <translation>词条总数：</translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation type="unfinished">释义语言：</translation>
+        <translation>释义语言：</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">此词典包含的文件：</translation>
+        <translation>此词典包含的文件：</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>描述：</translation>
     </message>
 </context>
 <context>
@@ -417,15 +417,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>词典信息</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑词典信息</translation>
     </message>
     <message>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>词典栏(&amp;D)</translation>
     </message>
 </context>
 <context>
@@ -593,7 +593,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>可以用鼠标拖拽词典以改变其群组设置或排序。(&amp;D)</translation>
+        <translation>可以用鼠标拖拽词典以改变其群组设置或排序(&amp;D)。</translation>
     </message>
     <message>
         <source>Rename current dictionary group</source>
@@ -648,23 +648,23 @@ between classic and school orthography in cyrillic)</source>
     <name>HistoryPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>删除(&amp;D)</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>复制</translation>
     </message>
     <message>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>历史：</translation>
     </message>
     <message>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>历史条数：%1/%2</translation>
     </message>
 </context>
 <context>
@@ -1512,7 +1512,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>逻辑语</translation>
     </message>
 </context>
 <context>
@@ -1534,7 +1534,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <source>F4</source>
@@ -1598,7 +1598,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation>词典...(&amp;D)</translation>
+        <translation>词典(&amp;D)...</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -1719,7 +1719,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Preferences...</source>
-        <translation>首选项...(&amp;P)</translation>
+        <translation>首选项(&amp;P)...</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
@@ -1891,95 +1891,95 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>导入(&amp;I)</translation>
     </message>
     <message>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>导入历史文件</translation>
     </message>
     <message>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>导入失败：无效数据</translation>
     </message>
     <message>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>历史导入成功</translation>
     </message>
     <message>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>导入错误：</translation>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>词典信息</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑词典信息</translation>
     </message>
     <message>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>查询面板(&amp;S)</translation>
     </message>
     <message>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>查询结果导航面板(&amp;R)</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>打印预览(&amp;V)</translation>
     </message>
     <message>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>重新扫描文件(&amp;R)</translation>
     </message>
     <message>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>新建标签页(&amp;N)</translation>
     </message>
     <message>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>总在最前(&amp;A)</translation>
     </message>
     <message>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>总在最前</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>菜单按钮</translation>
     </message>
     <message>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>在词典栏中显示词典名称(&amp;B)</translation>
     </message>
     <message>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>在工具栏上显示小图标(&amp;T)</translation>
     </message>
     <message>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>导航栏(&amp;N)</translation>
     </message>
     <message>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>主窗口已设置为总在最前。</translation>
     </message>
     <message>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>历史面板(&amp;H)</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>无障碍API未启用</translation>
     </message>
 </context>
 <context>
@@ -2012,7 +2012,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
 </context>
 <context>
@@ -2067,15 +2067,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>描述：</translation>
     </message>
     <message>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>按名称排序</translation>
     </message>
     <message>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>按语言排序</translation>
     </message>
 </context>
 <context>
@@ -2566,19 +2566,19 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>历史</translation>
     </message>
     <message>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>开启此选项已保存查询历史</translation>
     </message>
     <message>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>保存历史(&amp;H)</translation>
     </message>
     <message>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>文章</translation>
     </message>
     <message>
         <source>Turn this option on to always expand optional parts of articles</source>
@@ -2590,56 +2590,56 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>开启此选项以启用单击选择单词功能</translation>
     </message>
     <message>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>单击选择单词</translation>
     </message>
     <message>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 Bass 库播放音频文件（推荐）。使用该选项需要将 bass.dll (http://www.un4seen.com) 放入 GoldenDict 目录中。</translation>
     </message>
     <message>
         <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
+        <translation>通过 Bass 库播放</translation>
     </message>
     <message>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>附加样式：</translation>
     </message>
     <message>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>指定历史最大条数。</translation>
     </message>
     <message>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>最大历史条数：</translation>
     </message>
     <message>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>历史保存周期。若为 0 则只在程序退出时保存。</translation>
     </message>
     <message>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>保存周期：</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>分钟</translation>
     </message>
     <message>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>现代</translation>
     </message>
     <message>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>灵格斯</translation>
     </message>
     <message>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>灵格斯-蓝色调</translation>
     </message>
 </context>
 <context>
@@ -2700,22 +2700,22 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
     <message>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>词典查询/过滤 (Ctrl+F)</translation>
     </message>
     <message>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>快速查询</translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>清除查询结果</translation>
     </message>
 </context>
 <context>
@@ -2785,11 +2785,11 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">回退</translation>
+        <translation>回退</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">前进</translation>
+        <translation>前进</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -2797,7 +2797,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -2812,7 +2812,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
 </context>
 <context>
@@ -2936,7 +2936,7 @@ GoldenDict 尚不支持此方案。</translation>
     </message>
     <message>
         <source>&amp;Add...</source>
-        <translation>添加...(&amp;A)</translation>
+        <translation>添加(&amp;A)...</translation>
     </message>
     <message>
         <source>Choose a directory</source>
@@ -3065,90 +3065,91 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>白俄罗斯语转写</translation>
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>从&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;这里&lt;/a&gt;获取自己的API Key，或留空以使用默认API Key。</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>%GD1251% 对应 CP1251, %GDISO1%...%GDISO16% 依次对应 ISO 8859-1...ISO 8859-16,
+%GDBIG5% 对应 Big-5, %GDBIG5HKSCS% 对应 Big5-HKSCS, %GDGBK% 对应 GBK 及 GB18030, %GDSHIFTJIS% 对应 Shift-JIS.</translation>
     </message>
     <message>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>语音合成</translation>
     </message>
 </context>
 <context>
     <name>StylesComboBox</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">无</translation>
+        <translation>无</translation>
     </message>
 </context>
 <context>
     <name>TextToSpeechSource</name>
     <message>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>语音引擎列表：</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>添加(&amp;A)</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>移除(&amp;R)</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>预览</translation>
     </message>
     <message>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>可用语音引擎：</translation>
     </message>
     <message>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>预览以下文本：</translation>
     </message>
     <message>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Type text to be previewed here.</translation>
     </message>
     <message>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>预览(&amp;P)</translation>
     </message>
     <message>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>无可用 TTS 引擎</translation>
     </message>
     <message>
         <source>Confirm removal</source>
-        <translation type="unfinished">确认移除</translation>
+        <translation>确认移除</translation>
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>确定要将&lt;b&gt;%1&lt;/b&gt;引擎从列表中移除吗？</translation>
     </message>
     <message>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>无可用 TTS 引擎。&lt;br&gt;请确保 TTS 引擎已正确安装在计算机上。</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">首选项</translation>
+        <translation>首选项</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>音量：</translation>
     </message>
     <message>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>频率：</translation>
     </message>
 </context>
 <context>
@@ -3166,19 +3167,19 @@ p, li { white-space: pre-wrap; }
     <name>VoiceEnginesModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">已启用</translation>
+        <translation>已启用</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">名称</translation>
+        <translation>名称</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
 </context>
 <context>
@@ -3197,7 +3198,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
 </context>
 <context>
@@ -3211,7 +3212,7 @@ p, li { white-space: pre-wrap; }
     <name>WordList</name>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">警告： %1</translation>
+        <translation>警告： %1</translation>
     </message>
 </context>
 </TS>
