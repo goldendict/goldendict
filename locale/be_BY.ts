@@ -180,7 +180,7 @@
     <message>
         <location filename="../articleview.cc" line="703"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Сынтэзатар голасу</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="708"/>
@@ -3702,7 +3702,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Сынтэз мовы</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -3756,77 +3756,77 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбраныя галасавыя рухавікі:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Дадаць</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выдаліць</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Налады</translation>
+        <translation>Налады</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Гучнасьць:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Хуткасьць:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Праслухоўваньне</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Даступныя рухавікі:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тэкст для праслухоўваньня:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Упішы сюды тэкст, каб праслухаць.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Праслухаць</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Няма даступных сынтэзатараў голасу</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict не знайшоў жаднага даступнага сынтэзатара голасу.&lt;br&gt;Пераканайся ў наяўнасьці хоць аднаго ўсталяванага сынтазатара на сваім кампутары.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Пацьверджаньне прыбіраньня</translation>
+        <translation>Пацьверджаньне выдаленьня</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Выдаліць галасавы рухавік &lt;b&gt;%1&lt;/b&gt; са сьпісу?</translation>
     </message>
 </context>
 <context>
@@ -3847,22 +3847,22 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Улучана</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Назва</translation>
+        <translation>Назва</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">Значак</translation>
+        <translation>Значак</translation>
     </message>
 </context>
 <context>
