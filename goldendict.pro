@@ -222,7 +222,8 @@ HEADERS += folding.hh \
     wordlist.hh \
     mdictparser.hh \
     mdx.hh \
-    voiceengines.hh
+    voiceengines.hh \
+    sharedlibrary.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -328,7 +329,8 @@ SOURCES += folding.cc \
     wordlist.cc \
     mdictparser.cc \
     mdx.cc \
-    voiceengines.cc
+    voiceengines.cc \
+    bass.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui
@@ -336,10 +338,10 @@ win32 {
                wordbyauto.cc \
                guids.c \
                x64.cc \
-               bass.cc \
                speechclient_win.cc \
                texttospeechsource.cc \
-               speechhlp.cc
+               speechhlp.cc \
+               sharedlibrary_win.cc
     HEADERS += mouseover_win32/ThTypes.h \
                wordbyauto.hh \
                uiauto.hh \
@@ -350,6 +352,10 @@ win32 {
                sphelper.hh \
                speechclient.hh \
                speechhlp.hh
+}
+
+unix {
+    SOURCES += sharedlibrary_unix.cc
 }
 
 mac {

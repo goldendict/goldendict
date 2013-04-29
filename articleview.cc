@@ -20,11 +20,11 @@
 #include <QDebug>
 #include <QWebElement>
 #include <QCryptographicHash>
+#include "bass.hh"
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <mmsystem.h> // For PlaySound
-#include "bass.hh"
 
 #include "speechclient.hh"
 
@@ -1609,8 +1609,10 @@ void ArticleView::resourceDownloadFinished()
                           SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
             }
           }
-          else if ( !cfg.preferences.useExternalPlayer &&
-                     cfg.preferences.useBassLibrary )
+          else
+#endif
+          if ( !cfg.preferences.useExternalPlayer &&
+               cfg.preferences.useBassLibrary )
           {
             if( !BassAudioPlayer::instance().canBeUsed() )
               emit statusBarMessage( tr( "WARNING: %1" ).arg( tr( "Bass library not found." ) ),
@@ -1624,9 +1626,7 @@ void ArticleView::resourceDownloadFinished()
                                        10000, QPixmap( ":/icons/error.png" ) );
             }
           }
-          else
-#endif
-          if ( !cfg.preferences.useExternalPlayer )
+          else if ( !cfg.preferences.useExternalPlayer )
           {
             // Play via Phonon
 
