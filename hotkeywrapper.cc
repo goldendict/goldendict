@@ -131,9 +131,9 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
         memset( i, 0, sizeof( i ) );
   
         i[ 0 ].type = INPUT_KEYBOARD;
-        i[ 0 ].ki.wVk = 'C';
+        i[ 0 ].ki.wVk = ( vk == VK_INSERT ? VK_INSERT : 'C' );
         i[ 1 ].type = INPUT_KEYBOARD;
-        i[ 1 ].ki.wVk = 'C';
+        i[ 1 ].ki.wVk = i[ 0 ].ki.wVk;
         i[ 1 ].ki.dwFlags = KEYEVENTF_KEYUP;
   
         UnregisterHotKey( hwnd, hs.id );
