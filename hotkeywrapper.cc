@@ -126,18 +126,45 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
       // reach its original destination so it could be acted upon.
       if ( ( vk == VK_INSERT || vk == 'c' || vk == 'C' ) && mod == MOD_CONTROL )
       {
-        INPUT i[ 2 ];
+        INPUT i[ 4 ];
   
         memset( i, 0, sizeof( i ) );
-  
-        i[ 0 ].type = INPUT_KEYBOARD;
-        i[ 0 ].ki.wVk = ( vk == VK_INSERT ? VK_INSERT : 'C' );
-        i[ 1 ].type = INPUT_KEYBOARD;
-        i[ 1 ].ki.wVk = i[ 0 ].ki.wVk;
-        i[ 1 ].ki.dwFlags = KEYEVENTF_KEYUP;
+
+        // Bypass Ctrl+C/Ctrl+Ins
+
+        short ctrlPressed = GetAsyncKeyState( VK_CONTROL );
+        int n;
+        if( ctrlPressed & 0x8000 )
+        {
+          // Ctrl key is pressed, send key code only
+
+          i[ 0 ].type = INPUT_KEYBOARD;
+          i[ 0 ].ki.wVk = ( vk == VK_INSERT ? VK_INSERT : 'C' );
+          i[ 1 ].type = INPUT_KEYBOARD;
+          i[ 1 ].ki.wVk = i[ 0 ].ki.wVk;
+          i[ 1 ].ki.dwFlags = KEYEVENTF_KEYUP;
+          n = 2;
+        }
+        else
+        {
+          // Ctrl key isn't pressed, looks like Ctrl+C/Ctrl+Ins emulation
+          // We also emulate full sequence
+
+          i[ 0 ].type = INPUT_KEYBOARD;
+          i[ 0 ].ki.wVk = VK_CONTROL;
+          i[ 1 ].type = INPUT_KEYBOARD;
+          i[ 1 ].ki.wVk = ( vk == VK_INSERT ? VK_INSERT : 'C' );
+          i[ 2 ].type = INPUT_KEYBOARD;
+          i[ 2 ].ki.wVk = i[ 1 ].ki.wVk;
+          i[ 2 ].ki.dwFlags = KEYEVENTF_KEYUP;
+          i[ 3 ].type = INPUT_KEYBOARD;
+          i[ 3 ].ki.wVk = VK_CONTROL;
+          i[ 3 ].ki.dwFlags = KEYEVENTF_KEYUP;
+          n = 4;
+        }
   
         UnregisterHotKey( hwnd, hs.id );
-        SendInput( 2, i, sizeof( *i ) );
+        SendInput( n, i, sizeof( *i ) );
         RegisterHotKey(hwnd, hs.id, hs.modifier, hs.key);
       }
       #endif
