@@ -433,7 +433,7 @@ void AardDictionary::loadArticle( uint32_t address,
 
     while( 1 )
     {
-      articleText = "Article loading error";
+      articleText = string( QObject::tr( "Article loading error" ).toUtf8().constData() );
       try
       {
         Mutex::Lock _( aardMutex );
@@ -515,7 +515,7 @@ void AardDictionary::loadArticle( uint32_t address,
     if( !articleText.empty() )
       articleText = convert( articleText );
     else
-      articleText = "Article decoding error";
+      articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
 
     articleText = "<div class=\"aard\">" + articleText + "</div>";
 }
