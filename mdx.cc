@@ -822,10 +822,10 @@ string MdxDictionary::filterResource( const char * articleId, const char * artic
                  // anchors
                  .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
                            "\\1#" + uniquePrefix )
-                 .replace( QRegExp( "(<\\s*a\\s+[^>]*(name|id)\\s*=\\s*\")", Qt::CaseInsensitive ),
+                 .replace( QRegExp( "(<\\s*a\\s+[^>]*(name|id)\\s*=\\s*[\"'])", Qt::CaseInsensitive ),
                            "\\1" + uniquePrefix )
                  // sounds, and audio link script
-                 .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
+                 .replace( QRegExp( "(<\\s*(?:a|area)\\s+[^>]*href\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
                            QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
                            "\\1gdau://" + id + "/\\2" )
                  // stylesheets
