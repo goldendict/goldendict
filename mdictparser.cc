@@ -247,13 +247,20 @@ bool MdictParser::parseCompressedBlock( size_t compressedBlockSize, const char *
   quint32 type;
   quint32 checksum;
   type = qFromBigEndian<quint32>( ( const uchar * ) compressedBlockPtr );
-  checksum = qFromBigEndian<quint32>( ( const uchar * )compressedBlockPtr + sizeof( type ) );
+  checksum = qFromBigEndian<quint32>( ( const uchar * )compressedBlockPtr + sizeof( quint32 ) );
 
   if ( type == 0x00000000 )
   {
     // No compression
-    checksum >>= 8;
-    if ( checksum !=  qFromBigEndian<quint16>( dataSize - 2 ) )
+    checksum &= 0xffff;
+    quint16 sum = 0;
+    for ( size_t i = 0; i < dataSize; i++ )
+    {
+      sum += dataPtr[i];
+    }
+    sum += 1;
+
+    if ( checksum != sum )
     {
       qWarning() << "MDict: parseCompressedBlock: plain: checksum not match";
       return false;
