@@ -66,7 +66,7 @@ public:
 
   enum
   {
-    kParserVersion = 0x000000b
+    kParserVersion = 0x000000c
   };
 
   struct RecordIndex
