@@ -1,5 +1,6 @@
 /******** Global, non-dictionary-specific classes ***********/
 
+
 body
 {
   background: #fefdeb;
@@ -51,6 +52,7 @@ pre
   padding-top: 1px;
   margin-top: -9px;
   margin-bottom: 8px;
+  background: #fefdeb;
 /*fix for invalid blg*/
   font-style:normal;
 }

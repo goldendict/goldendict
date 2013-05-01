@@ -1,10 +1,15 @@
+html
+{
+  background: white !important;
+}
+
 body
 {
   margin-top: 1px;
   margin-right: 3px;
   margin-left:  2px;
   margin-bottom: 3px;
-  background: white;
+  background: white !important;
   font-family: Tahoma, Segoe UI, Palatino Linotype, Arial Unicode MS;
 }
 
@@ -26,6 +31,7 @@ a:hover
   padding: 5px;
   border: 1px solid #d0dde2;
   border-radius: 8px;
+  background: white;
 }
 
 .gdactivearticle
