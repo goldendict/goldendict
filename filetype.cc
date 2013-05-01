@@ -61,7 +61,8 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".mpc" ) ||
     endsWith( s, ".wma" ) ||
     endsWith( s, ".wv" ) ||
-    endsWith( s, ".ape" );
+    endsWith( s, ".ape" ) ||
+    endsWith( s, ".spx" );
 }
 
 bool isNameOfPicture( string const & name )
