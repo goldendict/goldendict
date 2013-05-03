@@ -3870,7 +3870,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation>Тоза кардан</translation>
+        <translation>&amp;Тоза кардан</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
