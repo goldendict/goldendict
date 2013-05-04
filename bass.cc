@@ -1,85 +1,128 @@
 // Wrapper for bass.dll
-
-#ifdef __WIN32
+#include "bass.hh"
+#include "dprintf.hh"
 
 #include <QWidget>
 #include <QApplication>
 
+#include <stdio.h>
 #include <memory.h>
-#include "bass.hh"
+#include <string>
+#ifdef Q_OS_LINUX
+#include <dlfcn.h>
+#endif
+
+using std::string;
 
 BassAudioPlayer::BassAudioPlayer() :
   fBASS_Free( 0 ),
   currentHandle( 0 ),
   data( 0 ),
-  hwnd( 0 ),
+  wid( 0 ),
   spxPluginHandle( 0 )
 {
   Mutex::Lock _( mt );
 
-  if( ( hBass = LoadLibraryW( L"bass.dll" ) ) == 0 )
+  string bassLibName;
+  string libSuffix;
+
+#if defined(Q_OS_WIN32)
+  bassLibName = "bass";
+  libSuffix = ".dll";
+#else // defined(Q_OS_WIN32)
+  bassLibName = "libbass";
+# if defined(Q_OS_MAC)
+  libSuffix = ".dylib";
+# else // defined(Q_OS_MAC)
+  libSuffix = ".so";
+# endif // defined(Q_OS_MAC)
+#endif // defined(Q_OS_WIN32)
+
+  if ( !bassLib.load( string( bassLibName + libSuffix ).c_str() ) )
     return;
+
   for( ; ; )
   {
-    fBASS_Init = ( pBASS_Init )GetProcAddress( hBass, "BASS_Init" );
+    fBASS_Init = ( pBASS_Init )bassLib.getSymbol( "BASS_Init" );
     if( fBASS_Init == 0 )
       break;
 
-    fBASS_Free = ( pBASS_Free )GetProcAddress( hBass, "BASS_Free" );
+    fBASS_Free = ( pBASS_Free )bassLib.getSymbol( "BASS_Free" );
     if( fBASS_Free == 0 )
       break;
 
-    fBASS_Stop = ( pBASS_Stop )GetProcAddress( hBass, "BASS_Stop" );
+    fBASS_Stop = ( pBASS_Stop )bassLib.getSymbol( "BASS_Stop" );
     if( fBASS_Stop == 0 )
       break;
 
-    fBASS_ErrorGetCode = ( pBASS_ErrorGetCode )GetProcAddress( hBass, "BASS_ErrorGetCode" );
+    fBASS_ErrorGetCode = ( pBASS_ErrorGetCode )bassLib.getSymbol( "BASS_ErrorGetCode" );
     if( fBASS_ErrorGetCode == 0 )
       break;
 
-    fBASS_StreamCreateFile = ( pBASS_StreamCreateFile )GetProcAddress( hBass, "BASS_StreamCreateFile" );
+    fBASS_StreamCreateFile = ( pBASS_StreamCreateFile )bassLib.getSymbol( "BASS_StreamCreateFile" );
     if( fBASS_StreamCreateFile == 0 )
       break;
 
-    fBASS_StreamFree = ( pBASS_StreamFree )GetProcAddress( hBass, "BASS_StreamFree" );
+    fBASS_StreamFree = ( pBASS_StreamFree )bassLib.getSymbol( "BASS_StreamFree" );
     if( fBASS_StreamFree == 0 )
       break;
 
-    fBASS_MusicLoad = ( pBASS_MusicLoad )GetProcAddress( hBass, "BASS_MusicLoad" );
+    fBASS_MusicLoad = ( pBASS_MusicLoad )bassLib.getSymbol( "BASS_MusicLoad" );
     if( fBASS_MusicLoad == 0 )
       break;
 
-    fBASS_MusicFree = ( pBASS_MusicFree )GetProcAddress( hBass, "BASS_MusicFree" );
+    fBASS_MusicFree = ( pBASS_MusicFree )bassLib.getSymbol( "BASS_MusicFree" );
     if( fBASS_MusicFree == 0 )
       break;
 
-    fBASS_ChannelPlay = ( pBASS_ChannelPlay )GetProcAddress( hBass, "BASS_ChannelPlay" );
+    fBASS_ChannelPlay = ( pBASS_ChannelPlay )bassLib.getSymbol( "BASS_ChannelPlay" );
     if( fBASS_ChannelPlay == 0 )
       break;
 
-    fBASS_ChannelStop = ( pBASS_ChannelStop )GetProcAddress( hBass, "BASS_ChannelStop" );
+    fBASS_ChannelStop = ( pBASS_ChannelStop )bassLib.getSymbol( "BASS_ChannelStop" );
     if( fBASS_ChannelStop == 0 )
       break;
 
-    fBASS_PluginLoad = ( pBASS_PluginLoad )GetProcAddress( hBass, "BASS_PluginLoad" );
+    fBASS_PluginLoad = ( pBASS_PluginLoad )bassLib.getSymbol( "BASS_PluginLoad" );
     if ( fBASS_PluginLoad == 0 )
       break;
 
-    fBASS_PluginFree = ( pBASS_PluginFree )GetProcAddress( hBass, "BASS_PluginFree" );
+    fBASS_PluginFree = ( pBASS_PluginFree )bassLib.getSymbol( "BASS_PluginFree" );
     if ( fBASS_PluginFree == 0 )
       break;
 
-    spxPluginHandle = fBASS_PluginLoad( ( const char * )L"bass_spx.dll", BASS_UNICODE );
+    string spxPluginName = bassLibName + "_spx" + libSuffix;
+
+    #ifdef Q_OS_LINUX
+    {
+      // BASS_PluginLoad() loads plugin from absolute path or relative path, it won't
+      // search any library path, so make a full plugin path here, ugly though.
+      Dl_info dlInfo;
+      SharedLibrary bassSpxLib( spxPluginName.c_str() );
+      void * proc = bassSpxLib.getSymbol( "BASS_SPX_StreamCreateFile" );
+      if ( proc && dladdr( proc, &dlInfo ) )
+      {
+        spxPluginName = dlInfo.dli_fname;
+      }
+    }
+    #endif
+
+    spxPluginHandle = fBASS_PluginLoad( spxPluginName.c_str(), 0 );
+    if ( spxPluginHandle == 0 )
+    {
+      DPRINTF( "Load \"%s\" failed, error text: %s\n", spxPluginName.c_str(),
+               errorText( fBASS_ErrorGetCode() ) );
+    }
 
     return;
   }
-  FreeLibrary( hBass );
-  hBass = 0;
+
+  bassLib.unload();
 }
 
 BassAudioPlayer::~BassAudioPlayer()
 {
-  if( hBass )
+  if( bassLib.loaded() )
   {
     if( currentHandle )
       fBASS_Stop();
@@ -87,7 +130,7 @@ BassAudioPlayer::~BassAudioPlayer()
       fBASS_PluginFree( spxPluginHandle );
     if( fBASS_Free )
       fBASS_Free();
-    FreeLibrary( hBass );
+    bassLib.unload();
     if( data )
       free( data );
   }
@@ -112,7 +155,7 @@ BOOL BassAudioPlayer::playMemory( const void * ptr, size_t size, int * errorCode
 
   fBASS_Free();
 
-  if( !fBASS_Init( -1, 44100, 0, hwnd, 0 ) )
+  if( !fBASS_Init( -1, 44100, 0, wid, 0 ) )
   {
     if( errorCodePtr )
       *errorCodePtr = fBASS_ErrorGetCode();
@@ -196,6 +239,3 @@ const char * BassAudioPlayer::errorText( int errorCode )
   }
   return "Unknown error";
 }
-
-#endif
-

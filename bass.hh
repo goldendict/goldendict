@@ -1,11 +1,15 @@
 #ifndef __BASS_HH_INCLUDED__
 #define __BASS_HH_INCLUDED__
 
-#ifdef __WIN32
-
-#include <windows.h>
 #include "bass.h"
 #include "mutex.hh"
+#include "sharedlibrary.hh"
+
+#include <QWidget>
+
+#ifdef Q_OS_WIN32
+#include <wtypes.h>
+#endif
 
 // Used bass.dll functions
 
@@ -13,12 +17,18 @@ class BassAudioPlayer
 {
 public:
   bool canBeUsed()
-  { return hBass != 0; }
+  { return bassLib.loaded(); }
 
   BOOL playMemory( const void * ptr, size_t size, int *errorCodePtr = 0 );
   const char * errorText( int errorCode );
-  void setMainWindow( HWND hwnd_ )
-  { hwnd = hwnd_; }
+  void setMainWindow( WId wid_ )
+  {
+#ifdef Q_OS_WIN32
+    wid = ( HWND )wid_;
+#else
+    wid = ( void * )wid_;
+#endif
+  }
 
   static BassAudioPlayer & instance();
 
@@ -27,11 +37,16 @@ private:
   BassAudioPlayer();
   ~BassAudioPlayer();
 
-  HMODULE hBass;
+  SharedLibrary bassLib;
 
   // Some bass.dll functions
 
-  typedef  BOOL BASSDEF( ( *pBASS_Init ) )( int , DWORD, DWORD, HWND, GUID * );
+#ifdef Q_OS_WIN32
+  typedef BOOL BASSDEF( ( *pBASS_Init ) )( int , DWORD, DWORD, HWND, GUID * );
+#else
+  typedef BOOL BASSDEF( ( *pBASS_Init ) )( int , DWORD, DWORD, void *, void * );
+#endif
+
   typedef BOOL BASSDEF( ( *pBASS_Free ) )();
   typedef BOOL BASSDEF( ( *pBASS_Stop ) )();
   typedef int BASSDEF( ( *pBASS_ErrorGetCode ) )();
@@ -59,14 +74,16 @@ private:
 
   DWORD currentHandle;
   void * data;
-  HWND hwnd;
+#ifdef Q_OS_WIN32
+  HWND wid;
+#else
+  void * wid;
+#endif
   HPLUGIN spxPluginHandle;
 
   Mutex mt;
 
   enum SoundType { STREAM, MUSIC } currentType;
 };
-
-#endif
 
 #endif // __BASS_HH_INCLUDED__
