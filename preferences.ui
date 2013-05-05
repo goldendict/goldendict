@@ -798,38 +798,12 @@ p, li { white-space: pre-wrap; }
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_16">
           <item>
-           <widget class="QRadioButton" name="useWindowsPlaySound">
+           <widget class="QRadioButton" name="useInternalPlayer">
             <property name="toolTip">
-             <string>Use Windows native playback API. Limited to .wav files only,
-but works very well.</string>
+             <string>Play audio files via FFmpeg(libav) and libao</string>
             </property>
             <property name="text">
-             <string>Play via Windows native API</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="playViaPhonon">
-            <property name="toolTip">
-             <string>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</string>
-            </property>
-            <property name="text">
-             <string>Play via Phonon</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="playViaBass">
-            <property name="toolTip">
-             <string>Play audio via Bass library. Optimal choice. To use this mode
-you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</string>
-            </property>
-            <property name="text">
-             <string>Play via Bass library</string>
+             <string>Use internal player</string>
             </property>
            </widget>
           </item>

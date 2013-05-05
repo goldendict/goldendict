@@ -18,7 +18,8 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 
     sudo apt-get install pkg-config build-essential qt4-qmake \
          libvorbis-dev zlib1g-dev libhunspell-dev  x11proto-record-dev \
-         qt4-qmake libqt4-dev libxtst-dev libphonon-dev liblzo2-dev libbz2-dev
+         qt4-qmake libqt4-dev libxtst-dev libphonon-dev liblzo2-dev libbz2-dev \
+         libao-dev libavutil-dev libavformat-dev
 
 ## How to build
 
