@@ -186,11 +186,11 @@
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation>Chơi một tập tin không phải WAV</translation>
+        <translation type="obsolete">Chơi một tập tin không phải WAV</translation>
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Để bật khả năng chơi các tập tin không phải WAV, hãy vào Biên tập|Tùy thích, mở thẻ Âm thanh và chọn &quot;Chơi qua DirectShow&quot; ở đó.</translation>
+        <translation type="obsolete">Để bật khả năng chơi các tập tin không phải WAV, hãy vào Biên tập|Tùy thích, mở thẻ Âm thanh và chọn &quot;Chơi qua DirectShow&quot; ở đó.</translation>
     </message>
     <message>
         <source>Highlight &amp;all</source>
@@ -218,14 +218,6 @@
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -278,6 +270,10 @@
     </message>
     <message>
         <source>TTS Voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2365,7 +2361,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation>Phát qua Phonon</translation>
+        <translation type="obsolete">Phát qua Phonon</translation>
     </message>
     <message>
         <source>Use external program:</source>
@@ -2446,7 +2442,7 @@ và gợi ý mở trang tải về.</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation>Phát qua DirectShow</translation>
+        <translation type="obsolete">Phát qua DirectShow</translation>
     </message>
     <message>
         <source>Changing Language</source>
@@ -2459,17 +2455,17 @@ và gợi ý mở trang tải về.</translation>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation>Sử dụng API phát lại của Windows. Giới hạn chỉ cho các tập tin .wav,
+        <translation type="obsolete">Sử dụng API phát lại của Windows. Giới hạn chỉ cho các tập tin .wav,
 nhưng hoạt động rất tốt.</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
-        <translation>Chơi bằng API của Windows</translation>
+        <translation type="obsolete">Chơi bằng API của Windows</translation>
     </message>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>Phát âm thanh qua nền tảng Phonon. Có thể sẽ không ổn định một chút,
+        <translation type="obsolete">Phát âm thanh qua nền tảng Phonon. Có thể sẽ không ổn định một chút,
 nhưng hỗ trợ nhiều định dạng âm thanh nhất.</translation>
     </message>
     <message>
@@ -2591,15 +2587,6 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play audio via Bass library. Optimal choice. To use this mode
-you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add-on style:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2633,6 +2620,14 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Lingoes-Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio files via FFmpeg(libav) and libao</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal player</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2694,6 +2689,17 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Article loading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Article decoding error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3097,7 +3103,7 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Xóa &amp;bỏ</translation>
     </message>
     <message>
         <source>Preview</source>

@@ -129,37 +129,37 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="166"/>
+        <location filename="../articleview.cc" line="128"/>
         <source>Select Current Article</source>
         <translation>Επιλογή τρέχοντος άρθρου</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="693"/>
+        <location filename="../articleview.cc" line="646"/>
         <source>Resource</source>
         <translation>Πόρος</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="698"/>
+        <location filename="../articleview.cc" line="651"/>
         <source>Audio</source>
         <translation>Ήχος</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="703"/>
+        <location filename="../articleview.cc" line="656"/>
         <source>TTS Voice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="708"/>
+        <location filename="../articleview.cc" line="661"/>
         <source>Picture</source>
         <translation>Εικόνα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="724"/>
+        <location filename="../articleview.cc" line="677"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Ορισμός στο λεξικό &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="728"/>
+        <location filename="../articleview.cc" line="681"/>
         <source>Definition: %1</source>
         <translation>Ορισμός: %1</translation>
     </message>
@@ -168,149 +168,148 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="916"/>
-        <location filename="../articleview.cc" line="1089"/>
+        <location filename="../articleview.cc" line="869"/>
+        <location filename="../articleview.cc" line="1042"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Δεν υπάρχει ο ζητούμενος πόρος.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="956"/>
+        <location filename="../articleview.cc" line="909"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Δεν υπάρχει το ζητούμενο πρόγραμμα ήχου.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1089"/>
-        <location filename="../articleview.cc" line="1190"/>
-        <location filename="../articleview.cc" line="1201"/>
+        <location filename="../articleview.cc" line="1042"/>
+        <location filename="../articleview.cc" line="1143"/>
+        <location filename="../articleview.cc" line="1154"/>
         <source>ERROR: %1</source>
         <translation>ΣΦΑΛΜΑ: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1155"/>
+        <location filename="../articleview.cc" line="1108"/>
         <source>Save sound</source>
         <translation>Αποθήκευση ήχου</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1157"/>
+        <location filename="../articleview.cc" line="1110"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Αρχείο ήχου (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Όλα τα αρχεία (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1170"/>
+        <location filename="../articleview.cc" line="1123"/>
         <source>Save image</source>
         <translation>Αποθήκευση εικόνας</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1172"/>
+        <location filename="../articleview.cc" line="1125"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Αρχείο εικόνας (*.bmp *.jpg *.png *.tif);;Όλα τα αρχεία (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1190"/>
+        <location filename="../articleview.cc" line="1143"/>
         <source>Resource saving error: </source>
         <translation>Σφάλμα αποθήκευσης:</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1337"/>
+        <location filename="../articleview.cc" line="1290"/>
         <source>&amp;Open Link</source>
         <translation>Άνοι&amp;γμα συνδέσμου</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1343"/>
+        <location filename="../articleview.cc" line="1296"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Άνοιγμα συνδέσμου σε νέα &amp;καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1350"/>
+        <location filename="../articleview.cc" line="1303"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Άνοιγμα συνδέσμου σε &amp;εξωτερικό περιηγητή</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1382"/>
+        <location filename="../articleview.cc" line="1335"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>Ανα&amp;ζήτηση του &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1390"/>
+        <location filename="../articleview.cc" line="1343"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Αναζήτηση του &quot;%1&quot; σε &amp;νέα καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1395"/>
+        <location filename="../articleview.cc" line="1348"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Αποστολή του &quot;%1&quot; στη γραμμή εισόδου</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1401"/>
-        <location filename="../articleview.cc" line="1433"/>
+        <location filename="../articleview.cc" line="1354"/>
+        <location filename="../articleview.cc" line="1386"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Προσθήκη του &quot;%1&quot; στο ιστορικό</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1415"/>
+        <location filename="../articleview.cc" line="1368"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Αναζήτηση του &quot;%1&quot; στο %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1423"/>
+        <location filename="../articleview.cc" line="1376"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Αναζήτηση του &quot;%1&quot; στο %2 σε &amp;νέα καρτέλα</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1600"/>
+        <location filename="../articleview.cc" line="1614"/>
+        <source>WARNING: FFmpeg Audio Player: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Playing a non-WAV file</source>
-        <translation>Αναπαραγωγή μη WAV αρχείου</translation>
+        <translation type="obsolete">Αναπαραγωγή μη WAV αρχείου</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1601"/>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Για αναπαραγωγή αρχείων που δεν είναι της μορφής WAV, παρακαλώ επιλέξτε Επεξεργασία|Προτιμήσεις, καρτέλα Ήχος, και σημειώστε την επιλογή &quot;Αναπαραγωγή μέσω DirectShow&quot;.</translation>
+        <translation type="obsolete">Για αναπαραγωγή αρχείων που δεν είναι της μορφής WAV, παρακαλώ επιλέξτε Επεξεργασία|Προτιμήσεις, καρτέλα Ήχος, και σημειώστε την επιλογή &quot;Αναπαραγωγή μέσω DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1616"/>
         <source>Bass library not found.</source>
-        <translation>Δε βρέθηκε η βιβλιοθήκη Bass.</translation>
+        <translation type="obsolete">Δε βρέθηκε η βιβλιοθήκη Bass.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1621"/>
         <source>Bass library can&apos;t play this sound.</source>
-        <translation>Η βιβλιοθήκη Bass δεν μπορεί να αναπαράγει αυτόν τον ήχο.</translation>
+        <translation type="obsolete">Η βιβλιοθήκη Bass δεν μπορεί να αναπαράγει αυτόν τον ήχο.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1656"/>
+        <location filename="../articleview.cc" line="1555"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Δεν ήταν δυνατή η αναπαραγωγή του αρχείου ήχου: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1674"/>
+        <location filename="../articleview.cc" line="1573"/>
         <source>Failed to create temporary file.</source>
         <translation>Απέτυχε η δημιουργία προσωρινού αρχείου.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1685"/>
+        <location filename="../articleview.cc" line="1584"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Απέτυχε το αυτόματο άνοιγμα του αρχείου· δοκιμάστε να το ανοίξετε χειροκίνητα: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1201"/>
-        <location filename="../articleview.cc" line="1708"/>
+        <location filename="../articleview.cc" line="1154"/>
+        <location filename="../articleview.cc" line="1607"/>
         <source>The referenced resource failed to download.</source>
         <translation>Απέτυχε η λήψη του ζητούμενου πόρου.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1363"/>
+        <location filename="../articleview.cc" line="1316"/>
         <source>Save &amp;image...</source>
         <translation>Αποθήκευση &amp;Εικόνας...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1371"/>
+        <location filename="../articleview.cc" line="1324"/>
         <source>Save s&amp;ound...</source>
         <translation>Αποθήκευση ή&amp;χου...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1616"/>
-        <location filename="../articleview.cc" line="1621"/>
-        <location filename="../articleview.cc" line="1708"/>
+        <location filename="../articleview.cc" line="1607"/>
         <source>WARNING: %1</source>
         <translation>ΠΡΟΣΟΧΗ: %1</translation>
     </message>
@@ -2009,68 +2008,68 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="733"/>
-        <location filename="../mainwindow.cc" line="2669"/>
+        <location filename="../mainwindow.cc" line="2668"/>
         <source>Accessibility API is not enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2949"/>
+        <location filename="../mainwindow.cc" line="2948"/>
         <source>The main window is set to be always on top.</source>
         <translation>Το κύριο παράθυρο βρίσκεται πάντα στο προσκήνιο.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3109"/>
+        <location filename="../mainwindow.cc" line="3108"/>
         <source>&amp;Hide</source>
         <translation>&amp;Απόκρυψη</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3135"/>
+        <location filename="../mainwindow.cc" line="3134"/>
         <source>Export history to file</source>
         <translation>Εξαγωγή ιστορικού σε αρχείο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3137"/>
-        <location filename="../mainwindow.cc" line="3199"/>
+        <location filename="../mainwindow.cc" line="3136"/>
+        <location filename="../mainwindow.cc" line="3198"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Αρχεία κειμένου (*.txt);;Όλα τα αρχεία (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3176"/>
+        <location filename="../mainwindow.cc" line="3175"/>
         <source>History export complete</source>
         <translation>Ολοκληρώθηκε η εξαγωγή του ιστορικού</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3179"/>
+        <location filename="../mainwindow.cc" line="3178"/>
         <source>Export error: </source>
         <translation>Σφάλμα εξαγωγής:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3197"/>
+        <location filename="../mainwindow.cc" line="3196"/>
         <source>Import history from file</source>
         <translation>Εισαγωγή ιστορικού από αρχείο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3246"/>
+        <location filename="../mainwindow.cc" line="3245"/>
         <source>Import error: invalid data in file</source>
         <translation>Σφάλμα εισαγωγής: μη έγκυρα δεδομένα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3250"/>
+        <location filename="../mainwindow.cc" line="3249"/>
         <source>History import complete</source>
         <translation>Ολοκληρώθηκε η εισαγωγή του ιστορικού</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3253"/>
+        <location filename="../mainwindow.cc" line="3252"/>
         <source>Import error: </source>
         <translation>Σφάλμα εισαγωγής:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3361"/>
+        <location filename="../mainwindow.cc" line="3360"/>
         <source>Dictionary info</source>
         <translation>Πληροφορίες λεξικού</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3362"/>
+        <location filename="../mainwindow.cc" line="3361"/>
         <source>Edit dictionary</source>
         <translation>Επεξεργασία λεξικού</translation>
     </message>
@@ -2150,72 +2149,72 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2475"/>
+        <location filename="../mainwindow.cc" line="2474"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Απέτυχε η φόρτωση του μηχανισμού παρακολούθησης πλήκτρων συντομεύσεων.&lt;br&gt;Βεβαιωθείτε ότι η επέκταση RECORD του XServer είναι ενεργοποιημένη.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2609"/>
+        <location filename="../mainwindow.cc" line="2608"/>
         <source>New Release Available</source>
         <translation>Νέα έκδοση διαθέσιμη</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2610"/>
+        <location filename="../mainwindow.cc" line="2609"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Η έκδοση &lt;b&gt;%1&lt;/b&gt; του GoldenDict είναι διαθέσιμη.&lt;br&gt;Κάντε κλικ στο &lt;b&gt;Λήψη&lt;/b&gt; για να επισκεφτείτε την ιστοσελίδα λήψης.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2615"/>
+        <location filename="../mainwindow.cc" line="2614"/>
         <source>Download</source>
         <translation>Λήψη</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2616"/>
+        <location filename="../mainwindow.cc" line="2615"/>
         <source>Skip This Release</source>
         <translation>Παράβλεψη αυτής της έκδοσης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2746"/>
+        <location filename="../mainwindow.cc" line="2745"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Επιλέξατε απόκρυψη μιας γραμμής εργαλείων. Πατήστε %1 για να την επαναφέρετε.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2747"/>
+        <location filename="../mainwindow.cc" line="2746"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2845"/>
+        <location filename="../mainwindow.cc" line="2844"/>
         <source>Page Setup</source>
         <translation>Διάταξη σελίδας</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2846"/>
+        <location filename="../mainwindow.cc" line="2845"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Δε βρέθηκε εκτυπωτής. Παρακαλώ εγκαταστήστε έναν εκτυπωτή.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2864"/>
+        <location filename="../mainwindow.cc" line="2863"/>
         <source>Print Article</source>
         <translation>Εκτύπωση αποτελέσματος</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2898"/>
+        <location filename="../mainwindow.cc" line="2897"/>
         <source>Save Article As</source>
         <translation>Αποθήκευση αποτελέσματος ως</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2900"/>
+        <location filename="../mainwindow.cc" line="2899"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Αρχείο html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2909"/>
+        <location filename="../mainwindow.cc" line="2908"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2910"/>
+        <location filename="../mainwindow.cc" line="2909"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Αδύνατη η αποθήκευση του άρθρου: %1</translation>
     </message>
@@ -2444,7 +2443,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3113"/>
+        <location filename="../mainwindow.cc" line="3112"/>
         <source>&amp;Show</source>
         <translation>Εμ&amp;φάνιση</translation>
     </message>
@@ -2643,17 +2642,16 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="162"/>
         <source>Play via DirectShow</source>
-        <translation>Αναπαραγωγή μέσω DirectShow</translation>
+        <translation type="obsolete">Αναπαραγωγή μέσω DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="364"/>
+        <location filename="../preferences.cc" line="347"/>
         <source>Changing Language</source>
         <translation>Αλλαγή γλώσσας</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="365"/>
+        <location filename="../preferences.cc" line="348"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Απαιτείται επανεκκίνηση του προγράμματος για να εφαρμοστεί η αλλαγή γλώσσας.</translation>
     </message>
@@ -2993,62 +2991,66 @@ be pressed shortly after the selection is done.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="803"/>
+        <source>Play audio files via FFmpeg(libav) and libao</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="806"/>
+        <source>Use internal player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation>Χρήση μόνο του εγγενούς API των Windows.
+        <translation type="obsolete">Χρήση μόνο του εγγενούς API των Windows.
 Αναπαράγει μόνο αρχεία wav, αλλά λειτουργεί άψογα.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="807"/>
         <source>Play via Windows native API</source>
-        <translation>Αναπαραγωγή μέσω του εγγενούς API των Windows</translation>
+        <translation type="obsolete">Αναπαραγωγή μέσω του εγγενούς API των Windows</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="814"/>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>Αναπαραγωγή ήχου μέσω του πλαισίου Phonon. Υποστηρίζει
+        <translation type="obsolete">Αναπαραγωγή ήχου μέσω του πλαισίου Phonon. Υποστηρίζει
 τις περισσότερες μορφές αρχείων, αλλά δεν είναι απόλυτα αξιόπιστη.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="818"/>
         <source>Play via Phonon</source>
-        <translation>Αναπαραγωγή μέσω Phonon</translation>
+        <translation type="obsolete">Αναπαραγωγή μέσω Phonon</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="828"/>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation>Αναπαραγωγή ήχου μέσω βιβλιοθήκης Bass. Η καλύτερη επιλογή.
+        <translation type="obsolete">Αναπαραγωγή ήχου μέσω βιβλιοθήκης Bass. Η καλύτερη επιλογή.
 Θα πρέπει να τοποθετήσετε το bass.dll (http://www.un4seen.com) στο φάκελο του GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="832"/>
         <source>Play via Bass library</source>
-        <translation>Αναπαραγωγή μέσω βιβλιοθήκης Bass</translation>
+        <translation type="obsolete">Αναπαραγωγή μέσω βιβλιοθήκης Bass</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="841"/>
+        <location filename="../preferences.ui" line="815"/>
         <source>Use any external program to play audio files</source>
         <translation>Χρήση οποιουδήποτε εξωτερικού προγράμματος για την αναπαραγωγή αρχείων ήχου</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="844"/>
+        <location filename="../preferences.ui" line="818"/>
         <source>Use external program:</source>
         <translation>Χρήση εξωτερικού προγράμματος:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1072"/>
+        <location filename="../preferences.ui" line="1046"/>
         <source>Ad&amp;vanced</source>
         <translation>Για &amp;προχωρημένους</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1078"/>
+        <location filename="../preferences.ui" line="1052"/>
         <source>ScanPopup extra technologies</source>
         <translation>Προχωρημένες τεχνολογίες αναδυόμενου παραθύρου</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1084"/>
+        <location filename="../preferences.ui" line="1058"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3059,12 +3061,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 αυτά τα προγράμματα, δεν χρειάζεται να ενεργοποιήσετε την επιλογή.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1090"/>
+        <location filename="../preferences.ui" line="1064"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>&amp;Χρήση IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1097"/>
+        <location filename="../preferences.ui" line="1071"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3074,12 +3076,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 δεν χρειάζεται να ενεργοποιήσετε την επιλογή.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1102"/>
+        <location filename="../preferences.ui" line="1076"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Χ&amp;ρήση UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1109"/>
+        <location filename="../preferences.ui" line="1083"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3089,63 +3091,63 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 δεν χρειάζεται να ενεργοποιήσετε την επιλογή.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1114"/>
+        <location filename="../preferences.ui" line="1088"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Χρήση &amp;μηνυμάτων Goldendict</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1124"/>
+        <location filename="../preferences.ui" line="1098"/>
         <source>History</source>
         <translation>Ιστορικό</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1130"/>
+        <location filename="../preferences.ui" line="1104"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Αν ενεργοποιηθεί, θα αποθηκεύεται το ιστορικό των μεταφρασμένων λέξεων</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1133"/>
+        <location filename="../preferences.ui" line="1107"/>
         <source>Store &amp;history</source>
         <translation>Αποθήκευση &amp;ιστορικού</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1148"/>
+        <location filename="../preferences.ui" line="1122"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Ορίστε το μέγιστο αριθμό λημμάτων που θα αποθηκεύονται στο ιστορικό.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1151"/>
+        <location filename="../preferences.ui" line="1125"/>
         <source>Maximum history size:</source>
         <translation>Μέγιστο μέγεθος ιστορικού:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1188"/>
+        <location filename="../preferences.ui" line="1162"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Συχνότητα αποθήκευσης ιστορικού. Αν χρησιμοποιήσετε 0, 
 το ιστορικό θα αποθηκεύεται μόνο κατά την έξοδο.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1194"/>
+        <location filename="../preferences.ui" line="1168"/>
         <source>Save every</source>
         <translation>Αποθήκευση κάθε</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1211"/>
+        <location filename="../preferences.ui" line="1185"/>
         <source>minutes</source>
         <translation>λεπτά</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1236"/>
+        <location filename="../preferences.ui" line="1210"/>
         <source>Articles</source>
         <translation>Άρθρα</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1242"/>
+        <location filename="../preferences.ui" line="1216"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Αν ενεργοποιηθεί, θα εμφανίζονται πάντα τα προαιρετικά τμήματα των άρθρων</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1245"/>
+        <location filename="../preferences.ui" line="1219"/>
         <source>Expand optional &amp;parts</source>
         <translation>Εμφάνιση &amp;προαιρετικών τμημάτων</translation>
     </message>
@@ -3236,49 +3238,49 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Πρόγραμμα αναπαραγωγής αρχείων ήχου:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="881"/>
+        <location filename="../preferences.ui" line="855"/>
         <source>&amp;Network</source>
         <translation>&amp;Δίκτυο</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="900"/>
+        <location filename="../preferences.ui" line="874"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Επιλέξτε το αν θέλετε να χρησιμοποιείτε
 διαμεσολαβητή για όλες τις ανάγκες της εφαρμογής.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="904"/>
+        <location filename="../preferences.ui" line="878"/>
         <source>Use proxy server</source>
         <translation>Χρήση διαμεσολαβητή</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="918"/>
+        <location filename="../preferences.ui" line="892"/>
         <source>Type:</source>
         <translation>Τύπος:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="928"/>
+        <location filename="../preferences.ui" line="902"/>
         <source>Host:</source>
         <translation>Διεύθυνση:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="938"/>
+        <location filename="../preferences.ui" line="912"/>
         <source>Port:</source>
         <translation>Θύρα:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="959"/>
+        <location filename="../preferences.ui" line="933"/>
         <source>User:</source>
         <translation>Χρήστης:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="969"/>
+        <location filename="../preferences.ui" line="943"/>
         <source>Password:</source>
         <translation>Κωδικός:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1004"/>
+        <location filename="../preferences.ui" line="978"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -3288,12 +3290,12 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
 προβλήματα με κάποιους ιστοτόπους, δοκιμάστε να το αποεπιλέξετε.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1009"/>
+        <location filename="../preferences.ui" line="983"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>Φραγή περιεχομένου από άλλους ιστοτόπους (εξαφανίζει τις περισσότερες διαφημίσεις)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1016"/>
+        <location filename="../preferences.ui" line="990"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -3302,12 +3304,12 @@ Plugin must be installed for this option to work.</source>
 το κατάλληλο πρόσθετο για να χρησιμοποιήσετε αυτή την επιλογή.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1021"/>
+        <location filename="../preferences.ui" line="995"/>
         <source>Enable web plugins</source>
         <translation>Ενεργοποίηση διαδικτυακών προσθέτων</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1044"/>
+        <location filename="../preferences.ui" line="1018"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -3319,7 +3321,7 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
 χρήστη και θα παραπέμπει στην ιστοσελίδα λήψης.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1051"/>
+        <location filename="../preferences.ui" line="1025"/>
         <source>Check for new program releases periodically</source>
         <translation>Περιοδικός έλεγχος για νέες εκδόσεις/ενημερώσεις</translation>
     </message>
@@ -3396,6 +3398,20 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <location filename="../sources.cc" line="737"/>
         <source>Icon</source>
         <translation>Εικονίδιο</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../aard.cc" line="436"/>
+        <location filename="../mdx.cc" line="781"/>
+        <source>Article loading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aard.cc" line="518"/>
+        <source>Article decoding error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3898,7 +3914,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Α&amp;φαίρεση</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>

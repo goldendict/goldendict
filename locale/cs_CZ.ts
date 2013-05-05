@@ -201,11 +201,11 @@
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation>Přehrávání souboru jiného než WAV</translation>
+        <translation type="obsolete">Přehrávání souboru jiného než WAV</translation>
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Pro povolení přehrávání jiných souborů než WAV, přejděte, prosím, do Upravit|Předvolby, zvolte kartu Audio a zde zvolte &quot;Přehrát přes DirectShow&quot;.</translation>
+        <translation type="obsolete">Pro povolení přehrávání jiných souborů než WAV, přejděte, prosím, do Upravit|Předvolby, zvolte kartu Audio a zde zvolte &quot;Přehrát přes DirectShow&quot;.</translation>
     </message>
     <message>
         <source>Highlight &amp;all</source>
@@ -233,14 +233,6 @@
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -293,6 +285,10 @@
     </message>
     <message>
         <source>TTS Voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3257,7 +3253,7 @@ Pokud se kvůli tomuto některé stránky rozbijí, zkuste toto vypnout.</transl
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation>Pžehrát pomoci Phononu</translation>
+        <translation type="obsolete">Pžehrát pomoci Phononu</translation>
     </message>
     <message>
         <source>Use external program:</source>
@@ -3265,7 +3261,7 @@ Pokud se kvůli tomuto některé stránky rozbijí, zkuste toto vypnout.</transl
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation>Přehrát pomocí DirectShow</translation>
+        <translation type="obsolete">Přehrát pomocí DirectShow</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
@@ -3274,16 +3270,16 @@ Pokud se kvůli tomuto některé stránky rozbijí, zkuste toto vypnout.</transl
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation>Použít nativní API Windows pro přehrávání. Podporuje pouze .wav, ale funguje velice dobře.</translation>
+        <translation type="obsolete">Použít nativní API Windows pro přehrávání. Podporuje pouze .wav, ale funguje velice dobře.</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
-        <translation>Použít nativní API Windows</translation>
+        <translation type="obsolete">Použít nativní API Windows</translation>
     </message>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>Přehrát audio pomocí Phononu. Může být poněkud nestabilní,
+        <translation type="obsolete">Přehrát audio pomocí Phononu. Může být poněkud nestabilní,
 ale mělo by podporovat většinu audio formátů.</translation>
     </message>
     <message>
@@ -3405,15 +3401,6 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play audio via Bass library. Optimal choice. To use this mode
-you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add-on style:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3447,6 +3434,14 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Lingoes-Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio files via FFmpeg(libav) and libao</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal player</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3508,6 +3503,17 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Article loading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Article decoding error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3937,7 +3943,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Odeb&amp;rat</translation>
     </message>
     <message>
         <source>Preview</source>

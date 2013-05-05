@@ -182,11 +182,11 @@
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation>播放非 wav 文件</translation>
+        <translation type="obsolete">播放非 wav 文件</translation>
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>要播放非 WAV 文件，请进入 编辑|首选项，选取音频选项卡，选择“通过 DirectShow 播放”。</translation>
+        <translation type="obsolete">要播放非 WAV 文件，请进入 编辑|首选项，选取音频选项卡，选择“通过 DirectShow 播放”。</translation>
     </message>
     <message>
         <source>Highlight &amp;all</source>
@@ -214,14 +214,6 @@
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -274,6 +266,10 @@
     </message>
     <message>
         <source>TTS Voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2443,7 +2439,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation>通过 Phonon 播放</translation>
+        <translation type="obsolete">通过 Phonon 播放</translation>
     </message>
     <message>
         <source>Use external program:</source>
@@ -2451,7 +2447,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation>通过 DirectShow 播放</translation>
+        <translation type="obsolete">通过 DirectShow 播放</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
@@ -2460,16 +2456,16 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation>使用 Windows 原生 API 播放。仅支持 .wav 文件，但稳定可靠。</translation>
+        <translation type="obsolete">使用 Windows 原生 API 播放。仅支持 .wav 文件，但稳定可靠。</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
-        <translation>通过 Windows 原生 API 播放</translation>
+        <translation type="obsolete">通过 Windows 原生 API 播放</translation>
     </message>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>通过 Phonon 框架播放音频。有时不太稳定，但支持大多数音频文件格式。</translation>
+        <translation type="obsolete">通过 Phonon 框架播放音频。有时不太稳定，但支持大多数音频文件格式。</translation>
     </message>
     <message>
         <source>Use any external program to play audio files</source>
@@ -2599,11 +2595,11 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <source>Play audio via Bass library. Optimal choice. To use this mode
 you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation>使用 Bass 库播放音频文件（推荐）。使用该选项需要将 bass.dll (http://www.un4seen.com) 放入 GoldenDict 目录中。</translation>
+        <translation type="obsolete">使用 Bass 库播放音频文件（推荐）。使用该选项需要将 bass.dll (http://www.un4seen.com) 放入 GoldenDict 目录中。</translation>
     </message>
     <message>
         <source>Play via Bass library</source>
-        <translation>通过 Bass 库播放</translation>
+        <translation type="obsolete">通过 Bass 库播放</translation>
     </message>
     <message>
         <source>Add-on style:</source>
@@ -2640,6 +2636,14 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <source>Lingoes-Blue</source>
         <translation>灵格斯-蓝色调</translation>
+    </message>
+    <message>
+        <source>Play audio files via FFmpeg(libav) and libao</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal player</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2701,6 +2705,17 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <source>Icon</source>
         <translation>图标</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Article loading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Article decoding error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

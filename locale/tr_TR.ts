@@ -132,7 +132,7 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation>Olmayan bir WAV dosyası oynatma</translation>
+        <translation type="obsolete">Olmayan bir WAV dosyası oynatma</translation>
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
@@ -192,7 +192,7 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>WAV dosyalarını oynatmayı etkinleştirmek için,Düzen|Tercihler&apos;e gidin
+        <translation type="obsolete">WAV dosyalarını oynatmayı etkinleştirmek için,Düzen|Tercihler&apos;e gidin
 Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translation>
     </message>
     <message>
@@ -229,14 +229,6 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library can&apos;t play this sound.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -289,6 +281,10 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>TTS Voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2230,11 +2226,11 @@ proxy sunucusu kullanmak istiyorsanız etkinleştirin.</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
-        <translation>Windows yerel uygulamasıyla çal</translation>
+        <translation type="obsolete">Windows yerel uygulamasıyla çal</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation>DirectShow ile oynat</translation>
+        <translation type="obsolete">DirectShow ile oynat</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2379,7 +2375,7 @@ ve muhtemelen indirme sayfasını açar.</translation>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation>Windows yerel çalma programını kullanın.
+        <translation type="obsolete">Windows yerel çalma programını kullanın.
 Sınırlıdır, (sadece Wav dosyaları) ama çok iyi çalışmakta.</translation>
     </message>
     <message>
@@ -2424,7 +2420,7 @@ daha sonra da basılabilir.</translation>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>Ses dosyalarını Phonon Framework ile oynat. Bu pek çok ses 
+        <translation type="obsolete">Ses dosyalarını Phonon Framework ile oynat. Bu pek çok ses 
 formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
@@ -2445,7 +2441,7 @@ formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation>Phonon ile oynat</translation>
+        <translation type="obsolete">Phonon ile oynat</translation>
     </message>
     <message>
         <source>Right Alt</source>
@@ -2623,15 +2619,6 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play audio via Bass library. Optimal choice. To use this mode
-you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play via Bass library</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add-on style:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2665,6 +2652,14 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Lingoes-Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio files via FFmpeg(libav) and libao</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal player</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2726,6 +2721,17 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     </message>
     <message>
         <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Article loading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Article decoding error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3132,7 +3138,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Kaldır</translation>
     </message>
     <message>
         <source>Preview</source>

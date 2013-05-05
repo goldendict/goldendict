@@ -154,11 +154,11 @@
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation>Jan WAV uka kipumpi  jaylliyaña</translation>
+        <translation type="obsolete">Jan WAV uka kipumpi  jaylliyaña</translation>
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation>Jaylliyañ sartayañatakix jan WAV ukampikix, por favor vaya a Editar|Preferencias, escoja la pestaña Audio y seleccione &quot;Reproducir con DirectShow&quot;.</translation>
+        <translation type="obsolete">Jaylliyañ sartayañatakix jan WAV ukampikix, por favor vaya a Editar|Preferencias, escoja la pestaña Audio y seleccione &quot;Reproducir con DirectShow&quot;.</translation>
     </message>
     <message>
         <source>Failed to run a player to play sound file: %1</source>
@@ -249,14 +249,6 @@
         <translation type="unfinished">akataraki : %1</translation>
     </message>
     <message>
-        <source>Bass library not found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass library can&apos;t play this sound.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select Current Article</source>
         <translation type="unfinished"></translation>
     </message>
@@ -294,6 +286,10 @@
     </message>
     <message>
         <source>TTS Voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3149,22 +3145,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation>Apnaqaña API nativa de Windows apnakañataki
+        <translation type="obsolete">Apnaqaña API nativa de Windows apnakañataki
 a archivos .wav,askiwa.</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
-        <translation>API apnaqaña nativa de Windows</translation>
+        <translation type="obsolete">API apnaqaña nativa de Windows</translation>
     </message>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation>Arst&apos;awi Phonon arst&apos;awayi. inach janiw sumaniti, 
+        <translation type="obsolete">Arst&apos;awi Phonon arst&apos;awayi. inach janiw sumaniti, 
 taxpach arunaka apnakispawa</translation>
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation>Phononmpi arst&apos;asi </translation>
+        <translation type="obsolete">Phononmpi arst&apos;asi </translation>
     </message>
     <message>
         <source>Use any external program to play audio files</source>
@@ -3257,7 +3253,7 @@ download page.</source>
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation>DirectShow </translation>
+        <translation type="obsolete">DirectShow </translation>
     </message>
     <message>
         <source>Changing Language</source>
@@ -3306,15 +3302,6 @@ With this on however, it will hide the main window.</source>
     </message>
     <message>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play audio via Bass library. Optimal choice. To use this mode
-you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play via Bass library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3426,6 +3413,14 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Lingoes-Blue</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Play audio files via FFmpeg(libav) and libao</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal player</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
@@ -3485,6 +3480,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Article loading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Article decoding error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3917,7 +3923,7 @@ Not implemented yet in GoldenDict.</source>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Chhakjaña</translation>
     </message>
     <message>
         <source>Preview</source>
