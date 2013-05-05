@@ -244,23 +244,7 @@
     <message>
         <location filename="../articleview.cc" line="1614"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Проигрывание отличного от WAV файла</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">Чтобы включить возможность проигрывания файлов типов, отличных от WAV, пожалуйста зайдите в Правка|Параметры, выберите вкладку Аудио и выберите режим &quot;Вывод звука через DirectShow&quot;.</translation>
-    </message>
-    <message>
-        <source>Bass library not found.</source>
-        <translation type="obsolete">Библиотека Bass не найдена.</translation>
-    </message>
-    <message>
-        <source>Bass library can&apos;t play this sound.</source>
-        <translation type="obsolete">Библиотека Bass не может воспроизвести этот звук.</translation>
+        <translation>ПРЕДУПРЕЖДЕНИЕ: Плейер FFMpeg: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1555"/>
@@ -2911,22 +2895,12 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="803"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Воспроизведение звуков через FFmpeg(libav) и libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="806"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play audio via Bass library. Optimal choice. To use this mode
-you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="obsolete">Воспроизводить через библиотеку Bass. Оптимальный выбор. Чтобы воспользоваться этим режимом,
-поместите файл bass.dll (http://www.un4seen.com) в папку GoldenDict.</translation>
-    </message>
-    <message>
-        <source>Play via Bass library</source>
-        <translation type="obsolete">Воспроизведение через библиотеку Bass</translation>
+        <translation>Использовать встроенный движок</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1046"/>
@@ -3077,26 +3051,6 @@ p, li { white-space: pre-wrap; }
         <translation>Воспроизведение</translation>
     </message>
     <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation type="obsolete">Использовать внутренние средства Windows для проигрывания. Поддерживаются
-только файлы типа .wav, однако воспроизведение всегда работает хорошо.</translation>
-    </message>
-    <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">Воспроизведение внутренними средствами Windows</translation>
-    </message>
-    <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">Воспроизводить через систему Phonon. Иногда работает нестабильно,
-зато поддерживает большинство аудио-форматов.</translation>
-    </message>
-    <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">Воспроизведение через Phonon</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="815"/>
         <source>Use any external program to play audio files</source>
         <translation>Использовать любую внешнюю программу для проигрывания аудио-файлов</translation>
@@ -3231,10 +3185,6 @@ GoldenDict. Если новая версия появилась, програм�
         <translation>Lingoes-Blue</translation>
     </message>
     <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">Воспроизведение через DirectShow</translation>
-    </message>
-    <message>
         <location filename="../preferences.cc" line="347"/>
         <source>Changing Language</source>
         <translation>Смена языка</translation>
@@ -3325,12 +3275,12 @@ GoldenDict. Если новая версия появилась, програм�
         <location filename="../aard.cc" line="436"/>
         <location filename="../mdx.cc" line="781"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка загрузки статьи</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="518"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка декодирования статьи</translation>
     </message>
 </context>
 <context>
