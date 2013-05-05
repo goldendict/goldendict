@@ -114,14 +114,8 @@ Preferences::Preferences():
   scanToMainWindow( false ),
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
-#ifdef Q_WS_WIN
   useExternalPlayer( false ),
-  useWindowsPlaySound( true ),
-#else
-  useExternalPlayer( true ), // Phonon on Linux still feels quite buggy
-  useWindowsPlaySound( false ),
-#endif
-  useBassLibrary( false ),
+  useInternalPlayer( true ),
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
@@ -688,11 +682,8 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "useExternalPlayer" ).isNull() )
       c.preferences.useExternalPlayer = ( preferences.namedItem( "useExternalPlayer" ).toElement().text() == "1" );
 
-    if ( !preferences.namedItem( "useWindowsPlaySound" ).isNull() )
-      c.preferences.useWindowsPlaySound = ( preferences.namedItem( "useWindowsPlaySound" ).toElement().text() == "1" );
-
-    if ( !preferences.namedItem( "useBassLibrary" ).isNull() )
-      c.preferences.useBassLibrary = ( preferences.namedItem( "useBassLibrary" ).toElement().text() == "1" );
+    if ( !preferences.namedItem( "useInternalPlayer" ).isNull() )
+      c.preferences.useInternalPlayer = ( preferences.namedItem( "useInternalPlayer" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
       c.preferences.audioPlaybackProgram = preferences.namedItem( "audioPlaybackProgram" ).toElement().text();
@@ -1370,12 +1361,8 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.preferences.useExternalPlayer ? "1" : "0" ) );
     preferences.appendChild( opt );
 
-    opt = dd.createElement( "useWindowsPlaySound" );
-    opt.appendChild( dd.createTextNode( c.preferences.useWindowsPlaySound ? "1" : "0" ) );
-    preferences.appendChild( opt );
-
-    opt = dd.createElement( "useBassLibrary" );
-    opt.appendChild( dd.createTextNode( c.preferences.useBassLibrary ? "1" : "0" ) );
+    opt = dd.createElement( "useInternalPlayer" );
+    opt.appendChild( dd.createTextNode( c.preferences.useInternalPlayer ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "audioPlaybackProgram" );

@@ -4,7 +4,7 @@
 #include "langcoder.hh"
 #include <QMessageBox>
 #include "broken_xrecord.hh"
-#include "bass.hh"
+
 
 Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   QDialog( parent ), prevInterfaceLanguage( 0 )
@@ -157,27 +157,13 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 
   // Sound
 
-#ifdef Q_WS_WIN
-  // Since there's only one Phonon backend under Windows, be more precise
-  ui.playViaPhonon->setText( tr( "Play via DirectShow" ) );
-  ui.playViaBass->setEnabled( BassAudioPlayer::instance().canBeUsed() );
-#else
-  // This setting is Windows-specific
-  ui.useWindowsPlaySound->hide();
-  ui.playViaBass->hide();
-#endif
-
   ui.pronounceOnLoadMain->setChecked( p.pronounceOnLoadMain );
   ui.pronounceOnLoadPopup->setChecked( p.pronounceOnLoadPopup );
 
-  ui.useExternalPlayer->setChecked( p.useExternalPlayer );
-
-#ifdef Q_WS_WIN
-  if ( p.useWindowsPlaySound && !p.useExternalPlayer )
-    ui.useWindowsPlaySound->setChecked( true );
-  else if( p.useBassLibrary && !p.useExternalPlayer && BassAudioPlayer::instance().canBeUsed() )
-    ui.playViaBass->setChecked( true );
-#endif
+  if ( p.useInternalPlayer )
+    ui.useInternalPlayer->setChecked( true );
+  else
+    ui.useExternalPlayer->setChecked( p.useExternalPlayer );
 
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
 
@@ -268,10 +254,7 @@ Config::Preferences Preferences::getPreferences()
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();
   p.useExternalPlayer = ui.useExternalPlayer->isChecked();
-#ifdef Q_WS_WIN
-  p.useWindowsPlaySound = ui.useWindowsPlaySound->isChecked();
-  p.useBassLibrary = ui.playViaBass->isChecked();
-#endif
+  p.useInternalPlayer = ui.useInternalPlayer->isChecked();
   p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
 
   p.proxyServer.enabled = ui.useProxyServer->isChecked();

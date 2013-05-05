@@ -17,15 +17,13 @@
 #include "webmultimediadownload.hh"
 #include "programs.hh"
 #include "dprintf.hh"
+#include "ffmpegaudio.hh"
 #include <QDebug>
 #include <QWebElement>
 #include <QCryptographicHash>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
-#include <mmsystem.h> // For PlaySound
-#include "bass.hh"
-
 #include "speechclient.hh"
 
 #include <QPainter>
@@ -33,44 +31,8 @@
 
 #include <QBuffer>
 
-// Phonon headers are a mess. How to include them properly? Send patches if you
-// know.
-#ifdef __WIN32
-#include <Phonon/AudioOutput>
-#include <Phonon/MediaObject>
-#else
-#include <phonon/audiooutput.h>
-#include <phonon/mediaobject.h>
-#endif
-
 using std::map;
 using std::list;
-
-/// A phonon-based audio player, created on demand
-struct AudioPlayer
-{
-  Phonon::AudioOutput output;
-  Phonon::MediaObject object;
-
-  static AudioPlayer & instance();
-
-private:
-
-  AudioPlayer();
-};
-
-AudioPlayer::AudioPlayer():
-    output( Phonon::AccessibilityCategory )
-{
-  Phonon::createPath( &object, &output );
-}
-
-AudioPlayer & AudioPlayer::instance()
-{
-  static AudioPlayer a;
-
-  return a;
-}
 
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
@@ -202,15 +164,6 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
-
-#ifdef Q_OS_WIN32
-  if ( winWavData.size() )
-  {
-    // If we were playing some sound some time ago, make sure it stopped
-    // playing before freeing the waveform memory.
-    PlaySoundA( 0, 0, 0 );
-  }
-#endif
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
@@ -1581,70 +1534,14 @@ void ArticleView::resourceDownloadFinished()
              Dictionary::WebMultimediaDownload::isAudioUrl( resourceDownloadUrl ) )
         {
           // Audio data
-
-#ifdef Q_OS_WIN32
-          // If we use Windows PlaySound, use that, not Phonon.
-          if ( !cfg.preferences.useExternalPlayer &&
-               cfg.preferences.useWindowsPlaySound )
+          if ( cfg.preferences.useInternalPlayer )
           {
-            // Stop any currently playing sound to make sure the previous data
-            // isn't used anymore
-            if ( winWavData.size() )
-            {
-              PlaySoundA( 0, 0, 0 );
-              winWavData.clear();
-            }
-
-            if ( data.size() < 4 || memcmp( data.data(), "RIFF", 4 ) != 0 )
-            {
-              QMessageBox::information( this, tr( "Playing a non-WAV file" ),
-                tr( "To enable playback of files different than WAV, please go "
-                    "to Edit|Preferences, choose the Audio tab and select "
-                    "\"Play via DirectShow\" there." ) );
-            }
-            else
-            {
-              winWavData = data;
-              PlaySoundA( &winWavData.front(), 0,
-                          SND_ASYNC | SND_MEMORY | SND_NODEFAULT | SND_NOWAIT );
-            }
-          }
-          else if ( !cfg.preferences.useExternalPlayer &&
-                     cfg.preferences.useBassLibrary )
-          {
-            if( !BassAudioPlayer::instance().canBeUsed() )
-              emit statusBarMessage( tr( "WARNING: %1" ).arg( tr( "Bass library not found." ) ),
-                                     10000, QPixmap( ":/icons/error.png" ) );
-            else
-            {
-              int bassErrorCode;
-              if( !BassAudioPlayer::instance().playMemory( data.data(), data.size(), &bassErrorCode ) )
-                emit statusBarMessage( tr( "WARNING: %1" ).arg( tr( "Bass library can't play this sound." ) )
-                                       + " " + QString( BassAudioPlayer::instance().errorText( bassErrorCode ) ),
-                                       10000, QPixmap( ":/icons/error.png" ) );
-            }
-          }
-          else
-#endif
-          if ( !cfg.preferences.useExternalPlayer )
-          {
-            // Play via Phonon
-
-            QBuffer * buf = new QBuffer;
-
-            buf->buffer().append( &data.front(), data.size() );
-
-            Phonon::MediaSource source( buf );
-            source.setAutoDelete( true ); // Dispose of our buf when done
-
-            AudioPlayer::instance().object.stop();
-            AudioPlayer::instance().object.clear();
-            AudioPlayer::instance().object.enqueue( source );
-            AudioPlayer::instance().object.play();
+            Ffmpeg::AudioPlayer & player = Ffmpeg::AudioPlayer::instance();
+            connect( &player, SIGNAL( error( QString ) ), this, SLOT( audioPlayerError( QString ) ), Qt::UniqueConnection );
+            player.playMemory( data.data(), data.size() );
           }
           else
           {
-
             // Use external viewer to play the file
             try
             {
@@ -1710,6 +1607,12 @@ void ArticleView::resourceDownloadFinished()
           tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
           10000, QPixmap( ":/icons/error.png" ) );
   }
+}
+
+void ArticleView::audioPlayerError( QString const & message )
+{
+  emit statusBarMessage( tr( "WARNING: FFmpeg Audio Player: %1" ).arg( message ),
+                         10000, QPixmap( ":/icons/error.png" ) );
 }
 
 void ArticleView::pasteTriggered()

@@ -34,11 +34,6 @@ class ArticleView: public QFrame
   QString articleToJump;
   QString soundScript;
 
-#ifdef Q_OS_WIN32
-    // Used in Windows only for PlaySound mode
-    vector< char > winWavData;
-#endif
-
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
   /// a multitude of requests.
@@ -264,6 +259,9 @@ private slots:
 
   /// Handles the double-click from the definition.
   void doubleClicked();
+
+  /// Handles audio player error message
+  void audioPlayerError( QString const & message );
 
 private:
 
