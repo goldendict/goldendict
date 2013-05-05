@@ -298,7 +298,7 @@
     <message>
         <location filename="../articleview.cc" line="1614"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ОГОҲӢ: Плеери аудиоии FFmpeg: %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -3003,12 +3003,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="803"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Пахш кардани файлҳои аудиоӣ тавассути FFmpeg(libav) ва libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="806"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Истифодаи плеери дарунӣ</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3376,12 +3376,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../aard.cc" line="436"/>
         <location filename="../mdx.cc" line="781"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Хатогии боркунии мақола</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="518"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Хатогии рамзкушоии мақола</translation>
     </message>
 </context>
 <context>
