@@ -122,15 +122,15 @@ mac {
         -lavutil-gd \
         -lavformat-gd \
         -lavcodec-gd
-    INCLUDEPATH = maclibs/include
-    LIBS += -Lmaclibs/lib -framework AppKit -framework Carbon
+    INCLUDEPATH = $${PWD}/maclibs/include
+    LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
                          machotkeywrapper.mm \
                          macmouseover.mm \
                          speechclient_mac.mm
     ICON = icons/macicon.icns
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
-                      cp -nR maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
+                      cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
                       cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/
 }
