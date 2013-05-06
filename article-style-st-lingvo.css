@@ -1,6 +1,11 @@
+html
+{
+  background: white !important;
+}
+
 body
 {
-  background: white;
+  background: white !important;
 }
 
 a
@@ -40,6 +45,11 @@ a:hover
   background: white;
 }
 
+.gdarticle
+{
+  background: white;
+}
+
 .gdarticleseparator + script + .gdarticle .gddictname
 {
   border-top: 1px solid #ccc;
@@ -68,8 +78,9 @@ a:hover
 {
   margin-top: 10px;
   border-bottom: 1px solid #cccccc;
-  margin-bottom: -1px;
-  display: block;
+  margin-bottom: 0px;
+  width: 100%;
+  display: inline-block;
   clear: both;
 }
 

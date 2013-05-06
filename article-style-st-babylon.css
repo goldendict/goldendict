@@ -1,7 +1,17 @@
+html
+{
+  background: white !important;
+}
+
 body
 {
-	background: white;
+	background: white !important;
 	font-size: 13px;
+}
+
+.gdarticle
+{
+  background: white;
 }
 
 h3 {
