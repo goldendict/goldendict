@@ -814,18 +814,18 @@ string MdxDictionary::filterResource( const char * articleId, const char * artic
 {
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromStdString( getId() + "_" + articleId + "_" );
-  QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(name|id)\\b\\s*=\\s*[\"'])", Qt::CaseInsensitive );
+  QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*)(?=[^\"'])", Qt::CaseInsensitive );
   anchorLinkRe.setMinimal( true );
 
   return string( QString::fromUtf8( article )
-                 // word cross links
-                 .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://([^#\"']+)#?[^\"']*", Qt::CaseInsensitive ),
-                           "\\1gdlookup://localhost/\\2" )
                  // anchors
-                 .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
-                           "\\1#" + uniquePrefix )
                  .replace( anchorLinkRe,
                            "\\1" + uniquePrefix )
+                 .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
+                           "\\1#" + uniquePrefix )
+                 // word cross links
+                 .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://([^#\"'/]+)#?[^\"']*", Qt::CaseInsensitive ),
+                           "\\1gdlookup://localhost/\\2" )
                  // sounds, and audio link script
                  .replace( QRegExp( "(<\\s*(?:a|area)\\s+[^>]*\\bhref\\b\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
                            QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
