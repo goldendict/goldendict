@@ -24,12 +24,15 @@
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
-#include "speechclient.hh"
 
 #include <QPainter>
 #endif
 
 #include <QBuffer>
+
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
+#include "speechclient.hh"
+#endif
 
 using std::map;
 using std::list;
@@ -912,7 +915,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   if ( url.scheme() == "gdtts" )
   {
 // TODO: Port TTS
-#ifdef Q_OS_WIN32
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
     // Text to speech
     QString md5Id = url.queryItemValue( "engine" );
     QString text( url.path().mid( 1 ) );

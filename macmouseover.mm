@@ -2,6 +2,7 @@
 #include <AppKit/NSTouch.h>
 #include <AppKit/NSEvent.h>
 #include <AppKit/NSScreen.h>
+#include <Foundation/NSAutoreleasePool.h>
 
 const int mouseOverInterval = 300;
 
@@ -129,7 +130,11 @@ void MacMouseOver::handlePosition()
   Mutex::Lock _( mouseMutex );
 
   QString strToTranslate;
+
+  NSAutoreleasePool * pool = [ [ NSAutoreleasePool alloc ] init ];
   CGPoint pt = carbonScreenPointFromCocoaScreenPoint( [NSEvent mouseLocation] );
+  [ pool drain ];
+
   CFArrayRef names = 0;
 
   AXUIElementRef elem = 0;

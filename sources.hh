@@ -12,7 +12,7 @@
 #include <QItemDelegate>
 #include <QItemEditorFactory>
 
-#ifdef Q_OS_WIN32
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
 #include "texttospeechsource.hh"
 #endif
 
@@ -251,7 +251,7 @@ signals:
 private:
   Ui::Sources ui;
 
-#ifdef Q_OS_WIN32
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
   TextToSpeechSource *textToSpeechSource;
 #endif
 

@@ -10,7 +10,7 @@
 
 Sources::Sources( QWidget * parent, Config::Class const & cfg):
   QWidget( parent ),
-#ifdef Q_OS_WIN32
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
   textToSpeechSource( NULL ),
 #endif
   itemDelegate( new QItemDelegate( this ) ),
@@ -95,7 +95,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.forvoLanguageCodes->setText( forvo.languageCodes );
 
   // Text to speech
-#ifdef Q_OS_WIN32
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
   textToSpeechSource = new TextToSpeechSource( this, cfg.voiceEngines );
   ui.tabWidget->addTab( textToSpeechSource, tr( "Text to Speech" ) );
 #endif
@@ -288,7 +288,7 @@ void Sources::on_removeProgram_clicked()
 
 Config::VoiceEngines Sources::getVoiceEngines() const
 {
-#ifdef Q_OS_WIN32
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
   if ( !textToSpeechSource )
     return Config::VoiceEngines();
   return textToSpeechSource->getVoiceEnginesModel().getCurrentVoiceEngines();

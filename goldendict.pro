@@ -126,7 +126,8 @@ mac {
     LIBS += -Lmaclibs/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
                          machotkeywrapper.mm \
-                         macmouseover.mm
+                         macmouseover.mm \
+                         speechclient_mac.mm
     ICON = icons/macicon.icns
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
                       cp -nR maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
@@ -364,7 +365,11 @@ win32 {
 }
 
 mac {
-    HEADERS += macmouseover.hh
+    HEADERS += macmouseover.hh \
+               texttospeechsource.hh \
+               speechclient.hh
+    FORMS   += texttospeechsource.ui
+    SOURCES += texttospeechsource.cc
 }
 
 RESOURCES += resources.qrc \
