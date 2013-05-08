@@ -1,4 +1,4 @@
-FFmpeg and libao build instructions
+FFmpeg, libao, zLib build instructions
 -----------------------------------
 
 Prerequisites
@@ -8,10 +8,11 @@ Prerequisites
 Build
 =====
 
-* Get source tarball for libspeex, ffmpeg, libao, and extract them respectively:
+* Get source tarball for libspeex, ffmpeg, libao, zlib and extract them respectively:
   * libspeex: http://www.speex.org/downloads/
   * libao: http://www.xiph.org/downloads/
   * ffmpeg: http://ffmpeg.org/download.html
+  * zlib: http://zlib.net/
 
 * Define environment variable: PREFIX, for example: export PREFIX=/usr/local
   * NOTE: You may also want to define CPATH and LIBRARY_PATH:
@@ -32,6 +33,9 @@ Build
   * Copy "libao-configure-mingw32.sh" to the libao source folder.
   * ./libao-configure-mingw32.sh
   * make && make install
+
+* Build zlib:
+  * make -f./win32/makefile.gcc && make -f./win32/makefile.gcc install
 
 binaries (dlls):  ${PREFIX}/bin
 C headers:        ${PREFIX}/include
