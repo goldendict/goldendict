@@ -524,6 +524,9 @@ Class load() throw( exError );
 /// Saves the configuration
 void save( Class const & ) throw( exError );
 
+/// Returns the configuration file name.
+QString getConfigFileName();
+
 /// Returns the main configuration directory.
 QString getConfigDir() throw( exError );
 

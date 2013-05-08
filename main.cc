@@ -21,8 +21,10 @@
 #endif
 
 #include "termination.hh"
+#include "atomic_rename.hh"
 
 #include <QWebSecurityOrigin>
+#include <QMessageBox>
 
 int main( int argc, char ** argv )
 {
@@ -119,7 +121,27 @@ int main( int argc, char ** argv )
     app.setWindowIcon( QIcon( ":/icons/macicon.png" ) );
   #endif
 
-  Config::Class cfg( Config::load() );
+  Config::Class cfg;
+  for( ; ; )
+  {
+    try
+    {
+      cfg = Config::Class( Config::load() );
+    }
+    catch( Config::exError )
+    {
+      QMessageBox mb( QMessageBox::Warning, "GoldenDict", "Error in configuration file. Continue with default settings?",
+                      QMessageBox::Yes | QMessageBox::No );
+      mb.exec();
+      if( mb.result() != QMessageBox::Yes )
+        return -1;
+
+      QString configFile = Config::getConfigFileName();
+      renameAtomically( configFile, configFile + ".bad" );
+      continue;
+    }
+    break;
+  }
 
   if ( Config::isPortableVersion() )
   {

@@ -48,10 +48,6 @@ namespace
     return result;
   }
 
-  QString getConfigFileName()
-  {
-    return getHomeDir().absoluteFilePath( "config" );
-  }
 }
 
 ProxyServer::ProxyServer(): enabled( false ), type( Socks5 ), port( 3128 )
@@ -1557,6 +1553,11 @@ void save( Class const & c ) throw( exError )
   configFile.close();
 
   renameAtomically( configFile.fileName(), getConfigFileName() );
+}
+
+QString getConfigFileName()
+{
+  return getHomeDir().absoluteFilePath( "config" );
 }
 
 QString getConfigDir() throw( exError )
