@@ -130,7 +130,7 @@ int main( int argc, char ** argv )
     }
     catch( Config::exError )
     {
-      QMessageBox mb( QMessageBox::Warning, "GoldenDict", "Error in configuration file. Continue with default settings?",
+      QMessageBox mb( QMessageBox::Warning, app.applicationName(), "Error in configuration file. Continue with default settings?",
                       QMessageBox::Yes | QMessageBox::No );
       mb.exec();
       if( mb.result() != QMessageBox::Yes )
