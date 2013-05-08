@@ -25,6 +25,7 @@
 #include <QAtomicInt>
 #include <QDomDocument>
 #include <QUrl>
+#include <QtEndian>
 
 #include "ufile.hh"
 #include "wstring_qt.hh"
@@ -53,65 +54,18 @@ DEF_EX_STR( exSuddenEndOfFile, "Sudden end of file", Dictionary::Ex )
 #pragma pack( push, 1 )
 #endif
 
-// Big-Endian template
-// http://habrahabr.ru/blogs/cpp/121811/
-
-template<typename T>
-struct BigEndian
-{
-    union
-    {
-        unsigned char bytes[sizeof(T)];
-        T raw_value;
-    };
-
-    BigEndian(T t = T())
-    {
-        operator =(t);
-    }
-
-    BigEndian(const BigEndian<T> & t)
-    {
-        raw_value = t.raw_value;
-    }
-
-    operator const T() const
-    {
-        T t = T();
-        for (unsigned i = 0; i < sizeof(T); i++)
-            t |= T(bytes[sizeof(T) - 1 - i]) << (i << 3);
-        return t;
-    }
-
-    const T operator = (const T t)
-    {
-        for (unsigned i = 0; i < sizeof(T); i++)
-            bytes[sizeof(T) - 1 - i] = (unsigned char)( t >> (i << 3) );
-        return t;
-    }
-
-}
-#ifndef _MSC_VER
-__attribute__((packed))
-#endif
-;
-
-typedef BigEndian< uint16_t > uint16_be;
-typedef BigEndian< uint32_t > uint32_be;
-typedef BigEndian< uint64_t > uint64_be;
-
 /// AAR file header
 struct AAR_header
 {
     char signature[4];
     char checksum[40];
-    uint16_be version;
+    uint16_t version;
     char uuid[16];
-    uint16_be volume;
-    uint16_be totalVolumes;
-    uint32_be metaLength;
-    uint32_be wordsCount;
-    uint32_be articleOffset;
+    uint16_t volume;
+    uint16_t totalVolumes;
+    uint32_t metaLength;
+    uint32_t wordsCount;
+    uint32_t articleOffset;
     char indexItemFormat[4];
     char keyLengthFormat[2];
     char articleLengthFormat[2];
@@ -123,8 +77,8 @@ __attribute__((packed))
 
 struct IndexElement
 {
-    uint32_be wordOffset;
-    uint32_be articleOffset;
+    uint32_t wordOffset;
+    uint32_t articleOffset;
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -133,8 +87,8 @@ __attribute__((packed))
 
 struct IndexElement64
 {
-    uint32_be wordOffset;
-    uint64_be articleOffset;
+    uint32_t wordOffset;
+    uint64_t articleOffset;
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -424,7 +378,7 @@ void AardDictionary::loadArticle( uint32_t address,
 {
     uint32_t articleOffset = address;
     uint32_t articleSize;
-    uint32_be size;
+    uint32_t size;
 
     vector< char > articleBody;
 
@@ -439,7 +393,7 @@ void AardDictionary::loadArticle( uint32_t address,
         Mutex::Lock _( aardMutex );
         df.seek( articleOffset );
         df.read( &size, sizeof(size) );
-        articleSize = size;
+        articleSize = qFromBigEndian( size );
 
         // Don't try to read and decode too big articles,
         // it is most likely error in dictionary
@@ -533,7 +487,7 @@ QString const& AardDictionary::getDescription()
         Mutex::Lock _( aardMutex );
         df.seek( 0 );
         df.read( &dictHeader, sizeof(dictHeader) );
-        size = dictHeader.metaLength;
+        size = qFromBigEndian( dictHeader.metaLength );
         data.resize( size );
         df.read( &data.front(), size );
     }
@@ -808,7 +762,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
 
           vector< char > data;
-          uint32_t size = dictHeader.metaLength;
+          uint32_t size = qFromBigEndian( dictHeader.metaLength );
 
           if( size == 0 )
           {
@@ -853,11 +807,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             dictName = dictName + " (" + capitalized + ")";
           }
 
-          uint16_t volumes = dictHeader.totalVolumes;
+          uint16_t volumes = qFromBigEndian( dictHeader.totalVolumes );
           if( volumes > 1 )
           {
             QString ss;
-            ss.sprintf( " (%i/%i)", (uint16_t)(dictHeader.volume), volumes );
+            ss.sprintf( " (%i/%i)", qFromBigEndian( dictHeader.volume ), volumes );
             dictName += ss.toLocal8Bit().data();
           }
 
@@ -880,12 +834,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           ChunkedStorage::Writer chunks( idx );
 
-          uint32_t wordCount = dictHeader.wordsCount;
+          uint32_t wordCount = qFromBigEndian( dictHeader.wordsCount );
           set< uint32_t > articleOffsets;
+
           uint32_t pos = df.tell();
           uint32_t wordsBase = pos + wordCount * ( has64bitIndex ? sizeof( IndexElement64 ) : sizeof( IndexElement ) );
-          uint32_t articlesBase = dictHeader.articleOffset;
+          uint32_t articlesBase = qFromBigEndian( dictHeader.articleOffset );
 
+          data.clear();
           for( uint32_t j = 0; j < wordCount; j++ )
           {
             uint32_t articleOffset;
@@ -897,8 +853,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               df.seek( pos );
               df.read( &el64, sizeof(el64) );
-              articleOffset = articlesBase + el64.articleOffset;
-              wordOffset = wordsBase + el64.wordOffset;
+              articleOffset = articlesBase + qFromBigEndian( el64.articleOffset );
+              wordOffset = wordsBase + qFromBigEndian( el64.wordOffset );
             }
             else
             {
@@ -906,16 +862,17 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               df.seek( pos );
               df.read( &el, sizeof(el) );
-              articleOffset = articlesBase + el.articleOffset;
-              wordOffset = wordsBase + el.wordOffset;
+              articleOffset = articlesBase + qFromBigEndian( el.articleOffset );
+              wordOffset = wordsBase + qFromBigEndian( el.wordOffset );
             }
 
             df.seek( wordOffset );
 
-            uint16_be sizeBE;
+            uint16_t sizeBE;
             df.read( &sizeBE, sizeof(sizeBE) );
-            uint16_t wordSize = sizeBE;
-            data.resize( wordSize );
+            uint16_t wordSize = qFromBigEndian( sizeBE );
+            if( data.size() < wordSize )
+              data.resize( wordSize );
             df.read( &data.front(), wordSize );
 
             if( articleOffsets.find( articleOffset ) == articleOffsets.end() )
@@ -926,6 +883,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             pos += has64bitIndex ? sizeof( IndexElement64 ) : sizeof( IndexElement );
           }
+          data.clear();
+
+          idxHeader.articleCount = articleOffsets.size();
+          articleOffsets.clear();
+
           // Finish with the chunks
 
           idxHeader.chunksOffset = chunks.finish();
@@ -944,7 +906,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           idxHeader.signature = Signature;
           idxHeader.formatVersion = CurrentFormatVersion;
 
-          idxHeader.articleCount = articleOffsets.size();
           idxHeader.wordCount = wordCount;
 
           if( langFrom.size() == 3)
