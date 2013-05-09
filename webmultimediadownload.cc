@@ -14,19 +14,19 @@ WebMultimediaDownload::WebMultimediaDownload( QUrl const & url,
 
 void WebMultimediaDownload::cancel()
 {
-  reply.reset();
+  reply = NULL;
 
   finish();
 }
 
 void WebMultimediaDownload::replyFinished( QNetworkReply * r )
 {
-  if ( r != reply.get() )
+  if ( !r || r != reply )
     return; // Not our reply
 
-  if ( reply->error() == QNetworkReply::NoError )
+  if ( r->error() == QNetworkReply::NoError )
   {
-    QByteArray all = reply->readAll();
+    QByteArray all = r->readAll();
 
     Mutex::Lock _( dataMutex );
 
@@ -37,11 +37,12 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
     hasAnyData = true;
   }
   else
-    setErrorString( reply->errorString() );
+    setErrorString( r->errorString() );
+
+  r->deleteLater();
+  reply = NULL;
 
   finish();
-
-  reply.reset();
 }
 
 bool WebMultimediaDownload::isAudioUrl( QUrl const & url )
