@@ -137,37 +137,37 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="128"/>
+        <location filename="../articleview.cc" line="131"/>
         <source>Select Current Article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="646"/>
+        <location filename="../articleview.cc" line="649"/>
         <source>Resource</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="651"/>
+        <location filename="../articleview.cc" line="654"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="656"/>
+        <location filename="../articleview.cc" line="659"/>
         <source>TTS Voice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="661"/>
+        <location filename="../articleview.cc" line="664"/>
         <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="677"/>
+        <location filename="../articleview.cc" line="680"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="681"/>
+        <location filename="../articleview.cc" line="684"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -176,96 +176,96 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="869"/>
-        <location filename="../articleview.cc" line="1042"/>
+        <location filename="../articleview.cc" line="872"/>
+        <location filename="../articleview.cc" line="1045"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>El recurso referido no existe.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="909"/>
+        <location filename="../articleview.cc" line="912"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1042"/>
-        <location filename="../articleview.cc" line="1143"/>
-        <location filename="../articleview.cc" line="1154"/>
+        <location filename="../articleview.cc" line="1045"/>
+        <location filename="../articleview.cc" line="1146"/>
+        <location filename="../articleview.cc" line="1157"/>
         <source>ERROR: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1108"/>
+        <location filename="../articleview.cc" line="1111"/>
         <source>Save sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1110"/>
+        <location filename="../articleview.cc" line="1113"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1123"/>
+        <location filename="../articleview.cc" line="1126"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1125"/>
+        <location filename="../articleview.cc" line="1128"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1143"/>
+        <location filename="../articleview.cc" line="1146"/>
         <source>Resource saving error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1290"/>
+        <location filename="../articleview.cc" line="1293"/>
         <source>&amp;Open Link</source>
         <translation>&amp;T&apos;inkisqata kichay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1296"/>
+        <location filename="../articleview.cc" line="1299"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Musuq pestañapi t&apos;inkisqata kichay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1303"/>
+        <location filename="../articleview.cc" line="1306"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Abrir enlace en un &amp;navegador web externo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1335"/>
+        <location filename="../articleview.cc" line="1338"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot;ta &amp;mask&apos;ay </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1343"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>&amp;Musuq pestañapi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1348"/>
+        <location filename="../articleview.cc" line="1351"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1354"/>
-        <location filename="../articleview.cc" line="1386"/>
+        <location filename="../articleview.cc" line="1357"/>
+        <location filename="../articleview.cc" line="1389"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1368"/>
+        <location filename="../articleview.cc" line="1371"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>%2pi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1376"/>
+        <location filename="../articleview.cc" line="1379"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>&amp;Musuq pestañapi %2pi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1614"/>
+        <location filename="../articleview.cc" line="1617"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -278,38 +278,38 @@
         <translation type="obsolete">Para activar reproducción de archivos no WAV, por favor vaya a Editar|Preferencias, escoja la pestaña Audio y seleccione &quot;Reproducir con DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1555"/>
+        <location filename="../articleview.cc" line="1558"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Fallo ejecutando un reproductor para reproducir el archivo de audio: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1573"/>
+        <location filename="../articleview.cc" line="1576"/>
         <source>Failed to create temporary file.</source>
         <translation>Temporal archiwuta yurichispa pantay.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1584"/>
+        <location filename="../articleview.cc" line="1587"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Fallo abriendo automáticamente el archivo de recursos. Intente abrirlo manualmente: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1154"/>
-        <location filename="../articleview.cc" line="1607"/>
+        <location filename="../articleview.cc" line="1157"/>
+        <location filename="../articleview.cc" line="1610"/>
         <source>The referenced resource failed to download.</source>
         <translation>El recurso ha fallado de descargar.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1316"/>
+        <location filename="../articleview.cc" line="1319"/>
         <source>Save &amp;image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1324"/>
+        <location filename="../articleview.cc" line="1327"/>
         <source>Save s&amp;ound...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1607"/>
+        <location filename="../articleview.cc" line="1610"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">WILLAY: %1</translation>
     </message>
@@ -2652,6 +2652,14 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>Main</name>
+    <message>
+        <location filename="../main.cc" line="152"/>
+        <source>Error in configuration file. Continue with default settings?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>Navigation</source>
@@ -4127,13 +4135,13 @@ la página web para descargarla.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="436"/>
+        <location filename="../aard.cc" line="390"/>
         <location filename="../mdx.cc" line="781"/>
         <source>Article loading error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="518"/>
+        <location filename="../aard.cc" line="472"/>
         <source>Article decoding error</source>
         <translation type="unfinished"></translation>
     </message>

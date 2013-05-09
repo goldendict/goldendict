@@ -1534,6 +1534,13 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>Main</name>
+    <message>
+        <source>Error in configuration file. Continue with default settings?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>F1</source>

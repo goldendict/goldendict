@@ -163,141 +163,141 @@
         <translation>Меркаваць &amp;рэґістр</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="128"/>
+        <location filename="../articleview.cc" line="131"/>
         <source>Select Current Article</source>
         <translation>Выбраць дзейны артыкул</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="646"/>
+        <location filename="../articleview.cc" line="649"/>
         <source>Resource</source>
         <translation>Рэсурс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="651"/>
+        <location filename="../articleview.cc" line="654"/>
         <source>Audio</source>
         <translation>Аўдыё</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="656"/>
+        <location filename="../articleview.cc" line="659"/>
         <source>TTS Voice</source>
         <translation>Сынтэзатар голасу</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="661"/>
+        <location filename="../articleview.cc" line="664"/>
         <source>Picture</source>
         <translation>Відарыс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="677"/>
+        <location filename="../articleview.cc" line="680"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Азначэньне з слоўніка „%1“: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="681"/>
+        <location filename="../articleview.cc" line="684"/>
         <source>Definition: %1</source>
         <translation>Азначэньне: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="869"/>
-        <location filename="../articleview.cc" line="1042"/>
+        <location filename="../articleview.cc" line="872"/>
+        <location filename="../articleview.cc" line="1045"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Запытанага рэсурсу не існуе.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="909"/>
+        <location filename="../articleview.cc" line="912"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Пазначанай праґрамы не існуе.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1042"/>
-        <location filename="../articleview.cc" line="1143"/>
-        <location filename="../articleview.cc" line="1154"/>
+        <location filename="../articleview.cc" line="1045"/>
+        <location filename="../articleview.cc" line="1146"/>
+        <location filename="../articleview.cc" line="1157"/>
         <source>ERROR: %1</source>
         <translation>АБМЫЛА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1108"/>
+        <location filename="../articleview.cc" line="1111"/>
         <source>Save sound</source>
         <translation>Захаваньне гуку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1110"/>
+        <location filename="../articleview.cc" line="1113"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Гукавыя файлы (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1123"/>
+        <location filename="../articleview.cc" line="1126"/>
         <source>Save image</source>
         <translation>Захаваньне выявы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1125"/>
+        <location filename="../articleview.cc" line="1128"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Файлы выяваў (*.bmp *.jpg *.png *.tif);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1143"/>
+        <location filename="../articleview.cc" line="1146"/>
         <source>Resource saving error: </source>
         <translation>Памылка захаваньня рэсурсу: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1290"/>
+        <location filename="../articleview.cc" line="1293"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Адчыніць спасылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1296"/>
+        <location filename="../articleview.cc" line="1299"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ачыніць спасылку ў новай &amp;укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1303"/>
+        <location filename="../articleview.cc" line="1306"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Адчыніць спасылку ў &amp;вонкавым аглядальніку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1316"/>
+        <location filename="../articleview.cc" line="1319"/>
         <source>Save &amp;image...</source>
         <translation>Захаваць &amp;выяву...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1324"/>
+        <location filename="../articleview.cc" line="1327"/>
         <source>Save s&amp;ound...</source>
         <translation>Захаваць &amp;гук...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1335"/>
+        <location filename="../articleview.cc" line="1338"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Шукаць „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1343"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Шукаць „%1“ у &amp;новай укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1348"/>
+        <location filename="../articleview.cc" line="1351"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Зьмясьціць „%1“ у ўводным радку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1354"/>
-        <location filename="../articleview.cc" line="1386"/>
+        <location filename="../articleview.cc" line="1357"/>
+        <location filename="../articleview.cc" line="1389"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Дадаць „%1“ у гісторыю</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1368"/>
+        <location filename="../articleview.cc" line="1371"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Шукаць „%1“ у ґрупе %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1376"/>
+        <location filename="../articleview.cc" line="1379"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Шукаць „%1“ у ґрупе %2 у новай у&amp;кладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1614"/>
+        <location filename="../articleview.cc" line="1617"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -310,7 +310,7 @@
         <translation type="obsolete">Каб улучыць прайграваньне файлаў розных ад WAV, перайдзі да Зьменаў|Наладаў, абяры ўкладку Аўдыё і ўлучы „Прайграваць цераз DirectShow“.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1607"/>
+        <location filename="../articleview.cc" line="1610"/>
         <source>WARNING: %1</source>
         <translation>УВАГА: %1</translation>
     </message>
@@ -323,23 +323,23 @@
         <translation type="obsolete">Бібліятэка Bass не патрапіла прайграць гэтага запісу.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1555"/>
+        <location filename="../articleview.cc" line="1558"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Немажліва ўрухоміць прайгравальніка гукавага файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1573"/>
+        <location filename="../articleview.cc" line="1576"/>
         <source>Failed to create temporary file.</source>
         <translation>Не атрымалася стварыць часовага файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1584"/>
+        <location filename="../articleview.cc" line="1587"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Не атрымалася аўтаматычна адчыніць рэсурсавага файла. Паспрабуй адчыніць ручна %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1154"/>
-        <location filename="../articleview.cc" line="1607"/>
+        <location filename="../articleview.cc" line="1157"/>
+        <location filename="../articleview.cc" line="1610"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
     </message>
@@ -1890,6 +1890,14 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>Main</name>
+    <message>
+        <location filename="../main.cc" line="152"/>
+        <source>Error in configuration file. Continue with default settings?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -3308,13 +3316,13 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="436"/>
+        <location filename="../aard.cc" line="390"/>
         <location filename="../mdx.cc" line="781"/>
         <source>Article loading error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="518"/>
+        <location filename="../aard.cc" line="472"/>
         <source>Article decoding error</source>
         <translation type="unfinished"></translation>
     </message>
