@@ -121,16 +121,35 @@ int main( int argc, char ** argv )
     app.setWindowIcon( QIcon( ":/icons/macicon.png" ) );
   #endif
 
+  // Load translations for system locale
+
+  QTranslator qtTranslator;
+
+  QString localeName = QLocale::system().name();
+
+  if ( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
+    qtTranslator.load( "qt_" + localeName,
+                       QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
+
+  app.installTranslator( &qtTranslator );
+
+  QTranslator translator;
+
+  translator.load( Config::getLocDir() + "/" + localeName );
+
+  app.installTranslator( &translator );
+
   Config::Class cfg;
   for( ; ; )
   {
     try
     {
-      cfg = Config::Class( Config::load() );
+      cfg = Config::load();
     }
     catch( Config::exError )
     {
-      QMessageBox mb( QMessageBox::Warning, app.applicationName(), "Error in configuration file. Continue with default settings?",
+      QMessageBox mb( QMessageBox::Warning, app.applicationName(),
+                      app.translate( "Main", "Error in configuration file. Continue with default settings?" ),
                       QMessageBox::Yes | QMessageBox::No );
       mb.exec();
       if( mb.result() != QMessageBox::Yes )
@@ -153,26 +172,18 @@ int main( int argc, char ** argv )
     cfg.hunspell.dictionariesPath = Config::getPortableVersionMorphoDir();
   }
 
-  // Load translations
+  // Reload translations for user selected locale is nesessary
 
-  QTranslator qtTranslator;
+  if( !cfg.preferences.interfaceLanguage.isEmpty() && localeName != cfg.preferences.interfaceLanguage )
+  {
+    localeName = cfg.preferences.interfaceLanguage;
 
-  QString localeName = cfg.preferences.interfaceLanguage;
+    if ( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
+      qtTranslator.load( "qt_" + localeName,
+                                 QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
 
-  if ( localeName.isEmpty() )
-    localeName = QLocale::system().name();
-
-  if ( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
-    qtTranslator.load( "qt_" + localeName,
-                               QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
-
-  app.installTranslator( &qtTranslator );
-
-  QTranslator translator;
-
-  translator.load( Config::getLocDir() + "/" + localeName );
-
-  app.installTranslator( &translator );
+    translator.load( Config::getLocDir() + "/" + localeName );
+  }
 
   // Prevent app from quitting spontaneously when it works with scan popup
   // and with the main window closed.
