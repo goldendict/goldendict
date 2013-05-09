@@ -38,7 +38,6 @@ win32 {
 	TARGET = GoldenDict
     LIBS += -liconv \
         -lwsock32 \
-        -lwinmm \
         -lpsapi \
         -lole32 \
         -loleaut32 \
