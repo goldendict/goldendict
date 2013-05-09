@@ -1893,7 +1893,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>配置文件错误，使用默认配置并继续？</translation>
     </message>
 </context>
 <context>
