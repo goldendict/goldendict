@@ -59,13 +59,13 @@ struct AAR_header
 {
     char signature[4];
     char checksum[40];
-    uint16_t version;
+    quint16 version;
     char uuid[16];
-    uint16_t volume;
-    uint16_t totalVolumes;
-    uint32_t metaLength;
-    uint32_t wordsCount;
-    uint32_t articleOffset;
+    quint16 volume;
+    quint16 totalVolumes;
+    quint32 metaLength;
+    quint32 wordsCount;
+    quint32 articleOffset;
     char indexItemFormat[4];
     char keyLengthFormat[2];
     char articleLengthFormat[2];
@@ -77,8 +77,8 @@ __attribute__((packed))
 
 struct IndexElement
 {
-    uint32_t wordOffset;
-    uint32_t articleOffset;
+    quint32 wordOffset;
+    quint32 articleOffset;
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -87,8 +87,8 @@ __attribute__((packed))
 
 struct IndexElement64
 {
-    uint32_t wordOffset;
-    uint64_t articleOffset;
+    quint32 wordOffset;
+    quint64 articleOffset;
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -103,15 +103,15 @@ enum
 
 struct IdxHeader
 {
-  uint32_t signature; // First comes the signature, AARX
-  uint32_t formatVersion; // File format version (CurrentFormatVersion)
-  uint32_t chunksOffset; // The offset to chunks' storage
-  uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
-  uint32_t indexRootOffset;
-  uint32_t wordCount;
-  uint32_t articleCount;
-  uint32_t langFrom;  // Source language
-  uint32_t langTo;    // Target language
+  quint32 signature; // First comes the signature, AARX
+  quint32 formatVersion; // File format version (CurrentFormatVersion)
+  quint32 chunksOffset; // The offset to chunks' storage
+  quint32 indexBtreeMaxElements; // Two fields from IndexInfo
+  quint32 indexRootOffset;
+  quint32 wordCount;
+  quint32 articleCount;
+  quint32 langFrom;  // Source language
+  quint32 langTo;    // Target language
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -273,7 +273,7 @@ protected:
 private:
 
     /// Loads the article.
-    void loadArticle( uint32_t address,
+    void loadArticle( quint32 address,
                       string & articleText );
     string convert( string const & in_data );
 
@@ -292,7 +292,7 @@ AardDictionary::AardDictionary( string const & id,
     // Read dictionary name
 
     idx.seek( sizeof( idxHeader ) );
-    vector< char > dName( idx.read< uint32_t >() );
+    vector< char > dName( idx.read< quint32 >() );
     if( dName.size() )
     {
         idx.read( &dName.front(), dName.size() );
@@ -373,12 +373,12 @@ string AardDictionary::convert( const string & in )
     return text.toUtf8().data();
 }
 
-void AardDictionary::loadArticle( uint32_t address,
+void AardDictionary::loadArticle( quint32 address,
                                    string & articleText )
 {
-    uint32_t articleOffset = address;
-    uint32_t articleSize;
-    uint32_t size;
+    quint32 articleOffset = address;
+    quint32 articleSize;
+    quint32 size;
 
     vector< char > articleBody;
 
@@ -480,7 +480,7 @@ QString const& AardDictionary::getDescription()
         return dictionaryDescription;
 
     AAR_header dictHeader;
-    uint32_t size;
+    quint32 size;
     vector< char > data;
 
     {
@@ -610,7 +610,7 @@ void AardArticleRequest::run()
 
   multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
 
-  set< uint32_t > articlesIncluded; // Some synonims make it that the articles
+  set< quint32 > articlesIncluded; // Some synonims make it that the articles
                                     // appear several times. We combat this
                                     // by only allowing them to appear once.
 
@@ -762,7 +762,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
 
           vector< char > data;
-          uint32_t size = qFromBigEndian( dictHeader.metaLength );
+          quint32 size = qFromBigEndian( dictHeader.metaLength );
 
           if( size == 0 )
           {
@@ -807,7 +807,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             dictName = dictName + " (" + capitalized + ")";
           }
 
-          uint16_t volumes = qFromBigEndian( dictHeader.totalVolumes );
+          quint16 volumes = qFromBigEndian( dictHeader.totalVolumes );
           if( volumes > 1 )
           {
             QString ss;
@@ -826,7 +826,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           idx.write( idxHeader );
 
-          idx.write( (uint32_t) dictName.size() );
+          idx.write( (quint32) dictName.size() );
           if( !dictName.empty() )
               idx.write( dictName.data(), dictName.size() );
 
@@ -834,18 +834,18 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           ChunkedStorage::Writer chunks( idx );
 
-          uint32_t wordCount = qFromBigEndian( dictHeader.wordsCount );
-          set< uint32_t > articleOffsets;
+          quint32 wordCount = qFromBigEndian( dictHeader.wordsCount );
+          set< quint32 > articleOffsets;
 
-          uint32_t pos = df.tell();
-          uint32_t wordsBase = pos + wordCount * ( has64bitIndex ? sizeof( IndexElement64 ) : sizeof( IndexElement ) );
-          uint32_t articlesBase = qFromBigEndian( dictHeader.articleOffset );
+          quint32 pos = df.tell();
+          quint32 wordsBase = pos + wordCount * ( has64bitIndex ? sizeof( IndexElement64 ) : sizeof( IndexElement ) );
+          quint32 articlesBase = qFromBigEndian( dictHeader.articleOffset );
 
           data.clear();
-          for( uint32_t j = 0; j < wordCount; j++ )
+          for( quint32 j = 0; j < wordCount; j++ )
           {
-            uint32_t articleOffset;
-            uint32_t wordOffset;
+            quint32 articleOffset;
+            quint32 wordOffset;
 
             if( has64bitIndex )
             {
@@ -868,9 +868,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             df.seek( wordOffset );
 
-            uint16_t sizeBE;
+            quint16 sizeBE;
             df.read( &sizeBE, sizeof(sizeBE) );
-            uint16_t wordSize = qFromBigEndian( sizeBE );
+            quint16 wordSize = qFromBigEndian( sizeBE );
             if( data.size() < wordSize )
               data.resize( wordSize );
             df.read( &data.front(), wordSize );
