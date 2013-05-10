@@ -316,7 +316,7 @@
     <message>
         <location filename="../articleview.cc" line="1617"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION : lecteur audio FFmpeg : %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -1915,7 +1915,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur dans le fichier de configuration. Continuer avec les paramètres par défaut ?</translation>
     </message>
 </context>
 <context>
@@ -3016,12 +3016,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="803"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire les fichiers audio via FFmpeg (libav) et libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="806"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le lecteur interne</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3388,12 +3388,12 @@ Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
         <location filename="../aard.cc" line="390"/>
         <location filename="../mdx.cc" line="781"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de chargement de l&apos;article</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="472"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de décodage de l&apos;article</translation>
     </message>
 </context>
 <context>
