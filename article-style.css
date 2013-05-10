@@ -136,6 +136,14 @@ div.sdct_x
 {
 }
 
+/* Blockquotes in XDXF-styled elements are used
+   for indentation purposes, see Issue #305. */
+.sdct_x blockquote
+{
+  margin: 0px;
+  padding-left: 9px;
+  display: inline-block;
+}
 
 /******** XDXF markup classes *********/
 
