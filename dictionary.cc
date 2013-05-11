@@ -200,6 +200,12 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
     if ( !info.isFile() )
     {
       fileName.chop( 3 );
+      fileName += "jpg";
+      info = QFileInfo( fileName );
+    }
+    if ( !info.isFile() )
+    {
+      fileName.chop( 3 );
       fileName += "ico";
       info = QFileInfo( fileName );
     }
