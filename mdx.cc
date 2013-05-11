@@ -402,7 +402,7 @@ void MdxDictionary::doDeferredInit()
         if ( dictFiles[ i ] != mddFileNames[ i - 1 ] || !File::exists( dictFiles[ i ] ) )
           continue;
 
-        IndexedMdd * mdd = new IndexedMdd( idxMutex, chunks );
+        sptr< IndexedMdd > mdd = new IndexedMdd( idxMutex, chunks );
         mdd->openIndex( mddIndexInfos[ i - 1 ], idx, idxMutex );
         mdd->open( dictFiles[ i ].c_str() );
         mddResources.push_back( mdd );
@@ -698,7 +698,6 @@ void MddResourceRequest::run()
             i != dict.mddResources.end(); i++  )
       {
         sptr< IndexedMdd > mddResource = *i;
-
         if ( mddResource->loadFile( resourceName, data ) )
           break;
       }
@@ -984,10 +983,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
          indexIsOldOrBad( dictFiles, indexFile ) )
     {
       // Building the index
-      MdictParser parser( i->c_str() );
+      MdictParser parser;
       list< sptr< MdictParser > > mddParsers;
 
-      if ( !parser.open() )
+      if ( !parser.open( i->c_str() ) )
         continue;
 
       string title = string( parser.title().toUtf8().constData() );
@@ -998,8 +997,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       {
         if ( File::exists( *mddIter ) )
         {
-          MdictParser * mddParser = new MdictParser( mddIter->c_str() );
-          if ( !mddParser->open() )
+          sptr< MdictParser > mddParser = new MdictParser();
+          if ( !mddParser->open( mddIter->c_str() ) )
           {
             FDPRINTF( stderr, "Warning: Broken mdd (resource) file: %s\n", mddIter->c_str() );
             continue;
@@ -1059,8 +1058,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       while ( !mddParsers.empty() )
       {
         sptr< MdictParser > mddParser = mddParsers.front();
-
-        IndexedWords * mddIndexedWords = new IndexedWords();
+        sptr< IndexedWords > mddIndexedWords = new IndexedWords();
         ResourceHandler resourceHandler( chunks, *mddIndexedWords );
 
         while ( mddParser->readNextHeadWordIndex( headWordIndex ) )
