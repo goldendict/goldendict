@@ -370,6 +370,9 @@ string AardDictionary::convert( const string & in )
     text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*[\\\"'](w:|s:){0,1}([^#](?!ttp://)[^\\\"']*)(.)" ),
                   "<a href=\"bword:\\2\"");
 
+    // Fix outstanding elements
+    text += "<br style=\"clear:both;\" />";
+
     return text.toUtf8().data();
 }
 
