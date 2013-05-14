@@ -129,14 +129,14 @@ bool DecoderContext::openCodec( QString & errorString )
   formatContext_ = avformat_alloc_context();
   if ( !formatContext_ )
   {
-    errorString = "avformat_alloc_context() failed.";
+    errorString = QObject::tr( "avformat_alloc_context() failed." );
     return false;
   }
 
   unsigned char * avioBuffer = ( unsigned char * )av_malloc( kBufferSize + FF_INPUT_BUFFER_PADDING_SIZE );
   if ( !avioBuffer )
   {
-    errorString = "av_malloc() failed.";
+    errorString = QObject::tr( "av_malloc() failed." );
     return false;
   }
 
@@ -145,7 +145,7 @@ bool DecoderContext::openCodec( QString & errorString )
   if ( !avioContext_ )
   {
     av_free( avioBuffer );
-    errorString = "avio_alloc_context() failed.";
+    errorString = QObject::tr( "avio_alloc_context() failed." );
     return false;
   }
 
@@ -162,14 +162,14 @@ bool DecoderContext::openCodec( QString & errorString )
   ret = avformat_open_input( &formatContext_, "_STREAM_", NULL, NULL );
   if ( ret < 0 )
   {
-    errorString = QString( "avformat_open_input() failed: %1." ).arg( avErrorString( ret ) );
+    errorString = QObject::tr( "avformat_open_input() failed: %1." ).arg( avErrorString( ret ) );
     return false;
   }
 
   ret = avformat_find_stream_info( formatContext_, NULL );
   if ( ret < 0 )
   {
-    errorString = QString( "avformat_find_stream_info() failed: %1." ).arg( avErrorString( ret ) );
+    errorString = QObject::tr( "avformat_find_stream_info() failed: %1." ).arg( avErrorString( ret ) );
     return false;
   }
 
@@ -184,7 +184,7 @@ bool DecoderContext::openCodec( QString & errorString )
   }
   if ( !audioStream_ )
   {
-    errorString = "Could not find audio stream.";
+    errorString = QObject::tr( "Could not find audio stream." );
     return false;
   }
 
@@ -192,14 +192,14 @@ bool DecoderContext::openCodec( QString & errorString )
   AVCodec * codec = avcodec_find_decoder( codecContext_->codec_id );
   if ( !codec )
   {
-    errorString = QString( "Codec [id: %d] not found." ).arg( codecContext_->codec_id );
+    errorString = QObject::tr( "Codec [id: %1] not found." ).arg( codecContext_->codec_id );
     return false;
   }
 
   ret = avcodec_open2( codecContext_, codec, NULL );
   if ( ret < 0 )
   {
-    errorString = QString( "avcodec_open2() failed: %1." ).arg( avErrorString( ret ) );
+    errorString = QObject::tr( "avcodec_open2() failed: %1." ).arg( avErrorString( ret ) );
     return false;
   }
 
@@ -260,7 +260,7 @@ bool DecoderContext::openOutputDevice( QString & errorString )
 
   if ( aoDriverId < 0 || !aoDrvInfo )
   {
-    errorString = "Cannot find usable audio output device.";
+    errorString = QObject::tr( "Cannot find usable audio output device." );
     return false;
   }
 
@@ -273,7 +273,7 @@ bool DecoderContext::openOutputDevice( QString & errorString )
 
   if ( aoSampleFormat.bits == 0 )
   {
-    errorString = "Unsupported sample format.";
+    errorString = QObject::tr( "Unsupported sample format." );
     return false;
   }
 
@@ -283,28 +283,28 @@ bool DecoderContext::openOutputDevice( QString & errorString )
   aoDevice_ = ao_open_live( aoDriverId, &aoSampleFormat, NULL );
   if ( !aoDevice_ )
   {
-    errorString = "ao_open_live() failed: ";
+    errorString = QObject::tr( "ao_open_live() failed: " );
 
     switch ( errno )
     {
       case AO_ENODRIVER:
-        errorString += "No driver corresponds to driver_id.";
+        errorString += QObject::tr( "No driver." );
         break;
       case AO_ENOTLIVE:
-        errorString += "This driver is not a live output device.";
+        errorString += QObject::tr( "This driver is not a live output device." );
         break;
       case AO_EBADOPTION:
-        errorString += "A valid option key has an invalid value.";
+        errorString += QObject::tr( "A valid option key has an invalid value." );
         break;
       case AO_EOPENDEVICE:
-        errorString += QString( "Cannot open the device: %1, channels: %2, rate: %3, btis: %4." )
+        errorString += QObject::tr( "Cannot open the device: %1, channels: %2, rate: %3, bits: %4." )
                        .arg( aoDrvInfo->short_name )
                        .arg( aoSampleFormat.channels )
                        .arg( aoSampleFormat.rate )
                        .arg( aoSampleFormat.bits );
         break;
       default:
-        errorString += "Unknown error.";
+        errorString += QObject::tr( "Unknown error." );
         break;
     }
 
@@ -329,7 +329,7 @@ bool DecoderContext::play( QString & errorString )
   AVFrame * frame = avcodec_alloc_frame();
   if ( !frame )
   {
-    errorString = "avcodec_alloc_frame() failed.";
+    errorString = QObject::tr( "avcodec_alloc_frame() failed." );
     return false;
   }
 
