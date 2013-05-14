@@ -1,6 +1,7 @@
 #include "ffmpegaudio.hh"
 
 #include <math.h>
+#include <errno.h>
 
 #ifndef INT64_C
 #define INT64_C(c) (c ## LL)
@@ -255,7 +256,9 @@ bool DecoderContext::openOutputDevice( QString & errorString )
 {
   // Prepare for audio output
   int aoDriverId = ao_default_driver_id();
-  if ( aoDriverId == -1 )
+  ao_info * aoDrvInfo = ao_driver_info( aoDriverId );
+
+  if ( aoDriverId < 0 || !aoDrvInfo )
   {
     errorString = "Cannot find usable audio output device.";
     return false;
@@ -274,19 +277,38 @@ bool DecoderContext::openOutputDevice( QString & errorString )
     return false;
   }
 
+  av_log( NULL, AV_LOG_INFO, "ao_open_live(): %s: channels: %d, rate: %d, bits: %d\n",
+          aoDrvInfo->name, aoSampleFormat.channels, aoSampleFormat.rate, aoSampleFormat.bits );
+
   aoDevice_ = ao_open_live( aoDriverId, &aoSampleFormat, NULL );
   if ( !aoDevice_ )
   {
-    errorString = "ao_open_live() failed.";
+    errorString = "ao_open_live() failed: ";
+
+    switch ( errno )
+    {
+      case AO_ENODRIVER:
+        errorString += "No driver corresponds to driver_id.";
+        break;
+      case AO_ENOTLIVE:
+        errorString += "This driver is not a live output device.";
+        break;
+      case AO_EBADOPTION:
+        errorString += "A valid option key has an invalid value.";
+        break;
+      case AO_EOPENDEVICE:
+        errorString += QString( "Cannot open the device: %1, channels: %2, rate: %3, btis: %4." )
+                       .arg( aoDrvInfo->short_name )
+                       .arg( aoSampleFormat.channels )
+                       .arg( aoSampleFormat.rate )
+                       .arg( aoSampleFormat.bits );
+        break;
+      default:
+        errorString += "Unknown error.";
+        break;
+    }
+
     return false;
-  }
-
-  ao_info * aoDriverInfo = ao_driver_info( aoDriverId );
-  if ( aoDriverInfo )
-  {
-
-    av_log( NULL, AV_LOG_INFO, "ao_open_live(): %s: channels: %d, rate: %d, bits: %d\n", aoDriverInfo->name,
-            aoSampleFormat.channels, aoSampleFormat.rate, aoSampleFormat.bits );
   }
 
   return true;
