@@ -272,6 +272,10 @@
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Copy as text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
@@ -2690,6 +2694,74 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Article decoding error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avformat_alloc_context() failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>av_malloc() failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avio_alloc_context() failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avformat_open_input() failed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avformat_find_stream_info() failed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find audio stream.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Codec [id: %1] not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avcodec_open2() failed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot find usable audio output device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported sample format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ao_open_live() failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No driver.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This driver is not a live output device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A valid option key has an invalid value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avcodec_alloc_frame() failed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
