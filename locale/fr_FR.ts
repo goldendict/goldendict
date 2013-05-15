@@ -3139,7 +3139,18 @@ Le greffon approprié doit être installé pour que cette option fonctionne.</tr
         <translation>Activer les greffons web</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1018"/>
+        <location filename="../preferences.ui" line="1002"/>
+        <source>Some sites detect GoldenDict via HTTP headers and block the requests.
+Enable this option to workaround the problem.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1006"/>
+        <source>Do not identify GoldenDict in HTTP headers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1029"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -3151,22 +3162,22 @@ en sera informé, et invité à se rendre sur la page de
 téléchargement.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1025"/>
+        <location filename="../preferences.ui" line="1036"/>
         <source>Check for new program releases periodically</source>
         <translation>Vérifier régulièrement les mises à jour</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1046"/>
+        <location filename="../preferences.ui" line="1057"/>
         <source>Ad&amp;vanced</source>
         <translation>A&amp;vancé</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1052"/>
+        <location filename="../preferences.ui" line="1063"/>
         <source>ScanPopup extra technologies</source>
         <translation>Fenêtre de scan</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1058"/>
+        <location filename="../preferences.ui" line="1069"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3177,12 +3188,12 @@ Cette fonction marche uniquement avec certains programmes la supportant
 Il n&apos;est pas nécessaire d&apos;activer cette option si vous n&apos;utilisez pas de tels programmes.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1064"/>
+        <location filename="../preferences.ui" line="1075"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>Utiliser &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1071"/>
+        <location filename="../preferences.ui" line="1082"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3190,12 +3201,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Cette fonction marche uniquement avec les programmes qui la supportent.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1076"/>
+        <location filename="../preferences.ui" line="1087"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Utiliser l&apos;a&amp;utomatisation de l&apos;interface</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1083"/>
+        <location filename="../preferences.ui" line="1094"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3204,62 +3215,62 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1088"/>
+        <location filename="../preferences.ui" line="1099"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Utiliser les messages de &amp;GoldenDict</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1098"/>
+        <location filename="../preferences.ui" line="1109"/>
         <source>History</source>
         <translation>Historique</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1104"/>
+        <location filename="../preferences.ui" line="1115"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Conserver l&apos;historique des mots traduits</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1107"/>
+        <location filename="../preferences.ui" line="1118"/>
         <source>Store &amp;history</source>
         <translation>Conserver l&apos;&amp;historique</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1122"/>
+        <location filename="../preferences.ui" line="1133"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Nombre maximal d&apos;entrées à conserver dans l&apos;historique.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1125"/>
+        <location filename="../preferences.ui" line="1136"/>
         <source>Maximum history size:</source>
         <translation>Taille maximale de l&apos;historique :</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1162"/>
+        <location filename="../preferences.ui" line="1173"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Intervalle de sauvegarde de l&apos;historique. Si cette valeur vaut 0, l&apos;historique sera sauvegardé uniquement lors de la sortie du programme.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1168"/>
+        <location filename="../preferences.ui" line="1179"/>
         <source>Save every</source>
         <translation>Sauver toutes les</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1185"/>
+        <location filename="../preferences.ui" line="1196"/>
         <source>minutes</source>
         <translation>minutes</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1210"/>
+        <location filename="../preferences.ui" line="1221"/>
         <source>Articles</source>
         <translation>Articles</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1216"/>
+        <location filename="../preferences.ui" line="1227"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Toujours afficher les parties optionnelles des articles</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1219"/>
+        <location filename="../preferences.ui" line="1230"/>
         <source>Expand optional &amp;parts</source>
         <translation>Afficher les &amp;parties optionnelles</translation>
     </message>
@@ -3303,12 +3314,12 @@ Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
         <translation type="obsolete">Jouer via DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="347"/>
+        <location filename="../preferences.cc" line="349"/>
         <source>Changing Language</source>
         <translation>Changement de langue</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="348"/>
+        <location filename="../preferences.cc" line="350"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Redémarrez le programme pour appliquer le changement de langue.</translation>
     </message>

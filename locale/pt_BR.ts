@@ -2997,17 +2997,17 @@ você precisa pôr o arquivo bass.dll (http://www.un4seen.com) na pasta do Golde
         <translation type="obsolete">Reproduzir via Biblioteca de Bass</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1046"/>
+        <location filename="../preferences.ui" line="1057"/>
         <source>Ad&amp;vanced</source>
         <translation>A&amp;vançada</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1052"/>
+        <location filename="../preferences.ui" line="1063"/>
         <source>ScanPopup extra technologies</source>
         <translation>Tecnologias exibição de definições/tradução semiautomáticas extras</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1058"/>
+        <location filename="../preferences.ui" line="1069"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3018,12 +3018,12 @@ palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a 
 Não é necessário habilitar esta opção se você não usa programas desse tipo.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1064"/>
+        <location filename="../preferences.ui" line="1075"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>Usar &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1071"/>
+        <location filename="../preferences.ui" line="1082"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3032,12 +3032,12 @@ palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a 
 Não é necessário habilitar esta opção se você não usa esses tipos de programa.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1076"/>
+        <location filename="../preferences.ui" line="1087"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Usar &amp;UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1083"/>
+        <location filename="../preferences.ui" line="1094"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3046,62 +3046,62 @@ palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a 
 Não é necessário habilitar esta opção se você não usa esses tipos de programas.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1088"/>
+        <location filename="../preferences.ui" line="1099"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Usar o comando especial de consulta do &amp;GoldenDict</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1098"/>
+        <location filename="../preferences.ui" line="1109"/>
         <source>History</source>
         <translation>Histórico</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1104"/>
+        <location filename="../preferences.ui" line="1115"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Habilite esta opção se quiser gravar o histórico das palavras traduzidas/pesquisadas.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1107"/>
+        <location filename="../preferences.ui" line="1118"/>
         <source>Store &amp;history</source>
         <translation>Gravar o &amp;histórico</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1122"/>
+        <location filename="../preferences.ui" line="1133"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation type="unfinished">Permite especificar o número máximo de verbetes consultados que deseja exibir no histórico.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1125"/>
+        <location filename="../preferences.ui" line="1136"/>
         <source>Maximum history size:</source>
         <translation type="unfinished">Máximo de verbetes:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1162"/>
+        <location filename="../preferences.ui" line="1173"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation type="unfinished">Intervalo de salvamento do histórico. Se você especificar 0 (zero), o histórico só será salvo ao se fechar o GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1168"/>
+        <location filename="../preferences.ui" line="1179"/>
         <source>Save every</source>
         <translation type="unfinished">A cada</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1185"/>
+        <location filename="../preferences.ui" line="1196"/>
         <source>minutes</source>
         <translation>minutos</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1210"/>
+        <location filename="../preferences.ui" line="1221"/>
         <source>Articles</source>
         <translation>Artigos</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1216"/>
+        <location filename="../preferences.ui" line="1227"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Habilite esta opção se quise expandir sempre partes opcionais de artigos.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1219"/>
+        <location filename="../preferences.ui" line="1230"/>
         <source>Expand optional &amp;parts</source>
         <translation>E&amp;xpandir partes opcionais</translation>
     </message>
@@ -3245,7 +3245,18 @@ O plugin precisa estar instalado em seu sistema para isto funcionar.</translatio
         <translation>Habilitar plugins da web</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1018"/>
+        <location filename="../preferences.ui" line="1002"/>
+        <source>Some sites detect GoldenDict via HTTP headers and block the requests.
+Enable this option to workaround the problem.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1006"/>
+        <source>Do not identify GoldenDict in HTTP headers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1029"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -3256,7 +3267,7 @@ no servidor do GoldenDict. Se houver atualizações, ele informa ao usuário
 e pergunta se ele deseja visitar a página de download.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1025"/>
+        <location filename="../preferences.ui" line="1036"/>
         <source>Check for new program releases periodically</source>
         <translation>Procurar atualizações do programa periodicamente</translation>
     </message>
@@ -3300,12 +3311,12 @@ e pergunta se ele deseja visitar a página de download.</translation>
         <translation type="obsolete">Reproduzir via DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="347"/>
+        <location filename="../preferences.cc" line="349"/>
         <source>Changing Language</source>
         <translation>Modificando Idioma</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="348"/>
+        <location filename="../preferences.cc" line="350"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Reinicie o programa para aplicar a mudança de idioma.</translation>
     </message>

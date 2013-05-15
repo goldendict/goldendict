@@ -2673,6 +2673,15 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
         <source>Use internal player</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Some sites detect GoldenDict via HTTP headers and block the requests.
+Enable this option to workaround the problem.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not identify GoldenDict in HTTP headers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
