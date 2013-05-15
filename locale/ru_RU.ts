@@ -2919,12 +2919,13 @@ seconds, which is specified here.</source>
         <location filename="../preferences.ui" line="1002"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Некоторые сайты опознают GoldenDict по заголовкам HTTP и блокируют запросы.
+Включите эту опцию, чтобы обойти проблему.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1006"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Не указывать GoldenDict в заголовках HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1057"/>
