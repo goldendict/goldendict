@@ -28,7 +28,8 @@ class ArticleView: public QFrame
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,
-          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction;
+          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction,
+          copyAsTextAction;
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
@@ -262,6 +263,9 @@ private slots:
 
   /// Handles audio player error message
   void audioPlayerError( QString const & message );
+
+  /// Copy current selection as plain text
+  void copyAsText();
 
 private:
 

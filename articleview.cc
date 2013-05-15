@@ -57,6 +57,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   goForwardAction( this ),
   openSearchAction( this ),
   selectCurrentArticleAction( this ),
+  copyAsTextAction( this ),
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ )
@@ -132,6 +133,12 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &selectCurrentArticleAction );
   connect( &selectCurrentArticleAction, SIGNAL( triggered() ),
            this, SLOT( selectCurrentArticle() ) );
+
+  copyAsTextAction.setShortcut( QKeySequence( "Ctrl+Shift+C" ) );
+  copyAsTextAction.setText( tr( "Copy as text" ) );
+  ui.definition->addAction( &copyAsTextAction );
+  connect( &copyAsTextAction, SIGNAL( triggered() ),
+           this, SLOT( copyAsText() ) );
 
   ui.definition->installEventFilter( this );
   ui.searchFrame->installEventFilter( this );
@@ -1395,6 +1402,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   if ( selectedText.size() )
   {
     menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
+    menu.addAction( &copyAsTextAction );
   }
   else
   {
@@ -1885,6 +1893,13 @@ void ArticleView::switchExpandOptionalParts()
 
   emit setExpandMode( expandOptionalParts );
   reload();
+}
+
+void ArticleView::copyAsText()
+{
+  QString text = ui.definition->selectedText();
+  if( !text.isEmpty() )
+    QApplication::clipboard()->setText( text );
 }
 
 #ifdef Q_OS_WIN32
