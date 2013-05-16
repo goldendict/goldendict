@@ -344,7 +344,7 @@
     <message>
         <location filename="../articleview.cc" line="138"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Нусха бардоштан ҳамчун матн</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1164"/>
@@ -3138,12 +3138,13 @@ Plugin must be installed for this option to work.</source>
         <location filename="../preferences.ui" line="1002"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Баъзе вебсайтҳо барномаи GoldenDict-ро тавассути сарварақҳои HTTP муайян мекунанд ва дархостҳои барномаро манъ мекунанд.
+Барои ҳал кардани ин мушкилӣ, ин имконотро фаъол кунед.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1006"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Пешгирии муайянкунии барномаи GoldenDict-ро дар сарварақҳои HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1029"/>
@@ -3410,87 +3411,87 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../ffmpegaudio.cc" line="132"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_alloc_context() қатъ шудааст.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="139"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() қатъ шудааст.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="148"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() қатъ шудааст.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="165"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() қатъ шудааст: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="172"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() қатъ шудааст: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="187"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷараёни аудиоӣ ёфт нашуд.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодеки [id: %1] ёфт нашуд.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="202"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_open2() қатъ шудааст: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="263"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дастгоҳи аудиоии истифодашаванда ёфт нашуд.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="276"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Формати намунаи дастгиринашаванда.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="286"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() қатъ шудааст: </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="291"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Драйвер надорад.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ин драйвер дастгоҳи барориши мустақим намебошад.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="297"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Калиди имконоти боэътибор дорои қимати нодуруст мебошад.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="300"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ин дастгоҳ кушода намешавад: %1, каналҳо: %2, суръат: %3, битҳо: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="307"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Хатои номаълум.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="332"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_frame() қатъ шудааст.</translation>
     </message>
 </context>
 <context>
