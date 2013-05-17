@@ -1710,6 +1710,7 @@ void MainWindow::editCurrentGroup()
 void MainWindow::editPreferences()
 {
   hotkeyWrapper.reset(); // So we could use the keys it hooks
+  scanPopup.reset(); // No scan popup either. No one should use dictionaries.
 
   Preferences preferences( this, cfg.preferences );
 
@@ -1785,6 +1786,7 @@ void MainWindow::editPreferences()
     Config::save( cfg );
   }
 
+  makeScanPopup();
   installHotKeys();
 }
 
