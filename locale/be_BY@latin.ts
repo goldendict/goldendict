@@ -170,7 +170,7 @@
     <message>
         <location filename="../articleview.cc" line="138"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapijavać jak tekst</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="656"/>
@@ -304,28 +304,12 @@
     <message>
         <location filename="../articleview.cc" line="1625"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Prajhravańnie farmataŭ roznych ad WAV</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">Kab ułučyć prajhravańnie fajłaŭ roznych ad WAV, pierajdzi da Źmienaŭ|Naładaŭ, abiary ŭkładku Aŭdyjo i ŭłučy „Prajhravać cieraz DirectShow“.</translation>
+        <translation>PAPIAREDŽAŃNIE: Prajhravalnik FFMpeg: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1618"/>
         <source>WARNING: %1</source>
         <translation>UVAHA: %1</translation>
-    </message>
-    <message>
-        <source>Bass library not found.</source>
-        <translation type="obsolete">GoldenDict nie znajšoŭ biblijateki Bass.</translation>
-    </message>
-    <message>
-        <source>Bass library can&apos;t play this sound.</source>
-        <translation type="obsolete">Biblijateka Bass nie patrapiła prajhrać hetaha zapisu.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1566"/>
@@ -1899,7 +1883,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Abmyła ŭ fajle kanfiguracyi. Praciahnuć z standartnymi naładami?</translation>
     </message>
 </context>
 <context>
@@ -2098,7 +2082,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3112"/>
+        <location filename="../mainwindow.cc" line="3114"/>
         <source>&amp;Show</source>
         <translation>&amp;Pakazać</translation>
     </message>
@@ -2286,139 +2270,139 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2474"/>
+        <location filename="../mainwindow.cc" line="2476"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Pamyłka inicyjalizacyi sačeńnia za klavišnymi skarotami.&lt;br&gt;Pierakanajsia, što XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2608"/>
+        <location filename="../mainwindow.cc" line="2610"/>
         <source>New Release Available</source>
         <translation>Dastuny novy vypusk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2609"/>
+        <location filename="../mainwindow.cc" line="2611"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict versii &lt;b&gt;%1&lt;/b&gt; dastupny dla zładavańnia.&lt;br&gt;Pstrykni pa &lt;b&gt;Zładavać&lt;/b&gt;, kab pierajści na bačynu zładavańnia.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2614"/>
+        <location filename="../mainwindow.cc" line="2616"/>
         <source>Download</source>
         <translation>Zładavać</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2615"/>
+        <location filename="../mainwindow.cc" line="2617"/>
         <source>Skip This Release</source>
         <translation>Praminuć hety vypusk</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="733"/>
-        <location filename="../mainwindow.cc" line="2668"/>
+        <location filename="../mainwindow.cc" line="2670"/>
         <source>Accessibility API is not enabled</source>
         <translation>Accessibility API nia ŭłučany</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2745"/>
+        <location filename="../mainwindow.cc" line="2747"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Palica meniu jość schavanaja. Skarystaj %1, kab pavaracić nazad.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2746"/>
+        <location filename="../mainwindow.cc" line="2748"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2844"/>
+        <location filename="../mainwindow.cc" line="2846"/>
         <source>Page Setup</source>
         <translation>Nałady bačyny</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2845"/>
+        <location filename="../mainwindow.cc" line="2847"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Niama dasiažnych drukarak. Spačatku ŭstaluj choć adnu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2863"/>
+        <location filename="../mainwindow.cc" line="2865"/>
         <source>Print Article</source>
         <translation>Nadrukavać artykuł</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2897"/>
+        <location filename="../mainwindow.cc" line="2899"/>
         <source>Save Article As</source>
         <translation>Zachavać artykuł jak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2899"/>
+        <location filename="../mainwindow.cc" line="2901"/>
         <source>Html files (*.html *.htm)</source>
         <translation>Fajły HTML(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2908"/>
+        <location filename="../mainwindow.cc" line="2910"/>
         <source>Error</source>
         <translation>Abmyła</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2909"/>
+        <location filename="../mainwindow.cc" line="2911"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Niemažliva zachavać artykuł: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2948"/>
+        <location filename="../mainwindow.cc" line="2950"/>
         <source>The main window is set to be always on top.</source>
         <translation>Hałoŭnaje akno ciapier zaŭsiody znachodzicca vyšej inšych.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3108"/>
+        <location filename="../mainwindow.cc" line="3110"/>
         <source>&amp;Hide</source>
         <translation>S&amp;chavać</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3134"/>
+        <location filename="../mainwindow.cc" line="3136"/>
         <source>Export history to file</source>
         <translation>Ekspartavańnie historyi ŭ fajł</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3136"/>
-        <location filename="../mainwindow.cc" line="3198"/>
+        <location filename="../mainwindow.cc" line="3138"/>
+        <location filename="../mainwindow.cc" line="3200"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Tekstavyja fajły (*.txt);;Usie fajły (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3175"/>
+        <location filename="../mainwindow.cc" line="3177"/>
         <source>History export complete</source>
         <translation>Ekspartavańnie historyi skončyłasia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3178"/>
+        <location filename="../mainwindow.cc" line="3180"/>
         <source>Export error: </source>
         <translation>Pamyłka ekspartu: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3196"/>
+        <location filename="../mainwindow.cc" line="3198"/>
         <source>Import history from file</source>
         <translation>Impartavańnie historyi z fajła</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3245"/>
+        <location filename="../mainwindow.cc" line="3247"/>
         <source>Import error: invalid data in file</source>
         <translation>Pamyłka impartavańnia: chibnyja źviestki ŭ fajle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3249"/>
+        <location filename="../mainwindow.cc" line="3251"/>
         <source>History import complete</source>
         <translation>Impartavańnie historyi skončyłasia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3252"/>
+        <location filename="../mainwindow.cc" line="3254"/>
         <source>Import error: </source>
         <translation>Pamyłka impartavańnia: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3360"/>
+        <location filename="../mainwindow.cc" line="3362"/>
         <source>Dictionary info</source>
         <translation>Infarmacyja pra słoŭnik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3361"/>
+        <location filename="../mainwindow.cc" line="3363"/>
         <source>Edit dictionary</source>
         <translation>Redagavać słoŭnik</translation>
     </message>
@@ -2951,42 +2935,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="803"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Prajhravać huki praz FFmpeg(libav) i libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="806"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation type="obsolete">Skarystać rodny API Windows dla prajhravańnia. Uznaŭlajucca
-adno tolki WAV-fajły, ale zaŭsiody vielmi dobra.</translation>
-    </message>
-    <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">Prajhravać praz rodny API Windows</translation>
-    </message>
-    <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">Prajhravać praź biblijateku Phonon. Mažliva niestabilnaja praca,
-ale padtrymlivajucca bolšaść aŭdyjo farmataŭ.</translation>
-    </message>
-    <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">Prajhravać praz Phonon</translation>
-    </message>
-    <message>
-        <source>Play audio via Bass library. Optimal choice. To use this mode
-you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="obsolete">Prajhravać aŭdyjo praź biblijateku Bass. Najlepšy vybar. Kab užyć hety režym,
-treba raźmiaścić bass.dll (http://www.un4seen.com) u katalozie GoldenDict.</translation>
-    </message>
-    <message>
-        <source>Play via Bass library</source>
-        <translation type="obsolete">Prajhravać praz Bass</translation>
+        <translation>Karystać ubudavany prajhravalnik</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="815"/>
@@ -3072,12 +3026,13 @@ Ubudovy musiać być ustalavanymi.</translation>
         <location filename="../preferences.ui" line="1002"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niekatoryja sajty paznajuć GoldenDict praz HTTP-zahałoŭki
+i blakujuć zapyty. Ułučy opcyju, kab abminuć prablemu.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1006"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie paznačać GoldenDict u HTTP-zapytach</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1029"/>
@@ -3241,10 +3196,6 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
         <translation>Lingoes-Blue</translation>
     </message>
     <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">Prajhravać praz DirectShow</translation>
-    </message>
-    <message>
         <location filename="../preferences.cc" line="349"/>
         <source>Changing Language</source>
         <translation>Źmiena movy</translation>
@@ -3335,97 +3286,97 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
         <location filename="../aard.cc" line="393"/>
         <location filename="../mdx.cc" line="781"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka ładavańnia artykuła</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="475"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka raskadavańnia artykuła</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="132"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka avformat_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="139"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka av_malloc().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="148"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka avio_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="165"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka avformat_open_input(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="172"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="187"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie atrymałsia znajści aŭdyjopłyń.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict nie znajšoŭ kodek [id: %1].</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="202"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka avcodec_open2(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="263"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie atrymałasia znajści pryładu vyvadu huku.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="276"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niepadtrymlivany hukavy farmat.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="286"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka ao_open_live(): </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="291"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niama drajveru.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hety drajver nia jość prałada vyvadu.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="297"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sapraŭdny kluč parametraŭ maje niesapraŭdnaje značeńnie.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="300"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niemažliva adčynić: pryłada: %1, kanałaŭ: %2, čaścinia dyskretyzacyi: %3, bitpłyń: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="307"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niaviedamaja pamyłka.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="332"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamyłka avcodec_alloc_frame().</translation>
     </message>
 </context>
 <context>
