@@ -685,7 +685,7 @@ void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
     return;
   }
 
-  for( ; ; )
+  while( !stream.atEnd() )
   {
     stream.readNext();
   
