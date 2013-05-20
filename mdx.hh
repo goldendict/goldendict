@@ -1,4 +1,4 @@
-/* This file is (c) 2013 Timon Wong <timon86.wang.gmail.com>
+/* This file is (c) 2013 Timon Wong <timon86.wang AT gmail DOT com>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __MDX_HH_INCLUDED__

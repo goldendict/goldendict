@@ -92,27 +92,29 @@ size_t MdictParser::RecordIndex::bsearch( const vector<MdictParser::RecordIndex>
   return ( size_t ) ( -1 );
 }
 
-MdictParser::MdictParser( const char * filename ): filename_( QString::fromUtf8( filename ) )
+MdictParser::MdictParser() :
+  version_( 0 ),
+  numHeadWordBlocks_( 0 ),
+  headWordBlockInfoSize_( 0 ),
+  headWordBlockSize_( 0 ),
+  headWordBlockInfoPos_( 0 ),
+  headWordPos_( 0 ),
+  totalRecordsSize_( 0 ),
+  recordPos_( 0 ),
+  wordCount_( 0 ),
+  numberTypeSize_( 0 ),
+  rtl_( false ),
+  bruteForce_( false ),
+  bruteForceEnd_( true )
 {
-  version_ = 0;
-  numHeadWordBlocks_ = 0;
-  headWordBlockInfoSize_ = 0;
-  headWordBlockSize_ = 0;
-  headWordBlockInfoPos_ = 0;
-  headWordPos_ = 0;
-  totalRecordsSize_ = 0;
-  recordPos_ = 0;
-
-  wordCount_ = 0;
-  numberTypeSize_ = 0;
-  rtl_ = false;
-  bruteForce_ = false;
-  bruteForceEnd_ = true;
 }
 
-bool MdictParser::open()
+bool MdictParser::open( const char * filename )
 {
+  filename_ = QString::fromUtf8( filename );
   file_ = new QFile( filename_ );
+
+  qDebug() << "MdictParser: open " << filename_;
 
   if ( file_.isNull() || !file_->exists() )
     return false;

@@ -151,11 +151,10 @@ public:
     return rtl_;
   }
 
-  MdictParser( char const * filename );
+  MdictParser();
   ~MdictParser() {}
 
-  bool open();
-  void close();
+  bool open( const char * filename );
   bool readNextHeadWordIndex( HeadWordIndex & headWordIndex );
   bool readRecordBlock( HeadWordIndex & headWordIndex, RecordHandler & recordHandler );
 
