@@ -21,7 +21,9 @@ void createMapping()
 {
   if( mapping == NULL )
   {
-    TISInputSourceRef inputSourceRef = TISCopyCurrentKeyboardInputSource();
+    TISInputSourceRef inputSourceRef = TISCopyInputSourceForLanguage( CFSTR( "en" ) );
+    if ( !inputSourceRef )
+      inputSourceRef = TISCopyCurrentKeyboardInputSource();
     if ( !inputSourceRef )
       return;
 
