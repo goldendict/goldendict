@@ -544,7 +544,7 @@ void MdxArticleRequest::run()
     }
     catch ( exCorruptDictionary & )
     {
-      errorMessage = "Dictionary file was tampered or corrupted";
+      errorMessage = tr( "Dictionary file was tampered or corrupted" );
       hasError = true;
     }
     catch ( std::exception & e )
