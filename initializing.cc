@@ -31,6 +31,7 @@ void Initializing::indexing( QString const & dictionaryName )
   ui.dictionary->setText( dictionaryName );
   ui.dictionary->show();
   ui.progressBar->show();
+  adjustSize();
   show();
 }
 

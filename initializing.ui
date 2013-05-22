@@ -12,6 +12,12 @@
     <height>84</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>326</width>
+    <height>0</height>
+   </size>
+  </property>
   <property name="windowTitle" >
    <string>GoldenDict - Initializing</string>
   </property>
@@ -43,6 +49,9 @@
      <property name="alignment" >
       <set>Qt::AlignCenter</set>
      </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>
@@ -52,6 +61,9 @@
      </property>
      <property name="value" >
       <number>-1</number>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
