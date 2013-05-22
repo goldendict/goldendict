@@ -841,18 +841,18 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Initializing</name>
     <message>
-        <location filename="../initializing.ui" line="16"/>
+        <location filename="../initializing.ui" line="22"/>
         <source>GoldenDict - Initializing</source>
         <translation>Ініцыялізацыя</translation>
     </message>
     <message>
-        <location filename="../initializing.ui" line="22"/>
+        <location filename="../initializing.ui" line="28"/>
         <location filename="../initializing.cc" line="30"/>
         <source>Please wait while indexing dictionary</source>
         <translation>Чакай! Ідзе індэксаваньне слоўнікаў</translation>
     </message>
     <message>
-        <location filename="../initializing.ui" line="38"/>
+        <location filename="../initializing.ui" line="44"/>
         <source>Dictionary Name</source>
         <translation>Назва слоўніка</translation>
     </message>
@@ -2408,6 +2408,19 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>Mdx::MdxArticleRequest</name>
+    <message>
+        <location filename="../mdx.cc" line="547"/>
+        <source>Dictionary file was tampered or corrupted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mdx.cc" line="558"/>
+        <source>Failed loading article from %1, reason: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
         <location filename="../mediawiki.cc" line="304"/>
@@ -3284,7 +3297,6 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <name>QObject</name>
     <message>
         <location filename="../aard.cc" line="393"/>
-        <location filename="../mdx.cc" line="781"/>
         <source>Article loading error</source>
         <translation>Памылка ладаваньня артыкула</translation>
     </message>

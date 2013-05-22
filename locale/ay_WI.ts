@@ -2765,6 +2765,17 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>Mdx::MdxArticleRequest</name>
+    <message>
+        <source>Dictionary file was tampered or corrupted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed loading article from %1, reason: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
