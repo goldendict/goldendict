@@ -460,7 +460,7 @@ void AardDictionary::loadArticle( quint32 address,
               encodedLink.push_back( *i );
               prev = false;
             }
-            encodedLink = string( QUrl::toPercentEncoding( QString::fromUtf8( encodedLink.c_str() ) ).data() );
+            encodedLink = string( QUrl( QString::fromUtf8( encodedLink.data(), encodedLink.size() ) ).toEncoded().data() );
             articleText = "<a href=\"" + encodedLink + "\">" + link + "</a>";
           }
         }
