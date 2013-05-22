@@ -263,6 +263,9 @@ private:
   /// Process resource links (images, audios, etc)
   QString & filterResource( QString const & articleId, QString & article );
 
+  /// Make css content usable only for articles from this dictionary
+  void isolateCSS( QString & css );
+
   friend class MdxHeadwordsRequest;
   friend class MdxArticleRequest;
   friend class MddResourceRequest;
@@ -737,10 +740,136 @@ void MddResourceRequest::run()
       hasAnyData = true;
     }
 
+    QString name = gd::toQString( resourceName );
+    if( name.endsWith( ".css" ) )
+    {
+      QString css = QString::fromUtf8( data.data(), data.size() );
+      dict.isolateCSS( css );
+      QByteArray bytes = css.toUtf8();
+      data.resize( bytes.size() );
+      memcpy( &data.front(), bytes.constData(), bytes.size() );
+    }
+
     break;
   }
 
   finish();
+}
+
+void MdxDictionary::isolateCSS( QString & css )
+{
+  if( css.isEmpty() )
+    return;
+
+  int currentPos = 0;
+  QString newCSS;
+  QString prefix( "span#gdfrom-" );
+  prefix += QString::fromLatin1( getId().c_str() );
+
+  // Strip comments
+  css.replace( QRegExp( "\\/\\*[^*]*\\*+([^/][^*]*\\*+)*\\/" ), QString() );
+
+  for( ; ; )
+  {
+    if( currentPos >= css.length() )
+      break;
+    QChar ch = css[ currentPos ];
+
+    if( ch == '@' )
+    {
+      // @ rules
+
+      int n = currentPos;
+      if( css.mid( currentPos, 7 ).compare( "@import", Qt::CaseInsensitive ) == 0 )
+      {
+        // Copy rule as is.
+        n = css.indexOf( ';', currentPos );
+        int n2 = css.indexOf( '{', currentPos );
+        if( n2 > 0 && n > n2 )
+          n = n2 - 1;
+      }
+      else
+      if( css.mid( currentPos, 6 ).compare( "@media", Qt::CaseInsensitive ) == 0 )
+      {
+        // We must to parse it content to isolate it.
+        // Copy all up to '{' and continue parse inside.
+        n = css.indexOf( '{', currentPos );
+      }
+      else
+      if( css.mid( currentPos, 5 ).compare( "@page", Qt::CaseInsensitive ) == 0 )
+      {
+        // Don't copy rule. GD use own page layout.
+        n = css.indexOf( '}', currentPos );
+        if( n < 0 )
+          break;
+        currentPos = n + 1;
+        continue;
+      }
+      else
+      {
+        // Copy rule as is.
+        n = css.indexOf( '}', currentPos );
+      }
+
+      newCSS.append( css.mid( currentPos, n < 0 ? n : n - currentPos + 1 ) );
+
+      if( n < 0 )
+        break;
+
+      currentPos = n + 1;
+      continue;
+    }
+
+    if( ch == '{' )
+    {
+      // Selector declaration block.
+      // We copy it up to '}' as is.
+
+      int n = css.indexOf( '}', currentPos );
+      newCSS.append( css.mid( currentPos, n == -1 ? n : n - currentPos + 1 ) );
+      if( n < 0 )
+        break;
+      currentPos = n + 1;
+      continue;
+    }
+
+    if( ch.isLetter() || ch == '.' || ch == '#' || ch == '*' || ch == '\\' )
+    {
+      // This is some selector.
+      // We must to add the isolate prefix to it.
+
+      int n = css.indexOf( QRegExp( "[ \\*\\>\\+,;:\\[\\{\\]]" ), currentPos + 1 );
+      QString s = css.mid( currentPos, n < 0 ? n : n - currentPos );
+      if( n < 0 )
+      {
+        newCSS.append( s );
+        break;
+      }
+      QString trimmed = s.trimmed();
+      if( trimmed.compare( "body", Qt::CaseInsensitive ) == 0
+          || trimmed.compare( "html", Qt::CaseInsensitive ) == 0 )
+      {
+        newCSS.append( s + " " + prefix + " " );
+        currentPos += 4;
+      }
+      else
+      {
+        newCSS.append( prefix + " " );
+      }
+
+      n = css.indexOf( QRegExp( "[,;\\{]" ), currentPos );
+      s = css.mid( currentPos, n < 0 ? n : n - currentPos );
+      newCSS.append( s );
+      if( n < 0 )
+        break;
+      currentPos = n;
+      continue;
+    }
+
+    newCSS.append( ch );
+    ++currentPos;
+  }
+  css = newCSS;
 }
 
 sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) throw( std::exception )
