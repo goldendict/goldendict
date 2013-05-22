@@ -117,8 +117,6 @@ int main( int argc, char ** argv )
 
   #ifndef Q_OS_MAC
     app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
-  #else
-    app.setWindowIcon( QIcon( ":/icons/macicon.png" ) );
   #endif
 
   // Load translations for system locale
