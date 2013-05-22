@@ -10,19 +10,6 @@ namespace gd
     return QString::fromUcs4( in.c_str() );
   }
 
-  wstring toWString( QString const & in )
-  {
-    QVector< unsigned int > v = in.toUcs4();
-
-    // Fix for CJK Extension B characters
-    int n = v.size();
-    while( n > 0 && v[ n - 1 ] == 0 ) n--;
-    if( n != v.size() )
-        v.resize( n );
-
-    return wstring( v.constData(), v.size() );
-  }
-
   #else
 
   QString toQString( wstring const & in )
@@ -30,9 +17,21 @@ namespace gd
     return QString::fromStdWString( in );
   }
 
+  #endif
+
   wstring toWString( QString const & in )
   {
-    return in.toStdWString();
+    QVector< unsigned int > v = in.toUcs4();
+
+    // Fix for QString instance which contains non-BMP characters
+    // Qt will wrongly created unexpected null characters at the end which may crash goldendict
+    //
+    // Related: https://bugreports.qt-project.org/browse/QTBUG-25536
+    int n = v.size();
+    while ( n > 0 && v[ n - 1 ] == 0 ) n--;
+    if ( n != v.size() )
+      v.resize( n );
+
+    return wstring( ( const wchar * ) v.constData(), v.size() );
   }
-  #endif
 }
