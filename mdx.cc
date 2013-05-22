@@ -66,6 +66,8 @@ enum
   kCurrentFormatVersion = 7 + BtreeIndexing::FormatVersion
 };
 
+DEF_EX( exCorruptDictionary, "dictionary file was tampered or corrupted", std::exception )
+
 struct IdxHeader
 {
   uint32_t signature; // First comes the signature, MDIC
@@ -259,7 +261,7 @@ private:
   void loadArticle( uint32_t offset, string & articleText );
 
   /// Process resource links (images, audios, etc)
-  string filterResource( const char * articleId, const char * article );
+  QString & filterResource( QString const & articleId, QString & article );
 
   friend class MdxHeadwordsRequest;
   friend class MdxArticleRequest;
@@ -533,8 +535,32 @@ void MdxArticleRequest::run()
 
     // Grab that article
     string articleBody;
+    bool hasError = false;
+    QString errorMessage;
 
-    dict.loadArticle( chain[ x ].articleOffset, articleBody );
+    try
+    {
+      dict.loadArticle( chain[ x ].articleOffset, articleBody );
+    }
+    catch ( exCorruptDictionary & )
+    {
+      errorMessage = "Dictionary file was tampered or corrupted";
+      hasError = true;
+    }
+    catch ( std::exception & e )
+    {
+      errorMessage = e.what();
+      hasError = true;
+    }
+
+    if ( hasError )
+    {
+      setErrorString( tr( "Failed loading article from %1, reason: %2" )
+                      .arg( QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ) )
+                      .arg( errorMessage ) );
+      finish();
+      return;
+    }
 
     if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
       continue; // We already have this article in the body.
@@ -762,8 +788,6 @@ void MdxDictionary::loadIcon() throw()
   dictionaryIconLoaded = true;
 }
 
-DEF_EX( exCorruptDictionary, "dictionary file tampered or corrupted", std::exception )
-
 void MdxDictionary::loadArticle( uint32_t offset, string & articleText )
 {
   vector< char > chunk;
@@ -774,77 +798,62 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText )
   char * pRecordInfo = chunks.getBlock( offset, chunk );
   memcpy( &recordInfo, pRecordInfo, sizeof( recordInfo ) );
 
-  // Make an sub unique id for this article
+  // Make a sub unique id for this article
   QString articleId;
   articleId.setNum( ( quint64 )pRecordInfo, 16 );
 
-  articleText = string( QObject::tr( "Article loading error" ).toUtf8().constData() );
+  ScopedMemMap compressed( dictFile, recordInfo.compressedBlockPos, recordInfo.compressedBlockSize );
+  if ( !compressed.startAddress() )
+    throw exCorruptDictionary();
 
-  try
-  {
-    ScopedMemMap compressed( dictFile, recordInfo.compressedBlockPos, recordInfo.compressedBlockSize );
-    if ( !compressed.startAddress() )
-      throw exCorruptDictionary();
+  QByteArray decompressed;
+  if ( !MdictParser::parseCompressedBlock( recordInfo.compressedBlockSize, ( char * )compressed.startAddress(),
+                                           recordInfo.decompressedBlockSize, decompressed ) )
+    throw exCorruptDictionary();
 
-    QByteArray decompressed;
-    if ( !MdictParser::parseCompressedBlock( recordInfo.compressedBlockSize, ( char * )compressed.startAddress(),
-                                             recordInfo.decompressedBlockSize, decompressed ) )
-      return;
+  QString article = MdictParser::toUtf16( encoding.c_str(),
+                                          decompressed.constData() + recordInfo.recordOffset,
+                                          recordInfo.recordSize );
 
-    QString article = MdictParser::toUtf16( encoding.c_str(),
-                                            decompressed.constData() + recordInfo.recordOffset,
-                                            recordInfo.recordSize );
-
-    article = MdictParser::substituteStylesheet( article, styleSheets );
-    articleText = filterResource( articleId.toLatin1().constData(), article.toUtf8().constData() );
-  }
-  catch ( std::exception & e )
-  {
-    FDPRINTF( stderr, "MDict: load article from %s failed, error: %s\n",
-              getDictionaryFilenames()[ 0 ].c_str(), e.what() );
-  }
-  catch ( ... )
-  {
-    FDPRINTF( stderr, "MDict: load article from %s failed, error: %s\n",
-              getDictionaryFilenames()[ 0 ].c_str(), "unknown error" );
-  }
+  article = MdictParser::substituteStylesheet( article, styleSheets );
+  article = filterResource( articleId, article );
+  articleText = string( article.toUtf8().constData() );
 }
 
-string MdxDictionary::filterResource( const char * articleId, const char * article )
+QString & MdxDictionary::filterResource( QString const & articleId, QString & article )
 {
   QString id = QString::fromStdString( getId() );
-  QString uniquePrefix = QString::fromStdString( getId() + "_" + articleId + "_" );
+  QString uniquePrefix = id + "_" + articleId + "_";
   QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*)(?=[^\"'])", Qt::CaseInsensitive );
   anchorLinkRe.setMinimal( true );
 
-  return string( QString::fromUtf8( article )
-                 // anchors
-                 .replace( anchorLinkRe,
-                           "\\1" + uniquePrefix )
-                 .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
-                           "\\1#" + uniquePrefix )
-                 // word cross links
-                 .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://([^#\"'/]+)#?[^\"']*", Qt::CaseInsensitive ),
-                           "\\1gdlookup://localhost/\\2" )
-                 // sounds, and audio link script
-                 .replace( QRegExp( "(<\\s*(?:a|area)\\s+[^>]*\\bhref\\b\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
-                           QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
-                           "\\1gdau://" + id + "/\\2" )
-                 // stylesheets
-                 .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
-                                    Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                           "\\1bres://" + id + "/\\2" )
-                 .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
-                                    Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                           "\\1\"bres://" + id + "/\\\"" )
-                 // images
-                 .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
-                                    Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                           "\\1bres://" + id + "/\\2" )
-                 .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
-                                    Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                           "\\1\"bres://" + id + "/\\2\"" )
-                 .toUtf8().constData() );
+  return article
+         // anchors
+         .replace( anchorLinkRe,
+                   "\\1" + uniquePrefix )
+         .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
+                   "\\1#" + uniquePrefix )
+         // word cross links
+         .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://([^#\"'/]+)#?[^\"']*", Qt::CaseInsensitive ),
+                   "\\1gdlookup://localhost/\\2" )
+         // sounds, and audio link script
+         .replace( QRegExp( "(<\\s*(?:a|area)\\s+[^>]*\\bhref\\b\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
+                   QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
+                   "\\1gdau://" + id + "/\\2" )
+         // stylesheets
+         .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1bres://" + id + "/\\2" )
+         .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1\"bres://" + id + "/\\\"" )
+         // images
+         .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1bres://" + id + "/\\2" )
+         .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1\"bres://" + id + "/\\2\"" );
 }
 
 static void addEntryToIndex( QString const & word, uint32_t offset, IndexedWords & indexedWords )
