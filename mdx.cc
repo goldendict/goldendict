@@ -63,7 +63,7 @@ static bool endsWith( string const & str, string const & tail )
 enum
 {
   kSignature = 0x4349444d,  // MDIC
-  kCurrentFormatVersion = 7 + BtreeIndexing::FormatVersion
+  kCurrentFormatVersion = 8 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 DEF_EX( exCorruptDictionary, "dictionary file was tampered or corrupted", std::exception )
