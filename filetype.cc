@@ -94,4 +94,12 @@ bool isNameOfTiff( string const & name )
     endsWith( s, ".tiff" );
 }
 
+bool isNameOfCSS( string const & name )
+{
+  string s = simplifyString( name );
+
+  return
+    endsWith( s, ".css" );
+}
+
 }

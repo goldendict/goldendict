@@ -1084,7 +1084,16 @@ void StardictResourceRequest::run()
       }
     }
 
-    Mutex::Lock _( dataMutex );
+    if( Filetype::isNameOfCSS( resourceName ) )
+    {
+      Mutex::Lock _( dataMutex );
+
+      QString css = QString::fromUtf8( data.data(), data.size() );
+      dict.isolateCSS( css );
+      QByteArray bytes = css.toUtf8();
+      data.resize( bytes.size() );
+      memcpy( &data.front(), bytes.constData(), bytes.size() );
+    }
 
     hasAnyData = true;
   }

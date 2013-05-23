@@ -267,6 +267,9 @@ protected:
   // else treat filename as name without extension
   bool loadIconFromFile( QString const & filename, bool isFullName = false );
 
+  /// Make css content usable only for articles from this dictionary
+  void isolateCSS( QString & css );
+
 public:
 
   /// Creates a dictionary. The id should be made using

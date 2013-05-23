@@ -21,6 +21,8 @@ bool isNameOfPicture( string const & );
 /// with .tif or tiff). We have this one separately since we need to reconvert
 /// TIFF files as WebKit doesn't seem to support them.
 bool isNameOfTiff( string const & );
+/// Returns true if the name resembles the one of a .css file
+bool isNameOfCSS( string const & );
 
 }
 
