@@ -56,8 +56,42 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
         // Fall-through
 
       default:
-        inConverted.push_back( *i );
         afterEol = false;
+
+        if ( ( unsigned char )*i >= 0x80 )
+        {
+          // n bytes in utf8 sequence
+          int bytes = 0;
+          // Convert U+10000 ~ U+7FFFFFFF into html entities
+          if ( ( *i & 0xfe ) == 0xfc )
+            bytes = 6;
+          else if ( ( *i & 0xfc ) == 0xf8 )
+            bytes = 5;
+          else if ( ( *i & 0xf8 ) == 0xf0 )
+            bytes = 4;
+
+          if ( bytes > 0 ) {
+            string buf;
+
+            while ( bytes && i != j )
+            {
+              buf.push_back( *i );
+              bytes--;
+              if ( bytes )
+                i++;
+            }
+
+            // QDomDocument hate non-BMP unicode characters, so javascript comes to rescue
+            QString code;
+            code.setNum( Utf8::decode( buf )[ 0 ] );
+            inConverted.append( "<script type=\"text/javascript\">document.write(\"\\u0026#" +
+                                code.toStdString() + ";\");</script>" );
+            continue;
+          }
+        }
+
+        inConverted.push_back( *i );
+      break;
     }
   }
 
