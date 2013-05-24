@@ -351,7 +351,7 @@ bool DecoderContext::play( QString & errorString )
     av_free_packet( &packet );
   }
 
-  if ( codecContext_->codec->capabilities & CODEC_CAP_DELAY )
+  if ( !isCancelled_ && codecContext_->codec->capabilities & CODEC_CAP_DELAY )
   {
     av_init_packet( &packet );
     int gotFrame = 0;
@@ -396,7 +396,7 @@ bool DecoderContext::normalizeAudio( AVFrame * frame, vector<char> & samples )
     case AV_SAMPLE_FMT_S32:
     {
       samples.resize( dataSize );
-      memcpy( &samples.front(), frame->extended_data[0], lineSize );
+      memcpy( &samples.front(), frame->data[0], lineSize );
     }
     break;
     case AV_SAMPLE_FMT_FLT:
@@ -406,7 +406,7 @@ bool DecoderContext::normalizeAudio( AVFrame * frame, vector<char> & samples )
       int32_t * out = ( int32_t * )&samples.front();
       for ( int i = 0; i < dataSize; i += sizeof( float ) )
       {
-        *out++ = toInt32( *( float * )frame->extended_data[i] );
+        *out++ = toInt32( *( float * )frame->data[i] );
       }
     }
     break;
@@ -417,7 +417,7 @@ bool DecoderContext::normalizeAudio( AVFrame * frame, vector<char> & samples )
       int32_t * out = ( int32_t * )&samples.front();
       for ( int i = 0; i < dataSize; i += sizeof( double ) )
       {
-        *out++ = toInt32( *( double * )frame->extended_data[i] );
+        *out++ = toInt32( *( double * )frame->data[i] );
       }
     }
     break;
