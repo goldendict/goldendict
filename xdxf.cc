@@ -631,6 +631,7 @@ qint64 GzippedFile::readData( char * data, qint64 maxSize )
   if ( size == 0 )
     return 0;
 
+  // Since XDXF should be utf-8 encoded, we can treat the data as utf-8 string
   const uchar u8LeadChar = *( ( const uchar * ) data );
 
   if ( u8LeadChar < 0x80 )

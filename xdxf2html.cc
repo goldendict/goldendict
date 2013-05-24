@@ -62,7 +62,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
         {
           // n bytes in utf8 sequence
           int bytes = 0;
-          // Convert U+10000 ~ U+7FFFFFFF into html entities
+          // Convert U+10000 ~ U+7FFFFFFF (in utf8 sequences) into html entities
           if ( ( *i & 0xfe ) == 0xfc )
             bytes = 6;
           else if ( ( *i & 0xfc ) == 0xf8 )
@@ -71,21 +71,25 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
             bytes = 4;
 
           if ( bytes > 0 ) {
-            string buf;
-
-            while ( bytes && i != j )
-            {
-              buf.push_back( *i );
-              bytes--;
-              if ( bytes )
-                i++;
-            }
+            // safe advance
+            string::const_iterator advanced = i;
+            while ( advanced != j && bytes-- )
+              advanced++;
+            string buf( i , advanced );
 
             // QDomDocument hate non-BMP unicode characters, so javascript comes to rescue
-            QString code;
-            code.setNum( Utf8::decode( buf )[ 0 ] );
-            inConverted.append( "<script type=\"text/javascript\">document.write(\"\\u0026#" +
-                                code.toStdString() + ";\");</script>" );
+            try
+            {
+              QString code;
+              code.setNum( Utf8::decode( buf )[ 0 ] );
+              inConverted.append( "<script type=\"text/javascript\">document.write(\"\\u0026#" +
+                                  code.toStdString() + ";\");</script>" );
+              i = advanced - 1;
+            }
+            catch ( Utf8::exCantDecode & )
+            {
+              inConverted.push_back( *i );
+            }
             continue;
           }
         }
