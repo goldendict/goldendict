@@ -1323,6 +1323,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
     if( !imageUrl.isEmpty() )
     {
+      menu.addAction( ui.definition->pageAction( QWebPage::CopyImageToClipboard ) );
       saveImageAction = new QAction( tr( "Save &image..." ), &menu );
       menu.addAction( saveImageAction );
     }
