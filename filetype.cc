@@ -102,4 +102,12 @@ bool isNameOfCSS( string const & name )
     endsWith( s, ".css" );
 }
 
+bool isNameOfSvg( string const & name )
+{
+  string s = simplifyString( name );
+
+  return
+    endsWith( s, ".svg" );
+}
+
 }

@@ -22,6 +22,7 @@ INCLUDEPATH += .
 QT += webkit
 QT += xml
 QT += network
+QT += svg
 CONFIG += exceptions \
     rtti \
     stl

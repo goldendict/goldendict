@@ -45,6 +45,9 @@
 #include <QByteArray>
 #include <QBuffer>
 
+// For SVG handling
+#include <QtSvg/QSvgRenderer>
+
 namespace Dsl {
 
 using namespace Details;
@@ -821,10 +824,26 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
       if( !imgdata.empty() )
       {
-        QImage img = QImage::fromData( (unsigned char *) &imgdata.front(),
-                                       imgdata.size() );
-        resize = maxPictureWidth > 0
-                 && img.width() > maxPictureWidth;
+        if( Filetype::isNameOfSvg( filename ) )
+        {
+          // We don't need to render svg file now
+
+          QSvgRenderer svg;
+          svg.load( QByteArray::fromRawData( imgdata.data(), imgdata.size() ) );
+          if( svg.isValid() )
+          {
+            QSize imgsize = svg.defaultSize();
+            resize = maxPictureWidth > 0
+                     && imgsize.width() > maxPictureWidth;
+          }
+        }
+        else
+        {
+          QImage img = QImage::fromData( (unsigned char *) &imgdata.front(),
+                                         imgdata.size() );
+          resize = maxPictureWidth > 0
+                   && img.width() > maxPictureWidth;
+        }
       }
 
       if( resize )
