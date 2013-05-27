@@ -22,6 +22,8 @@
 #include <QWebElement>
 #include <QCryptographicHash>
 
+#include <assert.h>
+
 #ifdef Q_OS_WIN32
 #include <windows.h>
 
@@ -952,10 +954,14 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   }
 }
 
-void ArticleView::saveResource( const QUrl & url, QUrl const & ref )
+vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, const QString & fileName )
 {
-  resourceToSaveDownloadRequests.clear();
-  resourceToSaveUrl = url;
+  return saveResource( url, ui.definition->url(), fileName );
+}
+
+vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, const QUrl & ref, const QString & fileName )
+{
+  vector< ResourceToSaveHandler * > handlers;
   sptr< Dictionary::DataRequest > req;
 
   if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau")
@@ -989,25 +995,8 @@ void ArticleView::saveResource( const QUrl & url, QUrl const & ref )
           req = (*activeDicts)[ x ]->getResource(
                   url.path().mid( 1 ).toUtf8().data() );
 
-          if ( req->isFinished() && req->dataSize() >= 0 )
-          {
-            // A request was instantly finished with success.
-            // If we've managed to spawn some lingering requests already,
-            // erase them.
-            resourceToSaveDownloadRequests.clear();
-
-            // Handle the result
-            resourceToSaveDownloadRequests.push_back( req );
-            resourceToSaveDownloadFinished();
-            return;
-          }
-          else
-          if ( !req->isFinished() )
-          {
-            resourceToSaveDownloadRequests.push_back( req );
-            connect( req.get(), SIGNAL( finished() ),
-                     this, SLOT( resourceToSaveDownloadFinished() ), Qt::QueuedConnection );
-          }
+          ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
+          handlers.push_back( handler );
         }
       }
     }
@@ -1016,154 +1005,27 @@ void ArticleView::saveResource( const QUrl & url, QUrl const & ref )
       // Normal resource download
       QString contentType;
       req = articleNetMgr.getResource( url, contentType );
+
+      ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
+      handlers.push_back( handler );
     }
   }
   else
+  {
     req = new Dictionary::WebMultimediaDownload( url, articleNetMgr );
 
-  if( url.host().compare( "search" ) != 0 )
-  {
-    if ( !req.get() )
-    {
-      // Request failed, fail
-    }
-    else
-    if ( req->isFinished() && req->dataSize() >= 0 )
-    {
-      // Have data ready, handle it
-      resourceToSaveDownloadRequests.push_back( req );
-      resourceToSaveDownloadFinished();
-      return;
-    }
-    else
-    if ( !req->isFinished() )
-    {
-      // Queue to be handled when done
-
-      resourceToSaveDownloadRequests.push_back( req );
-      connect( req.get(), SIGNAL( finished() ),
-               this, SLOT( resourceToSaveDownloadFinished() ), Qt::QueuedConnection );
-    }
+    ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
+    handlers.push_back( handler );
   }
 
-  if ( resourceToSaveDownloadRequests.empty() ) // No requests were queued
+  if ( handlers.empty() ) // No requests were queued
   {
     emit statusBarMessage(
           tr( "ERROR: %1" ).arg( tr( "The referenced resource doesn't exist." ) ),
           10000, QPixmap( ":/icons/error.png" ) );
-    return;
-  }
-  else
-    resourceToSaveDownloadFinished(); // Check any requests finished already
-}
-
-void ArticleView::resourceToSaveDownloadFinished()
-{
-  if ( resourceToSaveDownloadRequests.empty() )
-    return; // Stray signal
-
-  QByteArray resourceData;
-
-  // Find any finished resources
-
-  for( list< sptr< Dictionary::DataRequest > >::iterator i =
-       resourceToSaveDownloadRequests.begin(); i != resourceToSaveDownloadRequests.end(); )
-  {
-    if ( (*i)->isFinished() )
-    {
-      if ( (*i)->dataSize() >= 0 )
-      {
-        // Ok, got one finished, all others are irrelevant now
-
-        vector< char > const & data = (*i)->getFullData();
-        resourceData = QByteArray( data.data(), data.size() );
-        break;
-      }
-      else
-      {
-        // This one had no data. Erase it.
-        resourceToSaveDownloadRequests.erase( i++ );
-      }
-    }
-    else // Unfinished, try the next one.
-      i++;
   }
 
-  if( !resourceData.isEmpty() )
-  {
-    // Resource found, clear all requests
-    resourceToSaveDownloadRequests.clear();
-
-    QString fileName;
-    QString savePath;
-    if( cfg.resourceSavePath.isEmpty() )
-      savePath = QDir::homePath();
-    else
-    {
-      savePath = QDir::fromNativeSeparators( cfg.resourceSavePath );
-      if( !QDir( savePath ).exists() )
-        savePath = QDir::homePath();
-    }
-
-    QString name = resourceToSaveUrl.path().section( '/', -1 );
-
-    if ( resourceToSaveUrl.scheme() == "gdau" ||
-         Dictionary::WebMultimediaDownload::isAudioUrl( resourceToSaveUrl ) )
-    {
-      // Audio data
-      if( name.indexOf( '.' ) < 0 )
-        name += ".wav";
-
-      fileName = savePath + "/" + name;
-      fileName = QFileDialog::getSaveFileName( parentWidget(), tr( "Save sound" ),
-                                               fileName,
-                                               tr( "Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)" ) );
-    }
-    else
-    {
-      // Image data
-
-      // Check for babylon image name
-      if( name[ 0 ] == '\x1E' )
-        name.remove( 0, 1 );
-      if( name[ name.length() - 1 ] == '\x1F' )
-        name.chop( 1 );
-
-      fileName = savePath + "/" + name;
-      fileName = QFileDialog::getSaveFileName( parentWidget(), tr( "Save image" ),
-                                               fileName,
-                                               tr( "Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)" ) );
-    }
-
-    // Write data to file
-
-    if( !fileName.isEmpty() )
-    {
-      QFileInfo fileInfo( fileName );
-      emit storeResourceSavePath( QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() ) );
-      QFile file( fileName );
-      if ( file.open( QFile::WriteOnly ) )
-      {
-        file.write( resourceData.data(), resourceData.size() );
-        file.close();
-      }
-      if( file.error() )
-      {
-        emit statusBarMessage(
-              tr( "ERROR: %1" ).arg( tr( "Resource saving error: " ) + file.errorString() ),
-              10000, QPixmap( ":/icons/error.png" ) );
-      }
-    }
-
-    return;
-  }
-
-  if ( resourceToSaveDownloadRequests.empty() )
-  {
-    emit statusBarMessage(
-          tr( "ERROR: %1" ).arg( tr( "The referenced resource failed to download." ) ),
-          10000, QPixmap( ":/icons/error.png" ) );
-  }
+  return handlers;
 }
 
 void ArticleView::updateMutedContents()
@@ -1499,11 +1361,57 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       emit showDefinitionInNewTab( selectedText, groupComboBox->getCurrentGroup(),
                                    QString(), Contexts() );
     else
-    if( result == saveImageAction )
-      saveResource( imageUrl, ui.definition->url() );
-    else
-    if( result == saveSoundAction )
-      saveResource( targetUrl, ui.definition->url() );
+    if( result == saveImageAction || result == saveSoundAction )
+    {
+      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
+      QString savePath;
+      QString fileName;
+
+      if ( cfg.resourceSavePath.isEmpty() )
+        savePath = QDir::homePath();
+      else
+      {
+        savePath = QDir::fromNativeSeparators( cfg.resourceSavePath );
+        if ( !QDir( savePath ).exists() )
+          savePath = QDir::homePath();
+      }
+
+      QString name = url.path().section( '/', -1 );
+
+      if ( result == saveSoundAction )
+      {
+        // Audio data
+        if ( name.indexOf( '.' ) < 0 )
+          name += ".wav";
+
+        fileName = savePath + "/" + name;
+        fileName = QFileDialog::getSaveFileName( parentWidget(), tr( "Save sound" ),
+                                                 fileName,
+                                                 tr( "Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)" ) );
+      }
+      else
+      {
+        // Image data
+
+        // Check for babylon image name
+        if ( name[ 0 ] == '\x1E' )
+          name.remove( 0, 1 );
+        if ( name.length() && name[ name.length() - 1 ] == '\x1F' )
+          name.chop( 1 );
+
+        fileName = savePath + "/" + name;
+        fileName = QFileDialog::getSaveFileName( parentWidget(), tr( "Save image" ),
+                                                 fileName,
+                                                 tr( "Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)" ) );
+      }
+
+      if ( !fileName.isEmpty() )
+      {
+        QFileInfo fileInfo( fileName );
+        emit storeResourceSavePath( QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() ) );
+        saveResource( url, ui.definition->url(), fileName );
+      }
+    }
     else
     {
       if ( !popupView && result == maxDictionaryRefsAction )
@@ -2147,3 +2055,68 @@ QString ArticleView::wordAtPoint( int x, int y )
 }
 
 #endif
+
+ResourceToSaveHandler::ResourceToSaveHandler(
+    ArticleView * view, sptr< Dictionary::DataRequest > req,
+    QString const & fileName ) :
+  QObject( view ),
+  req( req ),
+  fileName( fileName )
+{
+  connect( this, SIGNAL( statusBarMessage( QString, int, QPixmap ) ),
+           view, SIGNAL( statusBarMessage( QString, int, QPixmap ) ) );
+
+  // If DataRequest finsihed immediately, call our handler directly
+  if ( req.get()->isFinished() )
+  {
+    QMetaObject::invokeMethod( this, "downloadFinished", Qt::QueuedConnection );
+  }
+  else
+  {
+    connect( req.get(), SIGNAL( finished() ), this, SLOT( downloadFinished() ) );
+  }
+}
+
+void ResourceToSaveHandler::downloadFinished()
+{
+  assert( req && req.get()->isFinished() );
+
+  QByteArray resourceData;
+
+  if ( req.get()->dataSize() >= 0 )
+  {
+    vector< char > const & data = req.get()->getFullData();
+    resourceData = QByteArray( data.data(), data.size() );
+  }
+
+  // Write data to file
+
+  if ( !resourceData.isEmpty() && !fileName.isEmpty() )
+  {
+    QFileInfo fileInfo( fileName );
+    QDir().mkpath( fileInfo.absoluteDir().absolutePath() );
+
+    QFile file( fileName );
+    if ( file.open( QFile::WriteOnly ) )
+    {
+      file.write( resourceData.data(), resourceData.size() );
+      file.close();
+    }
+
+    if ( file.error() )
+    {
+      emit statusBarMessage(
+            tr( "ERROR: %1" ).arg( tr( "Resource saving error: " ) + file.errorString() ),
+            10000, QPixmap( ":/icons/error.png" ) );
+    }
+  }
+  else
+  {
+    emit statusBarMessage(
+          tr( "ERROR: %1" ).arg( tr( "The referenced resource failed to download." ) ),
+          10000, QPixmap( ":/icons/error.png" ) );
+  }
+
+  emit done();
+  deleteLater();
+}
