@@ -255,48 +255,48 @@
         <translation>Пайвандро дар &amp;браузер кушодан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1326"/>
+        <location filename="../articleview.cc" line="1327"/>
         <source>Save &amp;image...</source>
         <translation>Захира &amp;кардани тасвир...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1334"/>
+        <location filename="../articleview.cc" line="1335"/>
         <source>Save s&amp;ound...</source>
         <translation>Захира &amp;кардани садо...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1345"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot;-ро &amp;дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1353"/>
+        <location filename="../articleview.cc" line="1354"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>&quot;%1&quot;-ро дар варақаи &amp;нав дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1358"/>
+        <location filename="../articleview.cc" line="1359"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Фиристодани &quot;%1&quot; ба хати ворида</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1364"/>
-        <location filename="../articleview.cc" line="1396"/>
+        <location filename="../articleview.cc" line="1365"/>
+        <location filename="../articleview.cc" line="1397"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Илова кардани &quot;%1&quot; ба таърих</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1378"/>
+        <location filename="../articleview.cc" line="1379"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>&quot;%1&quot;-ро дар %2 дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1386"/>
+        <location filename="../articleview.cc" line="1387"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>&quot;%1&quot;-ро дар %2 дар варақаи &amp;нав дарёфт кардан</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1625"/>
+        <location filename="../articleview.cc" line="1626"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>ОГОҲӢ: Плеери аудиоии FFmpeg: %1</translation>
     </message>
@@ -317,22 +317,22 @@
         <translation type="obsolete">Китобхои басс ин садоро пахш карда наметавонад.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1566"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Барои иҷрои файли аудиоӣ кушоиши плеер қатъ карда шуд: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1584"/>
+        <location filename="../articleview.cc" line="1585"/>
         <source>Failed to create temporary file.</source>
         <translation>Эҷодкунии файли муваққатӣ қатъ карда шуд.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1595"/>
+        <location filename="../articleview.cc" line="1596"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Кушоиши файл ба таври худкор қатъ карда шуд, кӯшиш кунед, ки онро ба таври дастӣ кушоед: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1618"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>WARNING: %1</source>
         <translation>ОГОҲӢ: %1</translation>
     </message>
@@ -348,7 +348,7 @@
     </message>
     <message>
         <location filename="../articleview.cc" line="1164"/>
-        <location filename="../articleview.cc" line="1618"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>The referenced resource failed to download.</source>
         <translation>Боргирии манбаъи ишорашуда қатъ карда шуд.</translation>
     </message>
@@ -1905,7 +1905,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="152"/>
+        <location filename="../main.cc" line="150"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Хатогӣ дар файли танзимӣ. Бо танзимоти пешфарз давом медиҳед?</translation>
     </message>
@@ -2482,12 +2482,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="547"/>
+        <location filename="../mdx.cc" line="548"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="558"/>
+        <location filename="../mdx.cc" line="559"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation type="unfinished"></translation>
     </message>

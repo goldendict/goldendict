@@ -278,48 +278,48 @@
         <translation>Ouvrir un lien dans un navigateur &amp;externe</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1326"/>
+        <location filename="../articleview.cc" line="1327"/>
         <source>Save &amp;image...</source>
         <translation>Enregistrer l&apos;&amp;image...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1334"/>
+        <location filename="../articleview.cc" line="1335"/>
         <source>Save s&amp;ound...</source>
         <translation>Enregistrer le fichier audi&amp;o...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1345"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>Re&amp;chercher &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1353"/>
+        <location filename="../articleview.cc" line="1354"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Rechercher &quot;%1&quot; dans un &amp;nouvel onglet</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1358"/>
+        <location filename="../articleview.cc" line="1359"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Envoyer &quot;%1&quot; dans la zone de saisie</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1364"/>
-        <location filename="../articleview.cc" line="1396"/>
+        <location filename="../articleview.cc" line="1365"/>
+        <location filename="../articleview.cc" line="1397"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Ajouter &quot;%1&quot; à l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1378"/>
+        <location filename="../articleview.cc" line="1379"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Rechercher &quot;%1&quot; dans %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1386"/>
+        <location filename="../articleview.cc" line="1387"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Rechercher &quot;%1&quot; dans &quot;%2&quot; dans un &amp;nouvel onglet</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1625"/>
+        <location filename="../articleview.cc" line="1626"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>ATTENTION : lecteur audio FFmpeg : %1</translation>
     </message>
@@ -332,7 +332,7 @@
         <translation type="obsolete">Pour activer la lecture de fichiers de type autre que WAV, allez dans Édition|Préférences, choisissez l&apos;onglet Audio et sélectionnez &quot;Lire avec DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1618"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>WARNING: %1</source>
         <translation>ATTENTION : %1</translation>
     </message>
@@ -345,23 +345,23 @@
         <translation type="obsolete">La bibliothèque Bass ne peut lire ce son.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1566"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Échec de lancement d&apos;un lecteur pour lire le fichier audio %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1584"/>
+        <location filename="../articleview.cc" line="1585"/>
         <source>Failed to create temporary file.</source>
         <translation>Échec de création d&apos;un fichier temporaire.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1595"/>
+        <location filename="../articleview.cc" line="1596"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Échec lors de l&apos;ouverture automatique du fichier de ressources, essayez d&apos;ouvrir manuellement : %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1164"/>
-        <location filename="../articleview.cc" line="1618"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>The referenced resource failed to download.</source>
         <translation>La ressource référencée n&apos;a pas pu être téléchargée.</translation>
     </message>
@@ -1918,7 +1918,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="152"/>
+        <location filename="../main.cc" line="150"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Erreur dans le fichier de configuration. Continuer avec les paramètres par défaut ?</translation>
     </message>
@@ -2495,12 +2495,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="547"/>
+        <location filename="../mdx.cc" line="548"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="558"/>
+        <location filename="../mdx.cc" line="559"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation type="unfinished"></translation>
     </message>

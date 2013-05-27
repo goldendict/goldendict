@@ -224,38 +224,38 @@
         <translation>Hap Lidhësin në &amp;Shfletuesin e Jashtëm</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1345"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Shikoj &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1353"/>
+        <location filename="../articleview.cc" line="1354"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Shikoj &quot;%1&quot; në Fushën e &amp;Re</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1358"/>
+        <location filename="../articleview.cc" line="1359"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1364"/>
-        <location filename="../articleview.cc" line="1396"/>
+        <location filename="../articleview.cc" line="1365"/>
+        <location filename="../articleview.cc" line="1397"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1378"/>
+        <location filename="../articleview.cc" line="1379"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Shikoj &quot;%1&quot; në %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1386"/>
+        <location filename="../articleview.cc" line="1387"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Shikoj &quot;%1&quot; në %2 në Fushën e &amp;Re</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1625"/>
+        <location filename="../articleview.cc" line="1626"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -268,38 +268,38 @@
         <translation type="obsolete">Për të aktivizuar leximin e skedave të ndryshme nga WAV, ju lutem shkoni te Editoj|Pëlqime, zgjidhni fushën Audio dhe seleksiononi atje &quot;Luaj via DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1566"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Dështon ekzekutimi i lexuesit për skedën zanore: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1584"/>
+        <location filename="../articleview.cc" line="1585"/>
         <source>Failed to create temporary file.</source>
         <translation>Dështon krijimi i skedës kohëshkurtër.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1595"/>
+        <location filename="../articleview.cc" line="1596"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Dështon autohapja e skedës burimore, provoni ta hapni vetë: %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1164"/>
-        <location filename="../articleview.cc" line="1618"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>The referenced resource failed to download.</source>
         <translation>Dështon shkarkimi i burimit të referuar.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1326"/>
+        <location filename="../articleview.cc" line="1327"/>
         <source>Save &amp;image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1334"/>
+        <location filename="../articleview.cc" line="1335"/>
         <source>Save s&amp;ound...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1618"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">KUJDES: %1</translation>
     </message>
@@ -1900,7 +1900,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="152"/>
+        <location filename="../main.cc" line="150"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2461,12 +2461,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="547"/>
+        <location filename="../mdx.cc" line="548"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="558"/>
+        <location filename="../mdx.cc" line="559"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation type="unfinished"></translation>
     </message>

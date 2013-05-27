@@ -128,7 +128,7 @@
         <translation>表单</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1566"/>
+        <location filename="../articleview.cc" line="1567"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>没有可用的播放器，无法打开音频文件：%1</translation>
     </message>
@@ -144,12 +144,12 @@
     </message>
     <message>
         <location filename="../articleview.cc" line="1164"/>
-        <location filename="../articleview.cc" line="1618"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>The referenced resource failed to download.</source>
         <translation>所引用的资源下载失败。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1584"/>
+        <location filename="../articleview.cc" line="1585"/>
         <source>Failed to create temporary file.</source>
         <translation>创建临时文件失败。</translation>
     </message>
@@ -159,7 +159,7 @@
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1345"/>
+        <location filename="../articleview.cc" line="1346"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>查找 &quot;%1&quot;(&amp;L)</translation>
     </message>
@@ -174,7 +174,7 @@
         <translation>前一个(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1353"/>
+        <location filename="../articleview.cc" line="1354"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>在新标签页中查找 &quot;%1&quot;(&amp;N)</translation>
     </message>
@@ -199,12 +199,12 @@
         <translation>区分大小写(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1595"/>
+        <location filename="../articleview.cc" line="1596"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>自动打开资源文件时失败，请尝试手动打开：%1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1378"/>
+        <location filename="../articleview.cc" line="1379"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>在 %2 中查找 &quot;%1&quot;</translation>
     </message>
@@ -216,10 +216,10 @@
     <message>
         <location filename="../articleview.cc" line="138"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>复制为文本</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1386"/>
+        <location filename="../articleview.cc" line="1387"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>在 %2 中查找 &quot;%1&quot; 并使用新标签页(&amp;N)</translation>
     </message>
@@ -314,33 +314,33 @@
         <translation>资源保存失败：</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1326"/>
+        <location filename="../articleview.cc" line="1327"/>
         <source>Save &amp;image...</source>
         <translation>保存图片(&amp;I)...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1334"/>
+        <location filename="../articleview.cc" line="1335"/>
         <source>Save s&amp;ound...</source>
         <translation>保存音频文件(&amp;O)...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1358"/>
+        <location filename="../articleview.cc" line="1359"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>将 &quot;%1&quot; 发送到输入框</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1364"/>
-        <location filename="../articleview.cc" line="1396"/>
+        <location filename="../articleview.cc" line="1365"/>
+        <location filename="../articleview.cc" line="1397"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>将 &quot;%1&quot; 添加到历史(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1618"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>WARNING: %1</source>
         <translation>警告： %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1625"/>
+        <location filename="../articleview.cc" line="1626"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>警告： 内置播放器：%1</translation>
     </message>
@@ -1896,7 +1896,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="152"/>
+        <location filename="../main.cc" line="150"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>配置文件错误，使用默认配置并继续？</translation>
     </message>
@@ -2474,14 +2474,14 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="547"/>
+        <location filename="../mdx.cc" line="548"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>词典文件被修改或已损坏</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="558"/>
+        <location filename="../mdx.cc" line="559"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>从 %1 加载文章失败：%2</translation>
     </message>
 </context>
 <context>
@@ -3140,12 +3140,12 @@ Plugin must be installed for this option to work.</source>
         <location filename="../preferences.ui" line="1002"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>部分网站屏蔽了使用 GoldenDict 浏览器标识（UA）的请求，启用此选项以绕过该问题。</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1006"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>不使用 GoldenDict 浏览器标识（UA）</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1057"/>
@@ -3394,87 +3394,87 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <location filename="../ffmpegaudio.cc" line="132"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_alloc_context() 调用失败。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="139"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() 调用失败。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="148"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() 调用失败。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="165"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() 调用失败：%1。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="172"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() 调用失败：%1。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="187"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到有效的音频流数据。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到有效的解码器 [id: %1]。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="202"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_open2() 调用失败：%1。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="263"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到有效的音频输出设备。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="276"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>不支持的采样格式。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="286"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() 调用失败：</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="291"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>无驱动程序。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>该驱动程序不是有效的输出设备。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="297"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>配置键值不匹配。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="300"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法打开设备：%1，声道：%2，采样率：%3，位：%4。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="307"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>未知错误。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="332"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_frame() 调用失败。</translation>
     </message>
 </context>
 <context>
