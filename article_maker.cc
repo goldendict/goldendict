@@ -486,7 +486,7 @@ void ArticleRequest::bodyFinished()
 
         head += string( "<div class=\"gddictname\"><span class=\"gddicticon\"><img src=\"gico://")
                 +  Html::escape( dictId )
-          + "/\"></span><span class=\"gdfromprefix\">"  +
+          + "/dicticon.png\"></span><span class=\"gdfromprefix\">"  +
           Html::escape( tr( "From " ).toUtf8().data() ) + "</span>" +
           Html::escape( activeDict->getName().c_str() )
            + "</div>";

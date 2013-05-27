@@ -24,6 +24,7 @@
 #include "fsencoding.hh"
 #include <QProcess>
 #include "historypanewidget.hh"
+#include <QCryptographicHash>
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -2879,6 +2880,39 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
   view->print( printer );
 }
 
+static void filterAndCollectResources( QString & html, QRegExp & rx, const QString & sep,
+                                       const QString & folder, set< QByteArray > & resourceIncluded,
+                                       vector< pair< QUrl, QString > > & downloadResources )
+{
+  int pos = 0;
+
+  while ( ( pos = rx.indexIn( html, pos ) ) != -1 )
+  {
+    QUrl url( rx.cap( 1 ) );
+    QString host = url.host();
+    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( url.path(), "/" ) );
+
+    if ( !host.startsWith( '/' ) )
+      host.insert( 0, '/' );
+    if ( !resourcePath.startsWith( '/' ) )
+      resourcePath.insert( 0, '/' );
+
+    QCryptographicHash hash( QCryptographicHash::Md5 );
+    hash.addData( rx.cap().toUtf8() );
+
+    if ( resourceIncluded.insert( hash.result() ).second )
+    {
+      // Gather resouce information (url, filename) to be download later
+      downloadResources.push_back( pair<QUrl, QString>( url, folder + host + resourcePath ) );
+    }
+
+    // Modify original url, set to the native one
+    QString newUrl = sep + QDir( folder ).dirName() + host + resourcePath + sep;
+    html.replace( pos, rx.cap().length(), newUrl );
+    pos += newUrl.length();
+  }
+}
+
 void MainWindow::on_saveArticle_triggered()
 {
   ArticleView *view = getCurrentArticleView();
@@ -2895,10 +2929,19 @@ void MainWindow::on_saveArticle_triggered()
       savePath = QDir::homePath();
   }
 
+  QFileDialog::Options options = QFileDialog::HideNameFilterDetails;
+  QString selectedFilter;
+  QStringList filters;
+  filters.push_back( tr( "Article, Complete (*.html)" ) );
+  filters.push_back( tr( "Article, HTML Only (*.html)" ) );
+
   fileName = savePath + "/" + fileName;
   fileName = QFileDialog::getSaveFileName( this, tr(  "Save Article As" ),
-                                                   fileName,
-                                                   tr( "Html files (*.html *.htm)" ) );
+                                           fileName,
+                                           filters.join( ";;" ),
+                                           &selectedFilter, options );
+
+  bool complete = ( selectedFilter == filters[ 0 ] );
 
   if ( !fileName.isEmpty() )
   {
@@ -2912,8 +2955,51 @@ void MainWindow::on_saveArticle_triggered()
     }
     else
     {
-      file.write( view->toHtml().toUtf8() );
-      cfg.articleSavePath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
+      QString html = view->toHtml();
+      QFileInfo fi( fileName );
+      cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
+
+      if ( complete )
+      {
+        QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
+        QRegExp rx1( "\"((?:bres|gico|gdau|qrcx)://[^\"]+)\"" );
+        QRegExp rx2( "'((?:bres|gico|gdau|qrcx)://[^']+)'" );
+        set< QByteArray > resourceIncluded;
+        vector< pair< QUrl, QString > > downloadResources;
+
+        filterAndCollectResources( html, rx1, "\"", folder, resourceIncluded, downloadResources );
+        filterAndCollectResources( html, rx2, "'", folder, resourceIncluded, downloadResources );
+
+        ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
+        // reserve '1' for saving main html file
+        int maxVal = 1;
+
+        // Pull and save resources to files
+        for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
+              i != downloadResources.end(); i++ )
+        {
+          vector< ResourceToSaveHandler * > handlerss = view->saveResource( i->first, i->second );
+          maxVal += handlerss.size();
+
+          for ( vector< ResourceToSaveHandler * >::iterator j = handlerss.begin();
+                j != handlerss.end(); j++ )
+          {
+            connect( *j, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
+          }
+        }
+
+        progressDialog->setLabelText( tr("Saving article...") );
+        progressDialog->setRange( 0, maxVal );
+        progressDialog->setValue( 0 );
+        progressDialog->show();
+
+        file.write( html.toUtf8() );
+        progressDialog->setValue( 1 );
+      }
+      else
+      {
+        file.write( html.toUtf8() );
+      }
     }
   }
 }

@@ -9,6 +9,7 @@
 #include <QToolButton>
 #include <QSystemTrayIcon>
 #include <QNetworkAccessManager>
+#include <QProgressDialog>
 #include "ui_mainwindow.h"
 #include "folding.hh"
 #include "config.hh"
@@ -408,6 +409,31 @@ private slots:
   /// Return true while scanning GoldenDict window
   bool isGoldenDictWindow( HWND hwnd );
 #endif
+};
+
+class ArticleSaveProgressDialog : public QProgressDialog
+{
+Q_OBJECT
+
+public:
+  explicit ArticleSaveProgressDialog( QWidget * parent = 0,  Qt::WindowFlags f = 0 ):
+    QProgressDialog( parent, f )
+  {
+    setAutoReset( false );
+    setAutoClose( false );
+  }
+
+public slots:
+  void perform()
+  {
+    int progress = value() + 1;
+    if ( progress == maximum() )
+    {
+      emit close();
+      deleteLater();
+    }
+    setValue( progress );
+  }
 };
 
 #endif
