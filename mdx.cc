@@ -1,4 +1,4 @@
-/* This file is (c) 2013 Timon Wong <timon86.wang.gmail.com>
+/* This file is (c) 2013 Timon Wong <timon86.wang AT gmail DOT com>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "mdx.hh"
@@ -53,18 +53,10 @@ using BtreeIndexing::IndexInfo;
 
 using namespace Mdict;
 
-
-/// Checks if the given string ends with the given substring
-static bool endsWith( string const & str, string const & tail )
-{
-  return str.size() >= tail.size() &&
-         str.compare( str.size() - tail.size(), tail.size(), tail ) == 0;
-}
-
 enum
 {
   kSignature = 0x4349444d,  // MDIC
-  kCurrentFormatVersion = 7 + BtreeIndexing::FormatVersion
+  kCurrentFormatVersion = 8 + BtreeIndexing::FormatVersion
 };
 
 DEF_EX( exCorruptDictionary, "dictionary file was tampered or corrupted", std::exception )
@@ -97,9 +89,8 @@ struct IdxHeader
   uint32_t langFrom; // Source language
   uint32_t langTo; // Target language
 
-  uint32_t hasMddFile;
-  uint32_t mddIndexBtreeMaxElements;
-  uint32_t mddIndexRootOffset;
+  uint32_t mddIndexInfosOffset; // address of IndexInfos for resource files (.mdd)
+  uint32_t mddIndexInfosCount; // count of IndexInfos for resource files
 }
 #ifndef _MSC_VER
 __attribute__( ( packed ) )
@@ -195,7 +186,7 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
   string encoding;
   ChunkedStorage::Reader chunks;
   QFile dictFile;
-  IndexedMdd mddResource;
+  vector< sptr< IndexedMdd > > mddResources;
   MdictParser::StyleSheets styleSheets;
 
   QAtomicInt deferredInitDone;
@@ -276,7 +267,6 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
   chunks( idx, idxHeader.chunksOffset ),
-  mddResource( idxMutex, chunks ),
   deferredInitRunnableStarted( false )
 {
   // Read the dictionary's name
@@ -395,20 +385,30 @@ void MdxDictionary::doDeferredInit()
       openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                             idxHeader.indexRootOffset ), idx, idxMutex );
 
-      for ( vector<string>::const_iterator i = getDictionaryFilenames().begin();
-            i != getDictionaryFilenames().end(); i++ )
+      vector< string > mddFileNames;
+      vector< IndexInfo > mddIndexInfos;
+      idx.seek( idxHeader.mddIndexInfosOffset );
+      for ( uint32_t i = 0; i < idxHeader.mddIndexInfosCount; i++ )
       {
-        if ( endsWith( *i, ".mdd" ) && File::exists( *i ) )
-        {
-          if ( idxHeader.hasMddFile && ( idxHeader.mddIndexBtreeMaxElements ||
-                                         idxHeader.mddIndexRootOffset ) )
-          {
-            mddResource.openIndex( IndexInfo( idxHeader.mddIndexBtreeMaxElements,
-                                              idxHeader.mddIndexRootOffset ),
-                                   idx, idxMutex );
-            mddResource.open( i->c_str() );
-          }
-        }
+        string::size_type sz = idx.read<string::size_type>();
+        vector< char > buf( sz );
+        idx.read( &buf.front(), sz );
+        uint32_t btreeMaxElements = idx.read<uint32_t>();
+        uint32_t rootOffset = idx.read<uint32_t>();
+        mddFileNames.push_back( string( &buf.front() ) );
+        mddIndexInfos.push_back( IndexInfo( btreeMaxElements, rootOffset ) );
+      }
+
+      vector< string > const dictFiles = getDictionaryFilenames();
+      for ( uint32_t i = 1; i < dictFiles.size() && i < mddFileNames.size() + 1; i++ )
+      {
+        if ( dictFiles[ i ] != mddFileNames[ i - 1 ] || !File::exists( dictFiles[ i ] ) )
+          continue;
+
+        sptr< IndexedMdd > mdd = new IndexedMdd( idxMutex, chunks );
+        mdd->openIndex( mddIndexInfos[ i - 1 ], idx, idxMutex );
+        mdd->open( dictFiles[ i ].c_str() );
+        mddResources.push_back( mdd );
       }
     }
     catch ( std::exception & e )
@@ -696,6 +696,12 @@ void MddResourceRequest::run()
       return;
     }
 
+    string u8ResourceName = Utf8::encode( resourceName );
+    QCryptographicHash hash( QCryptographicHash::Md5 );
+    hash.addData( u8ResourceName.data(), u8ResourceName.size() );
+    if ( !resourceIncluded.insert( hash.result() ).second )
+      continue;
+
     // Convert to the Windows separator
     std::replace( resourceName.begin(), resourceName.end(), '/', '\\' );
     if ( resourceName[ 0 ] != '\\' )
@@ -703,37 +709,51 @@ void MddResourceRequest::run()
       resourceName.insert( 0, 1, '\\' );
     }
 
-    string u8ResourceName = Utf8::encode( resourceName );
-    QCryptographicHash hash( QCryptographicHash::Md5 );
-    hash.addData( u8ResourceName.data(), u8ResourceName.size() );
-    if ( !resourceIncluded.insert( hash.result() ).second )
-      continue;
-
-    // Get actual resource
     Mutex::Lock _( dataMutex );
     data.clear();
-    if ( dict.mddResource.loadFile( resourceName, data ) )
-    {
-      // Check if this file has a redirection
-      // Always encoded in UTF16-LE
-      // L"@@@LINK="
-      static const char pattern[16] =
-      {
-        '@', '\0', '@', '\0', '@', '\0', 'L', '\0', 'I', '\0', 'N', '\0', 'K', '\0', '=', '\0'
-      };
 
-      if ( data.size() > sizeof( pattern ) )
+    try
+    {
+      // local file takes precedence
+      string fn = FsEncoding::dirname( dict.getDictionaryFilenames()[ 0 ] ) +
+                  FsEncoding::separator() + u8ResourceName;
+      File::loadFromFile( fn, data );
+    }
+    catch ( File::exCantOpen & )
+    {
+      for ( vector< sptr< IndexedMdd > >::const_iterator i = dict.mddResources.begin();
+            i != dict.mddResources.end(); i++  )
       {
-        if ( memcmp( &data.front(),  pattern, sizeof( pattern ) ) == 0 )
-        {
-          data.push_back( '\0' );
-          data.push_back( '\0' );
-          QString target = MdictParser::toUtf16( "UTF-16LE", &data.front() + sizeof( pattern ),
-                                                 data.size() - sizeof( pattern ) );
-          resourceName = gd::toWString( target.trimmed() );
-          continue;
-        }
+        sptr< IndexedMdd > mddResource = *i;
+        if ( mddResource->loadFile( resourceName, data ) )
+          break;
       }
+    }
+
+    // Check if this file has a redirection
+    // Always encoded in UTF16-LE
+    // L"@@@LINK="
+    static const char pattern[16] =
+    {
+      '@', '\0', '@', '\0', '@', '\0', 'L', '\0', 'I', '\0', 'N', '\0', 'K', '\0', '=', '\0'
+    };
+
+    if ( data.size() > sizeof( pattern ) )
+    {
+      if ( memcmp( &data.front(),  pattern, sizeof( pattern ) ) == 0 )
+      {
+        data.push_back( '\0' );
+        data.push_back( '\0' );
+        QString target = MdictParser::toUtf16( "UTF-16LE", &data.front() + sizeof( pattern ),
+                                               data.size() - sizeof( pattern ) );
+        resourceName = gd::toWString( target.trimmed() );
+        continue;
+      }
+    }
+
+    if ( data.size() > 0 )
+    {
+      hasAnyData = true;
 
       if( Filetype::isNameOfCSS( u8ResourceName ) )
       {
@@ -743,8 +763,6 @@ void MddResourceRequest::run()
         data.resize( bytes.size() );
         memcpy( &data.front(), bytes.constData(), bytes.size() );
       }
-
-      hasAnyData = true;
     }
 
     break;
@@ -926,7 +944,7 @@ private:
 };
 
 
-static bool indexIsOldOrBad( string const & indexFile, bool hasMddFile )
+static bool indexIsOldOrBad( vector< string > const & dictFiles, string const & indexFile )
 {
   File::Class idx( indexFile, "rb" );
   IdxHeader header;
@@ -936,7 +954,32 @@ static bool indexIsOldOrBad( string const & indexFile, bool hasMddFile )
          header.formatVersion != kCurrentFormatVersion ||
          header.parserVersion != MdictParser::kParserVersion ||
          header.foldingVersion != Folding::Version ||
-         header.hasMddFile != hasMddFile;
+         header.mddIndexInfosCount != dictFiles.size() - 1;
+}
+
+static void findResourceFiles( string const & mdx, vector< string > & dictFiles )
+{
+  string base( mdx, 0, mdx.size() - 4 );
+  // Check if there' is any file end with .mdd, which is the resource file for the dictionary
+  string resFile;
+  if ( File::tryPossibleName( base + ".mdd", resFile ) )
+  {
+    dictFiles.push_back( resFile );
+    // Find complementary .mdd file (volumes), like follows:
+    //   demo.mdx   <- main dictionary file
+    //   demo.mdd   <- main resource file ( 1st volume )
+    //   demo.1.mdd <- 2nd volume
+    //   ...
+    //   demo.n.mdd <- nth volume
+    QString baseU8 = QString::fromUtf8( base.c_str() );
+    int vol = 1;
+    while ( File::tryPossibleName( string( QString( "%1.%2.mdd" ).arg( baseU8 ).arg( vol )
+                                           .toUtf8().constBegin() ), resFile ) )
+    {
+      dictFiles.push_back( resFile );
+      vol++;
+    }
+  }
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & fileNames,
@@ -953,41 +996,38 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       continue;
 
     vector< string > dictFiles( 1, *i );
-
-    string baseName = ( ( *i )[ i->size() - 4 ] == '.' ) ?
-                      string( *i, 0, i->size() - 4 ) : string( *i, 0, i->size() - 7 );
-
-    // Check if there' is any file end with .mdd, which is the resource file for the dictionary
-    string mddFileName;
-    if ( File::tryPossibleName( baseName + ".mdd", mddFileName ) )
-      dictFiles.push_back( mddFileName );
+    findResourceFiles( *i, dictFiles );
 
     string dictId = Dictionary::makeDictionaryId( dictFiles );
-
     string indexFile = indicesDir + dictId;
 
     if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
-         indexIsOldOrBad( indexFile, !mddFileName.empty() ) )
+         indexIsOldOrBad( dictFiles, indexFile ) )
     {
       // Building the index
-      MdictParser parser( i->c_str() );
-      sptr<MdictParser> mddParser = NULL;
+      MdictParser parser;
+      list< sptr< MdictParser > > mddParsers;
 
-      if ( !parser.open() )
+      if ( !parser.open( i->c_str() ) )
         continue;
-
-      if ( File::exists( mddFileName ) )
-      {
-        mddParser = new MdictParser( mddFileName.c_str() );
-        if ( !mddParser->open() )
-        {
-          FDPRINTF( stderr, "Warning: Invalid mdd (resource) file: %s\n", mddFileName.c_str() );
-          continue;
-        }
-      }
 
       string title = string( parser.title().toUtf8().constData() );
       initializing.indexingDictionary( title );
+
+      for ( vector< string >::const_iterator mddIter = dictFiles.begin() + 1;
+            mddIter != dictFiles.end(); mddIter++ )
+      {
+        if ( File::exists( *mddIter ) )
+        {
+          sptr< MdictParser > mddParser = new MdictParser();
+          if ( !mddParser->open( mddIter->c_str() ) )
+          {
+            FDPRINTF( stderr, "Warning: Broken mdd (resource) file: %s\n", mddIter->c_str() );
+            continue;
+          }
+          mddParsers.push_back( mddParser );
+        }
+      }
 
       File::Class idx( indexFile, "wb" );
       IdxHeader idxHeader;
@@ -1035,16 +1075,22 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       }
 
       // enumerating resources if there's any
-      sptr<IndexedWords> mddIndexedWords;
-      if ( mddParser )
+      vector< sptr< IndexedWords > > mddIndices;
+      vector< string > mddFileNames;
+      while ( !mddParsers.empty() )
       {
-        mddIndexedWords = new IndexedWords();
+        sptr< MdictParser > mddParser = mddParsers.front();
+        sptr< IndexedWords > mddIndexedWords = new IndexedWords();
         ResourceHandler resourceHandler( chunks, *mddIndexedWords );
 
         while ( mddParser->readNextHeadWordIndex( headWordIndex ) )
         {
           mddParser->readRecordBlock( headWordIndex, resourceHandler );
         }
+
+        mddIndices.push_back( mddIndexedWords );
+        mddFileNames.push_back( string( mddParser->filename().toUtf8().constData() ) );
+        mddParsers.pop_front();
       }
 
       // Finish with the chunks
@@ -1092,12 +1138,26 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       idxHeader.langFrom = langs.first;
       idxHeader.langTo = langs.second;
 
-      if ( mddParser )
+      // Build index info for each mdd file
+      vector< IndexInfo > mddIndexInfos;
+      for ( vector< sptr< IndexedWords > >::const_iterator mddIndexIter = mddIndices.begin();
+            mddIndexIter != mddIndices.end(); mddIndexIter++ )
       {
-        IndexInfo resourceIdxInfo = BtreeIndexing::buildIndex( *mddIndexedWords, idx );
-        idxHeader.hasMddFile = true;
-        idxHeader.mddIndexBtreeMaxElements = resourceIdxInfo.btreeMaxElements;
-        idxHeader.mddIndexRootOffset = resourceIdxInfo.rootOffset;
+        IndexInfo resourceIdxInfo = BtreeIndexing::buildIndex( *( *mddIndexIter ), idx );
+        mddIndexInfos.push_back( resourceIdxInfo );
+      }
+
+      // Save address of IndexInfos for resource files
+      idxHeader.mddIndexInfosOffset = idx.tell();
+      idxHeader.mddIndexInfosCount = mddIndexInfos.size();
+      for ( uint32_t mi = 0; mi < mddIndexInfos.size(); mi++ )
+      {
+        const string & mddfile = mddFileNames[ mi ];
+
+        idx.write<string::size_type>( mddfile.size() + 1 );
+        idx.write( mddfile.c_str(), mddfile.size() + 1 );
+        idx.write<uint32_t>( mddIndexInfos[ mi ].btreeMaxElements );
+        idx.write<uint32_t>( mddIndexInfos[ mi ].rootOffset );
       }
 
       // That concludes it. Update the header.
