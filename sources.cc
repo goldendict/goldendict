@@ -447,7 +447,7 @@ QVariant MediaWikisModel::data( QModelIndex const & index, int role ) const
   }
 
   if ( role == Qt::CheckStateRole && !index.column() )
-    return mediawikis[ index.row() ].enabled;
+    return mediawikis[ index.row() ].enabled ? Qt::Checked : Qt::Unchecked;
 
   return QVariant();
 }
@@ -604,7 +604,7 @@ QVariant WebSitesModel::data( QModelIndex const & index, int role ) const
   }
 
   if ( role == Qt::CheckStateRole && !index.column() )
-    return webSites[ index.row() ].enabled;
+    return webSites[ index.row() ].enabled ? Qt::Checked : Qt::Unchecked;
 
   return QVariant();
 }
@@ -768,7 +768,7 @@ QVariant ProgramsModel::data( QModelIndex const & index, int role ) const
   }
 
   if ( role == Qt::CheckStateRole && !index.column() )
-    return programs[ index.row() ].enabled;
+    return programs[ index.row() ].enabled ? Qt::Checked : Qt::Unchecked;
 
   return QVariant();
 }
@@ -929,7 +929,7 @@ QVariant PathsModel::data( QModelIndex const & index, int role ) const
     return paths[ index.row() ].path;
 
   if ( role == Qt::CheckStateRole && index.column() == 1 )
-    return paths[ index.row() ].recursive;
+    return paths[ index.row() ].recursive ? Qt::Checked : Qt::Unchecked;
 
   return QVariant();
 }
@@ -1151,10 +1151,10 @@ QVariant HunspellDictsModel::data( QModelIndex const & index, int role ) const
     for( unsigned x = enabledDictionaries.size(); x--; )
     {
       if ( enabledDictionaries[ x ] == dataFiles[ index.row() ].dictId )
-        return true;
+        return Qt::Checked;
     }
 
-    return false;
+    return Qt::Unchecked;
   }
 
   return QVariant();

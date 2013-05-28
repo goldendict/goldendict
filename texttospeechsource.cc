@@ -264,7 +264,7 @@ QVariant VoiceEnginesModel::data( QModelIndex const & index, int role ) const
   }
 
   if ( role == Qt::CheckStateRole && index.column() == kColumnEnabled )
-    return voiceEngines[ index.row() ].enabled;
+    return voiceEngines[ index.row() ].enabled ? Qt::Checked : Qt::Unchecked;
 
   return QVariant();
 }
