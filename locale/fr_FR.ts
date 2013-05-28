@@ -2497,12 +2497,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="548"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier de dictionnaire a été modifié ou corrompu</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="559"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec du chargement de l&apos;article à partir de %1, cause : %2</translation>
     </message>
 </context>
 <context>
