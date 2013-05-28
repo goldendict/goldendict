@@ -249,15 +249,17 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
   return false;
 }
 
-void Class::isolateCSS( QString & css )
+void Class::isolateCSS( QString & css, QString const & wrapperSelector )
 {
   if( css.isEmpty() )
     return;
 
   int currentPos = 0;
   QString newCSS;
-  QString prefix( "span#gdfrom-" );
+  QString prefix( "#gdfrom-" );
   prefix += QString::fromLatin1( getId().c_str() );
+  if ( !wrapperSelector.isEmpty() )
+    prefix += " " + wrapperSelector;
 
   // Strip comments
   css.replace( QRegExp( "\\/\\*[^*]*\\*+([^/][^*]*\\*+)*\\/" ), QString() );

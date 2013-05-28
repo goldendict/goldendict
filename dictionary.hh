@@ -268,7 +268,7 @@ protected:
   bool loadIconFromFile( QString const & filename, bool isFullName = false );
 
   /// Make css content usable only for articles from this dictionary
-  void isolateCSS( QString & css );
+  void isolateCSS( QString & css, QString const & wrapperSelector = QString() );
 
 public:
 

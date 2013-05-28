@@ -758,7 +758,7 @@ void MddResourceRequest::run()
       if( Filetype::isNameOfCSS( u8ResourceName ) )
       {
         QString css = QString::fromUtf8( data.data(), data.size() );
-        dict.isolateCSS( css );
+        dict.isolateCSS( css, ".mdict" );
         QByteArray bytes = css.toUtf8();
         data.resize( bytes.size() );
         memcpy( &data.front(), bytes.constData(), bytes.size() );
