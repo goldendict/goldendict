@@ -1,11 +1,11 @@
 html
 {
-  background: white !important;
+  background-color: white;
 }
 
 body
 {
-  background: white !important;
+  background: white;
 }
 
 a
@@ -17,6 +17,11 @@ a
 a:hover
 {
   text-decoration: underline;
+}
+
+.gdarticle
+{
+  background: white;
 }
 
 /* Dictionary's name heading */
@@ -42,11 +47,6 @@ a:hover
   border: 1px solid white;
   margin-top: 7px;
   color: #7f7f7f;
-  background: white;
-}
-
-.gdarticle
-{
   background: white;
 }
 

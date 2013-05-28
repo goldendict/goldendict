@@ -1,6 +1,6 @@
 html
 {
-  background: white !important;
+  background-color: white;
 }
 
 body
@@ -9,7 +9,7 @@ body
   margin-right: 3px;
   margin-left:  2px;
   margin-bottom: 3px;
-  background: white !important;
+  background: white;
   font-family: Tahoma, Segoe UI, Palatino Linotype, Arial Unicode MS;
 }
 
