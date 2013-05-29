@@ -301,7 +301,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
           QDomNode parent = el.parentNode();
           if( !parent.isNull() )
           {
-            el_script.setAttribute( "language", "JavaScript" );
+            el_script.setAttribute( "type", "text/javascript" );
             parent.replaceChild( el_script, el );
 
             QDomText el_txt = dd.createTextNode( makeAudioLinkScript( string( "\"" ) + url.toEncoded().data() + "\"",

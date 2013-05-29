@@ -40,6 +40,13 @@ using std::map;
 using std::list;
 
 
+static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString & variable )
+{
+  return frame->evaluateJavaScript(
+        QString( "( typeof( %1 ) !== 'undefined' && %1 !== undefined ) ? %1 : null;" )
+        .arg( variable ) );
+}
+
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
@@ -369,9 +376,8 @@ unsigned ArticleView::getGroup( QUrl const & url )
 
 QStringList ArticleView::getArticlesList()
 {
-  return ui.definition->page()->mainFrame()->
-           evaluateJavaScript( "gdArticleContents;" ).toString().
-             trimmed().split( ' ', QString::SkipEmptyParts );
+  return evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdArticleContents" )
+      .toString().trimmed().split( ' ', QString::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -385,8 +391,7 @@ QString ArticleView::getActiveArticleId()
 
 QString ArticleView::getCurrentArticle()
 {
-  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript(
-    QString( "gdCurrentArticle;" ) );
+  QVariant v = evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdCurrentArticle" );
 
   if ( v.type() == QVariant::String )
     return v.toString();
@@ -460,7 +465,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
     if ( isFramedArticle( ca ) )
     {
-      QVariant result = ui.definition->page()->currentFrame()->evaluateJavaScript( "gdLastUrlText;" );
+      QVariant result = evaluateJavaScriptVariableSafe( ui.definition->page()->currentFrame(), "gdLastUrlText" );
 
       if ( result.type() == QVariant::String )
       {
@@ -1096,7 +1101,7 @@ void ArticleView::forward()
 
 bool ArticleView::hasSound()
 {
-  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLink;" );
+  QVariant v = evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdAudioLink" );
   if ( v.type() == QVariant::String )
     soundScript = v.toString();
   else

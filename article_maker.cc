@@ -117,7 +117,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   if ( icon.size() )
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
-  result += "<script language=\"JavaScript\">"
+  result += "<script type=\"text/javascript\">"
             "function gdMakeArticleActive( newId ) {"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "document.getElementById( gdCurrentArticle ).className = 'gdarticle';"
