@@ -1544,7 +1544,9 @@ void MainWindow::tabSwitched( int )
   updateWindowTitle();
   if (mruList.size() > 1)
   {
-    mruList.move(mruList.indexOf(ui.tabWidget->widget(ui.tabWidget->currentIndex())),0);
+    int from = mruList.indexOf( ui.tabWidget->widget( ui.tabWidget->currentIndex() ) );
+    if ( from > 0)
+      mruList.move( from, 0 );
   }
 }
 
