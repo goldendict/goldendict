@@ -2484,12 +2484,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="548"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Файли луғат тағйир ёфт ё вайрон шуд</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="559"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Боркунии мақола аз %1 қатъ шуд; сабаб: %2</translation>
     </message>
 </context>
 <context>
