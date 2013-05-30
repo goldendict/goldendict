@@ -19,9 +19,8 @@
 #endif
 
 #include <vorbis/vorbisfile.h>
-
-#include <QUrl>
 #include <QDir>
+#include "url.hh"
 
 namespace Lsa {
 
@@ -267,7 +266,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
   {
     result += "<tr>";
 
-    QUrl url;
+    Url::Class url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
     url.setPath( QString::fromUtf8( i->second.c_str() ) );
@@ -285,7 +284,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
   {
     result += "<tr>";
 
-    QUrl url;
+    Url::Class url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
     url.setPath( QString::fromUtf8( i->second.c_str() ) );

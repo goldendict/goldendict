@@ -12,12 +12,13 @@
 #include "file.hh"
 #include "filetype.hh"
 #include "htmlescape.hh"
+#include "url.hh"
 
 namespace Xdxf2Html {
 
 static void fixLink( QDomElement & el, string const & dictId, const char *attrName )
 {
-  QUrl url;
+  Url::Class url;
   url.setScheme( "bres" );
   url.setHost( QString::fromStdString(dictId) );
   url.setPath( el.attribute(attrName) );
@@ -274,7 +275,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
         if ( Filetype::isNameOfPicture( filename ) )
         {
-          QUrl url;
+          Url::Class url;
           url.setScheme( "bres" );
           url.setHost( QString::fromUtf8( dictPtr->getId().c_str() ) );
           url.setPath( QString::fromUtf8( filename.c_str() ) );
@@ -292,7 +293,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
         }
         else if( Filetype::isNameOfSound( filename ) )
         {
-          QUrl url;
+          Url::Class url;
           url.setScheme( "gdau" );
           url.setHost( QString::fromUtf8( dictPtr->getId().c_str() ) );
           url.setPath( QString::fromUtf8( filename.c_str() ) );

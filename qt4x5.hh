@@ -101,6 +101,17 @@ inline void setQueryItems( QUrl & url, QList< QPair< QString, QString > > const 
 
 }
 
+namespace Dom
+{
+
+#if IS_QT_5
+typedef int size_type;
+#else
+typedef uint size_type;
+#endif
+
+}
+
 }
 
 #endif // QT4X5_HH

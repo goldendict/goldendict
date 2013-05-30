@@ -10,12 +10,12 @@
 #include <string>
 #include <map>
 
-#include <QUrl>
 #include <QDir>
 #include <QFileInfo>
 #include <QCryptographicHash>
 
 #include "qt4x5.hh"
+#include "url.hh"
 
 namespace VoiceEngines
 {
@@ -89,7 +89,7 @@ sptr< Dictionary::DataRequest > VoiceEnginesDictionary::getArticle(
 
   result += "<table class=\"voiceengines_play\"><tr>";
 
-  QUrl url;
+  Url::Class url;
   url.setScheme( "gdtts" );
   url.setHost( "localhost" );
   url.setPath( QString::fromUtf8( wordUtf8.c_str() ) );

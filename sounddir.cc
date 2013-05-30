@@ -12,10 +12,10 @@
 #include "audiolink.hh"
 #include "wstring_qt.hh"
 #include "fsencoding.hh"
+#include "url.hh"
 #include <set>
 #include <QDir>
 #include <QFileInfo>
-#include <QUrl>
 
 namespace SoundDir {
 
@@ -181,7 +181,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
   {
     result += "<tr>";
 
-    QUrl url;
+    Url::Class url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
     url.setPath( QString::number( chain[ i->second ].articleOffset ) );
@@ -199,7 +199,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
   {
     result += "<tr>";
 
-    QUrl url;
+    Url::Class url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
     url.setPath( QString::number( chain[ i->second ].articleOffset ) );

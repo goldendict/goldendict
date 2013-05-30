@@ -5,12 +5,12 @@
 #include "wstring_qt.hh"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QUrl>
 #include <QtXml>
 #include <list>
 #include "dprintf.hh"
 #include "audiolink.hh"
 #include "qt4x5.hh"
+#include "url.hh"
 
 namespace MediaWiki {
 
@@ -111,7 +111,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   livedLongEnough( false ), isCancelling( false )
 {
   DPRINTF( "request begin\n" );
-  QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
+  Url::Class reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
   Qt4x5::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ) );
 
@@ -184,7 +184,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
 
         Mutex::Lock _( dataMutex );
 
-        for( unsigned x = 0; x < nl.length(); ++x )
+        for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
           matches.push_back( gd::toWString( nl.item( x ).toElement().attribute( "title" ) ) );
       }
     }
@@ -251,7 +251,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 #endif
            );
 
-  QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
+  Url::Class reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
   Qt4x5::Url::addQueryItem( reqUrl, "page", gd::toQString( str ) );
 
@@ -317,7 +317,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
           {
             QString articleString = textNode.toElement().text();
   
-            QUrl wikiUrl( url );
+            Url::Class wikiUrl( url );
             wikiUrl.setPath( "" );
   
             // Update any special index.php pages to be absolute

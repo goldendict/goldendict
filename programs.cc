@@ -1,13 +1,13 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include <QUrl>
 #include "programs.hh"
 #include "audiolink.hh"
 #include "htmlescape.hh"
 #include "utf8.hh"
 #include "wstring_qt.hh"
 #include "parsecmdline.hh"
+#include "url.hh"
 #include <QDir>
 #include <QFileInfo>
 
@@ -85,7 +85,7 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
 
       result += "<table class=\"programs_play\"><tr>";
 
-      QUrl url;
+      Url::Class url;
       url.setScheme( "gdprg" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
       url.setPath( QString::fromUtf8( wordUtf8.c_str() ) );

@@ -8,10 +8,11 @@
 #include "wstring_qt.hh"
 #include <limits.h>
 #include <QFile>
-#include <QUrl>
+
 #include "folding.hh"
 #include "langcoder.hh"
 #include "dprintf.hh"
+#include "url.hh"
 
 using std::vector;
 using std::string;
@@ -874,7 +875,7 @@ QPair< ArticleRequest::Words, ArticleRequest::Spacings > ArticleRequest::splitIn
 
 string ArticleRequest::linkWord( QString const & str )
 {
-  QUrl url;
+  Url::Class url;
 
   url.setScheme( "gdlookup" );
   url.setHost( "localhost" );

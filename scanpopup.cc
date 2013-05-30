@@ -4,7 +4,6 @@
 #include "scanpopup.hh"
 #include "folding.hh"
 #include "wstring_qt.hh"
-#include <QUrl>
 #include <QCursor>
 #include <QPixmap>
 #include <QBitmap>

@@ -24,12 +24,12 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 #include <QDomDocument>
-#include <QUrl>
 #include <QtEndian>
 
 #include "ufile.hh"
 #include "wstring_qt.hh"
 #include "qt4x5.hh"
+#include "url.hh"
 
 namespace Aard {
 

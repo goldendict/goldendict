@@ -21,7 +21,7 @@
 #include <stub_msvc.h>
 #endif
 
-#include <QUrl>
+#include "url.hh"
 
 namespace ZipSounds {
 
@@ -217,7 +217,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
   {
     result += "<tr>";
 
-    QUrl url;
+    Url::Class url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
     url.setPath( QString::fromUtf8( i->second.c_str() ) );
@@ -235,7 +235,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
   {
     result += "<tr>";
 
-    QUrl url;
+    Url::Class url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
     url.setPath( QString::fromUtf8( i->second.c_str() ) );

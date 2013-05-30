@@ -34,7 +34,6 @@
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
-#include <QUrl>
 
 #include <QDir>
 #include <QFileInfo>
@@ -49,6 +48,7 @@
 #include <QtSvg/QSvgRenderer>
 
 #include "qt4x5.hh"
+#include "url.hh"
 
 namespace Dsl {
 
@@ -774,7 +774,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
           ( !resourceZip.isOpen() ||
             !resourceZip.hasFile( Utf8::decode( filename ) ) );
 
-      QUrl url;
+      Url::Class url;
       url.setScheme( "gdau" );
       url.setHost( QString::fromUtf8( search ? "search" : getId().c_str() ) );
       url.setPath( QString::fromUtf8( filename.c_str() ) );
@@ -789,7 +789,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     else
     if ( Filetype::isNameOfPicture( filename ) )
     {
-      QUrl url;
+      Url::Class url;
       url.setScheme( "bres" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
       url.setPath( QString::fromUtf8( filename.c_str() ) );
@@ -866,7 +866,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     {
       // Unknown file type, downgrade to a hyperlink
 
-      QUrl url;
+      Url::Class url;
       url.setScheme( "bres" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
       url.setPath( QString::fromUtf8( filename.c_str() ) );
@@ -939,7 +939,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"ref" ) )
   {
-    QUrl url;
+    Url::Class url;
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
@@ -963,7 +963,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   {
     // Special case - insided card header was not parsed
 
-    QUrl url;
+    Url::Class url;
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
