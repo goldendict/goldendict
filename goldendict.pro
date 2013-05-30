@@ -235,7 +235,8 @@ HEADERS += folding.hh \
     mdictparser.hh \
     mdx.hh \
     voiceengines.hh \
-    ffmpegaudio.hh
+    ffmpegaudio.hh \
+    articleinspector.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -342,7 +343,8 @@ SOURCES += folding.cc \
     mdictparser.cc \
     mdx.cc \
     voiceengines.cc \
-    ffmpegaudio.cc
+    ffmpegaudio.cc \
+    articleinspector.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui

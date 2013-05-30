@@ -60,11 +60,14 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   openSearchAction( this ),
   selectCurrentArticleAction( this ),
   copyAsTextAction( this ),
+  inspectAction( this ),
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ )
 {
   ui.setupUi( this );
+
+  ui.definition->setUp( const_cast< Config::Class * >( &cfg ) );
 
   goBackAction.setShortcut( QKeySequence( "Alt+Left" ) );
   ui.definition->addAction( &goBackAction );
@@ -142,6 +145,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( &copyAsTextAction, SIGNAL( triggered() ),
            this, SLOT( copyAsText() ) );
 
+  inspectAction.setShortcut( QKeySequence( Qt::Key_F12 ) );
+  inspectAction.setText( tr( "Inspect" ) );
+  ui.definition->addAction( &inspectAction );
+  connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
+
   ui.definition->installEventFilter( this );
   ui.searchFrame->installEventFilter( this );
 
@@ -158,7 +166,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           blankPage );
 
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
-
 }
 
 // explicitly report the minimum size, to avoid
@@ -1323,6 +1330,9 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       break;
   }
 
+  menu.addSeparator();
+  menu.addAction( &inspectAction );
+
   if ( !menu.isEmpty() )
   {
     connect( this, SIGNAL( closePopupMenu() ), &menu, SLOT( close() ) );
@@ -1809,6 +1819,11 @@ void ArticleView::copyAsText()
   QString text = ui.definition->selectedText();
   if( !text.isEmpty() )
     QApplication::clipboard()->setText( text );
+}
+
+void ArticleView::inspect()
+{
+  ui.definition->triggerPageAction( QWebPage::InspectElement );
 }
 
 #ifdef Q_OS_WIN32

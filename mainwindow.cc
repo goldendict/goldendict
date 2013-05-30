@@ -843,8 +843,6 @@ MainWindow::~MainWindow()
     cfg.maximizedMainWindowGeometry = QRect();
 #endif
 
-  commitData();
-
   // Close all tabs -- they should be destroyed before network managers
   // do.
   while( ui.tabWidget->count() )
@@ -855,6 +853,8 @@ MainWindow::~MainWindow()
 
     delete w;
   }
+
+  commitData();
 
   history.save();
 }
@@ -1045,6 +1045,7 @@ void MainWindow::applyWebSettings()
 {
   QWebSettings *defaultSettings = QWebSettings::globalSettings();
   defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
+  defaultSettings->setAttribute( QWebSettings::DeveloperExtrasEnabled, true );
 }
 
 void MainWindow::makeDictionaries()

@@ -5,6 +5,74 @@
 #include <QMouseEvent>
 #include <QWebFrame>
 #include <QApplication>
+#include "articleinspector.hh"
+
+
+ArticleWebView::ArticleWebView( QWidget *parent ):
+  QWebView( parent ),
+  inspector( NULL ),
+  midButtonPressed( false ),
+  selectionBySingleClick( false ),
+  showInspectorDirectly( true )
+{
+}
+
+ArticleWebView::~ArticleWebView()
+{
+  if ( inspector )
+    inspector->deleteLater();
+}
+
+void ArticleWebView::setUp( Config::Class * cfg )
+{
+  this->cfg = cfg;
+}
+
+void ArticleWebView::triggerPageAction( QWebPage::WebAction action, bool checked )
+{
+  if ( action == QWebPage::InspectElement )
+  {
+    // Get or create inspector instance for current view.
+    if ( !inspector )
+    {
+      inspector = new ArticleInspector( cfg );
+      inspector->setPage( page() );
+      connect( this, SIGNAL( destroyed() ), inspector, SLOT( beforeClosed() ) );
+    }
+
+    if ( showInspectorDirectly )
+    {
+      showInspectorDirectly = false;
+      // Bring up the inspector window and set focus
+      inspector->show();
+      inspector->activateWindow();
+      inspector->raise();
+      return;
+    }
+  }
+
+  QWebView::triggerPageAction( action, checked );
+}
+
+bool ArticleWebView::event( QEvent * event )
+{
+  switch ( event->type() )
+  {
+  case QEvent::MouseButtonRelease:
+  case QEvent::MouseButtonDblClick:
+    showInspectorDirectly = true;
+    break;
+
+  case QEvent::ContextMenu:
+    showInspectorDirectly = false;
+    break;
+
+  default:
+    break;
+  }
+
+  return QWebView::event( event );
+}
 
 void ArticleWebView::mousePressEvent( QMouseEvent * event )
 {
