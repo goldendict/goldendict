@@ -29,6 +29,7 @@
 
 #include "ufile.hh"
 #include "wstring_qt.hh"
+#include "qt4x5.hh"
 
 namespace Aard {
 
@@ -594,7 +595,7 @@ void AardArticleRequestRunnable::run()
 
 void AardArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -621,7 +622,7 @@ void AardArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;

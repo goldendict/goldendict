@@ -19,10 +19,21 @@ isEmpty( hasGit ) {
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
-QT += webkit
-QT += xml
-QT += network
-QT += svg
+
+QT += core \
+      gui \
+      xml \
+      network \
+      svg
+
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT += widgets \
+          webkitwidgets \
+          printsupport
+} else {
+    QT += webkit
+}
+
 CONFIG += exceptions \
     rtti \
     stl
@@ -46,11 +57,17 @@ win32 {
     LIBS += -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.3.2 \
         -lao \
         -lavutil-gd \
         -lavformat-gd \
         -lavcodec-gd
+
+    greaterThan(QT_MAJOR_VERSION, 4) {
+      LIBS += -lhunspell-1.3
+    } else {
+      LIBS += -lhunspell-1.3.2
+    }
+
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
     LIBS += -L$${PWD}/winlibs/lib
@@ -236,7 +253,8 @@ HEADERS += folding.hh \
     mdx.hh \
     voiceengines.hh \
     ffmpegaudio.hh \
-    articleinspector.hh
+    articleinspector.hh \
+    qt4x5.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -411,12 +429,13 @@ TRANSLATIONS += locale/ru_RU.ts \
   QMAKE_EXTRA_TARGETS += revtarget
   PRE_TARGETDEPS      += $$PWD/version.txt
   revtarget.target     = $$PWD/version.txt
-!win32 {
-  revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
-}
-win32 {
-  revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
-}
+
+  !win32 {
+    revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
+  } else {
+    revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
+  }
+
   ALL_SOURCES = $$SOURCES $$HEADERS $$FORMS
   for(src, ALL_SOURCES) {
     QUALIFIED_SOURCES += $${PWD}/$${src}

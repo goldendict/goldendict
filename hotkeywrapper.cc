@@ -4,6 +4,10 @@
 #endif
 
 #include "hotkeywrapper.hh"
+
+#include <QWidget>
+#include <QMainWindow>
+
 #include "dprintf.hh"
 
 #ifdef Q_WS_X11
@@ -15,6 +19,9 @@
 QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
   QtSingleApplication( argc, argv )
 {
+#if defined( Q_OS_WIN ) && IS_QT_5
+  installNativeEventFilter( this );
+#endif
 }
 
 QHotkeyApplication::QHotkeyApplication( QString const & id,
@@ -201,7 +208,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 
 //////////////////////////////////////////////////////////////////////////
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
 
 void HotkeyWrapper::init()
 {
@@ -332,6 +339,25 @@ void HotkeyWrapper::unregister()
 }
 
 
+#if IS_QT_5
+
+bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, void * message, long * result )
+{
+  MSG * msg = reinterpret_cast< MSG * >( message );
+
+  if ( msg->message == WM_HOTKEY )
+  {
+    for (int i = 0; i < hotkeyWrappers.size(); i++)
+    {
+      if ( hotkeyWrappers.at(i)->winEvent( msg, result ) )
+        return true;
+    }
+  }
+
+  return false;
+}
+
+#else // IS_QT_5
 
 bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
 {
@@ -346,6 +372,8 @@ bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
 
   return QApplication::winEventFilter( message, result );
 }
+
+#endif
 
 //////////////////////////////////////////////////////////////////////////
 

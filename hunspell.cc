@@ -9,17 +9,21 @@
 #include "wstring_qt.hh"
 #include "language.hh"
 #include "langcoder.hh"
+
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSemaphore>
 #include <QRegExp>
 #include <QDir>
 #include <QCoreApplication>
+#include <QFileInfo>
+
 #include <set>
 #include <hunspell/hunspell.hxx>
+
 #include "dprintf.hh"
 #include "fsencoding.hh"
-#include <QFileInfo>
+#include "qt4x5.hh"
 
 namespace HunspellMorpho {
 
@@ -197,7 +201,7 @@ void HunspellArticleRequestRunnable::run()
 
 void HunspellArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -373,7 +377,7 @@ void HunspellHeadwordsRequestRunnable::run()
 
 void HunspellHeadwordsRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -597,7 +601,7 @@ void HunspellPrefixMatchRequestRunnable::run()
 
 void HunspellPrefixMatchRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

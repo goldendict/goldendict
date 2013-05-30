@@ -10,6 +10,8 @@
 #include "article_netmgr.hh"
 #include "wstring_qt.hh"
 #include "dprintf.hh"
+#include "qt4x5.hh"
+
 using std::string;
 
 namespace
@@ -134,24 +136,24 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   {
     contentType = "text/html";
 
-    if ( url.queryItemValue( "blank" ) == "1" )
+    if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
 
     bool groupIsValid = false;
 
-    QString word = url.queryItemValue( "word" );
-    unsigned group = url.queryItemValue( "group" ).toUInt( &groupIsValid );
+    QString word = Qt4x5::Url::queryItemValue( url, "word" );
+    unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
 
     // See if we have some dictionaries muted
 
     QSet< QString > mutedDicts =
-        QSet< QString >::fromList( url.queryItemValue( "muted" ).split( ',' ) );
+        QSet< QString >::fromList( Qt4x5::Url::queryItemValue( url, "muted" ).split( ',' ) );
 
     // Unpack contexts
 
     QMap< QString, QString > contexts;
 
-    QString contextsEncoded = url.queryItemValue( "contexts" );
+    QString contextsEncoded = Qt4x5::Url::queryItemValue( url, "contexts" );
 
     if ( contextsEncoded.size() )
     {

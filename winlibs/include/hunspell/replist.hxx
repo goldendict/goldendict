@@ -6,6 +6,10 @@
 
 #include "w_char.hxx"
 
+#ifdef near
+# undef near
+#endif
+
 class LIBHUNSPELL_DLL_EXPORTED RepList
 {
 protected:
@@ -24,4 +28,5 @@ public:
     int match(const char * word, int n);
     int conv(const char * word, char * dest);
 };
+
 #endif

@@ -48,6 +48,8 @@
 // For SVG handling
 #include <QtSvg/QSvgRenderer>
 
+#include "qt4x5.hh"
+
 namespace Dsl {
 
 using namespace Details;
@@ -301,11 +303,11 @@ public:
 
 void DslDictionary::deferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     if ( !deferredInitRunnableStarted )
@@ -329,11 +331,11 @@ string const & DslDictionary::ensureInitDone()
 
 void DslDictionary::doDeferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     // Do deferred init
@@ -950,7 +952,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       {
         QList< QPair< QString, QString > > query;
         query.append( QPair< QString, QString >( attr.left( n ), attr.mid( n + 1 ) ) );
-        url.setQueryItems( query );
+        Qt4x5::Url::setQueryItems( url, query );
       }
     }
 
@@ -1162,7 +1164,7 @@ void DslArticleRequestRunnable::run()
 
 void DslArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1197,7 +1199,7 @@ void DslArticleRequest::run()
   for( unsigned x = 0; x < chain.size(); ++x )
   {
     // Check if we're cancelled occasionally
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -1347,7 +1349,7 @@ void DslResourceRequestRunnable::run()
 void DslResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

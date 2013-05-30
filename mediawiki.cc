@@ -10,6 +10,7 @@
 #include <list>
 #include "dprintf.hh"
 #include "audiolink.hh"
+#include "qt4x5.hh"
 
 namespace MediaWiki {
 
@@ -112,7 +113,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
-  reqUrl.addQueryItem( "apfrom", gd::toQString( str ) );
+  Qt4x5::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ) );
 
   netReply = mgr.get( QNetworkRequest( reqUrl ) );
 
@@ -252,7 +253,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
-  reqUrl.addQueryItem( "page", gd::toQString( str ) );
+  Qt4x5::Url::addQueryItem( reqUrl, "page", gd::toQString( str ) );
 
   sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
   

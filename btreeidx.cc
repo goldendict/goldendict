@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "dprintf.hh"
+#include "qt4x5.hh"
 
 //#define __BTREE_USE_LZO
 // LZO mode is experimental and unsupported. Tests didn't show any substantial
@@ -178,7 +179,7 @@ void BtreeWordSearchRunnable::run()
 
 void BtreeWordSearchRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -225,7 +226,7 @@ void BtreeWordSearchRequest::run()
     if ( chainOffset )
     for( ; ; )
     {
-      if ( isCancelled )
+      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         break;
       
       //DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
@@ -296,7 +297,7 @@ void BtreeWordSearchRequest::run()
       }
     }
 
-    if ( charsLeftToChop && !isCancelled )
+    if ( charsLeftToChop && !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       --charsLeftToChop;
       folded.resize( folded.size() - 1 );

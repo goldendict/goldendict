@@ -12,15 +12,16 @@
 #include <QClipboard>
 #include <QKeyEvent>
 #include <QFileDialog>
+#include <QDebug>
+#include <QWebElement>
+#include <QCryptographicHash>
 #include "folding.hh"
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
 #include "programs.hh"
 #include "dprintf.hh"
 #include "ffmpegaudio.hh"
-#include <QDebug>
-#include <QWebElement>
-#include <QCryptographicHash>
+#include "qt4x5.hh"
 
 #include <assert.h>
 
@@ -200,11 +201,11 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
-  req.addQueryItem( "word", word );
-  req.addQueryItem( "group", QString::number( group ) );
+  Qt4x5::Url::addQueryItem( req, "word", word );
+  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
 
   if ( scrollTo.size() )
-    req.addQueryItem( "scrollto", scrollTo );
+    Qt4x5::Url::addQueryItem( req, "scrollto", scrollTo );
 
   if ( contexts.size() )
   {
@@ -218,13 +219,13 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
     buf.close();
 
-    req.addQueryItem( "contexts", QString::fromLatin1( buf.buffer().toBase64() ) );
+    Qt4x5::Url::addQueryItem( req,  "contexts", QString::fromLatin1( buf.buffer().toBase64() ) );
   }
 
   QString mutedDicts = getMutedForGroup( group );
 
   if ( mutedDicts.size() )
-    req.addQueryItem( "muted", mutedDicts );
+    Qt4x5::Url::addQueryItem( req,  "muted", mutedDicts );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -325,11 +326,11 @@ void ArticleView::loadFinished( bool )
     }
   }
   else
-  if ( url.queryItemValue( "scrollto" ).startsWith( "gdfrom-" ) )
+  if ( Qt4x5::Url::queryItemValue( url, "scrollto" ).startsWith( "gdfrom-" ) )
   {
     // There is no active article saved in history, but we have it as a parameter.
     // setCurrentArticle will save it and scroll there.
-    setCurrentArticle( url.queryItemValue( "scrollto" ), true );
+    setCurrentArticle( Qt4x5::Url::queryItemValue( url, "scrollto" ), true );
   }
 
 
@@ -375,8 +376,8 @@ void ArticleView::handleUrlChanged( QUrl const & url )
 
 unsigned ArticleView::getGroup( QUrl const & url )
 {
-  if ( url.scheme() == "gdlookup" && url.hasQueryItem( "group" ) )
-    return url.queryItemValue( "group" ).toUInt();
+  if ( url.scheme() == "gdlookup" && Qt4x5::Url::hasQueryItem( url, "group" ) )
+    return Qt4x5::Url::queryItemValue( url, "group" ).toUInt();
 
   return 0;
 }
@@ -693,10 +694,10 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
       def = def.mid( 1 );
     }
 
-    if( url.hasQueryItem( "dict" ) )
+    if( Qt4x5::Url::hasQueryItem( url, "dict" ) )
     {
       // Link to other dictionary
-      QString dictName( url.queryItemValue( "dict" ) );
+      QString dictName( Qt4x5::Url::queryItemValue( url, "dict" ) );
       if( !dictName.isEmpty() )
         msg = tr( "Definition from dictionary \"%1\": %2" ).arg( dictName ).arg( def );
     }
@@ -763,10 +764,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     else
     {
       QString newScrollTo( scrollTo );
-      if( url.hasQueryItem( "dict" ) )
+      if( Qt4x5::Url::hasQueryItem( url, "dict" ) )
       {
         // Link to other dictionary
-        QString dictName( url.queryItemValue( "dict" ) );
+        QString dictName( Qt4x5::Url::queryItemValue( url, "dict" ) );
         for( unsigned i = 0; i < allDictionaries.size(); i++ )
         {
           if( dictName.compare( QString::fromUtf8( allDictionaries[ i ]->getName().c_str() ) ) == 0 )
@@ -938,7 +939,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 // TODO: Port TTS
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
     // Text to speech
-    QString md5Id = url.queryItemValue( "engine" );
+    QString md5Id = Qt4x5::Url::queryItemValue( url, "engine" );
     QString text( url.path().mid( 1 ) );
 
     for ( Config::VoiceEngines::const_iterator i = cfg.voiceEngines.begin();
@@ -1054,14 +1055,14 @@ void ArticleView::updateMutedContents()
 
   QString mutedDicts = getMutedForGroup( group );
 
-  if ( currentUrl.queryItemValue( "muted" ) != mutedDicts )
+  if ( Qt4x5::Url::queryItemValue( currentUrl, "muted" ) != mutedDicts )
   {
     // The list has changed -- update the url
 
-    currentUrl.removeQueryItem( "muted" );
+    Qt4x5::Url::removeQueryItem( currentUrl, "muted" );
 
     if ( mutedDicts.size() )
-    currentUrl.addQueryItem( "muted", mutedDicts );
+    Qt4x5::Url::addQueryItem( currentUrl, "muted", mutedDicts );
 
     saveHistoryUserData();
 

@@ -24,6 +24,8 @@ extern "C" {
 
 #include <vector>
 
+#include "qt4x5.hh"
+
 using std::vector;
 
 namespace Ffmpeg
@@ -336,13 +338,14 @@ bool DecoderContext::play( QString & errorString )
   AVPacket packet;
   av_init_packet( &packet );
 
-  while ( !isCancelled_ && av_read_frame( formatContext_, &packet ) >= 0 )
+  while ( !Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) &&
+          av_read_frame( formatContext_, &packet ) >= 0 )
   {
     if ( packet.stream_index == audioStream_->index )
     {
       int gotFrame = 0;
       avcodec_decode_audio4( codecContext_, frame, &gotFrame, &packet );
-      if ( !isCancelled_ && gotFrame )
+      if ( !Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) && gotFrame )
       {
         playFrame( frame );
       }
@@ -351,13 +354,14 @@ bool DecoderContext::play( QString & errorString )
     av_free_packet( &packet );
   }
 
-  if ( !isCancelled_ && codecContext_->codec->capabilities & CODEC_CAP_DELAY )
+  if ( !Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) &&
+       codecContext_->codec->capabilities & CODEC_CAP_DELAY )
   {
     av_init_packet( &packet );
     int gotFrame = 0;
     while ( avcodec_decode_audio4( codecContext_, frame, &gotFrame, &packet ) >= 0 && gotFrame )
     {
-      if ( isCancelled_ )
+      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) )
         break;
       playFrame( frame );
     }
@@ -536,7 +540,7 @@ void DecoderThread::run()
 
   while ( !deviceMutex_.tryLock( 100 ) )
   {
-    if ( isCancelled_ )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) )
       return;
   }
 

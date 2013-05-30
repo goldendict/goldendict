@@ -254,5 +254,6 @@ void HistoryModel::historyChanged()
 {
 //  qDebug() << "History Changed!!";
 
-  reset();
+  beginResetModel();
+  endResetModel();
 }

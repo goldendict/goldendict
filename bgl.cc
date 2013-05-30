@@ -31,6 +31,8 @@
 
 #include <QRegExp>
 
+#include "qt4x5.hh"
+
 namespace Bgl {
 
 using std::map;
@@ -472,7 +474,7 @@ void BglHeadwordsRequestRunnable::run()
 
 void BglHeadwordsRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -484,7 +486,7 @@ void BglHeadwordsRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -657,7 +659,7 @@ void BglArticleRequest::fixHebArticle(string & hebArticle) // Hebrew support - r
 
 void BglArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -689,7 +691,7 @@ void BglArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -909,7 +911,7 @@ void BglResourceRequestRunnable::run()
 
 void BglResourceRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -927,7 +929,7 @@ void BglResourceRequest::run()
 
   for( size_t count = resourcesCount; count--; )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       break;
 
     vector< char > nameData( idx.read< uint32_t >() );

@@ -23,22 +23,24 @@
 #include <QPainter>
 #include <QRegExp>
 
+#include "qt4x5.hh"
+
 namespace Dictionary {
 
 bool Request::isFinished()
 {
-  return (int)isFinishedFlag;
+  return Qt4x5::AtomicInt::loadAcquire( isFinishedFlag );
 }
 
 void Request::update()
 {
-  if ( !isFinishedFlag )
+  if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
     emit updated();
 }
 
 void Request::finish()
 {
-  if ( !isFinishedFlag )
+  if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
   {
     isFinishedFlag.ref();
 

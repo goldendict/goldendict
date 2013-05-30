@@ -20,12 +20,13 @@
 
 #include "ex.hh"
 #include "qtsingleapplication.h"
+#include "qt4x5.hh"
 
 //////////////////////////////////////////////////////////////////////////
 
 struct HotkeyStruct
 {
-  HotkeyStruct() {};
+  HotkeyStruct() {}
   HotkeyStruct( quint32 key, quint32 key2, quint32 modifier, int handle, int id );
 
   quint32 key, key2;
@@ -187,6 +188,9 @@ public:
 };
 
 class QHotkeyApplication : public QtSingleApplication
+#if defined( Q_OS_WIN ) && IS_QT_5
+    , public QAbstractNativeEventFilter
+#endif
 {
   friend class HotkeyWrapper;
 
@@ -207,8 +211,12 @@ protected:
   void unregisterWrapper(HotkeyWrapper *wrapper);
 
 #ifdef Q_OS_WIN32
+# if IS_QT_5
+  virtual bool nativeEventFilter( const QByteArray & eventType, void * message, long * result );
+# else // IS_QT_5
   virtual bool winEventFilter ( MSG * message, long * result );
 #endif
+#endif // Q_OS_WIN32
 
   QList<HotkeyWrapper*> hotkeyWrappers;
 };

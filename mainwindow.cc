@@ -7,7 +7,9 @@
 #include "preferences.hh"
 #include "about.hh"
 #include "mruqmenu.hh"
-#include <limits.h>
+
+#include <QDebug>
+#include <QTextStream>
 #include <QDir>
 #include <QMessageBox>
 #include <QIcon>
@@ -15,16 +17,22 @@
 #include <QToolBar>
 #include <QCloseEvent>
 #include <QDesktopServices>
+#include <QProcess>
+#include <QCryptographicHash>
+#include <QFileDialog>
+#include <QPrinter>
+#include <QPageSetupDialog>
+#include <QPrintPreviewDialog>
+#include <QPrintDialog>
+
+#include <limits.h>
 #include <set>
 #include <map>
 #include "dprintf.hh"
-#include <QDebug>
-#include <QTextStream>
+
 #include "dictinfo.hh"
 #include "fsencoding.hh"
-#include <QProcess>
 #include "historypanewidget.hh"
-#include <QCryptographicHash>
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
