@@ -775,6 +775,11 @@ Class load() throw( exError )
   if ( !dictInfoGeometry.isNull() )
     c.dictInfoGeometry = QByteArray::fromBase64( dictInfoGeometry.toElement().text().toLatin1() );
 
+  QDomNode inspectorGeometry = root.namedItem( "inspectorGeometry" );
+
+  if ( !inspectorGeometry.isNull() )
+    c.inspectorGeometry = QByteArray::fromBase64( inspectorGeometry.toElement().text().toLatin1() );
+
   QDomNode timeForNewReleaseCheck = root.namedItem( "timeForNewReleaseCheck" );
 
   if ( !timeForNewReleaseCheck.isNull() )
@@ -1497,6 +1502,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "dictInfoGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.dictInfoGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "inspectorGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.inspectorGeometry.toBase64() ) ) );
     root.appendChild( opt );
 
     opt = dd.createElement( "timeForNewReleaseCheck" );
