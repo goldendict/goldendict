@@ -3455,9 +3455,11 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 
     if( cfg.editDictionaryCommandLine.isEmpty() || dictFilename.isEmpty() )
     {
-      scanPopup.get()->blockSignals( true );
+      if ( scanPopup )
+        scanPopup.get()->blockSignals( true );
       showDictionaryInfo( id );
-      scanPopup.get()->blockSignals( false );
+      if ( scanPopup )
+        scanPopup.get()->blockSignals( false );
     }
     else
     {
@@ -3469,9 +3471,11 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 
       if( result && result == infoAction )
       {
-        scanPopup.get()->blockSignals( true );
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( true );
         showDictionaryInfo( id );
-        scanPopup.get()->blockSignals( false );
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( false );
       }
       else
       if( result && result == editAction )
