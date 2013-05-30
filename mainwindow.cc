@@ -3023,6 +3023,20 @@ void MainWindow::on_rescanFiles_triggered()
 
   makeScanPopup();
   installHotKeys();
+
+  // Reload suggestion list
+  QString word = translateLine->text();
+  translateInputChanged( word );
+
+  // Reload all tabs
+  for( int i = 0; i < ui.tabWidget->count(); ++i )
+  {
+    ArticleView & view =
+      dynamic_cast< ArticleView & >( *( ui.tabWidget->widget( i ) ) );
+
+    view.reload();
+  }
+
 }
 
 void MainWindow::on_alwaysOnTop_triggered( bool checked )
