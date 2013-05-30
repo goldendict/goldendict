@@ -3,6 +3,7 @@
 namespace Url
 {
 
+#if IS_QT_5
 void Class::setPath( const QString & path )
 {
   QLatin1Char slash( '/' );
@@ -11,5 +12,6 @@ void Class::setPath( const QString & path )
   else
     QUrl::setPath( slash + path );
 }
+#endif
 
 }
