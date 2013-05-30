@@ -5,28 +5,35 @@
 #define __ARTICLEWEBVIEW_HH_INCLUDED__
 
 #include <QWebView>
+#include "config.hh"
+
+class ArticleInspector;
 
 /// A thin wrapper around QWebView to accomodate to some ArticleView's needs.
-/// Currently the only added feature is an ability to know if the middle mouse
-/// button is pressed or not according to the view's current state. This is used
-/// to open links in new tabs when they are clicked with middle button.
-/// There's also an added posibility to get double-click events after the fact
-/// with the doubleClicked() signal.
+/// Currently the only added features:
+/// 1. Ability to know if the middle mouse button is pressed or not according
+///    to the view's current state. This is used to open links in new tabs when
+///    they are clicked with middle button. There's also an added posibility to
+///    get double-click events after the fact with the doubleClicked() signal.
+/// 2. Manage our own QWebInspector instance. In order to show inspector correctly,
+///    use triggerPageAction( QWebPage::InspectElement ) instead.
 class ArticleWebView: public QWebView
 {
   Q_OBJECT
 
 public:
 
-  ArticleWebView( QWidget * parent ): QWebView( parent ),
-                                      midButtonPressed( false ),
-                                      selectionBySingleClick( false )
-  {}
+  ArticleWebView( QWidget * parent );
+  ~ArticleWebView();
+
+  void setUp( Config::Class * cfg );
 
   bool isMidButtonPressed() const
   { return midButtonPressed; }
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
+
+  void triggerPageAction( QWebPage::WebAction action, bool checked = false );
 
 signals:
 
@@ -38,6 +45,7 @@ signals:
 
 protected:
 
+  bool event( QEvent * event );
   void mousePressEvent( QMouseEvent * event );
   void mouseReleaseEvent( QMouseEvent * event );
   void mouseDoubleClickEvent( QMouseEvent * event );
@@ -46,8 +54,12 @@ protected:
 
 private:
 
+  Config::Class * cfg;
+  ArticleInspector * inspector;
+
   bool midButtonPressed;
   bool selectionBySingleClick;
+  bool showInspectorDirectly;
 };
 
 #endif

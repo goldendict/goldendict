@@ -13,7 +13,6 @@
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
 
-
 class ResourceToSaveHandler;
 
 /// A widget with the web view tailored to view and handle articles -- it
@@ -32,7 +31,7 @@ class ArticleView: public QFrame
 
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction,
-          copyAsTextAction;
+          copyAsTextAction, inspectAction;
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
@@ -268,6 +267,9 @@ private slots:
 
   /// Copy current selection as plain text
   void copyAsText();
+
+  /// Inspect element
+  void inspect();
 
 private:
 
