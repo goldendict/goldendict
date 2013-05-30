@@ -48,7 +48,7 @@ pre
    behave better (have some space before the start of article) */
 .gdarticle
 {
-  display: block;
+  display: table-cell;
   padding-top: 1px;
   margin-top: -9px;
   margin-bottom: 8px;
