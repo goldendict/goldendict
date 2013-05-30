@@ -87,6 +87,13 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QLabel" name="qtVersion">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
