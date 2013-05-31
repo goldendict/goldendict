@@ -87,6 +87,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.setupUi( this );
 
+  articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
+
   // use our own, cutsom statusbar
   setStatusBar(0);
   mainStatusBar = new MainStatusBar( this );
@@ -1739,6 +1741,12 @@ void MainWindow::editPreferences()
       applyQtStyleSheet( p.displayStyle, p.addonStyle );
       articleMaker.setDisplayStyle( p.displayStyle, p.addonStyle );
       needReload = true;
+    }
+
+    if( cfg.preferences.collapseBigArticles != p.collapseBigArticles
+        || cfg.preferences.articleSizeLimit != p.articleSizeLimit )
+    {
+      articleMaker.setCollapseParameters( p.collapseBigArticles, p.articleSizeLimit );
     }
 
     // See if we need to reapply expand optional parts mode

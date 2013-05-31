@@ -207,6 +207,9 @@ struct Preferences
 
   unsigned historyStoreInterval;
 
+  bool collapseBigArticles;
+  int articleSizeLimit;
+
   QString addonStyle;
 
   Preferences();
