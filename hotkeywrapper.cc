@@ -128,7 +128,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 
     if (hs.key == vk && hs.modifier == mod) {
 
-      #ifdef Q_WS_WIN32
+      #ifdef Q_OS_WIN32
       // If that was a copy-to-clipboard shortcut, re-emit it back so it could
       // reach its original destination so it could be acted upon.
       if ( ( vk == VK_INSERT || vk == 'c' || vk == 'C' ) && mod == MOD_CONTROL )

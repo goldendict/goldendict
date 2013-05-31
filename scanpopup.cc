@@ -25,7 +25,7 @@ using std::wstring;
 /// in their behavior on those platforms.
 static Qt::WindowFlags popupWindowFlags =
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup
@@ -322,7 +322,7 @@ void ScanPopup::translateWord( QString const & word )
 
   inputWord = str;
   engagePopup( false,
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
       true // We only focus popup under Windows when activated via Ctrl+C+C
            // -- on Linux it already has an implicit focus
 #else

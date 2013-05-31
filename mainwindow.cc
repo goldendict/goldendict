@@ -2557,13 +2557,13 @@ void MainWindow::checkForNewRelease()
 #ifdef Q_WS_X11
           "x11"
 #endif
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
           "mac"
 #endif
 #ifdef Q_WS_QWS
           "qws"
 #endif
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
           "win"
 #endif
           ) );
