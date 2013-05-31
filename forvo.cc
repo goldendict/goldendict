@@ -15,7 +15,6 @@
 #include "utf8.hh"
 #include "dprintf.hh"
 #include "qt4x5.hh"
-#include "url.hh"
 
 namespace Forvo {
 
@@ -174,7 +173,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
   else
     key = apiKey;
 
-  Url::Class reqUrl = QUrl::fromEncoded(
+  QUrl reqUrl = QUrl::fromEncoded(
       QString( "http://apifree.forvo.com/key/" + key + "/format/xml/action/word-pronunciations/word/" +
       QString::fromLatin1( QUrl::toPercentEncoding( gd::toQString( str ) ) ) + "/language/" + languageCode
        ).toUtf8() );
@@ -261,7 +260,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
               {
                 articleBody += "<tr>";
 
-                Url::Class url( mp3.toElement().text() );
+                QUrl url( mp3.toElement().text() );
 
                 string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 

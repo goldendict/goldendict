@@ -11,6 +11,7 @@
 #include <QDebug>
 #include <QTextStream>
 #include <QDir>
+#include <QUrl>
 #include <QMessageBox>
 #include <QIcon>
 #include <QList>
@@ -33,7 +34,7 @@
 #include "dictinfo.hh"
 #include "fsencoding.hh"
 #include "historypanewidget.hh"
-#include "url.hh"
+#include "qt4x5.hh"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -2306,7 +2307,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
   updateBackForwardButtons();
 
   #if 0
-  Url::Class req;
+  QUrl req;
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
@@ -2900,7 +2901,7 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
 
   while ( ( pos = rx.indexIn( html, pos ) ) != -1 )
   {
-    Url::Class url( rx.cap( 1 ) );
+    QUrl url( rx.cap( 1 ) );
     QString host = url.host();
     QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( url.path(), "/" ) );
 

@@ -10,7 +10,6 @@
 #include "dprintf.hh"
 #include "audiolink.hh"
 #include "qt4x5.hh"
-#include "url.hh"
 
 namespace MediaWiki {
 
@@ -111,7 +110,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   livedLongEnough( false ), isCancelling( false )
 {
   DPRINTF( "request begin\n" );
-  Url::Class reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
+  QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
   Qt4x5::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ) );
 
@@ -251,7 +250,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 #endif
            );
 
-  Url::Class reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
+  QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
   Qt4x5::Url::addQueryItem( reqUrl, "page", gd::toQString( str ) );
 
@@ -317,8 +316,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
           {
             QString articleString = textNode.toElement().text();
   
-            Url::Class wikiUrl( url );
-            wikiUrl.setPath( "" );
+            QUrl wikiUrl( url );
+            wikiUrl.setPath( "/" );
   
             // Update any special index.php pages to be absolute
             articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),

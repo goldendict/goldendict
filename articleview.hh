@@ -6,12 +6,12 @@
 
 #include <QWebView>
 #include <QMap>
+#include <QUrl>
 #include <list>
 #include "article_netmgr.hh"
 #include "instances.hh"
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
-#include "url.hh"
 
 class ResourceToSaveHandler;
 
@@ -42,7 +42,7 @@ class ArticleView: public QFrame
   /// a multitude of requests.
   std::list< sptr< Dictionary::DataRequest > > resourceDownloadRequests;
   /// Url of the resourceDownloadRequests
-  Url::Class resourceDownloadUrl;
+  QUrl resourceDownloadUrl;
 
   /// For resources opened via desktop services
   QString desktopOpenedTempFile;

@@ -7,11 +7,12 @@
 #include <stdint.h>
 #endif
 
+#include <QUrl>
+
 #include "article_netmgr.hh"
 #include "wstring_qt.hh"
 #include "dprintf.hh"
 #include "qt4x5.hh"
-#include "url.hh"
 
 using std::string;
 
@@ -57,7 +58,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     {
       // We have to override the local load policy for the qrc scheme, hence
       // we use qrcx and redirect it here back to qrc
-      Url::Class newUrl( req.url() );
+      QUrl newUrl( req.url() );
 
       newUrl.setScheme( "qrc" );
       newUrl.setHost( "" );
@@ -85,7 +86,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 
     //DPRINTF( "Referer: %s\n", referer.data() );
 
-    Url::Class refererUrl = QUrl::fromEncoded( referer );
+    QUrl refererUrl = QUrl::fromEncoded( referer );
 
     //DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
     //        getHostBase( refererUrl ).toUtf8().data() );
@@ -105,8 +106,8 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     QString fileName = req.url().toLocalFile();
     if( req.url().host().isEmpty() && articleMaker.adjustFilePath( fileName ) )
     {
-      Url::Class newUrl( req.url() );
-      newUrl.setPath( QUrl::fromLocalFile( fileName ).path() );
+      QUrl newUrl( req.url() );
+      newUrl.setPath( Qt4x5::Url::ensureLeadingSlash( QUrl::fromLocalFile( fileName ).path() ) );
 
       QNetworkRequest newReq( req );
       newReq.setUrl( newUrl );
@@ -232,7 +233,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   if ( url.scheme() == "gdpicture" )
   {
     contentType = "text/html";
-    Url::Class imgUrl ( url );
+    QUrl imgUrl ( url );
     imgUrl.setScheme( "bres" );
     return articleMaker.makePicturePage( imgUrl.toEncoded().data() );
   }

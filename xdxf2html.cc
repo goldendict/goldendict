@@ -3,6 +3,7 @@
 
 #include "xdxf2html.hh"
 #include <QtXml>
+#include <Qurl>
 #include "dprintf.hh"
 #include "utf8.hh"
 #include "wstring_qt.hh"
@@ -12,16 +13,16 @@
 #include "file.hh"
 #include "filetype.hh"
 #include "htmlescape.hh"
-#include "url.hh"
+#include "qt4x5.hh"
 
 namespace Xdxf2Html {
 
 static void fixLink( QDomElement & el, string const & dictId, const char *attrName )
 {
-  Url::Class url;
+  QUrl url;
   url.setScheme( "bres" );
   url.setHost( QString::fromStdString(dictId) );
-  url.setPath( el.attribute(attrName) );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( el.attribute(attrName) ) );
 
   el.setAttribute( attrName, url.toEncoded().data() );
 }
@@ -275,10 +276,10 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
         if ( Filetype::isNameOfPicture( filename ) )
         {
-          Url::Class url;
+          QUrl url;
           url.setScheme( "bres" );
           url.setHost( QString::fromUtf8( dictPtr->getId().c_str() ) );
-          url.setPath( QString::fromUtf8( filename.c_str() ) );
+          url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
           QDomElement newEl = dd.createElement( "img" );
           newEl.setAttribute( "src", url.toEncoded().data() );
@@ -293,10 +294,10 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
         }
         else if( Filetype::isNameOfSound( filename ) )
         {
-          Url::Class url;
+          QUrl url;
           url.setScheme( "gdau" );
           url.setHost( QString::fromUtf8( dictPtr->getId().c_str() ) );
-          url.setPath( QString::fromUtf8( filename.c_str() ) );
+          url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
           QDomElement el_script = dd.createElement( "script" );
           QDomNode parent = el.parentNode();

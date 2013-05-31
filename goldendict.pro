@@ -254,7 +254,6 @@ HEADERS += folding.hh \
     voiceengines.hh \
     ffmpegaudio.hh \
     articleinspector.hh \
-    url.hh \
     qt4x5.hh
 
 FORMS += groups.ui \
@@ -363,8 +362,7 @@ SOURCES += folding.cc \
     mdx.cc \
     voiceengines.cc \
     ffmpegaudio.cc \
-    articleinspector.cc \
-    url.cc
+    articleinspector.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui

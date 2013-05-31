@@ -7,7 +7,8 @@
 #include "utf8.hh"
 #include "wstring_qt.hh"
 #include "parsecmdline.hh"
-#include "url.hh"
+#include "qt4x5.hh"
+
 #include <QDir>
 #include <QFileInfo>
 
@@ -85,10 +86,10 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
 
       result += "<table class=\"programs_play\"><tr>";
 
-      Url::Class url;
+      QUrl url;
       url.setScheme( "gdprg" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( QString::fromUtf8( wordUtf8.c_str() ) );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( wordUtf8.c_str() ) ) );
 
       string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 

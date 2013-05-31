@@ -8,11 +8,12 @@
 #include "wstring_qt.hh"
 #include <limits.h>
 #include <QFile>
+#include <QUrl>
 
 #include "folding.hh"
 #include "langcoder.hh"
 #include "dprintf.hh"
-#include "url.hh"
+#include "qt4x5.hh"
 
 using std::vector;
 using std::string;
@@ -875,11 +876,11 @@ QPair< ArticleRequest::Words, ArticleRequest::Spacings > ArticleRequest::splitIn
 
 string ArticleRequest::linkWord( QString const & str )
 {
-  Url::Class url;
+  QUrl url;
 
   url.setScheme( "gdlookup" );
   url.setHost( "localhost" );
-  url.setPath( str );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( str ) );
 
   string escapedResult = Html::escape( str.toUtf8().data() );
   return string( "<a href=\"" ) + url.toEncoded().data() + "\">" + escapedResult +"</a>";

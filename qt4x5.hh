@@ -48,6 +48,17 @@ inline int loadAcquire( QAtomicInt const & ref )
 namespace Url
 {
 
+// This wrapper is created due to behavior change of the setPath() method
+// See: https://bugreports.qt-project.org/browse/QTBUG-27728
+//       https://codereview.qt-project.org/#change,38257
+inline QString ensureLeadingSlash( const QString & path )
+{
+  QLatin1Char slash( '/' );
+  if ( path.startsWith( slash ) )
+    return path;
+  return slash + path;
+}
+
 inline bool hasQueryItem( QUrl const & url, QString const & key )
 {
 #if IS_QT_5

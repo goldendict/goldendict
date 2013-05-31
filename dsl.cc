@@ -48,7 +48,6 @@
 #include <QtSvg/QSvgRenderer>
 
 #include "qt4x5.hh"
-#include "url.hh"
 
 namespace Dsl {
 
@@ -774,10 +773,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
           ( !resourceZip.isOpen() ||
             !resourceZip.hasFile( Utf8::decode( filename ) ) );
 
-      Url::Class url;
+      QUrl url;
       url.setScheme( "gdau" );
       url.setHost( QString::fromUtf8( search ? "search" : getId().c_str() ) );
-      url.setPath( QString::fromUtf8( filename.c_str() ) );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -789,10 +788,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     else
     if ( Filetype::isNameOfPicture( filename ) )
     {
-      Url::Class url;
+      QUrl url;
       url.setScheme( "bres" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( QString::fromUtf8( filename.c_str() ) );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       vector< char > imgdata;
       bool resize = false;
@@ -866,10 +865,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     {
       // Unknown file type, downgrade to a hyperlink
 
-      Url::Class url;
+      QUrl url;
       url.setScheme( "bres" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( QString::fromUtf8( filename.c_str() ) );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       result += string( "<a class=\"dsl_s\" href=\"" ) + url.toEncoded().data()
              + "\">" + processNodeChildren( node ) + "</a>";
@@ -939,11 +938,11 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"ref" ) )
   {
-    Url::Class url;
+    QUrl url;
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
-    url.setPath( gd::toQString( node.renderAsText() ) );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( node.renderAsText() ) ) );
     if( !node.tagAttrs.empty() )
     {
       QString attr = gd::toQString( node.tagAttrs ).remove( '\"' );
@@ -963,13 +962,13 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   {
     // Special case - insided card header was not parsed
 
-    Url::Class url;
+    QUrl url;
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
     wstring nodeStr = node.renderAsText();
     ArticleDom nodeDom( nodeStr );
-    url.setPath( gd::toQString( nodeDom.root.renderAsText() ) );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( nodeDom.root.renderAsText() ) ) );
 
     result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( nodeDom.root ) + "</a>";
   }

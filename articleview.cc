@@ -13,6 +13,7 @@
 #include <QKeyEvent>
 #include <QFileDialog>
 #include <QDebug>
+#include <QUrl>
 #include <QWebElement>
 #include <QCryptographicHash>
 #include "folding.hh"
@@ -22,7 +23,6 @@
 #include "dprintf.hh"
 #include "ffmpegaudio.hh"
 #include "qt4x5.hh"
-#include "url.hh"
 
 #include <assert.h>
 
@@ -165,7 +165,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   // Load the default blank page instantly, so there would be no flicker.
 
   QString contentType;
-  Url::Class blankPage( "gdlookup://localhost?blank=1" );
+  QUrl blankPage( "gdlookup://localhost?blank=1" );
 
   sptr< Dictionary::DataRequest > r = articleNetMgr.getResource( blankPage,
                                                                  contentType );
@@ -198,7 +198,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts )
 {
-  Url::Class req;
+  QUrl req;
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
@@ -255,7 +255,7 @@ void ArticleView::showAnticipation()
 
 void ArticleView::loadFinished( bool )
 {
-  Url::Class url = ui.definition->url();
+  QUrl url = ui.definition->url();
 
   // See if we have any iframes in need of expansion
 
@@ -482,7 +482,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
         contexts[ ca.mid( 7 ) ] = QString::fromLatin1( url.toEncoded() );
 
-        Url::Class target;
+        QUrl target;
 
         QString queryWord = result.toString();
 
@@ -665,7 +665,7 @@ QString ArticleView::getMutedForGroup( unsigned group )
 void ArticleView::linkHovered ( const QString & link, const QString & , const QString & )
 {
   QString msg;
-  Url::Class url(link);
+  QUrl url(link);
 
   if ( url.scheme() == "bres" )
   {
@@ -723,7 +723,7 @@ void ArticleView::linkClicked( QUrl const & url_ )
 {
   updateCurrentArticleFromCurrentFrame();
 
-  Url::Class url( url_ );
+  QUrl url( url_ );
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( url, contexts );
@@ -1044,7 +1044,7 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
 
 void ArticleView::updateMutedContents()
 {
-  Url::Class currentUrl = ui.definition->url();
+  QUrl currentUrl = ui.definition->url();
 
   if ( currentUrl.scheme() != "gdlookup" )
     return; // Weird url -- do nothing
@@ -1164,7 +1164,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * saveImageAction = 0;
   QAction * saveSoundAction = 0;
 
-  Url::Class targetUrl( r.linkUrl() );
+  QUrl targetUrl( r.linkUrl() );
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
@@ -1193,7 +1193,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   }
 
   QWebElement el = r.element();
-  Url::Class imageUrl;
+  QUrl imageUrl;
   if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
   {
     imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
@@ -1381,7 +1381,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if( result == saveImageAction || result == saveSoundAction )
     {
-      Url::Class url = ( result == saveImageAction ) ? imageUrl : targetUrl;
+      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
       QString savePath;
       QString fileName;
 
