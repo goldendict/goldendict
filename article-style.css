@@ -57,6 +57,16 @@ pre
   font-style:normal;
 }
 
+/* CSS trick to prevent the floating elements to overflow
+   the article boundaries, see Issue #333. */
+.gdarticle:after
+{
+   content: "";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
 /* Appears between the articles */
 .gdarticleseparator
 {
