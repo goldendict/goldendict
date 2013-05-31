@@ -62,10 +62,14 @@ win32 {
         -lavformat-gd \
         -lavcodec-gd
 
-    greaterThan(QT_MAJOR_VERSION, 4) {
-      LIBS += -lhunspell-1.3
+    isEmpty(HUNSPELL_LIB) {
+      greaterThan(QT_MAJOR_VERSION, 4) {
+        LIBS += -lhunspell-1.3-sjlj
+      } else {
+        LIBS += -lhunspell-1.3.2
+      }
     } else {
-      LIBS += -lhunspell-1.3.2
+      LIBS += -l$$HUNSPELL_LIB
     }
 
     RC_FILE = goldendict.rc
