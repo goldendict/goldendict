@@ -33,6 +33,7 @@ std::string makeAudioLinkScript( std::string const & url,
     escaped = ( ch == '\\' );
   }
 
-  return "if ( !gdAudioLinks.first ) { gdAudioLinks.first = " + ref + "; }" +
-         "gdAudioLinks['" + dictionaryId + "'] = " + ref + ";";
+  std::string audioLinkForDict = "gdAudioLinks['" + dictionaryId + "']";
+  return "gdAudioLinks.first = gdAudioLinks.first || " + ref + ";" +
+         audioLinkForDict + " = " + audioLinkForDict + " || " + ref + ";";
 }
