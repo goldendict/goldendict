@@ -1108,16 +1108,30 @@ void ArticleView::forward()
 
 bool ArticleView::hasSound()
 {
-  QVariant v = evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdAudioLink" );
+  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
   if ( v.type() == QVariant::String )
-    soundScript = v.toString();
-  else
-    soundScript.clear();
-  return !soundScript.isEmpty();
+    return !v.toString().isEmpty();
+  return false;
 }
 
 void ArticleView::playSound()
 {
+  QVariant v;
+  QString soundScript;
+
+  v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks[gdAudioLinks.current]" );
+
+  if ( v.type() == QVariant::String )
+    soundScript = v.toString();
+
+  // fallback to the first one
+  if ( soundScript.isEmpty() )
+  {
+    v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
+    if ( v.type() == QVariant::String )
+      soundScript = v.toString();
+  }
+
   if ( !soundScript.isEmpty() )
     openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
 }

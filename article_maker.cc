@@ -118,12 +118,13 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
   result += "<script type=\"text/javascript\">"
+            "gdAudioLinks = { first: null, current: null };"
             "function gdMakeArticleActive( newId ) {"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "document.getElementById( gdCurrentArticle ).className = 'gdarticle';"
             "document.getElementById( 'gdfrom-' + newId ).className = 'gdarticle gdactivearticle';"
-            "gdCurrentArticle = 'gdfrom-' + newId; articleview.onJsActiveArticleChanged(gdCurrentArticle);"
-            "eval( 'gdActivateAudioLink_' + newId + '();' ); } }"
+            "gdCurrentArticle = 'gdfrom-' + newId; gdAudioLinks.current = newId;"
+            "articleview.onJsActiveArticleChanged(gdCurrentArticle); } }"
             "var overIframeId = null;"
             "function gdSelectArticle( id ) {"
             "var selection = window.getSelection(); var range = document.createRange();"
@@ -173,7 +174,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   {
     // This is a special group containing internal welcome/help pages
     string result = makeHtmlHeader( inWord, QString() );
-    
+
     if ( inWord == tr( "Welcome!" ) )
     {
       result += tr(
@@ -188,7 +189,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
 "suggestions or just wonder what the others think, you are welcome at the program's <a href=\"http://goldendict.org/forum/\">forum</a>."
 "<p>Check program's <a href=\"http://goldendict.org/\">website</a> for the updates. "
 "<p>(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later."
-        
+
         ).toUtf8().data();
     }
     else
@@ -215,7 +216,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
       // Not found
       return makeNotFoundTextFor( inWord, "help" );
     }
-    
+
     result += "</body></html>";
 
     sptr< Dictionary::DataRequestInstant > r = new Dictionary::DataRequestInstant( true );
@@ -369,7 +370,7 @@ void ArticleRequest::altSearchFinished()
 {
   if ( altsDone )
     return;
-  
+
   // Check every request for finishing
   for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
          altSearches.begin(); i != altSearches.end(); )
@@ -389,13 +390,13 @@ void ArticleRequest::altSearchFinished()
   if ( altSearches.empty() )
   {
     DPRINTF( "alts finished\n" );
-    
+
     // They all've finished! Now we can look up bodies
 
     altsDone = true; // So any pending signals in queued mode won't mess us up
 
     vector< wstring > altsVector( alts.begin(), alts.end() );
-    
+
     for( unsigned x = 0; x < altsVector.size(); ++x )
     {
       DPRINTF( "Alt: %ls\n",
@@ -431,9 +432,9 @@ void ArticleRequest::bodyFinished()
     return;
 
   DPRINTF( "some body finished\n" );
-  
+
   bool wasUpdated = false;
-  
+
   while ( bodyRequests.size() )
   {
     // Since requests should go in order, check the first one first
@@ -453,7 +454,7 @@ void ArticleRequest::bodyFinished()
             activeDicts[ activeDicts.size() - bodyRequests.size() ];
 
         string dictId = activeDict->getId();
-        
+
         string head;
 
         string gdFrom = "gdfrom-" + Html::escape( dictId );
@@ -465,13 +466,13 @@ void ArticleRequest::bodyFinished()
         else
         {
           // This is the first article
-          head += "<script language=\"JavaScript\">"
+          head += "<script type=\"text/javascript\">"
                   "var gdCurrentArticle=\"" + gdFrom  + "\"; "
                   "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script language=\"JavaScript\">var gdArticleContents; "
+        head += "<script type=\"text/javascript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";</script>";
 
@@ -505,11 +506,11 @@ void ArticleRequest::bodyFinished()
         }
 
         Mutex::Lock _( dataMutex );
-  
+
         size_t offset = data.size();
-        
+
         data.resize( data.size() + head.size() + ( req.dataSize() > 0 ? req.dataSize() : 0 ) );
-  
+
         memcpy( &data.front() + offset, head.data(), head.size() );
 
         if ( req.dataSize() > 0 )
@@ -536,7 +537,7 @@ void ArticleRequest::bodyFinished()
     // No requests left, end the article
 
     bodyDone = true;
-    
+
     {
       string footer;
 
@@ -545,7 +546,7 @@ void ArticleRequest::bodyFinished()
         footer += "</span></span>";
         closePrevSpan = false;
       }
-      
+
       if ( !foundAnyDefinitions )
       {
         // No definitions were ever found, say so to the user.
@@ -568,11 +569,11 @@ void ArticleRequest::bodyFinished()
       }
 
       Mutex::Lock _( dataMutex );
-  
+
       size_t offset = data.size();
-      
+
       data.resize( data.size() + footer.size() );
-  
+
       memcpy( &data.front() + offset, footer.data(), footer.size() );
     }
 
@@ -640,11 +641,11 @@ void ArticleRequest::stemmedSearchFinished()
 
   {
     Mutex::Lock _( dataMutex );
-  
+
     size_t offset = data.size();
-  
+
     data.resize( data.size() + footer.size() );
-  
+
     memcpy( &data.front() + offset, footer.data(), footer.size() );
   }
 

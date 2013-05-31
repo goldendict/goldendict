@@ -2181,6 +2181,7 @@ void MainWindow::dictsListItemActivated( QListWidgetItem * item )
 {
   QString id = item->data( Qt::UserRole ).toString();
   getCurrentArticleView()->jumpToDictionary( id );
+  updatePronounceAvailability();
 }
 
 void MainWindow::dictsListSelectionChanged()

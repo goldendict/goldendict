@@ -6,7 +6,7 @@
 std::string addAudioLink( std::string const & url,
                           std::string const & dictionaryId )
 {
-    return std::string( "<script language=\"JavaScript\">" +
+    return std::string( "<script type=\"text/javascript\">" +
                         makeAudioLinkScript( url, dictionaryId ) +
                         "</script>" );
 }
@@ -33,9 +33,6 @@ std::string makeAudioLinkScript( std::string const & url,
     escaped = ( ch == '\\' );
   }
 
-  return std::string( "var gdAudioLink; "
-                      "if ( !gdAudioLink ) gdAudioLink=" ) + ref +
-         "; if ( typeof gdActivateAudioLink_" + dictionaryId + " != 'function' ) {"
-         "eval( 'function gdActivateAudioLink_" + dictionaryId + "() {"
-         "gdAudioLink=" + ref + "; }' ); }";
+  return "if ( !gdAudioLinks.first ) { gdAudioLinks.first = " + ref + "; }" +
+         "gdAudioLinks['" + dictionaryId + "'] = " + ref + ";";
 }
