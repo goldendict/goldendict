@@ -10,7 +10,7 @@
 
 #include "dprintf.hh"
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 #include <X11/Xlibint.h>
 #endif
 
@@ -97,7 +97,7 @@ void HotkeyWrapper::waitKey2()
 {
   state2 = false;
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 
   if ( keyToUngrab != grabbedKeys.end() )
   {
@@ -185,7 +185,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
       state2waiter = hs;
       QTimer::singleShot(500, this, SLOT(waitKey2()));
 
-      #ifdef Q_WS_X11
+      #ifdef HAVE_X11
 
       // Grab the second key, unless it's grabbed already
       // Note that we only grab the clipboard key only if

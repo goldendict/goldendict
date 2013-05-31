@@ -47,7 +47,7 @@
 #include "wstring_qt.hh"
 #endif
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 #include <QX11Info>
 #include <X11/Xlib.h>
 #endif
@@ -2395,7 +2395,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 void MainWindow::toggleMainWindow( bool onlyShow, bool byIconClick )
 #else
 void MainWindow::toggleMainWindow( bool onlyShow )
@@ -2441,7 +2441,7 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   if ( shown )
   {
     focusTranslateLine();
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
     Window wh = 0;
     int rev = 0;
     XGetInputFocus( QX11Info::display(), &wh, &rev );
@@ -2554,7 +2554,7 @@ void MainWindow::checkForNewRelease()
   QNetworkRequest req(
     QUrl( "http://goldendict.org/latest_release.php?current="
           PROGRAM_VERSION "&platform="
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
           "x11"
 #endif
 #ifdef Q_OS_MAC
@@ -2649,7 +2649,7 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
   switch(r) {
     case QSystemTrayIcon::Trigger:
       // Left click toggles the visibility of main window
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
       toggleMainWindow( false, true );
 #else
       toggleMainWindow();

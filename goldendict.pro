@@ -82,6 +82,7 @@ win32 {
 }
 
 unix:!mac {
+  DEFINES += HAVE_X11
   # This is to keep symbols for backtraces
   QMAKE_CXXFLAGS += -rdynamic
   QMAKE_LFLAGS += -rdynamic

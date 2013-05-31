@@ -3,7 +3,7 @@
 
 #include <QtGui>
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 
 #include <set>
 

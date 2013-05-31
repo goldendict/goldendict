@@ -5,7 +5,7 @@
 
 #include <QtGui>
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 #include <X11/Xlib.h>
 #include <X11/extensions/record.h>
 #include <QX11Info>
@@ -13,7 +13,7 @@
 
 bool isRECORDBroken()
 {
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 
  char const * vendor = ServerVendor( QX11Info::display() );
 
