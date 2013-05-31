@@ -3033,6 +3033,20 @@ void MainWindow::on_rescanFiles_triggered()
 
   makeScanPopup();
   installHotKeys();
+
+  // Reload suggestion list
+  QString word = translateLine->text();
+  translateInputChanged( word );
+
+  // Reload all tabs
+  for( int i = 0; i < ui.tabWidget->count(); ++i )
+  {
+    ArticleView & view =
+      dynamic_cast< ArticleView & >( *( ui.tabWidget->widget( i ) ) );
+
+    view.reload();
+  }
+
 }
 
 void MainWindow::on_alwaysOnTop_triggered( bool checked )
@@ -3451,9 +3465,11 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 
     if( cfg.editDictionaryCommandLine.isEmpty() || dictFilename.isEmpty() )
     {
-      scanPopup.get()->blockSignals( true );
+      if ( scanPopup )
+        scanPopup.get()->blockSignals( true );
       showDictionaryInfo( id );
-      scanPopup.get()->blockSignals( false );
+      if ( scanPopup )
+        scanPopup.get()->blockSignals( false );
     }
     else
     {
@@ -3465,9 +3481,11 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 
       if( result && result == infoAction )
       {
-        scanPopup.get()->blockSignals( true );
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( true );
         showDictionaryInfo( id );
-        scanPopup.get()->blockSignals( false );
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( false );
       }
       else
       if( result && result == editAction )

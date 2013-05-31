@@ -35,7 +35,6 @@ class ArticleView: public QFrame
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
-  QString soundScript;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make

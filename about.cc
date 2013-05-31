@@ -3,6 +3,7 @@
 
 #include "about.hh"
 #include <QtGui>
+#include <QSysInfo>
 
 #include "qt4x5.hh"
 
@@ -19,11 +20,11 @@ About::About( QWidget * parent ): QDialog( parent )
   else
     version = QString::fromLatin1( versionFile.readAll() ).trimmed();
 
-#ifdef _M_X64
-  version += " (64-bit)";
-#endif
-
   ui.version->setText( version );
+  ui.qtVersion->setText( tr( "Based on Qt %1 (%2, %3 bit)" ).arg(
+                           QLatin1String( qVersion() ),
+                           QLatin1String( "GCC " ) + QLatin1String( __VERSION__ ),
+                           QString::number( QSysInfo::WordSize ) ) );
 
   QFile creditsFile( ":/CREDITS.txt" );
 

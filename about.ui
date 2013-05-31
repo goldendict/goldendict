@@ -63,6 +63,9 @@
            <property name="text">
             <string notr="true">#.#</string>
            </property>
+           <property name="textInteractionFlags">
+            <set>Qt::TextEditorInteraction</set>
+           </property>
           </widget>
          </item>
         </layout>
@@ -84,6 +87,16 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="qtVersion">
+         <property name="text">
+          <string notr="true">Based on Qt #.#.# (GCC #.#, 32/64 bit)</string>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextEditorInteraction</set>
          </property>
         </widget>
        </item>
