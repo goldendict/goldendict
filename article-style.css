@@ -2706,4 +2706,14 @@ in bg url to hide it from iemac */
 
 .gdexpandicon {
     cursor:pointer;
+    width:16px;
+    height:16px;
+    background-image:url('qrcx://localhost/icons/arrow.png');
+}
+
+.gdcollapseicon {
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    background-image:url('qrcx://localhost/icons/downarrow.png');
 }

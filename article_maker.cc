@@ -124,8 +124,8 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "gdAudioLinks = { first: null, current: null };"
             "function gdMakeArticleActive( newId ) {"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
-            "document.getElementById( gdCurrentArticle ).className = 'gdarticle';"
-            "document.getElementById( 'gdfrom-' + newId ).className = 'gdarticle gdactivearticle';"
+            "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
+            "el=document.getElementById( 'gdfrom-' + newId ); el.className = el.className + ' gdactivearticle';"
             "gdCurrentArticle = 'gdfrom-' + newId; gdAudioLinks.current = newId;"
             "articleview.onJsActiveArticleChanged(gdCurrentArticle); } }"
             "var overIframeId = null;"
@@ -144,11 +144,11 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "function gdExpandArticle( id ) { elem = document.getElementById('gdarticlefrom-'+id); ico = document.getElementById('expandicon-'+id); art=document.getElementById('gdfrom-'+id);"
             "t=window.event.target || window.event.srcElement;"
             "if(elem.style.display=='inline' && t==ico) {"
-            "elem.style.display='none'; ico.src='qrcx://localhost/icons/arrow.png';"
+            "elem.style.display='none'; ico.className='gdexpandicon';"
             "art.className = art.className+' gdcollapsedarticle';"
             "document.getElementById('gddictname-'+id).style.cursor='pointer';"
             "} else {"
-            "elem.style.display='inline'; ico.src='qrcx://localhost/icons/uparrow.png';"
+            "elem.style.display='inline'; ico.className='gdcollapseicon';"
             "art.className=art.className.replace(' gdcollapsedarticle','');"
             "document.getElementById('gddictname-'+id).style.cursor='default';"
             "} }"
@@ -534,8 +534,8 @@ void ArticleRequest::bodyFinished()
           + "/dicticon.png\"></span><span class=\"gdfromprefix\">"  +
           Html::escape( tr( "From " ).toUtf8().data() ) + "</span>" +
           Html::escape( activeDict->getName().c_str() )
-          + "<span class=\"gdexpandicon\"><img src=\"qrcx://localhost/icons/"
-          + ( collapse ? "arrow.png" : "uparrow.png" )
+          + "<span><img src=\"qrcx://localhost/icons/blank.png\" class=\""
+          + ( collapse ? "gdexpandicon" : "gdcollapseicon" )
           + "\" id=\"expandicon-" + Html::escape( dictId ) + "\"></span>"
           + "</div>";
 
