@@ -2412,12 +2412,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mdx.cc" line="548"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Słoŭnikavy fajł skažany ci paškodžany</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="559"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Abmyła ładavańnia artykuła z %1, z pryčyny: %2</translation>
     </message>
 </context>
 <context>
