@@ -122,7 +122,7 @@ Preferences::Preferences():
   storeHistory( 1 ),
   alwaysExpandOptionalParts( true )
 , historyStoreInterval( 0 )
-, collapseBigArticles( true )
+, collapseBigArticles( false )
 , articleSizeLimit( 2000 )
 {
 }

@@ -141,9 +141,17 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "function gdExpandOptPart( expanderId, optionalId ) {  var d1=document.getElementById(expanderId); var i = 0; if( d1.alt == '[+]' ) {"
             "d1.alt = '[-]'; d1.src = 'qrcx://localhost/icons/collapse_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
             "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } };"
-            "function gdExpandArticle( id ) { elem = document.getElementById('gdarticlefrom-'+id); ico = document.getElementById('expandicon-'+id);"
-            "if(elem.style.display=='inline') { elem.style.display='none'; ico.style.display='inline' }"
-            "else { elem.style.display='inline'; ico.style.display='none' } };"
+            "function gdExpandArticle( id ) { elem = document.getElementById('gdarticlefrom-'+id); ico = document.getElementById('expandicon-'+id); art=document.getElementById('gdfrom-'+id);"
+            "t=window.event.target || window.event.srcElement;"
+            "if(elem.style.display=='inline' && t==ico) {"
+            "elem.style.display='none'; ico.src='qrcx://localhost/icons/arrow.png';"
+            "art.className = art.className+' gdcollapsedarticle';"
+            "document.getElementById('gddictname-'+id).style.cursor='pointer';"
+            "} else {"
+            "elem.style.display='inline'; ico.src='qrcx://localhost/icons/uparrow.png';"
+            "art.className=art.className.replace(' gdcollapsedarticle','');"
+            "document.getElementById('gddictname-'+id).style.cursor='default';"
+            "} }"
             "</script>";
 
   result += "</head><body>";
@@ -488,20 +496,6 @@ void ArticleRequest::bodyFinished()
                   "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
 
-        string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script type=\"text/javascript\">var gdArticleContents; "
-          "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
-          "else gdArticleContents += \"" + jsVal + " \";</script>";
-
-        head += string( "<span class=\"gdarticle" ) +
-                ( closePrevSpan ? "" : " gdactivearticle" ) +
-                "\" id=\"" + gdFrom +
-                "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +
-                " onContextMenu=\"gdMakeArticleActive( '" + jsVal + "' );\""
-                + ">";
-
-        closePrevSpan = true;
-
         bool collapse = false;
         if( articleSizeLimit >= 0 )
         {
@@ -518,15 +512,31 @@ void ArticleRequest::bodyFinished()
           }
         }
 
-        head += string( "<div class=\"gddictname\" onclick=\"gdExpandArticle(\'" )
-            + Html::escape( dictId ) + "\');\"><span class=\"gddicticon\"><img src=\"gico://"
-                +  Html::escape( dictId )
+        string jsVal = Html::escapeForJavaScript( dictId );
+        head += "<script type=\"text/javascript\">var gdArticleContents; "
+          "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
+          "else gdArticleContents += \"" + jsVal + " \";</script>";
+
+        head += string( "<span class=\"gdarticle" ) +
+                ( closePrevSpan ? "" : " gdactivearticle" ) +
+                ( collapse ? " gdcollapsedarticle" : "" ) +
+                "\" id=\"" + gdFrom +
+                "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +
+                " onContextMenu=\"gdMakeArticleActive( '" + jsVal + "' );\""
+                + ">";
+
+        closePrevSpan = true;
+
+        head += string( "<div class=\"gddictname\" onclick=\"gdExpandArticle(\'" ) + dictId + "\');"
+          + ( collapse ? "\" style=\"cursor:pointer;" : "" )
+          + "\" id=\"gddictname-" + Html::escape( dictId )
+          + "\"><span class=\"gddicticon\"><img src=\"gico://" + Html::escape( dictId )
           + "/dicticon.png\"></span><span class=\"gdfromprefix\">"  +
           Html::escape( tr( "From " ).toUtf8().data() ) + "</span>" +
           Html::escape( activeDict->getName().c_str() )
-          + "<span class=\"gdexpandicon\"><img src=\"qrcx://localhost/icons/expand_article.png\" id=\"expandicon-"
-          + Html::escape( activeDict->getId().c_str() ) + "\" style=\"display:" + ( collapse ? "inline" : "none" )
-          + "\"></span>"
+          + "<span class=\"gdexpandicon\"><img src=\"qrcx://localhost/icons/"
+          + ( collapse ? "arrow.png" : "uparrow.png" )
+          + "\" id=\"expandicon-" + Html::escape( dictId ) + "\"></span>"
           + "</div>";
 
         head += "<span class=\"gdarticlebody gdlangfrom-";
