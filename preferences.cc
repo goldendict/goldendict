@@ -135,6 +135,9 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.historySaveIntervalField->setValue( p.historyStoreInterval );
   ui.alwaysExpandOptionalParts->setChecked( p.alwaysExpandOptionalParts );
 
+  ui.collapseBigArticles->setChecked( p.collapseBigArticles );
+  ui.articleSizeLimit->setValue( p.articleSizeLimit );
+
   // Different platforms have different keys available
 
 #ifdef Q_OS_WIN32
@@ -251,6 +254,9 @@ Config::Preferences Preferences::getPreferences()
   p.maxStringsInHistory = ui.historyMaxSizeField->text().toUInt();
   p.historyStoreInterval = ui.historySaveIntervalField->text().toUInt();
   p.alwaysExpandOptionalParts = ui.alwaysExpandOptionalParts->isChecked();
+
+  p.collapseBigArticles = ui.collapseBigArticles->isChecked();
+  p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();

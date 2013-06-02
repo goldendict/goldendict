@@ -2713,3 +2713,19 @@ in bg url to hide it from iemac */
 .mwiki .infl-table { display: none }
 /****default hide dict icon ***/
 .gddicticon{display:none;}
+
+.gdexpandicon {
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    vertical-align: text-bottom;
+    background-image:url('qrcx://localhost/icons/arrow.png');
+}
+
+.gdcollapseicon {
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    vertical-align: text-bottom;
+    background-image:url('qrcx://localhost/icons/downarrow.png');
+}

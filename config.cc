@@ -122,6 +122,8 @@ Preferences::Preferences():
   storeHistory( 1 ),
   alwaysExpandOptionalParts( true )
 , historyStoreInterval( 0 )
+, collapseBigArticles( false )
+, articleSizeLimit( 2000 )
 {
 }
 
@@ -725,6 +727,12 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "historyStoreInterval" ).isNull() )
       c.preferences.historyStoreInterval = preferences.namedItem( "historyStoreInterval" ).toElement().text().toUInt() ;
+
+    if ( !preferences.namedItem( "collapseBigArticles" ).isNull() )
+      c.preferences.collapseBigArticles = ( preferences.namedItem( "collapseBigArticles" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "articleSizeLimit" ).isNull() )
+      c.preferences.articleSizeLimit = preferences.namedItem( "articleSizeLimit" ).toElement().text().toUInt() ;
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -1446,7 +1454,14 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "addonStyle" );
     opt.appendChild( dd.createTextNode( c.preferences.addonStyle ) );
     preferences.appendChild( opt );
-  }
+
+    opt = dd.createElement( "collapseBigArticles" );
+    opt.appendChild( dd.createTextNode( c.preferences.collapseBigArticles ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "articleSizeLimit" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.articleSizeLimit ) ) );
+    preferences.appendChild( opt );  }
 
   {
     QDomElement opt = dd.createElement( "lastMainGroupId" );
