@@ -147,11 +147,15 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "elem.style.display='none'; ico.className='gdexpandicon';"
             "art.className = art.className+' gdcollapsedarticle';"
             "document.getElementById('gddictname-'+id).style.cursor='pointer';"
-            "} else {"
+            "window.event.stopPropagation(); ico.title=''; art.title='";
+  result += tr( "Expand article" ).toUtf8().data();
+  result += "' } else {"
             "elem.style.display='inline'; ico.className='gdcollapseicon';"
             "art.className=art.className.replace(' gdcollapsedarticle','');"
             "document.getElementById('gddictname-'+id).style.cursor='default';"
-            "} }"
+            "art.title=''; ico.title='";
+  result += tr( "Collapse article").toUtf8().data();
+  result += "' } }"
             "</script>";
 
   result += "</head><body>";
@@ -523,6 +527,7 @@ void ArticleRequest::bodyFinished()
                 "\" id=\"" + gdFrom +
                 "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +
                 " onContextMenu=\"gdMakeArticleActive( '" + jsVal + "' );\""
+                + ( collapse ? string( " title=\"" ) + tr( "Expand article" ).toUtf8().data() + "\"" : "" )
                 + ">";
 
         closePrevSpan = true;
@@ -536,8 +541,9 @@ void ArticleRequest::bodyFinished()
           Html::escape( activeDict->getName().c_str() )
           + "<span><img src=\"qrcx://localhost/icons/blank.png\" class=\""
           + ( collapse ? "gdexpandicon" : "gdcollapseicon" )
-          + "\" id=\"expandicon-" + Html::escape( dictId ) + "\"></span>"
-          + "</div>";
+          + "\" id=\"expandicon-" + Html::escape( dictId ) + "\""
+          + ( collapse ? "" : string( " title=\"" ) + tr( "Collapse article" ).toUtf8().data() + "\"" )
+          + "></span>" + "</div>";
 
         head += "<span class=\"gdarticlebody gdlangfrom-";
         head += LangCoder::intToCode2( activeDict->getLangFrom() ).toLatin1().data();

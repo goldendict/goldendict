@@ -2708,6 +2708,7 @@ in bg url to hide it from iemac */
     cursor:pointer;
     width:16px;
     height:16px;
+    vertical-align: text-bottom;
     background-image:url('qrcx://localhost/icons/arrow.png');
 }
 
@@ -2715,5 +2716,6 @@ in bg url to hide it from iemac */
     cursor:pointer;
     width:16px;
     height:16px;
+    vertical-align: text-bottom;
     background-image:url('qrcx://localhost/icons/downarrow.png');
 }
