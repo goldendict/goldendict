@@ -31,7 +31,7 @@
     <message>
         <location filename="../about.cc" line="22"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>基于 Qt %1 (%2, %3 位)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="76"/>
@@ -54,12 +54,12 @@
     <message>
         <location filename="../article_maker.cc" line="151"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>展开文章</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="157"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>收起文章</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="172"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../article_maker.cc" line="537"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>展开文章</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="540"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../article_maker.cc" line="545"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>收起文章</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="560"/>
@@ -245,7 +245,7 @@
     <message>
         <location filename="../articleview.cc" line="156"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>审查元素</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1275"/>
@@ -2482,17 +2482,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2946"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>文章, 完整 (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2947"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>文章, 仅 HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3002"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>文章保存中……</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3061"/>
@@ -3120,7 +3120,7 @@ but should support most audio file formats.</source>
     <message>
         <location filename="../preferences.ui" line="815"/>
         <source>Use any external program to play audio files</source>
-        <translation>使用外部程序播放音频文件。</translation>
+        <translation>使用外部程序播放音频文件</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="259"/>
@@ -3253,22 +3253,22 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1239"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>开启此选项以自动收起过长的文章</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1242"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>收起大于</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1249"/>
         <source>Artiles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>大于此大小的文章将被收起</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1265"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>字符的文章</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="87"/>
@@ -3561,17 +3561,17 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <location filename="../articleview.cc" line="2144"/>
         <location filename="../articleview.cc" line="2151"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">错误： %1</translation>
+        <translation>错误： %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2144"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">资源保存失败：</translation>
+        <translation>资源保存失败：</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2151"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">所引用的资源下载失败。</translation>
+        <translation>所引用的资源下载失败。</translation>
     </message>
 </context>
 <context>
