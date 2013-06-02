@@ -545,6 +545,8 @@ void ArticleRequest::bodyFinished()
           + ( collapse ? "" : string( " title=\"" ) + tr( "Collapse article" ).toUtf8().data() + "\"" )
           + "></span>" + "</div>";
 
+        head += "<div class=\"gddictnamebodyseparator\"></div>";
+
         head += "<span class=\"gdarticlebody gdlangfrom-";
         head += LangCoder::intToCode2( activeDict->getLangFrom() ).toLatin1().data();
         head += "\" lang=\"";
