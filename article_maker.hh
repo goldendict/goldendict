@@ -23,6 +23,8 @@ class ArticleMaker: public QObject
   QString displayStyle, addonStyle;
 
   bool needExpandOptionalParts;
+  bool collapseBigArticles;
+  int articleLimitSize;
 
 public:
 
@@ -71,6 +73,9 @@ public:
   /// Return true if path successfully adjusted
   static bool adjustFilePath( QString & fileName );
 
+  /// Set collapse articles parameters
+  void setCollapseParameters( bool autoCollapse, int articleSize );
+
 private:
 
   /// Makes everything up to and including the opening body tag.
@@ -115,13 +120,15 @@ class ArticleRequest: public Dictionary::DataRequest
   QString currentSplittedWordCompound;
   QString lastGoodCompoundResult;
   bool firstCompoundWasFound;
+  int articleSizeLimit;
 
 public:
 
   ArticleRequest( QString const & word, QString const & group,
                   QMap< QString, QString > const & contexts,
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
-                  std::string const & header );
+                  std::string const & header,
+                  int sizeLimit );
 
   virtual void cancel();
 //  { finish(); } // Add our own requests cancellation here

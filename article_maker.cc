@@ -9,6 +9,7 @@
 #include <limits.h>
 #include <QFile>
 #include <QUrl>
+#include <QTextDocumentFragment>
 #include "folding.hh"
 #include "langcoder.hh"
 #include "dprintf.hh"
@@ -28,6 +29,8 @@ ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictiona
   displayStyle( displayStyle_ ),
   addonStyle( addonStyle_ ),
   needExpandOptionalParts( true )
+, collapseBigArticles( true )
+, articleLimitSize( 500 )
 {
 }
 
@@ -121,8 +124,8 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "gdAudioLinks = { first: null, current: null };"
             "function gdMakeArticleActive( newId ) {"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
-            "document.getElementById( gdCurrentArticle ).className = 'gdarticle';"
-            "document.getElementById( 'gdfrom-' + newId ).className = 'gdarticle gdactivearticle';"
+            "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
+            "el=document.getElementById( 'gdfrom-' + newId ); el.className = el.className + ' gdactivearticle';"
             "gdCurrentArticle = 'gdfrom-' + newId; gdAudioLinks.current = newId;"
             "articleview.onJsActiveArticleChanged(gdCurrentArticle); } }"
             "var overIframeId = null;"
@@ -137,7 +140,22 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "window.addEventListener('load', init, false);"
             "function gdExpandOptPart( expanderId, optionalId ) {  var d1=document.getElementById(expanderId); var i = 0; if( d1.alt == '[+]' ) {"
             "d1.alt = '[-]'; d1.src = 'qrcx://localhost/icons/collapse_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
-            "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } }"
+            "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } };"
+            "function gdExpandArticle( id ) { elem = document.getElementById('gdarticlefrom-'+id); ico = document.getElementById('expandicon-'+id); art=document.getElementById('gdfrom-'+id);"
+            "t=window.event.target || window.event.srcElement;"
+            "if(elem.style.display=='inline' && t==ico) {"
+            "elem.style.display='none'; ico.className='gdexpandicon';"
+            "art.className = art.className+' gdcollapsedarticle';"
+            "document.getElementById('gddictname-'+id).style.cursor='pointer';"
+            "window.event.stopPropagation(); ico.title=''; art.title='";
+  result += tr( "Expand article" ).toUtf8().data();
+  result += "' } else {"
+            "elem.style.display='inline'; ico.className='gdcollapseicon';"
+            "art.className=art.className.replace(' gdcollapsedarticle','');"
+            "document.getElementById('gddictname-'+id).style.cursor='default';"
+            "art.title=''; ico.title='";
+  result += tr( "Collapse article").toUtf8().data();
+  result += "' } }"
             "</script>";
 
   result += "</head><body>";
@@ -259,11 +277,13 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
         unmutedDicts.push_back( activeDicts[ x ] );
 
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
-                               contexts, unmutedDicts, header );
+                               contexts, unmutedDicts, header,
+                               collapseBigArticles ? articleLimitSize : -1 );
   }
   else
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
-                               contexts, activeDicts, header );
+                               contexts, activeDicts, header,
+                               collapseBigArticles ? articleLimitSize : -1 );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
@@ -315,6 +335,13 @@ void ArticleMaker::setExpandOptionalParts( bool expand )
   needExpandOptionalParts = expand;
 }
 
+void ArticleMaker::setCollapseParameters( bool autoCollapse, int articleSize )
+{
+  collapseBigArticles = autoCollapse;
+  articleLimitSize = articleSize;
+}
+
+
 bool ArticleMaker::adjustFilePath( QString & fileName )
 {
   QFileInfo info( fileName );
@@ -338,11 +365,13 @@ ArticleRequest::ArticleRequest(
   QString const & word_, QString const & group_,
   QMap< QString, QString > const & contexts_,
   vector< sptr< Dictionary::Class > > const & activeDicts_,
-  string const & header ):
+  string const & header,
+  int sizeLimit ):
     word( word_ ), group( group_ ), contexts( contexts_ ),
     activeDicts( activeDicts_ ),
     altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
     closePrevSpan( false )
+,   articleSizeLimit( sizeLimit )
 {
   // No need to lock dataMutex on construction
 
@@ -461,7 +490,7 @@ void ArticleRequest::bodyFinished()
 
         if ( closePrevSpan )
         {
-          head += "</span></span><span class=\"gdarticleseparator\"></span>";
+          head += "</span></span><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
         }
         else
         {
@@ -471,6 +500,22 @@ void ArticleRequest::bodyFinished()
                   "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
 
+        bool collapse = false;
+        if( articleSizeLimit >= 0 )
+        {
+          try
+          {
+            Mutex::Lock _( dataMutex );
+            QString text = QString::fromUtf8( req.getFullData().data(), req.getFullData().size() );
+            int size = QTextDocumentFragment::fromHtml( text ).toPlainText().length();
+            if( size > articleSizeLimit )
+              collapse = true;
+          }
+          catch(...)
+          {
+          }
+        }
+
         string jsVal = Html::escapeForJavaScript( dictId );
         head += "<script type=\"text/javascript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
@@ -478,25 +523,36 @@ void ArticleRequest::bodyFinished()
 
         head += string( "<span class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
+                ( collapse ? " gdcollapsedarticle" : "" ) +
                 "\" id=\"" + gdFrom +
                 "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +
                 " onContextMenu=\"gdMakeArticleActive( '" + jsVal + "' );\""
+                + ( collapse ? string( " title=\"" ) + tr( "Expand article" ).toUtf8().data() + "\"" : "" )
                 + ">";
 
         closePrevSpan = true;
 
-        head += string( "<div class=\"gddictname\"><span class=\"gddicticon\"><img src=\"gico://")
-                +  Html::escape( dictId )
+        head += string( "<div class=\"gddictname\" onclick=\"gdExpandArticle(\'" ) + dictId + "\');"
+          + ( collapse ? "\" style=\"cursor:pointer;" : "" )
+          + "\" id=\"gddictname-" + Html::escape( dictId )
+          + "\"><span class=\"gddicticon\"><img src=\"gico://" + Html::escape( dictId )
           + "/dicticon.png\"></span><span class=\"gdfromprefix\">"  +
           Html::escape( tr( "From " ).toUtf8().data() ) + "</span>" +
           Html::escape( activeDict->getName().c_str() )
-           + "</div>";
+          + "<span><img src=\"qrcx://localhost/icons/blank.png\" class=\""
+          + ( collapse ? "gdexpandicon" : "gdcollapseicon" )
+          + "\" id=\"expandicon-" + Html::escape( dictId ) + "\""
+          + ( collapse ? "" : string( " title=\"" ) + tr( "Collapse article" ).toUtf8().data() + "\"" )
+          + "></span>" + "</div>";
 
         head += "<span class=\"gdarticlebody gdlangfrom-";
         head += LangCoder::intToCode2( activeDict->getLangFrom() ).toLatin1().data();
         head += "\" lang=\"";
         head += LangCoder::intToCode2( activeDict->getLangTo() ).toLatin1().data();
-        head += "\">";
+        head += "\"";
+        head += " style=\"display:";
+        head += collapse ? "none" : "inline";
+        head += string( "\" id=\"gdarticlefrom-" ) + Html::escape( dictId ) + "\">";
 
         if ( errorString.size() )
         {
