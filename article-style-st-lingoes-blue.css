@@ -35,6 +35,7 @@ a:hover {
 }
 
 .gddictname {
+    display: -webkit-box; /* needed to be able to reorder elements, e.g. icon, dictionary name, collapse icon */
 	font-size: 12px;
 	font-weight: normal;
 	float: right;
@@ -54,11 +55,72 @@ a:hover {
 	cursor: default;
 }
 
+/* Actual text with the dictionary title */
+.gddicttitle
+{
+  display:block;
+  -webkit-box-ordinal-group: 1;
+}
+
 .gdactivearticle .gddictname {
 	border-top: 1px solid #92B0DD;
 	border-right: 1px solid #92B0DD;
 	color: darkblue;
 	background: #CFDDF0;
+}
+
+.gdcollapsedarticle .gddictname
+{
+  opacity: 0.7;
+}
+
+/* Nice diagonal pattern for the collapsed article */
+.gdcollapsedarticle
+{
+	background-image: -webkit-linear-gradient(left top, #ccc 0%, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%);
+	background-size: 50px 50px;
+}
+
+/* Move the collapse/expand buttons to the last, 3rd position */
+.collapse_expand_area
+{
+  display: block;
+  -webkit-box-ordinal-group: 3;
+}
+
+.gddicticon
+{
+  display: block;
+  vertical-align: text-bottom;
+  padding-right: -1em;
+  padding-left: 0.3em;
+  -webkit-box-ordinal-group: 2;
+}
+
+.gdexpandicon, .gdexpandicon:hover, .gdcollapseicon, .gdcollapseicon:hover
+{
+    width:15px;
+    background-position: center 25%;
+    background-repeat:no-repeat;
+    vertical-align: top;
+    padding-left: -5px;
+    margin-left: 0px;
+}
+
+.gdexpandicon {
+    background-image: url('qrcx://localhost/icons/expand_article.png');
+}
+
+.gdexpandicon:hover {
+    background-image: url('qrcx://localhost/icons/expand_article_hovered.png');
+}
+
+.gdcollapseicon {
+    background-image: url('qrcx://localhost/icons/collapse_article.png');
+}
+
+.gdcollapseicon:hover {
+    background-image: url('qrcx://localhost/icons/collapse_article_hovered.png');
 }
 
 .gdarticleseparator {
@@ -81,14 +143,6 @@ a:hover {
 	display:none
 }
 
-/* Dictionary icon is to the right */
-.gddicticon {
-	display: inline;
-	vertical-align: center;
-	float: right;
-	padding-right: 5px;
-	padding-left: 0.3em;
-}
 
 .gddicticon img {
 	border: 0;
