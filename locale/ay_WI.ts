@@ -43,6 +43,10 @@
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
         <translation>(c) 2008-2013 Konstantin Isakov (ikm@users.berlios.de)</translation>
     </message>
+    <message>
+        <source>Based on Qt %1 (%2, %3 bit)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticleMaker</name>
@@ -86,6 +90,14 @@
         <source>(picture)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Expand article</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Collapse article</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticleRequest</name>
@@ -112,6 +124,14 @@
     <message>
         <source>Individual words: </source>
         <translation>Sapa arunaka:</translation>
+    </message>
+    <message>
+        <source>Expand article</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Collapse article</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -273,10 +293,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save &amp;image...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -294,6 +310,10 @@
     </message>
     <message>
         <source>Copy as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspect</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2353,7 +2373,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
-        <translation>Archivos HTML (*.html *.htm)</translation>
+        <translation type="obsolete">Archivos HTML (*.html *.htm)</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2761,6 +2781,18 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Article, Complete (*.html)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Article, HTML Only (*.html)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving article...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3452,6 +3484,22 @@ Enable this option to workaround the problem.</source>
         <source>Do not identify GoldenDict in HTTP headers</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select this option to automatic collapse big articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Collapse articles more than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Artiles longer than this size will be collapsed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
@@ -3606,6 +3654,21 @@ Enable this option to workaround the problem.</source>
     <message>
         <source>Clear Search</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ResourceToSaveHandler</name>
+    <message>
+        <source>ERROR: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource saving error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The referenced resource failed to download.</source>
+        <translation type="unfinished">Apakañanaka pantjiwa</translation>
     </message>
 </context>
 <context>
