@@ -278,12 +278,14 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
 
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
                                contexts, unmutedDicts, header,
-                               collapseBigArticles ? articleLimitSize : -1 );
+                               collapseBigArticles ? articleLimitSize : -1,
+                               needExpandOptionalParts );
   }
   else
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
                                contexts, activeDicts, header,
-                               collapseBigArticles ? articleLimitSize : -1 );
+                               collapseBigArticles ? articleLimitSize : -1,
+                               needExpandOptionalParts );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
@@ -366,12 +368,13 @@ ArticleRequest::ArticleRequest(
   QMap< QString, QString > const & contexts_,
   vector< sptr< Dictionary::Class > > const & activeDicts_,
   string const & header,
-  int sizeLimit ):
+  int sizeLimit, bool needExpandOptionalParts_ ):
     word( word_ ), group( group_ ), contexts( contexts_ ),
     activeDicts( activeDicts_ ),
     altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
     closePrevSpan( false )
 ,   articleSizeLimit( sizeLimit )
+,   needExpandOptionalParts( needExpandOptionalParts_ )
 {
   // No need to lock dataMutex on construction
 
@@ -455,6 +458,24 @@ void ArticleRequest::altSearchFinished()
   }
 }
 
+int ArticleRequest::findEndOfCloseDiv( const QString &str, int pos )
+{
+  for( ; ; )
+  {
+    int n1 = str.indexOf( "</div>", pos );
+    if( n1 <= 0 )
+      return n1;
+
+    int n2 = str.indexOf( "<div ", pos );
+    if( n2 <= 0 || n2 > n1 )
+      return n1 + 6;
+
+    pos = findEndOfCloseDiv( str, n2 + 1 );
+    if( pos <= 0 )
+      return pos;
+  }
+}
+
 void ArticleRequest::bodyFinished()
 {
   if ( bodyDone )
@@ -507,6 +528,27 @@ void ArticleRequest::bodyFinished()
           {
             Mutex::Lock _( dataMutex );
             QString text = QString::fromUtf8( req.getFullData().data(), req.getFullData().size() );
+
+            if( !needExpandOptionalParts )
+            {
+              // Strip DSL optional parts
+              int pos = 0;
+              for( ; ; )
+              {
+                pos = text.indexOf( "<div class=\"dsl_opt\"" );
+                if( pos > 0 )
+                {
+                  int endPos = findEndOfCloseDiv( text, pos + 1 );
+                  if( endPos > pos)
+                    text.remove( pos, endPos - pos );
+                  else
+                    break;
+                }
+                else
+                  break;
+              }
+            }
+
             int size = QTextDocumentFragment::fromHtml( text ).toPlainText().length();
             if( size > articleSizeLimit )
               collapse = true;

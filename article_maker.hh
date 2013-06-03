@@ -121,6 +121,7 @@ class ArticleRequest: public Dictionary::DataRequest
   QString lastGoodCompoundResult;
   bool firstCompoundWasFound;
   int articleSizeLimit;
+  bool needExpandOptionalParts;
 
 public:
 
@@ -128,7 +129,7 @@ public:
                   QMap< QString, QString > const & contexts,
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
                   std::string const & header,
-                  int sizeLimit );
+                  int sizeLimit, bool needExpandOptionalParts_ );
 
   virtual void cancel();
 //  { finish(); } // Add our own requests cancellation here
@@ -157,6 +158,9 @@ private:
 
   /// Escapes the spacing between the words to include in html.
   std::string escapeSpacing( QString const & );
+
+  /// Find end of corresponding </div> tag
+  int findEndOfCloseDiv( QString const &, int pos );
 };
 
 
