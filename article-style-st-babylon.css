@@ -56,6 +56,39 @@ h3 {
 	display: none;
 }
 
+/* Move the collapse/expand buttons to the right */
+.collapse_expand_area
+{
+  float: right;
+  margin-right: 2px;
+}
+
+.gdexpandicon, .gdexpandicon:hover, .gdcollapseicon, .gdcollapseicon:hover
+{
+    width:15px;
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align: text-bottom;
+    padding-left: -5px;
+    margin-left: 0px;
+}
+
+.gdexpandicon {
+    background-image: url('qrcx://localhost/icons/expand_article.png');
+}
+
+.gdexpandicon:hover {
+    background-image: url('qrcx://localhost/icons/expand_article_hovered.png');
+}
+
+.gdcollapseicon {
+    background-image: url('qrcx://localhost/icons/collapse_article.png');
+}
+
+.gdcollapseicon:hover {
+    background-image: url('qrcx://localhost/icons/collapse_article_hovered.png');
+}
+
 .bglpos { color: black; font-weight: bold; font-size: 11px; background: #F0EDED; display: inline; }
 
 .bgltrn { color: #808080; font-size: 12px; display: inline; }
