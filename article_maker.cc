@@ -142,20 +142,28 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "d1.alt = '[-]'; d1.src = 'qrcx://localhost/icons/collapse_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
             "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } };"
             "function gdExpandArticle( id ) { elem = document.getElementById('gdarticlefrom-'+id); ico = document.getElementById('expandicon-'+id); art=document.getElementById('gdfrom-'+id);"
-            "t=window.event.target || window.event.srcElement;"
+            "ev=window.event; t=null;"
+            "if(ev) t=ev.target || ev.srcElement;"
             "if(elem.style.display=='inline' && t==ico) {"
             "elem.style.display='none'; ico.className='gdexpandicon';"
             "art.className = art.className+' gdcollapsedarticle';"
             "nm=document.getElementById('gddictname-'+id); nm.style.cursor='pointer';"
-            "window.event.stopPropagation(); ico.title=''; nm.title='";
+            "if(ev) ev.stopPropagation(); ico.title=''; nm.title='";
   result += tr( "Expand article" ).toUtf8().data();
-  result += "' } else {"
+  result += "' } else if(elem.style.display=='none') {"
             "elem.style.display='inline'; ico.className='gdcollapseicon';"
             "art.className=art.className.replace(' gdcollapsedarticle','');"
             "nm=document.getElementById('gddictname-'+id); nm.style.cursor='default';"
             "nm.title=''; ico.title='";
   result += tr( "Collapse article").toUtf8().data();
   result += "' } }"
+            "function gdCheckArticlesNumber() {"
+            "elems=document.getElementsByClassName('gddictname');"
+            "if(elems.length == 1) {"
+              "el=elems.item(0); s=el.id.replace('gddictname-','');"
+              "el=document.getElementById('gdfrom-'+s);"
+              "if(el && el.className.search('gdcollapsedarticle')>0) gdExpandArticle(s);"
+            "} }"
             "</script>";
 
   result += "</head><body>";
@@ -441,6 +449,9 @@ void ArticleRequest::altSearchFinished()
     }
 
     wstring wordStd = gd::toWString( word );
+
+    if( activeDicts.size() <= 1 )
+      articleSizeLimit = -1; // Don't collapse article if only one dictionary presented
 
     for( unsigned x = 0; x < activeDicts.size(); ++x )
     {
