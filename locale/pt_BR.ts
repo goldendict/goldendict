@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.0">
 <context>
     <name>About</name>
     <message>
@@ -36,7 +34,7 @@
     <message>
         <location filename="../about.cc" line="22"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Baseado no Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -44,12 +42,12 @@
     <message>
         <location filename="../article_maker.cc" line="151"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir artigo</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="157"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Recolher artigo</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="172"/>
@@ -108,7 +106,7 @@
     <message>
         <location filename="../article_maker.cc" line="537"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir artigo</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="540"/>
@@ -118,7 +116,7 @@
     <message>
         <location filename="../article_maker.cc" line="545"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Recolher artigo</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="560"/>
@@ -219,6 +217,10 @@
         <translation>Definição: %1</translation>
     </message>
     <message>
+        <source>GoldenDict</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../articleview.cc" line="893"/>
         <location filename="../articleview.cc" line="1036"/>
         <source>The referenced resource doesn&apos;t exist.</source>
@@ -256,7 +258,7 @@
     </message>
     <message>
         <source>Resource saving error: </source>
-        <translation type="obsolete">Erro ao salvar recurso:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../articleview.cc" line="1188"/>
@@ -320,6 +322,22 @@
         <translation>AVISO: Player de Áudio FFmpeg: %1</translation>
     </message>
     <message>
+        <source>Playing a non-WAV file</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bass library not found.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bass library can&apos;t play this sound.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../articleview.cc" line="1504"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Não foi possível executar o reprodutor de áudio: %1</translation>
@@ -352,7 +370,7 @@
     <message>
         <location filename="../articleview.cc" line="156"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspecionar</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1556"/>
@@ -523,6 +541,10 @@ entre clássico e ortografia escolar em cirílico)</translation>
 </context>
 <context>
     <name>DictionaryBar</name>
+    <message>
+        <source>Dictionary Bar</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../dictionarybar.cc" line="14"/>
         <source>&amp;Dictionary Bar</source>
@@ -1916,6 +1938,10 @@ entre clássico e ortografia escolar em cirílico)</translation>
 <context>
     <name>MainWindow</name>
     <message>
+        <source>GoldenDict</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="46"/>
         <location filename="../mainwindow.cc" line="668"/>
         <source>Welcome!</source>
@@ -1952,6 +1978,14 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <translation>His&amp;tórico</translation>
     </message>
     <message>
+        <source>Search Pane</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Results Navigation Pane</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
         <translation>&amp;Painel de Pesquisa</translation>
@@ -1965,6 +1999,10 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
         <translation>&amp; Painel Histórico</translation>
+    </message>
+    <message>
+        <source>&amp;Dictionaries...    F3</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
@@ -2110,6 +2148,14 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <translation>Botão Menu</translation>
     </message>
     <message>
+        <source>Print Preview</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Rescan Files</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="455"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
@@ -2156,6 +2202,14 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <translation>&amp;Importar</translation>
     </message>
     <message>
+        <source>Show Names in Dictionary Bar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Small Icons in Toolbars</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../mainwindow.cc" line="65"/>
         <source>&amp;Menubar</source>
         <translation>Barra de &amp;Menus</translation>
@@ -2170,6 +2224,10 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <location filename="../mainwindow.cc" line="242"/>
         <source>Found in Dictionaries:</source>
         <translation>Achado nos dicionários:</translation>
+    </message>
+    <message>
+        <source>Navigation</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="100"/>
@@ -2297,6 +2355,10 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <translation>%1 - %2</translation>
     </message>
     <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../mainwindow.cc" line="2488"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Não foi possível acionar o mecanismo de monitoramento por atalho.&lt;br&gt;Veja se seu XServer está com a extensão RECORD ativada.</translation>
@@ -2355,12 +2417,12 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2946"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artigo, Completo (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2947"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artigo, Apenas HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2950"/>
@@ -2369,7 +2431,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Arquivos HTML (*.html *.htm)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2964"/>
@@ -2384,7 +2446,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3002"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvando artigo...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3061"/>
@@ -2918,7 +2980,7 @@ teclas de atalho podem ser premidas também pouco depois da seleção da palavra
     <message>
         <location filename="../preferences.ui" line="533"/>
         <source>To avoid false positives, the keys are only monitored
-after the selection&apos;s done for a limited amount of
+after the selection's done for a limited amount of
 seconds, which is specified here.</source>
         <translation>Para evitar acionamentos de atalhos de teclado falsos, o status das
 teclas é verificado só depois de feita a seleção de palavra/expressão
@@ -2966,7 +3028,7 @@ em qualquer situação ou contexto, desde que o GoldenDict esteja em execução.
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -3012,22 +3074,49 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="1239"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione essa opção para automaticamente recolher grandes artigos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1242"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Recolher artigos mais de</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1249"/>
         <source>Artiles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Artiles maiores do que esse tamanho vai ser recolhido</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1265"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>símbolos</translation>
+    </message>
+    <message>
+        <source>Use Windows native playback API. Limited to .wav files only,
+but works very well.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Play via Windows native API</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Play audio via Phonon framework. May be somewhat unstable,
+but should support most audio file formats.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Play via Phonon</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Play audio via Bass library. Optimal choice. To use this mode
+you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Play via Bass library</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../preferences.ui" line="815"/>
@@ -3283,6 +3372,10 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
         <translation>Lingoes-Blue</translation>
     </message>
     <message>
+        <source>Play via DirectShow</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../preferences.cc" line="355"/>
         <source>Changing Language</source>
         <translation>Modificando Idioma</translation>
@@ -3489,17 +3582,17 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
         <location filename="../articleview.cc" line="2144"/>
         <location filename="../articleview.cc" line="2151"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">Erro: %1</translation>
+        <translation>Erro: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2144"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Erro ao salvar recurso:</translation>
+        <translation>Erro ao salvar recurso:</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2151"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Não foi possível efetuar o download do arquivo de fontes de dados.</translation>
+        <translation>O recurso referenciado não conseguiu baixar.</translation>
     </message>
 </context>
 <context>
@@ -3531,6 +3624,14 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
         <translation>Painel</translation>
     </message>
     <message>
+        <source>word</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>List Matches (Alt+M)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../scanpopup.ui" line="110"/>
         <location filename="../scanpopup.ui" line="124"/>
         <location filename="../scanpopup.ui" line="138"/>
@@ -3548,6 +3649,10 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
         <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
         <translation>Para Frente</translation>
+    </message>
+    <message>
+        <source>Alt+M</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="135"/>
@@ -3580,6 +3685,10 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
 could be resized or managed in other ways.</source>
         <translation>Use esta opção para fixar a janela do GoldenDict na frente
 das outras janelas, redimensioná-la ou geri-la à vontade.</translation>
+    </message>
+    <message>
+        <source>GoldenDict</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../scanpopup.cc" line="478"/>
@@ -3709,6 +3818,10 @@ dos grupos apropriados para usá-los.</translation>
         <translation>Especifique qualquer site que desejar. O demarcador %GDWORD% será substituído pela palavra da consulta do usuário:</translation>
     </message>
     <message>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../sources.ui" line="344"/>
         <source>Programs</source>
         <translation>Programas</translation>
@@ -3752,6 +3865,17 @@ obter sua própria chave.</translation>
         <location filename="../sources.ui" line="490"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation>Obter sua própria chave &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;aqui&lt;/a&gt;, ou deixe em branco para usar o padrão.</translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../sources.ui" line="331"/>
