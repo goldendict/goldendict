@@ -1,6 +1,10 @@
+#include "winuser.h"
+
 IDI_ICON1 ICON DISCARDABLE "icons/programicon.ico"
 #define GOLDENDICT_VER 1,0,1,0
 #define GOLDENDICT_VER_STR "1.0.1"
+
+1 RT_MANIFEST GoldenDict.exe.manifest
 
 1 VERSIONINFO
  FILEVERSION GOLDENDICT_VER

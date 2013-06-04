@@ -42,7 +42,8 @@ win32 {
         -lpsapi \
         -lole32 \
         -loleaut32 \
-        -ladvapi32
+        -ladvapi32 \
+        -lcomdlg32
     LIBS += -lvorbisfile \
         -lvorbis \
         -logg \
