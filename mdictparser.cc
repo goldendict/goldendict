@@ -236,13 +236,13 @@ QString MdictParser::toUtf16( const char * fromCode, const char * from, size_t f
   return QString::fromUtf16( ( const ushort * )&result.front() );
 }
 
-bool MdictParser::parseCompressedBlock( size_t compressedBlockSize, const char * compressedBlockPtr,
-                                        size_t decompressedBlockSize, QByteArray & decompressedBlock )
+bool MdictParser::parseCompressedBlock( qint64 compressedBlockSize, const char * compressedBlockPtr,
+                                        qint64 decompressedBlockSize, QByteArray & decompressedBlock )
 {
   if ( compressedBlockSize <= 8 )
     return false;
 
-  size_t dataSize = compressedBlockSize - 8;
+  qint64 dataSize = compressedBlockSize - 8;
   const char * dataPtr = compressedBlockPtr + 8;
   // 4bytes - type
   // 4bytes - checksum
@@ -256,7 +256,7 @@ bool MdictParser::parseCompressedBlock( size_t compressedBlockSize, const char *
     // No compression
     checksum &= 0xffff;
     quint16 sum = 0;
-    for ( size_t i = 0; i < dataSize; i++ )
+    for ( qint64 i = 0; i < dataSize; i++ )
     {
       sum += dataPtr[i];
     }
@@ -274,12 +274,12 @@ bool MdictParser::parseCompressedBlock( size_t compressedBlockSize, const char *
   {
     // LZO compression
     int result;
-    lzo_uint blockSize = decompressedBlockSize;
+    lzo_uint blockSize = ( lzo_uint )decompressedBlockSize;
     decompressedBlock.resize( blockSize );
     result = lzo1x_decompress_safe( ( const uchar * )dataPtr, dataSize,
                                     ( uchar * )decompressedBlock.data(), &blockSize, NULL );
 
-    if ( result != LZO_E_OK || blockSize != decompressedBlockSize )
+    if ( result != LZO_E_OK || blockSize != ( lzo_uint )decompressedBlockSize )
     {
       qWarning() << "MDict: parseCompressedBlock: decompression failed";
       return false;
@@ -620,7 +620,7 @@ bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
 
     RecordIndex const & recordIndex = recordBlockInfos_[idx];
     HeadWordIndex::const_iterator iNext = i + 1;
-    size_t recordSize;
+    qint64 recordSize;
     if ( iNext == headWordIndex.end() )
       recordSize = recordIndex.shadowEndPos - i->first;
     else

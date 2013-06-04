@@ -56,7 +56,7 @@ using namespace Mdict;
 enum
 {
   kSignature = 0x4349444d,  // MDIC
-  kCurrentFormatVersion = 8 + BtreeIndexing::FormatVersion + Folding::Version
+  kCurrentFormatVersion = 10 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 DEF_EX( exCorruptDictionary, "dictionary file was tampered or corrupted", std::exception )
@@ -364,16 +364,16 @@ void MdxDictionary::doDeferredInit()
       idx.seek( idxHeader.styleSheetAddress );
       for ( uint32_t i = 0; i < idxHeader.styleSheetCount; i++ )
       {
-        int key = idx.read<int>();
+        qint32 key = idx.read< qint32 >();
         vector< char > buf;
-        string::size_type sz;
+        quint32 sz;
 
-        sz = idx.read< string::size_type >();
+        sz = idx.read< quint32 >();
         buf.resize( sz );
         idx.read( &buf.front(), sz );
         QString styleBegin = QString::fromUtf8( buf.data() );
 
-        sz = idx.read< string::size_type >();
+        sz = idx.read< quint32 >();
         buf.resize( sz );
         idx.read( &buf.front(), sz );
         QString styleEnd = QString::fromUtf8( buf.data() );
@@ -390,7 +390,7 @@ void MdxDictionary::doDeferredInit()
       idx.seek( idxHeader.mddIndexInfosOffset );
       for ( uint32_t i = 0; i < idxHeader.mddIndexInfosCount; i++ )
       {
-        string::size_type sz = idx.read<string::size_type>();
+        quint32 sz = idx.read< quint32 >();
         vector< char > buf( sz );
         idx.read( &buf.front(), sz );
         uint32_t btreeMaxElements = idx.read<uint32_t>();
@@ -402,7 +402,10 @@ void MdxDictionary::doDeferredInit()
       vector< string > const dictFiles = getDictionaryFilenames();
       for ( uint32_t i = 1; i < dictFiles.size() && i < mddFileNames.size() + 1; i++ )
       {
-        if ( dictFiles[ i ] != mddFileNames[ i - 1 ] || !File::exists( dictFiles[ i ] ) )
+        QFileInfo fi( QString::fromUtf8( dictFiles[ i ].c_str() ) );
+        QString mddFileName = QString::fromUtf8( mddFileNames[ i - 1 ].c_str() );
+
+        if ( fi.fileName() != mddFileName || !fi.exists() )
           continue;
 
         sptr< IndexedMdd > mdd = new IndexedMdd( idxMutex, chunks );
@@ -755,7 +758,7 @@ void MddResourceRequest::run()
     {
       hasAnyData = true;
 
-      if( Filetype::isNameOfCSS( u8ResourceName ) )
+      if ( Filetype::isNameOfCSS( u8ResourceName ) )
       {
         QString css = QString::fromUtf8( data.data(), data.size() );
         dict.isolateCSS( css, ".mdict" );
@@ -1089,7 +1092,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
         }
 
         mddIndices.push_back( mddIndexedWords );
-        mddFileNames.push_back( string( mddParser->filename().toUtf8().constData() ) );
+        // Save filename for .mdd files only
+        QFileInfo fi( mddParser->filename() );
+        mddFileNames.push_back( string( fi.fileName().toUtf8().constData() ) );
         mddParsers.pop_front();
       }
 
@@ -1116,12 +1121,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
           string styleEnd( iter->second.second.toUtf8().constData() );
 
           // key
-          idx.write<int>( iter->first );
+          idx.write<qint32>( iter->first );
           // styleBegin
-          idx.write<string::size_type>( styleBegin.size() + 1 );
+          idx.write<quint32>( ( quint32 )styleBegin.size() + 1 );
           idx.write( styleBegin.c_str(), styleBegin.size() + 1 );
           // styleEnd
-          idx.write<string::size_type>( styleEnd.size() + 1 );
+          idx.write<quint32>( ( quint32 )styleEnd.size() + 1 );
           idx.write( styleEnd.c_str(), styleEnd.size() + 1 );
         }
       }
@@ -1154,7 +1159,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       {
         const string & mddfile = mddFileNames[ mi ];
 
-        idx.write<string::size_type>( mddfile.size() + 1 );
+        idx.write<quint32>( ( quint32 )mddfile.size() + 1 );
         idx.write( mddfile.c_str(), mddfile.size() + 1 );
         idx.write<uint32_t>( mddIndexInfos[ mi ].btreeMaxElements );
         idx.write<uint32_t>( mddIndexInfos[ mi ].rootOffset );

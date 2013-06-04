@@ -66,7 +66,7 @@ public:
 
   enum
   {
-    kParserVersion = 0x000000c
+    kParserVersion = 0x000000d
   };
 
   struct RecordIndex
@@ -101,9 +101,9 @@ public:
     qint64 compressedBlockPos;
     qint64 recordOffset;
 
-    size_t decompressedBlockSize;
-    size_t compressedBlockSize;
-    size_t recordSize;
+    qint64 decompressedBlockSize;
+    qint64 compressedBlockSize;
+    qint64 recordSize;
   };
 
   class RecordHandler
@@ -114,7 +114,7 @@ public:
 
   typedef vector< pair<qint64, qint64> > BlockInfoVector;
   typedef vector< pair<qint64, QString> > HeadWordIndex;
-  typedef map<int, pair<QString, QString> > StyleSheets;
+  typedef map<qint32, pair<QString, QString> > StyleSheets;
 
   inline QString const & title() const
   {
@@ -164,8 +164,8 @@ public:
   {
     return toUtf16( fromCode.toLatin1().constData(), from, fromSize );
   }
-  static bool parseCompressedBlock( size_t compressedBlockSize, const char * compressedBlockPtr,
-                                    size_t decompressedBlockSize, QByteArray & decompressedBlock );
+  static bool parseCompressedBlock( qint64 compressedBlockSize, const char * compressedBlockPtr,
+                                    qint64 decompressedBlockSize, QByteArray & decompressedBlock );
 
   static QString & substituteStylesheet( QString & article, StyleSheets const & styleSheets );
   static inline string substituteStylesheet( string const & article, StyleSheets const & styleSheets )
