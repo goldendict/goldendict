@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="22"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Na padstavie Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -44,12 +44,12 @@
     <message>
         <location filename="../article_maker.cc" line="151"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Razharnuć artykuł</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="157"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Zharnuć artykuł</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="172"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../article_maker.cc" line="537"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Razharnuć artykuł</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="540"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../article_maker.cc" line="545"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Zharnuć artykuł</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="560"/>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../articleview.cc" line="156"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspektar</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="670"/>
@@ -2354,12 +2354,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2946"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artykuł całkom (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2947"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artykuł, tolki HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2950"/>
@@ -2383,7 +2383,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3002"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachoŭvańnie artykuła...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3061"/>
@@ -3216,22 +3216,22 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../preferences.ui" line="1239"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Ułučy opcyju, kab aŭtamatyčna zhartać vialikija artykuły</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1242"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Zhartać artykuły, jakija majuć bolš za</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1249"/>
         <source>Artiles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Artykuły bolšyja za hetaje značeńnie buduć zhartacca</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1265"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>znakaŭ</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="42"/>
@@ -3475,17 +3475,17 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
         <location filename="../articleview.cc" line="2144"/>
         <location filename="../articleview.cc" line="2151"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">ABMYŁA: %1</translation>
+        <translation>ABMYŁA: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2144"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Pamyłka zachavańnia resursu: </translation>
+        <translation>Pamyłka zachavańnia resursu: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2151"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Nie atrymałasia zładavać paznačanaha resursu.</translation>
+        <translation>Nie atrymałasia zładavać paznačanaha resursu.</translation>
     </message>
 </context>
 <context>

@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="22"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>На падставе Qt %1 (%2, %3 біт)</translation>
     </message>
 </context>
 <context>
@@ -44,12 +44,12 @@
     <message>
         <location filename="../article_maker.cc" line="151"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Разгарнуць артыкул</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="157"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Згарнуць артыкул</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="172"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../article_maker.cc" line="537"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Разгарнуць артыкул</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="540"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../article_maker.cc" line="545"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Згарнуць артыкул</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="560"/>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../articleview.cc" line="156"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Інспэктар</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="670"/>
@@ -2354,12 +2354,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2946"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Артыкул цалком (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2947"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Артыкул, толькі HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2950"/>
@@ -2383,7 +2383,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3002"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Захоўваньне артыкула...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3061"/>
@@ -3216,22 +3216,22 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1239"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Улучы опцыю, каб аўтаматычна згартаць вялікія артыкулы</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1242"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Згартаць артыкулы, якія маюць больш за</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1249"/>
         <source>Artiles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Артыкулы большыя за гэтае значэньне будуць згартацца</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1265"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>знакаў</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="42"/>
@@ -3475,17 +3475,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../articleview.cc" line="2144"/>
         <location filename="../articleview.cc" line="2151"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">АБМЫЛА: %1</translation>
+        <translation>АБМЫЛА: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2144"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Памылка захаваньня рэсурсу: </translation>
+        <translation>Памылка захаваньня рэсурсу: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2151"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Не атрымалася зладаваць пазначанага рэсурсу.</translation>
+        <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
     </message>
 </context>
 <context>
