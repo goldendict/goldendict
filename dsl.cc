@@ -73,7 +73,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 17 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 18 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2
 };
 
@@ -967,7 +967,11 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     url.setHost( "localhost" );
     wstring nodeStr = node.renderAsText();
     ArticleDom nodeDom( nodeStr );
-    url.setPath( gd::toQString( nodeDom.root.renderAsText() ) );
+
+    list< wstring > allEntryWords;
+    wstring linkTxt = nodeDom.root.renderAsText();
+    expandOptionalParts( linkTxt, &allEntryWords );
+    url.setPath( gd::toQString( allEntryWords.front() ) );
 
     result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( nodeDom.root ) + "</a>";
   }
@@ -1848,13 +1852,19 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             chunks.addToBlock( &(*i).offset, sizeof( (*i).offset ) );
             chunks.addToBlock( &(*i).size, sizeof( (*i).size ) );
 
-            unescapeDsl( (*i).headword );
-            normalizeHeadword( (*i).headword );
+            allEntryWords.clear();
+            expandOptionalParts( (*i).headword, &allEntryWords );
 
-            indexedWords.addWord( (*i).headword, descOffset, maxHeadwordSize );
+            for( list< wstring >::iterator j = allEntryWords.begin();
+                 j != allEntryWords.end(); ++j )
+            {
+              unescapeDsl( *j );
+              normalizeHeadword( *j );
+              indexedWords.addWord( *j, descOffset, maxHeadwordSize );
+            }
 
             ++articleCount;
-            ++wordCount;
+            wordCount += allEntryWords.size();
           }
 
           if ( !hasString )
