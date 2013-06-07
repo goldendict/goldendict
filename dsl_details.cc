@@ -92,37 +92,61 @@ ArticleDom::ArticleDom( wstring const & str ):
 
         if( !linkTo.empty() )
         {
-          if ( !textNode )
+          list< wstring > allLinkEntries;
+          expandOptionalParts( linkTo, &allLinkEntries );
+
+          for( list< wstring >::iterator entry = allLinkEntries.begin();
+               entry != allLinkEntries.end(); )
           {
-            Node text = Node( Node::Text(), wstring() );
+            if ( !textNode )
+            {
+              Node text = Node( Node::Text(), wstring() );
+
+              if ( stack.empty() )
+              {
+                root.push_back( text );
+                stack.push_back( &root.back() );
+              }
+              else
+              {
+                stack.back()->push_back( text );
+                stack.push_back( &stack.back()->back() );
+              }
+
+              textNode = stack.back();
+            }
+            textNode->text.push_back( L'-' );
+            textNode->text.push_back( L' ' );
+
+            // Close the currently opened text node
+            stack.pop_back();
+            textNode = 0;
+
+            wstring linkText = Folding::trimWhitespace( *entry );
+            processUnsortedParts( linkText, false );
+            ArticleDom nodeDom( linkText );
+
+            Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
+            for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
+              link.push_back( *n );
+
+            ++entry;
 
             if ( stack.empty() )
             {
-              root.push_back( text );
-              stack.push_back( &root.back() );
+              root.push_back( link );
+              if( entry != allLinkEntries.end() ) // Add line break before next entry
+                root.push_back( Node( Node::Tag(), GD_NATIVE_TO_WS( L"br" ), wstring() ) );
             }
             else
             {
-              stack.back()->push_back( text );
-              stack.push_back( &stack.back()->back() );
+              stack.back()->push_back( link );
+              if( entry != allLinkEntries.end() )
+                stack.back()->push_back( Node( Node::Tag(), GD_NATIVE_TO_WS( L"br" ), wstring() ) );
             }
-
-            textNode = stack.back();
           }
-          textNode->text.push_back( L'-' );
-          textNode->text.push_back( L' ' );
 
-          // Close the currently opened text node
-          stack.pop_back();
-          textNode = 0;
 
-          Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
-          link.push_back( Node( Node::Text(), linkTo ) );
-
-          if ( stack.empty() )
-            root.push_back( link );
-          else
-            stack.back()->push_back( link );
 
           // Skip to next '@'
 

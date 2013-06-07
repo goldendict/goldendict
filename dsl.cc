@@ -966,15 +966,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
     wstring nodeStr = node.renderAsText();
-    processUnsortedParts( nodeStr, true );
-    ArticleDom nodeDom( nodeStr );
+    normalizeHeadword( nodeStr );
+    url.setPath( gd::toQString( nodeStr ) );
 
-    list< wstring > allEntryWords;
-    wstring linkTxt = nodeDom.root.renderAsText();
-    expandOptionalParts( linkTxt, &allEntryWords );
-    url.setPath( gd::toQString( allEntryWords.front() ) );
-
-    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( nodeDom.root ) + "</a>";
+    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"sub" ) )
@@ -990,6 +985,11 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   if ( node.tagName == GD_NATIVE_TO_WS( L"t" ) )
   {
     result += "<span class=\"dsl_t\">" + processNodeChildren( node ) + "</span>";
+  }
+  else
+  if ( node.tagName == GD_NATIVE_TO_WS( L"br" ) )
+  {
+    result += "<br />";
   }
   else
     result += "<span class=\"dsl_unknown\">" + processNodeChildren( node ) + "</span>";
