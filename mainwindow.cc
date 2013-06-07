@@ -25,6 +25,9 @@
 #include <QProcess>
 #include "historypanewidget.hh"
 #include <QCryptographicHash>
+#include <QRunnable>
+#include <QThreadPool>
+#include <QSslConfiguration>
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -46,6 +49,19 @@ using std::set;
 using std::wstring;
 using std::map;
 using std::pair;
+
+#ifndef QT_NO_OPENSSL
+
+class InitSSLRunnable : public QRunnable
+{
+  virtual void run()
+  {
+    /// This action force SSL library initialisation which may continue a few seconds
+    QSslConfiguration::setDefaultConfiguration( QSslConfiguration::defaultConfiguration() );
+  }
+};
+
+#endif
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
   commitDataCompleted( false ),
@@ -84,6 +100,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , gdAskMessage( 0xFFFFFFFF )
 #endif
 {
+#ifndef QT_NO_OPENSSL
+  QThreadPool::globalInstance()->start( new InitSSLRunnable );
+#endif
+
   applyQtStyleSheet( cfg.preferences.displayStyle, cfg.preferences.addonStyle );
 
   ui.setupUi( this );
