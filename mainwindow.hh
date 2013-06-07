@@ -145,7 +145,7 @@ private:
 
   QTimer newReleaseCheckTimer; // Countdown to a check for the new program
                                // release, if enabled
-  sptr< QNetworkReply > latestReleaseReply;
+  QNetworkReply *latestReleaseReply;
 
   sptr< QPrinter > printer; // The printer we use for all printing operations
 

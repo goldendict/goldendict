@@ -76,6 +76,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   dictNetMgr( this ),
   wordFinder( this ),
   newReleaseCheckTimer( this ),
+  latestReleaseReply( 0 ),
   wordListSelChanged( false )
 , wasMaximized( false )
 , blockUpdateWindowTitle( false )
@@ -2547,7 +2548,8 @@ void MainWindow::prepareNewReleaseChecks()
 
 void MainWindow::checkForNewRelease()
 {
-  latestReleaseReply.reset();
+  if( latestReleaseReply )
+    latestReleaseReply->deleteLater();
 
   QNetworkRequest req(
     QUrl( "http://goldendict.org/latest_release.php?current="
@@ -2568,13 +2570,13 @@ void MainWindow::checkForNewRelease()
 
   latestReleaseReply = articleNetMgr.get( req );
 
-  connect( latestReleaseReply.get(), SIGNAL( finished() ),
+  connect( latestReleaseReply, SIGNAL( finished() ),
            this, SLOT( latestReleaseReplyReady() ), Qt::QueuedConnection );
 }
 
 void MainWindow::latestReleaseReplyReady()
 {
-  if ( !latestReleaseReply.get() )
+  if ( !latestReleaseReply )
     return; // Some stray signal
 
   bool success = false;
@@ -2594,7 +2596,8 @@ void MainWindow::latestReleaseReplyReady()
     }
   }
 
-  latestReleaseReply.reset();
+  latestReleaseReply->deleteLater();
+  latestReleaseReply = 0;
 
   if ( !success )
   {
