@@ -966,6 +966,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
     wstring nodeStr = node.renderAsText();
+    processUnsortedParts( nodeStr, true );
     ArticleDom nodeDom( nodeStr );
 
     list< wstring > allEntryWords;
