@@ -1401,37 +1401,22 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
 void MainWindow::tabCloseRequested( int x )
 {
-//  if ( ui.tabWidget->count() < 2 )
-//    return; // We should always have at least one open tab
-
   QWidget * w = ui.tabWidget->widget( x );
-
-  if (cfg.preferences.mruTabOrder)
-  {
-    //removeTab activates next tab and emits currentChannged SIGNAL
-    //This is not what we want for MRU, so disable the signal for a moment
-
-    disconnect( ui.tabWidget, SIGNAL( currentChanged( int ) ),
-             this, SLOT( tabSwitched( int ) ) );
-  }
-
-  ui.tabWidget->removeTab( x );
-
-  if (cfg.preferences.mruTabOrder)
-  {
-    connect( ui.tabWidget, SIGNAL( currentChanged( int ) ), this, SLOT( tabSwitched( int ) ) );
-  }
 
   mruList.removeOne(w);
 
-  delete w;
+  // In MRU case: First, we switch to the appropriate tab
+  // and only then remove the old one.
 
   //activate a tab in accordance with MRU
-  if ( mruList.size() > 0 ) {
+  if ( cfg.preferences.mruTabOrder && mruList.size() > 0 ) {
     ui.tabWidget->setCurrentWidget(mruList.at(0));
   }
 
-  // if everything is closed, add new tab
+  ui.tabWidget->removeTab( x );
+  delete w;
+
+  // if everything is closed, add a new tab
   if ( ui.tabWidget->count() == 0 )
     addNewTab();
 }
