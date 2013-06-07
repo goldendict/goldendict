@@ -51,7 +51,7 @@
     <message>
         <location filename="../about.cc" line="22"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoja Qt %1 (%2, %3 bitų)</translation>
     </message>
 </context>
 <context>
@@ -59,12 +59,12 @@
     <message>
         <location filename="../article_maker.cc" line="151"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Išplėsti</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="157"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Suskleisti</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="172"/>
@@ -122,7 +122,7 @@
     <message>
         <location filename="../article_maker.cc" line="537"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Išplėsti</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="540"/>
@@ -132,7 +132,7 @@
     <message>
         <location filename="../article_maker.cc" line="545"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Suskleisti</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="560"/>
@@ -165,12 +165,12 @@
     <message>
         <location filename="../articleview.cc" line="150"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopijuoti kaip tekstą</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="156"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyrinėti</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="670"/>
@@ -185,7 +185,7 @@
     <message>
         <location filename="../articleview.cc" line="680"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>TTS balsas</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="685"/>
@@ -220,27 +220,27 @@
     <message>
         <location filename="../articleview.cc" line="1036"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1418"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti garsą</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1420"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Garsai (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Visos rinkmenos (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1433"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti paveikslą</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1435"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Paveikslai (*.bmp *.jpg *.png *.tif);;Visi failai (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1188"/>
@@ -291,7 +291,7 @@
     <message>
         <location filename="../articleview.cc" line="1563"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Įspėjimas: FFmpeg garso grutuvė: %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -332,12 +332,12 @@
     <message>
         <location filename="../articleview.cc" line="1215"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašti pa&amp;veikslą...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1223"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti g&amp;arsą...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1556"/>
@@ -395,18 +395,18 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Baltarusių transliteracija iš lotynų į kirilicą (klasikinė orthografija)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Baltarusių transliteracija iš lotynų į kirilicą (mokyklinė orthografija)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Baltarusių transliteracija iš lotynų į kirilicą (kirilicoje pašalina skirtumą tarp klasikinės ir mokyklinės orthografijos)</translation>
     </message>
 </context>
 <context>
@@ -1943,7 +1943,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="150"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida konfgūracijoje. Tęsti naudojant numatytąsias nuostatas?</translation>
     </message>
 </context>
 <context>
@@ -2176,7 +2176,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="3002"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašomas straipsnis...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3061"/>
@@ -3036,32 +3036,32 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="803"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Garsus leisti per FFmpeg(libav) ir libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="806"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti vidinę grotuvę</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1239"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatiškai suskleisti didelius straipsnius</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1242"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Suskleisti straipsnis didesnius nei</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1249"/>
         <source>Artiles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Suskleisti straipsnis, kurių dydis viršija</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1265"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>simboliai</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3511,72 +3511,72 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../aard.cc" line="393"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Straipsnio įkėlimo klaida</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="475"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Straipsnio dekodavimo klaida</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="132"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_alloc_context() klaida</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="139"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() klaida</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="148"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() klaida</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="165"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="172"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() klaida</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="187"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta rasti garso srauto</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodeko [id: %1] neradome</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="202"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_open2() klaida</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="263"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta rasti garso išvedimo įrenginio</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="276"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepalaikomas formatas</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="286"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() klaida</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="291"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra tvarkyklės.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
@@ -3596,12 +3596,12 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../ffmpegaudio.cc" line="307"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nežinoma klaida</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="332"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_frame() klaida</translation>
     </message>
 </context>
 <context>
@@ -3628,17 +3628,17 @@ ir pasiūlys atverti parsisiuntimo puslapį.
         <location filename="../articleview.cc" line="2144"/>
         <location filename="../articleview.cc" line="2151"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2144"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Šaltinių įrašymo klaida: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2151"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Nepavyko parsiųsti nurodytų šaltinių.</translation>
+        <translation>Nepavyko parsiųsti nurodytų šaltinių.</translation>
     </message>
 </context>
 <context>
@@ -4114,47 +4114,47 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasirinkite balso modulį:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pridėti</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Pašalinti</translation>
+        <translation>&amp;Pašalinti</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Nuostatos</translation>
+        <translation>Nuostatos</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Garsumas:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dažnis:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Išbandyti</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Galimi moduliai</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Perskaitytinas tekstas</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
@@ -4164,12 +4164,12 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Skaityti</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra prieinamų TTS balsų</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
@@ -4179,7 +4179,7 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Šalinimo patvirtinimas</translation>
+        <translation>Šalinimo patvirtinimas</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
@@ -4209,22 +4209,22 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">Įgalinta</translation>
+        <translation>Įgalinta</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Pavadinimas</translation>
+        <translation>Pavadinimas</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">Ženkliukas</translation>
+        <translation>Ženkliukas</translation>
     </message>
 </context>
 <context>
