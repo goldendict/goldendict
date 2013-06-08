@@ -28,6 +28,9 @@ QHotkeyApplication::QHotkeyApplication( QString const & id,
                                         int & argc, char ** argv ):
   QtSingleApplication( id, argc, argv )
 {
+#if defined( Q_OS_WIN ) && IS_QT_5
+  installNativeEventFilter( this );
+#endif
 }
 
 void QHotkeyApplication::addDataCommiter( DataCommitter & d )

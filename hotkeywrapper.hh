@@ -211,11 +211,11 @@ protected:
   void unregisterWrapper(HotkeyWrapper *wrapper);
 
 #ifdef Q_OS_WIN32
-# if IS_QT_5
+#if IS_QT_5
   virtual bool nativeEventFilter( const QByteArray & eventType, void * message, long * result );
-# else // IS_QT_5
+#else // IS_QT_5
   virtual bool winEventFilter ( MSG * message, long * result );
-#endif
+#endif // IS_QT_5
 #endif // Q_OS_WIN32
 
   QList<HotkeyWrapper*> hotkeyWrappers;

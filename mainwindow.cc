@@ -3528,6 +3528,12 @@ void MainWindow::storeResourceSavePath( const QString & newPath )
 
 #ifdef Q_OS_WIN32
 
+bool MainWindow::nativeEvent( const QByteArray & eventType, void * message, long * result )
+{
+  Q_UNUSED( eventType );
+  return winEvent( reinterpret_cast<MSG *>( message ), result );
+}
+
 bool MainWindow::winEvent( MSG * message, long * result )
 {
   if( message->message != gdAskMessage )

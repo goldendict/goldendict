@@ -403,6 +403,10 @@ signals:
   /// For receiving message from scan libraries
 protected:
   unsigned gdAskMessage;
+
+  // Qt4: winEvent
+  // Qt5: nativeEvent
+  bool nativeEvent( const QByteArray & eventType, void * message, long * result );
   bool winEvent( MSG * message, long * result );
 
 private slots:
