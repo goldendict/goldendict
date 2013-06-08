@@ -25,6 +25,9 @@
 #include <QPageSetupDialog>
 #include <QPrintPreviewDialog>
 #include <QPrintDialog>
+#include <QRunnable>
+#include <QThreadPool>
+#include <QSslConfiguration>
 
 #include <limits.h>
 #include <set>
@@ -57,6 +60,19 @@ using std::wstring;
 using std::map;
 using std::pair;
 
+#ifndef QT_NO_OPENSSL
+
+class InitSSLRunnable : public QRunnable
+{
+  virtual void run()
+  {
+    /// This action force SSL library initialisation which may continue a few seconds
+    QSslConfiguration::setDefaultConfiguration( QSslConfiguration::defaultConfiguration() );
+  }
+};
+
+#endif
+
 MainWindow::MainWindow( Config::Class & cfg_ ):
   commitDataCompleted( false ),
   trayIcon( 0 ),
@@ -86,6 +102,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   dictNetMgr( this ),
   wordFinder( this ),
   newReleaseCheckTimer( this ),
+  latestReleaseReply( 0 ),
   wordListSelChanged( false )
 , wasMaximized( false )
 , blockUpdateWindowTitle( false )
@@ -93,9 +110,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , gdAskMessage( 0xFFFFFFFF )
 #endif
 {
+#ifndef QT_NO_OPENSSL
+  QThreadPool::globalInstance()->start( new InitSSLRunnable );
+#endif
+
   applyQtStyleSheet( cfg.preferences.displayStyle, cfg.preferences.addonStyle );
 
   ui.setupUi( this );
+
+  articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
 
   // use our own, cutsom statusbar
   setStatusBar(0);
@@ -1388,37 +1411,22 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
 void MainWindow::tabCloseRequested( int x )
 {
-//  if ( ui.tabWidget->count() < 2 )
-//    return; // We should always have at least one open tab
-
   QWidget * w = ui.tabWidget->widget( x );
-
-  if (cfg.preferences.mruTabOrder)
-  {
-    //removeTab activates next tab and emits currentChannged SIGNAL
-    //This is not what we want for MRU, so disable the signal for a moment
-
-    disconnect( ui.tabWidget, SIGNAL( currentChanged( int ) ),
-             this, SLOT( tabSwitched( int ) ) );
-  }
-
-  ui.tabWidget->removeTab( x );
-
-  if (cfg.preferences.mruTabOrder)
-  {
-    connect( ui.tabWidget, SIGNAL( currentChanged( int ) ), this, SLOT( tabSwitched( int ) ) );
-  }
 
   mruList.removeOne(w);
 
-  delete w;
+  // In MRU case: First, we switch to the appropriate tab
+  // and only then remove the old one.
 
   //activate a tab in accordance with MRU
-  if ( mruList.size() > 0 ) {
+  if ( cfg.preferences.mruTabOrder && mruList.size() > 0 ) {
     ui.tabWidget->setCurrentWidget(mruList.at(0));
   }
 
-  // if everything is closed, add new tab
+  ui.tabWidget->removeTab( x );
+  delete w;
+
+  // if everything is closed, add a new tab
   if ( ui.tabWidget->count() == 0 )
     addNewTab();
 }
@@ -1749,6 +1757,12 @@ void MainWindow::editPreferences()
       applyQtStyleSheet( p.displayStyle, p.addonStyle );
       articleMaker.setDisplayStyle( p.displayStyle, p.addonStyle );
       needReload = true;
+    }
+
+    if( cfg.preferences.collapseBigArticles != p.collapseBigArticles
+        || cfg.preferences.articleSizeLimit != p.articleSizeLimit )
+    {
+      articleMaker.setCollapseParameters( p.collapseBigArticles, p.articleSizeLimit );
     }
 
     // See if we need to reapply expand optional parts mode
@@ -2549,7 +2563,8 @@ void MainWindow::prepareNewReleaseChecks()
 
 void MainWindow::checkForNewRelease()
 {
-  latestReleaseReply.reset();
+  if( latestReleaseReply )
+    latestReleaseReply->deleteLater();
 
   QNetworkRequest req(
     QUrl( "http://goldendict.org/latest_release.php?current="
@@ -2570,13 +2585,13 @@ void MainWindow::checkForNewRelease()
 
   latestReleaseReply = articleNetMgr.get( req );
 
-  connect( latestReleaseReply.get(), SIGNAL( finished() ),
+  connect( latestReleaseReply, SIGNAL( finished() ),
            this, SLOT( latestReleaseReplyReady() ), Qt::QueuedConnection );
 }
 
 void MainWindow::latestReleaseReplyReady()
 {
-  if ( !latestReleaseReply.get() )
+  if ( !latestReleaseReply )
     return; // Some stray signal
 
   bool success = false;
@@ -2596,7 +2611,8 @@ void MainWindow::latestReleaseReplyReady()
     }
   }
 
-  latestReleaseReply.reset();
+  latestReleaseReply->deleteLater();
+  latestReleaseReply = 0;
 
   if ( !success )
   {

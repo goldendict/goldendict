@@ -35,7 +35,7 @@ pre
 .gddictname
 {
   border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;
-  margin-top: 1.2em; margin-bottom: 0.1em; font-weight: bold; font-size: 14px;
+  margin-top: 1.2em; margin-bottom: 9px; font-weight: bold; font-size: 14px;
   /*background: #ffffdd;*/
 }
 
@@ -55,6 +55,16 @@ pre
   background: #fefdeb;
 /*fix for invalid blg*/
   font-style:normal;
+}
+
+/* CSS trick to prevent the floating elements to overflow
+   the article boundaries, see Issue #333. */
+.gdarticle:after
+{
+   content: "";
+   display: block;
+   height: 0;
+   clear: both;
 }
 
 /* Appears between the articles */
@@ -2703,3 +2713,19 @@ in bg url to hide it from iemac */
 .mwiki .infl-table { display: none }
 /****default hide dict icon ***/
 .gddicticon{display:none;}
+
+.gdexpandicon {
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    vertical-align: text-bottom;
+    background-image:url('qrcx://localhost/icons/arrow.png');
+}
+
+.gdcollapseicon {
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    vertical-align: text-bottom;
+    background-image:url('qrcx://localhost/icons/downarrow.png');
+}

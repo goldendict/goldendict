@@ -338,6 +338,9 @@ void ArticleView::loadFinished( bool )
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
 
+  // Expand collapsed article if only one loaded
+  ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "gdCheckArticlesNumber();" ) );
+
   // Jump to current article after page reloading
   if( !articleToJump.isEmpty() )
   {

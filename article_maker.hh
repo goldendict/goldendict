@@ -23,6 +23,8 @@ class ArticleMaker: public QObject
   QString displayStyle, addonStyle;
 
   bool needExpandOptionalParts;
+  bool collapseBigArticles;
+  int articleLimitSize;
 
 public:
 
@@ -71,6 +73,9 @@ public:
   /// Return true if path successfully adjusted
   static bool adjustFilePath( QString & fileName );
 
+  /// Set collapse articles parameters
+  void setCollapseParameters( bool autoCollapse, int articleSize );
+
 private:
 
   /// Makes everything up to and including the opening body tag.
@@ -115,13 +120,16 @@ class ArticleRequest: public Dictionary::DataRequest
   QString currentSplittedWordCompound;
   QString lastGoodCompoundResult;
   bool firstCompoundWasFound;
+  int articleSizeLimit;
+  bool needExpandOptionalParts;
 
 public:
 
   ArticleRequest( QString const & word, QString const & group,
                   QMap< QString, QString > const & contexts,
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
-                  std::string const & header );
+                  std::string const & header,
+                  int sizeLimit, bool needExpandOptionalParts_ );
 
   virtual void cancel();
 //  { finish(); } // Add our own requests cancellation here
@@ -150,6 +158,9 @@ private:
 
   /// Escapes the spacing between the words to include in html.
   std::string escapeSpacing( QString const & );
+
+  /// Find end of corresponding </div> tag
+  int findEndOfCloseDiv( QString const &, int pos );
 };
 
 

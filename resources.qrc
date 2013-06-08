@@ -65,5 +65,11 @@
         <file>qt-style-st-lingoes-blue.css</file>
         <file>qt-style-macos.css</file>
         <file>icons/mdict.png</file>
+        <file>icons/downarrow.png</file>
+        <file>icons/blank.png</file>
+        <file>icons/expand_article_hovered.png</file>
+        <file>icons/expand_article.png</file>
+        <file>icons/collapse_article_hovered.png</file>
+        <file>icons/collapse_article.png</file>
     </qresource>
 </RCC>

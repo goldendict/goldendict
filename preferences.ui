@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>572</width>
-    <height>394</height>
+    <height>403</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,6 +31,12 @@
        <width>15</width>
        <height>15</height>
       </size>
+     </property>
+     <property name="usesScrollButtons">
+      <bool>false</bool>
+     </property>
+     <property name="documentMode">
+      <bool>false</bool>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="icon">
@@ -1230,6 +1236,56 @@ It is not needed to select this option if you don't use such programs.</string>
              <string>Expand optional &amp;parts</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_11">
+            <item>
+             <widget class="QCheckBox" name="collapseBigArticles">
+              <property name="toolTip">
+               <string>Select this option to automatic collapse big articles</string>
+              </property>
+              <property name="text">
+               <string>Collapse articles more than</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="articleSizeLimit">
+              <property name="toolTip">
+               <string>Artiles longer than this size will be collapsed</string>
+              </property>
+              <property name="maximum">
+               <number>100000</number>
+              </property>
+              <property name="singleStep">
+               <number>50</number>
+              </property>
+              <property name="value">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>symbols</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_11">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>

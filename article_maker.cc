@@ -9,7 +9,7 @@
 #include <limits.h>
 #include <QFile>
 #include <QUrl>
-
+#include <QTextDocumentFragment>
 #include "folding.hh"
 #include "langcoder.hh"
 #include "dprintf.hh"
@@ -30,6 +30,8 @@ ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictiona
   displayStyle( displayStyle_ ),
   addonStyle( addonStyle_ ),
   needExpandOptionalParts( true )
+, collapseBigArticles( true )
+, articleLimitSize( 500 )
 {
 }
 
@@ -123,8 +125,8 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "gdAudioLinks = { first: null, current: null };"
             "function gdMakeArticleActive( newId ) {"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
-            "document.getElementById( gdCurrentArticle ).className = 'gdarticle';"
-            "document.getElementById( 'gdfrom-' + newId ).className = 'gdarticle gdactivearticle';"
+            "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
+            "el=document.getElementById( 'gdfrom-' + newId ); el.className = el.className + ' gdactivearticle';"
             "gdCurrentArticle = 'gdfrom-' + newId; gdAudioLinks.current = newId;"
             "articleview.onJsActiveArticleChanged(gdCurrentArticle); } }"
             "var overIframeId = null;"
@@ -139,7 +141,30 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "window.addEventListener('load', init, false);"
             "function gdExpandOptPart( expanderId, optionalId ) {  var d1=document.getElementById(expanderId); var i = 0; if( d1.alt == '[+]' ) {"
             "d1.alt = '[-]'; d1.src = 'qrcx://localhost/icons/collapse_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
-            "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } }"
+            "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } };"
+            "function gdExpandArticle( id ) { elem = document.getElementById('gdarticlefrom-'+id); ico = document.getElementById('expandicon-'+id); art=document.getElementById('gdfrom-'+id);"
+            "ev=window.event; t=null;"
+            "if(ev) t=ev.target || ev.srcElement;"
+            "if(elem.style.display=='inline' && t==ico) {"
+            "elem.style.display='none'; ico.className='gdexpandicon';"
+            "art.className = art.className+' gdcollapsedarticle';"
+            "nm=document.getElementById('gddictname-'+id); nm.style.cursor='pointer';"
+            "if(ev) ev.stopPropagation(); ico.title=''; nm.title='";
+  result += tr( "Expand article" ).toUtf8().data();
+  result += "' } else if(elem.style.display=='none') {"
+            "elem.style.display='inline'; ico.className='gdcollapseicon';"
+            "art.className=art.className.replace(' gdcollapsedarticle','');"
+            "nm=document.getElementById('gddictname-'+id); nm.style.cursor='default';"
+            "nm.title=''; ico.title='";
+  result += tr( "Collapse article").toUtf8().data();
+  result += "' } }"
+            "function gdCheckArticlesNumber() {"
+            "elems=document.getElementsByClassName('gddictname');"
+            "if(elems.length == 1) {"
+              "el=elems.item(0); s=el.id.replace('gddictname-','');"
+              "el=document.getElementById('gdfrom-'+s);"
+              "if(el && el.className.search('gdcollapsedarticle')>0) gdExpandArticle(s);"
+            "} }"
             "</script>";
 
   result += "</head><body>";
@@ -261,11 +286,15 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
         unmutedDicts.push_back( activeDicts[ x ] );
 
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
-                               contexts, unmutedDicts, header );
+                               contexts, unmutedDicts, header,
+                               collapseBigArticles ? articleLimitSize : -1,
+                               needExpandOptionalParts );
   }
   else
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
-                               contexts, activeDicts, header );
+                               contexts, activeDicts, header,
+                               collapseBigArticles ? articleLimitSize : -1,
+                               needExpandOptionalParts );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
@@ -317,6 +346,13 @@ void ArticleMaker::setExpandOptionalParts( bool expand )
   needExpandOptionalParts = expand;
 }
 
+void ArticleMaker::setCollapseParameters( bool autoCollapse, int articleSize )
+{
+  collapseBigArticles = autoCollapse;
+  articleLimitSize = articleSize;
+}
+
+
 bool ArticleMaker::adjustFilePath( QString & fileName )
 {
   QFileInfo info( fileName );
@@ -340,11 +376,14 @@ ArticleRequest::ArticleRequest(
   QString const & word_, QString const & group_,
   QMap< QString, QString > const & contexts_,
   vector< sptr< Dictionary::Class > > const & activeDicts_,
-  string const & header ):
+  string const & header,
+  int sizeLimit, bool needExpandOptionalParts_ ):
     word( word_ ), group( group_ ), contexts( contexts_ ),
     activeDicts( activeDicts_ ),
     altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
     closePrevSpan( false )
+,   articleSizeLimit( sizeLimit )
+,   needExpandOptionalParts( needExpandOptionalParts_ )
 {
   // No need to lock dataMutex on construction
 
@@ -412,6 +451,9 @@ void ArticleRequest::altSearchFinished()
 
     wstring wordStd = gd::toWString( word );
 
+    if( activeDicts.size() <= 1 )
+      articleSizeLimit = -1; // Don't collapse article if only one dictionary presented
+
     for( unsigned x = 0; x < activeDicts.size(); ++x )
     {
       sptr< Dictionary::DataRequest > r =
@@ -425,6 +467,24 @@ void ArticleRequest::altSearchFinished()
     }
 
     bodyFinished(); // Handle any ones which have already finished
+  }
+}
+
+int ArticleRequest::findEndOfCloseDiv( const QString &str, int pos )
+{
+  for( ; ; )
+  {
+    int n1 = str.indexOf( "</div>", pos );
+    if( n1 <= 0 )
+      return n1;
+
+    int n2 = str.indexOf( "<div ", pos );
+    if( n2 <= 0 || n2 > n1 )
+      return n1 + 6;
+
+    pos = findEndOfCloseDiv( str, n2 + 1 );
+    if( pos <= 0 )
+      return pos;
   }
 }
 
@@ -463,7 +523,7 @@ void ArticleRequest::bodyFinished()
 
         if ( closePrevSpan )
         {
-          head += "</span></span><span class=\"gdarticleseparator\"></span>";
+          head += "</span></span><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
         }
         else
         {
@@ -473,6 +533,43 @@ void ArticleRequest::bodyFinished()
                   "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
 
+        bool collapse = false;
+        if( articleSizeLimit >= 0 )
+        {
+          try
+          {
+            Mutex::Lock _( dataMutex );
+            QString text = QString::fromUtf8( req.getFullData().data(), req.getFullData().size() );
+
+            if( !needExpandOptionalParts )
+            {
+              // Strip DSL optional parts
+              int pos = 0;
+              for( ; ; )
+              {
+                pos = text.indexOf( "<div class=\"dsl_opt\"" );
+                if( pos > 0 )
+                {
+                  int endPos = findEndOfCloseDiv( text, pos + 1 );
+                  if( endPos > pos)
+                    text.remove( pos, endPos - pos );
+                  else
+                    break;
+                }
+                else
+                  break;
+              }
+            }
+
+            int size = QTextDocumentFragment::fromHtml( text ).toPlainText().length();
+            if( size > articleSizeLimit )
+              collapse = true;
+          }
+          catch(...)
+          {
+          }
+        }
+
         string jsVal = Html::escapeForJavaScript( dictId );
         head += "<script type=\"text/javascript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
@@ -480,6 +577,7 @@ void ArticleRequest::bodyFinished()
 
         head += string( "<span class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
+                ( collapse ? " gdcollapsedarticle" : "" ) +
                 "\" id=\"" + gdFrom +
                 "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +
                 " onContextMenu=\"gdMakeArticleActive( '" + jsVal + "' );\""
@@ -487,18 +585,30 @@ void ArticleRequest::bodyFinished()
 
         closePrevSpan = true;
 
-        head += string( "<div class=\"gddictname\"><span class=\"gddicticon\"><img src=\"gico://")
-                +  Html::escape( dictId )
+        head += string( "<div class=\"gddictname\" onclick=\"gdExpandArticle(\'" ) + dictId + "\');"
+          + ( collapse ? "\" style=\"cursor:pointer;" : "" )
+          + "\" id=\"gddictname-" + Html::escape( dictId ) + "\""
+          + ( collapse ? string( " title=\"" ) + tr( "Expand article" ).toUtf8().data() + "\"" : "" )
+          + "><span class=\"gddicticon\"><img src=\"gico://" + Html::escape( dictId )
           + "/dicticon.png\"></span><span class=\"gdfromprefix\">"  +
-          Html::escape( tr( "From " ).toUtf8().data() ) + "</span>" +
-          Html::escape( activeDict->getName().c_str() )
-           + "</div>";
+          Html::escape( tr( "From " ).toUtf8().data() ) + "</span><span class=\"gddicttitle\">" +
+          Html::escape( activeDict->getName().c_str() ) + "</span>"
+          + "<span class=\"collapse_expand_area\"><img src=\"qrcx://localhost/icons/blank.png\" class=\""
+          + ( collapse ? "gdexpandicon" : "gdcollapseicon" )
+          + "\" id=\"expandicon-" + Html::escape( dictId ) + "\""
+          + ( collapse ? "" : string( " title=\"" ) + tr( "Collapse article" ).toUtf8().data() + "\"" )
+          + "></span>" + "</div>";
+
+        head += "<div class=\"gddictnamebodyseparator\"></div>";
 
         head += "<span class=\"gdarticlebody gdlangfrom-";
         head += LangCoder::intToCode2( activeDict->getLangFrom() ).toLatin1().data();
         head += "\" lang=\"";
         head += LangCoder::intToCode2( activeDict->getLangTo() ).toLatin1().data();
-        head += "\">";
+        head += "\"";
+        head += " style=\"display:";
+        head += collapse ? "none" : "inline";
+        head += string( "\" id=\"gdarticlefrom-" ) + Html::escape( dictId ) + "\">";
 
         if ( errorString.size() )
         {

@@ -34,6 +34,7 @@
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
+#include <QUrl>
 
 #include <QDir>
 #include <QFileInfo>
@@ -74,7 +75,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 17 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 18 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2
 };
 
@@ -967,10 +968,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
     wstring nodeStr = node.renderAsText();
-    ArticleDom nodeDom( nodeStr );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( nodeDom.root.renderAsText() ) ) );
+    normalizeHeadword( nodeStr );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( nodeStr ) ) );
 
-    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( nodeDom.root ) + "</a>";
+    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"sub" ) )
@@ -986,6 +987,11 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   if ( node.tagName == GD_NATIVE_TO_WS( L"t" ) )
   {
     result += "<span class=\"dsl_t\">" + processNodeChildren( node ) + "</span>";
+  }
+  else
+  if ( node.tagName == GD_NATIVE_TO_WS( L"br" ) )
+  {
+    result += "<br />";
   }
   else
     result += "<span class=\"dsl_unknown\">" + processNodeChildren( node ) + "</span>";
@@ -1849,13 +1855,19 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             chunks.addToBlock( &(*i).offset, sizeof( (*i).offset ) );
             chunks.addToBlock( &(*i).size, sizeof( (*i).size ) );
 
-            unescapeDsl( (*i).headword );
-            normalizeHeadword( (*i).headword );
+            allEntryWords.clear();
+            expandOptionalParts( (*i).headword, &allEntryWords );
 
-            indexedWords.addWord( (*i).headword, descOffset, maxHeadwordSize );
+            for( list< wstring >::iterator j = allEntryWords.begin();
+                 j != allEntryWords.end(); ++j )
+            {
+              unescapeDsl( *j );
+              normalizeHeadword( *j );
+              indexedWords.addWord( *j, descOffset, maxHeadwordSize );
+            }
 
             ++articleCount;
-            ++wordCount;
+            wordCount += allEntryWords.size();
           }
 
           if ( !hasString )
