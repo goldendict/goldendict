@@ -2167,12 +2167,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2946"/>
         <source>Article, Complete (*.html)</source>
-        <translation>Статья полностью</translation>
+        <translation>Статья полностью (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2947"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation>Статья, только HTML</translation>
+        <translation>Статья, только HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3002"/>
