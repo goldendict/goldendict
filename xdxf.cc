@@ -60,7 +60,7 @@ DEF_EX( exCorruptedIndex, "The index file is corrupted", Dictionary::Ex )
 enum
 {
   Signature = 0x46584458, // XDXF on little-endian, FXDX on big-endian
-  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 enum ArticleFormat
@@ -526,7 +526,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   if ( &chunk.front() + chunk.size() - propertiesData < 9 )
     throw exCorruptedIndex();
 
-//  unsigned char fType = (unsigned char) *propertiesData;
+  unsigned char fType = (unsigned char) *propertiesData;
 
   uint32_t articleOffset, articleSize;
 
@@ -547,7 +547,8 @@ void XdxfDictionary::loadArticle( uint32_t address,
   if ( !articleBody )
     throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
 
-  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this );
+  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
+                                    fType == Logical );
 
   free( articleBody );
 }
@@ -717,7 +718,9 @@ void indexArticle( GzippedFile & gzFile,
                    IndexedWords & indexedWords,
                    ChunkedStorage::Writer & chunks,
                    unsigned & articleCount,
-                   unsigned & wordCount )
+                   unsigned & wordCount,
+                   ArticleFormat defaultFormat,
+                   int revisionNumber )
 {
   ArticleFormat format( Default );
 
@@ -728,7 +731,8 @@ void indexArticle( GzippedFile & gzFile,
   else
   if ( formatValue == "l" )
     format = Logical;
-
+  if( format == Default )
+    format = defaultFormat; 
   size_t articleOffset = gzFile.pos() - 1; // stream.characterOffset() is loony
 
   // uint32_t lineNumber = stream.lineNumber();
@@ -1070,6 +1074,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
 
               bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
+              int revisionNumber = ( stream.attributes().value( "revision" ).toString().toInt() );
 
               idxHeader.articleFormat = isLogical ? Logical : Visual;
 
@@ -1163,7 +1168,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   if ( stream.name() == "ar" )
                   {
                     indexArticle( gzFile, stream, indexedWords, chunks,
-                                  articleCount, wordCount );
+                                  articleCount, wordCount, isLogical ? Logical : Visual, revisionNumber );
                   }
                 }
               }

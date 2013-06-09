@@ -26,13 +26,13 @@ static void fixLink( QDomElement & el, string const & dictId, const char *attrNa
 }
 
 // converting a number into roman representation
-string convertToRoman(int input, int lower_case)
+string convertToRoman( int input, int lower_case )
 {
     string romanvalue = "";
-    if(input >= 4000)
+    if( input >= 4000 )
     {
-        int x = (input - input % 4000) / 1000;
-        romanvalue = "(" + convertToRoman(x,lower_case) + ")" ;
+        int x = ( input - input % 4000 ) / 1000;
+        romanvalue = "(" + convertToRoman( x, lower_case ) + ")" ;
         input %= 4000;
     }
 
@@ -40,21 +40,22 @@ string convertToRoman(int input, int lower_case)
                                "m", "cm", "d", "cd", "c", "xc", "l", "xl", "x", "ix", "v", "iv", "i"};
     const int decimal[13] =  {1000,  900, 500,  400, 100,   90,  50,   40,  10,    9,   5,    4,   1};
 
-    for (int i = 0; i < 13; i++)
+    for( int i = 0; i < 13; i++ )
     {
-        while (input >= decimal[i])
-        {
-            input -= decimal[i];
-            if (lower_case == 1)
-                romanvalue += roman[i+13];
-            else
-                romanvalue += roman[i];
-        }
+      while( input >= decimal[ i ] )
+      {
+        input -= decimal[ i ];
+        if ( lower_case == 1 )
+          romanvalue += roman[ i + 13 ];
+        else
+          romanvalue += roman[ i ];
+      }
     }
     return romanvalue;
 }
 
-string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv, Dictionary::Class *dictPtr )
+string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv,
+                Dictionary::Class *dictPtr, bool isLogicalFormat )
 {
 //  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
@@ -73,13 +74,18 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     {
       case '\n':
         afterEol = true;
-        inConverted.append( "<br/>" );
-      break;
+        if( !isLogicalFormat )
+          inConverted.append( "<br/>" );
+        break;
+
+      case '\r':
+        break;
 
       case ' ':
         if ( afterEol )
         {
-          inConverted.append( "&nbsp;" );
+          if( !isLogicalFormat )
+            inConverted.append( "&nbsp;" ); 
           break;
         }
         // Fall-through
@@ -108,7 +114,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
       in_data = "<div class=\"sdct_x\">";
   in_data += inConverted + "</div>";
 
-  if ( !dd.setContent( QByteArray( in_data.c_str() ), false, &errorStr, &errorLine, &errorColumn  ) )
+  if( !dd.setContent( QByteArray( in_data.c_str() ), false, &errorStr, &errorLine, &errorColumn  ) )
   {
     FDPRINTF( stderr, "Xdxf2html error, xml parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
     FDPRINTF( stderr, "The input was: %s\n", in.c_str() );
@@ -123,7 +129,10 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_ex" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_ex" );
+    else
+      el.setAttribute( "class", "xdxf_ex_old" );
   }
 
   nodes = dd.elementsByTagName( "k" ); // Key
@@ -143,78 +152,92 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
         el.setAttribute( "class", "xdxf_headwords" );
     }
   }
-
-  nodes = dd.elementsByTagName( "def" ); // processing of nested <def>s
-  // if this is a logical type of XDXF then we need to render proper numbering
-  // we will do it this way:
-  // 1. we compute the maximum nesting depth of the article
-  int maxNestingDepth = 1; // maximum nesting depth of the article
-  for( int i = 0; i < nodes.size(); i++ )
+  
+  // processing of nested <def>s
+  if( isLogicalFormat ) // in articles with visual format <def> tags do not effect the formatting.
   {
-    QDomElement el = nodes.at( i ).toElement();
-    QDomElement nestingNode = el;
-    int nestingCount = 0;
-    while (nestingNode.parentNode().toElement().tagName() == "def") {nestingCount++; nestingNode = nestingNode.parentNode().toElement();}
-    if (nestingCount > maxNestingDepth) {maxNestingDepth = nestingCount;}
-  }
-  // 2. in this loop we go layer-by-layer through all <def> and insert proper numbers according to its structure
-  for (int j = maxNestingDepth; j>0; j--) // j symbolizes special depth to be processed at this iteration
-  {
-    int siblingCount = 0; // this  that counts the number of among all siblings of this depth
-    QString numberText = ""; // the number to be inserted into the beginning of <def> (I,II,IV,1,2,3,a),b),c)...)
+    nodes = dd.elementsByTagName( "def" );
+    
+    // this is a logical type of XDXF, so we need to render proper numbering
+    // we will do it this way:
+    
+    // 1. we compute the maximum nesting depth of the article
+    int maxNestingDepth = 1; // maximum nesting depth of the article
     for( int i = 0; i < nodes.size(); i++ )
     {
       QDomElement el = nodes.at( i ).toElement();
       QDomElement nestingNode = el;
-      // computing the depth @nestingDepth of a current node @el
-      int nestingDepth = 0;
-      while (nestingNode.parentNode().toElement().tagName() == "def") {nestingDepth++; nestingNode=nestingNode.parentNode().toElement();}
-
-      // we process nodes on of current depth @j
-      // we do this in order not to break the numbering at this depth level
-      if (nestingDepth == j)
+      int nestingCount = 0;
+      while ( nestingNode.parentNode().toElement().tagName() == "def" )
       {
-        siblingCount++;
-        if (maxNestingDepth == 1)
-        {
-          numberText = numberText.setNum(siblingCount)+". ";
-        }
-        else if (maxNestingDepth == 2)
-        {
-          if (nestingDepth == 1)
-            numberText = numberText.setNum(siblingCount)+". ";
-          if (nestingDepth == 2)
-            numberText = numberText.setNum(siblingCount)+") ";
-        }
-        else
-        {
-          if (nestingDepth == 1)
-            numberText = QString::fromStdString(convertToRoman(siblingCount,0) + ". ");
-          if (nestingDepth == 2)
-            numberText = numberText.setNum(siblingCount)+". ";
-          if (nestingDepth == 3)
-            numberText = numberText.setNum(siblingCount)+") ";
-          if (nestingDepth == 4)
-            numberText = QString::fromStdString(convertToRoman(siblingCount,1) + ") ");
-        }
-        QDomElement node_num = dd.createElement("span");
-        node_num.setAttribute( "class", "xdxf_num" );
-        QDomText text_num = dd.createTextNode(numberText);
-        node_num.appendChild(text_num);
-        el.insertBefore(node_num,el.firstChild());
+        nestingCount++;
+        nestingNode = nestingNode.parentNode().toElement();
       }
-      else if (nestingDepth < j) // if it goes one level up @siblingCount needs to be reset
-        siblingCount = 0;
+      if ( nestingCount > maxNestingDepth )
+        maxNestingDepth = nestingCount;
+    }
+    // 2. in this loop we go layer-by-layer through all <def> and insert proper numbers according to its structure
+    for( int j = maxNestingDepth; j > 0; j-- ) // j symbolizes special depth to be processed at this iteration
+    {
+      int siblingCount = 0; // this  that counts the number of among all siblings of this depth
+      QString numberText = ""; // the number to be inserted into the beginning of <def> (I,II,IV,1,2,3,a),b),c)...)
+      for( int i = 0; i < nodes.size(); i++ )
+      {
+        QDomElement el = nodes.at( i ).toElement();
+        QDomElement nestingNode = el;
+        // computing the depth @nestingDepth of a current node @el
+        int nestingDepth = 0;
+        while( nestingNode.parentNode().toElement().tagName() == "def" )
+        {
+          nestingDepth++;
+          nestingNode=nestingNode.parentNode().toElement();
+        } 
+        // we process nodes on of current depth @j
+        // we do this in order not to break the numbering at this depth level
+        if (nestingDepth == j)
+        {
+          siblingCount++;
+          if( maxNestingDepth == 1 )
+          {
+            numberText = numberText.setNum(siblingCount) + ". ";
+          }
+          else if( maxNestingDepth == 2 )
+          {
+            if( nestingDepth == 1 )
+              numberText = numberText.setNum(siblingCount) + ". ";
+            if( nestingDepth == 2 )
+              numberText = numberText.setNum(siblingCount) + ") ";
+          }
+          else
+          {
+            if( nestingDepth == 1 )
+              numberText = QString::fromStdString(convertToRoman(siblingCount,0) + ". ");
+            if( nestingDepth == 2 )
+              numberText = numberText.setNum(siblingCount)+". ";
+            if( nestingDepth == 3 )
+              numberText = numberText.setNum(siblingCount)+") ";
+            if( nestingDepth == 4 )
+              numberText = QString::fromStdString(convertToRoman(siblingCount,1) + ") ");
+          }
+          QDomElement node_num = dd.createElement( "span" );
+          node_num.setAttribute( "class", "xdxf_num" );
+          QDomText text_num = dd.createTextNode(numberText);
+          node_num.appendChild(text_num);
+          el.insertBefore(node_num,el.firstChild());
+        }
+        else if( nestingDepth < j ) // if it goes one level up @siblingCount needs to be reset
+          siblingCount = 0;
+      }
+    }
+    // we finally change all <def> tags into 'xdxf_def' <span>s
+    while( nodes.size() )
+    {
+      QDomElement el = nodes.at( 0 ).toElement();
+      el.setTagName( "span" );
+      el.setAttribute( "class", "xdxf_def" );
     }
   }
-  // we finally change all <def> tags into 'xdxf_def' <span>s
-  while( nodes.size() )
-  {
-    QDomElement el = nodes.at( 0 ).toElement();
-    el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_def" );
-  }
-
+  
   nodes = dd.elementsByTagName( "opt" ); // Optional headword part
 
   while( nodes.size() )
@@ -304,14 +327,15 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
   {
     QDomElement el = nodes.at( 0 ).toElement();
 
-    el.setTagName( "font" );
-    el.setAttribute( "class", "xdxf_c" );
+    el.setTagName( "span" );
 
     if ( el.hasAttribute( "c" ) )
     {
-      el.setAttribute( "color", el.attribute( "c" ) );
+      el.setAttribute( "style", "color:" + el.attribute( "c" ) );
       el.removeAttribute( "c" );
     }
+    else
+      el.setAttribute( "style", "color:blue" );
   }
 
   nodes = dd.elementsByTagName( "co" ); // Editorial comment
@@ -321,7 +345,10 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_co" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_co" );
+    else
+      el.setAttribute( "class", "xdxf_co_old" );
   }
 
   /* grammar information */
@@ -331,7 +358,10 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_gr" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_gr" );
+    else
+      el.setAttribute( "class", "xdxf_gr_old" );
   }
   nodes = dd.elementsByTagName( "pos" ); // deprecated grammar tag
   while( nodes.size() )
@@ -339,7 +369,10 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_gr" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_gr" );
+    else
+      el.setAttribute( "class", "xdxf_gr_old" );
   }
   nodes = dd.elementsByTagName( "tense" ); // deprecated grammar tag
   while( nodes.size() )
@@ -347,10 +380,13 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_gr" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_gr" );
+    else
+      el.setAttribute( "class", "xdxf_gr_old" );
   }
   /* end of grammar generation */
-
+  
   nodes = dd.elementsByTagName( "tr" ); // Transcription
 
   while( nodes.size() )
@@ -358,9 +394,12 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_tr" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_tr" );
+    else
+      el.setAttribute( "class", "xdxf_tr" );
   }
-
+  
   // Ensure that ArticleNetworkAccessManager can deal with XDXF images.
   // We modify the URL by using the dictionary ID as the hostname.
   // This is necessary to determine from which dictionary a requested

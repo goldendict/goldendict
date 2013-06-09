@@ -185,14 +185,8 @@ div.xdxf
   border-bottom: 1px seagreen dotted;
 }
 
-/* Color-highlighted */
-.xdxf_c
-{
-  color: blue;
-}
-
 /* Editorial comment */
-.xdxf_co
+.xdxf_co, .xdxf_co_old
 {
     color: darkslateblue;
     font-style: italic;
@@ -213,12 +207,22 @@ div.xdxf
     display: block;
 }
 
+.xdxf_gr_old
+{
+    color: blue; /*orangered;*/
+}
+
 /* Example */
 .xdxf_ex
 {
     color: #808080;
     display: block;
     margin-left: 14px;
+}
+
+.xdxf_ex_old
+{
+    color: #808080;
 }
 
 /* Direct translation */
@@ -239,7 +243,7 @@ div.xdxf
   content:"]";
 }
 
-.xdxf_tr
+.xdxf_tr, .xdxf_tr_old
 {
   font-weight: bold;
 }
@@ -409,7 +413,7 @@ div.xdxf
 {
   color: blue;
   cursor: pointer;
-  vertical-align: center;
+  vertical-align: middle;
 }
 
 /************* Spelling suggestions *****************/
