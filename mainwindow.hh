@@ -243,6 +243,8 @@ private slots:
 
   void showDictionaryInfo( QString const & id );
 
+  void openDictionaryFolder( QString const & id );
+
 private slots:
 
   // Executed in response to a user click on an 'add tab' tool button

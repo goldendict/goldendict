@@ -64,6 +64,7 @@ signals:
   void forceAddWordToHistory( const QString & word);
   /// Retranslate signal from dictionary bar
   void showDictionaryInfo( QString const & id );
+  void openDictionaryFolder( QString const & id );
   /// Put translated word into history
   void sendWordToHistory( QString const & word );
 

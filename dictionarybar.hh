@@ -39,6 +39,9 @@ signals:
   /// Signal for show dictionary info command from context menu
   void showDictionaryInfo( QString const & id );
 
+  /// Signal for open dictionary folder from context menu
+  void openDictionaryFolder( QString const & id );
+
   /// Signal to close context menu
   void closePopupMenu();
 

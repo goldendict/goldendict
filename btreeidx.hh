@@ -155,6 +155,9 @@ public:
                                                               unsigned long maxResults )
     throw( std::exception );
 
+  virtual bool isLocalDictionary()
+  { return true; }
+
 protected:
 
   /// Called before each matching operation to ensure that any child init
