@@ -466,6 +466,10 @@ between classic and school orthography in cyrillic)</source>
         <source>&amp;Dictionary Bar</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open dictionary folder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditDictionaries</name>
@@ -2788,6 +2792,10 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Saving article...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open dictionary folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
