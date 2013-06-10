@@ -122,49 +122,88 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
     if (hs.key == vk && hs.modifier == mod) {
 
       #ifdef Q_WS_WIN32
-      // If that was a copy-to-clipboard shortcut, re-emit it back so it could
-      // reach its original destination so it could be acted upon.
-      if ( ( vk == VK_INSERT || vk == 'c' || vk == 'C' ) && mod == MOD_CONTROL )
+
+      if( hs.key2 != 0 || ( mod == MOD_CONTROL && ( vk == VK_INSERT || vk == 'c' || vk == 'C' ) ) )
       {
-        INPUT i[ 4 ];
-  
+        // Pass-through first part of compound hotkey or clipdoard copy command
+
+        INPUT i[ 10 ];
         memset( i, 0, sizeof( i ) );
+        int nextKeyNom = 0;
+        short emulateModKeys = 0;
 
-        // Bypass Ctrl+C/Ctrl+Ins
+        // If modifier keys aren't pressed it looks like emulation
+        // We then also emulate full sequence
 
-        short ctrlPressed = GetAsyncKeyState( VK_CONTROL );
-        int n;
-        if( ctrlPressed & 0x8000 )
+        if( ( mod & MOD_ALT ) != 0 && ( GetAsyncKeyState( VK_MENU ) & 0x8000 ) == 0 )
         {
-          // Ctrl key is pressed, send key code only
-
-          i[ 0 ].type = INPUT_KEYBOARD;
-          i[ 0 ].ki.wVk = ( vk == VK_INSERT ? VK_INSERT : 'C' );
-          i[ 1 ].type = INPUT_KEYBOARD;
-          i[ 1 ].ki.wVk = i[ 0 ].ki.wVk;
-          i[ 1 ].ki.dwFlags = KEYEVENTF_KEYUP;
-          n = 2;
+          emulateModKeys |= MOD_ALT;
+          i[ nextKeyNom ].type = INPUT_KEYBOARD;
+          i[ nextKeyNom ].ki.wVk = VK_MENU;
+          nextKeyNom += 1;
         }
-        else
+        if( ( mod & MOD_CONTROL ) != 0 && ( GetAsyncKeyState( VK_CONTROL ) & 0x8000 ) == 0 )
         {
-          // Ctrl key isn't pressed, looks like Ctrl+C/Ctrl+Ins emulation
-          // We also emulate full sequence
-
-          i[ 0 ].type = INPUT_KEYBOARD;
-          i[ 0 ].ki.wVk = VK_CONTROL;
-          i[ 1 ].type = INPUT_KEYBOARD;
-          i[ 1 ].ki.wVk = ( vk == VK_INSERT ? VK_INSERT : 'C' );
-          i[ 2 ].type = INPUT_KEYBOARD;
-          i[ 2 ].ki.wVk = i[ 1 ].ki.wVk;
-          i[ 2 ].ki.dwFlags = KEYEVENTF_KEYUP;
-          i[ 3 ].type = INPUT_KEYBOARD;
-          i[ 3 ].ki.wVk = VK_CONTROL;
-          i[ 3 ].ki.dwFlags = KEYEVENTF_KEYUP;
-          n = 4;
+          emulateModKeys |= MOD_CONTROL;
+          i[ nextKeyNom ].type = INPUT_KEYBOARD;
+          i[ nextKeyNom ].ki.wVk = VK_CONTROL;
+          nextKeyNom += 1;
         }
-  
+        if( ( mod & MOD_SHIFT ) != 0 && ( GetAsyncKeyState( VK_SHIFT ) & 0x8000 ) == 0 )
+        {
+          emulateModKeys |= MOD_SHIFT;
+          i[ nextKeyNom ].type = INPUT_KEYBOARD;
+          i[ nextKeyNom ].ki.wVk = VK_SHIFT;
+          nextKeyNom += 1;
+        }
+        if( ( mod & MOD_WIN ) != 0 && ( GetAsyncKeyState( VK_LWIN ) & 0x8000 ) == 0
+            && ( GetAsyncKeyState( VK_RWIN ) & 0x8000 ) == 0 )
+        {
+          emulateModKeys |= MOD_WIN;
+          i[ nextKeyNom ].type = INPUT_KEYBOARD;
+          i[ nextKeyNom ].ki.wVk = VK_LWIN;
+          nextKeyNom += 1;
+        }
+
+        i[ nextKeyNom ].type = INPUT_KEYBOARD;
+        i[ nextKeyNom ].ki.wVk = vk;
+        nextKeyNom += 1;
+        i[ nextKeyNom ].type = INPUT_KEYBOARD;
+        i[ nextKeyNom ].ki.wVk = vk;
+        i[ nextKeyNom ].ki.dwFlags = KEYEVENTF_KEYUP;
+        nextKeyNom += 1;
+
+        if( emulateModKeys & MOD_WIN )
+        {
+          i[ nextKeyNom ].type = INPUT_KEYBOARD;
+          i[ nextKeyNom ].ki.wVk = VK_LWIN;
+          i[ nextKeyNom ].ki.dwFlags = KEYEVENTF_KEYUP;
+          nextKeyNom += 1;
+        }
+        if( emulateModKeys & MOD_SHIFT )
+        {
+          i[ nextKeyNom ].type = INPUT_KEYBOARD;
+          i[ nextKeyNom ].ki.wVk = VK_SHIFT;
+          i[ nextKeyNom ].ki.dwFlags = KEYEVENTF_KEYUP;
+          nextKeyNom += 1;
+        }
+        if( emulateModKeys & MOD_CONTROL )
+        {
+          i[ nextKeyNom ].type = INPUT_KEYBOARD;
+          i[ nextKeyNom ].ki.wVk = VK_CONTROL;
+          i[ nextKeyNom ].ki.dwFlags = KEYEVENTF_KEYUP;
+          nextKeyNom += 1;
+        }
+        if( emulateModKeys & MOD_ALT )
+        {
+          i[ nextKeyNom ].type = INPUT_KEYBOARD;
+          i[ nextKeyNom ].ki.wVk = VK_MENU;
+          i[ nextKeyNom ].ki.dwFlags = KEYEVENTF_KEYUP;
+          nextKeyNom += 1;
+        }
+
         UnregisterHotKey( hwnd, hs.id );
-        SendInput( n, i, sizeof( *i ) );
+        SendInput( nextKeyNom, i, sizeof( *i ) );
         RegisterHotKey(hwnd, hs.id, hs.modifier, hs.key);
       }
       #endif
