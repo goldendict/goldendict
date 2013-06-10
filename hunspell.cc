@@ -73,6 +73,9 @@ public:
                                           wstring const & )
     throw( std::exception );
 
+  virtual bool isLocalDictionary()
+  { return true; }
+
 protected:
 
   virtual void loadIcon() throw();

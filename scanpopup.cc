@@ -132,6 +132,8 @@ ScanPopup::ScanPopup( QWidget * parent,
            &dictionaryBar, SIGNAL( closePopupMenu() ) );
   connect( &dictionaryBar, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SIGNAL( showDictionaryInfo( QString const & ) ) );
+  connect( &dictionaryBar, SIGNAL( openDictionaryFolder( QString const & ) ),
+           this, SIGNAL( openDictionaryFolder( QString const & ) ) );
 
   if ( cfg.popupWindowGeometry.size() )
     restoreGeometry( cfg.popupWindowGeometry );

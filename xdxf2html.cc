@@ -3,7 +3,6 @@
 
 #include "xdxf2html.hh"
 #include <QtXml>
-#include <Qurl>
 #include "dprintf.hh"
 #include "utf8.hh"
 #include "wstring_qt.hh"
@@ -339,7 +338,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
 //  DPRINTF( "Result>>>>>>>>>>: %s\n\n\n", dd.toByteArray().data() );
 
-  return dd.toString().remove('\n').toUtf8().data();
+  return dd.toString().remove('\n').remove( QRegExp( "<(b|i)/>" ) ).toUtf8().data();
 }
 
 }

@@ -31,6 +31,7 @@ public:
     urlTemplate( QUrl( urlTemplate_ ).toEncoded() ),
     iconFilename( iconFilename_ )
   {
+    dictionaryDescription = urlTemplate_;
   }
 
   virtual string getName() throw()

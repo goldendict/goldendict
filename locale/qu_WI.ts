@@ -57,62 +57,62 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="151"/>
+        <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="157"/>
+        <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="172"/>
+        <location filename="../article_maker.cc" line="180"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>Mana &lt;b&gt;%2&lt;/b&gt; juñupi &lt;b&gt;%1&lt;/b&gt; simita tarinchu.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="177"/>
+        <location filename="../article_maker.cc" line="185"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>Mana &lt;b&gt;%1&lt;/b&gt; juñupi simita tarinchu.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="196"/>
+        <location filename="../article_maker.cc" line="204"/>
         <source>Welcome!</source>
         <translation>Qallarinapaq</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="198"/>
+        <location filename="../article_maker.cc" line="206"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;¡Bienvenido a &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Qallarinapaq, &lt;b&gt;Allinchay &gt; Simi-pirwakuna&lt;/b&gt; riy. Jaqaypi simi-pirwakunata mask&apos;anapaq ñankunata yapay. Chaymanta, simi-pirwakunata ñiqichayta atinki. Juñukunaman simi-pirwakunata yapayta atinkitaq. &lt;p&gt;Chaymantari, simikunapi simikunata atinki. Mask&apos;anapaq tawak&apos;uchupi simita qillqapay. Wak programakunapi simikunata mask&apos;anapaq, &lt;a href=&quot;Working with popup&quot;&gt;Juch&apos;uy qhawanapi mask&apos;ayta&lt;/a&gt; qhaway. &lt;p&gt;Kay programata kamachinapaq &lt;b&gt;Allinchay &amp;gt; Aqllanakuna&lt;/b&gt; menuman riy. Achkhata yachanapaq qqllanakunaqpa willaynkukunata nawichayta atinki. &lt;p&gt;Aswan yanapata munaspaqa, &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;GoldenDictpa foronpi&lt;/a&gt; tapuyta atinki. Kay programata kunanchanapaq &lt;p&gt;&lt;a href=&quot;http://goldendict.org/&quot;&gt;web raphiman&lt;/a&gt; riy. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. GoldenDictqa GPL kamachiyyuq, versión 3 qhipamantataq.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="214"/>
+        <location filename="../article_maker.cc" line="222"/>
         <source>Working with popup</source>
         <translation>Juch&apos;uy qhawanapi mask&apos;anapaq</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="216"/>
+        <location filename="../article_maker.cc" line="224"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Cómo Utilizar la ventana emergente&lt;/h3&gt;Para buscar palabras desde otras aplicaciones activas, primero hay que habilitar la opción &lt;i&gt;&quot;Escaneo en una ventana emergente&quot;&lt;/i&gt; en &lt;b&gt;Editar|Preferencias&lt;/b&gt;. Luego puede utilizarla en cualquier momento, activando el icono arriba de la &apos;Ventana Emergente&apos;. Alternativamente, haga clic a derecha abajo en la bandeja del sistema y seleccione la opción &lt;b&gt;Escanear con Ventana Emergente&lt;/b&gt; en el menú.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="223"/>
+        <location filename="../article_maker.cc" line="231"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Luego detenga el cursor sobre la palabra que Ud. quiere buscar en otra aplicación y una ventana emergente aparecerá para hacer la consulta.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="226"/>
+        <location filename="../article_maker.cc" line="234"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Luego, seleccione una palabra deseada con su ratón para buscarla desde otra aplicación. Para seleccionar una palabra haga doble clic o arrastra sobre la palabra mientras oprimiendo el botón del ratón, y una ventana emergente aparecerá con la definición de la palabra.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="305"/>
+        <location filename="../article_maker.cc" line="315"/>
         <source>(untitled)</source>
         <translation>(mana sutiyuq)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="319"/>
+        <location filename="../article_maker.cc" line="329"/>
         <source>(picture)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -120,7 +120,7 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="540"/>
+        <location filename="../article_maker.cc" line="593"/>
         <source>From </source>
         <translation> </translation>
     </message>
@@ -129,32 +129,32 @@
         <translation type="obsolete">From %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="537"/>
+        <location filename="../article_maker.cc" line="590"/>
         <source>Expand article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="545"/>
+        <location filename="../article_maker.cc" line="598"/>
         <source>Collapse article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="560"/>
+        <location filename="../article_maker.cc" line="615"/>
         <source>Query error: %1</source>
         <translation>Pantay mask&apos;aspa: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="659"/>
+        <location filename="../article_maker.cc" line="714"/>
         <source>Close words: </source>
         <translation>Simikunata wisq&apos;ay:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="730"/>
+        <location filename="../article_maker.cc" line="785"/>
         <source>Compound expressions: </source>
         <translation>Expresiones compuestas:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="758"/>
+        <location filename="../article_maker.cc" line="813"/>
         <source>Individual words: </source>
         <translation>Palabras individuales:</translation>
     </message>
@@ -177,32 +177,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="670"/>
+        <location filename="../articleview.cc" line="673"/>
         <source>Resource</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="675"/>
+        <location filename="../articleview.cc" line="678"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="680"/>
+        <location filename="../articleview.cc" line="683"/>
         <source>TTS Voice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="685"/>
+        <location filename="../articleview.cc" line="688"/>
         <source>Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="701"/>
+        <location filename="../articleview.cc" line="704"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="705"/>
+        <location filename="../articleview.cc" line="708"/>
         <source>Definition: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -211,89 +211,89 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="893"/>
-        <location filename="../articleview.cc" line="1036"/>
+        <location filename="../articleview.cc" line="896"/>
+        <location filename="../articleview.cc" line="1039"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>El recurso referido no existe.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="933"/>
+        <location filename="../articleview.cc" line="936"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1036"/>
+        <location filename="../articleview.cc" line="1039"/>
         <source>ERROR: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1418"/>
+        <location filename="../articleview.cc" line="1421"/>
         <source>Save sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1420"/>
+        <location filename="../articleview.cc" line="1423"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1433"/>
+        <location filename="../articleview.cc" line="1436"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1435"/>
+        <location filename="../articleview.cc" line="1438"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1188"/>
+        <location filename="../articleview.cc" line="1191"/>
         <source>&amp;Open Link</source>
         <translation>&amp;T&apos;inkisqata kichay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1194"/>
+        <location filename="../articleview.cc" line="1197"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Musuq pestañapi t&apos;inkisqata kichay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1201"/>
+        <location filename="../articleview.cc" line="1204"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Abrir enlace en un &amp;navegador web externo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1234"/>
+        <location filename="../articleview.cc" line="1237"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot;ta &amp;mask&apos;ay </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1242"/>
+        <location filename="../articleview.cc" line="1245"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>&amp;Musuq pestañapi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1247"/>
+        <location filename="../articleview.cc" line="1250"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1253"/>
-        <location filename="../articleview.cc" line="1285"/>
+        <location filename="../articleview.cc" line="1256"/>
+        <location filename="../articleview.cc" line="1288"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1267"/>
+        <location filename="../articleview.cc" line="1270"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>%2pi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1275"/>
+        <location filename="../articleview.cc" line="1278"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>&amp;Musuq pestañapi %2pi &quot;%1&quot;ta mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1563"/>
+        <location filename="../articleview.cc" line="1566"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -306,37 +306,37 @@
         <translation type="obsolete">Para activar reproducción de archivos no WAV, por favor vaya a Editar|Preferencias, escoja la pestaña Audio y seleccione &quot;Reproducir con DirectShow&quot;.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1504"/>
+        <location filename="../articleview.cc" line="1507"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Fallo ejecutando un reproductor para reproducir el archivo de audio: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1522"/>
+        <location filename="../articleview.cc" line="1525"/>
         <source>Failed to create temporary file.</source>
         <translation>Temporal archiwuta yurichispa pantay.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1533"/>
+        <location filename="../articleview.cc" line="1536"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Fallo abriendo automáticamente el archivo de recursos. Intente abrirlo manualmente: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1556"/>
+        <location filename="../articleview.cc" line="1559"/>
         <source>The referenced resource failed to download.</source>
         <translation>El recurso ha fallado de descargar.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1215"/>
+        <location filename="../articleview.cc" line="1218"/>
         <source>Save &amp;image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1223"/>
+        <location filename="../articleview.cc" line="1226"/>
         <source>Save s&amp;ound...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1556"/>
+        <location filename="../articleview.cc" line="1559"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">WILLAY: %1</translation>
     </message>
@@ -563,12 +563,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>Kay juñuta allinchay</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="112"/>
+        <location filename="../dictionarybar.cc" line="126"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="126"/>
+        <location filename="../dictionarybar.cc" line="130"/>
+        <source>Open dictionary folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictionarybar.cc" line="135"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -875,7 +880,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="239"/>
+        <location filename="../hunspell.cc" line="242"/>
         <source>Spelling suggestions: </source>
         <translation>Qillqata allinchanapaq: </translation>
     </message>
@@ -1620,7 +1625,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Zulu</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="779"/>
+        <location filename="../hunspell.cc" line="782"/>
         <source>%1 Morphology</source>
         <translation>Morfología %1</translation>
     </message>
@@ -2693,17 +2698,17 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Wamp&apos;unapaq chumpi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="100"/>
+        <location filename="../mainwindow.cc" line="121"/>
         <source>Back</source>
         <translation>Ñawpaq</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="102"/>
+        <location filename="../mainwindow.cc" line="123"/>
         <source>Forward</source>
         <translation>Qhipa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="127"/>
+        <location filename="../mainwindow.cc" line="148"/>
         <source>Scan Popup</source>
         <translation>Juch&apos;uy qhawanapi mask&apos;ay</translation>
     </message>
@@ -2712,23 +2717,23 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Pronounce word</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="286"/>
+        <location filename="../mainwindow.cc" line="307"/>
         <source>Show &amp;Main Window</source>
         <translation>Qhapaq qhawanata &amp;rikhuchiy</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="367"/>
-        <location filename="../mainwindow.cc" line="290"/>
+        <location filename="../mainwindow.cc" line="311"/>
         <source>&amp;Quit</source>
         <translation>&amp;Lluqsiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="495"/>
+        <location filename="../mainwindow.cc" line="519"/>
         <source>Loading...</source>
         <translation>Jap&apos;ikuchkan...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2629"/>
+        <location filename="../mainwindow.cc" line="2643"/>
         <source>Skip This Release</source>
         <translation>Saltar esta versión</translation>
     </message>
@@ -2737,22 +2742,22 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">[Sconosciuto]</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2858"/>
+        <location filename="../mainwindow.cc" line="2872"/>
         <source>Page Setup</source>
         <translation>Raphita kamachina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2859"/>
+        <location filename="../mainwindow.cc" line="2873"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Mana impresora nisqaqa kanchu. Por favor instale una impresora.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2877"/>
+        <location filename="../mainwindow.cc" line="2891"/>
         <source>Print Article</source>
         <translation>Raphipi articulota ñit&apos;iy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2950"/>
+        <location filename="../mainwindow.cc" line="2964"/>
         <source>Save Article As</source>
         <translation>Jinata articulota jallch&apos;ay</translation>
     </message>
@@ -2761,12 +2766,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Archiwukuna HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2964"/>
+        <location filename="../mainwindow.cc" line="2978"/>
         <source>Error</source>
         <translation>Pantay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2965"/>
+        <location filename="../mainwindow.cc" line="2979"/>
         <source>Can&apos;t save article: %1</source>
         <translation>&quot;%1&quot; articulota mana jallch&apos;ayta atinchu </translation>
     </message>
@@ -2775,33 +2780,33 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Error loading dictionaries</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1078"/>
+        <location filename="../mainwindow.cc" line="1102"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 simi-pirwakuna, %2 articulokuna, %3 simikuna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2488"/>
+        <location filename="../mainwindow.cc" line="2500"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Fallo de inicializar monitoreo de teclas de acceso rápido.&lt;br&gt;Asegúrese que su XServer tiene activada la extensión RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2622"/>
+        <location filename="../mainwindow.cc" line="2636"/>
         <source>New Release Available</source>
         <translation>Una nueva versión está disponible</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2623"/>
+        <location filename="../mainwindow.cc" line="2637"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Ahora versión &lt;b&gt;%1&lt;/b&gt; de GoldenDict está disponible para descargar.&lt;br&gt;Haga clic en &lt;b&gt;Descargar&lt;/b&gt; para ir a página de descargas.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2628"/>
+        <location filename="../mainwindow.cc" line="2642"/>
         <source>Download</source>
         <translation>Urayachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="204"/>
-        <location filename="../mainwindow.cc" line="1089"/>
+        <location filename="../mainwindow.cc" line="225"/>
+        <location filename="../mainwindow.cc" line="1113"/>
         <source>Look up in:</source>
         <translation>Mask&apos;ay:</translation>
     </message>
@@ -2810,163 +2815,168 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Simi-pirwaqpa chumpinpi sutikunata rikhurichiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="65"/>
+        <location filename="../mainwindow.cc" line="81"/>
         <source>&amp;Menubar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="242"/>
+        <location filename="../mainwindow.cc" line="263"/>
         <source>Found in Dictionaries:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="142"/>
+        <location filename="../mainwindow.cc" line="163"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Simita parlachiy (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="63"/>
+        <location filename="../mainwindow.cc" line="79"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="64"/>
+        <location filename="../mainwindow.cc" line="80"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="97"/>
+        <location filename="../mainwindow.cc" line="118"/>
         <source>&amp;Navigation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="154"/>
+        <location filename="../mainwindow.cc" line="175"/>
         <source>Zoom In</source>
         <translation>Jatunyachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="160"/>
+        <location filename="../mainwindow.cc" line="181"/>
         <source>Zoom Out</source>
         <translation>Juch&apos;uyyachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="164"/>
+        <location filename="../mainwindow.cc" line="185"/>
         <source>Normal Size</source>
         <translation>Mana aqllasqa chhikan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="272"/>
+        <location filename="../mainwindow.cc" line="293"/>
         <source>Words Zoom In</source>
         <translation>Simikunata jatunyachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="276"/>
+        <location filename="../mainwindow.cc" line="297"/>
         <source>Words Zoom Out</source>
         <translation>Simikunata juch&apos;uyyachiy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="278"/>
+        <location filename="../mainwindow.cc" line="299"/>
         <source>Words Normal Size</source>
         <translation>Mana aqllasqa chhikanpa simikunan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="334"/>
+        <location filename="../mainwindow.cc" line="355"/>
         <source>Close current tab</source>
         <translation>Kunan pestañata wisq&apos;ay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="344"/>
+        <location filename="../mainwindow.cc" line="365"/>
         <source>Close all tabs</source>
         <translation>Tukuy pestañakunata wisq&apos;ay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="352"/>
+        <location filename="../mainwindow.cc" line="373"/>
         <source>Close all tabs except current</source>
         <translation>Tukuy pestañakunata wisq&apos;ay, mana kunan pestañachu </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1089"/>
+        <location filename="../mainwindow.cc" line="1113"/>
         <source>Look up:</source>
         <translation>Mask&apos;ay:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1107"/>
+        <location filename="../mainwindow.cc" line="1131"/>
         <source>All</source>
         <translation>Tukuy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="736"/>
-        <location filename="../mainwindow.cc" line="2682"/>
+        <location filename="../mainwindow.cc" line="760"/>
+        <location filename="../mainwindow.cc" line="2696"/>
         <source>Accessibility API is not enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2946"/>
+        <location filename="../mainwindow.cc" line="2960"/>
         <source>Article, Complete (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2947"/>
+        <location filename="../mainwindow.cc" line="2961"/>
         <source>Article, HTML Only (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3002"/>
+        <location filename="../mainwindow.cc" line="3016"/>
         <source>Saving article...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3061"/>
+        <location filename="../mainwindow.cc" line="3075"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3309"/>
+        <location filename="../mainwindow.cc" line="3323"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3358"/>
+        <location filename="../mainwindow.cc" line="3372"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3362"/>
+        <location filename="../mainwindow.cc" line="3376"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3365"/>
+        <location filename="../mainwindow.cc" line="3379"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3475"/>
+        <location filename="../mainwindow.cc" line="3507"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3476"/>
+        <location filename="../mainwindow.cc" line="3509"/>
+        <source>Open dictionary folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3515"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="323"/>
+        <location filename="../mainwindow.cc" line="344"/>
         <source>Opened tabs</source>
         <translation>Kichasqa Pestañas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1247"/>
+        <location filename="../mainwindow.cc" line="1274"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1305"/>
+        <location filename="../mainwindow.cc" line="1332"/>
         <source>(untitled)</source>
         <translation>(Mana sutiyuq)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1518"/>
+        <location filename="../mainwindow.cc" line="1530"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2975,38 +2985,38 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">WILLAY: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2759"/>
+        <location filename="../mainwindow.cc" line="2773"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2760"/>
+        <location filename="../mainwindow.cc" line="2774"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3221"/>
+        <location filename="../mainwindow.cc" line="3235"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3247"/>
+        <location filename="../mainwindow.cc" line="3261"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3249"/>
-        <location filename="../mainwindow.cc" line="3311"/>
+        <location filename="../mainwindow.cc" line="3263"/>
+        <location filename="../mainwindow.cc" line="3325"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3288"/>
+        <location filename="../mainwindow.cc" line="3302"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3291"/>
+        <location filename="../mainwindow.cc" line="3305"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3024,7 +3034,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="668"/>
+        <location filename="../mainwindow.cc" line="692"/>
         <source>Welcome!</source>
         <translation>¡Bienvenido!</translation>
     </message>
@@ -3214,7 +3224,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="542"/>
         <location filename="../mainwindow.ui" line="545"/>
-        <location filename="../mainwindow.cc" line="196"/>
+        <location filename="../mainwindow.cc" line="217"/>
         <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3237,7 +3247,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Pichay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="505"/>
+        <location filename="../mainwindow.cc" line="529"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3253,7 +3263,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3225"/>
+        <location filename="../mainwindow.cc" line="3239"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3284,12 +3294,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="548"/>
+        <location filename="../mdx.cc" line="551"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="559"/>
+        <location filename="../mdx.cc" line="562"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3435,17 +3445,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>Aqllanakuna</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="41"/>
+        <location filename="../preferences.ui" line="47"/>
         <source>&amp;Interface</source>
         <translation>&amp;Programaqpa uyan</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="47"/>
+        <location filename="../preferences.ui" line="53"/>
         <source>Tabbed browsing</source>
         <translation>Pestaña nisqawan wamp&apos;una</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="53"/>
+        <location filename="../preferences.ui" line="59"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
@@ -3454,12 +3464,12 @@ inmediatamente. Con esta opción pestañas nuevas serán
 abiertas sin trasladar a ellas.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="58"/>
+        <location filename="../preferences.ui" line="64"/>
         <source>Open new tabs in background</source>
         <translation>Musuq pestañata kichaqtin kunan pestañamanta ama ripuychu</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="65"/>
+        <location filename="../preferences.ui" line="71"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
@@ -3468,119 +3478,119 @@ de la lista. Con está opción pestañas nuevas son
 abiertas al lado de la pestaña actual.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="70"/>
+        <location filename="../preferences.ui" line="76"/>
         <source>Open new tabs after the current one</source>
         <translation>Kunan pestañaqpa chirunman musuq pestañata kichay</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="77"/>
+        <location filename="../preferences.ui" line="83"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="80"/>
+        <location filename="../preferences.ui" line="86"/>
         <source>Hide single tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="87"/>
+        <location filename="../preferences.ui" line="93"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="97"/>
+        <location filename="../preferences.ui" line="103"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Cuando activado un icono aparece en la bandeja del sistema que puede ser utilizado para abrir la ventana principal y realizar otras tareas. </translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="101"/>
+        <location filename="../preferences.ui" line="107"/>
         <source>Enable system tray icon</source>
         <translation>Sistema nisqaqpa chumpinpi unanchata churay</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="119"/>
+        <location filename="../preferences.ui" line="125"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
         <translation>Con esta opción, la aplicación inicia directamente en la bandeja del sistema sin mostrar su ventana principal.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="123"/>
+        <location filename="../preferences.ui" line="129"/>
         <source>Start to system tray</source>
         <translation>Sistema nisqaqpa chumpinpi qalliriy</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="130"/>
+        <location filename="../preferences.ui" line="136"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
         <translation>Con esta opción un intento de cerrar la ventana principal la ocultaría sin 
 cerrar la aplicación.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="134"/>
+        <location filename="../preferences.ui" line="140"/>
         <source>Close to system tray</source>
         <translation>Sistema nisqaqpa chimpunman wisq&apos;ay</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="154"/>
+        <location filename="../preferences.ui" line="160"/>
         <source>Startup</source>
         <translation>Qallariynin</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="163"/>
+        <location filename="../preferences.ui" line="169"/>
         <source>Start with system</source>
         <translation>Sistema nisqaqa qallariqtin GoldenDict qallarintaq</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="188"/>
+        <location filename="../preferences.ui" line="194"/>
         <source>Interface language:</source>
         <translation>GoldenDictpa simin:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="214"/>
+        <location filename="../preferences.ui" line="220"/>
         <source>Display style:</source>
         <translation>Imayna rikhurin:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="252"/>
+        <location filename="../preferences.ui" line="258"/>
         <source>Double-click translates the word clicked</source>
         <translation>Simita mask&apos;anapaq iskay klik ruway</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="259"/>
+        <location filename="../preferences.ui" line="265"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="263"/>
+        <location filename="../preferences.ui" line="269"/>
         <source>ESC key hides main window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="144"/>
+        <location filename="../preferences.ui" line="150"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="147"/>
+        <location filename="../preferences.ui" line="153"/>
         <source>Select word by single click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="272"/>
+        <location filename="../preferences.ui" line="278"/>
         <source>Add-on style:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="339"/>
+        <location filename="../preferences.ui" line="345"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>Selecciona si el modo de escaneo está activado por defecto o no. Si está
 marcado, el programa siempre iniciará con el modo de escaneo habilitado.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="520"/>
+        <location filename="../preferences.ui" line="526"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -3592,37 +3602,37 @@ las teclas escogidas puede ser oprimidas un poco
 despues la seleccion esté hecha.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="610"/>
+        <location filename="../preferences.ui" line="616"/>
         <source>Hotkeys</source>
         <translation>Teclakuna</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="629"/>
+        <location filename="../preferences.ui" line="635"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>Usar la siguiente combinación de teclas para mostrar u ocultar la ventana principal:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="660"/>
+        <location filename="../preferences.ui" line="666"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>Usar la tecla siguiente para traducir una palabra en la porta-papeles:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="707"/>
+        <location filename="../preferences.ui" line="713"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>Las teclas de acceso rápido están globales y funcionan desde cualquier programa o contexto mientras que GoldenDict estén ejecutando en el fondo.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="302"/>
+        <location filename="../preferences.ui" line="308"/>
         <source>&amp;Scan Popup</source>
         <translation>&amp;Juch&apos;uy qhawanapi mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="160"/>
+        <location filename="../preferences.ui" line="166"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
         <translation>Sistema nisqaqa qallariqtinkama, GoldenDictqa qallarinpis.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="321"/>
+        <location filename="../preferences.ui" line="327"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -3638,156 +3648,156 @@ en la bandeja del sistema.</translation>
         <translation type="obsolete">Scan popup functionality</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="327"/>
+        <location filename="../preferences.ui" line="333"/>
         <source>Enable scan popup functionality</source>
         <translation>Juch&apos;uy qhawanapi mask&apos;ay</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="343"/>
+        <location filename="../preferences.ui" line="349"/>
         <source>Start with scan popup turned on</source>
         <translation>Programaqa qallariqtin juch&apos;uy qhawanapi maskay</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="350"/>
+        <location filename="../preferences.ui" line="356"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Con esto habilitado, la ventana emergente sólo aparece si todas las teclas 
 seleccionadas estén oprimidas cuando la selección de la palabra cambie.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="354"/>
+        <location filename="../preferences.ui" line="360"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>Tukuy kay teclakunata ñit&apos;inaykikama, juch&apos;uy qhawanata rikhurichinqa:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="393"/>
+        <location filename="../preferences.ui" line="399"/>
         <source>Left Ctrl only</source>
         <translation>Sapalla lluq&apos;i CTRL </translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="396"/>
+        <location filename="../preferences.ui" line="402"/>
         <source>Left Ctrl</source>
         <translation>Lluq&apos;i CTRL</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="403"/>
+        <location filename="../preferences.ui" line="409"/>
         <source>Right Shift only</source>
         <translation>Sapalla paña MAYÚSCULA</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="406"/>
+        <location filename="../preferences.ui" line="412"/>
         <source>Right Shift</source>
         <translation>Paña MAYÚSCULA</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="413"/>
+        <location filename="../preferences.ui" line="419"/>
         <source>Alt key</source>
         <translation>Tecla ALT</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="416"/>
+        <location filename="../preferences.ui" line="422"/>
         <source>Alt</source>
         <translation>ALT</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="423"/>
+        <location filename="../preferences.ui" line="429"/>
         <source>Ctrl key</source>
         <translation>Tecla CTRL</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="426"/>
+        <location filename="../preferences.ui" line="432"/>
         <source>Ctrl</source>
         <translation>CTRL</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="433"/>
+        <location filename="../preferences.ui" line="439"/>
         <source>Left Alt only</source>
         <translation>Sapalla lluq&apos;i ALT</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="436"/>
+        <location filename="../preferences.ui" line="442"/>
         <source>Left Alt</source>
         <translation>Lluq&apos;i ALT</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="443"/>
+        <location filename="../preferences.ui" line="449"/>
         <source>Shift key</source>
         <translation>Tecla MAYÚSCULA</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="446"/>
+        <location filename="../preferences.ui" line="452"/>
         <source>Shift</source>
         <translation>MAYÚSCULA</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="453"/>
+        <location filename="../preferences.ui" line="459"/>
         <source>Right Alt only</source>
         <translation>Sapalla paña ALT</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="456"/>
+        <location filename="../preferences.ui" line="462"/>
         <source>Right Alt</source>
         <translation>Paña ALT</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="463"/>
+        <location filename="../preferences.ui" line="469"/>
         <source>Right Ctrl only</source>
         <translation>Sapalla paña CTRL</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="466"/>
+        <location filename="../preferences.ui" line="472"/>
         <source>Right Ctrl</source>
         <translation>Paña CTRL</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="473"/>
+        <location filename="../preferences.ui" line="479"/>
         <source>Left Shift only</source>
         <translation>Sola MAYÚSCULA de izquierda</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="476"/>
+        <location filename="../preferences.ui" line="482"/>
         <source>Left Shift</source>
         <translation>Lluq&apos;i MAYÚSCULA</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="483"/>
+        <location filename="../preferences.ui" line="489"/>
         <source>Windows key or Meta key</source>
         <translation>Tecla de WINDOWS o META</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="486"/>
+        <location filename="../preferences.ui" line="492"/>
         <source>Win/Meta</source>
         <translation>WINDOWSchu METAchu</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="526"/>
+        <location filename="../preferences.ui" line="532"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Teclasta ñit&apos;iyta atinki</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="533"/>
+        <location filename="../preferences.ui" line="539"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
         <translation>Para evitar positivos falsos, las teclas sólo son monitoreadas después de la terminación de la selección adentro un tiempo limitado, que está especificado aquí.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="557"/>
+        <location filename="../preferences.ui" line="563"/>
         <source>secs</source>
         <translation>qhipa segundokuna </translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="579"/>
+        <location filename="../preferences.ui" line="585"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="582"/>
+        <location filename="../preferences.ui" line="588"/>
         <source>Send translated word to main window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="717"/>
+        <location filename="../preferences.ui" line="723"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3800,57 +3810,57 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Nota: Aparece que la extensión RECORD está rota en tu instalación de X.Org XServer. Las teclas de acceso rápido de GoldenDict probablemente no funcionan. Este problema puede ser arreglado en el servidor mismo. Por favor consulte al &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;reportaje de bug&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; y se puede entregar comentarios allí.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="755"/>
+        <location filename="../preferences.ui" line="761"/>
         <source>&amp;Audio</source>
         <translation>&amp;Chanra</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="774"/>
+        <location filename="../preferences.ui" line="780"/>
         <source>Pronunciation</source>
         <translation>Parlachina</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="780"/>
+        <location filename="../preferences.ui" line="786"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Qhapaq qhawanapi kunanpacha simikunata parlachiy</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="787"/>
+        <location filename="../preferences.ui" line="793"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Juch&apos;uy qhawanapi kunanpacha simikunata parlachiy</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="797"/>
+        <location filename="../preferences.ui" line="803"/>
         <source>Playback</source>
         <translation>Takichina</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="803"/>
+        <location filename="../preferences.ui" line="809"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="806"/>
+        <location filename="../preferences.ui" line="812"/>
         <source>Use internal player</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1239"/>
+        <location filename="../preferences.ui" line="1245"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1242"/>
+        <location filename="../preferences.ui" line="1248"/>
         <source>Collapse articles more than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1249"/>
+        <location filename="../preferences.ui" line="1255"/>
         <source>Artiles longer than this size will be collapsed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1265"/>
+        <location filename="../preferences.ui" line="1271"/>
         <source>symbols</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3875,38 +3885,38 @@ pero debe soportar a mayoría de formatos de audio.</translation>
         <translation type="obsolete">Phonon nisqawan takichiy</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="815"/>
+        <location filename="../preferences.ui" line="821"/>
         <source>Use any external program to play audio files</source>
         <translation>Usar cualquier programa para reproducir archivos de audio</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="818"/>
+        <location filename="../preferences.ui" line="824"/>
         <source>Use external program:</source>
         <translation>Takichiy jawa programawan:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1002"/>
+        <location filename="../preferences.ui" line="1008"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1006"/>
+        <location filename="../preferences.ui" line="1012"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1057"/>
+        <location filename="../preferences.ui" line="1063"/>
         <source>Ad&amp;vanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1063"/>
+        <location filename="../preferences.ui" line="1069"/>
         <source>ScanPopup extra technologies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1069"/>
+        <location filename="../preferences.ui" line="1075"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3914,86 +3924,86 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1075"/>
+        <location filename="../preferences.ui" line="1081"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1082"/>
+        <location filename="../preferences.ui" line="1088"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1087"/>
+        <location filename="../preferences.ui" line="1093"/>
         <source>Use &amp;UIAutomation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1094"/>
+        <location filename="../preferences.ui" line="1100"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1099"/>
+        <location filename="../preferences.ui" line="1105"/>
         <source>Use &amp;GoldenDict message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1109"/>
+        <location filename="../preferences.ui" line="1115"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1115"/>
+        <location filename="../preferences.ui" line="1121"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1118"/>
+        <location filename="../preferences.ui" line="1124"/>
         <source>Store &amp;history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1133"/>
+        <location filename="../preferences.ui" line="1139"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1136"/>
+        <location filename="../preferences.ui" line="1142"/>
         <source>Maximum history size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1173"/>
+        <location filename="../preferences.ui" line="1179"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1179"/>
+        <location filename="../preferences.ui" line="1185"/>
         <source>Save every</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1196"/>
+        <location filename="../preferences.ui" line="1202"/>
         <source>minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1221"/>
+        <location filename="../preferences.ui" line="1227"/>
         <source>Articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1227"/>
+        <location filename="../preferences.ui" line="1233"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1230"/>
+        <location filename="../preferences.ui" line="1236"/>
         <source>Expand optional &amp;parts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4002,73 +4012,73 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="obsolete">Program to play audio files:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="855"/>
+        <location filename="../preferences.ui" line="861"/>
         <source>&amp;Network</source>
         <translation>&amp;Llika</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="874"/>
+        <location filename="../preferences.ui" line="880"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Habilite está opción si Ud. quiere utilizar un 
 servidor proxy por todas las solicitudes de red del programa.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="878"/>
+        <location filename="../preferences.ui" line="884"/>
         <source>Use proxy server</source>
         <translation>Servidor proxy nisqawan t&apos;inkichiy</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="892"/>
+        <location filename="../preferences.ui" line="898"/>
         <source>Type:</source>
         <translation>Tipo:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="902"/>
+        <location filename="../preferences.ui" line="908"/>
         <source>Host:</source>
         <translation>Host:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="912"/>
+        <location filename="../preferences.ui" line="918"/>
         <source>Port:</source>
         <translation>Punku:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="933"/>
+        <location filename="../preferences.ui" line="939"/>
         <source>User:</source>
         <translation>jap&apos;iq masi:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="943"/>
+        <location filename="../preferences.ui" line="949"/>
         <source>Password:</source>
         <translation>Pakasqa simi:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="978"/>
+        <location filename="../preferences.ui" line="984"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
         <translation>Habilitando esta opción bloqueará la mayoría de propagando comercial, porque no permite contenido (imágenes y marcos) que no vienen directamente del sitio utilizado. Si causa problemas con algunos sitios, deshabilite esta opción. </translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="983"/>
+        <location filename="../preferences.ui" line="989"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>No permite la carga de contenido de otros sitios (oculta la mayoría de propaganda)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="990"/>
+        <location filename="../preferences.ui" line="996"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="995"/>
+        <location filename="../preferences.ui" line="1001"/>
         <source>Enable web plugins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1029"/>
+        <location filename="../preferences.ui" line="1035"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -4081,7 +4091,7 @@ el programa le informa al usuario y le apunta a
 la página web para descargarla.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1036"/>
+        <location filename="../preferences.ui" line="1042"/>
         <source>Check for new program releases periodically</source>
         <translation>Verificar periódicamente si haya una nueva versión del programa</translation>
     </message>
@@ -4336,18 +4346,18 @@ la página web para descargarla.</translation>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2144"/>
-        <location filename="../articleview.cc" line="2151"/>
+        <location filename="../articleview.cc" line="2147"/>
+        <location filename="../articleview.cc" line="2154"/>
         <source>ERROR: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2144"/>
+        <location filename="../articleview.cc" line="2147"/>
         <source>Resource saving error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2151"/>
+        <location filename="../articleview.cc" line="2154"/>
         <source>The referenced resource failed to download.</source>
         <translation type="unfinished">El recurso ha fallado de descargar.</translation>
     </message>
@@ -4463,8 +4473,8 @@ could be resized or managed in other ways.</source>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="478"/>
-        <location filename="../scanpopup.cc" line="823"/>
+        <location filename="../scanpopup.cc" line="480"/>
+        <location filename="../scanpopup.cc" line="825"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4537,70 +4547,70 @@ could be resized or managed in other ways.</source>
         <translation type="obsolete">Sources</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="34"/>
+        <location filename="../sources.ui" line="37"/>
         <source>Files</source>
         <translation>Archiwukuna</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="40"/>
+        <location filename="../sources.ui" line="43"/>
         <source>Paths to search for the dictionary files:</source>
         <translation>Simi-pirwakunaqpa archiwunkuta tarinapaq ñankuna:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="54"/>
-        <location filename="../sources.ui" line="117"/>
-        <location filename="../sources.ui" line="241"/>
-        <location filename="../sources.ui" line="300"/>
-        <location filename="../sources.ui" line="367"/>
+        <location filename="../sources.ui" line="57"/>
+        <location filename="../sources.ui" line="120"/>
+        <location filename="../sources.ui" line="244"/>
+        <location filename="../sources.ui" line="303"/>
+        <location filename="../sources.ui" line="370"/>
         <source>&amp;Add...</source>
         <translation>&amp;Yapay...</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="61"/>
-        <location filename="../sources.ui" line="124"/>
-        <location filename="../sources.ui" line="248"/>
-        <location filename="../sources.ui" line="307"/>
-        <location filename="../sources.ui" line="374"/>
+        <location filename="../sources.ui" line="64"/>
+        <location filename="../sources.ui" line="127"/>
+        <location filename="../sources.ui" line="251"/>
+        <location filename="../sources.ui" line="310"/>
+        <location filename="../sources.ui" line="377"/>
         <source>&amp;Remove</source>
         <translation>&amp;Chinkachiy</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="81"/>
+        <location filename="../sources.ui" line="84"/>
         <source>Re&amp;scan now</source>
         <translation>Kunan &amp;hukmanta ñawichay</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="97"/>
+        <location filename="../sources.ui" line="100"/>
         <source>Sound Dirs</source>
         <translation>Chanrawan directoriokuna</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="103"/>
+        <location filename="../sources.ui" line="106"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
         <translation>Crear diccionarios de grupos de archivos de audio, encontrados en rutas aquí:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="153"/>
+        <location filename="../sources.ui" line="156"/>
         <source>Morphology</source>
         <translation>Morfología</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="159"/>
+        <location filename="../sources.ui" line="162"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
         <translation>Hunspell/Myspell simi-pirwakunawan directoriokunaman ñan:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="175"/>
+        <location filename="../sources.ui" line="178"/>
         <source>&amp;Change...</source>
         <translation>&amp;Allinchay...</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="184"/>
+        <location filename="../sources.ui" line="187"/>
         <source>Available morphology dictionaries:</source>
         <translation>Jap&apos;ikunapaq morfológicos simi-pirwakuna:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="196"/>
+        <location filename="../sources.ui" line="199"/>
         <source>Each morphology dictionary appears as a
 separate auxiliary dictionary which
 provides stem words for searches and
@@ -4615,12 +4625,12 @@ mal escritas. Agregar diccionarios a los
 fondos de grupos apropriados para utilizarlos.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="280"/>
+        <location filename="../sources.ui" line="283"/>
         <source>Websites</source>
         <translation>Web raphikuna</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="286"/>
+        <location filename="../sources.ui" line="289"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
         <translation>Web raphikuna: (Mask&apos;asqa simiwan &quot;%GDWORD%&quot;ta rantinqa)</translation>
     </message>
@@ -4629,37 +4639,37 @@ fondos de grupos apropriados para utilizarlos.</translation>
         <translation type="obsolete">(&quot;CP1251&quot;wan &quot;%GD1251%&quot;ta rantinqa. &quot;ISO 8859-1&quot;wan &quot;%GDISO1%&quot;ta rantinqa)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="344"/>
+        <location filename="../sources.ui" line="347"/>
         <source>Programs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="350"/>
+        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="403"/>
+        <location filename="../sources.ui" line="406"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="415"/>
+        <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Pronuncia directamente de &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Este sito permite que la gente grabe y comparta pronunciaciones de palabras que pueden ser escuchadas desde GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="428"/>
+        <location filename="../sources.ui" line="431"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Forvo nisqawan parlachiy</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="458"/>
+        <location filename="../sources.ui" line="461"/>
         <source>API Key:</source>
         <translation>API nisqaqpa chimpun:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="465"/>
+        <location filename="../sources.ui" line="468"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -4669,7 +4679,7 @@ disponible en el futuro, o registre en el sitio para obtener tu
 propia clave personalizada.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="490"/>
+        <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4692,80 +4702,80 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Obtenga tu propria clave &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;aquí&lt;/span&gt;&lt;/a&gt;, o deje en blanco para utilizar la clave por defecto.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="331"/>
+        <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="503"/>
+        <location filename="../sources.ui" line="506"/>
         <source>Language codes (comma-separated):</source>
         <translation>Simikunaqpa chimpunku (coma nisqakunawan t&apos;aqasqa):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="510"/>
+        <location filename="../sources.ui" line="513"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Simi munaykinkiLista de códigos de lenguas que Ud. quiere utilizar. Por Ejemplo: &quot;en, ru, es&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="533"/>
+        <location filename="../sources.ui" line="536"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Una lista completa de los códigos de lenguas está disponible &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="575"/>
+        <location filename="../sources.ui" line="578"/>
         <source>Transliteration</source>
         <translation>Waq qillqaman t&apos;ikray</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="596"/>
+        <location filename="../sources.ui" line="599"/>
         <source>Russian transliteration</source>
         <translation>Ruso qillqaman t&apos;ikray</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="607"/>
+        <location filename="../sources.ui" line="610"/>
         <source>Greek transliteration</source>
         <translation>Griego qillqaman t&apos;ikray</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="631"/>
+        <location filename="../sources.ui" line="634"/>
         <source>German transliteration</source>
         <translation>Aleman qillqaman t&apos;ikray</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="642"/>
+        <location filename="../sources.ui" line="645"/>
         <source>Belarusian transliteration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="668"/>
+        <location filename="../sources.ui" line="671"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Habilita el alfabeto romano para escribir la lengua japonesa</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="671"/>
+        <location filename="../sources.ui" line="674"/>
         <source>Japanese Romaji</source>
         <translation>Romano qillqapi japonés simita t&apos;ikray</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="683"/>
+        <location filename="../sources.ui" line="686"/>
         <source>Systems:</source>
         <translation>Sistemas:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="690"/>
+        <location filename="../sources.ui" line="693"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>El sistema más utilizado para transcribir japonés,
 basado en la fonología inglesa</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="694"/>
+        <location filename="../sources.ui" line="697"/>
         <source>Hepburn</source>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="704"/>
+        <location filename="../sources.ui" line="707"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -4776,12 +4786,12 @@ Su estándar es ISO-3602.
 Todavia no implementado en GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="710"/>
+        <location filename="../sources.ui" line="713"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="720"/>
+        <location filename="../sources.ui" line="723"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -4792,32 +4802,32 @@ Estandarizado como ISO 3602
 Todavía no implementado en GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="726"/>
+        <location filename="../sources.ui" line="729"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="733"/>
+        <location filename="../sources.ui" line="736"/>
         <source>Syllabaries:</source>
         <translation>Silabario:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="740"/>
+        <location filename="../sources.ui" line="743"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Silabario de Japonés Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="743"/>
+        <location filename="../sources.ui" line="746"/>
         <source>Hiragana</source>
         <translation>Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="750"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Silabario de Japonés Katakana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="753"/>
+        <location filename="../sources.ui" line="756"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>
@@ -4826,12 +4836,12 @@ Todavía no implementado en GoldenDict.</translation>
         <translation type="obsolete">Each morphology dictionary appears as a separate auxiliary dictionary which provides stem words for searches and spelling suggestions for mistyped words. Add appropriate dictionaries to the bottoms of the appropriate groups to use them.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="221"/>
+        <location filename="../sources.ui" line="224"/>
         <source>Wikipedia</source>
         <translation>Wikipedia</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="227"/>
+        <location filename="../sources.ui" line="230"/>
         <source>Wikipedia (MediaWiki) sites:</source>
         <translation>Wikipedia (MediaWiki) raphikuna:</translation>
     </message>

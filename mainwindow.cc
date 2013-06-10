@@ -504,6 +504,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &dictionaryBar, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
 
+  connect( &dictionaryBar, SIGNAL( openDictionaryFolder( QString const & ) ),
+           this, SLOT( openDictionaryFolder( QString const & ) ) );
+
   // History
   ui.historyPaneWidget->setUp( &cfg, &history, ui.menuHistory );
   history.enableAdd( cfg.preferences.storeHistory );
@@ -1219,6 +1222,9 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL( showDictionaryInfo( const QString & ) ),
            this, SLOT( showDictionaryInfo( const QString & ) ) );
+
+  connect( scanPopup.get(), SIGNAL( openDictionaryFolder( const QString & ) ),
+           this, SLOT( openDictionaryFolder( const QString & ) ) );
 
   connect( scanPopup.get(), SIGNAL( sendWordToHistory( QString ) ),
            this, SLOT( addWordToHistory( QString ) ) );
@@ -3459,27 +3465,45 @@ void MainWindow::showDictionaryInfo( const QString & id )
   }
 }
 
+void MainWindow::openDictionaryFolder( const QString & id )
+{
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
+    if( dictionaries[ x ]->getId() == id.toUtf8().data() )
+    {
+      if( dictionaries[ x ]->getDictionaryFilenames().size() > 0 )
+      {
+        QString fileName = FsEncoding::decode( dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str() );
+        QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
+        if( !folder.isEmpty() )
+          QDesktopServices::openUrl( folder );
+      }
+      break;
+    }
+  }
+}
+
 void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 {
   QListWidgetItem *item = ui.dictsList->itemAt( pos );
   if( item )
   {
     QString id = item->data( Qt::UserRole ).toString();
-    QString dictFilename;
+    Dictionary::Class *pDict = NULL;
 
-    if( !cfg.editDictionaryCommandLine.isEmpty() )
+    for( unsigned i = 0; i < dictionaries.size(); i++ )
     {
-      for( unsigned i = 0; i < dictionaries.size(); i++ )
+      if( id.compare( dictionaries[ i ]->getId().c_str() ) == 0 )
       {
-        if( id.compare( dictionaries[ i ]->getId().c_str() ) == 0 )
-        {
-          dictFilename = dictionaries[ i ]->getMainFilename();
-          break;
-        }
+        pDict = dictionaries[ i ].get();
+        break;
       }
     }
 
-    if( cfg.editDictionaryCommandLine.isEmpty() || dictFilename.isEmpty() )
+    if( pDict == NULL )
+      return;
+
+    if( !pDict->isLocalDictionary() )
     {
       if ( scanPopup )
         scanPopup.get()->blockSignals( true );
@@ -3491,7 +3515,14 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
     {
       QMenu menu( ui.dictsList );
       QAction * infoAction = menu.addAction( tr( "Dictionary info" ) );
-      QAction * editAction = menu.addAction( tr( "Edit dictionary" ) );
+
+      QAction * openDictFolderAction = menu.addAction( tr( "Open dictionary folder" ) );
+
+      QAction * editAction = NULL;
+
+      QString dictFilename = pDict->getMainFilename();
+      if( !cfg.editDictionaryCommandLine.isEmpty() && !dictFilename.isEmpty() )
+        editAction = menu.addAction( tr( "Edit dictionary" ) );
 
       QAction * result = menu.exec( ui.dictsList->mapToGlobal( pos ) );
 
@@ -3502,6 +3533,11 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
         showDictionaryInfo( id );
         if ( scanPopup )
           scanPopup.get()->blockSignals( false );
+      }
+      else
+      if( result && result == openDictFolderAction )
+      {
+        openDictionaryFolder( id );
       }
       else
       if( result && result == editAction )

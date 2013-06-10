@@ -389,6 +389,10 @@ public:
   // Return dictionary main file name
   virtual QString getMainFilename();
 
+  /// Return true if dictionary is local dictionary
+  virtual bool isLocalDictionary()
+  { return false; }
+
   virtual ~Class()
   {}
 };
