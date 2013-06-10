@@ -12,6 +12,7 @@
 #include "file.hh"
 #include "filetype.hh"
 #include "htmlescape.hh"
+#include <QRegExp>
 
 namespace Xdxf2Html {
 
@@ -337,7 +338,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
 //  DPRINTF( "Result>>>>>>>>>>: %s\n\n\n", dd.toByteArray().data() );
 
-  return dd.toString().remove('\n').toUtf8().data();
+  return dd.toString().remove('\n').remove( QRegExp( "<(b|i)/>" ) ).toUtf8().data();
 }
 
 }
