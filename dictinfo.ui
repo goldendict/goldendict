@@ -35,6 +35,9 @@
         <property name="text">
          <string notr="true"/>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
       <item row="0" column="2">
@@ -63,6 +66,9 @@
         <property name="text">
          <string notr="true"/>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
       <item row="1" column="2">
@@ -76,6 +82,32 @@
        <widget class="QLabel" name="dictionaryTranslatesTo">
         <property name="text">
          <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QPushButton" name="openFolder">
+        <property name="text">
+         <string>Open folder</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QPushButton" name="editDictionary">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Edit dictionary</string>
         </property>
        </widget>
       </item>

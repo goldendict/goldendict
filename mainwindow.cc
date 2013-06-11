@@ -3449,11 +3449,34 @@ void MainWindow::showDictionaryInfo( const QString & id )
     {
       DictInfo infoMsg( cfg, this );
       infoMsg.showInfo( dictionaries[ x ] );
-      infoMsg.exec();
+      int result = infoMsg.exec();
+
+      if ( result == DictInfo::OPEN_FOLDER )
+      {
+        openDictionaryFolder( id );
+      }
+      else if ( result == DictInfo::EDIT_DICTIONARY)
+      {
+        editDictionary( dictionaries[x] );
+      }
+
       break;
     }
   }
 }
+
+void MainWindow::editDictionary( sptr< Dictionary::Class > dict )
+{
+  QString dictFilename = dict->getMainFilename();
+  if( !cfg.editDictionaryCommandLine.isEmpty() && !dictFilename.isEmpty() )
+  {
+    QString command( cfg.editDictionaryCommandLine );
+    command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
+    if( !QProcess::startDetached( command ) )
+      QApplication::beep();
+  }
+}
+
 
 void MainWindow::openDictionaryFolder( const QString & id )
 {

@@ -245,6 +245,8 @@ private slots:
 
   void openDictionaryFolder( QString const & id );
 
+  void editDictionary ( sptr< Dictionary::Class > dict );
+
 private slots:
 
   // Executed in response to a user click on an 'add tab' tool button
