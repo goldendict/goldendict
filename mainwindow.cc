@@ -3464,9 +3464,46 @@ void MainWindow::openDictionaryFolder( const QString & id )
       if( dictionaries[ x ]->getDictionaryFilenames().size() > 0 )
       {
         QString fileName = FsEncoding::decode( dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str() );
-        QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
-        if( !folder.isEmpty() )
-          QDesktopServices::openUrl( folder );
+        bool explorerLaunched = false;
+
+        // Platform-dependent way to launch a file explorer and to select a file,
+        // currently only on Windows.
+#if defined(Q_OS_WIN)
+        if ( !QFileInfo( fileName ).isDir() )
+        {
+          QString param = QLatin1String("explorer.exe ")
+              + QLatin1String("/select, \"") + QDir::toNativeSeparators( fileName ) + QLatin1String("\"");
+
+          qDebug() << "Launching" << param;
+
+          // We use CreateProcess() directly instead of QProcess::startDetached() since
+          // startDetached() does some evil things with quotes breaking explorer arguments.
+          // E.g., the following file cannot be properly selected via startDetached(), due to equals sign,
+          // which explorer considers as separator:
+          // Z:\GoldenDict\content\-=MDict=-\Test.mdx
+          PROCESS_INFORMATION pinfo;
+          STARTUPINFOW startupInfo = { sizeof( STARTUPINFO ), 0, 0, 0,
+                                       (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
+                                       (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
+                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                                     };
+          explorerLaunched = CreateProcess(0, (wchar_t*) param.utf16(),
+                                           0, 0, FALSE, CREATE_UNICODE_ENVIRONMENT | CREATE_NEW_CONSOLE, 0,
+                                           0, &startupInfo, &pinfo);
+
+          if ( explorerLaunched ) {
+            CloseHandle( pinfo.hThread );
+            CloseHandle( pinfo.hProcess );
+          }
+        }
+#endif
+
+        if ( !explorerLaunched )
+        {
+          QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
+          if( !folder.isEmpty() )
+            QDesktopServices::openUrl( folder );
+        }
       }
       break;
     }
