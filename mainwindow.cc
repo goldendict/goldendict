@@ -3457,7 +3457,7 @@ void MainWindow::showDictionaryInfo( const QString & id )
       }
       else if ( result == DictInfo::EDIT_DICTIONARY)
       {
-        editDictionary( dictionaries[x] );
+        editDictionary( dictionaries[x].get() );
       }
 
       break;
@@ -3465,7 +3465,7 @@ void MainWindow::showDictionaryInfo( const QString & id )
   }
 }
 
-void MainWindow::editDictionary( sptr< Dictionary::Class > dict )
+void MainWindow::editDictionary( Dictionary::Class * dict )
 {
   QString dictFilename = dict->getMainFilename();
   if( !cfg.editDictionaryCommandLine.isEmpty() && !dictFilename.isEmpty() )
@@ -3592,10 +3592,7 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
       else
       if( result && result == editAction )
       {
-        QString command( cfg.editDictionaryCommandLine );
-        command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
-        if( !QProcess::startDetached( command ) )
-          QApplication::beep();
+        editDictionary( pDict );
       }
     }
   }

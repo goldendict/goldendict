@@ -245,7 +245,7 @@ private slots:
 
   void openDictionaryFolder( QString const & id );
 
-  void editDictionary ( sptr< Dictionary::Class > dict );
+  void editDictionary ( Dictionary::Class * dict );
 
 private slots:
 
