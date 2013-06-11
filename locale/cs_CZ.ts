@@ -436,6 +436,19 @@ between classic and school orthography in cyrillic)</source>
         <source>Description:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the dictionary via command:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictListModel</name>
@@ -468,6 +481,10 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Open dictionary folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extended menu with all dictionaries...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3524,11 +3541,19 @@ Enable this option to workaround the problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Artiles longer than this size will be collapsed</source>
+        <source>symbols</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>symbols</source>
+        <source>Adjust this value to avoid huge context menus.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Context menu dictionaries limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articles longer than this size will be collapsed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
