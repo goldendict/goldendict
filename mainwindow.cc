@@ -3502,7 +3502,7 @@ void MainWindow::openDictionaryFolder( const QString & id )
         {
           QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
           if( !folder.isEmpty() )
-            QDesktopServices::openUrl( folder );
+            QDesktopServices::openUrl( QUrl::fromLocalFile( folder ) );
         }
       }
       break;
