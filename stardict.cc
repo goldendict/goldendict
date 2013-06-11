@@ -170,6 +170,8 @@ public:
 
   virtual QString const& getDescription();
 
+  virtual QString getMainFilename();
+
 protected:
 
   void loadIcon() throw();
@@ -546,6 +548,11 @@ QString const& StardictDictionary::getDescription()
       dictionaryDescription = "NONE";
 
     return dictionaryDescription;
+}
+
+QString StardictDictionary::getMainFilename()
+{
+  return FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
 }
 
 /// StardictDictionary::findHeadwordsForSynonym()

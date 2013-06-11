@@ -24,7 +24,7 @@ void DictInfo::showInfo( sptr<Dictionary::Class> dict )
   ui.dictionaryTranslatesTo->setText( Language::localizedStringForId( dict->getLangTo() ) );
 
   ui.openFolder->setVisible( dict->isLocalDictionary() );
-  ui.editDictionary->setVisible( dict->isLocalDictionary() && !cfg.editDictionaryCommandLine.isEmpty());
+  ui.editDictionary->setVisible( dict->isLocalDictionary() && !dict->getMainFilename().isEmpty() && !cfg.editDictionaryCommandLine.isEmpty());
   ui.editDictionary->setToolTip(
         tr( "Edit the dictionary via command:\n%1" ).arg( cfg.editDictionaryCommandLine ) );
 
