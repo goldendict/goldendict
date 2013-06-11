@@ -6,19 +6,23 @@
 #include <QProcess>
 #include "dprintf.hh"
 #include "fsencoding.hh"
+#include <QDebug>
 
 using std::vector;
 
 DictionaryBar::DictionaryBar( QWidget * parent,
-                              Config::Events & events, QString const & _editDictionaryCommand ):
+                              Config::Events & events, QString const & _editDictionaryCommand, unsigned short const & maxDictionaryRefsInContextMenu_ ):
   QToolBar( tr( "&Dictionary Bar" ), parent ),
   mutedDictionaries( 0 ),
   configEvents( events ),
   editDictionaryCommand( _editDictionaryCommand ),
+  maxDictionaryRefsInContextMenu(maxDictionaryRefsInContextMenu_),
   use14x21( false ),
   timerId( 0 )
 {
   setObjectName( "dictionaryBar" );
+
+  maxDictionaryRefsAction = new QAction(  QIcon(":/icons/expand_opt.png"), tr( "Extended menu with all dictionaries..." ), this );
 
   connect( &events, SIGNAL( mutedDictionariesChanged() ),
            this, SLOT( mutedDictionariesChanged() ) );
@@ -97,6 +101,11 @@ void DictionaryBar::setDictionaryIconSize( int extent )
 
 void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
 {
+  showContextMenu( event );
+}
+
+void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
+{
   QMenu menu( this );
 
   QAction * editAction =
@@ -141,9 +150,20 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
   if ( !dictActions.empty() )
     menu.addSeparator();
 
+  unsigned refsAdded = 0;
+
   for( QList< QAction * >::iterator i = dictActions.begin();
        i != dictActions.end(); ++i )
   {
+
+    // Enough! Or the menu would become too large.
+    if ( refsAdded++ >= maxDictionaryRefsInContextMenu && !extended )
+    {
+      menu.addSeparator();
+      menu.addAction( maxDictionaryRefsAction );
+      break;
+    }
+
     // We need new action, since the one we have has text elided
     QAction * action = menu.addAction( (*i)->icon(), (*i)->toolTip() );
 
@@ -179,6 +199,11 @@ void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
     command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
     if( !QProcess::startDetached( command ) )
       QApplication::beep();
+  }
+
+  if( result && result == maxDictionaryRefsAction )
+  {
+    showContextMenu( event, true );
   }
 
   if ( result == editAction )

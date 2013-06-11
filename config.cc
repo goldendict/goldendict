@@ -124,6 +124,7 @@ Preferences::Preferences():
 , historyStoreInterval( 0 )
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
+, maxDictionaryRefsInContextMenu ( 20 )
 {
 }
 
@@ -733,6 +734,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "articleSizeLimit" ).isNull() )
       c.preferences.articleSizeLimit = preferences.namedItem( "articleSizeLimit" ).toElement().text().toUInt() ;
+
+    if ( !preferences.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
+      c.preferences.maxDictionaryRefsInContextMenu = preferences.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -799,9 +803,6 @@ Class load() throw( exError )
   c.showingDictBarNames = ( root.namedItem( "showingDictBarNames" ).toElement().text() == "1" );
 
   c.usingSmallIconsInToolbars = ( root.namedItem( "usingSmallIconsInToolbars" ).toElement().text() == "1" );
-
-  if ( !root.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
-    c.maxDictionaryRefsInContextMenu = root.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
 
   if ( !root.namedItem( "historyExportPath" ).isNull() )
     c.historyExportPath = root.namedItem( "historyExportPath" ).toElement().text();
@@ -1461,7 +1462,11 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "articleSizeLimit" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.articleSizeLimit ) ) );
-    preferences.appendChild( opt );  }
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "maxDictionaryRefsInContextMenu" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.maxDictionaryRefsInContextMenu ) ) );
+    preferences.appendChild( opt ); }
 
   {
     QDomElement opt = dd.createElement( "lastMainGroupId" );
@@ -1537,10 +1542,6 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "usingSmallIconsInToolbars" );
     opt.appendChild( dd.createTextNode( c.usingSmallIconsInToolbars ? "1" : "0" ) );
-    root.appendChild( opt );
-
-    opt = dd.createElement( "maxDictionaryRefsInContextMenu" );
-    opt.appendChild( dd.createTextNode( QString::number( c.maxDictionaryRefsInContextMenu ) ) );
     root.appendChild( opt );
 
     if( !c.historyExportPath.isEmpty() )

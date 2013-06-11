@@ -84,7 +84,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab( this ),
   cfg( cfg_ ),
   history( History::Load(), cfg_.preferences.maxStringsInHistory, cfg_.maxHeadwordSize ),
-  dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine ),
+  dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine, cfg.preferences.maxDictionaryRefsInContextMenu ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle,
                 cfg.preferences.addonStyle ),
   articleNetMgr( this, dictionaries, articleMaker,

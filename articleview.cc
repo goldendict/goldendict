@@ -1323,7 +1323,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       if ( allDictionaries[ x ]->getId() == i->toUtf8().data() )
       {
         QAction * action = 0;
-        if ( refsAdded == cfg.maxDictionaryRefsInContextMenu )
+        if ( refsAdded == cfg.preferences.maxDictionaryRefsInContextMenu )
         {
           // Enough! Or the menu would become too large.
           maxDictionaryRefsAction = new QAction( ".........", &menu );

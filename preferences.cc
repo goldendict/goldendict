@@ -138,6 +138,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
 
+  ui.maxDictsInContextMenu->setValue( p.maxDictionaryRefsInContextMenu );
+
   // Different platforms have different keys available
 
 #ifdef Q_OS_WIN32
@@ -257,6 +259,8 @@ Config::Preferences Preferences::getPreferences()
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
+
+  p.maxDictionaryRefsInContextMenu = ui.maxDictsInContextMenu->text().toInt();
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();

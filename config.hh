@@ -210,6 +210,8 @@ struct Preferences
   bool collapseBigArticles;
   int articleSizeLimit;
 
+  unsigned short maxDictionaryRefsInContextMenu;
+
   QString addonStyle;
 
   Preferences();
@@ -465,8 +467,6 @@ struct Class
 
   bool usingSmallIconsInToolbars;
 
-  unsigned short maxDictionaryRefsInContextMenu;
-
   int maxPictureWidth; // Maximum picture width
 
   /// Maximum size for the headwords.
@@ -481,7 +481,7 @@ struct Class
 
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
            pinPopupWindow( false ), showingDictBarNames( false ),
-           usingSmallIconsInToolbars( false ), maxDictionaryRefsInContextMenu( 20 ),
+           usingSmallIconsInToolbars( false ),
            maxPictureWidth( 0 ), maxHeadwordSize ( 256U )
   {}
   Group * getGroup( unsigned id );
