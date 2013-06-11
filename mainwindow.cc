@@ -1158,6 +1158,15 @@ void MainWindow::updateGroupList()
 
   updateDictionaryBar();
 
+  qDebug() << "Reloading all the tabs...";
+  for( int i = 0; i < ui.tabWidget->count(); ++i )
+  {
+    ArticleView & view =
+      dynamic_cast< ArticleView & >( *( ui.tabWidget->widget( i ) ) );
+
+    view.reload();
+  }
+
   connect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
 }
@@ -3059,16 +3068,6 @@ void MainWindow::on_rescanFiles_triggered()
   // Reload suggestion list
   QString word = translateLine->text();
   translateInputChanged( word );
-
-  // Reload all tabs
-  for( int i = 0; i < ui.tabWidget->count(); ++i )
-  {
-    ArticleView & view =
-      dynamic_cast< ArticleView & >( *( ui.tabWidget->widget( i ) ) );
-
-    view.reload();
-  }
-
 }
 
 void MainWindow::on_alwaysOnTop_triggered( bool checked )
