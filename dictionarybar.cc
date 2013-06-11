@@ -141,7 +141,10 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
         if( !editDictionaryCommand.isEmpty() )
         {
           if( !pDict->getMainFilename().isEmpty() )
-              editDictAction = menu.addAction( tr( "Edit dictionary" ) );
+          {
+            dictFilename = pDict->getMainFilename();
+            editDictAction = menu.addAction( tr( "Edit dictionary" ) );
+          }
         }
       }
     }
