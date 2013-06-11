@@ -2570,6 +2570,7 @@ void MainWindow::checkForNewRelease()
 {
   if( latestReleaseReply )
     latestReleaseReply->deleteLater();
+  latestReleaseReply = 0;
 
   QNetworkRequest req(
     QUrl( "http://goldendict.org/latest_release.php?current="
