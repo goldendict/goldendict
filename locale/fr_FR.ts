@@ -40,7 +40,7 @@
     <message>
         <location filename="../about.cc" line="22"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Basé sur Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -67,12 +67,12 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrandir l&apos;article</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuer l&apos;article</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="206"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../article_maker.cc" line="590"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrandir l&apos;article</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="593"/>
@@ -130,7 +130,7 @@
     <message>
         <location filename="../article_maker.cc" line="598"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuer l&apos;article</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="615"/>
@@ -213,7 +213,7 @@
     <message>
         <location filename="../articleview.cc" line="156"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspecter</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="673"/>
@@ -536,12 +536,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le dossier</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Éditer le dictionnaire</translation>
+        <translation>Éditer le dictionnaire</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -557,7 +557,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer le dictionnaire avec la commande :
+%1</translation>
     </message>
 </context>
 <context>
@@ -582,7 +583,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu étendu avec tous les dictionnaires...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -597,7 +598,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le dossier des dictionnaires</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -2457,12 +2458,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2970"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Article, Complet (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2971"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Article, HTML uniquement (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2974"/>
@@ -2486,7 +2487,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3026"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde de l&apos;article...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3075"/>
@@ -2555,7 +2556,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le dossier des dictionnaires</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3575"/>
@@ -2864,12 +2865,12 @@ Avec cette otion activée, Echap cachera la fenêtre principale.</translation>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustez cette valeur pour éviter de surcharger les menus contextuels.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite de dictionnaires dans les menus contextuels :</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
@@ -3125,22 +3126,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez cette option pour réduire automatiquement les longs articles</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Réduire les articles de plus de</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Les articles dépassant cette longueur seront réduits</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>symboles</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3635,17 +3636,18 @@ Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
         <location filename="../articleview.cc" line="2147"/>
         <location filename="../articleview.cc" line="2154"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">ERREUR : %1</translation>
+        <translation>ERREUR : %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2147"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Erreur lors de l&apos;enregistrement de la ressource :</translation>
+        <translation>
+Erreur lors de l&apos;enregistrement de la ressource :</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2154"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">La ressource référencée n&apos;a pas pu être téléchargée.</translation>
+        <translation>La ressource référencée n&apos;a pas pu être téléchargée.</translation>
     </message>
 </context>
 <context>
