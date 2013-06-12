@@ -500,12 +500,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть папку</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Редактировать словарь</translation>
+        <translation>Редактировать словарь</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -521,7 +521,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать словарь, команда: %1</translation>
     </message>
 </context>
 <context>
@@ -542,7 +542,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Расширенное меню со всеми словарями...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -2822,12 +2822,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Устанавливайте эту величину, чтобы избежать слишком больших контекстных меню</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Предел количества словарей в контекстном меню:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="376"/>
@@ -3136,11 +3136,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Artiles longer than this size will be collapsed</source>
-        <translation type="obsolete">Статьи размером более этой величины будут свёрнуты</translation>
+        <translation>Статьи размером более этой величины будут свёрнуты</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
