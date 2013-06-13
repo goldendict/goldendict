@@ -269,10 +269,6 @@
         <translation>Fajły vyjavaŭ (*.bmp *.jpg *.png *.tif);;Usie fajły (*.*)</translation>
     </message>
     <message>
-        <source>Resource saving error: </source>
-        <translation type="obsolete">Pamyłka zachavańnia resursu: </translation>
-    </message>
-    <message>
         <location filename="../articleview.cc" line="1191"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Adčynić spasyłku</translation>
@@ -504,12 +500,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Adčynić katalog</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Redagavać słoŭnik</translation>
+        <translation>Redagavać słoŭnik</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -525,7 +521,7 @@ miž klasyčnym i školnym pravapisam)</translation>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zredagavać słoŭnik praz zahad: %1</translation>
     </message>
 </context>
 <context>
@@ -546,7 +542,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pašyranaje meniu z usimi słoŭnikami...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -561,7 +557,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Adčynić słoŭnikavy katalog</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -2393,10 +2389,6 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation>Zachavać artykuł jak</translation>
     </message>
     <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Fajły HTML(*.html *.htm)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="2988"/>
         <source>Error</source>
         <translation>Abmyła</translation>
@@ -2470,7 +2462,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Adčynić słoŭnikavy katalog</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3575"/>
@@ -2779,12 +2771,12 @@ Razam z hetaj opcyjaj, nacisk klaviša budzie chavać hałoŭnaje akno.</transla
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaŭ hetaje značeńnie, kab unikać vialikich meniušak.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hranica kolkaści słoŭnikaŭ u vypadnym meniu:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
@@ -3267,11 +3259,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Artiles longer than this size will be collapsed</source>
-        <translation type="obsolete">Artykuły bolšyja za hetaje značeńnie buduć zhartacca</translation>
+        <translation>Artykuły bolšyja za hetaje značeńnie buduć zhartacca</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
@@ -3744,10 +3732,6 @@ słoŭniki ŭ kaniec adpaviednych grup.</translation>
         <translation>Pragramy</translation>
     </message>
     <message>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="obsolete">Roznyja vonkavyja pragramy. %GDWORD% zamienicca na zapytanaje słova. Aproč taho hetaje słova budzie padadziena ŭ standartny ŭvod.</translation>
-    </message>
-    <message>
         <location filename="../sources.ui" line="406"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
@@ -3789,7 +3773,7 @@ dla Big-5, %GDBIG5HKSCS% dla Big5-HKSCS, %GDGBK% dla GBK i GB18030, %GDSHIFTJIS%
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Roznyja vonkavyja pragramy. %GDWORD% zamienicca na zapytanaje słova. Kali takoha słova niama, to jaho nakirujuć u standartny ŭvod.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>

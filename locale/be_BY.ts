@@ -269,10 +269,6 @@
         <translation>Файлы выяваў (*.bmp *.jpg *.png *.tif);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <source>Resource saving error: </source>
-        <translation type="obsolete">Памылка захаваньня рэсурсу: </translation>
-    </message>
-    <message>
         <location filename="../articleview.cc" line="1191"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Адчыніць спасылку</translation>
@@ -504,12 +500,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Адчыніць каталёґ</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Рэдаґаваць слоўнік</translation>
+        <translation>Рэдаґаваць слоўнік</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -525,7 +521,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Зрэдаґаваць слоўнік праз загад: %1</translation>
     </message>
 </context>
 <context>
@@ -546,7 +542,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Пашыранае мэню з усімі слоўнікамі...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -561,7 +557,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Адчыніць слоўнікавы каталёґ</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -2393,10 +2389,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>Захаваць артыкул як</translation>
     </message>
     <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Файлы HTML(*.html *.htm)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="2988"/>
         <source>Error</source>
         <translation>Абмыла</translation>
@@ -2470,7 +2462,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Адчыніць слоўнікавы каталёґ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3575"/>
@@ -2779,12 +2771,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настаў гэтае значэньне, каб унікаць вялікіх мэнюшак.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Граніца колькасьці слоўнікаў у выпадным мэню:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
@@ -3267,11 +3259,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Artiles longer than this size will be collapsed</source>
-        <translation type="obsolete">Артыкулы большыя за гэтае значэньне будуць згартацца</translation>
+        <translation>Артыкулы большыя за гэтае значэньне будуць згартацца</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
@@ -3744,10 +3732,6 @@ of the appropriate groups to use them.</source>
         <translation>Праґрамы</translation>
     </message>
     <message>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="obsolete">Розныя вонкавыя праґрамы. %GDWORD% заменіцца на запытанае слова. Апроч таго гэтае слова будзе пададзена ў стандартны ўвод.</translation>
-    </message>
-    <message>
         <location filename="../sources.ui" line="406"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
@@ -3789,7 +3773,7 @@ in the future, or register on the site to get your own key.</source>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Розныя вонкавыя праґрамы. %GDWORD% заменіцца на запытанае слова. Калі такога слова няма, то яго накіруюць у стандартны ўвод.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
