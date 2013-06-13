@@ -153,12 +153,21 @@ bool RunInstance::start( Config::Program const & prg, QString const & word,
     QString programName = args.first();
     args.pop_front();
 
+    bool writeToStdInput = true;
+
     for( int x = 0; x < args.size(); ++x )
-      args[ x ].replace( "%GDWORD%", word );
+      if( args[ x ].indexOf( "%GDWORD%" ) >= 0 )
+      {
+        writeToStdInput = false;
+        args[ x ].replace( "%GDWORD%", word );
+      }
 
     process.start( programName, args );
-    process.write( word.toLocal8Bit() );
-    process.closeWriteChannel();
+    if( writeToStdInput )
+    {
+      process.write( word.toLocal8Bit() );
+      process.closeWriteChannel();
+    }
 
     return true;
   }
@@ -233,6 +242,7 @@ void ProgramDataRequest::instanceFinished( QByteArray output, QString error )
 
       result += "</div>";
 
+      Mutex::Lock _( dataMutex );
       data.resize( result.size() );
       memcpy( data.data(), result.data(), data.size() );
       hasAnyData = true;
