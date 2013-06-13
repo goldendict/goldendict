@@ -47,4 +47,6 @@ This project is licensed under the <b>GNU GPLv3+</b> license, a copy of which ca
 
 ## Support
 
-Users looking for support should file an issue on the [GitHub issue tracking page](https://github.com/goldendict/goldendict/issues), or file a [pull request](https://github.com/goldendict/goldendict/pulls) if you have a fix available. General questions should be asked on the [official GoldenDict forum](http://goldendict.org/forum/).
+Users looking for support should file an issue in the official [GoldenDict issue tracker](https://github.com/goldendict/goldendict/issues),
+or even better: submit a [pull request](https://github.com/goldendict/goldendict/pulls) if you have a fix available.
+General questions should be asked on the [official GoldenDict forum](http://goldendict.org/forum/).
