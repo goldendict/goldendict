@@ -60,7 +60,7 @@ DEF_EX( exCorruptedIndex, "The index file is corrupted", Dictionary::Ex )
 enum
 {
   Signature = 0x46584458, // XDXF on little-endian, FXDX on big-endian
-  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 enum ArticleFormat
@@ -526,7 +526,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   if ( &chunk.front() + chunk.size() - propertiesData < 9 )
     throw exCorruptedIndex();
 
-//  unsigned char fType = (unsigned char) *propertiesData;
+  unsigned char fType = (unsigned char) *propertiesData;
 
   uint32_t articleOffset, articleSize;
 
@@ -551,7 +551,8 @@ void XdxfDictionary::loadArticle( uint32_t address,
     return;
   }
 
-  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this );
+  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
+                                    fType == Logical );
 
   free( articleBody );
 }
@@ -721,7 +722,9 @@ void indexArticle( GzippedFile & gzFile,
                    IndexedWords & indexedWords,
                    ChunkedStorage::Writer & chunks,
                    unsigned & articleCount,
-                   unsigned & wordCount )
+                   unsigned & wordCount,
+                   ArticleFormat defaultFormat,
+                   int revisionNumber )
 {
   ArticleFormat format( Default );
 
@@ -732,7 +735,8 @@ void indexArticle( GzippedFile & gzFile,
   else
   if ( formatValue == "l" )
     format = Logical;
-
+  if( format == Default )
+    format = defaultFormat; 
   size_t articleOffset = gzFile.pos() - 1; // stream.characterOffset() is loony
 
   // uint32_t lineNumber = stream.lineNumber();
@@ -1074,6 +1078,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
 
               bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
+              int revisionNumber = ( stream.attributes().value( "revision" ).toString().toInt() );
 
               idxHeader.articleFormat = isLogical ? Logical : Visual;
 
@@ -1134,64 +1139,64 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   else
                   if ( stream.name() == "abbreviations" )
                   {
-                      QString s;
-                      string value;
-                      list < wstring > keys;
-                      while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
+                    QString s;
+                    string value;
+                    list < wstring > keys;
+                    while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
+                    {
+                      stream.readNext();
+                      while ( !( stream.isEndElement() && stream.name() == "abr_def" ) || !stream.atEnd() )
                       {
-                          stream.readNext();
-                          while ( !( stream.isEndElement() && stream.name() == "abr_def" ) && !stream.atEnd() )
-                          {
-                               stream.readNext();
-                               if ( stream.isStartElement() && stream.name() == "k" )
-                               {
-                                   s = stream.readElementText( QXmlStreamReader::SkipChildElements );
-                                   keys.push_back( gd::toWString( s ) );
-                               }
-                               else if ( stream.isStartElement() && stream.name() == "v" )
-                               {
-                                   s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
-                                   value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
-                                   for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
-                                   {
-                                       abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
-                                   }
-                                   keys.clear();
-                               }
-                               else if ( stream.isEndElement() && stream.name() == "abbreviations" )
-                                   break;
-                          }
+                        stream.readNext();
+                        if ( stream.isStartElement() && stream.name() == "k" )
+                        {
+                          s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            keys.push_back( gd::toWString( s ) );
+                        }
+                        else if ( stream.isStartElement() && stream.name() == "v" )
+                        {
+                          s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
+                            for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
+                            {
+                              abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
+                            }
+                            keys.clear();
+                        }
+                        else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                          break;
+                      }
                       }
                   }
                   else
                   if ( stream.name() == "ar" )
                   {
                     indexArticle( gzFile, stream, indexedWords, chunks,
-                                  articleCount, wordCount );
+                                  articleCount, wordCount, isLogical ? Logical : Visual, revisionNumber );
                   }
                 }
               }
 
               // Write abbreviations if presented
 
-              if( !abrv.empty() ) {
-                  idxHeader.hasAbrv = 1;
-                  idxHeader.abrvAddress = chunks.startNewBlock();
+              if( !abrv.empty() )
+              {
+                idxHeader.hasAbrv = 1;
+                idxHeader.abrvAddress = chunks.startNewBlock();
 
-                  uint32_t sz = abrv.size();
+                uint32_t sz = abrv.size();
 
+                chunks.addToBlock( &sz, sizeof( uint32_t ) );
+
+                for( map< string, string >::const_iterator i = abrv.begin();  i != abrv.end(); ++i )
+                {
+                  sz = i->first.size();
                   chunks.addToBlock( &sz, sizeof( uint32_t ) );
-
-                  for( map< string, string >::const_iterator i = abrv.begin();
-                       i != abrv.end(); ++i )
-                  {
-                    sz = i->first.size();
-                    chunks.addToBlock( &sz, sizeof( uint32_t ) );
-                    chunks.addToBlock( i->first.data(), sz );
-                    sz = i->second.size();
-                    chunks.addToBlock( &sz, sizeof( uint32_t ) );
-                    chunks.addToBlock( i->second.data(), sz );
-                  }
+                  chunks.addToBlock( i->first.data(), sz );
+                  sz = i->second.size();
+                  chunks.addToBlock( &sz, sizeof( uint32_t ) );
+                  chunks.addToBlock( i->second.data(), sz );
+                }
               }
 
               // Finish with the chunks

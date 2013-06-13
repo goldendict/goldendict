@@ -175,37 +175,81 @@ div.xdxf
   display: none;
 }
 
-/* Abbreviation */
-.xdxf_abr
+/* Article structure tag */
+.xdxf_num
 {
-  font-style: italic;
-  color: green;
-  cursor: default;
+    color: red;
+    font-weight: bold;
+    padding-left:-15px;
+}
+.xdxf_def
+{
+    display: block;
+    border-color: #e3e3e3;
+    border-width: 1px;
+    border-style: dashed;
+    margin: 1px;
+    margin-left: 15px;
+}
+.xdxf_def:before
+{
+    /*content: "%%%"*/
 }
 
-/* Color-highlighted */
-.xdxf_c
+/* Abbreviation */
+.xdxf_abbr
 {
-  color: blue;
+  font-style: italic;
+  color: seagreen;
+  cursor: default;
+  border-bottom: 1px seagreen dotted;
+}
+
+/* Editorial comment */
+.xdxf_co, .xdxf_co_old
+{
+    color: darkslateblue;
+    font-style: italic;
+}
+.xdxf_co:before
+{
+    content:"("
+}
+.xdxf_co:after
+{
+    content:")"
+}
+
+/* Grammar information */
+.xdxf_gr
+{
+    color: blue; /*orangered;*/
+    display: block;
+}
+
+.xdxf_gr_old
+{
+    color: blue; /*orangered;*/
 }
 
 /* Example */
 .xdxf_ex
 {
-  color: grey;
-/*  display: block;
-  margin: 8px;*/
+    color: #808080;
+    display: block;
+    margin-left: 14px;
+}
+
+.xdxf_ex_old
+{
+    color: #808080;
 }
 
 /* Direct translation */
 .xdxf_dtrn
 {
-}
-
-/* Appearance-only tag */
-.xdxf_nu
-{
-  color: red;
+    font-weight: bold;
+    color: #dd7800;
 }
 
 /* Transcription */
@@ -219,7 +263,7 @@ div.xdxf
   content:"]";
 }
 
-.xdxf_tr
+.xdxf_tr, .xdxf_tr_old
 {
   font-weight: bold;
 }
@@ -241,7 +285,7 @@ div.xdxf
 
 .xdxf_opt
 {
-  color: grey;
+  color: #808080;
 }
 
 /******** SDictionary markup classes *********/
@@ -391,7 +435,7 @@ div.xdxf
 {
   color: blue;
   cursor: pointer;
-  vertical-align: center;
+  vertical-align: middle;
 }
 
 /************* MDict dictionaries **************/
