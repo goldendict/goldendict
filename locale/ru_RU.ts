@@ -3357,17 +3357,17 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="175"/>
         <source>No program name was given.</source>
         <translation>Программа не указана.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="191"/>
         <source>The program has crashed.</source>
         <translation>Программа завершилась с ошибкой</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="194"/>
         <source>The program has returned exit code %1.</source>
         <translation>Программа вернула значение %1.</translation>
     </message>
@@ -3789,8 +3789,8 @@ of the appropriate groups to use them.</source>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Любые внешние программы. Строка %GDWORD% будет заменена на запрашиваемое слово. Это же слово будет отправлено в стандартный входной поток.</translation>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation>Любые внешние программы. Строка %GDWORD% будет заменена на запрашиваемое слово. Если такой строки нет, слово будет отправлено в стандартный входной поток.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>

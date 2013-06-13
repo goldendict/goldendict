@@ -3470,17 +3470,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>Ягон номи барнома муайян нашуд.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>Барнома вайрон шуд.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>Барнома маънои %1-ро намоиш дод.</translation>
     </message>
@@ -3878,9 +3878,8 @@ of the appropriate groups to use them.</source>
         <translation>Барномаҳо</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Тамоми барномаҳои берунӣ. Сатри %GDWORD% бо калимаи дархостшуда ҷойгузин карда мешавад. Худи калима низ ба сатри вуруди калимаҳо дохил карда мешавад.</translation>
+        <translation type="obsolete">Тамоми барномаҳои берунӣ. Сатри %GDWORD% бо калимаи дархостшуда ҷойгузин карда мешавад. Худи калима низ ба сатри вуруди калимаҳо дохил карда мешавад.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -3940,6 +3939,11 @@ p, li { white-space: pre-wrap; }
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation>Шумо инчунин метавонед инҳоро истифода баред: %GD1251% барои CP1251, %GDISO1%...%GDISO16% барои ISO 8859-1...ISO 8859-16 ба таври мувофиқ,
 %GDBIG5% барои Big-5, %GDBIG5HKSCS% барои Big5-HKSCS, %GDGBK% барои GBK ва GB18030, %GDSHIFTJIS% барои Shift-JIS.</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>

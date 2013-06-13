@@ -3495,17 +3495,17 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>Δεν ορίστηκε όνομα προγράμματος.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>Το πρόγραμμα κατέρρευσε.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>Το πρόγραμμα επέστρεψε κωδικό εξόδου %1.</translation>
     </message>
@@ -3944,9 +3944,8 @@ of the appropriate groups to use them.</source>
         <translation>Προγράμματα</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Προσθέστε οποιοδήποτε εξωτερικό πρόγραμμα. Οι χαρακτήρες %GDWORD% αντικαθίστανται από τη ζητούμενη λέξη. Η λέξη στέλνεται και στη συνήθη είσοδο.</translation>
+        <translation type="obsolete">Προσθέστε οποιοδήποτε εξωτερικό πρόγραμμα. Οι χαρακτήρες %GDWORD% αντικαθίστανται από τη ζητούμενη λέξη. Η λέξη στέλνεται και στη συνήθη είσοδο.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -4035,6 +4034,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

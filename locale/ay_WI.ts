@@ -4060,10 +4060,6 @@ Todavía no implementado en GoldenDict.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -4096,6 +4092,10 @@ Not implemented yet in GoldenDict.</source>
     </message>
     <message>
         <source>Text to Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

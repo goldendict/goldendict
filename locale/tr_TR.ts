@@ -3290,7 +3290,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Her türlü harici programlar. Metin %GDWORD% arama kelimesi ile değiştirilecektir. Bu kelime de standart girişten girecektir.</translation>
+        <translation type="obsolete">Her türlü harici programlar. Metin %GDWORD% arama kelimesi ile değiştirilecektir. Bu kelime de standart girişten girecektir.</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
@@ -3311,6 +3311,10 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Text to Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

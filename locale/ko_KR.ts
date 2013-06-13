@@ -3402,17 +3402,17 @@ download page.</source>
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>프로그램 이름이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>프로그램이 다운되었습니다.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>프로그램이 종료코드 %1를 전송했습니다.</translation>
     </message>
@@ -3829,9 +3829,8 @@ of the appropriate groups to use them.</source>
         <translation>프로그램</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>외부 프로그램. 문자열 %GDWORD%는 검색어로 대체되어 표준 입력으로 전달됩니다.</translation>
+        <translation type="obsolete">외부 프로그램. 문자열 %GDWORD%는 검색어로 대체되어 표준 입력으로 전달됩니다.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -3890,6 +3889,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -4275,17 +4275,17 @@ página web de descarga utilizando el navegador de internet.</translation>
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>No se ha ingresado el nombre del programa.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>Ha ocurrido un error en el programa.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>El programa ha retornado un error %1.</translation>
     </message>
@@ -4736,9 +4736,8 @@ Agregue los diccionarios al final de los grupos pertinentes para utilizarlos.</t
         <translation>Programas</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Ingrese todos los programas externos que quiera. La ocurrencia %GDWORD% se reemplazará por el término de búsqueda especificado. La misma también será enviada a la entrada estándar.</translation>
+        <translation type="obsolete">Ingrese todos los programas externos que quiera. La ocurrencia %GDWORD% se reemplazará por el término de búsqueda especificado. La misma también será enviada a la entrada estándar.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -4799,6 +4798,11 @@ p, li { white-space: pre-wrap; }
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation>Como alternativa, puede utilizar %GD1251% para codificación CP1251 y %GDISO1%...%GDISO16% para codificación ISO-8859-1...ISO 8859-16 
 respectivamente, %GDBIG5% para Big-5, %GDBIG5HKSCS% para Big5-HKSCS, %GDGBK% para GBK y GB18030, %GDSHIFTJIS% para Shift-JIS.</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>

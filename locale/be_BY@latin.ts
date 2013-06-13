@@ -3355,17 +3355,17 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>Nazva pragramy nie zadadzienaja.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>Pragrama niečakana skasavałasia.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>Pragrama pavaraciła vychodny kod %1.</translation>
     </message>
@@ -3744,9 +3744,8 @@ słoŭniki ŭ kaniec adpaviednych grup.</translation>
         <translation>Pragramy</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Roznyja vonkavyja pragramy. %GDWORD% zamienicca na zapytanaje słova. Aproč taho hetaje słova budzie padadziena ŭ standartny ŭvod.</translation>
+        <translation type="obsolete">Roznyja vonkavyja pragramy. %GDWORD% zamienicca na zapytanaje słova. Aproč taho hetaje słova budzie padadziena ŭ standartny ŭvod.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -3786,6 +3785,11 @@ in the future, or register on the site to get your own key.</source>
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation>Taksama karystaj %GD1251% dla CP1251, %GDISO1%...%GDISO16% dla ISO 8859-1...ISO 8859-16, %GDBIG5%
 dla Big-5, %GDBIG5HKSCS% dla Big5-HKSCS, %GDGBK% dla GBK i GB18030, %GDSHIFTJIS% dla Shift-JIS.</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>

@@ -3361,17 +3361,17 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>Nenhum nome de programa foi especificado.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>O programa travou.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>O programa retornou o código de fechamento %1.</translation>
     </message>
@@ -3751,9 +3751,8 @@ dos grupos apropriados para usá-los.</translation>
         <translation>Programas</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Qualquer programa externo. O demarcador %GDWORD% será substituído pela palavra da consulta. A palavra também será especificada no campo padrão.</translation>
+        <translation type="obsolete">Qualquer programa externo. O demarcador %GDWORD% será substituído pela palavra da consulta. A palavra também será especificada no campo padrão.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -3796,6 +3795,11 @@ obter sua própria chave.</translation>
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation>Alternativamente, usar %GD1251% por CP1251, %GDISO1%...%GDISO16% por ISO 8859-1...ISO 8859-16 respectivamente,
 %GDBIG5% por Big-5, %GDBIG5HKSCS% por Big5-HKSCS, %GDGBK% por GBK e GB18030, %GDSHIFTJIS% por Shift-JIS.</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>

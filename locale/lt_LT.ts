@@ -3508,17 +3508,17 @@ ir pasiūlys atverti parsisiuntimo puslapį.
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>Neduotas joks programos vardas.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>Programa užstrigo.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>Programa baigė darbą ir grąžino kodą %1.</translation>
     </message>
@@ -3948,9 +3948,8 @@ rašybos spėjimus.
         <translation>Programos</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Bet kokia išorinė programa. Norėdami perduoti užklausos žodį, rašykite %GDWORD%. Žodis taip pat perduodamas į standartinę įvedimą.</translation>
+        <translation type="obsolete">Bet kokia išorinė programa. Norėdami perduoti užklausos žodį, rašykite %GDWORD%. Žodis taip pat perduodamas į standartinę įvedimą.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -4008,6 +4007,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
