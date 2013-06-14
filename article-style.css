@@ -171,9 +171,13 @@ div.xdxf
     margin: 1px;
     margin-left: 15px;
 }
-.xdxf_def:before
+
+.xdxf_def:target
 {
-    /*content: "%%%"*/
+    /* this pseudoclass is used to marked out the referenced <def> that was just clicked */
+    border-color: red;
+    border-width: 1px;
+    border-style: double;
 }
 
 /* Abbreviation */
@@ -203,7 +207,7 @@ div.xdxf
 /* Grammar information */
 .xdxf_gr
 {
-    color: blue; /*orangered;*/
+    color: orangered;
     display: block;
 }
 
@@ -261,6 +265,13 @@ div.xdxf
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+/* The words in examples that are meaked out; they are marked out only when placed into <ex> tag */
+.xdxf_ex .xdxf_ex_markd, .xdxf_ex_old .xdxf_ex_markd
+{
+  color:black;
+  background-color:lightgray;
 }
 
 .xdxf_opt

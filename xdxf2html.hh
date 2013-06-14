@@ -20,7 +20,7 @@ using std::map;
 /// Converts the given xdxf markup to an html one. This is currently used
 /// for Stardict's 'x' records.
 string convert( string const &, DICT_TYPE type = STARDICT, map < string, string > const * pAbrv = NULL,
-                Dictionary::Class *dictPtr = NULL, bool isLogicalFormat = false ); 
+                Dictionary::Class *dictPtr = NULL, bool isLogicalFormat = false, unsigned revisionNumber = 0 ); 
 
 }
 

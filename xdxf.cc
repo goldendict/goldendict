@@ -93,6 +93,7 @@ struct IdxHeader
   uint32_t zipIndexBtreeMaxElements; // Two fields from IndexInfo of the zip
                                      // resource index.
   uint32_t zipIndexRootOffset;
+  uint32_t revisionNumber; // Format revision 
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -165,8 +166,7 @@ protected:
 
 private:
 
-  /// Loads the article, storing its headword and formatting the data it has
-  /// into an html.
+  // Loads the article, storing its headword and formatting article's data into an html.
   void loadArticle( uint32_t address,
                     string & articleText );
 
@@ -548,7 +548,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
     throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
 
   articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
-                                    fType == Logical );
+                                    fType == Logical, idxHeader.revisionNumber );
 
   free( articleBody );
 }
@@ -676,13 +676,14 @@ QString readXhtmlData( QXmlStreamReader & stream )
 
 void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
 {
+  // todo implement support for tag <srt>, that overrides the article sorting order 
   if ( stream.name() == "k" )
   {
     words.push_back( stream.readElementText( QXmlStreamReader::SkipChildElements ) );
     return;
   }
 
-  for( ; ; )
+  while( !stream.atEnd() ) 
   {
     stream.readNext();
   
@@ -719,8 +720,7 @@ void indexArticle( GzippedFile & gzFile,
                    ChunkedStorage::Writer & chunks,
                    unsigned & articleCount,
                    unsigned & wordCount,
-                   ArticleFormat defaultFormat,
-                   int revisionNumber )
+                   ArticleFormat defaultFormat )
 {
   ArticleFormat format( Default );
 
@@ -970,7 +970,8 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getResource( string const & name
   return new XdxfResourceRequest( *this, name );
 }
 
-} // anonymous namespace
+}
+// anonymous namespace - this section of file is devoted to rebuilding of dictionary articles index
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
@@ -1074,7 +1075,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
 
               bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
-              int revisionNumber = ( stream.attributes().value( "revision" ).toString().toInt() );
+              idxHeader.revisionNumber = stream.attributes().value( "revision" ).toString().toUInt();
 
               idxHeader.articleFormat = isLogical ? Logical : Visual;
 
@@ -1086,7 +1087,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 if ( stream.isStartElement() )
                 {
-                  if ( stream.name() == "full_name" )
+                  // todo implement using short <title> for denoting the dictionary in settings or dict list toolbar
+                  if ( stream.name() == "full_name" || stream.name() == "full_title" )
                   {
                     // That's our name
 
@@ -1114,6 +1116,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   else
                   if ( stream.name() == "description" )
                   {
+                    // todo implement adding other information to the description like <publisher>, <authors>, <file_ver>, <creation_date>, <last_edited_date>, <dict_edition>, <publishing_date>, <dict_src_url> 
                     QString desc = readXhtmlData( stream );
 
                     if ( dictionaryDescription.isEmpty() )
@@ -1141,34 +1144,62 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
                     {
                       stream.readNext();
-                      while ( !( stream.isEndElement() && stream.name() == "abr_def" ) || !stream.atEnd() )
+                      // abbreviations tag set switch at format revision = 30 
+                      if( idxHeader.revisionNumber >= 30 )
                       {
-                        stream.readNext();
-                        if ( stream.isStartElement() && stream.name() == "k" )
+                        while ( !( stream.isEndElement() && stream.name() == "abbr_def" ) || !stream.atEnd() )
                         {
-                          s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                          stream.readNext();
+                          if ( stream.isStartElement() && stream.name() == "abbr_k" )
+                          {
+                            s = stream.readElementText( QXmlStreamReader::SkipChildElements );
                             keys.push_back( gd::toWString( s ) );
+                          }
+                          else if ( stream.isStartElement() && stream.name() == "abbr_v" )
+                          {
+                            s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                              value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
+                              for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
+                              {
+                                abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
+                              }
+                              keys.clear();
+                          }
+                          else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                            break;
                         }
-                        else if ( stream.isStartElement() && stream.name() == "v" )
+                      }
+                      else
+                      {
+                        while ( !( stream.isEndElement() && stream.name() == "abr_def" ) || !stream.atEnd() )
                         {
-                          s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
-                            value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
-                            for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
-                            {
-                              abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
-                            }
-                            keys.clear();
+                          stream.readNext();
+                          if ( stream.isStartElement() && stream.name() == "k" )
+                          {
+                            s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            keys.push_back( gd::toWString( s ) );
+                          }
+                          else if ( stream.isStartElement() && stream.name() == "v" )
+                          {
+                            s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                              value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
+                              for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
+                              {
+                                abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
+                              }
+                              keys.clear();
+                          }
+                          else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                            break;
                         }
-                        else if ( stream.isEndElement() && stream.name() == "abbreviations" )
-                          break;
                       }
-                      }
+                    }
                   }
                   else
                   if ( stream.name() == "ar" )
                   {
                     indexArticle( gzFile, stream, indexedWords, chunks,
-                                  articleCount, wordCount, isLogical ? Logical : Visual, revisionNumber );
+                                  articleCount, wordCount, isLogical ? Logical : Visual );
                   }
                 }
               }

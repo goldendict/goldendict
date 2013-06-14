@@ -55,7 +55,7 @@ string convertToRoman( int input, int lower_case )
 }
 
 string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv,
-                Dictionary::Class *dictPtr, bool isLogicalFormat )
+                Dictionary::Class *dictPtr, bool isLogicalFormat, unsigned revisionNumber )
 {
 //  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
@@ -134,6 +134,16 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     else
       el.setAttribute( "class", "xdxf_ex_old" );
   }
+  
+  nodes = dd.elementsByTagName( "mrkd" ); // marked out words in tranlations/examples of usage
+
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_ex_markd" );
+  }
 
   nodes = dd.elementsByTagName( "k" ); // Key
 
@@ -199,31 +209,40 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
           siblingCount++;
           if( maxNestingDepth == 1 )
           {
-            numberText = numberText.setNum(siblingCount) + ". ";
+            numberText = numberText.setNum( siblingCount ) + ". ";
           }
           else if( maxNestingDepth == 2 )
           {
             if( nestingDepth == 1 )
-              numberText = numberText.setNum(siblingCount) + ". ";
+              numberText = numberText.setNum( siblingCount ) + ". ";
             if( nestingDepth == 2 )
-              numberText = numberText.setNum(siblingCount) + ") ";
+              numberText = numberText.setNum( siblingCount ) + ") ";
           }
           else
           {
             if( nestingDepth == 1 )
-              numberText = QString::fromStdString(convertToRoman(siblingCount,0) + ". ");
+              numberText = QString::fromStdString( convertToRoman(siblingCount,0) + ". " );
             if( nestingDepth == 2 )
-              numberText = numberText.setNum(siblingCount)+". ";
+              numberText = numberText.setNum( siblingCount ) + ". ";
             if( nestingDepth == 3 )
-              numberText = numberText.setNum(siblingCount)+") ";
+              numberText = numberText.setNum( siblingCount ) + ") ";
             if( nestingDepth == 4 )
-              numberText = QString::fromStdString(convertToRoman(siblingCount,1) + ") ");
+              numberText = QString::fromStdString( convertToRoman(siblingCount,1) + ") " );
           }
-          QDomElement node_num = dd.createElement( "span" );
-          node_num.setAttribute( "class", "xdxf_num" );
-          QDomText text_num = dd.createTextNode(numberText);
-          node_num.appendChild(text_num);
-          el.insertBefore(node_num,el.firstChild());
+          QDomElement numberNode = dd.createElement( "span" );
+          numberNode.setAttribute( "class", "xdxf_num" );
+          QDomText text_num = dd.createTextNode( numberText );
+          numberNode.appendChild( text_num );
+          el.insertBefore( numberNode, el.firstChild() );
+          
+          if ( el.hasAttribute( "cmt" ) )
+          {
+            QDomElement cmtNode = dd.createElement( "span" );
+            cmtNode.setAttribute( "class", "xdxf_co" );
+            QDomText text_num = dd.createTextNode( el.attribute( "cmt" ) );
+            cmtNode.appendChild( text_num );
+            el.insertAfter( cmtNode, el.firstChild() );
+          }
         }
         else if( nestingDepth < j ) // if it goes one level up @siblingCount needs to be reset
           siblingCount = 0;
@@ -257,6 +276,16 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     el.setTagName( "a" );
     el.setAttribute( "href", QString( "bword:" ) + el.text() );
     el.setAttribute( "class", "xdxf_kref" );
+    if ( el.hasAttribute( "idref" ) )
+    {
+      // todo implement support for referencing only specific parts of the article
+      el.setAttribute( "href", QString( "bword:" ) + el.text() + "#" + el.attribute( "idref" ));
+    }
+    if ( el.hasAttribute( "kcmt" ) )
+    {
+      QDomText kcmtText = dd.createTextNode( " " + el.attribute( "kcmt" ) );
+      el.parentNode().insertAfter( kcmtText, el );
+    }
   }
 
   nodes = dd.elementsByTagName( "iref" ); // Reference to internet site
@@ -269,7 +298,11 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     el.setAttribute( "href", el.text() );
   }
 
-  nodes = dd.elementsByTagName( "abr" ); // Abbreviation
+  // Abbreviations
+  if( revisionNumber < 29 )
+    nodes = dd.elementsByTagName( "abr" );
+  else
+    nodes = dd.elementsByTagName( "abbr" );
 
   while( nodes.size() )
   {
@@ -397,7 +430,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     if( isLogicalFormat )
       el.setAttribute( "class", "xdxf_tr" );
     else
-      el.setAttribute( "class", "xdxf_tr" );
+      el.setAttribute( "class", "xdxf_tr_old" );
   }
   
   // Ensure that ArticleNetworkAccessManager can deal with XDXF images.
