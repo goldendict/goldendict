@@ -26,7 +26,37 @@ static void fixLink( QDomElement & el, string const & dictId, const char *attrNa
   el.setAttribute( attrName, url.toEncoded().data() );
 }
 
-string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv, Dictionary::Class *dictPtr )
+// converting a number into roman representation
+string convertToRoman( int input, int lower_case )
+{
+    string romanvalue = "";
+    if( input >= 4000 )
+    {
+        int x = ( input - input % 4000 ) / 1000;
+        romanvalue = "(" + convertToRoman( x, lower_case ) + ")" ;
+        input %= 4000;
+    }
+
+    const string roman[26] = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I",
+                               "m", "cm", "d", "cd", "c", "xc", "l", "xl", "x", "ix", "v", "iv", "i"};
+    const int decimal[13] =  {1000,  900, 500,  400, 100,   90,  50,   40,  10,    9,   5,    4,   1};
+
+    for( int i = 0; i < 13; i++ )
+    {
+      while( input >= decimal[ i ] )
+      {
+        input -= decimal[ i ];
+        if ( lower_case == 1 )
+          romanvalue += roman[ i + 13 ];
+        else
+          romanvalue += roman[ i ];
+      }
+    }
+    return romanvalue;
+}
+
+string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv,
+                Dictionary::Class *dictPtr, bool isLogicalFormat, unsigned revisionNumber )
 {
 //  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
@@ -45,13 +75,18 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     {
       case '\n':
         afterEol = true;
-        inConverted.append( "<br/>" );
-      break;
+        if( !isLogicalFormat )
+          inConverted.append( "<br/>" );
+        break;
+
+      case '\r':
+        break;
 
       case ' ':
         if ( afterEol )
         {
-          inConverted.append( "&nbsp;" );
+          if( !isLogicalFormat )
+            inConverted.append( "&nbsp;" ); 
           break;
         }
         // Fall-through
@@ -80,7 +115,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
       in_data = "<div class=\"sdct_x\">";
   in_data += inConverted + "</div>";
 
-  if ( !dd.setContent( QByteArray( in_data.c_str() ), false, &errorStr, &errorLine, &errorColumn  ) )
+  if( !dd.setContent( QByteArray( in_data.c_str() ), false, &errorStr, &errorLine, &errorColumn  ) )
   {
     FDPRINTF( stderr, "Xdxf2html error, xml parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
     FDPRINTF( stderr, "The input was: %s\n", in.c_str() );
@@ -95,7 +130,20 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_ex" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_ex" );
+    else
+      el.setAttribute( "class", "xdxf_ex_old" );
+  }
+  
+  nodes = dd.elementsByTagName( "mrkd" ); // marked out words in tranlations/examples of usage
+
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    el.setAttribute( "class", "xdxf_ex_markd" );
   }
 
   nodes = dd.elementsByTagName( "k" ); // Key
@@ -115,7 +163,101 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
         el.setAttribute( "class", "xdxf_headwords" );
     }
   }
-
+  
+  // processing of nested <def>s
+  if( isLogicalFormat ) // in articles with visual format <def> tags do not effect the formatting.
+  {
+    nodes = dd.elementsByTagName( "def" );
+    
+    // this is a logical type of XDXF, so we need to render proper numbering
+    // we will do it this way:
+    
+    // 1. we compute the maximum nesting depth of the article
+    int maxNestingDepth = 1; // maximum nesting depth of the article
+    for( int i = 0; i < nodes.size(); i++ )
+    {
+      QDomElement el = nodes.at( i ).toElement();
+      QDomElement nestingNode = el;
+      int nestingCount = 0;
+      while ( nestingNode.parentNode().toElement().tagName() == "def" )
+      {
+        nestingCount++;
+        nestingNode = nestingNode.parentNode().toElement();
+      }
+      if ( nestingCount > maxNestingDepth )
+        maxNestingDepth = nestingCount;
+    }
+    // 2. in this loop we go layer-by-layer through all <def> and insert proper numbers according to its structure
+    for( int j = maxNestingDepth; j > 0; j-- ) // j symbolizes special depth to be processed at this iteration
+    {
+      int siblingCount = 0; // this  that counts the number of among all siblings of this depth
+      QString numberText = ""; // the number to be inserted into the beginning of <def> (I,II,IV,1,2,3,a),b),c)...)
+      for( int i = 0; i < nodes.size(); i++ )
+      {
+        QDomElement el = nodes.at( i ).toElement();
+        QDomElement nestingNode = el;
+        // computing the depth @nestingDepth of a current node @el
+        int nestingDepth = 0;
+        while( nestingNode.parentNode().toElement().tagName() == "def" )
+        {
+          nestingDepth++;
+          nestingNode=nestingNode.parentNode().toElement();
+        } 
+        // we process nodes on of current depth @j
+        // we do this in order not to break the numbering at this depth level
+        if (nestingDepth == j)
+        {
+          siblingCount++;
+          if( maxNestingDepth == 1 )
+          {
+            numberText = numberText.setNum( siblingCount ) + ". ";
+          }
+          else if( maxNestingDepth == 2 )
+          {
+            if( nestingDepth == 1 )
+              numberText = numberText.setNum( siblingCount ) + ". ";
+            if( nestingDepth == 2 )
+              numberText = numberText.setNum( siblingCount ) + ") ";
+          }
+          else
+          {
+            if( nestingDepth == 1 )
+              numberText = QString::fromStdString( convertToRoman(siblingCount,0) + ". " );
+            if( nestingDepth == 2 )
+              numberText = numberText.setNum( siblingCount ) + ". ";
+            if( nestingDepth == 3 )
+              numberText = numberText.setNum( siblingCount ) + ") ";
+            if( nestingDepth == 4 )
+              numberText = QString::fromStdString( convertToRoman(siblingCount,1) + ") " );
+          }
+          QDomElement numberNode = dd.createElement( "span" );
+          numberNode.setAttribute( "class", "xdxf_num" );
+          QDomText text_num = dd.createTextNode( numberText );
+          numberNode.appendChild( text_num );
+          el.insertBefore( numberNode, el.firstChild() );
+          
+          if ( el.hasAttribute( "cmt" ) )
+          {
+            QDomElement cmtNode = dd.createElement( "span" );
+            cmtNode.setAttribute( "class", "xdxf_co" );
+            QDomText text_num = dd.createTextNode( el.attribute( "cmt" ) );
+            cmtNode.appendChild( text_num );
+            el.insertAfter( cmtNode, el.firstChild() );
+          }
+        }
+        else if( nestingDepth < j ) // if it goes one level up @siblingCount needs to be reset
+          siblingCount = 0;
+      }
+    }
+    // we finally change all <def> tags into 'xdxf_def' <span>s
+    while( nodes.size() )
+    {
+      QDomElement el = nodes.at( 0 ).toElement();
+      el.setTagName( "span" );
+      el.setAttribute( "class", "xdxf_def" );
+    }
+  }
+  
   nodes = dd.elementsByTagName( "opt" ); // Optional headword part
 
   while( nodes.size() )
@@ -135,6 +277,16 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     el.setTagName( "a" );
     el.setAttribute( "href", QString( "bword:" ) + el.text() );
     el.setAttribute( "class", "xdxf_kref" );
+    if ( el.hasAttribute( "idref" ) )
+    {
+      // todo implement support for referencing only specific parts of the article
+      el.setAttribute( "href", QString( "bword:" ) + el.text() + "#" + el.attribute( "idref" ));
+    }
+    if ( el.hasAttribute( "kcmt" ) )
+    {
+      QDomText kcmtText = dd.createTextNode( " " + el.attribute( "kcmt" ) );
+      el.parentNode().insertAfter( kcmtText, el );
+    }
   }
 
   nodes = dd.elementsByTagName( "iref" ); // Reference to internet site
@@ -147,14 +299,18 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     el.setAttribute( "href", el.text() );
   }
 
-  nodes = dd.elementsByTagName( "abr" ); // Abbreviation
+  // Abbreviations
+  if( revisionNumber < 29 )
+    nodes = dd.elementsByTagName( "abr" );
+  else
+    nodes = dd.elementsByTagName( "abbr" );
 
   while( nodes.size() )
   {
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_abr" );
+    el.setAttribute( "class", "xdxf_abbr" );
     if( type == XDXF && pAbrv != NULL )
     {
         string val = Utf8::encode( Folding::trimWhitespace( gd::toWString( el.text() ) ) );
@@ -169,8 +325,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
           if ( Utf8::decode( i->second ).size() < 70 )
           {
-            // Replace all spaces with non-breakable ones, since that's how
-            // Lingvo shows tooltips
+            // Replace all spaces with non-breakable ones, since that's how Lingvo shows tooltips
             title.reserve( i->second.size() );
 
             for( char const * c = i->second.c_str(); *c; ++c )
@@ -206,14 +361,15 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
   {
     QDomElement el = nodes.at( 0 ).toElement();
 
-    el.setTagName( "font" );
-    el.setAttribute( "class", "xdxf_c" );
+    el.setTagName( "span" );
 
     if ( el.hasAttribute( "c" ) )
     {
-      el.setAttribute( "color", el.attribute( "c" ) );
+      el.setAttribute( "style", "color:" + el.attribute( "c" ) );
       el.removeAttribute( "c" );
     }
+    else
+      el.setAttribute( "style", "color:blue" );
   }
 
   nodes = dd.elementsByTagName( "co" ); // Editorial comment
@@ -223,9 +379,48 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_co" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_co" );
+    else
+      el.setAttribute( "class", "xdxf_co_old" );
   }
 
+  /* grammar information */
+  nodes = dd.elementsByTagName( "gr" ); // proper grammar tag
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_gr" );
+    else
+      el.setAttribute( "class", "xdxf_gr_old" );
+  }
+  nodes = dd.elementsByTagName( "pos" ); // deprecated grammar tag
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_gr" );
+    else
+      el.setAttribute( "class", "xdxf_gr_old" );
+  }
+  nodes = dd.elementsByTagName( "tense" ); // deprecated grammar tag
+  while( nodes.size() )
+  {
+    QDomElement el = nodes.at( 0 ).toElement();
+
+    el.setTagName( "span" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_gr" );
+    else
+      el.setAttribute( "class", "xdxf_gr_old" );
+  }
+  /* end of grammar generation */
+  
   nodes = dd.elementsByTagName( "tr" ); // Transcription
 
   while( nodes.size() )
@@ -233,9 +428,12 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     el.setTagName( "span" );
-    el.setAttribute( "class", "xdxf_tr" );
+    if( isLogicalFormat )
+      el.setAttribute( "class", "xdxf_tr" );
+    else
+      el.setAttribute( "class", "xdxf_tr_old" );
   }
-
+  
   // Ensure that ArticleNetworkAccessManager can deal with XDXF images.
   // We modify the URL by using the dictionary ID as the hostname.
   // This is necessary to determine from which dictionary a requested
