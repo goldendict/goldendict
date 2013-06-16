@@ -62,7 +62,7 @@ DEF_EX( exCorruptedIndex, "The index file is corrupted", Dictionary::Ex )
 enum
 {
   Signature = 0x46584458, // XDXF on little-endian, FXDX on big-endian
-  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 enum ArticleFormat
@@ -95,6 +95,7 @@ struct IdxHeader
   uint32_t zipIndexBtreeMaxElements; // Two fields from IndexInfo of the zip
                                      // resource index.
   uint32_t zipIndexRootOffset;
+  uint32_t revisionNumber; // Format revision 
 } __attribute__((packed));
 
 bool indexIsOldOrBad( string const & indexFile )
@@ -167,8 +168,7 @@ protected:
 
 private:
 
-  /// Loads the article, storing its headword and formatting the data it has
-  /// into an html.
+  // Loads the article, storing its headword and formatting article's data into an html.
   void loadArticle( uint32_t address,
                     string & articleText );
 
@@ -528,7 +528,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   if ( &chunk.front() + chunk.size() - propertiesData < 9 )
     throw exCorruptedIndex();
 
-//  unsigned char fType = (unsigned char) *propertiesData;
+  unsigned char fType = (unsigned char) *propertiesData;
 
   uint32_t articleOffset, articleSize;
 
@@ -553,7 +553,8 @@ void XdxfDictionary::loadArticle( uint32_t address,
     return;
   }
 
-  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this );
+  articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
+                                    fType == Logical, idxHeader.revisionNumber );
 
   free( articleBody );
 }
@@ -681,6 +682,7 @@ QString readXhtmlData( QXmlStreamReader & stream )
 
 void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
 {
+  // todo implement support for tag <srt>, that overrides the article sorting order 
   if ( stream.name() == "k" )
   {
     words.push_back( stream.readElementText( QXmlStreamReader::SkipChildElements ) );
@@ -723,7 +725,8 @@ void indexArticle( GzippedFile & gzFile,
                    IndexedWords & indexedWords,
                    ChunkedStorage::Writer & chunks,
                    unsigned & articleCount,
-                   unsigned & wordCount )
+                   unsigned & wordCount,
+                   ArticleFormat defaultFormat )
 {
   ArticleFormat format( Default );
 
@@ -734,7 +737,8 @@ void indexArticle( GzippedFile & gzFile,
   else
   if ( formatValue == "l" )
     format = Logical;
-
+  if( format == Default )
+    format = defaultFormat; 
   size_t articleOffset = gzFile.pos() - 1; // stream.characterOffset() is loony
 
   // uint32_t lineNumber = stream.lineNumber();
@@ -972,7 +976,8 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getResource( string const & name
   return new XdxfResourceRequest( *this, name );
 }
 
-} // anonymous namespace
+}
+// anonymous namespace - this section of file is devoted to rebuilding of dictionary articles index
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
@@ -1076,6 +1081,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
 
               bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
+              idxHeader.revisionNumber = stream.attributes().value( "revision" ).toString().toUInt();
 
               idxHeader.articleFormat = isLogical ? Logical : Visual;
 
@@ -1087,7 +1093,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 if ( stream.isStartElement() )
                 {
-                  if ( stream.name() == "full_name" )
+                  // todo implement using short <title> for denoting the dictionary in settings or dict list toolbar
+                  if ( stream.name() == "full_name" || stream.name() == "full_title" )
                   {
                     // That's our name
 
@@ -1115,6 +1122,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   else
                   if ( stream.name() == "description" )
                   {
+                    // todo implement adding other information to the description like <publisher>, <authors>, <file_ver>, <creation_date>, <last_edited_date>, <dict_edition>, <publishing_date>, <dict_src_url> 
                     QString desc = readXhtmlData( stream );
 
                     if ( dictionaryDescription.isEmpty() )
@@ -1136,64 +1144,92 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   else
                   if ( stream.name() == "abbreviations" )
                   {
-                      QString s;
-                      string value;
-                      list < wstring > keys;
-                      while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
+                    QString s;
+                    string value;
+                    list < wstring > keys;
+                    while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
+                    {
+                      stream.readNext();
+                      // abbreviations tag set switch at format revision = 30 
+                      if( idxHeader.revisionNumber >= 30 )
                       {
+                        while ( !( stream.isEndElement() && stream.name() == "abbr_def" ) || !stream.atEnd() )
+                        {
                           stream.readNext();
-                          while ( !( stream.isEndElement() && stream.name() == "abr_def" ) && !stream.atEnd() )
+                          if ( stream.isStartElement() && stream.name() == "abbr_k" )
                           {
-                               stream.readNext();
-                               if ( stream.isStartElement() && stream.name() == "k" )
-                               {
-                                   s = stream.readElementText( QXmlStreamReader::SkipChildElements );
-                                   keys.push_back( gd::toWString( s ) );
-                               }
-                               else if ( stream.isStartElement() && stream.name() == "v" )
-                               {
-                                   s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
-                                   value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
-                                   for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
-                                   {
-                                       abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
-                                   }
-                                   keys.clear();
-                               }
-                               else if ( stream.isEndElement() && stream.name() == "abbreviations" )
-                                   break;
+                            s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            keys.push_back( gd::toWString( s ) );
                           }
+                          else if ( stream.isStartElement() && stream.name() == "abbr_v" )
+                          {
+                            s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                              value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
+                              for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
+                              {
+                                abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
+                              }
+                              keys.clear();
+                          }
+                          else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                            break;
+                        }
                       }
+                      else
+                      {
+                        while ( !( stream.isEndElement() && stream.name() == "abr_def" ) || !stream.atEnd() )
+                        {
+                          stream.readNext();
+                          if ( stream.isStartElement() && stream.name() == "k" )
+                          {
+                            s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            keys.push_back( gd::toWString( s ) );
+                          }
+                          else if ( stream.isStartElement() && stream.name() == "v" )
+                          {
+                            s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                              value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
+                              for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
+                              {
+                                abrv[ Utf8::encode( Folding::trimWhitespace( *i ) ) ] = value;
+                              }
+                              keys.clear();
+                          }
+                          else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                            break;
+                        }
+                      }
+                    }
                   }
                   else
                   if ( stream.name() == "ar" )
                   {
                     indexArticle( gzFile, stream, indexedWords, chunks,
-                                  articleCount, wordCount );
+                                  articleCount, wordCount, isLogical ? Logical : Visual );
                   }
                 }
               }
 
               // Write abbreviations if presented
 
-              if( !abrv.empty() ) {
-                  idxHeader.hasAbrv = 1;
-                  idxHeader.abrvAddress = chunks.startNewBlock();
+              if( !abrv.empty() )
+              {
+                idxHeader.hasAbrv = 1;
+                idxHeader.abrvAddress = chunks.startNewBlock();
 
-                  uint32_t sz = abrv.size();
+                uint32_t sz = abrv.size();
 
+                chunks.addToBlock( &sz, sizeof( uint32_t ) );
+
+                for( map< string, string >::const_iterator i = abrv.begin();  i != abrv.end(); ++i )
+                {
+                  sz = i->first.size();
                   chunks.addToBlock( &sz, sizeof( uint32_t ) );
-
-                  for( map< string, string >::const_iterator i = abrv.begin();
-                       i != abrv.end(); ++i )
-                  {
-                    sz = i->first.size();
-                    chunks.addToBlock( &sz, sizeof( uint32_t ) );
-                    chunks.addToBlock( i->first.data(), sz );
-                    sz = i->second.size();
-                    chunks.addToBlock( &sz, sizeof( uint32_t ) );
-                    chunks.addToBlock( i->second.data(), sz );
-                  }
+                  chunks.addToBlock( i->first.data(), sz );
+                  sz = i->second.size();
+                  chunks.addToBlock( &sz, sizeof( uint32_t ) );
+                  chunks.addToBlock( i->second.data(), sz );
+                }
               }
 
               // Finish with the chunks

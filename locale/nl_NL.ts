@@ -510,29 +510,45 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation>Totaal aantal artikelen:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="43"/>
+        <location filename="../dictinfo.ui" line="46"/>
         <source>Translates from:</source>
         <translation>Vertaalt van:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="57"/>
+        <location filename="../dictinfo.ui" line="60"/>
         <source>Total words:</source>
         <translation>Totaal aantal woorden:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="71"/>
+        <location filename="../dictinfo.ui" line="77"/>
         <source>Translates to:</source>
         <translation>Vertaalt naar:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="88"/>
+        <location filename="../dictinfo.ui" line="91"/>
+        <source>Open folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="110"/>
+        <source>Edit dictionary</source>
+        <translation type="unfinished">Woordenboek bewerken</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="120"/>
         <source>Files comprising this dictionary:</source>
         <translation>Woordenboek bestaat uit de volgende bestanden:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="169"/>
+        <location filename="../dictinfo.ui" line="201"/>
         <source>Description:</source>
         <translation>Beschrijving:</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.cc" line="29"/>
+        <source>Edit the dictionary via command:
+%1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -550,27 +566,32 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="obsolete">Wörterbuchleiste</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="14"/>
+        <location filename="../dictionarybar.cc" line="15"/>
         <source>&amp;Dictionary Bar</source>
         <translation>&amp;Woordenboekwerkbalk</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="103"/>
+        <location filename="../dictionarybar.cc" line="25"/>
+        <source>Extended menu with all dictionaries...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictionarybar.cc" line="112"/>
         <source>Edit this group</source>
         <translation>Deze groep bewerken</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="126"/>
+        <location filename="../dictionarybar.cc" line="135"/>
         <source>Dictionary info</source>
         <translation>Woordenboek informatie</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="130"/>
+        <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="135"/>
+        <location filename="../dictionarybar.cc" line="146"/>
         <source>Edit dictionary</source>
         <translation>Woordenboek bewerken</translation>
     </message>
@@ -2042,22 +2063,22 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="760"/>
-        <location filename="../mainwindow.cc" line="2696"/>
+        <location filename="../mainwindow.cc" line="2706"/>
         <source>Accessibility API is not enabled</source>
         <translation>Toegankelijkheid API is niet ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2960"/>
+        <location filename="../mainwindow.cc" line="2970"/>
         <source>Article, Complete (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2961"/>
+        <location filename="../mainwindow.cc" line="2971"/>
         <source>Article, HTML Only (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3016"/>
+        <location filename="../mainwindow.cc" line="3026"/>
         <source>Saving article...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2113,17 +2134,17 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation>Fout bij importeren:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3507"/>
+        <location filename="../mainwindow.cc" line="3567"/>
         <source>Dictionary info</source>
         <translation>Woordenboekinformatie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3509"/>
+        <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3515"/>
+        <location filename="../mainwindow.cc" line="3575"/>
         <source>Edit dictionary</source>
         <translation>Woordenboek bewerken</translation>
     </message>
@@ -2180,17 +2201,17 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation>&amp;Navigatiewerkbalk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1274"/>
+        <location filename="../mainwindow.cc" line="1283"/>
         <source>Open Tabs List</source>
         <translation>Tabbladlijst openen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1332"/>
+        <location filename="../mainwindow.cc" line="1341"/>
         <source>(untitled)</source>
         <translation>(naamloos)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1530"/>
+        <location filename="../mainwindow.cc" line="1539"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -2203,57 +2224,57 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2500"/>
+        <location filename="../mainwindow.cc" line="2509"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Bewakingsmechanisme voor sneltoetsen kan niet worden geïnitialiseerd.&lt;br&gt;Zorg ervoor dat de RECORD-extensie van uw XServer is ingeschakeld.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2636"/>
+        <location filename="../mainwindow.cc" line="2646"/>
         <source>New Release Available</source>
         <translation>Nieuwe versie beschikbaar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2637"/>
+        <location filename="../mainwindow.cc" line="2647"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Versie &lt;b&gt;%1&lt;/b&gt; van GoldenDict kan nu gedownload worden.&lt;br&gt;Klik op &lt;b&gt;downloaden&lt;/b&gt; om naar de downloadpagina te gaan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2642"/>
+        <location filename="../mainwindow.cc" line="2652"/>
         <source>Download</source>
         <translation>Downloaden</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2643"/>
+        <location filename="../mainwindow.cc" line="2653"/>
         <source>Skip This Release</source>
         <translation>Deze versie overslaan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2773"/>
+        <location filename="../mainwindow.cc" line="2783"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>U hebt ervoor gekozen om de menubalk te verbergen. Druk op %1 om deze weer zichtbaar te maken.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2774"/>
+        <location filename="../mainwindow.cc" line="2784"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2882"/>
         <source>Page Setup</source>
         <translation>Pagina-instelling</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2873"/>
+        <location filename="../mainwindow.cc" line="2883"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Geen printer beschikbaar. U moet er eerst één installeren.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2891"/>
+        <location filename="../mainwindow.cc" line="2901"/>
         <source>Print Article</source>
         <translation>Artikel afdrukken</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2964"/>
+        <location filename="../mainwindow.cc" line="2974"/>
         <source>Save Article As</source>
         <translation>Artikel opslaan als</translation>
     </message>
@@ -2262,12 +2283,12 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="obsolete">Html bestanden (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2978"/>
+        <location filename="../mainwindow.cc" line="2988"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2979"/>
+        <location filename="../mainwindow.cc" line="2989"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Kan artikel niet opslaan: %1</translation>
     </message>
@@ -2704,12 +2725,12 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="obsolete">Afspelen met DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="355"/>
+        <location filename="../preferences.cc" line="359"/>
         <source>Changing Language</source>
         <translation>Toepassingstaal wijzigen</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="356"/>
+        <location filename="../preferences.cc" line="360"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Start het programma opnieuw om de toepassingstaal te wijzigen.</translation>
     </message>
@@ -2724,12 +2745,12 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation>&amp;Weergave</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="53"/>
+        <location filename="../preferences.ui" line="187"/>
         <source>Tabbed browsing</source>
         <translation>Tabbladen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="59"/>
+        <location filename="../preferences.ui" line="193"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
@@ -2738,12 +2759,12 @@ Als u deze optie inschakelt worden nieuwe tabbladen
 geopend zonder ze te selecteren.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="64"/>
+        <location filename="../preferences.ui" line="198"/>
         <source>Open new tabs in background</source>
         <translation>Nieuwe tabbladen op de achtergrond openen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="71"/>
+        <location filename="../preferences.ui" line="205"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
@@ -2751,72 +2772,72 @@ be the last ones.</source>
 Indien uitgeschakeld worden ze als laatste toegevoegd.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="76"/>
+        <location filename="../preferences.ui" line="210"/>
         <source>Open new tabs after the current one</source>
         <translation>Nieuwe tabbladen na de huidige openen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="103"/>
+        <location filename="../preferences.ui" line="99"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Indien ingeschakeld wordt een pictogram in het systeemvak weergegeven
 waarmee u het hoofdvenster kunt openen en andere taken uit kunt voeren.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="107"/>
+        <location filename="../preferences.ui" line="103"/>
         <source>Enable system tray icon</source>
         <translation>Systeemvakpictogram inschakelen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="125"/>
+        <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
         <translation>Hiermee start het programma direct in het systeemvak, zonder dat het
 hoofdvenster wordt weergegeven.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="129"/>
+        <location filename="../preferences.ui" line="125"/>
         <source>Start to system tray</source>
         <translation>Starten in systeemvak</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="136"/>
+        <location filename="../preferences.ui" line="132"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
         <translation>Als dit ingeschakeld is wordt het hoofdvenster alleen verborgen in plaats van gesloten.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="140"/>
+        <location filename="../preferences.ui" line="136"/>
         <source>Close to system tray</source>
         <translation>Sluiten naar systeemvak</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="160"/>
+        <location filename="../preferences.ui" line="53"/>
         <source>Startup</source>
         <translation>Het programma starten</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="169"/>
+        <location filename="../preferences.ui" line="62"/>
         <source>Start with system</source>
         <translation>Met systeem starten</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="194"/>
+        <location filename="../preferences.ui" line="239"/>
         <source>Interface language:</source>
         <translation>Toepassingstaal:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="220"/>
+        <location filename="../preferences.ui" line="265"/>
         <source>Display style:</source>
         <translation>Weergavestijl:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="308"/>
+        <location filename="../preferences.ui" line="357"/>
         <source>&amp;Scan Popup</source>
         <translation>&amp;Scan Popup</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="327"/>
+        <location filename="../preferences.ui" line="376"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -2826,37 +2847,37 @@ woord aanwijst met de muis (Windows) of een woord selecteert met de muis (Linux)
 U kunt dit in- of uitschakelen in het hoofdvenster of via het systeemvakpictogram.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="333"/>
+        <location filename="../preferences.ui" line="382"/>
         <source>Enable scan popup functionality</source>
         <translation>De Scan Popup modus inschakelen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="166"/>
+        <location filename="../preferences.ui" line="59"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
         <translation>GoldenDict automatisch starten wanneer het besturingssysteem opstart.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="83"/>
+        <location filename="../preferences.ui" line="217"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
         <translation>Selecteer deze optie om de tabbladbalk te verbergen als slechts één tabblad geopend is.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="86"/>
+        <location filename="../preferences.ui" line="220"/>
         <source>Hide single tab</source>
         <translation>Enkel tabblad verbergen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="93"/>
+        <location filename="../preferences.ui" line="227"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
         <translation>Met Ctrl-Tab navigeren door recent gebruikte tabbladen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="258"/>
+        <location filename="../preferences.ui" line="146"/>
         <source>Double-click translates the word clicked</source>
         <translation>Dubbelklikken vertaalt het aangeklikte woord</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="265"/>
+        <location filename="../preferences.ui" line="153"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
         <translation>Standaard verplaatst het indrukken van de Esc-toets de cursor
@@ -2864,151 +2885,161 @@ naar het zoekveld, maar hiermee wordt in plaats daarvan het
 hoofdvenster verborgen.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="269"/>
+        <location filename="../preferences.ui" line="157"/>
         <source>ESC key hides main window</source>
         <translation>Esc-toets verbergt hoofdvenster</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="150"/>
+        <location filename="../preferences.ui" line="164"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
         <translation>Selecteer deze optie om woorden te selecteren met een enkele muisklik</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="153"/>
+        <location filename="../preferences.ui" line="167"/>
         <source>Select word by single click</source>
         <translation>Woorden selecteren met een enkele muisklik</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="278"/>
+        <location filename="../preferences.ui" line="74"/>
         <source>Add-on style:</source>
         <translation>Add-on stijl:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="345"/>
+        <location filename="../preferences.ui" line="311"/>
+        <source>Adjust this value to avoid huge context menus.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="314"/>
+        <source>Context menu dictionaries limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="394"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>Hier kunt u aangeven of de Scan Popup modus standaard in- of uitgeschakeld is.
 Het programma start met de Scan Popup modus ingeschakeld als dit geselecteerd is.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="349"/>
+        <location filename="../preferences.ui" line="398"/>
         <source>Start with scan popup turned on</source>
         <translation>Starten met Scan Popup ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="356"/>
+        <location filename="../preferences.ui" line="405"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Als dit ingeschakeld is wordt de popup alleen weergegeven als alle opgegeven
 toetsen zijn ingedrukt wanneer de woordselectie verandert.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="360"/>
+        <location filename="../preferences.ui" line="409"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>Alleen een popup weergeven als alle geselecteerde toetsen ingedrukt worden:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="399"/>
+        <location filename="../preferences.ui" line="448"/>
         <source>Left Ctrl only</source>
         <translation>Alleen Ctrl-links</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="402"/>
+        <location filename="../preferences.ui" line="451"/>
         <source>Left Ctrl</source>
         <translation>Ctrl-links</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="409"/>
+        <location filename="../preferences.ui" line="458"/>
         <source>Right Shift only</source>
         <translation>Alleen Shift-rechts</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="412"/>
+        <location filename="../preferences.ui" line="461"/>
         <source>Right Shift</source>
         <translation>Shift-rechts</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="419"/>
+        <location filename="../preferences.ui" line="468"/>
         <source>Alt key</source>
         <translation>Alt-toets</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="422"/>
+        <location filename="../preferences.ui" line="471"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="429"/>
+        <location filename="../preferences.ui" line="478"/>
         <source>Ctrl key</source>
         <translation>Ctrl-toets</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="432"/>
+        <location filename="../preferences.ui" line="481"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="439"/>
+        <location filename="../preferences.ui" line="488"/>
         <source>Left Alt only</source>
         <translation>Alleen Alt-links</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="442"/>
+        <location filename="../preferences.ui" line="491"/>
         <source>Left Alt</source>
         <translation>Alt-links</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="449"/>
+        <location filename="../preferences.ui" line="498"/>
         <source>Shift key</source>
         <translation>Shift-toets</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="452"/>
+        <location filename="../preferences.ui" line="501"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="459"/>
+        <location filename="../preferences.ui" line="508"/>
         <source>Right Alt only</source>
         <translation>Alleen Alt-rechts</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="462"/>
+        <location filename="../preferences.ui" line="511"/>
         <source>Right Alt</source>
         <translation>Alt-rechts</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="469"/>
+        <location filename="../preferences.ui" line="518"/>
         <source>Right Ctrl only</source>
         <translation>Alleen Ctrl-rechts</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="472"/>
+        <location filename="../preferences.ui" line="521"/>
         <source>Right Ctrl</source>
         <translation>Ctrl-rechts</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="479"/>
+        <location filename="../preferences.ui" line="528"/>
         <source>Left Shift only</source>
         <translation>Alleen Shift-links</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="482"/>
+        <location filename="../preferences.ui" line="531"/>
         <source>Left Shift</source>
         <translation>Shift-links</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="489"/>
+        <location filename="../preferences.ui" line="538"/>
         <source>Windows key or Meta key</source>
         <translation>Windowstoets of Metatoets</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="492"/>
+        <location filename="../preferences.ui" line="541"/>
         <source>Win/Meta</source>
         <translation>Win/Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="526"/>
+        <location filename="../preferences.ui" line="575"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -3018,37 +3049,37 @@ terwijl u een woord selecteert. Als dit ingeschakeld is
 kunnen de toetsen ook kort erna ingedrukt worden.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="585"/>
+        <location filename="../preferences.ui" line="634"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
         <translation>Vertaald woord niet in popup weergeven maar naar hoofdvenster verzenden</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="588"/>
+        <location filename="../preferences.ui" line="637"/>
         <source>Send translated word to main window</source>
         <translation>Vertaald woord naar hoofdvenster verzenden</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="803"/>
+        <location filename="../preferences.ui" line="852"/>
         <source>Playback</source>
         <translation>Afspelen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1245"/>
+        <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1248"/>
+        <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1255"/>
-        <source>Artiles longer than this size will be collapsed</source>
+        <location filename="../preferences.ui" line="1304"/>
+        <source>Articles longer than this size will be collapsed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1271"/>
+        <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3083,27 +3114,27 @@ bass.dll in de GoldenDict map (zie http://www.un4seen.com).</translation>
         <translation type="obsolete">Afspelen met Bass-audio bibliotheek</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="821"/>
+        <location filename="../preferences.ui" line="870"/>
         <source>Use any external program to play audio files</source>
         <translation>Een extern programma gebruiken voor het afspelen van geluidsbestanden</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="824"/>
+        <location filename="../preferences.ui" line="873"/>
         <source>Use external program:</source>
         <translation>Extern programma gebruiken:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1063"/>
+        <location filename="../preferences.ui" line="1112"/>
         <source>Ad&amp;vanced</source>
         <translation>Gea&amp;vanceerd</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1069"/>
+        <location filename="../preferences.ui" line="1118"/>
         <source>ScanPopup extra technologies</source>
         <translation>Scan Popup-extra technologie</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1075"/>
+        <location filename="../preferences.ui" line="1124"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3114,12 +3145,12 @@ dit ondersteunen (bijvoorbeeld Internet Explorer 9). Als u dergelijke
 programma&apos;s niet gebruikt, dan hoeft u dit niet te selecteren.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1081"/>
+        <location filename="../preferences.ui" line="1130"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>&amp;IAccessibleEx gebruiken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1088"/>
+        <location filename="../preferences.ui" line="1137"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3129,12 +3160,12 @@ dit ondersteunen. Als u dergelijke programma&apos;s niet gebruikt, dan hoeft
 u dit niet te selecteren.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1093"/>
+        <location filename="../preferences.ui" line="1142"/>
         <source>Use &amp;UIAutomation</source>
         <translation>&amp;UIAutomation gebruiken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1100"/>
+        <location filename="../preferences.ui" line="1149"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3144,72 +3175,72 @@ dit ondersteunen. Als u dergelijke programma&apos;s niet gebruikt, dan hoeft
 u dit niet te selecteren.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1105"/>
+        <location filename="../preferences.ui" line="1154"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>&amp;GoldenDict methode gebruiken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1115"/>
+        <location filename="../preferences.ui" line="1164"/>
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1121"/>
+        <location filename="../preferences.ui" line="1170"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Schakel deze optie in om de geschiedenis van vertaalde woorden op te slaan</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1124"/>
+        <location filename="../preferences.ui" line="1173"/>
         <source>Store &amp;history</source>
         <translation>&amp;Geschiedenis opslaan</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1139"/>
+        <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Geef het maximum aantal items op dat bewaard wordt als geschiedenis.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1142"/>
+        <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
         <translation>Maximale grootte geschiedenis:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1179"/>
+        <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Opslag-interval voor geschiedenis (instellen op 0 om alleen op te slaan bij afsluiten).</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1185"/>
+        <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
         <translation>Elke</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1202"/>
+        <location filename="../preferences.ui" line="1251"/>
         <source>minutes</source>
         <translation>minuten opslaan</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1227"/>
+        <location filename="../preferences.ui" line="1276"/>
         <source>Articles</source>
         <translation>Artikelen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1233"/>
+        <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Schakel deze optie in om optionele onderdelen van artikelen altijd uit te vouwen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1236"/>
+        <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
         <translation>Optionele onderdelen &amp;uitvouwen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="532"/>
+        <location filename="../preferences.ui" line="581"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Toetsen ook achteraf in te drukken binnen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="539"/>
+        <location filename="../preferences.ui" line="588"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -3218,32 +3249,32 @@ toetsen nadat een selectie is gemaakt slechts gedurende
 een beperkt aantal hier op te geven seconden bewaakt.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="563"/>
+        <location filename="../preferences.ui" line="612"/>
         <source>secs</source>
         <translation>seconden</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="616"/>
+        <location filename="../preferences.ui" line="665"/>
         <source>Hotkeys</source>
         <translation>Sneltoetsen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="635"/>
+        <location filename="../preferences.ui" line="684"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>De volgende sneltoets gebruiken om het hoofdvenster te tonen of te verbergen:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="666"/>
+        <location filename="../preferences.ui" line="715"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>De volgende sneltoets gebruiken om woorden van het klembord te vertalen:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="713"/>
+        <location filename="../preferences.ui" line="762"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>De sneltoetsen werken systeembreed en vanuit elk programma zolang GoldenDict op de achtergrond actief is.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="723"/>
+        <location filename="../preferences.ui" line="772"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3256,78 +3287,78 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Opmerking: Waarschijnlijk gebruikt u een X.Org XServer versie, waarvan de RECORD-extensie niet functioneert. Daarom zullen sneltoetsen in Goldendict waarschijnlijk niet goed werken. Dit moet op de server zelf aangepast worden. U kunt naar het volgende verwijzen &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;foutvermelding&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; en daar een reactie achter laten.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="761"/>
+        <location filename="../preferences.ui" line="810"/>
         <source>&amp;Audio</source>
         <translation>&amp;Geluid</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="780"/>
+        <location filename="../preferences.ui" line="829"/>
         <source>Pronunciation</source>
         <translation>Uitspraak</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="786"/>
+        <location filename="../preferences.ui" line="835"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Woorden in hoofdvenster automatisch uitspreken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="793"/>
+        <location filename="../preferences.ui" line="842"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Woorden in Scan Popup automatisch uitspreken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="809"/>
+        <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
         <translation>Audiobestanden afspelen via FFmpeg(libav) en libao</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="812"/>
+        <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
         <translation>Interne speler gebruiken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="861"/>
+        <location filename="../preferences.ui" line="910"/>
         <source>&amp;Network</source>
         <translation>&amp;Netwerk</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="880"/>
+        <location filename="../preferences.ui" line="929"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Schakel dit in om een proxyserver te gebruiken voor alle netwerkaanvragen.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="884"/>
+        <location filename="../preferences.ui" line="933"/>
         <source>Use proxy server</source>
         <translation>Proxyserver gebruiken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="898"/>
+        <location filename="../preferences.ui" line="947"/>
         <source>Type:</source>
         <translation>Type:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="908"/>
+        <location filename="../preferences.ui" line="957"/>
         <source>Host:</source>
         <translation>Host:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="918"/>
+        <location filename="../preferences.ui" line="967"/>
         <source>Port:</source>
         <translation>Poort:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="939"/>
+        <location filename="../preferences.ui" line="988"/>
         <source>User:</source>
         <translation>Gebruiker:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="949"/>
+        <location filename="../preferences.ui" line="998"/>
         <source>Password:</source>
         <translation>Wachtwoord:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="984"/>
+        <location filename="../preferences.ui" line="1033"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -3336,12 +3367,12 @@ andere dan de door u bezochte site niet toe te staan. Als een site
 onjuist functioneert moet u dit mogelijk uitschakelen.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="989"/>
+        <location filename="../preferences.ui" line="1038"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>Inhoud van andere sites blokkeren (verbergt de meeste reclame)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="996"/>
+        <location filename="../preferences.ui" line="1045"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -3351,24 +3382,24 @@ De invoegtoepasing moet geïnstalleerd zijn om deze optie te
 kunnen gebruiken.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1001"/>
+        <location filename="../preferences.ui" line="1050"/>
         <source>Enable web plugins</source>
         <translation>Web-invoegtoepassingen inschakelen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1008"/>
+        <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation>Sommige websites detecteren GoldenDict met behulp van HTTP-headers
 en blokkeren de aanvragen. Selecteer deze optie om dit te voorkomen.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1012"/>
+        <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
         <translation>GoldenDict niet identificeren in HTTP-headers</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1035"/>
+        <location filename="../preferences.ui" line="1084"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -3379,7 +3410,7 @@ een nieuwe versie beschikbaar is en wordt de gebruiker zonodig
 gevraagd een downloadpagina te openen.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1042"/>
+        <location filename="../preferences.ui" line="1091"/>
         <source>Check for new program releases periodically</source>
         <translation>Periodiek controleren op nieuwe versies</translation>
     </message>
@@ -3415,17 +3446,17 @@ gevraagd een downloadpagina te openen.</translation>
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>Geen programmanaam opgegeven.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>Het programma is vastgelopen.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>Het programma heeft afsluitcode %1 geretourneerd.</translation>
     </message>
@@ -3866,9 +3897,8 @@ groep om ze te gebruiken.</translation>
         <translation>Programma&apos;s</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Alle externe programma&apos;s. De tekenreeks %GDWORD% wordt automatisch vervangen door het zoekwoord.
+        <translation type="obsolete">Alle externe programma&apos;s. De tekenreeks %GDWORD% wordt automatisch vervangen door het zoekwoord.
 Het zoekwoord wordt ook als standaardinvoer doorgegeven.</translation>
     </message>
     <message>
@@ -3930,6 +3960,11 @@ p, li { white-space: pre-wrap; }
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
         <translation>Gebruik als alternatief %GD1251% voor CP1251, %GDISO1%...%GDISO16% voor ISO 8859-1...ISO 8859-16 resp.,
 %GDBIG5% voor Big-5, %GDBIG5HKSCS% voor Big5-HKSCS, %GDGBK% voor GBK en GB18030, %GDSHIFTJIS% voor Shift-JIS.</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>

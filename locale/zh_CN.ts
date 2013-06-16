@@ -498,29 +498,45 @@ between classic and school orthography in cyrillic)</source>
         <translation>文章总数：</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="43"/>
+        <location filename="../dictinfo.ui" line="46"/>
         <source>Translates from:</source>
         <translation>词条语言：</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="57"/>
+        <location filename="../dictinfo.ui" line="60"/>
         <source>Total words:</source>
         <translation>词条总数：</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="71"/>
+        <location filename="../dictinfo.ui" line="77"/>
         <source>Translates to:</source>
         <translation>释义语言：</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="88"/>
+        <location filename="../dictinfo.ui" line="91"/>
+        <source>Open folder</source>
+        <translation>打开文件夹</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="110"/>
+        <source>Edit dictionary</source>
+        <translation>编辑词典信息</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="120"/>
         <source>Files comprising this dictionary:</source>
         <translation>此词典包含的文件：</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="169"/>
+        <location filename="../dictinfo.ui" line="201"/>
         <source>Description:</source>
         <translation>描述：</translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.cc" line="29"/>
+        <source>Edit the dictionary via command:
+%1</source>
+        <translation>编辑词典信息的命令行：%1</translation>
     </message>
 </context>
 <context>
@@ -538,27 +554,32 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">词典栏</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="103"/>
+        <location filename="../dictionarybar.cc" line="25"/>
+        <source>Extended menu with all dictionaries...</source>
+        <translation>展开菜单以包含所有词典……</translation>
+    </message>
+    <message>
+        <location filename="../dictionarybar.cc" line="112"/>
         <source>Edit this group</source>
         <translation>编辑此群组</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="126"/>
+        <location filename="../dictionarybar.cc" line="135"/>
         <source>Dictionary info</source>
         <translation>词典信息</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="130"/>
+        <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>打开词典文件夹</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="135"/>
+        <location filename="../dictionarybar.cc" line="146"/>
         <source>Edit dictionary</source>
         <translation>编辑词典信息</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="14"/>
+        <location filename="../dictionarybar.cc" line="15"/>
         <source>&amp;Dictionary Bar</source>
         <translation>词典栏(&amp;D)</translation>
     </message>
@@ -1995,7 +2016,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>退出(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2978"/>
+        <location filename="../mainwindow.cc" line="2988"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -2015,7 +2036,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>关闭至系统托盘(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2979"/>
+        <location filename="../mainwindow.cc" line="2989"/>
         <source>Can&apos;t save article: %1</source>
         <translation>无法保存文章：%1</translation>
     </message>
@@ -2050,7 +2071,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>保存文章(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2964"/>
+        <location filename="../mainwindow.cc" line="2974"/>
         <source>Save Article As</source>
         <translation>文章另存为</translation>
     </message>
@@ -2084,7 +2105,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>主页(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2636"/>
+        <location filename="../mainwindow.cc" line="2646"/>
         <source>New Release Available</source>
         <translation>有新版本可用</translation>
     </message>
@@ -2113,12 +2134,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>关于 GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2642"/>
+        <location filename="../mainwindow.cc" line="2652"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2882"/>
         <source>Page Setup</source>
         <translation>页面设置</translation>
     </message>
@@ -2134,12 +2155,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>正常大小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2500"/>
+        <location filename="../mainwindow.cc" line="2509"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>初始化热键监视机制失败。&lt;br&gt;请确保你的 XServer 已启用 RECORD 扩展。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2637"/>
+        <location filename="../mainwindow.cc" line="2647"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>有新版 GoldenDict 可用，版本为 &lt;b&gt;%1&lt;/b&gt;。&lt;br&gt;
 点击&lt;b&gt;下载&lt;/b&gt;，打开下载页面。</translation>
@@ -2168,7 +2189,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>加载中……</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1332"/>
+        <location filename="../mainwindow.cc" line="1341"/>
         <source>(untitled)</source>
         <translation>（未命名）</translation>
     </message>
@@ -2198,7 +2219,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>保存文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2643"/>
+        <location filename="../mainwindow.cc" line="2653"/>
         <source>Skip This Release</source>
         <translation>忽略此次升级</translation>
     </message>
@@ -2212,12 +2233,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">警告： %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2891"/>
+        <location filename="../mainwindow.cc" line="2901"/>
         <source>Print Article</source>
         <translation>打印文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2873"/>
+        <location filename="../mainwindow.cc" line="2883"/>
         <source>No printer is available. Please install one first.</source>
         <translation>找不到可用的打印机，请先安装一个打印机。</translation>
     </message>
@@ -2322,22 +2343,22 @@ between classic and school orthography in cyrillic)</source>
         <translation>在以下词典中找到：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1274"/>
+        <location filename="../mainwindow.cc" line="1283"/>
         <source>Open Tabs List</source>
         <translation>打开标签页列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1530"/>
+        <location filename="../mainwindow.cc" line="1539"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2773"/>
+        <location filename="../mainwindow.cc" line="2783"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>你选择了隐藏菜单栏，使用 %1 再次显示。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2774"/>
+        <location filename="../mainwindow.cc" line="2784"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
@@ -2413,17 +2434,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>导入错误：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3507"/>
+        <location filename="../mainwindow.cc" line="3567"/>
         <source>Dictionary info</source>
         <translation>词典信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3509"/>
+        <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>打开词典文件夹</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3515"/>
+        <location filename="../mainwindow.cc" line="3575"/>
         <source>Edit dictionary</source>
         <translation>编辑词典信息</translation>
     </message>
@@ -2490,17 +2511,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>导航栏(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2960"/>
+        <location filename="../mainwindow.cc" line="2970"/>
         <source>Article, Complete (*.html)</source>
         <translation>文章, 完整 (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2961"/>
+        <location filename="../mainwindow.cc" line="2971"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>文章, 仅 HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3016"/>
+        <location filename="../mainwindow.cc" line="3026"/>
         <source>Saving article...</source>
         <translation>文章保存中……</translation>
     </message>
@@ -2516,7 +2537,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="760"/>
-        <location filename="../mainwindow.cc" line="2696"/>
+        <location filename="../mainwindow.cc" line="2706"/>
         <source>Accessibility API is not enabled</source>
         <translation>无障碍API未启用</translation>
     </message>
@@ -2670,72 +2691,72 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../preferences.ui" line="422"/>
+        <location filename="../preferences.ui" line="471"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="129"/>
+        <location filename="../preferences.ui" line="125"/>
         <source>Start to system tray</source>
         <translation>启动至系统托盘</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="479"/>
+        <location filename="../preferences.ui" line="528"/>
         <source>Left Shift only</source>
         <translation>仅限左 Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="432"/>
+        <location filename="../preferences.ui" line="481"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="563"/>
+        <location filename="../preferences.ui" line="612"/>
         <source>secs</source>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="492"/>
+        <location filename="../preferences.ui" line="541"/>
         <source>Win/Meta</source>
         <translation>Win/Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="107"/>
+        <location filename="../preferences.ui" line="103"/>
         <source>Enable system tray icon</source>
         <translation>启用系统托盘图标</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="908"/>
+        <location filename="../preferences.ui" line="957"/>
         <source>Host:</source>
         <translation>主机：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="918"/>
+        <location filename="../preferences.ui" line="967"/>
         <source>Port:</source>
         <translation>端口：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="452"/>
+        <location filename="../preferences.ui" line="501"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="898"/>
+        <location filename="../preferences.ui" line="947"/>
         <source>Type:</source>
         <translation>类型：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="939"/>
+        <location filename="../preferences.ui" line="988"/>
         <source>User:</source>
         <translation>用户名：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="308"/>
+        <location filename="../preferences.ui" line="357"/>
         <source>&amp;Scan Popup</source>
         <translation>屏幕取词(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="59"/>
+        <location filename="../preferences.ui" line="193"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
@@ -2743,91 +2764,91 @@ switching to them.</source>
 启用此选项将会在打开新标签页时不自动选定。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="884"/>
+        <location filename="../preferences.ui" line="933"/>
         <source>Use proxy server</source>
         <translation>使用代理服务器</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="666"/>
+        <location filename="../preferences.ui" line="715"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>使用下列热键翻译剪贴板中的单词：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="489"/>
+        <location filename="../preferences.ui" line="538"/>
         <source>Windows key or Meta key</source>
         <translation>Windows 键或 Meta 键</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="360"/>
+        <location filename="../preferences.ui" line="409"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>仅在按住下列特定的按键时屏幕取词才会启动：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="786"/>
+        <location filename="../preferences.ui" line="835"/>
         <source>Auto-pronounce words in main window</source>
         <translation>自动朗读主窗口中的词条</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="169"/>
+        <location filename="../preferences.ui" line="62"/>
         <source>Start with system</source>
         <translation>随系统启动</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="439"/>
+        <location filename="../preferences.ui" line="488"/>
         <source>Left Alt only</source>
         <translation>仅限左 Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="53"/>
+        <location filename="../preferences.ui" line="187"/>
         <source>Tabbed browsing</source>
         <translation>标签页浏览</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="409"/>
+        <location filename="../preferences.ui" line="458"/>
         <source>Right Shift only</source>
         <translation>仅限右 Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="136"/>
+        <location filename="../preferences.ui" line="132"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
         <translation>启用此选项，关闭窗口将使程序最小化至系统托盘，
 而不是退出程序。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="761"/>
+        <location filename="../preferences.ui" line="810"/>
         <source>&amp;Audio</source>
         <translation>音频(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="880"/>
+        <location filename="../preferences.ui" line="929"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>如果你希望通过代理服务器执行程序的网络查
 询功能，启用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="194"/>
+        <location filename="../preferences.ui" line="239"/>
         <source>Interface language:</source>
         <translation>界面语言：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="399"/>
+        <location filename="../preferences.ui" line="448"/>
         <source>Left Ctrl only</source>
         <translation>仅限左 Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="64"/>
+        <location filename="../preferences.ui" line="198"/>
         <source>Open new tabs in background</source>
         <translation>在后台打开新标签页</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="861"/>
+        <location filename="../preferences.ui" line="910"/>
         <source>&amp;Network</source>
         <translation>网络(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="469"/>
+        <location filename="../preferences.ui" line="518"/>
         <source>Right Ctrl only</source>
         <translation>仅限右 Ctrl</translation>
     </message>
@@ -2837,53 +2858,53 @@ for all program&apos;s network requests.</source>
         <translation>Lingvo</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="412"/>
+        <location filename="../preferences.ui" line="461"/>
         <source>Right Shift</source>
         <translation>右 Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="482"/>
+        <location filename="../preferences.ui" line="531"/>
         <source>Left Shift</source>
         <translation>左 Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="356"/>
+        <location filename="../preferences.ui" line="405"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>启用后，屏幕取词窗口只有在按住特定按键时才会弹出。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="220"/>
+        <location filename="../preferences.ui" line="265"/>
         <source>Display style:</source>
         <translation>显示风格：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="793"/>
+        <location filename="../preferences.ui" line="842"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>自动朗读屏幕取词弹出窗口中的词条</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="333"/>
+        <location filename="../preferences.ui" line="382"/>
         <source>Enable scan popup functionality</source>
         <translation>启用屏幕取词功能</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="76"/>
+        <location filename="../preferences.ui" line="210"/>
         <source>Open new tabs after the current one</source>
         <translation>在当前页之后打开新标签页</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="356"/>
+        <location filename="../preferences.cc" line="360"/>
         <source>Restart the program to apply the language change.</source>
         <translation>变更界面语言需要重新启动程序才能生效。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="419"/>
+        <location filename="../preferences.ui" line="468"/>
         <source>Alt key</source>
         <translation>Alt 键</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="327"/>
+        <location filename="../preferences.ui" line="376"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -2894,12 +2915,12 @@ off from main window or tray icon.</source>
 托盘菜单中选择是否激活屏幕取词功能。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1042"/>
+        <location filename="../preferences.ui" line="1091"/>
         <source>Check for new program releases periodically</source>
         <translation>定期检查可用版本</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="71"/>
+        <location filename="../preferences.ui" line="205"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
@@ -2907,7 +2928,7 @@ be the last ones.</source>
 打开此选项，新标签页将会自动添加到末尾。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="140"/>
+        <location filename="../preferences.ui" line="136"/>
         <source>Close to system tray</source>
         <translation>关闭至系统托盘</translation>
     </message>
@@ -2917,13 +2938,13 @@ be the last ones.</source>
         <translation>系统默认</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="103"/>
+        <location filename="../preferences.ui" line="99"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>启用此选项，将会启用系统托盘图标。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1035"/>
+        <location filename="../preferences.ui" line="1084"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -2934,12 +2955,12 @@ download page.</source>
 页面。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="160"/>
+        <location filename="../preferences.ui" line="53"/>
         <source>Startup</source>
         <translation>开机自动启动</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="949"/>
+        <location filename="../preferences.ui" line="998"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
@@ -2954,7 +2975,7 @@ download page.</source>
         <translation>界面(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="539"/>
+        <location filename="../preferences.ui" line="588"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -2962,27 +2983,27 @@ seconds, which is specified here.</source>
 被监视。热键监视的秒数可以在这里设置。</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="355"/>
+        <location filename="../preferences.cc" line="359"/>
         <source>Changing Language</source>
         <translation>变更界面语言</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="429"/>
+        <location filename="../preferences.ui" line="478"/>
         <source>Ctrl key</source>
         <translation>Ctr l键</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="635"/>
+        <location filename="../preferences.ui" line="684"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>使用下列热键显示或隐藏主窗口：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="442"/>
+        <location filename="../preferences.ui" line="491"/>
         <source>Left Alt</source>
         <translation>左 Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="459"/>
+        <location filename="../preferences.ui" line="508"/>
         <source>Right Alt only</source>
         <translation>仅限右 Alt</translation>
     </message>
@@ -2992,64 +3013,64 @@ seconds, which is specified here.</source>
         <translation>首选项</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="532"/>
+        <location filename="../preferences.ui" line="581"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>按键取词容许的延迟时间：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="402"/>
+        <location filename="../preferences.ui" line="451"/>
         <source>Left Ctrl</source>
         <translation>左 Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="462"/>
+        <location filename="../preferences.ui" line="511"/>
         <source>Right Alt</source>
         <translation>右 Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="713"/>
+        <location filename="../preferences.ui" line="762"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>热键均为全局键，只要 GoldenDict 在后台运行，热键就可以在任何程序中使用。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="472"/>
+        <location filename="../preferences.ui" line="521"/>
         <source>Right Ctrl</source>
         <translation>右 Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="616"/>
+        <location filename="../preferences.ui" line="665"/>
         <source>Hotkeys</source>
         <translation>热键</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="349"/>
+        <location filename="../preferences.ui" line="398"/>
         <source>Start with scan popup turned on</source>
         <translation>启动程序时同时启动屏幕取词</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="125"/>
+        <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
         <translation>启用此选项，程序启动时将直接最小化至系统托盘。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="449"/>
+        <location filename="../preferences.ui" line="498"/>
         <source>Shift key</source>
         <translation>Shift 键</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="166"/>
+        <location filename="../preferences.ui" line="59"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
         <translation>开机自动启动 GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="345"/>
+        <location filename="../preferences.ui" line="394"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>选择是否默认启用屏幕取词模式。如果选中，程序启动时将会自动激活屏幕取词功能。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="526"/>
+        <location filename="../preferences.ui" line="575"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -3059,7 +3080,7 @@ be pressed shortly after the selection is done.</source>
 的一小段时间内按下键即可。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="723"/>
+        <location filename="../preferences.ui" line="772"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3072,7 +3093,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:2em;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;注意： 你正在运行的 X.Org XServer 版本 RECORD 扩展功能不能正常工作。GoldenDict 中的热键可能因此而失效。问题的解决依赖于 xserver 自身的恢复。请参照如下链接： &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug 记录&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; 并留下评论。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="984"/>
+        <location filename="../preferences.ui" line="1033"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -3081,17 +3102,17 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
 用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="989"/>
+        <location filename="../preferences.ui" line="1038"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>禁止载入来自其它站点的内容（封杀广告）</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="780"/>
+        <location filename="../preferences.ui" line="829"/>
         <source>Pronunciation</source>
         <translation>朗读</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="803"/>
+        <location filename="../preferences.ui" line="852"/>
         <source>Playback</source>
         <translation>播放</translation>
     </message>
@@ -3100,7 +3121,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
         <translation type="obsolete">通过 Phonon 播放</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="824"/>
+        <location filename="../preferences.ui" line="873"/>
         <source>Use external program:</source>
         <translation>使用外部程序播放：</translation>
     </message>
@@ -3109,7 +3130,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
         <translation type="obsolete">通过 DirectShow 播放</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="258"/>
+        <location filename="../preferences.ui" line="146"/>
         <source>Double-click translates the word clicked</source>
         <translation>双击翻译词条（在主界面中）</translation>
     </message>
@@ -3128,23 +3149,23 @@ but should support most audio file formats.</source>
         <translation type="obsolete">通过 Phonon 框架播放音频。有时不太稳定，但支持大多数音频文件格式。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="821"/>
+        <location filename="../preferences.ui" line="870"/>
         <source>Use any external program to play audio files</source>
         <translation>使用外部程序播放音频文件</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="265"/>
+        <location filename="../preferences.ui" line="153"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
         <translation>通常，按下 ESC 键会将焦点移至翻译输入框，若启用此选项则会隐藏主窗口。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="269"/>
+        <location filename="../preferences.ui" line="157"/>
         <source>ESC key hides main window</source>
         <translation>ESC 键隐藏主窗口</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="996"/>
+        <location filename="../preferences.ui" line="1045"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -3152,63 +3173,73 @@ Plugin must be installed for this option to work.</source>
 安装相应插件才能使此选项正常工作。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1001"/>
+        <location filename="../preferences.ui" line="1050"/>
         <source>Enable web plugins</source>
         <translation>启用 web 插件</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="83"/>
+        <location filename="../preferences.ui" line="217"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
         <translation>如果你不想在单标签页时见到主标签栏，请启用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="86"/>
+        <location filename="../preferences.ui" line="220"/>
         <source>Hide single tab</source>
         <translation>隐藏单标签页</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="585"/>
+        <location filename="../preferences.ui" line="311"/>
+        <source>Adjust this value to avoid huge context menus.</source>
+        <translation>避免右键菜单出现过多词典条目。</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="314"/>
+        <source>Context menu dictionaries limit:</source>
+        <translation>右键菜单词典数目限制：</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="634"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
         <translation>将翻译词条发送至主窗口，而非在取词窗口中显示</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="588"/>
+        <location filename="../preferences.ui" line="637"/>
         <source>Send translated word to main window</source>
         <translation>发送翻译词条到主窗口</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="809"/>
+        <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
         <translation>使用 FFmpeg(libav) 及 libao 播放音频文件 </translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="812"/>
+        <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
         <translation>使用内置播放器</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1008"/>
+        <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation>部分网站屏蔽了使用 GoldenDict 浏览器标识（UA）的请求，启用此选项以绕过该问题。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1012"/>
+        <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
         <translation>不使用 GoldenDict 浏览器标识（UA）</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1063"/>
+        <location filename="../preferences.ui" line="1112"/>
         <source>Ad&amp;vanced</source>
         <translation>高级(&amp;v)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1069"/>
+        <location filename="../preferences.ui" line="1118"/>
         <source>ScanPopup extra technologies</source>
         <translation>附加取词技术</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1075"/>
+        <location filename="../preferences.ui" line="1124"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3218,12 +3249,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1081"/>
+        <location filename="../preferences.ui" line="1130"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>使用 &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1088"/>
+        <location filename="../preferences.ui" line="1137"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3232,12 +3263,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1093"/>
+        <location filename="../preferences.ui" line="1142"/>
         <source>Use &amp;UIAutomation</source>
         <translation>使用 &amp;UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1100"/>
+        <location filename="../preferences.ui" line="1149"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3246,42 +3277,46 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1105"/>
+        <location filename="../preferences.ui" line="1154"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>使用 &amp;GoldenDict message</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1233"/>
+        <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>开启此选项以自动展开文章的可选部分</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1236"/>
+        <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
         <translation>展开可选部分(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1245"/>
+        <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>开启此选项以自动收起过长的文章</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1248"/>
+        <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
         <translation>收起大于</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1255"/>
-        <source>Artiles longer than this size will be collapsed</source>
+        <location filename="../preferences.ui" line="1304"/>
+        <source>Articles longer than this size will be collapsed</source>
         <translation>大于此大小的文章将被收起</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1271"/>
+        <source>Artiles longer than this size will be collapsed</source>
+        <translation type="obsolete">大于此大小的文章将被收起</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
         <translation>字符的文章</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="93"/>
+        <location filename="../preferences.ui" line="227"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
         <translation>用 Ctrl-tab 浏览标签页时，以“最近使用”为序</translation>
     </message>
@@ -3291,32 +3326,32 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Babylon</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1115"/>
+        <location filename="../preferences.ui" line="1164"/>
         <source>History</source>
         <translation>历史</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1121"/>
+        <location filename="../preferences.ui" line="1170"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>开启此选项已保存查询历史</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1124"/>
+        <location filename="../preferences.ui" line="1173"/>
         <source>Store &amp;history</source>
         <translation>保存历史(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1227"/>
+        <location filename="../preferences.ui" line="1276"/>
         <source>Articles</source>
         <translation>文章</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="150"/>
+        <location filename="../preferences.ui" line="164"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
         <translation>开启此选项以启用单击选择单词功能</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="153"/>
+        <location filename="../preferences.ui" line="167"/>
         <source>Select word by single click</source>
         <translation>单击选择单词</translation>
     </message>
@@ -3330,32 +3365,32 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <translation type="obsolete">通过 Bass 库播放</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="278"/>
+        <location filename="../preferences.ui" line="74"/>
         <source>Add-on style:</source>
         <translation>附加样式：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1139"/>
+        <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>指定历史最大条数。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1142"/>
+        <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
         <translation>最大历史条数：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1179"/>
+        <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>历史保存周期。若为 0 则只在程序退出时保存。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1185"/>
+        <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
         <translation>保存周期：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1202"/>
+        <location filename="../preferences.ui" line="1251"/>
         <source>minutes</source>
         <translation>分钟</translation>
     </message>
@@ -3406,17 +3441,17 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation>未指定程序名。</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation>程序已崩溃。</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation>程序返回，退出代码为 %1.</translation>
     </message>
@@ -3937,6 +3972,11 @@ of the appropriate groups to use them.</source>
         <translation>Forvo</translation>
     </message>
     <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation>任意外部程序。字符串 %GDWORD% 会被所查词条替换。若 %GDWORD% 不存在，该词条会写入标准输入。</translation>
+    </message>
+    <message>
         <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>从 &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt; 获取即时发音。这个网站使得人们可以记录并分享单词发音。你可以从 GoldenDict 中听这些发音。</translation>
@@ -4008,9 +4048,8 @@ p, li { white-space: pre-wrap; }
         <translation>程序</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>任意外部程序均可。字符串 %GDWORD% 会被所查词条替换，词条会写入标准输入。</translation>
+        <translation type="obsolete">任意外部程序均可。字符串 %GDWORD% 会被所查词条替换，词条会写入标准输入。</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="283"/>

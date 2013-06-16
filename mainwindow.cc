@@ -94,7 +94,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab( this ),
   cfg( cfg_ ),
   history( History::Load(), cfg_.preferences.maxStringsInHistory, cfg_.maxHeadwordSize ),
-  dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine ),
+  dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine, cfg.preferences.maxDictionaryRefsInContextMenu ),
   articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle,
                 cfg.preferences.addonStyle ),
   articleNetMgr( this, dictionaries, articleMaker,
@@ -2580,6 +2580,7 @@ void MainWindow::checkForNewRelease()
 {
   if( latestReleaseReply )
     latestReleaseReply->deleteLater();
+  latestReleaseReply = 0;
 
   QNetworkRequest req(
     QUrl( "http://goldendict.org/latest_release.php?current="
@@ -3458,11 +3459,34 @@ void MainWindow::showDictionaryInfo( const QString & id )
     {
       DictInfo infoMsg( cfg, this );
       infoMsg.showInfo( dictionaries[ x ] );
-      infoMsg.exec();
+      int result = infoMsg.exec();
+
+      if ( result == DictInfo::OPEN_FOLDER )
+      {
+        openDictionaryFolder( id );
+      }
+      else if ( result == DictInfo::EDIT_DICTIONARY)
+      {
+        editDictionary( dictionaries[x].get() );
+      }
+
       break;
     }
   }
 }
+
+void MainWindow::editDictionary( Dictionary::Class * dict )
+{
+  QString dictFilename = dict->getMainFilename();
+  if( !cfg.editDictionaryCommandLine.isEmpty() && !dictFilename.isEmpty() )
+  {
+    QString command( cfg.editDictionaryCommandLine );
+    command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
+    if( !QProcess::startDetached( command ) )
+      QApplication::beep();
+  }
+}
+
 
 void MainWindow::openDictionaryFolder( const QString & id )
 {
@@ -3473,9 +3497,46 @@ void MainWindow::openDictionaryFolder( const QString & id )
       if( dictionaries[ x ]->getDictionaryFilenames().size() > 0 )
       {
         QString fileName = FsEncoding::decode( dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str() );
-        QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
-        if( !folder.isEmpty() )
-          QDesktopServices::openUrl( folder );
+        bool explorerLaunched = false;
+
+        // Platform-dependent way to launch a file explorer and to select a file,
+        // currently only on Windows.
+#if defined(Q_OS_WIN)
+        if ( !QFileInfo( fileName ).isDir() )
+        {
+          QString param = QLatin1String("explorer.exe ")
+              + QLatin1String("/select, \"") + QDir::toNativeSeparators( fileName ) + QLatin1String("\"");
+
+          qDebug() << "Launching" << param;
+
+          // We use CreateProcess() directly instead of QProcess::startDetached() since
+          // startDetached() does some evil things with quotes breaking explorer arguments.
+          // E.g., the following file cannot be properly selected via startDetached(), due to equals sign,
+          // which explorer considers as separator:
+          // Z:\GoldenDict\content\-=MDict=-\Test.mdx
+          PROCESS_INFORMATION pinfo;
+          STARTUPINFOW startupInfo = { sizeof( STARTUPINFO ), 0, 0, 0,
+                                       (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
+                                       (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
+                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                                     };
+          explorerLaunched = CreateProcess(0, (wchar_t*) param.utf16(),
+                                           0, 0, FALSE, CREATE_UNICODE_ENVIRONMENT | CREATE_NEW_CONSOLE, 0,
+                                           0, &startupInfo, &pinfo);
+
+          if ( explorerLaunched ) {
+            CloseHandle( pinfo.hThread );
+            CloseHandle( pinfo.hProcess );
+          }
+        }
+#endif
+
+        if ( !explorerLaunched )
+        {
+          QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
+          if( !folder.isEmpty() )
+            QDesktopServices::openUrl( QUrl::fromLocalFile( folder ) );
+        }
       }
       break;
     }
@@ -3541,10 +3602,7 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
       else
       if( result && result == editAction )
       {
-        QString command( cfg.editDictionaryCommandLine );
-        command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
-        if( !QProcess::startDetached( command ) )
-          QApplication::beep();
+        editDictionary( pDict );
       }
     }
   }

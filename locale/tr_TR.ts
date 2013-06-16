@@ -432,6 +432,19 @@ between classic and school orthography in cyrillic)</source>
         <source>Description:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the dictionary via command:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictListModel</name>
@@ -464,6 +477,10 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Open dictionary folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extended menu with all dictionaries...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2742,11 +2759,19 @@ Enable this option to workaround the problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Artiles longer than this size will be collapsed</source>
+        <source>symbols</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>symbols</source>
+        <source>Adjust this value to avoid huge context menus.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Context menu dictionaries limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articles longer than this size will be collapsed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3265,7 +3290,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation>Her türlü harici programlar. Metin %GDWORD% arama kelimesi ile değiştirilecektir. Bu kelime de standart girişten girecektir.</translation>
+        <translation type="obsolete">Her türlü harici programlar. Metin %GDWORD% arama kelimesi ile değiştirilecektir. Bu kelime de standart girişten girecektir.</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
@@ -3286,6 +3311,10 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Text to Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

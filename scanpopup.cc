@@ -48,7 +48,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   switchExpandModeAction( this ),
   focusTranslateLineAction( this ),
   wordFinder( this ),
-  dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine ),
+  dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine, cfg.preferences.maxDictionaryRefsInContextMenu ),
   mouseEnteredOnce( false ),
   mouseIntercepted( false ),
   hideTimer( this )

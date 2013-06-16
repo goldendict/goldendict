@@ -23,6 +23,11 @@ void DictInfo::showInfo( sptr<Dictionary::Class> dict )
   ui.dictionaryTranslatesFrom->setText( Language::localizedStringForId( dict->getLangFrom() ) );
   ui.dictionaryTranslatesTo->setText( Language::localizedStringForId( dict->getLangTo() ) );
 
+  ui.openFolder->setVisible( dict->isLocalDictionary() );
+  ui.editDictionary->setVisible( dict->isLocalDictionary() && !dict->getMainFilename().isEmpty() && !cfg.editDictionaryCommandLine.isEmpty());
+  ui.editDictionary->setToolTip(
+        tr( "Edit the dictionary via command:\n%1" ).arg( cfg.editDictionaryCommandLine ) );
+
   std::vector< std::string > const & filenames = dict->getDictionaryFilenames();
 
   QString filenamesText;
@@ -46,4 +51,14 @@ void DictInfo::showInfo( sptr<Dictionary::Class> dict )
 void DictInfo::savePos( int )
 {
   cfg.dictInfoGeometry = saveGeometry();
+}
+
+void DictInfo::on_editDictionary_clicked()
+{
+  done( EDIT_DICTIONARY );
+}
+
+void DictInfo::on_openFolder_clicked()
+{
+  done( OPEN_FOLDER );
 }

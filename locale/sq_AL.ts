@@ -498,28 +498,44 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished">Artikujt totalë:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="43"/>
+        <location filename="../dictinfo.ui" line="46"/>
         <source>Translates from:</source>
         <translation type="unfinished">Përkthen nga:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="57"/>
+        <location filename="../dictinfo.ui" line="60"/>
         <source>Total words:</source>
         <translation type="unfinished">Fjalët totale:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="71"/>
+        <location filename="../dictinfo.ui" line="77"/>
         <source>Translates to:</source>
         <translation type="unfinished">Përkthen në:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="88"/>
+        <location filename="../dictinfo.ui" line="91"/>
+        <source>Open folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="110"/>
+        <source>Edit dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.ui" line="120"/>
         <source>Files comprising this dictionary:</source>
         <translation type="unfinished">Skedat që përbëjnë fjalorin:</translation>
     </message>
     <message>
-        <location filename="../dictinfo.ui" line="169"/>
+        <location filename="../dictinfo.ui" line="201"/>
         <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictinfo.cc" line="29"/>
+        <source>Edit the dictionary via command:
+%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -538,27 +554,32 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Brezi i Fjalorit</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="14"/>
+        <location filename="../dictionarybar.cc" line="15"/>
         <source>&amp;Dictionary Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="103"/>
+        <location filename="../dictionarybar.cc" line="25"/>
+        <source>Extended menu with all dictionaries...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictionarybar.cc" line="112"/>
         <source>Edit this group</source>
         <translation>Editoj këtë grupin</translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="126"/>
+        <location filename="../dictionarybar.cc" line="135"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="130"/>
+        <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictionarybar.cc" line="135"/>
+        <location filename="../dictionarybar.cc" line="146"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1970,47 +1991,47 @@ between classic and school orthography in cyrillic)</source>
         <translation>Hap...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2643"/>
+        <location filename="../mainwindow.cc" line="2653"/>
         <source>Skip This Release</source>
         <translation>Kapërcej Këtë Lëshimin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2773"/>
+        <location filename="../mainwindow.cc" line="2783"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2774"/>
+        <location filename="../mainwindow.cc" line="2784"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2872"/>
+        <location filename="../mainwindow.cc" line="2882"/>
         <source>Page Setup</source>
         <translation>Sistemimi i Faqes</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2873"/>
+        <location filename="../mainwindow.cc" line="2883"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Nuk mundëson asnjë printer. Ju lutem instalojeni një.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2891"/>
+        <location filename="../mainwindow.cc" line="2901"/>
         <source>Print Article</source>
         <translation>Shtyp Artikullin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2960"/>
+        <location filename="../mainwindow.cc" line="2970"/>
         <source>Article, Complete (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2961"/>
+        <location filename="../mainwindow.cc" line="2971"/>
         <source>Article, HTML Only (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2964"/>
+        <location filename="../mainwindow.cc" line="2974"/>
         <source>Save Article As</source>
         <translation>Ruaj Artikullin Si</translation>
     </message>
@@ -2019,12 +2040,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Skeda Html (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2978"/>
+        <location filename="../mainwindow.cc" line="2988"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2979"/>
+        <location filename="../mainwindow.cc" line="2989"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Nuk ruan artikullin: %1</translation>
     </message>
@@ -2034,22 +2055,22 @@ between classic and school orthography in cyrillic)</source>
         <translation>%1 fjalorë, %2 artikuj, %3 fjalë</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2500"/>
+        <location filename="../mainwindow.cc" line="2509"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Dështon nisja e mekanizmit monitorues të tasteve kryesore.&lt;br&gt;Sigurohuni që XServer e ka të ndezur zgjatimin RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2636"/>
+        <location filename="../mainwindow.cc" line="2646"/>
         <source>New Release Available</source>
         <translation>Ka Dalë Version i Ri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2637"/>
+        <location filename="../mainwindow.cc" line="2647"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Versioni &lt;b&gt;%1&lt;/b&gt; për GoldenDict është gati për t&apos;u shkarkuar.&lt;br&gt;Klikoni &lt;b&gt;Shkarkoj&lt;/b&gt;, që të shkoni te faqja e shkarkimit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2642"/>
+        <location filename="../mainwindow.cc" line="2652"/>
         <source>Download</source>
         <translation>Shkarkoj</translation>
     </message>
@@ -2150,12 +2171,12 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="760"/>
-        <location filename="../mainwindow.cc" line="2696"/>
+        <location filename="../mainwindow.cc" line="2706"/>
         <source>Accessibility API is not enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3016"/>
+        <location filename="../mainwindow.cc" line="3026"/>
         <source>Saving article...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2185,17 +2206,17 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3507"/>
+        <location filename="../mainwindow.cc" line="3567"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3509"/>
+        <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3515"/>
+        <location filename="../mainwindow.cc" line="3575"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2205,17 +2226,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>Fushat e hapura</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1274"/>
+        <location filename="../mainwindow.cc" line="1283"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1332"/>
+        <location filename="../mainwindow.cc" line="1341"/>
         <source>(untitled)</source>
         <translation>(pa titull)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1530"/>
+        <location filename="../mainwindow.cc" line="1539"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2663,12 +2684,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Grafika</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="53"/>
+        <location filename="../preferences.ui" line="187"/>
         <source>Tabbed browsing</source>
         <translation>Shfletimi me fusha</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="59"/>
+        <location filename="../preferences.ui" line="193"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
@@ -2676,12 +2697,12 @@ switching to them.</source>
 Por, kur e ndez këtë, fushat e reja hapen pa kaluar te to.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="64"/>
+        <location filename="../preferences.ui" line="198"/>
         <source>Open new tabs in background</source>
         <translation>Hap fushat e reja në sfond</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="71"/>
+        <location filename="../preferences.ui" line="205"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
@@ -2689,78 +2710,78 @@ be the last ones.</source>
 asaj aktive. Përndryshe ato shtohen te më të fundit.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="76"/>
+        <location filename="../preferences.ui" line="210"/>
         <source>Open new tabs after the current one</source>
         <translation>Hap fushat e reja pas aktuales</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="103"/>
+        <location filename="../preferences.ui" line="99"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Kur e aktivizon, në shiritin e sistemit shfaqet një ikonë që mund të përdoret
 për të hapur dritaren kryesore dhe për të kryer detyrat e tjera.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="107"/>
+        <location filename="../preferences.ui" line="103"/>
         <source>Enable system tray icon</source>
         <translation>Aktivizoj ikonën në shiritin e sistemit</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="125"/>
+        <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
         <translation>Kur e ndez këtë, aplikimi nis direkt në shiritin e sistemit, pa e treguar dritaren kryesore.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="129"/>
+        <location filename="../preferences.ui" line="125"/>
         <source>Start to system tray</source>
         <translation>Nis në shiritin e sistemit</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="136"/>
+        <location filename="../preferences.ui" line="132"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
         <translation>Kur e ndez këtë, përpjekja për të mbyllur dritaren kryesore të aplikimit në fakt e fsheh atë.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="140"/>
+        <location filename="../preferences.ui" line="136"/>
         <source>Close to system tray</source>
         <translation>Mbyll në shiritin e sistemit</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="160"/>
+        <location filename="../preferences.ui" line="53"/>
         <source>Startup</source>
         <translation>Nisja</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="169"/>
+        <location filename="../preferences.ui" line="62"/>
         <source>Start with system</source>
         <translation>Nis me sistemin</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="194"/>
+        <location filename="../preferences.ui" line="239"/>
         <source>Interface language:</source>
         <translation>Gjuha e grafikës:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="220"/>
+        <location filename="../preferences.ui" line="265"/>
         <source>Display style:</source>
         <translation>Stili i pamjes:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="258"/>
+        <location filename="../preferences.ui" line="146"/>
         <source>Double-click translates the word clicked</source>
         <translation>Klikoj dy herë për të përkthyer fjalën</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="345"/>
+        <location filename="../preferences.ui" line="394"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
         <translation>Zgjedh nëse mënyra tipike e skanimit të jashtëm është e ndezur apo jo.
 Nëse e zgjedh, programi nis gjithmonë me skanimin e jashtëm aktiv.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="526"/>
+        <location filename="../preferences.ui" line="575"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -2770,78 +2791,88 @@ tastet e zgjedhura kur seleksiononi një fjalë. Kur e aktivizon,
 tastet e zgjedhura mund të shtypen shkurt pas seleksionimit.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="616"/>
+        <location filename="../preferences.ui" line="665"/>
         <source>Hotkeys</source>
         <translation>Tastet kryesore</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="635"/>
+        <location filename="../preferences.ui" line="684"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>Përdor këtë tastin për të treguar ose fshehur dritaren kryesore:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="666"/>
+        <location filename="../preferences.ui" line="715"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>Përdor këtë tastin për të përkthyer një fjalë në mbledhëse:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="713"/>
+        <location filename="../preferences.ui" line="762"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>Tastet kryesore janë globale dhe punojnë në çdo program brenda çdo konteksti për aq kohë sa GoldenDict vepron në sfond.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="308"/>
+        <location filename="../preferences.ui" line="357"/>
         <source>&amp;Scan Popup</source>
         <translation>&amp;Skanimi i Jashtëm</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="83"/>
+        <location filename="../preferences.ui" line="217"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="86"/>
+        <location filename="../preferences.ui" line="220"/>
         <source>Hide single tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="93"/>
+        <location filename="../preferences.ui" line="227"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="166"/>
+        <location filename="../preferences.ui" line="59"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
         <translation>Nis automatikisht GoldenDict pas operacionit për fillimin e sistemit.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="265"/>
+        <location filename="../preferences.ui" line="153"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="269"/>
+        <location filename="../preferences.ui" line="157"/>
         <source>ESC key hides main window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="150"/>
+        <location filename="../preferences.ui" line="164"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="153"/>
+        <location filename="../preferences.ui" line="167"/>
         <source>Select word by single click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="278"/>
+        <location filename="../preferences.ui" line="74"/>
         <source>Add-on style:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="327"/>
+        <location filename="../preferences.ui" line="311"/>
+        <source>Adjust this value to avoid huge context menus.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="314"/>
+        <source>Context menu dictionaries limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="376"/>
         <source>When enabled, a translation popup window would be shown each time
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
@@ -2852,134 +2883,134 @@ me përkthimin. Kur e aktivizon, mund të ndizet dhe të fiket në ikonën e dri
 kryesore ose nga shiriti i sistemit.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="333"/>
+        <location filename="../preferences.ui" line="382"/>
         <source>Enable scan popup functionality</source>
         <translation>Aktivizoj funksionin e skanimit të jashtëm</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="349"/>
+        <location filename="../preferences.ui" line="398"/>
         <source>Start with scan popup turned on</source>
         <translation>Nis me skanimin e jashtëm të ndezur</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="356"/>
+        <location filename="../preferences.ui" line="405"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Kur e aktivizon, skanimi do shfaqet vetëm kur tërë tastet e seleksionuara
 janë në gjendjen e shtypur kur ndryshon seleksionimi i fjalës.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="360"/>
+        <location filename="../preferences.ui" line="409"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
         <translation>Tregoj skanimin vetëm kur shtyp tastet e seleksionuara:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="399"/>
+        <location filename="../preferences.ui" line="448"/>
         <source>Left Ctrl only</source>
         <translation>Vetëm Ctrl majtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="402"/>
+        <location filename="../preferences.ui" line="451"/>
         <source>Left Ctrl</source>
         <translation>Ctrl majtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="409"/>
+        <location filename="../preferences.ui" line="458"/>
         <source>Right Shift only</source>
         <translation>Vetëm Shift djathtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="412"/>
+        <location filename="../preferences.ui" line="461"/>
         <source>Right Shift</source>
         <translation>Shift djathtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="419"/>
+        <location filename="../preferences.ui" line="468"/>
         <source>Alt key</source>
         <translation>Tasti Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="422"/>
+        <location filename="../preferences.ui" line="471"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="429"/>
+        <location filename="../preferences.ui" line="478"/>
         <source>Ctrl key</source>
         <translation>Tasti Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="432"/>
+        <location filename="../preferences.ui" line="481"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="439"/>
+        <location filename="../preferences.ui" line="488"/>
         <source>Left Alt only</source>
         <translation>Vetëm Alt majtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="442"/>
+        <location filename="../preferences.ui" line="491"/>
         <source>Left Alt</source>
         <translation>Alt majtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="449"/>
+        <location filename="../preferences.ui" line="498"/>
         <source>Shift key</source>
         <translation>Tasti Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="452"/>
+        <location filename="../preferences.ui" line="501"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="459"/>
+        <location filename="../preferences.ui" line="508"/>
         <source>Right Alt only</source>
         <translation>Vetëm Alt djathtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="462"/>
+        <location filename="../preferences.ui" line="511"/>
         <source>Right Alt</source>
         <translation>Alt djathtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="469"/>
+        <location filename="../preferences.ui" line="518"/>
         <source>Right Ctrl only</source>
         <translation>Vetëm Ctrl djathtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="472"/>
+        <location filename="../preferences.ui" line="521"/>
         <source>Right Ctrl</source>
         <translation>Ctrl djathtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="479"/>
+        <location filename="../preferences.ui" line="528"/>
         <source>Left Shift only</source>
         <translation>Vetëm Shift majtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="482"/>
+        <location filename="../preferences.ui" line="531"/>
         <source>Left Shift</source>
         <translation>Shift majtas</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="489"/>
+        <location filename="../preferences.ui" line="538"/>
         <source>Windows key or Meta key</source>
         <translation>Tasti Windows ose Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="492"/>
+        <location filename="../preferences.ui" line="541"/>
         <source>Win/Meta</source>
         <translation>Win/Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="532"/>
+        <location filename="../preferences.ui" line="581"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Tastet mund të shtypen edhe më pas, brenda</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="539"/>
+        <location filename="../preferences.ui" line="588"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -2988,22 +3019,22 @@ kur e kryen seleksionimin brenda një sasie të kufizuar sekondash,
 e përcaktuar këtu.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="563"/>
+        <location filename="../preferences.ui" line="612"/>
         <source>secs</source>
         <translation>sek</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="585"/>
+        <location filename="../preferences.ui" line="634"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="588"/>
+        <location filename="../preferences.ui" line="637"/>
         <source>Send translated word to main window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="723"/>
+        <location filename="../preferences.ui" line="772"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3016,57 +3047,57 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Shënim: Duket sikur po punoni me një version të X.Org XServer që e ka të prishur zgjatimin RECORD. Ka mundësi që tastet kryesore në GoldenDict të mos funksionojnë. Kjo duhet ndrequr te vetë serveri. Ju lutem, raportojeni &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;këtë të metë&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; dhe lini një koment nëse doni.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="761"/>
+        <location filename="../preferences.ui" line="810"/>
         <source>&amp;Audio</source>
         <translation>&amp;Audio</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="780"/>
+        <location filename="../preferences.ui" line="829"/>
         <source>Pronunciation</source>
         <translation>Shqiptimi</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="786"/>
+        <location filename="../preferences.ui" line="835"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Autoshqiptoj fjalët në dritaren kryesore</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="793"/>
+        <location filename="../preferences.ui" line="842"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Autoshqiptoj fjalët në skanimin e jashtëm</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="803"/>
+        <location filename="../preferences.ui" line="852"/>
         <source>Playback</source>
         <translation>Riprodhimi</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="809"/>
+        <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="812"/>
+        <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1245"/>
+        <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1248"/>
+        <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1255"/>
-        <source>Artiles longer than this size will be collapsed</source>
+        <location filename="../preferences.ui" line="1304"/>
+        <source>Articles longer than this size will be collapsed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1271"/>
+        <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3091,59 +3122,59 @@ por përkrah shumicën e skedave në format audio.</translation>
         <translation type="obsolete">Luaj via Phonon</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="821"/>
+        <location filename="../preferences.ui" line="870"/>
         <source>Use any external program to play audio files</source>
         <translation>Përdor programin e jashtëm për të luajtur skedat zanore</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="824"/>
+        <location filename="../preferences.ui" line="873"/>
         <source>Use external program:</source>
         <translation>Përdor programin e jashtëm:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="861"/>
+        <location filename="../preferences.ui" line="910"/>
         <source>&amp;Network</source>
         <translation>&amp;Rrjeti</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="880"/>
+        <location filename="../preferences.ui" line="929"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>E aktivizon kur dëshironi të përdorni një server proxy
 për tërë kërkesat e programit për rrjet.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="884"/>
+        <location filename="../preferences.ui" line="933"/>
         <source>Use proxy server</source>
         <translation>Përdor server proxy</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="898"/>
+        <location filename="../preferences.ui" line="947"/>
         <source>Type:</source>
         <translation>Lloji:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="908"/>
+        <location filename="../preferences.ui" line="957"/>
         <source>Host:</source>
         <translation>Hosti:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="918"/>
+        <location filename="../preferences.ui" line="967"/>
         <source>Port:</source>
         <translation>Porti:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="939"/>
+        <location filename="../preferences.ui" line="988"/>
         <source>User:</source>
         <translation>Përdoruesi:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="949"/>
+        <location filename="../preferences.ui" line="998"/>
         <source>Password:</source>
         <translation>Fjalëkalimi:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="984"/>
+        <location filename="../preferences.ui" line="1033"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -3152,35 +3183,35 @@ përmbajtjen (imazhe, korniza) jashtë faqes që shfleton. Nëse ndonjë
 faqe ka probleme për shkak të kësaj, provoni ta çaktivizoni.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="989"/>
+        <location filename="../preferences.ui" line="1038"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>Mohoj përmbajtjen nga faqet e tjera (fsheh shumicën e reklamave)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="996"/>
+        <location filename="../preferences.ui" line="1045"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1001"/>
+        <location filename="../preferences.ui" line="1050"/>
         <source>Enable web plugins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1008"/>
+        <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1012"/>
+        <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1035"/>
+        <location filename="../preferences.ui" line="1084"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -3191,22 +3222,22 @@ të azhurnuar të GoldenDict. Nëse po, programi informon për të dhe
 kërkon hapjen e faqes për ta shkarkuar.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1042"/>
+        <location filename="../preferences.ui" line="1091"/>
         <source>Check for new program releases periodically</source>
         <translation>Verifikoj periodikisht versionet e reja të programit</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1063"/>
+        <location filename="../preferences.ui" line="1112"/>
         <source>Ad&amp;vanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1069"/>
+        <location filename="../preferences.ui" line="1118"/>
         <source>ScanPopup extra technologies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1075"/>
+        <location filename="../preferences.ui" line="1124"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3214,86 +3245,86 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1081"/>
+        <location filename="../preferences.ui" line="1130"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1088"/>
+        <location filename="../preferences.ui" line="1137"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1093"/>
+        <location filename="../preferences.ui" line="1142"/>
         <source>Use &amp;UIAutomation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1100"/>
+        <location filename="../preferences.ui" line="1149"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1105"/>
+        <location filename="../preferences.ui" line="1154"/>
         <source>Use &amp;GoldenDict message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1115"/>
+        <location filename="../preferences.ui" line="1164"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1121"/>
+        <location filename="../preferences.ui" line="1170"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1124"/>
+        <location filename="../preferences.ui" line="1173"/>
         <source>Store &amp;history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1139"/>
+        <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1142"/>
+        <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1179"/>
+        <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1185"/>
+        <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1202"/>
+        <location filename="../preferences.ui" line="1251"/>
         <source>minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1227"/>
+        <location filename="../preferences.ui" line="1276"/>
         <source>Articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1233"/>
+        <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1236"/>
+        <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3337,12 +3368,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="obsolete">Luaj via DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="355"/>
+        <location filename="../preferences.cc" line="359"/>
         <source>Changing Language</source>
         <translation>Ndryshimi i Gjuhës</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="356"/>
+        <location filename="../preferences.cc" line="360"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Riniseni programin për të zbatuar ndryshimin e gjuhës.</translation>
     </message>
@@ -3378,17 +3409,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="167"/>
+        <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="183"/>
+        <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="186"/>
+        <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3818,11 +3849,6 @@ të caktuara për t&apos;i përdorur ata.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../sources.ui" line="406"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
@@ -3877,6 +3903,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

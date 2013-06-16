@@ -11,6 +11,14 @@ class DictInfo: public QDialog
   Q_OBJECT
 public:
 
+  enum Actions
+  {
+    REJECTED,
+    ACCEPTED,
+    OPEN_FOLDER,
+    EDIT_DICTIONARY
+  };
+
   DictInfo( Config::Class &cfg_, QWidget * parent = 0 );
   void showInfo( sptr< Dictionary::Class > dict );
 
@@ -19,6 +27,8 @@ private:
   Config::Class &cfg;
 private slots:
   void savePos( int );
+  void on_editDictionary_clicked();
+  void on_openFolder_clicked();
 };
 
 #endif // DICTINFO_HH

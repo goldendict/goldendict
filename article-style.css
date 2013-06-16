@@ -175,37 +175,85 @@ div.xdxf
   display: none;
 }
 
-/* Abbreviation */
-.xdxf_abr
+/* Article structure tag */
+.xdxf_num
 {
-  font-style: italic;
-  color: green;
-  cursor: default;
+    color: red;
+    font-weight: bold;
+    padding-left:-15px;
+}
+.xdxf_def
+{
+    display: block;
+    border-color: #e3e3e3;
+    border-width: 1px;
+    border-style: dashed;
+    margin: 1px;
+    margin-left: 15px;
 }
 
-/* Color-highlighted */
-.xdxf_c
+.xdxf_def:target
 {
-  color: blue;
+    /* this pseudoclass is used to marked out the referenced <def> that was just clicked */
+    border-color: red;
+    border-width: 1px;
+    border-style: double;
+}
+
+/* Abbreviation */
+.xdxf_abbr
+{
+  font-style: italic;
+  color: seagreen;
+  cursor: default;
+  border-bottom: 1px seagreen dotted;
+}
+
+/* Editorial comment */
+.xdxf_co, .xdxf_co_old
+{
+    color: darkslateblue;
+    font-style: italic;
+}
+.xdxf_co:before
+{
+    content:"("
+}
+.xdxf_co:after
+{
+    content:")"
+}
+
+/* Grammar information */
+.xdxf_gr
+{
+    color: orangered;
+    display: block;
+}
+
+.xdxf_gr_old
+{
+    color: blue; /*orangered;*/
 }
 
 /* Example */
 .xdxf_ex
 {
-  color: grey;
-/*  display: block;
-  margin: 8px;*/
+    color: #808080;
+    display: block;
+    margin-left: 14px;
+}
+
+.xdxf_ex_old
+{
+    color: #808080;
 }
 
 /* Direct translation */
 .xdxf_dtrn
 {
-}
-
-/* Appearance-only tag */
-.xdxf_nu
-{
-  color: red;
+    font-weight: bold;
+    color: #dd7800;
 }
 
 /* Transcription */
@@ -219,7 +267,7 @@ div.xdxf
   content:"]";
 }
 
-.xdxf_tr
+.xdxf_tr, .xdxf_tr_old
 {
   font-weight: bold;
 }
@@ -239,9 +287,16 @@ div.xdxf
   margin-bottom: 10px;
 }
 
+/* The words in examples that are meaked out; they are marked out only when placed into <ex> tag */
+.xdxf_ex .xdxf_ex_markd, .xdxf_ex_old .xdxf_ex_markd
+{
+  color:black;
+  background-color:lightgray;
+}
+
 .xdxf_opt
 {
-  color: grey;
+  color: #808080;
 }
 
 /******** SDictionary markup classes *********/
@@ -391,7 +446,7 @@ div.xdxf
 {
   color: blue;
   cursor: pointer;
-  vertical-align: center;
+  vertical-align: text-bottom;
 }
 
 /************* MDict dictionaries **************/
