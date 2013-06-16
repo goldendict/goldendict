@@ -47,7 +47,7 @@ DEF_EX( exInvalidBase64, "Invalid base64 sequence encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x58444344, // DCDX on little-endian, XDCD on big-endian
-  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -55,6 +55,7 @@ struct IdxHeader
   uint32_t signature; // First comes the signature, DCDX
   uint32_t formatVersion; // File format version (CurrentFormatVersion)
   uint32_t wordCount; // Total number of words
+  uint32_t articleCount; // Total number of articles
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
   uint32_t langFrom;  // Source language
@@ -98,7 +99,7 @@ public:
   { return map< Dictionary::Property, string >(); }
 
   virtual unsigned long getArticleCount() throw()
-  { return idxHeader.wordCount; }
+  { return idxHeader.articleCount; }
 
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
@@ -263,7 +264,19 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
       // After tab1 should be article offset, after tab2 -- article size
 
       uint32_t articleOffset = decodeBase64( string( tab1 + 1, tab2 - tab1 - 1 ) );
-      uint32_t articleSize = decodeBase64( tab2 + 1 );
+
+      char * tab3 = strchr( tab2 + 1, '\t');
+
+      uint32_t articleSize;
+      if ( tab3 )
+      {
+         articleSize = decodeBase64( string( tab2 + 1, tab3 - tab2 - 1 ) );
+      }
+      else
+      {
+        articleSize = decodeBase64( tab2 + 1 );
+      }
+
       string articleText;
 
       char * articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
@@ -402,29 +415,39 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           if ( !indexFile.gets( buf, sizeof( buf ), true ) )
             break;
 
-          // Check that there are exactly two tabs in the record.
-
-          char * tab = strchr( buf, '\t' );
-
-          if ( !tab || ! ( tab = strchr( tab + 1, '\t' ) ) || strchr( tab + 1, '\t' ) )
+          // Check that there are exactly two or three tabs in the record.
+          char * tab1 = strchr( buf, '\t' );
+          if ( tab1 )
           {
-            DPRINTF( "Warning: incorrect amount of tabs in a line, skipping: %s\n", buf );
-            continue;
-          }
-
-          // Check for proper dictionary name
-          if ( !strncmp( buf, "00databaseshort", 15 ) || !strncmp( buf, "00-database-short", 17 ) )
-          {
-            char * tab1 = strchr( buf, '\t' );
-            if ( tab1 )
+            char * tab2 = strchr( tab1 + 1, '\t' );
+            if ( tab2 )
             {
-              char * tab2 = strchr( tab1 + 1, '\t' );
-              if ( tab2 )
+              char * tab3 = strchr( tab2 + 1, '\t');
+              if ( tab3 )
+              {
+                char * tab4 = strchr( tab3 + 1, '\t');
+                if ( tab4 )
+                {
+                  DPRINTF( "Warning: too many tabs present, skipping: %s\n", buf );
+                  continue;
+                }
+
+                // Handle the forth entry, if it exists. From dictfmt man:
+                // When --index-keep-orig option is used fourth column is created
+                // (if necessary) in .index file.
+                indexedWords.addWord( Utf8::decode( string( tab3 + 1, strlen ( tab3 + 1 ) ) ), curOffset );
+                ++idxHeader.wordCount;
+              }
+              indexedWords.addWord( Utf8::decode( string( buf, strchr( buf, '\t' ) - buf ) ), curOffset );
+              ++idxHeader.wordCount;
+              ++idxHeader.articleCount;
+
+              // Check for proper dictionary name
+              if ( !strncmp( buf, "00databaseshort", 15 ) || !strncmp( buf, "00-database-short", 17 ) )
               {
                 // After tab1 should be article offset, after tab2 -- article size
                 uint32_t articleOffset = decodeBase64( string( tab1 + 1, tab2 - tab1 - 1 ) );
                 uint32_t articleSize = decodeBase64( tab2 + 1 );
-
                 dictData * dz = dict_data_open( dictFiles[ 1 ].c_str(), 0 );
 
                 if ( dz )
@@ -450,11 +473,18 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 }
               }
             }
+            else
+            {
+              DPRINTF( "Warning: only a single tab present, skipping: %s\n", buf );
+              continue;
+            }
+          }
+          else
+          {
+            DPRINTF( "Warning: no tabs present, skipping: %s\n", buf );
+            continue;
           }
 
-          indexedWords.addWord( Utf8::decode( string( buf, strchr( buf, '\t' ) - buf ) ), curOffset );
-
-          ++idxHeader.wordCount;
 
         } while( !indexFile.eof() );
 
