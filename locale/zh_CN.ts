@@ -515,12 +515,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>打开文件夹</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">编辑词典信息</translation>
+        <translation>编辑词典信息</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -536,7 +536,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑词典信息的命令行：%1</translation>
     </message>
 </context>
 <context>
@@ -556,7 +556,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>展开菜单以包含所有词典……</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -571,7 +571,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>打开词典文件夹</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -2441,7 +2441,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>打开词典文件夹</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3575"/>
@@ -3190,12 +3190,12 @@ Plugin must be installed for this option to work.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>避免右键菜单出现过多词典条目。</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>右键菜单词典数目限制：</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="634"/>
@@ -3304,7 +3304,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>大于此大小的文章将被收起</translation>
     </message>
     <message>
         <source>Artiles longer than this size will be collapsed</source>
@@ -3974,7 +3974,7 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>任意外部程序。字符串 %GDWORD% 会被所查词条替换。若 %GDWORD% 不存在，该词条会写入标准输入。</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="418"/>
