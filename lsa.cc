@@ -18,6 +18,7 @@
 #include <stub_msvc.h>
 #endif
 
+#define OV_EXCLUDE_STATIC_CALLBACKS
 #include <vorbis/vorbisfile.h>
 
 #include <QUrl>
