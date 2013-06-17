@@ -1,5 +1,7 @@
 #include "articleinspector.hh"
 
+#include <algorithm>
+
 using std::list;
 
 list< ArticleInspector * > ArticleInspector::openedInspectors;
