@@ -17,6 +17,7 @@
 #include "mdictparser.hh"
 #include "filetype.hh"
 
+#include <algorithm>
 #include <map>
 #include <set>
 #include <list>

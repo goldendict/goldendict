@@ -17,8 +17,8 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 ### Installing External Deps on Ubuntu Linux
 
     sudo apt-get install pkg-config build-essential qt4-qmake \
-         libvorbis-dev zlib1g-dev libhunspell-dev  x11proto-record-dev \
-         qt4-qmake libqt4-dev libxtst-dev libphonon-dev liblzo2-dev libbz2-dev \
+         libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
+         qt4-qmake libqt4-dev libxtst-dev liblzo2-dev libbz2-dev \
          libao-dev libavutil-dev libavformat-dev
 
 ## How to build
@@ -32,6 +32,17 @@ And then invoke `qmake` and `make`:
     cd goldendict && qmake && make
 
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
+
+### Building without internal audio player
+
+If you have problem building with FFmpeg/libao (for example, Ubuntu older than 12.04), you can pass
+`"DISABLE_INTERNAL_PLAYER=1"` to `qmake` in order to disable internal audio player completely:
+
+    qmake "DISABLE_INTERNAL_PLAYER=1"
+
+Then, invoke `make clean` before `make` because the setting change:
+
+    make clean && make
 
 ## Installation
 

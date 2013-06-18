@@ -43,6 +43,8 @@ LIBS += \
         -lbz2 \
         -llzo2
 
+!isEmpty(DISABLE_INTERNAL_PLAYER): DEFINES += DISABLE_INTERNAL_PLAYER
+
 win32 {
 	TARGET = GoldenDict
     LIBS += -liconv \
@@ -54,11 +56,13 @@ win32 {
         -lcomdlg32
     LIBS += -lvorbisfile \
         -lvorbis \
-        -logg \
-        -lao \
-        -lavutil-gd \
-        -lavformat-gd \
-        -lavcodec-gd
+        -logg
+    isEmpty(DISABLE_INTERNAL_PLAYER) {
+        LIBS += -lao \
+            -lavutil-gd \
+            -lavformat-gd \
+            -lavcodec-gd
+    }
 
     isEmpty(HUNSPELL_LIB) {
       greaterThan(QT_MAJOR_VERSION, 4) {
@@ -93,11 +97,13 @@ unix:!mac {
     PKGCONFIG += vorbisfile \
     	vorbis \
         ogg \
-        hunspell \
-        ao \
-        libavutil \
-        libavformat \
-        libavcodec
+        hunspell
+    isEmpty(DISABLE_INTERNAL_PLAYER) {
+        PKGCONFIG += ao \
+            libavutil \
+            libavformat \
+            libavcodec
+    }
     arm {
         LIBS += -liconv
     } else {
@@ -137,11 +143,13 @@ mac {
         -lvorbis \
         -logg \
         -lhunspell-1.2 \
-        -llzo2 \
-        -lao \
-        -lavutil-gd \
-        -lavformat-gd \
-        -lavcodec-gd
+        -llzo2
+    isEmpty(DISABLE_INTERNAL_PLAYER) {
+        LIBS += -lao \
+            -lavutil-gd \
+            -lavformat-gd \
+            -lavcodec-gd
+    }
     INCLUDEPATH = $${PWD}/maclibs/include
     LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
