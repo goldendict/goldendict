@@ -1,3 +1,5 @@
+#ifndef DISABLE_INTERNAL_PLAYER
+
 #include "ffmpegaudio.hh"
 
 #include <math.h>
@@ -557,3 +559,5 @@ void DecoderThread::cancel( bool waitUntilFinished )
 }
 
 }
+
+#endif //DISABLE_INTERNAL_PLAYER

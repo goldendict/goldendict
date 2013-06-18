@@ -110,8 +110,13 @@ Preferences::Preferences():
   scanToMainWindow( false ),
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
+#ifndef DISABLE_INTERNAL_PLAYER
   useExternalPlayer( false ),
   useInternalPlayer( true ),
+#else
+  useExternalPlayer( true ),
+  useInternalPlayer( false ),
+#endif
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
@@ -682,8 +687,13 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "useExternalPlayer" ).isNull() )
       c.preferences.useExternalPlayer = ( preferences.namedItem( "useExternalPlayer" ).toElement().text() == "1" );
 
+#ifndef DISABLE_INTERNAL_PLAYER
     if ( !preferences.namedItem( "useInternalPlayer" ).isNull() )
       c.preferences.useInternalPlayer = ( preferences.namedItem( "useInternalPlayer" ).toElement().text() == "1" );
+#else
+    c.preferences.useInternalPlayer = false;
+    c.preferences.useExternalPlayer = true;
+#endif
 
     if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
       c.preferences.audioPlaybackProgram = preferences.namedItem( "audioPlaybackProgram" ).toElement().text();

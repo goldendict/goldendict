@@ -165,9 +165,13 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.pronounceOnLoadMain->setChecked( p.pronounceOnLoadMain );
   ui.pronounceOnLoadPopup->setChecked( p.pronounceOnLoadPopup );
 
+#ifdef DISABLE_INTERNAL_PLAYER
+  ui.useInternalPlayer->hide();
+#else
   if ( p.useInternalPlayer )
     ui.useInternalPlayer->setChecked( true );
   else
+#endif
     ui.useExternalPlayer->setChecked( p.useExternalPlayer );
 
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );

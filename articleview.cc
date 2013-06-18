@@ -1486,6 +1486,7 @@ void ArticleView::resourceDownloadFinished()
              Dictionary::WebMultimediaDownload::isAudioUrl( resourceDownloadUrl ) )
         {
           // Audio data
+#ifndef DISABLE_INTERNAL_PLAYER
           if ( cfg.preferences.useInternalPlayer )
           {
             Ffmpeg::AudioPlayer & player = Ffmpeg::AudioPlayer::instance();
@@ -1493,6 +1494,7 @@ void ArticleView::resourceDownloadFinished()
             player.playMemory( data.data(), data.size() );
           }
           else
+#endif
           {
             // Use external viewer to play the file
             try
