@@ -496,6 +496,28 @@ div.xdxf
   margin-top: 1em;
 }
 
+.dictd_phonetic:before, .dictd_phonetic:after
+{
+  content: "\\";
+  font-style: normal;
+}
+
+.dictd_phonetic:after
+{
+  margin-left: 3px;
+}
+
+.dictd_phonetic
+{
+  font-style: italic;
+  color: #009900;
+}
+
+.dictd_article a:link
+{
+  color: #0000FF;
+}
+
 /************* Websites *****************/
 
 .website_padding

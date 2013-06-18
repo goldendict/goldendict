@@ -283,16 +283,20 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
       if ( !articleBody )
       {
-//        throw exCantReadFile( getDictionaryFilenames()[ 1 ] );
         articleText = string( "<div class=\"dictd_article\">DICTZIP error: " )
                       + dict_error_str( dz ) + "</div>";
       }
       else
       {
-      //sprintf( buf, "Offset: %u, Size: %u\n", articleOffset, articleSize );
+        static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
+        static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
 
         articleText = string( "<div class=\"dictd_article\">" ) +
-          Html::preformat( articleBody ) + "</div>";
+            QString::fromUtf8( Html::preformat( articleBody ).c_str() )
+              .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")
+              .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>")
+            .toUtf8().data() +
+            "</div>";
         free( articleBody );
       }
 
