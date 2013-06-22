@@ -449,6 +449,25 @@ div.xdxf
   vertical-align: text-bottom;
 }
 
+.dsl_video .img
+{
+  display: inline-block;
+  background: url('qrcx://localhost/icons/video.png');
+  background-repeat: no-repeat;
+  /* Ugly hack since "vertical-align: middle;" looks _terrible_ in Qt4's webkit: */
+  vertical-align: -30%;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+.dsl_video .filename
+{
+  display: none; /* by default, the file name is hidden */
+  padding-left: 5px;
+}
+
 /************* MDict dictionaries **************/
 .mdict
 {

@@ -66,6 +66,26 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".spx" );
 }
 
+bool isNameOfVideo( string const & name )
+{
+  string s = simplifyString( name );
+
+  return
+    endsWith( s, ".mpg" ) ||
+    endsWith( s, ".mpeg" )||
+    endsWith( s, ".mpe" ) ||
+    endsWith( s, ".ogv" ) ||
+    endsWith( s, ".avi" ) ||
+    endsWith( s, ".m4v" ) ||
+    endsWith( s, ".mkv" ) ||
+    endsWith( s, ".wmv" ) ||
+    endsWith( s, ".sfw" ) ||
+    endsWith( s, ".flv" ) ||
+    endsWith( s, ".divx" ) ||
+    endsWith( s, ".3gp" ) ||
+    endsWith( s, ".mov" );
+}
+
 bool isNameOfPicture( string const & name )
 {
   string s = simplifyString( name );
