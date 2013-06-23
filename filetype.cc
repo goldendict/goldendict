@@ -53,7 +53,6 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".voc" ) ||
     endsWith( s, ".ogg" ) ||
     endsWith( s, ".mp3" ) ||
-    endsWith( s, ".mp4" ) ||
     endsWith( s, ".m4a") ||
     endsWith( s, ".aac" ) ||
     endsWith( s, ".flac" ) ||
@@ -77,6 +76,7 @@ bool isNameOfVideo( string const & name )
     endsWith( s, ".ogv" ) ||
     endsWith( s, ".avi" ) ||
     endsWith( s, ".m4v" ) ||
+    endsWith( s, ".mp4" ) ||
     endsWith( s, ".mkv" ) ||
     endsWith( s, ".wmv" ) ||
     endsWith( s, ".sfw" ) ||
