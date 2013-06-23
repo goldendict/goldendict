@@ -190,12 +190,17 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
+  Ffmpeg::AudioPlayer::instance().stop();
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts )
 {
+
+  // first, let's stop the player
+  Ffmpeg::AudioPlayer::instance().stop();
+
   QUrl req;
 
   req.setScheme( "gdlookup" );
