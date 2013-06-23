@@ -180,12 +180,12 @@
     <message>
         <location filename="../articleview.cc" line="695"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="704"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="721"/>
