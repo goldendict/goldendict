@@ -74,6 +74,7 @@ bool isNameOfVideo( string const & name )
     endsWith( s, ".mpeg" )||
     endsWith( s, ".mpe" ) ||
     endsWith( s, ".ogv" ) ||
+    endsWith( s, ".ogm" ) ||
     endsWith( s, ".avi" ) ||
     endsWith( s, ".m4v" ) ||
     endsWith( s, ".mp4" ) ||
