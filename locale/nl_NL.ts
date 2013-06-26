@@ -181,12 +181,22 @@
         <translation>Afbeelding</translation>
     </message>
     <message>
+        <location filename="../articleview.cc" line="695"/>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../articleview.cc" line="704"/>
+        <source>Video: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="721"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Definitie uit woordenboek &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="708"/>
+        <location filename="../articleview.cc" line="725"/>
         <source>Definition: %1</source>
         <translation>Definitie: %1</translation>
     </message>
@@ -195,38 +205,38 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="896"/>
-        <location filename="../articleview.cc" line="1039"/>
+        <location filename="../articleview.cc" line="913"/>
+        <location filename="../articleview.cc" line="1056"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>De bron waarnaar wordt verwezen bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="936"/>
+        <location filename="../articleview.cc" line="953"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Dit programma voor afspelen van geluiden bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1039"/>
+        <location filename="../articleview.cc" line="1056"/>
         <source>ERROR: %1</source>
         <translation>FOUT: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1421"/>
+        <location filename="../articleview.cc" line="1438"/>
         <source>Save sound</source>
         <translation>Geluid opslaan</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1423"/>
+        <location filename="../articleview.cc" line="1440"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Geluidsbestanden (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Alle bestanden (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1436"/>
+        <location filename="../articleview.cc" line="1453"/>
         <source>Save image</source>
         <translation>Afbeelding opslaan</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1438"/>
+        <location filename="../articleview.cc" line="1455"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Afbeeldingsbestanden (*.bmp *.jpg *.png *.tif);;Alle bestanden (*.*)</translation>
     </message>
@@ -235,53 +245,53 @@
         <translation type="obsolete">Fout bij opslaan bron:</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1191"/>
+        <location filename="../articleview.cc" line="1208"/>
         <source>&amp;Open Link</source>
         <translation>Koppeling &amp;openen</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1214"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Koppeling openen in nieuw&amp;tabblad</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1204"/>
+        <location filename="../articleview.cc" line="1221"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Koppeling openen in &amp;externe browser</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1237"/>
+        <location filename="../articleview.cc" line="1254"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Zoeken naar &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1245"/>
+        <location filename="../articleview.cc" line="1262"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Zoeken naar &quot;%1&quot; in een &amp;nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1250"/>
+        <location filename="../articleview.cc" line="1267"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Verzend &quot;%1&quot; naar zoekveld</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1256"/>
-        <location filename="../articleview.cc" line="1288"/>
+        <location filename="../articleview.cc" line="1273"/>
+        <location filename="../articleview.cc" line="1305"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>Voeg &quot;%1&quot; &amp;toe aan geschiedenis</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1270"/>
+        <location filename="../articleview.cc" line="1287"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Zoeken naar &quot;%1&quot; in %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1278"/>
+        <location filename="../articleview.cc" line="1295"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Zoeken naar &quot;%1&quot; in %2 in een &amp;nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1566"/>
+        <location filename="../articleview.cc" line="1585"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>WAARSCHUWING:FFmpeg audiospeler: %1</translation>
     </message>
@@ -302,37 +312,37 @@
         <translation type="obsolete">Bass bibliotheek kan dit geluid niet afspelen.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1507"/>
+        <location filename="../articleview.cc" line="1526"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Kan geen mediaspeler starten om het geluidsbestand af te spelen: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1525"/>
+        <location filename="../articleview.cc" line="1544"/>
         <source>Failed to create temporary file.</source>
         <translation>Tijdelijk bestand kan niet worden aangemaakt.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1536"/>
+        <location filename="../articleview.cc" line="1555"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Kan bronbestand niet automatisch openen, probeer het handmatig te openen: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1559"/>
+        <location filename="../articleview.cc" line="1578"/>
         <source>The referenced resource failed to download.</source>
         <translation>Kan de bron waarnaar wordt verwezen niet downloaden.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1218"/>
+        <location filename="../articleview.cc" line="1235"/>
         <source>Save &amp;image...</source>
         <translation>&amp;Afbeelding opslaan...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1226"/>
+        <location filename="../articleview.cc" line="1243"/>
         <source>Save s&amp;ound...</source>
         <translation>&amp;Geluid opslaan...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1559"/>
+        <location filename="../articleview.cc" line="1578"/>
         <source>WARNING: %1</source>
         <translation>WAARSCHUWING: %1</translation>
     </message>
@@ -2540,12 +2550,12 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="551"/>
+        <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="562"/>
+        <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2725,12 +2735,12 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <translation type="obsolete">Afspelen met DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="359"/>
+        <location filename="../preferences.cc" line="363"/>
         <source>Changing Language</source>
         <translation>Toepassingstaal wijzigen</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="360"/>
+        <location filename="../preferences.cc" line="364"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Start het programma opnieuw om de toepassingstaal te wijzigen.</translation>
     </message>
@@ -3502,87 +3512,87 @@ gevraagd een downloadpagina te openen.</translation>
         <translation>Fout bij decoderen artikel</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="132"/>
+        <location filename="../ffmpegaudio.cc" line="134"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>avformat_alloc_context() mislukt.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="139"/>
+        <location filename="../ffmpegaudio.cc" line="141"/>
         <source>av_malloc() failed.</source>
         <translation>av_malloc() mislukt.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="148"/>
+        <location filename="../ffmpegaudio.cc" line="150"/>
         <source>avio_alloc_context() failed.</source>
         <translation>avio_alloc_context() mislukt.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="165"/>
+        <location filename="../ffmpegaudio.cc" line="167"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation>avformat_open_input() mislukt: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="172"/>
+        <location filename="../ffmpegaudio.cc" line="174"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation>avformat_find_stream_info() mislukt: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="187"/>
+        <location filename="../ffmpegaudio.cc" line="189"/>
         <source>Could not find audio stream.</source>
         <translation>Kan audiogegevensstroom niet vinden.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="195"/>
+        <location filename="../ffmpegaudio.cc" line="197"/>
         <source>Codec [id: %1] not found.</source>
         <translation>Codec [id: %1] niet gevonden.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="202"/>
+        <location filename="../ffmpegaudio.cc" line="204"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation>avcodec_open2() mislukt: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="263"/>
+        <location filename="../ffmpegaudio.cc" line="265"/>
         <source>Cannot find usable audio output device.</source>
         <translation>Kan geen geschikt apparaat voor geluidsuitvoer vinden.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="276"/>
+        <location filename="../ffmpegaudio.cc" line="278"/>
         <source>Unsupported sample format.</source>
         <translation>Niet ondersteunde voorbeeldindeling.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="286"/>
+        <location filename="../ffmpegaudio.cc" line="288"/>
         <source>ao_open_live() failed: </source>
         <translation>ao_open_live() mislukt: </translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="291"/>
+        <location filename="../ffmpegaudio.cc" line="293"/>
         <source>No driver.</source>
         <translation>Geen stuurprogramma.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="294"/>
+        <location filename="../ffmpegaudio.cc" line="296"/>
         <source>This driver is not a live output device.</source>
         <translation>Dit stuurprogramma is geen live uitvoerapparaat.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="297"/>
+        <location filename="../ffmpegaudio.cc" line="299"/>
         <source>A valid option key has an invalid value.</source>
         <translation>Een geldige optiesleutel heeft een ongeldige waarde.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="300"/>
+        <location filename="../ffmpegaudio.cc" line="302"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation>Kan apparaat niet openen: %1, kanalen: %2, snelheid: %3, bits: %4.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="307"/>
+        <location filename="../ffmpegaudio.cc" line="309"/>
         <source>Unknown error.</source>
         <translation>Onbekende fout.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="332"/>
+        <location filename="../ffmpegaudio.cc" line="334"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>avcodec_alloc_frame() mislukt.</translation>
     </message>
@@ -3608,18 +3618,18 @@ gevraagd een downloadpagina te openen.</translation>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2147"/>
-        <location filename="../articleview.cc" line="2154"/>
+        <location filename="../articleview.cc" line="2166"/>
+        <location filename="../articleview.cc" line="2173"/>
         <source>ERROR: %1</source>
         <translation type="unfinished">FOUT: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2147"/>
+        <location filename="../articleview.cc" line="2166"/>
         <source>Resource saving error: </source>
         <translation type="unfinished">Fout bij opslaan bron:</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2154"/>
+        <location filename="../articleview.cc" line="2173"/>
         <source>The referenced resource failed to download.</source>
         <translation type="unfinished">Kan de bron waarnaar wordt verwezen niet downloaden.</translation>
     </message>

@@ -174,7 +174,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
       return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts );
   }
 
-  if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gico" ) &&
+  if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" || url.scheme() == "gico" ) &&
        url.path().size() )
   {
     //DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );

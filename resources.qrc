@@ -71,5 +71,6 @@
         <file>icons/expand_article.png</file>
         <file>icons/collapse_article_hovered.png</file>
         <file>icons/collapse_article.png</file>
+        <file>icons/video.png</file>
     </qresource>
 </RCC>

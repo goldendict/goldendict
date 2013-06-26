@@ -863,6 +863,17 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
                   + "\" alt=\"" + Html::escape( filename ) + "\"/>";
     }
     else
+    if ( Filetype::isNameOfVideo( filename ) ) {
+      QUrl url;
+      url.setScheme( "gdvideo" );
+      url.setHost( QString::fromUtf8( getId().c_str() ) );
+      url.setPath( QString::fromUtf8( filename.c_str() ) );
+
+      result += string( "<a class=\"dsl_s dsl_video\" href=\"" ) + url.toEncoded().data() + "\">"
+             + "<span class=\"img\"></span>"
+             + "<span class=\"filename\">" + processNodeChildren( node ) + "</span>" + "</a>";
+    }
+    else
     {
       // Unknown file type, downgrade to a hyperlink
 

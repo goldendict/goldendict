@@ -192,12 +192,17 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
+  Ffmpeg::AudioPlayer::instance().stop();
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts )
 {
+
+  // first, let's stop the player
+  Ffmpeg::AudioPlayer::instance().stop();
+
   QUrl req;
 
   req.setScheme( "gdlookup" );
@@ -690,6 +695,23 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
     msg = tr( "Picture" );
   }
   else
+  if ( url.scheme() == "gdvideo" )
+  {
+    if ( url.path().isEmpty() )
+    {
+      msg = tr( "Video" );
+    }
+    else
+    {
+      QString path = url.path();
+      if ( path.startsWith( '/' ) )
+      {
+        path = path.mid( 1 );
+      }
+      msg = tr( "Video: %1" ).arg( path );
+    }
+  }
+  else
   if (url.scheme() == "gdlookup" || url.scheme().compare( "bword" ) == 0)
   {
     QString def = url.path();
@@ -786,7 +808,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
   }
   else
-  if ( url.scheme() == "bres" || url.scheme() == "gdau" ||
+  if ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" ||
        Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Download it

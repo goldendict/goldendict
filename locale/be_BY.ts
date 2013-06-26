@@ -223,134 +223,144 @@
         <translation>Відарыс</translation>
     </message>
     <message>
+        <location filename="../articleview.cc" line="695"/>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../articleview.cc" line="704"/>
+        <source>Video: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="721"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Азначэньне з слоўніка „%1“: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="708"/>
+        <location filename="../articleview.cc" line="725"/>
         <source>Definition: %1</source>
         <translation>Азначэньне: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="896"/>
-        <location filename="../articleview.cc" line="1039"/>
+        <location filename="../articleview.cc" line="913"/>
+        <location filename="../articleview.cc" line="1056"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Запытанага рэсурсу не існуе.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="936"/>
+        <location filename="../articleview.cc" line="953"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Пазначанай праґрамы не існуе.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1039"/>
+        <location filename="../articleview.cc" line="1056"/>
         <source>ERROR: %1</source>
         <translation>АБМЫЛА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1421"/>
+        <location filename="../articleview.cc" line="1438"/>
         <source>Save sound</source>
         <translation>Захаваньне гуку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1423"/>
+        <location filename="../articleview.cc" line="1440"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Гукавыя файлы (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1436"/>
+        <location filename="../articleview.cc" line="1453"/>
         <source>Save image</source>
         <translation>Захаваньне выявы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1438"/>
+        <location filename="../articleview.cc" line="1455"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Файлы выяваў (*.bmp *.jpg *.png *.tif);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1191"/>
+        <location filename="../articleview.cc" line="1208"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Адчыніць спасылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1214"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ачыніць спасылку ў новай &amp;укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1204"/>
+        <location filename="../articleview.cc" line="1221"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Адчыніць спасылку ў &amp;вонкавым аглядальніку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1218"/>
+        <location filename="../articleview.cc" line="1235"/>
         <source>Save &amp;image...</source>
         <translation>Захаваць &amp;выяву...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1226"/>
+        <location filename="../articleview.cc" line="1243"/>
         <source>Save s&amp;ound...</source>
         <translation>Захаваць &amp;гук...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1237"/>
+        <location filename="../articleview.cc" line="1254"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Шукаць „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1245"/>
+        <location filename="../articleview.cc" line="1262"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Шукаць „%1“ у &amp;новай укладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1250"/>
+        <location filename="../articleview.cc" line="1267"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Зьмясьціць „%1“ у ўводным радку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1256"/>
-        <location filename="../articleview.cc" line="1288"/>
+        <location filename="../articleview.cc" line="1273"/>
+        <location filename="../articleview.cc" line="1305"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Дадаць „%1“ у гісторыю</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1270"/>
+        <location filename="../articleview.cc" line="1287"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Шукаць „%1“ у ґрупе %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1278"/>
+        <location filename="../articleview.cc" line="1295"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Шукаць „%1“ у ґрупе %2 у новай у&amp;кладцы</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1566"/>
+        <location filename="../articleview.cc" line="1585"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>ПАПЯРЭДЖАНЬНЕ: Прайгравальнік FFMpeg: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1559"/>
+        <location filename="../articleview.cc" line="1578"/>
         <source>WARNING: %1</source>
         <translation>УВАГА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1507"/>
+        <location filename="../articleview.cc" line="1526"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Немажліва ўрухоміць прайгравальніка гукавага файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1525"/>
+        <location filename="../articleview.cc" line="1544"/>
         <source>Failed to create temporary file.</source>
         <translation>Не атрымалася стварыць часовага файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1536"/>
+        <location filename="../articleview.cc" line="1555"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Не атрымалася аўтаматычна адчыніць рэсурсавага файла. Паспрабуй адчыніць ручна %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1559"/>
+        <location filename="../articleview.cc" line="1578"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
     </message>
@@ -2473,12 +2483,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="551"/>
+        <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>Слоўнікавы файл скажаны ці пашкоджаны</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="562"/>
+        <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>Абмыла ладаваньня артыкула з %1, з прычыны: %2</translation>
     </message>
@@ -3302,12 +3312,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Lingoes-Blue</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="359"/>
+        <location filename="../preferences.cc" line="363"/>
         <source>Changing Language</source>
         <translation>Зьмена мовы</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="360"/>
+        <location filename="../preferences.cc" line="364"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Перастартуй праґраму, каб ужыць зьмененую мову.</translation>
     </message>
@@ -3399,87 +3409,87 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Памылка раскадаваньня артыкула</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="132"/>
+        <location filename="../ffmpegaudio.cc" line="134"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>Памылка avformat_alloc_context().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="139"/>
+        <location filename="../ffmpegaudio.cc" line="141"/>
         <source>av_malloc() failed.</source>
         <translation>Памылка av_malloc().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="148"/>
+        <location filename="../ffmpegaudio.cc" line="150"/>
         <source>avio_alloc_context() failed.</source>
         <translation>Памылка avio_alloc_context().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="165"/>
+        <location filename="../ffmpegaudio.cc" line="167"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation>Памылка avformat_open_input(): %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="172"/>
+        <location filename="../ffmpegaudio.cc" line="174"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation>Памылка avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="187"/>
+        <location filename="../ffmpegaudio.cc" line="189"/>
         <source>Could not find audio stream.</source>
         <translation>Не атрымался знайсьці аўдыёплынь.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="195"/>
+        <location filename="../ffmpegaudio.cc" line="197"/>
         <source>Codec [id: %1] not found.</source>
         <translation>GoldenDict не знайшоў кодэк [id: %1].</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="202"/>
+        <location filename="../ffmpegaudio.cc" line="204"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation>Памылка avcodec_open2(): %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="263"/>
+        <location filename="../ffmpegaudio.cc" line="265"/>
         <source>Cannot find usable audio output device.</source>
         <translation>Не атрымалася знайсьці прыладу вываду гуку.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="276"/>
+        <location filename="../ffmpegaudio.cc" line="278"/>
         <source>Unsupported sample format.</source>
         <translation>Непадтрымліваны гукавы фармат.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="286"/>
+        <location filename="../ffmpegaudio.cc" line="288"/>
         <source>ao_open_live() failed: </source>
         <translation>Памылка ao_open_live(): </translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="291"/>
+        <location filename="../ffmpegaudio.cc" line="293"/>
         <source>No driver.</source>
         <translation>Няма драйвэру.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="294"/>
+        <location filename="../ffmpegaudio.cc" line="296"/>
         <source>This driver is not a live output device.</source>
         <translation>Гэты драйвэр ня ёсьць пралада вываду.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="297"/>
+        <location filename="../ffmpegaudio.cc" line="299"/>
         <source>A valid option key has an invalid value.</source>
         <translation>Сапраўдны ключ парамэтраў мае несапраўднае значэньне.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="300"/>
+        <location filename="../ffmpegaudio.cc" line="302"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation>Немажліва адчыніць: прылада: %1, каналаў: %2, часьціня дыскрэтызацыі: %3, бітплынь: %4.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="307"/>
+        <location filename="../ffmpegaudio.cc" line="309"/>
         <source>Unknown error.</source>
         <translation>Няведамая памылка.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="332"/>
+        <location filename="../ffmpegaudio.cc" line="334"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>Памылка avcodec_alloc_frame().</translation>
     </message>
@@ -3505,18 +3515,18 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2147"/>
-        <location filename="../articleview.cc" line="2154"/>
+        <location filename="../articleview.cc" line="2166"/>
+        <location filename="../articleview.cc" line="2173"/>
         <source>ERROR: %1</source>
         <translation>АБМЫЛА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2147"/>
+        <location filename="../articleview.cc" line="2166"/>
         <source>Resource saving error: </source>
         <translation>Памылка захаваньня рэсурсу: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2154"/>
+        <location filename="../articleview.cc" line="2173"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
     </message>

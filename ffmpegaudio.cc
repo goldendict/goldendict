@@ -23,6 +23,7 @@ extern "C" {
 
 #include <QString>
 #include <QDataStream>
+#include <QDebug>
 
 #include <vector>
 
@@ -71,6 +72,11 @@ void AudioPlayer::playMemory( const void * ptr, int size )
   connect( thread, SIGNAL( finished() ), thread, SLOT( deleteLater() ) );
 
   thread->start();
+}
+
+void AudioPlayer::stop()
+{
+  emit cancelPlaying( false );
 }
 
 struct DecoderContext

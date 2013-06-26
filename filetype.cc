@@ -53,7 +53,6 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".voc" ) ||
     endsWith( s, ".ogg" ) ||
     endsWith( s, ".mp3" ) ||
-    endsWith( s, ".mp4" ) ||
     endsWith( s, ".m4a") ||
     endsWith( s, ".aac" ) ||
     endsWith( s, ".flac" ) ||
@@ -64,6 +63,28 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".wv" ) ||
     endsWith( s, ".ape" ) ||
     endsWith( s, ".spx" );
+}
+
+bool isNameOfVideo( string const & name )
+{
+  string s = simplifyString( name );
+
+  return
+    endsWith( s, ".mpg" ) ||
+    endsWith( s, ".mpeg" )||
+    endsWith( s, ".mpe" ) ||
+    endsWith( s, ".ogv" ) ||
+    endsWith( s, ".ogm" ) ||
+    endsWith( s, ".avi" ) ||
+    endsWith( s, ".m4v" ) ||
+    endsWith( s, ".mp4" ) ||
+    endsWith( s, ".mkv" ) ||
+    endsWith( s, ".wmv" ) ||
+    endsWith( s, ".sfw" ) ||
+    endsWith( s, ".flv" ) ||
+    endsWith( s, ".divx" ) ||
+    endsWith( s, ".3gp" ) ||
+    endsWith( s, ".mov" );
 }
 
 bool isNameOfPicture( string const & name )
