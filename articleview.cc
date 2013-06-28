@@ -414,12 +414,12 @@ QString ArticleView::getCurrentArticle()
     return QString();
 }
 
-void ArticleView::jumpToDictionary( QString const & id )
+void ArticleView::jumpToDictionary( QString const & id, bool force )
 {
   QString targetArticle = "gdfrom-" + id;
 
-  // jump only if neceessary
-  if ( targetArticle != getCurrentArticle() )
+  // jump only if neceessary, or when forced
+  if ( force || targetArticle != getCurrentArticle() )
   {
     setCurrentArticle( targetArticle, true );
   }

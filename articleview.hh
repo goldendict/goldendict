@@ -151,7 +151,7 @@ public:
 
   /// Jumps to the article specified by the dictionary id,
   /// by executing a javascript code.
-  void jumpToDictionary( QString const & );
+  void jumpToDictionary( QString const &, bool force );
 
   /// Returns all articles currently present in view, as a list of dictionary
   /// string ids.

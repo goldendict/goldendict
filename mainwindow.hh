@@ -323,6 +323,8 @@ private slots:
   void dictsListItemActivated( QListWidgetItem * );
   void dictsListSelectionChanged();
 
+  void jumpToDictionary( QListWidgetItem *, bool force = false );
+
   void showDictsPane( );
   void dictsPaneVisibilityChanged ( bool );
 
