@@ -3226,7 +3226,7 @@ ArticleView * MainWindow::getCurrentArticleView()
 {
   if ( QWidget * cw = ui.tabWidget->currentWidget() )
   {
-    return &( dynamic_cast< ArticleView & >( *( cw ) ) );
+    return dynamic_cast< ArticleView * >( cw );
   }
   return 0;
 }
