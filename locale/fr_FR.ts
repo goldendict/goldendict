@@ -238,12 +238,12 @@
     <message>
         <location filename="../articleview.cc" line="695"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="704"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidéo : %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="721"/>
@@ -3950,7 +3950,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>N&apos;importe quel programme externe. Une chaîne %GDWORD% sera remplacée par le mot recherché. Si aucune chaîne n&apos;est détectée, le mot sera soumis sur l&apos;entrée standard.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
