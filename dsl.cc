@@ -740,7 +740,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"m" ) )
-      result += "<div class=\"dsl_m\">" + processNodeChildren( node ) + "</span>";
+      result += "<div class=\"dsl_m\">" + processNodeChildren( node ) + "</div>";
   else
   if ( node.tagName.size() == 2 && node.tagName[ 0 ] == L'm' &&
        iswdigit( node.tagName[ 1 ] ) )
