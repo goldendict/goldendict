@@ -739,6 +739,9 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += "<div class=\"dsl_opt\" id=\"" + id + "\">" + processNodeChildren( node ) + "</div>";
   }
   else
+  if ( node.tagName == GD_NATIVE_TO_WS( L"m" ) )
+      result += "<div class=\"dsl_m\">" + processNodeChildren( node ) + "</span>";
+  else
   if ( node.tagName.size() == 2 && node.tagName[ 0 ] == L'm' &&
        iswdigit( node.tagName[ 1 ] ) )
     result += "<div class=\"dsl_" + Utf8::encode( node.tagName ) + "\">" + processNodeChildren( node ) + "</div>";

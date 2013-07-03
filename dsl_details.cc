@@ -224,9 +224,10 @@ ArticleDom::ArticleDom( wstring const & str ):
         
         if ( !isClosing )
         {
-          if ( name.size() == 2 && name[ 0 ] == L'm' && iswdigit( name[ 1 ] ) )
+          if ( name == GD_NATIVE_TO_WS( L"m" ) ||
+               ( name.size() == 2 && name[ 0 ] == L'm' && iswdigit( name[ 1 ] ) ) )
           {
-            // Opening an 'mX' tag closes any previous 'm' tag
+            // Opening an 'mX' or 'm' tag closes any previous 'm' tag
             closeTag( GD_NATIVE_TO_WS( L"m" ), stack, false );
           }
           

@@ -348,6 +348,11 @@ div.xdxf
   color: green;
 }
 
+.dsl_m, .dsl_m0
+{
+  padding-left: 0px;
+}
+
 .dsl_m1
 {
   padding-left: 9px;
