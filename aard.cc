@@ -474,7 +474,19 @@ void AardDictionary::loadArticle( quint32 address,
     else
       articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
 
-    articleText = "<div class=\"aard\">" + articleText + "</div>";
+    // See Issue #271: A mechanism to clean-up invalid HTML cards.
+    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</b></b></b></b></b></b></b></b>"
+                     "</i></i></i></i></i></i></i></i>"
+                     "</a></a></a></a></a></a></a></a>";
+
+    static QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
+
+    articleText = string( "<div class=\"aard\">" )
+        // protect against <div/> which breaks formatting
+        + QString::fromUtf8( ( articleText ).c_str() ).replace( self_closing_divs, "\\1></div>").toUtf8().data()
+        + cleaner + "</div>";
 }
 
 QString const& AardDictionary::getDescription()
