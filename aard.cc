@@ -370,6 +370,9 @@ string AardDictionary::convert( const string & in )
     text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*[\\\"'](w:|s:){0,1}([^#](?!ttp://)[^\\\"']*)(.)" ),
                   "<a href=\"bword:\\2\"");
 
+    static QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
+    text.replace( self_closing_divs, "\\1></div>" );
+
     // Fix outstanding elements
     text += "<br style=\"clear:both;\" />";
 
@@ -481,12 +484,7 @@ void AardDictionary::loadArticle( quint32 address,
                      "</i></i></i></i></i></i></i></i>"
                      "</a></a></a></a></a></a></a></a>";
 
-    static QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
-
-    articleText = string( "<div class=\"aard\">" )
-        // protect against <div/> which breaks formatting
-        + QString::fromUtf8( ( articleText ).c_str() ).replace( self_closing_divs, "\\1></div>").toUtf8().data()
-        + cleaner + "</div>";
+    articleText = "<div class=\"aard\">" + articleText + cleaner + "</div>";
 }
 
 QString const& AardDictionary::getDescription()
