@@ -210,12 +210,12 @@
     <message>
         <location filename="../articleview.cc" line="695"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="704"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="721"/>
@@ -534,12 +534,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Кушодани ҷузвдон</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Таҳрир кардани луғат</translation>
+        <translation>Таҳрир кардани луғат</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -555,7 +555,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Таҳрир кардани луғат тавассути фармон:
+%1</translation>
     </message>
 </context>
 <context>
@@ -580,7 +581,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Менюи васеъшуда бо ҳамаи луғатҳо...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -595,7 +596,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Кушодани ҷузвдони луғат</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -2552,7 +2553,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Кушодани ҷузвдони луғат</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3575"/>
@@ -2863,12 +2864,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Танзим кардани ин қимат барои рад кардани менюҳои марбути бузург.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳудуди луғатҳои менюи марбуд:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
@@ -3140,7 +3141,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Мақалаҳои зиёда аз ин андоза мухтасар мешаванд</translation>
     </message>
     <message>
         <source>Artiles longer than this size will be collapsed</source>
@@ -3953,7 +3954,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ягон барномаи берунӣ. Сатри %GDWORD% бо калимаи дархостшуда ҷойгузин мешавад. Агар чунин сатр вуҷуд надошта бошад, калима ба вуруди стандартӣ равона мешавад.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
