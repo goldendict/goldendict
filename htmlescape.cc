@@ -81,7 +81,31 @@ string preformat( string const & str )
     leading = false;
   }
 
-  return result;
+  QString html;
+  string::size_type pos = 0, next_pos = 0;
+  for( ; ; )
+  {
+    next_pos = result.find( "<br/>", pos );
+    QString line = QString::fromUtf8( result.data() + pos, next_pos == string::npos ? -1 : next_pos - pos );
+
+    if( !line.isEmpty() )
+    {
+      bool rtl = line.isRightToLeft();
+      if( rtl )
+        html += "<bdo dir=\"rtl\">";
+      html += line;
+      if( rtl )
+        html += "</bdo>";
+    }
+
+    if( next_pos == string::npos )
+      break;
+
+    html += "<br/>";
+    pos = next_pos + 5;
+  }
+
+  return html.toUtf8().data();
 }
 
 string escapeForJavaScript( string const & str )
