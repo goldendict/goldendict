@@ -629,6 +629,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.dictsList, SIGNAL( itemSelectionChanged() ),
            this, SLOT( dictsListSelectionChanged() ) );
 
+  connect( ui.dictsList, SIGNAL( itemDoubleClicked( QListWidgetItem * ) ),
+           this, SLOT( dictsListItemActivated( QListWidgetItem * ) ) );
+
   connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
            this, SLOT( mutedDictionariesChanged() ) );
 
@@ -2218,16 +2221,23 @@ void MainWindow::wordListSelectionChanged()
 
 void MainWindow::dictsListItemActivated( QListWidgetItem * item )
 {
-  QString id = item->data( Qt::UserRole ).toString();
-  getCurrentArticleView()->jumpToDictionary( id );
+  jumpToDictionary( item, true );
 }
 
 void MainWindow::dictsListSelectionChanged()
 {
   QList< QListWidgetItem * > selected = ui.dictsList->selectedItems();
-
   if ( selected.size() )
-    dictsListItemActivated( selected.front() );
+    jumpToDictionary( selected.front() );
+}
+
+void MainWindow::jumpToDictionary( QListWidgetItem * item, bool force )
+{
+  ArticleView * view = getCurrentArticleView();
+  if ( view )
+  {
+    view->jumpToDictionary( item->data( Qt::UserRole ).toString(), force );
+  }
 }
 
 void MainWindow::openLinkInNewTab( QUrl const & url,
@@ -3226,7 +3236,7 @@ ArticleView * MainWindow::getCurrentArticleView()
 {
   if ( QWidget * cw = ui.tabWidget->currentWidget() )
   {
-    return &( dynamic_cast< ArticleView & >( *( cw ) ) );
+    return dynamic_cast< ArticleView * >( cw );
   }
   return 0;
 }

@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="22"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebaseerd op Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -44,12 +44,12 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel uitvouwen</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel samenvouwen</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="180"/>
@@ -110,7 +110,7 @@
     <message>
         <location filename="../article_maker.cc" line="590"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel uitvouwen</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="593"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../article_maker.cc" line="598"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel samenvouwen</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="615"/>
@@ -158,7 +158,7 @@
     <message>
         <location filename="../articleview.cc" line="156"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspecteren</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="673"/>
@@ -183,12 +183,12 @@
     <message>
         <location filename="../articleview.cc" line="695"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="704"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Video: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="721"/>
@@ -537,12 +537,12 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Map openen</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Woordenboek bewerken</translation>
+        <translation>Woordenboek bewerken</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -558,7 +558,8 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Woordenboek bewerken via opdracht:
+%1</translation>
     </message>
 </context>
 <context>
@@ -583,7 +584,7 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu uitbreiden met alle woordenboeken...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -598,7 +599,7 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Woordenboekmap openen</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -2080,17 +2081,17 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2970"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel, compleet (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2971"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel, alleen HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3026"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel opslaan...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3075"/>
@@ -2151,7 +2152,7 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Woordenboekmap openen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3575"/>
@@ -2552,12 +2553,12 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Woordenboekbestand is gemanipuleerd of beschadigd</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan artikel niet laden van %1, reden: %2</translation>
     </message>
 </context>
 <context>
@@ -2917,12 +2918,12 @@ hoofdvenster verborgen.</translation>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas deze waarde aan om zeer lange contextmenu&apos;s te voorkomen.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Woordenboeken in contextmenu beperken tot:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="394"/>
@@ -3076,22 +3077,22 @@ kunnen de toetsen ook kort erna ingedrukt worden.</translation>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer deze optie om lange artikelen automatisch samen te vouwen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikelen samenvouwen met meer dan</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Langere artikelen automatisch samenvouwen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>tekens</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3621,17 +3622,17 @@ gevraagd een downloadpagina te openen.</translation>
         <location filename="../articleview.cc" line="2166"/>
         <location filename="../articleview.cc" line="2173"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">FOUT: %1</translation>
+        <translation>FOUT: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2166"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Fout bij opslaan bron:</translation>
+        <translation>Fout bij opslaan bron:</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2173"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Kan de bron waarnaar wordt verwezen niet downloaden.</translation>
+        <translation>Kan de bron waarnaar wordt verwezen niet downloaden.</translation>
     </message>
 </context>
 <context>
@@ -3974,7 +3975,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle externe programma&apos;s. De tekenreeks %GDWORD% wordt automatisch vervangen door het zoekwoord.
+Als de tekenreeks niet aanwezig is, dan wordt het zoekwoord als standaardinvoer doorgegeven.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
