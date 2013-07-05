@@ -66,7 +66,11 @@ win32 {
 
     isEmpty(HUNSPELL_LIB) {
       greaterThan(QT_MAJOR_VERSION, 4) {
-        LIBS += -lhunspell-1.3-sjlj
+        lessThan(QT_MINOR_VERSION, 1) {
+          LIBS += -lhunspell-1.3-sjlj
+        } else {
+          LIBS += -lhunspell-1.3-dw2
+        }
       } else {
         LIBS += -lhunspell-1.3.2
       }
