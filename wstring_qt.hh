@@ -14,6 +14,7 @@ namespace gd
 {
   QString toQString( wstring const & );
   wstring toWString( QString const & );
+  wstring normalize( wstring const & );
 }
 
 #endif

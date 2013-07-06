@@ -33,4 +33,10 @@ namespace gd
 
     return wstring( ( const wchar * ) v.constData(), v.size() );
   }
+
+  wstring normalize( const wstring & str )
+  {
+    return gd::toWString( gd::toQString( str ).normalized( QString::NormalizationForm_C ) );
+  }
+
 }

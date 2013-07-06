@@ -668,7 +668,7 @@ void DslDictionary::loadArticle( uint32_t address,
 string DslDictionary::dslToHtml( wstring const & str )
 {
  // Normalize the string
-  wstring normalizedStr = gd::toWString( gd::toQString( str ).normalized( QString::NormalizationForm_C ) );
+  wstring normalizedStr = gd::normalize( str );
 
   ArticleDom dom( normalizedStr );
 

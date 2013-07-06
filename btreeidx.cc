@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "dprintf.hh"
+#include "wstring_qt.hh"
 
 //#define __BTREE_USE_LZO
 // LZO mode is experimental and unsupported. Tests didn't show any substantial
@@ -710,13 +711,13 @@ vector< WordArticleLink > BtreeIndex::readChain( char const * & ptr )
 void BtreeIndex::antialias( wstring const & str,
                             vector< WordArticleLink > & chain )
 {
-  wstring caseFolded = Folding::applySimpleCaseOnly( str );
+  wstring caseFolded = Folding::applySimpleCaseOnly( gd::normalize( str ) );
 
   for( unsigned x = chain.size(); x--; )
   {
     // If after applying case folding to each word they wouldn't match, we
     // drop the entry.
-    if ( Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) ) !=
+    if ( Folding::applySimpleCaseOnly( gd::normalize( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) ) ) !=
          caseFolded )
       chain.erase( chain.begin() + x );
     else
