@@ -242,7 +242,8 @@ HEADERS += folding.hh \
     mdx.hh \
     voiceengines.hh \
     ffmpegaudio.hh \
-    articleinspector.hh
+    articleinspector.hh \
+    delegate.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -350,7 +351,8 @@ SOURCES += folding.cc \
     mdx.cc \
     voiceengines.cc \
     ffmpegaudio.cc \
-    articleinspector.cc
+    articleinspector.cc \
+    delegate.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui
