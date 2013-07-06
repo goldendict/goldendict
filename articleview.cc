@@ -1256,8 +1256,15 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     // We don't prompt for selections larger or equal to 60 chars, since
     // it ruins the menu and it's hardly a single word anyway.
 
+    QString text = ui.definition->selectedText();
+    if( text.isRightToLeft() )
+    {
+      text.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
+      text.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
+    }
+
     lookupSelection = new QAction( tr( "&Look up \"%1\"" ).
-                                   arg( ui.definition->selectedText() ),
+                                   arg( text ),
                                    &menu );
     menu.addAction( lookupSelection );
 
@@ -1265,18 +1272,18 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     {
       lookupSelectionNewTab = new QAction( QIcon( ":/icons/addtab.png" ),
                                            tr( "Look up \"%1\" in &New Tab" ).
-                                           arg( ui.definition->selectedText() ),
+                                           arg( text ),
                                            &menu );
       menu.addAction( lookupSelectionNewTab );
 
       sendWordToInputLineAction = new QAction( tr( "Send \"%1\" to input line" ).
-                                               arg( ui.definition->selectedText() ),
+                                               arg( text ),
                                                &menu );
       menu.addAction( sendWordToInputLineAction );
     }
 
     addWordToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
-                                          arg( ui.definition->selectedText() ),
+                                          arg( text ),
                                           &menu );
     menu.addAction( addWordToHistoryAction );
 
