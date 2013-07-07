@@ -1707,6 +1707,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   Config::Class newCfg = cfg;
   EditDictionaries dicts( this, newCfg, dictionaries, groupInstances, dictNetMgr );
 
+  connect( &dicts, SIGNAL( showDictionaryInfo( QString const & ) ),
+           this, SLOT( showDictionaryInfo( QString const & ) ) );
+
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );
 
