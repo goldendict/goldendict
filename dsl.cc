@@ -73,7 +73,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 18 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 19 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2
 };
 
@@ -519,6 +519,10 @@ void DslDictionary::loadArticle( uint32_t address,
             DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
             articleBody, articleSize );
         free( articleBody );
+
+        // Strip DSL comments
+        bool b = false;
+        stripComments( articleData, b );
       }
       catch( ... )
       {
@@ -1637,7 +1641,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             for( ; ; )
             {
               // Skip any whitespace
-              if ( !abrvScanner.readNextLine( curString, curOffset ) )
+              if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) )
                 break;
               if ( curString.empty() || isDslWs( curString[ 0 ] ) )
                 continue;
@@ -1656,7 +1660,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 expandOptionalParts( curString, &keys );
 
-                if ( !abrvScanner.readNextLine( curString, curOffset ) || curString.empty() )
+                if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) || curString.empty() )
                 {
                   FDPRINTF( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
                   eof = true;
@@ -1725,7 +1729,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           // Find the main headword
 
-          if ( !hasString && !scanner.readNextLine( curString, curOffset ) )
+          if ( !hasString && !scanner.readNextLineWithoutComments( curString, curOffset ) )
             break; // Clean end of file
 
           hasString = false;
@@ -1766,7 +1770,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           for( ; ; )
           {
-            if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
+            if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) ) )
             {
               FDPRINTF( stderr, "Warning: premature end of file %s\n", i->c_str() );
               break;
@@ -1821,7 +1825,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           for( ; ; )
           {
 
-            if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) )
+            if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) )
                  || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )

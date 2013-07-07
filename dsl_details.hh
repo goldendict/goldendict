@@ -145,6 +145,9 @@ public:
   /// with #).
   bool readNextLine( wstring &, size_t & offset ) throw( Ex, Iconv::Ex );
 
+  /// Similar readNextLine but strip all DSL comments {{...}}
+  bool readNextLineWithoutComments( wstring &, size_t & offset ) throw( Ex, Iconv::Ex );
+
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
   { return linesRead; }
@@ -175,6 +178,9 @@ void unescapeDsl( wstring & str );
 // Normalizes the headword. Currently turns any sequences of consecutive spaces
 // into a single space.
 void normalizeHeadword( wstring & );
+
+/// Strip DSL {{...}} comments
+void stripComments( wstring &, bool & );
 
 inline size_t DslScanner::distanceToBytes( size_t x ) const
 {
