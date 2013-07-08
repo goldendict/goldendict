@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.0">
 <context>
     <name>About</name>
     <message>
@@ -211,12 +209,12 @@
     <message>
         <location filename="../articleview.cc" line="695"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="704"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vídeo: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="721"/>
@@ -511,12 +509,12 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir pasta</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Editar dicionário</translation>
+        <translation>Editar dicionário</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -532,7 +530,8 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar o dicionário via comando:
+%1</translation>
     </message>
 </context>
 <context>
@@ -553,7 +552,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Estender menu com todos os dicionários...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -568,7 +567,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir pasta de dicionário</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -2473,7 +2472,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir pasta de dicionário</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3575"/>
@@ -2791,12 +2790,12 @@ pesquisa. Com isto, porém, a janela principal será ocultada.</translation>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar este valor para evitar menus de contexto enormes.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite de dicionários no menu de contexto:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
@@ -2961,7 +2960,7 @@ teclas de atalho podem ser premidas também pouco depois da seleção da palavra
     <message>
         <location filename="../preferences.ui" line="588"/>
         <source>To avoid false positives, the keys are only monitored
-after the selection&apos;s done for a limited amount of
+after the selection's done for a limited amount of
 seconds, which is specified here.</source>
         <translation>Para evitar acionamentos de atalhos de teclado falsos, o status das
 teclas é verificado só depois de feita a seleção de palavra/expressão
@@ -3009,7 +3008,7 @@ em qualquer situação ou contexto, desde que o GoldenDict esteja em execução.
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -3065,11 +3064,11 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Artigos mais longos que esse tamanho vai ser recolhido</translation>
     </message>
     <message>
         <source>Artiles longer than this size will be collapsed</source>
-        <translation type="obsolete">Artiles maiores do que esse tamanho vai ser recolhido</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
@@ -3762,7 +3761,7 @@ dos grupos apropriados para usá-los.</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="obsolete">Qualquer programa externo. O demarcador %GDWORD% será substituído pela palavra da consulta. A palavra também será especificada no campo padrão.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -3809,7 +3808,7 @@ obter sua própria chave.</translation>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os programas externos. Um texto %GDWORD% vai ser substituído com a palavra consultada. Se nenhum texto não é apresentado, a palavra vai ser alimentada com a entrada padrão.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
