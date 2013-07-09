@@ -27,10 +27,11 @@ First, clone this repository, e.g.:
 
     git clone git://github.com/goldendict/goldendict.git
 
-And then invoke `qmake` and `make`:
+And then invoke `qmake-qt4` and `make`:
 
-    cd goldendict && qmake && make
+    cd goldendict && qmake-qt4 && make
 
+In case when qmake-qt4 does not exist, try using `qmake` but make sure it is indeed from the Qt 4 installation.
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 
 ### Building without internal audio player
