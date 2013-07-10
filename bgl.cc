@@ -768,13 +768,13 @@ void BglArticleRequest::run()
                    "</i></i></i></i></i></i></i></i>";
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
-      if (dict.idxHeader.langFrom == hebrew) // Hebrew support - format as RTL
+      if (dict.isFromLanguageRTL() ) // RTL support
         result += "<h3 style=\"text-align:right;direction:rtl\">";
       else
         result += "<h3>";
       result += postfixToSuperscript( i->second.first );
       result += "</h3>";
-      if ( dict.idxHeader.langTo == hebrew )
+      if ( dict.isToLanguageRTL() )
         result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
       else
         result += "<div>" + i->second.second + "</div>";
@@ -784,13 +784,13 @@ void BglArticleRequest::run()
  
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
-      if (dict.idxHeader.langFrom == hebrew) // Hebrew support - format as RTL
+      if (dict.isFromLanguageRTL() ) // RTL support
         result += "<h3 style=\"text-align:right;direction:rtl\">";
       else
         result += "<h3>";
       result += postfixToSuperscript( i->second.first );
       result += "</h3>";
-      if ( dict.idxHeader.langTo == hebrew )
+      if ( dict.isToLanguageRTL() )
         result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
       else
         result += "<div>" + i->second.second + "</div>";

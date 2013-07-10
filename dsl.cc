@@ -1248,7 +1248,10 @@ void DslArticleRequest::run()
     string articleText, articleAfter;
 
     articleText += "<span class=\"dsl_article\">";
-    articleText += "<div class=\"dsl_headwords\">";
+    articleText += "<div class=\"dsl_headwords\"";
+    if( dict.isFromLanguageRTL() )
+      articleText += " dir=\"rtl\"";
+    articleText += ">";
 
     if( displayedHeadword.size() == 1 && displayedHeadword[0] == '<' )  // Fix special case - "<" header
         articleText += "<";                                             // dslToHtml can't handle it correctly.
@@ -1261,7 +1264,11 @@ void DslArticleRequest::run()
 
     expandTildes( articleBody, tildeValue );
 
-    articleAfter += "<div class=\"dsl_definition\">";
+    articleAfter += "<div class=\"dsl_definition\"";
+    if( dict.isToLanguageRTL() )
+      articleAfter += " dir=\"rtl\"";
+    articleAfter += ">";
+
     articleAfter += dict.dslToHtml( articleBody );
     articleAfter += "</div>";
     articleAfter += "</span>";

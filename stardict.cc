@@ -821,20 +821,28 @@ void StardictArticleRequest::run()
 
     for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
     {
-        result += "<h3>";
+        result += dict.isFromLanguageRTL() ? "<h3 dir=\"rtl\">" : "<h3>";
         result += i->second.first;
         result += "</h3>";
+        if( dict.isToLanguageRTL() )
+          result += "<span dir=\"rtl\">";
         result += i->second.second;
         result += cleaner;
+        if( dict.isToLanguageRTL() )
+          result += "</span>";
     }
 
     for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
     {
-        result += "<h3>";
+        result += dict.isFromLanguageRTL() ? "<h3 dir=\"rtl\">" : "<h3>";
         result += i->second.first;
         result += "</h3>";
+        if( dict.isToLanguageRTL() )
+          result += "<span dir=\"rtl\">";
         result += i->second.second;
         result += cleaner;
+        if( dict.isToLanguageRTL() )
+          result += "</span>";
     }
     result = QString::fromUtf8( result.c_str() )
              .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),

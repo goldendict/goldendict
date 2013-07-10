@@ -110,7 +110,12 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
   string in_data;
   if( type == XDXF )
-      in_data = "<div class=\"xdxf\">";
+  {
+      in_data = "<div class=\"xdxf\"";
+      if( dictPtr->isToLanguageRTL() )
+        in_data += " dir=\"rtl\"";
+      in_data += ">";
+  }
   else
       in_data = "<div class=\"sdct_x\">";
   in_data += inConverted + "</div>";
@@ -161,6 +166,8 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     {
         el.setTagName( "div" );
         el.setAttribute( "class", "xdxf_headwords" );
+        if( dictPtr->isFromLanguageRTL() != dictPtr->isToLanguageRTL() )
+          el.setAttribute( "dir", dictPtr->isFromLanguageRTL() ? "rtl" : "ltr" );
     }
   }
   

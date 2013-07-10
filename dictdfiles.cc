@@ -291,13 +291,32 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
         static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
 
-        articleText = string( "<div class=\"dictd_article\">" ) +
-            QString::fromUtf8( Html::preformat( articleBody ).c_str() )
+        articleText = string( "<div class=\"dictd_article\"" );
+        if( isToLanguageRTL() )
+          articleText += " dir=\"rtl\"";
+        articleText += ">";
+
+        string convertedText = Html::preformat( articleBody );
+        free( articleBody );
+        if( fromLangTextDirection != toLangTextDirection )
+        {
+          string::size_type n = convertedText.find( "<br/>" );
+          if( n != string::npos )
+          {
+            convertedText.erase( n, 5 );
+            convertedText.insert( n, "</div>" );
+            string s( "<div dir=\"" );
+            s += isFromLanguageRTL() ? "rtl" : "ltr";
+            s += "\">";
+            convertedText.insert( 0, s );
+          }
+        }
+
+        articleText += QString::fromUtf8( convertedText.c_str() )
               .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")
               .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>")
-            .toUtf8().data() +
-            "</div>";
-        free( articleBody );
+            .toUtf8().data();
+        articleText += "</div>";
       }
 
       // Ok. Now, does it go to main articles, or to alternate ones? We list

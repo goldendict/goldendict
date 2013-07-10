@@ -258,6 +258,7 @@ protected:
   QString dictionaryDescription;
   QIcon dictionaryIcon, dictionaryNativeIcon;
   bool dictionaryIconLoaded;
+  int fromLangTextDirection, toLangTextDirection;
 
   // Load user icon if it exist
   // By default set icon to empty
@@ -269,6 +270,9 @@ protected:
 
   /// Make css content usable only for articles from this dictionary
   void isolateCSS( QString & css, QString const & wrapperSelector = QString() );
+
+  /// Init text direction for input and output languages
+  void initTextDirections();
 
 public:
 
@@ -388,6 +392,10 @@ public:
 
   // Return dictionary main file name
   virtual QString getMainFilename();
+
+  /// Check text direction
+  bool isFromLanguageRTL();
+  bool isToLanguageRTL();
 
   /// Return true if dictionary is local dictionary
   virtual bool isLocalDictionary()
