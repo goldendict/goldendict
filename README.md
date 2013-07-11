@@ -8,7 +8,7 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 
 ### External Deps
 
-* Make, GCC
+* Make, GCC, Git
 * Qt framework 4.7.* or 4.8.*
 * Qt Creator IDE is recommended for development
 * Various libraries on Linux (png, zlib, etc)
@@ -16,9 +16,9 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 
 ### Installing External Deps on Ubuntu Linux
 
-    sudo apt-get install pkg-config build-essential qt4-qmake \
+    sudo apt-get install git pkg-config build-essential qt4-qmake \
          libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
-         qt4-qmake libqt4-dev libxtst-dev liblzo2-dev libbz2-dev \
+         qt4-qmake libqt4-dev libqtwebkit-dev libxtst-dev liblzo2-dev libbz2-dev \
          libao-dev libavutil-dev libavformat-dev
 
 ## How to build
