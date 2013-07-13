@@ -296,21 +296,8 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
           articleText += " dir=\"rtl\"";
         articleText += ">";
 
-        string convertedText = Html::preformat( articleBody );
+        string convertedText = Html::preformat( articleBody, isToLanguageRTL() );
         free( articleBody );
-        if( fromLangTextDirection != toLangTextDirection )
-        {
-          string::size_type n = convertedText.find( "<br/>" );
-          if( n != string::npos )
-          {
-            convertedText.erase( n, 5 );
-            convertedText.insert( n, "</div>" );
-            string s( "<div dir=\"" );
-            s += isFromLanguageRTL() ? "rtl" : "ltr";
-            s += "\">";
-            convertedText.insert( 0, s );
-          }
-        }
 
         articleText += QString::fromUtf8( convertedText.c_str() )
               .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")

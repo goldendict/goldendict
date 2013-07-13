@@ -312,12 +312,14 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
                .toUtf8().data() );
     }
     case 'm': // Pure meaning, usually means preformatted text
-      return "<div class=\"sdct_m\">" + Html::preformat( string( resource, size ) ) + "</div>";
+      return "<div class=\"sdct_m\">" + Html::preformat( string( resource, size ), isToLanguageRTL() ) + "</div>";
     case 'l': // Same as 'm', but not in utf8, instead in current locale's
               // encoding.
               // We just use Qt here, it should know better about system's
               // locale.
-      return "<div class=\"sdct_l\">" + Html::preformat( QString::fromLocal8Bit( resource, size ).toUtf8().data() ) + "</div>";
+      return "<div class=\"sdct_l\">" + Html::preformat( QString::fromLocal8Bit( resource, size ).toUtf8().data(),
+                                                         isToLanguageRTL() )
+                                      + "</div>";
     case 'g': // Pango markup.
       return "<div class=\"sdct_g\">" + string( resource, size ) + "</div>";
     case 't': // Transcription
