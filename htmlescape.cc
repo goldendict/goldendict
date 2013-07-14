@@ -44,7 +44,7 @@ string escape( string const & str )
 static void storeLineInDiv( string & result, string const & line, bool baseRightToLeft )
 {
   result += "<div";
-  if( QString::fromUtf8( line.c_str(), line.size() ).isRightToLeft() != baseRightToLeft )
+  if( unescape( QString::fromUtf8( line.c_str(), line.size() ) ).isRightToLeft() != baseRightToLeft )
   {
     result += " dir=\"";
     result += baseRightToLeft ? "ltr\"" : "rtl\"";
