@@ -23,7 +23,6 @@
 #include <QImage>
 #include <QPainter>
 #include <QRegExp>
-#include <QLocale>
 
 namespace Dictionary {
 
@@ -120,8 +119,6 @@ vector< char > & DataRequest::getFullData() throw( exRequestUnfinished )
 
 Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
   id( id_ ), dictionaryFiles( dictionaryFiles_ ), dictionaryIconLoaded( false )
-, fromLangTextDirection( -1 )
-, toLangTextDirection( -1 )
 {
 }
 
@@ -369,40 +366,6 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
     ++currentPos;
   }
   css = newCSS;
-}
-
-void Class::initTextDirections()
-{
-  quint32 fromLanguage = getLangFrom();
-  if( fromLanguage == 0 )
-    fromLangTextDirection = Qt::LeftToRight;
-  else
-    fromLangTextDirection = QLocale( LangCoder::intToCode2( fromLanguage ) ).textDirection();
-
-  quint32 toLanguage = getLangTo();
-  if( toLanguage == fromLanguage )
-    toLangTextDirection = fromLangTextDirection;
-  else
-  {
-    if( toLanguage == 0 )
-      toLangTextDirection = Qt::LeftToRight;
-    else
-      toLangTextDirection = QLocale( LangCoder::intToCode2( toLanguage ) ).textDirection();
-  }
-}
-
-bool Class::isFromLanguageRTL()
-{
-  if( fromLangTextDirection < 0 )
-    initTextDirections();
-  return( fromLangTextDirection == Qt::RightToLeft );
-}
-
-bool Class::isToLanguageRTL()
-{
-  if( toLangTextDirection < 0 )
-    initTextDirections();
-  return( toLangTextDirection == Qt::RightToLeft );
 }
 
 string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
