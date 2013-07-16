@@ -176,9 +176,16 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
 {
   string result( "<div class=\"gdnotfound\"><p>" );
 
+  QString str( word );
+  if( str.isRightToLeft() )
+  {
+    str.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
+    str.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
+  }
+
   if ( word.size() )
     result += tr( "No translation for <b>%1</b> was found in group <b>%2</b>." ).
-              arg( QString::fromUtf8( Html::escape( word.toUtf8().data() ).c_str() ) ).
+              arg( QString::fromUtf8( Html::escape( str.toUtf8().data() ).c_str() ) ).
               arg( QString::fromUtf8( Html::escape( group.toUtf8().data() ).c_str() ) ).
                 toUtf8().data();
   else
@@ -811,7 +818,10 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
       footer += "<div class=\"gdstemmedsuggestion\"><span class=\"gdstemmedsuggestion_head\">" +
         Html::escape( tr( "Individual words: " ).toUtf8().data() ) +
-        "</span><span class=\"gdstemmedsuggestion_body\">";
+        "</span><span class=\"gdstemmedsuggestion_body\"";
+      if( splittedWords.first[ 0 ].isRightToLeft() )
+        footer += " dir=\"rtl\"";
+      footer += ">";
 
       footer += escapeSpacing( splittedWords.second[ 0 ] );
 
