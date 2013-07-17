@@ -305,7 +305,7 @@ string SdictDictionary::convert( string const & in )
         b = false;
       }
 
-      if( !result.midRef( n, next - n ).contains( '<' ) )
+      if( !result.mid( n, next - n ).contains( '<' ) )
       {
         if( Html::unescape( result.mid( n, next - n ) ).isRightToLeft() != isToLanguageRTL() )
         {
