@@ -190,7 +190,11 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
-  Ffmpeg::AudioPlayer::instance().stop();
+
+#ifndef DISABLE_INTERNAL_PLAYER
+  if ( cfg.preferences.useInternalPlayer )
+    Ffmpeg::AudioPlayer::instance().stop();
+#endif
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
@@ -198,8 +202,11 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
                                   Contexts const & contexts )
 {
 
+#ifndef DISABLE_INTERNAL_PLAYER
   // first, let's stop the player
-  Ffmpeg::AudioPlayer::instance().stop();
+  if ( cfg.preferences.useInternalPlayer )
+    Ffmpeg::AudioPlayer::instance().stop();
+#endif
 
   QUrl req;
 
