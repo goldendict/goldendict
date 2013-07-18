@@ -113,7 +113,9 @@ int main( int argc, char ** argv )
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.org/" );
+#if QT_VERSION >= 0x040600
   app.setStyle(new GdAppStyle);
+#endif
 
   #ifndef Q_OS_MAC
     app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );

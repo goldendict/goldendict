@@ -1,5 +1,7 @@
 #include "articleinspector.hh"
 
+#if QT_VERSION >= 0x040600
+
 #include <algorithm>
 
 using std::list;
@@ -49,3 +51,5 @@ void ArticleInspector::showEvent( QShowEvent * event )
 
   QWebInspector::showEvent( event );
 }
+
+#endif // QT_VERSION

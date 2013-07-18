@@ -19,8 +19,11 @@
 #include "dprintf.hh"
 #include "ffmpegaudio.hh"
 #include <QDebug>
-#include <QWebElement>
 #include <QCryptographicHash>
+
+#if QT_VERSION >= 0x040600
+#include <QWebElement>
+#endif
 
 #include <assert.h>
 
@@ -1236,6 +1239,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
+#if QT_VERSION >= 0x040600
   QWebElement el = r.element();
   QUrl imageUrl;
   if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
@@ -1255,6 +1259,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
     menu.addAction( saveSoundAction );
   }
+#endif
 
   QString selectedText = ui.definition->selectedText();
 
@@ -1432,6 +1437,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if( result == saveImageAction || result == saveSoundAction )
     {
+#if QT_VERSION >= 0x040600
       QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
       QString savePath;
       QString fileName;
@@ -1480,6 +1486,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
         emit storeResourceSavePath( QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() ) );
         saveResource( url, ui.definition->url(), fileName );
       }
+#endif
     }
     else
     {
@@ -1777,8 +1784,9 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 
     if ( ui.searchCaseSensitive->isChecked() )
       f |= QWebPage::FindCaseSensitively;
-
+#if QT_VERSION >= 0x040600
     f |= QWebPage::HighlightAllOccurrences;
+#endif
 
     ui.definition->findText( "", f );
 

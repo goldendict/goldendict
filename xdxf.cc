@@ -678,12 +678,27 @@ QString readXhtmlData( QXmlStreamReader & stream )
   return result;
 }
 
+namespace {
+
+/// Deal with Qt 4.5 incompatibility
+QString readElementText( QXmlStreamReader & stream )
+{
+#if QT_VERSION >= 0x040600
+    return stream.readElementText( QXmlStreamReader::SkipChildElements );
+#else
+    return stream.readElementText();
+#endif
+}
+
+}
+
+
 void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
 {
   // todo implement support for tag <srt>, that overrides the article sorting order 
   if ( stream.name() == "k" )
   {
-    words.push_back( stream.readElementText( QXmlStreamReader::SkipChildElements ) );
+    words.push_back( readElementText( stream ) );
     return;
   }
 
@@ -1156,12 +1171,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                           stream.readNext();
                           if ( stream.isStartElement() && stream.name() == "abbr_k" )
                           {
-                            s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            s = readElementText( stream );
                             keys.push_back( gd::toWString( s ) );
                           }
                           else if ( stream.isStartElement() && stream.name() == "abbr_v" )
                           {
-                            s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            s =  readElementText( stream );
                               value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
                               for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
                               {
@@ -1180,12 +1195,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                           stream.readNext();
                           if ( stream.isStartElement() && stream.name() == "k" )
                           {
-                            s = stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            s = readElementText( stream );
                             keys.push_back( gd::toWString( s ) );
                           }
                           else if ( stream.isStartElement() && stream.name() == "v" )
                           {
-                            s =  stream.readElementText( QXmlStreamReader::SkipChildElements );
+                            s =  readElementText( stream );
                               value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
                               for( list< wstring >::iterator i = keys.begin(); i != keys.end(); ++i )
                               {

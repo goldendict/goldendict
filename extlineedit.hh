@@ -6,7 +6,6 @@
 
 #include <QLineEdit>
 #include <QAbstractButton>
-#include <QPropertyAnimation>
 
 class IconButton: public QAbstractButton
 {
