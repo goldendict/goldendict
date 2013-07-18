@@ -98,15 +98,9 @@ unix:!mac {
     icons.path = $$PREFIX/share/pixmaps
     icons.files = redist/icons/*.*
     INSTALLS += icons
-    icons2.path = $$PREFIX/share/app-install/icons
-    icons2.files = redist/icons/*.*
-    INSTALLS += icons2
     desktops.path = $$PREFIX/share/applications
     desktops.files = redist/*.desktop
     INSTALLS += desktops
-    desktops2.path = $$PREFIX/share/app-install/desktop
-    desktops2.files = redist/*.desktop
-    INSTALLS += desktops2
 }
 mac {
     TARGET = GoldenDict
