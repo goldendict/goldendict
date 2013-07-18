@@ -9,7 +9,7 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 ### External Deps
 
 * Make, GCC, Git
-* Qt framework 4.7.* or 4.8.*
+* Qt framework. Minumal required version is 4.5. But Qt 4.7 or 4.8 is recommended.
 * Qt Creator IDE is recommended for development
 * Various libraries on Linux (png, zlib, etc)
 * On Mac and Windows all the libraries are already included in the repository
