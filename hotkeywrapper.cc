@@ -562,16 +562,76 @@ bool HotkeyWrapper::isKeyGrabbed( quint32 keyCode, quint32 modifiers ) const
   return i != grabbedKeys.end();
 }
 
+namespace {
+
+typedef int (*X11ErrorHandler) ( Display * display, XErrorEvent * event );
+
+class X11GrabUngrabErrorHandler {
+public:
+  static bool error;
+
+  static int grab_ungrab_error_handler( Display *, XErrorEvent * event )
+  {
+    qDebug() << "grab_ungrab_error_handler is invoked";
+    switch ( event->error_code )
+    {
+      case BadAccess:
+      case BadValue:
+      case BadWindow:
+        if ( event->request_code == 33 /* X_GrabKey */ ||
+             event->request_code == 34 /* X_UngrabKey */)
+        {
+          error = true;
+        }
+    }
+    return 0;
+  }
+
+  X11GrabUngrabErrorHandler()
+  {
+    error = false;
+    previousErrorHandler_ = XSetErrorHandler( grab_ungrab_error_handler );
+  }
+
+  ~X11GrabUngrabErrorHandler()
+  {
+    XFlush( QX11Info::display() );
+    (void) XSetErrorHandler( previousErrorHandler_ );
+  }
+
+  bool isError() const
+  {
+    XFlush( QX11Info::display() );
+    return error;
+  }
+
+private:
+  X11ErrorHandler previousErrorHandler_;
+};
+
+bool X11GrabUngrabErrorHandler::error = false;
+
+} // anonymous namespace
+
+
 HotkeyWrapper::GrabbedKeys::iterator HotkeyWrapper::grabKey( quint32 keyCode,
                                                              quint32 modifiers )
 {
   std::pair< GrabbedKeys::iterator, bool > result =
     grabbedKeys.insert( std::make_pair( keyCode, modifiers ) );
 
+
   if ( result.second )
   {
+    X11GrabUngrabErrorHandler errorHandler;
     XGrabKey( QX11Info::display(), keyCode, modifiers, QX11Info::appRootWindow(),
               True, GrabModeAsync, GrabModeAsync );
+
+    if ( errorHandler.isError() )
+    {
+      qDebug() << "Warning: Possible hotkeys conflict. Check your hotkeys options.";
+      ungrabKey( result.first );
+    }
   }
 
   return result.first;
@@ -579,9 +639,15 @@ HotkeyWrapper::GrabbedKeys::iterator HotkeyWrapper::grabKey( quint32 keyCode,
 
 void HotkeyWrapper::ungrabKey( GrabbedKeys::iterator i )
 {
+  X11GrabUngrabErrorHandler errorHandler;
   XUngrabKey( QX11Info::display(), i->first, i->second, QX11Info::appRootWindow() );
 
   grabbedKeys.erase( i );
+
+  if ( errorHandler.isError() )
+  {
+    qDebug() << "Warning: Cannot ungrab the hotkey";
+  }
 }
 
 quint32 HotkeyWrapper::nativeKey(int key)
