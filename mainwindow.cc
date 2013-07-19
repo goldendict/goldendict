@@ -515,7 +515,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   if ( cfg.preferences.enableTrayIcon )
   {
-    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon.png" ), this );
+    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon_old.png" ), this );
     trayIcon->setToolTip( tr( "Loading..." ) );
     trayIcon->show();
   }
@@ -965,7 +965,7 @@ void MainWindow::updateTrayIcon()
   if ( !trayIcon && cfg.preferences.enableTrayIcon )
   {
     // Need to show it
-    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon.png" ), this );
+    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon_old.png" ), this );
     trayIcon->setContextMenu( &trayIconMenu );
     trayIcon->show();
 
@@ -986,7 +986,7 @@ void MainWindow::updateTrayIcon()
     trayIcon->setIcon( QIcon(
       enableScanPopup->isChecked() ?
         ":/icons/programicon_scan.png" :
-        ":/icons/programicon.png" ) );
+        ":/icons/programicon_old.png" ) );
 
     trayIcon->setToolTip( "GoldenDict" );
   }
