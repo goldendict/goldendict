@@ -4,7 +4,7 @@
 #include <QtGui>
 #include "wstring.hh"
 
-struct LangCode
+struct GDLangCode
 {
     char code[ 3 ]; // ISO 639-1
     char code3[ 4 ]; // ISO 639-2B ( http://www.loc.gov/standards/iso639-2/ )

@@ -10,7 +10,7 @@ LangCoder langCoder;
 
 // Language codes
 
-static LangCode LangCodes[] = {
+static GDLangCode LangCodes[] = {
 
     { "aa", "aar", -1, "Afar" },
     { "ab", "abk", -1, "Abkhazian" },
@@ -205,7 +205,7 @@ static LangCode LangCodes[] = {
 LangCoder::LangCoder()
 {
   for (int i = 0; true; i++) {
-    const LangCode &lc = LangCodes[i];
+    const GDLangCode &lc = LangCodes[i];
     if (lc.lang[0] == 0)
       break;
     codeMap[code2toInt(lc.code)] = i;
@@ -224,7 +224,7 @@ QIcon LangCoder::icon(quint32 code)
 {
   if (langCoder.codeMap.contains(code))
   {
-    const LangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
+    const GDLangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
     return QIcon( ":/flags/" + QString(lc.code) + ".png" );
   }
 
@@ -238,7 +238,7 @@ LangStruct LangCoder::langStruct(quint32 code)
   ls.order = -1;
   if (codeMap.contains(code)) {
     int order = codeMap[code];
-    const LangCode &lc = LangCodes[order];
+    const GDLangCode &lc = LangCodes[order];
     ls.order = order;
     ls.lang = lc.lang;
     ls.icon = QIcon(":/flags/" + QString(lc.code) + ".png");
@@ -275,7 +275,7 @@ quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
 {
   gd::wstring langFolded = Folding::apply( lang );
 
-  for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
+  for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
   {
     if ( langFolded == Folding::apply( gd::toWString( lc->lang ) ) )
     {
@@ -290,7 +290,7 @@ quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
 
 quint32 LangCoder::findIdForLanguageCode3( const char * code3 )
 {
-  for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
+  for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
   {
     if ( strcasecmp( code3, lc->code3 ) == 0 )
     {
@@ -313,7 +313,7 @@ quint32 LangCoder::guessId( const QString & lang )
   // check if it could be the whole language name
   if (lstr.size() >= 3)
   {
-    for( LangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
+    for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
     {
       if ( lstr == QString( lc->lang ) )
       {
@@ -355,7 +355,7 @@ bool LangCoder::isLanguageRTL( quint32 code )
 {
   if ( langCoder.codeMap.contains( code ) )
   {
-    LangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
+    GDLangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
     if( lc.isRTL < 0 )
     {
 #if QT_VERSION >= 0x040700
