@@ -87,8 +87,15 @@ unix:!mac {
     } else {
         LIBS += -lX11 -lXtst
     }
-    PREFIX = $$(PREFIX)
+
+    # Install prefix: first try to use qmake's PREFIX variable,
+    # then $PREFIX from system environment, and if both fails,
+    # use the hardcoded /usr/local.
+    PREFIX = $${PREFIX}
+    isEmpty( PREFIX ):PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr/local
+    message(Install Prefix is: $$PREFIX)
+
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/goldendict/\\\"
     target.path = $$PREFIX/bin/
     locale.path = $$PREFIX/share/goldendict/locale/
