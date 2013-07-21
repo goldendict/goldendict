@@ -89,9 +89,9 @@ unix:!mac {
     }
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr/local
-    DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/apps/goldendict/\\\"
+    DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/goldendict/\\\"
     target.path = $$PREFIX/bin/
-    locale.path = $$PREFIX/share/apps/goldendict/locale/
+    locale.path = $$PREFIX/share/goldendict/locale/
     locale.files = locale/*.qm
     INSTALLS += target \
         locale
