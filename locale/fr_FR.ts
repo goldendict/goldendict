@@ -846,7 +846,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
         <translatorcomment>&quot;&amp;&quot; is not an accelerator here, should be replaced by &amp;amp; in the source file</translatorcomment>
-        <translation>Glissez-&amp;déposez les dictionnaires à partir de et vers les groupes, déplacez-les à l&apos;intérieur des groupes, réorganisez les groupes en utilisant votre souris.</translation>
+        <translation>Glissez-déposez les dictionnaires entre les groupes, déplacez-les à l&apos;intérieur des groupes, réorganisez les groupes en utilisant votre souris.</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="108"/>
@@ -3898,7 +3898,7 @@ Ajoutez les dictionnaires appropriés à la fin des groupes concernés pour les 
     <message>
         <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Prononcoations par&lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Le site permet aux utilisateurs d&apos;enregistrer et partager des prononciations de mots. Vous pouvez les écouter à partir de GoldenDict.</translation>
+        <translation>Prononciations par &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Le site permet aux utilisateurs d&apos;enregistrer et partager des prononciations de mots. Vous pouvez les écouter à partir de GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="431"/>
@@ -3990,7 +3990,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="645"/>
         <source>Belarusian transliteration</source>
-        <translation>Translittération biélorusse</translation>
+        <translation>Translitération biélorusse</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="671"/>
@@ -4084,7 +4084,7 @@ Pas encore implémenté dans GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="116"/>
         <source>(not available in portable version)</source>
-        <translation>(non disponible dans le version portable)</translation>
+        <translation>(non disponible dans la version portable)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="153"/>
