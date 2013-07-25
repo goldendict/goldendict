@@ -880,7 +880,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1\"bres://" + id + "/\\\"" )
          // images
-         .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+         .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x1f\\x7f]*([^\"']*)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1bres://" + id + "/\\2" )
          .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
