@@ -1,7 +1,7 @@
 body {
 	background: #EAF0F8;
 	margin: 0.3em;
-	font-family: "Arial Unicode MS", "Lucida Sans Unicode", Tahoma, "Palatino Linotype"; 
+	font-family: "Arial Unicode MS", "Lucida Sans Unicode", Tahoma, Verdana, "Palatino Linotype", sans-serif;
 	line-height: 120%;
 }
 

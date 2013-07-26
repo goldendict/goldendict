@@ -19,7 +19,7 @@ body
 {
   background: #fffef2;
   color: black;
-  font-family: "Tahoma, SimSun, SimSun-ExtB";
+  font-family: Tahoma, Verdana, SimSun, SimSun-ExtB, sans-serif;
   margin: 5px;
 }
 
