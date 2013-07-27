@@ -893,7 +893,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
-    result += "<a class=\"dsl_url\" href=\"" + Html::escape( Utf8::encode( node.renderAsText() ) ) +"\">" + processNodeChildren( node ) + "</a>";
+  {
+    string link = Html::escape( Utf8::encode( node.renderAsText() ) );
+    if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
+      link = "http://" + link;
+    result += "<a class=\"dsl_url\" href=\"" + link +"\">" + processNodeChildren( node ) + "</a>";
+  }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"!trs" ) )
     result += "<span class=\"dsl_trs\">" + processNodeChildren( node ) + "</span>";
