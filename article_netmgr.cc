@@ -132,26 +132,28 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
   if ( url.scheme() == "gdlookup" )
   {
+    QUrlQuery qu(url);
+
     contentType = "text/html";
 
-    if ( url.queryItemValue( "blank" ) == "1" )
+    if ( qu.queryItemValue( "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
 
     bool groupIsValid = false;
 
-    QString word = url.queryItemValue( "word" );
-    unsigned group = url.queryItemValue( "group" ).toUInt( &groupIsValid );
+    QString word = qu.queryItemValue( "word" );
+    unsigned group = qu.queryItemValue( "group" ).toUInt( &groupIsValid );
 
     // See if we have some dictionaries muted
 
     QSet< QString > mutedDicts =
-        QSet< QString >::fromList( url.queryItemValue( "muted" ).split( ',' ) );
+        QSet< QString >::fromList( qu.queryItemValue( "muted" ).split( ',' ) );
 
     // Unpack contexts
 
     QMap< QString, QString > contexts;
 
-    QString contextsEncoded = url.queryItemValue( "contexts" );
+    QString contextsEncoded = qu.queryItemValue( "contexts" );
 
     if ( contextsEncoded.size() )
     {

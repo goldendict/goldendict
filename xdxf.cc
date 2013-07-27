@@ -393,7 +393,7 @@ void XdxfArticleRequestRunnable::run()
 
 void XdxfArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( isCancelled.load() )
   {
     finish();
     return;
@@ -420,7 +420,7 @@ void XdxfArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( isCancelled.load() )
     {
       finish();
       return;
@@ -649,21 +649,21 @@ QString readXhtmlData( QXmlStreamReader & stream )
     {
       QString name = stream.name().toString();
 
-      result += "<" + Qt::escape( name ) + " ";
+      result += "<" + name.toHtmlEscaped() + " ";
 
       QXmlStreamAttributes attrs = stream.attributes();
 
       for( int x = 0; x < attrs.size(); ++x )
       {
-        result += Qt::escape( attrs[ x ].name().toString() );
-        result += "=\"" + Qt::escape( attrs[ x ].value().toString() ) + "\"";
+        result += attrs[ x ].name().toString().toHtmlEscaped();
+        result += "=\"" + attrs[ x ].value().toString().toHtmlEscaped() + "\"";
       }
 
       result += ">";
 
       result += readXhtmlData( stream );
 
-      result += "</" + Qt::escape( name ) + ">";
+      result += "</" + name.toHtmlEscaped() + ">";
     }
     else
     if ( stream.isCharacters() || stream.isWhitespace() || stream.isCDATA() )
@@ -881,7 +881,7 @@ void XdxfResourceRequestRunnable::run()
 void XdxfResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( isCancelled.load() )
   {
     finish();
     return;

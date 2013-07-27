@@ -212,14 +212,15 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 #endif
 
   QUrl req;
+  QUrlQuery reqQu;
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
-  req.addQueryItem( "word", word );
-  req.addQueryItem( "group", QString::number( group ) );
+  reqQu.addQueryItem( "word", word );
+  reqQu.addQueryItem( "group", QString::number( group ) );
 
   if ( scrollTo.size() )
-    req.addQueryItem( "scrollto", scrollTo );
+    reqQu.addQueryItem( "scrollto", scrollTo );
 
   if ( contexts.size() )
   {
@@ -233,13 +234,13 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
     buf.close();
 
-    req.addQueryItem( "contexts", QString::fromLatin1( buf.buffer().toBase64() ) );
+    reqQu.addQueryItem( "contexts", QString::fromLatin1( buf.buffer().toBase64() ) );
   }
 
   QString mutedDicts = getMutedForGroup( group );
 
   if ( mutedDicts.size() )
-    req.addQueryItem( "muted", mutedDicts );
+    reqQu.addQueryItem( "muted", mutedDicts );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -252,7 +253,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   ui.highlightAllButton->setChecked(false);
 
   emit setExpandMode( expandOptionalParts );
-
+  req.setQuery(reqQu);
   ui.definition->load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
@@ -269,6 +270,7 @@ void ArticleView::showAnticipation()
 void ArticleView::loadFinished( bool )
 {
   QUrl url = ui.definition->url();
+  QUrlQuery urlQu(url);
 
   // See if we have any iframes in need of expansion
 
@@ -340,11 +342,11 @@ void ArticleView::loadFinished( bool )
     }
   }
   else
-  if ( url.queryItemValue( "scrollto" ).startsWith( "gdfrom-" ) )
+  if ( urlQu.queryItemValue( "scrollto" ).startsWith( "gdfrom-" ) )
   {
     // There is no active article saved in history, but we have it as a parameter.
     // setCurrentArticle will save it and scroll there.
-    setCurrentArticle( url.queryItemValue( "scrollto" ), true );
+    setCurrentArticle( urlQu.queryItemValue( "scrollto" ), true );
   }
 
 
@@ -393,8 +395,9 @@ void ArticleView::handleUrlChanged( QUrl const & url )
 
 unsigned ArticleView::getGroup( QUrl const & url )
 {
-  if ( url.scheme() == "gdlookup" && url.hasQueryItem( "group" ) )
-    return url.queryItemValue( "group" ).toUInt();
+  QUrlQuery urlQu(url);
+  if ( url.scheme() == "gdlookup" && urlQu.hasQueryItem( "group" ) )
+    return urlQu.queryItemValue( "group" ).toUInt();
 
   return 0;
 }
@@ -682,6 +685,7 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
 {
   QString msg;
   QUrl url(link);
+  QUrlQuery urlQu(url);
 
   if ( url.scheme() == "bres" )
   {
@@ -728,10 +732,10 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
       def = def.mid( 1 );
     }
 
-    if( url.hasQueryItem( "dict" ) )
+    if( urlQu.hasQueryItem( "dict" ) )
     {
       // Link to other dictionary
-      QString dictName( url.queryItemValue( "dict" ) );
+      QString dictName( urlQu.queryItemValue( "dict" ) );
       if( !dictName.isEmpty() )
         msg = tr( "Definition from dictionary \"%1\": %2" ).arg( dictName ).arg( def );
     }
@@ -779,6 +783,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 {
   qDebug() << "clicked" << url;
 
+  QUrlQuery urlQu(url);
+
   if( url.scheme().compare( "gdpicture" ) == 0 )
     ui.definition->load( url );
   else
@@ -798,10 +804,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     else
     {
       QString newScrollTo( scrollTo );
-      if( url.hasQueryItem( "dict" ) )
+      if( urlQu.hasQueryItem( "dict" ) )
       {
         // Link to other dictionary
-        QString dictName( url.queryItemValue( "dict" ) );
+        QString dictName( urlQu.queryItemValue( "dict" ) );
         for( unsigned i = 0; i < allDictionaries.size(); i++ )
         {
           if( dictName.compare( QString::fromUtf8( allDictionaries[ i ]->getName().c_str() ) ) == 0 )
@@ -973,7 +979,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 // TODO: Port TTS
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
     // Text to speech
-    QString md5Id = url.queryItemValue( "engine" );
+    QString md5Id = urlQu.queryItemValue( "engine" );
     QString text( url.path().mid( 1 ) );
 
     for ( Config::VoiceEngines::const_iterator i = cfg.voiceEngines.begin();
@@ -1078,6 +1084,7 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
 void ArticleView::updateMutedContents()
 {
   QUrl currentUrl = ui.definition->url();
+  QUrlQuery currentUrlQu(currentUrl);
 
   if ( currentUrl.scheme() != "gdlookup" )
     return; // Weird url -- do nothing
@@ -1089,17 +1096,18 @@ void ArticleView::updateMutedContents()
 
   QString mutedDicts = getMutedForGroup( group );
 
-  if ( currentUrl.queryItemValue( "muted" ) != mutedDicts )
+  if ( currentUrlQu.queryItemValue( "muted" ) != mutedDicts )
   {
     // The list has changed -- update the url
 
-    currentUrl.removeQueryItem( "muted" );
+    currentUrlQu.removeQueryItem( "muted" );
 
     if ( mutedDicts.size() )
-    currentUrl.addQueryItem( "muted", mutedDicts );
+    currentUrlQu.addQueryItem( "muted", mutedDicts );
 
     saveHistoryUserData();
 
+    currentUrl.setQuery(currentUrlQu);
     ui.definition->load( currentUrl );
 
     //QApplication::setOverrideCursor( Qt::WaitCursor );

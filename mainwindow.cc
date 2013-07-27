@@ -45,6 +45,12 @@
 #include <X11/Xlib.h>
 #endif
 
+#include "QPrinter"
+#include "QPageSetupDialog"
+#include "QPrintPreviewDialog"
+#include "QPrintDialog"
+#include "QFileDialog"
+
 using std::set;
 using std::wstring;
 using std::map;

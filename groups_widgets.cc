@@ -18,6 +18,9 @@
 #include <QVector>
 #include <QFileInfo>
 
+#include <QFileDialog>
+#include <QMessageBox>
+
 using std::vector;
 
 /// DictGroupWidget
@@ -161,17 +164,20 @@ void DictListModel::populate(
   std::vector< sptr< Dictionary::Class > > const & active,
   std::vector< sptr< Dictionary::Class > > const & available )
 {
+  beginResetModel();
+
   dictionaries = active;
   allDicts = &available;
 
-  reset();
+  endResetModel();
 }
 
 void DictListModel::populate(
   std::vector< sptr< Dictionary::Class > > const & active )
 {
+  beginResetModel();
   dictionaries = active;
-  reset();
+  endResetModel();
 }
 
 void DictListModel::setAsSource()
@@ -351,12 +357,15 @@ void DictListModel::removeSelectedRows( QItemSelectionModel * source )
   if ( !rows.count() )
     return;
 
+  beginResetModel();
+
   for ( int i = rows.count()-1; i >= 0; --i )
   {
     dictionaries.erase( dictionaries.begin() + rows.at( i ).row() );
   }
 
-  reset();
+  endResetModel();
+
   emit contentChanged();
 }
 
@@ -403,6 +412,8 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
   if ( list.empty() )
     return;
 
+  beginResetModel();
+
   for ( unsigned i = 0; i < allDicts->size(); i++ )
   {
     for ( int j = 0; j < list.size(); j++ )
@@ -413,7 +424,7 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
         list.remove( j );
         if ( list.isEmpty() )
         {
-          reset();
+          endResetModel();
           emit contentChanged();
           return;
         }
@@ -422,7 +433,7 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
     }
   }
 
-  reset();
+  endResetModel();
   emit contentChanged();
 }
 
@@ -437,6 +448,7 @@ void DictListModel::filterDuplicates()
 
     if ( ids.contains( id ) )
     {
+      beginResetModel();
       dictionaries.erase( dictionaries.begin() + i-- );
       doReset = true;
       continue;
@@ -447,7 +459,7 @@ void DictListModel::filterDuplicates()
 
   if ( doReset )
   {
-    reset();
+    endResetModel();
     emit contentChanged();
   }
 }

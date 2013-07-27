@@ -88,12 +88,14 @@ sptr< Dictionary::DataRequest > VoiceEnginesDictionary::getArticle(
   result += "<table class=\"voiceengines_play\"><tr>";
 
   QUrl url;
+  QUrlQuery urlQu;
   url.setScheme( "gdtts" );
   url.setHost( "localhost" );
   url.setPath( QString::fromUtf8( wordUtf8.c_str() ) );
   QList< QPair<QString, QString> > query;
   query.push_back( QPair<QString, QString>( "engine", QString::fromStdString( getId() ) ) );
-  url.setQueryItems( query );
+  urlQu.setQueryItems( query );
+  url.setQuery(urlQu);
 
   string encodedUrl = url.toEncoded().data();
   string ref = string( "\"" ) + encodedUrl + "\"";

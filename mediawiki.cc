@@ -123,9 +123,11 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
 {
   DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
+  QUrlQuery reqUrlQu(reqUrl);
 
-  reqUrl.addQueryItem( "apfrom", gd::toQString( str ) );
+  reqUrlQu.addQueryItem( "apfrom", gd::toQString( str ) );
 
+  reqUrl.setQuery(reqUrlQu);
   netReply = mgr.get( QNetworkRequest( reqUrl ) );
 
   connect( netReply.get(), SIGNAL( finished() ),
@@ -263,9 +265,11 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
            );
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
+  QUrlQuery reqUrlQu(reqUrl);
 
-  reqUrl.addQueryItem( "page", gd::toQString( str ) );
+  reqUrlQu.addQueryItem( "page", gd::toQString( str ) );
 
+  reqUrl.setQuery(reqUrlQu);
   sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
   netReplies.push_back( std::make_pair( netReply, false ) );

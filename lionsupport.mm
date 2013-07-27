@@ -9,14 +9,4 @@ bool LionSupport::isLion()
 
 void LionSupport::addFullscreen(MainWindow *window)
 {
-#if defined(MAC_OS_X_VERSION_10_7) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-    if (isLion()) // checks if lion is running
-    {
-        NSView *nsview = (NSView *) window->winId();
-        NSWindow *nswindow = [nsview window];
-        [nswindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
-    }
-#else
-#warning No fullscreen support will be included in this build
-#endif
 }

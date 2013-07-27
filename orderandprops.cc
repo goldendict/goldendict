@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <QPair>
 
+#include <QMenu>
+
 using std::vector;
 using std::sort;
 

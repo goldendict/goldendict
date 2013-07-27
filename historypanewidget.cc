@@ -260,7 +260,8 @@ QVariant HistoryModel::data( QModelIndex const & index, int role ) const
 
 void HistoryModel::historyChanged()
 {
+  beginResetModel();
 //  qDebug() << "History Changed!!";
 
-  reset();
+  endResetModel();
 }

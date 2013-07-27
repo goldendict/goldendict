@@ -609,7 +609,7 @@ void AardArticleRequestRunnable::run()
 
 void AardArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( isCancelled.load() )
   {
     finish();
     return;
@@ -636,7 +636,7 @@ void AardArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( isCancelled.load() )
     {
       finish();
       return;

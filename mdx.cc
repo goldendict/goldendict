@@ -325,11 +325,11 @@ public:
 
 void MdxDictionary::deferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !deferredInitDone.load() )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( deferredInitDone.load() )
       return;
 
     if ( !deferredInitRunnableStarted )
@@ -350,11 +350,11 @@ string const & MdxDictionary::ensureInitDone()
 
 void MdxDictionary::doDeferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !deferredInitDone.load() )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( deferredInitDone.load() )
       return;
 
     // Do deferred init
@@ -497,7 +497,7 @@ void MdxArticleRequestRunnable::run()
 
 void MdxArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( isCancelled.load() )
   {
     finish();
     return;
@@ -529,7 +529,7 @@ void MdxArticleRequest::run()
 
   for ( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( isCancelled.load() )
     {
       finish();
       return;
@@ -675,7 +675,7 @@ void MddResourceRequestRunnable::run()
 
 void MddResourceRequest::run()
 {
-  if ( isCancelled )
+  if ( isCancelled.load() )
   {
     finish();
     return;
@@ -694,7 +694,7 @@ void MddResourceRequest::run()
   for ( ;; )
   {
     // Some runnables linger enough that they are cancelled before they start
-    if ( isCancelled )
+    if ( isCancelled.load() )
     {
       finish();
       return;

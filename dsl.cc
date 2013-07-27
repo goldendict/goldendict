@@ -301,11 +301,11 @@ public:
 
 void DslDictionary::deferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !deferredInitDone.load() )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( deferredInitDone.load() )
       return;
 
     if ( !deferredInitRunnableStarted )
@@ -329,11 +329,11 @@ string const & DslDictionary::ensureInitDone()
 
 void DslDictionary::doDeferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !deferredInitDone.load() )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( deferredInitDone.load() )
       return;
 
     // Do deferred init
@@ -893,7 +893,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
-    result += "<a class=\"dsl_url\" href=\"" + Html::escape( Utf8::encode( node.renderAsText() ) ) +"\">" + processNodeChildren( node ) + "</a>";
+  {
+    string link = Html::escape( Utf8::encode( node.renderAsText() ) );
+    if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
+      link = "http://" + link;
+    result += "<a class=\"dsl_url\" href=\"" + link +"\">" + processNodeChildren( node ) + "</a>";
+  }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"!trs" ) )
     result += "<span class=\"dsl_trs\">" + processNodeChildren( node ) + "</span>";
@@ -968,7 +973,9 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       {
         QList< QPair< QString, QString > > query;
         query.append( QPair< QString, QString >( attr.left( n ), attr.mid( n + 1 ) ) );
-        url.setQueryItems( query );
+        QUrlQuery urlQu;
+        urlQu.setQueryItems(query);
+        url.setQuery( urlQu );
       }
     }
 
@@ -1185,7 +1192,7 @@ void DslArticleRequestRunnable::run()
 
 void DslArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( isCancelled.load() )
   {
     finish();
     return;
@@ -1220,7 +1227,7 @@ void DslArticleRequest::run()
   for( unsigned x = 0; x < chain.size(); ++x )
   {
     // Check if we're cancelled occasionally
-    if ( isCancelled )
+    if ( isCancelled.load() )
     {
       finish();
       return;
@@ -1377,7 +1384,7 @@ void DslResourceRequestRunnable::run()
 void DslResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( isCancelled.load() )
   {
     finish();
     return;

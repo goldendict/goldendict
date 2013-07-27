@@ -426,7 +426,7 @@ void SdictArticleRequestRunnable::run()
 
 void SdictArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( isCancelled.load() )
   {
     finish();
     return;
@@ -453,7 +453,7 @@ void SdictArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( isCancelled.load() )
     {
       finish();
       return;

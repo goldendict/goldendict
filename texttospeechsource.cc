@@ -180,7 +180,7 @@ void VoiceEnginesModel::addNewVoiceEngine( QString const & id, QString const & n
 
 QModelIndex VoiceEnginesModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column, (void*)NULL );
 }
 
 QModelIndex VoiceEnginesModel::parent( QModelIndex const & /*parent*/ ) const
