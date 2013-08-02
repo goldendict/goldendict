@@ -47,6 +47,8 @@ private slots:
 
   void rescanSources();
 
+signals:
+
   void showDictionaryInfo( QString const & dictId );
 
 private:

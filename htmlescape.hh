@@ -17,7 +17,7 @@ string escape( string const & );
 
 // Converts the given preformatted text to html. Each end of line is replaced by
 // <br>, each leading space is converted to &nbsp;.
-string preformat( string const & );
+string preformat( string const &, bool baseRightToLeft = false );
 
 // Escapes the given string to be included in JavaScript.
 string escapeForJavaScript( string const & );

@@ -5,10 +5,12 @@
 #include "wstring_qt.hh"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QUrl>
 #include <QtXml>
 #include <list>
 #include "dprintf.hh"
 #include "audiolink.hh"
+#include "langcoder.hh"
 #include "qt4x5.hh"
 
 namespace MediaWiki {
@@ -22,6 +24,7 @@ class MediaWikiDictionary: public Dictionary::Class
   string name;
   QString url, icon;
   QNetworkAccessManager & netMgr;
+  quint32 langId;
 
 public:
 
@@ -33,8 +36,12 @@ public:
     name( name_ ),
     url( url_ ),
     icon( icon_ ),
-    netMgr( netMgr_ )
+    netMgr( netMgr_ ),
+    langId( 0 )
   {
+    int n = url.indexOf( "." );
+    if( n == 2 || ( n > 3 && url[ n-3 ] == '/' ) )
+      langId = LangCoder::code2toInt( url.mid( n - 2, 2 ).toLatin1().data() );
   }
 
   virtual string getName() throw()
@@ -55,6 +62,12 @@ public:
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
                                           wstring const & )
     throw( std::exception );
+
+  virtual quint32 getLangFrom() const
+  { return langId; }
+
+  virtual quint32 getLangTo() const
+  { return langId; }
 
 protected:
 
@@ -205,7 +218,7 @@ public:
 
   MediaWikiArticleRequest( wstring const & word, vector< wstring > const & alts,
                            QString const & url, QNetworkAccessManager & mgr,
-                           string const & wikidictID );
+                           Class * dictPtr_ );
 
   virtual void cancel();
 
@@ -214,7 +227,7 @@ private:
   void addQuery( QNetworkAccessManager & mgr, wstring const & word );
 
   virtual void requestFinished( QNetworkReply * );
-  string dictID;
+  Class * dictPtr;
 };
 
 void MediaWikiArticleRequest::cancel()
@@ -226,8 +239,8 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
                                                   vector< wstring > const & alts,
                                                   QString const & url_,
                                                   QNetworkAccessManager & mgr,
-                                                  string const & wikidictID ):
-  url( url_ ), dictID( wikidictID )
+                                                  Class * dictPtr_ ):
+  url( url_ ), dictPtr( dictPtr_ )
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
            this, SLOT( requestFinished( QNetworkReply * ) ),
@@ -325,7 +338,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
             // audio url
             articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)" ),
-                                   QString::fromStdString( addAudioLink( "\"http:\\1\"",this->dictID )+ "<a href=\"http:\\1" ) );
+                                   QString::fromStdString( addAudioLink( "\"http:\\1\"",this->dictPtr->getId() )+ "<a href=\"http:\\1" ) );
 
             // Add "http:" to image source urls
             articleString.replace( " src=\"//", " src=\"http://" );
@@ -337,7 +350,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
             //fix audio
             articleString.replace( QRegExp("<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
-                                            QString::fromStdString(addAudioLink("\"http://\\1\"",this->dictID)+
+                                            QString::fromStdString(addAudioLink("\"http://\\1\"",this->dictPtr->getId())+
                                            "<a href=\"http://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>"));
             // In those strings, change any underscores to spaces
             for( ; ; )
@@ -357,7 +370,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
   
             DPRINTF( "Article body after: %s\n", articleBody.data() );
   
-            articleBody.prepend( "<div class=\"mwiki\">" );
+            articleBody.prepend( dictPtr->isToLanguageRTL() ? "<div class=\"mwiki\" dir=\"rtl\">" :
+                                                              "<div class=\"mwiki\">" );
             articleBody.append( "</div>" );
   
             Mutex::Lock _( dataMutex );
@@ -414,7 +428,7 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
     return new DataRequestInstant( false );
   }
   else
-    return new MediaWikiArticleRequest( word, alts, url, netMgr,this->getId() );
+    return new MediaWikiArticleRequest( word, alts, url, netMgr, this );
 }
 
 }

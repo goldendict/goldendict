@@ -13,6 +13,7 @@
 #include "ex.hh"
 #include "mutex.hh"
 #include "wstring.hh"
+#include "langcoder.hh"
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {
@@ -388,6 +389,12 @@ public:
 
   // Return dictionary main file name
   virtual QString getMainFilename();
+
+  /// Check text direction
+  bool isFromLanguageRTL()
+  { return LangCoder::isLanguageRTL( getLangFrom() ); }
+  bool isToLanguageRTL()
+  { return LangCoder::isLanguageRTL( getLangTo() ); }
 
   /// Return true if dictionary is local dictionary
   virtual bool isLocalDictionary()

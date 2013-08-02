@@ -75,7 +75,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 18 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 19 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2
 };
 
@@ -521,6 +521,10 @@ void DslDictionary::loadArticle( uint32_t address,
             DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
             articleBody, articleSize );
         free( articleBody );
+
+        // Strip DSL comments
+        bool b = false;
+        stripComments( articleData, b );
       }
       catch( ... )
       {
@@ -670,7 +674,7 @@ void DslDictionary::loadArticle( uint32_t address,
 string DslDictionary::dslToHtml( wstring const & str )
 {
  // Normalize the string
-  wstring normalizedStr = gd::toWString( gd::toQString( str ).normalized( QString::NormalizationForm_C ) );
+  wstring normalizedStr = gd::normalize( str );
 
   ArticleDom dom( normalizedStr );
 
@@ -891,7 +895,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
-    result += "<a class=\"dsl_url\" href=\"" + Html::escape( Utf8::encode( node.renderAsText() ) ) +"\">" + processNodeChildren( node ) + "</a>";
+  {
+    string link = Html::escape( Utf8::encode( node.renderAsText() ) );
+    if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
+      link = "http://" + link;
+    result += "<a class=\"dsl_url\" href=\"" + link +"\">" + processNodeChildren( node ) + "</a>";
+  }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"!trs" ) )
     result += "<span class=\"dsl_trs\">" + processNodeChildren( node ) + "</span>";
@@ -1246,7 +1255,10 @@ void DslArticleRequest::run()
     string articleText, articleAfter;
 
     articleText += "<span class=\"dsl_article\">";
-    articleText += "<div class=\"dsl_headwords\">";
+    articleText += "<div class=\"dsl_headwords\"";
+    if( dict.isFromLanguageRTL() )
+      articleText += " dir=\"rtl\"";
+    articleText += ">";
 
     if( displayedHeadword.size() == 1 && displayedHeadword[0] == '<' )  // Fix special case - "<" header
         articleText += "<";                                             // dslToHtml can't handle it correctly.
@@ -1259,7 +1271,11 @@ void DslArticleRequest::run()
 
     expandTildes( articleBody, tildeValue );
 
-    articleAfter += "<div class=\"dsl_definition\">";
+    articleAfter += "<div class=\"dsl_definition\"";
+    if( dict.isToLanguageRTL() )
+      articleAfter += " dir=\"rtl\"";
+    articleAfter += ">";
+
     articleAfter += dict.dslToHtml( articleBody );
     articleAfter += "</div>";
     articleAfter += "</span>";
@@ -1639,7 +1655,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             for( ; ; )
             {
               // Skip any whitespace
-              if ( !abrvScanner.readNextLine( curString, curOffset ) )
+              if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) )
                 break;
               if ( curString.empty() || isDslWs( curString[ 0 ] ) )
                 continue;
@@ -1658,7 +1674,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 expandOptionalParts( curString, &keys );
 
-                if ( !abrvScanner.readNextLine( curString, curOffset ) || curString.empty() )
+                if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) || curString.empty() )
                 {
                   FDPRINTF( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
                   eof = true;
@@ -1727,7 +1743,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           // Find the main headword
 
-          if ( !hasString && !scanner.readNextLine( curString, curOffset ) )
+          if ( !hasString && !scanner.readNextLineWithoutComments( curString, curOffset ) )
             break; // Clean end of file
 
           hasString = false;
@@ -1768,7 +1784,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           for( ; ; )
           {
-            if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) ) )
+            if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) ) )
             {
               FDPRINTF( stderr, "Warning: premature end of file %s\n", i->c_str() );
               break;
@@ -1823,7 +1839,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           for( ; ; )
           {
 
-            if ( ! ( hasString = scanner.readNextLine( curString, curOffset ) )
+            if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) )
                  || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )

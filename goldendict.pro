@@ -113,26 +113,27 @@ unix:!mac {
     } else {
         LIBS += -lX11 -lXtst
     }
-    PREFIX = $$(PREFIX)
+
+    # Install prefix: first try to use qmake's PREFIX variable,
+    # then $PREFIX from system environment, and if both fails,
+    # use the hardcoded /usr/local.
+    PREFIX = $${PREFIX}
+    isEmpty( PREFIX ):PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr/local
-    DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/apps/goldendict/\\\"
+    message(Install Prefix is: $$PREFIX)
+
+    DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/goldendict/\\\"
     target.path = $$PREFIX/bin/
-    locale.path = $$PREFIX/share/apps/goldendict/locale/
+    locale.path = $$PREFIX/share/goldendict/locale/
     locale.files = locale/*.qm
     INSTALLS += target \
         locale
     icons.path = $$PREFIX/share/pixmaps
     icons.files = redist/icons/*.*
     INSTALLS += icons
-    icons2.path = $$PREFIX/share/app-install/icons
-    icons2.files = redist/icons/*.*
-    INSTALLS += icons2
     desktops.path = $$PREFIX/share/applications
     desktops.files = redist/*.desktop
     INSTALLS += desktops
-    desktops2.path = $$PREFIX/share/app-install/desktop
-    desktops2.files = redist/*.desktop
-    INSTALLS += desktops2
 }
 mac {
     TARGET = GoldenDict
@@ -269,6 +270,7 @@ HEADERS += folding.hh \
     voiceengines.hh \
     ffmpegaudio.hh \
     articleinspector.hh \
+    delegate.hh \
     qt4x5.hh
 
 FORMS += groups.ui \
@@ -377,7 +379,8 @@ SOURCES += folding.cc \
     mdx.cc \
     voiceengines.cc \
     ffmpegaudio.cc \
-    articleinspector.cc
+    articleinspector.cc \
+    delegate.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui
@@ -463,6 +466,14 @@ TRANSLATIONS += locale/ru_RU.ts \
 win32:# Windows doesn't seem to have *-qt4 symlinks
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
+
+# The *.qm files might not exist when qmake is run for the first time,
+# causing the standard install rule to be ignored, and no translations
+# will be installed. With this, we create the qm files during qmake run.
+!win32 {
+  system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_} 2> /dev/null)
+}
+
 updateqm.input = TRANSLATIONS
 updateqm.output = locale/${QMAKE_FILE_BASE}.qm
 updateqm.commands = $$QMAKE_LRELEASE \

@@ -291,13 +291,19 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
         static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
 
-        articleText = string( "<div class=\"dictd_article\">" ) +
-            QString::fromUtf8( Html::preformat( articleBody ).c_str() )
+        articleText = string( "<div class=\"dictd_article\"" );
+        if( isToLanguageRTL() )
+          articleText += " dir=\"rtl\"";
+        articleText += ">";
+
+        string convertedText = Html::preformat( articleBody, isToLanguageRTL() );
+        free( articleBody );
+
+        articleText += QString::fromUtf8( convertedText.c_str() )
               .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")
               .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>")
-            .toUtf8().data() +
-            "</div>";
-        free( articleBody );
+            .toUtf8().data();
+        articleText += "</div>";
       }
 
       // Ok. Now, does it go to main articles, or to alternate ones? We list

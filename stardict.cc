@@ -313,12 +313,14 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
                .toUtf8().data() );
     }
     case 'm': // Pure meaning, usually means preformatted text
-      return "<div class=\"sdct_m\">" + Html::preformat( string( resource, size ) ) + "</div>";
+      return "<div class=\"sdct_m\">" + Html::preformat( string( resource, size ), isToLanguageRTL() ) + "</div>";
     case 'l': // Same as 'm', but not in utf8, instead in current locale's
               // encoding.
               // We just use Qt here, it should know better about system's
               // locale.
-      return "<div class=\"sdct_l\">" + Html::preformat( QString::fromLocal8Bit( resource, size ).toUtf8().data() ) + "</div>";
+      return "<div class=\"sdct_l\">" + Html::preformat( QString::fromLocal8Bit( resource, size ).toUtf8().data(),
+                                                         isToLanguageRTL() )
+                                      + "</div>";
     case 'g': // Pango markup.
       return "<div class=\"sdct_g\">" + string( resource, size ) + "</div>";
     case 't': // Transcription
@@ -822,20 +824,28 @@ void StardictArticleRequest::run()
 
     for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
     {
-        result += "<h3>";
+        result += dict.isFromLanguageRTL() ? "<h3 dir=\"rtl\">" : "<h3>";
         result += i->second.first;
         result += "</h3>";
+        if( dict.isToLanguageRTL() )
+          result += "<span dir=\"rtl\">";
         result += i->second.second;
         result += cleaner;
+        if( dict.isToLanguageRTL() )
+          result += "</span>";
     }
 
     for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
     {
-        result += "<h3>";
+        result += dict.isFromLanguageRTL() ? "<h3 dir=\"rtl\">" : "<h3>";
         result += i->second.first;
         result += "</h3>";
+        if( dict.isToLanguageRTL() )
+          result += "<span dir=\"rtl\">";
         result += i->second.second;
         result += cleaner;
+        if( dict.isToLanguageRTL() )
+          result += "</span>";
     }
     result = QString::fromUtf8( result.c_str() )
              .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),

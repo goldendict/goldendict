@@ -861,6 +861,34 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
   }
 }
 
+bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
+                 throw( Ex, Iconv::Ex )
+{
+  wstring str;
+  bool commentToNextLine = false;
+  size_t currentOffset;
+
+  out.erase();
+  offset = 0;
+
+  do
+  {
+    bool b = readNextLine( str, currentOffset );
+
+    if( offset == 0 )
+      offset = currentOffset;
+
+    if( !b )
+      return false;
+
+    stripComments( str, commentToNextLine);
+
+    out += str;
+  }
+  while( commentToNextLine );
+
+  return true;
+}
 
 /////////////// DslScanner
 
@@ -1066,6 +1094,35 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
     headwords->push_back( str );
   if( !inside_recurse )
     result->merge( expanded );
+}
+
+static const wstring openBraces( GD_NATIVE_TO_WS( L"{{" ) );
+static const wstring closeBraces( GD_NATIVE_TO_WS( L"}}" ) );
+
+void stripComments( wstring & str, bool & nextLine )
+{
+  string::size_type n = 0, n2 = 0;
+
+  for( ; ; )
+  {
+    if( nextLine )
+    {
+      n = str.find( closeBraces, n2 );
+      if( n == string::npos )
+      {
+        str.erase( n2, n );
+        return;
+      }
+      str.erase( n2, n - n2 + 2 );
+      nextLine = false;
+    }
+
+    n = str.find( openBraces, n2 );
+    if( n == string::npos )
+      return;
+    nextLine = true;
+    n2 = n;
+  }
 }
 
 void expandTildes( wstring & str, wstring const & tildeReplacement )

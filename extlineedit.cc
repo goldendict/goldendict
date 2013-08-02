@@ -5,6 +5,10 @@
 
 #include <QPainter>
 
+#if QT_VERSION >= 0x040600
+#include <QPropertyAnimation>
+#endif
+
 ExtLineEdit::ExtLineEdit(QWidget *parent) :
     QLineEdit(parent)
 {
@@ -95,10 +99,9 @@ void ExtLineEdit::updateMargins()
     int leftMargin = iconButtons[realLeft]->pixmap().width() + 8;
     int rightMargin = iconButtons[realRight]->pixmap().width() + 8;
 
-    QMargins margins((iconEnabled[realLeft] ? leftMargin : 0), 1,
-                     (iconEnabled[realRight] ? rightMargin : 0), 1);
-
-    setTextMargins(margins);
+    setTextMargins(
+            (iconEnabled[realLeft] ? leftMargin : 0), 1,
+            (iconEnabled[realRight] ? rightMargin : 0), 1);
 }
 
 void ExtLineEdit::updateButtonPositions()
@@ -110,10 +113,14 @@ void ExtLineEdit::updateButtonPositions()
             iconPos = (iconPos == Left ? Right : Left);
 
         if (iconPos == ExtLineEdit::Right) {
-            const int iconoffset = textMargins().right() + 4;
+            int right;
+            getTextMargins(0, 0, &right, 0);
+            const int iconoffset = right + 4;
             iconButtons[i]->setGeometry(contentRect.adjusted(width() - iconoffset, 0, 0, 0));
         } else {
-            const int iconoffset = textMargins().left() + 4;
+            int left;
+            getTextMargins(&left, 0, 0, 0);
+            const int iconoffset = left + 4;
             iconButtons[i]->setGeometry(contentRect.adjusted(0, 0, -width() + iconoffset, 0));
         }
     }
@@ -172,6 +179,7 @@ void IconButton::paintEvent(QPaintEvent *)
 
 void IconButton::animate(bool visible)
 {
+#if QT_VERSION >= 0x040600
   QPropertyAnimation *animation = new QPropertyAnimation(this, "opacity");
   animation->setDuration(250);
   if (visible)
@@ -183,4 +191,7 @@ void IconButton::animate(bool visible)
     animation->setEndValue(0.0);
   }
   animation->start(QAbstractAnimation::DeleteWhenStopped);
+#else
+  setOpacity(visible ? 1.0 : 0.0);
+#endif
 }

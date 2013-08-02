@@ -525,7 +525,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   if ( cfg.preferences.enableTrayIcon )
   {
-    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon.png" ), this );
+    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon_old.png" ), this );
     trayIcon->setToolTip( tr( "Loading..." ) );
     trayIcon->show();
   }
@@ -975,7 +975,7 @@ void MainWindow::updateTrayIcon()
   if ( !trayIcon && cfg.preferences.enableTrayIcon )
   {
     // Need to show it
-    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon.png" ), this );
+    trayIcon = new QSystemTrayIcon( QIcon( ":/icons/programicon_old.png" ), this );
     trayIcon->setContextMenu( &trayIconMenu );
     trayIcon->show();
 
@@ -996,7 +996,7 @@ void MainWindow::updateTrayIcon()
     trayIcon->setIcon( QIcon(
       enableScanPopup->isChecked() ?
         ":/icons/programicon_scan.png" :
-        ":/icons/programicon.png" ) );
+        ":/icons/programicon_old.png" ) );
 
     trayIcon->setToolTip( "GoldenDict" );
   }
@@ -1531,6 +1531,12 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
   QString escaped = title;
   escaped.replace( "&", "&&" );
 
+  if( escaped.isRightToLeft() )
+  {
+    escaped.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
+    escaped.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
+  }
+
   ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), escaped );
   updateWindowTitle();
 }
@@ -1548,6 +1554,11 @@ void MainWindow::updateWindowTitle()
     QString str = view->getTitle();
     if( !str.isEmpty() )
     {
+      if( str.isRightToLeft() )
+      {
+        str.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
+        str.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
+      }
       if( !blockUpdateWindowTitle )
         setWindowTitle( tr( "%1 - %2" ).arg( str, "GoldenDict" ) );
       blockUpdateWindowTitle = false;
@@ -1705,6 +1716,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   Config::Class newCfg = cfg;
   EditDictionaries dicts( this, newCfg, dictionaries, groupInstances, dictNetMgr );
+
+  connect( &dicts, SIGNAL( showDictionaryInfo( QString const & ) ),
+           this, SLOT( showDictionaryInfo( QString const & ) ) );
 
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );

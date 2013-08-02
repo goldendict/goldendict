@@ -484,7 +484,12 @@ void AardDictionary::loadArticle( quint32 address,
                      "</i></i></i></i></i></i></i></i>"
                      "</a></a></a></a></a></a></a></a>";
 
-    articleText = "<div class=\"aard\">" + articleText + cleaner + "</div>";
+    string prefix( "<div class=\"aard\"" );
+    if( isToLanguageRTL() )
+      prefix += " dir=\"rtl\"";
+    prefix += ">";
+
+    articleText = prefix + articleText + cleaner + "</div>";
 }
 
 QString const& AardDictionary::getDescription()

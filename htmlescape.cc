@@ -41,10 +41,23 @@ string escape( string const & str )
   return result;
 }
 
-string preformat( string const & str )
+static void storeLineInDiv( string & result, string const & line, bool baseRightToLeft )
 {
-  string escaped = escape( str ), result;
+  result += "<div";
+  if( unescape( QString::fromUtf8( line.c_str(), line.size() ) ).isRightToLeft() != baseRightToLeft )
+  {
+    result += " dir=\"";
+    result += baseRightToLeft ? "ltr\"" : "rtl\"";
+  }
+  result += ">";
+  result += line + "</div>";
+}
 
+string preformat(string const & str , bool baseRightToLeft )
+{
+  string escaped = escape( str ), result, line;
+
+  line.reserve( escaped.size() );
   result.reserve( escaped.size() );
 
   bool leading = true;
@@ -55,20 +68,21 @@ string preformat( string const & str )
     {
       if ( *nextChar == ' ' )
       {
-        result += "&nbsp;";
+        line += "&nbsp;";
         continue;
       }
       else
       if ( *nextChar == '\t' )
       {
-        result += "&nbsp;&nbsp;&nbsp;&nbsp;";
+        line += "&nbsp;&nbsp;&nbsp;&nbsp;";
         continue;
       }
     }
 
     if ( *nextChar == '\n' )
     {
-      result += "<br/>";
+      storeLineInDiv( result, line, baseRightToLeft );
+      line.clear();
       leading = true;
       continue;
     }
@@ -76,10 +90,13 @@ string preformat( string const & str )
     if ( *nextChar == '\r' )
       continue; // Just skip all \r
 
-    result.push_back( *nextChar );
+    line.push_back( *nextChar );
 
     leading = false;
   }
+
+  if( !line.empty() )
+    storeLineInDiv( result, line, baseRightToLeft );
 
   return result;
 }

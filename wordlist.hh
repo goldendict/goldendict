@@ -8,6 +8,7 @@
 #include <QLineEdit>
 
 #include "wordfinder.hh"
+#include "delegate.hh"
 
 class WordList : public QListWidget
 {
@@ -34,6 +35,7 @@ private:
 
   WordFinder * wordFinder;
   QLineEdit * translateLine;
+  WordListItemDelegate listItemDelegate;
 };
 
 #endif // WORDLIST_HH

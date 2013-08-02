@@ -10,7 +10,7 @@ body
   margin-left:  2px;
   margin-bottom: 3px;
   background: white;
-  font-family: Tahoma, Segoe UI, Palatino Linotype, Arial Unicode MS;
+  font-family: Tahoma, Verdana, "Lucida Sans Unicode", "Segoe UI", "Palatino Linotype", "Arial Unicode MS", sans-serif;
 }
 
 a

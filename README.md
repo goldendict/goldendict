@@ -8,17 +8,17 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 
 ### External Deps
 
-* Make, GCC
-* Qt framework 4.7.* or 4.8.*
+* Make, GCC, Git
+* Qt framework. Minumal required version is 4.5. But Qt 4.7 or 4.8 is recommended.
 * Qt Creator IDE is recommended for development
 * Various libraries on Linux (png, zlib, etc)
 * On Mac and Windows all the libraries are already included in the repository
 
 ### Installing External Deps on Ubuntu Linux
 
-    sudo apt-get install pkg-config build-essential qt4-qmake \
+    sudo apt-get install git pkg-config build-essential qt4-qmake \
          libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
-         qt4-qmake libqt4-dev libxtst-dev liblzo2-dev libbz2-dev \
+         qt4-qmake libqt4-dev libqtwebkit-dev libxtst-dev liblzo2-dev libbz2-dev \
          libao-dev libavutil-dev libavformat-dev
 
 ## How to build
@@ -27,10 +27,11 @@ First, clone this repository, e.g.:
 
     git clone git://github.com/goldendict/goldendict.git
 
-And then invoke `qmake` and `make`:
+And then invoke `qmake-qt4` and `make`:
 
-    cd goldendict && qmake && make
+    cd goldendict && qmake-qt4 && make
 
+In case when qmake-qt4 does not exist, try using `qmake` but make sure it is indeed from the Qt 4 installation.
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 
 ### Building without internal audio player

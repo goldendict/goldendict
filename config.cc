@@ -309,6 +309,12 @@ Class load() throw( exError )
     if ( QDir( "/usr/share/dictd" ).exists() )
       c.paths.push_back( Path( "/usr/share/dictd", true ) );
 
+    if ( QDir( "/usr/share/opendict/dictionaries" ).exists() )
+      c.paths.push_back( Path( "/usr/share/opendict/dictionaries", true ) );
+
+    if ( QDir( "/usr/share/goldendict-wordnet" ).exists() )
+      c.paths.push_back( Path( "/usr/share/goldendict-wordnet", true ) );
+
     if ( QDir( "/usr/share/WyabdcRealPeopleTTS" ).exists() )
       c.soundDirs.push_back( SoundDir( "/usr/share/WyabdcRealPeopleTTS", "WyabdcRealPeopleTTS" ) );
 

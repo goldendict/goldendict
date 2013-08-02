@@ -2,6 +2,9 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "gdappstyle.hh"
+
+#if QT_VERSION >= 0x040600
+
 #include "dictionarybar.hh"
 
 #include <QWidget>
@@ -44,3 +47,5 @@ bool GdAppStyle::dictionaryBarButton(const QWidget * widget) const {
 
   return false;
 }
+
+#endif // QT_VERSION

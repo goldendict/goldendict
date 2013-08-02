@@ -87,6 +87,14 @@ void HistoryPaneWidget::setUp( Config::Class * cfg,  History * history, QMenu * 
   connect( m_historyList, SIGNAL( customContextMenuRequested( QPoint const & ) ),
            this, SLOT( showCustomMenu( QPoint const & ) ) );
 
+  listItemDelegate = new WordListItemDelegate( m_historyList->itemDelegate() );
+  m_historyList->setItemDelegate( listItemDelegate );
+}
+
+HistoryPaneWidget::~HistoryPaneWidget()
+{
+  if( listItemDelegate )
+    delete listItemDelegate;
 }
 
 void HistoryPaneWidget::copySelectedItems()

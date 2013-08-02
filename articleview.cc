@@ -12,16 +12,19 @@
 #include <QClipboard>
 #include <QKeyEvent>
 #include <QFileDialog>
-#include <QDebug>
-#include <QUrl>
-#include <QWebElement>
-#include <QCryptographicHash>
 #include "folding.hh"
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
 #include "programs.hh"
 #include "dprintf.hh"
 #include "ffmpegaudio.hh"
+#include <QDebug>
+#include <QCryptographicHash>
+
+#if QT_VERSION >= 0x040600
+#include <QWebElement>
+#endif
+
 #include "qt4x5.hh"
 
 #include <assert.h>
@@ -192,7 +195,11 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
-  Ffmpeg::AudioPlayer::instance().stop();
+
+#ifndef DISABLE_INTERNAL_PLAYER
+  if ( cfg.preferences.useInternalPlayer )
+    Ffmpeg::AudioPlayer::instance().stop();
+#endif
 }
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
@@ -200,8 +207,11 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
                                   Contexts const & contexts )
 {
 
+#ifndef DISABLE_INTERNAL_PLAYER
   // first, let's stop the player
-  Ffmpeg::AudioPlayer::instance().stop();
+  if ( cfg.preferences.useInternalPlayer )
+    Ffmpeg::AudioPlayer::instance().stop();
+#endif
 
   QUrl req;
 
@@ -1231,6 +1241,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
+#if QT_VERSION >= 0x040600
   QWebElement el = r.element();
   QUrl imageUrl;
   if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
@@ -1250,6 +1261,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
     menu.addAction( saveSoundAction );
   }
+#endif
 
   QString selectedText = ui.definition->selectedText();
 
@@ -1258,8 +1270,15 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     // We don't prompt for selections larger or equal to 60 chars, since
     // it ruins the menu and it's hardly a single word anyway.
 
+    QString text = ui.definition->selectedText();
+    if( text.isRightToLeft() )
+    {
+      text.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
+      text.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
+    }
+
     lookupSelection = new QAction( tr( "&Look up \"%1\"" ).
-                                   arg( ui.definition->selectedText() ),
+                                   arg( text ),
                                    &menu );
     menu.addAction( lookupSelection );
 
@@ -1267,18 +1286,18 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     {
       lookupSelectionNewTab = new QAction( QIcon( ":/icons/addtab.png" ),
                                            tr( "Look up \"%1\" in &New Tab" ).
-                                           arg( ui.definition->selectedText() ),
+                                           arg( text ),
                                            &menu );
       menu.addAction( lookupSelectionNewTab );
 
       sendWordToInputLineAction = new QAction( tr( "Send \"%1\" to input line" ).
-                                               arg( ui.definition->selectedText() ),
+                                               arg( text ),
                                                &menu );
       menu.addAction( sendWordToInputLineAction );
     }
 
     addWordToHistoryAction = new QAction( tr( "&Add \"%1\" to history" ).
-                                          arg( ui.definition->selectedText() ),
+                                          arg( text ),
                                           &menu );
     menu.addAction( addWordToHistoryAction );
 
@@ -1420,6 +1439,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if( result == saveImageAction || result == saveSoundAction )
     {
+#if QT_VERSION >= 0x040600
       QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
       QString savePath;
       QString fileName;
@@ -1468,6 +1488,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
         emit storeResourceSavePath( QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() ) );
         saveResource( url, ui.definition->url(), fileName );
       }
+#endif
     }
     else
     {
@@ -1765,8 +1786,9 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 
     if ( ui.searchCaseSensitive->isChecked() )
       f |= QWebPage::FindCaseSensitively;
-
+#if QT_VERSION >= 0x040600
     f |= QWebPage::HighlightAllOccurrences;
+#endif
 
     ui.definition->findText( "", f );
 
