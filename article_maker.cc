@@ -446,13 +446,7 @@ void ArticleRequest::altSearchFinished()
 
     for( unsigned x = 0; x < altsVector.size(); ++x )
     {
-      DPRINTF( "Alt: %ls\n",
-#ifdef Q_OS_WIN
-               gd::toQString( altsVector[ x ] ).toStdWString().c_str()
-#else
-               altsVector[ x ].c_str()
-#endif
-               );
+      qDebug() << "Alt:" << gd::toQString( altsVector[ x ] );
     }
 
     wstring wordStd = gd::toWString( word );

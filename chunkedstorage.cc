@@ -125,7 +125,10 @@ Reader::Reader( File::Class & f, uint32_t offset ): file( f )
 {
   file.seek( offset );
 
-  offsets.resize( file.read< uint32_t >() );
+  uint32_t size =  file.read< uint32_t >();
+  if ( size == 0 )
+    return;
+  offsets.resize( size );
   file.read( &offsets.front(), offsets.size() * sizeof( uint32_t ) );
 }
 

@@ -346,7 +346,7 @@ void DslDictionary::doDeferredInit()
 
       chunks = new ChunkedStorage::Reader( idx, idxHeader.chunksOffset );
 
-      // Open the .dict file
+      // Open the .dsl file
 
       dz = dict_data_open( getDictionaryFilenames()[ 0 ].c_str(), 0 );
 
@@ -1607,13 +1607,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // Building the index
         initializing.indexingDictionary( Utf8::encode( scanner.getDictionaryName() ) );
 
-        DPRINTF( "Dictionary name: %ls\n",
-#ifdef Q_OS_WIN
-                 gd::toQString( scanner.getDictionaryName() ).toStdWString().c_str()
-#else
-                 scanner.getDictionaryName().c_str()
-#endif
-        );
+        qDebug() << "Building the index for dictionary:"
+                 << gd::toQString( scanner.getDictionaryName() );
 
         File::Class idx( indexFile, "wb" );
 
@@ -1795,13 +1790,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             if ( isDslWs( curString[ 0 ] ) )
               break; // No more headwords
 
-            DPRINTF( "Alt headword: %ls\n",
-#ifdef Q_OS_WIN
-                     gd::toQString( curString ).toStdWString().c_str()
-#else
-                     curString.c_str()
-#endif
-                     );
+            qDebug() << "Alt headword" << gd::toQString( curString );
 
             processUnsortedParts( curString, true );
             expandTildes( curString, allEntryWords.front() );

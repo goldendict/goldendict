@@ -101,6 +101,9 @@ long DataRequest::dataSize()
 void DataRequest::getDataSlice( size_t offset, size_t size, void * buffer )
   throw( exSliceOutOfRange )
 {
+  if ( size == 0 )
+    return;
+
   Mutex::Lock _( dataMutex );
 
   if ( offset + size > data.size() || !hasAnyData )

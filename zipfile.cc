@@ -16,7 +16,11 @@ struct EndOfCdirRecord
   quint16 numDisk, numDiskCd, totalEntriesDisk, totalEntries;
   quint32 size, offset;
   quint16 commentLength;
-} __attribute__((packed));
+}
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 struct CentralFileHeaderRecord
 {
@@ -26,7 +30,11 @@ struct CentralFileHeaderRecord
   quint16 fileNameLength, extraFieldLength, fileCommentLength, diskNumberStart,
           intFileAttrs;
   quint32 externalFileAttrs, offsetOfLocalHeader;
-} __attribute__((packed));
+}
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 struct LocalFileHeaderRecord
 {
@@ -34,7 +42,11 @@ struct LocalFileHeaderRecord
   quint16 verNeeded, gpBits, compressionMethod, fileTime, fileDate;
   quint32 crc32, compressedSize, uncompressedSize;
   quint16 fileNameLength, extraFieldLength;
-} __attribute__((packed));
+}
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 #pragma pack( pop )
 

@@ -141,6 +141,10 @@ string encode( wstring const & in ) throw()
 
 wstring decode( string const & in ) throw( exCantDecode )
 {
+  
+  if ( in.size() == 0 )
+    return wstring();
+
   std::vector< wchar > buffer( in.size() );
 
   long result = decode( in.data(),  in.size(), &buffer.front() );

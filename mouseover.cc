@@ -25,16 +25,16 @@ MouseOver & MouseOver::instance()
 #ifdef Q_OS_WIN32
 const UINT WM_MY_SHOW_TRANSLATION = WM_USER + 301;
 static wchar_t className[] = L"GoldenDictMouseover";
-typedef BOOL WINAPI ( *ChangeWindowMessageFilterFunc )( UINT, DWORD );
+typedef BOOL ( WINAPI  *ChangeWindowMessageFilterFunc )( UINT, DWORD );
 
-#ifndef CHANGEFILTERSTRUCT
+#ifndef WINAPI_FAMILY
 typedef struct tagCHANGEFILTERSTRUCT {
   DWORD cbSize;
   DWORD ExtStatus;
 } CHANGEFILTERSTRUCT, *PCHANGEFILTERSTRUCT;
 #endif
 
-typedef BOOL WINAPI ( *ChangeWindowMessageFilterExFunc )( HWND, UINT, DWORD, PCHANGEFILTERSTRUCT );
+typedef BOOL ( WINAPI  *ChangeWindowMessageFilterExFunc )( HWND, UINT, DWORD, PCHANGEFILTERSTRUCT );
 
 #endif // Q_OS_WIN32
 

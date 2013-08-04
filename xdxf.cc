@@ -25,6 +25,10 @@
 #include "indexedzip.hh"
 #include "filetype.hh"
 
+#ifdef _MSC_VER
+#include <stub_msvc.h>
+#endif
+
 #include <QIODevice>
 #include <QXmlStreamReader>
 #include <QTextDocument>
@@ -94,7 +98,11 @@ struct IdxHeader
                                      // resource index.
   uint32_t zipIndexRootOffset;
   uint32_t revisionNumber; // Format revision 
-} __attribute__((packed));
+}
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
 bool indexIsOldOrBad( string const & indexFile )
 {

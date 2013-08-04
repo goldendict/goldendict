@@ -4,7 +4,11 @@
 #include "termination.hh"
 #include <exception>
 #include <typeinfo>
+
+#ifndef _MSC_VER
 #include <cxxabi.h>
+#endif
+
 #include <string>
 
 #ifndef __WIN32
@@ -28,13 +32,24 @@ static void termHandler()
   char * function = 0;
   size_t functionLength = 0;
 
+#ifdef _MSC_VER
+  std::type_info * ti = 0;
+#else
   std::type_info * ti = __cxxabiv1::__cxa_current_exception_type();
+#endif
 
   if ( ti )
   {
     char const * name = ti->name();
 
+#ifdef _MSC_VER
+    char * ret = 0;
+    // avoid 'unused' warnings
+    (void) status;
+    (void) functionLength;
+#else
     char * ret = abi::__cxa_demangle( name, function, &functionLength, &status );
+#endif
 
     if ( ret )
     {

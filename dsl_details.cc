@@ -2,16 +2,15 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "dsl_details.hh"
+
 #include "folding.hh"
 #include "langcoder.hh"
-#include <wctype.h>
-#include <stdio.h>
 #include "dprintf.hh"
 #include "ufile.hh"
-
-#ifdef Q_OS_WIN
 #include "wstring_qt.hh"
-#endif
+
+#include <stdio.h>
+#include <wctype.h>
 
 namespace Dsl {
 namespace Details {
@@ -545,13 +544,8 @@ void ArticleDom::closeTag( wstring const & name,
   else
   if ( warn )
   {
-    FDPRINTF( stderr, "Warning: no corresponding opening tag for closing tag \"/%ls\" found.\n",
-#ifdef Q_OS_WIN
-              gd::toQString( name ).toStdWString().c_str()
-#else
-              name.c_str()
-#endif
-              );
+    qWarning() << "Warning: no corresponding opening tag for closing tag" <<
+                   gd::toQString( name ) << "found.";
   }
 }
 
@@ -592,7 +586,7 @@ void ArticleDom::nextChar() throw( eot )
 
 DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
   encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), linesRead( 0 )
+  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.

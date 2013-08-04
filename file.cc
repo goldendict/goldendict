@@ -9,7 +9,9 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 #ifdef __WIN32
 #include <windows.h>
@@ -248,7 +250,7 @@ bool Class::eof() throw( exWriteError )
   if ( writeBuffer )
     flushWriteBuffer();
 
-  return feof( f );
+  return feof( f ) != 0;
 }
 
 FILE * Class::file() throw( exWriteError )

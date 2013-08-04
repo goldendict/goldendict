@@ -5,6 +5,11 @@
 
 #include "zlib.h"
 
+// eliminate some VC++ warnings
+#ifdef _MSC_VER
+#define fileno _fileno
+#endif
+
 #ifdef __cplusplus
 extern "C"
 {

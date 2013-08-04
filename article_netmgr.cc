@@ -301,6 +301,11 @@ qint64 ArticleResourceReply::bytesAvailable() const
 
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 {
+  // From the doc: "This function might be called with a maxSize of 0,
+  // which can be used to perform post-reading operations".
+  if ( maxSize == 0 )
+    return 0;
+
   DPRINTF( "====reading %d bytes\n", (int)maxSize );
 
   bool finished = req->isFinished();
