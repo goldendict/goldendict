@@ -35,7 +35,21 @@ LIBS += \
 !isEmpty(DISABLE_INTERNAL_PLAYER): DEFINES += DISABLE_INTERNAL_PLAYER
 
 win32 {
-	TARGET = GoldenDict
+    TARGET = GoldenDict
+
+    win32-msvc* {
+        VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
+        DEFINES += __WIN32 DISABLE_INTERNAL_PLAYER
+        DISABLE_INTERNAL_PLAYER=1 # Currently ffmeg is not supported with msvc
+        QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
+        LIBS += -lshell32 -luser32 -lsapi -lole32 -lhunspell
+        LIBS += -L$${PWD}/winlibs/lib/msvc
+    } else {
+        LIBS += lhunspell-1.3.2
+        LIBS += -L$${PWD}/winlibs/lib
+        !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
+    }
+
     LIBS += -liconv \
         -lwsock32 \
         -lpsapi \
@@ -45,8 +59,8 @@ win32 {
         -lcomdlg32
     LIBS += -lvorbisfile \
         -lvorbis \
-        -logg \
-        -lhunspell-1.3.2
+        -logg
+
     isEmpty(DISABLE_INTERNAL_PLAYER) {
         LIBS += -lao \
             -lavutil-gd \
@@ -55,14 +69,12 @@ win32 {
     }
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
-    LIBS += -L$${PWD}/winlibs/lib
 
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
 
     Release:DEFINES += NO_CONSOLE
 
-    !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 }
 
