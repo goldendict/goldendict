@@ -39,8 +39,7 @@ win32 {
 
     win32-msvc* {
         VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
-        DEFINES += __WIN32 DISABLE_INTERNAL_PLAYER
-        DISABLE_INTERNAL_PLAYER=1 # Currently ffmeg is not supported with msvc
+        DEFINES += __WIN32
         QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
         LIBS += -lshell32 -luser32 -lsapi -lole32 -lhunspell
         LIBS += -L$${PWD}/winlibs/lib/msvc
