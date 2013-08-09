@@ -44,7 +44,7 @@ win32 {
         LIBS += -lshell32 -luser32 -lsapi -lole32 -lhunspell
         LIBS += -L$${PWD}/winlibs/lib/msvc
     } else {
-        LIBS += lhunspell-1.3.2
+        LIBS += -lhunspell-1.3.2
         LIBS += -L$${PWD}/winlibs/lib
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
     }
