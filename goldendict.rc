@@ -1,4 +1,4 @@
-#include "winuser.h"
+#include "windows.h"
 
 IDI_ICON1 ICON DISCARDABLE "icons/programicon.ico"
 IDI_ICON2 ICON DISCARDABLE "icons/programicon_old.ico"
