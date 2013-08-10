@@ -39,7 +39,7 @@ win32 {
 
     win32-msvc* {
         VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
-        DEFINES += __WIN32
+        DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
         LIBS += -lshell32 -luser32 -lsapi -lole32 -lhunspell
         LIBS += -L$${PWD}/winlibs/lib/msvc
