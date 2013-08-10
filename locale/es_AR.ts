@@ -3996,7 +3996,7 @@ Enable this option to workaround the problem.</source>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation>No identifique GoldenDict en encabezados HTTP</translation>
+        <translation>No identificar GoldenDict en encabezados HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1112"/>
