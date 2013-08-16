@@ -122,6 +122,7 @@
     <Import Project="MSBuild\QtExtensions\rcc.props" />
     <Import Project="MSBuild\QtExtensions\uic.props" />
     <Import Project="MSBuild\QtExtensions\lrelease.props" />
+    <Import Project="MSBuild\custom.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
@@ -356,9 +357,6 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <PreBuildEvent>
-      <Command>git describe --tags --always --dirty &gt; version.txt</Command>
-    </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\winlibs\lib\msvc\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
     </PostBuildEvent>
@@ -419,9 +417,6 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <PreBuildEvent>
-      <Command>git describe --tags --always --dirty &gt; version.txt</Command>
-    </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\winlibs\lib\msvc\x64\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
     </PostBuildEvent>
@@ -483,9 +478,6 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <PreBuildEvent>
-      <Command>git describe --tags --always --dirty &gt; version.txt</Command>
-    </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\winlibs\lib\msvc\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
     </PostBuildEvent>
@@ -547,9 +539,6 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <PreBuildEvent>
-      <Command>git describe --tags --always --dirty &gt; version.txt</Command>
-    </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\winlibs\lib\msvc\x64\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
     </PostBuildEvent>
@@ -618,9 +607,6 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <PreBuildEvent>
-      <Command>git describe --tags --always --dirty &gt; version.txt</Command>
-    </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\winlibs\lib\msvc\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
     </PostBuildEvent>
@@ -693,9 +679,6 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <PreBuildEvent>
-      <Command>git describe --tags --always --dirty &gt; version.txt</Command>
-    </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)\winlibs\lib\msvc\x64\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
     </PostBuildEvent>
@@ -1221,6 +1204,8 @@
     <None Include="flags\pw.png" />
     <None Include="flags\py.png" />
     <None Include="flags\qa.png" />
+    <None Include="MSBuild\custom.props" />
+    <None Include="MSBuild\custom.targets" />
     <None Include="MSBuild\QtExtensions\lrelease.props" />
     <None Include="MSBuild\QtExtensions\lrelease.targets" />
     <None Include="MSBuild\QtExtensions\moc.props" />
@@ -1378,5 +1363,6 @@
     <Import Project="MSBuild\QtExtensions\rcc.targets" />
     <Import Project="MSBuild\QtExtensions\uic.targets" />
     <Import Project="MSBuild\QtExtensions\lrelease.targets" />
+    <Import Project="MSBuild\custom.targets" />
   </ImportGroup>
 </Project>

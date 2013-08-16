@@ -1394,6 +1394,12 @@
     <None Include="article-style.css">
       <Filter>Resources\CSS</Filter>
     </None>
+    <None Include="MSBuild\custom.props">
+      <Filter>Customizations</Filter>
+    </None>
+    <None Include="MSBuild\custom.targets">
+      <Filter>Customizations</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MSBuild\QtExtensions\moc.xml">
