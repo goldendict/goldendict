@@ -441,7 +441,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;..\..\Qt\4.8.5-msvc2010\include;..\..\Qt\4.8.5-msvc2010\include\QtSvg;..\..\Qt\4.8.5-msvc2010\include\QtWebKit;..\..\Qt\4.8.5-msvc2010\include\QtWidgets;..\..\Qt\4.8.5-msvc2010\include\QtNetwork;..\..\Qt\4.8.5-msvc2010\include\QtXml;..\..\Qt\4.8.5-msvc2010\include\QtGui;..\..\Qt\4.8.5-msvc2010\include\QtCore;build;..\..\Qt\4.8.5-msvc2010\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -456,6 +455,7 @@
       <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;build;$(QTDIR)\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;lzo2.lib;hunspell.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\QtSvg4.lib;$(QTDIR)\lib\QtWebKit4.lib;$(QTDIR)\lib\QtNetwork4.lib;$(QTDIR)\lib\QtXml4.lib;$(QTDIR)\lib\QtGui4.lib;$(QTDIR)\lib\QtCore4.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -505,7 +505,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;..\..\Qt\4.8.5-msvc2010\include;..\..\Qt\4.8.5-msvc2010\include\QtSvg;..\..\Qt\4.8.5-msvc2010\include\QtWebKit;..\..\Qt\4.8.5-msvc2010\include\QtWidgets;..\..\Qt\4.8.5-msvc2010\include\QtNetwork;..\..\Qt\4.8.5-msvc2010\include\QtXml;..\..\Qt\4.8.5-msvc2010\include\QtGui;..\..\Qt\4.8.5-msvc2010\include\QtCore;build;..\..\Qt\4.8.5-msvc2010\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;build;$(QTDIR)\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -569,7 +569,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtSvg;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtWebKit;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtWidgets;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtNetwork;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtXml;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtGui;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtCore;build;..\..\Qt\qt-everywhere-opensource-src-4.8.5\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;build;$(QTDIR)\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <BrowseInformation>false</BrowseInformation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -643,7 +643,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtSvg;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtWebKit;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtWidgets;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtNetwork;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtXml;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtGui;..\..\Qt\qt-everywhere-opensource-src-4.8.5\include\QtCore;build;..\..\Qt\qt-everywhere-opensource-src-4.8.5\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;build;$(QTDIR)\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <BrowseInformation>false</BrowseInformation>
       <ExceptionHandling>Sync</ExceptionHandling>
