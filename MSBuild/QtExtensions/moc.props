@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <QtMOCCompile>
+      <OutputFile                             Condition="'%(QtMOCCompile.OutputFile)'                             == ''">%(Filename)%(Extension).$(Platform).$(Configuration).cpp</OutputFile>
+      <DoNotGenerateInclude                   Condition="'%(QtMOCCompile.DoNotGenerateInclude)'                   == ''">false</DoNotGenerateInclude>
+      <NoWarnings                             Condition="'%(QtMOCCompile.NoWarnings)'                             == ''">false</NoWarnings>
+      <BaseIncludePath                        Condition="'%(QtMOCCompile.BaseIncludePath)'                        == ''"></BaseIncludePath>
+      <DefaultIncludeDirectories              Condition="'%(QtMOCCompile.DefaultIncludeDirectories)'              == ''"></DefaultIncludeDirectories>
+      <AdditionalIncludeDirectories           Condition="'%(QtMOCCompile.AdditionalIncludeDirectories)'           == ''"></AdditionalIncludeDirectories>
+      <PreprocessOnly                         Condition="'%(QtMOCCompile.PreprocessOnly)'                         == ''">false</PreprocessOnly>
+      <DefaultPreprocessorDefinitions         Condition="'%(QtMOCCompile.DefaultPreprocessorDefinitions)'         == ''"></DefaultPreprocessorDefinitions>
+      <PreprocessorDefinitions                Condition="'%(QtMOCCompile.PreprocessorDefinitions)'                == ''"></PreprocessorDefinitions>
+      <DefaultUndefinePreprocessorDefinitions Condition="'%(QtMOCCompile.DefaultUndefinePreprocessorDefinitions)' == ''"></DefaultUndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions        Condition="'%(QtMOCCompile.PreprocessorDefinitions)'                == ''"></UndefinePreprocessorDefinitions>
+      <MOC                                    Condition="'%(QtMOCCompile.MOC)'                                    == ''">$(QTDIR)\bin\moc.exe</MOC>
+      <ClCompileAssemblerListingLocation      Condition="'%(QtMOCCompile.ClCompileAssemblerListingLocation)'      == ''"></ClCompileAssemblerListingLocation>
+      <ClCompileObjectFileName                Condition="'%(QtMOCCompile.ClCompileObjectFileName)'                == ''"></ClCompileObjectFileName>
+      <ClCompileXMLDocumentationFileName      Condition="'%(QtMOCCompile.ClCompileXMLDocumentationFileName)'      == ''"></ClCompileXMLDocumentationFileName>
+      <CommandLineTemplate>%(MOC) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
+    </QtMOCCompile>
+  </ItemDefinitionGroup>
+  <PropertyGroup>
+    <BuildGenerateSourcesTargets>$(BuildGenerateSourcesTargets);_QtMOCCompile</BuildGenerateSourcesTargets>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+  <ProjectSchemaDefinitions
+  xmlns="http://schemas.microsoft.com/build/2009/properties"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+>
+  <Rule
+    Name="QtUIC"
+    DisplayName="Qt User Interface Compiler"
+    PageTemplate="tool"
+    SwitchPrefix="-"
+    Order="221"
+  >
+    <Rule.DataSource>
+      <DataSource
+        Persistence="ProjectFile"
+        ItemType="QtUICCompile"
+        HasConfigurationCondition="true"
+      />
+    </Rule.DataSource>
+    <Rule.Categories>
+      <Category
+        Name="General"
+        DisplayName="General"
+      />
+      <Category
+        Name="Command Line"
+        DisplayName="Command Line"
+        Subtype="CommandLine"
+      />
+    </Rule.Categories>
+    <StringProperty
+      Name="OutputFile"
+      Subtype="file"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/uic.html"
+      DisplayName="Output File"
+      Description="Write output to &lt;file&gt; instead of to standard output. (-o &lt;file&gt;)"
+      Switch="o &quot;[value]&quot;"
+    />
+    <StringListProperty
+      Name="TranslationFunction"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/uic.html"
+      DisplayName="Translation Function"
+      Description="Use &lt;func&gt; for translating strings instead of tr(). (-tr &lt;func&gt;)"
+      Switch="tr &quot;[value]&quot;"
+    />
+    <BoolProperty
+      Name="DontGenerateHeaderGuards"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/uic.html"
+      DisplayName="Don't Generate Header Guards"
+      Description="Don't generate guards against multiple inclusion (#ifndef FOO_H …). (-p)"
+      Switch="p"
+    />
+    <StringProperty
+      Name="Inputs"
+      Category="Command Line"
+      IsRequired="true"
+    >
+      <StringProperty.DataSource>
+        <DataSource
+          Persistence="ProjectFile"
+          ItemType="QtUICCompile"
+          SourceType="Item"
+        />
+      </StringProperty.DataSource>
+    </StringProperty>
+    <StringProperty
+      Subtype="AdditionalOptions"
+      Name="AdditionalOptions"
+      Category="Command Line"
+      DisplayName="Additional Options"
+      F1Keyword="vc.project.AdditionalOptionsPage"
+    />
+    <StringProperty
+      Name="UIC"
+      Subtype="file"
+      DisplayName="UIC"
+      Description="Path to uic.exe"
+      IncludeInCommandLine="False"
+    />
+    <StringProperty
+      Name="CommandLineTemplate"
+      Category="Command Line"
+      DisplayName="Command Line"
+      Visible="False"
+      IncludeInCommandLine="False"
+    />
+  </Rule>
+  <ItemType Name="QtUICCompile" DisplayName="Qt UIC Compile" />
+  <FileExtension Name="*.ui" ContentType="QtUICCompile" />
+  <ContentType Name="QtUICCompile" DisplayName="Qt UIC Compile" ItemType="QtUICCompile" />
+</ProjectSchemaDefinitions>

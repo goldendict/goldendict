@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName Include="QtUICCompile">
+      <Targets>QtUICCompile</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+
+  <PropertyGroup>
+      <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <UsingTask
+    TaskName="QtUIC"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+
+  <Target
+    Name="SelectQtUICCompile"
+    DependsOnTargets="_SelectedFiles;SelectCustomBuild"
+  >
+    <ItemGroup Condition="'@(SelectedFiles)' != ''">
+      <QtUICCompile
+        Remove="@(QtUICCompile)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'"
+      />
+    </ItemGroup>
+  </Target>
+
+  <Target
+    Name="QtUICCompile"
+    Condition="'@(QtUICCompile)' != ''"
+    DependsOnTargets="SelectQtUICCompile"
+    Inputs="@(QtUICCompile)"
+    Outputs="%(OutputFile)"
+  >
+    <Message Text="UIC %(QtUICCompile.Identity) -> $([System.IO.Path]::GetFileName('%(QtUICCompile.OutputFile)'))"
+             Importance="high"/>
+    <ItemGroup>
+      <QtUICCompile_tlog
+        Include="%(QtUICCompile.OutputFile)"
+        Condition="'%(QtUICCompile.OutputFile)' != '' and '%(QtUICCompile.ExcludedFromBuild)' != 'true'"
+      >
+        <Source>@(QtUICCompile, '|')</Source>
+      </QtUICCompile_tlog>
+    </ItemGroup>
+    <WriteLinesToFile
+      Condition="'@(QtUICCompile_tlog)' != '' and '%(QtUICCompile_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(QtUICCompile_tlog.Source);@(QtUICCompile_tlog-&gt;'%(Fullpath)')"
+    />
+    <MakeDir
+      Directories="$([System.IO.Path]::GetDirectoryName('%(QtUICCompile.OutputFile)'))"
+    />
+    <QtUIC
+      Condition="'%(QtUICCompile.ExcludedFromBuild)' != 'true'"
+      OutputFile="%(QtUICCompile.OutputFile)"
+      TranslationFunction="%(QtUICCompile.TranslationFunction)"
+      DontGenerateHeaderGuards="%(QtUICCompile.DontGenerateHeaderGuards)"
+      Inputs="%(QtUICCompile.Identity)"
+      AdditionalOptions="%(QtUICCompile.AdditionalOptions)"
+      CommandLineTemplate="%(QtUICCompile.CommandLineTemplate)"
+    />
+  </Target>
+
+  <Target
+    Name="QtUICCompileAndInclude"
+    Condition="'@(QtUICCompile)' != ''"
+    DependsOnTargets="SelectQtUICCompile;QtUICCompile"
+  >
+    <ItemGroup>
+      <ClInclude
+        Include="%(QtUICCompile.OutputFile)"
+        Condition="'%(QtUICCompile.ExcludedFromBuild)' != 'true'"
+      >
+        <AutoGen>True</AutoGen>
+        <DependentUpon>%(QtUICCompile.Identity)</DependentUpon>
+      </ClInclude>
+    </ItemGroup>
+  </Target>
+
+  <Target
+    Name="_QtUICCompile"
+    BeforeTargets="ClCompile"
+    DependsOnTargets="$(BeforeQtUICCompileTargets);QtUICCompileAndInclude;$(AfterQtUICCompileTargets)"
+  />
+</Project>

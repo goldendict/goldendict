@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura and Tvangeste.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName Include="QtTranslate">
+      <Targets>QtTranslate</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+
+  <PropertyGroup>
+      <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <UsingTask
+    TaskName="QtLrelease"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+
+  <Target
+    Name="SelectQtTranslate"
+    DependsOnTargets="_SelectedFiles;SelectCustomBuild"
+  >
+    <ItemGroup Condition="'@(SelectedFiles)' != ''">
+      <QtTranslate
+        Remove="@(QtTranslate)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'"
+      />
+    </ItemGroup>
+  </Target>
+
+  <Target
+    Name="QtTranslate"
+    Condition="'@(QtTranslate)' != ''"
+    DependsOnTargets="SelectQtTranslate"
+    Inputs="@(QtTranslate)"
+    Outputs="%(OutputFile)"
+  >
+    <Message Text="LRELEASE %(QtTranslate.Identity) -> $([System.IO.Path]::GetFileName('%(QtTranslate.OutputFile)'))"
+             Importance="high"/>
+    <ItemGroup>
+      <QtTranslate_tlog
+        Include="%(QtTranslate.OutputFile)"
+        Condition="'%(QtTranslate.OutputFile)' != '' and '%(QtTranslate.ExcludedFromBuild)' != 'true'"
+      >
+        <Source>@(QtTranslate, '|')</Source>
+      </QtTranslate_tlog>
+    </ItemGroup>
+    <WriteLinesToFile
+      Condition="'@(QtTranslate_tlog)' != '' and '%(QtTranslate_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(QtTranslate_tlog.Source);@(QtTranslate_tlog-&gt;'%(Fullpath)')"
+    />
+    <MakeDir
+      Directories="$([System.IO.Path]::GetDirectoryName('%(QtTranslate.OutputFile)'))"
+    />
+    <QtLrelease
+      Condition="'%(QtTranslate.ExcludedFromBuild)' != 'true'"
+      OutputFile="%(QtTranslate.OutputFile)"
+      Inputs="%(QtTranslate.Identity)"
+      AdditionalOptions="%(QtTranslate.AdditionalOptions)"
+      CommandLineTemplate="%(QtTranslate.CommandLineTemplate)"
+    />
+  </Target>
+
+  <Target
+    Name="QtTranslateAndInclude"
+    Condition="'@(QtTranslate)' != ''"
+    DependsOnTargets="SelectQtTranslate;QtTranslate"
+  >
+    <ItemGroup>
+      <ClInclude
+        Include="%(QtTranslate.OutputFile)"
+        Condition="'%(QtTranslate.ExcludedFromBuild)' != 'true'"
+      >
+        <AutoGen>True</AutoGen>
+        <DependentUpon>%(QtTranslate.Identity)</DependentUpon>
+      </ClInclude>
+    </ItemGroup>
+  </Target>
+
+  <Target
+    Name="_QtTranslate"
+    BeforeTargets="ClCompile"
+    DependsOnTargets="$(BeforeQtTranslateTargets);QtTranslateAndInclude;$(AfterQtTranslateTargets)"
+  />
+</Project>

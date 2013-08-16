@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName Include="QtMOCCompile">
+      <Targets>QtMOCCompile</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+
+  <PropertyGroup>
+      <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <UsingTask
+    TaskName="QtMOC"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+
+  <Target
+    Name="SelectQtMOCCompile"
+    DependsOnTargets="_SelectedFiles;SelectCustomBuild"
+  >
+    <ItemGroup Condition="'@(SelectedFiles)' != ''">
+      <QtMOCCompile
+        Remove="@(QtMOCCompile)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'"
+      />
+    </ItemGroup>
+  </Target>
+
+  <Target
+    Name="QtMOCCompile"
+    Condition="'@(QtMOCCompile)' != ''"
+    DependsOnTargets="SelectQtMOCCompile;QtUICCompile"
+    Inputs="@(QtMOCCompile)"
+    Outputs="%(OutputFile)"
+  >
+    <Message Text="MOC %(QtMOCCompile.Identity) -> $([System.IO.Path]::GetFileName('%(QtMOCCompile.OutputFile)'))"
+             Importance="high"/>
+    <!-- Almost for sure this will cause issues when this target is skipped. -->
+    <ItemGroup>
+      <!-- Take care of other common C++ extensions. -->
+      <ClCompile
+        Include="%(QtMOCCompile.RootDir)%(QtMOCCompile.Directory)%(QtMOCCompile.Filename).cpp"
+        Condition="!exists('%(QtMOCCompile.RootDir)%(QtMOCCompile.Directory)%(QtMOCCompile.Filename).cpp')"
+      >
+        <QtMOCCompileFakeItem>true</QtMOCCompileFakeItem>
+      </ClCompile>
+      <QtMOCCompileNoExtension Include="@(QtMOCCompile-&gt;'%(RootDir)%(Directory)%(Filename)')" />
+      <ClCompileNoExtension Include="@(ClCompile-&gt;'%(RootDir)%(Directory)%(Filename)')" />
+      <BuddyClCompile Include="@(ClCompileNoExtension)" Condition="'%(Identity)' == '@(QtMOCCompileNoExtension)'" />
+      <QtMOCCompile>
+        <DefaultIncludeDirectories Condition="'%(QtMOCCompile.DefaultIncludeDirectories)' == ''">@(BuddyClCompile->'%(AdditionalIncludeDirectories)')</DefaultIncludeDirectories>
+        <DefaultPreprocessorDefinitions Condition="'%(QtMOCCompile.DefaultPreprocessorDefinitions)' == ''">@(BuddyClCompile->'%(PreprocessorDefinitions)')</DefaultPreprocessorDefinitions>
+        <DefaultUndefinePreprocessorDefinitions Condition="'%(QtMOCCompile.DefaultUndefinePreprocessorDefinitions)' == ''">@(BuddyClCompile->'%(UndefinePreprocessorDefinitions)')</DefaultUndefinePreprocessorDefinitions>
+      </QtMOCCompile>
+    </ItemGroup>
+    <ItemGroup>
+      <QtMOCCompile_tlog
+        Include="%(QtMOCCompile.OutputFile)"
+        Condition="'%(QtMOCCompile.OutputFile)' != '' and '%(QtMOCCompile.ExcludedFromBuild)' != 'true'"
+      >
+        <Source>@(QtMOCCompile, '|')</Source>
+      </QtMOCCompile_tlog>
+    </ItemGroup>
+    <WriteLinesToFile
+      Condition="'@(QtMOCCompile_tlog)' != '' and '%(QtMOCCompile_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(QtMOCCompile_tlog.Source);@(QtMOCCompile_tlog-&gt;'%(Fullpath)')"
+    />
+    <MakeDir
+      Directories="$([System.IO.Path]::GetDirectoryName('%(QtMOCCompile.OutputFile)'))"
+    />
+    <QtMOC
+      Condition="'%(QtMOCCompile.ExcludedFromBuild)' != 'true'"
+      OutputFile="%(QtMOCCompile.OutputFile)"
+      DoNotGenerateInclude="%(QtMOCCompile.DoNotGenerateInclude)"
+      NoWarnings="%(QtMOCCompile.NoWarnings)"
+      BaseIncludePath="%(QtMOCCompile.BaseIncludePath)"
+      DefaultIncludeDirectories="%(QtMOCCompile.DefaultIncludeDirectories)"
+      AdditionalIncludeDirectories="%(QtMOCCompile.AdditionalIncludeDirectories)"
+      PreprocessOnly="%(QtMOCCompile.PreprocessOnly)"
+      DefaultPreprocessorDefinitions="%(QtMOCCompile.DefaultPreprocessorDefinitions)"
+      PreprocessorDefinitions="%(QtMOCCompile.PreprocessorDefinitions)"
+      DefaultUndefinePreprocessorDefinitions="%(QtMOCCompile.DefaultUndefinePreprocessorDefinitions)"
+      UndefinePreprocessorDefinitions="%(QtMOCCompile.UndefinePreprocessorDefinitions)"
+      Inputs="%(QtMOCCompile.Identity)"
+      AdditionalOptions="%(QtMOCCompile.AdditionalOptions)"
+      CommandLineTemplate="%(QtMOCCompile.CommandLineTemplate)"
+    />
+    <ItemGroup>
+      <ClCompile
+        Remove="@(ClCompile)"
+        Condition="'%(ClCompile.QtMOCCompileFakeItem)' == 'true'"
+      />
+      <QtMOCCompileNoExtension Remove="*" />
+      <ClCompileNoExtension Remove="*" />
+      <BuddyClCompile Remove="*" />
+    </ItemGroup>
+  </Target>
+
+  <Target
+    Name="QtMOCCompileAndInclude"
+    Condition="'@(QtMOCCompile)' != ''"
+    DependsOnTargets="SelectQtMOCCompile;QtMOCCompile"
+  >
+    <ItemGroup>
+      <ClCompile
+        Include="%(QtMOCCompile.OutputFile)"
+        Condition="'%(QtMOCCompile.ExcludedFromBuild)' != 'true'"
+      >
+        <AutoGen>True</AutoGen>
+        <DependentUpon>%(QtMOCCompile.Identity)</DependentUpon>
+        <WarningLevel>TurnOffAllWarnings</WarningLevel>
+        <PrecompiledHeader>NotUsing</PrecompiledHeader>
+        <AdditionalIncludeDirectories>%(QtMOCCompile.AdditionalIncludeDirectories);%(QtMOCCompile.DefaultIncludeDirectories)</AdditionalIncludeDirectories>
+        <PreprocessorDefinitions>%(QtMOCCompile.DefaultPreprocessorDefinitions);%(QtMOCCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+        <UndefinePreprocessorDefinitions>%(QtMOCCompile.DefaultUndefinePreprocessorDefinitions);%(QtMOCCompile.UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+        <AssemblerListingLocation Condition="'%(QtMOCCompile.ClCompileAssemblerListingLocation)' != ''">%(QtMOCCompile.ClCompileAssemblerListingLocation)</AssemblerListingLocation>
+        <ObjectFileName Condition="'%(QtMOCCompile.ClCompileObjectFileName)' != ''">%(QtMOCCompile.ClCompileObjectFileName)</ObjectFileName>
+        <XMLDocumentationFileName Condition="'%(QtMOCCompile.ClCompileXMLDocumentationFileName)' != ''">%(QtMOCCompile.ClCompileXMLDocumentationFileName)</XMLDocumentationFileName>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+
+  <Target
+    Name="_QtMOCCompile"
+    BeforeTargets="ClCompile"
+    DependsOnTargets="$(BeforeQtMOCCompileTargets);QtMOCCompileAndInclude;$(AfterQtMOCCompileTargets)"
+  />
+</Project>

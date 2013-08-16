@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura and Tvangeste.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<ProjectSchemaDefinitions
+  xmlns="http://schemas.microsoft.com/build/2009/properties"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+>
+  <Rule
+    Name="QtLrelease"
+    DisplayName="Qt Lrelease Tool"
+    PageTemplate="tool"
+    SwitchPrefix="-"
+    Order="220"
+  >
+    <Rule.DataSource>
+      <DataSource
+        Persistence="ProjectFile"
+        ItemType="QtTranslate"
+        HasConfigurationCondition="true"
+      />
+    </Rule.DataSource>
+    <Rule.Categories>
+      <Category
+        Name="General"
+        DisplayName="General"
+      />
+      <Category
+        Name="Command Line"
+        DisplayName="Command Line"
+        Subtype="CommandLine"
+      />
+    </Rule.Categories>
+    <StringProperty
+      Name="OutputFile"
+      Subtype="file"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtlinguist/linguist-manager.html#using-lrelease"
+      DisplayName="Output File"
+      Description="Write output to &lt;file&gt;. (-qm &lt;file&gt;)"
+      Switch="qm &quot;[value]&quot;"
+    />
+    <BoolProperty
+      Name="Compress"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtlinguist/linguist-manager.html#using-lrelease"
+      DisplayName="Compress the QM files"
+      Description="Compress the QM files. (-compress)"
+      Switch="compress"
+    />
+    <StringProperty
+      Name="Inputs"
+      Category="Command Line"
+      IsRequired="true"
+    >
+      <StringProperty.DataSource>
+        <DataSource
+          Persistence="ProjectFile"
+          ItemType="QtTranslate"
+          SourceType="Item"
+        />
+      </StringProperty.DataSource>
+    </StringProperty>
+    <StringProperty
+      Subtype="AdditionalOptions"
+      Name="AdditionalOptions"
+      Category="Command Line"
+      DisplayName="Additional Options"
+      F1Keyword="vc.project.AdditionalOptionsPage"
+    />
+    <StringProperty
+      Name="LRELEASE"
+      Subtype="file"
+      DisplayName="LRELEASE"
+      Description="Path to lrelease.exe"
+      IncludeInCommandLine="False"
+    />
+    <StringProperty
+      Name="CommandLineTemplate"
+      Category="Command Line"
+      DisplayName="Command Line"
+      Visible="False"
+      IncludeInCommandLine="False"
+    />
+  </Rule>
+  <ItemType Name="QtTranslate" DisplayName="Qt Translation" />
+  <FileExtension Name="*.ts" ContentType="QtTranslate" />
+  <ContentType Name="QtTranslate" DisplayName="Qt Translation" ItemType="QtTranslate" />
+</ProjectSchemaDefinitions>
