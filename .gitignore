@@ -30,3 +30,9 @@ version.txt
 .DS_Store
 Info.plist
 GoldenDict.xcodeproj/
+
+# visual studio files
+*.sdf
+*.opensdf
+*.suo
+*.vcxproj.user

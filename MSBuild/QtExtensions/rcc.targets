@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName Include="QtRCCCompile">
+      <Targets>QtRCCCompile</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+
+  <PropertyGroup>
+      <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <UsingTask
+    TaskName="QtRCC"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+
+  <Target
+    Name="SelectQtRCCCompile"
+    DependsOnTargets="_SelectedFiles;SelectCustomBuild"
+  >
+    <ItemGroup Condition="'@(SelectedFiles)' != ''">
+      <QtRCCCompile
+        Remove="@(QtRCCCompile)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'"
+      />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CalculateQtRCCDeps"
+          DependsOnTargets="SelectQtRCCCompile"
+          Outputs="%(QtRCCCompile.Identity)">
+    <Message Text="Calculating dependencies for %(QtRCCCompile.Identity)" />
+
+    <!-- Look into the qrc file and fetch all the referenced files -->
+    <XmlPeek XmlInputPath="%(QtRCCCompile.FullPath)"
+             Query="//file/text()">
+      <Output TaskParameter="Result" ItemName="QtRCCDeps" />
+    </XmlPeek>
+
+    <!-- Add the calculated dependencies to the AdditionalDependencies -->
+    <ItemGroup>
+      <QtRCCCompile>
+        <AdditionalDependencies>@(QtRCCDeps);%(QtRCCCompile.AdditionalDependencies)</AdditionalDependencies>
+      </QtRCCCompile>
+    </ItemGroup>
+
+    <Message Text="Actual Dependencies: @(QtRCCCompile->'%(AdditionalDependencies)')" />
+  </Target>
+
+  <Target
+    Name="QtRCCCompile"
+    Condition="'@(QtRCCCompile)' != ''"
+    DependsOnTargets="SelectQtRCCCompile;CalculateQtRCCDeps"
+    Inputs="@(QtRCCCompile);%(QtRCCCompile.AdditionalDependencies);"
+    Outputs="%(OutputFile)"
+  >
+    <Message Text="RCC %(QtRCCCompile.Identity) -> $([System.IO.Path]::GetFileName('%(QtRCCCompile.OutputFile)'))"
+             Importance="high"/>
+    <ItemGroup>
+      <QtRCCCompile_tlog
+        Include="%(QtRCCCompile.OutputFile)"
+        Condition="'%(QtRCCCompile.OutputFile)' != '' and '%(QtRCCCompile.ExcludedFromBuild)' != 'true'"
+      >
+        <Source>@(QtRCCCompile, '|')</Source>
+      </QtRCCCompile_tlog>
+    </ItemGroup>
+    <WriteLinesToFile
+      Condition="'@(QtRCCCompile_tlog)' != '' and '%(QtRCCCompile_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(QtRCCCompile_tlog.Source);@(QtRCCCompile_tlog-&gt;'%(Fullpath)')"
+    />
+    <MakeDir
+      Directories="$([System.IO.Path]::GetDirectoryName('%(QtRCCCompile.OutputFile)'))"
+    />
+    <QtRCC
+      Condition="'%(QtRCCCompile.ExcludedFromBuild)' != 'true'"
+      OutputFile="%(QtRCCCompile.OutputFile)"
+      ExternalInitializationFunction="%(QtRCCCompile.ExternalInitializationFunction)"
+      Threshold="%(QtRCCCompile.Threshold)"
+      CompressLevel="%(QtRCCCompile.CompressLevel)"
+      Root="%(QtRCCCompile.Root)"
+      DisableCompression="%(QtRCCCompile.DisableCompression)"
+      Binary="%(QtRCCCompile.Binary)"
+      Inputs="%(QtRCCCompile.Identity)"
+      AdditionalOptions="%(QtRCCCompile.AdditionalOptions)"
+      CommandLineTemplate="%(QtRCCCompile.CommandLineTemplate)"
+    />
+  </Target>
+
+  <Target
+    Name="QtRCCCompileAndInclude"
+    Condition="'@(QtRCCCompile)' != ''"
+    DependsOnTargets="SelectQtRCCCompile;QtRCCCompile"
+  >
+    <ItemGroup>
+      <ClCompile
+        Include="%(QtRCCCompile.OutputFile)"
+        Condition="'%(QtRCCCompile.ExcludedFromBuild)' != 'true'"
+      >
+        <AutoGen>True</AutoGen>
+        <DependentUpon>%(QtRCCCompile.Identity)</DependentUpon>
+        <WarningLevel>TurnOffAllWarnings</WarningLevel>
+        <PrecompiledHeader>NotUsing</PrecompiledHeader>
+        <AssemblerListingLocation Condition="'%(QtRCCCompile.ClCompileAssemblerListingLocation)' != ''">%(QtRCCCompile.ClCompileAssemblerListingLocation)</AssemblerListingLocation>
+        <ObjectFileName Condition="'%(QtRCCCompile.ClCompileObjectFileName)' != ''">%(QtRCCCompile.ClCompileObjectFileName)</ObjectFileName>
+        <XMLDocumentationFileName Condition="'%(QtRCCCompile.ClCompileXMLDocumentationFileName)' != ''">%(QtRCCCompile.ClCompileXMLDocumentationFileName)</XMLDocumentationFileName>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+
+  <Target
+    Name="_QtRCCCompile"
+    BeforeTargets="ClCompile"
+    DependsOnTargets="$(BeforeQtRCCCompileTargets);QtRCCCompileAndInclude;$(AfterQtRCCCompileTargets)"
+  />
+</Project>

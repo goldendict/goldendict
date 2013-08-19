@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <VersionFile>$(ProjectDir)version.txt</VersionFile>
+    <NewVersionFile>$(IntDir)version.txt</NewVersionFile>
+  </PropertyGroup>
+
+  <!-- Update the version.txt file, but only if needed, when the version really changes -->
+  <Target Name="GenerateGitVersionFile" AfterTargets="InitializeBuildStatus">
+    <WriteLinesToFile
+            File="$(VersionFile)"
+            Lines="1.5+git"
+            Overwrite="true"
+            Encoding="ASCII"
+            Condition="!Exists($(VersionFile))" />
+
+    <Exec Command="git describe --tags --always --dirty > $(NewVersionFile)"
+          IgnoreExitCode="True" />
+
+    <PropertyGroup>
+      <GoldenDictVersion>$([System.IO.File]::ReadAllText($(VersionFile)).Trim())</GoldenDictVersion>
+      <NewGoldenDictVersion>$([System.IO.File]::ReadAllText($(NewVersionFile)).Trim())</NewGoldenDictVersion>
+    </PropertyGroup>
+
+    <Message Text="Version change: $(GoldenDictVersion) ~> $(NewGoldendictVersion)"
+             Importance="high"
+             Condition="('$(NewGoldenDictVersion)' != '') And
+                        ('$(NewGoldenDictVersion)' != '$(GoldenDictVersion)')" />
+
+    <Copy
+      SourceFiles="$(NewVersionFile)"
+      DestinationFiles="$(VersionFile)"
+      Condition="('$(NewGoldenDictVersion)' != '') And
+                 ('$(NewGoldenDictVersion)' != '$(GoldenDictVersion)')"
+    />
+  </Target>
+
+  <Target Name="CleanVersionFiles" AfterTargets="Clean">
+    <Delete Files="$(VersionFile);$(NewVersionFile)" />
+  </Target>
+
+</Project>

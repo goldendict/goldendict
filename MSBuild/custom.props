@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Be careful adding properties and items here, they will be defined *before*
+       most other properties are defined, hence things like $(IntDir) have
+       wrong values, since they are not yet properly defined -->
+</Project>

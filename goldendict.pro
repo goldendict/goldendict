@@ -46,7 +46,41 @@ LIBS += \
 !isEmpty(DISABLE_INTERNAL_PLAYER): DEFINES += DISABLE_INTERNAL_PLAYER
 
 win32 {
-	TARGET = GoldenDict
+    TARGET = GoldenDict
+
+    win32-msvc* {
+        VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
+        DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
+        contains(QMAKE_TARGET.arch, x86_64) {
+            DEFINES += NOMINMAX __WIN64
+            LIBS += -L$${PWD}/winlibs/lib/msvc/x64
+        } else {
+            LIBS += -L$${PWD}/winlibs/lib/msvc
+        }
+        QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
+        QMAKE_LFLAGS_RELEASE += /LTCG /OPT:REF /OPT:ICF
+        # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
+        LIBS += -lshell32 -luser32 -lsapi -lole32 -lhunspell
+        HUNSPELL_LIB = hunspell
+    } else {
+        LIBS += -L$${PWD}/winlibs/lib
+        !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
+	
+	isEmpty(HUNSPELL_LIB) {
+          greaterThan(QT_MAJOR_VERSION, 4) {
+            lessThan(QT_MINOR_VERSION, 1) {
+              LIBS += -lhunspell-1.3-sjlj
+            } else {
+              LIBS += -lhunspell-1.3-dw2
+            }
+          } else {
+            LIBS += -lhunspell-1.3.2
+          }
+        } else {
+          LIBS += -l$$HUNSPELL_LIB
+        }
+    }
+
     LIBS += -liconv \
         -lwsock32 \
         -lpsapi \
@@ -64,30 +98,15 @@ win32 {
             -lavcodec-gd
     }
 
-    isEmpty(HUNSPELL_LIB) {
-      greaterThan(QT_MAJOR_VERSION, 4) {
-        lessThan(QT_MINOR_VERSION, 1) {
-          LIBS += -lhunspell-1.3-sjlj
-        } else {
-          LIBS += -lhunspell-1.3-dw2
-        }
-      } else {
-        LIBS += -lhunspell-1.3.2
-      }
-    } else {
-      LIBS += -l$$HUNSPELL_LIB
-    }
 
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
-    LIBS += -L$${PWD}/winlibs/lib
 
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
 
     Release:DEFINES += NO_CONSOLE
 
-    !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 }
 

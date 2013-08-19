@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<ProjectSchemaDefinitions
+  xmlns="http://schemas.microsoft.com/build/2009/properties"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+>
+  <Rule
+    Name="QtMOC"
+    DisplayName="Qt Meta Object Compiler"
+    PageTemplate="tool"
+    SwitchPrefix="-"
+    Order="222"
+  >
+    <Rule.DataSource>
+      <DataSource
+        Persistence="ProjectFile"
+        ItemType="QtMOCCompile"
+        HasConfigurationCondition="true"
+      />
+    </Rule.DataSource>
+    <Rule.Categories>
+      <Category
+        Name="General"
+        DisplayName="General"
+      />
+      <Category
+        Name="Command Line"
+        DisplayName="Command Line"
+        Subtype="CommandLine"
+      />
+    </Rule.Categories>
+    <StringProperty
+      Name="OutputFile"
+      Subtype="file"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/moc.html#command-line-options"
+      DisplayName="Output File"
+      Description="Write output to &lt;file&gt; rather than to standard output. (-o &lt;file&gt;)"
+      Switch="o &quot;[value]&quot;"
+    />
+    <!-- -f -->
+    <BoolProperty
+      Name="DoNotGenerateInclude"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/moc.html#command-line-options"
+      DisplayName="Do Not Generate Include"
+      Description="Do not generate an #include statement in the output. This may be used to run the moc on on a C++ file containing one or more class declarations. You should then #include the meta-object code in the .cpp file. (-i)"
+      Switch="i"
+    />
+    <BoolProperty
+      Name="NoWarnings"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/moc.html#command-line-options"
+      DisplayName="No Warnings"
+      Description="Do not generate any warnings. (Not recommended.) (-nw)"
+      Switch="nw"
+    />
+    <StringListProperty
+      Name="BaseIncludePath"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/moc.html#command-line-options"
+      DisplayName="Base Include Path"
+      Description="Makes the moc prepend &lt;path&gt;/ to the file name in the generated #include statement. (-p&lt;path&gt;)"
+      Switch="p &quot;[value]&quot;"
+    />
+    <StringListProperty
+      Name="DefaultIncludeDirectories"
+      Switch="I &quot;[value]&quot;"
+      Visible="false"
+    />
+    <StringListProperty
+      Name="AdditionalIncludeDirectories"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/moc.html#command-line-options"
+      DisplayName="Additional Include Directories"
+      Description="Add dir to the include path for header files. (-I &lt;dir&gt;)"
+      Switch="I &quot;[value]&quot;"
+    />
+    <BoolProperty
+      Name="PreprocessOnly"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/moc.html#command-line-options"
+      DisplayName="Preprocess Only"
+      Description="Preprocess only; do not generate meta-object code. (-E)"
+      Switch="E"
+    />
+    <StringListProperty
+      Name="DefaultPreprocessorDefinitions"
+      Switch="D &quot;[value]&quot;"
+      Visible="false"
+    />
+    <StringListProperty
+      Name="PreprocessorDefinitions"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/moc.html#command-line-options"
+      DisplayName="Preprocessor Definitions"
+      Description="Define macro, with optional definition. (-D &lt;macro&gt;[=&lt;def&gt;])"
+      Switch="D &quot;[value]&quot;"
+    />
+    <StringListProperty
+      Name="DefaultUndefinePreprocessorDefinitions"
+      Switch="U &quot;[value]&quot;"
+      Visible="false"
+    />
+    <StringListProperty
+      Name="UndefinePreprocessorDefinitions"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/moc.html#command-line-options"
+      DisplayName="Undefine Preprocessor Definitions"
+      Description="Undefine macro. (-U &lt;macro&gt;)"
+      Switch="U &quot;[value]&quot;"
+    />
+    <StringProperty
+      Name="Inputs"
+      Category="Command Line"
+      IsRequired="true"
+    >
+      <StringProperty.DataSource>
+        <DataSource
+          Persistence="ProjectFile"
+          ItemType="QtMOCCompile"
+          SourceType="Item"
+        />
+      </StringProperty.DataSource>
+    </StringProperty>
+    <StringProperty
+      Subtype="AdditionalOptions"
+      Name="AdditionalOptions"
+      Category="Command Line"
+      DisplayName="Additional Options"
+      F1Keyword="vc.project.AdditionalOptionsPage"
+    />
+    <StringProperty
+      Name="MOC"
+      Subtype="file"
+      DisplayName="MOC"
+      Description="Path to moc.exe"
+      IncludeInCommandLine="False"
+    />
+    <StringProperty
+      Name="CommandLineTemplate"
+      Category="Command Line"
+      DisplayName="Command Line"
+      Visible="False"
+      IncludeInCommandLine="False"
+    />
+  </Rule>
+  <ItemType Name="QtMOCCompile" DisplayName="Qt MOC Compile" />
+  <FileExtension Name="*.h;*.hpp;*.hxx;*.hh" ContentType="QtMOCCompile" />
+  <ContentType Name="QtMOCCompile" DisplayName="Qt MOC Compile" ItemType="QtMOCCompile" />
+</ProjectSchemaDefinitions>

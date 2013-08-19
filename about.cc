@@ -21,9 +21,19 @@ About::About( QWidget * parent ): QDialog( parent )
     version = QString::fromLatin1( versionFile.readAll() ).trimmed();
 
   ui.version->setText( version );
+
+#if defined (_MSC_VER)
+  QString compilerVersion = QString( "Visual C++ %1.%2.%3" )
+                               .arg( GD_CXX_MSVC_MAJOR )
+                               .arg( GD_CXX_MSVC_MINOR )
+                               .arg( GD_CXX_MSVC_BUILD );
+#else
+  QString compilerVersion = QLatin1String( "GCC " ) + QLatin1String( __VERSION__ );
+#endif
+
   ui.qtVersion->setText( tr( "Based on Qt %1 (%2, %3 bit)" ).arg(
                            QLatin1String( qVersion() ),
-                           QLatin1String( "GCC " ) + QLatin1String( __VERSION__ ),
+                           compilerVersion,
                            QString::number( QSysInfo::WordSize ) ) );
 
   QFile creditsFile( ":/CREDITS.txt" );

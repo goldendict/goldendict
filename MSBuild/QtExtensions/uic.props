@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <QtUICCompile>
+      <OutputFile               Condition="'%(QtUICCompile.OutputFile)'               == ''">%(Filename)%(Extension).h</OutputFile>
+      <TranslationFunction      Condition="'%(QtUICCompile.TranslationFunction)'      == ''"></TranslationFunction>
+      <DontGenerateHeaderGuards Condition="'%(QtUICCompile.DontGenerateHeaderGuards)' == ''">false</DontGenerateHeaderGuards>
+      <UIC                      Condition="'%(QtUICCompile.UIC)'                      == ''">$(QTDIR)\bin\uic.exe</UIC>
+      <CommandLineTemplate>%(UIC) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
+    </QtUICCompile>
+  </ItemDefinitionGroup>
+  <PropertyGroup>
+    <BuildGenerateSourcesTargets>$(BuildGenerateSourcesTargets);_QtUICCompile</BuildGenerateSourcesTargets>
+  </PropertyGroup>
+</Project>

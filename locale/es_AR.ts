@@ -51,7 +51,7 @@
     <message>
         <location filename="../about.cc" line="22"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Basado en Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -59,12 +59,12 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir artículo</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Plegar artículo</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="180"/>
@@ -131,12 +131,12 @@
     <message>
         <location filename="../article_maker.cc" line="590"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir artículo</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="598"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Plegar artículo</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="615"/>
@@ -169,12 +169,12 @@
     <message>
         <location filename="../articleview.cc" line="150"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar como texto</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="156"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspeccionar</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="673"/>
@@ -199,12 +199,12 @@
     <message>
         <location filename="../articleview.cc" line="695"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="704"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Video: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="721"/>
@@ -278,7 +278,7 @@
     <message>
         <location filename="../articleview.cc" line="1585"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ATENCIÓN: Reproductor de audio FFmpeg: %1</translation>
     </message>
     <message>
         <source>Save &amp;image</source>
@@ -338,7 +338,7 @@
     <message>
         <location filename="../articleview.cc" line="1526"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>No fue posible ejecutar un programa reproductor de audios: %1</translation>
+        <translation>No fue posible ejecutar un programa reproductor de audio: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1544"/>
@@ -560,12 +560,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir carpeta</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Editar diccionario</translation>
+        <translation>Editar diccionario</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -581,7 +581,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar el diccionario vía comando:
+%1</translation>
     </message>
 </context>
 <context>
@@ -606,7 +607,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Menú extendido con todos los diccionarios...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -621,7 +622,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir carpeta del diccionario</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -787,7 +788,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="147"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>¿Esta seguro que desea eliminar el grupo &lt;b&gt;%1&lt;/b&gt;?</translation>
+        <translation>¿Está seguro que desea eliminar el grupo &lt;b&gt;%1&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="186"/>
@@ -798,7 +799,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="160"/>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>¿Esta seguro que desea eliminar todos los grupos?</translation>
+        <translation>¿Está seguro que desea eliminar todos los grupos?</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -2740,7 +2741,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../main.cc" line="150"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en archivo de configuración. ¿Desea continuar con los valores por defecto?</translation>
     </message>
 </context>
 <context>
@@ -2811,12 +2812,12 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.cc" line="2970"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artículo, Completo (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2971"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artículo, sólo HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2974"/>
@@ -2974,7 +2975,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.cc" line="3026"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardando artículo...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3075"/>
@@ -3013,7 +3014,7 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mainwindow.cc" line="3569"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir carpeta del diccionario</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3575"/>
@@ -3368,12 +3369,12 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo del diccionario ha sido manipulado o corrompido</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al cargar artículo de %1, motivo: %2</translation>
     </message>
 </context>
 <context>
@@ -3662,12 +3663,12 @@ Sin embargo, si esta opción se activa se cerrará la ventana principal.</transl
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuste este valor para evitar menús contextuales enormes.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Límite de diccionarios en menú contextual:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="394"/>
@@ -3921,32 +3922,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir archivos de audio vía FFmpeg(libav) y libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizar reproductor de audio interno</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar esta opción para automáticamente plegar artículos grandes</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Plegar artículos con más de</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Los artículos que superen este tamaño aparecerán automáticamente plegados</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>símbolos</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3990,12 +3991,12 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Algunos sitios web detectan GoldenDict vía encabezados HTTP y de esta manera lo bloquean. Active esta opción para eludir este problema.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>No identificar GoldenDict en encabezados HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1112"/>
@@ -4333,97 +4334,97 @@ página web de descarga utilizando el navegador de internet.</translation>
     <message>
         <location filename="../aard.cc" line="393"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al cargar artículo</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="475"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al decodificar artículo</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="134"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo en avformat_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="141"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo en av_malloc().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="150"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo en avio_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="167"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo en avformat_open_input(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="174"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo en avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="189"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>No pudo encontrarse un stream de audio.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="197"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Códec [id: %1] no encontrado.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="204"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo en avcodec_open2(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="265"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se encuentra disponible un dispositivo de salida de audio.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="278"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de muestreo no soportado.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="288"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo en ao_open_live(): </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="293"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>No existe controlador de dispositivo disponible.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="296"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este controlador no es un dispositivo de salida activo.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Una opción de clave válida contiene un valor inválido.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede abrir el dispositivo: %1, channels: %2, rate: %3, bits: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="309"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error desconocido.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="334"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo en avcodec_alloc_frame().</translation>
     </message>
 </context>
 <context>
@@ -4450,17 +4451,17 @@ página web de descarga utilizando el navegador de internet.</translation>
         <location filename="../articleview.cc" line="2166"/>
         <location filename="../articleview.cc" line="2173"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">ERROR: %1</translation>
+        <translation>ERROR: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2166"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Error al guardar recurso: </translation>
+        <translation>Error al guardar recurso: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2173"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">No fue posible descargar el recurso referenciado.</translation>
+        <translation>No fue posible descargar el recurso referenciado.</translation>
     </message>
 </context>
 <context>
@@ -4812,7 +4813,7 @@ respectivamente, %GDBIG5% para Big-5, %GDBIG5HKSCS% para Big5-HKSCS, %GDGBK% par
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingrese todos los programas externos que quiera. La ocurrencia %GDWORD% se reemplazará por el término de búsqueda especificado. Si la ocurrencia no esta presente, el término será enviado a la entrada estándar.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>

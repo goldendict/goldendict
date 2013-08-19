@@ -255,13 +255,7 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
 void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                         wstring const & str )
 {
-  DPRINTF( "Requesting article %ls\n",
-#ifdef Q_OS_WIN
-           gd::toQString( str ).toStdWString().c_str()
-#else
-           str.c_str()
-#endif
-           );
+  qDebug() << "Requesting article" << gd::toQString( str );
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
@@ -367,8 +361,6 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
                                    QString( "<a href=\"%1/index.php?title=\\1" ).arg( url ));
 
             QByteArray articleBody = articleString.toUtf8();
-  
-            DPRINTF( "Article body after: %s\n", articleBody.data() );
   
             articleBody.prepend( dictPtr->isToLanguageRTL() ? "<div class=\"mwiki\" dir=\"rtl\">" :
                                                               "<div class=\"mwiki\">" );

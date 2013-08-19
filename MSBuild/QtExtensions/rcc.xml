@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<ProjectSchemaDefinitions
+  xmlns="http://schemas.microsoft.com/build/2009/properties"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+>
+  <Rule
+    Name="QtRCC"
+    DisplayName="Qt Resource Compiler"
+    PageTemplate="tool"
+    SwitchPrefix="-"
+    Order="223"
+  >
+    <Rule.DataSource>
+      <DataSource
+        Persistence="ProjectFile"
+        ItemType="QtRCCCompile"
+        HasConfigurationCondition="true"
+      />
+    </Rule.DataSource>
+    <Rule.Categories>
+      <Category
+        Name="General"
+        DisplayName="General"
+      />
+      <Category
+        Name="Command Line"
+        DisplayName="Command Line"
+        Subtype="CommandLine"
+      />
+    </Rule.Categories>
+    <StringProperty
+      Name="OutputFile"
+      Subtype="file"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/rcc.html"
+      DisplayName="Output File"
+      Description="Write output to file rather than to stdout. (-o &lt;file&gt;)"
+      Switch="o &quot;[value]&quot;"
+    />
+    <StringListProperty
+      Name="ExternalInitializationFunction"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/rcc.html"
+      DisplayName="External Initialization Function"
+      Description="Create an external initialization function with name. (-name &lt;name&gt;)"
+      Switch="name &quot;[value]&quot;"
+    />
+    <IntProperty
+      Name="Threshold"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/rcc.html"
+      DisplayName="Threshold"
+      Description="Specifies a threshold level (as a percentage) to use when deciding whether to compress a file. If the reduction in the file size is greater than the threshold level, it is compressed; otherwise, the uncompressed data is stored instead. The default threshold level is 70%, meaning that compressed files which are 30% or less of their original size are stored as compressed data. (-threshold &lt;level&gt;)"
+      Switch="threshold [value]"
+      MinValue="0"
+      MaxValue="100"
+    />
+    <EnumProperty
+      Name="CompressLevel"
+      DisplayName="Compress Level"
+      Description="Compress input files to the given compression level, which is an integer in the range 1 to 9. Level 1 does the least compression but is fastest. Level 9 does the most compression but is slowest. To turn off compression, use -no-compress. The default value for level is -1, which means use zlib's default compression level. (-compress &lt;level&gt;)"
+      Switch="compress [value]"
+    >
+      <EnumValue
+        Name="-1"
+        DisplayName="-1 (zlib's default)"
+      />
+      <EnumValue
+        Name="1"
+        DisplayName="1 (least)"
+      />
+      <EnumValue
+        Name="2"
+        DisplayName="2"
+      />
+      <EnumValue
+        Name="3"
+        DisplayName="3"
+      />
+      <EnumValue
+        Name="4"
+        DisplayName="4"
+      />
+      <EnumValue
+        Name="5"
+        DisplayName="5"
+      />
+      <EnumValue
+        Name="6"
+        DisplayName="6"
+      />
+      <EnumValue
+        Name="7"
+        DisplayName="7"
+      />
+      <EnumValue
+        Name="8"
+        DisplayName="8"
+      />
+      <EnumValue
+        Name="9"
+        DisplayName="9 (most)"
+      />
+    </EnumProperty>
+    <StringListProperty
+      Name="Root"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/rcc.html"
+      DisplayName="Root"
+      Description="Prefix the resource access path with path. The default is no prefix. (-root &lt;path&gt;)"
+      Switch="root &quot;[value]&quot;"
+    />
+    <BoolProperty
+      Name="DisableCompression"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/rcc.html"
+      DisplayName="Disable Compression"
+      Description="Disable compression. (-no-compress)"
+      Switch="no-compress"
+    />
+    <BoolProperty
+      Name="Binary"
+      HelpUrl="http://qt-project.org/doc/qt-5.0/qtdoc/rcc.html"
+      DisplayName="Binary"
+      Description="Output a binary file for use as a dynamic resource. (-binary)"
+      Switch="binary"
+    />
+    <StringProperty
+      Name="Inputs"
+      Category="Command Line"
+      IsRequired="true"
+    >
+      <StringProperty.DataSource>
+        <DataSource
+          Persistence="ProjectFile"
+          ItemType="QtRCCCompile"
+          SourceType="Item"
+        />
+      </StringProperty.DataSource>
+    </StringProperty>
+    <StringProperty
+      Subtype="AdditionalOptions"
+      Name="AdditionalOptions"
+      Category="Command Line"
+      DisplayName="Additional Options"
+      F1Keyword="vc.project.AdditionalOptionsPage"
+    />
+    <StringProperty
+      Name="RCC"
+      Subtype="file"
+      DisplayName="RCC"
+      Description="Path to rcc.exe"
+      IncludeInCommandLine="False"
+    />
+    <StringListProperty
+      Name="AdditionalDependencies"
+      Subtype="file"
+      DisplayName="Additional Dependencies"
+      Description="Provide additional dependencies that affect the end result. Note: files, listed inside the QRC are determined automatically and should not be added manually."
+      IncludeInCommandLine="False"
+    />
+    <StringProperty
+      Name="CommandLineTemplate"
+      Category="Command Line"
+      DisplayName="Command Line"
+      Visible="False"
+      IncludeInCommandLine="False"
+    />
+  </Rule>
+  <ItemType Name="QtRCCCompile" DisplayName="Qt RRC Compile" />
+  <FileExtension Name="*.qrc" ContentType="QtRCCCompile" />
+  <ContentType Name="QtRCCCompile" DisplayName="Qt RRC Compile" ItemType="QtRCCCompile" />
+</ProjectSchemaDefinitions>

@@ -1,11 +1,13 @@
-#include "winuser.h"
+#include "windows.h"
 
 IDI_ICON1 ICON DISCARDABLE "icons/programicon.ico"
 IDI_ICON2 ICON DISCARDABLE "icons/programicon_old.ico"
 #define GOLDENDICT_VER 1,5,0,0
 #define GOLDENDICT_VER_STR "1.5.0"
 
+#ifndef _MSC_VER // Visual Studio embeds the manifest automatically
 1 RT_MANIFEST GoldenDict.exe.manifest
+#endif
 
 1 VERSIONINFO
  FILEVERSION GOLDENDICT_VER

@@ -1,0 +1,9 @@
+Patched libao source for OSX can be found here:
+https://github.com/timonwong/libao/tree/goldendict
+
+You can checkout the source directly using git:
+  git clone -b goldendict https://github.com/timonwong/libao.git
+
+Then, copy libao-build.sh (along with this file) to libao source directory, and build using following commands:
+  chmod +x libao-build.sh
+  ./libao-build.sh [goldendict source directory]

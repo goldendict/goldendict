@@ -460,6 +460,9 @@ dictData *dict_data_open( const char *filename, int computeCRC )
 
    for(;;)
    {
+#ifdef __WIN32
+     wchar_t wname[16384];
+#endif
      if (dict_read_header( filename, h, computeCRC )) {
        break; /*
         err_fatal( __func__,
@@ -467,7 +470,6 @@ dictData *dict_data_open( const char *filename, int computeCRC )
      }
 
 #ifdef __WIN32
-     wchar_t wname[16384];
      if( MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 ) == 0 )
        break;
 
@@ -543,9 +545,8 @@ char *dict_data_read_ (
    dictData *h, unsigned long start, unsigned long size,
    const char *preFilter, const char *postFilter )
 {
-   (void) preFilter;
-   (void) postFilter;
-   char          *buffer, *pt;
+   char * buffer;
+   char * pt;
    unsigned long end;
    int           count;
    char          *inBuffer;
@@ -554,6 +555,8 @@ char *dict_data_read_ (
    int           firstOffset, lastOffset;
    int           i, j;
    int           found, target, lastStamp;
+   (void) preFilter;
+   (void) postFilter;
 
    end  = start + size;
 
@@ -670,6 +673,10 @@ char *dict_data_read_ (
 	    count = h->cache[target].count;
 	    inBuffer = h->cache[target].inBuffer;
 	 } else {
+#ifdef __WIN32
+        DWORD pos ;
+        DWORD readed;
+#endif
 	    h->cache[target].chunk = -1;
 	    if (!h->cache[target].inBuffer)
 	       h->cache[target].inBuffer = xmalloc( h->chunkLength );
@@ -688,8 +695,8 @@ char *dict_data_read_ (
 	    }
 
 #ifdef __WIN32
-      DWORD pos = SetFilePointer( h->fd, h->offsets[ i ], 0, FILE_BEGIN );
-      DWORD readed = 0;
+      pos = SetFilePointer( h->fd, h->offsets[ i ], 0, FILE_BEGIN );
+      readed = 0;
       if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
         ReadFile( h->fd, outBuffer, h->chunks[ i ], &readed, 0 );
       if( h->chunks[ i ] != readed )

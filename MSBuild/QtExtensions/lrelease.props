@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura and Tvangeste.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <QtTranslate>
+      <OutputFile          Condition="'%(QtLrelease.OutputFile)'               == ''">%(Filename).qm</OutputFile>
+      <Compress            Condition="'%(QtLrelease.Compress)'                 == ''">false</Compress>
+      <LRELEASE            Condition="'%(QtLrelease.LRELEASE)'                 == ''">$(QTDIR)\bin\lrelease.exe</LRELEASE>
+      <CommandLineTemplate>%(LRELEASE) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
+    </QtTranslate>
+  </ItemDefinitionGroup>
+  <PropertyGroup>
+    <BuildGenerateSourcesTargets>$(BuildGenerateSourcesTargets);_QtTranslate</BuildGenerateSourcesTargets>
+  </PropertyGroup>
+</Project>

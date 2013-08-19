@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This file is (c) 2013 Adam Badura.
+  Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <QtRCCCompile>
+      <OutputFile                             Condition="'%(QtRCCCompile.OutputFile)'                             == ''">%(Filename)%(Extension).cpp</OutputFile>
+      <ExternalInitializationFunction         Condition="'%(QtRCCCompile.ExternalInitializationFunction)'         == ''">%(Filename)</ExternalInitializationFunction>
+      <Threshold                              Condition="'%(QtRCCCompile.Threshold)'                              == ''"></Threshold>
+      <CompressLevel                          Condition="'%(QtRCCCompile.CompressLevel)'                          == ''">-1</CompressLevel>
+      <Root                                   Condition="'%(QtRCCCompile.Root)'                                   == ''"></Root>
+      <DisableCompression                     Condition="'%(QtRCCCompile.DisableCompression)'                     == ''">true</DisableCompression>
+      <Binary                                 Condition="'%(QtRCCCompile.Binary)'                                 == ''">false</Binary>
+      <RCC                                    Condition="'%(QtRCCCompile.RCC)'                                    == ''">$(QTDIR)\bin\rcc.exe</RCC>
+      <AdditionalDependencies                 Condition="'%(QtRCCCompile.AdditionalDependencies)'                 == ''">$(QTDIR)\bin\rcc.exe;$(MSBuildProjectFile)</AdditionalDependencies>
+      <ClCompileAssemblerListingLocation      Condition="'%(QtMOCCompile.ClCompileAssemblerListingLocation)'      == ''"></ClCompileAssemblerListingLocation>
+      <ClCompileObjectFileName                Condition="'%(QtMOCCompile.ClCompileObjectFileName)'                == ''"></ClCompileObjectFileName>
+      <ClCompileXMLDocumentationFileName      Condition="'%(QtMOCCompile.ClCompileXMLDocumentationFileName)'      == ''"></ClCompileXMLDocumentationFileName>
+      <CommandLineTemplate>%(RCC) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
+    </QtRCCCompile>
+  </ItemDefinitionGroup>
+  <PropertyGroup>
+    <BuildGenerateSourcesTargets>$(BuildGenerateSourcesTargets);_QtRCCCompile</BuildGenerateSourcesTargets>
+  </PropertyGroup>
+</Project>

@@ -1,6 +1,5 @@
 #include <windows.h>
 #include <servprov.h>
-#include <winable.h>
 #include "wordbyauto.hh"
 #include "uiauto.hh"
 
@@ -12,7 +11,7 @@ public:
     GDAutomationClient();
     ~GDAutomationClient();
     bool getWordAtPoint( POINT pt );
-    WCHAR *getText() { return buffer; };
+    WCHAR *getText() { return buffer; }
 private:
     WCHAR buffer[256];
     IUIAutomation *pGDAutomation;
