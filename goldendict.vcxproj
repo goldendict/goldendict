@@ -1353,6 +1353,8 @@
     <Image Include="icons\icon32_zoomin.png" />
     <Image Include="icons\icon32_zoomout.png" />
     <Image Include="icons\icon_dsl_native.png" />
+    <Image Include="icons\playsound_color.png" />
+    <Image Include="icons\playsound_full.png" />
     <Image Include="icons\programicon.ico" />
     <Image Include="icons\programicon_old.ico" />
     <Image Include="icons\programicon_old.png" />

@@ -1921,6 +1921,12 @@
     <Image Include="icons\programicon_old.png">
       <Filter>Resources\Icons</Filter>
     </Image>
+    <Image Include="icons\playsound_color.png">
+      <Filter>Resources\Icons</Filter>
+    </Image>
+    <Image Include="icons\playsound_full.png">
+      <Filter>Resources\Icons</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="goldendict.rc">

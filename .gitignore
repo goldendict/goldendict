@@ -8,6 +8,7 @@ locale/*.qm
 debug/
 build/
 release/
+tmp/
 goldendict
 
 Makefile
