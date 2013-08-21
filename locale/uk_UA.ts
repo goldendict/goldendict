@@ -9,18 +9,18 @@
         <translation>Про програму</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="51"/>
+        <location filename="../about.ui" line="66"/>
         <source>GoldenDict dictionary lookup program, version </source>
         <translation>GoldenDict — програма для роботи зі словниками, версія </translation>
     </message>
     <message>
-        <location filename="../about.ui" line="76"/>
+        <location filename="../about.ui" line="91"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
         <translatorcomment>© 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translatorcomment>
         <translation>© 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="110"/>
+        <location filename="../about.ui" line="125"/>
         <source>Credits:</source>
         <translation>Подяки:</translation>
     </message>
@@ -29,7 +29,7 @@
         <translation type="obsolete">#.#</translation>
     </message>
     <message>
-        <location filename="../about.ui" line="86"/>
+        <location filename="../about.ui" line="101"/>
         <source>Licensed under GNU GPLv3 or later</source>
         <translation>Ліцензовано за GNU GPLv3 або пізніше</translation>
     </message>
@@ -39,7 +39,7 @@
         <translation>[Невідомий]</translation>
     </message>
     <message>
-        <location filename="../about.cc" line="22"/>
+        <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -57,52 +57,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="180"/>
+        <location filename="../article_maker.cc" line="187"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>Нема перекладу для &lt;b&gt;%1&lt;/b&gt; в групі &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="185"/>
+        <location filename="../article_maker.cc" line="192"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>Нема перекладу в групі &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="204"/>
+        <location filename="../article_maker.cc" line="211"/>
         <source>Welcome!</source>
         <translation>Ласкаво просимо!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="206"/>
+        <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Ласкаво просимо до &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Щоб розпочати роботу з програмою, спочатку відвідайте &lt;b&gt;Зміни|Словники&lt;/b&gt;, та додайте деякі шляхи до словників, де їх можна знайти, вкажіть варіанти сайтів Wikipedia або інших джерел, встановити порядок словників або згрупувати словники.&lt;p&gt;І тоді ви зможете шукати самі слова! Ви можете це здійснити в цьому вікні, використовуючи панель зліва, або можете через &lt;a href=&quot;Контекстні вікна&quot;&gt;шукати слова з інших запущених програм&lt;/a&gt;. &lt;p&gt;Щоб налаштувати програму, перевірте доступність налаштувань в &lt;b&gt;Зміни|Налаштування&lt;/b&gt;. Всі параметри мають підказки, переконайтесь, що прочитали їх, якщо в чомусь не впевнені.&lt;p&gt;Якщо потрібна допомога, маєте якісь запитання, поради або просто бажаєте поділитись враженнями, ми будемо раді кожному на &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форумі&lt;/a&gt; програми.&lt;p&gt;Відвідайте &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайт&lt;/a&gt; програми щодо оновлень. &lt;p&gt;© 2008–2013 Konstantin Isakov. Ліцензовано за GPLv3 або пізнішої версії.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="222"/>
+        <location filename="../article_maker.cc" line="229"/>
         <source>Working with popup</source>
         <translation>Контекстні вікна</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="224"/>
+        <location filename="../article_maker.cc" line="231"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Контекстні вікна&lt;/h3&gt;Для пошуку слів з інших запущених програм вам потрібно ввімкнути &lt;i&gt;«Контекстні вікна»&lt;/i&gt; в меню &lt;b&gt;Налаштування&lt;/b&gt; і потім може увімкнути його в будь-який момент натиснувши піктограму «Контекстне вікно» вище, або натиснувши піктограму в лотку нижче правим клацом мишки і вибравши його в контекстному меню. </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="231"/>
+        <location filename="../article_maker.cc" line="238"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Потім наведіть курсор миші на слово, котре ви бажаєте перекласти, у сторонній програмі, тоді появиться контекстне вікно з потрібним описом слова.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="234"/>
+        <location filename="../article_maker.cc" line="241"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Тепер виберіть будь-яке слово,котре ви бажаєте перекласти, у сторонній програмі за допомогою мишки (подвійний клац або підвівши курсор при затиснутій лівій кнопці), тоді появиться контекстне вікно з потрібним описом слова.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="315"/>
+        <location filename="../article_maker.cc" line="322"/>
         <source>(untitled)</source>
         <translation>(без назви)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="329"/>
+        <location filename="../article_maker.cc" line="336"/>
         <source>(picture)</source>
         <translation>(зображення)</translation>
     </message>
@@ -110,37 +110,37 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="590"/>
+        <location filename="../article_maker.cc" line="591"/>
         <source>Expand article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="593"/>
+        <location filename="../article_maker.cc" line="594"/>
         <source>From </source>
         <translation>Зі словника</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="598"/>
+        <location filename="../article_maker.cc" line="599"/>
         <source>Collapse article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="615"/>
+        <location filename="../article_maker.cc" line="616"/>
         <source>Query error: %1</source>
         <translation>Помилка запиту: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="714"/>
+        <location filename="../article_maker.cc" line="715"/>
         <source>Close words: </source>
         <translation>Близькі за значенням: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="785"/>
+        <location filename="../article_maker.cc" line="786"/>
         <source>Compound expressions: </source>
         <translation>Словосполучення: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="813"/>
+        <location filename="../article_maker.cc" line="814"/>
         <source>Individual words: </source>
         <translation>Окремі слова: </translation>
     </message>
@@ -193,47 +193,47 @@
         <translation>Виділити &amp;все</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="144"/>
+        <location filename="../articleview.cc" line="147"/>
         <source>Select Current Article</source>
         <translation>Вибрати поточний об&apos;єкт</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="150"/>
+        <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="156"/>
+        <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="673"/>
+        <location filename="../articleview.cc" line="688"/>
         <source>Resource</source>
         <translation>Ресурс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="678"/>
+        <location filename="../articleview.cc" line="693"/>
         <source>Audio</source>
         <translation>Аудіо</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="683"/>
+        <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="688"/>
+        <location filename="../articleview.cc" line="703"/>
         <source>Picture</source>
         <translation>Зображення</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="721"/>
+        <location filename="../articleview.cc" line="736"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Визначення зі словника &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="725"/>
+        <location filename="../articleview.cc" line="740"/>
         <source>Definition: %1</source>
         <translation>Визначення: %1</translation>
     </message>
@@ -242,99 +242,99 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="913"/>
-        <location filename="../articleview.cc" line="1056"/>
+        <location filename="../articleview.cc" line="928"/>
+        <location filename="../articleview.cc" line="1071"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Вказаного ресурсу не існує.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="953"/>
+        <location filename="../articleview.cc" line="968"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Вказана аудіо програма не існує.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1056"/>
+        <location filename="../articleview.cc" line="1071"/>
         <source>ERROR: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1438"/>
+        <location filename="../articleview.cc" line="1463"/>
         <source>Save sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1440"/>
+        <location filename="../articleview.cc" line="1465"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1453"/>
+        <location filename="../articleview.cc" line="1478"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1455"/>
+        <location filename="../articleview.cc" line="1480"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1208"/>
+        <location filename="../articleview.cc" line="1223"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Відкрити посилання</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="695"/>
+        <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="704"/>
+        <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1214"/>
+        <location filename="../articleview.cc" line="1229"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Відкрити посилання в новій в&amp;кладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1221"/>
+        <location filename="../articleview.cc" line="1236"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Відкрити посилання у &amp;зовнішньому переглядачі</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1254"/>
+        <location filename="../articleview.cc" line="1278"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Пошук «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1262"/>
+        <location filename="../articleview.cc" line="1286"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Пошук «%1» в &amp;новій вкладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1267"/>
+        <location filename="../articleview.cc" line="1291"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Послати &quot;%1&quot; до стрічки введення</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1273"/>
-        <location filename="../articleview.cc" line="1305"/>
+        <location filename="../articleview.cc" line="1297"/>
+        <location filename="../articleview.cc" line="1329"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Додати &quot;%1&quot; до історії</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1287"/>
+        <location filename="../articleview.cc" line="1311"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Пошук «%1» в %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1295"/>
+        <location filename="../articleview.cc" line="1319"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Пошук «%1»в %2 в &amp;новій вкладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1585"/>
+        <location filename="../articleview.cc" line="1611"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -355,37 +355,37 @@
         <translation type="obsolete">Басова бібліотека не взмозі відтворити цей звук.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1526"/>
+        <location filename="../articleview.cc" line="1552"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Не вдалось запустити програвач для відтворення звукового файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1544"/>
+        <location filename="../articleview.cc" line="1570"/>
         <source>Failed to create temporary file.</source>
         <translation>Не вдалось створити тимчасовий файл.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1555"/>
+        <location filename="../articleview.cc" line="1581"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Не вдалось відкрити файл ресурсу, спробуйте відкрити вручну: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1578"/>
+        <location filename="../articleview.cc" line="1604"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не вдалось звантажити вказаний ресурс.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1235"/>
+        <location filename="../articleview.cc" line="1251"/>
         <source>Save &amp;image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1243"/>
+        <location filename="../articleview.cc" line="1259"/>
         <source>Save s&amp;ound...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1578"/>
+        <location filename="../articleview.cc" line="1604"/>
         <source>WARNING: %1</source>
         <translation>УВАГА: %1s</translation>
     </message>
@@ -660,37 +660,37 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="230"/>
+        <location filename="../forvo.cc" line="224"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Помилка аналізу XML: %1 в %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="306"/>
+        <location filename="../forvo.cc" line="300"/>
         <source>Added %1</source>
         <translation>Додано %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="309"/>
+        <location filename="../forvo.cc" line="303"/>
         <source>by</source>
         <translation> </translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="313"/>
+        <location filename="../forvo.cc" line="307"/>
         <source>Male</source>
         <translation>чоловіком</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="313"/>
+        <location filename="../forvo.cc" line="307"/>
         <source>Female</source>
         <translation>жінкою</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="315"/>
+        <location filename="../forvo.cc" line="309"/>
         <source>from</source>
         <translation>з</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="353"/>
+        <location filename="../forvo.cc" line="347"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Перейдіть до меню &lt;b&gt;Зміни|Словники|Джерела|Forvo&lt;/b&gt; та застосуйте наш власний ключ API, щоб усунути цю проблему.</translation>
     </message>
@@ -889,12 +889,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>Історія:</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="211"/>
+        <location filename="../historypanewidget.cc" line="219"/>
         <source>%1/%2</source>
         <translation>%1/%2</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="215"/>
+        <location filename="../historypanewidget.cc" line="223"/>
         <source>History size: %1 entries out of maximum %2</source>
         <translation>Розмір історії: %1 статей з максимальних %2</translation>
     </message>
@@ -907,7 +907,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>Орфографічні підказки: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="782"/>
+        <location filename="../hunspell.cc" line="776"/>
         <source>%1 Morphology</source>
         <translation>Морфологія %1</translation>
     </message>
@@ -1969,7 +1969,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="150"/>
+        <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1982,7 +1982,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="692"/>
+        <location filename="../mainwindow.cc" line="695"/>
         <source>Welcome!</source>
         <translation>Ласкаво просимо!</translation>
     </message>
@@ -2217,7 +2217,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3239"/>
+        <location filename="../mainwindow.cc" line="3263"/>
         <source>&amp;Show</source>
         <translation>&amp;Показати</translation>
     </message>
@@ -2247,7 +2247,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="225"/>
-        <location filename="../mainwindow.cc" line="1113"/>
+        <location filename="../mainwindow.cc" line="1116"/>
         <source>Look up in:</source>
         <translation>Пошук в:</translation>
     </message>
@@ -2336,17 +2336,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>Завантаження…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1102"/>
+        <location filename="../mainwindow.cc" line="1105"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 словників, %2 статей, %3 слів</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1113"/>
+        <location filename="../mainwindow.cc" line="1116"/>
         <source>Look up:</source>
         <translation>Шукати:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1131"/>
+        <location filename="../mainwindow.cc" line="1134"/>
         <source>All</source>
         <translation>Усьому</translation>
     </message>
@@ -2371,17 +2371,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Навігація</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1283"/>
+        <location filename="../mainwindow.cc" line="1286"/>
         <source>Open Tabs List</source>
         <translation>Відчинити список вкладок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1341"/>
+        <location filename="../mainwindow.cc" line="1344"/>
         <source>(untitled)</source>
         <translation>(без назви)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1539"/>
+        <location filename="../mainwindow.cc" line="1553"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -2390,73 +2390,73 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Попередження: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2509"/>
+        <location filename="../mainwindow.cc" line="2533"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Не вдалось запустити механізм стеження за гарячими клавішами.&lt;br&gt;Переконайтесь, що ваш XServer має розширення RECORD увімкнутим.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2646"/>
+        <location filename="../mainwindow.cc" line="2670"/>
         <source>New Release Available</source>
         <translation>Доступний новий випуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2647"/>
+        <location filename="../mainwindow.cc" line="2671"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версія &lt;b&gt;%1&lt;/b&gt; GoldenDict доступна до звантаження.&lt;br&gt;Натисніть &lt;b&gt;Звантажити&lt;/b&gt;, щоб перейти до сторінки звантаження.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2652"/>
+        <location filename="../mainwindow.cc" line="2676"/>
         <source>Download</source>
         <translation>Звантажити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2653"/>
+        <location filename="../mainwindow.cc" line="2677"/>
         <source>Skip This Release</source>
         <translation>Пропустити цей випуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="760"/>
-        <location filename="../mainwindow.cc" line="2706"/>
+        <location filename="../mainwindow.cc" line="763"/>
+        <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2783"/>
+        <location filename="../mainwindow.cc" line="2807"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Ви вирішили сховати лоток меню. Викор. %1 аби показувати його знову.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2784"/>
+        <location filename="../mainwindow.cc" line="2808"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2882"/>
+        <location filename="../mainwindow.cc" line="2906"/>
         <source>Page Setup</source>
         <translation>Параметри сторінки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2883"/>
+        <location filename="../mainwindow.cc" line="2907"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Не знайдено жодного принтера. Будь ласка, спершу встановіть хоч якийсь.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2901"/>
+        <location filename="../mainwindow.cc" line="2925"/>
         <source>Print Article</source>
         <translation>Надрукувати статтю</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2970"/>
+        <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2971"/>
+        <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2974"/>
+        <location filename="../mainwindow.cc" line="2998"/>
         <source>Save Article As</source>
         <translation>Зберегти статтю як</translation>
     </message>
@@ -2465,83 +2465,83 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Файли HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2988"/>
+        <location filename="../mainwindow.cc" line="3012"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2989"/>
+        <location filename="../mainwindow.cc" line="3013"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Неможливо зберегти статтю: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3026"/>
+        <location filename="../mainwindow.cc" line="3050"/>
         <source>Saving article...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3075"/>
+        <location filename="../mainwindow.cc" line="3099"/>
         <source>The main window is set to be always on top.</source>
         <translation>Головне меню налаштовано аби завжди бути зверху.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3235"/>
+        <location filename="../mainwindow.cc" line="3259"/>
         <source>&amp;Hide</source>
         <translation>&amp;Сховати</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3261"/>
+        <location filename="../mainwindow.cc" line="3285"/>
         <source>Export history to file</source>
         <translation>Експортувати файл історії</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3263"/>
-        <location filename="../mainwindow.cc" line="3325"/>
+        <location filename="../mainwindow.cc" line="3287"/>
+        <location filename="../mainwindow.cc" line="3349"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Текстові файли (*.txt);;Всі файли (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3302"/>
+        <location filename="../mainwindow.cc" line="3326"/>
         <source>History export complete</source>
         <translation>Експорти історії завершено</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3305"/>
+        <location filename="../mainwindow.cc" line="3329"/>
         <source>Export error: </source>
         <translation>Помилка експортування:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3323"/>
+        <location filename="../mainwindow.cc" line="3347"/>
         <source>Import history from file</source>
         <translation>Імпортувати історію з файлу</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3372"/>
+        <location filename="../mainwindow.cc" line="3396"/>
         <source>Import error: invalid data in file</source>
         <translation>Помилка імпорту: недійсна дата у файлі</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3376"/>
+        <location filename="../mainwindow.cc" line="3400"/>
         <source>History import complete</source>
         <translation>Імпорти історії завершено</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3379"/>
+        <location filename="../mainwindow.cc" line="3403"/>
         <source>Import error: </source>
         <translation>Помилка імпортування:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3567"/>
+        <location filename="../mainwindow.cc" line="3591"/>
         <source>Dictionary info</source>
         <translation>Інфа про словник</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3569"/>
+        <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3575"/>
+        <location filename="../mainwindow.cc" line="3599"/>
         <source>Edit dictionary</source>
         <translation>Редагувати словник</translation>
     </message>
@@ -2562,7 +2562,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="304"/>
+        <location filename="../mediawiki.cc" line="310"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Помилка аналізу XML: %1 в %2,%3</translation>
     </message>
@@ -2570,7 +2570,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="173"/>
+        <location filename="../mediawiki.cc" line="185"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Помилка аналізу XML: %1 в %2,%3</translation>
     </message>
@@ -3502,97 +3502,97 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="393"/>
+        <location filename="../aard.cc" line="396"/>
         <source>Article loading error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="475"/>
+        <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="134"/>
+        <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="141"/>
+        <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="150"/>
+        <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="167"/>
+        <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="174"/>
+        <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="189"/>
+        <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="197"/>
+        <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="204"/>
+        <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="265"/>
+        <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="278"/>
+        <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="288"/>
+        <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="293"/>
+        <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="296"/>
+        <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="299"/>
+        <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="302"/>
+        <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="309"/>
+        <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="334"/>
+        <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3618,18 +3618,18 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2166"/>
-        <location filename="../articleview.cc" line="2173"/>
+        <location filename="../articleview.cc" line="2193"/>
+        <location filename="../articleview.cc" line="2200"/>
         <source>ERROR: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2166"/>
+        <location filename="../articleview.cc" line="2193"/>
         <source>Resource saving error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2173"/>
+        <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
         <translation type="unfinished">Не вдалось звантажити вказаний ресурс.</translation>
     </message>
