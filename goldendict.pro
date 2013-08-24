@@ -432,7 +432,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/be_BY@latin.ts \
     locale/fr_FR.ts \
     locale/ko_KR.ts \
-    locale/nl_NL.ts
+    locale/nl_NL.ts \
+    locale/sr_SR.ts
 
 # Build version file
 !isEmpty( hasGit ) {
