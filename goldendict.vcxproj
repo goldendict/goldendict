@@ -964,6 +964,7 @@
     <QtTranslate Include="locale\ru_RU.ts" />
     <QtTranslate Include="locale\sk_SK.ts" />
     <QtTranslate Include="locale\sq_AL.ts" />
+    <QtTranslate Include="locale\sr_SR.ts" />
     <QtTranslate Include="locale\tg_TJ.ts" />
     <QtTranslate Include="locale\tr_TR.ts" />
     <QtTranslate Include="locale\uk_UA.ts" />
