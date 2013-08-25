@@ -25,4 +25,5 @@ Maksim Tamkovič <quendimax\gmail.com>: Belarusian translation and transliterati
 VirtualTam <virtualtam\myopera.com>: French translation
 Panho Ku <maranamho\gmail.com>: Korean translation
 Тим Перце <kreativnooko\gmail.com>: Serbian translation
+Cris van Minnen: Dutch translation
 Timon Wong <timon86.wang\gmail.com>: MDict (*.mdx/*.mdd) dictionary format
