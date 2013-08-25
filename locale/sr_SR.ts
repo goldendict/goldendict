@@ -16,7 +16,7 @@
     <message>
         <location filename="../about.ui" line="91"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">© Константин Исаков (ikm@goldendict.org), 2008-2011 {2008-2013 ?}</translation>
+        <translation>© Константин Исаков (ikm@goldendict.org), 2008-2011 {2008-2013 ?}</translation>
     </message>
     <message>
         <source>(c) 2008-2011 Konstantin Isakov (ikm@goldendict.org)</source>
@@ -510,22 +510,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">Укупно чланака:</translation>
+        <translation>Укупно чланака:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="46"/>
         <source>Translates from:</source>
-        <translation type="unfinished">Изворни језик:</translation>
+        <translation>Изворни језик:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="60"/>
         <source>Total words:</source>
-        <translation type="unfinished">Укупно речи:</translation>
+        <translation>Укупно речи:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="77"/>
         <source>Translates to:</source>
-        <translation type="unfinished">Циљни језик:</translation>
+        <translation>Циљни језик:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
@@ -540,7 +540,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Датотеке које чине речник:</translation>
+        <translation>Датотеке које чине речник:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="201"/>
@@ -2372,7 +2372,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="337"/>
@@ -3633,7 +3633,7 @@ GoldenDict. Ако се појавила нова верзија, програм
     <message>
         <location filename="../articleview.cc" line="2209"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Није могуће учитати повезане ресурсе.</translation>
+        <translation>Није могуће учитати повезане ресурсе.</translation>
     </message>
 </context>
 <context>
@@ -3679,12 +3679,12 @@ GoldenDict. Ако се појавила нова верзија, програм
     <message>
         <location filename="../scanpopup.ui" line="107"/>
         <source>Back</source>
-        <translation type="unfinished">Назад</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
-        <translation type="unfinished">Напред</translation>
+        <translation>Напред</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="135"/>
@@ -3731,7 +3731,7 @@ could be resized or managed in other ways.</source>
         <location filename="../scanpopup.cc" line="480"/>
         <location filename="../scanpopup.cc" line="825"/>
         <source>%1 - %2</source>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -4099,7 +4099,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">Ништа</translation>
+        <translation>Ништа</translation>
     </message>
 </context>
 <context>
@@ -4117,12 +4117,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Уклони</translation>
+        <translation>&amp;Уклони</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Поставке</translation>
+        <translation>Поставке</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
@@ -4172,7 +4172,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Потврди уклањање</translation>
+        <translation>Потврди уклањање</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
@@ -4198,12 +4198,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">Укључено</translation>
+        <translation>Укључено</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Назив</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
