@@ -16,16 +16,12 @@
     <message>
         <location filename="../about.ui" line="91"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">© Константин Исаков (ikm@goldendict.org), 2008-2013</translation>
+        <translation>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="125"/>
         <source>Credits:</source>
-        <translation>Merita:</translation>
-    </message>
-    <message>
-        <source>#.#</source>
-        <translation type="obsolete">#.#</translation>
+        <translation>Meritat:</translation>
     </message>
     <message>
         <location filename="../about.ui" line="101"/>
@@ -35,12 +31,12 @@
     <message>
         <location filename="../about.cc" line="17"/>
         <source>[Unknown]</source>
-        <translation>[I panjohur]</translation>
+        <translation>[E panjohur]</translation>
     </message>
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bazuar në Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -48,22 +44,22 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgjeroj artikullin</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Mbledh artikullin</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="187"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>Nuk gjen ndonjë përkthim për &lt;b&gt;%1&lt;/b&gt; te grupi &lt;b&gt;%2&lt;/b&gt;.</translation>
+        <translation>Nuk gjen përkthimin për &lt;b&gt;%1&lt;/b&gt; te grupi &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="192"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation>Nuk gjen ndonjë përkthim te grupi &lt;b&gt;%1&lt;/b&gt;.</translation>
+        <translation>Nuk gjen përkthimin te grupi &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="211"/>
@@ -73,27 +69,27 @@
     <message>
         <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Mirë se erdhët te &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Për të nisur përdorimin e programit, së pari vizitoni &lt;b&gt;Editoj|Fjalorët&lt;/b&gt; dhe vini shtegun e ndonjë direktorie ku gjenden skedat e fjalorit, sistemoni faqet për Wikipedia-n ose burimet e tjera, rregulloni rendin e fjalorëve ose krijoni grupe me ta.&lt;p&gt;Pastaj jeni gati të shikoni fjalët tuaja! Kjo kryhet këtu duke përdorur panelin në të majtë, ose duke &lt;a href=&quot;Working with popup&quot;&gt;shikuar fjalët nga aplikimet e tjera aktive&lt;/a&gt;. &lt;p&gt;Për të porositur programin, kontrolloni vendosjet e mundshme te &lt;b&gt;Editoj|Pëlqime&lt;/b&gt;. Tërë vendosjet atje kanë këshilla ndihmëse: sigurohuni që t&apos;i lexoni nëse keni dyshime për diçka.&lt;p&gt;Nëse kërkoni ndihmë tjetër, keni pyetje, sugjerime ose doni të dini se ç&apos;mendojnë të tjerët, jeni të mirëpritur te &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forumi&lt;/a&gt; i programit.&lt;p&gt;Kontrolloni edhe &lt;a href=&quot;http://goldendict.org/&quot;&gt;faqen në rrjetë&lt;/a&gt; të programit për t&apos;u azhurnuar. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licencuar sipas GPLv3 a më i vonë.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Mirë se erdhët te &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Për të përdorur programin, së pari vizitoni &lt;b&gt;Editoj|Fjalorët&lt;/b&gt; dhe përcaktoni vendndodhjen e direktorisë ku janë skedat e fjalorit, sistemoni faqet për Wikipedia-n ose burimet e tjera, radhitni fjalorët e krijoni grupe me ta.&lt;p&gt;Pastaj jeni gati të studioni fjalët! Kryeni këtë duke përdorur panelin në të majtë, ose duke &lt;a href=&quot;Working with popup&quot;&gt;parë nga aplikacionet e tjera aktive&lt;/a&gt;. &lt;p&gt;Për të porositur programin, kontrolloni parametrat e mundshëm te &lt;b&gt;Editoj|Preferencat&lt;/b&gt;. Parametrat kanë këshilla ndihmëse: sigurohuni që t&apos;i lexoni nëse keni dyshime për diçka.&lt;p&gt;Nëse kërkoni ndihmë, keni pyetje, sugjerime ose doni të dini se ç&apos;mendojnë të tjerët për programin, jeni të mirëpritur te &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forumi&lt;/a&gt;.&lt;p&gt;Kontrolloni edhe &lt;a href=&quot;http://goldendict.org/&quot;&gt;faqen në internet&lt;/a&gt; për t&apos;u azhurnuar. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licencuar sipas GPLv3 a më i vonë.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="229"/>
         <source>Working with popup</source>
-        <translation>Skanimi i jashtëm</translation>
+        <translation>Working with popup</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="231"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Skanimi i jashtëm&lt;/h3&gt;Për të shikuar fjalët nga aplikimet aktive, së pari duhet të aktivizoni &lt;i&gt;&quot;funksionin Skanimi i jashtëm&quot;&lt;/i&gt; në &lt;b&gt;Pëlqime&lt;/b&gt;. Pastaj mund ta aktivizoni atë kurdoherë duke ndezur ikonën &apos;Skanimi&apos;, ose duke klikuar me të djathtën ikonën te shiriti i sistemit për ta zgjedhur në menynë e jashtme. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Skanimi i jashtëm&lt;/h3&gt;Për të parë fjalët nga aplikacionet aktive, së pari aktivizoni &lt;i&gt;&quot;funksionin Skanimi i jashtëm&quot;&lt;/i&gt; te &lt;b&gt;Preferencat&lt;/b&gt;. Më tej e aktivizoni kurdoherë duke ndezur ikonën e &apos;Skanimit&apos;, ose duke klikuar me të djathtën ikonën te shiriti i sistemit. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="238"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>Pastaj thjesht ndaleni miun te fjala që doni të shikoni nga aplikimi tjetër, dhe do ju shfaqet një dritare me fjalën e treguar.</translation>
+        <translation>Thjesht ndaleni kursorin te fjala që doni të shikoni nga aplikacioni tjetër, dhe do ju shfaqet një dritare me fjalën e treguar.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="241"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Pastaj thjesht seleksiononi me miun ndonjë fjalë që doni të shikoni nga aplikimi tjetër (klikojeni dy herë ose visheni me butonin e shtypur të miut), dhe do ju shfaqet një dritare me fjalën e treguar.</translation>
+        <translation>Thjesht seleksiononi me maus fjalën që doni të shikoni nga aplikacioni tjetër (klikojeni dy herë ose visheni me butonin e shtypur të miut), dhe do ju shfaqet një dritare me fjalën e treguar.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="322"/>
@@ -103,7 +99,7 @@
     <message>
         <location filename="../article_maker.cc" line="336"/>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(figurë)</translation>
     </message>
 </context>
 <context>
@@ -111,7 +107,7 @@
     <message>
         <location filename="../article_maker.cc" line="591"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgjeroj artikullin</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="594"/>
@@ -121,7 +117,7 @@
     <message>
         <location filename="../article_maker.cc" line="599"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Mbledh artikullin</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="616"/>
@@ -149,112 +145,108 @@
     <message>
         <location filename="../articleview.cc" line="147"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleksionoj këtë artikullin</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopjoj tekstin</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspektoj</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="688"/>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Resursi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="693"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>TTS Voice</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Figura</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="736"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Përkufizimi nga fjalori &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="740"/>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
+        <translation>Përkufizimi: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="928"/>
         <location filename="../articleview.cc" line="1071"/>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>Burimi i referuar nuk ekziston.</translation>
+        <translation>Nuk ekziston resursi i referuar.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="968"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programi audio i referuar nuk ekziston.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1071"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>GABIM: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1463"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruaj tingullin</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1465"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Skeda zanore (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Të gjitha skedat (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1478"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruaj imazhin</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1480"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Skeda imazhe (*.bmp *.jpg *.png *.tif);;Të gjitha skedat (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1223"/>
         <source>&amp;Open Link</source>
-        <translation>&amp;Hap Lidhësin</translation>
+        <translation>&amp;Hap lidhësin</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Video: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1229"/>
         <source>Open Link in New &amp;Tab</source>
-        <translation>Hap Lidhësin në Fushën e &amp;Re</translation>
+        <translation>Hap lidhësin në fushën e &amp;re</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1236"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation>Hap Lidhësin në &amp;Shfletuesin e Jashtëm</translation>
+        <translation>Hap lidhësin në &amp;shfletuesin e jashtëm</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1278"/>
@@ -264,18 +256,18 @@
     <message>
         <location filename="../articleview.cc" line="1286"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>Shikoj &quot;%1&quot; në Fushën e &amp;Re</translation>
+        <translation>Shikoj &quot;%1&quot; në fushën e &amp;re</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1291"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Dërgoj &quot;%1&quot;te radha e inputit</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1297"/>
         <location filename="../articleview.cc" line="1329"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Shtoj &quot;%1&quot; te historiku</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1311"/>
@@ -285,55 +277,47 @@
     <message>
         <location filename="../articleview.cc" line="1319"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>Shikoj &quot;%1&quot; në %2 në Fushën e &amp;Re</translation>
+        <translation>Shikoj &quot;%1&quot; në %2 në fushën e &amp;re</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1611"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Luan një skedë jo-WAV</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">Për të aktivizuar leximin e skedave të ndryshme nga WAV, ju lutem shkoni te Editoj|Pëlqime, zgjidhni fushën Audio dhe seleksiononi atje &quot;Luaj via DirectShow&quot;.</translation>
+        <translation>KUJDEs: FFmpeg Audio Player: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1552"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Dështon ekzekutimi i lexuesit për skedën zanore: %1</translation>
+        <translation>Dështoi ekzekutimi i lexuesit për skedën zanore: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1570"/>
         <source>Failed to create temporary file.</source>
-        <translation>Dështon krijimi i skedës kohëshkurtër.</translation>
+        <translation>Dështoi krijimi i skedës kohëshkurtër.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1581"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Dështon autohapja e skedës burimore, provoni ta hapni vetë: %1.</translation>
+        <translation>Dështoi vetëhapja e skedës burimore, provojeni vetë: %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1604"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Dështon shkarkimi i burimit të referuar.</translation>
+        <translation>Dështoi shkarkimi i resursit të referuar.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1251"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruaj &amp;imazhin...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1259"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruaj t&amp;ingullin...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1604"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">KUJDES: %1</translation>
+        <translation>KUJDES: %1</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="14"/>
@@ -373,12 +357,12 @@
     <message>
         <location filename="../articleview.ui" line="152"/>
         <source>&amp;Case Sensitive</source>
-        <translation>Krahasoj &amp;Shkrimin</translation>
+        <translation>Krahasoj &amp;shkrimin</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="129"/>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Theksoj &amp;të gjitha</translation>
     </message>
 </context>
 <context>
@@ -386,18 +370,18 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Përkthimi bjellorusisht nga latinishtja në cirilik (ortografi klasike)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Përkthimi bjellorusisht nga latinishtja në cirilik (ortografi shkollore)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Përkthimi bjellorusisht (zvogëlon diferencat mes ortografisë klasike dhe shkollore në cirilik)</translation>
     </message>
 </context>
 <context>
@@ -461,7 +445,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groups_widgets.cc" line="838"/>
         <location filename="../groups_widgets.cc" line="1013"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fjalorët:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="690"/>
@@ -476,28 +460,28 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>I pacaktuar</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kombinoj grupet sipas gjuhës së burimit në &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kombinoj grupet sipas gjuhës së synuar në &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Krijoj grup përkthimi dyanësh &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kombinoj grupet me &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -505,48 +489,49 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">Artikujt totalë:</translation>
+        <translation>Artikujt totalë:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="46"/>
         <source>Translates from:</source>
-        <translation type="unfinished">Përkthen nga:</translation>
+        <translation>Përkthen nga:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="60"/>
         <source>Total words:</source>
-        <translation type="unfinished">Fjalët totale:</translation>
+        <translation>Totali i fjalëve:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="77"/>
         <source>Translates to:</source>
-        <translation type="unfinished">Përkthen në:</translation>
+        <translation>Përkthen në:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Hap dosjen</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoj fjalorin</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Skedat që përbëjnë fjalorin:</translation>
+        <translation>Skedat që përbëjnë fjalorin:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="201"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Përshkrimi:</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoj fjalorin me komandën:
+%1</translation>
     </message>
 </context>
 <context>
@@ -560,38 +545,34 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictionaryBar</name>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">Brezi i Fjalorit</translation>
-    </message>
-    <message>
         <location filename="../dictionarybar.cc" line="15"/>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Brezi i fjalorëve</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Meny e zgjeruar me të gjithë fjalorët...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
         <source>Edit this group</source>
-        <translation>Editoj këtë grupin</translation>
+        <translation>Editoj grupin</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="135"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info për fjalorin</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Hap dosjen e fjalorit</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoj fjalorin</translation>
     </message>
 </context>
 <context>
@@ -599,7 +580,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../editdictionaries.cc" line="41"/>
         <source>&amp;Sources</source>
-        <translation>&amp;Burime</translation>
+        <translation>&amp;Burimet</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
@@ -611,7 +592,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../editdictionaries.cc" line="43"/>
         <location filename="../editdictionaries.cc" line="225"/>
         <source>&amp;Groups</source>
-        <translation>&amp;Grupe</translation>
+        <translation>&amp;Grupet</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="104"/>
@@ -644,7 +625,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../externalviewer.cc" line="54"/>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>emri i programit është bosh</translation>
     </message>
 </context>
 <context>
@@ -763,17 +744,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="160"/>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>Jeni i sigurt për heqjen e tërë grupeve?</translation>
+        <translation>Jeni i sigurt për heqjen e të gjitha grupeve?</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="22"/>
         <source>Dictionaries available:</source>
-        <translation>Fjalorët e mundshëm:</translation>
+        <translation>Fjalorët e gatshëm:</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="64"/>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>Shtoj fjalorët e seleksionuar te grupi (Ins)</translation>
+        <translation>Shtoj fjalorët e përzgjedhur te grupi (Ins)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="67"/>
@@ -788,7 +769,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="89"/>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>Heq fjalorët e seleksionuar nga grupi (Del)</translation>
+        <translation>Heq fjalorët e përzgjedhur nga grupi (Del)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="92"/>
@@ -803,12 +784,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="119"/>
         <source>Groups:</source>
-        <translation>Grupe:</translation>
+        <translation>Grupet:</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
-        <translation>Fusha 2</translation>
+        <translation>Tab 2</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
@@ -858,7 +839,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Kapini &amp; lëshojini fjalorët midis grupeve, lëvizini ata brenda tyre, renditini grupet duke përdorur miun.</translation>
+        <translation>Kapini e lëshojini fjalorët midis grupeve, lëvizini, radhitini duke përdorur mausin.</translation>
     </message>
 </context>
 <context>
@@ -866,27 +847,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fshij përzgjedhjen</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopjoj përzgjedhjen</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Historiku:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="219"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="223"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Masa e historikut: %1 njësi jashtë maksimumit %2</translation>
     </message>
 </context>
 <context>
@@ -907,7 +888,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="1131"/>
         <source>Enabled</source>
-        <translation>I aktivizuar</translation>
+        <translation>Aktiv</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1133"/>
@@ -920,13 +901,13 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../initializing.cc" line="21"/>
         <source>Please wait...</source>
-        <translation>Ju lutem prisni...</translation>
+        <translation>Lutemi të prisni...</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="28"/>
         <location filename="../initializing.cc" line="30"/>
         <source>Please wait while indexing dictionary</source>
-        <translation>Ju lutem prisni lidhjen e fjalorit</translation>
+        <translation>Prisni, fjalori po indeksohet</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="22"/>
@@ -936,7 +917,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../initializing.ui" line="44"/>
         <source>Dictionary Name</source>
-        <translation>Emri i Fjalorit</translation>
+        <translation>Emri i fjalorit</translation>
     </message>
 </context>
 <context>
@@ -959,22 +940,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="58"/>
         <source>Afrikaans</source>
-        <translation>Африкаанс</translation>
+        <translation>Afrikanisht</translation>
     </message>
     <message>
         <location filename="../language.cc" line="59"/>
         <source>Akan</source>
-        <translation>Аканский</translation>
+        <translation>Аkan</translation>
     </message>
     <message>
         <location filename="../language.cc" line="60"/>
         <source>Amharic</source>
-        <translation>Амхарский</translation>
+        <translation>Amharic</translation>
     </message>
     <message>
         <location filename="../language.cc" line="61"/>
         <source>Aragonese</source>
-        <translation>Арагонский</translation>
+        <translation>Aragonese</translation>
     </message>
     <message>
         <location filename="../language.cc" line="62"/>
@@ -1869,82 +1850,82 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinezisht tradicionale</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinezisht e thjeshtuar</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjetër</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialekte të tjera të kinezishtes së thjeshtuar</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialekte të tjera të kinezishtes tradicionale</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjuhë të tjera evropiano-lindore</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjuhë të tjera evropiano-perëndimore</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjuhë të tjera ruse</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjuhë të tjera japoneze</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjuhë të tjera baltike</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjuhë të tjera greke</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialekte të tjera koreane</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialekte të tjera turke</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialekte të tjera tajlandeze</translation>
     </message>
     <message>
         <location filename="../language.cc" line="389"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamazight</translation>
     </message>
 </context>
 <context>
@@ -1960,15 +1941,11 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabim në skedën e konfiguracionit.Do vijoni me parametrat standardë?</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
-    <message>
-        <source>Navigation</source>
-        <translation type="obsolete">Lundrimi</translation>
-    </message>
     <message>
         <location filename="../mainwindow.cc" line="121"/>
         <source>Back</source>
@@ -1982,12 +1959,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="148"/>
         <source>Scan Popup</source>
-        <translation>Skanimi i Jashtëm</translation>
+        <translation>Skanimi i jashtëm</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="307"/>
         <source>Show &amp;Main Window</source>
-        <translation>Tregoj Dritaren &amp;Kryesore</translation>
+        <translation>Shfaq dritaren &amp;kryesore</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="367"/>
@@ -2003,51 +1980,47 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2677"/>
         <source>Skip This Release</source>
-        <translation>Kapërcej Këtë Lëshimin</translation>
+        <translation>Kaloj këtë versionin</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2807"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgjodhët të fshehni menynë.Përdorni %1 për ta rishfaqur.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2808"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2906"/>
         <source>Page Setup</source>
-        <translation>Sistemimi i Faqes</translation>
+        <translation>Sistemimi i faqes</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2907"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>Nuk mundëson asnjë printer. Ju lutem instalojeni një.</translation>
+        <translation>Nuk ka asnjë printer. Lutemi e instaloni më parë.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2925"/>
         <source>Print Article</source>
-        <translation>Shtyp Artikullin</translation>
+        <translation>Printoj artikullin</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikull, i plotë (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikull, vetëm HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2998"/>
         <source>Save Article As</source>
-        <translation>Ruaj Artikullin Si</translation>
-    </message>
-    <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Skeda Html (*.html *.htm)</translation>
+        <translation>Ruaj artikullin si</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3012"/>
@@ -2067,17 +2040,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2533"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Dështon nisja e mekanizmit monitorues të tasteve kryesore.&lt;br&gt;Sigurohuni që XServer e ka të ndezur zgjatimin RECORD.</translation>
+        <translation>Dështoi nisja e mekanizmit monitorues të tasteve kryesore.&lt;br&gt;Sigurohuni që XServer e ka të ndezur zgjatimin RECORD.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2670"/>
         <source>New Release Available</source>
-        <translation>Ka Dalë Version i Ri</translation>
+        <translation>Ka dalë version i ri</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2671"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>Versioni &lt;b&gt;%1&lt;/b&gt; për GoldenDict është gati për t&apos;u shkarkuar.&lt;br&gt;Klikoni &lt;b&gt;Shkarkoj&lt;/b&gt;, që të shkoni te faqja e shkarkimit.</translation>
+        <translation>Versioni &lt;b&gt;%1&lt;/b&gt; për GoldenDict është gati për t&apos;u shkarkuar.&lt;br&gt;Klikoni &lt;b&gt;Shkarkoj&lt;/b&gt;, që të hapni faqen e shkarkimit.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2676"/>
@@ -2091,38 +2064,34 @@ between classic and school orthography in cyrillic)</source>
         <translation>Shikoj në:</translation>
     </message>
     <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">Tregoj Emrat në Brezin e Fjalorit</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="81"/>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Brezi i &amp;menysë</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="263"/>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjetjet në fjalorë:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="163"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Shqiptoj Fjalën (Alt+S)</translation>
+        <translation>Shqiptoj fjalën (Alt+S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="79"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Tregoj emrat e &amp;fjalorëve</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="80"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Tregoj ikonat e &amp;vogla</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="118"/>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Lundrimi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="175"/>
@@ -2137,22 +2106,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="185"/>
         <source>Normal Size</source>
-        <translation>Masa Normale</translation>
+        <translation>Përmasat normale</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="293"/>
         <source>Words Zoom In</source>
-        <translation>Zmadhoj Fjalët</translation>
+        <translation>Zmadhoj fjalët</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="297"/>
         <source>Words Zoom Out</source>
-        <translation>Zvogëloj Fjalët</translation>
+        <translation>Zvogëloj fjalët</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="299"/>
         <source>Words Normal Size</source>
-        <translation>Fjalët në Masën Normale</translation>
+        <translation>Fjalët në përmasat normale</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="355"/>
@@ -2162,12 +2131,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="365"/>
         <source>Close all tabs</source>
-        <translation>Mbyll tërë fushat</translation>
+        <translation>Mbyll të gjitha fushat</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="373"/>
         <source>Close all tabs except current</source>
-        <translation>Mbyll tërë fushat veç kësaj</translation>
+        <translation>Mbyll të gjitha fushat veç kësaj</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1116"/>
@@ -2177,58 +2146,58 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="1134"/>
         <source>All</source>
-        <translation>Gjithçka</translation>
+        <translation>Të gjithë</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="763"/>
         <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Accessibility API është joaktiv</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruan artikullin...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3099"/>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dritarja kryesore qëndron gjithmonë në krye.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3347"/>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importoj historikun nga skeda</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3396"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabim importi: skedë me të dhëna të pasakta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3400"/>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Përfundoi importi i historikut</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3403"/>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Gabim importi:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3591"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info për fjalorin</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Hap dosjen e fjalorit</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3599"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoj fjalorin</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="344"/>
@@ -2238,7 +2207,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="1286"/>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>Hap listën e fushave</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1344"/>
@@ -2248,41 +2217,33 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="1553"/>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">KUJDES: %1</translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3259"/>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fsheh</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3285"/>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportoj historikun në skedë</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3287"/>
         <location filename="../mainwindow.cc" line="3349"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Skeda tekst (*.txt);;Të gjitha skedat (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3326"/>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Përfundoi eksporti i historikut</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3329"/>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
+        <translation>Gabim eksporti:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -2308,16 +2269,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>&amp;Preferences...</source>
-        <translation>&amp;Pëlqime...</translation>
+        <translation>&amp;Preferencat...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="413"/>
         <source>F2</source>
         <translation>F2</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation type="obsolete">&amp;Grupe...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
@@ -2332,7 +2289,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
-        <translation>H&amp;istoriku</translation>
+        <translation>H&amp;istorik</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
@@ -2342,22 +2299,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Paneli i &amp;kërkimit</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Paneli i &amp;rezultateve</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Paneli i &amp;historikut</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="337"/>
@@ -2367,7 +2324,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="345"/>
         <source>&amp;Homepage</source>
-        <translation>&amp;Faqja e Shtëpisë</translation>
+        <translation>&amp;Faqja zyrtare</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="353"/>
@@ -2387,7 +2344,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="370"/>
         <source>Quit from application</source>
-        <translation>Dal nga aplikimi</translation>
+        <translation>Mbyll aplikacionin</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="373"/>
@@ -2402,7 +2359,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="389"/>
         <source>&amp;Close To Tray</source>
-        <translation>&amp;Mbyll Në Shirit</translation>
+        <translation>&amp;Mbyll në shirit</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
@@ -2417,17 +2374,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="407"/>
         <source>&amp;Save Article</source>
-        <translation>&amp;Ruaj Artikullin</translation>
+        <translation>&amp;Ruaj artikullin</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="410"/>
         <source>Save Article</source>
-        <translation>Ruaj Artikullin</translation>
+        <translation>Ruaj artikullin</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="425"/>
         <source>&amp;Print</source>
-        <translation>&amp;Shtyp</translation>
+        <translation>&amp;Printoj</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="428"/>
@@ -2437,52 +2394,44 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>Page Set&amp;up</source>
-        <translation>Sistem&amp;oj Faqen</translation>
+        <translation>Sistem&amp;oj faqen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="444"/>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>Parashikoj &amp;shtypjen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Riskanoj skedat</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="475"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fushë e re</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="527"/>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gjithmonë në krye</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="530"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjithmonë në krye</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="533"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="542"/>
         <location filename="../mainwindow.ui" line="545"/>
         <location filename="../mainwindow.cc" line="217"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">Parashikoj Shtypjen</translation>
-    </message>
-    <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">Riskanoj Skedat</translation>
+        <translation>Butoni i menysë</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="455"/>
@@ -2497,42 +2446,38 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="529"/>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Fushë e re</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="478"/>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="489"/>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosja e &amp;konfiguracionit</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
         <location filename="../mainwindow.cc" line="3263"/>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Shfaq</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="500"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Eksportoj</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="516"/>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search Pane</source>
-        <translation type="obsolete">Paneli i Kërkimit</translation>
+        <translation>&amp;Importoj</translation>
     </message>
 </context>
 <context>
@@ -2540,12 +2485,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Skeda e fjalorit u manipulua ose u dëmtua</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi hapja e artikullit nga %1, arsyeja: %2</translation>
     </message>
 </context>
 <context>
@@ -2569,7 +2514,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="415"/>
         <source>Enabled</source>
-        <translation>I aktivizuar</translation>
+        <translation>Aktiv</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="417"/>
@@ -2584,7 +2529,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="421"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -2597,7 +2542,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="76"/>
         <source>Dictionary order:</source>
-        <translation>Rendi i fjalorëve:</translation>
+        <translation>Radha e fjalorëve:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="41"/>
@@ -2615,7 +2560,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="153"/>
         <source>Dictionary information</source>
-        <translation>Informacioni i Fjalorit</translation>
+        <translation>Informacion për fjalorin</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="161"/>
@@ -2630,7 +2575,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="195"/>
         <source>Total words:</source>
-        <translation>Fjalët totale:</translation>
+        <translation>Totali i fjalëve:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="212"/>
@@ -2645,7 +2590,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="248"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Përshkrimi:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="328"/>
@@ -2655,17 +2600,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Ndreqeni rendin duke i kapur dhe lëshuar elementet. Lëshojini fjalorët te grupi joaktiv që t&apos;i çaktivizoni ata.</translation>
+        <translation>Ndreqeni radhën duke kapur e lëshuar elementet. Kalojini fjalorët te grupi joaktiv për t&apos;i çaktivizuar.</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Radhit sipas emrit</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="250"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Radhit sipas gjuhëve</translation>
     </message>
 </context>
 <context>
@@ -2686,7 +2631,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../preferences.ui" line="14"/>
         <source>Preferences</source>
-        <translation>Pëlqime</translation>
+        <translation>Preferencat</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="47"/>
@@ -2716,8 +2661,8 @@ Por, kur e ndez këtë, fushat e reja hapen pa kaluar te to.</translation>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Kur e ndez këtë, fushat e reja hapen direkt pas aktuales,
-asaj aktive. Përndryshe ato shtohen te më të fundit.</translation>
+        <translation>Kur e ndez, fushat e reja hapen direkt pas aktuales,
+asaj aktive. Përndryshe ato i shtohen më të fundit.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="210"/>
@@ -2729,7 +2674,7 @@ asaj aktive. Përndryshe ato shtohen te më të fundit.</translation>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Kur e aktivizon, në shiritin e sistemit shfaqet një ikonë që mund të përdoret
-për të hapur dritaren kryesore dhe për të kryer detyrat e tjera.</translation>
+për të hapur dritaren kryesore dhe për të kryer detyra të tjera.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="103"/>
@@ -2740,7 +2685,7 @@ për të hapur dritaren kryesore dhe për të kryer detyrat e tjera.</translatio
         <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Kur e ndez këtë, aplikimi nis direkt në shiritin e sistemit, pa e treguar dritaren kryesore.</translation>
+        <translation>Kur e ndez, aplikacioni nis direkt në shiritin e sistemit, pa e shfaqur dritaren kryesore.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="125"/>
@@ -2751,7 +2696,7 @@ its main window.</source>
         <location filename="../preferences.ui" line="132"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
-        <translation>Kur e ndez këtë, përpjekja për të mbyllur dritaren kryesore të aplikimit në fakt e fsheh atë.</translation>
+        <translation>Kur e ndez, dritarja kryesore e aplikacionit nuk mbyllet por do të fshehet.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="136"/>
@@ -2781,14 +2726,14 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="146"/>
         <source>Double-click translates the word clicked</source>
-        <translation>Klikoj dy herë për të përkthyer fjalën</translation>
+        <translation>Përkthej fjalën me dy klikime</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="394"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Zgjedh nëse mënyra tipike e skanimit të jashtëm është e ndezur apo jo.
-Nëse e zgjedh, programi nis gjithmonë me skanimin e jashtëm aktiv.</translation>
+        <translation>Zgjedh nëse mënyra standarde e skanimit të jashtëm është ndezur apo jo.
+Kur e zgjedh, programi nis gjithmonë me skanimin e jashtëm aktiv.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="575"/>
@@ -2796,9 +2741,9 @@ Nëse e zgjedh, programi nis gjithmonë me skanimin e jashtëm aktiv.</translati
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation>Normalisht, për të aktivizuar skanimin duhen mbajtur shtypur 
-tastet e zgjedhura kur seleksiononi një fjalë. Kur e aktivizon,
-tastet e zgjedhura mund të shtypen shkurt pas seleksionimit.</translation>
+        <translation>Normalisht, skanimi aktivizohet duke mbajtur shtypur tastet
+e zgjedhura gjatë përzgjedhjes së fjalës. Kur e aktivizon,
+tastet e zgjedhura mund të shtypen shkurt pas përzgjedhjes.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="665"/>
@@ -2808,78 +2753,78 @@ tastet e zgjedhura mund të shtypen shkurt pas seleksionimit.</translation>
     <message>
         <location filename="../preferences.ui" line="684"/>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>Përdor këtë tastin për të treguar ose fshehur dritaren kryesore:</translation>
+        <translation>Përdor një tast për të shfaqur a fshehur dritaren kryesore:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="715"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Përdor këtë tastin për të përkthyer një fjalë në mbledhëse:</translation>
+        <translation>Përdor një tast për të përkthyer fjalën në kujtesën e kompjuterit:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="762"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>Tastet kryesore janë globale dhe punojnë në çdo program brenda çdo konteksti për aq kohë sa GoldenDict vepron në sfond.</translation>
+        <translation>Tastet kryesore punojnë përgjithësisht në çdo program, për aq kohë sa GoldenDict vepron në sfond.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
         <source>&amp;Scan Popup</source>
-        <translation>&amp;Skanimi i Jashtëm</translation>
+        <translation>&amp;Skanimi i jashtëm</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="217"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgjedh a duhet shfaqur brezi i fushave kur është hapur vetëm një fushë.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="220"/>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Fsheh fushën e vetme</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="227"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaloj fushat me Ctrl+Tab sipas rendit MRU</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="59"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>Nis automatikisht GoldenDict pas operacionit për fillimin e sistemit.</translation>
+        <translation>Nis automatikisht GoldenDict pas hapjes së sistemit.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="153"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalisht, shtypja e tastit ESC e çon fokusin te vija e përkthimit. Kur e ndez këtë, ai fsheh dritaren kryesore.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="157"/>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasti ESC fsheh dritaren kryesore</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="164"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizoni opsionin nëse doni të seleksiononi fjalët me një klikim</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="167"/>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleksionoj fjalën me një klikim</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="74"/>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stili i shtesave:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ndreq vlerën për të shmangur menytë e gjata të kontekstit.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limiti i fjalorëve në meny:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="376"/>
@@ -2887,32 +2832,32 @@ With this on however, it will hide the main window.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>Kur e aktivizon, çdo herë që e drejtoni miun në ndonjë fjalë mbi ekran (Windows)
-ose kur seleksiononi një fjalë me miun (Linux), ju shfaqet një dritare e jashtme
-me përkthimin. Kur e aktivizon, mund të ndizet dhe të fiket në ikonën e dritares
-kryesore ose nga shiriti i sistemit.</translation>
+        <translation>Kur e aktivizon, çdo herë që e drejtoni mausin në ndonjë fjalë mbi ekran (Windows)
+ose kur seleksiononi një fjalë me mausin (Linux), ju shfaqet një dritare e jashtme
+me përkthimin. Mund të ndizet e të fiket në ikonën e dritares kryesore
+ose nga shiriti i sistemit.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="382"/>
         <source>Enable scan popup functionality</source>
-        <translation>Aktivizoj funksionin e skanimit të jashtëm</translation>
+        <translation>Aktivizoj skanimin e jashtëm</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="398"/>
         <source>Start with scan popup turned on</source>
-        <translation>Nis me skanimin e jashtëm të ndezur</translation>
+        <translation>Nis me skanuesin e ndezur</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="405"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>Kur e aktivizon, skanimi do shfaqet vetëm kur tërë tastet e seleksionuara
-janë në gjendjen e shtypur kur ndryshon seleksionimi i fjalës.</translation>
+        <translation>Kur e aktivizon, skanimi do funksionojë vetëm kur tërë tastet e përzgjedhura
+janë në gjendjen e shtypur.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="409"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
-        <translation>Tregoj skanimin vetëm kur shtyp tastet e seleksionuara:</translation>
+        <translation>Shfaq skanuesin vetëm kur shtyp tastet e përzgjedhura:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="448"/>
@@ -3024,8 +2969,8 @@ janë në gjendjen e shtypur kur ndryshon seleksionimi i fjalës.</translation>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>Për të shmangur seleksionimet false, tastet monitorohen vetëm
-kur e kryen seleksionimin brenda një sasie të kufizuar sekondash,
+        <translation>Për të shmangur përzgjedhjet false, tastet monitorohen vetëm
+kur e kryen përzgjedhjen brenda një sasie të kufizuar sekondash,
 e përcaktuar këtu.</translation>
     </message>
     <message>
@@ -3036,12 +2981,12 @@ e përcaktuar këtu.</translation>
     <message>
         <location filename="../preferences.ui" line="634"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Dërgon fjalën e përkthyer te dritarja kryesore, jo te dritarja kërcyese</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="637"/>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Dërgoj fjalën e përkthyer te dritarja kryesore</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="772"/>
@@ -3074,7 +3019,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="842"/>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Autoshqiptoj fjalët në skanimin e jashtëm</translation>
+        <translation>Autoshqiptoj fjalët e skanuara</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="852"/>
@@ -3084,57 +3029,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Riprodhon skedat zanore me FFmpeg(libav) dhe libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Përdor lexuesin e brendshëm</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Kur e ndez, artikujt e mëdhenj do të mblidhen automatikisht.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Mbledh artikujt me më shumë se</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikujt mbi këtë përmasë do të mblidhen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation type="obsolete">Përdor leximin me API-n e brendshëm në Windows. Kufizohet vetëm te skedat .wav,
-por punon shumë mirë.</translation>
-    </message>
-    <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">Luaj via API të brendshëm në Windows</translation>
-    </message>
-    <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">Luan audion via bazës Phonon. Mund të jetë disi e paqëndrueshme,
-por përkrah shumicën e skedave në format audio.</translation>
-    </message>
-    <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">Luaj via Phonon</translation>
+        <translation>simbole</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="870"/>
         <source>Use any external program to play audio files</source>
-        <translation>Përdor programin e jashtëm për të luajtur skedat zanore</translation>
+        <translation>Riprodhon skedat zanore me një program tjetër</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="873"/>
@@ -3150,8 +3075,8 @@ por përkrah shumicën e skedave në format audio.</translation>
         <location filename="../preferences.ui" line="929"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>E aktivizon kur dëshironi të përdorni një server proxy
-për tërë kërkesat e programit për rrjet.</translation>
+        <translation>Aktivizojeni kur dëshironi të përdorni një server proxy
+për tërë kërkesat e programit për internet.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="933"/>
@@ -3190,7 +3115,7 @@ by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
         <translation>Kur e aktivizon, GoldenDict bllokon shumicën e reklamave duke mohuar
 përmbajtjen (imazhe, korniza) jashtë faqes që shfleton. Nëse ndonjë
-faqe ka probleme për shkak të kësaj, provoni ta çaktivizoni.</translation>
+faqe shfaq probleme prej kësaj, çaktivizojeni.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1038"/>
@@ -3202,23 +3127,26 @@ faqe ka probleme për shkak të kësaj, provoni ta çaktivizoni.</translation>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kur e aktivizon, mund të dëgjohen shqiptimet nga fjalorët
+online që varen nga Flash ose spinat e tjera të internetit.
+Spina duhet instaluar që të funksionojë.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1050"/>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizoj spinat e internetit</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Disa faqe e njohin GoldenDict me anë të kokëve HTTP, dhe i bllokojnë kërkesat.
+Ky opsion e anashkalon problemin.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk identifikoj GoldenDict në kokët HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3227,9 +3155,9 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>Kur e aktivizon, programi verifikon periodikisht nëse ka një version të ri,
-të azhurnuar të GoldenDict. Nëse po, programi informon për të dhe
-kërkon hapjen e faqes për ta shkarkuar.</translation>
+        <translation>Kur e aktivizon, programi verifikon periodikisht kur del një version i ri,
+i azhurnuar, i GoldenDict. Atëherë, programi informon rreth tij dhe
+kërkon ta shkarkojë.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1091"/>
@@ -3239,12 +3167,12 @@ kërkon hapjen e faqes për ta shkarkuar.</translation>
     <message>
         <location filename="../preferences.ui" line="1112"/>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Av&amp;ancuar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1118"/>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Teknologji shtesë për Skanimin e jashtëm</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1124"/>
@@ -3252,106 +3180,113 @@ kërkon hapjen e faqes për ta shkarkuar.</translation>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Përdorni teknologjinë IAccessibleEx për të gjetur fjalën nën kursor.
+Teknologjia punon vetëm me disa programe që e garantojnë atë
+(për shembull, Internet Explorer 9).
+Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>Përdor &amp;IAccessibleEx</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1137"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Përdorni teknologjinë UI Automation për të gjetur fjalën nën kursor.
+Teknologjia punon vetëm me disa programe që e garantojnë atë.
+Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1142"/>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>Përdor &amp;UIAutomation</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1149"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Përdorni mesazhet e GoldenDict për të gjetur fjalën nën kursor.
+Teknologjia punon vetëm me disa programe që e garantojnë atë.
+Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1154"/>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>Përdor mesazhet e &amp;GoldenDict</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1164"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historiku</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1170"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Kur e ndez, depozitohet historiku i fjalëve të përkthyera.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1173"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Depozitoj &amp;historikun</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Specifikoni numrin maksimal të njësive që ruhen në historik.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Masa maksimale e historikut:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervali i ruajtjes së historikut. Kur vendoset 0, historiku ruhet vetëm gjatë mbylljes së programit.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruaj çdo</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1251"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minuta</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1276"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikujt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Kur e ndez, pjesët fakultative të artikujve zgjerohen gjithmonë.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgjeroj &amp;pjesët fakultative</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="42"/>
         <source>System default</source>
-        <translation>Tipike e Sistemit</translation>
+        <translation>Standardi i sistemit</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="80"/>
         <source>Default</source>
-        <translation>Tipik</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Modern</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3361,21 +3296,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.cc" line="83"/>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">Luaj via DirectShow</translation>
+        <translation>Lingoes Blu</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="363"/>
@@ -3393,27 +3324,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../sources.cc" line="821"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="823"/>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst i thjeshtë</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="825"/>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="827"/>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>Krahasoj parashtesën</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="829"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>E panjohur</translation>
     </message>
 </context>
 <context>
@@ -3421,17 +3352,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk u dha emri i programit.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programi u prish.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programi ktheu kodin e daljes %1.</translation>
     </message>
 </context>
 <context>
@@ -3439,27 +3370,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../sources.cc" line="729"/>
         <source>Enabled</source>
-        <translation type="unfinished">I aktivizuar</translation>
+        <translation>Aktiv</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="731"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Lloji</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="733"/>
         <source>Name</source>
-        <translation type="unfinished">Emri</translation>
+        <translation>Emri</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="735"/>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Vija e komandës</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="737"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -3467,97 +3398,97 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../aard.cc" line="396"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabim në hapjen e artikullit</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabim në deshifrimin e artikullit</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi avformat_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi av_malloc().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi avio_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi avformat_open_input(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk gjen rrymën audio.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk gjen kodekun [id: %1].</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi avcodec_open2(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk gjen pajisje output të përdorshme për zërin.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Format i pagarantuar.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi ao_open_live(): </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk ka drejtues.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drejtuesi nuk është pajisje output e drejtërdrejtë.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Një tast i duhur ka vlerë të pasaktë.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk mund të hapë pajisjen: %1, kanalet: %2, raporti: %3, bitet: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabim i panjohur.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dështoi avcodec_alloc_frame().</translation>
     </message>
 </context>
 <context>
@@ -3565,17 +3496,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kërkoj/filtroj fjalorët (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Kërkim i shpejtë</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastroj kërkimin</translation>
     </message>
 </context>
 <context>
@@ -3584,17 +3515,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../articleview.cc" line="2193"/>
         <location filename="../articleview.cc" line="2200"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>GABIM: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2193"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Gabim në ruajtjen e resursit: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Dështon shkarkimi i burimit të referuar.</translation>
+        <translation>Dështoi shkarkimi i resursit të referuar.</translation>
     </message>
 </context>
 <context>
@@ -3626,26 +3557,14 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Dialog</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">fjala</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.ui" line="107"/>
         <source>Back</source>
-        <translation type="unfinished">Pas</translation>
+        <translation>Pas</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
-        <translation type="unfinished">Para</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Listoj &gt;Ngjashmëritë (Alt+M)</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
+        <translation>Para</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="135"/>
@@ -3660,24 +3579,24 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="155"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dërgoj fjalën te dritarja kryesore (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="165"/>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="185"/>
         <source>Shows or hides the dictionary bar</source>
-        <translation>Tregon ose fsheh brezin e fjalorit</translation>
+        <translation>Shfaq ose fsheh brezin e fjalorit</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="208"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
         <translation>Këtë e përdor për të piketuar dritaren që të qëndrojë mbi ekran,
-që të marrë një masë të re ose për mënyrat e tjera.</translation>
+që të marrë një përmasë të re ose për mënyrat e tjera.</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="110"/>
@@ -3689,14 +3608,10 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
         <translation>...</translation>
     </message>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.cc" line="480"/>
         <location filename="../scanpopup.cc" line="825"/>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -3714,7 +3629,7 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
     <message>
         <location filename="../sources.cc" line="1023"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -3722,7 +3637,7 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst në tinguj</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -3760,7 +3675,7 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
     <message>
         <location filename="../sources.cc" line="283"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Do e hiqni programin &lt;b&gt;%1&lt;/b&gt; nga lista?</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="37"/>
@@ -3770,7 +3685,7 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
     <message>
         <location filename="../sources.ui" line="43"/>
         <source>Paths to search for the dictionary files:</source>
-        <translation>Shtigjet ku kërkoni për skedat e fjalorëve:</translation>
+        <translation>Shtigjet ku do të kërkohen skedat e fjalorëve:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="57"/>
@@ -3798,7 +3713,7 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
     <message>
         <location filename="../sources.ui" line="100"/>
         <source>Sound Dirs</source>
-        <translation>Direktoritë e Zërit</translation>
+        <translation>Direktoritë audio</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="106"/>
@@ -3823,7 +3738,7 @@ që të marrë një masë të re ose për mënyrat e tjera.</translation>
     <message>
         <location filename="../sources.ui" line="187"/>
         <source>Available morphology dictionaries:</source>
-        <translation>Fjalorët morfologjikë të mundshëm:</translation>
+        <translation>Fjalorët morfologjikë të gatshëm:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="199"/>
@@ -3837,26 +3752,22 @@ of the appropriate groups to use them.</source>
 ndihmës që jep fjalët rrënjë për kërkimet dhe
 sugjeron rrokjet për fjalët e shkruara gabim.
 Shtojini fjalorët e duhur te fundi i grupeve
-të caktuara për t&apos;i përdorur ata.</translation>
+të caktuara për t&apos;i përdorur.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="283"/>
         <source>Websites</source>
-        <translation>Faqet në Rrjetë</translation>
+        <translation>Faqet në internet</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="289"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Çdo faqe në rrjetë. Rreshti %GDWORD% do zëvendësohet me fjalën e kërkuar:</translation>
-    </message>
-    <message>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">Si alternativë, përdorni %GD1251% për CP1251, %GDISO1% për ISO 8859-1.</translation>
+        <translation>Çdo faqe në internet. Radha %GDWORD% do zëvendësohet me fjalën e kërkuar:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programet</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
@@ -3866,7 +3777,7 @@ të caktuara për t&apos;i përdorur ata.</translation>
     <message>
         <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Shqiptimet direkte nga &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Kjo faqe lejon që personat të regjistrojnë shqiptimet e fjalëve dhe t&apos;i ndajnë ato me të tjerët. Mund të dëgjohen në GoldenDict.</translation>
+        <translation>Shqiptimet direkte nga &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Kjo faqe lejon individët të regjistrojnë shqiptimet e fjalëve dhe t&apos;i ndajnë ato me të tjerët. Mund të dëgjohen në GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="431"/>
@@ -3883,42 +3794,25 @@ të caktuara për t&apos;i përdorur ata.</translation>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation>Tani, përdorimi i Forvo-s kërkon një kod API. Lëreni bosh fushën për të përdorur atë normal,
+        <translation>Tani, përdorimi i Forvo-s kërkon një kod API. Lëreni bosh fushën për të përdorur atë standard,
 që mund të mos lejohet në të ardhmen, ose regjistrohuni te faqja për të marrë kodin tuaj.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Gjeni kodin tuaj &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;këtu&lt;/span&gt;&lt;/a&gt;, ose lëreni bosh për të përdorur atë normal.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>Merrni kodin tuaj &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;këtu&lt;/a&gt;, ose lëreni bosh për të përdorur standardin.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ndryshe, përdorni %GD1251% për CP1251, %GDISO1%...%GDISO16% për ISO 8859-1...ISO 8859-16 përkatësisht,
+%GDBIG5% për Big-5, %GDBIG5HKSCS% për Big5-HKSCS, %GDGBK% për GBK and GB18030, %GDSHIFTJIS% për Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Çdo program i jashtëm. Vargu %GDWORD% do zëvendësohet me fjalën e kërkuar. Kur vargu nuk shkruhet, fjala jepet si input standard.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
@@ -3958,12 +3852,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="645"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Përkthimi bjellorusisht</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="671"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
-        <translation>Aktivizoni përdorimin e alfabetit latin për të shkruar japonishten</translation>
+        <translation>Lejon përdorimin e alfabetit latin për të shkruar japonishten</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="674"/>
@@ -3973,7 +3867,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="686"/>
         <source>Systems:</source>
-        <translation>Sisteme:</translation>
+        <translation>Sistemi:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="693"/>
@@ -4022,7 +3916,7 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../sources.ui" line="736"/>
         <source>Syllabaries:</source>
-        <translation>Rrokjezime:</translation>
+        <translation>Rrokjezimi:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="743"/>
@@ -4060,7 +3954,7 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">Asnjë</translation>
+        <translation>Asnjë</translation>
     </message>
 </context>
 <context>
@@ -4068,77 +3962,77 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorët e përzgjedhur të zërit:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Shtoj</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Heq</translation>
+        <translation>&amp;Heq</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Pëlqime</translation>
+        <translation>Preferencat</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volumi:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlerësimi:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Parashikoj</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorët e gatshëm të zërit:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksti që parashikohet:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shkruani tekstin që do të parashikohet.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Parashikoj</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk ka zë TTS</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuk gjen zërin TTS të gatshëm. &lt;br&gt;Lutemi të siguroheni që keni instaluar të paktën një motor TTS në kompjuter.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Miratoj heqjen</translation>
+        <translation>Miratoj heqjen</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Do e hiqni motorin e zërit &lt;b&gt;%1&lt;/b&gt; nga lista?</translation>
     </message>
 </context>
 <context>
@@ -4146,12 +4040,12 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Kërkoni një fjalë a frazë në fjalor</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Ul poshtë</translation>
     </message>
 </context>
 <context>
@@ -4159,22 +4053,22 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">I aktivizuar</translation>
+        <translation>Aktiv</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Emri</translation>
+        <translation>Emri</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -4182,7 +4076,7 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="572"/>
         <source>Enabled</source>
-        <translation>I aktivizuar</translation>
+        <translation>Aktiv</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="574"/>
@@ -4197,7 +4091,7 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="578"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -4205,7 +4099,7 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../wordfinder.cc" line="170"/>
         <source>Failed to query some dictionaries.</source>
-        <translation>Dështon kërkimi te disa fjalorë.</translation>
+        <translation>Dështoi kërkimi në disa fjalorë.</translation>
     </message>
 </context>
 <context>
@@ -4213,7 +4107,7 @@ Akoma i pafutur në GoldenDict.</translation>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">KUJDES: %1</translation>
+        <translation>KUJDES: %1</translation>
     </message>
 </context>
 </TS>
