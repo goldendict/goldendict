@@ -155,6 +155,7 @@ mac {
                          macmouseover.mm \
                          speechclient_mac.mm
     ICON = icons/macicon.icns
+    QMAKE_INFO_PLIST = myInfo.plist
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
                       cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
