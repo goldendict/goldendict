@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Based on Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -44,12 +44,12 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 펼치기</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 감추기</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="187"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../article_maker.cc" line="591"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 펼치기</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="594"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../article_maker.cc" line="599"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 감추기</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="616"/>
@@ -150,12 +150,12 @@
     <message>
         <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>텍스트로 복사</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>요소검사</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="688"/>
@@ -170,7 +170,7 @@
     <message>
         <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>TTS 음성</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
@@ -180,12 +180,12 @@
     <message>
         <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>비디오</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>비디오: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="736"/>
@@ -286,7 +286,7 @@
     <message>
         <location filename="../articleview.cc" line="1611"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>경고: FFmpeg 오디오 플레이어: %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -530,12 +530,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>폴더 열기</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 편집</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -551,7 +551,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>명령행으로 사전 편집:
+%1</translation>
     </message>
 </context>
 <context>
@@ -572,12 +573,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 사전 메뉴 확장...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
         <source>Edit this group</source>
-        <translation>이 그룹을 편집합니다</translation>
+        <translation>그룹 편집</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="135"/>
@@ -587,7 +588,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 폴더 열기</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -663,7 +664,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../forvo.cc" line="303"/>
         <source>by</source>
-        <translation type="unfinished">by</translation>
+        <translation>by</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="307"/>
@@ -678,7 +679,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../forvo.cc" line="309"/>
         <source>from</source>
-        <translation type="unfinished">from</translation>
+        <translation>from</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="347"/>
@@ -738,7 +739,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="134"/>
         <source>Rename group</source>
-        <translation>그룹 이름 바꾸기</translation>
+        <translation>그룹 이름 변경</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="135"/>
@@ -859,7 +860,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>사전을 마우스로 끌어 그룹으로 지정/삭제, 그룹내에서 순서 변경을 할 수 있습니다(&amp;D).</translation>
+        <translation>사전을 마우스로 끌어 그룹으로 지정/삭제, 그룹내 순서 변경을 할 수 있습니다(&amp;D).</translation>
     </message>
 </context>
 <context>
@@ -908,7 +909,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="1131"/>
         <source>Enabled</source>
-        <translation>사용</translation>
+        <translation>활성</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1133"/>
@@ -1961,7 +1962,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>설정파일 오류. 기본설정으로 계속하시겠습니까?</translation>
     </message>
 </context>
 <context>
@@ -2166,7 +2167,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="763"/>
         <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Accessibility API가 활성화 되지 않았습니다</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3099"/>
@@ -2201,7 +2202,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 폴더 열기</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3599"/>
@@ -2231,17 +2232,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>항목, 전부 (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>항목, HTML 만 (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>항목 저장...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3259"/>
@@ -2509,12 +2510,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>사전파일이 훼손되었습니다</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에서 항목을 표시하지 못함, 이유: %2</translation>
     </message>
 </context>
 <context>
@@ -2538,7 +2539,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="415"/>
         <source>Enabled</source>
-        <translation>사용</translation>
+        <translation>활성</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="417"/>
@@ -2642,12 +2643,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="913"/>
         <source>Path</source>
-        <translation>경로</translation>
+        <translation>   경로</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="915"/>
         <source>Recursive</source>
-        <translation>재귀 검색</translation>
+        <translation>   하위 폴더 검색</translation>
     </message>
 </context>
 <context>
@@ -2850,12 +2851,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>컨텍스트메뉴가 너무 커지지 않게 이 값을 조정합니다.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>컨텍스트메뉴 사전 한도:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="376"/>
@@ -3020,32 +3021,32 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>오디오 파일 재생시 FFmpeg(libav)와 libao 사용</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>내장 플레이어 사용</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션을 선택하면 표시내용이 많은 항목을 자동으로 접히게 하여 숨깁니다</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>자동으로 숨길 항목의 크기: </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>항목의 크기가 이 값을 초과 하면 내용을 접어 표시합니다</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>자 이상</translation>
     </message>
     <message>
         <source>Play audio via Bass library. Optimal choice. To use this mode
@@ -3134,7 +3135,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
-        <translation>최대 검색기록 수:</translation>
+        <translation>검색기록 최대크기:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1228"/>
@@ -3144,7 +3145,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
-        <translation type="unfinished">저장 간격은</translation>
+        <translation>저장 간격: </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1251"/>
@@ -3159,12 +3160,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>이 항목을 선택하면 선택적 표시항목을 항상 확장하여 보여줍니다</translation>
+        <translation>이 항목을 선택하면 사전의 옵션항목을 항상 확장하여 보여줍니다</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
-        <translation>선택적 표시항목 확장(&amp;P)</translation>
+        <translation>옵셕항목 확장(&amp;P)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="772"/>
@@ -3308,12 +3309,13 @@ Plugin must be installed for this option to work.</source>
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>일부 사이트는 HTTP 헤더를 통해서 GoldenDict을 탐지하여 요청을 블록합니다.
+이런 문제를 우회하려면 옵션을 선택하십시오.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP 헤더에 GoldenDict을 표시하지 않음</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3344,7 +3346,7 @@ download page.</source>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Modern</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3359,12 +3361,12 @@ download page.</source>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
@@ -3432,7 +3434,7 @@ download page.</source>
     <message>
         <location filename="../sources.cc" line="729"/>
         <source>Enabled</source>
-        <translation>사용</translation>
+        <translation>활성</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="731"/>
@@ -3460,97 +3462,97 @@ download page.</source>
     <message>
         <location filename="../aard.cc" line="396"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>사전항목 로딩 오류</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>사전항목 디코딩 오류</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_alloc_context() failed.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() failed.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() failed.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() failed: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() failed: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>오디오 스트림을 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>[id: %1] 코덱을 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_open2() failed: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>사용할 수 있는 오디오 장치를 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>지원되지 않는 샘플 포멧</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() failed: </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>드라이버 없음.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 드라이버는 라이브 출력장치가 아닙니다.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>유효한 옵션키가 유효하지 않은 값을 가지고 있습니다.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>장치를 열수 없습니다: %1, 채널: %2, 샘플레이트: %3, 비트: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>알 수 없는 오류.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_frame() failed.</translation>
     </message>
 </context>
 <context>
@@ -3577,17 +3579,17 @@ download page.</source>
         <location filename="../articleview.cc" line="2193"/>
         <location filename="../articleview.cc" line="2200"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">오류: %1</translation>
+        <translation>오류: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2193"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">리소스 저장 오류: </translation>
+        <translation>리소스 저장 오류: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">참조할 리소스를 다운로드하지 못했습니다.</translation>
+        <translation>참조할 리소스를 다운로드하지 못했습니다.</translation>
     </message>
 </context>
 <context>
@@ -3699,7 +3701,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>음성 합성</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -3790,7 +3792,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="162"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>Hunspell/Myspell사전 경로 지정:</translation>
+        <translation>사전 경로:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="178"/>
@@ -3810,14 +3812,13 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>각 철자법사전은 별도의 
-분리된 보조사전 역할을 하며 
-검색을 위한 어간과 오타에 
-대해서 수정된 철자를 
-제안합니다.
-철자교정기능을 사용하기 위해 
-각 그룹의 하단에 적절한 
-사전을 추가하십시오.</translation>
+        <translation>각 철자법사전은 별도의 분리된 
+보조사전 역할을 하며 검색을 위
+한 어간과 오타에 대해서 수정된
+철자를 제안합니다.
+철자교정기능을 이용하기 위해서
+각 사전그룹에 해당하는 사전을
+추가하십시오.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="283"/>
@@ -3827,7 +3828,7 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="289"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>웹사이트. 문자열 %GDWORD%는 검색어로 대체됩니다.:</translation>
+        <translation>검색어가 위치할 자리에 문자열 %GDWORD%를 입력합니다:</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
@@ -3850,7 +3851,9 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>&lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;에서 라이브 음성 듣기. 이 사이트에서는 누구나 자기 목소리로 세계 각 언어의 단어들을 녹음하고 공유할 수 있는 기능을 제공하고 있으며. 그것들을 골든딕에서 연결하여 들을 수 있습니다.
+        <translation>&lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;에서 라이브 음성 듣기. 이 사이트에서는 누구나 자기 목소리로 세계 각 언어의 단어들을 녹음하고 공유할 수 있는 기능을 제공하고 
+있으며. 그것들을 골든딕에서 연결하여 들을 수 있습니다.
+
 </translation>
     </message>
     <message>
@@ -3875,7 +3878,7 @@ in the future, or register on the site to get your own key.</source>
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>별도의 개인키를 &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;여기&lt;/a&gt;서 얻거나, 비워두고 기본키를 사용하십시오.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3899,12 +3902,14 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>≪언어코드형식에 따라 개별지정하는 방법≫
+CP1251 → %GD1251%, ISO 8859-1 → %GDISO1%, ISO 8859-16 → %GDISO16%, Big-5 → %GDBIG5, Big5-HKSCS → %GDBIG5HKSCS%,
+GBK와 GB18030 → %GDGBK%, Shift-JIS → %GDSHIFTJIS%</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>외부 프로그램. 문자열 %GDWORD%는 검색어로 대체됩니다. 그런 문자열이 제시되지 않으면 단어는 표준 입력으로 전달됩니다.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
@@ -4038,7 +4043,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.ui" line="230"/>
         <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>위키백과(MediaWik) 사이트:</translation>
+        <translation>위키백과(MediaWiki) 사이트:</translation>
     </message>
 </context>
 <context>
@@ -4054,77 +4059,77 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>선택된 음성엔진:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>추가(&amp;A)</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">제거(&amp;R)</translation>
+        <translation>제거(&amp;R)</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">설정</translation>
+        <translation>설정</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rate:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>미리듣기</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>설치된 음성엔진:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>미리듣기 할 텍스트:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>여기에 미리듣기 할 텍스트를 언어에 맞게 입력하십시오.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>미리듣기(&amp;P)</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>설치된 TTS 음성이 없습니다</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>설치된 TTS 음성을 찾을 수 없습니다.&lt;br&gt;컴퓨터에 적어도 하나의 TTS 엔진이 설치되어 있는지 확인하십시오.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">삭제 확인</translation>
+        <translation>삭제 확인</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>목록에서 &lt;b&gt;%1&lt;/b&gt; 음성엔진을 삭제할까요?</translation>
     </message>
 </context>
 <context>
@@ -4145,22 +4150,22 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">사용</translation>
+        <translation>활성</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">이름</translation>
+        <translation>이름</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>ID</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">아이콘</translation>
+        <translation>아이콘</translation>
     </message>
 </context>
 <context>
@@ -4168,7 +4173,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="572"/>
         <source>Enabled</source>
-        <translation>사용</translation>
+        <translation>활성</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="574"/>
