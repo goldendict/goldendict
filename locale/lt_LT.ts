@@ -250,12 +250,12 @@
     <message>
         <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaizdo klipas</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaizdo klipas: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1229"/>
@@ -544,12 +544,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Atverti aplanką</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Keisti žodyną</translation>
+        <translation>Keisti žodyną</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -565,7 +565,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodyną keisti naudojant komandą:
+%1</translation>
     </message>
 </context>
 <context>
@@ -590,7 +591,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Išplėstinis meniu su visais žodynais...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -605,7 +606,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Atverti žodyno aplanką</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -1888,7 +1889,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
@@ -2052,12 +2053,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Visas straipsnis (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Straipsnis, tik HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2998"/>
@@ -2207,7 +2208,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
         <location filename="../mainwindow.cc" line="763"/>
         <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>API prieinamumui nėra įgalinta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
@@ -2251,7 +2252,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Atverti žodyno aplanką</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3599"/>
@@ -2580,12 +2581,12 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodyno failas sugadintas</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko įkelti straipsnio iš %1 dėl to, kad %2</translation>
     </message>
 </context>
 <context>
@@ -2876,12 +2877,12 @@ Tačiau įgalinus šią parinktį, būtų paslepiamas pagrindinis langas.</trans
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šią reikšmę keiskite tam, kad išvengtumėte didelių kontekstinių meniu.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodynų kiekio riba kontekstiniame meniu:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="394"/>
@@ -3107,7 +3108,7 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Suskleisti straipsnis, kurių dydis viršija</translation>
     </message>
     <message>
         <source>Artiles longer than this size will be collapsed</source>
@@ -3162,12 +3163,13 @@ bass.dll (http://www.un4seen.com) nukopijavę į GoldenDict aplanką.</translati
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kai kurios svetainės aptinka GoldenDict pagal HTTP antraštę ir dėl to blokuoja užklausas.
+Ši parinktis leidžia apeiti problemą.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP antraštėse neidentifikuoti GoldenDict</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1112"/>
@@ -3450,7 +3452,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Šiuolaikinis</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3465,12 +3467,12 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes mėlynas</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
@@ -3576,57 +3578,57 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation>avformat_alloc_context() klaida</translation>
+        <translation>avformat_alloc_context() klaida.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation>av_malloc() klaida</translation>
+        <translation>av_malloc() klaida.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation>avio_alloc_context() klaida</translation>
+        <translation>avio_alloc_context() klaida.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation>avformat_open_input() </translation>
+        <translation>avformat_open_input() klaida: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation>avformat_find_stream_info() klaida</translation>
+        <translation>avformat_find_stream_info() klaida: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation>Nepavyksta rasti garso srauto</translation>
+        <translation>Nepavyksta rasti garso srauto.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation>Kodeko [id: %1] neradome</translation>
+        <translation>Kodeko [id: %1] neradome.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation>avcodec_open2() klaida</translation>
+        <translation>avcodec_open2() klaida: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation>Nepavyksta rasti garso išvedimo įrenginio</translation>
+        <translation>Nepavyksta rasti garso išvedimo įrenginio.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation>Nepalaikomas formatas</translation>
+        <translation>Nepalaikomas formatas.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation>ao_open_live() klaida</translation>
+        <translation>ao_open_live() klaida:</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
@@ -3636,27 +3638,27 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ši tvarkyklė nėra „live“ išvedimo įrenginys.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkties raktas tinkamas, bet netinkama jo reikšmė.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta atverti įrenginio: %1, kanalų: %2, dažnio: %3, bitų: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation>Nežinoma klaida</translation>
+        <translation>Nežinoma klaida.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation>avcodec_alloc_frame() klaida</translation>
+        <translation>avcodec_alloc_frame() klaida.</translation>
     </message>
 </context>
 <context>
@@ -3821,7 +3823,7 @@ galėsite keisti lango dydį ar atlikti kitus įprastus langų tvarkymo veiksmus
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Balso sintezavimas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -3993,7 +3995,7 @@ Deja, ateityje numatytasis raktas gali nebegalioti, tad siūlome užsiregistruot
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Savo asmeninį raktą gausite &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;čia&lt;/a&gt;. Norėdami naudoti numatytąjį, palikite laukelį tuščią.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -4017,12 +4019,13 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arba naudokite %GD1251% – CP1251, %GDISO1%...%GDISO16% – ISO 8859-1...ISO 8859-16 atitinkamai koduotei,
+%GDBIG5% – Big-5, %GDBIG5HKSCS% – Big5-HKSCS, %GDGBK% – GBK ir GB18030, %GDSHIFTJIS% – Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bet kokia išoriinė programa. „%GDWORD%“ eilutė (be kabučių) bus pakeista į užklausos žodį. Jei šios eilutės nebus, žodis bus perduotas į standartinį įvedimą.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
@@ -4218,7 +4221,7 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Parašykite tekstą, kurį norėsite išmėginti.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
@@ -4233,7 +4236,7 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta rasti TTS balsų.&lt;br&gt;Įsitikinkite, kad savo kompiuteryje įdiegėte kokį nors TTS variklį.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
@@ -4243,7 +4246,7 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš meniu sąrašo pašalinti balso variklį &lt;b&gt;%1&lt;/b&gt;?</translation>
     </message>
 </context>
 <context>
