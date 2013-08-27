@@ -40,7 +40,7 @@
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished">На основу Qt %1 (%2, %3 бита)</translation>
+        <translation>На основу Qt %1 (%2, %3 бита)</translation>
     </message>
 </context>
 <context>
@@ -67,17 +67,17 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished">Прошири чланак</translation>
+        <translation>Прошири чланак</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished">Скупи чланак</translation>
+        <translation>Скупи чланак</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Добро дошли у &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Ако покренете програм по први пут, одредите путању до речника у &lt;b&gt;Уреди|Речник&lt;/b&gt;. Ту можете да наведете разне сајтове Википедије или другe изворe података, подесите редослед у коме су речници или направите речник.&lt;p&gt;Након тога, можете да почнете да тражите речи. Речи се могу наћи у левом окну прозора. Када радите у другим апликацијама, можете да тражите речи, користећи &lt;a href=&quot;Рад са искачућим прозором&quot;&gt;искачући прозор&lt;/a&gt;. &lt;p&gt;У изборнику &lt;b&gt;Уреди|Поставке&lt;/b&gt;.Можете да подесите апликацију по свом укусу. Сви параметри су наговештаји који се приказују када пређете преко њих. Обратите пажњу на њих, када имате проблема са конфигурацијом.&lt;p&gt;Ако вам је потребна помоћ,било каква питања, захтеве, итд, погледајте&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt; Форум програма&lt;/a&gt;.&lt;p&gt;Ажурирање софтвера доступно на  &lt;a href=&quot;http://goldendict.org/&quot;&gt;веб сајту&lt;/a&gt;.&lt;p&gt;© Константин Исаков (ikm@goldendict.org), 2008-2011. Лиценца: GNU GPLv3 или новија. {3 ?} {3&gt;?} {2008-2013 ?} {3 ?}</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Добро дошли у &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Ако покренете програм по први пут, одредите путању до речника у &lt;b&gt;Уреди|Речник&lt;/b&gt;. Ту можете да наведете разне сајтове Википедије или другe изворe података, подесите редослед у коме су речници или направите речник.&lt;p&gt;Након тога, можете да почнете да тражите речи. Речи се могу наћи у левом окну прозора. Када радите у другим апликацијама, можете да тражите речи, користећи &lt;a href=&quot;Рад са искачућим прозором&quot;&gt;искачући прозор&lt;/a&gt;. &lt;p&gt;У изборнику &lt;b&gt;Уреди|Поставке&lt;/b&gt;.Можете да подесите апликацију по свом укусу. Сви параметри су наговештаји који се приказују када пређете преко њих. Обратите пажњу на њих, када имате проблема са конфигурацијом.&lt;p&gt;Ако вам је потребна помоћ,било каква питања, захтеве, итд, погледајте&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt; Форум програма&lt;/a&gt;.&lt;p&gt;Ажурирање софтвера доступно на  &lt;a href=&quot;http://goldendict.org/&quot;&gt;веб сајту&lt;/a&gt;.&lt;p&gt;© Константин Исаков (ikm@goldendict.org), 2008-2011. Лиценца: GNU GPLv3 или новија. {3 ?} {3&gt;?} {2008-2013 ?} {3 ?}</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="229"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../article_maker.cc" line="336"/>
         <source>(picture)</source>
-        <translation type="unfinished">(слика)</translation>
+        <translation>(слика)</translation>
     </message>
 </context>
 <context>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../article_maker.cc" line="591"/>
         <source>Expand article</source>
-        <translation type="unfinished">Прошири чланак</translation>
+        <translation>Прошири чланак</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="594"/>
@@ -125,7 +125,7 @@
     <message>
         <location filename="../article_maker.cc" line="599"/>
         <source>Collapse article</source>
-        <translation type="unfinished">Скупи чланак</translation>
+        <translation>Скупи чланак</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="616"/>
@@ -172,42 +172,42 @@
     <message>
         <location filename="../articleview.cc" line="147"/>
         <source>Select Current Article</source>
-        <translation type="unfinished">Изаберите тренутни чланак</translation>
+        <translation>Изаберите тренутни чланак</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
-        <translation type="unfinished">Умножи као текст</translation>
+        <translation>Умножи као текст</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
-        <translation type="unfinished">Прегледај</translation>
+        <translation>Прегледај</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
-        <translation type="unfinished">TTS глас</translation>
+        <translation>TTS глас</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
         <source>Picture</source>
-        <translation type="unfinished">Слика</translation>
+        <translation>Слика</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
-        <translation type="unfinished">Видео</translation>
+        <translation>Видео</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
-        <translation type="unfinished">Видео: %1</translation>
+        <translation>Видео: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="736"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished">Дефиниција из речника &quot;%1&quot;: %2</translation>
+        <translation>Дефиниција из речника &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="928"/>
@@ -223,7 +223,7 @@
     <message>
         <location filename="../articleview.cc" line="1071"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">ГРЕШКА: %1</translation>
+        <translation>ГРЕШКА: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1223"/>
@@ -243,12 +243,12 @@
     <message>
         <location filename="../articleview.cc" line="1251"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished">Сачувај &amp;слику...</translation>
+        <translation>Сачувај &amp;слику...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1259"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished">Сачувај з&amp;вук...</translation>
+        <translation>Сачувај з&amp;вук...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1278"/>
@@ -263,13 +263,13 @@
     <message>
         <location filename="../articleview.cc" line="1291"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished">Пошаљи &quot;%1&quot; на ред за унос</translation>
+        <translation>Пошаљи &quot;%1&quot; на ред за унос</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1297"/>
         <location filename="../articleview.cc" line="1329"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished">&amp;Додај &quot;%1&quot; у историју</translation>
+        <translation>&amp;Додај &quot;%1&quot; у историју</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1311"/>
@@ -284,27 +284,27 @@
     <message>
         <location filename="../articleview.cc" line="1463"/>
         <source>Save sound</source>
-        <translation type="unfinished">Сачувај звук</translation>
+        <translation>Сачувај звук</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1465"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished">Звучне датотеке (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Све датотеке (*.*)</translation>
+        <translation>Звучне датотеке (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Све датотеке (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1478"/>
         <source>Save image</source>
-        <translation type="unfinished">Сачувај слику</translation>
+        <translation>Сачувај слику</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1480"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished">Сликовне датотеке (*.bmp *.jpg *.png *.tif);;Све датотеке (*.*)</translation>
+        <translation>Сликовне датотеке (*.bmp *.jpg *.png *.tif);;Све датотеке (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1611"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished">УПОЗОРЕЊЕ: FFmpeg Audio Player: %1</translation>
+        <translation>УПОЗОРЕЊЕ: FFmpeg Audio Player: %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -390,18 +390,18 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished">Белоруска транслитерација са латинице на ћирилицу (класичан правопис)</translation>
+        <translation>Белоруска транслитерација са латинице на ћирилицу (класичан правопис)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished">Белоруска транслитерација са латинице на ћирилицу (школски правопис)</translation>
+        <translation>Белоруска транслитерација са латинице на ћирилицу (школски правопис)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished">Белоруска транслитерација (изједначава разлике
+        <translation>Белоруска транслитерација (изједначава разлике
 између класичних и школског правописа на ћирилици)</translation>
     </message>
 </context>
@@ -466,7 +466,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groups_widgets.cc" line="838"/>
         <location filename="../groups_widgets.cc" line="1013"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished">Речници:</translation>
+        <translation>Речници:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="690"/>
@@ -481,28 +481,28 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished">Недодељено</translation>
+        <translation>Недодељено</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished">Комбинујте група из изворног језика у &quot;%1-&gt;&quot;</translation>
+        <translation>Комбинујте група из изворног језика у &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished">Комбинујте група из циљног језика у &quot;-&gt;%1&quot;</translation>
+        <translation>Комбинујте група из циљног језика у &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished">Направите двострану групу превођења &quot;%1-%2-%1&quot;</translation>
+        <translation>Направите двострану групу превођења &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished">Комбинујте група са &quot;%1&quot;</translation>
+        <translation>Комбинујте група са &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -530,12 +530,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished">Отвори фасциклу</translation>
+        <translation>Отвори фасциклу</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Уреди речник</translation>
+        <translation>Уреди речник</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -545,13 +545,13 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="201"/>
         <source>Description:</source>
-        <translation type="unfinished">Опис:</translation>
+        <translation>Опис:</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished">Уреди речник преко командне:
+        <translation>Уреди речник преко командне:
 %1</translation>
     </message>
 </context>
@@ -572,12 +572,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="15"/>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished">&amp;Картица речника</translation>
+        <translation>&amp;Картица речника</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished">Проширени изборник са свим речницима...</translation>
+        <translation>Проширени изборник са свим речницима...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -587,17 +587,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="135"/>
         <source>Dictionary info</source>
-        <translation type="unfinished">Подаци о речнику</translation>
+        <translation>Подаци о речнику</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished">Отвори фасциклу речника</translation>
+        <translation>Отвори фасциклу речника</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Уреди речник</translation>
+        <translation>Уреди речник</translation>
     </message>
 </context>
 <context>
@@ -872,27 +872,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished">Избриши изабрано</translation>
+        <translation>Избриши изабрано</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished">Умножи изабрано</translation>
+        <translation>Умножи изабрано</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished">Историјат:</translation>
+        <translation>Историјат:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="219"/>
         <source>%1/%2</source>
-        <translation type="unfinished">%1/%2</translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="223"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished">Величина историје: %1 уноса од максималних %2</translation>
+        <translation>Величина историје: %1 уноса од максималних %2</translation>
     </message>
 </context>
 <context>
@@ -1875,82 +1875,82 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished">Lojban</translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished">Традиционални кинески</translation>
+        <translation>Традиционални кинески</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished">Поједностављени кинески</translation>
+        <translation>Поједностављени кинески</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other</source>
-        <translation type="unfinished">Остали</translation>
+        <translation>Остали</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished">Остали поједностављеном кинеском дијалекти</translation>
+        <translation>Остали поједностављеном кинеском дијалекти</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished">Остали традиционални кинески дијалекти</translation>
+        <translation>Остали традиционални кинески дијалекти</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished">Остали источно-европски језици</translation>
+        <translation>Остали источно-европски језици</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished">Остали западно-европски језици</translation>
+        <translation>Остали западно-европски језици</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished">Остали руски језици</translation>
+        <translation>Остали руски језици</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished">Остали јапански језици</translation>
+        <translation>Остали јапански језици</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished">Остали балтички језици</translation>
+        <translation>Остали балтички језици</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished">Остали грчки језици</translation>
+        <translation>Остали грчки језици</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished">Остали корејски дијалекти</translation>
+        <translation>Остали корејски дијалекти</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished">Остали турски дијалекти</translation>
+        <translation>Остали турски дијалекти</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished">Остали тајландски дијалекти</translation>
+        <translation>Остали тајландски дијалекти</translation>
     </message>
     <message>
         <location filename="../language.cc" line="389"/>
         <source>Tamazight</source>
-        <translation type="unfinished">Tamazight</translation>
+        <translation>Tamazight</translation>
     </message>
 </context>
 <context>
@@ -1966,7 +1966,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished">Грешка у поставци датотеке. Наставити са подразумеваним подешавањима?</translation>
+        <translation>Грешка у поставци датотеке. Наставити са подразумеваним подешавањима?</translation>
     </message>
 </context>
 <context>
@@ -2039,12 +2039,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished">Чланак, целовит (*.html)</translation>
+        <translation>Чланак, целовит (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished">Чланак, само HTML (*.html)</translation>
+        <translation>Чланак, само HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2998"/>
@@ -2123,17 +2123,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="79"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished">Прикажи називе у картици &amp;речника</translation>
+        <translation>Прикажи називе у картици &amp;речника</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="80"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished">Прикажи малу икону у &amp;алатној траци</translation>
+        <translation>Прикажи малу икону у &amp;алатној траци</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="118"/>
         <source>&amp;Navigation</source>
-        <translation type="unfinished">&amp;Навигација</translation>
+        <translation>&amp;Навигација</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="175"/>
@@ -2184,7 +2184,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="763"/>
         <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished">Приступачност API није омогућено</translation>
+        <translation>Приступачност API није омогућено</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1116"/>
@@ -2199,73 +2199,73 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
         <source>Saving article...</source>
-        <translation type="unfinished">Чување чланка...</translation>
+        <translation>Чување чланка...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3099"/>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished">Главни прозор је подешен да увек буде на врху.</translation>
+        <translation>Главни прозор је подешен да увек буде на врху.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3259"/>
         <source>&amp;Hide</source>
-        <translation type="unfinished">&amp;Сакривен</translation>
+        <translation>&amp;Сакривен</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3285"/>
         <source>Export history to file</source>
-        <translation type="unfinished">Извоз историе у датотеку</translation>
+        <translation>Извоз историе у датотеку</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3287"/>
         <location filename="../mainwindow.cc" line="3349"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Текстуалне датотеке (*.txt);;Све датотеке (*.*)</translation>
+        <translation>Текстуалне датотеке (*.txt);;Све датотеке (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3326"/>
         <source>History export complete</source>
-        <translation type="unfinished">Извоз историје је завршен</translation>
+        <translation>Извоз историје је завршен</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3329"/>
         <source>Export error: </source>
-        <translation type="unfinished">Извоз грешке:</translation>
+        <translation>Извоз грешке:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3347"/>
         <source>Import history from file</source>
-        <translation type="unfinished">Увоз историје из датотеке</translation>
+        <translation>Увоз историје из датотеке</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3396"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished">Увоз грешке: неважећи подаци у датотеци</translation>
+        <translation>Увоз грешке: неважећи подаци у датотеци</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3400"/>
         <source>History import complete</source>
-        <translation type="unfinished">Увоз историје је завршен</translation>
+        <translation>Увоз историје је завршен</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3403"/>
         <source>Import error: </source>
-        <translation type="unfinished">Грешка при увозу:</translation>
+        <translation>Грешка при увозу:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3591"/>
         <source>Dictionary info</source>
-        <translation type="unfinished">Подаци о речнику</translation>
+        <translation>Подаци о речнику</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished">Отвори фасциклу речника</translation>
+        <translation>Отвори фасциклу речника</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3599"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Уреди речник</translation>
+        <translation>Уреди речник</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="344"/>
@@ -2352,22 +2352,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished">&amp;Претражи окно</translation>
+        <translation>&amp;Претражи окно</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished">&amp;Резултати окна за навигацију</translation>
+        <translation>&amp;Резултати окна за навигацију</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished">&amp;Окно историје</translation>
+        <translation>&amp;Окно историје</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation type="unfinished">&amp;Речници...</translation>
+        <translation>&amp;Речници...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -2457,60 +2457,60 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="444"/>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished">Преглед пре шта&amp;мпања</translation>
+        <translation>Преглед пре шта&amp;мпања</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished">&amp;Поново прегледа датотеке</translation>
+        <translation>&amp;Поново прегледа датотеке</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="475"/>
         <source>&amp;New Tab</source>
-        <translation type="unfinished">&amp;Нова картица</translation>
+        <translation>&amp;Нова картица</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
         <location filename="../mainwindow.cc" line="3263"/>
         <source>&amp;Show</source>
-        <translation type="unfinished">&amp;Прикажи</translation>
+        <translation>&amp;Прикажи</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="500"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished">Ctrl+H</translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>&amp;Export</source>
-        <translation type="unfinished">&amp;Извоз</translation>
+        <translation>&amp;Извоз</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="516"/>
         <source>&amp;Import</source>
-        <translation type="unfinished">&amp;Увоз</translation>
+        <translation>&amp;Увоз</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="527"/>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished">&amp;Увек на врху</translation>
+        <translation>&amp;Увек на врху</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="530"/>
         <source>Always on Top</source>
-        <translation type="unfinished">Увек на врху</translation>
+        <translation>Увек на врху</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="533"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished">Ctrl+O</translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="542"/>
         <location filename="../mainwindow.ui" line="545"/>
         <location filename="../mainwindow.cc" line="217"/>
         <source>Menu Button</source>
-        <translation type="unfinished">Дугме изборника</translation>
+        <translation>Дугме изборника</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -2555,12 +2555,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished">Речник датотека је покварен или оштећен</translation>
+        <translation>Речник датотека је покварен или оштећен</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished">Неуспешно учитавање чланка из %1, разлог: %2</translation>
+        <translation>Неуспешно учитавање чланка из %1, разлог: %2</translation>
     </message>
 </context>
 <context>
@@ -2599,7 +2599,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="421"/>
         <source>Icon</source>
-        <translation type="unfinished">Икона</translation>
+        <translation>Икона</translation>
     </message>
 </context>
 <context>
@@ -2660,7 +2660,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="248"/>
         <source>Description:</source>
-        <translation type="unfinished">Опис:</translation>
+        <translation>Опис:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="328"/>
@@ -2675,12 +2675,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
         <source>Sort by name</source>
-        <translation type="unfinished">Разврстај по имену</translation>
+        <translation>Разврстај по имену</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="250"/>
         <source>Sort by languages</source>
-        <translation type="unfinished">Разврстај по језицима</translation>
+        <translation>Разврстај по језицима</translation>
     </message>
 </context>
 <context>
@@ -2868,7 +2868,7 @@ be pressed shortly after the selection is done.</source>
     <message>
         <location filename="../preferences.ui" line="74"/>
         <source>Add-on style:</source>
-        <translation type="unfinished">Додатак стилу:</translation>
+        <translation>Додатак стилу:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="153"/>
@@ -2885,27 +2885,27 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="164"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished">Укључите ову могућност ако желите да изаберете речи једним кликом миша</translation>
+        <translation>Укључите ову могућност ако желите да изаберете речи једним кликом миша</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="167"/>
         <source>Select word by single click</source>
-        <translation type="unfinished">Изаберите реч једним кликом</translation>
+        <translation>Изаберите реч једним кликом</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="227"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished">Ctrl-Tab навигација картица у MRU редоследу</translation>
+        <translation>Ctrl-Tab навигација картица у MRU редоследу</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished">Подесите ову вредност да бисте избегли огромне падајуће изборнике</translation>
+        <translation>Подесите ову вредност да бисте избегли огромне падајуће изборнике</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished">Ограничи падајући изборник речника:</translation>
+        <translation>Ограничи падајући изборник речника:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="376"/>
@@ -3062,34 +3062,34 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="634"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished">Пошаљите преведену реч на главни прозор уместо да га прикаже у искачућем прозору</translation>
+        <translation>Пошаљите преведену реч на главни прозор уместо да га прикаже у искачућем прозору</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="637"/>
         <source>Send translated word to main window</source>
-        <translation type="unfinished">Пошаљите преведену реч у главни прозор</translation>
+        <translation>Пошаљите преведену реч у главни прозор</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished">Пусти звучне датотеке преко FFmpeg(libav) и libao</translation>
+        <translation>Пусти звучне датотеке преко FFmpeg(libav) и libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished">Користи уграђени пуштач</translation>
+        <translation>Користи уграђени пуштач</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished">Неки сајтови откривају GoldenDict преко HTTP заглавља и блок захтева.
+        <translation>Неки сајтови откривају GoldenDict преко HTTP заглавља и блок захтева.
 Омогућите ову могућност да бисте решили тај проблем.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished">Немојте да идентификујете GoldenDict у HTTP заглављима</translation>
+        <translation>Немојте да идентификујете GoldenDict у HTTP заглављима</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1112"/>
@@ -3148,77 +3148,77 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1164"/>
         <source>History</source>
-        <translation type="unfinished">Историјат</translation>
+        <translation>Историјат</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1170"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished">Укључите ову могућност за чување историје преведених речи</translation>
+        <translation>Укључите ову могућност за чување историје преведених речи</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1173"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished">Складиште &amp;историје</translation>
+        <translation>Складиште &amp;историје</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished">Одредите највећи број ставки задржат у историји</translation>
+        <translation>Одредите највећи број ставки задржат у историји</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished">Максимална величина историје:</translation>
+        <translation>Максимална величина историје:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished">Раздобље чувања историје. Ако се подеси на 0 у историји ће бити сачувана само током излаза.</translation>
+        <translation>Раздобље чувања историје. Ако се подеси на 0 у историји ће бити сачувана само током излаза.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
-        <translation type="unfinished">Сачувај сваких</translation>
+        <translation>Сачувај сваких</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1251"/>
         <source>minutes</source>
-        <translation type="unfinished">минута</translation>
+        <translation>минута</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1276"/>
         <source>Articles</source>
-        <translation type="unfinished">Чланци</translation>
+        <translation>Чланци</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished">Укључите ову могућност да увек прошири необавезне делове чланака</translation>
+        <translation>Укључите ову могућност да увек прошири необавезне делове чланака</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished">Могућност проширења &amp;делова</translation>
+        <translation>Могућност проширења &amp;делова</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished">Изаберите ову могућност да бисте аутоматски урушити велике чланке</translation>
+        <translation>Изаберите ову могућност да бисте аутоматски урушити велике чланке</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished">Уруши чланке опширније од</translation>
+        <translation>Уруши чланке опширније од</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished">Чланци дужи него ове величине ће бити срушени</translation>
+        <translation>Чланци дужи него ове величине ће бити срушени</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished">симболи</translation>
+        <translation>симболи</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="772"/>
@@ -3390,7 +3390,7 @@ GoldenDict. Ако се појавила нова верзија, програм
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished">Модеран</translation>
+        <translation>Модеран</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3400,17 +3400,17 @@ GoldenDict. Ако се појавила нова верзија, програм
     <message>
         <location filename="../preferences.cc" line="83"/>
         <source>Babylon</source>
-        <translation type="unfinished">Babylon</translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished">Lingoes</translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished">Lingoes-Blue</translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
@@ -3498,7 +3498,7 @@ GoldenDict. Ако се појавила нова верзија, програм
     <message>
         <location filename="../sources.cc" line="737"/>
         <source>Icon</source>
-        <translation type="unfinished">Икона</translation>
+        <translation>Икона</translation>
     </message>
 </context>
 <context>
@@ -3506,97 +3506,97 @@ GoldenDict. Ако се појавила нова верзија, програм
     <message>
         <location filename="../aard.cc" line="396"/>
         <source>Article loading error</source>
-        <translation type="unfinished">Грешка при учитавању чланка</translation>
+        <translation>Грешка при учитавању чланка</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation type="unfinished">Грешка декодирања чланка</translation>
+        <translation>Грешка декодирања чланка</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished">avformat_alloc_context() није успело.</translation>
+        <translation>avformat_alloc_context() није успело.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished">av_malloc() није успело.</translation>
+        <translation>av_malloc() није успело.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished">avio_alloc_context() није успело.</translation>
+        <translation>avio_alloc_context() није успело.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished">avformat_open_input() није успело: %1.</translation>
+        <translation>avformat_open_input() није успело: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished">avformat_find_stream_info() није успело: %1.</translation>
+        <translation>avformat_find_stream_info() није успело: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished">Није могуће пронаћи аудио ток.</translation>
+        <translation>Није могуће пронаћи аудио ток.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished">Кодек [id: %1] није пронађен.</translation>
+        <translation>Кодек [id: %1] није пронађен.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished">avcodec_open2() није успело: %1.</translation>
+        <translation>avcodec_open2() није успело: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished">Не можете да пронађете употребљив уређај за звучни излаз.</translation>
+        <translation>Не можете да пронађете употребљив уређај за звучни излаз.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished">Неподржан је пробни формат.</translation>
+        <translation>Неподржан је пробни формат.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished">ao_open_live() није успело: </translation>
+        <translation>ao_open_live() није успело: </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation type="unfinished">Нема управљача.</translation>
+        <translation>Нема управљача.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished">Овај управљач нема активан излазни уређај.</translation>
+        <translation>Овај управљач нема активан излазни уређај.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished">Важећи избор тастера има неважећу вредност.</translation>
+        <translation>Важећи избор тастера има неважећу вредност.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished">Не могу да отворим уређај: %1, канали: %2, мера: %3, бита: %4.</translation>
+        <translation>Не могу да отворим уређај: %1, канали: %2, мера: %3, бита: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation type="unfinished">Непозната грешка.</translation>
+        <translation>Непозната грешка.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished">avcodec_alloc_frame() није успело.</translation>
+        <translation>avcodec_alloc_frame() није успело.</translation>
     </message>
 </context>
 <context>
@@ -3604,17 +3604,17 @@ GoldenDict. Ако се појавила нова верзија, програм
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished">Речник - претрага/филтер (Ctrl+F)</translation>
+        <translation>Речник - претрага/филтер (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation type="unfinished">Брза претрага</translation>
+        <translation>Брза претрага</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation type="unfinished">Очисти претрагу</translation>
+        <translation>Очисти претрагу</translation>
     </message>
 </context>
 <context>
@@ -3623,12 +3623,12 @@ GoldenDict. Ако се појавила нова верзија, програм
         <location filename="../articleview.cc" line="2202"/>
         <location filename="../articleview.cc" line="2209"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">ГРЕШКА: %1</translation>
+        <translation>ГРЕШКА: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2202"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Грешка чувања ресурса: </translation>
+        <translation>Грешка чувања ресурса: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2209"/>
@@ -3699,12 +3699,12 @@ GoldenDict. Ако се појавила нова верзија, програм
     <message>
         <location filename="../scanpopup.ui" line="155"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished">Пошаљите реч у главни прозор (Alt+W)</translation>
+        <translation>Пошаљите реч у главни прозор (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="165"/>
         <source>Alt+W</source>
-        <translation type="unfinished">Alt+W</translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="185"/>
@@ -3749,7 +3749,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="1023"/>
         <source>Icon</source>
-        <translation type="unfinished">Икона</translation>
+        <translation>Икона</translation>
     </message>
 </context>
 <context>
@@ -3757,7 +3757,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished">Текст у говор</translation>
+        <translation>Текст у говор</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -3945,18 +3945,18 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished">Алтернативно, користите %GD1251% за CP1251, %GDISO1%...%GDISO16% за ISO 8859-1...ISO 8859-16 односно,
+        <translation>Алтернативно, користите %GD1251% за CP1251, %GDISO1%...%GDISO16% за ISO 8859-1...ISO 8859-16 односно,
 %GDBIG5% за Big-5, %GDBIG5HKSCS% за Big5-HKSCS, %GDGBK% за GBK и GB18030, %GDSHIFTJIS% за Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished">Неки спољни програми. Низ %GDWORD% биће замењен речју упита. Ако такав низ није представљен, реч ће се учитати у стандардни улаз.</translation>
+        <translation>Неки спољни програми. Низ %GDWORD% биће замењен речју упита. Ако такав низ није представљен, реч ће се учитати у стандардни улаз.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished">Набавите свој кључ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, или оставите празно да бисте користили подразумевани.</translation>
+        <translation>Набавите свој кључ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, или оставите празно да бисте користили подразумевани.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
@@ -3996,7 +3996,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="645"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished">Белоруска транслитерација</translation>
+        <translation>Белоруска транслитерација</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="671"/>
@@ -4107,12 +4107,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished">Изабрани погон гласа:</translation>
+        <translation>Изабрани погон гласа:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished">&amp;Додај</translation>
+        <translation>&amp;Додај</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
@@ -4127,47 +4127,47 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished">Величина:</translation>
+        <translation>Величина:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished">Мера:</translation>
+        <translation>Мера:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished">Преглед</translation>
+        <translation>Преглед</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished">Доступни гласовни погони:</translation>
+        <translation>Доступни гласовни погони:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished">Текст се може погледати:</translation>
+        <translation>Текст се може погледати:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished">Укуцајте текст да буде прегледан овде.</translation>
+        <translation>Укуцајте текст да буде прегледан овде.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished">&amp;Преглед</translation>
+        <translation>&amp;Преглед</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished">Нема доступног TTS гласа</translation>
+        <translation>Нема доступног TTS гласа</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished">Не можете да пронађете доступне TTS гласове.&lt;br&gt;Уверите се да је најмање један TTS погон већ инсталиран на рачунару.</translation>
+        <translation>Не можете да пронађете доступне TTS гласове.&lt;br&gt;Уверите се да је најмање један TTS погон већ инсталиран на рачунару.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
@@ -4177,7 +4177,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished">Уклоните гласовну погон &lt;b&gt;%1&lt;/b&gt; са списка?</translation>
+        <translation>Уклоните гласовну погон &lt;b&gt;%1&lt;/b&gt; са списка?</translation>
     </message>
 </context>
 <context>
@@ -4185,12 +4185,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished">Откуцајте реч или фразу за претрагу речника</translation>
+        <translation>Откуцајте реч или фразу за претрагу речника</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
-        <translation type="unfinished">Падајући</translation>
+        <translation>Падајући</translation>
     </message>
 </context>
 <context>
@@ -4208,12 +4208,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished">Id</translation>
+        <translation>Id</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">Икона</translation>
+        <translation>Икона</translation>
     </message>
 </context>
 <context>
@@ -4236,7 +4236,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="578"/>
         <source>Icon</source>
-        <translation type="unfinished">Икона</translation>
+        <translation>Икона</translation>
     </message>
 </context>
 <context>
@@ -4252,7 +4252,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">УПОЗОРЕЊЕ: %1</translation>
+        <translation>УПОЗОРЕЊЕ: %1</translation>
     </message>
 </context>
 </TS>
