@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Basato su Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -44,12 +44,12 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Espandi traduzione</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Compatta traduzione</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="187"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../article_maker.cc" line="591"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Espandi traduzione</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="594"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../article_maker.cc" line="599"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Compatta traduzione</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="616"/>
@@ -145,17 +145,17 @@
     <message>
         <location filename="../articleview.cc" line="147"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona traduzione corrente</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia come testo</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Ispeziona</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="688"/>
@@ -170,7 +170,7 @@
     <message>
         <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Voce sintetizzata (TTS)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
@@ -205,27 +205,27 @@
     <message>
         <location filename="../articleview.cc" line="1071"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1463"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva suono</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1465"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>File sonori (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Tutti i file (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1478"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva immagine</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1480"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>File d&apos;immagine (*.bmp *.jpg *.png *.tif);;Tutti i file (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1223"/>
@@ -235,12 +235,12 @@
     <message>
         <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Video: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1229"/>
@@ -286,7 +286,7 @@
     <message>
         <location filename="../articleview.cc" line="1611"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENZIONE: Lettore audio FFmpeg: %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -327,12 +327,12 @@
     <message>
         <location filename="../articleview.cc" line="1251"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva &amp;immagine...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1259"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva s&amp;uono...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1604"/>
@@ -390,18 +390,19 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Traslitterazione del biellorusso da caratteri latini a cirillici (ortografia classica)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Traslitterazione del biellorusso da caratteri latini a cirillici (ortografia scolastica)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Traslitterazione del biellorusso (lievemente diversa
+tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     </message>
 </context>
 <context>
@@ -480,7 +481,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Non assegnato</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
@@ -529,12 +530,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri cartella</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Modifica dizionario</translation>
+        <translation>Modifica dizionario</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -550,7 +551,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Modificia il dizionario via comando:
+%1</translation>
     </message>
 </context>
 <context>
@@ -575,7 +577,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Estendi menu con tutti i dizionari...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -590,7 +592,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri cartella dizionario</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -870,27 +872,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Elimina voce selezionata</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia voce selezionata</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cronologia:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="219"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="223"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensioni cronologia: %1 voci per un massimo di %2</translation>
     </message>
 </context>
 <context>
@@ -1873,7 +1875,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
@@ -1964,7 +1966,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nel file di configurazione. Continuare con le impostazioni preimpostate?</translation>
     </message>
 </context>
 <context>
@@ -2032,22 +2034,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2925"/>
         <source>Print Article</source>
-        <translation>Stampa voce</translation>
+        <translation>Stampa traduzione</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduzione come pagina completa (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduzione come pagina solo HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2998"/>
         <source>Save Article As</source>
-        <translation>Salva voce come</translation>
+        <translation>Salva traduzione come</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
@@ -2061,12 +2063,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3013"/>
         <source>Can&apos;t save article: %1</source>
-        <translation>Impossibile salvare la voce: %1</translation>
+        <translation>Impossibile salvare la traduzione: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvataggio traduzioni...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3099"/>
@@ -2202,7 +2204,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <location filename="../mainwindow.cc" line="763"/>
         <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;accessibilità alle API non è abilitita</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3347"/>
@@ -2236,7 +2238,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3599"/>
@@ -2335,7 +2337,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Pannello della &amp;cronologica</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...	F3</source>
@@ -2378,7 +2380,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="337"/>
@@ -2438,12 +2440,12 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="407"/>
         <source>&amp;Save Article</source>
-        <translation>&amp;Salva voce</translation>
+        <translation>&amp;Salva traduzione</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="410"/>
         <source>Save Article</source>
-        <translation>Salva la voce corrente</translation>
+        <translation>Salva la traduzione corrente</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="425"/>
@@ -2495,7 +2497,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <location filename="../mainwindow.ui" line="545"/>
         <location filename="../mainwindow.cc" line="217"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulsante menu</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -2561,12 +2563,12 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file del dizionario risulta alterato o corrotto</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile caricare la traduzione da %1, per il motivo seguente: %2</translation>
     </message>
 </context>
 <context>
@@ -2901,12 +2903,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modificare questo valore in modo da evitare menu contestuali troppo estesi.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite sul numero di dizionari per il menu contestuale:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="376"/>
@@ -3074,32 +3076,32 @@ entro il limite di secondi qui specificato.</translation>
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Riproduce l&apos;audio utilizzando le librerie FFmpeg(libav) e libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizza lettore interno</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuntando questa casella vengono automaticamente compattate le traduzioni troppo estese</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>compatta le traduzioni più estese di </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Le traduzioni più estese di queste dimensioni verranno compattate</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>caratteri</translation>
     </message>
     <message>
         <source>Play audio via Bass library. Optimal choice. To use this mode
@@ -3183,32 +3185,32 @@ Non è necessario attivare questa opzione se non si usano tali programmi.</trans
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Specificare il numero massimo di inserimenti da mantenere nella cronologia.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensione massima della cronologia:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervallo di salvattaggio della cronologia. Impostando il valore 0 la cronologia verrà salvata soltanto alla chiusura del programma.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva ogni </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1251"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minuti</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1276"/>
         <source>Articles</source>
-        <translation>Voci</translation>
+        <translation>Traduzioni</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1282"/>
@@ -3362,12 +3364,13 @@ Affinché questa opzione possa funzionare, è necessario che i plugin richiesti 
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alcuni siti web rilevano GoldenDict via intestazione HTTP e ne bloccano le richieste.
+Spuntare questa casella per raggirare il problema.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>non consentire che GoldenDict venga identificato nelle intestazioni HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3398,7 +3401,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Moderna</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3413,12 +3416,12 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
@@ -3514,97 +3517,97 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../aard.cc" line="396"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore di caricamento della traduzione</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore di decodifica del file di traduzione</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_alloc_context() fallito.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() fallito.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() fallito.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() fallito: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() fallito: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile rilevare il flusso audio.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificatore [id: %1] non trovato.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_open2() fallito: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile rilevare un dispositivo audio di uscita utilizzabile per file audio.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato campione non supportato.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() fallito: </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun driver.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo driver non è un dispositivo di uscita valido.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Una valida chiave di opzione presenta un valore non valido.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire il dispositivo: %1, canali: %2, velocità: %3, bit: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore sconosciuto.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_frame() fallito.</translation>
     </message>
 </context>
 <context>
@@ -3612,17 +3615,17 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca/Filtra nel dizionario (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca veloce</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina cronologia</translation>
     </message>
 </context>
 <context>
@@ -3631,17 +3634,17 @@ e si collega al sito del programma.</translation>
         <location filename="../articleview.cc" line="2193"/>
         <location filename="../articleview.cc" line="2200"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2193"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Errore di salvataggio risorsa:</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Lo scaricamento della risorsa di riferimento è fallita.</translation>
+        <translation>Lo scaricamento della risorsa di riferimento è fallita.</translation>
     </message>
 </context>
 <context>
@@ -3743,7 +3746,7 @@ in modo che possa essere ridimensionata o gestita liberamente.</translation>
         <location filename="../scanpopup.cc" line="480"/>
         <location filename="../scanpopup.cc" line="825"/>
         <source>%1 - %2</source>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -3761,7 +3764,7 @@ in modo che possa essere ridimensionata o gestita liberamente.</translation>
     <message>
         <location filename="../sources.cc" line="1023"/>
         <source>Icon</source>
-        <translation type="unfinished">Icona</translation>
+        <translation>Icona</translation>
     </message>
 </context>
 <context>
@@ -3769,7 +3772,7 @@ in modo che possa essere ridimensionata o gestita liberamente.</translation>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Testo a sintesi vocale (Text to Speech)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -3918,7 +3921,7 @@ in fondo al gruppo linguistico appropriato.</translation>
     <message>
         <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Pronuncia direttamente da  &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Questo sito permette alle persone di registrare e condividere la pronuncia delle parole ed è possibile ascoltarle direttamente da GoldenDict.</translation>
+        <translation>Pronuncia direttamente da &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Questo sito permette alle persone di registrare e condividere la pronuncia delle parole ed è possibile ascoltarle direttamente da GoldenDict.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="431"/>
@@ -3942,7 +3945,7 @@ In alternativa è possibile registrarsi al sito ed ottenere una chiave personale
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ottieni &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;qui&lt;/a&gt; la tua chiave personale oppure lascia il campo vuoto per utilizzare quella preimpostata.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3966,12 +3969,13 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>In alternativa usare %GD1251% per CP1251, %GDISO1%...%GDISO16% per ISO 8859-1...ISO 8859-16 rispettivamente,
+%GDBIG5% per Big-5, %GDBIG5HKSCS% per Big5-HKSCS, %GDGBK% per GBK e GB18030, %GDSHIFTJIS% per Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per qualsiasi programma esterno. La stringa %GDWORD% va&apos; posta in fondo alla linea di comando ed essa verrà sostituita dalla parola che si desidera tradurre. Se però nella riga di comando non fosse presente alcuna stringa, la parola da tradurre verrebbe passata all&apos;applicazione esterna come un inserimento standard.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
@@ -4011,7 +4015,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="645"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>traslitterazione bielorusso</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="671"/>
@@ -4122,77 +4126,77 @@ Non ancora implementato.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Motori di sintesi vocali selezionati:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aggiungi</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Elimina</translation>
+        <translation>&amp;Elimina</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Impostazioni</translation>
+        <translation>Impostazioni</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocità:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteprima</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Motori di sintesi disponibili:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Testo di anteprima da pronunciare:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Digita qui del testo d&apos;esempio da pronunciare per provare la voce di sintesi TTS.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anteprima</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna voce di sintesi TTS disponibile</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile rilevare una voce di sintesi TTS disponibile.&lt;br&gt;Assicurarsi che sul proprio computer sia stato già installato almeno un motore di sintesi TTS.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Conferma eliminazione</translation>
+        <translation>Conferma eliminazione</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminare il motore di sintesi vocale &lt;b&gt;%1&lt;/b&gt; dall&apos;elenco?</translation>
     </message>
 </context>
 <context>
@@ -4217,22 +4221,22 @@ Non ancora implementato.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">Abilitato</translation>
+        <translation>Abilitato</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">Icona</translation>
+        <translation>Icona</translation>
     </message>
 </context>
 <context>
@@ -4271,7 +4275,7 @@ Non ancora implementato.</translation>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">ATTENZIONE: %1</translation>
+        <translation>ATTENZIONE: %1</translation>
     </message>
 </context>
 </TS>
