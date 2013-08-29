@@ -41,7 +41,7 @@
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Основано наQt %1 (%2, %3 біт) </translation>
     </message>
 </context>
 <context>
@@ -49,12 +49,12 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Розкрити статтю</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Згорнути статтю</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="187"/>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../article_maker.cc" line="591"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Розкрити статтю</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="594"/>
@@ -122,7 +122,7 @@
     <message>
         <location filename="../article_maker.cc" line="599"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Згорнути статтю</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="616"/>
@@ -200,12 +200,12 @@
     <message>
         <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопіювати як текст</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Дослідити</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="688"/>
@@ -220,7 +220,7 @@
     <message>
         <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Голос TTS</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
@@ -255,27 +255,27 @@
     <message>
         <location filename="../articleview.cc" line="1071"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка:%1 </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1463"/>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти звук</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1465"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Звукові файли(*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Усі файли (*.*) </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1478"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти малюнок</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1480"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Графічні файли (*.bmp *.jpg *.png *.tif);;Усі файли (*.*) </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1223"/>
@@ -285,12 +285,12 @@
     <message>
         <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Відеозапис</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Відеозапис: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1229"/>
@@ -336,7 +336,7 @@
     <message>
         <location filename="../articleview.cc" line="1611"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередження: звуковий програвач FFmpeg: %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -377,12 +377,12 @@
     <message>
         <location filename="../articleview.cc" line="1251"/>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти &amp;зображення…</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1259"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти з&amp;вук</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1604"/>
@@ -535,12 +535,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити теку</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Редагувати словник</translation>
+        <translation>Редагувати словник</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -556,7 +556,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати словник через команду:
+%1</translation>
     </message>
 </context>
 <context>
@@ -581,7 +582,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Розширене меню з усіма словниками</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -596,7 +597,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити словникову теку</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -1880,7 +1881,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Ложбан</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
@@ -1971,7 +1972,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка в файлі налаштувань. Продовжити з типовими параметрами?</translation>
     </message>
 </context>
 <context>
@@ -2418,7 +2419,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="763"/>
         <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>API доступності не ввімкнено</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2807"/>
@@ -2448,12 +2449,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Стаття, Повна (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Стаття, тільки HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2998"/>
@@ -2477,7 +2478,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Збередення статті…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3099"/>
@@ -2538,7 +2539,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити словникову теку</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3599"/>
@@ -2551,12 +2552,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Словниковий файл пошкоджено</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося завантажити статтю з%1, причина: %2</translation>
     </message>
 </context>
 <context>
@@ -2847,12 +2848,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Скоригуйте це значення, щоб уникнути величезних контекстних меню.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження контекстного меню для словників:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
@@ -3100,32 +3101,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Програвати аудіофайли через FFmpeg(libav) та libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати внутрішній програвач</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть це, щоб автоматично згортати великі статті</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Згортати статті з понад</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Статті довші за цей розмір буде згорнуто</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>символів</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3241,12 +3242,13 @@ Plugin must be installed for this option to work.</source>
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деякі сайти виявлять GoldenDict через загловок HTTP і блокують запити.
+Щоб обійти цю проблему, ввімкніть цей параметр.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Не отожнювати GoldenDict в заголовках HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3348,17 +3350,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Проміжок збереження історії. Якщо вказати 0, то історія зберігатиметься тільки після виходу з програми.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберігати кожні</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1251"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>хвилин</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1276"/>
@@ -3388,7 +3390,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Modern</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -3403,12 +3405,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
@@ -3504,97 +3506,97 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../aard.cc" line="396"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка завантаження статті</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка розкодування статті</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: avformat_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: av_malloc().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: avio_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: avformat_open_input() %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: avformat_find_stream_info() %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо знайти аудіопотік.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодек [ід: %1] не знайдено.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: avcodec_open2() %1. </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо знайти зручний пристрій для аудіовиходу.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Непідтримуваний формат проби.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: ao_open_live(): </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає носія.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей носій не є пристроєм потокового аудіовиходу.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дійсний ключ має недійсне значення.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо відкрити пристрій: %1, канали: %2, частота: %3, бітів: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідома помилка.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: avcodec_alloc_frame().</translation>
     </message>
 </context>
 <context>
@@ -3621,17 +3623,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../articleview.cc" line="2193"/>
         <location filename="../articleview.cc" line="2200"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2193"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка зберігання ресурсів: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Не вдалось звантажити вказаний ресурс.</translation>
+        <translation>Не вдалось звантажити поданий ресурс.</translation>
     </message>
 </context>
 <context>
@@ -3751,7 +3753,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="1023"/>
         <source>Icon</source>
-        <translation type="unfinished">Наличка</translation>
+        <translation>Піктограма</translation>
     </message>
 </context>
 <context>
@@ -3896,7 +3898,7 @@ in the future, or register on the site to get your own key.</source>
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дістаньте власний ключ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;тут&lt;/a&gt;, або залиште поле порожнім, щоб скористатись типовим.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3920,12 +3922,13 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Інакше, використовуйте %GD1251% для CP1251, %GDISO1%...%GDISO16% для ISO 8859-1...ISO 8859-16 відповідно,
+%GDBIG5% для Big-5, %GDBIG5HKSCS% для Big5-HKSCS, %GDGBK% для GBK та GB18030, %GDSHIFTJIS% для Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь-яка стороння програма. Рядок %GDWORD% буде замінено на запитуване слово. Якщо такого рядка немає, слово буде підбиратись зі стандартного джерела.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
@@ -4054,7 +4057,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст для вимови</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -4108,77 +4111,77 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрані голосові рушії:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Додати</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Вилучити</translation>
+        <translation>&amp;Вилучити</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Налаштування</translation>
+        <translation>Параметри</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Гучність:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Огляд</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступні голосові рушії:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст для огляду:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть текст, щоб його оглянути тут.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Огляд</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає доступного голосу TTS</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо знайти доступний голос TTS.&lt;br&gt;Переконайтесь, що рушій TTS хоча би встановлено на комп&apos;ютері.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Підтвердження вилучення</translation>
+        <translation>Підтвердити вилучення</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити голосовий рушій&lt;b&gt;%1&lt;/b&gt; з цього переліку?</translation>
     </message>
 </context>
 <context>
@@ -4199,22 +4202,22 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">Увімкнено</translation>
+        <translation>Увімкнено</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Назва</translation>
+        <translation>Назва</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Ідентифікатор</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">Наличка</translation>
+        <translation>Піктограма</translation>
     </message>
 </context>
 <context>
