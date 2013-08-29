@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Založené na Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -44,12 +44,12 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozbaliť článok</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrátiť článok</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="187"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../article_maker.cc" line="591"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozbaliť článok</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="594"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../article_maker.cc" line="599"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrátiť článok</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="616"/>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>TTS Hlas</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
@@ -210,12 +210,12 @@
     <message>
         <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Video: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="736"/>
@@ -330,7 +330,7 @@
     <message>
         <location filename="../articleview.cc" line="1611"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>VAROVANIE: FFmpeg Audio Player: %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -376,12 +376,12 @@
     <message>
         <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovať ako text</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrolovať</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1604"/>
@@ -534,12 +534,12 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť priečinok</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Upraviť slovník</translation>
+        <translation>Upraviť slovník</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -555,7 +555,8 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť slovník cez príkaz:
+%1</translation>
     </message>
 </context>
 <context>
@@ -580,7 +581,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozšírená ponuka so všetkými slovníkmi…</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -595,7 +596,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť slovníkový priečinok</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -1969,7 +1970,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba v konfiguračnom súbore. Pokračovať so štandardnými nastaveniami?</translation>
     </message>
 </context>
 <context>
@@ -2425,7 +2426,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <location filename="../mainwindow.cc" line="763"/>
         <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>API Dostupnosti nie je povolené</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2807"/>
@@ -2455,12 +2456,12 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Článok, Kompletný (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Článok, iba HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2998"/>
@@ -2484,7 +2485,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukladanie článku…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3099"/>
@@ -2545,7 +2546,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť slovníkový priečinok</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3599"/>
@@ -2558,12 +2559,12 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Slovníkový súbor bol poškodený alebo sfalšovaný</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo sa načítať článok z %1; dôvod: %2</translation>
     </message>
 </context>
 <context>
@@ -2850,12 +2851,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravte túto hodnotu pre zabránenie veľkej kontextovej ponuky.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit slovníkov pre kontextovú ponuku:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
@@ -3098,32 +3099,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehra audio súbory cez FFmpeg(libav) a libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť interný prehrávač</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte túto ponuku pre automatické skrátenie dlhých článkov</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrátiť články väčšie než</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Články dlhšie než je táto veľkosť budú skrátené</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>symboly</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3234,12 +3235,13 @@ Zásuvný modul musí byť nainštalovaný, aby táto voľba fungovala.</transla
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niektoré stránky odhalia GoldenDict cez HTTP hlavičky a blokujú jeho požiadavky.
+Povoľte toto nastavenie na obídenie problému.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Neidentifikovať GoldenDict v HTTP hlavičke</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3497,97 +3499,97 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../aard.cc" line="396"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba načítania článku</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba dekódovania článku</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_alloc_context() zlyhal.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() zlyhal.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() zlyhal.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() zlyhal: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() zlyhal: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie je možné nájsť audio prúd.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodek [id: %1] nebol nájdený.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_open2() zlyhal: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie je možné nájsť použiteľný audio výstup.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodporovaný vzorkový formát.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() zlyhal: </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovládač neexistuje.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento ovládač nie je živým výstupný zariadením.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Platná možnosť kľúča má neplatnú hodnotu.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie je možné otvoriť zariadenie: %1, kanály: %2, tempo: %3, bity: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznáma chyba.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_frame() zlyhal.</translation>
     </message>
 </context>
 <context>
@@ -3614,17 +3616,17 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <location filename="../articleview.cc" line="2193"/>
         <location filename="../articleview.cc" line="2200"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">CHYBA: %1</translation>
+        <translation>CHYBA: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2193"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Chyba ukladania zdroja: </translation>
+        <translation>Chyba ukladania zdroja: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Referencovaný zdroj sa nepodarilo stiahnuť.</translation>
+        <translation>Referencovaný zdroj sa nepodarilo stiahnuť.</translation>
     </message>
 </context>
 <context>
@@ -3920,7 +3922,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Akýkoľvek externý program. Reťazec %GDWORD% bude nahradený so slovom požiadavky. Ak taký reťazec nebude nájdený, slovo bude vložené do štandardného vstupu.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
@@ -4049,7 +4051,7 @@ Zatiaľ nie je implementovaný v GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Text na reč</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -4103,77 +4105,77 @@ Zatiaľ nie je implementovaný v GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte hlasový systém:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Prid&amp;ať</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">Odst&amp;rániť</translation>
+        <translation>Odst&amp;rániť</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Nastavenia</translation>
+        <translation>Nastavenia</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasitosť:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Test</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostupné hlasové systémy:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Text na otestovanie:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem na píšte text na otestovanie.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Test</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie je dostupný žiadny TTS hlas</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie je možné nájsť dostupný TTS hlas.&lt;br&gt;Uistite sa, že minimálne jeden TTS systém máte nainštalovaný v počítači.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Potvrdiť odstránenie</translation>
+        <translation>Potvrdiť odstránenie</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť hlasový systém &lt;b&gt;%1&lt;/b&gt; zo zoznamu?</translation>
     </message>
 </context>
 <context>
@@ -4194,22 +4196,22 @@ Zatiaľ nie je implementovaný v GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">Povolené</translation>
+        <translation>Povolené</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Meno</translation>
+        <translation>Názov</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">Ikona</translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
