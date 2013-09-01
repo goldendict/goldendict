@@ -6,7 +6,7 @@
     <message>
         <location filename="../about.ui" line="17"/>
         <source>About</source>
-        <translation>Пра нас</translation>
+        <translation>Інфармацыя</translation>
     </message>
     <message>
         <location filename="../about.ui" line="66"/>
@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation>На падставе Qt %1 (%2, %3 біт)</translation>
+        <translation>На падставе Qt %1 (%2, %3 біты)</translation>
     </message>
 </context>
 <context>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../article_maker.cc" line="231"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Карыстаньне слоўнікам у вонкавых праґрамах&lt;/h3&gt;Каб шукаць словы ў слоўніку з-пад іншых праґрамаў, трэба ўлучыць &lt;i&gt;мэханізм выплыўных вокнаў&lt;/i&gt; у &lt;b&gt;Наладах&lt;/b&gt;, і заціснуць кнопку „Выплыўныя вокны“ ў галоўным акне, ці ўлучыць адпаведны пункт кантэкстнага мэню значка ў сыстэмны лотку. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Карыстаньне слоўнікам у вонкавых праґрамах&lt;/h3&gt;Каб шукаць словы ў слоўніку з-пад іншых праґрамаў, трэба падлучыць &lt;i&gt;мэханізм выплыўных вокнаў&lt;/i&gt; у &lt;b&gt;Наладах&lt;/b&gt;, і заціснуць кнопку „Выплыўныя вокны“ ў галоўным акне, ці ўлучыць адпаведны пункт кантэкстнага мэню значка ў сыстэмным лотку. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="238"/>
@@ -185,7 +185,7 @@
     <message>
         <location filename="../articleview.ui" line="152"/>
         <source>&amp;Case Sensitive</source>
-        <translation>Меркаваць &amp;рэґістр</translation>
+        <translation>&amp;Розьніць рэґістар</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="147"/>
@@ -256,7 +256,7 @@
     <message>
         <location filename="../articleview.cc" line="1071"/>
         <source>ERROR: %1</source>
-        <translation>АБМЫЛА: %1</translation>
+        <translation>ПАМЫЛКА: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1463"/>
@@ -322,7 +322,7 @@
         <location filename="../articleview.cc" line="1297"/>
         <location filename="../articleview.cc" line="1329"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation>&amp;Дадаць „%1“ у гісторыю</translation>
+        <translation>&amp;Дадаць „%1“ да гісторыі</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1311"/>
@@ -347,22 +347,22 @@
     <message>
         <location filename="../articleview.cc" line="1552"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Немажліва ўрухоміць прайгравальніка гукавага файла: %1</translation>
+        <translation>Ня здолеў запусьціць прайгравальніка гукавага файла: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1570"/>
         <source>Failed to create temporary file.</source>
-        <translation>Не атрымалася стварыць часовага файла.</translation>
+        <translation>Ня здолеў стварыць часовага файла.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1581"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Не атрымалася аўтаматычна адчыніць рэсурсавага файла. Паспрабуй адчыніць ручна %1.</translation>
+        <translation>Ня здолеў аўтаматычна адчыніць рэсурсавага файла. Паспрабуй адчыніць ручна %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1604"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
+        <translation>Ня здолеў зладаваць пазначанага рэсурсу.</translation>
     </message>
 </context>
 <context>
@@ -435,7 +435,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation>Немагчыма прачытаць абранага файла выявы.</translation>
+        <translation>Нельга прачытаць абранага файла выявы.</translation>
     </message>
 </context>
 <context>
@@ -607,7 +607,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../editdictionaries.cc" line="105"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>Колькі крыніц зьмяніліся. Ці ўжыць зьмены?</translation>
+        <translation>Колькі крыніц зьмянілася. Ці ўжыць зьмены?</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="108"/>
@@ -1941,7 +1941,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation>Абмыла ў файле канфіґурацыі. Працягнуць з стандартнымі наладамі?</translation>
+        <translation>Абмылка ў файле канфіґурацыі. Працягнуць з стандартнымі наладамі?</translation>
     </message>
 </context>
 <context>
@@ -1965,7 +1965,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>&amp;Help</source>
-        <translation>&amp;Помач</translation>
+        <translation>&amp;Дапамога</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
@@ -1990,7 +1990,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation>Панэль &amp;навіґацыі па выніках</translation>
+        <translation>Панэль &amp;навіґацыі ў выніках</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
@@ -2025,12 +2025,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="353"/>
         <source>&amp;About</source>
-        <translation>&amp;Пра нас</translation>
+        <translation>&amp;Інфармацыя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="356"/>
         <source>About GoldenDict</source>
-        <translation>Пра GoldenDict</translation>
+        <translation>Інфармацыя пра GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="359"/>
@@ -2189,7 +2189,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="80"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation>Паказваць малыя значкі ў паліцы &amp;інструмэнтаў</translation>
+        <translation>Паказваць малыя значкі ў паліцы &amp;прыладаў</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="81"/>
@@ -2330,7 +2330,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2533"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Памылка ініцыялізацыі сачэньня за клявішнымі скаротамі.&lt;br&gt;Пераканайся, што XServer мае ўлучанае пашырэньне RECORD.</translation>
+        <translation>Памылка ініцыялізацыі цікаваньня клявішных скаротаў.&lt;br&gt;Пераканайся, што XServer мае ўлучанае пашырэньне RECORD.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2670"/>
@@ -2340,7 +2340,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="2671"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>GoldenDict вэрсіі &lt;b&gt;%1&lt;/b&gt; даступны для зладаваньня.&lt;br&gt;Пстрыкні па &lt;b&gt;Зладаваць&lt;/b&gt;, каб перайсьці на бачыну зладаваньня.</translation>
+        <translation>GoldenDict вэрсіі &lt;b&gt;%1&lt;/b&gt; даступны для заладаваньня.&lt;br&gt;Пстрыкні па &lt;b&gt;Зладаваць&lt;/b&gt;, каб перайсьці на бачыну сьцягваньня.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2676"/>
@@ -2401,12 +2401,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3012"/>
         <source>Error</source>
-        <translation>Абмыла</translation>
+        <translation>Памылка</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3013"/>
         <source>Can&apos;t save article: %1</source>
-        <translation>Немажліва захаваць артыкул: %1</translation>
+        <translation>Няможна захаваць артыкул: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
@@ -2437,7 +2437,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3326"/>
         <source>History export complete</source>
-        <translation>Экспартаваньне гісторыі скончылася</translation>
+        <translation>Экспартаваньне гісторыі кончылася</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3329"/>
@@ -2457,7 +2457,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3400"/>
         <source>History import complete</source>
-        <translation>Імпартаваньне гісторыі скончылася</translation>
+        <translation>Імпартаваньне гісторыі кончылася</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3403"/>
@@ -2485,12 +2485,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation>Слоўнікавы файл скажаны ці пашкоджаны</translation>
+        <translation>Слоўнікавы файл скажоны ці пашкоджаны</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation>Абмыла ладаваньня артыкула з %1, з прычыны: %2</translation>
+        <translation>Абмылка ладаваньня артыкула з %1, з прычыны: %2</translation>
     </message>
 </context>
 <context>
@@ -2690,7 +2690,7 @@ be the last ones.</source>
         <location filename="../preferences.ui" line="99"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Калі ўлучана, у сыстэмным лотку зьявіцца значак, што можна
+        <translation>Калі ўлучана, у сыстэмным лотку зьявіцца значак, які можна
 карыстаць для выкліканьня галоўнага акна ды іншых дзеяньняў.</translation>
     </message>
     <message>
@@ -2702,7 +2702,7 @@ to open main window and perform other tasks.</source>
         <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>З гэтай опцыяй праґрама будзе стартаваць проста ў сыстэмным лотку без адлюставаньня галоўнага акна.</translation>
+        <translation>З гэтай опцыяй праґрама будзе стартаваць прост у сыстэмным лотку з схаваным галоўным акном.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="125"/>
@@ -3063,7 +3063,7 @@ for all program&apos;s network requests.</source>
     <message>
         <location filename="../preferences.ui" line="933"/>
         <source>Use proxy server</source>
-        <translation>Скарыстаць проксі сэрвэр</translation>
+        <translation>Скарыстаць проксі-сэрвэр</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="947"/>
@@ -3229,7 +3229,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation>Інтэрвал захаваньня гісторыі. Калі 0, гісторыя будзе захоўвацца адно перад выхадам.</translation>
+        <translation>Інтэрвал захаваньня гісторыі. Калі 0, гісторыя будзе захоўвацца толькі перад выхадам.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
@@ -3249,12 +3249,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Улучы гэтую опцыю, каб заўсёды разьвінаць дадатковыя разьдзелы артыкулаў</translation>
+        <translation>Улучы гэтую опцыю, каб заўсёды разгортваць дадатковыя разьдзелы артыкулаў</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
-        <translation>Разьвінаць дадатковыя &amp;разьдзелы</translation>
+        <translation>Разгортваць дадатковыя &amp;разьдзелы</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
@@ -3269,7 +3269,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation>Артыкулы большыя за гэтае значэньне будуць згартацца</translation>
+        <translation>Артыкулы большыя за гэта значэньне будуць згартацца</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
@@ -3319,7 +3319,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.cc" line="364"/>
         <source>Restart the program to apply the language change.</source>
-        <translation>Перастартуй праґраму, каб ужыць зьмененую мову.</translation>
+        <translation>Перастартуй праґраму, каб ужыць новую мову.</translation>
     </message>
 </context>
 <context>
@@ -3355,7 +3355,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
-        <translation>Назва праґрамы не зададзеная.</translation>
+        <translation>Назвы праґрамы не пазначылі.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="192"/>
@@ -3365,7 +3365,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
-        <translation>Праґрама павараціла выходны код %1.</translation>
+        <translation>Праґрама вярнула выходны код %1.</translation>
     </message>
 </context>
 <context>
@@ -3406,7 +3406,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation>Памылка раскадаваньня артыкула</translation>
+        <translation>Памылка раскадоўваньня артыкула</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
@@ -3436,12 +3436,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation>Не атрымался знайсьці аўдыёплынь.</translation>
+        <translation>Ня выйшла знайсьці аўдыёплыні.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation>GoldenDict не знайшоў кодэк [id: %1].</translation>
+        <translation>GoldenDict не знайшоў кодэка [id: %1].</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
@@ -3451,7 +3451,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation>Не атрымалася знайсьці прыладу вываду гуку.</translation>
+        <translation>Ня выйшла знайсьці прылады вываду гуку.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
@@ -3466,12 +3466,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation>Няма драйвэру.</translation>
+        <translation>Няма драйвэра.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation>Гэты драйвэр ня ёсьць пралада вываду.</translation>
+        <translation>Гэты драйвэр ня ёсьць праладай вываду.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
@@ -3481,7 +3481,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation>Немажліва адчыніць: прылада: %1, каналаў: %2, часьціня дыскрэтызацыі: %3, бітплынь: %4.</translation>
+        <translation>Няможна адчыніць: прылада: %1, каналаў: %2, часьціня дыскрэтызацыі: %3, бітплынь: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
@@ -3528,7 +3528,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Не атрымалася зладаваць пазначанага рэсурсу.</translation>
+        <translation>Ня выйшла зладаваць пазначанага рэсурсу.</translation>
     </message>
 </context>
 <context>
@@ -3708,7 +3708,7 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>Кожны марфаляґічны слоўнік ёсьць
+        <translation>Кожны марфаляґічны слоўнік — гэта
 асобны дапаможны слоўнік, які
 забесьпячае падставовыя формы
 словаў для шуканьня, і прапаноўвае
@@ -3933,7 +3933,7 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../sources.cc" line="258"/>
         <location filename="../sources.cc" line="282"/>
         <source>Confirm removal</source>
-        <translation>Пацьверджаньне прыбіраньня</translation>
+        <translation>Пацьверджаньне выдаленьня</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="168"/>

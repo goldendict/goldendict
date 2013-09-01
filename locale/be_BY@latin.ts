@@ -6,7 +6,7 @@
     <message>
         <location filename="../about.ui" line="17"/>
         <source>About</source>
-        <translation>Pra nas</translation>
+        <translation>Infarmacyja</translation>
     </message>
     <message>
         <location filename="../about.ui" line="66"/>
@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation>Na padstavie Qt %1 (%2, %3 bit)</translation>
+        <translation>Na padstavie Qt %1 (%2, %3 bity)</translation>
     </message>
 </context>
 <context>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajem u &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Pierš za ŭsio naviedaj &lt;b&gt;Źmieny|Słoŭniki&lt;/b&gt;, kab paznačyć šlachi da słoŭnikavych fajłaŭ, ź jakich budzie stanavicca biblijateka słoŭnikaŭ, dadaj roznyja sajty Wikipedyi j inšyja krynicy, vyznačy paradak słoŭnikaŭ dy stvary słoŭnikavyja grupy.&lt;p&gt;Pa naładžvańni pragrama budzie hatovaja da prahladu słoŭnikavych artykułaŭ. Toje možna rabić u hetym aknie (upišy šukanaje słova ŭ radok šukańnia) ci ŭ vonkavych pragramach z dapamohaju &lt;a href=&quot;Karystańnie słoŭnikam u vonkavych pragramach&quot;&gt;vypłyŭnych voknaŭ&lt;/a&gt;. &lt;p&gt;Kab dapasavać da siabie pragramu, skarystaj dastupnyja nałady ŭ &lt;b&gt;Źmienach|Naładach&lt;/b&gt;. Usie źmieščanyja tam nałady majuć padkazki. Čytaj ich dla peŭnaści ŭ zroblenych źmienach.&lt;p&gt;Kali ŭźnikli pytańni, prapanovy, ci prosta zachaciełasia znać mierkavańni ludziej, to zaprašajem na naš &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Novyja versii pragramy zaŭsiody možna znajści na našym &lt;a href=&quot;http://goldendict.org/&quot;&gt;sajcie&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Kanstancin Isakaŭ. Licenzija GPLv3 ci paźniejšaja.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajem u &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Pierš za ŭsio naviedaj &lt;b&gt;Źmieny|Słoŭniki&lt;/b&gt;, kab paznačyć šlachi da słoŭnikavych fajłaŭ, ź jakich budzie stanavicca biblijateka słoŭnikaŭ, dadaj roznyja sajty Vikipedyi j inšyja krynicy, vyznačy paradak słoŭnikaŭ dy stvary słoŭnikavyja grupy.&lt;p&gt;Pa naładžvańni pragrama budzie hatovaja da prahladu słoŭnikavych artykułaŭ. Toje možna rabić u hetym aknie (upišy šukanaje słova ŭ radok šukańnia) ci ŭ vonkavych pragramach z dapamohaju &lt;a href=&quot;Karystańnie słoŭnikam u vonkavych pragramach&quot;&gt;vypłyŭnych voknaŭ&lt;/a&gt;. &lt;p&gt;Kab dapasavać da siabie pragramu, skarystaj dastupnyja nałady ŭ &lt;b&gt;Źmienach|Naładach&lt;/b&gt;. Usie źmieščanyja tam nałady majuć padkazki. Čytaj ich dla peŭnaści ŭ zroblenych źmienach.&lt;p&gt;Kali ŭźnikli pytańni, prapanovy, ci prosta zachaciełasia znać mierkavańni ludziej, to zaprašajem na naš &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Novyja versii pragramy zaŭsiody možna znajści na našym &lt;a href=&quot;http://goldendict.org/&quot;&gt;sajcie&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Kanstancin Isakaŭ. Licenzija GPLv3 ci paźniejšaja.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="229"/>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../article_maker.cc" line="231"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Karystańnie słoŭnikam u vonkavych pragramach&lt;/h3&gt;Kab šukać słovy ŭ słoŭniku z-pad inšych pragramaŭ, treba ŭłučyć &lt;i&gt;mechanizm vypłyŭnych voknaŭ&lt;/i&gt; u &lt;b&gt;Naładach&lt;/b&gt;, i zacisnuć knopku „Vypłyŭnyja vokny“ ŭ hałoŭnym aknie, ci ŭłučyć adpaviedny punkt kantekstnaha meniu značka ŭ systemny łotku. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Karystańnie słoŭnikam u vonkavych pragramach&lt;/h3&gt;Kab šukać słovy ŭ słoŭniku z-pad inšych pragramaŭ, treba padłučyć &lt;i&gt;mechanizm vypłyŭnych voknaŭ&lt;/i&gt; u &lt;b&gt;Naładach&lt;/b&gt;, i zacisnuć knopku „Vypłyŭnyja vokny“ ŭ hałoŭnym aknie, ci ŭłučyć adpaviedny punkt kantekstnaha meniu značka ŭ systemnym łotku. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="238"/>
@@ -185,7 +185,7 @@
     <message>
         <location filename="../articleview.ui" line="152"/>
         <source>&amp;Case Sensitive</source>
-        <translation>Mierkavać &amp;registr</translation>
+        <translation>&amp;Roźnić registar</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="147"/>
@@ -256,7 +256,7 @@
     <message>
         <location filename="../articleview.cc" line="1071"/>
         <source>ERROR: %1</source>
-        <translation>ABMYŁA: %1</translation>
+        <translation>PAMYŁKA: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1463"/>
@@ -322,7 +322,7 @@
         <location filename="../articleview.cc" line="1297"/>
         <location filename="../articleview.cc" line="1329"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation>&amp;Dadać „%1“ u historyju</translation>
+        <translation>&amp;Dadać „%1“ da historyi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1311"/>
@@ -347,22 +347,22 @@
     <message>
         <location filename="../articleview.cc" line="1552"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Niemažliva ŭruchomić prajhravalnika hukavaha fajła: %1</translation>
+        <translation>Nia zdoleŭ zapuścić prajhravalnika hukavaha fajła: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1570"/>
         <source>Failed to create temporary file.</source>
-        <translation>Nie atrymałasia stvaryć časovaha fajła.</translation>
+        <translation>Nia zdoleŭ stvaryć časovaha fajła.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1581"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Nie atrymałasia aŭtamatyčna adčynić resursavaha fajła. Pasprabuj adčynić ručna %1.</translation>
+        <translation>Nia zdoleŭ aŭtamatyčna adčynić resursavaha fajła. Pasprabuj adčynić ručna %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1604"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Nie atrymałasia zładavać paznačanaha resursu.</translation>
+        <translation>Nia zdoleŭ zładavać paznačanaha resursu.</translation>
     </message>
 </context>
 <context>
@@ -435,7 +435,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation>Niemahčyma pračytać abranaha fajła vyjavy.</translation>
+        <translation>Nielha pračytać abranaha fajła vyjavy.</translation>
     </message>
 </context>
 <context>
@@ -607,7 +607,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../editdictionaries.cc" line="105"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>Kolki krynic źmianilisia. Ci ŭžyć źmieny?</translation>
+        <translation>Kolki krynic źmianiłasia. Ci ŭžyć źmieny?</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="108"/>
@@ -1941,7 +1941,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation>Abmyła ŭ fajle kanfiguracyi. Praciahnuć z standartnymi naładami?</translation>
+        <translation>Abmyłka ŭ fajle kanfiguracyi. Praciahnuć z standartnymi naładami?</translation>
     </message>
 </context>
 <context>
@@ -1965,7 +1965,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>&amp;Help</source>
-        <translation>&amp;Pomač</translation>
+        <translation>&amp;Dapamoha</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
@@ -1990,7 +1990,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation>Panel &amp;navigacyi pa vynikach</translation>
+        <translation>Panel &amp;navigacyi ŭ vynikach</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
@@ -2025,12 +2025,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="353"/>
         <source>&amp;About</source>
-        <translation>&amp;Pra nas</translation>
+        <translation>&amp;Infarmacyja</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="356"/>
         <source>About GoldenDict</source>
-        <translation>Pra GoldenDict</translation>
+        <translation>Infarmacyja pra GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="359"/>
@@ -2189,7 +2189,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="80"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation>Pakazvać małyja znački ŭ palicy &amp;instrumentaŭ</translation>
+        <translation>Pakazvać małyja znački ŭ palicy &amp;pryładaŭ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="81"/>
@@ -2330,7 +2330,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2533"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Pamyłka inicyjalizacyi sačeńnia za klavišnymi skarotami.&lt;br&gt;Pierakanajsia, što XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
+        <translation>Pamyłka inicyjalizacyi cikavańnia klavišnych skarotaŭ.&lt;br&gt;Pierakanajsia, što XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2670"/>
@@ -2340,7 +2340,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2671"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>GoldenDict versii &lt;b&gt;%1&lt;/b&gt; dastupny dla zładavańnia.&lt;br&gt;Pstrykni pa &lt;b&gt;Zładavać&lt;/b&gt;, kab pierajści na bačynu zładavańnia.</translation>
+        <translation>GoldenDict versii &lt;b&gt;%1&lt;/b&gt; dastupny dla załadavańnia.&lt;br&gt;Pstrykni pa &lt;b&gt;Zładavać&lt;/b&gt;, kab pierajści na bačynu ściahvańnia.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2676"/>
@@ -2401,12 +2401,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3012"/>
         <source>Error</source>
-        <translation>Abmyła</translation>
+        <translation>Pamyłka</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3013"/>
         <source>Can&apos;t save article: %1</source>
-        <translation>Niemažliva zachavać artykuł: %1</translation>
+        <translation>Niamožna zachavać artykuł: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
@@ -2437,7 +2437,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3326"/>
         <source>History export complete</source>
-        <translation>Ekspartavańnie historyi skončyłasia</translation>
+        <translation>Ekspartavańnie historyi končyłasia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3329"/>
@@ -2457,7 +2457,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3400"/>
         <source>History import complete</source>
-        <translation>Impartavańnie historyi skončyłasia</translation>
+        <translation>Impartavańnie historyi končyłasia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3403"/>
@@ -2485,12 +2485,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation>Słoŭnikavy fajł skažany ci paškodžany</translation>
+        <translation>Słoŭnikavy fajł skažony ci paškodžany</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation>Abmyła ładavańnia artykuła z %1, z pryčyny: %2</translation>
+        <translation>Abmyłka ładavańnia artykuła z %1, z pryčyny: %2</translation>
     </message>
 </context>
 <context>
@@ -2690,7 +2690,7 @@ kali tolki adna ŭkładka jość adčynienaja.</translation>
         <location filename="../preferences.ui" line="99"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Kali ŭłučana, u systemnym łotku źjavicca značak, što možna
+        <translation>Kali ŭłučana, u systemnym łotku źjavicca značak, jaki možna
 karystać dla vyklikańnia hałoŭnaha akna dy inšych dziejańniaŭ.</translation>
     </message>
     <message>
@@ -2702,7 +2702,7 @@ karystać dla vyklikańnia hałoŭnaha akna dy inšych dziejańniaŭ.</translati
         <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Z hetaj opcyjaj pragrama budzie startavać prosta ŭ systemnym łotku biez adlustavańnia hałoŭnaha akna.</translation>
+        <translation>Z hetaj opcyjaj pragrama budzie startavać prost u systemnym łotku z schavanym hałoŭnym aknom.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="125"/>
@@ -3063,7 +3063,7 @@ dla ŭsich sietkavych zapytaŭ pragramy.</translation>
     <message>
         <location filename="../preferences.ui" line="933"/>
         <source>Use proxy server</source>
-        <translation>Skarystać proksi server</translation>
+        <translation>Skarystać proksi-server</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="947"/>
@@ -3229,7 +3229,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation>Intervał zachavańnia historyi. Kali 0, historyja budzie zachoŭvacca adno pierad vychadam.</translation>
+        <translation>Intervał zachavańnia historyi. Kali 0, historyja budzie zachoŭvacca tolki pierad vychadam.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
@@ -3249,12 +3249,12 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Ułučy hetuju opcyju, kab zaŭsiody raźvinać dadatkovyja raździeły artykułaŭ</translation>
+        <translation>Ułučy hetuju opcyju, kab zaŭsiody razhortvać dadatkovyja raździeły artykułaŭ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
-        <translation>Raźvinać dadatkovyja &amp;raździeły</translation>
+        <translation>Razhortvać dadatkovyja &amp;raździeły</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
@@ -3269,7 +3269,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation>Artykuły bolšyja za hetaje značeńnie buduć zhartacca</translation>
+        <translation>Artykuły bolšyja za heta značeńnie buduć zhartacca</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
@@ -3319,7 +3319,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../preferences.cc" line="364"/>
         <source>Restart the program to apply the language change.</source>
-        <translation>Pierastartuj pragramu, kab užyć źmienienuju movu.</translation>
+        <translation>Pierastartuj pragramu, kab užyć novuju movu.</translation>
     </message>
 </context>
 <context>
@@ -3355,7 +3355,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
-        <translation>Nazva pragramy nie zadadzienaja.</translation>
+        <translation>Nazvy pragramy nie paznačyli.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="192"/>
@@ -3365,7 +3365,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
-        <translation>Pragrama pavaraciła vychodny kod %1.</translation>
+        <translation>Pragrama viarnuła vychodny kod %1.</translation>
     </message>
 </context>
 <context>
@@ -3406,7 +3406,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation>Pamyłka raskadavańnia artykuła</translation>
+        <translation>Pamyłka raskadoŭvańnia artykuła</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
@@ -3436,12 +3436,12 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation>Nie atrymałsia znajści aŭdyjopłyń.</translation>
+        <translation>Nia vyjšła znajści aŭdyjopłyni.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation>GoldenDict nie znajšoŭ kodek [id: %1].</translation>
+        <translation>GoldenDict nie znajšoŭ kodeka [id: %1].</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
@@ -3451,7 +3451,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation>Nie atrymałasia znajści pryładu vyvadu huku.</translation>
+        <translation>Nia vyjšła znajści pryłady vyvadu huku.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
@@ -3466,12 +3466,12 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation>Niama drajveru.</translation>
+        <translation>Niama drajvera.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation>Hety drajver nia jość prałada vyvadu.</translation>
+        <translation>Hety drajver nia jość praładaj vyvadu.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
@@ -3481,7 +3481,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation>Niemažliva adčynić: pryłada: %1, kanałaŭ: %2, čaścinia dyskretyzacyi: %3, bitpłyń: %4.</translation>
+        <translation>Niamožna adčynić: pryłada: %1, kanałaŭ: %2, čaścinia dyskretyzacyi: %3, bitpłyń: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
@@ -3528,7 +3528,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Nie atrymałasia zładavać paznačanaha resursu.</translation>
+        <translation>Nia vyjšła zładavać paznačanaha resursu.</translation>
     </message>
 </context>
 <context>
@@ -3708,7 +3708,7 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>Kožny marfalagičny słoŭnik jość
+        <translation>Kožny marfalagičny słoŭnik — heta
 asobny dapamožny słoŭnik, jaki
 zabieśpiačaje padstavovyja formy
 słovaŭ dla šukańnia, i prapanoŭvaje
@@ -3719,12 +3719,12 @@ słoŭniki ŭ kaniec adpaviednych grup.</translation>
     <message>
         <location filename="../sources.ui" line="224"/>
         <source>Wikipedia</source>
-        <translation>Wikipedyja</translation>
+        <translation>Vikipedyja</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="230"/>
         <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>Sajty Wikipedyi (MediaWiki):</translation>
+        <translation>Sajty Vikipedyi (MediaWiki):</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="283"/>
@@ -3933,7 +3933,7 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
         <location filename="../sources.cc" line="258"/>
         <location filename="../sources.cc" line="282"/>
         <source>Confirm removal</source>
-        <translation>Paćvierdžańnie prybirańnia</translation>
+        <translation>Paćvierdžańnie vydaleńnia</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="168"/>
