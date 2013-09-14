@@ -12,4 +12,10 @@ string decompressZlib( const char * bufptr, unsigned length );
 
 string decompressBzip2( const char * bufptr, unsigned length );
 
+#ifdef MAKE_ZIM_SUPPORT
+
+string decompressLzma2( const char * bufptr, unsigned length );
+
+#endif
+
 #endif // DECOMPRESS_HH

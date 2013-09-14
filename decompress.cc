@@ -2,6 +2,10 @@
 #include "zlib.h"
 #include "bzlib.h"
 
+#ifdef MAKE_ZIM_SUPPORT
+#include "lzma.h"
+#endif
+
 #define CHUNK_SIZE 2048
 
 QByteArray zlibDecompress( const char * bufptr, unsigned length )
@@ -74,3 +78,42 @@ int res;
     return str;
 }
 
+#ifdef MAKE_ZIM_SUPPORT
+
+#define BUFSIZE 0xFFFF
+
+string decompressLzma2( const char * bufptr, unsigned length )
+{
+string str;
+lzma_ret res;
+char buf[BUFSIZE];
+
+  lzma_stream strm = LZMA_STREAM_INIT;
+  strm.next_in = reinterpret_cast< const uint8_t * >( bufptr );
+  strm.avail_in = length;
+
+  while( 1 )
+  {
+    res = lzma_stream_decoder( &strm, UINT64_MAX, 0 );
+    if( res != LZMA_OK )
+      break;
+
+    while ( res != LZMA_STREAM_END )
+    {
+      strm.next_out = reinterpret_cast< uint8_t * >( buf );
+      strm.avail_out = BUFSIZE;
+      res = lzma_code( &strm, LZMA_RUN );
+      str.append( buf, BUFSIZE - strm.avail_out );
+      if( res != LZMA_OK && res != LZMA_STREAM_END )
+        break;
+    }
+    lzma_end( &strm );
+    if( res != LZMA_STREAM_END )
+      str.clear();
+
+    break;
+  }
+  return str;
+}
+
+#endif

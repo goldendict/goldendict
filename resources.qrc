@@ -75,5 +75,6 @@
         <file>icons/programicon_old.png</file>
         <file>icons/playsound_color.png</file>
         <file>icons/playsound_full.png</file>
+        <file>icons/icon32_zim.png</file>
     </qresource>
 </RCC>

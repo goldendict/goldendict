@@ -83,6 +83,8 @@ win32 {
     Release:DEFINES += NO_CONSOLE
 
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
+
+    CONFIG += zim_support
 }
 
 unix:!mac {
@@ -264,7 +266,8 @@ HEADERS += folding.hh \
     voiceengines.hh \
     ffmpegaudio.hh \
     articleinspector.hh \
-    delegate.hh
+    delegate.hh \
+    zim.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -373,7 +376,8 @@ SOURCES += folding.cc \
     voiceengines.cc \
     ffmpegaudio.cc \
     articleinspector.cc \
-    delegate.cc
+    delegate.cc \
+    zim.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui
@@ -401,6 +405,11 @@ mac {
                speechclient.hh
     FORMS   += texttospeechsource.ui
     SOURCES += texttospeechsource.cc
+}
+
+CONFIG( zim_support ) {
+  DEFINES += MAKE_ZIM_SUPPORT
+  LIBS += -llzma
 }
 
 RESOURCES += resources.qrc \
