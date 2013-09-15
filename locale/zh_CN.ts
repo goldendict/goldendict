@@ -387,18 +387,18 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation>白俄罗斯文转写（古典正字法）</translation>
+        <translation>白俄罗斯文转写（拉丁到西里尔字母，传统正字法）</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation>白俄罗斯文转写（学院正字法）</translation>
+        <translation>白俄罗斯文转写（拉丁到西里尔字母，官方正字法）</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation>白俄罗斯文转写（消除西里尔文中古典正字法和学院正字法中的区别）</translation>
+        <translation>白俄罗斯文转写（西里尔字母，官方正字法到传统正字法）</translation>
     </message>
 </context>
 <context>
