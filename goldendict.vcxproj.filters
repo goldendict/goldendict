@@ -1550,6 +1550,9 @@
     <QtTranslate Include="locale\sr_SR.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
+    <QtTranslate Include="locale\sv_SE.ts">
+      <Filter>Translations</Filter>
+    </QtTranslate>
   </ItemGroup>
   <ItemGroup>
     <QtMOCCompile Include="qtsingleapplication\src\qtlocalpeer.h">
