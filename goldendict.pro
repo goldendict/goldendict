@@ -162,6 +162,8 @@ mac {
                       cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
                       cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/
+
+    CONFIG += zim_support
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
