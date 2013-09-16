@@ -19,7 +19,7 @@ Tvangeste <i.4m.l33t\yandex.ru>: Interface enhancements
 Zdenko Podobný <zdenop\gmail.com>: Slovak translation
 Şükrü Yekta Karabulut <sukruyekta\gmail.com>: Turkish translation
 Amos Batto <amosbatto\yahoo.com>: Quechua, Aymara and Bolivian Spanish translations
-Carlos A. Cortijo Bon: Spanish from Spain translation
+Carlos A. Cortijo Bon <carlos_cortijo\yahoo.com>: Spanish from Spain translation
 Victor Ibragimov <victor.ibragimov\gmail.com>: Tajik translation
 Maksim Tamkovič <quendimax\gmail.com>: Belarusian translation and transliteration
 VirtualTam <virtualtam\myopera.com>: French translation
