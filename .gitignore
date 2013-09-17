@@ -10,6 +10,7 @@ build/
 release/
 tmp/
 goldendict
+winlibs/lib32-48/
 
 Makefile
 Makefile.Debug

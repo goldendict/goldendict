@@ -53,7 +53,11 @@ win32 {
         HUNSPELL_LIB = hunspell
     } else {
         LIBS += -lhunspell-1.3.2
-        LIBS += -L$${PWD}/winlibs/lib
+        CONFIG(gcc48) {
+            LIBS += -L$${PWD}/winlibs/lib32-48
+        } else {
+            LIBS += -L$${PWD}/winlibs/lib
+        }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
     }
 
