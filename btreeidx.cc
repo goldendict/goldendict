@@ -80,26 +80,39 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
 {
   vector< WordArticleLink > result;
 
-  wstring folded = Folding::apply( str );
-  if( folded.empty() )
-    folded = Folding::applyWhitespaceOnly( str );
-
-  bool exactMatch;
-
-  vector< char > leaf;
-  uint32_t nextLeaf;
-
-  char const * leafEnd;
-
-  char const * chainOffset = findChainOffsetExactOrPrefix( folded, exactMatch,
-                                                           leaf, nextLeaf,
-                                                           leafEnd );
-
-  if ( chainOffset && exactMatch )
+  try
   {
-    result = readChain( chainOffset );
+    wstring folded = Folding::apply( str );
+    if( folded.empty() )
+      folded = Folding::applyWhitespaceOnly( str );
 
-    antialias( str, result );
+    bool exactMatch;
+
+    vector< char > leaf;
+    uint32_t nextLeaf;
+
+    char const * leafEnd;
+
+    char const * chainOffset = findChainOffsetExactOrPrefix( folded, exactMatch,
+                                                             leaf, nextLeaf,
+                                                             leafEnd );
+
+    if ( chainOffset && exactMatch )
+    {
+      result = readChain( chainOffset );
+
+      antialias( str, result );
+    }
+  }
+  catch( std::exception & e )
+  {
+    FDPRINTF( stderr, "Articles searching failed, error: %s\n", e.what() );
+    result.clear();
+  }
+  catch(...)
+  {
+    FDPRINTF( stderr, "Articles searching failed\n" );
+    result.clear();
   }
 
   return result;
