@@ -314,12 +314,12 @@ void BtreeWordSearchRequest::run()
   catch( std::exception & e )
   {
     FDPRINTF( stderr, "Index searching failed: %s, error: %s\n",
-      dict.getName()->c_str(), e.what() );
+      dict.getName().c_str(), e.what() );
   }
   catch(...)
   {
     FDPRINTF( stderr, "Index searching failed: %s\n",
-      dict.getName()->c_str() );
+      dict.getName().c_str() );
   }
 
   finish();
