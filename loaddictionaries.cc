@@ -53,7 +53,7 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
               << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
               << "*.mdx"
 #ifdef MAKE_ZIM_SUPPORT
-              << "*.zim"
+              << "*.zim" << "*.zimaa"
 #endif
 ;
 }

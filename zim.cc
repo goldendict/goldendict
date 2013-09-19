@@ -21,11 +21,13 @@
 
 #include <QByteArray>
 #include <QFile>
+#include <QFileInfo>
 #include <QString>
 #include <QRunnable>
 #include <QSemaphore>
 #include <QAtomicInt>
 #include <QImage>
+#include <QDir>
 
 #include <string>
 #include <set>
@@ -48,7 +50,9 @@ using BtreeIndexing::IndexInfo;
 DEF_EX_STR( exNotZimFile, "Not an Zim file", Dictionary::Ex )
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 
-namespace {
+//namespace {
+
+class ZimFile;
 
 #ifdef _MSC_VER
 #pragma pack( push, 1 )
@@ -137,6 +141,170 @@ __attribute__((packed))
 #pragma pack( pop, 1 )
 #endif
 
+// Class for support of split zim files
+
+class ZimFile
+{
+  QVector< QFile * > files;
+  QVector< quint64 > offsets;
+  int currentFile;
+
+public:
+
+  ZimFile();
+  ZimFile( const QString & name );
+  ~ZimFile();
+
+  void setFileName( const QString & name );
+  void getFilenames( vector< string > & names );
+  bool open( QFile::OpenMode mode );
+  void close();
+  bool seek( quint64 pos );
+  qint64 read(  char * data, qint64 maxSize );
+  QByteArray read( qint64 maxSize );
+  bool getChar( char * c );
+  qint64 size()
+  { return files.isEmpty() ? 0 : offsets.last() + files.last()->size(); }
+};
+
+ZimFile::ZimFile() :
+  currentFile( 0 )
+{
+}
+
+ZimFile::ZimFile( const QString & name ) :
+  currentFile( 0 )
+{
+  setFileName( name );
+}
+
+ZimFile::~ZimFile()
+{
+  close();
+}
+
+void ZimFile::setFileName( const QString & name )
+{
+  close();
+
+  files.append( new QFile( name ) );
+  offsets.append( 0 );
+
+  if( name.endsWith( ".zimaa", Qt::CaseInsensitive ) )
+  {
+    QString fname = name;
+
+    for( int i = 0; i < 26; i++ )
+    {
+      fname[ fname.size() - 2 ] = (char)( 'a' + i );
+
+      int j;
+      for( j = 1; j < 26; j++ )
+      {
+        fname[ fname.size() - 1 ] = (char)( 'a' + j );
+        if( !QFileInfo( fname ).isFile() )
+          break;
+
+        quint64 offset = offsets.last() + files.last()->size();
+
+        files.append( new QFile( fname ) );
+        offsets.append( offset );
+      }
+
+      if( j < 26 )
+        break;
+    }
+  }
+}
+
+void ZimFile::close()
+{
+  for( QVector< QFile * >::const_iterator i = files.begin(); i != files.end(); ++i )
+  {
+    (*i)->close();
+    delete (*i);
+  }
+
+  files.clear();
+  offsets.clear();
+
+  currentFile = 0;
+}
+
+void ZimFile::getFilenames( vector< string > &names )
+{
+  for( QVector< QFile const * >::const_iterator i = files.begin(); i != files.end(); ++i )
+    names.push_back( FsEncoding::encode( (*i)->fileName() ) );
+}
+
+bool ZimFile::open( QFile::OpenMode mode )
+{
+  for( QVector< QFile * >::iterator i = files.begin(); i != files.end(); ++i )
+    if( !(*i)->open( mode ) )
+    {
+      close();
+      return false;
+    }
+
+  return true;
+}
+
+bool ZimFile::seek( quint64 pos )
+{
+  int fileNom;
+
+  for( fileNom = 0; fileNom < offsets.size() - 1; fileNom++ )
+    if( pos < offsets.at( fileNom + 1 ) )
+      break;
+
+  pos -= offsets.at( fileNom );
+
+  currentFile = fileNom;
+  return files.at( fileNom )->seek( pos );
+}
+
+qint64 ZimFile::read( char *data, qint64 maxSize )
+{
+  quint64 bytesReaded = 0;
+  for( int i = currentFile; i < files.size(); i++ )
+  {
+    if( i != currentFile )
+      files.at( i )->seek( 0 );
+
+    qint64 ret = files.at( i )->read( data + bytesReaded, maxSize );
+    if( ret < 0 )
+      break;
+
+    bytesReaded += ret;
+    maxSize -= ret;
+
+    if( maxSize <= 0 )
+      break;
+  }
+  return bytesReaded;
+}
+
+QByteArray ZimFile::read( qint64 maxSize )
+{
+  QByteArray data;
+  data.resize( maxSize );
+
+  qint64 ret = read( data.data(), maxSize );
+
+  if( ret != maxSize )
+    data.resize( ret );
+
+  return data;
+}
+
+bool ZimFile::getChar( char *c )
+{
+  char ch;
+  return read( c ? c : &ch, 1 ) == 1;
+}
+
+// Some supporting functions
+
 bool indexIsOldOrBad( string const & indexFile )
 {
   File::Class idx( indexFile, "rb" );
@@ -148,7 +316,7 @@ bool indexIsOldOrBad( string const & indexFile )
          header.formatVersion != CurrentFormatVersion;
 }
 
-quint32 readArticle( QFile & file, ZIM_header & header, uint32_t articleNumber, string & result,
+quint32 readArticle( ZimFile & file, ZIM_header & header, uint32_t articleNumber, string & result,
                      set< quint32 > * loadedArticles = NULL )
 {
   while( 1 )
@@ -247,6 +415,8 @@ quint32 readArticle( QFile & file, ZIM_header & header, uint32_t articleNumber, 
   return 0xFFFFFFFF;
 }
 
+// ZimDictionary
+
 class ZimDictionary: public BtreeIndexing::BtreeDictionary
 {
     Mutex idxMutex;
@@ -255,7 +425,7 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
     BtreeIndex resourceIndex;
     IdxHeader idxHeader;
     string dictionaryName;
-    QFile df;
+    ZimFile df;
     ZIM_header zimHeader;
 
   public:
@@ -340,8 +510,9 @@ ZimDictionary::ZimDictionary( string const & id,
 
     if( idxHeader.namePtr == 0xFFFFFFFF )
     {
-      int n = df.fileName().lastIndexOf( '/' );
-      dictionaryName = string( df.fileName().mid( n + 1 ).toUtf8().constData() );
+      QString name = QDir::fromNativeSeparators( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) );
+      int n = name.lastIndexOf( '/' );
+      dictionaryName = string( name.mid( n + 1 ).toUtf8().constData() );
     }
     else
     {
@@ -551,7 +722,7 @@ void ZimArticleRequest::run()
 
     headword = chain[ x ].word;
 
-    quint32 articleNumber;
+    quint32 articleNumber = 0xFFFFFFFF;
     try
     {
       articleNumber = dict.loadArticle( chain[ x ].articleOffset, articleText, &articlesIncluded );
@@ -786,7 +957,7 @@ sptr< Dictionary::DataRequest > ZimDictionary::getResource( string const & name 
   return new ZimResourceRequest( *this, name );
 }
 
-} // anonymous namespace
+//} // anonymous namespace
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
@@ -801,29 +972,32 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
   {
       // Skip files with the extensions different to .zim to speed up the
       // scanning
-      if ( i->size() < 4 ||
-          strcasecmp( i->c_str() + ( i->size() - 4 ), ".zim" ) != 0 )
+
+      QString firstName = QDir::fromNativeSeparators( FsEncoding::decode( i->c_str() ) );
+      if( !firstName.endsWith( ".zim") && !firstName.endsWith( ".zimaa" ) )
         continue;
 
       // Got the file -- check if we need to rebuid the index
 
-      vector< string > dictFiles( 1, *i );
+      ZimFile df( firstName );
+
+      vector< string > dictFiles;
+      df.getFilenames( dictFiles );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
 
       string indexFile = indicesDir + dictId;
 
-      if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
-           indexIsOldOrBad( indexFile ) )
+      try
       {
-        try
+        if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
+             indexIsOldOrBad( indexFile ) )
         {
           ZIM_header zh;
 
           unsigned articleCount = 0;
           unsigned wordCount = 0;
 
-          QFile df( FsEncoding::decode( i->c_str() ) );
           df.open( QFile::ReadOnly );
 
           qint64 ret = df.read( reinterpret_cast< char * >( &zh ), sizeof( zh ) );
@@ -834,8 +1008,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             throw exNotZimFile( i->c_str() );
 
           {
-            int n = df.fileName().lastIndexOf( '/' );
-            initializing.indexingDictionary( df.fileName().mid( n + 1 ).toUtf8().constData() );
+            int n = firstName.lastIndexOf( '/' );
+            initializing.indexingDictionary( firstName.mid( n + 1 ).toUtf8().constData() );
           }
 
           File::Class idx( indexFile, "wb" );
@@ -988,17 +1162,17 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           idx.write( &idxHeader, sizeof( idxHeader ) );
         }
-        catch( std::exception & e )
-        {
-          FDPRINTF( stderr, "Zim dictionary indexing failed: %s, error: %s\n",
-            i->c_str(), e.what() );
-          continue;
-        }
-        catch( ... )
-        {
-          FDPRINTF( stderr, "Zim dictionary indexing failed\n" );
-          continue;
-        }
+      }
+      catch( std::exception & e )
+      {
+        FDPRINTF( stderr, "Zim dictionary indexing failed: %s, error: %s\n",
+          i->c_str(), e.what() );
+        continue;
+      }
+      catch( ... )
+      {
+        FDPRINTF( stderr, "Zim dictionary indexing failed\n" );
+        continue;
       }
       dictionaries.push_back( new ZimDictionary( dictId,
                                                  indexFile,
