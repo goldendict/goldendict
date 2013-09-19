@@ -456,14 +456,23 @@ void ArticleRequest::altSearchFinished()
 
     for( unsigned x = 0; x < activeDicts.size(); ++x )
     {
-      sptr< Dictionary::DataRequest > r =
-        activeDicts[ x ]->getArticle( wordStd, altsVector,
-                                      gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
+      try
+      {
+        sptr< Dictionary::DataRequest > r =
+          activeDicts[ x ]->getArticle( wordStd, altsVector,
+                                        gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
 
-      connect( r.get(), SIGNAL( finished() ),
-               this, SLOT( bodyFinished() ), Qt::QueuedConnection );
+        connect( r.get(), SIGNAL( finished() ),
+                 this, SLOT( bodyFinished() ), Qt::QueuedConnection );
 
-      bodyRequests.push_back( r );
+        bodyRequests.push_back( r );
+      }
+      catch( std::exception & e )
+      {
+        qDebug() << "getArticle request error (" << e.what() << ") in \""
+                 << QString::fromUtf8( activeDicts[ x ]->getName().c_str() )
+                 << "\"";
+      }
     }
 
     bodyFinished(); // Handle any ones which have already finished
@@ -625,9 +634,16 @@ void ArticleRequest::bodyFinished()
 
         memcpy( &data.front() + offset, head.data(), head.size() );
 
-        if ( req.dataSize() > 0 )
-          bodyRequests.front()->getDataSlice( 0, req.dataSize(),
-                                              &data.front() + offset + head.size() );
+        try
+        {
+          if ( req.dataSize() > 0 )
+            bodyRequests.front()->getDataSlice( 0, req.dataSize(),
+                                                &data.front() + offset + head.size() );
+        }
+        catch( std::exception & e )
+        {
+          qDebug() << "getDataSlice error: " << e.what();
+        }
 
         wasUpdated = true;
 

@@ -197,7 +197,17 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
                 memcpy( &( ico->getData().front() ), bytes.data(), bytes.size() );
                 return ico;
             }
-            return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+            try
+            {
+              return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+            }
+            catch( std::exception & e )
+            {
+              qDebug() << "getResource request error (" << e.what() << ") in \""
+                       << QString::fromUtf8( dictionaries[ x ]->getName().c_str() )
+                       << "\"";
+              return sptr< Dictionary::DataRequest >();
+            }
         }
     }
     else
@@ -319,7 +329,14 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   
   size_t toRead = maxSize < left ? maxSize : left;
 
-  req->getDataSlice( alreadyRead, toRead, out );
+  try
+  {
+    req->getDataSlice( alreadyRead, toRead, out );
+  }
+  catch( std::exception & e )
+  {
+    qDebug() << "getDataSlice error: " << e.what();
+  }
 
   alreadyRead += toRead;
 
