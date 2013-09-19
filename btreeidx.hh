@@ -74,8 +74,6 @@ public:
 
   BtreeIndex();
 
-protected:
-
   /// Opens the index. The file reference is saved to be used for
   /// subsequent lookups.
   /// The mutex is the one to be locked when working with the file.
@@ -84,6 +82,8 @@ protected:
   /// Finds articles that match the given string. A case-insensitive search
   /// is performed.
   vector< WordArticleLink > findArticles( wstring const & );
+
+protected:
 
   /// Finds the offset in the btree leaf for the given word, either matching
   /// by an exact match, or by finding the smallest entry that might match

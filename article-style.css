@@ -491,6 +491,14 @@ div.xdxf
   color: inherit;
 }
 
+/************* Zim dictionaries **************/
+
+.zimdict_headword
+{
+  font-weight: bold!important;
+/*  font-size: 150%; */
+}
+
 /************* Spelling suggestions *****************/
 
 .gdspellsuggestion

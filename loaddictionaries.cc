@@ -27,6 +27,7 @@
 #include "aard.hh"
 #include "zipsounds.hh"
 #include "mdx.hh"
+#include "zim.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -50,7 +51,11 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   nameFilters << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
               << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf"
               << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
-              << "*.mdx";
+              << "*.mdx"
+#ifdef MAKE_ZIM_SUPPORT
+              << "*.zim" << "*.zimaa"
+#endif
+;
 }
 
 void LoadDictionaries::run()
@@ -185,6 +190,15 @@ void LoadDictionaries::handlePath( Config::Path const & path )
     dictionaries.insert( dictionaries.end(), mdxDictionaries.begin(),
                          mdxDictionaries.end() );
   }
+#ifdef MAKE_ZIM_SUPPORT
+  {
+    vector< sptr< Dictionary::Class > > zimDictionaries =
+      Zim::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), zimDictionaries.begin(),
+                         zimDictionaries.end() );
+  }
+#endif
 }
 
 void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw()
