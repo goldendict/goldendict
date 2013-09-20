@@ -112,7 +112,8 @@ void LoadDictionaries::handlePath( Config::Path const & path )
         handlePath( Config::Path( fullName, true ) );
     }
 
-    allFiles.push_back( FsEncoding::encode( QDir::toNativeSeparators( fullName ) ) );
+    if ( !i->isDir() )
+      allFiles.push_back( FsEncoding::encode( QDir::toNativeSeparators( fullName ) ) );
   }
 
   {
