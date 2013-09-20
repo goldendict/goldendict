@@ -25,6 +25,7 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 #include <QRegExp>
+#include <QDebug>
 
 #include "ufile.hh"
 
@@ -48,9 +49,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX_STR( exWordIsTooLarge, "Enountered a word that is too large:", Dictionary::Ex )
 DEF_EX_STR( exSuddenEndOfFile, "Sudden end of file", Dictionary::Ex )
 
-#ifdef _MSC_VER
 #pragma pack( push, 1 )
-#endif
 
 /// DCT file header
 struct DCT_header
@@ -108,9 +107,7 @@ __attribute__((packed))
 #endif
 ;
 
-#ifdef _MSC_VER
-#pragma pack( pop, 1 )
-#endif
+#pragma pack( pop )
 
 bool indexIsOldOrBad( string const & indexFile )
 {
@@ -570,6 +567,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         try
         {
+          qDebug( "SDict: Building the index for dictionary: %s\n", i->c_str() );
+
           File::Class df( *i, "rb" );
 
           DCT_header dictHeader;
@@ -577,7 +576,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           df.read( &dictHeader, sizeof(dictHeader) );
           if( strncmp( dictHeader.signature, "sdct", 4 ) )
           {
-              DPRINTF( "File %s is not valid sdictionary file", i->c_str() );
+              qWarning( "File \"%s\" is not valid SDictionary file", i->c_str() );
               continue;
           }
           int compression = dictHeader.compression & 0x0F;
@@ -674,13 +673,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         }
         catch( std::exception & e )
         {
-          FDPRINTF( stderr, "Sdictionary dictionary indexing failed: %s, error: %s\n",
-            i->c_str(), e.what() );
+          qWarning( "Sdictionary dictionary indexing failed: %s, error: %s\n",
+                    i->c_str(), e.what() );
           continue;
         }
         catch( ... )
         {
-          FDPRINTF( stderr, "Sdictionary dictionary indexing failed\n" );
+          qWarning( "Sdictionary dictionary indexing failed\n" );
           continue;
         }
       } // if need to rebuild

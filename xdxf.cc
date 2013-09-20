@@ -35,6 +35,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QPainter>
+#include <QDebug>
 
 #include <QSemaphore>
 #include <QThreadPool>
@@ -532,7 +533,10 @@ void XdxfDictionary::loadArticle( uint32_t address,
   }
 
   if ( &chunk.front() + chunk.size() - propertiesData < 9 )
-    throw exCorruptedIndex();
+  {
+    articleText = string( "<div class=\"xdxf\">Index seems corrupted</div>" );
+    return;
+  }
 
   unsigned char fType = (unsigned char) *propertiesData;
 
@@ -779,8 +783,8 @@ void indexArticle( GzippedFile & gzFile,
       if ( words.empty() )
       {
         // Nothing to index, this article didn't have any tags
-        DPRINTF( "Warning: no <k> tags found in an article at offset 0x%x, article skipped.\n",
-                (unsigned) articleOffset );
+        qWarning( "Warning: no <k> tags found in an article at offset 0x%x, article skipped.\n",
+                  (unsigned) articleOffset );
       }
       else
       {
@@ -1043,6 +1047,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
            indexIsOldOrBad( indexFile ) )
       {
         // Building the index
+
+        qDebug( "Xdxf: Building the index for dictionary: %s\n", i->c_str() );
 
         //initializing.indexingDictionary( nameFromFileName( dictFiles[ 0 ] ) );
 
@@ -1322,9 +1328,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( stream.hasError() )
         {
-          DPRINTF( "Warning: %s had a parse error %ls at line %lu, and therefore was indexed only up to the point of error.",
-                   dictFiles[ 0 ].c_str(), stream.errorString().toStdWString().c_str(),
-                   (unsigned long) stream.lineNumber() );
+          qWarning( "Warning: %s had a parse error %ls at line %lu, and therefore was indexed only up to the point of error.",
+                     dictFiles[ 0 ].c_str(), stream.errorString().toStdWString().c_str(),
+                     (unsigned long) stream.lineNumber() );
         }
       }
 
@@ -1334,8 +1340,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      FDPRINTF( stderr, "Xdxf dictionary reading failed: %s, error: %s\n",
-        i->c_str(), e.what() );
+      qWarning( "Xdxf dictionary reading failed: %s, error: %s\n",
+                i->c_str(), e.what() );
     }
   }
 

@@ -1607,7 +1607,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // Building the index
         initializing.indexingDictionary( Utf8::encode( scanner.getDictionaryName() ) );
 
-        qDebug() << "Building the index for dictionary:"
+        qDebug() << "Dsl: Building the index for dictionary:"
                  << gd::toQString( scanner.getDictionaryName() );
 
         File::Class idx( indexFile, "wb" );
@@ -1669,7 +1669,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) || curString.empty() )
                 {
-                  FDPRINTF( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
+                  qWarning( "Warning: premature end of file %s\n", abrvFileName.c_str() );
                   eof = true;
                   break;
                 }
@@ -1721,8 +1721,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
           catch( std::exception & e )
           {
-            FDPRINTF( stderr, "Error reading abrv file %s: %s. Skipping it.\n",
-                     abrvFileName.c_str(), e.what() );
+            qWarning( "Error reading abrv file \"%s\", error: %s. Skipping it.\n",
+                      abrvFileName.c_str(), e.what() );
           }
         }
 
@@ -1755,7 +1755,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               if ( !isDslWs( curString[ x ] ) )
               {
-                FDPRINTF( stderr, "Warning: garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
+                qWarning( "Warning: garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
                 break;
               }
             }
@@ -1779,7 +1779,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           {
             if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) ) )
             {
-              FDPRINTF( stderr, "Warning: premature end of file %s\n", i->c_str() );
+              qWarning( "Warning: premature end of file %s\n", i->c_str() );
               break;
             }
 
@@ -1790,7 +1790,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             if ( isDslWs( curString[ 0 ] ) )
               break; // No more headwords
 
+#ifdef QT_DEBUG
             qDebug() << "Alt headword" << gd::toQString( curString );
+#endif
 
             processUnsortedParts( curString, true );
             expandTildes( curString, allEntryWords.front() );
@@ -1970,8 +1972,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      FDPRINTF( stderr, "DSL dictionary reading failed: %s:%u, error: %s\n",
-        i->c_str(), atLine, e.what() );
+      qWarning( "DSL dictionary reading failed: %s:%u, error: %s\n",
+                i->c_str(), atLine, e.what() );
     }
   }
 

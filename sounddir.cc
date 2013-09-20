@@ -16,6 +16,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QUrl>
+#include <QDebug>
 
 namespace SoundDir {
 
@@ -370,6 +371,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::SoundDirs const & 
     if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) || indexIsOldOrBad( indexFile ) )
     {
       // Building the index
+
+      qDebug() << "Sounds: Building the index for directory: " << i->path;
 
       initializing.indexingDictionary( i->name.toUtf8().data() );
 

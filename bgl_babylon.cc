@@ -33,6 +33,7 @@
 #include "iconv.hh"
 #include "htmlescape.hh"
 #include <QString>
+#include <QDebug>
 
 #ifdef _WIN32
 #include <io.h>
@@ -560,7 +561,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               }
               catch( Iconv::Ex & e )
               {
-                DPRINTF("Bgl: charset convertion error, no trancription processing's done: %s\n", e.what());
+                qWarning() << "Bgl: charset convertion error, no trancription processing's done: " << e.what();
                 transcription = std::string( block.data + pos + 3, length );
               }
             }
@@ -593,7 +594,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               }
               catch( Iconv::Ex & e )
               {
-                DPRINTF("Bgl: charset convertion error, no trancription processing's done: %s\n", e.what());
+                qWarning() << "Bgl: charset convertion error, no trancription processing's done: " << e.what();
                 transcription = std::string( block.data + pos + 4, length );
               }
             }
@@ -786,7 +787,7 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   iconv_t cd = iconv_open( "UTF-8", charset.c_str() );
   if( cd == (iconv_t)(-1) )
   {
-    DPRINTF( "Error openning iconv library\n" );
+    qFatal( "Error openning iconv library" );
     exit(1);
   }
 
@@ -803,8 +804,7 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   defbuf = outbuf;
   while (inbufbytes) {
     if (iconv(cd, &inbuf, &inbufbytes, &outbuf, &outbufbytes) == (size_t)-1) {
-      DPRINTF( "\n%s\n", inbuf );
-      DPRINTF( "Error in iconv conversion\n" );
+      qWarning() << "\"" << inbuf << "\" - error in iconv conversion";
       break;
 //      inbuf++;
 //      inbufbytes--;

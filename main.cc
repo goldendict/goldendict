@@ -12,6 +12,8 @@
 
 //#define __DO_DEBUG
 
+#define LOG_TO_FILE_KEY "--log-to-file"
+
 #ifdef Q_OS_WIN32
 #include <QtCore/qt_windows.h>
 #endif
@@ -25,6 +27,57 @@
 
 #include <QWebSecurityOrigin>
 #include <QMessageBox>
+#include <QDebug>
+#include <QFile>
+#include <QString>
+
+QFile logFile;
+
+void gdMessageHandler( QtMsgType type, const char *msg )
+{
+  QString message = QString::fromUtf8( msg );
+  switch (type) {
+
+    case QtDebugMsg:
+      if( logFile.isOpen() )
+        message.insert( 0, "Debug: " );
+      else
+        fprintf(stderr, "Debug: %s\n", msg);
+      break;
+
+    case QtWarningMsg:
+      if( logFile.isOpen() )
+        message.insert( 0, "Warning: " );
+      else
+        fprintf(stderr, "Warning: %s\n", msg);
+      break;
+
+    case QtCriticalMsg:
+      if( logFile.isOpen() )
+        message.insert( 0, "Critical: " );
+      else
+        fprintf(stderr, "Critical: %s\n", msg);
+      break;
+
+    case QtFatalMsg:
+      if( logFile.isOpen() )
+      {
+        logFile.write( "Fatal: " );
+        logFile.write( msg );
+        logFile.flush();
+      }
+      else
+        fprintf(stderr, "Fatal: %s\n", msg);
+      abort();
+  }
+
+  if( logFile.isOpen() )
+  {
+    message.append( "\n" );
+    logFile.write( message.toUtf8() );
+    logFile.flush();
+  }
+}
 
 int main( int argc, char ** argv )
 {
@@ -94,17 +147,17 @@ int main( int argc, char ** argv )
 
   if ( app.isRunning() )
   {
-    if( argc == 2 )
+    if( argc == 2 && strcmp( argv[ 1 ], LOG_TO_FILE_KEY ) != 0 )
 #ifdef Q_OS_WIN32
     {
       LPWSTR * pstr;
       int num;
       pstr = CommandLineToArgvW( GetCommandLineW(), &num );
       if( pstr && num > 0 )
-        app.sendMessage( QString( "translateWord: ") + QString::fromWCharArray( pstr[1] ) );
+        app.sendMessage( QString( "translateWord: " ) + QString::fromWCharArray( pstr[1] ) );
     }
 #else
-      app.sendMessage( QString( "translateWord: ") + QString::fromLocal8Bit( argv[1] ) );
+      app.sendMessage( QString( "translateWord: " ) + QString::fromLocal8Bit( argv[1] ) );
 #endif
     else
       app.sendMessage("bringToFront");
@@ -162,6 +215,18 @@ int main( int argc, char ** argv )
     break;
   }
 
+  if( argc == 2 && strcmp( argv[ 1 ], LOG_TO_FILE_KEY ) == 0 )
+  {
+    // Open log file
+    logFile.setFileName( Config::getConfigDir() + "gd_log.txt" );
+    logFile.remove();
+    logFile.open( QFile::ReadWrite );
+
+    // Install message handler
+    qInstallMsgHandler( gdMessageHandler );
+  }
+
+
   if ( Config::isPortableVersion() )
   {
     // For portable version, hardcode some settings
@@ -202,7 +267,7 @@ int main( int argc, char ** argv )
   QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
     &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
 
-  if( argc == 2 )
+  if( argc == 2 && strcmp( argv[ 1 ], LOG_TO_FILE_KEY ) != 0)
 #ifdef Q_OS_WIN32
   {
     LPWSTR * pstr;
@@ -218,6 +283,9 @@ int main( int argc, char ** argv )
   int r = app.exec();
 
   app.removeDataCommiter( m );
+
+  if( logFile.isOpen() )
+    logFile.close();
 
   return r;
 }

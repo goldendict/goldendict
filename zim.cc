@@ -28,6 +28,7 @@
 #include <QAtomicInt>
 #include <QImage>
 #include <QDir>
+#include <QDebug>
 
 #include <string>
 #include <set>
@@ -54,9 +55,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 
 class ZimFile;
 
-#ifdef _MSC_VER
 #pragma pack( push, 1 )
-#endif
 
 enum CompressionType
 {
@@ -137,9 +136,7 @@ __attribute__((packed))
 #endif
 ;
 
-#ifdef _MSC_VER
-#pragma pack( pop, 1 )
-#endif
+#pragma pack( pop )
 
 // Class for support of split zim files
 
@@ -993,6 +990,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
              indexIsOldOrBad( indexFile ) )
         {
+          qDebug( "Zim: Building the index for dictionary: %s\n", i->c_str() );
+
           ZIM_header zh;
 
           unsigned articleCount = 0;
@@ -1165,13 +1164,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       }
       catch( std::exception & e )
       {
-        FDPRINTF( stderr, "Zim dictionary indexing failed: %s, error: %s\n",
-          i->c_str(), e.what() );
+        qWarning( "Zim dictionary indexing failed: %s, error: %s\n",
+                  i->c_str(), e.what() );
         continue;
       }
       catch( ... )
       {
-        FDPRINTF( stderr, "Zim dictionary indexing failed\n" );
+        qWarning( "Zim dictionary indexing failed\n" );
         continue;
       }
       dictionaries.push_back( new ZimDictionary( dictId,

@@ -28,6 +28,7 @@
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
+#include <QDebug>
 
 #include <QRegExp>
 
@@ -197,8 +198,7 @@ namespace
 
     if ( result < 0 )
     {
-      FDPRINTF( stderr, "Failed to decode utf8 of headword %s, skipping it.\n",
-                word.c_str() );
+      qWarning( "Failed to decode utf8 of headword \"%s\", skipping it.", word.c_str() );
       return;
     }
 
@@ -960,8 +960,7 @@ void BglResourceRequest::run()
                        compressedData.size() ) != Z_OK ||
            decompressedLength != data.size() )
       {
-        DPRINTF( "Failed to decompress resource %s, ignoring it.\n",
-          name.c_str() );
+        qWarning( "Failed to decompress resource \"%s\", ignoring it.\n", name.c_str() );
       }
       else
         hasAnyData = true;
@@ -1042,8 +1041,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     if ( compress( &compressedData.front(), &compressedSize,
                    (unsigned char const *) data, size ) != Z_OK )
     {
-      FDPRINTF( stderr, "Failed to compress the body of resource %s, dropping it.\n",
-                filename.c_str() );
+      qWarning( "Failed to compress the body of resource \"%s\", dropping it.\n", filename.c_str() );
       return;
     }
 
@@ -1087,6 +1085,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     {
       // Building the index
 
+      qDebug() << "Bgl: Building the index for dictionary: " << i->c_str();
+
       Babylon b( *i );
 
       if ( !b.open() )
@@ -1096,7 +1096,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       if ( !b.read( sourceCharset, targetCharset ) )
       {
-        FDPRINTF( stderr, "Failed to start reading from %s, skipping it\n", i->c_str() );
+        qWarning( "Failed to start reading from %s, skipping it\n", i->c_str() );
         continue;
       }
 

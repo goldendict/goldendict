@@ -281,7 +281,7 @@ void HunspellArticleRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    DPRINTF( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   if ( suggestions )
@@ -504,7 +504,7 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
   }
   catch( Iconv::Ex & e )
   {
-    DPRINTF( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   if ( suggestions )
@@ -626,7 +626,7 @@ void HunspellPrefixMatchRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    DPRINTF( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   finish();

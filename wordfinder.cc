@@ -138,9 +138,9 @@ void WordFinder::startSearch()
       }
       catch( std::exception & e )
       {
-        qDebug() << "Word \"" << inputWord << "\" search error (" << e.what() << ") in \""
-                 << QString::fromUtf8( (*inputDicts)[ x ]->getName().c_str() )
-                 << "\"";
+        qWarning() << "Word \"" << inputWord << "\" search error (" << e.what() << ") in \""
+                   << QString::fromUtf8( (*inputDicts)[ x ]->getName().c_str() )
+                   << "\"";
       }
     }
   }

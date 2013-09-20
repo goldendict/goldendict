@@ -34,6 +34,7 @@
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
+#include <QDebug>
 
 #include "ufile.hh"
 
@@ -1356,6 +1357,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         File::Class ifoFile( *i, "r" );
 
         Ifo ifo( ifoFile );
+
+        qDebug( "Stardict: Building the index for dictionary: %s\n", ifo.bookname.c_str() );
 
         if ( ifo.idxoffsetbits == 64 )
           throw ex64BitsNotSupported();

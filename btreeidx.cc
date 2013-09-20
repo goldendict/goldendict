@@ -106,12 +106,12 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
   }
   catch( std::exception & e )
   {
-    FDPRINTF( stderr, "Articles searching failed, error: %s\n", e.what() );
+    qWarning( "Articles searching failed, error: %s\n", e.what() );
     result.clear();
   }
   catch(...)
   {
-    FDPRINTF( stderr, "Articles searching failed\n" );
+    qWarning( "Articles searching failed\n" );
     result.clear();
   }
 
@@ -326,13 +326,12 @@ void BtreeWordSearchRequest::run()
   }
   catch( std::exception & e )
   {
-    FDPRINTF( stderr, "Index searching failed: %s, error: %s\n",
-      dict.getName().c_str(), e.what() );
+    qWarning( "Index searching failed: \"%s\", error: %s\n", e.what(),
+              dict.getName().c_str() );
   }
   catch(...)
   {
-    FDPRINTF( stderr, "Index searching failed: %s\n",
-      dict.getName().c_str() );
+    qWarning( "Index searching failed: \"%s\"\n", dict.getName().c_str() );
   }
 
   finish();
@@ -894,7 +893,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
   if ( compress( &compressedData.front(), &compressedSize,
                  &uncompressedData.front(), uncompressedData.size() ) != Z_OK )
   {
-    FDPRINTF( stderr, "Failed to compress btree node.\n" );
+    qFatal( "Failed to compress btree node." );
     abort();
   }
 

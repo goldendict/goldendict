@@ -436,7 +436,9 @@ void ArticleRequest::altSearchFinished()
 
   if ( altSearches.empty() )
   {
-    DPRINTF( "alts finished\n" );
+#ifdef QT_DEBUG
+    qDebug( "alts finished\n" );
+#endif
 
     // They all've finished! Now we can look up bodies
 
@@ -444,10 +446,12 @@ void ArticleRequest::altSearchFinished()
 
     vector< wstring > altsVector( alts.begin(), alts.end() );
 
+#ifdef QT_DEBUG
     for( unsigned x = 0; x < altsVector.size(); ++x )
     {
       qDebug() << "Alt:" << gd::toQString( altsVector[ x ] );
     }
+#endif
 
     wstring wordStd = gd::toWString( word );
 
@@ -469,9 +473,8 @@ void ArticleRequest::altSearchFinished()
       }
       catch( std::exception & e )
       {
-        qDebug() << "getArticle request error (" << e.what() << ") in \""
-                 << QString::fromUtf8( activeDicts[ x ]->getName().c_str() )
-                 << "\"";
+        qWarning( "getArticle request error (%s) in \"%s\"\n",
+                  e.what(), activeDicts[ x ]->getName().c_str() );
       }
     }
 
@@ -642,7 +645,7 @@ void ArticleRequest::bodyFinished()
         }
         catch( std::exception & e )
         {
-          qDebug() << "getDataSlice error: " << e.what();
+          qWarning( "getDataSlice error: %s\n", e.what() );
         }
 
         wasUpdated = true;
