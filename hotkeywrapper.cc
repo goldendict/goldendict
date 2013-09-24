@@ -412,6 +412,9 @@ void HotkeyWrapper::init()
   lAltCode = XKeysymToKeycode( display, XK_Alt_L );
   rAltCode = XKeysymToKeycode( display, XK_Alt_R );
 
+  lMetaCode = XKeysymToKeycode( display, XK_Super_L );
+  rMetaCode = XKeysymToKeycode( display, XK_Super_R );
+
   cCode = XKeysymToKeycode( display, XK_c );
   insertCode = XKeysymToKeycode( display, XK_Insert );
   kpInsertCode = XKeysymToKeycode( display, XK_KP_Insert );
@@ -493,6 +496,10 @@ void HotkeyWrapper::handleRecordEvent( XRecordInterceptData * data )
            key == rAltCode )
         currentModifiers |= Mod1Mask;
       else
+      if ( key == lMetaCode ||
+           key == rMetaCode )
+        currentModifiers |= Mod4Mask;
+      else
       {
         // Here we employ a kind of hack translating KP_Insert key
         // to just Insert. This allows reacting to both Insert keys.
@@ -518,6 +525,10 @@ void HotkeyWrapper::handleRecordEvent( XRecordInterceptData * data )
       if ( key == lAltCode ||
            key == rAltCode )
         currentModifiers &= ~Mod1Mask;
+      else
+      if ( key == lMetaCode ||
+           key == rMetaCode )
+        currentModifiers &= ~Mod4Mask;
     }
   }
 
@@ -540,6 +551,8 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
       mod |= ControlMask;
   if (modifier & Qt::AltModifier)
       mod |= Mod1Mask;
+  if (modifier & Qt::MetaModifier)
+      mod |= Mod4Mask;
 
   hotkeys.append( HotkeyStruct( vk, vk2, mod, handle, 0 ) );
 
