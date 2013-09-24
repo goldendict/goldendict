@@ -464,25 +464,33 @@ void SdictArticleRequest::run()
     string headword, articleText;
 
     headword = chain[ x ].word;
-    dict.loadArticle( chain[ x ].articleOffset, articleText );
 
-    // Ok. Now, does it go to main articles, or to alternate ones? We list
-    // main ones first, and alternates after.
+    try
+    {
+      dict.loadArticle( chain[ x ].articleOffset, articleText );
 
-    // We do the case-folded comparison here.
+      // Ok. Now, does it go to main articles, or to alternate ones? We list
+      // main ones first, and alternates after.
 
-    wstring headwordStripped =
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+      // We do the case-folded comparison here.
 
-    multimap< wstring, pair< string, string > > & mapToUse =
-      ( wordCaseFolded == headwordStripped ) ?
-        mainArticles : alternateArticles;
+      wstring headwordStripped =
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
 
-    mapToUse.insert( pair< wstring, pair< string, string > >(
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-      pair< string, string >( headword, articleText ) ) );
+      multimap< wstring, pair< string, string > > & mapToUse =
+        ( wordCaseFolded == headwordStripped ) ?
+          mainArticles : alternateArticles;
 
-    articlesIncluded.insert( chain[ x ].articleOffset );
+      mapToUse.insert( pair< wstring, pair< string, string > >(
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+        pair< string, string >( headword, articleText ) ) );
+
+      articlesIncluded.insert( chain[ x ].articleOffset );
+    }
+    catch( std::exception &ex )
+    {
+      qWarning( "SDict: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+    }
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )

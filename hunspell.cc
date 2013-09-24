@@ -283,6 +283,10 @@ void HunspellArticleRequest::run()
   {
     qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
+  catch( std::exception & e )
+  {
+    qWarning( "Hunspell: error: %s\n", e.what() );
+  }
 
   if ( suggestions )
   {

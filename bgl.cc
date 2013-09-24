@@ -746,8 +746,9 @@ void BglArticleRequest::run()
     articlesIncluded.insert( chain[ x ].articleOffset );
 
     } // try
-    catch( Utf8::exCantDecode )
+    catch( std::exception &ex )
     {
+      qWarning( "BGL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
     }
   }
 

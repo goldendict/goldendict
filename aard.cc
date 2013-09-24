@@ -404,6 +404,11 @@ void AardDictionary::loadArticle( quint32 address,
         articleBody.resize( articleSize );
         df.read( &articleBody.front(), articleSize );
       }
+      catch( std::exception &ex )
+      {
+        qWarning( "AARD: Failed loading article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+        break;
+      }
       catch(...)
       {
         break;

@@ -396,7 +396,7 @@ void StardictDictionary::loadArticle( uint32_t address,
       else
       if ( !size )
       {
-        FDPRINTF( stderr, "Warning: short entry for the word %s encountered.\n", headword.c_str() );
+        qWarning( "Stardict: short entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
         break;
       }
 
@@ -410,7 +410,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < entrySize )
         {
-          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -431,7 +431,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         {
           if ( size < sizeof( uint32_t ) )
           {
-            FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+            qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
             break;
           }
 
@@ -445,7 +445,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < entrySize )
         {
-          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -456,8 +456,8 @@ void StardictDictionary::loadArticle( uint32_t address,
       }
       else
       {
-        FDPRINTF( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
-                         type, headword.c_str() );
+        qWarning( "Stardict: non-alpha entry type 0x%x for the word %s encountered in \"%s\".\n",
+                  type, headword.c_str(), getName().c_str() );
         break;
       }
     }
@@ -474,7 +474,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < len + 2 )
         {
-          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -489,7 +489,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         // An entry which havs its size before contents
         if ( size < sizeof( uint32_t ) + 1 )
         {
-          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -501,7 +501,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < sizeof( uint32_t ) + 1 + entrySize )
         {
-          FDPRINTF( stderr, "Warning: malformed entry for the word %s encountered.\n", headword.c_str() );
+          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -512,8 +512,8 @@ void StardictDictionary::loadArticle( uint32_t address,
       }
       else
       {
-        FDPRINTF( stderr, "Warning: non-alpha entry type 0x%x for the word %s encountered.\n",
-                         (unsigned)*ptr, headword.c_str() );
+        qWarning( "Stardict: non-alpha entry type 0x%x for the word %s encountered in \"%s\".\n",
+                  (unsigned)*ptr, headword.c_str(), getName().c_str() );
         break;
       }
     }
@@ -1115,13 +1115,11 @@ void StardictResourceRequest::run()
 
     hasAnyData = true;
   }
-  catch( File::Ex & )
+  catch( std::exception &ex )
   {
-    // No such resource -- we don't set the hasAnyData flag then
-  }
-  catch( Utf8::exCantDecode )
-  {
-    // Failed to decode some utf8 -- probably the resource name is no good
+    qWarning( "Stardict: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+              resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    // Resource not loaded -- we don't set the hasAnyData flag then
   }
   catch( ... )
   {

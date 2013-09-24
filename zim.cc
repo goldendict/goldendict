@@ -936,13 +936,11 @@ void ZimResourceRequest::run()
 
     hasAnyData = true;
   }
-  catch( File::Ex & )
+  catch( std::exception &ex )
   {
-    // No such resource -- we don't set the hasAnyData flag then
-  }
-  catch( Utf8::exCantDecode )
-  {
-    // Failed to decode some utf8 -- probably the resource name is no good
+    qWarning( "ZIM: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
+              resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
   finish();
