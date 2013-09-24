@@ -1741,6 +1741,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
     updateGroupList();
 
     Config::save( cfg );
+
+    translateInputChanged( translateLine->text() );
   }
 
   }
