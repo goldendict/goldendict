@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2011 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Hoş geldiňiz! &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Programany ulanyp başlamak üçin, ilki bilent &lt;b&gt;Redaktrile|Dictionaries menýusyna baryň&lt;/b&gt; we şol ýerden sözlük faýllaryň ýerleşýän bukjalaryny görkeziň, Wikipedia ýa-da başga çeşmeleri saýlaň, sözlükleriň görkeziş tertibini sazlaň ýa-da sözlükleriň toparyny dörediň.&lt;p&gt;Şondan soň sözleriň terjimesini gözlemäge başlap bolýar! Ony şu penjiräniň sag tarapynda ýerleşýän meýdançadan edip bolýar ýa-da &lt;a href=&quot;popup bilen işlemek&quot;&gt;göni başga programmalaryň içinden hem edip bolýar&lt;/a&gt;. &lt;p&gt;Programmany sazlamak üçin, serediň &lt;b&gt;Redaktirle|Saýlamalar menýusyna&lt;/b&gt;. Şol ýerde ýerleşen ähli sazlamalaryň gysga düşündirişi bar, bir zat düşünmeseňiz olary okamagy unutmaň.&lt;p&gt;Eger goşmaça soragyňyz bar bolsa,maslahat gerek bolsa, pikiriňizi paýlaşmak isleseňiz ýa-da beýleki ulanyjylaryň pikirlerini bilmek isleseňiz &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;foruma giriň&lt;/a&gt;.&lt;p&gt;Programmanyň &lt;a href=&quot;http://goldendict.org/&quot;&gt;websaýtyndan&lt;/a&gt; täzelikleri bilip bilersiňiz. &lt;p&gt;(c) 2008-2011 Konstantin Isakow.  GPLv3 ýa-da soňky çykan lisenziýasy boýunça.</translation>
+        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Hoş geldiňiz! &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Programany ulanyp başlamak üçin, ilki bilent &lt;b&gt;Redaktrile|Dictionaries menýusyna baryň&lt;/b&gt; we şol ýerden sözlük faýllaryň ýerleşýän bukjalaryny görkeziň, Wikipedia ýa-da başga çeşmeleri saýlaň, sözlükleriň görkeziş tertibini sazlaň ýa-da sözlükleriň toparyny dörediň.&lt;p&gt;Şondan soň sözleriň terjimesini gözlemäge başlap bolýar! Ony şu penjiräniň sag tarapynda ýerleşýän meýdançadan edip bolýar ýa-da &lt;a href=&quot;Ýüzüne çykýan penjire (popup) bilen işlemek&quot;&gt;göni başga programmalaryň içinden hem edip bolýar&lt;/a&gt;. &lt;p&gt;Programmany sazlamak üçin, serediň &lt;b&gt;Redaktirle|Saýlamalar menýusyna&lt;/b&gt;. Şol ýerde ýerleşen ähli sazlamalaryň gysga düşündirişi bar, bir zat düşünmeseňiz olary okamagy unutmaň.&lt;p&gt;Eger goşmaça soragyňyz bar bolsa,maslahat gerek bolsa, pikiriňizi paýlaşmak isleseňiz ýa-da beýleki ulanyjylaryň pikirlerini bilmek isleseňiz &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;foruma giriň&lt;/a&gt;.&lt;p&gt;Programmanyň &lt;a href=&quot;http://goldendict.org/&quot;&gt;websaýtyndan&lt;/a&gt; täzelikleri bilip bilersiňiz. &lt;p&gt;(c) 2008-2011 Konstantin Isakow.  GPLv3 ýa-da soňky çykan lisenziýasy boýunça.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="152"/>
@@ -77,7 +77,7 @@
     <message>
         <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Hoş geldiňiz! &lt;b&gt;GoldenDict&lt;/b&gt;&lt;/h3&gt;&lt;p&gt;Programany ulanyp başlamak üçin, ilki bilen &lt;b&gt;Redaktrile|Dictionaries menýusyna baryň&lt;/b&gt; we şol ýerden sözlük faýllaryň ýerleşýän bukjalaryny görkeziň, Wikipedia ýa-da başga çeşmeleri saýlaň, sözlükleriň görkeziş tertibini goýuň ýa-da sözlükleriň toparyny dörediň.&lt;p&gt;Şondan soň sözleriň terjimesini gözlemäge başlap bolýar! Ony şu penjiräniň sag tarapynda ýerleşýän meýdançasyndan edip bolýar ýa-da &lt;a href=&quot;Working with popup&quot;&gt;göni başga programmalaryň içinden hem edip bolýar&lt;/a&gt;. &lt;p&gt;Programmany sazlamak üçin, serediň &lt;b&gt;Redaktirle|Saýlamalar menýusyna&lt;/b&gt;. Şol ýerde ýerleşen ähli sazlamalaryň gysga düşündirişi bar, bir zat düşünmeseňiz olary okamagy unutmaň.&lt;p&gt;Eger goşmaça soragyňyz bar bolsa,maslahat gerek bolsa, pikiriňizi paýlaşmak isleseňiz ýa-da beýleki ulanyjylaryň pikirlerini bilmek isleseňiz &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;foruma giriň&lt;/a&gt;.&lt;p&gt;Programmanyň &lt;a href=&quot;http://goldendict.org/&quot;&gt;websaýtyndan&lt;/a&gt; täzelikleri bilip bilersiňiz. &lt;p&gt;(c) 2008-2013 Konstantin Isakow.  GPLv3 ýa-da soňky çykan lisenziýasy boýunça.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Hoş geldiňiz! &lt;b&gt;GoldenDict&lt;/b&gt;&lt;/h3&gt;&lt;p&gt;Programany ulanyp başlamak üçin, ilki bilen &lt;b&gt;Redaktrile|Dictionaries menýusyna baryň&lt;/b&gt; we şol ýerden sözlük faýllaryň ýerleşýän bukjalaryny görkeziň, Wikipedia ýa-da başga çeşmeleri saýlaň, sözlükleriň görkeziş tertibini goýuň ýa-da sözlükleriň toparyny dörediň.&lt;p&gt;Şondan soň sözleriň terjimesini gözlemäge başlap bolýar! Ony şu penjiräniň sag tarapynda ýerleşýän meýdançasyndan edip bolýar ýa-da &lt;a href=&quot;Ýüzüne çykýan penjire (popup) bilen işlemek&quot;&gt;göni başga programmalaryň içinden hem edip bolýar&lt;/a&gt;. &lt;p&gt;Programmany sazlamak üçin, serediň &lt;b&gt;Redaktirle|Saýlamalar menýusyna&lt;/b&gt;. Şol ýerde ýerleşen ähli sazlamalaryň gysga düşündirişi bar, bir zat düşünmeseňiz olary okamagy unutmaň.&lt;p&gt;Eger goşmaça soragyňyz bar bolsa,maslahat gerek bolsa, pikiriňizi paýlaşmak isleseňiz ýa-da beýleki ulanyjylaryň pikirlerini bilmek isleseňiz &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;foruma giriň&lt;/a&gt;.&lt;p&gt;Programmanyň &lt;a href=&quot;http://goldendict.org/&quot;&gt;websaýtyndan&lt;/a&gt; täzelikleri bilip bilersiňiz. &lt;p&gt;(c) 2008-2013 Konstantin Isakow.  GPLv3 ýa-da soňky çykan lisenziýasy boýunça.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="229"/>
@@ -87,7 +87,7 @@
     <message>
         <location filename="../article_maker.cc" line="231"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Ýüze çykýan penjireler ( popup) bilen işlemegiň düzgünleri&lt;/h3&gt;Başga programmalaryň içinden sözleri terjime etmek üçin, şuny açmak gerek: &lt;i&gt;&quot;Skan popup &quot;&lt;/i&gt; in &lt;b&gt;Saýlamalar menýusynyň içinde ýerleşýär&lt;/b&gt;, soň ony Popup nyşany açyp ýa-da aşakdaky panelden myşkanyň sag düwmesine basyp işe göýbermek bolýar.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Ýüze çykýan penjireler ( popup) bilen işlemegiň düzgünleri&lt;/h3&gt;Başga programmalaryň içinden sözleri terjime etmek üçin, şuny açmak gerek: &lt;i&gt;&quot;Skan popup&quot;&lt;/i&gt; in &lt;b&gt;Saýlamalar menýusynyň içinde ýerleşýär&lt;/b&gt;, soň ony Popup nyşany açyp ýa-da aşakdaky panelden myşkanyň sag düwmesine basyp işe göýbermek bolýar.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="238"/>
@@ -475,9 +475,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="691"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translatorcomment>Çyndan hem toparlary dil jübütleriň esasynda gurmak isleýäýäňizmi?
-</translatorcomment>
-        <translation>Are you sure you want to generate a set of groups based on language pairs?</translation>
+        <translation>Çyndan hem toparlary dil jübütleriň esasynda gurmak isleýäýäňizmi?</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
@@ -2005,7 +2003,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
         <source>&amp;Zoom</source>
-        <translation>&amp;Zoom</translation>
+        <translation>&amp;Ulalt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
@@ -3052,17 +3050,17 @@ seconds, which is specified here.</translation>
     <message>
         <location filename="../preferences.ui" line="684"/>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>Baş penjiräni görkezmek ýa-da gizlemek üçin şeýle gyzgyn düwmeleri ulan:</translation>
+        <translation>Baş penjiräni görkezmek ýa-da gizlemek üçin şeýle  düwmeleri ulan:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="715"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Buferde saklanan sözi terjime etmek üçin şeýle gyzgyn düwmeleri ulan:</translation>
+        <translation>Buferde saklanan sözi terjime etmek üçin şeýle düwmeleri ulan:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="762"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</translation>
+        <translation>Bu gyzgyn düwmeler globaldyr we GoldenDict açyk duran wagty islendik başga programmada hem ýerlerde  işleýärler.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="772"/>
@@ -3819,12 +3817,10 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>Each morphology dictionary appears as a
-separate auxiliary dictionary which
-provides stem words for searches and
-spelling suggestions for mistyped words.
-Add appropriate dictionaries to the bottoms
-of the appropriate groups to use them.</translation>
+        <translation>Her morfologiýa sözlügi aýry bir goşmaça sözlük ýaly 
+görkezilip gözleg üçin esasy sözleri üpjün edýär 
+we ýalňyş ýazylan sözler üçin dogrylary hödürleýär. 
+Laýyk gelýän sözlükleri degişli toparlaryň aşagyna goşup ulan.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="224"/>
@@ -3867,7 +3863,7 @@ of the appropriate groups to use them.</translation>
     <message>
         <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</translation>
+        <translation>Janly aýdylyşy şu ýerden alynýar -  &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Bu websaýt adamlar üçin sözleriň aýdyşyny ýazga geçirmäge we paýlaşmaga mümkinçilik berýär. Olary GoldenDict arkaly diňläp bolýar.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="431"/>
@@ -3884,9 +3880,7 @@ of the appropriate groups to use them.</translation>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation>Use of Forvo currently requires an API key. Leave this field
-blank to use the default key, which may become unavailable
-in the future, or register on the site to get your own key.</translation>
+        <translation>Forvo häzirki wagtda API açary talap edýär. Özüň üçin täze açary almak üçin, websaýtda hasaba durmak gerek. Eger başdaky berlen açary ulanmak isleseň, şu meýdançany boş galdyr. Ýone başdaky berlen açar wagtyň geçmegi bilen ýiter.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
