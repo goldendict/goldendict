@@ -7,6 +7,10 @@
 #include <QApplication>
 #include "articleinspector.hh"
 
+#ifdef Q_OS_WIN32
+#include <qt_windows.h>
+#endif
+
 ArticleWebView::ArticleWebView( QWidget *parent ):
   QWebView( parent ),
 #if QT_VERSION >= 0x040600
@@ -143,6 +147,27 @@ void ArticleWebView::focusInEvent( QFocusEvent * event )
 
 void ArticleWebView::wheelEvent( QWheelEvent *ev )
 {
+#ifdef Q_OS_WIN32
+
+  // Avoid wrong mouse wheel handling in QWebView
+  // if system preferences is set to "scroll by page"
+
+  if( ev->modifiers() == Qt::NoModifier )
+  {
+    unsigned nLines;
+    SystemParametersInfo( SPI_GETWHEELSCROLLLINES, 0, &nLines, 0 );
+    if( nLines == WHEEL_PAGESCROLL )
+    {
+      QKeyEvent kev( QEvent::KeyPress, ev->delta() > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
+                     Qt::NoModifier );
+      QApplication::sendEvent( this, &kev );
+
+      ev->accept();
+      return;
+    }
+  }
+#endif
+
   if ( ev->modifiers().testFlag( Qt::ControlModifier ) )
   {
      ev->ignore();
