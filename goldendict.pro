@@ -118,6 +118,10 @@ win32 {
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 
     CONFIG += zim_support
+
+    greaterThan(QT_MAJOR_VERSION, 4) {
+      LIBS += -luxtheme
+    }
 }
 
 unix:!mac {
