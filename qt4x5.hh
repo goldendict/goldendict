@@ -110,6 +110,15 @@ inline void setQueryItems( QUrl & url, QList< QPair< QString, QString > > const 
 #endif
 }
 
+inline QString path( QUrl const & url )
+{
+#if IS_QT_5
+  return url.path( QUrl::FullyDecoded );
+#else
+  return url.path();
+#endif
+}
+
 }
 
 namespace Dom

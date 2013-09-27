@@ -1042,7 +1042,7 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
         for( unsigned x = 0; x < activeDicts->size(); ++x )
         {
           req = (*activeDicts)[ x ]->getResource(
-                  url.path().mid( 1 ).toUtf8().data() );
+                  Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
 
           ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
           handlers.push_back( handler );
@@ -1453,7 +1453,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
           savePath = QDir::homePath();
       }
 
-      QString name = url.path().section( '/', -1 );
+      QString name = Qt4x5::Url::path( url ).section( '/', -1 );
 
       if ( result == saveSoundAction )
       {

@@ -203,7 +203,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             }
             try
             {
-              return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+              return  dictionaries[ x ]->getResource( Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
             }
             catch( std::exception & e )
             {

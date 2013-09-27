@@ -2964,7 +2964,7 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
   {
     QUrl url( rx.cap( 1 ) );
     QString host = url.host();
-    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( url.path(), "/" ) );
+    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( Qt4x5::Url::path( url ), "/" ) );
 
     if ( !host.startsWith( '/' ) )
       host.insert( 0, '/' );
