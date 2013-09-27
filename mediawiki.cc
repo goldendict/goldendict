@@ -255,7 +255,7 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
 void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                         wstring const & str )
 {
-  qDebug() << "Requesting article" << gd::toQString( str );
+  qDebug() << "MediaWiki: requesting article" << gd::toQString( str );
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 

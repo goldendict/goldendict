@@ -94,7 +94,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     if ( !req.url().host().endsWith( refererUrl.host() ) &&
          getHostBase( req.url() ) != getHostBase( refererUrl ) && !req.url().scheme().startsWith("data") )
     {
-      DPRINTF( "Blocking element %s\n", req.url().toEncoded().data() );
+      qWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
 
       return new BlockedNetworkReply( this );
     }
@@ -201,7 +201,16 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
                 memcpy( &( ico->getData().front() ), bytes.data(), bytes.size() );
                 return ico;
             }
-            return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+            try
+            {
+              return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+            }
+            catch( std::exception & e )
+            {
+              qWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
+                        dictionaries[ x ]->getName().c_str() );
+              return sptr< Dictionary::DataRequest >();
+            }
         }
     }
     else
@@ -323,7 +332,14 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   
   size_t toRead = maxSize < left ? maxSize : left;
 
-  req->getDataSlice( alreadyRead, toRead, out );
+  try
+  {
+    req->getDataSlice( alreadyRead, toRead, out );
+  }
+  catch( std::exception & e )
+  {
+    qWarning( "getDataSlice error: %s\n", e.what() );
+  }
 
   alreadyRead += toRead;
 

@@ -81,26 +81,39 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
 {
   vector< WordArticleLink > result;
 
-  wstring folded = Folding::apply( str );
-  if( folded.empty() )
-    folded = Folding::applyWhitespaceOnly( str );
-
-  bool exactMatch;
-
-  vector< char > leaf;
-  uint32_t nextLeaf;
-
-  char const * leafEnd;
-
-  char const * chainOffset = findChainOffsetExactOrPrefix( folded, exactMatch,
-                                                           leaf, nextLeaf,
-                                                           leafEnd );
-
-  if ( chainOffset && exactMatch )
+  try
   {
-    result = readChain( chainOffset );
+    wstring folded = Folding::apply( str );
+    if( folded.empty() )
+      folded = Folding::applyWhitespaceOnly( str );
 
-    antialias( str, result );
+    bool exactMatch;
+
+    vector< char > leaf;
+    uint32_t nextLeaf;
+
+    char const * leafEnd;
+
+    char const * chainOffset = findChainOffsetExactOrPrefix( folded, exactMatch,
+                                                             leaf, nextLeaf,
+                                                             leafEnd );
+
+    if ( chainOffset && exactMatch )
+    {
+      result = readChain( chainOffset );
+
+      antialias( str, result );
+    }
+  }
+  catch( std::exception & e )
+  {
+    qWarning( "Articles searching failed, error: %s\n", e.what() );
+    result.clear();
+  }
+  catch(...)
+  {
+    qWarning( "Articles searching failed\n" );
+    result.clear();
   }
 
   return result;
@@ -212,99 +225,110 @@ void BtreeWordSearchRequest::run()
       charsLeftToChop = maxSuffixVariation;
   }
 
-  for( ; ; )
+  try
   {
-    bool exactMatch;
-  
-    vector< char > leaf;
-    uint32_t nextLeaf;
-    char const * leafEnd;
-  
-    char const * chainOffset = dict.findChainOffsetExactOrPrefix( folded, exactMatch,
-                                                                  leaf, nextLeaf,
-                                                                  leafEnd );
-  
-    if ( chainOffset )
     for( ; ; )
     {
-      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-        break;
-      
-      //DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
-  
-      vector< WordArticleLink > chain = dict.readChain( chainOffset );
-  
-      wstring chainHead = Utf8::decode( chain[ 0 ].word );
-  
-      wstring resultFolded = Folding::apply( chainHead );
-      if( resultFolded.empty() )
-        resultFolded = Folding::applyWhitespaceOnly( chainHead );
+      bool exactMatch;
+      vector< char > leaf;
+      uint32_t nextLeaf;
+      char const * leafEnd;
 
-      if ( resultFolded.size() >= folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
+      char const * chainOffset = dict.findChainOffsetExactOrPrefix( folded, exactMatch,
+                                                                    leaf, nextLeaf,
+                                                                    leafEnd );
+
+      if ( chainOffset )
+      for( ; ; )
       {
-        // Exact or prefix match
-
-        Mutex::Lock _( dataMutex );
-  
-        for( unsigned x = 0; x < chain.size(); ++x )
-        {
-          // Skip middle matches, if requested. If suffix variation is specified,
-          // make sure the string isn't larger than requested.
-          if ( ( allowMiddleMatches || Folding::apply( Utf8::decode( chain[ x ].prefix ) ).empty() ) &&
-               ( maxSuffixVariation < 0 || (int)resultFolded.size() - initialFoldedSize <= maxSuffixVariation ) )
-              matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
-        }
-  
-        if ( matches.size() >= maxResults )
-        {
-          // For now we actually allow more than maxResults if the last
-          // chain yield more than one result. That's ok and maybe even more
-          // desirable.
+        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
           break;
-        }
-      }
-      else
-        // Neither exact nor a prefix match, end this
-        break;
-  
-      // Fetch new leaf if we're out of chains here
-  
-      if ( chainOffset >= leafEnd )
-      {
-        // We're past the current leaf, fetch the next one
-  
-        //DPRINTF( "advancing\n" );
-  
-        if ( nextLeaf )
+
+        //DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
+
+        vector< WordArticleLink > chain = dict.readChain( chainOffset );
+
+        wstring chainHead = Utf8::decode( chain[ 0 ].word );
+
+        wstring resultFolded = Folding::apply( chainHead );
+        if( resultFolded.empty() )
+          resultFolded = Folding::applyWhitespaceOnly( chainHead );
+
+        if ( resultFolded.size() >= folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
         {
-          Mutex::Lock _( *dict.idxFileMutex );
-          
-          dict.readNode( nextLeaf, leaf );
-          leafEnd = &leaf.front() + leaf.size();
-  
-          nextLeaf = dict.idxFile->read< uint32_t >();
-          chainOffset = &leaf.front() + sizeof( uint32_t );
-  
-          uint32_t leafEntries = *(uint32_t *)&leaf.front();
-  
-          if ( leafEntries == 0xffffFFFF )
+          // Exact or prefix match
+
+          Mutex::Lock _( dataMutex );
+
+          for( unsigned x = 0; x < chain.size(); ++x )
           {
-            //DPRINTF( "bah!\n" );
-            exit( 1 );
+            // Skip middle matches, if requested. If suffix variation is specified,
+            // make sure the string isn't larger than requested.
+            if ( ( allowMiddleMatches || Folding::apply( Utf8::decode( chain[ x ].prefix ) ).empty() ) &&
+                 ( maxSuffixVariation < 0 || (int)resultFolded.size() - initialFoldedSize <= maxSuffixVariation ) )
+                matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+          }
+
+          if ( matches.size() >= maxResults )
+          {
+            // For now we actually allow more than maxResults if the last
+            // chain yield more than one result. That's ok and maybe even more
+            // desirable.
+            break;
           }
         }
         else
-          break; // That was the last leaf
-      }
-    }
+          // Neither exact nor a prefix match, end this
+          break;
 
-    if ( charsLeftToChop && !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-    {
-      --charsLeftToChop;
-      folded.resize( folded.size() - 1 );
+        // Fetch new leaf if we're out of chains here
+
+        if ( chainOffset >= leafEnd )
+        {
+          // We're past the current leaf, fetch the next one
+
+          //DPRINTF( "advancing\n" );
+
+          if ( nextLeaf )
+          {
+            Mutex::Lock _( *dict.idxFileMutex );
+
+            dict.readNode( nextLeaf, leaf );
+            leafEnd = &leaf.front() + leaf.size();
+
+            nextLeaf = dict.idxFile->read< uint32_t >();
+            chainOffset = &leaf.front() + sizeof( uint32_t );
+
+            uint32_t leafEntries = *(uint32_t *)&leaf.front();
+
+            if ( leafEntries == 0xffffFFFF )
+            {
+              //DPRINTF( "bah!\n" );
+              exit( 1 );
+            }
+          }
+          else
+            break; // That was the last leaf
+        }
+      }
+
+      if ( charsLeftToChop && !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      {
+        --charsLeftToChop;
+        folded.resize( folded.size() - 1 );
+      }
+      else
+        break;
     }
-    else
-      break;
+  }
+  catch( std::exception & e )
+  {
+    qWarning( "Index searching failed: \"%s\", error: %s\n", e.what(),
+              dict.getName().c_str() );
+  }
+  catch(...)
+  {
+    qWarning( "Index searching failed: \"%s\"\n", dict.getName().c_str() );
   }
 
   finish();
@@ -866,7 +890,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
   if ( compress( &compressedData.front(), &compressedSize,
                  &uncompressedData.front(), uncompressedData.size() ) != Z_OK )
   {
-    FDPRINTF( stderr, "Failed to compress btree node.\n" );
+    qFatal( "Failed to compress btree node." );
     abort();
   }
 

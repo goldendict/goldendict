@@ -153,7 +153,7 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
 void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                     wstring const & str )
 {
-  qDebug() << "Requesting article" << gd::toQString( str );
+  qDebug() << "Forvo: requesting article" << gd::toQString( str );
 
   QString key;
 

@@ -437,7 +437,9 @@ void ArticleRequest::altSearchFinished()
 
   if ( altSearches.empty() )
   {
-    DPRINTF( "alts finished\n" );
+#ifdef QT_DEBUG
+    qDebug( "alts finished\n" );
+#endif
 
     // They all've finished! Now we can look up bodies
 
@@ -445,10 +447,12 @@ void ArticleRequest::altSearchFinished()
 
     vector< wstring > altsVector( alts.begin(), alts.end() );
 
+#ifdef QT_DEBUG
     for( unsigned x = 0; x < altsVector.size(); ++x )
     {
       qDebug() << "Alt:" << gd::toQString( altsVector[ x ] );
     }
+#endif
 
     wstring wordStd = gd::toWString( word );
 
@@ -457,14 +461,22 @@ void ArticleRequest::altSearchFinished()
 
     for( unsigned x = 0; x < activeDicts.size(); ++x )
     {
-      sptr< Dictionary::DataRequest > r =
-        activeDicts[ x ]->getArticle( wordStd, altsVector,
-                                      gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
+      try
+      {
+        sptr< Dictionary::DataRequest > r =
+          activeDicts[ x ]->getArticle( wordStd, altsVector,
+                                        gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
 
-      connect( r.get(), SIGNAL( finished() ),
-               this, SLOT( bodyFinished() ), Qt::QueuedConnection );
+        connect( r.get(), SIGNAL( finished() ),
+                 this, SLOT( bodyFinished() ), Qt::QueuedConnection );
 
-      bodyRequests.push_back( r );
+        bodyRequests.push_back( r );
+      }
+      catch( std::exception & e )
+      {
+        qWarning( "getArticle request error (%s) in \"%s\"\n",
+                  e.what(), activeDicts[ x ]->getName().c_str() );
+      }
     }
 
     bodyFinished(); // Handle any ones which have already finished
@@ -626,9 +638,16 @@ void ArticleRequest::bodyFinished()
 
         memcpy( &data.front() + offset, head.data(), head.size() );
 
-        if ( req.dataSize() > 0 )
-          bodyRequests.front()->getDataSlice( 0, req.dataSize(),
-                                              &data.front() + offset + head.size() );
+        try
+        {
+          if ( req.dataSize() > 0 )
+            bodyRequests.front()->getDataSlice( 0, req.dataSize(),
+                                                &data.front() + offset + head.size() );
+        }
+        catch( std::exception & e )
+        {
+          qWarning( "getDataSlice error: %s\n", e.what() );
+        }
 
         wasUpdated = true;
 

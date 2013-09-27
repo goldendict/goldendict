@@ -124,15 +124,24 @@ void WordFinder::startSearch()
 
     for( size_t y = 0; y < allWordWritings.size(); ++y )
     {
-      sptr< Dictionary::WordSearchRequest > sr =
-        ( searchType == PrefixMatch ) ?
-          (*inputDicts)[ x ]->prefixMatch( allWordWritings[ y ], requestedMaxResults ) :
-          (*inputDicts)[ x ]->stemmedMatch( allWordWritings[ y ], stemmedMinLength, stemmedMaxSuffixVariation, requestedMaxResults );
-  
-      connect( sr.get(), SIGNAL( finished() ),
-               this, SLOT( requestFinished() ), Qt::QueuedConnection );
-  
-      queuedRequests.push_back( sr );
+      try
+      {
+        sptr< Dictionary::WordSearchRequest > sr =
+          ( searchType == PrefixMatch ) ?
+            (*inputDicts)[ x ]->prefixMatch( allWordWritings[ y ], requestedMaxResults ) :
+            (*inputDicts)[ x ]->stemmedMatch( allWordWritings[ y ], stemmedMinLength, stemmedMaxSuffixVariation, requestedMaxResults );
+
+        connect( sr.get(), SIGNAL( finished() ),
+                 this, SLOT( requestFinished() ), Qt::QueuedConnection );
+
+        queuedRequests.push_back( sr );
+      }
+      catch( std::exception & e )
+      {
+        qWarning() << "Word \"" << inputWord << "\" search error (" << e.what() << ") in \""
+                   << QString::fromUtf8( (*inputDicts)[ x ]->getName().c_str() )
+                   << "\"";
+      }
     }
   }
 

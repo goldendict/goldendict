@@ -8,7 +8,6 @@
 #include "btreeidx.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
-#include "dprintf.hh"
 #include "indexedzip.hh"
 #include "filetype.hh"
 
@@ -16,6 +15,7 @@
 #include <string>
 #include <QFile>
 #include <QDir>
+#include <QDebug>
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -329,6 +329,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
            indexIsOldOrBad( indexFile ) )
       {
+        qDebug( "Zips: Building the index for dictionary: %s\n", i->c_str() );
+
         File::Class idx( indexFile, "wb" );
         IdxHeader idxHeader;
 
@@ -393,8 +395,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      FDPRINTF( stderr, "Zipped sounds pack reading failed: %s, error: %s\n",
-        i->c_str(), e.what() );
+      qWarning( "Zipped sounds pack reading failed: %s, error: %s\n",
+                i->c_str(), e.what() );
     }
   }
 

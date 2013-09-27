@@ -114,6 +114,11 @@ void WordList::updateMatchResults( bool finished )
                              20000 , QPixmap( ":/icons/error.png" ) );
   }
 
+  if( !results.empty() && results.front().first.isRightToLeft() )
+    setLayoutDirection( Qt::RightToLeft );
+  else
+    setLayoutDirection( Qt::LeftToRight );
+
   emit contentChanged();
 }
 

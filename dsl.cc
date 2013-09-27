@@ -1240,60 +1240,70 @@ void DslArticleRequest::run()
     wstring articleBody;
     unsigned headwordIndex;
 
-    dict.loadArticle( chain[ x ].articleOffset, wordCaseFolded, tildeValue,
-                      displayedHeadword, headwordIndex, articleBody );
-
-    if ( !articlesIncluded.insert( std::make_pair( chain[ x ].articleOffset,
-                                                   headwordIndex ) ).second )
-      continue; // We already have this article in the body.
-
-    dict.articleNom += 1;
-
-    if( displayedHeadword.empty() || isDslWs( displayedHeadword[ 0 ] ) )
-      displayedHeadword = word; // Special case - insided card
-
     string articleText, articleAfter;
 
-    articleText += "<span class=\"dsl_article\">";
-    articleText += "<div class=\"dsl_headwords\"";
-    if( dict.isFromLanguageRTL() )
-      articleText += " dir=\"rtl\"";
-    articleText += ">";
-
-    if( displayedHeadword.size() == 1 && displayedHeadword[0] == '<' )  // Fix special case - "<" header
-        articleText += "<";                                             // dslToHtml can't handle it correctly.
-    else
-      articleText += dict.dslToHtml( displayedHeadword );
-
-    /// After this may be expand button will be inserted
-
-    articleAfter += "</div>";
-
-    expandTildes( articleBody, tildeValue );
-
-    articleAfter += "<div class=\"dsl_definition\"";
-    if( dict.isToLanguageRTL() )
-      articleAfter += " dir=\"rtl\"";
-    articleAfter += ">";
-
-    articleAfter += dict.dslToHtml( articleBody );
-    articleAfter += "</div>";
-    articleAfter += "</span>";
-
-    if( dict.hasHiddenZones() )
+    try
     {
-      string prefix = "O" + dict.getId().substr( 0, 7 ) + "_" + QString::number( dict.articleNom ).toStdString();
-      string id1 = prefix + "_expand";
-      string id2 = prefix + "_opt_";
-      string button = "<img src=\"qrcx://localhost/icons/expand_opt.png\" class=\"hidden_expand_opt\" id=\"" + id1 +
-                      "\" onclick=\"gdExpandOptPart('" + id1 + "','" + id2 +"')\" alt=\"[+]\"/>";
-      if( articleText.compare( articleText.size() - 4, 4, "</p>" ) == 0 )
-        articleText.insert( articleText.size() - 4, " " + button );
-      else
-        articleText += button;
-    }
+      dict.loadArticle( chain[ x ].articleOffset, wordCaseFolded, tildeValue,
+                        displayedHeadword, headwordIndex, articleBody );
 
-    articleText += articleAfter;
+      if ( !articlesIncluded.insert( std::make_pair( chain[ x ].articleOffset,
+                                                     headwordIndex ) ).second )
+        continue; // We already have this article in the body.
+
+      dict.articleNom += 1;
+
+      if( displayedHeadword.empty() || isDslWs( displayedHeadword[ 0 ] ) )
+        displayedHeadword = word; // Special case - insided card
+
+      articleText += "<span class=\"dsl_article\">";
+      articleText += "<div class=\"dsl_headwords\"";
+      if( dict.isFromLanguageRTL() )
+        articleText += " dir=\"rtl\"";
+      articleText += ">";
+
+      if( displayedHeadword.size() == 1 && displayedHeadword[0] == '<' )  // Fix special case - "<" header
+          articleText += "<";                                             // dslToHtml can't handle it correctly.
+      else
+        articleText += dict.dslToHtml( displayedHeadword );
+
+      /// After this may be expand button will be inserted
+
+      articleAfter += "</div>";
+
+      expandTildes( articleBody, tildeValue );
+
+      articleAfter += "<div class=\"dsl_definition\"";
+      if( dict.isToLanguageRTL() )
+        articleAfter += " dir=\"rtl\"";
+      articleAfter += ">";
+
+      articleAfter += dict.dslToHtml( articleBody );
+      articleAfter += "</div>";
+      articleAfter += "</span>";
+
+      if( dict.hasHiddenZones() )
+      {
+        string prefix = "O" + dict.getId().substr( 0, 7 ) + "_" + QString::number( dict.articleNom ).toStdString();
+        string id1 = prefix + "_expand";
+        string id2 = prefix + "_opt_";
+        string button = "<img src=\"qrcx://localhost/icons/expand_opt.png\" class=\"hidden_expand_opt\" id=\"" + id1 +
+                        "\" onclick=\"gdExpandOptPart('" + id1 + "','" + id2 +"')\" alt=\"[+]\"/>";
+        if( articleText.compare( articleText.size() - 4, 4, "</p>" ) == 0 )
+          articleText.insert( articleText.size() - 4, " " + button );
+        else
+          articleText += button;
+      }
+
+      articleText += articleAfter;
+    }
+    catch( std::exception &ex )
+    {
+      qWarning( "DSL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+      articleText = string( "<span class=\"dsl_article\">" )
+                    + string( QObject::tr( "Article loading error" ).toUtf8().constData() )
+                    + "</span>";
+    }
 
     Mutex::Lock _( dataMutex );
 
@@ -1474,13 +1484,11 @@ void DslResourceRequest::run()
 
     hasAnyData = true;
   }
-  catch( File::Ex & )
+  catch( std::exception &ex )
   {
-    // No such resource -- we don't set the hasAnyData flag then
-  }
-  catch( Utf8::exCantDecode )
-  {
-    // Failed to decode some utf8 -- probably the resource name is no good
+    qWarning( "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+              resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
   finish();
@@ -1609,7 +1617,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // Building the index
         initializing.indexingDictionary( Utf8::encode( scanner.getDictionaryName() ) );
 
-        qDebug() << "Building the index for dictionary:"
+        qDebug() << "Dsl: Building the index for dictionary:"
                  << gd::toQString( scanner.getDictionaryName() );
 
         File::Class idx( indexFile, "wb" );
@@ -1671,7 +1679,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) || curString.empty() )
                 {
-                  FDPRINTF( stderr, "Warning: premature end of file %s\n", abrvFileName.c_str() );
+                  qWarning( "Warning: premature end of file %s\n", abrvFileName.c_str() );
                   eof = true;
                   break;
                 }
@@ -1723,8 +1731,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
           catch( std::exception & e )
           {
-            FDPRINTF( stderr, "Error reading abrv file %s: %s. Skipping it.\n",
-                     abrvFileName.c_str(), e.what() );
+            qWarning( "Error reading abrv file \"%s\", error: %s. Skipping it.\n",
+                      abrvFileName.c_str(), e.what() );
           }
         }
 
@@ -1757,7 +1765,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               if ( !isDslWs( curString[ x ] ) )
               {
-                FDPRINTF( stderr, "Warning: garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
+                qWarning( "Warning: garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
                 break;
               }
             }
@@ -1781,7 +1789,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           {
             if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) ) )
             {
-              FDPRINTF( stderr, "Warning: premature end of file %s\n", i->c_str() );
+              qWarning( "Warning: premature end of file %s\n", i->c_str() );
               break;
             }
 
@@ -1792,7 +1800,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             if ( isDslWs( curString[ 0 ] ) )
               break; // No more headwords
 
+#ifdef QT_DEBUG
             qDebug() << "Alt headword" << gd::toQString( curString );
+#endif
 
             processUnsortedParts( curString, true );
             expandTildes( curString, allEntryWords.front() );
@@ -1972,8 +1982,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      FDPRINTF( stderr, "DSL dictionary reading failed: %s:%u, error: %s\n",
-        i->c_str(), atLine, e.what() );
+      qWarning( "DSL dictionary reading failed: %s:%u, error: %s\n",
+                i->c_str(), atLine, e.what() );
     }
   }
 

@@ -964,7 +964,10 @@
     <QtTranslate Include="locale\ru_RU.ts" />
     <QtTranslate Include="locale\sk_SK.ts" />
     <QtTranslate Include="locale\sq_AL.ts" />
+    <QtTranslate Include="locale\sr_SR.ts" />
+	<QtTranslate Include="locale\sv_SE.ts" />
     <QtTranslate Include="locale\tg_TJ.ts" />
+    <QtTranslate Include="locale\tk_TM.ts" />
     <QtTranslate Include="locale\tr_TR.ts" />
     <QtTranslate Include="locale\uk_UA.ts" />
     <QtTranslate Include="locale\vi_VN.ts" />
@@ -1353,6 +1356,8 @@
     <Image Include="icons\icon32_zoomin.png" />
     <Image Include="icons\icon32_zoomout.png" />
     <Image Include="icons\icon_dsl_native.png" />
+    <Image Include="icons\playsound_color.png" />
+    <Image Include="icons\playsound_full.png" />
     <Image Include="icons\programicon.ico" />
     <Image Include="icons\programicon_old.ico" />
     <Image Include="icons\programicon_old.png" />

@@ -40,11 +40,11 @@
     </message>
     <message>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
+        <translation>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Založeno na Qt %1 (%2, %3 bit) </translation>
     </message>
 </context>
 <context>
@@ -83,19 +83,19 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Vítejte v programu  &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Práci s programem začněte v &lt;b&gt;Upravit|Slovníky&lt;/b&gt;, kde můžete přidat cesty ke složkám, kde budou vyhledávány soubory slovníků, nastavíte různé stránky Wikipedie a jiné zdroje, upravíte pořadí adresářů nebo vytvoříte skupiny slovníků.&lt;p&gt;Pak budete moci vyhledávat slovíčka! To můžete provádět v tomto okně použitím pasnelu vlevo, nebo můžete &lt;a href=&quot;Working with popup&quot;&gt;vyhledávat slova z jiných aktivních aplikací&lt;/a&gt;. &lt;p&gt;Upravení vlastností programu provedete v &lt;b&gt;Upravit|Předvolby&lt;/b&gt;. Všechna nastavení mají nápovědu, která vám pomůže v případě, že máte o něčem pochybnosti.&lt;p&gt;Budete-li potřebovat další pomoc, budete mít nějaké návrhy nebo jenom budete chtít vědět co si myslí jiní, budete vítání na stránkách &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskuse&lt;/a&gt; o programu.&lt;p&gt;Aktualizace programu hledejte na &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;jeho stránkách&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licencováno pod GPLv3 nebo novější.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Vítejte v programu  &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Práci s programem začněte v &lt;b&gt;Upravit|Slovníky&lt;/b&gt;, kde můžete přidat cesty ke složkám, kde budou vyhledávány soubory slovníků, nastavíte různé stránky Wikipedie a jiné zdroje, upravíte pořadí adresářů nebo vytvoříte skupiny slovníků.&lt;p&gt;Pak budete moci vyhledávat slovíčka! To můžete provádět v tomto okně použitím pasnelu vlevo, nebo můžete &lt;a href=&quot;Working with popup&quot;&gt;vyhledávat slova z jiných aktivních aplikací&lt;/a&gt;. &lt;p&gt;Upravení vlastností programu provedete v &lt;b&gt;Upravit|Předvolby&lt;/b&gt;. Všechna nastavení mají nápovědu, která vám pomůže v případě, že máte o něčem pochybnosti.&lt;p&gt;Budete-li potřebovat další pomoc, budete mít nějaké návrhy nebo jenom budete chtít vědět co si myslí jiní, budete vítání na stránkách &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;diskuse&lt;/a&gt; o programu.&lt;p&gt;Aktualizace programu hledejte na &lt;a href=&quot;http://goldendict.org/&quot;&gt;jeho stránkách&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licencováno pod GPLv3 nebo novější.</translation>
     </message>
     <message>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(obrázek)</translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozbalit článek</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbalit článek</translation>
     </message>
 </context>
 <context>
@@ -126,11 +126,11 @@
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozbalit článek</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbalit článek</translation>
     </message>
 </context>
 <context>
@@ -229,115 +229,116 @@
     </message>
     <message>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýr&amp;aznit vše</translation>
     </message>
     <message>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdroj</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Definice: %1</translation>
     </message>
     <message>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Odkazovaný audio program neexistuje.</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">VAROVÁNÍ: %1</translation>
+        <translation>VAROVÁNÍ: %1</translation>
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>Přid&amp;at &quot;%1&quot; do historie</translation>
     </message>
     <message>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Definice ze slovníku &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat &quot;%1&quot; na vstupní řádek</translation>
     </message>
     <message>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázek</translation>
     </message>
     <message>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat aktuální článek</translation>
     </message>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>CHYBA: %1</translation>
     </message>
     <message>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit zvuk</translation>
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvukové soubory (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Všechny soubory (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit obrázek</translation>
     </message>
     <message>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory obrázků (*.bmp *.jpg *.png *.tif);;Všechny soubory (*.*)</translation>
     </message>
     <message>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ulož&amp;it obrázek...</translation>
     </message>
     <message>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ul&amp;ožit zvuk...</translation>
     </message>
     <message>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuk TTS</translation>
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>VAROVÁNÍ: FFmpeg Audio Player: %1</translation>
     </message>
     <message>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat jako text</translation>
     </message>
     <message>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Projít</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Video: %1</translation>
     </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Běloruský přepis z latinky do cyrilice (klasická ortografie)</translation>
     </message>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Běloruský přepis z latinky do cyrilice (školní ortografie)</translation>
     </message>
     <message>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Běloruský přepis (vyrovnává rodíly mezi klasickou
+a školní ortografií v cyrilici)</translation>
     </message>
 </context>
 <context>
@@ -395,67 +396,68 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Slovníky:</translation>
     </message>
     <message>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sloučit skupiny podle zdrojového jazyka do &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sloučit skupiny podle cílového jazyka do &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit dvoustrannou skupinu překladů &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sloučit skupiny s &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepřidělený</translation>
     </message>
 </context>
 <context>
     <name>DictInfo</name>
     <message>
         <source>Total articles:</source>
-        <translation type="unfinished">Celkem článků:</translation>
+        <translation>Celkem článků:</translation>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation type="unfinished">Překládá z:</translation>
+        <translation>Překládá z:</translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation type="unfinished">Celkem slov:</translation>
+        <translation>Celkem slov:</translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation type="unfinished">Překládá do:</translation>
+        <translation>Překládá do:</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Soubory obsažené v tomto slovníku:</translation>
+        <translation>Soubory obsažené v tomto slovníku:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít složku</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit slovník</translation>
     </message>
     <message>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit slovník příkazem:
+%1</translation>
     </message>
 </context>
 <context>
@@ -477,23 +479,23 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace o slovníku</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit slovník</translation>
     </message>
     <message>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Pru&amp;h slovníků</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít složku slovníků</translation>
     </message>
     <message>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozšířit nabídku se všemi slovníky...</translation>
     </message>
 </context>
 <context>
@@ -535,7 +537,7 @@ between classic and school orthography in cyrillic)</source>
     <name>ExternalViewer</name>
     <message>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>název prohlížecího programu je prázdný</translation>
     </message>
 </context>
 <context>
@@ -720,23 +722,23 @@ between classic and school orthography in cyrillic)</source>
     <name>HistoryPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vy&amp;brané</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat vybrané</translation>
     </message>
     <message>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie:</translation>
     </message>
     <message>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost historie: %1 položek z maximálně %2</translation>
     </message>
 </context>
 <context>
@@ -2264,67 +2266,67 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradiční čínština</translation>
     </message>
     <message>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Zjednodušená čínština</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné</translation>
     </message>
     <message>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné zjednodušené čínské dialekty</translation>
     </message>
     <message>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné tradiční čínské dialekty</translation>
     </message>
     <message>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné východoevropské jazyky</translation>
     </message>
     <message>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné západoevropské jazyky</translation>
     </message>
     <message>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné ruské jazyky</translation>
     </message>
     <message>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné japonské jazyky</translation>
     </message>
     <message>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné pobaltské jazyky</translation>
     </message>
     <message>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné řecké jazyky</translation>
     </message>
     <message>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné korejské dialekty</translation>
     </message>
     <message>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné turecké dialekty</translation>
     </message>
     <message>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné thajské dialekty</translation>
     </message>
     <message>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamazight</translation>
     </message>
     <message>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
 </context>
 <context>
@@ -2338,7 +2340,7 @@ between classic and school orthography in cyrillic)</source>
     <name>Main</name>
     <message>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba v konfiguračním souboru. Pokračovat s výchozím nastavením?</translation>
     </message>
 </context>
 <context>
@@ -2517,7 +2519,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <source>F4</source>
@@ -2653,186 +2655,186 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová karta</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Složka s nas&amp;tavením</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Pruh &amp;nabídky</translation>
     </message>
     <message>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nalezeno ve slovnících:</translation>
     </message>
     <message>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít v seznamu karet</translation>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozhodli jste se skrýt pruh nabídky. Použijte %1 pro jeho zpětné zobrazení.</translation>
     </message>
     <message>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Zo&amp;brazit</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exportovat</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;krýt</translation>
     </message>
     <message>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovat historii do souboru</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Textové soubory (*.txt);;Všechny soubory (*.*)</translation>
     </message>
     <message>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Export historie byl dokončen</translation>
     </message>
     <message>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba exportu:</translation>
     </message>
     <message>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importovat</translation>
     </message>
     <message>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importovat historii ze souboru</translation>
     </message>
     <message>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba importu: neplatná data v souboru</translation>
     </message>
     <message>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Import historie byl dokončen</translation>
     </message>
     <message>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba importu: </translation>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace o slovníku</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit slovník</translation>
     </message>
     <message>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyhledávací pan&amp;el</translation>
     </message>
     <message>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel p&amp;ro procházení výsledků</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vytisknout náhled</translation>
     </message>
     <message>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Znovu p&amp;rojít soubory</translation>
     </message>
     <message>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nová karta</translation>
     </message>
     <message>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Vždy n&amp;ahoře</translation>
     </message>
     <message>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Vždy nahoře</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítko nabídky</translation>
     </message>
     <message>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zo&amp;brazit názvy v pruhu slovníků</translation>
     </message>
     <message>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazi&amp;t malé ikony v nástrojových lištách</translation>
     </message>
     <message>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>Procháze&amp;ní</translation>
     </message>
     <message>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavní okno je nastaveno vždy nahoře.</translation>
     </message>
     <message>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Panel historie</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>API pro zpřístupnění není povoleno</translation>
     </message>
     <message>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Článek, Kompletní (*.html)</translation>
     </message>
     <message>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Článek, Pouze HTML (*.html)</translation>
     </message>
     <message>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukládá se článek...</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít složku slovníků</translation>
     </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor slovníku byl změněn nebo poškozen</translation>
     </message>
     <message>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhalo načtení článku z %1, důvod: %2</translation>
     </message>
 </context>
 <context>
@@ -2865,7 +2867,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -2921,15 +2923,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Seřadit podle názvu</translation>
     </message>
     <message>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Seřadit podle jazyků</translation>
     </message>
 </context>
 <context>
@@ -3375,364 +3377,375 @@ ale mělo by podporovat většinu audio formátů.</translation>
     </message>
     <message>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte tuto volbu pokud chcete aby se zobrazoval pruh s kartami ikdyž je otevřena jenom jedna karta.</translation>
     </message>
     <message>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt jednu kartu</translation>
     </message>
     <message>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stisk ESC obvykle přepne na hlavní řádek překladu.
+S touto volbou ale sryje hlavní okno.</translation>
     </message>
     <message>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesa ESC skryje hlavní okno</translation>
     </message>
     <message>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat přeložené slovo do hlavního okna namísto zobrazení ve vyskakovacím okně</translation>
     </message>
     <message>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat přeložené slovo do hlavního okna</translation>
     </message>
     <message>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud toto povolíte, umožníte poslech výslovností ze slovníků
+online, jenž závisí na Flashi a jiných webových modulech.
+Aby tato volba fungovala,.modul musí být nainstalován.</translation>
     </message>
     <message>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Powolit webové moduly</translation>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Pok&amp;ročilé</translation>
     </message>
     <message>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Extra technologie vyskakovacího okna</translation>
     </message>
     <message>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokusit se použít technologiiI AccessibleEx pro získání slova pod kurzorem.
+Tato technologie pracuje pouze s některými programy které ji podporují
+ (např. Internet Explorer 9).
+Pokud takové programy nepoužíváte, nemusíte tuto volbu zapínat.</translation>
     </message>
     <message>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít &amp;IAccessibleEx </translation>
     </message>
     <message>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokusit se použít technologiiI UI Automation pro získání slova pod kurzorem.
+Tato technologie pracuje pouze s některými programy které ji podporují.
+Pokud takové programy nepoužíváte, nemusíte tuto volbu zapínat.</translation>
     </message>
     <message>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít &amp;UIAutomation</translation>
     </message>
     <message>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokusit se použít speciální zprávu GoldenDict pro získání slova pod kurzorem.
+Tato technologie pracuje pouze s některými programy které ji podporují.
+Pokud takové programy nepoužíváte, nemusíte tuto volbu zapínat.</translation>
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít zprávu &amp;GoldenDict</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl-Tab přepíná na naposled použité karty</translation>
     </message>
     <message>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie</translation>
     </message>
     <message>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapněte tuto volbu pro ukládání historie překládaných slov</translation>
     </message>
     <message>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukládat &amp;historii</translation>
     </message>
     <message>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Články</translation>
     </message>
     <message>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapněte tuto volbu aby byly vždy rozbalovány volitelné části článků</translation>
     </message>
     <message>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rozbalovat volitelné části</translation>
     </message>
     <message>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapněte tuto volbu pokud chcete vybírat slova jedním kliknutím myši</translation>
     </message>
     <message>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybírat slovo jedním kliknutím</translation>
     </message>
     <message>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Styl doplňku:</translation>
     </message>
     <message>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Určete maximální počet záznamů, jenž se má uchovávat v historii.</translation>
     </message>
     <message>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximální velikost historie:</translation>
     </message>
     <message>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Interval ukládání historie. Pokud nastaven na 0, historie bude uložena při ukončení.</translation>
     </message>
     <message>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit každých</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minut</translation>
     </message>
     <message>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Moderní</translation>
     </message>
     <message>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehrávat audio soubory přes FFmpeg(libav) a libao</translation>
     </message>
     <message>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít vlastní přehrávač</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Některé stránky detekují GoldenDict přes hlavičky HTTP a blokují jeho požadavky.
+Povolením této volby problém obejdete.</translation>
     </message>
     <message>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Neidentifikovat GoldenDict v lavičkách HTTP</translation>
     </message>
     <message>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte tuto volbu pro automatické sbalení článků</translation>
     </message>
     <message>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbalit čláky delší než</translation>
     </message>
     <message>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>symboly</translation>
     </message>
     <message>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravte tuto hodnotu abyste se vyhnuli velkým kontextovm nabídkám.</translation>
     </message>
     <message>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit slovníků kontextové nabídky:</translation>
     </message>
     <message>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Články delší než tato velikost budou sbaleny</translation>
     </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistý text</translation>
     </message>
     <message>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámý</translation>
     </message>
 </context>
 <context>
     <name>Programs::RunInstance</name>
     <message>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nebyl poskytnut název programu.</translation>
     </message>
     <message>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program spadnul.</translation>
     </message>
     <message>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program vrátil návratový kód %1.</translation>
     </message>
 </context>
 <context>
     <name>ProgramsModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Povoleno</translation>
+        <translation>Povoleno</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Jméno</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Příkazový řádek</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při načítání článku</translation>
     </message>
     <message>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při rekódování článku</translation>
     </message>
     <message>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhal avformat_alloc_context().</translation>
     </message>
     <message>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhal av_malloc().</translation>
     </message>
     <message>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhal avio_alloc_context().</translation>
     </message>
     <message>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhal avformat_open_input(): %1.</translation>
     </message>
     <message>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhal avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze najít najít proud audio.</translation>
     </message>
     <message>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodekc [id: %1] nenalezen.</translation>
     </message>
     <message>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhal avcodec_open2(): %1.</translation>
     </message>
     <message>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze najít použitelné výstupní audio zařízení.</translation>
     </message>
     <message>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodporovaný formát vzorku.</translation>
     </message>
     <message>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Selhal ao_open_live(): </translation>
     </message>
     <message>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Není ovladač.</translation>
     </message>
     <message>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento ovladač není aktivní výstupní zařízení.</translation>
     </message>
     <message>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Platná volba má neplatnou hodnotu.</translation>
     </message>
     <message>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze otevřít zařízení: %1, kanálů: %2, frekvence: %3, bitů: %4.</translation>
     </message>
     <message>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámá chyba.</translation>
     </message>
     <message>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhal avcodec_alloc_frame().</translation>
     </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
     <message>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledání-filtrování slovníků (Ctrl+F)</translation>
     </message>
     <message>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Rychlé hledání</translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazat hledání</translation>
     </message>
 </context>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>CHYBA: %1</translation>
     </message>
     <message>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při upkládání zdroje: </translation>
     </message>
     <message>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Odkázaný zdroj se nepovedlo stáhnout.</translation>
+        <translation>Odkázaný zdroj se nepovedlo stáhnout.</translation>
     </message>
 </context>
 <context>
@@ -3811,19 +3824,19 @@ Lze měnit jeho velikost a může s ním být i jinak manipulováno.</translatio
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat slovo do hlavního okna (Alt+W)</translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Zpět</translation>
+        <translation>Zpět</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Vpřed</translation>
+        <translation>Vpřed</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -3831,7 +3844,7 @@ Lze měnit jeho velikost a může s ním být i jinak manipulováno.</translatio
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -3846,7 +3859,7 @@ Lze měnit jeho velikost a může s ním být i jinak manipulováno.</translatio
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -4099,132 +4112,133 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programy</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit program &lt;b&gt;%1&lt;/b&gt; ze seznamu?</translation>
     </message>
     <message>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Běloruský přepis</translation>
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Získejte &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;vlastní klíč&lt;/a&gt;, nebo ponechte prázdné a použijte výchozí.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Případně použijte %GD1251% pro CP1251, %GDISO1%...%GDISO16% pro ISO 8859-1...ISO 8859-16, nebo
+%GDBIG5% pro Big-5, %GDBIG5HKSCS% pro Big5-HKSCS, %GDGBK% pro GBK a GB18030, %GDSHIFTJIS% pro Shift-JIS.</translation>
     </message>
     <message>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuková syntéza</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny externí programy. Řetězec %GDWORD% bude nahrazen hledaným slovem. Pokud takový řetězec nebude předán, slovo bude posláno na standardní vstup.</translation>
     </message>
 </context>
 <context>
     <name>StylesComboBox</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">Žádná</translation>
+        <translation>Žádná</translation>
     </message>
 </context>
 <context>
     <name>TextToSpeechSource</name>
     <message>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolené syntetizátory hlasu:</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přid&amp;at</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">Odeb&amp;rat</translation>
+        <translation>Odeb&amp;rat</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled</translation>
     </message>
     <message>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedostupné syntetizátory hlasu:</translation>
     </message>
     <message>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Text pro náhled:</translation>
     </message>
     <message>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde napište text, jenž poslouží jako náhled.</translation>
     </message>
     <message>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhle&amp;d</translation>
     </message>
     <message>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Není dostupný hlas TTS</translation>
     </message>
     <message>
         <source>Confirm removal</source>
-        <translation type="unfinished">Potvrdit odebrání</translation>
+        <translation>Potvrdit odebrání</translation>
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit syntetizátor vlasu &lt;b&gt;%1&lt;/b&gt; ze seznamu?</translation>
     </message>
     <message>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze najít dostupný hlas TTS.&lt;br&gt;Prosím, ujistěte se, že aspoň jeden hlas TTS je již na vašem počítači nainstalován.</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Předvolby</translation>
+        <translation>Předvolby</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasitost:</translation>
     </message>
     <message>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzorkovací frekvence:</translation>
     </message>
 </context>
 <context>
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Napište slovo nebo frázi pro hledání ve slovnících</translation>
     </message>
     <message>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozbalovací</translation>
     </message>
 </context>
 <context>
     <name>VoiceEnginesModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Povoleno</translation>
+        <translation>Povoleno</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Jméno</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -4243,7 +4257,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -4257,7 +4271,7 @@ p, li { white-space: pre-wrap; }
     <name>WordList</name>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">VAROVÁNÍ: %1</translation>
+        <translation>VAROVÁNÍ: %1</translation>
     </message>
 </context>
 </TS>

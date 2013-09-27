@@ -1623,7 +1623,16 @@ void ArticleView::pasteTriggered()
                   QApplication::clipboard()->text() ) ) );
 
   if ( text.size() )
-    showDefinition( text, getGroup( ui.definition->url() ), getCurrentArticle() );
+  {
+    unsigned groupId = getGroup( ui.definition->url() );
+    if ( groupId == 0 )
+    {
+      // We couldn't figure out the group out of the URL,
+      // so let's try the currently selected group.
+      groupId = groupComboBox->getCurrentGroup();
+    }
+    showDefinition( text, groupId, getCurrentArticle() );
+  }
 }
 
 void ArticleView::moveOneArticleUp()

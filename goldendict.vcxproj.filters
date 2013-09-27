@@ -1547,6 +1547,15 @@
     <QtTranslate Include="locale\zh_TW.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
+    <QtTranslate Include="locale\sr_SR.ts">
+      <Filter>Translations</Filter>
+    </QtTranslate>
+    <QtTranslate Include="locale\sv_SE.ts">
+      <Filter>Translations</Filter>
+    </QtTranslate>
+    <QtTranslate Include="locale\tk_TM.ts">
+      <Filter>Translations</Filter>
+    </QtTranslate>
   </ItemGroup>
   <ItemGroup>
     <QtMOCCompile Include="qtsingleapplication\src\qtlocalpeer.h">
@@ -1919,6 +1928,12 @@
       <Filter>Resources\Icons</Filter>
     </Image>
     <Image Include="icons\programicon_old.png">
+      <Filter>Resources\Icons</Filter>
+    </Image>
+    <Image Include="icons\playsound_color.png">
+      <Filter>Resources\Icons</Filter>
+    </Image>
+    <Image Include="icons\playsound_full.png">
       <Filter>Resources\Icons</Filter>
     </Image>
   </ItemGroup>

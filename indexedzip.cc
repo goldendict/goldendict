@@ -8,6 +8,8 @@
 #include "utf8.hh"
 #include "iconv.hh"
 
+#include <QDebug>
+
 using namespace BtreeIndexing;
 using std::vector;
 
@@ -135,8 +137,8 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
     {
       if ( entry.compressionMethod == ZipFile::Unsupported )
       {
-        DPRINTF( "Warning: compression method unsupported -- skipping file %s\n",
-                entry.fileName.data() );
+        qWarning( "Zip warning: compression method unsupported -- skipping file \"%s\"\n",
+                  entry.fileName.data() );
         continue;
       }
 

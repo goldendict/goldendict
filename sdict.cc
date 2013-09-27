@@ -25,6 +25,7 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 #include <QRegExp>
+#include <QDebug>
 
 #include "ufile.hh"
 #include "qt4x5.hh"
@@ -49,9 +50,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX_STR( exWordIsTooLarge, "Enountered a word that is too large:", Dictionary::Ex )
 DEF_EX_STR( exSuddenEndOfFile, "Sudden end of file", Dictionary::Ex )
 
-#ifdef _MSC_VER
 #pragma pack( push, 1 )
-#endif
 
 /// DCT file header
 struct DCT_header
@@ -109,9 +108,7 @@ __attribute__((packed))
 #endif
 ;
 
-#ifdef _MSC_VER
-#pragma pack( pop, 1 )
-#endif
+#pragma pack( pop )
 
 bool indexIsOldOrBad( string const & indexFile )
 {
@@ -468,25 +465,33 @@ void SdictArticleRequest::run()
     string headword, articleText;
 
     headword = chain[ x ].word;
-    dict.loadArticle( chain[ x ].articleOffset, articleText );
 
-    // Ok. Now, does it go to main articles, or to alternate ones? We list
-    // main ones first, and alternates after.
+    try
+    {
+      dict.loadArticle( chain[ x ].articleOffset, articleText );
 
-    // We do the case-folded comparison here.
+      // Ok. Now, does it go to main articles, or to alternate ones? We list
+      // main ones first, and alternates after.
 
-    wstring headwordStripped =
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+      // We do the case-folded comparison here.
 
-    multimap< wstring, pair< string, string > > & mapToUse =
-      ( wordCaseFolded == headwordStripped ) ?
-        mainArticles : alternateArticles;
+      wstring headwordStripped =
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
 
-    mapToUse.insert( pair< wstring, pair< string, string > >(
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-      pair< string, string >( headword, articleText ) ) );
+      multimap< wstring, pair< string, string > > & mapToUse =
+        ( wordCaseFolded == headwordStripped ) ?
+          mainArticles : alternateArticles;
 
-    articlesIncluded.insert( chain[ x ].articleOffset );
+      mapToUse.insert( pair< wstring, pair< string, string > >(
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+        pair< string, string >( headword, articleText ) ) );
+
+      articlesIncluded.insert( chain[ x ].articleOffset );
+    }
+    catch( std::exception &ex )
+    {
+      qWarning( "SDict: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+    }
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
@@ -571,6 +576,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         try
         {
+          qDebug( "SDict: Building the index for dictionary: %s\n", i->c_str() );
+
           File::Class df( *i, "rb" );
 
           DCT_header dictHeader;
@@ -578,7 +585,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           df.read( &dictHeader, sizeof(dictHeader) );
           if( strncmp( dictHeader.signature, "sdct", 4 ) )
           {
-              DPRINTF( "File %s is not valid sdictionary file", i->c_str() );
+              qWarning( "File \"%s\" is not valid SDictionary file", i->c_str() );
               continue;
           }
           int compression = dictHeader.compression & 0x0F;
@@ -675,13 +682,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         }
         catch( std::exception & e )
         {
-          FDPRINTF( stderr, "Sdictionary dictionary indexing failed: %s, error: %s\n",
-            i->c_str(), e.what() );
+          qWarning( "Sdictionary dictionary indexing failed: %s, error: %s\n",
+                    i->c_str(), e.what() );
           continue;
         }
         catch( ... )
         {
-          FDPRINTF( stderr, "Sdictionary dictionary indexing failed\n" );
+          qWarning( "Sdictionary dictionary indexing failed\n" );
           continue;
         }
       } // if need to rebuild

@@ -17,7 +17,7 @@ public:
 
   DEF_EX( Ex, "Iconv exception", std::exception )
   DEF_EX_STR( exCantInit, "Can't initialize iconv conversion:", Ex )
-  DEF_EX( exIncorrectSeq, "Invalid character sequence encountered during character convesion", Ex )
+  DEF_EX( exIncorrectSeq, "Invalid character sequence encountered during character conversion", Ex )
   DEF_EX( exPrematureEnd, "Character sequence ended prematurely during character conversion", Ex )
   DEF_EX_STR( exOther, "An error has occured during character conversion:", Ex )
 

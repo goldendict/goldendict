@@ -454,6 +454,12 @@ div.xdxf
   vertical-align: text-bottom;
 }
 
+.dsl_s_wav img
+{
+  /* Ugly hack since "vertical-align: middle;" looks _terrible_ in Qt4's webkit: */
+  vertical-align: -30%;
+}
+
 .dsl_video .img
 {
   display: inline-block;
@@ -483,6 +489,14 @@ div.xdxf
 {
   text-decoration: none;
   color: inherit;
+}
+
+/************* Zim dictionaries **************/
+
+.zimdict_headword
+{
+  font-weight: bold!important;
+/*  font-size: 150%; */
 }
 
 /************* Spelling suggestions *****************/

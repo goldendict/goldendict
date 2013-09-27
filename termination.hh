@@ -4,6 +4,10 @@
 #ifndef TERMINATION_HH
 #define TERMINATION_HH
 
+#include <QFile>
+
+extern QFile logFile;
+
 // Installs the termination handler which attempts to pop Qt's dialog showing
 // the exception and backtrace, and then aborts.
 void installTerminationHandler();

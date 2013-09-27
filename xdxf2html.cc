@@ -13,6 +13,7 @@
 #include "filetype.hh"
 #include "htmlescape.hh"
 #include "qt4x5.hh"
+#include <QDebug>
 
 namespace Xdxf2Html {
 
@@ -122,8 +123,8 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
   if( !dd.setContent( QByteArray( in_data.c_str() ), false, &errorStr, &errorLine, &errorColumn  ) )
   {
-    FDPRINTF( stderr, "Xdxf2html error, xml parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
-    FDPRINTF( stderr, "The input was: %s\n", in.c_str() );
+    qWarning( "Xdxf2html error, xml parse failed: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
+    qWarning( "The input was: %s\n", in.c_str() );
 
     return in;
   }

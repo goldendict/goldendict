@@ -1011,6 +1011,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
          indexIsOldOrBad( dictFiles, indexFile ) )
     {
       // Building the index
+
+      qDebug( "MDict: Building the index for dictionary: %s\n", i->c_str() );
+
       MdictParser parser;
       list< sptr< MdictParser > > mddParsers;
 
@@ -1028,7 +1031,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
           sptr< MdictParser > mddParser = new MdictParser();
           if ( !mddParser->open( mddIter->c_str() ) )
           {
-            FDPRINTF( stderr, "Warning: Broken mdd (resource) file: %s\n", mddIter->c_str() );
+            qWarning( "Warning: Broken mdd (resource) file: %s\n", mddIter->c_str() );
             continue;
           }
           mddParsers.push_back( mddParser );

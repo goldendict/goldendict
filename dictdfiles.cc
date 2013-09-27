@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include "dprintf.hh"
 
+#include <QDebug>
+
 #ifdef _MSC_VER
 #include <stub_msvc.h>
 #endif
@@ -397,6 +399,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         // Building the index
         string dictionaryName = nameFromFileName( dictFiles[ 0 ] );
+
+        qDebug( "DictD: Building the index for dictionary: %s\n", dictionaryName.c_str() );
+
         initializing.indexingDictionary( dictionaryName );
 
         File::Class idx( indexFile, "wb" );
@@ -541,8 +546,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      FDPRINTF( stderr, "Dictd dictionary reading failed: %s, error: %s\n",
-        i->c_str(), e.what() );
+      qWarning( "Dictd dictionary \"%s\" reading failed, error: %s\n",
+                i->c_str(), e.what() );
     }
   }
 

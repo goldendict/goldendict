@@ -22,6 +22,7 @@
 #include <vorbis/vorbisfile.h>
 #include <QDir>
 #include <QUrl>
+#include <QDebug>
 
 #include "qt4x5.hh"
 
@@ -463,7 +464,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
 
     if ( result <= 0 )
     {
-      FDPRINTF( stderr, "Warning: failed to read Vorbis data (code = %ld)\n", result );
+      qWarning( "Warning: failed to read Vorbis data (code = %ld)\n", result );
       memset( ptr, 0, left );
       break;
     }
@@ -548,6 +549,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         // Building the index
 
+        qDebug( "Lsa: Building the index for dictionary: %s\n", i->c_str() );
+
         initializing.indexingDictionary( FsEncoding::basename( *i ) );
 
         File::Class idx( indexFile, "wb" );
@@ -623,8 +626,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      FDPRINTF( stderr, "Lingo's LSA reading failed: %s, error: %s\n",
-        i->c_str(), e.what() );
+      qWarning( "Lingvo's LSA reading failed: %s, error: %s\n",
+                 i->c_str(), e.what() );
     }
   }
 

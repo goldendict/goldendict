@@ -27,7 +27,7 @@ const UINT WM_MY_SHOW_TRANSLATION = WM_USER + 301;
 static wchar_t className[] = L"GoldenDictMouseover";
 typedef BOOL ( WINAPI  *ChangeWindowMessageFilterFunc )( UINT, DWORD );
 
-#if WINVER < 0x0601
+#ifndef _MSC_VER
 typedef struct tagCHANGEFILTERSTRUCT {
   DWORD cbSize;
   DWORD ExtStatus;

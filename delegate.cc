@@ -14,6 +14,16 @@ void WordListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem 
   QStyleOptionViewItem opt = option;
   initStyleOption( &opt4, index );
   if( opt4.text.isRightToLeft() )
+  {
     opt.direction = Qt::RightToLeft;
+    if( opt4.textElideMode != Qt::ElideNone )
+      opt.textElideMode = Qt::ElideLeft;
+  }
+  else
+  {
+    opt.direction = Qt::LeftToRight;
+    if( opt4.textElideMode != Qt::ElideNone )
+      opt.textElideMode = Qt::ElideRight;
+  }
   mainDelegate->paint( painter, opt, index );
 }

@@ -63,18 +63,26 @@ win32 {
         LIBS += -lshell32 -luser32 -lsapi -lole32 -lhunspell
         HUNSPELL_LIB = hunspell
     } else {
-        LIBS += -L$${PWD}/winlibs/lib
+        CONFIG(gcc48) {
+            LIBS += -L$${PWD}/winlibs/lib32-48
+        } else {
+            LIBS += -L$${PWD}/winlibs/lib
+        }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 	
 	isEmpty(HUNSPELL_LIB) {
-          greaterThan(QT_MAJOR_VERSION, 4) {
-            lessThan(QT_MINOR_VERSION, 1) {
-              LIBS += -lhunspell-1.3-sjlj
-            } else {
-              LIBS += -lhunspell-1.3-dw2
-            }
-          } else {
+          CONFIG(gcc48) {
             LIBS += -lhunspell-1.3.2
+          } else {
+            greaterThan(QT_MAJOR_VERSION, 4) {
+              lessThan(QT_MINOR_VERSION, 1) {
+                LIBS += -lhunspell-1.3-sjlj
+              } else {
+                LIBS += -lhunspell-1.3-dw2
+              }
+            } else {
+              LIBS += -lhunspell-1.3.2
+            }
           }
         } else {
           LIBS += -l$$HUNSPELL_LIB
@@ -108,6 +116,8 @@ win32 {
     Release:DEFINES += NO_CONSOLE
 
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
+
+    CONFIG += zim_support
 }
 
 unix:!mac {
@@ -181,10 +191,13 @@ mac {
                          macmouseover.mm \
                          speechclient_mac.mm
     ICON = icons/macicon.icns
+    QMAKE_INFO_PLIST = myInfo.plist
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
                       cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
                       cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/
+
+    CONFIG += zim_support
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
@@ -290,6 +303,7 @@ HEADERS += folding.hh \
     ffmpegaudio.hh \
     articleinspector.hh \
     delegate.hh \
+    zim.hh \
     qt4x5.hh
 
 FORMS += groups.ui \
@@ -399,7 +413,8 @@ SOURCES += folding.cc \
     voiceengines.cc \
     ffmpegaudio.cc \
     articleinspector.cc \
-    delegate.cc
+    delegate.cc \
+    zim.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui
@@ -427,6 +442,11 @@ mac {
                speechclient.hh
     FORMS   += texttospeechsource.ui
     SOURCES += texttospeechsource.cc
+}
+
+CONFIG( zim_support ) {
+  DEFINES += MAKE_ZIM_SUPPORT
+  LIBS += -llzma
 }
 
 RESOURCES += resources.qrc \
@@ -459,7 +479,10 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/be_BY@latin.ts \
     locale/fr_FR.ts \
     locale/ko_KR.ts \
-    locale/nl_NL.ts
+    locale/nl_NL.ts \
+    locale/sr_SR.ts \
+    locale/sv_SE.ts \
+    locale/tk_TM.ts
 
 # Build version file
 !isEmpty( hasGit ) {
