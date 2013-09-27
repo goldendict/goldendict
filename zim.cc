@@ -14,6 +14,7 @@
 #include "wstring_qt.hh"
 #include "filetype.hh"
 #include "file.hh"
+#include "qt4x5.hh"
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -680,7 +681,7 @@ void ZimArticleRequestRunnable::run()
 
 void ZimArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -707,7 +708,7 @@ void ZimArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -879,7 +880,7 @@ void ZimResourceRequestRunnable::run()
 void ZimResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

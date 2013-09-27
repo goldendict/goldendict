@@ -33,9 +33,22 @@
 
 QFile logFile;
 
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
+
+void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &mess )
+{
+  Q_UNUSED( context );
+  QString message( mess );
+  const char * msg = message.toUtf8().constData();
+
+#else
+
 void gdMessageHandler( QtMsgType type, const char *msg )
 {
   QString message = QString::fromUtf8( msg );
+
+#endif
+
   switch (type) {
 
     case QtDebugMsg:
@@ -223,7 +236,11 @@ int main( int argc, char ** argv )
     logFile.open( QFile::ReadWrite );
 
     // Install message handler
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
+    qInstallMessageHandler( gdMessageHandler );
+#else
     qInstallMsgHandler( gdMessageHandler );
+#endif
   }
 
 
