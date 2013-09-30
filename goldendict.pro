@@ -64,7 +64,13 @@ win32 {
         HUNSPELL_LIB = hunspell
     } else {
         CONFIG(gcc48) {
-            LIBS += -L$${PWD}/winlibs/lib32-48
+            x64 {
+                LIBS += -L$${PWD}/winlibs/lib64-48
+                QMAKE_CXXFLAGS += -m64
+                QMAKE_CFLAGS += -m64
+            } else {
+                LIBS += -L$${PWD}/winlibs/lib32-48
+            }
         } else {
             LIBS += -L$${PWD}/winlibs/lib
         }
