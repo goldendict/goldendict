@@ -828,7 +828,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</translation>
+        <translation>Süýre&amp;taşla sözlükleri toparyň içine ýa-da daşyna, myşkanyň kömegi bilen toparyň içinde ýerlerini ýa-da tertibini üýtget.</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="108"/>
@@ -2668,7 +2668,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</translation>
+        <translation>Içine zatlary süýräp we taşlap tertibini üýtgedip bolýar. Sözlükleri öçürmek üçin, olary aktiw däl toparyna taşlamaly.</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
@@ -3930,7 +3930,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="536"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</translation>
+        <translation>Dil kodlarynyň doly sanawy bar &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="578"/>
@@ -3976,8 +3976,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="693"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation>The most widely used method of transcription of Japanese,
-based on English phonology</translation>
+        <translation> Ýapon diliniň iňlis fonologiýasynda iň köp ulanylýan transkripsiýa usuly. </translation>
     </message>
     <message>
         <location filename="../sources.ui" line="697"/>
@@ -3990,10 +3989,9 @@ based on English phonology</translation>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>The most regular system, having a one-to-one relation to the
-kana writing systems. Standardized as ISO 3602
+        <translation> Iň tertipli sistemasy, kana ýazylyş sistemalara brimeňzeşlik gatnaşygy bar. ISO 3602 boýunça standartlaşdyrlan.
 
-Not implemented yet in GoldenDict.</translation>
+Entek GoldenDict-de edilmedik.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="713"/>
@@ -4006,10 +4004,10 @@ Not implemented yet in GoldenDict.</translation>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Based on Nihon-shiki system, but modified for modern standard Japanese.
-Standardized as ISO 3602
+        <translation>Nihon-şiki sistemasyna esaslanýar, ýöne häzirki zaman adaty Ýapon dili üçin üýtgedilen görnüşindedir.
+ISO 3602 boýunça standartlaşdyrlan.
 
-Not implemented yet in GoldenDict.</translation>
+Entek GoldenDict-de edilmedik.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="729"/>
