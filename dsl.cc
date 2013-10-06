@@ -680,18 +680,7 @@ string DslDictionary::dslToHtml( wstring const & str )
 
   string html = processNodeChildren( dom.root );
 
-  // Lines seem to indicate paragraphs in Dsls, so we enclose each line within
-  // a <p></p>.
-
-  for( size_t x = html.size(); x--; )
-    if ( html[ x ] == '\n' )
-      html.insert( x + 1, "</p><p>" );
-
-  return
-#if 0 // Enable this to enable dsl source in html as a comment
-      "<!-- DSL Source:\n" + Utf8::encode( str ) + "\n-->"
-#endif
-         "<p>" + html + "</p>";
+  return html;
 }
 
 string DslDictionary::processNodeChildren( ArticleDom::Node const & node )
@@ -706,10 +695,26 @@ string DslDictionary::processNodeChildren( ArticleDom::Node const & node )
 }
 string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 {
-  if ( !node.isTag )
-    return Html::escape( Utf8::encode( node.text ) );
-
   string result;
+
+  if ( !node.isTag )
+  {
+    result = Html::escape( Utf8::encode( node.text ) );
+
+    // Handle all end-of-line
+
+    string::size_type n;
+
+    // Strip all '\r'
+    while( ( n = result.find( '\r' ) ) != string::npos )
+      result.erase( n, 1 );
+
+    // Replace all '\n'
+    while( ( n = result.find( '\n' ) ) != string::npos )
+      result.replace( n, 1, "<p></p>" );
+
+    return result;
+  }
 
   if ( node.tagName == GD_NATIVE_TO_WS( L"b" ) )
     result += "<b class=\"dsl_b\">" + processNodeChildren( node ) + "</b>";
