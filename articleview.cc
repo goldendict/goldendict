@@ -863,30 +863,39 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       if ( activeDicts )
         for( unsigned x = 0; x < activeDicts->size(); ++x )
         {
-          sptr< Dictionary::DataRequest > req =
-            (*activeDicts)[ x ]->getResource(
-              url.path().mid( 1 ).toUtf8().data() );
-
-          if ( req->isFinished() && req->dataSize() >= 0 )
+          try
           {
-            // A request was instantly finished with success.
-            // If we've managed to spawn some lingering requests already,
-            // erase them.
-            resourceDownloadRequests.clear();
+            sptr< Dictionary::DataRequest > req =
+              (*activeDicts)[ x ]->getResource(
+                url.path().mid( 1 ).toUtf8().data() );
 
-            // Handle the result
-            resourceDownloadRequests.push_back( req );
-            resourceDownloadFinished();
+            if ( req->isFinished() && req->dataSize() >= 0 )
+            {
+              // A request was instantly finished with success.
+              // If we've managed to spawn some lingering requests already,
+              // erase them.
+              resourceDownloadRequests.clear();
 
-            return;
+              // Handle the result
+              resourceDownloadRequests.push_back( req );
+              resourceDownloadFinished();
+
+              return;
+            }
+            else
+            if ( !req->isFinished() )
+            {
+              resourceDownloadRequests.push_back( req );
+
+              connect( req.get(), SIGNAL( finished() ),
+                       this, SLOT( resourceDownloadFinished() ) );
+            }
           }
-          else
-          if ( !req->isFinished() )
+          catch( std::exception & e )
           {
-            resourceDownloadRequests.push_back( req );
-
-            connect( req.get(), SIGNAL( finished() ),
-                     this, SLOT( resourceDownloadFinished() ) );
+            emit statusBarMessage(
+                  tr( "ERROR: %1" ).arg( e.what() ),
+                  10000, QPixmap( ":/icons/error.png" ) );
           }
         }
     }
@@ -1039,11 +1048,19 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
       {
         for( unsigned x = 0; x < activeDicts->size(); ++x )
         {
-          req = (*activeDicts)[ x ]->getResource(
-                  url.path().mid( 1 ).toUtf8().data() );
+          try
+          {
+            req = (*activeDicts)[ x ]->getResource(
+                    url.path().mid( 1 ).toUtf8().data() );
 
-          ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
-          handlers.push_back( handler );
+            ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
+            handlers.push_back( handler );
+          }
+          catch( std::exception & e )
+          {
+            qWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
+                       (*activeDicts)[ x ]->getName().c_str() );
+          }
         }
       }
     }
