@@ -1070,8 +1070,11 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
       QString contentType;
       req = articleNetMgr.getResource( url, contentType );
 
-      ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
-      handlers.push_back( handler );
+      if( req.get() )
+      {
+        ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
+        handlers.push_back( handler );
+      }
     }
   }
   else
