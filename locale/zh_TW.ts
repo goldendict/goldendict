@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>GoldenDict 電子詞典程式，版本 </translation>
+        <translation>GoldenDict 查字典程式，版本 </translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
@@ -25,22 +25,22 @@
     </message>
     <message>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
+        <translation>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>基於 QT %1(%2, %3 bit)</translation>
     </message>
 </context>
 <context>
     <name>ArticleMaker</name>
     <message>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>然後只要將滑鼠指標停留在你想要進行抓詞查詢的單字上，程式就會在蹦現式視窗中顯示釋義。</translation>
+        <translation>然後只要將滑鼠游標停留在你想要進行查詢的單字上，程式就會在彈出式視窗中顯示釋義。</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;使用螢幕取詞功能&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;如要從其它程式中直接進行抓詞查詢，請先在&lt;b&gt;選項&lt;/b&gt;中啟用「螢幕取詞功能」，接著按上面的「彈出功能表」圖示，或是右鍵按系統匣圖示後從彈出功能表中選定「螢幕取詞」以啟動此功能。</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;使用螢幕取詞功能&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;如要從其它程式中直接抓詞查詢，請先在&lt;b&gt;偏好設定&lt;/b&gt;中啟用「螢幕取詞功能」，接著按一下主視窗的「螢幕取詞」圖示，或在系統匣圖示上按右鍵，從選單中選定「螢幕取詞」以啟動此功能。</translation>
     </message>
     <message>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>然後只要用滑鼠指標選定你要進行抓詞查詢的詞（按兩下單字或是用滑鼠拖拉選定），程式就會在蹦現式視窗中顯示釋義。</translation>
+        <translation>然後只要用滑鼠游標選定你要進行抓詞查詢的詞（按兩下單字或是用滑鼠拖拉選定），程式就會在彈出式視窗中顯示釋義。</translation>
     </message>
     <message>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
@@ -68,19 +68,19 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;歡迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 詞典程式！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用時請首先開啟&lt;b&gt;編輯 | 詞典&lt;/b&gt;功能表以新增並掃描含有詞典檔案的資料夾，然後新增維基百科網站查詢或其它資源，再調整詞典排序或建立新的詞典群組。&lt;p style=&quot;text-indent:2em&quot;&gt;這些設定都完成以後，就可以開始使用了。你可以使用左側的查詢面板，或是&lt;a href=&quot;使用螢幕取詞功能&quot;&gt;直接從其它程式中抓詞查詢&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要改變設定，可以在&lt;b&gt;編輯 | 選項&lt;/b&gt;功能表中檢視一下可用的系統設定。所有的設定都有滑鼠指標提示資訊，如果有不明之處，請仔細閱讀提示資訊。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要更多說明，有任何疑問、建議，或是僅僅想了解其他人的想法，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;官方論壇&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要取得程式更新的訊息，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/&quot;&gt;官方網站&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2013 Konstantin Isakov. 授權基於 GPLv3 或更高版本。</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;歡迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 查字典程式！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用時請首先開啟&lt;b&gt;編輯 | 字典&lt;/b&gt;功能表以新增並掃描含有字典檔案的資料夾，然後新增維基百科網站查詢或其它資源，再調整字典排序或建立新的字典群組。&lt;p style=&quot;text-indent:2em&quot;&gt;這些設定都完成以後，就可以開始使用了。你可以使用左側的查詢面板，或是&lt;a href=&quot;使用螢幕取詞功能&quot;&gt;直接從其它程式中抓詞查詢&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需自訂本程式，可以在&lt;b&gt;編輯 | 偏好設定&lt;/b&gt;功能表中檢視可用的設定。所有的設定都有滑鼠游標提示資訊，如果有不明之處，請看一下提示。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要更多說明、有任何疑問、建議，或是想了解其他人的想法，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;官方論壇&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要取得程式更新，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/&quot;&gt;官方網站&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2013 Konstantin Isakov. 授權基於 GPLv3 或更高版本。</translation>
     </message>
     <message>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(圖片)</translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>展開條目</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>收縮條目</translation>
     </message>
 </context>
 <context>
@@ -107,11 +107,11 @@
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>展開條目</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>收縮條目</translation>
     </message>
 </context>
 <context>
@@ -162,7 +162,7 @@
     </message>
     <message>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>在新標籤頁中尋找 &quot;%1&quot;(&amp;N)</translation>
+        <translation>在新分頁中尋找 &quot;%1&quot;(&amp;N)</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -190,11 +190,11 @@
     </message>
     <message>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>在 %2 中尋找 &quot;%1&quot; 並使用新標籤頁(&amp;N)</translation>
+        <translation>在 %2 中尋找 &quot;%1&quot; 並使用新分頁(&amp;N)</translation>
     </message>
     <message>
         <source>Open Link in New &amp;Tab</source>
-        <translation>在新標籤頁中開啟連結(&amp;T)</translation>
+        <translation>在新分頁中開啟連結(&amp;T)</translation>
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
@@ -206,119 +206,119 @@
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">要播放非 WAV 檔案，請進入 編輯|選項，選取音訊標籤，選擇「透過 DirectShow 播放」。</translation>
+        <translation type="obsolete">要播放非 WAV 檔案，請進入 編輯|偏好設定，選取音訊標籤，選擇「透過 DirectShow 播放」。</translation>
     </message>
     <message>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>全部醒目提示(&amp;a)</translation>
     </message>
     <message>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>資源</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>音訊</translation>
     </message>
     <message>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>定義： %1</translation>
     </message>
     <message>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>引用的音訊程式不存在。</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">警告： %1</translation>
+        <translation>警告： %1</translation>
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>將 &quot;%1&quot; 新增至歷史紀錄(&amp;A) </translation>
     </message>
     <message>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>字典 &quot;%1&quot; 的定義： %2</translation>
     </message>
     <message>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>把 &quot;%1&quot; 傳送到輸入列</translation>
     </message>
     <message>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>圖片</translation>
     </message>
     <message>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇目前條目</translation>
     </message>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>錯誤：%1</translation>
     </message>
     <message>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存發音</translation>
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>發音檔(*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有檔案 (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存圖片</translation>
     </message>
     <message>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>圖片檔(*.bmp *.jpg *.png *.tif);;所有檔案 (*.*) </translation>
     </message>
     <message>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存圖片...(&amp;i)</translation>
     </message>
     <message>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存發音...(&amp;o)</translation>
     </message>
     <message>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>文字轉語音聲音</translation>
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>警告： FFmpeg 音訊撥放程式： %1</translation>
     </message>
     <message>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>以純文字複製</translation>
     </message>
     <message>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>檢查原始碼</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>影像</translation>
     </message>
     <message>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>影像： %1</translation>
     </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>白俄羅斯語轉寫──拉丁文至斯拉夫字母(傳統正字法)</translation>
     </message>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>白俄羅斯語轉寫──拉丁文至斯拉夫字母(學院正字法)</translation>
     </message>
     <message>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>白俄羅斯語轉寫(消弭傳統正字法和學院正字法之間的差異)</translation>
     </message>
 </context>
 <context>
@@ -376,67 +376,68 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>字典： </translation>
     </message>
     <message>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>依來源語言合併分組至 &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>依目標語言合併分組至 &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>製作雙向翻譯組 &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>與 &quot;%1&quot; 合併分組</translation>
     </message>
     <message>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>未指定</translation>
     </message>
 </context>
 <context>
     <name>DictInfo</name>
     <message>
         <source>Total articles:</source>
-        <translation type="unfinished">文章總數：</translation>
+        <translation>條目總數：</translation>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation type="unfinished">詞條語言：</translation>
+        <translation>翻譯自：</translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation type="unfinished">詞條總數：</translation>
+        <translation>總字數：</translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation type="unfinished">釋義語言：</translation>
+        <translation>翻譯至：</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">此詞典包含的檔案：</translation>
+        <translation>此字典包含的檔案：</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>描述：</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>打開資料夾</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯字典</translation>
     </message>
     <message>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>以指令編輯字典：
+%1</translation>
     </message>
 </context>
 <context>
@@ -450,7 +451,7 @@ between classic and school orthography in cyrillic)</source>
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
-        <translation type="obsolete">詞典欄</translation>
+        <translation type="obsolete">字典欄</translation>
     </message>
     <message>
         <source>Edit this group</source>
@@ -458,34 +459,34 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>字典資訊</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯字典</translation>
     </message>
     <message>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>字典欄(&amp;D)</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>打開字典資料夾</translation>
     </message>
     <message>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>展開所有字典的選單...</translation>
     </message>
 </context>
 <context>
     <name>EditDictionaries</name>
     <message>
         <source>&amp;Dictionaries</source>
-        <translation>詞典(&amp;D)</translation>
+        <translation>字典(&amp;D)</translation>
     </message>
     <message>
         <source>Dictionaries</source>
-        <translation>詞典</translation>
+        <translation>字典</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -497,11 +498,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Sources changed</source>
-        <translation>詞典檔案所在資料夾已變更</translation>
+        <translation>字典檔案所在資料夾已變更</translation>
     </message>
     <message>
         <source>&amp;Sources</source>
-        <translation>詞典來源(&amp;S)</translation>
+        <translation>字典來源(&amp;S)</translation>
     </message>
     <message>
         <source>&amp;Groups</source>
@@ -509,14 +510,14 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>某些詞典檔案的所在資料夾已變更，是否接受變更？</translation>
+        <translation>某些字典檔案的所在資料夾已變更，是否接受變更？</translation>
     </message>
 </context>
 <context>
     <name>ExternalViewer</name>
     <message>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>檢視程式的名稱是空白的</translation>
     </message>
 </context>
 <context>
@@ -547,7 +548,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>進入 編輯|詞典|詞典來源|Forvo, 申請自己的 API-key 來消除此錯誤。</translation>
+        <translation>進入 編輯|字典|字典來源|Forvo, 申請自己的 API-key 來消除此錯誤。</translation>
     </message>
 </context>
 <context>
@@ -602,7 +603,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Tab 2</source>
-        <translation>標籤頁 2</translation>
+        <translation>分頁 2</translation>
     </message>
     <message>
         <source>Are you sure you want to remove all the groups?</source>
@@ -626,7 +627,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionaries available:</source>
-        <translation>可用詞典：</translation>
+        <translation>可用字典：</translation>
     </message>
     <message>
         <source>&amp;Add group</source>
@@ -638,19 +639,19 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Create new dictionary group</source>
-        <translation>建立新的詞典群組</translation>
+        <translation>建立新的字典群組</translation>
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>可以用滑鼠拖曳詞典以改變其群組設定或排序。(&amp;D)</translation>
+        <translation>可以用滑鼠拖曳字典以改變其群組設定或排序(&amp;D)。</translation>
     </message>
     <message>
         <source>Rename current dictionary group</source>
-        <translation>重新命名當前詞典群組</translation>
+        <translation>重新命名當前字典群組</translation>
     </message>
     <message>
         <source>Remove current dictionary group</source>
-        <translation>移除詞典群組</translation>
+        <translation>移除字典群組</translation>
     </message>
     <message>
         <source>Give a name for the new group:</source>
@@ -662,11 +663,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>將所選詞典從群組中移除(Del)</translation>
+        <translation>將所選字典從群組中移除(Del)</translation>
     </message>
     <message>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>將所選詞典新增進群組(Ins)</translation>
+        <translation>將所選字典新增進群組(Ins)</translation>
     </message>
     <message>
         <source>&amp;Remove group</source>
@@ -682,7 +683,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Remove all dictionary groups</source>
-        <translation>移除全部詞典群組</translation>
+        <translation>移除全部字典群組</translation>
     </message>
     <message>
         <source>Create language-based groups</source>
@@ -697,23 +698,23 @@ between classic and school orthography in cyrillic)</source>
     <name>HistoryPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除選擇的部分(&amp;D)</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>複製選擇的部分</translation>
     </message>
     <message>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>歷史紀錄：</translation>
     </message>
     <message>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>歷史紀錄的大小： %1 個條目，最多 %2 個</translation>
     </message>
 </context>
 <context>
@@ -742,7 +743,7 @@ between classic and school orthography in cyrillic)</source>
     <name>Initializing</name>
     <message>
         <source>Dictionary Name</source>
-        <translation>詞典名稱</translation>
+        <translation>字典名稱</translation>
     </message>
     <message>
         <source>GoldenDict - Initializing</source>
@@ -750,7 +751,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Please wait while indexing dictionary</source>
-        <translation>正在索引詞典，請稍候</translation>
+        <translation>正在索引字典，請稍候</translation>
     </message>
     <message>
         <source>Please wait...</source>
@@ -1341,7 +1342,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Chinese</source>
-        <translation>漢語</translation>
+        <translation>中文</translation>
     </message>
     <message>
         <source>Chuvash</source>
@@ -1501,81 +1502,81 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>繁體中文</translation>
     </message>
     <message>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>簡體中文</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>其他</translation>
     </message>
     <message>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>其他簡體中文方言</translation>
     </message>
     <message>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>其他繁體中文方言</translation>
     </message>
     <message>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>其他東歐語言</translation>
     </message>
     <message>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>其他西歐語言</translation>
     </message>
     <message>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>其他俄羅斯文</translation>
     </message>
     <message>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>其他日文</translation>
     </message>
     <message>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>其他波羅的海語言</translation>
     </message>
     <message>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>其他希臘文</translation>
     </message>
     <message>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>其他韓文方言</translation>
     </message>
     <message>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>其他土耳其方言</translation>
     </message>
     <message>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>其他泰文方言</translation>
     </message>
     <message>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>塔馬齊格特語</translation>
     </message>
     <message>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>邏輯語</translation>
     </message>
 </context>
 <context>
     <name>LoadDictionaries</name>
     <message>
         <source>Error loading dictionaries</source>
-        <translation>讀取詞典出錯</translation>
+        <translation>讀取字典時出錯</translation>
     </message>
 </context>
 <context>
     <name>Main</name>
     <message>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>設定檔有問題，要使用預設的設定嗎？</translation>
     </message>
 </context>
 <context>
@@ -1590,7 +1591,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <source>F4</source>
@@ -1610,7 +1611,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
-        <translation>詞典數：%1，文章數：%2，詞條數：%3</translation>
+        <translation>字典數：%1，文章數：%2，詞條數：%3</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -1654,7 +1655,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation>詞典...(&amp;D)</translation>
+        <translation>字典...(&amp;D)</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -1767,7 +1768,9 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Loading...</source>
-        <translation>載入中……</translation>
+        <translation>載入中
+
+</translation>
     </message>
     <message>
         <source>(untitled)</source>
@@ -1775,7 +1778,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Preferences...</source>
-        <translation>選項...(&amp;P)</translation>
+        <translation>偏好設定...(&amp;P)</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
@@ -1823,7 +1826,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">在詞典欄中顯示詞典名稱</translation>
+        <translation type="obsolete">在字典欄中顯示字典名稱</translation>
     </message>
     <message>
         <source>H&amp;istory</source>
@@ -1851,202 +1854,202 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Close current tab</source>
-        <translation>關閉當前標籤頁</translation>
+        <translation>關閉當前分頁</translation>
     </message>
     <message>
         <source>Close all tabs</source>
-        <translation>關閉所有標籤頁</translation>
+        <translation>關閉所有分頁</translation>
     </message>
     <message>
         <source>Close all tabs except current</source>
-        <translation>關閉其它標籤頁</translation>
+        <translation>關閉其它分頁</translation>
     </message>
     <message>
         <source>Opened tabs</source>
-        <translation>已開啟的標籤頁</translation>
+        <translation>已開啟的分頁</translation>
     </message>
     <message>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>新分頁</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>設定檔資料夾(&amp;C)</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>選單列(&amp;M)</translation>
     </message>
     <message>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>在下列字典中找到：</translation>
     </message>
     <message>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>打開分頁列表</translation>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>您已隱藏選單列，可使用 %1 來顯示選單列。</translation>
     </message>
     <message>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示(&amp;S)</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出(&amp;E)</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>隱藏(&amp;H)</translation>
     </message>
     <message>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出歷史紀錄</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>文字檔 (*.txt);;所有檔案 (*.*)</translation>
     </message>
     <message>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>成功匯出歷史紀錄</translation>
     </message>
     <message>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>匯出失敗： </translation>
     </message>
     <message>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>匯入(&amp;I)</translation>
     </message>
     <message>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>匯入歷史紀錄</translation>
     </message>
     <message>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>匯入失敗： 檔案中無效的日期</translation>
     </message>
     <message>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>成功匯入歷史紀錄</translation>
     </message>
     <message>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>匯入失敗： </translation>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>字典資訊</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯字典</translation>
     </message>
     <message>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋列(&amp;S)</translation>
     </message>
     <message>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>結果導覽列(&amp;R)</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>預覽列印(&amp;v)</translation>
     </message>
     <message>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>重新掃描檔案(&amp;R)</translation>
     </message>
     <message>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>新分頁(&amp;N)</translation>
     </message>
     <message>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>最上層顯示(&amp;A)</translation>
     </message>
     <message>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>最上層顯示</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>選單按鈕</translation>
     </message>
     <message>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>在字典列中顯示字典名稱(&amp;B)</translation>
     </message>
     <message>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>在工具列中顯示小圖示(&amp;T)</translation>
     </message>
     <message>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>導覽(&amp;N)</translation>
     </message>
     <message>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>主視窗設定為最上層顯示。</translation>
     </message>
     <message>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>歷史紀錄(&amp;H)</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>未啟用協助存取 API</translation>
     </message>
     <message>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>條目，完整 (*.html)</translation>
     </message>
     <message>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>條目，僅HTML部分 (*.html)</translation>
     </message>
     <message>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存條目...</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>打開字典資料夾</translation>
     </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>字典檔案已遭竄改或已損壞</translation>
     </message>
     <message>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>從 %1 讀取條目時失敗，原因是： %2</translation>
     </message>
 </context>
 <context>
@@ -2079,7 +2082,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>圖示</translation>
     </message>
 </context>
 <context>
@@ -2094,7 +2097,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>未啟用（已禁用）的詞典：</translation>
+        <translation>未啟用（已禁用）的字典：</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2118,31 +2121,31 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>可以透過拖曳改變項目的排序。將詞典放入未啟用的群組以禁用。</translation>
+        <translation>可以透過拖曳改變項目的排序。將字典放入未啟用的群組以禁用。</translation>
     </message>
     <message>
         <source>Dictionary order:</source>
-        <translation>詞典排序：</translation>
+        <translation>字典排序：</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation>此詞典包含的檔案：</translation>
+        <translation>此字典包含的檔案：</translation>
     </message>
     <message>
         <source>Dictionary information</source>
-        <translation>詞典資訊</translation>
+        <translation>字典資訊</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>描述</translation>
     </message>
     <message>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>依名稱排序</translation>
     </message>
     <message>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>依語言排序</translation>
     </message>
 </context>
 <context>
@@ -2214,8 +2217,8 @@ between classic and school orthography in cyrillic)</source>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>在正常情況下，開啟一個新標籤頁將會自動將其選定。
-啟用此選項將會在開啟新標籤頁時不自動選定。</translation>
+        <translation type="unfinished">在正常情況下，會自動跳到開啟的新分頁。
+啟用此選項後，不會自動跳至開啟的新分頁。</translation>
     </message>
     <message>
         <source>Use proxy server</source>
@@ -2235,7 +2238,7 @@ switching to them.</source>
     </message>
     <message>
         <source>Auto-pronounce words in main window</source>
-        <translation>自動朗讀主視窗中的詞條</translation>
+        <translation>自動朗讀主視窗中的單字</translation>
     </message>
     <message>
         <source>Start with system</source>
@@ -2247,7 +2250,7 @@ switching to them.</source>
     </message>
     <message>
         <source>Tabbed browsing</source>
-        <translation>標籤頁瀏覽</translation>
+        <translation>分頁瀏覽</translation>
     </message>
     <message>
         <source>Right Shift only</source>
@@ -2279,7 +2282,7 @@ for all program&apos;s network requests.</source>
     </message>
     <message>
         <source>Open new tabs in background</source>
-        <translation>在後台開啟新標籤頁</translation>
+        <translation type="unfinished">在背景開啟新分頁</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -2312,7 +2315,7 @@ in the pressed state when the word selection changes.</source>
     </message>
     <message>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>自動朗讀螢幕取詞彈出視窗中的詞條</translation>
+        <translation>自動朗讀螢幕取詞彈出視窗中的單字</translation>
     </message>
     <message>
         <source>Enable scan popup functionality</source>
@@ -2320,7 +2323,7 @@ in the pressed state when the word selection changes.</source>
     </message>
     <message>
         <source>Open new tabs after the current one</source>
-        <translation>在當前頁之後開啟新標籤頁</translation>
+        <translation>在當前頁之後開啟新分頁</translation>
     </message>
     <message>
         <source>Restart the program to apply the language change.</source>
@@ -2335,8 +2338,8 @@ in the pressed state when the word selection changes.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>啟用後，用滑鼠指標指向一個單字（Windows下），或是
-選定一個單字（Linux下）的時候，都會出現一個蹦現式
+        <translation>啟用後，用滑鼠游標指向一個單字（Windows下），或是
+選定一個單字（Linux下）的時候，都會出現一個彈出式
 視窗來顯示釋義。啟用此功能後，可以從主視窗或系統
 匣功能表中選擇是否啟動螢幕取詞功能。</translation>
     </message>
@@ -2348,8 +2351,8 @@ off from main window or tray icon.</source>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>開啟此選項，新標籤頁將會在當前頁面後開啟；不
-開啟此選項，新標籤頁將會自動新增到末尾。</translation>
+        <translation>開啟此選項，新分頁將會在當前頁面後開啟；不
+開啟此選項，新分頁將會自動新增到末尾。</translation>
     </message>
     <message>
         <source>Close to system tray</source>
@@ -2419,7 +2422,7 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation>選項</translation>
+        <translation>偏好設定</translation>
     </message>
     <message>
         <source>Keys may also be pressed afterwards, within</source>
@@ -2435,7 +2438,7 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>熱鍵均為全域鍵，只要 GoldenDict 在後台執行，熱鍵就可以在任何程式中使用。</translation>
+        <translation>熱鍵均為全域鍵，只要 GoldenDict 在背景執行，熱鍵就可以在任何程式中使用。</translation>
     </message>
     <message>
         <source>Right Ctrl</source>
@@ -2492,8 +2495,8 @@ p, li { white-space: pre-wrap; }
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>啟用此選項後，GoldenDict 將會禁止載入你所瀏覽的站台中來自其它站台的
-內容（圖片、框架）以便封殺廣告。如果某些網點因此而出現錯誤，可以試著禁
+        <translation>啟用此選項後，GoldenDict 將會阻擋你所瀏覽的站台中來自其它站台的
+內容（圖片、框架）以便封殺廣告。如果某些網站因此而出現錯誤，可以試著禁
 用此選項。</translation>
     </message>
     <message>
@@ -2544,364 +2547,372 @@ but should support most audio file formats.</source>
     </message>
     <message>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用此選項會使主視窗在只有一個分頁時隱藏分頁列。</translation>
     </message>
     <message>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>隱藏單一分頁</translation>
     </message>
     <message>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>一般而言，按下 ESC 鍵會將游標移至翻譯列。啟用此選項後，按下 ESC 鍵會隱藏主視窗。</translation>
     </message>
     <message>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 ESC 鍵隱藏主視窗</translation>
     </message>
     <message>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>將翻譯的文字傳送至主視窗，而非顯示在彈出式視窗中</translation>
     </message>
     <message>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>將翻譯傳送至主視窗</translation>
     </message>
     <message>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用此選項後才能聆聽需要 Flash 或其他網路擴充程式才能撥放的線上字典的發音。
+需先安裝擴充程式，本選項才能順利運作。</translation>
     </message>
     <message>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用網路擴充程式</translation>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>進階設定(&amp;v)</translation>
     </message>
     <message>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>額外的螢幕取詞技術</translation>
     </message>
     <message>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>嘗試使用 IAccessibleEx 技術來取得滑鼠游標下的單字。
+本技術僅適用支援該技術的程式(如 Internet Explorer 9 )。
+若您不使用這類程式的話，就不須勾選此選項。</translation>
     </message>
     <message>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用 &amp;IAccessibleEx</translation>
     </message>
     <message>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>嘗試使用 UI Automation 技術來取得滑鼠游標下的單字。
+本技術僅適用支援該技術的程式。
+若您不使用這類程式的話，就不須勾選此選項。</translation>
     </message>
     <message>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用 &amp;UIAutomation</translation>
     </message>
     <message>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>嘗試使用特別的 GoldenDict 訊息來取得滑鼠游標下的單字。
+本技術僅適用支援該技術的程式。
+若您不使用這類程式的話，就不須勾選此選項。</translation>
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用 &amp;GoldenDict 訊息</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl-Tab 依照 MRU 順序瀏覽分頁</translation>
     </message>
     <message>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>歷史紀錄</translation>
     </message>
     <message>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用此選項以儲存查詢單字的歷史紀錄</translation>
     </message>
     <message>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存歷史紀錄(&amp;h)</translation>
     </message>
     <message>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>條目</translation>
     </message>
     <message>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用此選項以後會打開條目額外的部分</translation>
     </message>
     <message>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>展開額外的部分(&amp;p)</translation>
     </message>
     <message>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用此選項後只要按一下滑鼠左鍵就可選擇單字</translation>
     </message>
     <message>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>按一下就選字</translation>
     </message>
     <message>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>擴充風格：</translation>
     </message>
     <message>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>設定歷史紀錄的最大條目數量。</translation>
     </message>
     <message>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>歷史紀錄最大為：</translation>
     </message>
     <message>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>多久一次儲存歷史紀錄。如果設定為 0 就代表只在離開時儲存。</translation>
     </message>
     <message>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>每</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>分鐘儲存一次</translation>
     </message>
     <message>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>現代</translation>
     </message>
     <message>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 FFmpeg(libav) 和 libao 播放音訊檔案。</translation>
     </message>
     <message>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>使用內部播放器</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>有些網站會偵測 GoldenDict 的HTTP 標頭檔，所以阻擋其請求。
+啟用此選項能應付此問題。</translation>
     </message>
     <message>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>在 HTTP 標頭檔中不要顯示 GoldenDict</translation>
     </message>
     <message>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用此選項能自動收縮較長的條目</translation>
     </message>
     <message>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>收縮超過</translation>
     </message>
     <message>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>個符號的條目</translation>
     </message>
     <message>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>調整此數值來避免超長的字典選單。</translation>
     </message>
     <message>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>內文選單的字典上限：</translation>
     </message>
     <message>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>超過此大小的條目將被收縮</translation>
     </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>音訊</translation>
     </message>
     <message>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>純文字</translation>
     </message>
     <message>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>前綴符合</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>未知</translation>
     </message>
 </context>
 <context>
     <name>Programs::RunInstance</name>
     <message>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>未提供程式名稱。</translation>
     </message>
     <message>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>該程式已當掉。</translation>
     </message>
     <message>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>該程式 returned exit code %1。</translation>
     </message>
 </context>
 <context>
     <name>ProgramsModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">已啟用</translation>
+        <translation>已啟用</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>類型</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">名稱</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>命令列</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>圖示</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>條目讀取失敗</translation>
     </message>
     <message>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>條目解碼失敗</translation>
     </message>
     <message>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_alloc_context() failed.</translation>
     </message>
     <message>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() failed.</translation>
     </message>
     <message>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() failed.</translation>
     </message>
     <message>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() failed: %1.</translation>
     </message>
     <message>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() failed: %1.</translation>
     </message>
     <message>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到音訊串流。</translation>
     </message>
     <message>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到 Codec [id: %1]</translation>
     </message>
     <message>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_open2() failed: %1.</translation>
     </message>
     <message>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到可用的音訊輸出裝置。</translation>
     </message>
     <message>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>不支援的樣本格式。</translation>
     </message>
     <message>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() failed: </translation>
     </message>
     <message>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有驅動程式。</translation>
     </message>
     <message>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>本驅動程式不是有效的輸出裝置。</translation>
     </message>
     <message>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>A valid option key has an invalid value.</translation>
     </message>
     <message>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法開啟裝置: %1, 頻道: %2, rate: %3, bits: %4.</translation>
     </message>
     <message>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>未知的錯誤。</translation>
     </message>
     <message>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_frame() failed.</translation>
     </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
     <message>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>字典搜尋/篩選(Ctrl+F)</translation>
     </message>
     <message>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>快速搜尋</translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>清除搜尋</translation>
     </message>
 </context>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>錯誤： %1</translation>
     </message>
     <message>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>資源儲存錯誤： </translation>
     </message>
     <message>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">所引用的資源下載失敗。</translation>
+        <translation>所引用的資源下載失敗。</translation>
     </message>
 </context>
 <context>
@@ -2950,11 +2961,11 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>朗讀詞條(Alt+S)</translation>
+        <translation>單字發音(Alt+S)</translation>
     </message>
     <message>
         <source>Shows or hides the dictionary bar</source>
-        <translation>顯示或隱藏詞典欄</translation>
+        <translation>顯示或隱藏字典欄</translation>
     </message>
     <message>
         <source>Use this to pin down the window so it would stay on screen,
@@ -2963,19 +2974,19 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>將單字傳送到主視窗 (Alt+W)</translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">回退</translation>
+        <translation>上一頁</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">前進</translation>
+        <translation>下一頁</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -2983,7 +2994,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -2998,7 +3009,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>圖示</translation>
     </message>
 </context>
 <context>
@@ -3138,7 +3149,7 @@ GoldenDict 尚不支援此方案。</translation>
     </message>
     <message>
         <source>Paths to search for the dictionary files:</source>
-        <translation>詞典檔案所在資料夾：</translation>
+        <translation>字典檔案所在資料夾：</translation>
     </message>
     <message>
         <source>Confirm removal</source>
@@ -3164,7 +3175,7 @@ spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
         <translation>每個構詞法規則庫都會顯示為獨立的協助
-詞典。拼字檢查和拼字建議需要使用這些
+字典。拼字檢查和拼字建議需要使用這些
 構詞法規則庫，請將其新增至相應群組的
 最下面。</translation>
     </message>
@@ -3239,132 +3250,133 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>程式</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>將程式&lt;b&gt;%1&lt;/b&gt; 從清單移除？</translation>
     </message>
     <message>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>白俄羅斯文轉寫</translation>
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>在&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;此&lt;/a&gt;取得個人金鑰，或是留白以使用預設值。</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>此外，CP1251也可使用 %GD1251%， ISO 8859-1...ISO 8859-16 分別可使用 %GDISO1%...%GDISO16%
+Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用 %GDGBK%，Shift-JIS 使用 %GDSHIFTJIS%。</translation>
     </message>
     <message>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>文字轉語音</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">可使用任何外部程式。字串 %GDWORD% 代表查詢的單字。若未輸入該字串(即:只輸入程式名而未輸入 %GDWORD%)，則會用查詢的單字當作程式的標準輸入。</translation>
     </message>
 </context>
 <context>
     <name>StylesComboBox</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">無</translation>
+        <translation>無</translation>
     </message>
 </context>
 <context>
     <name>TextToSpeechSource</name>
     <message>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇音訊引擎：</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>新增(&amp;A)</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">移除(&amp;R)</translation>
+        <translation>移除(&amp;R)</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>預覽</translation>
     </message>
     <message>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>可用的音訊引擎：</translation>
     </message>
     <message>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>預覽的文字：</translation>
     </message>
     <message>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>請在此輸入預覽的文字。</translation>
     </message>
     <message>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>預覽(&amp;P)</translation>
     </message>
     <message>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有可用的文字轉語音聲音</translation>
     </message>
     <message>
         <source>Confirm removal</source>
-        <translation type="unfinished">確認移除</translation>
+        <translation>確認移除</translation>
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>確定要將&lt;b&gt;%1&lt;/b&gt;音訊引擎從清單中移除嗎？</translation>
     </message>
     <message>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到可用的文字轉語音聲音。&lt;br&gt;請檢查您的電腦是否已經安裝文字轉語音引擎。</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">選項</translation>
+        <translation>偏好設定</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>音量：</translation>
     </message>
     <message>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>速度：</translation>
     </message>
 </context>
 <context>
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入單字或片語來查字典</translation>
     </message>
     <message>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>下拉</translation>
     </message>
 </context>
 <context>
     <name>VoiceEnginesModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">已啟用</translation>
+        <translation>已啟用</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">名稱</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>圖示</translation>
     </message>
 </context>
 <context>
@@ -3383,21 +3395,21 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>圖示</translation>
     </message>
 </context>
 <context>
     <name>WordFinder</name>
     <message>
         <source>Failed to query some dictionaries.</source>
-        <translation>在某些詞典中進行查詢時失敗。</translation>
+        <translation>在某些字典中進行查詢時失敗。</translation>
     </message>
 </context>
 <context>
     <name>WordList</name>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">警告： %1</translation>
+        <translation>警告： %1</translation>
     </message>
 </context>
 </TS>
