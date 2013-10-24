@@ -2217,7 +2217,7 @@ between classic and school orthography in cyrillic)</source>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation type="unfinished">在正常情況下，會自動跳到開啟的新分頁。
+        <translation>在正常情況下，會自動跳到開啟的新分頁。
 啟用此選項後，不會自動跳至開啟的新分頁。</translation>
     </message>
     <message>
@@ -2282,7 +2282,7 @@ for all program&apos;s network requests.</source>
     </message>
     <message>
         <source>Open new tabs in background</source>
-        <translation type="unfinished">在背景開啟新分頁</translation>
+        <translation>在背景開啟新分頁</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -3276,7 +3276,7 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished">可使用任何外部程式。字串 %GDWORD% 代表查詢的單字。若未輸入該字串(即:只輸入程式名而未輸入 %GDWORD%)，則會用查詢的單字當作程式的標準輸入。</translation>
+        <translation>可使用任何外部程式。字串 %GDWORD% 代表查詢的單字。若未輸入該字串(即:只輸入程式名而未輸入 %GDWORD%)，則會用查詢的單字當作程式的標準輸入。</translation>
     </message>
 </context>
 <context>
