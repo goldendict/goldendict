@@ -47,7 +47,7 @@
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Βασίζεται στην Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -55,12 +55,12 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση άρθρου</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη άρθρου</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="187"/>
@@ -118,7 +118,7 @@
     <message>
         <location filename="../article_maker.cc" line="591"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση άρθρου</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="594"/>
@@ -128,7 +128,7 @@
     <message>
         <location filename="../article_maker.cc" line="599"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη άρθρου</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="616"/>
@@ -161,12 +161,12 @@
     <message>
         <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή ως κείμενο</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιθεωρητής</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="688"/>
@@ -181,7 +181,7 @@
     <message>
         <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Φωνή TTS</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
@@ -191,12 +191,12 @@
     <message>
         <location filename="../articleview.cc" line="710"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Βίντεο</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="719"/>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Βίντεο: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="736"/>
@@ -301,7 +301,7 @@
     <message>
         <location filename="../articleview.cc" line="1611"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ΠΡΟΣΟΧΗ: Αναπαραγωγή ήχου FFmpeg: %1</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
@@ -547,12 +547,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα φακέλου</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished">Επεξεργασία λεξικού</translation>
+        <translation>Επεξεργασία λεξικού</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
@@ -568,7 +568,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία του λεξικού με χρήση της εντολής: %1</translation>
     </message>
 </context>
 <context>
@@ -593,7 +593,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Πλήρες μενού με όλα τα λεξικά...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
@@ -608,7 +608,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα φακέλου λεξικού</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
@@ -1891,7 +1891,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
@@ -1982,7 +1982,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../main.cc" line="152"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα στο αρχείο ρυθμίσεων. Συνέχεια με χρήση των προεπιλεγμένων ρυθμίσεων;</translation>
     </message>
 </context>
 <context>
@@ -2085,22 +2085,22 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="763"/>
         <location filename="../mainwindow.cc" line="2730"/>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι ενεργοποιημένο το API προσβασιμότητας</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2994"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Άρθρο, πλήρες (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2995"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Άρθρο, μόνο HTML (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3050"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση άρθρου...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3099"/>
@@ -2161,7 +2161,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3593"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα φακέλου λεξικού</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3599"/>
@@ -2562,12 +2562,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Το αρχείο λεξικού είναι αλλοιωμένο ή κατεστραμμένο</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε η φόρτωση του άρθρου από το %1. Αιτία: %2</translation>
     </message>
 </context>
 <context>
@@ -2726,7 +2726,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Μοντέρνα</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
@@ -2741,12 +2741,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
@@ -2948,12 +2948,12 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσαρμόστε αυτήν την τιμή για να μειώσετε το μέγεθος του μενού περιεχομένου.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αριθμός λεξικών μενού περιεχομένου:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="394"/>
@@ -3109,32 +3109,32 @@ be pressed shortly after the selection is done.</source>
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή αρχείων ήχου μέσω FFmpeg(libav) και libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση εσωτερικού προγράμματος</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1294"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν σημειώσετε αυτήν την επιλογή, τα μεγάλα άρθρα θα αποκρύπτονται αυτόματα</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1297"/>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη άρθρων με περισσότερα από</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1304"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποκρύψη των άρθρων που υπερβαίνουν αυτό το μέγεθος</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>σύμβολα</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3180,12 +3180,13 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορισμένες ιστοσελίδες εντοπίζουν το GoldenDict μέσω των κεφαλίδων HTTP και μπλοκάρουν τα αιτήματά του.
+Ενεργοποιήστε αυτή την επιλογή για να παρακάμψετε το πρόβλημα.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Μη ταυτοποίηση του GoldenDict στις κεφαλίδες HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1112"/>
@@ -3553,97 +3554,97 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
     <message>
         <location filename="../aard.cc" line="396"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα φόρτωσης άρθρου</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα αποκωδικοποίησης άρθρου</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε το avformat_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε το av_malloc().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε το avio_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε το avformat_open_input(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε το avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε βρέθηκε η ροή ήχου.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε βρέθηκε ο codec [id: %1].</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε το avcodec_open2(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε βρέθηκε λειτουργική συσκευή εξόδου ήχου.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Μη υποστηριζόμενη μορφή.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε το ao_open_live(): </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε βρέθηκε ο οδηγός.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτός ο οδηγός δεν είναι συσκευή ζωντανής εξόδου ήχου.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Μία έγκυρη επιλογή δεν διαθέτει έγκυρη τιμή.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η ενεργοποίηση της συσκευής: %1, κανάλια: %2, ταχύτητα: %3, bit: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Άγνωστο σφάλμα.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Απέτυχε το avcodec_alloc_frame().</translation>
     </message>
 </context>
 <context>
@@ -3670,17 +3671,17 @@ GoldenDict. Αν ναι, το πρόγραμμα θα ειδοποιεί το
         <location filename="../articleview.cc" line="2193"/>
         <location filename="../articleview.cc" line="2200"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished">ΣΦΑΛΜΑ: %1</translation>
+        <translation>ΣΦΑΛΜΑ: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2193"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished">Σφάλμα αποθήκευσης:</translation>
+        <translation>Σφάλμα αποθήκευσης:</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2200"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Απέτυχε η λήψη του ζητούμενου πόρου.</translation>
+        <translation>Απέτυχε η λήψη του ζητούμενου πόρου.</translation>
     </message>
 </context>
 <context>
@@ -3807,7 +3808,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Εκφώνηση κειμένου</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
@@ -3898,7 +3899,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="162"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>Διαδρομή φακέλου με λεξικά Hunspell/Myspell:</translation>
+        <translation>Φάκελος με λεξικά Hunspell/Myspell:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="178"/>
@@ -3908,7 +3909,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="187"/>
         <source>Available morphology dictionaries:</source>
-        <translation>Διαθέσιμα λεξικά μορφολογίας:</translation>
+        <translation>Διαθέσιμες μορφολογίες:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="199"/>
@@ -3919,10 +3920,10 @@ spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
         <translation>Τα λεξικά μορφολογίας εμφανίζονται ως 
-ξεχωριστά βοηθητικά λεξικά και παρέχουν
+ξεχωριστά βοηθητικά λεξικά και περιέχουν
 ρίζες λέξεων και προτάσεις ορθογραφίας.
-Προσθέστε λεξικά μορφολογίας στο τέλος
-μιας ομάδας για να τα χρησιμοποιήσετε.</translation>
+Μπορείτε να προσθέτετε τα κατάλληλα λεξικά
+μορφολογίας στο τέλος κάθε ομάδας λεξικών.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="224"/>
@@ -4044,17 +4045,18 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="334"/>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εναλλακτικά, χρησιμοποιήστε %GD1253% για κωδικοποίηση CP1253, %GDISO1%...%GDISO16% για ISO 8859-1...ISO 8859-16 αντιστοίχως,
+%GDBIG5% για Big-5, %GDBIG5HKSCS% για Big5-HKSCS, %GDGBK% για GBK και GB18030, %GDSHIFTJIS% για Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθέστε οποιοδήποτε εξωτερικό πρόγραμμα. Οι χαρακτήρες %GDWORD% αντικαθίστανται από τη ζητούμενη λέξη. Αν το %GDWORD% λείπει, η λέξη θα σταλεί στη συνήθη είσοδο.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποκτήστε το προσωπικό σας κλειδί από &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;εδώ&lt;/a&gt;, ή αφήστε κενό για να χρησιμοποιήσετε το προεπιλεγμένο.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="645"/>
@@ -4159,77 +4161,77 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλεγμένες μηχανές εκφώνησης:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσ&amp;θήκη</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">Α&amp;φαίρεση</translation>
+        <translation>Α&amp;φαίρεση</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">Προτιμήσεις</translation>
+        <translation>Προτιμήσεις</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ένταση:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ταχύτητα:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπισκόπηση</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαθέσιμες μηχανές εκφώνησης:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Κείμενο προεπισκόπησης:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εδώ προσθέτετε το κείμενο που θα εκφωνηθεί στην προεπισκόπηση.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Προεπισκόπηση</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν υπάρχει διαθέσιμη φωνή TTS</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε βρέθηκαν διαθέσιμες φωνές TTS.&lt;br&gt;Βεβαιωθείτε ότι έχετε εγκαταστήσει μία τουλάχιστον μηχανή TTS.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">Επιβεβαίωση αφαίρεσης</translation>
+        <translation>Επιβεβαίωση αφαίρεσης</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Να αφαιρεθεί η μηχανή εκφώνησης &lt;b&gt;%1&lt;/b&gt; από τη λίστα;</translation>
     </message>
 </context>
 <context>
@@ -4250,22 +4252,22 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργή</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">Όνομα</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished">Εικονίδιο</translation>
+        <translation>Εικονίδιο</translation>
     </message>
 </context>
 <context>
