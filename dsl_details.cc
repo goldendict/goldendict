@@ -229,19 +229,7 @@ ArticleDom::ArticleDom( wstring const & str ):
             // Opening an 'mX' or 'm' tag closes any previous 'm' tag
             closeTag( GD_NATIVE_TO_WS( L"m" ), stack, false );
           }
-          
-          Node node( Node::Tag(), name, attrs );
-
-          if ( stack.empty() )
-          {
-            root.push_back( node );
-            stack.push_back( &root.back() );
-          }
-          else
-          {
-            stack.back()->push_back( node );
-            stack.push_back( &stack.back()->back() );
-          }
+          openTag( name, attrs, stack );
         }
         else
         {
@@ -472,6 +460,72 @@ ArticleDom::ArticleDom( wstring const & str ):
   {
     FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", (unsigned) stack.size() );
   }
+}
+
+void ArticleDom::openTag( wstring const & name,
+                          wstring const & attrs,
+                          list<Node *> &stack )
+{
+  list< Node > nodesToReopen;
+
+  if( name == GD_NATIVE_TO_WS( L"m" ) || checkM( name, GD_NATIVE_TO_WS( L"m" ) ) )
+  {
+    // All tags above [m] tag will be closed and reopened after
+    // to avoid break this tag by closing some other tag.
+
+    while( stack.size() )
+    {
+      nodesToReopen.push_back( Node( Node::Tag(), stack.back()->tagName,
+                                     stack.back()->tagAttrs ) );
+
+      if ( stack.back()->empty() )
+      {
+        // Empty nodes are deleted since they're no use
+
+        stack.pop_back();
+
+        Node * parent = stack.size() ? stack.back() : &root;
+
+        parent->pop_back();
+      }
+      else
+        stack.pop_back();
+    }
+  }
+
+  // Add tag
+
+  Node node( Node::Tag(), name, attrs );
+
+  if ( stack.empty() )
+  {
+    root.push_back( node );
+    stack.push_back( &root.back() );
+  }
+  else
+  {
+    stack.back()->push_back( node );
+    stack.push_back( &stack.back()->back() );
+  }
+
+  // Reopen tags if needed
+
+  while( nodesToReopen.size() )
+  {
+    if ( stack.empty() )
+    {
+      root.push_back( nodesToReopen.back() );
+      stack.push_back( &root.back() );
+    }
+    else
+    {
+      stack.back()->push_back( nodesToReopen.back() );
+      stack.push_back( &stack.back()->back() );
+    }
+
+    nodesToReopen.pop_back();
+  }
+
 }
 
 void ArticleDom::closeTag( wstring const & name,
