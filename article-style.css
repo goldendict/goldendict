@@ -398,15 +398,9 @@ div.xdxf
   padding-left: 81px;
 }
 
-.dsl_ex,
-.dsl_ex font[color] /* DSL Feature: Enforce the example color even if the childen tags say otherwise */
-{
-  color: gray;
-}
-
 .dsl_p, .dsl_p :not(a) /* DSL Feature: Enforce the style even if the childen tags say otherwise, except links */
 {
-  color: green;
+  color: green !important; /* DSL label color must have highest priority */
   font-style: italic;
   cursor: default;
   font-weight: normal; /* DSL feature: labels are always of normal weight */
@@ -443,7 +437,18 @@ div.xdxf
 .dsl_opt
 {
   display: none;
-  color: grey;
+}
+
+.dsl_opt,
+.dsl_opt .dsl_ex,
+.dsl_opt .dsl_ex font[color] /* DSL Feature: Enforce the optional zone color even if the childen tags say otherwise */
+{
+  color: gray;
+}
+
+.dsl_ex, .dsl_ex .dsl_opt
+{
+  color: gray;
 }
 
 /* Style for expand optional parts button */

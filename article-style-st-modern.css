@@ -165,8 +165,7 @@ a:hover
   margin-top: 1.5em;
 }
 
-.dsl_ex,
-.dsl_ex font[color]
+.dsl_ex, .dsl_ex .dsl_opt
 {
   color: steelblue;
 }
