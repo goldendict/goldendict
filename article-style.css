@@ -441,6 +441,7 @@ div.xdxf
 
 .dsl_opt,
 .dsl_opt .dsl_ex,
+.dsl_opt .dsl_ex :not(a),
 .dsl_opt .dsl_ex font[color] /* DSL Feature: Enforce the optional zone color even if the childen tags say otherwise */
 {
   color: gray;
