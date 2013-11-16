@@ -757,13 +757,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         try
         {
 
-          gdDebug( "Aard: Building the index for dictionary: %s", i->c_str() );
+          gdDebug( "Aard: Building the index for dictionary: %s\n", i->c_str() );
 
           {
             QFileInfo info( FsEncoding::decode( i->c_str() ) );
             if( info.size() > ULONG_MAX )
             {
-              gdWarning( "File %s is too large", i->c_str() );
+              gdWarning( "File %s is too large\n", i->c_str() );
               continue;
             }
           }
@@ -779,7 +779,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               || strncmp( dictHeader.keyLengthFormat, ">H", 2 )
               || strncmp( dictHeader.articleLengthFormat, ">L", 2) )
           {
-              gdWarning( "File %s is not in supported aard format", i->c_str() );
+              gdWarning( "File %s is not in supported aard format\n", i->c_str() );
               continue;
           }
 
