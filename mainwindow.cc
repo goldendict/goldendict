@@ -17,7 +17,7 @@
 #include <QDesktopServices>
 #include <set>
 #include <map>
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include <QDebug>
 #include <QTextStream>
 #include "dictinfo.hh"

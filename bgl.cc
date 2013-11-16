@@ -10,7 +10,7 @@
 #include "chunkedstorage.hh"
 #include "langcoder.hh"
 #include "language.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "fsencoding.hh"
 #include "htmlescape.hh"
 
@@ -198,7 +198,7 @@ namespace
 
     if ( result < 0 )
     {
-      qWarning( "Failed to decode utf8 of headword \"%s\", skipping it.", word.c_str() );
+      gdWarning( "Failed to decode utf8 of headword \"%s\", skipping it.", word.c_str() );
       return;
     }
 
@@ -748,7 +748,7 @@ void BglArticleRequest::run()
     } // try
     catch( std::exception &ex )
     {
-      qWarning( "BGL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+      gdWarning( "BGL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
     }
   }
 
@@ -961,7 +961,7 @@ void BglResourceRequest::run()
                        compressedData.size() ) != Z_OK ||
            decompressedLength != data.size() )
       {
-        qWarning( "Failed to decompress resource \"%s\", ignoring it.\n", name.c_str() );
+        gdWarning( "Failed to decompress resource \"%s\", ignoring it.\n", name.c_str() );
       }
       else
         hasAnyData = true;
@@ -1042,7 +1042,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     if ( compress( &compressedData.front(), &compressedSize,
                    (unsigned char const *) data, size ) != Z_OK )
     {
-      qWarning( "Failed to compress the body of resource \"%s\", dropping it.\n", filename.c_str() );
+      gdWarning( "Failed to compress the body of resource \"%s\", dropping it.\n", filename.c_str() );
       return;
     }
 
@@ -1086,7 +1086,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     {
       // Building the index
 
-      qDebug() << "Bgl: Building the index for dictionary: " << i->c_str();
+      gdDebug( "Bgl: Building the index for dictionary: %s\n", i->c_str() );
 
       Babylon b( *i );
 
@@ -1097,7 +1097,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       if ( !b.read( sourceCharset, targetCharset ) )
       {
-        qWarning( "Failed to start reading from %s, skipping it\n", i->c_str() );
+        gdWarning( "Failed to start reading from %s, skipping it\n", i->c_str() );
         continue;
       }
 

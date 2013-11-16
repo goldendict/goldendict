@@ -8,7 +8,7 @@
 #include <QUrl>
 #include <QtXml>
 #include <list>
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "audiolink.hh"
 #include "langcoder.hh"
 
@@ -254,7 +254,7 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
 void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                         wstring const & str )
 {
-  qDebug() << "MediaWiki: requesting article" << gd::toQString( str );
+  gdDebug( "MediaWiki: requesting article %s\n", gd::toQString( str ).toUtf8().data() );
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 

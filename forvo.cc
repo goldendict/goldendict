@@ -14,7 +14,7 @@
 #include "language.hh"
 #include "langcoder.hh"
 #include "utf8.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 namespace Forvo {
 
@@ -153,7 +153,7 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
 void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                     wstring const & str )
 {
-  qDebug() << "Forvo: requesting article" << gd::toQString( str );
+  gdDebug( "Forvo: requesting article %s\n", gd::toQString( str ).toUtf8().data() );
 
   QString key;
 

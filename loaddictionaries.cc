@@ -20,7 +20,7 @@
 #include "forvo.hh"
 #include "programs.hh"
 #include "voiceengines.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "fsencoding.hh"
 #include "xdxf.hh"
 #include "sdict.hh"

@@ -4,7 +4,7 @@
 #endif
 
 #include "hotkeywrapper.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 #ifdef Q_WS_X11
 #include <X11/Xlibint.h>

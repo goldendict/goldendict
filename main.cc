@@ -31,7 +31,7 @@
 #include <QFile>
 #include <QString>
 
-QFile logFile;
+#include "gddebug.hh"
 
 void gdMessageHandler( QtMsgType type, const char *msg )
 {
@@ -222,10 +222,14 @@ int main( int argc, char ** argv )
     logFile.remove();
     logFile.open( QFile::ReadWrite );
 
+    // Write UTF-8 BOM
+    QByteArray line;
+    line.append( 0xEF ).append( 0xBB ).append( 0xBF );
+    logFile.write( line );
+
     // Install message handler
     qInstallMsgHandler( gdMessageHandler );
   }
-
 
   if ( Config::isPortableVersion() )
   {

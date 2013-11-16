@@ -16,7 +16,7 @@
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
 #include "programs.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "ffmpegaudio.hh"
 #include <QDebug>
 #include <QCryptographicHash>
@@ -1058,7 +1058,7 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
           }
           catch( std::exception & e )
           {
-            qWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
+            gdWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
                        (*activeDicts)[ x ]->getName().c_str() );
           }
         }

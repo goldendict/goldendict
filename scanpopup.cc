@@ -11,7 +11,7 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QDesktopWidget>
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 #ifdef Q_OS_MACX
 #include "macmouseover.hh"

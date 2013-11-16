@@ -5,7 +5,7 @@
 #include <QDir>
 #include <QFile>
 #include <QtXml>
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 #ifdef _MSC_VER
 #include <stdint_msvc.h>

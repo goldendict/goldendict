@@ -257,7 +257,6 @@ HEADERS += folding.hh \
     parsecmdline.hh \
     dictspanewidget.hh \
     maintabwidget.hh \
-    dprintf.hh \
     mainstatusbar.hh \
     gdappstyle.hh \
     ufile.hh \
@@ -279,7 +278,8 @@ HEADERS += folding.hh \
     ffmpegaudio.hh \
     articleinspector.hh \
     delegate.hh \
-    zim.hh
+    zim.hh \
+    gddebug.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -389,7 +389,8 @@ SOURCES += folding.cc \
     ffmpegaudio.cc \
     articleinspector.cc \
     delegate.cc \
-    zim.cc
+    zim.cc \
+    gddebug.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui

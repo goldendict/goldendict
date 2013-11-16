@@ -16,7 +16,7 @@
 #include <list>
 #include <wctype.h>
 #include <stdlib.h>
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "wstring_qt.hh"
 #include "xdxf2html.hh"
 #include "ufile.hh"
@@ -468,7 +468,7 @@ void XdxfArticleRequest::run()
     }
     catch( std::exception &ex )
     {
-      qWarning( "XDXF: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+      gdWarning( "XDXF: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
     }
   }
 
@@ -993,8 +993,8 @@ void XdxfResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    qWarning( "XDXF: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-              resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdWarning( "XDXF: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+               resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
@@ -1054,7 +1054,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         // Building the index
 
-        qDebug( "Xdxf: Building the index for dictionary: %s\n", i->c_str() );
+        gdDebug( "Xdxf: Building the index for dictionary: %s\n", i->c_str() );
 
         //initializing.indexingDictionary( nameFromFileName( dictFiles[ 0 ] ) );
 
@@ -1334,9 +1334,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( stream.hasError() )
         {
-          qWarning( "Warning: %s had a parse error %ls at line %lu, and therefore was indexed only up to the point of error.",
-                     dictFiles[ 0 ].c_str(), stream.errorString().toStdWString().c_str(),
-                     (unsigned long) stream.lineNumber() );
+          gdWarning( "Warning: %s had a parse error %s at line %lu, and therefore was indexed only up to the point of error.",
+                      dictFiles[ 0 ].c_str(), stream.errorString().toUtf8().data(),
+                      (unsigned long) stream.lineNumber() );
         }
       }
 
@@ -1346,8 +1346,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      qWarning( "Xdxf dictionary reading failed: %s, error: %s\n",
-                i->c_str(), e.what() );
+      gdWarning( "Xdxf dictionary reading failed: %s, error: %s\n",
+                 i->c_str(), e.what() );
     }
   }
 

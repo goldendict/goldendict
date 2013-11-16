@@ -10,7 +10,7 @@
 #include "xdxf2html.hh"
 #include "htmlescape.hh"
 #include "langcoder.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "fsencoding.hh"
 #include "filetype.hh"
 #include "indexedzip.hh"
@@ -396,7 +396,7 @@ void StardictDictionary::loadArticle( uint32_t address,
       else
       if ( !size )
       {
-        qWarning( "Stardict: short entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
+        gdWarning( "Stardict: short entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
         break;
       }
 
@@ -410,7 +410,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < entrySize )
         {
-          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
+          gdWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -431,7 +431,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         {
           if ( size < sizeof( uint32_t ) )
           {
-            qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
+            gdWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
             break;
           }
 
@@ -445,7 +445,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < entrySize )
         {
-          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
+          gdWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -456,8 +456,8 @@ void StardictDictionary::loadArticle( uint32_t address,
       }
       else
       {
-        qWarning( "Stardict: non-alpha entry type 0x%x for the word %s encountered in \"%s\".\n",
-                  type, headword.c_str(), getName().c_str() );
+        gdWarning( "Stardict: non-alpha entry type 0x%x for the word %s encountered in \"%s\".\n",
+                   type, headword.c_str(), getName().c_str() );
         break;
       }
     }
@@ -474,7 +474,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < len + 2 )
         {
-          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
+          gdWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -489,7 +489,7 @@ void StardictDictionary::loadArticle( uint32_t address,
         // An entry which havs its size before contents
         if ( size < sizeof( uint32_t ) + 1 )
         {
-          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
+          gdWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -501,7 +501,7 @@ void StardictDictionary::loadArticle( uint32_t address,
 
         if ( size < sizeof( uint32_t ) + 1 + entrySize )
         {
-          qWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
+          gdWarning( "Stardict: malformed entry for the word %s encountered in \"%s\".\n", headword.c_str(), getName().c_str() );
           break;
         }
 
@@ -512,8 +512,8 @@ void StardictDictionary::loadArticle( uint32_t address,
       }
       else
       {
-        qWarning( "Stardict: non-alpha entry type 0x%x for the word %s encountered in \"%s\".\n",
-                  (unsigned)*ptr, headword.c_str(), getName().c_str() );
+        gdWarning( "Stardict: non-alpha entry type 0x%x for the word %s encountered in \"%s\".\n",
+                   (unsigned)*ptr, headword.c_str(), getName().c_str() );
         break;
       }
     }
@@ -1117,7 +1117,7 @@ void StardictResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    qWarning( "Stardict: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+    gdWarning( "Stardict: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
               resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
@@ -1356,7 +1356,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         Ifo ifo( ifoFile );
 
-        qDebug( "Stardict: Building the index for dictionary: %s\n", ifo.bookname.c_str() );
+        gdDebug( "Stardict: Building the index for dictionary: %s\n", ifo.bookname.c_str() );
 
         if ( ifo.idxoffsetbits == 64 )
           throw ex64BitsNotSupported();

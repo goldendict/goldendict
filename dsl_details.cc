@@ -5,7 +5,7 @@
 
 #include "folding.hh"
 #include "langcoder.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "ufile.hh"
 #include "wstring_qt.hh"
 

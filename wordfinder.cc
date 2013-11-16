@@ -6,7 +6,7 @@
 #include "wstring_qt.hh"
 #include <QThreadPool>
 #include <map>
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 using std::vector;
 using std::list;
@@ -138,9 +138,8 @@ void WordFinder::startSearch()
       }
       catch( std::exception & e )
       {
-        qWarning() << "Word \"" << inputWord << "\" search error (" << e.what() << ") in \""
-                   << QString::fromUtf8( (*inputDicts)[ x ]->getName().c_str() )
-                   << "\"";
+        gdWarning( "Word \"%s\" search error (%s) in \"%s\"\n",
+                   inputWord.toUtf8().data(), e.what(), (*inputDicts)[ x ]->getName().c_str() );
       }
     }
   }

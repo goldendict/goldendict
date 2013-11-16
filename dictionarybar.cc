@@ -4,7 +4,7 @@
 #include <QMenu>
 #include <QContextMenuEvent>
 #include <QProcess>
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "fsencoding.hh"
 #include <QDebug>
 

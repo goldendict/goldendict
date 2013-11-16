@@ -9,7 +9,7 @@
 #include "btreeidx.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 #include <set>
 #include <string>
@@ -548,7 +548,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         // Building the index
 
-        qDebug( "Lsa: Building the index for dictionary: %s\n", i->c_str() );
+        gdDebug( "Lsa: Building the index for dictionary: %s\n", i->c_str() );
 
         initializing.indexingDictionary( FsEncoding::basename( *i ) );
 
@@ -625,7 +625,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      qWarning( "Lingvo's LSA reading failed: %s, error: %s\n",
+      gdWarning( "Lingvo's LSA reading failed: %s, error: %s\n",
                  i->c_str(), e.what() );
     }
   }

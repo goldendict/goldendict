@@ -17,7 +17,7 @@
 #include <QCoreApplication>
 #include <set>
 #include <hunspell/hunspell.hxx>
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "fsencoding.hh"
 #include <QFileInfo>
 
@@ -292,11 +292,11 @@ void HunspellArticleRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
   catch( std::exception & e )
   {
-    qWarning( "Hunspell: error: %s\n", e.what() );
+    gdWarning( "Hunspell: error: %s\n", e.what() );
   }
 
   if ( suggestions )
@@ -519,7 +519,7 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
   }
   catch( Iconv::Ex & e )
   {
-    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   if ( suggestions )
@@ -641,7 +641,7 @@ void HunspellPrefixMatchRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   finish();

@@ -4,7 +4,7 @@
 #include "uiauto.hh"
 
 #include <cstdio>
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 class GDAutomationClient {
 public:

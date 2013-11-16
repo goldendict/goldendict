@@ -9,7 +9,7 @@
 
 #include "article_netmgr.hh"
 #include "wstring_qt.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 using std::string;
 
 namespace
@@ -90,7 +90,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     if ( !req.url().host().endsWith( refererUrl.host() ) &&
          getHostBase( req.url() ) != getHostBase( refererUrl ) && !req.url().scheme().startsWith("data") )
     {
-      qWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
+      gdWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
 
       return new BlockedNetworkReply( this );
     }
@@ -203,8 +203,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             }
             catch( std::exception & e )
             {
-              qWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
-                        dictionaries[ x ]->getName().c_str() );
+              gdWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
+                         dictionaries[ x ]->getName().c_str() );
               return sptr< Dictionary::DataRequest >();
             }
         }
