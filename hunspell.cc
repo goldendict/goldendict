@@ -510,7 +510,9 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
 
           if ( Folding::applySimpleCaseOnly( alt ) != lowercasedWord ) // No point in providing same word
           {
+#ifdef QT_DEBUG
             qDebug() << ">>>>>Alt:" << gd::toQString( alt );
+#endif
             result.append( alt );
           }
         }
