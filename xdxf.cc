@@ -321,7 +321,7 @@ QString const& XdxfDictionary::getDescription()
               Mutex::Lock _( idxMutex );
               descr = chunks->getBlock( idxHeader.descriptionAddress, chunk );
             }
-            dictionaryDescription = QString::fromUtf8( descr );
+            dictionaryDescription = QString::fromUtf8( descr, idxHeader.descriptionSize );
         }
         catch(...)
         {
