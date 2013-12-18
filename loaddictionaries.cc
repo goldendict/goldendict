@@ -325,7 +325,9 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   set< string > ids;
   std::pair< std::set< string >::iterator, bool > ret;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
   QTextCodec::setCodecForCStrings( QTextCodec::codecForName( "UTF8" ) );
+#endif
 
   for( unsigned x = dictionaries.size(); x--; )
   {
