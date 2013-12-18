@@ -125,7 +125,7 @@ Preferences::Preferences():
   wordsZoomLevel( 0 ),
   maxStringsInHistory( 500 ),
   storeHistory( 1 ),
-  alwaysExpandOptionalParts( true )
+  alwaysExpandOptionalParts( false )
 , historyStoreInterval( 0 )
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
