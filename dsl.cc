@@ -17,7 +17,7 @@
 #include "wstring_qt.hh"
 #include "zipfile.hh"
 #include "indexedzip.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 #include <zlib.h>
 #include <map>
@@ -682,18 +682,7 @@ string DslDictionary::dslToHtml( wstring const & str )
 
   string html = processNodeChildren( dom.root );
 
-  // Lines seem to indicate paragraphs in Dsls, so we enclose each line within
-  // a <p></p>.
-
-  for( size_t x = html.size(); x--; )
-    if ( html[ x ] == '\n' )
-      html.insert( x + 1, "</p><p>" );
-
-  return
-#if 0 // Enable this to enable dsl source in html as a comment
-      "<!-- DSL Source:\n" + Utf8::encode( str ) + "\n-->"
-#endif
-         "<p>" + html + "</p>";
+  return html;
 }
 
 string DslDictionary::processNodeChildren( ArticleDom::Node const & node )
@@ -708,10 +697,26 @@ string DslDictionary::processNodeChildren( ArticleDom::Node const & node )
 }
 string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 {
-  if ( !node.isTag )
-    return Html::escape( Utf8::encode( node.text ) );
-
   string result;
+
+  if ( !node.isTag )
+  {
+    result = Html::escape( Utf8::encode( node.text ) );
+
+    // Handle all end-of-line
+
+    string::size_type n;
+
+    // Strip all '\r'
+    while( ( n = result.find( '\r' ) ) != string::npos )
+      result.erase( n, 1 );
+
+    // Replace all '\n'
+    while( ( n = result.find( '\n' ) ) != string::npos )
+      result.replace( n, 1, "<p></p>" );
+
+    return result;
+  }
 
   if ( node.tagName == GD_NATIVE_TO_WS( L"b" ) )
     result += "<b class=\"dsl_b\">" + processNodeChildren( node ) + "</b>";
@@ -1260,7 +1265,7 @@ void DslArticleRequest::run()
       articleText += "<div class=\"dsl_headwords\"";
       if( dict.isFromLanguageRTL() )
         articleText += " dir=\"rtl\"";
-      articleText += ">";
+      articleText += "><p>";
 
       if( displayedHeadword.size() == 1 && displayedHeadword[0] == '<' )  // Fix special case - "<" header
           articleText += "<";                                             // dslToHtml can't handle it correctly.
@@ -1269,7 +1274,7 @@ void DslArticleRequest::run()
 
       /// After this may be expand button will be inserted
 
-      articleAfter += "</div>";
+      articleAfter += "</p></div>";
 
       expandTildes( articleBody, tildeValue );
 
@@ -1287,7 +1292,7 @@ void DslArticleRequest::run()
         string prefix = "O" + dict.getId().substr( 0, 7 ) + "_" + QString::number( dict.articleNom ).toStdString();
         string id1 = prefix + "_expand";
         string id2 = prefix + "_opt_";
-        string button = "<img src=\"qrcx://localhost/icons/expand_opt.png\" class=\"hidden_expand_opt\" id=\"" + id1 +
+        string button = " <img src=\"qrcx://localhost/icons/expand_opt.png\" class=\"hidden_expand_opt\" id=\"" + id1 +
                         "\" onclick=\"gdExpandOptPart('" + id1 + "','" + id2 +"')\" alt=\"[+]\"/>";
         if( articleText.compare( articleText.size() - 4, 4, "</p>" ) == 0 )
           articleText.insert( articleText.size() - 4, " " + button );
@@ -1299,7 +1304,7 @@ void DslArticleRequest::run()
     }
     catch( std::exception &ex )
     {
-      qWarning( "DSL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+      gdWarning( "DSL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
       articleText = string( "<span class=\"dsl_article\">" )
                     + string( QObject::tr( "Article loading error" ).toUtf8().constData() )
                     + "</span>";
@@ -1486,8 +1491,8 @@ void DslResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    qWarning( "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-              resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdWarning( "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+               resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
@@ -1617,8 +1622,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // Building the index
         initializing.indexingDictionary( Utf8::encode( scanner.getDictionaryName() ) );
 
-        qDebug() << "Dsl: Building the index for dictionary:"
-                 << gd::toQString( scanner.getDictionaryName() );
+        gdDebug( "Dsl: Building the index for dictionary: %s\n",
+                 gd::toQString( scanner.getDictionaryName() ).toUtf8().data() );
 
         File::Class idx( indexFile, "wb" );
 
@@ -1679,7 +1684,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) || curString.empty() )
                 {
-                  qWarning( "Warning: premature end of file %s\n", abrvFileName.c_str() );
+                  gdWarning( "Warning: premature end of file %s\n", abrvFileName.c_str() );
                   eof = true;
                   break;
                 }
@@ -1731,8 +1736,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
           catch( std::exception & e )
           {
-            qWarning( "Error reading abrv file \"%s\", error: %s. Skipping it.\n",
-                      abrvFileName.c_str(), e.what() );
+            gdWarning( "Error reading abrv file \"%s\", error: %s. Skipping it.\n",
+                       abrvFileName.c_str(), e.what() );
           }
         }
 
@@ -1765,7 +1770,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               if ( !isDslWs( curString[ x ] ) )
               {
-                qWarning( "Warning: garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
+                gdWarning( "Warning: garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
                 break;
               }
             }
@@ -1789,7 +1794,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           {
             if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) ) )
             {
-              qWarning( "Warning: premature end of file %s\n", i->c_str() );
+              gdWarning( "Warning: premature end of file %s\n", i->c_str() );
               break;
             }
 
@@ -1982,8 +1987,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      qWarning( "DSL dictionary reading failed: %s:%u, error: %s\n",
-                i->c_str(), atLine, e.what() );
+      gdWarning( "DSL dictionary reading failed: %s:%u, error: %s\n",
+                 i->c_str(), atLine, e.what() );
     }
   }
 

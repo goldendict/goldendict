@@ -12,7 +12,7 @@
 #include <QTextDocumentFragment>
 #include "folding.hh"
 #include "langcoder.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "qt4x5.hh"
 
 using std::vector;
@@ -474,8 +474,8 @@ void ArticleRequest::altSearchFinished()
       }
       catch( std::exception & e )
       {
-        qWarning( "getArticle request error (%s) in \"%s\"\n",
-                  e.what(), activeDicts[ x ]->getName().c_str() );
+        gdWarning( "getArticle request error (%s) in \"%s\"\n",
+                   e.what(), activeDicts[ x ]->getName().c_str() );
       }
     }
 
@@ -646,7 +646,7 @@ void ArticleRequest::bodyFinished()
         }
         catch( std::exception & e )
         {
-          qWarning( "getDataSlice error: %s\n", e.what() );
+          gdWarning( "getDataSlice error: %s\n", e.what() );
         }
 
         wasUpdated = true;

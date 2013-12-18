@@ -9,6 +9,7 @@
 #include "langcoder.hh"
 #include "fsencoding.hh"
 #include "decompress.hh"
+#include "gddebug.hh"
 
 #include <map>
 #include <set>
@@ -406,7 +407,7 @@ void AardDictionary::loadArticle( quint32 address,
       }
       catch( std::exception &ex )
       {
-        qWarning( "AARD: Failed loading article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+        gdWarning( "AARD: Failed loading article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
         break;
       }
       catch(...)
@@ -756,13 +757,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         try
         {
 
-          qDebug( "Aard: Building the index for dictionary: %s", i->c_str() );
+          gdDebug( "Aard: Building the index for dictionary: %s\n", i->c_str() );
 
           {
             QFileInfo info( FsEncoding::decode( i->c_str() ) );
             if( info.size() > ULONG_MAX )
             {
-              qWarning( "File %s is too large", i->c_str() );
+              gdWarning( "File %s is too large\n", i->c_str() );
               continue;
             }
           }
@@ -778,7 +779,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               || strncmp( dictHeader.keyLengthFormat, ">H", 2 )
               || strncmp( dictHeader.articleLengthFormat, ">L", 2) )
           {
-              qWarning( "File %s is not in supported aard format", i->c_str() );
+              gdWarning( "File %s is not in supported aard format\n", i->c_str() );
               continue;
           }
 
@@ -787,7 +788,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           if( size == 0 )
           {
-              qWarning( "File %s has invalid metadata", i->c_str() );
+              gdWarning( "File %s has invalid metadata", i->c_str() );
               continue;
           }
 
@@ -801,7 +802,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           if( meta.empty() )
           {
-              qWarning( "File %s has invalid metadata", i->c_str() );
+              gdWarning( "File %s has invalid metadata", i->c_str() );
               continue;
           }
 
@@ -945,13 +946,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         }
         catch( std::exception & e )
         {
-          qWarning( "Aard dictionary indexing failed: %s, error: %s\n",
+          gdWarning( "Aard dictionary indexing failed: %s, error: %s\n",
                     i->c_str(), e.what() );
           continue;
         }
         catch( ... )
         {
-          qWarning( "Aard dictionary indexing failed\n" );
+          gdWarning( "Aard dictionary indexing failed\n" );
           continue;
         }
       } // if need to rebuild

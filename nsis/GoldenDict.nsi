@@ -1,7 +1,7 @@
 !include "MUI2.nsh"
 
   Name "GoldenDict"
-  OutFile "GoldenDict-1.0.1-1-Install.exe"
+  OutFile "GoldenDict-1.5.0-Install.exe"
 
   InstallDir "$PROGRAMFILES\GoldenDict"
 
@@ -20,7 +20,7 @@ Var StartMenuFolder
 ;Pages
 
   !insertmacro MUI_PAGE_WELCOME
-  !insertmacro MUI_PAGE_LICENSE "LICENSE.txt"
+  !insertmacro MUI_PAGE_LICENSE "../LICENSE.txt"
   !insertmacro MUI_PAGE_DIRECTORY
 
   !insertmacro MUI_PAGE_STARTMENU GDApplication $StartMenuFolder
@@ -102,30 +102,35 @@ Section
 
   CreateDirectory $INSTDIR\imageformats
   SetOutPath $INSTDIR\imageformats
-  File ..\release\imageformats\*
+  File ..\imageformats\*
 
-  CreateDirectory $INSTDIR\phonon_backend
-  SetOutPath $INSTDIR\phonon_backend
-  File ..\release\phonon_backend\*
+  CreateDirectory $INSTDIR\codecs
+  SetOutPath $INSTDIR\codecs
+  File ..\codecs\*
+
+  CreateDirectory $INSTDIR\x64
+  SetOutPath $INSTDIR\x64
+  File ..\x64\*
 
   CreateDirectory $INSTDIR\locale
   SetOutPath $INSTDIR\locale
-  File ..\release\locale\*
+  File ..\locale\*
 
   CreateDirectory $INSTDIR\content
   CreateDirectory $INSTDIR\content\morphology
   SetOutPath $INSTDIR\content\morphology
-  File ..\release\content\morphology\*
+  File ..\content\morphology\*
 
   SetOutPath $INSTDIR
-  File ..\release\*.dll
-  File LICENSE.txt
-  File /oname=$INSTDIR\GoldenDict.exe ..\release\goldendict.exe
+  File ..\*.dll
+  File ..\LICENSE.txt
+  File /oname=$INSTDIR\GoldenDict.exe ..\goldendict.exe
   
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
   !insertmacro MUI_STARTMENU_WRITE_BEGIN GDApplication
       
+  SetShellVarContext all
   CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
   CreateShortCut "$SMPROGRAMS\$StartMenuFolder\GoldenDict.lnk" "$INSTDIR\GoldenDict.exe"
   CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
@@ -404,6 +409,7 @@ Section "Uninstall"
 
   skip_cfg:
 
+  SetShellVarContext all
   !insertmacro MUI_STARTMENU_GETFOLDER GDApplication $StartMenuFolder
 
 ; This file is auto-generated

@@ -179,8 +179,7 @@ h3 {
 	font-family: Arial;
 }
 
-.dsl_ex,
-.dsl_ex font[color]
+.dsl_ex, .dsl_ex .dsl_opt
 {
 	color: slategray;
 }
@@ -194,16 +193,19 @@ h3 {
 }
 
 /* Stress settings */
-.dsl_stress_without_accent {
+.dsl_stress_without_accent,
+.dsl_opt .dsl_ex .dsl_stress_without_accent {
 	display: none;
 	color: green;
 }
 
-.dsl_stress_with_accent {
+.dsl_stress_with_accent,
+.dsl_opt .dsl_ex .dsl_stress_with_accent {
 	display: inline;
 	color: #DD0000;
 }
-.dsl_stress {
+.dsl_stress,
+.dsl_opt .dsl_ex .dsl_stress {
 	display: inline;
 	color: blue;
 }

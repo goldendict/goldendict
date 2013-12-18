@@ -10,6 +10,7 @@
 #include "audiolink.hh"
 #include "indexedzip.hh"
 #include "filetype.hh"
+#include "gddebug.hh"
 
 #include <set>
 #include <string>
@@ -329,7 +330,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
            indexIsOldOrBad( indexFile ) )
       {
-        qDebug( "Zips: Building the index for dictionary: %s\n", i->c_str() );
+        gdDebug( "Zips: Building the index for dictionary: %s\n", i->c_str() );
 
         File::Class idx( indexFile, "wb" );
         IdxHeader idxHeader;
@@ -395,8 +396,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      qWarning( "Zipped sounds pack reading failed: %s, error: %s\n",
-                i->c_str(), e.what() );
+      gdWarning( "Zipped sounds pack reading failed: %s, error: %s\n",
+                 i->c_str(), e.what() );
     }
   }
 

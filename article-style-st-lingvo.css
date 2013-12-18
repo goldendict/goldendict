@@ -89,7 +89,12 @@ a:hover
   margin-top: 10px;
 }
 
-.dsl_ex
+.dsl_ex, .dsl_ex .dsl_opt
 {
   color: inherit;
+}
+
+.dsl_com
+{
+  color: black;
 }

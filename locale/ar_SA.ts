@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ar_SA">
+<TS version="2.0" language="ar">
 <context>
     <name>About</name>
     <message>
@@ -11,36 +11,32 @@
     <message>
         <location filename="../about.ui" line="66"/>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>برنامج القاموس الذهبي للبحث في القواميس, الاصدار</translation>
+        <translation>برنامج القاموس الذهبي للبحث في القواميس، الإصدار </translation>
     </message>
     <message>
         <location filename="../about.ui" line="91"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
-    </message>
-    <message>
-        <location filename="../about.ui" line="125"/>
-        <source>Credits:</source>
-        <translation>المساهمون:</translation>
-    </message>
-    <message>
-        <source>#.#</source>
-        <translation type="obsolete">#.#</translation>
+        <translation>(c) 2008-2013 قسطنطين ايزاكوف (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="101"/>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>مرخص وفق GNU GPLv3 أو أحدث</translation>
+        <translation>مرخص وفق الإصدار الثّالث من رُخصة غنّو أو أحدث</translation>
+    </message>
+    <message>
+        <location filename="../about.ui" line="125"/>
+        <source>Credits:</source>
+        <translation>إشادات:</translation>
     </message>
     <message>
         <location filename="../about.cc" line="17"/>
         <source>[Unknown]</source>
-        <translation>[مجهول]</translation>
+        <translation>[غير معروف]</translation>
     </message>
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>مبني على كيوتي %1 (%2، %3 بت)</translation>
     </message>
 </context>
 <context>
@@ -48,32 +44,32 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>وسّع المقالة</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>اطوِ المقالة</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="187"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>لم يجد ترجمة لـ &lt;b&gt;%1&lt;/b&gt; في المجموعة &lt;b&gt;%2&lt;/b&gt;.</translation>
+        <translation>تعذّر إيجاد ترجمة لـ &lt;b&gt;%1&lt;/b&gt; في المجموعة &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="192"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation>لم يُعثر على ترجمة في مجموعة &lt;b&gt;%1&lt;/b&gt;.</translation>
+        <translation>تعذّر إيجاد ترجمة في مجموعة &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="211"/>
         <source>Welcome!</source>
-        <translation>مرحبا!</translation>
+        <translation>مرحبًا بك!</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">ت&lt;h3 align=&quot;center&quot;&gt;مرحبا في &lt;b&gt;القاموس الذهبي&lt;/b&gt;!&lt;p&gt;لتبدأ العمل مع البرنامج، اذهب إلى &lt;b&gt;تحرير|قواميس&lt;/b&gt; لاضافة بعض مسارات القواميس لأبحث فيها، اعدّ قواميس ويكيبيديا متنوعة أو مصادر  أخرى، غير ترتيب القواميس أو أنشئ مجموعة للقواميس.&lt;p&gt;وعندها انت جاهز للبحث عن كلمات! يمكنك عمل ذلك من هذه النافذة باستخدام اللوح الأيمن، أو يمكنك &lt;a href=&quot;Working with popup&quot;&gt; البحث عن كلمات أثناء عملك على برامج أخرى &lt;/a&gt;. &lt;p&gt; لتخصيص برنامج، تحقق من التفضيلات عند &lt;b&gt;تحرير|تفضيلات &lt;/b&gt;. كل الاعدادات هناك لها تلمحيات، تأكد من قرائتها إن كنت في شك من أي شيء.&lt;p&gt;ان احتجت لمزيد من المساعدة، أو عندك أي سؤال، اقتراح أو تريد أن تعرف ماذا يقول الآخرون، فأنت مرحب بك في في &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;منتدى&lt;/a&gt; البرنامج. &lt;p&gt;تحقق من &lt;a href=&quot;http://goldendict.org/&quot;&gt;موقع&lt;/a&gt; البرنامج لأجل التحديثات. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. مرخص تحت GPLv3 أو أحدث.</translation>
+        <translation>&lt;h3 dir=&quot;RTL&quot; align=&quot;center&quot;&gt;مرحبًا بك في &lt;b&gt;القاموس الذهبي&lt;/b&gt;!&lt;/h3&gt;&lt;p dir=&quot;RTL&quot;&gt;لبدأ العمل مع البرنامج، زُر أولًا &lt;b&gt;حرّر|قواميس&lt;/b&gt; لإضافة بعض مسارات القواميس حيث يُبحث فيها عن ملفات القواميس، إعداد مواقع ويكيبيديا شتّى أو مصادر أخرى، ضبط ترتيب القواميس أو إنشاء مجموعات قواميس.&lt;p dir=&quot;RTL&quot;&gt;ثمَّ ستكون جاهزًا للبحث عن الكلمات! يمكنك فعل ذلك في الناقذة باستخدام اللوحة على اليمين، أو يمكنك &lt;a href=&quot;Working with popup&quot;&gt;البحث عن الكلمات من تطبيقات نشطة أخرى&lt;/a&gt;. &lt;p dir=&quot;RTL&quot;&gt;لتخصيص البرنامج، اكتشف التفضيلات المتوفّرة في &lt;b&gt;حرّر|تفضيلات&lt;/b&gt;. كل الإعدادات هناك تملك تلميحات، تأكّد من قرائتها إن كنت تشكّ في أي شيء.&lt;p dir=&quot;RTL&quot;&gt;إن احتجت إلى مزيدٍ من المعلومات، لديك بعض الأسئلة، اقتراحات أو تتسائل فيما يفكّر الغير، نرحّب بك دائمًا في &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;منتدى&lt;/a&gt; البرنامج.&lt;p dir=&quot;RTL&quot;&gt;تحقّق من &lt;a href=&quot;http://goldendict.org/&quot;&gt;موقع وِب&lt;/a&gt; البرنامج للتحديثات.&lt;p dir=&quot;RTL&quot;&gt;حقوق النشر 2008-2013 كونستانتين إيساكوف. مرخّص وفق رخصة جنو العمومية الإصدار 3 أو أحدث.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="229"/>
@@ -83,65 +79,65 @@
     <message>
         <location filename="../article_maker.cc" line="231"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;العمل مع المنبثقات&lt;/h3&gt;لنظر كلمة من برنامج نشط آخر, عليك أولا تفعيل &lt;i&gt;&quot;خاصية منبثقة المسح&quot;&lt;/i&gt; في &lt;b&gt;التفضيلات&lt;/b&gt;, ثم تفعيلها في أي وقت إما بضغط أيقونة ‘المنبثقة‘ فوق, أو بالنقر على أيقونة  الزاوية بزر الفأرة الأيمن واختيار ذلك من القائمة التي أظهرتها. </translation>
+        <translation>&lt;h3 dir=&quot;RTL&quot; align=&quot;center&quot;&gt;العمل مع المنبثقة&lt;/h3&gt;&lt;p dir=&quot;RTL&quot;&gt;للبحث عن الكلمات في تطبيقات نشطة أخرى، عليك أولًا تفعيل &lt;i&gt;&quot;وظيفة منبثقة الاستكشاف&quot;&lt;/i&gt; في &lt;b&gt;تفضيلات&lt;/b&gt;، ثمّ مكّنها في أي وقت بإطلاق أيقونة &quot;منبثقة&quot; بالأعلى، أو بنقر أيقونة صينية النظام بزر الفأرة الأيمن واختيارها في القائمة التي ظهرت.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="238"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>ثم اوقف المؤشر على الكلمة التي تريد نظرها في البرنامج الآخر, و ستنبثق نافذة تصفها لك.</translation>
+        <translation>&lt;p dir=&quot;RTL&quot;&gt;ثمَّ أوقف فقط المؤشر على الكلمة التي تريد البحث عنها في التطبيق الآخر، وستنبثق نافذة تصِف لكَ الكلمة.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="241"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>ثم اختر أية كلمة لنظرها في البرنامج الآخر بالفأرة (نقرتين عليها او حددها بالفأرة و الزر مضغوط), و ستظهر لك نافذة تصفها لك.</translation>
+        <translation>&lt;p dir=&quot;RTL&quot;&gt;ثمَّ حدّد فقط أي كلمة تريد البحث عنها في التطبيق الآخر بالفأرة (انقر مزدوجًا أو مرّرها بالفأرة أثناء ضغط الزر)، وستنبثق نافذة تصِف لكَ الكلمة.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="322"/>
         <source>(untitled)</source>
-        <translation>(بلا عنوان)</translation>
+        <translation>(غير معنون)</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="336"/>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(صورة)</translation>
     </message>
 </context>
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="591"/>
+        <location filename="../article_maker.cc" line="603"/>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>وسّع المقالة</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="594"/>
+        <location filename="../article_maker.cc" line="606"/>
         <source>From </source>
         <translation>من</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="599"/>
+        <location filename="../article_maker.cc" line="611"/>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>اطوِ المقالة</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="616"/>
+        <location filename="../article_maker.cc" line="628"/>
         <source>Query error: %1</source>
-        <translation>أخطاء الطلب: %1</translation>
+        <translation>خطأ استعلام: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="715"/>
+        <location filename="../article_maker.cc" line="734"/>
         <source>Close words: </source>
-        <translation type="unfinished">كلمات قريبة:</translation>
+        <translation>الكلمات القريبة:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="786"/>
+        <location filename="../article_maker.cc" line="805"/>
         <source>Compound expressions: </source>
-        <translation type="unfinished">تعبيرات مركبة:</translation>
+        <translation>التعابير المركّبة:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="814"/>
+        <location filename="../article_maker.cc" line="833"/>
         <source>Individual words: </source>
-        <translation type="unfinished">كلمات مفردة:</translation>
+        <translation>الكلمات مفردةً: </translation>
     </message>
 </context>
 <context>
@@ -149,22 +145,22 @@
     <message>
         <location filename="../articleview.ui" line="14"/>
         <source>Form</source>
-        <translation>صيغة</translation>
+        <translation>نموذج</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="36"/>
         <source>about:blank</source>
-        <translation>about:blank</translation>
-    </message>
-    <message>
-        <location filename="../articleview.ui" line="74"/>
-        <source>x</source>
-        <translation>x</translation>
+        <translation>حول:فارغ</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="64"/>
         <source>Find:</source>
-        <translation>ابحث:</translation>
+        <translation>اعثر على:</translation>
+    </message>
+    <message>
+        <location filename="../articleview.ui" line="74"/>
+        <source>x</source>
+        <translation>س</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="92"/>
@@ -174,7 +170,7 @@
     <message>
         <location filename="../articleview.ui" line="109"/>
         <source>&amp;Next</source>
-        <translation>ال&amp;لاحق</translation>
+        <translation>ال&amp;تالي</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="116"/>
@@ -182,203 +178,191 @@
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="152"/>
-        <source>&amp;Case Sensitive</source>
-        <translation>&amp;حساس للحالة</translation>
-    </message>
-    <message>
         <location filename="../articleview.ui" line="129"/>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>أبرز ال&amp;كل</translation>
+    </message>
+    <message>
+        <location filename="../articleview.ui" line="152"/>
+        <source>&amp;Case Sensitive</source>
+        <translation>ح&amp;سّاس للحالة</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="147"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>حدّد المقالة الحالية</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="153"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>انسخ كنص</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="159"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>افحص</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="688"/>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="693"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>الصوت</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="698"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>صوت قراءة النّصوص</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="703"/>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>الصورة</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="710"/>
+        <source>Video</source>
+        <translation>المرئيات</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="719"/>
+        <source>Video: %1</source>
+        <translation>المقطع المرئي: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="736"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>التّعريف من القاموس &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="740"/>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">القاموس الذهبي</translation>
+        <translation>تعريف: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="928"/>
         <location filename="../articleview.cc" line="1071"/>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>المرجع المشار إليه غير موجود.</translation>
+        <translation>المورد المشار إليه غير موجود.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="968"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>برنامج الصوت المشار إليه غير موجود.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1071"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1463"/>
-        <source>Save sound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1465"/>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1478"/>
-        <source>Save image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1480"/>
-        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1223"/>
         <source>&amp;Open Link</source>
-        <translation>ا&amp;فتح الرابط</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="710"/>
-        <source>Video</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="719"/>
-        <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ا&amp;فتح الوصلة</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1229"/>
         <source>Open Link in New &amp;Tab</source>
-        <translation>افتح الرابط في لسا&amp;ن جديد</translation>
+        <translation>افتح الوصلة في &amp;لسان جديد</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1236"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation>افتح الرابط في &amp;متصفح خارجي</translation>
+        <translation>افتح الوصلة في متصفّح &amp;خارجي</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1251"/>
+        <source>Save &amp;image...</source>
+        <translation>احفظ ال&amp;صّورة...</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1259"/>
+        <source>Save s&amp;ound...</source>
+        <translation>احفظ الصّو&amp;ت...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1278"/>
         <source>&amp;Look up &quot;%1&quot;</source>
-        <translation>ا&amp;نظر &quot;%1&quot;</translation>
+        <translation>اب&amp;حث عن &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1286"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>انظر &quot;%1&quot; في &amp;لسان جديد</translation>
+        <translation>ابحث عن &quot;%1&quot; في لسان &amp;جديد</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1291"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>أرسل &quot;%1&quot; إلى سطر الإدخال</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1297"/>
         <location filename="../articleview.cc" line="1329"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>أ&amp;ضف &quot;%1&quot; إلى التأريخ</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1311"/>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>انظر &quot;%1&quot; في %2</translation>
+        <translation>ابحث عن &quot;%1&quot; في %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1319"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>انظر &quot;%1&quot;في %2 في لسان &amp;جديد</translation>
+        <translation>ابحث عن &quot;%1&quot; في %2 في لسان &amp;جديد</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1611"/>
-        <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <location filename="../articleview.cc" line="1463"/>
+        <source>Save sound</source>
+        <translation>احفظ الصوت</translation>
     </message>
     <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">تشغيل ملف غير WAV</translation>
+        <location filename="../articleview.cc" line="1465"/>
+        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation>ملفات صوت (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;كل الملفات (*.*)</translation>
     </message>
     <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">لتمكين تشغيل ملفات غير WAV، اذهب إلى تحرير|تفضيلات، اختر لسان الصوت وانتق &quot;شغل عبر DirectShow&quot; من هناك.</translation>
+        <location filename="../articleview.cc" line="1478"/>
+        <source>Save image</source>
+        <translation>احفظ الصّورة</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1480"/>
+        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
+        <translation>ملفات صورة (*.bmp *.jpg *.png *.tif);;كل الملفات (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1552"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>فشل بدء مشغل لتشغيل ملف الصوت: %1</translation>
+        <translation>فشل فتح مشغّل لملف الصّوت: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1570"/>
         <source>Failed to create temporary file.</source>
-        <translation>فشل إنشاء ملف مؤقت.</translation>
+        <translation>فشل في إنشاء ملف مؤقت.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1581"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>تعذر فتح ملف المصدر آليا, حاول فتحه يدويا: %1.</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1604"/>
-        <source>The referenced resource failed to download.</source>
-        <translation>فشل تنزيل المرجع المشار إليه.</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1251"/>
-        <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1259"/>
-        <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل في فتح ملف المورد تلقائيًّا، حاول فتحه يدويًّا: %1.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1604"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">تحذير: %1</translation>
+        <translation>تحذير: %1</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1604"/>
+        <source>The referenced resource failed to download.</source>
+        <translation>فشل تنزيل المورد المشار إليه.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1611"/>
+        <source>WARNING: FFmpeg Audio Player: %1</source>
+        <translation>تحذير: مشغّل FFmpeg الصوتي: %1</translation>
     </message>
 </context>
 <context>
@@ -386,18 +370,18 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>النّقل الحرفي البيلاروسي من اللاتينية إلى السيريلية (قواعد الإملاء التّقليدية)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>النّقل الحرفي البيلاروسي من اللاتينية إلى السيريلية (قواعد الإملاء المدرسية)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>النّقل الحرفي البيلاروسي (ينعّم الفوارق بين قواعد الإملاء التّقليدية والمدرسية في السيريلية)</translation>
     </message>
 </context>
 <context>
@@ -405,7 +389,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictgroupwidget.ui" line="14"/>
         <source>Form</source>
-        <translation>صيغة</translation>
+        <translation>نموذج</translation>
     </message>
     <message>
         <location filename="../dictgroupwidget.ui" line="37"/>
@@ -415,42 +399,42 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictgroupwidget.ui" line="85"/>
         <source>Shortcut:</source>
-        <translation type="unfinished">الاختصار:</translation>
+        <translation>الاختصار:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="38"/>
         <source>None</source>
-        <translation type="unfinished">لاشيء</translation>
+        <translation>لا شيء</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="43"/>
         <source>From file...</source>
-        <translation type="unfinished">من ملف...</translation>
+        <translation>من ملف...</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="90"/>
         <source>Choose a file to use as group icon</source>
-        <translation type="unfinished">اختر ملفا ليستخدم كرمز للمجموعة</translation>
+        <translation>اختر ملفًا لاستخدامه كرمز للمجموعة</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="92"/>
         <source>Images</source>
-        <translation type="unfinished">صور</translation>
+        <translation>الصور</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="93"/>
         <source>All files</source>
-        <translation type="unfinished">كل الملفات</translation>
+        <translation>كل الملفات</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Error</source>
-        <translation type="unfinished">خطأ</translation>
+        <translation>خطأ</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation type="unfinished">تعذر قراءة ملف الصورة المحدد.</translation>
+        <translation>تعذّر قراءة ملف الصورة المحدّد.</translation>
     </message>
 </context>
 <context>
@@ -461,43 +445,43 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groups_widgets.cc" line="838"/>
         <location filename="../groups_widgets.cc" line="1013"/>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>القواميس:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="690"/>
         <source>Confirmation</source>
-        <translation type="unfinished">التأكد</translation>
+        <translation>التّأكيد</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="691"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation type="unfinished">أمتأكد من رغبتك بتوليد مجموعات حسب أزواج اللغة؟</translation>
+        <translation>هل أنت متأكد من توليد مجموعة مجموعات مبنية على زوجي اللّغة؟</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>غير مُعيّن</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>ادمج المجموعات باللغة المصدر إلى &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>ادمج المجموعات باللغة الهدف إلى &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>أنشئ مجموعة ترجمة من جهتين &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>ادمج المجموعات بـ &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -505,48 +489,48 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation type="unfinished">مجموع المقالات:</translation>
+        <translation>مجموع المقالات:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="46"/>
         <source>Translates from:</source>
-        <translation type="unfinished">ترجم من:</translation>
+        <translation>ترجم من:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="60"/>
         <source>Total words:</source>
-        <translation type="unfinished">مجموع الكلمات:</translation>
+        <translation>مجموع الكلمات:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="77"/>
         <source>Translates to:</source>
-        <translation type="unfinished">ترجم إلى:</translation>
+        <translation>ترجم إلى:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>افتح المجلد</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>حرّر القاموس</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">الملفات المشتملة على هذا القاموس:</translation>
+        <translation>الملفات التي تتضمن القاموس:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="201"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>الوصف:</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>حرّر القاموس بالأمر: %1</translation>
     </message>
 </context>
 <context>
@@ -554,44 +538,40 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups_widgets.cc" line="233"/>
         <source>%1 entries</source>
-        <translation>%1 مدخل</translation>
+        <translation>%1 من المدخلات</translation>
     </message>
 </context>
 <context>
     <name>DictionaryBar</name>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">شريط القاموس</translation>
-    </message>
-    <message>
         <location filename="../dictionarybar.cc" line="15"/>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>شريط ال&amp;قواميس</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>قائمة موسّعة بكل القواميس...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
         <source>Edit this group</source>
-        <translation type="unfinished">حرر هذه المجموعة</translation>
+        <translation>حرّر هذه المجموعة</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="135"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>معلومات القاموس</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="139"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>افتح مجلد القاموس</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="146"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>حرّر القاموس</translation>
     </message>
 </context>
 <context>
@@ -604,7 +584,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../editdictionaries.cc" line="41"/>
         <source>&amp;Sources</source>
-        <translation>&amp;مصادر</translation>
+        <translation>م&amp;صادر</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
@@ -621,22 +601,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../editdictionaries.cc" line="104"/>
         <source>Sources changed</source>
-        <translation>تغيرت المصادر</translation>
+        <translation>تغيّرت المصادر</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="105"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>بعض المصادر تغيرت. أتقبل التغييرات؟</translation>
+        <translation>بعض المصادر تغيّرت. أتقبل التّغييرات؟</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="108"/>
         <source>Accept</source>
-        <translation>أقبل</translation>
+        <translation>اقبل</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="110"/>
         <source>Cancel</source>
-        <translation>ألغ</translation>
+        <translation>ألغِ</translation>
     </message>
 </context>
 <context>
@@ -644,7 +624,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../externalviewer.cc" line="54"/>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>اسم برنامج العارض فارغ</translation>
     </message>
 </context>
 <context>
@@ -652,37 +632,37 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../forvo.cc" line="224"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished">خطأ عبارة XML: %1 في %2,%3</translation>
+        <translation>خطأ تحليل XML: %1 عند %2،%3</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="300"/>
         <source>Added %1</source>
-        <translation type="unfinished">اُضيف %1</translation>
+        <translation>أُضيف %1</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="303"/>
         <source>by</source>
-        <translation type="unfinished">من</translation>
+        <translation>بواسطة</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="307"/>
         <source>Male</source>
-        <translation type="unfinished">ذكر</translation>
+        <translation>ذكر</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="307"/>
         <source>Female</source>
-        <translation type="unfinished">انثى</translation>
+        <translation>أنثى</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="309"/>
         <source>from</source>
-        <translation type="unfinished">من</translation>
+        <translation>من</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="347"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished">اذهب إلى تحرير|قواميس|مصادر|فروفو وطبّق لمفتحاح API الخاص بنا لإذهاب هذا الخطأ.</translation>
+        <translation>اذهب إلى حرّر|قواميس|فورڤو واطلب منّا مفتاح API لإخفاء هذا الخطأ.</translation>
     </message>
 </context>
 <context>
@@ -690,7 +670,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../german.cc" line="48"/>
         <source>German Transliteration</source>
-        <translation>الترجمة الصوتية الألمانية</translation>
+        <translation>النسخ الألماني الحرفي</translation>
     </message>
 </context>
 <context>
@@ -698,7 +678,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../greektranslit.cc" line="839"/>
         <source>Greek Transliteration</source>
-        <translation type="unfinished">الترجمة الصوتية اليونانية</translation>
+        <translation>النسخ اليوناني الحرفي</translation>
     </message>
 </context>
 <context>
@@ -714,12 +694,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groupselectorwidget.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished">صيغة</translation>
+        <translation>نموذج</translation>
     </message>
     <message>
         <location filename="../groupselectorwidget.ui" line="19"/>
         <source>Look in</source>
-        <translation>انظر في</translation>
+        <translation>ابحث في</translation>
     </message>
 </context>
 <context>
@@ -732,7 +712,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="64"/>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>أضف القواميس المحددة للمجموعة (Ins)</translation>
+        <translation>أضف القواميس المحدّدة إلى المجموعة (Ins)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="67"/>
@@ -747,7 +727,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="89"/>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>أزل القواميس المحددة من المجموعة (Del)</translation>
+        <translation>أزل القواميس المحدّدة من المجموعة (Del)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="92"/>
@@ -767,7 +747,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
-        <translation>Tab 2</translation>
+        <translation>لسان 2</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
@@ -782,22 +762,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="153"/>
         <source>Create language-based groups</source>
-        <translation type="unfinished">أنشئ مجموعات بحسب اللغة</translation>
+        <translation>أنشئ مجموعات مبنية على اللغات</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="156"/>
         <source>Auto groups</source>
-        <translation type="unfinished">مجموعات تلقائية</translation>
+        <translation>مجموعات تلقائية</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="163"/>
         <source>Rename current dictionary group</source>
-        <translation>غير تسمية مجموعة القواميس الحالية</translation>
+        <translation>أعد تسمية مجموعة القواميس الحالية</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="166"/>
         <source>Re&amp;name group</source>
-        <translation>&amp;غير تسمية المجموعة</translation>
+        <translation>أ&amp;عد تسمية المجموعة</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="173"/>
@@ -823,7 +803,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>اسحب و أ&amp;فلت القواميس إلى ومن المجموعات, انقلهم داخل المجموعات, أعد ترتيب المجموعة باستخدام الفأرة.</translation>
+        <translation>اسحب وأ&amp;فلت القواميس من وإلى المجموعات، انقلها داخل المجموعات، أعد ترتيب المجموعات باستخدام الفأرة.</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="108"/>
@@ -833,17 +813,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="109"/>
         <source>Give a name for the new group:</source>
-        <translation>أعط المجموعة الجديدة اسما:</translation>
+        <translation>ضع اسمًا للمجموعة الجديدة:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="134"/>
         <source>Rename group</source>
-        <translation>غير اسم المجموعة</translation>
+        <translation>أعد تسمية المجموعة</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="135"/>
         <source>Give a new name for the group:</source>
-        <translation>أعط المجموعة الجديدة اسما:</translation>
+        <translation>ضع اسمًا جديدًا للمجموعة:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="146"/>
@@ -853,12 +833,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="147"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>أمتأكد من رغبتك بازالة المجموعة &lt;b&gt;%1&lt;/b&gt;؟</translation>
+        <translation>هل أنت متأكد من إزالة المجموعة &lt;b&gt;%1&lt;/b&gt;؟</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="160"/>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>أمتأكد من رغبتك بازالة كل المجموعات؟</translation>
+        <translation>هل أنت متأكد من إزالة كل المجموعات؟</translation>
     </message>
 </context>
 <context>
@@ -866,27 +846,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>ا&amp;حذف المحدّد</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>انسخ المحدّد</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>التأريخ:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="219"/>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="223"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>حجم التأريخ: %1 من المدخلات من أصل %2</translation>
     </message>
 </context>
 <context>
@@ -894,12 +874,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../hunspell.cc" line="242"/>
         <source>Spelling suggestions: </source>
-        <translation>اقتراحات التهجئة:</translation>
+        <translation>اقتراحات الإملاء:</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="776"/>
+        <location filename="../hunspell.cc" line="780"/>
         <source>%1 Morphology</source>
-        <translation type="unfinished">%1 صرف</translation>
+        <translation>الصَرْف %1</translation>
     </message>
 </context>
 <context>
@@ -907,7 +887,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="1131"/>
         <source>Enabled</source>
-        <translation>مفعل</translation>
+        <translation>مُمكّن</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1133"/>
@@ -920,23 +900,23 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../initializing.ui" line="22"/>
         <source>GoldenDict - Initializing</source>
-        <translation>بدء - القاموس الذهبي</translation>
+        <translation>القاموس الذهبي - يهيّئ</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="28"/>
         <location filename="../initializing.cc" line="30"/>
         <source>Please wait while indexing dictionary</source>
-        <translation>انتظر بينما تفهرس القواميس</translation>
+        <translation>فضلًا انتظر بينما تُفهرَس القواميس</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="44"/>
         <source>Dictionary Name</source>
-        <translation>اسم القاموس</translation>
+        <translation>اسم القامويس</translation>
     </message>
     <message>
         <location filename="../initializing.cc" line="21"/>
         <source>Please wait...</source>
-        <translation>رجاء انتظر...</translation>
+        <translation>فضلًا انتظر...</translation>
     </message>
 </context>
 <context>
@@ -944,1013 +924,1013 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="55"/>
         <source>Afar</source>
-        <translation type="unfinished"></translation>
+        <translation>العفرية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="56"/>
         <source>Abkhazian</source>
-        <translation type="unfinished"></translation>
+        <translation>الأبخازية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="57"/>
         <source>Avestan</source>
-        <translation type="unfinished"></translation>
+        <translation>الأفستية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="58"/>
         <source>Afrikaans</source>
-        <translation type="unfinished"></translation>
+        <translation>الإفريقية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="59"/>
         <source>Akan</source>
-        <translation type="unfinished"></translation>
+        <translation>الأكانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="60"/>
         <source>Amharic</source>
-        <translation type="unfinished"></translation>
+        <translation>الأمهرية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="61"/>
         <source>Aragonese</source>
-        <translation type="unfinished"></translation>
+        <translation>الأراغونية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="62"/>
         <source>Arabic</source>
-        <translation type="unfinished">عربي</translation>
+        <translation>العربية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="63"/>
         <source>Assamese</source>
-        <translation type="unfinished"></translation>
+        <translation>الأسامية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="64"/>
         <source>Avaric</source>
-        <translation type="unfinished"></translation>
+        <translation>الأفارية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="65"/>
         <source>Aymara</source>
-        <translation type="unfinished"></translation>
+        <translation>الأيمارية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="66"/>
         <source>Azerbaijani</source>
-        <translation type="unfinished"></translation>
+        <translation>الأذرية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="67"/>
         <source>Bashkir</source>
-        <translation type="unfinished"></translation>
+        <translation>الباشكيرية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="68"/>
         <source>Belarusian</source>
-        <translation type="unfinished"></translation>
+        <translation>البلاروسية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="69"/>
         <source>Bulgarian</source>
-        <translation type="unfinished"></translation>
+        <translation>البلغارية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="70"/>
         <source>Bihari</source>
-        <translation type="unfinished"></translation>
+        <translation>البيهارية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="71"/>
         <source>Bislama</source>
-        <translation type="unfinished"></translation>
+        <translation>البيسلامية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="72"/>
         <source>Bambara</source>
-        <translation type="unfinished"></translation>
+        <translation>البامبارية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="73"/>
         <source>Bengali</source>
-        <translation type="unfinished"></translation>
+        <translation>البنغالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="74"/>
         <source>Tibetan</source>
-        <translation type="unfinished"></translation>
+        <translation>التبتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="75"/>
         <source>Breton</source>
-        <translation type="unfinished"></translation>
+        <translation>البريتونية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="76"/>
         <source>Bosnian</source>
-        <translation type="unfinished"></translation>
+        <translation>البوسنية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="77"/>
         <source>Catalan</source>
-        <translation type="unfinished"></translation>
+        <translation>الكتالانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="78"/>
         <source>Chechen</source>
-        <translation type="unfinished"></translation>
+        <translation>الشيشانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="79"/>
         <source>Chamorro</source>
-        <translation type="unfinished"></translation>
+        <translation>التشامورو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="80"/>
         <source>Corsican</source>
-        <translation type="unfinished"></translation>
+        <translation>الكورسيكية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="81"/>
         <source>Cree</source>
-        <translation type="unfinished"></translation>
+        <translation>الكري</translation>
     </message>
     <message>
         <location filename="../language.cc" line="82"/>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>التشيكية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="83"/>
         <source>Church Slavic</source>
-        <translation type="unfinished"></translation>
+        <translation>الكنيسة السلافية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="84"/>
         <source>Chuvash</source>
-        <translation type="unfinished"></translation>
+        <translation>التشوفاشية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="85"/>
         <source>Welsh</source>
-        <translation type="unfinished"></translation>
+        <translation>الويلزية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="86"/>
         <source>Danish</source>
-        <translation type="unfinished"></translation>
+        <translation>الدنماركية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="87"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>الألمانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="88"/>
         <source>Divehi</source>
-        <translation type="unfinished"></translation>
+        <translation>الدِّيْفِيْهيّة</translation>
     </message>
     <message>
         <location filename="../language.cc" line="89"/>
         <source>Dzongkha</source>
-        <translation type="unfinished"></translation>
+        <translation>الزونخاية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="90"/>
         <source>Ewe</source>
-        <translation type="unfinished"></translation>
+        <translation>اليو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="91"/>
         <source>Greek</source>
-        <translation type="unfinished"></translation>
+        <translation>اليونانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="92"/>
         <source>English</source>
-        <translation type="unfinished">انكليزي</translation>
+        <translation>الإنجليزية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="93"/>
         <source>Esperanto</source>
-        <translation type="unfinished"></translation>
+        <translation>الاسبرانتو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="94"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>الإسبانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="95"/>
         <source>Estonian</source>
-        <translation type="unfinished"></translation>
+        <translation>الأستونية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="96"/>
         <source>Basque</source>
-        <translation type="unfinished"></translation>
+        <translation>الباسكية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="97"/>
         <source>Persian</source>
-        <translation type="unfinished">فارسي</translation>
+        <translation>الفارسية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="98"/>
         <source>Fulah</source>
-        <translation type="unfinished"></translation>
+        <translation>الفولانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="99"/>
         <source>Finnish</source>
-        <translation type="unfinished"></translation>
+        <translation>الفنلندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="100"/>
         <source>Fijian</source>
-        <translation type="unfinished"></translation>
+        <translation>الفيجية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="101"/>
         <source>Faroese</source>
-        <translation type="unfinished"></translation>
+        <translation>الفاروية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="102"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>الفرنسية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="103"/>
         <source>Western Frisian</source>
-        <translation type="unfinished"></translation>
+        <translation>الفريزيان</translation>
     </message>
     <message>
         <location filename="../language.cc" line="104"/>
         <source>Irish</source>
-        <translation type="unfinished"></translation>
+        <translation>الأيرلندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="105"/>
         <source>Scottish Gaelic</source>
-        <translation type="unfinished"></translation>
+        <translation>الغيلية الأسكتلندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="106"/>
         <source>Galician</source>
-        <translation type="unfinished"></translation>
+        <translation>الجاليكية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="107"/>
         <source>Guarani</source>
-        <translation type="unfinished"></translation>
+        <translation>الغوارانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="108"/>
         <source>Gujarati</source>
-        <translation type="unfinished"></translation>
+        <translation>الغوجاراتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="109"/>
         <source>Manx</source>
-        <translation type="unfinished"></translation>
+        <translation>المنكية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="110"/>
         <source>Hausa</source>
-        <translation type="unfinished"></translation>
+        <translation>الهوساوية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="111"/>
         <source>Hebrew</source>
-        <translation type="unfinished"></translation>
+        <translation>العبرية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="112"/>
         <source>Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation>الهندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="113"/>
         <source>Hiri Motu</source>
-        <translation type="unfinished"></translation>
+        <translation>الحيري موتو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="114"/>
         <source>Croatian</source>
-        <translation type="unfinished"></translation>
+        <translation>الكرواتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="115"/>
         <source>Haitian</source>
-        <translation type="unfinished"></translation>
+        <translation>الهايتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="116"/>
         <source>Hungarian</source>
-        <translation type="unfinished"></translation>
+        <translation>المجرية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="117"/>
         <source>Armenian</source>
-        <translation type="unfinished"></translation>
+        <translation>الأرمينية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="118"/>
         <source>Herero</source>
-        <translation type="unfinished"></translation>
+        <translation>الهيريرو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="119"/>
         <source>Interlingua</source>
-        <translation type="unfinished"></translation>
+        <translation>الوسيطة</translation>
     </message>
     <message>
         <location filename="../language.cc" line="120"/>
         <source>Indonesian</source>
-        <translation type="unfinished"></translation>
+        <translation>الأندونيسية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="121"/>
         <source>Interlingue</source>
-        <translation type="unfinished"></translation>
+        <translation>الإنترلينجوا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="122"/>
         <source>Igbo</source>
-        <translation type="unfinished"></translation>
+        <translation>الإيبو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="123"/>
         <source>Sichuan Yi</source>
-        <translation type="unfinished"></translation>
+        <translation>سيتشوان يي</translation>
     </message>
     <message>
         <location filename="../language.cc" line="124"/>
         <source>Inupiaq</source>
-        <translation type="unfinished"></translation>
+        <translation>الاينبياك</translation>
     </message>
     <message>
         <location filename="../language.cc" line="125"/>
         <source>Ido</source>
-        <translation type="unfinished"></translation>
+        <translation>الآيدوية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="126"/>
         <source>Icelandic</source>
-        <translation type="unfinished"></translation>
+        <translation>الأيسلاندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="127"/>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>الإيطالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="128"/>
         <source>Inuktitut</source>
-        <translation type="unfinished"></translation>
+        <translation>الإنكتيتوتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="129"/>
         <source>Japanese</source>
-        <translation type="unfinished"></translation>
+        <translation>اليابانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="130"/>
         <source>Javanese</source>
-        <translation type="unfinished"></translation>
+        <translation>الجاوية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="131"/>
         <source>Georgian</source>
-        <translation type="unfinished"></translation>
+        <translation>الجورجية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="132"/>
         <source>Kongo</source>
-        <translation type="unfinished"></translation>
+        <translation>الكونغو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="133"/>
         <source>Kikuyu</source>
-        <translation type="unfinished"></translation>
+        <translation>الكيكويو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="134"/>
         <source>Kwanyama</source>
-        <translation type="unfinished"></translation>
+        <translation>الكوانيامية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="135"/>
         <source>Kazakh</source>
-        <translation type="unfinished"></translation>
+        <translation>الكازاخية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="136"/>
         <source>Kalaallisut</source>
-        <translation type="unfinished"></translation>
+        <translation>الجرينلاندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="137"/>
         <source>Khmer</source>
-        <translation type="unfinished"></translation>
+        <translation>الخميرية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="138"/>
         <source>Kannada</source>
-        <translation type="unfinished"></translation>
+        <translation>الكانادية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="139"/>
         <source>Korean</source>
-        <translation type="unfinished"></translation>
+        <translation>الكورية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="140"/>
         <source>Kanuri</source>
-        <translation type="unfinished"></translation>
+        <translation>الكانورية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="141"/>
         <source>Kashmiri</source>
-        <translation type="unfinished"></translation>
+        <translation>الكشميرية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="142"/>
         <source>Kurdish</source>
-        <translation type="unfinished"></translation>
+        <translation>الكردية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="143"/>
         <source>Komi</source>
-        <translation type="unfinished"></translation>
+        <translation>الكومية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="144"/>
         <source>Cornish</source>
-        <translation type="unfinished"></translation>
+        <translation>الكورنية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="145"/>
         <source>Kirghiz</source>
-        <translation type="unfinished"></translation>
+        <translation>القيرقيزية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="146"/>
         <source>Latin</source>
-        <translation type="unfinished"></translation>
+        <translation>اللاتينية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="147"/>
         <source>Luxembourgish</source>
-        <translation type="unfinished"></translation>
+        <translation>اللوكسمبرجية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="148"/>
         <source>Ganda</source>
-        <translation type="unfinished"></translation>
+        <translation>الغاندا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="149"/>
         <source>Limburgish</source>
-        <translation type="unfinished"></translation>
+        <translation>الليمبرجيشية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="150"/>
         <source>Lingala</source>
-        <translation type="unfinished"></translation>
+        <translation>اللينغالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="151"/>
         <source>Lao</source>
-        <translation type="unfinished"></translation>
+        <translation>اللاوية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="152"/>
         <source>Lithuanian</source>
-        <translation type="unfinished"></translation>
+        <translation>اللتوانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="153"/>
         <source>Luba-Katanga</source>
-        <translation type="unfinished"></translation>
+        <translation>لوبا-كاتانغا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="154"/>
         <source>Latvian</source>
-        <translation type="unfinished"></translation>
+        <translation>اللاتفية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="155"/>
         <source>Malagasy</source>
-        <translation type="unfinished"></translation>
+        <translation>المالاجاشية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="156"/>
         <source>Marshallese</source>
-        <translation type="unfinished"></translation>
+        <translation>المارشالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="157"/>
         <source>Maori</source>
-        <translation type="unfinished"></translation>
+        <translation>الماورية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="158"/>
         <source>Macedonian</source>
-        <translation type="unfinished"></translation>
+        <translation>المقدونية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="159"/>
         <source>Malayalam</source>
-        <translation type="unfinished"></translation>
+        <translation>المالايالامية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="160"/>
         <source>Mongolian</source>
-        <translation type="unfinished"></translation>
+        <translation>المنغولية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="161"/>
         <source>Marathi</source>
-        <translation type="unfinished"></translation>
+        <translation>المهاراتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="162"/>
         <source>Malay</source>
-        <translation type="unfinished"></translation>
+        <translation>المالاوية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="163"/>
         <source>Maltese</source>
-        <translation type="unfinished"></translation>
+        <translation>المالطية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="164"/>
         <source>Burmese</source>
-        <translation type="unfinished"></translation>
+        <translation>البورمية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="165"/>
         <source>Nauru</source>
-        <translation type="unfinished"></translation>
+        <translation>الناورو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="166"/>
         <source>Norwegian Bokmal</source>
-        <translation type="unfinished"></translation>
+        <translation>بوكمال النرويجية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="167"/>
         <source>North Ndebele</source>
-        <translation type="unfinished"></translation>
+        <translation>شمال نديبيلي</translation>
     </message>
     <message>
         <location filename="../language.cc" line="168"/>
         <source>Nepali</source>
-        <translation type="unfinished"></translation>
+        <translation>النيبالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="169"/>
         <source>Ndonga</source>
-        <translation type="unfinished"></translation>
+        <translation>الإندونجية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="170"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>الهولندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="171"/>
         <source>Norwegian Nynorsk</source>
-        <translation type="unfinished"></translation>
+        <translation>النينورسك النرويجية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="172"/>
         <source>Norwegian</source>
-        <translation type="unfinished"></translation>
+        <translation>النرويجية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="173"/>
         <source>South Ndebele</source>
-        <translation type="unfinished"></translation>
+        <translation>جنوب نديبيلي</translation>
     </message>
     <message>
         <location filename="../language.cc" line="174"/>
         <source>Navajo</source>
-        <translation type="unfinished"></translation>
+        <translation>النافاهو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="175"/>
         <source>Chichewa</source>
-        <translation type="unfinished"></translation>
+        <translation>الشيشيوا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="176"/>
         <source>Occitan</source>
-        <translation type="unfinished"></translation>
+        <translation>الأوكيتانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="177"/>
         <source>Ojibwa</source>
-        <translation type="unfinished"></translation>
+        <translation>الأوجيبوا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="178"/>
         <source>Oromo</source>
-        <translation type="unfinished"></translation>
+        <translation>الأورومية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="179"/>
         <source>Oriya</source>
-        <translation type="unfinished"></translation>
+        <translation>الأوريا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="180"/>
         <source>Ossetian</source>
-        <translation type="unfinished"></translation>
+        <translation>الأوسيتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="181"/>
         <source>Panjabi</source>
-        <translation type="unfinished"></translation>
+        <translation>البنجابية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="182"/>
         <source>Pali</source>
-        <translation type="unfinished"></translation>
+        <translation>البالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="183"/>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>البولندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="184"/>
         <source>Pashto</source>
-        <translation type="unfinished"></translation>
+        <translation>البشتونية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="185"/>
         <source>Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>البرتغالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="186"/>
         <source>Quechua</source>
-        <translation type="unfinished"></translation>
+        <translation>الكويتشوا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="187"/>
         <source>Raeto-Romance</source>
-        <translation type="unfinished"></translation>
+        <translation>ريتو-الرومانسية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="188"/>
         <source>Kirundi</source>
-        <translation type="unfinished"></translation>
+        <translation>الكيروندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="189"/>
         <source>Romanian</source>
-        <translation type="unfinished"></translation>
+        <translation>الرومانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="190"/>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>الروسية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="191"/>
         <source>Kinyarwanda</source>
-        <translation type="unfinished"></translation>
+        <translation>الكينيارواندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="192"/>
         <source>Sanskrit</source>
-        <translation type="unfinished"></translation>
+        <translation>السنسكريتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="193"/>
         <source>Sardinian</source>
-        <translation type="unfinished"></translation>
+        <translation>السردينية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="194"/>
         <source>Sindhi</source>
-        <translation type="unfinished"></translation>
+        <translation>السندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="195"/>
         <source>Northern Sami</source>
-        <translation type="unfinished"></translation>
+        <translation>شمال سامي</translation>
     </message>
     <message>
         <location filename="../language.cc" line="196"/>
         <source>Sango</source>
-        <translation type="unfinished"></translation>
+        <translation>السانغو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="197"/>
         <source>Serbo-Croatian</source>
-        <translation type="unfinished"></translation>
+        <translation>الصربية الكرواتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="198"/>
         <source>Sinhala</source>
-        <translation type="unfinished"></translation>
+        <translation>السنهالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="199"/>
         <source>Slovak</source>
-        <translation type="unfinished"></translation>
+        <translation>السلوفاكية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="200"/>
         <source>Slovenian</source>
-        <translation type="unfinished"></translation>
+        <translation>السلوفينية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="201"/>
         <source>Samoan</source>
-        <translation type="unfinished"></translation>
+        <translation>الساموية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="202"/>
         <source>Shona</source>
-        <translation type="unfinished"></translation>
+        <translation>الشونا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="203"/>
         <source>Somali</source>
-        <translation type="unfinished"></translation>
+        <translation>الصومالية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="204"/>
         <source>Albanian</source>
-        <translation type="unfinished"></translation>
+        <translation>الألبانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="205"/>
         <source>Serbian</source>
-        <translation type="unfinished"></translation>
+        <translation>الصربية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="206"/>
         <source>Swati</source>
-        <translation type="unfinished"></translation>
+        <translation>السواتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="207"/>
         <source>Southern Sotho</source>
-        <translation type="unfinished"></translation>
+        <translation>جنوب السوتو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="208"/>
         <source>Sundanese</source>
-        <translation type="unfinished"></translation>
+        <translation>السوندانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="209"/>
         <source>Swedish</source>
-        <translation type="unfinished"></translation>
+        <translation>السويدية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="210"/>
         <source>Swahili</source>
-        <translation type="unfinished"></translation>
+        <translation>السواحلية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="211"/>
         <source>Tamil</source>
-        <translation type="unfinished"></translation>
+        <translation>التاميلية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="212"/>
         <source>Telugu</source>
-        <translation type="unfinished"></translation>
+        <translation>التيلجو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="213"/>
         <source>Tajik</source>
-        <translation type="unfinished"></translation>
+        <translation>الطاجيكية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="214"/>
         <source>Thai</source>
-        <translation type="unfinished"></translation>
+        <translation>التايلاندية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="215"/>
         <source>Tigrinya</source>
-        <translation type="unfinished"></translation>
+        <translation>التغرينية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="216"/>
         <source>Turkmen</source>
-        <translation type="unfinished"></translation>
+        <translation>التركمانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="217"/>
         <source>Tagalog</source>
-        <translation type="unfinished"></translation>
+        <translation>التاجالوجية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="218"/>
         <source>Tswana</source>
-        <translation type="unfinished"></translation>
+        <translation>التسوانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="219"/>
         <source>Tonga</source>
-        <translation type="unfinished"></translation>
+        <translation>التونغا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="220"/>
         <source>Turkish</source>
-        <translation type="unfinished"></translation>
+        <translation>التركية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="221"/>
         <source>Tsonga</source>
-        <translation type="unfinished"></translation>
+        <translation>التسونجا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="222"/>
         <source>Tatar</source>
-        <translation type="unfinished"></translation>
+        <translation>التتارية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="223"/>
         <source>Twi</source>
-        <translation type="unfinished"></translation>
+        <translation>التوي</translation>
     </message>
     <message>
         <location filename="../language.cc" line="224"/>
         <source>Tahitian</source>
-        <translation type="unfinished"></translation>
+        <translation>التاهيتية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="225"/>
         <source>Uighur</source>
-        <translation type="unfinished">ايغور</translation>
+        <translation>الإيغورية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="226"/>
         <source>Ukrainian</source>
-        <translation type="unfinished"></translation>
+        <translation>الأوكرانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="227"/>
         <source>Urdu</source>
-        <translation type="unfinished">اوردو</translation>
+        <translation>الأُردية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="228"/>
         <source>Uzbek</source>
-        <translation type="unfinished"></translation>
+        <translation>الأوزبكية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="229"/>
         <source>Venda</source>
-        <translation type="unfinished"></translation>
+        <translation>الفيندا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="230"/>
         <source>Vietnamese</source>
-        <translation type="unfinished"></translation>
+        <translation>الفيتنامية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="231"/>
         <source>Volapuk</source>
-        <translation type="unfinished"></translation>
+        <translation>فولابوك</translation>
     </message>
     <message>
         <location filename="../language.cc" line="232"/>
         <source>Walloon</source>
-        <translation type="unfinished"></translation>
+        <translation>الولونية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="233"/>
         <source>Wolof</source>
-        <translation type="unfinished"></translation>
+        <translation>الوولوف</translation>
     </message>
     <message>
         <location filename="../language.cc" line="234"/>
         <source>Xhosa</source>
-        <translation type="unfinished"></translation>
+        <translation>زوسا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="235"/>
         <source>Yiddish</source>
-        <translation type="unfinished"></translation>
+        <translation>اليديشية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="236"/>
         <source>Yoruba</source>
-        <translation type="unfinished"></translation>
+        <translation>اليوروبية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="237"/>
         <source>Zhuang</source>
-        <translation type="unfinished"></translation>
+        <translation>التشوانغية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="238"/>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>الصينية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="239"/>
         <source>Zulu</source>
-        <translation type="unfinished"></translation>
+        <translation>الزولو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>اللوجبانية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>الصينية التقليدية</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>الصينية المبسطة</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>أخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>لهجات الصينية المبسطة الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>لهجات الصينية التقليدية الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>لغات شرق أوروبا الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>لغات غرب أوروبا الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>اللغات الروسية الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>اللغات اليابانية الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>اللغات البلطيقية الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>اللغات اليونانية الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>اللهجات الكورية الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>اللهجات التركية الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>اللهجات التايلاندية الأخرى</translation>
     </message>
     <message>
         <location filename="../language.cc" line="389"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>الأمازيغية</translation>
     </message>
 </context>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="226"/>
+        <location filename="../loaddictionaries.cc" line="241"/>
         <source>Error loading dictionaries</source>
         <translation>خطأ في تحميل القواميس</translation>
     </message>
@@ -1958,22 +1938,18 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="152"/>
+        <location filename="../main.cc" line="205"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ في ملف الإعداد. أأتابع بالإعدادات الافتراضية؟</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">القاموس الذهبي</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="46"/>
         <location filename="../mainwindow.cc" line="695"/>
         <source>Welcome!</source>
-        <translation>مرحبا!</translation>
+        <translation>مرحبًا بك!</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="69"/>
@@ -1983,12 +1959,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="86"/>
         <source>&amp;Edit</source>
-        <translation>&amp;حرر</translation>
+        <translation>&amp;حرّر</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>&amp;Help</source>
-        <translation>&amp;مساعدة</translation>
+        <translation>م&amp;ساعدة</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
@@ -1998,16 +1974,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
         <source>&amp;Zoom</source>
-        <translation type="unfinished">&amp;كبّر</translation>
+        <translation>ت&amp;قريب</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
-        <translation>&amp;تاريخ</translation>
+        <translation>&amp;تأريخ</translation>
     </message>
     <message>
-        <source>Search Pane</source>
-        <translation type="obsolete">شريط البحث</translation>
+        <location filename="../mainwindow.ui" line="131"/>
+        <source>&amp;Search Pane</source>
+        <translation>لوحة ال&amp;بحث</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="258"/>
+        <source>&amp;Results Navigation Pane</source>
+        <translation>لوحة التنقّل بين النتائ&amp;ج</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="285"/>
+        <source>&amp;History Pane</source>
+        <translation>لوحة التأري&amp;خ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
@@ -2017,26 +2004,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation type="obsolete">م&amp;جموعات...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="131"/>
-        <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="258"/>
-        <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="285"/>
-        <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
@@ -2056,7 +2024,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="353"/>
         <source>&amp;About</source>
-        <translation>ح&amp;ول</translation>
+        <translation>&amp;حول</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="356"/>
@@ -2077,27 +2045,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="370"/>
         <source>Quit from application</source>
-        <translation>اخرج من البرنامج</translation>
+        <translation>اخرج من التطبيق</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="373"/>
         <source>Ctrl+Q</source>
-        <translation>Ctrl+خ</translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="381"/>
         <source>&amp;Forum</source>
-        <translation>&amp;منتدى</translation>
+        <translation>المن&amp;تدى</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="389"/>
         <source>&amp;Close To Tray</source>
-        <translation>ا&amp;نزل لزاوية النظام</translation>
+        <translation>أ&amp;غلق إلى صينية النظام</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>Minimizes the window to tray</source>
-        <translation>تصغير النافذة إلى الزاوية</translation>
+        <translation>يصغّر النافذة إلى صينية النظام</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="395"/>
@@ -2107,12 +2075,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="407"/>
         <source>&amp;Save Article</source>
-        <translation>ا&amp;حفظ المقال</translation>
+        <translation>ا&amp;حفظ المقالة</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="410"/>
         <source>Save Article</source>
-        <translation>حفظ المقال</translation>
+        <translation>احفظ المقالة</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="413"/>
@@ -2127,57 +2095,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="428"/>
         <source>Ctrl+P</source>
-        <translation>Ctrl+ط</translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>Page Set&amp;up</source>
-        <translation>ا&amp;عداد الصفحة</translation>
+        <translation>إ&amp;عداد الصفحة</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="444"/>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>معاي&amp;نة الطباعة</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="475"/>
-        <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="527"/>
-        <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="530"/>
-        <source>Always on Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="533"/>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="542"/>
-        <location filename="../mainwindow.ui" line="545"/>
-        <location filename="../mainwindow.cc" line="217"/>
-        <source>Menu Button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">معاينة الطباعة</translation>
-    </message>
-    <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">اعد فحص الملفات</translation>
+        <translation>أعد إ&amp;كتشاف الملفات</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="455"/>
@@ -2187,67 +2120,85 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
         <source>&amp;Clear</source>
-        <translation>&amp;مسح</translation>
+        <translation>ا&amp;محُ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="529"/>
-        <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwindow.ui" line="475"/>
+        <source>&amp;New Tab</source>
+        <translation>لسان &amp;جديد</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="478"/>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="489"/>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>مجلد الإ&amp;عداد</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3263"/>
+        <location filename="../mainwindow.cc" line="3268"/>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>أ&amp;ظهر</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="500"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;صدّر</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="516"/>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>ا&amp;ستورد</translation>
     </message>
     <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">اعرض الاسماء في شريط القواميس</translation>
+        <location filename="../mainwindow.ui" line="527"/>
+        <source>&amp;Always on Top</source>
+        <translation>&amp;دائمًا في الأعلى</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="530"/>
+        <source>Always on Top</source>
+        <translation>دائمًا في الأعلى</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="533"/>
+        <source>Ctrl+O</source>
+        <translation>Ctrl+O</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="542"/>
+        <location filename="../mainwindow.ui" line="545"/>
+        <location filename="../mainwindow.cc" line="217"/>
+        <source>Menu Button</source>
+        <translation>زر قائمة</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="79"/>
+        <source>Show Names in Dictionary &amp;Bar</source>
+        <translation>أظهر الأسماء في &amp;شريط القواميس</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="80"/>
+        <source>Show Small Icons in &amp;Toolbars</source>
+        <translation>أظهر رموز صغيرة في شريط الأد&amp;وات</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="81"/>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>شريط ال&amp;قوائم</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="225"/>
-        <location filename="../mainwindow.cc" line="1116"/>
-        <source>Look up in:</source>
-        <translation>انظر في:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="263"/>
-        <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Navigation</source>
-        <translation type="obsolete">التنقل</translation>
+        <location filename="../mainwindow.cc" line="118"/>
+        <source>&amp;Navigation</source>
+        <translation>التن&amp;قّل</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="121"/>
@@ -2257,12 +2208,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="123"/>
         <source>Forward</source>
-        <translation>تقدم</translation>
+        <translation>تقدّم</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="148"/>
         <source>Scan Popup</source>
-        <translation>انبثاق النتائج</translation>
+        <translation>منبثقة الاستكشاف</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="163"/>
@@ -2272,67 +2223,94 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="175"/>
         <source>Zoom In</source>
-        <translation>تكبير</translation>
+        <translation>قرّب</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="181"/>
         <source>Zoom Out</source>
-        <translation>تصغير</translation>
+        <translation>بعّد</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="185"/>
         <source>Normal Size</source>
-        <translation>حجم طبيعي</translation>
+        <translation>الحجم الطّبيعي</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="225"/>
+        <location filename="../mainwindow.cc" line="1116"/>
+        <source>Look up in:</source>
+        <translation>ابحث في:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="263"/>
+        <source>Found in Dictionaries:</source>
+        <translation>اعثر في القواميس:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="293"/>
         <source>Words Zoom In</source>
-        <translation type="unfinished">تكبير الكلمات</translation>
+        <translation>قرّب الكلمات</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="297"/>
         <source>Words Zoom Out</source>
-        <translation type="unfinished">تصغير الكلمات</translation>
+        <translation>يعّد الكلمات</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="299"/>
         <source>Words Normal Size</source>
-        <translation type="unfinished">الحجم الطبيعي للكلمات</translation>
+        <translation>حجم الكلمات العادي</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="307"/>
         <source>Show &amp;Main Window</source>
-        <translation>اعرض النافذة ال&amp;رئيسية</translation>
+        <translation>أظهر النافذة ال&amp;رئيسية</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="344"/>
+        <source>Opened tabs</source>
+        <translation>الألسنة المفتوحة</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="355"/>
         <source>Close current tab</source>
-        <translation type="unfinished">أغلق اللسان الحالي</translation>
+        <translation>أغلق اللسان الحالي</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="365"/>
         <source>Close all tabs</source>
-        <translation type="unfinished">أغلق كل الألسنة</translation>
+        <translation>أغلق كل الألسنة</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="373"/>
         <source>Close all tabs except current</source>
-        <translation type="unfinished">أغلق كل الألسنة عدا الحالي</translation>
+        <translation>أغلق كل الألسنة ما عدا هذا</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="519"/>
         <source>Loading...</source>
-        <translation>تحميل...</translation>
+        <translation>يحمّل...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="529"/>
+        <source>New Tab</source>
+        <translation>لسان جديد</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="763"/>
+        <location filename="../mainwindow.cc" line="2735"/>
+        <source>Accessibility API is not enabled</source>
+        <translation>أداة الإتاحة غير ممكّنة</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1105"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
-        <translation>%1 قواميس, %2 مقالات, %3 كلمات</translation>
+        <translation>%1 من القواميس، %2 من المقالات، %3 من الكلمات</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1116"/>
         <source>Look up:</source>
-        <translation>انظر:</translation>
+        <translation>ابحث عن:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1134"/>
@@ -2340,199 +2318,165 @@ between classic and school orthography in cyrillic)</source>
         <translation>الكل</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="344"/>
-        <source>Opened tabs</source>
-        <translation type="unfinished">الألسنة المفتوحة</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="79"/>
-        <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="80"/>
-        <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="118"/>
-        <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="1286"/>
+        <location filename="../mainwindow.cc" line="1289"/>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>قائمة الألسنة المفتوحة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1344"/>
+        <location filename="../mainwindow.cc" line="1347"/>
         <source>(untitled)</source>
-        <translation>(بلا عنوان)</translation>
+        <translation>(غير معنون)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1553"/>
+        <location filename="../mainwindow.cc" line="1556"/>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">تحذير: %1</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="2533"/>
+        <location filename="../mainwindow.cc" line="2538"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>فشل بدء آلية مراقبة المفاتيح السريعة.&lt;br&gt;تأكد من ان خادم الرسوميات مفعّل للاحقة RECORD.</translation>
+        <translation>فشل تهيئة تقنية مراقبة المفاتيح الساخنة.&lt;br&gt;تأكد من أن امتداد RECORD في XServer ممكّن.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2670"/>
+        <location filename="../mainwindow.cc" line="2675"/>
         <source>New Release Available</source>
-        <translation>اصدار جديد متوفر</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="2671"/>
-        <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>الاصدار &lt;b&gt;%1&lt;/b&gt; من القاموس الذهبي متوفر للتنزيل.&lt;br&gt;انقر &lt;b&gt;نزّل&lt;/b&gt; للوصول لصفحة التنزيل.</translation>
+        <translation>إصدار جديد متوفّر</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2676"/>
+        <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
+        <translation>الإصدار &lt;b&gt;%1&lt;/b&gt; من القاموس الذهبي متوفّر الآن للتنزيل.&lt;br&gt;انقر &lt;b&gt;نزّل&lt;/b&gt; للوصول إلى صفحة التنزيل.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="2681"/>
         <source>Download</source>
         <translation>نزّل</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2677"/>
+        <location filename="../mainwindow.cc" line="2682"/>
         <source>Skip This Release</source>
-        <translation>تجاهل هذا الاصدار</translation>
+        <translation>تخطّ هذا الإصدار</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="763"/>
-        <location filename="../mainwindow.cc" line="2730"/>
-        <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="2807"/>
+        <location filename="../mainwindow.cc" line="2812"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>اخترت إخفاء شريط القوائم. استخدم %1 لإظهاره مرة أخرى.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2808"/>
+        <location filename="../mainwindow.cc" line="2813"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2906"/>
+        <location filename="../mainwindow.cc" line="2911"/>
         <source>Page Setup</source>
-        <translation>اعداد الصفحة</translation>
+        <translation>إعداد الصفحة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2907"/>
+        <location filename="../mainwindow.cc" line="2912"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>لا يوجد طابعة. ركب واحدة أولا.</translation>
+        <translation>لا تتوفر طابعة. فضلًا ثبّت واحدة أولًا.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2925"/>
+        <location filename="../mainwindow.cc" line="2930"/>
         <source>Print Article</source>
-        <translation>اطبع المقال</translation>
+        <translation>اطبع المقالة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2994"/>
+        <location filename="../mainwindow.cc" line="2999"/>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>مقالة، بالكامل (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2995"/>
+        <location filename="../mainwindow.cc" line="3000"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>مقالة، HTML فقط (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2998"/>
+        <location filename="../mainwindow.cc" line="3003"/>
         <source>Save Article As</source>
-        <translation>احفظ المقال كـ</translation>
+        <translation>احفظ المقالة كـ</translation>
     </message>
     <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">ملفات Html ‏(*.html *.htm)</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="3012"/>
+        <location filename="../mainwindow.cc" line="3017"/>
         <source>Error</source>
         <translation>خطأ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3013"/>
+        <location filename="../mainwindow.cc" line="3018"/>
         <source>Can&apos;t save article: %1</source>
-        <translation>تعذر حفظ المقال: %1</translation>
+        <translation>تعذّر حفظ المقالة: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3050"/>
+        <location filename="../mainwindow.cc" line="3055"/>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>يحفظ المقالة...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3099"/>
+        <location filename="../mainwindow.cc" line="3104"/>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>عُيّنت النافذة الرئيسية في الأعلى دائمًا.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3259"/>
+        <location filename="../mainwindow.cc" line="3264"/>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>أ&amp;خفِ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3285"/>
+        <location filename="../mainwindow.cc" line="3290"/>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>صدّر التأريخ إلى ملف</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3287"/>
-        <location filename="../mainwindow.cc" line="3349"/>
+        <location filename="../mainwindow.cc" line="3292"/>
+        <location filename="../mainwindow.cc" line="3354"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>ملفات نص (*.txt);;كل الملفات (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3326"/>
+        <location filename="../mainwindow.cc" line="3331"/>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>اكتمل تصدير التأريخ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3329"/>
+        <location filename="../mainwindow.cc" line="3334"/>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ استيراد:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3347"/>
+        <location filename="../mainwindow.cc" line="3352"/>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>استورد التأريخ من ملف</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3396"/>
+        <location filename="../mainwindow.cc" line="3401"/>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ استيراد: بيانات غير صالحة في الملف</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3400"/>
+        <location filename="../mainwindow.cc" line="3405"/>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>اكتمل استيراد التأريخ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3403"/>
+        <location filename="../mainwindow.cc" line="3408"/>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ استيراد:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3591"/>
+        <location filename="../mainwindow.cc" line="3596"/>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>معلومات القاموس</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3593"/>
+        <location filename="../mainwindow.cc" line="3598"/>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>افتح مجلد القاموس</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3599"/>
+        <location filename="../mainwindow.cc" line="3604"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>حرّر القاموس</translation>
     </message>
 </context>
 <context>
@@ -2540,12 +2484,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>عُبث في ملف القاموس أو أُتلف</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل تحميل المقالة من %1، السبب: %2</translation>
     </message>
 </context>
 <context>
@@ -2553,7 +2497,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mediawiki.cc" line="310"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>خطأ عبارة XML: %1 في %2,%3</translation>
+        <translation>خطأ تحليل XML: %1 عند %2،%3</translation>
     </message>
 </context>
 <context>
@@ -2561,7 +2505,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mediawiki.cc" line="185"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>خطأ عبارة XML: %1 في %2,%3</translation>
+        <translation>خطأ تحليل XML: %1 عند %2،%3</translation>
     </message>
 </context>
 <context>
@@ -2569,7 +2513,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="415"/>
         <source>Enabled</source>
-        <translation>مفعل</translation>
+        <translation>ممكّن</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="417"/>
@@ -2584,7 +2528,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="421"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>الرّمز</translation>
     </message>
 </context>
 <context>
@@ -2592,12 +2536,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">صيغة</translation>
-    </message>
-    <message>
-        <location filename="../orderandprops.ui" line="76"/>
-        <source>Dictionary order:</source>
-        <translation>ترتيب القواميس:</translation>
+        <translation>النموذج</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="41"/>
@@ -2608,14 +2547,19 @@ between classic and school orthography in cyrillic)</source>
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../orderandprops.ui" line="76"/>
+        <source>Dictionary order:</source>
+        <translation>ترتيب القواميس:</translation>
+    </message>
+    <message>
         <location filename="../orderandprops.ui" line="139"/>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>القواميس غير العاملة (معطلة):</translation>
+        <translation>القواميس غير النشطة (المعطّلة):</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="153"/>
         <source>Dictionary information</source>
-        <translation>معلومات  القاموس</translation>
+        <translation>معلومات القاموس</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="161"/>
@@ -2635,37 +2579,37 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
-        <translation>ترجم من:</translation>
+        <translation>الترجمات من:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="219"/>
         <source>Translates to:</source>
-        <translation>ترجم إلى:</translation>
+        <translation>الترجمات إلى:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="248"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>الوصف:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="328"/>
         <source>Files comprising this dictionary:</source>
-        <translation>الملفات المشتملة على هذا القاموس:</translation>
+        <translation>الملفات التي تتضمن القاموس:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>غير الترتيب بسحب وافلات العناصر. اسحب القواميس إلى المجموعة غير الفعالة لتعطيل استخدامها.</translation>
+        <translation>اضبط الترتيب بسحب العناصر إفلاتها في القائمة. أفلت القواميس في المجموعة غير النشطة لتعطيل استخدامها.</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>افرز بالاسم</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="250"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>افرز باللغة</translation>
     </message>
 </context>
 <context>
@@ -2678,7 +2622,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="915"/>
         <source>Recursive</source>
-        <translation>تداخل</translation>
+        <translation>التكرارية</translation>
     </message>
 </context>
 <context>
@@ -2686,26 +2630,109 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../preferences.ui" line="14"/>
         <source>Preferences</source>
-        <translation>التفضيلات</translation>
+        <translation>تفضيلات</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="47"/>
         <source>&amp;Interface</source>
-        <translation>الوا&amp;جهة</translation>
+        <translation>ال&amp;واجهة</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="53"/>
+        <source>Startup</source>
+        <translation>البدء</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="59"/>
+        <source>Automatically starts GoldenDict after operation system bootup.</source>
+        <translation>يبدأ القاموس الذهبي مباشرة بعد إقلاع النّظام .</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="62"/>
+        <source>Start with system</source>
+        <translation>ابدأ مع النظام</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="74"/>
+        <source>Add-on style:</source>
+        <translation>نمط الملحقة:</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="99"/>
+        <source>When enabled, an icon appears in the sytem tray area which can be used
+to open main window and perform other tasks.</source>
+        <translation>عند تمكينه، سيظهر رمز في صينية النظام حيث يمكن استخدامها
+لفتح النافذة الرئيسية وإجراء مهامَ أخرى.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="103"/>
+        <source>Enable system tray icon</source>
+        <translation>مكّن رمز صينية النظام</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="121"/>
+        <source>With this on, the application starts directly to system tray without showing
+its main window.</source>
+        <translation>بهذه، يبدأ التطبيق تلقائيًّا في صينية النظام دون
+أن تظهر النافذة الرئيسية.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="125"/>
+        <source>Start to system tray</source>
+        <translation>ابدأ إلى صينية النظام</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="132"/>
+        <source>With this on, an attempt to close main window would hide it instead of closing
+the application.</source>
+        <translation>بهذه، محاولة إغلاق النافذة الرئيسية يخفي التطبيق بدلًا
+من إنهائه.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="136"/>
+        <source>Close to system tray</source>
+        <translation>أغلق إلى صينية النظام</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="146"/>
+        <source>Double-click translates the word clicked</source>
+        <translation>النقر المزدوج يترجم الكلمة المحدّدة</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="153"/>
+        <source>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</source>
+        <translation>عادةً، ضغط ESC ينقل التركيز إلى سطر الترجمة.
+بهذه، على أي حال، ستُخفي النافذة الرئيسية.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="157"/>
+        <source>ESC key hides main window</source>
+        <translation>مفتاح ESC يخفي النافذة الرئيسية</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="164"/>
+        <source>Turn this option on if you want to select words by single mouse click</source>
+        <translation>مكّن هذا الخيار إن أردت تحديد الكلمة بنقرة فأرة واحدة</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="167"/>
+        <source>Select word by single click</source>
+        <translation>حدّد الكلمة بنقرة مفردة</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="187"/>
         <source>Tabbed browsing</source>
-        <translation>التصفح بالألسنة</translation>
+        <translation>التصفّح المبوّب</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="193"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>الأصل، فتح لسان جديد ينتقل له تلقائيا.
-عند تشغيل هذه, الألسنة الجديدة ستفتح
-دون الانتقال لها.</translation>
+        <translation>عادةً، عند فتح لسان، يُتبدَّل إليه تلقائيًّا.
+بهذه، على أي حال، الألسنة الجديدة ستُفتح دون
+التبديل إليها.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="198"/>
@@ -2717,79 +2744,29 @@ switching to them.</source>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>عند تشغيل هذه, الألسنة الجديدة تفتح
-مباشرة بعد, اللسان النشط. دونها
-تضاف بعد آخر لسان.</translation>
+        <translation>بهذه، الألسنة ستُفتح فقط بعد
+الحاليّة، النشطة. وإلّا ستُضاف
+إلى الألسنة الأخيرة.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="210"/>
         <source>Open new tabs after the current one</source>
-        <translation>افتح الألسنة الجديدة بعد اللسان الحالي</translation>
+        <translation>افتح الألسنة الجديدة بعد الحاليّة</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="217"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>اختر هذا الخيار إن لم تكن تريد رؤية شريط الألسنة الرئيسي عندما يكون لسان واحد مفتوح.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="220"/>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>أخفِ لسانًا واحدًا</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="227"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
-to open main window and perform other tasks.</source>
-        <translation>عند تفعيلها, ستظهر أيقونة في زاوية النظام يمكن استخدامها
-لفتح النافذة الرئيسية و تأدية مهام أخرى.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="103"/>
-        <source>Enable system tray icon</source>
-        <translation>فعل أيقونة زاوية النظام</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="121"/>
-        <source>With this on, the application starts directly to system tray without showing
-its main window.</source>
-        <translation>بتشغيل هذه, البرنامج سينتقل البرنامج مباشرة إلى زاوية النظام دون عرض
-النافذة الرئيسية.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="125"/>
-        <source>Start to system tray</source>
-        <translation>ابدأ في زاوية النظام</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="132"/>
-        <source>With this on, an attempt to close main window would hide it instead of closing
-the application.</source>
-        <translation>بتشغيل هذه, اغلاق النافذة الرئيسية سيخفيها بدلا من إغلاق البرنامج.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="136"/>
-        <source>Close to system tray</source>
-        <translation>اغلق إلى زاوية النظام</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="53"/>
-        <source>Startup</source>
-        <translation>تشغيل تلقائي</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="59"/>
-        <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>ابدأ القاموس الذهبي مباشرة بعد اقلاع النظام.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="62"/>
-        <source>Start with system</source>
-        <translation>ابدأ مع النظام</translation>
+        <translation>Ctrl-Tab يتنقّل بين الألسنة بترتيب MRU</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="239"/>
@@ -2802,50 +2779,19 @@ the application.</source>
         <translation>نمط العرض:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="146"/>
-        <source>Double-click translates the word clicked</source>
-        <translation type="unfinished">النقر المزدوج يترجم الكلمة المنقورة</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="153"/>
-        <source>Normally, pressing ESC key moves focus to the translation line.
-With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="157"/>
-        <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="164"/>
-        <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="167"/>
-        <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="74"/>
-        <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>اضبط هذه القيمة لتجنّب قوائم المحتوى الضخمة.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>حد القواميس في قائمة السياق:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
         <source>&amp;Scan Popup</source>
-        <translation>م&amp;نبثقة البحث</translation>
+        <translation>منبثقة الا&amp;ستكشاف</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="376"/>
@@ -2853,38 +2799,39 @@ With this on however, it will hide the main window.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>عند تفعيلها, نافذة منبثقة بالترجمة ستظهر كل مرة تضع مؤشر الفأرة على
-أية كلمة على الشاشة (وندز) أو حدد أية كلمة بالفأرة (لينكس). عند التفعيل
-يمكنك تشغيلها و اطفائها من النافذة الرئيسية أو زاوية النظام.</translation>
+        <translation>إن مكّن، نافذة ترجمة منبثقة ستظهر كل مرة
+تضع المؤشر على أي كلمة على الشاشة (ويندوز)
+أو تحدّد أي كلمة بالفأرة (لينكس). إن مكّن، تستطيع
+تشغيله أو تعطيله من النافذة الرئيسية أو صينية النظام.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="382"/>
         <source>Enable scan popup functionality</source>
-        <translation>مكّن خاصية منبثقة البحث</translation>
+        <translation>مكّن وظيفة منبثقة الاستكشاف</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="394"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>اختر إذا ماكانت منبثقة البحث مشغلة افتراضيا أم لا. إن حددت, البرنامج سيبدأ
-دائما مع خاصية المنبثقة منشطة.</translation>
+        <translation>يحدّد إن كان وضع منبثقة الاستكشاف ممكّن افتراضيًّا أو لا. إن عُلِّم،
+سيبدأ البرنامج دائمًا ومنبثقة الاستكشاف نشطة.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="398"/>
         <source>Start with scan popup turned on</source>
-        <translation>ابدأ مع منبثقة البحث تعمل</translation>
+        <translation>ابدأ و منبثقة الاستكشاف تعمل</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="405"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation type="unfinished">عند تمكين هذا, المنبثقة ستظهر فقط عند استمرار ضغط كل المفاتيح المختارة
-عند تغيّر تحديد الكلمة.</translation>
+        <translation>إن كان هذا ممكّنًا، النافذة المنبثقة ستظهر فقط إن كانت كل
+المفاتيح مضغوطة عندما يتغيّر تحديد الكلمة.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="409"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
-        <translation type="unfinished">اظهر المنبثقة عند كون كل المفاتيح المحددة مضغوطة فقط:</translation>
+        <translation>أظهر المنبثقة فقط عند إبقاء الضغط على المفاتيح هذه كلها:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="448"/>
@@ -2899,12 +2846,12 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="458"/>
         <source>Right Shift only</source>
-        <translation>Shift اليسار فقط</translation>
+        <translation>Shift اليميني فقط</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="461"/>
         <source>Right Shift</source>
-        <translation>Shift اليمين</translation>
+        <translation>Shift اليميني</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="468"/>
@@ -2929,12 +2876,12 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="488"/>
         <source>Left Alt only</source>
-        <translation>Alt اليسار فقط</translation>
+        <translation>Alt اليساري فقط</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="491"/>
         <source>Left Alt</source>
-        <translation>Alt اليسار</translation>
+        <translation>Alt اليساري</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="498"/>
@@ -2949,42 +2896,42 @@ in the pressed state when the word selection changes.</source>
     <message>
         <location filename="../preferences.ui" line="508"/>
         <source>Right Alt only</source>
-        <translation>Alt اليمين فقط</translation>
+        <translation>Alt اليميني فقط</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="511"/>
         <source>Right Alt</source>
-        <translation>Alt اليمين</translation>
+        <translation>Alt اليميني</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="518"/>
         <source>Right Ctrl only</source>
-        <translation>Ctrl اليمين فقط</translation>
+        <translation>Ctrl اليميني فقط</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="521"/>
         <source>Right Ctrl</source>
-        <translation>Ctrl اليمين</translation>
+        <translation>Ctrl اليميني</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="528"/>
         <source>Left Shift only</source>
-        <translation>Shift اليسار فقط</translation>
+        <translation>Shift اليساري فقط</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="531"/>
         <source>Left Shift</source>
-        <translation>Shift اليسار</translation>
+        <translation>Shift اليساري</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="538"/>
         <source>Windows key or Meta key</source>
-        <translation>مفتاح وندز أو مفتاح ميتا</translation>
+        <translation>مفتاح الشّعار</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="541"/>
         <source>Win/Meta</source>
-        <translation>Win/Meta</translation>
+        <translation>ويندوز/ميتا</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="575"/>
@@ -2992,37 +2939,40 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation>الأصل, لتفعيل المنبثقة عليك ابقاء المفاتيح المختارة
-مضغوطة عند اختيارك لكلمة. عند تمكين هذا, المفاتيح
-يمكن ان تضغط أيضا بعد تحديد الكلمة.</translation>
+        <translation>عادةً، لتفعيل المنبثقة عليك إبقاء
+الضغط على المفاتيح المختارة وأنت
+تحدّد الكلمة. عند تمكين هذا، المفاتيح
+المختارة يمكن ضغطها بوقت أقل بعد
+الانتهاء من التحديد.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="581"/>
         <source>Keys may also be pressed afterwards, within</source>
-        <translation>يمكن ان تضغط المفاتيح لاحقا, في</translation>
+        <translation>يمكن أيضًا ضغط المفاتيح فيما بعد خلال</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="588"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>لتجنب اللبس, ستراقب المفاتيح بعد انتهاء التحديد لفترة
-محددة من الثوان, المحددة هنا.</translation>
+        <translation>لتجنّب الأخطاء، تُراقب المفاتيح أيضًا
+بعد الاختيار القيمة لوقت محدّد من
+الثواني، والذي تستطيع تحديده هنا.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="612"/>
         <source>secs</source>
-        <translation>ثانية</translation>
+        <translation>ث</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="634"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>أرسل الكلمة المترجمة إلى النافذة الرئيسية بدلًا من إظهارها في نافذة منبثقة</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="637"/>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>أرسل الكلمة المترجمة إلى النافذة الرئيسية</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="665"/>
@@ -3032,17 +2982,17 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="684"/>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>استخدم هذه المفاتيح السريعة لعرض أو اخفاء النافذة الرئيسية:</translation>
+        <translation>استخدم المفتاح السّريع التالي لإظهار أو إخفاء النافذة الرئيسية:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="715"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>استخدم هذه المفاتيح السريعة لترجمة كلمة من الحافظة:</translation>
+        <translation>استخدم المفاتيح السّريع التالي لترجمة كلمة من الحافظة:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="762"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>المفاتيح السريعة عامة و تعمل من أي برنامج أو اي سياق طالما ان القاموس الذهبي يعمل في الخلفية.</translation>
+        <translation>المفاتيح السريعة تعمل في أي مكان من الحاسوب خلال أي محتوى طالما القاموس الذهبي يعمل في الخلفية.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="772"/>
@@ -3055,7 +3005,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;ملاحظة: يبدو انك تعمل على اصدار من خادوم X.Org XServerاللاحقة RECORD معطوبة فيه. لن تعمل المفاتيح السريعة في القاموس الذهبي على الأغلب. ينبغي اصلاح هذا في الخادوم نفسه. رجاء اطلع على الآتي &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;مدخلة علة&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; واترك تعليقا هناك إن شئت.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p dir=&quot;RTL&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;ملاحظة: يبدو أنك تعمل على إصدار X.Org XServer لديه ملحقة RECORD معطّلة. المفاتيح السريعة في القاموس الذهبي قد لا تعمل. يمكن إصلاح هذا في الخدم نفسه. فضلًا ارجع إلى &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;العلة هذه&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; واترك تعليقًا هناك إن أحببت.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="810"/>
@@ -3065,104 +3015,64 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="829"/>
         <source>Pronunciation</source>
-        <translation>اللفظ</translation>
+        <translation>النطق</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="835"/>
         <source>Auto-pronounce words in main window</source>
-        <translation>انطق بالكلمات آليا في النافذة الرئيسية</translation>
+        <translation>انطق تلقائيًّا الكلمات في النافذة الرئيسية</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="842"/>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>انطق بالكلمات آليا في منبثقة البحث</translation>
+        <translation>انطق تلقائيًّا الكلمات في منبثقة الاستكشاف</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="852"/>
         <source>Playback</source>
-        <translation type="unfinished">التشغيل</translation>
+        <translation>التشغيل</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>شغّل ملفات الصوت بـ FFmpeg(libav) و libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1294"/>
-        <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1297"/>
-        <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1304"/>
-        <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1320"/>
-        <source>symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation type="obsolete">استخدم API الاصلية لمشغلات وندز. محصور بملفات .wav فقط،
-لكنه يعمل جيدا.</translation>
-    </message>
-    <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">شغل عبر API الموطنة في وندز</translation>
-    </message>
-    <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">شغل الصوت عبر إطار فونون. قد يكون غير مستقر نوعا ما،
-لكنه يدعم أغلب هيئات ملفات الصوت.</translation>
-    </message>
-    <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">شغل عبر Phonon</translation>
+        <translation>استخدم المشغّل الداخلي</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="870"/>
         <source>Use any external program to play audio files</source>
-        <translation>استخدم أيّة برنامج خارجي لتشغيل ملفات الصوت</translation>
+        <translation>استخدم أي برنامج خارجي لتشغيل ملفات الصوت</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="873"/>
         <source>Use external program:</source>
-        <translation>استخدم برنامجا خارجيا:</translation>
+        <translation>استخدم برنامجًا خارجيًا:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="910"/>
         <source>&amp;Network</source>
-        <translation>ال&amp;شبكة</translation>
+        <translation>ال&amp;شّبكة</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="929"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>مكن استخدام خادوم بروكسي لكل طلبات
-البرنامج الشبكية.</translation>
+        <translation>مكّنه إن وددت استخدام مُلقّم
+لجميع طلبات البرنامج في الشبكة.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="933"/>
         <source>Use proxy server</source>
-        <translation>استخدم خادوم بروكسي</translation>
+        <translation>استخدم مُلقّمًا</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="947"/>
         <source>Type:</source>
-        <translation>النوع:</translation>
+        <translation>النّوع:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="957"/>
@@ -3189,37 +3099,41 @@ for all program&apos;s network requests.</source>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>تمكين هذا سيجعل القاموس الذهبي يحجب أغلب الاعلانات
-بمنع المحتوى (صور, اطارات) من خارج الموقع الذي تتصفحه.
-ان كانت بعض المواقع تتشوه بسبب ذلك, جرب تعطيله.</translation>
+        <translation>تمكين هذا يجعل القاموس الذهبي يمنع أغلب الإعلانات
+بعدم السماح بالمحتوى (صور، إطارات) غير المُنشأ من الموقع
+الذي تتصفّحه. إن انهارت بعض المواقع بسبب هذا، حاول تعطيله.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1038"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation>لا تسمح بتحميل المحتوى من المواقع الاخرى (يخفي معظم الاعلانات)</translation>
+        <translation>امنع تحميل المحتوى من مواقع أخرى (يخفي أغلب الإعلانات)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1045"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>تمكين هذا سيسمح بالاستماع إلى نطق الصوت
+من القواميس الموجودة على الإنترنت التي تعتمد
+مشغّل فلاش أو إضافات وِب. يجب تثبيت الإضافة
+ليعمل هذا الخيار.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1050"/>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>مكّن إضافات الوِب</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>بعض المواقع تكتشف القاموس الذهبي من خلال ترويسات HTTP وتمنع الطلبات.
+مكّن هذا الخيار للالتفاف حول المشكلة.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>لا تعرّف القاموس الذهبي في ترويسات HTTP</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
@@ -3228,25 +3142,25 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>عند تمكين هذا, سيتحقق البرنامج من التحديثات
-المتوفرة للتحميل من القاموس الذهبي. إن وجدت،
-سيعلم البرنامج المستخدم و يطلب اذنه لفتح صفحة
-التنزيل.</translation>
+        <translation>عند تمكين هذا، يلتمس البرنامج
+كل فترة إن كان هناك تحديث جديد
+للبرنامج متوفّر للتنزيل. إن كان كذلك،
+سيُعلمك البرنامج عنه ويطلب فتح صفحة التنزيل.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1091"/>
         <source>Check for new program releases periodically</source>
-        <translation type="unfinished">تحقق من الاصدارات الحديثة غِبّا</translation>
+        <translation>التمس عن إصدار جديد للبرنامج كل فترة</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1112"/>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>مت&amp;قدّم</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1118"/>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>تقنيات منبثقة الاستكشاف الإضافية</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1124"/>
@@ -3254,140 +3168,163 @@ download page.</source>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>حاول أن تستخدم تقنية IAccessibleEx لاسترجاع الكلمة الواقعة تحت المؤشر.
+تعمل هذه التقنية فقط مع بعض البرمجيات التي تدعمها.
+(على سبيل المثال انترنت اكسبلورر 9)
+لا حاجة لانتقاء هذا الخيار إذا كنت لا تستخدم مثل هذه البرمجيات.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1130"/>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>استخدم &amp;IAccessibleEx</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1137"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>حاول أن تستخدم تقنية أتمتة واجهة المُستخدم لاسترجاع الكلمة الواقعة تحت المؤشر.
+تعمل هذه التقنية فقط مع بعض البرمجيات التي تدعمها.
+لا حاجة لانتقاء هذا الخيار إذا كنت لا تستخدم مثل هذه البرمجيات.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1142"/>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>استخدم أ&amp;تمتة واجهة المستخدم</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1149"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>حاول استخدام رسالة القاموس الذهبي لاسترجاع الكلمة تحت المؤشر.
+هذه التقنية تعمل فقط مع بعض البرامج وتدعمها.
+ليس مهمًّا تحديد هذا الخيار إن لم تكن تستخدم هكذا برنامج.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1154"/>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>استخدم رسالة القاموس ال&amp;ذهبي</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1164"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>التأريخ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1170"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>مكّن هذا الخيار لتخزين تأريخ الكلمات المترجمة</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1173"/>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>خزّن ال&amp;تأريخ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>حدّد عدد المدخلات الأقصى لإبقائها في التأريخ.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>حجم التأريخ الأقصى:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>فترة حفظ التأريخ. إن عُيِّنت إلى 0، سيُحفظ التأريخ أثناء إنهاء التطبيق فقط.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>احفظ كلّ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1251"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>دقيقة</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1276"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>المقالات</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1282"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>مكّن هذا الخيار لتوسيع الأجزاء الاختيارية من المقالات دائمًا</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1285"/>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>وسّع الأ&amp;قسام الاختيارية</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1294"/>
+        <source>Select this option to automatic collapse big articles</source>
+        <translation>حدّد هذا الخيار لطي المقالات الكبيرة تلقائيًّا</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1297"/>
+        <source>Collapse articles more than</source>
+        <translation>اطو المقالات الأكبر من الـ</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1304"/>
+        <source>Articles longer than this size will be collapsed</source>
+        <translation>المقالات الأكبر من هذا الحجم ستطوى</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1320"/>
+        <source>symbols</source>
+        <translation>رمز</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="42"/>
         <source>System default</source>
-        <translation>افتراضيات النظام</translation>
+        <translation>افتراضي النظام</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="80"/>
         <source>Default</source>
-        <translation>الافتراضيات</translation>
+        <translation>الافتراضي</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>عصري</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
         <source>Lingvo</source>
-        <translation type="unfinished">لينغفو</translation>
+        <translation>لنغفو</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="83"/>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>بابيلون</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>لِنْغوز</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">اعرض خلال DirectShow</translation>
+        <translation>لِنْغوز-بلو</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="363"/>
         <source>Changing Language</source>
-        <translation>تغيير اللغة</translation>
+        <translation>يغيّر اللغة</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="364"/>
         <source>Restart the program to apply the language change.</source>
-        <translation>اعد تشغيل البرنامج لتطبيق تغيير اللغة.</translation>
+        <translation>أعد تشغيل البرنامج لتطبيق تغيير اللغة.</translation>
     </message>
 </context>
 <context>
@@ -3395,27 +3332,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../sources.cc" line="821"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>صوت</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="823"/>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>نص مجرّد</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="825"/>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="827"/>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>طابِق السابقة</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="829"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>غير معروف</translation>
     </message>
 </context>
 <context>
@@ -3423,17 +3360,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يُعطَ اسم للبرنامج.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>انهار البرنامج.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>أرجعَ البرنامج شِفرة الخروج %1.</translation>
     </message>
 </context>
 <context>
@@ -3441,125 +3378,126 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../sources.cc" line="729"/>
         <source>Enabled</source>
-        <translation type="unfinished">مفعل</translation>
+        <translation>ممكّن</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="731"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>النوع</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="733"/>
         <source>Name</source>
-        <translation type="unfinished">الاسم</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="735"/>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>سطر الأوامر</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="737"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>الرّمز</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="396"/>
+        <location filename="../aard.cc" line="391"/>
+        <location filename="../dsl.cc" line="1302"/>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ في تحميل المقالة</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="478"/>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ في فك ترميز المقالة</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل avformat_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل av_malloc().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل avio_alloc_context().</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل avformat_open_input(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر العثور على دفق الصوت.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يُعثر على المرماز [المعرّف: %1].</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>فشلavcodec_open2(): %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر العثور على جهاز خرج صوت قابل للاستخدام.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>صيغة النموذج غير مدعومة.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>فشل ao_open_live(): </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا تعريف.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا التعريف ليس جهاز خرج حيّ.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>مفتاح خيار صالح يملك قيمة غير صالحة.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر فتح الجهاز: %1، القنوات: %2، المعدّل: %3، البتات: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ غير معروف.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل avcodec_alloc_frame().</translation>
     </message>
 </context>
 <context>
@@ -3567,36 +3505,36 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>رشّح/ابحث في القاموس (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>بحث سريع</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>امحُ البحث</translation>
     </message>
 </context>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2193"/>
-        <location filename="../articleview.cc" line="2200"/>
+        <location filename="../articleview.cc" line="2202"/>
+        <location filename="../articleview.cc" line="2209"/>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2193"/>
+        <location filename="../articleview.cc" line="2202"/>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ في حفظ المورد: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2200"/>
+        <location filename="../articleview.cc" line="2209"/>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">فشل تنزيل المرجع المشار إليه.</translation>
+        <translation>فشل تنزيل المورد المشار إليه.</translation>
     </message>
 </context>
 <context>
@@ -3604,12 +3542,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../romaji.cc" line="107"/>
         <source>Hepburn Romaji for Hiragana</source>
-        <translation>هيبورن روماجي لالهيراجانا</translation>
+        <translation>رومانجي هِپ‌بيرن للهيراجانا</translation>
     </message>
     <message>
         <location filename="../romaji.cc" line="116"/>
         <source>Hepburn Romaji for Katakana</source>
-        <translation>هيبورن روماجي لكاتاكانا</translation>
+        <translation>رومانجي هِپ‌بيرن للكاتاكانا</translation>
     </message>
 </context>
 <context>
@@ -3617,7 +3555,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../russiantranslit.cc" line="107"/>
         <source>Russian Transliteration</source>
-        <translation>الترجمة الصوتية الروسية</translation>
+        <translation>النسخ الروسي الحرفي</translation>
     </message>
 </context>
 <context>
@@ -3625,15 +3563,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="14"/>
         <source>Dialog</source>
-        <translation>مربع حوار</translation>
+        <translation>الحوار</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">كلمة</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">اسرد المقابلات (Alt+M)</translation>
+        <location filename="../scanpopup.ui" line="107"/>
+        <source>Back</source>
+        <translation>ارجع</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="110"/>
@@ -3645,18 +3580,9 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="107"/>
-        <source>Back</source>
-        <translation type="unfinished">ارجع</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
-        <translation type="unfinished">تقدم</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
+        <translation>تقدّم</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="135"/>
@@ -3671,34 +3597,30 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="155"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>أرسل الكلمة إلى النافذة الرئيسية (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="165"/>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="185"/>
         <source>Shows or hides the dictionary bar</source>
-        <translation>أظهر أو أخف شريط القاموس</translation>
+        <translation>يُظهر أو يخفي شريط القاموس</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="208"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation type="unfinished">استخدم هذا لتعليق النافذة وابقاءها على الشاشة،
-يمكن تغيير حجمها أو ادارتها بطرق أخرى.</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">القاموس الذهبي</translation>
+        <translation>استخدم هذا لتثبيت النافذة فتبقى على الشاشة،
+يمكن تغيير حجمها أو إدارتها بطرق عدّة.</translation>
     </message>
     <message>
         <location filename="../scanpopup.cc" line="480"/>
         <location filename="../scanpopup.cc" line="825"/>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -3716,7 +3638,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="1023"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>الرّمز</translation>
     </message>
 </context>
 <context>
@@ -3724,12 +3646,12 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="37"/>
         <source>Files</source>
-        <translation>ملفات</translation>
+        <translation>الملفات</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="43"/>
         <source>Paths to search for the dictionary files:</source>
-        <translation>مسار البحث عن ملفات القواميس</translation>
+        <translation>المسارات للبحث فيها عن ملفات القواميس:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="57"/>
@@ -3747,32 +3669,32 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="310"/>
         <location filename="../sources.ui" line="377"/>
         <source>&amp;Remove</source>
-        <translation>ا&amp;مسح</translation>
+        <translation>أ&amp;زل</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="84"/>
         <source>Re&amp;scan now</source>
-        <translation>ا&amp;بحث مجددا</translation>
+        <translation>أعد الا&amp;كتشاف الآن</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="100"/>
         <source>Sound Dirs</source>
-        <translation>مجلدات الصوت</translation>
+        <translation>أدلة الصوت</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="106"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>اعمل قواميسا من مجموعة من الملفات الصوتية بإضافة المسار هنا:</translation>
+        <translation>اعمل قواميس من مجموعات من ملفات الصوت بإضافة المسارات هنا:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="156"/>
         <source>Morphology</source>
-        <translation>الصرف</translation>
+        <translation>الصَرْف</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="162"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>مسار قواميس Hunspell/Myspell:</translation>
+        <translation>المسار إلى دليل بقواميس Hunspell/Myspell:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="178"/>
@@ -3782,7 +3704,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="187"/>
         <source>Available morphology dictionaries:</source>
-        <translation>القواميس الصرفية المتوفرة:</translation>
+        <translation>قواميس الصَرْف المتوفّرة:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="199"/>
@@ -3792,12 +3714,13 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>كل قاموس صرفي يظهر
+        <translation>كل قاموس صَرْف يظهر
 كقاموس مساعد منفصل
-ليقدم كلمات جذعية للبحث
-و اقتراحات هجائية للكلمات الخطأ
-أضف القواميس الملائمة لأسفل
-المجموعة المناسبة لاستخدامهم.</translation>
+حيث يقدّم جذر الكلمة للبحث
+واقتراحات الإملاء للكلمات
+الخاطئة. أضف القواميس
+المناسبة إلى أسفل المجموعات
+المناسبة لاستخدامها.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="224"/>
@@ -3807,139 +3730,118 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="230"/>
         <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>مواقع (ميديا ويكي) لويكيبيديا:</translation>
+        <translation>مواقع ويكيبيديا (ميدياويكي):</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="283"/>
         <source>Websites</source>
-        <translation>مواقع</translation>
+        <translation>مواقع الوِب</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="289"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>اية مواقع مع العبارة %GDWORD% ستستبدل بكلمة الطلب:</translation>
+        <translation>أي مواقع للوِب. السلسلة %GDWORD% ستُستبدل بكلمة الاستعلام:</translation>
     </message>
     <message>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">كبيديل استخدم %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</translation>
+        <location filename="../sources.ui" line="334"/>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation>إضافةً إلى ذلك، استخدم %GD1251% لـ CP1251، و %GDISO1% لـ ISO 8859-1، و %GDISO16% لـ ISO 8859-16، و
+%GDBIG5% لـ Big-5، و %GDBIG5HKSCS% لـ Big5-HKSCS، و %GDGBK% لـ GBK و GB18030، و %GDSHIFTJIS% لـ Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>البرامج</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation>أي برامج خارجية، السلسلة %GDWORD% ستُستبدل بكلمة الاستعلام. إن لم تُقدَّم هكذا سلسلة، ستُغذّى الكلمة إلى الإدخال القياسي.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
         <source>Forvo</source>
-        <translation type="unfinished">فروفو</translation>
+        <translation>فورڤو</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation type="unfinished">تهجئة حية من &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. هذا الموقع يسمح للناس بتسجيل ومشاركة لفظ الكلمات. يمكنك الاستماع لها داخل GoldenDict.</translation>
+        <translation>نطق حيّ من &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. هذا الموقع يسمح للناس بتسجيل ومشاركة نطق الكلمة. يمكنك الإستماع إليها من القاموس الذهبي.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="431"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation type="unfinished">فعّل الترجمة من فروفو</translation>
+        <translation>مكّن النطق من فورڤو</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="461"/>
         <source>API Key:</source>
-        <translation type="unfinished">مفتاح API:</translation>
+        <translation>مفتاح API:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="468"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation type="unfinished">استخدام فروفو حاليا يتطلب مفتاح API. اترك الحقل هذا
-فارغا لاستخدام المفتاح الافتراضي، الذي قد يتعطل
-في المستقبل، أو سجل عبر الموقع لتحصل على مفتاحك الخاص.</translation>
+        <translation>استخدام فورڤو حاليًّا يتطلّب مفتاح API. اترك هذا الحقل
+فارغًا إن أردت استخدام الافتراضي، والذي قد لا يتوفّر في
+المستقبل، أو سجّل في موقعنا للحصول على مفتاحك الخاص.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;احصل على مفتاحك الخاص &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../sources.ui" line="334"/>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
-%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../sources.ui" line="353"/>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>احصل على مفتاحك الخاص من &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;هنا&lt;/a&gt;، أو اتركه فارغًا لاستخدام الافتراضي.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
         <source>Language codes (comma-separated):</source>
-        <translation type="unfinished">رموز اللغات (مفصولة بالفاصلة):</translation>
+        <translation>ترميزات اللغة (مقسّمة بفواصل):</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="513"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation type="unfinished">قائمة برموز اللغات التي ترغب بها. مثال: &quot;en, ru&quot;.</translation>
+        <translation>قائمة ترميزات اللغة التي تريد امتلاكها. مثال: &quot;en, ru&quot;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="536"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation type="unfinished">قائمة كاملة برموز اللغات &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;هنا&lt;/a&gt;.</translation>
+        <translation>القائمة الكاملة من ترميزات اللغة متوفّرة &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;هنا&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="578"/>
         <source>Transliteration</source>
-        <translation>الترجمة الصوتية</translation>
+        <translation>النسخ الحرفي</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="599"/>
         <source>Russian transliteration</source>
-        <translation>الترجمة الصوتية الروسية</translation>
+        <translation>النسخ الروسي الحرفي</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="610"/>
         <source>Greek transliteration</source>
-        <translation>الترجمة الصوتية اليونانية</translation>
+        <translation>النسخ اليوناني الحرفي</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="634"/>
         <source>German transliteration</source>
-        <translation>الترجمة الصوتية الألمانية</translation>
+        <translation>النسخ الألماني الحرفي</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="645"/>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>النسخ البلاروسي الحرفي</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="671"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
-        <translation>يمكنك من استخدام الأبجدية اللاتينية لكتابة اللغة اليابانية</translation>
+        <translation>يمكّن استخدام الأبجدية اللاتينية لكتابة اللغة اليابانية</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="674"/>
         <source>Japanese Romaji</source>
-        <translation>اليابانية روماجي</translation>
+        <translation>روماجي اليابانية</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="686"/>
@@ -3950,13 +3852,13 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.ui" line="693"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation>الاسلوب الأكثر شيوعا لل transcription اليابانية,
-يعتمد على الصوتية الانكليزية</translation>
+        <translation>الطريقة الأكثر استخدامًا لنسخ اليابانية،
+مبنية على الفونولوجيا الإنجليزية</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="697"/>
         <source>Hepburn</source>
-        <translation type="unfinished">هيبورن</translation>
+        <translation>هِپ‌بيرن</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="707"/>
@@ -3964,15 +3866,15 @@ based on English phonology</source>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation type="unfinished">الاسلوب الاكثر اعتيادا, بعلاقة واحد مقابل واحد لأنظمة كتابة الكانا
-مقياس قياسي ISO 3602
+        <translation>النظام الأكثر اعتيادية، لهُ علاقة واحد إلى واحد لأنظمة
+كتابة الكانا، موحّدة كـ ISO 3602
 
-غير مطبق بعد في القاموس الذهبي.</translation>
+لم يُنفَّذ حتى الآن في القاموس الذهبي.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="713"/>
         <source>Nihon-shiki</source>
-        <translation>نيهون-سيكي</translation>
+        <translation>نيهون-شيكي</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="723"/>
@@ -3980,25 +3882,25 @@ Not implemented yet in GoldenDict.</source>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>يعتمد على نظام نيهون-سيكي, لكنه معدل للمواصفات القياسية اليابانية الحديثة
-مقياس قياسي ISO 3602
+        <translation>مبني على نيهون-شيكي، لكن مُعدَّل لليابانية العصرية القياسية.
+موحّدة كـ ISO 3602
 
-غير مضمن بعد في القاموس الذهبي.</translation>
+لم يُنفَّذ حتى الآن في القاموس الذهبي.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="729"/>
         <source>Kunrei-shiki</source>
-        <translation>كنري-سيكي</translation>
+        <translation>كنريه-شيكي</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="736"/>
         <source>Syllabaries:</source>
-        <translation>سيليباري:</translation>
+        <translation>الكتابة المقطعية:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="743"/>
         <source>Hiragana Japanese syllabary</source>
-        <translation>هيراغانا سلبري اليابانية</translation>
+        <translation>الكتابة اليابانية الهيراجانا المقطعية</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="746"/>
@@ -4008,29 +3910,29 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.ui" line="753"/>
         <source>Katakana Japanese syllabary</source>
-        <translation>كاتاكانا سلبري اليابانية</translation>
+        <translation>الكتابة اليابانية الكاتاكانا المقطعية</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="756"/>
         <source>Katakana</source>
-        <translation>الكتكانا</translation>
+        <translation>الكاتاكانا</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>قراءة النّصوص</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
         <source>(not available in portable version)</source>
-        <translation>(غير متوفر في النسخة المتنقلة)</translation>
+        <translation>(ليس متوفّرًا في الإصدار المحمول)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="153"/>
         <location filename="../sources.cc" line="180"/>
         <location filename="../sources.cc" line="207"/>
         <source>Choose a directory</source>
-        <translation>اختر قاموسا</translation>
+        <translation>اختر قاموسًا</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="167"/>
@@ -4039,24 +3941,24 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../sources.cc" line="258"/>
         <location filename="../sources.cc" line="282"/>
         <source>Confirm removal</source>
-        <translation>أكد الحذف</translation>
+        <translation>تأكيد الإزالة</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="168"/>
         <location filename="../sources.cc" line="195"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>اأزيل القاموس &lt;b&gt;%1&lt;/b&gt; من القائمة؟</translation>
+        <translation>أأزيل القاموس &lt;b&gt;%1&lt;/b&gt; من القائمة؟</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="235"/>
         <location filename="../sources.cc" line="259"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>اأزيل القاموس &lt;b&gt;%1&lt;/b&gt; من القائمة؟</translation>
+        <translation>أأزيل الموقع &lt;b&gt;%1&lt;/b&gt; من القائمة؟</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="283"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>أأزيل البرنامج &lt;b&gt;%1&lt;/b&gt; من القائمة؟</translation>
     </message>
 </context>
 <context>
@@ -4064,7 +3966,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation type="unfinished">لاشيء</translation>
+        <translation>لاشيء</translation>
     </message>
 </context>
 <context>
@@ -4072,77 +3974,77 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>محركات الصوت المحدّدة:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>أ&amp;ضف</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">ا&amp;مسح</translation>
+        <translation>أ&amp;زل</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation type="unfinished">التفضيلات</translation>
+        <translation>تفضيلات</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>الحجم:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>المعدّل:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>معاينة</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>محركات الصوت المتوفّرة:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>النص لمعاينته:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>اطبع نصًّا هنا لعرضه.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;عاين</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يُعثر على صوت TTS</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر العثور على صوت TTS.&lt;br&gt;فضلًا تأكد من وجود محرك TTS بالإصدار الأخير مثبّت على حاسوبك.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation type="unfinished">أكد الحذف</translation>
+        <translation>تأكيد الإزالة</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>أأزيل محرك الصوت &lt;b&gt;%1&lt;/b&gt; من القائمة؟</translation>
     </message>
 </context>
 <context>
@@ -4150,12 +4052,12 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>اطبع كلمة أو عبارة للبحث في القواميس</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>القائمة المنسدلة</translation>
     </message>
 </context>
 <context>
@@ -4163,22 +4065,22 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation type="unfinished">مفعل</translation>
+        <translation>ممكّن</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation type="unfinished">الاسم</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>المعرّف</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>الأيقونة</translation>
     </message>
 </context>
 <context>
@@ -4186,7 +4088,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="572"/>
         <source>Enabled</source>
-        <translation>مفعل</translation>
+        <translation>ممكّن</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="574"/>
@@ -4201,15 +4103,15 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="578"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>الرّمز</translation>
     </message>
 </context>
 <context>
     <name>WordFinder</name>
     <message>
-        <location filename="../wordfinder.cc" line="170"/>
+        <location filename="../wordfinder.cc" line="179"/>
         <source>Failed to query some dictionaries.</source>
-        <translation>فشل طلب بعض القواميس.</translation>
+        <translation>فشل الاستعلام عن بعض القواميس.</translation>
     </message>
 </context>
 <context>
@@ -4217,7 +4119,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">تحذير: %1</translation>
+        <translation>تحذير: %1</translation>
     </message>
 </context>
 </TS>

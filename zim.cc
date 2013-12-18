@@ -7,7 +7,7 @@
 #include "btreeidx.hh"
 #include "fsencoding.hh"
 #include "folding.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "utf8.hh"
 #include "decompress.hh"
 #include "langcoder.hh"
@@ -939,8 +939,8 @@ void ZimResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    qWarning( "ZIM: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
-              resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdWarning( "ZIM: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
+               resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
@@ -989,7 +989,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
              indexIsOldOrBad( indexFile ) )
         {
-          qDebug( "Zim: Building the index for dictionary: %s\n", i->c_str() );
+          gdDebug( "Zim: Building the index for dictionary: %s\n", i->c_str() );
 
           ZIM_header zh;
 
@@ -1163,8 +1163,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       }
       catch( std::exception & e )
       {
-        qWarning( "Zim dictionary indexing failed: %s, error: %s\n",
-                  i->c_str(), e.what() );
+        gdWarning( "Zim dictionary indexing failed: %s, error: %s\n",
+                   i->c_str(), e.what() );
         continue;
       }
       catch( ... )

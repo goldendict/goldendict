@@ -10,7 +10,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "wstring_qt.hh"
 #include "qt4x5.hh"
 
@@ -107,7 +107,7 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
   }
   catch( std::exception & e )
   {
-    qWarning( "Articles searching failed, error: %s\n", e.what() );
+    gdWarning( "Articles searching failed, error: %s\n", e.what() );
     result.clear();
   }
   catch(...)
@@ -328,7 +328,7 @@ void BtreeWordSearchRequest::run()
   }
   catch(...)
   {
-    qWarning( "Index searching failed: \"%s\"\n", dict.getName().c_str() );
+    gdWarning( "Index searching failed: \"%s\"\n", dict.getName().c_str() );
   }
 
   finish();

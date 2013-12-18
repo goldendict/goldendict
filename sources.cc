@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QStandardItemModel>
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 
 Sources::Sources( QWidget * parent, Config::Class const & cfg):

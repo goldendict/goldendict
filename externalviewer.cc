@@ -4,7 +4,7 @@
 #include <QDir>
 #include "externalviewer.hh"
 #include "parsecmdline.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 using std::vector;
 

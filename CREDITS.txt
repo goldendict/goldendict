@@ -6,11 +6,11 @@ Hero Phương <herophuong93\gmail.com>: Vietnamese translation
 Daniele Di Pisa <daniele\systems.it>: Italian translation
 Daniel Kaneider: German translation
 Zhang Jinsong <zhangsong023\gmail.com>: Simplified Chinese translation
-Usama Akkad <uahello\gmail.com>: Arabic translation
+Usama Akkad <uahello\gmail.com>, Linux Arab Community Team <linuxac.org>: Arabic translation
 Korostil Daniel <ted.korostiled\gmail.com>: Ukrainian translation
 Grzegorz Karpowicz <greg.karpowicz\gmail.com>: Polish translation
 Nardog <alphisation\gmail.com>: Japanese translation
-Maha 吳寶原, Ray Chou 周邦信, Marcus Bingenheimer: Traditional Chinese translation
+Maha 吳寶原, Ray Chou 周邦信, Marcus Bingenheimer, 黃文龍 <wlhunag\gmail.com>: Traditional Chinese translation
 Besmir Godole <bgodole\gmail.com>: Albanian translation
 Leonardo Montenegro <thesolidone\gmail.com>, MCHAL <MCHAL@anomail.de>, Alexandro Casanova <shorterfire\gmail.com>: Brazilian Portuguese translation
 Julian Depetris Chauvin <jdepetris\gmail.com>: Interface enhancements
@@ -27,3 +27,4 @@ Panho Ku <maranamho\gmail.com>: Korean translation
 Тим Перце <kreativnooko\gmail.com>: Serbian translation
 Cris van Minnen: Dutch translation
 Timon Wong <timon86.wang\gmail.com>: MDict (*.mdx/*.mdd) dictionary format
+PICTT Turkmenistan: Turkmen translation

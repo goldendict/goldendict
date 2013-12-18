@@ -32,7 +32,7 @@
 #include <limits.h>
 #include <set>
 #include <map>
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 #include "dictinfo.hh"
 #include "fsencoding.hh"

@@ -4,7 +4,7 @@
 #include "indexedzip.hh"
 #include "zipfile.hh"
 #include <zlib.h>
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "utf8.hh"
 #include "iconv.hh"
 

@@ -16,7 +16,7 @@
 #include <list>
 #include <wctype.h>
 #include <stdlib.h>
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 #include <QDebug>
 
@@ -400,7 +400,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         // Building the index
         string dictionaryName = nameFromFileName( dictFiles[ 0 ] );
 
-        qDebug( "DictD: Building the index for dictionary: %s\n", dictionaryName.c_str() );
+        gdDebug( "DictD: Building the index for dictionary: %s\n", dictionaryName.c_str() );
 
         initializing.indexingDictionary( dictionaryName );
 
@@ -546,8 +546,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      qWarning( "Dictd dictionary \"%s\" reading failed, error: %s\n",
-                i->c_str(), e.what() );
+      gdWarning( "Dictd dictionary \"%s\" reading failed, error: %s\n",
+                 i->c_str(), e.what() );
     }
   }
 

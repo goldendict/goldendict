@@ -4,11 +4,12 @@
 #endif
 
 #include "hotkeywrapper.hh"
+#include "gddebug.hh"
+
 
 #include <QWidget>
 #include <QMainWindow>
 
-#include "dprintf.hh"
 
 #ifdef HAVE_X11
 #include <X11/Xlibint.h>

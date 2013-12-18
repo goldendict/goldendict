@@ -69,6 +69,8 @@ struct ArticleDom
 
 private:
 
+  void openTag( wstring const & name, wstring const & attr, list< Node * > & stack );
+
   void closeTag( wstring const & name, list< Node * > & stack,
                  bool warn = true );
 

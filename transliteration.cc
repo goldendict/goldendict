@@ -4,7 +4,7 @@
 #include "transliteration.hh"
 #include "utf8.hh"
 #include "folding.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 namespace Transliteration {
 

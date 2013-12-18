@@ -9,3 +9,5 @@ INCLUDEPATH += .
 
 # Input
 SOURCES += gen_uninstall.cc
+
+RC_FILE = gen_uninstall.rc

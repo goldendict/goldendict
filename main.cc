@@ -31,7 +31,7 @@
 #include <QFile>
 #include <QString>
 
-QFile logFile;
+#include "gddebug.hh"
 
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
 
@@ -235,6 +235,11 @@ int main( int argc, char ** argv )
     logFile.remove();
     logFile.open( QFile::ReadWrite );
 
+    // Write UTF-8 BOM
+    QByteArray line;
+    line.append( 0xEF ).append( 0xBB ).append( 0xBF );
+    logFile.write( line );
+
     // Install message handler
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
     qInstallMessageHandler( gdMessageHandler );
@@ -242,7 +247,6 @@ int main( int argc, char ** argv )
     qInstallMsgHandler( gdMessageHandler );
 #endif
   }
-
 
   if ( Config::isPortableVersion() )
   {

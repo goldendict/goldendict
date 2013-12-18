@@ -20,8 +20,7 @@
 
 #include <set>
 #include <hunspell/hunspell.hxx>
-
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "fsencoding.hh"
 #include "qt4x5.hh"
 
@@ -38,6 +37,13 @@ class HunspellDictionary: public Dictionary::Class
   string name;
   Hunspell hunspell;
 
+#ifdef Q_OS_WIN32
+  static string Utf8ToLocal8Bit( string const & name )
+  {
+    return string( QString::fromUtf8( name.c_str() ).toLocal8Bit().data() );
+  }
+#endif
+
 public:
 
   /// files[ 0 ] should be .aff file, files[ 1 ] should be .dic file.
@@ -45,7 +51,11 @@ public:
                       vector< string > const & files ):
     Dictionary::Class( id, files ),
     name( name_ ),
+#ifdef Q_OS_WIN32
+    hunspell( Utf8ToLocal8Bit( files[ 0 ] ).c_str(), Utf8ToLocal8Bit( files[ 1 ] ).c_str() )
+#else
     hunspell( files[ 0 ].c_str(), files[ 1 ].c_str() )
+#endif
   {
   }
 
@@ -285,11 +295,11 @@ void HunspellArticleRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
   catch( std::exception & e )
   {
-    qWarning( "Hunspell: error: %s\n", e.what() );
+    gdWarning( "Hunspell: error: %s\n", e.what() );
   }
 
   if ( suggestions )
@@ -503,7 +513,9 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
 
           if ( Folding::applySimpleCaseOnly( alt ) != lowercasedWord ) // No point in providing same word
           {
+#ifdef QT_DEBUG
             qDebug() << ">>>>>Alt:" << gd::toQString( alt );
+#endif
             result.append( alt );
           }
         }
@@ -512,7 +524,7 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
   }
   catch( Iconv::Ex & e )
   {
-    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   if ( suggestions )
@@ -634,7 +646,7 @@ void HunspellPrefixMatchRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    qWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
   finish();

@@ -5,7 +5,7 @@
 #include <QDir>
 #include <QFile>
 #include <QtXml>
-#include "dprintf.hh"
+#include "gddebug.hh"
 
 #ifdef _MSC_VER
 #include <stdint_msvc.h>
@@ -126,7 +126,7 @@ Preferences::Preferences():
   wordsZoomLevel( 0 ),
   maxStringsInHistory( 500 ),
   storeHistory( 1 ),
-  alwaysExpandOptionalParts( true )
+  alwaysExpandOptionalParts( false )
 , historyStoreInterval( 0 )
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )

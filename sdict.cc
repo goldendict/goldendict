@@ -7,7 +7,7 @@
 #include "utf8.hh"
 #include "chunkedstorage.hh"
 #include "langcoder.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "fsencoding.hh"
 #include "decompress.hh"
 #include "htmlescape.hh"
@@ -490,7 +490,7 @@ void SdictArticleRequest::run()
     }
     catch( std::exception &ex )
     {
-      qWarning( "SDict: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+      gdWarning( "SDict: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
     }
   }
 
@@ -576,7 +576,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       {
         try
         {
-          qDebug( "SDict: Building the index for dictionary: %s\n", i->c_str() );
+          gdDebug( "SDict: Building the index for dictionary: %s\n", i->c_str() );
 
           File::Class df( *i, "rb" );
 
@@ -585,7 +585,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           df.read( &dictHeader, sizeof(dictHeader) );
           if( strncmp( dictHeader.signature, "sdct", 4 ) )
           {
-              qWarning( "File \"%s\" is not valid SDictionary file", i->c_str() );
+              gdWarning( "File \"%s\" is not valid SDictionary file", i->c_str() );
               continue;
           }
           int compression = dictHeader.compression & 0x0F;
@@ -682,8 +682,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         }
         catch( std::exception & e )
         {
-          qWarning( "Sdictionary dictionary indexing failed: %s, error: %s\n",
-                    i->c_str(), e.what() );
+          gdWarning( "Sdictionary dictionary indexing failed: %s, error: %s\n",
+                     i->c_str(), e.what() );
           continue;
         }
         catch( ... )

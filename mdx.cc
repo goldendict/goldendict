@@ -9,7 +9,7 @@
 #include "wstring.hh"
 #include "wstring_qt.hh"
 #include "chunkedstorage.hh"
-#include "dprintf.hh"
+#include "gddebug.hh"
 #include "langcoder.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
@@ -1012,7 +1012,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
     {
       // Building the index
 
-      qDebug( "MDict: Building the index for dictionary: %s\n", i->c_str() );
+      gdDebug( "MDict: Building the index for dictionary: %s\n", i->c_str() );
 
       MdictParser parser;
       list< sptr< MdictParser > > mddParsers;
@@ -1031,7 +1031,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
           sptr< MdictParser > mddParser = new MdictParser();
           if ( !mddParser->open( mddIter->c_str() ) )
           {
-            qWarning( "Warning: Broken mdd (resource) file: %s\n", mddIter->c_str() );
+            gdWarning( "Warning: Broken mdd (resource) file: %s\n", mddIter->c_str() );
             continue;
           }
           mddParsers.push_back( mddParser );
