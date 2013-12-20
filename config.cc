@@ -799,6 +799,22 @@ Class load() throw( exError )
       height = maximizedMainWindowGeometry.namedItem( "height" ).toElement().text().toInt();
     c.maximizedMainWindowGeometry = QRect( x, y, width, height );
   }
+
+  QDomNode normalMainWindowGeometry = root.namedItem( "normalMainWindowGeometry" );
+
+  if ( !normalMainWindowGeometry.isNull() )
+  {
+    int x = 0, y = 0, width = 0, height = 0;
+    if( !normalMainWindowGeometry.namedItem( "x" ).isNull() )
+      x = normalMainWindowGeometry.namedItem( "x" ).toElement().text().toInt();
+    if( !normalMainWindowGeometry.namedItem( "y" ).isNull() )
+      y = normalMainWindowGeometry.namedItem( "y" ).toElement().text().toInt();
+    if( !normalMainWindowGeometry.namedItem( "width" ).isNull() )
+      width = normalMainWindowGeometry.namedItem( "width" ).toElement().text().toInt();
+    if( !normalMainWindowGeometry.namedItem( "height" ).isNull() )
+      height = normalMainWindowGeometry.namedItem( "height" ).toElement().text().toInt();
+    c.normalMainWindowGeometry = QRect( x, y, width, height );
+  }
 #endif
 
   QDomNode dictInfoGeometry = root.namedItem( "dictInfoGeometry" );
@@ -1536,6 +1552,25 @@ void save( Class const & c ) throw( exError )
       opt = dd.createElement( "height" );
       opt.appendChild( dd.createTextNode( QString::number( c.maximizedMainWindowGeometry.height() ) ) );
       maximizedMainWindowGeometry.appendChild( opt );
+
+      QDomElement normalMainWindowGeometry = dd.createElement( "normalMainWindowGeometry" );
+      root.appendChild( normalMainWindowGeometry );
+
+      opt = dd.createElement( "x" );
+      opt.appendChild( dd.createTextNode( QString::number( c.normalMainWindowGeometry.x() ) ) );
+      normalMainWindowGeometry.appendChild( opt );
+
+      opt = dd.createElement( "y" );
+      opt.appendChild( dd.createTextNode( QString::number( c.normalMainWindowGeometry.y() ) ) );
+      normalMainWindowGeometry.appendChild( opt );
+
+      opt = dd.createElement( "width" );
+      opt.appendChild( dd.createTextNode( QString::number( c.normalMainWindowGeometry.width() ) ) );
+      normalMainWindowGeometry.appendChild( opt );
+
+      opt = dd.createElement( "height" );
+      opt.appendChild( dd.createTextNode( QString::number( c.normalMainWindowGeometry.height() ) ) );
+      normalMainWindowGeometry.appendChild( opt );
     }
 #endif
 

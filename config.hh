@@ -475,6 +475,7 @@ struct Class
 
 #ifdef Q_OS_WIN
   QRect maximizedMainWindowGeometry;
+  QRect normalMainWindowGeometry;
 #endif
 
   QString editDictionaryCommandLine; // Command line to call external editor for dictionary
