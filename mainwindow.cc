@@ -28,6 +28,7 @@
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSslConfiguration>
+#include <QDesktopWidget>
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -38,6 +39,10 @@
 #include "mouseover_win32/GDDataTranfer.h"
 #include "wstring.hh"
 #include "wstring_qt.hh"
+
+#define gdStoreNormalGeometryEvent ( ( QEvent::Type )( QEvent::User + 1 ) )
+#define gdApplyNormalGeometryEvent ( ( QEvent::Type )( QEvent::User + 2 ) )
+
 #endif
 
 #ifdef Q_WS_X11
@@ -644,13 +649,16 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.historyList->installEventFilter( this );
 
 #ifdef Q_OS_WIN
-  QRect baseGeometry;
+  if( cfg.normalMainWindowGeometry.width() <= 0 )
+  {
+    QRect r = QApplication::desktop()->availableGeometry();
+    cfg.normalMainWindowGeometry.setRect( r.width() / 4, r.height() / 4, r.width() / 2, r.height() / 2 );
+  }
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
   {
+    setGeometry( cfg.maximizedMainWindowGeometry );
     if ( cfg.mainWindowGeometry.size() )
       restoreGeometry( cfg.mainWindowGeometry );
-    baseGeometry = geometry();
-    setGeometry( cfg.maximizedMainWindowGeometry );
     if ( cfg.mainWindowState.size() )
       restoreState( cfg.mainWindowState, 1 );
     setWindowState( windowState() | Qt::WindowMaximized );
@@ -732,15 +740,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   {
     show();
     focusTranslateLine();
-#ifdef Q_OS_WIN
-    if( baseGeometry.width() > 0 )
-    {
-      hide();
-      setGeometry( baseGeometry );
-      showMaximized();
-      activateWindow();
-    }
-#endif
   }
 
   connect( &newReleaseCheckTimer, SIGNAL( timeout() ),
@@ -867,9 +866,15 @@ MainWindow::~MainWindow()
 {
 #ifdef Q_OS_WIN
   if( isMaximized() )
+  {
     cfg.maximizedMainWindowGeometry = geometry();
+  }
   else
+  {
     cfg.maximizedMainWindowGeometry = QRect();
+    if( !isMinimized() )
+      cfg.normalMainWindowGeometry = geometry();
+  }
 #endif
 
   // Close all tabs -- they should be destroyed before network managers
@@ -2022,6 +2027,23 @@ bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
 
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
+#ifdef Q_OS_WIN
+  if( obj == this && ev->type() == gdStoreNormalGeometryEvent )
+  {
+    if( !isMaximized() && !isMinimized() && !isFullScreen() )
+      cfg.normalMainWindowGeometry = normalGeometry();
+    ev->accept();
+    return true;
+  }
+
+  if( obj == this && ev->type() == gdApplyNormalGeometryEvent )
+  {
+    if( !isMaximized() && !isMinimized() && !isFullScreen() )
+      setGeometry( cfg.normalMainWindowGeometry );
+    ev->accept();
+    return true;
+  }
+#endif
   if ( ev->type() == QEvent::ShortcutOverride ) {
     // Handle Ctrl+H to show the History Pane.
     QKeyEvent * ke = static_cast<QKeyEvent*>( ev );
@@ -2044,6 +2066,13 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   // when the main window is moved or resized, hide the word list suggestions
   if ( obj == this && ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize ) )
   {
+#ifdef Q_OS_WIN
+    if( !isMaximized() && !isMinimized() && !isFullScreen() && gdAskMessage != 0xFFFFFFFF )
+    {
+      QEvent *ev = new QEvent( gdStoreNormalGeometryEvent );
+      qApp->postEvent( this, ev );
+    }
+#endif
     if ( !cfg.preferences.searchInDock )
     {
         translateBox->setPopupEnabled( false );
@@ -2055,6 +2084,14 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   {
     QWindowStateChangeEvent *stev = static_cast< QWindowStateChangeEvent *>( ev );
     wasMaximized = ( stev->oldState() == Qt::WindowMaximized && isMinimized() );
+
+#ifdef Q_OS_WIN
+    if( stev->oldState() == Qt::WindowMaximized && !isMinimized() && cfg.normalMainWindowGeometry.width() > 0 )
+    {
+      QEvent *ev = new QEvent( gdApplyNormalGeometryEvent );
+      qApp->postEvent( this, ev );
+    }
+#endif
   }
 
   if ( ev->type() == QEvent::MouseButtonPress ) {
