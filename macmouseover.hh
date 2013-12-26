@@ -31,6 +31,8 @@ public:
 
   /// Called from event loop callback
   void mouseMoved();
+
+  static bool isAXAPIEnabled();
   
 signals:
 
