@@ -1781,6 +1781,9 @@ void MainWindow::editPreferences()
     p.hideMenubar = cfg.preferences.hideMenubar;
     p.searchInDock = cfg.preferences.searchInDock;
     p.alwaysOnTop = cfg.preferences.alwaysOnTop;
+#ifndef Q_WS_X11
+    p.trackClipboardChanges = cfg.preferences.trackClipboardChanges;
+#endif
 
     bool needReload = false;
 

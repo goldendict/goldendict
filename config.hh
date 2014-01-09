@@ -211,6 +211,9 @@ struct Preferences
   int articleSizeLimit;
 
   unsigned short maxDictionaryRefsInContextMenu;
+#ifndef Q_WS_X11
+  bool trackClipboardChanges;
+#endif
 
   QString addonStyle;
 
