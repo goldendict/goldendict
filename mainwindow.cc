@@ -3292,7 +3292,7 @@ void MainWindow::wordReceived( const QString & word)
 {
     toggleMainWindow( true );
     translateLine->setText( word );
-    translateInputFinished();
+    translateInputFinished( false );
 }
 
 void MainWindow::updateHistoryMenu()
