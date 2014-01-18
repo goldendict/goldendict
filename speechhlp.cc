@@ -81,7 +81,7 @@ bool speechAvailable(SpeechHelper sp)
 void speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
 {
     HRESULT hr;
-    IEnumSpObjectTokens * enumSpTokens;
+    IEnumSpObjectTokens * enumSpTokens = NULL;
     ULONG count = 0;
     bool next = true;
     hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);

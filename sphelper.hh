@@ -20,7 +20,7 @@
 #ifdef _SAPI_VER
 #undef _SAPI_VER
 #endif
-#define _SAPI_VER 0503
+#define _SAPI_VER 0x053
 
 inline void SpHexFromUlong(WCHAR * psz, ULONG ul)
 {
@@ -110,6 +110,12 @@ inline HRESULT SpGetDescription(ISpObjectToken * pObjToken, WCHAR ** ppszDescrip
     WCHAR szLangId[10];
     HRESULT hr = S_OK;
 
+    if (ppszDescription == NULL)
+    {
+        return E_POINTER;
+    }
+    *ppszDescription = NULL;
+
 #if _SAPI_VER >= 0x053
     WCHAR* pRegKeyPath = 0;
     WCHAR* pszTemp = 0;
@@ -119,12 +125,6 @@ inline HRESULT SpGetDescription(ISpObjectToken * pObjToken, WCHAR ** ppszDescrip
     // When running on Windows Vista query the localized engine name from a resource dll
     OSVERSIONINFO ver;
     ver.dwOSVersionInfoSize = sizeof( ver );
-
-    if (ppszDescription == NULL)
-    {
-        return E_POINTER;
-    }
-    *ppszDescription = NULL;
 
     if( ( ::GetVersionEx( &ver ) == TRUE ) && ( ver.dwMajorVersion >= 6 ) )
     {
