@@ -884,6 +884,19 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
              + "<span class=\"filename\">" + processNodeChildren( node ) + "</span>" + "</a>";
     }
     else
+    if ( Filetype::isNameOfContent( filename ) )
+    {
+        QUrl url;
+        url.setScheme( "bres" );
+        url.setHost( QString::fromUtf8( getId().c_str() ) );
+
+        string ref = string( " data=\"" ) + url.toEncoded().data() + "/";
+
+        result += "<object " + ( node.tagAttrs.size() ?
+          Html::escape( Utf8::encode( node.tagAttrs ) ) : string( ) ) + ref + processNodeChildren( node )
+          + "\"/>" + "</object>";
+    }
+    else
     {
       // Unknown file type, downgrade to a hyperlink
 
