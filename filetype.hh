@@ -28,8 +28,10 @@ bool isNameOfTiff( string const & );
 bool isNameOfCSS( string const & );
 /// Returns true if the name resembles the one of a .svg file
 bool isNameOfSvg( string const & name );
+/// Returns true if the name resembles the one of a content file (i.e. ends
+/// with .swf, .htm, .html, .pdf).
+bool isNameOfContent( string const & );
 
 }
 
 #endif
-
