@@ -131,6 +131,9 @@ Preferences::Preferences():
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
 , maxDictionaryRefsInContextMenu ( 20 )
+#ifndef Q_WS_X11
+, trackClipboardChanges( false )
+#endif
 {
 }
 
@@ -756,6 +759,11 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
       c.preferences.maxDictionaryRefsInContextMenu = preferences.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
+
+#ifndef Q_WS_X11
+    if ( !preferences.namedItem( "trackClipboardChanges" ).isNull() )
+      c.preferences.trackClipboardChanges = ( preferences.namedItem( "trackClipboardChanges" ).toElement().text() == "1" );
+#endif
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -1501,7 +1509,14 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "maxDictionaryRefsInContextMenu" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.maxDictionaryRefsInContextMenu ) ) );
-    preferences.appendChild( opt ); }
+    preferences.appendChild( opt );
+
+#ifndef Q_WS_X11
+    opt = dd.createElement( "trackClipboardChanges" );
+    opt.appendChild( dd.createTextNode( c.preferences.trackClipboardChanges ? "1" : "0" ) );
+    preferences.appendChild( opt );
+#endif
+  }
 
   {
     QDomElement opt = dd.createElement( "lastMainGroupId" );

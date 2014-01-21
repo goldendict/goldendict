@@ -3,6 +3,7 @@
 #include <AppKit/NSEvent.h>
 #include <AppKit/NSScreen.h>
 #include <Foundation/NSAutoreleasePool.h>
+#include <Foundation/Foundation.h>
 
 const int mouseOverInterval = 300;
 
@@ -91,7 +92,7 @@ void MacMouseOver::mouseMoved()
 void MacMouseOver::enableMouseOver()
 {
   mouseTimer.stop();
-  if( !AXAPIEnabled() )
+  if( !isAXAPIEnabled() )
     return;
   if( !tapRef )
     tapRef = CGEventTapCreate( kCGAnnotatedSessionEventTap, kCGHeadInsertEventTap,
@@ -317,4 +318,12 @@ void MacMouseOver::handleRetrievedString( QString & wordSeq, int wordSeqPos )
   }
 
   emit instance().hovered( word, false );
+}
+
+bool MacMouseOver::isAXAPIEnabled()
+{
+  if( NSFoundationVersionNumber >= 1000 )  // MacOS 10.9+
+    return AXIsProcessTrusted();
+
+  return AXAPIEnabled();
 }

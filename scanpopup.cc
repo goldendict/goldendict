@@ -212,6 +212,10 @@ ScanPopup::ScanPopup( QWidget * parent,
 #ifdef HAVE_X11
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
+#else
+  if( cfg.preferences.trackClipboardChanges )
+    connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
+             this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
 #endif
 
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),

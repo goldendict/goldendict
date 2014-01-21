@@ -42,6 +42,7 @@
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
+#include "macmouseover.hh"
 #endif
 
 #ifdef Q_OS_WIN32
@@ -768,7 +769,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   updateStatusLine();
 
 #ifdef Q_OS_MACX
-  if( cfg.preferences.startWithScanPopupOn && !AXAPIEnabled() )
+  if( cfg.preferences.startWithScanPopupOn && !MacMouseOver::isAXAPIEnabled() )
       mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
                                       QPixmap( ":/icons/error.png" ) );
 #endif
@@ -1790,6 +1791,9 @@ void MainWindow::editPreferences()
     p.hideMenubar = cfg.preferences.hideMenubar;
     p.searchInDock = cfg.preferences.searchInDock;
     p.alwaysOnTop = cfg.preferences.alwaysOnTop;
+#ifndef Q_WS_X11
+    p.trackClipboardChanges = cfg.preferences.trackClipboardChanges;
+#endif
 
     bool needReload = false;
 
@@ -2778,7 +2782,7 @@ void MainWindow::scanEnableToggled( bool on )
     {
       scanPopup->enableScanning();
 #ifdef Q_OS_MACX
-      if( !AXAPIEnabled() )
+      if( !MacMouseOver::isAXAPIEnabled() )
           mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
                                           QPixmap( ":/icons/error.png" ) );
 #endif
@@ -3301,7 +3305,7 @@ void MainWindow::wordReceived( const QString & word)
 {
     toggleMainWindow( true );
     translateLine->setText( word );
-    translateInputFinished();
+    translateInputFinished( false );
 }
 
 void MainWindow::updateHistoryMenu()
