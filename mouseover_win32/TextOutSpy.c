@@ -127,6 +127,12 @@ LRESULT lr;
 	}
 
 	if( ( flags & GD_FLAG_METHOD_UI_AUTOMATION ) != 0 && IsWindow( GlobalData->ServerWND ) ) {
+#ifdef __WIN64
+		GlobalData32->CurMod.MatchedWord[0] = 0;
+		GlobalData32->CurMod.WordLen = 0;
+		GlobalData32->CurMod.BeginPos = 0;
+		GlobalData32->LastPt = GlobalData->LastPt;
+#endif
 		PostMessage( GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0 );
 	}		
 }
