@@ -211,6 +211,9 @@ signals:
 
   void storeResourceSavePath(QString const & );
 
+  void zoomIn();
+  void zoomOut();
+
 public slots:
 
   void on_searchPrevious_clicked();

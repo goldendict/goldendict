@@ -7,6 +7,7 @@
 #include "preferences.hh"
 #include "about.hh"
 #include "mruqmenu.hh"
+#include "gestures.hh"
 #include <limits.h>
 #include <QDir>
 #include <QMessageBox>
@@ -115,6 +116,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.setupUi( this );
 
   articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  // Set own gesture recognizers
+  Gestures::registerRecognizers();
+#endif
 
   // use our own, cutsom statusbar
   setStatusBar(0);
@@ -774,6 +780,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_WIN32
   gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ui.centralWidget->grabGesture( Gestures::GDPinchGestureType );
+  ui.centralWidget->grabGesture( Gestures::GDSwipeGestureType );
+#endif
 }
 
 void MainWindow::ctrlTabPressed()
@@ -876,6 +887,12 @@ MainWindow::~MainWindow()
     if( !isMinimized() )
       cfg.normalMainWindowGeometry = geometry();
   }
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ui.centralWidget->ungrabGesture( Gestures::GDPinchGestureType );
+  ui.centralWidget->ungrabGesture( Gestures::GDSwipeGestureType );
+  Gestures::unregisterRecognizers();
 #endif
 
   // Close all tabs -- they should be destroyed before network managers
@@ -1403,6 +1420,10 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   connect( view, SIGNAL( storeResourceSavePath( QString const & ) ),
            this, SLOT( storeResourceSavePath( QString const & ) ) );
+
+  connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
+
+  connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 

@@ -279,7 +279,8 @@ HEADERS += folding.hh \
     articleinspector.hh \
     delegate.hh \
     zim.hh \
-    gddebug.hh
+    gddebug.hh \
+    gestures.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -390,7 +391,8 @@ SOURCES += folding.cc \
     articleinspector.cc \
     delegate.cc \
     zim.cc \
-    gddebug.cc
+    gddebug.cc \
+    gestures.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui
