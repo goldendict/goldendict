@@ -11,6 +11,7 @@
 #include "indexedzip.hh"
 #include "filetype.hh"
 #include "gddebug.hh"
+#include "chunkedstorage.hh"
 
 #include <set>
 #include <string>
@@ -42,7 +43,7 @@ DEF_EX( exInvalidData, "Invalid data encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x5350495a, // ZIPS on little-endian, SPIZ on big-endian
-  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion
+  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion
 };
 
 struct IdxHeader
@@ -52,6 +53,7 @@ struct IdxHeader
   uint32_t soundsCount; // Total number of sounds, for informative purposes only
   uint32_t indexBtreeMaxElements; // Two fields from IndexInfo
   uint32_t indexRootOffset;
+  uint32_t chunksOffset; // The offset to chunks' storage
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -103,6 +105,7 @@ class ZipSoundsDictionary: public BtreeIndexing::BtreeDictionary
   Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
+  sptr< ChunkedStorage::Reader > chunks;
   IndexedZip zipsFile;
 
 public:
@@ -141,6 +144,8 @@ ZipSoundsDictionary::ZipSoundsDictionary( string const & id,
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() )
 {
+  chunks = new ChunkedStorage::Reader( idx, idxHeader.chunksOffset );
+
   // Initialize the index
 
   openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
@@ -183,7 +188,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
 
-  multimap< wstring, string > mainArticles, alternateArticles;
+  multimap< wstring, uint32_t > mainArticles, alternateArticles;
 
   set< uint32_t > articlesIncluded; // Some synonims make it that the articles
                                     // appear several times. We combat this
@@ -204,12 +209,12 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
 
-    multimap< wstring, string > & mapToUse =
+    multimap< wstring, uint32_t > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
         mainArticles : alternateArticles;
 
-    mapToUse.insert( std::pair< wstring, string >(
-      Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) ), chain[ x ].word ) );
+    mapToUse.insert( std::pair< wstring, uint32_t >(
+      Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) ), chain[ x ].articleOffset ) );
 
     articlesIncluded.insert( chain[ x ].articleOffset );
   }
@@ -219,42 +224,69 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
 
   string result;
 
-  multimap< wstring, string >::const_iterator i;
+  multimap< wstring, uint32_t >::const_iterator i;
 
   result += "<table class=\"lsa_play\">";
+
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
+    vector< char > chunk;
+    char * nameBlock = chunks->getBlock( i->second, chunk );
+
+    uint16_t sz;
+    memcpy( &sz, nameBlock, sizeof( uint16_t ) );
+    nameBlock += sizeof( uint16_t );
+
+    string name( nameBlock, sz );
+    nameBlock += sz;
+
+    string displayedName = mainArticles.size() + alternateArticles.size() > 1 ?
+           name : Utf8::encode( stripExtension( name ) );
+
     result += "<tr>";
 
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( QString::fromUtf8( i->second.c_str() ) );
+    url.setPath( QString::fromUtf8( name.c_str() ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
     result += addAudioLink( ref, getId() );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" + i->second + "</a></td>";
+    result += "<td><a href=" + ref + ">" + displayedName + "</a></td>";
     result += "</tr>";
   }
 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
+    vector< char > chunk;
+    char * nameBlock = chunks->getBlock( i->second, chunk );
+
+    uint16_t sz;
+    memcpy( &sz, nameBlock, sizeof( uint16_t ) );
+    nameBlock += sizeof( uint16_t );
+
+    string name( nameBlock, sz );
+    nameBlock += sz;
+
+    string displayedName = mainArticles.size() + alternateArticles.size() > 1 ?
+           name : Utf8::encode( stripExtension( name ) );
+
     result += "<tr>";
 
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( QString::fromUtf8( i->second.c_str() ) );
+    url.setPath( QString::fromUtf8( name.c_str() ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
     result += addAudioLink( ref, getId() );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" + i->second + "</a></td>";
+    result += "<td><a href=" + ref + ">" + displayedName + "</a></td>";
     result += "</tr>";
   }
 
@@ -282,10 +314,31 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const &
   if ( chain.empty() )
     return new Dictionary::DataRequestInstant( false ); // No such resource
 
+  // Find sound
+
+  uint32_t dataOffset = 0;
+  for( int x = chain.size() - 1; x >= 0 ; x-- )
+  {
+    vector< char > chunk;
+    char * nameBlock = chunks->getBlock( chain[ x ].articleOffset, chunk );
+
+    uint16_t sz;
+    memcpy( &sz, nameBlock, sizeof( uint16_t ) );
+    nameBlock += sizeof( uint16_t );
+
+    string fileName( nameBlock, sz );
+    nameBlock += sz;
+
+    memcpy( &dataOffset, nameBlock, sizeof( uint32_t ) );
+
+    if( name.compare( fileName ) == 0 )
+      break;
+  }
+
   sptr< Dictionary::DataRequestInstant > dr = new
     Dictionary::DataRequestInstant( true );
 
-  if ( zipsFile.loadFile( chain[ 0 ].articleOffset, dr->getData() ) )
+  if ( zipsFile.loadFile( dataOffset, dr->getData() ) )
     return dr;
 
   return new Dictionary::DataRequestInstant( false );
@@ -351,6 +404,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idx.write( idxHeader );
 
         IndexedWords names, zipFileNames;
+        ChunkedStorage::Writer chunks( idx );
+
         IndexedZip zipFile;
         if( zipFile.openZipFile( QDir::fromNativeSeparators(
                                  FsEncoding::decode( i->c_str() ) ) ) )
@@ -358,18 +413,30 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if( !zipFileNames.empty() )
         {
-          // Remove extension for sound files (like in sound dirs)
-
           for( IndexedWords::iterator i = zipFileNames.begin(); i != zipFileNames.end(); ++i )
           {
             vector< WordArticleLink > links = i->second;
             for( unsigned x = 0; x < links.size(); x++ )
             {
+              // Save original name
+
+              uint32_t offset = chunks.startNewBlock();
+              uint16_t sz = links[ x ].word.size();
+              chunks.addToBlock( &sz, sizeof(uint16_t) );
+              chunks.addToBlock( links[ x ].word.c_str(), sz );
+              chunks.addToBlock( &links[ x ].articleOffset, sizeof( uint32_t ) );
+
+              // Remove extension for sound files (like in sound dirs)
+
               wstring word = stripExtension( links[ x ].word );
               if( !word.empty() )
-                names.addSingleWord( word, links[ x ].articleOffset );
+                names.addSingleWord( word, offset );
             }
           }
+
+          // Finish with the chunks
+
+          idxHeader.chunksOffset = chunks.finish();
 
           // Build the resulting zip file index
 
