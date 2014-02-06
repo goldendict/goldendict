@@ -42,7 +42,7 @@ DEF_EX( exInvalidData, "Invalid data encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x5350495a, // ZIPS on little-endian, SPIZ on big-endian
-  CurrentFormatVersion = 1 + BtreeIndexing::FormatVersion
+  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion
 };
 
 struct IdxHeader
@@ -86,6 +86,14 @@ wstring stripExtension( string const & str )
     wstring::size_type pos = name.rfind( L'.' );
     if ( pos != wstring::npos )
       name.erase( pos );
+
+    // Strip spaces at the end of name
+    string::size_type n = name.length();
+    while( n && name.at( n - 1 ) == L' ' )
+      n--;
+
+    if( n != name.length() )
+      name.erase( n );
   }
   return name;
 }
