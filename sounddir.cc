@@ -177,9 +177,39 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
 
   multimap< wstring, uint32_t >::const_iterator i;
 
+  string displayedName;
+  vector< char > chunk;
+  char * nameBlock;
+
   result += "<table class=\"lsa_play\">";
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
+    if( mainArticles.size() + alternateArticles.size() <= 1 )
+      displayedName = chain[ i->second ].word;
+    else
+    {
+      try
+      {
+        Mutex::Lock _( idxMutex );
+        nameBlock = chunks.getBlock( chain[ i->second ].articleOffset, chunk );
+
+        if ( nameBlock >= &chunk.front() + chunk.size() )
+        {
+          // chunks reader thinks it's okay since zero-sized records can exist,
+          // but we don't allow that.
+          throw ChunkedStorage::exAddressOutOfRange();
+        }
+
+        chunk.back() = 0; // It must end with 0 anyway, but just in case
+        displayedName = string( nameBlock );
+      }
+      catch(  ChunkedStorage::exAddressOutOfRange & )
+      {
+        // Bad address
+        continue;
+      }
+    }
+
     result += "<tr>";
 
     QUrl url;
@@ -192,12 +222,38 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
     result += addAudioLink( ref, getId() );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" + Html::escape( chain[ i->second ].word ) + "</a></td>";
+    result += "<td><a href=" + ref + ">" + Html::escape( displayedName ) + "</a></td>";
     result += "</tr>";
   }
 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
+    if( mainArticles.size() + alternateArticles.size() <= 1 )
+      displayedName = chain[ i->second ].word;
+    else
+    {
+      try
+      {
+        Mutex::Lock _( idxMutex );
+        nameBlock = chunks.getBlock( chain[ i->second ].articleOffset, chunk );
+
+        if ( nameBlock >= &chunk.front() + chunk.size() )
+        {
+          // chunks reader thinks it's okay since zero-sized records can exist,
+          // but we don't allow that.
+          throw ChunkedStorage::exAddressOutOfRange();
+        }
+
+        chunk.back() = 0; // It must end with 0 anyway, but just in case
+        displayedName = string( nameBlock );
+      }
+      catch(  ChunkedStorage::exAddressOutOfRange & )
+      {
+        // Bad address
+        continue;
+      }
+    }
+
     result += "<tr>";
 
     QUrl url;
@@ -210,7 +266,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
     result += addAudioLink( ref, getId() );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" + Html::escape( chain[ i->second ].word ) + "</a></td>";
+    result += "<td><a href=" + ref + ">" + Html::escape( displayedName ) + "</a></td>";
     result += "</tr>";
   }
 
