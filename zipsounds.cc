@@ -12,6 +12,7 @@
 #include "filetype.hh"
 #include "gddebug.hh"
 #include "chunkedstorage.hh"
+#include "htmlescape.hh"
 
 #include <set>
 #include <string>
@@ -228,10 +229,28 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
 
   result += "<table class=\"lsa_play\">";
 
+  vector< char > chunk;
+  char * nameBlock;
+
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
-    vector< char > chunk;
-    char * nameBlock = chunks->getBlock( i->second, chunk );
+    try
+    {
+      Mutex::Lock _( idxMutex );
+      nameBlock = chunks->getBlock( i->second, chunk );
+
+      if ( nameBlock >= &chunk.front() + chunk.size() )
+      {
+        // chunks reader thinks it's okay since zero-sized records can exist,
+        // but we don't allow that.
+        throw ChunkedStorage::exAddressOutOfRange();
+      }
+    }
+    catch(  ChunkedStorage::exAddressOutOfRange & )
+    {
+      // Bad address
+      continue;
+    }
 
     uint16_t sz;
     memcpy( &sz, nameBlock, sizeof( uint16_t ) );
@@ -255,14 +274,29 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     result += addAudioLink( ref, getId() );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" + displayedName + "</a></td>";
+    result += "<td><a href=" + ref + ">" + Html::escape( displayedName ) + "</a></td>";
     result += "</tr>";
   }
 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
-    vector< char > chunk;
-    char * nameBlock = chunks->getBlock( i->second, chunk );
+    try
+    {
+      Mutex::Lock _( idxMutex );
+      nameBlock = chunks->getBlock( i->second, chunk );
+
+      if ( nameBlock >= &chunk.front() + chunk.size() )
+      {
+        // chunks reader thinks it's okay since zero-sized records can exist,
+        // but we don't allow that.
+        throw ChunkedStorage::exAddressOutOfRange();
+      }
+    }
+    catch(  ChunkedStorage::exAddressOutOfRange & )
+    {
+      // Bad address
+      continue;
+    }
 
     uint16_t sz;
     memcpy( &sz, nameBlock, sizeof( uint16_t ) );
@@ -286,7 +320,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     result += addAudioLink( ref, getId() );
 
     result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-    result += "<td><a href=" + ref + ">" + displayedName + "</a></td>";
+    result += "<td><a href=" + ref + ">" + Html::escape( displayedName ) + "</a></td>";
     result += "</tr>";
   }
 
