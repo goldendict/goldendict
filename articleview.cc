@@ -451,6 +451,9 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( !id.startsWith( "gdfrom-" ) )
     return; // Incorrect id
 
+  if ( !ui.definition->isVisible() )
+    return; // No action on background page, scrollIntoView there don't work
+
   if ( getArticlesList().contains( id.mid( 7 ) ) )
   {
     if ( moveToIt )
@@ -1828,7 +1831,7 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
   if ( !id.startsWith( "gdfrom-" ) )
     return; // Incorrect id
 
-  emit activeArticleChanged( id.mid( 7 ) );
+  emit activeArticleChanged( this, id.mid( 7 ) );
 }
 
 void ArticleView::doubleClicked()

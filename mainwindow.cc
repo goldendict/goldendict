@@ -1396,8 +1396,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
 
-  connect( view, SIGNAL( activeArticleChanged( const QString & ) ),
-           this, SLOT( activeArticleChanged( const QString & ) ) );
+  connect( view, SIGNAL( activeArticleChanged( ArticleView const *, const QString & ) ),
+           this, SLOT( activeArticleChanged( ArticleView const *, const QString & ) ) );
 
   connect( view, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
@@ -1588,6 +1588,9 @@ void MainWindow::updateWindowTitle()
 
 void MainWindow::pageLoaded( ArticleView * view )
 {
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
   updateBackForwardButtons();
 
   updatePronounceAvailability();
@@ -2329,8 +2332,11 @@ void MainWindow::showDefinitionInNewTab( QString const & word,
       showDefinition( word, group, fromArticle, contexts );
 }
 
-void MainWindow::activeArticleChanged( QString const & id )
+void MainWindow::activeArticleChanged( ArticleView const * view, QString const & id )
 {
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
   // select the row with the corresponding id
   for (int i = 0; i < ui.dictsList->count(); ++i) {
     QListWidgetItem * w = ui.dictsList->item( i );
