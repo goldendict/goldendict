@@ -165,7 +165,6 @@ started( false )
 {
 }
 
-
 QGesture * GDSwipeGestureRecognizer::create( QObject * pTarget )
 {
   if ( pTarget && pTarget->isWidgetType() ) {
@@ -259,8 +258,8 @@ QGestureRecognizer::Result GDSwipeGestureRecognizer::recognize( QGesture * state
           int dy1 = p1.screenPos().toPoint().y() - swipe->lastPositions[ 0 ].y();
           int dy2 = p2.screenPos().toPoint().y() - swipe->lastPositions[ 1 ].y();
 
-          if( qAbs( ( dx1 + dx2 ) / 2.0 ) >= MOVE_TRESHOLD ||
-              qAbs( ( dy1 + dy2 ) / 2.0 ) >= MOVE_TRESHOLD )
+          if( qAbs( ( dx1 + dx2 ) / 2.0 ) >= MOVE_X_TRESHOLD ||
+              qAbs( ( dy1 + dy2 ) / 2.0 ) >= MOVE_Y_TRESHOLD )
           {
             qreal angle1 = computeAngle( dx1, dy1 );
             qreal angle2 = computeAngle( dx2, dy2 );
@@ -275,8 +274,8 @@ QGestureRecognizer::Result GDSwipeGestureRecognizer::recognize( QGesture * state
               break;
             }
 
-            if( ( swipe->vertDirection != QSwipeGesture::NoDirection && swipe->vertDirection != vertDir ) ||
-                ( swipe->horizDirection != QSwipeGesture::NoDirection && swipe->horizDirection != horizDir ) )
+            if( ( swipe->vertDirection != QSwipeGesture::NoDirection && horizDir != QSwipeGesture::NoDirection ) ||
+                ( swipe->horizDirection != QSwipeGesture::NoDirection && vertDir != QSwipeGesture::NoDirection ) )
             {
               // Gesture direction changed
               result = QGestureRecognizer::CancelGesture;

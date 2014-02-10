@@ -99,7 +99,8 @@ class GDSwipeGestureRecognizer : public QGestureRecognizer
 public:
   GDSwipeGestureRecognizer(){}
 private:
-  static const int MOVE_TRESHOLD = 50;
+  static const int MOVE_X_TRESHOLD = 100;
+  static const int MOVE_Y_TRESHOLD = 50;
 
   virtual QGesture * create( QObject* pTarget );
   virtual QGestureRecognizer::Result recognize( QGesture* pGesture, QObject * pWatched, QEvent * pEvent );
