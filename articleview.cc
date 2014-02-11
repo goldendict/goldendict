@@ -20,6 +20,7 @@
 #include "ffmpegaudio.hh"
 #include <QDebug>
 #include <QCryptographicHash>
+#include "gestures.hh"
 
 #if QT_VERSION >= 0x040600
 #include <QWebElement>
@@ -178,6 +179,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           blankPage );
 
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ui.definition->grabGesture( Gestures::GDPinchGestureType );
+  ui.definition->grabGesture( Gestures::GDSwipeGestureType );
+#endif
 }
 
 // explicitly report the minimum size, to avoid
@@ -199,6 +205,11 @@ ArticleView::~ArticleView()
 #ifndef DISABLE_INTERNAL_PLAYER
   if ( cfg.preferences.useInternalPlayer )
     Ffmpeg::AudioPlayer::instance().stop();
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
+  ui.definition->ungrabGesture( Gestures::GDSwipeGestureType );
 #endif
 }
 
@@ -442,6 +453,9 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( !id.startsWith( "gdfrom-" ) )
     return; // Incorrect id
 
+  if ( !ui.definition->isVisible() )
+    return; // No action on background page, scrollIntoView there don't work
+
   if ( getArticlesList().contains( id.mid( 7 ) ) )
   {
     if ( moveToIt )
@@ -593,6 +607,59 @@ bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
 
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  if( ev->type() == QEvent::Gesture )
+  {
+    Gestures::GestureResult result;
+    QPoint pt;
+
+    bool handled = Gestures::handleGestureEvent( obj, ev, result, pt );
+
+    if( handled )
+    {
+      if( result == Gestures::ZOOM_IN )
+        zoomIn();
+      else
+      if( result == Gestures::ZOOM_OUT )
+        zoomOut();
+      else
+      if( result == Gestures::SWIPE_LEFT )
+        back();
+      else
+      if( result == Gestures::SWIPE_RIGHT )
+        forward();
+      else
+      if( result == Gestures::SWIPE_UP || result == Gestures::SWIPE_DOWN )
+      {
+        int delta = result == Gestures::SWIPE_UP ? -120 : 120;
+        QWidget *widget = static_cast< QWidget * >( obj );
+
+        QWidget *child = widget->childAt( widget->mapFromGlobal( pt ) );
+        if( child )
+        {
+          QWheelEvent whev( child->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
+          qApp->sendEvent( child, &whev );
+        }
+        else
+        {
+          QWheelEvent whev( widget->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
+          qApp->sendEvent( widget, &whev );
+        }
+      }
+    }
+
+    return handled;
+  }
+
+  if( ev->type() == QEvent::MouseMove )
+  {
+    if( Gestures::isFewTouchPointsPresented() )
+    {
+      ev->accept();
+      return true;
+    }
+  }
+#endif
 
   if ( handleF3( obj, ev ) )
   {
@@ -1766,7 +1833,7 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
   if ( !id.startsWith( "gdfrom-" ) )
     return; // Incorrect id
 
-  emit activeArticleChanged( id.mid( 7 ) );
+  emit activeArticleChanged( this, id.mid( 7 ) );
 }
 
 void ArticleView::doubleClicked()

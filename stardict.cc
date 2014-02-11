@@ -14,6 +14,7 @@
 #include "fsencoding.hh"
 #include "filetype.hh"
 #include "indexedzip.hh"
+#include "tiff.hh"
 
 #include <zlib.h>
 #include <map>
@@ -1083,6 +1084,11 @@ void StardictResourceRequest::run()
 
       QImage img = QImage::fromData( (unsigned char *) &data.front(),
                                      data.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+      if( img.isNull() )
+        GdTiff::tiffToQImage( &data.front(), data.size(), img );
+#endif
 
       dataMutex.unlock();
 

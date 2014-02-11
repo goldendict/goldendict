@@ -7,7 +7,8 @@
 #include "preferences.hh"
 #include "about.hh"
 #include "mruqmenu.hh"
-
+#include "gestures.hh"
+#include <limits.h>
 #include <QDebug>
 #include <QTextStream>
 #include <QDir>
@@ -125,6 +126,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.setupUi( this );
 
   articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  // Set own gesture recognizers
+  Gestures::registerRecognizers();
+#endif
 
   // use our own, cutsom statusbar
   setStatusBar(0);
@@ -784,6 +790,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_WIN32
   gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ui.centralWidget->grabGesture( Gestures::GDPinchGestureType );
+  ui.centralWidget->grabGesture( Gestures::GDSwipeGestureType );
+#endif
 }
 
 void MainWindow::ctrlTabPressed()
@@ -886,6 +897,12 @@ MainWindow::~MainWindow()
     if( !isMinimized() )
       cfg.normalMainWindowGeometry = geometry();
   }
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ui.centralWidget->ungrabGesture( Gestures::GDPinchGestureType );
+  ui.centralWidget->ungrabGesture( Gestures::GDSwipeGestureType );
+  Gestures::unregisterRecognizers();
 #endif
 
   // Close all tabs -- they should be destroyed before network managers
@@ -1389,8 +1406,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
 
-  connect( view, SIGNAL( activeArticleChanged( const QString & ) ),
-           this, SLOT( activeArticleChanged( const QString & ) ) );
+  connect( view, SIGNAL( activeArticleChanged( ArticleView const *, const QString & ) ),
+           this, SLOT( activeArticleChanged( ArticleView const *, const QString & ) ) );
 
   connect( view, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
@@ -1413,6 +1430,10 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   connect( view, SIGNAL( storeResourceSavePath( QString const & ) ),
            this, SLOT( storeResourceSavePath( QString const & ) ) );
+
+  connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
+
+  connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -1577,6 +1598,9 @@ void MainWindow::updateWindowTitle()
 
 void MainWindow::pageLoaded( ArticleView * view )
 {
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
   updateBackForwardButtons();
 
   updatePronounceAvailability();
@@ -2318,8 +2342,11 @@ void MainWindow::showDefinitionInNewTab( QString const & word,
       showDefinition( word, group, fromArticle, contexts );
 }
 
-void MainWindow::activeArticleChanged( QString const & id )
+void MainWindow::activeArticleChanged( ArticleView const * view, QString const & id )
 {
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
   // select the row with the corresponding id
   for (int i = 0; i < ui.dictsList->count(); ++i) {
     QListWidgetItem * w = ui.dictsList->item( i );

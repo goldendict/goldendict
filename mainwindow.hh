@@ -339,7 +339,7 @@ private slots:
                                ArticleView::Contexts const & contexts );
   void typingEvent( QString const & );
 
-  void activeArticleChanged( QString const & id );
+  void activeArticleChanged( ArticleView const *, QString const & id );
 
   void mutedDictionariesChanged();
 

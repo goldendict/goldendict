@@ -196,7 +196,7 @@ signals:
   /// typically in response to user actions
   /// (clicking on the article or using shortcuts).
   /// id - the dictionary id of the active article.
-  void activeArticleChanged ( QString const & id );
+  void activeArticleChanged ( ArticleView const *, QString const & id );
 
   /// Signal to add word to history even if history is disabled
   void forceAddWordToHistory( const QString & word);
@@ -210,6 +210,9 @@ signals:
   void sendWordToInputLine( QString const & word );
 
   void storeResourceSavePath(QString const & );
+
+  void zoomIn();
+  void zoomOut();
 
 public slots:
 

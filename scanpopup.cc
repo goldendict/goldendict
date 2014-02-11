@@ -11,6 +11,7 @@
 #include <QMouseEvent>
 #include <QDesktopWidget>
 #include "gddebug.hh"
+#include "gestures.hh"
 
 #ifdef Q_OS_MACX
 #include "macmouseover.hh"
@@ -254,6 +255,10 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.goBackButton->setEnabled( false );
   ui.goForwardButton->setEnabled( false );
 
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  grabGesture( Gestures::GDPinchGestureType );
+  grabGesture( Gestures::GDSwipeGestureType );
+#endif
 }
 
 ScanPopup::~ScanPopup()
@@ -264,6 +269,11 @@ ScanPopup::~ScanPopup()
   cfg.pinPopupWindow = ui.pinButton->isChecked();
 
   disableScanning();
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ungrabGesture( Gestures::GDPinchGestureType );
+  ungrabGesture( Gestures::GDSwipeGestureType );
+#endif
 }
 
 void ScanPopup::enableScanning()

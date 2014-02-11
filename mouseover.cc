@@ -242,7 +242,7 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd_, UINT msg,
     {
         if( ( res & GD_FLAG_METHOD_UI_AUTOMATION ) == 0 )
             return 0;
-        POINT pt = Global_Data->CurMod.Pt;
+        POINT pt = Global_Data->LastPt;
         WCHAR *pwstr = gdGetWordAtPointByAutomation( pt );
         if( pwstr == NULL ) return 0;
         wordSeq = QString::fromWCharArray( pwstr );
