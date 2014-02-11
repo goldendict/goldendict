@@ -14,6 +14,7 @@
 #include "wstring_qt.hh"
 #include "filetype.hh"
 #include "file.hh"
+#include "tiff.hh"
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -908,6 +909,11 @@ void ZimResourceRequest::run()
       dataMutex.lock();
 
       QImage img = QImage::fromData( reinterpret_cast< const uchar * >( resource.data() ), resource.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+      if( img.isNull() )
+        GdTiff::tiffToQImage( &data.front(), data.size(), img );
+#endif
 
       dataMutex.unlock();
 

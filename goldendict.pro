@@ -280,7 +280,8 @@ HEADERS += folding.hh \
     delegate.hh \
     zim.hh \
     gddebug.hh \
-    gestures.hh
+    gestures.hh \
+    tiff.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -392,7 +393,8 @@ SOURCES += folding.cc \
     delegate.cc \
     zim.cc \
     gddebug.cc \
-    gestures.cc
+    gestures.cc \
+    tiff.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui
@@ -425,6 +427,11 @@ mac {
 CONFIG( zim_support ) {
   DEFINES += MAKE_ZIM_SUPPORT
   LIBS += -llzma
+}
+
+!CONFIG( no_extra_tiff_handler ) {
+  DEFINES += MAKE_EXTRA_TIFF_HANDLER
+  LIBS += -ltiff
 }
 
 RESOURCES += resources.qrc \

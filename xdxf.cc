@@ -24,6 +24,7 @@
 #include "langcoder.hh"
 #include "indexedzip.hh"
 #include "filetype.hh"
+#include "tiff.hh"
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -967,6 +968,11 @@ void XdxfResourceRequest::run()
 
       QImage img = QImage::fromData( (unsigned char *) &data.front(),
                                      data.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+      if( img.isNull() )
+        GdTiff::tiffToQImage( &data.front(), data.size(), img );
+#endif
 
       dataMutex.unlock();
 
