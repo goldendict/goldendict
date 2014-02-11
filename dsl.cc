@@ -854,6 +854,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
         {
           QImage img = QImage::fromData( (unsigned char *) &imgdata.front(),
                                          imgdata.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+          if( img.isNull() && Filetype::isNameOfTiff( filename ) )
+            GdTiff::tiffToQImage( &imgdata.front(), imgdata.size(), img );
+#endif
+
           resize = maxPictureWidth > 0
                    && img.width() > maxPictureWidth;
         }
