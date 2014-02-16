@@ -4,8 +4,15 @@
 #ifdef MAKE_EXTRA_TIFF_HANDLER
 
 #include "tiff.hh"
+
+#if defined (Q_OS_MAC) || defined (Q_OS_WIN)
 #include "tiff/tiff.h"
 #include "tiff/tiffio.h"
+#else
+#include "tiff.h"
+#include "tiffio.h"
+#endif
+
 #include <QBuffer>
 
 namespace GdTiff
