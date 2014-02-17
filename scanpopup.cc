@@ -27,7 +27,7 @@ using std::wstring;
 /// in their behavior on those platforms.
 static Qt::WindowFlags popupWindowFlags =
 
-#ifdef Q_WS_WIN
+#if defined (Q_OS_WIN) || defined (Q_OS_MACX)
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup
