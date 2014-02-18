@@ -33,6 +33,12 @@ int GdAppStyle::pixelMetric ( PixelMetric metric, const QStyleOption * option, c
     }
   }
 
+  // Qt don't upscale icons for high dpi scales
+  // We limit maximum small icon size to 21 pixel
+  // (standard icon size for Lingvo dictionaries)
+  if( metric == QStyle::PM_SmallIconSize )
+    return defaultVal < 21 ? defaultVal : 21;
+
   return defaultVal;
 }
 
