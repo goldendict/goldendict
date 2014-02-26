@@ -18,6 +18,7 @@
 #endif
 
 #include "ufile.hh"
+#include "fsencoding.hh"
 
 namespace File {
 
@@ -69,9 +70,31 @@ bool exists( char const * filename ) throw()
 
 void Class::open( char const * filename, char const * mode ) throw( exCantOpen )
 {
-  f = gd_fopen( filename, mode );
+  QFile::OpenMode openMode = QIODevice::Text;
+  const char * pch = mode;
+  while( *pch )
+  {
+    switch( *pch )
+    {
+      case 'r': openMode |= QIODevice::ReadOnly;
+                break;
+      case 'w': openMode |= QIODevice::WriteOnly;
+                break;
+      case '+': openMode &= ~( QIODevice::ReadOnly | QIODevice::WriteOnly );
+                openMode |= QIODevice::ReadWrite;
+                break;
+      case 'a': openMode |= QIODevice::Append;
+                break;
+      case 'b': openMode &= ~QIODevice::Text;
+                break;
+      default:  break;
+    }
+    ++pch;
+  }
 
-  if ( !f )
+  f.setFileName( FsEncoding::decode( filename ) );
+
+  if ( !f.open( openMode ) )
     throw exCantOpen( std::string( filename ) + ": " + strerror( errno ) );
 }
 
@@ -87,7 +110,7 @@ Class::Class( std::string const & filename, char const * mode )
   open( filename.c_str(), mode );
 }
 
-void Class::read( void * buf, size_t size ) throw( exReadError, exWriteError )
+void Class::read( void * buf, qint64 size ) throw( exReadError, exWriteError )
 {
   if ( !size )
     return;
@@ -95,21 +118,22 @@ void Class::read( void * buf, size_t size ) throw( exReadError, exWriteError )
   if ( writeBuffer )
     flushWriteBuffer();
 
-  size_t result = fread( buf, size, 1, f );
+  qint64 result = f.read( reinterpret_cast<char *>( buf ), size );
 
-  if ( result != 1 )
+  if ( result != size )
     throw exReadError();
 }
 
-size_t Class::readRecords( void * buf, size_t size, size_t count ) throw( exWriteError )
+size_t Class::readRecords( void * buf, qint64 size, size_t count ) throw( exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
 
-  return fread( buf, size, count, f );
+  qint64 result = f.read( reinterpret_cast<char *>( buf ), size * count );
+  return result < 0 ? result : result / size;
 }
 
-void Class::write( void const * buf, size_t size ) throw( exWriteError )
+void Class::write( void const * buf, qint64 size ) throw( exWriteError )
 {
   if ( !size )
     return;
@@ -119,9 +143,9 @@ void Class::write( void const * buf, size_t size ) throw( exWriteError )
     // If the write is large, there's not much point in buffering
     flushWriteBuffer();
 
-    size_t result = fwrite( buf, size, 1, f );
+    size_t result = f.write( reinterpret_cast<char const *>( buf ), size );
 
-    if ( result != 1 )
+    if ( result != size )
       throw exWriteError();
 
     return;
@@ -154,12 +178,13 @@ void Class::write( void const * buf, size_t size ) throw( exWriteError )
   }
 }
 
-size_t Class::writeRecords( void const * buf, size_t size, size_t count )
+size_t Class::writeRecords( void const * buf, qint64 size, size_t count )
   throw( exWriteError )
 {
   flushWriteBuffer();
 
-  return fwrite( buf, size, count, f );
+  qint64 result = f.write( reinterpret_cast<const char *>( buf ), size * count );
+  return result < 0 ? result : result / size;
 }
 
 char * Class::gets( char * s, int size, bool stripNl )
@@ -168,11 +193,11 @@ char * Class::gets( char * s, int size, bool stripNl )
   if ( writeBuffer )
     flushWriteBuffer();
 
-  char * result = fgets( s, size, f );
+  qint64 len = f.readLine( s, size );
+  char * result = len > 0 ? s : NULL;
 
   if ( result && stripNl )
   {
-    size_t len = strlen( result );
     
     char * last = result + len;
 
@@ -205,7 +230,7 @@ void Class::seek( long offset ) throw( exSeekError, exWriteError )
   if ( writeBuffer )
     flushWriteBuffer();
 
-  if ( fseek( f, offset, SEEK_SET ) != 0 )
+  if ( !f.seek( offset ) )
     throw exSeekError();
 }
 
@@ -214,7 +239,7 @@ void Class::seekCur( long offset ) throw( exSeekError, exWriteError )
   if ( writeBuffer )
     flushWriteBuffer();
 
-  if ( fseek( f, offset, SEEK_CUR ) != 0 )
+  if( !f.seek( f.pos() + offset ) )
     throw exSeekError();
 }
 
@@ -223,7 +248,7 @@ void Class::seekEnd( long offset ) throw( exSeekError, exWriteError )
   if ( writeBuffer )
     flushWriteBuffer();
 
-  if ( fseek( f, offset, SEEK_END ) != 0 )
+  if( !f.seek( f.size() + offset ) )
     throw exSeekError();
 }
 
@@ -234,7 +259,7 @@ void Class::rewind() throw( exSeekError, exWriteError )
 
 size_t Class::tell() throw( exSeekError )
 {
-  long result = ftell( f );
+  qint64 result = f.pos();
 
   if ( result == -1 )
     throw exSeekError();
@@ -250,35 +275,25 @@ bool Class::eof() throw( exWriteError )
   if ( writeBuffer )
     flushWriteBuffer();
 
-  return feof( f ) != 0;
+  return f.atEnd();
 }
 
-FILE * Class::file() throw( exWriteError )
+QFile & Class::file() throw( exWriteError )
 {
   flushWriteBuffer();
 
   return f;
 }
 
-FILE * Class::release() throw( exWriteError )
-{
-  releaseWriteBuffer();
-
-  FILE * c = f;
-
-  f = 0;
-
-  return c;
-}
-
 void Class::close() throw( exWriteError )
 {
-  fclose( release() );
+  releaseWriteBuffer();
+  f.close();
 }
 
 Class::~Class() throw()
 {
-  if ( f )
+  if ( f.isOpen() )
   {
     try
     {
@@ -287,7 +302,7 @@ Class::~Class() throw()
     catch( exWriteError & )
     {
     }
-    fclose( f );
+    f.close();
   }
 }
 
@@ -295,9 +310,9 @@ void Class::flushWriteBuffer() throw( exWriteError )
 {
   if ( writeBuffer && writeBufferLeft != WriteBufferSize )
   {
-    size_t result = fwrite( writeBuffer, WriteBufferSize - writeBufferLeft, 1, f );
+    size_t result = f.write( writeBuffer, WriteBufferSize - writeBufferLeft );
 
-    if ( result != 1 )
+    if ( result != WriteBufferSize - writeBufferLeft )
       throw exWriteError();
 
     writeBufferLeft = WriteBufferSize;
