@@ -38,6 +38,7 @@ namespace BtreeIndexing {
 
 using gd::wstring;
 using gd::wchar;
+using std::pair;
 
 enum
 {
@@ -709,8 +710,6 @@ vector< WordArticleLink > BtreeIndex::readChain( char const * & ptr )
 
   vector< WordArticleLink > result;
 
-  vector< char > charBuffer;
-
   while( chainSize )
   {
     string str = ptr;
@@ -1071,6 +1070,130 @@ IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )
                                         lastLeafOffset );
 
   return IndexInfo( btreeMaxElements, rootOffset );
+}
+
+void BtreeIndex::getAllHeadwords( QSet< QString > & headwords )
+{
+  if ( !idxFile )
+    throw exIndexWasNotOpened();
+
+  Mutex::Lock _( *idxFileMutex );
+
+  findNodeArticleLinks( rootOffset, NULL, NULL, &headwords );
+}
+
+void BtreeIndex::findAllArticleLinks( QVector< FTSLink > & articleLinks )
+{
+  if ( !idxFile )
+    throw exIndexWasNotOpened();
+
+  Mutex::Lock _( *idxFileMutex );
+
+  QSet< uint32_t > offsets;
+
+  findNodeArticleLinks( rootOffset, &articleLinks, &offsets, NULL );
+}
+
+void BtreeIndex::findNodeArticleLinks( uint32_t currentNodeOffset,
+                                       QVector< FTSLink > * articleLinks,
+                                       QSet< uint32_t > * offsets,
+                                       QSet< QString > * headwords )
+{
+  // Read a node
+
+  vector< char > extLeaf;
+
+  if( rootNodeLoaded && currentNodeOffset == rootOffset )
+    extLeaf = rootNode;
+  else
+    readNode( currentNodeOffset, extLeaf );
+
+  char const * leaf = &extLeaf.front();
+
+  // Is it a leaf or a node?
+
+  uint32_t leafEntries = *(uint32_t *)leaf;
+
+  if ( leafEntries == 0xffffFFFF )
+  {
+    // A node
+
+    uint32_t const * offs = (uint32_t *)leaf + 1;
+
+    for( unsigned i = 0; i <= indexNodeSize; i++ )
+      findNodeArticleLinks( offs[ i ], articleLinks, offsets, headwords );
+  }
+  else
+  {
+    // A leaf
+
+    if ( !leafEntries )
+    {
+      // Empty leaf? This may only be possible for entirely empty trees only.
+      if ( currentNodeOffset != rootOffset )
+        throw exCorruptedChainData();
+      else
+        return; // No match
+    }
+
+    // Build an array containing all chain pointers
+    char const * ptr = leaf + sizeof( uint32_t );
+
+    uint32_t chainSize;
+    QPair< QSet< uint32_t >::iterator, bool > pr;
+
+    while( leafEntries-- )
+    {
+      memcpy( &chainSize, ptr, sizeof( uint32_t ) );
+
+      char const * chainPtr = ptr;
+      vector< WordArticleLink > result = readChain( chainPtr );
+      for( unsigned i = 0; i < result.size(); i++ )
+      {
+        if( headwords )
+          headwords->insert( QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+
+        if( !offsets || offsets->contains( result[ i ].articleOffset ) )
+          continue;
+
+        offsets->insert( result[ i ].articleOffset );
+        if( articleLinks )
+          articleLinks->push_back( FTSLink( result[ i ].prefix + result[ i ].word, result[ i ].articleOffset ) );
+      }
+
+      ptr += sizeof( uint32_t ) + chainSize;
+    }
+  }
+}
+
+bool BtreeDictionary::getHeadwords( QStringList &headwords )
+{
+  QSet< QString > setOfHeadwords;
+  headwords.clear();
+
+  try
+  {
+    getAllHeadwords( setOfHeadwords );
+
+    if( setOfHeadwords.size() )
+    {
+      headwords.reserve( setOfHeadwords.size() );
+
+      for( QSet< QString >::const_iterator it = setOfHeadwords.constBegin();
+           it != setOfHeadwords.constEnd(); ++it )
+      {
+        headwords.append( *it );
+      }
+
+      headwords.sort();
+    }
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Failed headwords retrieving for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+
+  return headwords.size() > 0;
 }
 
 }

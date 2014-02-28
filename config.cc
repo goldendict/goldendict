@@ -870,6 +870,26 @@ Class load() throw( exError )
     }
   }
 
+  QDomNode headwordsDialog = root.namedItem( "headwordsDialog" );
+
+  if ( !headwordsDialog.isNull() )
+  {
+    if ( !headwordsDialog.namedItem( "searchMode" ).isNull() )
+      c.headwordsDialog.searchMode = headwordsDialog.namedItem( "searchMode" ).toElement().text().toInt() ;
+
+    if ( !headwordsDialog.namedItem( "matchCase" ).isNull() )
+      c.headwordsDialog.matchCase = ( headwordsDialog.namedItem( "matchCase" ).toElement().text() == "1" );
+
+    if ( !headwordsDialog.namedItem( "autoApply" ).isNull() )
+      c.headwordsDialog.autoApply = ( headwordsDialog.namedItem( "autoApply" ).toElement().text() == "1" );
+
+    if ( !headwordsDialog.namedItem( "headwordsExportPath" ).isNull() )
+      c.headwordsDialog.headwordsExportPath = headwordsDialog.namedItem( "headwordsExportPath" ).toElement().text();
+
+    if ( !headwordsDialog.namedItem( "headwordsDialogGeometry" ).isNull() )
+      c.headwordsDialog.headwordsDialogGeometry = QByteArray::fromBase64( headwordsDialog.namedItem( "headwordsDialogGeometry" ).toElement().text().toLatin1() );
+  }
+
   return c;
 }
 
@@ -1644,6 +1664,31 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "maxHeadwordSize" );
     opt.appendChild( dd.createTextNode( QString::number( c.maxHeadwordSize ) ) );
     root.appendChild( opt );
+  }
+
+  {
+    QDomNode hd = dd.createElement( "headwordsDialog" );
+    root.appendChild( hd );
+
+    QDomElement opt = dd.createElement( "searchMode" );
+    opt.appendChild( dd.createTextNode( QString::number( c.headwordsDialog.searchMode ) ) );
+    hd.appendChild( opt );
+
+    opt = dd.createElement( "matchCase" );
+    opt.appendChild( dd.createTextNode( c.headwordsDialog.matchCase ? "1" : "0" ) );
+    hd.appendChild( opt );
+
+    opt = dd.createElement( "autoApply" );
+    opt.appendChild( dd.createTextNode( c.headwordsDialog.autoApply ? "1" : "0" ) );
+    hd.appendChild( opt );
+
+    opt = dd.createElement( "headwordsExportPath" );
+    opt.appendChild( dd.createTextNode( c.headwordsDialog.headwordsExportPath ) );
+    hd.appendChild( opt );
+
+    opt = dd.createElement( "headwordsDialogGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.headwordsDialog.headwordsDialogGeometry.toBase64() ) ) );
+    hd.appendChild( opt );
   }
 
   QByteArray result( dd.toByteArray() );

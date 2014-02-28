@@ -8,6 +8,7 @@
 #include "about.hh"
 #include "mruqmenu.hh"
 #include "gestures.hh"
+#include "dictheadwords.hh"
 #include <limits.h>
 #include <QDir>
 #include <QMessageBox>
@@ -3555,6 +3556,15 @@ void MainWindow::showDictionaryInfo( const QString & id )
       else if ( result == DictInfo::EDIT_DICTIONARY)
       {
         editDictionary( dictionaries[x].get() );
+      }
+      else if( result == DictInfo::SHOW_HEADWORDS )
+      {
+        DictHeadwords headwordsDlg( this, cfg, dictionaries[ x ].get() );
+
+        connect( &headwordsDlg, SIGNAL( headwordSelected( QString ) ),
+                 this, SLOT( wordReceived( QString ) ) );
+
+        headwordsDlg.exec();
       }
 
       break;
