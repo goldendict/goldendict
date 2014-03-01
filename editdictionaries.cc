@@ -48,7 +48,10 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   connect( &sources, SIGNAL( rescan() ), this, SLOT( rescanSources() ) );
 
   connect( groups.get(), SIGNAL( showDictionaryInfo( QString const & ) ),
-           this, SIGNAL( showDictionaryInfo(QString const & ) ) );
+           this, SIGNAL( showDictionaryInfo( QString const & ) ) );
+
+  connect( orderAndProps.get(), SIGNAL( showDictionaryHeadwords( QString const & ) ),
+           this, SIGNAL( showDictionaryHeadwords( QString const & ) ) );
 }
 
 void EditDictionaries::editGroup( unsigned id )

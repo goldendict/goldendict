@@ -219,6 +219,8 @@ private:
 
   void fillWordListFromHistory();
 
+  void showDictionaryHeadwords( Dictionary::Class * dict );
+
 private slots:
 
   void hotKeyActivated( int );
@@ -242,6 +244,8 @@ private slots:
   void foundDictsContextMenuRequested( const QPoint & pos );
 
   void showDictionaryInfo( QString const & id );
+
+  void showDictionaryHeadwords( QString const & id );
 
   void openDictionaryFolder( QString const & id );
 

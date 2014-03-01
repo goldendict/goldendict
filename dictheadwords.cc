@@ -50,6 +50,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 //  proxy->setDynamicSortFilter( true );
 
   ui.headersListView->setModel( proxy );
+  ui.headersListView->setEditTriggers( QAbstractItemView::NoEditTriggers );
 
   // very important call, for performance reasons:
   ui.headersListView->setUniformItemSizes( true );

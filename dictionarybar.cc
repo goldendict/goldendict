@@ -112,6 +112,7 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
       menu.addAction( QIcon( ":/icons/bookcase.png" ), tr( "Edit this group" ) );
 
   QAction * infoAction = NULL;
+  QAction * headwordsAction = NULL;
   QAction * editDictAction = NULL;
   QAction * openDictFolderAction = NULL;
   QString dictFilename;
@@ -136,6 +137,9 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
 
       if( pDict->isLocalDictionary() )
       {
+        if( pDict->getWordCount() > 0 )
+          headwordsAction = menu.addAction( tr( "Dictionary headwords" ) );
+
         openDictFolderAction = menu.addAction( tr( "Open dictionary folder" ) );
 
         if( !editDictionaryCommand.isEmpty() )
@@ -186,6 +190,13 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
   {
     QString id = dictAction->data().toString();
     emit showDictionaryInfo( id );
+    return;
+  }
+
+  if( result && result == headwordsAction )
+  {
+    QString id = dictAction->data().toString();
+    emit showDictionaryHeadwords( id );
     return;
   }
 

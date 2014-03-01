@@ -507,6 +507,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &dictionaryBar, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
 
+  connect( &dictionaryBar, SIGNAL( showDictionaryHeadwords( QString const & ) ),
+           this, SLOT( showDictionaryHeadwords( QString const & ) ) );
+
   connect( &dictionaryBar, SIGNAL( openDictionaryFolder( QString const & ) ),
            this, SLOT( openDictionaryFolder( QString const & ) ) );
 
@@ -1743,6 +1746,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   connect( &dicts, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
+
+  connect( &dicts, SIGNAL( showDictionaryHeadwords( QString const & ) ),
+           this, SLOT( showDictionaryHeadwords( QString const & ) ) );
 
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );
@@ -3559,17 +3565,34 @@ void MainWindow::showDictionaryInfo( const QString & id )
       }
       else if( result == DictInfo::SHOW_HEADWORDS )
       {
-        DictHeadwords headwordsDlg( this, cfg, dictionaries[ x ].get() );
-
-        connect( &headwordsDlg, SIGNAL( headwordSelected( QString ) ),
-                 this, SLOT( wordReceived( QString ) ) );
-
-        headwordsDlg.exec();
+        showDictionaryHeadwords( dictionaries[x].get() );
       }
 
       break;
     }
   }
+}
+
+void MainWindow::showDictionaryHeadwords( const QString & id )
+{
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
+    if( dictionaries[ x ]->getId() == id.toUtf8().data() )
+    {
+      showDictionaryHeadwords( dictionaries[ x ].get() );
+      break;
+    }
+  }
+}
+
+void MainWindow::showDictionaryHeadwords( Dictionary::Class * dict )
+{
+  DictHeadwords headwordsDlg( this, cfg, dict );
+
+  connect( &headwordsDlg, SIGNAL( headwordSelected( QString ) ),
+           this, SLOT( wordReceived( QString ) ) );
+
+  headwordsDlg.exec();
 }
 
 void MainWindow::editDictionary( Dictionary::Class * dict )
@@ -3673,6 +3696,10 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
       QMenu menu( ui.dictsList );
       QAction * infoAction = menu.addAction( tr( "Dictionary info" ) );
 
+      QAction * headwordsAction = NULL;
+      if( pDict->getWordCount() > 0 )
+        headwordsAction = menu.addAction( tr( "Dictionary headwords" ) );
+
       QAction * openDictFolderAction = menu.addAction( tr( "Open dictionary folder" ) );
 
       QAction * editAction = NULL;
@@ -3688,6 +3715,15 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
         if ( scanPopup )
           scanPopup.get()->blockSignals( true );
         showDictionaryInfo( id );
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( false );
+      }
+      else
+      if( result && result == headwordsAction )
+      {
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( true );
+        showDictionaryHeadwords( pDict );
         if ( scanPopup )
           scanPopup.get()->blockSignals( false );
       }

@@ -50,7 +50,7 @@
        <item>
         <widget class="QPushButton" name="exportButton">
          <property name="toolTip">
-          <string>Expors headwords to file</string>
+          <string>Exports headwords to file</string>
          </property>
          <property name="text">
           <string>Export</string>
