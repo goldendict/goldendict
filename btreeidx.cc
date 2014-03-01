@@ -1184,8 +1184,6 @@ bool BtreeDictionary::getHeadwords( QStringList &headwords )
       {
         headwords.append( *it );
       }
-
-      headwords.sort();
     }
   }
   catch( std::exception &ex )

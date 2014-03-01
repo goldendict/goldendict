@@ -47,7 +47,11 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
   proxy = new QSortFilterProxyModel( this );
 
   proxy->setSourceModel( model );
-//  proxy->setDynamicSortFilter( true );
+
+  proxy->setSortCaseSensitivity( Qt::CaseInsensitive );
+  proxy->setSortLocaleAware( true );
+  proxy->sort( 0 );
+  proxy->setDynamicSortFilter( true );
 
   ui.headersListView->setModel( proxy );
   ui.headersListView->setEditTriggers( QAbstractItemView::NoEditTriggers );
