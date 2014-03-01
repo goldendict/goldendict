@@ -98,7 +98,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   showHeadwordsNumber();
 
-  QApplication::setOverrideCursor( Qt::ArrowCursor );
+  QApplication::restoreOverrideCursor();
 }
 
 DictHeadwords::~DictHeadwords()
@@ -150,7 +150,7 @@ void DictHeadwords::filterChanged()
 
   proxy->setFilterRegExp( regExp );
 
-  QApplication::setOverrideCursor( Qt::ArrowCursor );
+  QApplication::restoreOverrideCursor();
 
   showHeadwordsNumber();
 }
