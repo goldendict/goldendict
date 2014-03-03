@@ -104,6 +104,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   wordListSelChanged( false )
 , wasMaximized( false )
 , blockUpdateWindowTitle( false )
+, headwordsDlg( 0 )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -892,6 +893,8 @@ MainWindow::~MainWindow()
       cfg.normalMainWindowGeometry = geometry();
   }
 #endif
+
+  closeHeadwordsDialog();
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.centralWidget->ungrabGesture( Gestures::GDPinchGestureType );
@@ -2559,10 +2562,16 @@ void MainWindow::toggleMainWindow( bool onlyShow )
       hide();
     else
       showMinimized();
+
+    if( headwordsDlg )
+      headwordsDlg->hide();
   }
 
   if ( shown )
   {
+    if( headwordsDlg )
+      headwordsDlg->show();
+
     focusTranslateLine();
 #ifdef Q_WS_X11
     Window wh = 0;
@@ -3587,12 +3596,27 @@ void MainWindow::showDictionaryHeadwords( const QString & id )
 
 void MainWindow::showDictionaryHeadwords( Dictionary::Class * dict )
 {
-  DictHeadwords headwordsDlg( this, cfg, dict );
+  if( headwordsDlg == 0 )
+  {
+    headwordsDlg = new DictHeadwords( this, cfg, dict );
+    connect( headwordsDlg, SIGNAL( headwordSelected( QString ) ),
+             this, SLOT( wordReceived( QString ) ) );
+    connect( headwordsDlg, SIGNAL( closeDialog() ),
+             this, SLOT( closeHeadwordsDialog() ) );
+  }
+  else
+    headwordsDlg->setup( dict );
 
-  connect( &headwordsDlg, SIGNAL( headwordSelected( QString ) ),
-           this, SLOT( wordReceived( QString ) ) );
+  headwordsDlg->show();
+}
 
-  headwordsDlg.exec();
+void MainWindow::closeHeadwordsDialog()
+{
+  if( headwordsDlg )
+  {
+    delete headwordsDlg;
+    headwordsDlg = NULL;
+  }
 }
 
 void MainWindow::editDictionary( Dictionary::Class * dict )

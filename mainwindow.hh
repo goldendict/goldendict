@@ -27,6 +27,7 @@
 #include "mruqmenu.hh"
 #include "translatebox.hh"
 #include "wordlist.hh"
+#include "dictheadwords.hh"
 
 #ifdef Q_WS_X11
 #include <fixx11h.h>
@@ -156,6 +157,8 @@ private:
   bool blockUpdateWindowTitle;
 
   QPrinter & getPrinter(); // Creates a printer if it's not there and returns it
+
+  DictHeadwords * headwordsDlg;
 
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
@@ -401,6 +404,8 @@ private slots:
   void sendWordToInputLine( QString const & word );
 
   void storeResourceSavePath( QString const & );
+
+  void closeHeadwordsDialog();
 
 signals:
   /// Set optional parts expand mode for all tabs

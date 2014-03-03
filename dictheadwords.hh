@@ -22,7 +22,7 @@ public:
                         Dictionary::Class * dict_ );
   virtual ~DictHeadwords();
 
-  void setup();
+  void setup( Dictionary::Class * dict_ );
 
 protected:
   Config::Class & cfg;
@@ -37,7 +37,7 @@ protected:
 private:
   Ui::DictHeadwords ui;
 private slots:
-  void savePos( int );
+  void savePos();
   void filterChangedInternal();
   void filterChanged();
   void exportButtonClicked();
@@ -45,9 +45,11 @@ private slots:
   void itemClicked( const QModelIndex & index );
   void autoApplyStateChanged( int state );
   void showHeadwordsNumber();
+  virtual void reject();
 
 signals:
   void headwordSelected( QString const & );
+  void closeDialog();
 };
 
 #endif // __DICTHEADWORDS_H_INCLUDED__

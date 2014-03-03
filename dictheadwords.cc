@@ -18,14 +18,13 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 , cfg( cfg_ )
 , dict( dict_ )
 {
-  QApplication::setOverrideCursor( Qt::WaitCursor );
-
   ui.setupUi( this );
 
   if( cfg.headwordsDialog.headwordsDialogGeometry.size() > 0 )
     restoreGeometry( cfg.headwordsDialog.headwordsDialogGeometry );
 
-  setWindowTitle( QString::fromUtf8( dict->getName().c_str() ) );
+  setAttribute( Qt::WA_DeleteOnClose, false );
+  setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
 
   ui.searchModeCombo->addItem( tr( "Text" ), QRegExp::FixedString );
   ui.searchModeCombo->addItem( tr( "Wildcards" ), QRegExp::Wildcard );
@@ -39,8 +38,6 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   ui.matchCase->setChecked( cfg.headwordsDialog.matchCase );
 
-  dict->getHeadwords( headers );
-
   model = new QStringListModel( this );
   model->setStringList( headers );
 
@@ -50,7 +47,6 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   proxy->setSortCaseSensitivity( Qt::CaseInsensitive );
   proxy->setSortLocaleAware( true );
-  proxy->sort( 0 );
   proxy->setDynamicSortFilter( true );
 
   ui.headersListView->setModel( proxy );
@@ -74,7 +70,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
     ui.applyButton->setEnabled( !cfg.headwordsDialog.autoApply );
   }
 
-  connect( this, SIGNAL( finished( int ) ), this, SLOT( savePos( int ) ) );
+  connect( this, SIGNAL( finished( int ) ), this, SLOT( savePos() ) );
 
   connect( ui.OKButton, SIGNAL( clicked( bool ) ), this, SLOT( okButtonClicked() ) );
   connect( ui.exportButton, SIGNAL( clicked( bool ) ), this, SLOT( exportButtonClicked() ) );
@@ -96,9 +92,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
   connect( proxy, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
            this, SLOT( showHeadwordsNumber() ) );
 
-  showHeadwordsNumber();
-
-  QApplication::restoreOverrideCursor();
+  setup( dict_ );
 }
 
 DictHeadwords::~DictHeadwords()
@@ -107,7 +101,27 @@ DictHeadwords::~DictHeadwords()
     delete delegate;
 }
 
-void DictHeadwords::savePos( int )
+void DictHeadwords::setup( Dictionary::Class *dict_ )
+{
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+
+  dict = dict_;
+
+  setWindowTitle( QString::fromUtf8( dict->getName().c_str() ) );
+
+  headers.clear();
+  model->setStringList( headers );
+
+  dict->getHeadwords( headers );
+  model->setStringList( headers );
+
+  proxy->sort( 0 );
+  filterChanged();
+
+  QApplication::restoreOverrideCursor();
+}
+
+void DictHeadwords::savePos()
 {
   cfg.headwordsDialog.searchMode = ui.searchModeCombo->currentIndex();
   cfg.headwordsDialog.matchCase = ui.matchCase->isChecked();
@@ -120,7 +134,14 @@ void DictHeadwords::savePos( int )
 
 void DictHeadwords::okButtonClicked()
 {
-  done( 0 );
+  savePos();
+  closeDialog();
+}
+
+void DictHeadwords::reject()
+{
+  savePos();
+  closeDialog();
 }
 
 void DictHeadwords::exportButtonClicked()
