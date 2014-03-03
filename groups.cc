@@ -26,6 +26,21 @@ Groups::Groups( QWidget * parent,
   ui.searchLine->applyTo( ui.dictionaries );
   addAction( ui.searchLine->getFocusAction() );
 
+  groupsListMenu = new QMenu( tr( "Group tabs" ), ui.groups );
+
+  groupsListButton = new QToolButton( ui.groups );
+  groupsListButton->setAutoRaise( true );
+  groupsListButton->setIcon( QIcon( ":/icons/windows-list.png" ) );
+  groupsListButton->setMenu( groupsListMenu );
+  groupsListButton->setToolTip( tr( "Open groups list" ) );
+  groupsListButton->setPopupMode( QToolButton::InstantPopup );
+  ui.groups->setCornerWidget( groupsListButton );
+  groupsListButton->setFocusPolicy( Qt::ClickFocus );
+
+  connect(groupsListMenu, SIGNAL( aboutToShow() ), this, SLOT( fillGroupsMenu() ) );
+  connect(groupsListMenu, SIGNAL( triggered( QAction * ) ),
+          this, SLOT( switchToGroup( QAction * ) ) );
+
   // Populate groups' widget
 
   ui.groups->populate( groups, dicts, ui.dictionaries->getCurrentDictionaries() );
@@ -205,4 +220,27 @@ void Groups::showDictInfo( QPoint const & pos )
   }
 }
 
+void Groups::fillGroupsMenu()
+{
+  groupsListMenu->clear();
+  for( int i = 0; i < ui.groups->count(); i++ )
+  {
+    QAction * act = groupsListMenu->addAction( ui.groups->tabText( i ) );
+    act->setData( i );
+    if (ui.groups->currentIndex() == i)
+    {
+      QFont f( act->font() );
+      f.setBold( true );
+      act->setFont( f );
+    }
+  }
 
+  if( groupsListMenu->actions().size() > 1 )
+    groupsListMenu->setActiveAction( groupsListMenu->actions().at( ui.groups->currentIndex() ) );
+}
+
+void Groups::switchToGroup( QAction * act )
+{
+  int idx = act->data().toInt();
+  ui.groups->setCurrentIndex(idx);
+}

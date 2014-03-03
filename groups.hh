@@ -9,6 +9,7 @@
 #include "dictionary.hh"
 #include "groups_widgets.hh"
 #include <QToolButton>
+#include <QMenu>
 
 class Groups: public QWidget
 {
@@ -35,6 +36,9 @@ private:
   std::vector< sptr< Dictionary::Class > > const & dicts;
   Config::Groups groups;
 
+  QToolButton * groupsListButton;
+  QMenu * groupsListMenu;
+
   // Reacts to the event that the number of groups is possibly changed
   void countChanged();
 
@@ -47,6 +51,8 @@ private slots:
   void removeFromGroup();
   void addAutoGroups();
   void showDictInfo( const QPoint & pos );
+  void fillGroupsMenu();
+  void switchToGroup( QAction * act );
 
 signals:
   void showDictionaryInfo( QString const & id );
