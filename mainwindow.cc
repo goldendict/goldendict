@@ -88,6 +88,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   useSmallIconsInToolbarsAction( tr( "Show Small Icons in &Toolbars" ), this ),
   toggleMenuBarAction( tr( "&Menubar" ), this ),
   switchExpandModeAction( this ),
+  focusHeadwordsDlgAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -338,6 +339,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &focusTranslateLineAction, SIGNAL( triggered() ),
            this, SLOT( focusTranslateLine() ) );
 
+  focusHeadwordsDlgAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  focusHeadwordsDlgAction.setShortcut( QKeySequence( "Ctrl+D" ) );
+
+  connect( &focusHeadwordsDlgAction, SIGNAL( triggered() ),
+           this, SLOT( focusHeadwordsDialog() ) );
+
   ui.centralWidget->addAction( &escAction );
   ui.dictsPane->addAction( &escAction );
   ui.searchPaneWidget->addAction( &escAction );
@@ -350,6 +357,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPaneWidget->addAction( &focusTranslateLineAction );
   ui.historyPane->addAction( &focusTranslateLineAction );
   groupList->addAction( &focusTranslateLineAction );
+
+  ui.centralWidget->addAction( &focusHeadwordsDlgAction );
+  ui.dictsPane->addAction( &focusHeadwordsDlgAction );
+  ui.searchPaneWidget->addAction( &focusHeadwordsDlgAction );
+  ui.historyPane->addAction( &focusHeadwordsDlgAction );
+  groupList->addAction( &focusHeadwordsDlgAction );
+  translateBox->addAction( &focusHeadwordsDlgAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -3617,6 +3631,12 @@ void MainWindow::closeHeadwordsDialog()
     delete headwordsDlg;
     headwordsDlg = NULL;
   }
+}
+
+void MainWindow::focusHeadwordsDialog()
+{
+  if( headwordsDlg )
+    headwordsDlg->activateWindow();
 }
 
 void MainWindow::editDictionary( Dictionary::Class * dict )

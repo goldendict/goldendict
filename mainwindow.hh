@@ -106,7 +106,8 @@ private:
   QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction,
-          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction, switchExpandModeAction;
+          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction,
+          switchExpandModeAction, focusHeadwordsDlgAction;
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
@@ -406,6 +407,8 @@ private slots:
   void storeResourceSavePath( QString const & );
 
   void closeHeadwordsDialog();
+
+  void focusHeadwordsDialog();
 
 signals:
   /// Set optional parts expand mode for all tabs
