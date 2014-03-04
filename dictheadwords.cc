@@ -92,6 +92,8 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
   connect( proxy, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
            this, SLOT( showHeadwordsNumber() ) );
 
+  ui.headersListView->installEventFilter( this );
+
   setup( dict_ );
 }
 
@@ -130,6 +132,20 @@ void DictHeadwords::savePos()
     cfg.headwordsDialog.autoApply = ui.autoApply->isChecked();
 
   cfg.headwordsDialog.headwordsDialogGeometry = saveGeometry();
+}
+
+bool DictHeadwords::eventFilter( QObject * obj, QEvent * ev )
+{
+  if( obj == ui.headersListView && ev->type() == QEvent::KeyPress )
+  {
+    QKeyEvent * kev = static_cast< QKeyEvent * >( ev );
+    if( kev->key() == Qt::Key_Return || kev->key() == Qt::Key_Enter )
+    {
+      itemClicked( ui.headersListView->currentIndex() );
+      return true;
+    }
+  }
+  return QDialog::eventFilter( obj, ev );
 }
 
 void DictHeadwords::okButtonClicked()

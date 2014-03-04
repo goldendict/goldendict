@@ -33,6 +33,7 @@ protected:
   WordListItemDelegate * delegate;
 
   void saveHeadersToFile();
+  bool eventFilter( QObject * obj, QEvent * ev );
 
 private:
   Ui::DictHeadwords ui;
