@@ -1140,7 +1140,6 @@ void BtreeIndex::findNodeArticleLinks( uint32_t currentNodeOffset,
     char const * ptr = leaf + sizeof( uint32_t );
 
     uint32_t chainSize;
-    QPair< QSet< uint32_t >::iterator, bool > pr;
 
     while( leafEntries-- )
     {
@@ -1169,7 +1168,9 @@ void BtreeIndex::findNodeArticleLinks( uint32_t currentNodeOffset,
 bool BtreeDictionary::getHeadwords( QStringList &headwords )
 {
   QSet< QString > setOfHeadwords;
+
   headwords.clear();
+  setOfHeadwords.reserve( getWordCount() );
 
   try
   {
@@ -1179,11 +1180,11 @@ bool BtreeDictionary::getHeadwords( QStringList &headwords )
     {
       headwords.reserve( setOfHeadwords.size() );
 
-      for( QSet< QString >::const_iterator it = setOfHeadwords.constBegin();
-           it != setOfHeadwords.constEnd(); ++it )
-      {
+      QSet< QString >::const_iterator it = setOfHeadwords.constBegin();
+      QSet< QString >::const_iterator end = setOfHeadwords.constEnd();
+
+      for( ; it != end; ++it )
         headwords.append( *it );
-      }
     }
   }
   catch( std::exception &ex )
