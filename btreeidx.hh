@@ -137,11 +137,10 @@ protected:
   /// are left.
   void antialias( wstring const &, vector< WordArticleLink > & );
 
-  /// Find all article links for node
-  void findNodeArticleLinks( uint32_t currentNodeOffset,
-                             QVector< FTSLink > * articleLinks,
-                             QSet< uint32_t > * offsets,
-                             QSet< QString > * headwords );
+  /// Find all article links
+  void findArticleLinks( QVector< FTSLink > * articleLinks,
+                         QSet< uint32_t > * offsets,
+                         QSet< QString > * headwords );
 protected:
 
   Mutex * idxFileMutex;

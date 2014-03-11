@@ -1079,7 +1079,7 @@ void BtreeIndex::getAllHeadwords( QSet< QString > & headwords )
 
   Mutex::Lock _( *idxFileMutex );
 
-  findNodeArticleLinks( rootOffset, NULL, NULL, &headwords );
+  findArticleLinks( NULL, NULL, &headwords );
 }
 
 void BtreeIndex::findAllArticleLinks( QVector< FTSLink > & articleLinks )
@@ -1091,76 +1091,101 @@ void BtreeIndex::findAllArticleLinks( QVector< FTSLink > & articleLinks )
 
   QSet< uint32_t > offsets;
 
-  findNodeArticleLinks( rootOffset, &articleLinks, &offsets, NULL );
+  findArticleLinks( &articleLinks, &offsets, NULL );
 }
 
-void BtreeIndex::findNodeArticleLinks( uint32_t currentNodeOffset,
-                                       QVector< FTSLink > * articleLinks,
-                                       QSet< uint32_t > * offsets,
-                                       QSet< QString > * headwords )
+void BtreeIndex::findArticleLinks(QVector< FTSLink > * articleLinks,
+                                   QSet< uint32_t > * offsets,
+                                   QSet< QString > *headwords )
 {
-  // Read a node
+  uint32_t currentNodeOffset = rootOffset;
+  uint32_t nextLeaf;
+  uint32_t leafEntries;
+
+  if ( !rootNodeLoaded )
+  {
+    // Time to load our root node. We do it only once, at the first request.
+    readNode( rootOffset, rootNode );
+    rootNodeLoaded = true;
+  }
+
+  char const * leaf = &rootNode.front();
+  char const * leafEnd = leaf + rootNode.size();
+  char const * chainPtr = 0;
 
   vector< char > extLeaf;
 
-  if( rootNodeLoaded && currentNodeOffset == rootOffset )
-    extLeaf = rootNode;
-  else
-    readNode( currentNodeOffset, extLeaf );
+  // Find first leaf
 
-  char const * leaf = &extLeaf.front();
-
-  // Is it a leaf or a node?
-
-  uint32_t leafEntries = *(uint32_t *)leaf;
-
-  if ( leafEntries == 0xffffFFFF )
+  for( ; ; )
   {
-    // A node
+    leafEntries = *(uint32_t *)leaf;
 
-    uint32_t const * offs = (uint32_t *)leaf + 1;
-
-    for( unsigned i = 0; i <= indexNodeSize; i++ )
-      findNodeArticleLinks( offs[ i ], articleLinks, offsets, headwords );
-  }
-  else
-  {
-    // A leaf
-
-    if ( !leafEntries )
+    if ( leafEntries == 0xffffFFFF )
     {
-      // Empty leaf? This may only be possible for entirely empty trees only.
-      if ( currentNodeOffset != rootOffset )
-        throw exCorruptedChainData();
-      else
-        return; // No match
+      // A node
+      currentNodeOffset = *( (uint32_t *)leaf + 1 );
+      readNode( currentNodeOffset, extLeaf );
+      leaf = &extLeaf.front();
+      leafEnd = leaf + extLeaf.size();
+    }
+    else
+    {
+      // A leaf
+      chainPtr = leaf + sizeof( uint32_t );
+      break;
+    }
+  }
+
+  nextLeaf = ( currentNodeOffset != rootOffset ? idxFile->read< uint32_t >() : 0 );
+
+  if ( !leafEntries )
+  {
+    // Empty leaf? This may only be possible for entirely empty trees only.
+    if ( currentNodeOffset != rootOffset )
+      throw exCorruptedChainData();
+    else
+      return; // No match
+  }
+
+  // Read all chains
+
+  for( ; ; )
+  {
+    vector< WordArticleLink > result = readChain( chainPtr );
+    for( unsigned i = 0; i < result.size(); i++ )
+    {
+      if( headwords )
+        headwords->insert( QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+
+      if( !offsets || offsets->contains( result[ i ].articleOffset ) )
+        continue;
+
+      offsets->insert( result[ i ].articleOffset );
+      if( articleLinks )
+        articleLinks->push_back( FTSLink( result[ i ].prefix + result[ i ].word, result[ i ].articleOffset ) );
     }
 
-    // Build an array containing all chain pointers
-    char const * ptr = leaf + sizeof( uint32_t );
-
-    uint32_t chainSize;
-
-    while( leafEntries-- )
+    if ( chainPtr >= leafEnd )
     {
-      memcpy( &chainSize, ptr, sizeof( uint32_t ) );
+      // We're past the current leaf, fetch the next one
 
-      char const * chainPtr = ptr;
-      vector< WordArticleLink > result = readChain( chainPtr );
-      for( unsigned i = 0; i < result.size(); i++ )
+      if ( nextLeaf )
       {
-        if( headwords )
-          headwords->insert( QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+        readNode( nextLeaf, extLeaf );
+        leaf = &extLeaf.front();
+        leafEnd = leaf + extLeaf.size();
 
-        if( !offsets || offsets->contains( result[ i ].articleOffset ) )
-          continue;
+        nextLeaf = idxFile->read< uint32_t >();
+        chainPtr = leaf + sizeof( uint32_t );
 
-        offsets->insert( result[ i ].articleOffset );
-        if( articleLinks )
-          articleLinks->push_back( FTSLink( result[ i ].prefix + result[ i ].word, result[ i ].articleOffset ) );
+        leafEntries = *(uint32_t *)leaf;
+
+        if ( leafEntries == 0xffffFFFF )
+          throw exCorruptedChainData();
       }
-
-      ptr += sizeof( uint32_t ) + chainSize;
+      else
+        break; // That was the last leaf
     }
   }
 }
