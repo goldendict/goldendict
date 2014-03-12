@@ -206,31 +206,58 @@ void BtreeWordSearchRequest::run()
     return;
   }
   
-  wstring folded;
   QRegExp regexp;
   bool useWildcards = allowMiddleMatches
                       && ( str.find( '*' ) != wstring::npos ||
                            str.find( '?' ) != wstring::npos );
+
+  wstring folded = Folding::apply( str );
   if( useWildcards )
   {
     regexp.setPattern( gd::toQString( Folding::applyDiacriticsOnly( str ) ) );
     regexp.setPatternSyntax( QRegExp::WildcardUnix );
     regexp.setCaseSensitivity( Qt::CaseInsensitive );
 
-    wstring foldedWithWildcards = Folding::apply( str, useWildcards );
+    bool bNoLetters = folded.empty();
+    wstring foldedWithWildcards;
 
+    if( bNoLetters )
+      foldedWithWildcards = Folding::applyWhitespaceOnly( str );
+    else
+      foldedWithWildcards = Folding::apply( str, useWildcards );
+
+    folded.clear();
     folded.reserve( foldedWithWildcards.size() );
-    for( unsigned x = 0; x < foldedWithWildcards.size(); x++ )
+    for( wstring::size_type x = 0; x < foldedWithWildcards.size(); x++ )
     {
       wchar ch = foldedWithWildcards[ x ];
-      if( ch == '\\' || ch == '*' || ch == '?' )
+
+      if( bNoLetters )
+      {
+        if( ch == '*' || ch == '?' )
+        {
+          // Store escaped symbols
+          wstring::size_type n = folded.size();
+          if( n && folded[ n - 1 ] == '\\' )
+          {
+            folded[ n - 1 ] = ch;
+            continue;
+          }
+          else
+            break;
+        }
+      }
+      else
+      {
+        if( ch == '\\' || ch == '*' || ch == '?' )
         break;
+      }
+
       folded.push_back( ch );
     }
   }
   else
   {
-    folded = Folding::apply( str );
     if( folded.empty() )
       folded = Folding::applyWhitespaceOnly( str );
   }
