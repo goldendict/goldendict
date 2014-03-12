@@ -854,6 +854,8 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
     translateBoxToolBarAction->setVisible( true );
   }
 
+  translateLine->setToolTip( tr( "String to search in dictionaries, the wildcards '*' and '?' are allowed.\nTo find '*' and '?' symbols use '\\*' and '\\?' respectively" ) );
+
   // reset the flag when switching UI modes
   wordListSelChanged = false;
 

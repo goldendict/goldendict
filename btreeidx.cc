@@ -206,9 +206,34 @@ void BtreeWordSearchRequest::run()
     return;
   }
   
-  wstring folded = Folding::apply( str );
-  if( folded.empty() )
-    folded = Folding::applyWhitespaceOnly( str );
+  wstring folded;
+  QRegExp regexp;
+  bool useWildcards = allowMiddleMatches
+                      && ( str.find( '*' ) != wstring::npos ||
+                           str.find( '?' ) != wstring::npos );
+  if( useWildcards )
+  {
+    regexp.setPattern( gd::toQString( Folding::applyDiacriticsOnly( str ) ) );
+    regexp.setPatternSyntax( QRegExp::WildcardUnix );
+    regexp.setCaseSensitivity( Qt::CaseInsensitive );
+
+    wstring foldedWithWildcards = Folding::apply( str, useWildcards );
+
+    folded.reserve( foldedWithWildcards.size() );
+    for( unsigned x = 0; x < foldedWithWildcards.size(); x++ )
+    {
+      wchar ch = foldedWithWildcards[ x ];
+      if( ch == '\\' || ch == '*' || ch == '?' )
+        break;
+      folded.push_back( ch );
+    }
+  }
+  else
+  {
+    folded = Folding::apply( str );
+    if( folded.empty() )
+      folded = Folding::applyWhitespaceOnly( str );
+  }
 
   int initialFoldedSize = folded.size();
 
@@ -263,12 +288,24 @@ void BtreeWordSearchRequest::run()
 
           for( unsigned x = 0; x < chain.size(); ++x )
           {
-            // Skip middle matches, if requested. If suffix variation is specified,
-            // make sure the string isn't larger than requested.
-            if ( ( allowMiddleMatches || Folding::apply( Utf8::decode( chain[ x ].prefix ) ).empty() ) &&
-                 ( maxSuffixVariation < 0 || (int)resultFolded.size() - initialFoldedSize <= maxSuffixVariation ) )
+            if( useWildcards )
+            {
+              wstring result = Folding::applyDiacriticsOnly( Utf8::decode( chain[ x ].word ) );
+              if( regexp.indexIn( gd::toQString( result ) ) == 0 )
                 matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+            }
+            else
+            {
+              // Skip middle matches, if requested. If suffix variation is specified,
+              // make sure the string isn't larger than requested.
+              if ( ( allowMiddleMatches || Folding::apply( Utf8::decode( chain[ x ].prefix ) ).empty() ) &&
+                   ( maxSuffixVariation < 0 || (int)resultFolded.size() - initialFoldedSize <= maxSuffixVariation ) )
+                  matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+            }
           }
+
+          if( isCancelled )
+            break;
 
           if ( matches.size() >= maxResults )
           {
@@ -421,6 +458,30 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
 
   char const * leaf = &rootNode.front();
   leafEnd = leaf + rootNode.size();
+
+  if( target.empty() )
+  {
+    //For empty target string we return first chain in index
+    for( ; ; )
+    {
+      uint32_t leafEntries = *(uint32_t *)leaf;
+
+      if ( leafEntries == 0xffffFFFF )
+      {
+        // A node
+        currentNodeOffset = *( (uint32_t *)leaf + 1 );
+        readNode( currentNodeOffset, extLeaf );
+        leaf = &extLeaf.front();
+        leafEnd = leaf + extLeaf.size();
+        nextLeaf = idxFile->read< uint32_t >();
+      }
+      else
+      {
+        // A leaf
+        return leaf + sizeof( uint32_t );
+      }
+    }
+  }
 
   for( ; ; )
   {
@@ -1099,7 +1160,7 @@ void BtreeIndex::findArticleLinks(QVector< FTSLink > * articleLinks,
                                    QSet< QString > *headwords )
 {
   uint32_t currentNodeOffset = rootOffset;
-  uint32_t nextLeaf;
+  uint32_t nextLeaf = 0;
   uint32_t leafEntries;
 
   if ( !rootNodeLoaded )
@@ -1128,6 +1189,7 @@ void BtreeIndex::findArticleLinks(QVector< FTSLink > * articleLinks,
       readNode( currentNodeOffset, extLeaf );
       leaf = &extLeaf.front();
       leafEnd = leaf + extLeaf.size();
+      nextLeaf = idxFile->read< uint32_t >();
     }
     else
     {
@@ -1136,8 +1198,6 @@ void BtreeIndex::findArticleLinks(QVector< FTSLink > * articleLinks,
       break;
     }
   }
-
-  nextLeaf = ( currentNodeOffset != rootOffset ? idxFile->read< uint32_t >() : 0 );
 
   if ( !leafEntries )
   {
