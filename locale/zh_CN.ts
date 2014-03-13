@@ -585,27 +585,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="193"/>
+        <location filename="../dictheadwords.cc" line="209"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="210"/>
+        <location filename="../dictheadwords.cc" line="226"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="212"/>
+        <location filename="../dictheadwords.cc" line="228"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">文本文件 (*.txt);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="252"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="252"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
@@ -2121,12 +2121,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1164"/>
+        <location filename="../mainwindow.cc" line="1180"/>
         <source>All</source>
         <translation>全部</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="135"/>
+        <location filename="../mainwindow.cc" line="136"/>
         <source>Back</source>
         <translation>回退</translation>
     </message>
@@ -2135,7 +2135,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">打印预览</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1135"/>
+        <location filename="../mainwindow.cc" line="1151"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>词典数：%1，文章数：%2，词条数：%3</translation>
     </message>
@@ -2156,17 +2156,17 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="367"/>
-        <location filename="../mainwindow.cc" line="325"/>
+        <location filename="../mainwindow.cc" line="326"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3101"/>
+        <location filename="../mainwindow.cc" line="3117"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="162"/>
+        <location filename="../mainwindow.cc" line="163"/>
         <source>Scan Popup</source>
         <translation>屏幕取词</translation>
     </message>
@@ -2181,12 +2181,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>关闭至系统托盘(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3102"/>
+        <location filename="../mainwindow.cc" line="3118"/>
         <source>Can&apos;t save article: %1</source>
         <translation>无法保存文章：%1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="189"/>
+        <location filename="../mainwindow.cc" line="190"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
@@ -2216,7 +2216,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>保存文章(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3103"/>
         <source>Save Article As</source>
         <translation>文章另存为</translation>
     </message>
@@ -2250,17 +2250,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>主页(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2759"/>
+        <location filename="../mainwindow.cc" line="2775"/>
         <source>New Release Available</source>
         <translation>有新版本可用</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1146"/>
+        <location filename="../mainwindow.cc" line="1162"/>
         <source>Look up:</source>
         <translation>查找：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="195"/>
+        <location filename="../mainwindow.cc" line="196"/>
         <source>Zoom Out</source>
         <translation>缩小</translation>
     </message>
@@ -2269,7 +2269,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">群组...(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="321"/>
+        <location filename="../mainwindow.cc" line="322"/>
         <source>Show &amp;Main Window</source>
         <translation>显示主窗口(&amp;M)</translation>
     </message>
@@ -2279,33 +2279,33 @@ between classic and school orthography in cyrillic)</source>
         <translation>关于 GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2765"/>
+        <location filename="../mainwindow.cc" line="2781"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2995"/>
+        <location filename="../mainwindow.cc" line="3011"/>
         <source>Page Setup</source>
         <translation>页面设置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="239"/>
-        <location filename="../mainwindow.cc" line="1146"/>
+        <location filename="../mainwindow.cc" line="240"/>
+        <location filename="../mainwindow.cc" line="1162"/>
         <source>Look up in:</source>
         <translation>查找于：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="199"/>
+        <location filename="../mainwindow.cc" line="200"/>
         <source>Normal Size</source>
         <translation>正常大小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2622"/>
+        <location filename="../mainwindow.cc" line="2638"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>初始化热键监视机制失败。&lt;br&gt;请确保你的 XServer 已启用 RECORD 扩展。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2760"/>
+        <location filename="../mainwindow.cc" line="2776"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>有新版 GoldenDict 可用，版本为 &lt;b&gt;%1&lt;/b&gt;。&lt;br&gt;
 点击&lt;b&gt;下载&lt;/b&gt;，打开下载页面。</translation>
@@ -2329,12 +2329,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="536"/>
+        <location filename="../mainwindow.cc" line="550"/>
         <source>Loading...</source>
         <translation>加载中……</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1377"/>
+        <location filename="../mainwindow.cc" line="1393"/>
         <source>(untitled)</source>
         <translation>（未命名）</translation>
     </message>
@@ -2349,12 +2349,12 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="715"/>
+        <location filename="../mainwindow.cc" line="729"/>
         <source>Welcome!</source>
         <translation>欢迎使用！</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="177"/>
+        <location filename="../mainwindow.cc" line="178"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>朗读词条(Alt+S)</translation>
     </message>
@@ -2364,12 +2364,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>保存文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2766"/>
+        <location filename="../mainwindow.cc" line="2782"/>
         <source>Skip This Release</source>
         <translation>忽略此次升级</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="137"/>
+        <location filename="../mainwindow.cc" line="138"/>
         <source>Forward</source>
         <translation>前进</translation>
     </message>
@@ -2378,12 +2378,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">警告： %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3014"/>
+        <location filename="../mainwindow.cc" line="3030"/>
         <source>Print Article</source>
         <translation>打印文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2996"/>
+        <location filename="../mainwindow.cc" line="3012"/>
         <source>No printer is available. Please install one first.</source>
         <translation>找不到可用的打印机，请先安装一个打印机。</translation>
     </message>
@@ -2416,37 +2416,37 @@ between classic and school orthography in cyrillic)</source>
         <translation>缩放(&amp;Z)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="307"/>
+        <location filename="../mainwindow.cc" line="308"/>
         <source>Words Zoom In</source>
         <translation>单词列表 - 放大</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="311"/>
+        <location filename="../mainwindow.cc" line="312"/>
         <source>Words Zoom Out</source>
         <translation>单词列表 - 缩小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="313"/>
+        <location filename="../mainwindow.cc" line="314"/>
         <source>Words Normal Size</source>
         <translation>单词列表 - 正常大小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="369"/>
+        <location filename="../mainwindow.cc" line="383"/>
         <source>Close current tab</source>
         <translation>关闭当前标签页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="379"/>
+        <location filename="../mainwindow.cc" line="393"/>
         <source>Close all tabs</source>
         <translation>关闭所有标签页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="387"/>
+        <location filename="../mainwindow.cc" line="401"/>
         <source>Close all tabs except current</source>
         <translation>关闭其它标签页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="358"/>
+        <location filename="../mainwindow.cc" line="372"/>
         <source>Opened tabs</source>
         <translation>已打开的标签页</translation>
     </message>
@@ -2459,7 +2459,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">词典...(&amp;D)   	F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="546"/>
+        <location filename="../mainwindow.cc" line="560"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
     </message>
@@ -2483,33 +2483,33 @@ between classic and school orthography in cyrillic)</source>
         <translation>菜单栏(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="277"/>
+        <location filename="../mainwindow.cc" line="278"/>
         <source>Found in Dictionaries:</source>
         <translation>在以下词典中找到：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1319"/>
+        <location filename="../mainwindow.cc" line="1335"/>
         <source>Open Tabs List</source>
         <translation>打开标签页列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1590"/>
+        <location filename="../mainwindow.cc" line="1606"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2896"/>
+        <location filename="../mainwindow.cc" line="2912"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>你选择了隐藏菜单栏，使用 %1 再次显示。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2897"/>
+        <location filename="../mainwindow.cc" line="2913"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3352"/>
+        <location filename="../mainwindow.cc" line="3368"/>
         <source>&amp;Show</source>
         <translation>显示(&amp;S)</translation>
     </message>
@@ -2519,7 +2519,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>导出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3348"/>
+        <location filename="../mainwindow.cc" line="3364"/>
         <source>&amp;Hide</source>
         <translation>隐藏(&amp;H)</translation>
     </message>
@@ -2528,23 +2528,23 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">历史记录查看模式</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3374"/>
+        <location filename="../mainwindow.cc" line="3390"/>
         <source>Export history to file</source>
         <translation>导出历史记录到文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3376"/>
-        <location filename="../mainwindow.cc" line="3438"/>
+        <location filename="../mainwindow.cc" line="3392"/>
+        <location filename="../mainwindow.cc" line="3454"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>文本文件 (*.txt);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3415"/>
+        <location filename="../mainwindow.cc" line="3431"/>
         <source>History export complete</source>
         <translation>历史记录导出完成</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3418"/>
+        <location filename="../mainwindow.cc" line="3434"/>
         <source>Export error: </source>
         <translation>导出错误：</translation>
     </message>
@@ -2559,42 +2559,42 @@ between classic and school orthography in cyrillic)</source>
         <translation>导入(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3436"/>
+        <location filename="../mainwindow.cc" line="3452"/>
         <source>Import history from file</source>
         <translation>导入历史文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3485"/>
+        <location filename="../mainwindow.cc" line="3501"/>
         <source>Import error: invalid data in file</source>
         <translation>导入失败：无效数据</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3489"/>
+        <location filename="../mainwindow.cc" line="3505"/>
         <source>History import complete</source>
         <translation>历史导入成功</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3492"/>
+        <location filename="../mainwindow.cc" line="3508"/>
         <source>Import error: </source>
         <translation>导入错误：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3721"/>
+        <location filename="../mainwindow.cc" line="3743"/>
         <source>Dictionary info</source>
         <translation>词典信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3725"/>
+        <location filename="../mainwindow.cc" line="3747"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3727"/>
+        <location filename="../mainwindow.cc" line="3749"/>
         <source>Open dictionary folder</source>
         <translation>打开词典文件夹</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3733"/>
+        <location filename="../mainwindow.cc" line="3755"/>
         <source>Edit dictionary</source>
         <translation>编辑词典信息</translation>
     </message>
@@ -2641,7 +2641,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="542"/>
         <location filename="../mainwindow.ui" line="545"/>
-        <location filename="../mainwindow.cc" line="231"/>
+        <location filename="../mainwindow.cc" line="232"/>
         <source>Menu Button</source>
         <translation>菜单按钮</translation>
     </message>
@@ -2656,27 +2656,33 @@ between classic and school orthography in cyrillic)</source>
         <translation>在工具栏上显示小图标(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="132"/>
+        <location filename="../mainwindow.cc" line="133"/>
         <source>&amp;Navigation</source>
         <translation>导航栏(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3083"/>
+        <location filename="../mainwindow.cc" line="857"/>
+        <source>String to search in dictionaries, the wildcards &apos;*&apos; and &apos;?&apos; are allowed.
+To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&apos; respectively</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3099"/>
         <source>Article, Complete (*.html)</source>
         <translation>文章, 完整 (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3084"/>
+        <location filename="../mainwindow.cc" line="3100"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>文章, 仅 HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3139"/>
+        <location filename="../mainwindow.cc" line="3155"/>
         <source>Saving article...</source>
         <translation>文章保存中……</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3188"/>
+        <location filename="../mainwindow.cc" line="3204"/>
         <source>The main window is set to be always on top.</source>
         <translation>主窗口已设置为总在最前。</translation>
     </message>
@@ -2686,8 +2692,8 @@ between classic and school orthography in cyrillic)</source>
         <translation>历史面板(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="774"/>
-        <location filename="../mainwindow.cc" line="2819"/>
+        <location filename="../mainwindow.cc" line="788"/>
+        <location filename="../mainwindow.cc" line="2835"/>
         <source>Accessibility API is not enabled</source>
         <translation>无障碍API未启用</translation>
     </message>

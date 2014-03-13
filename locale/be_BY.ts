@@ -569,27 +569,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="193"/>
+        <location filename="../dictheadwords.cc" line="209"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="210"/>
+        <location filename="../dictheadwords.cc" line="226"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="212"/>
+        <location filename="../dictheadwords.cc" line="228"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">Тэкставыя файлы (*.txt);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="252"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="252"/>
         <source>Cancel</source>
         <translation type="unfinished">Скасаваць</translation>
     </message>
@@ -2082,7 +2082,7 @@ between classic and school orthography in cyrillic)</source>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="715"/>
+        <location filename="../mainwindow.cc" line="729"/>
         <source>Welcome!</source>
         <translation>Вітаем!</translation>
     </message>
@@ -2173,7 +2173,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="367"/>
-        <location filename="../mainwindow.cc" line="325"/>
+        <location filename="../mainwindow.cc" line="326"/>
         <source>&amp;Quit</source>
         <translation>&amp;Выйсьці</translation>
     </message>
@@ -2274,7 +2274,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3352"/>
+        <location filename="../mainwindow.cc" line="3368"/>
         <source>&amp;Show</source>
         <translation>&amp;Паказаць</translation>
     </message>
@@ -2311,7 +2311,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="542"/>
         <location filename="../mainwindow.ui" line="545"/>
-        <location filename="../mainwindow.cc" line="231"/>
+        <location filename="../mainwindow.cc" line="232"/>
         <source>Menu Button</source>
         <translation>Кнопка мэню</translation>
     </message>
@@ -2331,290 +2331,296 @@ between classic and school orthography in cyrillic)</source>
         <translation>Паліца &amp;мэню</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="132"/>
+        <location filename="../mainwindow.cc" line="133"/>
         <source>&amp;Navigation</source>
         <translation>&amp;Навіґацыя</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="135"/>
+        <location filename="../mainwindow.cc" line="136"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="137"/>
+        <location filename="../mainwindow.cc" line="138"/>
         <source>Forward</source>
         <translation>Наперад</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="162"/>
+        <location filename="../mainwindow.cc" line="163"/>
         <source>Scan Popup</source>
         <translation>Улучыць працу ў вонкавых праґрамах</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="177"/>
+        <location filename="../mainwindow.cc" line="178"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Вымавіць слова (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="189"/>
+        <location filename="../mainwindow.cc" line="190"/>
         <source>Zoom In</source>
         <translation>Павялічыць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="195"/>
+        <location filename="../mainwindow.cc" line="196"/>
         <source>Zoom Out</source>
         <translation>Паменшыць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="199"/>
+        <location filename="../mainwindow.cc" line="200"/>
         <source>Normal Size</source>
         <translation>Звычайны памер</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="239"/>
-        <location filename="../mainwindow.cc" line="1146"/>
+        <location filename="../mainwindow.cc" line="240"/>
+        <location filename="../mainwindow.cc" line="1162"/>
         <source>Look up in:</source>
         <translation>Шукаць у:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="277"/>
+        <location filename="../mainwindow.cc" line="278"/>
         <source>Found in Dictionaries:</source>
         <translation>Знойдзена ў наступных слоўніках:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="307"/>
+        <location filename="../mainwindow.cc" line="308"/>
         <source>Words Zoom In</source>
         <translation>Павялічыць радок шуканьня</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="311"/>
+        <location filename="../mainwindow.cc" line="312"/>
         <source>Words Zoom Out</source>
         <translation>Паменшыць радок шуканьня</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="313"/>
+        <location filename="../mainwindow.cc" line="314"/>
         <source>Words Normal Size</source>
         <translation>Звычайны памер радка шуканьня</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="321"/>
+        <location filename="../mainwindow.cc" line="322"/>
         <source>Show &amp;Main Window</source>
         <translation>Паказаць &amp;галоўнае акно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="358"/>
+        <location filename="../mainwindow.cc" line="372"/>
         <source>Opened tabs</source>
         <translation>Адчыненыя ўкладкі</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="369"/>
+        <location filename="../mainwindow.cc" line="383"/>
         <source>Close current tab</source>
         <translation>Зачыніць дзейную ўкладку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="379"/>
+        <location filename="../mainwindow.cc" line="393"/>
         <source>Close all tabs</source>
         <translation>Зачыніць усе ўкладкі</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="387"/>
+        <location filename="../mainwindow.cc" line="401"/>
         <source>Close all tabs except current</source>
         <translation>Зачыніць усе ўкладкі апроч дзейнай</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="536"/>
+        <location filename="../mainwindow.cc" line="550"/>
         <source>Loading...</source>
         <translation>Ладаваньне...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="546"/>
+        <location filename="../mainwindow.cc" line="560"/>
         <source>New Tab</source>
         <translation>Новая ўкладка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1135"/>
+        <location filename="../mainwindow.cc" line="857"/>
+        <source>String to search in dictionaries, the wildcards &apos;*&apos; and &apos;?&apos; are allowed.
+To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&apos; respectively</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1151"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 слоўнікаў, %2 артыкулаў, %3 словаў</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1146"/>
+        <location filename="../mainwindow.cc" line="1162"/>
         <source>Look up:</source>
         <translation>Шукаць:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1164"/>
+        <location filename="../mainwindow.cc" line="1180"/>
         <source>All</source>
         <translation>Усе</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1319"/>
+        <location filename="../mainwindow.cc" line="1335"/>
         <source>Open Tabs List</source>
         <translation>Адчыніць сьпіс укладак</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1377"/>
+        <location filename="../mainwindow.cc" line="1393"/>
         <source>(untitled)</source>
         <translation>(бяз назвы)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1590"/>
+        <location filename="../mainwindow.cc" line="1606"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2622"/>
+        <location filename="../mainwindow.cc" line="2638"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Памылка ініцыялізацыі цікаваньня клявішных скаротаў.&lt;br&gt;Пераканайся, што XServer мае ўлучанае пашырэньне RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2759"/>
+        <location filename="../mainwindow.cc" line="2775"/>
         <source>New Release Available</source>
         <translation>Дастуны новы выпуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2760"/>
+        <location filename="../mainwindow.cc" line="2776"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict вэрсіі &lt;b&gt;%1&lt;/b&gt; даступны для заладаваньня.&lt;br&gt;Пстрыкні па &lt;b&gt;Зладаваць&lt;/b&gt;, каб перайсьці на бачыну сьцягваньня.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2765"/>
+        <location filename="../mainwindow.cc" line="2781"/>
         <source>Download</source>
         <translation>Зладаваць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2766"/>
+        <location filename="../mainwindow.cc" line="2782"/>
         <source>Skip This Release</source>
         <translation>Прамінуць гэты выпуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="774"/>
-        <location filename="../mainwindow.cc" line="2819"/>
+        <location filename="../mainwindow.cc" line="788"/>
+        <location filename="../mainwindow.cc" line="2835"/>
         <source>Accessibility API is not enabled</source>
         <translation>Accessibility API ня ўлучаны</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2896"/>
+        <location filename="../mainwindow.cc" line="2912"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Паліца мэню ёсьць схаваная. Скарыстай %1, каб павараціць назад.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2897"/>
+        <location filename="../mainwindow.cc" line="2913"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2995"/>
+        <location filename="../mainwindow.cc" line="3011"/>
         <source>Page Setup</source>
         <translation>Налады бачыны</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2996"/>
+        <location filename="../mainwindow.cc" line="3012"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Няма дасяжных друкарак. Спачатку ўсталюй хоць адну.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3014"/>
+        <location filename="../mainwindow.cc" line="3030"/>
         <source>Print Article</source>
         <translation>Надрукаваць артыкул</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3083"/>
+        <location filename="../mainwindow.cc" line="3099"/>
         <source>Article, Complete (*.html)</source>
         <translation>Артыкул цалком (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3084"/>
+        <location filename="../mainwindow.cc" line="3100"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Артыкул, толькі HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3103"/>
         <source>Save Article As</source>
         <translation>Захаваць артыкул як</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3101"/>
+        <location filename="../mainwindow.cc" line="3117"/>
         <source>Error</source>
         <translation>Памылка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3102"/>
+        <location filename="../mainwindow.cc" line="3118"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Няможна захаваць артыкул: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3139"/>
+        <location filename="../mainwindow.cc" line="3155"/>
         <source>Saving article...</source>
         <translation>Захоўваньне артыкула...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3188"/>
+        <location filename="../mainwindow.cc" line="3204"/>
         <source>The main window is set to be always on top.</source>
         <translation>Галоўнае акно цяпер заўсёды знаходзіцца вышэй іншых.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3348"/>
+        <location filename="../mainwindow.cc" line="3364"/>
         <source>&amp;Hide</source>
         <translation>С&amp;хаваць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3374"/>
+        <location filename="../mainwindow.cc" line="3390"/>
         <source>Export history to file</source>
         <translation>Экспартаваньне гісторыі ў файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3376"/>
-        <location filename="../mainwindow.cc" line="3438"/>
+        <location filename="../mainwindow.cc" line="3392"/>
+        <location filename="../mainwindow.cc" line="3454"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Тэкставыя файлы (*.txt);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3415"/>
+        <location filename="../mainwindow.cc" line="3431"/>
         <source>History export complete</source>
         <translation>Экспартаваньне гісторыі кончылася</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3418"/>
+        <location filename="../mainwindow.cc" line="3434"/>
         <source>Export error: </source>
         <translation>Памылка экспарту: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3436"/>
+        <location filename="../mainwindow.cc" line="3452"/>
         <source>Import history from file</source>
         <translation>Імпартаваньне гісторыі з файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3485"/>
+        <location filename="../mainwindow.cc" line="3501"/>
         <source>Import error: invalid data in file</source>
         <translation>Памылка імпартаваньня: хібныя зьвесткі ў файле</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3489"/>
+        <location filename="../mainwindow.cc" line="3505"/>
         <source>History import complete</source>
         <translation>Імпартаваньне гісторыі кончылася</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3492"/>
+        <location filename="../mainwindow.cc" line="3508"/>
         <source>Import error: </source>
         <translation>Памылка імпартаваньня: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3721"/>
+        <location filename="../mainwindow.cc" line="3743"/>
         <source>Dictionary info</source>
         <translation>Інфармацыя пра слоўнік</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3725"/>
+        <location filename="../mainwindow.cc" line="3747"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3727"/>
+        <location filename="../mainwindow.cc" line="3749"/>
         <source>Open dictionary folder</source>
         <translation>Адчыніць слоўнікавы каталёґ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3733"/>
+        <location filename="../mainwindow.cc" line="3755"/>
         <source>Edit dictionary</source>
         <translation>Рэдаґаваць слоўнік</translation>
     </message>

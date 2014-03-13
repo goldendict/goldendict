@@ -580,27 +580,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="193"/>
+        <location filename="../dictheadwords.cc" line="209"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="210"/>
+        <location filename="../dictheadwords.cc" line="226"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="212"/>
+        <location filename="../dictheadwords.cc" line="228"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="252"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="252"/>
         <source>Cancel</source>
         <translation type="unfinished">キャンセル</translation>
     </message>
@@ -2100,78 +2100,78 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">操作</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="135"/>
+        <location filename="../mainwindow.cc" line="136"/>
         <source>Back</source>
         <translation>戻る</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="137"/>
+        <location filename="../mainwindow.cc" line="138"/>
         <source>Forward</source>
         <translation>進む</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="162"/>
+        <location filename="../mainwindow.cc" line="163"/>
         <source>Scan Popup</source>
         <translation>スキャン ポップアップ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="321"/>
+        <location filename="../mainwindow.cc" line="322"/>
         <source>Show &amp;Main Window</source>
         <translation>メイン ウィンドウの表示(&amp;M)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="367"/>
-        <location filename="../mainwindow.cc" line="325"/>
+        <location filename="../mainwindow.cc" line="326"/>
         <source>&amp;Quit</source>
         <translation>終了(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="536"/>
+        <location filename="../mainwindow.cc" line="550"/>
         <source>Loading...</source>
         <translation>読み込んでいます...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2766"/>
+        <location filename="../mainwindow.cc" line="2782"/>
         <source>Skip This Release</source>
         <translation>このリリースをスキップ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2896"/>
+        <location filename="../mainwindow.cc" line="2912"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2897"/>
+        <location filename="../mainwindow.cc" line="2913"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2995"/>
+        <location filename="../mainwindow.cc" line="3011"/>
         <source>Page Setup</source>
         <translation>ページ設定</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2996"/>
+        <location filename="../mainwindow.cc" line="3012"/>
         <source>No printer is available. Please install one first.</source>
         <translation>利用可能なプリンターがありません。まずインストールしてください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3014"/>
+        <location filename="../mainwindow.cc" line="3030"/>
         <source>Print Article</source>
         <translation>記事の印刷</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3083"/>
+        <location filename="../mainwindow.cc" line="3099"/>
         <source>Article, Complete (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3084"/>
+        <location filename="../mainwindow.cc" line="3100"/>
         <source>Article, HTML Only (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3103"/>
         <source>Save Article As</source>
         <translation>名前を付けて記事を保存</translation>
     </message>
@@ -2180,43 +2180,43 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">HTML ファイル (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3101"/>
+        <location filename="../mainwindow.cc" line="3117"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3102"/>
+        <location filename="../mainwindow.cc" line="3118"/>
         <source>Can&apos;t save article: %1</source>
         <translation>記事を保存できません: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1135"/>
+        <location filename="../mainwindow.cc" line="1151"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 個の辞書、%2 個の記事、 %3 個の単語</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2622"/>
+        <location filename="../mainwindow.cc" line="2638"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>ホットキー監視機構の初期化に失敗しました。&lt;br&gt;XServer の RECORD 拡張がオンになっていることを確認してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2759"/>
+        <location filename="../mainwindow.cc" line="2775"/>
         <source>New Release Available</source>
         <translation>新しいリリースが利用可能です</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2760"/>
+        <location filename="../mainwindow.cc" line="2776"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict のバージョン &lt;b&gt;%1&lt;/b&gt; のダウンロードが利用可能です。&lt;br&gt;ダウンロード ページへ移動するには&lt;b&gt;ダウンロード&lt;/b&gt;をクリックします。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2765"/>
+        <location filename="../mainwindow.cc" line="2781"/>
         <source>Download</source>
         <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="239"/>
-        <location filename="../mainwindow.cc" line="1146"/>
+        <location filename="../mainwindow.cc" line="240"/>
+        <location filename="../mainwindow.cc" line="1162"/>
         <source>Look up in:</source>
         <translation>検索する場所:</translation>
     </message>
@@ -2230,12 +2230,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="277"/>
+        <location filename="../mainwindow.cc" line="278"/>
         <source>Found in Dictionaries:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="177"/>
+        <location filename="../mainwindow.cc" line="178"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>単語の発音 (Alt+S)</translation>
     </message>
@@ -2250,138 +2250,144 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="132"/>
+        <location filename="../mainwindow.cc" line="133"/>
         <source>&amp;Navigation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="189"/>
+        <location filename="../mainwindow.cc" line="190"/>
         <source>Zoom In</source>
         <translation>拡大</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="195"/>
+        <location filename="../mainwindow.cc" line="196"/>
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="199"/>
+        <location filename="../mainwindow.cc" line="200"/>
         <source>Normal Size</source>
         <translation>通常のサイズ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="307"/>
+        <location filename="../mainwindow.cc" line="308"/>
         <source>Words Zoom In</source>
         <translation>単語の拡大</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="311"/>
+        <location filename="../mainwindow.cc" line="312"/>
         <source>Words Zoom Out</source>
         <translation>単語の縮小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="313"/>
+        <location filename="../mainwindow.cc" line="314"/>
         <source>Words Normal Size</source>
         <translation>通常の単語のサイズ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="369"/>
+        <location filename="../mainwindow.cc" line="383"/>
         <source>Close current tab</source>
         <translation>現在のタブを閉じる</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="379"/>
+        <location filename="../mainwindow.cc" line="393"/>
         <source>Close all tabs</source>
         <translation>すべてのタブを閉じる</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="387"/>
+        <location filename="../mainwindow.cc" line="401"/>
         <source>Close all tabs except current</source>
         <translation>現在以外のすべてのタブを閉じる</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1146"/>
+        <location filename="../mainwindow.cc" line="857"/>
+        <source>String to search in dictionaries, the wildcards &apos;*&apos; and &apos;?&apos; are allowed.
+To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&apos; respectively</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="1162"/>
         <source>Look up:</source>
         <translation>検索:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1164"/>
+        <location filename="../mainwindow.cc" line="1180"/>
         <source>All</source>
         <translation>すべて</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="774"/>
-        <location filename="../mainwindow.cc" line="2819"/>
+        <location filename="../mainwindow.cc" line="788"/>
+        <location filename="../mainwindow.cc" line="2835"/>
         <source>Accessibility API is not enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3139"/>
+        <location filename="../mainwindow.cc" line="3155"/>
         <source>Saving article...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3188"/>
+        <location filename="../mainwindow.cc" line="3204"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3436"/>
+        <location filename="../mainwindow.cc" line="3452"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3485"/>
+        <location filename="../mainwindow.cc" line="3501"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3489"/>
+        <location filename="../mainwindow.cc" line="3505"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3492"/>
+        <location filename="../mainwindow.cc" line="3508"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3721"/>
+        <location filename="../mainwindow.cc" line="3743"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3725"/>
+        <location filename="../mainwindow.cc" line="3747"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3727"/>
+        <location filename="../mainwindow.cc" line="3749"/>
         <source>Open dictionary folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3733"/>
+        <location filename="../mainwindow.cc" line="3755"/>
         <source>Edit dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="358"/>
+        <location filename="../mainwindow.cc" line="372"/>
         <source>Opened tabs</source>
         <translation>開いているタブ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1319"/>
+        <location filename="../mainwindow.cc" line="1335"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1377"/>
+        <location filename="../mainwindow.cc" line="1393"/>
         <source>(untitled)</source>
         <translation>(無題)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1590"/>
+        <location filename="../mainwindow.cc" line="1606"/>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2390,28 +2396,28 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">警告: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3348"/>
+        <location filename="../mainwindow.cc" line="3364"/>
         <source>&amp;Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3374"/>
+        <location filename="../mainwindow.cc" line="3390"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3376"/>
-        <location filename="../mainwindow.cc" line="3438"/>
+        <location filename="../mainwindow.cc" line="3392"/>
+        <location filename="../mainwindow.cc" line="3454"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3415"/>
+        <location filename="../mainwindow.cc" line="3431"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3418"/>
+        <location filename="../mainwindow.cc" line="3434"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2421,7 +2427,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="715"/>
+        <location filename="../mainwindow.cc" line="729"/>
         <source>Welcome!</source>
         <translation>ようこそ!</translation>
     </message>
@@ -2607,7 +2613,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="542"/>
         <location filename="../mainwindow.ui" line="545"/>
-        <location filename="../mainwindow.cc" line="231"/>
+        <location filename="../mainwindow.cc" line="232"/>
         <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2630,7 +2636,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>クリア(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="546"/>
+        <location filename="../mainwindow.cc" line="560"/>
         <source>New Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2646,7 +2652,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3352"/>
+        <location filename="../mainwindow.cc" line="3368"/>
         <source>&amp;Show</source>
         <translation type="unfinished"></translation>
     </message>

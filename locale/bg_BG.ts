@@ -2159,6 +2159,11 @@ between classic and school orthography in cyrillic)</source>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>String to search in dictionaries, the wildcards &apos;*&apos; and &apos;?&apos; are allowed.
+To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&apos; respectively</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
