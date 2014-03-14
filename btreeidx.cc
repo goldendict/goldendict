@@ -334,7 +334,7 @@ void BtreeWordSearchRequest::run()
             }
           }
 
-          if( isCancelled )
+          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
             break;
 
           if ( matches.size() >= maxResults )
