@@ -25,7 +25,7 @@ namespace
   }
 }
 
-wstring apply( wstring const & in )
+wstring apply( wstring const & in, bool preserveWildcards )
 {
   // First, strip diacritics and apply ws/punctuation removal
 
@@ -41,7 +41,12 @@ wstring apply( wstring const & in )
   {
     wchar ch = foldDiacritic( nextChar, left, consumed );
 
-    if ( !isCombiningMark( ch ) && !isWhitespace( ch ) && !isPunct( ch ) )
+    if ( !isCombiningMark( ch ) && !isWhitespace( ch )
+         && ( !isPunct( ch )
+              || ( preserveWildcards &&
+                   ( ch == '\\' || ch == '?' || ch == '*' || ch == '[' || ch == ']' ) )
+            )
+    )
       withoutDiacritics.push_back( ch );
 
     nextChar += consumed;

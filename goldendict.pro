@@ -316,7 +316,8 @@ HEADERS += folding.hh \
     gddebug.hh \
     qt4x5.hh \
     gestures.hh \
-    tiff.hh
+    tiff.hh \
+    dictheadwords.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -330,7 +331,8 @@ FORMS += groups.ui \
     about.ui \
     editdictionaries.ui \
     orderandprops.ui \
-    dictinfo.ui
+    dictinfo.ui \
+    dictheadwords.ui
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -429,7 +431,8 @@ SOURCES += folding.cc \
     zim.cc \
     gddebug.cc \
     gestures.cc \
-    tiff.cc
+    tiff.cc \
+    dictheadwords.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui

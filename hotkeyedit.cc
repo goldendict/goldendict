@@ -38,10 +38,10 @@ void HotKeyEdit::renderCurrentValue()
 
   if ( currentKey1 )
   {
-    result = QKeySequence( currentKey1 | currentModifiers ).toString( QKeySequence::PortableText );
+    result = QKeySequence( currentKey1 | currentModifiers ).toString( QKeySequence::NativeText );
 
     if ( currentKey2 )
-     result += "+" + QKeySequence( currentKey2 ).toString( QKeySequence::PortableText );
+     result += "+" + QKeySequence( currentKey2 ).toString( QKeySequence::NativeText );
   }
 
   setText( result );

@@ -8,6 +8,7 @@
 #include "about.hh"
 #include "mruqmenu.hh"
 #include "gestures.hh"
+#include "dictheadwords.hh"
 #include <limits.h>
 #include <QDebug>
 #include <QTextStream>
@@ -97,6 +98,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   useSmallIconsInToolbarsAction( tr( "Show Small Icons in &Toolbars" ), this ),
   toggleMenuBarAction( tr( "&Menubar" ), this ),
   switchExpandModeAction( this ),
+  focusHeadwordsDlgAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -113,6 +115,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   wordListSelChanged( false )
 , wasMaximized( false )
 , blockUpdateWindowTitle( false )
+, headwordsDlg( 0 )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -346,6 +349,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &focusTranslateLineAction, SIGNAL( triggered() ),
            this, SLOT( focusTranslateLine() ) );
 
+  focusHeadwordsDlgAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  focusHeadwordsDlgAction.setShortcut( QKeySequence( "Ctrl+D" ) );
+
+  connect( &focusHeadwordsDlgAction, SIGNAL( triggered() ),
+           this, SLOT( focusHeadwordsDialog() ) );
+
   ui.centralWidget->addAction( &escAction );
   ui.dictsPane->addAction( &escAction );
   ui.searchPaneWidget->addAction( &escAction );
@@ -358,6 +367,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPaneWidget->addAction( &focusTranslateLineAction );
   ui.historyPane->addAction( &focusTranslateLineAction );
   groupList->addAction( &focusTranslateLineAction );
+
+  ui.centralWidget->addAction( &focusHeadwordsDlgAction );
+  ui.dictsPane->addAction( &focusHeadwordsDlgAction );
+  ui.searchPaneWidget->addAction( &focusHeadwordsDlgAction );
+  ui.historyPane->addAction( &focusHeadwordsDlgAction );
+  groupList->addAction( &focusHeadwordsDlgAction );
+  translateBox->addAction( &focusHeadwordsDlgAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -515,6 +531,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( &dictionaryBar, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
+
+  connect( &dictionaryBar, SIGNAL( showDictionaryHeadwords( QString const & ) ),
+           this, SLOT( showDictionaryHeadwords( QString const & ) ) );
 
   connect( &dictionaryBar, SIGNAL( openDictionaryFolder( QString const & ) ),
            this, SLOT( openDictionaryFolder( QString const & ) ) );
@@ -845,6 +864,8 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
     translateBoxToolBarAction->setVisible( true );
   }
 
+  translateLine->setToolTip( tr( "String to search in dictionaries. The wildcards '*', '?' and sets of symbols '[...]' are allowed.\nTo find '*', '?', '[', ']' symbols use '\\*', '\\?', '\\[', '\\]' respectively" ) );
+
   // reset the flag when switching UI modes
   wordListSelChanged = false;
 
@@ -898,6 +919,8 @@ MainWindow::~MainWindow()
       cfg.normalMainWindowGeometry = geometry();
   }
 #endif
+
+  closeHeadwordsDialog();
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.centralWidget->ungrabGesture( Gestures::GDPinchGestureType );
@@ -1753,6 +1776,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   connect( &dicts, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
 
+  connect( &dicts, SIGNAL( showDictionaryHeadwords( QString const & ) ),
+           this, SLOT( showDictionaryHeadwords( QString const & ) ) );
+
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );
 
@@ -2562,10 +2588,16 @@ void MainWindow::toggleMainWindow( bool onlyShow )
       hide();
     else
       showMinimized();
+
+    if( headwordsDlg )
+      headwordsDlg->hide();
   }
 
   if ( shown )
   {
+    if( headwordsDlg )
+      headwordsDlg->show();
+
     focusTranslateLine();
 #ifdef HAVE_X11
     Window wh = 0;
@@ -3566,10 +3598,57 @@ void MainWindow::showDictionaryInfo( const QString & id )
       {
         editDictionary( dictionaries[x].get() );
       }
+      else if( result == DictInfo::SHOW_HEADWORDS )
+      {
+        showDictionaryHeadwords( dictionaries[x].get() );
+      }
 
       break;
     }
   }
+}
+
+void MainWindow::showDictionaryHeadwords( const QString & id )
+{
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
+    if( dictionaries[ x ]->getId() == id.toUtf8().data() )
+    {
+      showDictionaryHeadwords( dictionaries[ x ].get() );
+      break;
+    }
+  }
+}
+
+void MainWindow::showDictionaryHeadwords( Dictionary::Class * dict )
+{
+  if( headwordsDlg == 0 )
+  {
+    headwordsDlg = new DictHeadwords( this, cfg, dict );
+    connect( headwordsDlg, SIGNAL( headwordSelected( QString ) ),
+             this, SLOT( wordReceived( QString ) ) );
+    connect( headwordsDlg, SIGNAL( closeDialog() ),
+             this, SLOT( closeHeadwordsDialog() ) );
+  }
+  else
+    headwordsDlg->setup( dict );
+
+  headwordsDlg->show();
+}
+
+void MainWindow::closeHeadwordsDialog()
+{
+  if( headwordsDlg )
+  {
+    delete headwordsDlg;
+    headwordsDlg = NULL;
+  }
+}
+
+void MainWindow::focusHeadwordsDialog()
+{
+  if( headwordsDlg )
+    headwordsDlg->activateWindow();
 }
 
 void MainWindow::editDictionary( Dictionary::Class * dict )
@@ -3673,6 +3752,10 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
       QMenu menu( ui.dictsList );
       QAction * infoAction = menu.addAction( tr( "Dictionary info" ) );
 
+      QAction * headwordsAction = NULL;
+      if( pDict->getWordCount() > 0 )
+        headwordsAction = menu.addAction( tr( "Dictionary headwords" ) );
+
       QAction * openDictFolderAction = menu.addAction( tr( "Open dictionary folder" ) );
 
       QAction * editAction = NULL;
@@ -3688,6 +3771,15 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
         if ( scanPopup )
           scanPopup.get()->blockSignals( true );
         showDictionaryInfo( id );
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( false );
+      }
+      else
+      if( result && result == headwordsAction )
+      {
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( true );
+        showDictionaryHeadwords( pDict );
         if ( scanPopup )
           scanPopup.get()->blockSignals( false );
       }

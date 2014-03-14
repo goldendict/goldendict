@@ -122,7 +122,7 @@ ArticleDom::ArticleDom( wstring const & str ):
             textNode = 0;
 
             wstring linkText = Folding::trimWhitespace( *entry );
-            processUnsortedParts( linkText, false );
+            processUnsortedParts( linkText, true );
             ArticleDom nodeDom( linkText );
 
             Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );

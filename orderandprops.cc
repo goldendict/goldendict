@@ -252,6 +252,26 @@ void OrderAndProps::contextMenuRequested( const QPoint & pos )
   QAction * sortLangAction = new QAction( tr( "Sort by languages" ), &menu );
   menu.addAction( sortLangAction );
 
+  QAction * showHeadwordsAction = NULL;
+  QVariant value = ui.dictionaryOrder->getModel()->data( ui.dictionaryOrder->indexAt( pos ), Qt::EditRole );
+  QString id;
+  if( value.canConvert< QString >() )
+    id = value.toString();
+
+  if( !id.isEmpty() )
+  {
+    vector< sptr< Dictionary::Class > > const & dicts = ui.dictionaryOrder->getCurrentDictionaries();
+    unsigned n;
+    for( n = 0; n < dicts.size(); n++ )
+      if( id.compare( QString::fromUtf8( dicts.at( n )->getId().c_str() ) ) == 0 )
+        break;
+    if( n < dicts.size()  && dicts.at( n )->getWordCount() > 0 )
+    {
+      showHeadwordsAction = new QAction( tr( "Dictionary headwords" ), &menu );
+      menu.addAction( showHeadwordsAction );
+    }
+  }
+
   QAction * result = menu.exec( ui.dictionaryOrder->mapToGlobal( pos ) );
 
   if( result == sortNameAction || result == sortLangAction )
@@ -262,5 +282,10 @@ void OrderAndProps::contextMenuRequested( const QPoint & pos )
     else
       sort( sortedDicts.begin(), sortedDicts.end(), dictLessThan );
     ui.dictionaryOrder->populate( sortedDicts );
+  }
+
+  if( result && result == showHeadwordsAction )
+  {
+    emit showDictionaryHeadwords( id );
   }
 }

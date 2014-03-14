@@ -9,6 +9,7 @@
 #include <map>
 #include <QObject>
 #include <QIcon>
+#include <QStringList>
 #include "sptr.hh"
 #include "ex.hh"
 #include "mutex.hh"
@@ -398,6 +399,10 @@ public:
 
   /// Return true if dictionary is local dictionary
   virtual bool isLocalDictionary()
+  { return false; }
+
+  /// Retrieve all dictionary headwords
+  virtual bool getHeadwords( QStringList & )
   { return false; }
 
   virtual ~Class()

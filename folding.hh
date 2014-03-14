@@ -28,7 +28,7 @@ enum
 
 /// Applies the folding algorithm to each character in the given string,
 /// making another one as a result.
-wstring apply( wstring const & );
+wstring apply( wstring const &, bool preserveWildcards = false );
 
 /// Applies only simple case folding algorithm. Since many dictionaries have
 /// different case style, we interpret words differing only by case as synonyms.

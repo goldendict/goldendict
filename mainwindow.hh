@@ -27,6 +27,7 @@
 #include "mruqmenu.hh"
 #include "translatebox.hh"
 #include "wordlist.hh"
+#include "dictheadwords.hh"
 
 #ifdef HAVE_X11
 #include <fixx11h.h>
@@ -105,7 +106,8 @@ private:
   QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction,
-          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction, switchExpandModeAction;
+          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction,
+          switchExpandModeAction, focusHeadwordsDlgAction;
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
@@ -156,6 +158,8 @@ private:
   bool blockUpdateWindowTitle;
 
   QPrinter & getPrinter(); // Creates a printer if it's not there and returns it
+
+  DictHeadwords * headwordsDlg;
 
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
@@ -219,6 +223,8 @@ private:
 
   void fillWordListFromHistory();
 
+  void showDictionaryHeadwords( Dictionary::Class * dict );
+
 private slots:
 
   void hotKeyActivated( int );
@@ -242,6 +248,8 @@ private slots:
   void foundDictsContextMenuRequested( const QPoint & pos );
 
   void showDictionaryInfo( QString const & id );
+
+  void showDictionaryHeadwords( QString const & id );
 
   void openDictionaryFolder( QString const & id );
 
@@ -397,6 +405,10 @@ private slots:
   void sendWordToInputLine( QString const & word );
 
   void storeResourceSavePath( QString const & );
+
+  void closeHeadwordsDialog();
+
+  void focusHeadwordsDialog();
 
 signals:
   /// Set optional parts expand mode for all tabs
