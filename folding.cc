@@ -43,7 +43,8 @@ wstring apply( wstring const & in, bool preserveWildcards )
 
     if ( !isCombiningMark( ch ) && !isWhitespace( ch )
          && ( !isPunct( ch )
-              || ( preserveWildcards && ( ch == '\\' || ch == '?' || ch == '*' ) )
+              || ( preserveWildcards &&
+                   ( ch == '\\' || ch == '?' || ch == '*' || ch == '[' || ch == ']' ) )
             )
     )
       withoutDiacritics.push_back( ch );

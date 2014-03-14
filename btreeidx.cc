@@ -209,12 +209,15 @@ void BtreeWordSearchRequest::run()
   QRegExp regexp;
   bool useWildcards = allowMiddleMatches
                       && ( str.find( '*' ) != wstring::npos ||
-                           str.find( '?' ) != wstring::npos );
+                           str.find( '?' ) != wstring::npos ||
+                           str.find( '[' ) != wstring::npos ||
+                           str.find( ']' ) != wstring::npos);
 
   wstring folded = Folding::apply( str );
+
   if( useWildcards )
   {
-    regexp.setPattern( gd::toQString( Folding::applyDiacriticsOnly( str ) ) );
+    regexp.setPattern( gd::toQString( Folding::applyDiacriticsOnly( Folding::applySimpleCaseOnly( str ) ) ) );
     regexp.setPatternSyntax( QRegExp::WildcardUnix );
     regexp.setCaseSensitivity( Qt::CaseInsensitive );
 
@@ -234,7 +237,7 @@ void BtreeWordSearchRequest::run()
 
       if( bNoLetters )
       {
-        if( ch == '*' || ch == '?' )
+        if( ch == '*' || ch == '?' || ch == '[' || ch == ']' )
         {
           // Store escaped symbols
           wstring::size_type n = folded.size();
@@ -249,7 +252,7 @@ void BtreeWordSearchRequest::run()
       }
       else
       {
-        if( ch == '\\' || ch == '*' || ch == '?' )
+        if( ch == '\\' || ch == '*' || ch == '?' || ch == '[' || ch == ']' )
         break;
       }
 
