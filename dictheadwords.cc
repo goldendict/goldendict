@@ -27,7 +27,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
 
   ui.searchModeCombo->addItem( tr( "Text" ), QRegExp::FixedString );
-  ui.searchModeCombo->addItem( tr( "Wildcards" ), QRegExp::Wildcard );
+  ui.searchModeCombo->addItem( tr( "Wildcards" ), QRegExp::WildcardUnix );
   ui.searchModeCombo->addItem( tr( "RegExp" ), QRegExp::RegExp );
   ui.searchModeCombo->setCurrentIndex( cfg.headwordsDialog.searchMode );
 
@@ -59,16 +59,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
   if( delegate )
     ui.headersListView->setItemDelegate( delegate );
 
-  if( headers.size() > AUTO_APPLY_LIMIT )
-  {
-    ui.autoApply->setChecked( false );
-    ui.autoApply->setEnabled( false );
-  }
-  else
-  {
-    ui.autoApply->setChecked( cfg.headwordsDialog.autoApply );
-    ui.applyButton->setEnabled( !cfg.headwordsDialog.autoApply );
-  }
+  ui.autoApply->setChecked( cfg.headwordsDialog.autoApply );
 
   connect( this, SIGNAL( finished( int ) ), this, SLOT( savePos() ) );
 
@@ -119,6 +110,20 @@ void DictHeadwords::setup( Dictionary::Class *dict_ )
 
   proxy->sort( 0 );
   filterChanged();
+
+  if( headers.size() > AUTO_APPLY_LIMIT )
+  {
+    cfg.headwordsDialog.autoApply = ui.autoApply->isChecked();
+    ui.autoApply->setChecked( false );
+    ui.autoApply->setEnabled( false );
+  }
+  else
+  {
+    ui.autoApply->setEnabled( true );
+    ui.autoApply->setChecked( cfg.headwordsDialog.autoApply );
+  }
+
+  ui.applyButton->setEnabled( !ui.autoApply->isChecked() );
 
   QApplication::restoreOverrideCursor();
 }
