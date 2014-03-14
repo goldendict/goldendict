@@ -568,27 +568,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="209"/>
+        <location filename="../dictheadwords.cc" line="214"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="226"/>
+        <location filename="../dictheadwords.cc" line="231"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="228"/>
+        <location filename="../dictheadwords.cc" line="233"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">ملفات نص (*.txt);;كل الملفات (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="252"/>
+        <location filename="../dictheadwords.cc" line="257"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="252"/>
+        <location filename="../dictheadwords.cc" line="257"/>
         <source>Cancel</source>
         <translation type="unfinished">ألغِ</translation>
     </message>
@@ -2438,8 +2438,8 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="857"/>
-        <source>String to search in dictionaries, the wildcards &apos;*&apos; and &apos;?&apos; are allowed.
-To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&apos; respectively</source>
+        <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
+To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

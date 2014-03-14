@@ -571,27 +571,27 @@ between classic and school orthography in cyrillic)</source>
         <translation>Рег. выражение</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="209"/>
+        <location filename="../dictheadwords.cc" line="214"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation>Неповторяющихся заголовков всего: %1, отфильтрованых: %2</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="226"/>
+        <location filename="../dictheadwords.cc" line="231"/>
         <source>Save headwords to file</source>
         <translation>Сохранить заголовки в файл</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="228"/>
+        <location filename="../dictheadwords.cc" line="233"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Текстовые файлы (*.txt);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="252"/>
+        <location filename="../dictheadwords.cc" line="257"/>
         <source>Export headwords...</source>
         <translation>Экспортируются заголовки...</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="252"/>
+        <location filename="../dictheadwords.cc" line="257"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -2266,13 +2266,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>Закрыть все вкладки, кроме текущей</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="857"/>
-        <source>String to search in dictionaries, the wildcards &apos;*&apos; and &apos;?&apos; are allowed.
-To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&apos; respectively</source>
-        <translation>Строка для поиска в словарях. Можно использовать шаблонные символы '*' и '?'.
-Чтобы найти сами символы '*' и '?', используйте '\*' и '\?' соответственно.</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="1162"/>
         <source>Look up:</source>
         <translation>Искать:</translation>
@@ -2337,6 +2330,13 @@ To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&
         <location filename="../mainwindow.cc" line="372"/>
         <source>Opened tabs</source>
         <translation>Открытые вкладки</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="857"/>
+        <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
+To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
+        <translation>Строка для поиска в словарях. Можно использовать шаблоны &apos;*&apos;, &apos;?&apos; и диапазоны символов &apos;[...]&apos;.
+Чтобы найти сами символы &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos;, используйте &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; соответственно.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1335"/>

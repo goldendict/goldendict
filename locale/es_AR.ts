@@ -619,27 +619,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="209"/>
+        <location filename="../dictheadwords.cc" line="214"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="226"/>
+        <location filename="../dictheadwords.cc" line="231"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="228"/>
+        <location filename="../dictheadwords.cc" line="233"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">Documentos de texto (*.txt);;Todos los archivos (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="252"/>
+        <location filename="../dictheadwords.cc" line="257"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="252"/>
+        <location filename="../dictheadwords.cc" line="257"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
     </message>
@@ -3091,12 +3091,6 @@ Reordene los grupos usando el mouse sobre las pestañas con los nombres de los m
         <translation>Cerrar todas las pestañas excepto la actual</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="857"/>
-        <source>String to search in dictionaries, the wildcards &apos;*&apos; and &apos;?&apos; are allowed.
-To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&apos; respectively</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cc" line="1162"/>
         <source>Look up:</source>
         <translation>Buscar:</translation>
@@ -3111,6 +3105,12 @@ To find &apos;*&apos; and &apos;?&apos; symbols use &apos;\*&apos; and &apos;\?&
         <location filename="../mainwindow.cc" line="2835"/>
         <source>Accessibility API is not enabled</source>
         <translation>La función de accesibilidad no esta activada</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="857"/>
+        <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
+To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3155"/>
