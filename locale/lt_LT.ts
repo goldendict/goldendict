@@ -525,107 +525,107 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieškos veiksena</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis elementas nurodo, kaip bus interpretuojama atrankos užklausa</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Jei pažymėta, atrenkant bus atsižvelgiama į raidžių lygį</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Skirti raidžių registrą</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Antraštinius žodžius eksportuoti į failą</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerai</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="91"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Norėdami atrinkti antraštinius žodžius pagal atrankos filtrą, paspauskite šį mygtuką</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="94"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Pritaikyti</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="107"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Jei pažymėta, pakeitus atrankos tekstą iš karto atrinkti antraštinius žodžius</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="110"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrinkti rašant</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atranka:</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="124"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstas, pagal kurį norite atrinkti antraštinius žodžius (tikslus tekstas, pakaitos simboliai, reguliarusis reiškinys)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="29"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstas</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="30"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakaitos simboliai</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="31"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguliarusis reiškinys</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="214"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš viso nesikartojančių antraštinių žodžių: %1; atrinkta: %2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="231"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Antraštinių žodžių įrašymas į failą</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="233"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Tekstiniai failai (*.txt);;Visi failai (*.*)</translation>
+        <translation>Tekstiniai failai (*.txt);;Visi failai (*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="257"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Antraštinių žodžių eksportavimas...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="257"/>
         <source>Cancel</source>
-        <translation type="unfinished">Atšaukti</translation>
+        <translation>Atšaukti</translation>
     </message>
 </context>
 <context>
@@ -673,12 +673,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti visus nesikartojančius žodyno antraštinius žodžius</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Antraštiniai žodžiai</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -725,7 +725,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodyno antraštiniai žodžiai</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -871,12 +871,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupės kortelės</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Atverti grupių sąrašą</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
@@ -2158,7 +2158,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="857"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodynuose ieškomas tekstas. Galite naudoti pakaitos simbolius „*“, „?“ ir simbolių rinkinį „[...]“.
+Norėdami rasti „*“, „?“, „[“, „]“ simbolius, atitinkamai įveskite „\*“, „\?“, „\[“, „\]“</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2782"/>
@@ -2392,7 +2393,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="3747"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodyno antraštiniai žodžiai</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3749"/>
@@ -2856,7 +2857,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../orderandprops.cc" line="268"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Žodyno antraštiniai žodžiai</translation>
     </message>
 </context>
 <context>
