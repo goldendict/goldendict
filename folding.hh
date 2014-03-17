@@ -78,6 +78,9 @@ void normalizeWhitespace( wstring & );
 /// generation would be too slow.
 //ssize_t apply( wchar const * in, wchar * out, size_t outSize );
 
+/// Unescape all wildcard symbols (for exast search)
+wstring unescapeWildcardSymbols( wstring const & );
+
 }
 
 #endif

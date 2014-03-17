@@ -83,9 +83,12 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
 
   try
   {
-    wstring folded = Folding::apply( str );
+    // Exast search - unescape all wildcard symbols
+    wstring word = Folding::unescapeWildcardSymbols( str );
+
+    wstring folded = Folding::apply( word );
     if( folded.empty() )
-      folded = Folding::applyWhitespaceOnly( str );
+      folded = Folding::applyWhitespaceOnly( word );
 
     bool exactMatch;
 
@@ -102,7 +105,7 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
     {
       result = readChain( chainOffset );
 
-      antialias( str, result );
+      antialias( word, result );
     }
   }
   catch( std::exception & e )
@@ -207,11 +210,17 @@ void BtreeWordSearchRequest::run()
   }
   
   QRegExp regexp;
-  bool useWildcards = allowMiddleMatches
-                      && ( str.find( '*' ) != wstring::npos ||
-                           str.find( '?' ) != wstring::npos ||
-                           str.find( '[' ) != wstring::npos ||
-                           str.find( ']' ) != wstring::npos);
+  bool useWildcards = false;
+  if( allowMiddleMatches )
+    useWildcards = ( str.find( '*' ) != wstring::npos ||
+                     str.find( '?' ) != wstring::npos ||
+                     str.find( '[' ) != wstring::npos ||
+                     str.find( ']' ) != wstring::npos );
+  else
+  {
+    // Exast search - unescape all wildcard symbols
+    str = Folding::unescapeWildcardSymbols( str );
+  }
 
   wstring folded = Folding::apply( str );
 
@@ -253,7 +262,12 @@ void BtreeWordSearchRequest::run()
       else
       {
         if( ch == '\\' || ch == '*' || ch == '?' || ch == '[' || ch == ']' )
-        break;
+        {
+          if( folded.empty() )
+            continue;
+          else
+            break;
+        }
       }
 
       folded.push_back( ch );
@@ -320,9 +334,10 @@ void BtreeWordSearchRequest::run()
           {
             if( useWildcards )
             {
-              wstring result = Folding::applyDiacriticsOnly( Utf8::decode( chain[ x ].word ) );
+              wstring fullword = Utf8::decode( chain[ x ].prefix + chain[ x ].word  );
+              wstring result = Folding::applyDiacriticsOnly( fullword );
               if( regexp.indexIn( gd::toQString( result ) ) == 0 )
-                matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+                matches.push_back( fullword );
             }
             else
             {

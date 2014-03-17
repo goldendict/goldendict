@@ -664,4 +664,28 @@ void normalizeWhitespace( wstring & str )
   }
 }
 
+wstring unescapeWildcardSymbols( wstring const & in )
+{
+  wstring tmp;
+  tmp.reserve( in.size() );
+
+  wchar const * wordBegin = in.c_str();
+
+  for( ; *wordBegin; ++wordBegin )
+  {
+    if( *wordBegin == '*' || *wordBegin == '?'
+        || *wordBegin == '[' || *wordBegin == ']' )
+    {
+      wstring::size_type n = tmp.size();
+      if( n && tmp[ n - 1 ] == '\\' )
+      {
+        tmp[ n - 1 ] = *wordBegin;
+        continue;
+      }
+    }
+    tmp.push_back( *wordBegin );
+  }
+  return tmp;
+}
+
 }
