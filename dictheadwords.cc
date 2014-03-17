@@ -201,7 +201,11 @@ void DictHeadwords::itemClicked( const QModelIndex & index )
 {
   QVariant value = proxy->data( index, Qt::DisplayRole );
   if ( value.canConvert< QString >() )
-    emit headwordSelected( value.toString() );
+  {
+    QString headword = value.toString();
+    headword.replace( QRegExp( "([\\*\\?\\[\\]])" ), "\\\\1" );
+    emit headwordSelected( headword );
+  }
 }
 
 void DictHeadwords::autoApplyStateChanged( int state )
