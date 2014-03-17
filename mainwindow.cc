@@ -3814,12 +3814,6 @@ bool MainWindow::winEvent( MSG * message, long * result )
   QString str = view->wordAtPoint( lpdata->Pt.x, lpdata->Pt.y );
 
   memset( lpdata->cwData, 0, lpdata->dwMaxLength * sizeof( WCHAR ) );
-  if( str.isRightToLeft() )
-  {
-    gd::wstring wstr = gd::toWString( str );
-    wstr.assign( wstr.rbegin(), wstr.rend() );
-    str = gd::toQString( wstr );
-  }
   str.truncate( lpdata->dwMaxLength - 1 );
   str.toWCharArray( lpdata->cwData );
 

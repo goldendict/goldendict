@@ -571,7 +571,7 @@ static void UninstallTextOutHooks()
 	}
 }
 
-DLLIMPORT void __gdGetWord (TCurrentMode *P)
+DLLIMPORT DWORD __gdGetWord (TCurrentMode *P)
 {
 	TCHAR wClassName[64];
 	TKnownWndClass WndClass;
@@ -588,6 +588,10 @@ DLLIMPORT void __gdGetWord (TCurrentMode *P)
 	} else {
 		P->WordLen = 0;
 	}
+	if(WndClass == kwcConsole || WndClass == kwcConEmu)
+		return 1;
+
+	return 0;
 }
 
 

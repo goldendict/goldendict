@@ -342,15 +342,18 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd_, UINT msg,
 
     // See if we have an RTL char. Reverse the whole string if we do.
 
-    for( int x = 0; x < word.size(); ++x )
+    if( lparam == 0 )
     {
-      QChar::Direction d = word[ x ].direction();
-
-      if ( d == QChar::DirR || d == QChar::DirAL ||
-           d == QChar::DirRLE || d == QChar::DirRLO )
+      for( int x = 0; x < word.size(); ++x )
       {
-        std::reverse( word.begin(), word.end() );
-        break;
+        QChar::Direction d = word[ x ].direction();
+
+        if ( d == QChar::DirR || d == QChar::DirAL ||
+             d == QChar::DirRLE || d == QChar::DirRLO )
+        {
+          std::reverse( word.begin(), word.end() );
+          break;
+        }
       }
     }
 

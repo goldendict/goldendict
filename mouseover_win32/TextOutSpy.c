@@ -13,7 +13,7 @@ HINSTANCE g_hInstance = NULL;
 HANDLE hSynhroMutex = 0;
 HINSTANCE hGetWordLib = 0;
 UINT_PTR TimerID = 0;
-typedef void (*GetWordProc_t)(TCurrentMode *);
+typedef DWORD (*GetWordProc_t)(TCurrentMode *);
 GetWordProc_t GetWordProc = NULL;
 GDDataStruct gds;
 UINT uGdAskMessage;
@@ -83,7 +83,7 @@ LRESULT lr;
 					GlobalData32->CurMod.BeginPos = 0;
 					lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
 #endif
-					SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+					SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 1, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
 				}
 			}
 			return;
@@ -94,7 +94,8 @@ LRESULT lr;
 		GlobalData->CurMod.WND = GlobalData->LastWND;
 		GlobalData->CurMod.Pt = GlobalData->LastPt;
 
-		GetWordProc(&(GlobalData->CurMod));
+		LPARAM lparam = GetWordProc(&(GlobalData->CurMod));
+		// lparam == 0 - need to reverse RTL text, else don't reverse
 
 		if (GlobalData->CurMod.WordLen > 0) {
 			if( IsWindow( GlobalData->ServerWND ) ) {
@@ -104,7 +105,7 @@ LRESULT lr;
 				GlobalData32->CurMod.BeginPos = GlobalData->CurMod.BeginPos;
 				lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
 #endif
-				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, lparam, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
 			}
 			return;
 		}
@@ -120,7 +121,7 @@ LRESULT lr;
 				GlobalData32->CurMod.BeginPos = GlobalData->CurMod.BeginPos;
 				lstrcpyn( GlobalData32->CurMod.MatchedWord, GlobalData->CurMod.MatchedWord, sizeof( GlobalData32->CurMod.MatchedWord ) );
 #endif
-				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
+				SendMessageTimeout(GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 1, SMTO_ABORTIFHUNG, MOUSEOVER_INTERVAL, &SendMsgAnswer);
 			}
 			return;
 		}
@@ -133,7 +134,7 @@ LRESULT lr;
 		GlobalData32->CurMod.BeginPos = 0;
 		GlobalData32->LastPt = GlobalData->LastPt;
 #endif
-		PostMessage( GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 0 );
+		PostMessage( GlobalData->ServerWND, WM_MY_SHOW_TRANSLATION, 0, 1 );
 	}		
 }
 
