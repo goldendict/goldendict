@@ -10,10 +10,15 @@
 #include <X11/Xlibint.h>
 #endif
 
+#ifdef Q_OS_WIN32
+#include "mainwindow.hh"
+#endif
+
 //////////////////////////////////////////////////////////////////////////
 
 QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
-  QtSingleApplication( argc, argv )
+  QtSingleApplication( argc, argv ),
+  mainWindow( 0 )
 {
 }
 
@@ -381,6 +386,12 @@ bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
       if ( hotkeyWrappers.at(i)->winEvent( message, result ) )
         return true;
     }
+  }
+
+  if( mainWindow )
+  {
+    if( ( static_cast< MainWindow * >( mainWindow ) )->handleGDMessage( message, result ) )
+      return true;
   }
 
   return QApplication::winEventFilter( message, result );

@@ -421,7 +421,8 @@ signals:
   /// For receiving message from scan libraries
 protected:
   unsigned gdAskMessage;
-  bool winEvent( MSG * message, long * result );
+public:
+  bool handleGDMessage( MSG * message, long * result );
 
 private slots:
   /// Return true while scanning GoldenDict window

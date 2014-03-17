@@ -798,6 +798,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   #endif
 #ifdef Q_OS_WIN32
   gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
+  ( static_cast< QHotkeyApplication * >( qApp ) )->setMainWindow( this );
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
@@ -3800,11 +3801,15 @@ void MainWindow::storeResourceSavePath( const QString & newPath )
 
 #ifdef Q_OS_WIN32
 
-bool MainWindow::winEvent( MSG * message, long * result )
+bool MainWindow::handleGDMessage( MSG * message, long * result )
 {
   if( message->message != gdAskMessage )
     return false;
   *result = 0;
+
+  if( !isGoldenDictWindow( message->hwnd ) )
+    return true;
+
   ArticleView * view = getCurrentArticleView();
   if( !view )
     return true;
@@ -3823,7 +3828,7 @@ bool MainWindow::winEvent( MSG * message, long * result )
 
 bool MainWindow::isGoldenDictWindow( HWND hwnd )
 {
-    return hwnd == (HWND)winId();
+  return hwnd == winId() || hwnd == ui.centralWidget->winId();
 }
 
 #endif
