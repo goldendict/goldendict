@@ -47,7 +47,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   proxy->setSortCaseSensitivity( Qt::CaseInsensitive );
   proxy->setSortLocaleAware( true );
-  proxy->setDynamicSortFilter( true );
+  proxy->setDynamicSortFilter( false );
 
   ui.headersListView->setModel( proxy );
   ui.headersListView->setEditTriggers( QAbstractItemView::NoEditTriggers );
@@ -191,6 +191,7 @@ void DictHeadwords::filterChanged()
   QApplication::setOverrideCursor( Qt::WaitCursor );
 
   proxy->setFilterRegExp( regExp );
+  proxy->sort( 0 );
 
   QApplication::restoreOverrideCursor();
 
