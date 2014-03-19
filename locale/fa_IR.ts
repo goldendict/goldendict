@@ -69,7 +69,7 @@
     <message>
         <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 dir=&quot;RTL&quot; align=&quot;center&quot;&gt;به گلدن‌دیکت &lt;b&gt;خوش آمدید&lt;/b&gt;!&lt;/h3&gt;&lt;p dir=&quot;RTL&quot;&gt;برای آغاز به کار با برنامه، نخست&lt;b&gt;ویرایش|واژه‌نامه‌ها&lt;/b&gt; را ببینید. برای افزودن مسیرهای شاخه برای یافتن پرونده‌های واژه‌نامه، راه‌اندازی پایگاه‌های گوناگون ویکی‌پدیا یا دیگر منابع، ترتیب واژه‌نامه را تنظیم کنید یا گروه‌های واژه‌نامه بسازید&lt;p dir=&quot;RTL&quot;&gt;اکنون شما آماده‌اید تا واژه‌هایتان را بیابید!شما می‌توانید در قاب سمت چپ در این پنجره یا &lt;a href=&quot;Working with popup&quot;&gt;واژه‌هایتان را از دیگر پنجره‌های فعال بیابید&lt;/a&gt;. &lt;p dir=&quot;RTL&quot;&gt;برای شخصی‌سازی برنامه، ترجیحات موجود در &lt;b&gt;ویرایش|ترجیحات&lt;/b&gt; را بررسی کنید. همه تنظیمات راه‌نمای ابزار دارند، اگر از چیزی مطمئن نیستید آن‌ها را بخوانید.&lt;p dir=&quot;RTL&quot;&gt;اگر به راه‌نمایی بیش‌تری نیاز دارید یا به نظرهای دیگران علاقه‌مند هستید، بفرمایید به &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;انجمن برنامه&lt;/a&gt;.&lt;p dir=&quot;RTL&quot;&gt; برای به‌روزرسانی‌ها &lt;a href=&quot;http://goldendict.org/&quot;&gt;وب‌سایت برنامه&lt;/a&gt; را بررسی کنید.&lt;p dir=&quot;RTL&quot;&gt;© ۲۰۰۸-۲۰۱۲ کنستانتین ایساکوف. تحت لیسانس GPLv3 یا بالاتر.</translation>
+        <translation>&lt;h3 dir=&quot;RTL&quot; align=&quot;center&quot;&gt;به گلدن‌دیکت &lt;b&gt;خوش آمدید&lt;/b&gt;!&lt;/h3&gt;&lt;p dir=&quot;RTL&quot;&gt;برای آغاز به کار با برنامه، نخست&lt;b&gt;ویرایش|واژه‌نامه‌ها&lt;/b&gt; را ببینید. برای افزودن مسیرهای شاخه برای یافتن پرونده‌های واژه‌نامه، راه‌اندازی پایگاه‌های گوناگون ویکی‌پدیا یا دیگر منابع، ترتیب واژه‌نامه را تنظیم کنید یا گروه‌های واژه‌نامه بسازید&lt;p dir=&quot;RTL&quot;&gt;اکنون شما آماده‌اید تا واژه‌هایتان را بیابید! شما می‌توانید در قاب سمت چپ در این پنجره یا &lt;a href=&quot;Working with popup&quot;&gt;واژه‌هایتان را از دیگر پنجره‌های فعال بیابید&lt;/a&gt;. &lt;p dir=&quot;RTL&quot;&gt;برای شخصی‌سازی برنامه، ترجیحات موجود در &lt;b&gt;ویرایش|ترجیحات&lt;/b&gt; را بررسی کنید. همه تنظیمات راه‌نمای ابزار دارند، اگر از چیزی مطمئن نیستید آن‌ها را بخوانید.&lt;p dir=&quot;RTL&quot;&gt;اگر به راه‌نمایی بیش‌تری نیاز دارید یا به نظرهای دیگران علاقه‌مند هستید، بفرمایید به &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;انجمن برنامه&lt;/a&gt;.&lt;p dir=&quot;RTL&quot;&gt; برای به‌روزرسانی‌ها &lt;a href=&quot;http://goldendict.org/&quot;&gt;وب‌سایت برنامه&lt;/a&gt; را بررسی کنید.&lt;p dir=&quot;RTL&quot;&gt;© ۲۰۰۸-۲۰۱۲ کنستانتین ایساکوف. تحت لیسانس GPLv3 یا بالاتر.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="229"/>
@@ -491,107 +491,107 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>شیوه جست‌وجو</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>این رکن تعیین می‌کند که رشته پالایه چگونه تفسیر شود</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>اگر به‌کار افتاده باشد برای نمادها در هنگام پالایش پذیرفته می‌شود</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>همتا بودن مورد</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>صادر کردن سرواژه‌ها به پرونده</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>صادر کردن</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>خوب</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="91"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>برای اعمال پالایه لیست سرواژه‌ها این کلید را فشار دهید</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="94"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>اعمال کردن</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="107"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>اگر به‌کار افتاده باشد هر تغییر پالایه بی‌درنگ بر روی لیست سرواژه‌ها اعمال می‌گردد</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="110"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>اعمال خودکار</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>پالایه:</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="124"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>رشته پالایه (رشته ثابت، نویسه‌های عام یا عبارت منظم)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="29"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>متن</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="30"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>نویسه‌های عام</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="31"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="219"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>جمع سرواژه‌های یکتا:  %1، پالایش شده: %2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="236"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیره سرواژه‌ها در پرونده</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="238"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">پرونده‌های متنی (*.txt);;همه پرونده‌ها (*.*)</translation>
+        <translation>پرونده‌های متنی (*.txt);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="262"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>صادر کردن سرواژه‌ها...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="262"/>
         <source>Cancel</source>
-        <translation type="unfinished">لغو</translation>
+        <translation>لغو</translation>
     </message>
 </context>
 <context>
@@ -639,12 +639,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>همه سرواژه‌های واژه‌نامه یکتا را نشان بده</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>سرواژه‌ها</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -686,7 +686,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>سرواژه‌های واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -933,12 +933,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>زبانه‌های گروه</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>لیست گروه‌ها را باز کن</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
@@ -2129,7 +2129,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation>قاب تا&amp;ریخ‌چه</translation>
+        <translation>قاب &amp;تاریخ‌چه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
@@ -2144,7 +2144,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>&amp;Preferences...</source>
-        <translation>تر&amp;جیحات...</translation>
+        <translation>ترجی&amp;حات...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="337"/>
@@ -2175,7 +2175,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.ui" line="367"/>
         <location filename="../mainwindow.cc" line="326"/>
         <source>&amp;Quit</source>
-        <translation>تر&amp;ک کردن</translation>
+        <translation>&amp;ترک کردن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="370"/>
@@ -2195,7 +2195,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="389"/>
         <source>&amp;Close To Tray</source>
-        <translation>ب&amp;ستن به سینی</translation>
+        <translation>بستن به &amp;سینی</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
@@ -2240,7 +2240,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="444"/>
         <source>Print Pre&amp;view</source>
-        <translation>پی&amp;ش‌نمایش چاپ</translation>
+        <translation>&amp;پیش‌نمایش چاپ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
@@ -2255,7 +2255,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
         <source>&amp;Clear</source>
-        <translation>پ&amp;اک کردن</translation>
+        <translation>&amp;پاک کردن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="475"/>
@@ -2270,13 +2270,13 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="489"/>
         <source>&amp;Configuration Folder</source>
-        <translation>پوشه پ&amp;یکربندی</translation>
+        <translation>&amp;پوشه پیکربندی</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
         <location filename="../mainwindow.cc" line="3369"/>
         <source>&amp;Show</source>
-        <translation>ن&amp;مایش</translation>
+        <translation>&amp;نمایش</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="500"/>
@@ -2286,12 +2286,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>&amp;Export</source>
-        <translation>&amp;صادرکردن</translation>
+        <translation>&amp;صادر کردن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="516"/>
         <source>&amp;Import</source>
-        <translation>&amp;واردکردن</translation>
+        <translation>&amp;وارد کردن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="527"/>
@@ -2318,7 +2318,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="87"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation>نمایش نام‌ها در نوار وا&amp;ژه‌نامه</translation>
+        <translation>نمایش نا&amp;م‌ها در نوار واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="88"/>
@@ -2328,7 +2328,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="89"/>
         <source>&amp;Menubar</source>
-        <translation>نو&amp;ار منو</translation>
+        <translation>نوار &amp;منو</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="133"/>
@@ -2399,7 +2399,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="322"/>
         <source>Show &amp;Main Window</source>
-        <translation>نمایش پنجره ا&amp;صلی</translation>
+        <translation>&amp;نمایش پنجره اصلی</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="372"/>
@@ -2441,7 +2441,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="858"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>رشته‌ای که باید در واژه‌نامه‌ها جست‌وجو شود. نویسه‌های عام &apos;*&apos;، &apos;?&apos; و گروه‌هایی از نمادهای &apos;[...]&apos; مجاز هستند.
+برای یافتن نمادهای &apos;*&apos;، &apos;?&apos;، &apos;[&apos;، &apos;]&apos; به ترتیب &apos;\*&apos;، &apos;\?&apos;، &apos;\[&apos;، &apos;\]&apos; را به‌کار ببرید</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1152"/>
@@ -2612,7 +2613,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3748"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>سرواژه‌های واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3750"/>
@@ -2760,7 +2761,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="268"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>سرواژه‌های واژه‌نامه</translation>
     </message>
 </context>
 <context>
@@ -2796,7 +2797,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../preferences.ui" line="59"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>پس از بالاآمدن سیستم‌عامل گلدن‌دیکت خودکار اجرا شود.</translation>
+        <translation>پس از بالا آمدن سیستم‌عامل گلدن‌دیکت به‌طور خودکار اجرا شود.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="62"/>
@@ -2824,8 +2825,8 @@ to open main window and perform other tasks.</source>
         <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>با به‌کار انداختن این، برنامه هنگام آغاز
-بدون نمایش پنجره اصلی به سینی سیستم می‌رود.</translation>
+        <translation>با به‌کار انداختن این، برنامه هنگام آغاز بدون
+نمایش پنجره اصلی به سینی سیستم می‌رود.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="125"/>
@@ -2853,8 +2854,8 @@ the application.</source>
         <location filename="../preferences.ui" line="153"/>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation>در حالت عادی، فشردن کلید ESC تمرکز را به خط ترجمه انتقال می‌دهد.
-با به‌کار انداختن این، باعث پنهان شدن پنجره اصلی می‌شود.</translation>
+        <translation>در حالت عادی، فشردن کلید ESC تمرکز را به خط ترجمه انتقال
+می‌دهد. با به‌کار انداختن این، باعث پنهان شدن پنجره اصلی می‌شود.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="157"/>
@@ -2963,8 +2964,8 @@ off from main window or tray icon.</source>
         <location filename="../preferences.ui" line="394"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>برگزینید که آیا حالت پویش واشو به‌طور پیش‌فرض روشن است یا نه.
-اگر به‌کار افتاده است، برنامه همیشه با فعال بودن پویش واشو آغاز می‌شود.</translation>
+        <translation>برگزینید که آیا حالت پویش واشو به‌طور پیش‌فرض روشن باشد یا نه. اگر
+به‌کار افتاده باشد، برنامه همیشه با فعال بودن پویش واشو آغاز می‌شود.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="398"/>
@@ -3204,7 +3205,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="910"/>
         <source>&amp;Network</source>
-        <translation>&amp;شبکه</translation>
+        <translation>ش&amp;بکه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="929"/>
@@ -3249,7 +3250,7 @@ for all program&apos;s network requests.</source>
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
         <translation>با به‌کار انداختن این گلدن‌دیکت بیش‌تر آگهی‌ها را با اجازه ندادن
-به محتوایی (تصویرها، قاب‌ها) که از پایگاه مروری شما نیست می‌بندد.
+به محتوای (تصویرها، قاب‌ها) که از پایگاه مروری شما نیست می‌بندد.
 اگر برخی پایگاه‌ها به خاطر این خراب شدند، این را از کار بیندازید. </translation>
     </message>
     <message>
@@ -3275,8 +3276,8 @@ Plugin must be installed for this option to work.</source>
         <location filename="../preferences.ui" line="1057"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation>برخی پایگاه‌ها گلدن‌دیگت را از سرآیند HTTP می‌شناسندو درخواست‌ها را می‌بندند.
-این گزینه را به‌کار اندازید تا مشکل از بین برود.</translation>
+        <translation>برخی پایگاه‌ها گلدن‌دیگت را از سرآیند HTTP می‌شناسند و درخواست‌ها
+را می‌بندند. این گزینه را به‌کار اندازید تا مشکل از بین برود.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
@@ -3290,10 +3291,10 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>وقتی به‌کار افتاده است، برنامه به‌طور دوره‌ای
-برای نسخه‌های تازه گلدن‌دیکت برای بارگیری
-بررسی می‌کند. اگر بود برنامه کاربر را آگاه
-می‌کند و پیام می‌دهد تا یک برگه بارگیری باز کند.</translation>
+        <translation>وقتی به‌کار افتاده است، برنامه به‌طور دوره‌ای برای
+نسخه‌های تازه گلدن‌دیکت برای بارگیری بررسی می‌کند.
+اگر در دست‌رس بود برنامه کاربر را آگاه می‌کند
+و پیام می‌دهد تا یک برگه بارگیری باز کند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1091"/>
@@ -3303,7 +3304,7 @@ download page.</source>
     <message>
         <location filename="../preferences.ui" line="1112"/>
         <source>Ad&amp;vanced</source>
-        <translation>پ&amp;یش‌رفته</translation>
+        <translation>&amp;پیش‌رفته</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1118"/>
@@ -3366,12 +3367,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1173"/>
         <source>Store &amp;history</source>
-        <translation>نگه‌داری تاریخ‌&amp;چه</translation>
+        <translation>نگه‌داری &amp;تاریخ‌چه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation>بیشینه شمار ورودی برای نگه‌داری در تاریخ چه را تعیین می‌کند.</translation>
+        <translation>بیشینه شمار ورودی برای نگه‌داری در تاریخ‌چه را تعیین می‌کند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1191"/>
@@ -3652,7 +3653,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation>جست‌وجو/فیلتر واژه‌نامه (Ctrl+F)</translation>
+        <translation>جست‌وجو/پالایه واژه‌نامه (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
