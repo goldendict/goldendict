@@ -69,7 +69,7 @@
     <message>
         <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 dir=&quot;RTL&quot; align=&quot;center&quot;&gt;به گلدن‌دیکت &lt;b&gt;خوش آمدید&lt;/b&gt;!&lt;/h3&gt;&lt;p dir=&quot;RTL&quot;&gt;برای آغاز به کار با برنامه، نخست&lt;b&gt;ویرایش|واژه‌نامه‌ها&lt;/b&gt; را ببینید. برای افزودن مسیرهای شاخه برای یافتن پرونده‌های واژه‌نامه، راه‌اندازی پایگاه‌های گوناگون ویکی‌پدیا یا دیگر منابع، ترتیب واژه‌نامه را تنظیم کنید یا گروه‌های واژه‌نامه بسازید&lt;p dir=&quot;RTL&quot;&gt;اکنون شما آماده‌اید تا واژه‌هایتان را بیابید! شما می‌توانید در قاب سمت چپ در این پنجره یا &lt;a href=&quot;Working with popup&quot;&gt;واژه‌هایتان را از دیگر پنجره‌های فعال بیابید&lt;/a&gt;. &lt;p dir=&quot;RTL&quot;&gt;برای شخصی‌سازی برنامه، ترجیحات موجود در &lt;b&gt;ویرایش|ترجیحات&lt;/b&gt; را بررسی کنید. همه تنظیمات راه‌نمای ابزار دارند، اگر از چیزی مطمئن نیستید آن‌ها را بخوانید.&lt;p dir=&quot;RTL&quot;&gt;اگر به راه‌نمایی بیش‌تری نیاز دارید یا به نظرهای دیگران علاقه‌مند هستید، بفرمایید به &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;انجمن برنامه&lt;/a&gt;.&lt;p dir=&quot;RTL&quot;&gt; برای به‌روزرسانی‌ها &lt;a href=&quot;http://goldendict.org/&quot;&gt;وب‌سایت برنامه&lt;/a&gt; را بررسی کنید.&lt;p dir=&quot;RTL&quot;&gt;© ۲۰۰۸-۲۰۱۲ کنستانتین ایساکوف. تحت لیسانس GPLv3 یا بالاتر.</translation>
+        <translation>&lt;h3 dir=&quot;RTL&quot; align=&quot;center&quot;&gt;به گلدن‌دیکت &lt;b&gt;خوش آمدید&lt;/b&gt;!&lt;/h3&gt;&lt;p dir=&quot;RTL&quot;&gt;برای آغاز به کار با برنامه، نخست&lt;b&gt; ویرایش|واژه‌نامه‌ها&lt;/b&gt; را ببینید. برای افزودن مسیرهای شاخه برای یافتن پرونده‌های واژه‌نامه، راه‌اندازی پایگاه‌های گوناگون ویکی‌پدیا یا دیگر منابع، ترتیب واژه‌نامه را تنظیم کنید یا گروه‌های واژه‌نامه بسازید&lt;p dir=&quot;RTL&quot;&gt;اکنون شما آماده‌اید تا واژه‌هایتان را بیابید! شما می‌توانید در قاب سمت چپ در این پنجره یا &lt;a href=&quot;Working with popup&quot;&gt;واژه‌هایتان را از دیگر پنجره‌های فعال بیابید&lt;/a&gt;. &lt;p dir=&quot;RTL&quot;&gt;برای شخصی‌سازی برنامه، ترجیحات موجود در &lt;b&gt;ویرایش|ترجیحات&lt;/b&gt; را بررسی کنید. همه تنظیمات راهنمای ابزار دارند، اگر از چیزی مطمئن نیستید آن‌ها را بخوانید.&lt;p dir=&quot;RTL&quot;&gt;اگر به راهنمایی بیش‌تری نیاز دارید یا به نظرهای دیگران علاقه‌مند هستید، بفرمایید به &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;انجمن برنامه&lt;/a&gt;.&lt;p dir=&quot;RTL&quot;&gt; برای به‌روزرسانی‌ها &lt;a href=&quot;http://goldendict.org/&quot;&gt;وب‌سایت برنامه&lt;/a&gt; را بررسی کنید.&lt;p dir=&quot;RTL&quot;&gt;© ۲۰۰۸-۲۰۱۳ کنستانتین ایساکوف. تحت لیسانس GPLv3 یا بالاتر.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="229"/>
@@ -303,7 +303,7 @@
         <location filename="../articleview.cc" line="1384"/>
         <location filename="../articleview.cc" line="1416"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation>&amp;افزودن &quot;%1&quot; به تاریخ‌چه</translation>
+        <translation>&amp;افزودن &quot;%1&quot; به پیشینه</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1398"/>
@@ -991,7 +991,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation>تاریخ‌چه:</translation>
+        <translation>پیشینه:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="219"/>
@@ -1001,7 +1001,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="223"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation>اندازه تاریخ‌چه: %1 ورودی فراتر از بیشینه %2</translation>
+        <translation>اندازه پیشینه: %1 ورودی فراتر از بیشینه %2</translation>
     </message>
 </context>
 <context>
@@ -2099,7 +2099,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>&amp;Help</source>
-        <translation>&amp;راه‌نما</translation>
+        <translation>&amp;راهنما</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
@@ -2114,7 +2114,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
-        <translation>&amp;تاریخ‌چه</translation>
+        <translation>پی&amp;شینه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
@@ -2129,7 +2129,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation>قاب &amp;تاریخ‌چه</translation>
+        <translation>قاب &amp;پیشینه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
@@ -2144,7 +2144,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>&amp;Preferences...</source>
-        <translation>ترجی&amp;حات...</translation>
+        <translation>&amp;ترجیحات...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="337"/>
@@ -2567,7 +2567,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3391"/>
         <source>Export history to file</source>
-        <translation>صادر کردن تاریخ‌چه به پرونده</translation>
+        <translation>صادر کردن پیشینه به پرونده</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3393"/>
@@ -2578,7 +2578,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3432"/>
         <source>History export complete</source>
-        <translation>صادر کردن تاریخ‌چه کامل شد</translation>
+        <translation>صادر کردن پیشینه کامل شد</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3435"/>
@@ -2588,7 +2588,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3453"/>
         <source>Import history from file</source>
-        <translation>وارد کردن تاریخ‌چه از پرونده</translation>
+        <translation>وارد کردن پیشینه از پرونده</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3502"/>
@@ -2598,7 +2598,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3506"/>
         <source>History import complete</source>
-        <translation>وارد کردن تاریخ‌چه کامل شد</translation>
+        <translation>وارد کردن پیشینه کامل شد</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3509"/>
@@ -3357,32 +3357,32 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1164"/>
         <source>History</source>
-        <translation>تاریخ‌چه</translation>
+        <translation>پیشینه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1170"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation>برای نگه‌داری تاریخ‌چه واژه‌های ترجمه شده این گزینه را روشن کنید</translation>
+        <translation>برای نگه‌داری پیشینه واژه‌های ترجمه شده این گزینه را روشن کنید</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1173"/>
         <source>Store &amp;history</source>
-        <translation>نگه‌داری &amp;تاریخ‌چه</translation>
+        <translation>نگه‌داری &amp;پیشینه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1188"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation>بیشینه شمار ورودی برای نگه‌داری در تاریخ‌چه را تعیین می‌کند.</translation>
+        <translation>بیشینه شمار ورودی برای نگه‌داری در پیشینه را تعیین می‌کند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1191"/>
         <source>Maximum history size:</source>
-        <translation>بیشینه اندازه تاریخ‌چه:</translation>
+        <translation>بیشینه اندازه پیشینه:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1228"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation>وقفه ذخیره تاریخ‌چه. اگر ۰ قرار داده شود تاریخ‌چه تنها هنگام ترک برنامه ذخیره خواهد شد.</translation>
+        <translation>وقفه ذخیره پیشینه. اگر ۰ قرار داده شود پیشینه تنها هنگام ترک برنامه ذخیره خواهد شد.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
