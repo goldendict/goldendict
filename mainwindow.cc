@@ -805,6 +805,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.centralWidget->grabGesture( Gestures::GDPinchGestureType );
   ui.centralWidget->grabGesture( Gestures::GDSwipeGestureType );
 #endif
+
+  if( layoutDirection() == Qt::RightToLeft )
+  {
+    // Adjust button icons for Right-To-Left layout
+    navBack->setIcon( QIcon( ":/icons/next.png" ) );
+    navForward->setIcon( QIcon( ":/icons/previous.png" ) );
+  }
 }
 
 void MainWindow::ctrlTabPressed()

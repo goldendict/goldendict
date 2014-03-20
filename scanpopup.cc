@@ -57,6 +57,13 @@ ScanPopup::ScanPopup( QWidget * parent,
 {
   ui.setupUi( this );
 
+  if( layoutDirection() == Qt::RightToLeft )
+  {
+    // Adjust button icons for Right-To-Left layout
+    ui.goBackButton->setIcon( QIcon( ":/icons/next.png" ) );
+    ui.goForwardButton->setIcon( QIcon( ":/icons/previous.png" ) );
+  }
+
   mainStatusBar = new MainStatusBar( this );
 
   ui.queryError->hide();
