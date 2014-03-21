@@ -362,7 +362,7 @@ QString const& DictdDictionary::getDescription()
     if( !dictionaryDescription.isEmpty() )
         return dictionaryDescription;
 
-    sptr< Dictionary::DataRequest > req = getArticle( gd::__nativeToWs( L"00databaseinfo" ),
+    sptr< Dictionary::DataRequest > req = getArticle( GD_NATIVE_TO_WS( L"00databaseinfo" ),
                                                       vector< wstring >(), wstring() );
 
     if( req->dataSize() > 0 )
