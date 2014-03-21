@@ -17,8 +17,10 @@
 //////////////////////////////////////////////////////////////////////////
 
 QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
-  QtSingleApplication( argc, argv ),
-  mainWindow( 0 )
+  QtSingleApplication( argc, argv )
+#ifdef Q_OS_WIN32
+,  mainWindow( 0 )
+#endif
 {
 }
 
