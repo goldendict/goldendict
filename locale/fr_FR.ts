@@ -527,107 +527,107 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode de recherche</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>Détermine la façon dont le filtre sera interprété</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>La casse des caractères sera considérée lors du filtrage</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Respecter la casse</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistre les vedettes dans un fichier</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="91"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Applique le filtre à la liste de vedettes</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="94"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="107"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les changements de filtre seront automatiquement appliqués à la liste de vedettes</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="110"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer automatiquement</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre :</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="124"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre (chaîne de caractères, opérateurs de cardinalité ou expression régulière)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="29"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="30"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Opérateurs de cardinalité</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="31"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Expression régulière</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="214"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Total de vedettes uniques : %1, %2 filtrées</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="231"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer les vedettes dans un fichier</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="233"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Fichiers texte (*.txt);;Tous les fichiers (*.*)</translation>
+        <translation>Fichiers texte (*.txt);;Tous les fichiers (*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="257"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les vedettes ...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="257"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
@@ -675,12 +675,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer toutes les vedettes uniques du dictionnaire</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Vedettes</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -727,7 +727,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Vedettes du dictionnaire</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -975,12 +975,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Grouper les onglets</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir la liste de groupes</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
@@ -2578,7 +2578,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="857"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaîne à rechercher dans les dictionnaires. Les opérateurs de cardinalité &apos;*&apos;, &apos;?&apos; et les groupes de symboles &apos;[...]&apos; sont autorisés.
+Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos;, utiliser respectivement &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2912"/>
@@ -2706,7 +2707,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3747"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Vedettes du dictionnaire</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3749"/>
@@ -2854,7 +2855,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="268"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Vedettes du dictionnaire</translation>
     </message>
 </context>
 <context>
