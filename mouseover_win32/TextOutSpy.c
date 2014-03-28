@@ -18,7 +18,7 @@ GetWordProc_t GetWordProc = NULL;
 GDDataStruct gds;
 UINT uGdAskMessage;
 WCHAR Buffer[256];
-DWORD ourProcessID;
+DWORD ourProcessID, gdProcessID, winProcessID;
 
 static HWND GetWindowFromPoint(POINT pt)
 {
@@ -90,6 +90,10 @@ LRESULT lr;
 		}
 	}
 
+	// Don't use other methods for GD own windows
+	if( winProcessID == gdProcessID ) 
+		return;
+
 	if( ( flags & GD_FLAG_METHOD_STANDARD ) != 0 && GetWordProc != 0 ) {
 		GlobalData->CurMod.WND = GlobalData->LastWND;
 		GlobalData->CurMod.Pt = GlobalData->LastPt;
@@ -151,7 +155,7 @@ DWORD wso;
 		while( 1 ) {
 			POINT curPt;
 			HWND targetWnd;
-			DWORD winProcessID = 0;
+			winProcessID = 0;
 
 			if( !GetCursorPos( &curPt ) ) 
 				break;
@@ -316,6 +320,7 @@ BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
 				return FALSE;
 			}
 			ourProcessID = GetCurrentProcessId();
+			GetWindowThreadProcessId( GlobalData->ServerWND, &gdProcessID );
 			if(hSynhroMutex==0) {
 				hSynhroMutex = CreateMutex(NULL, FALSE, "GoldenDictTextOutSpyMutex");
 				if(hSynhroMutex==0) {
