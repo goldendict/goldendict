@@ -50,7 +50,7 @@ namespace
 
 }
 
-ProxyServer::ProxyServer(): enabled( false ), type( Socks5 ), port( 3128 )
+ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Socks5 ), port( 3128 )
 {
 }
 
@@ -716,6 +716,7 @@ Class load() throw( exError )
     if ( !proxy.isNull() )
     {
       c.preferences.proxyServer.enabled = ( proxy.toElement().attribute( "enabled" ) == "1" );
+      c.preferences.proxyServer.useSystemProxy = ( proxy.toElement().attribute( "useSystemProxy" ) == "1" );
       c.preferences.proxyServer.type = ( ProxyServer::Type ) proxy.namedItem( "type" ).toElement().text().toULong();
       c.preferences.proxyServer.host = proxy.namedItem( "host" ).toElement().text();
       c.preferences.proxyServer.port = proxy.namedItem( "port" ).toElement().text().toULong();
@@ -1464,6 +1465,10 @@ void save( Class const & c ) throw( exError )
       QDomAttr enabled = dd.createAttribute( "enabled" );
       enabled.setValue( c.preferences.proxyServer.enabled ? "1" : "0" );
       proxy.setAttributeNode( enabled );
+
+      QDomAttr useSystemProxy = dd.createAttribute( "useSystemProxy" );
+      useSystemProxy.setValue( c.preferences.proxyServer.useSystemProxy ? "1" : "0" );
+      proxy.setAttributeNode( useSystemProxy );
 
       opt = dd.createElement( "type" );
       opt.appendChild( dd.createTextNode( QString::number( c.preferences.proxyServer.type ) ) );

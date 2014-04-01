@@ -116,6 +116,7 @@ struct Groups: public QVector< Group >
 struct ProxyServer
 {
   bool enabled;
+  bool useSystemProxy;
 
   enum Type
   {

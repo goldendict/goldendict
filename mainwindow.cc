@@ -1086,6 +1086,13 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 
 void MainWindow::applyProxySettings()
 {
+  if( cfg.preferences.proxyServer.enabled && cfg.preferences.proxyServer.useSystemProxy )
+  {
+    QNetworkProxyFactory::setUseSystemConfiguration( true );
+    return;
+  }
+  QNetworkProxyFactory::setUseSystemConfiguration( false );
+
   QNetworkProxy::ProxyType type = QNetworkProxy::NoProxy;
 
   if ( cfg.preferences.proxyServer.enabled )
