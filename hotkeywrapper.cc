@@ -27,6 +27,9 @@ QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
 QHotkeyApplication::QHotkeyApplication( QString const & id,
                                         int & argc, char ** argv ):
   QtSingleApplication( id, argc, argv )
+#ifdef Q_OS_WIN32
+,  mainWindow( 0 )
+#endif
 {
 }
 
