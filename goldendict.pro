@@ -297,7 +297,8 @@ FORMS += groups.ui \
     editdictionaries.ui \
     orderandprops.ui \
     dictinfo.ui \
-    dictheadwords.ui
+    dictheadwords.ui \
+    authentication.ui
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \

@@ -410,6 +410,8 @@ private slots:
 
   void focusHeadwordsDialog();
 
+  void proxyAuthentication( const QNetworkProxy & proxy, QAuthenticator * authenticator );
+
 signals:
   /// Set optional parts expand mode for all tabs
   void setExpandOptionalParts( bool expand );

@@ -31,6 +31,7 @@
 #include <QThreadPool>
 #include <QSslConfiguration>
 #include <QDesktopWidget>
+#include "ui_authentication.h"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -704,6 +705,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   applyProxySettings();
   applyWebSettings();
 
+  connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
+           this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
+
+  connect( &articleNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
+           this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
+
   makeDictionaries();
 
   // After we have dictionaries and groups, we can populate history
@@ -1088,10 +1095,15 @@ void MainWindow::applyProxySettings()
 {
   if( cfg.preferences.proxyServer.enabled && cfg.preferences.proxyServer.useSystemProxy )
   {
-    QNetworkProxyFactory::setUseSystemConfiguration( true );
+    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery();
+    if( !cfg.preferences.proxyServer.systemProxyUser.isEmpty() )
+    {
+      proxies.first().setUser( cfg.preferences.proxyServer.systemProxyUser );
+      proxies.first().setPassword( cfg.preferences.proxyServer.systemProxyPassword );
+    }
+    QNetworkProxy::setApplicationProxy( proxies.first() );
     return;
   }
-  QNetworkProxyFactory::setUseSystemConfiguration( false );
 
   QNetworkProxy::ProxyType type = QNetworkProxy::NoProxy;
 
@@ -1849,6 +1861,8 @@ void MainWindow::editPreferences()
 #ifndef Q_WS_X11
     p.trackClipboardChanges = cfg.preferences.trackClipboardChanges;
 #endif
+    p.proxyServer.systemProxyUser = cfg.preferences.proxyServer.systemProxyUser;
+    p.proxyServer.systemProxyPassword = cfg.preferences.proxyServer.systemProxyPassword;
 
     bool needReload = false;
 
@@ -3811,6 +3825,57 @@ void MainWindow::sendWordToInputLine( const QString & word )
 void MainWindow::storeResourceSavePath( const QString & newPath )
 {
   cfg.resourceSavePath = newPath;
+}
+
+void MainWindow::proxyAuthentication( const QNetworkProxy &,
+                                      QAuthenticator * authenticator )
+{
+  QNetworkProxy proxy = QNetworkProxy::applicationProxy();
+
+  QString * userStr, * passwordStr;
+  if( cfg.preferences.proxyServer.useSystemProxy )
+  {
+    userStr = &cfg.preferences.proxyServer.systemProxyUser;
+    passwordStr = &cfg.preferences.proxyServer.systemProxyPassword;
+  }
+  else
+  {
+    userStr = &cfg.preferences.proxyServer.user;
+    passwordStr = &cfg.preferences.proxyServer.password;
+  }
+
+  if( proxy.user().isEmpty() && !userStr->isEmpty() )
+  {
+    authenticator->setUser( *userStr );
+    authenticator->setPassword( *passwordStr );
+
+    proxy.setUser( *userStr );
+    proxy.setPassword( *passwordStr );
+    QNetworkProxy::setApplicationProxy( proxy );
+  }
+  else
+  {
+    QDialog dlg;
+    Ui::Dialog ui;
+    ui.setupUi( &dlg );
+    dlg.adjustSize();
+
+    ui.userEdit->setText( *userStr );
+    ui.passwordEdit->setText( *passwordStr );
+
+    if ( dlg.exec() == QDialog::Accepted )
+    {
+      *userStr = ui.userEdit->text();
+      *passwordStr = ui.passwordEdit->text();
+
+      authenticator->setUser( *userStr );
+      authenticator->setPassword( *passwordStr );
+
+      proxy.setUser( *userStr );
+      proxy.setPassword( *passwordStr );
+      QNetworkProxy::setApplicationProxy( proxy );
+    }
+  }
 }
 
 #ifdef Q_OS_WIN32

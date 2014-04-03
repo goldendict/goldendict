@@ -722,6 +722,8 @@ Class load() throw( exError )
       c.preferences.proxyServer.port = proxy.namedItem( "port" ).toElement().text().toULong();
       c.preferences.proxyServer.user = proxy.namedItem( "user" ).toElement().text();
       c.preferences.proxyServer.password = proxy.namedItem( "password" ).toElement().text();
+      c.preferences.proxyServer.systemProxyUser = proxy.namedItem( "systemProxyUser" ).toElement().text();
+      c.preferences.proxyServer.systemProxyPassword = proxy.namedItem( "systemProxyPassword" ).toElement().text();
     }
 
     if ( !preferences.namedItem( "checkForNewReleases" ).isNull() )
@@ -1488,6 +1490,14 @@ void save( Class const & c ) throw( exError )
 
       opt = dd.createElement( "password" );
       opt.appendChild( dd.createTextNode( c.preferences.proxyServer.password ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "systemProxyUser" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.systemProxyUser ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "systemProxyPassword" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.systemProxyPassword ) );
       proxy.appendChild( opt );
     }
 
