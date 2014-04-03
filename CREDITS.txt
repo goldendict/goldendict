@@ -28,3 +28,4 @@ Panho Ku <maranamho\gmail.com>: Korean translation
 Cris van Minnen: Dutch translation
 Timon Wong <timon86.wang\gmail.com>: MDict (*.mdx/*.mdd) dictionary format
 PICTT Turkmenistan: Turkmen translation
+Hossein Taeb <taeeb2002\yahoo.com> : Persian translation
