@@ -2836,7 +2836,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../preferences.ui" line="99"/>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>هنگامی‌که به‌کار افتاده، یک نشانه در سینی سیستم نمایش داده می‌شود
+        <translation>با به کار انداختن این قسمت، یک نشانه در سینی سیستم نمایش داده ‌شده
 که می‌تواند برای باز کردن پنجره اصلی و انجام دیگر کارها به‌کار برده شود.</translation>
     </message>
     <message>
@@ -2848,7 +2848,7 @@ to open main window and perform other tasks.</source>
         <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>با به‌کار انداختن این، برنامه هنگام آغاز بدون
+        <translation>با به‌کار انداختن این گزینه، برنامه هنگام آغاز بدون
 نمایش پنجره اصلی به سینی سیستم می‌رود.</translation>
     </message>
     <message>
@@ -2860,7 +2860,7 @@ its main window.</source>
         <location filename="../preferences.ui" line="132"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
-        <translation>با به‌کار انداختن این،هر تلاشی برای بستن پنجره
+        <translation>با به‌کار انداختن این گزینه،هر تلاشی برای بستن پنجره
 اصلی به جای بستن برنامه آن‌را پنهان می‌کند.</translation>
     </message>
     <message>
@@ -2888,7 +2888,7 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="164"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation>اگر می‌خواهید واژه‌ها را با تک کلیک موش برگزینید این گزینه را به‌کار اندازید</translation>
+        <translation>اگر می‌خواهید واژه‌ها را با تک کلیک موشواره (موس) برگزینید این گزینه را به‌کار اندازید</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="167"/>
