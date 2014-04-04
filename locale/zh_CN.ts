@@ -403,6 +403,29 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>Dialog</name>
+    <message>
+        <location filename="../authentication.ui" line="14"/>
+        <source>Proxy authentication required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../authentication.ui" line="20"/>
+        <source>You need to supply a Username and a Password to access via proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../authentication.ui" line="30"/>
+        <source>Username:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../authentication.ui" line="40"/>
+        <source>Password:</source>
+        <translation type="unfinished">密码：</translation>
+    </message>
+</context>
+<context>
     <name>DictGroupWidget</name>
     <message>
         <location filename="../dictgroupwidget.ui" line="14"/>
@@ -585,27 +608,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="214"/>
+        <location filename="../dictheadwords.cc" line="219"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="231"/>
+        <location filename="../dictheadwords.cc" line="236"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="233"/>
+        <location filename="../dictheadwords.cc" line="238"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">文本文件 (*.txt);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="257"/>
+        <location filename="../dictheadwords.cc" line="262"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="257"/>
+        <location filename="../dictheadwords.cc" line="262"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
@@ -2121,12 +2144,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1180"/>
+        <location filename="../mainwindow.cc" line="1207"/>
         <source>All</source>
         <translation>全部</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="136"/>
+        <location filename="../mainwindow.cc" line="137"/>
         <source>Back</source>
         <translation>回退</translation>
     </message>
@@ -2135,7 +2158,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">打印预览</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1151"/>
+        <location filename="../mainwindow.cc" line="1178"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>词典数：%1，文章数：%2，词条数：%3</translation>
     </message>
@@ -2156,17 +2179,17 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="367"/>
-        <location filename="../mainwindow.cc" line="326"/>
+        <location filename="../mainwindow.cc" line="327"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3117"/>
+        <location filename="../mainwindow.cc" line="3146"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="163"/>
+        <location filename="../mainwindow.cc" line="164"/>
         <source>Scan Popup</source>
         <translation>屏幕取词</translation>
     </message>
@@ -2181,12 +2204,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>关闭至系统托盘(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3118"/>
+        <location filename="../mainwindow.cc" line="3147"/>
         <source>Can&apos;t save article: %1</source>
         <translation>无法保存文章：%1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="190"/>
+        <location filename="../mainwindow.cc" line="191"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
@@ -2216,7 +2239,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>保存文章(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3103"/>
+        <location filename="../mainwindow.cc" line="3132"/>
         <source>Save Article As</source>
         <translation>文章另存为</translation>
     </message>
@@ -2250,17 +2273,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>主页(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2775"/>
+        <location filename="../mainwindow.cc" line="2804"/>
         <source>New Release Available</source>
         <translation>有新版本可用</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1162"/>
+        <location filename="../mainwindow.cc" line="1189"/>
         <source>Look up:</source>
         <translation>查找：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="196"/>
+        <location filename="../mainwindow.cc" line="197"/>
         <source>Zoom Out</source>
         <translation>缩小</translation>
     </message>
@@ -2269,7 +2292,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">群组...(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="322"/>
+        <location filename="../mainwindow.cc" line="323"/>
         <source>Show &amp;Main Window</source>
         <translation>显示主窗口(&amp;M)</translation>
     </message>
@@ -2279,33 +2302,33 @@ between classic and school orthography in cyrillic)</source>
         <translation>关于 GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2781"/>
+        <location filename="../mainwindow.cc" line="2810"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3011"/>
+        <location filename="../mainwindow.cc" line="3040"/>
         <source>Page Setup</source>
         <translation>页面设置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="240"/>
-        <location filename="../mainwindow.cc" line="1162"/>
+        <location filename="../mainwindow.cc" line="241"/>
+        <location filename="../mainwindow.cc" line="1189"/>
         <source>Look up in:</source>
         <translation>查找于：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="200"/>
+        <location filename="../mainwindow.cc" line="201"/>
         <source>Normal Size</source>
         <translation>正常大小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2638"/>
+        <location filename="../mainwindow.cc" line="2667"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>初始化热键监视机制失败。&lt;br&gt;请确保你的 XServer 已启用 RECORD 扩展。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2776"/>
+        <location filename="../mainwindow.cc" line="2805"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>有新版 GoldenDict 可用，版本为 &lt;b&gt;%1&lt;/b&gt;。&lt;br&gt;
 点击&lt;b&gt;下载&lt;/b&gt;，打开下载页面。</translation>
@@ -2329,12 +2352,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="550"/>
+        <location filename="../mainwindow.cc" line="551"/>
         <source>Loading...</source>
         <translation>加载中……</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1393"/>
+        <location filename="../mainwindow.cc" line="1420"/>
         <source>(untitled)</source>
         <translation>（未命名）</translation>
     </message>
@@ -2349,12 +2372,12 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="729"/>
+        <location filename="../mainwindow.cc" line="736"/>
         <source>Welcome!</source>
         <translation>欢迎使用！</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="178"/>
+        <location filename="../mainwindow.cc" line="179"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>朗读词条(Alt+S)</translation>
     </message>
@@ -2364,12 +2387,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>保存文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2782"/>
+        <location filename="../mainwindow.cc" line="2811"/>
         <source>Skip This Release</source>
         <translation>忽略此次升级</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="138"/>
+        <location filename="../mainwindow.cc" line="139"/>
         <source>Forward</source>
         <translation>前进</translation>
     </message>
@@ -2378,12 +2401,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">警告： %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3030"/>
+        <location filename="../mainwindow.cc" line="3059"/>
         <source>Print Article</source>
         <translation>打印文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3012"/>
+        <location filename="../mainwindow.cc" line="3041"/>
         <source>No printer is available. Please install one first.</source>
         <translation>找不到可用的打印机，请先安装一个打印机。</translation>
     </message>
@@ -2416,37 +2439,37 @@ between classic and school orthography in cyrillic)</source>
         <translation>缩放(&amp;Z)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="308"/>
+        <location filename="../mainwindow.cc" line="309"/>
         <source>Words Zoom In</source>
         <translation>单词列表 - 放大</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="312"/>
+        <location filename="../mainwindow.cc" line="313"/>
         <source>Words Zoom Out</source>
         <translation>单词列表 - 缩小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="314"/>
+        <location filename="../mainwindow.cc" line="315"/>
         <source>Words Normal Size</source>
         <translation>单词列表 - 正常大小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="383"/>
+        <location filename="../mainwindow.cc" line="384"/>
         <source>Close current tab</source>
         <translation>关闭当前标签页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="393"/>
+        <location filename="../mainwindow.cc" line="394"/>
         <source>Close all tabs</source>
         <translation>关闭所有标签页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="401"/>
+        <location filename="../mainwindow.cc" line="402"/>
         <source>Close all tabs except current</source>
         <translation>关闭其它标签页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="372"/>
+        <location filename="../mainwindow.cc" line="373"/>
         <source>Opened tabs</source>
         <translation>已打开的标签页</translation>
     </message>
@@ -2459,7 +2482,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">词典...(&amp;D)   	F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="560"/>
+        <location filename="../mainwindow.cc" line="561"/>
         <source>New Tab</source>
         <translation>新建标签页</translation>
     </message>
@@ -2478,44 +2501,44 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">在工具栏上显示小图标</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="89"/>
+        <location filename="../mainwindow.cc" line="90"/>
         <source>&amp;Menubar</source>
         <translation>菜单栏(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="278"/>
+        <location filename="../mainwindow.cc" line="279"/>
         <source>Found in Dictionaries:</source>
         <translation>在以下词典中找到：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="857"/>
+        <location filename="../mainwindow.cc" line="872"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1335"/>
+        <location filename="../mainwindow.cc" line="1362"/>
         <source>Open Tabs List</source>
         <translation>打开标签页列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1606"/>
+        <location filename="../mainwindow.cc" line="1633"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2912"/>
+        <location filename="../mainwindow.cc" line="2941"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>你选择了隐藏菜单栏，使用 %1 再次显示。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2913"/>
+        <location filename="../mainwindow.cc" line="2942"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3368"/>
+        <location filename="../mainwindow.cc" line="3397"/>
         <source>&amp;Show</source>
         <translation>显示(&amp;S)</translation>
     </message>
@@ -2525,7 +2548,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>导出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3364"/>
+        <location filename="../mainwindow.cc" line="3393"/>
         <source>&amp;Hide</source>
         <translation>隐藏(&amp;H)</translation>
     </message>
@@ -2534,23 +2557,23 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">历史记录查看模式</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3390"/>
+        <location filename="../mainwindow.cc" line="3419"/>
         <source>Export history to file</source>
         <translation>导出历史记录到文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3392"/>
-        <location filename="../mainwindow.cc" line="3454"/>
+        <location filename="../mainwindow.cc" line="3421"/>
+        <location filename="../mainwindow.cc" line="3483"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>文本文件 (*.txt);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3431"/>
+        <location filename="../mainwindow.cc" line="3460"/>
         <source>History export complete</source>
         <translation>历史记录导出完成</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3434"/>
+        <location filename="../mainwindow.cc" line="3463"/>
         <source>Export error: </source>
         <translation>导出错误：</translation>
     </message>
@@ -2565,42 +2588,42 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>导入(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3452"/>
+        <location filename="../mainwindow.cc" line="3481"/>
         <source>Import history from file</source>
         <translation>导入历史文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3501"/>
+        <location filename="../mainwindow.cc" line="3530"/>
         <source>Import error: invalid data in file</source>
         <translation>导入失败：无效数据</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3505"/>
+        <location filename="../mainwindow.cc" line="3534"/>
         <source>History import complete</source>
         <translation>历史导入成功</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3508"/>
+        <location filename="../mainwindow.cc" line="3537"/>
         <source>Import error: </source>
         <translation>导入错误：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3743"/>
+        <location filename="../mainwindow.cc" line="3772"/>
         <source>Dictionary info</source>
         <translation>词典信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3747"/>
+        <location filename="../mainwindow.cc" line="3776"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3749"/>
+        <location filename="../mainwindow.cc" line="3778"/>
         <source>Open dictionary folder</source>
         <translation>打开词典文件夹</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3755"/>
+        <location filename="../mainwindow.cc" line="3784"/>
         <source>Edit dictionary</source>
         <translation>编辑词典信息</translation>
     </message>
@@ -2647,42 +2670,42 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="542"/>
         <location filename="../mainwindow.ui" line="545"/>
-        <location filename="../mainwindow.cc" line="232"/>
+        <location filename="../mainwindow.cc" line="233"/>
         <source>Menu Button</source>
         <translation>菜单按钮</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="87"/>
+        <location filename="../mainwindow.cc" line="88"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation>在词典栏中显示词典名称(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="88"/>
+        <location filename="../mainwindow.cc" line="89"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation>在工具栏上显示小图标(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="133"/>
+        <location filename="../mainwindow.cc" line="134"/>
         <source>&amp;Navigation</source>
         <translation>导航栏(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3099"/>
+        <location filename="../mainwindow.cc" line="3128"/>
         <source>Article, Complete (*.html)</source>
         <translation>文章, 完整 (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3100"/>
+        <location filename="../mainwindow.cc" line="3129"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>文章, 仅 HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3155"/>
+        <location filename="../mainwindow.cc" line="3184"/>
         <source>Saving article...</source>
         <translation>文章保存中……</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3204"/>
+        <location filename="../mainwindow.cc" line="3233"/>
         <source>The main window is set to be always on top.</source>
         <translation>主窗口已设置为总在最前。</translation>
     </message>
@@ -2692,8 +2715,8 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>历史面板(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="788"/>
-        <location filename="../mainwindow.cc" line="2835"/>
+        <location filename="../mainwindow.cc" line="795"/>
+        <location filename="../mainwindow.cc" line="2864"/>
         <source>Accessibility API is not enabled</source>
         <translation>无障碍API未启用</translation>
     </message>
@@ -2887,12 +2910,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>启用系统托盘图标</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="957"/>
+        <location filename="../preferences.ui" line="977"/>
         <source>Host:</source>
         <translation>主机：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="967"/>
+        <location filename="../preferences.ui" line="987"/>
         <source>Port:</source>
         <translation>端口：</translation>
     </message>
@@ -2902,12 +2925,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="947"/>
+        <location filename="../preferences.ui" line="967"/>
         <source>Type:</source>
         <translation>类型：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="988"/>
+        <location filename="../preferences.ui" line="1008"/>
         <source>User:</source>
         <translation>用户名：</translation>
     </message>
@@ -3055,7 +3078,7 @@ in the pressed state when the word selection changes.</source>
         <translation>在当前页之后打开新标签页</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="369"/>
+        <location filename="../preferences.cc" line="387"/>
         <source>Restart the program to apply the language change.</source>
         <translation>变更界面语言需要重新启动程序才能生效。</translation>
     </message>
@@ -3076,7 +3099,7 @@ off from main window or tray icon.</source>
 托盘菜单中选择是否激活屏幕取词功能。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1091"/>
+        <location filename="../preferences.ui" line="1114"/>
         <source>Check for new program releases periodically</source>
         <translation>定期检查可用版本</translation>
     </message>
@@ -3105,7 +3128,7 @@ to open main window and perform other tasks.</source>
         <translation>启用此选项，将会启用系统托盘图标。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1084"/>
+        <location filename="../preferences.ui" line="1107"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -3121,7 +3144,7 @@ download page.</source>
         <translation>开机自动启动</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="998"/>
+        <location filename="../preferences.ui" line="1018"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
@@ -3144,7 +3167,7 @@ seconds, which is specified here.</source>
 被监视。热键监视的秒数可以在这里设置。</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="368"/>
+        <location filename="../preferences.cc" line="386"/>
         <source>Changing Language</source>
         <translation>变更界面语言</translation>
     </message>
@@ -3254,7 +3277,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:2em;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;注意： 你正在运行的 X.Org XServer 版本 RECORD 扩展功能不能正常工作。GoldenDict 中的热键可能因此而失效。问题的解决依赖于 xserver 自身的恢复。请参照如下链接： &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug 记录&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; 并留下评论。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1033"/>
+        <location filename="../preferences.ui" line="1056"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -3263,7 +3286,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
 用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1038"/>
+        <location filename="../preferences.ui" line="1061"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>禁止载入来自其它站点的内容（封杀广告）</translation>
     </message>
@@ -3326,7 +3349,7 @@ With this on however, it will hide the main window.</source>
         <translation>ESC 键隐藏主窗口</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1045"/>
+        <location filename="../preferences.ui" line="1068"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -3334,7 +3357,7 @@ Plugin must be installed for this option to work.</source>
 安装相应插件才能使此选项正常工作。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1050"/>
+        <location filename="../preferences.ui" line="1073"/>
         <source>Enable web plugins</source>
         <translation>启用 web 插件</translation>
     </message>
@@ -3379,28 +3402,43 @@ Plugin must be installed for this option to work.</source>
         <translation>使用内置播放器</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1057"/>
+        <location filename="../preferences.ui" line="945"/>
+        <source>System proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="952"/>
+        <source>Custom proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="959"/>
+        <source>Custom settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1080"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation>部分网站屏蔽了使用 GoldenDict 浏览器标识（UA）的请求，启用此选项以绕过该问题。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1061"/>
+        <location filename="../preferences.ui" line="1084"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
         <translation>不使用 GoldenDict 浏览器标识（UA）</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1112"/>
+        <location filename="../preferences.ui" line="1135"/>
         <source>Ad&amp;vanced</source>
         <translation>高级(&amp;v)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1118"/>
+        <location filename="../preferences.ui" line="1141"/>
         <source>ScanPopup extra technologies</source>
         <translation>附加取词技术</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1124"/>
+        <location filename="../preferences.ui" line="1147"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3410,12 +3448,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1130"/>
+        <location filename="../preferences.ui" line="1153"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>使用 &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1137"/>
+        <location filename="../preferences.ui" line="1160"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3424,12 +3462,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1142"/>
+        <location filename="../preferences.ui" line="1165"/>
         <source>Use &amp;UIAutomation</source>
         <translation>使用 &amp;UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1149"/>
+        <location filename="../preferences.ui" line="1172"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3438,32 +3476,32 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 如果你不使用此类程序，则不需要启用此选项。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1154"/>
+        <location filename="../preferences.ui" line="1177"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>使用 &amp;GoldenDict message</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1282"/>
+        <location filename="../preferences.ui" line="1305"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>开启此选项以自动展开文章的可选部分</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1285"/>
+        <location filename="../preferences.ui" line="1308"/>
         <source>Expand optional &amp;parts</source>
         <translation>展开可选部分(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1294"/>
+        <location filename="../preferences.ui" line="1317"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>开启此选项以自动收起过长的文章</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1297"/>
+        <location filename="../preferences.ui" line="1320"/>
         <source>Collapse articles more than</source>
         <translation>收起大于</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1304"/>
+        <location filename="../preferences.ui" line="1327"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>大于此大小的文章将被收起</translation>
     </message>
@@ -3472,7 +3510,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="obsolete">大于此大小的文章将被收起</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1320"/>
+        <location filename="../preferences.ui" line="1343"/>
         <source>symbols</source>
         <translation>字符的文章</translation>
     </message>
@@ -3487,22 +3525,22 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Babylon</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1164"/>
+        <location filename="../preferences.ui" line="1187"/>
         <source>History</source>
         <translation>历史</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1170"/>
+        <location filename="../preferences.ui" line="1193"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>开启此选项已保存查询历史</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1173"/>
+        <location filename="../preferences.ui" line="1196"/>
         <source>Store &amp;history</source>
         <translation>保存历史(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1276"/>
+        <location filename="../preferences.ui" line="1299"/>
         <source>Articles</source>
         <translation>文章</translation>
     </message>
@@ -3531,27 +3569,27 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <translation>附加样式：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1188"/>
+        <location filename="../preferences.ui" line="1211"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>指定历史最大条数。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1191"/>
+        <location filename="../preferences.ui" line="1214"/>
         <source>Maximum history size:</source>
         <translation>最大历史条数：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1228"/>
+        <location filename="../preferences.ui" line="1251"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>历史保存周期。若为 0 则只在程序退出时保存。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1234"/>
+        <location filename="../preferences.ui" line="1257"/>
         <source>Save every</source>
         <translation>保存周期：</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1251"/>
+        <location filename="../preferences.ui" line="1274"/>
         <source>minutes</source>
         <translation>分钟</translation>
     </message>
@@ -3876,8 +3914,8 @@ could be resized or managed in other ways.</source>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="494"/>
-        <location filename="../scanpopup.cc" line="839"/>
+        <location filename="../scanpopup.cc" line="501"/>
+        <location filename="../scanpopup.cc" line="846"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>

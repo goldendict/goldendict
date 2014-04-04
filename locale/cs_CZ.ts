@@ -342,6 +342,25 @@ a školní ortografií v cyrilici)</translation>
     </message>
 </context>
 <context>
+    <name>Dialog</name>
+    <message>
+        <source>Proxy authentication required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need to supply a Username and a Password to access via proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished">Heslo:</translation>
+    </message>
+</context>
+<context>
     <name>DictGroupWidget</name>
     <message>
         <source>Form</source>
@@ -3696,6 +3715,18 @@ Povolením této volby problém obejdete.</translation>
     <message>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Články delší než tato velikost budou sbaleny</translation>
+    </message>
+    <message>
+        <source>System proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
