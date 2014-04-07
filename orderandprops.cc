@@ -251,23 +251,15 @@ void OrderAndProps::contextMenuRequested( const QPoint & pos )
   menu.addAction( sortLangAction );
 
   QAction * showHeadwordsAction = NULL;
-  QVariant value = ui.dictionaryOrder->getModel()->data( ui.dictionaryOrder->indexAt( pos ), Qt::EditRole );
-  QString id;
-  if( value.canConvert< QString >() )
-    id = value.toString();
 
-  if( !id.isEmpty() )
+  QModelIndex idx = ui.searchLine->mapToSource( ui.dictionaryOrder->indexAt( pos ) );
+  sptr< Dictionary::Class > dict;
+  if( idx.isValid() && (unsigned)idx.row() < ui.dictionaryOrder->getCurrentDictionaries().size() )
+    dict = ui.dictionaryOrder->getCurrentDictionaries()[ idx.row() ];
+  if ( dict && dict->getWordCount() > 0 )
   {
-    vector< sptr< Dictionary::Class > > const & dicts = ui.dictionaryOrder->getCurrentDictionaries();
-    unsigned n;
-    for( n = 0; n < dicts.size(); n++ )
-      if( id.compare( QString::fromUtf8( dicts.at( n )->getId().c_str() ) ) == 0 )
-        break;
-    if( n < dicts.size()  && dicts.at( n )->getWordCount() > 0 )
-    {
-      showHeadwordsAction = new QAction( tr( "Dictionary headwords" ), &menu );
-      menu.addAction( showHeadwordsAction );
-    }
+    showHeadwordsAction = new QAction( tr( "Dictionary headwords" ), &menu );
+    menu.addAction( showHeadwordsAction );
   }
 
   QAction * result = menu.exec( ui.dictionaryOrder->mapToGlobal( pos ) );
@@ -284,6 +276,6 @@ void OrderAndProps::contextMenuRequested( const QPoint & pos )
 
   if( result && result == showHeadwordsAction )
   {
-    emit showDictionaryHeadwords( id );
+    emit showDictionaryHeadwords( QString::fromUtf8( dict->getId().c_str() ) );
   }
 }
