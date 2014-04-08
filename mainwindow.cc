@@ -945,8 +945,6 @@ MainWindow::~MainWindow()
   }
 
   commitData();
-
-  history.save();
 }
 
 void MainWindow::commitData( QSessionManager & )
@@ -970,6 +968,8 @@ void MainWindow::commitData()
 
     // Save any changes in last chosen groups etc
     Config::save( cfg );
+
+    history.save();
   }
 }
 
