@@ -1781,6 +1781,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
 
   wordFinder.clear();
   dictionariesUnmuted.clear();
@@ -1843,6 +1844,7 @@ void MainWindow::editPreferences()
 {
   hotkeyWrapper.reset(); // So we could use the keys it hooks
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
 
   Preferences preferences( this, cfg.preferences );
 
@@ -3201,6 +3203,7 @@ void MainWindow::on_rescanFiles_triggered()
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
 
   groupInstances.clear(); // Release all the dictionaries they hold
   dictionaries.clear();
