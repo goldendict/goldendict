@@ -807,7 +807,7 @@ void BglArticleRequest::run()
            .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
                      "\\1bword:" )
           //remove invalid width, height attrs
-          .replace(QRegExp( "(width)|(height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
+          .replace(QRegExp( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
                    "" )
           //remove invalid <br> tag
           .replace( QRegExp( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)", Qt::CaseInsensitive ),
