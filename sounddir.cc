@@ -415,7 +415,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::SoundDirs const & 
       continue; // No such dir, no dictionary then
 
     vector< string > dictFiles( 1,
-      QDir::toNativeSeparators( dir.canonicalPath() ).toLocal8Bit().data() );
+      FsEncoding::encode( QDir::toNativeSeparators( dir.canonicalPath() ) ) );
 
     dictFiles.push_back( "SoundDir" ); // A mixin
 

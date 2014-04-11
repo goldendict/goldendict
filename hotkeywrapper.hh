@@ -216,8 +216,13 @@ protected:
 #else // IS_QT_5
   virtual bool winEventFilter ( MSG * message, long * result );
 #endif // IS_QT_5
-#endif // Q_OS_WIN32
 
+  QWidget * mainWindow;
+public:
+  void setMainWindow( QWidget * widget )
+  { mainWindow = widget; }
+protected:
+#endif // Q_OS_WIN32
   QList<HotkeyWrapper*> hotkeyWrappers;
 };
 

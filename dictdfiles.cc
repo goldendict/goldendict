@@ -118,6 +118,8 @@ public:
                                                       vector< wstring > const & alts,
                                                       wstring const & )
     throw( std::exception );
+
+  virtual QString const& getDescription();
 };
 
 DictdDictionary::DictdDictionary( string const & id,
@@ -353,6 +355,22 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
   {
     return new Dictionary::DataRequestInstant( QString( e.what() ) );
   }
+}
+
+QString const& DictdDictionary::getDescription()
+{
+    if( !dictionaryDescription.isEmpty() )
+        return dictionaryDescription;
+
+    sptr< Dictionary::DataRequest > req = getArticle( GD_NATIVE_TO_WS( L"00databaseinfo" ),
+                                                      vector< wstring >(), wstring() );
+
+    if( req->dataSize() > 0 )
+      dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ) );
+    else
+      dictionaryDescription = "NONE";
+
+    return dictionaryDescription;
 }
 
 } // anonymous namespace

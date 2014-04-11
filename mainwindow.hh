@@ -410,6 +410,8 @@ private slots:
 
   void focusHeadwordsDialog();
 
+  void proxyAuthentication( const QNetworkProxy & proxy, QAuthenticator * authenticator );
+
 signals:
   /// Set optional parts expand mode for all tabs
   void setExpandOptionalParts( bool expand );
@@ -421,11 +423,8 @@ signals:
   /// For receiving message from scan libraries
 protected:
   unsigned gdAskMessage;
-
-  // Qt4: winEvent
-  // Qt5: nativeEvent
-  bool nativeEvent( const QByteArray & eventType, void * message, long * result );
-  bool winEvent( MSG * message, long * result );
+public:
+  bool handleGDMessage( MSG * message, long * result );
 
 private slots:
   /// Return true while scanning GoldenDict window

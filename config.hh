@@ -116,6 +116,7 @@ struct Groups: public QVector< Group >
 struct ProxyServer
 {
   bool enabled;
+  bool useSystemProxy;
 
   enum Type
   {
@@ -127,6 +128,7 @@ struct ProxyServer
   QString host;
   unsigned port;
   QString user, password;
+  QString systemProxyUser, systemProxyPassword;
 
   ProxyServer();
 };

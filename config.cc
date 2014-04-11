@@ -51,7 +51,7 @@ namespace
 
 }
 
-ProxyServer::ProxyServer(): enabled( false ), type( Socks5 ), port( 3128 )
+ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Socks5 ), port( 3128 )
 {
 }
 
@@ -717,11 +717,14 @@ Class load() throw( exError )
     if ( !proxy.isNull() )
     {
       c.preferences.proxyServer.enabled = ( proxy.toElement().attribute( "enabled" ) == "1" );
+      c.preferences.proxyServer.useSystemProxy = ( proxy.toElement().attribute( "useSystemProxy" ) == "1" );
       c.preferences.proxyServer.type = ( ProxyServer::Type ) proxy.namedItem( "type" ).toElement().text().toULong();
       c.preferences.proxyServer.host = proxy.namedItem( "host" ).toElement().text();
       c.preferences.proxyServer.port = proxy.namedItem( "port" ).toElement().text().toULong();
       c.preferences.proxyServer.user = proxy.namedItem( "user" ).toElement().text();
       c.preferences.proxyServer.password = proxy.namedItem( "password" ).toElement().text();
+      c.preferences.proxyServer.systemProxyUser = proxy.namedItem( "systemProxyUser" ).toElement().text();
+      c.preferences.proxyServer.systemProxyPassword = proxy.namedItem( "systemProxyPassword" ).toElement().text();
     }
 
     if ( !preferences.namedItem( "checkForNewReleases" ).isNull() )
@@ -1466,6 +1469,10 @@ void save( Class const & c ) throw( exError )
       enabled.setValue( c.preferences.proxyServer.enabled ? "1" : "0" );
       proxy.setAttributeNode( enabled );
 
+      QDomAttr useSystemProxy = dd.createAttribute( "useSystemProxy" );
+      useSystemProxy.setValue( c.preferences.proxyServer.useSystemProxy ? "1" : "0" );
+      proxy.setAttributeNode( useSystemProxy );
+
       opt = dd.createElement( "type" );
       opt.appendChild( dd.createTextNode( QString::number( c.preferences.proxyServer.type ) ) );
       proxy.appendChild( opt );
@@ -1484,6 +1491,14 @@ void save( Class const & c ) throw( exError )
 
       opt = dd.createElement( "password" );
       opt.appendChild( dd.createTextNode( c.preferences.proxyServer.password ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "systemProxyUser" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.systemProxyUser ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "systemProxyPassword" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.systemProxyPassword ) );
       proxy.appendChild( opt );
     }
 

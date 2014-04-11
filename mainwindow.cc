@@ -41,6 +41,7 @@
 #include "historypanewidget.hh"
 #include "qt4x5.hh"
 #include <QDesktopWidget>
+#include "ui_authentication.h"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -714,6 +715,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   applyProxySettings();
   applyWebSettings();
 
+  connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
+           this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
+
+  connect( &articleNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
+           this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
+
   makeDictionaries();
 
   // After we have dictionaries and groups, we can populate history
@@ -808,12 +815,20 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   #endif
 #ifdef Q_OS_WIN32
   gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
+  ( static_cast< QHotkeyApplication * >( qApp ) )->setMainWindow( this );
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.centralWidget->grabGesture( Gestures::GDPinchGestureType );
   ui.centralWidget->grabGesture( Gestures::GDSwipeGestureType );
 #endif
+
+  if( layoutDirection() == Qt::RightToLeft )
+  {
+    // Adjust button icons for Right-To-Left layout
+    navBack->setIcon( QIcon( ":/icons/next.png" ) );
+    navForward->setIcon( QIcon( ":/icons/previous.png" ) );
+  }
 }
 
 void MainWindow::ctrlTabPressed()
@@ -940,8 +955,6 @@ MainWindow::~MainWindow()
   }
 
   commitData();
-
-  history.save();
 }
 
 void MainWindow::commitData( QSessionManager & )
@@ -965,6 +978,8 @@ void MainWindow::commitData()
 
     // Save any changes in last chosen groups etc
     Config::save( cfg );
+
+    history.save();
   }
 }
 
@@ -1088,6 +1103,18 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 
 void MainWindow::applyProxySettings()
 {
+  if( cfg.preferences.proxyServer.enabled && cfg.preferences.proxyServer.useSystemProxy )
+  {
+    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery();
+    if( !cfg.preferences.proxyServer.systemProxyUser.isEmpty() )
+    {
+      proxies.first().setUser( cfg.preferences.proxyServer.systemProxyUser );
+      proxies.first().setPassword( cfg.preferences.proxyServer.systemProxyPassword );
+    }
+    QNetworkProxy::setApplicationProxy( proxies.first() );
+    return;
+  }
+
   QNetworkProxy::ProxyType type = QNetworkProxy::NoProxy;
 
   if ( cfg.preferences.proxyServer.enabled )
@@ -1764,6 +1791,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
 
   wordFinder.clear();
   dictionariesUnmuted.clear();
@@ -1826,6 +1854,7 @@ void MainWindow::editPreferences()
 {
   hotkeyWrapper.reset(); // So we could use the keys it hooks
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
 
   Preferences preferences( this, cfg.preferences );
 
@@ -1844,6 +1873,8 @@ void MainWindow::editPreferences()
 #ifndef Q_WS_X11
     p.trackClipboardChanges = cfg.preferences.trackClipboardChanges;
 #endif
+    p.proxyServer.systemProxyUser = cfg.preferences.proxyServer.systemProxyUser;
+    p.proxyServer.systemProxyPassword = cfg.preferences.proxyServer.systemProxyPassword;
 
     bool needReload = false;
 
@@ -3182,6 +3213,7 @@ void MainWindow::on_rescanFiles_triggered()
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
 
   groupInstances.clear(); // Release all the dictionaries they hold
   dictionaries.clear();
@@ -3808,19 +3840,68 @@ void MainWindow::storeResourceSavePath( const QString & newPath )
   cfg.resourceSavePath = newPath;
 }
 
-#ifdef Q_OS_WIN32
-
-bool MainWindow::nativeEvent( const QByteArray & eventType, void * message, long * result )
+void MainWindow::proxyAuthentication( const QNetworkProxy &,
+                                      QAuthenticator * authenticator )
 {
-  Q_UNUSED( eventType );
-  return winEvent( reinterpret_cast<MSG *>( message ), result );
+  QNetworkProxy proxy = QNetworkProxy::applicationProxy();
+
+  QString * userStr, * passwordStr;
+  if( cfg.preferences.proxyServer.useSystemProxy )
+  {
+    userStr = &cfg.preferences.proxyServer.systemProxyUser;
+    passwordStr = &cfg.preferences.proxyServer.systemProxyPassword;
+  }
+  else
+  {
+    userStr = &cfg.preferences.proxyServer.user;
+    passwordStr = &cfg.preferences.proxyServer.password;
+  }
+
+  if( proxy.user().isEmpty() && !userStr->isEmpty() )
+  {
+    authenticator->setUser( *userStr );
+    authenticator->setPassword( *passwordStr );
+
+    proxy.setUser( *userStr );
+    proxy.setPassword( *passwordStr );
+    QNetworkProxy::setApplicationProxy( proxy );
+  }
+  else
+  {
+    QDialog dlg;
+    Ui::Dialog ui;
+    ui.setupUi( &dlg );
+    dlg.adjustSize();
+
+    ui.userEdit->setText( *userStr );
+    ui.passwordEdit->setText( *passwordStr );
+
+    if ( dlg.exec() == QDialog::Accepted )
+    {
+      *userStr = ui.userEdit->text();
+      *passwordStr = ui.passwordEdit->text();
+
+      authenticator->setUser( *userStr );
+      authenticator->setPassword( *passwordStr );
+
+      proxy.setUser( *userStr );
+      proxy.setPassword( *passwordStr );
+      QNetworkProxy::setApplicationProxy( proxy );
+    }
+  }
 }
 
-bool MainWindow::winEvent( MSG * message, long * result )
+#ifdef Q_OS_WIN32
+
+bool MainWindow::handleGDMessage( MSG * message, long * result )
 {
   if( message->message != gdAskMessage )
     return false;
   *result = 0;
+
+  if( !isGoldenDictWindow( message->hwnd ) )
+    return true;
+
   ArticleView * view = getCurrentArticleView();
   if( !view )
     return true;
@@ -3830,12 +3911,6 @@ bool MainWindow::winEvent( MSG * message, long * result )
   QString str = view->wordAtPoint( lpdata->Pt.x, lpdata->Pt.y );
 
   memset( lpdata->cwData, 0, lpdata->dwMaxLength * sizeof( WCHAR ) );
-  if( str.isRightToLeft() )
-  {
-    gd::wstring wstr = gd::toWString( str );
-    wstr.assign( wstr.rbegin(), wstr.rend() );
-    str = gd::toQString( wstr );
-  }
   str.truncate( lpdata->dwMaxLength - 1 );
   str.toWCharArray( lpdata->cwData );
 
@@ -3845,7 +3920,7 @@ bool MainWindow::winEvent( MSG * message, long * result )
 
 bool MainWindow::isGoldenDictWindow( HWND hwnd )
 {
-    return hwnd == (HWND)winId();
+  return hwnd == winId() || hwnd == ui.centralWidget->winId();
 }
 
 #endif

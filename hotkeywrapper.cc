@@ -15,10 +15,17 @@
 #include <X11/Xlibint.h>
 #endif
 
+#ifdef Q_OS_WIN32
+#include "mainwindow.hh"
+#endif
+
 //////////////////////////////////////////////////////////////////////////
 
 QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
   QtSingleApplication( argc, argv )
+#ifdef Q_OS_WIN32
+,  mainWindow( 0 )
+#endif
 {
 #if defined( Q_OS_WIN ) && IS_QT_5
   installNativeEventFilter( this );
@@ -28,6 +35,9 @@ QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
 QHotkeyApplication::QHotkeyApplication( QString const & id,
                                         int & argc, char ** argv ):
   QtSingleApplication( id, argc, argv )
+#ifdef Q_OS_WIN32
+,  mainWindow( 0 )
+#endif
 {
 #if defined( Q_OS_WIN ) && IS_QT_5
   installNativeEventFilter( this );
@@ -411,6 +421,12 @@ bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
       if ( hotkeyWrappers.at(i)->winEvent( message, result ) )
         return true;
     }
+  }
+
+  if( mainWindow )
+  {
+    if( ( static_cast< MainWindow * >( mainWindow ) )->handleGDMessage( message, result ) )
+      return true;
   }
 
   return QApplication::winEventFilter( message, result );

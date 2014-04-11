@@ -200,6 +200,23 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.proxyUser->setText( p.proxyServer.user );
   ui.proxyPassword->setText( p.proxyServer.password );
 
+  if( p.proxyServer.useSystemProxy )
+  {
+    ui.systemProxy->setChecked( true );
+    ui.customSettingsGroup->setEnabled( false );
+  }
+  else
+  {
+    ui.customProxy->setChecked( true );
+    ui.customSettingsGroup->setEnabled( p.proxyServer.enabled );
+  }
+
+  connect( ui.customProxy, SIGNAL( toggled( bool ) ),
+           this, SLOT( customProxyToggled( bool ) ) );
+
+  connect( ui.useProxyServer, SIGNAL( toggled( bool ) ),
+           this, SLOT( customProxyToggled( bool ) ) );
+
   ui.checkForNewReleases->setChecked( p.checkForNewReleases );
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
   ui.enableWebPlugins->setChecked( p.enableWebPlugins );
@@ -278,6 +295,7 @@ Config::Preferences Preferences::getPreferences()
   p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
 
   p.proxyServer.enabled = ui.useProxyServer->isChecked();
+  p.proxyServer.useSystemProxy = ui.systemProxy->isChecked();
 
   p.proxyServer.type = ( Config::ProxyServer::Type ) ui.proxyType->currentIndex();
 
@@ -374,3 +392,8 @@ void Preferences::on_useExternalPlayer_toggled( bool enabled )
   ui.audioPlaybackProgram->setEnabled( enabled );
 }
 
+void Preferences::customProxyToggled( bool )
+{
+  ui.customSettingsGroup->setEnabled( ui.customProxy->isChecked()
+                                      && ui.useProxyServer->isChecked() );
+}

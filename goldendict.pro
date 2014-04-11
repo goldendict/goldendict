@@ -332,7 +332,8 @@ FORMS += groups.ui \
     editdictionaries.ui \
     orderandprops.ui \
     dictinfo.ui \
-    dictheadwords.ui
+    dictheadwords.ui \
+    authentication.ui
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -505,7 +506,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/nl_NL.ts \
     locale/sr_SR.ts \
     locale/sv_SE.ts \
-    locale/tk_TM.ts
+    locale/tk_TM.ts \
+    locale/fa_IR.ts
 
 # Build version file
 !isEmpty( hasGit ) {

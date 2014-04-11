@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="be">
+<TS version="2.0" language="fa_IR">
 <context>
     <name>About</name>
     <message>
         <location filename="../about.ui" line="17"/>
         <source>About</source>
-        <translation>Infarmacyja</translation>
+        <translation>درباره</translation>
     </message>
     <message>
         <location filename="../about.ui" line="66"/>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>GoldenDict — pragrama prahladu słoŭnikaŭ, versija </translation>
+        <translation>برنامه جست‌وجوگر واژه‌نامه گلدن‌دیکت، نسخه </translation>
     </message>
     <message>
         <location filename="../about.ui" line="91"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation>(c) 2008-2013 Kanstancin Isakaŭ (ikm@goldendict.org)</translation>
+        <translation>© ۲۰۰۸-۲۰۱۳ کنستانتین ایساکوف (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="101"/>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>Licenzija GNU GPLv3 ci paźniejšaja</translation>
+        <translation>تحت مجوز گنو GPLv3 یا بالاتر</translation>
     </message>
     <message>
         <location filename="../about.ui" line="125"/>
         <source>Credits:</source>
-        <translation>Udzielniki prajektu:</translation>
+        <translation>دست اندرکاران:</translation>
     </message>
     <message>
         <location filename="../about.cc" line="17"/>
         <source>[Unknown]</source>
-        <translation>[Niaviedamaja]</translation>
+        <translation>[ناشناخته]</translation>
     </message>
     <message>
         <location filename="../about.cc" line="32"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation>Na padstavie Qt %1 (%2, %3 bity)</translation>
+        <translation>برپایه‌ی کیوتی %1 (%2، %3 بیت)</translation>
     </message>
 </context>
 <context>
@@ -44,62 +44,62 @@
     <message>
         <location filename="../article_maker.cc" line="152"/>
         <source>Expand article</source>
-        <translation>Razharnuć artykuł</translation>
+        <translation>گستراندن بند</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="158"/>
         <source>Collapse article</source>
-        <translation>Zharnuć artykuł</translation>
+        <translation>جمع‌کردن بند</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="187"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>GoldenDict nie znajšoŭ pierakładu dla &lt;b&gt;%1&lt;/b&gt; u grupie &lt;b&gt;%2&lt;/b&gt;.</translation>
+        <translation>هیچ ترجمه‌ای برای &lt;b&gt;%1&lt;/b&gt; در گروه &lt;b&gt;%2&lt;/b&gt; یافت نشد.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="192"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation>GoldenDict nie znajšoŭ pierakładu ŭ grupie &lt;b&gt;%1&lt;/b&gt;.</translation>
+        <translation>هیچ ترجمه‌ای در گروه &lt;b&gt;%1&lt;/b&gt; یافت نشد.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="211"/>
         <source>Welcome!</source>
-        <translation>Vitajem!</translation>
+        <translation>خوش آمدید!</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="213"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajem u &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Pierš za ŭsio naviedaj &lt;b&gt;Źmieny|Słoŭniki&lt;/b&gt;, kab paznačyć šlachi da słoŭnikavych fajłaŭ, ź jakich budzie stanavicca biblijateka słoŭnikaŭ, dadaj roznyja sajty Vikipedyi j inšyja krynicy, vyznačy paradak słoŭnikaŭ dy stvary słoŭnikavyja grupy.&lt;p&gt;Pa naładžvańni pragrama budzie hatovaja da prahladu słoŭnikavych artykułaŭ. Toje možna rabić u hetym aknie (upišy šukanaje słova ŭ radok šukańnia) ci ŭ vonkavych pragramach z dapamohaju &lt;a href=&quot;Karystańnie słoŭnikam u vonkavych pragramach&quot;&gt;vypłyŭnych voknaŭ&lt;/a&gt;. &lt;p&gt;Kab dapasavać da siabie pragramu, skarystaj dastupnyja nałady ŭ &lt;b&gt;Źmienach|Naładach&lt;/b&gt;. Usie źmieščanyja tam nałady majuć padkazki. Čytaj ich dla peŭnaści ŭ zroblenych źmienach.&lt;p&gt;Kali ŭźnikli pytańni, prapanovy, ci prosta zachaciełasia znać mierkavańni ludziej, to zaprašajem na naš &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Novyja versii pragramy zaŭsiody možna znajści na našym &lt;a href=&quot;http://goldendict.org/&quot;&gt;sajcie&lt;/a&gt;.&lt;p&gt;(c) 2008-2013 Kanstancin Isakaŭ. Licenzija GPLv3 ci paźniejšaja.</translation>
+        <translation>&lt;h3 dir=&quot;RTL&quot; align=&quot;center&quot;&gt;به گلدن‌دیکت &lt;b&gt;خوش آمدید&lt;/b&gt;!&lt;/h3&gt;&lt;p dir=&quot;RTL&quot;&gt;برای آغاز به کار با برنامه، نخست&lt;b&gt; ویرایش|واژه‌نامه‌ها&lt;/b&gt; را ببینید. برای افزودن مسیرهای شاخه برای یافتن پرونده‌های واژه‌نامه، راه‌اندازی پایگاه‌های گوناگون ویکی‌پدیا یا دیگر منابع، ترتیب واژه‌نامه را تنظیم کنید یا گروه‌های واژه‌نامه بسازید&lt;p dir=&quot;RTL&quot;&gt;اکنون شما آماده‌اید تا واژه‌هایتان را بیابید! شما می‌توانید در قاب سمت چپ در این پنجره یا &lt;a href=&quot;Working with popup&quot;&gt;واژه‌هایتان را از دیگر پنجره‌های فعال بیابید&lt;/a&gt;. &lt;p dir=&quot;RTL&quot;&gt;برای شخصی‌سازی برنامه، ترجیحات موجود در &lt;b&gt;ویرایش|ترجیحات&lt;/b&gt; را بررسی کنید. همه تنظیمات راهنمای ابزار دارند، اگر از چیزی مطمئن نیستید آن‌ها را بخوانید.&lt;p dir=&quot;RTL&quot;&gt;اگر به راهنمایی بیش‌تری نیاز دارید یا به نظرهای دیگران علاقه‌مند هستید، بفرمایید به &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;انجمن برنامه&lt;/a&gt;.&lt;p dir=&quot;RTL&quot;&gt; برای به‌روزرسانی‌ها &lt;a href=&quot;http://goldendict.org/&quot;&gt;وب‌سایت برنامه&lt;/a&gt; را بررسی کنید.&lt;p dir=&quot;RTL&quot;&gt;© ۲۰۰۸-۲۰۱۳ کنستانتین ایساکوف. تحت لیسانس GPLv3 یا بالاتر.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="229"/>
         <source>Working with popup</source>
-        <translation>Karystańnie słoŭnikam u vonkavych pragramach</translation>
+        <translation>کار با پنجره واشو</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="231"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Karystańnie słoŭnikam u vonkavych pragramach&lt;/h3&gt;Kab šukać słovy ŭ słoŭniku z-pad inšych pragramaŭ, treba padłučyć &lt;i&gt;mechanizm vypłyŭnych voknaŭ&lt;/i&gt; u &lt;b&gt;Naładach&lt;/b&gt;, i zacisnuć knopku „Vypłyŭnyja vokny“ ŭ hałoŭnym aknie, ci ŭłučyć adpaviedny punkt kantekstnaha meniu značka ŭ systemnym łotku. </translation>
+        <translation>&lt;h3 dir=&quot;RTL&quot; align=&quot;center&quot;&gt;کار کردن با واشو&lt;/h3&gt;&lt;p dir=&quot;RTL&quot;&gt;برای یافتن واژه‌ها از دیگر پنجره‌های فعال، شما نخست باید به‌کار اندازید &lt;i&gt;«قابلیت پویش واشو»&lt;/i&gt; در &lt;b&gt;ترجیحات&lt;/b&gt;، و سپس آن را در هر زمان با کلیک نماد بالای «واشو»، یا کلیک نماد سینی سیستم با کلیک راست موش و برگزیدن در منویی که بالا آمده است به‌کار اندازید. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="238"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>Zatym u kožnaj pragramie prosta spyni kursor myšy nad słovam, i praz chvilu źjavicca vypłyŭnoje akno z adpaviednym artykułam.</translation>
+        <translation>&lt;p dir=&quot;RTL&quot;&gt;سپس تنها نشان‌گر را روی واژه در برنامه دیگری که می‌خواهید بیابید نگه‌دارید، و یک پنجره واشو واژه را برای شما شرح می‌دهد.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="241"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Zatym u kožnaj pragramie prosta abiary słova myššu (dvojčy pstrykni ci praviadzi pa słovie kursoram myšy z zacisnutaj levaj knopkaj), i praz chvilu źjavicca vypłyŭnoje akno z adpaviednym artykułam.</translation>
+        <translation>&lt;p dir=&quot;RTL&quot;&gt;سپس تنها هر واژه در برنامه دیگری را که می‌خواهید بیابید با موش برگزینید (دوبار کلیک یا جاروب کردن با موش با کلید فشرده شده)، و یک پنجره واشو واژه را برای شما شرح می‌دهد.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="322"/>
         <source>(untitled)</source>
-        <translation>(nienazvanaja)</translation>
+        <translation>(بی‌عنوان)</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="336"/>
         <source>(picture)</source>
-        <translation>(vidarys)</translation>
+        <translation>(عکس)</translation>
     </message>
 </context>
 <context>
@@ -107,37 +107,37 @@
     <message>
         <location filename="../article_maker.cc" line="603"/>
         <source>Expand article</source>
-        <translation>Razharnuć artykuł</translation>
+        <translation>گستراندن بند</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="606"/>
         <source>From </source>
-        <translation>Z </translation>
+        <translation>از </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="611"/>
         <source>Collapse article</source>
-        <translation>Zharnuć artykuł</translation>
+        <translation>جمع‌کردن بند</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="628"/>
         <source>Query error: %1</source>
-        <translation>Pamyłka zapytu: %1</translation>
+        <translation>خطای جست‌وجو: %1</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="734"/>
         <source>Close words: </source>
-        <translation>Padobnyja słovy: </translation>
+        <translation>واژه‌های نزدیک: </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="805"/>
         <source>Compound expressions: </source>
-        <translation>Słovazłučeńni: </translation>
+        <translation>عبارت‌های ترکیبی: </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="833"/>
         <source>Individual words: </source>
-        <translation>Słovy paasobku: </translation>
+        <translation>واژه‌های جداگانه: </translation>
     </message>
 </context>
 <context>
@@ -145,17 +145,17 @@
     <message>
         <location filename="../articleview.ui" line="14"/>
         <source>Form</source>
-        <translation>Chorma</translation>
+        <translation>فرم</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="36"/>
         <source>about:blank</source>
-        <translation>about:blank</translation>
+        <translation>درباره:تهی</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="64"/>
         <source>Find:</source>
-        <translation>Šukać:</translation>
+        <translation>یافتن:</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="74"/>
@@ -165,12 +165,12 @@
     <message>
         <location filename="../articleview.ui" line="92"/>
         <source>&amp;Previous</source>
-        <translation>&amp;Papiaredni</translation>
+        <translation>پ&amp;یشین</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="109"/>
         <source>&amp;Next</source>
-        <translation>&amp;Nastupny</translation>
+        <translation>&amp;پسین</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="116"/>
@@ -180,190 +180,190 @@
     <message>
         <location filename="../articleview.ui" line="129"/>
         <source>Highlight &amp;all</source>
-        <translation>Paznačyć &amp;usie</translation>
+        <translation>پررنگ گردن &amp;همه</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="152"/>
         <source>&amp;Case Sensitive</source>
-        <translation>&amp;Roźnić registar</translation>
+        <translation>&amp;حساس به کوچکی و بزرگی</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="148"/>
         <source>Select Current Article</source>
-        <translation>Vybrać dziejny artykuł</translation>
+        <translation>برگزیدن بند جاری</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="154"/>
         <source>Copy as text</source>
-        <translation>Skapijavać jak tekst</translation>
+        <translation>رونوشت مانند متن</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="160"/>
         <source>Inspect</source>
-        <translation>Inspektar</translation>
+        <translation>بازرسی کردن</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="755"/>
         <source>Resource</source>
-        <translation>Resurs</translation>
+        <translation>منبع</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="760"/>
         <source>Audio</source>
-        <translation>Aŭdyjo</translation>
+        <translation>شنیداری</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="765"/>
         <source>TTS Voice</source>
-        <translation>Syntezatar hołasu</translation>
+        <translation>گفتار TTS</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="770"/>
         <source>Picture</source>
-        <translation>Vidarys</translation>
+        <translation>عکس</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="777"/>
         <source>Video</source>
-        <translation>Videa</translation>
+        <translation>ویدیو</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="786"/>
         <source>Video: %1</source>
-        <translation>Videa: %1</translation>
+        <translation>ویدیوی: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="803"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation>Aznačeńnie z słoŭnika „%1“: %2</translation>
+        <translation>تعریف از واژه‌نامه &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="807"/>
         <source>Definition: %1</source>
-        <translation>Aznačeńnie: %1</translation>
+        <translation>تعریف: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1004"/>
         <location filename="../articleview.cc" line="1158"/>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>Zapytanaha resursu nie isnuje.</translation>
+        <translation>منبع ارجاع شده وجود ندارد.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1044"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation>Paznačanaj pragramy nie isnuje.</translation>
+        <translation>برنامه شنیداری ارجاع شده وجود ندارد.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="964"/>
         <location filename="../articleview.cc" line="1158"/>
         <source>ERROR: %1</source>
-        <translation>PAMYŁKA: %1</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1550"/>
-        <source>Save sound</source>
-        <translation>Zachavańnie huku</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1552"/>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>Hukavyja fajły (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Usie fajły (*.*)</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1565"/>
-        <source>Save image</source>
-        <translation>Zachavańnie vyjavy</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1567"/>
-        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation>Fajły vyjavaŭ (*.bmp *.jpg *.png *.tif);;Usie fajły (*.*)</translation>
+        <translation>خطای: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1310"/>
         <source>&amp;Open Link</source>
-        <translation>&amp;Adčynić spasyłku</translation>
+        <translation>&amp;باز کردن پیوند</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1316"/>
         <source>Open Link in New &amp;Tab</source>
-        <translation>Ačynić spasyłku ŭ novaj &amp;układcy</translation>
+        <translation>باز کردن پیوند در &amp;زیانه تازه</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1323"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation>Adčynić spasyłku ŭ &amp;vonkavym ahladalniku</translation>
+        <translation>باز کردن پیوند در &amp;مرورگر بیرونی</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1338"/>
         <source>Save &amp;image...</source>
-        <translation>Zachavać &amp;vyjavu...</translation>
+        <translation>ذخیره &amp;تصویر...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1346"/>
         <source>Save s&amp;ound...</source>
-        <translation>Zachavać &amp;huk...</translation>
+        <translation>ذخیره آ&amp;وا...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1365"/>
         <source>&amp;Look up &quot;%1&quot;</source>
-        <translation>&amp;Šukać „%1“</translation>
+        <translation>&amp;یافتن &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1373"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>Šukać „%1“ u &amp;novaj układcy</translation>
+        <translation>یافتن &quot;%1&quot; در &amp;زبانه تازه</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1378"/>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation>Źmiaścić „%1“ u ŭvodnym radku</translation>
+        <translation>فرستادن &quot;%1&quot; به خط ورودی</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1384"/>
         <location filename="../articleview.cc" line="1416"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation>&amp;Dadać „%1“ da historyi</translation>
+        <translation>&amp;افزودن &quot;%1&quot; به پیشینه</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1398"/>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>Šukać „%1“ u grupie %2</translation>
+        <translation>یافتن &quot;%1&quot; در %2</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1406"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>Šukać „%1“ u grupie %2 u novaj u&amp;kładcy</translation>
+        <translation>یافتن &quot;%1&quot; در %2 در &amp;زبانه تازه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1698"/>
-        <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation>PAPIAREDŽAŃNIE: Prajhravalnik FFMpeg: %1</translation>
+        <location filename="../articleview.cc" line="1550"/>
+        <source>Save sound</source>
+        <translation>ذخیره کردن آوا</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1691"/>
-        <source>WARNING: %1</source>
-        <translation>UVAHA: %1</translation>
+        <location filename="../articleview.cc" line="1552"/>
+        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation>پرونده‌های آوا (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;همه پرونده‌ها (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1565"/>
+        <source>Save image</source>
+        <translation>ذخیره کردن تصویر</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1567"/>
+        <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
+        <translation>پرونده‌های تصویر (*.bmp *.jpg *.png *.tif);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1639"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Nia zdoleŭ zapuścić prajhravalnika hukavaha fajła: %1</translation>
+        <translation>خطا در اجرای یک پخش‌کننده برای پخش پرونده آوا: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1657"/>
         <source>Failed to create temporary file.</source>
-        <translation>Nia zdoleŭ stvaryć časovaha fajła.</translation>
+        <translation>ساخت پرونده موقت شکست خورد.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1668"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Nia zdoleŭ aŭtamatyčna adčynić resursavaha fajła. Pasprabuj adčynić ručna %1.</translation>
+        <translation>باز کردن خودکار پرونده منبع شکست خورد، تلاش کنید به‌صورت دستی بازکنید: %1.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1691"/>
+        <source>WARNING: %1</source>
+        <translation>هشدار: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1691"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Nia zdoleŭ zładavać paznačanaha resursu.</translation>
+        <translation>بارگیری منبع ارجاع شده شکست خورد.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1698"/>
+        <source>WARNING: FFmpeg Audio Player: %1</source>
+        <translation>هشدار: پخش‌کننده شنیداری FFmpeg : %1</translation>
     </message>
 </context>
 <context>
@@ -371,19 +371,19 @@
     <message>
         <location filename="../belarusiantranslit.cc" line="417"/>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation>Biełaruskaja tranśliteracyja z łaciny ŭ kirylicu (klasyčny pravapis)</translation>
+        <translation>نویسه‌گردانی بلاروسی از لاتین به سیریلیک (درست‌نویسی سنتی)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="420"/>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation>Biełaruskaja tranśliteracyja z łaciny ŭ kirylicu (školny pravapis)</translation>
+        <translation>نویسه‌گردانی بلاروسی از لاتین به سیریلیک (درست‌نویسی آموزشی)</translation>
     </message>
     <message>
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation>Biełaruskaja tranśliteracyja (zhładžvaje roźnicu
-miž klasyčnym i školnym pravapisam)</translation>
+        <translation>نویسه‌گردانی بلاروسی (ملایم کردن تفاوت بین
+درست‌نویسی سنتی و آموزشی در سیریلیک)</translation>
     </message>
 </context>
 <context>
@@ -406,7 +406,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../authentication.ui" line="40"/>
         <source>Password:</source>
-        <translation type="unfinished">Parol:</translation>
+        <translation type="unfinished">گذرواژه:</translation>
     </message>
 </context>
 <context>
@@ -414,52 +414,52 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictgroupwidget.ui" line="14"/>
         <source>Form</source>
-        <translation>Chorma</translation>
+        <translation>فرم</translation>
     </message>
     <message>
         <location filename="../dictgroupwidget.ui" line="37"/>
         <source>Group icon:</source>
-        <translation>Značak grupy:</translation>
+        <translation>نشانه گروه:</translation>
     </message>
     <message>
         <location filename="../dictgroupwidget.ui" line="85"/>
         <source>Shortcut:</source>
-        <translation>Klavišny skarot:</translation>
+        <translation>میان‌بر:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="38"/>
         <source>None</source>
-        <translation>Niama</translation>
+        <translation>هیج کدام</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="43"/>
         <source>From file...</source>
-        <translation>Z fajła...</translation>
+        <translation>از پرونده...</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="90"/>
         <source>Choose a file to use as group icon</source>
-        <translation>Abiary fajł vyjavy, jakaja budzie značkam grupy</translation>
+        <translation>یک پرونده را برای نشانه گروه برگزینید</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="92"/>
         <source>Images</source>
-        <translation>Vyjavy</translation>
+        <translation>تصویرها</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="93"/>
         <source>All files</source>
-        <translation>Usie fajły</translation>
+        <translation>همه پرونده‌ها</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Error</source>
-        <translation>Pamyłka</translation>
+        <translation>خطا</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="100"/>
         <source>Can&apos;t read the specified image file.</source>
-        <translation>Nielha pračytać abranaha fajła vyjavy.</translation>
+        <translation>پرونده تصویری مشخص شده را نمی‌تواند بخواند.</translation>
     </message>
 </context>
 <context>
@@ -470,43 +470,43 @@ miž klasyčnym i školnym pravapisam)</translation>
         <location filename="../groups_widgets.cc" line="838"/>
         <location filename="../groups_widgets.cc" line="1013"/>
         <source>Dictionaries: </source>
-        <translation>Słoŭnikaŭ: </translation>
+        <translation>واژه‌نامه‌ها:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="690"/>
         <source>Confirmation</source>
-        <translation>Paćvierdžańnie</translation>
+        <translation>تایید</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="691"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation>Ci napeŭna chočaš zgieneravać zbor grupaŭ na padstavie moŭnych par?</translation>
+        <translation>آیا شما از درخواست ایجاد یک مجموعه از گروه‌ها برپایه جفت‌های زبان اطمینان دارید؟</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="716"/>
         <source>Unassigned</source>
-        <translation>Pa-za grupami</translation>
+        <translation>واگذار نشده</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="854"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation>Sabrać grupy „%1-&gt;“ pavodle kryničnaje movy</translation>
+        <translation>گروه‌ها را با زبان منبع ترکیب کنید به &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="871"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation>Sabrać grupy „-&gt;%1“ pavodle metavaje movy</translation>
+        <translation>گروه‌ها را با زبان هدف ترکیب کنید به &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="889"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation>Sabrać grupu dvuchbakovaha pierakładu „%1-%2-%1“</translation>
+        <translation>گروه ترجمه دوطرفه بسازید &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="907"/>
         <location filename="../groups_widgets.cc" line="926"/>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation>Sabrać grupy z „%1“</translation>
+        <translation>گروه‌ها را ترکیب کنید با &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -514,107 +514,107 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>شیوه جست‌وجو</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>این رکن تعیین می‌کند که رشته پالایه چگونه تفسیر شود</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>اگر به‌کار افتاده باشد برای نمادها در هنگام پالایش پذیرفته می‌شود</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>همتا بودن مورد</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>صادر کردن سرواژه‌ها به پرونده</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>صادر کردن</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>خوب</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="91"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>برای اعمال پالایه لیست سرواژه‌ها این کلید را فشار دهید</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="94"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>اعمال کردن</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="107"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>اگر به‌کار افتاده باشد هر تغییر پالایه بی‌درنگ بر روی لیست سرواژه‌ها اعمال می‌گردد</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="110"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>اعمال خودکار</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>پالایه:</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="124"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>رشته پالایه (رشته ثابت، نویسه‌های عام یا عبارت منظم)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="29"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>متن</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="30"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>نویسه‌های عام</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="31"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="219"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>جمع سرواژه‌های یکتا:  %1، پالایش شده: %2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="236"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیره سرواژه‌ها در پرونده</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="238"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Tekstavyja fajły (*.txt);;Usie fajły (*.*)</translation>
+        <translation>پرونده‌های متنی (*.txt);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="262"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>صادر کردن سرواژه‌ها...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="262"/>
         <source>Cancel</source>
-        <translation type="unfinished">Skasavać</translation>
+        <translation>لغو</translation>
     </message>
 </context>
 <context>
@@ -622,58 +622,58 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation>Usiaho artykułaŭ:</translation>
+        <translation>مجموع بندها:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="46"/>
         <source>Translates from:</source>
-        <translation>Kryničnaja mova:</translation>
+        <translation>ترجمه از:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="60"/>
         <source>Total words:</source>
-        <translation>Usiaho słovaŭ:</translation>
+        <translation>مجموع واژه‌ها:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="77"/>
         <source>Translates to:</source>
-        <translation>Metavaja mova:</translation>
+        <translation>ترجمه به:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
         <source>Open folder</source>
-        <translation>Adčynić katalog</translation>
+        <translation>بازکردن پوشه</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation>Redagavać słoŭnik</translation>
+        <translation>ویرایش واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
         <source>Files comprising this dictionary:</source>
-        <translation>Fajły, jakija składajuć słoŭnik:</translation>
+        <translation>پرونده‌های دربرگیرنده این واژه‌نامه:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="201"/>
         <source>Description:</source>
-        <translation>Apisańnie:</translation>
+        <translation>شرح:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>همه سرواژه‌های واژه‌نامه یکتا را نشان بده</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>سرواژه‌ها</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation>Zredagavać słoŭnik praz zahad: %1</translation>
+        <translation>ویرایش واژه‌نامه با دستور: %1</translation>
     </message>
 </context>
 <context>
@@ -681,7 +681,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups_widgets.cc" line="233"/>
         <source>%1 entries</source>
-        <translation>%1 artykułaŭ</translation>
+        <translation>%1 ورودی</translation>
     </message>
 </context>
 <context>
@@ -689,37 +689,37 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="15"/>
         <source>&amp;Dictionary Bar</source>
-        <translation>&amp;Słoŭnikavaja palica</translation>
+        <translation>نوار &amp;واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="25"/>
         <source>Extended menu with all dictionaries...</source>
-        <translation>Pašyranaje meniu z usimi słoŭnikami...</translation>
+        <translation>منوی گسترش یافته با همه واژه‌نامه‌ها...</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="112"/>
         <source>Edit this group</source>
-        <translation>Redagavać hetuju grupu</translation>
+        <translation>ویرایش این گروه</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="136"/>
         <source>Dictionary info</source>
-        <translation>Infarmacyja pra słoŭnik</translation>
+        <translation>اطلاعات واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>سرواژه‌های واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
         <source>Open dictionary folder</source>
-        <translation>Adčynić słoŭnikavy katalog</translation>
+        <translation>بازکردن پوشه واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="150"/>
         <source>Edit dictionary</source>
-        <translation>Redagavać słoŭnik</translation>
+        <translation>ویرایش واژه‌نامه</translation>
     </message>
 </context>
 <context>
@@ -727,44 +727,44 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../editdictionaries.ui" line="14"/>
         <source>Dictionaries</source>
-        <translation>Słoŭniki</translation>
+        <translation>واژه‌نامه‌ها</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="41"/>
         <source>&amp;Sources</source>
-        <translation>&amp;Krynicy</translation>
+        <translation>&amp;منابع</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
         <location filename="../editdictionaries.cc" line="225"/>
         <source>&amp;Dictionaries</source>
-        <translation>&amp;Słoŭniki</translation>
+        <translation>&amp;واژه‌نامه‌ها</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="43"/>
         <location filename="../editdictionaries.cc" line="228"/>
         <source>&amp;Groups</source>
-        <translation>G&amp;rupy</translation>
+        <translation>&amp;گروه‌ها</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="107"/>
         <source>Sources changed</source>
-        <translation>Krynicy źmianilisia</translation>
+        <translation>منابع تغییر کردند</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="108"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>Kolki krynic źmianiłasia. Ci ŭžyć źmieny?</translation>
+        <translation>برخی منابع تغییر کرده‌اند. شما می‌خواهید تغییرات را بپذیرید؟</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="111"/>
         <source>Accept</source>
-        <translation>Užyć</translation>
+        <translation>پذیرش</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="113"/>
         <source>Cancel</source>
-        <translation>Skasavać</translation>
+        <translation>لغو</translation>
     </message>
 </context>
 <context>
@@ -772,7 +772,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../externalviewer.cc" line="54"/>
         <source>the viewer program name is empty</source>
-        <translation>nazva pragramy prahladalnika parožniaja</translation>
+        <translation>نام برنامه نمایش‌گر تهی است</translation>
     </message>
 </context>
 <context>
@@ -780,37 +780,37 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../forvo.cc" line="224"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>Pamyłka razboru fajła XML: %1 — radok %2, słupok %3</translation>
+        <translation>خطای تجزیه XML: %1 در %2،%3</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="300"/>
         <source>Added %1</source>
-        <translation>Dadana %1</translation>
+        <translation>افزوده شد %1</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="303"/>
         <source>by</source>
-        <translation> </translation>
+        <translation>به‌وسیله</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="307"/>
         <source>Male</source>
-        <translation>Mužčyna</translation>
+        <translation>مرد</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="307"/>
         <source>Female</source>
-        <translation>Žančyna</translation>
+        <translation>زن</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="309"/>
         <source>from</source>
-        <translation>z</translation>
+        <translation>از</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="347"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Prajdzi ŭ Źmieny|Słoŭniki|Krynicy|Forvo i atrymaj svoj ułasny API-kluč, kab prybrać hetuju pamyłku.</translation>
+        <translation>به ویرایش|واژه‌نامه‌ها|منابع|فوروُ بروید و کلید API مربوط به ما را بپذیرید تا این خطا ناپدید شود.</translation>
     </message>
 </context>
 <context>
@@ -818,7 +818,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../german.cc" line="48"/>
         <source>German Transliteration</source>
-        <translation>Niamieckaja traśliteracyja</translation>
+        <translation>نویسه‌گردانی آلمانی</translation>
     </message>
 </context>
 <context>
@@ -826,7 +826,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../greektranslit.cc" line="839"/>
         <source>Greek Transliteration</source>
-        <translation>Hreckaja tranśliteracyja</translation>
+        <translation>نویسه‌گردانی یونانی</translation>
     </message>
 </context>
 <context>
@@ -834,7 +834,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groupcombobox.cc" line="14"/>
         <source>Choose a Group (Alt+G)</source>
-        <translation>Abiary grupu (Alt+G)</translation>
+        <translation>یک گروه برگزینید (Alt+G)</translation>
     </message>
 </context>
 <context>
@@ -842,12 +842,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groupselectorwidget.ui" line="13"/>
         <source>Form</source>
-        <translation>Chorma</translation>
+        <translation>فرم</translation>
     </message>
     <message>
         <location filename="../groupselectorwidget.ui" line="19"/>
         <source>Look in</source>
-        <translation>Šukać u</translation>
+        <translation>جست‌وجو در</translation>
     </message>
 </context>
 <context>
@@ -855,12 +855,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups.ui" line="22"/>
         <source>Dictionaries available:</source>
-        <translation>Dastupnyja słoŭniki:</translation>
+        <translation>واژه‌نامه‌های در دست‌رس:</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="64"/>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>Dadać vybranyja słoŭniki ŭ grupu (Ins)</translation>
+        <translation>افزودن واژه‌نامه‌های برگزیده شده به گروه (درج)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="67"/>
@@ -870,12 +870,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups.ui" line="70"/>
         <source>Ins</source>
-        <translation>Ins</translation>
+        <translation>درج</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="89"/>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>Vyniać vybranyja słoŭniki z grupy (Del)</translation>
+        <translation>حذف واژه‌نامه‌های برگزیده شده از گروه (حذف)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="92"/>
@@ -885,118 +885,118 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../groups.ui" line="95"/>
         <source>Del</source>
-        <translation>Del</translation>
+        <translation>حذف</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="119"/>
         <source>Groups:</source>
-        <translation>Grupy:</translation>
+        <translation>گروه‌ها:</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
-        <translation>Układka</translation>
+        <translation>زبانه ۲</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
         <source>Create new dictionary group</source>
-        <translation>Stvaryć novuju słoŭnikavuju grupu</translation>
+        <translation>ساخت گروه واژه‌نامه تازه</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="146"/>
         <source>&amp;Add group</source>
-        <translation>&amp;Dadać grupu</translation>
+        <translation>&amp;افزودن گروه</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="153"/>
         <source>Create language-based groups</source>
-        <translation>Stvaryć grupy na padstavie movy</translation>
+        <translation>ساخت گروه‌های زبان-پایه</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="156"/>
         <source>Auto groups</source>
-        <translation>Zgrupavać aŭtamatyčna</translation>
+        <translation>گروه‌های خودکار</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="163"/>
         <source>Rename current dictionary group</source>
-        <translation>Pieranazvać grupu</translation>
+        <translation>تغییرنام گروه واژه‌نامه جاری</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="166"/>
         <source>Re&amp;name group</source>
-        <translation>Piera&amp;nazvać grupu</translation>
+        <translation>&amp;تغییرنام گروه</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="173"/>
         <source>Remove current dictionary group</source>
-        <translation>Vydalić grupu</translation>
+        <translation>حذف گروه واژه‌نامه جاری</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="176"/>
         <source>&amp;Remove group</source>
-        <translation>&amp;Vydalić grupu</translation>
+        <translation>&amp;حذف گروه</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="183"/>
         <source>Remove all dictionary groups</source>
-        <translation>Vydalić usie słoŭnikavyja grupy</translation>
+        <translation>حذف همه گروه‌های واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="186"/>
         <location filename="../groups.cc" line="174"/>
         <source>Remove all groups</source>
-        <translation>Vydalić usie grupy</translation>
+        <translation>حذف همه گروه‌ها</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Pieraciahvaj słoŭniki ŭ/z grupy. Raźmiarkoŭvaj ich u grupie z dapamohaju myšy.</translation>
+        <translation>کشیدن و &amp;رهاکردن واژه‌نامه‌ها به و از گروه‌ها، جابه‌جایی آن‌ها درون گروه‌ها، مرتب‌سازی دوباره گروه‌ها به‌وسیله موش.</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>زبانه‌های گروه</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>لیست گروه‌ها را باز کن</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
         <source>Add group</source>
-        <translation>Dadać grupu</translation>
+        <translation>افزودن گروه</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="124"/>
         <source>Give a name for the new group:</source>
-        <translation>Zadaj nazvu novaj grupy:</translation>
+        <translation>یک نام برای گروه تازه بدهید:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="149"/>
         <source>Rename group</source>
-        <translation>Pieranazvańnie grupy</translation>
+        <translation>تغییرنام گروه</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="150"/>
         <source>Give a new name for the group:</source>
-        <translation>Zadaj novuju nazvu grupy:</translation>
+        <translation>یک نام تازه برای گروه بدهید:</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="161"/>
         <source>Remove group</source>
-        <translation>Vydaleńnie grupy</translation>
+        <translation>حذف گروه</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="162"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>Sapraŭdy žadaješ vydalić grupu &lt;b&gt;%1&lt;/b&gt;?</translation>
+        <translation>آیا شما از حذف گروه &lt;b&gt;%1&lt;/b&gt; اطمینان دارید؟</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="175"/>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>Sapraŭdy žadaješ vydalić usie grupy?</translation>
+        <translation>آیا شما از حذف همه گروه‌ها اطمینان دارید؟</translation>
     </message>
 </context>
 <context>
@@ -1004,17 +1004,17 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation>&amp;Vydalić vybranaje</translation>
+        <translation>&amp;حذف برگزیده‌ها</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation>Skapijavać vybranaje</translation>
+        <translation>رونوشت برگزیده‌ها</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation>Historyja:</translation>
+        <translation>پیشینه:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="219"/>
@@ -1024,7 +1024,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../historypanewidget.cc" line="223"/>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation>Pamier historyi: %1 zapisaŭ z %2 mahčymych</translation>
+        <translation>اندازه پیشینه: %1 ورودی فراتر از بیشینه %2</translation>
     </message>
 </context>
 <context>
@@ -1032,12 +1032,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../hunspell.cc" line="253"/>
         <source>Spelling suggestions: </source>
-        <translation>Artagrafičnyja padkazki: </translation>
+        <translation>پیش‌نهادهای درست‌نویسی:</translation>
     </message>
     <message>
         <location filename="../hunspell.cc" line="793"/>
         <source>%1 Morphology</source>
-        <translation>Marfalogija %1</translation>
+        <translation>%1 ریخت‌شناسی</translation>
     </message>
 </context>
 <context>
@@ -1045,12 +1045,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../sources.cc" line="1131"/>
         <source>Enabled</source>
-        <translation>Ułučana</translation>
+        <translation>به‌کار افتاده</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1133"/>
         <source>Name</source>
-        <translation>Nazva</translation>
+        <translation>نام</translation>
     </message>
 </context>
 <context>
@@ -1058,23 +1058,23 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../initializing.ui" line="22"/>
         <source>GoldenDict - Initializing</source>
-        <translation>Inicyjalizacyja</translation>
+        <translation>گلدن‌دیکت - برپاسازی</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="28"/>
         <location filename="../initializing.cc" line="30"/>
         <source>Please wait while indexing dictionary</source>
-        <translation>Čakaj! Idzie indeksavańnie słoŭnikaŭ</translation>
+        <translation>لطفا تا فهرست‌سازی واژه‌نامه صبر کنید</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="44"/>
         <source>Dictionary Name</source>
-        <translation>Nazva słoŭnika</translation>
+        <translation>نام واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../initializing.cc" line="21"/>
         <source>Please wait...</source>
-        <translation>Zaraz...</translation>
+        <translation>لطفا منتظر بمانید...</translation>
     </message>
 </context>
 <context>
@@ -1082,1007 +1082,1007 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../language.cc" line="55"/>
         <source>Afar</source>
-        <translation>Afar</translation>
+        <translation>عفری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="56"/>
         <source>Abkhazian</source>
-        <translation>Abchaskaja</translation>
+        <translation>آبخازی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="57"/>
         <source>Avestan</source>
-        <translation>Avestyjskaja</translation>
+        <translation>اوستایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="58"/>
         <source>Afrikaans</source>
-        <translation>Afrykaans</translation>
+        <translation>آفریقایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="59"/>
         <source>Akan</source>
-        <translation>Akan</translation>
+        <translation>آکانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="60"/>
         <source>Amharic</source>
-        <translation>Amharskaja</translation>
+        <translation>آمهاری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="61"/>
         <source>Aragonese</source>
-        <translation>Aragonskaja</translation>
+        <translation>اراگونی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="62"/>
         <source>Arabic</source>
-        <translation>Arabskaja</translation>
+        <translation>عربی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="63"/>
         <source>Assamese</source>
-        <translation>Asamskaja</translation>
+        <translation>اسامی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="64"/>
         <source>Avaric</source>
-        <translation>Avarskaja</translation>
+        <translation>آواری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="65"/>
         <source>Aymara</source>
-        <translation>Ajmara</translation>
+        <translation>آیماری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="66"/>
         <source>Azerbaijani</source>
-        <translation>Azejbardžanskaja</translation>
+        <translation>آذری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="67"/>
         <source>Bashkir</source>
-        <translation>Baškirskaja</translation>
+        <translation>باشکیری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="68"/>
         <source>Belarusian</source>
-        <translation>Biełaruskaja</translation>
+        <translation>بلاروسی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="69"/>
         <source>Bulgarian</source>
-        <translation>Baŭharskaja</translation>
+        <translation>بلغاری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="70"/>
         <source>Bihari</source>
-        <translation>Bichary</translation>
+        <translation>بیهاری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="71"/>
         <source>Bislama</source>
-        <translation>Bisłama</translation>
+        <translation>بیسلامی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="72"/>
         <source>Bambara</source>
-        <translation>Bambara</translation>
+        <translation>بامباری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="73"/>
         <source>Bengali</source>
-        <translation>Bengalskaja</translation>
+        <translation>بنگالی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="74"/>
         <source>Tibetan</source>
-        <translation>Tybeckaja</translation>
+        <translation>تبتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="75"/>
         <source>Breton</source>
-        <translation>Bretonskaja</translation>
+        <translation>بریتونی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="76"/>
         <source>Bosnian</source>
-        <translation>Baśnijskaja</translation>
+        <translation>بوسنی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="77"/>
         <source>Catalan</source>
-        <translation>Katalanskaja</translation>
+        <translation>کاتالانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="78"/>
         <source>Chechen</source>
-        <translation>Čačenskaja</translation>
+        <translation>چچنی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="79"/>
         <source>Chamorro</source>
-        <translation>Čamorro</translation>
+        <translation>چامورو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="80"/>
         <source>Corsican</source>
-        <translation>Karsykanskaja</translation>
+        <translation>کورسیکی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="81"/>
         <source>Cree</source>
-        <translation>Kry</translation>
+        <translation>کری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="82"/>
         <source>Czech</source>
-        <translation>Českaja</translation>
+        <translation>چکی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="83"/>
         <source>Church Slavic</source>
-        <translation>Carkoŭnasłavianskaja</translation>
+        <translation>کلیسا اسلاوی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="84"/>
         <source>Chuvash</source>
-        <translation>Čuvaskaja</translation>
+        <translation>چوواشی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="85"/>
         <source>Welsh</source>
-        <translation>Valijskaja</translation>
+        <translation>ولزی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="86"/>
         <source>Danish</source>
-        <translation>Dackaja</translation>
+        <translation>دانمارکی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="87"/>
         <source>German</source>
-        <translation>Niamieckaja</translation>
+        <translation>آلمانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="88"/>
         <source>Divehi</source>
-        <translation>Dyviechi</translation>
+        <translation>دایوهایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="89"/>
         <source>Dzongkha</source>
-        <translation>Dzongcha</translation>
+        <translation>زونخایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="90"/>
         <source>Ewe</source>
-        <translation>Eve</translation>
+        <translation>ایوی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="91"/>
         <source>Greek</source>
-        <translation>Hreckaja</translation>
+        <translation>یونانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="92"/>
         <source>English</source>
-        <translation>Angielskaja</translation>
+        <translation>انگلیسی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="93"/>
         <source>Esperanto</source>
-        <translation>Esperanta</translation>
+        <translation>اسپرانتور</translation>
     </message>
     <message>
         <location filename="../language.cc" line="94"/>
         <source>Spanish</source>
-        <translation>Hišpanskaja</translation>
+        <translation>اسپانیایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="95"/>
         <source>Estonian</source>
-        <translation>Estonskaja</translation>
+        <translation>استونیایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="96"/>
         <source>Basque</source>
-        <translation>Baskonskaja</translation>
+        <translation>باسکی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="97"/>
         <source>Persian</source>
-        <translation>Persydzkaja</translation>
+        <translation>فارسی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="98"/>
         <source>Fulah</source>
-        <translation>Fuła</translation>
+        <translation>فولاهی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="99"/>
         <source>Finnish</source>
-        <translation>Finskaja</translation>
+        <translation>فنلاندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="100"/>
         <source>Fijian</source>
-        <translation>Fidžyjskaja</translation>
+        <translation>فیجی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="101"/>
         <source>Faroese</source>
-        <translation>Farerskaja</translation>
+        <translation>فارویی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="102"/>
         <source>French</source>
-        <translation>Francuskaja</translation>
+        <translation>فرانسوی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="103"/>
         <source>Western Frisian</source>
-        <translation>Zachodniefryzyjskaja</translation>
+        <translation>فریزلندی غربی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="104"/>
         <source>Irish</source>
-        <translation>Irlandzkaja</translation>
+        <translation>ایرلندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="105"/>
         <source>Scottish Gaelic</source>
-        <translation>Šatlandzka-gelskaja</translation>
+        <translation>اسکاتلندی بومی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="106"/>
         <source>Galician</source>
-        <translation>Galisijskaja</translation>
+        <translation>گالیشی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="107"/>
         <source>Guarani</source>
-        <translation>Guarani</translation>
+        <translation>گورانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="108"/>
         <source>Gujarati</source>
-        <translation>Gudžaraci</translation>
+        <translation>گوجراتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="109"/>
         <source>Manx</source>
-        <translation>Menskaja</translation>
+        <translation>مانکسی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="110"/>
         <source>Hausa</source>
-        <translation>Chausa</translation>
+        <translation>هوساوی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="111"/>
         <source>Hebrew</source>
-        <translation>Iŭryt</translation>
+        <translation>عبری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="112"/>
         <source>Hindi</source>
-        <translation>Hindzi</translation>
+        <translation>هندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="113"/>
         <source>Hiri Motu</source>
-        <translation>Hiry-motu</translation>
+        <translation>هیری موتو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="114"/>
         <source>Croatian</source>
-        <translation>Charvackaja</translation>
+        <translation>کرواتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="115"/>
         <source>Haitian</source>
-        <translation>Haicianskaja</translation>
+        <translation>هایتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="116"/>
         <source>Hungarian</source>
-        <translation>Vuhorskaja</translation>
+        <translation>مجارستانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="117"/>
         <source>Armenian</source>
-        <translation>Armianskaja</translation>
+        <translation>ارمنی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="118"/>
         <source>Herero</source>
-        <translation>Hiererskaja</translation>
+        <translation>هریرو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="119"/>
         <source>Interlingua</source>
-        <translation>Interlinhva</translation>
+        <translation>اینترلینگوا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="120"/>
         <source>Indonesian</source>
-        <translation>Indanezijskaja</translation>
+        <translation>اندونزیایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="121"/>
         <source>Interlingue</source>
-        <translation>Akcydental</translation>
+        <translation>اینترلینگو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="122"/>
         <source>Igbo</source>
-        <translation>Igbo</translation>
+        <translation>ایگبویی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="123"/>
         <source>Sichuan Yi</source>
-        <translation>Nosu</translation>
+        <translation>سیچوانی یی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="124"/>
         <source>Inupiaq</source>
-        <translation>Inupiak</translation>
+        <translation>اینوپیاک</translation>
     </message>
     <message>
         <location filename="../language.cc" line="125"/>
         <source>Ido</source>
-        <translation>Ida</translation>
+        <translation>ایدو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="126"/>
         <source>Icelandic</source>
-        <translation>Iślandzkaja</translation>
+        <translation>آیسلندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="127"/>
         <source>Italian</source>
-        <translation>Italjanskaja</translation>
+        <translation>ایتالیایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="128"/>
         <source>Inuktitut</source>
-        <translation>Inuktytut</translation>
+        <translation>اینوکتیتوتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="129"/>
         <source>Japanese</source>
-        <translation>Japonskaja</translation>
+        <translation>ژاپنی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="130"/>
         <source>Javanese</source>
-        <translation>Javanskaja</translation>
+        <translation>جاوایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="131"/>
         <source>Georgian</source>
-        <translation>Hruzinskaja</translation>
+        <translation>گرجستانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="132"/>
         <source>Kongo</source>
-        <translation>Konha</translation>
+        <translation>کنگو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="133"/>
         <source>Kikuyu</source>
-        <translation>Kikuju</translation>
+        <translation>کیکویو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="134"/>
         <source>Kwanyama</source>
-        <translation>Kvańjama</translation>
+        <translation>کاوانیامی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="135"/>
         <source>Kazakh</source>
-        <translation>Kazaskaja</translation>
+        <translation>قزاقی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="136"/>
         <source>Kalaallisut</source>
-        <translation>Grenlandzkaja</translation>
+        <translation>گرینلندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="137"/>
         <source>Khmer</source>
-        <translation>Kchmerskaja</translation>
+        <translation>خمیری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="138"/>
         <source>Kannada</source>
-        <translation>Kanada</translation>
+        <translation>کانادایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="139"/>
         <source>Korean</source>
-        <translation>Karejskaja</translation>
+        <translation>کره‌ای</translation>
     </message>
     <message>
         <location filename="../language.cc" line="140"/>
         <source>Kanuri</source>
-        <translation>Kanury</translation>
+        <translation>کانیوری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="141"/>
         <source>Kashmiri</source>
-        <translation>Kašmirskaja</translation>
+        <translation>کشمیری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="142"/>
         <source>Kurdish</source>
-        <translation>Kurdzkaja</translation>
+        <translation>کردی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="143"/>
         <source>Komi</source>
-        <translation>Komi</translation>
+        <translation>کومی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="144"/>
         <source>Cornish</source>
-        <translation>Kornskaja</translation>
+        <translation>کرنیش</translation>
     </message>
     <message>
         <location filename="../language.cc" line="145"/>
         <source>Kirghiz</source>
-        <translation>Kyrhyskaja</translation>
+        <translation>قرقیزی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="146"/>
         <source>Latin</source>
-        <translation>Łacina</translation>
+        <translation>لاتینی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="147"/>
         <source>Luxembourgish</source>
-        <translation>Luksemburskaja</translation>
+        <translation>لوگزامبورگی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="148"/>
         <source>Ganda</source>
-        <translation>Ługanda</translation>
+        <translation>گاندا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="149"/>
         <source>Limburgish</source>
-        <translation>Limburskaja</translation>
+        <translation>لیمبورگی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="150"/>
         <source>Lingala</source>
-        <translation>Lingała</translation>
+        <translation>لینگالی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="151"/>
         <source>Lao</source>
-        <translation>Łaoskaja</translation>
+        <translation>لائوسی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="152"/>
         <source>Lithuanian</source>
-        <translation>Letuviskaja</translation>
+        <translation>لیتوانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="153"/>
         <source>Luba-Katanga</source>
-        <translation>Łuba-katanga</translation>
+        <translation>لوبا کاتانگا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="154"/>
         <source>Latvian</source>
-        <translation>Łatyskaja</translation>
+        <translation>لاتویانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="155"/>
         <source>Malagasy</source>
-        <translation>Małagaskaja</translation>
+        <translation>مالاگاسی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="156"/>
         <source>Marshallese</source>
-        <translation>Maršalskaja</translation>
+        <translation>مارشالی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="157"/>
         <source>Maori</source>
-        <translation>Maary</translation>
+        <translation>مائوری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="158"/>
         <source>Macedonian</source>
-        <translation>Makiedonskaja</translation>
+        <translation>مقدونی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="159"/>
         <source>Malayalam</source>
-        <translation>Małajałam</translation>
+        <translation>مالایایی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="160"/>
         <source>Mongolian</source>
-        <translation>Mangolskaja</translation>
+        <translation>مغولستانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="161"/>
         <source>Marathi</source>
-        <translation>Maratchi</translation>
+        <translation>مهاراتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="162"/>
         <source>Malay</source>
-        <translation>Małajskaja</translation>
+        <translation>مالایا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="163"/>
         <source>Maltese</source>
-        <translation>Maltyjskaja</translation>
+        <translation>مالتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="164"/>
         <source>Burmese</source>
-        <translation>Birmanskaja</translation>
+        <translation>برمه‌ای</translation>
     </message>
     <message>
         <location filename="../language.cc" line="165"/>
         <source>Nauru</source>
-        <translation>Nauru</translation>
+        <translation>نائورو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="166"/>
         <source>Norwegian Bokmal</source>
-        <translation>Bukmał</translation>
+        <translation>بوکمال نروژی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="167"/>
         <source>North Ndebele</source>
-        <translation>Paŭnočny Ndebele</translation>
+        <translation>ندیبیلی شمال</translation>
     </message>
     <message>
         <location filename="../language.cc" line="168"/>
         <source>Nepali</source>
-        <translation>Nepalskaja</translation>
+        <translation>نپالی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="169"/>
         <source>Ndonga</source>
-        <translation>Ndonga</translation>
+        <translation>اندونگا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="170"/>
         <source>Dutch</source>
-        <translation>Niderlandzkaja</translation>
+        <translation>هلندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="171"/>
         <source>Norwegian Nynorsk</source>
-        <translation>Novanarveskaja</translation>
+        <translation>نینورسک نروژی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="172"/>
         <source>Norwegian</source>
-        <translation>Narveskaja</translation>
+        <translation>نروژی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="173"/>
         <source>South Ndebele</source>
-        <translation>Paŭdniovy Ndebele</translation>
+        <translation>ندیبیلی جنوب</translation>
     </message>
     <message>
         <location filename="../language.cc" line="174"/>
         <source>Navajo</source>
-        <translation>Navacha</translation>
+        <translation>ناواهو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="175"/>
         <source>Chichewa</source>
-        <translation>Ńjandža</translation>
+        <translation>چیچوا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="176"/>
         <source>Occitan</source>
-        <translation>Aksytanskaja</translation>
+        <translation>اکیتانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="177"/>
         <source>Ojibwa</source>
-        <translation>Odžybve</translation>
+        <translation>اجیبوا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="178"/>
         <source>Oromo</source>
-        <translation>Aroma</translation>
+        <translation>اورومی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="179"/>
         <source>Oriya</source>
-        <translation>Oryja</translation>
+        <translation>اوریا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="180"/>
         <source>Ossetian</source>
-        <translation>Asetynskaja</translation>
+        <translation>قفقازی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="181"/>
         <source>Panjabi</source>
-        <translation>Pandžabi</translation>
+        <translation>پنجابی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="182"/>
         <source>Pali</source>
-        <translation>Pali</translation>
+        <translation>پالی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="183"/>
         <source>Polish</source>
-        <translation>Polskaja</translation>
+        <translation>لهستانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="184"/>
         <source>Pashto</source>
-        <translation>Puštu</translation>
+        <translation>پشتو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="185"/>
         <source>Portuguese</source>
-        <translation>Partugalskaja</translation>
+        <translation>پرتغالی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="186"/>
         <source>Quechua</source>
-        <translation>Kiečua</translation>
+        <translation>کچوا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="187"/>
         <source>Raeto-Romance</source>
-        <translation>Retaramanskaja</translation>
+        <translation>ریتو-رومنس</translation>
     </message>
     <message>
         <location filename="../language.cc" line="188"/>
         <source>Kirundi</source>
-        <translation>Kirundzi</translation>
+        <translation>کیروندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="189"/>
         <source>Romanian</source>
-        <translation>Rumynskaja</translation>
+        <translation>رومانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="190"/>
         <source>Russian</source>
-        <translation>Rasiejskaja</translation>
+        <translation>روسی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="191"/>
         <source>Kinyarwanda</source>
-        <translation>Ruanda</translation>
+        <translation>کینیارواندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="192"/>
         <source>Sanskrit</source>
-        <translation>Sanskryt</translation>
+        <translation>سانسکریتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="193"/>
         <source>Sardinian</source>
-        <translation>Sardynskaja</translation>
+        <translation>ساردینی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="194"/>
         <source>Sindhi</source>
-        <translation>Sindchi</translation>
+        <translation>سندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="195"/>
         <source>Northern Sami</source>
-        <translation>Paŭnočnasaamskaja</translation>
+        <translation>سامی شمال</translation>
     </message>
     <message>
         <location filename="../language.cc" line="196"/>
         <source>Sango</source>
-        <translation>Sango</translation>
+        <translation>سانگو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="197"/>
         <source>Serbo-Croatian</source>
-        <translation>Serbskacharvackaja</translation>
+        <translation>صربستانی- کرواتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="198"/>
         <source>Sinhala</source>
-        <translation>Synhalskaja</translation>
+        <translation>سنهالی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="199"/>
         <source>Slovak</source>
-        <translation>Słavackaja</translation>
+        <translation>اسلواکی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="200"/>
         <source>Slovenian</source>
-        <translation>Słavienskaja</translation>
+        <translation>اسلونی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="201"/>
         <source>Samoan</source>
-        <translation>Samaanskaja</translation>
+        <translation>ساموی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="202"/>
         <source>Shona</source>
-        <translation>Šona</translation>
+        <translation>شونا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="203"/>
         <source>Somali</source>
-        <translation>Samalijskaja</translation>
+        <translation>سومالی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="204"/>
         <source>Albanian</source>
-        <translation>Albanskaja</translation>
+        <translation>آلبانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="205"/>
         <source>Serbian</source>
-        <translation>Serbskaja</translation>
+        <translation>صربستانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="206"/>
         <source>Swati</source>
-        <translation>Svaci</translation>
+        <translation>سواتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="207"/>
         <source>Southern Sotho</source>
-        <translation>Sesota</translation>
+        <translation>سوتو جنوب</translation>
     </message>
     <message>
         <location filename="../language.cc" line="208"/>
         <source>Sundanese</source>
-        <translation>Sundanskaja</translation>
+        <translation>سوندانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="209"/>
         <source>Swedish</source>
-        <translation>Švedzkaja</translation>
+        <translation>سوئدی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="210"/>
         <source>Swahili</source>
-        <translation>Suachili</translation>
+        <translation>سواحیلی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="211"/>
         <source>Tamil</source>
-        <translation>Tamilskaja</translation>
+        <translation>تامیلی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="212"/>
         <source>Telugu</source>
-        <translation>Teługu</translation>
+        <translation>تیلگو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="213"/>
         <source>Tajik</source>
-        <translation>Tadžyckaja</translation>
+        <translation>تاجیک</translation>
     </message>
     <message>
         <location filename="../language.cc" line="214"/>
         <source>Thai</source>
-        <translation>Tajskaja</translation>
+        <translation>تایلندی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="215"/>
         <source>Tigrinya</source>
-        <translation>Tygryńja</translation>
+        <translation>تگرینی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="216"/>
         <source>Turkmen</source>
-        <translation>Turkmenskaja</translation>
+        <translation>ترکمن</translation>
     </message>
     <message>
         <location filename="../language.cc" line="217"/>
         <source>Tagalog</source>
-        <translation>Tagalskaja</translation>
+        <translation>تاگالوگی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="218"/>
         <source>Tswana</source>
-        <translation>Tsvana</translation>
+        <translation>تسوانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="219"/>
         <source>Tonga</source>
-        <translation>Tanganskaja</translation>
+        <translation>تونگا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="220"/>
         <source>Turkish</source>
-        <translation>Tureckaja</translation>
+        <translation>ترکی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="221"/>
         <source>Tsonga</source>
-        <translation>Tsonga</translation>
+        <translation>تسونگا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="222"/>
         <source>Tatar</source>
-        <translation>Tatarskaja</translation>
+        <translation>تاتاری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="223"/>
         <source>Twi</source>
-        <translation>Akan</translation>
+        <translation>توی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="224"/>
         <source>Tahitian</source>
-        <translation>Taicianskaja</translation>
+        <translation>تاهیتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="225"/>
         <source>Uighur</source>
-        <translation>Ujhurskaja</translation>
+        <translation>اویغوری</translation>
     </message>
     <message>
         <location filename="../language.cc" line="226"/>
         <source>Ukrainian</source>
-        <translation>Ukrainskaja</translation>
+        <translation>اوکراینی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="227"/>
         <source>Urdu</source>
-        <translation>Urdu</translation>
+        <translation>اردو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="228"/>
         <source>Uzbek</source>
-        <translation>Uzbeckaja</translation>
+        <translation>ازبکی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="229"/>
         <source>Venda</source>
-        <translation>Vendzkaja</translation>
+        <translation>ویندا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="230"/>
         <source>Vietnamese</source>
-        <translation>Vijetnamskaja</translation>
+        <translation>ویتنامی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="231"/>
         <source>Volapuk</source>
-        <translation>Vałapiuk</translation>
+        <translation>ولاپوک</translation>
     </message>
     <message>
         <location filename="../language.cc" line="232"/>
         <source>Walloon</source>
-        <translation>Valonskaja</translation>
+        <translation>والونی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="233"/>
         <source>Wolof</source>
-        <translation>Vałof</translation>
+        <translation>ولوف</translation>
     </message>
     <message>
         <location filename="../language.cc" line="234"/>
         <source>Xhosa</source>
-        <translation>Kosa</translation>
+        <translation>زوسا</translation>
     </message>
     <message>
         <location filename="../language.cc" line="235"/>
         <source>Yiddish</source>
-        <translation>Idyš</translation>
+        <translation>یدیشی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="236"/>
         <source>Yoruba</source>
-        <translation>Joruba</translation>
+        <translation>یوروبی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="237"/>
         <source>Zhuang</source>
-        <translation>Čžuanskaja</translation>
+        <translation>ژوانکی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="238"/>
         <source>Chinese</source>
-        <translation>Kitajskaja</translation>
+        <translation>چینی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="239"/>
         <source>Zulu</source>
-        <translation>Zułu</translation>
+        <translation>زولو</translation>
     </message>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Lojban</source>
-        <translation>Łožban</translation>
+        <translation>لوجبانی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="375"/>
         <source>Traditional Chinese</source>
-        <translation>Tradycyjnaja kitajskaja</translation>
+        <translation>چینی سنتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="376"/>
         <source>Simplified Chinese</source>
-        <translation>Sproščanaja kitajskaja</translation>
+        <translation>چینی ساده</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Other</source>
-        <translation>Inšaja</translation>
+        <translation>سایر</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation>Inšyja dyjalekty sproščanaj kitajskaj</translation>
+        <translation>چینی سایر گویش‌های ساده</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation>Inšyja dyjalekty tradycyjnaj kitajskaj</translation>
+        <translation>چینی سایر گویش‌های سنتی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Eastern-European languages</source>
-        <translation>Inšyja ŭschodnieeŭrapiejskija movy</translation>
+        <translation>سایر زبان‌های اروپای شرقی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Western-European languages</source>
-        <translation>Inšyja zachodnieeŭrapiejskija movy</translation>
+        <translation>سایر زبان‌های اروپای غربی</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Russian languages</source>
-        <translation>Inšyja rasiejskija movy</translation>
+        <translation>روسی سایر زبان‌ها</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Japanese languages</source>
-        <translation>Inšyja japonskija movy</translation>
+        <translation>ژاپنی سایر زبان‌ها</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Baltic languages</source>
-        <translation>Inšyja bałckija movy</translation>
+        <translation>بالتیک سایر زبان‌ها</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Greek languages</source>
-        <translation>Inšyja hreckija movy</translation>
+        <translation>یونانی سایر زبان‌ها</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Korean dialects</source>
-        <translation>Inšyja karejskija dyjalekty</translation>
+        <translation>کره‌ای سایر گویش‌ها</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Turkish dialects</source>
-        <translation>Inšyja tureckija dyjalekty</translation>
+        <translation>ترکی سایر گویش‌ها</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Other Thai dialects</source>
-        <translation>Inšyja tajskija dyjalekty</translation>
+        <translation>تایلندی سایر گویش‌ها</translation>
     </message>
     <message>
         <location filename="../language.cc" line="389"/>
         <source>Tamazight</source>
-        <translation>Berberskaja</translation>
+        <translation>آمازیغی</translation>
     </message>
 </context>
 <context>
@@ -2090,7 +2090,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../loaddictionaries.cc" line="241"/>
         <source>Error loading dictionaries</source>
-        <translation>Pamyłka pry ładavańni słoŭnikaŭ</translation>
+        <translation>خطا در بارگیری واژه‌نامه‌ها</translation>
     </message>
 </context>
 <context>
@@ -2098,7 +2098,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../main.cc" line="205"/>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation>Abmyłka ŭ fajle kanfiguracyi. Praciahnuć z standartnymi naładami?</translation>
+        <translation>خطا در پرونده پیکربندی. با تنظیمات پیش‌فرض ادامه می‌دهید؟</translation>
     </message>
 </context>
 <context>
@@ -2107,57 +2107,57 @@ miž klasyčnym i školnym pravapisam)</translation>
         <location filename="../mainwindow.ui" line="46"/>
         <location filename="../mainwindow.cc" line="736"/>
         <source>Welcome!</source>
-        <translation>Vitajem!</translation>
+        <translation>خوش آمدید!</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="69"/>
         <source>&amp;File</source>
-        <translation>&amp;Fajł</translation>
+        <translation>&amp;پرونده</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="86"/>
         <source>&amp;Edit</source>
-        <translation>Ź&amp;mieny</translation>
+        <translation>&amp;ویرایش</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>&amp;Help</source>
-        <translation>&amp;Dapamoha</translation>
+        <translation>&amp;راهنما</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>&amp;View</source>
-        <translation>&amp;Vyhlad</translation>
+        <translation>&amp;نما</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="108"/>
         <source>&amp;Zoom</source>
-        <translation>&amp;Sumier</translation>
+        <translation>&amp;بزرگ‌نمایی</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
         <source>H&amp;istory</source>
-        <translation>&amp;Historyja</translation>
+        <translation>پی&amp;شینه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="131"/>
         <source>&amp;Search Pane</source>
-        <translation>Panel &amp;šukańnia</translation>
+        <translation>قاب &amp;جست‌وجو</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="258"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation>Panel &amp;navigacyi ŭ vynikach</translation>
+        <translation>قاب &amp;ناوبری نتایج</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
         <source>&amp;History Pane</source>
-        <translation>Panel &amp;historyi</translation>
+        <translation>قاب &amp;پیشینه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>&amp;Dictionaries...</source>
-        <translation>&amp;Słoŭniki...</translation>
+        <translation>&amp;واژه‌نامه‌ها...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -2167,7 +2167,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>&amp;Preferences...</source>
-        <translation>&amp;Nałady...</translation>
+        <translation>&amp;ترجیحات...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="337"/>
@@ -2177,17 +2177,17 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="345"/>
         <source>&amp;Homepage</source>
-        <translation>&amp;Chatniaja bačyna</translation>
+        <translation>&amp;برگه آغازین</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="353"/>
         <source>&amp;About</source>
-        <translation>&amp;Infarmacyja</translation>
+        <translation>&amp;درباره</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="356"/>
         <source>About GoldenDict</source>
-        <translation>Infarmacyja pra GoldenDict</translation>
+        <translation>درباره گلدن‌دیکت</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="359"/>
@@ -2198,12 +2198,12 @@ miž klasyčnym i školnym pravapisam)</translation>
         <location filename="../mainwindow.ui" line="367"/>
         <location filename="../mainwindow.cc" line="327"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Vyjści</translation>
+        <translation>&amp;ترک کردن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="370"/>
         <source>Quit from application</source>
-        <translation>Vyjści z pragramy</translation>
+        <translation>ترک کردن برنامه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="373"/>
@@ -2213,17 +2213,17 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="381"/>
         <source>&amp;Forum</source>
-        <translation>&amp;Forum</translation>
+        <translation>&amp;انجمن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="389"/>
         <source>&amp;Close To Tray</source>
-        <translation>Źvinuć u &amp;łotak</translation>
+        <translation>بستن به &amp;سینی</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>Minimizes the window to tray</source>
-        <translation>Źvinuć akno ŭ łotak</translation>
+        <translation>کمینه کردن پنجره به سینی</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="395"/>
@@ -2233,12 +2233,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="407"/>
         <source>&amp;Save Article</source>
-        <translation>&amp;Zachavać artykuł</translation>
+        <translation>&amp;ذخیره بند</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="410"/>
         <source>Save Article</source>
-        <translation>Zachavać artykuł</translation>
+        <translation>ذخیره بند</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="413"/>
@@ -2248,7 +2248,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="425"/>
         <source>&amp;Print</source>
-        <translation>Na&amp;drukavać</translation>
+        <translation>&amp;چاپ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="428"/>
@@ -2258,17 +2258,17 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
         <source>Page Set&amp;up</source>
-        <translation>Nałady &amp;bačyny</translation>
+        <translation>&amp;برپایی برگه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="444"/>
         <source>Print Pre&amp;view</source>
-        <translation>Pieradpr&amp;ahlad druku</translation>
+        <translation>&amp;پیش‌نمایش چاپ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="452"/>
         <source>&amp;Rescan Files</source>
-        <translation>Piera&amp;skanavać fajły</translation>
+        <translation>پویش &amp;دوباره پرونده‌ها</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="455"/>
@@ -2278,12 +2278,12 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
         <source>&amp;Clear</source>
-        <translation>&amp;Ačyścić</translation>
+        <translation>&amp;پاک کردن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="475"/>
         <source>&amp;New Tab</source>
-        <translation>&amp;Novaja ŭkładka</translation>
+        <translation>&amp;زبانه تازه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="478"/>
@@ -2293,13 +2293,13 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="489"/>
         <source>&amp;Configuration Folder</source>
-        <translation>Tečka &amp;kanfiguracyi</translation>
+        <translation>&amp;پوشه پیکربندی</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="497"/>
         <location filename="../mainwindow.cc" line="3397"/>
         <source>&amp;Show</source>
-        <translation>&amp;Pakazać</translation>
+        <translation>&amp;نمایش</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="500"/>
@@ -2309,22 +2309,22 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>&amp;Export</source>
-        <translation>Z&amp;ekspartavać</translation>
+        <translation>&amp;صادر کردن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="516"/>
         <source>&amp;Import</source>
-        <translation>Z&amp;ympartavać</translation>
+        <translation>&amp;وارد کردن</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="527"/>
         <source>&amp;Always on Top</source>
-        <translation>Zaŭsiody na &amp;viersie</translation>
+        <translation>&amp;همیشه در بالا</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="530"/>
         <source>Always on Top</source>
-        <translation>Zaŭsiody na viersie</translation>
+        <translation>همیشه در بالا</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="533"/>
@@ -2336,148 +2336,161 @@ miž klasyčnym i školnym pravapisam)</translation>
         <location filename="../mainwindow.ui" line="545"/>
         <location filename="../mainwindow.cc" line="233"/>
         <source>Menu Button</source>
-        <translation>Knopka meniu</translation>
+        <translation>کلید منو</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="88"/>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation>Pakazvać &amp;nazvy ŭ słoŭnikavaj palicy</translation>
+        <translation>نمایش نا&amp;م‌ها در نوار واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="89"/>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation>Pakazvać małyja znački ŭ palicy &amp;pryładaŭ</translation>
+        <translation>نمایش نشانه‌های &amp;کوچک در نوار ابزار</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="90"/>
         <source>&amp;Menubar</source>
-        <translation>Palica &amp;meniu</translation>
+        <translation>نوار &amp;منو</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="134"/>
         <source>&amp;Navigation</source>
-        <translation>&amp;Navigacyja</translation>
+        <translation>نا&amp;وبری</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="137"/>
         <source>Back</source>
-        <translation>Nazad</translation>
+        <translation>پس</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="139"/>
         <source>Forward</source>
-        <translation>Napierad</translation>
+        <translation>پیش</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="164"/>
         <source>Scan Popup</source>
-        <translation>Ułučyć pracu ŭ vonkavych pragramach</translation>
+        <translation>پویش واشو</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="179"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Vymavić słova (Alt+S)</translation>
+        <translation>بیان واژه (Alt+S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="191"/>
         <source>Zoom In</source>
-        <translation>Pavialičyć</translation>
+        <translation>بزرگ‌نمایی به درون</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="197"/>
         <source>Zoom Out</source>
-        <translation>Pamienšyć</translation>
+        <translation>بزرگ‌نمایی به بیرون</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="201"/>
         <source>Normal Size</source>
-        <translation>Zvyčajny pamier</translation>
+        <translation>اندازه عادی</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="241"/>
         <location filename="../mainwindow.cc" line="1189"/>
         <source>Look up in:</source>
-        <translation>Šukać u:</translation>
+        <translation>یافتن در:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="279"/>
         <source>Found in Dictionaries:</source>
-        <translation>Znojdziena ŭ nastupnych słoŭnikach:</translation>
+        <translation>در این واژه‌نامه‌ها یافت شد:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="309"/>
         <source>Words Zoom In</source>
-        <translation>Pavialičyć radok šukańnia</translation>
+        <translation>بزرگ‌نمایی به درون واژه‌ها</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="313"/>
         <source>Words Zoom Out</source>
-        <translation>Pamienšyć radok šukańnia</translation>
+        <translation>بزرگ‌نمایی به بیرون واژه‌ها</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="315"/>
         <source>Words Normal Size</source>
-        <translation>Zvyčajny pamier radka šukańnia</translation>
+        <translation>اندازه عادی واژه‌ها</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="323"/>
         <source>Show &amp;Main Window</source>
-        <translation>Pakazać &amp;hałoŭnaje akno</translation>
+        <translation>&amp;نمایش پنجره اصلی</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="373"/>
         <source>Opened tabs</source>
-        <translation>Adčynienyja ŭkładki</translation>
+        <translation>زبانه‌های باز شده</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="384"/>
         <source>Close current tab</source>
-        <translation>Začynić dziejnuju ŭkładku</translation>
+        <translation>بستن زبانه جاری</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="394"/>
         <source>Close all tabs</source>
-        <translation>Začynić usie ŭkładki</translation>
+        <translation>بستن همه زبانه‌ها</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="402"/>
         <source>Close all tabs except current</source>
-        <translation>Začynić usie ŭkładki aproč dziejnaj</translation>
+        <translation>بستن همه زبانه‌ها مگر زبانه جاری</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="551"/>
         <source>Loading...</source>
-        <translation>Ładavańnie...</translation>
+        <translation>بارگیری...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="561"/>
         <source>New Tab</source>
-        <translation>Novaja ŭkładka</translation>
+        <translation>زبانه تازه</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="795"/>
+        <location filename="../mainwindow.cc" line="2864"/>
+        <source>Accessibility API is not enabled</source>
+        <translation>API دست‌رسی به‌کار نیفتاده است</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="872"/>
+        <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
+To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
+        <translation>رشته‌ای که باید در واژه‌نامه‌ها جست‌وجو شود. نویسه‌های عام &apos;*&apos;، &apos;?&apos; و گروه‌هایی از نمادهای &apos;[...]&apos; مجاز هستند.
+برای یافتن نمادهای &apos;*&apos;، &apos;?&apos;، &apos;[&apos;، &apos;]&apos; به ترتیب &apos;\*&apos;، &apos;\?&apos;، &apos;\[&apos;، &apos;\]&apos; را به‌کار ببرید</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1178"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
-        <translation>%1 słoŭnikaŭ, %2 artykułaŭ, %3 słovaŭ</translation>
+        <translation>%1 واژه‌نامه، %2 بند، %3 واژه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1189"/>
         <source>Look up:</source>
-        <translation>Šukać:</translation>
+        <translation>یافتن:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1207"/>
         <source>All</source>
-        <translation>Usie</translation>
+        <translation>همه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1362"/>
         <source>Open Tabs List</source>
-        <translation>Adčynić śpis układak</translation>
+        <translation>باز کردن لیست زبانه‌ها</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1420"/>
         <source>(untitled)</source>
-        <translation>(biaz nazvy)</translation>
+        <translation>(بی‌عنوان)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1633"/>
@@ -2487,44 +2500,32 @@ miž klasyčnym i školnym pravapisam)</translation>
     <message>
         <location filename="../mainwindow.cc" line="2667"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Pamyłka inicyjalizacyi cikavańnia klavišnych skarotaŭ.&lt;br&gt;Pierakanajsia, što XServer maje ŭłučanaje pašyreńnie RECORD.</translation>
+        <translation>برپاسازی سازوکار بازبینی کلیدهای میان‌بر شکست خورد.&lt;br&gt;مطمئن شوید که افزونه RECORD مربوط به XServer روشن شده است.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2804"/>
         <source>New Release Available</source>
-        <translation>Dastuny novy vypusk</translation>
+        <translation>نسخه تازه موجود است</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2805"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>GoldenDict versii &lt;b&gt;%1&lt;/b&gt; dastupny dla załadavańnia.&lt;br&gt;Pstrykni pa &lt;b&gt;Zładavać&lt;/b&gt;, kab pierajści na bačynu ściahvańnia.</translation>
+        <translation>نسخه &lt;b&gt;%1&lt;/b&gt; گلدن‌دیکت برای بارگیری آماده است &lt;br&gt; برای به‌دست آوردن برگه بارگیری &lt;b&gt;بارگیری&lt;/b&gt; را کلیک کنید.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2810"/>
         <source>Download</source>
-        <translation>Zładavać</translation>
+        <translation>بارگیری</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2811"/>
         <source>Skip This Release</source>
-        <translation>Praminuć hety vypusk</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="795"/>
-        <location filename="../mainwindow.cc" line="2864"/>
-        <source>Accessibility API is not enabled</source>
-        <translation>Accessibility API nia ŭłučany</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="872"/>
-        <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
-To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>پرش از این نسخه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2941"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation>Palica meniu jość schavanaja. Skarystaj %1, kab pavaracić nazad.</translation>
+        <translation>شما پنهان کردن نوار منو را برگزیده‌اید. %1 را به‌کار ببرید تا دوباره نمایش داده شود.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="2942"/>
@@ -2534,118 +2535,118 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3040"/>
         <source>Page Setup</source>
-        <translation>Nałady bačyny</translation>
+        <translation>برپایی برگه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3041"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>Niama dasiažnych drukarak. Spačatku ŭstaluj choć adnu.</translation>
+        <translation>چاپ‌گری موجود نیست. لطفاً نخست یکی نصب کنید.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3059"/>
         <source>Print Article</source>
-        <translation>Nadrukavać artykuł</translation>
+        <translation>چاپ بند</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3128"/>
         <source>Article, Complete (*.html)</source>
-        <translation>Artykuł całkom (*.html)</translation>
+        <translation>بند، کامل (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3129"/>
         <source>Article, HTML Only (*.html)</source>
-        <translation>Artykuł, tolki HTML (*.html)</translation>
+        <translation>بند HTML تنها (*.html)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3132"/>
         <source>Save Article As</source>
-        <translation>Zachavać artykuł jak</translation>
+        <translation>ذخیره بند به‌عنوان</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3146"/>
         <source>Error</source>
-        <translation>Pamyłka</translation>
+        <translation>خطا</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3147"/>
         <source>Can&apos;t save article: %1</source>
-        <translation>Niamožna zachavać artykuł: %1</translation>
+        <translation>نمی‌تواند بند: %1 را ذخیره کند</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3184"/>
         <source>Saving article...</source>
-        <translation>Zachoŭvańnie artykuła...</translation>
+        <translation>درحال ذخیره بند...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3233"/>
         <source>The main window is set to be always on top.</source>
-        <translation>Hałoŭnaje akno ciapier zaŭsiody znachodzicca vyšej inšych.</translation>
+        <translation>پنجره اصلی تنظیم می‌شود تا همیشه در بالا باشد.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3393"/>
         <source>&amp;Hide</source>
-        <translation>S&amp;chavać</translation>
+        <translation>پنهان&amp;سازی</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3419"/>
         <source>Export history to file</source>
-        <translation>Ekspartavańnie historyi ŭ fajł</translation>
+        <translation>صادر کردن پیشینه به پرونده</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3421"/>
         <location filename="../mainwindow.cc" line="3483"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation>Tekstavyja fajły (*.txt);;Usie fajły (*.*)</translation>
+        <translation>پرونده‌های متنی (*.txt);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3460"/>
         <source>History export complete</source>
-        <translation>Ekspartavańnie historyi končyłasia</translation>
+        <translation>صادر کردن پیشینه کامل شد</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3463"/>
         <source>Export error: </source>
-        <translation>Pamyłka ekspartu: </translation>
+        <translation>خطا در صادر کردن:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3481"/>
         <source>Import history from file</source>
-        <translation>Impartavańnie historyi z fajła</translation>
+        <translation>وارد کردن پیشینه از پرونده</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3530"/>
         <source>Import error: invalid data in file</source>
-        <translation>Pamyłka impartavańnia: chibnyja źviestki ŭ fajle</translation>
+        <translation>خطا در وارد کردن: داده نامعتبر در پرونده</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3534"/>
         <source>History import complete</source>
-        <translation>Impartavańnie historyi končyłasia</translation>
+        <translation>وارد کردن پیشینه کامل شد</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3537"/>
         <source>Import error: </source>
-        <translation>Pamyłka impartavańnia: </translation>
+        <translation>خطا در وارد کردن:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3772"/>
         <source>Dictionary info</source>
-        <translation>Infarmacyja pra słoŭnik</translation>
+        <translation>اطلاعات واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3776"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>سرواژه‌های واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3778"/>
         <source>Open dictionary folder</source>
-        <translation>Adčynić słoŭnikavy katalog</translation>
+        <translation>باز کردن پوشه واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3784"/>
         <source>Edit dictionary</source>
-        <translation>Redagavać słoŭnik</translation>
+        <translation>ویرایش واژه‌نامه</translation>
     </message>
 </context>
 <context>
@@ -2653,12 +2654,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mdx.cc" line="552"/>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation>Słoŭnikavy fajł skažony ci paškodžany</translation>
+        <translation>پرونده واژه‌نامه دست‌کاری یا خراب شده است</translation>
     </message>
     <message>
         <location filename="../mdx.cc" line="563"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation>Abmyłka ładavańnia artykuła z %1, z pryčyny: %2</translation>
+        <translation>بارگیری بند از %1 شکست خورد، دلیل: %2</translation>
     </message>
 </context>
 <context>
@@ -2666,7 +2667,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mediawiki.cc" line="310"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>Pamyłka razboru fajła XML: %1 — radok %2, słupok %3</translation>
+        <translation>خطای تجزیه XML: %1 در %2،%3</translation>
     </message>
 </context>
 <context>
@@ -2674,7 +2675,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mediawiki.cc" line="185"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>Pamyłka razboru fajła XML: %1 — radok %2, słupok %3</translation>
+        <translation>خطای تجزیه XML: %1 در %2،%3</translation>
     </message>
 </context>
 <context>
@@ -2682,22 +2683,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../sources.cc" line="415"/>
         <source>Enabled</source>
-        <translation>Ułučany</translation>
+        <translation>به‌کار افتاده</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="417"/>
         <source>Name</source>
-        <translation>Nazva</translation>
+        <translation>نام</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="419"/>
         <source>Address</source>
-        <translation>Adras</translation>
+        <translation>آدرس</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="421"/>
         <source>Icon</source>
-        <translation>Značak</translation>
+        <translation>نشانه</translation>
     </message>
 </context>
 <context>
@@ -2705,12 +2706,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.ui" line="14"/>
         <source>Form</source>
-        <translation>Chorma</translation>
-    </message>
-    <message>
-        <location filename="../orderandprops.ui" line="76"/>
-        <source>Dictionary order:</source>
-        <translation>Paradak słoŭnikaŭ:</translation>
+        <translation>فرم</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="41"/>
@@ -2721,69 +2717,74 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../orderandprops.ui" line="76"/>
+        <source>Dictionary order:</source>
+        <translation>ترتیب واژه‌نامه‌ها:</translation>
+    </message>
+    <message>
         <location filename="../orderandprops.ui" line="139"/>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>Nieŭžyvanyja (vyłučanyja) słoŭniki:</translation>
+        <translation>واژه‌نامه‌های غیرفعال (از کار افتاده):</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="153"/>
         <source>Dictionary information</source>
-        <translation>Infarmacyja pra słoŭnik</translation>
+        <translation>اطلاعات واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="161"/>
         <source>Name:</source>
-        <translation>Nazva:</translation>
+        <translation>نام:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="188"/>
         <source>Total articles:</source>
-        <translation>Usiaho artykułaŭ:</translation>
+        <translation>جمع بندها:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="195"/>
         <source>Total words:</source>
-        <translation>Usiaho słovaŭ:</translation>
+        <translation>جمع واژه‌ها:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="212"/>
         <source>Translates from:</source>
-        <translation>Kryničnaja mova:</translation>
+        <translation>ترجمه از:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="219"/>
         <source>Translates to:</source>
-        <translation>Metavaja mova:</translation>
+        <translation>ترجمه به:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="248"/>
         <source>Description:</source>
-        <translation>Apisańnie:</translation>
+        <translation>شرح:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="328"/>
         <source>Files comprising this dictionary:</source>
-        <translation>Fajły, jakija składajuć słoŭnik:</translation>
+        <translation>پرونده‌های دربرگیرنده این واژه‌نامه:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="408"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Uparadkuj słoŭniki, raźmierkavaŭšy ich myššu. Kab nie ŭžyvać słoŭnika, pieraciahni jaho ŭ grupu vyłučanych słoŭnikaŭ.</translation>
+        <translation>با کشیدن و رها کردن آیتم‌ها ترتیب آن‌ها را تنظیم کنید. برای از کار انداختن واژه‌نامه‌ها آن‌ها را در گروه غیرفعال بیندازید.</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="248"/>
         <source>Sort by name</source>
-        <translation>Sartavać pavodle nazvy</translation>
+        <translation>مرتب کردن با نام</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="250"/>
         <source>Sort by languages</source>
-        <translation>Sartavać pavodle movy</translation>
+        <translation>مرتب کردن با زبان</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="268"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>سرواژه‌های واژه‌نامه</translation>
     </message>
 </context>
 <context>
@@ -2791,12 +2792,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../sources.cc" line="913"/>
         <source>Path</source>
-        <translation>Šlach</translation>
+        <translation>مسیر</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="915"/>
         <source>Recursive</source>
-        <translation>Rekursiŭna</translation>
+        <translation>بازگشتی</translation>
     </message>
 </context>
 <context>
@@ -2804,167 +2805,167 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../preferences.ui" line="14"/>
         <source>Preferences</source>
-        <translation>Nałady</translation>
+        <translation>ترجیحات</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="47"/>
         <source>&amp;Interface</source>
-        <translation>&amp;Interfejs</translation>
+        <translation>&amp;رابط</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="53"/>
+        <source>Startup</source>
+        <translation>آغازگر</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="59"/>
+        <source>Automatically starts GoldenDict after operation system bootup.</source>
+        <translation>پس از بالا آمدن سیستم‌عامل گلدن‌دیکت به‌طور خودکار اجرا شود.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="62"/>
+        <source>Start with system</source>
+        <translation>آغاز هم‌راه با سیستم</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="74"/>
+        <source>Add-on style:</source>
+        <translation>سبک افزونه:</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="99"/>
+        <source>When enabled, an icon appears in the sytem tray area which can be used
+to open main window and perform other tasks.</source>
+        <translation>هنگامی‌که به‌کار افتاده، یک نشانه در سینی سیستم نمایش داده می‌شود
+که می‌تواند برای باز کردن پنجره اصلی و انجام دیگر کارها به‌کار برده شود.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="103"/>
+        <source>Enable system tray icon</source>
+        <translation>به‌کار انداختن نشانه سینی سیستم</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="121"/>
+        <source>With this on, the application starts directly to system tray without showing
+its main window.</source>
+        <translation>با به‌کار انداختن این، برنامه هنگام آغاز بدون
+نمایش پنجره اصلی به سینی سیستم می‌رود.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="125"/>
+        <source>Start to system tray</source>
+        <translation>آغاز برنامه در سینی سیستم</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="132"/>
+        <source>With this on, an attempt to close main window would hide it instead of closing
+the application.</source>
+        <translation>با به‌کار انداختن این،هر تلاشی برای بستن پنجره
+اصلی به جای بستن برنامه آن‌را پنهان می‌کند.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="136"/>
+        <source>Close to system tray</source>
+        <translation>بستن به سینی سیستم</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="146"/>
+        <source>Double-click translates the word clicked</source>
+        <translation>دوبار کلیک واژه کلیک شده را ترجمه کند</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="153"/>
+        <source>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</source>
+        <translation>در حالت عادی، فشردن کلید ESC تمرکز را به خط ترجمه انتقال
+می‌دهد. با به‌کار انداختن این، باعث پنهان شدن پنجره اصلی می‌شود.</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="157"/>
+        <source>ESC key hides main window</source>
+        <translation>کلید ESC پنجره اصلی را پنهان کند</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="164"/>
+        <source>Turn this option on if you want to select words by single mouse click</source>
+        <translation>اگر می‌خواهید واژه‌ها را با تک کلیک موش برگزینید این گزینه را به‌کار اندازید</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="167"/>
+        <source>Select word by single click</source>
+        <translation>برگزیدن واژه با تک کلیک</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="187"/>
         <source>Tabbed browsing</source>
-        <translation>Kiravańnie ŭkładkami</translation>
+        <translation>مرور زبانه‌ای</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="193"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>Zvyčajna, adčynienaja ŭkładka adrazu stanovicca dziejnaj.
-Pa ŭłučeńni hetaje opcyi, novyja ŭkładki buduć adčyniacca
-bieź pierachodu ŭ stan dziejnaj.</translation>
+        <translation>در حالت عادی، با باز کردن یک زبانه‌ی تازه فوری به آن می‌روید.
+با فعال بودن این، زیانه‌ی تازه باز می‌شود ولی به آن نمی‌روید.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="198"/>
         <source>Open new tabs in background</source>
-        <translation>Adčyniać novyja ŭkładki ŭ fonie</translation>
+        <translation>باز کردن زبانه‌های تازه در پس‌زمینه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="205"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Pa ŭłučeńni hetaje opcyi, novyja ŭkładki buduć
-adčyniacca adrazu za dziejnaj, a nie ŭ kancy.</translation>
+        <translation>با فعال کردن ابن، زبانه‌های تازه پس از 
+زبانه فعلی فعال باز می‌شوند، وگرنه
+به‌عنوان آخرین زیانه افزوده می‌شوند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="210"/>
         <source>Open new tabs after the current one</source>
-        <translation>Adčyniać układki za dziejnaj</translation>
+        <translation>باز کردن زبانه تازه پس از زبانه جاری</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="217"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation>Ułučy hetuju opcyju, kali nie žadaješ bačyć palicy ŭkładak,
-kali tolki adna ŭkładka jość adčynienaja.</translation>
+        <translation>اگر نمی‌خواهید نوار زبانه اصلی را هنگامی‌که تنها یک زبانه باز شده دارید ببینید این را برگزینید.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="220"/>
         <source>Hide single tab</source>
-        <translation>Chavać adzinuju ŭkładku</translation>
+        <translation>پنهان کردن تک زبانه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="227"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation>Ctrl-Tab pierałučaje ŭkładki ŭ skarystanym paradku</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
-to open main window and perform other tasks.</source>
-        <translation>Kali ŭłučana, u systemnym łotku źjavicca značak, jaki možna
-karystać dla vyklikańnia hałoŭnaha akna dy inšych dziejańniaŭ.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="103"/>
-        <source>Enable system tray icon</source>
-        <translation>Ułučyć značak u systemnym łotku</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="121"/>
-        <source>With this on, the application starts directly to system tray without showing
-its main window.</source>
-        <translation>Z hetaj opcyjaj pragrama budzie startavać prost u systemnym łotku z schavanym hałoŭnym aknom.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="125"/>
-        <source>Start to system tray</source>
-        <translation>Startavać u systemnym łotku</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="132"/>
-        <source>With this on, an attempt to close main window would hide it instead of closing
-the application.</source>
-        <translation>Z hetaj opcyjaj začynieńnie hałoŭnaha akna
-budzie źvinać jaho ŭ systemny łotak.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="136"/>
-        <source>Close to system tray</source>
-        <translation>Źvinać u systemny łotak</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="164"/>
-        <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation>Ułučy hetuju opcyju, kali chočaš vybirać słovy adnym pstrykam</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="167"/>
-        <source>Select word by single click</source>
-        <translation>Vybirać słovy adnym pstrykam</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="53"/>
-        <source>Startup</source>
-        <translation>Startavańnie</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="59"/>
-        <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>Aŭtamatyčna startavać GoldenDict pa załadavańni systemy.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="62"/>
-        <source>Start with system</source>
-        <translation>Startavać razam z systemaju</translation>
+        <translation>با مهار+Tab بین زبانه‌ها به ترتیب MRU جابه‌جا شوید</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="239"/>
         <source>Interface language:</source>
-        <translation>Mova interfejsu:</translation>
+        <translation>زبان رابط کاربری:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="265"/>
         <source>Display style:</source>
-        <translation>Styl artykułaŭ:</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="146"/>
-        <source>Double-click translates the word clicked</source>
-        <translation>Pierakładać vybranaje słova padvojnym pstrykam</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="153"/>
-        <source>Normally, pressing ESC key moves focus to the translation line.
-With this on however, it will hide the main window.</source>
-        <translation>Zvyčajna, naciskańnie klaviša ESC pieramiaščaje fokus u radok uvodu.
-Razam z hetaj opcyjaj, nacisk klaviša budzie chavać hałoŭnaje akno.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="157"/>
-        <source>ESC key hides main window</source>
-        <translation>Klaviš ESC chavaje hałoŭnaje akno</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="74"/>
-        <source>Add-on style:</source>
-        <translation>Dadatkovy styl:</translation>
+        <translation>سبک نمایش:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="311"/>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation>Nastaŭ hetaje značeńnie, kab unikać vialikich meniušak.</translation>
+        <translation>برای دوری از فهرست زمینه خیلی بزرگ این مقدار را تنظیم کنید.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="314"/>
         <source>Context menu dictionaries limit:</source>
-        <translation>Hranica kolkaści słoŭnikaŭ u vypadnym meniu:</translation>
+        <translation>شمار واژه‌نامه‌های فهرست زمینه:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="357"/>
         <source>&amp;Scan Popup</source>
-        <translation>&amp;Karystańnie zvonku</translation>
+        <translation>پویش &amp;واشو</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="376"/>
@@ -2972,137 +2973,139 @@ Razam z hetaj opcyjaj, nacisk klaviša budzie chavać hałoŭnaje akno.</transla
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>Kali ŭłučana, vypłyŭnoje akno budzie pakazvacca kožny raz, kali
-pieramiaścić kursor myšy na słova na ekranie (Windows) ci vybrać
-jaho (Linux). Kali ŭłučana, možna adłučyć ci ŭłučyć pracu vypłyŭnoha
-akna ŭ hałoŭnym aknie ci ŭ systemnym łotku.</translation>
+        <translation>وقتی به‌کار افتاده، یک پنجره ترجمه واشو زمانی‌که شما با موش روی
+واژه‌ای روی نمایش‌گر اشاره کنید (ویندوز) یا واژه‌ای را با موش
+برگزینید (لینوکس) نمایش داده می‌شود. زمانی‌که به‌کار افتاده است، شما 
+می‌توانید آن‌را از پنجره اصلی یا نشانه سینی سیستم خاموش یا روشن کنید.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="382"/>
         <source>Enable scan popup functionality</source>
-        <translation>Ułučyć mechanizm vypłyŭnych voknaŭ</translation>
+        <translation>به‌کار انداختن قابلیت پویش واشو</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="394"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Vyznačaje ci ŭłučać vonkavyja vypłyŭnyja vokny pry startavańni pragramy.</translation>
+        <translation>برگزینید که آیا حالت پویش واشو به‌طور پیش‌فرض روشن باشد یا نه. اگر
+به‌کار افتاده باشد، برنامه همیشه با فعال بودن پویش واشو آغاز می‌شود.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="398"/>
         <source>Start with scan popup turned on</source>
-        <translation>Startavać razam z ułučanymi vypłyŭnymi voknami</translation>
+        <translation>آغاز با روشن بودن پویش واشو</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="405"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>Pakazvać vypłyŭnoje akno tolki tady, kali karystalnik zaciśnie ŭsie paznačanyja klavišy.</translation>
+        <translation>با به‌کار انداختن این، واشو تنها زمانی نمایش داده می‌شود که
+هنگام تغییر گزینش واژه همه کلیدهای برگزیده فشار داده شوند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="409"/>
         <source>Only show popup when all selected keys are kept pressed:</source>
-        <translation>Pakazvać vypłyŭnoje akno tolki pry nastupnych zacisnutych klavišach:</translation>
+        <translation>تنها زمانی که همه کلیدهای انتخاب شده فشار داده شده‌اند واشو را نمایش بده:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="448"/>
         <source>Left Ctrl only</source>
-        <translation>Tolki levy Ctrl</translation>
+        <translation>تنها مهار چپ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="451"/>
         <source>Left Ctrl</source>
-        <translation>Levy Ctrl</translation>
+        <translation>مهار چپ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="458"/>
         <source>Right Shift only</source>
-        <translation>Tolki pravy Shift</translation>
+        <translation>تنها تبدیل چپ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="461"/>
         <source>Right Shift</source>
-        <translation>Pravy Shift</translation>
+        <translation>تبدیل راست</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="468"/>
         <source>Alt key</source>
-        <translation>Klaviš Alt</translation>
+        <translation>کلید دگرساز</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="471"/>
         <source>Alt</source>
-        <translation>Alt</translation>
+        <translation>دگرساز</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="478"/>
         <source>Ctrl key</source>
-        <translation>Klaviš Ctrl</translation>
+        <translation>کلید مهار</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="481"/>
         <source>Ctrl</source>
-        <translation>Ctrl</translation>
+        <translation>مهار</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="488"/>
         <source>Left Alt only</source>
-        <translation>Tolki levy Alt</translation>
+        <translation>تنها دگرساز چپ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="491"/>
         <source>Left Alt</source>
-        <translation>Levy Alt</translation>
+        <translation>دگرساز چپ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="498"/>
         <source>Shift key</source>
-        <translation>Klaviš Shift</translation>
+        <translation>کلید تبدیل</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="501"/>
         <source>Shift</source>
-        <translation>Shift</translation>
+        <translation>تبدیل</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="508"/>
         <source>Right Alt only</source>
-        <translation>Tolki pravy Alt</translation>
+        <translation>تنها دگرساز راست</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="511"/>
         <source>Right Alt</source>
-        <translation>Pravy Alt</translation>
+        <translation>دگرساز راست</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="518"/>
         <source>Right Ctrl only</source>
-        <translation>Tolki pravy Ctrl</translation>
+        <translation>تنها مهار راست</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="521"/>
         <source>Right Ctrl</source>
-        <translation>Pravy Ctrl</translation>
+        <translation>مهار راست</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="528"/>
         <source>Left Shift only</source>
-        <translation>Tolki levy Shift</translation>
+        <translation>تنها تبدیل چپ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="531"/>
         <source>Left Shift</source>
-        <translation>Levy Shift</translation>
+        <translation>تبدیل چپ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="538"/>
         <source>Windows key or Meta key</source>
-        <translation>Windows-klaviš ci Meta-klaviš</translation>
+        <translation>کلید ویندوز یا کلید متا</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="541"/>
         <source>Win/Meta</source>
-        <translation>Win/Meta</translation>
+        <translation>ویندوز/متا</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="575"/>
@@ -3110,58 +3113,59 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation>Zvyčajna, kab vyklikać vypłyŭnoje akno, treba trymać
-nacisnutymi adpaviednyja klavišy ŭ čas vybirańnia słova.
-Razam z hetaj opcyjaj, klavišy mohuć być nacisnutymi
-i praz peŭny čas.</translation>
+        <translation>به‌طور عادی، به منظور فعال کردن واشو شما باید هنگامی‌که یک واژه
+را برگزیده‌اید کلیدهای برگزیده شده را فشار داده شده نگه دارید.
+با به‌کار انداختن این، کلیدهای برگزیده، هم‌چنین می‌توانند
+با فاصه کوتاهی پس از انجام گزینش واژه فشار داده شوند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="581"/>
         <source>Keys may also be pressed afterwards, within</source>
-        <translation>Klavišy možna nacisnuć i praz</translation>
+        <translation>هم‌چنین کلیدها ممکن است فشار داده شوند پس از آن، در مدت</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="588"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>Kab unikać pamyłkovych vyklikaŭ, GoldenDict cikuje za klavišami
-abmiežavanuju kolkaść sekundaŭ, jakaja j zadajecca tut.</translation>
+        <translation>برای پیش‌گیری از رخ‌داد اشتباه، کلیدها پس از
+اتمام گزینش تنها برای چند ثانیه محدود که
+در این‌جا مشخص شده است بازبینی می‌شوند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="612"/>
         <source>secs</source>
-        <translation>s</translation>
+        <translation>ثانیه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="634"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation>Słać pierakładanaje słova ŭ hałoŭnaje akno zamiest vyklikańnia vypłyŭnoha</translation>
+        <translation>واژه ترجمه شده را به‌جای نمایش در پنجره واشو به پنجره اصلی بفرست</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="637"/>
         <source>Send translated word to main window</source>
-        <translation>Słać pierakładanaje słova ŭ hałoŭnaje akno</translation>
+        <translation>واژه ترجمه شده را به پنجره اصلی بفرست</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="665"/>
         <source>Hotkeys</source>
-        <translation>Klavišnyja skaroty</translation>
+        <translation>کلیدهای میان‌برها</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="684"/>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>Vykarystoŭvać nastupny skarot dla vyklikańnia hałoŭnaha akna:</translation>
+        <translation>برای نمایش یا پنهان کردن پنجره اصلی میان‌برهای زیر را به‌کار ببر:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="715"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Vykarystoŭvać nastupny skarot dla pierakładu słova z kišeni:</translation>
+        <translation>برای ترجمه یک واژه از حافظه میان‌برهای زیر را به‌کار ببر:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="762"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>Klavišnyja skaroty jość glabalnymi i dziejničajuć u kožnaj pragramie ŭ kožnym kantekście, pakul pracuje GoldenDict.</translation>
+        <translation>کلیدهای میان‌بر سراسری هستند و تا زمانی که گلدن‌دیکت در پس‌زمینه در حال اجراست در هر برنامه و هر متنی کار می‌کنند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="772"/>
@@ -3174,69 +3178,69 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Zaŭvaha: Padobna na toje, što dziejny  vypusk X.Org XServer maje niepracazdolnaje pašyreńnie RECORD. Klavišnyja skaroty GoldenDict mahčyma rabić nia budutь. Heta treba vypraŭlać na baku serveru. Padrabiaznaja infarmacyja &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;tut&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;. Pry žadańni tam možna pakinuć svoj kamentar.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p dir=&quot;RTL&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;توجه: به نظر می‌رسد شما نسخه‌ای از X.Org XServer که افزونه RECORD آن خراب شده است را در حال اجرا دارید. کلیدهای میان‌بر در گلدن‌دیکت به‌خوبی کار نخواهند کرد. این بایستی در خود server درست شود. لطفاً مراجعه کنید به &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;ثبت باگ&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; و اگر دوست دارید یک یادداشت آن‌جا بگذارید.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="810"/>
         <source>&amp;Audio</source>
-        <translation>&amp;Aŭdyjo</translation>
+        <translation>&amp;شنیداری</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="829"/>
         <source>Pronunciation</source>
-        <translation>Vymaŭleńnie</translation>
+        <translation>بیان کردن</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="835"/>
         <source>Auto-pronounce words in main window</source>
-        <translation>Aŭtamatyčna vymaŭlać słovy ŭ hałoŭnym aknie</translation>
+        <translation>بیان خودکار واژه‌ها در پنجره اصلی</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="842"/>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Aŭtamatyčna vymaŭlać słovy ŭ vypłyŭnym aknie</translation>
+        <translation>بیان خودکار واژه‌ها در پویش واشو</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="852"/>
         <source>Playback</source>
-        <translation>Prajhravańnie</translation>
+        <translation>بازپخش</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="858"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation>Prajhravać huki praz FFmpeg(libav) i libao</translation>
+        <translation>پخش پرونده‌های شنیداری با FFmpeg(libav) و libao</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="861"/>
         <source>Use internal player</source>
-        <translation>Karystać ubudavany prajhravalnik</translation>
+        <translation>به‌کار بردن پخش‌کننده درونی</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="870"/>
         <source>Use any external program to play audio files</source>
-        <translation>Skarystać vonkavuju pragramu dla prajhravańnia aŭdyjo fajłaŭ</translation>
+        <translation>به‌کار بردن هر برنامه بیرونی برای پخش پرونده‌های شنیداری</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="873"/>
         <source>Use external program:</source>
-        <translation>Prajhravać praz vonkavuju pragramu:</translation>
+        <translation>به‌کار بردن برنامه بیرونی:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="910"/>
         <source>&amp;Network</source>
-        <translation>&amp;Sietka</translation>
+        <translation>ش&amp;بکه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="929"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>Ułučyć, kab vykarystoŭvać proksi server
-dla ŭsich sietkavych zapytaŭ pragramy.</translation>
+        <translation>اگر می‌خواهید کارگزار پروکسی را برای همه درخواست‌های
+شبکه برنامه به‌کار ببرید این را به‌کار اندازید.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="933"/>
         <source>Use proxy server</source>
-        <translation>Skarystać proksi-server</translation>
+        <translation>به‌کار بردن کارگزار پروکسی</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="945"/>
@@ -3256,67 +3260,67 @@ dla ŭsich sietkavych zapytaŭ pragramy.</translation>
     <message>
         <location filename="../preferences.ui" line="967"/>
         <source>Type:</source>
-        <translation>Typ:</translation>
+        <translation>نوع:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="977"/>
         <source>Host:</source>
-        <translation>Host:</translation>
+        <translation>میزبان:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="987"/>
         <source>Port:</source>
-        <translation>Port:</translation>
+        <translation>درگاه:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1008"/>
         <source>User:</source>
-        <translation>Karystalnik:</translation>
+        <translation>کاربر:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1018"/>
         <source>Password:</source>
-        <translation>Parol:</translation>
+        <translation>گذرواژه:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1056"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>Dazvolić GoldenDict blakavać bolšaść reklamy praz zabaronu
-peŭnaha źmieściva (vyjavaŭ, ramak), jakoje nie naležyć ułasna sajtam.
-Kali niejkija sajty złamajucca, pasprabuj adłučyć hetuju opcyju.</translation>
+        <translation>با به‌کار انداختن این گلدن‌دیکت بیش‌تر آگهی‌ها را با اجازه ندادن
+به محتوای (تصویرها، قاب‌ها) که از پایگاه مروری شما نیست می‌بندد.
+اگر برخی پایگاه‌ها به خاطر این خراب شدند، این را از کار بیندازید. </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1061"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation>Abmiežavać załadoŭvanaje źmieściva ź inšych sajtaŭ (chavaje bolšaść reklamy)</translation>
+        <translation>بارگیری محتوا از دیگر پایگاه‌ها را می‌بندد (بیش‌تر آگهی‌ها را پنهان می‌کند)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1068"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation>Dazvolić prasłuchoŭvać vymaŭleńnie z vonkavych
-sajtaŭ, jakija patrabujuć Flash ci inšyja sieciŭnyja ŭbudovy.
-Ubudovy musiać być ustalavanymi.</translation>
+        <translation>با به‌کار انداختن این می‌توانید به بیان آواها از شاخه‌های
+برخط که بر روی فلش یا دیگر افزونه‌های وب تکیه کرده‌اند
+گوش کنید. برای کار کردن این گزینه افزونه باید نصب شده باشد.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1073"/>
         <source>Enable web plugins</source>
-        <translation>Ułučyć sieciŭnyja ŭbudovy</translation>
+        <translation>به‌کار انداختن افزونه‌های وب</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1080"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation>Niekatoryja sajty paznajuć GoldenDict praz HTTP-zahałoŭki
-i blakujuć zapyty. Ułučy opcyju, kab abminuć prablemu.</translation>
+        <translation>برخی پایگاه‌ها گلدن‌دیگت را از سرآیند HTTP می‌شناسند و درخواست‌ها
+را می‌بندند. این گزینه را به‌کار اندازید تا مشکل از بین برود.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1084"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation>Nie paznačać GoldenDict u HTTP-zapytach</translation>
+        <translation>گلدن‌دیکت را در سرآیند HTTP نمایان نکن</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1107"/>
@@ -3325,25 +3329,25 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>Kali opcyja ŭłučanaja, pragrama budzie praviarać
-najaŭnaść abnaŭleńniaŭ GoldenDict. Kali najaŭnaść
-paćvierdzicca, pragrama nahadaje pra heta
-j prapanuje naviedać bačynu zładavańnia.</translation>
+        <translation>وقتی به‌کار افتاده است، برنامه به‌طور دوره‌ای برای
+نسخه‌های تازه گلدن‌دیکت برای بارگیری بررسی می‌کند.
+اگر در دست‌رس بود برنامه کاربر را آگاه می‌کند
+و پیام می‌دهد تا یک برگه بارگیری باز کند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1114"/>
         <source>Check for new program releases periodically</source>
-        <translation>Praviarać najaŭnaść novych vypuskaŭ pragramy</translation>
+        <translation>بررسی دوره‌ای برای نسخه‌های تازه برنامه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1135"/>
         <source>Ad&amp;vanced</source>
-        <translation>&amp;Dadatkova</translation>
+        <translation>&amp;پیش‌رفته</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1141"/>
         <source>ScanPopup extra technologies</source>
-        <translation>Dadatkovyja mechanizmy skanavańnia słovaŭ dla vypłyŭnych voknaŭ</translation>
+        <translation>فن‌آوری‌های فراتر پویش واشو</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1147"/>
@@ -3351,163 +3355,162 @@ j prapanuje naviedać bačynu zładavańnia.</translation>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Skarystaj technalogiju IAccessibleEx, kab vyznačać słovy pad kursoram.
-Jana pracuje tolki z tymi pragramami, jakija padtrymlivajuć jaje (prykładam,
-Internet Explorer 9).
-Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</translation>
+        <translation>تلاش می‌کند تا برای به‌دست آوردن واژه زیر نشان‌گر موش فن‌آوری IAccessibleEx را به‌کار ببرد.
+این فن‌آوری تنها با برخی برنامه‌ها که از آن پشتیبانی می‌کنند کار می‌کند (همانند IE9).
+اگر شما از این‌چنین برنامه‌هایی استفاده نمی‌کنید نیازی به برگزیدن این گزینه ندارید.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1153"/>
         <source>Use &amp;IAccessibleEx</source>
-        <translation>Skarystać &amp;IAccessibleEx</translation>
+        <translation>به‌کار بردن &amp;IAccessibleEx</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1160"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Skarystaj technalogiju UI Automation, kab vyznačać słovy pad kursoram.
-Jana pracuje tolki z tymi pragramami, jakija padtrymlivajuć jaje.
-Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</translation>
+        <translation>تلاش می‌کند تا برای به‌دست آوردن واژه زیر نشان‌گر موش فن‌آوری UIAutomation را به‌کار ببرد.
+این فن‌آوری تنها با برخی برنامه‌ها که از آن پشتیبانی می‌کنند کار می‌کند.
+اگر شما از این‌چنین برنامه‌هایی استفاده نمی‌کنید نیازی به برگزیدن این گزینه ندارید.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1165"/>
         <source>Use &amp;UIAutomation</source>
-        <translation>Skarystać &amp;UIAutomation</translation>
+        <translation>به‌کار بردن &amp;UIAutomation</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1172"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Skarystaj admysłovyja zapyty GoldenDict, kab vyznačać słovy pad kursoram.
-Jany pracujuć tolki z tymi pragramami, jakija ich padtrymlivajuć.
-Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</translation>
+        <translation>تلاش می‌کند تا برای به‌دست آوردن واژه زیر نشان‌گر موش پیام‌ ویژه گلدن‌دیکت را به‌کار ببرد.
+این فن‌آوری تنها با برخی برنامه‌ها که از آن پشتیبانی می‌کنند کار می‌کند.
+اگر شما از این‌چنین برنامه‌هایی استفاده نمی‌کنید نیازی به برگزیدن این گزینه ندارید.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1177"/>
         <source>Use &amp;GoldenDict message</source>
-        <translation>Skarystać zapyty &amp;GoldenDict</translation>
+        <translation>به‌کار بردن پیام &amp;گلدن‌دیکت</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1187"/>
         <source>History</source>
-        <translation>Historyja</translation>
+        <translation>پیشینه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1193"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation>Ułučy hetuju opcyju, kab zachoŭvać historyju pierakładanych słovaŭ</translation>
+        <translation>برای نگه‌داری پیشینه واژه‌های ترجمه شده این گزینه را روشن کنید</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1196"/>
         <source>Store &amp;history</source>
-        <translation>Zachoŭvać &amp;historyju</translation>
+        <translation>نگه‌داری &amp;پیشینه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1211"/>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation>Paznačaje maksymalnuju kolkaść zapisaŭ u historyi.</translation>
+        <translation>بیشینه شمار ورودی برای نگه‌داری در پیشینه را تعیین می‌کند.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1214"/>
         <source>Maximum history size:</source>
-        <translation>Pamier historyi:</translation>
+        <translation>بیشینه اندازه پیشینه:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1251"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation>Intervał zachavańnia historyi. Kali 0, historyja budzie zachoŭvacca tolki pierad vychadam.</translation>
+        <translation>وقفه ذخیره پیشینه. اگر ۰ قرار داده شود پیشینه تنها هنگام ترک برنامه ذخیره خواهد شد.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1257"/>
         <source>Save every</source>
-        <translation>Zachoŭvać praz</translation>
+        <translation>ذخیره کن هر</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1274"/>
         <source>minutes</source>
-        <translation>chv</translation>
+        <translation>دقیقه</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1299"/>
         <source>Articles</source>
-        <translation>Artykuły</translation>
+        <translation>بندها</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1305"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Ułučy hetuju opcyju, kab zaŭsiody razhortvać dadatkovyja raździeły artykułaŭ</translation>
+        <translation>برای گستراندن همیشگی بخش‌های اختیاری بندها این گزینه را روشن کنید</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1308"/>
         <source>Expand optional &amp;parts</source>
-        <translation>Razhortvać dadatkovyja &amp;raździeły</translation>
+        <translation>&amp;بخش‌های اختیاری را بگستران</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1317"/>
         <source>Select this option to automatic collapse big articles</source>
-        <translation>Ułučy opcyju, kab aŭtamatyčna zhartać vialikija artykuły</translation>
+        <translation>برای جمع کردن خودکار بندهای بزرگ این گزینه را برگزینید</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1320"/>
         <source>Collapse articles more than</source>
-        <translation>Zhartać artykuły, jakija majuć bolš za</translation>
+        <translation>بندهای بیش از این را جمع کن</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1327"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation>Artykuły bolšyja za heta značeńnie buduć zhartacca</translation>
+        <translation>بندهای کشیده‌تر از این اندازه جمع می‌شوند</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1343"/>
         <source>symbols</source>
-        <translation>znakaŭ</translation>
+        <translation>نماد</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="42"/>
         <source>System default</source>
-        <translation>Systemnaja</translation>
+        <translation>پیش‌فرض سیستم</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="80"/>
         <source>Default</source>
-        <translation>Standartny</translation>
+        <translation>پیش‌فرض</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="81"/>
         <source>Modern</source>
-        <translation>Sučasny</translation>
+        <translation>نوین</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="82"/>
         <source>Lingvo</source>
-        <translation>Lingvo</translation>
+        <translation>لینگوُ</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="83"/>
         <source>Babylon</source>
-        <translation>Babylon</translation>
+        <translation>بابیلون</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="84"/>
         <source>Lingoes</source>
-        <translation>Lingoes</translation>
+        <translation>لینگوز</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="85"/>
         <source>Lingoes-Blue</source>
-        <translation>Lingoes-Blue</translation>
+        <translation>لینگوز-آبی</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="386"/>
         <source>Changing Language</source>
-        <translation>Źmiena movy</translation>
+        <translation>تغییر دادن زبان</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="387"/>
         <source>Restart the program to apply the language change.</source>
-        <translation>Pierastartuj pragramu, kab užyć novuju movu.</translation>
+        <translation>برای به‌کار برده شدن تغییر زبان برنامه را دوباره راه‌اندازی کنید.</translation>
     </message>
 </context>
 <context>
@@ -3515,12 +3518,12 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../sources.cc" line="821"/>
         <source>Audio</source>
-        <translation>Aŭdyjo</translation>
+        <translation>شنیداری</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="823"/>
         <source>Plain Text</source>
-        <translation>Zvyčajny tekst</translation>
+        <translation>متن ساده</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="825"/>
@@ -3530,12 +3533,12 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../sources.cc" line="827"/>
         <source>Prefix Match</source>
-        <translation>Pavodle prefiksu</translation>
+        <translation>همتا بودن پیش‌وند</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="829"/>
         <source>Unknown</source>
-        <translation>Niaviedama</translation>
+        <translation>ناشناخته</translation>
     </message>
 </context>
 <context>
@@ -3543,17 +3546,17 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../programs.cc" line="176"/>
         <source>No program name was given.</source>
-        <translation>Nazvy pragramy nie paznačyli.</translation>
+        <translation>نام برنامه‌ای داده نشده است.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="192"/>
         <source>The program has crashed.</source>
-        <translation>Pragrama niečakana skasavałasia.</translation>
+        <translation>برنامه خراب شده است.</translation>
     </message>
     <message>
         <location filename="../programs.cc" line="195"/>
         <source>The program has returned exit code %1.</source>
-        <translation>Pragrama viarnuła vychodny kod %1.</translation>
+        <translation>برنامه این کد خروج را برگردانده است %1.</translation>
     </message>
 </context>
 <context>
@@ -3561,27 +3564,27 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../sources.cc" line="729"/>
         <source>Enabled</source>
-        <translation>Ułučana</translation>
+        <translation>به‌کار افتاده</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="731"/>
         <source>Type</source>
-        <translation>Typ</translation>
+        <translation>نوع</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="733"/>
         <source>Name</source>
-        <translation>Nazva</translation>
+        <translation>نام</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="735"/>
         <source>Command Line</source>
-        <translation>Zahadny radok</translation>
+        <translation>خط فرمان</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="737"/>
         <source>Icon</source>
-        <translation>Značak</translation>
+        <translation>نشانه</translation>
     </message>
 </context>
 <context>
@@ -3590,97 +3593,97 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
         <location filename="../aard.cc" line="392"/>
         <location filename="../dsl.cc" line="1314"/>
         <source>Article loading error</source>
-        <translation>Pamyłka ładavańnia artykuła</translation>
+        <translation>خطا در بارگیری بند</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="479"/>
         <source>Article decoding error</source>
-        <translation>Pamyłka raskadoŭvańnia artykuła</translation>
+        <translation>خطا در رمزگشایی بند</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="140"/>
         <source>avformat_alloc_context() failed.</source>
-        <translation>Pamyłka avformat_alloc_context().</translation>
+        <translation>avformat_alloc_context() شکست خورد.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="147"/>
         <source>av_malloc() failed.</source>
-        <translation>Pamyłka av_malloc().</translation>
+        <translation>av_malloc() شکست خورد.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="156"/>
         <source>avio_alloc_context() failed.</source>
-        <translation>Pamyłka avio_alloc_context().</translation>
+        <translation>avio_alloc_context() شکست خورد.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="173"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation>Pamyłka avformat_open_input(): %1.</translation>
+        <translation>avformat_open_input() شکست خورد: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="180"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation>Pamyłka avformat_find_stream_info(): %1.</translation>
+        <translation>avformat_find_stream_info() شکست خورد.: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="195"/>
         <source>Could not find audio stream.</source>
-        <translation>Nia vyjšła znajści aŭdyjopłyni.</translation>
+        <translation>نمی‌تواند جریان شنیداری را بیابد.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="203"/>
         <source>Codec [id: %1] not found.</source>
-        <translation>GoldenDict nie znajšoŭ kodeka [id: %1].</translation>
+        <translation>کدک [شناسه: %1] یافت نشد.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="210"/>
         <source>avcodec_open2() failed: %1.</source>
-        <translation>Pamyłka avcodec_open2(): %1.</translation>
+        <translation>avcodec_open2() شکست خورد: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="271"/>
         <source>Cannot find usable audio output device.</source>
-        <translation>Nia vyjšła znajści pryłady vyvadu huku.</translation>
+        <translation>نمی‌تواند دستگاه خروجی شنیداری به‌کار بردنی بیابد.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="284"/>
         <source>Unsupported sample format.</source>
-        <translation>Niepadtrymlivany hukavy farmat.</translation>
+        <translation>قالب نمونه‌برداری پشتیبانی نشده.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="294"/>
         <source>ao_open_live() failed: </source>
-        <translation>Pamyłka ao_open_live(): </translation>
+        <translation>ao_open_live() شکست خورد: </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="299"/>
         <source>No driver.</source>
-        <translation>Niama drajvera.</translation>
+        <translation>راه‌اندازی نیست.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="302"/>
         <source>This driver is not a live output device.</source>
-        <translation>Hety drajver nia jość praładaj vyvadu.</translation>
+        <translation>این راه‌انداز یک دستگاه خروجی زنده نیست.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="305"/>
         <source>A valid option key has an invalid value.</source>
-        <translation>Sapraŭdny kluč parametraŭ maje niesapraŭdnaje značeńnie.</translation>
+        <translation>یک کلید گزینه معتبر مقدار نامعتبر دارد.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="308"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation>Niamožna adčynić: pryłada: %1, kanałaŭ: %2, čaścinia dyskretyzacyi: %3, bitpłyń: %4.</translation>
+        <translation>نمی‌تواند دستگاه: %1 را بازکند، کانال: %2، نرخ: %3، بیت: %4.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unknown error.</source>
-        <translation>Niaviedamaja pamyłka.</translation>
+        <translation>خطای ناشناخته.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="340"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation>Pamyłka avcodec_alloc_frame().</translation>
+        <translation>avcodec_alloc_frame() شکست خورد.</translation>
     </message>
 </context>
 <context>
@@ -3688,17 +3691,17 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../groups_widgets.cc" line="1023"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation>Filtravać słoŭniki pavodle nazvy (Ctrl+F)</translation>
+        <translation>جست‌وجو/پالایه واژه‌نامه (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
-        <translation>Chutki pošuk</translation>
+        <translation>جست‌وجوی تند</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
-        <translation>Ačyścić</translation>
+        <translation>پاک کردن جست‌وجو</translation>
     </message>
 </context>
 <context>
@@ -3707,17 +3710,17 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
         <location filename="../articleview.cc" line="2289"/>
         <location filename="../articleview.cc" line="2296"/>
         <source>ERROR: %1</source>
-        <translation>ABMYŁA: %1</translation>
+        <translation>خطای: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2289"/>
         <source>Resource saving error: </source>
-        <translation>Pamyłka zachavańnia resursu: </translation>
+        <translation>خطا در ذخیره منبع: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2296"/>
         <source>The referenced resource failed to download.</source>
-        <translation>Nia vyjšła zładavać paznačanaha resursu.</translation>
+        <translation>بارگیری منبع ارجاع شده شکست خورد.</translation>
     </message>
 </context>
 <context>
@@ -3725,12 +3728,12 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../romaji.cc" line="107"/>
         <source>Hepburn Romaji for Hiragana</source>
-        <translation>Systema łacinizacyi Hepbiorna dla Chiragany</translation>
+        <translation>روماجی هپ‌برن  برای هیراگانا</translation>
     </message>
     <message>
         <location filename="../romaji.cc" line="116"/>
         <source>Hepburn Romaji for Katakana</source>
-        <translation>Systema łacinizacyi Hepbiorna dla Katakany</translation>
+        <translation>روماجی هپ‌برن  برای کاتاکانا</translation>
     </message>
 </context>
 <context>
@@ -3738,7 +3741,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../russiantranslit.cc" line="107"/>
         <source>Russian Transliteration</source>
-        <translation>Rasiejskaja traśliteracyja</translation>
+        <translation>نویسه‌گردانی روسی</translation>
     </message>
 </context>
 <context>
@@ -3746,12 +3749,12 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../scanpopup.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Dyjalog</translation>
+        <translation>دیالوگ</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="107"/>
         <source>Back</source>
-        <translation>Nazad</translation>
+        <translation>پس</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="110"/>
@@ -3765,12 +3768,12 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../scanpopup.ui" line="121"/>
         <source>Forward</source>
-        <translation>Napierad</translation>
+        <translation>پیش</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="135"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Vymavić słova (Alt+S)</translation>
+        <translation>بیان واژه (Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="145"/>
@@ -3780,7 +3783,7 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../scanpopup.ui" line="155"/>
         <source>Send word to main window (Alt+W)</source>
-        <translation>Dasłać słova u hałoŭnaje akno (Alt+W)</translation>
+        <translation>فرستادن واژه به پنجره اصلی (Alt+W)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="165"/>
@@ -3790,14 +3793,14 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
     <message>
         <location filename="../scanpopup.ui" line="185"/>
         <source>Shows or hides the dictionary bar</source>
-        <translation>Pakazać abo schavać słoŭnikavuju palicu</translation>
+        <translation>نمایش یا پنهان کردن نوار واژه‌نامه</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="208"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation>Skarystaj špilku, kab zamacavać akno na ekranie, źmianiać
-jahony pamier, dy kiravać im kožnym zručnym sposabam.</translation>
+        <translation>این سنجاق را فشار دهید تا پنجره روی صفحه بماند،
+می‌توان تغییر اندازه داد یا طور دیگری مدیریت کرد.</translation>
     </message>
     <message>
         <location filename="../scanpopup.cc" line="501"/>
@@ -3811,17 +3814,17 @@ jahony pamier, dy kiravać im kožnym zručnym sposabam.</translation>
     <message>
         <location filename="../sources.cc" line="1019"/>
         <source>Path</source>
-        <translation>Šlach</translation>
+        <translation>مسیر</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1021"/>
         <source>Name</source>
-        <translation>Nazva</translation>
+        <translation>نام</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1023"/>
         <source>Icon</source>
-        <translation>Značak</translation>
+        <translation>نشانه</translation>
     </message>
 </context>
 <context>
@@ -3829,12 +3832,12 @@ jahony pamier, dy kiravać im kožnym zručnym sposabam.</translation>
     <message>
         <location filename="../sources.ui" line="37"/>
         <source>Files</source>
-        <translation>Fajły</translation>
+        <translation>پرونده‌ها</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="43"/>
         <source>Paths to search for the dictionary files:</source>
-        <translation>Šlachi šukańnia słoŭnikavych fajłaŭ:</translation>
+        <translation>مسیرهای جست‌وجوی پرونده‌های واژه‌نامه:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="57"/>
@@ -3843,7 +3846,7 @@ jahony pamier, dy kiravać im kožnym zručnym sposabam.</translation>
         <location filename="../sources.ui" line="303"/>
         <location filename="../sources.ui" line="370"/>
         <source>&amp;Add...</source>
-        <translation>&amp;Dadać...</translation>
+        <translation>&amp;افزودن...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="64"/>
@@ -3852,42 +3855,42 @@ jahony pamier, dy kiravać im kožnym zručnym sposabam.</translation>
         <location filename="../sources.ui" line="310"/>
         <location filename="../sources.ui" line="377"/>
         <source>&amp;Remove</source>
-        <translation>&amp;Prybrać</translation>
+        <translation>&amp;حذف کردن</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="84"/>
         <source>Re&amp;scan now</source>
-        <translation>Piera&amp;skanavać</translation>
+        <translation>اکنون &amp;پویش دوباره کن</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="100"/>
         <source>Sound Dirs</source>
-        <translation>Katalogi hukavych fajłaŭ</translation>
+        <translation>شاخه‌های آوا</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="106"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>Zrabić słoŭniki adpaviedna dadanym šlacham:</translation>
+        <translation>ساخت واژه‌نامه‌ها از دسته‌های پرونده‌های شنیداری با افزودن مسیرها در این‌جا:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="156"/>
         <source>Morphology</source>
-        <translation>Marfalogija</translation>
+        <translation>ریخت‌شناسی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="162"/>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>Šlach da słoŭnikaŭ Hunspell/Myspell:</translation>
+        <translation>مسیر شاخه با واژه‌نامه‌های Hunspell/Myspell:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="178"/>
         <source>&amp;Change...</source>
-        <translation>Ź&amp;mianić...</translation>
+        <translation>&amp;تغییر دادن...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="187"/>
         <source>Available morphology dictionaries:</source>
-        <translation>Dastupnyja marfalagičnyja słoŭniki:</translation>
+        <translation>واژه‌نامه‌های ریخت‌شناسی موجود:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="199"/>
@@ -3897,149 +3900,150 @@ provides stem words for searches and
 spelling suggestions for mistyped words.
 Add appropriate dictionaries to the bottoms
 of the appropriate groups to use them.</source>
-        <translation>Kožny marfalagičny słoŭnik — heta
-asobny dapamožny słoŭnik, jaki
-zabieśpiačaje padstavovyja formy
-słovaŭ dla šukańnia, i prapanoŭvaje
-padobnyja pravilnyja vyrazy dla
-pamyłkova napisanych. Dadavaj
-słoŭniki ŭ kaniec adpaviednych grup.</translation>
+        <translation>هر واژه‌نامه ریخت‌شناسی همانند واژه‌نامه
+کمکی جداگانه پدیدار می‌شود که ریشه
+واژه‌ها را برای جست‌وجو و پیش‌نهادهای
+درست‌نویسی برای واژه‌های نادرست آماده می‌کند.
+واژه‌نامه‌های مناسب را به انتهای گروه‌های
+مناسب برای به‌کار بردن آن‌ها می‌افزاید.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="224"/>
         <source>Wikipedia</source>
-        <translation>Vikipedyja</translation>
+        <translation>ویکی‌پدیا</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="230"/>
         <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>Sajty Vikipedyi (MediaWiki):</translation>
+        <translation>پایگاه‌های ویکی‌پدیا (ویکی‌مدیا):</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="283"/>
         <source>Websites</source>
-        <translation>Sajty</translation>
+        <translation>پایگاه‌های وب</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="289"/>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Roznyja sajty. %GDWORD% zamienicca na zapytanaje słova:</translation>
+        <translation>هر پایگاه وبی. یک رشته %GDWORD% با واژه درخواستی جای‌گزین می‌شود:</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="334"/>
+        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
+%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
+        <translation>به‌نوبت، به‌کار می‌برد %GD1251% برای CP1251،و %GDISO1%...%GDISO16% برای ISO 8859-1...ISO 8859-16 را به‌ترتیب برای،
+%GDBIG5% برای Big-5، و %GDBIG5HKSCS% برای Big5-HKSCS، و %GDGBK% برای GBK و GB18030، و %GDSHIFTJIS% برای Shift-JIS.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>Programs</source>
-        <translation>Pragramy</translation>
+        <translation>برنامه‌ها</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation>هر برنامه بیرونی. یک رشته %GDWORD% با واژه درخواستی جای‌گزین می‌شود. اگر چنین رشته‌ای آماده نبود، واژه به ورودی استاندارد فرستاده می‌شود.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="406"/>
         <source>Forvo</source>
-        <translation>Forvo</translation>
+        <translation>فوروُ</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="418"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Žyvoje vymaŭleńnie z &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Hety sajt dazvalaje ludziam zapisvać i dzialicca vymaŭleńniem słovaŭ. Ich možna prasłuchać pry dapamozie GoldenDict.</translation>
+        <translation>بیان زنده از &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. این پایگاه به مردم اجازه ضبط و اشتراک بیان‌ها را می‌دهد. شما از گلدن‌دیکت می‌توانید به آن‌ها گوش کنید.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="431"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation>Ułučyć vymaŭleńnie z Forvo</translation>
+        <translation>به‌کار انداختن بیان کردن با فوروُ</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="461"/>
         <source>API Key:</source>
-        <translation>Kluč API:</translation>
+        <translation>کلید API:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="468"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation>Karystańnie sajtam Forvo patrabuje kluč API. Pakiń pole pustym, kab karystacca standartnym klučom, jaki paźniej moža stać niedastupnym, ci zaregistrujsia na sajcie i atrymaj ułasny kluč.</translation>
+        <translation>به‌کار بردن فوروُ هم‌اکنون به یک کلید API نیاز دارد. برای به‌کار بردن
+کلید پیش‌فرض بگذارید این فیلد تهی باشد، چرا که ممکن است در آینده
+در دست‌رس نباشد، یا در پایگاه نام‌نویسی کنید تا کلید خودتان را به‌دست آورید.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="493"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation>Atrymaj svoj ułasny kluč &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;tut&lt;/a&gt;, ci pakiń pole pustym dla standartnaha značeńnia.</translation>
-    </message>
-    <message>
-        <location filename="../sources.ui" line="334"/>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
-%GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation>Taksama karystaj %GD1251% dla CP1251, %GDISO1%...%GDISO16% dla ISO 8859-1...ISO 8859-16, %GDBIG5%
-dla Big-5, %GDBIG5HKSCS% dla Big5-HKSCS, %GDGBK% dla GBK i GB18030, %GDSHIFTJIS% dla Shift-JIS.</translation>
-    </message>
-    <message>
-        <location filename="../sources.ui" line="353"/>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation>Roznyja vonkavyja pragramy. %GDWORD% zamienicca na zapytanaje słova. Kali takoha słova niama, to jaho nakirujuć u standartny ŭvod.</translation>
+        <translation>کلید خودتان را &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;از این‌جا&lt;/a&gt; به‌دست آورید، یا برای به‌کار بردن کلید پیش‌فرض بگذارید تهی باشد.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="506"/>
         <source>Language codes (comma-separated):</source>
-        <translation>Moŭnyja kody (praz kosku):</translation>
+        <translation>کدهای زبان (جدا شده با کاما):</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="513"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation>Pieralik vybranych moŭnyk kodaŭ. Prykładam: „en, uk, pl“.</translation>
+        <translation>لیست کدهای زبان که می‌خواهید داشته باشید. همانند: &quot;en, ru&quot;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="536"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation>Poŭny śpis dastupnych moŭnych kodaŭ &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;tut&lt;/a&gt;.</translation>
+        <translation>لیست همه کدهای زبان &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;این‌جا&lt;/a&gt; در دست‌رس است.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="578"/>
         <source>Transliteration</source>
-        <translation>Tranśliteracyja</translation>
+        <translation>نویسه‌گردانی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="599"/>
         <source>Russian transliteration</source>
-        <translation>Rasiejskaja tranśliteracyja</translation>
+        <translation>نویسه‌گردانی روسی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="610"/>
         <source>Greek transliteration</source>
-        <translation>Hreckaja tranśliteracyja</translation>
+        <translation>نویسه‌گردانی یونانی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="634"/>
         <source>German transliteration</source>
-        <translation>Niamieckaja tranśliteracyja</translation>
+        <translation>نویسه‌گردانی آلمانی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="645"/>
         <source>Belarusian transliteration</source>
-        <translation>Biełaruskaja tranśliteracyja</translation>
+        <translation>نویسه‌گردانی بلاروسی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="671"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
-        <translation>Ułučaje łacinski alfabet dla japonskaje movy</translation>
+        <translation>برای به‌کار بردن الفبای لاتین برای نوشتن زبان ژاپنی به‌کار اندازید</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="674"/>
         <source>Japanese Romaji</source>
-        <translation>Japonski ramadzi</translation>
+        <translation>روماجی ژاپنی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="686"/>
         <source>Systems:</source>
-        <translation>Systemy:</translation>
+        <translation>سامانه‌ها:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="693"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation>Najbolš užyvany metad transkrypcyi japonskaje movy
-na padstavie angielskaje fanalogii</translation>
+        <translation>پر کاربردترین روش آوانویسی ژاپنی،
+بر پایه واج‌شناسی انگلیسی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="697"/>
         <source>Hepburn</source>
-        <translation>Hepbiorn</translation>
+        <translation>هپ‌برن</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="707"/>
@@ -4047,15 +4051,15 @@ na padstavie angielskaje fanalogii</translation>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Heta systema najbolš dakładna adlustroŭvaje znaki kany.
-Standartyzavanaja ŭ ISO 3602.
+        <translation>منظم‌ترین سامانه، یک رابطه یک-به-یک با سامانه‌های
+نوشتاری کانا. استاندارد شده در ISO 3602
 
-U GoldenDict jašče nie padtrymlivajecca.</translation>
+هنوز در گلدن‌دیکت پیاده‌سازی نشده است.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="713"/>
         <source>Nihon-shiki</source>
-        <translation>Nichon-siki</translation>
+        <translation>نیهون-شیکی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="723"/>
@@ -4063,57 +4067,57 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Stvoranaja na padstavie systemy Nichon-siki i adaptavanaja da sučasnaj Japonskaj.
-Standartyzavanaja ŭ ISO 3602.
+        <translation>برپایه سامانه نیهون-شیکی، ولی برای استاندارد نوین ژاپنی پیراسته شده است.
+استاندارد شده در ISO 3602
 
-U GoldenDict jašče nie padtrymlivajecca.</translation>
+هنوز در گلدن‌دیکت پیاده‌سازی نشده است.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="729"/>
         <source>Kunrei-shiki</source>
-        <translation>Kunrej-siki</translation>
+        <translation>کنری-شیکی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="736"/>
         <source>Syllabaries:</source>
-        <translation>Składovyja abecedy:</translation>
+        <translation>هجابندی‌ها:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="743"/>
         <source>Hiragana Japanese syllabary</source>
-        <translation>Składovaja abeceda Chiragana</translation>
+        <translation>هجابندی هیراگانای ژاپنی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="746"/>
         <source>Hiragana</source>
-        <translation>Chiragana</translation>
+        <translation>هیراگانا</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="753"/>
         <source>Katakana Japanese syllabary</source>
-        <translation>Składovaja abeceda Kitakana</translation>
+        <translation>هجابندی کاتاکانای ژاپنی</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="756"/>
         <source>Katakana</source>
-        <translation>Katakana</translation>
+        <translation>کاتاکانا</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="100"/>
         <source>Text to Speech</source>
-        <translation>Syntez movy</translation>
+        <translation>متن به گفتار</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="116"/>
         <source>(not available in portable version)</source>
-        <translation>(nie dastupna ŭ pieranosnaj versii)</translation>
+        <translation>(در نسخه قابل حمل در دست‌رس نیست)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="153"/>
         <location filename="../sources.cc" line="180"/>
         <location filename="../sources.cc" line="207"/>
         <source>Choose a directory</source>
-        <translation>Vybar katalogu</translation>
+        <translation>یک شاخه برگزینید</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="167"/>
@@ -4122,24 +4126,24 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
         <location filename="../sources.cc" line="258"/>
         <location filename="../sources.cc" line="282"/>
         <source>Confirm removal</source>
-        <translation>Paćvierdžańnie vydaleńnia</translation>
+        <translation>تایید حذف کردن</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="168"/>
         <location filename="../sources.cc" line="195"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Prybrać katalog &lt;b&gt;%1&lt;/b&gt; sa śpisu?</translation>
+        <translation>شاخه &lt;b&gt;%1&lt;/b&gt; را از لیست حذف کند؟</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="235"/>
         <location filename="../sources.cc" line="259"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Prybrać sajt &lt;b&gt;%1&lt;/b&gt; sa śpisu?</translation>
+        <translation>پایگاه &lt;b&gt;%1&lt;/b&gt; را از لیست حذف کند؟</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="283"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Prybrać pragramu &lt;b&gt;%1&lt;/b&gt; sa śpisu?</translation>
+        <translation>برنامه &lt;b&gt;%1&lt;/b&gt; را از لیست حذف کند؟</translation>
     </message>
 </context>
 <context>
@@ -4147,7 +4151,7 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
     <message>
         <location filename="../stylescombobox.cc" line="17"/>
         <source>None</source>
-        <translation>Niama</translation>
+        <translation>هیچ کدام</translation>
     </message>
 </context>
 <context>
@@ -4155,77 +4159,77 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
     <message>
         <location filename="../texttospeechsource.ui" line="33"/>
         <source>Selected voice engines:</source>
-        <translation>Vybranyja hałasavyja ruchaviki:</translation>
+        <translation>موتورهای گفتار برگزیده:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="53"/>
         <source>&amp;Add</source>
-        <translation>&amp;Dadać</translation>
+        <translation>&amp;افزودن</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="60"/>
         <source>&amp;Remove</source>
-        <translation>&amp;Vydalić</translation>
+        <translation>&amp;حذف</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation>Nałady</translation>
+        <translation>ترجیحات</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
         <source>Volume:</source>
-        <translation>Hučnaść:</translation>
+        <translation>حجم:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="119"/>
         <source>Rate:</source>
-        <translation>Chutkaść:</translation>
+        <translation>نرخ:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="151"/>
         <source>Preview</source>
-        <translation>Prasłuchoŭvańnie</translation>
+        <translation>پیش‌نمایش</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="165"/>
         <source>Available voice engines:</source>
-        <translation>Dastupnyja ruchaviki:</translation>
+        <translation>موتورهای گفتار موجود:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="183"/>
         <source>Text to be previewed:</source>
-        <translation>Tekst dla prasłuchoŭvańnia:</translation>
+        <translation>متن پیش‌نمایش:</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="190"/>
         <source>Type text to be previewed here.</source>
-        <translation>Upišy siudy tekst, kab prasłuchać.</translation>
+        <translation>متن را تایپ کنید تا این‌جا پیش‌نمایش شود.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="224"/>
         <source>&amp;Preview</source>
-        <translation>&amp;Prasłuchać</translation>
+        <translation>&amp;پیش‌نمایش</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="58"/>
         <source>No TTS voice available</source>
-        <translation>Niama dastupnych syntezataraŭ hołasu</translation>
+        <translation>گفتار TTS در دست‌رس نیست</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation>GoldenDict nie znajšoŭ žadnaha dastupnaha syntezatara hołasu.&lt;br&gt;Pierakanajsia ŭ najaŭnaści choć adnaho ŭstalavanaha syntazatara na svaim kamputary.</translation>
+        <translation>نمی‌تواند گفتار TTS در دست‌رسی بیابد. &lt;br&gt; مطمئن شوید که دست‌کم یک موتور TTS روی رایانه شما نصب شده است.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation>Paćvierdžańnie vydaleńnia</translation>
+        <translation>تایید حذف</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Vydalić hałasavy ruchavik &lt;b&gt;%1&lt;/b&gt; sa śpisu?</translation>
+        <translation>حذف موتور گفتار &lt;b&gt;%1&lt;/b&gt; از لیست؟</translation>
     </message>
 </context>
 <context>
@@ -4233,12 +4237,12 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
     <message>
         <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation>Upišy słova ci vyraz dla šukańnia ŭ słoŭnikach</translation>
+        <translation>یک واژه یا عبارت برای جست‌وجو در واژه‌نامه‌ها تایپ کنید</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
-        <translation>Vypadny śpis</translation>
+        <translation>پایین رفتن</translation>
     </message>
 </context>
 <context>
@@ -4246,22 +4250,22 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation>Ułučana</translation>
+        <translation>به‌کار افتاده</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
-        <translation>Nazva</translation>
+        <translation>نام</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
-        <translation>Id</translation>
+        <translation>شناسه</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
-        <translation>Značak</translation>
+        <translation>نشانه</translation>
     </message>
 </context>
 <context>
@@ -4269,22 +4273,22 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
     <message>
         <location filename="../sources.cc" line="572"/>
         <source>Enabled</source>
-        <translation>Ułučany</translation>
+        <translation>به‌کار افتاده</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="574"/>
         <source>Name</source>
-        <translation>Nazva</translation>
+        <translation>نام</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="576"/>
         <source>Address</source>
-        <translation>Adras</translation>
+        <translation>آدرس</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="578"/>
         <source>Icon</source>
-        <translation>Značak</translation>
+        <translation>نشانه</translation>
     </message>
 </context>
 <context>
@@ -4292,7 +4296,7 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
     <message>
         <location filename="../wordfinder.cc" line="178"/>
         <source>Failed to query some dictionaries.</source>
-        <translation>Pamyłka zapytu ŭ niejkich słoŭnikach.</translation>
+        <translation>پرس و جوی برخی واژه‌نامه‌ها شکست خورد.</translation>
     </message>
 </context>
 <context>
@@ -4300,7 +4304,7 @@ U GoldenDict jašče nie padtrymlivajecca.</translation>
     <message>
         <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
-        <translation>UVAHA: %1</translation>
+        <translation>هشدار: %1</translation>
     </message>
 </context>
 </TS>
