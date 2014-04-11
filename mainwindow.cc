@@ -3920,7 +3920,7 @@ bool MainWindow::handleGDMessage( MSG * message, long * result )
 
 bool MainWindow::isGoldenDictWindow( HWND hwnd )
 {
-  return hwnd == winId() || hwnd == ui.centralWidget->winId();
+  return hwnd == (HWND)winId() || hwnd == (HWND)ui.centralWidget->winId();
 }
 
 #endif

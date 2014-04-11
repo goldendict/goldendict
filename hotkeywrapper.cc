@@ -407,6 +407,12 @@ bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, vo
     }
   }
 
+  if( mainWindow )
+  {
+    if( ( static_cast< MainWindow * >( mainWindow ) )->handleGDMessage( msg, result ) )
+      return true;
+  }
+
   return false;
 }
 
