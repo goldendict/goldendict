@@ -30,8 +30,9 @@ class ArticleView: public QFrame
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,
-          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction,
+          goBackAction, goForwardAction, selectCurrentArticleAction,
           copyAsTextAction, inspectAction;
+  QAction & openSearchAction;
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
@@ -59,6 +60,7 @@ public:
                Instances::Groups const &,
                bool popupView,
                Config::Class const & cfg,
+               QAction & openSearchAction_,
                QAction * dictionaryBarToggled = 0,
                GroupComboBox const * groupComboBox = 0 );
 
@@ -82,6 +84,8 @@ public:
   void showDefinition( QString const & word, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
+
+  void showDefinition( QString const & word, QStringList const & dictIDs );
 
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.

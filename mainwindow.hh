@@ -28,6 +28,7 @@
 #include "translatebox.hh"
 #include "wordlist.hh"
 #include "dictheadwords.hh"
+#include "fulltextsearch.hh"
 
 #ifdef Q_WS_X11
 #include <fixx11h.h>
@@ -160,6 +161,10 @@ private:
   QPrinter & getPrinter(); // Creates a printer if it's not there and returns it
 
   DictHeadwords * headwordsDlg;
+
+  FTS::FtsIndexing ftsIndexing;
+
+  FTS::FullTextSearchDialog * ftsDlg;
 
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
@@ -353,6 +358,8 @@ private slots:
 
   void showTranslationFor( QString const &, unsigned inGroup = 0 );
 
+  void showTranslationFor( QString const &, QStringList const & dictIDs );
+
   void showHistoryItem( QString const & );
 
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
@@ -411,6 +418,9 @@ private slots:
   void focusHeadwordsDialog();
 
   void proxyAuthentication( const QNetworkProxy & proxy, QAuthenticator * authenticator );
+
+  void showFullTextSearchDialog();
+  void closeFullTextSearchDialog();
 
 signals:
   /// Set optional parts expand mode for all tabs

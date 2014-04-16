@@ -442,6 +442,25 @@ struct HeadwordsDialog
   {}
 };
 
+struct FullTextSearch
+{
+  int searchMode;
+  bool matchCase;
+  int maxArticlesPerDictionary;
+  int maxDistanceBetweenWords;
+  bool useMaxDistanceBetweenWords;
+  bool useMaxArticlesPerDictionary;
+  QByteArray dialogGeometry;
+
+  FullTextSearch() :
+    searchMode( 0 ), matchCase( false ),
+    maxArticlesPerDictionary( 100 ),
+    maxDistanceBetweenWords( 2 ),
+    useMaxDistanceBetweenWords( true ),
+    useMaxArticlesPerDictionary( false )
+  {}
+};
+
 struct Class
 {
   Paths paths;
@@ -493,6 +512,8 @@ struct Class
   unsigned int maxHeadwordSize;
 
   HeadwordsDialog headwordsDialog;
+
+  FullTextSearch fts;
 
 #ifdef Q_OS_WIN
   QRect maximizedMainWindowGeometry;

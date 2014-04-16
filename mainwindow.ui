@@ -46,7 +46,16 @@
         <string>Welcome!</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <property name="margin">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
          <number>0</number>
         </property>
        </layout>
@@ -61,7 +70,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -120,9 +129,17 @@
     <addaction name="separator"/>
     <addaction name="clearHistory"/>
    </widget>
+   <widget class="QMenu" name="menuSearch">
+    <property name="title">
+     <string>Search</string>
+    </property>
+    <addaction name="searchInPageAction"/>
+    <addaction name="fullTextSearchAction"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menu_Edit"/>
+   <addaction name="menuSearch"/>
    <addaction name="menuHistory"/>
    <addaction name="menu_Help"/>
   </widget>
@@ -543,6 +560,31 @@
    </property>
    <property name="toolTip">
     <string>Menu Button</string>
+   </property>
+  </action>
+  <action name="searchInPageAction">
+   <property name="text">
+    <string>Search in page</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::TextHeuristicRole</enum>
+   </property>
+  </action>
+  <action name="fullTextSearchAction">
+   <property name="text">
+    <string>Full-text search</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+F</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetWithChildrenShortcut</enum>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::TextHeuristicRole</enum>
    </property>
   </action>
  </widget>

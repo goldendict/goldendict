@@ -12,6 +12,7 @@
 #include <map>
 #include <QVector>
 #include <QSet>
+#include <QList>
 
 #ifdef _MSC_VER
 #include <stdint_msvc.h>
@@ -57,21 +58,6 @@ struct WordArticleLink
   {}
 };
 
-/// Links for full-text search
-struct FTSLink
-{
-  string word; // in utf8
-  uint32_t articleOffset;
-  uint32_t linkOffset;
-
-  FTSLink()
-  {}
-
-  FTSLink( string const & word_, uint32_t articleOffset_ ):
-    word( word_ ), articleOffset( articleOffset_ ), linkOffset( 0 )
-  {}
-};
-
 /// Information needed to open the index
 struct IndexInfo
 {
@@ -100,11 +86,20 @@ public:
   /// is performed.
   vector< WordArticleLink > findArticles( wstring const & );
 
-  /// Find all chain offsets in the index
-  void findAllArticleLinks( QVector< FTSLink > & articleLinks );
+  /// Find all unique article links in the index
+  void findAllArticleLinks( QVector< WordArticleLink > & articleLinks );
 
   /// Retrieve all unique headwors from index
   void getAllHeadwords( QSet< QString > & headwords );
+
+  /// Find all article links and/or headwords in the index
+  void findArticleLinks( QVector< WordArticleLink > * articleLinks,
+                         QSet< uint32_t > * offsets,
+                         QSet< QString > * headwords );
+
+  /// Retrieve headwords for presented article adresses
+  void getHeadwordsFromOffsets( QList< uint32_t > & offsets, QVector< QString > & headwords );
+
 protected:
 
   /// Finds the offset in the btree leaf for the given word, either matching
@@ -137,10 +132,6 @@ protected:
   /// are left.
   void antialias( wstring const &, vector< WordArticleLink > & );
 
-  /// Find all article links
-  void findArticleLinks( QVector< FTSLink > * articleLinks,
-                         QSet< uint32_t > * offsets,
-                         QSet< QString > * headwords );
 protected:
 
   Mutex * idxFileMutex;
@@ -186,7 +177,13 @@ public:
 
   virtual bool getHeadwords( QStringList &headwords );
 
-protected:
+  virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+  string const & ftsIndexName() const
+  { return ftsIdxName; }
+
+  Mutex & getFtsMutex()
+  { return ftsIdxMutex; }
 
   /// Called before each matching operation to ensure that any child init
   /// has completed. Mainly used for deferred init. The default implementation
@@ -195,7 +192,12 @@ protected:
   /// successful, or a human-readable error string otherwise.
   virtual string const & ensureInitDone();
 
+protected:
+  Mutex ftsIdxMutex;
+  string ftsIdxName;
+
   friend class BtreeWordSearchRequest;
+  friend class FTSResultsRequest;
 };
 
 // Everything below is for building the index data.

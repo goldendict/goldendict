@@ -57,7 +57,7 @@ struct ArticleDom
 
     /// Concatenates all childen text nodes recursively to form all text
     /// the node contains stripped of any markup.
-    wstring renderAsText() const;
+    wstring renderAsText( bool stripTrsTag = false ) const;
   };
 
   /// Does the parse at construction. Refer to the 'root' member variable

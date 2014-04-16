@@ -41,7 +41,7 @@ int wcscasecmp( const wchar *s1, const wchar *s2 )
 
 /////////////// ArticleDom
 
-wstring ArticleDom::Node::renderAsText() const
+wstring ArticleDom::Node::renderAsText( bool stripTrsTag ) const
 {
   if ( !isTag )
     return text;
@@ -49,7 +49,8 @@ wstring ArticleDom::Node::renderAsText() const
   wstring result;
 
   for( list< Node >::const_iterator i = begin(); i != end(); ++i )
-    result += i->renderAsText();
+    if( !stripTrsTag || i->tagName != GD_NATIVE_TO_WS( L"!trs" ) )
+      result += i->renderAsText( stripTrsTag );
 
   return result;
 }

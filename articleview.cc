@@ -55,6 +55,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
                           Config::Class const & cfg_,
+                          QAction & openSearchAction_,
                           QAction * dictionaryBarToggled_,
                           GroupComboBox const * groupComboBox_ ):
   QFrame( parent ),
@@ -68,10 +69,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   articleDownAction( this ),
   goBackAction( this ),
   goForwardAction( this ),
-  openSearchAction( this ),
   selectCurrentArticleAction( this ),
   copyAsTextAction( this ),
   inspectAction( this ),
+  openSearchAction( openSearchAction_ ),
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ )
@@ -140,7 +141,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &articleDownAction );
   connect( &articleDownAction, SIGNAL( triggered() ), this, SLOT( moveOneArticleDown() ) );
 
-  openSearchAction.setShortcut( QKeySequence( "Ctrl+F" ) );
   ui.definition->addAction( &openSearchAction );
   connect( &openSearchAction, SIGNAL( triggered() ), this, SLOT( openSearch() ) );
 
@@ -251,6 +251,42 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   if ( mutedDicts.size() )
     req.addQueryItem( "muted", mutedDicts );
+
+  // Update both histories (pages history and headwords history)
+  saveHistoryUserData();
+  emit sendWordToHistory( word );
+
+  // Any search opened is probably irrelevant now
+  closeSearch();
+
+  // Clear highlight all button selection
+  ui.highlightAllButton->setChecked(false);
+
+  emit setExpandMode( expandOptionalParts );
+
+  ui.definition->load( req );
+
+  //QApplication::setOverrideCursor( Qt::WaitCursor );
+  ui.definition->setCursor( Qt::WaitCursor );
+}
+
+void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs )
+{
+  if( dictIDs.isEmpty() )
+    return;
+
+#ifndef DISABLE_INTERNAL_PLAYER
+  // first, let's stop the player
+  if ( cfg.preferences.useInternalPlayer )
+    Ffmpeg::AudioPlayer::instance().stop();
+#endif
+
+  QUrl req;
+
+  req.setScheme( "gdlookup" );
+  req.setHost( "localhost" );
+  req.addQueryItem( "word", word );
+  req.addQueryItem( "dictionaries", dictIDs.join( ",") );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -1763,6 +1799,9 @@ void ArticleView::moveOneArticleDown()
 
 void ArticleView::openSearch()
 {
+  if( !isVisible() )
+    return;
+
   if ( !searchIsOpened )
   {
     ui.searchFrame->show();

@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QTextDocumentFragment>
+#include <QRegExp>
 #include "htmlescape.hh"
 
 namespace Html {
@@ -140,7 +141,13 @@ QString unescape( QString const & str )
 {
   // Does it contain HTML? If it does, we need to strip it
   if ( str.contains( '<' ) || str.contains( '&' ) )
-    return QTextDocumentFragment::fromHtml( str ).toPlainText();
+  {
+    QString tmp = str;
+    tmp.replace( QRegExp( "<(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol)[^>]{0,}>",
+                          Qt::CaseInsensitive, QRegExp::RegExp2 ), " " );
+    tmp.remove( QRegExp( "<[^>]*>", Qt::CaseSensitive, QRegExp::RegExp2 ) );
+    return QTextDocumentFragment::fromHtml( tmp.trimmed() ).toPlainText();
+  }
   return str;
 }
 

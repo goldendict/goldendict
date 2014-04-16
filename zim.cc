@@ -15,6 +15,8 @@
 #include "filetype.hh"
 #include "file.hh"
 #include "tiff.hh"
+#include "ftshelpers.hh"
+#include "htmlescape.hh"
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -51,6 +53,8 @@ using BtreeIndexing::IndexInfo;
 
 DEF_EX_STR( exNotZimFile, "Not an Zim file", Dictionary::Ex )
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
+DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
+
 
 //namespace {
 
@@ -314,7 +318,7 @@ bool indexIsOldOrBad( string const & indexFile )
          header.formatVersion != CurrentFormatVersion;
 }
 
-quint32 readArticle( ZimFile & file, ZIM_header & header, uint32_t articleNumber, string & result,
+quint32 readArticle( ZimFile & file, ZIM_header & header, quint32 articleNumber, string & result,
                      set< quint32 > * loadedArticles = NULL )
 {
   while( 1 )
@@ -425,6 +429,7 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
     string dictionaryName;
     ZimFile df;
     ZIM_header zimHeader;
+    set< quint32 > articlesIndexedForFTS;
 
   public:
 
@@ -463,6 +468,17 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
 
     /// Loads the resource.
     void loadResource( std::string &resourceName, string & data );
+
+    virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                              int searchMode, bool matchCase,
+                                                              int distanceBetweenWords,
+                                                              int maxResults );
+    virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+    quint32 getArticleText( uint32_t articleAddress, QString & headword, QString & text,
+                            set< quint32 > * loadedArticles );
+
+    virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
 protected:
 
@@ -515,6 +531,27 @@ ZimDictionary::ZimDictionary( string const & id,
     else
     {
       readArticle( df, zimHeader, idxHeader.namePtr, dictionaryName );
+    }
+
+    // Full-text search parameters
+
+    can_FTS = true;
+
+    quint32 lang = getLangTo();
+    if( lang == LangCoder::code2toInt( "zh" )
+        || lang == LangCoder::code2toInt( "ja" ) )
+    {
+      // Don't index articles in some languages which don't use spaces
+      can_FTS_index = false;
+    }
+    else
+    {
+      can_FTS_index = true;
+      ftsIdxName = indexFile + "_FTS";
+
+      if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
+                             && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+        FTS_index_completed.ref();
     }
 }
 
@@ -612,6 +649,175 @@ QString const& ZimDictionary::getDescription()
       dictionaryDescription = QString::fromUtf8( str.c_str(), str.size() );
 
     return dictionaryDescription;
+}
+
+void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
+{
+  if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+    FTS_index_completed.ref();
+
+  if( haveFTSIndex() )
+    return;
+
+  if( ensureInitDone().size() )
+    return;
+
+  if( firstIteration )
+    return;
+
+  gdDebug( "Zim: Building the full-text index for dictionary: %s\n",
+           getName().c_str() );
+
+  try
+  {
+    Mutex::Lock _( getFtsMutex() );
+
+    File::Class ftsIdx( ftsIndexName(), "wb" );
+
+    FtsHelpers::FtsIdxHeader ftsIdxHeader;
+    memset( &ftsIdxHeader, 0, sizeof( ftsIdxHeader ) );
+
+    // We write a dummy header first. At the end of the process the header
+    // will be rewritten with the right values.
+
+    ftsIdx.write( ftsIdxHeader );
+
+    ChunkedStorage::Writer chunks( ftsIdx );
+
+    BtreeIndexing::IndexedWords indexedWords;
+
+    QSet< uint32_t > setOfOffsets;
+
+    findArticleLinks( 0, &setOfOffsets, 0 );
+
+    QVector< uint32_t > offsets;
+    offsets.resize( setOfOffsets.size() );
+    uint32_t * ptr = &offsets.front();
+
+    for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
+         it != setOfOffsets.constEnd(); ++it )
+    {
+      *ptr = *it;
+      ptr++;
+    }
+
+    // Free memory
+    setOfOffsets.clear();
+
+    qSort( offsets );
+
+    QMap< QString, QVector< uint32_t > > ftsWords;
+
+    set< quint32 > indexedArticles;
+    quint32 articleNumber;
+
+    // index articles for full-text search
+    for( int i = 0; i < offsets.size(); i++ )
+    {
+      if( isCancelled )
+        throw exUserAbort();
+
+      QString headword, articleStr;
+
+      articleNumber = getArticleText( offsets.at( i ), headword, articleStr,
+                                      &indexedArticles );
+      if( articleNumber == 0xFFFFFFFF )
+        continue;
+
+      indexedArticles.insert( articleNumber );
+
+      FtsHelpers::parseArticleForFts( offsets.at( i ), articleStr, ftsWords );
+    }
+
+    // Free memory
+    offsets.clear();
+
+    for( QMap< QString, QVector< uint32_t > >::ConstIterator it = ftsWords.begin();
+         it != ftsWords.end(); ++it )
+    {
+      if( isCancelled )
+        throw exUserAbort();
+
+      uint32_t offset = chunks.startNewBlock();
+      uint32_t size = it.value().size();
+
+      chunks.addToBlock( &size, sizeof(uint32_t) );
+      chunks.addToBlock( it.value().data(), size * sizeof(uint32_t) );
+
+      indexedWords.addSingleWord( gd::toWString( it.key() ), offset );
+    }
+
+    // Free memory
+    ftsWords.clear();
+
+    ftsIdxHeader.chunksOffset = chunks.finish();
+    ftsIdxHeader.wordCount = indexedWords.size();
+
+    BtreeIndexing::IndexInfo ftsIdxInfo = BtreeIndexing::buildIndex( indexedWords, ftsIdx );
+
+    // Free memory
+    indexedWords.clear();
+
+    ftsIdxHeader.indexBtreeMaxElements = ftsIdxInfo.btreeMaxElements;
+    ftsIdxHeader.indexRootOffset = ftsIdxInfo.rootOffset;
+
+    ftsIdxHeader.signature = FtsHelpers::FtsSignature;
+    ftsIdxHeader.formatVersion = FtsHelpers::CurrentFtsFormatVersion;
+
+    ftsIdx.rewind();
+    ftsIdx.writeRecords( &ftsIdxHeader, sizeof(ftsIdxHeader), 1 );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Zim: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+  }
+
+  FTS_index_completed.ref();
+}
+
+void ZimDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
+  try
+  {
+    headword.clear();
+    string articleText;
+
+    loadArticle( articleAddress, articleText, 0 );
+    text = Html::unescape( QString::fromUtf8( articleText.data(), articleText.size() ) );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Zim: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+}
+
+quint32 ZimDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text,
+                                    set< quint32 > * loadedArticles )
+{
+  quint32 articleNumber = 0xFFFFFFFF;
+  try
+  {
+    headword.clear();
+    string articleText;
+
+    articleNumber = loadArticle( articleAddress, articleText, loadedArticles );
+    text = Html::unescape( QString::fromUtf8( articleText.data(), articleText.size() ) );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Zim: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+  return articleNumber;
+}
+
+sptr< Dictionary::DataRequest > ZimDictionary::getSearchResults( QString const & searchString,
+                                                                 int searchMode, bool matchCase,
+                                                                 int distanceBetweenWords,
+                                                                 int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
 }
 
 /// ZimDictionary::getArticle()

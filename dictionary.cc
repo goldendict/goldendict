@@ -122,6 +122,7 @@ vector< char > & DataRequest::getFullData() throw( exRequestUnfinished )
 
 Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
   id( id_ ), dictionaryFiles( dictionaryFiles_ ), dictionaryIconLoaded( false )
+  , can_FTS( false), can_FTS_index( false ), FTS_index_completed( false )
 {
 }
 
@@ -152,6 +153,11 @@ vector< wstring > Class::getAlternateWritings( wstring const & )
 
 sptr< DataRequest > Class::getResource( string const & /*name*/ )
   throw( std::exception )
+{
+  return new DataRequestInstant( false );
+}
+
+sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int )
 {
   return new DataRequestInstant( false );
 }

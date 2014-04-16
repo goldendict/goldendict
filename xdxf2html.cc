@@ -57,7 +57,8 @@ string convertToRoman( int input, int lower_case )
 }
 
 string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv,
-                Dictionary::Class *dictPtr, bool isLogicalFormat, unsigned revisionNumber )
+                Dictionary::Class *dictPtr, bool isLogicalFormat, unsigned revisionNumber,
+                QString * headword )
 {
 //  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
@@ -154,6 +155,9 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
   nodes = dd.elementsByTagName( "k" ); // Key
 
+  if( headword )
+    headword->clear();
+
   while( nodes.size() )
   {
     QDomElement el = nodes.at( 0 ).toElement();
@@ -165,6 +169,9 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     }
     else
     {
+        if( headword && headword->isEmpty() )
+          *headword = el.text();
+
         el.setTagName( "div" );
         el.setAttribute( "class", "xdxf_headwords" );
         if( dictPtr->isFromLanguageRTL() != dictPtr->isToLanguageRTL() )

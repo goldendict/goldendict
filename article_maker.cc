@@ -201,8 +201,38 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
 sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   QString const & inWord, unsigned groupId,
   QMap< QString, QString > const & contexts,
-  QSet< QString > const & mutedDicts ) const
+  QSet< QString > const & mutedDicts,
+  QStringList const & dictIDs ) const
 {
+  if( !dictIDs.isEmpty() )
+  {
+    QStringList ids = dictIDs;
+    std::vector< sptr< Dictionary::Class > > ftsDicts;
+
+    // Find dictionaries by ID's
+    for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
+      for( QStringList::Iterator it = ids.begin(); it != ids.end(); ++it )
+      {
+        if( *it == QString::fromStdString( dictionaries[ x ]->getId() ) )
+        {
+          ftsDicts.push_back( dictionaries[ x ] );
+          ids.erase( it );
+          break;
+        }
+        if( ids.isEmpty() )
+          break;
+      }
+    }
+
+    string header = makeHtmlHeader( inWord.trimmed(), QString() );
+
+    return new ArticleRequest( inWord.trimmed(), "",
+                               contexts, ftsDicts, header,
+                               collapseBigArticles ? articleLimitSize : -1,
+                               needExpandOptionalParts );
+  }
+
   if ( groupId == Instances::Group::HelpGroupId )
   {
     // This is a special group containing internal welcome/help pages

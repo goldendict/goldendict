@@ -10,6 +10,8 @@
 #include "fsencoding.hh"
 #include "decompress.hh"
 #include "gddebug.hh"
+#include "ftshelpers.hh"
+#include "htmlescape.hh"
 
 #include <map>
 #include <set>
@@ -262,6 +264,14 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
 
     virtual QString const& getDescription();
 
+    virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                              int searchMode, bool matchCase,
+                                                              int distanceBetweenWords,
+                                                              int maxResults );
+    virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+    virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
+
 protected:
 
     virtual void loadIcon() throw();
@@ -301,8 +311,26 @@ AardDictionary::AardDictionary( string const & id,
                           idxHeader.indexRootOffset ),
                idx, idxMutex );
 
-    // Read decription
+    // Full-text search parameters
 
+    can_FTS = true;
+
+    quint32 lang = getLangTo();
+    if( lang == LangCoder::code2toInt( "zh" )
+        || lang == LangCoder::code2toInt( "ja" ) )
+    {
+      // Don't index articles in some languages which don't use spaces
+      can_FTS_index = false;
+    }
+    else
+    {
+      can_FTS_index = true;
+      ftsIdxName = indexFile + "_FTS";
+
+      if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
+                             && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+        FTS_index_completed.ref();
+    }
 }
 
 AardDictionary::~AardDictionary()
@@ -541,6 +569,62 @@ QString const& AardDictionary::getDescription()
       dictionaryDescription = "NONE";
 
     return dictionaryDescription;
+}
+
+void AardDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
+{
+  if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+    FTS_index_completed.ref();
+
+  if( haveFTSIndex() )
+    return;
+
+  if( ensureInitDone().size() )
+    return;
+
+  if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
+    return;
+
+  gdDebug( "Aard: Building the full-text index for dictionary: %s\n",
+           getName().c_str() );
+
+  try
+  {
+    FtsHelpers::makeFTSIndex( this, isCancelled );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Aard: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+  }
+
+  FTS_index_completed.ref();
+}
+
+void AardDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
+  try
+  {
+    headword.clear();
+    string articleText;
+
+    loadArticle( articleAddress, articleText );
+
+    text = Html::unescape( QString::fromUtf8( articleText.data(), articleText.size() ) );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Aard: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+}
+
+sptr< Dictionary::DataRequest > AardDictionary::getSearchResults( QString const & searchString,
+                                                                  int searchMode, bool matchCase,
+                                                                  int distanceBetweenWords,
+                                                                  int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
 }
 
 /// AardDictionary::getArticle()

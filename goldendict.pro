@@ -282,7 +282,9 @@ HEADERS += folding.hh \
     gddebug.hh \
     gestures.hh \
     tiff.hh \
-    dictheadwords.hh
+    dictheadwords.hh \
+    fulltextsearch.hh \
+    ftshelpers.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -298,7 +300,8 @@ FORMS += groups.ui \
     orderandprops.ui \
     dictinfo.ui \
     dictheadwords.ui \
-    authentication.ui
+    authentication.ui \
+    fulltextsearch.ui
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -398,7 +401,9 @@ SOURCES += folding.cc \
     gddebug.cc \
     gestures.cc \
     tiff.cc \
-    dictheadwords.cc
+    dictheadwords.cc \
+    fulltextsearch.cc \
+    ftshelpers.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui

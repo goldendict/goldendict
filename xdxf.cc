@@ -25,6 +25,7 @@
 #include "indexedzip.hh"
 #include "filetype.hh"
 #include "tiff.hh"
+#include "ftshelpers.hh"
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -170,6 +171,14 @@ public:
 
   virtual QString getMainFilename();
 
+  virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                            int searchMode, bool matchCase,
+                                                            int distanceBetweenWords,
+                                                            int maxResults );
+  virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+  virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
+
 protected:
 
   void loadIcon() throw();
@@ -178,7 +187,7 @@ private:
 
   // Loads the article, storing its headword and formatting article's data into an html.
   void loadArticle( uint32_t address,
-                    string & articleText );
+                    string & articleText, QString * headword = 0 );
 
   friend class XdxfArticleRequest;
   friend class XdxfResourceRequest;
@@ -264,6 +273,27 @@ XdxfDictionary::XdxfDictionary( string const & id,
   openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                         idxHeader.indexRootOffset ),
              idx, idxMutex );
+
+  // Full-text search parameters
+
+  can_FTS = true;
+
+  quint32 lang = getLangTo();
+  if( lang == LangCoder::code2toInt( "zh" )
+      || lang == LangCoder::code2toInt( "ja" ) )
+  {
+    // Don't index articles in some languages which don't use spaces
+    can_FTS_index = false;
+  }
+  else
+  {
+    can_FTS_index = true;
+    ftsIdxName = indexFile + "_FTS";
+
+    if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
+                           && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      FTS_index_completed.ref();
+  }
 }
 
 XdxfDictionary::~XdxfDictionary()
@@ -334,6 +364,62 @@ QString const& XdxfDictionary::getDescription()
 QString XdxfDictionary::getMainFilename()
 {
   return FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
+}
+
+void XdxfDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
+{
+  if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+    FTS_index_completed.ref();
+
+  if( haveFTSIndex() )
+    return;
+
+  if( ensureInitDone().size() )
+    return;
+
+  if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
+    return;
+
+  gdDebug( "Xdxf: Building the full-text index for dictionary: %s\n",
+           getName().c_str() );
+
+  try
+  {
+    FtsHelpers::makeFTSIndex( this, isCancelled );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Xdxf: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+  }
+
+  FTS_index_completed.ref();
+}
+
+void XdxfDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
+  try
+  {
+    string articleStr;
+    loadArticle( articleAddress, articleStr, &headword );
+
+    wstring wstr = Utf8::decode( articleStr );
+
+    text = Html::unescape( gd::toQString( wstr ) );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Xdxf: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+}
+
+sptr< Dictionary::DataRequest > XdxfDictionary::getSearchResults( QString const & searchString,
+                                                                  int searchMode, bool matchCase,
+                                                                  int distanceBetweenWords,
+                                                                  int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
 }
 
 /// XdxfDictionary::getArticle()
@@ -527,7 +613,8 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word
 }
 
 void XdxfDictionary::loadArticle( uint32_t address,
-                                  string & articleText )
+                                  string & articleText,
+                                  QString * headword )
 {
   // Read the properties
 
@@ -573,7 +660,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   }
 
   articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
-                                    fType == Logical, idxHeader.revisionNumber );
+                                    fType == Logical, idxHeader.revisionNumber, headword );
 
   free( articleBody );
 }
@@ -810,6 +897,9 @@ void indexArticle( GzippedFile & gzFile,
         chunks.addToBlock( &f, 1 );
         chunks.addToBlock( &offs, sizeof( offs ) );
         chunks.addToBlock( &size, sizeof( size ) );
+
+        // Add also first header - it's needed for full-text search
+        chunks.addToBlock( words.begin()->toUtf8().data(), words.begin()->toUtf8().length() + 1 );
 
 //        DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
 

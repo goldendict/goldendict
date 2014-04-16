@@ -53,7 +53,8 @@ public:
   sptr< Dictionary::DataRequest > makeDefinitionFor( QString const & word, unsigned groupId,
                                                      QMap< QString, QString > const & contexts,
                                                      QSet< QString > const & mutedDicts =
-                                                       QSet< QString >() ) const;
+                                                       QSet< QString >(),
+                                                     QStringList const & dictIDs = QStringList() ) const;
 
   /// Makes up a text which states that no translation for the given word
   /// was found. Sometimes it's better to call this directly when it's already

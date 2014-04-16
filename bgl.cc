@@ -13,6 +13,7 @@
 #include "gddebug.hh"
 #include "fsencoding.hh"
 #include "htmlescape.hh"
+#include "ftshelpers.hh"
 
 #include <map>
 #include <set>
@@ -251,7 +252,15 @@ namespace
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
       throw( std::exception );
 
+    virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                              int searchMode, bool matchCase,
+                                                              int distanceBetweenWords,
+                                                              int maxResults );
     virtual QString const& getDescription();
+
+    virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+    virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
   protected:
 
@@ -295,6 +304,25 @@ namespace
     openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                         idxHeader.indexRootOffset ),
                idx, idxMutex );
+
+    can_FTS = true;
+
+    Language::Id lang = getLangTo() & 0xFFFF;
+    if( lang == LangCoder::code2toInt( "zh" )
+        || lang == LangCoder::code2toInt( "ja" ) )
+    {
+      // Don't index articles in some languages which don't use spaces
+      can_FTS_index = false;
+    }
+    else
+    {
+      can_FTS_index = true;
+      ftsIdxName = indexFile + "_FTS";
+
+      if( !Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+          && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+        FTS_index_completed.ref();
+    }
   }
 
   void BglDictionary::loadIcon() throw()
@@ -405,6 +433,62 @@ namespace
     }
 
     return dictionaryDescription;
+  }
+
+  void BglDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+  {
+    try
+    {
+      string headwordStr, displayedHeadwordStr, articleStr;
+      loadArticle( articleAddress, headwordStr, displayedHeadwordStr, articleStr );
+
+      headword = QString::fromUtf8( headwordStr.data(), headwordStr.size() );
+
+      wstring wstr = Utf8::decode( articleStr );
+
+      if ( getLangTo() == LangCoder::code2toInt( "he" ) )
+      {
+        for ( unsigned int i = 0; i < wstr.size(); i++ )
+        {
+          if ( wstr[ i ] >= 224 && wstr[ i ] <= 250 ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8
+            wstr[ i ] += 1488 - 224; // Convert to Hebrew unicode
+        }
+      }
+
+      text = Html::unescape( gd::toQString( wstr ) );
+    }
+    catch( std::exception &ex )
+    {
+      gdWarning( "BGL: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    }
+  }
+
+  void BglDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
+  {
+    if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+           || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+      FTS_index_completed.ref();
+
+    if( haveFTSIndex() )
+      return;
+
+    if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
+      return;
+
+    gdDebug( "Bgl: Building the full-text index for dictionary: %s\n",
+             getName().c_str() );
+
+    try
+    {
+      FtsHelpers::makeFTSIndex( this, isCancelled );
+    }
+    catch( std::exception &ex )
+    {
+      gdWarning( "Bgl: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+      QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+    }
+
+    FTS_index_completed.ref();
   }
 
 /// BglDictionary::findHeadwordsForSynonym()
@@ -1054,6 +1138,13 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
   }
 }
 
+sptr< Dictionary::DataRequest > BglDictionary::getSearchResults( QString const & searchString,
+                                                                 int searchMode, bool matchCase,
+                                                                 int distanceBetweenWords,
+                                                                 int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+}
 
 
 vector< sptr< Dictionary::Class > > makeDictionaries(

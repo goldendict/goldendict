@@ -47,6 +47,8 @@
 #define gdStoreNormalGeometryEvent ( ( QEvent::Type )( QEvent::User + 1 ) )
 #define gdApplyNormalGeometryEvent ( ( QEvent::Type )( QEvent::User + 2 ) )
 
+#define MIN_THREAD_COUNT 4
+
 #endif
 
 #ifdef Q_WS_X11
@@ -107,10 +109,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , wasMaximized( false )
 , blockUpdateWindowTitle( false )
 , headwordsDlg( 0 )
+, ftsIndexing( dictionaries )
+, ftsDlg( 0 )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
 {
+  if( QThreadPool::globalInstance()->maxThreadCount() < MIN_THREAD_COUNT )
+    QThreadPool::globalInstance()->setMaxThreadCount( MIN_THREAD_COUNT );
+
 #ifndef QT_NO_OPENSSL
   QThreadPool::globalInstance()->start( new InitSSLRunnable );
 #endif
@@ -223,6 +230,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   buttonMenu->addSeparator();
   buttonMenu->addMenu( ui.menuFile );
   buttonMenu->addMenu( ui.menuView );
+  buttonMenu->addMenu( ui.menuSearch );
   buttonMenu->addMenu( ui.menu_Help );
 
   menuButton = new QToolButton( navToolbar );
@@ -365,6 +373,16 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.historyPane->addAction( &focusHeadwordsDlgAction );
   groupList->addAction( &focusHeadwordsDlgAction );
   translateBox->addAction( &focusHeadwordsDlgAction );
+
+  connect( ui.fullTextSearchAction, SIGNAL( triggered() ),
+           this, SLOT( showFullTextSearchDialog() ) );
+
+  ui.centralWidget->addAction( ui.fullTextSearchAction );
+  ui.dictsPane->addAction( ui.fullTextSearchAction );
+  ui.searchPaneWidget->addAction( ui.fullTextSearchAction );
+  ui.historyPane->addAction( ui.fullTextSearchAction );
+  groupList->addAction( ui.fullTextSearchAction );
+  translateBox->addAction( ui.fullTextSearchAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -927,6 +945,8 @@ MainWindow::~MainWindow()
 
   closeHeadwordsDialog();
 
+  ftsIndexing.stopIndexing();
+
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.centralWidget->ungrabGesture( Gestures::GDPinchGestureType );
   ui.centralWidget->ungrabGesture( Gestures::GDSwipeGestureType );
@@ -1158,7 +1178,11 @@ void MainWindow::makeDictionaries()
 
   dictionariesUnmuted.clear();
 
+  ftsIndexing.stopIndexing();
+
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
+
+  ftsIndexing.doIndexing();
 
   updateStatusLine();
   updateGroupList();
@@ -1425,6 +1449,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 {
   ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
                                         groupInstances, false, cfg,
+                                        *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
 
@@ -1782,6 +1807,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
   closeHeadwordsDialog();
+  closeFullTextSearchDialog();
 
   wordFinder.clear();
   dictionariesUnmuted.clear();
@@ -1845,6 +1871,7 @@ void MainWindow::editPreferences()
   hotkeyWrapper.reset(); // So we could use the keys it hooks
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
   closeHeadwordsDialog();
+  closeFullTextSearchDialog();
 
   Preferences preferences( this, cfg.preferences );
 
@@ -1966,6 +1993,9 @@ void MainWindow::currentGroupChanged( QString const & )
   translateInputFinished( false );
 
   updateCurrentGroupProperty();
+
+  if( ftsDlg )
+    ftsDlg->setCurrentGroup( cfg.lastMainGroupId );
 }
 
 void MainWindow::updateCurrentGroupProperty()
@@ -2568,6 +2598,25 @@ void MainWindow::showTranslationFor( QString const & inWord,
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
 
+void MainWindow::showTranslationFor( QString const & inWord,
+                                     QStringList const & dictIDs )
+{
+  ArticleView *view = getCurrentArticleView();
+
+  navPronounce->setEnabled( false );
+
+  view->showDefinition( inWord, dictIDs );
+
+  updatePronounceAvailability();
+  updateFoundInDictsList();
+
+  // Add to history
+
+  addWordToHistory( inWord );
+
+  updateBackForwardButtons();
+}
+
 #ifdef Q_WS_X11
 void MainWindow::toggleMainWindow( bool onlyShow, bool byIconClick )
 #else
@@ -2612,12 +2661,18 @@ void MainWindow::toggleMainWindow( bool onlyShow )
 
     if( headwordsDlg )
       headwordsDlg->hide();
+
+    if( ftsDlg )
+      ftsDlg->hide();
   }
 
   if ( shown )
   {
     if( headwordsDlg )
       headwordsDlg->show();
+
+    if( ftsDlg )
+      ftsDlg->show();
 
     focusTranslateLine();
 #ifdef Q_WS_X11
@@ -3204,13 +3259,16 @@ void MainWindow::on_rescanFiles_triggered()
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
   closeHeadwordsDialog();
+  closeFullTextSearchDialog();
 
   groupInstances.clear(); // Release all the dictionaries they hold
   dictionaries.clear();
   dictionariesUnmuted.clear();
   dictionaryBar.setDictionaries( dictionaries );
 
+  ftsIndexing.stopIndexing();
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+  ftsIndexing.doIndexing();
 
   updateGroupList();
 
@@ -3878,6 +3936,37 @@ void MainWindow::proxyAuthentication( const QNetworkProxy &,
       proxy.setPassword( *passwordStr );
       QNetworkProxy::setApplicationProxy( proxy );
     }
+  }
+}
+
+void MainWindow::showFullTextSearchDialog()
+{
+  if( !ftsDlg )
+  {
+    ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances ,ftsIndexing );
+
+    connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList) ),
+             this, SLOT( showTranslationFor( QString, QStringList ) ) );
+    connect( ftsDlg, SIGNAL( closeDialog() ),
+             this, SLOT( closeFullTextSearchDialog() ) );
+    connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
+             ftsDlg, SLOT( updateDictionaries() ) );
+  }
+
+  unsigned group = groupInstances.empty() ? 0
+                                          : groupInstances[ groupList->currentIndex() ].id;
+  ftsDlg->setCurrentGroup( group );
+
+  ftsDlg->show();
+}
+
+void MainWindow::closeFullTextSearchDialog()
+{
+  if( ftsDlg )
+  {
+    ftsDlg->stopSearch();
+    delete ftsDlg;
+    ftsDlg = 0;
   }
 }
 

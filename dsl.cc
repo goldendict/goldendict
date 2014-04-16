@@ -19,6 +19,9 @@
 #include "indexedzip.hh"
 #include "gddebug.hh"
 #include "tiff.hh"
+#include "fulltextsearch.hh"
+#include "ftshelpers.hh"
+#include "language.hh"
 
 #include <zlib.h>
 #include <map>
@@ -40,6 +43,9 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QPainter>
+#include <QMap>
+#include <QStringList>
+#include <QRegExp>
 
 // For TIFF conversion
 #include <QImage>
@@ -70,6 +76,7 @@ using BtreeIndexing::IndexInfo;
 namespace {
 
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
+DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
 
 enum
 {
@@ -203,9 +210,17 @@ public:
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
     throw( std::exception );
 
+  virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                            int searchMode, bool matchCase,
+                                                            int distanceBetweenWords,
+                                                            int maxResults );
   virtual QString const& getDescription();
 
   virtual QString getMainFilename();
+
+  virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+  virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
 protected:
 
@@ -236,6 +251,7 @@ private:
 
   friend class DslArticleRequest;
   friend class DslResourceRequest;
+  friend class DslFTSResultsRequest;
   friend class DslDeferredInitRunnable;
 };
 
@@ -252,6 +268,25 @@ DslDictionary::DslDictionary( string const & id,
   articleNom( 0 ),
   maxPictureWidth( maxPictureWidth_ )
 {
+  can_FTS = true;
+
+  Language::Id lang = getLangTo();
+  if( lang == LangCoder::code2toInt( "zh" )
+      || lang == LangCoder::code2toInt( "ja" ) )
+  {
+    // Don't index articles in some languages which don't use spaces
+    can_FTS_index = false;
+  }
+  else
+  {
+    can_FTS_index = true;
+    ftsIdxName = indexFile + "_FTS";
+
+    if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
+        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      FTS_index_completed.ref();
+  }
+
   // Read the dictionary name
 
   idx.seek( sizeof( idxHeader ) );
@@ -913,7 +948,9 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"!trs" ) )
+  {
     result += "<span class=\"dsl_trs\">" + processNodeChildren( node ) + "</span>";
+  }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"p") )
   {
@@ -989,7 +1026,8 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       }
     }
 
-    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
+    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">"
+              + processNodeChildren( node ) + "</a>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"@" ) )
@@ -1004,7 +1042,8 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     normalizeHeadword( nodeStr );
     url.setPath( gd::toQString( nodeStr ) );
 
-    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
+    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">"
+              + processNodeChildren( node ) + "</a>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"sub" ) )
@@ -1104,36 +1143,157 @@ QString DslDictionary::getMainFilename()
   return FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
 }
 
-#if 0
-vector< wstring > StardictDictionary::findHeadwordsForSynonym( wstring const & str )
-  throw( std::exception )
+void DslDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
-  vector< wstring > result;
+  if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+    FTS_index_completed.ref();
 
-  vector< WordArticleLink > chain = findArticles( str );
 
-  wstring caseFolded = Folding::applySimpleCaseOnly( str );
+  if( haveFTSIndex() )
+    return;
 
-  for( unsigned x = 0; x < chain.size(); ++x )
+  if( ensureInitDone().size() )
+    return;
+
+  if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
+    return;
+
+  gdDebug( "Dsl: Building the full-text index for dictionary: %s\n",
+           getName().c_str() );
+
+  try
   {
-    string headword, articleText;
+    FtsHelpers::makeFTSIndex( this, isCancelled );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "DSL: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+  }
 
-    loadArticle( chain[ x ].articleOffset,
-                 headword, articleText );
+  FTS_index_completed.ref();
+}
 
-    wstring headwordDecoded = Utf8::decode( headword );
+void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
+  vector< char > chunk;
 
-    if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) )
+  char * articleProps;
+  wstring articleData;
+
+  headword.clear();
+  text.clear();
+
+  {
+    Mutex::Lock _( idxMutex );
+    articleProps = chunks->getBlock( articleAddress, chunk );
+  }
+
+  uint32_t articleOffset, articleSize;
+
+  memcpy( &articleOffset, articleProps, sizeof( articleOffset ) );
+  memcpy( &articleSize, articleProps + sizeof( articleOffset ),
+          sizeof( articleSize ) );
+
+  char * articleBody;
+
+  {
+    Mutex::Lock _( dzMutex );
+    articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+  }
+
+  if ( !articleBody )
+  {
+    return;
+  }
+  else
+  {
+    try
     {
-      // The headword seems to differ from the input word, which makes the
-      // input word its synonym.
-      result.push_back( headwordDecoded );
+      articleData =
+        DslIconv::toWstring(
+          DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+          articleBody, articleSize );
+      free( articleBody );
+
+      // Strip DSL comments
+      bool b = false;
+      stripComments( articleData, b );
+    }
+    catch( ... )
+    {
+      free( articleBody );
+      return;
     }
   }
 
-  return result;
+  // Skip headword
+
+  size_t pos = 0;
+  wstring tildeValue;
+
+  for( ; ; )
+  {
+    size_t begin = pos;
+
+    pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), begin );
+
+    if ( tildeValue.empty() )
+    {
+      // Process the headword
+
+      tildeValue = wstring( articleData, begin, pos - begin );
+
+      list< wstring > lst;
+
+      expandOptionalParts( tildeValue, &lst );
+
+      if ( lst.size() ) // Should always be
+        tildeValue = lst.front();
+
+      processUnsortedParts( tildeValue, false );
+    }
+
+    if ( pos == articleData.size() )
+      break;
+
+    // Skip \n\r
+
+    if ( articleData[ pos ] == '\r' )
+      ++pos;
+
+    if ( pos != articleData.size() )
+    {
+      if ( articleData[ pos ] == '\n' )
+        ++pos;
+    }
+
+    if ( pos == articleData.size() || isDslWs( articleData[ pos ] ) )
+    {
+      // Ok, it's either end of article, or the begining of the article's text
+      break;
+    }
+  }
+
+  unescapeDsl( tildeValue );
+  headword = gd::toQString( tildeValue );
+
+  wstring articleText;
+
+  if ( pos != articleData.size() )
+    articleText = wstring( articleData, pos );
+  else
+    articleText.clear();
+
+  articleData.clear();
+
+  ArticleDom dom( gd::normalize( articleText ) );
+
+  articleText.clear();
+
+  text = gd::toQString( dom.root.renderAsText( true ) );
 }
-#endif
 
 /// DslDictionary::getArticle()
 
@@ -1515,8 +1675,6 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
   return new DslResourceRequest( *this, name );
 }
 
-} // anonymous namespace
-
 #if 0
 static void findCorrespondingFiles( string const & ifo,
                                     string & idx, string & dict, string & syn,
@@ -1553,6 +1711,18 @@ static void findCorrespondingFiles( string const & ifo,
     throw exNoSynFile( ifo );
 }
 #endif
+
+sptr< Dictionary::DataRequest > DslDictionary::getSearchResults( QString const & searchString,
+                                                                 int searchMode, bool matchCase,
+                                                                 int distanceBetweenWords,
+                                                                 int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+}
+
+} // anonymous namespace
+
+/// makeDictionaries
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
