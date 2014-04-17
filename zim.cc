@@ -689,7 +689,10 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
 
     QSet< uint32_t > setOfOffsets;
 
-    findArticleLinks( 0, &setOfOffsets, 0 );
+    findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
+
+    if( isCancelled )
+      throw exUserAbort();
 
     QVector< uint32_t > offsets;
     offsets.resize( setOfOffsets.size() );
@@ -705,7 +708,13 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // Free memory
     setOfOffsets.clear();
 
+    if( isCancelled )
+      throw exUserAbort();
+
     qSort( offsets );
+
+    if( isCancelled )
+      throw exUserAbort();
 
     QMap< QString, QVector< uint32_t > > ftsWords;
 
@@ -751,8 +760,14 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // Free memory
     ftsWords.clear();
 
+    if( isCancelled )
+      throw exUserAbort();
+
     ftsIdxHeader.chunksOffset = chunks.finish();
     ftsIdxHeader.wordCount = indexedWords.size();
+
+    if( isCancelled )
+      throw exUserAbort();
 
     BtreeIndexing::IndexInfo ftsIdxInfo = BtreeIndexing::buildIndex( indexedWords, ftsIdx );
 

@@ -1198,7 +1198,8 @@ void BtreeIndex::findAllArticleLinks( QVector< WordArticleLink > & articleLinks 
 
 void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
                                    QSet< uint32_t > * offsets,
-                                   QSet< QString > *headwords )
+                                   QSet< QString > *headwords,
+                                   QAtomicInt * isCancelled )
 {
   uint32_t currentNodeOffset = rootOffset;
   uint32_t nextLeaf = 0;
@@ -1224,6 +1225,9 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
   for( ; ; )
   {
     leafEntries = *(uint32_t *)leaf;
+
+    if( isCancelled && *isCancelled )
+      return;
 
     if ( leafEntries == 0xffffFFFF )
     {
@@ -1258,6 +1262,9 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
     vector< WordArticleLink > result = readChain( chainPtr );
     for( unsigned i = 0; i < result.size(); i++ )
     {
+      if( isCancelled && *isCancelled )
+        return;
+
       if( headwords )
         headwords->insert( QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
 
@@ -1296,7 +1303,8 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
 }
 
 void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
-                                          QVector<QString> & headwords )
+                                          QVector<QString> & headwords,
+                                          QAtomicInt * isCancelled )
 {
   uint32_t currentNodeOffset = rootOffset;
   uint32_t nextLeaf = 0;
@@ -1322,6 +1330,9 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
   for( ; ; )
   {
     leafEntries = *(uint32_t *)leaf;
+
+    if( isCancelled && *isCancelled )
+      return;
 
     if ( leafEntries == 0xffffFFFF )
     {
@@ -1359,6 +1370,9 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
       for( QList< uint32_t >::Iterator it = offsets.begin();
            it != offsets.end(); ++it )
       {
+        if( isCancelled && *isCancelled )
+          return;
+
         if( result.at( i ).articleOffset == *it )
         {
           headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );

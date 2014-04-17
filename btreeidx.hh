@@ -95,10 +95,13 @@ public:
   /// Find all article links and/or headwords in the index
   void findArticleLinks( QVector< WordArticleLink > * articleLinks,
                          QSet< uint32_t > * offsets,
-                         QSet< QString > * headwords );
+                         QSet< QString > * headwords,
+                         QAtomicInt * isCancelled = 0 );
 
   /// Retrieve headwords for presented article adresses
-  void getHeadwordsFromOffsets( QList< uint32_t > & offsets, QVector< QString > & headwords );
+  void getHeadwordsFromOffsets( QList< uint32_t > & offsets,
+                                QVector< QString > & headwords,
+                                QAtomicInt * isCancelled = 0 );
 
 protected:
 

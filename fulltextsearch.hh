@@ -89,6 +89,15 @@ public:
   virtual ~FtsIndexing()
   { stopIndexing(); }
 
+  void setDictionaries( std::vector< sptr< Dictionary::Class > > const & dicts )
+  {
+    clearDictionaries();
+    dictionaries = dicts;
+  }
+
+  void clearDictionaries()
+  { dictionaries.clear(); }
+
   /// Start dictionaries indexing for full-text search
   void doIndexing();
 
@@ -100,7 +109,7 @@ public:
 protected:
   QAtomicInt isCancelled;
   QSemaphore indexingExited;
-  std::vector< sptr< Dictionary::Class > > const & dictionaries;
+  std::vector< sptr< Dictionary::Class > > dictionaries;
   bool started;
   QString nowIndexing;
   Mutex nameMutex;

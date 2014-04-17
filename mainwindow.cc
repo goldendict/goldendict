@@ -1179,9 +1179,11 @@ void MainWindow::makeDictionaries()
   dictionariesUnmuted.clear();
 
   ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
 
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
+  ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
 
   updateStatusLine();
@@ -1809,6 +1811,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
 
+  ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
+
   wordFinder.clear();
   dictionariesUnmuted.clear();
 
@@ -1859,6 +1864,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   makeScanPopup();
   installHotKeys();
+
+  ftsIndexing.setDictionaries( dictionaries );
+  ftsIndexing.doIndexing();
 }
 
 void MainWindow::editCurrentGroup()
@@ -1872,6 +1880,9 @@ void MainWindow::editPreferences()
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
+
+  ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
 
   Preferences preferences( this, cfg.preferences );
 
@@ -1960,6 +1971,9 @@ void MainWindow::editPreferences()
 
   makeScanPopup();
   installHotKeys();
+
+  ftsIndexing.setDictionaries( dictionaries );
+  ftsIndexing.doIndexing();
 }
 
 void MainWindow::currentGroupChanged( QString const & )
@@ -3261,13 +3275,17 @@ void MainWindow::on_rescanFiles_triggered()
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
 
+  ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
+
   groupInstances.clear(); // Release all the dictionaries they hold
   dictionaries.clear();
   dictionariesUnmuted.clear();
   dictionaryBar.setDictionaries( dictionaries );
 
-  ftsIndexing.stopIndexing();
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+
+  ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
 
   updateGroupList();
@@ -3943,7 +3961,7 @@ void MainWindow::showFullTextSearchDialog()
 {
   if( !ftsDlg )
   {
-    ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances ,ftsIndexing );
+    ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances, ftsIndexing );
 
     connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList) ),
              this, SLOT( showTranslationFor( QString, QStringList ) ) );

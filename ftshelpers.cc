@@ -106,6 +106,9 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 {
   Mutex::Lock _( dict->getFtsMutex() );
 
+  if( isCancelled )
+    throw exUserAbort();
+
   File::Class ftsIdx( dict->ftsIndexName(), "wb" );
 
   FtsIdxHeader ftsIdxHeader;
@@ -122,7 +125,10 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 
   QSet< uint32_t > setOfOffsets;
 
-  dict->findArticleLinks( 0, &setOfOffsets, 0 );
+  dict->findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
+
+  if( isCancelled )
+    throw exUserAbort();
 
   QVector< uint32_t > offsets;
   offsets.resize( setOfOffsets.size() );
@@ -137,6 +143,9 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 
   // Free memory
   setOfOffsets.clear();
+
+  if( isCancelled )
+    throw exUserAbort();
 
   qSort( offsets );
 
@@ -176,8 +185,14 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
   // Free memory
   ftsWords.clear();
 
+  if( isCancelled )
+    throw exUserAbort();
+
   ftsIdxHeader.chunksOffset = chunks.finish();
   ftsIdxHeader.wordCount = indexedWords.size();
+
+  if( isCancelled )
+    throw exUserAbort();
 
   BtreeIndexing::IndexInfo ftsIdxInfo = BtreeIndexing::buildIndex( indexedWords, ftsIdx );
 
@@ -298,7 +313,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   if( !offsetsForHeadwords.isEmpty() )
   {
     QVector< QString > headwords;
-    dict.getHeadwordsFromOffsets( offsetsForHeadwords, headwords );
+    dict.getHeadwordsFromOffsets( offsetsForHeadwords, headwords, &isCancelled );
     for( int x = 0; x < headwords.size(); x++ )
       foundHeadwords->append( FTS::FtsHeadword( headwords.at( x ), id ) );
   }
