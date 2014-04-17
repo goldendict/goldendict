@@ -167,6 +167,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   ui.articlesPerDictionary->setMaximum( MaxArticlesPerDictionary );
   ui.articlesPerDictionary->setValue( cfg.preferences.fts.maxArticlesPerDictionary );
 
+  ui.matchCase->setChecked( cfg.preferences.fts.matchCase );
+
   setLimitsUsing();
 
   connect( ui.checkBoxDistanceBetweenWords, SIGNAL( stateChanged( int ) ),
