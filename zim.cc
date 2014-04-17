@@ -480,6 +480,13 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
 
     virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
+    virtual void setFTSParameters( Config::FullTextSearch const & fts )
+    {
+      can_FTS = fts.enabled
+                && !fts.disabledTypes.contains( "ZIM", Qt::CaseInsensitive )
+                && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+    }
+
 protected:
 
     virtual void loadIcon() throw();
@@ -782,14 +789,14 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
 
     ftsIdx.rewind();
     ftsIdx.writeRecords( &ftsIdxHeader, sizeof(ftsIdxHeader), 1 );
+
+    FTS_index_completed.ref();
   }
   catch( std::exception &ex )
   {
     gdWarning( "Zim: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
     QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
   }
-
-  FTS_index_completed.ref();
 }
 
 void ZimDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )

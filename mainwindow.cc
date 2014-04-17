@@ -233,6 +233,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   buttonMenu->addMenu( ui.menuSearch );
   buttonMenu->addMenu( ui.menu_Help );
 
+  ui.fullTextSearchAction->setEnabled( cfg.preferences.fts.enabled );
+
   menuButton = new QToolButton( navToolbar );
   menuButton->setPopupMode( QToolButton::InstantPopup );
   menuButton->setMenu( buttonMenu );
@@ -1183,6 +1185,9 @@ void MainWindow::makeDictionaries()
 
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
 
@@ -1904,6 +1909,14 @@ void MainWindow::editPreferences()
     p.proxyServer.systemProxyUser = cfg.preferences.proxyServer.systemProxyUser;
     p.proxyServer.systemProxyPassword = cfg.preferences.proxyServer.systemProxyPassword;
 
+    p.fts.dialogGeometry = cfg.preferences.fts.dialogGeometry;
+    p.fts.matchCase = cfg.preferences.fts.matchCase;
+    p.fts.maxArticlesPerDictionary = cfg.preferences.fts.maxArticlesPerDictionary;
+    p.fts.maxDistanceBetweenWords = cfg.preferences.fts.maxDistanceBetweenWords;
+    p.fts.searchMode = cfg.preferences.fts.searchMode;
+    p.fts.useMaxArticlesPerDictionary = cfg.preferences.fts.useMaxArticlesPerDictionary;
+    p.fts.useMaxDistanceBetweenWords = cfg.preferences.fts.useMaxDistanceBetweenWords;
+
     bool needReload = false;
 
     // See if we need to reapply stylesheets
@@ -1965,6 +1978,11 @@ void MainWindow::editPreferences()
     history.enableAdd( cfg.preferences.storeHistory );
     history.setMaxSize( cfg.preferences.maxStringsInHistory );
     ui.historyPaneWidget->updateHistoryCounts();
+
+    for( unsigned x = 0; x < dictionaries.size(); x++ )
+      dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+
+    ui.fullTextSearchAction->setEnabled( cfg.preferences.fts.enabled );
 
     Config::save( cfg );
   }
@@ -3284,6 +3302,9 @@ void MainWindow::on_rescanFiles_triggered()
   dictionaryBar.setDictionaries( dictionaries );
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();

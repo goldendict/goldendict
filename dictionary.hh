@@ -14,6 +14,7 @@
 #include "mutex.hh"
 #include "wstring.hh"
 #include "langcoder.hh"
+#include "config.hh"
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {
@@ -422,6 +423,10 @@ public:
 
   /// Make index for full-text search
   virtual void makeFTSIndex( QAtomicInt &, bool )
+  {}
+
+  /// Set full-text search parameters
+  virtual void setFTSParameters( Config::FullTextSearch const & )
   {}
 
   /// Retrieve all dictionary headwords

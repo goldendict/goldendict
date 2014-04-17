@@ -33,8 +33,9 @@ void Indexing::run()
       if( isCancelled )
         break;
 
-      if( dictionaries.at( x )->canFTSIndex() &&
-          !dictionaries.at( x )->haveFTSIndex() )
+      if( dictionaries.at( x )->canFTS()
+          && dictionaries.at( x )->canFTSIndex()
+          &&!dictionaries.at( x )->haveFTSIndex() )
       {
         emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
         dictionaries.at( x )->makeFTSIndex( isCancelled, true );
@@ -47,8 +48,9 @@ void Indexing::run()
       if( isCancelled )
         break;
 
-      if( dictionaries.at( x )->canFTSIndex() &&
-          !dictionaries.at( x )->haveFTSIndex() )
+      if( dictionaries.at( x )->canFTS()
+          && dictionaries.at( x )->canFTSIndex()
+          &&!dictionaries.at( x )->haveFTSIndex() )
       {
         emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
         dictionaries.at( x )->makeFTSIndex( isCancelled, false );
@@ -131,8 +133,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 {
   ui.setupUi( this );
 
-  if( cfg.fts.dialogGeometry.size() > 0 )
-    restoreGeometry( cfg.fts.dialogGeometry );
+  if( cfg.preferences.fts.dialogGeometry.size() > 0 )
+    restoreGeometry( cfg.preferences.fts.dialogGeometry );
 
   setWindowTitle( tr( "Full-text search" ) );
 
@@ -145,25 +147,25 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   ui.searchMode->addItem( tr( "Plain text"), PlainText );
   ui.searchMode->addItem( tr( "Wildcards" ), Wildcards );
   ui.searchMode->addItem( tr( "RexExp" ), RegExp );
-  ui.searchMode->setCurrentIndex( cfg.fts.searchMode );
+  ui.searchMode->setCurrentIndex( cfg.preferences.fts.searchMode );
 
   ui.checkBoxDistanceBetweenWords->setText( tr( "Max distance between words (%1-%2):" )
                                             .arg( QString::number( MinDistanceBetweenWords ) )
                                             .arg( QString::number( MaxDistanceBetweenWords ) ) );
-  ui.checkBoxDistanceBetweenWords->setChecked( cfg.fts.useMaxDistanceBetweenWords );
+  ui.checkBoxDistanceBetweenWords->setChecked( cfg.preferences.fts.useMaxDistanceBetweenWords );
 
   ui.distanceBetweenWords->setMinimum( MinDistanceBetweenWords );
   ui.distanceBetweenWords->setMaximum( MaxDistanceBetweenWords );
-  ui.distanceBetweenWords->setValue( cfg.fts.maxDistanceBetweenWords );
+  ui.distanceBetweenWords->setValue( cfg.preferences.fts.maxDistanceBetweenWords );
 
   ui.checkBoxArticlesPerDictionary->setText( tr( "Max articles per dictionary (%1-%2):" )
                                              .arg( QString::number( MinArticlesPerDictionary ) )
                                              .arg( QString::number( MaxArticlesPerDictionary ) ) );
-  ui.checkBoxArticlesPerDictionary->setChecked( cfg.fts.useMaxArticlesPerDictionary );
+  ui.checkBoxArticlesPerDictionary->setChecked( cfg.preferences.fts.useMaxArticlesPerDictionary );
 
   ui.articlesPerDictionary->setMinimum( MinArticlesPerDictionary );
   ui.articlesPerDictionary->setMaximum( MaxArticlesPerDictionary );
-  ui.articlesPerDictionary->setValue( cfg.fts.maxArticlesPerDictionary );
+  ui.articlesPerDictionary->setValue( cfg.preferences.fts.maxArticlesPerDictionary );
 
   setLimitsUsing();
 
@@ -236,14 +238,14 @@ void FullTextSearchDialog::showDictNumbers()
 
 void FullTextSearchDialog::saveData()
 {
-  cfg.fts.searchMode = ui.searchMode->currentIndex();
-  cfg.fts.matchCase = ui.matchCase->isChecked();
-  cfg.fts.maxArticlesPerDictionary = ui.articlesPerDictionary->text().toInt();
-  cfg.fts.maxDistanceBetweenWords = ui.distanceBetweenWords->text().toInt();
-  cfg.fts.useMaxDistanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked();
-  cfg.fts.useMaxArticlesPerDictionary = ui.checkBoxArticlesPerDictionary->isChecked();
+  cfg.preferences.fts.searchMode = ui.searchMode->currentIndex();
+  cfg.preferences.fts.matchCase = ui.matchCase->isChecked();
+  cfg.preferences.fts.maxArticlesPerDictionary = ui.articlesPerDictionary->text().toInt();
+  cfg.preferences.fts.maxDistanceBetweenWords = ui.distanceBetweenWords->text().toInt();
+  cfg.preferences.fts.useMaxDistanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked();
+  cfg.preferences.fts.useMaxArticlesPerDictionary = ui.checkBoxArticlesPerDictionary->isChecked();
 
-  cfg.fts.dialogGeometry = saveGeometry();
+  cfg.preferences.fts.dialogGeometry = saveGeometry();
 }
 
 void FullTextSearchDialog::setNewIndexingName( QString name )

@@ -184,6 +184,12 @@ public:
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
+  virtual void setFTSParameters( Config::FullTextSearch const & fts )
+  {
+    can_FTS = fts.enabled
+              && !fts.disabledTypes.contains( "STARDICT", Qt::CaseInsensitive )
+              && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+  }
 protected:
 
   void loadIcon() throw();
@@ -611,14 +617,13 @@ void StardictDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstItera
   try
   {
     FtsHelpers::makeFTSIndex( this, isCancelled );
+    FTS_index_completed.ref();
   }
   catch( std::exception &ex )
   {
     gdWarning( "Stardict: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
     QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
   }
-
-  FTS_index_completed.ref();
 }
 
 void StardictDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )

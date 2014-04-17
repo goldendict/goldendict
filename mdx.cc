@@ -252,6 +252,15 @@ public:
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
+  virtual void setFTSParameters( Config::FullTextSearch const & fts )
+  {
+    if( ensureInitDone().size() )
+      return;
+
+    can_FTS = fts.enabled
+              && !fts.disabledTypes.contains( "MDICT", Qt::CaseInsensitive )
+              && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+  }
 protected:
 
   virtual void loadIcon() throw();
@@ -481,14 +490,13 @@ void MdxDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
   try
   {
     FtsHelpers::makeFTSIndex( this, isCancelled );
+    FTS_index_completed.ref();
   }
   catch( std::exception &ex )
   {
     gdWarning( "MDict: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
     QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
   }
-
-  FTS_index_completed.ref();
 }
 
 void MdxDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )

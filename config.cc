@@ -766,6 +766,42 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "trackClipboardChanges" ).isNull() )
       c.preferences.trackClipboardChanges = ( preferences.namedItem( "trackClipboardChanges" ).toElement().text() == "1" );
 #endif
+
+    QDomNode fts = preferences.namedItem( "fullTextSearch" );
+
+    if ( !fts.isNull() )
+    {
+      if ( !fts.namedItem( "searchMode" ).isNull() )
+        c.preferences.fts.searchMode = fts.namedItem( "searchMode" ).toElement().text().toInt();
+
+      if ( !fts.namedItem( "matchCase" ).isNull() )
+        c.preferences.fts.matchCase = ( fts.namedItem( "matchCase" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "maxArticlesPerDictionary" ).isNull() )
+        c.preferences.fts.maxArticlesPerDictionary = fts.namedItem( "maxArticlesPerDictionary" ).toElement().text().toInt();
+
+      if ( !fts.namedItem( "maxDistanceBetweenWords" ).isNull() )
+        c.preferences.fts.maxDistanceBetweenWords = fts.namedItem( "maxDistanceBetweenWords" ).toElement().text().toInt();
+
+      if ( !fts.namedItem( "useMaxArticlesPerDictionary" ).isNull() )
+        c.preferences.fts.useMaxArticlesPerDictionary = ( fts.namedItem( "useMaxArticlesPerDictionary" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "useMaxDistanceBetweenWords" ).isNull() )
+        c.preferences.fts.useMaxDistanceBetweenWords = ( fts.namedItem( "useMaxDistanceBetweenWords" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "dialogGeometry" ).isNull() )
+        c.preferences.fts.dialogGeometry = QByteArray::fromBase64( fts.namedItem( "dialogGeometry" ).toElement().text().toLatin1() );
+
+      if( !fts.namedItem( "disabledTypes" ).isNull() )
+      c.preferences.fts.disabledTypes = fts.namedItem( "disabledTypes" ).toElement().text();
+
+      if ( !fts.namedItem( "enabled" ).isNull() )
+        c.preferences.fts.useMaxDistanceBetweenWords = ( fts.namedItem( "enabled" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "maxDictionarySize" ).isNull() )
+        c.preferences.fts.maxDictionarySize = fts.namedItem( "maxDictionarySize" ).toElement().text().toUInt();
+    }
+
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -891,32 +927,6 @@ Class load() throw( exError )
 
     if ( !headwordsDialog.namedItem( "headwordsDialogGeometry" ).isNull() )
       c.headwordsDialog.headwordsDialogGeometry = QByteArray::fromBase64( headwordsDialog.namedItem( "headwordsDialogGeometry" ).toElement().text().toLatin1() );
-  }
-
-  QDomNode fts = root.namedItem( "fullTextSearch" );
-
-  if ( !fts.isNull() )
-  {
-    if ( !fts.namedItem( "searchMode" ).isNull() )
-      c.fts.searchMode = fts.namedItem( "searchMode" ).toElement().text().toInt();
-
-    if ( !fts.namedItem( "matchCase" ).isNull() )
-      c.fts.matchCase = ( fts.namedItem( "matchCase" ).toElement().text() == "1" );
-
-    if ( !fts.namedItem( "maxArticlesPerDictionary" ).isNull() )
-      c.fts.maxArticlesPerDictionary = fts.namedItem( "maxArticlesPerDictionary" ).toElement().text().toInt();
-
-    if ( !fts.namedItem( "maxDistanceBetweenWords" ).isNull() )
-      c.fts.maxDistanceBetweenWords = fts.namedItem( "maxDistanceBetweenWords" ).toElement().text().toInt();
-
-    if ( !fts.namedItem( "useMaxArticlesPerDictionary" ).isNull() )
-      c.fts.useMaxArticlesPerDictionary = ( fts.namedItem( "useMaxArticlesPerDictionary" ).toElement().text() == "1" );
-
-    if ( !fts.namedItem( "useMaxDistanceBetweenWords" ).isNull() )
-      c.fts.useMaxDistanceBetweenWords = ( fts.namedItem( "useMaxDistanceBetweenWords" ).toElement().text() == "1" );
-
-    if ( !fts.namedItem( "dialogGeometry" ).isNull() )
-      c.fts.dialogGeometry = QByteArray::fromBase64( fts.namedItem( "dialogGeometry" ).toElement().text().toLatin1() );
   }
 
   return c;
@@ -1576,6 +1586,51 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.preferences.trackClipboardChanges ? "1" : "0" ) );
     preferences.appendChild( opt );
 #endif
+    {
+      QDomNode hd = dd.createElement( "fullTextSearch" );
+      preferences.appendChild( hd );
+
+      QDomElement opt = dd.createElement( "searchMode" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.searchMode ) ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "matchCase" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.matchCase ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "maxArticlesPerDictionary" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.maxArticlesPerDictionary ) ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "maxDistanceBetweenWords" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.maxDistanceBetweenWords ) ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "useMaxArticlesPerDictionary" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.useMaxArticlesPerDictionary ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "useMaxDistanceBetweenWords" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.useMaxDistanceBetweenWords ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "dialogGeometry" );
+      opt.appendChild( dd.createTextNode( QString::fromLatin1( c.preferences.fts.dialogGeometry.toBase64() ) ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "disabledTypes" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.disabledTypes ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "enabled" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.enabled ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "maxDictionarySize" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.maxDictionarySize ) ) );
+      hd.appendChild( opt );
+    }
+
   }
 
   {
@@ -1729,39 +1784,6 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "headwordsDialogGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.headwordsDialog.headwordsDialogGeometry.toBase64() ) ) );
-    hd.appendChild( opt );
-  }
-
-  {
-    QDomNode hd = dd.createElement( "fullTextSearch" );
-    root.appendChild( hd );
-
-    QDomElement opt = dd.createElement( "searchMode" );
-    opt.appendChild( dd.createTextNode( QString::number( c.fts.searchMode ) ) );
-    hd.appendChild( opt );
-
-    opt = dd.createElement( "matchCase" );
-    opt.appendChild( dd.createTextNode( c.fts.matchCase ? "1" : "0" ) );
-    hd.appendChild( opt );
-
-    opt = dd.createElement( "maxArticlesPerDictionary" );
-    opt.appendChild( dd.createTextNode( QString::number( c.fts.maxArticlesPerDictionary ) ) );
-    hd.appendChild( opt );
-
-    opt = dd.createElement( "maxDistanceBetweenWords" );
-    opt.appendChild( dd.createTextNode( QString::number( c.fts.maxDistanceBetweenWords ) ) );
-    hd.appendChild( opt );
-
-    opt = dd.createElement( "useMaxArticlesPerDictionary" );
-    opt.appendChild( dd.createTextNode( c.fts.useMaxArticlesPerDictionary ? "1" : "0" ) );
-    hd.appendChild( opt );
-
-    opt = dd.createElement( "useMaxDistanceBetweenWords" );
-    opt.appendChild( dd.createTextNode( c.fts.useMaxDistanceBetweenWords ? "1" : "0" ) );
-    hd.appendChild( opt );
-
-    opt = dd.createElement( "dialogGeometry" );
-    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.fts.dialogGeometry.toBase64() ) ) );
     hd.appendChild( opt );
   }
 

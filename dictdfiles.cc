@@ -131,6 +131,12 @@ public:
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
+  virtual void setFTSParameters( Config::FullTextSearch const & fts )
+  {
+    can_FTS = fts.enabled
+              && !fts.disabledTypes.contains( "DICTD", Qt::CaseInsensitive )
+              && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+  }
 };
 
 DictdDictionary::DictdDictionary( string const & id,
@@ -433,14 +439,13 @@ void DictdDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteratio
   try
   {
     FtsHelpers::makeFTSIndex( this, isCancelled );
+    FTS_index_completed.ref();
   }
   catch( std::exception &ex )
   {
     gdWarning( "DictD: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
     QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
   }
-
-  FTS_index_completed.ref();
 }
 
 void DictdDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
