@@ -749,8 +749,8 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // Free memory
     offsets.clear();
 
-    for( QMap< QString, QVector< uint32_t > >::ConstIterator it = ftsWords.begin();
-         it != ftsWords.end(); ++it )
+    QMap< QString, QVector< uint32_t > >::iterator it = ftsWords.begin();
+    while( it != ftsWords.end() )
     {
       if( isCancelled )
         throw exUserAbort();
@@ -762,6 +762,8 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
       chunks.addToBlock( it.value().data(), size * sizeof(uint32_t) );
 
       indexedWords.addSingleWord( gd::toWString( it.key() ), offset );
+
+      it = ftsWords.erase( it );
     }
 
     // Free memory
