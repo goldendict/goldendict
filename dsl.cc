@@ -1186,6 +1186,9 @@ void DslDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
 
 void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
 {
+  headword.clear();
+  text.clear();
+
   vector< char > chunk;
 
   char * articleProps;
@@ -1240,7 +1243,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   // Skip headword
 
   size_t pos = 0;
-  wstring tildeValue;
+  wstring articleHeadword;
 
   for( ; ; )
   {
@@ -1248,20 +1251,20 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
     pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), begin );
 
-    if ( tildeValue.empty() )
+    if ( articleHeadword.empty() )
     {
       // Process the headword
 
-      tildeValue = wstring( articleData, begin, pos - begin );
+      articleHeadword = wstring( articleData, begin, pos - begin );
 
       list< wstring > lst;
 
-      expandOptionalParts( tildeValue, &lst );
+      expandOptionalParts( articleHeadword, &lst );
 
       if ( lst.size() ) // Should always be
-        tildeValue = lst.front();
+        articleHeadword = lst.front();
 
-      processUnsortedParts( tildeValue, false );
+      processUnsortedParts( articleHeadword, true );
     }
 
     if ( pos == articleData.size() )
@@ -1285,8 +1288,38 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     }
   }
 
-  unescapeDsl( tildeValue );
-  headword = gd::toQString( tildeValue );
+  if( !articleHeadword.empty() && isDslWs( articleHeadword[ 0 ] ) )
+  {
+    // Headword of the insided card
+    // Take it from card if no '~' presented
+    string::size_type pos = articleHeadword.find( L'@' );
+    if( pos != string::npos )
+    {
+      wstring head = Folding::trimWhitespace( articleHeadword.substr( pos + 1 ) );
+      string::size_type tildaPos = head.find( L'~' );
+
+      while( tildaPos != string::npos )
+      {
+        if( tildaPos == 0 || head[ tildaPos ] != L'\\' )
+          break;
+        tildaPos = head.find( L'~', tildaPos + 1 );
+      }
+
+      if( tildaPos == string::npos )
+      {
+        // This is full headword - store it
+        unescapeDsl( head );
+        headword = gd::toQString( head );
+      }
+      // If '~' presented, leave headword empty,
+      // it will be retrieved from index later
+    }
+  }
+  else
+  {
+    unescapeDsl( articleHeadword );
+    headword = gd::toQString( articleHeadword );
+  }
 
   wstring articleText;
 
