@@ -45,7 +45,12 @@ struct FtsHeadword
   }
 
   bool operator <( FtsHeadword const & other ) const
-  { return headword.localeAwareCompare( other.headword ) < 0; }
+  {
+    if( headword[ 0 ] == '\"' || headword[ 0 ] == '\'' )
+      return headword.mid( 1 ).localeAwareCompare( other.headword ) < 0;
+    else
+      return headword.localeAwareCompare( other.headword ) < 0;
+  }
 
   bool operator ==( FtsHeadword const & other ) const
   { return headword.compare( other.headword, Qt::CaseInsensitive ) == 0; }
