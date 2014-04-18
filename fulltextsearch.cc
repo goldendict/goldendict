@@ -15,8 +15,8 @@ namespace FTS
 
 enum
 {
-  MinDistanceBetweenWords = 1,
-  MaxDistanceBetweenWords = 10,
+  MinDistanceBetweenWords = 0,
+  MaxDistanceBetweenWords = 15,
   MinArticlesPerDictionary = 1,
   MaxArticlesPerDictionary = 10000
 };

@@ -283,7 +283,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
           if( matchWordNom > 0 )
           {
             unmatchWordNom += 1;
-            if( distanceBetweenWords > 0 && unmatchWordNom > distanceBetweenWords )
+            if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
             {
               matchWordNom = 0;
               unmatchWordNom = 0;
