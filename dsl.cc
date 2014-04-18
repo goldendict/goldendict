@@ -250,7 +250,7 @@ private:
                     wstring & articleText );
 
   /// Converts DSL language to an Html.
-  string dslToHtml( wstring const & );
+  string dslToHtml( wstring const &, wstring const & headword = wstring() );
 
   // Parts of dslToHtml()
   string nodeToHtml( ArticleDom::Node const & );
@@ -715,12 +715,12 @@ void DslDictionary::loadArticle( uint32_t address,
     articleText.clear();
 }
 
-string DslDictionary::dslToHtml( wstring const & str )
+string DslDictionary::dslToHtml( wstring const & str, wstring const & headword )
 {
  // Normalize the string
   wstring normalizedStr = gd::normalize( str );
 
-  ArticleDom dom( normalizedStr );
+  ArticleDom dom( normalizedStr, getName(), headword );
 
   optionalPartNom = 0;
 
@@ -1330,7 +1330,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
   articleData.clear();
 
-  ArticleDom dom( gd::normalize( articleText ) );
+  ArticleDom dom( gd::normalize( articleText ), getName(), articleHeadword );
 
   articleText.clear();
 
@@ -1477,7 +1477,7 @@ void DslArticleRequest::run()
       if( displayedHeadword.size() == 1 && displayedHeadword[0] == '<' )  // Fix special case - "<" header
           articleText += "<";                                             // dslToHtml can't handle it correctly.
       else
-        articleText += dict.dslToHtml( displayedHeadword );
+        articleText += dict.dslToHtml( displayedHeadword, displayedHeadword );
 
       /// After this may be expand button will be inserted
 
@@ -1490,7 +1490,7 @@ void DslArticleRequest::run()
         articleAfter += " dir=\"rtl\"";
       articleAfter += ">";
 
-      articleAfter += dict.dslToHtml( articleBody );
+      articleAfter += dict.dslToHtml( articleBody, displayedHeadword );
       articleAfter += "</div>";
       articleAfter += "</span>";
 

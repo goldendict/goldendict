@@ -62,7 +62,8 @@ struct ArticleDom
 
   /// Does the parse at construction. Refer to the 'root' member variable
   /// afterwards.
-  ArticleDom( wstring const & );
+  ArticleDom( wstring const &, string const & dictName = string(),
+              wstring const & headword_ = wstring() );
 
   /// Root of DOM's tree
   Node root;
@@ -83,6 +84,10 @@ private:
   unsigned transcriptionCount; // >0 = inside a [t] tag
 
   void nextChar() throw( eot );
+
+  /// Infomation for diagnostic purposes
+  string dictionaryName;
+  wstring headword;
 };
 
 /// A adapted version of Iconv which takes Dsl encoding and decodes to wchar.

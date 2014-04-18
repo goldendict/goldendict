@@ -8,6 +8,7 @@
 #include "gddebug.hh"
 #include "ufile.hh"
 #include "wstring_qt.hh"
+#include "utf8.hh"
 
 #include <stdio.h>
 #include <wctype.h>
@@ -62,9 +63,12 @@ static inline bool checkM( wstring const & dest, wstring const & src )
     dest[ 0 ] == L'm' && iswdigit( dest[ 1 ] ) );
 }
 
-ArticleDom::ArticleDom( wstring const & str ):
+ArticleDom::ArticleDom( wstring const & str, string const & dictName,
+                        wstring const & headword_):
   root( Node::Tag(), wstring(), wstring() ), stringPos( str.c_str() ),
-  transcriptionCount( 0 )
+  transcriptionCount( 0 ),
+  dictionaryName( dictName ),
+  headword( headword_ )
 {
   list< Node * > stack; // Currently opened tags
 
@@ -599,8 +603,13 @@ void ArticleDom::closeTag( wstring const & name,
   else
   if ( warn )
   {
-    qWarning() << "Warning: no corresponding opening tag for closing tag" <<
-                   gd::toQString( name ) << "found.";
+    if( !dictionaryName.empty() )
+      gdWarning( "Warning: no corresponding opening tag for closing tag \"%s\" found in \"%s\", article \"%s\".",
+                 gd::toQString( name ).toUtf8().data(), dictionaryName.c_str(),
+                 gd::toQString( headword ).toUtf8().data() );
+    else
+      gdWarning( "Warning: no corresponding opening tag for closing tag \"%s\" found.",
+                 gd::toQString( name ).toUtf8().data() );
   }
 }
 
