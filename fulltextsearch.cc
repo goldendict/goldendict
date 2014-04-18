@@ -10,8 +10,6 @@
 #include <QMessageBox>
 #include <qalgorithms.h>
 
-#include <windows.h>
-
 namespace FTS
 {
 

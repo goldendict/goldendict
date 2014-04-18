@@ -47,14 +47,14 @@
 #define gdStoreNormalGeometryEvent ( ( QEvent::Type )( QEvent::User + 1 ) )
 #define gdApplyNormalGeometryEvent ( ( QEvent::Type )( QEvent::User + 2 ) )
 
-#define MIN_THREAD_COUNT 4
-
 #endif
 
 #ifdef Q_WS_X11
 #include <QX11Info>
 #include <X11/Xlib.h>
 #endif
+
+#define MIN_THREAD_COUNT 4
 
 using std::set;
 using std::wstring;
