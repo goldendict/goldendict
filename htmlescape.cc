@@ -143,7 +143,7 @@ QString unescape( QString const & str )
   if ( str.contains( '<' ) || str.contains( '&' ) )
   {
     QString tmp = str;
-    tmp.replace( QRegExp( "<(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol)[^>]{0,}>",
+    tmp.replace( QRegExp( "<(?:\\s*(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
                           Qt::CaseInsensitive, QRegExp::RegExp2 ), " " );
     tmp.remove( QRegExp( "<[^>]*>", Qt::CaseSensitive, QRegExp::RegExp2 ) );
     return QTextDocumentFragment::fromHtml( tmp.trimmed() ).toPlainText();
