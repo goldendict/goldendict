@@ -238,7 +238,9 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.allowStardict->setChecked( !p.fts.disabledTypes.contains( "STARDICT", Qt::CaseInsensitive ) );
   ui.allowXDXF->setChecked( !p.fts.disabledTypes.contains( "XDXF", Qt::CaseInsensitive ) );
   ui.allowZim->setChecked( !p.fts.disabledTypes.contains( "ZIM", Qt::CaseInsensitive ) );
-
+#ifndef MAKE_ZIM_SUPPORT
+  ui.allowZim->hide();
+#endif
   ui.maxDictionarySize->setValue( p.fts.maxDictionarySize );
 }
 
