@@ -886,6 +886,7 @@ const QString & MdxDictionary::getDescription()
   }
   else
   {
+    Mutex::Lock _( idxMutex );
     vector< char > chunk;
     char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
     string str( dictDescription );

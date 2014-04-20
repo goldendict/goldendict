@@ -491,7 +491,11 @@ void DictdDictionary::getArticleText( uint32_t articleAddress, QString & headwor
 
     string articleText;
 
-    char * articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+    char * articleBody;
+    {
+      Mutex::Lock _( dzMutex );
+      articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+    }
 
     if ( !articleBody )
     {
