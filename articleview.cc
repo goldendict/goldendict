@@ -887,8 +887,15 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   else
   if ( url.scheme().compare( "bword" ) == 0 )
   {
-    showDefinition( url.path(),
-                    getGroup( ref ), scrollTo, contexts );
+    if( ref.hasQueryItem( "dictionaries" ) )
+    {
+      QStringList dictsList = ref.queryItemValue( "dictionaries" )
+                                 .split( ",", QString::SkipEmptyParts );
+      showDefinition( url.path(), dictsList );
+    }
+    else
+      showDefinition( url.path(),
+                      getGroup( ref ), scrollTo, contexts );
   }
   else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
@@ -900,6 +907,15 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
     else
     {
+      if( ref.hasQueryItem( "dictionaries" ) )
+      {
+        // Specific dictionary group from full-text search
+        QStringList dictsList = ref.queryItemValue( "dictionaries" )
+                                   .split( ",", QString::SkipEmptyParts );
+        showDefinition( url.path().mid( 1 ), dictsList );
+        return;
+      }
+
       QString newScrollTo( scrollTo );
       if( url.hasQueryItem( "dict" ) )
       {

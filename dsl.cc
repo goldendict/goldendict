@@ -1309,6 +1309,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
       {
         // This is full headword - store it
         unescapeDsl( head );
+        normalizeHeadword( head );
         headword = gd::toQString( head );
       }
       // If '~' presented, leave headword empty,
@@ -1318,6 +1319,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   else
   {
     unescapeDsl( articleHeadword );
+    normalizeHeadword( articleHeadword );
     headword = gd::toQString( articleHeadword );
   }
 
