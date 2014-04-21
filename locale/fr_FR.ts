@@ -427,22 +427,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../authentication.ui" line="14"/>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentification requise pour le proxy</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="20"/>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Un nom d&apos;utilisateur et un mot de passe sont requis pour utiliser un proxy</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="30"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisateur :</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="40"/>
         <source>Password:</source>
-        <translation type="unfinished">Mot de passe :</translation>
+        <translation>Mot de passe :</translation>
     </message>
 </context>
 <context>
@@ -3310,17 +3310,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="945"/>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy du système</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="952"/>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy personnalisé</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="959"/>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres personnalisés</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1317"/>
