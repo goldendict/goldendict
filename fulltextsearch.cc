@@ -273,12 +273,20 @@ void FullTextSearchDialog::setLimitsUsing()
 void FullTextSearchDialog::accept()
 {
   QStringList list1, list2;
-  QRegExp regexp;
   int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
 
+  int maxResultsPerDict = ui.checkBoxArticlesPerDictionary->isChecked() ?
+                            ui.articlesPerDictionary->value() : -1;
+  int distanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked() ?
+                               ui.distanceBetweenWords->value() : -1;
+
+  model->clear();
+  ui.articlesFound->setText( QString::number( results.size() ) );
+
   if( !FtsHelpers::parseSearchString( ui.searchLine->text(), list1, list2,
-                                      regexp, mode,
-                                      ui.matchCase->isChecked() ) )
+                                      searchRegExp, mode,
+                                      ui.matchCase->isChecked(),
+                                      distanceBetweenWords ) )
   {
     QMessageBox message( QMessageBox::Warning,
                          "GoldenDict",
@@ -302,15 +310,8 @@ void FullTextSearchDialog::accept()
   }
 
   ui.OKButton->setEnabled( false );
-  model->clear();
-  ui.articlesFound->setText( QString::number( results.size() ) );
 
   // Make search requests
-
-  int maxResultsPerDict = ui.checkBoxArticlesPerDictionary->isChecked() ?
-                            ui.articlesPerDictionary->value() : -1;
-  int distanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked() ?
-                               ui.distanceBetweenWords->value() : -1;
 
   for( unsigned x = 0; x < activeDicts.size(); ++x )
   {
@@ -396,7 +397,7 @@ void FullTextSearchDialog::itemClicked( const QModelIndex & idx )
   {
     QString headword = results[ idx.row() ].headword;
     headword.replace( QRegExp( "([\\*\\?\\[\\]])" ), "\\\\1" );
-    emit showTranslationFor( headword, results[ idx.row() ].dictIDs );
+    emit showTranslationFor( headword, results[ idx.row() ].dictIDs, searchRegExp );
   }
 }
 

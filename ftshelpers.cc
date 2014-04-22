@@ -32,7 +32,8 @@ bool ftsIndexIsOldOrBad( string const & indexFile )
 bool parseSearchString( QString const & str, QStringList & indexWords,
                         QStringList & searchWords,
                         QRegExp & searchRegExp, int searchMode,
-                        bool matchCase )
+                        bool matchCase,
+                        int distanceBetweenWords )
 {
   searchWords.clear();
   indexWords.clear();
@@ -52,7 +53,31 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
     indexWords = list.filter( wordRegExp );
     indexWords.removeDuplicates();
 
-    searchRegExp = QRegExp();
+    // Make regexp for results hilite
+
+    QStringList allWords = str.split( spacesRegExp, QString::SkipEmptyParts );
+    QString searchString( "(" );
+
+    QString stripWords( "(?:\\W+\\w+){0," );
+    if( distanceBetweenWords >= 0 )
+      stripWords += QString::number( distanceBetweenWords );
+    stripWords += "}\\W+";
+
+    QString boundWord( searchMode == FTS::WholeWords ? "\\b" : "(?:\\w*)");
+
+    for( int x = 0; x < allWords.size(); x++ )
+    {
+      if( x )
+        searchString += stripWords;
+
+      searchString += boundWord + allWords[ x ] + boundWord;
+    }
+
+    searchString += ")";
+
+    searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                            QRegExp::RegExp2 );
+    searchRegExp.setMinimal( true );
 
     return !indexWords.isEmpty();
   }
@@ -72,6 +97,7 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     searchRegExp = QRegExp( str, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
                             searchMode == FTS::Wildcards ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
+    searchRegExp.setMinimal( true );
   }
 
   return true;
@@ -526,7 +552,8 @@ void FTSResultsRequest::run()
     QStringList indexWords, searchWords;
     QRegExp searchRegExp;
 
-    if( !FtsHelpers::parseSearchString( searchString, indexWords, searchWords, searchRegExp, searchMode, matchCase ) )
+    if( !FtsHelpers::parseSearchString( searchString, indexWords, searchWords, searchRegExp,
+                                        searchMode, matchCase, distanceBetweenWords ) )
     {
       finish();
       return;

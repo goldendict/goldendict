@@ -22,7 +22,11 @@ enum {
   MinimumWordSize = 4,
 
   // Maximum dictionary size for first iteration of FTS indexing
-  MaxDictionarySizeForFastSearch = 150000 //
+  MaxDictionarySizeForFastSearch = 150000,
+
+  // Maxumum match length for highlight search results
+  // (QWebPage::findText() crashes on too long strings)
+  MaxMatchLengthForHighlightResults = 500
 };
 
 enum SearchMode
@@ -173,6 +177,8 @@ class FullTextSearchDialog : public QDialog
   std::list< sptr< Dictionary::DataRequest > > searchReqs;
 
   FtsIndexing & ftsIdx;
+
+  QRegExp searchRegExp;
 public:
   FullTextSearchDialog( QWidget * parent,
                         Config::Class & cfg_,
@@ -205,7 +211,8 @@ private slots:
   void updateDictionaries();
 
 signals:
-  void showTranslationFor( QString const &, QStringList const & dictIDs );
+  void showTranslationFor( QString const &, QStringList const & dictIDs,
+                           QRegExp const & searchRegExp );
   void closeDialog();
 };
 

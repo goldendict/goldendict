@@ -21,6 +21,7 @@
 #include <QDebug>
 #include <QCryptographicHash>
 #include "gestures.hh"
+#include "fulltextsearch.hh"
 
 #if QT_VERSION >= 0x040600
 #include <QWebElement>
@@ -75,7 +76,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   openSearchAction( openSearchAction_ ),
   searchIsOpened( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
-  groupComboBox( groupComboBox_ )
+  groupComboBox( groupComboBox_ ),
+  ftsSearchIsOpened( false ),
+  ftsSearchMatchCase( false ),
+  ftsPosition( 0 )
 {
   ui.setupUi( this );
 
@@ -163,6 +167,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->installEventFilter( this );
   ui.searchFrame->installEventFilter( this );
+  ui.ftsSearchFrame->installEventFilter( this );
 
   // Load the default blank page instantly, so there would be no flicker.
 
@@ -182,6 +187,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->grabGesture( Gestures::GDPinchGestureType );
   ui.definition->grabGesture( Gestures::GDSwipeGestureType );
 #endif
+
+  // Variable name for store current selection range
+  rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
 }
 
 // explicitly report the minimum size, to avoid
@@ -270,7 +278,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   ui.definition->setCursor( Qt::WaitCursor );
 }
 
-void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs )
+void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
+                                  QRegExp const & searchRegExp )
 {
   if( dictIDs.isEmpty() )
     return;
@@ -287,6 +296,11 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   req.setHost( "localhost" );
   req.addQueryItem( "word", word );
   req.addQueryItem( "dictionaries", dictIDs.join( ",") );
+  req.addQueryItem( "regexp", searchRegExp.pattern() );
+  if( searchRegExp.caseSensitivity() == Qt::CaseSensitive )
+    req.addQueryItem( "matchcase", "1" );
+  if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
+    req.addQueryItem( "wildcards", "1" );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -409,6 +423,9 @@ void ArticleView::loadFinished( bool )
   }
 
   emit pageLoaded( this );
+
+  if( ui.definition->url().hasQueryItem( "regexp" ) )
+    highlightFTSResults();
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -630,6 +647,22 @@ bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
       if ( ke->modifiers() == Qt::ShiftModifier )
       {
         on_searchPrevious_clicked();
+        ev->accept();
+        return true;
+      }
+    }
+    if ( ke->key() == Qt::Key_F3 && ftsSearchIsOpened )
+    {
+      if ( !ke->modifiers() )
+      {
+        on_ftsSearchNext_clicked();
+        ev->accept();
+        return true;
+      }
+
+      if ( ke->modifiers() == Qt::ShiftModifier )
+      {
+        on_ftsSearchPrevious_clicked();
         ev->accept();
         return true;
       }
@@ -891,7 +924,12 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     {
       QStringList dictsList = ref.queryItemValue( "dictionaries" )
                                  .split( ",", QString::SkipEmptyParts );
-      showDefinition( url.path(), dictsList );
+
+      QRegExp regexp( ref.queryItemValue( "regexp" ),
+                      ref.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                      ref.hasQueryItem( "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
+
+      showDefinition( url.path(), dictsList, regexp );
     }
     else
       showDefinition( url.path(),
@@ -912,7 +950,12 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         // Specific dictionary group from full-text search
         QStringList dictsList = ref.queryItemValue( "dictionaries" )
                                    .split( ",", QString::SkipEmptyParts );
-        showDefinition( url.path().mid( 1 ), dictsList );
+
+        QRegExp regexp( ref.queryItemValue( "regexp" ),
+                        ref.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                        ref.hasQueryItem( "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
+
+        showDefinition( url.path().mid( 1 ), dictsList, regexp );
         return;
       }
 
@@ -1818,6 +1861,9 @@ void ArticleView::openSearch()
   if( !isVisible() )
     return;
 
+  if( ftsSearchIsOpened )
+    closeSearch();
+
   if ( !searchIsOpened )
   {
     ui.searchFrame->show();
@@ -1832,7 +1878,7 @@ void ArticleView::openSearch()
   if ( ui.definition->selectedText().size() )
   {
     ui.definition->page()->currentFrame()->
-           evaluateJavaScript( "window.getSelection().removeAllRanges();" );
+           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
   }
 
   if ( ui.searchText->property( "noResults" ).toBool() )
@@ -1927,7 +1973,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       if ( ui.definition->selectedText().size() )
       {
         ui.definition->page()->currentFrame()->
-               evaluateJavaScript( "window.getSelection().removeAllRanges();" );
+               evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
       }
     }
 
@@ -1991,6 +2037,27 @@ bool ArticleView::closeSearch()
     return true;
   }
   else
+  if( ftsSearchIsOpened )
+  {
+    allMatches.clear();
+    uniqueMatches.clear();
+    ftsPosition = 0;
+    ftsSearchIsOpened = false;
+
+    ui.ftsSearchFrame->hide();
+    ui.definition->setFocus();
+
+    QWebPage::FindFlags flags ( 0 );
+
+  #if QT_VERSION >= 0x040600
+    flags |= QWebPage::HighlightAllOccurrences;
+  #endif
+
+    ui.definition->findText( "", flags );
+
+    return true;
+  }
+  else
     return false;
 }
 
@@ -2005,6 +2072,9 @@ void ArticleView::showEvent( QShowEvent * ev )
 
   if ( !searchIsOpened )
     ui.searchFrame->hide();
+
+  if( !ftsSearchIsOpened )
+    ui.ftsSearchFrame->hide();
 }
 
 void ArticleView::receiveExpandOptionalParts( bool expand )
@@ -2043,6 +2113,147 @@ void ArticleView::copyAsText()
 void ArticleView::inspect()
 {
   ui.definition->triggerPageAction( QWebPage::InspectElement );
+}
+
+void ArticleView::highlightFTSResults()
+{
+  closeSearch();
+
+  // Clear any current selection
+  if ( ui.definition->selectedText().size() )
+  {
+    ui.definition->page()->currentFrame()->
+           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
+  }
+
+  const QUrl & url = ui.definition->url();
+  QRegExp regexp( url.queryItemValue( "regexp" ),
+                  url.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                  url.hasQueryItem( "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
+  regexp.setMinimal( true );
+
+  QString pageText = ui.definition->page()->currentFrame()->toPlainText();
+  int pos = 0;
+
+  while( pos >= 0 )
+  {
+    pos = regexp.indexIn( pageText, pos );
+    if( pos >= 0 )
+    {
+      if( regexp.matchedLength() > FTS::MaxMatchLengthForHighlightResults )
+      {
+        gdWarning( "ArticleView::highlightFTSResults(): Too long match - skipped (matched length %i, allowed %i)",
+                   regexp.matchedLength(), FTS::MaxMatchLengthForHighlightResults );
+      }
+      else
+        allMatches.append( regexp.cap() );
+
+      pos += regexp.matchedLength();
+    }
+  }
+
+  ftsSearchMatchCase = url.hasQueryItem( "matchcase" );
+
+  QWebPage::FindFlags flags ( 0 );
+
+  if( ftsSearchMatchCase )
+    flags |= QWebPage::FindCaseSensitively;
+
+#if QT_VERSION >= 0x040600
+  flags |= QWebPage::HighlightAllOccurrences;
+
+  for( int x = 0; x < allMatches.size(); x++ )
+    ui.definition->findText( allMatches.at( x ), flags );
+
+  flags &= ~QWebPage::HighlightAllOccurrences;
+#endif
+
+  if( !allMatches.isEmpty() )
+  {
+    if( ui.definition->findText( allMatches.at( 0 ), flags ) )
+    {
+        ui.definition->page()->currentFrame()->
+               evaluateJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
+                                   .arg( rangeVarName ) );
+    }
+  }
+
+  ui.ftsSearchFrame->show();
+  ui.ftsSearchPrevious->setEnabled( false );
+  ui.ftsSearchNext->setEnabled( !allMatches.isEmpty() );
+
+  ftsSearchIsOpened = true;
+}
+
+void ArticleView::performFtsFindOperation( bool backwards )
+{
+  if( !ftsSearchIsOpened )
+    return;
+
+  if( allMatches.isEmpty() )
+  {
+    ui.ftsSearchNext->setEnabled( false );
+    ui.ftsSearchPrevious->setEnabled( false );
+    return;
+  }
+
+  QWebPage::FindFlags flags( 0 );
+
+  if( ftsSearchMatchCase )
+    flags |= QWebPage::FindCaseSensitively;
+
+
+  // Restore saved highlighted selection
+  ui.definition->page()->currentFrame()->
+         evaluateJavaScript( QString( "var sel=window.getSelection();sel.removeAllRanges();sel.addRange(%1);_=0;" )
+                             .arg( rangeVarName ) );
+
+  bool res;
+  if( backwards )
+  {
+    if( ftsPosition > 0 )
+    {
+      res = ui.definition->findText( allMatches.at( ftsPosition - 1 ),
+                                     flags | QWebPage::FindBackward );
+      ftsPosition -= 1;
+    }
+    else
+      res = ui.definition->findText( allMatches.at( ftsPosition ),
+                                     flags | QWebPage::FindBackward );
+
+    ui.ftsSearchPrevious->setEnabled( res );
+    if( !ui.ftsSearchNext->isEnabled() )
+      ui.ftsSearchNext->setEnabled( res );
+  }
+  else
+  {
+    if( ftsPosition < allMatches.size() - 1 )
+    {
+      res = ui.definition->findText( allMatches.at( ftsPosition + 1 ), flags );
+      ftsPosition += 1;
+    }
+    else
+      res = ui.definition->findText( allMatches.at( ftsPosition ), flags );
+
+    ui.ftsSearchNext->setEnabled( res );
+    if( !ui.ftsSearchPrevious->isEnabled() )
+      ui.ftsSearchPrevious->setEnabled( res );
+  }
+
+  // Store new highlighted selection
+  ui.definition->page()->currentFrame()->
+         evaluateJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
+                             .arg( rangeVarName ) );
+}
+
+void ArticleView::on_ftsSearchPrevious_clicked()
+{
+  performFtsFindOperation( true );
+}
+
+void ArticleView::on_ftsSearchNext_clicked()
+{
+  performFtsFindOperation( false );
 }
 
 #ifdef Q_OS_WIN32

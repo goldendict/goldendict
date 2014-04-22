@@ -46,7 +46,8 @@ bool ftsIndexIsOldOrBad( std::string const & indexFile );
 bool parseSearchString( QString const & str, QStringList & IndexWords,
                         QStringList & searchWords,
                         QRegExp & searchRegExp, int searchMode,
-                        bool matchCase );
+                        bool matchCase,
+                        int distanceBetweenWords );
 
 void parseArticleForFts( uint32_t articleAddress, QString & articleText,
                          QMap< QString, QVector< uint32_t > > & words );

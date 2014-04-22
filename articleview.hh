@@ -36,6 +36,7 @@ class ArticleView: public QFrame
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
+  QString rangeVarName;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
@@ -49,6 +50,16 @@ class ArticleView: public QFrame
 
   QAction * dictionaryBarToggled;
   GroupComboBox const * groupComboBox;
+
+  /// Search in results of full-text search
+  QStringList allMatches;
+  QStringList uniqueMatches;
+  bool ftsSearchIsOpened, ftsSearchMatchCase;
+  int ftsPosition;
+
+  void highlightFTSResults();
+  void performFtsFindOperation( bool backwards );
+  void showFindButtons();
 
 public:
   /// The popupView flag influences contents of the context menus to be
@@ -85,7 +96,8 @@ public:
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
 
-  void showDefinition( QString const & word, QStringList const & dictIDs );
+  void showDefinition( QString const & word, QStringList const & dictIDs,
+                       QRegExp const & searchRegExp );
 
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
@@ -264,6 +276,9 @@ private slots:
   void on_searchCloseButton_clicked();
   void on_searchCaseSensitive_clicked();
   void on_highlightAllButton_clicked();
+
+  void on_ftsSearchPrevious_clicked();
+  void on_ftsSearchNext_clicked();
 
   /// Handles the double-click from the definition.
   void doubleClicked();

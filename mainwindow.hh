@@ -358,7 +358,8 @@ private slots:
 
   void showTranslationFor( QString const &, unsigned inGroup = 0 );
 
-  void showTranslationFor( QString const &, QStringList const & dictIDs );
+  void showTranslationFor( QString const &, QStringList const & dictIDs,
+                           QRegExp const & searchRegExp );
 
   void showHistoryItem( QString const & );
 

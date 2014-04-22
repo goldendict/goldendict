@@ -80,7 +80,8 @@ public:
 private:
 
   /// Makes everything up to and including the opening body tag.
-  std::string makeHtmlHeader( QString const & word, QString const & icon ) const;
+  std::string makeHtmlHeader( QString const & word, QString const & icon,
+                              bool expandOptionalParts ) const;
 
   /// Makes the html body for makeNotFoundTextFor()
   static std::string makeNotFoundBody( QString const & word, QString const & group );
