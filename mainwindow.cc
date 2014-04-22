@@ -2638,7 +2638,8 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
   navPronounce->setEnabled( false );
 
-  view->showDefinition( inWord, dictIDs, searchRegExp );
+  view->showDefinition( inWord, dictIDs, searchRegExp,
+                        groupInstances[ groupList->currentIndex() ].id );
 
   updatePronounceAvailability();
   updateFoundInDictsList();

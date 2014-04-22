@@ -279,7 +279,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 }
 
 void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
-                                  QRegExp const & searchRegExp )
+                                  QRegExp const & searchRegExp, unsigned group )
 {
   if( dictIDs.isEmpty() )
     return;
@@ -301,6 +301,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
     req.addQueryItem( "matchcase", "1" );
   if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
     req.addQueryItem( "wildcards", "1" );
+  req.addQueryItem( "group", QString::number( group ) );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -925,11 +926,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       QStringList dictsList = ref.queryItemValue( "dictionaries" )
                                  .split( ",", QString::SkipEmptyParts );
 
-      QRegExp regexp( ref.queryItemValue( "regexp" ),
-                      ref.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                      ref.hasQueryItem( "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
-
-      showDefinition( url.path(), dictsList, regexp );
+      showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ) );
     }
     else
       showDefinition( url.path(),
@@ -951,11 +948,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         QStringList dictsList = ref.queryItemValue( "dictionaries" )
                                    .split( ",", QString::SkipEmptyParts );
 
-        QRegExp regexp( ref.queryItemValue( "regexp" ),
-                        ref.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                        ref.hasQueryItem( "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
-
-        showDefinition( url.path().mid( 1 ), dictsList, regexp );
+        showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ) );
         return;
       }
 
@@ -1955,7 +1948,18 @@ void ArticleView::doubleClicked()
                                      getCurrentArticle(), Contexts() );
       }
       else
-        showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+      {
+        QUrl const & ref = ui.definition->url();
+
+        if( ref.hasQueryItem( "dictionaries" ) )
+        {
+          QStringList dictsList = ref.queryItemValue( "dictionaries" )
+                                     .split( ",", QString::SkipEmptyParts );
+          showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ) );
+        }
+        else
+          showDefinition( selectedText, getGroup( ref ), getCurrentArticle() );
+      }
     }
   }
 }
@@ -2119,18 +2123,22 @@ void ArticleView::highlightFTSResults()
 {
   closeSearch();
 
+  const QUrl & url = ui.definition->url();
+  QRegExp regexp( url.queryItemValue( "regexp" ),
+                  url.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                  url.hasQueryItem( "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
+
+  if( regexp.pattern().isEmpty() )
+    return;
+
+  regexp.setMinimal( true );
+
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
   {
     ui.definition->page()->currentFrame()->
            evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
   }
-
-  const QUrl & url = ui.definition->url();
-  QRegExp regexp( url.queryItemValue( "regexp" ),
-                  url.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                  url.hasQueryItem( "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
-  regexp.setMinimal( true );
 
   QString pageText = ui.definition->page()->currentFrame()->toPlainText();
   int pos = 0;

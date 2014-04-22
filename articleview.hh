@@ -97,7 +97,7 @@ public:
                        Contexts const & contexts = Contexts() );
 
   void showDefinition( QString const & word, QStringList const & dictIDs,
-                       QRegExp const & searchRegExp );
+                       QRegExp const & searchRegExp, unsigned group );
 
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
