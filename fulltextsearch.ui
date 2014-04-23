@@ -83,31 +83,30 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="articlesFoundLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>21</height>
+        </size>
+       </property>
        <property name="text">
         <string>Articles found:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="articlesFound">
-       <property name="text">
-        <string notr="true">0</string>
+      <widget class="QProgressBar" name="searchProgressBar">
+       <property name="maximum">
+        <number>0</number>
+       </property>
+       <property name="value">
+        <number>-1</number>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -177,16 +176,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="nowIndexingLabel">
      <property name="text">
-      <string>Now indexing:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="nowIndexing">
-     <property name="text">
-      <string notr="true"/>
+      <string>Now indexing: None</string>
      </property>
     </widget>
    </item>

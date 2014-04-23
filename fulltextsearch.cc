@@ -147,6 +147,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   ui.searchMode->addItem( tr( "RexExp" ), RegExp );
   ui.searchMode->setCurrentIndex( cfg.preferences.fts.searchMode );
 
+  ui.searchProgressBar->hide();
+
   ui.checkBoxDistanceBetweenWords->setText( tr( "Max distance between words (%1-%2):" )
                                             .arg( QString::number( MinDistanceBetweenWords ) )
                                             .arg( QString::number( MaxDistanceBetweenWords ) ) );
@@ -179,7 +181,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   model = new HeadwordsListModel( this, results, activeDicts );
   ui.headwordsView->setModel( model );
 
-  ui.articlesFound->setText( "0" );
+  ui.articlesFoundLabel->setText( tr( "Articles found: " ) + "0" );
 
   connect( ui.headwordsView, SIGNAL( clicked( QModelIndex ) ),
            this, SLOT( itemClicked( QModelIndex ) ) );
@@ -250,7 +252,7 @@ void FullTextSearchDialog::saveData()
 
 void FullTextSearchDialog::setNewIndexingName( QString name )
 {
-  ui.nowIndexing->setText( name );
+  ui.nowIndexingLabel->setText( tr( "Now indexing: " ) + name );
   showDictNumbers();
 }
 
@@ -281,7 +283,7 @@ void FullTextSearchDialog::accept()
                                ui.distanceBetweenWords->value() : -1;
 
   model->clear();
-  ui.articlesFound->setText( QString::number( results.size() ) );
+  ui.articlesFoundLabel->setText( tr( "Articles found: " ) + QString::number( results.size() ) );
 
   if( !FtsHelpers::parseSearchString( ui.searchLine->text(), list1, list2,
                                       searchRegExp, mode,
@@ -310,6 +312,7 @@ void FullTextSearchDialog::accept()
   }
 
   ui.OKButton->setEnabled( false );
+  ui.searchProgressBar->show();
 
   // Make search requests
 
@@ -354,7 +357,8 @@ void FullTextSearchDialog::searchReqFinished()
               (*it)->getDataSlice( 0, sizeof( headwords ), &headwords );
               model->addResults( QModelIndex(), *headwords );
               delete headwords;
-              ui.articlesFound->setText( QString::number( results.size() ) );
+              ui.articlesFoundLabel->setText( tr( "Articles found: " )
+                                              + QString::number( results.size() ) );
             }
             catch( std::exception & e )
             {
@@ -378,6 +382,7 @@ void FullTextSearchDialog::searchReqFinished()
   }
   if ( searchReqs.empty() )
   {
+    ui.searchProgressBar->hide();
     ui.OKButton->setEnabled( true );
     QApplication::beep();
   }
