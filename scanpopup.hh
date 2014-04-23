@@ -107,6 +107,7 @@ private:
   Ui::ScanPopup ui;
   ArticleView * definition;
   QAction escapeAction, switchExpandModeAction, focusTranslateLineAction;
+  QAction openSearchAction;
   QString pendingInputWord, inputWord;
   WordFinder wordFinder;
   Config::Events configEvents;

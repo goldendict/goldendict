@@ -48,6 +48,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   escapeAction( this ),
   switchExpandModeAction( this ),
   focusTranslateLineAction( this ),
+  openSearchAction( this ),
   wordFinder( this ),
   dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine, cfg.preferences.maxDictionaryRefsInContextMenu ),
   mouseEnteredOnce( false ),
@@ -55,6 +56,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   hideTimer( this )
 {
   ui.setupUi( this );
+
+  openSearchAction.setShortcut( QKeySequence( "Ctrl+F" ) );
 
   if( layoutDirection() == Qt::RightToLeft )
   {
@@ -69,6 +72,7 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   definition = new ArticleView( ui.outerFrame, articleNetMgr, allDictionaries,
                                 groups, true, cfg,
+                                openSearchAction,
                                 dictionaryBar.toggleViewAction()
                                 );
 

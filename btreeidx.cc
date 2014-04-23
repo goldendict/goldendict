@@ -1180,30 +1180,29 @@ void BtreeIndex::getAllHeadwords( QSet< QString > & headwords )
   if ( !idxFile )
     throw exIndexWasNotOpened();
 
-  Mutex::Lock _( *idxFileMutex );
-
   findArticleLinks( NULL, NULL, &headwords );
 }
 
-void BtreeIndex::findAllArticleLinks( QVector< FTSLink > & articleLinks )
+void BtreeIndex::findAllArticleLinks( QVector< WordArticleLink > & articleLinks )
 {
   if ( !idxFile )
     throw exIndexWasNotOpened();
-
-  Mutex::Lock _( *idxFileMutex );
 
   QSet< uint32_t > offsets;
 
   findArticleLinks( &articleLinks, &offsets, NULL );
 }
 
-void BtreeIndex::findArticleLinks(QVector< FTSLink > * articleLinks,
+void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
                                    QSet< uint32_t > * offsets,
-                                   QSet< QString > *headwords )
+                                   QSet< QString > *headwords,
+                                   QAtomicInt * isCancelled )
 {
   uint32_t currentNodeOffset = rootOffset;
   uint32_t nextLeaf = 0;
   uint32_t leafEntries;
+
+  Mutex::Lock _( *idxFileMutex );
 
   if ( !rootNodeLoaded )
   {
@@ -1223,6 +1222,9 @@ void BtreeIndex::findArticleLinks(QVector< FTSLink > * articleLinks,
   for( ; ; )
   {
     leafEntries = *(uint32_t *)leaf;
+
+    if( isCancelled && *isCancelled )
+      return;
 
     if ( leafEntries == 0xffffFFFF )
     {
@@ -1257,16 +1259,130 @@ void BtreeIndex::findArticleLinks(QVector< FTSLink > * articleLinks,
     vector< WordArticleLink > result = readChain( chainPtr );
     for( unsigned i = 0; i < result.size(); i++ )
     {
+      if( isCancelled && *isCancelled )
+        return;
+
       if( headwords )
         headwords->insert( QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
 
-      if( !offsets || offsets->contains( result[ i ].articleOffset ) )
+      if( offsets && offsets->contains( result[ i ].articleOffset ) )
         continue;
 
-      offsets->insert( result[ i ].articleOffset );
+      if( offsets )
+        offsets->insert( result[ i ].articleOffset );
+
       if( articleLinks )
-        articleLinks->push_back( FTSLink( result[ i ].prefix + result[ i ].word, result[ i ].articleOffset ) );
+        articleLinks->push_back( WordArticleLink( result[ i ].prefix + result[ i ].word, result[ i ].articleOffset ) );
     }
+
+    if ( chainPtr >= leafEnd )
+    {
+      // We're past the current leaf, fetch the next one
+
+      if ( nextLeaf )
+      {
+        readNode( nextLeaf, extLeaf );
+        leaf = &extLeaf.front();
+        leafEnd = leaf + extLeaf.size();
+
+        nextLeaf = idxFile->read< uint32_t >();
+        chainPtr = leaf + sizeof( uint32_t );
+
+        leafEntries = *(uint32_t *)leaf;
+
+        if ( leafEntries == 0xffffFFFF )
+          throw exCorruptedChainData();
+      }
+      else
+        break; // That was the last leaf
+    }
+  }
+}
+
+void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
+                                          QVector<QString> & headwords,
+                                          QAtomicInt * isCancelled )
+{
+  uint32_t currentNodeOffset = rootOffset;
+  uint32_t nextLeaf = 0;
+  uint32_t leafEntries;
+
+  Mutex::Lock _( *idxFileMutex );
+
+  if ( !rootNodeLoaded )
+  {
+    // Time to load our root node. We do it only once, at the first request.
+    readNode( rootOffset, rootNode );
+    rootNodeLoaded = true;
+  }
+
+  char const * leaf = &rootNode.front();
+  char const * leafEnd = leaf + rootNode.size();
+  char const * chainPtr = 0;
+
+  vector< char > extLeaf;
+
+  // Find first leaf
+
+  for( ; ; )
+  {
+    leafEntries = *(uint32_t *)leaf;
+
+    if( isCancelled && *isCancelled )
+      return;
+
+    if ( leafEntries == 0xffffFFFF )
+    {
+      // A node
+      currentNodeOffset = *( (uint32_t *)leaf + 1 );
+      readNode( currentNodeOffset, extLeaf );
+      leaf = &extLeaf.front();
+      leafEnd = leaf + extLeaf.size();
+      nextLeaf = idxFile->read< uint32_t >();
+    }
+    else
+    {
+      // A leaf
+      chainPtr = leaf + sizeof( uint32_t );
+      break;
+    }
+  }
+
+  if ( !leafEntries )
+  {
+    // Empty leaf? This may only be possible for entirely empty trees only.
+    if ( currentNodeOffset != rootOffset )
+      throw exCorruptedChainData();
+    else
+      return; // No match
+  }
+
+  // Read all chains
+
+  for( ; ; )
+  {
+    vector< WordArticleLink > result = readChain( chainPtr );
+    for( unsigned i = 0; i < result.size(); i++ )
+    {
+      for( QList< uint32_t >::Iterator it = offsets.begin();
+           it != offsets.end(); ++it )
+      {
+        if( isCancelled && *isCancelled )
+          return;
+
+        if( result.at( i ).articleOffset == *it )
+        {
+          headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+          offsets.erase( it );
+          break;
+        }
+      }
+      if( offsets.isEmpty() )
+        break;
+    }
+
+    if( offsets.isEmpty() )
+      break;
 
     if ( chainPtr >= leafEnd )
     {
@@ -1320,6 +1436,10 @@ bool BtreeDictionary::getHeadwords( QStringList &headwords )
   }
 
   return headwords.size() > 0;
+}
+
+void BtreeDictionary::getArticleText(uint32_t, QString &, QString & )
+{
 }
 
 }

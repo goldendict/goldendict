@@ -55,7 +55,9 @@ bool MainTabWidget::eventFilter( QObject * obj, QEvent * ev )
   if( ev->type() == QEvent::MouseButtonDblClick )
   {
     QMouseEvent * mev = static_cast< QMouseEvent *>( ev );
-    if( tabBar()->tabAt( mev->pos() ) == -1 )
+    if( mev->y() >= tabBar()->rect().y()
+        && mev->y() <= tabBar()->rect().y() + tabBar()->rect().height()
+        && tabBar()->tabAt( mev->pos() ) == -1 )
     {
       emit doubleClicked();
       return true;

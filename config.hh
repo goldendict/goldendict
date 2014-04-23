@@ -148,6 +148,30 @@ struct HotKey
   QKeySequence toKeySequence() const;
 };
 
+struct FullTextSearch
+{
+  int searchMode;
+  bool matchCase;
+  int maxArticlesPerDictionary;
+  int maxDistanceBetweenWords;
+  bool useMaxDistanceBetweenWords;
+  bool useMaxArticlesPerDictionary;
+  bool enabled;
+  quint32 maxDictionarySize;
+  QByteArray dialogGeometry;
+  QString disabledTypes;
+
+  FullTextSearch() :
+    searchMode( 0 ), matchCase( false ),
+    maxArticlesPerDictionary( 100 ),
+    maxDistanceBetweenWords( 2 ),
+    useMaxDistanceBetweenWords( true ),
+    useMaxArticlesPerDictionary( false ),
+    enabled( true ),
+    maxDictionarySize( 0 )
+  {}
+};
+
 /// Various user preferences
 struct Preferences
 {
@@ -218,6 +242,8 @@ struct Preferences
 #endif
 
   QString addonStyle;
+
+  FullTextSearch fts;
 
   Preferences();
 };

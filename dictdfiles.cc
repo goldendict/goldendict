@@ -17,6 +17,7 @@
 #include <wctype.h>
 #include <stdlib.h>
 #include "gddebug.hh"
+#include "ftshelpers.hh"
 
 #include <QDebug>
 
@@ -86,6 +87,7 @@ class DictdDictionary: public BtreeIndexing::BtreeDictionary
   IdxHeader idxHeader;
   dictData * dz;
   string dictionaryName;
+  Mutex indexFileMutex, dzMutex;
 
 public:
 
@@ -120,6 +122,21 @@ public:
     throw( std::exception );
 
   virtual QString const& getDescription();
+
+  virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                            int searchMode, bool matchCase,
+                                                            int distanceBetweenWords,
+                                                            int maxResults );
+  void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+  virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
+
+  virtual void setFTSParameters( Config::FullTextSearch const & fts )
+  {
+    can_FTS = fts.enabled
+              && !fts.disabledTypes.contains( "DICTD", Qt::CaseInsensitive )
+              && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+  }
 };
 
 DictdDictionary::DictdDictionary( string const & id,
@@ -150,6 +167,27 @@ DictdDictionary::DictdDictionary( string const & id,
   openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
                         idxHeader.indexRootOffset ),
              idx, idxMutex );
+
+  // Full-text search parameters
+
+  can_FTS = true;
+
+  quint32 lang = getLangTo();
+  if( lang == LangCoder::code2toInt( "zh" )
+      || lang == LangCoder::code2toInt( "ja" ) )
+  {
+    // Don't index articles in some languages which don't use spaces
+    can_FTS_index = false;
+  }
+  else
+  {
+    can_FTS_index = true;
+    ftsIdxName = indexFile + "_FTS";
+
+    if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
+                           && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      FTS_index_completed.ref();
+  }
 }
 
 DictdDictionary::~DictdDictionary()
@@ -250,10 +288,13 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
       // Now load that article
 
-      indexFile.seek( chain[ x ].articleOffset );
+      {
+        Mutex::Lock _( indexFileMutex );
+        indexFile.seek( chain[ x ].articleOffset );
 
-      if ( !indexFile.gets( buf, sizeof( buf ), true ) )
-        throw exFailedToReadLineFromIndex();
+        if ( !indexFile.gets( buf, sizeof( buf ), true ) )
+          throw exFailedToReadLineFromIndex();
+      }
 
       char * tab1 = strchr( buf, '\t' );
 
@@ -283,7 +324,11 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
       string articleText;
 
-      char * articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+      char * articleBody;
+      {
+        Mutex::Lock _( dzMutex );
+        articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+      }
 
       if ( !articleBody )
       {
@@ -371,6 +416,118 @@ QString const& DictdDictionary::getDescription()
       dictionaryDescription = "NONE";
 
     return dictionaryDescription;
+}
+
+void DictdDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
+{
+  if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+    FTS_index_completed.ref();
+
+  if( haveFTSIndex() )
+    return;
+
+  if( ensureInitDone().size() )
+    return;
+
+  if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
+    return;
+
+  gdDebug( "DictD: Building the full-text index for dictionary: %s\n",
+           getName().c_str() );
+
+  try
+  {
+    FtsHelpers::makeFTSIndex( this, isCancelled );
+    FTS_index_completed.ref();
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "DictD: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+  }
+}
+
+void DictdDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
+  try
+  {
+    char buf[ 16384 ];
+    {
+      Mutex::Lock _( indexFileMutex );
+      indexFile.seek( articleAddress );
+
+      if ( !indexFile.gets( buf, sizeof( buf ), true ) )
+        throw exFailedToReadLineFromIndex();
+    }
+
+    char * tab1 = strchr( buf, '\t' );
+
+    if ( !tab1 )
+      throw exMalformedIndexFileLine();
+
+    headword = QString::fromUtf8( buf, tab1 - buf );
+
+    char * tab2 = strchr( tab1 + 1, '\t' );
+
+    if ( !tab2 )
+      throw exMalformedIndexFileLine();
+
+    // After tab1 should be article offset, after tab2 -- article size
+
+    uint32_t articleOffset = decodeBase64( string( tab1 + 1, tab2 - tab1 - 1 ) );
+
+    char * tab3 = strchr( tab2 + 1, '\t');
+
+    uint32_t articleSize;
+    if ( tab3 )
+    {
+      articleSize = decodeBase64( string( tab2 + 1, tab3 - tab2 - 1 ) );
+    }
+    else
+    {
+      articleSize = decodeBase64( tab2 + 1 );
+    }
+
+    string articleText;
+
+    char * articleBody;
+    {
+      Mutex::Lock _( dzMutex );
+      articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+    }
+
+    if ( !articleBody )
+    {
+      articleText = dict_error_str( dz );
+    }
+    else
+    {
+      static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
+      static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
+
+      string convertedText = Html::preformat( articleBody, isToLanguageRTL() );
+      free( articleBody );
+
+      text = QString::fromUtf8( convertedText.data(), convertedText.size() )
+            .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")
+            .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>");
+
+      text = Html::unescape( text );
+    }
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "DictD: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+}
+
+sptr< Dictionary::DataRequest > DictdDictionary::getSearchResults( QString const & searchString,
+                                                                   int searchMode, bool matchCase,
+                                                                   int distanceBetweenWords,
+                                                                   int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
 }
 
 } // anonymous namespace

@@ -9,12 +9,12 @@
 #include <map>
 #include <QObject>
 #include <QIcon>
-#include <QStringList>
 #include "sptr.hh"
 #include "ex.hh"
 #include "mutex.hh"
 #include "wstring.hh"
 #include "langcoder.hh"
+#include "config.hh"
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {
@@ -260,6 +260,8 @@ protected:
   QString dictionaryDescription;
   QIcon dictionaryIcon, dictionaryNativeIcon;
   bool dictionaryIconLoaded;
+  bool can_FTS, can_FTS_index;
+  QAtomicInt FTS_index_completed;
 
   // Load user icon if it exist
   // By default set icon to empty
@@ -385,6 +387,12 @@ public:
   virtual sptr< DataRequest > getResource( string const & /*name*/ )
     throw( std::exception );
 
+  /// Returns a results of full-text search of given string similar getArticle().
+  virtual sptr< DataRequest > getSearchResults( QString const & searchString,
+                                                int searchMode, bool matchCase,
+                                                int distanceBetweenWords,
+                                                int maxArticlesPerDictionary );
+
   // Return dictionary description if presented
   virtual QString const& getDescription();
 
@@ -400,6 +408,26 @@ public:
   /// Return true if dictionary is local dictionary
   virtual bool isLocalDictionary()
   { return false; }
+
+  /// Dictionary can full-text search
+  bool canFTS()
+  { return can_FTS; }
+
+  /// Dictionary can be indexed for full-text search
+  bool canFTSIndex()
+  { return can_FTS_index; }
+
+  /// Dictionary have index for full-text search
+  bool haveFTSIndex()
+  { return FTS_index_completed != 0; }
+
+  /// Make index for full-text search
+  virtual void makeFTSIndex( QAtomicInt &, bool )
+  {}
+
+  /// Set full-text search parameters
+  virtual void setFTSParameters( Config::FullTextSearch const & )
+  {}
 
   /// Retrieve all dictionary headwords
   virtual bool getHeadwords( QStringList & )

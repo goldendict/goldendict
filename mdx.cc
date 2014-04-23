@@ -16,6 +16,8 @@
 #include "ex.hh"
 #include "mdictparser.hh"
 #include "filetype.hh"
+#include "ftshelpers.hh"
+#include "htmlescape.hh"
 
 #include <algorithm>
 #include <map>
@@ -104,6 +106,7 @@ __attribute__( ( packed ) )
 class IndexedMdd: public BtreeIndexing::BtreeIndex
 {
   Mutex & idxMutex;
+  Mutex fileMutex;
   ChunkedStorage::Reader & chunks;
   QFile mddFile;
   bool isFileOpen;
@@ -243,6 +246,23 @@ public:
   virtual sptr< Dictionary::DataRequest > getResource( string const & name ) throw( std::exception );
   virtual QString const & getDescription();
 
+  virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                            int searchMode, bool matchCase,
+                                                            int distanceBetweenWords,
+                                                            int maxResults );
+  virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+  virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
+
+  virtual void setFTSParameters( Config::FullTextSearch const & fts )
+  {
+    if( ensureInitDone().size() )
+      return;
+
+    can_FTS = fts.enabled
+              && !fts.disabledTypes.contains( "MDICT", Qt::CaseInsensitive )
+              && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+  }
 protected:
 
   virtual void loadIcon() throw();
@@ -287,6 +307,27 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
 
   dictFile.setFileName( QString::fromUtf8( dictionaryFiles[ 0 ].c_str() ) );
   dictFile.open( QIODevice::ReadOnly );
+
+  // Full-text search parameters
+
+  can_FTS = true;
+
+  quint32 lang = getLangTo();
+  if( lang == LangCoder::code2toInt( "zh" )
+      || lang == LangCoder::code2toInt( "ja" ) )
+  {
+    // Don't index articles in some languages which don't use spaces
+    can_FTS_index = false;
+  }
+  else
+  {
+    can_FTS_index = true;
+    ftsIdxName = indexFile + "_FTS";
+
+    if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
+                           && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      FTS_index_completed.ref();
+  }
 }
 
 MdxDictionary::~MdxDictionary()
@@ -428,6 +469,60 @@ void MdxDictionary::doDeferredInit()
 
     deferredInitDone.ref();
   }
+}
+
+void MdxDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
+{
+  if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+    FTS_index_completed.ref();
+
+  if( haveFTSIndex() )
+    return;
+
+  if( ensureInitDone().size() )
+    return;
+
+  if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
+    return;
+
+  gdDebug( "MDict: Building the full-text index for dictionary: %s\n",
+           getName().c_str() );
+
+  try
+  {
+    FtsHelpers::makeFTSIndex( this, isCancelled );
+    FTS_index_completed.ref();
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "MDict: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+  }
+}
+
+void MdxDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
+  try
+  {
+    headword.clear();
+    string articleText;
+
+    loadArticle( articleAddress, articleText );
+    text = Html::unescape( QString::fromUtf8( articleText.data(), articleText.size() ) );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "MDict: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+}
+
+sptr< Dictionary::DataRequest > MdxDictionary::getSearchResults( QString const & searchString,
+                                                                 int searchMode, bool matchCase,
+                                                                 int distanceBetweenWords,
+                                                                 int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
 }
 
 /// MdxDictionary::getArticle
@@ -793,6 +888,7 @@ const QString & MdxDictionary::getDescription()
   }
   else
   {
+    Mutex::Lock _( idxMutex );
     vector< char > chunk;
     char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
     string str( dictDescription );
