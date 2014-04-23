@@ -635,19 +635,25 @@ void ArticleView::cleanupTemp()
 
 bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
 {
-  if ( ev->type() == QEvent::ShortcutOverride ) {
+  if ( ev->type() == QEvent::ShortcutOverride
+       || ev->type() == QEvent::KeyPress )
+  {
     QKeyEvent * ke = static_cast<QKeyEvent *>( ev );
     if ( ke->key() == Qt::Key_F3 && isSearchOpened() ) {
       if ( !ke->modifiers() )
       {
-        on_searchNext_clicked();
+        if( ev->type() == QEvent::KeyPress )
+          on_searchNext_clicked();
+
         ev->accept();
         return true;
       }
 
       if ( ke->modifiers() == Qt::ShiftModifier )
       {
-        on_searchPrevious_clicked();
+        if( ev->type() == QEvent::KeyPress )
+          on_searchPrevious_clicked();
+
         ev->accept();
         return true;
       }
@@ -656,14 +662,18 @@ bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
     {
       if ( !ke->modifiers() )
       {
-        on_ftsSearchNext_clicked();
+        if( ev->type() == QEvent::KeyPress )
+          on_ftsSearchNext_clicked();
+
         ev->accept();
         return true;
       }
 
       if ( ke->modifiers() == Qt::ShiftModifier )
       {
-        on_ftsSearchPrevious_clicked();
+        if( ev->type() == QEvent::KeyPress )
+          on_ftsSearchPrevious_clicked();
+
         ev->accept();
         return true;
       }

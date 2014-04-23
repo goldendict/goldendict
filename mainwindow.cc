@@ -2191,12 +2191,15 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     return true;
   }
 #endif
-  if ( ev->type() == QEvent::ShortcutOverride ) {
+  if ( ev->type() == QEvent::ShortcutOverride
+       || ev->type() == QEvent::KeyPress )
+  {
     // Handle Ctrl+H to show the History Pane.
     QKeyEvent * ke = static_cast<QKeyEvent*>( ev );
     if ( ke->key() == Qt::Key_H && ke->modifiers() == Qt::ControlModifier )
     {
-      on_showHideHistory_triggered();
+      if( ev->type() == QEvent::KeyPress )
+        on_showHideHistory_triggered();
       ev->accept();
       return true;
     }
