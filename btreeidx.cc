@@ -1223,7 +1223,7 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
   {
     leafEntries = *(uint32_t *)leaf;
 
-    if( isCancelled && *isCancelled )
+    if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
       return;
 
     if ( leafEntries == 0xffffFFFF )
@@ -1259,7 +1259,7 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
     vector< WordArticleLink > result = readChain( chainPtr );
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      if( isCancelled && *isCancelled )
+      if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
         return;
 
       if( headwords )
@@ -1328,7 +1328,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
   {
     leafEntries = *(uint32_t *)leaf;
 
-    if( isCancelled && *isCancelled )
+    if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
       return;
 
     if ( leafEntries == 0xffffFFFF )
@@ -1367,7 +1367,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
       for( QList< uint32_t >::Iterator it = offsets.begin();
            it != offsets.end(); ++it )
       {
-        if( isCancelled && *isCancelled )
+        if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
         if( result.at( i ).articleOffset == *it )

@@ -144,10 +144,9 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     bool groupIsValid = false;
 
     QString word = Qt4x5::Url::queryItemValue( url, "word" );
-
-    QString word = url.queryItemValue( "word" );
-
-    QString dictIDs = url.queryItemValue( "dictionaries" );
+    unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
+   
+    QString dictIDs = Qt4x5::Url::queryItemValue( url, "dictionaries" );
     if( !dictIDs.isEmpty() )
     {
       // Individual dictionaries set from full-text search
@@ -155,7 +154,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
       return articleMaker.makeDefinitionFor( word, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
     }
 
-    unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
+   
+
     // See if we have some dictionaries muted
 
     QSet< QString > mutedDicts =

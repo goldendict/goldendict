@@ -296,14 +296,14 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
-  req.addQueryItem( "word", word );
-  req.addQueryItem( "dictionaries", dictIDs.join( ",") );
-  req.addQueryItem( "regexp", searchRegExp.pattern() );
+  Qt4x5::Url::addQueryItem( req, "word", word );
+  Qt4x5::Url::addQueryItem( req, "dictionaries", dictIDs.join( ",") );
+  Qt4x5::Url::addQueryItem( req, "regexp", searchRegExp.pattern() );
   if( searchRegExp.caseSensitivity() == Qt::CaseSensitive )
-    req.addQueryItem( "matchcase", "1" );
+    Qt4x5::Url::addQueryItem( req, "matchcase", "1" );
   if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
-    req.addQueryItem( "wildcards", "1" );
-  req.addQueryItem( "group", QString::number( group ) );
+    Qt4x5::Url::addQueryItem( req, "wildcards", "1" );
+  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -427,7 +427,7 @@ void ArticleView::loadFinished( bool )
 
   emit pageLoaded( this );
 
-  if( ui.definition->url().hasQueryItem( "regexp" ) )
+  if( Qt4x5::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
 }
 
@@ -933,10 +933,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   else
   if ( url.scheme().compare( "bword" ) == 0 )
   {
-    if( ref.hasQueryItem( "dictionaries" ) )
+    if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
     {
-      QStringList dictsList = ref.queryItemValue( "dictionaries" )
-                                 .split( ",", QString::SkipEmptyParts );
+      QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
+                                          .split( ",", QString::SkipEmptyParts );
 
       showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ) );
     }
@@ -954,11 +954,11 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
     else
     {
-      if( ref.hasQueryItem( "dictionaries" ) )
+      if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
       {
         // Specific dictionary group from full-text search
-        QStringList dictsList = ref.queryItemValue( "dictionaries" )
-                                   .split( ",", QString::SkipEmptyParts );
+        QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
+                                            .split( ",", QString::SkipEmptyParts );
 
         showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ) );
         return;
@@ -1963,10 +1963,10 @@ void ArticleView::doubleClicked()
       {
         QUrl const & ref = ui.definition->url();
 
-        if( ref.hasQueryItem( "dictionaries" ) )
+        if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
         {
-          QStringList dictsList = ref.queryItemValue( "dictionaries" )
-                                     .split( ",", QString::SkipEmptyParts );
+          QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
+                                              .split( ",", QString::SkipEmptyParts );
           showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ) );
         }
         else
@@ -2136,9 +2136,9 @@ void ArticleView::highlightFTSResults()
   closeSearch();
 
   const QUrl & url = ui.definition->url();
-  QRegExp regexp( url.queryItemValue( "regexp" ),
-                  url.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                  url.hasQueryItem( "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
+  QRegExp regexp( Qt4x5::Url::queryItemValue( url, "regexp" ),
+                  Qt4x5::Url::hasQueryItem( url, "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                  Qt4x5::Url::hasQueryItem( url, "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
 
   if( regexp.pattern().isEmpty() )
     return;
@@ -2172,7 +2172,7 @@ void ArticleView::highlightFTSResults()
     }
   }
 
-  ftsSearchMatchCase = url.hasQueryItem( "matchcase" );
+  ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( url, "matchcase" );
 
   QWebPage::FindFlags flags ( 0 );
 
