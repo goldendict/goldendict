@@ -192,6 +192,9 @@ public:
 
   void stopSearch();
 
+protected:
+  bool eventFilter( QObject * obj, QEvent * ev );
+
 private:
   Ui::FullTextSearchDialog ui;
   QList< FtsHeadword > results;

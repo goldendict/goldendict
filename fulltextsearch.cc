@@ -189,6 +189,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   connect( ui.OKButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
   connect( ui.cancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
 
+  ui.headwordsView->installEventFilter( this );
+
   delegate = new WordListItemDelegate( ui.headwordsView->itemDelegate() );
   if( delegate )
     ui.headwordsView->setItemDelegate( delegate );
@@ -453,6 +455,20 @@ void FullTextSearchDialog::updateDictionaries()
   }
 
   showDictNumbers();
+}
+
+bool FullTextSearchDialog::eventFilter( QObject * obj, QEvent * ev )
+{
+  if( obj == ui.headwordsView && ev->type() == QEvent::KeyPress )
+  {
+    QKeyEvent * kev = static_cast< QKeyEvent * >( ev );
+    if( kev->key() == Qt::Key_Return || kev->key() == Qt::Key_Enter )
+    {
+      itemClicked( ui.headwordsView->currentIndex() );
+      return true;
+    }
+  }
+  return QDialog::eventFilter( obj, ev );
 }
 
 /// HeadwordsListModel

@@ -4001,7 +4001,10 @@ void MainWindow::showFullTextSearchDialog()
                                           : groupInstances[ groupList->currentIndex() ].id;
   ftsDlg->setCurrentGroup( group );
 
-  ftsDlg->show();
+  if( !ftsDlg ->isVisible() )
+    ftsDlg->show();
+  else
+    ftsDlg->activateWindow();
 }
 
 void MainWindow::closeFullTextSearchDialog()
