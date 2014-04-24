@@ -81,7 +81,7 @@ DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 19 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 20 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2
 };
 
@@ -117,12 +117,12 @@ struct InsidedCard
 {
   uint32_t offset;
   uint32_t size;
-  wstring headword;
-  InsidedCard( uint32_t _offset, uint32_t _size, wstring const & word ) :
-  offset( _offset ), size( _size ), headword( word )
+  QVector< wstring > headwords;
+  InsidedCard( uint32_t _offset, uint32_t _size, QVector< wstring > const & words ) :
+  offset( _offset ), size( _size ), headwords( words )
   {}
   InsidedCard( InsidedCard const & e ) :
-  offset( e.offset ), size( e.size ), headword( e.headword )
+  offset( e.offset ), size( e.size ), headwords( e.headwords )
   {}
   InsidedCard() {}
 
@@ -582,6 +582,9 @@ void DslDictionary::loadArticle( uint32_t address,
   bool hadFirstHeadword = false;
   bool foundDisplayedHeadword = false;
 
+  // Check is we retrieve insided card
+  bool insidedCard = isDslWs( articleData.at( 0 ) );
+
   wstring tildeValueWithUnsorted; // This one has unsorted parts left
   for( headwordIndex = 0; ; )
   {
@@ -598,88 +601,88 @@ void DslDictionary::loadArticle( uint32_t address,
 
       wstring rawHeadword = wstring( articleData, begin, pos - begin );
 
-      if ( !hadFirstHeadword )
-      {
-        // We need our tilde expansion value
-        tildeValue = rawHeadword;
-
-        list< wstring > lst;
-
-        expandOptionalParts( tildeValue, &lst );
-
-        if ( lst.size() ) // Should always be
-          tildeValue = lst.front();
-
-        tildeValueWithUnsorted = tildeValue;
-
-        processUnsortedParts( tildeValue, false );
-      }
-
-      wstring str = rawHeadword;
-
-      if ( hadFirstHeadword )
-        expandTildes( str, tildeValueWithUnsorted );
-
-      processUnsortedParts( str, true );
-
-      str = Folding::applySimpleCaseOnly( str );
-
-      list< wstring > lst;
-      expandOptionalParts( str, &lst );
-
-      // Does one of the results match the requested word? If so, we'd choose
-      // it as our headword.
-
-      for( list< wstring >::iterator i = lst.begin(); i != lst.end(); ++i )
-      {
-        unescapeDsl( *i );
-        normalizeHeadword( *i );
-
-        if ( Folding::trimWhitespace( *i ) == requestedHeadwordFolded )
-        {
-          // Found it. Now we should make a displayed headword for it.
-          if ( hadFirstHeadword )
-            expandTildes( rawHeadword, tildeValueWithUnsorted );
-
-          processUnsortedParts( rawHeadword, false );
-
-          displayedHeadword = rawHeadword;
-
-          foundDisplayedHeadword = true;
-          break;
-        }
-      }
-
-      if( !rawHeadword.empty() && isDslWs( rawHeadword[ 0 ] ) )
+      if( insidedCard && !rawHeadword.empty() && isDslWs( rawHeadword[ 0 ] ) )
       {
         // Headword of the insided card
-        // Take it from card if no '~' presented
-        string::size_type pos = rawHeadword.find( L'@' );
-        if( pos != string::npos )
+        wstring::size_type hpos = rawHeadword.find( L'@' );
+        if( hpos != string::npos )
         {
-          wstring head = Folding::trimWhitespace( rawHeadword.substr( pos + 1 ) );
-          string::size_type tildaPos = head.find( L'~' );
-          while( tildaPos != string::npos )
+          wstring head = Folding::trimWhitespace( rawHeadword.substr( hpos + 1 ) );
+          hpos = head.find( L'~' );
+          while( hpos != string::npos )
           {
-            if( tildaPos == 0 || head[ tildaPos ] != L'\\' )
+            if( hpos == 0 || head[ hpos ] != L'\\' )
               break;
-            tildaPos = head.find( L'~', tildaPos + 1 );
+            hpos = head.find( L'~', hpos + 1 );
           }
-          if( tildaPos == string::npos )
-          {
-            processUnsortedParts( head, false );
-            displayedHeadword = head;
-            foundDisplayedHeadword = true;
-          }
+          if( hpos == string::npos )
+            rawHeadword = head;
+          else
+            rawHeadword.clear();
         }
       }
 
-      if ( !foundDisplayedHeadword )
+      if( !rawHeadword.empty() )
       {
-        ++headwordIndex;
-        hadFirstHeadword = true;
+        if ( !hadFirstHeadword )
+        {
+          // We need our tilde expansion value
+          tildeValue = rawHeadword;
+
+          list< wstring > lst;
+
+          expandOptionalParts( tildeValue, &lst );
+
+          if ( lst.size() ) // Should always be
+            tildeValue = lst.front();
+
+          tildeValueWithUnsorted = tildeValue;
+
+          processUnsortedParts( tildeValue, false );
+        }
+        wstring str = rawHeadword;
+
+        if ( hadFirstHeadword )
+          expandTildes( str, tildeValueWithUnsorted );
+
+        processUnsortedParts( str, true );
+
+        str = Folding::applySimpleCaseOnly( str );
+
+        list< wstring > lst;
+        expandOptionalParts( str, &lst );
+
+        // Does one of the results match the requested word? If so, we'd choose
+        // it as our headword.
+
+        for( list< wstring >::iterator i = lst.begin(); i != lst.end(); ++i )
+        {
+          unescapeDsl( *i );
+          normalizeHeadword( *i );
+
+          if ( Folding::trimWhitespace( *i ) == requestedHeadwordFolded )
+          {
+            // Found it. Now we should make a displayed headword for it.
+            if ( hadFirstHeadword )
+              expandTildes( rawHeadword, tildeValueWithUnsorted );
+
+            processUnsortedParts( rawHeadword, false );
+
+            displayedHeadword = rawHeadword;
+
+            foundDisplayedHeadword = true;
+            break;
+          }
+        }
+
+        if ( !foundDisplayedHeadword )
+        {
+          ++headwordIndex;
+          hadFirstHeadword = true;
+        }
       }
     }
+
 
     if ( pos == articleData.size() )
       break;
@@ -695,18 +698,40 @@ void DslDictionary::loadArticle( uint32_t address,
         ++pos;
     }
 
-    if ( pos == articleData.size() || isDslWs( articleData[ pos ] ) )
+    if ( pos == articleData.size() )
     {
-      // Ok, it's either end of article, or the begining of the article's text
+      // Ok, it's end of article
       break;
+    }
+    if( isDslWs( articleData[ pos ] ) )
+    {
+     // Check for begin article text
+      if( insidedCard )
+      {
+        // Check for next insided headword
+        wstring::size_type hpos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), pos );
+        if ( hpos == wstring::npos )
+          hpos = articleData.size();
+
+        wstring str = wstring( articleData, pos, hpos - pos );
+
+        hpos = str.find( L'@');
+        if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' )
+          break;
+      }
+      else
+        break;
     }
   }
 
   if ( !foundDisplayedHeadword )
   {
     // This is strange. Anyway, use tilde expansion value, it's better
-    // than nothing.
-    displayedHeadword = tildeValue;
+    // than nothing (or requestedHeadwordFolded for insided card.
+    if( insidedCard )
+      displayedHeadword = requestedHeadwordFolded;
+    else
+      displayedHeadword = tildeValue;
   }
 
   if ( pos != articleData.size() )
@@ -1245,6 +1270,9 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   size_t pos = 0;
   wstring articleHeadword;
 
+  // Check if we retrieve insided card
+  bool insidedCard = isDslWs( articleData.at( 0 ) );
+
   for( ; ; )
   {
     size_t begin = pos;
@@ -1257,14 +1285,38 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
       articleHeadword = wstring( articleData, begin, pos - begin );
 
-      list< wstring > lst;
+      if( insidedCard && !articleHeadword.empty() && isDslWs( articleHeadword[ 0 ] ) )
+      {
+        // Headword of the insided card
+        wstring::size_type hpos = articleHeadword.find( L'@' );
+        if( hpos != string::npos )
+        {
+          wstring head = Folding::trimWhitespace( articleHeadword.substr( hpos + 1 ) );
+          hpos = head.find( L'~' );
+          while( hpos != string::npos )
+          {
+            if( hpos == 0 || head[ hpos ] != L'\\' )
+              break;
+            hpos = head.find( L'~', hpos + 1 );
+          }
+          if( hpos == string::npos )
+            articleHeadword = head;
+          else
+            articleHeadword.clear();
+        }
+      }
 
-      expandOptionalParts( articleHeadword, &lst );
+      if( !articleHeadword.empty() )
+      {
+        list< wstring > lst;
 
-      if ( lst.size() ) // Should always be
-        articleHeadword = lst.front();
+        expandOptionalParts( articleHeadword, &lst );
 
-      processUnsortedParts( articleHeadword, true );
+        if ( lst.size() ) // Should always be
+          articleHeadword = lst.front();
+
+        processUnsortedParts( articleHeadword, true );
+      }
     }
 
     if ( pos == articleData.size() )
@@ -1281,42 +1333,33 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
         ++pos;
     }
 
-    if ( pos == articleData.size() || isDslWs( articleData[ pos ] ) )
+    if ( pos == articleData.size() )
     {
-      // Ok, it's either end of article, or the begining of the article's text
+      // Ok, it's end of article
       break;
     }
-  }
-
-  if( !articleHeadword.empty() && isDslWs( articleHeadword[ 0 ] ) )
-  {
-    // Headword of the insided card
-    // Take it from card if no '~' presented
-    string::size_type pos = articleHeadword.find( L'@' );
-    if( pos != string::npos )
+    if( isDslWs( articleData[ pos ] ) )
     {
-      wstring head = Folding::trimWhitespace( articleHeadword.substr( pos + 1 ) );
-      string::size_type tildaPos = head.find( L'~' );
-
-      while( tildaPos != string::npos )
+     // Check for begin article text
+      if( insidedCard )
       {
-        if( tildaPos == 0 || head[ tildaPos ] != L'\\' )
+        // Check for next insided headword
+        wstring::size_type hpos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), pos );
+        if ( hpos == wstring::npos )
+          hpos = articleData.size();
+
+        wstring str = wstring( articleData, pos, hpos - pos );
+
+        hpos = str.find( L'@');
+        if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' )
           break;
-        tildaPos = head.find( L'~', tildaPos + 1 );
       }
-
-      if( tildaPos == string::npos )
-      {
-        // This is full headword - store it
-        unescapeDsl( head );
-        normalizeHeadword( head );
-        headword = gd::toQString( head );
-      }
-      // If '~' presented, leave headword empty,
-      // it will be retrieved from index later
+      else
+        break;
     }
   }
-  else
+
+  if( !articleHeadword.empty() )
   {
     unescapeDsl( articleHeadword );
     normalizeHeadword( articleHeadword );
@@ -2062,6 +2105,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           wstring headword;
           QVector< InsidedCard > insidedCards;
           uint32_t offset = curOffset;
+          QVector< wstring > insidedHeadwords;
+          unsigned linesInsideCard = 0;
 
           // Skip the article's body
           for( ; ; )
@@ -2071,7 +2116,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                  || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )
-                insidedCards.append( InsidedCard( offset, curOffset - offset, headword ) );
+                insidedCards.append( InsidedCard( offset, curOffset - offset, insidedHeadwords ) );
               break;
             }
 
@@ -2079,20 +2124,39 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             wstring::size_type n = curString.find( L'@' );
             if( n == wstring::npos || curString[ n - 1 ] == L'\\' )
+            {
+              if( insideInsided )
+                linesInsideCard++;
+
               continue;
+            }
 
             // Handle embedded card
 
             if( insideInsided )
-              insidedCards.append( InsidedCard( offset, curOffset - offset, headword ) );
+            {
+              if( linesInsideCard )
+              {
+                insidedCards.append( InsidedCard( offset, curOffset - offset, insidedHeadwords ) );
 
-            offset = curOffset;
+                insidedHeadwords.clear();
+                linesInsideCard = 0;
+                offset = curOffset;
+              }
+            }
+            else
+            {
+              offset = curOffset;
+              linesInsideCard = 0;
+            }
+
             headword = Folding::trimWhitespace( curString.substr( n + 1 ) );
 
             if( !headword.empty() )
             {
               processUnsortedParts( headword, true );
               expandTildes( headword, allEntryWords.front() );
+              insidedHeadwords.append( headword );
               insideInsided = true;
             }
             else
@@ -2113,19 +2177,22 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             chunks.addToBlock( &(*i).offset, sizeof( (*i).offset ) );
             chunks.addToBlock( &(*i).size, sizeof( (*i).size ) );
 
-            allEntryWords.clear();
-            expandOptionalParts( (*i).headword, &allEntryWords );
-
-            for( list< wstring >::iterator j = allEntryWords.begin();
-                 j != allEntryWords.end(); ++j )
+            for( int x = 0; x < (*i).headwords.size(); x++ )
             {
-              unescapeDsl( *j );
-              normalizeHeadword( *j );
-              indexedWords.addWord( *j, descOffset, maxHeadwordSize );
-            }
+              allEntryWords.clear();
+              expandOptionalParts( (*i).headwords[ x ], &allEntryWords );
 
+              for( list< wstring >::iterator j = allEntryWords.begin();
+                   j != allEntryWords.end(); ++j )
+              {
+                unescapeDsl( *j );
+                normalizeHeadword( *j );
+                indexedWords.addWord( *j, descOffset, maxHeadwordSize );
+              }
+
+              wordCount += allEntryWords.size();
+            }
             ++articleCount;
-            wordCount += allEntryWords.size();
           }
 
           if ( !hasString )

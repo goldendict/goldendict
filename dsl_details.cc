@@ -128,7 +128,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
             wstring linkText = Folding::trimWhitespace( *entry );
             processUnsortedParts( linkText, true );
-            ArticleDom nodeDom( linkText );
+            ArticleDom nodeDom( linkText, dictName, headword_ );
 
             Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
             for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
@@ -1234,6 +1234,8 @@ void normalizeHeadword( wstring & str )
       }
     }
   }
+  if( !str.empty() && str[ str.size() - 1 ] == L' ' )
+    str.erase( str.size() - 1, 1 );
 }
 
 namespace
