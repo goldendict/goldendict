@@ -1236,6 +1236,8 @@ void normalizeHeadword( wstring & str )
   }
   if( !str.empty() && str[ str.size() - 1 ] == L' ' )
     str.erase( str.size() - 1, 1 );
+  if( !str.empty() && str[ 0 ] == L' ' )
+    str.erase( 0, 1 );
 }
 
 namespace
