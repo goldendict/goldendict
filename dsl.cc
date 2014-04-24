@@ -77,6 +77,7 @@ namespace {
 
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
+DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 
 enum
 {
@@ -394,10 +395,12 @@ void DslDictionary::doDeferredInit()
 
       // Open the .dsl file
 
-      dz = dict_data_open( getDictionaryFilenames()[ 0 ].c_str(), 0 );
+      DZ_ERRORS error;
+      dz = dict_data_open( getDictionaryFilenames()[ 0 ].c_str(), &error, 0 );
 
       if ( !dz )
-        throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
+        throw exDictzipError( string( dz_error_str( error ) )
+                              + "(" + getDictionaryFilenames()[ 0 ] + ")" );
 
       // Read the abrv, if any
 

@@ -257,8 +257,9 @@ static void err_internal( const char *routine, const char *format, ... )
 # endif
 #endif
 
-static int dict_read_header( const char *filename,
-			     dictData *header, int computeCRC )
+static enum  DZ_ERRORS dict_read_header( const char *filename,
+					 dictData *header,
+					 int computeCRC )
 {
    FILE          *str;
    int           id1, id2, si1, si2;
@@ -276,7 +277,7 @@ static int dict_read_header( const char *filename,
    {
       err_fatal_errno( __func__,
 		       "Cannot open data file \"%s\" for read\n", filename );
-      return 1;
+      return DZ_ERR_OPENFILE;
    }
 
    header->filename     = NULL;//str_find( filename );
@@ -302,7 +303,7 @@ static int dict_read_header( const char *filename,
       }
       header->crc = crc;
       fclose( str );
-      return 0;
+      return DZ_NOERROR;
    }
    header->type = DICT_GZIP;
    
@@ -334,7 +335,7 @@ static int dict_read_header( const char *filename,
 			  "dzip header version %d not supported\n",
 			  header->version );
 	    fclose( str );
-	    return 1;
+	    return DZ_ERR_UNSUPPORTED_FORMAT;
 	 }
    
 	 header->chunkLength  = getc( str ) << 0;
@@ -344,10 +345,14 @@ static int dict_read_header( const char *filename,
 	 
 	 if (header->chunkCount <= 0) {
 	    fclose( str );
-	    return 5;
+	    return DZ_ERR_INVALID_FORMAT;
 	 }
 	 header->chunks = xmalloc( sizeof( header->chunks[0] )
 				   * header->chunkCount );
+	 if( header->chunks == 0 ) {
+	   return DZ_ERR_NOMEMORY;
+	 }
+
 	 for (i = 0; i < header->chunkCount; i++) {
 	    header->chunks[i]  = getc( str ) << 0;
 	    header->chunks[i] |= getc( str ) << 8;
@@ -368,7 +373,9 @@ static int dict_read_header( const char *filename,
 	       __func__,
 	       "too long FNAME field in dzip file \"%s\"\n", filename);
 	    fclose( str );
-	    return 1;
+	    if( header->chunks )
+	      free( header->chunks );
+	    return DZ_ERR_INVALID_FORMAT;
 	 }
       }
 
@@ -389,7 +396,9 @@ static int dict_read_header( const char *filename,
 	       __func__,
 	       "too long COMMENT field in dzip file \"%s\"\n", filename);
 	    fclose( str );
-	    return 1;
+	    if( header->chunks )
+	      free( header->chunks );
+	    return DZ_ERR_INVALID_FORMAT;
 	 }
       }
 
@@ -412,7 +421,9 @@ static int dict_read_header( const char *filename,
 		    "File position (%lu) != header length + 1 (%d)\n",
 		    ftell( str ), header->headerLength + 1 );
       fclose( str );
-      return 1;
+      if( header->chunks )
+        free( header->chunks );
+      return DZ_ERR_INVALID_FORMAT;
    }
 
    fseek( str, -8, SEEK_END );
@@ -429,6 +440,12 @@ static int dict_read_header( const char *filename,
 				/* Compute offsets */
    header->offsets = xmalloc( sizeof( header->offsets[0] )
 			      * header->chunkCount );
+   if( header->offsets == 0 ) {
+     if( header->chunks )
+       free( header->chunks );
+     return DZ_ERR_NOMEMORY;
+   }
+
    for (offset = header->headerLength + 1, i = 0;
 	i < header->chunkCount;
 	i++)
@@ -438,19 +455,29 @@ static int dict_read_header( const char *filename,
    }
 
    fclose( str );
-   return 0;
+   return DZ_NOERROR;
 }
 
-dictData *dict_data_open( const char *filename, int computeCRC )
+dictData *dict_data_open( const char *filename,
+                          enum DZ_ERRORS * error,
+                          int computeCRC )
 {
    dictData    *h = NULL;
 //   struct stat sb;
    int         j;
 
    if (!filename)
-      return NULL;
+   {
+     *error = DZ_ERR_OPENFILE;
+     return NULL;
+   }
 
    h = xmalloc( sizeof( struct dictData ) );
+   if( h == 0 )
+   {
+     *error = DZ_ERR_NOMEMORY;
+     return 0;
+   }
 
    memset( h, 0, sizeof( struct dictData ) );
 #ifdef __WIN32
@@ -463,7 +490,8 @@ dictData *dict_data_open( const char *filename, int computeCRC )
 #ifdef __WIN32
      wchar_t wname[16384];
 #endif
-     if (dict_read_header( filename, h, computeCRC )) {
+     *error = dict_read_header( filename, h, computeCRC );
+     if ( *error != DZ_NOERROR ) {
        break; /*
         err_fatal( __func__,
        "\"%s\" not in text or dzip format\n", filename );*/
@@ -471,12 +499,18 @@ dictData *dict_data_open( const char *filename, int computeCRC )
 
 #ifdef __WIN32
      if( MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 ) == 0 )
+     {
+       *error = DZ_ERR_OPENFILE;
        break;
+     }
 
      h->fd = CreateFileW( wname, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0,
                           OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, 0);
      if( h->fd == INVALID_HANDLE_VALUE )
+     {
+       *error = DZ_ERR_OPENFILE;
        break;
+     }
 
      h->size = GetFileSize( h->fd, 0 );
 #else
@@ -484,6 +518,7 @@ dictData *dict_data_open( const char *filename, int computeCRC )
 
      if ( !h->fd )
      {
+       *error = DZ_ERR_OPENFILE;
        break;
         /*err_fatal_errno( __func__,
              "Cannot open data file \"%s\"\n", filename );*/
@@ -501,6 +536,7 @@ dictData *dict_data_open( const char *filename, int computeCRC )
         h->cache[j].count    = 0;
      }
 
+     *error = DZ_NOERROR;
      return h;
    }
    dict_data_close( h );
@@ -563,7 +599,7 @@ char *dict_data_read_ (
    buffer = xmalloc( size + 1 );
    if( !buffer )
    {
-     strcpy( h->errorString, "Cannot allocate memory" );
+     strcpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ) );
      return 0;
    }
 
@@ -603,7 +639,7 @@ char *dict_data_read_ (
           fread( buffer, size, 1, h->fd ) != 1 )
 #endif
      {
-       strcpy( h->errorString, "Cannot read file" );
+       strcpy( h->errorString, dz_error_str( DZ_ERR_READFILE ) );
        xfree( buffer );
        return 0;
      }
@@ -681,6 +717,12 @@ char *dict_data_read_ (
 	    if (!h->cache[target].inBuffer)
 	       h->cache[target].inBuffer = xmalloc( h->chunkLength );
 	    inBuffer = h->cache[target].inBuffer;
+	    if( !inBuffer )
+	    {
+	      sprintf( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ) );
+	      xfree( buffer );
+	      return 0;
+	    }
 
 	    if (h->chunks[i] >= OUT_BUFFER_SIZE ) {
 /*
@@ -705,6 +747,7 @@ char *dict_data_read_ (
            fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
 #endif
       {
+        sprintf( h->errorString, dz_error_str( DZ_ERR_READFILE ) );
         xfree( buffer );
         return 0;
       }
@@ -780,11 +823,26 @@ char *dict_data_read_ (
       xfree( buffer );
       return 0;
    }
-   
+   h->errorString[ 0 ] = 0;
    return buffer;
 }
 
 char *dict_error_str( dictData *data )
 {
   return data->errorString;
+}
+
+const char * dz_error_str( enum DZ_ERRORS error )
+{
+  switch( error )
+  {
+    case DZ_NOERROR:                return "No error";
+    case DZ_ERR_OPENFILE:           return "Open file error";
+    case DZ_ERR_READFILE:           return "Read file error";
+    case DZ_ERR_INVALID_FORMAT:     return "Invalid file format";
+    case DZ_ERR_UNSUPPORTED_FORMAT: return "Unsupported file format";
+    case DZ_ERR_NOMEMORY:           return "Memory allocation error";
+    case DZ_ERR_INTERNAL:           return "Internal error";
+  }
+  return "Unknown error";
 }

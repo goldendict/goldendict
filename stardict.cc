@@ -68,6 +68,7 @@ DEF_EX( exDicttypeNotSupported, "Dictionaries with dicttypes are not supported, 
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX_STR( exWordIsTooLarge, "Enountered a word that is too large:", Dictionary::Ex )
 DEF_EX_STR( exSuddenEndOfFile, "Sudden end of file", Dictionary::Ex )
+DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 
 DEF_EX_STR( exIncorrectOffset, "Incorrect offset encountered in file", Dictionary::Ex )
 
@@ -228,10 +229,12 @@ StardictDictionary::StardictDictionary( string const & id,
 {
   // Open the .dict file
 
-  dz = dict_data_open( dictionaryFiles[ 2 ].c_str(), 0 );
+  DZ_ERRORS error;
+  dz = dict_data_open( dictionaryFiles[ 2 ].c_str(), &error, 0 );
 
   if ( !dz )
-    throw exCantReadFile( dictionaryFiles[ 2 ] );
+    throw exDictzipError( string( dz_error_str( error ) )
+                          + "(" + dictionaryFiles[ 2 ] + ")" );
 
   // Initialize the index
 

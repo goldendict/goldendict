@@ -46,6 +46,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX( exFailedToReadLineFromIndex, "Failed to read line from index file", Dictionary::Ex )
 DEF_EX( exMalformedIndexFileLine, "Malformed index file line encountered", Dictionary::Ex )
 DEF_EX( exInvalidBase64, "Invalid base64 sequence encountered", Dictionary::Ex )
+DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 
 enum
 {
@@ -157,10 +158,12 @@ DictdDictionary::DictdDictionary( string const & id,
 
   // Open the .dict file
 
-  dz = dict_data_open( dictionaryFiles[ 1 ].c_str(), 0 );
+  DZ_ERRORS error;
+  dz = dict_data_open( dictionaryFiles[ 1 ].c_str(), &error, 0 );
 
   if ( !dz )
-    throw exCantReadFile( dictionaryFiles[ 1 ] );
+    throw exDictzipError( string( dz_error_str( error ) )
+                          + "(" + getDictionaryFilenames()[ 1 ] + ")" );
 
   // Initialize the index
 
@@ -638,7 +641,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 // After tab1 should be article offset, after tab2 -- article size
                 uint32_t articleOffset = decodeBase64( string( tab1 + 1, tab2 - tab1 - 1 ) );
                 uint32_t articleSize = decodeBase64( tab2 + 1 );
-                dictData * dz = dict_data_open( dictFiles[ 1 ].c_str(), 0 );
+
+                DZ_ERRORS error;
+                dictData * dz = dict_data_open( dictFiles[ 1 ].c_str(), &error, 0 );
 
                 if ( dz )
                 {
@@ -661,6 +666,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   }
                   dict_data_close( dz );
                 }
+                else
+                  throw exDictzipError( string( dz_error_str( error ) )
+                                        + "(" + dictFiles[ 1 ] + ")" );
               }
             }
             else
