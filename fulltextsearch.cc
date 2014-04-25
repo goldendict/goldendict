@@ -59,7 +59,7 @@ void Indexing::run()
   {
     gdWarning( "Exception occured while full-text search: %s", ex.what() );
   }
-  emit sendNowIndexingName( "None" );
+  emit sendNowIndexingName( tr( "None" ) );
 }
 
 
