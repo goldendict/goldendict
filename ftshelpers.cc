@@ -85,15 +85,12 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
   {
     // Make a pattern for search in article text
 
-//    QString spacesInExpression = QString::number(str.simplified().count(" "));
     QString wordsForEnum = str.simplified().replace(" ","|");
     QString patternForEnum;
 
     if( wordsForEnum.count("|") > 0 )patternForEnum = "(?:\\b(?:" + wordsForEnum + ")\\b((?:\\W+\\w+){0,"
         + QString::number( distanceBetweenWords ) + "}\\W+\\b(?:" + wordsForEnum + ")\\b){"
         + QString::number(str.simplified().count(" ")) + "})";
-//        + spacesInExpression + "," + spacesInExpression + "})";
-
     else patternForEnum = "\\b" + wordsForEnum + "\\b";
 
     searchRegExp  = QRegExp( patternForEnum, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::RegExp2 );
@@ -342,9 +339,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
           }
           pos += searchRegexp.matchedLength();
         }
-
-//        qDebug() << "results..." << results;
-
         if( maxResults > 0 && results >= maxResults )
           break;
       }
