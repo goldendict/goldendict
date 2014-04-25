@@ -1605,8 +1605,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      FDPRINTF( stderr, "Stardict's dictionary reading failed: %s, error: %s\n",
-        i->c_str(), e.what() );
+      gdWarning( "Stardict dictionary initializing failed: %s, error: %s\n",
+                 i->c_str(), e.what() );
     }
   }
 

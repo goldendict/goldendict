@@ -1451,7 +1451,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      gdWarning( "Xdxf dictionary reading failed: %s, error: %s\n",
+      gdWarning( "Xdxf dictionary initializing failed: %s, error: %s\n",
                  i->c_str(), e.what() );
     }
   }

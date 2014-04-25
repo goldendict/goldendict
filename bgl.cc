@@ -1186,149 +1186,165 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       gdDebug( "Bgl: Building the index for dictionary: %s\n", i->c_str() );
 
-      Babylon b( *i );
-
-      if ( !b.open() )
-        continue;
-
-      std::string sourceCharset, targetCharset;
-
-      if ( !b.read( sourceCharset, targetCharset ) )
+      try
       {
-        gdWarning( "Failed to start reading from %s, skipping it\n", i->c_str() );
-        continue;
+        Babylon b( *i );
+
+        if ( !b.open() )
+          continue;
+
+        std::string sourceCharset, targetCharset;
+
+        if ( !b.read( sourceCharset, targetCharset ) )
+        {
+          gdWarning( "Failed to start reading from %s, skipping it\n", i->c_str() );
+          continue;
+        }
+
+        initializing.indexingDictionary( b.title() );
+
+        File::Class idx( indexFile, "wb" );
+
+        IdxHeader idxHeader;
+
+        memset( &idxHeader, 0, sizeof( idxHeader ) );
+
+        // We write a dummy header first. At the end of the process the header
+        // will be rewritten with the right values.
+
+        idx.write( idxHeader );
+
+        idx.write< uint32_t >( b.title().size() );
+        idx.write( b.title().data(), b.title().size() );
+
+        // This is our index data that we accumulate during the loading process.
+        // For each new word encountered, we emit the article's body to the file
+        // immediately, inserting the word itself and its offset in this map.
+        // This map maps folded words to the original words and the corresponding
+        // articles' offsets.
+        IndexedWords indexedWords;
+
+        // We use this buffer to decode utf8 into it.
+        vector< wchar > wcharBuffer;
+
+        ChunkedStorage::Writer chunks( idx );
+
+        uint32_t articleCount = 0, wordCount = 0;
+
+        ResourceHandler resourceHandler( idx );
+
+        b.setResourcePrefix( string( "bres://" ) + dictId + "/" );
+
+        // Save icon if there's one
+        if ( size_t sz = b.getIcon().size() )
+        {
+          idxHeader.iconAddress = chunks.startNewBlock();
+          chunks.addToBlock( &b.getIcon().front(), sz );
+          idxHeader.iconSize = sz;
+        }
+
+        // Save dictionary description if there's one
+        idxHeader.descriptionSize = 0;
+        idxHeader.descriptionAddress = chunks.startNewBlock();
+
+        chunks.addToBlock( b.copyright().c_str(), b.copyright().size() + 1 );
+        idxHeader.descriptionSize += b.copyright().size() + 1;
+
+        chunks.addToBlock( b.author().c_str(), b.author().size() + 1 );
+        idxHeader.descriptionSize += b.author().size() + 1;
+
+        chunks.addToBlock( b.email().c_str(), b.email().size() + 1 );
+        idxHeader.descriptionSize += b.email().size() + 1;
+
+        chunks.addToBlock( b.description().c_str(), b.description().size() + 1 );
+        idxHeader.descriptionSize += b.description().size() + 1;
+
+        for( ; ; )
+        {
+          bgl_entry e = b.readEntry( &resourceHandler );
+
+          if ( e.headword.empty() )
+            break;
+
+          // Save the article's body itself first
+
+          uint32_t articleAddress = chunks.startNewBlock();
+
+          chunks.addToBlock( e.headword.c_str(), e.headword.size() + 1 );
+          chunks.addToBlock( e.displayedHeadword.c_str(), e.displayedHeadword.size() + 1 );
+          chunks.addToBlock( e.definition.c_str(), e.definition.size() + 1 );
+
+          // Add entries to the index
+
+          addEntryToIndex( e.headword, articleAddress, indexedWords, wcharBuffer );
+
+          for( unsigned x = 0; x < e.alternates.size(); ++x )
+            addEntryToIndex( e.alternates[ x ], articleAddress, indexedWords, wcharBuffer );
+
+          wordCount += 1 + e.alternates.size();
+          ++articleCount;
+        }
+
+        // Finish with the chunks
+
+        idxHeader.chunksOffset = chunks.finish();
+
+        DPRINTF( "Writing index...\n" );
+
+        // Good. Now build the index
+
+        IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
+
+        idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
+        idxHeader.indexRootOffset = idxInfo.rootOffset;
+
+        // Save the resource's list.
+
+        idxHeader.resourceListOffset = idx.tell();
+        idxHeader.resourcesCount = resourceHandler.getResources().size();
+
+        for( list< pair< string, uint32_t > >::const_iterator j =
+            resourceHandler.getResources().begin();
+             j != resourceHandler.getResources().end(); ++j )
+        {
+          idx.write< uint32_t >( j->first.size() );
+          idx.write( j->first.data(), j->first.size() );
+          idx.write< uint32_t >( j->second );
+        }
+
+        // That concludes it. Update the header.
+
+        idxHeader.signature = Signature;
+        idxHeader.formatVersion = CurrentFormatVersion;
+        idxHeader.parserVersion = Babylon::ParserVersion;
+        idxHeader.foldingVersion = Folding::Version;
+        idxHeader.articleCount = articleCount;
+        idxHeader.wordCount = wordCount;
+        idxHeader.langFrom = b.sourceLang();//LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
+        idxHeader.langTo = b.targetLang();//LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
+
+        idx.rewind();
+
+        idx.write( &idxHeader, sizeof( idxHeader ) );
       }
-
-      initializing.indexingDictionary( b.title() );
-
-      File::Class idx( indexFile, "wb" );
-
-      IdxHeader idxHeader;
-
-      memset( &idxHeader, 0, sizeof( idxHeader ) );
-
-      // We write a dummy header first. At the end of the process the header
-      // will be rewritten with the right values.
-
-      idx.write( idxHeader );
-
-      idx.write< uint32_t >( b.title().size() );
-      idx.write( b.title().data(), b.title().size() );
-
-      // This is our index data that we accumulate during the loading process.
-      // For each new word encountered, we emit the article's body to the file
-      // immediately, inserting the word itself and its offset in this map.
-      // This map maps folded words to the original words and the corresponding
-      // articles' offsets.
-      IndexedWords indexedWords;
-
-      // We use this buffer to decode utf8 into it.
-      vector< wchar > wcharBuffer;
-
-      ChunkedStorage::Writer chunks( idx );
-
-      uint32_t articleCount = 0, wordCount = 0;
-
-      ResourceHandler resourceHandler( idx );
-
-      b.setResourcePrefix( string( "bres://" ) + dictId + "/" );
-
-      // Save icon if there's one
-      if ( size_t sz = b.getIcon().size() )
+      catch( std::exception & e )
       {
-        idxHeader.iconAddress = chunks.startNewBlock();
-        chunks.addToBlock( &b.getIcon().front(), sz );
-        idxHeader.iconSize = sz;
+        gdWarning( "BGL dictionary indexing failed: %s, error: %s\n",
+                   i->c_str(), e.what() );
       }
-      
-      // Save dictionary description if there's one
-      idxHeader.descriptionSize = 0;
-      idxHeader.descriptionAddress = chunks.startNewBlock();
-
-      chunks.addToBlock( b.copyright().c_str(), b.copyright().size() + 1 );
-      idxHeader.descriptionSize += b.copyright().size() + 1;
-
-      chunks.addToBlock( b.author().c_str(), b.author().size() + 1 );
-      idxHeader.descriptionSize += b.author().size() + 1;
-
-      chunks.addToBlock( b.email().c_str(), b.email().size() + 1 );
-      idxHeader.descriptionSize += b.email().size() + 1;
-
-      chunks.addToBlock( b.description().c_str(), b.description().size() + 1 );
-      idxHeader.descriptionSize += b.description().size() + 1;
-
-      for( ; ; )
-      {
-        bgl_entry e = b.readEntry( &resourceHandler );
-
-        if ( e.headword.empty() )
-          break;
-
-        // Save the article's body itself first
-
-        uint32_t articleAddress = chunks.startNewBlock();
-
-        chunks.addToBlock( e.headword.c_str(), e.headword.size() + 1 );
-        chunks.addToBlock( e.displayedHeadword.c_str(), e.displayedHeadword.size() + 1 );
-        chunks.addToBlock( e.definition.c_str(), e.definition.size() + 1 );
-
-        // Add entries to the index
-
-        addEntryToIndex( e.headword, articleAddress, indexedWords, wcharBuffer );
-
-        for( unsigned x = 0; x < e.alternates.size(); ++x )
-          addEntryToIndex( e.alternates[ x ], articleAddress, indexedWords, wcharBuffer );
-
-        wordCount += 1 + e.alternates.size();
-        ++articleCount;
-      }
-
-      // Finish with the chunks
-
-      idxHeader.chunksOffset = chunks.finish();
-
-      DPRINTF( "Writing index...\n" );
-
-      // Good. Now build the index
-
-      IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
-
-      idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
-      idxHeader.indexRootOffset = idxInfo.rootOffset;
-
-      // Save the resource's list.
-
-      idxHeader.resourceListOffset = idx.tell();
-      idxHeader.resourcesCount = resourceHandler.getResources().size();
-
-      for( list< pair< string, uint32_t > >::const_iterator j =
-          resourceHandler.getResources().begin();
-           j != resourceHandler.getResources().end(); ++j )
-      {
-        idx.write< uint32_t >( j->first.size() );
-        idx.write( j->first.data(), j->first.size() );
-        idx.write< uint32_t >( j->second );
-      }
-
-      // That concludes it. Update the header.
-
-      idxHeader.signature = Signature;
-      idxHeader.formatVersion = CurrentFormatVersion;
-      idxHeader.parserVersion = Babylon::ParserVersion;
-      idxHeader.foldingVersion = Folding::Version;
-      idxHeader.articleCount = articleCount;
-      idxHeader.wordCount = wordCount;
-      idxHeader.langFrom = b.sourceLang();//LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
-      idxHeader.langTo = b.targetLang();//LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
-
-      idx.rewind();
-
-      idx.write( &idxHeader, sizeof( idxHeader ) );
     }
 
-    dictionaries.push_back( new BglDictionary( dictId,
-                                               indexFile,
-                                               *i ) );
+    try
+    {
+      dictionaries.push_back( new BglDictionary( dictId,
+                                                 indexFile,
+                                                 *i ) );
+    }
+    catch( std::exception & e )
+    {
+      gdWarning( "BGL dictionary initializing failed: %s, error: %s\n",
+                 i->c_str(), e.what() );
+    }
   }
 
   return dictionaries;

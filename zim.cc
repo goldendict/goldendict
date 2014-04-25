@@ -1395,21 +1395,22 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           idx.write( &idxHeader, sizeof( idxHeader ) );
         }
+
+        dictionaries.push_back( new ZimDictionary( dictId,
+                                                   indexFile,
+                                                   dictFiles ) );
       }
       catch( std::exception & e )
       {
-        gdWarning( "Zim dictionary indexing failed: %s, error: %s\n",
+        gdWarning( "Zim dictionary initializing failed: %s, error: %s\n",
                    i->c_str(), e.what() );
         continue;
       }
       catch( ... )
       {
-        qWarning( "Zim dictionary indexing failed\n" );
+        qWarning( "Zim dictionary initializing failed\n" );
         continue;
       }
-      dictionaries.push_back( new ZimDictionary( dictId,
-                                                 indexFile,
-                                                 dictFiles ) );
   }
   return dictionaries;
 }

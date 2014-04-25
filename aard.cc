@@ -47,7 +47,7 @@ using BtreeIndexing::IndexInfo;
 
 namespace {
 
-DEF_EX_STR( exNotDctFile, "Not an Sdictionary file", Dictionary::Ex )
+DEF_EX_STR( exNotAardFile, "Not an AARD file", Dictionary::Ex )
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX_STR( exWordIsTooLarge, "Enountered a word that is too large:", Dictionary::Ex )
 DEF_EX_STR( exSuddenEndOfFile, "Sudden end of file", Dictionary::Ex )
@@ -1046,9 +1046,18 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           continue;
         }
       } // if need to rebuild
-      dictionaries.push_back( new AardDictionary( dictId,
-                                                   indexFile,
-                                                   dictFiles ) );
+      try
+      {
+        dictionaries.push_back( new AardDictionary( dictId,
+                                                    indexFile,
+                                                    dictFiles ) );
+      }
+      catch( std::exception & e )
+      {
+        gdWarning( "Aard dictionary initializing failed: %s, error: %s\n",
+                  i->c_str(), e.what() );
+        continue;
+      }
   }
   return dictionaries;
 }
