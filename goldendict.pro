@@ -279,7 +279,12 @@ HEADERS += folding.hh \
     articleinspector.hh \
     delegate.hh \
     zim.hh \
-    gddebug.hh
+    gddebug.hh \
+    gestures.hh \
+    tiff.hh \
+    dictheadwords.hh \
+    fulltextsearch.hh \
+    ftshelpers.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -293,7 +298,10 @@ FORMS += groups.ui \
     about.ui \
     editdictionaries.ui \
     orderandprops.ui \
-    dictinfo.ui
+    dictinfo.ui \
+    dictheadwords.ui \
+    authentication.ui \
+    fulltextsearch.ui
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -390,7 +398,12 @@ SOURCES += folding.cc \
     articleinspector.cc \
     delegate.cc \
     zim.cc \
-    gddebug.cc
+    gddebug.cc \
+    gestures.cc \
+    tiff.cc \
+    dictheadwords.cc \
+    fulltextsearch.cc \
+    ftshelpers.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui
@@ -423,6 +436,11 @@ mac {
 CONFIG( zim_support ) {
   DEFINES += MAKE_ZIM_SUPPORT
   LIBS += -llzma
+}
+
+!CONFIG( no_extra_tiff_handler ) {
+  DEFINES += MAKE_EXTRA_TIFF_HANDLER
+  LIBS += -ltiff
 }
 
 RESOURCES += resources.qrc \
@@ -458,7 +476,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/nl_NL.ts \
     locale/sr_SR.ts \
     locale/sv_SE.ts \
-    locale/tk_TM.ts
+    locale/tk_TM.ts \
+    locale/fa_IR.ts
 
 # Build version file
 !isEmpty( hasGit ) {

@@ -30,11 +30,13 @@ class ArticleView: public QFrame
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,
-          goBackAction, goForwardAction, openSearchAction, selectCurrentArticleAction,
+          goBackAction, goForwardAction, selectCurrentArticleAction,
           copyAsTextAction, inspectAction;
+  QAction & openSearchAction;
   bool searchIsOpened;
   bool expandOptionalParts;
   QString articleToJump;
+  QString rangeVarName;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
@@ -49,6 +51,16 @@ class ArticleView: public QFrame
   QAction * dictionaryBarToggled;
   GroupComboBox const * groupComboBox;
 
+  /// Search in results of full-text search
+  QStringList allMatches;
+  QStringList uniqueMatches;
+  bool ftsSearchIsOpened, ftsSearchMatchCase;
+  int ftsPosition;
+
+  void highlightFTSResults();
+  void performFtsFindOperation( bool backwards );
+  void showFindButtons();
+
 public:
   /// The popupView flag influences contents of the context menus to be
   /// appropriate to the context of the view.
@@ -59,6 +71,7 @@ public:
                Instances::Groups const &,
                bool popupView,
                Config::Class const & cfg,
+               QAction & openSearchAction_,
                QAction * dictionaryBarToggled = 0,
                GroupComboBox const * groupComboBox = 0 );
 
@@ -82,6 +95,9 @@ public:
   void showDefinition( QString const & word, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
+
+  void showDefinition( QString const & word, QStringList const & dictIDs,
+                       QRegExp const & searchRegExp, unsigned group );
 
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
@@ -196,7 +212,7 @@ signals:
   /// typically in response to user actions
   /// (clicking on the article or using shortcuts).
   /// id - the dictionary id of the active article.
-  void activeArticleChanged ( QString const & id );
+  void activeArticleChanged ( ArticleView const *, QString const & id );
 
   /// Signal to add word to history even if history is disabled
   void forceAddWordToHistory( const QString & word);
@@ -210,6 +226,9 @@ signals:
   void sendWordToInputLine( QString const & word );
 
   void storeResourceSavePath(QString const & );
+
+  void zoomIn();
+  void zoomOut();
 
 public slots:
 
@@ -257,6 +276,9 @@ private slots:
   void on_searchCloseButton_clicked();
   void on_searchCaseSensitive_clicked();
   void on_highlightAllButton_clicked();
+
+  void on_ftsSearchPrevious_clicked();
+  void on_ftsSearchNext_clicked();
 
   /// Handles the double-click from the definition.
   void doubleClicked();

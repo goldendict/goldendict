@@ -7,6 +7,8 @@
 #include "preferences.hh"
 #include "about.hh"
 #include "mruqmenu.hh"
+#include "gestures.hh"
+#include "dictheadwords.hh"
 #include <limits.h>
 #include <QDir>
 #include <QMessageBox>
@@ -29,6 +31,7 @@
 #include <QThreadPool>
 #include <QSslConfiguration>
 #include <QDesktopWidget>
+#include "ui_authentication.h"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -50,6 +53,8 @@
 #include <QX11Info>
 #include <X11/Xlib.h>
 #endif
+
+#define MIN_THREAD_COUNT 4
 
 using std::set;
 using std::wstring;
@@ -86,6 +91,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   useSmallIconsInToolbarsAction( tr( "Show Small Icons in &Toolbars" ), this ),
   toggleMenuBarAction( tr( "&Menubar" ), this ),
   switchExpandModeAction( this ),
+  focusHeadwordsDlgAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -102,10 +108,16 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   wordListSelChanged( false )
 , wasMaximized( false )
 , blockUpdateWindowTitle( false )
+, headwordsDlg( 0 )
+, ftsIndexing( dictionaries )
+, ftsDlg( 0 )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
 {
+  if( QThreadPool::globalInstance()->maxThreadCount() < MIN_THREAD_COUNT )
+    QThreadPool::globalInstance()->setMaxThreadCount( MIN_THREAD_COUNT );
+
 #ifndef QT_NO_OPENSSL
   QThreadPool::globalInstance()->start( new InitSSLRunnable );
 #endif
@@ -115,6 +127,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.setupUi( this );
 
   articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  // Set own gesture recognizers
+  Gestures::registerRecognizers();
+#endif
 
   // use our own, cutsom statusbar
   setStatusBar(0);
@@ -213,7 +230,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   buttonMenu->addSeparator();
   buttonMenu->addMenu( ui.menuFile );
   buttonMenu->addMenu( ui.menuView );
+  buttonMenu->addMenu( ui.menuSearch );
   buttonMenu->addMenu( ui.menu_Help );
+
+  ui.fullTextSearchAction->setEnabled( cfg.preferences.fts.enabled );
 
   menuButton = new QToolButton( navToolbar );
   menuButton->setPopupMode( QToolButton::InstantPopup );
@@ -330,6 +350,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &focusTranslateLineAction, SIGNAL( triggered() ),
            this, SLOT( focusTranslateLine() ) );
 
+  focusHeadwordsDlgAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  focusHeadwordsDlgAction.setShortcut( QKeySequence( "Ctrl+D" ) );
+
+  connect( &focusHeadwordsDlgAction, SIGNAL( triggered() ),
+           this, SLOT( focusHeadwordsDialog() ) );
+
   ui.centralWidget->addAction( &escAction );
   ui.dictsPane->addAction( &escAction );
   ui.searchPaneWidget->addAction( &escAction );
@@ -342,6 +368,23 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPaneWidget->addAction( &focusTranslateLineAction );
   ui.historyPane->addAction( &focusTranslateLineAction );
   groupList->addAction( &focusTranslateLineAction );
+
+  ui.centralWidget->addAction( &focusHeadwordsDlgAction );
+  ui.dictsPane->addAction( &focusHeadwordsDlgAction );
+  ui.searchPaneWidget->addAction( &focusHeadwordsDlgAction );
+  ui.historyPane->addAction( &focusHeadwordsDlgAction );
+  groupList->addAction( &focusHeadwordsDlgAction );
+  translateBox->addAction( &focusHeadwordsDlgAction );
+
+  connect( ui.fullTextSearchAction, SIGNAL( triggered() ),
+           this, SLOT( showFullTextSearchDialog() ) );
+
+  ui.centralWidget->addAction( ui.fullTextSearchAction );
+  ui.dictsPane->addAction( ui.fullTextSearchAction );
+  ui.searchPaneWidget->addAction( ui.fullTextSearchAction );
+  ui.historyPane->addAction( ui.fullTextSearchAction );
+  groupList->addAction( ui.fullTextSearchAction );
+  translateBox->addAction( ui.fullTextSearchAction );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -499,6 +542,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( &dictionaryBar, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
+
+  connect( &dictionaryBar, SIGNAL( showDictionaryHeadwords( QString const & ) ),
+           this, SLOT( showDictionaryHeadwords( QString const & ) ) );
 
   connect( &dictionaryBar, SIGNAL( openDictionaryFolder( QString const & ) ),
            this, SLOT( openDictionaryFolder( QString const & ) ) );
@@ -679,6 +725,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   applyProxySettings();
   applyWebSettings();
 
+  connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
+           this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
+
+  connect( &articleNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
+           this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
+
   makeDictionaries();
 
   // After we have dictionaries and groups, we can populate history
@@ -773,7 +825,20 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   #endif
 #ifdef Q_OS_WIN32
   gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
+  ( static_cast< QHotkeyApplication * >( qApp ) )->setMainWindow( this );
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ui.centralWidget->grabGesture( Gestures::GDPinchGestureType );
+  ui.centralWidget->grabGesture( Gestures::GDSwipeGestureType );
+#endif
+
+  if( layoutDirection() == Qt::RightToLeft )
+  {
+    // Adjust button icons for Right-To-Left layout
+    navBack->setIcon( QIcon( ":/icons/next.png" ) );
+    navForward->setIcon( QIcon( ":/icons/previous.png" ) );
+  }
 }
 
 void MainWindow::ctrlTabPressed()
@@ -823,6 +888,8 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 
     translateBoxToolBarAction->setVisible( true );
   }
+
+  translateLine->setToolTip( tr( "String to search in dictionaries. The wildcards '*', '?' and sets of symbols '[...]' are allowed.\nTo find '*', '?', '[', ']' symbols use '\\*', '\\?', '\\[', '\\]' respectively" ) );
 
   // reset the flag when switching UI modes
   wordListSelChanged = false;
@@ -878,6 +945,16 @@ MainWindow::~MainWindow()
   }
 #endif
 
+  closeHeadwordsDialog();
+
+  ftsIndexing.stopIndexing();
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ui.centralWidget->ungrabGesture( Gestures::GDPinchGestureType );
+  ui.centralWidget->ungrabGesture( Gestures::GDSwipeGestureType );
+  Gestures::unregisterRecognizers();
+#endif
+
   // Close all tabs -- they should be destroyed before network managers
   // do.
   while( ui.tabWidget->count() )
@@ -890,8 +967,6 @@ MainWindow::~MainWindow()
   }
 
   commitData();
-
-  history.save();
 }
 
 void MainWindow::commitData( QSessionManager & )
@@ -915,6 +990,8 @@ void MainWindow::commitData()
 
     // Save any changes in last chosen groups etc
     Config::save( cfg );
+
+    history.save();
   }
 }
 
@@ -1038,6 +1115,18 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 
 void MainWindow::applyProxySettings()
 {
+  if( cfg.preferences.proxyServer.enabled && cfg.preferences.proxyServer.useSystemProxy )
+  {
+    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery();
+    if( !cfg.preferences.proxyServer.systemProxyUser.isEmpty() )
+    {
+      proxies.first().setUser( cfg.preferences.proxyServer.systemProxyUser );
+      proxies.first().setPassword( cfg.preferences.proxyServer.systemProxyPassword );
+    }
+    QNetworkProxy::setApplicationProxy( proxies.first() );
+    return;
+  }
+
   QNetworkProxy::ProxyType type = QNetworkProxy::NoProxy;
 
   if ( cfg.preferences.proxyServer.enabled )
@@ -1091,7 +1180,16 @@ void MainWindow::makeDictionaries()
 
   dictionariesUnmuted.clear();
 
+  ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
+
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
+
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+
+  ftsIndexing.setDictionaries( dictionaries );
+  ftsIndexing.doIndexing();
 
   updateStatusLine();
   updateGroupList();
@@ -1358,6 +1456,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 {
   ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
                                         groupInstances, false, cfg,
+                                        *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
 
@@ -1379,8 +1478,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
 
-  connect( view, SIGNAL( activeArticleChanged( const QString & ) ),
-           this, SLOT( activeArticleChanged( const QString & ) ) );
+  connect( view, SIGNAL( activeArticleChanged( ArticleView const *, const QString & ) ),
+           this, SLOT( activeArticleChanged( ArticleView const *, const QString & ) ) );
 
   connect( view, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
@@ -1403,6 +1502,10 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   connect( view, SIGNAL( storeResourceSavePath( QString const & ) ),
            this, SLOT( storeResourceSavePath( QString const & ) ) );
+
+  connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
+
+  connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -1567,6 +1670,9 @@ void MainWindow::updateWindowTitle()
 
 void MainWindow::pageLoaded( ArticleView * view )
 {
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
   updateBackForwardButtons();
 
   updatePronounceAvailability();
@@ -1707,6 +1813,11 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
+  closeFullTextSearchDialog();
+
+  ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
 
   wordFinder.clear();
   dictionariesUnmuted.clear();
@@ -1718,6 +1829,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   connect( &dicts, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
+
+  connect( &dicts, SIGNAL( showDictionaryHeadwords( QString const & ) ),
+           this, SLOT( showDictionaryHeadwords( QString const & ) ) );
 
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );
@@ -1755,6 +1869,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   makeScanPopup();
   installHotKeys();
+
+  ftsIndexing.setDictionaries( dictionaries );
+  ftsIndexing.doIndexing();
 }
 
 void MainWindow::editCurrentGroup()
@@ -1766,6 +1883,11 @@ void MainWindow::editPreferences()
 {
   hotkeyWrapper.reset(); // So we could use the keys it hooks
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
+  closeFullTextSearchDialog();
+
+  ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
 
   Preferences preferences( this, cfg.preferences );
 
@@ -1781,6 +1903,19 @@ void MainWindow::editPreferences()
     p.hideMenubar = cfg.preferences.hideMenubar;
     p.searchInDock = cfg.preferences.searchInDock;
     p.alwaysOnTop = cfg.preferences.alwaysOnTop;
+#ifndef Q_WS_X11
+    p.trackClipboardChanges = cfg.preferences.trackClipboardChanges;
+#endif
+    p.proxyServer.systemProxyUser = cfg.preferences.proxyServer.systemProxyUser;
+    p.proxyServer.systemProxyPassword = cfg.preferences.proxyServer.systemProxyPassword;
+
+    p.fts.dialogGeometry = cfg.preferences.fts.dialogGeometry;
+    p.fts.matchCase = cfg.preferences.fts.matchCase;
+    p.fts.maxArticlesPerDictionary = cfg.preferences.fts.maxArticlesPerDictionary;
+    p.fts.maxDistanceBetweenWords = cfg.preferences.fts.maxDistanceBetweenWords;
+    p.fts.searchMode = cfg.preferences.fts.searchMode;
+    p.fts.useMaxArticlesPerDictionary = cfg.preferences.fts.useMaxArticlesPerDictionary;
+    p.fts.useMaxDistanceBetweenWords = cfg.preferences.fts.useMaxDistanceBetweenWords;
 
     bool needReload = false;
 
@@ -1844,11 +1979,19 @@ void MainWindow::editPreferences()
     history.setMaxSize( cfg.preferences.maxStringsInHistory );
     ui.historyPaneWidget->updateHistoryCounts();
 
+    for( unsigned x = 0; x < dictionaries.size(); x++ )
+      dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+
+    ui.fullTextSearchAction->setEnabled( cfg.preferences.fts.enabled );
+
     Config::save( cfg );
   }
 
   makeScanPopup();
   installHotKeys();
+
+  ftsIndexing.setDictionaries( dictionaries );
+  ftsIndexing.doIndexing();
 }
 
 void MainWindow::currentGroupChanged( QString const & )
@@ -1882,6 +2025,9 @@ void MainWindow::currentGroupChanged( QString const & )
   translateInputFinished( false );
 
   updateCurrentGroupProperty();
+
+  if( ftsDlg )
+    ftsDlg->setCurrentGroup( cfg.lastMainGroupId );
 }
 
 void MainWindow::updateCurrentGroupProperty()
@@ -2045,12 +2191,15 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     return true;
   }
 #endif
-  if ( ev->type() == QEvent::ShortcutOverride ) {
+  if ( ev->type() == QEvent::ShortcutOverride
+       || ev->type() == QEvent::KeyPress )
+  {
     // Handle Ctrl+H to show the History Pane.
     QKeyEvent * ke = static_cast<QKeyEvent*>( ev );
     if ( ke->key() == Qt::Key_H && ke->modifiers() == Qt::ControlModifier )
     {
-      on_showHideHistory_triggered();
+      if( ev->type() == QEvent::KeyPress )
+        on_showHideHistory_triggered();
       ev->accept();
       return true;
     }
@@ -2305,8 +2454,11 @@ void MainWindow::showDefinitionInNewTab( QString const & word,
       showDefinition( word, group, fromArticle, contexts );
 }
 
-void MainWindow::activeArticleChanged( QString const & id )
+void MainWindow::activeArticleChanged( ArticleView const * view, QString const & id )
 {
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
   // select the row with the corresponding id
   for (int i = 0; i < ui.dictsList->count(); ++i) {
     QListWidgetItem * w = ui.dictsList->item( i );
@@ -2481,6 +2633,27 @@ void MainWindow::showTranslationFor( QString const & inWord,
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
 
+void MainWindow::showTranslationFor( QString const & inWord,
+                                     QStringList const & dictIDs,
+                                     QRegExp const & searchRegExp )
+{
+  ArticleView *view = getCurrentArticleView();
+
+  navPronounce->setEnabled( false );
+
+  view->showDefinition( inWord, dictIDs, searchRegExp,
+                        groupInstances[ groupList->currentIndex() ].id );
+
+  updatePronounceAvailability();
+  updateFoundInDictsList();
+
+  // Add to history
+
+  addWordToHistory( inWord );
+
+  updateBackForwardButtons();
+}
+
 #ifdef Q_WS_X11
 void MainWindow::toggleMainWindow( bool onlyShow, bool byIconClick )
 #else
@@ -2522,10 +2695,22 @@ void MainWindow::toggleMainWindow( bool onlyShow )
       hide();
     else
       showMinimized();
+
+    if( headwordsDlg )
+      headwordsDlg->hide();
+
+    if( ftsDlg )
+      ftsDlg->hide();
   }
 
   if ( shown )
   {
+    if( headwordsDlg )
+      headwordsDlg->show();
+
+    if( ftsDlg )
+      ftsDlg->show();
+
     focusTranslateLine();
 #ifdef Q_WS_X11
     Window wh = 0;
@@ -3110,6 +3295,11 @@ void MainWindow::on_rescanFiles_triggered()
 {
   hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
+  closeHeadwordsDialog();
+  closeFullTextSearchDialog();
+
+  ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
 
   groupInstances.clear(); // Release all the dictionaries they hold
   dictionaries.clear();
@@ -3117,6 +3307,12 @@ void MainWindow::on_rescanFiles_triggered()
   dictionaryBar.setDictionaries( dictionaries );
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+
+  ftsIndexing.setDictionaries( dictionaries );
+  ftsIndexing.doIndexing();
 
   updateGroupList();
 
@@ -3292,7 +3488,7 @@ void MainWindow::wordReceived( const QString & word)
 {
     toggleMainWindow( true );
     translateLine->setText( word );
-    translateInputFinished();
+    translateInputFinished( false );
 }
 
 void MainWindow::updateHistoryMenu()
@@ -3526,10 +3722,57 @@ void MainWindow::showDictionaryInfo( const QString & id )
       {
         editDictionary( dictionaries[x].get() );
       }
+      else if( result == DictInfo::SHOW_HEADWORDS )
+      {
+        showDictionaryHeadwords( dictionaries[x].get() );
+      }
 
       break;
     }
   }
+}
+
+void MainWindow::showDictionaryHeadwords( const QString & id )
+{
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
+    if( dictionaries[ x ]->getId() == id.toUtf8().data() )
+    {
+      showDictionaryHeadwords( dictionaries[ x ].get() );
+      break;
+    }
+  }
+}
+
+void MainWindow::showDictionaryHeadwords( Dictionary::Class * dict )
+{
+  if( headwordsDlg == 0 )
+  {
+    headwordsDlg = new DictHeadwords( this, cfg, dict );
+    connect( headwordsDlg, SIGNAL( headwordSelected( QString ) ),
+             this, SLOT( wordReceived( QString ) ) );
+    connect( headwordsDlg, SIGNAL( closeDialog() ),
+             this, SLOT( closeHeadwordsDialog() ) );
+  }
+  else
+    headwordsDlg->setup( dict );
+
+  headwordsDlg->show();
+}
+
+void MainWindow::closeHeadwordsDialog()
+{
+  if( headwordsDlg )
+  {
+    delete headwordsDlg;
+    headwordsDlg = NULL;
+  }
+}
+
+void MainWindow::focusHeadwordsDialog()
+{
+  if( headwordsDlg )
+    headwordsDlg->activateWindow();
 }
 
 void MainWindow::editDictionary( Dictionary::Class * dict )
@@ -3633,6 +3876,10 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
       QMenu menu( ui.dictsList );
       QAction * infoAction = menu.addAction( tr( "Dictionary info" ) );
 
+      QAction * headwordsAction = NULL;
+      if( pDict->getWordCount() > 0 )
+        headwordsAction = menu.addAction( tr( "Dictionary headwords" ) );
+
       QAction * openDictFolderAction = menu.addAction( tr( "Open dictionary folder" ) );
 
       QAction * editAction = NULL;
@@ -3648,6 +3895,15 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
         if ( scanPopup )
           scanPopup.get()->blockSignals( true );
         showDictionaryInfo( id );
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( false );
+      }
+      else
+      if( result && result == headwordsAction )
+      {
+        if ( scanPopup )
+          scanPopup.get()->blockSignals( true );
+        showDictionaryHeadwords( pDict );
         if ( scanPopup )
           scanPopup.get()->blockSignals( false );
       }
@@ -3676,13 +3932,102 @@ void MainWindow::storeResourceSavePath( const QString & newPath )
   cfg.resourceSavePath = newPath;
 }
 
+void MainWindow::proxyAuthentication( const QNetworkProxy &,
+                                      QAuthenticator * authenticator )
+{
+  QNetworkProxy proxy = QNetworkProxy::applicationProxy();
+
+  QString * userStr, * passwordStr;
+  if( cfg.preferences.proxyServer.useSystemProxy )
+  {
+    userStr = &cfg.preferences.proxyServer.systemProxyUser;
+    passwordStr = &cfg.preferences.proxyServer.systemProxyPassword;
+  }
+  else
+  {
+    userStr = &cfg.preferences.proxyServer.user;
+    passwordStr = &cfg.preferences.proxyServer.password;
+  }
+
+  if( proxy.user().isEmpty() && !userStr->isEmpty() )
+  {
+    authenticator->setUser( *userStr );
+    authenticator->setPassword( *passwordStr );
+
+    proxy.setUser( *userStr );
+    proxy.setPassword( *passwordStr );
+    QNetworkProxy::setApplicationProxy( proxy );
+  }
+  else
+  {
+    QDialog dlg;
+    Ui::Dialog ui;
+    ui.setupUi( &dlg );
+    dlg.adjustSize();
+
+    ui.userEdit->setText( *userStr );
+    ui.passwordEdit->setText( *passwordStr );
+
+    if ( dlg.exec() == QDialog::Accepted )
+    {
+      *userStr = ui.userEdit->text();
+      *passwordStr = ui.passwordEdit->text();
+
+      authenticator->setUser( *userStr );
+      authenticator->setPassword( *passwordStr );
+
+      proxy.setUser( *userStr );
+      proxy.setPassword( *passwordStr );
+      QNetworkProxy::setApplicationProxy( proxy );
+    }
+  }
+}
+
+void MainWindow::showFullTextSearchDialog()
+{
+  if( !ftsDlg )
+  {
+    ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances, ftsIndexing );
+
+    connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp ) ),
+             this, SLOT( showTranslationFor( QString, QStringList, QRegExp ) ) );
+    connect( ftsDlg, SIGNAL( closeDialog() ),
+             this, SLOT( closeFullTextSearchDialog() ) );
+    connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
+             ftsDlg, SLOT( updateDictionaries() ) );
+  }
+
+  unsigned group = groupInstances.empty() ? 0
+                                          : groupInstances[ groupList->currentIndex() ].id;
+  ftsDlg->setCurrentGroup( group );
+
+  if( !ftsDlg ->isVisible() )
+    ftsDlg->show();
+  else
+    ftsDlg->activateWindow();
+}
+
+void MainWindow::closeFullTextSearchDialog()
+{
+  if( ftsDlg )
+  {
+    ftsDlg->stopSearch();
+    delete ftsDlg;
+    ftsDlg = 0;
+  }
+}
+
 #ifdef Q_OS_WIN32
 
-bool MainWindow::winEvent( MSG * message, long * result )
+bool MainWindow::handleGDMessage( MSG * message, long * result )
 {
   if( message->message != gdAskMessage )
     return false;
   *result = 0;
+
+  if( !isGoldenDictWindow( message->hwnd ) )
+    return true;
+
   ArticleView * view = getCurrentArticleView();
   if( !view )
     return true;
@@ -3692,12 +4037,6 @@ bool MainWindow::winEvent( MSG * message, long * result )
   QString str = view->wordAtPoint( lpdata->Pt.x, lpdata->Pt.y );
 
   memset( lpdata->cwData, 0, lpdata->dwMaxLength * sizeof( WCHAR ) );
-  if( str.isRightToLeft() )
-  {
-    gd::wstring wstr = gd::toWString( str );
-    wstr.assign( wstr.rbegin(), wstr.rend() );
-    str = gd::toQString( wstr );
-  }
   str.truncate( lpdata->dwMaxLength - 1 );
   str.toWCharArray( lpdata->cwData );
 
@@ -3707,7 +4046,7 @@ bool MainWindow::winEvent( MSG * message, long * result )
 
 bool MainWindow::isGoldenDictWindow( HWND hwnd )
 {
-    return hwnd == (HWND)winId();
+  return hwnd == winId() || hwnd == ui.centralWidget->winId();
 }
 
 #endif

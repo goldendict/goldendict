@@ -8,6 +8,7 @@
 #include "gddebug.hh"
 #include "ufile.hh"
 #include "wstring_qt.hh"
+#include "utf8.hh"
 
 #include <stdio.h>
 #include <wctype.h>
@@ -41,7 +42,7 @@ int wcscasecmp( const wchar *s1, const wchar *s2 )
 
 /////////////// ArticleDom
 
-wstring ArticleDom::Node::renderAsText() const
+wstring ArticleDom::Node::renderAsText( bool stripTrsTag ) const
 {
   if ( !isTag )
     return text;
@@ -49,7 +50,8 @@ wstring ArticleDom::Node::renderAsText() const
   wstring result;
 
   for( list< Node >::const_iterator i = begin(); i != end(); ++i )
-    result += i->renderAsText();
+    if( !stripTrsTag || i->tagName != GD_NATIVE_TO_WS( L"!trs" ) )
+      result += i->renderAsText( stripTrsTag );
 
   return result;
 }
@@ -61,9 +63,12 @@ static inline bool checkM( wstring const & dest, wstring const & src )
     dest[ 0 ] == L'm' && iswdigit( dest[ 1 ] ) );
 }
 
-ArticleDom::ArticleDom( wstring const & str ):
+ArticleDom::ArticleDom( wstring const & str, string const & dictName,
+                        wstring const & headword_):
   root( Node::Tag(), wstring(), wstring() ), stringPos( str.c_str() ),
-  transcriptionCount( 0 )
+  transcriptionCount( 0 ),
+  dictionaryName( dictName ),
+  headword( headword_ )
 {
   list< Node * > stack; // Currently opened tags
 
@@ -122,8 +127,8 @@ ArticleDom::ArticleDom( wstring const & str ):
             textNode = 0;
 
             wstring linkText = Folding::trimWhitespace( *entry );
-            processUnsortedParts( linkText, false );
-            ArticleDom nodeDom( linkText );
+            processUnsortedParts( linkText, true );
+            ArticleDom nodeDom( linkText, dictName, headword_ );
 
             Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
             for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
@@ -598,8 +603,13 @@ void ArticleDom::closeTag( wstring const & name,
   else
   if ( warn )
   {
-    qWarning() << "Warning: no corresponding opening tag for closing tag" <<
-                   gd::toQString( name ) << "found.";
+    if( !dictionaryName.empty() )
+      gdWarning( "Warning: no corresponding opening tag for closing tag \"%s\" found in \"%s\", article \"%s\".",
+                 gd::toQString( name ).toUtf8().data(), dictionaryName.c_str(),
+                 gd::toQString( headword ).toUtf8().data() );
+    else
+      gdWarning( "Warning: no corresponding opening tag for closing tag \"%s\" found.",
+                 gd::toQString( name ).toUtf8().data() );
   }
 }
 
@@ -1224,6 +1234,10 @@ void normalizeHeadword( wstring & str )
       }
     }
   }
+  if( !str.empty() && str[ str.size() - 1 ] == L' ' )
+    str.erase( str.size() - 1, 1 );
+  if( !str.empty() && str[ 0 ] == L' ' )
+    str.erase( 0, 1 );
 }
 
 namespace

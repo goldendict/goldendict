@@ -208,6 +208,11 @@ protected:
 
 #ifdef Q_OS_WIN32
   virtual bool winEventFilter ( MSG * message, long * result );
+  QWidget * mainWindow;
+public:
+  void setMainWindow( QWidget * widget )
+  { mainWindow = widget; }
+protected:
 #endif
 
   QList<HotkeyWrapper*> hotkeyWrappers;

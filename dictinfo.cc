@@ -28,6 +28,11 @@ void DictInfo::showInfo( sptr<Dictionary::Class> dict )
   ui.editDictionary->setToolTip(
         tr( "Edit the dictionary via command:\n%1" ).arg( cfg.editDictionaryCommandLine ) );
 
+  if( dict->getWordCount() == 0 )
+    ui.headwordsButton->setVisible( false );
+  else
+    ui.buttonsLayout->insertSpacerItem( 0, new QSpacerItem( 40, 20, QSizePolicy::Expanding ) );
+
   std::vector< std::string > const & filenames = dict->getDictionaryFilenames();
 
   QString filenamesText;
@@ -61,4 +66,14 @@ void DictInfo::on_editDictionary_clicked()
 void DictInfo::on_openFolder_clicked()
 {
   done( OPEN_FOLDER );
+}
+
+void DictInfo::on_OKButton_clicked()
+{
+  done( ACCEPTED );
+}
+
+void DictInfo::on_headwordsButton_clicked()
+{
+  done( SHOW_HEADWORDS );
 }

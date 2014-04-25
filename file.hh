@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <string>
 #include <vector>
+#include <QFile>
 #include "ex.hh"
 
 /// A simple wrapper over FILE * operations with added write-buffering,
@@ -33,7 +34,7 @@ inline bool exists( std::string const & filename ) throw()
 
 class Class
 {
-  FILE * f;
+  QFile f;
   char * writeBuffer;
   size_t writeBufferLeft;
 
@@ -47,7 +48,7 @@ public:
 
   /// Reads the number of bytes to the buffer, throws an error if it
   /// failed to fill the whole buffer (short read, i/o error etc).
-  void read( void * buf, size_t size ) throw( exReadError, exWriteError );
+  void read( void * buf, qint64 size ) throw( exReadError, exWriteError );
 
   template< typename T >
   void read( T & value ) throw( exReadError, exWriteError )
@@ -59,7 +60,7 @@ public:
 
   /// Attempts reading at most 'count' records sized 'size'. Returns
   /// the number of records it managed to read, up to 'count'.
-  size_t readRecords( void * buf, size_t size, size_t count ) throw( exWriteError );
+  size_t readRecords( void * buf, qint64 size, size_t count ) throw( exWriteError );
 
   /// Writes the number of bytes from the buffer, throws an error if it
   /// failed to write the whole buffer (short write, i/o error etc).
@@ -67,7 +68,7 @@ public:
   /// end up on disk immediately, or a short write may occur later
   /// than it really did. If you don't want write buffering, use
   /// writeRecords() function instead.
-  void write( void const * buf, size_t size ) throw( exWriteError );
+  void write( void const * buf, qint64 size ) throw( exWriteError );
 
   template< typename T >
   void write( T const & value ) throw( exWriteError )
@@ -77,7 +78,7 @@ public:
   /// the number of records it managed to write, up to 'count'.
   /// This function does not employ buffering, but flushes the buffer if it
   /// was used before.
-  size_t writeRecords( void const * buf, size_t size, size_t count )
+  size_t writeRecords( void const * buf, qint64 size, size_t count )
     throw( exWriteError );
 
   /// Reads a string from the file. Unlike the normal fgets(), this one
@@ -107,11 +108,7 @@ public:
 
   /// Returns the underlying FILE * record, so other operations can be
   /// performed on it.
-  FILE * file() throw( exWriteError );
-
-  /// Releases the file handle out of the control of the class. No further
-  /// operations are valid. The file will not be closed on destruction.
-  FILE * release() throw( exWriteError );
+  QFile & file() throw( exWriteError );
 
   /// Closes the file. No further operations are valid.
   void close() throw( exWriteError );

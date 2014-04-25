@@ -27,6 +27,8 @@
 #include "mruqmenu.hh"
 #include "translatebox.hh"
 #include "wordlist.hh"
+#include "dictheadwords.hh"
+#include "fulltextsearch.hh"
 
 #ifdef Q_WS_X11
 #include <fixx11h.h>
@@ -105,7 +107,8 @@ private:
   QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction,
-          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction, switchExpandModeAction;
+          showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction,
+          switchExpandModeAction, focusHeadwordsDlgAction;
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
@@ -156,6 +159,12 @@ private:
   bool blockUpdateWindowTitle;
 
   QPrinter & getPrinter(); // Creates a printer if it's not there and returns it
+
+  DictHeadwords * headwordsDlg;
+
+  FTS::FtsIndexing ftsIndexing;
+
+  FTS::FullTextSearchDialog * ftsDlg;
 
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
@@ -219,6 +228,8 @@ private:
 
   void fillWordListFromHistory();
 
+  void showDictionaryHeadwords( Dictionary::Class * dict );
+
 private slots:
 
   void hotKeyActivated( int );
@@ -242,6 +253,8 @@ private slots:
   void foundDictsContextMenuRequested( const QPoint & pos );
 
   void showDictionaryInfo( QString const & id );
+
+  void showDictionaryHeadwords( QString const & id );
 
   void openDictionaryFolder( QString const & id );
 
@@ -339,11 +352,14 @@ private slots:
                                ArticleView::Contexts const & contexts );
   void typingEvent( QString const & );
 
-  void activeArticleChanged( QString const & id );
+  void activeArticleChanged( ArticleView const *, QString const & id );
 
   void mutedDictionariesChanged();
 
   void showTranslationFor( QString const &, unsigned inGroup = 0 );
+
+  void showTranslationFor( QString const &, QStringList const & dictIDs,
+                           QRegExp const & searchRegExp );
 
   void showHistoryItem( QString const & );
 
@@ -398,6 +414,15 @@ private slots:
 
   void storeResourceSavePath( QString const & );
 
+  void closeHeadwordsDialog();
+
+  void focusHeadwordsDialog();
+
+  void proxyAuthentication( const QNetworkProxy & proxy, QAuthenticator * authenticator );
+
+  void showFullTextSearchDialog();
+  void closeFullTextSearchDialog();
+
 signals:
   /// Set optional parts expand mode for all tabs
   void setExpandOptionalParts( bool expand );
@@ -409,7 +434,8 @@ signals:
   /// For receiving message from scan libraries
 protected:
   unsigned gdAskMessage;
-  bool winEvent( MSG * message, long * result );
+public:
+  bool handleGDMessage( MSG * message, long * result );
 
 private slots:
   /// Return true while scanning GoldenDict window

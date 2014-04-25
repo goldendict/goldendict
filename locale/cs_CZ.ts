@@ -342,6 +342,25 @@ a školní ortografií v cyrilici)</translation>
     </message>
 </context>
 <context>
+    <name>Dialog</name>
+    <message>
+        <source>Proxy authentication required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need to supply a Username and a Password to access via proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished">Heslo:</translation>
+    </message>
+</context>
+<context>
     <name>DictGroupWidget</name>
     <message>
         <source>Form</source>
@@ -420,6 +439,93 @@ a školní ortografií v cyrilici)</translation>
     </message>
 </context>
 <context>
+    <name>DictHeadwords</name>
+    <message>
+        <source>Search mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This element determines how filter string will be interpreted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If checked on the symbols case will be take in account when filtering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Match case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exports headwords to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press this button to apply filter to headwords list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If checked any filter changes will we immediately applied to headwords list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter string (fixed string, wildcards or regular expression)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wildcards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RegExp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique headwords total: %1, filtered: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save headwords to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text files (*.txt);;All files (*.*)</source>
+        <translation type="unfinished">Textové soubory (*.txt);;Všechny soubory (*.*)</translation>
+    </message>
+    <message>
+        <source>Export headwords...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Zrušit</translation>
+    </message>
+</context>
+<context>
     <name>DictInfo</name>
     <message>
         <source>Total articles:</source>
@@ -459,6 +565,14 @@ a školní ortografií v cyrilici)</translation>
         <translation>Upravit slovník příkazem:
 %1</translation>
     </message>
+    <message>
+        <source>Show all unique dictionary headwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Headwords</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictListModel</name>
@@ -496,6 +610,10 @@ a školní ortografií v cyrilici)</translation>
     <message>
         <source>Extended menu with all dictionaries...</source>
         <translation>Rozšířit nabídku se všemi slovníky...</translation>
+    </message>
+    <message>
+        <source>Dictionary headwords</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -716,6 +834,14 @@ a školní ortografií v cyrilici)</translation>
     <message>
         <source>Auto groups</source>
         <translation>Automatické skupiny</translation>
+    </message>
+    <message>
+        <source>Group tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open groups list</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2825,6 +2951,15 @@ a školní ortografií v cyrilici)</translation>
         <source>Open dictionary folder</source>
         <translation>Otevřít složku slovníků</translation>
     </message>
+    <message>
+        <source>Dictionary headwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
+To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -2932,6 +3067,10 @@ a školní ortografií v cyrilici)</translation>
     <message>
         <source>Sort by languages</source>
         <translation>Seřadit podle jazyků</translation>
+    </message>
+    <message>
+        <source>Dictionary headwords</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3576,6 +3715,18 @@ Povolením této volby problém obejdete.</translation>
     <message>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Články delší než tato velikost budou sbaleny</translation>
+    </message>
+    <message>
+        <source>System proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

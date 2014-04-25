@@ -38,6 +38,7 @@ namespace BtreeIndexing {
 
 using gd::wstring;
 using gd::wchar;
+using std::pair;
 
 enum
 {
@@ -82,9 +83,12 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
 
   try
   {
-    wstring folded = Folding::apply( str );
+    // Exast search - unescape all wildcard symbols
+    wstring word = Folding::unescapeWildcardSymbols( str );
+
+    wstring folded = Folding::apply( word );
     if( folded.empty() )
-      folded = Folding::applyWhitespaceOnly( str );
+      folded = Folding::applyWhitespaceOnly( word );
 
     bool exactMatch;
 
@@ -101,7 +105,7 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
     {
       result = readChain( chainOffset );
 
-      antialias( str, result );
+      antialias( word, result );
     }
   }
   catch( std::exception & e )
@@ -205,9 +209,75 @@ void BtreeWordSearchRequest::run()
     return;
   }
   
+  QRegExp regexp;
+  bool useWildcards = false;
+  if( allowMiddleMatches )
+    useWildcards = ( str.find( '*' ) != wstring::npos ||
+                     str.find( '?' ) != wstring::npos ||
+                     str.find( '[' ) != wstring::npos ||
+                     str.find( ']' ) != wstring::npos );
+  else
+  {
+    // Exast search - unescape all wildcard symbols
+    str = Folding::unescapeWildcardSymbols( str );
+  }
+
   wstring folded = Folding::apply( str );
-  if( folded.empty() )
-    folded = Folding::applyWhitespaceOnly( str );
+
+  if( useWildcards )
+  {
+    regexp.setPattern( gd::toQString( Folding::applyDiacriticsOnly( Folding::applySimpleCaseOnly( str ) ) ) );
+    regexp.setPatternSyntax( QRegExp::WildcardUnix );
+    regexp.setCaseSensitivity( Qt::CaseInsensitive );
+
+    bool bNoLetters = folded.empty();
+    wstring foldedWithWildcards;
+
+    if( bNoLetters )
+      foldedWithWildcards = Folding::applyWhitespaceOnly( str );
+    else
+      foldedWithWildcards = Folding::apply( str, useWildcards );
+
+    folded.clear();
+    folded.reserve( foldedWithWildcards.size() );
+    for( wstring::size_type x = 0; x < foldedWithWildcards.size(); x++ )
+    {
+      wchar ch = foldedWithWildcards[ x ];
+
+      if( bNoLetters )
+      {
+        if( ch == '*' || ch == '?' || ch == '[' || ch == ']' )
+        {
+          // Store escaped symbols
+          wstring::size_type n = folded.size();
+          if( n && folded[ n - 1 ] == '\\' )
+          {
+            folded[ n - 1 ] = ch;
+            continue;
+          }
+          else
+            break;
+        }
+      }
+      else
+      {
+        if( ch == '\\' || ch == '*' || ch == '?' || ch == '[' || ch == ']' )
+        {
+          if( folded.empty() )
+            continue;
+          else
+            break;
+        }
+      }
+
+      folded.push_back( ch );
+    }
+  }
+  else
+  {
+    if( folded.empty() )
+      folded = Folding::applyWhitespaceOnly( str );
+  }
 
   int initialFoldedSize = folded.size();
 
@@ -262,12 +332,25 @@ void BtreeWordSearchRequest::run()
 
           for( unsigned x = 0; x < chain.size(); ++x )
           {
-            // Skip middle matches, if requested. If suffix variation is specified,
-            // make sure the string isn't larger than requested.
-            if ( ( allowMiddleMatches || Folding::apply( Utf8::decode( chain[ x ].prefix ) ).empty() ) &&
-                 ( maxSuffixVariation < 0 || (int)resultFolded.size() - initialFoldedSize <= maxSuffixVariation ) )
-                matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+            if( useWildcards )
+            {
+              wstring fullword = Utf8::decode( chain[ x ].prefix + chain[ x ].word  );
+              wstring result = Folding::applyDiacriticsOnly( fullword );
+              if( regexp.indexIn( gd::toQString( result ) ) == 0 )
+                matches.push_back( fullword );
+            }
+            else
+            {
+              // Skip middle matches, if requested. If suffix variation is specified,
+              // make sure the string isn't larger than requested.
+              if ( ( allowMiddleMatches || Folding::apply( Utf8::decode( chain[ x ].prefix ) ).empty() ) &&
+                   ( maxSuffixVariation < 0 || (int)resultFolded.size() - initialFoldedSize <= maxSuffixVariation ) )
+                  matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+            }
           }
+
+          if( isCancelled )
+            break;
 
           if ( matches.size() >= maxResults )
           {
@@ -420,6 +503,30 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
 
   char const * leaf = &rootNode.front();
   leafEnd = leaf + rootNode.size();
+
+  if( target.empty() )
+  {
+    //For empty target string we return first chain in index
+    for( ; ; )
+    {
+      uint32_t leafEntries = *(uint32_t *)leaf;
+
+      if ( leafEntries == 0xffffFFFF )
+      {
+        // A node
+        currentNodeOffset = *( (uint32_t *)leaf + 1 );
+        readNode( currentNodeOffset, extLeaf );
+        leaf = &extLeaf.front();
+        leafEnd = leaf + extLeaf.size();
+        nextLeaf = idxFile->read< uint32_t >();
+      }
+      else
+      {
+        // A leaf
+        return leaf + sizeof( uint32_t );
+      }
+    }
+  }
 
   for( ; ; )
   {
@@ -708,8 +815,6 @@ vector< WordArticleLink > BtreeIndex::readChain( char const * & ptr )
   ptr += sizeof( uint32_t );
 
   vector< WordArticleLink > result;
-
-  vector< char > charBuffer;
 
   while( chainSize )
   {
@@ -1071,6 +1176,273 @@ IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )
                                         lastLeafOffset );
 
   return IndexInfo( btreeMaxElements, rootOffset );
+}
+
+void BtreeIndex::getAllHeadwords( QSet< QString > & headwords )
+{
+  if ( !idxFile )
+    throw exIndexWasNotOpened();
+
+  findArticleLinks( NULL, NULL, &headwords );
+}
+
+void BtreeIndex::findAllArticleLinks( QVector< WordArticleLink > & articleLinks )
+{
+  if ( !idxFile )
+    throw exIndexWasNotOpened();
+
+  QSet< uint32_t > offsets;
+
+  findArticleLinks( &articleLinks, &offsets, NULL );
+}
+
+void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
+                                   QSet< uint32_t > * offsets,
+                                   QSet< QString > *headwords,
+                                   QAtomicInt * isCancelled )
+{
+  uint32_t currentNodeOffset = rootOffset;
+  uint32_t nextLeaf = 0;
+  uint32_t leafEntries;
+
+  Mutex::Lock _( *idxFileMutex );
+
+  if ( !rootNodeLoaded )
+  {
+    // Time to load our root node. We do it only once, at the first request.
+    readNode( rootOffset, rootNode );
+    rootNodeLoaded = true;
+  }
+
+  char const * leaf = &rootNode.front();
+  char const * leafEnd = leaf + rootNode.size();
+  char const * chainPtr = 0;
+
+  vector< char > extLeaf;
+
+  // Find first leaf
+
+  for( ; ; )
+  {
+    leafEntries = *(uint32_t *)leaf;
+
+    if( isCancelled && *isCancelled )
+      return;
+
+    if ( leafEntries == 0xffffFFFF )
+    {
+      // A node
+      currentNodeOffset = *( (uint32_t *)leaf + 1 );
+      readNode( currentNodeOffset, extLeaf );
+      leaf = &extLeaf.front();
+      leafEnd = leaf + extLeaf.size();
+      nextLeaf = idxFile->read< uint32_t >();
+    }
+    else
+    {
+      // A leaf
+      chainPtr = leaf + sizeof( uint32_t );
+      break;
+    }
+  }
+
+  if ( !leafEntries )
+  {
+    // Empty leaf? This may only be possible for entirely empty trees only.
+    if ( currentNodeOffset != rootOffset )
+      throw exCorruptedChainData();
+    else
+      return; // No match
+  }
+
+  // Read all chains
+
+  for( ; ; )
+  {
+    vector< WordArticleLink > result = readChain( chainPtr );
+    for( unsigned i = 0; i < result.size(); i++ )
+    {
+      if( isCancelled && *isCancelled )
+        return;
+
+      if( headwords )
+        headwords->insert( QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+
+      if( offsets && offsets->contains( result[ i ].articleOffset ) )
+        continue;
+
+      if( offsets )
+        offsets->insert( result[ i ].articleOffset );
+
+      if( articleLinks )
+        articleLinks->push_back( WordArticleLink( result[ i ].prefix + result[ i ].word, result[ i ].articleOffset ) );
+    }
+
+    if ( chainPtr >= leafEnd )
+    {
+      // We're past the current leaf, fetch the next one
+
+      if ( nextLeaf )
+      {
+        readNode( nextLeaf, extLeaf );
+        leaf = &extLeaf.front();
+        leafEnd = leaf + extLeaf.size();
+
+        nextLeaf = idxFile->read< uint32_t >();
+        chainPtr = leaf + sizeof( uint32_t );
+
+        leafEntries = *(uint32_t *)leaf;
+
+        if ( leafEntries == 0xffffFFFF )
+          throw exCorruptedChainData();
+      }
+      else
+        break; // That was the last leaf
+    }
+  }
+}
+
+void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
+                                          QVector<QString> & headwords,
+                                          QAtomicInt * isCancelled )
+{
+  uint32_t currentNodeOffset = rootOffset;
+  uint32_t nextLeaf = 0;
+  uint32_t leafEntries;
+
+  Mutex::Lock _( *idxFileMutex );
+
+  if ( !rootNodeLoaded )
+  {
+    // Time to load our root node. We do it only once, at the first request.
+    readNode( rootOffset, rootNode );
+    rootNodeLoaded = true;
+  }
+
+  char const * leaf = &rootNode.front();
+  char const * leafEnd = leaf + rootNode.size();
+  char const * chainPtr = 0;
+
+  vector< char > extLeaf;
+
+  // Find first leaf
+
+  for( ; ; )
+  {
+    leafEntries = *(uint32_t *)leaf;
+
+    if( isCancelled && *isCancelled )
+      return;
+
+    if ( leafEntries == 0xffffFFFF )
+    {
+      // A node
+      currentNodeOffset = *( (uint32_t *)leaf + 1 );
+      readNode( currentNodeOffset, extLeaf );
+      leaf = &extLeaf.front();
+      leafEnd = leaf + extLeaf.size();
+      nextLeaf = idxFile->read< uint32_t >();
+    }
+    else
+    {
+      // A leaf
+      chainPtr = leaf + sizeof( uint32_t );
+      break;
+    }
+  }
+
+  if ( !leafEntries )
+  {
+    // Empty leaf? This may only be possible for entirely empty trees only.
+    if ( currentNodeOffset != rootOffset )
+      throw exCorruptedChainData();
+    else
+      return; // No match
+  }
+
+  // Read all chains
+
+  for( ; ; )
+  {
+    vector< WordArticleLink > result = readChain( chainPtr );
+    for( unsigned i = 0; i < result.size(); i++ )
+    {
+      for( QList< uint32_t >::Iterator it = offsets.begin();
+           it != offsets.end(); ++it )
+      {
+        if( isCancelled && *isCancelled )
+          return;
+
+        if( result.at( i ).articleOffset == *it )
+        {
+          headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+          offsets.erase( it );
+          break;
+        }
+      }
+      if( offsets.isEmpty() )
+        break;
+    }
+
+    if( offsets.isEmpty() )
+      break;
+
+    if ( chainPtr >= leafEnd )
+    {
+      // We're past the current leaf, fetch the next one
+
+      if ( nextLeaf )
+      {
+        readNode( nextLeaf, extLeaf );
+        leaf = &extLeaf.front();
+        leafEnd = leaf + extLeaf.size();
+
+        nextLeaf = idxFile->read< uint32_t >();
+        chainPtr = leaf + sizeof( uint32_t );
+
+        leafEntries = *(uint32_t *)leaf;
+
+        if ( leafEntries == 0xffffFFFF )
+          throw exCorruptedChainData();
+      }
+      else
+        break; // That was the last leaf
+    }
+  }
+}
+
+bool BtreeDictionary::getHeadwords( QStringList &headwords )
+{
+  QSet< QString > setOfHeadwords;
+
+  headwords.clear();
+  setOfHeadwords.reserve( getWordCount() );
+
+  try
+  {
+    getAllHeadwords( setOfHeadwords );
+
+    if( setOfHeadwords.size() )
+    {
+      headwords.reserve( setOfHeadwords.size() );
+
+      QSet< QString >::const_iterator it = setOfHeadwords.constBegin();
+      QSet< QString >::const_iterator end = setOfHeadwords.constEnd();
+
+      for( ; it != end; ++it )
+        headwords.append( *it );
+    }
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Failed headwords retrieving for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+
+  return headwords.size() > 0;
+}
+
+void BtreeDictionary::getArticleText(uint32_t, QString &, QString & )
+{
 }
 
 }

@@ -131,15 +131,4 @@ bool isNameOfSvg( string const & name )
     endsWith( s, ".svg" );
 }
 
-bool isNameOfContent( string const & name )
-{
-  string s = simplifyString( name );
-
-  return
-    endsWith( s, ".swf" ) ||
-    endsWith( s, ".htm" ) ||
-    endsWith( s, ".html" ) ||
-    endsWith( s, ".pdf" );
-}
-
 }

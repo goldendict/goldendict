@@ -41,7 +41,8 @@ void ArticleMaker::setDisplayStyle( QString const & st, QString const & adst )
 }
 
 std::string ArticleMaker::makeHtmlHeader( QString const & word,
-                                          QString const & icon ) const
+                                          QString const & icon,
+                                          bool expandOptionalParts ) const
 {
   string result =
     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
@@ -81,7 +82,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += css.data();
 
     // Turn on/off expanding of article optional parts
-    if( needExpandOptionalParts )
+    if( expandOptionalParts )
       result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none;\n}\n";
 
     result += "</style>\n";
@@ -201,12 +202,41 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
 sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   QString const & inWord, unsigned groupId,
   QMap< QString, QString > const & contexts,
-  QSet< QString > const & mutedDicts ) const
+  QSet< QString > const & mutedDicts,
+  QStringList const & dictIDs ) const
 {
+  if( !dictIDs.isEmpty() )
+  {
+    QStringList ids = dictIDs;
+    std::vector< sptr< Dictionary::Class > > ftsDicts;
+
+    // Find dictionaries by ID's
+    for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
+      for( QStringList::Iterator it = ids.begin(); it != ids.end(); ++it )
+      {
+        if( *it == QString::fromStdString( dictionaries[ x ]->getId() ) )
+        {
+          ftsDicts.push_back( dictionaries[ x ] );
+          ids.erase( it );
+          break;
+        }
+      }
+      if( ids.isEmpty() )
+        break;
+    }
+
+    string header = makeHtmlHeader( inWord.trimmed(), QString(), true );
+
+    return new ArticleRequest( inWord.trimmed(), "",
+                               contexts, ftsDicts, header,
+                               -1, true );
+  }
+
   if ( groupId == Instances::Group::HelpGroupId )
   {
     // This is a special group containing internal welcome/help pages
-    string result = makeHtmlHeader( inWord, QString() );
+    string result = makeHtmlHeader( inWord, QString(), needExpandOptionalParts );
 
     if ( inWord == tr( "Welcome!" ) )
     {
@@ -278,7 +308,8 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
 
   string header = makeHtmlHeader( inWord.trimmed(),
                                   activeGroup && activeGroup->icon.size() ?
-                                    activeGroup->icon : QString() );
+                                    activeGroup->icon : QString(),
+                                  needExpandOptionalParts );
 
   if ( mutedDicts.size() )
   {
@@ -306,7 +337,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
   QString const & word, QString const & group ) const
 {
-  string result = makeHtmlHeader( word, QString() ) + makeNotFoundBody( word, group ) +
+  string result = makeHtmlHeader( word, QString(), true ) + makeNotFoundBody( word, group ) +
     "</body></html>";
 
   sptr< Dictionary::DataRequestInstant > r = new Dictionary::DataRequestInstant( true );
@@ -319,7 +350,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
 {
-  string result = makeHtmlHeader( tr( "(untitled)" ), QString() ) +
+  string result = makeHtmlHeader( tr( "(untitled)" ), QString(), true ) +
     "</body></html>";
 
   sptr< Dictionary::DataRequestInstant > r =
@@ -333,7 +364,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
 
 sptr< Dictionary::DataRequest > ArticleMaker::makePicturePage( string const & url ) const
 {
-  string result = makeHtmlHeader( tr( "(picture)" ), QString() )
+  string result = makeHtmlHeader( tr( "(picture)" ), QString(), true )
                   + "<a href=\"javascript: if(history.length>2) history.go(-1)\">"
                   + "<img src=\"" + url + "\" /></a>"
                   + "</body></html>";

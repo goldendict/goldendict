@@ -141,6 +141,9 @@ bool Babylon::readBlock( bgl_block &block )
   if( block.length )
   {
     block.data = (char *)malloc( block.length );
+    if( !block.data )
+      return false;
+
     unsigned res = gzread( file, block.data, block.length );
     if( block.length != res )
     {
@@ -800,6 +803,11 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   char *inbuf;
   inbuf = (char *)s.data();
   outbuf = (char*)malloc( outbufbytes + 1 );
+  if( !outbuf )
+  {
+    qFatal( "Memory allocation error in Babylon::convertToUtf8()" );
+    exit(1);
+  }
   memset( outbuf, '\0', outbufbytes + 1 );
   defbuf = outbuf;
   while (inbufbytes) {

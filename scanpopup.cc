@@ -12,6 +12,7 @@
 #include <QMouseEvent>
 #include <QDesktopWidget>
 #include "gddebug.hh"
+#include "gestures.hh"
 
 #ifdef Q_OS_MACX
 #include "macmouseover.hh"
@@ -26,7 +27,7 @@ using std::wstring;
 /// in their behavior on those platforms.
 static Qt::WindowFlags popupWindowFlags =
 
-#ifdef Q_WS_WIN
+#if defined (Q_OS_WIN) || defined (Q_OS_MACX)
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup
@@ -48,6 +49,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   escapeAction( this ),
   switchExpandModeAction( this ),
   focusTranslateLineAction( this ),
+  openSearchAction( this ),
   wordFinder( this ),
   dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine, cfg.preferences.maxDictionaryRefsInContextMenu ),
   mouseEnteredOnce( false ),
@@ -56,12 +58,22 @@ ScanPopup::ScanPopup( QWidget * parent,
 {
   ui.setupUi( this );
 
+  openSearchAction.setShortcut( QKeySequence( "Ctrl+F" ) );
+
+  if( layoutDirection() == Qt::RightToLeft )
+  {
+    // Adjust button icons for Right-To-Left layout
+    ui.goBackButton->setIcon( QIcon( ":/icons/next.png" ) );
+    ui.goForwardButton->setIcon( QIcon( ":/icons/previous.png" ) );
+  }
+
   mainStatusBar = new MainStatusBar( this );
 
   ui.queryError->hide();
 
   definition = new ArticleView( ui.outerFrame, articleNetMgr, allDictionaries,
                                 groups, true, cfg,
+                                openSearchAction,
                                 dictionaryBar.toggleViewAction()
                                 );
 
@@ -213,6 +225,10 @@ ScanPopup::ScanPopup( QWidget * parent,
 #ifdef Q_WS_X11
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
+#else
+  if( cfg.preferences.trackClipboardChanges )
+    connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
+             this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
 #endif
 
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),
@@ -251,6 +267,10 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.goBackButton->setEnabled( false );
   ui.goForwardButton->setEnabled( false );
 
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  grabGesture( Gestures::GDPinchGestureType );
+  grabGesture( Gestures::GDSwipeGestureType );
+#endif
 }
 
 ScanPopup::~ScanPopup()
@@ -261,6 +281,11 @@ ScanPopup::~ScanPopup()
   cfg.pinPopupWindow = ui.pinButton->isChecked();
 
   disableScanning();
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  ungrabGesture( Gestures::GDPinchGestureType );
+  ungrabGesture( Gestures::GDSwipeGestureType );
+#endif
 }
 
 void ScanPopup::enableScanning()

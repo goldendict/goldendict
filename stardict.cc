@@ -14,6 +14,9 @@
 #include "fsencoding.hh"
 #include "filetype.hh"
 #include "indexedzip.hh"
+#include "tiff.hh"
+#include "ftshelpers.hh"
+#include "wstring_qt.hh"
 
 #include <zlib.h>
 #include <map>
@@ -65,6 +68,7 @@ DEF_EX( exDicttypeNotSupported, "Dictionaries with dicttypes are not supported, 
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX_STR( exWordIsTooLarge, "Enountered a word that is too large:", Dictionary::Ex )
 DEF_EX_STR( exSuddenEndOfFile, "Sudden end of file", Dictionary::Ex )
+DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 
 DEF_EX_STR( exIncorrectOffset, "Incorrect offset encountered in file", Dictionary::Ex )
 
@@ -173,6 +177,20 @@ public:
 
   virtual QString getMainFilename();
 
+  virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                            int searchMode, bool matchCase,
+                                                            int distanceBetweenWords,
+                                                            int maxResults );
+  virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+  virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
+
+  virtual void setFTSParameters( Config::FullTextSearch const & fts )
+  {
+    can_FTS = fts.enabled
+              && !fts.disabledTypes.contains( "STARDICT", Qt::CaseInsensitive )
+              && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+  }
 protected:
 
   void loadIcon() throw();
@@ -211,10 +229,12 @@ StardictDictionary::StardictDictionary( string const & id,
 {
   // Open the .dict file
 
-  dz = dict_data_open( dictionaryFiles[ 2 ].c_str(), 0 );
+  DZ_ERRORS error;
+  dz = dict_data_open( dictionaryFiles[ 2 ].c_str(), &error, 0 );
 
   if ( !dz )
-    throw exCantReadFile( dictionaryFiles[ 2 ] );
+    throw exDictzipError( string( dz_error_str( error ) )
+                          + "(" + dictionaryFiles[ 2 ] + ")" );
 
   // Initialize the index
 
@@ -237,6 +257,27 @@ StardictDictionary::StardictDictionary( string const & id,
 
     if ( zipName.endsWith( ".zip", Qt::CaseInsensitive ) ) // Sanity check
       resourceZip.openZipFile( zipName );
+  }
+
+  // Full-text search parameters
+
+  can_FTS = true;
+
+  quint32 lang = getLangTo();
+  if( lang == LangCoder::code2toInt( "zh" )
+      || lang == LangCoder::code2toInt( "ja" ) )
+  {
+    // Don't index articles in some languages which don't use spaces
+    can_FTS_index = false;
+  }
+  else
+  {
+    can_FTS_index = true;
+    ftsIdxName = indexFile + "_FTS";
+
+    if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
+                           && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      FTS_index_completed.ref();
   }
 }
 
@@ -556,6 +597,63 @@ QString const& StardictDictionary::getDescription()
 QString StardictDictionary::getMainFilename()
 {
   return FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
+}
+
+void StardictDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
+{
+  if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+    FTS_index_completed.ref();
+
+  if( haveFTSIndex() )
+    return;
+
+  if( ensureInitDone().size() )
+    return;
+
+  if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
+    return;
+
+  gdDebug( "Stardict: Building the full-text index for dictionary: %s\n",
+           getName().c_str() );
+
+  try
+  {
+    FtsHelpers::makeFTSIndex( this, isCancelled );
+    FTS_index_completed.ref();
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Stardict: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+  }
+}
+
+void StardictDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
+  try
+  {
+    string headwordStr, articleStr;
+    loadArticle( articleAddress, headwordStr, articleStr );
+
+    headword = QString::fromUtf8( headwordStr.data(), headwordStr.size() );
+
+    wstring wstr = Utf8::decode( articleStr );
+
+    text = Html::unescape( gd::toQString( wstr ) );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "Stardict: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+}
+
+sptr< Dictionary::DataRequest > StardictDictionary::getSearchResults( QString const & searchString,
+                                                                      int searchMode, bool matchCase,
+                                                                      int distanceBetweenWords,
+                                                                      int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
 }
 
 /// StardictDictionary::findHeadwordsForSynonym()
@@ -1082,6 +1180,11 @@ void StardictResourceRequest::run()
 
       QImage img = QImage::fromData( (unsigned char *) &data.front(),
                                      data.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+      if( img.isNull() )
+        GdTiff::tiffToQImage( &data.front(), data.size(), img );
+#endif
 
       dataMutex.unlock();
 

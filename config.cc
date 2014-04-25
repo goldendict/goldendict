@@ -50,7 +50,7 @@ namespace
 
 }
 
-ProxyServer::ProxyServer(): enabled( false ), type( Socks5 ), port( 3128 )
+ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Socks5 ), port( 3128 )
 {
 }
 
@@ -130,6 +130,9 @@ Preferences::Preferences():
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
 , maxDictionaryRefsInContextMenu ( 20 )
+#ifndef Q_WS_X11
+, trackClipboardChanges( false )
+#endif
 {
 }
 
@@ -713,11 +716,14 @@ Class load() throw( exError )
     if ( !proxy.isNull() )
     {
       c.preferences.proxyServer.enabled = ( proxy.toElement().attribute( "enabled" ) == "1" );
+      c.preferences.proxyServer.useSystemProxy = ( proxy.toElement().attribute( "useSystemProxy" ) == "1" );
       c.preferences.proxyServer.type = ( ProxyServer::Type ) proxy.namedItem( "type" ).toElement().text().toULong();
       c.preferences.proxyServer.host = proxy.namedItem( "host" ).toElement().text();
       c.preferences.proxyServer.port = proxy.namedItem( "port" ).toElement().text().toULong();
       c.preferences.proxyServer.user = proxy.namedItem( "user" ).toElement().text();
       c.preferences.proxyServer.password = proxy.namedItem( "password" ).toElement().text();
+      c.preferences.proxyServer.systemProxyUser = proxy.namedItem( "systemProxyUser" ).toElement().text();
+      c.preferences.proxyServer.systemProxyPassword = proxy.namedItem( "systemProxyPassword" ).toElement().text();
     }
 
     if ( !preferences.namedItem( "checkForNewReleases" ).isNull() )
@@ -755,6 +761,47 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
       c.preferences.maxDictionaryRefsInContextMenu = preferences.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
+
+#ifndef Q_WS_X11
+    if ( !preferences.namedItem( "trackClipboardChanges" ).isNull() )
+      c.preferences.trackClipboardChanges = ( preferences.namedItem( "trackClipboardChanges" ).toElement().text() == "1" );
+#endif
+
+    QDomNode fts = preferences.namedItem( "fullTextSearch" );
+
+    if ( !fts.isNull() )
+    {
+      if ( !fts.namedItem( "searchMode" ).isNull() )
+        c.preferences.fts.searchMode = fts.namedItem( "searchMode" ).toElement().text().toInt();
+
+      if ( !fts.namedItem( "matchCase" ).isNull() )
+        c.preferences.fts.matchCase = ( fts.namedItem( "matchCase" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "maxArticlesPerDictionary" ).isNull() )
+        c.preferences.fts.maxArticlesPerDictionary = fts.namedItem( "maxArticlesPerDictionary" ).toElement().text().toInt();
+
+      if ( !fts.namedItem( "maxDistanceBetweenWords" ).isNull() )
+        c.preferences.fts.maxDistanceBetweenWords = fts.namedItem( "maxDistanceBetweenWords" ).toElement().text().toInt();
+
+      if ( !fts.namedItem( "useMaxArticlesPerDictionary" ).isNull() )
+        c.preferences.fts.useMaxArticlesPerDictionary = ( fts.namedItem( "useMaxArticlesPerDictionary" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "useMaxDistanceBetweenWords" ).isNull() )
+        c.preferences.fts.useMaxDistanceBetweenWords = ( fts.namedItem( "useMaxDistanceBetweenWords" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "dialogGeometry" ).isNull() )
+        c.preferences.fts.dialogGeometry = QByteArray::fromBase64( fts.namedItem( "dialogGeometry" ).toElement().text().toLatin1() );
+
+      if( !fts.namedItem( "disabledTypes" ).isNull() )
+      c.preferences.fts.disabledTypes = fts.namedItem( "disabledTypes" ).toElement().text();
+
+      if ( !fts.namedItem( "enabled" ).isNull() )
+        c.preferences.fts.useMaxDistanceBetweenWords = ( fts.namedItem( "enabled" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "maxDictionarySize" ).isNull() )
+        c.preferences.fts.maxDictionarySize = fts.namedItem( "maxDictionarySize" ).toElement().text().toUInt();
+    }
+
   }
 
   c.lastMainGroupId = root.namedItem( "lastMainGroupId" ).toElement().text().toUInt();
@@ -860,6 +907,26 @@ Class load() throw( exError )
     {
       c.maxHeadwordSize = value;
     }
+  }
+
+  QDomNode headwordsDialog = root.namedItem( "headwordsDialog" );
+
+  if ( !headwordsDialog.isNull() )
+  {
+    if ( !headwordsDialog.namedItem( "searchMode" ).isNull() )
+      c.headwordsDialog.searchMode = headwordsDialog.namedItem( "searchMode" ).toElement().text().toInt();
+
+    if ( !headwordsDialog.namedItem( "matchCase" ).isNull() )
+      c.headwordsDialog.matchCase = ( headwordsDialog.namedItem( "matchCase" ).toElement().text() == "1" );
+
+    if ( !headwordsDialog.namedItem( "autoApply" ).isNull() )
+      c.headwordsDialog.autoApply = ( headwordsDialog.namedItem( "autoApply" ).toElement().text() == "1" );
+
+    if ( !headwordsDialog.namedItem( "headwordsExportPath" ).isNull() )
+      c.headwordsDialog.headwordsExportPath = headwordsDialog.namedItem( "headwordsExportPath" ).toElement().text();
+
+    if ( !headwordsDialog.namedItem( "headwordsDialogGeometry" ).isNull() )
+      c.headwordsDialog.headwordsDialogGeometry = QByteArray::fromBase64( headwordsDialog.namedItem( "headwordsDialogGeometry" ).toElement().text().toLatin1() );
   }
 
   return c;
@@ -1437,6 +1504,10 @@ void save( Class const & c ) throw( exError )
       enabled.setValue( c.preferences.proxyServer.enabled ? "1" : "0" );
       proxy.setAttributeNode( enabled );
 
+      QDomAttr useSystemProxy = dd.createAttribute( "useSystemProxy" );
+      useSystemProxy.setValue( c.preferences.proxyServer.useSystemProxy ? "1" : "0" );
+      proxy.setAttributeNode( useSystemProxy );
+
       opt = dd.createElement( "type" );
       opt.appendChild( dd.createTextNode( QString::number( c.preferences.proxyServer.type ) ) );
       proxy.appendChild( opt );
@@ -1455,6 +1526,14 @@ void save( Class const & c ) throw( exError )
 
       opt = dd.createElement( "password" );
       opt.appendChild( dd.createTextNode( c.preferences.proxyServer.password ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "systemProxyUser" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.systemProxyUser ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "systemProxyPassword" );
+      opt.appendChild( dd.createTextNode( c.preferences.proxyServer.systemProxyPassword ) );
       proxy.appendChild( opt );
     }
 
@@ -1500,7 +1579,59 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "maxDictionaryRefsInContextMenu" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.maxDictionaryRefsInContextMenu ) ) );
-    preferences.appendChild( opt ); }
+    preferences.appendChild( opt );
+
+#ifndef Q_WS_X11
+    opt = dd.createElement( "trackClipboardChanges" );
+    opt.appendChild( dd.createTextNode( c.preferences.trackClipboardChanges ? "1" : "0" ) );
+    preferences.appendChild( opt );
+#endif
+    {
+      QDomNode hd = dd.createElement( "fullTextSearch" );
+      preferences.appendChild( hd );
+
+      QDomElement opt = dd.createElement( "searchMode" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.searchMode ) ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "matchCase" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.matchCase ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "maxArticlesPerDictionary" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.maxArticlesPerDictionary ) ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "maxDistanceBetweenWords" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.maxDistanceBetweenWords ) ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "useMaxArticlesPerDictionary" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.useMaxArticlesPerDictionary ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "useMaxDistanceBetweenWords" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.useMaxDistanceBetweenWords ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "dialogGeometry" );
+      opt.appendChild( dd.createTextNode( QString::fromLatin1( c.preferences.fts.dialogGeometry.toBase64() ) ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "disabledTypes" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.disabledTypes ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "enabled" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.enabled ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "maxDictionarySize" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.maxDictionarySize ) ) );
+      hd.appendChild( opt );
+    }
+
+  }
 
   {
     QDomElement opt = dd.createElement( "lastMainGroupId" );
@@ -1629,6 +1760,31 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "maxHeadwordSize" );
     opt.appendChild( dd.createTextNode( QString::number( c.maxHeadwordSize ) ) );
     root.appendChild( opt );
+  }
+
+  {
+    QDomNode hd = dd.createElement( "headwordsDialog" );
+    root.appendChild( hd );
+
+    QDomElement opt = dd.createElement( "searchMode" );
+    opt.appendChild( dd.createTextNode( QString::number( c.headwordsDialog.searchMode ) ) );
+    hd.appendChild( opt );
+
+    opt = dd.createElement( "matchCase" );
+    opt.appendChild( dd.createTextNode( c.headwordsDialog.matchCase ? "1" : "0" ) );
+    hd.appendChild( opt );
+
+    opt = dd.createElement( "autoApply" );
+    opt.appendChild( dd.createTextNode( c.headwordsDialog.autoApply ? "1" : "0" ) );
+    hd.appendChild( opt );
+
+    opt = dd.createElement( "headwordsExportPath" );
+    opt.appendChild( dd.createTextNode( c.headwordsDialog.headwordsExportPath ) );
+    hd.appendChild( opt );
+
+    opt = dd.createElement( "headwordsDialogGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.headwordsDialog.headwordsDialogGeometry.toBase64() ) ) );
+    hd.appendChild( opt );
   }
 
   QByteArray result( dd.toByteArray() );

@@ -18,6 +18,10 @@
 #include "zipfile.hh"
 #include "indexedzip.hh"
 #include "gddebug.hh"
+#include "tiff.hh"
+#include "fulltextsearch.hh"
+#include "ftshelpers.hh"
+#include "language.hh"
 
 #include <zlib.h>
 #include <map>
@@ -39,6 +43,9 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QPainter>
+#include <QMap>
+#include <QStringList>
+#include <QRegExp>
 
 // For TIFF conversion
 #include <QImage>
@@ -69,11 +76,13 @@ using BtreeIndexing::IndexInfo;
 namespace {
 
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
+DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
+DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 19 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 21 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2
 };
 
@@ -109,12 +118,12 @@ struct InsidedCard
 {
   uint32_t offset;
   uint32_t size;
-  wstring headword;
-  InsidedCard( uint32_t _offset, uint32_t _size, wstring const & word ) :
-  offset( _offset ), size( _size ), headword( word )
+  QVector< wstring > headwords;
+  InsidedCard( uint32_t _offset, uint32_t _size, QVector< wstring > const & words ) :
+  offset( _offset ), size( _size ), headwords( words )
   {}
   InsidedCard( InsidedCard const & e ) :
-  offset( e.offset ), size( e.size ), headword( e.headword )
+  offset( e.offset ), size( e.size ), headwords( e.headwords )
   {}
   InsidedCard() {}
 
@@ -202,9 +211,27 @@ public:
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
     throw( std::exception );
 
+  virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                            int searchMode, bool matchCase,
+                                                            int distanceBetweenWords,
+                                                            int maxResults );
   virtual QString const& getDescription();
 
   virtual QString getMainFilename();
+
+  virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+  virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
+
+  virtual void setFTSParameters( Config::FullTextSearch const & fts )
+  {
+    if( ensureInitDone().size() )
+      return;
+
+    can_FTS = fts.enabled
+              && !fts.disabledTypes.contains( "DSL", Qt::CaseInsensitive )
+              && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+  }
 
 protected:
 
@@ -224,7 +251,7 @@ private:
                     wstring & articleText );
 
   /// Converts DSL language to an Html.
-  string dslToHtml( wstring const & );
+  string dslToHtml( wstring const &, wstring const & headword = wstring() );
 
   // Parts of dslToHtml()
   string nodeToHtml( ArticleDom::Node const & );
@@ -235,6 +262,7 @@ private:
 
   friend class DslArticleRequest;
   friend class DslResourceRequest;
+  friend class DslFTSResultsRequest;
   friend class DslDeferredInitRunnable;
 };
 
@@ -251,6 +279,25 @@ DslDictionary::DslDictionary( string const & id,
   articleNom( 0 ),
   maxPictureWidth( maxPictureWidth_ )
 {
+  can_FTS = true;
+
+  Language::Id lang = getLangTo();
+  if( lang == LangCoder::code2toInt( "zh" )
+      || lang == LangCoder::code2toInt( "ja" ) )
+  {
+    // Don't index articles in some languages which don't use spaces
+    can_FTS_index = false;
+  }
+  else
+  {
+    can_FTS_index = true;
+    ftsIdxName = indexFile + "_FTS";
+
+    if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
+        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      FTS_index_completed.ref();
+  }
+
   // Read the dictionary name
 
   idx.seek( sizeof( idxHeader ) );
@@ -348,10 +395,12 @@ void DslDictionary::doDeferredInit()
 
       // Open the .dsl file
 
-      dz = dict_data_open( getDictionaryFilenames()[ 0 ].c_str(), 0 );
+      DZ_ERRORS error;
+      dz = dict_data_open( getDictionaryFilenames()[ 0 ].c_str(), &error, 0 );
 
       if ( !dz )
-        throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
+        throw exDictzipError( string( dz_error_str( error ) )
+                              + "(" + getDictionaryFilenames()[ 0 ] + ")" );
 
       // Read the abrv, if any
 
@@ -536,6 +585,9 @@ void DslDictionary::loadArticle( uint32_t address,
   bool hadFirstHeadword = false;
   bool foundDisplayedHeadword = false;
 
+  // Check is we retrieve insided card
+  bool insidedCard = isDslWs( articleData.at( 0 ) );
+
   wstring tildeValueWithUnsorted; // This one has unsorted parts left
   for( headwordIndex = 0; ; )
   {
@@ -552,88 +604,88 @@ void DslDictionary::loadArticle( uint32_t address,
 
       wstring rawHeadword = wstring( articleData, begin, pos - begin );
 
-      if ( !hadFirstHeadword )
-      {
-        // We need our tilde expansion value
-        tildeValue = rawHeadword;
-
-        list< wstring > lst;
-
-        expandOptionalParts( tildeValue, &lst );
-
-        if ( lst.size() ) // Should always be
-          tildeValue = lst.front();
-
-        tildeValueWithUnsorted = tildeValue;
-
-        processUnsortedParts( tildeValue, false );
-      }
-
-      wstring str = rawHeadword;
-
-      if ( hadFirstHeadword )
-        expandTildes( str, tildeValueWithUnsorted );
-
-      processUnsortedParts( str, true );
-
-      str = Folding::applySimpleCaseOnly( str );
-
-      list< wstring > lst;
-      expandOptionalParts( str, &lst );
-
-      // Does one of the results match the requested word? If so, we'd choose
-      // it as our headword.
-
-      for( list< wstring >::iterator i = lst.begin(); i != lst.end(); ++i )
-      {
-        unescapeDsl( *i );
-        normalizeHeadword( *i );
-
-        if ( Folding::trimWhitespace( *i ) == requestedHeadwordFolded )
-        {
-          // Found it. Now we should make a displayed headword for it.
-          if ( hadFirstHeadword )
-            expandTildes( rawHeadword, tildeValueWithUnsorted );
-
-          processUnsortedParts( rawHeadword, false );
-
-          displayedHeadword = rawHeadword;
-
-          foundDisplayedHeadword = true;
-          break;
-        }
-      }
-
-      if( !rawHeadword.empty() && isDslWs( rawHeadword[ 0 ] ) )
+      if( insidedCard && !rawHeadword.empty() && isDslWs( rawHeadword[ 0 ] ) )
       {
         // Headword of the insided card
-        // Take it from card if no '~' presented
-        string::size_type pos = rawHeadword.find( L'@' );
-        if( pos != string::npos )
+        wstring::size_type hpos = rawHeadword.find( L'@' );
+        if( hpos != string::npos )
         {
-          wstring head = Folding::trimWhitespace( rawHeadword.substr( pos + 1 ) );
-          string::size_type tildaPos = head.find( L'~' );
-          while( tildaPos != string::npos )
+          wstring head = Folding::trimWhitespace( rawHeadword.substr( hpos + 1 ) );
+          hpos = head.find( L'~' );
+          while( hpos != string::npos )
           {
-            if( tildaPos == 0 || head[ tildaPos ] != L'\\' )
+            if( hpos == 0 || head[ hpos ] != L'\\' )
               break;
-            tildaPos = head.find( L'~', tildaPos + 1 );
+            hpos = head.find( L'~', hpos + 1 );
           }
-          if( tildaPos == string::npos )
-          {
-            processUnsortedParts( head, false );
-            displayedHeadword = head;
-            foundDisplayedHeadword = true;
-          }
+          if( hpos == string::npos )
+            rawHeadword = head;
+          else
+            rawHeadword.clear();
         }
       }
 
-      if ( !foundDisplayedHeadword )
+      if( !rawHeadword.empty() )
       {
-        ++headwordIndex;
-        hadFirstHeadword = true;
+        if ( !hadFirstHeadword )
+        {
+          // We need our tilde expansion value
+          tildeValue = rawHeadword;
+
+          list< wstring > lst;
+
+          expandOptionalParts( tildeValue, &lst );
+
+          if ( lst.size() ) // Should always be
+            tildeValue = lst.front();
+
+          tildeValueWithUnsorted = tildeValue;
+
+          processUnsortedParts( tildeValue, false );
+        }
+        wstring str = rawHeadword;
+
+        if ( hadFirstHeadword )
+          expandTildes( str, tildeValueWithUnsorted );
+
+        processUnsortedParts( str, true );
+
+        str = Folding::applySimpleCaseOnly( str );
+
+        list< wstring > lst;
+        expandOptionalParts( str, &lst );
+
+        // Does one of the results match the requested word? If so, we'd choose
+        // it as our headword.
+
+        for( list< wstring >::iterator i = lst.begin(); i != lst.end(); ++i )
+        {
+          unescapeDsl( *i );
+          normalizeHeadword( *i );
+
+          if ( Folding::trimWhitespace( *i ) == requestedHeadwordFolded )
+          {
+            // Found it. Now we should make a displayed headword for it.
+            if ( hadFirstHeadword )
+              expandTildes( rawHeadword, tildeValueWithUnsorted );
+
+            processUnsortedParts( rawHeadword, false );
+
+            displayedHeadword = rawHeadword;
+
+            foundDisplayedHeadword = true;
+            break;
+          }
+        }
+
+        if ( !foundDisplayedHeadword )
+        {
+          ++headwordIndex;
+          hadFirstHeadword = true;
+        }
       }
     }
+
 
     if ( pos == articleData.size() )
       break;
@@ -649,18 +701,40 @@ void DslDictionary::loadArticle( uint32_t address,
         ++pos;
     }
 
-    if ( pos == articleData.size() || isDslWs( articleData[ pos ] ) )
+    if ( pos == articleData.size() )
     {
-      // Ok, it's either end of article, or the begining of the article's text
+      // Ok, it's end of article
       break;
+    }
+    if( isDslWs( articleData[ pos ] ) )
+    {
+     // Check for begin article text
+      if( insidedCard )
+      {
+        // Check for next insided headword
+        wstring::size_type hpos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), pos );
+        if ( hpos == wstring::npos )
+          hpos = articleData.size();
+
+        wstring str = wstring( articleData, pos, hpos - pos );
+
+        hpos = str.find( L'@');
+        if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' )
+          break;
+      }
+      else
+        break;
     }
   }
 
   if ( !foundDisplayedHeadword )
   {
     // This is strange. Anyway, use tilde expansion value, it's better
-    // than nothing.
-    displayedHeadword = tildeValue;
+    // than nothing (or requestedHeadwordFolded for insided card.
+    if( insidedCard )
+      displayedHeadword = requestedHeadwordFolded;
+    else
+      displayedHeadword = tildeValue;
   }
 
   if ( pos != articleData.size() )
@@ -669,12 +743,12 @@ void DslDictionary::loadArticle( uint32_t address,
     articleText.clear();
 }
 
-string DslDictionary::dslToHtml( wstring const & str )
+string DslDictionary::dslToHtml( wstring const & str, wstring const & headword )
 {
  // Normalize the string
   wstring normalizedStr = gd::normalize( str );
 
-  ArticleDom dom( normalizedStr );
+  ArticleDom dom( normalizedStr, getName(), headword );
 
   optionalPartNom = 0;
 
@@ -853,6 +927,12 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
         {
           QImage img = QImage::fromData( (unsigned char *) &imgdata.front(),
                                          imgdata.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+          if( img.isNull() && Filetype::isNameOfTiff( filename ) )
+            GdTiff::tiffToQImage( &imgdata.front(), imgdata.size(), img );
+#endif
+
           resize = maxPictureWidth > 0
                    && img.width() > maxPictureWidth;
         }
@@ -884,18 +964,6 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
              + "<span class=\"filename\">" + processNodeChildren( node ) + "</span>" + "</a>";
     }
     else
-    if ( Filetype::isNameOfContent( filename ) )
-    {
-      QUrl url;
-      url.setScheme( "bres" );
-      url.setHost( QString::fromUtf8( getId().c_str() ) );
-
-      result += "<object " + ( node.tagAttrs.size() ?
-             Html::escape( Utf8::encode( node.tagAttrs ) ) : string( ) )
-             + " data=\"" + url.toEncoded().data() + "/"
-             + processNodeChildren( node ) + "\"/>" + "</object>";
-    }
-    else
     {
       // Unknown file type, downgrade to a hyperlink
 
@@ -918,7 +986,9 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"!trs" ) )
+  {
     result += "<span class=\"dsl_trs\">" + processNodeChildren( node ) + "</span>";
+  }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"p") )
   {
@@ -994,7 +1064,8 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       }
     }
 
-    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
+    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">"
+              + processNodeChildren( node ) + "</a>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"@" ) )
@@ -1009,7 +1080,8 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     normalizeHeadword( nodeStr );
     url.setPath( gd::toQString( nodeStr ) );
 
-    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">" + processNodeChildren( node ) + "</a>";
+    result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">"
+              + processNodeChildren( node ) + "</a>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"sub" ) )
@@ -1109,36 +1181,209 @@ QString DslDictionary::getMainFilename()
   return FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
 }
 
-#if 0
-vector< wstring > StardictDictionary::findHeadwordsForSynonym( wstring const & str )
-  throw( std::exception )
+void DslDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
-  vector< wstring > result;
+  if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+    FTS_index_completed.ref();
 
-  vector< WordArticleLink > chain = findArticles( str );
 
-  wstring caseFolded = Folding::applySimpleCaseOnly( str );
+  if( haveFTSIndex() )
+    return;
 
-  for( unsigned x = 0; x < chain.size(); ++x )
+  if( ensureInitDone().size() )
+    return;
+
+  if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
+    return;
+
+  gdDebug( "Dsl: Building the full-text index for dictionary: %s\n",
+           getName().c_str() );
+
+  try
   {
-    string headword, articleText;
+    FtsHelpers::makeFTSIndex( this, isCancelled );
+    FTS_index_completed.ref();
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "DSL: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+  }
+}
 
-    loadArticle( chain[ x ].articleOffset,
-                 headword, articleText );
+void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
+  headword.clear();
+  text.clear();
 
-    wstring headwordDecoded = Utf8::decode( headword );
+  vector< char > chunk;
 
-    if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) )
+  char * articleProps;
+  wstring articleData;
+
+  headword.clear();
+  text.clear();
+
+  {
+    Mutex::Lock _( idxMutex );
+    articleProps = chunks->getBlock( articleAddress, chunk );
+  }
+
+  uint32_t articleOffset, articleSize;
+
+  memcpy( &articleOffset, articleProps, sizeof( articleOffset ) );
+  memcpy( &articleSize, articleProps + sizeof( articleOffset ),
+          sizeof( articleSize ) );
+
+  char * articleBody;
+
+  {
+    Mutex::Lock _( dzMutex );
+    articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
+  }
+
+  if ( !articleBody )
+  {
+    return;
+  }
+  else
+  {
+    try
     {
-      // The headword seems to differ from the input word, which makes the
-      // input word its synonym.
-      result.push_back( headwordDecoded );
+      articleData =
+        DslIconv::toWstring(
+          DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+          articleBody, articleSize );
+      free( articleBody );
+
+      // Strip DSL comments
+      bool b = false;
+      stripComments( articleData, b );
+    }
+    catch( ... )
+    {
+      free( articleBody );
+      return;
     }
   }
 
-  return result;
+  // Skip headword
+
+  size_t pos = 0;
+  wstring articleHeadword;
+
+  // Check if we retrieve insided card
+  bool insidedCard = isDslWs( articleData.at( 0 ) );
+
+  for( ; ; )
+  {
+    size_t begin = pos;
+
+    pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), begin );
+
+    if ( articleHeadword.empty() )
+    {
+      // Process the headword
+
+      articleHeadword = wstring( articleData, begin, pos - begin );
+
+      if( insidedCard && !articleHeadword.empty() && isDslWs( articleHeadword[ 0 ] ) )
+      {
+        // Headword of the insided card
+        wstring::size_type hpos = articleHeadword.find( L'@' );
+        if( hpos != string::npos )
+        {
+          wstring head = Folding::trimWhitespace( articleHeadword.substr( hpos + 1 ) );
+          hpos = head.find( L'~' );
+          while( hpos != string::npos )
+          {
+            if( hpos == 0 || head[ hpos ] != L'\\' )
+              break;
+            hpos = head.find( L'~', hpos + 1 );
+          }
+          if( hpos == string::npos )
+            articleHeadword = head;
+          else
+            articleHeadword.clear();
+        }
+      }
+
+      if( !articleHeadword.empty() )
+      {
+        list< wstring > lst;
+
+        expandOptionalParts( articleHeadword, &lst );
+
+        if ( lst.size() ) // Should always be
+          articleHeadword = lst.front();
+
+        processUnsortedParts( articleHeadword, true );
+      }
+    }
+
+    if ( pos == articleData.size() )
+      break;
+
+    // Skip \n\r
+
+    if ( articleData[ pos ] == '\r' )
+      ++pos;
+
+    if ( pos != articleData.size() )
+    {
+      if ( articleData[ pos ] == '\n' )
+        ++pos;
+    }
+
+    if ( pos == articleData.size() )
+    {
+      // Ok, it's end of article
+      break;
+    }
+    if( isDslWs( articleData[ pos ] ) )
+    {
+     // Check for begin article text
+      if( insidedCard )
+      {
+        // Check for next insided headword
+        wstring::size_type hpos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), pos );
+        if ( hpos == wstring::npos )
+          hpos = articleData.size();
+
+        wstring str = wstring( articleData, pos, hpos - pos );
+
+        hpos = str.find( L'@');
+        if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' )
+          break;
+      }
+      else
+        break;
+    }
+  }
+
+  if( !articleHeadword.empty() )
+  {
+    unescapeDsl( articleHeadword );
+    normalizeHeadword( articleHeadword );
+    headword = gd::toQString( articleHeadword );
+  }
+
+  wstring articleText;
+
+  if ( pos != articleData.size() )
+    articleText = wstring( articleData, pos );
+  else
+    articleText.clear();
+
+  articleData.clear();
+
+  ArticleDom dom( gd::normalize( articleText ), getName(), articleHeadword );
+
+  articleText.clear();
+
+  text = gd::toQString( dom.root.renderAsText( true ) );
 }
-#endif
 
 /// DslDictionary::getArticle()
 
@@ -1280,7 +1525,7 @@ void DslArticleRequest::run()
       if( displayedHeadword.size() == 1 && displayedHeadword[0] == '<' )  // Fix special case - "<" header
           articleText += "<";                                             // dslToHtml can't handle it correctly.
       else
-        articleText += dict.dslToHtml( displayedHeadword );
+        articleText += dict.dslToHtml( displayedHeadword, displayedHeadword );
 
       /// After this may be expand button will be inserted
 
@@ -1293,7 +1538,7 @@ void DslArticleRequest::run()
         articleAfter += " dir=\"rtl\"";
       articleAfter += ">";
 
-      articleAfter += dict.dslToHtml( articleBody );
+      articleAfter += dict.dslToHtml( articleBody, displayedHeadword );
       articleAfter += "</div>";
       articleAfter += "</span>";
 
@@ -1476,6 +1721,11 @@ void DslResourceRequest::run()
       QImage img = QImage::fromData( (unsigned char *) &data.front(),
                                      data.size() );
 
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+      if( img.isNull() )
+        GdTiff::tiffToQImage( &data.front(), data.size(), img );
+#endif
+
       dataMutex.unlock();
 
       if ( !img.isNull() )
@@ -1515,8 +1765,6 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
   return new DslResourceRequest( *this, name );
 }
 
-} // anonymous namespace
-
 #if 0
 static void findCorrespondingFiles( string const & ifo,
                                     string & idx, string & dict, string & syn,
@@ -1553,6 +1801,18 @@ static void findCorrespondingFiles( string const & ifo,
     throw exNoSynFile( ifo );
 }
 #endif
+
+sptr< Dictionary::DataRequest > DslDictionary::getSearchResults( QString const & searchString,
+                                                                 int searchMode, bool matchCase,
+                                                                 int distanceBetweenWords,
+                                                                 int maxResults )
+{
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+}
+
+} // anonymous namespace
+
+/// makeDictionaries
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
@@ -1848,6 +2108,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           wstring headword;
           QVector< InsidedCard > insidedCards;
           uint32_t offset = curOffset;
+          QVector< wstring > insidedHeadwords;
+          unsigned linesInsideCard = 0;
 
           // Skip the article's body
           for( ; ; )
@@ -1857,7 +2119,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                  || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )
-                insidedCards.append( InsidedCard( offset, curOffset - offset, headword ) );
+                insidedCards.append( InsidedCard( offset, curOffset - offset, insidedHeadwords ) );
               break;
             }
 
@@ -1865,20 +2127,39 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             wstring::size_type n = curString.find( L'@' );
             if( n == wstring::npos || curString[ n - 1 ] == L'\\' )
+            {
+              if( insideInsided )
+                linesInsideCard++;
+
               continue;
+            }
 
             // Handle embedded card
 
             if( insideInsided )
-              insidedCards.append( InsidedCard( offset, curOffset - offset, headword ) );
+            {
+              if( linesInsideCard )
+              {
+                insidedCards.append( InsidedCard( offset, curOffset - offset, insidedHeadwords ) );
 
-            offset = curOffset;
+                insidedHeadwords.clear();
+                linesInsideCard = 0;
+                offset = curOffset;
+              }
+            }
+            else
+            {
+              offset = curOffset;
+              linesInsideCard = 0;
+            }
+
             headword = Folding::trimWhitespace( curString.substr( n + 1 ) );
 
             if( !headword.empty() )
             {
               processUnsortedParts( headword, true );
               expandTildes( headword, allEntryWords.front() );
+              insidedHeadwords.append( headword );
               insideInsided = true;
             }
             else
@@ -1899,19 +2180,22 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             chunks.addToBlock( &(*i).offset, sizeof( (*i).offset ) );
             chunks.addToBlock( &(*i).size, sizeof( (*i).size ) );
 
-            allEntryWords.clear();
-            expandOptionalParts( (*i).headword, &allEntryWords );
-
-            for( list< wstring >::iterator j = allEntryWords.begin();
-                 j != allEntryWords.end(); ++j )
+            for( int x = 0; x < (*i).headwords.size(); x++ )
             {
-              unescapeDsl( *j );
-              normalizeHeadword( *j );
-              indexedWords.addWord( *j, descOffset, maxHeadwordSize );
-            }
+              allEntryWords.clear();
+              expandOptionalParts( (*i).headwords[ x ], &allEntryWords );
 
+              for( list< wstring >::iterator j = allEntryWords.begin();
+                   j != allEntryWords.end(); ++j )
+              {
+                unescapeDsl( *j );
+                normalizeHeadword( *j );
+                indexedWords.addWord( *j, descOffset, maxHeadwordSize );
+              }
+
+              wordCount += allEntryWords.size();
+            }
             ++articleCount;
-            wordCount += allEntryWords.size();
           }
 
           if ( !hasString )

@@ -28,7 +28,7 @@ enum
 
 /// Applies the folding algorithm to each character in the given string,
 /// making another one as a result.
-wstring apply( wstring const & );
+wstring apply( wstring const &, bool preserveWildcards = false );
 
 /// Applies only simple case folding algorithm. Since many dictionaries have
 /// different case style, we interpret words differing only by case as synonyms.
@@ -77,6 +77,9 @@ void normalizeWhitespace( wstring & );
 /// Currently commented out, consider implementing it in case indices'
 /// generation would be too slow.
 //ssize_t apply( wchar const * in, wchar * out, size_t outSize );
+
+/// Unescape all wildcard symbols (for exast search)
+wstring unescapeWildcardSymbols( wstring const & );
 
 }
 

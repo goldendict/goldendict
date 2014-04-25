@@ -350,7 +350,10 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   {
     if ( ids.find( FsEncoding::encode( *i ) ) == ids.end() &&
          i->size() == 32 )
+    {
       indexDir.remove( *i );
+      indexDir.remove( *i + "_FTS" );
+    }
   }
 
   // Run deferred inits

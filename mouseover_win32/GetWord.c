@@ -80,14 +80,19 @@ typedef struct TConsoleParams {
 	int BeginPos;
 } TConsoleParams;
 
-static int GetWordFromConsolePack(TConsoleParams *params)
+static int GetWordFromConsolePack(TConsoleParams *params, BOOL *pInvalidConsole)
 {
 	int WordLen=0;
 
+	*pInvalidConsole = TRUE;
+
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	if (hStdOut != INVALID_HANDLE_VALUE) {
+	if (hStdOut != INVALID_HANDLE_VALUE && hStdOut != 0) {
 		CONSOLE_SCREEN_BUFFER_INFO csbi;
 		if (GetConsoleScreenBufferInfo(hStdOut, &csbi)) {
+
+			*pInvalidConsole = FALSE;
+
 			COORD CurPos;
 			CurPos.X = csbi.srWindow.Left + (SHORT)(params->Pt.x * (csbi.srWindow.Right - csbi.srWindow.Left + 1) / params->ClientRect.right);
 			CurPos.Y = csbi.srWindow.Top + (SHORT)(params->Pt.y * (csbi.srWindow.Bottom - csbi.srWindow.Top + 1) / params->ClientRect.bottom);
@@ -129,6 +134,7 @@ static char* GetWordFromConsole(HWND WND, POINT Pt, DWORD *BeginPos)
 	DWORD pid;
 	DWORD WordSize;
 	char *Result;
+	BOOL invalidConsole;
 
 	*BeginPos=0;
 	if((TP = malloc(sizeof(TConsoleParams))) == NULL)
@@ -145,7 +151,7 @@ static char* GetWordFromConsole(HWND WND, POINT Pt, DWORD *BeginPos)
 	if (pid != GetCurrentProcessId()) {
 	        if(Is_XP_And_Later()) {
 			if(AttachConsole(pid)) {
-				WordSize = GetWordFromConsolePack(TP);
+				WordSize = GetWordFromConsolePack(TP, &invalidConsole);
 				FreeConsole();
 			} else {
 				WordSize = 0;
@@ -154,7 +160,25 @@ static char* GetWordFromConsole(HWND WND, POINT Pt, DWORD *BeginPos)
 			WordSize = 0;
 		}
 	} else {
-		WordSize = GetWordFromConsolePack(TP);
+		WordSize = GetWordFromConsolePack(TP, &invalidConsole);
+		if( invalidConsole ) {
+			/*
+			 Under Win 8.1 GetWindowThreadProcessId return current "conhost" process ID
+			 instead of target window process ID.
+			 We try to attach console to parent process.
+			*/
+			
+		        if(Is_XP_And_Later()) {
+				if(AttachConsole( (DWORD)-1 )) {
+					WordSize = GetWordFromConsolePack(TP, &invalidConsole);
+					FreeConsole();
+				} else {
+					WordSize = 0;
+				}
+			} else {
+				WordSize = 0;
+			}
+		}	
 	}
 
 	if (WordSize > 0 && WordSize <= 255) {

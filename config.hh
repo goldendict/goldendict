@@ -116,6 +116,7 @@ struct Groups: public QVector< Group >
 struct ProxyServer
 {
   bool enabled;
+  bool useSystemProxy;
 
   enum Type
   {
@@ -127,6 +128,7 @@ struct ProxyServer
   QString host;
   unsigned port;
   QString user, password;
+  QString systemProxyUser, systemProxyPassword;
 
   ProxyServer();
 };
@@ -144,6 +146,30 @@ struct HotKey
   HotKey( QKeySequence const & );
 
   QKeySequence toKeySequence() const;
+};
+
+struct FullTextSearch
+{
+  int searchMode;
+  bool matchCase;
+  int maxArticlesPerDictionary;
+  int maxDistanceBetweenWords;
+  bool useMaxDistanceBetweenWords;
+  bool useMaxArticlesPerDictionary;
+  bool enabled;
+  quint32 maxDictionarySize;
+  QByteArray dialogGeometry;
+  QString disabledTypes;
+
+  FullTextSearch() :
+    searchMode( 0 ), matchCase( false ),
+    maxArticlesPerDictionary( 100 ),
+    maxDistanceBetweenWords( 2 ),
+    useMaxDistanceBetweenWords( true ),
+    useMaxArticlesPerDictionary( false ),
+    enabled( true ),
+    maxDictionarySize( 0 )
+  {}
 };
 
 /// Various user preferences
@@ -211,8 +237,13 @@ struct Preferences
   int articleSizeLimit;
 
   unsigned short maxDictionaryRefsInContextMenu;
+#ifndef Q_WS_X11
+  bool trackClipboardChanges;
+#endif
 
   QString addonStyle;
+
+  FullTextSearch fts;
 
   Preferences();
 };
@@ -423,6 +454,20 @@ struct VoiceEngine
 
 typedef QVector< VoiceEngine> VoiceEngines;
 
+struct HeadwordsDialog
+{
+  int searchMode;
+  bool matchCase;
+  bool autoApply;
+  QString headwordsExportPath;
+  QByteArray headwordsDialogGeometry;
+
+  HeadwordsDialog() :
+    searchMode( 0 ), matchCase( false )
+    , autoApply( false )
+  {}
+};
+
 struct Class
 {
   Paths paths;
@@ -472,6 +517,8 @@ struct Class
   /// Maximum size for the headwords.
   /// Bigger headwords won't be indexed. For now, only in DSL.
   unsigned int maxHeadwordSize;
+
+  HeadwordsDialog headwordsDialog;
 
 #ifdef Q_OS_WIN
   QRect maximizedMainWindowGeometry;

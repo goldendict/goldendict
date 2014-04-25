@@ -16,7 +16,8 @@ public:
     REJECTED,
     ACCEPTED,
     OPEN_FOLDER,
-    EDIT_DICTIONARY
+    EDIT_DICTIONARY,
+    SHOW_HEADWORDS
   };
 
   DictInfo( Config::Class &cfg_, QWidget * parent = 0 );
@@ -29,6 +30,8 @@ private slots:
   void savePos( int );
   void on_editDictionary_clicked();
   void on_openFolder_clicked();
+  void on_OKButton_clicked();
+  void on_headwordsButton_clicked();
 };
 
 #endif // DICTINFO_HH

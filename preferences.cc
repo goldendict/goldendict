@@ -151,6 +151,11 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.rightCtrl->hide();
   ui.leftShift->hide();
   ui.rightShift->hide();
+#ifdef Q_OS_MACX
+  ui.altKey->setText( "Opt" );
+  ui.winKey->setText( "Ctrl" );
+  ui.ctrlKey->setText( "Cmd" );
+#endif
 #endif
 
 //Platform-specific options
@@ -195,6 +200,23 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.proxyUser->setText( p.proxyServer.user );
   ui.proxyPassword->setText( p.proxyServer.password );
 
+  if( p.proxyServer.useSystemProxy )
+  {
+    ui.systemProxy->setChecked( true );
+    ui.customSettingsGroup->setEnabled( false );
+  }
+  else
+  {
+    ui.customProxy->setChecked( true );
+    ui.customSettingsGroup->setEnabled( p.proxyServer.enabled );
+  }
+
+  connect( ui.customProxy, SIGNAL( toggled( bool ) ),
+           this, SLOT( customProxyToggled( bool ) ) );
+
+  connect( ui.useProxyServer, SIGNAL( toggled( bool ) ),
+           this, SLOT( customProxyToggled( bool ) ) );
+
   ui.checkForNewReleases->setChecked( p.checkForNewReleases );
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
   ui.enableWebPlugins->setChecked( p.enableWebPlugins );
@@ -203,6 +225,23 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   // Add-on styles
   ui.addonStylesLabel->setVisible( ui.addonStyles->count() > 1 );
   ui.addonStyles->setCurrentStyle( p.addonStyle );
+
+  // Full-text search parameters
+  ui.ftsGroupBox->setChecked( p.fts.enabled );
+
+  ui.allowAard->setChecked( !p.fts.disabledTypes.contains( "AARD", Qt::CaseInsensitive ) );
+  ui.allowBGL->setChecked( !p.fts.disabledTypes.contains( "BGL", Qt::CaseInsensitive ) );
+  ui.allowDictD->setChecked( !p.fts.disabledTypes.contains( "DICTD", Qt::CaseInsensitive ) );
+  ui.allowDSL->setChecked( !p.fts.disabledTypes.contains( "DSL", Qt::CaseInsensitive ) );
+  ui.allowMDict->setChecked( !p.fts.disabledTypes.contains( "MDICT", Qt::CaseInsensitive ) );
+  ui.allowSDict->setChecked( !p.fts.disabledTypes.contains( "SDICT", Qt::CaseInsensitive ) );
+  ui.allowStardict->setChecked( !p.fts.disabledTypes.contains( "STARDICT", Qt::CaseInsensitive ) );
+  ui.allowXDXF->setChecked( !p.fts.disabledTypes.contains( "XDXF", Qt::CaseInsensitive ) );
+  ui.allowZim->setChecked( !p.fts.disabledTypes.contains( "ZIM", Qt::CaseInsensitive ) );
+#ifndef MAKE_ZIM_SUPPORT
+  ui.allowZim->hide();
+#endif
+  ui.maxDictionarySize->setValue( p.fts.maxDictionarySize );
 }
 
 Config::Preferences Preferences::getPreferences()
@@ -273,6 +312,7 @@ Config::Preferences Preferences::getPreferences()
   p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
 
   p.proxyServer.enabled = ui.useProxyServer->isChecked();
+  p.proxyServer.useSystemProxy = ui.systemProxy->isChecked();
 
   p.proxyServer.type = ( Config::ProxyServer::Type ) ui.proxyType->currentIndex();
 
@@ -288,6 +328,72 @@ Config::Preferences Preferences::getPreferences()
   p.hideGoldenDictHeader = ui.hideGoldenDictHeader->isChecked();
 
   p.addonStyle = ui.addonStyles->getCurrentStyle();
+
+  p.fts.enabled = ui.ftsGroupBox->isChecked();
+  p.fts.maxDictionarySize = ui.maxDictionarySize->value();
+
+  if( !ui.allowAard->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "AARD";
+  }
+
+  if( !ui.allowBGL->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "BGL";
+  }
+
+  if( !ui.allowDictD->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "DICTD";
+  }
+
+  if( !ui.allowDSL->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "DSL";
+  }
+
+  if( !ui.allowMDict->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "MDICT";
+  }
+
+  if( !ui.allowSDict->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "SDICT";
+  }
+
+  if( !ui.allowStardict->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "STARDICT";
+  }
+
+  if( !ui.allowXDXF->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "XDXF";
+  }
+
+  if( !ui.allowZim->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "ZIM";
+  }
 
   return p;
 }
@@ -369,3 +475,8 @@ void Preferences::on_useExternalPlayer_toggled( bool enabled )
   ui.audioPlaybackProgram->setEnabled( enabled );
 }
 
+void Preferences::customProxyToggled( bool )
+{
+  ui.customSettingsGroup->setEnabled( ui.customProxy->isChecked()
+                                      && ui.useProxyServer->isChecked() );
+}

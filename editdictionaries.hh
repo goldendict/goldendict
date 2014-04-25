@@ -51,6 +51,8 @@ signals:
 
   void showDictionaryInfo( QString const & dictId );
 
+  void showDictionaryHeadwords( QString const & dictId );
+
 private:
 
   bool isSourcesChanged() const;

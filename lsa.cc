@@ -24,6 +24,7 @@
 #include <QUrl>
 #include <QDir>
 #include <QDebug>
+#include <QFile>
 
 namespace Lsa {
 
@@ -316,10 +317,10 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
 /// This wraps around file operations
 struct ShiftedVorbis
 {
-  FILE * f;
+  QFile & f;
   size_t shift;
 
-  ShiftedVorbis( FILE * f_, size_t shift_ ): f( f_ ), shift( shift_ )
+  ShiftedVorbis( QFile & f_, size_t shift_ ): f( f_ ), shift( shift_ )
   {}
 
   static size_t read( void * ptr, size_t size, size_t nmemb, void * datasource );
@@ -334,7 +335,7 @@ size_t ShiftedVorbis::read( void * ptr, size_t size, size_t nmemb,
 {
   ShiftedVorbis * sv = ( ShiftedVorbis * ) datasource;
 
-  return fread( ptr, size, nmemb, sv->f );
+  return sv->f.read( reinterpret_cast<char *>( ptr ), size * nmemb );
 }
 
 int ShiftedVorbis::seek( void * datasource, ogg_int64_t offset, int whence )
@@ -344,13 +345,19 @@ int ShiftedVorbis::seek( void * datasource, ogg_int64_t offset, int whence )
   if ( whence == SEEK_SET )
     offset += sv->shift;
 
-  return fseek( sv->f, offset, whence );
+  if( whence == SEEK_CUR )
+    offset += sv->f.pos();
+
+  if( whence == SEEK_END )
+    offset += sv->f.size();
+
+  return sv->f.seek( offset );
 }
 
 long ShiftedVorbis::tell( void * datasource )
 {
   ShiftedVorbis * sv = ( ShiftedVorbis * ) datasource;
-  long result = ftell( sv->f );
+  long result = sv->f.pos();
 
   if ( result != -1 )
     result -= sv->shift;

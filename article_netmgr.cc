@@ -140,6 +140,15 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     bool groupIsValid = false;
 
     QString word = url.queryItemValue( "word" );
+
+    QString dictIDs = url.queryItemValue( "dictionaries" );
+    if( !dictIDs.isEmpty() )
+    {
+      // Individual dictionaries set from full-text search
+      QStringList dictIDList = dictIDs.split( "," );
+      return articleMaker.makeDefinitionFor( word, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
+    }
+
     unsigned group = url.queryItemValue( "group" ).toUInt( &groupIsValid );
 
     // See if we have some dictionaries muted
