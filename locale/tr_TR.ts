@@ -653,6 +653,71 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>FTS::FtsIndexing</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Yok</translation>
+    </message>
+</context>
+<context>
+    <name>FTS::FullTextSearchDialog</name>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wildcards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RexExp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max distance between words (%1-%2):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max articles per dictionary (%1-%2):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articles found: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Now indexing: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The search line must contains at least one word contains </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> or more symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No dictionaries for full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FTS::Indexing</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Yok</translation>
+    </message>
+</context>
+<context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
         <source>by</source>
@@ -681,6 +746,53 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML ayrıştırma hatası: %1 içinde %2,%3</translation>
+    </message>
+</context>
+<context>
+    <name>FullTextSearchDialog</name>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Match case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articles found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available dictionaries in group:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wait for indexing:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Non-indexable:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indexed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Now indexing: None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">İptal</translation>
     </message>
 </context>
 <context>
@@ -2198,6 +2310,26 @@ between classic and school orthography in cyrillic)</source>
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -2931,6 +3063,22 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Custom settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow full-text search for:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t search in dictionaries contains more than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>articles (0 - unlimited)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

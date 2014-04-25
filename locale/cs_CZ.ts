@@ -659,6 +659,71 @@ a školní ortografií v cyrilici)</translation>
     </message>
 </context>
 <context>
+    <name>FTS::FtsIndexing</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Žádná</translation>
+    </message>
+</context>
+<context>
+    <name>FTS::FullTextSearchDialog</name>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wildcards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RexExp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max distance between words (%1-%2):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max articles per dictionary (%1-%2):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articles found: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Now indexing: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The search line must contains at least one word contains </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> or more symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No dictionaries for full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FTS::Indexing</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Žádná</translation>
+    </message>
+</context>
+<context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
@@ -687,6 +752,53 @@ a školní ortografií v cyrilici)</translation>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Pro odstranění této chyby přejděte do Upravit|Slovníky|Zdroje|Forvo a aplikuje na vlasní klíč API.</translation>
+    </message>
+</context>
+<context>
+    <name>FullTextSearchDialog</name>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Match case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articles found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available dictionaries in group:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wait for indexing:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Non-indexable:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indexed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Now indexing: None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Zrušit</translation>
     </message>
 </context>
 <context>
@@ -2960,6 +3072,26 @@ a školní ortografií v cyrilici)</translation>
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -3726,6 +3858,22 @@ Povolením této volby problém obejdete.</translation>
     </message>
     <message>
         <source>Custom settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow full-text search for:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t search in dictionaries contains more than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>articles (0 - unlimited)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
