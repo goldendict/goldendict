@@ -81,6 +81,33 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     return !indexWords.isEmpty();
   }
+  else if( searchMode == FTS::Enumeration )
+  {
+    // Make a pattern for search in article text
+
+//    QString spacesInExpression = QString::number(str.simplified().count(" "));
+    QString wordsForEnum = str.simplified().replace(" ","|");
+    QString patternForEnum;
+
+    if( wordsForEnum.count("|") > 0 )patternForEnum = "(?:\\b(?:" + wordsForEnum + ")\\b((?:\\W+\\w+){0,"
+        + QString::number( distanceBetweenWords ) + "}\\W+\\b(?:" + wordsForEnum + ")\\b){"
+        + QString::number(str.simplified().count(" ")) + "})";
+//        + spacesInExpression + "," + spacesInExpression + "})";
+
+    else patternForEnum = "\\b" + wordsForEnum + "\\b";
+
+    searchRegExp  = QRegExp( patternForEnum, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::RegExp2 );
+    searchRegExp.setMinimal(true);
+
+    // Make words list for index search
+
+    QStringList list = str.normalized( QString::NormalizationForm_C )
+        .toLower().split( spacesRegExp, QString::SkipEmptyParts );
+    indexWords = list.filter( wordRegExp );
+    indexWords.removeDuplicates();
+
+    return !indexWords.isEmpty();
+  }
   else
   {
     // Make words list for index search
@@ -265,6 +292,59 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
           foundHeadwords->append( FTS::FtsHeadword( headword, id ) );
 
         results++;
+        if( maxResults > 0 && results >= maxResults )
+          break;
+      }
+    }
+  }
+  else if( searchMode == FTS::Enumeration )
+  {
+    // Enumeration mode
+
+    QStringList searchListForEnum = QString( searchRegexp.pattern().remove(0,8).remove(QRegExp("\\).*")) ).split("|");
+
+    for( int i = 0; i < offsets.size(); i++ )
+    {
+      if( isCancelled )
+        break;
+
+      dict.getArticleText( offsets.at( i ), headword, articleText );
+
+      if ( articleText.simplified().contains(searchRegexp) )
+      {
+        bool ourCase;
+        int pos = 0;
+
+        while ((pos = searchRegexp.indexIn(articleText, pos)) != -1)
+        {
+          QString foundExpression = articleText.mid(pos, searchRegexp.matchedLength()).simplified().trimmed();
+
+          if (foundExpression.count(" ") <= distanceBetweenWords + 1)
+          {
+            ourCase = true;
+
+            foreach (QString nextWord, searchListForEnum)
+            {
+              if ( !foundExpression.contains(nextWord, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive) )
+              {
+                ourCase = false;
+                break;
+              }
+            }
+            if ( ourCase )
+            {
+              if( headword.isEmpty() )offsetsForHeadwords.append( offsets.at( i ) );
+              else foundHeadwords->append( FTS::FtsHeadword( headword, id ) );
+
+              results++;
+              break;
+            }
+          }
+          pos += searchRegexp.matchedLength();
+        }
+
+//        qDebug() << "results..." << results;
+
         if( maxResults > 0 && results >= maxResults )
           break;
       }
