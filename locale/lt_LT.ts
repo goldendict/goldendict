@@ -427,22 +427,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../authentication.ui" line="14"/>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>Reikia prisijungti per įgaliotąjį serverį</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="20"/>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Norėdami naudotis įgaliotuoju serveriu, įveskite naudotojo vardą  ir slaptažodį</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="30"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudotojo vardas:</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="40"/>
         <source>Password:</source>
-        <translation type="unfinished">Slaptažodis:</translation>
+        <translation>Slaptažodis:</translation>
     </message>
 </context>
 <context>
@@ -821,7 +821,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="69"/>
         <source>None</source>
-        <translation type="unfinished">Nieko</translation>
+        <translation>Nieko</translation>
     </message>
 </context>
 <context>
@@ -829,64 +829,64 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="137"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieška visuose tekstuose</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="144"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Ištisi žodžiai</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="145"/>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiesiog tekstas</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="146"/>
         <source>Wildcards</source>
-        <translation type="unfinished">Pakaitos simboliai</translation>
+        <translation>Pakaitos simboliai</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="147"/>
         <source>RexExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguliarusis reiškinys</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="152"/>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Didžiausias atstumas tarp žodžių (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="161"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Viename žodyne surastų straipsnelių riba (%1-%2): </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="184"/>
         <location filename="../fulltextsearch.cc" line="288"/>
         <location filename="../fulltextsearch.cc" line="362"/>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Surasta straipsnelių: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="257"/>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>Darbar indeksuojama: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="297"/>
         <source>The search line must contains at least one word contains </source>
-        <translation type="unfinished"></translation>
+        <translation>Paieškos užklausoje įveskite bent vieną žodį ne mažiau kaip iš</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="298"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>simbolių</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="309"/>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra žodynų, palaikančių paiešką jų straipsnelių turinyje</translation>
     </message>
 </context>
 <context>
@@ -894,7 +894,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="62"/>
         <source>None</source>
-        <translation type="unfinished">Nieko</translation>
+        <translation>Nieko</translation>
     </message>
 </context>
 <context>
@@ -941,57 +941,57 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="203"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieška</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished">Skirti raidžių registrą</translation>
+        <translation>Skirti raidžių registrą</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Veiksena:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="94"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Surasta straipsneliuose:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="116"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prieinamos žodynų grupės:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="122"/>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeksavimo eilėje:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="136"/>
         <source>Non-indexable:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neindeksuojami:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="150"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš viso:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="157"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suindeksuoti:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="181"/>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Dabar indeksuojama: nieko</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="229"/>
         <source>Cancel</source>
-        <translation type="unfinished">Atšaukti</translation>
+        <translation>Atšaukti</translation>
     </message>
 </context>
 <context>
@@ -2704,7 +2704,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieška</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="275"/>
@@ -2836,22 +2836,22 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="567"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieškoti puslapyje</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="570"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="578"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieška visuose tekstuose</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="581"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald+Lyg2+F</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -3439,37 +3439,37 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="963"/>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistemos įgaliotasis serveris</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="970"/>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Savitas įgaliotasis serveris</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="977"/>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Savitos nuostatos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1157"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieška visuose tekstuose</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1176"/>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Leisti ieškoti šių žodynų straipsneliuose:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
         <source>Don&apos;t search in dictionaries contains more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Neieškoti, jei žodyne yra virš</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1270"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>straipsnelių(-io) (0 = neriboti)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1491"/>
