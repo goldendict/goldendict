@@ -2217,6 +2217,7 @@ void ArticleView::highlightFTSResults()
 
   while( pos >= 0 )
   {
+    bool ourCase;
     pos = regexp.indexIn( markHandler.normalizedText(), pos );
     if( pos >= 0 )
     {
