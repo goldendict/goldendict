@@ -82,7 +82,7 @@ void normalizeWhitespace( wstring & );
 /// Unescape all wildcard symbols (for exast search)
 QString unescapeWildcardSymbols( QString const & );
 
-/// Unescape all wildcard symbols (for place word to input line)
+/// Escape all wildcard symbols (for place word to input line)
 QString escapeWildcardSymbols( QString const & );
 
 }
