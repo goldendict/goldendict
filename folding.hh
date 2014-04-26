@@ -5,6 +5,7 @@
 #define __FOLDING_HH_INCLUDED__
 
 #include "wstring.hh"
+#include <QString>
 
 /// Folding provides means to translate several possible ways to write a
 /// symbol into one. This facilitates searching. Here we currently perform
@@ -79,7 +80,10 @@ void normalizeWhitespace( wstring & );
 //ssize_t apply( wchar const * in, wchar * out, size_t outSize );
 
 /// Unescape all wildcard symbols (for exast search)
-wstring unescapeWildcardSymbols( wstring const & );
+QString unescapeWildcardSymbols( QString const & );
+
+/// Unescape all wildcard symbols (for place word to input line)
+QString escapeWildcardSymbols( QString const & );
 
 }
 

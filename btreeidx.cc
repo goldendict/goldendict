@@ -77,15 +77,12 @@ void BtreeIndex::openIndex( IndexInfo const & indexInfo,
   rootNode.clear();
 }
 
-vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
+vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word )
 {
   vector< WordArticleLink > result;
 
   try
   {
-    // Exast search - unescape all wildcard symbols
-    wstring word = Folding::unescapeWildcardSymbols( str );
-
     wstring folded = Folding::apply( word );
     if( folded.empty() )
       folded = Folding::applyWhitespaceOnly( word );
@@ -216,11 +213,6 @@ void BtreeWordSearchRequest::run()
                      str.find( '?' ) != wstring::npos ||
                      str.find( '[' ) != wstring::npos ||
                      str.find( ']' ) != wstring::npos );
-  else
-  {
-    // Exast search - unescape all wildcard symbols
-    str = Folding::unescapeWildcardSymbols( str );
-  }
 
   wstring folded = Folding::apply( str );
 
