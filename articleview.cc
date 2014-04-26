@@ -2199,10 +2199,6 @@ void ArticleView::highlightFTSResults()
 
   regexp.setMinimal( true );
 
-  QStringList searchListForEnum;
-  if ( regexp.pattern().startsWith("(?:\\b(?:") )
-    searchListForEnum = QString( regexp.pattern().remove(0,8).remove(QRegExp("\\).*")) ).split("|");
-
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
   {
@@ -2217,7 +2213,6 @@ void ArticleView::highlightFTSResults()
 
   while( pos >= 0 )
   {
-    bool ourCase;
     pos = regexp.indexIn( markHandler.normalizedText(), pos );
     if( pos >= 0 )
     {
@@ -2231,27 +2226,8 @@ void ArticleView::highlightFTSResults()
                    regexp.matchedLength(), FTS::MaxMatchLengthForHighlightResults );
       }
       else
-      {
-        if (searchListForEnum.isEmpty())
-          allMatches.append( pageText.mid( spos, matched ) );
-        else
-        {
-          ourCase = true;
+        allMatches.append( pageText.mid( spos, matched ) );
 
-          foreach (QString nextWord, searchListForEnum)
-          {
-            if ( !regexp.cap().contains(nextWord, url.hasQueryItem( "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive) )
-            {
-              ourCase = false;
-              break;
-            }
-          }
-          if ( ourCase )
-          {
-            allMatches.append( pageText.mid( spos, matched ) );
-          }
-        }
-      }
       pos += regexp.matchedLength();
     }
   }

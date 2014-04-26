@@ -33,7 +33,6 @@ enum SearchMode
 {
   WholeWords = 0,
   PlainText,
-  Enumeration,
   Wildcards,
   RegExp
 };

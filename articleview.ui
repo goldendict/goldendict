@@ -68,7 +68,7 @@
       <item>
        <widget class="QToolButton" name="ftsSearchPrevious">
         <property name="text">
-         <string>Previous</string>
+         <string>&amp;Previous</string>
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
@@ -82,7 +82,7 @@
       <item>
        <widget class="QToolButton" name="ftsSearchNext">
         <property name="text">
-         <string>Next</string>
+         <string>&amp;Next</string>
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">

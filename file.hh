@@ -20,6 +20,7 @@ DEF_EX_STR( exCantOpen, "Can't open", Ex )
 DEF_EX( exReadError, "Error reading from the file", Ex )
 DEF_EX( exWriteError, "Error writing to the file", Ex )
 DEF_EX( exSeekError, "File seek error", Ex )
+DEF_EX( exAllocation, "Memory allocation error", Ex )
 
 /// Checks if the file exists or not.
 
@@ -68,7 +69,7 @@ public:
   /// end up on disk immediately, or a short write may occur later
   /// than it really did. If you don't want write buffering, use
   /// writeRecords() function instead.
-  void write( void const * buf, qint64 size ) throw( exWriteError );
+  void write( void const * buf, qint64 size ) throw( exWriteError, exAllocation );
 
   template< typename T >
   void write( T const & value ) throw( exWriteError )
