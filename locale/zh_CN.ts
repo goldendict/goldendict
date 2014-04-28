@@ -409,22 +409,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../authentication.ui" line="14"/>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>代理服务器要求身份验证</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="20"/>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>您需要提供代理服务器的用户名和密码</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="30"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>用户名：</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="40"/>
         <source>Password:</source>
-        <translation type="unfinished">密码：</translation>
+        <translation>密码：</translation>
     </message>
 </context>
 <context>
@@ -532,7 +532,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索模式</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
@@ -547,27 +547,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>区分大小写</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>将词条导出至文件</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>导出</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>确定</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="91"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>点击此按钮启用词条列表过滤器</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="94"/>
@@ -577,7 +577,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="107"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>若勾选则词条列表过滤器的修改即时生效</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="110"/>
@@ -587,7 +587,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>过滤器：</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="124"/>
@@ -602,12 +602,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.cc" line="30"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>通配符</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="31"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>正则表达式</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="219"/>
@@ -627,12 +627,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.cc" line="262"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>导出词条...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="262"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -685,7 +685,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>词条</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -726,7 +726,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>词典词条</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -802,7 +802,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="69"/>
         <source>None</source>
-        <translation type="unfinished">无</translation>
+        <translation>无</translation>
     </message>
 </context>
 <context>
@@ -810,64 +810,64 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="137"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>全文搜索</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="144"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>全字匹配</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="145"/>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>纯文本</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="146"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>通配符</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="147"/>
         <source>RexExp</source>
-        <translation type="unfinished"></translation>
+        <translation>正则表达式</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="152"/>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>最大词间距 (%1-%2)：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="161"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>每个词典最大词条数 (%1-%2)：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="184"/>
         <location filename="../fulltextsearch.cc" line="288"/>
         <location filename="../fulltextsearch.cc" line="362"/>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>搜索到的词条：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="257"/>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>正在索引：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="297"/>
         <source>The search line must contains at least one word contains </source>
-        <translation type="unfinished"></translation>
+        <translation>搜索关键词至少包含</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="298"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>个或更多字符</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="309"/>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>没有可供全文搜索的词典</translation>
     </message>
 </context>
 <context>
@@ -875,7 +875,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="62"/>
         <source>None</source>
-        <translation type="unfinished">无</translation>
+        <translation>无</translation>
     </message>
 </context>
 <context>
@@ -922,57 +922,57 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="203"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>区分大小写</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>模式：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="94"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索到的词条：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="116"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>群组中的可用词典：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="122"/>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>等候索引：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="136"/>
         <source>Non-indexable:</source>
-        <translation type="unfinished"></translation>
+        <translation>不可索引：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="150"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>总计：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="157"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>已索引：</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="181"/>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>正在索引：无</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="229"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -1057,7 +1057,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>打开群组列表</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="161"/>
@@ -2322,7 +2322,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="384"/>
@@ -2762,7 +2762,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3881"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>词典词条</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3883"/>
@@ -2824,22 +2824,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="567"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>页内搜索</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="570"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="578"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>全文搜索</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="581"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="90"/>
@@ -3023,7 +3023,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="261"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>词典词条</translation>
     </message>
 </context>
 <context>
@@ -3571,17 +3571,17 @@ Plugin must be installed for this option to work.</source>
     <message>
         <location filename="../preferences.ui" line="963"/>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>系统代理</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="970"/>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>自定义代理</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="977"/>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>自定义设置</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1098"/>
@@ -3597,22 +3597,22 @@ Enable this option to workaround the problem.</source>
     <message>
         <location filename="../preferences.ui" line="1157"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>全文搜索</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1176"/>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>允许对以下格式词典进行全文搜索：</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
         <source>Don&apos;t search in dictionaries contains more than</source>
-        <translation type="unfinished"></translation>
+        <translation>不要在词条数多于</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1270"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>个 (0 - 无限制) 的词典中进行搜索</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1309"/>
