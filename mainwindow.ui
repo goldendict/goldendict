@@ -120,6 +120,7 @@
     <addaction name="separator"/>
     <addaction name="clearHistory"/>
     <addaction name="separator"/>
+    <addaction name="action_Login"/>
    </widget>
    <widget class="QMenu" name="menuSearch">
     <property name="title">
@@ -577,6 +578,11 @@
    </property>
    <property name="menuRole">
     <enum>QAction::TextHeuristicRole</enum>
+   </property>
+  </action>
+  <action name="action_Login">
+   <property name="text">
+    <string>&amp;Login</string>
    </property>
   </action>
  </widget>
