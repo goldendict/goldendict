@@ -68,7 +68,7 @@ About::About( QWidget * parent ): QDialog( parent )
       html += "<br>";
     }
 
-    html += "</body></html>";
+    html += "Modified: nvntung@gmail.com</body></html>";
 
     ui.credits->setHtml( html );
   }
