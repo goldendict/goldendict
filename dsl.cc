@@ -1376,13 +1376,69 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   else
     articleText.clear();
 
-  articleData.clear();
+  if( !articleText.empty() )
+  {
+    text = gd::toQString( articleText ).normalized( QString::NormalizationForm_C );
 
-  ArticleDom dom( gd::normalize( articleText ), getName(), articleHeadword );
+    articleText.clear();
 
-  articleText.clear();
+    // Parse article text
 
-  text = gd::toQString( dom.root.renderAsText( true ) );
+    // Strip [!trs] areas
+    int pos = 0;
+    while( pos >= 0 )
+    {
+      pos = text.indexOf( QLatin1String( "[!trs]" ), pos, Qt::CaseInsensitive );
+      if( pos >= 0 )
+      {
+        int pos2 = text.indexOf( QLatin1String( "[/!trs]" ), pos + 6, Qt::CaseInsensitive );
+        text.remove( pos, pos2 > 0 ? pos2 - pos + 7 : text.length() - pos );
+      }
+    }
+    // Strip tags
+
+    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]", Qt::CaseInsensitive ) );
+
+    // Chech for insided cards
+
+    bool haveInsidedCards = false;
+    pos = 0;
+    while( pos >= 0 )
+    {
+      pos = text.indexOf( "@", pos );
+      if( pos > 0 && text.at( pos - 1 ) != '\\' )
+      {
+        haveInsidedCards = true;
+        break;
+      }
+
+      if( pos >= 0 )
+        pos += 1;
+    }
+
+    if( haveInsidedCards )
+    {
+      // Use base DSL parser for articles with insided cards
+      ArticleDom dom( gd::toWString( text ), getName(), articleHeadword );
+      text = gd::toQString( dom.root.renderAsText( true ) );
+    }
+    else
+    {
+      // Unescape DSL symbols
+      pos = 0;
+      while( pos >= 0 )
+      {
+        pos = text.indexOf( '\\', pos );
+        if( pos >= 0 )
+        {
+          if( text[ pos + 1 ] == '\\' )
+            pos += 1;
+
+          text.remove( pos, 1 );
+        }
+      }
+    }
+  }
 }
 
 /// DslDictionary::getArticle()
