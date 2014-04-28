@@ -857,12 +857,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="297"/>
         <source>The search line must contains at least one word contains </source>
-        <translation type="unfinished"></translation>
+        <translation>搜索关键词至少包含</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="298"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>个或更多字符</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="309"/>
