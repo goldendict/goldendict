@@ -3992,7 +3992,7 @@ void MainWindow::showFullTextSearchDialog()
     connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp ) ),
              this, SLOT( showTranslationFor( QString, QStringList, QRegExp ) ) );
     connect( ftsDlg, SIGNAL( closeDialog() ),
-             this, SLOT( closeFullTextSearchDialog() ) );
+             this, SLOT( closeFullTextSearchDialog() ), Qt::QueuedConnection );
     connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
              ftsDlg, SLOT( updateDictionaries() ) );
   }
