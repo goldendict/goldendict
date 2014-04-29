@@ -1354,24 +1354,26 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
   // Read all chains
 
+  QList< uint32_t >::Iterator begOffsets = offsets.begin();
+  QList< uint32_t >::Iterator endOffsets = offsets.end();
+
   for( ; ; )
   {
     vector< WordArticleLink > result = readChain( chainPtr );
+
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      for( QList< uint32_t >::Iterator it = offsets.begin();
-           it != offsets.end(); ++it )
-      {
-        if( isCancelled && *isCancelled )
-          return;
+      QList< uint32_t >::Iterator it = qBinaryFind( begOffsets, endOffsets,
+                                                    result.at( i ).articleOffset );
 
-        if( result.at( i ).articleOffset == *it )
-        {
-          headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
-          offsets.erase( it );
-          break;
-        }
+      if( it != offsets.end() )
+      {
+        headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+        offsets.erase( it );
+        begOffsets = offsets.begin();
+        endOffsets = offsets.end();
       }
+
       if( offsets.isEmpty() )
         break;
     }
