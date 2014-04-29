@@ -287,7 +287,8 @@ private:
 
     /// Loads the article.
     void loadArticle( quint32 address,
-                      string & articleText );
+                      string & articleText,
+                      bool rawText = false );
     string convert( string const & in_data );
 
     friend class AardArticleRequest;
@@ -411,7 +412,8 @@ string AardDictionary::convert( const string & in )
 }
 
 void AardDictionary::loadArticle( quint32 address,
-                                   string & articleText )
+                                  string & articleText,
+                                  bool rawText )
 {
     quint32 articleOffset = address;
     quint32 articleSize;
@@ -509,7 +511,12 @@ void AardDictionary::loadArticle( quint32 address,
     }
 
     if( !articleText.empty() )
+    {
+      if( rawText )
+        return;
+
       articleText = convert( articleText );
+    }
     else
       articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
 
