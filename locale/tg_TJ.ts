@@ -417,22 +417,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../authentication.ui" line="14"/>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>Санҷиши ҳаққонияти прокси лозим аст</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="20"/>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Барои пайдо кардани дастрасӣ тавассути прокси, шумо бояд номи корбар ва паролро ваорид кунед</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="30"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Номи корбар:</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="40"/>
         <source>Password:</source>
-        <translation type="unfinished">Парол:</translation>
+        <translation>Парол:</translation>
     </message>
 </context>
 <context>
@@ -540,107 +540,107 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳолати ҷустуҷӯ</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>Ин унсур муайян мекунад, ки чӣ тавр фитри сатр иҷро мешавад</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Агар интихоб кунед, мавриди аломатҳо ҳангоми филтркунӣ ба ҳисоб гирифта мешавад</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Мавриди мутобиқат</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Калимаҳои аввалинро ба файл содир мекунад</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Содир кардан</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="91"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Барои татбиқ кардани филтр ба рӯйхати калимаҳои аввалин, ин тугмаро зер кунед</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="94"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Татбиқ кардан</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="107"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Агар интихоб кунед, тағйироти филтр ба рӯйхати калимаҳои аввалин дарҳол татбиқ карда мешавад</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="110"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Табиқи худкор</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Филтр:</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="124"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Филтркунии сатрҳо (сатрҳои устувор, ифодаҳои оддӣ ва аломатҳои махсус)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="29"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Матн</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="30"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Аломатҳои махсус</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="31"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Ифодаи оддӣ</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="219"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳамагӣ калимаҳои аввалини беҳамто: %1, филтршуда: %2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="236"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Захира кардани калимаҳои аввалин ба файл</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="238"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Файлҳои матнӣ (*.txt);;Ҳамаи файлҳо (*.*)</translation>
+        <translation>Файлҳои матнӣ (*.txt);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="262"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Содир кардани калимаҳои аввлин...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="262"/>
         <source>Cancel</source>
-        <translation type="unfinished">Бекор кардан</translation>
+        <translation>Бекор кардан</translation>
     </message>
 </context>
 <context>
@@ -688,12 +688,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Намоиш додани ҳамаи калимаҳои аввалини беҳамтои луғат</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Калимаҳои аввалин</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -740,7 +740,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Калимаҳои аввалини луғат</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -811,7 +811,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="69"/>
         <source>None</source>
-        <translation type="unfinished">Ҳеҷ чиз</translation>
+        <translation>Ҳеҷ</translation>
     </message>
 </context>
 <context>
@@ -819,64 +819,64 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="137"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯ дар тамоми матн</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="144"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Калимаҳои пурра</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="145"/>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Матни оддӣ</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="146"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Аломатҳои махсус</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="147"/>
         <source>RexExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Ифодаи оддӣ</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="152"/>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Масофаи ҳадди аксар байни калимаҳо (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="161"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳадди аксари ифодаҳо дар ҳар як луғат (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="184"/>
         <location filename="../fulltextsearch.cc" line="288"/>
         <location filename="../fulltextsearch.cc" line="362"/>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Мақолаҳои ёфтшуда: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="257"/>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>Мураттабсозӣ: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="297"/>
         <source>The search line must contains at least one word contains </source>
-        <translation type="unfinished"></translation>
+        <translation>Хати ҷустуҷӯ бояд ақаллан як калимаро бо </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="298"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation> ё якчанд аломатро дар бар гирад</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="309"/>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ягон луғат барои ҷустуҷӯи матни пурра вуҷуд надорад</translation>
     </message>
 </context>
 <context>
@@ -884,7 +884,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="62"/>
         <source>None</source>
-        <translation type="unfinished">Ҳеҷ чиз</translation>
+        <translation>Ҳеҷ</translation>
     </message>
 </context>
 <context>
@@ -931,57 +931,57 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="203"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯ</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Мавриди мутобиқат</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳолат:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="94"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Мақолаҳои ёфтшуда:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="116"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Луғатҳои дастрас дар гурӯҳ:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="122"/>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Дар ҳоли интизори мураттабсозӣ:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="136"/>
         <source>Non-indexable:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ғайри мураттаб:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="150"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳамагӣ:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="157"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Мураттабшуда:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="181"/>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Мураттабсозӣ: Ҳеҷ</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="229"/>
         <source>Cancel</source>
-        <translation type="unfinished">Бекор кардан</translation>
+        <translation>Бекор кардан</translation>
     </message>
 </context>
 <context>
@@ -1127,12 +1127,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Гурӯҳбандии варақаҳо</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Кушодани рӯйхати гурӯҳҳо</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
@@ -2344,7 +2344,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="336"/>
@@ -2492,22 +2492,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="567"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯ дар саҳифа</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="570"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="578"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯ дар матни пурра</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="581"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -2755,7 +2755,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="892"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>Сатрҳое, ки дар луғатҳо ҷустуҷӯ карда мешаванд. Аломатҳои махсус &apos;*&apos;, &apos;?&apos; ма маҷмӯи аломатҳои &apos;[...]&apos; иҷозат дода намешаванд.
+Барои ёфтани аломатҳои &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos;, аз &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; истифода баред</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3035"/>
@@ -2883,7 +2884,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3881"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Калимаҳои аввалини луғат</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3883"/>
@@ -3032,7 +3033,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="261"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Калимаҳои аввалини луғат</translation>
     </message>
 </context>
 <context>
@@ -3471,37 +3472,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="963"/>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Прокси система</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="970"/>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Прокси фармоишӣ</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="977"/>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Танзимоти прокси</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1157"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯи матни пурра</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1176"/>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Иҷозати матни пурра барои ҷустуҷӯ:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
         <source>Don&apos;t search in dictionaries contains more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯ накардан дар луғатҳо бо зиёда аз</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1270"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>мақолаҳо (0 - номаҳдуд)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1491"/>
