@@ -28,6 +28,7 @@
 #include "zipsounds.hh"
 #include "mdx.hh"
 #include "zim.hh"
+#include "dictserver.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -314,6 +315,13 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   {
     vector< sptr< Dictionary::Class > > dicts =
       VoiceEngines::makeDictionaries( cfg.voiceEngines );
+
+    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+  }
+
+  {
+    vector< sptr< Dictionary::Class > > dicts =
+      DictServer::makeDictionaries( cfg.dictServers );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }

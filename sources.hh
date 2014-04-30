@@ -76,6 +76,36 @@ private:
   Config::WebSites webSites;
 };
 
+/// A model to be projected into the dictServers view, according to Qt's MVC model
+class DictServersModel: public QAbstractItemModel
+{
+  Q_OBJECT
+
+public:
+
+  DictServersModel( QWidget * parent, Config::DictServers const & );
+
+  void removeServer( int index );
+  void addNewServer();
+
+  /// Returns the sites the model currently has listed
+  Config::DictServers const & getCurrentDictServers() const
+  { return dictServers; }
+
+  QModelIndex index( int row, int column, QModelIndex const & parent ) const;
+  QModelIndex parent( QModelIndex const & parent ) const;
+  Qt::ItemFlags flags( QModelIndex const & index ) const;
+  int rowCount( QModelIndex const & parent ) const;
+  int columnCount( QModelIndex const & parent ) const;
+  QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+  QVariant data( QModelIndex const & index, int role ) const;
+  bool setData( QModelIndex const & index, const QVariant & value, int role );
+
+private:
+
+  Config::DictServers dictServers;
+};
+
 /// A model to be projected into the programs view, according to Qt's MVC model
 class ProgramsModel: public QAbstractItemModel
 {
@@ -232,6 +262,9 @@ public:
   Config::WebSites const & getWebSites() const
   { return webSitesModel.getCurrentWebSites(); }
 
+  Config::DictServers const & getDictServers() const
+  { return dictServersModel.getCurrentDictServers(); }
+
   Config::Programs const & getPrograms() const
   { return programsModel.getCurrentPrograms(); }
 
@@ -260,6 +293,7 @@ private:
 
   MediaWikisModel mediawikisModel;
   WebSitesModel webSitesModel;
+  DictServersModel dictServersModel;
   ProgramsModel programsModel;
   PathsModel pathsModel;
   SoundDirsModel soundDirsModel;
@@ -284,6 +318,9 @@ private slots:
 
   void on_addWebSite_clicked();
   void on_removeWebSite_clicked();
+
+  void on_removeDictServer_clicked();
+  void on_addDictServer_clicked();
 
   void on_addProgram_clicked();
   void on_removeProgram_clicked();
