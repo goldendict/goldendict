@@ -20,7 +20,7 @@ enum {
 
 namespace {
 
-#define MAX_MATCHES_COUNT 50
+#define MAX_MATCHES_COUNT 60
 
 bool readLine( QTcpSocket & socket, QString & line,
                QString & errorString, QAtomicInt & isCancelled )
@@ -152,12 +152,14 @@ class DictServerDictionary: public Dictionary::Class
   QString errorString;
   QTcpSocket socket;
   QStringList databases;
+  QStringList strategies;
 
 public:
 
   DictServerDictionary( string const & id, string const & name_,
                         QString const & url_,
                         QString const & database_,
+                        QString const & strategies_,
                         QString const & icon_ ):
     Dictionary::Class( id, vector< string >() ),
     name( name_ ),
@@ -172,6 +174,10 @@ public:
     databases = database_.split( QRegExp( "[ ,;]" ), QString::SkipEmptyParts );
     if( databases.isEmpty() )
       databases.append( "*" );
+
+    strategies = strategies_.split( QRegExp( "[ ,;]" ), QString::SkipEmptyParts );
+    if( strategies.isEmpty() )
+      strategies.append( "prefix" );
   }
 
   virtual string getName() throw()
@@ -313,92 +319,100 @@ void DictServerWordSearchRequest::run()
   {
     QStringList matchesList;
 
-    for( int i = 0; i < dict.databases.size(); i++ )
+    for( int ns = 0; ns < dict.strategies.size(); ns++ )
     {
-      QString matchReq = QString( "MATCH " )
-                         + dict.databases.at( i )
-                         + " prefix \""
-                         + gd::toQString( word )
-                         + "\"\r\n";
-      socket->write( matchReq.toUtf8() );
-      socket->waitForBytesWritten( 1000 );
-
-      if( isCancelled )
-        break;
-
-      QString reply;
-
-      if( !readLine( *socket, reply, errorString, isCancelled ) )
-        break;
-
-      if( isCancelled )
-        break;
-
-      if( reply.left( 3 ) == "250" )
+      for( int i = 0; i < dict.databases.size(); i++ )
       {
-        // "OK" reply - matches info will be later
+        QString matchReq = QString( "MATCH " )
+                           + dict.databases.at( i )
+                           + " " + dict.strategies.at( ns )
+                           + " \"" + gd::toQString( word )
+                           + "\"\r\n";
+        socket->write( matchReq.toUtf8() );
+        socket->waitForBytesWritten( 1000 );
+
+        if( isCancelled )
+          break;
+
+        QString reply;
+
         if( !readLine( *socket, reply, errorString, isCancelled ) )
           break;
 
         if( isCancelled )
           break;
-      }
 
-      if( reply.left( 3 ) == "552" )
-      {
-        // No matches
-        continue;
-      }
-
-      if( reply[ 0 ] == '5' || reply[ 0 ] == '4' )
-      {
-        // Database error
-        gdWarning( "Find matches in \"%s\", database \"%s\" fault: %s\n",
-                   dict.getName().c_str(), dict.databases.at( i ).toUtf8().data(),
-                   reply.toUtf8().data() );
-        continue;
-      }
-
-      if( reply.left( 3 ) == "152" )
-      {
-        // Matches found
-        int countPos = reply.indexOf( ' ', 4 );
-
-        // Get matches count
-        int count = reply.mid( 4, countPos > 4 ? countPos - 4 : -1 ).toInt();
-
-        // Read matches
-        for( int x = 0; x <= count; x++ )
+        if( reply.left( 3 ) == "250" )
         {
-          if( isCancelled )
-            break;
-
+          // "OK" reply - matches info will be later
           if( !readLine( *socket, reply, errorString, isCancelled ) )
             break;
 
-          if( reply[ 0 ] == '.' )
+          if( isCancelled )
             break;
-
-          while( reply.endsWith( '\r' ) || reply.endsWith( '\n' ) )
-            reply.chop( 1 );
-
-          int pos = reply.indexOf( ' ' );
-          if( pos >= 0 )
-          {
-            QString word = reply.mid( pos + 1 );
-            if( word.endsWith( '\"') )
-              word.chop( 1 );
-            if( word[ 0 ] ==  '\"' )
-              word = word.mid( 1 );
-
-            matchesList.append( word );
-          }
         }
 
-        if( isCancelled || !errorString.isEmpty() )
-          break;
+        if( reply.left( 3 ) == "552" )
+        {
+          // No matches
+          continue;
+        }
 
+        if( reply[ 0 ] == '5' || reply[ 0 ] == '4' )
+        {
+          // Database error
+          gdWarning( "Find matches in \"%s\", database \"%s\", strategy \"%s\" fault: %s\n",
+                     dict.getName().c_str(), dict.databases.at( i ).toUtf8().data(),
+                     dict.strategies.at( ns ).toUtf8().data(), reply.toUtf8().data() );
+          continue;
+        }
+
+        if( reply.left( 3 ) == "152" )
+        {
+          // Matches found
+          int countPos = reply.indexOf( ' ', 4 );
+
+          // Get matches count
+          int count = reply.mid( 4, countPos > 4 ? countPos - 4 : -1 ).toInt();
+
+          // Read matches
+          for( int x = 0; x <= count; x++ )
+          {
+            if( isCancelled )
+              break;
+
+            if( !readLine( *socket, reply, errorString, isCancelled ) )
+              break;
+
+            if( reply[ 0 ] == '.' )
+              break;
+
+            while( reply.endsWith( '\r' ) || reply.endsWith( '\n' ) )
+              reply.chop( 1 );
+
+            int pos = reply.indexOf( ' ' );
+            if( pos >= 0 )
+            {
+              QString word = reply.mid( pos + 1 );
+              if( word.endsWith( '\"') )
+                word.chop( 1 );
+              if( word[ 0 ] ==  '\"' )
+                word = word.mid( 1 );
+
+              matchesList.append( word );
+            }
+          }
+          if( isCancelled || !errorString.isEmpty() )
+            break;
+        }
       }
+
+      if( isCancelled || !errorString.isEmpty() )
+        break;
+
+      matchesList.removeDuplicates();
+      if( matchesList.size() >= MAX_MATCHES_COUNT )
+        break;
     }
 
     if( !isCancelled && errorString.isEmpty() )
@@ -770,6 +784,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::DictServers const 
                                                   servers[ x ].name.toUtf8().data(),
                                                   servers[ x ].url,
                                                   servers[ x ].databases,
+                                                  servers[ x ].strategies,
                                                   servers[ x ].iconFilename  ) );
   }
 

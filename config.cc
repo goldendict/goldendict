@@ -637,6 +637,7 @@ Class load() throw( exError )
       d.url = ds.attribute( "url" );
       d.enabled = ( ds.attribute( "enabled" ) == "1" );
       d.databases = ds.attribute( "databases" );
+      d.strategies = ds.attribute( "strategies" );
       d.iconFilename = ds.attribute( "icon" );
 
       c.dictServers.push_back( d );
@@ -1322,6 +1323,10 @@ void save( Class const & c ) throw( exError )
       QDomAttr databases = dd.createAttribute( "databases" );
       databases.setValue( i->databases );
       ds.setAttributeNode( databases );
+
+      QDomAttr strategies = dd.createAttribute( "strategies" );
+      strategies.setValue( i->strategies );
+      ds.setAttributeNode( strategies );
 
       QDomAttr icon = dd.createAttribute( "icon" );
       icon.setValue( i->iconFilename );

@@ -58,6 +58,8 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.dictServers->resizeColumnToContents( 1 );
   ui.dictServers->resizeColumnToContents( 2 );
   ui.dictServers->resizeColumnToContents( 3 );
+  ui.dictServers->resizeColumnToContents( 4 );
+  ui.dictServers->resizeColumnToContents( 5 );
 
   ui.programs->setTabKeyNavigation( true );
   ui.programs->setModel( &programsModel );
@@ -748,7 +750,7 @@ int DictServersModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 5;
+    return 6;
 }
 
 QVariant DictServersModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
@@ -765,6 +767,8 @@ QVariant DictServersModel::headerData( int section, Qt::Orientation /*orientatio
       case 3:
         return tr( "Databases" );
       case 4:
+        return tr( "Strategies" );
+      case 5:
         return tr( "Icon" );
       default:
         return QVariant();
@@ -789,6 +793,8 @@ QVariant DictServersModel::data( QModelIndex const & index, int role ) const
       case 3:
         return dictServers[ index.row() ].databases;
       case 4:
+        return dictServers[ index.row() ].strategies;
+      case 5:
         return dictServers[ index.row() ].iconFilename;
       default:
         return QVariant();
@@ -797,6 +803,9 @@ QVariant DictServersModel::data( QModelIndex const & index, int role ) const
 
   if( role == Qt::ToolTipRole && index.column() == 3 )
     return tr( "Comma-delimited list of databases\n(empty string or \"*\" matches all databases)" );
+
+  if( role == Qt::ToolTipRole && index.column() == 4 )
+    return tr( "Comma-delimited list of search strategies\n(empty string mean \"prefix\" strategy)" );
 
   if ( role == Qt::CheckStateRole && !index.column() )
     return dictServers[ index.row() ].enabled ? Qt::Checked : Qt::Unchecked;
@@ -835,6 +844,10 @@ bool DictServersModel::setData( QModelIndex const & index, const QVariant & valu
         dataChanged( index, index );
         return true;
       case 4:
+        dictServers[ index.row() ].strategies =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 5:
         dictServers[ index.row() ].iconFilename =  value.toString();
         dataChanged( index, index );
         return true;
