@@ -602,6 +602,15 @@ between classic and school orthography in cyrillic)</source>
 (empty string or &quot;*&quot; matches all databases)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Strategies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-delimited list of search strategies
+(empty string mean &quot;prefix&quot; strategy)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictionaryBar</name>
