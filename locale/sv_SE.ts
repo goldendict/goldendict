@@ -594,27 +594,27 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="219"/>
+        <location filename="../dictheadwords.cc" line="218"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="235"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="238"/>
+        <location filename="../dictheadwords.cc" line="237"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">Textfiler (*.txt);;Alla filer (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="262"/>
+        <location filename="../dictheadwords.cc" line="261"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="262"/>
+        <location filename="../dictheadwords.cc" line="261"/>
         <source>Cancel</source>
         <translation type="unfinished">Avbryt</translation>
     </message>
@@ -688,6 +688,40 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
 </context>
 <context>
+    <name>DictServersModel</name>
+    <message>
+        <location filename="../sources.cc" line="760"/>
+        <source>Enabled</source>
+        <translation type="unfinished">Aktiverad</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="762"/>
+        <source>Name</source>
+        <translation type="unfinished">Namn</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="764"/>
+        <source>Address</source>
+        <translation type="unfinished">Adress</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="766"/>
+        <source>Databases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="768"/>
+        <source>Icon</source>
+        <translation type="unfinished">Ikon</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="799"/>
+        <source>Comma-delimited list of databases
+(empty string or &quot;*&quot; matches all databases)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictionaryBar</name>
     <message>
         <location filename="../dictionarybar.cc" line="15"/>
@@ -739,13 +773,13 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
-        <location filename="../editdictionaries.cc" line="225"/>
+        <location filename="../editdictionaries.cc" line="227"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Ordlistor</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="228"/>
+        <location filename="../editdictionaries.cc" line="230"/>
         <source>&amp;Groups</source>
         <translation>&amp;Grupper</translation>
     </message>
@@ -789,64 +823,64 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="137"/>
+        <location filename="../fulltextsearch.cc" line="140"/>
         <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="144"/>
+        <location filename="../fulltextsearch.cc" line="147"/>
         <source>Whole words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="145"/>
+        <location filename="../fulltextsearch.cc" line="148"/>
         <source>Plain text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="146"/>
+        <location filename="../fulltextsearch.cc" line="149"/>
         <source>Wildcards</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="147"/>
+        <location filename="../fulltextsearch.cc" line="150"/>
         <source>RexExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="152"/>
+        <location filename="../fulltextsearch.cc" line="155"/>
         <source>Max distance between words (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="161"/>
+        <location filename="../fulltextsearch.cc" line="164"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="184"/>
-        <location filename="../fulltextsearch.cc" line="288"/>
-        <location filename="../fulltextsearch.cc" line="362"/>
+        <location filename="../fulltextsearch.cc" line="187"/>
+        <location filename="../fulltextsearch.cc" line="292"/>
+        <location filename="../fulltextsearch.cc" line="366"/>
         <source>Articles found: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="257"/>
+        <location filename="../fulltextsearch.cc" line="261"/>
         <source>Now indexing: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="297"/>
+        <location filename="../fulltextsearch.cc" line="301"/>
         <source>The search line must contains at least one word contains </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="298"/>
+        <location filename="../fulltextsearch.cc" line="302"/>
         <source> or more symbols</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="309"/>
+        <location filename="../fulltextsearch.cc" line="313"/>
         <source>No dictionaries for full-text search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1187,12 +1221,12 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1131"/>
+        <location filename="../sources.cc" line="1327"/>
         <source>Enabled</source>
         <translation>Aktiverad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1133"/>
+        <location filename="../sources.cc" line="1329"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
@@ -2232,7 +2266,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="241"/>
+        <location filename="../loaddictionaries.cc" line="242"/>
         <source>Error loading dictionaries</source>
         <translation>Fel vid inläsning av ordlistorna</translation>
     </message>
@@ -2849,22 +2883,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="415"/>
+        <location filename="../sources.cc" line="447"/>
         <source>Enabled</source>
         <translation>Aktiverad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="417"/>
+        <location filename="../sources.cc" line="449"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="419"/>
+        <location filename="../sources.cc" line="451"/>
         <source>Address</source>
         <translation>Adress</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="421"/>
+        <location filename="../sources.cc" line="453"/>
         <source>Icon</source>
         <translation>Ikon</translation>
     </message>
@@ -2958,12 +2992,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="913"/>
+        <location filename="../sources.cc" line="1109"/>
         <source>Path</source>
         <translation>Sökväg</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="915"/>
+        <location filename="../sources.cc" line="1111"/>
         <source>Recursive</source>
         <translation>Rekursiv</translation>
     </message>
@@ -3714,27 +3748,27 @@ du inte aktivera det här alternativet.</translation>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="821"/>
+        <location filename="../sources.cc" line="1017"/>
         <source>Audio</source>
         <translation>Ljud</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="823"/>
+        <location filename="../sources.cc" line="1019"/>
         <source>Plain Text</source>
         <translation>Oformaterad text</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="825"/>
+        <location filename="../sources.cc" line="1021"/>
         <source>Html</source>
         <translation>HTML</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="827"/>
+        <location filename="../sources.cc" line="1023"/>
         <source>Prefix Match</source>
         <translation>Prefixmatchning</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="829"/>
+        <location filename="../sources.cc" line="1025"/>
         <source>Unknown</source>
         <translation>Okänd</translation>
     </message>
@@ -3760,27 +3794,27 @@ du inte aktivera det här alternativet.</translation>
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="729"/>
+        <location filename="../sources.cc" line="925"/>
         <source>Enabled</source>
         <translation>Aktiverad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="731"/>
+        <location filename="../sources.cc" line="927"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="733"/>
+        <location filename="../sources.cc" line="929"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="735"/>
+        <location filename="../sources.cc" line="931"/>
         <source>Command Line</source>
         <translation>Kommandorad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="737"/>
+        <location filename="../sources.cc" line="933"/>
         <source>Icon</source>
         <translation>Ikon</translation>
     </message>
@@ -3788,13 +3822,13 @@ du inte aktivera det här alternativet.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="427"/>
-        <location filename="../dsl.cc" line="1564"/>
+        <location filename="../aard.cc" line="429"/>
+        <location filename="../dsl.cc" line="1620"/>
         <source>Article loading error</source>
         <translation>Artikelinläsningsfel</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="514"/>
+        <location filename="../aard.cc" line="521"/>
         <source>Article decoding error</source>
         <translation>Artikelavkodningsfel</translation>
     </message>
@@ -3924,12 +3958,12 @@ du inte aktivera det här alternativet.</translation>
 <context>
     <name>Romaji</name>
     <message>
-        <location filename="../romaji.cc" line="107"/>
+        <location filename="../romaji.cc" line="108"/>
         <source>Hepburn Romaji for Hiragana</source>
         <translation>Romanisering för hiragana enl. Hepburn-systemet</translation>
     </message>
     <message>
-        <location filename="../romaji.cc" line="116"/>
+        <location filename="../romaji.cc" line="117"/>
         <source>Hepburn Romaji for Katakana</source>
         <translation>Romanisering för katakana enl. Hepburn-systemet</translation>
     </message>
@@ -4010,17 +4044,17 @@ Rutan kan storleksändras och hanteras på andra sätt.</translation>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1019"/>
+        <location filename="../sources.cc" line="1215"/>
         <source>Path</source>
         <translation>Sökväg</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1021"/>
+        <location filename="../sources.cc" line="1217"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1023"/>
+        <location filename="../sources.cc" line="1219"/>
         <source>Icon</source>
         <translation>Ikon</translation>
     </message>
@@ -4042,7 +4076,8 @@ Rutan kan storleksändras och hanteras på andra sätt.</translation>
         <location filename="../sources.ui" line="120"/>
         <location filename="../sources.ui" line="244"/>
         <location filename="../sources.ui" line="303"/>
-        <location filename="../sources.ui" line="370"/>
+        <location filename="../sources.ui" line="367"/>
+        <location filename="../sources.ui" line="426"/>
         <source>&amp;Add...</source>
         <translation>&amp;Lägg till …</translation>
     </message>
@@ -4051,7 +4086,8 @@ Rutan kan storleksändras och hanteras på andra sätt.</translation>
         <location filename="../sources.ui" line="127"/>
         <location filename="../sources.ui" line="251"/>
         <location filename="../sources.ui" line="310"/>
-        <location filename="../sources.ui" line="377"/>
+        <location filename="../sources.ui" line="374"/>
+        <location filename="../sources.ui" line="433"/>
         <source>&amp;Remove</source>
         <translation>Ta &amp;bort</translation>
     </message>
@@ -4126,32 +4162,32 @@ använda dem.</translation>
         <translation>Ange de webbplatser du vill använda. Strängen %GDWORD% ersätts av sökordet vid sökning:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="347"/>
+        <location filename="../sources.ui" line="403"/>
         <source>Programs</source>
         <translation>Program</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="406"/>
+        <location filename="../sources.ui" line="462"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="418"/>
+        <location filename="../sources.ui" line="474"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Uppläsning av ord från &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;, en webbplats som låter människor spela in och dela uttal av ord. Du kan lyssna på inspelningarna inifrån GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="431"/>
+        <location filename="../sources.ui" line="487"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Aktivera orduppläsningar från Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="461"/>
+        <location filename="../sources.ui" line="517"/>
         <source>API Key:</source>
         <translation>API-nyckel:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="468"/>
+        <location filename="../sources.ui" line="524"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -4161,7 +4197,7 @@ som kan komma att bli otillgänglig i framtiden, eller registrera
 dig på webbplatsen för att få din egen nyckel.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="493"/>
+        <location filename="../sources.ui" line="549"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation>Skaffa en egen nyckel &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;här&lt;/a&gt; eller lämna fältet tomt för att använda standardnyckeln.</translation>
     </message>
@@ -4173,79 +4209,89 @@ dig på webbplatsen för att få din egen nyckel.</translation>
 %GDBIG5% för Big5, %GDBIG5HKSCS% för Big5-HKSCS, %GDGBK% för GBK och GB18030, samt %GDSHIFTJIS% för Shift JIS.</translation>
     </message>
     <message>
+        <location filename="../sources.ui" line="347"/>
+        <source>DICT servers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../sources.ui" line="353"/>
+        <source>DICT servers:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="409"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation>Ange de program du vill använda. Strängen %GDWORD% ersätts av sökordet. Om strängen inte finns kommer sökordet att matas in som standardindata.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="506"/>
+        <location filename="../sources.ui" line="562"/>
         <source>Language codes (comma-separated):</source>
         <translation>Språkkoder:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="513"/>
+        <location filename="../sources.ui" line="569"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Lista över språkkoder för de som du vill ha tillgång till. Exempel: &quot;en, fr, sv&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="536"/>
+        <location filename="../sources.ui" line="592"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Avgränsa språkkoderna med kommatecken. En fullständig lista över språkkoder finns tillgänglig &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;här&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="578"/>
+        <location filename="../sources.ui" line="634"/>
         <source>Transliteration</source>
         <translation>Translitterering</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="599"/>
+        <location filename="../sources.ui" line="655"/>
         <source>Russian transliteration</source>
         <translation>Translitterering av ryska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="610"/>
+        <location filename="../sources.ui" line="666"/>
         <source>Greek transliteration</source>
         <translation>Translitterering av grekiska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="634"/>
+        <location filename="../sources.ui" line="690"/>
         <source>German transliteration</source>
         <translation>Translitterering av tyska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="645"/>
+        <location filename="../sources.ui" line="701"/>
         <source>Belarusian transliteration</source>
         <translation>Translitterering av vitryska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="671"/>
+        <location filename="../sources.ui" line="727"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Låter dig använda det latinska alfabetet för att skriva på japanska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="674"/>
+        <location filename="../sources.ui" line="730"/>
         <source>Japanese Romaji</source>
         <translation>Romanisering av japanska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="686"/>
+        <location filename="../sources.ui" line="742"/>
         <source>Systems:</source>
         <translation>System:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="749"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Den mest utbredda metoden för transkribering av japanska,
 baserad på engelsk fonologi.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="697"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Hepburn</source>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="707"/>
+        <location filename="../sources.ui" line="763"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -4256,12 +4302,12 @@ stavelseskriftsystemet kana. Standardiserat som ISO 3602.
 Har ännu inte implementerats i  GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="713"/>
+        <location filename="../sources.ui" line="769"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="723"/>
+        <location filename="../sources.ui" line="779"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -4272,75 +4318,77 @@ Standardiserat som ISO 3602.
 Har ännu inte implementerats i  GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="729"/>
+        <location filename="../sources.ui" line="785"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="736"/>
+        <location filename="../sources.ui" line="792"/>
         <source>Syllabaries:</source>
         <translation>Stavelseskrifter:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="743"/>
+        <location filename="../sources.ui" line="799"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Den japanska stavelseskriften hiragana.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="746"/>
+        <location filename="../sources.ui" line="802"/>
         <source>Hiragana</source>
         <translation>Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="753"/>
+        <location filename="../sources.ui" line="809"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Den japanska stavelseskriften katakana.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="756"/>
+        <location filename="../sources.ui" line="812"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="100"/>
+        <location filename="../sources.cc" line="108"/>
         <source>Text to Speech</source>
         <translation>Text till tal</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="116"/>
+        <location filename="../sources.cc" line="124"/>
         <source>(not available in portable version)</source>
         <translation>(inte tillgängligt i den portabla versionen)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="153"/>
-        <location filename="../sources.cc" line="180"/>
-        <location filename="../sources.cc" line="207"/>
+        <location filename="../sources.cc" line="161"/>
+        <location filename="../sources.cc" line="188"/>
+        <location filename="../sources.cc" line="215"/>
         <source>Choose a directory</source>
         <translation>Välj en mapp</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="167"/>
-        <location filename="../sources.cc" line="194"/>
-        <location filename="../sources.cc" line="234"/>
-        <location filename="../sources.cc" line="258"/>
-        <location filename="../sources.cc" line="282"/>
+        <location filename="../sources.cc" line="175"/>
+        <location filename="../sources.cc" line="202"/>
+        <location filename="../sources.cc" line="242"/>
+        <location filename="../sources.cc" line="266"/>
+        <location filename="../sources.cc" line="290"/>
+        <location filename="../sources.cc" line="314"/>
         <source>Confirm removal</source>
         <translation>Bekräfta borttagning</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="168"/>
-        <location filename="../sources.cc" line="195"/>
+        <location filename="../sources.cc" line="176"/>
+        <location filename="../sources.cc" line="203"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Vill du ta bort mappen &lt;b&gt;%1&lt;/b&gt; ur listan?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="235"/>
-        <location filename="../sources.cc" line="259"/>
+        <location filename="../sources.cc" line="243"/>
+        <location filename="../sources.cc" line="267"/>
+        <location filename="../sources.cc" line="291"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Vill du ta bort webbplatsen &lt;b&gt;%1&lt;/b&gt; ur listan?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="283"/>
+        <location filename="../sources.cc" line="315"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Vill du ta bort programmet &lt;b&gt;%1&lt;/b&gt; ur listan?</translation>
     </message>
@@ -4470,22 +4518,22 @@ Har ännu inte implementerats i  GoldenDict.</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="572"/>
+        <location filename="../sources.cc" line="604"/>
         <source>Enabled</source>
         <translation>Aktiverad</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="574"/>
+        <location filename="../sources.cc" line="606"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="576"/>
+        <location filename="../sources.cc" line="608"/>
         <source>Address</source>
         <translation>Adress</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="578"/>
+        <location filename="../sources.cc" line="610"/>
         <source>Icon</source>
         <translation>Ikon</translation>
     </message>

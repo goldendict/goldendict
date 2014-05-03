@@ -619,27 +619,27 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="219"/>
+        <location filename="../dictheadwords.cc" line="218"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="235"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="238"/>
+        <location filename="../dictheadwords.cc" line="237"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">Pliki tekstowe (*.txt);;Wszystkie pliki (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="262"/>
+        <location filename="../dictheadwords.cc" line="261"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="262"/>
+        <location filename="../dictheadwords.cc" line="261"/>
         <source>Cancel</source>
         <translation type="unfinished">Anuluj</translation>
     </message>
@@ -713,6 +713,40 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     </message>
 </context>
 <context>
+    <name>DictServersModel</name>
+    <message>
+        <location filename="../sources.cc" line="760"/>
+        <source>Enabled</source>
+        <translation type="unfinished">Włączone</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="762"/>
+        <source>Name</source>
+        <translation type="unfinished">Nazwa</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="764"/>
+        <source>Address</source>
+        <translation type="unfinished">Adres</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="766"/>
+        <source>Databases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="768"/>
+        <source>Icon</source>
+        <translation type="unfinished">Ikona</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="799"/>
+        <source>Comma-delimited list of databases
+(empty string or &quot;*&quot; matches all databases)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
@@ -763,13 +797,13 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
-        <location filename="../editdictionaries.cc" line="225"/>
+        <location filename="../editdictionaries.cc" line="227"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Słowniki</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="228"/>
+        <location filename="../editdictionaries.cc" line="230"/>
         <source>&amp;Groups</source>
         <translation>&amp;Grupy</translation>
     </message>
@@ -818,64 +852,64 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="137"/>
+        <location filename="../fulltextsearch.cc" line="140"/>
         <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="144"/>
+        <location filename="../fulltextsearch.cc" line="147"/>
         <source>Whole words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="145"/>
+        <location filename="../fulltextsearch.cc" line="148"/>
         <source>Plain text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="146"/>
+        <location filename="../fulltextsearch.cc" line="149"/>
         <source>Wildcards</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="147"/>
+        <location filename="../fulltextsearch.cc" line="150"/>
         <source>RexExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="152"/>
+        <location filename="../fulltextsearch.cc" line="155"/>
         <source>Max distance between words (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="161"/>
+        <location filename="../fulltextsearch.cc" line="164"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="184"/>
-        <location filename="../fulltextsearch.cc" line="288"/>
-        <location filename="../fulltextsearch.cc" line="362"/>
+        <location filename="../fulltextsearch.cc" line="187"/>
+        <location filename="../fulltextsearch.cc" line="292"/>
+        <location filename="../fulltextsearch.cc" line="366"/>
         <source>Articles found: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="257"/>
+        <location filename="../fulltextsearch.cc" line="261"/>
         <source>Now indexing: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="297"/>
+        <location filename="../fulltextsearch.cc" line="301"/>
         <source>The search line must contains at least one word contains </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="298"/>
+        <location filename="../fulltextsearch.cc" line="302"/>
         <source> or more symbols</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="309"/>
+        <location filename="../fulltextsearch.cc" line="313"/>
         <source>No dictionaries for full-text search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1215,12 +1249,12 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1131"/>
+        <location filename="../sources.cc" line="1327"/>
         <source>Enabled</source>
         <translation>Włączone</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1133"/>
+        <location filename="../sources.cc" line="1329"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
@@ -2260,7 +2294,7 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="241"/>
+        <location filename="../loaddictionaries.cc" line="242"/>
         <source>Error loading dictionaries</source>
         <translation>Błąd podczas ładowania słowników</translation>
     </message>
@@ -2925,22 +2959,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="415"/>
+        <location filename="../sources.cc" line="447"/>
         <source>Enabled</source>
         <translation>Włączone</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="417"/>
+        <location filename="../sources.cc" line="449"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="419"/>
+        <location filename="../sources.cc" line="451"/>
         <source>Address</source>
         <translation>Adres</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="421"/>
+        <location filename="../sources.cc" line="453"/>
         <source>Icon</source>
         <translation>Ikona</translation>
     </message>
@@ -3034,12 +3068,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="913"/>
+        <location filename="../sources.cc" line="1109"/>
         <source>Path</source>
         <translation>Ścieżka</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="915"/>
+        <location filename="../sources.cc" line="1111"/>
         <source>Recursive</source>
         <translation>Uwzględniaj podkatalogi</translation>
     </message>
@@ -3812,27 +3846,27 @@ otwarcia strony pobierania.</translation>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="821"/>
+        <location filename="../sources.cc" line="1017"/>
         <source>Audio</source>
         <translation>Dźwięk</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="823"/>
+        <location filename="../sources.cc" line="1019"/>
         <source>Plain Text</source>
         <translation>Zwykły tekst</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="825"/>
+        <location filename="../sources.cc" line="1021"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="827"/>
+        <location filename="../sources.cc" line="1023"/>
         <source>Prefix Match</source>
         <translation>Zgodność przedrostków</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="829"/>
+        <location filename="../sources.cc" line="1025"/>
         <source>Unknown</source>
         <translation>Nieznane</translation>
     </message>
@@ -3858,27 +3892,27 @@ otwarcia strony pobierania.</translation>
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="729"/>
+        <location filename="../sources.cc" line="925"/>
         <source>Enabled</source>
         <translation>Włączone</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="731"/>
+        <location filename="../sources.cc" line="927"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="733"/>
+        <location filename="../sources.cc" line="929"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="735"/>
+        <location filename="../sources.cc" line="931"/>
         <source>Command Line</source>
         <translation>Wiersz komend</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="737"/>
+        <location filename="../sources.cc" line="933"/>
         <source>Icon</source>
         <translation>Ikona</translation>
     </message>
@@ -3886,13 +3920,13 @@ otwarcia strony pobierania.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="427"/>
-        <location filename="../dsl.cc" line="1564"/>
+        <location filename="../aard.cc" line="429"/>
+        <location filename="../dsl.cc" line="1620"/>
         <source>Article loading error</source>
         <translation>Błąd ładowania artykułu</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="514"/>
+        <location filename="../aard.cc" line="521"/>
         <source>Article decoding error</source>
         <translation>Błąd dekodowania artykułu</translation>
     </message>
@@ -4022,12 +4056,12 @@ otwarcia strony pobierania.</translation>
 <context>
     <name>Romaji</name>
     <message>
-        <location filename="../romaji.cc" line="107"/>
+        <location filename="../romaji.cc" line="108"/>
         <source>Hepburn Romaji for Hiragana</source>
         <translation>Hepburn Romaji dla Hiragana</translation>
     </message>
     <message>
-        <location filename="../romaji.cc" line="116"/>
+        <location filename="../romaji.cc" line="117"/>
         <source>Hepburn Romaji for Katakana</source>
         <translation>Hepburn Romaji dla Katakana</translation>
     </message>
@@ -4124,17 +4158,17 @@ temu można zmieniać jego wielkość i zarządzać nim w inny sposób.</transla
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1019"/>
+        <location filename="../sources.cc" line="1215"/>
         <source>Path</source>
         <translation>Ścieżka</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1021"/>
+        <location filename="../sources.cc" line="1217"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1023"/>
+        <location filename="../sources.cc" line="1219"/>
         <source>Icon</source>
         <translation>Ikona</translation>
     </message>
@@ -4142,45 +4176,47 @@ temu można zmieniać jego wielkość i zarządzać nim w inny sposób.</transla
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="100"/>
+        <location filename="../sources.cc" line="108"/>
         <source>Text to Speech</source>
         <translation>Tekst na mowę</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="116"/>
+        <location filename="../sources.cc" line="124"/>
         <source>(not available in portable version)</source>
         <translation>(niedostępne w wersji przenośnej)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="153"/>
-        <location filename="../sources.cc" line="180"/>
-        <location filename="../sources.cc" line="207"/>
+        <location filename="../sources.cc" line="161"/>
+        <location filename="../sources.cc" line="188"/>
+        <location filename="../sources.cc" line="215"/>
         <source>Choose a directory</source>
         <translation>Wybierz katalog</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="167"/>
-        <location filename="../sources.cc" line="194"/>
-        <location filename="../sources.cc" line="234"/>
-        <location filename="../sources.cc" line="258"/>
-        <location filename="../sources.cc" line="282"/>
+        <location filename="../sources.cc" line="175"/>
+        <location filename="../sources.cc" line="202"/>
+        <location filename="../sources.cc" line="242"/>
+        <location filename="../sources.cc" line="266"/>
+        <location filename="../sources.cc" line="290"/>
+        <location filename="../sources.cc" line="314"/>
         <source>Confirm removal</source>
         <translation>Potwierdzenie usunięcia</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="168"/>
-        <location filename="../sources.cc" line="195"/>
+        <location filename="../sources.cc" line="176"/>
+        <location filename="../sources.cc" line="203"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Czy usunąć katalog &lt;b&gt;%1&lt;/b&gt; z listy?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="235"/>
-        <location filename="../sources.cc" line="259"/>
+        <location filename="../sources.cc" line="243"/>
+        <location filename="../sources.cc" line="267"/>
+        <location filename="../sources.cc" line="291"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Czy usunąć witrynę &lt;b&gt;%1&lt;/b&gt; z listy?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="283"/>
+        <location filename="../sources.cc" line="315"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Czy usunąć program &lt;b&gt;%1&lt;/b&gt; z listy?</translation>
     </message>
@@ -4199,7 +4235,8 @@ temu można zmieniać jego wielkość i zarządzać nim w inny sposób.</transla
         <location filename="../sources.ui" line="120"/>
         <location filename="../sources.ui" line="244"/>
         <location filename="../sources.ui" line="303"/>
-        <location filename="../sources.ui" line="370"/>
+        <location filename="../sources.ui" line="367"/>
+        <location filename="../sources.ui" line="426"/>
         <source>&amp;Add...</source>
         <translation>&amp;Dodaj...</translation>
     </message>
@@ -4208,7 +4245,8 @@ temu można zmieniać jego wielkość i zarządzać nim w inny sposób.</transla
         <location filename="../sources.ui" line="127"/>
         <location filename="../sources.ui" line="251"/>
         <location filename="../sources.ui" line="310"/>
-        <location filename="../sources.ui" line="377"/>
+        <location filename="../sources.ui" line="374"/>
+        <location filename="../sources.ui" line="433"/>
         <source>&amp;Remove</source>
         <translation>&amp;Usuń</translation>
     </message>
@@ -4288,7 +4326,7 @@ właściwej grupy.</translation>
         <translation type="obsolete">Można też użyć ciągu znaków %GD1251% dla słów w stronie kodowej CP1251 lub ciągu znaków %GDISO1% dla słów w stronie kodowej ISO 8859-1.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="347"/>
+        <location filename="../sources.ui" line="403"/>
         <source>Programs</source>
         <translation>Programy</translation>
     </message>
@@ -4297,27 +4335,27 @@ właściwej grupy.</translation>
         <translation type="obsolete">Wszystkie programy zewnętrzne. Ciąg znaków %GDWORD% zostaje zastąpiony wyszukiwanym słowem. To słowo zostaje także umieszczone w standardowym wejściu.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="406"/>
+        <location filename="../sources.ui" line="462"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="418"/>
+        <location filename="../sources.ui" line="474"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Rzeczywista wymowa z witryny &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Witryna ta umożliwia rejestrowanie i udostępnianie wzorów wymowy słów. Można z nich korzystać w programie GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="431"/>
+        <location filename="../sources.ui" line="487"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Włącz dostęp do wymowy w witrynie Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="461"/>
+        <location filename="../sources.ui" line="517"/>
         <source>API Key:</source>
         <translation>Klucz API:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="468"/>
+        <location filename="../sources.ui" line="524"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -4326,7 +4364,7 @@ pole, aby użyć klucza domyślnego, który w przyszłości może przestać być
 dostępny, lub zarejestruj się w tej witrynie, aby uzyskać własny klucz API.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="493"/>
+        <location filename="../sources.ui" line="549"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation>Uzyskaj własny klucz &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;tutaj&lt;/a&gt; lub pozostaw puste pole, aby użyć klucza domyślnego.</translation>
     </message>
@@ -4356,79 +4394,89 @@ p, li { white-space: pre-wrap; }
 %GDBIG5% dla Big-5, %GDBIG5HKSCS% dla Big5-HKSCS, %GDGBK% dla GBK i GB18030, %GDSHIFTJIS% dla Shift-JIS.</translation>
     </message>
     <message>
+        <location filename="../sources.ui" line="347"/>
+        <source>DICT servers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../sources.ui" line="353"/>
+        <source>DICT servers:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="409"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation>Dowolne programy zewnętrzne. Ciąg znaków %GDWORD% zostanie zastąpiony wyszukiwanym słowem. Przy braku tego ciągu znaków, słowo zostanie przesłane do standardowego wejścia.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="506"/>
+        <location filename="../sources.ui" line="562"/>
         <source>Language codes (comma-separated):</source>
         <translation>Kody języków (rozdzielone przecinkami):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="513"/>
+        <location filename="../sources.ui" line="569"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Lista wybranych kodów języków. Na przykład: „en, ru, pl”.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="536"/>
+        <location filename="../sources.ui" line="592"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Pełna lista kodów języków jest dostępna &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;tutaj&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="578"/>
+        <location filename="../sources.ui" line="634"/>
         <source>Transliteration</source>
         <translation>Transliteracja</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="599"/>
+        <location filename="../sources.ui" line="655"/>
         <source>Russian transliteration</source>
         <translation>Transliteracja rosyjska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="610"/>
+        <location filename="../sources.ui" line="666"/>
         <source>Greek transliteration</source>
         <translation>Transliteracja grecka</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="634"/>
+        <location filename="../sources.ui" line="690"/>
         <source>German transliteration</source>
         <translation>Transliteracja niemiecka</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="645"/>
+        <location filename="../sources.ui" line="701"/>
         <source>Belarusian transliteration</source>
         <translation>Transliteracja białoruska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="671"/>
+        <location filename="../sources.ui" line="727"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Umożliwia pisanie w języku japońskim za pomocą alfabetu łacińskiego</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="674"/>
+        <location filename="../sources.ui" line="730"/>
         <source>Japanese Romaji</source>
         <translation>Japońskie Rōmaji</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="686"/>
+        <location filename="../sources.ui" line="742"/>
         <source>Systems:</source>
         <translation>Systemy:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="749"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Najczęściej używana metoda transkrypcji języka japońskiego
 oparta na wymowie angielskiej</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="697"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Hepburn</source>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="707"/>
+        <location filename="../sources.ui" line="763"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -4439,12 +4487,12 @@ odpowiedniość z systemem zapisu kana. Opisany przez standard ISO 3602.
 Systemu tego nie zaimplementowano jeszcze w programie GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="713"/>
+        <location filename="../sources.ui" line="769"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="723"/>
+        <location filename="../sources.ui" line="779"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -4456,32 +4504,32 @@ Opisany przez standard ISO 3602.
 Systemu tego nie zaimplementowano jeszcze w programie GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="729"/>
+        <location filename="../sources.ui" line="785"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="736"/>
+        <location filename="../sources.ui" line="792"/>
         <source>Syllabaries:</source>
         <translation>Zapisy sylabiczne:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="743"/>
+        <location filename="../sources.ui" line="799"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Japoński zapis sylabiczny Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="746"/>
+        <location filename="../sources.ui" line="802"/>
         <source>Hiragana</source>
         <translation>Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="753"/>
+        <location filename="../sources.ui" line="809"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Japoński zapis sylabiczny Katakana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="756"/>
+        <location filename="../sources.ui" line="812"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>
@@ -4611,22 +4659,22 @@ Systemu tego nie zaimplementowano jeszcze w programie GoldenDict.</translation>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="572"/>
+        <location filename="../sources.cc" line="604"/>
         <source>Enabled</source>
         <translation>Włączone</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="574"/>
+        <location filename="../sources.cc" line="606"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="576"/>
+        <location filename="../sources.cc" line="608"/>
         <source>Address</source>
         <translation>Adres</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="578"/>
+        <location filename="../sources.cc" line="610"/>
         <source>Icon</source>
         <translation>Ikona</translation>
     </message>

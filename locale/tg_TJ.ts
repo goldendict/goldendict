@@ -618,27 +618,27 @@ between classic and school orthography in cyrillic)</source>
         <translation>Ифодаи оддӣ</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="219"/>
+        <location filename="../dictheadwords.cc" line="218"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation>Ҳамагӣ калимаҳои аввалини беҳамто: %1, филтршуда: %2</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="235"/>
         <source>Save headwords to file</source>
         <translation>Захира кардани калимаҳои аввалин ба файл</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="238"/>
+        <location filename="../dictheadwords.cc" line="237"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Файлҳои матнӣ (*.txt);;Ҳамаи файлҳо (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="262"/>
+        <location filename="../dictheadwords.cc" line="261"/>
         <source>Export headwords...</source>
         <translation>Содир кардани калимаҳои аввлин...</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="262"/>
+        <location filename="../dictheadwords.cc" line="261"/>
         <source>Cancel</source>
         <translation>Бекор кардан</translation>
     </message>
@@ -712,6 +712,40 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>DictServersModel</name>
+    <message>
+        <location filename="../sources.cc" line="760"/>
+        <source>Enabled</source>
+        <translation type="unfinished">Фаъолшуда</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="762"/>
+        <source>Name</source>
+        <translation type="unfinished">Ном</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="764"/>
+        <source>Address</source>
+        <translation type="unfinished">Суроға</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="766"/>
+        <source>Databases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="768"/>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="799"/>
+        <source>Comma-delimited list of databases
+(empty string or &quot;*&quot; matches all databases)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
@@ -767,13 +801,13 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
-        <location filename="../editdictionaries.cc" line="225"/>
+        <location filename="../editdictionaries.cc" line="227"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Луғатҳо</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="228"/>
+        <location filename="../editdictionaries.cc" line="230"/>
         <source>&amp;Groups</source>
         <translation>&amp;Гурӯҳҳо</translation>
     </message>
@@ -817,64 +851,64 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="137"/>
+        <location filename="../fulltextsearch.cc" line="140"/>
         <source>Full-text search</source>
         <translation>Ҷустуҷӯ дар тамоми матн</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="144"/>
+        <location filename="../fulltextsearch.cc" line="147"/>
         <source>Whole words</source>
         <translation>Калимаҳои пурра</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="145"/>
+        <location filename="../fulltextsearch.cc" line="148"/>
         <source>Plain text</source>
         <translation>Матни оддӣ</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="146"/>
+        <location filename="../fulltextsearch.cc" line="149"/>
         <source>Wildcards</source>
         <translation>Аломатҳои махсус</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="147"/>
+        <location filename="../fulltextsearch.cc" line="150"/>
         <source>RexExp</source>
         <translation>Ифодаи оддӣ</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="152"/>
+        <location filename="../fulltextsearch.cc" line="155"/>
         <source>Max distance between words (%1-%2):</source>
         <translation>Масофаи ҳадди аксар байни калимаҳо (%1-%2):</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="161"/>
+        <location filename="../fulltextsearch.cc" line="164"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation>Ҳадди аксари ифодаҳо дар ҳар як луғат (%1-%2):</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="184"/>
-        <location filename="../fulltextsearch.cc" line="288"/>
-        <location filename="../fulltextsearch.cc" line="362"/>
+        <location filename="../fulltextsearch.cc" line="187"/>
+        <location filename="../fulltextsearch.cc" line="292"/>
+        <location filename="../fulltextsearch.cc" line="366"/>
         <source>Articles found: </source>
         <translation>Мақолаҳои ёфтшуда: </translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="257"/>
+        <location filename="../fulltextsearch.cc" line="261"/>
         <source>Now indexing: </source>
         <translation>Мураттабсозӣ: </translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="297"/>
+        <location filename="../fulltextsearch.cc" line="301"/>
         <source>The search line must contains at least one word contains </source>
         <translation>Хати ҷустуҷӯ бояд ақаллан як калимаро бо </translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="298"/>
+        <location filename="../fulltextsearch.cc" line="302"/>
         <source> or more symbols</source>
         <translation> ё якчанд аломатро дар бар гирад</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="309"/>
+        <location filename="../fulltextsearch.cc" line="313"/>
         <source>No dictionaries for full-text search</source>
         <translation>Ягон луғат барои ҷустуҷӯи матни пурра вуҷуд надорад</translation>
     </message>
@@ -1214,12 +1248,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1131"/>
+        <location filename="../sources.cc" line="1327"/>
         <source>Enabled</source>
         <translation>Фаъолшуда</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1133"/>
+        <location filename="../sources.cc" line="1329"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
@@ -2259,7 +2293,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="241"/>
+        <location filename="../loaddictionaries.cc" line="242"/>
         <source>Error loading dictionaries</source>
         <translation>Ҳангоми боркунии луғатҳо хатогӣ ба вуҷуд омад</translation>
     </message>
@@ -2929,22 +2963,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="415"/>
+        <location filename="../sources.cc" line="447"/>
         <source>Enabled</source>
         <translation>Фаъолшуда</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="417"/>
+        <location filename="../sources.cc" line="449"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="419"/>
+        <location filename="../sources.cc" line="451"/>
         <source>Address</source>
         <translation>Суроға</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="421"/>
+        <location filename="../sources.cc" line="453"/>
         <source>Icon</source>
         <translation>Аломат</translation>
     </message>
@@ -3039,12 +3073,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="913"/>
+        <location filename="../sources.cc" line="1109"/>
         <source>Path</source>
         <translation>Масир</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="915"/>
+        <location filename="../sources.cc" line="1111"/>
         <source>Recursive</source>
         <translation>Фаъол/ғайрифаъол кардани луғат</translation>
     </message>
@@ -3829,27 +3863,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="821"/>
+        <location filename="../sources.cc" line="1017"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="823"/>
+        <location filename="../sources.cc" line="1019"/>
         <source>Plain Text</source>
         <translation>Матни оддӣ</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="825"/>
+        <location filename="../sources.cc" line="1021"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="827"/>
+        <location filename="../sources.cc" line="1023"/>
         <source>Prefix Match</source>
         <translation>Аз рӯи префикс</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="829"/>
+        <location filename="../sources.cc" line="1025"/>
         <source>Unknown</source>
         <translation>Номаълум</translation>
     </message>
@@ -3875,27 +3909,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="729"/>
+        <location filename="../sources.cc" line="925"/>
         <source>Enabled</source>
         <translation>Фаъолшуда</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="731"/>
+        <location filename="../sources.cc" line="927"/>
         <source>Type</source>
         <translation>Намуд</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="733"/>
+        <location filename="../sources.cc" line="929"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="735"/>
+        <location filename="../sources.cc" line="931"/>
         <source>Command Line</source>
         <translation>Сатри иҷрои фармон</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="737"/>
+        <location filename="../sources.cc" line="933"/>
         <source>Icon</source>
         <translation>Аломат</translation>
     </message>
@@ -3903,13 +3937,13 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="427"/>
-        <location filename="../dsl.cc" line="1564"/>
+        <location filename="../aard.cc" line="429"/>
+        <location filename="../dsl.cc" line="1620"/>
         <source>Article loading error</source>
         <translation>Хатогии боркунии мақола</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="514"/>
+        <location filename="../aard.cc" line="521"/>
         <source>Article decoding error</source>
         <translation>Хатогии рамзкушоии мақола</translation>
     </message>
@@ -4039,12 +4073,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>Romaji</name>
     <message>
-        <location filename="../romaji.cc" line="107"/>
+        <location filename="../romaji.cc" line="108"/>
         <source>Hepburn Romaji for Hiragana</source>
         <translation>Системаи Хэпбёрни Ромаҷӣ барои Хирагана</translation>
     </message>
     <message>
-        <location filename="../romaji.cc" line="116"/>
+        <location filename="../romaji.cc" line="117"/>
         <source>Hepburn Romaji for Katakana</source>
         <translation>Системаи Хэпбёрни Ромаҷӣ барои Катакана</translation>
     </message>
@@ -4141,17 +4175,17 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1019"/>
+        <location filename="../sources.cc" line="1215"/>
         <source>Path</source>
         <translation>Масир</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1021"/>
+        <location filename="../sources.cc" line="1217"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1023"/>
+        <location filename="../sources.cc" line="1219"/>
         <source>Icon</source>
         <translation>Аломат</translation>
     </message>
@@ -4173,7 +4207,8 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="120"/>
         <location filename="../sources.ui" line="244"/>
         <location filename="../sources.ui" line="303"/>
-        <location filename="../sources.ui" line="370"/>
+        <location filename="../sources.ui" line="367"/>
+        <location filename="../sources.ui" line="426"/>
         <source>&amp;Add...</source>
         <translation>&amp;Илова кардан...</translation>
     </message>
@@ -4182,7 +4217,8 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="127"/>
         <location filename="../sources.ui" line="251"/>
         <location filename="../sources.ui" line="310"/>
-        <location filename="../sources.ui" line="377"/>
+        <location filename="../sources.ui" line="374"/>
+        <location filename="../sources.ui" line="433"/>
         <source>&amp;Remove</source>
         <translation>&amp;Тоза кардан</translation>
     </message>
@@ -4261,7 +4297,7 @@ of the appropriate groups to use them.</source>
         <translation type="obsolete">Шумо ҳамчунин метавонед сатри %GD1251%-ро барои рамзгузории CP1251 ва сатри %GDISO1%-ро барои рамзгузории ISO 8859-1 истифода баред.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="347"/>
+        <location filename="../sources.ui" line="403"/>
         <source>Programs</source>
         <translation>Барномаҳо</translation>
     </message>
@@ -4270,27 +4306,27 @@ of the appropriate groups to use them.</source>
         <translation type="obsolete">Тамоми барномаҳои берунӣ. Сатри %GDWORD% бо калимаи дархостшуда ҷойгузин карда мешавад. Худи калима низ ба сатри вуруди калимаҳо дохил карда мешавад.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="406"/>
+        <location filename="../sources.ui" line="462"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="418"/>
+        <location filename="../sources.ui" line="474"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Талаффузи фаврӣ аз &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Вебсайти зерин ба одамон иҷозат медиҳад, ки онҳо тавонанд талаффузи калимаҳоро сабт ва бо дигарон мубодила намоянд. Шумо метавонед калимаҳои сабтшударо аз луғати GoldenDict гӯш кунед.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="431"/>
+        <location filename="../sources.ui" line="487"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Талаффузро аз Forvo фаъол кардан</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="461"/>
+        <location filename="../sources.ui" line="517"/>
         <source>API Key:</source>
         <translation>Калиди API:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="468"/>
+        <location filename="../sources.ui" line="524"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -4299,7 +4335,7 @@ in the future, or register on the site to get your own key.</source>
 оянда дастнорас шавад, ё ки барои дархости калиди шахсӣ дар сайт қайд шавед.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="493"/>
+        <location filename="../sources.ui" line="549"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation>Калиди шахсии худро аз &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;ин ҷо&lt;/a&gt; гиред, ё барои истифодаи калиди пешфарз ин амалро нодида гузаронед.</translation>
     </message>
@@ -4329,79 +4365,89 @@ p, li { white-space: pre-wrap; }
 %GDBIG5% барои Big-5, %GDBIG5HKSCS% барои Big5-HKSCS, %GDGBK% барои GBK ва GB18030, %GDSHIFTJIS% барои Shift-JIS.</translation>
     </message>
     <message>
+        <location filename="../sources.ui" line="347"/>
+        <source>DICT servers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../sources.ui" line="353"/>
+        <source>DICT servers:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="409"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation>Ягон барномаи берунӣ. Сатри %GDWORD% бо калимаи дархостшуда ҷойгузин мешавад. Агар чунин сатр вуҷуд надошта бошад, калима ба вуруди стандартӣ равона мешавад.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="506"/>
+        <location filename="../sources.ui" line="562"/>
         <source>Language codes (comma-separated):</source>
         <translation>Рамзҳои забон (бо вергул ҷудо мешаванд):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="513"/>
+        <location filename="../sources.ui" line="569"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Рӯйхати рамзҳои забоне, ки шумо мехоҳед дар бар гиред. Масалан: &quot;en, tg&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="536"/>
+        <location filename="../sources.ui" line="592"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Рӯйхати рамзҳои забонҳои пур дар &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;ин ҷо&lt;/a&gt; дастрас аст.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="578"/>
+        <location filename="../sources.ui" line="634"/>
         <source>Transliteration</source>
         <translation>Транслитератсия</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="599"/>
+        <location filename="../sources.ui" line="655"/>
         <source>Russian transliteration</source>
         <translation>Транслитератсияи русӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="610"/>
+        <location filename="../sources.ui" line="666"/>
         <source>Greek transliteration</source>
         <translation>Транслитератсияи юнонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="634"/>
+        <location filename="../sources.ui" line="690"/>
         <source>German transliteration</source>
         <translation>Транслитератсияи олмонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="645"/>
+        <location filename="../sources.ui" line="701"/>
         <source>Belarusian transliteration</source>
         <translation>Транслитератсияи белорусӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="671"/>
+        <location filename="../sources.ui" line="727"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Истифодаи алифбои лотиниро барои навиштан бо забони ҷопонӣ фаъол мекунад</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="674"/>
+        <location filename="../sources.ui" line="730"/>
         <source>Japanese Romaji</source>
         <translation>Ромаҷии ҷопонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="686"/>
+        <location filename="../sources.ui" line="742"/>
         <source>Systems:</source>
         <translation>Системаҳо:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="749"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Машҳуртарин тарзи транскрипткунонии калимаҳои Ҷопонӣ
 дар асоси фонологияи Англисӣ иҷро мешавад</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="697"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Hepburn</source>
         <translation>Хэпбёрн</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="707"/>
+        <location filename="../sources.ui" line="763"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -4412,12 +4458,12 @@ Not implemented yet in GoldenDict.</source>
 Системаи дар боло зикршуда ҳоло дар луғати GoldenDict вуҷуд надорад.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="713"/>
+        <location filename="../sources.ui" line="769"/>
         <source>Nihon-shiki</source>
         <translation>Ниҳон-шикӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="723"/>
+        <location filename="../sources.ui" line="779"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -4428,75 +4474,77 @@ Not implemented yet in GoldenDict.</source>
 Системаи дар боло зикршуда ҳоло дар луғати GoldenDict вуҷуд надорад.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="729"/>
+        <location filename="../sources.ui" line="785"/>
         <source>Kunrei-shiki</source>
         <translation>Канрей-шикӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="736"/>
+        <location filename="../sources.ui" line="792"/>
         <source>Syllabaries:</source>
         <translation>Алифбои ҳиҷо:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="743"/>
+        <location filename="../sources.ui" line="799"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Алифбои ҳиҷои Хираганаи ҷопонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="746"/>
+        <location filename="../sources.ui" line="802"/>
         <source>Hiragana</source>
         <translation>Хирагана</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="753"/>
+        <location filename="../sources.ui" line="809"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Алифбои ҳиҷои Катаканаи ҷопонӣ</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="756"/>
+        <location filename="../sources.ui" line="812"/>
         <source>Katakana</source>
         <translation>Катакана</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="100"/>
+        <location filename="../sources.cc" line="108"/>
         <source>Text to Speech</source>
         <translation>Матн ба талаффуз</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="116"/>
+        <location filename="../sources.cc" line="124"/>
         <source>(not available in portable version)</source>
         <translation>(дар версияи кӯчондашаванда дастрас нест)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="153"/>
-        <location filename="../sources.cc" line="180"/>
-        <location filename="../sources.cc" line="207"/>
+        <location filename="../sources.cc" line="161"/>
+        <location filename="../sources.cc" line="188"/>
+        <location filename="../sources.cc" line="215"/>
         <source>Choose a directory</source>
         <translation>Ҷузвдонро интихоб кунед</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="167"/>
-        <location filename="../sources.cc" line="194"/>
-        <location filename="../sources.cc" line="234"/>
-        <location filename="../sources.cc" line="258"/>
-        <location filename="../sources.cc" line="282"/>
+        <location filename="../sources.cc" line="175"/>
+        <location filename="../sources.cc" line="202"/>
+        <location filename="../sources.cc" line="242"/>
+        <location filename="../sources.cc" line="266"/>
+        <location filename="../sources.cc" line="290"/>
+        <location filename="../sources.cc" line="314"/>
         <source>Confirm removal</source>
         <translation>Тозакуниро тасдиқ кунед</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="168"/>
-        <location filename="../sources.cc" line="195"/>
+        <location filename="../sources.cc" line="176"/>
+        <location filename="../sources.cc" line="203"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Ҷузвдони &lt;b&gt;%1&lt;/b&gt;-ро аз рӯйхат тоза мекунед?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="235"/>
-        <location filename="../sources.cc" line="259"/>
+        <location filename="../sources.cc" line="243"/>
+        <location filename="../sources.cc" line="267"/>
+        <location filename="../sources.cc" line="291"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Вебсайти &lt;b&gt;%1&lt;/b&gt;-ро аз рӯйхат тоза мекунед?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="283"/>
+        <location filename="../sources.cc" line="315"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Барномаи &lt;b&gt;%1&lt;/b&gt;-ро аз рӯйхат тоза мекунед?</translation>
     </message>
@@ -4626,22 +4674,22 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="572"/>
+        <location filename="../sources.cc" line="604"/>
         <source>Enabled</source>
         <translation>Фаъолшуда</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="574"/>
+        <location filename="../sources.cc" line="606"/>
         <source>Name</source>
         <translation>Ном</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="576"/>
+        <location filename="../sources.cc" line="608"/>
         <source>Address</source>
         <translation>Суроға</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="578"/>
+        <location filename="../sources.cc" line="610"/>
         <source>Icon</source>
         <translation>Аломат</translation>
     </message>

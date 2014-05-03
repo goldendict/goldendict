@@ -562,6 +562,34 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>DictServersModel</name>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished">已啟用</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">名稱</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">位址</translation>
+    </message>
+    <message>
+        <source>Databases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished">圖示</translation>
+    </message>
+    <message>
+        <source>Comma-delimited list of databases
+(empty string or &quot;*&quot; matches all databases)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
@@ -3576,6 +3604,14 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation>可使用任何外部程式。字串 %GDWORD% 代表查詢的單字。若未輸入該字串(即:只輸入程式名而未輸入 %GDWORD%)，則會用查詢的單字當作程式的標準輸入。</translation>
+    </message>
+    <message>
+        <source>DICT servers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DICT servers:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

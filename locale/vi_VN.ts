@@ -565,6 +565,34 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>DictServersModel</name>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished">Bật</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Tên</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Địa chỉ</translation>
+    </message>
+    <message>
+        <source>Databases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-delimited list of databases
+(empty string or &quot;*&quot; matches all databases)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
@@ -3583,6 +3611,14 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DICT servers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DICT servers:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
