@@ -235,7 +235,8 @@ QString const & DictServerDictionary::getDescription()
   if( dictionaryDescription.isEmpty() )
   {
     dictionaryDescription = "Url: " + url + "\n";
-    dictionaryDescription += "Databases: " + databases.join( "," );
+    dictionaryDescription += "Databases: " + databases.join( ", " ) + "\n";
+    dictionaryDescription += "Strategies: " + strategies.join( ", " );
   }
   return dictionaryDescription;
 }
