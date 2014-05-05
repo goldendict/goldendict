@@ -19,7 +19,7 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
     sudo apt-get install git pkg-config build-essential qt4-qmake \
          libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
          libqt4-dev libqtwebkit-dev libxtst-dev liblzo2-dev libbz2-dev \
-         libao-dev libavutil-dev libavformat-dev
+         libao-dev libavutil-dev libavformat-dev libtiff5-dev
 
 ## How to build
 
@@ -34,12 +34,35 @@ And then invoke `qmake-qt4` and `make`:
 In case when qmake-qt4 does not exist, try using `qmake` but make sure it is indeed from the Qt 4 installation.
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 
+### Building with Zim dictionaries support
+
+To add Zim format support you need at first install lzma-dev package:
+
+    sudo apt-get liblzma-dev
+
+Then pass `"CONFIG+=zim_support"` to `qmake`
+
+    qmake "CONFIG+=zim_support"
+
+### Building without extra tiff handler
+
+If you have problem building with libtiff5-dev package, you can pass
+`"CONFIG+=no_extra_tiff_handler"` to `qmake` in order to disable extra tiff support
+(without such extra support some b/w tiff images will not be displayed):
+
+    qmake "CONFIG+=no_extra_tiff_handler"
+
 ### Building without internal audio player
 
 If you have problem building with FFmpeg/libao (for example, Ubuntu older than 12.04), you can pass
 `"DISABLE_INTERNAL_PLAYER=1"` to `qmake` in order to disable internal audio player completely:
 
     qmake "DISABLE_INTERNAL_PLAYER=1"
+
+<b>NB:</b> All additional settings for `qmake` that you need must be combined in one `qmake` launch, for example:
+
+    qmake "CONFIG+=zim_support" "CONFIG+=no_extra_tiff_handler" "DISABLE_INTERNAL_PLAYER=1"
+
 
 Then, invoke `make clean` before `make` because the setting change:
 
